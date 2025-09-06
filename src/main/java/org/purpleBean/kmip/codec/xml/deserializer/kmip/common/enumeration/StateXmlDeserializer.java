@@ -1,0 +1,51 @@
+package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.common.enumeration.State;
+
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
+public class StateXmlDeserializer extends JsonDeserializer<State> {
+
+    @Override
+    public State deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        ObjectCodec codec = p.getCodec();
+        JsonNode node = codec.readTree(p);
+
+        if (!node.isObject()) {
+            ctxt.reportInputMismatch(State.class, "Expected XML element object for State");
+            return null;
+        }
+
+        JsonNode typeNode = node.get("type");
+        if (typeNode == null || !typeNode.isTextual() ||
+                !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+            ctxt.reportInputMismatch(State.class, "Missing or invalid '@type' attribute for State");
+            return null;
+        }
+
+        JsonNode valueNode = node.get("value");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch(State.class, "Missing or non-text '@value' attribute for State");
+            return null;
+        }
+
+        String description = valueNode.asText();
+        KmipSpec spec = KmipCodecContext.getSpec();
+
+        State state = new State(State.fromName(spec, description));
+        if (!state.isSupportedFor(spec)) {
+            throw new NoSuchElementException("State '" + description + "' not supported for spec " + spec);
+        }
+
+        return state;
+    }
+}
