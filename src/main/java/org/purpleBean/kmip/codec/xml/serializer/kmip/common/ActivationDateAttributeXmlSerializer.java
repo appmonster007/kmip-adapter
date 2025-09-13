@@ -8,6 +8,7 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -24,7 +25,11 @@ public class ActivationDateAttributeXmlSerializer extends JsonSerializer<Activat
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
-        xmlGen.writeStartObject(activationDateAttribute.getKmipTag().getDescription());
+        // Start element with name from kmipTag
+        String elementName = activationDateAttribute.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(activationDateAttribute);
+
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", activationDateAttribute.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);

@@ -8,6 +8,7 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.KmipCodecContext;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -24,9 +25,11 @@ public class ProtocolVersionMinorXmlSerializer extends JsonSerializer<ProtocolVe
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
+        // Start element with name from kmipTag
         String elementName = protocolVersionMinor.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(protocolVersionMinor);
 
-        xmlGen.writeStartObject(elementName);
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", protocolVersionMinor.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);

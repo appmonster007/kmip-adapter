@@ -9,6 +9,7 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -26,7 +27,10 @@ public class SampleStructureXmlSerializer extends JsonSerializer<SampleStructure
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
-        xmlGen.writeStartObject(sampleStructure.getKmipTag().getDescription());
+        // Start element with name from kmipTag
+        String elementName = sampleStructure.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(sampleStructure);
 
         List<KmipDataType> values = sampleStructure.getValues();
         for (KmipDataType kmipDataType : values) {

@@ -90,12 +90,12 @@ public class XmlRoundTripTest extends BaseKmipTest {
                 String xml = mapper.writeValueAsString(original);
                 
                 // Verify serialization produces expected XML structure
-                assertThat(xml).startsWith("<SampleStructure>");
+                assertThat(xml).startsWith("<SecretData>");
                 assertThat(xml).contains("<ActivationDate");
                 assertThat(xml).contains("<State");
                 assertThat(xml).contains("type=\"DateTime\"");
                 assertThat(xml).contains("type=\"Enumeration\"");
-                assertThat(xml).endsWith("</SampleStructure>");
+                assertThat(xml).endsWith("</SecretData>");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

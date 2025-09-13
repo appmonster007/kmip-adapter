@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 
 public class SimpleRequestHeaderXmlSerializer extends JsonSerializer<SimpleRequestHeader> {
@@ -19,9 +20,10 @@ public class SimpleRequestHeaderXmlSerializer extends JsonSerializer<SimpleReque
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
-        // Start element using kmipTag description
+        // Start element with name from kmipTag
         String elementName = header.getKmipTag().getDescription();
-        xmlGen.writeStartObject(elementName);
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(header);
 
         // Serialize nested ProtocolVersion using its registered serializer
         serializers.defaultSerializeField(

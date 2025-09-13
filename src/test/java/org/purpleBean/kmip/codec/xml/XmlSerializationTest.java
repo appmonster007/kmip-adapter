@@ -153,7 +153,7 @@ class XmlSerializationTest extends BaseKmipTest {
             
             // When & Then
             SerializationTestUtils.testXmlSerialization(xmlMapper, structure, xml -> {
-                assertThat(xml).contains("<SampleStructure>");
+                assertThat(xml).contains("<SecretData>");
                 assertThat(xml).contains("<ActivationDate");
                 assertThat(xml).contains("<State");
                 assertThat(xml).contains("type=\"DateTime\"");
@@ -195,7 +195,7 @@ class XmlSerializationTest extends BaseKmipTest {
             
             // When & Then
             SerializationTestUtils.testXmlSerialization(xmlMapper, structure, xml -> {
-                assertThat(xml).contains("<SampleStructure>");
+                assertThat(xml).contains("<SecretData>");
                 assertThat(xml).contains("<ActivationDate");
                 assertThat(xml).contains("<State");
             });

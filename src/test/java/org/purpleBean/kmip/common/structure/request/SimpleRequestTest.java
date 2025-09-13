@@ -158,7 +158,7 @@ class SimpleRequestTest {
             String xml = xmlMapper.writeValueAsString(requestMessage);
 
             // Verify the XML structure
-            assertThat(xml).contains("<SimpleRequestMessage>");
+            assertThat(xml).contains("<RequestMessage>");
             assertThat(xml).contains("<RequestHeader>");
             assertThat(xml).contains("<ProtocolVersion>");
             assertThat(xml).contains("<ProtocolVersionMajor type=\"Integer\" value=\"1\"/>");

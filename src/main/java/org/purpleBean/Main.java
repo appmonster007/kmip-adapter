@@ -7,6 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.RequestHeaderStructure;
 import org.purpleBean.kmip.RequestMessageStructure;
 import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
@@ -113,6 +114,7 @@ public class Main {
         printJson(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
         // ErrorList excluded
         printJson(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
+        printJson(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
     }
 
     private static void demoXml(XmlMapper mapper,
@@ -129,6 +131,7 @@ public class Main {
         printXml(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
         // ErrorList excluded
         printXml(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
+        printXml(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
     }
 
     private static void demoTtlv(TtlvMapper mapper,
@@ -144,6 +147,7 @@ public class Main {
         roundTripTtlv(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
         // ErrorList excluded
         roundTripTtlv(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
+        roundTripTtlv(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
     }
 
     // ================= HELPERS =================
@@ -178,7 +182,7 @@ public class Main {
         System.out.println("Round-trip Result:");
         System.out.println(deserialized);
         System.out.println();
-        System.out.println(ttlvObject.getStructuredByteString());
+        System.out.println(ttlvObject.getByteString());
         System.out.println();
     }
 

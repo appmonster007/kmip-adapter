@@ -471,7 +471,11 @@ public class YourEnumerationXmlSerializer extends JsonSerializer<YourEnumeration
         ToXmlGenerator xmlGen = (ToXmlGenerator) gen;
 
         // Write XML element with tag description as element name
-        xmlGen.writeStartObject(value.getKmipTag().getDescription());
+        // Start element with name from kmipTag
+        String elementName = value.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(value);
+
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);

@@ -6,12 +6,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 
 public class SimpleRequestBatchItemXmlSerializer extends JsonSerializer<SimpleRequestBatchItem> {
 
     @Override
-    public void serialize(SimpleRequestBatchItem item,
+    public void serialize(SimpleRequestBatchItem batchItem,
                           JsonGenerator gen,
                           SerializerProvider serializers) throws IOException {
 
@@ -20,8 +21,9 @@ public class SimpleRequestBatchItemXmlSerializer extends JsonSerializer<SimpleRe
         }
 
         // Start element with name from kmipTag
-        String elementName = item.getKmipTag().getDescription();
-        xmlGen.writeStartObject(elementName);
+        String elementName = batchItem.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(batchItem);
 
         // If there were nested fields, they could be serialized here using:
         // serializers.defaultSerializeField(fieldName, fieldValue, gen);

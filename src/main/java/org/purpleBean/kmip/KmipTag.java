@@ -3,6 +3,7 @@ package org.purpleBean.kmip;
 import lombok.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 
+import javax.xml.namespace.QName;
 import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
