@@ -36,7 +36,7 @@ public YourKmipType(@NonNull SomeValue value) {
     Objects.requireNonNull(value, "Value cannot be null");
     
     // Step 2: KMIP specification compatibility
-    KmipSpec spec = KmipCodecContext.getSpec();
+    KmipSpec spec = KmipContext.getSpec();
     if (!value.isSupportedFor(spec)) {
         throw new IllegalArgumentException(
             String.format("Value '%s' is not supported for KMIP specification %s", 
@@ -131,7 +131,7 @@ public static class YourStructureBuilder {
      * Validate all fields against current KMIP specification
      */
     private void validateKmipSpecCompatibility() {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         List<String> unsupportedFields = new ArrayList<>();
         
         // Check each field that implements KmipDataType
@@ -197,7 +197,7 @@ public void serialize(YourKmipType value, JsonGenerator gen, SerializerProvider 
     Objects.requireNonNull(value, "Cannot serialize null value");
     
     // Step 2: KMIP specification support validation
-    KmipSpec spec = KmipCodecContext.getSpec();
+    KmipSpec spec = KmipContext.getSpec();
     if (!value.isSupportedFor(spec)) {
         throw new UnsupportedEncodingException(
             String.format("Type %s is not supported for KMIP specification %s", 
@@ -331,7 +331,7 @@ class ConstructorValidation {
     @DisplayName("Should reject unsupported KMIP specification")
     void shouldRejectUnsupportedKmipSpecification() {
         // Given
-        KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
+        KmipContext.setSpec(KmipSpec.UnknownVersion);
         SomeValue validValue = createValidValue();
         
         // When & Then
@@ -400,7 +400,7 @@ class BuilderValidation {
     @DisplayName("Should reject fields unsupported by KMIP specification")
     void shouldRejectFieldsUnsupportedByKmipSpecification() {
         // Given
-        KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
+        KmipContext.setSpec(KmipSpec.UnknownVersion);
         RequiredFieldType unsupportedField = createUnsupportedField();
         
         // When & Then
@@ -458,7 +458,7 @@ class SerializationValidation {
     void shouldRejectSerializationOfUnsupportedTypes() {
         // Given
         YourKmipType validObject = createValidObject();
-        KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
+        KmipContext.setSpec(KmipSpec.UnknownVersion);
         
         // When & Then
         assertThatThrownBy(() -> jsonMapper.writeValueAsString(validObject))
@@ -501,7 +501,7 @@ class RegistrationValidation {
     void shouldRejectInvalidExtensionValueRanges(int invalidValue) {
         // When & Then
         assertThatThrownBy(() -> YourEnumeration.register(
-            invalidValue, "ValidDescription", Set.of(KmipSpec.V1_2)
+            invalidValue, "ValidDescription", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
         )).isInstanceOf(IllegalArgumentException.class)
           .hasMessageContaining("Extension value")
           .hasMessageContaining("must be in range");
@@ -513,7 +513,7 @@ class RegistrationValidation {
     void shouldRejectEmptyOrWhitespaceDescriptions(String invalidDescription) {
         // When & Then
         assertThatThrownBy(() -> YourEnumeration.register(
-            0x80000001, invalidDescription, Set.of(KmipSpec.V1_2)
+            0x80000001, invalidDescription, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
         )).isInstanceOf(IllegalArgumentException.class)
           .hasMessageContaining("Description cannot be empty");
     }
@@ -523,7 +523,7 @@ class RegistrationValidation {
     void shouldRejectNullParameters() {
         // Test null description
         assertThatThrownBy(() -> YourEnumeration.register(
-            0x80000001, null, Set.of(KmipSpec.V1_2)
+            0x80000001, null, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
         )).isInstanceOf(NullPointerException.class);
         
         // Test null supported versions
@@ -547,11 +547,11 @@ class RegistrationValidation {
     void shouldRejectDuplicateValueRegistration() {
         // Given
         int duplicateValue = 0x80000001;
-        YourEnumeration.register(duplicateValue, "FirstDescription", Set.of(KmipSpec.V1_2));
+        YourEnumeration.register(duplicateValue, "FirstDescription", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         
         // When & Then
         assertThatThrownBy(() -> YourEnumeration.register(
-            duplicateValue, "SecondDescription", Set.of(KmipSpec.V1_2)
+            duplicateValue, "SecondDescription", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
         )).isInstanceOf(IllegalArgumentException.class)
           .hasMessageContaining("already registered");
     }
@@ -561,11 +561,11 @@ class RegistrationValidation {
     void shouldRejectDuplicateDescriptionRegistration() {
         // Given
         String duplicateDescription = "DuplicateDescription";
-        YourEnumeration.register(0x80000001, duplicateDescription, Set.of(KmipSpec.V1_2));
+        YourEnumeration.register(0x80000001, duplicateDescription, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         
         // When & Then
         assertThatThrownBy(() -> YourEnumeration.register(
-            0x80000002, duplicateDescription, Set.of(KmipSpec.V1_2)
+            0x80000002, duplicateDescription, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
         )).isInstanceOf(IllegalArgumentException.class)
           .hasMessageContaining("already registered");
     }
@@ -589,7 +589,7 @@ public final class KmipValidationUtils {
     public static void validateKmipSpecSupport(KmipDataType value, String fieldName) {
         Objects.requireNonNull(value, fieldName + " cannot be null");
         
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
                 String.format("Field '%s' with type %s is not supported for KMIP specification %s", 

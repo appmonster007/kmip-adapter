@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
@@ -16,14 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("KmipCodecContext Tests")
+@DisplayName("KmipContext Tests")
 @Execution(ExecutionMode.SAME_THREAD) // Ensure thread safety tests run sequentially
-class KmipCodecContextTest extends BaseKmipTest {
-
-    @AfterEach
-    void cleanupContext() {
-        KmipCodecContext.clear();
-    }
+class KmipContextTest extends BaseKmipTest {
 
     @Nested
     @DisplayName("Basic Operations")
@@ -33,7 +29,7 @@ class KmipCodecContextTest extends BaseKmipTest {
         @DisplayName("Should have default V1.2 version")
         void shouldHaveDefaultV1_2Version() {
             // When
-            KmipSpec spec = KmipCodecContext.getSpec();
+            KmipSpec spec = KmipContext.getSpec();
             
             // Then
             assertThat(spec).isEqualTo(KmipSpec.V1_2);
@@ -46,8 +42,8 @@ class KmipCodecContextTest extends BaseKmipTest {
             KmipSpec expectedSpec = KmipSpec.V1_2;
             
             // When
-            KmipCodecContext.setSpec(expectedSpec);
-            KmipSpec actualSpec = KmipCodecContext.getSpec();
+            KmipContext.setSpec(expectedSpec);
+            KmipSpec actualSpec = KmipContext.getSpec();
             
             // Then
             assertThat(actualSpec).isEqualTo(expectedSpec);
@@ -57,11 +53,11 @@ class KmipCodecContextTest extends BaseKmipTest {
         @DisplayName("Should clear context to default")
         void shouldClearContextToDefault() {
             // Given
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
+            KmipContext.setSpec(KmipSpec.V1_2);
             
             // When
-            KmipCodecContext.clear();
-            KmipSpec spec = KmipCodecContext.getSpec();
+            KmipContext.clear();
+            KmipSpec spec = KmipContext.getSpec();
             
             // Then
             assertThat(spec).isEqualTo(KmipSpec.UnknownVersion);
@@ -71,7 +67,7 @@ class KmipCodecContextTest extends BaseKmipTest {
         @DisplayName("Should handle null spec gracefully")
         void shouldHandleNullSpecGracefully() {
             // When & Then
-            assertThatCode(() -> KmipCodecContext.setSpec(null))
+            assertThatCode(() -> KmipContext.setSpec(null))
                 .doesNotThrowAnyException();
             
             // The behavior with null depends on ThreadLocal implementation
@@ -91,24 +87,28 @@ class KmipCodecContextTest extends BaseKmipTest {
             
             try {
                 // When - Set different specs in different threads
+                // Clear any existing context in the current thread
+                KmipContext.clear();
+                
                 CompletableFuture<KmipSpec> thread1 = CompletableFuture.supplyAsync(() -> {
-                    KmipCodecContext.setSpec(KmipSpec.V1_2);
-                    return KmipCodecContext.getSpec();
+                    KmipContext.setSpec(KmipSpec.V1_2);
+                    return KmipContext.getSpec();
                 }, executor);
                 
                 CompletableFuture<KmipSpec> thread2 = CompletableFuture.supplyAsync(() -> {
-                    KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
-                    return KmipCodecContext.getSpec();
+                    KmipContext.setSpec(KmipSpec.UnknownVersion);
+                    return KmipContext.getSpec();
                 }, executor);
                 
                 CompletableFuture<KmipSpec> mainThread = CompletableFuture.supplyAsync(() -> {
-                    // Main thread should still have default
-                    return KmipCodecContext.getSpec();
+                    // Main thread should have the default (UnknownVersion)
+                    return KmipContext.getSpec();
                 });
                 
-                // Then
+                // Then - Each thread should maintain its own context
                 assertThat(thread1.get(1, TimeUnit.SECONDS)).isEqualTo(KmipSpec.V1_2);
                 assertThat(thread2.get(1, TimeUnit.SECONDS)).isEqualTo(KmipSpec.UnknownVersion);
+                // Main thread should still have the default value (UnknownVersion)
                 assertThat(mainThread.get(1, TimeUnit.SECONDS)).isEqualTo(KmipSpec.UnknownVersion);
                 
             } finally {
@@ -132,15 +132,15 @@ class KmipCodecContextTest extends BaseKmipTest {
                     final int threadId = i;
                     futures[i] = CompletableFuture.runAsync(() -> {
                         KmipSpec specToSet = (threadId % 2 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
-                        KmipCodecContext.setSpec(specToSet);
+                        KmipContext.setSpec(specToSet);
                         
                         // Verify the spec is what we set
-                        KmipSpec retrievedSpec = KmipCodecContext.getSpec();
+                        KmipSpec retrievedSpec = KmipContext.getSpec();
                         assertThat(retrievedSpec).isEqualTo(specToSet);
                         
                         // Clear and verify
-                        KmipCodecContext.clear();
-                        assertThat(KmipCodecContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
+                        KmipContext.clear();
+                        assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
                     }, executor);
                 }
                 
@@ -162,13 +162,13 @@ class KmipCodecContextTest extends BaseKmipTest {
             try {
                 // When - Set spec in one thread, check in another
                 CompletableFuture<Void> setterThread = CompletableFuture.runAsync(() -> {
-                    KmipCodecContext.setSpec(KmipSpec.V1_2);
+                    KmipContext.setSpec(KmipSpec.V1_2);
                 }, executor);
                 
                 setterThread.get(1, TimeUnit.SECONDS);
                 
                 CompletableFuture<KmipSpec> getterThread = CompletableFuture.supplyAsync(() -> {
-                    return KmipCodecContext.getSpec();
+                    return KmipContext.getSpec();
                 }, executor);
                 
                 // Then - Getter thread should have default, not the set value
@@ -192,11 +192,11 @@ class KmipCodecContextTest extends BaseKmipTest {
             KmipSpec initialSpec = KmipSpec.V1_2;
             
             // When
-            KmipCodecContext.setSpec(initialSpec);
+            KmipContext.setSpec(initialSpec);
             
             // Perform multiple operations
-            KmipSpec spec1 = KmipCodecContext.getSpec();
-            KmipSpec spec2 = KmipCodecContext.getSpec();
+            KmipSpec spec1 = KmipContext.getSpec();
+            KmipSpec spec2 = KmipContext.getSpec();
             
             // Then
             assertThat(spec1).isEqualTo(initialSpec);
@@ -212,42 +212,42 @@ class KmipCodecContextTest extends BaseKmipTest {
             KmipSpec secondSpec = KmipSpec.UnknownVersion;
             
             // When
-            KmipCodecContext.setSpec(firstSpec);
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(firstSpec);
+            KmipContext.setSpec(firstSpec);
+            assertThat(KmipContext.getSpec()).isEqualTo(firstSpec);
             
-            KmipCodecContext.setSpec(secondSpec);
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(secondSpec);
+            KmipContext.setSpec(secondSpec);
+            assertThat(KmipContext.getSpec()).isEqualTo(secondSpec);
             
             // Then - Latest set value should be active
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(secondSpec);
+            assertThat(KmipContext.getSpec()).isEqualTo(secondSpec);
         }
 
         @Test
         @DisplayName("Should handle clear after set")
         void shouldHandleClearAfterSet() {
             // Given
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(KmipSpec.V1_2);
+            KmipContext.setSpec(KmipSpec.V1_2);
+            assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.V1_2);
             
             // When
-            KmipCodecContext.clear();
+            KmipContext.clear();
             
             // Then
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
+            assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
         }
 
         @Test
         @DisplayName("Should handle multiple clear operations")
         void shouldHandleMultipleClearOperations() {
             // Given
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
+            KmipContext.setSpec(KmipSpec.V1_2);
             
             // When
-            KmipCodecContext.clear();
-            KmipCodecContext.clear(); // Second clear
+            KmipContext.clear();
+            KmipContext.clear(); // Second clear
             
             // Then
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
+            assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
         }
     }
 
@@ -262,7 +262,7 @@ class KmipCodecContextTest extends BaseKmipTest {
             // The context should already be set to V1_2 by BaseKmipTest
             
             // When
-            KmipSpec currentSpec = KmipCodecContext.getSpec();
+            KmipSpec currentSpec = KmipContext.getSpec();
             
             // Then
             assertThat(currentSpec).isEqualTo(KmipSpec.V1_2);
@@ -272,16 +272,16 @@ class KmipCodecContextTest extends BaseKmipTest {
         @DisplayName("Should support withKmipSpec pattern")
         void shouldSupportWithKmipSpecPattern() {
             // Given
-            KmipSpec originalSpec = KmipCodecContext.getSpec();
+            KmipSpec originalSpec = KmipContext.getSpec();
             KmipSpec testSpec = KmipSpec.UnknownVersion;
             
             // When
             withKmipSpec(testSpec, () -> {
-                assertThat(KmipCodecContext.getSpec()).isEqualTo(testSpec);
+                assertThat(KmipContext.getSpec()).isEqualTo(testSpec);
             });
             
             // Then - Should restore original spec
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(originalSpec);
+            assertThat(KmipContext.getSpec()).isEqualTo(originalSpec);
         }
     }
 }

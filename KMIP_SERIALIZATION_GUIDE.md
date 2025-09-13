@@ -279,7 +279,7 @@ The TTLV round-trip test follows the same pattern as JSON/XML tests but with the
     @DisplayName("should support all KMIP versions")
     void shouldSupportAllKmipVersions(KmipSpec version) {
         // Given
-        KmipCodecContext.setSpec(version);
+        KmipContext.setSpec(version);
         YourType original = KmipTestDataFactory.createYourType();
         
         // When/Then
@@ -338,7 +338,7 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.YourEnumeration;
@@ -350,7 +350,7 @@ public class YourEnumerationJsonSerializer extends KmipDataTypeJsonSerializer<Yo
 
     @Override
     public void serialize(YourEnumeration value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         // Validation: Check KMIP spec support
         if (!value.isSupportedFor(spec)) {
@@ -377,7 +377,7 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -401,8 +401,8 @@ public class YourEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
         // Extract and validate tag
         KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
         if (tag != KmipTag.Standard.YOUR_ENUMERATION_TAG) {
-            ctxt.reportInputMismatch(YourEnumeration.class, 
-                String.format("Expected tag %s for YourEnumeration", KmipTag.Standard.YOUR_ENUMERATION_TAG));
+            ctxt.reportInputMismatch(YourEnumeration.class,
+                    String.format("Expected tag %s for YourEnumeration", KmipTag.Standard.YOUR_ENUMERATION_TAG));
             return null;
         }
 
@@ -412,9 +412,9 @@ public class YourEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
             ctxt.reportInputMismatch(YourEnumeration.class, "YourEnumeration 'type' must be a string");
             return null;
         }
-        
+
         // Check if the type is expected for YourEnumeration.class using EncodingType.fromName
-        
+
         // Extract value
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
@@ -423,14 +423,14 @@ public class YourEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
         }
 
         String valueString = valueNode.asText();
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         try {
             YourEnumeration.Value enumValue = YourEnumeration.fromName(spec, valueString);
             return new YourEnumeration(enumValue);
         } catch (NoSuchElementException e) {
-            ctxt.reportInputMismatch(YourEnumeration.class, 
-                String.format("Unknown YourEnumeration value: %s", valueString));
+            ctxt.reportInputMismatch(YourEnumeration.class,
+                    String.format("Unknown YourEnumeration value: %s", valueString));
             return null;
         }
     }
@@ -448,7 +448,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.YourEnumeration;
 
@@ -459,12 +459,12 @@ public class YourEnumerationXmlSerializer extends JsonSerializer<YourEnumeration
 
     @Override
     public void serialize(YourEnumeration value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
-        
+        KmipSpec spec = KmipContext.getSpec();
+
         // Validation: Check KMIP spec support
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                String.format("YourEnumeration not supported for KMIP spec %s", spec)
+                    String.format("YourEnumeration not supported for KMIP spec %s", spec)
             );
         }
 
@@ -495,7 +495,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.YourEnumeration;
 
@@ -523,14 +523,14 @@ public class YourEnumerationXmlDeserializer extends JsonDeserializer<YourEnumera
         }
 
         String valueString = valueNode.asText();
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         try {
             YourEnumeration.Value enumValue = YourEnumeration.fromName(spec, valueString);
             return new YourEnumeration(enumValue);
         } catch (NoSuchElementException e) {
-            ctxt.reportInputMismatch(YourEnumeration.class, 
-                String.format("Unknown YourEnumeration value: %s", valueString));
+            ctxt.reportInputMismatch(YourEnumeration.class,
+                    String.format("Unknown YourEnumeration value: %s", valueString));
             return null;
         }
     }
@@ -544,8 +544,8 @@ public class YourEnumerationXmlDeserializer extends JsonDeserializer<YourEnumera
 ```java
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration;
 
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
@@ -556,19 +556,19 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
 public class YourEnumerationTtlvSerializer implements TtlvSerializer<YourEnumeration> {
-    
+
     @Override
     public ByteBuffer serialize(YourEnumeration value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
     private TtlvObject serializeToTtlvObject(YourEnumeration value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
-        
+        KmipSpec spec = KmipContext.getSpec();
+
         // Validation: Check KMIP spec support
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                String.format("YourEnumeration not supported for KMIP spec %s", spec)
+                    String.format("YourEnumeration not supported for KMIP spec %s", spec)
             );
         }
 
@@ -598,7 +598,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -610,24 +610,24 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class YourEnumerationTtlvDeserializer implements TtlvDeserializer<YourEnumeration> {
-    
+
     private final EncodingType expectedType = EncodingType.ENUMERATION;
     private final KmipTag.Standard expectedTag = KmipTag.Standard.YOUR_ENUMERATION_TAG;
 
     @Override
     public YourEnumeration deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        
+
         // Validation: Check tag and type
         if (!Arrays.equals(obj.getTag(), expectedTag.getTagBytes())) {
             throw new IllegalArgumentException(
-                String.format("Expected tag %s for YourEnumeration", expectedTag.getDescription())
+                    String.format("Expected tag %s for YourEnumeration", expectedTag.getDescription())
             );
         }
-        
+
         if (obj.getType() != expectedType.getTypeValue()) {
             throw new IllegalArgumentException(
-                String.format("Expected type %s for YourEnumeration", expectedType.getDescription())
+                    String.format("Expected type %s for YourEnumeration", expectedType.getDescription())
             );
         }
 
@@ -635,18 +635,18 @@ public class YourEnumerationTtlvDeserializer implements TtlvDeserializer<YourEnu
         if (obj.getValue().length != 4) {
             throw new IllegalArgumentException("YourEnumeration value must be 4 bytes");
         }
-        
+
         ByteBuffer valueBuffer = ByteBuffer.wrap(obj.getValue());
         int intValue = valueBuffer.getInt();
 
         // Convert to enumeration
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         try {
             YourEnumeration.Value enumValue = YourEnumeration.fromValue(spec, intValue);
             return new YourEnumeration(enumValue);
         } catch (NoSuchElementException e) {
             throw new IllegalArgumentException(
-                String.format("Unknown YourEnumeration value: %d", intValue), e
+                    String.format("Unknown YourEnumeration value: %d", intValue), e
             );
         }
     }
@@ -657,50 +657,57 @@ public class YourEnumerationTtlvDeserializer implements TtlvDeserializer<YourEnu
 
 ### JSON Module Registration
 
-Add to `KmipJsonModule.java`:
+Add to `KmipJsonModule.java` constructor:
 
 ```java
-// In setupModule() method
-addSerializer(YourEnumeration.class, new YourEnumerationJsonSerializer());
-addDeserializer(YourEnumeration.class, new YourEnumerationJsonDeserializer());
+public KmipJsonModule() {
+    super("KmipJsonModule", Version.unknownVersion());
 
-addSerializer(YourAttribute.class, new YourAttributeJsonSerializer());
-addDeserializer(YourAttribute.class, new YourAttributeJsonDeserializer());
+    addSerializer(YourEnumeration.class, new YourEnumerationJsonSerializer());
+    addDeserializer(YourEnumeration.class, new YourEnumerationJsonDeserializer());
 
-addSerializer(YourStructure.class, new YourStructureJsonSerializer());
-addDeserializer(YourStructure.class, new YourStructureJsonDeserializer());
+    addSerializer(YourAttribute.class, new YourAttributeJsonSerializer());
+    addDeserializer(YourAttribute.class, new YourAttributeJsonDeserializer());
+
+    addSerializer(YourStructure.class, new YourStructureJsonSerializer());
+    addDeserializer(YourStructure.class, new YourStructureJsonDeserializer());
+}
 ```
 
 ### XML Module Registration
 
-Add to `KmipXmlModule.java`:
+Add to `KmipXmlModule.java` constructor:
 
 ```java
-// In setupModule() method
-addSerializer(YourEnumeration.class, new YourEnumerationXmlSerializer());
-addDeserializer(YourEnumeration.class, new YourEnumerationXmlDeserializer());
+public KmipXmlModule() {
+    super("KmipXmlModule", Version.unknownVersion());
 
-addSerializer(YourAttribute.class, new YourAttributeXmlSerializer());
-addDeserializer(YourAttribute.class, new YourAttributeXmlDeserializer());
+    addSerializer(YourEnumeration.class, new YourEnumerationXmlSerializer());
+    addDeserializer(YourEnumeration.class, new YourEnumerationXmlDeserializer());
 
-addSerializer(YourStructure.class, new YourStructureXmlSerializer());
-addDeserializer(YourStructure.class, new YourStructureXmlDeserializer());
+    addSerializer(YourAttribute.class, new YourAttributeXmlSerializer());
+    addDeserializer(YourAttribute.class, new YourAttributeXmlDeserializer());
+
+    addSerializer(YourStructure.class, new YourStructureXmlSerializer());
+    addDeserializer(YourStructure.class, new YourStructureXmlDeserializer());
+}
 ```
 
 ### TTLV Module Registration
 
-Add to `KmipTtlvModule.java`:
+Add to `KmipTtlvModule.java` constructor:
 
 ```java
-// In constructor
-registerSerializer(YourEnumeration.class, new YourEnumerationTtlvSerializer());
-registerDeserializer(YourEnumeration.class, new YourEnumerationTtlvDeserializer());
+public KmipTtlvModule() {
+    addSerializer(YourEnumeration.class, new YourEnumerationTtlvSerializer());
+    addDeserializer(YourEnumeration.class, new YourEnumerationTtlvDeserializer());
 
-registerSerializer(YourAttribute.class, new YourAttributeTtlvSerializer());
-registerDeserializer(YourAttribute.class, new YourAttributeTtlvDeserializer());
+    addSerializer(YourAttribute.class, new YourAttributeTtlvSerializer());
+    addDeserializer(YourAttribute.class, new YourAttributeTtlvDeserializer());
 
-registerSerializer(YourStructure.class, new YourStructureTtlvSerializer());
-registerDeserializer(YourStructure.class, new YourStructureTtlvDeserializer());
+    addSerializer(YourStructure.class, new YourStructureTtlvSerializer());
+    addDeserializer(YourStructure.class, new YourStructureTtlvDeserializer());
+}
 ```
 
 ## Validation in Serializers
@@ -709,7 +716,7 @@ registerDeserializer(YourStructure.class, new YourStructureTtlvDeserializer());
 
 ```java
 // KMIP spec validation
-KmipSpec spec = KmipCodecContext.getSpec();
+KmipSpec spec = KmipContext.getSpec();
 if (!value.isSupportedFor(spec)) {
     throw new UnsupportedEncodingException(
         String.format("Type %s not supported for KMIP spec %s", 

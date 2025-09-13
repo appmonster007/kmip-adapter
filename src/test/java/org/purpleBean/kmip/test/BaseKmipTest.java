@@ -7,8 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
@@ -25,29 +25,29 @@ public abstract class BaseKmipTest {
 
     @BeforeEach
     void setUp() {
-        setupCodecContext();
+        setupContext();
         setupMappers();
         setupTestSpecificResources();
     }
 
     @AfterEach
     void tearDown() {
-        cleanupCodecContext();
+        cleanupContext();
         cleanupTestSpecificResources();
     }
 
     /**
      * Sets up the KMIP codec context with default specification.
      */
-    protected void setupCodecContext() {
-        KmipCodecContext.setSpec(defaultSpec);
+    protected void setupContext() {
+        KmipContext.setSpec(defaultSpec);
     }
 
     /**
      * Cleans up the KMIP codec context.
      */
-    protected void cleanupCodecContext() {
-        KmipCodecContext.clear();
+    protected void cleanupContext() {
+        KmipContext.clear();
     }
 
     /**
@@ -89,7 +89,7 @@ public abstract class BaseKmipTest {
      * @param spec the KMIP specification to use
      */
     protected void withKmipSpec(KmipSpec spec) {
-        KmipCodecContext.setSpec(spec);
+        KmipContext.setSpec(spec);
     }
 
     /**
@@ -99,16 +99,16 @@ public abstract class BaseKmipTest {
      * @param operation the test operation to execute
      */
     protected void withKmipSpec(KmipSpec spec, Runnable operation) {
-        KmipSpec originalSpec = KmipCodecContext.getSpec();
+        KmipSpec originalSpec = KmipContext.getSpec();
         try {
-            KmipCodecContext.setSpec(spec);
+            KmipContext.setSpec(spec);
             operation.run();
         } finally {
             // Ensure we properly clean up and restore the original spec
             if (originalSpec != null) {
-                KmipCodecContext.setSpec(originalSpec);
+                KmipContext.setSpec(originalSpec);
             } else {
-                KmipCodecContext.clear();
+                KmipContext.clear();
             }
         }
     }

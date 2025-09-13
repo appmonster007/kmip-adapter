@@ -13,7 +13,23 @@ A comprehensive step-by-step guide for creating new KMIP objects with all suppor
 
 ## Overview
 
-When creating a new KMIP object supported by the KMIP specification, you need to create several supporting components:
+When creating a new KMIP object supported by the KMIP specification, you need to create several supporting components. Before starting, please review these core guidelines:
+
+### Core Guidelines
+
+1. **Inheritance Rules**:
+   - All new KMIP objects must extend either `KmipEnumeration` (for enumerations) or some combination of `KmipStructure` and `KmipAttribute` (for complex types).
+   - Maintain strict type hierarchy to ensure consistency across the codebase.
+
+2. **Version Support Requirements**:
+   - All new enum values or extensions must support `KmipSpec.UnknownVersion` by default.
+   - All new objects or extensions must support `KmipSpec.UnknownVersion` by default.
+   - Always implement `isSupportedFor(KmipSpec spec)` to handle version compatibility.
+
+3. **Registration**:
+   - Register all new enum values with proper version support information.
+   - Ensure proper initialization order when registering new values.
+
 
 ### Required Components
 1. **Main KMIP Object** - The core data type (Enumeration, Attribute, or Structure)
@@ -128,7 +144,7 @@ src/test/java/org/purpleBean/kmip/
 #### 1. Constructor Validation (Main Code)
 ```java
 public YourType(Value value) {
-    KmipSpec spec = KmipCodecContext.getSpec();
+    KmipSpec spec = KmipContext.getSpec();
     if (!value.isSupportedFor(spec)) {
         throw new IllegalArgumentException(
             String.format("Unsupported value of %s provided for %s", 
@@ -148,7 +164,7 @@ public YourStructure build() {
     }
     
     // Validate KMIP spec compatibility
-    KmipSpec spec = KmipCodecContext.getSpec();
+    KmipSpec spec = KmipContext.getSpec();
     validateFieldSupport(requiredField, spec);
     validateFieldSupport(optionalField, spec);
     
@@ -160,7 +176,7 @@ public YourStructure build() {
 ```java
 @Override
 public void serialize(YourType value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-    KmipSpec spec = KmipCodecContext.getSpec();
+    KmipSpec spec = KmipContext.getSpec();
     if (!value.isSupportedFor(spec)) {
         throw new UnsupportedEncodingException("Type not supported for spec " + spec);
     }

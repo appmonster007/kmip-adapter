@@ -1,44 +1,96 @@
 # KMIP Adapter
 
-A comprehensive Java library for building and managing KMIP (Key Management Interoperability Protocol) data types with support for TTLV serialization, JSON/XML mapping, and extensible type systems.
-
 [![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
 [![Maven](https://img.shields.io/badge/Maven-3.6+-blue.svg)](https://maven.apache.org/)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Tests](https://img.shields.io/badge/Tests-551%20passing-brightgreen.svg)](https://github.com/your-org/kmip-adapter/actions)
+[![Documentation](https://img.shields.io/badge/Docs-latest-brightgreen.svg)](/docs/)
 
-## Overview
+A comprehensive Java library for building and managing KMIP (Key Management Interoperability Protocol) data types with support for TTLV serialization, JSON/XML mapping, and extensible type systems.
 
-The KMIP Adapter provides a robust foundation for implementing KMIP-compliant applications with:
+## 📚 Documentation
 
+### Getting Started
+- [Installation](/docs/01-getting-started/installation.md) - How to add the library to your project
+- [Configuration](/docs/01-getting-started/configuration.md) - Basic setup and configuration
+
+### Architecture
+- [Core Concepts](/docs/02-architecture/core-concepts.md) - Key architectural concepts and design decisions
+- [Type System](/docs/02-architecture/type-system.md) - Understanding KMIP's type system
+- [Serialization](/docs/02-architecture/serialization.md) - Serialization formats and protocols
+
+### Guides
+- [Implementation Guide](/docs/03-guides/implementation.md) - How to implement KMIP objects
+- [Testing Guide](/docs/03-guides/testing.md) - Testing strategies and best practices
+- [Benchmarking](/docs/03-guides/benchmarking.md) - Performance testing and optimization
+
+### API Reference
+- [Enumerations](/docs/04-api/enumerations.md) - Available enumeration types
+- [Attributes](/docs/04-api/attributes.md) - KMIP attribute types
+- [Structures](/docs/04-api/structures.md) - Complex KMIP data structures
+
+### Contributing
+- [Code Style](/docs/05-contributing/code-style.md) - Coding standards and conventions
+- [Pull Requests](/docs/05-contributing/pull-requests.md) - How to contribute code
+- [Release Process](/docs/05-contributing/release-process.md) - Versioning and releases
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Java 21 or higher
+- Maven 3.6 or higher
+
+### Maven
+
+Add the dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.purpleBean</groupId>
+    <artifactId>kmip-adapter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+### Basic Usage
+
+```java
+// Set up the KMIP context
+KmipContext.setSpec(KmipSpec.V1_2);
+
+try {
+    // Create a KMIP object
+    Name name = new Name("example-key", NameType.UNINTERPRETED_TEXT_STRING);
+    
+    // Serialize to JSON
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.registerModule(new KmipModule());
+    
+    String json = mapper.writeValueAsString(name);
+    System.out.println("Serialized: " + json);
+    
+    // Deserialize back to object
+    Name deserialized = mapper.readValue(json, Name.class);
+    
+} finally {
+    // Always clear the context when done
+    KmipContext.clear();
+}
+```
+
+## 🔍 Features
+
+### Core Features
 - **Type-safe KMIP data structures** with compile-time validation
 - **Extensible enumeration system** supporting custom values and version compatibility
 - **Multi-format serialization** (TTLV, JSON, XML) with Jackson integration
 - **Thread-safe codec contexts** for version-specific processing
-- **Comprehensive test suite** with 551 passing tests ensuring reliability
 
-## Features
-
-### 🏗️ Core Architecture
-
-- **KmipDataType Interface**: Base contract for all KMIP data types
-- **KmipStructure Interface**: Extended contract for complex structured data
-- **Version Management**: Full KMIP specification version support (V1.2, extensible)
-- **Tag System**: Comprehensive KMIP tag registry with custom extension support
-
-### 🔄 Serialization Support
-
-- **TTLV Format**: Native KMIP Tag-Type-Length-Value encoding
-- **JSON Mapping**: Jackson-based JSON serialization/deserialization
-- **XML Support**: Full XML document mapping with proper namespacing
-- **Thread Safety**: Isolated codec contexts for concurrent processing
-
-### 📊 Type System
-
-- **Standard Enumerations**: Pre-defined KMIP enumerations (State, etc.)
-- **Custom Extensions**: Runtime registration of custom enumeration values
-- **Version Compatibility**: Automatic validation against KMIP specification versions
-- **Null Safety**: Comprehensive `@NonNull` annotations with Lombok integration
+### Advanced Features
+- **Custom type registration** for extending the type system
+- **Validation framework** for input verification
+- **Comprehensive test suite** with 500+ tests
+- **Performance optimized** for high-throughput scenarios
 
 ## Quick Start
 
@@ -67,23 +119,22 @@ Add to your `pom.xml`:
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.KmipSpec;
 
 // Set KMIP specification context
-KmipCodecContext.setSpec(KmipSpec.V1_2);
+KmipContext.setSpec(KmipSpec.V1_2);
 
 // Create basic types
 State activeState = new State(State.Standard.ACTIVE);
 ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
-    .dateTime(OffsetDateTime.now())
-    .build();
+        .dateTime(OffsetDateTime.now())
+        .build();
 
 // Create complex structures
 SampleStructure structure = SampleStructure.builder()
-    .activationDate(activationDate)
-    .state(activeState)
-    .build();
+        .activationDate(activationDate)
+        .state(activeState)
+        .build();
 ```
 
 #### Custom Enumeration Registration
@@ -96,7 +147,7 @@ import org.purpleBean.kmip.KmipSpec;
 State.Value customState = State.register(
     -1000001, 
     "CustomPendingState", 
-    Set.of(KmipSpec.V1_2)
+    Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
 );
 
 // Use custom state
@@ -179,20 +230,20 @@ public interface KmipStructure extends KmipDataType {
 
 #### Context Management
 
-The `KmipCodecContext` is a critical component that manages KMIP specification versions in a thread-safe manner. It uses ThreadLocal storage to ensure each thread has its own isolated context.
+The `KmipContext` is a critical component that manages KMIP specification versions in a thread-safe manner. It uses ThreadLocal storage to ensure each thread has its own isolated context.
 
-**Why Use KmipCodecContext:**
+**Why Use KmipContext:**
 - **Version Validation**: Ensures KMIP objects are created with compatible specification versions
 - **Thread Safety**: Prevents version conflicts in multi-threaded applications
 - **Automatic Validation**: KMIP types automatically validate against the current context
 - **Error Prevention**: Catches unsupported value/version combinations at creation time
 
-**When to Use KmipCodecContext:**
+**When to Use KmipContext:**
 
 1. **Before Creating KMIP Objects** - Always set the context before instantiating KMIP types:
    ```java
    // Set context first
-   KmipCodecContext.setSpec(KmipSpec.V1_2);
+   KmipContext.setSpec(KmipSpec.V1_2);
    
    // Then create objects - they will validate against V1_2
    State activeState = new State(State.Standard.ACTIVE);
@@ -202,13 +253,13 @@ The `KmipCodecContext` is a critical component that manages KMIP specification v
    ```java
    // Thread 1
    CompletableFuture.runAsync(() -> {
-       KmipCodecContext.setSpec(KmipSpec.V1_2);
+       KmipContext.setSpec(KmipSpec.V1_2);
        // Process V1_2 objects safely
    });
    
    // Thread 2 - independent context
    CompletableFuture.runAsync(() -> {
-       KmipCodecContext.setSpec(KmipSpec.V1_2);
+       KmipContext.setSpec(KmipSpec.V1_2);
        // Process with isolated context
    });
    ```
@@ -216,11 +267,11 @@ The `KmipCodecContext` is a critical component that manages KMIP specification v
 3. **When Processing Different KMIP Versions** - Switch contexts for different specification versions:
    ```java
    // Process legacy data
-   KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
+   KmipContext.setSpec(KmipSpec.UnknownVersion);
    // ... process older format
    
    // Switch to current version
-   KmipCodecContext.setSpec(KmipSpec.V1_2);
+   KmipContext.setSpec(KmipSpec.V1_2);
    // ... process current format
    ```
 
@@ -232,14 +283,14 @@ The `KmipCodecContext` is a critical component that manages KMIP specification v
        @PostMapping("/kmip/v1.2/objects")
        public ResponseEntity<?> createObject(@RequestBody ObjectRequest request) {
            // Set context for this request
-           KmipCodecContext.setSpec(KmipSpec.V1_2);
+           KmipContext.setSpec(KmipSpec.V1_2);
            
            try {
                // Create and process KMIP objects
                return ResponseEntity.ok(processRequest(request));
            } finally {
                // Clean up context
-               KmipCodecContext.clear();
+               KmipContext.clear();
            }
        }
    }
@@ -249,14 +300,14 @@ The `KmipCodecContext` is a critical component that manages KMIP specification v
 ```java
 // Always clear context when done (optional but recommended)
 try {
-    KmipCodecContext.setSpec(KmipSpec.V1_2);
+    KmipContext.setSpec(KmipSpec.V1_2);
     // ... your KMIP operations
 } finally {
-    KmipCodecContext.clear(); // Resets to UnknownVersion
+    KmipContext.clear(); // Resets to UnknownVersion
 }
 
 // Check current context
-KmipSpec current = KmipCodecContext.getSpec();
+KmipSpec current = KmipContext.getSpec();
 ```
 
 **What Happens Without Context:**

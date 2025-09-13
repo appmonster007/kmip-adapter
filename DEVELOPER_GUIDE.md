@@ -245,10 +245,10 @@ For detailed serialization and testing information, refer to the specialized gui
 ```java
 public void processKmipData(KmipSpec targetVersion) {
     try {
-        KmipCodecContext.setSpec(targetVersion);
+        KmipContext.setSpec(targetVersion);
         // Process KMIP objects
     } finally {
-        KmipCodecContext.clear();
+        KmipContext.clear();
     }
 }
 ```
@@ -269,7 +269,7 @@ public static class YourStructureBuilder {
 // Register custom values at application startup
 @PostConstruct
 public void registerCustomValues() {
-    State.register(-1000001, "CustomState", Set.of(KmipSpec.V1_2));
+    State.register(-1000001, "CustomState", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 }
 ```
 
@@ -293,7 +293,7 @@ State state = new State(State.Standard.ACTIVE); // May fail
 ✅ **Always set context first**
 ```java
 // GOOD - context set before creation
-KmipCodecContext.setSpec(KmipSpec.V1_2);
+KmipContext.setSpec(KmipSpec.V1_2);
 State state = new State(State.Standard.ACTIVE);
 ```
 

@@ -70,7 +70,7 @@ public final class KmipTestDataFactory {
      * Creates a custom State for testing extensibility.
      */
     public static State createCustomState() {
-        State.Value customValue = State.register(-1000050, "TestCustom", Set.of(KmipSpec.V1_2));
+        State.Value customValue = State.register(-1000050, "TestCustom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         return new State(customValue);
     }
 
@@ -161,7 +161,7 @@ public final class KmipTestDataFactory {
      * Creates a custom KmipTag for testing extensibility.
      */
     public static KmipTag.Value createCustomKmipTag() {
-        return KmipTag.register(0x540001, "TestCustomTag", Set.of(KmipSpec.V1_2));
+        return KmipTag.register(0x540001, "TestCustomTag", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
     }
 
     /**
@@ -169,7 +169,7 @@ public final class KmipTestDataFactory {
      */
     public static List<KmipTag.Value> createCustomKmipTags(int count) {
         return java.util.stream.IntStream.range(0, count)
-                .mapToObj(i -> KmipTag.register(0x540001 + i, "TestCustomTag" + i, Set.of(KmipSpec.V1_2)))
+                .mapToObj(i -> KmipTag.register(0x540001 + i, "TestCustomTag" + i, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
                 .toList();
     }
 

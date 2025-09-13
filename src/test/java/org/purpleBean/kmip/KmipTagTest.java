@@ -108,7 +108,7 @@ class KmipTagTest extends BaseKmipTest {
                 // Given
                 int customValue = 0x540001;
                 String customDescription = "TestCustomTag" + System.currentTimeMillis(); // Ensure unique name
-                Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+                Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
                 // When
                 KmipTag.Value customTag = KmipTag.register(customValue, customDescription, supportedVersions);
@@ -141,7 +141,7 @@ class KmipTagTest extends BaseKmipTest {
         @DisplayName("Should reject invalid extension values")
         void shouldRejectInvalidExtensionValues(int invalidValue) {
             // When & Then
-            assertThatThrownBy(() -> KmipTag.register(invalidValue, "Invalid" + invalidValue, Set.of(KmipSpec.V1_2)))
+            assertThatThrownBy(() -> KmipTag.register(invalidValue, "Invalid" + invalidValue, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(String.format("Extension value %d must be between 0x540000 and 0x54FFFF", invalidValue));
         }
@@ -152,7 +152,7 @@ class KmipTagTest extends BaseKmipTest {
             // Given
             int validValue = 0x540002;
             String validDescription = "TestTag";
-            Set<KmipSpec> validVersions = Set.of(KmipSpec.V1_2);
+            Set<KmipSpec> validVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
             // When & Then - Verify null description throws NullPointerException
             assertThatThrownBy(() -> KmipTag.register(validValue, null, validVersions))
@@ -295,8 +295,8 @@ class KmipTagTest extends BaseKmipTest {
             // Given
             int customValue1 = 0x540010;
             int customValue2 = 0x540011;
-            KmipTag.register(customValue1, "Custom1", Set.of(KmipSpec.V1_2));
-            KmipTag.register(customValue2, "Custom2", Set.of(KmipSpec.V1_2));
+            KmipTag.register(customValue1, "Custom1", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            KmipTag.register(customValue2, "Custom2", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
             // When
             var registeredValues = KmipTag.registeredValues();
@@ -317,8 +317,8 @@ class KmipTagTest extends BaseKmipTest {
             String description2 = "Second";
 
             // When
-            KmipTag.Value first = KmipTag.register(customValue, description1, Set.of(KmipSpec.V1_2));
-            KmipTag.Value second = KmipTag.register(customValue, description2, Set.of(KmipSpec.V1_2));
+            KmipTag.Value first = KmipTag.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            KmipTag.Value second = KmipTag.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
             // Then - Registry creates new instances for each registration
             assertThat(first).isNotSameAs(second);
@@ -354,7 +354,7 @@ class KmipTagTest extends BaseKmipTest {
         @DisplayName("Should format hex string with proper padding")
         void shouldFormatHexStringWithProperPadding() {
             // Given - Create a tag with value that needs padding
-            KmipTag.register(0x540001, "PaddingTest", Set.of(KmipSpec.V1_2));
+            KmipTag.register(0x540001, "PaddingTest", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
             KmipTag.Value customTag = KmipTag.fromValue(KmipSpec.V1_2, 0x540001);
             KmipTag tag = new KmipTag(customTag);
 

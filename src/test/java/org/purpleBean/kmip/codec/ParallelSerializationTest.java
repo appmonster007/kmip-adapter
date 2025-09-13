@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
@@ -32,7 +32,7 @@ class ParallelSerializationTest extends BaseKmipTest {
 
         @Test
         @DisplayName("Should handle JSON and XML serialization in parallel threads with different codec contexts")
-        void shouldHandleJsonAndXmlSerializationInParallelThreadsWithDifferentCodecContexts() throws Exception {
+        void shouldHandleJsonAndXmlSerializationInParallelThreadsWithDifferentContexts() throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(4);
             int numberOfThreads = 20;
@@ -47,11 +47,11 @@ class ParallelSerializationTest extends BaseKmipTest {
 
                     CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                         // Set thread-specific codec context
-                        KmipCodecContext.setSpec(specForThread);
+                        KmipContext.setSpec(specForThread);
                         
                         try {
                             // Verify context is set correctly
-                            assertThat(KmipCodecContext.getSpec()).isEqualTo(specForThread);
+                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
                             
                             // Create test data with V1_2 context - use standard states to avoid version issues
                             State activeState = new State(State.Standard.ACTIVE);
@@ -76,10 +76,10 @@ class ParallelSerializationTest extends BaseKmipTest {
                             }
                             
                             // Verify context is still correct after serialization
-                            assertThat(KmipCodecContext.getSpec()).isEqualTo(specForThread);
+                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
                             
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor);
                     
@@ -97,7 +97,7 @@ class ParallelSerializationTest extends BaseKmipTest {
 
         @Test
         @DisplayName("Should handle concurrent serialization with multiple codec contexts and formats")
-        void shouldHandleConcurrentSerializationWithMultipleCodecContextsAndFormats() throws Exception {
+        void shouldHandleConcurrentSerializationWithMultipleContextsAndFormats() throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(6);
             int operationsPerThread = 50;
@@ -106,24 +106,24 @@ class ParallelSerializationTest extends BaseKmipTest {
                 // When - Create tasks that mix different specs and formats
                 List<CompletableFuture<Void>> jsonTasks = IntStream.range(0, operationsPerThread)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipCodecContext.setSpec(KmipSpec.V1_2);
+                        KmipContext.setSpec(KmipSpec.V1_2);
                         try {
                             ProtocolVersion version = ProtocolVersion.of(1, 2);
                             SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();
 
                 List<CompletableFuture<Void>> xmlTasks = IntStream.range(0, operationsPerThread)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipCodecContext.setSpec(KmipSpec.V1_2);
+                        KmipContext.setSpec(KmipSpec.V1_2);
                         try {
                             State state = new State(State.Standard.ACTIVE);
                             SerializationTestUtils.performXmlRoundTrip(xmlMapper, state, State.class);
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();
@@ -131,7 +131,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                 List<CompletableFuture<Void>> mixedTasks = IntStream.range(0, operationsPerThread)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
                         KmipSpec spec = KmipSpec.V1_2;
-                        KmipCodecContext.setSpec(spec);
+                        KmipContext.setSpec(spec);
                         try {
                             ActivationDateAttribute attr = ActivationDateAttribute.builder()
                                     .dateTime(OffsetDateTime.now())
@@ -140,7 +140,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                             SerializationTestUtils.performJsonRoundTrip(jsonMapper, attr, ActivationDateAttribute.class);
                             SerializationTestUtils.performXmlRoundTrip(xmlMapper, attr, ActivationDateAttribute.class);
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();
@@ -162,11 +162,11 @@ class ParallelSerializationTest extends BaseKmipTest {
 
     @Nested
     @DisplayName("Codec Context Isolation")
-    class CodecContextIsolation {
+    class ContextIsolation {
 
         @Test
         @DisplayName("Should maintain codec context isolation between parallel serialization operations")
-        void shouldMaintainCodecContextIsolationBetweenParallelSerializationOperations() throws Exception {
+        void shouldMaintainContextIsolationBetweenParallelSerializationOperations() throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(10);
             int numberOfOperations = 100;
@@ -179,25 +179,25 @@ class ParallelSerializationTest extends BaseKmipTest {
                         final KmipSpec expectedSpec = (i % 3 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
                         
                         return CompletableFuture.runAsync(() -> {
-                            KmipCodecContext.setSpec(expectedSpec);
+                            KmipContext.setSpec(expectedSpec);
                             
                             // Capture the spec at the beginning
-                            capturedSpecs.add(KmipCodecContext.getSpec());
+                            capturedSpecs.add(KmipContext.getSpec());
                             
                             // Perform serialization operations
                             ProtocolVersion version = ProtocolVersion.of(i % 5, i % 3);
                             SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
                             
                             // Verify spec hasn't changed during serialization
-                            assertThat(KmipCodecContext.getSpec()).isEqualTo(expectedSpec);
+                            assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
                             
                             // Perform XML serialization
                             SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
                             
                             // Final verification
-                            assertThat(KmipCodecContext.getSpec()).isEqualTo(expectedSpec);
+                            assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
                             
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }, executor);
                     })
                     .toList();
@@ -228,7 +228,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                         for (int j = 0; j < 5; j++) {
                             // Rapid context switching
                             KmipSpec spec = (j % 2 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
-                            KmipCodecContext.setSpec(spec);
+                            KmipContext.setSpec(spec);
                             
                             // Quick serialization
                             ProtocolVersion version = ProtocolVersion.of(j, i % 3);
@@ -240,9 +240,9 @@ class ParallelSerializationTest extends BaseKmipTest {
                             }
                             
                             // Verify context integrity
-                            assertThat(KmipCodecContext.getSpec()).isEqualTo(spec);
+                            assertThat(KmipContext.getSpec()).isEqualTo(spec);
                         }
-                        KmipCodecContext.clear();
+                        KmipContext.clear();
                     }, executor))
                     .toList();
 
@@ -274,7 +274,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                 List<CompletableFuture<Void>> futures = IntStream.range(0, totalOperations)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
                         KmipSpec spec = KmipSpec.V1_2;
-                        KmipCodecContext.setSpec(spec);
+                        KmipContext.setSpec(spec);
                         
                         try {
                             // Create test data with standard values to avoid version issues
@@ -293,7 +293,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                             SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
                             
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();
@@ -334,19 +334,19 @@ class ParallelSerializationTest extends BaseKmipTest {
                 // When - Mix successful and failing operations
                 List<CompletableFuture<Void>> successfulFutures = IntStream.range(0, successfulOperations)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipCodecContext.setSpec(KmipSpec.V1_2);
+                        KmipContext.setSpec(KmipSpec.V1_2);
                         try {
                             ProtocolVersion version = ProtocolVersion.of(1, 2);
                             SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();
 
                 List<CompletableFuture<Void>> failingFutures = IntStream.range(0, failingOperations)
                     .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipCodecContext.setSpec(KmipSpec.UnknownVersion);
+                        KmipContext.setSpec(KmipSpec.UnknownVersion);
                         try {
                             // Intentionally cause serialization issues with malformed data
                             String malformedJson = "{invalid json}";
@@ -354,7 +354,7 @@ class ParallelSerializationTest extends BaseKmipTest {
                                 SerializationTestUtils.testJsonDeserialization(jsonMapper, malformedJson, ProtocolVersion.class))
                                 .isInstanceOf(AssertionError.class);
                         } finally {
-                            KmipCodecContext.clear();
+                            KmipContext.clear();
                         }
                     }, executor))
                     .toList();

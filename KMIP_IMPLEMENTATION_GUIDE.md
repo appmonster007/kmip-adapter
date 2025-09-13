@@ -10,6 +10,7 @@ This document provides comprehensive guidelines for implementing KMIP objects in
 5. [Serialization & Deserialization](#serialization--deserialization)
 6. [Testing Guidelines](#testing-guidelines)
 7. [Best Practices](#best-practices)
+8. [Code Organization](#code-organization)
 
 ## Core Interfaces
 
@@ -18,23 +19,39 @@ Base interface for all KMIP data types.
 
 ```java
 public interface KmipDataType {
+    /**
+     * @return The KMIP tag that identifies this data type
+     */
     KmipTag getKmipTag();
+    
+    /**
+     * @return The encoding type for serialization
+     */
     EncodingType getEncodingType();
+    
+    /**
+     * Check if this type is supported in the given KMIP specification
+     * @param spec The KMIP specification to check against
+     * @return true if supported, false otherwise
+     */
     boolean isSupportedFor(@NonNull KmipSpec spec);
 }
 ```
 
 ### `KmipEnumeration`
-For fixed sets of values.
+Interface for fixed sets of values with description support.
 
 ```java
 public interface KmipEnumeration extends KmipDataType {
+    /**
+     * @return A human-readable description of this enumeration value
+     */
     String getDescription();
 }
 ```
 
 ### `KmipAttribute`
-For KMIP attributes.
+Interface for KMIP attributes with attribute-specific functionality.
 
 ```java
 public interface KmipAttribute extends KmipDataType {
@@ -49,10 +66,13 @@ public interface KmipAttribute extends KmipDataType {
 ```
 
 ### `KmipStructure`
-For complex KMIP structures.
+Interface for complex structured data types.
 
 ```java
 public interface KmipStructure extends KmipDataType {
+    /**
+     * @return List of all contained values in this structure
+     */
     List<KmipDataType> getValues();
 }
 ```
@@ -66,7 +86,8 @@ package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -86,17 +107,17 @@ public class YourEnumeration implements KmipEnumeration {
 
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.YOUR_ENUM_TAG);
     private final EncodingType encodingType = EncodingType.ENUMERATION;
-    
+
     @NonNull
     private final Value value;
 
     public YourEnumeration(@NonNull Value value) {
         // KMIP spec compatibility validation
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
-                String.format("Value '%s' for %s is not supported for KMIP spec %s", 
-                    kmipTag.getDescription(), value.getDescription(), spec)
+                    String.format("Value '%s' for %s is not supported for KMIP spec %s",
+                            kmipTag.getDescription(), value.getDescription(), spec)
             );
         }
         this.value = value;
@@ -104,8 +125,8 @@ public class YourEnumeration implements KmipEnumeration {
 
     // Standard values
     public enum Standard implements Value {
-        VALUE_1(0x01, "Value 1", Set.of(KmipSpec.V1_2)),
-        VALUE_2(0x02, "Value 2", Set.of(KmipSpec.V1_2));
+        VALUE_1(0x01, "Value 1", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        VALUE_2(0x02, "Value 2", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
         private final int value;
         private final String description;
@@ -143,7 +164,7 @@ public class YourEnumeration implements KmipEnumeration {
     public static Value register(int value, String description, Set<KmipSpec> supportedVersions) {
         if (!isValidExtensionValue(value)) {
             throw new IllegalArgumentException(
-                String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
+                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
             );
         }
         if (description.trim().isEmpty()) {
@@ -162,23 +183,33 @@ public class YourEnumeration implements KmipEnumeration {
     public static Value fromValue(KmipSpec spec, int value) {
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-            .filter(x -> x.isSupportedFor(spec))
-            .orElseThrow(() -> new NoSuchElementException(
-                String.format("No value found for %d in KMIP spec %s", value, spec)
-            ));
+                .filter(x -> x.isSupportedFor(spec))
+                .orElseThrow(() -> new NoSuchElementException(
+                        String.format("No value found for %d in KMIP spec %s", value, spec)
+                ));
     }
 
     public static Value fromName(KmipSpec spec, String name) {
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-            .filter(x -> x.isSupportedFor(spec))
-            .orElseThrow(() -> new NoSuchElementException(
-                String.format("No value found for '%s' in KMIP spec %s", name, spec)
-            ));
+                .filter(x -> x.isSupportedFor(spec))
+                .orElseThrow(() -> new NoSuchElementException(
+                        String.format("No value found for '%s' in KMIP spec %s", name, spec)
+                ));
     }
 
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
     }
 
     @Override
@@ -222,7 +253,7 @@ public class YourAttribute implements KmipAttribute {
     // Required fields from KmipDataType
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.YOUR_ATTRIBUTE_TAG);
     private final EncodingType encodingType = EncodingType.TEXT_STRING; // Adjust based on attribute type
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     // Attribute properties with default values
     private final boolean alwaysPresent = false;
@@ -281,7 +312,7 @@ package org.purpleBean.kmip.common.structure;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 
 import java.util.*;
 
@@ -291,12 +322,12 @@ public class YourStructure implements KmipStructure {
     // Required fields from KmipDataType
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.YOUR_STRUCTURE_TAG);
     private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     // Structure fields - these should be KMIP data types
     @NonNull
     private final SomeKmipType field1;
-    
+
     private final AnotherKmipType field2;
 
     @Override
@@ -323,12 +354,12 @@ public class YourStructure implements KmipStructure {
             }
 
             // KMIP spec compatibility validation
-            KmipSpec spec = KmipCodecContext.getSpec();
+            KmipSpec spec = KmipContext.getSpec();
             for (KmipDataType field : fields) {
                 if (field != null && !field.isSupportedFor(spec)) {
                     throw new IllegalArgumentException(
-                        String.format("Value '%s' is not supported for KMIP spec %s", 
-                            field.getKmipTag().getDescription(), spec)
+                            String.format("Value '%s' is not supported for KMIP spec %s",
+                                    field.getKmipTag().getDescription(), spec)
                     );
                 }
             }
@@ -351,7 +382,7 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 
 import java.io.IOException;
@@ -360,7 +391,7 @@ import java.io.UnsupportedEncodingException;
 public class YourTypeJsonSerializer extends KmipDataTypeJsonSerializer<YourType> {
 
     @Override
-    public void serialize(YourType value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) 
+    public void serialize(YourType value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
             throws IOException {
         // Validation: Null check
         if (value == null) {
@@ -368,11 +399,11 @@ public class YourTypeJsonSerializer extends KmipDataTypeJsonSerializer<YourType>
         }
 
         // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", 
-                    value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            value.getKmipTag().getDescription(), spec)
             );
         }
 
@@ -380,12 +411,12 @@ public class YourTypeJsonSerializer extends KmipDataTypeJsonSerializer<YourType>
         jsonGenerator.writeStartObject();
         jsonGenerator.writeObject(value.getKmipTag());
         jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
-        
+
         // Write the value field(s) - adjust based on your type
         if (value.getYourValue() != null) {
             jsonGenerator.writeStringField("value", value.getYourValue().toString());
         }
-        
+
         jsonGenerator.writeEndObject();
     }
 }
@@ -497,7 +528,7 @@ class YourTypeTest extends BaseKmipTest {
             // Given
             int customValue = 0x80000001;
             String customDescription = "CustomValue";
-            Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+            Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
             
             // When
             YourType.Value customValueObj = YourType.register(
@@ -564,13 +595,66 @@ class YourTypeTest extends BaseKmipTest {
 
 ## Best Practices
 
-1. **Immutability**: All KMIP objects should be immutable. Use the Builder pattern for construction.
-2. **Null Safety**: Use `@NonNull` annotations and validate inputs in the builder.
-3. **Thread Safety**: Ensure thread-safe implementations, especially for shared state.
-4. **Documentation**: Include Javadoc for all public APIs.
-5. **Testing**: Cover all public methods with unit tests, including edge cases.
-6. **Error Handling**: Provide clear error messages for invalid states or inputs.
-7. **Versioning**: Always consider KMIP spec version compatibility.
-8. **Performance**: Be mindful of object creation in hot paths.
-9. **Code Organization**: Follow the existing package structure and naming conventions.
-10. **Validation**: Validate all inputs and object states.
+1. **Immutability**:
+   - Make all value objects immutable using `@Value` or `@Data(staticConstructor = "of")`
+   - Use the Builder pattern for complex object creation
+   - Make collections immutable with `Collections.unmodifiableList()`
+
+2. **Validation**:
+   - Use `@NonNull` for required parameters
+   - Validate all inputs in constructors and factory methods
+   - Provide clear error messages for validation failures
+
+3. **Thread Safety**:
+   - Use concurrent collections for shared state
+   - Document thread safety guarantees
+   - Prefer immutability over synchronization
+
+4. **Documentation**:
+   - Document all public APIs with Javadoc
+   - Include `@throws` for all possible exceptions
+   - Document thread safety and nullability
+
+5. **Testing**:
+   - Test all public methods
+   - Include edge cases and error conditions
+   - Test serialization/deserialization round-trips
+
+6. **Error Handling**:
+   - Use specific exception types
+   - Include context in error messages
+   - Use proper exception chaining
+
+7. **Performance**:
+   - Reuse objects where possible
+   - Be mindful of object creation in hot paths
+   - Consider caching for expensive operations
+
+8. **Code Organization**:
+   - Follow the existing package structure
+   - Use consistent naming conventions
+   - Group related functionality together
+
+## Code Organization
+
+### Package Structure
+
+```
+src/main/java/org/purpleBean/kmip/
+├── codec/                    # Serialization/deserialization
+│   ├── json/                 # JSON codec implementation
+│   ├── ttlv/                 # TTLV codec implementation
+│   └── xml/                  # XML codec implementation
+├── common/                   # Common KMIP types
+│   ├── enumeration/          # Enumerated types
+│   ├── structure/            # Complex data structures
+│   └── attribute/            # Attribute implementations
+└── util/                     # Utility classes
+```
+
+### Naming Conventions
+
+- **Interfaces**: Start with `Kmip` prefix (e.g., `KmipDataType`)
+- **Implementations**: Use descriptive names (e.g., `State`, `ProtocolVersion`)
+- **Constants**: UPPER_SNAKE_CASE
+- **Packages**: Lowercase, no underscores

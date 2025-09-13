@@ -4,9 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 // Removed Spring Boot test annotations - this is now a regular integration test
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
@@ -92,13 +92,13 @@ class KmipIntegrationTest extends BaseKmipTest {
         void shouldHandleSpringBootAutoConfiguration() {
             // Given - Auto-configured components should work
             // When
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
+            KmipContext.setSpec(KmipSpec.V1_2);
             
             // Then
-            assertThat(KmipCodecContext.getSpec()).isEqualTo(KmipSpec.V1_2);
+            assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.V1_2);
             
             // Cleanup
-            KmipCodecContext.clear();
+            KmipContext.clear();
         }
     }
 
@@ -243,20 +243,20 @@ class KmipIntegrationTest extends BaseKmipTest {
 
         @Test
         @DisplayName("Should handle codec context corruption recovery")
-        void shouldHandleCodecContextCorruptionRecovery() {
+        void shouldHandleContextCorruptionRecovery() {
             // Given - Normal operation
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
+            KmipContext.setSpec(KmipSpec.V1_2);
             ProtocolVersion version = ProtocolVersion.of(1, 2);
             
             // When - Simulate context issues and recovery
             SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
             
             // Corrupt context
-            KmipCodecContext.setSpec(null);
+            KmipContext.setSpec(null);
             
             // Recover context
-            KmipCodecContext.clear();
-            KmipCodecContext.setSpec(KmipSpec.V1_2);
+            KmipContext.clear();
+            KmipContext.setSpec(KmipSpec.V1_2);
             
             // Then - Should work normally after recovery
             SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);

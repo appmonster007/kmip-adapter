@@ -22,8 +22,8 @@ public class RegistryBehaviorTest {
         String description2 = "Second";
         
         // When
-        State.Value first = State.register(customValue, description1, Set.of(KmipSpec.V1_2));
-        State.Value second = State.register(customValue, description2, Set.of(KmipSpec.V1_2));
+        State.Value first = State.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+        State.Value second = State.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         
         // Debug output
         System.out.println("First: " + first);
@@ -47,8 +47,8 @@ public class RegistryBehaviorTest {
         String description2 = "Second";
         
         // When
-        KmipTag.Value first = KmipTag.register(customValue, description1, Set.of(KmipSpec.V1_2));
-        KmipTag.Value second = KmipTag.register(customValue, description2, Set.of(KmipSpec.V1_2));
+        KmipTag.Value first = KmipTag.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+        KmipTag.Value second = KmipTag.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         
         // Debug output
         System.out.println("First: " + first);
