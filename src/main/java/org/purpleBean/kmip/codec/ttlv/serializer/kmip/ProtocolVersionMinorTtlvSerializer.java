@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.serializer.kmip;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
@@ -19,7 +19,7 @@ public class ProtocolVersionMinorTtlvSerializer implements TtlvSerializer<Protoc
     }
 
     private TtlvObject serializeToTtlvObject(ProtocolVersion.ProtocolVersionMinor value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common;
 
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
@@ -19,7 +19,7 @@ public class ActivationDateAttributeTtlvSerializer implements TtlvSerializer<Act
     }
 
     public TtlvObject serializeToTtlvObject(ActivationDateAttribute value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

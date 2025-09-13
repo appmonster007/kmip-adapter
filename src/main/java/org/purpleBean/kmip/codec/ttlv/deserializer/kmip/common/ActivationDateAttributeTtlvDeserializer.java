@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
@@ -30,7 +30,7 @@ public class ActivationDateAttributeTtlvDeserializer implements TtlvDeserializer
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
         OffsetDateTime dt = mapper.readValue(bb, OffsetDateTime.class);
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         ActivationDateAttribute activationDateAttribute = ActivationDateAttribute.builder().dateTime(dt).build();
 
         if (!activationDateAttribute.isSupportedFor(spec)) {

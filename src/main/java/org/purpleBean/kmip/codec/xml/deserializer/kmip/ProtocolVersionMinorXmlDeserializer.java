@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -43,7 +43,7 @@ public class ProtocolVersionMinorXmlDeserializer extends JsonDeserializer<Protoc
         int value = Integer.parseInt(valueNode.asText());
         ProtocolVersion.ProtocolVersionMinor minor = ProtocolVersion.ProtocolVersionMinor.of(value);
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!minor.isSupportedFor(spec)) {
             throw new NoSuchElementException("ProtocolVersionMinor " + value + " not supported for spec " + spec);
         }

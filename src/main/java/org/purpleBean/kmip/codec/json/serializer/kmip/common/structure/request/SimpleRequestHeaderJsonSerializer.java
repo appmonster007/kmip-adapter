@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
@@ -16,7 +16,7 @@ public class SimpleRequestHeaderJsonSerializer extends KmipDataTypeJsonSerialize
 
     @Override
     public void serialize(SimpleRequestHeader header, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         if (!header.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();

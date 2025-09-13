@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
 import javax.xml.namespace.QName;
@@ -18,7 +18,7 @@ public class SampleStructureXmlSerializer extends JsonSerializer<SampleStructure
 
     @Override
     public void serialize(SampleStructure sampleStructure, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException("SampleStructure not supported for spec " + spec);
         }

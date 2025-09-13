@@ -19,7 +19,7 @@ public class ActivationDateAttribute implements KmipAttribute {
 
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     private final EncodingType encodingType = EncodingType.DATE_TIME;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     private final boolean alwaysPresent = false;
     private final boolean serverInitializable = true;

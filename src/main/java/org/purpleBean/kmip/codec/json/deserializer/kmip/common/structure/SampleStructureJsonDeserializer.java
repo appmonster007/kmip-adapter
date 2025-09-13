@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -42,7 +42,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
 
         SampleStructure sampleStructure = builder.build();
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }

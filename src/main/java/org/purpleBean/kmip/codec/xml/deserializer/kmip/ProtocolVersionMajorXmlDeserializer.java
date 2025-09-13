@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 
@@ -43,7 +43,7 @@ public class ProtocolVersionMajorXmlDeserializer extends JsonDeserializer<Protoc
         int value = Integer.parseInt(valueNode.asText());
         ProtocolVersion.ProtocolVersionMajor major = ProtocolVersion.ProtocolVersionMajor.of(value);
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!major.isSupportedFor(spec)) {
             throw new NoSuchElementException("ProtocolVersionMajor " + value + " not supported for spec " + spec);
         }

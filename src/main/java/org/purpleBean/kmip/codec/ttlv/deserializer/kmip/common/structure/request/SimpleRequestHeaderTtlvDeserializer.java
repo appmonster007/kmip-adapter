@@ -4,7 +4,7 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -30,7 +30,7 @@ public class SimpleRequestHeaderTtlvDeserializer implements TtlvDeserializer<Sim
 
         List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         SimpleRequestHeader.SimpleRequestHeaderBuilder builder = SimpleRequestHeader.builder();
 
         for (TtlvObject ttlvObject : nestedObjects) {

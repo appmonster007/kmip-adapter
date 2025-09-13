@@ -3,11 +3,8 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.reques
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
@@ -45,7 +42,7 @@ public class SimpleRequestHeaderJsonDeserializer extends KmipDataTypeJsonDeseria
 
         SimpleRequestHeader header = builder.build();
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!header.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }

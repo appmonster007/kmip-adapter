@@ -5,11 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.RequestHeaderStructure;
 import org.purpleBean.kmip.RequestMessageStructure;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
@@ -52,13 +51,13 @@ public class Main {
                 .requestBatchItemErrors(errorList)
                 .build();
 
-        KmipCodecContext.setSpec(KmipSpec.V1_2);
+        KmipContext.setSpec(KmipSpec.V1_2);
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
                 .dateTime(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
                 .build();
 
         State activeState = new State(State.Standard.ACTIVE);
-        State customState = new State(State.register(-1341234, "Alive", Set.of(KmipSpec.V1_2)));
+        State customState = new State(State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)));
 
         SampleStructure sampleStructure = SampleStructure.builder()
                 .activationDate(activationDate)

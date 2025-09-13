@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class ProtocolVersionXmlSerializer extends JsonSerializer<ProtocolVersion
 
     @Override
     public void serialize(ProtocolVersion protocolVersion, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!protocolVersion.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

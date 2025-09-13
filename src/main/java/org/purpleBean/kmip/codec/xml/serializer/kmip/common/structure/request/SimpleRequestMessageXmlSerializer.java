@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 
 import javax.xml.namespace.QName;
@@ -18,7 +18,7 @@ public class SimpleRequestMessageXmlSerializer extends JsonSerializer<SimpleRequ
 
     @Override
     public void serialize(SimpleRequestMessage message, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!message.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException("SimpleRequestMessage not supported for spec " + spec);
         }

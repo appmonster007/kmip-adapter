@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request;
 
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
@@ -21,7 +21,7 @@ public class SimpleRequestMessageTtlvSerializer implements TtlvSerializer<Simple
     }
 
     private TtlvObject serializeToTtlvObject(SimpleRequestMessage value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

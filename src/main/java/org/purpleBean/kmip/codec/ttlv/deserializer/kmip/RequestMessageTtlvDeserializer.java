@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.RequestMessageStructure;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
@@ -18,7 +18,7 @@ public class RequestMessageTtlvDeserializer implements TtlvDeserializer<RequestM
         SimpleRequestMessage simpleRequestMessage = mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
         ttlvBuffer.rewind();
         ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
-        KmipCodecContext.setSpec(KmipSpec.fromValue(protocolVersion));
+        KmipContext.setSpec(KmipSpec.fromValue(protocolVersion));
 
         return deserializeByProtocolVersion(protocolVersion, ttlvBuffer, mapper);
     }

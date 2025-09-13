@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 
@@ -18,7 +18,7 @@ public class SampleStructure implements KmipStructure {
 
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
     private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     @NonNull
     private final ActivationDateAttribute activationDate;
@@ -45,7 +45,7 @@ public class SampleStructure implements KmipStructure {
             fields.add(state);
 
             // KMIP spec compatibility validation
-            KmipSpec spec = KmipCodecContext.getSpec();
+            KmipSpec spec = KmipContext.getSpec();
             for (KmipDataType field : fields) {
                 if (field != null && !field.isSupportedFor(spec)) {
                     throw new IllegalArgumentException(

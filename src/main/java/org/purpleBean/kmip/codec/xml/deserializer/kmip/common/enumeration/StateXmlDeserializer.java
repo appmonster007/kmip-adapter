@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class StateXmlDeserializer extends JsonDeserializer<State> {
         }
 
         String description = valueNode.asText();
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         State state = new State(State.fromName(spec, description));
         if (!state.isSupportedFor(spec)) {

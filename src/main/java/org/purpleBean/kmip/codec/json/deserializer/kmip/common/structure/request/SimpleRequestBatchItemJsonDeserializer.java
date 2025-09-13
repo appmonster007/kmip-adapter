@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
@@ -43,7 +43,7 @@ public class SimpleRequestBatchItemJsonDeserializer extends KmipDataTypeJsonDese
 
         SimpleRequestBatchItem batchItem = builder.build();
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!batchItem.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }

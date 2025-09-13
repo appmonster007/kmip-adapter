@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 
 import javax.xml.namespace.QName;
@@ -16,7 +16,7 @@ public class ActivationDateAttributeXmlSerializer extends JsonSerializer<Activat
 
     @Override
     public void serialize(ActivationDateAttribute activationDateAttribute, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!activationDateAttribute.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

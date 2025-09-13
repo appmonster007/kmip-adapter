@@ -2,8 +2,8 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 
@@ -20,7 +20,7 @@ public class ActivationDateAttributeJsonSerializer extends KmipDataTypeJsonSeria
         }
 
         // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!activationDateAttribute.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
                     String.format("%s is not supported for KMIP spec %s", activationDateAttribute.getKmipTag().getDescription(), spec)

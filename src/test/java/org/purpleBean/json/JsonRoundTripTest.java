@@ -50,7 +50,7 @@ public class JsonRoundTripTest extends BaseKmipTest {
         // Set proper KMIP context for custom state registration
         withKmipSpec(KmipSpec.V1_2, () -> {
             try {
-                State.register(-1341234, "Alive", Set.of(KmipSpec.V1_2));
+                State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
                 State original = new State(State.fromName(KmipSpec.V1_2, "Alive"));
                 String json = mapper.writeValueAsString(original);
                 

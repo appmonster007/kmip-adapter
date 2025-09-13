@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.enumeration.State;
 
@@ -20,7 +20,7 @@ public class StateJsonSerializer extends KmipDataTypeJsonSerializer<State> {
         }
 
         // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!state.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
                     String.format("State '%s' is not supported for KMIP spec %s",

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
@@ -29,7 +29,7 @@ public class StateTtlvDeserializer implements TtlvDeserializer<State> {
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
         int value = bb.getInt();
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         State state = new State(State.fromValue(spec, value));
 
         if (!state.isSupportedFor(spec)) {

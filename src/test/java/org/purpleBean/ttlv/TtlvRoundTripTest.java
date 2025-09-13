@@ -94,7 +94,7 @@ public class TtlvRoundTripTest extends BaseKmipTest {
     @Test
     void state_roundTrip_withCustom() {
         withKmipSpec(KmipSpec.V1_2, () -> {
-            State.register(-1341234, "Alive", Set.of(KmipSpec.V1_2));
+            State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
             State original = new State(State.fromName(KmipSpec.V1_2, "Alive"));
 
             // Serialize to TTLV

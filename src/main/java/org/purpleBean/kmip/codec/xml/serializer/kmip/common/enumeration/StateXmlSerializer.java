@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecContext;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import javax.xml.namespace.QName;
@@ -16,7 +16,7 @@ public class StateXmlSerializer extends JsonSerializer<State> {
 
     @Override
     public void serialize(State state, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!state.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }

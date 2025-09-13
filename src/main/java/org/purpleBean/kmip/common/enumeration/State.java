@@ -5,7 +5,7 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipEnumeration;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,7 +31,7 @@ public class State implements KmipEnumeration {
 
     public State(@NonNull Value value) {
         // KMIP spec compatibility validation
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for %s is not supported for KMIP spec %s", kmipTag.getDescription(), value.getDescription(), spec)
@@ -104,12 +104,12 @@ public class State implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PRE_ACTIVE(0x00000001, "PreActive", Set.of(KmipSpec.V1_2)),
-        ACTIVE(0x00000002, "Active", Set.of(KmipSpec.V1_2)),
-        DEACTIVATED(0x00000003, "Deactivated", Set.of(KmipSpec.V1_2)),
-        COMPROMISED(0x00000004, "Compromised", Set.of(KmipSpec.V1_2)),
-        DESTROYED(0x00000005, "Destroyed", Set.of(KmipSpec.V1_2)),
-        DESTROYED_COMPROMISED(0x00000006, "DestroyedCompromised", Set.of(KmipSpec.V1_2));
+        PRE_ACTIVE(0x00000001, "PreActive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        ACTIVE(0x00000002, "Active", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        DEACTIVATED(0x00000003, "Deactivated", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        COMPROMISED(0x00000004, "Compromised", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        DESTROYED(0x00000005, "Destroyed", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        DESTROYED_COMPROMISED(0x00000006, "DestroyedCompromised", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
         private final int value;
         private final String description;

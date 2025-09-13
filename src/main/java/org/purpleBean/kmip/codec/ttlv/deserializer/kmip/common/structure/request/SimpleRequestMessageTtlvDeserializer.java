@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.reques
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -31,7 +31,7 @@ public class SimpleRequestMessageTtlvDeserializer implements TtlvDeserializer<Si
 
         List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
         SimpleRequestMessage.SimpleRequestMessageBuilder builder = SimpleRequestMessage.builder();
 
         for (TtlvObject ttlvObject : nestedObjects) {

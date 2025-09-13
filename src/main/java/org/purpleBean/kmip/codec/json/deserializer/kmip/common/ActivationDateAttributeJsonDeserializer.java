@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.codec.KmipCodecContext;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -35,7 +35,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
         OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
         ActivationDateAttribute activationDateAttribute = ActivationDateAttribute.builder().dateTime(dateTime).build();
 
-        KmipSpec spec = KmipCodecContext.getSpec();
+        KmipSpec spec = KmipContext.getSpec();
 
         if (!activationDateAttribute.isSupportedFor(spec)) {
             throw new NoSuchElementException();
