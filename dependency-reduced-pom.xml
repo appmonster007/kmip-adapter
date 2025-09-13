@@ -30,34 +30,44 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <release>21</release>
+          <release>${java.version}</release>
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
               <version>${lombok.version}</version>
             </path>
+            <path>
+              <groupId>org.openjdk.jmh</groupId>
+              <artifactId>jmh-generator-annprocess</artifactId>
+              <version>${jmh.version}</version>
+            </path>
           </annotationProcessorPaths>
-          <source>21</source>
-          <target>21</target>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire.version}</version>
+        <version>${maven-surefire-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${junit-platform.version}</version>
+          </dependency>
+        </dependencies>
         <configuration>
+          <useModulePath>false</useModulePath>
           <properties>
-            <configurationParameters>junit.jupiter.execution.parallel.enabled=true
-                            junit.jupiter.execution.parallel.mode.default=concurrent</configurationParameters>
+            <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
           </properties>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-          </systemPropertyVariables>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${failsafe.version}</version>
+        <version>${maven-failsafe-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -66,25 +76,35 @@
             </goals>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${junit-platform.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <useModulePath>false</useModulePath>
+        </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven-checkstyle-plugin.version}</version>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
-            <id>validate</id>
-            <phase>validate</phase>
             <goals>
-              <goal>check</goal>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <configLocation>google_checks.xml</configLocation>
-          <consoleOutput>true</consoleOutput>
-          <failsOnError>true</failsOnError>
-          <linkXRef>false</linkXRef>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -116,45 +136,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <source>21</source>
-          <target>21</target>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.openjdk.jmh</groupId>
-              <artifactId>jmh-generator-annprocess</artifactId>
-              <version>${jmh.version}</version>
-            </path>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>${lombok.version}</version>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>test</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -165,15 +146,51 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>1.10.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.10.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-engine</artifactId>
+      <version>1.10.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>opentest4j</artifactId>
+          <groupId>org.opentest4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.10.0</version>
       <scope>test</scope>
       <exclusions>
-        <exclusion>
-          <artifactId>junit-jupiter-api</artifactId>
-          <groupId>org.junit.jupiter</groupId>
-        </exclusion>
         <exclusion>
           <artifactId>junit-jupiter-params</artifactId>
           <groupId>org.junit.jupiter</groupId>
@@ -185,56 +202,18 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-generator-annprocess</artifactId>
-      <version>1.37</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>1.10.0</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.10.0</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>junit-platform-engine</artifactId>
-          <groupId>org.junit.platform</groupId>
+          <artifactId>opentest4j</artifactId>
+          <groupId>org.opentest4j</groupId>
         </exclusion>
         <exclusion>
           <artifactId>apiguardian-api</artifactId>
           <groupId>org.apiguardian</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>5.5.0</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>byte-buddy</artifactId>
-          <groupId>net.bytebuddy</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>byte-buddy-agent</artifactId>
-          <groupId>net.bytebuddy</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>objenesis</artifactId>
-          <groupId>org.objenesis</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-      <version>5.5.0</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit-jupiter-api</artifactId>
-          <groupId>org.junit.jupiter</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -251,6 +230,18 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>1.21.3</version>
@@ -261,6 +252,28 @@
           <groupId>org.testcontainers</groupId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <version>1.36</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jopt-simple</artifactId>
+          <groupId>net.sf.jopt-simple</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-math3</artifactId>
+          <groupId>org.apache.commons</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <version>1.36</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -312,31 +325,57 @@
           <artifactId>xmlunit-core</artifactId>
           <groupId>org.xmlunit</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <jmh.version>1.37</jmh.version>
+    <jmh.version>1.36</jmh.version>
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+    <jackson.version>2.20.0</jackson.version>
+    <spring-boot.version>3.5.5</spring-boot.version>
+    <surefire.version>${maven-surefire-plugin.version}</surefire.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <assertj.version>3.24.2</assertj.version>
+    <junit.version>5.10.0</junit.version>
+    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
     <java.version>21</java.version>
     <maven.compiler.source>21</maven.compiler.source>
     <spring.version>6.2.10</spring.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <jackson.version>2.20.0</jackson.version>
+    <mockito.version>5.5.0</mockito.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring-boot.version>3.5.5</spring-boot.version>
-    <surefire.version>3.2.5</surefire.version>
     <jackson-annotations.version>2.20</jackson-annotations.version>
     <spotbugs-maven-plugin.version>4.8.2.0</spotbugs-maven-plugin.version>
     <lombok.version>1.18.40</lombok.version>
     <maven.compiler.target>21</maven.compiler.target>
     <maven-pmd-plugin.version>3.21.0</maven-pmd-plugin.version>
+    <junit-platform.version>1.10.0</junit-platform.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-    <failsafe.version>3.2.5</failsafe.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.10.0</junit.version>
-    <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
-    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <testcontainers.version>1.21.3</testcontainers.version>
+    <failsafe.version>${maven-failsafe-plugin.version}</failsafe.version>
   </properties>
 </project>

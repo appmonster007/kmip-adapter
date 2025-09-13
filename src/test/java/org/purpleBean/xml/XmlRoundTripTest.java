@@ -31,7 +31,7 @@ public class XmlRoundTripTest extends BaseKmipTest {
         XmlMapper mapper = buildMapper();
         ProtocolVersion original = ProtocolVersion.of(3, 5);
         String xml = mapper.writeValueAsString(original);
-        
+
         // Verify serialization produces expected XML structure
         assertThat(xml).startsWith("<ProtocolVersion>");
         assertThat(xml).contains("<ProtocolVersionMajor");
@@ -42,32 +42,34 @@ public class XmlRoundTripTest extends BaseKmipTest {
         assertThat(xml).endsWith("</ProtocolVersion>");
     }
 
-
     @Test
     void state_serialization_withStandard() throws Exception {
         XmlMapper mapper = buildMapper();
-        withKmipSpec(KmipSpec.V1_2, () -> {
-            try {
-                State original = new State(State.Standard.ACTIVE);
-                String xml = mapper.writeValueAsString(original);
-                
-                // Verify serialization produces expected XML structure
-                assertThat(xml).contains("<State type=\"Enumeration\"");
-                assertThat(xml).contains("value=\"Active\"");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        withKmipSpec(
+                KmipSpec.V1_2,
+                () -> {
+                    try {
+                        State original = new State(State.Standard.ACTIVE);
+                        String xml = mapper.writeValueAsString(original);
+
+                        // Verify serialization produces expected XML structure
+                        assertThat(xml).contains("<State type=\"Enumeration\"");
+                        assertThat(xml).contains("value=\"Active\"");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @Test
     void activationDate_serialization() throws Exception {
         XmlMapper mapper = buildMapper();
-        ActivationDateAttribute original = ActivationDateAttribute.builder()
-                .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-                .build();
+        ActivationDateAttribute original =
+                ActivationDateAttribute.builder()
+                        .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .build();
         String xml = mapper.writeValueAsString(original);
-        
+
         // Verify serialization produces expected XML structure
         assertThat(xml).contains("<ActivationDate");
         assertThat(xml).contains("type=\"DateTime\"");
@@ -77,30 +79,29 @@ public class XmlRoundTripTest extends BaseKmipTest {
     @Test
     void sampleStructure_serialization() throws Exception {
         XmlMapper mapper = buildMapper();
-        withKmipSpec(KmipSpec.V1_2, () -> {
-            try {
-                State active = new State(State.Standard.ACTIVE);
-                ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
-                        .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-                        .build();
-                SampleStructure original = SampleStructure.builder()
-                        .activationDate(activationDate)
-                        .state(active)
-                        .build();
-                String xml = mapper.writeValueAsString(original);
-                
-                // Verify serialization produces expected XML structure
-                assertThat(xml).startsWith("<SecretData>");
-                assertThat(xml).contains("<ActivationDate");
-                assertThat(xml).contains("<State");
-                assertThat(xml).contains("type=\"DateTime\"");
-                assertThat(xml).contains("type=\"Enumeration\"");
-                assertThat(xml).endsWith("</SecretData>");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        withKmipSpec(
+                KmipSpec.V1_2,
+                () -> {
+                    try {
+                        State active = new State(State.Standard.ACTIVE);
+                        ActivationDateAttribute activationDate =
+                                ActivationDateAttribute.builder()
+                                        .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                                        .build();
+                        SampleStructure original =
+                                SampleStructure.builder().activationDate(activationDate).state(active).build();
+                        String xml = mapper.writeValueAsString(original);
+
+                        // Verify serialization produces expected XML structure
+                        assertThat(xml).startsWith("<SecretData>");
+                        assertThat(xml).contains("<ActivationDate");
+                        assertThat(xml).contains("<State");
+                        assertThat(xml).contains("type=\"DateTime\"");
+                        assertThat(xml).contains("type=\"Enumeration\"");
+                        assertThat(xml).endsWith("</SecretData>");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }
-
-

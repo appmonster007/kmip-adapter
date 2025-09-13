@@ -13,8 +13,8 @@ import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 /**
- * Base test class providing common setup and utilities for KMIP tests.
- * Follows the Template Method pattern to provide consistent test environment setup.
+ * Base test class providing common setup and utilities for KMIP tests. Follows the Template Method
+ * pattern to provide consistent test environment setup.
  */
 @ExtendWith(MockitoExtension.class)
 public abstract class BaseKmipTest {
@@ -68,16 +68,16 @@ public abstract class BaseKmipTest {
     }
 
     /**
-     * Template method for test-specific resource setup.
-     * Override in subclasses to provide custom setup logic.
+     * Template method for test-specific resource setup. Override in subclasses to provide custom
+     * setup logic.
      */
     protected void setupTestSpecificResources() {
         // Default implementation - override in subclasses if needed
     }
 
     /**
-     * Template method for test-specific resource cleanup.
-     * Override in subclasses to provide custom cleanup logic.
+     * Template method for test-specific resource cleanup. Override in subclasses to provide custom
+     * cleanup logic.
      */
     protected void cleanupTestSpecificResources() {
         // Default implementation - override in subclasses if needed
@@ -95,7 +95,7 @@ public abstract class BaseKmipTest {
     /**
      * Executes a test operation with a specific KMIP specification context.
      *
-     * @param spec the KMIP specification to use
+     * @param spec      the KMIP specification to use
      * @param operation the test operation to execute
      */
     protected void withKmipSpec(KmipSpec spec, Runnable operation) {

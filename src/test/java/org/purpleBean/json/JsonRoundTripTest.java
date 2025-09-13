@@ -32,7 +32,7 @@ public class JsonRoundTripTest extends BaseKmipTest {
         ObjectMapper jsonMapper = buildMapper();
         ProtocolVersion original = ProtocolVersion.of(1, 2);
         String json = jsonMapper.writeValueAsString(original);
-        
+
         // Verify serialization produces expected JSON structure
         assertThat(json).contains("\"tag\":\"ProtocolVersion\"");
         assertThat(json).contains("\"type\":\"Structure\"");
@@ -46,32 +46,35 @@ public class JsonRoundTripTest extends BaseKmipTest {
     @Test
     void state_serialization_withCustom() throws Exception {
         ObjectMapper mapper = buildMapper();
-        
+
         // Set proper KMIP context for custom state registration
-        withKmipSpec(KmipSpec.V1_2, () -> {
-            try {
-                State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-                State original = new State(State.fromName(KmipSpec.V1_2, "Alive"));
-                String json = mapper.writeValueAsString(original);
-                
-                // Verify serialization produces expected JSON structure
-                assertThat(json).contains("\"tag\":\"State\"");
-                assertThat(json).contains("\"type\":\"Enumeration\"");
-                assertThat(json).contains("\"value\":\"Alive\"");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        withKmipSpec(
+                KmipSpec.V1_2,
+                () -> {
+                    try {
+                        State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+                        State original = new State(State.fromName(KmipSpec.V1_2, "Alive"));
+                        String json = mapper.writeValueAsString(original);
+
+                        // Verify serialization produces expected JSON structure
+                        assertThat(json).contains("\"tag\":\"State\"");
+                        assertThat(json).contains("\"type\":\"Enumeration\"");
+                        assertThat(json).contains("\"value\":\"Alive\"");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @Test
     void activationDate_serialization() throws Exception {
         ObjectMapper mapper = buildMapper();
-        ActivationDateAttribute original = ActivationDateAttribute.builder()
-                .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-                .build();
+        ActivationDateAttribute original =
+                ActivationDateAttribute.builder()
+                        .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .build();
         String json = mapper.writeValueAsString(original);
-        
+
         // Verify serialization produces expected JSON structure
         assertThat(json).contains("\"tag\":\"ActivationDate\"");
         assertThat(json).contains("\"type\":\"DateTime\"");
@@ -82,15 +85,14 @@ public class JsonRoundTripTest extends BaseKmipTest {
     void sampleStructure_serialization() throws Exception {
         ObjectMapper mapper = buildMapper();
         State active = new State(State.Standard.ACTIVE);
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
-                .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-                .build();
-        SampleStructure original = SampleStructure.builder()
-                .activationDate(activationDate)
-                .state(active)
-                .build();
+        ActivationDateAttribute activationDate =
+                ActivationDateAttribute.builder()
+                        .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .build();
+        SampleStructure original =
+                SampleStructure.builder().activationDate(activationDate).state(active).build();
         String json = mapper.writeValueAsString(original);
-        
+
         // Verify serialization produces expected JSON structure
         assertThat(json).contains("\"tag\":\"SecretData\"");
         assertThat(json).contains("\"type\":\"Structure\"");
@@ -99,5 +101,3 @@ public class JsonRoundTripTest extends BaseKmipTest {
         assertThat(json).contains("\"tag\":\"State\"");
     }
 }
-
-

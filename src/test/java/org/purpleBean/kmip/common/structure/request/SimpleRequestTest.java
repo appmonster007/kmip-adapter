@@ -13,7 +13,8 @@ import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("SimpleRequest Tests")
 class SimpleRequestTest {
@@ -27,18 +28,17 @@ class SimpleRequestTest {
     void setUp() {
         // Set up test data
         ProtocolVersion protocolVersion = ProtocolVersion.of(1, 4);
-        requestHeader = SimpleRequestHeader.builder()
-                .protocolVersion(protocolVersion)
-                .build();
+        requestHeader = SimpleRequestHeader.builder().protocolVersion(protocolVersion).build();
 
         batchItem1 = SimpleRequestBatchItem.builder().build();
         batchItem2 = SimpleRequestBatchItem.builder().build();
 
-        requestMessage = SimpleRequestMessage.builder()
-                .requestHeader(requestHeader)
-                .requestBatchItem(batchItem1)
-                .requestBatchItem(batchItem2)
-                .build();
+        requestMessage =
+                SimpleRequestMessage.builder()
+                        .requestHeader(requestHeader)
+                        .requestBatchItem(batchItem1)
+                        .requestBatchItem(batchItem2)
+                        .build();
     }
 
     @Nested
@@ -48,7 +48,8 @@ class SimpleRequestTest {
         @DisplayName("Should have correct values")
         void shouldHaveCorrectValues() {
             // Verify the request header structure
-            assertThat(requestHeader.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_HEADER));
+            assertThat(requestHeader.getKmipTag())
+                    .isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_HEADER));
             assertThat(requestHeader.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
             assertThat(requestHeader.getProtocolVersion().getMajor()).isEqualTo(1);
             assertThat(requestHeader.getProtocolVersion().getMinor()).isEqualTo(4);
@@ -78,12 +79,13 @@ class SimpleRequestTest {
         @DisplayName("Should have correct structure")
         void shouldHaveCorrectStructure() {
             // Verify the message structure
-            assertThat(requestMessage.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_MESSAGE));
+            assertThat(requestMessage.getKmipTag())
+                    .isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_MESSAGE));
             assertThat(requestMessage.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
             assertThat(requestMessage.getRequestHeader()).isEqualTo(requestHeader);
             assertThat(requestMessage.getRequestBatchItems()).containsExactly(batchItem1, batchItem2);
             assertThat(requestMessage.isSupportedFor(KmipSpec.V1_2)).isTrue();
-            
+
             // Verify values include header and batch items
             List<KmipDataType> values = requestMessage.getValues();
             assertThat(values).hasSize(3);
@@ -94,9 +96,7 @@ class SimpleRequestTest {
         @Test
         @DisplayName("Should reject null request header")
         void shouldRejectNullRequestHeader() {
-            assertThatThrownBy(() -> SimpleRequestMessage.builder()
-                    .requestHeader(null)
-                    .build())
+            assertThatThrownBy(() -> SimpleRequestMessage.builder().requestHeader(null).build())
                     .isInstanceOf(NullPointerException.class)
                     .hasMessageContaining("requestHeader");
         }
@@ -109,11 +109,12 @@ class SimpleRequestTest {
             Exception error2 = new RuntimeException("Test error 2");
 
             // When
-            SimpleRequestMessage message = SimpleRequestMessage.builder()
-                    .requestHeader(requestHeader)
-                    .requestBatchItemError(error1)
-                    .requestBatchItemError(error2)
-                    .build();
+            SimpleRequestMessage message =
+                    SimpleRequestMessage.builder()
+                            .requestHeader(requestHeader)
+                            .requestBatchItemError(error1)
+                            .requestBatchItemError(error2)
+                            .build();
 
             // Then
             assertThat(message.getRequestBatchItemErrors())
@@ -176,10 +177,9 @@ class SimpleRequestTest {
         @DisplayName("Should handle empty batch items")
         void shouldHandleEmptyBatchItems() {
             // When
-            SimpleRequestMessage message = SimpleRequestMessage.builder()
-                    .requestHeader(requestHeader)
-                    .build();
-            
+            SimpleRequestMessage message =
+                    SimpleRequestMessage.builder().requestHeader(requestHeader).build();
+
             // Then
             assertThat(message.getRequestBatchItems()).isEmpty();
             assertThat(message.getValues()).hasSize(1); // Only header, no batch items
@@ -189,10 +189,11 @@ class SimpleRequestTest {
         @DisplayName("Should handle null batch items in builder")
         void shouldHandleNullBatchItemsInBuilder() {
             // When
-            SimpleRequestMessage message = SimpleRequestMessage.builder()
-                    .requestHeader(requestHeader)
-                    .requestBatchItem(null)
-                    .build();
+            SimpleRequestMessage message =
+                    SimpleRequestMessage.builder()
+                            .requestHeader(requestHeader)
+                            .requestBatchItem(null)
+                            .build();
 
             // Then - verify the builder includes the null batch item
             assertThat(message.getRequestBatchItems()).hasSize(1);
@@ -204,10 +205,11 @@ class SimpleRequestTest {
         @DisplayName("Should handle empty batch items in builder")
         void shouldHandleEmptyBatchItemsInBuilder() {
             // When
-            SimpleRequestMessage message = SimpleRequestMessage.builder()
-                    .requestHeader(requestHeader)
-                    .clearRequestBatchItems()
-                    .build();
+            SimpleRequestMessage message =
+                    SimpleRequestMessage.builder()
+                            .requestHeader(requestHeader)
+                            .clearRequestBatchItems()
+                            .build();
 
             // Then
             assertThat(message.getRequestBatchItems()).isEmpty();

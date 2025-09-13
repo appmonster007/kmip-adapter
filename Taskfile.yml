@@ -1,0 +1,109 @@
+version: '3'
+
+# Global variables
+vars:
+  # Detect OS and set appropriate shell
+  OS: '{{.OS}}'
+  SHELL: '{{if eq OS "windows"}}cmd{{else}}bash{{end}}'
+  SHELL_OPTS: '{{if eq OS "windows"}}/c{{else}}-c{{end}}'
+
+# Task configuration
+silent: true
+
+# Task definitions
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+    desc: Show available commands
+
+  all:
+    desc: Run complete pipeline (clean → build → test → benchmark)
+    cmds:
+      - task: clean
+      - task: build
+      - task: test-unit
+      - task: test-integration
+      - task: benchmark
+
+  help:
+    desc: Show this help message
+    cmds:
+      - task --list
+
+  install:
+    desc: Install project dependencies
+    cmds:
+      - mvn clean install -DskipTests
+    status:
+      - test ! -d target
+
+  test:
+    desc: Run all tests (unit + integration)
+    cmds:
+      - task: test-unit
+      - task: test-integration
+    deps: [install]
+
+  test-unit:
+    desc: Run unit tests
+    cmds:
+      - mvn test
+    deps: [install]
+
+  test-integration:
+    desc: Run integration tests
+    cmds:
+      - mvn verify -DskipUnitTests
+    deps: [install]
+
+  test-class:
+    desc: Run specific test class
+    cmds:
+      - mvn test -Dtest={{.CLI_ARGS}}
+    deps: [install]
+    silent: false
+
+  benchmark:
+    desc: Run performance benchmarks
+    cmds:
+      - mvn clean test-compile exec:exec -Dexec.executable="java" -Dexec.args="-cp target/test-classes:target/classes:$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q) org.openjdk.jmh.Main -f 1 -wi 3 -i 5"
+    deps: [install]
+
+  format:
+    desc: Format code using spotless
+    cmds:
+      - mvn spotless:apply
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - mvn clean
+
+  build:
+    desc: Clean and build the project
+    cmds:
+      - task: clean
+      - task: install
+
+  run:
+    desc: Run the application
+    cmds:
+      - mvn spring-boot:run
+    deps: [install]
+
+  coverage:
+    desc: Generate code coverage report
+    cmds:
+      - mvn clean test jacoco:report
+      - echo "Report generated at: file://$(pwd)/target/site/jacoco/index.html"
+
+  info:
+    desc: Show project information
+    cmds:
+      - echo "Project Information:"
+      - echo "  Name: $(mvn help:evaluate -Dexpression=project.name -q -DforceStdout)"
+      - echo "  Version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+      - echo "  Java Version: $(java -version 2>&1 | head -n 1)"
+      - echo "  Maven Version: $(mvn -v | head -n 1)"

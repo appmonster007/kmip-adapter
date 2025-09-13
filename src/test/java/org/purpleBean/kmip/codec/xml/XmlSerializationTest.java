@@ -16,7 +16,8 @@ import org.purpleBean.kmip.test.SerializationTestUtils;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("XML Serialization Tests")
 class XmlSerializationTest extends BaseKmipTest {
@@ -30,7 +31,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeProtocolVersionCorrectly() {
             // Given
             ProtocolVersion original = KmipTestDataFactory.createProtocolVersion();
-            
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, ProtocolVersion.class);
         }
@@ -41,8 +42,9 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldHandleVariousProtocolVersions(String versionPair) {
             // Given
             String[] parts = versionPair.split(",");
-            ProtocolVersion version = ProtocolVersion.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-            
+            ProtocolVersion version =
+                    ProtocolVersion.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
         }
@@ -52,15 +54,18 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldProduceExpectedXmlStructureForProtocolVersion() {
             // Given
             ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, version, xml -> {
-                assertThat(xml).contains("<ProtocolVersion>");
-                assertThat(xml).contains("<ProtocolVersionMajor");
-                assertThat(xml).contains("<ProtocolVersionMinor");
-                assertThat(xml).contains("value=\"1\"");
-                assertThat(xml).contains("value=\"2\"");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    version,
+                    xml -> {
+                        assertThat(xml).contains("<ProtocolVersion>");
+                        assertThat(xml).contains("<ProtocolVersionMajor");
+                        assertThat(xml).contains("<ProtocolVersionMinor");
+                        assertThat(xml).contains("value=\"1\"");
+                        assertThat(xml).contains("value=\"2\"");
+                    });
         }
     }
 
@@ -73,7 +78,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeStandardStateCorrectly() {
             // Given
             State original = KmipTestDataFactory.createState();
-            
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, State.class);
         }
@@ -83,7 +88,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeCustomStateCorrectly() {
             // Given
             State original = KmipTestDataFactory.createCustomState();
-            
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, State.class);
         }
@@ -93,7 +98,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldHandleAllStandardStates() {
             // Given
             List<State> states = KmipTestDataFactory.createStates();
-            
+
             // When & Then
             for (State state : states) {
                 SerializationTestUtils.performXmlRoundTrip(xmlMapper, state, State.class);
@@ -105,13 +110,16 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldProduceExpectedXmlStructureForState() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, state, xml -> {
-                assertThat(xml).contains("<State");
-                assertThat(xml).contains("type=\"Enumeration\"");
-                assertThat(xml).contains("Active");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    state,
+                    xml -> {
+                        assertThat(xml).contains("<State");
+                        assertThat(xml).contains("type=\"Enumeration\"");
+                        assertThat(xml).contains("Active");
+                    });
         }
     }
 
@@ -124,21 +132,23 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeActivationDateAttributeCorrectly() {
             // Given
             ActivationDateAttribute original = KmipTestDataFactory.createActivationDateAttribute();
-            
+
             // When & Then
-            SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, ActivationDateAttribute.class);
+            SerializationTestUtils.performXmlRoundTrip(
+                    xmlMapper, original, ActivationDateAttribute.class);
         }
 
         @Test
         @DisplayName("Should handle various date formats")
         void shouldHandleVariousDateFormats() {
             // Given
-            List<ActivationDateAttribute> dates = List.of(
-                KmipTestDataFactory.createActivationDateAttribute(KmipTestDataFactory.BoundaryData.epochDateTime()),
-                KmipTestDataFactory.createActivationDateAttribute(OffsetDateTime.now()),
-                KmipTestDataFactory.createRandomActivationDateAttribute()
-            );
-            
+            List<ActivationDateAttribute> dates =
+                    List.of(
+                            KmipTestDataFactory.createActivationDateAttribute(
+                                    KmipTestDataFactory.BoundaryData.epochDateTime()),
+                            KmipTestDataFactory.createActivationDateAttribute(OffsetDateTime.now()),
+                            KmipTestDataFactory.createRandomActivationDateAttribute());
+
             // When & Then
             for (ActivationDateAttribute date : dates) {
                 SerializationTestUtils.performXmlRoundTrip(xmlMapper, date, ActivationDateAttribute.class);
@@ -150,14 +160,17 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldProduceExpectedXmlStructureForActivationDateAttribute() {
             // Given
             SampleStructure structure = KmipTestDataFactory.createSampleStructure();
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, structure, xml -> {
-                assertThat(xml).contains("<SecretData>");
-                assertThat(xml).contains("<ActivationDate");
-                assertThat(xml).contains("<State");
-                assertThat(xml).contains("type=\"DateTime\"");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    structure,
+                    xml -> {
+                        assertThat(xml).contains("<SecretData>");
+                        assertThat(xml).contains("<ActivationDate");
+                        assertThat(xml).contains("<State");
+                        assertThat(xml).contains("type=\"DateTime\"");
+                    });
         }
     }
 
@@ -170,7 +183,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeSampleStructureCorrectly() {
             // Given
             SampleStructure original = KmipTestDataFactory.createSampleStructure();
-            
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, SampleStructure.class);
         }
@@ -180,7 +193,7 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldHandleComplexNestedStructures() {
             // Given
             List<SampleStructure> structures = KmipTestDataFactory.createSampleStructures(5);
-            
+
             // When & Then
             for (SampleStructure structure : structures) {
                 SerializationTestUtils.performXmlRoundTrip(xmlMapper, structure, SampleStructure.class);
@@ -192,13 +205,16 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldProduceExpectedXmlStructureForSampleStructure() {
             // Given
             SampleStructure structure = KmipTestDataFactory.createSampleStructure();
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, structure, xml -> {
-                assertThat(xml).contains("<SecretData>");
-                assertThat(xml).contains("<ActivationDate");
-                assertThat(xml).contains("<State");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    structure,
+                    xml -> {
+                        assertThat(xml).contains("<SecretData>");
+                        assertThat(xml).contains("<ActivationDate");
+                        assertThat(xml).contains("<State");
+                    });
         }
     }
 
@@ -210,24 +226,30 @@ class XmlSerializationTest extends BaseKmipTest {
         @DisplayName("Should handle malformed XML gracefully")
         void shouldHandleMalformedXmlGracefully() {
             // Given
-            String malformedXml = "<ProtocolVersion><protocolVersionMajor><value>not_a_number</value></protocolVersionMajor>";
-            
+            String malformedXml =
+                    "<ProtocolVersion><protocolVersionMajor><value>not_a_number</value></protocolVersionMajor>";
+
             // When & Then
-            assertThatThrownBy(() -> 
-                SerializationTestUtils.testXmlDeserialization(xmlMapper, malformedXml, ProtocolVersion.class))
-                .isInstanceOf(AssertionError.class);
+            assertThatThrownBy(
+                    () ->
+                            SerializationTestUtils.testXmlDeserialization(
+                                    xmlMapper, malformedXml, ProtocolVersion.class))
+                    .isInstanceOf(AssertionError.class);
         }
 
         @Test
         @DisplayName("Should handle missing required elements")
         void shouldHandleMissingRequiredElements() {
             // Given
-            String incompleteXml = "<ProtocolVersion><protocolVersionMajor><value>1</value></protocolVersionMajor></ProtocolVersion>";
-            
+            String incompleteXml =
+                    "<ProtocolVersion><protocolVersionMajor><value>1</value></protocolVersionMajor></ProtocolVersion>";
+
             // When & Then
-            assertThatThrownBy(() -> 
-                SerializationTestUtils.testXmlDeserialization(xmlMapper, incompleteXml, ProtocolVersion.class))
-                .isInstanceOf(AssertionError.class);
+            assertThatThrownBy(
+                    () ->
+                            SerializationTestUtils.testXmlDeserialization(
+                                    xmlMapper, incompleteXml, ProtocolVersion.class))
+                    .isInstanceOf(AssertionError.class);
         }
 
         @Test
@@ -235,13 +257,16 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldHandleXmlNamespacesCorrectly() {
             // Given
             ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, version, xml -> {
-                // Verify XML is well-formed and contains expected structure
-                assertThat(xml).contains("<ProtocolVersion>");
-                assertThat(xml).contains("</ProtocolVersion>");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    version,
+                    xml -> {
+                        // Verify XML is well-formed and contains expected structure
+                        assertThat(xml).contains("<ProtocolVersion>");
+                        assertThat(xml).contains("</ProtocolVersion>");
+                    });
         }
 
         @Test
@@ -249,15 +274,18 @@ class XmlSerializationTest extends BaseKmipTest {
         void shouldProduceValidXmlFormat() {
             // Given
             SampleStructure structure = KmipTestDataFactory.createSampleStructure();
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, structure, xml -> {
-                // Basic XML validation
-                assertThat(xml).startsWith("<");
-                assertThat(xml).endsWith(">");
-                assertThat(xml).doesNotContain("<<");
-                assertThat(xml).doesNotContain(">>");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    structure,
+                    xml -> {
+                        // Basic XML validation
+                        assertThat(xml).startsWith("<");
+                        assertThat(xml).endsWith(">");
+                        assertThat(xml).doesNotContain("<<");
+                        assertThat(xml).doesNotContain(">>");
+                    });
         }
     }
 
@@ -269,17 +297,19 @@ class XmlSerializationTest extends BaseKmipTest {
         @DisplayName("Should handle large datasets efficiently")
         void shouldHandleLargeDatasetsEfficiently() {
             // Given
-            List<SampleStructure> largeDataset = KmipTestDataFactory.PerformanceData.largeSampleStructureList();
-            
+            List<SampleStructure> largeDataset =
+                    KmipTestDataFactory.PerformanceData.largeSampleStructureList();
+
             // When
             long startTime = System.currentTimeMillis();
-            
-            for (SampleStructure structure : largeDataset.subList(0, Math.min(100, largeDataset.size()))) {
+
+            for (SampleStructure structure :
+                    largeDataset.subList(0, Math.min(100, largeDataset.size()))) {
                 SerializationTestUtils.performXmlRoundTrip(xmlMapper, structure, SampleStructure.class);
             }
-            
+
             long endTime = System.currentTimeMillis();
-            
+
             // Then
             assertThat(endTime - startTime).isLessThan(5000); // Should complete within 5 seconds
         }

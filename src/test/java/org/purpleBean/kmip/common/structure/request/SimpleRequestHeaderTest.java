@@ -1,15 +1,19 @@
 package org.purpleBean.kmip.common.structure.request;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("SimpleRequestHeader Tests")
 class SimpleRequestHeaderTest {
@@ -25,9 +29,8 @@ class SimpleRequestHeaderTest {
             ProtocolVersion protocolVersion = ProtocolVersion.of(1, 4);
 
             // When
-            SimpleRequestHeader header = SimpleRequestHeader.builder()
-                    .protocolVersion(protocolVersion)
-                    .build();
+            SimpleRequestHeader header =
+                    SimpleRequestHeader.builder().protocolVersion(protocolVersion).build();
 
             // Then
             assertThat(header.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_HEADER));
@@ -40,9 +43,7 @@ class SimpleRequestHeaderTest {
         @DisplayName("Should reject null protocol version")
         void shouldRejectNullProtocolVersion() {
             // When & Then
-            assertThatThrownBy(() -> SimpleRequestHeader.builder()
-                    .protocolVersion(null)
-                    .build())
+            assertThatThrownBy(() -> SimpleRequestHeader.builder().protocolVersion(null).build())
                     .isInstanceOf(NullPointerException.class);
         }
     }
@@ -55,9 +56,8 @@ class SimpleRequestHeaderTest {
         @DisplayName("Should support all KMIP versions")
         void shouldSupportAllKmipVersions() {
             // Given
-            SimpleRequestHeader header = SimpleRequestHeader.builder()
-                    .protocolVersion(ProtocolVersion.of(1, 4))
-                    .build();
+            SimpleRequestHeader header =
+                    SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(1, 4)).build();
 
             // Then
             // Test with available versions
@@ -87,12 +87,10 @@ class SimpleRequestHeaderTest {
         @DisplayName("Should not be equal when protocol versions differ")
         void shouldNotBeEqualWhenProtocolVersionsDiffer() {
             // Given
-            SimpleRequestHeader header1 = SimpleRequestHeader.builder()
-                    .protocolVersion(ProtocolVersion.of(1, 4))
-                    .build();
-            SimpleRequestHeader header2 = SimpleRequestHeader.builder()
-                    .protocolVersion(ProtocolVersion.of(2, 0))
-                    .build();
+            SimpleRequestHeader header1 =
+                    SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(1, 4)).build();
+            SimpleRequestHeader header2 =
+                    SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(2, 0)).build();
 
             // Then
             assertThat(header1).isNotEqualTo(header2);
@@ -108,9 +106,8 @@ class SimpleRequestHeaderTest {
         @DisplayName("Should serialize to JSON")
         void shouldSerializeToJson() throws JsonProcessingException {
             // Given
-            SimpleRequestHeader header = SimpleRequestHeader.builder()
-                    .protocolVersion(ProtocolVersion.of(1, 4))
-                    .build();
+            SimpleRequestHeader header =
+                    SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(1, 4)).build();
 
             // When
             ObjectMapper jsonMapper = new ObjectMapper();
@@ -121,15 +118,18 @@ class SimpleRequestHeaderTest {
             assertThat(json).contains("\"tag\":\"RequestHeader\"");
             assertThat(json).contains("\"type\":\"Structure\"");
             assertThat(json).contains("\"ProtocolVersion\"");
-            assertThat(json).contains("\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":1");
-            assertThat(json).contains("\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":4");
+            assertThat(json)
+                    .contains("\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":1");
+            assertThat(json)
+                    .contains("\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":4");
         }
 
         @Test
         @DisplayName("Should deserialize from JSON")
-        void shouldDeserializeFromJson() throws JsonMappingException, JsonProcessingException {
+        void shouldDeserializeFromJson() throws JsonProcessingException {
             // Given
-            String json = "{\"tag\":\"RequestHeader\",\"type\":\"Structure\",\"value\":[{\"tag\":\"ProtocolVersion\",\"type\":\"Structure\",\"value\":[{\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":1},{\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":4}]}]}";
+            String json =
+                    "{\"tag\":\"RequestHeader\",\"type\":\"Structure\",\"value\":[{\"tag\":\"ProtocolVersion\",\"type\":\"Structure\",\"value\":[{\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":1},{\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":4}]}]}";
 
             // When
             ObjectMapper jsonMapper = new ObjectMapper();

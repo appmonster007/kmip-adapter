@@ -34,6 +34,7 @@
 
 
     <properties>
+        <!-- ===== Build Properties ===== -->
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -41,39 +42,65 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Dependency versions -->
+        <!-- ===== Main Dependencies ===== -->
         <lombok.version>1.18.40</lombok.version>
+        
+        <!-- Jackson -->
         <jackson.version>2.20.0</jackson.version>
         <jackson-annotations.version>2.20</jackson-annotations.version>
+        
+        <!-- Spring -->
         <spring-boot.version>3.5.5</spring-boot.version>
         <spring.version>6.2.10</spring.version>
+        
+        <!-- ===== Testing Dependencies ===== -->
         <junit.version>5.10.0</junit.version>
-        <jmh.version>1.37</jmh.version>
-        <surefire.version>3.2.5</surefire.version>
-        <failsafe.version>3.2.5</failsafe.version>
-        <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
+        <junit-platform.version>1.10.0</junit-platform.version>
+        <assertj.version>3.24.2</assertj.version>
+        <mockito.version>5.5.0</mockito.version>
+        <testcontainers.version>1.21.3</testcontainers.version>
+        <jmh.version>1.36</jmh.version>
+        
+        <!-- ===== Build Plugins ===== -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <maven-pmd-plugin.version>3.21.0</maven-pmd-plugin.version>
         <spotbugs-maven-plugin.version>4.8.2.0</spotbugs-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+        
+        <!-- Legacy property names for backward compatibility -->
+        <surefire.version>${maven-surefire-plugin.version}</surefire.version>
+        <failsafe.version>${maven-failsafe-plugin.version}</failsafe.version>
     </properties>
+    
+    <!-- ===== DEPENDENCY MANAGEMENT ===== -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Test Dependencies -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <!-- ===== PROJECT DEPENDENCIES ===== -->
     <dependencies>
-        <!-- Spring Core (optional, for DI support) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
+        <!-- ===== PRODUCTION DEPENDENCIES ===== -->
+        
+        <!-- Core Dependencies -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -81,102 +108,118 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jackson Databind: for JSON and XML data binding -->
+        <!-- JSON/XML Processing -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
-        <!-- Jackson Annotations: for JSON/XML mapping annotations -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson-annotations.version}</version>
         </dependency>
-
-        <!-- Jackson Core: low-level JSON parser (optional, comes transitively) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
-        <!-- Jackson XML Dataformat: to extend databind with XML parsing support -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 
+        <!-- Spring Integration (Optional) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- ===== TEST DEPENDENCIES ===== -->
         <!-- JUnit 5 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- JMH for performance testing -->
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>${jmh.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>${jmh.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Test reporting -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
             <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Mockito for mocking -->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.5.0</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Mockito JUnit Jupiter integration -->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.5.0</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- AssertJ for fluent assertions -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- AssertJ -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Testcontainers for integration testing -->
+        
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- TestContainers -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>1.21.3</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Spring Boot Test for testing Spring components -->
+        
+        <!-- JMH Benchmarking -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Spring Test (Optional) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -193,47 +236,65 @@
 
     <build>
         <plugins>
-            <!-- Java compiler version -->
+            <!-- Java Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <release>21</release>
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </path>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh.version}</version>
+                        </path>
                     </annotationProcessorPaths>
-                    <source>21</source>
-                    <target>21</target>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
-            <!-- Unit testing -->
+            <!-- Test Plugins -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite-engine</artifactId>
+                        <version>${junit-platform.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
+                    <useModulePath>false</useModulePath>
                     <properties>
-                        <configurationParameters>
-                            junit.jupiter.execution.parallel.enabled=true
-                            junit.jupiter.execution.parallel.mode.default=concurrent
-                        </configurationParameters>
+                        <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
                     </properties>
-                    <systemPropertyVariables>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${failsafe.version}</version>
+                <version>${maven-failsafe-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite-engine</artifactId>
+                        <version>${junit-platform.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -244,138 +305,55 @@
                 </executions>
             </plugin>
 
-            <!-- Code quality plugins -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${maven-pmd-plugin.version}</version>
-                <configuration>
-                    <rulesets>
-                        <ruleset>/category/java/bestpractices.xml</ruleset>
-                        <ruleset>/category/java/codestyle.xml</ruleset>
-                        <ruleset>/category/java/design.xml</ruleset>
-                        <ruleset>/category/java/errorprone.xml</ruleset>
-                        <ruleset>/category/java/performance.xml</ruleset>
-                        <ruleset>/category/java/security.xml</ruleset>
-                    </rulesets>
-                    <failOnViolation>true</failOnViolation>
-                    <printFailingErrors>true</printFailingErrors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbugs-maven-plugin.version}</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <failOnError>true</failOnError>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin> -->
-
-            <!-- JMH Maven Plugin for running benchmarks -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <!-- <configuration>
-                    <skip>true</skip>
-                </configuration> -->
-            </plugin>
-            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${failsafe.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <version>3.5.1</version>
                 <configuration>
-                    <mainClass>org.openjdk.jmh.Main</mainClass>
-                    <arguments>
-                        <argument>-f</argument>
-                        <argument>1</argument>
-                        <argument>-wi</argument>
-                        <argument>3</argument>
-                        <argument>-i</argument>
-                        <argument>5</argument>
-                        <argument>org.purpleBean.kmip.benchmark.*</argument>
-                    </arguments>
+                    <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                     <classpathScope>test</classpathScope>
                 </configuration>
             </plugin>
+
+            <!-- Code Formatting -->
+<!--            <plugin>-->
+<!--                <groupId>com.diffplug.spotless</groupId>-->
+<!--                <artifactId>spotless-maven-plugin</artifactId>-->
+<!--                <version>2.43.0</version>-->
+<!--                <configuration>-->
+<!--                    <java>-->
+<!--                        <googleJavaFormat>-->
+<!--                            <version>1.17.0</version>-->
+<!--                            <style>GOOGLE</style>-->
+<!--                        </googleJavaFormat>-->
+<!--                        <removeUnusedImports />-->
+<!--                        <trimTrailingWhitespace />-->
+<!--                        <endWithNewline />-->
+<!--                        <indent>-->
+<!--                            <spaces>true</spaces>-->
+<!--                            <spacesPerTab>4</spacesPerTab>-->
+<!--                        </indent>-->
+<!--                    </java>-->
+<!--                    &lt;!&ndash; Formatting includes &ndash;&gt;-->
+<!--                    <format>-->
+<!--                        <includes>-->
+<!--                            <include>src/**/*.java</include>-->
+<!--                            <include>src/**/*.xml</include>-->
+<!--                            <include>pom.xml</include>-->
+<!--                        </includes>-->
+<!--                    </format>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>process-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>apply</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <source>21</source>
-                    <target>21</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.openjdk.jmh</groupId>
-                            <artifactId>jmh-generator-annprocess</artifactId>
-                            <version>${jmh.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <!-- Code coverage -->
+            <!-- Code Coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -392,6 +370,39 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- JMH Benchmarking -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>benchmarks</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

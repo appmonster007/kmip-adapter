@@ -30,11 +30,13 @@ public class TestExecutionStatsListener implements TestExecutionListener {
     }
 
     @Override
-    public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
+    public void executionFinished(
+            TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
         if (testIdentifier.isTest()) {
             long duration = System.currentTimeMillis() - startTimes.get(testIdentifier.getUniqueId());
-            testStats.computeIfAbsent(testIdentifier.getDisplayName(), k -> new TestStats())
-                   .recordExecution(duration, testExecutionResult.getStatus());
+            testStats
+                    .computeIfAbsent(testIdentifier.getDisplayName(), k -> new TestStats())
+                    .recordExecution(duration, testExecutionResult.getStatus());
         }
     }
 
@@ -50,14 +52,34 @@ public class TestExecutionStatsListener implements TestExecutionListener {
         private final AtomicLong totalDuration = new AtomicLong();
         private volatile long minDuration = Long.MAX_VALUE;
         private volatile long maxDuration = 0;
-        
-        public int getExecutionCount() { return executionCount.get(); }
-        public int getSuccessCount() { return successCount.get(); }
-        public int getFailureCount() { return failureCount.get(); }
-        public int getAbortedCount() { return abortedCount.get(); }
-        public long getTotalDuration() { return totalDuration.get(); }
-        public long getMinDuration() { return minDuration; }
-        public long getMaxDuration() { return maxDuration; }
+
+        public int getExecutionCount() {
+            return executionCount.get();
+        }
+
+        public int getSuccessCount() {
+            return successCount.get();
+        }
+
+        public int getFailureCount() {
+            return failureCount.get();
+        }
+
+        public int getAbortedCount() {
+            return abortedCount.get();
+        }
+
+        public long getTotalDuration() {
+            return totalDuration.get();
+        }
+
+        public long getMinDuration() {
+            return minDuration;
+        }
+
+        public long getMaxDuration() {
+            return maxDuration;
+        }
 
         public void recordExecution(long duration, TestExecutionResult.Status status) {
             executionCount.incrementAndGet();
@@ -78,10 +100,15 @@ public class TestExecutionStatsListener implements TestExecutionListener {
 
         @Override
         public String toString() {
-            return String.format("Runs: %d, Success: %d, Fail: %d, Aborted: %d, " +
-                              "Avg: %.2fms, Min: %dms, Max: %dms",
-                    executionCount.get(), successCount.get(), failureCount.get(), 
-                    abortedCount.get(), getAverageDuration(), minDuration, maxDuration);
+            return String.format(
+                    "Runs: %d, Success: %d, Fail: %d, Aborted: %d, " + "Avg: %.2fms, Min: %dms, Max: %dms",
+                    executionCount.get(),
+                    successCount.get(),
+                    failureCount.get(),
+                    abortedCount.get(),
+                    getAverageDuration(),
+                    minDuration,
+                    maxDuration);
         }
     }
 }

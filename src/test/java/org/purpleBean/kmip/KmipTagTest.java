@@ -18,25 +18,26 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("KmipTag Tests")
 class KmipTagTest extends BaseKmipTest {
-    
+
     // Helper method to clean up test tags
     private void cleanupTestTags() {
         KmipTag.registeredValues().stream()
-            .filter(KmipTag.Value::isCustom)
-            .filter(v -> v.getDescription() != null && v.getDescription().startsWith("TestCustomTag"))
-            .toList() // Create a copy to avoid concurrent modification
-            .forEach(v -> {
-                try {
-                    // Use reflection to clean up test tags from registries
-                    cleanUpRegistry("VALUE_REGISTRY", v.getValue());
-                    cleanUpRegistry("DESCRIPTION_REGISTRY", v.getDescription());
-                    cleanUpRegistry("EXTENSION_DESCRIPTION_REGISTRY", v.getDescription());
-                } catch (Exception e) {
-                    throw new RuntimeException("Failed to clean up test tags", e);
-                }
-            });
+                .filter(KmipTag.Value::isCustom)
+                .filter(v -> v.getDescription() != null && v.getDescription().startsWith("TestCustomTag"))
+                .toList() // Create a copy to avoid concurrent modification
+                .forEach(
+                        v -> {
+                            try {
+                                // Use reflection to clean up test tags from registries
+                                cleanUpRegistry("VALUE_REGISTRY", v.getValue());
+                                cleanUpRegistry("DESCRIPTION_REGISTRY", v.getDescription());
+                                cleanUpRegistry("EXTENSION_DESCRIPTION_REGISTRY", v.getDescription());
+                            } catch (Exception e) {
+                                throw new RuntimeException("Failed to clean up test tags", e);
+                            }
+                        });
     }
-    
+
     @SuppressWarnings("unchecked")
     private <T> void cleanUpRegistry(String fieldName, T key) throws Exception {
         Field field = KmipTag.class.getDeclaredField(fieldName);
@@ -104,14 +105,16 @@ class KmipTagTest extends BaseKmipTest {
             try {
                 // Clean up any leftover test tags first
                 cleanupTestTags();
-                
+
                 // Given
                 int customValue = 0x540001;
-                String customDescription = "TestCustomTag" + System.currentTimeMillis(); // Ensure unique name
+                String customDescription =
+                        "TestCustomTag" + System.currentTimeMillis(); // Ensure unique name
                 Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
                 // When
-                KmipTag.Value customTag = KmipTag.register(customValue, customDescription, supportedVersions);
+                KmipTag.Value customTag =
+                        KmipTag.register(customValue, customDescription, supportedVersions);
                 KmipTag tag = new KmipTag(customTag);
 
                 // Then
@@ -122,28 +125,34 @@ class KmipTagTest extends BaseKmipTest {
                         .hasValidTagBytes();
 
                 // Verify registration in the registry
-                assertThat(KmipTag.fromValue(KmipSpec.V1_2, customValue))
-                        .isEqualTo(customTag);
-                assertThat(KmipTag.fromName(KmipSpec.V1_2, customDescription))
-                        .isEqualTo(customTag);
+                assertThat(KmipTag.fromValue(KmipSpec.V1_2, customValue)).isEqualTo(customTag);
+                assertThat(KmipTag.fromName(KmipSpec.V1_2, customDescription)).isEqualTo(customTag);
             } finally {
                 cleanupTestTags();
             }
         }
 
         @ParameterizedTest
-        @ValueSource(ints = {
-                0x420001,  // Standard range, not extension
-                0x550000,  // Above extension range
-                -1,        // Negative value
-                0xFFFFFFFF // Max int, way above extension range
-        })
+        @ValueSource(
+                ints = {
+                        0x420001, // Standard range, not extension
+                        0x550000, // Above extension range
+                        -1, // Negative value
+                        0xFFFFFFFF // Max int, way above extension range
+                })
         @DisplayName("Should reject invalid extension values")
         void shouldRejectInvalidExtensionValues(int invalidValue) {
             // When & Then
-            assertThatThrownBy(() -> KmipTag.register(invalidValue, "Invalid" + invalidValue, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+            assertThatThrownBy(
+                    () ->
+                            KmipTag.register(
+                                    invalidValue,
+                                    "Invalid" + invalidValue,
+                                    Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(String.format("Extension value %d must be between 0x540000 and 0x54FFFF", invalidValue));
+                    .hasMessageContaining(
+                            String.format(
+                                    "Extension value %d must be between 0x540000 and 0x54FFFF", invalidValue));
         }
 
         @Test
@@ -156,22 +165,22 @@ class KmipTagTest extends BaseKmipTest {
 
             // When & Then - Verify null description throws NullPointerException
             assertThatThrownBy(() -> KmipTag.register(validValue, null, validVersions))
-                .isInstanceOf(NullPointerException.class)
-                .hasMessageContaining("description is marked non-null but is null");
+                    .isInstanceOf(NullPointerException.class)
+                    .hasMessageContaining("description is marked non-null but is null");
 
             // When & Then - Verify empty description throws IllegalArgumentException
             assertThatThrownBy(() -> KmipTag.register(validValue, "", validVersions))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Description cannot be empty");
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Description cannot be empty");
 
             // When & Then - Verify empty versions set throws IllegalArgumentException
             assertThatThrownBy(() -> KmipTag.register(validValue, validDescription, Set.of()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("At least one supported version must be specified");
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("At least one supported version must be specified");
 
             // When & Then - Verify null versions throws NullPointerException
             assertThatThrownBy(() -> KmipTag.register(validValue, validDescription, null))
-                .isInstanceOf(NullPointerException.class);
+                    .isInstanceOf(NullPointerException.class);
         }
     }
 
@@ -278,9 +287,8 @@ class KmipTagTest extends BaseKmipTest {
 
             // Then
             assertThat(tagBytes).hasSize(3);
-            int reconstructedValue = ((tagBytes[0] & 0xFF) << 16) |
-                    ((tagBytes[1] & 0xFF) << 8) |
-                    (tagBytes[2] & 0xFF);
+            int reconstructedValue =
+                    ((tagBytes[0] & 0xFF) << 16) | ((tagBytes[1] & 0xFF) << 8) | (tagBytes[2] & 0xFF);
             assertThat(reconstructedValue).isEqualTo(tagValue);
         }
     }
@@ -317,8 +325,12 @@ class KmipTagTest extends BaseKmipTest {
             String description2 = "Second";
 
             // When
-            KmipTag.Value first = KmipTag.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            KmipTag.Value second = KmipTag.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            KmipTag.Value first =
+                    KmipTag.register(
+                            customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            KmipTag.Value second =
+                    KmipTag.register(
+                            customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
             // Then - Registry creates new instances for each registration
             assertThat(first).isNotSameAs(second);

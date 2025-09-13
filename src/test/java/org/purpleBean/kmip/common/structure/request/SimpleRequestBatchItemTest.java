@@ -1,15 +1,17 @@
 package org.purpleBean.kmip.common.structure.request;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("SimpleRequestBatchItem Tests")
 class SimpleRequestBatchItemTest {
@@ -106,7 +108,7 @@ class SimpleRequestBatchItemTest {
 
         @Test
         @DisplayName("Should deserialize from JSON")
-        void shouldDeserializeFromJson() throws JsonMappingException, JsonProcessingException {
+        void shouldDeserializeFromJson() throws JsonProcessingException {
             // Given
             String json = "{\"tag\":\"BatchItem\",\"type\":\"Structure\",\"value\":[]}";
 

@@ -29,13 +29,14 @@ class StateTest extends BaseKmipTest {
         void shouldCreateStateWithStandardValue() {
             // Given
             State.Standard standardState = State.Standard.ACTIVE;
-            
+
             // When
             State state = new State(standardState);
-            
+
             // Then
             assertThat(state.getValue()).isInstanceOf(State.Standard.class);
-            assertThat(((State.Standard) state.getValue()).getValue()).isEqualTo(standardState.getValue());
+            assertThat(state.getValue().getValue())
+                    .isEqualTo(standardState.getValue());
             assertThat(state.getDescription()).isEqualTo(standardState.getDescription());
             assertThat(state.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.STATE);
             assertThat(state.getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
@@ -47,10 +48,11 @@ class StateTest extends BaseKmipTest {
         void shouldHandleAllStandardStatesCorrectly(State.Standard standardState) {
             // When
             State state = new State(standardState);
-            
+
             // Then
             assertThat(state.getValue()).isInstanceOf(State.Standard.class);
-            assertThat(((State.Standard) state.getValue()).getValue()).isEqualTo(standardState.getValue());
+            assertThat(state.getValue().getValue())
+                    .isEqualTo(standardState.getValue());
             assertThat(state.getDescription()).isEqualTo(standardState.getDescription());
             assertThat(state.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.STATE);
             assertThat(state.getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
@@ -61,7 +63,7 @@ class StateTest extends BaseKmipTest {
         void shouldSupportVersionCompatibilityForStandardStates() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
             assertThat(state.isSupportedFor(KmipSpec.V1_2)).isTrue();
             assertThat(state.isSupportedFor(KmipSpec.V1_2)).isTrue();
@@ -79,11 +81,12 @@ class StateTest extends BaseKmipTest {
             int customValue = -1000010;
             String customDescription = "TestCustomState";
             Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
-            
+
             // When
-            State.Value customStateValue = State.register(customValue, customDescription, supportedVersions);
+            State.Value customStateValue =
+                    State.register(customValue, customDescription, supportedVersions);
             State state = new State(customStateValue);
-            
+
             // Then
             assertThat(customStateValue.getValue()).isEqualTo(customValue);
             assertThat(customStateValue.getDescription()).isEqualTo(customDescription);
@@ -98,11 +101,11 @@ class StateTest extends BaseKmipTest {
             // Given
             String customName = "CustomTestState";
             State.register(-1000020, customName, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            
+
             // When
             State.Value foundState = State.fromName(KmipSpec.V1_2, customName);
             State state = new State(foundState);
-            
+
             // Then
             assertThat(foundState).isNotNull();
             assertThat(foundState.getDescription()).isEqualTo(customName);
@@ -115,12 +118,13 @@ class StateTest extends BaseKmipTest {
         void shouldHandleCustomStateLookupByValue() {
             // Given
             int customValue = -1000030;
-            State.register(customValue, "ValueLookupTest", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            
+            State.register(
+                    customValue, "ValueLookupTest", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+
             // When
             State.Value foundState = State.fromValue(KmipSpec.V1_2, customValue);
             State state = new State(foundState);
-            
+
             // Then
             assertThat(foundState).isNotNull();
             assertThat(foundState.getValue()).isEqualTo(customValue);
@@ -134,13 +138,15 @@ class StateTest extends BaseKmipTest {
         void shouldRejectNullParametersInRegistration() {
             // Given
             int validValue = -1000040;
-            
+
             // When & Then
-            assertThatThrownBy(() -> State.register(validValue, null, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
-                .isInstanceOf(NullPointerException.class);
-                
+            assertThatThrownBy(
+                    () ->
+                            State.register(validValue, null, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                    .isInstanceOf(NullPointerException.class);
+
             assertThatThrownBy(() -> State.register(validValue, "Test", null))
-                .isInstanceOf(NullPointerException.class);
+                    .isInstanceOf(NullPointerException.class);
         }
 
         @Test
@@ -149,15 +155,25 @@ class StateTest extends BaseKmipTest {
             // Given - Standard range values (not extension range)
             int standardValue = 0x00000001;
             int positiveValue = 1000;
-            
+
             // When & Then
-            assertThatThrownBy(() -> State.register(standardValue, "InvalidStandard", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Extension value");
-                
-            assertThatThrownBy(() -> State.register(positiveValue, "InvalidPositive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Extension value");
+            assertThatThrownBy(
+                    () ->
+                            State.register(
+                                    standardValue,
+                                    "InvalidStandard",
+                                    Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Extension value");
+
+            assertThatThrownBy(
+                    () ->
+                            State.register(
+                                    positiveValue,
+                                    "InvalidPositive",
+                                    Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Extension value");
         }
 
         @Test
@@ -165,15 +181,21 @@ class StateTest extends BaseKmipTest {
         void shouldRejectEmptyDescription() {
             // Given
             int validExtensionValue = -1000041;
-            
+
             // When & Then
-            assertThatThrownBy(() -> State.register(validExtensionValue, "", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Description cannot be empty");
-                
-            assertThatThrownBy(() -> State.register(validExtensionValue, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Description cannot be empty");
+            assertThatThrownBy(
+                    () ->
+                            State.register(
+                                    validExtensionValue, "", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Description cannot be empty");
+
+            assertThatThrownBy(
+                    () ->
+                            State.register(
+                                    validExtensionValue, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Description cannot be empty");
         }
 
         @Test
@@ -181,11 +203,11 @@ class StateTest extends BaseKmipTest {
         void shouldRejectEmptySupportedVersions() {
             // Given
             int validExtensionValue = -1000042;
-            
+
             // When & Then
             assertThatThrownBy(() -> State.register(validExtensionValue, "ValidDescription", Set.of()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("At least one supported version must be specified");
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("At least one supported version must be specified");
         }
     }
 
@@ -198,10 +220,10 @@ class StateTest extends BaseKmipTest {
         void shouldFindStandardStateByValue() {
             // Given
             State.Standard expected = State.Standard.ACTIVE;
-            
+
             // When
             State.Value found = State.fromValue(KmipSpec.V1_2, expected.getValue());
-            
+
             // Then
             assertThat(found).isEqualTo(expected);
         }
@@ -211,10 +233,10 @@ class StateTest extends BaseKmipTest {
         void shouldFindStandardStateByName() {
             // Given
             State.Standard expected = State.Standard.DEACTIVATED;
-            
+
             // When
             State.Value found = State.fromName(KmipSpec.V1_2, expected.getDescription());
-            
+
             // Then
             assertThat(found).isEqualTo(expected);
         }
@@ -224,11 +246,11 @@ class StateTest extends BaseKmipTest {
         void shouldThrowExceptionForUnknownValue() {
             // Given
             int unknownValue = -9999999;
-            
+
             // When & Then
             assertThatThrownBy(() -> State.fromValue(KmipSpec.V1_2, unknownValue))
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("No value found for -9999999");
+                    .isInstanceOf(NoSuchElementException.class)
+                    .hasMessageContaining("No value found for -9999999");
         }
 
         @Test
@@ -236,25 +258,24 @@ class StateTest extends BaseKmipTest {
         void shouldThrowExceptionForUnknownName() {
             // Given
             String unknownName = "NonExistentState";
-            
+
             // When & Then
             assertThatThrownBy(() -> State.fromName(KmipSpec.V1_2, unknownName))
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("No value found for 'NonExistentState'");
+                    .isInstanceOf(NoSuchElementException.class)
+                    .hasMessageContaining("No value found for 'NonExistentState'");
         }
 
         @Test
         @DisplayName("Should reject null parameters in lookup methods")
         void shouldRejectNullParametersInLookupMethods() {
             // When & Then
-            assertThatThrownBy(() -> State.fromValue(null, 1))
-                .isInstanceOf(NullPointerException.class);
-                
+            assertThatThrownBy(() -> State.fromValue(null, 1)).isInstanceOf(NullPointerException.class);
+
             assertThatThrownBy(() -> State.fromName(null, "Active"))
-                .isInstanceOf(NullPointerException.class);
-                
+                    .isInstanceOf(NullPointerException.class);
+
             assertThatThrownBy(() -> State.fromName(KmipSpec.V1_2, null))
-                .isInstanceOf(NullPointerException.class);
+                    .isInstanceOf(NullPointerException.class);
         }
 
         @Test
@@ -263,11 +284,11 @@ class StateTest extends BaseKmipTest {
             // Given - Register a state only for V1_2
             int customValue = -1000050;
             State.register(customValue, "SpecificVersionState", Set.of(KmipSpec.UnknownVersion));
-            
+
             // When & Then
             assertThat(State.fromValue(KmipSpec.UnknownVersion, customValue)).isNotNull();
             assertThatThrownBy(() -> State.fromValue(KmipSpec.V1_2, customValue))
-                .isInstanceOf(RuntimeException.class);
+                    .isInstanceOf(RuntimeException.class);
         }
     }
 
@@ -283,15 +304,15 @@ class StateTest extends BaseKmipTest {
             int customValue2 = -1000061;
             State.register(customValue1, "Custom1", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
             State.register(customValue2, "Custom2", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            
+
             // When
             var registeredValues = State.registeredValues();
-            
+
             // Then
             assertThat(registeredValues)
-                .isNotEmpty()
-                .anyMatch(v -> v.getValue() == customValue1)
-                .anyMatch(v -> v.getValue() == customValue2);
+                    .isNotEmpty()
+                    .anyMatch(v -> v.getValue() == customValue1)
+                    .anyMatch(v -> v.getValue() == customValue2);
         }
 
         @Test
@@ -301,11 +322,13 @@ class StateTest extends BaseKmipTest {
             int customValue = -1000070;
             String description1 = "First";
             String description2 = "Second";
-            
+
             // When
-            State.Value first = State.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            State.Value second = State.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-            
+            State.Value first =
+                    State.register(customValue, description1, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            State.Value second =
+                    State.register(customValue, description2, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+
             // Then - Registry creates new instances for each registration
             assertThat(first).isNotSameAs(second);
             assertThat(first.getValue()).isEqualTo(second.getValue());
@@ -328,7 +351,7 @@ class StateTest extends BaseKmipTest {
             // Given
             State state1 = new State(State.Standard.ACTIVE);
             State state2 = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
             assertThat(state1).isEqualTo(state2);
             assertThat(state1.hashCode()).isEqualTo(state2.hashCode());
@@ -340,7 +363,7 @@ class StateTest extends BaseKmipTest {
             // Given
             State state1 = new State(State.Standard.ACTIVE);
             State state2 = new State(State.Standard.DEACTIVATED);
-            
+
             // When & Then
             assertThat(state1).isNotEqualTo(state2);
         }
@@ -350,10 +373,12 @@ class StateTest extends BaseKmipTest {
         void shouldHandleEqualityWithCustomStates() {
             // Given
             int customValue = -1000080;
-            State.Value customStateValue = State.register(customValue, "EqualityTest", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+            State.Value customStateValue =
+                    State.register(
+                            customValue, "EqualityTest", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
             State state1 = new State(customStateValue);
             State state2 = new State(customStateValue);
-            
+
             // When & Then
             assertThat(state1).isEqualTo(state2);
             assertThat(state1.hashCode()).isEqualTo(state2.hashCode());
@@ -369,7 +394,7 @@ class StateTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeStandardStateJsonCorrectly() {
             // Given
             State original = KmipTestDataFactory.createState();
-            
+
             // When & Then
             SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, State.class);
         }
@@ -379,7 +404,7 @@ class StateTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeCustomStateJsonCorrectly() {
             // Given
             State original = KmipTestDataFactory.createCustomState();
-            
+
             // When & Then
             SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, State.class);
         }
@@ -389,7 +414,7 @@ class StateTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeXmlCorrectly() {
             // Given
             State original = new State(State.Standard.COMPROMISED);
-            
+
             // When & Then
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, State.class);
         }
@@ -399,7 +424,7 @@ class StateTest extends BaseKmipTest {
         void shouldHandleAllStandardStatesInSerialization() {
             // Given
             var states = KmipTestDataFactory.createStates();
-            
+
             // When & Then
             for (State state : states) {
                 SerializationTestUtils.performBothRoundTrips(jsonMapper, xmlMapper, state, State.class);
@@ -411,12 +436,15 @@ class StateTest extends BaseKmipTest {
         void shouldProduceExpectedJsonStructure() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
-            SerializationTestUtils.testJsonSerialization(jsonMapper, state, json -> {
-                SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-                assertThat(json).contains("Active");
-            });
+            SerializationTestUtils.testJsonSerialization(
+                    jsonMapper,
+                    state,
+                    json -> {
+                        SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
+                        assertThat(json).contains("Active");
+                    });
         }
     }
 
@@ -429,7 +457,7 @@ class StateTest extends BaseKmipTest {
         void shouldHaveCorrectKmipTag() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
             assertThat(state.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.STATE);
             assertThat(state.getKmipTag().getDescription()).isEqualTo("State");
@@ -440,7 +468,7 @@ class StateTest extends BaseKmipTest {
         void shouldHaveCorrectEncodingType() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
             assertThat(state.getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
         }
@@ -450,7 +478,7 @@ class StateTest extends BaseKmipTest {
         void shouldSupportKmipSpecification() {
             // Given
             State state = new State(State.Standard.ACTIVE);
-            
+
             // When & Then
             assertThat(state.isSupportedFor(defaultSpec)).isTrue();
         }
@@ -466,11 +494,11 @@ class StateTest extends BaseKmipTest {
             // Given - Create state with specific version support
             int versionSpecificValue = -1000090;
             State.register(versionSpecificValue, "VersionSpecific", Set.of(KmipSpec.UnknownVersion));
-            
+
             // When & Then - Should work with supported version
             State.Value found = State.fromValue(KmipSpec.UnknownVersion, versionSpecificValue);
             assertThat(found.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-            
+
             // Should not work with unsupported version
             assertThat(found.isSupportedFor(KmipSpec.V1_2)).isFalse();
         }
@@ -480,19 +508,25 @@ class StateTest extends BaseKmipTest {
         void shouldMaintainThreadSafetyInRegistration() {
             // Given
             int baseValue = -1000100;
-            
+
             // When - Register multiple states concurrently
-            java.util.concurrent.CompletableFuture<Void>[] futures = new java.util.concurrent.CompletableFuture[10];
+            java.util.concurrent.CompletableFuture<Void>[] futures =
+                    new java.util.concurrent.CompletableFuture[10];
             for (int i = 0; i < 10; i++) {
                 final int index = i;
-                futures[i] = java.util.concurrent.CompletableFuture.runAsync(() -> {
-                    State.register(baseValue - index, "ThreadTest" + index, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-                });
+                futures[i] =
+                        java.util.concurrent.CompletableFuture.runAsync(
+                                () -> {
+                                    State.register(
+                                            baseValue - index,
+                                            "ThreadTest" + index,
+                                            Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+                                });
             }
-            
+
             // Then - All registrations should complete successfully
             assertThatCode(() -> java.util.concurrent.CompletableFuture.allOf(futures).get())
-                .doesNotThrowAnyException();
+                    .doesNotThrowAnyException();
         }
     }
 }

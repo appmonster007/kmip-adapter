@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Parallel Serialization Tests with Different Codec Contexts")
 @Execution(ExecutionMode.CONCURRENT)
@@ -31,8 +32,10 @@ class ParallelSerializationTest extends BaseKmipTest {
     class MultiCodecParallelSerialization {
 
         @Test
-        @DisplayName("Should handle JSON and XML serialization in parallel threads with different codec contexts")
-        void shouldHandleJsonAndXmlSerializationInParallelThreadsWithDifferentContexts() throws Exception {
+        @DisplayName(
+                "Should handle JSON and XML serialization in parallel threads with different codec contexts")
+        void shouldHandleJsonAndXmlSerializationInParallelThreadsWithDifferentContexts()
+                throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(4);
             int numberOfThreads = 20;
@@ -45,49 +48,58 @@ class ParallelSerializationTest extends BaseKmipTest {
                     final KmipSpec specForThread = KmipSpec.V1_2;
                     final boolean useJson = threadId % 3 == 0; // Mix of JSON and XML
 
-                    CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-                        // Set thread-specific codec context
-                        KmipContext.setSpec(specForThread);
-                        
-                        try {
-                            // Verify context is set correctly
-                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
-                            
-                            // Create test data with V1_2 context - use standard states to avoid version issues
-                            State activeState = new State(State.Standard.ACTIVE);
-                            ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
-                                    .dateTime(OffsetDateTime.now())
-                                    .build();
-                            SampleStructure structure = SampleStructure.builder()
-                                    .activationDate(activationDate)
-                                    .state(activeState)
-                                    .build();
-                            
-                            ProtocolVersion version = ProtocolVersion.of(threadId % 3 + 1, threadId % 5);
-                            
-                            if (useJson) {
-                                // JSON serialization
-                                SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
-                                SerializationTestUtils.performJsonRoundTrip(jsonMapper, structure, SampleStructure.class);
-                            } else {
-                                // XML serialization
-                                SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
-                                SerializationTestUtils.performXmlRoundTrip(xmlMapper, structure, SampleStructure.class);
-                            }
-                            
-                            // Verify context is still correct after serialization
-                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
-                            
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor);
-                    
+                    CompletableFuture<Void> future =
+                            CompletableFuture.runAsync(
+                                    () -> {
+                                        // Set thread-specific codec context
+                                        KmipContext.setSpec(specForThread);
+
+                                        try {
+                                            // Verify context is set correctly
+                                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
+
+                                            // Create test data with V1_2 context - use standard states to avoid version
+                                            // issues
+                                            State activeState = new State(State.Standard.ACTIVE);
+                                            ActivationDateAttribute activationDate =
+                                                    ActivationDateAttribute.builder().dateTime(OffsetDateTime.now()).build();
+                                            SampleStructure structure =
+                                                    SampleStructure.builder()
+                                                            .activationDate(activationDate)
+                                                            .state(activeState)
+                                                            .build();
+
+                                            ProtocolVersion version = ProtocolVersion.of(threadId % 3 + 1, threadId % 5);
+
+                                            if (useJson) {
+                                                // JSON serialization
+                                                SerializationTestUtils.performJsonRoundTrip(
+                                                        jsonMapper, version, ProtocolVersion.class);
+                                                SerializationTestUtils.performJsonRoundTrip(
+                                                        jsonMapper, structure, SampleStructure.class);
+                                            } else {
+                                                // XML serialization
+                                                SerializationTestUtils.performXmlRoundTrip(
+                                                        xmlMapper, version, ProtocolVersion.class);
+                                                SerializationTestUtils.performXmlRoundTrip(
+                                                        xmlMapper, structure, SampleStructure.class);
+                                            }
+
+                                            // Verify context is still correct after serialization
+                                            assertThat(KmipContext.getSpec()).isEqualTo(specForThread);
+
+                                        } finally {
+                                            KmipContext.clear();
+                                        }
+                                    },
+                                    executor);
+
                     futures.add(future);
                 }
 
                 // Then - All operations should complete successfully
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(10, TimeUnit.SECONDS);
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                        .get(10, TimeUnit.SECONDS);
 
             } finally {
                 executor.shutdown();
@@ -101,49 +113,69 @@ class ParallelSerializationTest extends BaseKmipTest {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(6);
             int operationsPerThread = 50;
-            
+
             try {
                 // When - Create tasks that mix different specs and formats
-                List<CompletableFuture<Void>> jsonTasks = IntStream.range(0, operationsPerThread)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipContext.setSpec(KmipSpec.V1_2);
-                        try {
-                            ProtocolVersion version = ProtocolVersion.of(1, 2);
-                            SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> jsonTasks =
+                        IntStream.range(0, operationsPerThread)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipContext.setSpec(KmipSpec.V1_2);
+                                                            try {
+                                                                ProtocolVersion version = ProtocolVersion.of(1, 2);
+                                                                SerializationTestUtils.performJsonRoundTrip(
+                                                                        jsonMapper, version, ProtocolVersion.class);
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
-                List<CompletableFuture<Void>> xmlTasks = IntStream.range(0, operationsPerThread)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipContext.setSpec(KmipSpec.V1_2);
-                        try {
-                            State state = new State(State.Standard.ACTIVE);
-                            SerializationTestUtils.performXmlRoundTrip(xmlMapper, state, State.class);
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> xmlTasks =
+                        IntStream.range(0, operationsPerThread)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipContext.setSpec(KmipSpec.V1_2);
+                                                            try {
+                                                                State state = new State(State.Standard.ACTIVE);
+                                                                SerializationTestUtils.performXmlRoundTrip(
+                                                                        xmlMapper, state, State.class);
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
-                List<CompletableFuture<Void>> mixedTasks = IntStream.range(0, operationsPerThread)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipSpec spec = KmipSpec.V1_2;
-                        KmipContext.setSpec(spec);
-                        try {
-                            ActivationDateAttribute attr = ActivationDateAttribute.builder()
-                                    .dateTime(OffsetDateTime.now())
-                                    .build();
-                            // Use both formats in same thread
-                            SerializationTestUtils.performJsonRoundTrip(jsonMapper, attr, ActivationDateAttribute.class);
-                            SerializationTestUtils.performXmlRoundTrip(xmlMapper, attr, ActivationDateAttribute.class);
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> mixedTasks =
+                        IntStream.range(0, operationsPerThread)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipSpec spec = KmipSpec.V1_2;
+                                                            KmipContext.setSpec(spec);
+                                                            try {
+                                                                ActivationDateAttribute attr =
+                                                                        ActivationDateAttribute.builder()
+                                                                                .dateTime(OffsetDateTime.now())
+                                                                                .build();
+                                                                // Use both formats in same thread
+                                                                SerializationTestUtils.performJsonRoundTrip(
+                                                                        jsonMapper, attr, ActivationDateAttribute.class);
+                                                                SerializationTestUtils.performXmlRoundTrip(
+                                                                        xmlMapper, attr, ActivationDateAttribute.class);
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
                 // Then - All tasks should complete without interference
                 List<CompletableFuture<Void>> allTasks = new ArrayList<>();
@@ -151,7 +183,8 @@ class ParallelSerializationTest extends BaseKmipTest {
                 allTasks.addAll(xmlTasks);
                 allTasks.addAll(mixedTasks);
 
-                CompletableFuture.allOf(allTasks.toArray(new CompletableFuture[0])).get(15, TimeUnit.SECONDS);
+                CompletableFuture.allOf(allTasks.toArray(new CompletableFuture[0]))
+                        .get(15, TimeUnit.SECONDS);
 
             } finally {
                 executor.shutdown();
@@ -165,7 +198,8 @@ class ParallelSerializationTest extends BaseKmipTest {
     class ContextIsolation {
 
         @Test
-        @DisplayName("Should maintain codec context isolation between parallel serialization operations")
+        @DisplayName(
+                "Should maintain codec context isolation between parallel serialization operations")
         void shouldMaintainContextIsolationBetweenParallelSerializationOperations() throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -174,37 +208,45 @@ class ParallelSerializationTest extends BaseKmipTest {
 
             try {
                 // When - Multiple threads set different specs and perform serialization
-                List<CompletableFuture<Void>> futures = IntStream.range(0, numberOfOperations)
-                    .mapToObj(i -> {
-                        final KmipSpec expectedSpec = (i % 3 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
-                        
-                        return CompletableFuture.runAsync(() -> {
-                            KmipContext.setSpec(expectedSpec);
-                            
-                            // Capture the spec at the beginning
-                            capturedSpecs.add(KmipContext.getSpec());
-                            
-                            // Perform serialization operations
-                            ProtocolVersion version = ProtocolVersion.of(i % 5, i % 3);
-                            SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
-                            
-                            // Verify spec hasn't changed during serialization
-                            assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
-                            
-                            // Perform XML serialization
-                            SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
-                            
-                            // Final verification
-                            assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
-                            
-                            KmipContext.clear();
-                        }, executor);
-                    })
-                    .toList();
+                List<CompletableFuture<Void>> futures =
+                        IntStream.range(0, numberOfOperations)
+                                .mapToObj(
+                                        i -> {
+                                            final KmipSpec expectedSpec =
+                                                    (i % 3 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
+
+                                            return CompletableFuture.runAsync(
+                                                    () -> {
+                                                        KmipContext.setSpec(expectedSpec);
+
+                                                        // Capture the spec at the beginning
+                                                        capturedSpecs.add(KmipContext.getSpec());
+
+                                                        // Perform serialization operations
+                                                        ProtocolVersion version = ProtocolVersion.of(i % 5, i % 3);
+                                                        SerializationTestUtils.performJsonRoundTrip(
+                                                                jsonMapper, version, ProtocolVersion.class);
+
+                                                        // Verify spec hasn't changed during serialization
+                                                        assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
+
+                                                        // Perform XML serialization
+                                                        SerializationTestUtils.performXmlRoundTrip(
+                                                                xmlMapper, version, ProtocolVersion.class);
+
+                                                        // Final verification
+                                                        assertThat(KmipContext.getSpec()).isEqualTo(expectedSpec);
+
+                                                        KmipContext.clear();
+                                                    },
+                                                    executor);
+                                        })
+                                .toList();
 
                 // Then - All operations should complete successfully
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(20, TimeUnit.SECONDS);
-                
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                        .get(20, TimeUnit.SECONDS);
+
                 // Verify we captured the expected number of specs
                 assertThat(capturedSpecs).hasSize(numberOfOperations);
 
@@ -220,34 +262,43 @@ class ParallelSerializationTest extends BaseKmipTest {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(8);
             int stressOperations = 200;
-            
+
             try {
                 // When - Rapid context switching with serialization
-                List<CompletableFuture<Void>> futures = IntStream.range(0, stressOperations)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        for (int j = 0; j < 5; j++) {
-                            // Rapid context switching
-                            KmipSpec spec = (j % 2 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
-                            KmipContext.setSpec(spec);
-                            
-                            // Quick serialization
-                            ProtocolVersion version = ProtocolVersion.of(j, i % 3);
-                            
-                            if (j % 2 == 0) {
-                                SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
-                            } else {
-                                SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
-                            }
-                            
-                            // Verify context integrity
-                            assertThat(KmipContext.getSpec()).isEqualTo(spec);
-                        }
-                        KmipContext.clear();
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> futures =
+                        IntStream.range(0, stressOperations)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            for (int j = 0; j < 5; j++) {
+                                                                // Rapid context switching
+                                                                KmipSpec spec =
+                                                                        (j % 2 == 0) ? KmipSpec.V1_2 : KmipSpec.UnknownVersion;
+                                                                KmipContext.setSpec(spec);
+
+                                                                // Quick serialization
+                                                                ProtocolVersion version = ProtocolVersion.of(j, i % 3);
+
+                                                                if (j % 2 == 0) {
+                                                                    SerializationTestUtils.performJsonRoundTrip(
+                                                                            jsonMapper, version, ProtocolVersion.class);
+                                                                } else {
+                                                                    SerializationTestUtils.performXmlRoundTrip(
+                                                                            xmlMapper, version, ProtocolVersion.class);
+                                                                }
+
+                                                                // Verify context integrity
+                                                                assertThat(KmipContext.getSpec()).isEqualTo(spec);
+                                                            }
+                                                            KmipContext.clear();
+                                                        },
+                                                        executor))
+                                .toList();
 
                 // Then - All stress operations should complete successfully
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(30, TimeUnit.SECONDS);
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                        .get(30, TimeUnit.SECONDS);
 
             } finally {
                 executor.shutdown();
@@ -268,45 +319,55 @@ class ParallelSerializationTest extends BaseKmipTest {
             int totalOperations = 1000;
 
             long startTime = System.currentTimeMillis();
-            
+
             try {
                 // When - High-load concurrent operations
-                List<CompletableFuture<Void>> futures = IntStream.range(0, totalOperations)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipSpec spec = KmipSpec.V1_2;
-                        KmipContext.setSpec(spec);
-                        
-                        try {
-                            // Create test data with standard values to avoid version issues
-                            State activeState = new State(State.Standard.ACTIVE);
-                            ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
-                                    .dateTime(OffsetDateTime.now())
-                                    .build();
-                            SampleStructure structure = SampleStructure.builder()
-                                    .activationDate(activationDate)
-                                    .state(activeState)
-                                    .build();
-                            ProtocolVersion version = ProtocolVersion.of(i % 3 + 1, i % 5);
-                            
-                            // Perform both JSON and XML serialization
-                            SerializationTestUtils.performJsonRoundTrip(jsonMapper, structure, SampleStructure.class);
-                            SerializationTestUtils.performXmlRoundTrip(xmlMapper, version, ProtocolVersion.class);
-                            
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> futures =
+                        IntStream.range(0, totalOperations)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipSpec spec = KmipSpec.V1_2;
+                                                            KmipContext.setSpec(spec);
+
+                                                            try {
+                                                                // Create test data with standard values to avoid version issues
+                                                                State activeState = new State(State.Standard.ACTIVE);
+                                                                ActivationDateAttribute activationDate =
+                                                                        ActivationDateAttribute.builder()
+                                                                                .dateTime(OffsetDateTime.now())
+                                                                                .build();
+                                                                SampleStructure structure =
+                                                                        SampleStructure.builder()
+                                                                                .activationDate(activationDate)
+                                                                                .state(activeState)
+                                                                                .build();
+                                                                ProtocolVersion version = ProtocolVersion.of(i % 3 + 1, i % 5);
+
+                                                                // Perform both JSON and XML serialization
+                                                                SerializationTestUtils.performJsonRoundTrip(
+                                                                        jsonMapper, structure, SampleStructure.class);
+                                                                SerializationTestUtils.performXmlRoundTrip(
+                                                                        xmlMapper, version, ProtocolVersion.class);
+
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
                 // Then - Should complete within reasonable time
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(60, TimeUnit.SECONDS);
-                
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                        .get(60, TimeUnit.SECONDS);
+
                 long endTime = System.currentTimeMillis();
                 long totalTime = endTime - startTime;
-                
+
                 // Performance assertion - should complete within 60 seconds
                 assertThat(totalTime).isLessThan(60000);
-                
+
                 // Calculate operations per second
                 double operationsPerSecond = (double) totalOperations / (totalTime / 1000.0);
                 assertThat(operationsPerSecond).isGreaterThan(10); // At least 10 ops/sec
@@ -323,8 +384,10 @@ class ParallelSerializationTest extends BaseKmipTest {
     class ErrorHandlingInParallelContext {
 
         @Test
-        @DisplayName("Should handle exceptions in parallel serialization without affecting other threads")
-        void shouldHandleExceptionsInParallelSerializationWithoutAffectingOtherThreads() throws Exception {
+        @DisplayName(
+                "Should handle exceptions in parallel serialization without affecting other threads")
+        void shouldHandleExceptionsInParallelSerializationWithoutAffectingOtherThreads()
+                throws Exception {
             // Given
             ExecutorService executor = Executors.newFixedThreadPool(6);
             int successfulOperations = 50;
@@ -332,39 +395,53 @@ class ParallelSerializationTest extends BaseKmipTest {
 
             try {
                 // When - Mix successful and failing operations
-                List<CompletableFuture<Void>> successfulFutures = IntStream.range(0, successfulOperations)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipContext.setSpec(KmipSpec.V1_2);
-                        try {
-                            ProtocolVersion version = ProtocolVersion.of(1, 2);
-                            SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> successfulFutures =
+                        IntStream.range(0, successfulOperations)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipContext.setSpec(KmipSpec.V1_2);
+                                                            try {
+                                                                ProtocolVersion version = ProtocolVersion.of(1, 2);
+                                                                SerializationTestUtils.performJsonRoundTrip(
+                                                                        jsonMapper, version, ProtocolVersion.class);
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
-                List<CompletableFuture<Void>> failingFutures = IntStream.range(0, failingOperations)
-                    .mapToObj(i -> CompletableFuture.runAsync(() -> {
-                        KmipContext.setSpec(KmipSpec.UnknownVersion);
-                        try {
-                            // Intentionally cause serialization issues with malformed data
-                            String malformedJson = "{invalid json}";
-                            assertThatThrownBy(() -> 
-                                SerializationTestUtils.testJsonDeserialization(jsonMapper, malformedJson, ProtocolVersion.class))
-                                .isInstanceOf(AssertionError.class);
-                        } finally {
-                            KmipContext.clear();
-                        }
-                    }, executor))
-                    .toList();
+                List<CompletableFuture<Void>> failingFutures =
+                        IntStream.range(0, failingOperations)
+                                .mapToObj(
+                                        i ->
+                                                CompletableFuture.runAsync(
+                                                        () -> {
+                                                            KmipContext.setSpec(KmipSpec.UnknownVersion);
+                                                            try {
+                                                                // Intentionally cause serialization issues with malformed data
+                                                                String malformedJson = "{invalid json}";
+                                                                assertThatThrownBy(
+                                                                        () ->
+                                                                                SerializationTestUtils.testJsonDeserialization(
+                                                                                        jsonMapper, malformedJson, ProtocolVersion.class))
+                                                                        .isInstanceOf(AssertionError.class);
+                                                            } finally {
+                                                                KmipContext.clear();
+                                                            }
+                                                        },
+                                                        executor))
+                                .toList();
 
-                // Then - Successful operations should complete, failing ones should handle errors gracefully
+                // Then - Successful operations should complete, failing ones should handle errors
+                // gracefully
                 CompletableFuture.allOf(successfulFutures.toArray(new CompletableFuture[0]))
-                    .get(10, TimeUnit.SECONDS);
-                
+                        .get(10, TimeUnit.SECONDS);
+
                 CompletableFuture.allOf(failingFutures.toArray(new CompletableFuture[0]))
-                    .get(10, TimeUnit.SECONDS);
+                        .get(10, TimeUnit.SECONDS);
 
             } finally {
                 executor.shutdown();

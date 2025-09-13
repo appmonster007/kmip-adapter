@@ -72,18 +72,47 @@ mvn test-compile exec:java -Dexec.mainClass="org.openjdk.jmh.Main" -Dexec.args="
 
 ## Benchmark Results
 
-### Latest Results
+### Latest Results (2025-09-13)
 
+#### Throughput (Operations per Microsecond)
 | Benchmark | Mode | Cnt | Score | Error | Units |
 |-----------|------|-----|-------|-------|-------|
-| stateCreation | avgt | 5 | 123.45 | ± 1.23 | ns/op |
-| activationDateCreation | avgt | 5 | 234.56 | ± 2.34 | ns/op |
-| sampleStructureCreation | avgt | 5 | 345.67 | ± 3.45 | ns/op |
-| stateToString | avgt | 5 | 45.67 | ± 0.45 | ns/op |
-| activationDateToString | avgt | 5 | 67.89 | ± 0.67 | ns/op |
-| sampleStructureToString | avgt | 5 | 89.01 | ± 0.89 | ns/op |
-| createKmipTag | avgt | 5 | 12.34 | ± 0.12 | ns/op |
-| getKmipSpec | avgt | 5 | 0.12 | ± 0.01 | ns/op |
+| createKmipTag | thrpt | 3 | 725,471 | ± 593,746 | ops/us |
+| getKmipSpec | thrpt | 3 | 1,002,952 | ± 21,393 | ops/us |
+| stateCreation | thrpt | 3 | 159,661 | ± 8,019 | ops/us |
+| sampleStructureCreation | thrpt | 3 | 36,207 | ± 1,655 | ops/us |
+| stateToString | thrpt | 3 | 2.263 | ± 0.087 | ops/us |
+| sampleStructureToString | thrpt | 3 | 0.741 | ± 0.060 | ops/us |
+| activationDateCreation | thrpt | 3 | 85.354 | ± 19.307 | ops/us |
+| activationDateToString | thrpt | 3 | 2.183 | ± 1.914 | ops/us |
+
+#### Average Time per Operation (Microseconds)
+| Benchmark | Mode | Cnt | Score | Error | Units |
+|-----------|------|-----|-------|-------|-------|
+| getKmipSpec | avgt | 3 | 0.001 | ± 0.001 | us/op |
+| createKmipTag | avgt | 3 | 0.001 | ± 0.001 | us/op |
+| stateCreation | avgt | 3 | 0.006 | ± 0.006 | us/op |
+| sampleStructureCreation | avgt | 3 | 0.028 | ± 0.026 | us/op |
+| stateToString | avgt | 3 | 0.445 | ± 0.408 | us/op |
+| activationDateToString | avgt | 3 | 0.447 | ± 0.007 | us/op |
+| sampleStructureToString | avgt | 3 | 1.355 | ± 1.217 | us/op |
+
+### Performance Analysis
+
+1. **Fastest Operations** (sub-microsecond):
+   - KMIP spec lookup and tag creation are the fastest operations
+   - State and sample structure creation are in the tens of nanoseconds
+
+2. **Moderate Operations** (hundreds of nanoseconds):
+   - String conversions for states and activation dates
+   
+3. **Most Expensive Operations** (microseconds):
+   - Sample structure to string conversion is the most expensive operation
+
+### Recommendations
+- Consider optimizing string conversion logic for sample structures
+- Object pooling could benefit operations with higher allocation rates
+- The high variance in some results suggests potential for JIT warmup optimization
 
 ### Historical Trends
 [Placeholder for performance trend graphs/charts]

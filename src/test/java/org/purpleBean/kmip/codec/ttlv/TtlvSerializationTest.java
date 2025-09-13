@@ -50,9 +50,8 @@ class TtlvSerializationTest extends BaseKmipTest {
             // Then
             assertThat(tagBytes).hasSize(3);
             // Verify the bytes match the expected custom value
-            int reconstructedValue = ((tagBytes[0] & 0xFF) << 16) |
-                    ((tagBytes[1] & 0xFF) << 8) |
-                    (tagBytes[2] & 0xFF);
+            int reconstructedValue =
+                    ((tagBytes[0] & 0xFF) << 16) | ((tagBytes[1] & 0xFF) << 8) | (tagBytes[2] & 0xFF);
             assertThat(reconstructedValue).isEqualTo(customValue);
         }
 
@@ -68,9 +67,8 @@ class TtlvSerializationTest extends BaseKmipTest {
 
             // Then
             assertThat(tagBytes).hasSize(3);
-            int reconstructedValue = ((tagBytes[0] & 0xFF) << 16) |
-                    ((tagBytes[1] & 0xFF) << 8) |
-                    (tagBytes[2] & 0xFF);
+            int reconstructedValue =
+                    ((tagBytes[0] & 0xFF) << 16) | ((tagBytes[1] & 0xFF) << 8) | (tagBytes[2] & 0xFF);
             assertThat(reconstructedValue).isEqualTo(tagValue);
         }
     }
@@ -161,8 +159,10 @@ class TtlvSerializationTest extends BaseKmipTest {
             assertThat(version.getValues()).hasSize(2);
 
             // Verify nested components
-            assertThat(version.getProtocolVersionMajor().getEncodingType()).isEqualTo(EncodingType.INTEGER);
-            assertThat(version.getProtocolVersionMinor().getEncodingType()).isEqualTo(EncodingType.INTEGER);
+            assertThat(version.getProtocolVersionMajor().getEncodingType())
+                    .isEqualTo(EncodingType.INTEGER);
+            assertThat(version.getProtocolVersionMinor().getEncodingType())
+                    .isEqualTo(EncodingType.INTEGER);
         }
 
         @Test
@@ -176,7 +176,8 @@ class TtlvSerializationTest extends BaseKmipTest {
             assertThat(sampleStructure.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
 
             // Verify nested components have correct encoding types
-            assertThat(sampleStructure.getActivationDate().getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+            assertThat(sampleStructure.getActivationDate().getEncodingType())
+                    .isEqualTo(EncodingType.DATE_TIME);
             assertThat(sampleStructure.getState().getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
         }
     }

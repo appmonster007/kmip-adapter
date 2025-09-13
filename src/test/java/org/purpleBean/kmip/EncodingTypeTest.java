@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("EncodingType Tests")
 class EncodingTypeTest extends BaseKmipTest {
@@ -32,7 +32,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveCorrectStructureTypeProperties() {
             // When
             EncodingType structure = EncodingType.STRUCTURE;
-            
+
             // Then
             assertThat(structure.getTypeValue()).isEqualTo((byte) 0x01);
             assertThat(structure.getDescription()).isEqualTo("Structure");
@@ -45,7 +45,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveCorrectIntegerTypeProperties() {
             // When
             EncodingType integer = EncodingType.INTEGER;
-            
+
             // Then
             assertThat(integer.getTypeValue()).isEqualTo((byte) 0x02);
             assertThat(integer.getDescription()).isEqualTo("Integer");
@@ -58,7 +58,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveCorrectBooleanTypeProperties() {
             // When
             EncodingType bool = EncodingType.BOOLEAN;
-            
+
             // Then
             assertThat(bool.getTypeValue()).isEqualTo((byte) 0x06);
             assertThat(bool.getDescription()).isEqualTo("Boolean");
@@ -77,7 +77,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldFindEncodingTypeByTypeValue(EncodingType expected) {
             // When
             var found = EncodingType.fromTypeValue(expected.getTypeValue());
-            
+
             // Then
             assertThat(found).isPresent().contains(expected);
         }
@@ -88,7 +88,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldFindEncodingTypeByName(EncodingType expected) {
             // When
             var found = EncodingType.fromName(expected.name());
-            
+
             // Then
             assertThat(found).isPresent().contains(expected);
         }
@@ -98,10 +98,10 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldReturnEmptyForInvalidTypeValue() {
             // Given
             byte invalidTypeValue = (byte) 0xFF;
-            
+
             // When
             var found = EncodingType.fromTypeValue(invalidTypeValue);
-            
+
             // Then
             assertThat(found).isEmpty();
         }
@@ -111,10 +111,10 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldReturnEmptyForInvalidName() {
             // Given
             String invalidName = "INVALID_TYPE";
-            
+
             // When
             var found = EncodingType.fromName(invalidName);
-            
+
             // Then
             assertThat(found).isEmpty();
         }
@@ -145,22 +145,20 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldIdentifyFixedLengthTypesCorrectly() {
             // Given
             EncodingType[] fixedLengthTypes = {
-                EncodingType.INTEGER,
-                EncodingType.LONG_INTEGER,
-                EncodingType.ENUMERATION,
-                EncodingType.BOOLEAN,
-                EncodingType.DATE_TIME,
-                EncodingType.INTERVAL
+                    EncodingType.INTEGER,
+                    EncodingType.LONG_INTEGER,
+                    EncodingType.ENUMERATION,
+                    EncodingType.BOOLEAN,
+                    EncodingType.DATE_TIME,
+                    EncodingType.INTERVAL
             };
-            
+
             // When & Then
             for (EncodingType type : fixedLengthTypes) {
-                assertThat(type.isFixedLength())
-                    .as("Type %s should be fixed length", type.name())
-                    .isTrue();
+                assertThat(type.isFixedLength()).as("Type %s should be fixed length", type.name()).isTrue();
                 assertThat(type.getRawByteSize())
-                    .as("Type %s should have positive byte size", type.name())
-                    .isPositive();
+                        .as("Type %s should have positive byte size", type.name())
+                        .isPositive();
             }
         }
 
@@ -169,20 +167,20 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldIdentifyVariableLengthTypesCorrectly() {
             // Given
             EncodingType[] variableLengthTypes = {
-                EncodingType.STRUCTURE,
-                EncodingType.BIG_INTEGER,
-                EncodingType.TEXT_STRING,
-                EncodingType.BYTE_STRING
+                    EncodingType.STRUCTURE,
+                    EncodingType.BIG_INTEGER,
+                    EncodingType.TEXT_STRING,
+                    EncodingType.BYTE_STRING
             };
-            
+
             // When & Then
             for (EncodingType type : variableLengthTypes) {
                 assertThat(type.isFixedLength())
-                    .as("Type %s should be variable length", type.name())
-                    .isFalse();
+                        .as("Type %s should be variable length", type.name())
+                        .isFalse();
                 assertThat(type.getRawByteSize())
-                    .as("Type %s should have -1 byte size", type.name())
-                    .isEqualTo(-1);
+                        .as("Type %s should have -1 byte size", type.name())
+                        .isEqualTo(-1);
             }
         }
     }
@@ -197,7 +195,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldReturnDescriptionAsStringRepresentation(EncodingType encodingType) {
             // When
             String stringRepresentation = encodingType.toString();
-            
+
             // Then
             assertThat(stringRepresentation).isEqualTo(encodingType.getDescription());
         }
@@ -207,7 +205,7 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveConsistentStringRepresentations() {
             // Given
             EncodingType type = EncodingType.STRUCTURE;
-            
+
             // When & Then
             assertThat(type.toString()).isEqualTo("Structure");
             assertThat(type.getDescription()).isEqualTo("Structure");
@@ -255,13 +253,14 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveUniqueTypeValuesForAllEncodingTypes() {
             // Given
             EncodingType[] allTypes = EncodingType.values();
-            
+
             // When
-            long uniqueTypeValues = java.util.Arrays.stream(allTypes)
-                .mapToInt(type -> type.getTypeValue() & 0xFF)
-                .distinct()
-                .count();
-            
+            long uniqueTypeValues =
+                    java.util.Arrays.stream(allTypes)
+                            .mapToInt(type -> type.getTypeValue() & 0xFF)
+                            .distinct()
+                            .count();
+
             // Then
             assertThat(uniqueTypeValues).isEqualTo(allTypes.length);
         }
@@ -271,14 +270,14 @@ class EncodingTypeTest extends BaseKmipTest {
         void shouldHaveSequentialTypeValues() {
             // Given
             EncodingType[] allTypes = EncodingType.values();
-            
+
             // When & Then
             for (int i = 0; i < allTypes.length; i++) {
                 int expectedValue = i + 1;
                 int actualValue = allTypes[i].getTypeValue() & 0xFF;
                 assertThat(actualValue)
-                    .as("Type %s should have value %d", allTypes[i].name(), expectedValue)
-                    .isEqualTo(expectedValue);
+                        .as("Type %s should have value %d", allTypes[i].name(), expectedValue)
+                        .isEqualTo(expectedValue);
             }
         }
     }

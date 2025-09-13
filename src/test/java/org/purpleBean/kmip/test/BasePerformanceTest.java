@@ -16,19 +16,19 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public abstract class BasePerformanceTest {
-    
+
     protected KmipSpec spec = KmipSpec.V1_2;
-    
+
     @Setup(Level.Trial)
     public void setup() {
         // Common setup for all performance tests
     }
-    
+
     @TearDown(Level.Trial)
     public void tearDown() {
         // Common cleanup
     }
-    
+
     /**
      * Example benchmark method - override this in concrete test classes
      */
@@ -36,7 +36,7 @@ public abstract class BasePerformanceTest {
     public void benchmarkMethod(Blackhole bh) {
         // Default implementation - override in subclasses
     }
-    
+
     protected void preventOptimization(Blackhole bh, Object result) {
         // Use Blackhole to prevent JVM optimizations
         bh.consume(result);

@@ -20,14 +20,25 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
 - [Serialization](/docs/02-architecture/serialization.md) - Serialization formats and protocols
 
 ### Guides
-- [Implementation Guide](/docs/03-guides/implementation.md) - How to implement KMIP objects
-- [Testing Guide](/docs/03-guides/testing.md) - Testing strategies and best practices
-- [Benchmarking](/docs/03-guides/benchmarking.md) - Performance testing and optimization
+- [Development Guide](/docs/03-guides/development/boilerplate.md) - Templates and patterns for KMIP development
+  - [Workflow Guide](/docs/03-guides/development/workflow.md) - Step-by-step development workflow
+  - [Implementation Patterns](/docs/03-guides/development/boilerplate.md) - Code templates for common tasks
+  - [Testing Strategies](/docs/03-guides/development/boilerplate.md#testing) - Testing patterns and best practices
+  - [Serialization](/docs/03-guides/development/boilerplate.md#serialization) - JSON, XML, and TTLV serialization patterns
+
+- [Implementation Reference](/docs/05-guides/implementation/) - Comprehensive implementation details
+  - [Core Concepts](/docs/05-guides/implementation/core/README.md) - Base interfaces and patterns
+  - [Enumerations](/docs/05-guides/implementation/enumerations/README.md) - Type-safe enumerations
+  - [Attributes](/docs/05-guides/implementation/attributes/README.md) - Attribute implementation
+  - [Structures](/docs/05-guides/implementation/structures/README.md) - Complex data structures
+  - [Serialization](/docs/05-guides/implementation/serialization/README.md) - Advanced serialization
+  - [Testing](/docs/05-guides/implementation/testing/README.md) - Advanced testing patterns
+  - [Validation](/docs/05-guides/implementation/validation/README.md) - Advanced validation
 
 ### API Reference
-- [Enumerations](/docs/04-api/enumerations.md) - Available enumeration types
-- [Attributes](/docs/04-api/attributes.md) - KMIP attribute types
-- [Structures](/docs/04-api/structures.md) - Complex KMIP data structures
+- [Enumerations](/docs/04-api/enumerations.md) - Available enumeration types and their usage
+- [Attributes](/docs/04-api/attributes.md) - KMIP attribute types and validation rules
+- [Structures](/docs/04-api/structures.md) - Complex KMIP data structures and composition
 
 ### Contributing
 - [Code Style](/docs/05-contributing/code-style.md) - Coding standards and conventions

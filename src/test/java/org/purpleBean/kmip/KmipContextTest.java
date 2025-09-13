@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {@link KmipContext} class.
@@ -79,10 +79,12 @@ class KmipContextTest {
         boolean[] executed = {false};
 
         // When
-        KmipContext.withSpec(testSpec, () -> {
-            assertThat(KmipContext.getSpec()).isSameAs(testSpec);
-            executed[0] = true;
-        });
+        KmipContext.withSpec(
+                testSpec,
+                () -> {
+                    assertThat(KmipContext.getSpec()).isSameAs(testSpec);
+                    executed[0] = true;
+                });
 
         // Then
         assertThat(executed[0]).isTrue();
@@ -97,10 +99,12 @@ class KmipContextTest {
         KmipContext.setSpec(originalSpec);
 
         // When
-        KmipContext.withSpec(KmipSpec.V1_2, () -> {
-            // Do nothing, just verify the spec is set inside the block
-            assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.V1_2);
-        });
+        KmipContext.withSpec(
+                KmipSpec.V1_2,
+                () -> {
+                    // Do nothing, just verify the spec is set inside the block
+                    assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.V1_2);
+                });
 
         // Then
         assertThat(KmipContext.getSpec()).isSameAs(originalSpec);
@@ -113,9 +117,11 @@ class KmipContextTest {
         KmipContext.clear();
 
         // When
-        KmipContext.withSpec(KmipSpec.V1_2, () -> {
-            assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.V1_2);
-        });
+        KmipContext.withSpec(
+                KmipSpec.V1_2,
+                () -> {
+                    assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.V1_2);
+                });
 
         // Then - Should revert to UnknownVersion
         assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.UnknownVersion);
@@ -129,12 +135,15 @@ class KmipContextTest {
         KmipContext.setSpec(originalSpec);
 
         // When
-        assertThatThrownBy(() ->
-            KmipContext.withSpec(KmipSpec.V1_2, () -> {
-                throw new RuntimeException("Test exception");
-            })
-        ).isInstanceOf(RuntimeException.class)
-         .hasMessage("Test exception");
+        assertThatThrownBy(
+                () ->
+                        KmipContext.withSpec(
+                                KmipSpec.V1_2,
+                                () -> {
+                                    throw new RuntimeException("Test exception");
+                                }))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Test exception");
 
         // Then
         assertThat(KmipContext.getSpec()).isSameAs(originalSpec);
@@ -148,11 +157,13 @@ class KmipContextTest {
         final KmipSpec[] threadSpec = {null};
 
         // When
-        Thread thread = new Thread(() -> {
-            // This thread should have the default UnknownVersion
-            threadSpec[0] = KmipContext.getSpec();
-        });
-        
+        Thread thread =
+                new Thread(
+                        () -> {
+                            // This thread should have the default UnknownVersion
+                            threadSpec[0] = KmipContext.getSpec();
+                        });
+
         thread.start();
         thread.join();
 

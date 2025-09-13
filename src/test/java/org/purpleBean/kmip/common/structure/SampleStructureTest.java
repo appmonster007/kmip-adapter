@@ -28,10 +28,8 @@ class SampleStructureTest extends BaseKmipTest {
             State state = KmipTestDataFactory.createState();
 
             // When
-            SampleStructure structure = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
             // Then
             assertThat(structure.getActivationDate()).isEqualTo(activationDate);
@@ -46,10 +44,8 @@ class SampleStructureTest extends BaseKmipTest {
             State validState = KmipTestDataFactory.createState();
 
             // When & Then
-            assertThatThrownBy(() -> SampleStructure.builder()
-                    .activationDate(null)
-                    .state(validState)
-                    .build())
+            assertThatThrownBy(
+                    () -> SampleStructure.builder().activationDate(null).state(validState).build())
                     .isInstanceOf(NullPointerException.class)
                     .hasMessageContaining("activationDate is marked non-null but is null");
         }
@@ -58,13 +54,12 @@ class SampleStructureTest extends BaseKmipTest {
         @DisplayName("Should accept null state")
         void shouldAcceptNullState() {
             // Given
-            ActivationDateAttribute validActivationDate = KmipTestDataFactory.createActivationDateAttribute();
+            ActivationDateAttribute validActivationDate =
+                    KmipTestDataFactory.createActivationDateAttribute();
 
             // When
-            SampleStructure sampleStructure = SampleStructure.builder()
-                    .activationDate(validActivationDate)
-                    .state(null)
-                    .build();
+            SampleStructure sampleStructure =
+                    SampleStructure.builder().activationDate(validActivationDate).state(null).build();
 
             // Then
             assertNotNull(sampleStructure);
@@ -76,16 +71,15 @@ class SampleStructureTest extends BaseKmipTest {
         @DisplayName("Should accept valid business rule combinations")
         void shouldAcceptValidBusinessRuleCombinations() {
             // Given - Create ACTIVE state with future activation date (should succeed)
-            ActivationDateAttribute futureActivationDate = ActivationDateAttribute.builder()
-                    .dateTime(java.time.OffsetDateTime.now().plusDays(1))
-                    .build();
+            ActivationDateAttribute futureActivationDate =
+                    ActivationDateAttribute.builder()
+                            .dateTime(java.time.OffsetDateTime.now().plusDays(1))
+                            .build();
             State activeState = new State(State.Standard.ACTIVE);
 
             // When
-            SampleStructure structure = SampleStructure.builder()
-                    .activationDate(futureActivationDate)
-                    .state(activeState)
-                    .build();
+            SampleStructure structure =
+                    SampleStructure.builder().activationDate(futureActivationDate).state(activeState).build();
 
             // Then
             assertThat(structure.getActivationDate()).isEqualTo(futureActivationDate);
@@ -100,10 +94,8 @@ class SampleStructureTest extends BaseKmipTest {
             State state = KmipTestDataFactory.createState();
 
             // When
-            SampleStructure structure = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
             // Then
             assertThat(structure.getActivationDate()).isEqualTo(activationDate);
@@ -158,15 +150,11 @@ class SampleStructureTest extends BaseKmipTest {
             ActivationDateAttribute activationDate = KmipTestDataFactory.createActivationDateAttribute();
             State state = KmipTestDataFactory.createState();
 
-            SampleStructure structure1 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure1 =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
-            SampleStructure structure2 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure2 =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
             // When & Then
             assertThat(structure1).isEqualTo(structure2);
@@ -178,18 +166,15 @@ class SampleStructureTest extends BaseKmipTest {
         void shouldNotBeEqualWhenActivationDateDiffers() {
             // Given
             ActivationDateAttribute activationDate1 = KmipTestDataFactory.createActivationDateAttribute();
-            ActivationDateAttribute activationDate2 = KmipTestDataFactory.createRandomActivationDateAttribute();
+            ActivationDateAttribute activationDate2 =
+                    KmipTestDataFactory.createRandomActivationDateAttribute();
             State state = KmipTestDataFactory.createState();
 
-            SampleStructure structure1 = SampleStructure.builder()
-                    .activationDate(activationDate1)
-                    .state(state)
-                    .build();
+            SampleStructure structure1 =
+                    SampleStructure.builder().activationDate(activationDate1).state(state).build();
 
-            SampleStructure structure2 = SampleStructure.builder()
-                    .activationDate(activationDate2)
-                    .state(state)
-                    .build();
+            SampleStructure structure2 =
+                    SampleStructure.builder().activationDate(activationDate2).state(state).build();
 
             // When & Then
             assertThat(structure1).isNotEqualTo(structure2);
@@ -203,15 +188,11 @@ class SampleStructureTest extends BaseKmipTest {
             State state1 = new State(State.Standard.ACTIVE);
             State state2 = new State(State.Standard.DEACTIVATED);
 
-            SampleStructure structure1 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state1)
-                    .build();
+            SampleStructure structure1 =
+                    SampleStructure.builder().activationDate(activationDate).state(state1).build();
 
-            SampleStructure structure2 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state2)
-                    .build();
+            SampleStructure structure2 =
+                    SampleStructure.builder().activationDate(activationDate).state(state2).build();
 
             // When & Then
             assertThat(structure1).isNotEqualTo(structure2);
@@ -224,15 +205,11 @@ class SampleStructureTest extends BaseKmipTest {
             ActivationDateAttribute activationDate = KmipTestDataFactory.createActivationDateAttribute();
             State state = KmipTestDataFactory.createState();
 
-            SampleStructure structure1 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure1 =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
-            SampleStructure structure2 = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build();
+            SampleStructure structure2 =
+                    SampleStructure.builder().activationDate(activationDate).state(state).build();
 
             // When & Then
             assertThat(structure1).isEqualTo(structure2);
@@ -271,7 +248,8 @@ class SampleStructureTest extends BaseKmipTest {
 
             // When & Then
             for (SampleStructure structure : structures) {
-                SerializationTestUtils.performBothRoundTrips(jsonMapper, xmlMapper, structure, SampleStructure.class);
+                SerializationTestUtils.performBothRoundTrips(
+                        jsonMapper, xmlMapper, structure, SampleStructure.class);
             }
         }
 
@@ -282,9 +260,12 @@ class SampleStructureTest extends BaseKmipTest {
             SampleStructure structure = KmipTestDataFactory.createSampleStructure();
 
             // When & Then
-            SerializationTestUtils.testJsonSerialization(jsonMapper, structure, json -> {
-                SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-            });
+            SerializationTestUtils.testJsonSerialization(
+                    jsonMapper,
+                    structure,
+                    json -> {
+                        SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
+                    });
         }
 
         @Test
@@ -324,14 +305,13 @@ class SampleStructureTest extends BaseKmipTest {
             SampleStructure original = KmipTestDataFactory.createSampleStructure();
 
             // When
-            SampleStructure restored = SerializationTestUtils.performJsonRoundTrip(
-                    jsonMapper, original, SampleStructure.class);
+            SampleStructure restored =
+                    SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, SampleStructure.class);
 
             // Then - Components should maintain their properties
             assertThat(restored.getActivationDate().getDateTime())
                     .isEqualTo(original.getActivationDate().getDateTime());
-            assertThat(restored.getState().getValue())
-                    .isEqualTo(original.getState().getValue());
+            assertThat(restored.getState().getValue()).isEqualTo(original.getState().getValue());
         }
 
         @Test
@@ -341,13 +321,12 @@ class SampleStructureTest extends BaseKmipTest {
             ActivationDateAttribute activationDate = KmipTestDataFactory.createActivationDateAttribute();
             State customState = KmipTestDataFactory.createCustomState();
 
-            SampleStructure structure = SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(customState)
-                    .build();
+            SampleStructure structure =
+                    SampleStructure.builder().activationDate(activationDate).state(customState).build();
 
             // When & Then
-            SerializationTestUtils.performBothRoundTrips(jsonMapper, xmlMapper, structure, SampleStructure.class);
+            SerializationTestUtils.performBothRoundTrips(
+                    jsonMapper, xmlMapper, structure, SampleStructure.class);
         }
     }
 
@@ -363,10 +342,8 @@ class SampleStructureTest extends BaseKmipTest {
             State state = KmipTestDataFactory.createState();
 
             // When & Then - Should validate spec compatibility during construction
-            assertThatCode(() -> SampleStructure.builder()
-                    .activationDate(activationDate)
-                    .state(state)
-                    .build())
+            assertThatCode(
+                    () -> SampleStructure.builder().activationDate(activationDate).state(state).build())
                     .doesNotThrowAnyException();
         }
 
@@ -374,13 +351,15 @@ class SampleStructureTest extends BaseKmipTest {
         @DisplayName("Should maintain immutability")
         void shouldMaintainImmutability() {
             // Given
-            ActivationDateAttribute originalActivationDate = KmipTestDataFactory.createActivationDateAttribute();
+            ActivationDateAttribute originalActivationDate =
+                    KmipTestDataFactory.createActivationDateAttribute();
             State originalState = KmipTestDataFactory.createState();
 
-            SampleStructure structure = SampleStructure.builder()
-                    .activationDate(originalActivationDate)
-                    .state(originalState)
-                    .build();
+            SampleStructure structure =
+                    SampleStructure.builder()
+                            .activationDate(originalActivationDate)
+                            .state(originalState)
+                            .build();
 
             // When - Retrieve components
             ActivationDateAttribute retrievedActivationDate = structure.getActivationDate();

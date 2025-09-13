@@ -14,13 +14,14 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Factory class for creating test data objects with consistent, reusable patterns.
- * Provides both deterministic and randomized test data generation.
+ * Factory class for creating test data objects with consistent, reusable patterns. Provides both
+ * deterministic and randomized test data generation.
  */
 public final class KmipTestDataFactory {
 
     private static final Random RANDOM = new Random(42); // Fixed seed for reproducible tests
-    private static final OffsetDateTime BASE_DATE = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
+    private static final OffsetDateTime BASE_DATE =
+            OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 
     private KmipTestDataFactory() {
         // Utility class - prevent instantiation
@@ -45,11 +46,10 @@ public final class KmipTestDataFactory {
      */
     public static List<ProtocolVersion> createProtocolVersions() {
         return List.of(
-            ProtocolVersion.of(1, 0),
-            ProtocolVersion.of(1, 1),
-            ProtocolVersion.of(1, 2),
-            ProtocolVersion.of(2, 0)
-        );
+                ProtocolVersion.of(1, 0),
+                ProtocolVersion.of(1, 1),
+                ProtocolVersion.of(1, 2),
+                ProtocolVersion.of(2, 0));
     }
 
     /**
@@ -70,7 +70,8 @@ public final class KmipTestDataFactory {
      * Creates a custom State for testing extensibility.
      */
     public static State createCustomState() {
-        State.Value customValue = State.register(-1000050, "TestCustom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+        State.Value customValue =
+                State.register(-1000050, "TestCustom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
         return new State(customValue);
     }
 
@@ -79,12 +80,11 @@ public final class KmipTestDataFactory {
      */
     public static List<State> createStates() {
         return List.of(
-            new State(State.Standard.PRE_ACTIVE),
-            new State(State.Standard.ACTIVE),
-            new State(State.Standard.DEACTIVATED),
-            new State(State.Standard.COMPROMISED),
-            new State(State.Standard.DESTROYED)
-        );
+                new State(State.Standard.PRE_ACTIVE),
+                new State(State.Standard.ACTIVE),
+                new State(State.Standard.DEACTIVATED),
+                new State(State.Standard.COMPROMISED),
+                new State(State.Standard.DESTROYED));
     }
 
     /**
@@ -92,37 +92,35 @@ public final class KmipTestDataFactory {
      */
     public static ActivationDateAttribute createActivationDateAttribute() {
         return ActivationDateAttribute.builder()
-            .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-            .build();
+                .dateTime(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                .build();
     }
-    
+
     public static ActivationDateAttribute createNullActivationDateAttribute() {
         // Since @NonNull is enforced, we cannot create with null dateTime
         // Return a valid attribute with a default date instead
         return ActivationDateAttribute.builder()
-            .dateTime(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
-            .build();
+                .dateTime(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                .build();
     }
 
     /**
      * Creates an ActivationDateAttribute with a specific date.
      */
     public static ActivationDateAttribute createActivationDateAttribute(OffsetDateTime dateTime) {
-        return ActivationDateAttribute.builder()
-                .dateTime(dateTime)
-                .build();
+        return ActivationDateAttribute.builder().dateTime(dateTime).build();
     }
 
     /**
      * Creates a random ActivationDateAttribute for testing edge cases.
      */
     public static ActivationDateAttribute createRandomActivationDateAttribute() {
-        OffsetDateTime randomDate = BASE_DATE.plusDays(RANDOM.nextInt(365))
-                .plusHours(RANDOM.nextInt(24))
-                .plusMinutes(RANDOM.nextInt(60));
-        return ActivationDateAttribute.builder()
-                .dateTime(randomDate)
-                .build();
+        OffsetDateTime randomDate =
+                BASE_DATE
+                        .plusDays(RANDOM.nextInt(365))
+                        .plusHours(RANDOM.nextInt(24))
+                        .plusMinutes(RANDOM.nextInt(60));
+        return ActivationDateAttribute.builder().dateTime(randomDate).build();
     }
 
     /**
@@ -138,11 +136,9 @@ public final class KmipTestDataFactory {
     /**
      * Creates a SampleStructure with specific components.
      */
-    public static SampleStructure createSampleStructure(ActivationDateAttribute activationDate, State state) {
-        return SampleStructure.builder()
-                .activationDate(activationDate)
-                .state(state)
-                .build();
+    public static SampleStructure createSampleStructure(
+            ActivationDateAttribute activationDate, State state) {
+        return SampleStructure.builder().activationDate(activationDate).state(state).build();
     }
 
     /**
@@ -150,10 +146,12 @@ public final class KmipTestDataFactory {
      */
     public static List<SampleStructure> createSampleStructures(int count) {
         return java.util.stream.IntStream.range(0, count)
-                .mapToObj(i -> SampleStructure.builder()
-                        .activationDate(createRandomActivationDateAttribute())
-                        .state(createState(State.Standard.values()[i % State.Standard.values().length]))
-                        .build())
+                .mapToObj(
+                        i ->
+                                SampleStructure.builder()
+                                        .activationDate(createRandomActivationDateAttribute())
+                                        .state(createState(State.Standard.values()[i % State.Standard.values().length]))
+                                        .build())
                 .toList();
     }
 
@@ -161,7 +159,8 @@ public final class KmipTestDataFactory {
      * Creates a custom KmipTag for testing extensibility.
      */
     public static KmipTag.Value createCustomKmipTag() {
-        return KmipTag.register(0x540001, "TestCustomTag", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+        return KmipTag.register(
+                0x540001, "TestCustomTag", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
     }
 
     /**
@@ -169,7 +168,12 @@ public final class KmipTestDataFactory {
      */
     public static List<KmipTag.Value> createCustomKmipTags(int count) {
         return java.util.stream.IntStream.range(0, count)
-                .mapToObj(i -> KmipTag.register(0x540001 + i, "TestCustomTag" + i, Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
+                .mapToObj(
+                        i ->
+                                KmipTag.register(
+                                        0x540001 + i,
+                                        "TestCustomTag" + i,
+                                        Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)))
                 .toList();
     }
 

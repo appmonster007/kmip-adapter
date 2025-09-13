@@ -11,7 +11,7 @@ import org.purpleBean.kmip.test.KmipAssertions;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
 import org.purpleBean.kmip.test.SerializationTestUtils;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ProtocolVersion Tests")
 class ProtocolVersionTest extends BaseKmipTest {
@@ -26,15 +26,15 @@ class ProtocolVersionTest extends BaseKmipTest {
             // Given
             int major = 1;
             int minor = 2;
-            
+
             // When
             ProtocolVersion version = ProtocolVersion.of(major, minor);
-            
+
             // Then
             KmipAssertions.assertThat(version)
-                .hasVersion(major, minor)
-                .hasValidStructure()
-                .isCompatibleWith(KmipSpec.V1_2);
+                    .hasVersion(major, minor)
+                    .hasValidStructure()
+                    .isCompatibleWith(KmipSpec.V1_2);
         }
 
         @Test
@@ -43,36 +43,25 @@ class ProtocolVersionTest extends BaseKmipTest {
             // Given
             ProtocolVersion.ProtocolVersionMajor major = new ProtocolVersion.ProtocolVersionMajor(1);
             ProtocolVersion.ProtocolVersionMinor minor = new ProtocolVersion.ProtocolVersionMinor(2);
-            
+
             // When
             ProtocolVersion version = ProtocolVersion.of(major, minor);
-            
+
             // Then
-            KmipAssertions.assertThat(version)
-                .hasVersion(1, 2)
-                .hasValidStructure();
+            KmipAssertions.assertThat(version).hasVersion(1, 2).hasValidStructure();
             assertThat(version.getProtocolVersionMajor()).isEqualTo(major);
             assertThat(version.getProtocolVersionMinor()).isEqualTo(minor);
         }
 
         @ParameterizedTest
-        @CsvSource({
-            "0, 0",
-            "1, 0",
-            "1, 1",
-            "1, 2",
-            "2, 0",
-            "99, 99"
-        })
+        @CsvSource({"0, 0", "1, 0", "1, 1", "1, 2", "2, 0", "99, 99"})
         @DisplayName("Should handle various version combinations")
         void shouldHandleVariousVersionCombinations(int major, int minor) {
             // When
             ProtocolVersion version = ProtocolVersion.of(major, minor);
-            
+
             // Then
-            KmipAssertions.assertThat(version)
-                .hasVersion(major, minor)
-                .hasValidStructure();
+            KmipAssertions.assertThat(version).hasVersion(major, minor).hasValidStructure();
         }
 
         @Test
@@ -80,7 +69,7 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHaveCorrectKmipStructureProperties() {
             // Given
             ProtocolVersion version = KmipTestDataFactory.createProtocolVersion();
-            
+
             // When & Then
             assertThat(version.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.PROTOCOL_VERSION);
             assertThat(version.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
@@ -98,10 +87,11 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldCreateProtocolVersionMajorCorrectly() {
             // Given
             int majorValue = 1;
-            
+
             // When
-            ProtocolVersion.ProtocolVersionMajor major = new ProtocolVersion.ProtocolVersionMajor(majorValue);
-            
+            ProtocolVersion.ProtocolVersionMajor major =
+                    new ProtocolVersion.ProtocolVersionMajor(majorValue);
+
             // Then
             assertThat(major.getValue()).isEqualTo(majorValue);
             assertThat(major.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.PROTOCOL_VERSION_MAJOR);
@@ -115,10 +105,11 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldCreateProtocolVersionMinorCorrectly() {
             // Given
             int minorValue = 2;
-            
+
             // When
-            ProtocolVersion.ProtocolVersionMinor minor = new ProtocolVersion.ProtocolVersionMinor(minorValue);
-            
+            ProtocolVersion.ProtocolVersionMinor minor =
+                    new ProtocolVersion.ProtocolVersionMinor(minorValue);
+
             // Then
             assertThat(minor.getValue()).isEqualTo(minorValue);
             assertThat(minor.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.PROTOCOL_VERSION_MINOR);
@@ -133,7 +124,7 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleVariousMajorVersionValues(int value) {
             // When
             ProtocolVersion.ProtocolVersionMajor major = new ProtocolVersion.ProtocolVersionMajor(value);
-            
+
             // Then
             assertThat(major.getValue()).isEqualTo(value);
             assertThat(major.toString()).isEqualTo(String.valueOf(value));
@@ -145,7 +136,7 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleVariousMinorVersionValues(int value) {
             // When
             ProtocolVersion.ProtocolVersionMinor minor = new ProtocolVersion.ProtocolVersionMinor(value);
-            
+
             // Then
             assertThat(minor.getValue()).isEqualTo(value);
             assertThat(minor.toString()).isEqualTo(String.valueOf(value));
@@ -162,7 +153,7 @@ class ProtocolVersionTest extends BaseKmipTest {
             // Given
             ProtocolVersion version1 = ProtocolVersion.of(1, 2);
             ProtocolVersion version2 = ProtocolVersion.of(1, 2);
-            
+
             // When & Then
             assertThat(version1).isEqualTo(version2);
             assertThat(version1.hashCode()).isEqualTo(version2.hashCode());
@@ -174,7 +165,7 @@ class ProtocolVersionTest extends BaseKmipTest {
             // Given
             ProtocolVersion version1 = ProtocolVersion.of(1, 2);
             ProtocolVersion version2 = ProtocolVersion.of(2, 2);
-            
+
             // When & Then
             assertThat(version1).isNotEqualTo(version2);
         }
@@ -185,7 +176,7 @@ class ProtocolVersionTest extends BaseKmipTest {
             // Given
             ProtocolVersion version1 = ProtocolVersion.of(1, 2);
             ProtocolVersion version2 = ProtocolVersion.of(1, 3);
-            
+
             // When & Then
             assertThat(version1).isNotEqualTo(version2);
         }
@@ -198,7 +189,7 @@ class ProtocolVersionTest extends BaseKmipTest {
             ProtocolVersion.ProtocolVersionMajor major2 = new ProtocolVersion.ProtocolVersionMajor(1);
             ProtocolVersion.ProtocolVersionMinor minor1 = new ProtocolVersion.ProtocolVersionMinor(2);
             ProtocolVersion.ProtocolVersionMinor minor2 = new ProtocolVersion.ProtocolVersionMinor(2);
-            
+
             // When & Then
             assertThat(major1).isEqualTo(major2);
             assertThat(minor1).isEqualTo(minor2);
@@ -216,29 +207,30 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHaveCorrectStringRepresentation() {
             // Given
             ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
+
             // When
             String stringRepresentation = version.toString();
-            
+
             // Then
             assertThat(stringRepresentation).isEqualTo("KMIP-ProtocolVersion-V1.2");
         }
 
         @ParameterizedTest
         @CsvSource({
-            "0, 0, KMIP-ProtocolVersion-V0.0",
-            "1, 0, KMIP-ProtocolVersion-V1.0",
-            "1, 2, KMIP-ProtocolVersion-V1.2",
-            "2, 1, KMIP-ProtocolVersion-V2.1"
+                "0, 0, KMIP-ProtocolVersion-V0.0",
+                "1, 0, KMIP-ProtocolVersion-V1.0",
+                "1, 2, KMIP-ProtocolVersion-V1.2",
+                "2, 1, KMIP-ProtocolVersion-V2.1"
         })
         @DisplayName("Should format string representation correctly for various versions")
-        void shouldFormatStringRepresentationCorrectlyForVariousVersions(int major, int minor, String expected) {
+        void shouldFormatStringRepresentationCorrectlyForVariousVersions(
+                int major, int minor, String expected) {
             // Given
             ProtocolVersion version = ProtocolVersion.of(major, minor);
-            
+
             // When
             String actual = version.toString();
-            
+
             // Then
             assertThat(actual).isEqualTo(expected);
         }
@@ -253,13 +245,12 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeJsonCorrectly() {
             // Given
             ProtocolVersion original = KmipTestDataFactory.createProtocolVersion();
-            
+
             // When & Then
-            ProtocolVersion restored = SerializationTestUtils.performJsonRoundTrip(
-                jsonMapper, original, ProtocolVersion.class);
-            
-            KmipAssertions.assertThat(restored)
-                .hasVersion(original.getMajor(), original.getMinor());
+            ProtocolVersion restored =
+                    SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, ProtocolVersion.class);
+
+            KmipAssertions.assertThat(restored).hasVersion(original.getMajor(), original.getMinor());
         }
 
         @Test
@@ -267,13 +258,12 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldSerializeAndDeserializeXmlCorrectly() {
             // Given
             ProtocolVersion original = KmipTestDataFactory.createProtocolVersion();
-            
+
             // When & Then
-            ProtocolVersion restored = SerializationTestUtils.performXmlRoundTrip(
-                xmlMapper, original, ProtocolVersion.class);
-            
-            KmipAssertions.assertThat(restored)
-                .hasVersion(original.getMajor(), original.getMinor());
+            ProtocolVersion restored =
+                    SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, ProtocolVersion.class);
+
+            KmipAssertions.assertThat(restored).hasVersion(original.getMajor(), original.getMinor());
         }
 
         @Test
@@ -281,10 +271,11 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleMultipleVersionsInSerialization() {
             // Given
             var versions = KmipTestDataFactory.createProtocolVersions();
-            
+
             // When & Then
             for (ProtocolVersion version : versions) {
-                SerializationTestUtils.performBothRoundTrips(jsonMapper, xmlMapper, version, ProtocolVersion.class);
+                SerializationTestUtils.performBothRoundTrips(
+                        jsonMapper, xmlMapper, version, ProtocolVersion.class);
             }
         }
 
@@ -293,12 +284,15 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldProduceValidJsonStructure() {
             // Given
             ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
+
             // When & Then
-            SerializationTestUtils.testJsonSerialization(jsonMapper, version, json -> {
-                SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-                assertThat(json).contains("\"ProtocolVersion\"");
-            });
+            SerializationTestUtils.testJsonSerialization(
+                    jsonMapper,
+                    version,
+                    json -> {
+                        SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
+                        assertThat(json).contains("\"ProtocolVersion\"");
+                    });
         }
 
         @Test
@@ -306,11 +300,14 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldProduceValidXmlStructure() {
             // Given
             ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
+
             // When & Then
-            SerializationTestUtils.testXmlSerialization(xmlMapper, version, xml -> {
-                SerializationTestUtils.validateXmlStructure(xml, "ProtocolVersion");
-            });
+            SerializationTestUtils.testXmlSerialization(
+                    xmlMapper,
+                    version,
+                    xml -> {
+                        SerializationTestUtils.validateXmlStructure(xml, "ProtocolVersion");
+                    });
         }
     }
 
@@ -323,11 +320,9 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleZeroVersions() {
             // Given & When
             ProtocolVersion version = KmipTestDataFactory.BoundaryData.minProtocolVersion();
-            
+
             // Then
-            KmipAssertions.assertThat(version)
-                .hasVersion(0, 0)
-                .hasValidStructure();
+            KmipAssertions.assertThat(version).hasVersion(0, 0).hasValidStructure();
         }
 
         @Test
@@ -335,11 +330,11 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleMaximumIntegerVersions() {
             // Given & When
             ProtocolVersion version = KmipTestDataFactory.BoundaryData.maxProtocolVersion();
-            
+
             // Then
             KmipAssertions.assertThat(version)
-                .hasVersion(Integer.MAX_VALUE, Integer.MAX_VALUE)
-                .hasValidStructure();
+                    .hasVersion(Integer.MAX_VALUE, Integer.MAX_VALUE)
+                    .hasValidStructure();
         }
 
         @Test
@@ -347,11 +342,9 @@ class ProtocolVersionTest extends BaseKmipTest {
         void shouldHandleNegativeVersions() {
             // Given & When
             ProtocolVersion version = KmipTestDataFactory.ErrorData.negativeProtocolVersion();
-            
+
             // Then
-            KmipAssertions.assertThat(version)
-                .hasVersion(-1, -1)
-                .hasValidStructure();
+            KmipAssertions.assertThat(version).hasVersion(-1, -1).hasValidStructure();
         }
 
         @Test
@@ -361,10 +354,10 @@ class ProtocolVersionTest extends BaseKmipTest {
             ProtocolVersion version = ProtocolVersion.of(1, 2);
             int originalMajor = version.getMajor();
             int originalMinor = version.getMinor();
-            
+
             // When - Attempt to modify through getters (should not be possible)
             // The objects are immutable, so we just verify they remain unchanged
-            
+
             // Then
             assertThat(version.getMajor()).isEqualTo(originalMajor);
             assertThat(version.getMinor()).isEqualTo(originalMinor);

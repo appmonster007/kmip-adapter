@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
- * Utility class for testing serialization and deserialization of KMIP objects.
- * Provides reusable patterns for round-trip testing and validation.
+ * Utility class for testing serialization and deserialization of KMIP objects. Provides reusable
+ * patterns for round-trip testing and validation.
  */
 public final class SerializationTestUtils {
 
@@ -21,10 +21,10 @@ public final class SerializationTestUtils {
     /**
      * Performs a JSON round-trip test: serialize to JSON, then deserialize back to object.
      *
-     * @param mapper the ObjectMapper to use
+     * @param mapper   the ObjectMapper to use
      * @param original the original object to test
-     * @param clazz the class type for deserialization
-     * @param <T> the type of object being tested
+     * @param clazz    the class type for deserialization
+     * @param <T>      the type of object being tested
      * @return the deserialized object for further assertions
      */
     public static <T> T performJsonRoundTrip(ObjectMapper mapper, T original, Class<T> clazz) {
@@ -41,10 +41,10 @@ public final class SerializationTestUtils {
     /**
      * Performs an XML round-trip test: serialize to XML, then deserialize back to object.
      *
-     * @param mapper the XmlMapper to use
+     * @param mapper   the XmlMapper to use
      * @param original the original object to test
-     * @param clazz the class type for deserialization
-     * @param <T> the type of object being tested
+     * @param clazz    the class type for deserialization
+     * @param <T>      the type of object being tested
      * @return the deserialized object for further assertions
      */
     public static <T> T performXmlRoundTrip(XmlMapper mapper, T original, Class<T> clazz) {
@@ -62,13 +62,13 @@ public final class SerializationTestUtils {
      * Performs both JSON and XML round-trip tests.
      *
      * @param jsonMapper the ObjectMapper for JSON testing
-     * @param xmlMapper the XmlMapper for XML testing
-     * @param original the original object to test
-     * @param clazz the class type for deserialization
-     * @param <T> the type of object being tested
+     * @param xmlMapper  the XmlMapper for XML testing
+     * @param original   the original object to test
+     * @param clazz      the class type for deserialization
+     * @param <T>        the type of object being tested
      */
-    public static <T> void performBothRoundTrips(ObjectMapper jsonMapper, XmlMapper xmlMapper, 
-                                                T original, Class<T> clazz) {
+    public static <T> void performBothRoundTrips(
+            ObjectMapper jsonMapper, XmlMapper xmlMapper, T original, Class<T> clazz) {
         performJsonRoundTrip(jsonMapper, original, clazz);
         performXmlRoundTrip(xmlMapper, original, clazz);
     }
@@ -76,13 +76,13 @@ public final class SerializationTestUtils {
     /**
      * Tests JSON serialization with custom validation.
      *
-     * @param mapper the ObjectMapper to use
-     * @param original the original object to serialize
+     * @param mapper        the ObjectMapper to use
+     * @param original      the original object to serialize
      * @param jsonValidator custom validation logic for the JSON string
-     * @param <T> the type of object being tested
+     * @param <T>           the type of object being tested
      */
-    public static <T> void testJsonSerialization(ObjectMapper mapper, T original, 
-                                                Consumer<String> jsonValidator) {
+    public static <T> void testJsonSerialization(
+            ObjectMapper mapper, T original, Consumer<String> jsonValidator) {
         try {
             String json = mapper.writeValueAsString(original);
             jsonValidator.accept(json);
@@ -94,13 +94,13 @@ public final class SerializationTestUtils {
     /**
      * Tests XML serialization with custom validation.
      *
-     * @param mapper the XmlMapper to use
-     * @param original the original object to serialize
+     * @param mapper       the XmlMapper to use
+     * @param original     the original object to serialize
      * @param xmlValidator custom validation logic for the XML string
-     * @param <T> the type of object being tested
+     * @param <T>          the type of object being tested
      */
-    public static <T> void testXmlSerialization(XmlMapper mapper, T original, 
-                                               Consumer<String> xmlValidator) {
+    public static <T> void testXmlSerialization(
+            XmlMapper mapper, T original, Consumer<String> xmlValidator) {
         try {
             String xml = mapper.writeValueAsString(original);
             xmlValidator.accept(xml);
@@ -113,9 +113,9 @@ public final class SerializationTestUtils {
      * Tests JSON deserialization from a string.
      *
      * @param mapper the ObjectMapper to use
-     * @param json the JSON string to deserialize
-     * @param clazz the class type for deserialization
-     * @param <T> the type of object being tested
+     * @param json   the JSON string to deserialize
+     * @param clazz  the class type for deserialization
+     * @param <T>    the type of object being tested
      * @return the deserialized object
      */
     public static <T> T testJsonDeserialization(ObjectMapper mapper, String json, Class<T> clazz) {
@@ -130,9 +130,9 @@ public final class SerializationTestUtils {
      * Tests XML deserialization from a string.
      *
      * @param mapper the XmlMapper to use
-     * @param xml the XML string to deserialize
-     * @param clazz the class type for deserialization
-     * @param <T> the type of object being tested
+     * @param xml    the XML string to deserialize
+     * @param clazz  the class type for deserialization
+     * @param <T>    the type of object being tested
      * @return the deserialized object
      */
     public static <T> T testXmlDeserialization(XmlMapper mapper, String xml, Class<T> clazz) {
@@ -146,7 +146,7 @@ public final class SerializationTestUtils {
     /**
      * Validates that serialization produces expected JSON structure.
      *
-     * @param json the JSON string to validate
+     * @param json           the JSON string to validate
      * @param expectedFields the fields that should be present in the JSON
      */
     public static void validateJsonStructure(String json, String... expectedFields) {
@@ -159,7 +159,7 @@ public final class SerializationTestUtils {
     /**
      * Validates that serialization produces expected XML structure.
      *
-     * @param xml the XML string to validate
+     * @param xml              the XML string to validate
      * @param expectedElements the elements that should be present in the XML
      */
     public static void validateXmlStructure(String xml, String... expectedElements) {
@@ -172,10 +172,10 @@ public final class SerializationTestUtils {
     /**
      * Tests that serialization handles null values appropriately.
      *
-     * @param mapper the ObjectMapper to use
+     * @param mapper          the ObjectMapper to use
      * @param objectWithNulls an object containing null values
-     * @param clazz the class type
-     * @param <T> the type of object being tested
+     * @param clazz           the class type
+     * @param <T>             the type of object being tested
      */
     public static <T> void testNullHandling(ObjectMapper mapper, T objectWithNulls, Class<T> clazz) {
         try {

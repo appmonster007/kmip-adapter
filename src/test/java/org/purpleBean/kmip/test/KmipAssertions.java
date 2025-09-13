@@ -2,15 +2,11 @@ package org.purpleBean.kmip.test;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.*;
 
 /**
- * Custom AssertJ assertions for KMIP-specific objects.
- * Provides fluent, readable assertions for domain objects.
+ * Custom AssertJ assertions for KMIP-specific objects. Provides fluent, readable assertions for
+ * domain objects.
  */
 public class KmipAssertions extends Assertions {
 
@@ -29,7 +25,8 @@ public class KmipAssertions extends Assertions {
     /**
      * Custom assertion for ProtocolVersion objects.
      */
-    public static class ProtocolVersionAssert extends AbstractAssert<ProtocolVersionAssert, ProtocolVersion> {
+    public static class ProtocolVersionAssert
+            extends AbstractAssert<ProtocolVersionAssert, ProtocolVersion> {
 
         public ProtocolVersionAssert(ProtocolVersion actual) {
             super(actual, ProtocolVersionAssert.class);
@@ -38,7 +35,8 @@ public class KmipAssertions extends Assertions {
         public ProtocolVersionAssert hasMajorVersion(int expectedMajor) {
             isNotNull();
             if (actual.getMajor() != expectedMajor) {
-                failWithMessage("Expected major version <%d> but was <%d>", expectedMajor, actual.getMajor());
+                failWithMessage(
+                        "Expected major version <%d> but was <%d>", expectedMajor, actual.getMajor());
             }
             return this;
         }
@@ -46,7 +44,8 @@ public class KmipAssertions extends Assertions {
         public ProtocolVersionAssert hasMinorVersion(int expectedMinor) {
             isNotNull();
             if (actual.getMinor() != expectedMinor) {
-                failWithMessage("Expected minor version <%d> but was <%d>", expectedMinor, actual.getMinor());
+                failWithMessage(
+                        "Expected minor version <%d> but was <%d>", expectedMinor, actual.getMinor());
             }
             return this;
         }
@@ -58,7 +57,8 @@ public class KmipAssertions extends Assertions {
         public ProtocolVersionAssert isCompatibleWith(KmipSpec spec) {
             isNotNull();
             if (!actual.isSupportedFor(spec)) {
-                failWithMessage("Expected protocol version to be compatible with <%s> but it was not", spec);
+                failWithMessage(
+                        "Expected protocol version to be compatible with <%s> but it was not", spec);
             }
             return this;
         }
@@ -84,7 +84,8 @@ public class KmipAssertions extends Assertions {
         public KmipDataTypeAssert hasKmipTag(KmipTag.Value expectedTag) {
             isNotNull();
             if (!actual.getKmipTag().getValue().equals(expectedTag)) {
-                failWithMessage("Expected KMIP tag <%s> but was <%s>", expectedTag, actual.getKmipTag().getValue());
+                failWithMessage(
+                        "Expected KMIP tag <%s> but was <%s>", expectedTag, actual.getKmipTag().getValue());
             }
             return this;
         }
@@ -92,7 +93,8 @@ public class KmipAssertions extends Assertions {
         public KmipDataTypeAssert hasEncodingType(EncodingType expectedType) {
             isNotNull();
             if (!actual.getEncodingType().equals(expectedType)) {
-                failWithMessage("Expected encoding type <%s> but was <%s>", expectedType, actual.getEncodingType());
+                failWithMessage(
+                        "Expected encoding type <%s> but was <%s>", expectedType, actual.getEncodingType());
             }
             return this;
         }
@@ -126,7 +128,8 @@ public class KmipAssertions extends Assertions {
         public KmipTagAssert hasValue(int expectedValue) {
             isNotNull();
             if (actual.getValue().getValue() != expectedValue) {
-                failWithMessage("Expected tag value <%d> but was <%d>", expectedValue, actual.getValue().getValue());
+                failWithMessage(
+                        "Expected tag value <%d> but was <%d>", expectedValue, actual.getValue().getValue());
             }
             return this;
         }
@@ -134,7 +137,9 @@ public class KmipAssertions extends Assertions {
         public KmipTagAssert hasDescription(String expectedDescription) {
             isNotNull();
             if (!actual.getDescription().equals(expectedDescription)) {
-                failWithMessage("Expected tag description <%s> but was <%s>", expectedDescription, actual.getDescription());
+                failWithMessage(
+                        "Expected tag description <%s> but was <%s>",
+                        expectedDescription, actual.getDescription());
             }
             return this;
         }
@@ -143,8 +148,9 @@ public class KmipAssertions extends Assertions {
             isNotNull();
             byte[] tagBytes = actual.getTagBytes();
             if (tagBytes == null || tagBytes.length != 3) {
-                failWithMessage("Expected tag bytes to be 3 bytes long but was <%d>", 
-                    tagBytes != null ? tagBytes.length : 0);
+                failWithMessage(
+                        "Expected tag bytes to be 3 bytes long but was <%d>",
+                        tagBytes != null ? tagBytes.length : 0);
             }
             return this;
         }

@@ -8,7 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("KmipSpec Tests")
 class KmipSpecTest extends BaseKmipTest {
@@ -31,7 +32,7 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldHaveCorrectV12Properties() {
             // When
             KmipSpec v12 = KmipSpec.V1_2;
-            
+
             // Then
             assertThat(v12.getMajor()).isEqualTo(1);
             assertThat(v12.getMinor()).isEqualTo(2);
@@ -43,7 +44,7 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldHaveCorrectUnknownVersionProperties() {
             // When
             KmipSpec unknown = KmipSpec.UnknownVersion;
-            
+
             // Then
             assertThat(unknown.getMajor()).isEqualTo(-1);
             assertThat(unknown.getMinor()).isEqualTo(-1);
@@ -60,10 +61,10 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldFindV12FromProtocolVersion() {
             // Given
             ProtocolVersion protocolVersion = ProtocolVersion.of(1, 2);
-            
+
             // When
             KmipSpec spec = KmipSpec.fromValue(protocolVersion);
-            
+
             // Then
             assertThat(spec).isEqualTo(KmipSpec.V1_2);
         }
@@ -73,26 +74,23 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldThrowExceptionForUnsupportedVersion() {
             // Given
             ProtocolVersion unsupportedVersion = ProtocolVersion.of(99, 99);
-            
+
             // When & Then
             assertThatThrownBy(() -> KmipSpec.fromValue(unsupportedVersion))
-                .isInstanceOf(RuntimeException.class);
+                    .isInstanceOf(RuntimeException.class);
         }
 
         @ParameterizedTest
-        @CsvSource({
-            "1, 2, V1_2",
-            "-1, -1, UnknownVersion"
-        })
+        @CsvSource({"1, 2, V1_2", "-1, -1, UnknownVersion"})
         @DisplayName("Should map protocol versions correctly")
         void shouldMapProtocolVersionsCorrectly(int major, int minor, String expectedSpecName) {
             // Given
             ProtocolVersion protocolVersion = ProtocolVersion.of(major, minor);
             KmipSpec expectedSpec = KmipSpec.valueOf(expectedSpecName);
-            
+
             // When
             KmipSpec actualSpec = KmipSpec.fromValue(protocolVersion);
-            
+
             // Then
             assertThat(actualSpec).isEqualTo(expectedSpec);
         }
@@ -107,10 +105,10 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldFormatVersionStringCorrectly() {
             // Given
             KmipSpec v12 = KmipSpec.V1_2;
-            
+
             // When
             String versionString = v12.toString();
-            
+
             // Then
             assertThat(versionString).matches("V\\d+\\.\\d+");
             assertThat(versionString).isEqualTo("V1.2");
@@ -121,10 +119,10 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldHandleNegativeVersionsInStringFormat() {
             // Given
             KmipSpec unknown = KmipSpec.UnknownVersion;
-            
+
             // When
             String versionString = unknown.toString();
-            
+
             // Then
             assertThat(versionString).isEqualTo("V-1.-1");
         }
@@ -139,7 +137,7 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldBeEqualToItself() {
             // Given
             KmipSpec spec = KmipSpec.V1_2;
-            
+
             // When & Then
             assertThat(spec).isEqualTo(spec);
             assertThat(spec.hashCode()).isEqualTo(spec.hashCode());
@@ -151,7 +149,7 @@ class KmipSpecTest extends BaseKmipTest {
             // Given
             KmipSpec spec1 = KmipSpec.V1_2;
             KmipSpec spec2 = KmipSpec.V1_2;
-            
+
             // When & Then
             assertThat(spec1).isEqualTo(spec2);
             assertThat(spec1.hashCode()).isEqualTo(spec2.hashCode());
@@ -163,7 +161,7 @@ class KmipSpecTest extends BaseKmipTest {
             // Given
             KmipSpec v12 = KmipSpec.V1_2;
             KmipSpec unknown = KmipSpec.UnknownVersion;
-            
+
             // When & Then
             assertThat(v12).isNotEqualTo(unknown);
         }
@@ -178,7 +176,7 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldHandleVersionCompatibilityChecks() {
             // Given
             KmipSpec v12 = KmipSpec.V1_2;
-            
+
             // When & Then - These are basic checks, actual compatibility logic
             // would be implemented in the components that use KmipSpec
             assertThat(v12.getMajor()).isPositive();
@@ -191,7 +189,7 @@ class KmipSpecTest extends BaseKmipTest {
             // Given
             KmipSpec known = KmipSpec.V1_2;
             KmipSpec unknown = KmipSpec.UnknownVersion;
-            
+
             // When & Then
             assertThat(known.getMajor()).isPositive();
             assertThat(known.getMinor()).isNotNegative();
@@ -208,8 +206,7 @@ class KmipSpecTest extends BaseKmipTest {
         @DisplayName("Should handle null ProtocolVersion gracefully")
         void shouldHandleNullProtocolVersionGracefully() {
             // When & Then
-            assertThatThrownBy(() -> KmipSpec.fromValue(null))
-                .isInstanceOf(NullPointerException.class);
+            assertThatThrownBy(() -> KmipSpec.fromValue(null)).isInstanceOf(NullPointerException.class);
         }
 
         @Test
@@ -217,11 +214,11 @@ class KmipSpecTest extends BaseKmipTest {
         void shouldMaintainEnumContract() {
             // Given
             KmipSpec[] allSpecs = KmipSpec.values();
-            
+
             // When & Then
             assertThat(allSpecs).isNotEmpty();
             assertThat(allSpecs).contains(KmipSpec.V1_2, KmipSpec.UnknownVersion);
-            
+
             // Verify valueOf works for all enum constants
             for (KmipSpec spec : allSpecs) {
                 assertThat(KmipSpec.valueOf(spec.name())).isEqualTo(spec);
@@ -234,12 +231,10 @@ class KmipSpecTest extends BaseKmipTest {
             // Given - Test with extreme values that might be added in future
             ProtocolVersion maxVersion = ProtocolVersion.of(Integer.MAX_VALUE, Integer.MAX_VALUE);
             ProtocolVersion minVersion = ProtocolVersion.of(Integer.MIN_VALUE, Integer.MIN_VALUE);
-            
+
             // When & Then - These should throw exceptions as they're not registered
-            assertThatThrownBy(() -> KmipSpec.fromValue(maxVersion))
-                .isInstanceOf(RuntimeException.class);
-            assertThatThrownBy(() -> KmipSpec.fromValue(minVersion))
-                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> KmipSpec.fromValue(maxVersion)).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> KmipSpec.fromValue(minVersion)).isInstanceOf(RuntimeException.class);
         }
     }
 }
