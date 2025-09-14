@@ -1,5 +1,7 @@
 # KMIP Attributes
 
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Attribute](../03-guides/boilerplate-attribute.md)
+
 ## Overview
 
 Attributes in KMIP represent properties and characteristics of managed objects. This document covers the standard attributes and how to work with them.

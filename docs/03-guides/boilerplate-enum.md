@@ -1,5 +1,109 @@
 # Boilerplate: DemoStatus (KmipEnumeration Implementation)
 
+## Minimal Boilerplate (Copy-Ready)
+
+### Main Code: `FooStatus` (implements `KmipEnumeration`)
+
+```java
+package org.purpleBean.kmip.foo.enumeration;
+
+import lombok.*;
+import org.purpleBean.kmip.*;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Data
+@Builder
+public class FooStatus implements KmipEnumeration {
+    public interface Value extends KmipEnumeration {
+        boolean isSupportedFor(KmipSpec spec);
+    }
+
+    @Getter
+    public enum Standard implements Value {
+        READY(0x01, "Ready");
+
+        private final int value; private final String description;
+        Standard(int v, String d) { this.value = v; this.description = d; }
+        public int getValue() { return value; }
+        public String getDescription() { return description; }
+        public boolean isSupportedFor(KmipSpec spec) { return true; }
+    }
+
+    private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<String, Value> NAME_REGISTRY = new ConcurrentHashMap<>();
+    static {
+        for (Standard s : Standard.values()) {
+            VALUE_REGISTRY.put(s.getValue(), s);
+            NAME_REGISTRY.put(s.getDescription(), s);
+        }
+    }
+
+    public static Value register(int value, String description, Set<KmipSpec> supported) {
+        Value ext = new Value() {
+            public int getValue() { return value; }
+            public String getDescription() { return description; }
+            public boolean isSupportedFor(KmipSpec spec) { return supported.contains(spec); }
+        };
+        VALUE_REGISTRY.put(value, ext);
+        NAME_REGISTRY.put(description, ext);
+        return ext;
+    }
+
+    public static Value fromValue(KmipSpec spec, int value) {
+        Value v = VALUE_REGISTRY.get(value);
+        if (v == null || !v.isSupportedFor(spec)) throw new IllegalArgumentException("Unknown or unsupported value: " + value);
+        return v;
+    }
+
+    public static Value fromName(KmipSpec spec, String name) {
+        Value v = NAME_REGISTRY.get(name);
+        if (v == null || !v.isSupportedFor(spec)) throw new IllegalArgumentException("Unknown or unsupported name: " + name);
+        return v;
+    }
+
+    @NonNull private final Value value;
+}
+```
+
+### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/FooStatusJsonTest.java`
+
+```java
+package org.purpleBean.kmip.codec.json;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.foo.enumeration.FooStatus;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.SerializationTestUtils;
+
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("FooStatus JSON Tests")
+class FooStatusJsonTest extends BaseKmipTest {
+
+    @Test
+    @DisplayName("Round-trip: standard FooStatus")
+    void roundTrip_standard() {
+        FooStatus original = new FooStatus(FooStatus.Standard.READY);
+        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, FooStatus.class);
+    }
+
+    @Test
+    @DisplayName("Round-trip: custom FooStatus")
+    void roundTrip_custom() {
+        FooStatus.Value custom = FooStatus.register(0x7FFFFFF0, "Custom", Set.of(KmipSpec.V1_2, KmipSpec.UnknownVersion));
+        FooStatus original = new FooStatus(custom);
+        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, FooStatus.class);
+        assertThat(original.getValue().getDescription()).isEqualTo("Custom");
+    }
+}
+```
+
 ## DemoStatus Type (Copy-Ready)
 
 ```java

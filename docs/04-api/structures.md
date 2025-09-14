@@ -1,5 +1,7 @@
 # KMIP Structures
 
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Structure](../03-guides/boilerplate-structure.md) • [Boilerplate: Attribute](../03-guides/boilerplate-attribute.md) • [Boilerplate: Enumeration](../03-guides/boilerplate-enum.md)
+
 ## Overview
 
 Structures in KMIP represent complex data types that group related information. This document covers the core structures and their usage.

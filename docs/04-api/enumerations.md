@@ -1,5 +1,7 @@
 # Enumerations
 
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Enumeration](../03-guides/boilerplate-enum.md)
+
 ## Core Enumerations
 
 ### State

@@ -1,39 +1,55 @@
-# Boilerplate: DemoStructure (KmipStructure)
+# Boilerplate: Structures and Per-Class Tests
 
-## DemoStructure Type (Copy-Ready)
+This guide provides concise, copy-ready boilerplates for adding a new KMIP structure and its per-class tests across codecs. Use the minimal Foo examples, then see the extended DemoStructure for a full pattern.
+
+## Minimal Boilerplate (Copy-Ready)
+
+### Main Code: `Foo` (implements `KmipStructure`)
 
 ```java
-package org.purpleBean.kmip.demo.structure;
+package org.purpleBean.kmip.foo.structure;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.demo.enumeration.DemoStatus;
-import org.purpleBean.kmip.common.DemoAttribute;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
-public class DemoStructure implements KmipStructure {
-    private static final KmipTag.Value DEMO_STRUCTURE_TAG = KmipTag.register(
-            0x540101, "DemoStructure", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
+public class Foo implements KmipStructure {
+    private static final KmipTag.Value FOO_TAG = KmipTag.register(
+            0x540200, "Foo", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
     );
 
-    @NonNull private final DemoStatus status;
-    private final DemoAttribute demoAttribute;  // Nullable field
+    @NonNull FooStatus status;        // replace with your enum/type
+    FooAttribute attribute;           // nullable, optional
 
-    @Override public KmipTag getKmipTag() { return new KmipTag(DEMO_STRUCTURE_TAG); }
+    @Override public KmipTag getKmipTag() { return new KmipTag(FOO_TAG); }
     @Override public EncodingType getEncodingType() { return EncodingType.STRUCTURE; }
-    @Override public boolean isSupportedFor(@NonNull KmipSpec spec) { return status.isSupportedFor(spec); }
-    @Override 
-    public List<KmipDataType> getValues() { 
+    @Override public boolean isSupportedFor(@NonNull KmipSpec spec) { return true; }
+    @Override public List<KmipDataType> getValues() {
         List<KmipDataType> values = new ArrayList<>();
         values.add(status);
-        if (demoAttribute != null) {
-            values.add(demoAttribute);
-        }
+        if (attribute != null) values.add(attribute);
         return values;
+    }
+}
+```
+
+### Factory (optional for tests): `FooFactory`
+
+```java
+package org.purpleBean.kmip.foo;
+
+public final class FooFactory {
+    private FooFactory() {}
+    public static Foo createFoo() {
+        return Foo.builder()
+                .status(new FooStatus(FooStatus.Standard.READY))
+                .attribute(FooAttribute.builder().value("example").build())
+                .build();
     }
 }
 ```
@@ -43,31 +59,131 @@ public class DemoStructure implements KmipStructure {
 ```java
 KmipContext.setSpec(KmipSpec.V1_2);
 try {
-    DemoStructure structure = DemoStructure.builder()
-        .status(new DemoStatus(DemoStatus.Standard.READY))
-        .demoAttribute(DemoAttribute.builder()
-            .value("example-value")
-            .build())
-        .build();
+    Foo foo = FooFactory.createFoo();
+    // serialize or process foo
 } finally {
     KmipContext.clear();
 }
 ```
 
+## Per-Class Test Boilerplates (Copy-Ready)
+
+### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/FooJsonTest.java`
+
+```java
+package org.purpleBean.kmip.codec.json;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.SerializationTestUtils;
+
+@DisplayName("Foo JSON Tests")
+class FooJsonTest extends BaseKmipTest {
+
+    @Test
+    @DisplayName("Round-trip: serialize and deserialize Foo")
+    void roundTrip() {
+        Foo original = FooFactory.createFoo();
+        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, Foo.class);
+    }
+
+    @Test
+    @DisplayName("Structure: expected JSON fields present")
+    void structure_expectFields() {
+        Foo foo = FooFactory.createFoo();
+        SerializationTestUtils.testJsonSerialization(jsonMapper, foo, json -> {
+            SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
+            // assertThat(json).contains("\"Foo\"");
+        });
+    }
+}
+```
+
+### TTLV Test: `src/test/java/org/purpleBean/kmip/codec/ttlv/FooTtlvTest.java`
+
+```java
+package org.purpleBean.kmip.codec.ttlv;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.test.BaseKmipTest;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("Foo TTLV Tests")
+class FooTtlvTest extends BaseKmipTest {
+
+    private final TtlvMapper ttlvMapper = new TtlvMapper();
+
+    FooTtlvTest() {
+        ttlvMapper.registerModule(new KmipTtlvModule());
+    }
+
+    @Test
+    @DisplayName("Round-trip: Foo TTLV")
+    void roundTrip() throws IOException {
+        Foo original = FooFactory.createFoo();
+        ByteBuffer buf = ttlvMapper.writeValueAsByteBuffer(original);
+        Foo deserialized = ttlvMapper.readValue(buf, Foo.class);
+        assertThat(deserialized).isEqualTo(original);
+    }
+}
+```
+
+### XML Test: `src/test/java/org/purpleBean/kmip/codec/xml/FooXmlTest.java`
+
+```java
+package org.purpleBean.kmip.codec.xml;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.SerializationTestUtils;
+
+@DisplayName("Foo XML Tests")
+class FooXmlTest extends BaseKmipTest {
+
+    @Test
+    @DisplayName("Round-trip: serialize and deserialize Foo")
+    void roundTrip() {
+        Foo original = FooFactory.createFoo();
+        SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, Foo.class);
+    }
+
+    @Test
+    @DisplayName("Structure: expected XML fields present")
+    void structure_expectFields() {
+        Foo foo = FooFactory.createFoo();
+        SerializationTestUtils.testXmlSerialization(xmlMapper, foo, xml -> {
+            // assertThat(xml).contains("<Foo>");
+        });
+    }
+}
+```
+
+## Extended Example: DemoStructure
+
+For a fuller example with custom tag registration and richer assertions, adapt your `Foo` to the earlier DemoStructure pattern.
+
 ## Testing
 
 ```java
 @ExtendWith(MockitoExtension.class)
-@DisplayName("DemoStructure Tests")
-class DemoStructureTest extends BaseKmipTest {
+@DisplayName("Foo Tests")
+class FooTest extends BaseKmipTest {
     
-    private DemoStatus validStatus;
-    private DemoAttribute validAttribute;
+    private FooStatus validStatus;
+    private FooAttribute validAttribute;
     
     @BeforeEach
     void setUp() {
-        validStatus = new DemoStatus(DemoStatus.Standard.READY);
-        validAttribute = DemoAttribute.builder()
+        validStatus = new FooStatus(FooStatus.Standard.READY);
+        validAttribute = FooAttribute.builder()
             .value("test-value")
             .build();
         KmipContext.setSpec(KmipSpec.V1_2);
@@ -83,20 +199,20 @@ class DemoStructureTest extends BaseKmipTest {
     class ConstructionTests {
         
         @Test
-        @DisplayName("Should create valid DemoStructure with all fields")
-        void shouldCreateValidDemoStructure() {
+        @DisplayName("Should create valid Foo with all fields")
+        void shouldCreateValidFoo() {
             // When
-            DemoStructure structure = DemoStructure.builder()
+            Foo structure = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(validAttribute)
+                .attribute(validAttribute)
                 .build();
                 
             // Then
             assertThat(structure)
                 .isNotNull()
                 .extracting(
-                    DemoStructure::getStatus,
-                    DemoStructure::getDemoAttribute,
+                    Foo::getStatus,
+                    Foo::getAttribute,
                     s -> s.isSupportedFor(KmipSpec.V1_2),
                     s -> s.isSupportedFor(KmipSpec.V1_0)
                 )
@@ -106,12 +222,12 @@ class DemoStructureTest extends BaseKmipTest {
                     true,
                     false
                 );
-            
+                
             // Verify KMIP tag and encoding type
             assertThat(structure.getKmipTag())
                 .isNotNull()
                 .extracting(KmipTag::getTagName)
-                .isEqualTo("DemoStructure");
+                .isEqualTo("Foo");
                 
             assertThat(structure.getEncodingType())
                 .isEqualTo(EncodingType.STRUCTURE);
@@ -121,9 +237,9 @@ class DemoStructureTest extends BaseKmipTest {
         @DisplayName("Should include all values in getValues()")
         void shouldIncludeAllValuesInGetValues() {
             // Given
-            DemoStructure structure = DemoStructure.builder()
+            Foo structure = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(validAttribute)
+                .attribute(validAttribute)
                 .build();
                 
             // When
@@ -136,27 +252,25 @@ class DemoStructureTest extends BaseKmipTest {
         }
         
         @Test
-        @DisplayName("Should fail with null status")
+        @DisplayName("Should fail with null status (if @NonNull)")
         void shouldFailWithNullStatus() {
             assertThatNullPointerException()
-                .isThrownBy(() -> DemoStructure.builder()
+                .isThrownBy(() -> Foo.builder()
                     .status(null)
-                    .demoAttribute(validAttribute)
+                    .attribute(validAttribute)
                     .build()
                 )
                 .withMessage("status is marked non-null but is null");
         }
         
         @Test
-        @DisplayName("Should fail with null demo attribute")
+        @DisplayName("Should handle null attribute (optional)")
         void shouldFailWithNullDemoAttribute() {
-            assertThatNullPointerException()
-                .isThrownBy(() -> DemoStructure.builder()
-                    .status(validStatus)
-                    .demoAttribute(null)
-                    .build()
-                )
-                .withMessage("demoAttribute is marked non-null but is null");
+            Foo structureWithNull = Foo.builder()
+                .status(validStatus)
+                .attribute(null)
+                .build();
+            assertThat(structureWithNull.getAttribute()).isNull();
         }
     }
     
@@ -165,41 +279,41 @@ class DemoStructureTest extends BaseKmipTest {
     class EqualityTests {
         
         @Test
-        @DisplayName("Should create with valid fields")
+        @DisplayName("Should create with valid fields (equality smoke)")
         void shouldCreateWithValidFields() {
             // Test with non-null demoAttribute
-            DemoStructure structure = DemoStructure.builder()
+            Foo structure = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(validAttribute)
+                .attribute(validAttribute)
                 .build();
             
             assertThat(structure).isNotNull();
             assertThat(structure.getStatus()).isEqualTo(validStatus);
-            assertThat(structure.getDemoAttribute()).isEqualTo(validAttribute);
+            assertThat(structure.getAttribute()).isEqualTo(validAttribute);
             
             // Test with null demoAttribute
-            DemoStructure structureWithNullAttr = DemoStructure.builder()
+            Foo structureWithNullAttr = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(null)
+                .attribute(null)
                 .build();
                 
             assertThat(structureWithNullAttr).isNotNull();
             assertThat(structureWithNullAttr.getStatus()).isEqualTo(validStatus);
-            assertThat(structureWithNullAttr.getDemoAttribute()).isNull();
+            assertThat(structureWithNullAttr.getAttribute()).isNull();
         }
         
         @Test
         @DisplayName("Should be equal with same field values")
         void shouldBeEqualWithSameFieldValues() {
             // Given
-            DemoStructure structure1 = DemoStructure.builder()
+            Foo structure1 = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(validAttribute)
+                .attribute(validAttribute)
                 .build();
                 
-            DemoStructure structure2 = DemoStructure.builder()
+            Foo structure2 = Foo.builder()
                 .status(validStatus)
-                .demoAttribute(validAttribute)
+                .attribute(validAttribute)
                 .build();
                 
             // Then
