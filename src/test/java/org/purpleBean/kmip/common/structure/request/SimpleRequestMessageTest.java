@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
@@ -16,8 +18,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("SimpleRequest Tests")
-class SimpleRequestTest {
+@DisplayName("SimpleRequestMessage Tests")
+class SimpleRequestMessageTest {
 
     private SimpleRequestMessage requestMessage;
     private SimpleRequestHeader requestHeader;
@@ -41,36 +43,7 @@ class SimpleRequestTest {
                         .build();
     }
 
-    @Nested
-    @DisplayName("SimpleRequestHeader Tests")
-    class SimpleRequestHeaderTests {
-        @Test
-        @DisplayName("Should have correct values")
-        void shouldHaveCorrectValues() {
-            // Verify the request header structure
-            assertThat(requestHeader.getKmipTag())
-                    .isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_HEADER));
-            assertThat(requestHeader.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
-            assertThat(requestHeader.getProtocolVersion().getMajor()).isEqualTo(1);
-            assertThat(requestHeader.getProtocolVersion().getMinor()).isEqualTo(4);
-            assertThat(requestHeader.getValues()).hasSize(1);
-            assertThat(requestHeader.isSupportedFor(KmipSpec.V1_2)).isTrue();
-        }
-    }
-
-    @Nested
-    @DisplayName("SimpleRequestBatchItem Tests")
-    class SimpleRequestBatchItemTests {
-        @Test
-        @DisplayName("Should have correct values")
-        void shouldHaveCorrectValues() {
-            // Verify the batch item structure
-            assertThat(batchItem1.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.BATCH_ITEM));
-            assertThat(batchItem1.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
-            assertThat(batchItem1.getValues()).isEmpty();
-            assertThat(batchItem1.isSupportedFor(KmipSpec.V1_2)).isTrue();
-        }
-    }
+    // Header and BatchItem have dedicated tests; keep message-focused tests here
 
     @Nested
     @DisplayName("SimpleRequestMessage Tests")
@@ -129,6 +102,52 @@ class SimpleRequestTest {
             // Test with available versions
             assertThat(requestMessage.isSupportedFor(KmipSpec.V1_2)).isTrue();
         }
+
+        @ParameterizedTest
+        @CsvSource({"1,0,0","1,2,1","1,4,2","2,0,3"})
+        @DisplayName("Should build message with various protocol versions and batch item counts")
+        void shouldBuildMessageWithVariousInputs(int major, int minor, int batchCount) {
+            // Given
+            SimpleRequestHeader header =
+                    SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(major, minor)).build();
+
+            SimpleRequestMessage.SimpleRequestMessageBuilder builder =
+                    SimpleRequestMessage.builder().requestHeader(header);
+            for (int i = 0; i < batchCount; i++) {
+                builder.requestBatchItem(SimpleRequestBatchItem.builder().build());
+            }
+
+            // When
+            SimpleRequestMessage msg = builder.build();
+
+            // Then
+            assertThat(msg.getRequestHeader().getProtocolVersion().getMajor()).isEqualTo(major);
+            assertThat(msg.getRequestHeader().getProtocolVersion().getMinor()).isEqualTo(minor);
+            assertThat(msg.getRequestBatchItems()).hasSize(batchCount);
+            // Values should include header + batch items
+            assertThat(msg.getValues()).hasSize(1 + batchCount);
+        }
+
+        @ParameterizedTest
+        @CsvSource({"0","1","2"})
+        @DisplayName("Should accumulate batch item errors of various counts")
+        void shouldAccumulateBatchItemErrors(int errorCount) {
+            // Given
+            SimpleRequestMessage.SimpleRequestMessageBuilder builder =
+                    SimpleRequestMessage.builder().requestHeader(requestHeader);
+            for (int i = 0; i < errorCount; i++) {
+                builder.requestBatchItemError(new RuntimeException("Err-" + i));
+            }
+
+            // When
+            SimpleRequestMessage msg = builder.build();
+
+            // Then
+            assertThat(msg.getRequestBatchItemErrors()).hasSize(errorCount);
+            for (int i = 0; i < errorCount; i++) {
+                assertThat(msg.getRequestBatchItemErrors().get(i).getMessage()).isEqualTo("Err-" + i);
+            }
+        }
     }
 
     @Nested
@@ -167,6 +186,59 @@ class SimpleRequestTest {
             assertThat(xml).contains("</ProtocolVersion>");
             assertThat(xml).contains("</RequestHeader>");
             assertThat(xml).contains("<BatchItem/>"); // Empty batch items
+        }
+
+        @ParameterizedTest
+        @CsvSource({"0","1","2","3"})
+        @DisplayName("Should serialize to JSON with varying batch item counts")
+        void shouldSerializeJson_withVaryingBatchItemCounts(int batchCount) throws JsonProcessingException {
+            // Given
+            SimpleRequestMessage.SimpleRequestMessageBuilder builder =
+                    SimpleRequestMessage.builder().requestHeader(requestHeader);
+            for (int i = 0; i < batchCount; i++) {
+                builder.requestBatchItem(SimpleRequestBatchItem.builder().build());
+            }
+            SimpleRequestMessage msg = builder.build();
+
+            // When
+            ObjectMapper jsonMapper = new ObjectMapper();
+            jsonMapper.registerModule(new KmipJsonModule());
+            String json = jsonMapper.writeValueAsString(msg);
+
+            // Then
+            assertThat(json).contains("\"RequestMessage\"");
+            if (batchCount == 0) {
+                // No batch items
+                assertThat(json).contains("\"RequestHeader\"");
+            } else {
+                assertThat(json.split("\\\"BatchItem\\\"")).hasSizeGreaterThan(1);
+            }
+        }
+
+        @ParameterizedTest
+        @CsvSource({"0","1","2","3"})
+        @DisplayName("Should serialize to XML with varying batch item counts")
+        void shouldSerializeXml_withVaryingBatchItemCounts(int batchCount) throws JsonProcessingException {
+            // Given
+            SimpleRequestMessage.SimpleRequestMessageBuilder builder =
+                    SimpleRequestMessage.builder().requestHeader(requestHeader);
+            for (int i = 0; i < batchCount; i++) {
+                builder.requestBatchItem(SimpleRequestBatchItem.builder().build());
+            }
+            SimpleRequestMessage msg = builder.build();
+
+            // When
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.registerModule(new KmipXmlModule());
+            String xml = xmlMapper.writeValueAsString(msg);
+
+            // Then
+            assertThat(xml).contains("<RequestMessage>");
+            if (batchCount == 0) {
+                assertThat(xml).contains("<RequestHeader>");
+            } else {
+                assertThat(xml).contains("<BatchItem/");
+            }
         }
     }
 

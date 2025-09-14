@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -36,6 +38,23 @@ class SimpleRequestHeaderTest {
             assertThat(header.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.REQUEST_HEADER));
             assertThat(header.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
             assertThat(header.getProtocolVersion()).isEqualTo(protocolVersion);
+            assertThat(header.getValues()).hasSize(1).contains(protocolVersion);
+        }
+
+        @ParameterizedTest
+        @CsvSource({"1,0","1,2","1,4","2,0","2,1"})
+        @DisplayName("Should create headers for multiple protocol versions")
+        void shouldCreateHeadersForMultipleProtocolVersions(int major, int minor) {
+            // Given
+            ProtocolVersion protocolVersion = ProtocolVersion.of(major, minor);
+
+            // When
+            SimpleRequestHeader header =
+                    SimpleRequestHeader.builder().protocolVersion(protocolVersion).build();
+
+            // Then
+            assertThat(header.getProtocolVersion().getMajor()).isEqualTo(major);
+            assertThat(header.getProtocolVersion().getMinor()).isEqualTo(minor);
             assertThat(header.getValues()).hasSize(1).contains(protocolVersion);
         }
 
