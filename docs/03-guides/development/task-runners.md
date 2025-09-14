@@ -101,8 +101,11 @@ Traditional build automation tool, available on most Unix-like systems.
 # Show help
 make help
 
-# Run tests
-make test
+# Run all tests (unit + integration)
+make all-tests
+
+# Or just unit tests
+make test-unit
 
 # Run a specific test class
 make test-class TEST=com.example.TestClass
@@ -139,6 +142,7 @@ make format
 - Test commands on all supported platforms
 - Prefer simple, single-purpose commands
 - Include help text for all commands
+- Note: Code formatting via Spotless is optional and disabled by default in `pom.xml`. Enable the plugin to use `mvn spotless:apply` and equivalent task runner commands.
 
 ## Troubleshooting
 

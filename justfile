@@ -32,8 +32,10 @@ install:
     @echo "📦 Installing dependencies..."
     mvn clean install -DskipTests
 
-# Run all tests
-test: test-unit test-integration
+# Run all tests (unit + integration)
+test:
+    @echo "🧪 Running all tests (unit + integration)..."
+    mvn -Pwith-integration test
 
 # Run unit tests
 test-unit:
@@ -43,7 +45,7 @@ test-unit:
 # Run integration tests
 test-integration:
     @echo "🔍 Running integration tests..."
-    mvn verify -DskipUnitTests
+    mvn -Pwith-integration test
 
 # Run specific test class
 test-class TEST:
@@ -58,9 +60,7 @@ test-class TEST:
 # Run performance benchmarks
 benchmark:
     @echo "⚡ Running performance benchmarks..."
-    mvn clean test-compile exec:exec -Dexec.executable="java" \
-        -Dexec.args="-cp target/test-classes:target/classes:$$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q) \
-        org.openjdk.jmh.Main -f 1 -wi 3 -i 5"
+    mvn -Pperf verify
 
 # Format code
 format:

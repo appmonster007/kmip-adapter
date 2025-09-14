@@ -5,7 +5,7 @@ This guide explains how to contribute code changes to the KMIP Adapter project t
 ## Before You Start
 
 1. **Check for Existing Issues**
-   - Search the [issue tracker](https://github.com/your-org/kmip-adapter/issues) to see if the issue is already reported
+   - Search the [issue tracker](https://github.com/purplebean/kmip-adapter/issues) to see if the issue is already reported
    - If it's a new issue, consider creating one before starting work
 
 2. **Announce Your Intentions**
@@ -18,7 +18,7 @@ This guide explains how to contribute code changes to the KMIP Adapter project t
    ```bash
    git clone https://github.com/your-username/kmip-adapter.git
    cd kmip-adapter
-   git remote add upstream https://github.com/your-org/kmip-adapter.git
+   git remote add upstream https://github.com/purplebean/kmip-adapter.git
    ```
 
 2. **Create a Feature Branch**
@@ -30,7 +30,7 @@ This guide explains how to contribute code changes to the KMIP Adapter project t
 
 1. **Follow the Code Style**
    - Adhere to the [code style guide](./code-style.md)
-   - Run the formatter: `mvn formatter:format`
+   - Run the formatter: `mvn spotless:apply` (optional; Spotless is disabled by default in `pom.xml`. Enable the plugin first if needed.)
 
 2. **Write Tests**
    - Add unit tests for new functionality

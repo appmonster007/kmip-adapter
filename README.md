@@ -3,7 +3,7 @@
 [![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
 [![Maven](https://img.shields.io/badge/Maven-3.6+-blue.svg)](https://maven.apache.org/)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Tests](https://img.shields.io/badge/Tests-551%20passing-brightgreen.svg)](https://github.com/your-org/kmip-adapter/actions)
+[![Tests](https://img.shields.io/badge/Tests-500%2B%20passing-brightgreen.svg)](https://github.com/purplebean/kmip-adapter/actions)
 [![Documentation](https://img.shields.io/badge/Docs-latest-brightgreen.svg)](/docs/)
 
 A comprehensive Java library for building and managing KMIP (Key Management Interoperability Protocol) data types with support for TTLV serialization, JSON/XML mapping, and extensible type systems.
@@ -72,32 +72,29 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>org.purpleBean</groupId>
     <artifactId>kmip-adapter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 
 ### Basic Usage
 
 ```java
-// Set up the KMIP context
-KmipContext.setSpec(KmipSpec.V1_2);
+// Minimal JSON round-trip with a built-in type
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
+import org.purpleBean.kmip.codec.json.KmipJsonModule;
 
+KmipContext.setSpec(KmipSpec.V1_2);
 try {
-    // Create a KMIP object
-    Name name = new Name("example-key", NameType.UNINTERPRETED_TEXT_STRING);
-    
-    // Serialize to JSON
     ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new KmipModule());
-    
-    String json = mapper.writeValueAsString(name);
-    System.out.println("Serialized: " + json);
-    
-    // Deserialize back to object
-    Name deserialized = mapper.readValue(json, Name.class);
-    
+    mapper.registerModule(new KmipJsonModule());
+
+    ProtocolVersion original = ProtocolVersion.of(1, 2);
+    String json = mapper.writeValueAsString(original);
+    ProtocolVersion restored = mapper.readValue(json, ProtocolVersion.class);
 } finally {
-    // Always clear the context when done
     KmipContext.clear();
 }
 ```
@@ -116,7 +113,7 @@ try {
 - **Comprehensive test suite** with 500+ tests
 - **Performance optimized** for high-throughput scenarios
 
-## Quick Start
+## Detailed Examples
 
 ### Prerequisites
 
@@ -368,7 +365,7 @@ mvn -Pwith-integration test
 mvn clean test
 
 # Run specific test class
-mvn test -Dtest=StateTest
+mvn test -Dtest=ProtocolVersionTest
 
 # Run performance benchmarks (JMH) without affecting unit tests
 mvn -Pperf verify

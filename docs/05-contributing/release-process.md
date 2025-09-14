@@ -51,7 +51,7 @@ This document outlines the steps to create a new release of the KMIP Adapter.
 
 3. **Run Integration Tests**
    ```bash
-   mvn verify -Pintegration-tests
+   mvn -Pwith-integration test
    ```
 
 4. **Create Source and Javadoc JARs**
@@ -80,7 +80,7 @@ This document outlines the steps to create a new release of the KMIP Adapter.
 ## GitHub Release
 
 1. **Create a New Release**
-   - Go to the [Releases](https://github.com/your-org/kmip-adapter/releases) page
+   - Go to the [Releases](https://github.com/purplebean/kmip-adapter/releases) page
    - Click "Draft a new release"
    - Tag version: `vX.Y.Z`
    - Release title: `KMIP Adapter X.Y.Z`

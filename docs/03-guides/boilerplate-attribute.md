@@ -11,6 +11,7 @@ package org.purpleBean.kmip.foo.attribute;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.enumeration.State;
 
 import java.time.OffsetDateTime; // replace with your value type
 import java.util.Set;
@@ -24,9 +25,19 @@ public class FooAttribute implements KmipAttribute {
 
     @NonNull private final OffsetDateTime value; // replace with your type
 
+    // KmipDataType contract
     @Override public KmipTag getKmipTag() { return new KmipTag(FOO_ATTRIBUTE_TAG); }
     @Override public EncodingType getEncodingType() { return EncodingType.DATE_TIME; } // adjust
     @Override public boolean isSupportedFor(@NonNull KmipSpec spec) { return true; }
+
+    // KmipAttribute contract — tailor these per-attribute semantics
+    @Override public boolean isAlwaysPresent() { return false; }
+    @Override public boolean isServerInitializable() { return false; }
+    @Override public boolean isClientInitializable() { return true; }
+    @Override public boolean isServerModifiable(State state) { return false; }
+    @Override public boolean isClientModifiable(State state) { return true; }
+    @Override public boolean isClientDeletable() { return true; }
+    @Override public boolean isMultiInstanceAllowed() { return false; }
 }
 ```
 

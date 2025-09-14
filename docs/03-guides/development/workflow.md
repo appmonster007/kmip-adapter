@@ -13,7 +13,7 @@ This guide provides a step-by-step process for building, testing, and documentin
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-org/kmip-adapter.git
+git clone https://github.com/purplebean/kmip-adapter.git
 cd kmip-adapter
 ```
 
@@ -28,9 +28,10 @@ mvn clean install -DskipTests
 - Follow the [Code Style Guide](./code-style.md)
 - Run code formatting before committing:
   ```bash
-  // if spotless plugin installed
-  mvn spotless:apply 
+  # If Spotless plugin is enabled in pom.xml
+  mvn spotless:apply
   ```
+  Note: Spotless is optional and disabled by default in `pom.xml`. Enable the plugin to use this command or the equivalent task runner targets.
 
 ### Implementing Features
 1. Create a feature branch:
@@ -88,47 +89,17 @@ mvn test -Dtest=com.example.YourTestClass#testMethodName
 ## 5. Performance Testing
 
 ### Running JMH Benchmarks
-```bash
-mvn clean test-compile exec:exec -Dexec.executable="java" -Dexec.args="-cp target/test-classes:target/classes:$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q) org.openjdk.jmh.Main -f 1 -wi 3 -i 5"
-```
+Use the existing Maven profiles defined in `pom.xml`:
 
-Or use the JMH Maven plugin:
 ```bash
-mvn clean test-compile exec:exec@jmh-benchmark
-```
+# Full benchmarks
+mvn -Pperf verify
 
-Add this to your `pom.xml` in the build/plugins section:
-```xml
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>exec-maven-plugin</artifactId>
-    <version>3.5.0</version>
-    <executions>
-        <execution>
-            <id>jmh-benchmark</id>
-            <phase>test</phase>
-            <goals>
-                <goal>exec</goal>
-            </goals>
-            <configuration>
-                <executable>java</executable>
-                <arguments>
-                    <argument>-cp</argument>
-                    <classpath>
-                        <mainClass>org.openjdk.jmh.Main</mainClass>
-                    </classpath>
-                    <argument>org.openjdk.jmh.Main</argument>
-                    <argument>-f</argument>
-                    <argument>1</argument>
-                    <argument>-wi</argument>
-                    <argument>3</argument>
-                    <argument>-i</argument>
-                    <argument>5</argument>
-                </arguments>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
+# Faster benchmarks
+mvn -Pperf-fast verify
+
+# Pass JMH args
+mvn -Pperf -Dbench.args="-rf json -rff target/jmh.json -wi 3 -i 5 -f 1" verify
 ```
 
 ### Performance Test Parameters

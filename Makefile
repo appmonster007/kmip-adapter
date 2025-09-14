@@ -37,6 +37,11 @@ all: clean build test-unit test-integration benchmark ## Run complete pipeline
 ## Run all tests
 all-tests: test-unit test-integration ## Run all tests (unit + integration)
 
+## Convenience alias to run all tests
+test: ## Run all tests (unit + integration)
+	@echo "${GREEN}Running all tests (unit + integration)...${RESET}"
+	mvn -Pwith-integration test
+
 ## Run unit tests
 test-unit: ## Run unit tests
 	@echo "${GREEN}Running unit tests...${RESET}"
@@ -45,7 +50,7 @@ test-unit: ## Run unit tests
 ## Run integration tests
 test-integration: ## Run integration tests
 	@echo "${GREEN}Running integration tests...${RESET}"
-	mvn verify -DskipUnitTests
+	mvn -Pwith-integration test
 
 ## Run a specific test class
 test-class: ## Run a specific test class (e.g., make test-class TEST=com.example.TestClass)
@@ -58,9 +63,7 @@ test-class: ## Run a specific test class (e.g., make test-class TEST=com.example
 ## Run performance benchmarks
 benchmark: ## Run performance benchmarks
 	@echo "${GREEN}Running performance benchmarks...${RESET}"
-	mvn clean test-compile exec:exec -Dexec.executable="java" \
-		-Dexec.args="-cp target/test-classes:target/classes:$$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q) \
-		org.openjdk.jmh.Main -f 1 -wi 3 -i 5"
+	mvn -Pperf verify
 
 ## Format code
 format: ## Format code using spotless

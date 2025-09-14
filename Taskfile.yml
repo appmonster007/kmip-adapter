@@ -42,8 +42,7 @@ tasks:
   test:
     desc: Run all tests (unit + integration)
     cmds:
-      - task: test-unit
-      - task: test-integration
+      - mvn -Pwith-integration test
     deps: [install]
 
   test-unit:
@@ -55,7 +54,7 @@ tasks:
   test-integration:
     desc: Run integration tests
     cmds:
-      - mvn verify -DskipUnitTests
+      - mvn -Pwith-integration test
     deps: [install]
 
   test-class:
@@ -68,7 +67,7 @@ tasks:
   benchmark:
     desc: Run performance benchmarks
     cmds:
-      - mvn clean test-compile exec:exec -Dexec.executable="java" -Dexec.args="-cp target/test-classes:target/classes:$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q) org.openjdk.jmh.Main -f 1 -wi 3 -i 5"
+      - mvn -Pperf verify
     deps: [install]
 
   format:

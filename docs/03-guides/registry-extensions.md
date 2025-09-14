@@ -8,7 +8,7 @@ Relevant types in this repository that implement this pattern:
 - `org.purplebean.kmip.common.enumeration.State`
 - `org.purplebean.kmip.KmipTag` (tag registry)
 
-The canonical reference patterns originate from the root guide `KMIP_IMPLEMENTATION_GUIDE.md` and have been adapted here to match the actual code.
+The canonical reference patterns originate from the [Implementation Guide](./implementation.md) and have been adapted here to match the actual code.
 
 ## Enumeration Registry Pattern
 

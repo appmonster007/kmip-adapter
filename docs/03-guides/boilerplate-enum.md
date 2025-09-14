@@ -12,12 +12,16 @@ import org.purpleBean.kmip.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 @Data
 @Builder
 public class FooStatus implements KmipEnumeration {
-    public interface Value extends KmipEnumeration {
+    public interface Value {
+        int getValue();
+        String getDescription();
         boolean isSupportedFor(KmipSpec spec);
+        boolean isCustom();
     }
 
     @Getter
@@ -64,6 +68,16 @@ public class FooStatus implements KmipEnumeration {
     }
 
     @NonNull private final Value value;
+
+    // KmipEnumeration requirement
+    @Override
+    public String getDescription() { return value.getDescription(); }
+
+    @Override
+    public KmipTag getKmipTag() { return new KmipTag(KmipTag.Standard.STATE); /* replace with your tag */ }
+
+    @Override
+    public EncodingType getEncodingType() { return EncodingType.ENUMERATION; }
 }
 ```
 

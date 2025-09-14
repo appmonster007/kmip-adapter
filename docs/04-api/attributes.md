@@ -36,7 +36,7 @@ EncodingType type = attr.getEncoding(); // EncodingType.DATE_TIME
 - Validation should be performed in constructors for required fields.
 - Version-aware behavior (when applicable) should rely on `KmipContext.getSpec()`.
 
-If you need custom attributes, follow the patterns in `KMIP_IMPLEMENTATION_GUIDE.md` and ensure:
+If you need custom attributes, follow the patterns in [Implementation Guide](../03-guides/implementation.md) and ensure:
 - Strong typing for the attribute value
 - Correct `KmipTag` mapping
 - Proper `EncodingType`

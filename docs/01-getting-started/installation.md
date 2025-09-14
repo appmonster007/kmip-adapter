@@ -17,7 +17,7 @@ Add the following dependency to your `pom.xml`:
     <dependency>
         <groupId>org.purpleBean</groupId>
         <artifactId>kmip-adapter</artifactId>
-        <version>1.0.0</version>
+        <version>1.0-SNAPSHOT</version>
     </dependency>
     
     <!-- JSON/XML + JavaTime support (aligned with project pom) -->
@@ -50,7 +50,7 @@ Add to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("org.purpleBean:kmip-adapter:1.0.0")
+    implementation("org.purpleBean:kmip-adapter:1.0-SNAPSHOT")
 
     // JSON/XML + JavaTime support (aligned with project pom)
     implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
@@ -66,7 +66,7 @@ Add to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'org.purpleBean:kmip-adapter:1.0.0'
+    implementation 'org.purpleBean:kmip-adapter:1.0-SNAPSHOT'
 
     // JSON/XML + JavaTime support (aligned with project pom)
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
@@ -80,7 +80,7 @@ dependencies {
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-org/kmip-adapter.git
+   git clone https://github.com/purplebean/kmip-adapter.git
    cd kmip-adapter
    ```
 
@@ -149,6 +149,8 @@ public class KmipTest {
 
 3. **Missing Dependencies**: Make sure all required dependencies are included in your build file.
 
+4. **Code Formatting (Optional)**: A `format` task exists in task runners, but the Spotless plugin is disabled by default in `pom.xml`. To use it, enable the `spotless-maven-plugin` in `pom.xml` or skip formatting commands.
+
 ## Next Steps
 
 - [Configuration Guide](./configuration.md)
@@ -156,4 +158,4 @@ public class KmipTest {
 
 ## Support
 
-For issues and feature requests, please use the [GitHub Issue Tracker](https://github.com/your-org/kmip-adapter/issues).
+For issues and feature requests, please use the [GitHub Issue Tracker](https://github.com/purplebean/kmip-adapter/issues).

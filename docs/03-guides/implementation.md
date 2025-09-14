@@ -22,10 +22,10 @@ This guide provides comprehensive instructions for implementing KMIP objects, se
 KMIP value sets are represented as value-based types with a fixed set of standard values and optional custom extensions. Here's the `State` implementation pattern used in this project:
 
 ```java
-package org.purplebean.kmip.common.enumeration;
+package org.purpleBean.kmip.common.enumeration;
 
 import lombok.Getter;
-import org.purplebean.kmip.KmipEnumeration;
+import org.purpleBean.kmip.KmipEnumeration;
 import java.util.Arrays;
 
 /**
@@ -169,16 +169,16 @@ public final class State implements KmipDataType {
 KMIP attributes implement the `KmipAttribute` interface. Example: `ActivationDateAttribute`:
 
 ```java
-package org.purplebean.kmip.common;
+package org.purpleBean.kmip.common;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.purplebean.kmip.EncodingType;
-import org.purplebean.kmip.KmipAttribute;
-import org.purplebean.kmip.KmipTag;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipAttribute;
+import org.purpleBean.kmip.KmipTag;
 
 import java.time.OffsetDateTime;
 
@@ -210,16 +210,16 @@ public class ActivationDateAttribute implements KmipAttribute {
 Complex KMIP objects are implemented as structures. Example: `RequestMessage`:
 
 ```java
-package org.purplebean.kmip.common.structure.request;
+package org.purpleBean.kmip.common.structure.request;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.jackson.Jacksonized;
-import org.purplebean.kmip.EncodingType;
-import org.purplebean.kmip.KmipSpec;
-import org.purplebean.kmip.KmipStructure;
-import org.purplebean.kmip.KmipTag;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.KmipTag;
 
 import java.util.List;
 import java.util.Set;

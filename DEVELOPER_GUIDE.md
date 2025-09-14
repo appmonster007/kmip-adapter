@@ -13,14 +13,14 @@ A comprehensive guide for extending and contributing to the KMIP Adapter library
 
 ## Overview
 
-The KMIP Adapter follows a structured approach to building KMIP-compliant data types. The current test suite includes 551 passing tests with 100% code coverage across all classes. The library implements:
+The KMIP Adapter follows a structured approach to building KMIP-compliant data types. The current test suite includes 500+ tests with high coverage across core components. The library implements:
 
 - **Type Safety**: Compile-time validation through interfaces and `@NonNull` annotations
 - **Version Compatibility**: Automatic validation against KMIP specifications
 - **Extensibility**: Runtime registration of custom values with proper cleanup
 - **Thread Safety**: Concurrent access through ThreadLocal contexts
 - **Serialization**: Multi-format support (TTLV, JSON, XML)
-- **Comprehensive Testing**: 551 passing tests with full code coverage
+- **Comprehensive Testing**: Extensive tests with strong coverage
 - **Test Isolation**: Clean test state management
 - **Parameterized Testing**: Extensive use of JUnit 5 parameterized tests
 
@@ -85,11 +85,13 @@ For detailed instructions on creating new KMIP objects, refer to the specialized
 
 ### 📚 **Comprehensive Creation Guides**
 
-- **[KMIP Object Creation Guide](./KMIP_OBJECT_CREATION_GUIDE.md)** - Main overview with quick start checklist and file organization
-- **[KMIP Object Boilerplate](KMIP_IMPLEMENTATION_GUIDE.md)** - Complete templates for Enumerations, Attributes, and Structures
-- **[KMIP Serialization Guide](./KMIP_SERIALIZATION_GUIDE.md)** - JSON, XML, and TTLV serializer/deserializer templates
-- **[KMIP Testing Guide](./KMIP_TESTING_GUIDE.md)** - Comprehensive test templates with validation examples
-- **[KMIP Validation Patterns](./KMIP_VALIDATION_PATTERNS.md)** - Validation patterns for main and test code
+- **[Quick Start for New Types](docs/03-guides/quick-start-new-types.md)** - Main overview with quick start checklist and file organization
+- **[Boilerplate: Enumerations](docs/03-guides/boilerplate-enum.md)** - Templates for extensible enumerations
+- **[Boilerplate: Attributes](docs/03-guides/boilerplate-attribute.md)** - Templates for attributes
+- **[Boilerplate: Structures](docs/03-guides/boilerplate-structure.md)** - Templates for structures
+- **[Serialization Guide](docs/02-architecture/serialization.md)** - JSON, XML, and TTLV serializer/deserializer overview
+- **[Testing Guide](docs/03-guides/testing.md)** - Comprehensive test templates with validation examples
+- **[Context Management](docs/03-guides/context-management.md)** - Version/context handling patterns
 
 ### 🚀 **Quick Start**
 
@@ -197,6 +199,7 @@ For detailed serialization and testing information, refer to the specialized gui
    - Add JavaDoc for all public methods
    - Include usage examples
    - Update this developer guide if needed
+   - Note: Code formatting via Spotless is optional; the plugin is disabled by default in `pom.xml`. Enable it first if you plan to use `mvn spotless:apply` or equivalent task runner commands.
 
 ### Code Review Process
 

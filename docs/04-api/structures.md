@@ -58,7 +58,7 @@ SimpleRequestMessage request = SimpleRequestMessage.builder()
 
 ## Custom Structures
 
-Follow the structure patterns in `KMIP_IMPLEMENTATION_GUIDE.md`:
+Follow the structure patterns in [Implementation Guide](../03-guides/implementation.md):
 - Implement `KmipStructure`.
 - Provide `getKmipTag()` and `getEncodingType()`.
 - Expose contained KMIP values via `getValues()` where appropriate.
