@@ -25,6 +25,7 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
 
 ### Getting Started
 - [Installation](/docs/01-getting-started/installation.md) - How to add the library to your project
+- [Build System](/docs/01-getting-started/build-system.md) - Using Makefile, Taskfile, and justfile
 - [Configuration](/docs/01-getting-started/configuration.md) - Basic setup and configuration
 
 ### Architecture

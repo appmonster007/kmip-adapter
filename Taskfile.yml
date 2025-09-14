@@ -19,12 +19,11 @@ tasks:
     desc: Show available commands
 
   all:
-    desc: Run complete pipeline (clean → build → test → benchmark)
+    desc: Run complete pipeline (build → tests → coverage → benchmark)
     cmds:
-      - task: clean
       - task: build
-      - task: test-unit
-      - task: test-integration
+      - task: tests
+      - task: coverage
       - task: benchmark
 
   help:
@@ -35,14 +34,15 @@ tasks:
   install:
     desc: Install project dependencies
     cmds:
-      - mvn clean install -DskipTests
+      - mvn -DskipTests install
     status:
       - test ! -d target
 
-  test:
-    desc: Run all tests (unit + integration)
+  tests:
+    desc: Run all tests (unit + integration) once
     cmds:
-      - mvn -Pwith-integration test
+      - echo "Running all tests (unit + integration) once..."
+      - mvn -Pwith-integration verify
     deps: [install]
 
   test-unit:
@@ -67,13 +67,19 @@ tasks:
   benchmark:
     desc: Run performance benchmarks
     cmds:
-      - mvn -Pperf verify
+      - mvn -Pperf -DskipTests verify
     deps: [install]
 
   format:
-    desc: Format code using spotless
+    desc: Format code (Spotless optional)
     cmds:
-      - mvn spotless:apply
+      - |
+        if grep -q "spotless-maven-plugin" pom.xml; then \
+          echo "Spotless detected. Running spotless:apply"; \
+          mvn spotless:apply; \
+        else \
+          echo "Spotless not configured in pom.xml. Skipping format."; \
+        fi
 
   clean:
     desc: Clean build artifacts
@@ -81,22 +87,26 @@ tasks:
       - mvn clean
 
   build:
-    desc: Clean and build the project
+    desc: Build the project (no implicit clean)
     cmds:
-      - task: clean
       - task: install
 
   run:
-    desc: Run the application
+    desc: Run the application (if spring-boot plugin configured)
     cmds:
-      - mvn spring-boot:run
+      - |
+        if grep -q "spring-boot-maven-plugin" pom.xml; then \
+          mvn spring-boot:run; \
+        else \
+          echo "Spring Boot plugin not configured in pom.xml. Skipping run."; \
+        fi
     deps: [install]
 
   coverage:
-    desc: Generate code coverage report
+    desc: Generate code coverage report (reuse execution data)
     cmds:
-      - mvn clean test jacoco:report
-      - echo "Report generated at: file://$(pwd)/target/site/jacoco/index.html"
+      - mvn -DskipTests jacoco:report
+      - echo "Report generated at: target/site/jacoco/index.html"
 
   info:
     desc: Show project information
@@ -106,3 +116,203 @@ tasks:
       - echo "  Version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
       - echo "  Java Version: $(java -version 2>&1 | head -n 1)"
       - echo "  Maven Version: $(mvn -v | head -n 1)"
+
+  # ----------------------
+  # CI/CD tasks
+  # ----------------------
+  ci-clean:
+    desc: Clean CI artifacts workspace
+    cmds:
+      - rm -rf target/ci-artifacts target/ci-artifacts.zip || true
+      - mkdir -p target/ci-artifacts/{unit,integration,performance,coverage,logs}
+
+  ci-build:
+    desc: Build for CI (skip tests)
+    cmds:
+      - mvn -DskipTests -DskipITs package
+
+  ci-test-unit:
+    desc: Run unit tests only and collect evidence
+    cmds:
+      - bash -c 'mvn -DexcludedGroups=integration test 2>&1 | tee target/ci-artifacts/logs/unit-tests.log'
+      - bash -c '[ -d target/surefire-reports ] && cp -R target/surefire-reports/* target/ci-artifacts/unit/ || true'
+
+  ci-test-integration:
+    desc: Run integration tests only and collect evidence
+    cmds:
+      - bash -c 'mvn -DskipTests -DskipITs=false failsafe:integration-test failsafe:verify 2>&1 | tee target/ci-artifacts/logs/integration-tests.log'
+      - bash -c '[ -d target/failsafe-reports ] && cp -R target/failsafe-reports/* target/ci-artifacts/integration/ || true'
+
+  ci-test-perf:
+    desc: Run performance benchmarks and collect evidence
+    cmds:
+      - bash -c 'mvn -Pperf -DskipTests -DskipITs verify 2>&1 | tee target/ci-artifacts/performance/benchmarks.log'
+      - bash -c '[ -d target/benchmarks ] && cp -R target/benchmarks target/ci-artifacts/performance/ || true'
+
+  ci-test-perf-fast:
+    desc: Run fast performance benchmarks and collect evidence
+    cmds:
+      - bash -c 'mvn -Pperf-fast -DskipTests -DskipITs verify 2>&1 | tee target/ci-artifacts/performance/benchmarks.log'
+      - bash -c '[ -d target/benchmarks ] && cp -R target/benchmarks target/ci-artifacts/performance/ || true'
+
+  ci-coverage:
+    desc: Generate coverage report and collect evidence
+    cmds:
+      - bash -c 'mvn -DskipTests jacoco:report 2>&1 | tee target/ci-artifacts/logs/coverage.log'
+      - bash -c '[ -d target/site/jacoco ] && cp -R target/site/jacoco/* target/ci-artifacts/coverage/ || true'
+
+  ci-report:
+    desc: Build consolidated CI evidence markdown
+    cmds:
+      - |
+        REPORT=target/ci-artifacts/summary.md; \
+        ART_UNIT_DIR=target/ci-artifacts/unit; ART_IT_DIR=target/ci-artifacts/integration; ART_PERF_DIR=target/ci-artifacts/performance; ART_COV_DIR=target/ci-artifacts/coverage; \
+        RUN_U=$(grep -ho 'tests="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_U=$(grep -ho 'failures="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_U=$(grep -ho 'errors="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_U=$(grep -ho 'skipped="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        RUN_I=$(grep -ho 'tests="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_I=$(grep -ho 'failures="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_I=$(grep -ho 'errors="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_I=$(grep -ho 'skipped="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        COV=$([ -f $$ART_COV_DIR/jacoco.csv ] && tail -n +2 $$ART_COV_DIR/jacoco.csv | head -1 | cut -d, -f4 | xargs printf "%.1f%%" || echo "0%"); \
+        PERF=$([ -s $$ART_PERF_DIR/benchmarks.log ] && echo "✅ Generated" || echo "⏳ Not run"); \
+        { \
+          echo "# CI Evidence Summary"; echo; echo "Generated: $$(date)"; echo; \
+          echo "## Unit Tests"; STATUS_U=$([ "$$FAIL_U" = "0" ] && [ "$$ERR_U" = "0" ] && echo "✅ PASSED" || echo "❌ FAILED"); \
+          echo "- Status: $$STATUS_U"; echo "- Tests Run: $$RUN_U | Failures: $$FAIL_U | Errors: $$ERR_U | Skipped: $$SKIP_U"; echo; \
+          if [ "$$RUN_I" -gt 0 ]; then \
+            echo "## Integration Tests"; \
+            STATUS_I=$([ "$$FAIL_I" = "0" ] && [ "$$ERR_I" = "0" ] && echo "✅ PASSED" || echo "❌ FAILED"); \
+            echo "- Status: $$STATUS_I"; \
+            echo "- Tests Run: $$RUN_I | Failures: $$FAIL_I | Errors: $$ERR_I | Skipped: $$SKIP_I"; \
+          else \
+            echo "<!-- ## Integration Tests (no tests found) -->"; \
+          fi; \
+          echo; \
+          echo "## Performance Tests"; echo "- Status: $$PERF"; echo "- Log: target/ci-artifacts/performance/benchmarks.log"; echo; \
+          echo "## Code Coverage"; echo "- Status: $([ -f $$ART_COV_DIR/index.html ] && echo "✅ Generated" || echo "⏳ Not generated")"; \
+          echo "- Overall Coverage: $$COV"; echo "- Report: target/ci-artifacts/coverage/index.html"; echo; \
+          echo "## Artifacts"; echo "- Unit: target/ci-artifacts/unit"; echo "- Integration: target/ci-artifacts/integration"; \
+          echo "- Performance: target/ci-artifacts/performance"; echo "- Coverage: target/ci-artifacts/coverage"; \
+        } > $$REPORT; \
+        cat $$REPORT
+
+  ci-report-json:
+    desc: Build consolidated CI evidence JSON
+    cmds:
+      - |
+        JSON=target/ci-artifacts/summary.json; \
+        ART_UNIT_DIR=target/ci-artifacts/unit; ART_IT_DIR=target/ci-artifacts/integration; ART_PERF_DIR=target/ci-artifacts/performance; ART_COV_DIR=target/ci-artifacts/coverage; \
+        RUN_U=$(grep -ho 'tests="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_U=$(grep -ho 'failures="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_U=$(grep -ho 'errors="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_U=$(grep -ho 'skipped="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        RUN_I=$(grep -ho 'tests="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_I=$(grep -ho 'failures="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_I=$(grep -ho 'errors="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_I=$(grep -ho 'skipped="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        COV=$([ -f $$ART_COV_DIR/jacoco.csv ] && tail -n +2 $$ART_COV_DIR/jacoco.csv | head -1 | cut -d, -f4 | xargs printf "%.1f" || echo 0); \
+        PERF=$([ -s $$ART_PERF_DIR/benchmarks.log ] && echo true || echo false); \
+        { \
+          echo "{"; \
+          echo "  \"generated\": \"$$(date -u +%Y-%m-%dT%H:%M:%SZ)\","; \
+          echo "  \"unit\": { \"run\": $$RUN_U, \"failures\": $$FAIL_U, \"errors\": $$ERR_U, \"skipped\": $$SKIP_U },"; \
+          echo "  \"integration\": { \"run\": $$RUN_I, \"failures\": $$FAIL_I, \"errors\": $$ERR_I, \"skipped\": $$SKIP_I },"; \
+          echo "  \"performance\": { \"generated\": $$PERF, \"log\": \"target/ci-artifacts/performance/benchmarks.log\" },"; \
+          echo "  \"coverage\": { \"overall\": $$COV, \"report\": \"target/ci-artifacts/coverage/index.html\" }"; \
+          echo "}"; \
+        } > $$JSON; \
+        cat $$JSON
+
+  ci-docs:
+    desc: Update docs/03-guides/testing/reports.md using CI artifacts (relative links)
+    cmds:
+      - |
+        OUT=docs/03-guides/testing/reports.md; \
+        ART_UNIT_DIR=target/ci-artifacts/unit; ART_IT_DIR=target/ci-artifacts/integration; ART_PERF_DIR=target/ci-artifacts/performance; ART_COV_DIR=target/ci-artifacts/coverage; \
+        RUN_U=$(grep -ho 'tests="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_U=$(grep -ho 'failures="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_U=$(grep -ho 'errors="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_U=$(grep -ho 'skipped="[0-9]\+"' $$ART_UNIT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        RUN_I=$(grep -ho 'tests="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        FAIL_I=$(grep -ho 'failures="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        ERR_I=$(grep -ho 'errors="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        SKIP_I=$(grep -ho 'skipped="[0-9]\+"' $$ART_IT_DIR/*.xml 2>/dev/null | grep -o '[0-9]\+' | awk '{s+=$$1} END {print s+0}'); \
+        COV=$([ -f $$ART_COV_DIR/jacoco.csv ] && tail -n +2 $$ART_COV_DIR/jacoco.csv | head -1 | cut -d, -f4 | xargs printf "%.1f%%" || echo "0%" ); \
+        PERF=$([ -s $$ART_PERF_DIR/benchmarks.log ] && echo "✅ Generated" || echo "⏳ Not run" ); \
+        { \
+          echo "# Test Reports and Coverage"; echo; echo "## Latest Test Results"; echo; echo "Generated: $$(date)"; echo; \
+          echo "### Unit Tests"; \
+          STATUS_U=$([ "$$FAIL_U" = "0" ] && [ "$$ERR_U" = "0" ] && echo "✅ PASSED" || echo "❌ FAILED"); \
+          echo "- **Status**: $$STATUS_U"; \
+          echo "- **Tests Run**: $$RUN_U"; \
+          echo "- **Failures**: $$FAIL_U"; \
+          echo "- **Errors**: $$ERR_U"; \
+          echo "- **Skipped**: $$SKIP_U"; \
+          echo "- **Reports**: [Surefire XML]($$REL_PATH/target/ci-artifacts/unit/)"; \
+          echo; \
+          if [ "$$RUN_I" -gt 0 ]; then \
+            echo "### Integration Tests"; \
+            STATUS_I=$([ "$$FAIL_I" = "0" ] && [ "$$ERR_I" = "0" ] && echo "✅ PASSED" || echo "❌ FAILED"); \
+            echo "- **Status**: $$STATUS_I"; \
+            echo "- **Tests Run**: $$RUN_I"; \
+            echo "- **Failures**: $$FAIL_I"; \
+            echo "- **Errors**: $$ERR_I"; \
+            echo "- **Skipped**: $$SKIP_I"; \
+            echo "- **Reports**: [Failsafe XML]($$REL_PATH/target/ci-artifacts/integration/)"; \
+          else \
+            echo "<!-- ### Integration Tests (no tests found) -->"; \
+          fi; \
+          echo; \
+          echo "### Performance Tests"; echo "- **Status**: $$PERF"; echo "- **Log**: [benchmarks.log](../../../target/ci-artifacts/performance/benchmarks.log)"; echo; \
+          echo "### Code Coverage"; echo "- **Status**: $([ -f $$ART_COV_DIR/index.html ] && echo "✅ Generated" || echo "⏳ Not generated" )"; \
+          echo "- **Overall Coverage**: $$COV"; echo "- **Report**: [index.html](../../../target/ci-artifacts/coverage/index.html)"; echo; \
+          echo "## Report Locations"; \
+          echo "- **Unit Reports**: [../../../target/ci-artifacts/unit/](../../../target/ci-artifacts/unit/)"; \
+          echo "- **Integration Reports**: [../../../target/ci-artifacts/integration/](../../../target/ci-artifacts/integration/)"; \
+          echo "- **Coverage Reports**: [../../../target/ci-artifacts/coverage/](../../../target/ci-artifacts/coverage/)"; \
+          echo "- **Performance Logs**: [../../../target/ci-artifacts/performance/](../../../target/ci-artifacts/performance/)"; \
+        } > $$OUT; \
+        echo "Updated: $$OUT"
+
+  ci-artifacts:
+    desc: Package CI artifacts into a zip
+    cmds:
+      - bash -c 'cd target && zip -qr ci-artifacts.zip ci-artifacts || true'
+      - echo "Package: target/ci-artifacts.zip"
+
+  ci-all:
+    desc: Full CI pipeline
+    cmds:
+      - task: ci-clean
+      - task: ci-build
+      - task: ci-test-unit
+      - task: ci-test-integration
+      - task: ci-test-perf
+      - task: ci-coverage
+      - task: ci-report
+      - task: ci-report-json
+      - task: ci-docs
+      - task: ci-artifacts
+
+  reports:
+    desc: Generate reports and update docs (no test re-run)
+    cmds:
+      - task: ci-report
+      - task: ci-report-json
+      - task: ci-docs
+
+  ci-all-fast:
+    desc: Fast CI pipeline
+    cmds:
+      - task: ci-clean
+      - task: ci-build
+      - task: ci-test-unit
+      - task: ci-test-integration
+      - task: ci-test-perf-fast
+      - task: ci-coverage
+      - task: ci-report
+      - task: ci-report-json
+      - task: ci-docs
+      - task: ci-artifacts
