@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 @ToString
 public final class TtlvObject {
 
-    private final byte[] tag;
     private final byte type;
     private final int length;
     private final byte[] value;
+    private byte[] tag;
 
     @Builder
     private TtlvObject(byte[] tag, byte type, byte[] value) {
@@ -104,8 +104,6 @@ public final class TtlvObject {
         buffer.putInt(obj.value != null ? obj.value.length : 0);
     }
 
-    // Serialization
-
     private static void addPadding(ByteBuffer buffer, int valueLength) {
         int contentLength = TtlvConstants.HEADER_SIZE + valueLength;
         int paddingNeeded = TtlvConstants.calculatePaddedLength(contentLength) - contentLength;
@@ -115,6 +113,8 @@ public final class TtlvObject {
             buffer.put(padding);
         }
     }
+
+    // Serialization
 
     private static void skipPadding(ByteBuffer buffer, int valueLength) {
         int contentLength = TtlvConstants.HEADER_SIZE + valueLength;
@@ -137,8 +137,6 @@ public final class TtlvObject {
         validateInput(data.length);
     }
 
-    // Deserialization
-
     private static void validateInput(int length) {
         if (length == 0) throw new IllegalArgumentException(TtlvConstants.ERROR_EMPTY_DATA);
         TtlvConstants.validateMinimumDataLength(length);
@@ -148,6 +146,13 @@ public final class TtlvObject {
     // Defensive getters for array/list fields (Lombok won't generate these because we define them)
     public byte[] getTag() {
         return Arrays.copyOf(tag, tag.length);
+    }
+
+    public void setTag(byte[] tag) {
+        if (tag.length != TtlvConstants.TAG_SIZE) {
+            throw new IllegalArgumentException(String.format("Tag must be %d bytes, got %d", TtlvConstants.TAG_SIZE, tag.length));
+        }
+        this.tag = Arrays.copyOf(tag, tag.length);
     }
 
     public byte[] getValue() {
@@ -177,6 +182,8 @@ public final class TtlvObject {
     public boolean isStructure() {
         return type == EncodingType.STRUCTURE.getTypeValue();
     }
+
+    // Deserialization
 
     public byte[] toBytes() {
         byte[] valueBytes = getValue();
