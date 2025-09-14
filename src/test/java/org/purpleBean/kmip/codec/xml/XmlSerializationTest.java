@@ -3,6 +3,7 @@ package org.purpleBean.kmip.codec.xml;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.purpleBean.kmip.ProtocolVersion;
@@ -19,10 +20,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("XML Serialization Tests")
-class XmlSerializationTest extends BaseKmipTest {
+@DisplayName("XML Error Handling Tests")
+class XmlErrorHandlingTest extends BaseKmipTest {
 
     @Nested
+    @Disabled("Replaced by per-class tests: ProtocolVersionXmlTest")
     @DisplayName("Protocol Version XML Serialization")
     class ProtocolVersionXmlSerialization {
 
@@ -70,6 +72,7 @@ class XmlSerializationTest extends BaseKmipTest {
     }
 
     @Nested
+    @Disabled("Replaced by per-class tests: StateXmlTest")
     @DisplayName("State XML Serialization")
     class StateXmlSerialization {
 
@@ -124,6 +127,7 @@ class XmlSerializationTest extends BaseKmipTest {
     }
 
     @Nested
+    @Disabled("Replaced by per-class tests: ActivationDateAttributeXmlTest")
     @DisplayName("ActivationDateAttribute XML Serialization")
     class ActivationDateAttributeXmlSerialization {
 
@@ -175,6 +179,7 @@ class XmlSerializationTest extends BaseKmipTest {
     }
 
     @Nested
+    @Disabled("Replaced by per-class tests: SampleStructureXmlTest")
     @DisplayName("SampleStructure XML Serialization")
     class SampleStructureXmlSerialization {
 

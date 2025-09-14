@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec;
+package org.purpleBean.kmip;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-@DisplayName("KmipContext Tests")
+@DisplayName("KmipContext Concurrency Tests")
 @Execution(ExecutionMode.SAME_THREAD) // Ensure thread safety tests run sequentially
-class KmipContextTest extends BaseKmipTest {
+class KmipContextConcurrencyTest extends BaseKmipTest {
 
     @Nested
     @DisplayName("Basic Operations")
