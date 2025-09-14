@@ -20,17 +20,26 @@ Add the following dependency to your `pom.xml`:
         <version>1.0.0</version>
     </dependency>
     
-    <!-- Optional: Add these if you need JSON or XML support -->
+    <!-- JSON/XML + JavaTime support (aligned with project pom) -->
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.15.0</version>
+        <version>2.20.0</version>
     </dependency>
-    
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>2.20</version>
+    </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jackson-dataformat-xml</artifactId>
-        <version>2.15.0</version>
+        <version>2.20.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>2.20.0</version>
     </dependency>
 </dependencies>
 ```
@@ -42,10 +51,12 @@ Add to your `build.gradle.kts`:
 ```kotlin
 dependencies {
     implementation("org.purpleBean:kmip-adapter:1.0.0")
-    
-    // Optional: Add these if you need JSON or XML support
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
+
+    // JSON/XML + JavaTime support (aligned with project pom)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.20")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.0")
 }
 ```
 
@@ -56,10 +67,12 @@ Add to your `build.gradle`:
 ```groovy
 dependencies {
     implementation 'org.purpleBean:kmip-adapter:1.0.0'
-    
-    // Optional: Add these if you need JSON or XML support
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
+
+    // JSON/XML + JavaTime support (aligned with project pom)
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.20'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.0'
 }
 ```
 
@@ -79,6 +92,28 @@ dependencies {
    # Or using Gradle
    ./gradlew build
    ```
+
+## Test & Benchmark Commands
+
+```bash
+# Run unit tests (default)
+mvn test
+
+# Include integration tests (tagged with @Tag("integration"))
+mvn -Pwith-integration test
+
+# Generate coverage report (HTML at target/site/jacoco/index.html)
+mvn clean test
+
+# Strict coverage gate (optional)
+mvn -Pcoverage-strict verify
+
+# Run performance benchmarks (JMH)
+mvn -Pperf verify
+
+# Quick benchmarks (lighter warmups/iterations)
+mvn -Pperf-fast verify
+```
 
 ## Verifying Installation
 
@@ -117,7 +152,6 @@ public class KmipTest {
 ## Next Steps
 
 - [Configuration Guide](./configuration.md)
-- [Quick Start Guide](./quickstart.md)
 - [API Documentation](../04-api/)
 
 ## Support

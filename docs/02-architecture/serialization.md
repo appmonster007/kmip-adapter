@@ -29,6 +29,14 @@ try {
 }
 ```
 
+## Test Layout and Reuse
+
+- Per-class tests live next to their codecs for ease of discovery:
+  - JSON: `src/test/java/org/purpleBean/kmip/codec/json/*JsonTest.java`
+  - TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/*TtlvTest.java`
+  - XML: `src/test/java/org/purpleBean/kmip/codec/xml/*XmlTest.java`
+- Shared test base `BaseKmipTest` configures JSON/XML mappers with `JavaTimeModule`, `KmipJsonModule`, `KmipXmlModule`, and manages `KmipContext` lifecycle.
+
 ### Serialization Modules
 
 1. **`KmipTtlvModule`**
@@ -51,10 +59,12 @@ try {
 ### JSON Serialization Example
 
 ```java
-// 1. Configure ObjectMapper with KMIP JSON module
-ObjectMapper jsonMapper = new ObjectMapper()
-    .registerModule(new KmipJsonModule())
-    .enable(SerializationFeature.INDENT_OUTPUT);
+// 1. Configure ObjectMapper with JavaTime and KMIP JSON modules
+ObjectMapper jsonMapper = new ObjectMapper();
+jsonMapper.findAndRegisterModules();
+jsonMapper.registerModule(new JavaTimeModule());
+jsonMapper.registerModule(new KmipJsonModule());
+jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 // 2. Set KMIP spec using thread-local context
 KmipContext.setSpec(KmipSpec.V1_2);
@@ -131,6 +141,7 @@ ObjectMapper mapper = new ObjectMapper()
 
 - `TtlvMapper` does not take a config object; register serializers via `KmipTtlvModule`.
 - Reuse `ObjectMapper`/`XmlMapper` instances; they are thread-safe after configuration.
+- Always register `JavaTimeModule` and the relevant KMIP module (`KmipJsonModule` / `KmipXmlModule`) when working with date/time types.
 - Keep `KmipContext` scope minimal and always clear it after use.
 
 ## Best Practices
@@ -222,11 +233,17 @@ public class CustomTypeSerializer extends JsonSerializer<CustomType> {
 
 ```java
 // JSON
-ObjectMapper json = new ObjectMapper().registerModule(new KmipJsonModule());
+ObjectMapper json = new ObjectMapper();
+json.findAndRegisterModules();
+json.registerModule(new JavaTimeModule());
+json.registerModule(new KmipJsonModule());
 String jsonOut = json.writeValueAsString(sample);
 
 // XML
-XmlMapper xml = new XmlMapper().registerModule(new KmipXmlModule());
+XmlMapper xml = new XmlMapper();
+xml.findAndRegisterModules();
+xml.registerModule(new JavaTimeModule());
+xml.registerModule(new KmipXmlModule());
 String xmlOut = xml.writeValueAsString(sample);
 
 // TTLV
@@ -246,8 +263,14 @@ For high-performance scenarios:
 
 ```java
 // Configure once
-ObjectMapper json = new ObjectMapper().registerModule(new KmipJsonModule());
-XmlMapper xml = new XmlMapper().registerModule(new KmipXmlModule());
+ObjectMapper json = new ObjectMapper();
+json.findAndRegisterModules();
+json.registerModule(new JavaTimeModule());
+json.registerModule(new KmipJsonModule());
+XmlMapper xml = new XmlMapper();
+xml.findAndRegisterModules();
+xml.registerModule(new JavaTimeModule());
+xml.registerModule(new KmipXmlModule());
 TtlvMapper ttlv = new TtlvMapper();
 ttlv.registerModule(new KmipTtlvModule());
 

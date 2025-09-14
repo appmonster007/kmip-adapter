@@ -10,21 +10,25 @@ This guide covers how to run and interpret benchmarks for the KMIP Adapter. We u
 - Java 21+
 - Maven 3.6+
 
-### Running All Benchmarks
+### Running All Benchmarks (standard)
 
 ```bash
-mvn clean install
-java -jar target/benchmarks.jar
+mvn -Pperf verify
 ```
 
-### Running Specific Benchmarks
+### Quick Benchmarks (reduced warmups/iterations)
 
 ```bash
-# Run a specific benchmark class
-java -jar target/benchmarks.jar KmipSerializationBenchmark
+mvn -Pperf-fast verify
+```
 
-# Run a specific benchmark method
-java -jar target/benchmarks.jar KmipSerializationBenchmark.stateCreation
+### Running Specific Benchmarks / Custom Options
+
+Pass JMH options via `bench.args`:
+
+```bash
+# Throughput mode, JSON report, specific benchmark selection
+mvn -Pperf -Dbench.args="KmipSerializationBenchmark -bm thrpt -rf json -rff target/jmh.json" verify
 ```
 
 ### Common JMH Options
@@ -137,14 +141,14 @@ public class ParameterizedBenchmark {
 ### Using JMH Profilers
 
 ```bash
-# Enable GC profiler
-java -jar target/benchmarks.jar -prof gc
+# Enable GC profiler (via bench.args)
+mvn -Pperf -Dbench.args="-prof gc" verify
 
 # Enable stack profiler
-java -jar target/benchmarks.jar -prof stack
+mvn -Pperf -Dbench.args="-prof stack" verify
 
 # Enable perf_asm (Linux only)
-java -jar target/benchmarks.jar -prof perfasm
+mvn -Pperf -Dbench.args="-prof perfasm" verify
 ```
 
 ### Common Issues

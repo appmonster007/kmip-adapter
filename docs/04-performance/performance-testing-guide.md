@@ -20,8 +20,8 @@ This document outlines the performance testing strategy, methodology, and result
 - Java Version: 21
 
 ### Software Dependencies
-- JMH (Java Microbenchmark Harness) 1.37
-- Maven 3.8.1+
+- JMH (Java Microbenchmark Harness) 1.36
+- Maven 3.6+
 - Java 21
 
 ## Benchmark Setup
@@ -49,26 +49,29 @@ Key metrics collected:
 
 ## Running Benchmarks
 
-### Prerequisites
+Benchmarks are wired into Maven profiles so they don't affect normal unit test runs.
+
+### Run All Benchmarks (standard)
 ```bash
-mvn clean install -DskipTests
+mvn -Pperf verify
 ```
 
-### Run All Benchmarks
+### Quick Benchmarks (reduced warmups/iterations)
 ```bash
-mvn test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
+mvn -Pperf-fast verify
 ```
 
-### Run Specific Benchmark
+### Customize JMH Options
+Pass JMH arguments via `bench.args`:
 ```bash
-mvn test-compile exec:java -Dexec.mainClass="org.openjdk.jmh.Main" -Dexec.args="KmipSerializationBenchmark"
+mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
 ```
 
-### Benchmark Options
-- `-f 1`: Number of forks (default: 1)
-- `-wi 3`: Warmup iterations (default: 3)
-- `-i 5`: Measurement iterations (default: 5)
-- `-t 4`: Number of threads (default: 1)
+Common flags:
+- `-f 1`: number of forks
+- `-wi 3`: warmup iterations
+- `-i 5`: measurement iterations
+- `-t 4`: number of threads
 
 ## Benchmark Results
 

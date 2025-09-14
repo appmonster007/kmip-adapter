@@ -13,6 +13,42 @@
 - [Test Coverage](#test-coverage)
 - [Best Practices](#best-practices)
 
+## Quick Start: Running Tests
+
+Use Maven profiles to run fast unit tests by default, include integration tests when needed, and execute JMH performance benchmarks separately.
+
+```bash
+# Run unit tests (default)
+mvn test
+
+# Include integration tests (tests tagged with @Tag("integration"))
+mvn -Pwith-integration test
+
+# Run with coverage report (HTML at target/site/jacoco/index.html)
+mvn clean test
+
+# Strict coverage gate (optional; fails build below thresholds)
+mvn -Pcoverage-strict verify
+
+# Run performance benchmarks (JMH)
+mvn -Pperf verify
+
+# Quick benchmarks (lighter warmups/iterations)
+mvn -Pperf-fast verify
+
+# Optional: pass JMH args
+mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
+```
+
+Per-class unit tests live alongside their codecs for easy discoverability:
+
+- JSON: `src/test/java/org/purpleBean/kmip/codec/json/*JsonTest.java`
+- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/*TtlvTest.java`
+- XML: `src/test/java/org/purpleBean/kmip/codec/xml/*XmlTest.java`
+- Request structures: `src/test/java/org/purpleBean/kmip/common/structure/request/*`
+
+Integration tests are tagged with `@Tag("integration")` and can be included with the `with-integration` profile.
+
 ## Unit Testing
 
 ### Testing Enumerations
@@ -350,12 +386,14 @@ public class ProtocolVersionBenchmark {
 ### Running Benchmarks
 
 ```bash
-# Run all benchmarks
-mvn clean install
-java -jar target/benchmarks.jar
+# Run all benchmarks via Maven profile
+mvn -Pperf verify
 
-# Run specific benchmark with options
-java -jar target/benchmarks.jar KeyBlockBenchmark -f 1 -wi 3 -i 5
+# Quick benchmarks (reduced warmups/iterations)
+mvn -Pperf-fast verify
+
+# Pass JMH args (e.g., output JSON report)
+mvn -Pperf -Dbench.args="-rf json -rff target/jmh.json -wi 3 -i 5 -f 1" verify
 ```
 
 ## Test Utilities
