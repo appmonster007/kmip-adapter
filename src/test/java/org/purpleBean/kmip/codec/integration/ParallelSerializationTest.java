@@ -1,10 +1,11 @@
-package org.purpleBean.kmip.codec;
+package org.purpleBean.kmip.codec.integration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.api.Tag;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Parallel Serialization Tests with Different Codec Contexts")
+@Tag("integration")
 @Execution(ExecutionMode.CONCURRENT)
 class ParallelSerializationTest extends BaseKmipTest {
 
