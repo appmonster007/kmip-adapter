@@ -83,7 +83,7 @@ Add the dependency to your `pom.xml`:
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.structure.ProtocolVersion;
+import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 
 KmipContext.setSpec(KmipSpec.V1_2);
@@ -390,6 +390,12 @@ Current test coverage includes:
 - **Registry Operations**: Full enumeration extension testing
 - **Thread Safety**: Concurrent codec context validation
 - **Error Handling**: Comprehensive exception scenario testing
+
+Note: Per-class codec tests are organized to mirror runtime packages for easier discoverability, for example:
+
+- JSON: `src/test/java/org/purpleBean/kmip/codec/json/common/...`
+- XML: `src/test/java/org/purpleBean/kmip/codec/xml/common/...`
+- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/...`
 
 ## Configuration
 

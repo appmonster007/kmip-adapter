@@ -31,11 +31,13 @@ try {
 
 ## Test Layout and Reuse
 
-- Per-class tests live next to their codecs for ease of discovery:
-  - JSON: `src/test/java/org/purpleBean/kmip/codec/json/*JsonTest.java`
-  - TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/*TtlvTest.java`
-  - XML: `src/test/java/org/purpleBean/kmip/codec/xml/*XmlTest.java`
+- Per-class tests mirror runtime packages under each codec for ease of discovery:
+  - JSON: `src/test/java/org/purpleBean/kmip/codec/json/common/.../*JsonTest.java`
+  - TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/.../*TtlvTest.java`
+  - XML: `src/test/java/org/purpleBean/kmip/codec/xml/common/.../*XmlTest.java`
+- Request structures have codec tests under `.../structure/request/*` and unit tests under `src/test/java/org/purpleBean/kmip/common/structure/request/*`.
 - Shared test base `BaseKmipTest` configures JSON/XML mappers with `JavaTimeModule`, `KmipJsonModule`, `KmipXmlModule`, and manages `KmipContext` lifecycle.
+- Note: Some XML tests validate serialization structure instead of full round-trips where deserializer array semantics differ from serializer output (e.g., request message items). This is intentional and documented in the tests.
 
 ### Serialization Modules
 

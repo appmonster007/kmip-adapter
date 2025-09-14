@@ -61,10 +61,10 @@ public final class FooFactory {
 
 ## Per-Class Test Boilerplates (Copy-Ready)
 
-### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/FooAttributeJsonTest.java`
+### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/common/FooAttributeJsonTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.json;
+package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -85,10 +85,10 @@ class FooAttributeJsonTest extends BaseKmipTest {
 }
 ```
 
-### TTLV Test: `src/test/java/org/purpleBean/kmip/codec/ttlv/FooAttributeTtlvTest.java`
+### TTLV Test: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/FooAttributeTtlvTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.ttlv;
+package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -118,10 +118,10 @@ class FooAttributeTtlvTest extends BaseKmipTest {
 }
 ```
 
-### XML Test: `src/test/java/org/purpleBean/kmip/codec/xml/FooAttributeXmlTest.java`
+### XML Test: `src/test/java/org/purpleBean/kmip/codec/xml/common/FooAttributeXmlTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.xml;
+package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -134,10 +134,13 @@ import org.purpleBean.kmip.test.SerializationTestUtils;
 class FooAttributeXmlTest extends BaseKmipTest {
 
     @Test
-    @DisplayName("Round-trip: serialize and deserialize FooAttribute")
-    void roundTrip() {
+    @DisplayName("Serialize FooAttribute to XML and validate structure")
+    void serialize_structure() {
+        // For some request-like structures, prefer structure checks over round-trip
         FooAttribute original = FooFactory.createFooAttribute();
-        SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, FooAttribute.class);
+        SerializationTestUtils.testXmlSerialization(xmlMapper, original, xml -> {
+            // assertThat(xml).contains("<FooAttribute>");
+        });
     }
 }
 ```

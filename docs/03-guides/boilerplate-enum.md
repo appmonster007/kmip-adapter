@@ -81,7 +81,7 @@ public class FooStatus implements KmipEnumeration {
 }
 ```
 
-### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/FooStatusJsonTest.java`
+### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/common/enumeration/FooStatusJsonTest.java`
 
 ```java
 package org.purpleBean.kmip.codec.json;

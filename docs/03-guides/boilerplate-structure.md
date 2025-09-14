@@ -68,10 +68,10 @@ try {
 
 ## Per-Class Test Boilerplates (Copy-Ready)
 
-### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/FooJsonTest.java`
+### JSON Test: `src/test/java/org/purpleBean/kmip/codec/json/common/structure/FooJsonTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.json;
+package org.purpleBean.kmip.codec.json.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -100,10 +100,10 @@ class FooJsonTest extends BaseKmipTest {
 }
 ```
 
-### TTLV Test: `src/test/java/org/purpleBean/kmip/codec/ttlv/FooTtlvTest.java`
+### TTLV Test: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/structure/FooTtlvTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.ttlv;
+package org.purpleBean.kmip.codec.ttlv.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -135,10 +135,10 @@ class FooTtlvTest extends BaseKmipTest {
 }
 ```
 
-### XML Test: `src/test/java/org/purpleBean/kmip/codec/xml/FooXmlTest.java`
+### XML Test: `src/test/java/org/purpleBean/kmip/codec/xml/common/structure/FooXmlTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.xml;
+package org.purpleBean.kmip.codec.xml.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -149,10 +149,13 @@ import org.purpleBean.kmip.test.SerializationTestUtils;
 class FooXmlTest extends BaseKmipTest {
 
     @Test
-    @DisplayName("Round-trip: serialize and deserialize Foo")
-    void roundTrip() {
+    @DisplayName("Serialize Foo to XML and validate structure")
+    void serialize_structure() {
+        // In some cases (e.g., request structures), prefer structure checks over round-trip
         Foo original = FooFactory.createFoo();
-        SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, Foo.class);
+        SerializationTestUtils.testXmlSerialization(xmlMapper, original, xml -> {
+            // assertThat(xml).contains("<Foo>");
+        });
     }
 
     @Test

@@ -40,12 +40,20 @@ mvn -Pperf-fast verify
 mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
 ```
 
-Per-class unit tests live alongside their codecs for easy discoverability:
+Per-class unit tests are organized to mirror runtime packages for each codec layer:
 
-- JSON: `src/test/java/org/purpleBean/kmip/codec/json/*JsonTest.java`
-- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/*TtlvTest.java`
-- XML: `src/test/java/org/purpleBean/kmip/codec/xml/*XmlTest.java`
-- Request structures: `src/test/java/org/purpleBean/kmip/common/structure/request/*`
+- JSON: `src/test/java/org/purpleBean/kmip/codec/json/common/.../*JsonTest.java`
+- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/.../*TtlvTest.java`
+- XML: `src/test/java/org/purpleBean/kmip/codec/xml/common/.../*XmlTest.java`
+
+Examples:
+- Enumerations (e.g., `State`): `codec/json/common/enumeration/StateJsonTest.java`, `codec/xml/common/enumeration/StateXmlTest.java`, `codec/ttlv/common/enumeration/StateTtlvTest.java`
+- Attributes (e.g., `ActivationDateAttribute`): `codec/json/common/ActivationDateAttributeJsonTest.java`, etc.
+- Structures (e.g., `SampleStructure`): `codec/json/common/structure/SampleStructureJsonTest.java`, etc.
+- Request structures (e.g., `SimpleRequestHeader`, `SimpleRequestMessage`, `SimpleRequestBatchItem`):
+  - JSON: `codec/json/common/structure/request/*`
+  - XML: `codec/xml/common/structure/request/*`
+  - TTLV: `codec/ttlv/common/structure/request/*`
 
 Integration tests are tagged with `@Tag("integration")` and can be included with the `with-integration` profile.
 

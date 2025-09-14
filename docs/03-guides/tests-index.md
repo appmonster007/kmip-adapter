@@ -4,10 +4,10 @@ A concise reference mapping production classes to their corresponding per-class 
 
 ## Layout Overview
 
-- JSON codec tests: `src/test/java/org/purpleBean/kmip/codec/json/`
-- TTLV codec tests: `src/test/java/org/purpleBean/kmip/codec/ttlv/`
-- XML codec tests: `src/test/java/org/purpleBean/kmip/codec/xml/`
-- Request structures: `src/test/java/org/purpleBean/kmip/common/structure/request/`
+- JSON codec tests: `src/test/java/org/purpleBean/kmip/codec/json/common/...`
+- TTLV codec tests: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/...`
+- XML codec tests: `src/test/java/org/purpleBean/kmip/codec/xml/common/...`
+- Core and request structure unit tests: `src/test/java/org/purpleBean/kmip/common/...`
 - Top-level KMIP tests: `src/test/java/org/purpleBean/kmip/`
 - Integration tests (cross-codec/behavioral): `src/test/java/org/purpleBean/kmip/codec/integration/`
 
@@ -19,24 +19,36 @@ A concise reference mapping production classes to their corresponding per-class 
   - XML: `codec/xml/ProtocolVersionXmlTest.java`
 
 - `org.purpleBean.kmip.common.enumeration.State`
-  - JSON: `codec/json/StateJsonTest.java`
-  - TTLV: `codec/ttlv/StateTtlvTest.java`
-  - XML: `codec/xml/StateXmlTest.java`
+  - JSON: `codec/json/common/enumeration/StateJsonTest.java`
+  - TTLV: `codec/ttlv/common/enumeration/StateTtlvTest.java`
+  - XML: `codec/xml/common/enumeration/StateXmlTest.java`
 
 - `org.purpleBean.kmip.common.ActivationDateAttribute`
-  - JSON: `codec/json/ActivationDateAttributeJsonTest.java`
-  - TTLV: `codec/ttlv/ActivationDateAttributeTtlvTest.java`
-  - XML: `codec/xml/ActivationDateAttributeXmlTest.java`
+  - JSON: `codec/json/common/ActivationDateAttributeJsonTest.java`
+  - TTLV: `codec/ttlv/common/ActivationDateAttributeTtlvTest.java`
+  - XML: `codec/xml/common/ActivationDateAttributeXmlTest.java`
 
 - `org.purpleBean.kmip.common.structure.SampleStructure`
-  - JSON: `codec/json/SampleStructureJsonTest.java`
-  - TTLV: `codec/ttlv/SampleStructureTtlvTest.java`
-  - XML: `codec/xml/SampleStructureXmlTest.java`
+  - JSON: `codec/json/common/structure/SampleStructureJsonTest.java`
+  - TTLV: `codec/ttlv/common/structure/SampleStructureTtlvTest.java`
+  - XML: `codec/xml/common/structure/SampleStructureXmlTest.java`
 
 - Request structures (`org.purpleBean.kmip.common.structure.request.*`)
-  - `SimpleRequestHeader`: `common/structure/request/SimpleRequestHeaderTest.java`
-  - `SimpleRequestBatchItem`: `common/structure/request/SimpleRequestBatchItemTest.java`
-  - `SimpleRequestMessage`: `common/structure/request/SimpleRequestMessageTest.java`
+  - Unit tests:
+    - `SimpleRequestHeader`: `common/structure/request/SimpleRequestHeaderTest.java`
+    - `SimpleRequestBatchItem`: `common/structure/request/SimpleRequestBatchItemTest.java`
+    - `SimpleRequestMessage`: `common/structure/request/SimpleRequestMessageTest.java`
+  - Codec tests:
+    - JSON:
+      - `codec/json/common/structure/request/SimpleRequestHeaderJsonTest.java`
+      - `codec/json/common/structure/request/SimpleRequestBatchItemJsonTest.java`
+      - `codec/json/common/structure/request/SimpleRequestMessageJsonTest.java`
+    - XML:
+      - `codec/xml/common/structure/request/SimpleRequestHeaderXmlTest.java`
+      - `codec/xml/common/structure/request/SimpleRequestMessageXmlTest.java`
+    - TTLV:
+      - `codec/ttlv/common/structure/request/SimpleRequestHeaderTtlvTest.java`
+      - `codec/ttlv/common/structure/request/SimpleRequestMessageTtlvTest.java`
 
 - Context and core
   - `KmipContext`: `kmip/KmipContextTest.java`
