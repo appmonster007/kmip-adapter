@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("ProtocolVersion TTLV Tests")
 class ProtocolVersionTtlvTest extends BaseKmipTest {
@@ -47,6 +48,29 @@ class ProtocolVersionTtlvTest extends BaseKmipTest {
                     }
 
                     assertThat(deserialized).isEqualTo(original);
+                });
+    }
+
+    @Test
+    @DisplayName("TTLV: serialize succeeds but deserialize fails under UnsupportedVersion context")
+    void ttlv_behavior_underUnsupportedVersion() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> {
+                    ProtocolVersion original = ProtocolVersion.of(1, 2);
+
+                    // Serialization should not check spec compatibility for ProtocolVersion (returns true)
+                    ByteBuffer buffer;
+                    try {
+                        buffer = ttlvMapper.writeValueAsByteBuffer(original);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Failed to serialize to TTLV", e);
+                    }
+
+                    // Deserialization should fail because tag resolution via KmipTag.fromBytes
+                    // filters by supported versions and UnsupportedVersion is not supported
+                    assertThatThrownBy(() -> ttlvMapper.readValue(buffer, ProtocolVersion.class))
+                            .isInstanceOf(RuntimeException.class);
                 });
     }
 }

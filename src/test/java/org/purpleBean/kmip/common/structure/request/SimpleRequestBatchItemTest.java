@@ -10,11 +10,12 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purpleBean.kmip.test.BaseKmipTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("SimpleRequestBatchItem Tests")
-class SimpleRequestBatchItemTest {
+class SimpleRequestBatchItemTest extends BaseKmipTest {
 
     @Nested
     @DisplayName("Construction and Basic Properties")
@@ -121,6 +122,29 @@ class SimpleRequestBatchItemTest {
             assertThat(item).isNotNull();
             assertThat(item.getKmipTag()).isEqualTo(new KmipTag(KmipTag.Standard.BATCH_ITEM));
             assertThat(item.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: JSON serialization succeeds but deserialization fails")
+        void unsupportedVersion_jsonSerializationThenDeserializationFails() throws JsonProcessingException {
+            // Given
+            SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+
+            // When & Then
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> {
+                        ObjectMapper jsonMapper = new ObjectMapper();
+                        jsonMapper.registerModule(new KmipJsonModule());
+                        try {
+                            String json = jsonMapper.writeValueAsString(item);
+                            org.assertj.core.api.Assertions.assertThatThrownBy(
+                                            () -> jsonMapper.readValue(json, SimpleRequestBatchItem.class))
+                                    .isInstanceOf(Exception.class);
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         }
     }
 }

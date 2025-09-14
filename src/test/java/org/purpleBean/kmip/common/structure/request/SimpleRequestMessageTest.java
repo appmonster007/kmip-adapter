@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
+import org.purpleBean.kmip.test.BaseKmipTest;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("SimpleRequestMessage Tests")
-class SimpleRequestMessageTest {
+class SimpleRequestMessageTest extends BaseKmipTest {
 
     private SimpleRequestMessage requestMessage;
     private SimpleRequestHeader requestHeader;
@@ -147,6 +148,40 @@ class SimpleRequestMessageTest {
             for (int i = 0; i < errorCount; i++) {
                 assertThat(msg.getRequestBatchItemErrors().get(i).getMessage()).isEqualTo("Err-" + i);
             }
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: JSON serialization should succeed (message supports all specs)")
+        void unsupportedVersion_jsonSerializationShouldSucceed() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> {
+                        ObjectMapper jsonMapper = new ObjectMapper();
+                        jsonMapper.registerModule(new KmipJsonModule());
+                        try {
+                            String json = jsonMapper.writeValueAsString(requestMessage);
+                            assertThat(json).contains("\"RequestMessage\"");
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: XML serialization should succeed (message supports all specs)")
+        void unsupportedVersion_xmlSerializationShouldSucceed() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> {
+                        XmlMapper xmlMapper = new XmlMapper();
+                        xmlMapper.registerModule(new KmipXmlModule());
+                        try {
+                            String xml = xmlMapper.writeValueAsString(requestMessage);
+                            assertThat(xml).contains("<RequestMessage>");
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         }
     }
 

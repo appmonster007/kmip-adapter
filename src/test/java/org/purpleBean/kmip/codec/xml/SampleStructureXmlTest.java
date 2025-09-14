@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.xml;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -43,5 +44,15 @@ class SampleStructureXmlTest extends BaseKmipTest {
                     assertThat(xml).contains("<State");
                 }
         );
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: SampleStructure XML serialization should fail")
+    void unsupportedVersion_xmlSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                        .isInstanceOf(Exception.class));
     }
 }

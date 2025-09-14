@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.ttlv;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.test.BaseKmipTest;
@@ -54,5 +55,15 @@ class SampleStructureTtlvTest extends BaseKmipTest {
             throw new RuntimeException("Failed to deserialize from TTLV", e);
         }
         assertThat(deserialized).isEqualTo(original);
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: SampleStructure TTLV serialization should fail")
+    void unsupportedVersion_ttlvSerializationShouldFail() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> ttlvMapper.writeValueAsByteBuffer(KmipTestDataFactory.createSampleStructure()))
+                        .isInstanceOf(Exception.class));
     }
 }

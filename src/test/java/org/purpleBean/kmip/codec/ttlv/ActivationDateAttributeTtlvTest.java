@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.ttlv;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
@@ -45,6 +46,16 @@ class ActivationDateAttributeTtlvTest extends BaseKmipTest {
         for (ActivationDateAttribute d : dates) {
             assertRoundTrip(d);
         }
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: ActivationDateAttribute TTLV serialization should fail")
+    void unsupportedVersion_ttlvSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> ttlvMapper.writeValueAsByteBuffer(KmipTestDataFactory.createActivationDateAttribute()))
+                        .isInstanceOf(Exception.class));
     }
 
     private void assertRoundTrip(ActivationDateAttribute original) {

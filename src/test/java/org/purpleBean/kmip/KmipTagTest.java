@@ -93,6 +93,18 @@ class KmipTagTest extends BaseKmipTest {
             assertThat(tag.getValue().isSupportedFor(KmipSpec.V1_2)).isTrue();
             assertThat(tag.getValue().isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
         }
+
+        @Test
+        @DisplayName("Standard tags should not be supported for UnsupportedVersion")
+        void standardTagsShouldNotBeSupportedForUnsupportedVersion() {
+            // Given
+            KmipSpec unsupported = KmipSpec.UnsupportedVersion;
+
+            // When & Then - pick representative standard tags
+            assertThat(KmipTag.Standard.PROTOCOL_VERSION.isSupportedFor(unsupported)).isFalse();
+            assertThat(KmipTag.Standard.STATE.isSupportedFor(unsupported)).isFalse();
+            assertThat(KmipTag.Standard.SECRET_DATA.isSupportedFor(unsupported)).isFalse();
+        }
     }
 
     @Nested
@@ -199,6 +211,20 @@ class KmipTagTest extends BaseKmipTest {
 
             // Then
             assertThat(found).isEqualTo(expected);
+        }
+
+        @Test
+        @DisplayName("Should reject lookups under UnsupportedVersion")
+        void shouldRejectLookupsUnderUnsupportedVersion() {
+            // Given
+            KmipSpec unsupported = KmipSpec.UnsupportedVersion;
+            KmipTag.Standard standard = KmipTag.Standard.PROTOCOL_VERSION;
+
+            // When & Then
+            assertThatThrownBy(() -> KmipTag.fromValue(unsupported, standard.getValue()))
+                    .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> KmipTag.fromName(unsupported, standard.getDescription()))
+                    .isInstanceOf(RuntimeException.class);
         }
 
         @Test

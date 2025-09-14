@@ -12,6 +12,7 @@ import java.util.Optional;
 public enum KmipSpec {
 
     UnknownVersion(-1, -1),
+    UnsupportedVersion(-9, -9),
     V1_2(1, 2);
 
     private static final Map<Map.Entry<Integer, Integer>, KmipSpec> SPEC_MAP = new HashMap<>();

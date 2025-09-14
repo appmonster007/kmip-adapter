@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.json;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -41,5 +42,15 @@ class SampleStructureJsonTest extends BaseKmipTest {
                     SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
                     assertThat(json).contains("\"SecretData\"");
                 });
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: SampleStructure JSON serialization should fail")
+    void unsupportedVersion_jsonSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                        .isInstanceOf(Exception.class));
     }
 }

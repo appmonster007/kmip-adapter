@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.xml;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -11,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @DisplayName("ActivationDateAttribute XML Tests")
 class ActivationDateAttributeXmlTest extends BaseKmipTest {
@@ -48,5 +50,15 @@ class ActivationDateAttributeXmlTest extends BaseKmipTest {
                     assertThat(xml).contains("type=\"DateTime\"");
                 }
         );
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: ActivationDateAttribute XML serialization should fail")
+    void unsupportedVersion_xmlSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(
+                                () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                        .isInstanceOf(Exception.class));
     }
 }

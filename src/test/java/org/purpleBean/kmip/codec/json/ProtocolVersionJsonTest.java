@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -28,6 +29,28 @@ class ProtocolVersionJsonTest extends BaseKmipTest {
         String[] parts = versionPair.split(",");
         ProtocolVersion version = ProtocolVersion.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
         SerializationTestUtils.performJsonRoundTrip(jsonMapper, version, ProtocolVersion.class);
+    }
+
+    @Test
+    @DisplayName("JSON: serialization succeeds but deserialization fails under UnsupportedVersion context")
+    void json_behavior_underUnsupportedVersionContext() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> {
+                    ProtocolVersion original = KmipTestDataFactory.createProtocolVersion();
+                    // Serialize should succeed
+                    String json;
+                    try {
+                        json = jsonMapper.writeValueAsString(original);
+                    } catch (Exception e) {
+                        throw new RuntimeException("JSON serialization failed unexpectedly", e);
+                    }
+                    // Deserialize should fail due to tag lookup filtering by UnsupportedVersion
+                    final String finalJson = json;
+                    org.assertj.core.api.Assertions.assertThatThrownBy(
+                                    () -> jsonMapper.readValue(finalJson, ProtocolVersion.class))
+                            .isInstanceOf(Exception.class);
+                });
     }
 
     @Test

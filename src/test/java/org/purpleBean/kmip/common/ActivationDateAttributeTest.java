@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -248,6 +249,26 @@ class ActivationDateAttributeTest extends BaseKmipTest {
             // When & Then
             SerializationTestUtils.testNullHandling(
                     jsonMapper, attributeWithNull, ActivationDateAttribute.class);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: ActivationDateAttribute JSON serialization should fail")
+        void unsupportedVersion_jsonSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                            .isInstanceOf(Exception.class));
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: ActivationDateAttribute XML serialization should fail")
+        void unsupportedVersion_xmlSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                            .isInstanceOf(Exception.class));
         }
     }
 

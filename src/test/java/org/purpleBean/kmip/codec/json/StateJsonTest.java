@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.json;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -48,5 +49,15 @@ class StateJsonTest extends BaseKmipTest {
                     SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
                     assertThat(json).contains("Active");
                 });
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: State construction should fail")
+    void unsupportedVersion_constructionFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> new State(State.Standard.ACTIVE))
+                        .isInstanceOf(IllegalArgumentException.class));
     }
 }

@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.json;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -48,5 +49,15 @@ class ActivationDateAttributeJsonTest extends BaseKmipTest {
                     assertThat(json).contains("\"ActivationDate\"");
                 }
         );
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: ActivationDateAttribute JSON serialization should fail")
+    void unsupportedVersion_jsonSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                        .isInstanceOf(Exception.class));
     }
 }

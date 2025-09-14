@@ -13,12 +13,13 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purpleBean.kmip.test.BaseKmipTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("SimpleRequestHeader Tests")
-class SimpleRequestHeaderTest {
+class SimpleRequestHeaderTest extends BaseKmipTest {
 
     @Nested
     @DisplayName("Construction and Basic Properties")
@@ -64,6 +65,24 @@ class SimpleRequestHeaderTest {
             // When & Then
             assertThatThrownBy(() -> SimpleRequestHeader.builder().protocolVersion(null).build())
                     .isInstanceOf(NullPointerException.class);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: XML serialization should succeed (header supports all specs)")
+        void unsupportedVersion_xmlSerializationShouldSucceed() throws JsonProcessingException {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> {
+                        SimpleRequestHeader header = SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(1, 4)).build();
+                        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper = new com.fasterxml.jackson.dataformat.xml.XmlMapper();
+                        xmlMapper.registerModule(new org.purpleBean.kmip.codec.xml.KmipXmlModule());
+                        try {
+                            String xml = xmlMapper.writeValueAsString(header);
+                            assertThat(xml).contains("<RequestHeader>");
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         }
     }
 
@@ -161,6 +180,24 @@ class SimpleRequestHeaderTest {
             assertThat(header.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
             assertThat(header.getProtocolVersion().getMajor()).isEqualTo(1);
             assertThat(header.getProtocolVersion().getMinor()).isEqualTo(4);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: JSON serialization should succeed (header supports all specs)")
+        void unsupportedVersion_jsonSerializationShouldSucceed() throws JsonProcessingException {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> {
+                        SimpleRequestHeader header = SimpleRequestHeader.builder().protocolVersion(ProtocolVersion.of(1, 4)).build();
+                        ObjectMapper jsonMapper = new ObjectMapper();
+                        jsonMapper.registerModule(new KmipJsonModule());
+                        try {
+                            String json = jsonMapper.writeValueAsString(header);
+                            assertThat(json).contains("\"RequestHeader\"");
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         }
     }
 }

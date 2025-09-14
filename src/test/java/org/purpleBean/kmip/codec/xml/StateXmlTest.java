@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.xml;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
@@ -33,5 +34,15 @@ class StateXmlTest extends BaseKmipTest {
         for (State state : states) {
             SerializationTestUtils.performXmlRoundTrip(xmlMapper, state, State.class);
         }
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: State XML serialization should fail")
+    void unsupportedVersion_xmlSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> xmlMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
+                        .isInstanceOf(Exception.class));
     }
 }

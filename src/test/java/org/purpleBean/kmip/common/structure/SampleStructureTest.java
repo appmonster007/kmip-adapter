@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.BaseKmipTest;
@@ -100,6 +101,26 @@ class SampleStructureTest extends BaseKmipTest {
             // Then
             assertThat(structure.getActivationDate()).isEqualTo(activationDate);
             assertThat(structure.getState()).isEqualTo(state);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: SampleStructure JSON serialization should fail")
+        void unsupportedVersion_jsonSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                            .isInstanceOf(Exception.class));
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: SampleStructure XML serialization should fail")
+        void unsupportedVersion_xmlSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                            .isInstanceOf(Exception.class));
         }
     }
 

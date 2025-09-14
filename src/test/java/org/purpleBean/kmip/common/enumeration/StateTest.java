@@ -68,6 +68,15 @@ class StateTest extends BaseKmipTest {
             assertThat(state.isSupportedFor(KmipSpec.V1_2)).isTrue();
             assertThat(state.isSupportedFor(KmipSpec.V1_2)).isTrue();
         }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: constructing State should fail")
+        void unsupportedVersion_constructingStateShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(() -> new State(State.Standard.ACTIVE))
+                            .isInstanceOf(IllegalArgumentException.class));
+        }
     }
 
     @Nested
@@ -397,6 +406,26 @@ class StateTest extends BaseKmipTest {
 
             // When & Then
             SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, State.class);
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: State JSON serialization should fail")
+        void unsupportedVersion_stateJsonSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> jsonMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
+                            .isInstanceOf(Exception.class));
+        }
+
+        @Test
+        @DisplayName("UnsupportedVersion context: State XML serialization should fail")
+        void unsupportedVersion_stateXmlSerializationShouldFail() {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(
+                                    () -> xmlMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
+                            .isInstanceOf(Exception.class));
         }
 
         @Test

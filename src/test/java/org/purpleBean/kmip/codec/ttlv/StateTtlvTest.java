@@ -3,6 +3,7 @@ package org.purpleBean.kmip.codec.ttlv;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -66,5 +67,18 @@ class StateTtlvTest extends BaseKmipTest {
             }
             assertThat(deserialized).isEqualTo(original);
         });
+    }
+
+    @Test
+    @DisplayName("UnsupportedVersion context: State TTLV serialization should fail")
+    void unsupportedVersion_ttlvSerializationFails() {
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
+                                () -> {
+                                    State original = new State(State.Standard.ACTIVE);
+                                    ttlvMapper.writeValueAsByteBuffer(original);
+                                })
+                        .isInstanceOf(Exception.class));
     }
 }

@@ -50,6 +50,19 @@ class KmipSpecTest extends BaseKmipTest {
             assertThat(unknown.getMinor()).isEqualTo(-1);
             assertThat(unknown.toString()).isEqualTo("V-1.-1");
         }
+
+        @Test
+        @DisplayName("Should have UnsupportedVersion enum available with formatted string")
+        void shouldHaveUnsupportedVersionAvailable() {
+            // When
+            KmipSpec unsupported = KmipSpec.UnsupportedVersion;
+
+            // Then
+            // We don't assert on specific major/minor values as they are intentionally implementation-defined.
+            // But we do assert that the enum exists and its string representation follows the version format.
+            assertThat(unsupported).isNotNull();
+            assertThat(unsupported.toString()).matches("V-?\\d+\\.-?\\d+");
+        }
     }
 
     @Nested
@@ -80,6 +93,20 @@ class KmipSpecTest extends BaseKmipTest {
                     .isInstanceOf(RuntimeException.class);
         }
 
+        @Test
+        @DisplayName("Should never resolve to UnsupportedVersion for known protocol versions")
+        void shouldNeverResolveToUnsupportedVersionForKnownVersions() {
+            // Given
+            ProtocolVersion v12 = ProtocolVersion.of(1, 2);
+
+            // When
+            KmipSpec resolved = KmipSpec.fromValue(v12);
+
+            // Then
+            assertThat(resolved).isEqualTo(KmipSpec.V1_2);
+            assertThat(resolved).isNotEqualTo(KmipSpec.UnsupportedVersion);
+        }
+
         @ParameterizedTest
         @CsvSource({"1, 2, V1_2", "-1, -1, UnknownVersion"})
         @DisplayName("Should map protocol versions correctly")
@@ -93,6 +120,7 @@ class KmipSpecTest extends BaseKmipTest {
 
             // Then
             assertThat(actualSpec).isEqualTo(expectedSpec);
+            assertThat(actualSpec).isNotEqualTo(KmipSpec.UnsupportedVersion);
         }
     }
 
@@ -217,7 +245,8 @@ class KmipSpecTest extends BaseKmipTest {
 
             // When & Then
             assertThat(allSpecs).isNotEmpty();
-            assertThat(allSpecs).contains(KmipSpec.V1_2, KmipSpec.UnknownVersion);
+            assertThat(allSpecs)
+                    .contains(KmipSpec.V1_2, KmipSpec.UnknownVersion, KmipSpec.UnsupportedVersion);
 
             // Verify valueOf works for all enum constants
             for (KmipSpec spec : allSpecs) {
@@ -236,5 +265,6 @@ class KmipSpecTest extends BaseKmipTest {
             assertThatThrownBy(() -> KmipSpec.fromValue(maxVersion)).isInstanceOf(RuntimeException.class);
             assertThatThrownBy(() -> KmipSpec.fromValue(minVersion)).isInstanceOf(RuntimeException.class);
         }
+
     }
 }

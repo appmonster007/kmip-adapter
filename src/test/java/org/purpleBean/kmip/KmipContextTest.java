@@ -192,4 +192,14 @@ class KmipContextTest {
         // Then
         assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.UnknownVersion);
     }
+
+    @Test
+    @DisplayName("setSpec with UnsupportedVersion should work as expected")
+    void setSpec_withUnsupportedVersion_shouldWork() {
+        // When
+        KmipContext.setSpec(KmipSpec.UnsupportedVersion);
+
+        // Then
+        assertThat(KmipContext.getSpec()).isSameAs(KmipSpec.UnsupportedVersion);
+    }
 }
