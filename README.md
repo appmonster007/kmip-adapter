@@ -18,6 +18,7 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
   - [Attribute Boilerplate](docs/03-guides/boilerplate-attribute.md)
   - [Enumeration Boilerplate](docs/03-guides/boilerplate-enum.md)
   - [Tests Index (Per-Class Mapping)](docs/03-guides/tests-index.md)
+  - [Quick Start for New Types](docs/03-guides/quick-start-new-types.md)
 - Performance:
   - [Performance Testing Guide](docs/04-performance/performance-testing-guide.md)
   - [Benchmarking Guide](docs/03-guides/benchmarking.md)
