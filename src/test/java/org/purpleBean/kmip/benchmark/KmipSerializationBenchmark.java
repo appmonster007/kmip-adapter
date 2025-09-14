@@ -3,6 +3,7 @@ package org.purpleBean.kmip.benchmark;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.purpleBean.kmip.KmipSpec;
@@ -10,6 +11,8 @@ import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
+import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +47,14 @@ public class KmipSerializationBenchmark {
 
         // Use the same mappers as the rest of the test suite
         jsonMapper = new ObjectMapper();
+        jsonMapper.findAndRegisterModules();
+        jsonMapper.registerModule(new JavaTimeModule());
+        jsonMapper.registerModule(new KmipJsonModule());
+
         xmlMapper = new XmlMapper();
+        xmlMapper.findAndRegisterModules();
+        xmlMapper.registerModule(new JavaTimeModule());
+        xmlMapper.registerModule(new KmipXmlModule());
     }
 
     @Benchmark

@@ -507,6 +507,35 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>perf-fast</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.1</version>
+                        <executions>
+                            <execution>
+                                <id>run-jmh-fast</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                                    <classpathScope>test</classpathScope>
+                                    <arguments>
+                                        -Dbench.args=-wi\ 1\ -i\ 2\ -f\ 1
+                                        ${bench.args}
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>

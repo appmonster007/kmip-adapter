@@ -60,6 +60,7 @@
         </dependencies>
         <configuration>
           <useModulePath>false</useModulePath>
+          <excludedGroups>integration</excludedGroups>
           <properties>
             <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
           </properties>
@@ -190,6 +191,46 @@
                       </limits>
                     </rule>
                   </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>with-integration</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <configuration>
+              <excludedGroups />
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>perf</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.1</version>
+            <executions>
+              <execution>
+                <id>run-jmh</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                  <classpathScope>test</classpathScope>
+                  <arguments>${bench.args}</arguments>
                 </configuration>
               </execution>
             </executions>
