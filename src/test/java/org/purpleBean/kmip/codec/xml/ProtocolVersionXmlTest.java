@@ -39,4 +39,37 @@ class ProtocolVersionXmlTest extends BaseKmipTest {
                     SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, ProtocolVersion.class);
                 });
     }
+
+    @Test
+    @DisplayName("Error handling: malformed XML should fail deserialization")
+    void errorHandling_malformedXml_shouldFail() {
+        String malformedXml = "<ProtocolVersion><ProtocolVersionMajor><value>not_a_number</value></ProtocolVersionMajor>";
+        org.assertj.core.api.Assertions.assertThatThrownBy(
+                        () -> xmlMapper.readValue(malformedXml, ProtocolVersion.class))
+                .isInstanceOf(Exception.class);
+    }
+
+    @Test
+    @DisplayName("Error handling: missing required elements should fail deserialization")
+    void errorHandling_missingElements_shouldFail() {
+        String incompleteXml = "<ProtocolVersion><ProtocolVersionMajor><value>1</value></ProtocolVersionMajor></ProtocolVersion>";
+        org.assertj.core.api.Assertions.assertThatThrownBy(
+                        () -> xmlMapper.readValue(incompleteXml, ProtocolVersion.class))
+                .isInstanceOf(Exception.class);
+    }
+
+    @Test
+    @DisplayName("Structure: expected XML elements present for ProtocolVersion")
+    void structure_expectedElements() {
+        ProtocolVersion version = ProtocolVersion.of(1, 2);
+        SerializationTestUtils.testXmlSerialization(
+                xmlMapper,
+                version,
+                xml -> {
+                    org.assertj.core.api.Assertions.assertThat(xml).contains("<ProtocolVersion>");
+                    org.assertj.core.api.Assertions.assertThat(xml).contains("<ProtocolVersionMajor");
+                    org.assertj.core.api.Assertions.assertThat(xml).contains("<ProtocolVersionMinor");
+                }
+        );
+    }
 }

@@ -54,6 +54,24 @@ class ProtocolVersionJsonTest extends BaseKmipTest {
     }
 
     @Test
+    @DisplayName("Error handling: malformed JSON should fail deserialization")
+    void errorHandling_malformedJson_shouldFail() {
+        String malformedJson = "{\"protocolVersionMajor\": {\"value\": \"not_a_number\"}}";
+        org.assertj.core.api.Assertions.assertThatThrownBy(
+                        () -> jsonMapper.readValue(malformedJson, ProtocolVersion.class))
+                .isInstanceOf(Exception.class);
+    }
+
+    @Test
+    @DisplayName("Error handling: missing required fields should fail deserialization")
+    void errorHandling_missingFields_shouldFail() {
+        String incompleteJson = "{\"protocolVersionMajor\": {\"value\": 1}}"; // Missing minor
+        org.assertj.core.api.Assertions.assertThatThrownBy(
+                        () -> jsonMapper.readValue(incompleteJson, ProtocolVersion.class))
+                .isInstanceOf(Exception.class);
+    }
+
+    @Test
     @DisplayName("Structure: expected JSON fields present")
     void structure_expectFields() {
         ProtocolVersion version = ProtocolVersion.of(1, 2);
