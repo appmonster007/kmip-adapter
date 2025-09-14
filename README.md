@@ -345,17 +345,34 @@ The library includes a comprehensive test suite with 540+ tests covering:
 ### Running Tests
 
 ```bash
-# Run all tests
+# Run unit tests (default)
 mvn test
 
-# Run with coverage report
-mvn clean test jacoco:report
+# Include integration tests (tagged with @Tag("integration"))
+mvn -Pwith-integration test
+
+# Run with coverage report (HTML report under target/site/jacoco/index.html)
+mvn clean test
 
 # Run specific test class
 mvn test -Dtest=StateTest
+
+# Run performance benchmarks (JMH) without affecting unit tests
+mvn -Pperf verify
+# Optional: pass JMH args
+mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
 ```
 
 ### Test Coverage
+
+Coverage reports are generated at:
+- target/site/jacoco/index.html
+
+Optional strict coverage gate (fail build below thresholds):
+
+```bash
+mvn -Pcoverage-strict verify
+```
 
 Current test coverage includes:
 - **Core Types**: 100% coverage of all KMIP data types
