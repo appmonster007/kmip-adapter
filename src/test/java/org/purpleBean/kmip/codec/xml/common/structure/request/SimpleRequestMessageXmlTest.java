@@ -8,7 +8,6 @@ import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.SerializationTestUtils;
 
 @DisplayName("SimpleRequestMessage XML Codec Tests")
 class SimpleRequestMessageXmlTest extends BaseKmipTest {
@@ -46,7 +45,7 @@ class SimpleRequestMessageXmlTest extends BaseKmipTest {
             try {
                 String xml = xmlMapper.writeValueAsString(buildMessage());
                 org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> xmlMapper.readValue(xml, SimpleRequestMessage.class))
+                                () -> xmlMapper.readValue(xml, SimpleRequestMessage.class))
                         .isInstanceOf(Exception.class);
             } catch (Exception e) {
                 throw new RuntimeException(e);

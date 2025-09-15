@@ -2,10 +2,12 @@ package org.purpleBean.kmip.codec.xml;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.RequestMessageStructure;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.*;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMajorXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.RequestMessageXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ActivationDateAttributeXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.StateXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.SampleStructureXmlDeserializer;

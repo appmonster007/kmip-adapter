@@ -65,7 +65,7 @@ class SimpleRequestMessageTtlvTest extends BaseKmipTest {
                 throw new RuntimeException(e);
             }
             org.assertj.core.api.Assertions.assertThatThrownBy(
-                    () -> ttlvMapper.readValue(buffer, SimpleRequestMessage.class))
+                            () -> ttlvMapper.readValue(buffer, SimpleRequestMessage.class))
                     .isInstanceOf(Exception.class);
         });
     }

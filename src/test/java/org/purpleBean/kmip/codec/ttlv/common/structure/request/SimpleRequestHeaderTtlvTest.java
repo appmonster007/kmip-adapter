@@ -60,7 +60,7 @@ class SimpleRequestHeaderTtlvTest extends BaseKmipTest {
                 throw new RuntimeException(e);
             }
             org.assertj.core.api.Assertions.assertThatThrownBy(
-                    () -> ttlvMapper.readValue(buffer, SimpleRequestHeader.class))
+                            () -> ttlvMapper.readValue(buffer, SimpleRequestHeader.class))
                     .isInstanceOf(Exception.class);
         });
     }

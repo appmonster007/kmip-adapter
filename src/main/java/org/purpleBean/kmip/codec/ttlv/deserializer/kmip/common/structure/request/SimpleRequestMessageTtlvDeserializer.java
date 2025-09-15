@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request;
 
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;

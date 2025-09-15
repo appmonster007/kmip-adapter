@@ -3,7 +3,6 @@ package org.purpleBean.kmip.codec.ttlv;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.test.BaseKmipTest;
@@ -12,8 +11,8 @@ import org.purpleBean.kmip.test.KmipTestDataFactory;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

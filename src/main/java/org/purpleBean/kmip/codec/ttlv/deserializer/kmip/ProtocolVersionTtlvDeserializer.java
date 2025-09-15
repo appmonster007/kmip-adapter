@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;

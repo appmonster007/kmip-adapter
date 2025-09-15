@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.common.structure.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -43,7 +42,7 @@ class SimpleRequestHeaderTest extends BaseKmipTest {
         }
 
         @ParameterizedTest
-        @CsvSource({"1,0","1,2","1,4","2,0","2,1"})
+        @CsvSource({"1,0", "1,2", "1,4", "2,0", "2,1"})
         @DisplayName("Should create headers for multiple protocol versions")
         void shouldCreateHeadersForMultipleProtocolVersions(int major, int minor) {
             // Given

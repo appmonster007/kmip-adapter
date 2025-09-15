@@ -105,7 +105,7 @@ class SimpleRequestMessageTest extends BaseKmipTest {
         }
 
         @ParameterizedTest
-        @CsvSource({"1,0,0","1,2,1","1,4,2","2,0,3"})
+        @CsvSource({"1,0,0", "1,2,1", "1,4,2", "2,0,3"})
         @DisplayName("Should build message with various protocol versions and batch item counts")
         void shouldBuildMessageWithVariousInputs(int major, int minor, int batchCount) {
             // Given
@@ -130,7 +130,7 @@ class SimpleRequestMessageTest extends BaseKmipTest {
         }
 
         @ParameterizedTest
-        @CsvSource({"0","1","2"})
+        @CsvSource({"0", "1", "2"})
         @DisplayName("Should accumulate batch item errors of various counts")
         void shouldAccumulateBatchItemErrors(int errorCount) {
             // Given
@@ -224,7 +224,7 @@ class SimpleRequestMessageTest extends BaseKmipTest {
         }
 
         @ParameterizedTest
-        @CsvSource({"0","1","2","3"})
+        @CsvSource({"0", "1", "2", "3"})
         @DisplayName("Should serialize to JSON with varying batch item counts")
         void shouldSerializeJson_withVaryingBatchItemCounts(int batchCount) throws JsonProcessingException {
             // Given
@@ -251,7 +251,7 @@ class SimpleRequestMessageTest extends BaseKmipTest {
         }
 
         @ParameterizedTest
-        @CsvSource({"0","1","2","3"})
+        @CsvSource({"0", "1", "2", "3"})
         @DisplayName("Should serialize to XML with varying batch item counts")
         void shouldSerializeXml_withVaryingBatchItemCounts(int batchCount) throws JsonProcessingException {
             // Given

@@ -8,7 +8,6 @@ import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.SerializationTestUtils;
 
 @DisplayName("SimpleRequestMessage JSON Codec Tests")
 class SimpleRequestMessageJsonTest extends BaseKmipTest {
@@ -49,7 +48,7 @@ class SimpleRequestMessageJsonTest extends BaseKmipTest {
             try {
                 String json = jsonMapper.writeValueAsString(buildMessage());
                 org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> jsonMapper.readValue(json, SimpleRequestMessage.class))
+                                () -> jsonMapper.readValue(json, SimpleRequestMessage.class))
                         .isInstanceOf(Exception.class);
             } catch (Exception e) {
                 throw new RuntimeException(e);

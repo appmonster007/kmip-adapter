@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 
 import javax.xml.namespace.QName;

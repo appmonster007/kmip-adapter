@@ -257,7 +257,7 @@ class ActivationDateAttributeTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                            () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
                             .isInstanceOf(Exception.class));
         }
 
@@ -267,7 +267,7 @@ class ActivationDateAttributeTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                            () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
                             .isInstanceOf(Exception.class));
         }
     }

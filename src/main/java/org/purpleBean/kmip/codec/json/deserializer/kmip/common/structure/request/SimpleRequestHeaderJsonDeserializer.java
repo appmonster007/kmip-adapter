@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 

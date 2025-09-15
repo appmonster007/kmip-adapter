@@ -8,11 +8,11 @@ import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 import java.util.concurrent.TimeUnit;
 

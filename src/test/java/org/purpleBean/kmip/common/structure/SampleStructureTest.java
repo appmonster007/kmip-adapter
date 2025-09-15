@@ -109,7 +109,7 @@ class SampleStructureTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                            () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
                             .isInstanceOf(Exception.class));
         }
 
@@ -119,7 +119,7 @@ class SampleStructureTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
+                            () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
                             .isInstanceOf(Exception.class));
         }
     }

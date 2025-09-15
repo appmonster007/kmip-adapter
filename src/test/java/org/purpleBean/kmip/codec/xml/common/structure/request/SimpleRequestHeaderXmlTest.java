@@ -32,7 +32,7 @@ class SimpleRequestHeaderXmlTest extends BaseKmipTest {
             try {
                 String xml = xmlMapper.writeValueAsString(header);
                 org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> xmlMapper.readValue(xml, SimpleRequestHeader.class))
+                                () -> xmlMapper.readValue(xml, SimpleRequestHeader.class))
                         .isInstanceOf(Exception.class);
             } catch (Exception e) {
                 throw new RuntimeException(e);

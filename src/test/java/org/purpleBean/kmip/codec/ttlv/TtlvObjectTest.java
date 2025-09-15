@@ -68,7 +68,7 @@ class TtlvObjectTest {
         @Test
         @DisplayName("getPrimitiveValue should throw for structure")
         void primitiveGetter_throwsOnStructure() {
-            byte[] child1 = TtlvObject.builder().tag(tag(0x420001)).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0,0,0,1}).build().toBytes();
+            byte[] child1 = TtlvObject.builder().tag(tag(0x420001)).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0, 0, 0, 1}).build().toBytes();
             byte[] value = child1; // single child
             TtlvObject structure = TtlvObject.builder().tag(tag(0x420002)).type(EncodingType.STRUCTURE.getTypeValue()).value(value).build();
 
@@ -85,12 +85,12 @@ class TtlvObjectTest {
             TtlvObject child1 = TtlvObject.builder()
                     .tag(tag(0x420001))
                     .type(EncodingType.INTEGER.getTypeValue())
-                    .value(new byte[]{0,0,0,1})
+                    .value(new byte[]{0, 0, 0, 1})
                     .build();
             TtlvObject child2 = TtlvObject.builder()
                     .tag(tag(0x420002))
                     .type(EncodingType.BOOLEAN.getTypeValue())
-                    .value(new byte[]{0,0,0,0,0,0,0,1}) // KMIP boolean occupies 8 bytes
+                    .value(new byte[]{0, 0, 0, 0, 0, 0, 0, 1}) // KMIP boolean occupies 8 bytes
                     .build();
 
             byte[] nestedBytes = TtlvObject.toBytesMultiple(child1, child2);
@@ -116,7 +116,7 @@ class TtlvObjectTest {
             TtlvObject primitive = TtlvObject.builder()
                     .tag(tag(0x420004))
                     .type(EncodingType.INTEGER.getTypeValue())
-                    .value(new byte[]{0,0,0,2})
+                    .value(new byte[]{0, 0, 0, 2})
                     .build();
             assertThatThrownBy(primitive::getNestedValue).isInstanceOf(IllegalStateException.class);
         }
@@ -128,8 +128,8 @@ class TtlvObjectTest {
         @Test
         @DisplayName("Serialize and parse multiple consecutive objects")
         void multiple_toFromBytes() {
-            TtlvObject a = TtlvObject.builder().tag(tag(0x420010)).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0,0,0,3}).build();
-            TtlvObject b = TtlvObject.builder().tag(tag(0x420011)).type(EncodingType.LONG_INTEGER.getTypeValue()).value(new byte[]{0,0,0,0,0,0,0,5}).build();
+            TtlvObject a = TtlvObject.builder().tag(tag(0x420010)).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0, 0, 0, 3}).build();
+            TtlvObject b = TtlvObject.builder().tag(tag(0x420011)).type(EncodingType.LONG_INTEGER.getTypeValue()).value(new byte[]{0, 0, 0, 0, 0, 0, 0, 5}).build();
 
             byte[] both = TtlvObject.toBytesMultiple(a, b);
             List<TtlvObject> list = TtlvObject.fromBytesMultiple(both);
@@ -144,7 +144,7 @@ class TtlvObjectTest {
         @DisplayName("Builder should validate tag length")
         void builder_invalidTagLength() {
             byte[] badTag = new byte[]{0x42, 0x00}; // only 2 bytes
-            assertThatThrownBy(() -> TtlvObject.builder().tag(badTag).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0,0,0,1}).build())
+            assertThatThrownBy(() -> TtlvObject.builder().tag(badTag).type(EncodingType.INTEGER.getTypeValue()).value(new byte[]{0, 0, 0, 1}).build())
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
@@ -194,7 +194,7 @@ class TtlvObjectTest {
             TtlvObject obj = TtlvObject.builder()
                     .tag(tag(0x420030))
                     .type(EncodingType.INTEGER.getTypeValue())
-                    .value(new byte[]{0,0,0,7})
+                    .value(new byte[]{0, 0, 0, 7})
                     .build();
             String hex = obj.getByteString();
 
@@ -211,7 +211,7 @@ class TtlvObjectTest {
             TtlvObject child = TtlvObject.builder()
                     .tag(tag(0x420001))
                     .type(EncodingType.INTEGER.getTypeValue())
-                    .value(new byte[]{0,0,0,1})
+                    .value(new byte[]{0, 0, 0, 1})
                     .build();
             TtlvObject parent = TtlvObject.builder()
                     .tag(tag(0x420040))

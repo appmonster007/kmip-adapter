@@ -1,11 +1,7 @@
 package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipEnumeration;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

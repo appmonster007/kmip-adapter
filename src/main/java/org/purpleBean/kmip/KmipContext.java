@@ -8,7 +8,8 @@ public final class KmipContext {
     private static final ThreadLocal<KmipSpec> currentSpec = ThreadLocal.withInitial(() -> KmipSpec.UnknownVersion);
 
     // Prevent instantiation
-    private KmipContext() {}
+    private KmipContext() {
+    }
 
     /**
      * Gets the current KMIP specification for the current thread.
@@ -45,7 +46,7 @@ public final class KmipContext {
      * Executes the given runnable with the specified KMIP spec,
      * ensuring the spec is properly cleaned up afterward.
      *
-     * @param spec the KMIP spec to use
+     * @param spec     the KMIP spec to use
      * @param runnable the code to execute
      */
     public static void withSpec(KmipSpec spec, Runnable runnable) {

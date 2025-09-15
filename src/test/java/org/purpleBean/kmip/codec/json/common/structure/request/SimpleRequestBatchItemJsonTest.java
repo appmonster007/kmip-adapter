@@ -29,7 +29,7 @@ class SimpleRequestBatchItemJsonTest extends BaseKmipTest {
                 throw new RuntimeException(e);
             }
             org.assertj.core.api.Assertions.assertThatThrownBy(
-                    () -> jsonMapper.readValue(json, SimpleRequestBatchItem.class))
+                            () -> jsonMapper.readValue(json, SimpleRequestBatchItem.class))
                     .isInstanceOf(Exception.class);
         });
     }

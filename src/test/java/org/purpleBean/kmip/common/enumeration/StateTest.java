@@ -414,7 +414,7 @@ class StateTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> jsonMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
+                            () -> jsonMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
                             .isInstanceOf(Exception.class));
         }
 
@@ -424,7 +424,7 @@ class StateTest extends BaseKmipTest {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
                     () -> assertThatThrownBy(
-                                    () -> xmlMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
+                            () -> xmlMapper.writeValueAsString(new State(State.Standard.ACTIVE)))
                             .isInstanceOf(Exception.class));
         }
 

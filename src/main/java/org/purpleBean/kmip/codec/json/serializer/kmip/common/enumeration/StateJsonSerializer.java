@@ -2,8 +2,8 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.enumeration.State;
 

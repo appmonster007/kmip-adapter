@@ -58,7 +58,7 @@ class ActivationDateAttributeXmlTest extends BaseKmipTest {
         withKmipSpec(
                 KmipSpec.UnsupportedVersion,
                 () -> assertThatThrownBy(
-                                () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
+                        () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
                         .isInstanceOf(Exception.class));
     }
 }

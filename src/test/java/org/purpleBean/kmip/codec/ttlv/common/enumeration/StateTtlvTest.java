@@ -3,8 +3,6 @@ package org.purpleBean.kmip.codec.ttlv;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.BaseKmipTest;

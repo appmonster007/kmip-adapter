@@ -32,7 +32,7 @@ class SimpleRequestHeaderJsonTest extends BaseKmipTest {
             try {
                 String json = jsonMapper.writeValueAsString(header);
                 org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> jsonMapper.readValue(json, SimpleRequestHeader.class))
+                                () -> jsonMapper.readValue(json, SimpleRequestHeader.class))
                         .isInstanceOf(Exception.class);
             } catch (Exception e) {
                 throw new RuntimeException(e);

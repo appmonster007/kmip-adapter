@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip;
 
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
