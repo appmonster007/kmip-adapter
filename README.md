@@ -4,7 +4,7 @@
 [![Maven](https://img.shields.io/badge/Maven-3.6+-blue.svg)](https://maven.apache.org/)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Tests](https://img.shields.io/badge/Tests-500%2B%20passing-brightgreen.svg)](https://github.com/purplebean/kmip-adapter/actions)
-[![Documentation](https://img.shields.io/badge/Docs-latest-brightgreen.svg)](/docs/)
+[![Documentation](https://img.shields.io/badge/Docs-latest-brightgreen.svg)](docs/)
 
 A comprehensive Java library for building and managing KMIP (Key Management Interoperability Protocol) data types with support for TTLV serialization, JSON/XML mapping, and extensible type systems.
 
@@ -14,9 +14,9 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
 
 - Testing & Coverage: [Testing Guide](docs/03-guides/testing.md)
 - Boilerplates:
-  - [Structure Boilerplate](docs/03-guides/boilerplate-structure.md)
-  - [Attribute Boilerplate](docs/03-guides/boilerplate-attribute.md)
-  - [Enumeration Boilerplate](docs/03-guides/boilerplate-enum.md)
+  - [Structure Boilerplate](docs/03-guides/development/boilerplate-structure.md)
+  - [Attribute Boilerplate](docs/03-guides/development/boilerplate-attribute.md)
+  - [Enumeration Boilerplate](docs/03-guides/development/boilerplate-enum.md)
   - [Tests Index (Per-Class Mapping)](docs/03-guides/tests-index.md)
   - [Quick Start for New Types](docs/03-guides/quick-start-new-types.md)
 - Performance:
@@ -24,40 +24,38 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
   - [Benchmarking Guide](docs/03-guides/benchmarking.md)
 
 ### Getting Started
-- [Installation](/docs/01-getting-started/installation.md) - How to add the library to your project
-- [Build System](/docs/01-getting-started/build-system.md) - Using Makefile, Taskfile, and justfile
-- [Configuration](/docs/01-getting-started/configuration.md) - Basic setup and configuration
+- [Installation](docs/01-getting-started/installation.md) - How to add the library to your project
+- [Build System](docs/01-getting-started/build-system.md) - Using Makefile, Taskfile, and justfile
+- [Configuration](docs/01-getting-started/configuration.md) - Basic setup and configuration
 
 ### Architecture
-- [Core Concepts](/docs/02-architecture/core-concepts.md) - Key architectural concepts and design decisions
-- [Type System](/docs/02-architecture/type-system.md) - Understanding KMIP's type system
-- [Serialization](/docs/02-architecture/serialization.md) - Serialization formats and protocols
+- [Core Concepts](docs/02-architecture/core-concepts.md) - Key architectural concepts and design decisions
+- [Type System](docs/02-architecture/type-system.md) - Understanding KMIP's type system
+- [Serialization](docs/02-architecture/serialization.md) - Serialization formats and protocols
 
 ### Guides
-- [Development Guide](/docs/03-guides/development/boilerplate.md) - Templates and patterns for KMIP development
-  - [Workflow Guide](/docs/03-guides/development/workflow.md) - Step-by-step development workflow
-  - [Implementation Patterns](/docs/03-guides/development/boilerplate.md) - Code templates for common tasks
-  - [Testing Strategies](/docs/03-guides/development/boilerplate.md#testing) - Testing patterns and best practices
-  - [Serialization](/docs/03-guides/development/boilerplate.md#serialization) - JSON, XML, and TTLV serialization patterns
+- [Development Guide](docs/03-guides/development/boilerplate.md) - Overview and checklists; see linked FooDemo boilerplates
+  - [Testing Guide](docs/03-guides/testing.md) - Testing patterns and best practices
+  - [Quick Start](docs/03-guides/quick-start-new-types.md) - Fast path to add new types
 
-- [Implementation Reference](/docs/05-guides/implementation/) - Comprehensive implementation details
-  - [Core Concepts](/docs/05-guides/implementation/core/README.md) - Base interfaces and patterns
-  - [Enumerations](/docs/05-guides/implementation/enumerations/README.md) - Type-safe enumerations
-  - [Attributes](/docs/05-guides/implementation/attributes/README.md) - Attribute implementation
-  - [Structures](/docs/05-guides/implementation/structures/README.md) - Complex data structures
-  - [Serialization](/docs/05-guides/implementation/serialization/README.md) - Advanced serialization
-  - [Testing](/docs/05-guides/implementation/testing/README.md) - Advanced testing patterns
-  - [Validation](/docs/05-guides/implementation/validation/README.md) - Advanced validation
+- [Implementation Reference](docs/05-guides/implementation/) - Comprehensive implementation details
+  - [Core Concepts](docs/05-guides/implementation/core/README.md) - Base interfaces and patterns
+  - [Enumerations](docs/05-guides/implementation/enumerations/README.md) - Type-safe enumerations
+  - [Attributes](docs/05-guides/implementation/attributes/README.md) - Attribute implementation
+  - [Structures](docs/05-guides/implementation/structures/README.md) - Complex data structures
+  - [Serialization](docs/05-guides/implementation/serialization/README.md) - Advanced serialization
+  - [Testing](docs/05-guides/implementation/testing/README.md) - Advanced testing patterns
+  - [Validation](docs/05-guides/implementation/validation/README.md) - Advanced validation
 
 ### API Reference
-- [Enumerations](/docs/04-api/enumerations.md) - Available enumeration types and their usage
-- [Attributes](/docs/04-api/attributes.md) - KMIP attribute types and validation rules
-- [Structures](/docs/04-api/structures.md) - Complex KMIP data structures and composition
+- [Enumerations](docs/04-api/enumerations.md) - Available enumeration types and their usage
+- [Attributes](docs/04-api/attributes.md) - KMIP attribute types and validation rules
+- [Structures](docs/04-api/structures.md) - Complex KMIP data structures and composition
 
 ### Contributing
-- [Code Style](/docs/05-contributing/code-style.md) - Coding standards and conventions
-- [Pull Requests](/docs/05-contributing/pull-requests.md) - How to contribute code
-- [Release Process](/docs/05-contributing/release-process.md) - Versioning and releases
+- [Code Style](docs/05-contributing/code-style.md) - Coding standards and conventions
+- [Pull Requests](docs/05-contributing/pull-requests.md) - How to contribute code
+- [Release Process](docs/05-contributing/release-process.md) - Versioning and releases
 
 ## 🚀 Quick Start
 

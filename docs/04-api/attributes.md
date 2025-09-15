@@ -1,6 +1,6 @@
 # KMIP Attributes
 
-See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Attribute](../03-guides/boilerplate-attribute.md)
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Attribute](../03-guides/development/boilerplate-attribute.md)
 
 ## Overview
 

@@ -86,12 +86,11 @@ For detailed instructions on creating new KMIP objects, refer to the specialized
 ### 📚 **Comprehensive Creation Guides**
 
 - **[Quick Start for New Types](docs/03-guides/quick-start-new-types.md)** - Main overview with quick start checklist and file organization
-- **[Boilerplate: Enumerations](docs/03-guides/boilerplate-enum.md)** - Templates for extensible enumerations
-- **[Boilerplate: Attributes](docs/03-guides/boilerplate-attribute.md)** - Templates for attributes
-- **[Boilerplate: Structures](docs/03-guides/boilerplate-structure.md)** - Templates for structures
+- **[Boilerplate: Enumerations](docs/03-guides/development/boilerplate-enum.md)** - Templates for extensible enumerations
+- **[Boilerplate: Attributes](docs/03-guides/development/boilerplate-attribute.md)** - Templates for attributes
+- **[Boilerplate: Structures](docs/03-guides/development/boilerplate-structure.md)** - Templates for structures
 - **[Serialization Guide](docs/02-architecture/serialization.md)** - JSON, XML, and TTLV serializer/deserializer overview
 - **[Testing Guide](docs/03-guides/testing.md)** - Comprehensive test templates with validation examples
-- **[Context Management](docs/03-guides/context-management.md)** - Version/context handling patterns
 
 ### 🚀 **Quick Start**
 
@@ -99,21 +98,21 @@ For detailed instructions on creating new KMIP objects, refer to the specialized
 2. **Follow the step-by-step guide** in the appropriate specialized guide
 3. **Use the boilerplate templates** to create your main class
 4. **Implement serializers/deserializers** for all three formats (JSON, XML, TTLV)
-5. **Register in codec modules** and create comprehensive tests
-6. **Add validation patterns** as specified in the validation guide
+5. **Register in codec modules** using `addSerializer`/`addDeserializer` in `KmipJsonModule`, `KmipXmlModule`, and `KmipTtlvModule`; create comprehensive tests
+6. **Add validation patterns** in builders (e.g., custom `build()` validation) and align with guides
 
 ### 📋 **Implementation Checklist**
 
-- [ ] Create main KMIP object class with proper validation
-- [ ] Add KMIP tag to `KmipTag.Standard` enum
+- [ ] Create main KMIP object class with proper validation (`@NonNull`, equals/hash, etc.)
+- [ ] Add KMIP tag to `KmipTag.Standard` or register via `KmipTag.register(...)`
 - [ ] Implement JSON serializer/deserializer
-- [ ] Implement XML serializer/deserializer  
+- [ ] Implement XML serializer/deserializer
 - [ ] Implement TTLV serializer/deserializer
-- [ ] Register all serializers in codec modules
-- [ ] Create comprehensive unit tests
-- [ ] Add serialization round-trip tests
-- [ ] Update `KmipTestDataFactory` with test data methods
-- [ ] Add integration tests
+- [ ] Register serializers/deserializers in modules via `addSerializer`/`addDeserializer`
+- [ ] Create comprehensive unit tests (construction, validation, equals/hash)
+- [ ] Add JSON/XML/TTLV round-trip tests
+- [ ] Update `KmipTestDataFactory` with test data helpers when needed
+- [ ] Add integration tests as appropriate
 
 For detailed serialization and testing information, refer to the specialized guides linked above.
 

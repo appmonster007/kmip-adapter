@@ -1,5 +1,10 @@
 # Testing Guide
 
+See also boilerplates for copy-ready tests and registrations:
+- Structure: `../03-guides/development/boilerplate-structure.md`
+- Attribute: `../03-guides/development/boilerplate-attribute.md`
+- Enumeration: `../03-guides/development/boilerplate-enum.md`
+
 ## Table of Contents
 - [Unit Testing](#unit-testing)
   - [Testing Enumerations](#testing-enumerations)

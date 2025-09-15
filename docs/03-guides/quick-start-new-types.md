@@ -5,9 +5,9 @@ A concise checklist to add a new KMIP type and per-class tests end-to-end, with 
 ## Links
 
 - Boilerplates:
-  - Structure: `docs/03-guides/boilerplate-structure.md`
-  - Attribute: `docs/03-guides/boilerplate-attribute.md`
-  - Enumeration: `docs/03-guides/boilerplate-enum.md`
+  - Structure: `docs/03-guides/development/boilerplate-structure.md`
+  - Attribute: `docs/03-guides/development/boilerplate-attribute.md`
+  - Enumeration: `docs/03-guides/development/boilerplate-enum.md`
 - Tests Index (per-class mapping): `docs/03-guides/tests-index.md`
 - Testing Guide: `docs/03-guides/testing.md`
 - Performance: `docs/04-performance/performance-testing-guide.md`
@@ -15,9 +15,9 @@ A concise checklist to add a new KMIP type and per-class tests end-to-end, with 
 ## 5-Step Checklist
 
 1. Define the type (minimal @Data/@Builder)
-   - Structure example: see `Foo` in `boilerplate-structure.md`.
-   - Attribute example: see `FooAttribute` in `boilerplate-attribute.md`.
-   - Enumeration example: see `FooStatus` in `boilerplate-enum.md`.
+   - Structure example: see `FooDemoStructure` in `development/boilerplate-structure.md`.
+   - Attribute example: see `FooDemoAttribute` in `development/boilerplate-attribute.md`.
+   - Enumeration example: see `FooDemoEnum` in `development/boilerplate-enum.md`.
    - Register a tag if needed (e.g., `KmipTag.register(...)`).
 
 2. Add a small factory (optional but helpful for tests)

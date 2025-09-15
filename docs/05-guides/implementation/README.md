@@ -1,6 +1,6 @@
 # KMIP Implementation Reference
 
-This directory contains detailed implementation references for the KMIP Adapter components. For quick-start guides and code templates, see the [Development Guide](/docs/03-guides/development/boilerplate.md).
+This directory contains detailed implementation references for the KMIP Adapter components. For quick-start guides and code templates, see the [Development Guide](../../03-guides/development/boilerplate.md).
 
 ## Reference Documentation
 
@@ -18,9 +18,9 @@ This directory contains detailed implementation references for the KMIP Adapter 
 ## How to Use This Reference
 
 ### For New Development
-1. Start with the [Development Guide](/docs/03-guides/development/boilerplate.md)
+1. Start with the [Development Guide](../../03-guides/development/boilerplate.md)
 2. Follow the patterns in the relevant implementation guide
-3. Refer to the [API Reference](/docs/04-api/) for detailed specifications
+3. Refer to the [API Reference](../../04-api/) for detailed specifications
 
 ### For Maintenance
 1. Check the [Version Compatibility](#version-compatibility) section below
@@ -48,8 +48,8 @@ When contributing to the implementation:
 4. Add or update tests for new or modified functionality
 
 ## Related Resources
-- [API Reference](/docs/04-api/)
-- [Development Guide](/docs/03-guides/development/boilerplate.md)
-- [Performance Testing Guide](/docs/04-performance/performance-testing-guide.md)
+- [API Reference](../../04-api/)
+- [Development Guide](../../03-guides/development/boilerplate.md)
+- [Performance Testing Guide](../../04-performance/performance-testing-guide.md)
 
 If you have questions or need clarification, please refer to the relevant guide or open an issue in the project's issue tracker.

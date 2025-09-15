@@ -1,6 +1,6 @@
 # Enumerations
 
-See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Enumeration](../03-guides/boilerplate-enum.md)
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Enumeration](../03-guides/development/boilerplate-enum.md)
 
 ## Core Enumerations
 
@@ -79,7 +79,7 @@ String description = std.getDescription();
 
 You can define custom enumerations by implementing the `KmipEnumeration` interface:
 
-Refer boilerplate code in [boilerplate-enum](../03-guides/boilerplate-enum.md)
+Refer boilerplate code in [boilerplate-enum](../03-guides/development/boilerplate-enum.md)
 
 ## Best Practices
 

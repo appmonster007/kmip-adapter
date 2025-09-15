@@ -1,6 +1,6 @@
 # KMIP Structures
 
-See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Structure](../03-guides/boilerplate-structure.md) • [Boilerplate: Attribute](../03-guides/boilerplate-attribute.md) • [Boilerplate: Enumeration](../03-guides/boilerplate-enum.md)
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Structure](../03-guides/development/boilerplate-structure.md) • [Boilerplate: Attribute](../03-guides/development/boilerplate-attribute.md) • [Boilerplate: Enumeration](../03-guides/development/boilerplate-enum.md)
 
 ## Overview
 
@@ -8,21 +8,32 @@ Structures in KMIP represent complex data types that group related information. 
 
 ## Core Structures
 
-### SampleStructure
+### FooDemoStructure
 
-Represents an example composite structure used throughout the project and tests.
+Represents a demonstration composite structure for boilerplate patterns.
 
-**Properties:**
-- `activationDate` (ActivationDateAttribute): Activation timestamp
-- `state` (State): The object's state (e.g., ACTIVE)
+Properties:
+- `attribute` (FooDemoAttribute): Required attribute field
+- `mode` (FooDemoEnum): Optional enumeration field
 
-**Example:**
+Example:
 ```java
-SampleStructure sample = SampleStructure.builder()
-    .activationDate(new ActivationDateAttribute(OffsetDateTime.now(ZoneOffset.UTC)))
-    .state(new State(State.Standard.ACTIVE))
+// Required attribute
+FooDemoAttribute attribute = FooDemoAttribute.builder()
+    .dateTime(java.time.OffsetDateTime.now(java.time.ZoneOffset.UTC))
+    .build();
+
+// Optional enum (may be null)
+FooDemoEnum mode = null; // or: new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE)
+
+// Build structure
+FooDemoStructure foo = FooDemoStructure.builder()
+    .attribute(attribute)
+    .mode(mode)
     .build();
 ```
+
+See also: Boilerplates for [Structure](../03-guides/development/boilerplate-structure.md), [Attribute](../03-guides/development/boilerplate-attribute.md), and [Enumeration](../03-guides/development/boilerplate-enum.md).
 
 <!-- KeyWrappingData example omitted; keep API guide focused on implemented structures in this project. -->
 
@@ -30,7 +41,7 @@ SampleStructure sample = SampleStructure.builder()
 
 ## Message Structures
 
-### SimpleRequestMessage
+### ExampleRequestMessage
 
 Represents a KMIP request message.
 
@@ -40,15 +51,15 @@ Represents a KMIP request message.
 
 **Example:**
 ```java
-SimpleRequestHeader header = SimpleRequestHeader.builder()
+ExampleRequestHeader header = ExampleRequestHeader.builder()
     .protocolVersion(ProtocolVersion.of(1, 2))
     .build();
 
-SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
+ExampleRequestBatchItem item = ExampleRequestBatchItem.builder()
     .operation("CREATE")
     .build();
 
-SimpleRequestMessage request = SimpleRequestMessage.builder()
+ExampleRequestMessage request = ExampleRequestMessage.builder()
     .requestHeader(header)
     .batchItems(List.of(item))
     .build();
@@ -106,13 +117,13 @@ byte[] ttlv = ttlvMapper.writeValueAsBytes(request);
 
 ```java
 // JSON
-SimpleRequestMessage fromJson = objectMapper.readValue(json, SimpleRequestMessage.class);
+ExampleRequestMessage fromJson = objectMapper.readValue(json, ExampleRequestMessage.class);
 
 // XML
-SimpleRequestMessage fromXml = xmlMapper.readValue(xml, SimpleRequestMessage.class);
+ExampleRequestMessage fromXml = xmlMapper.readValue(xml, ExampleRequestMessage.class);
 
 // TTLV
-SimpleRequestMessage fromTtlv = ttlvMapper.readValue(ttlv, SimpleRequestMessage.class);
+ExampleRequestMessage fromTtlv = ttlvMapper.readValue(ttlv, ExampleRequestMessage.class);
 ```
 
 <!-- Validation helpers are enforced through constructors/builders and serializers. Add explicit checks where needed per KMIP guides. -->

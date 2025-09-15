@@ -12,6 +12,8 @@ The KMIP Adapter provides a robust, type-safe serialization framework that suppo
 | JSON | `KmipJsonModule` | Human-readable JSON format | Web APIs, debugging, and configuration |
 | XML | `KmipXmlModule` | Standard XML format | Integration with XML-based systems and tools |
 
+See also: Boilerplates for [Structure](../03-guides/development/boilerplate-structure.md), [Attribute](../03-guides/development/boilerplate-attribute.md), and [Enumeration](../03-guides/development/boilerplate-enum.md) for copy-ready, spec-aligned templates.
+
 ## Core Components
 
 ### `KmipContext`
@@ -38,6 +40,8 @@ try {
 - Request structures have codec tests under `.../structure/request/*` and unit tests under `src/test/java/org/purpleBean/kmip/common/structure/request/*`.
 - Shared test base `BaseKmipTest` configures JSON/XML mappers with `JavaTimeModule`, `KmipJsonModule`, `KmipXmlModule`, and manages `KmipContext` lifecycle.
 - Note: Some XML tests validate serialization structure instead of full round-trips where deserializer array semantics differ from serializer output (e.g., request message items). This is intentional and documented in the tests.
+
+See also: Boilerplates for [Structure](../03-guides/development/boilerplate-structure.md), [Attribute](../03-guides/development/boilerplate-attribute.md), and [Enumeration](../03-guides/development/boilerplate-enum.md) for end-to-end examples with tests and registration.
 
 ### Serialization Modules
 
