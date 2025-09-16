@@ -8,6 +8,7 @@ import org.purpleBean.kmip.test.BaseKmipTest;
 
 import java.util.Objects;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
@@ -50,7 +51,7 @@ public abstract class AbstractJsonSerializationSuite<T> extends BaseKmipTest {
         try {
             String json = mapper().writeValueAsString(original);
             T restored = mapper().readValue(json, type());
-            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
             throw new AssertionError("JSON round-trip failed", e);
         }
@@ -63,7 +64,7 @@ public abstract class AbstractJsonSerializationSuite<T> extends BaseKmipTest {
         try {
             String json = mapper().writeValueAsString(original);
             T restored = mapper().readValue(json, type());
-            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
             throw new AssertionError("JSON round-trip failed", e);
         }

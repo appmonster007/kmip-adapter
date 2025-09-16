@@ -7,6 +7,8 @@ import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
+import java.util.Objects;
+
 @DisplayName("SimpleRequestMessage TTLV Serialization")
 class SimpleRequestMessageTtlvTest extends AbstractTtlvSerializationSuite<SimpleRequestMessage> {
 
@@ -47,7 +49,7 @@ class SimpleRequestMessageTtlvTest extends AbstractTtlvSerializationSuite<Simple
     @Override
     protected boolean equalsRelaxed(SimpleRequestMessage a, SimpleRequestMessage b) {
         if (a == null || b == null) return a == b;
-        return java.util.Objects.equals(a.getRequestHeader(), b.getRequestHeader())
-                && java.util.Objects.equals(a.getRequestBatchItems(), b.getRequestBatchItems());
+        return Objects.equals(a.getRequestHeader(), b.getRequestHeader())
+                && Objects.equals(a.getRequestBatchItems(), b.getRequestBatchItems());
     }
 }

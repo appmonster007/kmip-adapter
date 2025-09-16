@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
@@ -111,7 +112,7 @@ class KmipTagTest {
         @Test
         @DisplayName("fromName: throws NoSuchElementException for unknown name")
         void fromName_throwsForUnknownName() {
-            assertThatExceptionOfType(java.util.NoSuchElementException.class)
+            assertThatExceptionOfType(NoSuchElementException.class)
                     .isThrownBy(() -> KmipTag.fromName(KmipSpec.V1_2, "__NON_EXISTENT__"));
         }
 
@@ -125,7 +126,7 @@ class KmipTagTest {
         @Test
         @DisplayName("fromValue: throws NoSuchElementException for unknown value")
         void fromValue_throwsForUnknownValue() {
-            assertThatExceptionOfType(java.util.NoSuchElementException.class)
+            assertThatExceptionOfType(NoSuchElementException.class)
                     .isThrownBy(() -> KmipTag.fromValue(KmipSpec.V1_2, 0x123456));
         }
     }

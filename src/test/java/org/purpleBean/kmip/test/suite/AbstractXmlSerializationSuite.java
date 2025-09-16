@@ -8,6 +8,7 @@ import org.purpleBean.kmip.test.BaseKmipTest;
 
 import java.util.Objects;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
@@ -43,7 +44,7 @@ public abstract class AbstractXmlSerializationSuite<T> extends BaseKmipTest {
         try {
             String xml = mapper().writeValueAsString(original);
             T restored = mapper().readValue(xml, type());
-            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
             throw new AssertionError("XML round-trip failed", e);
         }
@@ -56,7 +57,7 @@ public abstract class AbstractXmlSerializationSuite<T> extends BaseKmipTest {
         try {
             String xml = mapper().writeValueAsString(original);
             T restored = mapper().readValue(xml, type());
-            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
             throw new AssertionError("XML round-trip failed", e);
         }
