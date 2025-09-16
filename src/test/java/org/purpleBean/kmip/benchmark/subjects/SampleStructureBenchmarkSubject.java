@@ -31,7 +31,9 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
     private ByteBuffer ttlvBuf;
 
     @Override
-    public String name() { return "SampleStructure"; }
+    public String name() {
+        return "SampleStructure";
+    }
 
     @Override
     public void setup() throws Exception {
@@ -49,7 +51,7 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        var fixed = OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC);
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(fixed).build();
         State state = new State(State.Standard.ACTIVE);
         obj = SampleStructure.builder().activationDate(activationDate).state(state).build();
@@ -65,20 +67,32 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
     }
 
     @Override
-    public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
+    public String jsonSerialize() throws Exception {
+        return json.writeValueAsString(obj);
+    }
 
     @Override
-    public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, SampleStructure.class); }
+    public Object jsonDeserialize() throws Exception {
+        return json.readValue(jsonStr, SampleStructure.class);
+    }
 
     @Override
-    public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
+    public String xmlSerialize() throws Exception {
+        return xml.writeValueAsString(obj);
+    }
 
     @Override
-    public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, SampleStructure.class); }
+    public Object xmlDeserialize() throws Exception {
+        return xml.readValue(xmlStr, SampleStructure.class);
+    }
 
     @Override
-    public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
+    public ByteBuffer ttlvSerialize() throws Exception {
+        return ttlv.writeValueAsByteBuffer(obj);
+    }
 
     @Override
-    public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), SampleStructure.class); }
+    public Object ttlvDeserialize() throws Exception {
+        return ttlv.readValue(ttlvBuf.duplicate(), SampleStructure.class);
+    }
 }

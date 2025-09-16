@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
  */
 public final class JmhReportGenerator {
 
-    private JmhReportGenerator() {}
+    private JmhReportGenerator() {
+    }
 
     public static void generateMarkdownSummary(String jsonPath, String mdOutPath) throws IOException {
         Path in = Path.of(jsonPath);
@@ -25,7 +26,8 @@ public final class JmhReportGenerator {
             throw new IOException("JMH results not found: " + jsonPath);
         }
         ObjectMapper mapper = new ObjectMapper();
-        List<JsonNode> results = mapper.readValue(Files.readString(in), new TypeReference<List<JsonNode>>() {});
+        List<JsonNode> results = mapper.readValue(Files.readString(in), new TypeReference<List<JsonNode>>() {
+        });
 
         List<Row> rows = new ArrayList<>();
         for (JsonNode node : results) {
@@ -55,10 +57,10 @@ public final class JmhReportGenerator {
             md.append("---|---|---:|---:|---\n");
             for (Row r : entry.getValue()) {
                 md.append(r.simpleName()).append(" | ")
-                  .append(r.mode).append(" | ")
-                  .append(r.score).append(" | ")
-                  .append(r.error).append(" | ")
-                  .append(r.unit).append("\n");
+                        .append(r.mode).append(" | ")
+                        .append(r.score).append(" | ")
+                        .append(r.error).append(" | ")
+                        .append(r.unit).append("\n");
             }
             md.append("\n");
         }

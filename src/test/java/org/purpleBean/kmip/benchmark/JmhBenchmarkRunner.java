@@ -1,32 +1,31 @@
 package org.purpleBean.kmip.benchmark;
 
+import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.ChainedOptionsBuilder;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import org.openjdk.jmh.results.format.ResultFormatType;
-
 import org.purpleBean.kmip.benchmark.report.JmhReportGenerator;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Standalone JMH runner to execute benchmarks only when explicitly invoked.
  * This is not picked up by Surefire/Failsafe.
- *
+ * <p>
  * Usage examples:
- *  - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
- *  - mvn -q -DskipTests verify -P perf
- *  - mvn -q -DskipTests verify -P perf-fast
+ * - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
+ * - mvn -q -DskipTests verify -P perf
+ * - mvn -q -DskipTests verify -P perf-fast
  */
 public final class JmhBenchmarkRunner {
 
-    private JmhBenchmarkRunner() {}
+    private JmhBenchmarkRunner() {
+    }
 
     public static void main(String[] args) throws RunnerException {
         // Allow overrides via -Dbench.args="-wi 2 -i 3 -f 1"

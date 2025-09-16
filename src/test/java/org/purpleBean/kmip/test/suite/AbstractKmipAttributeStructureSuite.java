@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Combined domain suite for types that implement both KmipAttribute and KmipStructure.
- *
+ * <p>
  * Type bound ensures the concrete type implements both interfaces.
  */
 @DisplayName("Abstract KMIP Attribute+Structure Suite")
@@ -19,15 +19,22 @@ public abstract class AbstractKmipAttributeStructureSuite<T extends KmipStructur
 
     // Expectations for flag-like capabilities
     protected abstract boolean expectAlwaysPresent();
+
     protected abstract boolean expectServerInitializable();
+
     protected abstract boolean expectClientInitializable();
+
     protected abstract boolean expectClientDeletable();
+
     protected abstract boolean expectMultiInstanceAllowed();
 
     // Representative states to exercise state-dependent methods
     protected abstract State stateForServerModifiableTrue();
+
     protected abstract State stateForServerModifiableFalse();
+
     protected abstract State stateForClientModifiableTrue();
+
     protected abstract State stateForClientModifiableFalse();
 
     @Test

@@ -17,13 +17,17 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
      * Provide an instance that should be equal to {@link #createDefault()}.
      * If null, equality test is skipped.
      */
-    protected T createEqualToDefault() { return null; }
+    protected T createEqualToDefault() {
+        return null;
+    }
 
     /**
      * Provide an instance that should not be equal to {@link #createDefault()}.
      * If null, inequality test is skipped.
      */
-    protected T createDifferentFromDefault() { return null; }
+    protected T createDifferentFromDefault() {
+        return null;
+    }
 
     @Test
     @DisplayName("Enumeration: description is non-null and non-empty")

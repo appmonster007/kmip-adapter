@@ -25,7 +25,17 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
      * Override if a specific EncodingType is expected (e.g., STRUCTURE, ENUMERATION).
      * If null, this assertion is skipped.
      */
-    protected EncodingType expectedEncodingType() { return null; }
+    protected EncodingType expectedEncodingType() {
+        return null;
+    }
+
+    /**
+     * Override when a type is expected to be supported even for KmipSpec.UnsupportedVersion.
+     * Defaults to false for strict types.
+     */
+    protected boolean expectedSupportedForUnsupportedSpec() {
+        return false;
+    }
 
     @Test
     @DisplayName("KMIP: has non-null tag and encoding type")
@@ -51,6 +61,7 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
     @DisplayName("KMIP: not supported for unsupported spec")
     void kmip_notSupportedForUnsupportedSpec() {
         T obj = createDefault();
-        assertThat(obj.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+        boolean expected = expectedSupportedForUnsupportedSpec();
+        assertThat(obj.isSupportedFor(KmipSpec.UnsupportedVersion)).isEqualTo(expected);
     }
 }

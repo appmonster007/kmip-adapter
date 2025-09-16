@@ -27,7 +27,9 @@ public class StateBenchmarkSubject implements KmipBenchmarkSubject {
     private ByteBuffer ttlvBuf;
 
     @Override
-    public String name() { return "State"; }
+    public String name() {
+        return "State";
+    }
 
     @Override
     public void setup() throws Exception {
@@ -58,20 +60,32 @@ public class StateBenchmarkSubject implements KmipBenchmarkSubject {
     }
 
     @Override
-    public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
+    public String jsonSerialize() throws Exception {
+        return json.writeValueAsString(obj);
+    }
 
     @Override
-    public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, State.class); }
+    public Object jsonDeserialize() throws Exception {
+        return json.readValue(jsonStr, State.class);
+    }
 
     @Override
-    public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
+    public String xmlSerialize() throws Exception {
+        return xml.writeValueAsString(obj);
+    }
 
     @Override
-    public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, State.class); }
+    public Object xmlDeserialize() throws Exception {
+        return xml.readValue(xmlStr, State.class);
+    }
 
     @Override
-    public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
+    public ByteBuffer ttlvSerialize() throws Exception {
+        return ttlv.writeValueAsByteBuffer(obj);
+    }
 
     @Override
-    public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), State.class); }
+    public Object ttlvDeserialize() throws Exception {
+        return ttlv.readValue(ttlvBuf.duplicate(), State.class);
+    }
 }

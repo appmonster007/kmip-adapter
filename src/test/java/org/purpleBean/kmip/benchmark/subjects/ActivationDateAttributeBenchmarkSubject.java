@@ -29,7 +29,9 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
     private ByteBuffer ttlvBuf;
 
     @Override
-    public String name() { return "ActivationDateAttribute"; }
+    public String name() {
+        return "ActivationDateAttribute";
+    }
 
     @Override
     public void setup() throws Exception {
@@ -47,7 +49,7 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        var fixed = OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC);
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         obj = ActivationDateAttribute.builder().dateTime(fixed).build();
 
         jsonStr = json.writeValueAsString(obj);
@@ -61,20 +63,32 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
     }
 
     @Override
-    public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
+    public String jsonSerialize() throws Exception {
+        return json.writeValueAsString(obj);
+    }
 
     @Override
-    public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, ActivationDateAttribute.class); }
+    public Object jsonDeserialize() throws Exception {
+        return json.readValue(jsonStr, ActivationDateAttribute.class);
+    }
 
     @Override
-    public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
+    public String xmlSerialize() throws Exception {
+        return xml.writeValueAsString(obj);
+    }
 
     @Override
-    public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, ActivationDateAttribute.class); }
+    public Object xmlDeserialize() throws Exception {
+        return xml.readValue(xmlStr, ActivationDateAttribute.class);
+    }
 
     @Override
-    public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
+    public ByteBuffer ttlvSerialize() throws Exception {
+        return ttlv.writeValueAsByteBuffer(obj);
+    }
 
     @Override
-    public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), ActivationDateAttribute.class); }
+    public Object ttlvDeserialize() throws Exception {
+        return ttlv.readValue(ttlvBuf.duplicate(), ActivationDateAttribute.class);
+    }
 }

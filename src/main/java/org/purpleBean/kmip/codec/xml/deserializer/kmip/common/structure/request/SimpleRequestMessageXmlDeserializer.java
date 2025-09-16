@@ -33,13 +33,24 @@ public class SimpleRequestMessageXmlDeserializer extends JsonDeserializer<Simple
         builder.requestHeader(p.getCodec().treeToValue(headerNode, SimpleRequestHeader.class));
 
         JsonNode batchItemNode = node.get(KmipTag.Standard.BATCH_ITEM.getDescription());
-        if (!batchItemNode.isArray()) {
+        if (!batchItemNode.isArray() && !batchItemNode.isEmpty()) {
             ctxt.reportInputMismatch(SimpleRequestBatchItem.class, "SimpleRequestBatchItem 'value' must be array");
         }
 
-        for (var valueNode : batchItemNode.valueStream().toList()) {
+        if (batchItemNode.isArray()) {
+            for (var valueNode : batchItemNode.valueStream().toList()) {
+                try {
+                    SimpleRequestBatchItem item = p.getCodec().treeToValue(valueNode, SimpleRequestBatchItem.class);
+                    builder.requestBatchItem(item)
+                            .requestBatchItemError(null);
+                } catch (Exception e) {
+                    builder.requestBatchItem(null)
+                            .requestBatchItemError(e);
+                }
+            }
+        } else {
             try {
-                SimpleRequestBatchItem item = p.getCodec().treeToValue(valueNode, SimpleRequestBatchItem.class);
+                SimpleRequestBatchItem item = p.getCodec().treeToValue(batchItemNode, SimpleRequestBatchItem.class);
                 builder.requestBatchItem(item)
                         .requestBatchItemError(null);
             } catch (Exception e) {

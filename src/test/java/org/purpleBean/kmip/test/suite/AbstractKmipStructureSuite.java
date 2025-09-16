@@ -19,7 +19,9 @@ public abstract class AbstractKmipStructureSuite<T extends KmipStructure> extend
     /**
      * Minimum number of components expected; default 0.
      */
-    protected int expectedMinComponentCount() { return 0; }
+    protected int expectedMinComponentCount() {
+        return 0;
+    }
 
     /**
      * Optional hook to validate individual components.

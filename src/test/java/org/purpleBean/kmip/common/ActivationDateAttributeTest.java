@@ -14,7 +14,9 @@ class ActivationDateAttributeTest extends AbstractKmipAttributeSuite<ActivationD
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ActivationDateAttribute> type() { return ActivationDateAttribute.class; }
+    protected Class<ActivationDateAttribute> type() {
+        return ActivationDateAttribute.class;
+    }
 
     @Override
     protected ActivationDateAttribute createDefault() {
@@ -22,32 +24,52 @@ class ActivationDateAttributeTest extends AbstractKmipAttributeSuite<ActivationD
     }
 
     @Override
-    protected EncodingType expectedEncodingType() { return EncodingType.DATE_TIME; }
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.DATE_TIME;
+    }
 
     @Override
-    protected boolean expectAlwaysPresent() { return false; }
+    protected boolean expectAlwaysPresent() {
+        return false;
+    }
 
     @Override
-    protected boolean expectServerInitializable() { return true; }
+    protected boolean expectServerInitializable() {
+        return true;
+    }
 
     @Override
-    protected boolean expectClientInitializable() { return true; }
+    protected boolean expectClientInitializable() {
+        return true;
+    }
 
     @Override
-    protected boolean expectClientDeletable() { return false; }
+    protected boolean expectClientDeletable() {
+        return false;
+    }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() { return false; }
+    protected boolean expectMultiInstanceAllowed() {
+        return false;
+    }
 
     @Override
-    protected State stateForServerModifiableTrue() { return new State(State.Standard.PRE_ACTIVE); }
+    protected State stateForServerModifiableTrue() {
+        return new State(State.Standard.PRE_ACTIVE);
+    }
 
     @Override
-    protected State stateForServerModifiableFalse() { return new State(State.Standard.ACTIVE); }
+    protected State stateForServerModifiableFalse() {
+        return new State(State.Standard.ACTIVE);
+    }
 
     @Override
-    protected State stateForClientModifiableTrue() { return new State(State.Standard.PRE_ACTIVE); }
+    protected State stateForClientModifiableTrue() {
+        return new State(State.Standard.PRE_ACTIVE);
+    }
 
     @Override
-    protected State stateForClientModifiableFalse() { return new State(State.Standard.ACTIVE); }
+    protected State stateForClientModifiableFalse() {
+        return new State(State.Standard.ACTIVE);
+    }
 }

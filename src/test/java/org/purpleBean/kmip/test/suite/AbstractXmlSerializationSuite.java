@@ -5,7 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -19,30 +20,64 @@ public abstract class AbstractXmlSerializationSuite<T> extends BaseKmipTest {
 
     protected abstract T createDefault();
 
-    protected T createVariant() { return createDefault(); }
+    protected T createVariant() {
+        return createDefault();
+    }
 
-    protected XmlMapper mapper() { return getXmlMapper(); }
+    protected XmlMapper mapper() {
+        return getXmlMapper();
+    }
+
+    /**
+     * Override when the type is allowed to serialize even under KmipSpec.UnsupportedVersion.
+     * Default is true (negative test expects failure).
+     */
+    protected boolean unsupportedSpecShouldFailSerialize() {
+        return true;
+    }
 
     @Test
     @DisplayName("XML: round-trip default instance")
     void xml_roundTrip_default() {
         T original = createDefault();
-        SerializationTestUtils.performXmlRoundTrip(mapper(), original, type());
+        try {
+            String xml = mapper().writeValueAsString(original);
+            T restored = mapper().readValue(xml, type());
+            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+        } catch (Exception e) {
+            throw new AssertionError("XML round-trip failed", e);
+        }
     }
 
     @Test
     @DisplayName("XML: round-trip variant instance")
     void xml_roundTrip_variant() {
         T original = createVariant();
-        SerializationTestUtils.performXmlRoundTrip(mapper(), original, type());
+        try {
+            String xml = mapper().writeValueAsString(original);
+            T restored = mapper().readValue(xml, type());
+            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+        } catch (Exception e) {
+            throw new AssertionError("XML round-trip failed", e);
+        }
+    }
+
+    /**
+     * Hook for subclasses to relax equality comparison on round-trips.
+     * Default uses Objects.equals (delegates to equals()).
+     */
+    protected boolean equalsRelaxed(T a, T b) {
+        return Objects.equals(a, b);
     }
 
     @Test
     @DisplayName("XML: unsupported KMIP spec should fail serialize")
     void xml_unsupportedSpec_failsSerialize() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> mapper().writeValueAsString(createDefault()))
-                        .isInstanceOf(Exception.class));
+        if (unsupportedSpecShouldFailSerialize()) {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(() -> mapper().writeValueAsString(createDefault()))
+                            .isInstanceOf(Exception.class));
+        }
     }
 }

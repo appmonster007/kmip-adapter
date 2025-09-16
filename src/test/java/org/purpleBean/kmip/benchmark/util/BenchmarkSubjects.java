@@ -9,9 +9,12 @@ import java.util.*;
  */
 public final class BenchmarkSubjects {
 
-    private BenchmarkSubjects() {}
+    private BenchmarkSubjects() {
+    }
 
-    /** Discover all subjects via ServiceLoader and return a name->impl map. */
+    /**
+     * Discover all subjects via ServiceLoader and return a name->impl map.
+     */
     public static Map<String, KmipBenchmarkSubject> discoverMap() {
         Map<String, KmipBenchmarkSubject> registry = new LinkedHashMap<>();
         ServiceLoader<KmipBenchmarkSubject> loader = ServiceLoader.load(KmipBenchmarkSubject.class);
@@ -21,7 +24,9 @@ public final class BenchmarkSubjects {
         return registry;
     }
 
-    /** Discover all subjects and return their names in a stable order. */
+    /**
+     * Discover all subjects and return their names in a stable order.
+     */
     public static List<String> discoverNames() {
         return new ArrayList<>(discoverMap().keySet());
     }

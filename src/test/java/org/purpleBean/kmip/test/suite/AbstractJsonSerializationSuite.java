@@ -5,7 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -26,30 +27,64 @@ public abstract class AbstractJsonSerializationSuite<T> extends BaseKmipTest {
     /**
      * Optionally provide an alternative instance (can be same as default).
      */
-    protected T createVariant() { return createDefault(); }
+    protected T createVariant() {
+        return createDefault();
+    }
 
-    protected ObjectMapper mapper() { return getJsonMapper(); }
+    protected ObjectMapper mapper() {
+        return getJsonMapper();
+    }
+
+    /**
+     * Override when the type is allowed to serialize even under KmipSpec.UnsupportedVersion.
+     * Default is true (negative test expects failure).
+     */
+    protected boolean unsupportedSpecShouldFailSerialize() {
+        return true;
+    }
 
     @Test
     @DisplayName("JSON: round-trip default instance")
     void json_roundTrip_default() {
         T original = createDefault();
-        SerializationTestUtils.performJsonRoundTrip(mapper(), original, type());
+        try {
+            String json = mapper().writeValueAsString(original);
+            T restored = mapper().readValue(json, type());
+            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+        } catch (Exception e) {
+            throw new AssertionError("JSON round-trip failed", e);
+        }
     }
 
     @Test
     @DisplayName("JSON: round-trip variant instance")
     void json_roundTrip_variant() {
         T original = createVariant();
-        SerializationTestUtils.performJsonRoundTrip(mapper(), original, type());
+        try {
+            String json = mapper().writeValueAsString(original);
+            T restored = mapper().readValue(json, type());
+            org.assertj.core.api.Assertions.assertThat(equalsRelaxed(original, restored)).isTrue();
+        } catch (Exception e) {
+            throw new AssertionError("JSON round-trip failed", e);
+        }
     }
 
     @Test
     @DisplayName("JSON: unsupported KMIP spec should fail serialize")
     void json_unsupportedSpec_failsSerialize() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> mapper().writeValueAsString(createDefault()))
-                        .isInstanceOf(Exception.class));
+        if (unsupportedSpecShouldFailSerialize()) {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(() -> mapper().writeValueAsString(createDefault()))
+                            .isInstanceOf(Exception.class));
+        }
+    }
+
+    /**
+     * Hook for subclasses to relax equality comparison on round-trips.
+     * Default uses Objects.equals (delegates to equals()).
+     */
+    protected boolean equalsRelaxed(T a, T b) {
+        return Objects.equals(a, b);
     }
 }

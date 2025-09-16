@@ -8,17 +8,27 @@ import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
 class StateTest extends AbstractKmipEnumerationSuite<State> {
 
     @Override
-    protected Class<State> type() { return State.class; }
+    protected Class<State> type() {
+        return State.class;
+    }
 
     @Override
-    protected State createDefault() { return new State(State.Standard.ACTIVE); }
+    protected State createDefault() {
+        return new State(State.Standard.ACTIVE);
+    }
 
     @Override
-    protected State createEqualToDefault() { return new State(State.Standard.ACTIVE); }
+    protected State createEqualToDefault() {
+        return new State(State.Standard.ACTIVE);
+    }
 
     @Override
-    protected State createDifferentFromDefault() { return new State(State.Standard.DEACTIVATED); }
+    protected State createDifferentFromDefault() {
+        return new State(State.Standard.DEACTIVATED);
+    }
 
     @Override
-    protected EncodingType expectedEncodingType() { return EncodingType.ENUMERATION; }
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.ENUMERATION;
+    }
 }

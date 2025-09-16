@@ -13,7 +13,9 @@ class ActivationDateAttributeTtlvTest extends AbstractTtlvSerializationSuite<Act
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ActivationDateAttribute> type() { return ActivationDateAttribute.class; }
+    protected Class<ActivationDateAttribute> type() {
+        return ActivationDateAttribute.class;
+    }
 
     @Override
     protected ActivationDateAttribute createDefault() {

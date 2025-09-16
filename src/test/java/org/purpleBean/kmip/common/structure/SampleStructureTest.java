@@ -19,7 +19,9 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<SampleStructure> type() { return SampleStructure.class; }
+    protected Class<SampleStructure> type() {
+        return SampleStructure.class;
+    }
 
     @Override
     protected SampleStructure createDefault() {
@@ -29,10 +31,14 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
     }
 
     @Override
-    protected EncodingType expectedEncodingType() { return EncodingType.STRUCTURE; }
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
 
     @Override
-    protected int expectedMinComponentCount() { return 2; }
+    protected int expectedMinComponentCount() {
+        return 2;
+    }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {

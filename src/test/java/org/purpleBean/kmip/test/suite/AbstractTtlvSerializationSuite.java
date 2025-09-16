@@ -9,6 +9,7 @@ import org.purpleBean.kmip.test.BaseKmipTest;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,18 +20,28 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("Abstract TTLV Serialization Suite")
 public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
 
+    protected TtlvMapper ttlvMapper;
+
     protected abstract Class<T> type();
 
     protected abstract T createDefault();
 
-    protected T createVariant() { return createDefault(); }
-
-    protected TtlvMapper ttlvMapper;
+    protected T createVariant() {
+        return createDefault();
+    }
 
     @Override
     protected void setupTestSpecificResources() {
         ttlvMapper = new TtlvMapper();
         ttlvMapper.registerModule(new KmipTtlvModule());
+    }
+
+    /**
+     * Override when the type is allowed to serialize even under KmipSpec.UnsupportedVersion.
+     * Default is true (negative test expects failure).
+     */
+    protected boolean unsupportedSpecShouldFailSerialize() {
+        return true;
     }
 
     @Test
@@ -41,7 +52,7 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         try {
             buffer = ttlvMapper.writeValueAsByteBuffer(original);
             T restored = ttlvMapper.readValue(buffer, type());
-            assertThat(restored).isEqualTo(original);
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {
             throw new AssertionError("TTLV round-trip failed", e);
         }
@@ -55,7 +66,7 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         try {
             buffer = ttlvMapper.writeValueAsByteBuffer(original);
             T restored = ttlvMapper.readValue(buffer, type());
-            assertThat(restored).isEqualTo(original);
+            assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {
             throw new AssertionError("TTLV round-trip failed", e);
         }
@@ -64,9 +75,19 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
     @Test
     @DisplayName("TTLV: unsupported KMIP spec should fail serialize")
     void ttlv_unsupportedSpec_failsSerialize() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> ttlvMapper.writeValueAsByteBuffer(createDefault()))
-                        .isInstanceOf(Exception.class));
+        if (unsupportedSpecShouldFailSerialize()) {
+            withKmipSpec(
+                    KmipSpec.UnsupportedVersion,
+                    () -> assertThatThrownBy(() -> ttlvMapper.writeValueAsByteBuffer(createDefault()))
+                            .isInstanceOf(Exception.class));
+        }
+    }
+
+    /**
+     * Hook for subclasses to relax equality comparison on round-trips.
+     * Default uses Objects.equals (delegates to equals()).
+     */
+    protected boolean equalsRelaxed(T a, T b) {
+        return Objects.equals(a, b);
     }
 }
