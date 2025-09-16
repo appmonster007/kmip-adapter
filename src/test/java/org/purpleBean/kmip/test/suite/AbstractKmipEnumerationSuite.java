@@ -29,6 +29,23 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
         return null;
     }
 
+    /**
+     * Override and return true if this enumeration supports runtime registry behavior (e.g., custom value registration).
+     */
+    protected boolean supportsRegistryBehavior() {
+        return false;
+    }
+
+    /**
+     * Override to assert registry behavior for the specific enumeration (positive cases: register, lookup by value/name).
+     */
+    protected void assertEnumerationRegistryBehaviorPositive() { /* no-op by default */ }
+
+    /**
+     * Override to assert negative registry behavior (invalid range, empty description, empty versions, etc.).
+     */
+    protected void assertEnumerationRegistryBehaviorNegative() { /* no-op by default */ }
+
     @Test
     @DisplayName("Enumeration: description is non-null and non-empty")
     void enumeration_description_present() {
@@ -55,5 +72,21 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
         T c = createDifferentFromDefault();
         if (c == null) return; // implementor didn't supply; skip
         assertThat(a).isNotEqualTo(c);
+    }
+
+    @Test
+    @DisplayName("Enumeration: registry behavior (positive) (opt-in)")
+    void enumeration_registry_behavior_positive() {
+        if (supportsRegistryBehavior()) {
+            assertEnumerationRegistryBehaviorPositive();
+        }
+    }
+
+    @Test
+    @DisplayName("Enumeration: registry behavior (negative) (opt-in)")
+    void enumeration_registry_behavior_negative() {
+        if (supportsRegistryBehavior()) {
+            assertEnumerationRegistryBehaviorNegative();
+        }
     }
 }

@@ -359,7 +359,9 @@ public final class KmipTag {
     @Getter
     @ToString
     @RequiredArgsConstructor
+    @EqualsAndHashCode
     private static final class Extension implements Value {
+        @EqualsAndHashCode.Include
         private final int value;
         private final String description;
         private final Set<KmipSpec> supportedVersions;
