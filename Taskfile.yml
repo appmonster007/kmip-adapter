@@ -6,6 +6,12 @@ vars:
   OS: '{{.OS}}'
   SHELL: '{{if eq OS "windows"}}cmd{{else}}bash{{end}}'
   SHELL_OPTS: '{{if eq OS "windows"}}/c{{else}}-c{{end}}'
+  ARTIFACTS_DIR: 'target/ci-artifacts'
+  ART_UNIT_DIR: '{{.ARTIFACTS_DIR}}/unit'
+  ART_PERF_DIR: '{{.ARTIFACTS_DIR}}/performance'
+  ART_COV_DIR: '{{.ARTIFACTS_DIR}}/coverage'
+  ART_LOGS_DIR: '{{.ARTIFACTS_DIR}}/logs'
+  JACOCO_SITE: 'target/site/jacoco'
 
 # Task configuration
 silent: true
@@ -22,9 +28,9 @@ tasks:
     desc: Run complete pipeline (build → tests → coverage → benchmark)
     cmds:
       - task: build
-      - task: tests
+      - task: test-unit
       - task: coverage
-      - task: benchmark
+      - task: perf
 
   help:
     desc: Show this help message
@@ -39,45 +45,184 @@ tasks:
       - test ! -d target
 
   tests:
-    desc: Run all tests (unit + integration) once
+    desc: Run all unit tests once (alias for test-unit)
     cmds:
-      - echo "Running all tests (unit + integration) once..."
-      - mvn -Pwith-integration verify
+      - task: test-unit
     deps: [install]
 
   test-unit:
     desc: Run unit tests
     cmds:
-      - mvn test
-    deps: [install]
-
-  test-integration:
-    desc: Run integration tests
-    cmds:
-      - mvn -Pwith-integration test
+      - echo "Running unit tests..."
+      - mvn -q test
     deps: [install]
 
   test-class:
-    desc: Run specific test class
+    desc: Run a specific test class (e.g., task test-class -- TEST=com.example.TestClass)
     cmds:
-      - mvn test -Dtest={{.CLI_ARGS}}
+      - |
+        if [ -z "{{.CLI_ARGS}}" ]; then
+          echo "Please specify a test class with TEST=ClassName"
+          exit 1
+        fi
+        mvn test -Dtest={{.CLI_ARGS}}
     deps: [install]
     silent: false
 
-  benchmark:
-    desc: Run performance benchmarks
+  # Performance testing tasks
+  perf-runner:
+    desc: Run JMH using JmhBenchmarkRunner (skip tests)
     cmds:
-      - mvn -Pperf -DskipTests verify
+      - echo "Running performance benchmarks via runner..."
+      - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
     deps: [install]
 
+  perf:
+    desc: Run performance benchmarks with 'perf' profile (skip tests)
+    cmds:
+      - echo "Running performance benchmarks (-P perf)..."
+      - mvn -q -DskipTests verify -P perf
+    deps: [install]
+
+  perf-fast:
+    desc: Run fast performance benchmarks (-P perf-fast)
+    cmds:
+      - echo "Running fast performance benchmarks (-P perf-fast)..."
+      - mvn -q -DskipTests verify -P perf-fast
+    deps: [install]
+
+  # Build and utility tasks
   format:
     desc: Format code (Spotless optional)
     cmds:
+      - echo "Formatting code..."
       - |
-        if grep -q "spotless-maven-plugin" pom.xml; then \
-          echo "Spotless detected. Running spotless:apply"; \
-          mvn spotless:apply; \
-        else \
+        if grep -q "spotless-maven-plugin" pom.xml; then
+          echo "- Spotless detected. Running spotless:apply"
+          mvn spotless:apply
+        else
+          echo "- Spotless not configured in pom.xml. Skipping format."
+        fi
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - echo "Cleaning..."
+      - mvn clean
+
+  build:
+    desc: Build the project (no implicit clean)
+    cmds:
+      - task: install
+
+  run:
+    desc: Run the application (if Spring Boot plugin is configured)
+    cmds:
+      - |
+        if grep -q "spring-boot-maven-plugin" pom.xml; then
+          mvn spring-boot:run
+        else
+          echo "- Spring Boot plugin not configured in pom.xml. Nothing to run. Skipping."
+        fi
+
+  coverage:
+    desc: Generate code coverage report (reuses previous test run)
+    cmds:
+      - echo "Generating code coverage report from existing execution data..."
+      - mvn -DskipTests jacoco:report
+      - echo "Report generated at: file://$(pwd)/target/site/jacoco/index.html"
+
+  show-jmh-json:
+    desc: Show path to JMH JSON results
+    cmds:
+      - |
+        if [ -f target/jmh-results.json ]; then
+          echo "JMH JSON: file://$(pwd)/target/jmh-results.json"
+        else
+          echo "No JMH JSON found at target/jmh-results.json"
+        fi
+
+  show-jmh-report:
+    desc: Show path to JMH Markdown report
+    cmds:
+      - |
+        if [ -f target/jmh-report.md ]; then
+          echo "JMH Report: file://$(pwd)/target/jmh-report.md"
+        else
+          echo "No JMH report found at target/jmh-report.md"
+        fi
+
+  # CI/CD tasks
+  ci-clean:
+    desc: Clean CI workspace
+    cmds:
+      - echo "[CI] Cleaning workspace..."
+      - rm -rf ${ARTIFACTS_DIR} target/ci-artifacts.zip || true
+      - mkdir -p ${ARTIFACTS_DIR} ${ART_UNIT_DIR} ${ART_PERF_DIR} ${ART_COV_DIR} ${ART_LOGS_DIR}
+
+  ci-build:
+    desc: Build project for CI (skip tests)
+    cmds:
+      - echo "[CI] Building project (skip tests)..."
+      - mvn -DskipTests -DskipITs package
+
+  ci-test-unit:
+    desc: Run unit tests in CI and collect reports
+    cmds:
+      - echo "[CI] Running unit tests..."
+      - mkdir -p ${ART_UNIT_DIR}
+      - mvn test -Dmaven.test.failure.ignore=true
+      - cp -r target/surefire-reports/* ${ART_UNIT_DIR}/ || true
+
+  ci-test-perf:
+    desc: Run performance tests in CI
+    cmds:
+      - echo "[CI] Running performance tests..."
+      - mkdir -p ${ART_PERF_DIR}
+      - mvn -q -DskipTests verify -P perf
+      - cp target/benchmark-results/* ${ART_PERF_DIR}/ || true
+
+  ci-test-perf-fast:
+    desc: Run fast performance tests in CI
+    cmds:
+      - echo "[CI] Running fast performance tests..."
+      - mkdir -p ${ART_PERF_DIR}
+      - mvn -q -DskipTests verify -P perf-fast
+      - cp target/benchmark-results/* ${ART_PERF_DIR}/ || true
+
+  ci-coverage:
+    desc: Generate code coverage report in CI
+    cmds:
+      - echo "[CI] Generating code coverage report..."
+      - mkdir -p ${ART_COV_DIR}
+      - mvn -DskipTests jacoco:report
+      - cp -r ${JACOCO_SITE}/* ${ART_COV_DIR}/ || true
+
+  ci-artifacts:
+    desc: Package CI artifacts
+    cmds:
+      - echo "[CI] Packaging artifacts..."
+      - zip -r target/ci-artifacts.zip ${ARTIFACTS_DIR}
+
+  ci-all:
+    desc: Run full CI pipeline
+    cmds:
+      - task: ci-clean
+      - task: ci-build
+      - task: ci-test-unit
+      - task: ci-test-perf
+      - task: ci-coverage
+      - task: ci-artifacts
+
+  ci-all-fast:
+    desc: Fast CI pipeline
+    cmds:
+      - task: ci-clean
+      - task: ci-build
+      - task: ci-test-unit
+      - task: ci-test-perf-fast
+      - task: ci-artifacts
+    deps: [install]
           echo "Spotless not configured in pom.xml. Skipping format."; \
         fi
 

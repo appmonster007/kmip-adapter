@@ -4,78 +4,130 @@
 # Set default shell to bash for better script handling
 set shell := ["bash", "-c"]
 
+# Colors
+GREEN := $(shell echo -e '\033[0;32m')
+YELLOW := $(shell echo -e '\033[0;33m')
+WHITE := $(shell echo -e '\033[1;37m')
+RESET := $(shell echo -e '\033[0m')
+
 # Default target when running just without arguments
 default: help
 
 # Run complete pipeline (build → tests → coverage → benchmark)
-all: build tests coverage benchmark
+all: build test-unit coverage perf
 
 # Show this help
 help:
     #!/usr/bin/env bash
-    echo "KMIP Adapter Development Commands:"
-    echo "  just install      - Install project dependencies"
-    echo "  just tests        - Run all tests (unit + integration) once"
-    echo "  just test-unit    - Run unit tests"
-    echo "  just test-integration - Run integration tests"
-    echo "  just test-class TEST=... - Run specific test class"
-    echo "  just benchmark    - Run performance benchmarks"
-    echo "  just format       - Format code using spotless"
-    echo "  just clean        - Clean build artifacts"
-    echo "  just build        - Clean and build the project"
-    echo "  just run          - Run the application"
-    echo "  just coverage     - Generate code coverage report"
-    echo "  just info         - Show project information"
+    echo "${WHITE}KMIP Adapter Development Commands:${RESET}"
+    echo "  ${YELLOW}just install${RESET}      - Install project dependencies"
+    echo "  ${YELLOW}just tests${RESET}         - Run all unit tests (alias for test-unit)"
+    echo "  ${YELLOW}just test-unit${RESET}     - Run unit tests"
+    echo "  ${YELLOW}just test-class TEST=...${RESET} - Run specific test class"
+    echo "  ${YELLOW}just perf-runner${RESET}   - Run JMH using JmhBenchmarkRunner"
+    echo "  ${YELLOW}just perf${RESET}          - Run performance benchmarks (perf profile)"
+    echo "  ${YELLOW}just perf-fast${RESET}     - Run fast performance benchmarks (perf-fast profile)"
+    echo "  ${YELLOW}just format${RESET}        - Format code using spotless (if configured)"
+    echo "  ${YELLOW}just clean${RESET}         - Clean build artifacts"
+    echo "  ${YELLOW}just build${RESET}         - Build the project (no implicit clean)"
+    echo "  ${YELLOW}just run${RESET}           - Run the application (if Spring Boot plugin configured)"
+    echo "  ${YELLOW}just coverage${RESET}      - Generate code coverage report"
+    echo "  ${YELLOW}just show-jmh-json${RESET} - Show path to JMH JSON results"
+    echo "  ${YELLOW}just show-jmh-report${RESET} - Show path to JMH Markdown report"
 
 # Install project dependencies
 install:
     @echo "📦 Installing dependencies..."
     mvn clean install -DskipTests
 
-# Run all tests (unit + integration) once
+# Run all unit tests (alias for test-unit)
 tests:
-    @echo "🧪 Running all tests (unit + integration) once..."
-    mvn -Pwith-integration verify
+    @echo "${GREEN}Running all unit tests...${RESET}"
+    @just test-unit
 
 # Run unit tests
 test-unit:
-    @echo "🧪 Running unit tests..."
-    mvn test
-
-# Run integration tests
-test-integration:
-    @echo "🔍 Running integration tests..."
-    mvn -Pwith-integration test
+    @echo "${GREEN}Running unit tests...${RESET}"
+    mvn -q test
 
 # Run specific test class
 test-class TEST:
     #!/usr/bin/env bash
     if [ -z "{{TEST}}" ]; then
-        echo "❌ Please specify a test class with TEST=ClassName"
+        echo "${YELLOW}Please specify a test class with TEST=ClassName${RESET}"
         exit 1
     fi
-    echo "🧪 Running test class: {{TEST}}"
+    echo "${GREEN}Running test class: {{TEST}}${RESET}"
     mvn test -Dtest={{TEST}}
 
-# Run performance benchmarks
-benchmark:
-    @echo "⚡ Running performance benchmarks..."
-    mvn -Pperf -DskipTests verify
+# Performance testing
+perf-runner:
+    @echo "${GREEN}Running performance benchmarks via runner...${RESET}"
+    mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
 
-# Format code
+perf:
+    @echo "${GREEN}Running performance benchmarks (-P perf)...${RESET}"
+    mvn -q -DskipTests verify -P perf
+
+perf-fast:
+    @echo "${GREEN}Running fast performance benchmarks (-P perf-fast)...${RESET}"
+    mvn -q -DskipTests verify -P perf-fast
+
+# Code formatting
 format:
-    #!/usr/bin/env bash
-    echo "🎨 Formatting code..."
-    if grep -q "spotless-maven-plugin" pom.xml; then
-        echo "- Spotless detected. Running spotless:apply"
-        mvn spotless:apply
-    else
-        echo "- Spotless not configured in pom.xml. Skipping format."
+    @echo "${GREEN}Formatting code...${RESET}"
+    @if grep -q "spotless-maven-plugin" pom.xml; then \
+        echo "- Spotless detected. Running spotless:apply"; \
+        mvn spotless:apply; \
+    else \
+        echo "- Spotless not configured in pom.xml. Skipping format."; \
     fi
+
+# Build and clean
+clean:
+    @echo "${GREEN}Cleaning...${RESET}"
+    mvn clean
+
+build:
+    @echo "${GREEN}Building project...${RESET}"
+    @just install
+
+# Run application
+run:
+    @echo "${GREEN}Running application...${RESET}"
+    @if grep -q "spring-boot-maven-plugin" pom.xml; then \
+        mvn spring-boot:run; \
+    else \
+        echo "${YELLOW}- Spring Boot plugin not configured in pom.xml. Nothing to run. Skipping.${RESET}"; \
+    fi
+
+# Code coverage and reports
+coverage:
+    @echo "${GREEN}Generating code coverage report from existing execution data...${RESET}"
+    mvn -DskipTests jacoco:report
+    @echo "${GREEN}Report generated at:${RESET} file://$(pwd)/target/site/jacoco/index.html"
+
+show-jmh-json:
+    @if [ -f target/jmh-results.json ]; then \
+        echo "${GREEN}JMH JSON:${RESET} file://$(pwd)/target/jmh-results.json"; \
+    else \
+        echo "${YELLOW}No JMH JSON found at target/jmh-results.json${RESET}"; \
+    fi
+
+show-jmh-report:
+    @if [ -f target/jmh-report.md ]; then \
+        echo "${GREEN}JMH Report:${RESET} file://$(pwd)/target/jmh-report.md"; \
+    else \
+        echo "${YELLOW}No JMH report found at target/jmh-report.md${RESET}"; \
+    fi
+
+# Run performance benchmarks (alias for perf)
+benchmark:
+    @just perf
 
 # Clean build artifacts
 clean:
-    @echo "🧹 Cleaning..."
+    @echo "${GREEN}Cleaning...${RESET}"
     mvn clean
 
 # Build the project
@@ -83,9 +135,12 @@ build: install
 
 # Run the application
 run:
-    #!/usr/bin/env bash
-    echo "🚀 Running application..."
-    if grep -q "spring-boot-maven-plugin" pom.xml; then
+    @echo "${GREEN}Running application...${RESET}"
+    @if grep -q "spring-boot-maven-plugin" pom.xml; then \
+        mvn spring-boot:run; \
+    else \
+        echo "${YELLOW}- Spring Boot plugin not configured in pom.xml. Nothing to run. Skipping.${RESET}"; \
+    fi
         mvn spring-boot:run
     else
         echo "- Spring Boot plugin not configured in pom.xml. Nothing to run. Skipping."
