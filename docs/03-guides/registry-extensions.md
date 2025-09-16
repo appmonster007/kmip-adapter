@@ -69,15 +69,22 @@ try {
 
 ```java
 // Define and register a custom tag (example)
+// Valid extension range is [0x540000, 0x54FFFF]
 KmipTag.Value customTag = KmipTag.register(
-    0x540001,
-    "TestCustomTag"
+    0x540010,
+    "TestCustomTag",
+    Set.of(KmipSpec.V1_2)
 );
 
 // Use the registered tag where applicable (e.g., in structures/serializers)
 ```
 
 Use these tags in serializers and structures in the same way as standard tags.
+
+Notes:
+- The tag extension value must be within [0x540000, 0x54FFFF], otherwise an IllegalArgumentException is thrown.
+- Description must be non-empty.
+- At least one supported `KmipSpec` must be provided.
 
 ## Version Validation with KmipContext
 
@@ -111,3 +118,15 @@ ttlv.registerModule(new KmipTtlvModule());
 - Gate all construction paths with KMIP spec checks (`KmipContext.getSpec()`).
 - Provide negative tests for invalid extension values, duplicate names, and unsupported specs.
 - Prefer immutable value objects and builders for complex structures.
+
+### Import Style in Examples and Tests
+
+Across examples and tests, prefer imports over fully qualified names:
+
+```java
+import java.util.Set;
+import java.util.NoSuchElementException;
+import static org.assertj.core.api.Assertions.*;
+```
+
+Avoid `java.util.Set.of(...)` and `org.assertj.core.api.Assertions.*` FQNs in code; rely on imports for readability.

@@ -1,24 +1,22 @@
-# KMIP Attribute Boilerplate
+# KMIP Attribute Boilerplate (Authoritative)
 
-This guide explains, step by step, how to add a new KMIP Attribute. As a concrete example, we will build `FooDemoAttribute` that contains exactly one required field:
+This guide is the authoritative, copy-ready blueprint for creating a new KMIP Attribute called `FooDemoAttribute`, modeled on `ActivationDateAttribute`. It has a single required field:
 
 - name: `dateTime`
 - type: `java.time.OffsetDateTime`
 
-Follow this blueprint to create your new attribute with minimal surprises.
+It covers:
+- Core implementation (main/java)
+- JSON/XML/TTLV serializers and deserializers
+- Unit and codec tests using the reusable test suites
+- Optional performance tests (JMH)
+- Import style and legacy references to avoid
 
-Table of contents
-1. Core attribute implementation
-2. JSON codec (serializer/deserializer)
-3. XML codec (serializer/deserializer)
-4. TTLV codec (serializer/deserializer)
-5. Tests (core, JSON, XML, TTLV, edge cases)
-6. Registration and wiring notes
-7. Gotchas and checklist
+Use this as your single source of truth.
 
-## 1. Core attribute implementation
+---
 
-Create a new class alongside the other common attributes.
+## 1) Core Attribute Implementation
 
 File: `src/main/java/org/purpleBean/kmip/common/FooDemoAttribute.java`
 
@@ -42,10 +40,14 @@ import java.util.Set;
 @Builder
 public class FooDemoAttribute implements KmipAttribute {
 
+    // Use a real Standard entry you add in KmipTag.Standard
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ATTRIBUTE);
     private final EncodingType encodingType = EncodingType.DATE_TIME;
+
+    // Template supported versions — adjust as needed
     private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    // Capability flags — mirror ActivationDateAttribute semantics
     private final boolean alwaysPresent = false;
     private final boolean serverInitializable = true;
     private final boolean clientInitializable = true;
@@ -57,13 +59,13 @@ public class FooDemoAttribute implements KmipAttribute {
 
     @Override
     public boolean isClientModifiable(@NonNull State state) {
-        // Only PRE_ACTIVE is modifiable
+        // PRE_ACTIVE is modifiable
         return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
     @Override
     public boolean isServerModifiable(@NonNull State state) {
-        // Only PRE_ACTIVE is modifiable
+        // PRE_ACTIVE is modifiable
         return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
@@ -83,20 +85,21 @@ public class FooDemoAttribute implements KmipAttribute {
 
     @Override
     public int hashCode() {
-        // Use only up to seconds for hash code
         return Objects.hash(dateTime.withNano(0));
     }
 }
 ```
 
 Notes
-- `@NonNull` on `dateTime` makes it required via Lombok builder.
-- PRE_ACTIVE-only mutability for client and server.
-- Equality and hashing truncate to seconds to ignore nanos.
+- Add `FOO_DEMO_ATTRIBUTE` to `KmipTag.Standard` with a unique value/description.
+- Equality and hashing truncate to seconds to avoid flakiness.
+- Adjust supported versions to your needs; keep `UnknownVersion` if appropriate.
 
-## 2. JSON codec
+---
 
-Serializer file: `src/main/java/org/purpleBean/kmip/codec/json/serializer/kmip/common/FooDemoAttributeJsonSerializer.java`
+## 2) JSON Codec
+
+Serializer: `src/main/java/org/purpleBean/kmip/codec/json/serializer/kmip/common/FooDemoAttributeJsonSerializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
@@ -120,7 +123,7 @@ public class FooDemoAttributeJsonSerializer extends KmipDataTypeJsonSerializer<F
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
             );
         }
 
@@ -133,7 +136,7 @@ public class FooDemoAttributeJsonSerializer extends KmipDataTypeJsonSerializer<F
 }
 ```
 
-Deserializer file: `src/main/java/org/purpleBean/kmip/codec/json/deserializer/kmip/common/FooDemoAttributeJsonDeserializer.java`
+Deserializer: `src/main/java/org/purpleBean/kmip/codec/json/deserializer/kmip/common/FooDemoAttributeJsonDeserializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.json.deserializer.kmip.common;
@@ -158,7 +161,6 @@ public class FooDemoAttributeJsonDeserializer extends KmipDataTypeJsonDeserializ
         JsonNode node = p.readValueAsTree();
 
         KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
-
         if (!node.isObject() || tag != KmipTag.Standard.FOO_DEMO_ATTRIBUTE) {
             ctxt.reportInputMismatch(FooDemoAttribute.class, "Expected object for FooDemoAttribute");
             return null;
@@ -177,15 +179,16 @@ public class FooDemoAttributeJsonDeserializer extends KmipDataTypeJsonDeserializ
         if (!attribute.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }
-
         return attribute;
     }
 }
 ```
 
-## 3. XML codec
+---
 
-Serializer file: `src/main/java/org/purpleBean/kmip/codec/xml/serializer/kmip/common/FooDemoAttributeXmlSerializer.java`
+## 3) XML Codec
+
+Serializer: `src/main/java/org/purpleBean/kmip/codec/xml/serializer/kmip/common/FooDemoAttributeXmlSerializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
@@ -203,22 +206,18 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class FooDemoAttributeXmlSerializer extends JsonSerializer<FooDemoAttribute> {
-
     @Override
     public void serialize(FooDemoAttribute value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }
-
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
-
         String elementName = value.getKmipTag().getDescription();
         xmlGen.setNextName(QName.valueOf(elementName));
         xmlGen.writeStartObject(value);
-
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
@@ -228,7 +227,7 @@ public class FooDemoAttributeXmlSerializer extends JsonSerializer<FooDemoAttribu
 }
 ```
 
-Deserializer file: `src/main/java/org/purpleBean/kmip/codec/xml/deserializer/kmip/common/FooDemoAttributeXmlDeserializer.java`
+Deserializer: `src/main/java/org/purpleBean/kmip/codec/xml/deserializer/kmip/common/FooDemoAttributeXmlDeserializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
@@ -237,44 +236,49 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.State;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.NoSuchElementException;
 
 public class FooDemoAttributeXmlDeserializer extends JsonDeserializer<FooDemoAttribute> {
-
     @Override
     public FooDemoAttribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(FooDemoAttribute.class, "Expected object for FooDemoAttribute");
+            ctxt.reportInputMismatch(FooDemoAttribute.class, "Expected XML element object for FooDemoAttribute");
             return null;
         }
-
         JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !EncodingType.DATE_TIME.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(State.class, "Missing or invalid '@type' attribute for FooDemoAttribute");
+        if (typeNode == null || !typeNode.isTextual()) {
+            ctxt.reportInputMismatch(FooDemoAttribute.class, "Missing or invalid '@type' attribute for FooDemoAttribute");
             return null;
         }
-
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(FooDemoAttribute.class, "Missing or non-text 'value' for FooDemoAttribute");
+            ctxt.reportInputMismatch(FooDemoAttribute.class, "Missing or non-text '@value' attribute for FooDemoAttribute");
             return null;
         }
+        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
+        FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(dateTime).build();
 
-        return FooDemoAttribute.builder().dateTime(OffsetDateTime.parse(valueNode.asText())).build();
+        KmipSpec spec = KmipContext.getSpec();
+        if (!attribute.isSupportedFor(spec)) {
+            throw new NoSuchElementException();
+        }
+        return attribute;
     }
 }
 ```
 
-## 4. TTLV codec
+---
 
-Serializer file: `src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/kmip/common/FooDemoAttributeTtlvSerializer.java`
+## 4) TTLV Codec
+
+Serializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/kmip/common/FooDemoAttributeTtlvSerializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common;
@@ -316,7 +320,7 @@ public class FooDemoAttributeTtlvSerializer implements TtlvSerializer<FooDemoAtt
 }
 ```
 
-Deserializer file: `src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/kmip/common/FooDemoAttributeTtlvDeserializer.java`
+Deserializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/kmip/common/FooDemoAttributeTtlvDeserializer.java`
 
 ```java
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
@@ -362,363 +366,220 @@ public class FooDemoAttributeTtlvDeserializer implements TtlvDeserializer<FooDem
 }
 ```
 
-## 5. Tests
+---
 
-The following tests provide canonical coverage for an attribute with a single required `OffsetDateTime` field. Update names/packages for `FooDemoAttribute` and keep assertions aligned.
+## 5) Unit Tests
 
-Core tests: `src/test/java/org/purpleBean/kmip/common/FooDemoAttributeTest.java`
+### Core Attribute Test (reusable suite)
+
+File: `src/test/java/org/purpleBean/kmip/common/FooDemoAttributeTest.java`
 
 ```java
 package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.test.suite.AbstractKmipAttributeStructureSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.*;
+@DisplayName("FooDemoAttribute Domain Tests")
+class FooDemoAttributeTest extends AbstractKmipAttributeStructureSuite<FooDemoAttribute> {
 
-@DisplayName("FooDemoAttribute Tests")
-class FooDemoAttributeTest extends BaseKmipTest {
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Nested
-    @DisplayName("Construction and Basic Properties")
-    class ConstructionAndBasicProperties {
+    @Override
+    protected Class<FooDemoAttribute> type() { return FooDemoAttribute.class; }
 
-        @Test
-        @DisplayName("Should create FooDemoAttribute with builder")
-        void shouldCreateWithBuilder() {
-            OffsetDateTime dateTime = OffsetDateTime.now();
-            FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(dateTime).build();
-            assertThat(attribute.getDateTime()).isEqualTo(dateTime);
-            assertThat(attribute.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.FOO_DEMO_ATTRIBUTE);
-            assertThat(attribute.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
-        }
+    @Override
+    protected FooDemoAttribute createDefault() { return FooDemoAttribute.builder().dateTime(FIXED_TIME).build(); }
 
-        @Test
-        @DisplayName("Should handle various date formats")
-        void shouldHandleVariousDateFormats() {
-            OffsetDateTime[] testDates = {
-                    OffsetDateTime.now(),
-                    OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC),
-                    OffsetDateTime.of(2023, 12, 31, 23, 59, 59, 999_999_999, ZoneOffset.of("+05:30")),
-                    KmipTestDataFactory.BoundaryData.epochDateTime()
-            };
-            for (OffsetDateTime dateTime : testDates) {
-                FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(dateTime).build();
-                assertThat(attribute.getDateTime()).isEqualTo(dateTime);
-            }
-        }
+    @Override
+    protected EncodingType expectedEncodingType() { return EncodingType.DATE_TIME; }
 
-        @Test
-        @DisplayName("Should handle null dateTime")
-        void shouldHandleNullDateTime() {
-            assertThatThrownBy(() -> FooDemoAttribute.builder().dateTime(null).build())
-                    .isInstanceOf(NullPointerException.class)
-                    .hasMessageContaining("dateTime is marked non-null but is null");
-        }
-    }
+    // Capability flags
+    @Override protected boolean expectAlwaysPresent() { return false; }
+    @Override protected boolean expectServerInitializable() { return true; }
+    @Override protected boolean expectClientInitializable() { return true; }
+    @Override protected boolean expectClientDeletable() { return false; }
+    @Override protected boolean expectMultiInstanceAllowed() { return false; }
 
-    @Nested
-    @DisplayName("KMIP Structure Properties")
-    class KmipStructureProperties {
-
-        @Test
-        @DisplayName("Should have correct KMIP tag and encoding type")
-        void shouldHaveCorrectKmipTag() {
-            FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-            assertThat(attribute.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.FOO_DEMO_ATTRIBUTE);
-            assertThat(attribute.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
-            assertThat(attribute.isSupportedFor(defaultSpec)).isTrue();
-        }
-    }
-
-    @Nested
-    @DisplayName("Equality and Hash Code")
-    class EqualityAndHashCode {
-
-        @Test
-        @DisplayName("Should be equal when dateTime matches (second precision)")
-        void shouldBeEqualWhenDateTimeMatches() {
-            OffsetDateTime dateTime = OffsetDateTime.now();
-            FooDemoAttribute a = FooDemoAttribute.builder().dateTime(dateTime).build();
-            FooDemoAttribute b = FooDemoAttribute.builder().dateTime(dateTime).build();
-            assertThat(a).isEqualTo(b);
-            assertThat(a.hashCode()).isEqualTo(b.hashCode());
-        }
-    }
+    // State-dependent mutability
+    @Override protected State stateForServerModifiableTrue() { return new State(State.Standard.PRE_ACTIVE); }
+    @Override protected State stateForServerModifiableFalse() { return new State(State.Standard.ACTIVE); }
+    @Override protected State stateForClientModifiableTrue() { return new State(State.Standard.PRE_ACTIVE); }
+    @Override protected State stateForClientModifiableFalse() { return new State(State.Standard.ACTIVE); }
 }
 ```
 
-JSON tests: `src/test/java/org/purpleBean/kmip/codec/json/common/FooDemoAttributeJsonTest.java`
+---
+
+## 6) Codec Tests
+
+Place these under codec packages and extend abstract suites.
+
+### JSON
+
+File: `src/test/java/org/purpleBean/kmip/codec/json/common/FooDemoAttributeJsonTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.json;
+package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-
-@DisplayName("FooDemoAttribute JSON Tests")
-class FooDemoAttributeJsonTest extends BaseKmipTest {
-
-    @Test
-    @DisplayName("Round-trip: FooDemoAttribute JSON")
-    void roundTrip() {
-        FooDemoAttribute original = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, FooDemoAttribute.class);
-    }
-
-    @Test
-    @DisplayName("Round-trip: various date inputs")
-    void roundTrip_variousDates() {
-        List<FooDemoAttribute> dates = List.of(
-                FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build(),
-                FooDemoAttribute.builder().dateTime(OffsetDateTime.now()).build(),
-                FooDemoAttribute.builder().dateTime(KmipTestDataFactory.createRandomActivationDateAttribute().getDateTime()).build()
-        );
-        for (FooDemoAttribute d : dates) {
-            SerializationTestUtils.performJsonRoundTrip(jsonMapper, d, FooDemoAttribute.class);
-        }
-    }
-
-    @Test
-    @DisplayName("Structure: expected JSON fields present")
-    void structure_expectFields() {
-        FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-        SerializationTestUtils.testJsonSerialization(
-                jsonMapper,
-                attribute,
-                json -> {
-                    SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-                    assertThat(json).contains("\"FooDemoAttribute\"");
-                }
-        );
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: JSON serialization should fail")
-    void unsupportedVersion_jsonSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> jsonMapper.writeValueAsString(FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build()))
-                        .isInstanceOf(Exception.class));
+@DisplayName("FooDemoAttribute JSON Serialization")
+class FooDemoAttributeJsonTest extends AbstractJsonSerializationSuite<FooDemoAttribute> {
+    @Override protected Class<FooDemoAttribute> type() { return FooDemoAttribute.class; }
+    @Override protected FooDemoAttribute createDefault() {
+        return FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
     }
 }
 ```
 
-XML tests: `src/test/java/org/purpleBean/kmip/codec/xml/common/FooDemoAttributeXmlTest.java`
+### XML
+
+File: `src/test/java/org/purpleBean/kmip/codec/xml/common/FooDemoAttributeXmlTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.xml;
+package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-
-@DisplayName("FooDemoAttribute XML Tests")
-class FooDemoAttributeXmlTest extends BaseKmipTest {
-
-    @Test
-    @DisplayName("Round-trip: FooDemoAttribute XML")
-    void roundTrip() {
-        FooDemoAttribute original = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-        SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, FooDemoAttribute.class);
-    }
-
-    @Test
-    @DisplayName("Structure: expected XML fields present")
-    void structure_expectFields() {
-        FooDemoAttribute attribute = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-        SerializationTestUtils.testXmlSerialization(
-                xmlMapper,
-                attribute,
-                xml -> {
-                    assertThat(xml).contains("<FooDemoAttribute");
-                    assertThat(xml).contains("type=\"DateTime\"");
-                }
-        );
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: XML serialization should fail")
-    void unsupportedVersion_xmlSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> xmlMapper.writeValueAsString(FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build()))
-                        .isInstanceOf(Exception.class));
+@DisplayName("FooDemoAttribute XML Serialization")
+class FooDemoAttributeXmlTest extends AbstractXmlSerializationSuite<FooDemoAttribute> {
+    @Override protected Class<FooDemoAttribute> type() { return FooDemoAttribute.class; }
+    @Override protected FooDemoAttribute createDefault() {
+        return FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
     }
 }
 ```
 
-TTLV tests: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/FooDemoAttributeTtlvTest.java`
+### TTLV
+
+File: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/FooDemoAttributeTtlvTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.ttlv;
+package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.common.FooDemoAttribute;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+@DisplayName("FooDemoAttribute TTLV Serialization")
+class FooDemoAttributeTtlvTest extends AbstractTtlvSerializationSuite<FooDemoAttribute> {
+    @Override protected Class<FooDemoAttribute> type() { return FooDemoAttribute.class; }
+    @Override protected FooDemoAttribute createDefault() {
+        return FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
+    }
+}
+```
+
+---
+
+## 7) Performance Benchmarks (JMH)
+
+This project includes a pluggable JMH harness that auto-discovers benchmark subjects via Java ServiceLoader. Below is a ready-to-adapt boilerplate subject for `FooDemoAttribute`.
+
+Subject class: `src/test/java/org/purpleBean/kmip/benchmark/subjects/FooDemoAttributeBenchmarkSubject.java`
+
+```java
+package org.purpleBean.kmip.benchmark.subjects;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+public class FooDemoAttributeBenchmarkSubject implements KmipBenchmarkSubject {
+    private ObjectMapper json;
+    private XmlMapper xml;
+    private TtlvMapper ttlv;
+    private FooDemoAttribute obj;
+    private String jsonStr;
+    private String xmlStr;
+    private ByteBuffer ttlvBuf;
 
-@DisplayName("FooDemoAttribute TTLV Tests")
-class FooDemoAttributeTtlvTest extends BaseKmipTest {
+    @Override public String name() { return "FooDemoAttribute"; }
 
-    private final TtlvMapper ttlvMapper = buildMapper();
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(KmipSpec.V1_2);
+        json = new ObjectMapper(); json.findAndRegisterModules(); json.registerModule(new JavaTimeModule()); json.registerModule(new KmipJsonModule());
+        xml = new XmlMapper(); xml.findAndRegisterModules(); xml.registerModule(new JavaTimeModule()); xml.registerModule(new KmipXmlModule());
+        ttlv = new TtlvMapper(); ttlv.registerModule(new KmipTtlvModule());
 
-    private TtlvMapper buildMapper() {
-        TtlvMapper mapper = new TtlvMapper();
-        mapper.registerModule(new KmipTtlvModule());
-        return mapper;
+        obj = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
+
+        jsonStr = json.writeValueAsString(obj);
+        xmlStr = xml.writeValueAsString(obj);
+        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
     }
 
-    @Test
-    @DisplayName("Round-trip: FooDemoAttribute TTLV")
-    void roundTrip() {
-        FooDemoAttribute original = FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build();
-        assertRoundTrip(original);
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: TTLV serialization should fail")
-    void unsupportedVersion_ttlvSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> ttlvMapper.writeValueAsByteBuffer(FooDemoAttribute.builder().dateTime(KmipTestDataFactory.BoundaryData.epochDateTime()).build()))
-                        .isInstanceOf(Exception.class));
-    }
-
-    private void assertRoundTrip(FooDemoAttribute original) {
-        ByteBuffer buffer;
-        try {
-            buffer = ttlvMapper.writeValueAsByteBuffer(original);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to serialize to TTLV", e);
-        }
-        FooDemoAttribute deserialized;
-        try {
-            deserialized = ttlvMapper.readValue(buffer, FooDemoAttribute.class);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to deserialize from TTLV", e);
-        }
-        assertThat(deserialized.getDateTime().toInstant().truncatedTo(ChronoUnit.SECONDS))
-                .isEqualTo(original.getDateTime().toInstant().truncatedTo(ChronoUnit.SECONDS));
-    }
+    @Override public void tearDown() { KmipContext.clear(); }
+    @Override public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
+    @Override public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, FooDemoAttribute.class); }
+    @Override public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
+    @Override public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, FooDemoAttribute.class); }
+    @Override public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
+    @Override public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), FooDemoAttribute.class); }
 }
 ```
 
-## 6. Registration and wiring notes
+ServiceLoader registration: `src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject`
 
-- Ensure your JSON, XML and TTLV modules register the new serializers/deserializers (check how `KmipJsonModule`, `KmipXmlModule`, and `KmipTtlvModule` handle attribute modules in the codebase).
-- Add the new `KmipTag.Standard.FOO_DEMO_ATTRIBUTE` entry in `KmipTag` with a unique tag value and human-readable description (e.g., `"FooDemoAttribute"`). This is required by all codecs and tests above.
-- Keep package structure parallel to existing attribute files so auto-discovery and test utilities continue to work.
-
-### 6.1 JSON module registration
-
-File: `src/main/java/org/purpleBean/kmip/codec/json/KmipJsonModule.java`
-
-Add imports near the top:
-
-```java
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.codec.json.serializer.kmip.common.FooDemoAttributeJsonSerializer;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.common.FooDemoAttributeJsonDeserializer;
+```
+org.purpleBean.kmip.benchmark.subjects.FooDemoAttributeBenchmarkSubject
 ```
 
-Then register inside the constructor:
+Recommended runner:
 
-```java
-addSerializer(FooDemoAttribute.class, new FooDemoAttributeJsonSerializer());
-addDeserializer(FooDemoAttribute.class, new FooDemoAttributeJsonDeserializer());
+```bash
+mvn -q -DskipTests test-compile \
+  exec:java \
+  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
+  -Dbench.include=KmipSerializationBenchmark
 ```
 
-### 6.2 XML module registration
+Outputs (defaults)
+- Raw JMH JSON: `target/jmh-results.json`
+- Markdown summary: `target/jmh-report.md`
 
-File: `src/main/java/org/purpleBean/kmip/codec/xml/KmipXmlModule.java`
+You can customize paths via `-Dbench.result` and `-Dbench.report`. See `docs/04-performance/performance-testing-guide.md` for more.
 
-Add imports near the top:
+---
 
-```java
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.FooDemoAttributeXmlSerializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.FooDemoAttributeXmlDeserializer;
-```
+## 8) Import Style and Legacy References
 
-Then register inside the constructor:
-
-```java
-addSerializer(FooDemoAttribute.class, new FooDemoAttributeXmlSerializer());
-addDeserializer(FooDemoAttribute.class, new FooDemoAttributeXmlDeserializer());
-```
-
-### 6.3 TTLV module registration
-
-File: `src/main/java/org/purpleBean/kmip/codec/ttlv/KmipTtlvModule.java`
-
-Add imports near the top:
-
-```java
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.FooDemoAttributeTtlvSerializer;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.FooDemoAttributeTtlvDeserializer;
-```
-
-Then register inside the constructor:
-
-```java
-addSerializer(FooDemoAttribute.class, new FooDemoAttributeTtlvSerializer());
-addDeserializer(FooDemoAttribute.class, new FooDemoAttributeTtlvDeserializer());
-```
-
-## 7. Gotchas and checklist
-
-- Field required: `dateTime` must be `@NonNull` and validated by Lombok builder.
-- Equality/HashCode: truncate to seconds to avoid flakes.
-- JSON shape: object with `tag`, `type`, `value` fields; not a bare string.
-- XML shape: element name from `KmipTag` description; `type` and `value` as attributes.
-- TTLV: use `EncodingType.DATE_TIME` and delegate `OffsetDateTime` payload to mapper.
-- Spec compatibility: guard in every serializer and TTLV serializer using `KmipContext.getSpec()`.
-- Unsupported version behavior: throw as in the references and add failing tests in UnsupportedVersion context.
-- Tests: coverage for construction, equality, codec round-trips, structure checks, and version guards.
-
-By following this blueprint pattern exactly, `FooDemoAttribute` will integrate cleanly across codecs with predictable behavior.
+- Prefer imports, not FQNs, in tests:
+  - `import java.util.NoSuchElementException;`
+  - `import java.util.Set;` / `Set.of(...)`
+  - `import static org.assertj.core.api.Assertions.*;`
+- Avoid legacy/fictitious classes: JsonCodec, XmlCodec, TtlvCodec (do not exist in this repo).
+- Use the canonical testing suites and mappers as shown above.
+- For tag registry and lookup examples, refer to `src/test/java/org/purpleBean/kmip/KmipTagTest.java`.

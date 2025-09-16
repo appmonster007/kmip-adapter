@@ -62,6 +62,23 @@ Examples:
 
 Integration tests are tagged with `@Tag("integration")` and can be included with the `with-integration` profile.
 
+## Test Style and Import Guidelines
+
+- Prefer simple imports over fully qualified names (FQNs) throughout the test sources. For example:
+  - Use `import java.util.Objects;` and `Objects.equals(...)` instead of `java.util.Objects.equals(...)`.
+  - Use `import java.util.NoSuchElementException;` instead of `java.util.NoSuchElementException` in assertions.
+  - Use AssertJ static imports, e.g., `import static org.assertj.core.api.Assertions.*;` or explicit `assertThat`, `assertThatThrownBy`, `assertThatExceptionOfType` rather than `org.assertj.core.api.Assertions.*` FQNs.
+- Keep imports grouped and ordered consistently: standard imports, then static imports.
+- Mirror runtime packages in the test directory and keep unit tests focused on domain behavior; place codec-specific round-trips under `codec/` packages.
+
+Examples of preferred imports in tests:
+
+```java
+import java.util.Objects;
+import java.util.NoSuchElementException;
+import static org.assertj.core.api.Assertions.*;
+```
+
 ## Unit Testing
 
 ### Testing Enumerations
@@ -88,6 +105,16 @@ class StateTest {
             .extracting(State.Value::getValue, State.Value::getDescription)
             .containsExactly(0x02, "Active");
     }
+
+### Reusable Enumeration Suite Hooks
+
+`AbstractKmipEnumerationSuite` now provides two separate, opt-in hooks to validate registry behavior for enumeration types that support runtime registration (e.g., `State`):
+
+- `supportsRegistryBehavior()` — return `true` to opt-in.
+- `assertEnumerationRegistryBehaviorPositive()` — implement positive cases such as valid registration and lookups by value/name.
+- `assertEnumerationRegistryBehaviorNegative()` — implement negative cases such as invalid extension ranges, empty descriptions, and empty version sets.
+
+This split avoids overloading a single method and produces clearer test reports by separating positive and negative behaviors.
 
     @Test
     @DisplayName("Should throw IllegalArgumentException for invalid code")

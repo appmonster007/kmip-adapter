@@ -92,6 +92,16 @@ class YourEnumerationTest extends BaseKmipTest {
 }
 ```
 
+#### Enumeration Registry Hooks (Opt-in)
+
+If your enumeration supports runtime registration (e.g., `State`), extend the reusable suite and split the registry checks into positive and negative hooks:
+
+- `supportsRegistryBehavior()` — return `true`.
+- `assertEnumerationRegistryBehaviorPositive()` — implement valid registration and lookups by value/name.
+- `assertEnumerationRegistryBehaviorNegative()` — implement invalid range, blank description, and empty version set checks.
+
+This improves clarity of test reports and keeps responsibilities separated.
+
 ### Testing Attributes
 
 ```java
@@ -208,6 +218,14 @@ public abstract class BaseKmipTest {
 ```
 
 ### Custom Assertions
+
+Prefer AssertJ with static imports for readability in all tests, and avoid fully qualified names:
+
+```java
+import static org.assertj.core.api.Assertions.*;
+```
+
+Examples: `assertThat`, `assertThatThrownBy`, `assertThatExceptionOfType`.
 
 ```java
 public class YourTypeAssert extends AbstractAssert<YourTypeAssert, YourType> {

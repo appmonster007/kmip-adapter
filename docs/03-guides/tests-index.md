@@ -53,10 +53,24 @@ A concise reference mapping production classes to their corresponding per-class 
 - Context and core
   - `KmipContext`: `kmip/KmipContextTest.java`
   - Concurrency: `kmip/KmipContextConcurrencyTest.java`
-  - Registry behavior: `kmip/RegistryBehaviorTest.java`
+  - Tag registry and lookups: `kmip/KmipTagTest.java`
 
 - Integration (cross-codec behavior)
   - `codec/integration/ParallelSerializationTest.java` (@Tag("integration"))
+
+## Reusable Test Suites
+
+To reduce duplication and standardize behavior checks, several abstract suites are used across tests:
+
+- `AbstractKmipDataTypeSuite` — tag and encoding invariants; supported/unsupported spec checks.
+- `AbstractKmipStructureSuite` — structure values list shape and component validation hook.
+- `AbstractKmipEnumerationSuite` — enumeration description and equality semantics, plus optional registry behavior.
+  - Opt-in hooks for enums that support runtime registration:
+    - `supportsRegistryBehavior()`
+    - `assertEnumerationRegistryBehaviorPositive()`
+    - `assertEnumerationRegistryBehaviorNegative()`
+
+For tag registry and lookup semantics, refer to the canonical `kmip/KmipTagTest.java`.
 
 ## How to Run
 
