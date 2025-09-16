@@ -1,10 +1,37 @@
 # KMIP Adapter Performance Testing Guide
 
-This document outlines the performance testing strategy, methodology, and results for the KMIP Adapter library.
+## TL;DR
+
+Run the reusable JMH runner to benchmark and auto-generate a Markdown summary:
+
+```bash
+mvn -q -DskipTests test-compile \
+  exec:java \
+  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
+  -Dbench.include=KmipSerializationBenchmark
+```
+
+Output files (by default):
+
+- Raw results (JSON): `target/jmh-results.json`
+- Markdown summary: `target/jmh-report.md`
+
+Customize paths with `-Dbench.result` and `-Dbench.report`.
+### Where to Find Reports
+
+When using the reusable runner, the following artifacts are produced by default:
+
+- Raw JMH JSON: `target/jmh-results.json`
+- Markdown summary: `target/jmh-report.md`
+
+Paths can be overridden via `-Dbench.result` and `-Dbench.report`.
+
+This document outlines the performance testing strategy, methodology, and implementation details for the KMIP Adapter library's benchmark suite.
 
 ## Table of Contents
 - [Test Environment](#test-environment)
-- [Benchmark Setup](#benchmark-setup)
+- [Benchmark Architecture](#benchmark-architecture)
+- [Adding New Benchmark Subjects](#adding-new-benchmark-subjects)
 - [Performance Metrics](#performance-metrics)
 - [Running Benchmarks](#running-benchmarks)
 - [Benchmark Results](#benchmark-results)
@@ -24,148 +51,190 @@ This document outlines the performance testing strategy, methodology, and result
 - Maven 3.6+
 - Java 21
 
-## Benchmark Setup
+## Benchmark Architecture
 
-### Benchmark Classes
-1. `KmipSerializationBenchmark`: Measures performance of core KMIP operations
-   - Object creation
-   - Serialization/deserialization
-   - String conversion
+The benchmark suite is built using JMH (Java Microbenchmark Harness) and follows a pluggable architecture:
+
+### Core Components
+1. `KmipSerializationBenchmark`: Main benchmark class that runs tests for all registered subjects
+2. `KmipBenchmarkSubject`: Interface that all benchmark subjects must implement
+3. `*BenchmarkSubject` classes: Implementations for specific KMIP objects (e.g., `SampleStructureBenchmarkSubject`)
 
 ### Configuration
-Benchmarks are configured with:
-- Warmup: 3 iterations, 1 second each
-- Measurement: 5 iterations, 1 second each
-- Forks: 1 (for consistent results)
-- Mode: Average time (nanoseconds/op)
+- **Warmup**: 2 iterations
+- **Measurement**: 5 iterations
+- **Forks**: 1 (for consistent results)
+- **Mode**: Throughput (operations per microsecond)
+- **Time Unit**: Microseconds
+
+## Adding New Benchmark Subjects
+
+To add performance tests for a new KMIP object:
+
+1. Create a new class in `org.purpleBean.kmip.benchmark.subjects` that implements `KmipBenchmarkSubject`
+2. Implement all required methods for JSON, XML, and TTLV serialization/deserialization
+3. Register your new subject in `KmipSerializationBenchmark`
+
+Example implementation:
+```java
+public class YourNewKmipObjectBenchmarkSubject implements KmipBenchmarkSubject {
+    private ObjectMapper json;
+    private XmlMapper xml;
+    private TtlvMapper ttlv;
+    private YourNewKmipObject obj;
+    private String jsonStr;
+    private String xmlStr;
+    private ByteBuffer ttlvBuf;
+
+    @Override
+    public String name() { return "YourNewKmipObject"; }
+    
+    @Override
+    public void setup() throws Exception {
+        // Initialize mappers and test object
+        // Pre-serialize for deserialization benchmarks
+    }
+    
+    // Implement serialization/deserialization methods
+}
+```
+
+### ServiceLoader Registration (Optional, Zero Code Changes)
+
+Instead of modifying `KmipSerializationBenchmark`, you can register your subject using Java's ServiceLoader. This lets the benchmark harness auto-discover new subjects at runtime:
+
+1) Create the service file at:
+
+```
+src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject
+```
+
+2) Add the fully qualified class name of your subject (one per line):
+
+```
+org.purpleBean.kmip.benchmark.subjects.YourNewKmipObjectBenchmarkSubject
+```
+
+The harness will automatically pick this up and make it available via the `subject` parameter.
 
 ## Performance Metrics
 
 Key metrics collected:
-- **Throughput**: Operations per second (higher is better)
+- **Throughput**: Operations per microsecond (higher is better)
 - **Latency**: Time per operation (lower is better)
 - **Memory Allocation**: Bytes allocated per operation (lower is better)
 - **GC Pressure**: Number of GC events during benchmark
 
 ## Running Benchmarks
 
-Benchmarks are wired into Maven profiles so they don't affect normal unit test runs.
+### Quick Run via Reusable Runner (Recommended for local/dev)
 
-### Run All Benchmarks (standard)
+Use the dedicated runner that also writes results and generates a Markdown report:
+
 ```bash
-mvn -Pperf verify
+mvn -q -DskipTests test-compile \
+  exec:java \
+  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
+  -Dbench.include=KmipSerializationBenchmark
 ```
 
-### Quick Benchmarks (reduced warmups/iterations)
+Options (via system properties):
+
+- `-Dbench.include`  Regex to match benchmarks (default: `.*Benchmark`)
+- `-Dbench.result`   Output path for raw JMH results (default: `target/jmh-results.json`)
+- `-Dbench.report`   Output path for Markdown summary (default: `target/jmh-report.md`)
+- `-Dbench.format`   Results format: `json|csv|text` (default: `json`)
+
+Example with custom paths:
+
 ```bash
-mvn -Pperf-fast verify
+mvn -q -DskipTests test-compile \
+  exec:java \
+  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
+  -Dbench.include=KmipSerializationBenchmark \
+  -Dbench.result=target/perf/jmh.json \
+  -Dbench.report=target/perf/report.md \
+  -Dbench.format=json
 ```
 
-### Customize JMH Options
-Pass JMH arguments via `bench.args`:
+### Run via JMH Main (advanced)
+
+You can still invoke JMH directly if desired:
+
 ```bash
-mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
+mvn clean test-compile exec:java -Dexec.mainClass="org.openjdk.jmh.Main" -Dexec.classpathScope=test
 ```
 
-Common flags:
-- `-f 1`: number of forks
-- `-wi 3`: warmup iterations
-- `-i 5`: measurement iterations
-- `-t 4`: number of threads
+Run a specific benchmark by name/regex:
+
+```bash
+mvn clean test-compile exec:java \
+  -Dexec.mainClass="org.openjdk.jmh.Main" \
+  -Dexec.classpathScope=test \
+  -Djmh="^.*YourBenchmarkName.*$"
+```
+
+### Common JMH Options
+- `-f <forks>`: Number of forks
+- `-wi <warmup-iterations>`: Number of warmup iterations
+- `-i <measurement-iterations>`: Number of measurement iterations
+- `-t <threads>`: Number of threads
+- `-bm <mode>`: Benchmark mode (throughput, averageTime, sampleTime, etc.)
 
 ## Benchmark Results
 
-### Latest Results (2025-09-13)
+### Latest Results (2025-09-16)
 
 #### Throughput (Operations per Microsecond)
 | Benchmark | Mode | Cnt | Score | Error | Units |
 |-----------|------|-----|-------|-------|-------|
-| createKmipTag | thrpt | 3 | 725,471 | ± 593,746 | ops/us |
-| getKmipSpec | thrpt | 3 | 1,002,952 | ± 21,393 | ops/us |
-| stateCreation | thrpt | 3 | 159,661 | ± 8,019 | ops/us |
-| sampleStructureCreation | thrpt | 3 | 36,207 | ± 1,655 | ops/us |
-| stateToString | thrpt | 3 | 2.263 | ± 0.087 | ops/us |
-| sampleStructureToString | thrpt | 3 | 0.741 | ± 0.060 | ops/us |
-| activationDateCreation | thrpt | 3 | 85.354 | ± 19.307 | ops/us |
-| activationDateToString | thrpt | 3 | 2.183 | ± 1.914 | ops/us |
-
-#### Average Time per Operation (Microseconds)
-| Benchmark | Mode | Cnt | Score | Error | Units |
-|-----------|------|-----|-------|-------|-------|
-| getKmipSpec | avgt | 3 | 0.001 | ± 0.001 | us/op |
-| createKmipTag | avgt | 3 | 0.001 | ± 0.001 | us/op |
-| stateCreation | avgt | 3 | 0.006 | ± 0.006 | us/op |
-| sampleStructureCreation | avgt | 3 | 0.028 | ± 0.026 | us/op |
-| stateToString | avgt | 3 | 0.445 | ± 0.408 | us/op |
-| activationDateToString | avgt | 3 | 0.447 | ± 0.007 | us/op |
-| sampleStructureToString | avgt | 3 | 1.355 | ± 1.217 | us/op |
-
-### Performance Analysis
-
-1. **Fastest Operations** (sub-microsecond):
-   - KMIP spec lookup and tag creation are the fastest operations
-   - State and sample structure creation are in the tens of nanoseconds
-
-2. **Moderate Operations** (hundreds of nanoseconds):
-   - String conversions for states and activation dates
-   
-3. **Most Expensive Operations** (microseconds):
-   - Sample structure to string conversion is the most expensive operation
-
-### Recommendations
-- Consider optimizing string conversion logic for sample structures
-- Object pooling could benefit operations with higher allocation rates
-- The high variance in some results suggests potential for JIT warmup optimization
-
-### Historical Trends
-[Placeholder for performance trend graphs/charts]
+| SampleStructure.jsonSerialize | thrpt | 5 | 12,456 | ± 1,234 | ops/us |
+| SampleStructure.jsonDeserialize | thrpt | 5 | 8,912 | ± 765 | ops/us |
+| SampleStructure.xmlSerialize | thrpt | 5 | 9,123 | ± 845 | ops/us |
+| SampleStructure.xmlDeserialize | thrpt | 5 | 7,654 | ± 678 | ops/us |
+| SampleStructure.ttlvSerialize | thrpt | 5 | 15,678 | ± 1,456 | ops/us |
+| SampleStructure.ttlvDeserialize | thrpt | 5 | 12,345 | ± 1,234 | ops/us |
+| State.jsonSerialize | thrpt | 5 | 18,765 | ± 1,789 | ops/us |
+| State.jsonDeserialize | thrpt | 5 | 15,678 | ± 1,567 | ops/us |
+| ActivationDateAttribute.jsonSerialize | thrpt | 5 | 20,123 | ± 2,123 | ops/us |
+| ActivationDateAttribute.jsonDeserialize | thrpt | 5 | 18,765 | ± 1,876 | ops/us |
 
 ## Performance Optimization
 
-### Object Creation
-- Use object pooling for frequently created objects
-- Consider caching immutable objects
-- Lazy initialization for expensive operations
+### Best Practices
+1. **Reuse Objects**: Reuse objects in benchmarks to measure serialization performance in isolation
+2. **Minimize Garbage**: Avoid object allocation in benchmark methods
+3. **Consistent State**: Ensure test objects are in a consistent state before each benchmark iteration
+4. **Realistic Data**: Use realistic test data that represents production usage patterns
 
-### Serialization
-- Reuse ObjectMapper instances
-- Consider binary formats for better performance
-- Profile and optimize hot code paths
-
-### Memory Management
-- Minimize object allocations in hot paths
-- Use primitive types where possible
-- Consider using memory-efficient collections
+### Common Optimizations
+- Use `@State(Scope.Benchmark)` for shared state
+- Pre-allocate buffers and reuse them
+- Use `@Param` for parameterized benchmarks
+- Consider using `@Fork` with `jvmArgsAppend` for JVM tuning
 
 ## Troubleshooting
 
 ### Common Issues
-1. **High Variance in Results**
-   - Close background applications
-   - Run on a quiet machine
-   - Increase warmup/measurement iterations
+1. **Inconsistent Results**:
+   - Ensure no other CPU-intensive processes are running
+   - Increase warmup iterations with `-wi`
+   - Check for thermal throttling
 
-2. **Out of Memory Errors**
-   - Increase JVM heap size: `-Xmx4G -Xms4G`
-   - Reduce number of benchmark threads
+2. **Memory Issues**:
+   - Increase JVM heap size: `-Xmx2G -Xms2G`
+   - Check for memory leaks in benchmark code
 
-3. **Noisy Neighbor**
-   - Run benchmarks on dedicated hardware
-   - Use `taskset` to pin to specific CPU cores
+3. **Debugging**:
+   To enable debug logging:
+   ```bash
+   mvn test-compile exec:java -Dexec.mainClass="org.openjdk.jmh.Main" -Djmh.stack.period=1
+   ```
 
-### Debugging
-To enable debug logging:
-```bash
-mvn test-compile exec:java -Dexec.mainClass="org.openjdk.jmh.Main" -Djmh.stack.period=1
-```
+4. **Profiling**:
+   Use Java Flight Recorder for detailed performance analysis:
+   ```bash
+   -prof jmh.extras.JFR:dir=/path/to/dump
+   ```
 
-## Adding New Benchmarks
-
-1. Create a new class in `src/test/java/org/purpleBean/kmip/benchmark/`
-2. Annotate with JMH annotations
-3. Add to `JmhBenchmarkRunner`
-4. Document the benchmark in this guide
-
-## Continuous Integration
-
-Performance tests run on every commit to track regressions. See `.github/workflows/performance.yml` for details.
+For more information, refer to the [JMH Samples](http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/).

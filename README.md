@@ -372,6 +372,15 @@ mvn -Pperf verify
 mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify
 ```
 
+### Coverage (quick)
+
+- Generate coverage and open HTML report:
+
+```bash
+mvn clean test
+open target/site/jacoco/index.html   # macOS; use xdg-open on Linux
+```
+
 ### Test Coverage
 
 Coverage reports are generated at:
