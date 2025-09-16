@@ -275,8 +275,8 @@
                 </dependencies>
                 <configuration>
                     <useModulePath>false</useModulePath>
-                    <!-- Exclude integration-tagged tests by default -->
-                    <excludedGroups>integration</excludedGroups>
+                    <!-- Exclude integration- and perf-tagged tests by default -->
+                    <excludedGroups>integration,perf</excludedGroups>
                     <properties>
                         <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
                     </properties>

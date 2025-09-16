@@ -1,63 +1,27 @@
-package org.purpleBean.kmip.codec.json;
+package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
+@DisplayName("ActivationDateAttribute JSON Serialization Tests")
+class ActivationDateAttributeJsonTest extends AbstractJsonSerializationSuite<ActivationDateAttribute> {
 
-@DisplayName("ActivationDateAttribute JSON Tests")
-class ActivationDateAttributeJsonTest extends BaseKmipTest {
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Test
-    @DisplayName("Round-trip: serialize and deserialize ActivationDateAttribute")
-    void roundTrip() {
-        ActivationDateAttribute original = KmipTestDataFactory.createActivationDateAttribute();
-        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, ActivationDateAttribute.class);
+    @Override
+    protected Class<ActivationDateAttribute> type() { return ActivationDateAttribute.class; }
+
+    @Override
+    protected ActivationDateAttribute createDefault() {
+        return ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
     }
 
-    @Test
-    @DisplayName("Round-trip: various date inputs")
-    void roundTrip_variousDates() {
-        List<ActivationDateAttribute> dates = List.of(
-                KmipTestDataFactory.createActivationDateAttribute(KmipTestDataFactory.BoundaryData.epochDateTime()),
-                KmipTestDataFactory.createActivationDateAttribute(OffsetDateTime.now()),
-                KmipTestDataFactory.createRandomActivationDateAttribute()
-        );
-
-        for (ActivationDateAttribute date : dates) {
-            SerializationTestUtils.performJsonRoundTrip(jsonMapper, date, ActivationDateAttribute.class);
-        }
-    }
-
-    @Test
-    @DisplayName("Structure: expected JSON fields present for ActivationDateAttribute")
-    void structure_expectFields() {
-        ActivationDateAttribute attribute = KmipTestDataFactory.createActivationDateAttribute();
-        SerializationTestUtils.testJsonSerialization(
-                jsonMapper,
-                attribute,
-                json -> {
-                    SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-                    assertThat(json).contains("\"ActivationDate\"");
-                }
-        );
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: ActivationDateAttribute JSON serialization should fail")
-    void unsupportedVersion_jsonSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
-                                () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
-                        .isInstanceOf(Exception.class));
+    @Override
+    protected ActivationDateAttribute createVariant() {
+        return ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
     }
 }

@@ -18,15 +18,6 @@ public final class SerializationTestUtils {
         // Utility class - prevent instantiation
     }
 
-    /**
-     * Performs a JSON round-trip test: serialize to JSON, then deserialize back to object.
-     *
-     * @param mapper   the ObjectMapper to use
-     * @param original the original object to test
-     * @param clazz    the class type for deserialization
-     * @param <T>      the type of object being tested
-     * @return the deserialized object for further assertions
-     */
     public static <T> T performJsonRoundTrip(ObjectMapper mapper, T original, Class<T> clazz) {
         try {
             String json = mapper.writeValueAsString(original);
@@ -38,15 +29,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Performs an XML round-trip test: serialize to XML, then deserialize back to object.
-     *
-     * @param mapper   the XmlMapper to use
-     * @param original the original object to test
-     * @param clazz    the class type for deserialization
-     * @param <T>      the type of object being tested
-     * @return the deserialized object for further assertions
-     */
     public static <T> T performXmlRoundTrip(XmlMapper mapper, T original, Class<T> clazz) {
         try {
             String xml = mapper.writeValueAsString(original);
@@ -58,29 +40,12 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Performs both JSON and XML round-trip tests.
-     *
-     * @param jsonMapper the ObjectMapper for JSON testing
-     * @param xmlMapper  the XmlMapper for XML testing
-     * @param original   the original object to test
-     * @param clazz      the class type for deserialization
-     * @param <T>        the type of object being tested
-     */
     public static <T> void performBothRoundTrips(
             ObjectMapper jsonMapper, XmlMapper xmlMapper, T original, Class<T> clazz) {
         performJsonRoundTrip(jsonMapper, original, clazz);
         performXmlRoundTrip(xmlMapper, original, clazz);
     }
 
-    /**
-     * Tests JSON serialization with custom validation.
-     *
-     * @param mapper        the ObjectMapper to use
-     * @param original      the original object to serialize
-     * @param jsonValidator custom validation logic for the JSON string
-     * @param <T>           the type of object being tested
-     */
     public static <T> void testJsonSerialization(
             ObjectMapper mapper, T original, Consumer<String> jsonValidator) {
         try {
@@ -91,14 +56,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Tests XML serialization with custom validation.
-     *
-     * @param mapper       the XmlMapper to use
-     * @param original     the original object to serialize
-     * @param xmlValidator custom validation logic for the XML string
-     * @param <T>          the type of object being tested
-     */
     public static <T> void testXmlSerialization(
             XmlMapper mapper, T original, Consumer<String> xmlValidator) {
         try {
@@ -109,15 +66,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Tests JSON deserialization from a string.
-     *
-     * @param mapper the ObjectMapper to use
-     * @param json   the JSON string to deserialize
-     * @param clazz  the class type for deserialization
-     * @param <T>    the type of object being tested
-     * @return the deserialized object
-     */
     public static <T> T testJsonDeserialization(ObjectMapper mapper, String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, clazz);
@@ -126,15 +74,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Tests XML deserialization from a string.
-     *
-     * @param mapper the XmlMapper to use
-     * @param xml    the XML string to deserialize
-     * @param clazz  the class type for deserialization
-     * @param <T>    the type of object being tested
-     * @return the deserialized object
-     */
     public static <T> T testXmlDeserialization(XmlMapper mapper, String xml, Class<T> clazz) {
         try {
             return mapper.readValue(xml, clazz);
@@ -143,12 +82,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Validates that serialization produces expected JSON structure.
-     *
-     * @param json           the JSON string to validate
-     * @param expectedFields the fields that should be present in the JSON
-     */
     public static void validateJsonStructure(String json, String... expectedFields) {
         Assertions.assertThat(json).isNotNull().isNotEmpty();
         for (String field : expectedFields) {
@@ -156,12 +89,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Validates that serialization produces expected XML structure.
-     *
-     * @param xml              the XML string to validate
-     * @param expectedElements the elements that should be present in the XML
-     */
     public static void validateXmlStructure(String xml, String... expectedElements) {
         Assertions.assertThat(xml).isNotNull().isNotEmpty();
         for (String element : expectedElements) {
@@ -169,14 +96,6 @@ public final class SerializationTestUtils {
         }
     }
 
-    /**
-     * Tests that serialization handles null values appropriately.
-     *
-     * @param mapper          the ObjectMapper to use
-     * @param objectWithNulls an object containing null values
-     * @param clazz           the class type
-     * @param <T>             the type of object being tested
-     */
     public static <T> void testNullHandling(ObjectMapper mapper, T objectWithNulls, Class<T> clazz) {
         try {
             String serialized = mapper.writeValueAsString(objectWithNulls);

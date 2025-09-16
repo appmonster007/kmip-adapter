@@ -1,64 +1,27 @@
-package org.purpleBean.kmip.codec.xml;
+package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+@DisplayName("ActivationDateAttribute XML Serialization Tests")
+class ActivationDateAttributeXmlTest extends AbstractXmlSerializationSuite<ActivationDateAttribute> {
 
-@DisplayName("ActivationDateAttribute XML Tests")
-class ActivationDateAttributeXmlTest extends BaseKmipTest {
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Test
-    @DisplayName("Round-trip: serialize and deserialize ActivationDateAttribute")
-    void roundTrip() {
-        ActivationDateAttribute original = KmipTestDataFactory.createActivationDateAttribute();
-        SerializationTestUtils.performXmlRoundTrip(xmlMapper, original, ActivationDateAttribute.class);
+    @Override
+    protected Class<ActivationDateAttribute> type() { return ActivationDateAttribute.class; }
+
+    @Override
+    protected ActivationDateAttribute createDefault() {
+        return ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
     }
 
-    @Test
-    @DisplayName("Round-trip: various date inputs")
-    void roundTrip_variousDates() {
-        List<ActivationDateAttribute> dates = List.of(
-                KmipTestDataFactory.createActivationDateAttribute(KmipTestDataFactory.BoundaryData.epochDateTime()),
-                KmipTestDataFactory.createActivationDateAttribute(OffsetDateTime.now()),
-                KmipTestDataFactory.createRandomActivationDateAttribute()
-        );
-
-        for (ActivationDateAttribute date : dates) {
-            SerializationTestUtils.performXmlRoundTrip(xmlMapper, date, ActivationDateAttribute.class);
-        }
-    }
-
-    @Test
-    @DisplayName("Structure: expected XML fields present for ActivationDateAttribute")
-    void structure_expectFields() {
-        ActivationDateAttribute attribute = KmipTestDataFactory.createActivationDateAttribute();
-        SerializationTestUtils.testXmlSerialization(
-                xmlMapper,
-                attribute,
-                xml -> {
-                    assertThat(xml).contains("<ActivationDate");
-                    assertThat(xml).contains("type=\"DateTime\"");
-                }
-        );
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: ActivationDateAttribute XML serialization should fail")
-    void unsupportedVersion_xmlSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(
-                        () -> xmlMapper.writeValueAsString(KmipTestDataFactory.createActivationDateAttribute()))
-                        .isInstanceOf(Exception.class));
+    @Override
+    protected ActivationDateAttribute createVariant() {
+        return ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
     }
 }

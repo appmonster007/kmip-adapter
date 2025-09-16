@@ -1,69 +1,33 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purpleBean.kmip.codec.ttlv.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.List;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
+@DisplayName("SampleStructure TTLV Serialization Tests")
+class SampleStructureTtlvTest extends AbstractTtlvSerializationSuite<SampleStructure> {
 
-@DisplayName("SampleStructure TTLV Tests")
-class SampleStructureTtlvTest extends BaseKmipTest {
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    private final TtlvMapper ttlvMapper = buildMapper();
+    @Override
+    protected Class<SampleStructure> type() { return SampleStructure.class; }
 
-    private TtlvMapper buildMapper() {
-        TtlvMapper mapper = new TtlvMapper();
-        mapper.registerModule(new KmipTtlvModule());
-        return mapper;
+    @Override
+    protected SampleStructure createDefault() {
+        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        State state = new State(State.Standard.ACTIVE);
+        return SampleStructure.builder().activationDate(activationDate).state(state).build();
     }
 
-    @Test
-    @DisplayName("Round-trip: SampleStructure TTLV")
-    void roundTrip_sampleStructure() {
-        SampleStructure original = KmipTestDataFactory.createSampleStructure();
-        assertRoundTrip(original);
-    }
-
-    @Test
-    @DisplayName("Round-trip: complex nested structures")
-    void roundTrip_complex() {
-        List<SampleStructure> structures = KmipTestDataFactory.createSampleStructures(5);
-        for (SampleStructure structure : structures) {
-            assertRoundTrip(structure);
-        }
-    }
-
-    private void assertRoundTrip(SampleStructure original) {
-        ByteBuffer buffer;
-        try {
-            buffer = ttlvMapper.writeValueAsByteBuffer(original);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to serialize to TTLV", e);
-        }
-        SampleStructure deserialized;
-        try {
-            deserialized = ttlvMapper.readValue(buffer, SampleStructure.class);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to deserialize from TTLV", e);
-        }
-        assertThat(deserialized).isEqualTo(original);
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: SampleStructure TTLV serialization should fail")
-    void unsupportedVersion_ttlvSerializationShouldFail() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
-                                () -> ttlvMapper.writeValueAsByteBuffer(KmipTestDataFactory.createSampleStructure()))
-                        .isInstanceOf(Exception.class));
+    @Override
+    protected SampleStructure createVariant() {
+        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        State state = new State(State.Standard.DEACTIVATED);
+        return SampleStructure.builder().activationDate(activationDate).state(state).build();
     }
 }

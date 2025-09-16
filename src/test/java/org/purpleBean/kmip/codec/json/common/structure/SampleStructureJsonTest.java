@@ -1,56 +1,33 @@
-package org.purpleBean.kmip.codec.json;
+package org.purpleBean.kmip.codec.json.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.KmipTestDataFactory;
-import org.purpleBean.kmip.test.SerializationTestUtils;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
-import java.util.List;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
+@DisplayName("SampleStructure JSON Serialization Tests")
+class SampleStructureJsonTest extends AbstractJsonSerializationSuite<SampleStructure> {
 
-@DisplayName("SampleStructure JSON Tests")
-class SampleStructureJsonTest extends BaseKmipTest {
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Test
-    @DisplayName("Round-trip: serialize and deserialize SampleStructure")
-    void roundTrip() {
-        SampleStructure original = KmipTestDataFactory.createSampleStructure();
-        SerializationTestUtils.performJsonRoundTrip(jsonMapper, original, SampleStructure.class);
+    @Override
+    protected Class<SampleStructure> type() { return SampleStructure.class; }
+
+    @Override
+    protected SampleStructure createDefault() {
+        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        State state = new State(State.Standard.ACTIVE);
+        return SampleStructure.builder().activationDate(activationDate).state(state).build();
     }
 
-    @Test
-    @DisplayName("Round-trip: complex nested structures")
-    void roundTrip_complex() {
-        List<SampleStructure> structures = KmipTestDataFactory.createSampleStructures(5);
-        for (SampleStructure structure : structures) {
-            SerializationTestUtils.performJsonRoundTrip(jsonMapper, structure, SampleStructure.class);
-        }
-    }
-
-    @Test
-    @DisplayName("Structure: expected JSON fields present for SampleStructure")
-    void structure_expectFields() {
-        SampleStructure structure = KmipTestDataFactory.createSampleStructure();
-        SerializationTestUtils.testJsonSerialization(
-                jsonMapper,
-                structure,
-                json -> {
-                    SerializationTestUtils.validateJsonStructure(json, "tag", "type", "value");
-                    assertThat(json).contains("\"SecretData\"");
-                });
-    }
-
-    @Test
-    @DisplayName("UnsupportedVersion context: SampleStructure JSON serialization should fail")
-    void unsupportedVersion_jsonSerializationFails() {
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> org.assertj.core.api.Assertions.assertThatThrownBy(
-                                () -> jsonMapper.writeValueAsString(KmipTestDataFactory.createSampleStructure()))
-                        .isInstanceOf(Exception.class));
+    @Override
+    protected SampleStructure createVariant() {
+        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        State state = new State(State.Standard.DEACTIVATED);
+        return SampleStructure.builder().activationDate(activationDate).state(state).build();
     }
 }

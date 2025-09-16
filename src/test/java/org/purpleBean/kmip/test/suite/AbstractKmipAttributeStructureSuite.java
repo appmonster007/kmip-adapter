@@ -1,0 +1,53 @@
+package org.purpleBean.kmip.test.suite;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.KmipAttribute;
+import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.common.enumeration.State;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * Combined domain suite for types that implement both KmipAttribute and KmipStructure.
+ *
+ * Type bound ensures the concrete type implements both interfaces.
+ */
+@DisplayName("Abstract KMIP Attribute+Structure Suite")
+public abstract class AbstractKmipAttributeStructureSuite<T extends KmipStructure & KmipAttribute>
+        extends AbstractKmipStructureSuite<T> {
+
+    // Expectations for flag-like capabilities
+    protected abstract boolean expectAlwaysPresent();
+    protected abstract boolean expectServerInitializable();
+    protected abstract boolean expectClientInitializable();
+    protected abstract boolean expectClientDeletable();
+    protected abstract boolean expectMultiInstanceAllowed();
+
+    // Representative states to exercise state-dependent methods
+    protected abstract State stateForServerModifiableTrue();
+    protected abstract State stateForServerModifiableFalse();
+    protected abstract State stateForClientModifiableTrue();
+    protected abstract State stateForClientModifiableFalse();
+
+    @Test
+    @DisplayName("Attr+Struct: capability flags match expectations")
+    void attrStruct_capabilityFlags_matchExpectations() {
+        T obj = createDefault();
+        assertThat(obj.isAlwaysPresent()).isEqualTo(expectAlwaysPresent());
+        assertThat(obj.isServerInitializable()).isEqualTo(expectServerInitializable());
+        assertThat(obj.isClientInitializable()).isEqualTo(expectClientInitializable());
+        assertThat(obj.isClientDeletable()).isEqualTo(expectClientDeletable());
+        assertThat(obj.isMultiInstanceAllowed()).isEqualTo(expectMultiInstanceAllowed());
+    }
+
+    @Test
+    @DisplayName("Attr+Struct: server/client modifiable respect state")
+    void attrStruct_modifiable_respectsState() {
+        T obj = createDefault();
+        assertThat(obj.isServerModifiable(stateForServerModifiableTrue())).isTrue();
+        assertThat(obj.isServerModifiable(stateForServerModifiableFalse())).isFalse();
+        assertThat(obj.isClientModifiable(stateForClientModifiableTrue())).isTrue();
+        assertThat(obj.isClientModifiable(stateForClientModifiableFalse())).isFalse();
+    }
+}

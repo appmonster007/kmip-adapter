@@ -60,7 +60,7 @@
         </dependencies>
         <configuration>
           <useModulePath>false</useModulePath>
-          <excludedGroups>integration</excludedGroups>
+          <excludedGroups>integration,perf</excludedGroups>
           <properties>
             <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
           </properties>
