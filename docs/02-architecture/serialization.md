@@ -130,17 +130,12 @@ public class CustomTypeSerializer extends StdSerializer<CustomType> {
     }
 }
 
-// 2. Create a custom module
-SimpleModule customModule = new SimpleModule("CustomKMIP")
-    .addSerializer(CustomType.class, new CustomTypeSerializer())
-    .addDeserializer(CustomType.class, new CustomTypeDeserializer());
-
-// 3. Register with ObjectMapper
-ObjectMapper mapper = new ObjectMapper()
-    .registerModule(new KmipJsonModule())
-    .registerModule(customModule);
-
-// 4. (Optional) Register your custom module with ObjectMapper as shown above.
+// 2. Prefer ServiceLoader registration (no code changes in KmipJsonModule)
+//    Create provider files with your FQCNs:
+//    - META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer
+//    - META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer
+// 3. Register KmipJsonModule on your ObjectMapper; providers will be auto‑loaded.
+ObjectMapper mapper = new ObjectMapper().registerModule(new KmipJsonModule());
 ```
 
 ### Performance Notes

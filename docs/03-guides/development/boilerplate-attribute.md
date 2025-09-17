@@ -295,7 +295,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
-public class FooDemoAttributeTtlvSerializer implements TtlvSerializer<FooDemoAttribute> {
+public class FooDemoAttributeTtlvSerializer extends KmipDataTypeTtlvSerializer<FooDemoAttribute> {
     @Override
     public ByteBuffer serialize(FooDemoAttribute value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
@@ -341,7 +341,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class FooDemoAttributeTtlvDeserializer implements TtlvDeserializer<FooDemoAttribute> {
+public class FooDemoAttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<FooDemoAttribute> {
     EncodingType type = EncodingType.DATE_TIME;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ATTRIBUTE);
 
@@ -365,10 +365,38 @@ public class FooDemoAttributeTtlvDeserializer implements TtlvDeserializer<FooDem
     }
 }
 ```
+## 5) Registration (ServiceLoader)
+
+Register your serializers/deserializers via Java ServiceLoader. Add fully-qualified class names (one per line) to these files in `src/main/resources/META-INF/services/`:
+
+- JSON
+    - `org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
+        - `org.purpleBean.kmip.codec.json.serializer.kmip.common.FooDemoAttributeJsonSerializer`
+    - `org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
+        - `org.purpleBean.kmip.codec.json.deserializer.kmip.common.FooDemoAttributeJsonDeserializer`
+
+- XML
+    - `org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
+        - `org.purpleBean.kmip.codec.xml.serializer.kmip.common.FooDemoAttributeXmlSerializer`
+    - `org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
+        - `org.purpleBean.kmip.codec.xml.deserializer.kmip.common.FooDemoAttributeXmlDeserializer`
+
+- TTLV
+    - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer`
+        - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.FooDemoAttributeTtlvSerializer`
+    - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer`
+        - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.FooDemoAttributeTtlvDeserializer`
+
+Notes
+- You do NOT need to modify `KmipJsonModule`, `KmipXmlModule`, or `KmipTtlvModule`. They auto-discover providers via ServiceLoader.
+- JSON/XML base classes (`KmipDataTypeJsonSerializer/Deserializer`, `KmipDataTypeXmlSerializer/Deserializer`) and TTLV abstract contracts (`KmipDataTypeTtlvSerializer`, `KmipDataTypeTtlvDeserializer`) infer the handled type automatically.
 
 ---
 
-## 5) Unit Tests
+
+---
+
+## 6) Unit Tests
 
 ### Core Attribute Test (reusable suite)
 
@@ -416,7 +444,7 @@ class FooDemoAttributeTest extends AbstractKmipAttributeStructureSuite<FooDemoAt
 
 ---
 
-## 6) Codec Tests
+## 7) Codec Tests
 
 Place these under codec packages and extend abstract suites.
 
@@ -491,7 +519,7 @@ class FooDemoAttributeTtlvTest extends AbstractTtlvSerializationSuite<FooDemoAtt
 
 ---
 
-## 7) Performance Benchmarks (JMH)
+## 8) Performance Benchmarks (JMH)
 
 This project includes a pluggable JMH harness that auto-discovers benchmark subjects via Java ServiceLoader. Below is a ready-to-adapt boilerplate subject for `FooDemoAttribute`.
 
@@ -574,7 +602,7 @@ You can customize paths via `-Dbench.result` and `-Dbench.report`. See `docs/04-
 
 ---
 
-## 8) Import Style and Legacy References
+## 9) Import Style and Legacy References
 
 - Prefer imports, not FQNs, in tests:
   - `import java.util.NoSuchElementException;`

@@ -23,19 +23,31 @@ A concise checklist to add a new KMIP type and per-class tests end-to-end, with 
 2. Add a small factory (optional but helpful for tests)
    - Provide a `FooFactory.createFoo()` or `createFooAttribute()` returning a valid instance.
 
-3. Add per-class tests (copy-ready)
+3. Register codecs via ServiceLoader (no code edits in Kmip*Module)
+   - Add your provider classes (FQCN, one per line) to the following files as applicable:
+     - JSON
+       - `META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
+       - `META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
+     - XML
+       - `META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
+       - `META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
+     - TTLV
+       - `META-INF/services/org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer`
+       - `META-INF/services/org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer`
+
+4. Add per-class tests (copy-ready)
    - JSON: place in `src/test/java/org/purpleBean/kmip/codec/json/`.
    - TTLV: place in `src/test/java/org/purpleBean/kmip/codec/ttlv/`.
    - XML: place in `src/test/java/org/purpleBean/kmip/codec/xml/`.
    - Extend `BaseKmipTest` and reuse `SerializationTestUtils`.
 
-4. Run tests and coverage locally
+5. Run tests and coverage locally
    - Unit tests: `mvn test`
    - Include integration tests: `mvn -Pwith-integration test`
    - Coverage (HTML): `mvn clean test` → `target/site/jacoco/index.html`
    - Strict coverage: `mvn -Pcoverage-strict verify`
 
-5. (Optional) Benchmarks
+6. (Optional) Benchmarks
    - Standard perf: `mvn -Pperf verify`
    - Fast perf: `mvn -Pperf-fast verify`
    - Custom: `mvn -Pperf -Dbench.args="-wi 3 -i 5 -f 1 -rf json -rff target/jmh.json" verify`

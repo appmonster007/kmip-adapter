@@ -20,7 +20,7 @@ Common building blocks referenced in all boilerplates:
 Recommended flow:
 1) Open the FooDemo* guide that matches your type.
 2) Copy the class and the matching serializer/deserializer code blocks.
-3) Register the codecs in the respective modules (snippets included in each guide).
+3) Register the codecs using ServiceLoader by listing your providers in the correct `META-INF/services` files (see below). No code edits are needed in the `Kmip*Module` classes.
 4) Copy the provided tests and run `mvn test`.
 5) Adjust tags (`KmipTag.Standard.*` or custom `KmipTag.register(...)`) and field names/types as needed.
 
@@ -34,14 +34,23 @@ Recommended flow:
 
 - Serialization
   - [ ] JSON/XML/TTLV serializers and deserializers created
-  - [ ] Registered via `addSerializer`/`addDeserializer` in `KmipJsonModule`, `KmipXmlModule`, `KmipTtlvModule`
+  - [ ] Registered via ServiceLoader in the correct `META-INF/services` file(s):
+    - JSON
+      - `META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
+      - `META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
+    - XML
+      - `META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
+      - `META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
+    - TTLV
+      - `META-INF/services/org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer`
+      - `META-INF/services/org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer`
 
 - Tests
   - [ ] Unit tests for construction and validation
   - [ ] JSON/XML/TTLV round‑trip tests
   - [ ] UnsupportedVersion cases covered
 
-See the FooDemo* boilerplates for exact code you can paste.
+See the FooDemo* boilerplates for exact code you can paste, including example provider entries for all three formats.
 
 ---
 
@@ -64,9 +73,9 @@ See the FooDemo* boilerplates for exact code you can paste.
   - [ ] Deserializers validate shape (tag/type/value) and enforce required fields
 
 - Module registration
-  - [ ] `KmipJsonModule`: `addSerializer` + `addDeserializer`
-  - [ ] `KmipXmlModule`: `addSerializer` + `addDeserializer`
-  - [ ] `KmipTtlvModule`: `addSerializer` + `addDeserializer`
+  - [ ] JSON: `KmipJsonModule` auto-loads providers from ServiceLoader
+  - [ ] XML: `KmipXmlModule` auto-loads providers from ServiceLoader
+  - [ ] TTLV: `KmipTtlvModule` auto-loads providers from ServiceLoader
 
 - Tests (see FooDemo* guides for copy‑ready classes)
   - [ ] Unit tests for construction/validation, equals/hash
