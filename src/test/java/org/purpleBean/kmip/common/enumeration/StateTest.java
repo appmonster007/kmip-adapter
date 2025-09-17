@@ -44,18 +44,21 @@ class StateTest extends AbstractKmipEnumerationSuite<State> {
     }
 
     @Override
+    protected void assertLookupBehaviour() {
+        // Lookup by name/value
+        State.Value byName = State.fromName(KmipSpec.V1_2, "X-Enum-Custom");
+        State.Value byVal = State.fromValue(KmipSpec.V1_2, 0x80000010);
+        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+    }
+
+    @Override
     protected void assertEnumerationRegistryBehaviorPositive() {
         // Valid registration in State requires 8XXXXXXX (hex) range per implementation
         State.Value custom = State.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.V1_2));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.V1_2)).isTrue();
-
-        // Lookup by name/value
-        State.Value byName = State.fromName(KmipSpec.V1_2, "X-Enum-Custom");
-        State.Value byVal = State.fromValue(KmipSpec.V1_2, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
     }
 
     @Override

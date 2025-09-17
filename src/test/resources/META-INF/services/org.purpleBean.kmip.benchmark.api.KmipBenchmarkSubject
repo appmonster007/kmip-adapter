@@ -1,3 +1,5 @@
 org.purpleBean.kmip.benchmark.subjects.ActivationDateAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.StateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.SampleStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.KeyCompressionTypeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.CredentialTypeBenchmarkSubject
