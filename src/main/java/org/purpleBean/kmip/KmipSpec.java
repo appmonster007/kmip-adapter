@@ -13,7 +13,14 @@ public enum KmipSpec {
 
     UnknownVersion(-1, -1),
     UnsupportedVersion(-9, -9),
-    V1_2(1, 2);
+    V1_0(1, 0),
+    V1_1(1, 1),
+    V1_2(1, 2),
+    V1_3(1, 3),
+    V1_4(1, 4),
+    V2_0(2, 0),
+    V2_1(2, 1),
+    V3_0(3, 0);
 
     private static final Map<Map.Entry<Integer, Integer>, KmipSpec> SPEC_MAP = new HashMap<>();
 

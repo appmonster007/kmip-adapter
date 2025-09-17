@@ -3,6 +3,8 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMajorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMinorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.ActivationDateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.StateXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.CredentialTypeXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.KeyCompressionTypeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.SampleStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestBatchItemXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestHeaderXmlSerializer
