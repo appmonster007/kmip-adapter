@@ -2,23 +2,33 @@ package org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.enumeration.KeyCompressionType;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class KeyCompressionTypeXmlSerializer extends KmipDataTypeXmlSerializer<KeyCompressionType> {
     @Override
-    public void serialize(KeyCompressionType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
+    public void serialize(KeyCompressionType value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
-            throw new IOException(
-                String.format("%s '%s' is not supported for KMIP spec %s",
-                    value.getKmipTag().getDescription(), value.getDescription(), spec));
+            throw new UnsupportedEncodingException();
         }
-        gen.writeString(value.getDescription());
+        if (!(gen instanceof ToXmlGenerator xmlGen)) {
+            throw new IllegalStateException("Expected ToXmlGenerator");
+        }
+        String elementName = value.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(value);
+        xmlGen.setNextIsAttribute(true);
+        xmlGen.writeStringField("type", value.getEncodingType().getDescription());
+        xmlGen.setNextIsAttribute(true);
+        xmlGen.writeStringField("value", value.getDescription());
+        xmlGen.writeEndObject();
     }
 }

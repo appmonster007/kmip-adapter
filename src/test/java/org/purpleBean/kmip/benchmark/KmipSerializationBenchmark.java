@@ -53,7 +53,7 @@ public class KmipSerializationBenchmark {
         return s.impl.ttlvDeserialize();
     }
 
-    @org.openjdk.jmh.annotations.State(Scope.Benchmark)
+    @State(Scope.Benchmark)
     public static class BenchState {
 
         private static final Map<String, KmipBenchmarkSubject> REGISTRY = new HashMap<>();
