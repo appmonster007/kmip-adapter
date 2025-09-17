@@ -2,69 +2,36 @@ package org.purpleBean.kmip.codec.xml;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.RequestMessageStructure;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMajorXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.RequestMessageXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ActivationDateAttributeXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.StateXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.SampleStructureXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestBatchItemXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestHeaderXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestMessageXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMajorXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMinorXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.ActivationDateAttributeXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.StateXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.SampleStructureXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestBatchItemXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestHeaderXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestMessageXmlSerializer;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.common.structure.SampleStructure;
-import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
+
+import java.util.ServiceLoader;
 
 public class KmipXmlModule extends SimpleModule {
     public KmipXmlModule() {
         super("KmipXmlModule", Version.unknownVersion());
 
-        addSerializer(ProtocolVersion.class, new ProtocolVersionXmlSerializer());
-        addDeserializer(ProtocolVersion.class, new ProtocolVersionXmlDeserializer());
-
-        addSerializer(ProtocolVersion.ProtocolVersionMajor.class, new ProtocolVersionMajorXmlSerializer());
-        addDeserializer(ProtocolVersion.ProtocolVersionMajor.class, new ProtocolVersionMajorXmlDeserializer());
-
-        addSerializer(ProtocolVersion.ProtocolVersionMinor.class, new ProtocolVersionMinorXmlSerializer());
-        addDeserializer(ProtocolVersion.ProtocolVersionMinor.class, new ProtocolVersionMinorXmlDeserializer());
-
-        addSerializer(SimpleRequestMessage.class, new SimpleRequestMessageXmlSerializer());
-        addDeserializer(SimpleRequestMessage.class, new SimpleRequestMessageXmlDeserializer());
-
-        addDeserializer(RequestMessageStructure.class, new RequestMessageXmlDeserializer());
-
-        addSerializer(SimpleRequestHeader.class, new SimpleRequestHeaderXmlSerializer());
-        addDeserializer(SimpleRequestHeader.class, new SimpleRequestHeaderXmlDeserializer());
-
-        addSerializer(SimpleRequestBatchItem.class, new SimpleRequestBatchItemXmlSerializer());
-        addDeserializer(SimpleRequestBatchItem.class, new SimpleRequestBatchItemXmlDeserializer());
-
-        addSerializer(State.class, new StateXmlSerializer());
-        addDeserializer(State.class, new StateXmlDeserializer());
-
-        addSerializer(ActivationDateAttribute.class, new ActivationDateAttributeXmlSerializer());
-        addDeserializer(ActivationDateAttribute.class, new ActivationDateAttributeXmlDeserializer());
-
-        addSerializer(SampleStructure.class, new SampleStructureXmlSerializer());
-        addDeserializer(SampleStructure.class, new SampleStructureXmlDeserializer());
-
+        // Auto-register any XML serializers/deserializers exposed via Java ServiceLoader
+        // Providers should extend KmipDataTypeXmlSerializer / KmipDataTypeXmlDeserializer.
+        for (KmipDataTypeXmlSerializer<?> ser : ServiceLoader.load(KmipDataTypeXmlSerializer.class)) {
+            try {
+                addSerializer(ser);
+            } catch (Throwable t) {
+                System.err.println("[KmipXmlModule] Failed to register XML serializer via ServiceLoader: " + ser.getClass().getName() + ": " + t.getMessage());
+            }
+        }
+        for (KmipDataTypeXmlDeserializer<?> deser : ServiceLoader.load(KmipDataTypeXmlDeserializer.class)) {
+            try {
+                Class<?> target = deser.handledType();
+                if (target != null) {
+                    addDeserializer((Class) target, deser);
+                } else {
+                    System.err.println("[KmipXmlModule] Could not infer handled type for XML deserializer: " + deser.getClass().getName());
+                }
+            } catch (Throwable t) {
+                System.err.println("[KmipXmlModule] Failed to register XML deserializer via ServiceLoader: " + deser.getClass().getName() + ": " + t.getMessage());
+            }
+        }
 
     }
 }
-
-

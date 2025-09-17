@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
-public class LongTtlvDeserializer implements TtlvDeserializer<Long> {
+public class LongTtlvDeserializer extends TtlvDeserializer<Long> {
     private final EncodingType type = EncodingType.LONG_INTEGER;
 
     @Override

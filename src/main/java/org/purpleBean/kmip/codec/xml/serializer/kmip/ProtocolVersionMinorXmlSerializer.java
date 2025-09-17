@@ -12,7 +12,7 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class ProtocolVersionMinorXmlSerializer extends JsonSerializer<ProtocolVersion.ProtocolVersionMinor> {
+public class ProtocolVersionMinorXmlSerializer extends KmipDataTypeXmlSerializer<ProtocolVersion.ProtocolVersionMinor> {
 
     @Override
     public void serialize(ProtocolVersion.ProtocolVersionMinor protocolVersionMinor, JsonGenerator gen, SerializerProvider provider) throws IOException {

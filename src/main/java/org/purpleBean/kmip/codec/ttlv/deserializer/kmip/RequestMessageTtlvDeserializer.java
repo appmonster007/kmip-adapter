@@ -4,14 +4,13 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.RequestMessageStructure;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestMessageTtlvDeserializer implements TtlvDeserializer<RequestMessageStructure> {
+public class RequestMessageTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestMessageStructure> {
 
     @Override
     public RequestMessageStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {

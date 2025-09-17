@@ -5,7 +5,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class SampleStructureTtlvDeserializer implements TtlvDeserializer<SampleStructure> {
+public class SampleStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SampleStructure> {
     EncodingType type = EncodingType.STRUCTURE;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
 

@@ -1,0 +1,10 @@
+org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMajorJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMinorJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.RequestMessageJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.ActivationDateAttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.StateJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.SampleStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestBatchItemJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestHeaderJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestMessageJsonDeserializer

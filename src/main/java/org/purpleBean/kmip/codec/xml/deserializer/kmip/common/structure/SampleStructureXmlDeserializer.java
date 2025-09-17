@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
@@ -15,7 +16,7 @@ import org.purpleBean.kmip.common.structure.SampleStructure;
 import java.io.IOException;
 import java.util.Map;
 
-public class SampleStructureXmlDeserializer extends JsonDeserializer<SampleStructure> {
+public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<SampleStructure> {
 
     @Override
     public SampleStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

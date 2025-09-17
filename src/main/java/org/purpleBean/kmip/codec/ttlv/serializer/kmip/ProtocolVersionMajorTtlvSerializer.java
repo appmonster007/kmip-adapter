@@ -6,13 +6,12 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
-public class ProtocolVersionMajorTtlvSerializer implements TtlvSerializer<ProtocolVersion.ProtocolVersionMajor> {
+public class ProtocolVersionMajorTtlvSerializer extends KmipDataTypeTtlvSerializer<ProtocolVersion.ProtocolVersionMajor> {
     @Override
     public ByteBuffer serialize(ProtocolVersion.ProtocolVersionMajor value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();

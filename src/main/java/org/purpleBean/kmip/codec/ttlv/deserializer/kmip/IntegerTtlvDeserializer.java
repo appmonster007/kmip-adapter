@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
-public class IntegerTtlvDeserializer implements TtlvDeserializer<Integer> {
+public class IntegerTtlvDeserializer extends TtlvDeserializer<Integer> {
     private final EncodingType type = EncodingType.INTEGER;
 
     @Override

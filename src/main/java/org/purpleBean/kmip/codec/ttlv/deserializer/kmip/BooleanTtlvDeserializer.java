@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
-public class BooleanTtlvDeserializer implements TtlvDeserializer<Boolean> {
+public class BooleanTtlvDeserializer extends TtlvDeserializer<Boolean> {
     private final EncodingType type = EncodingType.BOOLEAN;
 
     @Override

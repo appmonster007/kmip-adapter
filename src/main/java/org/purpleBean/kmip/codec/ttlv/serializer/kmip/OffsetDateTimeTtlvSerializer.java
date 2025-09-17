@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 
-public class OffsetDateTimeTtlvSerializer implements TtlvSerializer<OffsetDateTime> {
+public class OffsetDateTimeTtlvSerializer extends TtlvSerializer<OffsetDateTime> {
     private final EncodingType type = EncodingType.DATE_TIME;
 
     @Override

@@ -5,14 +5,13 @@ import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-public class ProtocolVersionMinorTtlvDeserializer implements TtlvDeserializer<ProtocolVersion.ProtocolVersionMinor> {
+public class ProtocolVersionMinorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProtocolVersion.ProtocolVersionMinor> {
     EncodingType type = EncodingType.INTEGER;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MINOR);
 

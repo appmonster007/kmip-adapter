@@ -1,0 +1,9 @@
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMajorTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMinorTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ActivationDateAttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.StateTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.SampleStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestHeaderTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestBatchItemTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestMessageTtlvSerializer

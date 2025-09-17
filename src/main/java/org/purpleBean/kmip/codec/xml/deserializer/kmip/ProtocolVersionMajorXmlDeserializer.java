@@ -13,7 +13,7 @@ import org.purpleBean.kmip.ProtocolVersion;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class ProtocolVersionMajorXmlDeserializer extends JsonDeserializer<ProtocolVersion.ProtocolVersionMajor> {
+public class ProtocolVersionMajorXmlDeserializer extends KmipDataTypeXmlDeserializer<ProtocolVersion.ProtocolVersionMajor> {
 
     @Override
     public ProtocolVersion.ProtocolVersionMajor deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

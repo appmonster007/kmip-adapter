@@ -8,13 +8,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
 
-public class SimpleRequestMessageXmlDeserializer extends JsonDeserializer<SimpleRequestMessage> {
+public class SimpleRequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<SimpleRequestMessage> {
 
     @Override
     public SimpleRequestMessage deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

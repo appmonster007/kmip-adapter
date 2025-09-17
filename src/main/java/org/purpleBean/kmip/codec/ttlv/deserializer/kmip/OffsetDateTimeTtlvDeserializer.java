@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Objects;
 
-public class OffsetDateTimeTtlvDeserializer implements TtlvDeserializer<OffsetDateTime> {
+public class OffsetDateTimeTtlvDeserializer extends TtlvDeserializer<OffsetDateTime> {
     private final EncodingType type = EncodingType.DATE_TIME;
 
     @Override

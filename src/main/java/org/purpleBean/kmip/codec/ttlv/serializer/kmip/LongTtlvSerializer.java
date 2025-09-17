@@ -7,7 +7,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class LongTtlvSerializer implements TtlvSerializer<Long> {
+public class LongTtlvSerializer extends TtlvSerializer<Long> {
     private final EncodingType type = EncodingType.INTEGER;
 
     @Override

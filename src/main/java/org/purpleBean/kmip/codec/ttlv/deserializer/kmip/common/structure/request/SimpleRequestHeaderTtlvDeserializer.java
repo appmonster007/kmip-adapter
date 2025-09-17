@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.reques
 
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class SimpleRequestHeaderTtlvDeserializer implements TtlvDeserializer<SimpleRequestHeader> {
+public class SimpleRequestHeaderTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SimpleRequestHeader> {
     EncodingType type = EncodingType.STRUCTURE;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_HEADER);
 

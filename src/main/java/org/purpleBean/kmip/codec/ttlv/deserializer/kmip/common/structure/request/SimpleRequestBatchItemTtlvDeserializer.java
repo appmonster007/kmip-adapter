@@ -5,7 +5,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 
@@ -14,7 +14,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class SimpleRequestBatchItemTtlvDeserializer implements TtlvDeserializer<SimpleRequestBatchItem> {
+public class SimpleRequestBatchItemTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SimpleRequestBatchItem> {
     EncodingType type = EncodingType.STRUCTURE;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ITEM);
 

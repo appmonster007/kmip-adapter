@@ -12,6 +12,7 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.SampleS
 import org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestBatchItemJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestHeaderJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestMessageJsonDeserializer;
+import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipTagJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.kmip.ProtocolVersionJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.kmip.ProtocolVersionMajorJsonSerializer;
@@ -28,6 +29,8 @@ import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
+import java.lang.reflect.ParameterizedType;
+import java.util.ServiceLoader;
 
 public class KmipJsonModule extends SimpleModule {
     public KmipJsonModule() {
@@ -38,33 +41,30 @@ public class KmipJsonModule extends SimpleModule {
         addSerializer(KmipTag.class, new KmipTagJsonSerializer());
         addDeserializer(KmipTag.class, new KmipTagJsonDeserializer());
 
-        addSerializer(ProtocolVersion.class, new ProtocolVersionJsonSerializer());
-        addDeserializer(ProtocolVersion.class, new ProtocolVersionJsonDeserializer());
-
-        addSerializer(ProtocolVersion.ProtocolVersionMajor.class, new ProtocolVersionMajorJsonSerializer());
-        addDeserializer(ProtocolVersion.ProtocolVersionMajor.class, new ProtocolVersionMajorJsonDeserializer());
-
-        addSerializer(ProtocolVersion.ProtocolVersionMinor.class, new ProtocolVersionMinorJsonSerializer());
-        addDeserializer(ProtocolVersion.ProtocolVersionMinor.class, new ProtocolVersionMinorJsonDeserializer());
-
-        addSerializer(SimpleRequestMessage.class, new SimpleRequestMessageJsonSerializer());
-        addDeserializer(SimpleRequestMessage.class, new SimpleRequestMessageJsonDeserializer());
-
-        addDeserializer(RequestMessageStructure.class, new RequestMessageJsonDeserializer());
-
-        addSerializer(SimpleRequestHeader.class, new SimpleRequestHeaderJsonSerializer());
-        addDeserializer(SimpleRequestHeader.class, new SimpleRequestHeaderJsonDeserializer());
-
-        addSerializer(SimpleRequestBatchItem.class, new SimpleRequestBatchItemJsonSerializer());
-        addDeserializer(SimpleRequestBatchItem.class, new SimpleRequestBatchItemJsonDeserializer());
-
-        addSerializer(State.class, new StateJsonSerializer());
-        addDeserializer(State.class, new StateJsonDeserializer());
-
-        addSerializer(ActivationDateAttribute.class, new ActivationDateAttributeJsonSerializer());
-        addDeserializer(ActivationDateAttribute.class, new ActivationDateAttributeJsonDeserializer());
-
-        addSerializer(SampleStructure.class, new SampleStructureJsonSerializer());
-        addDeserializer(SampleStructure.class, new SampleStructureJsonDeserializer());
+        // Also auto-register any serializers/deserializers exposed via Java ServiceLoader
+        // This enables external modules to contribute handlers without modifying this file.
+        // Serializers: SimpleModule.addSerializer(JsonSerializer) uses handledType(), which we override.
+        for (KmipDataTypeJsonSerializer<?> ser : ServiceLoader.load(KmipDataTypeJsonSerializer.class)) {
+            try {
+                addSerializer(ser);
+            } catch (Throwable t) {
+                // Best-effort registration; don't break module init for one faulty provider.
+                System.err.println("[KmipJsonModule] Failed to register serializer via ServiceLoader: " + ser.getClass().getName() + ": " + t.getMessage());
+            }
+        }
+        // Deserializers: need to infer the target class from the generic parameter.
+        for (KmipDataTypeJsonDeserializer<?> deser : ServiceLoader.load(KmipDataTypeJsonDeserializer.class)) {
+            try {
+                Class<?> target = deser.handledType();
+                if (target != null) {
+                    addDeserializer((Class) target, deser);
+                } else {
+                    System.err.println("[KmipJsonModule] Could not infer handled type for deserializer: " + deser.getClass().getName());
+                }
+            } catch (Throwable t) {
+                System.err.println("[KmipJsonModule] Failed to register deserializer via ServiceLoader: " + deser.getClass().getName() + ": " + t.getMessage());
+            }
+        }
     }
 }
+

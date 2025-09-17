@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer.kmip;
+package org.purpleBean.kmip.codec.xml.deserializer.kmip;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import org.purpleBean.kmip.KmipDataType;
@@ -6,12 +6,10 @@ import org.purpleBean.kmip.KmipDataType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public abstract class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDeserializer<T> {
+public abstract class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDeserializer<T> {
     @Override
     public Class<?> handledType() {
-        // Try to infer the generic parameter (T) from the concrete subclass declaration
-        // e.g., class FooSerializer extends KmipDataTypeJsonSerializer<Foo>
-        // This allows SimpleModule.addSerializer(JsonSerializer) to work without passing Class explicitly
+        // Infer the generic parameter (T) from the concrete subclass declaration
         Type superType = getClass().getGenericSuperclass();
         if (superType instanceof ParameterizedType pt) {
             Type tArg = pt.getActualTypeArguments()[0];

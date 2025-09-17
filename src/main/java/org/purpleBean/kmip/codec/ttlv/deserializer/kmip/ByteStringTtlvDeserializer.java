@@ -7,7 +7,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ByteStringTtlvDeserializer implements TtlvDeserializer<ByteBuffer> {
+public class ByteStringTtlvDeserializer extends TtlvDeserializer<ByteBuffer> {
     private final EncodingType type = EncodingType.BYTE_STRING;
 
     @Override

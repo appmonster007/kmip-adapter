@@ -1,0 +1,6 @@
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.BooleanTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.IntegerTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.LongTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ByteStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.TextStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.OffsetDateTimeTtlvDeserializer

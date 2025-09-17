@@ -5,7 +5,7 @@ import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SampleStructureTtlvSerializer implements TtlvSerializer<SampleStructure> {
+public class SampleStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<SampleStructure> {
     @Override
     public ByteBuffer serialize(SampleStructure value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();

@@ -12,7 +12,7 @@ import org.purpleBean.kmip.ProtocolVersion;
 
 import java.io.IOException;
 
-public class ProtocolVersionXmlDeserializer extends JsonDeserializer<ProtocolVersion> {
+public class ProtocolVersionXmlDeserializer extends KmipDataTypeXmlDeserializer<ProtocolVersion> {
 
     @Override
     public ProtocolVersion deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

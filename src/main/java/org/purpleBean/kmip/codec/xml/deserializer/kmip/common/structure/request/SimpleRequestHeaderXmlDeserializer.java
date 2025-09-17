@@ -9,12 +9,13 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
 import java.io.IOException;
 import java.util.Map;
 
-public class SimpleRequestHeaderXmlDeserializer extends JsonDeserializer<SimpleRequestHeader> {
+public class SimpleRequestHeaderXmlDeserializer extends KmipDataTypeXmlDeserializer<SimpleRequestHeader> {
 
     @Override
     public SimpleRequestHeader deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

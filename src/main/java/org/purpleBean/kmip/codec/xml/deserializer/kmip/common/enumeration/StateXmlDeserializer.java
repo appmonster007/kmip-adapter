@@ -8,12 +8,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class StateXmlDeserializer extends JsonDeserializer<State> {
+public class StateXmlDeserializer extends KmipDataTypeXmlDeserializer<State> {
 
     @Override
     public State deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

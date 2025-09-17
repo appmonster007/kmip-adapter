@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 
-public class SimpleRequestHeaderXmlSerializer extends JsonSerializer<SimpleRequestHeader> {
+public class SimpleRequestHeaderXmlSerializer extends KmipDataTypeXmlSerializer<SimpleRequestHeader> {
 
     @Override
     public void serialize(SimpleRequestHeader header,

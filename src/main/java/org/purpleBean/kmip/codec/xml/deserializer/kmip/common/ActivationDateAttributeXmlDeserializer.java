@@ -5,13 +5,14 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
-public class ActivationDateAttributeXmlDeserializer extends JsonDeserializer<ActivationDateAttribute> {
+public class ActivationDateAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<ActivationDateAttribute> {
 
     @Override
     public ActivationDateAttribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

@@ -2,7 +2,6 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ProtocolVersionTtlvDeserializer implements TtlvDeserializer<ProtocolVersion> {
+public class ProtocolVersionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProtocolVersion> {
     EncodingType type = EncodingType.STRUCTURE;
     KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
 
