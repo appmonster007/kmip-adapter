@@ -523,6 +523,14 @@ class FooDemoEnumTest extends AbstractKmipEnumerationSuite<FooDemoEnum> {
     // Opt-in registry behavior (split positive/negative)
     @Override
     protected boolean supportsRegistryBehavior() { return true; }
+    
+    @Override
+    protected void assertLookupBehaviour() {
+        FooDemoEnum.Value byName = FooDemoEnum.fromName(KmipSpec.V1_2, "X-Enum-Custom");
+        FooDemoEnum.Value byVal = FooDemoEnum.fromValue(KmipSpec.V1_2, 0x80000010);
+        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+    }
 
     @Override
     protected void assertEnumerationRegistryBehaviorPositive() {
@@ -530,11 +538,6 @@ class FooDemoEnumTest extends AbstractKmipEnumerationSuite<FooDemoEnum> {
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.V1_2)).isTrue();
-
-        FooDemoEnum.Value byName = FooDemoEnum.fromName(KmipSpec.V1_2, "X-Enum-Custom");
-        FooDemoEnum.Value byVal = FooDemoEnum.fromValue(KmipSpec.V1_2, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
     }
 
     @Override
