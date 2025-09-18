@@ -1,0 +1,23 @@
+package org.purpleBean.kmip.codec.ttlv.common.enumeration;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.enumeration.KeyFormatType;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+
+@DisplayName("KeyFormatType TTLV Serialization")
+class KeyFormatTypeTtlvTest extends AbstractTtlvSerializationSuite<KeyFormatType> {
+    @Override
+    protected Class<KeyFormatType> type() {
+        return KeyFormatType.class;
+    }
+
+    @Override
+    protected KeyFormatType createDefault() {
+        return new KeyFormatType(KeyFormatType.Standard.PLACEHOLDER_1);
+    }
+
+    @Override
+    protected KeyFormatType createVariant() {
+        return new KeyFormatType(KeyFormatType.Standard.PLACEHOLDER_2);
+    }
+}
