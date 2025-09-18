@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.KeyRoleType;
 
@@ -17,6 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyRoleType.
  */
 public class KeyRoleTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyRoleType> {
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_ROLE_TYPE);
 
     @Override
     public KeyRoleType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -28,9 +32,15 @@ public class KeyRoleTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyR
             return null;
         }
 
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch(KeyRoleType.class, "Invalid Tag for KeyRoleType");
+            return null;
+        }
+
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
-                !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+                !encodingType.getDescription().equals(typeNode.asText())) {
             ctxt.reportInputMismatch(KeyRoleType.class, "Missing or invalid '@type' attribute for KeyRoleType");
             return null;
         }

@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 
@@ -17,6 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyValueLocationType.
  */
 public class KeyValueLocationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyValueLocationType> {
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_TYPE);
 
     @Override
     public KeyValueLocationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -28,9 +32,15 @@ public class KeyValueLocationTypeXmlDeserializer extends KmipDataTypeXmlDeserial
             return null;
         }
 
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch(KeyValueLocationType.class, "Invalid Tag for KeyValueLocationType");
+            return null;
+        }
+
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
-                !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+                !encodingType.getDescription().equals(typeNode.asText())) {
             ctxt.reportInputMismatch(KeyValueLocationType.class, "Missing or invalid '@type' attribute for KeyValueLocationType");
             return null;
         }

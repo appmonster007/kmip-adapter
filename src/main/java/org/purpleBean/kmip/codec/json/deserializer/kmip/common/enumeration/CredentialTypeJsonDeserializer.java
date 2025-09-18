@@ -24,7 +24,7 @@ public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
     public CredentialType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(CredentialType.class, "JSON node cannot be null for CredentialType deserialization");
+            ctxt.reportInputMismatch(CredentialType.class, String.format("JSON node cannot be null for CredentialType deserialization"));
             return null;
         }
 
@@ -33,7 +33,7 @@ public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(CredentialType.class, "Invalid KMIP tag for CredentialType");
+                ctxt.reportInputMismatch(CredentialType.class, String.format("Invalid KMIP tag for CredentialType"));
                 return null;
             }
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(CredentialType.class, "Missing or non-text 'type' field for CredentialType");
+            ctxt.reportInputMismatch(CredentialType.class, String.format("Missing or non-text 'type' field for CredentialType"));
             return null;
         }
 

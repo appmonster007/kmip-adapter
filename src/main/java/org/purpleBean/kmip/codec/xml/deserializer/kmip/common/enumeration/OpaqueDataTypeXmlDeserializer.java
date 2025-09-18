@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 
@@ -17,6 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for OpaqueDataType.
  */
 public class OpaqueDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<OpaqueDataType> {
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPAQUE_DATA_TYPE);
 
     @Override
     public OpaqueDataType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -28,9 +32,15 @@ public class OpaqueDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<O
             return null;
         }
 
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch(OpaqueDataType.class, "Invalid Tag for OpaqueDataType");
+            return null;
+        }
+
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
-                !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+                !encodingType.getDescription().equals(typeNode.asText())) {
             ctxt.reportInputMismatch(OpaqueDataType.class, "Missing or invalid '@type' attribute for OpaqueDataType");
             return null;
         }

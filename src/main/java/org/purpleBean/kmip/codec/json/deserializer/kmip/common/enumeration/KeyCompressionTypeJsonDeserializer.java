@@ -24,7 +24,7 @@ public class KeyCompressionTypeJsonDeserializer extends KmipDataTypeJsonDeserial
     public KeyCompressionType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(KeyCompressionType.class, "JSON node cannot be null for KeyCompressionType deserialization");
+            ctxt.reportInputMismatch(KeyCompressionType.class, String.format("JSON node cannot be null for KeyCompressionType deserialization"));
             return null;
         }
 
@@ -33,7 +33,7 @@ public class KeyCompressionTypeJsonDeserializer extends KmipDataTypeJsonDeserial
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(KeyCompressionType.class, "Invalid KMIP tag for KeyCompressionType");
+                ctxt.reportInputMismatch(KeyCompressionType.class, String.format("Invalid KMIP tag for KeyCompressionType"));
                 return null;
             }
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class KeyCompressionTypeJsonDeserializer extends KmipDataTypeJsonDeserial
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(KeyCompressionType.class, "Missing or non-text 'type' field for KeyCompressionType");
+            ctxt.reportInputMismatch(KeyCompressionType.class, String.format("Missing or non-text 'type' field for KeyCompressionType"));
             return null;
         }
 

@@ -48,7 +48,7 @@ generate_enum() {
     local ENUM_NAME_LOWERCASE=$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')
     local ENUM_VAR_NAME=$(get_enum_var_name "$ENUM_NAME")
     
-    echo "\nGenerating files for ${ENUM_NAME}..."
+    echo -e "\nGenerating files for ${ENUM_NAME}..."
     
     # 1. Create the main enum class
     cat > "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" << EOF
@@ -426,9 +426,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
 
@@ -439,6 +441,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ${ENUM_NAME}.
  */
 public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${ENUM_NAME}> {
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
 
     @Override
     public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -450,9 +454,15 @@ public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${E
             return null;
         }
 
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Invalid Tag for ${ENUM_NAME}");
+            return null;
+        }
+
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
-                !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+                !encodingType.getDescription().equals(typeNode.asText())) {
             ctxt.reportInputMismatch(${ENUM_NAME}.class, "Missing or invalid '@type' attribute for ${ENUM_NAME}");
             return null;
         }
