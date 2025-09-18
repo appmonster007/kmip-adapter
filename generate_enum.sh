@@ -29,9 +29,9 @@ create_directories() {
     mkdir -p "${main_java}/codec/xml/deserializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
-    mkdir -p "${test_java}/test/codec/json/${sub_path}"
-    mkdir -p "${test_java}/test/codec/xml/${sub_path}"
-    mkdir -p "${test_java}/test/codec/ttlv/${sub_path}"
+    mkdir -p "${test_java}/codec/json/${sub_path}"
+    mkdir -p "${test_java}/codec/xml/${sub_path}"
+    mkdir -p "${test_java}/codec/ttlv/${sub_path}"
     mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
 }
 
