@@ -17,25 +17,25 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class ActivationDateAttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ActivationDateAttribute> {
-    EncodingType type = EncodingType.DATE_TIME;
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
+    private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
 
     @Override
     public ActivationDateAttribute deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
+                && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s", encodingType.getTypeValue(), kmipTag.getDescription()));
         }
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
         OffsetDateTime dt = mapper.readValue(bb, OffsetDateTime.class);
 
         KmipSpec spec = KmipContext.getSpec();
-        ActivationDateAttribute activationDateAttribute = ActivationDateAttribute.builder().dateTime(dt).build();
+        ActivationDateAttribute attribute = ActivationDateAttribute.builder().dateTime(dt).build();
 
-        if (!activationDateAttribute.isSupportedFor(spec)) {
+        if (!attribute.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }
-        return activationDateAttribute;
+        return attribute;
     }
 }

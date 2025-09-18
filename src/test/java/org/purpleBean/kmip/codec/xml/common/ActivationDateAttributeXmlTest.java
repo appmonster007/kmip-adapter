@@ -9,21 +9,25 @@ import java.time.ZoneOffset;
 
 @DisplayName("ActivationDateAttribute XML Serialization Tests")
 class ActivationDateAttributeXmlTest extends AbstractXmlSerializationSuite<ActivationDateAttribute> {
-
+    
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
-    @Override
-    protected Class<ActivationDateAttribute> type() {
-        return ActivationDateAttribute.class;
+    
+    @Override 
+    protected Class<ActivationDateAttribute> type() { 
+        return ActivationDateAttribute.class; 
     }
-
-    @Override
+    
+    @Override 
     protected ActivationDateAttribute createDefault() {
-        return ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        return ActivationDateAttribute.builder()
+            .dateTime(FIXED_TIME)
+            .build();
     }
-
+    
     @Override
     protected ActivationDateAttribute createVariant() {
-        return ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        return ActivationDateAttribute.builder()
+            .dateTime(FIXED_TIME.plusDays(1))
+            .build();
     }
 }

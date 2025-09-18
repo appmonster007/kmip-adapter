@@ -19,11 +19,15 @@ class ActivationDateAttributeJsonTest extends AbstractJsonSerializationSuite<Act
 
     @Override
     protected ActivationDateAttribute createDefault() {
-        return ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        return ActivationDateAttribute.builder()
+            .dateTime(FIXED_TIME)
+            .build();
     }
 
     @Override
     protected ActivationDateAttribute createVariant() {
-        return ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        return ActivationDateAttribute.builder()
+            .dateTime(FIXED_TIME.plusDays(1))
+            .build();
     }
 }

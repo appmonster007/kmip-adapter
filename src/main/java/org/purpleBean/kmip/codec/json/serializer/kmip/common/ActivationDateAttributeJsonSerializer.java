@@ -10,27 +10,26 @@ import org.purpleBean.kmip.common.ActivationDateAttribute;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for ActivationDate.
+ */
 public class ActivationDateAttributeJsonSerializer extends KmipDataTypeJsonSerializer<ActivationDateAttribute> {
 
     @Override
-    public void serialize(ActivationDateAttribute activationDateAttribute, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (activationDateAttribute == null) {
-            return;
-        }
+    public void serialize(ActivationDateAttribute value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        if (value == null) return;
 
-        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!activationDateAttribute.isSupportedFor(spec)) {
+        if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", activationDateAttribute.getKmipTag().getDescription(), spec)
+                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
             );
         }
 
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(activationDateAttribute.getKmipTag());
-        jsonGenerator.writeStringField("type", activationDateAttribute.getEncodingType().getDescription());
-        jsonGenerator.writeStringField("value", activationDateAttribute.getDateTime().toString());
-        jsonGenerator.writeEndObject();
+        gen.writeStartObject();
+        gen.writeObject(value.getKmipTag());
+        gen.writeStringField("type", value.getEncodingType().getDescription());
+        gen.writeStringField("value", value.getDateTime().toString());
+        gen.writeEndObject();
     }
 }

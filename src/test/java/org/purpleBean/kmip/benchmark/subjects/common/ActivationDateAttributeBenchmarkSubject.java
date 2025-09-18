@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
 
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -34,7 +34,6 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
     @Override
     public void setup() throws Exception {
-//        KmipContext.setSpec(KmipSpec.V1_2);
         json = new ObjectMapper();
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
@@ -48,12 +47,15 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        obj = ActivationDateAttribute.builder().dateTime(fixed).build();
+        // Create test object
+        obj = ActivationDateAttribute.builder()
+            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
+            .build();
 
+        // Serialize to all formats for deserialization benchmarks
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+        ttlvBuf = ByteBuffer.wrap(ttlv.writeValueAsBytes(obj));
     }
 
     @Override
