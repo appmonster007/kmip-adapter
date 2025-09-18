@@ -6,6 +6,9 @@ import org.purpleBean.kmip.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * KMIP State enumeration.
+ */
 @Data
 @Builder
 public class State implements KmipEnumeration {
@@ -22,6 +25,7 @@ public class State implements KmipEnumeration {
 
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
     private final EncodingType encodingType = EncodingType.ENUMERATION;
+
     @NonNull
     private final Value value;
 
@@ -30,24 +34,26 @@ public class State implements KmipEnumeration {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
-                    String.format("Value '%s' for %s is not supported for KMIP spec %s", kmipTag.getDescription(), value.getDescription(), spec)
+                    String.format("Value '%s' for State is not supported for KMIP spec %s", value.getDescription(), spec)
             );
         }
-
         this.value = value;
     }
 
-    private static boolean isValidExtensionValue(int value) {
+    private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
-        return !(value < extensionStart || value > 0);
-    }
-
-    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        if (!isValidExtensionValue(value)) {
+        if (value < extensionStart || value > 0) {
             throw new IllegalArgumentException(
                     String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
             );
         }
+    }
+
+    /**
+     * Register an extension value.
+     */
+    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
+        checkValidExtensionValue(value);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
@@ -61,24 +67,34 @@ public class State implements KmipEnumeration {
         return custom;
     }
 
-    public static Value fromValue(@NonNull KmipSpec spec, int value) {
-        Value v = VALUE_REGISTRY.get(value);
-        return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No value found for %d in KMIP spec %s", value, spec)
-                ));
-    }
-
-    public static Value fromName(@NonNull KmipSpec spec, @NonNull String name) {
+    /**
+     * Look up by name.
+     */
+    public static Value fromName(KmipSpec spec, String name) {
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
                 .filter(x -> x.isSupportedFor(spec))
                 .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No value found for '%s' in KMIP spec %s", name, spec)
+                        String.format("No State value found for '%s' in KMIP spec %s", name, spec)
                 ));
     }
 
+    /**
+     * Look up by value.
+     */
+    public static Value fromValue(KmipSpec spec, int value) {
+        // Check standard values first
+        Value v = VALUE_REGISTRY.get(value);
+        return Optional.ofNullable(v)
+                .filter(x -> x.isSupportedFor(spec))
+                .orElseThrow(() -> new NoSuchElementException(
+                        String.format("No State value found for %d in KMIP spec %s", value, spec)
+                ));
+    }
+
+    /**
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -113,31 +129,41 @@ public class State implements KmipEnumeration {
 
         private final boolean custom = false;
 
+        Standard(int value, String description, KmipSpec... supportedVersions) {
+            this.value = value;
+            this.description = description;
+            this.supportedVersions = Set.of(supportedVersions);
+        }
+
         @Override
         public boolean isSupportedFor(KmipSpec spec) {
             return supportedVersions.contains(spec);
         }
     }
 
+    // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 
     @Getter
+    @AllArgsConstructor
     @ToString
-    @RequiredArgsConstructor
-    public static final class Extension implements Value {
+    public static class Extension implements Value {
         private final int value;
         private final String description;
         private final Set<KmipSpec> supportedVersions;
 
         private final boolean custom = true;
+
+        public Extension(int value, String description, KmipSpec... supportedVersions) {
+            this.value = value;
+            this.description = description;
+            this.supportedVersions = Set.of(supportedVersions);
+        }
 
         @Override
         public boolean isSupportedFor(KmipSpec spec) {

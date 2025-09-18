@@ -42,14 +42,11 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
     abstract protected void assertLookupBehaviour();
 
     /**
-     * Override to assert registry behavior for the specific enumeration (positive cases: register, lookup by value/name).
+     * Override to assert registry behavior for the specific enumeration.
+     * positive cases: register, lookup by value/name.
+     * negative cases: invalid range, empty description, empty versions, etc.
      */
-    abstract protected void assertEnumerationRegistryBehaviorPositive();
-
-    /**
-     * Override to assert negative registry behavior (invalid range, empty description, empty versions, etc.).
-     */
-    abstract protected void assertEnumerationRegistryBehaviorNegative();
+    abstract protected void assertEnumerationRegistryBehavior();
 
     @Test
     @DisplayName("Enumeration: description is non-null and non-empty")
@@ -80,19 +77,11 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
     }
 
     @Test
-    @DisplayName("Enumeration: registry behavior (positive) (opt-in)")
-    void enumeration_registry_behavior_positive() {
+    @DisplayName("Enumeration: registry behavior and look up")
+    void enumeration_registry_behavior() {
         if (supportsRegistryBehavior()) {
-            assertEnumerationRegistryBehaviorPositive();
+            assertEnumerationRegistryBehavior();
             assertLookupBehaviour();
-        }
-    }
-
-    @Test
-    @DisplayName("Enumeration: registry behavior (negative) (opt-in)")
-    void enumeration_registry_behavior_negative() {
-        if (supportsRegistryBehavior()) {
-            assertEnumerationRegistryBehaviorNegative();
         }
     }
 }

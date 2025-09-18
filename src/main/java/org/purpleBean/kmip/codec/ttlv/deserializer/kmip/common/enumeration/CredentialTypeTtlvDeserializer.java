@@ -15,30 +15,29 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+/**
+ * TTLV deserializer for CredentialType.
+ */
 public class CredentialTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CredentialType> {
-    private final EncodingType type = EncodingType.ENUMERATION;
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CREDENTIAL_TYPE);
 
     @Override
     public CredentialType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(
-                    String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
+                && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for CredentialType", encodingType.getTypeValue()));
         }
-
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int raw = bb.getInt();
+        int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        CredentialType.Value enumValue = CredentialType.fromValue(spec, raw);
-        CredentialType result = new CredentialType(enumValue);
+        CredentialType credentialtype = new CredentialType(CredentialType.fromValue(spec, value));
 
-        if (!result.isSupportedFor(spec)) {
-            throw new NoSuchElementException(
-                    String.format("Value '%d' is not supported for KMIP spec %s", raw, spec));
+        if (!credentialtype.isSupportedFor(spec)) {
+            throw new NoSuchElementException();
         }
-        return result;
+        return credentialtype;
     }
 }

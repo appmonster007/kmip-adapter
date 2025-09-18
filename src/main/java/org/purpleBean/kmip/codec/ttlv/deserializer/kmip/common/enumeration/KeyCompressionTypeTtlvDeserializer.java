@@ -15,30 +15,29 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+/**
+ * TTLV deserializer for KeyCompressionType.
+ */
 public class KeyCompressionTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyCompressionType> {
-    private final EncodingType type = EncodingType.ENUMERATION;
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_COMPRESSION_TYPE);
 
     @Override
     public KeyCompressionType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(
-                    String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
+                && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for KeyCompressionType", encodingType.getTypeValue()));
         }
-
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int raw = bb.getInt();
+        int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyCompressionType.Value enumValue = KeyCompressionType.fromValue(spec, raw);
-        KeyCompressionType result = new KeyCompressionType(enumValue);
+        KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromValue(spec, value));
 
-        if (!result.isSupportedFor(spec)) {
-            throw new NoSuchElementException(
-                    String.format("Value '%d' is not supported for KMIP spec %s", raw, spec));
+        if (!keycompressiontype.isSupportedFor(spec)) {
+            throw new NoSuchElementException();
         }
-        return result;
+        return keycompressiontype;
     }
 }

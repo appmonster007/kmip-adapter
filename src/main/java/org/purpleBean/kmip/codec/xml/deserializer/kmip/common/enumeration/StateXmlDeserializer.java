@@ -3,7 +3,6 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -14,6 +13,9 @@ import org.purpleBean.kmip.common.enumeration.State;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
+/**
+ * XML deserializer for State.
+ */
 public class StateXmlDeserializer extends KmipDataTypeXmlDeserializer<State> {
 
     @Override
@@ -44,7 +46,8 @@ public class StateXmlDeserializer extends KmipDataTypeXmlDeserializer<State> {
 
         State state = new State(State.fromName(spec, description));
         if (!state.isSupportedFor(spec)) {
-            throw new NoSuchElementException("State '" + description + "' not supported for spec " + spec);
+            throw new NoSuchElementException(
+                String.format("State '%s' not supported for spec %s", description, spec));
         }
 
         return state;

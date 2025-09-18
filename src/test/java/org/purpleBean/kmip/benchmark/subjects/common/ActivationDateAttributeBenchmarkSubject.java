@@ -1,26 +1,27 @@
-package org.purpleBean.kmip.benchmark.subjects;
+package org.purpleBean.kmip.benchmark.subjects.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
-import org.purpleBean.kmip.common.enumeration.KeyCompressionType;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
 
 import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
-public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSubject {
 
     private ObjectMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
 
-    private KeyCompressionType obj;
+    private ActivationDateAttribute obj;
 
     private String jsonStr;
     private String xmlStr;
@@ -28,12 +29,12 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
 
     @Override
     public String name() {
-        return "KeyCompressionType";
+        return "ActivationDateAttribute";
     }
 
     @Override
     public void setup() throws Exception {
-        KmipContext.setSpec(KmipSpec.V1_2);
+//        KmipContext.setSpec(KmipSpec.V1_2);
         json = new ObjectMapper();
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
@@ -47,8 +48,8 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        // Using the first standard value from KeyCompressionType for benchmarking
-        obj = new KeyCompressionType(KeyCompressionType.Standard.NONE);
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+        obj = ActivationDateAttribute.builder().dateTime(fixed).build();
 
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
@@ -67,7 +68,7 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
 
     @Override
     public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, KeyCompressionType.class);
+        return json.readValue(jsonStr, ActivationDateAttribute.class);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
 
     @Override
     public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, KeyCompressionType.class);
+        return xml.readValue(xmlStr, ActivationDateAttribute.class);
     }
 
     @Override
@@ -87,6 +88,6 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
 
     @Override
     public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), KeyCompressionType.class);
+        return ttlv.readValue(ttlvBuf.duplicate(), ActivationDateAttribute.class);
     }
 }

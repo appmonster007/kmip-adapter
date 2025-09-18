@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.benchmark.subjects;
+package org.purpleBean.kmip.benchmark.subjects.common.structure;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -37,7 +37,7 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        KmipContext.setSpec(KmipSpec.V1_2);
+//        KmipContext.setSpec(KmipSpec.V1_2);
         json = new ObjectMapper();
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());

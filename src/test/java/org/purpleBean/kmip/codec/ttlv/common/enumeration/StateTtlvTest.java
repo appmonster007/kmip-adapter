@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
-@DisplayName("State TTLV Serialization Tests")
+@DisplayName("State TTLV Serialization")
 class StateTtlvTest extends AbstractTtlvSerializationSuite<State> {
-
     @Override
     protected Class<State> type() {
         return State.class;

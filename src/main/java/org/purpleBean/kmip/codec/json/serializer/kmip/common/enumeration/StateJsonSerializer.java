@@ -10,32 +10,35 @@ import org.purpleBean.kmip.common.enumeration.State;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for State.
+ */
 public class StateJsonSerializer extends KmipDataTypeJsonSerializer<State> {
 
     @Override
-    public void serialize(State state, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(State value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
-        if (state == null) {
+        if (value == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!state.isSupportedFor(spec)) {
+        if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
                     String.format("State '%s' is not supported for KMIP spec %s",
-                            state.getDescription(), spec)
+                            value.getDescription(), spec)
             );
         }
 
-        if (state.getDescription() == null || state.getDescription().trim().isEmpty()) {
+        if (value.getDescription() == null || value.getDescription().trim().isEmpty()) {
             throw new IllegalStateException("State must have a valid description");
         }
 
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(state.getKmipTag());
-        jsonGenerator.writeStringField("type", state.getEncodingType().getDescription());
-        jsonGenerator.writeStringField("value", state.getDescription());
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeStringField("value", value.getDescription());
         jsonGenerator.writeEndObject();
     }
 }

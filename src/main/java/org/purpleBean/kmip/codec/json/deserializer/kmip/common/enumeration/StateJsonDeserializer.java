@@ -13,6 +13,9 @@ import org.purpleBean.kmip.common.enumeration.State;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
+/**
+ * JSON deserializer for State.
+ */
 public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
     private final EncodingType encodingType = EncodingType.ENUMERATION;
@@ -21,7 +24,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
     public State deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(State.class, String.format("JSON node cannot be null for %s deserialization", kmipTag.getDescription()));
+            ctxt.reportInputMismatch(State.class, "JSON node cannot be null for State deserialization");
             return null;
         }
 
@@ -30,20 +33,19 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(State.class, String.format("Invalid KMIP tag for %s", kmipTag.getDescription()));
+                ctxt.reportInputMismatch(State.class, "Invalid KMIP tag for State");
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(State.class, String.format("Failed to parse KMIP tag for %s: %s", kmipTag.getDescription(), e.getMessage()));
+            ctxt.reportInputMismatch(State.class, String.format("Failed to parse KMIP tag for State: %s", e.getMessage()));
             return null;
         }
 
-        if (!node.isObject() || tag.getValue() != KmipTag.Standard.STATE) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(State.class,
-                    String.format("Expected object with %s tag for %s, got tag: %s", kmipTag.getValue().getValue(), kmipTag.getDescription(), tag.getValue()));
+                    String.format("Expected object with %s tag for State, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
-
 
         // Validation: Extract and validate type field
         JsonNode typeNode = node.get("type");
@@ -52,7 +54,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(State.class, String.format("Missing or non-text 'type' field for %s", kmipTag.getDescription()));
+            ctxt.reportInputMismatch(State.class, "Missing or non-text 'type' field for State");
             return null;
         }
 
@@ -76,21 +78,19 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
             stateValue = State.fromName(spec, description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(State.class,
-                    String.format("Unknown %s value '%s' for KMIP spec %s", kmipTag.getDescription(), description, spec));
+                    String.format("Unknown State value '%s' for KMIP spec %s", description, spec));
             return null;
         }
 
         State state = new State(stateValue);
 
-        // Final validation: Ensure constructed state is supported
+        // Final validation: Ensure constructed State is supported
         if (!state.isSupportedFor(spec)) {
             throw new NoSuchElementException(
-                    String.format("%s '%s' is not supported for KMIP spec %s", kmipTag.getDescription(), description, spec)
+                    String.format("State '%s' is not supported for KMIP spec %s", description, spec)
             );
         }
 
         return state;
     }
 }
-
-

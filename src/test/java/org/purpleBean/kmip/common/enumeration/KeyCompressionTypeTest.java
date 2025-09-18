@@ -7,75 +7,73 @@ import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
 
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("KeyCompressionType Domain Tests")
 class KeyCompressionTypeTest extends AbstractKmipEnumerationSuite<KeyCompressionType> {
 
     @Override
-    protected Class<KeyCompressionType> type() { 
-        return KeyCompressionType.class; 
+    protected Class<KeyCompressionType> type() {
+        return KeyCompressionType.class;
     }
 
     @Override
-    protected KeyCompressionType createDefault() { 
-        return new KeyCompressionType(KeyCompressionType.Standard.NONE); 
+    protected KeyCompressionType createDefault() {
+        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_1);
     }
 
     @Override
-    protected KeyCompressionType createEqualToDefault() { 
-        return new KeyCompressionType(KeyCompressionType.Standard.NONE); 
+    protected KeyCompressionType createEqualToDefault() {
+        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_1);
     }
 
     @Override
-    protected KeyCompressionType createDifferentFromDefault() { 
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY); 
+    protected KeyCompressionType createDifferentFromDefault() {
+        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_2);
     }
 
     @Override
-    protected EncodingType expectedEncodingType() { 
-        return EncodingType.ENUMERATION; 
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.ENUMERATION;
     }
 
     @Override
-    protected boolean supportsRegistryBehavior() { 
-        return true; 
+    protected boolean supportsRegistryBehavior() {
+        return true;
     }
 
     @Override
     protected void assertLookupBehaviour() {
-        KeyCompressionType.Value byName = KeyCompressionType.fromName(KmipSpec.V1_2, "X-Enum-Custom");
-        KeyCompressionType.Value byVal = KeyCompressionType.fromValue(KmipSpec.V1_2, 0x80000010);
+        // Lookup by name/value
+        KeyCompressionType.Value byName = KeyCompressionType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
+        KeyCompressionType.Value byVal = KeyCompressionType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
         assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(byVal.getValue()).isEqualTo(0x80000010);
+
+        // Lookup by name/value with unsupported version
+        assertThatThrownBy(() -> KeyCompressionType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
     }
 
     @Override
-    protected void assertEnumerationRegistryBehaviorPositive() {
-        KeyCompressionType.Value custom = KeyCompressionType.register(
-            0x80000010, 
-            "X-Enum-Custom",
-            Set.of(KmipSpec.V1_2, KmipSpec.V2_0)
-        );
-        
+    protected void assertEnumerationRegistryBehavior() {
+        // Valid registration in KeyCompressionType requires 8XXXXXXX (hex) range per implementation
+        KeyCompressionType.Value custom = KeyCompressionType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.V1_2)).isTrue();
-    }
+        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
-    @Override
-    protected void assertEnumerationRegistryBehaviorNegative() {
-        // Test invalid extension value range
-        assertThatThrownBy(() -> 
-            KeyCompressionType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.V1_2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("Extension value must be in vendor range");
-            
-        // Test empty description
-        assertThatThrownBy(() -> 
-            KeyCompressionType.register(0x80000011, "   ", Set.of(KmipSpec.V1_2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("Description cannot be empty");
-
+        // Negative cases: invalid range, empty description, empty versions
+        assertThatThrownBy(() -> KeyCompressionType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> KeyCompressionType.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> KeyCompressionType.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> KeyCompressionType.register(0x80000012, "X-Empty-Versions", Set.of()))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
+

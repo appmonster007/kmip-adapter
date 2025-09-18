@@ -12,19 +12,27 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * XML serializer for CredentialType.
+ */
 public class CredentialTypeXmlSerializer extends KmipDataTypeXmlSerializer<CredentialType> {
+
     @Override
     public void serialize(CredentialType value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }
+
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
+
+        // Start element with name from kmipTag
         String elementName = value.getKmipTag().getDescription();
         xmlGen.setNextName(QName.valueOf(elementName));
         xmlGen.writeStartObject(value);
+
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
@@ -32,3 +40,4 @@ public class CredentialTypeXmlSerializer extends KmipDataTypeXmlSerializer<Crede
         xmlGen.writeEndObject();
     }
 }
+

@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
-@DisplayName("State XML Serialization Tests")
+@DisplayName("State XML Serialization")
 class StateXmlTest extends AbstractXmlSerializationSuite<State> {
-
     @Override
     protected Class<State> type() {
         return State.class;

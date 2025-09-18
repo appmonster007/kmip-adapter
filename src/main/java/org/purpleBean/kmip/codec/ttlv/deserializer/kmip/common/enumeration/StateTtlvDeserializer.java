@@ -15,16 +15,19 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+/**
+ * TTLV deserializer for State.
+ */
 public class StateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<State> {
-    EncodingType type = EncodingType.ENUMERATION;
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
 
     @Override
     public State deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
+                && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for State", encodingType.getTypeValue()));
         }
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
         int value = bb.getInt();

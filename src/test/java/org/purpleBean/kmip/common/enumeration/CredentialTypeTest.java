@@ -7,75 +7,73 @@ import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
 
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CredentialType Domain Tests")
 class CredentialTypeTest extends AbstractKmipEnumerationSuite<CredentialType> {
 
     @Override
-    protected Class<CredentialType> type() { 
-        return CredentialType.class; 
+    protected Class<CredentialType> type() {
+        return CredentialType.class;
     }
 
     @Override
-    protected CredentialType createDefault() { 
-        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD); 
+    protected CredentialType createDefault() {
+        return new CredentialType(CredentialType.Standard.PLACEHOLDER_1);
     }
 
     @Override
-    protected CredentialType createEqualToDefault() { 
-        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD); 
+    protected CredentialType createEqualToDefault() {
+        return new CredentialType(CredentialType.Standard.PLACEHOLDER_1);
     }
 
     @Override
-    protected CredentialType createDifferentFromDefault() { 
-        return new CredentialType(CredentialType.Standard.DEVICE); 
+    protected CredentialType createDifferentFromDefault() {
+        return new CredentialType(CredentialType.Standard.PLACEHOLDER_2);
     }
 
     @Override
-    protected EncodingType expectedEncodingType() { 
-        return EncodingType.ENUMERATION; 
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.ENUMERATION;
     }
 
     @Override
-    protected boolean supportsRegistryBehavior() { 
-        return true; 
+    protected boolean supportsRegistryBehavior() {
+        return true;
     }
 
     @Override
     protected void assertLookupBehaviour() {
-        CredentialType.Value byName = CredentialType.fromName(KmipSpec.V1_2, "X-Enum-Custom");
-        CredentialType.Value byVal = CredentialType.fromValue(KmipSpec.V1_2, 0x80000010);
+        // Lookup by name/value
+        CredentialType.Value byName = CredentialType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
+        CredentialType.Value byVal = CredentialType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
         assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(byVal.getValue()).isEqualTo(0x80000010);
+
+        // Lookup by name/value with unsupported version
+        assertThatThrownBy(() -> CredentialType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
     }
 
     @Override
-    protected void assertEnumerationRegistryBehaviorPositive() {
-        CredentialType.Value custom = CredentialType.register(
-            0x80000010, 
-            "X-Enum-Custom",
-            Set.of(KmipSpec.V1_2, KmipSpec.V2_0)
-        );
-        
+    protected void assertEnumerationRegistryBehavior() {
+        // Valid registration in CredentialType requires 8XXXXXXX (hex) range per implementation
+        CredentialType.Value custom = CredentialType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.V1_2)).isTrue();
-    }
+        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
-    @Override
-    protected void assertEnumerationRegistryBehaviorNegative() {
-        // Test invalid extension value range
-        assertThatThrownBy(() -> 
-            CredentialType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.V1_2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("Extension value must be in vendor range");
-            
-        // Test empty description
-        assertThatThrownBy(() -> 
-            CredentialType.register(0x80000011, "   ", Set.of(KmipSpec.V1_2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("Description cannot be empty");
-
+        // Negative cases: invalid range, empty description, empty versions
+        assertThatThrownBy(() -> CredentialType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> CredentialType.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> CredentialType.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> CredentialType.register(0x80000012, "X-Empty-Versions", Set.of()))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
+

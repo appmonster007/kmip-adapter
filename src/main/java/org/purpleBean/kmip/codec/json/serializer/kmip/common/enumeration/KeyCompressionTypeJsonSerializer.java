@@ -10,20 +10,35 @@ import org.purpleBean.kmip.common.enumeration.KeyCompressionType;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for KeyCompressionType.
+ */
 public class KeyCompressionTypeJsonSerializer extends KmipDataTypeJsonSerializer<KeyCompressionType> {
+
     @Override
-    public void serialize(KeyCompressionType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
+    public void serialize(KeyCompressionType value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
+        if (value == null) {
+            return;
+        }
+
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                String.format("%s '%s' is not supported for KMIP spec %s",
-                    value.getKmipTag().getDescription(), value.getDescription(), spec));
+                    String.format("KeyCompressionType '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
-        gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeStringField("value", value.getDescription());
-        gen.writeEndObject();
+
+        if (value.getDescription() == null || value.getDescription().trim().isEmpty()) {
+            throw new IllegalStateException("KeyCompressionType must have a valid description");
+        }
+
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeStringField("value", value.getDescription());
+        jsonGenerator.writeEndObject();
     }
 }

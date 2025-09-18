@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
+/**
+ * TTLV serializer for State.
+ */
 public class StateTtlvSerializer extends KmipDataTypeTtlvSerializer<State> {
+
     @Override
     public ByteBuffer serialize(State value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
@@ -34,4 +38,3 @@ public class StateTtlvSerializer extends KmipDataTypeTtlvSerializer<State> {
                 .build();
     }
 }
-
