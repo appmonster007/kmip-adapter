@@ -25,12 +25,12 @@ class KmipContextConcurrencyTest extends BaseKmipTest {
 
         @Test
         @DisplayName("Should have default V1.2 version")
-        void shouldHaveDefaultV1_2Version() {
+        void shouldHaveDefaultUnknownVersion() {
             // When
             KmipSpec spec = KmipContext.getSpec();
 
             // Then
-            assertThat(spec).isEqualTo(KmipSpec.V1_2);
+            assertThat(spec).isEqualTo(KmipSpec.UnknownVersion);
         }
 
         @Test

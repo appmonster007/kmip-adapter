@@ -10,13 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KmipContextTest extends BaseKmipTest {
 
     @Test
-    @DisplayName("Default spec is V1_2; set and clear work")
+    @DisplayName("Default spec is UnknownVersion; set and clear work")
     void lifecycle() {
         // default from BaseKmipTest
-        assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.V1_2);
-
-        KmipContext.setSpec(KmipSpec.UnknownVersion);
         assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);
+
+        KmipContext.setSpec(KmipSpec.V1_2);
+        assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.V1_2);
 
         KmipContext.clear();
         assertThat(KmipContext.getSpec()).isEqualTo(KmipSpec.UnknownVersion);

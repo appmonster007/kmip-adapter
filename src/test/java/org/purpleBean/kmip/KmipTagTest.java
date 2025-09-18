@@ -37,7 +37,7 @@ class KmipTagTest {
         @DisplayName("isSupportedFor returns true for any spec (including null)")
         void isSupportedFor_alwaysReturnsTrue() {
             KmipTag tag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
-            assertThat(tag.isSupportedFor(KmipSpec.V1_2)).isTrue();
+            assertThat(tag.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
             assertThat(tag.isSupportedFor(null)).isTrue();
         }
     }
@@ -47,7 +47,7 @@ class KmipTagTest {
     class RegistryBehaviorTests {
         private static final int VALID_EXTENSION = 0x540010;
         private static final String TEST_DESCRIPTION = "X-Test-Tag";
-        private static final Set<KmipSpec> TEST_VERSIONS = Set.of(KmipSpec.V1_2);
+        private static final Set<KmipSpec> TEST_VERSIONS = Set.of(KmipSpec.UnknownVersion);
 
         @Test
         @DisplayName("register: accepts valid extension range [0x540000, 0x54FFFF]")
@@ -105,7 +105,7 @@ class KmipTagTest {
         @Test
         @DisplayName("fromName: finds standard tag by name")
         void fromName_findsStandardTag() {
-            KmipTag.Value tag = KmipTag.fromName(KmipSpec.V1_2, KNOWN_TAG_NAME);
+            KmipTag.Value tag = KmipTag.fromName(KmipSpec.UnknownVersion, KNOWN_TAG_NAME);
             assertThat(tag.getValue()).isEqualTo(KNOWN_TAG_VALUE);
         }
 
@@ -113,13 +113,13 @@ class KmipTagTest {
         @DisplayName("fromName: throws NoSuchElementException for unknown name")
         void fromName_throwsForUnknownName() {
             assertThatExceptionOfType(NoSuchElementException.class)
-                    .isThrownBy(() -> KmipTag.fromName(KmipSpec.V1_2, "__NON_EXISTENT__"));
+                    .isThrownBy(() -> KmipTag.fromName(KmipSpec.UnknownVersion, "__NON_EXISTENT__"));
         }
 
         @Test
         @DisplayName("fromValue: finds standard tag by value")
         void fromValue_findsStandardTag() {
-            KmipTag.Value tag = KmipTag.fromValue(KmipSpec.V1_2, KNOWN_TAG_VALUE);
+            KmipTag.Value tag = KmipTag.fromValue(KmipSpec.UnknownVersion, KNOWN_TAG_VALUE);
             assertThat(tag.getDescription()).isEqualTo(KNOWN_TAG_NAME);
         }
 
@@ -127,7 +127,7 @@ class KmipTagTest {
         @DisplayName("fromValue: throws NoSuchElementException for unknown value")
         void fromValue_throwsForUnknownValue() {
             assertThatExceptionOfType(NoSuchElementException.class)
-                    .isThrownBy(() -> KmipTag.fromValue(KmipSpec.V1_2, 0x123456));
+                    .isThrownBy(() -> KmipTag.fromValue(KmipSpec.UnknownVersion, 0x123456));
         }
     }
 }

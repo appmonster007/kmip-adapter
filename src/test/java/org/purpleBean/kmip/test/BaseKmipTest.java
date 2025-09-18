@@ -21,7 +21,7 @@ public abstract class BaseKmipTest {
 
     protected ObjectMapper jsonMapper;
     protected XmlMapper xmlMapper;
-    protected KmipSpec defaultSpec = KmipSpec.V1_2;
+    protected KmipSpec defaultSpec = KmipSpec.UnknownVersion;
 
     @BeforeEach
     void setUp() {
