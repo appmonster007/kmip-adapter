@@ -1,21 +1,10 @@
-# KMIP Enumeration Boilerplate (Authoritative)
+# KMIP Enumeration Implementation Guide
 
-This guide is the authoritative, copy-ready blueprint for creating a new KMIP enumeration called `FooDemoEnum`, modeled on the production `State` enumeration and its serializers/deserializers/tests.
+This guide provides a complete reference for implementing KMIP enumeration classes, using `FooDemoEnum` as an example.
 
-It covers:
-- Core implementation (main/java)
-- JSON/XML/TTLV serializers and deserializers
-- Unit and codec tests using the reusable test suites
-- Optional performance tests (JMH)
-- Import style and legacy references to avoid
+## 1. Core Enumeration Class
 
-Use this as your single source of truth.
-
----
-
-## 1) Core Enumeration Implementation
-
-File: `src/main/java/org/purpleBean/kmip/common/enumeration/FooDemoEnum.java`
+Create the main enum class that implements `KmipEnumeration` interface:
 
 ```java
 package org.purpleBean.kmip.common.enumeration;
@@ -27,24 +16,23 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Modeled after State: registry-backed, spec-aware KMIP enumeration.
+ * KMIP FooDemoEnum enumeration.
  */
 @Data
+@Builder
 public class FooDemoEnum implements KmipEnumeration {
-
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
 
     static {
-        // Pre-register standard values
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
 
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM); // add this entry to KmipTag.Standard
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
     private final EncodingType encodingType = EncodingType.ENUMERATION;
 
     @NonNull
@@ -54,26 +42,27 @@ public class FooDemoEnum implements KmipEnumeration {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
-                    String.format("Value '%s' for %s is not supported for KMIP spec %s",
-                            value.getDescription(), kmipTag.getDescription(), spec)
+                    String.format("Value '%s' for FooDemoEnum is not supported for KMIP spec %s", 
+                    value.getDescription(), spec)
             );
         }
         this.value = value;
     }
 
-    public String getDescription() { return value.getDescription(); }
-    public boolean isCustom() { return value.isCustom(); }
-
-    @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) { return value.isSupportedFor(spec); }
+    private static void checkValidExtensionValue(int value) {
+        int extensionStart = 0x80000000;
+        if (value < extensionStart || value > 0) {
+            throw new IllegalArgumentException(
+                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
+            );
+        }
+    }
 
     /**
-     * Register an extension value. Mirror range/validation from production patterns.
+     * Register an extension value.
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        if (!isValidExtensionValue(value)) {
-            throw new IllegalArgumentException("Extension value must be in vendor range 0x80000000 - 0xFFFFFFFF");
-        }
+        checkValidExtensionValue(value);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
@@ -87,34 +76,75 @@ public class FooDemoEnum implements KmipEnumeration {
         return custom;
     }
 
-    private static boolean isValidExtensionValue(int value) {
-        return Integer.compareUnsigned(value, 0x80000000) >= 0; // value >= 0x80000000 (unsigned)
-    }
-
-    /** Lookup by integer value, filtered by spec support. */
-    public static Value fromValue(@NonNull KmipSpec spec, int value) {
-        Value v = VALUE_REGISTRY.get(value);
-        return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No value found for %d in KMIP spec %s", value, spec)));
-    }
-
-    /** Lookup by description (case-sensitive in registry), filtered by spec support. */
-    public static Value fromName(@NonNull KmipSpec spec, @NonNull String name) {
+    /**
+     * Look up by name.
+     */
+    public static Value fromName(KmipSpec spec, String name) {
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
                 .filter(x -> x.isSupportedFor(spec))
                 .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No value found for '%s' in KMIP spec %s", name, spec)));
+                        String.format("No FooDemoEnum value found for '%s' in KMIP spec %s", name, spec)
+                ));
     }
 
-    /** Values registered via register(...). */
+    /**
+     * Look up by value.
+     */
+    public static Value fromValue(KmipSpec spec, int value) {
+        Value v = VALUE_REGISTRY.get(value);
+        return Optional.ofNullable(v)
+                .filter(x -> x.isSupportedFor(spec))
+                .orElseThrow(() -> new NoSuchElementException(
+                        String.format("No FooDemoEnum value found for %d in KMIP spec %s", value, spec)
+                ));
+    }
+
+    /**
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
 
-    // ----- Value hierarchy modeled after State -----
+    public String getDescription() {
+        return value.getDescription();
+    }
+
+    public boolean isCustom() {
+        return value.isCustom();
+    }
+
+    @Override
+    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+        return value.isSupportedFor(spec);
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @ToString
+    public enum Standard implements Value {
+        DEMO_ONE(0x00000001, "DemoOne", KmipSpec.V1_0, KmipSpec.V1_1, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4),
+        DEMO_TWO(0x00000002, "DemoTwo", KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
+
+        private final int value;
+        private final String description;
+        private final Set<KmipSpec> supportedVersions;
+        private final boolean custom = false;
+
+        Standard(int value, String description, KmipSpec... supportedVersions) {
+            this.value = value;
+            this.description = description;
+            this.supportedVersions = Set.of(supportedVersions);
+        }
+
+        @Override
+        public boolean isSupportedFor(KmipSpec spec) {
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    // ----- Value hierarchy -----
     public interface Value {
         int getValue();
         String getDescription();
@@ -123,46 +153,32 @@ public class FooDemoEnum implements KmipEnumeration {
     }
 
     @Getter
-    @RequiredArgsConstructor
+    @AllArgsConstructor
     @ToString
-    public enum Standard implements Value {
-        EXAMPLE_ONE(0x00000001, "ExampleOne", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        EXAMPLE_TWO(0x00000002, "ExampleTwo", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-
+    public static class Extension implements Value {
         private final int value;
         private final String description;
         private final Set<KmipSpec> supportedVersions;
-        private final boolean custom = false;
 
-        @Override
-        public boolean isSupportedFor(KmipSpec spec) { return supportedVersions.contains(spec); }
-    }
-
-    @Getter
-    @ToString
-    @RequiredArgsConstructor
-    public static final class Extension implements Value {
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
         private final boolean custom = true;
 
+        public Extension(int value, String description, KmipSpec... supportedVersions) {
+            this.value = value;
+            this.description = description;
+            this.supportedVersions = Set.of(supportedVersions);
+        }
+
         @Override
-        public boolean isSupportedFor(KmipSpec spec) { return supportedVersions.contains(spec); }
+        public boolean isSupportedFor(KmipSpec spec) {
+            return supportedVersions.contains(spec);
+        }
     }
 }
 ```
 
-Notes
-- Add `FOO_DEMO_ENUM` to `KmipTag.Standard` with a unique value/description.
-- `register(...)` uses the vendor extension range (0x80000000 – 0xFFFFFFFF) like production patterns.
-- Lookups filter by spec support and throw `NoSuchElementException` for unknowns.
+## 2. JSON Serializer
 
----
-
-## 2) JSON Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/json/serializer/kmip/common/enumeration/FooDemoEnumJsonSerializer.java`
+Create a JSON serializer for the enum:
 
 ```java
 package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
@@ -177,26 +193,42 @@ import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for FooDemoEnum.
+ */
 public class FooDemoEnumJsonSerializer extends KmipDataTypeJsonSerializer<FooDemoEnum> {
+
     @Override
-    public void serialize(FooDemoEnum value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
+    public void serialize(FooDemoEnum value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) 
+            throws IOException {
+        if (value == null) {
+            return;
+        }
+
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                String.format("%s '%s' is not supported for KMIP spec %s",
-                    value.getKmipTag().getDescription(), value.getDescription(), spec));
+                    String.format("FooDemoEnum '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
-        gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeStringField("value", value.getDescription());
-        gen.writeEndObject();
+
+        if (value.getDescription() == null || value.getDescription().trim().isEmpty()) {
+            throw new IllegalStateException("FooDemoEnum must have a valid description");
+        }
+
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeStringField("value", value.getDescription());
+        jsonGenerator.writeEndObject();
     }
 }
 ```
 
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/json/deserializer/kmip/common/enumeration/FooDemoEnumJsonDeserializer.java`
+## 3. JSON Deserializer
+
+Create a JSON deserializer for the enum:
 
 ```java
 package org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration;
@@ -214,6 +246,9 @@ import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
+/**
+ * JSON deserializer for FooDemoEnum.
+ */
 public class FooDemoEnumJsonDeserializer extends KmipDataTypeJsonDeserializer<FooDemoEnum> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
     private final EncodingType encodingType = EncodingType.ENUMERATION;
@@ -222,81 +257,119 @@ public class FooDemoEnumJsonDeserializer extends KmipDataTypeJsonDeserializer<Fo
     public FooDemoEnum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "JSON node cannot be null for FooDemoEnum deserialization");
+            ctxt.reportInputMismatch(FooDemoEnum.class, 
+                    "JSON node cannot be null for FooDemoEnum deserialization");
             return null;
         }
-        KmipTag tag = p.getCodec().treeToValue(node, KmipTag.class);
-        if (!node.isObject() || tag.getValue() != KmipTag.Standard.FOO_DEMO_ENUM) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "Expected object with FooDemoEnum tag");
+
+        // Validate KMIP tag
+        KmipTag tag;
+        try {
+            tag = p.getCodec().treeToValue(node, KmipTag.class);
+            if (tag == null) {
+                ctxt.reportInputMismatch(FooDemoEnum.class, "Invalid KMIP tag for FooDemoEnum");
+                return null;
+            }
+        } catch (Exception e) {
+            ctxt.reportInputMismatch(FooDemoEnum.class, 
+                    String.format("Failed to parse KMIP tag for FooDemoEnum: %s", e.getMessage()));
             return null;
         }
+
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+            ctxt.reportInputMismatch(FooDemoEnum.class,
+                    String.format("Expected object with %s tag for FooDemoEnum, got tag: %s", 
+                    kmipTag.getValue().getValue(), tag.getValue().getValue()));
+            return null;
+        }
+
+        // Validate type field
         JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "Missing or invalid 'type' for FooDemoEnum");
+        if (typeNode == null || !typeNode.isTextual() || 
+                EncodingType.fromName(typeNode.asText()).isEmpty() ||
+                EncodingType.fromName(typeNode.asText()).get() != encodingType) {
+            ctxt.reportInputMismatch(FooDemoEnum.class, 
+                    "Missing or invalid 'type' field for FooDemoEnum");
             return null;
         }
+
+        // Validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "Missing or non-text 'value' for FooDemoEnum");
+            ctxt.reportInputMismatch(FooDemoEnum.class, 
+                    String.format("Missing or non-text 'value' field for %s", 
+                    kmipTag.getDescription()));
             return null;
         }
+
         String description = valueNode.asText();
-        if (description.trim().isEmpty()) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "FooDemoEnum value cannot be empty");
+        if (description == null || description.trim().isEmpty()) {
+            ctxt.reportInputMismatch(FooDemoEnum.class, 
+                    String.format("%s value cannot be empty", kmipTag.getDescription()));
             return null;
         }
+
+        // KMIP spec compatibility and value lookup
         KmipSpec spec = KmipContext.getSpec();
-        FooDemoEnum.Value enumValue;
         try {
-            enumValue = FooDemoEnum.fromName(spec, description);
+            FooDemoEnum.Value enumValue = FooDemoEnum.fromName(spec, description);
+            FooDemoEnum result = new FooDemoEnum(enumValue);
+
+            if (!result.isSupportedFor(spec)) {
+                throw new NoSuchElementException(
+                        String.format("FooDemoEnum '%s' is not supported for KMIP spec %s", 
+                        description, spec)
+                );
+            }
+
+            return result;
         } catch (NoSuchElementException e) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "Unknown FooDemoEnum value '" + description + "' for spec " + spec);
+            ctxt.reportInputMismatch(FooDemoEnum.class,
+                    String.format("Unknown FooDemoEnum value '%s' for KMIP spec %s", 
+                    description, spec));
             return null;
         }
-        FooDemoEnum result = new FooDemoEnum(enumValue);
-        if (!result.isSupportedFor(spec)) {
-            throw new NoSuchElementException("FooDemoEnum '" + description + "' is not supported for spec " + spec);
-        }
-        return result;
     }
 }
 ```
 
----
-
-## 3) XML Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/xml/serializer/kmip/common/enumeration/FooDemoEnumXmlSerializer.java`
+## 4. XML Serializer
 
 ```java
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class FooDemoEnumXmlSerializer extends JsonSerializer<FooDemoEnum> {
+/**
+ * XML serializer for FooDemoEnum.
+ */
+public class FooDemoEnumXmlSerializer extends KmipDataTypeXmlSerializer<FooDemoEnum> {
+
     @Override
     public void serialize(FooDemoEnum value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
         }
+
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
+
         String elementName = value.getKmipTag().getDescription();
         xmlGen.setNextName(QName.valueOf(elementName));
         xmlGen.writeStartObject(value);
+
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
@@ -306,83 +379,96 @@ public class FooDemoEnumXmlSerializer extends JsonSerializer<FooDemoEnum> {
 }
 ```
 
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/xml/deserializer/kmip/common/enumeration/FooDemoEnumXmlDeserializer.java`
+## 5. XML Deserializer
 
 ```java
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class FooDemoEnumXmlDeserializer extends JsonDeserializer<FooDemoEnum> {
+/**
+ * XML deserializer for FooDemoEnum.
+ */
+public class FooDemoEnumXmlDeserializer extends KmipDataTypeXmlDeserializer<FooDemoEnum> {
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
+
     @Override
     public FooDemoEnum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
+        ObjectCodec codec = p.getCodec();
+        JsonNode node = codec.readTree(p);
+
         if (!node.isObject()) {
             ctxt.reportInputMismatch(FooDemoEnum.class, "Expected XML element object for FooDemoEnum");
             return null;
         }
+
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch(FooDemoEnum.class, "Invalid Tag for FooDemoEnum");
+            return null;
+        }
+
         JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() || !EncodingType.ENUMERATION.getDescription().equals(typeNode.asText())) {
+        if (typeNode == null || !typeNode.isTextual() ||
+                !encodingType.getDescription().equals(typeNode.asText())) {
             ctxt.reportInputMismatch(FooDemoEnum.class, "Missing or invalid '@type' attribute for FooDemoEnum");
             return null;
         }
+
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(FooDemoEnum.class, "Missing or non-text '@value' attribute for FooDemoEnum");
             return null;
         }
+
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
-        FooDemoEnum.Value v;
-        try {
-            v = FooDemoEnum.fromName(spec, description);
-        } catch (NoSuchElementException e) {
-            ctxt.reportInputMismatch(FooDemoEnum.class, "Unknown value '" + description + "' for spec " + spec);
-            return null;
+
+        FooDemoEnum fooDemoEnum = new FooDemoEnum(FooDemoEnum.fromName(spec, description));
+        if (!fooDemoEnum.isSupportedFor(spec)) {
+            throw new NoSuchElementException(
+                String.format("FooDemoEnum '%s' not supported for spec %s", description, spec));
         }
-        FooDemoEnum result = new FooDemoEnum(v);
-        if (!result.isSupportedFor(spec)) {
-            throw new NoSuchElementException("FooDemoEnum '" + description + "' not supported for spec " + spec);
-        }
-        return result;
+
+        return fooDemoEnum;
     }
 }
 ```
 
----
-
-## 4) TTLV Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/kmip/common/enumeration/FooDemoEnumTtlvSerializer.java`
+## 6. TTLV Serializer
 
 ```java
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
+/**
+ * TTLV serializer for FooDemoEnum.
+ */
 public class FooDemoEnumTtlvSerializer extends KmipDataTypeTtlvSerializer<FooDemoEnum> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
 
     @Override
     public ByteBuffer serialize(FooDemoEnum value, TtlvMapper mapper) throws IOException {
@@ -395,9 +481,9 @@ public class FooDemoEnumTtlvSerializer extends KmipDataTypeTtlvSerializer<FooDem
             throw new UnsupportedEncodingException();
         }
 
-        byte[] tag = kmipTag.getTagBytes();
-        byte type = EncodingType.ENUMERATION.getTypeValue();
-        byte[] payload = ByteBuffer.allocate(4).putInt(value.getValue().getValue()).array();
+        byte[] tag = value.getKmipTag().getTagBytes();
+        byte type = value.getEncodingType().getTypeValue();
+        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue().getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)
@@ -408,7 +494,7 @@ public class FooDemoEnumTtlvSerializer extends KmipDataTypeTtlvSerializer<FooDem
 }
 ```
 
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/kmip/common/enumeration/FooDemoEnumTtlvDeserializer.java`
+## 7. TTLV Deserializer
 
 ```java
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
@@ -419,7 +505,7 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 
@@ -428,67 +514,37 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+/**
+ * TTLV deserializer for FooDemoEnum.
+ */
 public class FooDemoEnumTtlvDeserializer extends KmipDataTypeTtlvDeserializer<FooDemoEnum> {
-    EncodingType type = EncodingType.ENUMERATION;
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
+    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_ENUM);
 
     @Override
     public FooDemoEnum deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
+                && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for FooDemoEnum", encodingType.getTypeValue()));
         }
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int raw = bb.getInt();
+        int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        FooDemoEnum.Value enumValue = FooDemoEnum.fromValue(spec, raw);
-        FooDemoEnum result = new FooDemoEnum(enumValue);
+        FooDemoEnum fooDemoEnum = new FooDemoEnum(FooDemoEnum.fromValue(spec, value));
 
-        if (!result.isSupportedFor(spec)) {
+        if (!fooDemoEnum.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }
-        return result;
+        return fooDemoEnum;
     }
 }
 ```
----
 
-## 5) Registration (ServiceLoader)
+## 8. Testing
 
-Register your serializers/deserializers via Java ServiceLoader. Add fully-qualified class names (one per line) to these files in `src/main/resources/META-INF/services/`:
-
-- JSON
-    - `org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
-        - `org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.FooDemoEnumJsonSerializer`
-    - `org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
-        - `org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.FooDemoEnumJsonDeserializer`
-
-- XML
-    - `org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
-        - `org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.FooDemoEnumXmlSerializer`
-    - `org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
-        - `org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.FooDemoEnumXmlDeserializer`
-
-- TTLV
-    - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer`
-        - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.FooDemoEnumTtlvSerializer`
-    - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer`
-        - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.FooDemoEnumTtlvDeserializer`
-
-Notes
-- You do NOT need to modify `KmipJsonModule`, `KmipXmlModule`, or `KmipTtlvModule`. They auto-discover providers via ServiceLoader.
-- JSON/XML base classes (`KmipDataTypeJsonSerializer/Deserializer`, `KmipDataTypeXmlSerializer/Deserializer`) and TTLV abstract contracts (`KmipDataTypeTtlvSerializer`, `KmipDataTypeTtlvDeserializer`) infer the handled type automatically.
-
-
----
-
-## 6) Unit Tests
-
-### Core Enumeration Test (reusable suite)
-
-File: `src/test/java/org/purpleBean/kmip/common/enumeration/FooDemoEnumTest.java`
+### 8.1 Domain Test
 
 ```java
 package org.purpleBean.kmip.common.enumeration;
@@ -506,61 +562,80 @@ import static org.assertj.core.api.Assertions.*;
 class FooDemoEnumTest extends AbstractKmipEnumerationSuite<FooDemoEnum> {
 
     @Override
-    protected Class<FooDemoEnum> type() { return FooDemoEnum.class; }
+    protected Class<FooDemoEnum> type() {
+        return FooDemoEnum.class;
+    }
 
     @Override
-    protected FooDemoEnum createDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE); }
+    protected FooDemoEnum createDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
+    }
 
     @Override
-    protected FooDemoEnum createEqualToDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE); }
+    protected FooDemoEnum createEqualToDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
+    }
 
     @Override
-    protected FooDemoEnum createDifferentFromDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_TWO); }
+    protected FooDemoEnum createDifferentFromDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_2);
+    }
 
     @Override
-    protected EncodingType expectedEncodingType() { return EncodingType.ENUMERATION; }
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.ENUMERATION;
+    }
 
-    // Opt-in registry behavior (split positive/negative)
     @Override
-    protected boolean supportsRegistryBehavior() { return true; }
-    
+    protected boolean supportsRegistryBehavior() {
+        return true;
+    }
+
     @Override
     protected void assertLookupBehaviour() {
-        FooDemoEnum.Value byName = FooDemoEnum.fromName(KmipSpec.V1_2, "X-Enum-Custom");
-        FooDemoEnum.Value byVal = FooDemoEnum.fromValue(KmipSpec.V1_2, 0x80000010);
+        // Lookup by name/value
+        FooDemoEnum.Value byName = FooDemoEnum.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
+        FooDemoEnum.Value byVal = FooDemoEnum.fromValue(KmipSpec.UnknownVersion, 0x80000010);
         assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(byVal.getValue()).isEqualTo(0x80000010);
+
+        // Lookup by name/value with unsupported version
+        assertThatThrownBy(() -> FooDemoEnum.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
     }
 
     @Override
-    protected void assertEnumerationRegistryBehaviorPositive() {
-        FooDemoEnum.Value custom = FooDemoEnum.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.V1_2));
+    protected void assertEnumerationRegistryBehavior() {
+        // Valid registration in FooDemoEnum requires 8XXXXXXX (hex) range per implementation
+        FooDemoEnum.Value custom = FooDemoEnum.register(0x80000010, "X-Enum-Custom", 
+            Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0));
+        
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.V1_2)).isTrue();
-    }
+        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
+        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
-    @Override
-    protected void assertEnumerationRegistryBehaviorNegative() {
-        assertThatThrownBy(() -> FooDemoEnum.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.V1_2)))
+        // Negative cases: invalid range, empty description, empty versions
+        assertThatThrownBy(() -> 
+            FooDemoEnum.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> FooDemoEnum.register(0x80000011, "   ", Set.of(KmipSpec.V1_2)))
+                
+        assertThatThrownBy(() -> 
+            FooDemoEnum.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> FooDemoEnum.register(0x80000012, "X-Empty-Versions", Set.of()))
+                
+        assertThatThrownBy(() -> 
+            FooDemoEnum.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+                .isInstanceOf(IllegalArgumentException.class);
+                
+        assertThatThrownBy(() -> 
+            FooDemoEnum.register(0x80000012, "X-Empty-Versions", Set.of()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
 ```
 
----
-
-## 7) Codec Tests
-
-Place these under codec packages and extend the abstract suites for each format.
-
-### JSON
-
-File: `src/test/java/org/purpleBean/kmip/codec/json/common/enumeration/FooDemoEnumJsonTest.java`
+### 8.2 JSON Serialization Test
 
 ```java
 package org.purpleBean.kmip.codec.json.common.enumeration;
@@ -571,15 +646,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 @DisplayName("FooDemoEnum JSON Serialization")
 class FooDemoEnumJsonTest extends AbstractJsonSerializationSuite<FooDemoEnum> {
-    @Override protected Class<FooDemoEnum> type() { return FooDemoEnum.class; }
-    @Override protected FooDemoEnum createDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE); }
-    @Override protected FooDemoEnum createVariant() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_TWO); }
+    @Override
+    protected Class<FooDemoEnum> type() {
+        return FooDemoEnum.class;
+    }
+
+    @Override
+    protected FooDemoEnum createDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
+    }
+
+    @Override
+    protected FooDemoEnum createVariant() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_2);
+    }
 }
 ```
 
-### XML
-
-File: `src/test/java/org/purpleBean/kmip/codec/xml/common/enumeration/FooDemoEnumXmlTest.java`
+### 8.3 XML Serialization Test
 
 ```java
 package org.purpleBean.kmip.codec.xml.common.enumeration;
@@ -590,15 +674,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("FooDemoEnum XML Serialization")
 class FooDemoEnumXmlTest extends AbstractXmlSerializationSuite<FooDemoEnum> {
-    @Override protected Class<FooDemoEnum> type() { return FooDemoEnum.class; }
-    @Override protected FooDemoEnum createDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE); }
-    @Override protected FooDemoEnum createVariant() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_TWO); }
+    @Override
+    protected Class<FooDemoEnum> type() {
+        return FooDemoEnum.class;
+    }
+
+    @Override
+    protected FooDemoEnum createDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
+    }
+
+    @Override
+    protected FooDemoEnum createVariant() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_2);
+    }
 }
 ```
 
-### TTLV
-
-File: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/enumeration/FooDemoEnumTtlvTest.java`
+### 8.4 TTLV Serialization Test
 
 ```java
 package org.purpleBean.kmip.codec.ttlv.common.enumeration;
@@ -609,28 +702,33 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 @DisplayName("FooDemoEnum TTLV Serialization")
 class FooDemoEnumTtlvTest extends AbstractTtlvSerializationSuite<FooDemoEnum> {
-    @Override protected Class<FooDemoEnum> type() { return FooDemoEnum.class; }
-    @Override protected FooDemoEnum createDefault() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE); }
-    @Override protected FooDemoEnum createVariant() { return new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_TWO); }
+    @Override
+    protected Class<FooDemoEnum> type() {
+        return FooDemoEnum.class;
+    }
+
+    @Override
+    protected FooDemoEnum createDefault() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
+    }
+
+    @Override
+    protected FooDemoEnum createVariant() {
+        return new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_2);
+    }
 }
 ```
 
----
-
-## 8) Performance Benchmarks (JMH)
-
-Authoritative reference: `StateBenchmarkSubject`. Below is a ready-to-adapt boilerplate for `FooDemoEnum`.
-
-Subject class: `src/test/java/org/purpleBean/kmip/benchmark/subjects/FooDemoEnumBenchmarkSubject.java`
+### 8.5 Benchmark Subject
 
 ```java
-package org.purpleBean.kmip.benchmark.subjects;
+package org.purpleBean.kmip.benchmark.subjects.common.enumeration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
@@ -642,64 +740,169 @@ import java.nio.ByteBuffer;
 
 public class FooDemoEnumBenchmarkSubject implements KmipBenchmarkSubject {
     private ObjectMapper json;
-    private XmlMapper xml;
+    private ObjectMapper xml;
     private TtlvMapper ttlv;
+
     private FooDemoEnum obj;
+
     private String jsonStr;
     private String xmlStr;
     private ByteBuffer ttlvBuf;
 
-    @Override public String name() { return "FooDemoEnum"; }
+    @Override
+    public String name() {
+        return "FooDemoEnum";
+    }
 
     @Override
     public void setup() throws Exception {
-        KmipContext.setSpec(KmipSpec.V1_2);
-        json = new ObjectMapper(); json.findAndRegisterModules(); json.registerModule(new JavaTimeModule()); json.registerModule(new KmipJsonModule());
-        xml = new XmlMapper(); xml.findAndRegisterModules(); xml.registerModule(new JavaTimeModule()); xml.registerModule(new KmipXmlModule());
-        ttlv = new TtlvMapper(); ttlv.registerModule(new KmipTtlvModule());
+        json = new JsonMapper();
+        json.findAndRegisterModules();
+        json.registerModule(new JavaTimeModule());
+        json.registerModule(new KmipJsonModule());
+        
+        xml = new XmlMapper();
+        xml.findAndRegisterModules();
+        xml.registerModule(new JavaTimeModule());
+        xml.registerModule(new KmipXmlModule());
+        
+        ttlv = new TtlvMapper();
+        ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
+        obj = new FooDemoEnum(FooDemoEnum.Standard.PLACEHOLDER_1);
 
+        // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
         ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
     }
 
-    @Override public void tearDown() { KmipContext.clear(); }
-    @Override public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
-    @Override public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, FooDemoEnum.class); }
-    @Override public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
-    @Override public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, FooDemoEnum.class); }
-    @Override public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
-    @Override public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), FooDemoEnum.class); }
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+
+    @Override
+    public String jsonSerialize() throws Exception {
+        return json.writeValueAsString(obj);
+    }
+
+    @Override
+    public Object jsonDeserialize() throws Exception {
+        return json.readValue(jsonStr, FooDemoEnum.class);
+    }
+
+    @Override
+    public String xmlSerialize() throws Exception {
+        return xml.writeValueAsString(obj);
+    }
+
+    @Override
+    public Object xmlDeserialize() throws Exception {
+        return xml.readValue(xmlStr, FooDemoEnum.class);
+    }
+
+    @Override
+    public ByteBuffer ttlvSerialize() throws Exception {
+        return ttlv.writeValueAsByteBuffer(obj);
+    }
+
+    @Override
+    public Object ttlvDeserialize() throws Exception {
+        return ttlv.readValue(ttlvBuf.duplicate(), FooDemoEnum.class);
+    }
 }
 ```
 
-ServiceLoader registration: `src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject`
+## 8. Service Registration
 
+Register the serializers in the appropriate service files:
+
+### `META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
 ```
-org.purpleBean.kmip.benchmark.subjects.FooDemoEnumBenchmarkSubject
-```
-
-Recommended runner (same as attribute guide):
-
-```bash
-mvn -q -DskipTests test-compile \
-  exec:java \
-  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
-  -Dbench.include=KmipSerializationBenchmark
+org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.FooDemoEnumJsonSerializer
 ```
 
-Outputs:
-- Raw JMH JSON: `target/jmh-results.json`
-- Markdown summary: `target/jmh-report.md`
+### `META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
+```
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.FooDemoEnumJsonDeserializer
+```
 
----
+### `META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
+```
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.FooDemoEnumXmlSerializer
+```
 
-## 9) Import Style and Legacy References
+### `META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
+```
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.FooDemoEnumXmlDeserializer
+```
 
-- Prefer imports, not FQNs, in tests:
-  - `import java.util.Set;` / `Set.of(...)`
-  - `import static org.assertj.core.api.Assertions.*;`
-- Use the canonical testing suites and mappers as shown above.
-- For tag registry and lookup examples (non-enumeration), refer to `src/test/java/org/purpleBean/kmip/KmipTagTest.java`.
+### `META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer`
+```
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.FooDemoEnumTtlvSerializer
+```
+
+### `META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer`
+```
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.FooDemoEnumTtlvDeserializer
+```
+
+## Key Features
+
+1. **Type Safety**: Strongly-typed enum values with compile-time checking
+2. **KMIP Versioning**: Support for different KMIP spec versions
+3. **Extensibility**: Ability to register custom enum values at runtime
+4. **Thread Safety**: Thread-safe value registration and lookup
+5. **Validation**: Comprehensive input validation
+6. **Serialization**: Support for JSON and XML formats
+7. **Immutability**: All value objects are immutable
+8. **Documentation**: Comprehensive JavaDoc and error messages
+
+## Usage Examples
+
+### Creating an instance
+```java
+// Using standard value
+FooDemoEnum demo = new FooDemoEnum(FooDemoEnum.Standard.DEMO_ONE);
+
+// Looking up by name (with KMIP version check)
+FooDemoEnum demo = new FooDemoEnum(FooDemoEnum.fromName(KmipSpec.V1_4, "DemoOne"));
+
+// Looking up by value (with KMIP version check)
+FooDemoEnum demo = new FooDemoEnum(FooDemoEnum.fromValue(KmipSpec.V1_4, 0x00000001));
+```
+
+### Registering a custom value
+```java
+// Register a custom value (only once, typically at startup)
+FooDemoEnum.Value custom = FooDemoEnum.register(
+    0x80000001, 
+    "CustomValue", 
+    Set.of(KmipSpec.V1_3, KmipSpec.V1_4)
+);
+
+// Use the custom value
+FooDemoEnum customDemo = new FooDemoEnum(custom);
+```
+
+### Serialization/Deserialization
+```java
+// JSON serialization
+ObjectMapper mapper = new ObjectMapper();
+String json = mapper.writeValueAsString(demo);
+// Produces: {"tag":"FooDemoEnum","type":"Enumeration","value":"DemoOne"}
+
+// JSON deserialization
+FooDemoEnum deserialized = mapper.readValue(json, FooDemoEnum.class);
+```
+
+## Best Practices
+
+1. **Version Support**: Always specify which KMIP versions each enum value supports
+2. **Validation**: Validate all inputs, especially for extension values
+3. **Immutability**: Never modify enum values after creation
+4. **Thread Safety**: Be aware of thread safety when registering custom values
+5. **Error Messages**: Provide clear, descriptive error messages
+6. **Testing**: Test all edge cases, especially around version compatibility
+7. **Documentation**: Document the purpose and usage of each enum value
