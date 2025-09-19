@@ -74,17 +74,26 @@ create_directories() {
     echo "Creating directory structure..."
 
     # Main source and codec directories
-    local dirs=(
-        "${main_java}/${sub_path}"
-        "${main_java}/codec/{json/serializer,json/deserializer,xml/serializer,xml/deserializer,ttlv/serializer,ttlv/deserializer}/kmip/${sub_path}"
-        "${test_java}/{,codec/{json,xml,ttlv}/}${sub_path}"
-        "${test_java}/benchmark/subjects/${sub_path}"
-        "{src/main,src/test}/resources/META-INF/services"
-    )
-
-    for dir in "${dirs[@]}"; do
-        mkdir -p $dir
+    # Create base directories
+    mkdir -p "${main_java}/${sub_path}"
+    
+    # Create codec directories
+    for dir in serializer deserializer; do
+        mkdir -p "${main_java}/codec/json/${dir}/kmip/${sub_path}"
+        mkdir -p "${main_java}/codec/xml/${dir}/kmip/${sub_path}"
+        mkdir -p "${main_java}/codec/ttlv/${dir}/kmip/${sub_path}"
     done
+    
+    # Create test directories
+    mkdir -p "${test_java}/${sub_path}"
+    for format in json xml ttlv; do
+        mkdir -p "${test_java}/codec/${format}/${sub_path}"
+    done
+    
+    # Create benchmark and resources directories
+    mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
+    mkdir -p "src/main/resources/META-INF/services"
+    mkdir -p "src/test/resources/META-INF/services"
 
     echo "✓ Directory structure created"
 }
