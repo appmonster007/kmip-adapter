@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.common.structure.SampleStructure;
 
 import java.io.IOException;
 
@@ -17,7 +16,7 @@ public class KmipTagJsonDeserializer extends JsonDeserializer<KmipTag> {
         JsonNode node = p.readValueAsTree();
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(SampleStructure.class, "Expected object for KmipTag");
+            ctxt.reportInputMismatch(KmipTag.class, "Expected object for KmipTag");
             return null;
         }
 
