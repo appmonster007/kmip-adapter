@@ -13,11 +13,11 @@ class CertificateTypeTtlvTest extends AbstractTtlvSerializationSuite<Certificate
 
     @Override
     protected CertificateType createDefault() {
-        return new CertificateType(CertificateType.Standard.PLACEHOLDER_1);
+        return new CertificateType(CertificateType.Standard.X_509);
     }
 
     @Override
     protected CertificateType createVariant() {
-        return new CertificateType(CertificateType.Standard.PLACEHOLDER_2);
+        return new CertificateType(CertificateType.Standard.PGP);
     }
 }

@@ -93,8 +93,8 @@ public class CredentialType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,18 @@ public class CredentialType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        USERNAME_AND_PASSWORD(0x00000001, "Username and Password",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DEVICE(0x00000002, "Device",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ATTESTATION(0x00000003, "Attestation",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ONE_TIME_PASSWORD(0x00000004, "One Time Password",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HASHED_PASSWORD(0x00000005, "Hashed Password",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        TICKET(0x00000006, "Ticket",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -140,8 +150,11 @@ public class CredentialType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

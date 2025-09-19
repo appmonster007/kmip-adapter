@@ -13,11 +13,11 @@ class SplitKeyMethodTtlvTest extends AbstractTtlvSerializationSuite<SplitKeyMeth
 
     @Override
     protected SplitKeyMethod createDefault() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.PLACEHOLDER_1);
+        return new SplitKeyMethod(SplitKeyMethod.Standard.XOR);
     }
 
     @Override
     protected SplitKeyMethod createVariant() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.PLACEHOLDER_2);
+        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_2_16);
     }
 }

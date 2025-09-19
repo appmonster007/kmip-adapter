@@ -13,11 +13,11 @@ class UsageLimitsUnitXmlTest extends AbstractXmlSerializationSuite<UsageLimitsUn
 
     @Override
     protected UsageLimitsUnit createDefault() {
-        return new UsageLimitsUnit(UsageLimitsUnit.Standard.PLACEHOLDER_1);
+        return new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE);
     }
 
     @Override
     protected UsageLimitsUnit createVariant() {
-        return new UsageLimitsUnit(UsageLimitsUnit.Standard.PLACEHOLDER_2);
+        return new UsageLimitsUnit(UsageLimitsUnit.Standard.OBJECT);
     }
 }

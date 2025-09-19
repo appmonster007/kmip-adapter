@@ -20,17 +20,17 @@ class CertificateTypeTest extends AbstractKmipEnumerationSuite<CertificateType> 
 
     @Override
     protected CertificateType createDefault() {
-        return new CertificateType(CertificateType.Standard.PLACEHOLDER_1);
+        return new CertificateType(CertificateType.Standard.X_509);
     }
 
     @Override
     protected CertificateType createEqualToDefault() {
-        return new CertificateType(CertificateType.Standard.PLACEHOLDER_1);
+        return new CertificateType(CertificateType.Standard.X_509);
     }
 
     @Override
     protected CertificateType createDifferentFromDefault() {
-        return new CertificateType(CertificateType.Standard.PLACEHOLDER_2);
+        return new CertificateType(CertificateType.Standard.PGP);
     }
 
     @Override

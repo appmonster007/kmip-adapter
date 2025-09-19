@@ -20,17 +20,17 @@ class CredentialTypeTest extends AbstractKmipEnumerationSuite<CredentialType> {
 
     @Override
     protected CredentialType createDefault() {
-        return new CredentialType(CredentialType.Standard.PLACEHOLDER_1);
+        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
     }
 
     @Override
     protected CredentialType createEqualToDefault() {
-        return new CredentialType(CredentialType.Standard.PLACEHOLDER_1);
+        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
     }
 
     @Override
     protected CredentialType createDifferentFromDefault() {
-        return new CredentialType(CredentialType.Standard.PLACEHOLDER_2);
+        return new CredentialType(CredentialType.Standard.DEVICE);
     }
 
     @Override

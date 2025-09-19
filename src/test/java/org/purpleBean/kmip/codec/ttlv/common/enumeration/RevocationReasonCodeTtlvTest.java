@@ -13,11 +13,11 @@ class RevocationReasonCodeTtlvTest extends AbstractTtlvSerializationSuite<Revoca
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.PLACEHOLDER_1);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
     }
 
     @Override
     protected RevocationReasonCode createVariant() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.PLACEHOLDER_2);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);
     }
 }

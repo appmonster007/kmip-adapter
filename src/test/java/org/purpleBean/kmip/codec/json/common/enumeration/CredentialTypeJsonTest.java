@@ -13,11 +13,11 @@ class CredentialTypeJsonTest extends AbstractJsonSerializationSuite<CredentialTy
 
     @Override
     protected CredentialType createDefault() {
-        return new CredentialType(CredentialType.Standard.PLACEHOLDER_1);
+        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
     }
 
     @Override
     protected CredentialType createVariant() {
-        return new CredentialType(CredentialType.Standard.PLACEHOLDER_2);
+        return new CredentialType(CredentialType.Standard.DEVICE);
     }
 }

@@ -13,11 +13,11 @@ class ResultStatusJsonTest extends AbstractJsonSerializationSuite<ResultStatus> 
 
     @Override
     protected ResultStatus createDefault() {
-        return new ResultStatus(ResultStatus.Standard.PLACEHOLDER_1);
+        return new ResultStatus(ResultStatus.Standard.OPERATION_FAILED);
     }
 
     @Override
     protected ResultStatus createVariant() {
-        return new ResultStatus(ResultStatus.Standard.PLACEHOLDER_2);
+        return new ResultStatus(ResultStatus.Standard.OPERATION_PENDING);
     }
 }

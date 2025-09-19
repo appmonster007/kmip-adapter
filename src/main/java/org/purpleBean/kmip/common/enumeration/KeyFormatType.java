@@ -93,8 +93,8 @@ public class KeyFormatType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,44 @@ public class KeyFormatType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        RAW(0x00000001, "Raw",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        OPAQUE(0x00000002, "Opaque",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PKCS_1(0x00000003, "PKCS#1",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PKCS_8(0x00000004, "PKCS#8",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X_509(0x00000005, "X.509",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        EC_PRIVATE_KEY(0x00000006, "EC Private Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_SYMMETRIC_KEY(0x00000007, "Transparent Symmetric Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_DSA_PRIVATE_KEY(0x00000008, "Transparent DSA Private Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_DSA_PUBLIC_KEY(0x00000009, "Transparent DSA Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_RSA_PRIVATE_KEY(0x0000000A, "Transparent RSA Private Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_RSA_PUBLIC_KEY(0x0000000B, "Transparent RSA Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_DH_PRIVATE_KEY(0x0000000C, "Transparent DH Private Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_DH_PUBLIC_KEY(0x0000000D, "Transparent DH Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECDSA_PRIVATE_KEY(0x0000000E, "Transparent ECDSA Private Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECDSA_PUBLIC_KEY(0x0000000F, "Transparent ECDSA Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECDH_PRIVATE_KEY(0x00000010, "Transparent ECDH Private Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECDH_PUBLIC_KEY(0x00000011, "Transparent ECDH Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECMQV_PRIVATE_KEY(0x00000012, "Transparent ECMQV Private Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRANSPARENT_ECMQV_PUBLIC_KEY(0x00000013, "Transparent ECMQV Public Key",
+                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -140,8 +176,11 @@ public class KeyFormatType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

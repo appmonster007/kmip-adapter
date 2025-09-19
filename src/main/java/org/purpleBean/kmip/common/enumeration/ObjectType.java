@@ -93,8 +93,8 @@ public class ObjectType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,26 @@ public class ObjectType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        CERTIFICATE(0x00000001, "Certificate",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_KEY(0x00000002, "Symmetric Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_KEY(0x00000003, "Public Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_KEY(0x00000004, "Private Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SPLIT_KEY(0x00000005, "Split Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TEMPLATE(0x00000006, "Template",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SECRET_DATA(0x00000007, "Secret Data",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        OPAQUE_DATA(0x00000008, "Opaque Data",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PGP_KEY(0x00000009, "PGP Key",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CERTIFICATE_REQUEST(0x0000000A, "Certificate Request",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0); // Note: Added in KMIP 2.0+
 
         private final int value;
         private final String description;
@@ -140,8 +158,11 @@ public class ObjectType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

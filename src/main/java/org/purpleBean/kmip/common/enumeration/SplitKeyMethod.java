@@ -93,8 +93,8 @@ public class SplitKeyMethod implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,14 @@ public class SplitKeyMethod implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        XOR(0x00000001, "XOR",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        POLYNOMIAL_SHARING_GF_2_16(0x00000002, "Polynomial Sharing GF(2^16)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        POLYNOMIAL_SHARING_PRIME_FIELD(0x00000003, "Polynomial Sharing Prime Field",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        POLYNOMIAL_SHARING_GF_2_8(0x00000004, "Polynomial Sharing GF(2^8)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
         private final int value;
         private final String description;
@@ -140,8 +146,11 @@ public class SplitKeyMethod implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

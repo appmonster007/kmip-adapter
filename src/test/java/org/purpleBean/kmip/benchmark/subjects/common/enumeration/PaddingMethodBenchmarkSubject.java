@@ -44,16 +44,16 @@ public class PaddingMethodBenchmarkSubject implements KmipBenchmarkSubject {
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new PaddingMethod(PaddingMethod.Standard.PLACEHOLDER_1);
+        obj = new PaddingMethod(PaddingMethod.Standard.NONE_PADDING);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

@@ -44,16 +44,16 @@ public class OperationBenchmarkSubject implements KmipBenchmarkSubject {
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new Operation(Operation.Standard.PLACEHOLDER_1);
+        obj = new Operation(Operation.Standard.CREATE);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

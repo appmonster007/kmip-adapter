@@ -20,17 +20,17 @@ class AttestationTypeTest extends AbstractKmipEnumerationSuite<AttestationType> 
 
     @Override
     protected AttestationType createDefault() {
-        return new AttestationType(AttestationType.Standard.PLACEHOLDER_1);
+        return new AttestationType(AttestationType.Standard.TPM_QUOTE);
     }
 
     @Override
     protected AttestationType createEqualToDefault() {
-        return new AttestationType(AttestationType.Standard.PLACEHOLDER_1);
+        return new AttestationType(AttestationType.Standard.TPM_QUOTE);
     }
 
     @Override
     protected AttestationType createDifferentFromDefault() {
-        return new AttestationType(AttestationType.Standard.PLACEHOLDER_2);
+        return new AttestationType(AttestationType.Standard.TCG_INTEGRITY_REPORT);
     }
 
     @Override

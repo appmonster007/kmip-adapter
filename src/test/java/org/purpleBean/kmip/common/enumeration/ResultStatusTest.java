@@ -20,17 +20,17 @@ class ResultStatusTest extends AbstractKmipEnumerationSuite<ResultStatus> {
 
     @Override
     protected ResultStatus createDefault() {
-        return new ResultStatus(ResultStatus.Standard.PLACEHOLDER_1);
+        return new ResultStatus(ResultStatus.Standard.SUCCESS);
     }
 
     @Override
     protected ResultStatus createEqualToDefault() {
-        return new ResultStatus(ResultStatus.Standard.PLACEHOLDER_1);
+        return new ResultStatus(ResultStatus.Standard.SUCCESS);
     }
 
     @Override
     protected ResultStatus createDifferentFromDefault() {
-        return new ResultStatus(ResultStatus.Standard.PLACEHOLDER_2);
+        return new ResultStatus(ResultStatus.Standard.OPERATION_FAILED);
     }
 
     @Override

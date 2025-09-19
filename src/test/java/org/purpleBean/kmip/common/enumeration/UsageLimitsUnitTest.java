@@ -20,17 +20,17 @@ class UsageLimitsUnitTest extends AbstractKmipEnumerationSuite<UsageLimitsUnit> 
 
     @Override
     protected UsageLimitsUnit createDefault() {
-        return new UsageLimitsUnit(UsageLimitsUnit.Standard.PLACEHOLDER_1);
+        return new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE);
     }
 
     @Override
     protected UsageLimitsUnit createEqualToDefault() {
-        return new UsageLimitsUnit(UsageLimitsUnit.Standard.PLACEHOLDER_1);
+        return new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE);
     }
 
     @Override
     protected UsageLimitsUnit createDifferentFromDefault() {
-        return new UsageLimitsUnit(UsageLimitsUnit.Standard.PLACEHOLDER_2);
+        return new UsageLimitsUnit(UsageLimitsUnit.Standard.OBJECT);
     }
 
     @Override

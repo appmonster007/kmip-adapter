@@ -44,16 +44,16 @@ public class KeyCompressionTypeBenchmarkSubject implements KmipBenchmarkSubject 
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_1);
+        obj = new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

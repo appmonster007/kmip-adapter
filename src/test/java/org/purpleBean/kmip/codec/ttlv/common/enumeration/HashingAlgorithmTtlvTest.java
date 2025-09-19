@@ -13,11 +13,11 @@ class HashingAlgorithmTtlvTest extends AbstractTtlvSerializationSuite<HashingAlg
 
     @Override
     protected HashingAlgorithm createDefault() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.PLACEHOLDER_1);
+        return new HashingAlgorithm(HashingAlgorithm.Standard.MD2);
     }
 
     @Override
     protected HashingAlgorithm createVariant() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.PLACEHOLDER_2);
+        return new HashingAlgorithm(HashingAlgorithm.Standard.MD4);
     }
 }

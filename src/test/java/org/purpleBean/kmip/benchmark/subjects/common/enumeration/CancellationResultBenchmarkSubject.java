@@ -44,16 +44,16 @@ public class CancellationResultBenchmarkSubject implements KmipBenchmarkSubject 
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new CancellationResult(CancellationResult.Standard.PLACEHOLDER_1);
+        obj = new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

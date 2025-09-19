@@ -20,17 +20,17 @@ class OperationTest extends AbstractKmipEnumerationSuite<Operation> {
 
     @Override
     protected Operation createDefault() {
-        return new Operation(Operation.Standard.PLACEHOLDER_1);
+        return new Operation(Operation.Standard.CREATE);
     }
 
     @Override
     protected Operation createEqualToDefault() {
-        return new Operation(Operation.Standard.PLACEHOLDER_1);
+        return new Operation(Operation.Standard.CREATE);
     }
 
     @Override
     protected Operation createDifferentFromDefault() {
-        return new Operation(Operation.Standard.PLACEHOLDER_2);
+        return new Operation(Operation.Standard.CREATE_KEY_PAIR);
     }
 
     @Override

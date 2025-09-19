@@ -13,11 +13,11 @@ class KeyRoleTypeXmlTest extends AbstractXmlSerializationSuite<KeyRoleType> {
 
     @Override
     protected KeyRoleType createDefault() {
-        return new KeyRoleType(KeyRoleType.Standard.PLACEHOLDER_1);
+        return new KeyRoleType(KeyRoleType.Standard.BDK);
     }
 
     @Override
     protected KeyRoleType createVariant() {
-        return new KeyRoleType(KeyRoleType.Standard.PLACEHOLDER_2);
+        return new KeyRoleType(KeyRoleType.Standard.CVK);
     }
 }

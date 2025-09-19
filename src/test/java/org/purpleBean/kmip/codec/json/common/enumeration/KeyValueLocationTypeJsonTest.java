@@ -13,11 +13,11 @@ class KeyValueLocationTypeJsonTest extends AbstractJsonSerializationSuite<KeyVal
 
     @Override
     protected KeyValueLocationType createDefault() {
-        return new KeyValueLocationType(KeyValueLocationType.Standard.PLACEHOLDER_1);
+        return new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected KeyValueLocationType createVariant() {
-        return new KeyValueLocationType(KeyValueLocationType.Standard.PLACEHOLDER_2);
+        return new KeyValueLocationType(KeyValueLocationType.Standard.URI);
     }
 }

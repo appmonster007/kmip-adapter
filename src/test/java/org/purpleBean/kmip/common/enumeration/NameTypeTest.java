@@ -20,17 +20,17 @@ class NameTypeTest extends AbstractKmipEnumerationSuite<NameType> {
 
     @Override
     protected NameType createDefault() {
-        return new NameType(NameType.Standard.PLACEHOLDER_1);
+        return new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected NameType createEqualToDefault() {
-        return new NameType(NameType.Standard.PLACEHOLDER_1);
+        return new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected NameType createDifferentFromDefault() {
-        return new NameType(NameType.Standard.PLACEHOLDER_2);
+        return new NameType(NameType.Standard.URI);
     }
 
     @Override

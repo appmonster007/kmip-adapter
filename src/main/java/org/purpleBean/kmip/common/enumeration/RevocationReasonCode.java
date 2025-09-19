@@ -93,8 +93,8 @@ public class RevocationReasonCode implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,20 @@ public class RevocationReasonCode implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        CERTIFICATE_SUPERSEDED(0x00000001, "Certificate Superseded",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        KEY_COMPROMISE(0x00000002, "Key Compromise",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        CA_COMPROMISE(0x00000003, "CA Compromise",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        AFFILIATION_CHANGED(0x00000004, "Affiliation Changed",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        SUPERSEDED(0x00000005, "Superseded",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        CESSATION_OF_OPERATION(0x00000006, "Cessation of Operation",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        PRIVILEGE_WITHDRAWN(0x00000007, "Privilege Withdrawn",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
         private final int value;
         private final String description;
@@ -140,8 +152,11 @@ public class RevocationReasonCode implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

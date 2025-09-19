@@ -93,8 +93,8 @@ public class ResultStatus implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,14 @@ public class ResultStatus implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        SUCCESS(0x00000000, "Operation completed successfully",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        OPERATION_FAILED(0x00000001, "Operation failed",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        OPERATION_PENDING(0x00000002, "Operation is pending completion",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V3_0),
+        OPERATION_UNDONE(0x00000003, "Operation was undone",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -140,8 +146,11 @@ public class ResultStatus implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

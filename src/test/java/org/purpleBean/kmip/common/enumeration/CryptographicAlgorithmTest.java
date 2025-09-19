@@ -20,17 +20,17 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationSuite<Cryptograp
 
     @Override
     protected CryptographicAlgorithm createDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.PLACEHOLDER_1);
+        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
     }
 
     @Override
     protected CryptographicAlgorithm createEqualToDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.PLACEHOLDER_1);
+        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
     }
 
     @Override
     protected CryptographicAlgorithm createDifferentFromDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.PLACEHOLDER_2);
+        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.TRIPLE_DES);
     }
 
     @Override

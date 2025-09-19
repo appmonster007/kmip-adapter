@@ -20,17 +20,17 @@ class CertificateRequestTypeTest extends AbstractKmipEnumerationSuite<Certificat
 
     @Override
     protected CertificateRequestType createDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PLACEHOLDER_1);
+        return new CertificateRequestType(CertificateRequestType.Standard.CRMF);
     }
 
     @Override
     protected CertificateRequestType createEqualToDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PLACEHOLDER_1);
+        return new CertificateRequestType(CertificateRequestType.Standard.CRMF);
     }
 
     @Override
     protected CertificateRequestType createDifferentFromDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PLACEHOLDER_2);
+        return new CertificateRequestType(CertificateRequestType.Standard.PROVISIONING);
     }
 
     @Override

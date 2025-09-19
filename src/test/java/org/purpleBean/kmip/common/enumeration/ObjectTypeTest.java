@@ -20,17 +20,17 @@ class ObjectTypeTest extends AbstractKmipEnumerationSuite<ObjectType> {
 
     @Override
     protected ObjectType createDefault() {
-        return new ObjectType(ObjectType.Standard.PLACEHOLDER_1);
+        return new ObjectType(ObjectType.Standard.CERTIFICATE);
     }
 
     @Override
     protected ObjectType createEqualToDefault() {
-        return new ObjectType(ObjectType.Standard.PLACEHOLDER_1);
+        return new ObjectType(ObjectType.Standard.CERTIFICATE);
     }
 
     @Override
     protected ObjectType createDifferentFromDefault() {
-        return new ObjectType(ObjectType.Standard.PLACEHOLDER_2);
+        return new ObjectType(ObjectType.Standard.SYMMETRIC_KEY);
     }
 
     @Override

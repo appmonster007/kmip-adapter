@@ -13,11 +13,11 @@ class AlternativeNameTypeXmlTest extends AbstractXmlSerializationSuite<Alternati
 
     @Override
     protected AlternativeNameType createDefault() {
-        return new AlternativeNameType(AlternativeNameType.Standard.PLACEHOLDER_1);
+        return new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected AlternativeNameType createVariant() {
-        return new AlternativeNameType(AlternativeNameType.Standard.PLACEHOLDER_2);
+        return new AlternativeNameType(AlternativeNameType.Standard.URI);
     }
 }

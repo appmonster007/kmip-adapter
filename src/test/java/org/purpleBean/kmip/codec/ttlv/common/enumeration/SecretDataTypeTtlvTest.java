@@ -13,11 +13,11 @@ class SecretDataTypeTtlvTest extends AbstractTtlvSerializationSuite<SecretDataTy
 
     @Override
     protected SecretDataType createDefault() {
-        return new SecretDataType(SecretDataType.Standard.PLACEHOLDER_1);
+        return new SecretDataType(SecretDataType.Standard.PASSWORD);
     }
 
     @Override
     protected SecretDataType createVariant() {
-        return new SecretDataType(SecretDataType.Standard.PLACEHOLDER_2);
+        return new SecretDataType(SecretDataType.Standard.SEED);
     }
 }

@@ -20,17 +20,17 @@ class KeyValueLocationTypeTest extends AbstractKmipEnumerationSuite<KeyValueLoca
 
     @Override
     protected KeyValueLocationType createDefault() {
-        return new KeyValueLocationType(KeyValueLocationType.Standard.PLACEHOLDER_1);
+        return new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected KeyValueLocationType createEqualToDefault() {
-        return new KeyValueLocationType(KeyValueLocationType.Standard.PLACEHOLDER_1);
+        return new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected KeyValueLocationType createDifferentFromDefault() {
-        return new KeyValueLocationType(KeyValueLocationType.Standard.PLACEHOLDER_2);
+        return new KeyValueLocationType(KeyValueLocationType.Standard.URI);
     }
 
     @Override

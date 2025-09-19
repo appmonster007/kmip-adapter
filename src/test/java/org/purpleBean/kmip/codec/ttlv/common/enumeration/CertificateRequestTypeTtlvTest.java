@@ -13,11 +13,11 @@ class CertificateRequestTypeTtlvTest extends AbstractTtlvSerializationSuite<Cert
 
     @Override
     protected CertificateRequestType createDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PLACEHOLDER_1);
+        return new CertificateRequestType(CertificateRequestType.Standard.CRMF);
     }
 
     @Override
     protected CertificateRequestType createVariant() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PLACEHOLDER_2);
+        return new CertificateRequestType(CertificateRequestType.Standard.PROVISIONING);
     }
 }

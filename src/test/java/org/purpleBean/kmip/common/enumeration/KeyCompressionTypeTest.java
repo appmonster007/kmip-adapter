@@ -20,17 +20,17 @@ class KeyCompressionTypeTest extends AbstractKmipEnumerationSuite<KeyCompression
 
     @Override
     protected KeyCompressionType createDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_1);
+        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
     }
 
     @Override
     protected KeyCompressionType createEqualToDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_1);
+        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
     }
 
     @Override
     protected KeyCompressionType createDifferentFromDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.PLACEHOLDER_2);
+        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME);
     }
 
     @Override

@@ -44,16 +44,16 @@ public class SecretDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new SecretDataType(SecretDataType.Standard.PLACEHOLDER_1);
+        obj = new SecretDataType(SecretDataType.Standard.PASSWORD);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

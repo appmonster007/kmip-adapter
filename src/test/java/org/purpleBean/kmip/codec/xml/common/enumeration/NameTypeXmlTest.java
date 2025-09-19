@@ -13,11 +13,11 @@ class NameTypeXmlTest extends AbstractXmlSerializationSuite<NameType> {
 
     @Override
     protected NameType createDefault() {
-        return new NameType(NameType.Standard.PLACEHOLDER_1);
+        return new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING);
     }
 
     @Override
     protected NameType createVariant() {
-        return new NameType(NameType.Standard.PLACEHOLDER_2);
+        return new NameType(NameType.Standard.URI);
     }
 }

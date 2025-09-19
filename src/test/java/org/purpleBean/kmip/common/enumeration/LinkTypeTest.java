@@ -20,17 +20,17 @@ class LinkTypeTest extends AbstractKmipEnumerationSuite<LinkType> {
 
     @Override
     protected LinkType createDefault() {
-        return new LinkType(LinkType.Standard.PLACEHOLDER_1);
+        return new LinkType(LinkType.Standard.CERTIFICATE_LINK);
     }
 
     @Override
     protected LinkType createEqualToDefault() {
-        return new LinkType(LinkType.Standard.PLACEHOLDER_1);
+        return new LinkType(LinkType.Standard.CERTIFICATE_LINK);
     }
 
     @Override
     protected LinkType createDifferentFromDefault() {
-        return new LinkType(LinkType.Standard.PLACEHOLDER_2);
+        return new LinkType(LinkType.Standard.PUBLIC_KEY_LINK);
     }
 
     @Override

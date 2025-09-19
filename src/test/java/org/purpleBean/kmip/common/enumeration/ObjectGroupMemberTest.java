@@ -20,17 +20,17 @@ class ObjectGroupMemberTest extends AbstractKmipEnumerationSuite<ObjectGroupMemb
 
     @Override
     protected ObjectGroupMember createDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.PLACEHOLDER_1);
+        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
     }
 
     @Override
     protected ObjectGroupMember createEqualToDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.PLACEHOLDER_1);
+        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
     }
 
     @Override
     protected ObjectGroupMember createDifferentFromDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.PLACEHOLDER_2);
+        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT);
     }
 
     @Override

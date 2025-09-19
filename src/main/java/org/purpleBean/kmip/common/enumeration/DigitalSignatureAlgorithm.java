@@ -93,8 +93,8 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,38 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        MD2_WITH_RSA_ENCRYPTION(0x00000001, "MD2 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD5_WITH_RSA_ENCRYPTION(0x00000002, "MD5 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA1_WITH_RSA_ENCRYPTION(0x00000003, "SHA-1 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA224_WITH_RSA_ENCRYPTION(0x00000004, "SHA-224 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA256_WITH_RSA_ENCRYPTION(0x00000005, "SHA-256 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA384_WITH_RSA_ENCRYPTION(0x00000006, "SHA-384 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA512_WITH_RSA_ENCRYPTION(0x00000007, "SHA-512 with RSA Encryption",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RSASSA_PSS(0x00000008, "RSASSA-PSS",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA1(0x00000009, "DSA with SHA-1",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA224(0x0000000A, "DSA with SHA-224",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA256(0x0000000B, "DSA with SHA-256",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA1(0x0000000C, "ECDSA with SHA-1",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA224(0x0000000D, "ECDSA with SHA-224",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA256(0x0000000E, "ECDSA with SHA-256",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA384(0x0000000F, "ECDSA with SHA-384",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA512(0x00000010, "ECDSA with SHA-512",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -140,8 +170,11 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

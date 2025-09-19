@@ -13,11 +13,11 @@ class BatchErrorContinuationOptionXmlTest extends AbstractXmlSerializationSuite<
 
     @Override
     protected BatchErrorContinuationOption createDefault() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.PLACEHOLDER_1);
+        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);
     }
 
     @Override
     protected BatchErrorContinuationOption createVariant() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.PLACEHOLDER_2);
+        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.STOP);
     }
 }

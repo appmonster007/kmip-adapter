@@ -20,17 +20,17 @@ class KeyRoleTypeTest extends AbstractKmipEnumerationSuite<KeyRoleType> {
 
     @Override
     protected KeyRoleType createDefault() {
-        return new KeyRoleType(KeyRoleType.Standard.PLACEHOLDER_1);
+        return new KeyRoleType(KeyRoleType.Standard.BDK);
     }
 
     @Override
     protected KeyRoleType createEqualToDefault() {
-        return new KeyRoleType(KeyRoleType.Standard.PLACEHOLDER_1);
+        return new KeyRoleType(KeyRoleType.Standard.BDK);
     }
 
     @Override
     protected KeyRoleType createDifferentFromDefault() {
-        return new KeyRoleType(KeyRoleType.Standard.PLACEHOLDER_2);
+        return new KeyRoleType(KeyRoleType.Standard.CVK);
     }
 
     @Override

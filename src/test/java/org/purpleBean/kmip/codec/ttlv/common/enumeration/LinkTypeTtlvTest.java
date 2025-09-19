@@ -13,11 +13,11 @@ class LinkTypeTtlvTest extends AbstractTtlvSerializationSuite<LinkType> {
 
     @Override
     protected LinkType createDefault() {
-        return new LinkType(LinkType.Standard.PLACEHOLDER_1);
+        return new LinkType(LinkType.Standard.CERTIFICATE_LINK);
     }
 
     @Override
     protected LinkType createVariant() {
-        return new LinkType(LinkType.Standard.PLACEHOLDER_2);
+        return new LinkType(LinkType.Standard.PUBLIC_KEY_LINK);
     }
 }

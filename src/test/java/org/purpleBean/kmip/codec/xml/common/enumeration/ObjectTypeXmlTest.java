@@ -13,11 +13,11 @@ class ObjectTypeXmlTest extends AbstractXmlSerializationSuite<ObjectType> {
 
     @Override
     protected ObjectType createDefault() {
-        return new ObjectType(ObjectType.Standard.PLACEHOLDER_1);
+        return new ObjectType(ObjectType.Standard.CERTIFICATE);
     }
 
     @Override
     protected ObjectType createVariant() {
-        return new ObjectType(ObjectType.Standard.PLACEHOLDER_2);
+        return new ObjectType(ObjectType.Standard.SYMMETRIC_KEY);
     }
 }

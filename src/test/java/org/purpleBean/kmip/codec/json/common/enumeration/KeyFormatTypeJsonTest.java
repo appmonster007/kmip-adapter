@@ -13,11 +13,11 @@ class KeyFormatTypeJsonTest extends AbstractJsonSerializationSuite<KeyFormatType
 
     @Override
     protected KeyFormatType createDefault() {
-        return new KeyFormatType(KeyFormatType.Standard.PLACEHOLDER_1);
+        return new KeyFormatType(KeyFormatType.Standard.RAW);
     }
 
     @Override
     protected KeyFormatType createVariant() {
-        return new KeyFormatType(KeyFormatType.Standard.PLACEHOLDER_2);
+        return new KeyFormatType(KeyFormatType.Standard.OPAQUE);
     }
 }

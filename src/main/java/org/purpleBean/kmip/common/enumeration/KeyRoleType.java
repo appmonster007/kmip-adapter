@@ -93,8 +93,8 @@ public class KeyRoleType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,54 @@ public class KeyRoleType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        BDK(0x00000001, "BDK (Base Derivation Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CVK(0x00000002, "CVK (Card Verification Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DEK(0x00000003, "DEK (Data Encryption Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKAC(0x00000004, "MKAC (Master Key Authentication Code)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKSMC(0x00000005, "MKSMC (Master Key for Secure Messaging Command)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKSMI(0x00000006, "MKSMI (Master Key for Secure Messaging Integrity)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKDAC(0x00000007, "MKDAC (Master Key for Data Authentication Code)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKDN(0x00000008, "MKDN (Master Key for Deriving New Keys)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKCP(0x00000009, "MKCP (Master Key for Card Personalization)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKOTH(0x0000000A, "MKOTH (Master Key for Other Purposes)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        KEK(0x0000000B, "KEK (Key Encryption Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_16609(0x0000000C, "MAC 16609",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_97971(0x0000000D, "MAC 9797-1",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_97972(0x0000000E, "MAC 9797-2",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_97973(0x0000000F, "MAC 9797-3",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_97974(0x00000010, "MAC 9797-4",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_97975(0x00000011, "MAC 9797-5",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ZPK(0x00000012, "ZPK (Zone Pin Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKIBM(0x00000013, "PVK IBM (PIN Verification Key IBM)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKPVV(0x00000014, "PVK PVV (PIN Verification Value Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKOTH(0x00000015, "PVK Other (PIN Verification Key Other)",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DUKPT(0x00000016, "DUKPT (Derived Unique Key Per Transaction)",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0), // Note: Not in 1.2 spec
+        IV(0x00000017, "IV (Initialization Vector)",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0), // Note: Not in 1.2 spec
+        TRKBK(0x00000018, "TRKBK (Track Back Key)",
+                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0); // Note: Not in 1.2 spec
 
         private final int value;
         private final String description;
@@ -140,8 +186,11 @@ public class KeyRoleType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

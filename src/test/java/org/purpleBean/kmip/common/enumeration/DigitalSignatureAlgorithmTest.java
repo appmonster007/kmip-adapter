@@ -20,17 +20,17 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationSuite<Digital
 
     @Override
     protected DigitalSignatureAlgorithm createDefault() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.PLACEHOLDER_1);
+        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION);
     }
 
     @Override
     protected DigitalSignatureAlgorithm createEqualToDefault() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.PLACEHOLDER_1);
+        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION);
     }
 
     @Override
     protected DigitalSignatureAlgorithm createDifferentFromDefault() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.PLACEHOLDER_2);
+        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION);
     }
 
     @Override

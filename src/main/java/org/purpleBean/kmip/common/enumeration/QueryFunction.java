@@ -93,8 +93,8 @@ public class QueryFunction implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,16 @@ public class QueryFunction implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        QUERY_SERVER_INFORMATION(0x00000001, "Query Server Information",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
+        QUERY_OPERATIONAL_CAPABILITIES(0x00000002, "Query Operational Capabilities",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
+        QUERY_APPLICATION_NAMESPACES(0x00000003, "Query Application Namespaces",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
+        QUERY_EXTENSION_LIST(0x00000004, "Query Extension List",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
+        QUERY_SERVER_DEFAULT_MECHANISMS(0x00000005, "Query Server Default Mechanisms",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2); // Not in 2.1+
 
         private final int value;
         private final String description;
@@ -140,8 +148,11 @@ public class QueryFunction implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

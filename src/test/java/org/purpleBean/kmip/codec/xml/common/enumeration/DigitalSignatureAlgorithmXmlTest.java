@@ -13,11 +13,11 @@ class DigitalSignatureAlgorithmXmlTest extends AbstractXmlSerializationSuite<Dig
 
     @Override
     protected DigitalSignatureAlgorithm createDefault() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.PLACEHOLDER_1);
+        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION);
     }
 
     @Override
     protected DigitalSignatureAlgorithm createVariant() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.PLACEHOLDER_2);
+        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION);
     }
 }

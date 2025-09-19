@@ -13,11 +13,11 @@ class QueryFunctionXmlTest extends AbstractXmlSerializationSuite<QueryFunction> 
 
     @Override
     protected QueryFunction createDefault() {
-        return new QueryFunction(QueryFunction.Standard.PLACEHOLDER_1);
+        return new QueryFunction(QueryFunction.Standard.QUERY_SERVER_INFORMATION);
     }
 
     @Override
     protected QueryFunction createVariant() {
-        return new QueryFunction(QueryFunction.Standard.PLACEHOLDER_2);
+        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONAL_CAPABILITIES);
     }
 }

@@ -13,11 +13,11 @@ class CancellationResultJsonTest extends AbstractJsonSerializationSuite<Cancella
 
     @Override
     protected CancellationResult createDefault() {
-        return new CancellationResult(CancellationResult.Standard.PLACEHOLDER_1);
+        return new CancellationResult(CancellationResult.Standard.CANCELED);
     }
 
     @Override
     protected CancellationResult createVariant() {
-        return new CancellationResult(CancellationResult.Standard.PLACEHOLDER_2);
+        return new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);
     }
 }

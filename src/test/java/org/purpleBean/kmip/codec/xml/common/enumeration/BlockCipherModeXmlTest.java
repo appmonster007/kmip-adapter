@@ -13,11 +13,11 @@ class BlockCipherModeXmlTest extends AbstractXmlSerializationSuite<BlockCipherMo
 
     @Override
     protected BlockCipherMode createDefault() {
-        return new BlockCipherMode(BlockCipherMode.Standard.PLACEHOLDER_1);
+        return new BlockCipherMode(BlockCipherMode.Standard.CBC);
     }
 
     @Override
     protected BlockCipherMode createVariant() {
-        return new BlockCipherMode(BlockCipherMode.Standard.PLACEHOLDER_2);
+        return new BlockCipherMode(BlockCipherMode.Standard.ECB);
     }
 }

@@ -93,8 +93,8 @@ public class SecretDataType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,8 +116,10 @@ public class SecretDataType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        PASSWORD(0x00000001, "Password",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        SEED(0x00000002, "Seed",
+                KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
         private final int value;
         private final String description;
@@ -140,8 +142,11 @@ public class SecretDataType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

@@ -13,11 +13,11 @@ class OperationJsonTest extends AbstractJsonSerializationSuite<Operation> {
 
     @Override
     protected Operation createDefault() {
-        return new Operation(Operation.Standard.PLACEHOLDER_1);
+        return new Operation(Operation.Standard.CREATE);
     }
 
     @Override
     protected Operation createVariant() {
-        return new Operation(Operation.Standard.PLACEHOLDER_2);
+        return new Operation(Operation.Standard.CREATE_KEY_PAIR);
     }
 }

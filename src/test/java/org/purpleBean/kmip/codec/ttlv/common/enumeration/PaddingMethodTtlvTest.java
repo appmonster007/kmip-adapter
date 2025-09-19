@@ -13,11 +13,11 @@ class PaddingMethodTtlvTest extends AbstractTtlvSerializationSuite<PaddingMethod
 
     @Override
     protected PaddingMethod createDefault() {
-        return new PaddingMethod(PaddingMethod.Standard.PLACEHOLDER_1);
+        return new PaddingMethod(PaddingMethod.Standard.NONE_PADDING);
     }
 
     @Override
     protected PaddingMethod createVariant() {
-        return new PaddingMethod(PaddingMethod.Standard.PLACEHOLDER_2);
+        return new PaddingMethod(PaddingMethod.Standard.PKCS5);
     }
 }
