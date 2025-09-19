@@ -71,10 +71,9 @@ public class KmipSerializationBenchmark {
 
         // Select which subject to benchmark. Populated by JmhBenchmarkRunner via OptionsBuilder.param("subject", ...)
         // Default placeholder is only a guard in case the runner does not set params.
-        @Param({
-                "__AUTO__"
-        })
+        @Param({"__AUTO__"})
         public String subject;
+
         private KmipBenchmarkSubject impl;
 
         @Setup(Level.Trial)
@@ -87,7 +86,7 @@ public class KmipSerializationBenchmark {
             if (impl == null) {
                 throw new IllegalArgumentException("Unknown subject: " + subject + ". Available: " + REGISTRY.keySet());
             }
-            impl.setup();
+//            impl.setup();
         }
 
         @TearDown(Level.Trial)

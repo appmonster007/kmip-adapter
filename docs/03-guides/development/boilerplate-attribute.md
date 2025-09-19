@@ -549,9 +549,16 @@ public class FooDemoAttributeBenchmarkSubject implements KmipBenchmarkSubject {
     private XmlMapper xml;
     private TtlvMapper ttlv;
     private FooDemoAttribute obj;
+    @Getter
     private String jsonStr;
+    @Getter
     private String xmlStr;
+    @Getter
     private ByteBuffer ttlvBuf;
+    
+    public FooDemoAttributeBenchmarkSubject() throws Exception {
+        this.setup();
+    }
 
     @Override public String name() { return "FooDemoAttribute"; }
 

@@ -750,6 +750,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
@@ -767,9 +768,16 @@ public class ${ENUM_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 
     private ${ENUM_NAME} obj;
 
+    @Getter
     private String jsonStr;
+    @Getter
     private String xmlStr;
+    @Getter
     private ByteBuffer ttlvBuf;
+
+    public ${ENUM_NAME}BenchmarkSubject() throws Exception {
+        this.setup();
+    }
 
     @Override
     public String name() {

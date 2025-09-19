@@ -23,6 +23,12 @@ public interface KmipBenchmarkSubject {
      */
     void tearDown();
 
+    String getJsonStr();
+
+    String getXmlStr();
+
+    ByteBuffer getTtlvBuf();
+
     // JSON
     String jsonSerialize() throws Exception;
 

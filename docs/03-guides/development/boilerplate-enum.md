@@ -745,10 +745,17 @@ public class FooDemoEnumBenchmarkSubject implements KmipBenchmarkSubject {
 
     private FooDemoEnum obj;
 
+    @Getter
     private String jsonStr;
+    @Getter
     private String xmlStr;
+    @Getter
     private ByteBuffer ttlvBuf;
 
+    public FooDemoEnumBenchmarkSubject() throws Exception {
+        this.setup();
+    }
+    
     @Override
     public String name() {
         return "FooDemoEnum";

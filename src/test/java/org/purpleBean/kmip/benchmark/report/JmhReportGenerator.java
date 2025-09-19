@@ -3,11 +3,13 @@ package org.purpleBean.kmip.benchmark.report;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,6 +31,7 @@ public final class JmhReportGenerator {
         List<JsonNode> results = mapper.readValue(Files.readString(in), new TypeReference<List<JsonNode>>() {
         });
 
+        Map<String, SubjectMetaInfo> subjectMetaInfoMap = new HashMap<>();
         List<Row> rows = new ArrayList<>();
         for (JsonNode node : results) {
             String benchmark = node.path("benchmark").asText("");
@@ -40,6 +43,12 @@ public final class JmhReportGenerator {
             String scoreError = primary.path("scoreError").asText("-");
             String mode = node.path("mode").asText("");
 
+            subjectMetaInfoMap.putIfAbsent(subject, new SubjectMetaInfo(
+                    subject,
+                    BenchmarkSubjects.getJsonStr(subject),
+                    BenchmarkSubjects.getXmlStr(subject),
+                    BenchmarkSubjects.getTtlvBuf(subject))
+            );
             rows.add(new Row(benchmark, subject, score, scoreError, scoreUnit, mode));
         }
 
@@ -52,7 +61,12 @@ public final class JmhReportGenerator {
 
         for (var entry : bySubject.entrySet()) {
             String subject = entry.getKey();
-            md.append("## ").append(subject).append("\n\n");
+            md.append("## ").append(subject)
+                    .append("\n")
+                    .append(String.format("\nJSON: %s  ", subjectMetaInfoMap.get(subject).jsonStr))
+                    .append(String.format("\nXML: %s  ", subjectMetaInfoMap.get(subject).xmlStr).replace("<", "&lt;").replace(">", "&gt;"))
+                    .append(String.format("\nTTLV: %s  ", subjectMetaInfoMap.get(subject).ttlvStr))
+                    .append("\n\n");
             md.append("Benchmark | Mode | Score | Error margin (99.9%) | Unit\n");
             md.append("---|---|---:|---:|---\n");
             for (Row r : entry.getValue()) {
@@ -75,5 +89,8 @@ public final class JmhReportGenerator {
             int idx = benchmark.lastIndexOf('.');
             return idx >= 0 ? benchmark.substring(idx + 1) : benchmark;
         }
+    }
+
+    private record SubjectMetaInfo(String subject, String jsonStr, String xmlStr, String ttlvStr) {
     }
 }

@@ -3,6 +3,7 @@ package org.purpleBean.kmip.benchmark.subjects.common.structure;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
@@ -25,9 +26,16 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
 
     private SampleStructure obj;
 
+    @Getter
     private String jsonStr;
+    @Getter
     private String xmlStr;
+    @Getter
     private ByteBuffer ttlvBuf;
+
+    public SampleStructureBenchmarkSubject() throws Exception {
+        this.setup();
+    }
 
     @Override
     public String name() {

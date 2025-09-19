@@ -42,6 +42,7 @@ public final class JmhBenchmarkRunner {
 
         // Auto-discover benchmark subjects via ServiceLoader and pass them as JMH @Param values
         List<String> subjects = BenchmarkSubjects.discoverNames();
+
         if (subjects.isEmpty()) {
             throw new IllegalStateException("No KmipBenchmarkSubject implementations discovered via ServiceLoader. " +
                     "Ensure service entries exist under src/test/resources/META-INF/services/" +

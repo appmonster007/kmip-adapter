@@ -912,6 +912,7 @@ package org.purpleBean.kmip.benchmark.subjects.${package_path//\//.};
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
@@ -934,9 +935,16 @@ public class ${class_name}BenchmarkSubject implements KmipBenchmarkSubject {
 
     private ${class_name} obj;
 
+    @Getter
     private String jsonStr;
+    @Getter
     private String xmlStr;
+    @Getter
     private ByteBuffer ttlvBuf;
+
+    public ${class_name}BenchmarkSubject() throws Exception {
+        this.setup();
+    }
 
     @Override
     public String name() {
