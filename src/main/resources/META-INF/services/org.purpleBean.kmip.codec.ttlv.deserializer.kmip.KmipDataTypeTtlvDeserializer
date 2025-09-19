@@ -16,6 +16,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.DerivationMe
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.DigitalSignatureAlgorithmTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.EncodingOptionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.HashingAlgorithmTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.InteropFunctionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.KeyCompressionTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.KeyFormatTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.KeyRoleTypeTtlvDeserializer

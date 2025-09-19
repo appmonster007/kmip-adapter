@@ -15,6 +15,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.DerivationMetho
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.DigitalSignatureAlgorithmXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.EncodingOptionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.HashingAlgorithmXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.InteropFunctionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.KeyCompressionTypeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.KeyFormatTypeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.KeyRoleTypeXmlSerializer

@@ -12,6 +12,7 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.DerivationMethodBenchm
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DigitalSignatureAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.EncodingOptionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.HashingAlgorithmBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.InteropFunctionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.KeyCompressionTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.KeyFormatTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.KeyRoleTypeBenchmarkSubject

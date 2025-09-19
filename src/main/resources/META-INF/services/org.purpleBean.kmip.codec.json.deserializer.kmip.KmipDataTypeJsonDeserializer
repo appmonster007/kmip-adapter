@@ -16,6 +16,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DerivationMe
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DigitalSignatureAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.EncodingOptionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.HashingAlgorithmJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.InteropFunctionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.KeyCompressionTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.KeyFormatTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.KeyRoleTypeJsonDeserializer

@@ -331,8 +331,8 @@ public final class KmipTag {
         COUNTER_LENGTH(0x4200D0, "CounterLength", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
         INITIAL_COUNTER_VALUE(0x4200D1, "InitialCounterValue", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
         INVOCATION_FIELD_LENGTH(0x4200D2, "InvocationFieldLength", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        ATTESTATION_CAPABLE_INDICATOR(0x4200D3, "AttestationCapableIndicator", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
-
+        ATTESTATION_CAPABLE_INDICATOR(0x4200D3, "AttestationCapableIndicator", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
+        INTEROP_FUNCTION(0x420160, "InteropFunction", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
 
         private final int value;
         private final String description;
