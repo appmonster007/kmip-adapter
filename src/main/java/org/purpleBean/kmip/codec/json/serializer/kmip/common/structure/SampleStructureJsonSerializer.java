@@ -25,7 +25,8 @@ public class SampleStructureJsonSerializer extends KmipDataTypeJsonSerializer<Sa
         KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", sampleStructure.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            sampleStructure.getKmipTag().getDescription(), spec)
             );
         }
 
@@ -34,7 +35,10 @@ public class SampleStructureJsonSerializer extends KmipDataTypeJsonSerializer<Sa
         for (KmipDataType field : fields) {
             if (field != null && !field.isSupportedFor(spec)) {
                 throw new UnsupportedEncodingException(
-                        String.format("%s in %s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), sampleStructure.getKmipTag().getDescription(), spec)
+                        String.format("%s in %s is not supported for KMIP spec %s",
+                                field.getKmipTag().getDescription(),
+                                sampleStructure.getKmipTag().getDescription(),
+                                spec)
                 );
             }
         }
@@ -44,9 +48,9 @@ public class SampleStructureJsonSerializer extends KmipDataTypeJsonSerializer<Sa
         jsonGenerator.writeStringField("type", sampleStructure.getEncodingType().getDescription());
         jsonGenerator.writeFieldName("value");
         jsonGenerator.writeStartArray();
-        for (KmipDataType value : fields) {
-            if (value != null) {
-                jsonGenerator.writeObject(value);
+        for (KmipDataType fieldValue : fields) {
+            if (fieldValue != null) {
+                jsonGenerator.writeObject(fieldValue);
             }
         }
         jsonGenerator.writeEndArray();

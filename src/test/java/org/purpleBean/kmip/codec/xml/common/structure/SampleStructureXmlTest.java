@@ -21,15 +21,23 @@ class SampleStructureXmlTest extends AbstractXmlSerializationSuite<SampleStructu
 
     @Override
     protected SampleStructure createDefault() {
+        // TODO: Update with actual default values for your structure
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
-        return SampleStructure.builder().activationDate(activationDate).state(state).build();
+        return SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
     }
 
     @Override
     protected SampleStructure createVariant() {
+        // TODO: Update with different values to test variations
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME.plusDays(1)).build();
         State state = new State(State.Standard.DEACTIVATED);
-        return SampleStructure.builder().activationDate(activationDate).state(state).build();
+        return SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
     }
 }

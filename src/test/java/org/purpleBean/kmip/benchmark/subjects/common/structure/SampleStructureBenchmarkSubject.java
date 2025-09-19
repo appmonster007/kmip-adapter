@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
@@ -37,7 +36,7 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-//        KmipContext.setSpec(KmipSpec.V1_2);
+        // Configure mappers
         json = new ObjectMapper();
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
@@ -51,11 +50,16 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
+        // Create test object with sample data
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(fixed).build();
         State state = new State(State.Standard.ACTIVE);
-        obj = SampleStructure.builder().activationDate(activationDate).state(state).build();
+        obj = SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
 
+        // Pre-serialize for benchmarks
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
         ttlvBuf = ttlv.writeValueAsByteBuffer(obj);

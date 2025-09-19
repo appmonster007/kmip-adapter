@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * KMIP SampleStructure structure.
+ */
 @Data
 @Builder
 public class SampleStructure implements KmipStructure {
@@ -19,9 +22,10 @@ public class SampleStructure implements KmipStructure {
     private final EncodingType encodingType = EncodingType.STRUCTURE;
     private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    // TODO: Add your structure fields here
+    // Example:
     @NonNull
     private final ActivationDateAttribute activationDate;
-    // @NonNull
     private final State state;
 
     @Override
@@ -37,23 +41,50 @@ public class SampleStructure implements KmipStructure {
         return supportedVersions.contains(spec);
     }
 
+    /**
+     * Builder for SampleStructure.
+     */
     public static class SampleStructureBuilder {
+        /**
+         * Build a new SampleStructure instance with the current configuration.
+         */
         public SampleStructure build() {
+            // Validate required fields
+            validate();
+
+            // Create a copy to ensure immutability
+            // SampleStructure result = new SampleStructure();
+            // TODO: Copy all fields from instance to result
+            // result.activationDate = this.activationDate;
+            // result.state = this.state;
+
+            return new SampleStructure(activationDate, state);
+        }
+
+        /**
+         * Validate the current configuration.
+         */
+        private void validate() {
             List<KmipDataType> fields = new ArrayList<>();
             fields.add(activationDate);
             fields.add(state);
 
-            // KMIP spec compatibility validation
             KmipSpec spec = KmipContext.getSpec();
+
+            // Validate KMIP spec compatibility
             for (KmipDataType field : fields) {
                 if (field != null && !field.isSupportedFor(spec)) {
                     throw new IllegalArgumentException(
-                            String.format("Value '%s' is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
+                            String.format("%s is not supported for KMIP spec %s",
+                                    field.getKmipTag().getDescription(), spec)
                     );
                 }
             }
 
-            return new SampleStructure(activationDate, state);
+            // Validate required fields
+            // if (activationDate == null) {
+            //     throw new IllegalArgumentException("ActivationDate is required");
+            // }
         }
     }
 }

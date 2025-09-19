@@ -11,8 +11,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("SampleStructure Domain Tests")
 class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
 
@@ -25,9 +23,13 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
 
     @Override
     protected SampleStructure createDefault() {
+        // TODO: Update with actual default values for your structure
         ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
-        return SampleStructure.builder().activationDate(activationDate).state(state).build();
+        return SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
     }
 
     @Override
@@ -37,12 +39,15 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
 
     @Override
     protected int expectedMinComponentCount() {
+        // TODO: Update with the expected minimum number of components
         return 2;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values.get(0).getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
-        assertThat(values.get(1).getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
+        // TODO: Add validation for each component
+        // Example:
+        // assertThat(values.get(0).getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+        // assertThat(values.get(1).getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
     }
 }

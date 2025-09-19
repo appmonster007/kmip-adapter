@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
@@ -19,9 +18,13 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
 
     @Override
     public void serialize(SampleStructure sampleStructure, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException("SampleStructure not supported for spec " + spec);
+            throw new UnsupportedEncodingException(
+                    String.format("%s not supported for KMIP spec %s",
+                            sampleStructure.getClass().getSimpleName(), spec)
+            );
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
@@ -33,9 +36,10 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
         xmlGen.setNextName(QName.valueOf(elementName));
         xmlGen.writeStartObject(sampleStructure);
 
+        // Serialize all fields
         List<KmipDataType> values = sampleStructure.getValues();
         for (KmipDataType kmipDataType : values) {
-            if (kmipDataType != null) {
+            if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
                 serializers.defaultSerializeField(
                         kmipDataType.getKmipTag().getDescription(),
                         kmipDataType,
