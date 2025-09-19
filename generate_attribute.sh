@@ -53,7 +53,7 @@ generate_attribute() {
     
     # 1. Create the main attribute class
     cat > "${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Attribute.java" << EOF
-package org.purpleBean.kmip.common;
+package org.purpleBean.kmip.${SUB_PATH};
 
 import lombok.*;
 import org.purpleBean.kmip.*;

@@ -52,7 +52,7 @@ generate_enum() {
     
     # 1. Create the main enum class
     cat > "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" << EOF
-package org.purpleBean.kmip.common.enumeration;
+package org.purpleBean.kmip.${SUB_PATH//\//.};
 
 import lombok.*;
 import org.purpleBean.kmip.*;
@@ -225,14 +225,14 @@ EOF
 
 # 2. Create JSON Serializer
 cat > "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ENUM_NAME}JsonSerializer.java" << EOF
-package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH//\//.};
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -273,7 +273,7 @@ EOF
 
 # 3. Create JSON Deserializer
 cat > "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}JsonDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH//\//.};
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -283,7 +283,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -373,7 +373,7 @@ EOF
 
 # 4. Create XML Serializer
 cat > "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ENUM_NAME}XmlSerializer.java" << EOF
-package org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH//\//.};
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -381,7 +381,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
@@ -420,7 +420,7 @@ EOF
 
 # 5. Create XML Deserializer
 cat > "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}XmlDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH//\//.};
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -432,7 +432,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -489,14 +489,14 @@ EOF
 
 # 6. Create TTLV Serializer
 cat > "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ENUM_NAME}TtlvSerializer.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH//\//.};
 
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -533,7 +533,7 @@ EOF
 
 # 7. Create TTLV Deserializer
 cat > "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}TtlvDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH//\//.};
 
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -543,7 +543,7 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -580,7 +580,7 @@ EOF
 
 # 8. Create Domain Test
 cat > "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" << EOF
-package org.purpleBean.kmip.common.enumeration;
+package org.purpleBean.kmip.${SUB_PATH//\//.};
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
@@ -663,10 +663,10 @@ EOF
 
 # 9. Create JSON Test
 cat > "${TEST_JAVA}/codec/json/${SUB_PATH}/${ENUM_NAME}JsonTest.java" << EOF
-package org.purpleBean.kmip.codec.json.common.enumeration;
+package org.purpleBean.kmip.codec.json.${SUB_PATH//\//.};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 @DisplayName("${ENUM_NAME} JSON Serialization")
@@ -690,10 +690,10 @@ EOF
 
 # 10. Create XML Test
 cat > "${TEST_JAVA}/codec/xml/${SUB_PATH}/${ENUM_NAME}XmlTest.java" << EOF
-package org.purpleBean.kmip.codec.xml.common.enumeration;
+package org.purpleBean.kmip.codec.xml.${SUB_PATH//\//.};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("${ENUM_NAME} XML Serialization")
@@ -717,10 +717,10 @@ EOF
 
 # 11. Create TTLV Test
 cat > "${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ENUM_NAME}TtlvTest.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.common.enumeration;
+package org.purpleBean.kmip.codec.ttlv.${SUB_PATH//\//.};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 @DisplayName("${ENUM_NAME} TTLV Serialization")
@@ -744,7 +744,7 @@ EOF
 
 # 12. Create Benchmark Subject
 cat > "${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ENUM_NAME}BenchmarkSubject.java" << EOF
-package org.purpleBean.kmip.benchmark.subjects.common.enumeration;
+package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH//\//.};
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -756,7 +756,7 @@ import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
-import org.purpleBean.kmip.common.enumeration.${ENUM_NAME};
+import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
 
 import java.nio.ByteBuffer;
 
@@ -874,31 +874,31 @@ add_service_entry() {
 
 # Add to JSON serializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-    "org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.${ENUM_NAME}JsonSerializer"
+    "org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}JsonSerializer"
 
 # Add to JSON deserializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-    "org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.${ENUM_NAME}JsonDeserializer"
+    "org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}JsonDeserializer"
 
 # Add to XML serializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-    "org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.${ENUM_NAME}XmlSerializer"
+    "org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}XmlSerializer"
 
 # Add to XML deserializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-    "org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.${ENUM_NAME}XmlDeserializer"
+    "org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}XmlDeserializer"
 
 # Add to TTLV serializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-    "org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.${ENUM_NAME}TtlvSerializer"
+    "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}TtlvSerializer"
 
 # Add to TTLV deserializers
 add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-    "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.${ENUM_NAME}TtlvDeserializer"
+    "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}TtlvDeserializer"
 
 # Add to benchmark subjects
 add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-    "org.purpleBean.kmip.benchmark.subjects.common.enumeration.${ENUM_NAME}BenchmarkSubject"
+    "org.purpleBean.kmip.benchmark.subjects.${SUB_PATH//\//.}.${ENUM_NAME}BenchmarkSubject"
 
     echo "Successfully generated files for ${ENUM_NAME}"
     echo "Don't forget to update the Standard enum values in ${ENUM_NAME}.java with actual values from the KMIP specification."
