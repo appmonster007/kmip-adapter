@@ -78,17 +78,27 @@ tasks:
     deps: [install]
 
   perf:
-    desc: Run performance benchmarks with 'perf' profile (skip tests)
+    desc: "Run performance benchmarks (perf profile)"
     cmds:
-      - echo "Running performance benchmarks (-P perf)..."
-      - mvn -q -DskipTests verify -P perf
+      - echo "{{.GREEN}}Running performance benchmarks...{{.RESET}}"
+      - mvn -q -DskipTests verify -P perf \
+          -Dbench.threads=$(nproc) \
+          -Dbench.wi=3 \
+          -Dbench.mi=5 \
+          -Dbench.wt.ms=100 \
+          -Dbench.mt.ms=200
     deps: [install]
 
   perf-fast:
-    desc: Run fast performance benchmarks (-P perf-fast)
+    desc: "Run fast performance benchmarks (perf-fast profile)"
     cmds:
-      - echo "Running fast performance benchmarks (-P perf-fast)..."
-      - mvn -q -DskipTests verify -P perf-fast
+      - echo "{{.GREEN}}Running fast performance benchmarks...{{.RESET}}"
+      - mvn -q -DskipTests verify -P perf-fast \
+          -Dbench.threads=$(nproc) \
+          -Dbench.wi=1 \
+          -Dbench.mi=1 \
+          -Dbench.wt.ms=50 \
+          -Dbench.mt.ms=100
     deps: [install]
 
   # Build and utility tasks

@@ -40,6 +40,14 @@ public final class JmhBenchmarkRunner {
             default -> ResultFormatType.JSON;
         };
 
+        // Parallelism and timing are configurable via system properties
+        int threads = Integer.getInteger("bench.threads", Math.max(1, Runtime.getRuntime().availableProcessors()));
+        int forks = Integer.getInteger("bench.forks", 0);
+        int warmupIters = Integer.getInteger("bench.wi", 2);
+        int measureIters = Integer.getInteger("bench.mi", 3);
+        long warmupMs = Long.getLong("bench.wt.ms", 10L);
+        long measureMs = Long.getLong("bench.mt.ms", 10L);
+
         // Auto-discover benchmark subjects via ServiceLoader and pass them as JMH @Param values
         List<String> subjects = BenchmarkSubjects.discoverNames();
 
@@ -49,16 +57,18 @@ public final class JmhBenchmarkRunner {
                     "org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject");
         }
         System.out.println("JMH Runner discovered subjects: " + subjects);
+        System.out.printf("JMH config => threads=%d, forks=%d, wi=%d, wtMs=%d, mi=%d, mtMs=%d, timeUnit=%s%n",
+                threads, forks, warmupIters, warmupMs, measureIters, measureMs, TimeUnit.MICROSECONDS);
 
         ChainedOptionsBuilder builder = new OptionsBuilder()
                 .include(include)
-                .warmupIterations(3)
-                .warmupTime(TimeValue.seconds(1))
-                .measurementIterations(5)
-                .measurementTime(TimeValue.seconds(1))
-                // Run in-process to avoid classpath issues when using exec:java
-                .forks(0)
-                .threads(1)
+                .warmupIterations(warmupIters)
+                .warmupTime(TimeValue.milliseconds(warmupMs))
+                .measurementIterations(measureIters)
+                .measurementTime(TimeValue.milliseconds(measureMs))
+                // Run in-process to avoid classpath issues when using exec:java (configurable via bench.forks)
+                .forks(forks)
+                .threads(threads)
                 .timeUnit(TimeUnit.MICROSECONDS)
                 .shouldFailOnError(true)
                 .shouldDoGC(true)

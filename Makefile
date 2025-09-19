@@ -73,15 +73,25 @@ perf-runner: ## Run JMH using JmhBenchmarkRunner (skip tests)
 	@echo "${GREEN}Running performance benchmarks via runner...${RESET}"
 	mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
 
-## Run performance benchmarks (profile: perf)
-perf: ## Run performance benchmarks with 'perf' profile (skip tests)
-	@echo "${GREEN}Running performance benchmarks (-P perf)...${RESET}"
-	mvn -q -DskipTests verify -P perf
+## Run performance benchmarks (perf profile)
+perf: ## Run performance benchmarks (perf profile)
+	@echo "${GREEN}Running performance benchmarks...${RESET}"
+	mvn -q -DskipTests verify -P perf \
+		-Dbench.threads=$$(nproc) \
+		-Dbench.wi=3 \
+		-Dbench.mi=5 \
+		-Dbench.wt.ms=100 \
+		-Dbench.mt.ms=200
 
-## Run fast performance benchmarks (profile: perf-fast)
-perf-fast: ## Run fast performance benchmarks (-P perf-fast)
-	@echo "${GREEN}Running fast performance benchmarks (-P perf-fast)...${RESET}"
-	mvn -q -DskipTests verify -P perf-fast
+## Run fast performance benchmarks (perf-fast profile)
+perf-fast: ## Run fast performance benchmarks (perf-fast profile)
+	@echo "${GREEN}Running fast performance benchmarks...${RESET}"
+	mvn -q -DskipTests verify -P perf-fast \
+		-Dbench.threads=$$(nproc) \
+		-Dbench.wi=1 \
+		-Dbench.mi=1 \
+		-Dbench.wt.ms=50 \
+		-Dbench.mt.ms=100
 
 ## Format code (uses Spotless if configured, else skips)
 format: ## Format code (Spotless optional)

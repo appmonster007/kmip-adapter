@@ -66,12 +66,22 @@ perf-runner:
     mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
 
 perf:
-    @echo "${GREEN}Running performance benchmarks (-P perf)...${RESET}"
-    mvn -q -DskipTests verify -P perf
+    @echo "${GREEN}Running performance benchmarks...${RESET}"
+    mvn -q -DskipTests verify -P perf \
+        -Dbench.threads=$$(nproc) \
+        -Dbench.wi=3 \
+        -Dbench.mi=5 \
+        -Dbench.wt.ms=100 \
+        -Dbench.mt.ms=200
 
 perf-fast:
-    @echo "${GREEN}Running fast performance benchmarks (-P perf-fast)...${RESET}"
-    mvn -q -DskipTests verify -P perf-fast
+    @echo "${GREEN}Running fast performance benchmarks...${RESET}"
+    mvn -q -DskipTests verify -P perf-fast \
+        -Dbench.threads=$$(nproc) \
+        -Dbench.wi=1 \
+        -Dbench.mi=1 \
+        -Dbench.wt.ms=50 \
+        -Dbench.mt.ms=100
 
 # Code formatting
 format:
