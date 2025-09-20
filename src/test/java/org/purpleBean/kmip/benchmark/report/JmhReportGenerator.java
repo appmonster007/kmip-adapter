@@ -8,10 +8,8 @@ import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -53,14 +51,22 @@ public final class JmhReportGenerator {
         }
 
         // Group by subject for readability
-        Map<String, List<Row>> bySubject = rows.stream().collect(Collectors.groupingBy(r -> r.subject));
+        Map<String, List<Row>> bySubject = rows.stream()
+                .collect(Collectors.groupingBy(r -> r.subject, TreeMap::new, Collectors.toList()));
 
         StringBuilder md = new StringBuilder();
         md.append("# KMIP Serialization Benchmarks\n\n");
-        md.append("Generated from JMH JSON: ").append(jsonPath).append("\n\n");
+        md.append(String.format("Generated from JMH JSON: [%s](%s)  ", jsonPath, in.getFileName()));
+        AtomicInteger index = new AtomicInteger(1);
+        for (Map.Entry<String, List<Row>> e : bySubject.entrySet()) {
+            String k = e.getKey();
+            md.append(String.format("\n%d. [%s](#%s)  ", index.getAndIncrement(), k, k));
+        }
+        md.append("\n\n");
 
         for (var entry : bySubject.entrySet()) {
             String subject = entry.getKey();
+            md.append(String.format("<a id=\"%s\"></a>\n", subject));
             md.append("## ").append(subject)
                     .append("\n")
                     .append(String.format("\nJSON: %s  ", subjectMetaInfoMap.get(subject).jsonStr))
