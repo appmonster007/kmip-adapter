@@ -42,8 +42,8 @@ public class FooDemoEnum implements KmipEnumeration {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
-                    String.format("Value '%s' for FooDemoEnum is not supported for KMIP spec %s", 
-                    value.getDescription(), spec)
+                    String.format("Value '%s' for FooDemoEnum is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
             );
         }
         this.value = value;
@@ -147,8 +147,11 @@ public class FooDemoEnum implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

@@ -131,10 +131,10 @@ public class ResultReason implements KmipEnumeration {
         FEATURE_NOT_SUPPORTED(0x00000008, "FeatureNotSupported", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         OPERATION_CANCELED_BY_REQUESTER(0x00000009, "OperationCanceledByRequester", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CRYPTOGRAPHIC_FAILURE(0x0000000A, "CryptographicFailure", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ILLEGAL_OPERATION(0x0000000B, "IllegalOperation", KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        ILLEGAL_OPERATION(0x0000000B, "IllegalOperation", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         PERMISSION_DENIED(0x0000000C, "PermissionDenied", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         OBJECT_ARCHIVED(0x0000000D, "ObjectArchived", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        INDEX_OUT_OF_BOUNDS(0x0000000E, "IndexOutOfBounds", KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        INDEX_OUT_OF_BOUNDS(0x0000000E, "IndexOutOfBounds", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         APPLICATION_NAMESPACE_NOT_SUPPORTED(0x0000000F, "ApplicationNamespaceNotSupported", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         KEY_FORMAT_TYPE_NOT_SUPPORTED(0x00000010, "KeyFormatTypeNotSupported", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         KEY_COMPRESSION_TYPE_NOT_SUPPORTED(0x00000011, "KeyCompressionTypeNotSupported", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
@@ -159,6 +159,7 @@ public class ResultReason implements KmipEnumeration {
         BAD_CRYPTOGRAPHIC_PARAMETERS(0x00000024, "BadCryptographicParameters", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         BAD_PASSWORD(0x00000025, "BadPassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         CODEC_ERROR(0x00000026, "CodecError", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RESERVED(0x00000027, "Reserved", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         ILLEGAL_OBJECT_TYPE(0x00000028, "IllegalObjectType", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         INCOMPATIBLE_CRYPTOGRAPHIC_USAGE_MASK(0x00000029, "IncompatibleCryptographicUsageMask", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         INTERNAL_SERVER_ERROR(0x0000002A, "InternalServerError", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
@@ -168,11 +169,15 @@ public class ResultReason implements KmipEnumeration {
         INVALID_CORRELATION_VALUE(0x0000002E, "InvalidCorrelationValue", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         INVALID_CSR(0x0000002F, "InvalidCsr", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         INVALID_OBJECT_TYPE(0x00000030, "InvalidObjectType", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RESERVED_2(0x00000031, "Reserved", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         KEY_WRAP_TYPE_NOT_SUPPORTED(0x00000032, "KeyWrapTypeNotSupported", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RESERVED_3(0x00000033, "Reserved", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         MISSING_INITIALIZATION_VECTOR(0x00000034, "MissingInitializationVector", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         NON_UNIQUE_NAME_ATTRIBUTE(0x00000035, "NonUniqueNameAttribute", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         OBJECT_DESTROYED(0x00000036, "ObjectDestroyed", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         OBJECT_NOT_FOUND(0x00000037, "ObjectNotFound", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RESERVED_4(0x00000038, "Reserved", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        NOT_AUTHORISED(0x00000039, "NotAuthorised", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         SERVER_LIMIT_EXCEEDED(0x0000003A, "ServerLimitExceeded", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         UNKNOWN_ENUMERATION(0x0000003B, "UnknownEnumeration", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         UNKNOWN_MESSAGE_EXTENSION(0x0000003C, "UnknownMessageExtension", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
@@ -192,9 +197,8 @@ public class ResultReason implements KmipEnumeration {
         UNKNOWN_OBJECT_GROUP(0x0000004A, "UnknownObjectGroup", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         CONSTRAINT_VIOLATION(0x0000004B, "ConstraintViolation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         DUPLICATE_PROCESS_REQUEST(0x0000004C, "DuplicateProcessRequest", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CIRCULAR_LINK_ERROR(0x0000004D, "CircularLinkError", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        GENERAL_FAILURE(0x00000100, "GeneralFailure", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        NOT_AUTHORised(0x00000039, "NotAuthorised", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        CIRCULAR_LINK_ERROR(0x0000004D, "CircularLinkError", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        GENERAL_FAILURE(0x00000100, "GeneralFailure", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

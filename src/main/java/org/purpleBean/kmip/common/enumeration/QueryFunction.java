@@ -135,7 +135,7 @@ public class QueryFunction implements KmipEnumeration {
         QUERY_CLIENT_REGISTRATION_METHODS(0x0000000C, "QueryClientRegistrationMethods", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         QUERY_DEFAULTS_INFORMATION(0x0000000D, "QueryDefaultsInformation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         QUERY_STORAGE_PROTECTION_MASKS(0x0000000E, "QueryStorageProtectionMasks", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        QUERY_CREDENTIAL_INFORMATION(0x0000000F, "QueryCredentialInformation", KmipSpec.UnknownVersion, KmipSpec.V3_0);
+        QUERY_CREDENTIAL_INFORMATION(0x0000000F, "QueryCredentialInformation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

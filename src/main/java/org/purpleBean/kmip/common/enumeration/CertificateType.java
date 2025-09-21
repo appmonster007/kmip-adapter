@@ -122,7 +122,7 @@ public class CertificateType implements KmipEnumeration {
     @ToString
     public enum Standard implements Value {
         X_509(0x00000001, "X509", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PGP(0x00000002, "Pgp", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        PGP(0x00000002, "Pgp", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
