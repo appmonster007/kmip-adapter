@@ -245,16 +245,28 @@ def compute_changes(
 
     to_edit = {}
     for name, val, desc, vers in consts:
-        if val in expected_vals:
+        print(f"DEBUG compute_changes: {name} (value=0x{val:08X}), expected_vals has {val}: {val in expected_vals}")
+
+        # Check if this is a placeholder constant that should be replaced
+        is_placeholder = ('reserve' in name.lower() or 'placeholder' in name.lower())
+        correct_spec_name = spec_vals.get(val, "")
+
+        if is_placeholder and correct_spec_name and 'reserved' not in correct_spec_name.lower():
+            # This is a placeholder that should be replaced with correct name/description
+            to_edit[name] = (val, desc, vers, True)  # True -> replace with correct name/description
+            print(f"  -> Added to to_edit (placeholder replacement needed)")
+        elif val in expected_vals:
             # Must support Unknown + target version
             if (unknown_version not in vers or
                 target_version not in vers):
                 # Find the original index in the structure
                 to_edit[name] = (val, desc, vers, True)  # True -> set to Unknown + target_version
+                print(f"  -> Added to to_edit (needs version update)")
         else:
             # Remove target_version if present
             if target_version in vers:
                 to_edit[name] = (val, desc, vers, False)  # False -> remove target_version only
+                print(f"  -> Added to to_edit (remove target version)")
 
     return {
         "missing": missing,
@@ -347,6 +359,7 @@ def convert_to_upper_snake_case(name: str) -> str:
 
 def generate_sorted_enum_constants(
     existing_constants: List[Tuple[str, int, str, str]],
+    spec_vals: Dict[int, str],
     missing_spec: Dict[int, str],
     extra_vals: Set[int],
     to_edit: Dict[str, Tuple[int, str, str, bool]],
@@ -364,18 +377,45 @@ def generate_sorted_enum_constants(
 
     # Add existing constants, updating their version info if needed
     for name, value, description, versions in existing_constants:
-        existing_values.add(value)
-        existing_names.add(name)
+        # Skip reserved enums - don't modify their versions
+        if 'reserved' in name.lower() or 'reserved' in description.lower():
+            # Keep them as-is without version modifications
+            all_constants.append((name, value, description, versions))
+            existing_values.add(value)
+            existing_names.add(name)
+            continue
 
-        # Check if this constant needs version updates
+        # Initialize variables
+        const_name = name
+        description = description  # Use the original description from tuple unpacking
+
+        # Check if this constant needs updates
         if name in to_edit:
-            val, desc, vers, should_add_version = to_edit[name]
-            if should_add_version:
-                # Add target version (for constants in CSV)
-                updated_versions = update_versions_arg(versions, True, target_version, unknown_version)
+            val, desc, vers, should_replace = to_edit[name]
+            if should_replace:
+                # This is a placeholder that should be replaced with correct name/description
+                correct_spec_name = spec_vals.get(value, "")
+                if correct_spec_name and 'reserved' not in correct_spec_name.lower():
+                    const_name = convert_to_upper_snake_case(correct_spec_name)
+                    description = convert_to_pascal_case(const_name)
+                    # Add target version support
+                    updated_versions = update_versions_arg(vers, True, target_version, unknown_version)
+                else:
+                    # Fallback to original name/description
+                    const_name = name
+                    description = desc
+                    updated_versions = vers
             else:
-                # Remove target version (for constants not in CSV)
-                updated_versions = update_versions_arg(versions, False, target_version, unknown_version)
+                # Normal version update
+                if (unknown_version not in vers or
+                    target_version not in vers):
+                    # Add target version (for constants in CSV)
+                    updated_versions = update_versions_arg(vers, True, target_version, unknown_version)
+                else:
+                    # Remove target version (for constants not in CSV)
+                    updated_versions = update_versions_arg(vers, False, target_version, unknown_version)
+                const_name = name
+                description = desc
         else:
             # Only ensure target version support for constants that are in the CSV
             if expected_vals is None or value in expected_vals:
@@ -384,12 +424,20 @@ def generate_sorted_enum_constants(
             else:
                 # For constants not in CSV, keep their existing versions unchanged
                 updated_versions = versions
+            const_name = name
+            # description is already available from the tuple unpacking
 
-        # For existing constants, use the existing description
-        all_constants.append((name, value, description, updated_versions))
+        print(f"DEBUG: Processing {name} (value=0x{value:08X}), is_placeholder={should_replace if name in to_edit else 'N/A'}, correct_spec_name='{spec_vals.get(value, '')}', new_name='{const_name}', new_desc='{description}'")
+
+        # For existing constants, use the description (either original or corrected)
+        all_constants.append((const_name, value, description, updated_versions))
 
     # Add missing constants (only those not already existing by value)
     for value, spec_name in missing_spec.items():
+        # Skip reserved enums - don't add them even if they're in CSV
+        if 'reserved' in spec_name.lower():
+            continue
+
         if value not in existing_values:  # Only add if truly new
             # Convert to UPPER_SNAKE_CASE for enum name
             const_name = convert_to_upper_snake_case(spec_name)
@@ -494,7 +542,8 @@ def apply_changes(
     existing_constants = changes["consts"]
     sorted_lines = generate_sorted_enum_constants(
         existing_constants,
-        spec_vals,
+        spec_vals,  # spec_vals as second parameter
+        dict(zip(changes["missing"], [spec_vals.get(v, "") for v in changes["missing"]])),  # missing_spec as dict
         set(changes["extra"]),  # Convert extra values to set
         changes["to_edit"],
         is_tag,
