@@ -24,7 +24,7 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
     public Operation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(Operation.class, String.format("JSON node cannot be null for Operation deserialization"));
+            ctxt.reportInputMismatch(Operation.class, "JSON node cannot be null for Operation deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Operation.class, String.format("Invalid KMIP tag for Operation"));
+                ctxt.reportInputMismatch(Operation.class, "Invalid KMIP tag for Operation");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(Operation.class,
-                    String.format("Expected object with %s tag for Operation, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for Operation, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(Operation.class, String.format("Missing or non-text 'type' field for Operation"));
+            ctxt.reportInputMismatch(Operation.class, "Missing or non-text 'type' field for Operation");
             return null;
         }
 

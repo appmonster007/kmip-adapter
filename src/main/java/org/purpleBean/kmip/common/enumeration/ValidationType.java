@@ -121,11 +121,11 @@ public class ValidationType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        HARDWARE(0x00000002, "Hardware", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SOFTWARE(0x00000003, "Software", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        FIRMWARE(0x00000004, "Firmware", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        HYBRID(0x00000005, "Hybrid", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HARDWARE(0x00000002, "Hardware", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SOFTWARE(0x00000003, "Software", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        FIRMWARE(0x00000004, "Firmware", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HYBRID(0x00000005, "Hybrid", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

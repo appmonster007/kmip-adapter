@@ -24,7 +24,7 @@ public class QueryFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<
     public QueryFunction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(QueryFunction.class, String.format("JSON node cannot be null for QueryFunction deserialization"));
+            ctxt.reportInputMismatch(QueryFunction.class, "JSON node cannot be null for QueryFunction deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class QueryFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(QueryFunction.class, String.format("Invalid KMIP tag for QueryFunction"));
+                ctxt.reportInputMismatch(QueryFunction.class, "Invalid KMIP tag for QueryFunction");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class QueryFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(QueryFunction.class,
-                    String.format("Expected object with %s tag for QueryFunction, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for QueryFunction, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class QueryFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(QueryFunction.class, String.format("Missing or non-text 'type' field for QueryFunction"));
+            ctxt.reportInputMismatch(QueryFunction.class, "Missing or non-text 'type' field for QueryFunction");
             return null;
         }
 

@@ -121,13 +121,13 @@ public class DestroyAction implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        KEY_MATERIAL_DELETED(0x00000002, "KeyMaterialDeleted", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        KEY_MATERIAL_SHREDDED(0x00000003, "KeyMaterialShredded", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        META_DATA_DELETED(0x00000004, "MetaDataDeleted", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        META_DATA_SHREDDED(0x00000005, "MetaDataShredded", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        DELETED(0x00000006, "Deleted", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SHREDDED(0x00000007, "Shredded", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        KEY_MATERIAL_DELETED(0x00000002, "KeyMaterialDeleted", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        KEY_MATERIAL_SHREDDED(0x00000003, "KeyMaterialShredded", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        META_DATA_DELETED(0x00000004, "MetaDataDeleted", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        META_DATA_SHREDDED(0x00000005, "MetaDataShredded", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DELETED(0x00000006, "Deleted", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHREDDED(0x00000007, "Shredded", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

@@ -24,7 +24,7 @@ public class SplitKeyMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
     public SplitKeyMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(SplitKeyMethod.class, String.format("JSON node cannot be null for SplitKeyMethod deserialization"));
+            ctxt.reportInputMismatch(SplitKeyMethod.class, "JSON node cannot be null for SplitKeyMethod deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class SplitKeyMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(SplitKeyMethod.class, String.format("Invalid KMIP tag for SplitKeyMethod"));
+                ctxt.reportInputMismatch(SplitKeyMethod.class, "Invalid KMIP tag for SplitKeyMethod");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class SplitKeyMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(SplitKeyMethod.class,
-                    String.format("Expected object with %s tag for SplitKeyMethod, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for SplitKeyMethod, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class SplitKeyMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(SplitKeyMethod.class, String.format("Missing or non-text 'type' field for SplitKeyMethod"));
+            ctxt.reportInputMismatch(SplitKeyMethod.class, "Missing or non-text 'type' field for SplitKeyMethod");
             return null;
         }
 

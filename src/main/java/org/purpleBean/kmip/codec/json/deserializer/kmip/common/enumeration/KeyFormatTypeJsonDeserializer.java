@@ -24,7 +24,7 @@ public class KeyFormatTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<
     public KeyFormatType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(KeyFormatType.class, String.format("JSON node cannot be null for KeyFormatType deserialization"));
+            ctxt.reportInputMismatch(KeyFormatType.class, "JSON node cannot be null for KeyFormatType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class KeyFormatTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(KeyFormatType.class, String.format("Invalid KMIP tag for KeyFormatType"));
+                ctxt.reportInputMismatch(KeyFormatType.class, "Invalid KMIP tag for KeyFormatType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class KeyFormatTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(KeyFormatType.class,
-                    String.format("Expected object with %s tag for KeyFormatType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for KeyFormatType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class KeyFormatTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(KeyFormatType.class, String.format("Missing or non-text 'type' field for KeyFormatType"));
+            ctxt.reportInputMismatch(KeyFormatType.class, "Missing or non-text 'type' field for KeyFormatType");
             return null;
         }
 

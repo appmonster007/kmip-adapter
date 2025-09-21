@@ -18,8 +18,8 @@ public class SimpleRequestHeaderJsonDeserializer extends KmipDataTypeJsonDeseria
     public SimpleRequestHeader deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
-        if (!node.isObject() || tag != kmipTag.getValue()) {
+        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).value();
+        if (!node.isObject() || tag != kmipTag.value()) {
             ctxt.reportInputMismatch(SimpleRequestHeader.class, "Expected object for SimpleRequestHeader");
             return null;
         }
@@ -33,7 +33,7 @@ public class SimpleRequestHeaderJsonDeserializer extends KmipDataTypeJsonDeseria
         SimpleRequestHeader.SimpleRequestHeaderBuilder builder = SimpleRequestHeader.builder();
 
         for (JsonNode valueNode : values) {
-            KmipTag.Value childTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
+            KmipTag.Value childTag = p.getCodec().treeToValue(valueNode, KmipTag.class).value();
             if (childTag == KmipTag.Standard.PROTOCOL_VERSION) {
                 builder.protocolVersion(p.getCodec().treeToValue(valueNode, ProtocolVersion.class));
             }

@@ -24,7 +24,7 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
     public RevocationReasonCode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(RevocationReasonCode.class, String.format("JSON node cannot be null for RevocationReasonCode deserialization"));
+            ctxt.reportInputMismatch(RevocationReasonCode.class, "JSON node cannot be null for RevocationReasonCode deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(RevocationReasonCode.class, String.format("Invalid KMIP tag for RevocationReasonCode"));
+                ctxt.reportInputMismatch(RevocationReasonCode.class, "Invalid KMIP tag for RevocationReasonCode");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(RevocationReasonCode.class,
-                    String.format("Expected object with %s tag for RevocationReasonCode, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for RevocationReasonCode, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(RevocationReasonCode.class, String.format("Missing or non-text 'type' field for RevocationReasonCode"));
+            ctxt.reportInputMismatch(RevocationReasonCode.class, "Missing or non-text 'type' field for RevocationReasonCode");
             return null;
         }
 

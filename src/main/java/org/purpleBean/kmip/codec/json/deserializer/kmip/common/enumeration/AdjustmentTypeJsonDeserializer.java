@@ -24,7 +24,7 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
     public AdjustmentType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(AdjustmentType.class, String.format("JSON node cannot be null for AdjustmentType deserialization"));
+            ctxt.reportInputMismatch(AdjustmentType.class, "JSON node cannot be null for AdjustmentType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AdjustmentType.class, String.format("Invalid KMIP tag for AdjustmentType"));
+                ctxt.reportInputMismatch(AdjustmentType.class, "Invalid KMIP tag for AdjustmentType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(AdjustmentType.class,
-                    String.format("Expected object with %s tag for AdjustmentType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for AdjustmentType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AdjustmentType.class, String.format("Missing or non-text 'type' field for AdjustmentType"));
+            ctxt.reportInputMismatch(AdjustmentType.class, "Missing or non-text 'type' field for AdjustmentType");
             return null;
         }
 

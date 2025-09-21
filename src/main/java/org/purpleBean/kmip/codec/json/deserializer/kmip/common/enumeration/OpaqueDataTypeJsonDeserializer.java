@@ -24,7 +24,7 @@ public class OpaqueDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
     public OpaqueDataType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(OpaqueDataType.class, String.format("JSON node cannot be null for OpaqueDataType deserialization"));
+            ctxt.reportInputMismatch(OpaqueDataType.class, "JSON node cannot be null for OpaqueDataType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class OpaqueDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(OpaqueDataType.class, String.format("Invalid KMIP tag for OpaqueDataType"));
+                ctxt.reportInputMismatch(OpaqueDataType.class, "Invalid KMIP tag for OpaqueDataType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class OpaqueDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(OpaqueDataType.class,
-                    String.format("Expected object with %s tag for OpaqueDataType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for OpaqueDataType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class OpaqueDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(OpaqueDataType.class, String.format("Missing or non-text 'type' field for OpaqueDataType"));
+            ctxt.reportInputMismatch(OpaqueDataType.class, "Missing or non-text 'type' field for OpaqueDataType");
             return null;
         }
 

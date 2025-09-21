@@ -121,11 +121,11 @@ public class ClientRegistrationMethod implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SERVER_PRE_GENERATED(0x00000002, "ServerPreGenerated", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SERVER_ON_DEMAND(0x00000003, "ServerOnDemand", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CLIENT_GENERATED(0x00000004, "ClientGenerated", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CLIENT_REGISTERED(0x00000005, "ClientRegistered", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SERVER_PRE_GENERATED(0x00000002, "ServerPreGenerated", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SERVER_ON_DEMAND(0x00000003, "ServerOnDemand", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CLIENT_GENERATED(0x00000004, "ClientGenerated", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CLIENT_REGISTERED(0x00000005, "ClientRegistered", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

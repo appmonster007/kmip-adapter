@@ -24,7 +24,7 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
     public ProfileName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ProfileName.class, String.format("JSON node cannot be null for ProfileName deserialization"));
+            ctxt.reportInputMismatch(ProfileName.class, "JSON node cannot be null for ProfileName deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ProfileName.class, String.format("Invalid KMIP tag for ProfileName"));
+                ctxt.reportInputMismatch(ProfileName.class, "Invalid KMIP tag for ProfileName");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ProfileName.class,
-                    String.format("Expected object with %s tag for ProfileName, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ProfileName, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ProfileName.class, String.format("Missing or non-text 'type' field for ProfileName"));
+            ctxt.reportInputMismatch(ProfileName.class, "Missing or non-text 'type' field for ProfileName");
             return null;
         }
 

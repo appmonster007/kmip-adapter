@@ -8,6 +8,7 @@ import argparse
 import csv
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 
@@ -20,11 +21,13 @@ SPECIAL_CATEGORY_TO_FILE = {
     "Adjustment Type": "AdjustmentType",
     "Batch Error Continuation Option": "BatchErrorContinuationOption",
     "Digital Signature Algorithm": "DigitalSignatureAlgorithm",
+    "Data": "DataEnumeration",
 }
 
 # Categories in CSV that are not represented as enums or should be ignored here
 IGNORE_CATEGORIES = {
     "Opaque Data Type",  # appears to only have extensions in CSV
+    "Item Type",  # TTLV data types, not business domain enums
 }
 
 # Special file mappings for non-enum files with their full paths
@@ -39,6 +42,50 @@ SPECIAL_FILE_MAPPINGS = {
 
 CONST_LINE_RE = re.compile(r"^\s*([A-Z0-9_]+)\s*\(\s*0x([0-9A-Fa-f]{6,8})\s*,\s*\"([^\"]*)\"\s*,\s*(.*?)\)\s*[,;]?\s*$")
 ENUM_HEADER_RE = re.compile(r"\benum\s+Standard\s+implements?\s+Value|\benum\s+Standard\s+\w*\s*implements?\s*Value?")
+
+
+def generate_enum_file(file_stem: str, root_dir: Path) -> bool:
+    """
+    Generate a new Java enum file using generate_enum.sh script.
+    
+    Args:
+        file_stem: The name of the enum file to generate (without .java extension)
+        root_dir: The root directory of the project
+        
+    Returns:
+        True if generation was successful, False otherwise
+    """
+    generate_script = root_dir / "generate_enum.sh"
+    
+    if not generate_script.exists():
+        print(f"Error: generate_enum.sh script not found at {generate_script}")
+        return False
+    
+    try:
+        print(f"Generating missing enum file: {file_stem}")
+        result = subprocess.run(
+            ["sh", str(generate_script), file_stem],
+            cwd=str(root_dir),
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        if result.returncode == 0:
+            print(f"Successfully generated {file_stem}.java")
+            return True
+        else:
+            print(f"Error generating {file_stem}.java:")
+            print(f"STDOUT: {result.stdout}")
+            print(f"STDERR: {result.stderr}")
+            return False
+            
+    except subprocess.TimeoutExpired:
+        print(f"Timeout generating {file_stem}.java")
+        return False
+    except Exception as e:
+        print(f"Exception generating {file_stem}.java: {e}")
+        return False
 
 
 def convert_version_to_constant(version: str) -> str:
@@ -760,8 +807,15 @@ def main():
         for file_stem, spec_vals in csv_vals.items():
             java_file = get_java_file_path(file_stem, root, enum_dir)
             if not java_file or not java_file.exists():
-                print(f"Warning: No Java file found for {file_stem}", file=sys.stderr)
-                continue
+                print(f"Java file not found for {file_stem}, attempting to generate...")
+                if not generate_enum_file(file_stem, root):
+                    print(f"Warning: Could not generate file for {file_stem}, skipping", file=sys.stderr)
+                    continue
+                # Try to get the file path again after generation
+                java_file = get_java_file_path(file_stem, root, enum_dir)
+                if not java_file or not java_file.exists():
+                    print(f"Warning: File still not found after generation for {file_stem}, skipping", file=sys.stderr)
+                    continue
 
             result = process_file(
                 file_stem=file_stem,

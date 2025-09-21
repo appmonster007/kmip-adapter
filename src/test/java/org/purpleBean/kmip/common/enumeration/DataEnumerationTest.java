@@ -20,17 +20,17 @@ class DataEnumerationTest extends AbstractKmipEnumerationSuite<DataEnumeration> 
 
     @Override
     protected DataEnumeration createDefault() {
-        return new DataEnumeration(DataEnumeration.Standard.PLACEHOLDER_1);
+        return new DataEnumeration(DataEnumeration.Standard.DECRYPT);
     }
 
     @Override
     protected DataEnumeration createEqualToDefault() {
-        return new DataEnumeration(DataEnumeration.Standard.PLACEHOLDER_1);
+        return new DataEnumeration(DataEnumeration.Standard.DECRYPT);
     }
 
     @Override
     protected DataEnumeration createDifferentFromDefault() {
-        return new DataEnumeration(DataEnumeration.Standard.PLACEHOLDER_2);
+        return new DataEnumeration(DataEnumeration.Standard.ENCRYPT);
     }
 
     @Override

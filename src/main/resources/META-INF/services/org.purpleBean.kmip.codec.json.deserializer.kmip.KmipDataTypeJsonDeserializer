@@ -16,12 +16,14 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ClientRegist
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.CredentialTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.CryptographicAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DataEnumerationJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DeactivationReasonCodeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DerivationMethodJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DestroyActionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DigitalSignatureAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.DrbgAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.EncodingOptionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.EndpointRoleJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.EphemeralJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.Fips186VariationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.HashingAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.InteropFunctionJsonDeserializer
@@ -34,10 +36,12 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.LinkTypeJson
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.MaskGeneratorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.NameTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.NistKeyTypeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ObjectClassJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ObjectGroupMemberJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ObjectTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.OpaqueDataTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.OperationJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.OtpAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.PaddingMethodJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ProcessingStageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ProfileNameJsonDeserializer
@@ -54,6 +58,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.RotateNameTy
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.SecretDataTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ShreddingAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.SplitKeyMethodJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.SplitKeyPolynomialJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.StateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.TicketTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.UniqueIdentifierJsonDeserializer

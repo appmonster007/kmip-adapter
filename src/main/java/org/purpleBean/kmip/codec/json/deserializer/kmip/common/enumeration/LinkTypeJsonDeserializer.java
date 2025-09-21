@@ -24,7 +24,7 @@ public class LinkTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<LinkT
     public LinkType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(LinkType.class, String.format("JSON node cannot be null for LinkType deserialization"));
+            ctxt.reportInputMismatch(LinkType.class, "JSON node cannot be null for LinkType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class LinkTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<LinkT
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(LinkType.class, String.format("Invalid KMIP tag for LinkType"));
+                ctxt.reportInputMismatch(LinkType.class, "Invalid KMIP tag for LinkType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class LinkTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<LinkT
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(LinkType.class,
-                    String.format("Expected object with %s tag for LinkType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for LinkType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class LinkTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<LinkT
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(LinkType.class, String.format("Missing or non-text 'type' field for LinkType"));
+            ctxt.reportInputMismatch(LinkType.class, "Missing or non-text 'type' field for LinkType");
             return null;
         }
 

@@ -121,7 +121,7 @@ public class TicketType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        LOGIN(0x00000001, "Login", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        LOGIN(0x00000001, "Login", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

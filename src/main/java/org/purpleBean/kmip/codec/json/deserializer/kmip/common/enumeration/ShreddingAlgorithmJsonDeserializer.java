@@ -24,7 +24,7 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
     public ShreddingAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ShreddingAlgorithm.class, String.format("JSON node cannot be null for ShreddingAlgorithm deserialization"));
+            ctxt.reportInputMismatch(ShreddingAlgorithm.class, "JSON node cannot be null for ShreddingAlgorithm deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ShreddingAlgorithm.class, String.format("Invalid KMIP tag for ShreddingAlgorithm"));
+                ctxt.reportInputMismatch(ShreddingAlgorithm.class, "Invalid KMIP tag for ShreddingAlgorithm");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ShreddingAlgorithm.class,
-                    String.format("Expected object with %s tag for ShreddingAlgorithm, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ShreddingAlgorithm, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ShreddingAlgorithm.class, String.format("Missing or non-text 'type' field for ShreddingAlgorithm"));
+            ctxt.reportInputMismatch(ShreddingAlgorithm.class, "Missing or non-text 'type' field for ShreddingAlgorithm");
             return null;
         }
 

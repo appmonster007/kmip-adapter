@@ -16,12 +16,14 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ClientRegistr
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.CredentialTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.CryptographicAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DataEnumerationXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DeactivationReasonCodeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DerivationMethodXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DestroyActionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DigitalSignatureAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.DrbgAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.EncodingOptionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.EndpointRoleXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.EphemeralXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.Fips186VariationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.HashingAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.InteropFunctionXmlDeserializer
@@ -34,10 +36,12 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.LinkTypeXmlDe
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.MaskGeneratorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.NameTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.NistKeyTypeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ObjectClassXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ObjectGroupMemberXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ObjectTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.OpaqueDataTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.OperationXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.OtpAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.PaddingMethodXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ProcessingStageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ProfileNameXmlDeserializer
@@ -54,6 +58,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.RotateNameTyp
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.SecretDataTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ShreddingAlgorithmXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.SplitKeyMethodXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.SplitKeyPolynomialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.StateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.TicketTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.UniqueIdentifierXmlDeserializer

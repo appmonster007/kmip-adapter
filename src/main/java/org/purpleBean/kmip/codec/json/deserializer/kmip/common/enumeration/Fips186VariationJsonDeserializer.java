@@ -24,7 +24,7 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
     public Fips186Variation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(Fips186Variation.class, String.format("JSON node cannot be null for Fips186Variation deserialization"));
+            ctxt.reportInputMismatch(Fips186Variation.class, "JSON node cannot be null for Fips186Variation deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Fips186Variation.class, String.format("Invalid KMIP tag for Fips186Variation"));
+                ctxt.reportInputMismatch(Fips186Variation.class, "Invalid KMIP tag for Fips186Variation");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(Fips186Variation.class,
-                    String.format("Expected object with %s tag for Fips186Variation, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for Fips186Variation, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(Fips186Variation.class, String.format("Missing or non-text 'type' field for Fips186Variation"));
+            ctxt.reportInputMismatch(Fips186Variation.class, "Missing or non-text 'type' field for Fips186Variation");
             return null;
         }
 

@@ -121,13 +121,13 @@ public class Fips186Variation implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        GP_X_ORIGINAL(0x00000002, "GpXOriginal", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        GP_X_CHANGE_NOTICE(0x00000003, "GpXChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        X_ORIGINAL(0x00000004, "XOriginal", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        X_CHANGE_NOTICE(0x00000005, "XChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        K_ORIGINAL(0x00000006, "KOriginal", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        K_CHANGE_NOTICE(0x00000007, "KChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        GP_X_ORIGINAL(0x00000002, "GpXOriginal", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        GP_X_CHANGE_NOTICE(0x00000003, "GpXChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        X_ORIGINAL(0x00000004, "XOriginal", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        X_CHANGE_NOTICE(0x00000005, "XChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        K_ORIGINAL(0x00000006, "KOriginal", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        K_CHANGE_NOTICE(0x00000007, "KChangeNotice", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

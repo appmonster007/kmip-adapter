@@ -15,12 +15,14 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ClientRegistra
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.CredentialTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.CryptographicAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DataEnumerationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DeactivationReasonCodeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DerivationMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DestroyActionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DigitalSignatureAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.DrbgAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.EncodingOptionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.EndpointRoleTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.EphemeralTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.Fips186VariationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.HashingAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.InteropFunctionTtlvSerializer
@@ -33,10 +35,12 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.LinkTypeTtlvSe
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.MaskGeneratorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.NameTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.NistKeyTypeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ObjectClassTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ObjectGroupMemberTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ObjectTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.OpaqueDataTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.OperationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.OtpAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.PaddingMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ProcessingStageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ProfileNameTtlvSerializer
@@ -53,6 +57,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.RotateNameType
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.SecretDataTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ShreddingAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.SplitKeyMethodTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.SplitKeyPolynomialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.StateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.TicketTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.UniqueIdentifierTtlvSerializer

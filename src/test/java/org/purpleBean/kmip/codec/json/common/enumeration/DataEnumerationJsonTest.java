@@ -13,11 +13,11 @@ class DataEnumerationJsonTest extends AbstractJsonSerializationSuite<DataEnumera
 
     @Override
     protected DataEnumeration createDefault() {
-        return new DataEnumeration(DataEnumeration.Standard.PLACEHOLDER_1);
+        return new DataEnumeration(DataEnumeration.Standard.DECRYPT);
     }
 
     @Override
     protected DataEnumeration createVariant() {
-        return new DataEnumeration(DataEnumeration.Standard.PLACEHOLDER_2);
+        return new DataEnumeration(DataEnumeration.Standard.ENCRYPT);
     }
 }

@@ -121,9 +121,9 @@ public class UnwrapMode implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        PROCESSED(0x00000002, "Processed", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        NOT_PROCESSED(0x00000003, "NotProcessed", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PROCESSED(0x00000002, "Processed", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        NOT_PROCESSED(0x00000003, "NotProcessed", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

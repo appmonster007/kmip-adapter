@@ -24,7 +24,7 @@ public class InteropFunctionJsonDeserializer extends KmipDataTypeJsonDeserialize
     public InteropFunction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(InteropFunction.class, String.format("JSON node cannot be null for InteropFunction deserialization"));
+            ctxt.reportInputMismatch(InteropFunction.class, "JSON node cannot be null for InteropFunction deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class InteropFunctionJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(InteropFunction.class, String.format("Invalid KMIP tag for InteropFunction"));
+                ctxt.reportInputMismatch(InteropFunction.class, "Invalid KMIP tag for InteropFunction");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class InteropFunctionJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(InteropFunction.class,
-                    String.format("Expected object with %s tag for InteropFunction, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for InteropFunction, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class InteropFunctionJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(InteropFunction.class, String.format("Missing or non-text 'type' field for InteropFunction"));
+            ctxt.reportInputMismatch(InteropFunction.class, "Missing or non-text 'type' field for InteropFunction");
             return null;
         }
 

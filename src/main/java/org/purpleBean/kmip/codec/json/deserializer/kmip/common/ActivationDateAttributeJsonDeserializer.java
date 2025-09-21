@@ -26,7 +26,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, String.format("JSON node cannot be null for ActivationDateAttribute deserialization"));
+            ctxt.reportInputMismatch(ActivationDateAttribute.class, "JSON node cannot be null for ActivationDateAttribute deserialization");
             return null;
         }
 
@@ -35,7 +35,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ActivationDateAttribute.class, String.format("Invalid KMIP tag for ActivationDateAttribute"));
+                ctxt.reportInputMismatch(ActivationDateAttribute.class, "Invalid KMIP tag for ActivationDateAttribute");
                 return null;
             }
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ActivationDateAttribute.class, "Expected object for ActivationDateAttribute");
             return null;
         }
@@ -55,7 +55,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, String.format("Missing or non-text 'type' field for ActivationDateAttribute"));
+            ctxt.reportInputMismatch(ActivationDateAttribute.class, "Missing or non-text 'type' field for ActivationDateAttribute");
             return null;
         }
 

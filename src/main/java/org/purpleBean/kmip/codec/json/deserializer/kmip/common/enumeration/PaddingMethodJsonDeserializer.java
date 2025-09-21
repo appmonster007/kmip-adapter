@@ -24,7 +24,7 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
     public PaddingMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(PaddingMethod.class, String.format("JSON node cannot be null for PaddingMethod deserialization"));
+            ctxt.reportInputMismatch(PaddingMethod.class, "JSON node cannot be null for PaddingMethod deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(PaddingMethod.class, String.format("Invalid KMIP tag for PaddingMethod"));
+                ctxt.reportInputMismatch(PaddingMethod.class, "Invalid KMIP tag for PaddingMethod");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(PaddingMethod.class,
-                    String.format("Expected object with %s tag for PaddingMethod, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for PaddingMethod, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(PaddingMethod.class, String.format("Missing or non-text 'type' field for PaddingMethod"));
+            ctxt.reportInputMismatch(PaddingMethod.class, "Missing or non-text 'type' field for PaddingMethod");
             return null;
         }
 

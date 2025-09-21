@@ -24,7 +24,7 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
     public ValidationAuthorityType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ValidationAuthorityType.class, String.format("JSON node cannot be null for ValidationAuthorityType deserialization"));
+            ctxt.reportInputMismatch(ValidationAuthorityType.class, "JSON node cannot be null for ValidationAuthorityType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ValidationAuthorityType.class, String.format("Invalid KMIP tag for ValidationAuthorityType"));
+                ctxt.reportInputMismatch(ValidationAuthorityType.class, "Invalid KMIP tag for ValidationAuthorityType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ValidationAuthorityType.class,
-                    String.format("Expected object with %s tag for ValidationAuthorityType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ValidationAuthorityType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ValidationAuthorityType.class, String.format("Missing or non-text 'type' field for ValidationAuthorityType"));
+            ctxt.reportInputMismatch(ValidationAuthorityType.class, "Missing or non-text 'type' field for ValidationAuthorityType");
             return null;
         }
 

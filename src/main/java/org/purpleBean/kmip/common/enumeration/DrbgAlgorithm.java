@@ -121,11 +121,11 @@ public class DrbgAlgorithm implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        DUAL_EC(0x00000002, "DualEc", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        HASH(0x00000003, "Hash", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        HMAC(0x00000004, "Hmac", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CTR(0x00000005, "Ctr", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DUAL_EC(0x00000002, "DualEc", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HASH(0x00000003, "Hash", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HMAC(0x00000004, "Hmac", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CTR(0x00000005, "Ctr", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

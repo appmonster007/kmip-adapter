@@ -121,9 +121,9 @@ public class ProcessingStage implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        SUBMITTED(0x00000001, "Submitted", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        IN_PROCESS(0x00000002, "InProcess", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        COMPLETED(0x00000003, "Completed", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        SUBMITTED(0x00000001, "Submitted", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        IN_PROCESS(0x00000002, "InProcess", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        COMPLETED(0x00000003, "Completed", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

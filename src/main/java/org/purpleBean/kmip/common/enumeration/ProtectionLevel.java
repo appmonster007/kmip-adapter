@@ -121,8 +121,8 @@ public class ProtectionLevel implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        HIGH(0x00000001, "High", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        LOW(0x00000002, "Low", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        HIGH(0x00000001, "High", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOW(0x00000002, "Low", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

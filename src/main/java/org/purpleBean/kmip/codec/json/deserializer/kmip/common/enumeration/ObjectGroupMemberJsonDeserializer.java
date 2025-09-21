@@ -24,7 +24,7 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
     public ObjectGroupMember deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ObjectGroupMember.class, String.format("JSON node cannot be null for ObjectGroupMember deserialization"));
+            ctxt.reportInputMismatch(ObjectGroupMember.class, "JSON node cannot be null for ObjectGroupMember deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ObjectGroupMember.class, String.format("Invalid KMIP tag for ObjectGroupMember"));
+                ctxt.reportInputMismatch(ObjectGroupMember.class, "Invalid KMIP tag for ObjectGroupMember");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ObjectGroupMember.class,
-                    String.format("Expected object with %s tag for ObjectGroupMember, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ObjectGroupMember, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ObjectGroupMember.class, String.format("Missing or non-text 'type' field for ObjectGroupMember"));
+            ctxt.reportInputMismatch(ObjectGroupMember.class, "Missing or non-text 'type' field for ObjectGroupMember");
             return null;
         }
 

@@ -24,7 +24,7 @@ public class AttestationTypeJsonDeserializer extends KmipDataTypeJsonDeserialize
     public AttestationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(AttestationType.class, String.format("JSON node cannot be null for AttestationType deserialization"));
+            ctxt.reportInputMismatch(AttestationType.class, "JSON node cannot be null for AttestationType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class AttestationTypeJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttestationType.class, String.format("Invalid KMIP tag for AttestationType"));
+                ctxt.reportInputMismatch(AttestationType.class, "Invalid KMIP tag for AttestationType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class AttestationTypeJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(AttestationType.class,
-                    String.format("Expected object with %s tag for AttestationType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for AttestationType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class AttestationTypeJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttestationType.class, String.format("Missing or non-text 'type' field for AttestationType"));
+            ctxt.reportInputMismatch(AttestationType.class, "Missing or non-text 'type' field for AttestationType");
             return null;
         }
 

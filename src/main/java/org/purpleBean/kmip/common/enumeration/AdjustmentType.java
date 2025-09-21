@@ -121,9 +121,9 @@ public class AdjustmentType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        INCREMENT(0x00000001, "Increment", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        DECREMENT(0x00000002, "Decrement", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        NEGATE(0x00000003, "Negate", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        INCREMENT(0x00000001, "Increment", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DECREMENT(0x00000002, "Decrement", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        NEGATE(0x00000003, "Negate", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

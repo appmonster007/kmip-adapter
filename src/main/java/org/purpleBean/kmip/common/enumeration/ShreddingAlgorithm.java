@@ -121,9 +121,9 @@ public class ShreddingAlgorithm implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        CRYPTOGRAPHIC(0x00000002, "Cryptographic", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        UNSUPPORTED(0x00000003, "Unsupported", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CRYPTOGRAPHIC(0x00000002, "Cryptographic", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        UNSUPPORTED(0x00000003, "Unsupported", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

@@ -24,7 +24,7 @@ public class NistKeyTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ni
     public NistKeyType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(NistKeyType.class, String.format("JSON node cannot be null for NistKeyType deserialization"));
+            ctxt.reportInputMismatch(NistKeyType.class, "JSON node cannot be null for NistKeyType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class NistKeyTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ni
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(NistKeyType.class, String.format("Invalid KMIP tag for NistKeyType"));
+                ctxt.reportInputMismatch(NistKeyType.class, "Invalid KMIP tag for NistKeyType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class NistKeyTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ni
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(NistKeyType.class,
-                    String.format("Expected object with %s tag for NistKeyType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for NistKeyType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class NistKeyTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ni
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(NistKeyType.class, String.format("Missing or non-text 'type' field for NistKeyType"));
+            ctxt.reportInputMismatch(NistKeyType.class, "Missing or non-text 'type' field for NistKeyType");
             return null;
         }
 

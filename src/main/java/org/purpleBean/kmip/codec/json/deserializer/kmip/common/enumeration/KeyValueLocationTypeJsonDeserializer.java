@@ -24,7 +24,7 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
     public KeyValueLocationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(KeyValueLocationType.class, String.format("JSON node cannot be null for KeyValueLocationType deserialization"));
+            ctxt.reportInputMismatch(KeyValueLocationType.class, "JSON node cannot be null for KeyValueLocationType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(KeyValueLocationType.class, String.format("Invalid KMIP tag for KeyValueLocationType"));
+                ctxt.reportInputMismatch(KeyValueLocationType.class, "Invalid KMIP tag for KeyValueLocationType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(KeyValueLocationType.class,
-                    String.format("Expected object with %s tag for KeyValueLocationType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for KeyValueLocationType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(KeyValueLocationType.class, String.format("Missing or non-text 'type' field for KeyValueLocationType"));
+            ctxt.reportInputMismatch(KeyValueLocationType.class, "Missing or non-text 'type' field for KeyValueLocationType");
             return null;
         }
 

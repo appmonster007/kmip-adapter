@@ -24,7 +24,7 @@ public class ValidityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseriali
     public ValidityIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ValidityIndicator.class, String.format("JSON node cannot be null for ValidityIndicator deserialization"));
+            ctxt.reportInputMismatch(ValidityIndicator.class, "JSON node cannot be null for ValidityIndicator deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ValidityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseriali
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ValidityIndicator.class, String.format("Invalid KMIP tag for ValidityIndicator"));
+                ctxt.reportInputMismatch(ValidityIndicator.class, "Invalid KMIP tag for ValidityIndicator");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ValidityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseriali
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ValidityIndicator.class,
-                    String.format("Expected object with %s tag for ValidityIndicator, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ValidityIndicator, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ValidityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseriali
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ValidityIndicator.class, String.format("Missing or non-text 'type' field for ValidityIndicator"));
+            ctxt.reportInputMismatch(ValidityIndicator.class, "Missing or non-text 'type' field for ValidityIndicator");
             return null;
         }
 

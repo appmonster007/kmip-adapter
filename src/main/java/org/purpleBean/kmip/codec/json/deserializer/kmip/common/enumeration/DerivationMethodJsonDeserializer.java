@@ -24,7 +24,7 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
     public DerivationMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(DerivationMethod.class, String.format("JSON node cannot be null for DerivationMethod deserialization"));
+            ctxt.reportInputMismatch(DerivationMethod.class, "JSON node cannot be null for DerivationMethod deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(DerivationMethod.class, String.format("Invalid KMIP tag for DerivationMethod"));
+                ctxt.reportInputMismatch(DerivationMethod.class, "Invalid KMIP tag for DerivationMethod");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(DerivationMethod.class,
-                    String.format("Expected object with %s tag for DerivationMethod, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for DerivationMethod, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(DerivationMethod.class, String.format("Missing or non-text 'type' field for DerivationMethod"));
+            ctxt.reportInputMismatch(DerivationMethod.class, "Missing or non-text 'type' field for DerivationMethod");
             return null;
         }
 

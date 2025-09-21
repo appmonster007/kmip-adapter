@@ -24,7 +24,7 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
     public DigitalSignatureAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, String.format("JSON node cannot be null for DigitalSignatureAlgorithm deserialization"));
+            ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, "JSON node cannot be null for DigitalSignatureAlgorithm deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, String.format("Invalid KMIP tag for DigitalSignatureAlgorithm"));
+                ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, "Invalid KMIP tag for DigitalSignatureAlgorithm");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class,
-                    String.format("Expected object with %s tag for DigitalSignatureAlgorithm, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for DigitalSignatureAlgorithm, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, String.format("Missing or non-text 'type' field for DigitalSignatureAlgorithm"));
+            ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class, "Missing or non-text 'type' field for DigitalSignatureAlgorithm");
             return null;
         }
 

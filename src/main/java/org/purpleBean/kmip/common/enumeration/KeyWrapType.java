@@ -121,8 +121,8 @@ public class KeyWrapType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        NOT_WRAPPED(0x00000001, "NotWrapped", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        AS_REGISTERED(0x00000002, "AsRegistered", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        NOT_WRAPPED(0x00000001, "NotWrapped", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        AS_REGISTERED(0x00000002, "AsRegistered", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

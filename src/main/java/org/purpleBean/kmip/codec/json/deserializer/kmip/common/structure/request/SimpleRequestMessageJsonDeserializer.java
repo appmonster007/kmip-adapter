@@ -25,8 +25,8 @@ public class SimpleRequestMessageJsonDeserializer extends KmipDataTypeJsonDeseri
     public SimpleRequestMessage deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
-        if (!node.isObject() || tag != kmipTag.getValue()) {
+        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).value();
+        if (!node.isObject() || tag != kmipTag.value()) {
             ctxt.reportInputMismatch(SimpleRequestMessage.class, "Expected object for SimpleRequestMessage");
             return null;
         }

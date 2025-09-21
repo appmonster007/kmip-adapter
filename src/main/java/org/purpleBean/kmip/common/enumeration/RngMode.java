@@ -121,9 +121,9 @@ public class RngMode implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SHARED_INSTANTIATION(0x00000002, "SharedInstantiation", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        NON_SHARED_INSTANTIATION(0x00000003, "NonSharedInstantiation", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHARED_INSTANTIATION(0x00000002, "SharedInstantiation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        NON_SHARED_INSTANTIATION(0x00000003, "NonSharedInstantiation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

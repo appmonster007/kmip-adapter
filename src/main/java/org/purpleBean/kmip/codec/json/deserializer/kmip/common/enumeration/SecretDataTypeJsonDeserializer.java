@@ -24,7 +24,7 @@ public class SecretDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
     public SecretDataType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(SecretDataType.class, String.format("JSON node cannot be null for SecretDataType deserialization"));
+            ctxt.reportInputMismatch(SecretDataType.class, "JSON node cannot be null for SecretDataType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class SecretDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(SecretDataType.class, String.format("Invalid KMIP tag for SecretDataType"));
+                ctxt.reportInputMismatch(SecretDataType.class, "Invalid KMIP tag for SecretDataType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class SecretDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(SecretDataType.class,
-                    String.format("Expected object with %s tag for SecretDataType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for SecretDataType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class SecretDataTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(SecretDataType.class, String.format("Missing or non-text 'type' field for SecretDataType"));
+            ctxt.reportInputMismatch(SecretDataType.class, "Missing or non-text 'type' field for SecretDataType");
             return null;
         }
 

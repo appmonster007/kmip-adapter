@@ -121,25 +121,25 @@ public class NistKeyType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PRIVATE_SIGNATURE_KEY(0x00000001, "PrivateSignatureKey", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        PUBLIC_SIGNATURE_VERIFICATION_KEY(0x00000002, "PublicSignatureVerificationKey", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SYMMETRIC_AUTHENTICATION_KEY(0x00000003, "SymmetricAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PRIVATE_AUTHENTICATION_KEY(0x00000004, "PrivateAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PUBLIC_AUTHENTICATION_KEY(0x00000005, "PublicAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_DATA_ENCRYPTION_KEY(0x00000006, "SymmetricDataEncryptionKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_KEY_WRAPPING_KEY(0x00000007, "SymmetricKeyWrappingKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_RANDOM_NUMBER_GENERATION_KEY(0x00000008, "SymmetricRandomNumberGenerationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_MASTER_KEY(0x00000009, "SymmetricMasterKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PRIVATE_KEY_TRANSPORT_KEY(0x0000000A, "PrivateKeyTransportKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PUBLIC_KEY_TRANSPORT_KEY(0x0000000B, "PublicKeyTransportKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_KEY_AGREEMENT_KEY(0x0000000C, "SymmetricKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PRIVATE_STATIC_KEY_AGREEMENT_KEY(0x0000000D, "PrivateStaticKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PUBLIC_STATIC_KEY_AGREEMENT_KEY(0x0000000E, "PublicStaticKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PRIVATE_EPHEMERAL_KEY_AGREEMENT_KEY(0x0000000F, "PrivateEphemeralKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PUBLIC_EPHEMERAL_KEY_AGREEMENT_KEY(0x00000010, "PublicEphemeralKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        SYMMETRIC_AUTHORIZATION_KEY(0x00000011, "SymmetricAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PRIVATE_AUTHORIZATION_KEY(0x00000012, "PrivateAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PUBLIC_AUTHORIZATION_KEY(0x00000013, "PublicAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        PRIVATE_SIGNATURE_KEY(0x00000001, "PrivateSignatureKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_SIGNATURE_VERIFICATION_KEY(0x00000002, "PublicSignatureVerificationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_AUTHENTICATION_KEY(0x00000003, "SymmetricAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_AUTHENTICATION_KEY(0x00000004, "PrivateAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_AUTHENTICATION_KEY(0x00000005, "PublicAuthenticationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_DATA_ENCRYPTION_KEY(0x00000006, "SymmetricDataEncryptionKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_KEY_WRAPPING_KEY(0x00000007, "SymmetricKeyWrappingKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_RANDOM_NUMBER_GENERATION_KEY(0x00000008, "SymmetricRandomNumberGenerationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_MASTER_KEY(0x00000009, "SymmetricMasterKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_KEY_TRANSPORT_KEY(0x0000000A, "PrivateKeyTransportKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_KEY_TRANSPORT_KEY(0x0000000B, "PublicKeyTransportKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_KEY_AGREEMENT_KEY(0x0000000C, "SymmetricKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_STATIC_KEY_AGREEMENT_KEY(0x0000000D, "PrivateStaticKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_STATIC_KEY_AGREEMENT_KEY(0x0000000E, "PublicStaticKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_EPHEMERAL_KEY_AGREEMENT_KEY(0x0000000F, "PrivateEphemeralKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_EPHEMERAL_KEY_AGREEMENT_KEY(0x00000010, "PublicEphemeralKeyAgreementKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SYMMETRIC_AUTHORIZATION_KEY(0x00000011, "SymmetricAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PRIVATE_AUTHORIZATION_KEY(0x00000012, "PrivateAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUBLIC_AUTHORIZATION_KEY(0x00000013, "PublicAuthorizationKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

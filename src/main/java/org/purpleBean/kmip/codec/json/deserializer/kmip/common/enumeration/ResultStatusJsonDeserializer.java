@@ -24,7 +24,7 @@ public class ResultStatusJsonDeserializer extends KmipDataTypeJsonDeserializer<R
     public ResultStatus deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ResultStatus.class, String.format("JSON node cannot be null for ResultStatus deserialization"));
+            ctxt.reportInputMismatch(ResultStatus.class, "JSON node cannot be null for ResultStatus deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ResultStatusJsonDeserializer extends KmipDataTypeJsonDeserializer<R
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ResultStatus.class, String.format("Invalid KMIP tag for ResultStatus"));
+                ctxt.reportInputMismatch(ResultStatus.class, "Invalid KMIP tag for ResultStatus");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ResultStatusJsonDeserializer extends KmipDataTypeJsonDeserializer<R
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ResultStatus.class,
-                    String.format("Expected object with %s tag for ResultStatus, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ResultStatus, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ResultStatusJsonDeserializer extends KmipDataTypeJsonDeserializer<R
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ResultStatus.class, String.format("Missing or non-text 'type' field for ResultStatus"));
+            ctxt.reportInputMismatch(ResultStatus.class, "Missing or non-text 'type' field for ResultStatus");
             return null;
         }
 

@@ -24,7 +24,7 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
     public ProtectionLevel deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ProtectionLevel.class, String.format("JSON node cannot be null for ProtectionLevel deserialization"));
+            ctxt.reportInputMismatch(ProtectionLevel.class, "JSON node cannot be null for ProtectionLevel deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ProtectionLevel.class, String.format("Invalid KMIP tag for ProtectionLevel"));
+                ctxt.reportInputMismatch(ProtectionLevel.class, "Invalid KMIP tag for ProtectionLevel");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ProtectionLevel.class,
-                    String.format("Expected object with %s tag for ProtectionLevel, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ProtectionLevel, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ProtectionLevel.class, String.format("Missing or non-text 'type' field for ProtectionLevel"));
+            ctxt.reportInputMismatch(ProtectionLevel.class, "Missing or non-text 'type' field for ProtectionLevel");
             return null;
         }
 

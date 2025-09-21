@@ -121,9 +121,9 @@ public class AsynchronousIndicator implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        MANDATORY(0x00000001, "Mandatory", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        OPTIONAL(0x00000002, "Optional", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        PROHIBITED(0x00000003, "Prohibited", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        MANDATORY(0x00000001, "Mandatory", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        OPTIONAL(0x00000002, "Optional", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PROHIBITED(0x00000003, "Prohibited", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

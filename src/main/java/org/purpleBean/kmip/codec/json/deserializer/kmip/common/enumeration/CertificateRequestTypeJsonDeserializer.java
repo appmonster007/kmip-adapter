@@ -24,7 +24,7 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
     public CertificateRequestType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(CertificateRequestType.class, String.format("JSON node cannot be null for CertificateRequestType deserialization"));
+            ctxt.reportInputMismatch(CertificateRequestType.class, "JSON node cannot be null for CertificateRequestType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(CertificateRequestType.class, String.format("Invalid KMIP tag for CertificateRequestType"));
+                ctxt.reportInputMismatch(CertificateRequestType.class, "Invalid KMIP tag for CertificateRequestType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(CertificateRequestType.class,
-                    String.format("Expected object with %s tag for CertificateRequestType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for CertificateRequestType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(CertificateRequestType.class, String.format("Missing or non-text 'type' field for CertificateRequestType"));
+            ctxt.reportInputMismatch(CertificateRequestType.class, "Missing or non-text 'type' field for CertificateRequestType");
             return null;
         }
 

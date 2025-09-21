@@ -14,7 +14,7 @@ public class ProtocolVersionJsonDeserializer extends KmipDataTypeJsonDeserialize
     public ProtocolVersion deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
+        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).value();
 
         if (!node.isObject() || tag != KmipTag.Standard.PROTOCOL_VERSION) {
             ctxt.reportInputMismatch(ProtocolVersion.class, "Expected object for ProtocolVersion");

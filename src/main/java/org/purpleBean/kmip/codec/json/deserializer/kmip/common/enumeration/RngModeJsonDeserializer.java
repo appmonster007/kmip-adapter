@@ -24,7 +24,7 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
     public RngMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(RngMode.class, String.format("JSON node cannot be null for RngMode deserialization"));
+            ctxt.reportInputMismatch(RngMode.class, "JSON node cannot be null for RngMode deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(RngMode.class, String.format("Invalid KMIP tag for RngMode"));
+                ctxt.reportInputMismatch(RngMode.class, "Invalid KMIP tag for RngMode");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(RngMode.class,
-                    String.format("Expected object with %s tag for RngMode, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for RngMode, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(RngMode.class, String.format("Missing or non-text 'type' field for RngMode"));
+            ctxt.reportInputMismatch(RngMode.class, "Missing or non-text 'type' field for RngMode");
             return null;
         }
 

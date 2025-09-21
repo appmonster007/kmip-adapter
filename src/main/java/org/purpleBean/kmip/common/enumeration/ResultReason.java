@@ -177,7 +177,7 @@ public class ResultReason implements KmipEnumeration {
         OBJECT_DESTROYED(0x00000036, "ObjectDestroyed", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         OBJECT_NOT_FOUND(0x00000037, "ObjectNotFound", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         RESERVED_4(0x00000038, "Reserved", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        NOT_AUTHORISED(0x00000039, "NotAuthorised", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        NOT_AUTHORISED(0x00000039, "NotAuthorised", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         SERVER_LIMIT_EXCEEDED(0x0000003A, "ServerLimitExceeded", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         UNKNOWN_ENUMERATION(0x0000003B, "UnknownEnumeration", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         UNKNOWN_MESSAGE_EXTENSION(0x0000003C, "UnknownMessageExtension", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),

@@ -24,7 +24,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
     public State deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(State.class, String.format("JSON node cannot be null for State deserialization"));
+            ctxt.reportInputMismatch(State.class, "JSON node cannot be null for State deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(State.class, String.format("Invalid KMIP tag for State"));
+                ctxt.reportInputMismatch(State.class, "Invalid KMIP tag for State");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(State.class,
-                    String.format("Expected object with %s tag for State, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for State, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(State.class, String.format("Missing or non-text 'type' field for State"));
+            ctxt.reportInputMismatch(State.class, "Missing or non-text 'type' field for State");
             return null;
         }
 

@@ -138,7 +138,7 @@ public class BlockCipherMode implements KmipEnumeration {
         X9_102_TDKW(0x0000000F, "X9102Tdkw", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         X9_102_AKW1(0x00000010, "X9102Akw1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         X9_102_AKW2(0x00000011, "X9102Akw2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        AEAD(0x00000012, "Aead", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        AEAD(0x00000012, "Aead", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

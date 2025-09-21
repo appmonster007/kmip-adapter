@@ -24,7 +24,7 @@ public class ProcessingStageJsonDeserializer extends KmipDataTypeJsonDeserialize
     public ProcessingStage deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(ProcessingStage.class, String.format("JSON node cannot be null for ProcessingStage deserialization"));
+            ctxt.reportInputMismatch(ProcessingStage.class, "JSON node cannot be null for ProcessingStage deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class ProcessingStageJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ProcessingStage.class, String.format("Invalid KMIP tag for ProcessingStage"));
+                ctxt.reportInputMismatch(ProcessingStage.class, "Invalid KMIP tag for ProcessingStage");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class ProcessingStageJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(ProcessingStage.class,
-                    String.format("Expected object with %s tag for ProcessingStage, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for ProcessingStage, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class ProcessingStageJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ProcessingStage.class, String.format("Missing or non-text 'type' field for ProcessingStage"));
+            ctxt.reportInputMismatch(ProcessingStage.class, "Missing or non-text 'type' field for ProcessingStage");
             return null;
         }
 

@@ -121,9 +121,9 @@ public class ValidationAuthorityType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        NIST_CMVP(0x00000002, "NistCmvp", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        COMMON_CRITERIA(0x00000003, "CommonCriteria", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        NIST_CMVP(0x00000002, "NistCmvp", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        COMMON_CRITERIA(0x00000003, "CommonCriteria", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

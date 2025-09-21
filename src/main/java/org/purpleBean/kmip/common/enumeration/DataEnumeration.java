@@ -121,8 +121,13 @@ public class DataEnumeration implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion);
+        DECRYPT(0x00000001, "Decrypt", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        ENCRYPT(0x00000002, "Encrypt", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        HASH(0x00000003, "Hash", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        MACMAC_DATA(0x00000004, "MacmacData", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        RNG_RETRIEVE(0x00000005, "RngRetrieve", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        SIGN_SIGNATURE_DATA(0x00000006, "SignSignatureData", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        SIGNATURE_VERIFY(0x00000007, "SignatureVerify", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

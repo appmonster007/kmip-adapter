@@ -13,12 +13,14 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.ClientRegistrationMeth
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.CredentialTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.CryptographicAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DataEnumerationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.DeactivationReasonCodeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DerivationMethodBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DestroyActionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DigitalSignatureAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.DrbgAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.EncodingOptionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.EndpointRoleBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.EphemeralBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.Fips186VariationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.HashingAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.InteropFunctionBenchmarkSubject
@@ -31,10 +33,12 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.LinkTypeBenchmarkSubje
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.MaskGeneratorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.NameTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.NistKeyTypeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.ObjectClassBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ObjectGroupMemberBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ObjectTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.OpaqueDataTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.OperationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.OtpAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.PaddingMethodBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ProcessingStageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ProfileNameBenchmarkSubject
@@ -51,6 +55,7 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.RotateNameTypeBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.SecretDataTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ShreddingAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.SplitKeyMethodBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.enumeration.SplitKeyPolynomialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.StateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.TicketTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.UniqueIdentifierBenchmarkSubject

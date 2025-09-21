@@ -121,8 +121,8 @@ public class EndpointRole implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        CLIENT(0x00000001, "Client", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        SERVER(0x00000002, "Server", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        CLIENT(0x00000001, "Client", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SERVER(0x00000002, "Server", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

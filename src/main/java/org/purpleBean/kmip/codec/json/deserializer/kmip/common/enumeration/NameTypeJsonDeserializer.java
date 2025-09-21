@@ -24,7 +24,7 @@ public class NameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<NameT
     public NameType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(NameType.class, String.format("JSON node cannot be null for NameType deserialization"));
+            ctxt.reportInputMismatch(NameType.class, "JSON node cannot be null for NameType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class NameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<NameT
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(NameType.class, String.format("Invalid KMIP tag for NameType"));
+                ctxt.reportInputMismatch(NameType.class, "Invalid KMIP tag for NameType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class NameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<NameT
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(NameType.class,
-                    String.format("Expected object with %s tag for NameType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for NameType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class NameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<NameT
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(NameType.class, String.format("Missing or non-text 'type' field for NameType"));
+            ctxt.reportInputMismatch(NameType.class, "Missing or non-text 'type' field for NameType");
             return null;
         }
 

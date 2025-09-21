@@ -121,23 +121,27 @@ public class UniqueIdentifier implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        ID_PLACEHOLDER(0x00000001, "IdPlaceholder", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        CERTIFY(0x00000002, "Certify", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        CREATE(0x00000003, "Create", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CREATE_KEY_PAIR(0x00000004, "CreateKeyPair", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CREATE_KEY_PAIR_PRIVATE_KEY(0x00000005, "CreateKeyPairPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CREATE_KEY_PAIR_PUBLIC_KEY(0x00000006, "CreateKeyPairPublicKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        CREATE_SPLIT_KEY(0x00000007, "CreateSplitKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        DERIVE_KEY(0x00000008, "DeriveKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        IMPORT(0x00000009, "Import", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        JOIN_SPLIT_KEY(0x0000000A, "JoinSplitKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        LOCATE(0x0000000B, "Locate", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        REGISTER(0x0000000C, "Register", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        RE_KEY(0x0000000D, "ReKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        RE_CERTIFY(0x0000000E, "ReCertify", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        RE_KEY_KEY_PAIR(0x0000000F, "ReKeyKeyPair", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        RE_KEY_KEY_PAIR_PRIVATE_KEY(0x00000010, "ReKeyKeyPairPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        RE_KEY_KEY_PAIR_PUBLIC_KEY(0x00000011, "ReKeyKeyPairPublicKey", KmipSpec.UnknownVersion, KmipSpec.V2_1);
+        ID_PLACEHOLDER(0x00000001, "IdPlaceholder", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CERTIFY(0x00000002, "Certify", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE(0x00000003, "Create", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_KEY_PAIR(0x00000004, "CreateKeyPair", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_KEY_PAIR_PRIVATE_KEY(0x00000005, "CreateKeyPairPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_KEY_PAIR_PUBLIC_KEY(0x00000006, "CreateKeyPairPublicKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_SPLIT_KEY(0x00000007, "CreateSplitKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DERIVE_KEY(0x00000008, "DeriveKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        IMPORT(0x00000009, "Import", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        JOIN_SPLIT_KEY(0x0000000A, "JoinSplitKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOCATE(0x0000000B, "Locate", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        REGISTER(0x0000000C, "Register", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY(0x0000000D, "ReKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_CERTIFY(0x0000000E, "ReCertify", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY_KEY_PAIR(0x0000000F, "ReKeyKeyPair", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY_KEY_PAIR_PRIVATE_KEY(0x00000010, "ReKeyKeyPairPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY_KEY_PAIR_PUBLIC_KEY(0x00000011, "ReKeyKeyPairPublicKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_PROVISION(0x00000012, "ReProvision", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_USER(0x00000013, "CreateUser", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_GROUP(0x00000014, "CreateGroup", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_CREDENTIAL(0x00000015, "CreateCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

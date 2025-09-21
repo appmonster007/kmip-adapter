@@ -24,7 +24,7 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
     public CryptographicAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(CryptographicAlgorithm.class, String.format("JSON node cannot be null for CryptographicAlgorithm deserialization"));
+            ctxt.reportInputMismatch(CryptographicAlgorithm.class, "JSON node cannot be null for CryptographicAlgorithm deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(CryptographicAlgorithm.class, String.format("Invalid KMIP tag for CryptographicAlgorithm"));
+                ctxt.reportInputMismatch(CryptographicAlgorithm.class, "Invalid KMIP tag for CryptographicAlgorithm");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(CryptographicAlgorithm.class,
-                    String.format("Expected object with %s tag for CryptographicAlgorithm, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for CryptographicAlgorithm, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(CryptographicAlgorithm.class, String.format("Missing or non-text 'type' field for CryptographicAlgorithm"));
+            ctxt.reportInputMismatch(CryptographicAlgorithm.class, "Missing or non-text 'type' field for CryptographicAlgorithm");
             return null;
         }
 

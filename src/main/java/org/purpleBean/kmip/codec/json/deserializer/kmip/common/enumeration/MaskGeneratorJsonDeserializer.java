@@ -24,7 +24,7 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
     public MaskGenerator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(MaskGenerator.class, String.format("JSON node cannot be null for MaskGenerator deserialization"));
+            ctxt.reportInputMismatch(MaskGenerator.class, "JSON node cannot be null for MaskGenerator deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(MaskGenerator.class, String.format("Invalid KMIP tag for MaskGenerator"));
+                ctxt.reportInputMismatch(MaskGenerator.class, "Invalid KMIP tag for MaskGenerator");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(MaskGenerator.class,
-                    String.format("Expected object with %s tag for MaskGenerator, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for MaskGenerator, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(MaskGenerator.class, String.format("Missing or non-text 'type' field for MaskGenerator"));
+            ctxt.reportInputMismatch(MaskGenerator.class, "Missing or non-text 'type' field for MaskGenerator");
             return null;
         }
 

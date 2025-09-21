@@ -121,7 +121,7 @@ public class MaskGenerator implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        MFG1(0x00000001, "Mfg1", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        MFG1(0x00000001, "Mfg1", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

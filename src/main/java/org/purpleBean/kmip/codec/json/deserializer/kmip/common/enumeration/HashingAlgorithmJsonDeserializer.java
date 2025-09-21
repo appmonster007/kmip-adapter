@@ -24,7 +24,7 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
     public HashingAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(HashingAlgorithm.class, String.format("JSON node cannot be null for HashingAlgorithm deserialization"));
+            ctxt.reportInputMismatch(HashingAlgorithm.class, "JSON node cannot be null for HashingAlgorithm deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(HashingAlgorithm.class, String.format("Invalid KMIP tag for HashingAlgorithm"));
+                ctxt.reportInputMismatch(HashingAlgorithm.class, "Invalid KMIP tag for HashingAlgorithm");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(HashingAlgorithm.class,
-                    String.format("Expected object with %s tag for HashingAlgorithm, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for HashingAlgorithm, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(HashingAlgorithm.class, String.format("Missing or non-text 'type' field for HashingAlgorithm"));
+            ctxt.reportInputMismatch(HashingAlgorithm.class, "Missing or non-text 'type' field for HashingAlgorithm");
             return null;
         }
 

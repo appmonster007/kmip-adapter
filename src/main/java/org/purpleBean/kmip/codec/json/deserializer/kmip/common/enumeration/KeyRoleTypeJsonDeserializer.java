@@ -24,7 +24,7 @@ public class KeyRoleTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
     public KeyRoleType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(KeyRoleType.class, String.format("JSON node cannot be null for KeyRoleType deserialization"));
+            ctxt.reportInputMismatch(KeyRoleType.class, "JSON node cannot be null for KeyRoleType deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class KeyRoleTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(KeyRoleType.class, String.format("Invalid KMIP tag for KeyRoleType"));
+                ctxt.reportInputMismatch(KeyRoleType.class, "Invalid KMIP tag for KeyRoleType");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class KeyRoleTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(KeyRoleType.class,
-                    String.format("Expected object with %s tag for KeyRoleType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for KeyRoleType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class KeyRoleTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(KeyRoleType.class, String.format("Missing or non-text 'type' field for KeyRoleType"));
+            ctxt.reportInputMismatch(KeyRoleType.class, "Missing or non-text 'type' field for KeyRoleType");
             return null;
         }
 

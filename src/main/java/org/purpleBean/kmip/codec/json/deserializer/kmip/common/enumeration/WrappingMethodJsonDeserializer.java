@@ -24,7 +24,7 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
     public WrappingMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(WrappingMethod.class, String.format("JSON node cannot be null for WrappingMethod deserialization"));
+            ctxt.reportInputMismatch(WrappingMethod.class, "JSON node cannot be null for WrappingMethod deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(WrappingMethod.class, String.format("Invalid KMIP tag for WrappingMethod"));
+                ctxt.reportInputMismatch(WrappingMethod.class, "Invalid KMIP tag for WrappingMethod");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(WrappingMethod.class,
-                    String.format("Expected object with %s tag for WrappingMethod, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for WrappingMethod, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(WrappingMethod.class, String.format("Missing or non-text 'type' field for WrappingMethod"));
+            ctxt.reportInputMismatch(WrappingMethod.class, "Missing or non-text 'type' field for WrappingMethod");
             return null;
         }
 

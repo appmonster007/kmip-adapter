@@ -24,7 +24,7 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
     public UsageLimitsUnit deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(UsageLimitsUnit.class, String.format("JSON node cannot be null for UsageLimitsUnit deserialization"));
+            ctxt.reportInputMismatch(UsageLimitsUnit.class, "JSON node cannot be null for UsageLimitsUnit deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(UsageLimitsUnit.class, String.format("Invalid KMIP tag for UsageLimitsUnit"));
+                ctxt.reportInputMismatch(UsageLimitsUnit.class, "Invalid KMIP tag for UsageLimitsUnit");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(UsageLimitsUnit.class,
-                    String.format("Expected object with %s tag for UsageLimitsUnit, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for UsageLimitsUnit, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(UsageLimitsUnit.class, String.format("Missing or non-text 'type' field for UsageLimitsUnit"));
+            ctxt.reportInputMismatch(UsageLimitsUnit.class, "Missing or non-text 'type' field for UsageLimitsUnit");
             return null;
         }
 

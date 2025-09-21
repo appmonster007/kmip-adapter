@@ -24,7 +24,7 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
     public RecommendedCurve deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(RecommendedCurve.class, String.format("JSON node cannot be null for RecommendedCurve deserialization"));
+            ctxt.reportInputMismatch(RecommendedCurve.class, "JSON node cannot be null for RecommendedCurve deserialization");
             return null;
         }
 
@@ -33,7 +33,7 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(RecommendedCurve.class, String.format("Invalid KMIP tag for RecommendedCurve"));
+                ctxt.reportInputMismatch(RecommendedCurve.class, "Invalid KMIP tag for RecommendedCurve");
                 return null;
             }
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
             return null;
         }
 
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
+        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
             ctxt.reportInputMismatch(RecommendedCurve.class,
-                    String.format("Expected object with %s tag for RecommendedCurve, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
+                    String.format("Expected object with %s tag for RecommendedCurve, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
             return null;
         }
 
@@ -54,7 +54,7 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(RecommendedCurve.class, String.format("Missing or non-text 'type' field for RecommendedCurve"));
+            ctxt.reportInputMismatch(RecommendedCurve.class, "Missing or non-text 'type' field for RecommendedCurve");
             return null;
         }
 
