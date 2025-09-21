@@ -162,6 +162,7 @@ public class RecommendedCurve implements KmipEnumeration {
         ANSIX9C2PNB163V1(0x00000027, "AnsiX9C2Pnb163V1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ANSIX9C2PNB163V2(0x00000028, "AnsiX9C2Pnb163V2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ANSIX9C2PNB163V3(0x00000029, "AnsiX9C2Pnb163V3", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ANSIX9C2PNB176V1(0x0000002A, "AnsiX9C2Pnb176V1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ANSIX9C2TNB191V1(0x0000002B, "AnsiX9C2Tnb191V1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ANSIX9C2TNB191V2(0x0000002C, "AnsiX9C2Tnb191V2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ANSIX9C2TNB191V3(0x0000002D, "AnsiX9C2Tnb191V3", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),

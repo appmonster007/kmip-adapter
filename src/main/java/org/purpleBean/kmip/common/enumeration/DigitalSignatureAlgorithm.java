@@ -121,14 +121,14 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        MD2_WITH_RSA_ENCRYPTION(0x00000001, "Md2WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        MD5_WITH_RSA_ENCRYPTION(0x00000002, "Md5WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_1_WITH_RSA_ENCRYPTION(0x00000003, "Sha1WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_224_WITH_RSA_ENCRYPTION(0x00000004, "Sha224WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_256_WITH_RSA_ENCRYPTION(0x00000005, "Sha256WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_384_WITH_RSA_ENCRYPTION(0x00000006, "Sha384WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_512_WITH_RSA_ENCRYPTION(0x00000007, "Sha512WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        RSASSA_PSS(0x00000008, "RsassaPss", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD2_WITH_RSA_ENCRYPTION(0x00000001, "Md2WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD5_WITH_RSA_ENCRYPTION(0x00000002, "Md5WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_1_WITH_RSA_ENCRYPTION(0x00000003, "Sha1WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_224_WITH_RSA_ENCRYPTION(0x00000004, "Sha224WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_256_WITH_RSA_ENCRYPTION(0x00000005, "Sha256WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_384_WITH_RSA_ENCRYPTION(0x00000006, "Sha384WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_512_WITH_RSA_ENCRYPTION(0x00000007, "Sha512WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RSASSA_PSS(0x00000008, "RsassaPss", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         DSA_WITH_SHA_1(0x00000009, "DsaWithSha1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         DSA_WITH_SHA224(0x0000000A, "DsaWithSha224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         DSA_WITH_SHA256(0x0000000B, "DsaWithSha256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
