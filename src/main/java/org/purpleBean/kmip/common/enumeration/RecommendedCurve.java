@@ -40,16 +40,11 @@ public class RecommendedCurve implements KmipEnumeration {
         this.value = value;
     }
 
-    /**
-     * Validates that the extension value is within the allowed range.
-     * Extension values must be in the range 0x80000001 to 0x8FFFFFFF (inclusive).
-     */
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
-        int extensionEnd = 0x8FFFFFFF;
-        if (value <= extensionStart || value > extensionEnd) {
+        if (value < extensionStart || value > 0) {
             throw new IllegalArgumentException(
-                    String.format("Extension value 0x%08X must be in range 0x80000001 to 0x8FFFFFFF (hex)", value)
+                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
             );
         }
     }
@@ -65,10 +60,15 @@ public class RecommendedCurve implements KmipEnumeration {
         if (supportedVersions.isEmpty()) {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
+        Value existingEnumByValue = VALUE_REGISTRY.get(value);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        if (existingEnumByValue != null || existingEnumByDescription != null) {
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+        }
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.put(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
         return custom;
     }
 
@@ -98,8 +98,8 @@ public class RecommendedCurve implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -212,8 +212,11 @@ public class RecommendedCurve implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 

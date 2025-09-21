@@ -60,10 +60,15 @@ public class LinkType implements KmipEnumeration {
         if (supportedVersions.isEmpty()) {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
+        Value existingEnumByValue = VALUE_REGISTRY.get(value);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        if (existingEnumByValue != null || existingEnumByDescription != null) {
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+        }
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.put(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
         return custom;
     }
 
@@ -93,8 +98,8 @@ public class LinkType implements KmipEnumeration {
     }
 
     /**
-    * Get registered values.
-    */
+     * Get registered values.
+     */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -152,8 +157,11 @@ public class LinkType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupportedFor(KmipSpec spec);
+
         boolean isCustom();
     }
 
