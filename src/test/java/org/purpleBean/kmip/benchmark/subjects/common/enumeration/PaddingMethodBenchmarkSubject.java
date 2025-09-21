@@ -53,7 +53,7 @@ public class PaddingMethodBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new PaddingMethod(PaddingMethod.Standard.NONE_PADDING);
+        obj = new PaddingMethod(PaddingMethod.Standard.NONE);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

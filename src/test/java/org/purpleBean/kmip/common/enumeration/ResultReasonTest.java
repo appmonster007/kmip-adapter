@@ -20,17 +20,17 @@ class ResultReasonTest extends AbstractKmipEnumerationSuite<ResultReason> {
 
     @Override
     protected ResultReason createDefault() {
-        return new ResultReason(ResultReason.Standard.PLACEHOLDER_1);
+        return new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
     }
 
     @Override
     protected ResultReason createEqualToDefault() {
-        return new ResultReason(ResultReason.Standard.PLACEHOLDER_1);
+        return new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
     }
 
     @Override
     protected ResultReason createDifferentFromDefault() {
-        return new ResultReason(ResultReason.Standard.PLACEHOLDER_2);
+        return new ResultReason(ResultReason.Standard.RESPONSE_TOO_LARGE);
     }
 
     @Override

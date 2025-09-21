@@ -13,11 +13,11 @@ class RecommendedCurveXmlTest extends AbstractXmlSerializationSuite<RecommendedC
 
     @Override
     protected RecommendedCurve createDefault() {
-        return new RecommendedCurve(RecommendedCurve.Standard.PLACEHOLDER_1);
+        return new RecommendedCurve(RecommendedCurve.Standard.P_192);
     }
 
     @Override
     protected RecommendedCurve createVariant() {
-        return new RecommendedCurve(RecommendedCurve.Standard.PLACEHOLDER_2);
+        return new RecommendedCurve(RecommendedCurve.Standard.K_163);
     }
 }

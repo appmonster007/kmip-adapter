@@ -13,7 +13,7 @@ class RevocationReasonCodeTtlvTest extends AbstractTtlvSerializationSuite<Revoca
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
     }
 
     @Override

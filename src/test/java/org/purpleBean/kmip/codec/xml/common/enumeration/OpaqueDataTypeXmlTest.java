@@ -1,8 +1,11 @@
 package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+
+import java.util.Set;
 
 @DisplayName("OpaqueDataType XML Serialization")
 class OpaqueDataTypeXmlTest extends AbstractXmlSerializationSuite<OpaqueDataType> {
@@ -13,11 +16,11 @@ class OpaqueDataTypeXmlTest extends AbstractXmlSerializationSuite<OpaqueDataType
 
     @Override
     protected OpaqueDataType createDefault() {
-        return new OpaqueDataType(OpaqueDataType.Standard.PLACEHOLDER_1);
+        return new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
     }
 
     @Override
     protected OpaqueDataType createVariant() {
-        return new OpaqueDataType(OpaqueDataType.Standard.PLACEHOLDER_2);
+        return new OpaqueDataType(OpaqueDataType.register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion)));
     }
 }

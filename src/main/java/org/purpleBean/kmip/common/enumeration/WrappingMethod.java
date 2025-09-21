@@ -116,8 +116,11 @@ public class WrappingMethod implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        ENCRYPT(0x00000001, "Encrypt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_SIGN(0x00000002, "MacSign", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ENCRYPT_THEN_MAC_SIGN(0x00000003, "EncryptThenMacSign", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_SIGN_THEN_ENCRYPT(0x00000004, "MacSignThenEncrypt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TR_31(0x00000005, "Tr31", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

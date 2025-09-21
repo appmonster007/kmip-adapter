@@ -13,11 +13,11 @@ class WrappingMethodTtlvTest extends AbstractTtlvSerializationSuite<WrappingMeth
 
     @Override
     protected WrappingMethod createDefault() {
-        return new WrappingMethod(WrappingMethod.Standard.PLACEHOLDER_1);
+        return new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
     }
 
     @Override
     protected WrappingMethod createVariant() {
-        return new WrappingMethod(WrappingMethod.Standard.PLACEHOLDER_2);
+        return new WrappingMethod(WrappingMethod.Standard.MAC_SIGN);
     }
 }

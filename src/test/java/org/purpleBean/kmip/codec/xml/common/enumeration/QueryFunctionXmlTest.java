@@ -18,6 +18,6 @@ class QueryFunctionXmlTest extends AbstractXmlSerializationSuite<QueryFunction> 
 
     @Override
     protected QueryFunction createVariant() {
-        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONAL_CAPABILITIES);
+        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONS);
     }
 }

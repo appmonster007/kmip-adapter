@@ -13,7 +13,7 @@ class PaddingMethodXmlTest extends AbstractXmlSerializationSuite<PaddingMethod> 
 
     @Override
     protected PaddingMethod createDefault() {
-        return new PaddingMethod(PaddingMethod.Standard.NONE_PADDING);
+        return new PaddingMethod(PaddingMethod.Standard.NONE);
     }
 
     @Override

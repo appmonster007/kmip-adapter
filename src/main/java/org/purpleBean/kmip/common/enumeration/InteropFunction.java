@@ -116,9 +116,9 @@ public class InteropFunction implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        BEGIN(0x00000001, "Begin", KmipSpec.UnknownVersion, KmipSpec.V1_2),
-        END(0x00000002, "End", KmipSpec.UnknownVersion, KmipSpec.V1_2),
-        RESET(0x00000003, "Reset", KmipSpec.UnknownVersion, KmipSpec.V1_2);
+        BEGIN(0x00000001, "Begin", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        END(0x00000002, "End", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RESET(0x00000003, "Reset", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

@@ -93,8 +93,8 @@ public class NameType implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,10 +116,8 @@ public class NameType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNINTERPRETED_TEXT_STRING(0x00000001, "Uninterpreted Text String",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        URI(0x00000002, "URI (Uniform Resource Identifier)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        UNINTERPRETED_TEXT_STRING(0x00000001, "UninterpretedTextString", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        URI(0x00000002, "Uri", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1);
 
         private final int value;
         private final String description;
@@ -142,11 +140,8 @@ public class NameType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

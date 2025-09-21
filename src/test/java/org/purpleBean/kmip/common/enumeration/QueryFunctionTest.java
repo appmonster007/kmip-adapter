@@ -30,7 +30,7 @@ class QueryFunctionTest extends AbstractKmipEnumerationSuite<QueryFunction> {
 
     @Override
     protected QueryFunction createDifferentFromDefault() {
-        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONAL_CAPABILITIES);
+        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONS);
     }
 
     @Override

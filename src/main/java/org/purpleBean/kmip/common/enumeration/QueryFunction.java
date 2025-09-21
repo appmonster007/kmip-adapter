@@ -93,8 +93,8 @@ public class QueryFunction implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,16 +116,21 @@ public class QueryFunction implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        QUERY_SERVER_INFORMATION(0x00000001, "Query Server Information",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
-        QUERY_OPERATIONAL_CAPABILITIES(0x00000002, "Query Operational Capabilities",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
-        QUERY_APPLICATION_NAMESPACES(0x00000003, "Query Application Namespaces",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
-        QUERY_EXTENSION_LIST(0x00000004, "Query Extension List",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2), // Not in 2.1+
-        QUERY_SERVER_DEFAULT_MECHANISMS(0x00000005, "Query Server Default Mechanisms",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2); // Not in 2.1+
+        QUERY_OPERATIONS(0x00000001, "QueryOperations", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_OBJECTS(0x00000002, "QueryObjects", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_SERVER_INFORMATION(0x00000003, "QueryServerInformation", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_APPLICATION_NAMESPACES(0x00000004, "QueryApplicationNamespaces", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_EXTENSION_LIST(0x00000005, "QueryExtensionList", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_EXTENSION_MAP(0x00000006, "QueryExtensionMap", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_ATTESTATION_TYPES(0x00000007, "QueryAttestationTypes", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_RNGS(0x00000008, "QueryRngs", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_VALIDATIONS(0x00000009, "QueryValidations", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_PROFILES(0x0000000A, "QueryProfiles", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_CAPABILITIES(0x0000000B, "QueryCapabilities", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_CLIENT_REGISTRATION_METHODS(0x0000000C, "QueryClientRegistrationMethods", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_DEFAULTS_INFORMATION(0x0000000D, "QueryDefaultsInformation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_STORAGE_PROTECTION_MASKS(0x0000000E, "QueryStorageProtectionMasks", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_CREDENTIAL_INFORMATION(0x0000000F, "QueryCredentialInformation", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -148,11 +153,8 @@ public class QueryFunction implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

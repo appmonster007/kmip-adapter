@@ -53,7 +53,7 @@ public class RecommendedCurveBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new RecommendedCurve(RecommendedCurve.Standard.PLACEHOLDER_1);
+        obj = new RecommendedCurve(RecommendedCurve.Standard.P_192);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

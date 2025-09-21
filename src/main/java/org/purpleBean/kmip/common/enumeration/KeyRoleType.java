@@ -93,8 +93,8 @@ public class KeyRoleType implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,54 +116,30 @@ public class KeyRoleType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        BDK(0x00000001, "BDK (Base Derivation Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CVK(0x00000002, "CVK (Card Verification Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DEK(0x00000003, "DEK (Data Encryption Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKAC(0x00000004, "MKAC (Master Key Authentication Code)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKSMC(0x00000005, "MKSMC (Master Key for Secure Messaging Command)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKSMI(0x00000006, "MKSMI (Master Key for Secure Messaging Integrity)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKDAC(0x00000007, "MKDAC (Master Key for Data Authentication Code)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKDN(0x00000008, "MKDN (Master Key for Deriving New Keys)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKCP(0x00000009, "MKCP (Master Key for Card Personalization)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MKOTH(0x0000000A, "MKOTH (Master Key for Other Purposes)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        KEK(0x0000000B, "KEK (Key Encryption Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_16609(0x0000000C, "MAC 16609",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_97971(0x0000000D, "MAC 9797-1",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_97972(0x0000000E, "MAC 9797-2",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_97973(0x0000000F, "MAC 9797-3",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_97974(0x00000010, "MAC 9797-4",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_97975(0x00000011, "MAC 9797-5",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ZPK(0x00000012, "ZPK (Zone Pin Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PVKIBM(0x00000013, "PVK IBM (PIN Verification Key IBM)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PVKPVV(0x00000014, "PVK PVV (PIN Verification Value Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PVKOTH(0x00000015, "PVK Other (PIN Verification Key Other)",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DUKPT(0x00000016, "DUKPT (Derived Unique Key Per Transaction)",
-                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0), // Note: Not in 1.2 spec
-        IV(0x00000017, "IV (Initialization Vector)",
-                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0), // Note: Not in 1.2 spec
-        TRKBK(0x00000018, "TRKBK (Track Back Key)",
-                KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0); // Note: Not in 1.2 spec
+        BDK(0x00000001, "Bdk", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CVK(0x00000002, "Cvk", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DEK(0x00000003, "Dek", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKAC(0x00000004, "Mkac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKSMC(0x00000005, "Mksmc", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKSMI(0x00000006, "Mksmi", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKDAC(0x00000007, "Mkdac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKDN(0x00000008, "Mkdn", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKCP(0x00000009, "Mkcp", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MKOTH(0x0000000A, "Mkoth", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        KEK(0x0000000B, "Kek", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC16609(0x0000000C, "Mac16609", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC97971(0x0000000D, "Mac97971", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC97972(0x0000000E, "Mac97972", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC97973(0x0000000F, "Mac97973", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC97974(0x00000010, "Mac97974", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC97975(0x00000011, "Mac97975", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ZPK(0x00000012, "Zpk", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKIBM(0x00000013, "Pvkibm", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKPVV(0x00000014, "Pvkpvv", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PVKOTH(0x00000015, "Pvkoth", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DUKPT(0x00000016, "Dukpt", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        IV(0x00000017, "Iv", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        TRKBK(0x00000018, "Trkbk", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -186,11 +162,8 @@ public class KeyRoleType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
@@ -14,6 +15,7 @@ import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 
 import java.nio.ByteBuffer;
+import java.util.Set;
 
 public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
     private ObjectMapper json;
@@ -44,16 +46,16 @@ public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
         json.findAndRegisterModules();
         json.registerModule(new JavaTimeModule());
         json.registerModule(new KmipJsonModule());
-        
+
         xml = new XmlMapper();
         xml.findAndRegisterModules();
         xml.registerModule(new JavaTimeModule());
         xml.registerModule(new KmipXmlModule());
-        
+
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new OpaqueDataType(OpaqueDataType.Standard.PLACEHOLDER_1);
+        obj = new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

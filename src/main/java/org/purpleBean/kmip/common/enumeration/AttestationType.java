@@ -93,8 +93,8 @@ public class AttestationType implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,12 +116,9 @@ public class AttestationType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        TPM_QUOTE(0x00000001, "TPM Quote",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        TCG_INTEGRITY_REPORT(0x00000002, "TCG Integrity Report",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SAML_ASSERTION(0x00000003, "SAML Assertion",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        TPM_QUOTE(0x00000001, "TpmQuote", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TCG_INTEGRITY_REPORT(0x00000002, "TcgIntegrityReport", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SAML_ASSERTION(0x00000003, "SamlAssertion", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -144,11 +141,8 @@ public class AttestationType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

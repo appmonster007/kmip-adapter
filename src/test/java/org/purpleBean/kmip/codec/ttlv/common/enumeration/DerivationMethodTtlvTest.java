@@ -13,11 +13,11 @@ class DerivationMethodTtlvTest extends AbstractTtlvSerializationSuite<Derivation
 
     @Override
     protected DerivationMethod createDefault() {
-        return new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_1);
+        return new DerivationMethod(DerivationMethod.Standard.PBKDF2);
     }
 
     @Override
     protected DerivationMethod createVariant() {
-        return new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_2);
+        return new DerivationMethod(DerivationMethod.Standard.HASH);
     }
 }

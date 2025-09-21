@@ -13,11 +13,11 @@ class ValidityIndicatorTtlvTest extends AbstractTtlvSerializationSuite<ValidityI
 
     @Override
     protected ValidityIndicator createDefault() {
-        return new ValidityIndicator(ValidityIndicator.Standard.PLACEHOLDER_1);
+        return new ValidityIndicator(ValidityIndicator.Standard.VALID);
     }
 
     @Override
     protected ValidityIndicator createVariant() {
-        return new ValidityIndicator(ValidityIndicator.Standard.PLACEHOLDER_2);
+        return new ValidityIndicator(ValidityIndicator.Standard.INVALID);
     }
 }

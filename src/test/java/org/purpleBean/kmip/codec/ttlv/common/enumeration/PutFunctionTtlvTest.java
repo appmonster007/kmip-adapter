@@ -13,11 +13,11 @@ class PutFunctionTtlvTest extends AbstractTtlvSerializationSuite<PutFunction> {
 
     @Override
     protected PutFunction createDefault() {
-        return new PutFunction(PutFunction.Standard.PLACEHOLDER_1);
+        return new PutFunction(PutFunction.Standard.NEW);
     }
 
     @Override
     protected PutFunction createVariant() {
-        return new PutFunction(PutFunction.Standard.PLACEHOLDER_2);
+        return new PutFunction(PutFunction.Standard.REPLACE);
     }
 }

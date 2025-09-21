@@ -13,11 +13,11 @@ class ResultReasonTtlvTest extends AbstractTtlvSerializationSuite<ResultReason> 
 
     @Override
     protected ResultReason createDefault() {
-        return new ResultReason(ResultReason.Standard.PLACEHOLDER_1);
+        return new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
     }
 
     @Override
     protected ResultReason createVariant() {
-        return new ResultReason(ResultReason.Standard.PLACEHOLDER_2);
+        return new ResultReason(ResultReason.Standard.RESPONSE_TOO_LARGE);
     }
 }

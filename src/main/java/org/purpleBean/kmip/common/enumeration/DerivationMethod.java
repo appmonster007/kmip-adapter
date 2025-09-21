@@ -116,8 +116,16 @@ public class DerivationMethod implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        PBKDF2(0x00000001, "Pbkdf2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        HASH(0x00000002, "Hash", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        HMAC(0x00000003, "Hmac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ENCRYPT(0x00000004, "Encrypt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        NIST800_108_C(0x00000005, "Nist800108C", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        NIST800_108_F(0x00000006, "Nist800108F", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        NIST800_108_DPI(0x00000007, "Nist800108Dpi", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ASYMMETRIC_KEY(0x00000008, "AsymmetricKey", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        AWS_SIGNATURE_VERSION_4(0x00000009, "AwsSignatureVersion4", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        HKDF(0x0000000A, "Hkdf", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

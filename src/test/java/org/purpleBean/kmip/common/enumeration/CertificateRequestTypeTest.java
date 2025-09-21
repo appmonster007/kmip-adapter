@@ -30,7 +30,7 @@ class CertificateRequestTypeTest extends AbstractKmipEnumerationSuite<Certificat
 
     @Override
     protected CertificateRequestType createDifferentFromDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PROVISIONING);
+        return new CertificateRequestType(CertificateRequestType.Standard.PKCS_10);
     }
 
     @Override

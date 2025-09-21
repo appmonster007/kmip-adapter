@@ -125,7 +125,7 @@ public class FooDemoEnum implements KmipEnumeration {
     @ToString
     public enum Standard implements Value {
         DEMO_ONE(0x00000001, "DemoOne", KmipSpec.V1_0, KmipSpec.V1_1, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4),
-        DEMO_TWO(0x00000002, "DemoTwo", KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
+        DEMO_TWO(0x00000002, "DemoTwo", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
 
         private final int value;
         private final String description;

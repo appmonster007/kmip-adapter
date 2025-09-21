@@ -30,7 +30,7 @@ class SplitKeyMethodTest extends AbstractKmipEnumerationSuite<SplitKeyMethod> {
 
     @Override
     protected SplitKeyMethod createDifferentFromDefault() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_2_8);
+        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216);
     }
 
     @Override

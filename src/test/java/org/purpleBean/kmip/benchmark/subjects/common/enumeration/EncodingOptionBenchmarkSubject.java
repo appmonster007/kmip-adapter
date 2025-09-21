@@ -53,7 +53,7 @@ public class EncodingOptionBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new EncodingOption(EncodingOption.Standard.PLACEHOLDER_1);
+        obj = new EncodingOption(EncodingOption.Standard.NO_ENCODING);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

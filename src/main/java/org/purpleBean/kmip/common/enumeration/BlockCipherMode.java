@@ -93,8 +93,8 @@ public class BlockCipherMode implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,42 +116,24 @@ public class BlockCipherMode implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        CBC(0x00000001, "CBC",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECB(0x00000002, "ECB",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PCBC(0x00000003, "PCBC",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CFB(0x00000004, "CFB",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        OFB(0x00000005, "OFB",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CTR(0x00000006, "CTR",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CMAC(0x00000007, "CMAC",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CCM(0x00000008, "CCM",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        GCM(0x00000009, "GCM",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CBC_MAC(0x0000000A, "CBC-MAC",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        XTS(0x0000000B, "XTS",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        AES_KEY_WRAP_PADDING(0x0000000C, "AESKeyWrapPadding",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        NIST_KEY_WRAP(0x0000000D, "NISTKeyWrap",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        X9_102_AESKW(0x0000000E, "X9.102 AESKW",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        X9_102_TDKW(0x0000000F, "X9.102 TDKW",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        X9_102_AKW1(0x00000010, "X9.102 AKW1",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        X9_102_AKW2(0x00000011, "X9.102 AKW2",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        AEAD(0x00000012, "AEAD",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        CBC(0x00000001, "Cbc", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECB(0x00000002, "Ecb", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PCBC(0x00000003, "Pcbc", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CFB(0x00000004, "Cfb", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        OFB(0x00000005, "Ofb", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CTR(0x00000006, "Ctr", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CMAC(0x00000007, "Cmac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CCM(0x00000008, "Ccm", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        GCM(0x00000009, "Gcm", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CBC_MAC(0x0000000A, "CbcMac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        XTS(0x0000000B, "Xts", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        AES_KEY_WRAP_PADDING(0x0000000C, "AesKeyWrapPadding", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        NIST_KEY_WRAP(0x0000000D, "NistKeyWrap", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X9_102_AESKW(0x0000000E, "X9102AESKW", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X9_102_TDKW(0x0000000F, "X9102Tdkw", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X9_102_AKW1(0x00000010, "X9102Akw1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X9_102_AKW2(0x00000011, "X9102Akw2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        AEAD(0x00000012, "Aead", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -174,11 +156,8 @@ public class BlockCipherMode implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

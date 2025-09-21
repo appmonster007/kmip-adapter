@@ -18,6 +18,6 @@ class SplitKeyMethodJsonTest extends AbstractJsonSerializationSuite<SplitKeyMeth
 
     @Override
     protected SplitKeyMethod createVariant() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_2_16);
+        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216);
     }
 }

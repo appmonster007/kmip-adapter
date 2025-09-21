@@ -13,7 +13,7 @@ class RevocationReasonCodeJsonTest extends AbstractJsonSerializationSuite<Revoca
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
     }
 
     @Override

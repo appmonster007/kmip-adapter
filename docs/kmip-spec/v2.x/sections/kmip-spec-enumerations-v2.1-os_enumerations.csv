@@ -1,0 +1,1103 @@
+enumeration_category,enumeration_name,value
+Adjustment Type,Increment,00000001
+Adjustment Type,Decrement,00000002
+Adjustment Type,Negate,00000003
+Adjustment Type,Extensions,8XXXXXXX
+Alternative Name Type,Uninterpreted Text String,00000001
+Alternative Name Type,URI,00000002
+Alternative Name Type,Object Serial Number,00000003
+Alternative Name Type,Email Address,00000004
+Alternative Name Type,DNS Name,00000005
+Alternative Name Type,X.500 Distinguished Name,00000006
+Alternative Name Type,IP Address,00000007
+Alternative Name Type,Extensions,8XXXXXXX
+Asynchronous Indicator,Mandatory,00000001
+Asynchronous Indicator,Optional,00000002
+Asynchronous Indicator,Prohibited,00000003
+Asynchronous Indicator,Extensions,8XXXXXXX
+Attestation Type,TPM Quote,00000001
+Attestation Type,TCG Integrity Report,00000002
+Attestation Type,SAML Assertion,00000003
+Attestation Type,Extensions,8XXXXXXX
+Batch Error Continuation Option,Continue,00000001
+Batch Error Continuation Option,Stop,00000002
+Batch Error Continuation Option,Undo,00000003
+Batch Error Continuation Option,Extensions,8XXXXXXX
+Block Cipher Mode,CBC,00000001
+Block Cipher Mode,ECB,00000002
+Block Cipher Mode,PCBC,00000003
+Block Cipher Mode,CFB,00000004
+Block Cipher Mode,OFB,00000005
+Block Cipher Mode,CTR,00000006
+Block Cipher Mode,CMAC,00000007
+Block Cipher Mode,CCM,00000008
+Block Cipher Mode,GCM,00000009
+Block Cipher Mode,CBC-MAC,0000000A
+Block Cipher Mode,XTS,0000000B
+Block Cipher Mode,AESKeyWrapPadding,0000000C
+Block Cipher Mode,NISTKeyWrap,0000000D
+Block Cipher Mode,X9.102 AESKW,0000000E
+Block Cipher Mode,X9.102 TDKW,0000000F
+Block Cipher Mode,X9.102 AKW1,00000010
+Block Cipher Mode,X9.102 AKW2,00000011
+Block Cipher Mode,AEAD,00000012
+Block Cipher Mode,Extensions,8XXXXXXX
+Cancellation Result,Canceled,00000001
+Cancellation Result,Unable to Cancel,00000002
+Cancellation Result,Completed,00000003
+Cancellation Result,Failed,00000004
+Cancellation Result,Unavailable,00000005
+Cancellation Result,Extensions,8XXXXXXX
+Certificate Request Type,CRMF,00000001
+Certificate Request Type,PKCS#10,00000002
+Certificate Request Type,PEM,00000003
+Certificate Request Type,(Reserved),00000004
+Certificate Request Type,Extensions,8XXXXXXX
+Certificate Type,X.509,00000001
+Certificate Type,PGP,00000002
+Certificate Type,Extensions,8XXXXXXX
+Client Registration Method,Unspecified,00000001
+Client Registration Method,Server Pre-Generated,00000002
+Client Registration Method,Server On-Demand,00000003
+Client Registration Method,Client Generated,00000004
+Client Registration Method,Client Registered,00000005
+Client Registration Method,Extensions,8XXXXXXX
+Credential Type,Username and Password,00000001
+Credential Type,Device,00000002
+Credential Type,Attestation,00000003
+Credential Type,One Time Password,00000004
+Credential Type,Hashed Password,00000005
+Credential Type,Ticket,00000006
+Credential Type,Extensions,8XXXXXXX
+Cryptographic Algorithm,DES,00000001
+Cryptographic Algorithm,3DES,00000002
+Cryptographic Algorithm,AES,00000003
+Cryptographic Algorithm,RSA,00000004
+Cryptographic Algorithm,DSA,00000005
+Cryptographic Algorithm,ECDSA,00000006
+Cryptographic Algorithm,HMAC-SHA1,00000007
+Cryptographic Algorithm,HMAC-SHA224,00000008
+Cryptographic Algorithm,HMAC-SHA256,00000009
+Cryptographic Algorithm,HMAC-SHA384,0000000A
+Cryptographic Algorithm,HMAC-SHA512,0000000B
+Cryptographic Algorithm,HMAC-MD5,0000000C
+Cryptographic Algorithm,DH,0000000D
+Cryptographic Algorithm,ECDH,0000000E
+Cryptographic Algorithm,ECMQV,0000000F
+Cryptographic Algorithm,Blowfish,00000010
+Cryptographic Algorithm,Camellia,00000011
+Cryptographic Algorithm,CAST5,00000012
+Cryptographic Algorithm,IDEA,00000013
+Cryptographic Algorithm,MARS,00000014
+Cryptographic Algorithm,RC2,00000015
+Cryptographic Algorithm,RC4,00000016
+Cryptographic Algorithm,RC5,00000017
+Cryptographic Algorithm,SKIPJACK,00000018
+Cryptographic Algorithm,Twofish,00000019
+Cryptographic Algorithm,EC,0000001A
+Cryptographic Algorithm,One Time Pad,0000001B
+Cryptographic Algorithm,ChaCha20,0000001C
+Cryptographic Algorithm,Poly1305,0000001D
+Cryptographic Algorithm,ChaCha20Poly1305,0000001E
+Cryptographic Algorithm,SHA3-224,0000001F
+Cryptographic Algorithm,SHA3-256,00000020
+Cryptographic Algorithm,SHA3-384,00000021
+Cryptographic Algorithm,SHA3-512,00000022
+Cryptographic Algorithm,HMAC-SHA3-224,00000023
+Cryptographic Algorithm,HMAC-SHA3-256,00000024
+Cryptographic Algorithm,HMAC-SHA3-384,00000025
+Cryptographic Algorithm,HMAC-SHA3-512,00000026
+Cryptographic Algorithm,SHAKE-128,00000027
+Cryptographic Algorithm,SHAKE-256,00000028
+Cryptographic Algorithm,ARIA,00000029
+Cryptographic Algorithm,SEED,0000002A
+Cryptographic Algorithm,SM2,0000002B
+Cryptographic Algorithm,SM3,0000002C
+Cryptographic Algorithm,SM4,0000002D
+Cryptographic Algorithm,GOST R 34.10-2012,0000002E
+Cryptographic Algorithm,GOST R 34.11-2012,0000002F
+Cryptographic Algorithm,GOST R 34.13-2015,00000030
+Cryptographic Algorithm,GOST 28147-89,00000031
+Cryptographic Algorithm,XMSS,00000032
+Cryptographic Algorithm,SPHINCS-256,00000033
+Cryptographic Algorithm,McEliece,00000034
+Cryptographic Algorithm,McEliece-6960119,00000035
+Cryptographic Algorithm,McEliece-8192128,00000036
+Cryptographic Algorithm,Ed25519,00000037
+Cryptographic Algorithm,Ed448,00000038
+Cryptographic Algorithm,Extensions,8XXXXXXX
+Data,Decrypt,00000001
+Data,Encrypt,00000002
+Data,Hash,00000003
+Data,MAC MAC Data,00000004
+Data,RNG Retrieve,00000005
+Data,Sign Signature Data,00000006
+Data,Signature Verify,00000007
+Data,Extensions,8XXXXXXX
+Derivation Method,PBKDF2,00000001
+Derivation Method,HASH,00000002
+Derivation Method,HMAC,00000003
+Derivation Method,ENCRYPT,00000004
+Derivation Method,NIST800-108-C,00000005
+Derivation Method,NIST800-108-F,00000006
+Derivation Method,NIST800-108-DPI,00000007
+Derivation Method,Asymmetric Key,00000008
+Derivation Method,AWS Signature Version 4,00000009
+Derivation Method,HKDF,0000000A
+Derivation Method,Extensions,8XXXXXXX
+Destroy Action,Unspecified,00000001
+Destroy Action,Key Material Deleted,00000002
+Destroy Action,Key Material Shredded,00000003
+Destroy Action,Meta Data Deleted,00000004
+Destroy Action,Meta Data Shredded,00000005
+Destroy Action,Deleted,00000006
+Destroy Action,Shredded,00000007
+Destroy Action,Extensions,8XXXXXXX
+Digital Signature Algorithm,MD2 with RSA Encryption,00000001
+Digital Signature Algorithm,MD5 with RSA Encryption,00000002
+Digital Signature Algorithm,SHA-1 with RSA Encryption,00000003
+Digital Signature Algorithm,SHA-224 with RSA Encryption,00000004
+Digital Signature Algorithm,SHA-256 with RSA Encryption,00000005
+Digital Signature Algorithm,SHA-384 with RSA Encryption,00000006
+Digital Signature Algorithm,SHA-512 with RSA Encryption,00000007
+Digital Signature Algorithm,RSASSA-PSS,00000008
+Digital Signature Algorithm,DSA with SHA-1,00000009
+Digital Signature Algorithm,DSA with SHA224,0000000A
+Digital Signature Algorithm,DSA with SHA256,0000000B
+Digital Signature Algorithm,ECDSA with SHA-1,0000000C
+Digital Signature Algorithm,ECDSA with SHA224,0000000D
+Digital Signature Algorithm,ECDSA with SHA256,0000000E
+Digital Signature Algorithm,ECDSA with SHA384,0000000F
+Digital Signature Algorithm,ECDSA with SHA512,00000010
+Digital Signature Algorithm,SHA3-256 with RSA Encryption,00000011
+Digital Signature Algorithm,SHA3-384 with RSA Encryption,00000012
+Digital Signature Algorithm,SHA3-512 with RSA Encryption,00000013
+Digital Signature Algorithm,Extensions,8XXXXXXX
+DRBG Algorithm,Unspecified,00000001
+DRBG Algorithm,Dual-EC,00000002
+DRBG Algorithm,Hash,00000003
+DRBG Algorithm,HMAC,00000004
+DRBG Algorithm,CTR,00000005
+DRBG Algorithm,Extensions,8XXXXXXX
+Encoding Option,No Encoding,00000001
+Encoding Option,TTLV Encoding,00000002
+Encoding Option,Extensions,8XXXXXXX
+Endpoint Role,Client,00000001
+Endpoint Role,Server,00000002
+Endpoint Role,Extensions,8XXXXXXX
+FIPS186 Variation,Unspecified,00000001
+FIPS186 Variation,GP x-Original,00000002
+FIPS186 Variation,GP x-Change Notice,00000003
+FIPS186 Variation,x-Original,00000004
+FIPS186 Variation,x-Change Notice,00000005
+FIPS186 Variation,k-Original,00000006
+FIPS186 Variation,k-Change Notice,00000007
+FIPS186 Variation,Extensions,8XXXXXXX
+Hashing Algorithm,MD2,00000001
+Hashing Algorithm,MD4,00000002
+Hashing Algorithm,MD5,00000003
+Hashing Algorithm,SHA-1,00000004
+Hashing Algorithm,SHA-224,00000005
+Hashing Algorithm,SHA-256,00000006
+Hashing Algorithm,SHA-384,00000007
+Hashing Algorithm,SHA-512,00000008
+Hashing Algorithm,RIPEMD-160,00000009
+Hashing Algorithm,Tiger,0000000A
+Hashing Algorithm,Whirlpool,0000000B
+Hashing Algorithm,SHA-512/224,0000000C
+Hashing Algorithm,SHA-512/256,0000000D
+Hashing Algorithm,SHA3-224,0000000E
+Hashing Algorithm,SHA3-256,0000000F
+Hashing Algorithm,SHA3-384,00000010
+Hashing Algorithm,SHA3-512,00000011
+Hashing Algorithm,Extensions,8XXXXXXX
+Interop Function,Begin,00000001
+Interop Function,End,00000002
+Interop Function,Reset,00000003
+Interop Function,Extensions,8XXXXXXX
+Item Type,Structure,00000001
+Item Type,Integer,00000002
+Item Type,Long Integer,00000003
+Item Type,Big Integer,00000004
+Item Type,Enumeration,00000005
+Item Type,Boolean,00000006
+Item Type,Text String,00000007
+Item Type,Byte String,00000008
+Item Type,Date Time,00000009
+Item Type,Interval,0000000A
+Item Type,Date Time Extended,0000000B
+Key Compression Type,EC Public Key Type Uncompressed,00000001
+Key Compression Type,EC Public Key Type X9.62 Compressed Prime,00000002
+Key Compression Type,EC Public Key Type X9.62 Compressed Char2,00000003
+Key Compression Type,EC Public Key Type X9.62 Hybrid,00000004
+Key Compression Type,Extensions,8XXXXXXX
+Key Format Type,Raw,00000001
+Key Format Type,Opaque,00000002
+Key Format Type,PKCS#1,00000003
+Key Format Type,PKCS#8,00000004
+Key Format Type,X.509,00000005
+Key Format Type,ECPrivateKey,00000006
+Key Format Type,Transparent Symmetric Key,00000007
+Key Format Type,Transparent DSA Private Key,00000008
+Key Format Type,Transparent DSA Public Key,00000009
+Key Format Type,Transparent RSA Private Key,0000000A
+Key Format Type,Transparent RSA Public Key,0000000B
+Key Format Type,Transparent DH Private Key,0000000C
+Key Format Type,Transparent DH Public Key,0000000D
+Key Format Type,(Reserved),0000000E
+Key Format Type,(Reserved),0000000F
+Key Format Type,(Reserved),00000010
+Key Format Type,(Reserved),00000011
+Key Format Type,(Reserved),00000012
+Key Format Type,(Reserved),00000013
+Key Format Type,Transparent EC Private Key,00000014
+Key Format Type,Transparent EC Public Key,00000015
+Key Format Type,PKCS#12,00000016
+Key Format Type,PKCS#10,00000017
+Key Format Type,Extensions,8XXXXXXX
+Key Role Type,BDK,00000001
+Key Role Type,CVK,00000002
+Key Role Type,DEK,00000003
+Key Role Type,MKAC,00000004
+Key Role Type,MKSMC,00000005
+Key Role Type,MKSMI,00000006
+Key Role Type,MKDAC,00000007
+Key Role Type,MKDN,00000008
+Key Role Type,MKCP,00000009
+Key Role Type,MKOTH,0000000A
+Key Role Type,KEK,0000000B
+Key Role Type,MAC16609,0000000C
+Key Role Type,MAC97971,0000000D
+Key Role Type,MAC97972,0000000E
+Key Role Type,MAC97973,0000000F
+Key Role Type,MAC97974,00000010
+Key Role Type,MAC97975,00000011
+Key Role Type,ZPK,00000012
+Key Role Type,PVKIBM,00000013
+Key Role Type,PVKPVV,00000014
+Key Role Type,PVKOTH,00000015
+Key Role Type,DUKPT,00000016
+Key Role Type,IV,00000017
+Key Role Type,TRKBK,00000018
+Key Role Type,Extensions,8XXXXXXX
+Key Value Location Type,Uninterpreted Text String,00000001
+Key Value Location Type,URI,00000002
+Key Value Location Type,Extensions,8XXXXXXX
+Link Type,Certificate Link,00000101
+Link Type,Public Key Link,00000102
+Link Type,Private Key Link,00000103
+Link Type,Derivation Base Object Link,00000104
+Link Type,Derived Key Link,00000105
+Link Type,Replacement Object Link,00000106
+Link Type,Replaced Object Link,00000107
+Link Type,Parent Link,00000108
+Link Type,Child Link,00000109
+Link Type,Previous Link,0000010A
+Link Type,Next Link,0000010B
+Link Type,PKCS#12 Certificate Link,0000010C
+Link Type,PKCS#12 Password Link,0000010D
+Link Type,Wrapping Key Link,0000010E
+Link Type,Extensions,8XXXXXXX
+Key Wrap Type,Not Wrapped,00000001
+Key Wrap Type,As Registered,00000002
+Key Wrap Type,Extensions,8XXXXXXX
+Mask Generator,MFG1,00000001
+Mask Generator,Extensions,8XXXXXXX
+Name Type,Uninterpreted Text String,00000001
+Name Type,URI,00000002
+Name Type,Extensions,8XXXXXXX
+NIST Key Type,Private signature key,00000001
+NIST Key Type,Public signature verification key,00000002
+NIST Key Type,Symmetric authentication key,00000003
+NIST Key Type,Private authentication key,00000004
+NIST Key Type,Public authentication key,00000005
+NIST Key Type,Symmetric data encryption key,00000006
+NIST Key Type,Symmetric key wrapping key,00000007
+NIST Key Type,Symmetric random number generation key,00000008
+NIST Key Type,Symmetric master key,00000009
+NIST Key Type,Private key transport key,0000000A
+NIST Key Type,Public key transport key,0000000B
+NIST Key Type,Symmetric key agreement key,0000000C
+NIST Key Type,Private static key agreement key,0000000D
+NIST Key Type,Public static key agreement key,0000000E
+NIST Key Type,Private ephemeral key agreement key,0000000F
+NIST Key Type,Public ephemeral key agreement key,00000010
+NIST Key Type,Symmetric authorization key,00000011
+NIST Key Type,Private authorization key,00000012
+NIST Key Type,Public authorization key,00000013
+NIST Key Type,Extensions,8XXXXXXX
+Object Group Member,Group Member Fresh,00000001
+Object Group Member,Group Member Default,00000002
+Object Group Member,Extensions,8XXXXXXX
+Object Type,Certificate,00000001
+Object Type,Symmetric Key,00000002
+Object Type,Public Key,00000003
+Object Type,Private Key,00000004
+Object Type,Split Key,00000005
+Object Type,(Reserved),00000006
+Object Type,Secret Data,00000007
+Object Type,Opaque Object,00000008
+Object Type,PGP Key,00000009
+Object Type,Certificate Request,0000000A
+Object Type,Extensions,8XXXXXXX
+Opaque Data Type,Extensions,8XXXXXXX
+Operation,Create,00000001
+Operation,Create Key Pair,00000002
+Operation,Register,00000003
+Operation,Re-key,00000004
+Operation,Derive Key,00000005
+Operation,Certify,00000006
+Operation,Re-certify,00000007
+Operation,Locate,00000008
+Operation,Check,00000009
+Operation,Get,0000000A
+Operation,Get Attributes,0000000B
+Operation,Get Attribute List,0000000C
+Operation,Add Attribute,0000000D
+Operation,Modify Attribute,0000000E
+Operation,Delete Attribute,0000000F
+Operation,Obtain Lease,00000010
+Operation,Get Usage Allocation,00000011
+Operation,Activate,00000012
+Operation,Revoke,00000013
+Operation,Destroy,00000014
+Operation,Archive,00000015
+Operation,Recover,00000016
+Operation,Validate,00000017
+Operation,Query,00000018
+Operation,Cancel,00000019
+Operation,Poll,0000001A
+Operation,Notify,0000001B
+Operation,Put,0000001C
+Operation,Re-key Key Pair,0000001D
+Operation,Discover Versions,0000001E
+Operation,Encrypt,0000001F
+Operation,Decrypt,00000020
+Operation,Sign,00000021
+Operation,Signature Verify,00000022
+Operation,MAC,00000023
+Operation,MAC Verify,00000024
+Operation,RNG Retrieve,00000025
+Operation,RNG Seed,00000026
+Operation,Hash,00000027
+Operation,Create Split Key,00000028
+Operation,Join Split Key,00000029
+Operation,Import,0000002A
+Operation,Export,0000002B
+Operation,Log,0000002C
+Operation,Login,0000002D
+Operation,Logout,0000002E
+Operation,Delegated Login,0000002F
+Operation,Adjust Attribute,00000030
+Operation,Set Attribute,00000031
+Operation,Set Endpoint Role,00000032
+Operation,PKCS#11,00000033
+Operation,Interop,00000034
+Operation,Re-Provision,00000035
+Operation,Set Defaults,00000036
+Operation,Set Constraints,00000037
+Operation,Get Constraints,00000038
+Operation,Query Asynchronous Requests,00000039
+Operation,Process,0000003A
+Operation,Ping,0000003B
+Operation,Extensions,8XXXXXXX
+Padding Method,None,00000001
+Padding Method,OAEP,00000002
+Padding Method,PKCS5,00000003
+Padding Method,SSL3,00000004
+Padding Method,Zeros,00000005
+Padding Method,ANSI X9.23,00000006
+Padding Method,ISO 10126,00000007
+Padding Method,PKCS1 v1.5,00000008
+Padding Method,X9.31,00000009
+Padding Method,PSS,0000000A
+Padding Method,Extensions,8XXXXXXX
+Processing Stage,Submitted,00000001
+Processing Stage,In Process,00000002
+Processing Stage,Completed,00000003
+Processing Stage,Extensions,8XXXXXXX
+Profile Name,(Reserved),00000001-00000103
+Profile Name,Complete Server Basic,00000104
+Profile Name,Complete Server TLS v1.2,00000105
+Profile Name,Tape Library Client,00000106
+Profile Name,Tape Library Server,00000107
+Profile Name,Symmetric Key Lifecycle Client,00000108
+Profile Name,Symmetric Key Lifecycle Server,00000109
+Profile Name,Asymmetric Key Lifecycle Client,0000010A
+Profile Name,Asymmetric Key Lifecycle Server,0000010B
+Profile Name,Basic Cryptographic Client,0000010C
+Profile Name,Basic Cryptographic Server,0000010D
+Profile Name,Advanced Cryptographic Client,0000010E
+Profile Name,Advanced Cryptographic Server,0000010F
+Profile Name,RNG Cryptographic Client,00000110
+Profile Name,RNG Cryptographic Server,00000111
+Profile Name,Basic Symmetric Key Foundry Client,00000112
+Profile Name,Intermediate Symmetric Key Foundry Client,00000113
+Profile Name,Advanced Symmetric Key Foundry Client,00000114
+Profile Name,Symmetric Key Foundry Server,00000115
+Profile Name,Opaque Managed Object Store Client,00000116
+Profile Name,Opaque Managed Object Store Server,00000117
+Profile Name,(Reserved),00000118
+Profile Name,(Reserved),00000119
+Profile Name,(Reserved),0000011A
+Profile Name,(Reserved),0000011B
+Profile Name,Storage Array with Self Encrypting Drive Client,0000011C
+Profile Name,Storage Array with Self Encrypting Drive Server,0000011D
+Profile Name,HTTPS Client,0000011E
+Profile Name,HTTPS Server,0000011F
+Profile Name,JSON Client,00000120
+Profile Name,JSON Server,00000121
+Profile Name,XML Client,00000122
+Profile Name,XML Server,00000123
+Profile Name,AES XTS Client,00000124
+Profile Name,AES XTS Server,00000125
+Profile Name,Quantum Safe Client,00000126
+Profile Name,Quantum Safe Server,00000127
+Profile Name,PKCS#11 Client,00000128
+Profile Name,PKCS#11 Server,00000129
+Profile Name,Baseline Client,0000012A
+Profile Name,Baseline Server,0000012B
+Profile Name,Complete Server,0000012C
+Profile Name,Extensions,8XXXXXXX
+Protection Level,High,00000001
+Protection Level,Low,00000002
+Protection Level,Extensions,8XXXXXXX
+Put Function,New,00000001
+Put Function,Replace,00000002
+Put Function,Extensions,8XXXXXXX
+Query Function,Query Operations,00000001
+Query Function,Query Objects,00000002
+Query Function,Query Server Information,00000003
+Query Function,Query Application Namespaces,00000004
+Query Function,Query Extension List,00000005
+Query Function,Query Extension Map,00000006
+Query Function,Query Attestation Types,00000007
+Query Function,Query RNGs,00000008
+Query Function,Query Validations,00000009
+Query Function,Query Profiles,0000000A
+Query Function,Query Capabilities,0000000B
+Query Function,Query Client Registration Methods,0000000C
+Query Function,Query Defaults Information,0000000D
+Query Function,Query Storage Protection Masks,0000000E
+Query Function,Extensions,8XXXXXXX
+Recommended Curve,P-192,00000001
+Recommended Curve,K-163,00000002
+Recommended Curve,B-163,00000003
+Recommended Curve,P-224,00000004
+Recommended Curve,K-233,00000005
+Recommended Curve,B-233,00000006
+Recommended Curve,P-256,00000007
+Recommended Curve,K-283,00000008
+Recommended Curve,B-283,00000009
+Recommended Curve,P-384,0000000A
+Recommended Curve,K-409,0000000B
+Recommended Curve,B-409,0000000C
+Recommended Curve,P-521,0000000D
+Recommended Curve,K-571,0000000E
+Recommended Curve,B-571,0000000F
+Recommended Curve,SECP112R1,00000010
+Recommended Curve,SECP112R2,00000011
+Recommended Curve,SECP128R1,00000012
+Recommended Curve,SECP128R2,00000013
+Recommended Curve,SECP160K1,00000014
+Recommended Curve,SECP160R1,00000015
+Recommended Curve,SECP160R2,00000016
+Recommended Curve,SECP192K1,00000017
+Recommended Curve,SECP224K1,00000018
+Recommended Curve,SECP256K1,00000019
+Recommended Curve,SECT113R1,0000001A
+Recommended Curve,SECT113R2,0000001B
+Recommended Curve,SECT131R1,0000001C
+Recommended Curve,SECT131R2,0000001D
+Recommended Curve,SECT163R1,0000001E
+Recommended Curve,SECT193R1,0000001F
+Recommended Curve,SECT193R2,00000020
+Recommended Curve,SECT239K1,00000021
+Recommended Curve,ANSIX9P192V2,00000022
+Recommended Curve,ANSIX9P192V3,00000023
+Recommended Curve,ANSIX9P239V1,00000024
+Recommended Curve,ANSIX9P239V2,00000025
+Recommended Curve,ANSIX9P239V3,00000026
+Recommended Curve,ANSIX9C2PNB163V1,00000027
+Recommended Curve,ANSIX9C2PNB163V2,00000028
+Recommended Curve,ANSIX9C2PNB163V3,00000029
+Recommended Curve,ANSIX9C2PNB176V1,0000002A
+Recommended Curve,ANSIX9C2TNB191V1,0000002B
+Recommended Curve,ANSIX9C2TNB191V2,0000002C
+Recommended Curve,ANSIX9C2TNB191V3,0000002D
+Recommended Curve,ANSIX9C2PNB208W1,0000002E
+Recommended Curve,ANSIX9C2TNB239V1,0000002F
+Recommended Curve,ANSIX9C2TNB239V2,00000030
+Recommended Curve,ANSIX9C2TNB239V3,00000031
+Recommended Curve,ANSIX9C2PNB272W1,00000032
+Recommended Curve,ANSIX9C2PNB304W1,00000033
+Recommended Curve,ANSIX9C2TNB359V1,00000034
+Recommended Curve,ANSIX9C2PNB368W1,00000035
+Recommended Curve,ANSIX9C2TNB431R1,00000036
+Recommended Curve,BRAINPOOLP160R1,00000037
+Recommended Curve,BRAINPOOLP160T1,00000038
+Recommended Curve,BRAINPOOLP192R1,00000039
+Recommended Curve,BRAINPOOLP192T1,0000003A
+Recommended Curve,BRAINPOOLP224R1,0000003B
+Recommended Curve,BRAINPOOLP224T1,0000003C
+Recommended Curve,BRAINPOOLP256R1,0000003D
+Recommended Curve,BRAINPOOLP256T1,0000003E
+Recommended Curve,BRAINPOOLP320R1,0000003F
+Recommended Curve,BRAINPOOLP320T1,00000040
+Recommended Curve,BRAINPOOLP384R1,00000041
+Recommended Curve,BRAINPOOLP384T1,00000042
+Recommended Curve,BRAINPOOLP512R1,00000043
+Recommended Curve,BRAINPOOLP512T1,00000044
+Recommended Curve,CURVE25519,00000045
+Recommended Curve,CURVE448,00000046
+Recommended Curve,Extensions,8XXXXXXX
+Result Reason,Item Not Found,00000001
+Result Reason,Response Too Large,00000002
+Result Reason,Authentication Not Successful,00000003
+Result Reason,Invalid Message,00000004
+Result Reason,Operation Not Supported,00000005
+Result Reason,Missing Data,00000006
+Result Reason,Invalid Field,00000007
+Result Reason,Feature Not Supported,00000008
+Result Reason,Operation Canceled By Requester,00000009
+Result Reason,Cryptographic Failure,0000000A
+Result Reason,(Reserved),0000000B
+Result Reason,Permission Denied,0000000C
+Result Reason,Object Archived,0000000D
+Result Reason,(Reserved),0000000E
+Result Reason,Application Namespace Not Supported,0000000F
+Result Reason,Key Format Type Not Supported,00000010
+Result Reason,Key Compression Type Not Supported,00000011
+Result Reason,Encoding Option Error,00000012
+Result Reason,Key Value Not Present,00000013
+Result Reason,Attestation Required,00000014
+Result Reason,Attestation Failed,00000015
+Result Reason,Sensitive,00000016
+Result Reason,Not Extractable,00000017
+Result Reason,Object Already Exists,00000018
+Result Reason,Invalid Ticket,00000019
+Result Reason,Usage Limit Exceeded,0000001A
+Result Reason,Numeric Range,0000001B
+Result Reason,Invalid Data Type,0000001C
+Result Reason,Read Only Attribute,0000001D
+Result Reason,Multi Valued Attribute,0000001E
+Result Reason,Unsupported Attribute,0000001F
+Result Reason,Attribute Instance Not Found,00000020
+Result Reason,Attribute Not Found,00000021
+Result Reason,Attribute Read Only,00000022
+Result Reason,Attribute Single Valued,00000023
+Result Reason,Bad Cryptographic Parameters,00000024
+Result Reason,Bad Password,00000025
+Result Reason,Codec Error,00000026
+Result Reason,(Reserved),00000027
+Result Reason,Illegal Object Type,00000028
+Result Reason,Incompatible Cryptographic Usage Mask,00000029
+Result Reason,Internal Server Error,0000002A
+Result Reason,Invalid Asynchronous Correlation Value,0000002B
+Result Reason,Invalid Attribute,0000002C
+Result Reason,Invalid Attribute Value,0000002D
+Result Reason,Invalid Correlation Value,0000002E
+Result Reason,Invalid CSR,0000002F
+Result Reason,Invalid Object Type,00000030
+Result Reason,(Reserved),00000031
+Result Reason,Key Wrap Type Not Supported,00000032
+Result Reason,(Reserved),00000033
+Result Reason,Missing Initialization Vector,00000034
+Result Reason,Non Unique Name Attribute,00000035
+Result Reason,Object Destroyed,00000036
+Result Reason,Object Not Found,00000037
+Result Reason,(Reserved),00000038
+Result Reason,Not Authorised,00000039
+Result Reason,Server Limit Exceeded,0000003A
+Result Reason,Unknown Enumeration,0000003B
+Result Reason,Unknown Message Extension,0000003C
+Result Reason,Unknown Tag,0000003D
+Result Reason,Unsupported Cryptographic Parameters,0000003E
+Result Reason,Unsupported Protocol Version,0000003F
+Result Reason,Wrapping Object Archived,00000040
+Result Reason,Wrapping Object Destroyed,00000041
+Result Reason,Wrapping Object Not Found,00000042
+Result Reason,Wrong Key Lifecycle State,00000043
+Result Reason,Protection Storage Unavailable,00000044
+Result Reason,PKCS#11 Codec Error,00000045
+Result Reason,PKCS#11 Invalid Function,00000046
+Result Reason,PKCS#11 Invalid Interface,00000047
+Result Reason,Private Protection Storage Unavailable,00000048
+Result Reason,Public Protection Storage Unavailable,00000049
+Result Reason,Unknown Object Group,0000004A
+Result Reason,Constraint Violation,0000004B
+Result Reason,Duplicate Process Request,0000004C
+Result Reason,General Failure,00000100
+Result Reason,Extensions,8XXXXXXX
+Result Status,Success,00000000
+Result Status,Operation Failed,00000001
+Result Status,Operation Pending,00000002
+Result Status,Operation Undone,00000003
+Result Status,Extensions,8XXXXXXX
+Revocation Reason Code,Unspecified,00000001
+Revocation Reason Code,Key Compromise,00000002
+Revocation Reason Code,CA Compromise,00000003
+Revocation Reason Code,Affiliation Changed,00000004
+Revocation Reason Code,Superseded,00000005
+Revocation Reason Code,Cessation of Operation,00000006
+Revocation Reason Code,Privilege Withdrawn,00000007
+Revocation Reason Code,Extensions,8XXXXXXX
+RNG Algorithm,Unspecified,00000001
+RNG Algorithm,FIPS 186-2,00000002
+RNG Algorithm,DRBG,00000003
+RNG Algorithm,NRBG,00000004
+RNG Algorithm,ANSI X9.31,00000005
+RNG Algorithm,ANSI X9.62,00000006
+RNG Algorithm,Extensions,8XXXXXXX
+RNG Mode,Unspecified,00000001
+RNG Mode,Shared Instantiation,00000002
+RNG Mode,Non-Shared Instantiation,00000003
+RNG Mode,Extensions,8XXXXXXX
+Rotate Name Type,Uninterpreted Text String,00000001
+Rotate Name Type,URI,00000002
+Rotate Name Type,Extensions,8XXXXXXX
+Secret Data Type,Password,00000001
+Secret Data Type,Seed,00000002
+Secret Data Type,Extensions,8XXXXXXX
+Shredding Algorithm,Unspecified,00000001
+Shredding Algorithm,Cryptographic,00000002
+Shredding Algorithm,Unsupported,00000003
+Shredding Algorithm,Extensions,8XXXXXXX
+Split Key Method,XOR,00000001
+Split Key Method,Polynomial Sharing GF (216),00000002
+Split Key Method,Polynomial Sharing Prime Field,00000003
+Split Key Method,Polynomial Sharing GF (28),00000004
+Split Key Method,Extensions,8XXXXXXX
+State,Pre-Active,00000001
+State,Active,00000002
+State,Deactivated,00000003
+State,Compromised,00000004
+State,Destroyed,00000005
+State,Destroyed Compromised,00000006
+State,Extensions,8XXXXXXX
+Tag,(Unused),000000 - 420000
+Tag,Activation Date,420001
+Tag,Application Data,420002
+Tag,Application Namespace,420003
+Tag,Application Specific Information,420004
+Tag,Archive Date,420005
+Tag,Asynchronous Correlation Value,420006
+Tag,Asynchronous Indicator,420007
+Tag,Attribute,420008
+Tag,(Reserved),420009
+Tag,Attribute Name,42000A
+Tag,Attribute Value,42000B
+Tag,Authentication,42000C
+Tag,Batch Count,42000D
+Tag,Batch Error Continuation Option,42000E
+Tag,Batch Item,42000F
+Tag,Batch Order Option,420010
+Tag,Block Cipher Mode,420011
+Tag,Cancellation Result,420012
+Tag,Certificate,420013
+Tag,(Reserved),420014
+Tag,(Reserved),420015
+Tag,(Reserved),420016
+Tag,(Reserved),420017
+Tag,Certificate Request,420018
+Tag,Certificate Request Type,420019
+Tag,(Reserved),42001A
+Tag,(Reserved),42001B
+Tag,(Reserved),42001C
+Tag,Certificate Type,42001D
+Tag,Certificate Value,42001E
+Tag,(Reserved),42001F
+Tag,Compromise Date,420020
+Tag,Compromise Occurrence Date,420021
+Tag,Contact Information,420022
+Tag,Credential,420023
+Tag,Credential Type,420024
+Tag,Credential Value,420025
+Tag,Criticality Indicator,420026
+Tag,CRT Coefficient,420027
+Tag,Cryptographic Algorithm,420028
+Tag,Cryptographic Domain Parameters,420029
+Tag,Cryptographic Length,42002A
+Tag,Cryptographic Parameters,42002B
+Tag,Cryptographic Usage Mask,42002C
+Tag,(Reserved),42002D
+Tag,D,42002E
+Tag,Deactivation Date,42002F
+Tag,Derivation Data,420030
+Tag,Derivation Method,420031
+Tag,Derivation Parameters,420032
+Tag,Destroy Date,420033
+Tag,Digest,420034
+Tag,Digest Value,420035
+Tag,Encryption Key Information,420036
+Tag,G,420037
+Tag,Hashing Algorithm,420038
+Tag,Initial Date,420039
+Tag,Initialization Vector,42003A
+Tag,(Reserved),42003B
+Tag,Iteration Count,42003C
+Tag,IV/Counter/Nonce,42003D
+Tag,J,42003E
+Tag,Key,42003F
+Tag,Key Block,420040
+Tag,Key Compression Type,420041
+Tag,Key Format Type,420042
+Tag,Key Material,420043
+Tag,Key Part Identifier,420044
+Tag,Key Value,420045
+Tag,Key Wrapping Data,420046
+Tag,Key Wrapping Specification,420047
+Tag,Last Change Date,420048
+Tag,Lease Time,420049
+Tag,Link,42004A
+Tag,Link Type,42004B
+Tag,Linked Object Identifier,42004C
+Tag,MAC/Signature,42004D
+Tag,MAC/Signature Key Information,42004E
+Tag,Maximum Items,42004F
+Tag,Maximum Response Size,420050
+Tag,Message Extension,420051
+Tag,Modulus,420052
+Tag,Name,420053
+Tag,Name Type,420054
+Tag,Name Value,420055
+Tag,Object Group,420056
+Tag,Object Type,420057
+Tag,Offset,420058
+Tag,Opaque Data Type,420059
+Tag,Opaque Data Value,42005A
+Tag,Opaque Object,42005B
+Tag,Operation,42005C
+Tag,(Reserved),42005D
+Tag,P,42005E
+Tag,Padding Method,42005F
+Tag,Prime Exponent P,420060
+Tag,Prime Exponent Q,420061
+Tag,Prime Field Size,420062
+Tag,Private Exponent,420063
+Tag,Private Key,420064
+Tag,(Reserved),420065
+Tag,Private Key Unique Identifier,420066
+Tag,Process Start Date,420067
+Tag,Protect Stop Date,420068
+Tag,Protocol Version,420069
+Tag,Protocol Version Major,42006A
+Tag,Protocol Version Minor,42006B
+Tag,Public Exponent,42006C
+Tag,Public Key,42006D
+Tag,(Reserved),42006E
+Tag,Public Key Unique Identifier,42006F
+Tag,Put Function,420070
+Tag,Q,420071
+Tag,Q String,420072
+Tag,Qlength,420073
+Tag,Query Function,420074
+Tag,Recommended Curve,420075
+Tag,Replaced Unique Identifier,420076
+Tag,Request Header,420077
+Tag,Request Message,420078
+Tag,Request Payload,420079
+Tag,Response Header,42007A
+Tag,Response Message,42007B
+Tag,Response Payload,42007C
+Tag,Result Message,42007D
+Tag,Result Reason,42007E
+Tag,Result Status,42007F
+Tag,Revocation Message,420080
+Tag,Revocation Reason,420081
+Tag,Revocation Reason Code,420082
+Tag,Key Role Type,420083
+Tag,Salt,420084
+Tag,Secret Data,420085
+Tag,Secret Data Type,420086
+Tag,(Reserved),420087
+Tag,Server Information,420088
+Tag,Split Key,420089
+Tag,Split Key Method,42008A
+Tag,Split Key Parts,42008B
+Tag,Split Key Threshold,42008C
+Tag,State,42008D
+Tag,Storage Status Mask,42008E
+Tag,Symmetric Key,42008F
+Tag,(Reserved),420090
+Tag,(Reserved),420091
+Tag,Time Stamp,420092
+Tag,Unique Batch Item ID,420093
+Tag,Unique Identifier,420094
+Tag,Usage Limits,420095
+Tag,Usage Limits Count,420096
+Tag,Usage Limits Total,420097
+Tag,Usage Limits Unit,420098
+Tag,Username,420099
+Tag,Validity Date,42009A
+Tag,Validity Indicator,42009B
+Tag,Vendor Extension,42009C
+Tag,Vendor Identification,42009D
+Tag,Wrapping Method,42009E
+Tag,X,42009F
+Tag,Y,4200A0
+Tag,Password,4200A1
+Tag,Device Identifier,4200A2
+Tag,Encoding Option,4200A3
+Tag,Extension Information,4200A4
+Tag,Extension Name,4200A5
+Tag,Extension Tag,4200A6
+Tag,Extension Type,4200A7
+Tag,Fresh,4200A8
+Tag,Machine Identifier,4200A9
+Tag,Media Identifier,4200AA
+Tag,Network Identifier,4200AB
+Tag,Object Group Member,4200AC
+Tag,Certificate Length,4200AD
+Tag,Digital Signature Algorithm,4200AE
+Tag,Certificate Serial Number,4200AF
+Tag,Device Serial Number,4200B0
+Tag,Issuer Alternative Name,4200B1
+Tag,Issuer Distinguished Name,4200B2
+Tag,Subject Alternative Name,4200B3
+Tag,Subject Distinguished Name,4200B4
+Tag,X.509 Certificate Identifier,4200B5
+Tag,X.509 Certificate Issuer,4200B6
+Tag,X.509 Certificate Subject,4200B7
+Tag,Key Value Location,4200B8
+Tag,Key Value Location Value,4200B9
+Tag,Key Value Location Type,4200BA
+Tag,Key Value Present,4200BB
+Tag,Original Creation Date,4200BC
+Tag,PGP Key,4200BD
+Tag,PGP Key Version,4200BE
+Tag,Alternative Name,4200BF
+Tag,Alternative Name Value,4200C0
+Tag,Alternative Name Type,4200C1
+Tag,Data,4200C2
+Tag,Signature Data,4200C3
+Tag,Data Length,4200C4
+Tag,Random IV,4200C5
+Tag,MAC Data,4200C6
+Tag,Attestation Type,4200C7
+Tag,Nonce,4200C8
+Tag,Nonce ID,4200C9
+Tag,Nonce Value,4200CA
+Tag,Attestation Measurement,4200CB
+Tag,Attestation Assertion,4200CC
+Tag,IV Length,4200CD
+Tag,Tag Length,4200CE
+Tag,Fixed Field Length,4200CF
+Tag,Counter Length,4200D0
+Tag,Initial Counter Value,4200D1
+Tag,Invocation Field Length,4200D2
+Tag,Attestation Capable Indicator,4200D3
+Tag,Offset Items,4200D4
+Tag,Located Items,4200D5
+Tag,Correlation Value,4200D6
+Tag,Init Indicator,4200D7
+Tag,Final Indicator,4200D8
+Tag,RNG Parameters,4200D9
+Tag,RNG Algorithm,4200DA
+Tag,DRBG Algorithm,4200DB
+Tag,FIPS186 Variation,4200DC
+Tag,Prediction Resistance,4200DD
+Tag,Random Number Generator,4200DE
+Tag,Validation Information,4200DF
+Tag,Validation Authority Type,4200E0
+Tag,Validation Authority Country,4200E1
+Tag,Validation Authority URI,4200E2
+Tag,Validation Version Major,4200E3
+Tag,Validation Version Minor,4200E4
+Tag,Validation Type,4200E5
+Tag,Validation Level,4200E6
+Tag,Validation Certificate Identifier,4200E7
+Tag,Validation Certificate URI,4200E8
+Tag,Validation Vendor URI,4200E9
+Tag,Validation Profile,4200EA
+Tag,Profile Information,4200EB
+Tag,Profile Name,4200EC
+Tag,Server URI,4200ED
+Tag,Server Port,4200EE
+Tag,Streaming Capability,4200EF
+Tag,Asynchronous Capability,4200F0
+Tag,Attestation Capability,4200F1
+Tag,Unwrap Mode,4200F2
+Tag,Destroy Action,4200F3
+Tag,Shredding Algorithm,4200F4
+Tag,RNG Mode,4200F5
+Tag,Client Registration Method,4200F6
+Tag,Capability Information,4200F7
+Tag,Key Wrap Type,4200F8
+Tag,Batch Undo Capability,4200F9
+Tag,Batch Continue Capability,4200FA
+Tag,PKCS#12 Friendly Name,4200FB
+Tag,Description,4200FC
+Tag,Comment,4200FD
+Tag,AuthenticatedEncryption Additional Data,4200FE
+Tag,Authenticated Encryption Tag,4200FF
+Tag,Salt Length,420100
+Tag,Mask Generator,420101
+Tag,Mask Generator Hashing Algorithm,420102
+Tag,P Source,420103
+Tag,Trailer Field,420104
+Tag,Client Correlation Value,420105
+Tag,Server Correlation Value,420106
+Tag,Digested Data,420107
+Tag,Certificate Subject CN,420108
+Tag,Certificate Subject O,420109
+Tag,Certificate Subject OU,42010A
+Tag,Certificate Subject Email,42010B
+Tag,Certificate Subject C,42010C
+Tag,Certificate Subject ST,42010D
+Tag,Certificate Subject L,42010E
+Tag,Certificate Subject UID,42010F
+Tag,Certificate Subject Serial Number,420110
+Tag,Certificate Subject Title,420111
+Tag,Certificate Subject DC,420112
+Tag,Certificate Subject DN Qualifier,420113
+Tag,Certificate Issuer CN,420114
+Tag,Certificate Issuer O,420115
+Tag,Certificate Issuer OU,420116
+Tag,Certificate Issuer Email,420117
+Tag,Certificate Issuer C,420118
+Tag,Certificate Issuer ST,420119
+Tag,Certificate Issuer L,42011A
+Tag,Certificate Issuer UID,42011B
+Tag,Certificate Issuer Serial Number,42011C
+Tag,Certificate Issuer Title,42011D
+Tag,Certificate Issuer DC,42011E
+Tag,Certificate Issuer DN Qualifier,42011F
+Tag,Sensitive,420120
+Tag,Always Sensitive,420121
+Tag,Extractable,420122
+Tag,Never Extractable,420123
+Tag,Replace Existing,420124
+Tag,Attributes,420125
+Tag,Common Attributes,420126
+Tag,Private Key Attributes,420127
+Tag,Public Key Attributes,420128
+Tag,Extension Enumeration,420129
+Tag,Extension Attribute,42012A
+Tag,Extension Parent Structure Tag,42012B
+Tag,Extension Description,42012C
+Tag,Server Name,42012D
+Tag,Server Serial Number,42012E
+Tag,Server Version,42012F
+Tag,Server Load,420130
+Tag,Product Name,420131
+Tag,Build Level,420132
+Tag,Build Date,420133
+Tag,Cluster Info,420134
+Tag,Alternate Failover Endpoints,420135
+Tag,Short Unique Identifier,420136
+Tag,Reserved,420137
+Tag,Tag,420138
+Tag,Certificate Request Unique Identifier,420139
+Tag,NIST Key Type,42013A
+Tag,Attribute Reference,42013B
+Tag,Current Attribute,42013C
+Tag,New Attribute,42013D
+Tag,(Reserved),42013E
+Tag,(Reserved),42013F
+Tag,Certificate Request Value,420140
+Tag,Log Message,420141
+Tag,Profile Version,420142
+Tag,Profile Version Major,420143
+Tag,Profile Version Minor,420144
+Tag,Protection Level,420145
+Tag,Protection Period,420146
+Tag,Quantum Safe,420147
+Tag,Quantum Safe Capability,420148
+Tag,Ticket,420149
+Tag,Ticket Type,42014A
+Tag,Ticket Value,42014B
+Tag,Request Count,42014C
+Tag,Rights,42014D
+Tag,Objects,42014E
+Tag,Operations,42014F
+Tag,Right,420150
+Tag,Endpoint Role,420151
+Tag,Defaults Information,420152
+Tag,Object Defaults,420153
+Tag,Ephemeral,420154
+Tag,Server Hashed Password,420155
+Tag,One Time Password,420156
+Tag,Hashed Password,420157
+Tag,Adjustment Type,420158
+Tag,PKCS#11 Interface,420159
+Tag,PKCS#11 Function,42015A
+Tag,PKCS#11 Input Parameters,42015B
+Tag,PKCS#11 Output Parameters,42015C
+Tag,PKCS#11 Return Code,42015D
+Tag,Protection Storage Mask,42015E
+Tag,Protection Storage Masks,42015F
+Tag,Interop Function,420160
+Tag,Interop Identifier,420161
+Tag,Adjustment Value,420162
+Tag,Common Protection Storage Masks,420163
+Tag,Private Protection Storage Masks,420164
+Tag,Public Protection Storage Masks,420165
+Tag,Object Groups,420166
+Tag,Object Types,420167
+Tag,Constraints,420168
+Tag,Constraint,420169
+Tag,Rotate Interval,0x42016A
+Tag,Rotate Automatic,0x42016B
+Tag,Rotate Offset,0x42016C
+Tag,Rotate Date,0x42016D
+Tag,Rotate Generation,0x42016E
+Tag,Rotate Name,0x42016F
+Tag,Rotate Name Value,0x420170
+Tag,Rotate Name Type,0x420171
+Tag,Rotate Latest,0x420172
+Tag,Asynchronous Request,0x420173
+Tag,Submission Date,0x420174
+Tag,Processing Stage,0x420175
+Tag,Asynchronous Correlation Values,0x420176
+Tag,(Reserved),420XXX – 42FFFF
+Tag,(Unused),430000 – 53FFFF
+Tag,Extensions,540000 – 54FFFF
+Tag,(Unused),550000 - FFFFFF
+Ticket Type,Login,00000001
+Ticket Type,Extensions,8XXXXXXX
+Unique Identifier,ID Placeholder,00000001
+Unique Identifier,Certify,00000002
+Unique Identifier,Create,00000003
+Unique Identifier,Create Key Pair,00000004
+Unique Identifier,Create Key Pair Private Key,00000005
+Unique Identifier,Create Key Pair Public Key,00000006
+Unique Identifier,Create Split Key,00000007
+Unique Identifier,Derive Key,00000008
+Unique Identifier,Import,00000009
+Unique Identifier,Join Split Key,0000000A
+Unique Identifier,Locate,0000000B
+Unique Identifier,Register,0000000C
+Unique Identifier,Re-key,0000000D
+Unique Identifier,Re-certify,0000000E
+Unique Identifier,Re-key Key Pair,0000000F
+Unique Identifier,Re-key Key Pair Private Key,00000010
+Unique Identifier,Re-key Key Pair Public Key,00000011
+Unique Identifier,Extensions,8XXXXXXX
+Unwrap Mode,Unspecified,00000001
+Unwrap Mode,Processed,00000002
+Unwrap Mode,Not Processed,00000003
+Unwrap Mode,Extensions,8XXXXXXX
+Usage Limits Unit,Byte,00000001
+Usage Limits Unit,Object,00000002
+Usage Limits Unit,Extensions,8XXXXXXX
+Validity Indicator,Valid,00000001
+Validity Indicator,Invalid,00000002
+Validity Indicator,Unknown,00000003
+Validity Indicator,Extensions,8XXXXXXX
+Wrapping Method,Encrypt,00000001
+Wrapping Method,MAC/sign,00000002
+Wrapping Method,Encrypt then MAC/sign,00000003
+Wrapping Method,MAC/sign then encrypt,00000004
+Wrapping Method,TR-31,00000005
+Wrapping Method,Extensions,8XXXXXXX
+Validation Authority Type,Unspecified,00000001
+Validation Authority Type,NIST CMVP,00000002
+Validation Authority Type,Common Criteria,00000003
+Validation Authority Type,Extensions,8XXXXXXX
+Validation Type,Unspecified,00000001
+Validation Type,Hardware,00000002
+Validation Type,Software,00000003
+Validation Type,Firmware,00000004
+Validation Type,Hybrid,00000005
+Validation Type,Extensions,8XXXXXXX

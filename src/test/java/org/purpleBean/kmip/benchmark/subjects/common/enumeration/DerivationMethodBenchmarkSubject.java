@@ -53,7 +53,7 @@ public class DerivationMethodBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_1);
+        obj = new DerivationMethod(DerivationMethod.Standard.PBKDF2);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

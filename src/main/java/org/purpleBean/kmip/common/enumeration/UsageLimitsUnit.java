@@ -93,8 +93,8 @@ public class UsageLimitsUnit implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,10 +116,8 @@ public class UsageLimitsUnit implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        BYTE(0x00000001, "Byte",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2),
-        OBJECT(0x00000002, "Object",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2);
+        BYTE(0x00000001, "Byte", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        OBJECT(0x00000002, "Object", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -142,11 +140,8 @@ public class UsageLimitsUnit implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

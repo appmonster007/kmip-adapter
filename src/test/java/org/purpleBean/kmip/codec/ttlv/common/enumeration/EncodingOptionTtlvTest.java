@@ -13,11 +13,11 @@ class EncodingOptionTtlvTest extends AbstractTtlvSerializationSuite<EncodingOpti
 
     @Override
     protected EncodingOption createDefault() {
-        return new EncodingOption(EncodingOption.Standard.PLACEHOLDER_1);
+        return new EncodingOption(EncodingOption.Standard.NO_ENCODING);
     }
 
     @Override
     protected EncodingOption createVariant() {
-        return new EncodingOption(EncodingOption.Standard.PLACEHOLDER_2);
+        return new EncodingOption(EncodingOption.Standard.TTLV_ENCODING);
     }
 }

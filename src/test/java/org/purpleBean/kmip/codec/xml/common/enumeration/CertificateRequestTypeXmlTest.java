@@ -18,6 +18,6 @@ class CertificateRequestTypeXmlTest extends AbstractXmlSerializationSuite<Certif
 
     @Override
     protected CertificateRequestType createVariant() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PROVISIONING);
+        return new CertificateRequestType(CertificateRequestType.Standard.PKCS_10);
     }
 }

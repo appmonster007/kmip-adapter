@@ -53,7 +53,7 @@ public class RevocationReasonCodeBenchmarkSubject implements KmipBenchmarkSubjec
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
+        obj = new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

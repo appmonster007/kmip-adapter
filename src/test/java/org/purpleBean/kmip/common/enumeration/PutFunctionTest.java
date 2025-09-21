@@ -20,17 +20,17 @@ class PutFunctionTest extends AbstractKmipEnumerationSuite<PutFunction> {
 
     @Override
     protected PutFunction createDefault() {
-        return new PutFunction(PutFunction.Standard.PLACEHOLDER_1);
+        return new PutFunction(PutFunction.Standard.NEW);
     }
 
     @Override
     protected PutFunction createEqualToDefault() {
-        return new PutFunction(PutFunction.Standard.PLACEHOLDER_1);
+        return new PutFunction(PutFunction.Standard.NEW);
     }
 
     @Override
     protected PutFunction createDifferentFromDefault() {
-        return new PutFunction(PutFunction.Standard.PLACEHOLDER_2);
+        return new PutFunction(PutFunction.Standard.REPLACE);
     }
 
     @Override

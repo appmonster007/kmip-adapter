@@ -53,7 +53,7 @@ public class WrappingMethodBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new WrappingMethod(WrappingMethod.Standard.PLACEHOLDER_1);
+        obj = new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

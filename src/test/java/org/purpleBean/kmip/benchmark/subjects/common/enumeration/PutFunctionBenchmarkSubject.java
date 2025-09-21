@@ -53,7 +53,7 @@ public class PutFunctionBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new PutFunction(PutFunction.Standard.PLACEHOLDER_1);
+        obj = new PutFunction(PutFunction.Standard.NEW);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

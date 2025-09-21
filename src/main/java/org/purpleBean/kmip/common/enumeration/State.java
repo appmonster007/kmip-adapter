@@ -116,12 +116,12 @@ public class State implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PRE_ACTIVE(0x00000001, "PreActive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        ACTIVE(0x00000002, "Active", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        DEACTIVATED(0x00000003, "Deactivated", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        COMPROMISED(0x00000004, "Compromised", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        DESTROYED(0x00000005, "Destroyed", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)),
-        DESTROYED_COMPROMISED(0x00000006, "DestroyedCompromised", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2));
+        PRE_ACTIVE(0x00000001, "PreActive", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ACTIVE(0x00000002, "Active", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DEACTIVATED(0x00000003, "Deactivated", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        COMPROMISED(0x00000004, "Compromised", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DESTROYED(0x00000005, "Destroyed", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DESTROYED_COMPROMISED(0x00000006, "DestroyedCompromised", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

@@ -93,8 +93,8 @@ public class LinkType implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,32 +116,20 @@ public class LinkType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        CERTIFICATE_LINK(0x00000101, "Certificate Link",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PUBLIC_KEY_LINK(0x00000102, "Public Key Link",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PRIVATE_KEY_LINK(0x00000103, "Private Key Link",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DERIVATION_BASE_OBJECT_LINK(0x00000104, "Derivation Base Object Link",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DERIVED_KEY_LINK(0x00000105, "Derived Key Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        REPLACEMENT_OBJECT_LINK(0x00000106, "Replacement Object Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        REPLACED_OBJECT_LINK(0x00000107, "Replaced Object Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PARENT_LINK(0x00000108, "Parent Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CHILD_LINK(0x00000109, "Child Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PREVIOUS_LINK(0x0000010A, "Previous Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        NEXT_LINK(0x0000010B, "Next Link",
-                KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PKCS12_CERTIFICATE_LINK(0x0000010C, "PKCS#12 Certificate Link",
-                KmipSpec.V2_1, KmipSpec.V3_0), // Note: Not in 1.2 spec
-        PKCS12_PASSWORD_LINK(0x0000010D, "PKCS#12 Password Link",
-                KmipSpec.V2_1, KmipSpec.V3_0); // Note: Not in 1.2 spec
+        CERTIFICATE_LINK(0x00000101, "CertificateLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        PUBLIC_KEY_LINK(0x00000102, "PublicKeyLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        PRIVATE_KEY_LINK(0x00000103, "PrivateKeyLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        DERIVATION_BASE_OBJECT_LINK(0x00000104, "DerivationBaseObjectLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        DERIVED_KEY_LINK(0x00000105, "DerivedKeyLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        REPLACEMENT_OBJECT_LINK(0x00000106, "ReplacementObjectLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        REPLACED_OBJECT_LINK(0x00000107, "ReplacedObjectLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        PARENT_LINK(0x00000108, "ParentLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        CHILD_LINK(0x00000109, "ChildLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        PREVIOUS_LINK(0x0000010A, "PreviousLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        NEXT_LINK(0x0000010B, "NextLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        PKCS_12_CERTIFICATE_LINK(0x0000010C, "Pkcs12CertificateLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        PKCS_12_PASSWORD_LINK(0x0000010D, "Pkcs12PasswordLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        WRAPPING_KEY_LINK(0x0000010E, "WrappingKeyLink", KmipSpec.UnknownVersion, KmipSpec.V2_1);
 
         private final int value;
         private final String description;
@@ -164,11 +152,8 @@ public class LinkType implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

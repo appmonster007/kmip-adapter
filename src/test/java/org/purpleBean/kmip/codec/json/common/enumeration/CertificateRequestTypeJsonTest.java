@@ -18,6 +18,6 @@ class CertificateRequestTypeJsonTest extends AbstractJsonSerializationSuite<Cert
 
     @Override
     protected CertificateRequestType createVariant() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PROVISIONING);
+        return new CertificateRequestType(CertificateRequestType.Standard.PKCS_10);
     }
 }

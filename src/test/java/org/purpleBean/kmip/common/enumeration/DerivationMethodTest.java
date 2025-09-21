@@ -20,17 +20,17 @@ class DerivationMethodTest extends AbstractKmipEnumerationSuite<DerivationMethod
 
     @Override
     protected DerivationMethod createDefault() {
-        return new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_1);
+        return new DerivationMethod(DerivationMethod.Standard.PBKDF2);
     }
 
     @Override
     protected DerivationMethod createEqualToDefault() {
-        return new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_1);
+        return new DerivationMethod(DerivationMethod.Standard.PBKDF2);
     }
 
     @Override
     protected DerivationMethod createDifferentFromDefault() {
-        return new DerivationMethod(DerivationMethod.Standard.PLACEHOLDER_2);
+        return new DerivationMethod(DerivationMethod.Standard.HASH);
     }
 
     @Override

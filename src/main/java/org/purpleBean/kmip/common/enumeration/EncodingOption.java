@@ -116,8 +116,8 @@ public class EncodingOption implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        NO_ENCODING(0x00000001, "NoEncoding", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TTLV_ENCODING(0x00000002, "TtlvEncoding", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

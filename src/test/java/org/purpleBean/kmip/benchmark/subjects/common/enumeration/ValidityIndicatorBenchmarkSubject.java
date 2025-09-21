@@ -53,7 +53,7 @@ public class ValidityIndicatorBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new ValidityIndicator(ValidityIndicator.Standard.PLACEHOLDER_1);
+        obj = new ValidityIndicator(ValidityIndicator.Standard.VALID);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

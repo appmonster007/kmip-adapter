@@ -20,12 +20,12 @@ class RevocationReasonCodeTest extends AbstractKmipEnumerationSuite<RevocationRe
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
     }
 
     @Override
     protected RevocationReasonCode createEqualToDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.CERTIFICATE_SUPERSEDED);
+        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
     }
 
     @Override

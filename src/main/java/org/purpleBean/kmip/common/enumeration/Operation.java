@@ -93,8 +93,8 @@ public class Operation implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,26 +116,70 @@ public class Operation implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        CREATE(0x00000001, "Create",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CREATE_KEY_PAIR(0x00000002, "Create Key Pair",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        REGISTER(0x00000003, "Register",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        REKEY(0x00000004, "Rekey",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DERIVE_KEY(0x00000005, "Derive Key",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CERTIFY(0x00000006, "Certify",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RECERTIFY(0x00000007, "Recertify",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        LOCATE(0x00000008, "Locate",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CHECK(0x00000009, "Check",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        GET(0x0000000A, "Get",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        CREATE(0x00000001, "Create", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_KEY_PAIR(0x00000002, "CreateKeyPair", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        REGISTER(0x00000003, "Register", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY(0x00000004, "ReKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DERIVE_KEY(0x00000005, "DeriveKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CERTIFY(0x00000006, "Certify", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_CERTIFY(0x00000007, "ReCertify", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOCATE(0x00000008, "Locate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CHECK(0x00000009, "Check", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        GET(0x0000000A, "Get", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        GET_ATTRIBUTES(0x0000000B, "GetAttributes", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        GET_ATTRIBUTE_LIST(0x0000000C, "GetAttributeList", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ADD_ATTRIBUTE(0x0000000D, "AddAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MODIFY_ATTRIBUTE(0x0000000E, "ModifyAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DELETE_ATTRIBUTE(0x0000000F, "DeleteAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        OBTAIN_LEASE(0x00000010, "ObtainLease", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        GET_USAGE_ALLOCATION(0x00000011, "GetUsageAllocation", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ACTIVATE(0x00000012, "Activate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        REVOKE(0x00000013, "Revoke", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DESTROY(0x00000014, "Destroy", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ARCHIVE(0x00000015, "Archive", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RECOVER(0x00000016, "Recover", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        VALIDATE(0x00000017, "Validate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY(0x00000018, "Query", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CANCEL(0x00000019, "Cancel", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLL(0x0000001A, "Poll", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        NOTIFY(0x0000001B, "Notify", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PUT(0x0000001C, "Put", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_KEY_KEY_PAIR(0x0000001D, "ReKeyKeyPair", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DISCOVER_VERSIONS(0x0000001E, "DiscoverVersions", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ENCRYPT(0x0000001F, "Encrypt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DECRYPT(0x00000020, "Decrypt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SIGN(0x00000021, "Sign", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SIGNATURE_VERIFY(0x00000022, "SignatureVerify", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC(0x00000023, "Mac", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_VERIFY(0x00000024, "MacVerify", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RNG_RETRIEVE(0x00000025, "RngRetrieve", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RNG_SEED(0x00000026, "RngSeed", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        HASH(0x00000027, "Hash", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_SPLIT_KEY(0x00000028, "CreateSplitKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        JOIN_SPLIT_KEY(0x00000029, "JoinSplitKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        IMPORT(0x0000002A, "Import", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        EXPORT(0x0000002B, "Export", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOG(0x0000002C, "Log", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOGIN(0x0000002D, "Login", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        LOGOUT(0x0000002E, "Logout", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DELEGATED_LOGIN(0x0000002F, "DelegatedLogin", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        ADJUST_ATTRIBUTE(0x00000030, "AdjustAttribute", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SET_ATTRIBUTE(0x00000031, "SetAttribute", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SET_ENDPOINT_ROLE(0x00000032, "SetEndpointRole", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PKCS_11(0x00000033, "Pkcs11", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        INTEROP(0x00000034, "Interop", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RE_PROVISION(0x00000035, "ReProvision", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SET_DEFAULTS(0x00000036, "SetDefaults", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SET_CONSTRAINTS(0x00000037, "SetConstraints", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        GET_CONSTRAINTS(0x00000038, "GetConstraints", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        QUERY_ASYNCHRONOUS_REQUESTS(0x00000039, "QueryAsynchronousRequests", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PROCESS(0x0000003A, "Process", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        PING(0x0000003B, "Ping", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CREATE_GROUP(0x0000003C, "CreateGroup", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        OBLITERATE(0x0000003D, "Obliterate", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_USER(0x0000003E, "CreateUser", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_CREDENTIAL(0x0000003F, "CreateCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        DEACTIVATE(0x00000040, "Deactivate", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
@@ -158,11 +202,8 @@ public class Operation implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

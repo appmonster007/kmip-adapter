@@ -93,8 +93,8 @@ public class ObjectGroupMember implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
-     */
+    * Get registered values.
+    */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
@@ -116,10 +116,8 @@ public class ObjectGroupMember implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        GROUP_MEMBER_FRESH(0x00000001, "Group Member Fresh",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        GROUP_MEMBER_DEFAULT(0x00000002, "Group Member Default",
-                KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        GROUP_MEMBER_FRESH(0x00000001, "GroupMemberFresh", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        GROUP_MEMBER_DEFAULT(0x00000002, "GroupMemberDefault", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1);
 
         private final int value;
         private final String description;
@@ -142,11 +140,8 @@ public class ObjectGroupMember implements KmipEnumeration {
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
-
         String getDescription();
-
         boolean isSupportedFor(KmipSpec spec);
-
         boolean isCustom();
     }
 

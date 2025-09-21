@@ -53,7 +53,7 @@ public class ResultReasonBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = new TtlvMapper();
         ttlv.registerModule(new KmipTtlvModule());
 
-        obj = new ResultReason(ResultReason.Standard.PLACEHOLDER_1);
+        obj = new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);
