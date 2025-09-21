@@ -58,19 +58,18 @@ class BatchErrorContinuationOptionTest extends AbstractKmipEnumerationSuite<Batc
     @Override
     protected void assertEnumerationRegistryBehavior() {
         // Valid registration in BatchErrorContinuationOption requires 8XXXXXXX (hex) range per implementation
-        BatchErrorContinuationOption.Value custom = BatchErrorContinuationOption.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0));
+        BatchErrorContinuationOption.Value custom = BatchErrorContinuationOption.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
         assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
         // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> BatchErrorContinuationOption.register(0x80000012, "X-Empty-Versions", Set.of()))
                 .isInstanceOf(IllegalArgumentException.class);

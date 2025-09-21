@@ -197,7 +197,7 @@ public class ResultReason implements KmipEnumeration {
         UNKNOWN_OBJECT_GROUP(0x0000004A, "UnknownObjectGroup", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         CONSTRAINT_VIOLATION(0x0000004B, "ConstraintViolation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         DUPLICATE_PROCESS_REQUEST(0x0000004C, "DuplicateProcessRequest", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CIRCULAR_LINK_ERROR(0x0000004D, "CircularLinkError", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        CIRCULAR_LINK_ERROR(0x0000004D, "CircularLinkError", KmipSpec.UnknownVersion, KmipSpec.V3_0),
         GENERAL_FAILURE(0x00000100, "GeneralFailure", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;

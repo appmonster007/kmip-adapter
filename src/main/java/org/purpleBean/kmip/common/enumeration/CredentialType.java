@@ -127,8 +127,8 @@ public class CredentialType implements KmipEnumeration {
         ONE_TIME_PASSWORD(0x00000004, "OneTimePassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         HASHED_PASSWORD(0x00000005, "HashedPassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         TICKET(0x00000006, "Ticket", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        PASSWORD(0x00000007, "Password", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CERTIFICATE(0x00000008, "Certificate", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        PASSWORD(0x00000007, "Password", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CERTIFICATE(0x00000008, "Certificate", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

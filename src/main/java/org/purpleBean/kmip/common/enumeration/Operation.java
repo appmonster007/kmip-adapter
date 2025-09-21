@@ -180,11 +180,11 @@ public class Operation implements KmipEnumeration {
         QUERY_ASYNCHRONOUS_REQUESTS(0x00000039, "QueryAsynchronousRequests", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         PROCESS(0x0000003A, "Process", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         PING(0x0000003B, "Ping", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CREATE_GROUP(0x0000003C, "CreateGroup", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        OBLITERATE(0x0000003D, "Obliterate", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CREATE_USER(0x0000003E, "CreateUser", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CREATE_CREDENTIAL(0x0000003F, "CreateCredential", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        DEACTIVATE(0x00000040, "Deactivate", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        CREATE_GROUP(0x0000003C, "CreateGroup", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        OBLITERATE(0x0000003D, "Obliterate", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_USER(0x0000003E, "CreateUser", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        CREATE_CREDENTIAL(0x0000003F, "CreateCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        DEACTIVATE(0x00000040, "Deactivate", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

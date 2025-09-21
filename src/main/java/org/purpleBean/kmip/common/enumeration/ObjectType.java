@@ -131,12 +131,12 @@ public class ObjectType implements KmipEnumeration {
         OPAQUE_OBJECT(0x00000008, "OpaqueObject", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         PGP_KEY(0x00000009, "PgpKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFICATE_REQUEST(0x0000000A, "CertificateRequest", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        USER(0x0000000B, "User", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        GROUP(0x0000000C, "Group", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        PASSWORD_CREDENTIAL(0x0000000D, "PasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        DEVICE_CREDENTIAL(0x0000000E, "DeviceCredential", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ONE_TIME_PASSWORD_CREDENTIAL(0x0000000F, "OneTimePasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HASHED_PASSWORD_CREDENTIAL(0x00000010, "HashedPasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        USER(0x0000000B, "User", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        GROUP(0x0000000C, "Group", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        PASSWORD_CREDENTIAL(0x0000000D, "PasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        DEVICE_CREDENTIAL(0x0000000E, "DeviceCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        ONE_TIME_PASSWORD_CREDENTIAL(0x0000000F, "OneTimePasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+        HASHED_PASSWORD_CREDENTIAL(0x00000010, "HashedPasswordCredential", KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
