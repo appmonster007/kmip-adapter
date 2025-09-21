@@ -615,7 +615,6 @@ class FooDemoEnumTest extends AbstractKmipEnumerationSuite<FooDemoEnum> {
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
         assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
         // Negative cases: invalid range, empty description, empty versions

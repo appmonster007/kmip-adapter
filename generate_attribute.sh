@@ -73,7 +73,7 @@ public class ${ATTRIBUTE_NAME}Attribute implements KmipAttribute {
     private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
 
     // Template supported versions — adjust as needed
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion );
 
     // TODO : update the capability flags
     // Capability flags — adjust based on attribute semantics

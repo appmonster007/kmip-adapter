@@ -290,7 +290,7 @@ public class ${class_name} implements KmipStructure, KmipAttribute {
 
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_name_snake});
     private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
     
     // Attribute properties with defaults
     private final boolean alwaysPresent = false;

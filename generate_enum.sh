@@ -175,8 +175,8 @@ public class ${ENUM_NAME} implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion, KmipSpec.V1_0),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion, KmipSpec.V1_0);
+        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion ),
+        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion );
 
         private final int value;
         private final String description;
@@ -648,19 +648,18 @@ class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
     @Override
     protected void assertEnumerationRegistryBehavior() {
         // Valid registration in ${ENUM_NAME} requires 8XXXXXXX (hex) range per implementation
-        ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0));
+        ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion ));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.V1_0)).isTrue();
         assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
         // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion )))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion )))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_0)))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion )))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000012, "X-Empty-Versions", Set.of()))
                 .isInstanceOf(IllegalArgumentException.class);
