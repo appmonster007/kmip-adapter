@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
 Comprehensive script to update KMIP enum files with proper version management, sorting, and missing enum handling.
+
+python3 scripts/comprehensive_enum_sync.py  \
+    --csv docs/kmip-spec/v3.x/sections/kmip-spec-enumerations-v3.0-os_enumerations.csv \
+    --enum-dir src/main/java/org/purpleBean/kmip/common/enumeration \
+    --write
 """
 
 import sys
