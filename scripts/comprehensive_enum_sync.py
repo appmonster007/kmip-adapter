@@ -644,8 +644,6 @@ def apply_changes(
         lines[enum_end_idx + 1:]  # Everything after the enum
     )
 
-    print(new_lines)
-
     # Write back to file with proper newlines
     with open(java_path, 'w', encoding='utf-8') as f:
         for i, line in enumerate(new_lines):
