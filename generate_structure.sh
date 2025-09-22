@@ -807,19 +807,16 @@ EOF
     cat > "${bench_dir}/${STRUCTURE_NAME}BenchmarkSubject.java" << EOF
 package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH//\//.};
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.${SUB_PATH//\//.}.${STRUCTURE_NAME};
 
 import java.nio.ByteBuffer;
@@ -828,7 +825,7 @@ import java.time.ZoneOffset;
 
 public class ${STRUCTURE_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 
-    private ObjectMapper json;
+    private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
 
@@ -853,18 +850,9 @@ public class ${STRUCTURE_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         // Configure mappers
-        json = new ObjectMapper();
-        json.findAndRegisterModules();
-        json.registerModule(new JavaTimeModule());
-        json.registerModule(new KmipJsonModule());
-
-        xml = new XmlMapper();
-        xml.findAndRegisterModules();
-        xml.registerModule(new JavaTimeModule());
-        xml.registerModule(new KmipXmlModule());
-
-        ttlv = new TtlvMapper();
-        ttlv.registerModule(new KmipTtlvModule());
+        json = MapperFactory.getJsonMapper();
+        xml = MapperFactory.getXmlMapper();
+        ttlv = MapperFactory.getTtlvMapper();
 
         // Create test object with sample data
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);

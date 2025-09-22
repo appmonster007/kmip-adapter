@@ -1,16 +1,13 @@
 package org.purpleBean.kmip.benchmark.subjects.common;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
 
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -18,7 +15,7 @@ import java.time.ZoneOffset;
 
 public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSubject {
 
-    private ObjectMapper json;
+    private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
 
@@ -42,23 +39,14 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
     @Override
     public void setup() throws Exception {
-        json = new ObjectMapper();
-        json.findAndRegisterModules();
-        json.registerModule(new JavaTimeModule());
-        json.registerModule(new KmipJsonModule());
-
-        xml = new XmlMapper();
-        xml.findAndRegisterModules();
-        xml.registerModule(new JavaTimeModule());
-        xml.registerModule(new KmipXmlModule());
-
-        ttlv = new TtlvMapper();
-        ttlv.registerModule(new KmipTtlvModule());
+        json = MapperFactory.getJsonMapper();
+        xml = MapperFactory.getXmlMapper();
+        ttlv = MapperFactory.getTtlvMapper();
 
         // Create test object
         obj = ActivationDateAttribute.builder()
-            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
-            .build();
+                .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
+                .build();
 
         // Serialize to all formats for deserialization benchmarks
         jsonStr = json.writeValueAsString(obj);

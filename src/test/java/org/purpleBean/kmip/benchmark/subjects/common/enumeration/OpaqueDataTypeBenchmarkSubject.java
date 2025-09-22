@@ -1,25 +1,21 @@
 package org.purpleBean.kmip.benchmark.subjects.common.enumeration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 
 import java.nio.ByteBuffer;
 import java.util.Set;
 
 public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
-    private ObjectMapper json;
-    private ObjectMapper xml;
+    private JsonMapper json;
+    private XmlMapper xml;
     private TtlvMapper ttlv;
 
     private OpaqueDataType obj;
@@ -42,18 +38,11 @@ public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = new JsonMapper();
-        json.findAndRegisterModules();
-        json.registerModule(new JavaTimeModule());
-        json.registerModule(new KmipJsonModule());
+        json = MapperFactory.getJsonMapper();
 
-        xml = new XmlMapper();
-        xml.findAndRegisterModules();
-        xml.registerModule(new JavaTimeModule());
-        xml.registerModule(new KmipXmlModule());
+        xml = MapperFactory.getXmlMapper();
 
-        ttlv = new TtlvMapper();
-        ttlv.registerModule(new KmipTtlvModule());
+        ttlv = MapperFactory.getTtlvMapper();
 
         obj = new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
 
