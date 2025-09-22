@@ -57,7 +57,7 @@ public class DataEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<
         DataEnumeration dataenumeration = new DataEnumeration(DataEnumeration.fromName(spec, description));
         if (!dataenumeration.isSupportedFor(spec)) {
             throw new NoSuchElementException(
-                String.format("DataEnumeration '%s' not supported for spec %s", description, spec));
+                    String.format("DataEnumeration '%s' not supported for spec %s", description, spec));
         }
 
         return dataenumeration;

@@ -41,9 +41,9 @@ public class NistKeyTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ni
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(NistKeyType.class,
-                    String.format("Expected object with %s tag for NistKeyType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for NistKeyType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 

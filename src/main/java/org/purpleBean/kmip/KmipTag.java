@@ -7,7 +7,10 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public record KmipTag(@EqualsAndHashCode.Include @NonNull Value value) {
+@Data
+@EqualsAndHashCode
+@ToString
+public class KmipTag {
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -18,6 +21,10 @@ public record KmipTag(@EqualsAndHashCode.Include @NonNull Value value) {
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
+
+    @EqualsAndHashCode.Include
+    @NonNull
+    private final Value value;
 
     private static boolean isValidExtensionValue(int value) {
         int extensionStart = 0x540000;

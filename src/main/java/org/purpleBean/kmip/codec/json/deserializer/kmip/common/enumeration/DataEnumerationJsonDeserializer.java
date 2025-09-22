@@ -41,9 +41,9 @@ public class DataEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(DataEnumeration.class,
-                    String.format("Expected object with %s tag for DataEnumeration, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for DataEnumeration, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 

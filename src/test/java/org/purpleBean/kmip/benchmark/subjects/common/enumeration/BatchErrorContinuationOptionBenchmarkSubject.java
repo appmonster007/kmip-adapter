@@ -37,9 +37,7 @@ public class BatchErrorContinuationOptionBenchmarkSubject implements KmipBenchma
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);

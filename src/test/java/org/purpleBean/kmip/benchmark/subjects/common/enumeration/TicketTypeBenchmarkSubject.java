@@ -37,9 +37,7 @@ public class TicketTypeBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new TicketType(TicketType.Standard.LOGIN);

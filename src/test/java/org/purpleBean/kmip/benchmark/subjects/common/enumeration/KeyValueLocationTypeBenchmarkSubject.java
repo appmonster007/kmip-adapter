@@ -37,9 +37,7 @@ public class KeyValueLocationTypeBenchmarkSubject implements KmipBenchmarkSubjec
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING);

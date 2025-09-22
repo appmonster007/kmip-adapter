@@ -37,9 +37,7 @@ public class ResultReasonBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);

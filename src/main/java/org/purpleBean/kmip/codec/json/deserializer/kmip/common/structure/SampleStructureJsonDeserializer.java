@@ -40,9 +40,9 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(SampleStructure.class,
-                    String.format("Expected object with %s tag for SampleStructure, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for SampleStructure, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 
@@ -69,7 +69,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
         for (JsonNode valueNode : values) {
             if (!valueNode.has("tag")) continue;
 
-            KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).value();
+            KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
             setValue(builder, nodeTag, valueNode, p, ctxt);
         }
 

@@ -41,9 +41,9 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(ValidationAuthorityType.class,
-                    String.format("Expected object with %s tag for ValidationAuthorityType, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for ValidationAuthorityType, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 

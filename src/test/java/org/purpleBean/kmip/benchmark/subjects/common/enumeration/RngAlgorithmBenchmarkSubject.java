@@ -37,9 +37,7 @@ public class RngAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new RngAlgorithm(RngAlgorithm.Standard.UNSPECIFIED);

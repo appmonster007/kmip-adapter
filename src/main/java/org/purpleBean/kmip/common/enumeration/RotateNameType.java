@@ -121,8 +121,8 @@ public class RotateNameType implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        UNINTERPRETED_TEXT_STRING(0x00000001, "UninterpretedTextString", KmipSpec.UnknownVersion,  KmipSpec.V2_1),
-        URI(0x00000002, "Uri", KmipSpec.UnknownVersion,  KmipSpec.V2_1);
+        UNINTERPRETED_TEXT_STRING(0x00000001, "UninterpretedTextString", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        URI(0x00000002, "Uri", KmipSpec.UnknownVersion, KmipSpec.V2_1);
 
         private final int value;
         private final String description;

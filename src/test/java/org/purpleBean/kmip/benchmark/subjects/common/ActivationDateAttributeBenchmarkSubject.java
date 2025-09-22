@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
 
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -45,8 +45,8 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
         // Create test object
         obj = ActivationDateAttribute.builder()
-                .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
-                .build();
+            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
+            .build();
 
         // Serialize to all formats for deserialization benchmarks
         jsonStr = json.writeValueAsString(obj);

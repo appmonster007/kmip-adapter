@@ -13,7 +13,7 @@ public class ProtocolVersionMinorJsonDeserializer extends KmipDataTypeJsonDeseri
     public ProtocolVersion.ProtocolVersionMinor deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).value();
+        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
 
         if (!node.isObject() || tag != KmipTag.Standard.PROTOCOL_VERSION_MINOR) {
             ctxt.reportInputMismatch(ProtocolVersion.ProtocolVersionMinor.class, "Expected object for ProtocolVersionMinor");

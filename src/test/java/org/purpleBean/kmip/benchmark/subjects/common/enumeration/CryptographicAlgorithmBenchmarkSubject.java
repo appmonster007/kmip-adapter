@@ -37,9 +37,7 @@ public class CryptographicAlgorithmBenchmarkSubject implements KmipBenchmarkSubj
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);

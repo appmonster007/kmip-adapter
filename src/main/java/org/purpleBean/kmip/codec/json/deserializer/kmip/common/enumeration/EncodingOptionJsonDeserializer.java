@@ -41,9 +41,9 @@ public class EncodingOptionJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(EncodingOption.class,
-                    String.format("Expected object with %s tag for EncodingOption, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for EncodingOption, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 

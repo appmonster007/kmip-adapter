@@ -37,9 +37,7 @@ public class RevocationReasonCodeBenchmarkSubject implements KmipBenchmarkSubjec
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);

@@ -37,9 +37,7 @@ public class CredentialTypeBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);

@@ -37,9 +37,7 @@ public class DerivationMethodBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new DerivationMethod(DerivationMethod.Standard.PBKDF2);

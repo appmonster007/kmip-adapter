@@ -41,9 +41,9 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(RevocationReasonCode.class,
-                    String.format("Expected object with %s tag for RevocationReasonCode, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for RevocationReasonCode, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 

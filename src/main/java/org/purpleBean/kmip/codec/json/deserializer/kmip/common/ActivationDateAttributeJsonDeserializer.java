@@ -43,7 +43,7 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(ActivationDateAttribute.class, "Expected object for ActivationDateAttribute");
             return null;
         }

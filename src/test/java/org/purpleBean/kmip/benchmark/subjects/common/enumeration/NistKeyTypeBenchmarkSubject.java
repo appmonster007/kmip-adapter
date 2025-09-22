@@ -37,9 +37,7 @@ public class NistKeyTypeBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new NistKeyType(NistKeyType.Standard.PRIVATE_SIGNATURE_KEY);

@@ -37,9 +37,7 @@ public class CancellationResultBenchmarkSubject implements KmipBenchmarkSubject 
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);

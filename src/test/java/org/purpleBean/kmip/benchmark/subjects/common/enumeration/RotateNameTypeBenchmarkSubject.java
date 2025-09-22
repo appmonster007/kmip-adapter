@@ -37,9 +37,7 @@ public class RotateNameTypeBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new RotateNameType(RotateNameType.Standard.UNINTERPRETED_TEXT_STRING);

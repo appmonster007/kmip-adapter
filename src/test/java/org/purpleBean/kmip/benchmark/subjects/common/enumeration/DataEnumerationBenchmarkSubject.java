@@ -37,9 +37,7 @@ public class DataEnumerationBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new DataEnumeration(DataEnumeration.Standard.DECRYPT);

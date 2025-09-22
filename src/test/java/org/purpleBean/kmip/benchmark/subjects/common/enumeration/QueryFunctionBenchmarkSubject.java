@@ -37,9 +37,7 @@ public class QueryFunctionBenchmarkSubject implements KmipBenchmarkSubject {
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new QueryFunction(QueryFunction.Standard.QUERY_SERVER_INFORMATION);

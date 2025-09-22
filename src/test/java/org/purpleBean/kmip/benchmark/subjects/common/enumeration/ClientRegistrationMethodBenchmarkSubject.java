@@ -37,9 +37,7 @@ public class ClientRegistrationMethodBenchmarkSubject implements KmipBenchmarkSu
     @Override
     public void setup() throws Exception {
         json = MapperFactory.getJsonMapper();
-
         xml = MapperFactory.getXmlMapper();
-
         ttlv = MapperFactory.getTtlvMapper();
 
         obj = new ClientRegistrationMethod(ClientRegistrationMethod.Standard.UNSPECIFIED);

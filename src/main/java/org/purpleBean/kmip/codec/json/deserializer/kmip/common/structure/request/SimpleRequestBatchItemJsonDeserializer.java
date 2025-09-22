@@ -22,8 +22,8 @@ public class SimpleRequestBatchItemJsonDeserializer extends KmipDataTypeJsonDese
     public SimpleRequestBatchItem deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).value();
-        if (!node.isObject() || tag != kmipTag.value()) {
+        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
+        if (!node.isObject() || tag != kmipTag.getValue()) {
             ctxt.reportInputMismatch(SimpleRequestBatchItem.class, "Expected object for SimpleRequestBatchItem");
             return null;
         }

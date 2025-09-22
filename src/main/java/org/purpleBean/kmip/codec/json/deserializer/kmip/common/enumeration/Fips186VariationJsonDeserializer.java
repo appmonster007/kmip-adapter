@@ -41,9 +41,9 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
             return null;
         }
 
-        if (!node.isObject() || tag.value().getValue() != kmipTag.value().getValue()) {
+        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
             ctxt.reportInputMismatch(Fips186Variation.class,
-                    String.format("Expected object with %s tag for Fips186Variation, got tag: %s", kmipTag.value().getValue(), tag.value().getValue()));
+                    String.format("Expected object with %s tag for Fips186Variation, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
 
