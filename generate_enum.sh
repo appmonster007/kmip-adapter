@@ -1,27 +1,114 @@
 #!/bin/bash
+# generate_enum_refactor.sh
+# Refactored generator for KMIP enumerations.
+# - Per-file generator functions
+# - Flags to enable/disable generation of each artifact
+# - Performs a DRY RUN (prints what would be done) when no generation flags provided
+# - Compatible with Bash 3.x
+set -e
 
-# Check if enum names are provided
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <EnumName1> [<EnumName2> ...]"
-    echo "Example: $0 State Operation ObjectType"
-    echo "Example: $0 MyNewEnum"
+#############################################
+# Globals & Defaults
+#############################################
+BASE_DIR="$(pwd)"
+MAIN_JAVA="src/main/java/org/purpleBean/kmip"
+TEST_JAVA="src/test/java/org/purpleBean/kmip"
+SUB_PATH="common/enumeration"
+
+# Generation flags (off by default)
+GEN_CLASS=false
+GEN_JSON_SER=false
+GEN_JSON_DES=false
+GEN_XML_SER=false
+GEN_XML_DES=false
+GEN_TTLV_SER=false
+GEN_TTLV_DES=false
+GEN_DOMAIN_TEST=false
+GEN_JSON_TEST=false
+GEN_XML_TEST=false
+GEN_TTLV_TEST=false
+GEN_BENCHMARK=false
+GEN_SERVICES=false
+
+DRY_RUN=false
+
+#############################################
+# Helpers
+#############################################
+usage() {
+    cat <<EOF
+Usage: $0 [options] <EnumName1> [EnumName2 ...]
+
+If no generation options are provided the script performs a DRY RUN (prints what it would do).
+To actually create files pass one or more generation flags.
+
+Options:
+  --class         Generate the Enum class
+  --json-ser      Generate JSON serializer
+  --json-des      Generate JSON deserializer
+  --xml-ser       Generate XML serializer
+  --xml-des       Generate XML deserializer
+  --ttlv-ser      Generate TTLV serializer
+  --ttlv-des      Generate TTLV deserializer
+  --domain-test   Generate domain/unit test
+  --json-test     Generate JSON serialization test
+  --xml-test      Generate XML serialization test
+  --ttlv-test     Generate TTLV serialization test
+  --benchmark     Generate benchmark subject
+  --services      Add ServiceLoader entries
+  --all           Generate everything
+  -h, --help      Show this help
+
+Examples:
+  # Dry run (no files created)
+  $0 State
+
+  # Create only class and json serializer
+  $0 --class --json-ser State
+EOF
     exit 1
-fi
+}
 
-# Store all enum names in an array
-ENUM_NAMES=("$@")
-# Function to convert enum name to variable name
 get_enum_var_name() {
     local name="$1"
     echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
 }
 
-# Function to create all required directories
+to_snake_upper() {
+    local name="$1"
+    echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
+}
+
+pkg_dot() {
+    echo "${SUB_PATH//\//.}"
+}
+
+#############################################
+# Filesystem & service helpers (respect DRY_RUN)
+#############################################
 create_directories() {
     local main_java="$1"
     local test_java="$2"
     local sub_path="$3"
-    
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create directories:"
+        echo "  ${main_java}/${sub_path}"
+        echo "  ${main_java}/codec/json/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/json/deserializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/xml/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/xml/deserializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
+        echo "  ${test_java}/codec/json/${sub_path}"
+        echo "  ${test_java}/codec/xml/${sub_path}"
+        echo "  ${test_java}/codec/ttlv/${sub_path}"
+        echo "  ${test_java}/benchmark/subjects/${sub_path}"
+        echo "  src/main/resources/META-INF/services"
+        echo "  src/test/resources/META-INF/services"
+        return 0
+    fi
+
     mkdir -p "${main_java}/${sub_path}"
     mkdir -p "${main_java}/codec/json/serializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/json/deserializer/kmip/${sub_path}"
@@ -33,26 +120,93 @@ create_directories() {
     mkdir -p "${test_java}/codec/xml/${sub_path}"
     mkdir -p "${test_java}/codec/ttlv/${sub_path}"
     mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
+    mkdir -p "src/main/resources/META-INF/services"
+    mkdir -p "src/test/resources/META-INF/services"
 }
 
-# Base directories
-BASE_DIR="$(pwd)"
-MAIN_JAVA="src/main/java/org/purpleBean/kmip"
-TEST_JAVA="src/test/java/org/purpleBean/kmip"
-SUB_PATH="common/enumeration"
+add_service_entry() {
+    local file="$1"
+    local entry="$2"
 
-# Function to generate files for a single enum
-generate_enum() {
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would add service entry:"
+        echo "  file: ${file}"
+        echo "  entry: ${entry}"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "$file")"
+    touch "$file"
+
+    if ! grep -qFx "${entry}" "${file}"; then
+        echo "${entry}" >> "${file}"
+    fi
+
+    local temp_file="${file}.tmp"
+    sort -u "${file}" > "${temp_file}" 2>/dev/null || (sort -u "${file}" > "${temp_file}")
+    # remove empty lines
+    grep -v '^[[:space:]]*$' "${temp_file}" > "${temp_file}.2" && mv "${temp_file}.2" "${temp_file}"
+
+    if ! cmp -s "${file}" "${temp_file}"; then
+        mv "${temp_file}" "${file}"
+    else
+        rm -f "${temp_file}"
+    fi
+}
+
+register_services_for_enum() {
     local ENUM_NAME="$1"
-    local ENUM_NAME_SNAKE=$(echo "${ENUM_NAME}" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr 'a-z' 'A-Z')
-    local ENUM_NAME_LOWERCASE=$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')
-    local ENUM_VAR_NAME=$(get_enum_var_name "$ENUM_NAME")
-    
-    echo -e "\nGenerating files for ${ENUM_NAME}..."
-    
-    # 1. Create the main enum class
-    cat > "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" << EOF
-package org.purpleBean.kmip.${SUB_PATH//\//.};
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${GEN_SERVICES}" = "false" ]; then
+        return 0
+    fi
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+        "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${ENUM_NAME}JsonSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+        "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${ENUM_NAME}JsonDeserializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+        "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${ENUM_NAME}XmlSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${ENUM_NAME}XmlDeserializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${ENUM_NAME}TtlvSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${ENUM_NAME}TtlvDeserializer"
+
+    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purpleBean.kmip.benchmark.subjects.${pdot}.${ENUM_NAME}BenchmarkSubject"
+}
+
+#############################################
+# Per-artifact generators (each respects DRY_RUN)
+#############################################
+
+generate_enum_class() {
+    local ENUM_NAME="$1"
+    local ENUM_NAME_SNAKE
+    ENUM_NAME_SNAKE="$(to_snake_upper "${ENUM_NAME}")"
+    local out_dir="${MAIN_JAVA}/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create enum class: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.${pdot};
 
 import lombok.*;
 import org.purpleBean.kmip.*;
@@ -231,16 +385,34 @@ public class ${ENUM_NAME} implements KmipEnumeration {
 }
 EOF
 
-# 2. Create JSON Serializer
-cat > "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ENUM_NAME}JsonSerializer.java" << EOF
-package org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_json_serializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}JsonSerializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+    local enum_snake
+    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create JSON serializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.json.serializer.kmip.${pdot};
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -279,9 +451,29 @@ public class ${ENUM_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${ENU
 }
 EOF
 
-# 3. Create JSON Deserializer
-cat > "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}JsonDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_json_deserializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}JsonDeserializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+    local enum_snake
+    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
+    local enum_lower
+    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create JSON deserializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot};
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -291,7 +483,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -300,14 +492,14 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ${ENUM_NAME}.
  */
 public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<${ENUM_NAME}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
     private final EncodingType encodingType = EncodingType.ENUMERATION;
 
     @Override
     public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("JSON node cannot be null for ${ENUM_NAME} deserialization"));
+            ctxt.reportInputMismatch(${ENUM_NAME}.class, "JSON node cannot be null for ${ENUM_NAME} deserialization");
             return null;
         }
 
@@ -316,7 +508,7 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("Invalid KMIP tag for ${ENUM_NAME}"));
+                ctxt.reportInputMismatch(${ENUM_NAME}.class, "Invalid KMIP tag for ${ENUM_NAME}");
                 return null;
             }
         } catch (Exception e) {
@@ -337,7 +529,7 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("Missing or non-text 'type' field for ${ENUM_NAME}"));
+            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Missing or non-text 'type' field for ${ENUM_NAME}");
             return null;
         }
 
@@ -356,32 +548,50 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
 
         // Validation: KMIP spec compatibility and value lookup
         KmipSpec spec = KmipContext.getSpec();
-        ${ENUM_NAME}.Value ${ENUM_NAME_LOWERCASE}Value;
+        ${ENUM_NAME}.Value ${enum_lower}Value;
         try {
-            ${ENUM_NAME_LOWERCASE}Value = ${ENUM_NAME}.fromName(spec, description);
+            ${enum_lower}Value = ${ENUM_NAME}.fromName(spec, description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(${ENUM_NAME}.class,
                     String.format("Unknown ${ENUM_NAME} value '%s' for KMIP spec %s", description, spec));
             return null;
         }
 
-        ${ENUM_NAME} ${ENUM_NAME_LOWERCASE} = new ${ENUM_NAME}(${ENUM_NAME_LOWERCASE}Value);
+        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${enum_lower}Value);
 
         // Final validation: Ensure constructed ${ENUM_NAME} is supported
-        if (!${ENUM_NAME_LOWERCASE}.isSupportedFor(spec)) {
+        if (!${enum_lower}.isSupportedFor(spec)) {
             throw new NoSuchElementException(
                     String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s", description, spec)
             );
         }
 
-        return ${ENUM_NAME_LOWERCASE};
+        return ${enum_lower};
     }
 }
 EOF
 
-# 4. Create XML Serializer
-cat > "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ENUM_NAME}XmlSerializer.java" << EOF
-package org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_xml_serializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}XmlSerializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+    local enum_snake
+    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create XML serializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot};
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -389,7 +599,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
@@ -426,9 +636,29 @@ public class ${ENUM_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${ENUM_
 
 EOF
 
-# 5. Create XML Deserializer
-cat > "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}XmlDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_xml_deserializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}XmlDeserializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+    local enum_snake
+    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
+    local enum_lower
+    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create XML deserializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot};
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -440,7 +670,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -450,7 +680,7 @@ import java.util.NoSuchElementException;
  */
 public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${ENUM_NAME}> {
     private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
 
     @Override
     public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -484,27 +714,43 @@ public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${E
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ${ENUM_NAME} ${ENUM_NAME_LOWERCASE} = new ${ENUM_NAME}(${ENUM_NAME}.fromName(spec, description));
-        if (!${ENUM_NAME_LOWERCASE}.isSupportedFor(spec)) {
+        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromName(spec, description));
+        if (!${enum_lower}.isSupportedFor(spec)) {
             throw new NoSuchElementException(
                 String.format("${ENUM_NAME} '%s' not supported for spec %s", description, spec));
         }
 
-        return ${ENUM_NAME_LOWERCASE};
+        return ${enum_lower};
     }
 }
 EOF
 
-# 6. Create TTLV Serializer
-cat > "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ENUM_NAME}TtlvSerializer.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_ttlv_serializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}TtlvSerializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create TTLV serializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot};
 
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -539,9 +785,29 @@ public class ${ENUM_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${ENU
 }
 EOF
 
-# 7. Create TTLV Deserializer
-cat > "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ENUM_NAME}TtlvDeserializer.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_ttlv_deserializer() {
+    local ENUM_NAME="$1"
+    local out_dir="${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}TtlvDeserializer.java"
+    local pdot
+    pdot="$(pkg_dot)"
+    local enum_snake
+    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
+    local enum_lower
+    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create TTLV deserializer: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot};
 
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -551,7 +817,7 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -563,7 +829,7 @@ import java.util.NoSuchElementException;
  */
 public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<${ENUM_NAME}> {
     private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
 
     @Override
     public ${ENUM_NAME} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -576,19 +842,35 @@ public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<$
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ${ENUM_NAME} ${ENUM_NAME_LOWERCASE} = new ${ENUM_NAME}(${ENUM_NAME}.fromValue(spec, value));
+        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromValue(spec, value));
 
-        if (!${ENUM_NAME_LOWERCASE}.isSupportedFor(spec)) {
+        if (!${enum_lower}.isSupportedFor(spec)) {
             throw new NoSuchElementException();
         }
-        return ${ENUM_NAME_LOWERCASE};
+        return ${enum_lower};
     }
 }
 EOF
 
-# 8. Create Domain Test
-cat > "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" << EOF
-package org.purpleBean.kmip.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_domain_test() {
+    local ENUM_NAME="$1"
+    local out_dir="${TEST_JAVA}/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}Test.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create domain test: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.${pdot};
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
@@ -648,18 +930,18 @@ class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
     @Override
     protected void assertEnumerationRegistryBehavior() {
         // Valid registration in ${ENUM_NAME} requires 8XXXXXXX (hex) range per implementation
-        ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion ));
+        ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
         assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
         assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
 
         // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion )))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion )))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion )))
+        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000012, "X-Empty-Versions", Set.of()))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -668,12 +950,28 @@ class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
 
 EOF
 
-# 9. Create JSON Test
-cat > "${TEST_JAVA}/codec/json/${SUB_PATH}/${ENUM_NAME}JsonTest.java" << EOF
-package org.purpleBean.kmip.codec.json.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_json_test() {
+    local ENUM_NAME="$1"
+    local out_dir="${TEST_JAVA}/codec/json/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}JsonTest.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create JSON test: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.json.${pdot};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 @DisplayName("${ENUM_NAME} JSON Serialization")
@@ -695,12 +993,28 @@ class ${ENUM_NAME}JsonTest extends AbstractJsonSerializationSuite<${ENUM_NAME}> 
 }
 EOF
 
-# 10. Create XML Test
-cat > "${TEST_JAVA}/codec/xml/${SUB_PATH}/${ENUM_NAME}XmlTest.java" << EOF
-package org.purpleBean.kmip.codec.xml.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_xml_test() {
+    local ENUM_NAME="$1"
+    local out_dir="${TEST_JAVA}/codec/xml/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}XmlTest.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create XML test: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.xml.${pdot};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("${ENUM_NAME} XML Serialization")
@@ -722,12 +1036,28 @@ class ${ENUM_NAME}XmlTest extends AbstractXmlSerializationSuite<${ENUM_NAME}> {
 }
 EOF
 
-# 11. Create TTLV Test
-cat > "${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ENUM_NAME}TtlvTest.java" << EOF
-package org.purpleBean.kmip.codec.ttlv.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_ttlv_test() {
+    local ENUM_NAME="$1"
+    local out_dir="${TEST_JAVA}/codec/ttlv/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}TtlvTest.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create TTLV test: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.codec.ttlv.${pdot};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 @DisplayName("${ENUM_NAME} TTLV Serialization")
@@ -749,9 +1079,25 @@ class ${ENUM_NAME}TtlvTest extends AbstractTtlvSerializationSuite<${ENUM_NAME}> 
 }
 EOF
 
-# 12. Create Benchmark Subject
-cat > "${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ENUM_NAME}BenchmarkSubject.java" << EOF
-package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH//\//.};
+    echo "Created: ${out_file}"
+}
+
+generate_benchmark_subject() {
+    local ENUM_NAME="$1"
+    local out_dir="${TEST_JAVA}/benchmark/subjects/${SUB_PATH}"
+    local out_file="${out_dir}/${ENUM_NAME}BenchmarkSubject.java"
+    local pdot
+    pdot="$(pkg_dot)"
+
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: would create benchmark subject: ${out_file}"
+        return 0
+    fi
+
+    mkdir -p "${out_dir}"
+
+    cat > "${out_file}" <<EOF
+package org.purpleBean.kmip.benchmark.subjects.${pdot};
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -760,7 +1106,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.${SUB_PATH//\//.}.${ENUM_NAME};
+import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.nio.ByteBuffer;
 
@@ -838,80 +1184,104 @@ public class ${ENUM_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 }
 EOF
 
-# 12. Create ServiceLoader registrations
-mkdir -p "src/main/resources/META-INF/services"
-mkdir -p "src/test/resources/META-INF/services"
-
-# Function to add and sort service file entries
-add_service_entry() {
-    local file="$1"
-    local entry="$2"
-    
-    # Create parent directory if it doesn't exist
-    mkdir -p "$(dirname "$file")"
-    
-    # Create file if it doesn't exist
-    touch "$file"
-    
-    # Add the entry if it doesn't exist
-    if ! grep -qF "$entry" "$file"; then
-        echo "$entry" >> "$file"
-    fi
-    
-    # Sort the file, remove duplicates, and empty lines
-    # The following commands ensure:
-    # 1. Sort lines alphabetically with -u to remove duplicates
-    # 2. Remove empty lines and lines with only whitespace
-    # 3. Use a temporary file to avoid issues with reading and writing to the same file
-    local temp_file="${file}.tmp"
-    sort -u "$file" | grep -v '^[[:space:]]*$' > "$temp_file"
-    
-    # Only update the file if it changed to preserve timestamps
-    if ! cmp -s "$file" "$temp_file"; then
-        mv "$temp_file" "$file"
-    else
-        rm -f "$temp_file"
-    fi
+    echo "Created: ${out_file}"
 }
 
-# Add to JSON serializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-    "org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}JsonSerializer"
+#############################################
+# Orchestrator for a single enum
+#############################################
+generate_enum() {
+    local ENUM_NAME="$1"
+    echo
+    echo "Processing enum: ${ENUM_NAME}"
 
-# Add to JSON deserializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-    "org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}JsonDeserializer"
+    ${GEN_CLASS} && generate_enum_class "${ENUM_NAME}"
+    ${GEN_JSON_SER} && generate_json_serializer "${ENUM_NAME}"
+    ${GEN_JSON_DES} && generate_json_deserializer "${ENUM_NAME}"
+    ${GEN_XML_SER} && generate_xml_serializer "${ENUM_NAME}"
+    ${GEN_XML_DES} && generate_xml_deserializer "${ENUM_NAME}"
+    ${GEN_TTLV_SER} && generate_ttlv_serializer "${ENUM_NAME}"
+    ${GEN_TTLV_DES} && generate_ttlv_deserializer "${ENUM_NAME}"
+    ${GEN_DOMAIN_TEST} && generate_domain_test "${ENUM_NAME}"
+    ${GEN_JSON_TEST} && generate_json_test "${ENUM_NAME}"
+    ${GEN_XML_TEST} && generate_xml_test "${ENUM_NAME}"
+    ${GEN_TTLV_TEST} && generate_ttlv_test "${ENUM_NAME}"
+    ${GEN_BENCHMARK} && generate_benchmark_subject "${ENUM_NAME}"
+    ${GEN_SERVICES} && register_services_for_enum "${ENUM_NAME}"
 
-# Add to XML serializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-    "org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}XmlSerializer"
-
-# Add to XML deserializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-    "org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}XmlDeserializer"
-
-# Add to TTLV serializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-    "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}TtlvSerializer"
-
-# Add to TTLV deserializers
-add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-    "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH//\//.}.${ENUM_NAME}TtlvDeserializer"
-
-# Add to benchmark subjects
-add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-    "org.purpleBean.kmip.benchmark.subjects.${SUB_PATH//\//.}.${ENUM_NAME}BenchmarkSubject"
-
-    echo "Successfully generated files for ${ENUM_NAME}"
-    echo "Don't forget to update the Standard enum values in ${ENUM_NAME}.java with actual values from the KMIP specification."
+    echo "Finished (or planned) generation for ${ENUM_NAME}"
+    echo "Remember to update Standard values in ${ENUM_NAME}.java with real KMIP enum values."
 }
 
-# Create directories once
-create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+#############################################
+# Main
+#############################################
+if [ $# -eq 0 ]; then
+    usage
+fi
 
-# Process each enum name
-for enum_name in "${ENUM_NAMES[@]}"; do
-    generate_enum "$enum_name"
+ENUMS=()
+any_flag=false
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --class) GEN_CLASS=true; any_flag=true; shift ;;
+        --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
+        --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
+        --xml-ser) GEN_XML_SER=true; any_flag=true; shift ;;
+        --xml-des) GEN_XML_DES=true; any_flag=true; shift ;;
+        --ttlv-ser) GEN_TTLV_SER=true; any_flag=true; shift ;;
+        --ttlv-des) GEN_TTLV_DES=true; any_flag=true; shift ;;
+        --domain-test) GEN_DOMAIN_TEST=true; any_flag=true; shift ;;
+        --json-test) GEN_JSON_TEST=true; any_flag=true; shift ;;
+        --xml-test) GEN_XML_TEST=true; any_flag=true; shift ;;
+        --ttlv-test) GEN_TTLV_TEST=true; any_flag=true; shift ;;
+        --benchmark) GEN_BENCHMARK=true; any_flag=true; shift ;;
+        --services) GEN_SERVICES=true; any_flag=true; shift ;;
+        --all)
+            GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+            GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
+            GEN_TTLV_TEST=true; GEN_BENCHMARK=true; GEN_SERVICES=true;
+            any_flag=true; shift ;;
+        -h|--help) usage ;;
+        --*) echo "Unknown option: $1"; usage ;;
+        *) ENUMS[${#ENUMS[@]}]="$1"; shift ;;
+    esac
 done
 
-echo -e "\nSuccessfully generated all files for ${#ENUM_NAMES[@]} enums!"
+if [ ${#ENUMS[@]} -eq 0 ]; then
+    echo "Error: at least one enum name required."
+    usage
+fi
+
+# If no flags provided -> dry run and plan everything
+if [ "${any_flag}" = "false" ]; then
+    DRY_RUN=true
+    echo "No generation flags provided -> performing DRY RUN (no files will be written)."
+    GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
+    GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+    GEN_TTLV_TEST=true; GEN_BENCHMARK=true; GEN_SERVICES=true
+fi
+
+# Prepare directories (dry-run will only print)
+create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+
+# Process each enum
+i=0
+while [ "${i}" -lt "${#ENUMS[@]}" ]; do
+    enum_name="${ENUMS[$i]}"
+    generate_enum "${enum_name}"
+    i=$((i + 1))
+done
+
+if [ "${DRY_RUN}" = "true" ]; then
+    echo
+    echo "DRY RUN complete. Nothing was written."
+    echo "Re-run with flags (e.g. --all) to actually generate files."
+else
+    echo
+    echo "Generation complete for ${#ENUMS[@]} enum(s)."
+    echo "Don't forget to fill in real enum values and review generated TODOs."
+fi
+
+exit 0

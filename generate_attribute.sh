@@ -1,28 +1,112 @@
 #!/bin/bash
+set -euo pipefail
 
-# Check if attribute names are provided
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <AttributeName1> [<AttributeName2> ...]"
-    echo "Example: $0 ActivationDate"
-    echo "Example: $0 MyNewAttribute"
+#############################################
+# generate_attribute.sh
+#
+# Generator for KMIP attribute artifacts.
+# - Per-artifact generator functions
+# - Flags to select which artifacts to generate
+# - Dry-run mode when no generation flags provided (prints what would be done)
+#############################################
+
+#############################################
+# Globals & Defaults
+#############################################
+BASE_DIR="$(pwd)"
+MAIN_JAVA="src/main/java/org/purpleBean/kmip"
+TEST_JAVA="src/test/java/org/purpleBean/kmip"
+SUB_PATH="common"
+
+# Generation flags (off by default)
+GEN_CLASS=false
+GEN_JSON_SER=false
+GEN_JSON_DES=false
+GEN_XML_SER=false
+GEN_XML_DES=false
+GEN_TTLV_SER=false
+GEN_TTLV_DES=false
+GEN_TEST_JSON=false
+GEN_TEST_XML=false
+GEN_TEST_TTLV=false
+GEN_BENCHMARK=false
+
+# Dry run toggled automatically when no flags provided
+DRY_RUN=false
+
+#############################################
+# Helpers
+#############################################
+usage() {
+    cat <<EOF
+Usage: $0 [options] <Attribute1> [Attribute2...]
+
+If no generation options are provided the script performs a DRY RUN (prints what it would do).
+To actually create files pass one or more generation flags.
+
+Options:
+  --class        Generate Attribute class
+  --json-ser     Generate JSON Serializer
+  --json-des     Generate JSON Deserializer
+  --xml-ser      Generate XML Serializer
+  --xml-des      Generate XML Deserializer
+  --ttlv-ser     Generate TTLV Serializer
+  --ttlv-des     Generate TTLV Deserializer
+  --test-json    Generate JSON Test
+  --test-xml     Generate XML Test
+  --test-ttlv    Generate TTLV Test
+  --benchmark    Generate Benchmark Subject
+  --all          Generate all files
+  --help, -h     Show this help
+
+Examples:
+  # Dry run (no files will be written)
+  $0 ActivationDate
+
+  # Generate only class + json serializer
+  $0 --class --json-ser ActivationDate
+
+  # Generate everything for multiple attributes
+  $0 --all ActivationDate DeactivationDate
+EOF
     exit 1
-fi
+}
 
-# Store all attribute names in an array
-ATTRIBUTE_NAMES=("$@")
-
-# Function to convert attribute name to variable name
 get_attribute_var_name() {
     local name="$1"
     echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
 }
 
-# Function to create all required directories
+to_snake_upper() {
+    local name="$1"
+    # convert CamelCase to SNAKE_UPPER (e.g., ActivationDate -> ACTIVATION_DATE)
+    echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
+}
+
+#############################################
+# Directory Management (respects DRY_RUN)
+#############################################
 create_directories() {
     local main_java="$1"
     local test_java="$2"
     local sub_path="$3"
-    
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create directories:"
+        echo "  ${main_java}/${sub_path}"
+        echo "  ${main_java}/codec/json/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/json/deserializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/xml/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/xml/deserializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
+        echo "  ${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
+        echo "  ${test_java}/codec/json/${sub_path}"
+        echo "  ${test_java}/codec/xml/${sub_path}"
+        echo "  ${test_java}/codec/ttlv/${sub_path}"
+        echo "  ${test_java}/benchmark/subjects/${sub_path}"
+        return 0
+    fi
+
     mkdir -p "${main_java}/${sub_path}"
     mkdir -p "${main_java}/codec/json/serializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/json/deserializer/kmip/${sub_path}"
@@ -36,23 +120,81 @@ create_directories() {
     mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
 }
 
-# Base directories
-BASE_DIR="$(pwd)"
-MAIN_JAVA="src/main/java/org/purpleBean/kmip"
-TEST_JAVA="src/test/java/org/purpleBean/kmip"
-SUB_PATH="common"
+#############################################
+# Service registration helper (respects DRY_RUN)
+#############################################
+add_service_entry() {
+    local file="$1"
+    local entry="$2"
 
-# Function to generate files for a single attribute
-generate_attribute() {
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would add service entry:"
+        echo "  file: ${file}"
+        echo "  entry: ${entry}"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "$file")"
+    touch "$file"
+
+    if ! grep -qF "$entry" "$file"; then
+        echo "$entry" >> "$file"
+    fi
+
+    local temp_file="${file}.tmp"
+    sort -u "$file" | grep -v '^[[:space:]]*$' > "$temp_file"
+
+    if ! cmp -s "$file" "$temp_file"; then
+        mv "$temp_file" "$file"
+    else
+        rm -f "$temp_file"
+    fi
+}
+
+register_services() {
     local ATTRIBUTE_NAME="$1"
-    local ATTRIBUTE_NAME_SNAKE=$(echo "${ATTRIBUTE_NAME}" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr 'a-z' 'A-Z')
-    local ATTRIBUTE_NAME_LOWERCASE=$(echo "${ATTRIBUTE_NAME}" | tr '[:upper:]' '[:lower:]')
-    local ATTRIBUTE_VAR_NAME=$(get_attribute_var_name "$ATTRIBUTE_NAME")
-    
-    echo -e "\nGenerating files for ${ATTRIBUTE_NAME}Attribute..."
-    
-    # 1. Create the main attribute class
-    cat > "${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Attribute.java" << EOF
+    local sub_path="$2"
+
+    # Create META-INF dirs and add entries (add_service_entry handles dry-run)
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+        "org.purpleBean.kmip.codec.json.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeJsonSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+        "org.purpleBean.kmip.codec.json.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeJsonDeserializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+        "org.purpleBean.kmip.codec.xml.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeXmlSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeXmlDeserializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeTtlvSerializer"
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeTtlvDeserializer"
+
+    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purpleBean.kmip.benchmark.subjects.${sub_path}.${ATTRIBUTE_NAME}AttributeBenchmarkSubject"
+}
+
+#############################################
+# Generators (each respects DRY_RUN)
+#############################################
+
+generate_attribute_class() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR_NAME="$3"
+    local path="${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Attribute.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
+    mkdir -p "${MAIN_JAVA}/${SUB_PATH}"
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.${SUB_PATH};
 
 import lombok.*;
@@ -120,10 +262,20 @@ public class ${ATTRIBUTE_NAME}Attribute implements KmipAttribute {
     }
 }
 EOF
+}
 
-    # 2. Create JSON Serializer
+generate_json_serializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonSerializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonSerializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH};
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -160,10 +312,20 @@ public class ${ATTRIBUTE_NAME}AttributeJsonSerializer extends KmipDataTypeJsonSe
     }
 }
 EOF
+}
 
-    # 3. Create JSON Deserializer
+generate_json_deserializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonDeserializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonDeserializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH};
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -246,10 +408,20 @@ public class ${ATTRIBUTE_NAME}AttributeJsonDeserializer extends KmipDataTypeJson
     }
 }
 EOF
+}
 
-    # 4. Create XML Serializer
+generate_xml_serializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlSerializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlSerializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH};
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -293,10 +465,20 @@ public class ${ATTRIBUTE_NAME}AttributeXmlSerializer extends KmipDataTypeXmlSeri
     }
 }
 EOF
+}
 
-    # 5. Create XML Deserializer
+generate_xml_deserializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlDeserializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlDeserializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH};
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -347,7 +529,7 @@ public class ${ATTRIBUTE_NAME}AttributeXmlDeserializer extends KmipDataTypeXmlDe
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, 
+            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class,
                 "Missing or non-text 'value' for ${ATTRIBUTE_NAME}Attribute");
             return null;
         }
@@ -367,10 +549,20 @@ public class ${ATTRIBUTE_NAME}AttributeXmlDeserializer extends KmipDataTypeXmlDe
     }
 }
 EOF
+}
 
-    # 6. Create TTLV Serializer
+generate_ttlv_serializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvSerializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvSerializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH};
 
 import org.purpleBean.kmip.KmipContext;
@@ -398,7 +590,7 @@ public class ${ATTRIBUTE_NAME}AttributeTtlvSerializer extends KmipDataTypeTtlvSe
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s", 
+                String.format("%s is not supported for KMIP spec %s",
                 value.getKmipTag().getDescription(), spec)
             );
         }
@@ -415,10 +607,20 @@ public class ${ATTRIBUTE_NAME}AttributeTtlvSerializer extends KmipDataTypeTtlvSe
     }
 }
 EOF
+}
 
-    # 7. Create TTLV Deserializer
+generate_ttlv_deserializer() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local path="${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvDeserializer.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}"
-    cat > "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvDeserializer.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH};
 
 import org.purpleBean.kmip.EncodingType;
@@ -461,10 +663,19 @@ public class ${ATTRIBUTE_NAME}AttributeTtlvDeserializer extends KmipDataTypeTtlv
     }
 }
 EOF
+}
 
-    # 8. Create JSON Test
+generate_json_test() {
+    local ATTRIBUTE_NAME="$1"
+    local path="${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonTest.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${TEST_JAVA}/codec/json/${SUB_PATH}"
-    cat > "${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonTest.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.json.${SUB_PATH};
 
 import org.junit.jupiter.api.DisplayName;
@@ -499,10 +710,19 @@ class ${ATTRIBUTE_NAME}AttributeJsonTest extends AbstractJsonSerializationSuite<
     }
 }
 EOF
+}
 
-    # 9. Create XML Test
+generate_xml_test() {
+    local ATTRIBUTE_NAME="$1"
+    local path="${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlTest.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${TEST_JAVA}/codec/xml/${SUB_PATH}"
-    cat > "${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlTest.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.xml.${SUB_PATH};
 
 import org.junit.jupiter.api.DisplayName;
@@ -514,21 +734,21 @@ import java.time.ZoneOffset;
 
 @DisplayName("${ATTRIBUTE_NAME}Attribute XML Serialization Tests")
 class ${ATTRIBUTE_NAME}AttributeXmlTest extends AbstractXmlSerializationSuite<${ATTRIBUTE_NAME}Attribute> {
-    
+
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-    
-    @Override 
-    protected Class<${ATTRIBUTE_NAME}Attribute> type() { 
-        return ${ATTRIBUTE_NAME}Attribute.class; 
+
+    @Override
+    protected Class<${ATTRIBUTE_NAME}Attribute> type() {
+        return ${ATTRIBUTE_NAME}Attribute.class;
     }
-    
-    @Override 
+
+    @Override
     protected ${ATTRIBUTE_NAME}Attribute createDefault() {
         return ${ATTRIBUTE_NAME}Attribute.builder()
             .dateTime(FIXED_TIME)
             .build();
     }
-    
+
     @Override
     protected ${ATTRIBUTE_NAME}Attribute createVariant() {
         return ${ATTRIBUTE_NAME}Attribute.builder()
@@ -537,10 +757,19 @@ class ${ATTRIBUTE_NAME}AttributeXmlTest extends AbstractXmlSerializationSuite<${
     }
 }
 EOF
+}
 
-    # 10. Create TTLV Test
+generate_ttlv_test() {
+    local ATTRIBUTE_NAME="$1"
+    local path="${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvTest.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${TEST_JAVA}/codec/ttlv/${SUB_PATH}"
-    cat > "${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvTest.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.codec.ttlv.${SUB_PATH};
 
 import org.junit.jupiter.api.DisplayName;
@@ -552,21 +781,21 @@ import java.time.ZoneOffset;
 
 @DisplayName("${ATTRIBUTE_NAME}Attribute TTLV Serialization Tests")
 class ${ATTRIBUTE_NAME}AttributeTtlvTest extends AbstractTtlvSerializationSuite<${ATTRIBUTE_NAME}Attribute> {
-    
+
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-    
-    @Override 
-    protected Class<${ATTRIBUTE_NAME}Attribute> type() { 
-        return ${ATTRIBUTE_NAME}Attribute.class; 
+
+    @Override
+    protected Class<${ATTRIBUTE_NAME}Attribute> type() {
+        return ${ATTRIBUTE_NAME}Attribute.class;
     }
-    
-    @Override 
+
+    @Override
     protected ${ATTRIBUTE_NAME}Attribute createDefault() {
         return ${ATTRIBUTE_NAME}Attribute.builder()
             .dateTime(FIXED_TIME)
             .build();
     }
-    
+
     @Override
     protected ${ATTRIBUTE_NAME}Attribute createVariant() {
         return ${ATTRIBUTE_NAME}Attribute.builder()
@@ -575,10 +804,19 @@ class ${ATTRIBUTE_NAME}AttributeTtlvTest extends AbstractTtlvSerializationSuite<
     }
 }
 EOF
+}
 
-    # 11. Create Benchmark Subject
+generate_benchmark_subject() {
+    local ATTRIBUTE_NAME="$1"
+    local path="${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeBenchmarkSubject.java"
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${path}"
+        return 0
+    fi
+
     mkdir -p "${TEST_JAVA}/benchmark/subjects/${SUB_PATH}"
-    cat > "${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeBenchmarkSubject.java" << EOF
+    cat > "${path}" << EOF
 package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH};
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -671,97 +909,109 @@ public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject implements KmipBenchmark
     }
 }
 EOF
-
-    echo "Generated files for ${ATTRIBUTE_NAME}Attribute:"
-    echo "  - ${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Attribute.java"
-    echo "  - ${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonSerializer.java"
-    echo "  - ${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonDeserializer.java"
-    echo "  - ${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlSerializer.java"
-    echo "  - ${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlDeserializer.java"
-    echo "  - ${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvSerializer.java"
-    echo "  - ${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvDeserializer.java"
-    echo "  - ${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonTest.java"
-    echo "  - ${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlTest.java"
-    echo "  - ${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvTest.java"
-    echo "  - ${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeBenchmarkSubject.java"
-
-    # Function to add and sort service file entries
-    add_service_entry() {
-        local file="$1"
-        local entry="$2"
-        
-        # Create parent directory if it doesn't exist
-        mkdir -p "$(dirname "$file")"
-        
-        # Create file if it doesn't exist
-        touch "$file"
-        
-        # Add the entry if it doesn't exist
-        if ! grep -qF "$entry" "$file"; then
-            echo "$entry" >> "$file"
-        fi
-        
-        # Sort the file, remove duplicates, and empty lines
-        local temp_file="${file}.tmp"
-        sort -u "$file" | grep -v '^[[:space:]]*$' > "$temp_file"
-        
-        # Only update the file if it changed to preserve timestamps
-        if ! cmp -s "$file" "$temp_file"; then
-            mv "$temp_file" "$file"
-        else
-            rm -f "$temp_file"
-        fi
-    }
-
-    # Create META-INF directories if they don't exist
-    mkdir -p "src/main/resources/META-INF/services"
-    mkdir -p "src/test/resources/META-INF/services"
-
-    # Add JSON serializers/deserializers
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-        "org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeJsonSerializer"
-    
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-        "org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeJsonDeserializer"
-
-    # Add XML serializers/deserializers
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-        "org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeXmlSerializer"
-    
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeXmlDeserializer"
-
-    # Add TTLV serializers/deserializers
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeTtlvSerializer"
-    
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeTtlvDeserializer"
-
-    # Add benchmark subject
-    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-        "org.purpleBean.kmip.benchmark.subjects.${SUB_PATH}.${ATTRIBUTE_NAME}AttributeBenchmarkSubject"
-
-    echo ""
-    echo "Service entries have been added for ${ATTRIBUTE_NAME}Attribute in:"
-    echo "- src/main/resources/META-INF/services/ (for serializers/deserializers)"
-    echo "- src/test/resources/META-INF/services/ (for benchmark subjects)"
-    echo ""
-    echo "Note: Don't forget to add the following to your KmipTag.Standard enum:"
-    echo "    ${ATTRIBUTE_NAME_SNAKE}(0x$(printf '%x' $((RANDOM * 1000 % 65000 + 1000))), \"${ATTRIBUTE_NAME}Attribute\");"
 }
 
-# Create directories once
-create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+#############################################
+# Orchestrator for one attribute
+#############################################
+generate_attribute() {
+    local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE
+    ATTRIBUTE_NAME_SNAKE="$(to_snake_upper "$ATTRIBUTE_NAME")"
+    local ATTRIBUTE_VAR_NAME
+    ATTRIBUTE_VAR_NAME="$(get_attribute_var_name "$ATTRIBUTE_NAME")"
 
-# Process each attribute name
-for ATTRIBUTE_NAME in "${ATTRIBUTE_NAMES[@]}"; do
-    generate_attribute "${ATTRIBUTE_NAME}"
-done
+    echo -e "\nProcessing ${ATTRIBUTE_NAME}Attribute..."
 
-echo -e "\nGeneration complete! Don't forget to:"
-echo "1. Add the attribute tag to the KmipTag.Standard enum"
-echo "2. Update any relevant documentation"
-echo "3. Run the tests to verify everything works as expected"
+    $GEN_CLASS       && generate_attribute_class "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR_NAME}"
+    $GEN_JSON_SER    && generate_json_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_JSON_DES    && generate_json_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_XML_SER     && generate_xml_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_XML_DES     && generate_xml_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_TTLV_SER    && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_TTLV_DES    && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_TEST_JSON   && generate_json_test "${ATTRIBUTE_NAME}"
+    $GEN_TEST_XML    && generate_xml_test "${ATTRIBUTE_NAME}"
+    $GEN_TEST_TTLV   && generate_ttlv_test "${ATTRIBUTE_NAME}"
+    $GEN_BENCHMARK   && generate_benchmark_subject "${ATTRIBUTE_NAME}"
 
-echo -e "\nScript is now executable. You can run it with: ./generate_attribute.sh <AttributeName>"
+    register_services "${ATTRIBUTE_NAME}" "${SUB_PATH}"
+
+    echo "Finished (or planned) generation for ${ATTRIBUTE_NAME}Attribute."
+    echo "Suggested enum entry to add to KmipTag.Standard:"
+    echo "    ${ATTRIBUTE_NAME_SNAKE}(0x\$(printf '%x' \$((RANDOM * 1000 % 65000 + 1000))), \"${ATTRIBUTE_NAME}Attribute\");"
+}
+
+#############################################
+# Main
+#############################################
+main() {
+    if [[ $# -eq 0 ]]; then
+        usage
+    fi
+
+    local attrs=()
+    local any_flag=false
+
+    # Parse flags
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --class) GEN_CLASS=true; any_flag=true ;;
+            --json-ser) GEN_JSON_SER=true; any_flag=true ;;
+            --json-des) GEN_JSON_DES=true; any_flag=true ;;
+            --xml-ser) GEN_XML_SER=true; any_flag=true ;;
+            --xml-des) GEN_XML_DES=true; any_flag=true ;;
+            --ttlv-ser) GEN_TTLV_SER=true; any_flag=true ;;
+            --ttlv-des) GEN_TTLV_DES=true; any_flag=true ;;
+            --test-json) GEN_TEST_JSON=true; any_flag=true ;;
+            --test-xml) GEN_TEST_XML=true; any_flag=true ;;
+            --test-ttlv) GEN_TEST_TTLV=true; any_flag=true ;;
+            --benchmark) GEN_BENCHMARK=true; any_flag=true ;;
+            --all)
+                GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_TEST_JSON=true; GEN_TEST_XML=true; GEN_TEST_TTLV=true;
+                GEN_BENCHMARK=true; any_flag=true
+                ;;
+            --help|-h) usage ;;
+            --*) echo "Unknown option: $1"; usage ;;
+            *) attrs+=("$1") ;;
+        esac
+        shift
+    done
+
+    if [[ ${#attrs[@]} -eq 0 ]]; then
+        echo "Error: at least one attribute name required."
+        usage
+    fi
+
+    # If no generation flags provided -> dry run (print what would be done)
+    if [[ $any_flag == false ]]; then
+        DRY_RUN=true
+        echo "No generation flags provided -> performing DRY RUN (no files will be written)."
+        # Plan to show everything in the dry run
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_TEST_JSON=true; GEN_TEST_XML=true; GEN_TEST_TTLV=true
+        GEN_BENCHMARK=true
+    fi
+
+    # Create directories (in dry-run this will only print)
+    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+
+    # Process each attribute
+    for ATTRIBUTE_NAME in "${attrs[@]}"; do
+        generate_attribute "${ATTRIBUTE_NAME}"
+    done
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo -e "\nDRY RUN complete. Nothing was written."
+        echo "Rerun with flags to actually generate files. Example:"
+        echo "  $0 --all ActivationDate"
+    else
+        echo -e "\nGeneration complete! Don't forget to:"
+        echo "1. Add the attribute tag to the KmipTag.Standard enum"
+        echo "2. Update any relevant documentation"
+        echo "3. Run the tests to verify everything works as expected"
+    fi
+}
+
+main "$@"
