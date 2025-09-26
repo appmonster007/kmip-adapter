@@ -7,7 +7,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
@@ -47,7 +47,7 @@ public class SampleStructureBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = MapperFactory.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(fixed).build();
+        ActivationDate activationDate = ActivationDate.builder().dateTime(fixed).build();
         State state = new State(State.Standard.ACTIVE);
         obj = SampleStructure.builder()
                 .activationDate(activationDate)

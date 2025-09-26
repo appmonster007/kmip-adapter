@@ -8,7 +8,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
@@ -105,7 +105,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
         // Example:
         switch (nodeTag) {
             case KmipTag.Standard.ACTIVATION_DATE ->
-                    builder.activationDate(p.getCodec().treeToValue(node, ActivationDateAttribute.class));
+                    builder.activationDate(p.getCodec().treeToValue(node, ActivationDate.class));
             case KmipTag.Standard.STATE -> builder.state(p.getCodec().treeToValue(node, State.class));
             default -> throw new IllegalArgumentException();
         }

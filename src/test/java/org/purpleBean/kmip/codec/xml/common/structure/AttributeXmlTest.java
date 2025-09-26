@@ -1,14 +1,10 @@
 package org.purpleBean.kmip.codec.xml.common.structure;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
@@ -30,7 +26,7 @@ class AttributeXmlTest extends AbstractXmlSerializationSuite<Attribute> {
     protected void setupTestSpecificResources() {
         super.setupTestSpecificResources();
         mockKmipAttribute = mockStatic(KmipAttribute.class);
-        mockKmipAttribute.when(() -> KmipAttribute.getClassFromRegistry(any(), any(), any())).thenReturn(ActivationDateAttribute.class);
+        mockKmipAttribute.when(() -> KmipAttribute.getClassFromRegistry(any(), any(), any())).thenReturn(ActivationDate.class);
     }
 
     @Override
@@ -45,7 +41,7 @@ class AttributeXmlTest extends AbstractXmlSerializationSuite<Attribute> {
 
     @Override
     protected Attribute createDefault() {
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
         return Attribute.of(activationDate);
     }
 

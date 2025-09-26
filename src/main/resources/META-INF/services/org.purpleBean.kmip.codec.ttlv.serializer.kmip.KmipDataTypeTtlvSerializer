@@ -2,7 +2,7 @@
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMajorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMinorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ActivationDateAttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ActivationDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueTtlvSerializer

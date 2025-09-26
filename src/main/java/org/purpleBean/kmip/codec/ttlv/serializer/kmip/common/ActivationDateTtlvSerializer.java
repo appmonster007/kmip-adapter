@@ -5,19 +5,19 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ActivationDateAttributeTtlvSerializer extends KmipDataTypeTtlvSerializer<ActivationDateAttribute> {
+public class ActivationDateTtlvSerializer extends KmipDataTypeTtlvSerializer<ActivationDate> {
 
     @Override
-    public ByteBuffer serialize(ActivationDateAttribute value, TtlvMapper mapper) throws IOException {
+    public ByteBuffer serialize(ActivationDate value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
-    public TtlvObject serializeToTtlvObject(ActivationDateAttribute value, TtlvMapper mapper) throws IOException {
+    public TtlvObject serializeToTtlvObject(ActivationDate value, TtlvMapper mapper) throws IOException {
         if (value == null) {
             return null;
         }

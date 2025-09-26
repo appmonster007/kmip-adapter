@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Data
 @Builder
-public class ActivationDateAttribute implements KmipAttribute {
+public class ActivationDate implements KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -23,8 +23,8 @@ public class ActivationDateAttribute implements KmipAttribute {
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ActivationDateAttribute.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDateAttribute.class);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
         }
     }
 
@@ -68,7 +68,7 @@ public class ActivationDateAttribute implements KmipAttribute {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ActivationDateAttribute that = (ActivationDateAttribute) o;
+        ActivationDate that = (ActivationDate) o;
         // Compare OffsetDateTime up to seconds to avoid flakiness
         return this.dateTime.withNano(0).equals(that.dateTime.withNano(0));
     }

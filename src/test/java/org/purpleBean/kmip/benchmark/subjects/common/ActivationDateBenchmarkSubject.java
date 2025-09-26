@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -13,13 +13,13 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSubject {
+public class ActivationDateBenchmarkSubject implements KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
 
-    private ActivationDateAttribute obj;
+    private ActivationDate obj;
 
     @Getter
     private String jsonStr;
@@ -28,13 +28,13 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
     @Getter
     private ByteBuffer ttlvBuf;
 
-    public ActivationDateAttributeBenchmarkSubject() throws Exception {
+    public ActivationDateBenchmarkSubject() throws Exception {
         this.setup();
     }
 
     @Override
     public String name() {
-        return "ActivationDateAttribute";
+        return "ActivationDate";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
         ttlv = MapperFactory.getTtlvMapper();
 
         // Create test object
-        obj = ActivationDateAttribute.builder()
+        obj = ActivationDate.builder()
             .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
             .build();
 
@@ -66,7 +66,7 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
     @Override
     public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, ActivationDateAttribute.class);
+        return json.readValue(jsonStr, ActivationDate.class);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
     @Override
     public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, ActivationDateAttribute.class);
+        return xml.readValue(xmlStr, ActivationDate.class);
     }
 
     @Override
@@ -86,6 +86,6 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
 
     @Override
     public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), ActivationDateAttribute.class);
+        return ttlv.readValue(ttlvBuf.duplicate(), ActivationDate.class);
     }
 }

@@ -288,7 +288,7 @@ State.Value lookedUp = State.fromValue(KmipSpec.V1_2, code);
 ### 3. Validation Example
 
 ```java
-// ActivationDateAttribute validation patterns
+// ActivationDate validation patterns
 ActivationDateAttribute attr = ActivationDateAttribute.builder()
     .dateTime(OffsetDateTime.now(ZoneOffset.UTC))
     .build();
@@ -301,7 +301,7 @@ ActivationDateAttribute attr = ActivationDateAttribute.builder()
 ### 1. Type Conversion
 
 ```java
-// Convert ActivationDateAttribute to/from TTLV using TtlvMapper
+// Convert ActivationDate to/from TTLV using TtlvMapper
 TtlvMapper ttlv = new TtlvMapper();
 ttlv.registerModule(new KmipTtlvModule());
 byte[] bytes = ttlv.writeValueAsBytes(attr);

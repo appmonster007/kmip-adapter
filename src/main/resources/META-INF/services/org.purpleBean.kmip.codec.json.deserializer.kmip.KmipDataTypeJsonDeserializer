@@ -2,7 +2,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMajorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMinorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.RequestMessageJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.kmip.common.ActivationDateAttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.ActivationDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeIndexJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeNameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueJsonDeserializer

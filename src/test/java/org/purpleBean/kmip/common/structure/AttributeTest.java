@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.StringUtils;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
 
 import java.time.OffsetDateTime;
@@ -25,7 +25,7 @@ class AttributeTest extends AbstractKmipStructureSuite<Attribute> {
 
     @Override
     protected Attribute createDefault() {
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
         return Attribute.of(activationDate);
     }
 

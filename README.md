@@ -136,6 +136,7 @@ Add to your `pom.xml`:
 #### Creating KMIP Data Types
 
 ```java
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
@@ -146,7 +147,7 @@ KmipContext.setSpec(KmipSpec.V1_2);
 
 // Create basic types
 State activeState = new State(State.Standard.ACTIVE);
-ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
+ActivationDate activationDate = ActivationDate.builder()
         .dateTime(OffsetDateTime.now())
         .build();
 

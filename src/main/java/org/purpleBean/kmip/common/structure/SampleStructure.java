@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class SampleStructure implements KmipStructure {
     // TODO: Add your structure fields here
     // Example:
     @NonNull
-    private final ActivationDateAttribute activationDate;
+    private final ActivationDate activationDate;
     private final State state;
 
     @Override

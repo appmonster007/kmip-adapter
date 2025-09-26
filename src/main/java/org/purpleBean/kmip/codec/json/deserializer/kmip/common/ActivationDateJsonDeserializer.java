@@ -8,7 +8,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -17,16 +17,16 @@ import java.util.NoSuchElementException;
 /**
  * JSON deserializer for ActivationDate.
  */
-public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<ActivationDateAttribute> {
+public class ActivationDateJsonDeserializer extends KmipDataTypeJsonDeserializer<ActivationDate> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
 
     @Override
-    public ActivationDateAttribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public ActivationDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, "JSON node cannot be null for ActivationDateAttribute deserialization");
+            ctxt.reportInputMismatch(ActivationDate.class, "JSON node cannot be null for ActivationDate deserialization");
             return null;
         }
 
@@ -35,16 +35,16 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(ActivationDateAttribute.class, "Invalid KMIP tag for ActivationDateAttribute");
+                ctxt.reportInputMismatch(ActivationDate.class, "Invalid KMIP tag for ActivationDate");
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, String.format("Failed to parse KMIP tag for ActivationDateAttribute: %s", e.getMessage()));
+            ctxt.reportInputMismatch(ActivationDate.class, String.format("Failed to parse KMIP tag for ActivationDate: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, "Expected object for ActivationDateAttribute");
+            ctxt.reportInputMismatch(ActivationDate.class, "Expected object for ActivationDate");
             return null;
         }
 
@@ -55,24 +55,24 @@ public class ActivationDateAttributeJsonDeserializer extends KmipDataTypeJsonDes
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, "Missing or non-text 'type' field for ActivationDateAttribute");
+            ctxt.reportInputMismatch(ActivationDate.class, "Missing or non-text 'type' field for ActivationDate");
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(ActivationDateAttribute.class, "Missing or non-text 'value' for ActivationDateAttribute");
+            ctxt.reportInputMismatch(ActivationDate.class, "Missing or non-text 'value' for ActivationDate");
             return null;
         }
 
         OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        ActivationDateAttribute attribute = ActivationDateAttribute.builder().dateTime(dateTime).build();
+        ActivationDate attribute = ActivationDate.builder().dateTime(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupportedFor(spec)) {
             throw new NoSuchElementException(
-                    String.format("ActivationDateAttribute '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
+                    String.format("ActivationDate '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
             );
         }
         return attribute;

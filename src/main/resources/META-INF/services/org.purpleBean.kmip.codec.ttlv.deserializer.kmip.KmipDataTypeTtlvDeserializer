@@ -3,7 +3,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMajorTtlvDeseria
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMinorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.RequestMessageTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ActivationDateAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ActivationDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeIndexTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.AdjustmentTypeTtlvDeserializer

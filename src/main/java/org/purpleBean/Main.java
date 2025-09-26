@@ -11,7 +11,7 @@ import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.common.structure.SampleStructure;
@@ -50,7 +50,7 @@ public class Main {
                 .build();
 
         KmipContext.setSpec(KmipSpec.V1_2);
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder()
+        ActivationDate activationDate = ActivationDate.builder()
                 .dateTime(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
                 .build();
 

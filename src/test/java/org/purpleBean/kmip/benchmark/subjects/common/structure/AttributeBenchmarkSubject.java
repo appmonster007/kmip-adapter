@@ -9,7 +9,7 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.MapperFactory;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class AttributeBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = MapperFactory.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(fixed).build();
+        ActivationDate activationDate = ActivationDate.builder().dateTime(fixed).build();
         obj = Attribute.of(activationDate);
 
         jsonStr = json.writeValueAsString(obj);

@@ -47,7 +47,7 @@ public class FooDemoAttribute implements KmipAttribute {
     // Template supported versions — adjust as needed
     private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
-    // Capability flags — mirror ActivationDateAttribute semantics
+    // Capability flags — mirror ActivationDate semantics
     private final boolean alwaysPresent = false;
     private final boolean serverInitializable = true;
     private final boolean clientInitializable = true;

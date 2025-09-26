@@ -7,7 +7,7 @@ import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
@@ -62,7 +62,7 @@ public class SampleStructureTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         // Example:
         switch (nodeTag) {
             case KmipTag.Standard.ACTIVATION_DATE ->
-                    builder.activationDate(mapper.readValue(ttlvObject.toByteBuffer(), ActivationDateAttribute.class));
+                    builder.activationDate(mapper.readValue(ttlvObject.toByteBuffer(), ActivationDate.class));
             case KmipTag.Standard.STATE -> builder.state(mapper.readValue(ttlvObject.toByteBuffer(), State.class));
             default -> throw new IllegalArgumentException();
         }

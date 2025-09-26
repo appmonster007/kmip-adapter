@@ -23,7 +23,7 @@ A concise reference mapping production classes to their corresponding per-class 
   - TTLV: `codec/ttlv/common/enumeration/StateTtlvTest.java`
   - XML: `codec/xml/common/enumeration/StateXmlTest.java`
 
-- `org.purpleBean.kmip.common.ActivationDateAttribute`
+- `org.purpleBean.kmip.common.ActivationDate`
   - JSON: `codec/json/common/ActivationDateAttributeJsonTest.java`
   - TTLV: `codec/ttlv/common/ActivationDateAttributeTtlvTest.java`
   - XML: `codec/xml/common/ActivationDateAttributeXmlTest.java`

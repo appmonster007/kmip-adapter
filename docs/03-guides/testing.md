@@ -157,7 +157,7 @@ This split avoids overloading a single method and produces clearer test reports 
  * Tests for {@link ActivationDateAttribute} attribute.
  */
 @ExtendWith(MockitoExtension.class)
-@DisplayName("ActivationDateAttribute Tests")
+@DisplayName("ActivationDate Tests")
 class ActivationDateAttributeTest extends BaseKmipTest {
 
     @Test

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
+import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
 
@@ -24,7 +24,7 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
     @Override
     protected SampleStructure createDefault() {
         // TODO: Update with actual default values for your structure
-        ActivationDateAttribute activationDate = ActivationDateAttribute.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
         return SampleStructure.builder()
                 .activationDate(activationDate)
