@@ -13,11 +13,11 @@ class ProfileNameTtlvTest extends AbstractTtlvSerializationSuite<ProfileName> {
 
     @Override
     protected ProfileName createDefault() {
-        return new ProfileName(ProfileName.Standard.PLACEHOLDER_1);
+        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
     }
 
     @Override
     protected ProfileName createVariant() {
-        return new ProfileName(ProfileName.Standard.PLACEHOLDER_2);
+        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2);
     }
 }

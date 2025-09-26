@@ -40,7 +40,7 @@ public class ProfileNameBenchmarkSubject implements KmipBenchmarkSubject {
         xml = MapperFactory.getXmlMapper();
         ttlv = MapperFactory.getTtlvMapper();
 
-        obj = new ProfileName(ProfileName.Standard.PLACEHOLDER_1);
+        obj = new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
 
         // Pre-serialize to ensure all mappers are initialized
         jsonStr = json.writeValueAsString(obj);

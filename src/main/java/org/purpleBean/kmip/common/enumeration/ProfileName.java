@@ -130,8 +130,6 @@ public class ProfileName implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion),
         COMPLETE_SERVER_BASIC(0x00000104, "CompleteServerBasic", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         COMPLETE_SERVER_TLS_V1_2(0x00000105, "CompleteServerTlsV12", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         TAPE_LIBRARY_CLIENT(0x00000106, "TapeLibraryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
