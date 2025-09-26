@@ -18,15 +18,25 @@ import java.util.Set;
 @Builder
 public class SampleStructure implements KmipStructure {
 
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     // TODO: Add your structure fields here
     // Example:
     @NonNull
     private final ActivationDateAttribute activationDate;
     private final State state;
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
 
     @Override
     public List<KmipDataType> getValues() {

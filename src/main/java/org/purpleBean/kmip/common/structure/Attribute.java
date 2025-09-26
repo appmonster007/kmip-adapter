@@ -2,7 +2,6 @@ package org.purpleBean.kmip.common.structure;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.KmipCodecManager;
@@ -23,9 +22,8 @@ import java.util.regex.Pattern;
 @Builder
 public class Attribute implements KmipStructure {
 
-    @Getter
-    private static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
+    public static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
     private final EncodingType encodingType = EncodingType.STRUCTURE;
     @NonNull
     private final AttributeName attributeName;
@@ -117,8 +115,8 @@ public class Attribute implements KmipStructure {
     @Data
     @Builder
     public static class AttributeIndex implements KmipDataType {
-        private static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
-        private static final EncodingType encodingType = EncodingType.INTEGER;
+        public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
+        public static final EncodingType encodingType = EncodingType.INTEGER;
 
         private final int index;
 
@@ -205,8 +203,8 @@ public class Attribute implements KmipStructure {
 //                encodingType = EncodingType.BYTE_STRING;
 //                value = (ByteBuffer) KmipCodecRegistry.serialize(value);
 //            } else {
-                encodingType = EncodingType.TEXT_STRING;
-                value = (String) KmipCodecManager.serialize(value);
+            encodingType = EncodingType.TEXT_STRING;
+            value = (String) KmipCodecManager.serialize(value);
 //            }
 
             return Attribute.CustomAttribute.of(name, encodingType, value);

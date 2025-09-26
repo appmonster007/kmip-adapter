@@ -154,37 +154,6 @@ add_service_entry() {
     fi
 }
 
-register_services_for_enum() {
-    local ENUM_NAME="$1"
-    local pdot
-    pdot="$(pkg_dot)"
-
-    if [ "${GEN_SERVICES}" = "false" ]; then
-        return 0
-    fi
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-        "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${ENUM_NAME}JsonSerializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-        "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${ENUM_NAME}JsonDeserializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-        "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${ENUM_NAME}XmlSerializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${ENUM_NAME}XmlDeserializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${ENUM_NAME}TtlvSerializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${ENUM_NAME}TtlvDeserializer"
-
-    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-        "org.purpleBean.kmip.benchmark.subjects.${pdot}.${ENUM_NAME}BenchmarkSubject"
-}
-
 #############################################
 # Per-artifact generators (each respects DRY_RUN)
 #############################################
@@ -220,6 +189,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder
 public class ${ENUM_NAME} implements KmipEnumeration {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
+    public static final EncodingType encodingType = EncodingType.ENUMERATION;
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -230,9 +201,6 @@ public class ${ENUM_NAME} implements KmipEnumeration {
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
-
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
 
     @NonNull
     private final Value value;
@@ -310,6 +278,16 @@ public class ${ENUM_NAME} implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
     }
 
     public String getDescription() {
@@ -451,6 +429,9 @@ public class ${ENUM_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${ENU
 }
 EOF
 
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+        "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${ENUM_NAME}JsonSerializer"
+
     echo "Created: ${out_file}"
 }
 
@@ -571,6 +552,9 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
 }
 EOF
 
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+        "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${ENUM_NAME}JsonDeserializer"
+
     echo "Created: ${out_file}"
 }
 
@@ -635,6 +619,9 @@ public class ${ENUM_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${ENUM_
 }
 
 EOF
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+        "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${ENUM_NAME}XmlSerializer"
 
     echo "Created: ${out_file}"
 }
@@ -725,6 +712,9 @@ public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${E
 }
 EOF
 
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${ENUM_NAME}XmlDeserializer"
+
     echo "Created: ${out_file}"
 }
 
@@ -784,6 +774,9 @@ public class ${ENUM_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${ENU
     }
 }
 EOF
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${ENUM_NAME}TtlvSerializer"
 
     echo "Created: ${out_file}"
 }
@@ -851,6 +844,9 @@ public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<$
     }
 }
 EOF
+
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+            "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${ENUM_NAME}TtlvDeserializer"
 
     echo "Created: ${out_file}"
 }
@@ -1184,6 +1180,9 @@ public class ${ENUM_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 }
 EOF
 
+    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purpleBean.kmip.benchmark.subjects.${pdot}.${ENUM_NAME}BenchmarkSubject"
+
     echo "Created: ${out_file}"
 }
 
@@ -1207,7 +1206,6 @@ generate_enum() {
     ${GEN_XML_TEST} && generate_xml_test "${ENUM_NAME}"
     ${GEN_TTLV_TEST} && generate_ttlv_test "${ENUM_NAME}"
     ${GEN_BENCHMARK} && generate_benchmark_subject "${ENUM_NAME}"
-    ${GEN_SERVICES} && register_services_for_enum "${ENUM_NAME}"
 
     echo "Finished (or planned) generation for ${ENUM_NAME}"
     echo "Remember to update Standard values in ${ENUM_NAME}.java with real KMIP enum values."

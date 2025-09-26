@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 @Builder
 public class SimpleRequestMessage implements RequestMessageStructure {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
 
     @NonNull
     private final SimpleRequestHeader requestHeader;
@@ -24,6 +24,15 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     @Singular
     private final List<Exception> requestBatchItemErrors;
 
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
 
     @Override
     public List<KmipDataType> getValues() {

@@ -12,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder
 public class UniqueIdentifier implements KmipEnumeration {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);
+    public static final EncodingType encodingType = EncodingType.ENUMERATION;
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -22,9 +24,6 @@ public class UniqueIdentifier implements KmipEnumeration {
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
-
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
 
     @NonNull
     private final Value value;
@@ -102,6 +101,16 @@ public class UniqueIdentifier implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
     }
 
     public String getDescription() {

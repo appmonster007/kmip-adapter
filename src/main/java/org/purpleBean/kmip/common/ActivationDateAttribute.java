@@ -16,9 +16,9 @@ import java.util.Set;
 @Data
 @Builder
 public class ActivationDateAttribute implements KmipAttribute {
-    private static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
+    public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
-    private static EncodingType encodingType = EncodingType.DATE_TIME;
 
     static {
         for (KmipSpec spec : supportedVersions) {
