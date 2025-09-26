@@ -51,7 +51,7 @@ public class Main {
 
         KmipContext.setSpec(KmipSpec.V1_2);
         ActivationDate activationDate = ActivationDate.builder()
-                .dateTime(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
+                .value(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
                 .build();
 
         State activeState = new State(State.Standard.ACTIVE);
