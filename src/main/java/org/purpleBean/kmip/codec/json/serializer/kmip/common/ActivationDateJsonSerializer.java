@@ -29,7 +29,7 @@ public class ActivationDateJsonSerializer extends KmipDataTypeJsonSerializer<Act
         gen.writeStartObject();
         gen.writeObject(value.getKmipTag());
         gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeStringField("value", value.getDateTime().toString());
+        gen.writeObjectField("value", value.getValue());
         gen.writeEndObject();
     }
 }

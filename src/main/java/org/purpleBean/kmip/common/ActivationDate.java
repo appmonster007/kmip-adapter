@@ -35,7 +35,7 @@ public class ActivationDate implements KmipAttribute {
     private final boolean clientDeletable = false;
     private final boolean multiInstanceAllowed = false;
     @NonNull
-    private final OffsetDateTime dateTime;
+    private final OffsetDateTime value;
 
     @Override
     public KmipTag getKmipTag() {
@@ -70,11 +70,11 @@ public class ActivationDate implements KmipAttribute {
         if (o == null || getClass() != o.getClass()) return false;
         ActivationDate that = (ActivationDate) o;
         // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.dateTime.withNano(0).equals(that.dateTime.withNano(0));
+        return this.value.withNano(0).equals(that.value.withNano(0));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dateTime.withNano(0));
+        return Objects.hash(value.withNano(0));
     }
 }

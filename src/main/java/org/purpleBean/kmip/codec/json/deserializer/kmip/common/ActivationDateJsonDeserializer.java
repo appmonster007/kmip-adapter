@@ -67,7 +67,7 @@ public class ActivationDateJsonDeserializer extends KmipDataTypeJsonDeserializer
         }
 
         OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        ActivationDate attribute = ActivationDate.builder().dateTime(dateTime).build();
+        ActivationDate attribute = ActivationDate.builder().value(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupportedFor(spec)) {

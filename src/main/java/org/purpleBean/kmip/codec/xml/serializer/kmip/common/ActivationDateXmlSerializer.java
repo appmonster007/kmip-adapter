@@ -36,7 +36,7 @@ public class ActivationDateXmlSerializer extends KmipDataTypeXmlSerializer<Activ
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("value", value.getDateTime().toString());
+        xmlGen.writeObjectField("value", value.getValue());
         xmlGen.writeEndObject();
     }
 }

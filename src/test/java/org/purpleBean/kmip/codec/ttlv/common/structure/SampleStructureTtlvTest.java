@@ -22,7 +22,7 @@ class SampleStructureTtlvTest extends AbstractTtlvSerializationSuite<SampleStruc
     @Override
     protected SampleStructure createDefault() {
         // TODO: Update with actual default values for your structure
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
         return SampleStructure.builder()
                 .activationDate(activationDate)
@@ -33,7 +33,7 @@ class SampleStructureTtlvTest extends AbstractTtlvSerializationSuite<SampleStruc
     @Override
     protected SampleStructure createVariant() {
         // TODO: Update with different values to test variations
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
         State state = new State(State.Standard.DEACTIVATED);
         return SampleStructure.builder()
                 .activationDate(activationDate)

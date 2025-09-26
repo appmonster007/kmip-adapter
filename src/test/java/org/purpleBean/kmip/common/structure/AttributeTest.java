@@ -25,7 +25,7 @@ class AttributeTest extends AbstractKmipStructureSuite<Attribute> {
 
     @Override
     protected Attribute createDefault() {
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         return Attribute.of(activationDate);
     }
 

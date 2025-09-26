@@ -31,7 +31,7 @@ public class ActivationDateTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         OffsetDateTime dt = mapper.readValue(bb, OffsetDateTime.class);
 
         KmipSpec spec = KmipContext.getSpec();
-        ActivationDate attribute = ActivationDate.builder().dateTime(dt).build();
+        ActivationDate attribute = ActivationDate.builder().value(dt).build();
 
         if (!attribute.isSupportedFor(spec)) {
             throw new NoSuchElementException();

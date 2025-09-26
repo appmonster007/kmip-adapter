@@ -20,7 +20,7 @@ class ActivationDateTest extends AbstractKmipAttributeSuite<ActivationDate> {
 
     @Override
     protected ActivationDate createDefault() {
-        return ActivationDate.builder().dateTime(FIXED_TIME).build();
+        return ActivationDate.builder().value(FIXED_TIME).build();
     }
 
     @Override

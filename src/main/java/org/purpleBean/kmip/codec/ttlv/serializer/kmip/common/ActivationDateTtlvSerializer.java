@@ -32,7 +32,7 @@ public class ActivationDateTtlvSerializer extends KmipDataTypeTtlvSerializer<Act
 
         byte[] tag = value.getKmipTag().getTagBytes();
         byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getDateTime()).array();
+        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)

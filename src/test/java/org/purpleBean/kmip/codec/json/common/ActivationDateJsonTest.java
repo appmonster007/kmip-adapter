@@ -20,14 +20,14 @@ class ActivationDateJsonTest extends AbstractJsonSerializationSuite<ActivationDa
     @Override
     protected ActivationDate createDefault() {
         return ActivationDate.builder()
-            .dateTime(FIXED_TIME)
-            .build();
+                .value(FIXED_TIME)
+                .build();
     }
 
     @Override
     protected ActivationDate createVariant() {
         return ActivationDate.builder()
-            .dateTime(FIXED_TIME.plusDays(1))
-            .build();
+                .value(FIXED_TIME.plusDays(1))
+                .build();
     }
 }

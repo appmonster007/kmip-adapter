@@ -50,7 +50,7 @@ public class AttributeBenchmarkSubject implements KmipBenchmarkSubject {
         ttlv = MapperFactory.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDate activationDate = ActivationDate.builder().dateTime(fixed).build();
+        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
         obj = Attribute.of(activationDate);
 
         jsonStr = json.writeValueAsString(obj);
