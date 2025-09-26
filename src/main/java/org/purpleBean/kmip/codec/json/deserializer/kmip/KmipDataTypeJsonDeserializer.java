@@ -10,13 +10,18 @@ public abstract class KmipDataTypeJsonDeserializer<T extends KmipDataType> exten
     @Override
     public Class<?> handledType() {
         // Try to infer the generic parameter (T) from the concrete subclass declaration
-        // e.g., class FooSerializer extends KmipDataTypeJsonSerializer<Foo>
-        // This allows SimpleModule.addSerializer(JsonSerializer) to work without passing Class explicitly
+        // Handles both raw classes and parameterized types (template classes)
         Type superType = getClass().getGenericSuperclass();
         if (superType instanceof ParameterizedType pt) {
             Type tArg = pt.getActualTypeArguments()[0];
             if (tArg instanceof Class<?> c) {
                 return c;
+            }
+            if (tArg instanceof ParameterizedType parameterized) {
+                Type raw = parameterized.getRawType();
+                if (raw instanceof Class<?> rc) {
+                    return rc;
+                }
             }
         }
         return super.handledType();

@@ -12,10 +12,9 @@ import java.util.Set;
 @Data
 @Builder
 public class ProtocolVersion implements KmipStructure {
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
     private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
-
     @NonNull
     private final ProtocolVersionMajor protocolVersionMajor;
     @NonNull
@@ -82,7 +81,7 @@ public class ProtocolVersion implements KmipStructure {
 
         @Override
         public boolean isSupportedFor(@NonNull KmipSpec spec) {
-            return true;
+            return supportedVersions.contains(spec);
         }
     }
 
@@ -108,7 +107,7 @@ public class ProtocolVersion implements KmipStructure {
 
         @Override
         public boolean isSupportedFor(@NonNull KmipSpec spec) {
-            return true;
+            return supportedVersions.contains(spec);
         }
     }
 }

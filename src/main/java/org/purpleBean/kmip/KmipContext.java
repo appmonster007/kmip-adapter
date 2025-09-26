@@ -1,5 +1,7 @@
 package org.purpleBean.kmip;
 
+import java.util.function.Supplier;
+
 /**
  * Thread-local context for KMIP codec operations.
  * Maintains KMIP specification version per thread for proper serialization/deserialization.
@@ -43,17 +45,19 @@ public final class KmipContext {
     }
 
     /**
-     * Executes the given runnable with the specified KMIP spec,
-     * ensuring the spec is properly cleaned up afterward.
+     * Executes the given supplier with the specified KMIP spec,
+     * ensuring the spec is properly cleaned up afterward and returning its output.
      *
      * @param spec     the KMIP spec to use
-     * @param runnable the code to execute
+     * @param supplier the code to execute
+     * @param <T>      the result type
+     * @return the output from the supplier
      */
-    public static void withSpec(KmipSpec spec, Runnable runnable) {
+    public static <T> T withSpec(KmipSpec spec, Supplier<T> supplier) {
         KmipSpec previous = getSpec();
         try {
             setSpec(spec);
-            runnable.run();
+            return supplier.get();
         } finally {
             if (previous != null) {
                 setSpec(previous);

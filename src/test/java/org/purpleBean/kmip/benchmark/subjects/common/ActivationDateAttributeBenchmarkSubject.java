@@ -51,7 +51,7 @@ public class ActivationDateAttributeBenchmarkSubject implements KmipBenchmarkSub
         // Serialize to all formats for deserialization benchmarks
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ByteBuffer.wrap(ttlv.writeValueAsBytes(obj));
+        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
     }
 
     @Override

@@ -55,21 +55,61 @@ public class TtlvMapper {
     }
 
 
-    @SuppressWarnings("unchecked") // TODO : remove?
+    @SuppressWarnings("unchecked")
     private <T> TtlvSerializer<T> getSerializer(Class<?> type) {
+        // First try the exact type
         TtlvSerializer<?> serializer = serializers.get(type);
-        if (serializer == null) {
-            throw new IllegalStateException("No serializer registered for type: " + type.getName());
+        if (serializer != null) {
+            return (TtlvSerializer<T>) serializer;
         }
-        return (TtlvSerializer<T>) serializer;
+
+        // Then try superclasses
+        Class<?> current = type.getSuperclass();
+        while (current != null && current != Object.class) {
+            serializer = serializers.get(current);
+            if (serializer != null) {
+                return (TtlvSerializer<T>) serializer;
+            }
+            current = current.getSuperclass();
+        }
+
+        // Then try interfaces
+        for (Class<?> iface : type.getInterfaces()) {
+            serializer = serializers.get(iface);
+            if (serializer != null) {
+                return (TtlvSerializer<T>) serializer;
+            }
+        }
+
+        throw new IllegalArgumentException("No serializer found for type: " + type.getName());
     }
 
-    @SuppressWarnings("unchecked") // TODO : remove?
+    @SuppressWarnings("unchecked")
     private <T> TtlvDeserializer<T> getDeserializer(Class<T> type) {
+        // First try the exact type
         TtlvDeserializer<?> deserializer = deserializers.get(type);
-        if (deserializer == null) {
-            throw new IllegalStateException("No deserializer registered for type: " + type.getName());
+        if (deserializer != null) {
+            return (TtlvDeserializer<T>) deserializer;
         }
-        return (TtlvDeserializer<T>) deserializer;
+
+        // Then try superclasses
+        Class<?> current = type.getSuperclass();
+        while (current != null && current != Object.class) {
+            deserializer = deserializers.get(current);
+            if (deserializer != null) {
+                return (TtlvDeserializer<T>) deserializer;
+            }
+            current = current.getSuperclass();
+        }
+
+        // Then try interfaces
+        for (Class<?> iface : type.getInterfaces()) {
+            deserializer = deserializers.get(iface);
+            if (deserializer != null) {
+                return (TtlvDeserializer<T>) deserializer;
+            }
+        }
+
+        throw new IllegalArgumentException("No deserializer found for type: " + type.getName());
     }
 }

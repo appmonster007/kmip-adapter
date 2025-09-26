@@ -65,4 +65,5 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.ValidationAuthorityTyp
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ValidationTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.ValidityIndicatorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.WrappingMethodBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.SampleStructureBenchmarkSubject

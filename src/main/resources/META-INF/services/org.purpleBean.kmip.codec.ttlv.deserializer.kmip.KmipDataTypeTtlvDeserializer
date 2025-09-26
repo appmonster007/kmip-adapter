@@ -1,8 +1,11 @@
+#org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CustomAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMajorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMinorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.RequestMessageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ActivationDateAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeIndexTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.AdjustmentTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.AlternativeNameTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.AsynchronousIndicatorTtlvDeserializer
@@ -68,6 +71,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.ValidationAu
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.ValidationTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.ValidityIndicatorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.WrappingMethodTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.SampleStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request.SimpleRequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request.SimpleRequestHeaderTtlvDeserializer

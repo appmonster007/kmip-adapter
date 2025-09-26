@@ -64,7 +64,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
      *
      * @param builder the builder to set the field on
      * @param nodeTag the tag identifying the field to set
-     * @param node    the JSON node containing the field value
+     * @param node    the XML node containing the field value
      * @param p       the JsonParser
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value

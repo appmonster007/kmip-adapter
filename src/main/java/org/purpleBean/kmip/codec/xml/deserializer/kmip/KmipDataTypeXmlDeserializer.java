@@ -9,12 +9,19 @@ import java.lang.reflect.Type;
 public abstract class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDeserializer<T> {
     @Override
     public Class<?> handledType() {
-        // Infer the generic parameter (T) from the concrete subclass declaration
+        // Try to infer the generic parameter (T) from the concrete subclass declaration
+        // Handles both raw classes and parameterized types (template classes)
         Type superType = getClass().getGenericSuperclass();
         if (superType instanceof ParameterizedType pt) {
             Type tArg = pt.getActualTypeArguments()[0];
             if (tArg instanceof Class<?> c) {
                 return c;
+            }
+            if (tArg instanceof ParameterizedType parameterized) {
+                Type raw = parameterized.getRawType();
+                if (raw instanceof Class<?> rc) {
+                    return rc;
+                }
             }
         }
         return super.handledType();

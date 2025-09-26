@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.RequestMessageStructure;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
@@ -16,6 +13,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.ActivationDateAttribute;
 import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
@@ -64,13 +62,16 @@ public class Main {
                 .state(activeState)
                 .build();
 
+//        Attribute attr = Attribute.of(activationDate);
+        Attribute attr = Attribute.of(Attribute.CustomAttribute.ofStructureString("x-apple", sampleStructure));
+
         ObjectMapper jsonMapper = buildJsonMapper();
         XmlMapper xmlMapper = buildXmlMapper();
         TtlvMapper ttlvMapper = buildTtlvMapper();
 
-        demoJson(jsonMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage);
-        demoXml(xmlMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage);
-        demoTtlv(ttlvMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage);
+        demoJson(jsonMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
+        demoXml(xmlMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
+        demoTtlv(ttlvMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
 
         printHeader("DONE");
     }
@@ -78,6 +79,7 @@ public class Main {
     private static ObjectMapper buildJsonMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.registerModule(new KmipJsonModule());
         mapper.registerModule(new JavaTimeModule());
         return mapper;
@@ -86,6 +88,7 @@ public class Main {
     private static XmlMapper buildXmlMapper() {
         XmlMapper mapper = new XmlMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.registerModule(new KmipXmlModule());
         mapper.registerModule(new JavaTimeModule());
         return mapper;
@@ -99,63 +102,43 @@ public class Main {
 
     // ================= DEMOS =================
 
-    private static void demoJson(ObjectMapper mapper,
-                                 ProtocolVersion protocolVersion,
-                                 State customState,
-                                 ActivationDateAttribute activationDate,
-                                 SampleStructure sampleStructure,
-                                 SimpleRequestMessage requestMessage) throws JsonProcessingException {
+    private static void demoJson(ObjectMapper mapper, KmipDataType... dataTypes) throws JsonProcessingException {
         printSection("JSON Serialization/Deserialization");
 
-        printJson(mapper, "ProtocolVersion", protocolVersion, ProtocolVersion.class);
-        printJson(mapper, "State (Custom)", customState, State.class);
-        printJson(mapper, "ActivationDateAttribute", activationDate, ActivationDateAttribute.class);
-        printJson(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
-        // ErrorList excluded
-        printJson(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
-        printJson(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
+        for (KmipDataType dataType : dataTypes) {
+            if (dataType != null) {
+                printJson(mapper, dataType.getKmipTag().getDescription(), dataType, (Class<KmipDataType>) dataType.getClass());
+            }
+        }
     }
 
-    private static void demoXml(XmlMapper mapper,
-                                ProtocolVersion protocolVersion,
-                                State customState,
-                                ActivationDateAttribute activationDate,
-                                SampleStructure sampleStructure,
-                                SimpleRequestMessage requestMessage) throws JsonProcessingException {
+    private static void demoXml(XmlMapper mapper, KmipDataType... dataTypes) throws JsonProcessingException {
         printSection("XML Serialization/Deserialization");
 
-        printXml(mapper, "ProtocolVersion", protocolVersion, ProtocolVersion.class);
-        printXml(mapper, "State (Custom)", customState, State.class);
-        printXml(mapper, "ActivationDateAttribute", activationDate, ActivationDateAttribute.class);
-        printXml(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
-        // ErrorList excluded
-        printXml(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
-        printXml(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
+        for (KmipDataType dataType : dataTypes) {
+            if (dataType != null) {
+                printXml(mapper, dataType.getKmipTag().getDescription(), dataType, (Class<KmipDataType>) dataType.getClass());
+            }
+        }
     }
 
-    private static void demoTtlv(TtlvMapper mapper,
-                                 ProtocolVersion protocolVersion,
-                                 State customState,
-                                 ActivationDateAttribute activationDate,
-                                 SampleStructure sampleStructure,
-                                 SimpleRequestMessage requestMessage) throws IOException {
+    private static void demoTtlv(TtlvMapper mapper, KmipDataType... dataTypes) throws IOException {
         printSection("TTLV Serialization/Deserialization");
 
-        roundTripTtlv(mapper, "ActivationDateAttribute", activationDate, ActivationDateAttribute.class);
-        roundTripTtlv(mapper, "State (Custom)", customState, State.class);
-        roundTripTtlv(mapper, "SampleStructure", sampleStructure, SampleStructure.class);
-        // ErrorList excluded
-        roundTripTtlv(mapper, "SimpleRequestMessage", requestMessage, RequestMessageStructure.class);
-        roundTripTtlv(mapper, "SimpleRequestHeader", requestMessage.getRequestHeader(), SimpleRequestHeader.class);
+        for (KmipDataType dataType : dataTypes) {
+            if (dataType != null) {
+                roundTripTtlv(mapper, dataType.getKmipTag().getDescription(), dataType, (Class<KmipDataType>) dataType.getClass());
+            }
+        }
     }
 
     // ================= HELPERS =================
 
     private static <T> void printJson(ObjectMapper mapper, String label, T obj, Class<T> type) throws JsonProcessingException {
         String serialized = mapper.writeValueAsString(obj);
-        T deserialized = mapper.readValue(serialized, type);
         System.out.println(label + " JSON:");
         System.out.println(serialized);
+        T deserialized = mapper.readValue(serialized, type);
         System.out.println("Round-trip Result:");
         System.out.println(deserialized);
         System.out.println();
@@ -163,9 +146,9 @@ public class Main {
 
     private static <T> void printXml(XmlMapper mapper, String label, T obj, Class<T> type) throws JsonProcessingException {
         String serialized = mapper.writeValueAsString(obj);
-        T deserialized = mapper.readValue(serialized, type);
         System.out.println(label + " XML:");
         System.out.println(serialized);
+        T deserialized = mapper.readValue(serialized, type);
         System.out.println("Round-trip Result:");
         System.out.println(deserialized);
         System.out.println();
@@ -173,15 +156,12 @@ public class Main {
 
     private static <T> void roundTripTtlv(TtlvMapper mapper, String label, T obj, Class<T> type) throws IOException {
         ByteBuffer buffer = mapper.writeValueAsByteBuffer(obj);
-        TtlvObject ttlvObject = TtlvObject.fromBuffer(buffer);
-        buffer.rewind();
-        T deserialized = mapper.readValue(buffer, type);
+        TtlvObject ttlvObject = TtlvObject.fromBuffer(buffer.duplicate());
         System.out.println(label + " TTLV:");
-        System.out.println(obj);
+        System.out.println(ttlvObject.getStructuredByteString());
+        T deserialized = mapper.readValue(buffer, type);
         System.out.println("Round-trip Result:");
         System.out.println(deserialized);
-        System.out.println();
-        System.out.println(ttlvObject.getByteString());
         System.out.println();
     }
 
