@@ -1,16 +1,15 @@
 package org.purpleBean.kmip.test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
+import org.purpleBean.kmip.codec.KmipCodecManager;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * Base test class providing common setup and utilities for KMIP tests. Follows the Template Method
@@ -19,8 +18,9 @@ import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 @ExtendWith(MockitoExtension.class)
 public abstract class BaseKmipTest {
 
-    protected ObjectMapper jsonMapper;
+    protected JsonMapper jsonMapper;
     protected XmlMapper xmlMapper;
+    protected TtlvMapper ttlvMapper;
     protected KmipSpec defaultSpec = KmipSpec.UnknownVersion;
 
     @BeforeEach
@@ -45,17 +45,9 @@ public abstract class BaseKmipTest {
     }
 
     protected void setupMappers() {
-        // JSON Mapper setup
-        jsonMapper = new ObjectMapper();
-        jsonMapper.findAndRegisterModules();
-        jsonMapper.registerModule(new JavaTimeModule());
-        jsonMapper.registerModule(new KmipJsonModule());
-
-        // XML Mapper setup
-        xmlMapper = new XmlMapper();
-        xmlMapper.findAndRegisterModules();
-        xmlMapper.registerModule(new JavaTimeModule());
-        xmlMapper.registerModule(new KmipXmlModule());
+        jsonMapper = KmipCodecManager.getJsonMapper();
+        xmlMapper = KmipCodecManager.getXmlMapper();
+        ttlvMapper = KmipCodecManager.getTtlvMapper();
     }
 
     protected void setupTestSpecificResources() {
@@ -84,11 +76,15 @@ public abstract class BaseKmipTest {
         }
     }
 
-    protected ObjectMapper getJsonMapper() {
+    protected JsonMapper getJsonMapper() {
         return jsonMapper;
     }
 
     protected XmlMapper getXmlMapper() {
         return xmlMapper;
+    }
+
+    protected TtlvMapper getTtlvMapper() {
+        return ttlvMapper;
     }
 }

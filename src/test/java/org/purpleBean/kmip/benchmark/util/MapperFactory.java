@@ -2,11 +2,8 @@ package org.purpleBean.kmip.benchmark.util;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 /**
  * Factory for creating configured mappers used in benchmarks.
@@ -14,9 +11,9 @@ import org.purpleBean.kmip.codec.xml.KmipXmlModule;
  */
 public final class MapperFactory {
 
-    private static final JsonMapper JSON_MAPPER = createJsonMapper();
-    private static final XmlMapper XML_MAPPER = createXmlMapper();
-    private static final TtlvMapper TTLV_MAPPER = createTtlvMapper();
+    private static final JsonMapper JSON_MAPPER = KmipCodecManager.getJsonMapper();
+    private static final XmlMapper XML_MAPPER = KmipCodecManager.getXmlMapper();
+    private static final TtlvMapper TTLV_MAPPER = KmipCodecManager.getTtlvMapper();
 
     private MapperFactory() {
         // Utility class
@@ -44,27 +41,5 @@ public final class MapperFactory {
      */
     public static TtlvMapper getTtlvMapper() {
         return TTLV_MAPPER;
-    }
-
-    private static JsonMapper createJsonMapper() {
-        JsonMapper mapper = new JsonMapper();
-        mapper.findAndRegisterModules();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.registerModule(new KmipJsonModule());
-        return mapper;
-    }
-
-    private static XmlMapper createXmlMapper() {
-        XmlMapper mapper = new XmlMapper();
-        mapper.findAndRegisterModules();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.registerModule(new KmipXmlModule());
-        return mapper;
-    }
-
-    private static TtlvMapper createTtlvMapper() {
-        TtlvMapper mapper = new TtlvMapper();
-        mapper.registerModule(new KmipTtlvModule());
-        return mapper;
     }
 }

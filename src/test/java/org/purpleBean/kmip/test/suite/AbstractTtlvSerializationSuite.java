@@ -3,7 +3,6 @@ package org.purpleBean.kmip.test.suite;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
@@ -20,8 +19,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("Abstract TTLV Serialization Suite")
 public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
 
-    protected TtlvMapper ttlvMapper;
-
     protected abstract Class<T> type();
 
     protected abstract T createDefault();
@@ -30,10 +27,8 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         return createDefault();
     }
 
-    @Override
-    protected void setupTestSpecificResources() {
-        ttlvMapper = new TtlvMapper();
-        ttlvMapper.registerModule(new KmipTtlvModule());
+    protected TtlvMapper mapper() {
+        return getTtlvMapper();
     }
 
     /**
@@ -64,8 +59,8 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         T original = createVariant();
         ByteBuffer buffer;
         try {
-            buffer = ttlvMapper.writeValueAsByteBuffer(original);
-            T restored = ttlvMapper.readValue(buffer, type());
+            buffer = mapper().writeValueAsByteBuffer(original);
+            T restored = mapper().readValue(buffer, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {
             throw new AssertionError("TTLV round-trip failed", e);
@@ -78,7 +73,7 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         if (unsupportedSpecShouldFailSerialize()) {
             withKmipSpec(
                     KmipSpec.UnsupportedVersion,
-                    () -> assertThatThrownBy(() -> ttlvMapper.writeValueAsByteBuffer(createDefault()))
+                    () -> assertThatThrownBy(() -> mapper().writeValueAsByteBuffer(createDefault()))
                             .isInstanceOf(Exception.class));
         }
     }
