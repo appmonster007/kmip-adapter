@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Implementors provide expectations and representative states where required.
  */
 @DisplayName("Abstract KMIP Attribute Suite")
-public abstract class AbstractKmipAttributeSuite<T extends KmipAttribute> extends AbstractKmipDataTypeSuite<T> {
+public abstract class AbstractKmipDataTypeAttributeSuite<T extends KmipAttribute> extends AbstractKmipDataTypeSuite<T> {
 
     // Expectations for flag-like capabilities
     protected abstract boolean expectAlwaysPresent();

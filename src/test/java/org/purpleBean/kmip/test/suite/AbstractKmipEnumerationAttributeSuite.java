@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Combined domain suite for types that implement both KmipAttribute and KmipEnumeration.
  * <p>
  * Type bound ensures the concrete type implements both interfaces.
- * This suite combines the testing capabilities of both AbstractKmipAttributeSuite 
+ * This suite combines the testing capabilities of both AbstractKmipDataTypeAttributeSuite
  * and AbstractKmipEnumerationSuite.
  */
 @DisplayName("Abstract KMIP Attribute+Enumeration Suite")
-public abstract class AbstractKmipAttributeEnumerationSuite<T extends KmipEnumeration & KmipAttribute>
+public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumeration & KmipAttribute>
         extends AbstractKmipEnumerationSuite<T> {
 
     // Expectations for flag-like capabilities (from KmipAttribute)

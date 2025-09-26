@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Type bound ensures the concrete type implements both interfaces.
  */
 @DisplayName("Abstract KMIP Attribute+Structure Suite")
-public abstract class AbstractKmipAttributeStructureSuite<T extends KmipStructure & KmipAttribute>
+public abstract class AbstractKmipStructureAttributeSuite<T extends KmipStructure & KmipAttribute>
         extends AbstractKmipStructureSuite<T> {
 
     // Expectations for flag-like capabilities
@@ -49,11 +49,17 @@ public abstract class AbstractKmipAttributeStructureSuite<T extends KmipStructur
     }
 
     @Test
-    @DisplayName("Attr+Struct: server/client modifiable respect state")
-    void attrStruct_modifiable_respectsState() {
+    @DisplayName("Attr+Struct: server modifiable respects state")
+    void attrStruct_serverModifiable_respectsState() {
         T obj = createDefault();
         assertThat(obj.isServerModifiable(stateForServerModifiableTrue())).isTrue();
         assertThat(obj.isServerModifiable(stateForServerModifiableFalse())).isFalse();
+    }
+
+    @Test
+    @DisplayName("Attr+Struct: client modifiable respects state")
+    void attrStruct_clientModifiable_respectsState() {
+        T obj = createDefault();
         assertThat(obj.isClientModifiable(stateForClientModifiableTrue())).isTrue();
         assertThat(obj.isClientModifiable(stateForClientModifiableFalse())).isFalse();
     }
