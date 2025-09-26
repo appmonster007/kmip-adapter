@@ -8,6 +8,7 @@ import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializ
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 
@@ -42,8 +43,8 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
             case DATE_TIME -> obj = OffsetDateTime.parse(valueNode.asText());
             case LONG_INTEGER -> obj = valueNode.longValue();
             case TEXT_STRING -> obj = valueNode.asText();
-            case BYTE_STRING -> obj = ByteBuffer.wrap(valueNode.asText().getBytes());
-//            case BIG_INTEGER -> o = valueNode.asText();
+            case BYTE_STRING -> obj = p.getCodec().treeToValue(valueNode, ByteBuffer.class);
+            case BIG_INTEGER -> obj = p.getCodec().treeToValue(valueNode, BigInteger.class);
             default -> throw new IllegalArgumentException("Unsupported encoding type: " + encodingType);
         }
 

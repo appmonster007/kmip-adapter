@@ -2,11 +2,14 @@ package org.purpleBean.kmip.codec.xml;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.purpleBean.kmip.codec.xml.deserializer.BigIntegerXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.deserializer.ByteBufferXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.serializer.BigIntegerXmlSerializer;
 import org.purpleBean.kmip.codec.xml.serializer.ByteBufferXmlSerializer;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ServiceLoader;
 
@@ -16,6 +19,9 @@ public class KmipXmlModule extends SimpleModule {
 
         addSerializer(ByteBuffer.class, new ByteBufferXmlSerializer());
         addDeserializer(ByteBuffer.class, new ByteBufferXmlDeserializer());
+
+        addSerializer(BigInteger.class, new BigIntegerXmlSerializer());
+        addDeserializer(BigInteger.class, new BigIntegerXmlDeserializer());
 
         // Auto-register any XML serializers/deserializers exposed via Java ServiceLoader
         // Providers should extend KmipDataTypeXmlSerializer / KmipDataTypeXmlDeserializer.

@@ -3,13 +3,16 @@ package org.purpleBean.kmip.codec.json;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.json.deserializer.BigIntegerJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.ByteBufferJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipTagJsonDeserializer;
+import org.purpleBean.kmip.codec.json.serializer.BigIntegerJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.ByteBufferJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipTagJsonSerializer;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ServiceLoader;
 
@@ -24,6 +27,9 @@ public class KmipJsonModule extends SimpleModule {
 
         addSerializer(ByteBuffer.class, new ByteBufferJsonSerializer());
         addDeserializer(ByteBuffer.class, new ByteBufferJsonDeserializer());
+
+        addSerializer(BigInteger.class, new BigIntegerJsonSerializer());
+        addDeserializer(BigInteger.class, new BigIntegerJsonDeserializer());
 
         // Also auto-register any serializers/deserializers exposed via Java ServiceLoader
         // This enables external modules to contribute handlers without modifying this file.

@@ -8,6 +8,7 @@ import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -204,7 +205,7 @@ public class Attribute implements KmipStructure {
 //                value = (ByteBuffer) KmipCodecRegistry.serialize(value);
 //            } else {
             encodingType = EncodingType.TEXT_STRING;
-            value = (String) KmipCodecManager.serialize(value);
+            value = KmipCodecManager.serialize(value);
 //            }
 
             return Attribute.CustomAttribute.of(name, encodingType, value);
@@ -221,7 +222,7 @@ public class Attribute implements KmipStructure {
                 case STRUCTURE -> true;
                 case INTEGER, ENUMERATION, INTERVAL -> !(value instanceof Integer);
                 case LONG_INTEGER -> !(value instanceof Long);
-//                case BIG_INTEGER -> !(value instanceof BigInteger);
+                case BIG_INTEGER -> !(value instanceof BigInteger);
                 case BOOLEAN -> !(value instanceof Boolean);
                 case TEXT_STRING -> !(value instanceof String);
                 case BYTE_STRING -> !(value instanceof ByteBuffer);

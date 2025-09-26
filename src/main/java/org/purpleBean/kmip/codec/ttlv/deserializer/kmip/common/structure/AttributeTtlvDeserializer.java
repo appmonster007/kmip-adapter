@@ -7,6 +7,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -87,7 +88,7 @@ public class AttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Attr
             case LONG_INTEGER -> obj = mapper.readValue(value, Long.class);
             case TEXT_STRING -> obj = mapper.readValue(value, String.class);
             case BYTE_STRING -> obj = mapper.readValue(value, ByteBuffer.class);
-//            case BIG_INTEGER -> o = valueNode.asText();
+            case BIG_INTEGER -> obj = mapper.readValue(value, BigInteger.class);
             default -> throw new IllegalArgumentException("Unsupported encoding type: " + encodingType);
         }
 
