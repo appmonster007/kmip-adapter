@@ -1,5 +1,5 @@
 #!/bin/bash
-# generate_enum_refactor.sh
+# generate_enum.sh
 # Refactored generator for KMIP enumerations.
 # - Per-file generator functions
 # - Flags to enable/disable generation of each artifact
@@ -55,7 +55,6 @@ Options:
   --xml-test      Generate XML serialization test
   --ttlv-test     Generate TTLV serialization test
   --benchmark     Generate benchmark subject
-  --services      Add ServiceLoader entries
   --all           Generate everything
   -h, --help      Show this help
 
@@ -69,18 +68,37 @@ EOF
     exit 1
 }
 
-get_enum_var_name() {
+# Converts "MyEnum" -> "myEnum"
+get_var_name() {
     local name="$1"
     echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
 }
 
+# Converts "MyEnum" -> "MY_ENUM"
 to_snake_upper() {
     local name="$1"
+    # Use sed and tr; compatible with older bash
     echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
 }
 
 pkg_dot() {
     echo "${SUB_PATH//\//.}"
+}
+
+# PascalCase from input tokens: "foo_bar" -> "FooBar"
+get_pascal_case() {
+    local input="$*"
+    echo "$input" | sed -E 's/[_-]+/ /g' | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) tolower(substr($i,2)) }}1' | tr -d ' '
+}
+
+# Run a command or echo dry-run message
+do_or_dry_cmd() {
+    local message="$1"; shift
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: ${message}"
+        return 0
+    fi
+    "$@"
 }
 
 #############################################
@@ -143,11 +161,19 @@ add_service_entry() {
     fi
 
     local temp_file="${file}.tmp"
-    sort -u "${file}" > "${temp_file}" 2>/dev/null || (sort -u "${file}" > "${temp_file}")
+    # portable fallback: some platforms may not support redirecting sort -u's output to same file
+    if sort -u "${file}" > "${temp_file}" 2>/dev/null; then
+        :
+    else
+        # fallback attempt (should be identical)
+        sort -u "${file}" > "${temp_file}"
+    fi
+
     # remove empty lines
     grep -v '^[[:space:]]*$' "${temp_file}" > "${temp_file}.2" && mv "${temp_file}.2" "${temp_file}"
 
-    if ! cmp -s "${file}" "${temp_file}"; then
+    if ! cmp -s "${file}" "${temp_file}"; 2>/dev/null; then
+        # try to move only when different
         mv "${temp_file}" "${file}"
     else
         rm -f "${temp_file}"
@@ -473,8 +499,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ${ENUM_NAME}.
  */
 public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<${ENUM_NAME}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
+    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
 
     @Override
     public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -666,8 +692,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ${ENUM_NAME}.
  */
 public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${ENUM_NAME}> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
+    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
+    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
 
     @Override
     public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -821,8 +847,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ${ENUM_NAME}.
  */
 public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<${ENUM_NAME}> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${enum_snake});
+    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
+    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
 
     @Override
     public ${ENUM_NAME} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -949,115 +975,33 @@ EOF
     echo "Created: ${out_file}"
 }
 
-generate_json_test() {
+generate_serialization_test_for_format() {
     local ENUM_NAME="$1"
-    local out_dir="${TEST_JAVA}/codec/json/${SUB_PATH}"
-    local out_file="${out_dir}/${ENUM_NAME}JsonTest.java"
+    local format="$2"
+    local format_pascal
+    format_pascal="$(get_pascal_case "${format}")"
+    local suite_name="${ENUM_NAME}${format_pascal}Test"
+    local out_dir="${TEST_JAVA}/codec/${format}/${SUB_PATH}"
+    local out_file="${out_dir}/${suite_name}.java"
     local pdot
     pdot="$(pkg_dot)"
 
     if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create JSON test: ${out_file}"
+        echo "DRY RUN: would create ${format} serialization test: ${out_file}"
         return 0
     fi
 
     mkdir -p "${out_dir}"
 
     cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.json.${pdot};
+package org.purpleBean.kmip.codec.${format}.${pdot};
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.Abstract${format_pascal}SerializationSuite;
 
-@DisplayName("${ENUM_NAME} JSON Serialization")
-class ${ENUM_NAME}JsonTest extends AbstractJsonSerializationSuite<${ENUM_NAME}> {
-    @Override
-    protected Class<${ENUM_NAME}> type() {
-        return ${ENUM_NAME}.class;
-    }
-
-    @Override
-    protected ${ENUM_NAME} createDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-    }
-
-    @Override
-    protected ${ENUM_NAME} createVariant() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_2);
-    }
-}
-EOF
-
-    echo "Created: ${out_file}"
-}
-
-generate_xml_test() {
-    local ENUM_NAME="$1"
-    local out_dir="${TEST_JAVA}/codec/xml/${SUB_PATH}"
-    local out_file="${out_dir}/${ENUM_NAME}XmlTest.java"
-    local pdot
-    pdot="$(pkg_dot)"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create XML test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.xml.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
-
-@DisplayName("${ENUM_NAME} XML Serialization")
-class ${ENUM_NAME}XmlTest extends AbstractXmlSerializationSuite<${ENUM_NAME}> {
-    @Override
-    protected Class<${ENUM_NAME}> type() {
-        return ${ENUM_NAME}.class;
-    }
-
-    @Override
-    protected ${ENUM_NAME} createDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-    }
-
-    @Override
-    protected ${ENUM_NAME} createVariant() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_2);
-    }
-}
-EOF
-
-    echo "Created: ${out_file}"
-}
-
-generate_ttlv_test() {
-    local ENUM_NAME="$1"
-    local out_dir="${TEST_JAVA}/codec/ttlv/${SUB_PATH}"
-    local out_file="${out_dir}/${ENUM_NAME}TtlvTest.java"
-    local pdot
-    pdot="$(pkg_dot)"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create TTLV test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.ttlv.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
-
-@DisplayName("${ENUM_NAME} TTLV Serialization")
-class ${ENUM_NAME}TtlvTest extends AbstractTtlvSerializationSuite<${ENUM_NAME}> {
+@DisplayName("${ENUM_NAME} ${format} Serialization")
+class ${ENUM_NAME}${format_pascal}Test extends Abstract${format_pascal}SerializationSuite<${ENUM_NAME}> {
     @Override
     protected Class<${ENUM_NAME}> type() {
         return ${ENUM_NAME}.class;
@@ -1202,9 +1146,9 @@ generate_enum() {
     ${GEN_TTLV_SER} && generate_ttlv_serializer "${ENUM_NAME}"
     ${GEN_TTLV_DES} && generate_ttlv_deserializer "${ENUM_NAME}"
     ${GEN_DOMAIN_TEST} && generate_domain_test "${ENUM_NAME}"
-    ${GEN_JSON_TEST} && generate_json_test "${ENUM_NAME}"
-    ${GEN_XML_TEST} && generate_xml_test "${ENUM_NAME}"
-    ${GEN_TTLV_TEST} && generate_ttlv_test "${ENUM_NAME}"
+    ${GEN_JSON_TEST} && generate_serialization_test_for_format "${ENUM_NAME}" "json"
+    ${GEN_XML_TEST} && generate_serialization_test_for_format "${ENUM_NAME}" "xml"
+    ${GEN_TTLV_TEST} && generate_serialization_test_for_format "${ENUM_NAME}" "ttlv"
     ${GEN_BENCHMARK} && generate_benchmark_subject "${ENUM_NAME}"
 
     echo "Finished (or planned) generation for ${ENUM_NAME}"
@@ -1235,7 +1179,6 @@ while [ $# -gt 0 ]; do
         --xml-test) GEN_XML_TEST=true; any_flag=true; shift ;;
         --ttlv-test) GEN_TTLV_TEST=true; any_flag=true; shift ;;
         --benchmark) GEN_BENCHMARK=true; any_flag=true; shift ;;
-        --services) GEN_SERVICES=true; any_flag=true; shift ;;
         --all)
             GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
             GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
