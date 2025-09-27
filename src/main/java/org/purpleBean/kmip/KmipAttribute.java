@@ -50,6 +50,8 @@ public interface KmipAttribute extends KmipDataType {
 
     AttributeName getAttributeName();
 
+    String getCanonicalName();
+
     record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
     }
 }

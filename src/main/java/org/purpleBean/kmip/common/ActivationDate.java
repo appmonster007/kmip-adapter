@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Data
 @Builder
-public class ActivationDate implements KmipAttribute {
+public class ActivationDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -46,6 +46,11 @@ public class ActivationDate implements KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     @Override

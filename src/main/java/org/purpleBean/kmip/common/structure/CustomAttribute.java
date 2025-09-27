@@ -121,4 +121,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     public boolean isMultiInstanceAllowed() {
         return true;
     }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
 }
