@@ -5,19 +5,19 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeIndex;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttributeIndexTtlvSerializer extends KmipDataTypeTtlvSerializer<Attribute.AttributeIndex> {
+public class AttributeIndexTtlvSerializer extends KmipDataTypeTtlvSerializer<AttributeIndex> {
 
     @Override
-    public ByteBuffer serialize(Attribute.AttributeIndex value, TtlvMapper mapper) throws IOException {
+    public ByteBuffer serialize(AttributeIndex value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
-    public TtlvObject serializeToTtlvObject(Attribute.AttributeIndex value, TtlvMapper mapper) throws IOException {
+    public TtlvObject serializeToTtlvObject(AttributeIndex value, TtlvMapper mapper) throws IOException {
         if (value == null) {
             return null;
         }
@@ -32,7 +32,7 @@ public class AttributeIndexTtlvSerializer extends KmipDataTypeTtlvSerializer<Att
 
         byte[] tag = value.getKmipTag().getTagBytes();
         byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getIndex()).array();
+        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)

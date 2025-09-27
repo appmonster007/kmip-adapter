@@ -30,7 +30,7 @@ public abstract class AbstractKmipStructureSuite<T extends KmipStructure> extend
 
     @Test
     @DisplayName("Structure: values list present and meets minimal expectations")
-    void structure_values_presentAndValid() {
+    protected void structure_values_presentAndValid() {
         T obj = createDefault();
         List<KmipDataType> values = obj.getValues();
         assertThat(values).isNotNull();

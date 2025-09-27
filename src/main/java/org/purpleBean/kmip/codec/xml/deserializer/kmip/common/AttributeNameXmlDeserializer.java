@@ -10,7 +10,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeName;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -18,42 +18,42 @@ import java.util.NoSuchElementException;
 /**
  * XML deserializer for AttributeName.
  */
-public class AttributeNameXmlDeserializer extends KmipDataTypeXmlDeserializer<Attribute.AttributeName> {
+public class AttributeNameXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeName> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_NAME);
     private final EncodingType encodingType = EncodingType.TEXT_STRING;
 
     @Override
-    public Attribute.AttributeName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, "Expected XML element object for AttributeName");
+            ctxt.reportInputMismatch(AttributeName.class, "Expected XML element object for AttributeName");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, "Invalid Tag for AttributeName");
+            ctxt.reportInputMismatch(AttributeName.class, "Invalid Tag for AttributeName");
             return null;
         }
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, "Missing or invalid '@type' datatype for AttributeName");
+            ctxt.reportInputMismatch(AttributeName.class, "Missing or invalid '@type' datatype for AttributeName");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class,
+            ctxt.reportInputMismatch(AttributeName.class,
                     "Missing or non-text 'value' for AttributeName");
             return null;
         }
 
         String name = valueNode.asText();
-        Attribute.AttributeName datatype = Attribute.AttributeName.of(name);
+        AttributeName datatype = AttributeName.of(name);
 
         KmipSpec spec = KmipContext.getSpec();
         if (!datatype.isSupportedFor(spec)) {

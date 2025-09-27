@@ -10,7 +10,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeIndex;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -18,49 +18,49 @@ import java.util.NoSuchElementException;
 /**
  * XML deserializer for AttributeIndex.
  */
-public class AttributeIndexXmlDeserializer extends KmipDataTypeXmlDeserializer<Attribute.AttributeIndex> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
-    private final EncodingType encodingType = EncodingType.INTEGER;
+public class AttributeIndexXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeIndex> {
+    private final KmipTag kmipTag = AttributeIndex.kmipTag;
+    private final EncodingType encodingType = AttributeIndex.encodingType;
 
     @Override
-    public Attribute.AttributeIndex deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeIndex deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(Attribute.AttributeIndex.class, "Expected XML element object for AttributeIndex");
+            ctxt.reportInputMismatch(AttributeIndex.class, "Expected XML element object for AttributeIndex");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(Attribute.AttributeIndex.class, "Invalid Tag for AttributeIndex");
+            ctxt.reportInputMismatch(AttributeIndex.class, "Invalid Tag for AttributeIndex");
             return null;
         }
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(Attribute.AttributeIndex.class, "Missing or invalid '@type' datatype for AttributeIndex");
+            ctxt.reportInputMismatch(AttributeIndex.class, "Missing or invalid '@type' datatype for AttributeIndex");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(Attribute.AttributeIndex.class,
+            ctxt.reportInputMismatch(AttributeIndex.class,
                     "Missing or non-text 'value' for AttributeIndex");
             return null;
         }
 
         int index = valueNode.asInt();
-        Attribute.AttributeIndex datatype = Attribute.AttributeIndex.of(index);
+        AttributeIndex attributeIndex = AttributeIndex.of(index);
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!datatype.isSupportedFor(spec)) {
+        if (!attributeIndex.isSupportedFor(spec)) {
             throw new NoSuchElementException(
                     String.format("AttributeIndex '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
-        return datatype;
+        return attributeIndex;
     }
 }

@@ -50,7 +50,7 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
 
     @Test
     @DisplayName("Enumeration: description is non-null and non-empty")
-    void enumeration_description_present() {
+    protected void enumeration_description_present() {
         T obj = createDefault();
         String desc = obj.getDescription();
         assertThat(desc).isNotNull();
@@ -59,7 +59,7 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
 
     @Test
     @DisplayName("Enumeration: equals/hashCode contract for equal instances")
-    void enumeration_equalsAndHashCode_equalInstances() {
+    protected void enumeration_equalsAndHashCode_equalInstances() {
         T a = createDefault();
         T b = createEqualToDefault();
         if (b == null) return; // implementor didn't supply; skip
@@ -69,7 +69,7 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
 
     @Test
     @DisplayName("Enumeration: not equal for differing instances")
-    void enumeration_notEqual_forDifferent() {
+    protected void enumeration_notEqual_forDifferent() {
         T a = createDefault();
         T c = createDifferentFromDefault();
         if (c == null) return; // implementor didn't supply; skip
@@ -78,7 +78,7 @@ public abstract class AbstractKmipEnumerationSuite<T extends KmipEnumeration> ex
 
     @Test
     @DisplayName("Enumeration: registry behavior and look up")
-    void enumeration_registry_behavior() {
+    protected void enumeration_registry_behavior() {
         if (supportsRegistryBehavior()) {
             assertEnumerationRegistryBehavior();
             assertLookupBehaviour();

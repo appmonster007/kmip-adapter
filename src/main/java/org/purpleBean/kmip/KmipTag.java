@@ -158,7 +158,7 @@ public class KmipTag {
         CRYPTOGRAPHIC_LENGTH(0x42002A, "CryptographicLength", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CRYPTOGRAPHIC_PARAMETERS(0x42002B, "CryptographicParameters", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CRYPTOGRAPHIC_USAGE_MASK(0x42002C, "CryptographicUsageMask", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CUSTOM_ATTRIBUTE(0x42002D, "CustomAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2),
+        CUSTOM_ATTRIBUTE(0x42002D, "Custom", KmipSpec.UnknownVersion, KmipSpec.V1_2),
         D(0x42002E, "D", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         DEACTIVATION_DATE(0x42002F, "DeactivationDate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         DERIVATION_DATA(0x420030, "DerivationData", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),

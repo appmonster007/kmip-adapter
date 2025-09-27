@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeName;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,23 +13,23 @@ import java.io.UnsupportedEncodingException;
 /**
  * JSON serializer for AttributeName.
  */
-public class AttributeNameJsonSerializer extends KmipDataTypeJsonSerializer<Attribute.AttributeName> {
+public class AttributeNameJsonSerializer extends KmipDataTypeJsonSerializer<AttributeName> {
 
     @Override
-    public void serialize(Attribute.AttributeName value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
+    public void serialize(AttributeName attributeName, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        if (attributeName == null) return;
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!attributeName.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s", attributeName.getKmipTag().getDescription(), spec)
             );
         }
 
         gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeStringField("value", value.getName());
+        gen.writeObject(attributeName.getKmipTag());
+        gen.writeStringField("type", attributeName.getEncodingType().getDescription());
+        gen.writeObjectField("value", attributeName.getValue());
         gen.writeEndObject();
     }
 }

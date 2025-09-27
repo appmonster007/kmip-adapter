@@ -5,19 +5,18 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeValue;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttributeValueTtlvSerializer extends KmipDataTypeTtlvSerializer<Attribute.AttributeValue> {
-
+public class AttributeValueTtlvSerializer extends KmipDataTypeTtlvSerializer<AttributeValue> {
     @Override
-    public ByteBuffer serialize(Attribute.AttributeValue value, TtlvMapper mapper) throws IOException {
+    public ByteBuffer serialize(AttributeValue value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
-    public TtlvObject serializeToTtlvObject(Attribute.AttributeValue value, TtlvMapper mapper) throws IOException {
+    private TtlvObject serializeToTtlvObject(AttributeValue value, TtlvMapper mapper) throws IOException {
         if (value == null) {
             return null;
         }
@@ -25,19 +24,19 @@ public class AttributeValueTtlvSerializer extends KmipDataTypeTtlvSerializer<Att
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s",
-                value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            value.getKmipTag().getDescription(), spec)
             );
         }
 
-        byte[] valueBytes = mapper.writeValueAsByteBuffer(value.getValue()).array();
-        TtlvObject payload = TtlvObject.fromBytes(valueBytes);
         byte[] tag = value.getKmipTag().getTagBytes();
+        byte type = value.getEncodingType().getTypeValue();
+        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)
-                .type(payload.getType())
-                .value(payload.getValue())
+                .type(type)
+                .value(payload)
                 .build();
     }
 }

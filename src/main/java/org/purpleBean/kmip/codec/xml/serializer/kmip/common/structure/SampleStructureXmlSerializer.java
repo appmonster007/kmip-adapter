@@ -40,11 +40,8 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
         List<KmipDataType> values = sampleStructure.getValues();
         for (KmipDataType kmipDataType : values) {
             if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
-                serializers.defaultSerializeField(
-                        kmipDataType.getKmipTag().getDescription(),
-                        kmipDataType,
-                        gen
-                );
+                String fieldName = kmipDataType.getKmipTag().getDescription();
+                serializers.defaultSerializeField(fieldName, kmipDataType, gen);
             }
         }
 

@@ -3,8 +3,9 @@ package org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.structure.Attribute;
 
@@ -19,24 +20,27 @@ public class AttributeXmlSerializer extends KmipDataTypeXmlSerializer<Attribute>
     public void serialize(Attribute attribute, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", attribute.getClass().getSimpleName(), spec));
+            throw new UnsupportedEncodingException();
         }
 
-        if (!(gen instanceof ToXmlGenerator)) {
+        if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
+        // Start element with name from kmipTag
         String elementName = attribute.getKmipTag().getDescription();
-        ((ToXmlGenerator) gen).setNextName(QName.valueOf(elementName));
-        gen.writeStartObject(attribute);
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(attribute);
 
+        // Serialize all fields
         List<KmipDataType> values = attribute.getValues();
         for (KmipDataType kmipDataType : values) {
             if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
-                serializers.defaultSerializeField(kmipDataType.getKmipTag().getDescription(), kmipDataType, gen);
+                String fieldName = kmipDataType.getKmipTag().getDescription();
+                serializers.defaultSerializeField(fieldName, kmipDataType, gen);
             }
         }
 
-        gen.writeEndObject();
+        xmlGen.writeEndObject();
     }
 }

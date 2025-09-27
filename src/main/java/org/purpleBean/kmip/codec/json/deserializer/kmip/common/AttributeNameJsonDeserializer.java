@@ -8,7 +8,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeName;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -16,16 +16,16 @@ import java.util.NoSuchElementException;
 /**
  * JSON deserializer for AttributeName.
  */
-public class AttributeNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Attribute.AttributeName> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_NAME);
-    private final EncodingType encodingType = EncodingType.TEXT_STRING;
+public class AttributeNameJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeName> {
+    private final KmipTag kmipTag = AttributeName.kmipTag;
+    private final EncodingType encodingType = AttributeName.encodingType;
 
     @Override
-    public Attribute.AttributeName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, String.format("JSON node cannot be null for AttributeName deserialization"));
+            ctxt.reportInputMismatch(AttributeName.class, "JSON node cannot be null for AttributeName deserialization");
             return null;
         }
 
@@ -34,16 +34,16 @@ public class AttributeNameJsonDeserializer extends KmipDataTypeJsonDeserializer<
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Attribute.AttributeName.class, String.format("Invalid KMIP tag for AttributeName"));
+                ctxt.reportInputMismatch(AttributeName.class, "Invalid KMIP tag for AttributeName");
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, String.format("Failed to parse KMIP tag for AttributeName: %s", e.getMessage()));
+            ctxt.reportInputMismatch(AttributeName.class, String.format("Failed to parse KMIP tag for AttributeName: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, "Expected object for AttributeName");
+            ctxt.reportInputMismatch(AttributeName.class, "Expected object for AttributeName");
             return null;
         }
 
@@ -54,26 +54,26 @@ public class AttributeNameJsonDeserializer extends KmipDataTypeJsonDeserializer<
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, String.format("Missing or non-text 'type' field for AttributeName"));
+            ctxt.reportInputMismatch(AttributeName.class, "Missing or non-text 'type' field for AttributeName");
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(Attribute.AttributeName.class, "Missing or non-text 'value' for AttributeName");
+            ctxt.reportInputMismatch(AttributeName.class, "Missing or non-text 'value' for AttributeName");
             return null;
         }
 
         String name = valueNode.asText();
-        Attribute.AttributeName data = Attribute.AttributeName.builder().name(name).build();
+        AttributeName attributeName = AttributeName.builder().value(name).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!data.isSupportedFor(spec)) {
+        if (!attributeName.isSupportedFor(spec)) {
             throw new NoSuchElementException(
                     String.format("AttributeName '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
             );
         }
-        return data;
+        return attributeName;
     }
 }

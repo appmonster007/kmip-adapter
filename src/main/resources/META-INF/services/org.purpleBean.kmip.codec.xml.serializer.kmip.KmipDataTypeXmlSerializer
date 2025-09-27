@@ -1,4 +1,3 @@
-#org.purpleBean.kmip.codec.xml.serializer.kmip.common.CustomAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMajorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMinorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionXmlSerializer
@@ -6,7 +5,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.ActivationDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeIndexXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.kmip.common.CustomAttributeXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CustomAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.AdjustmentTypeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.AlternativeNameTypeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.AsynchronousIndicatorXmlSerializer

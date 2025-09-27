@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeIndex;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.io.UnsupportedEncodingException;
 /**
  * XML serializer for AttributeIndex.
  */
-public class AttributeIndexXmlSerializer extends KmipDataTypeXmlSerializer<Attribute.AttributeIndex> {
+public class AttributeIndexXmlSerializer extends KmipDataTypeXmlSerializer<AttributeIndex> {
 
     @Override
-    public void serialize(Attribute.AttributeIndex value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeIndex value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
             throw new UnsupportedEncodingException();
@@ -36,7 +36,7 @@ public class AttributeIndexXmlSerializer extends KmipDataTypeXmlSerializer<Attri
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
-        xmlGen.writeNumberField("value", value.getIndex());
+        xmlGen.writeNumberField("value", value.getValue());
         xmlGen.writeEndObject();
     }
 }

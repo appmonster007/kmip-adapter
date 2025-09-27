@@ -1,3 +1,4 @@
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CustomAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMajorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMinorJsonDeserializer
@@ -6,7 +7,6 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.ActivationDateJsonDeseri
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeIndexJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeNameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.kmip.common.CustomAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.AdjustmentTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.AlternativeNameTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.AsynchronousIndicatorJsonDeserializer

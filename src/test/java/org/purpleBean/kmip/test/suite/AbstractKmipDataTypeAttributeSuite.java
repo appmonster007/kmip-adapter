@@ -36,7 +36,7 @@ public abstract class AbstractKmipDataTypeAttributeSuite<T extends KmipAttribute
 
     @Test
     @DisplayName("Attribute: capability flags match expectations")
-    void attribute_capabilityFlags_matchExpectations() {
+    protected void attribute_capabilityFlags_matchExpectations() {
         T attr = createDefault();
         assertThat(attr.isAlwaysPresent()).isEqualTo(expectAlwaysPresent());
         assertThat(attr.isServerInitializable()).isEqualTo(expectServerInitializable());
@@ -47,7 +47,7 @@ public abstract class AbstractKmipDataTypeAttributeSuite<T extends KmipAttribute
 
     @Test
     @DisplayName("Attribute: server modifiable respects state")
-    void attribute_serverModifiable_respectsState() {
+    protected void attribute_serverModifiable_respectsState() {
         T attr = createDefault();
         assertThat(attr.isServerModifiable(stateForServerModifiableTrue())).isTrue();
         assertThat(attr.isServerModifiable(stateForServerModifiableFalse())).isFalse();
@@ -55,7 +55,7 @@ public abstract class AbstractKmipDataTypeAttributeSuite<T extends KmipAttribute
 
     @Test
     @DisplayName("Attribute: client modifiable respects state")
-    void attribute_clientModifiable_respectsState() {
+    protected void attribute_clientModifiable_respectsState() {
         T attr = createDefault();
         assertThat(attr.isClientModifiable(stateForClientModifiableTrue())).isTrue();
         assertThat(attr.isClientModifiable(stateForClientModifiableFalse())).isFalse();

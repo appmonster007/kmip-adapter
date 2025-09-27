@@ -3,17 +3,20 @@ package org.purpleBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 import org.purpleBean.kmip.common.ActivationDate;
+import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
@@ -62,42 +65,40 @@ public class Main {
                 .state(activeState)
                 .build();
 
-//        Attribute attr = Attribute.of(activationDate);
-        Attribute attr = Attribute.of(Attribute.CustomAttribute.ofStructureString("x-apple", sampleStructure));
-
-        ObjectMapper jsonMapper = buildJsonMapper();
+        JsonMapper jsonMapper = buildJsonMapper();
         XmlMapper xmlMapper = buildXmlMapper();
         TtlvMapper ttlvMapper = buildTtlvMapper();
 
-        demoJson(jsonMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
-        demoXml(xmlMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
-        demoTtlv(ttlvMapper, protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr);
+        CustomAttribute customAttribute = CustomAttribute.of("x-asfa", customState);
+        Attribute attr = Attribute.builder()
+                .attributeName(activationDate.getAttributeName())
+                .attributeIndex(AttributeIndex.of(0))
+                .attributeValue(activationDate.getAttributeValue()).build();
+
+        KmipDataType[] dataTypes = {protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr, customAttribute};
+
+        demoJson(jsonMapper, dataTypes);
+        demoXml(xmlMapper, dataTypes);
+        demoTtlv(ttlvMapper, dataTypes);
 
         printHeader("DONE");
     }
 
-    private static ObjectMapper buildJsonMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        mapper.registerModule(new KmipJsonModule());
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
+    private static JsonMapper buildJsonMapper() {
+        JsonMapper jsonMapper = KmipCodecManager.createJsonMapper();
+        jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return jsonMapper;
     }
 
     private static XmlMapper buildXmlMapper() {
-        XmlMapper mapper = new XmlMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        mapper.registerModule(new KmipXmlModule());
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
+        XmlMapper xmlMapper = KmipCodecManager.createXmlMapper();
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return xmlMapper;
     }
 
     private static TtlvMapper buildTtlvMapper() {
-        TtlvMapper mapper = new TtlvMapper();
-        mapper.registerModule(new KmipTtlvModule());
-        return mapper;
+        TtlvMapper ttlvMapper = KmipCodecManager.createTtlvMapper();
+        return ttlvMapper;
     }
 
     // ================= DEMOS =================

@@ -8,19 +8,19 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeName;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class AttributeNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Attribute.AttributeName> {
+public class AttributeNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeName> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_NAME);
     private final EncodingType encodingType = EncodingType.TEXT_STRING;
 
     @Override
-    public Attribute.AttributeName deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public AttributeName deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
                 && obj.getType() != encodingType.getTypeValue()) {
@@ -30,7 +30,7 @@ public class AttributeNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         String name = mapper.readValue(bb, String.class);
 
         KmipSpec spec = KmipContext.getSpec();
-        Attribute.AttributeName datatype = Attribute.AttributeName.of(name);
+        AttributeName datatype = AttributeName.of(name);
 
         if (!datatype.isSupportedFor(spec)) {
             throw new NoSuchElementException();

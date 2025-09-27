@@ -39,7 +39,7 @@ public abstract class AbstractKmipStructureAttributeSuite<T extends KmipStructur
 
     @Test
     @DisplayName("Attr+Struct: capability flags match expectations")
-    void attrStruct_capabilityFlags_matchExpectations() {
+    protected void attrStruct_capabilityFlags_matchExpectations() {
         T obj = createDefault();
         assertThat(obj.isAlwaysPresent()).isEqualTo(expectAlwaysPresent());
         assertThat(obj.isServerInitializable()).isEqualTo(expectServerInitializable());
@@ -50,7 +50,7 @@ public abstract class AbstractKmipStructureAttributeSuite<T extends KmipStructur
 
     @Test
     @DisplayName("Attr+Struct: server modifiable respects state")
-    void attrStruct_serverModifiable_respectsState() {
+    protected void attrStruct_serverModifiable_respectsState() {
         T obj = createDefault();
         assertThat(obj.isServerModifiable(stateForServerModifiableTrue())).isTrue();
         assertThat(obj.isServerModifiable(stateForServerModifiableFalse())).isFalse();
@@ -58,7 +58,7 @@ public abstract class AbstractKmipStructureAttributeSuite<T extends KmipStructur
 
     @Test
     @DisplayName("Attr+Struct: client modifiable respects state")
-    void attrStruct_clientModifiable_respectsState() {
+    protected void attrStruct_clientModifiable_respectsState() {
         T obj = createDefault();
         assertThat(obj.isClientModifiable(stateForClientModifiableTrue())).isTrue();
         assertThat(obj.isClientModifiable(stateForClientModifiableFalse())).isFalse();

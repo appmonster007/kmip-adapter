@@ -24,18 +24,29 @@ public class ActivationDate implements KmipAttribute {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class, ActivationDate::of);
         }
     }
 
-    // Capability flags — adjust based on attribute semantics
-    private final boolean alwaysPresent = false;
-    private final boolean serverInitializable = true;
-    private final boolean clientInitializable = true;
-    private final boolean clientDeletable = false;
-    private final boolean multiInstanceAllowed = false;
     @NonNull
     private final OffsetDateTime value;
+
+    public static ActivationDate of(@NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime dateTime)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return new ActivationDate(dateTime);
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
 
     @Override
     public KmipTag getKmipTag() {
@@ -56,6 +67,31 @@ public class ActivationDate implements KmipAttribute {
     public boolean isClientModifiable(@NonNull State state) {
         // PRE_ACTIVE is modifiable by default, adjust as needed
         return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true;
     }
 
     @Override

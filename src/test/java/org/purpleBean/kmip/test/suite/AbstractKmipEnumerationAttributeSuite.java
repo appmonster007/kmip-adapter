@@ -41,7 +41,7 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
 
     @Test
     @DisplayName("AttrEnum: capability flags match expectations")
-    void attrEnum_capabilityFlags_matchExpectations() {
+    protected void attrEnum_capabilityFlags_matchExpectations() {
         T obj = createDefault();
         assertThat(obj.isAlwaysPresent()).isEqualTo(expectAlwaysPresent());
         assertThat(obj.isServerInitializable()).isEqualTo(expectServerInitializable());
@@ -52,7 +52,7 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
 
     @Test
     @DisplayName("AttrEnum: server modifiable respects state")
-    void attrEnum_serverModifiable_respectsState() {
+    protected void attrEnum_serverModifiable_respectsState() {
         T obj = createDefault();
         assertThat(obj.isServerModifiable(stateForServerModifiableTrue())).isTrue();
         assertThat(obj.isServerModifiable(stateForServerModifiableFalse())).isFalse();
@@ -60,7 +60,7 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
 
     @Test
     @DisplayName("AttrEnum: client modifiable respects state")
-    void attrEnum_clientModifiable_respectsState() {
+    protected void attrEnum_clientModifiable_respectsState() {
         T obj = createDefault();
         assertThat(obj.isClientModifiable(stateForClientModifiableTrue())).isTrue();
         assertThat(obj.isClientModifiable(stateForClientModifiableFalse())).isFalse();
@@ -68,19 +68,19 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
 
     @Test
     @DisplayName("AttrEnum: enumeration description is consistent with attribute behavior")
-    void attrEnum_description_consistentWithAttributeBehavior() {
+    protected void attrEnum_description_consistentWithAttributeBehavior() {
         T obj = createDefault();
         String desc = obj.getDescription();
-        
+
         // Description should be non-null and non-empty (from enumeration contract)
         assertThat(desc).isNotNull();
         assertThat(desc.trim()).isNotEmpty();
-        
+
         // Description should be consistent with KMIP tag description (attribute contract)
         String tagDesc = obj.getKmipTag().getDescription();
         assertThat(tagDesc).isNotNull();
         assertThat(tagDesc.trim()).isNotEmpty();
-        
+
         // They should be related (often the same, but allow for variations)
         // This is a soft assertion - implementors can override if needed
         assertDescriptionConsistency(desc, tagDesc);
@@ -89,9 +89,9 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
     /**
      * Override this method if you need custom logic for validating description consistency
      * between the enumeration description and the KMIP tag description.
-     * 
+     *
      * @param enumDesc the description from KmipEnumeration.getDescription()
-     * @param tagDesc the description from KmipTag.getDescription()
+     * @param tagDesc  the description from KmipTag.getDescription()
      */
     protected void assertDescriptionConsistency(String enumDesc, String tagDesc) {
         // Default implementation: they should be equal (case-insensitive)

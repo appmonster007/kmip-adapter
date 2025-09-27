@@ -4,18 +4,23 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.common.AttributeIndex;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class AttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<Attribute> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = Attribute.kmipTag;
+    private final EncodingType encodingType = Attribute.encodingType;
 
     @Override
     public Attribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -27,56 +32,24 @@ public class AttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<Attrib
             return null;
         }
 
-        if (p instanceof FromXmlParser && !kmipTag.getDescription().equalsIgnoreCase(((FromXmlParser) p).getStaxReader().getLocalName())) {
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(Attribute.class, "Invalid Tag for Attribute");
             return null;
         }
 
-        var fields = node.fields();
-
         KmipSpec spec = KmipContext.getSpec();
+        Attribute.AttributeBuilder builder = Attribute.builder();
 
-        JsonNode attrNameNode = null;
-        JsonNode attrIndexNode = null;
-        JsonNode attrValueNode = null;
+        // Process all fields in the XML
+        var fields = node.fields();
         while (fields.hasNext()) {
             Map.Entry<String, JsonNode> entry = fields.next();
             KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            switch (nodeTag) {
-                case KmipTag.Standard.ATTRIBUTE_NAME -> attrNameNode = entry.getValue();
-                case KmipTag.Standard.ATTRIBUTE_INDEX -> attrIndexNode = entry.getValue();
-                case KmipTag.Standard.ATTRIBUTE_VALUE -> attrValueNode = entry.getValue();
-                default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-            }
+            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
         }
 
-        if (attrNameNode == null || attrValueNode == null) {
-            throw new IllegalArgumentException("Missing required fields for Attribute");
-        }
-
-        if (!attrValueNode.has("type")) {
-            throw new IllegalArgumentException("Missing 'type' field for Attribute");
-        }
-
-        Attribute.AttributeName attrName = p.getCodec().treeToValue(attrNameNode, Attribute.AttributeName.class);
-        String name = StringUtils.covertTitleToPascalCase(attrName.getName());
-
-        Attribute.AttributeIndex attrIndex;
-        if (attrIndexNode == null) {
-            attrIndex = null;
-        } else {
-            attrIndex = p.getCodec().treeToValue(attrIndexNode, Attribute.AttributeIndex.class);
-        }
-
-        ObjectNode valueNode = ((ObjectNode) attrValueNode).put("name", name);
-
-        Attribute.AttributeValue attrValue = p.getCodec().treeToValue(valueNode, Attribute.AttributeValue.class);
-
-        Attribute attribute = Attribute.builder()
-                .attributeName(attrName)
-                .attributeIndex(attrIndex)
-                .attributeValue(attrValue)
-                .build();
+        Attribute attribute = builder.build();
 
         if (!attribute.isSupportedFor(spec)) {
             ctxt.reportInputMismatch(Attribute.class, "Attribute not supported for spec " + spec);
@@ -84,5 +57,27 @@ public class AttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<Attrib
         }
 
         return attribute;
+    }
+
+    /**
+     * Sets the appropriate field in the builder based on the tag and value.
+     *
+     * @param builder the builder to set the field on
+     * @param nodeTag the tag identifying the field to set
+     * @param node    the XML node containing the field value
+     * @param p       the JsonParser
+     * @param ctxt    the DeserializationContext
+     * @throws IOException if there is an error deserializing the value
+     */
+    private void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+        switch (nodeTag) {
+            case KmipTag.Standard.ATTRIBUTE_NAME ->
+                    builder.attributeName(p.getCodec().treeToValue(node, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_INDEX ->
+                    builder.attributeIndex(p.getCodec().treeToValue(node, AttributeIndex.class));
+            case KmipTag.Standard.ATTRIBUTE_VALUE ->
+                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.class));
+            default -> throw new IllegalArgumentException();
+        }
     }
 }

@@ -17,27 +17,15 @@ import java.io.IOException;
 
 public final class KmipCodecManager {
     @Getter
-    private static final TtlvMapper ttlvMapper = new TtlvMapper();
+    private static final TtlvMapper ttlvMapper = createTtlvMapper();
     @Getter
-    private static final XmlMapper xmlMapper = new XmlMapper();
+    private static final XmlMapper xmlMapper = createXmlMapper();
     @Getter
-    private static final JsonMapper jsonMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = createJsonMapper();
 
     @Getter
     @Setter
     private static MapperType defaultType = MapperType.XML;
-
-    static {
-        ttlvMapper.registerModule(new KmipTtlvModule());
-
-        xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        xmlMapper.registerModule(new KmipXmlModule());
-        xmlMapper.registerModule(new JavaTimeModule());
-
-        jsonMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        jsonMapper.registerModule(new KmipJsonModule());
-        jsonMapper.registerModule(new JavaTimeModule());
-    }
 
     // Convenience method to serialize using default mapper
     public static <T> Object serialize(T obj) throws IOException {
@@ -61,6 +49,28 @@ public final class KmipCodecManager {
             case JSON -> jsonMapper.readValue(StringEscapeUtils.unescapeJson((String) value), type);
             default -> throw new IllegalArgumentException("Unsupported mapper type: " + defaultType);
         };
+    }
+
+    public static JsonMapper createJsonMapper() {
+        JsonMapper jsonMapper = new JsonMapper();
+        jsonMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        jsonMapper.registerModule(new KmipJsonModule());
+        jsonMapper.registerModule(new JavaTimeModule());
+        return jsonMapper;
+    }
+
+    public static XmlMapper createXmlMapper() {
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        xmlMapper.registerModule(new KmipXmlModule());
+        xmlMapper.registerModule(new JavaTimeModule());
+        return xmlMapper;
+    }
+
+    public static TtlvMapper createTtlvMapper() {
+        TtlvMapper ttlvMapper = new TtlvMapper();
+        ttlvMapper.registerModule(new KmipTtlvModule());
+        return ttlvMapper;
     }
 
     public enum MapperType {

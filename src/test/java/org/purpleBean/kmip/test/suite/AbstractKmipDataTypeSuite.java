@@ -37,9 +37,7 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
         return false;
     }
 
-    @Test
-    @DisplayName("KMIP: has non-null tag and encoding type")
-    void kmip_hasTagAndEncodingType() {
+    protected void validateTagAndEncodingType() {
         T obj = createDefault();
         KmipTag tag = obj.getKmipTag();
         EncodingType type = obj.getEncodingType();
@@ -51,15 +49,21 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
     }
 
     @Test
+    @DisplayName("KMIP: has non-null tag and encoding type")
+    protected void kmip_hasTagAndEncodingType() {
+        validateTagAndEncodingType();
+    }
+
+    @Test
     @DisplayName("KMIP: supported for default spec")
-    void kmip_supportedForDefaultSpec() {
+    protected void kmip_supportedForDefaultSpec() {
         T obj = createDefault();
         assertThat(obj.isSupportedFor(defaultSpec)).isTrue();
     }
 
     @Test
     @DisplayName("KMIP: not supported for unsupported spec")
-    void kmip_notSupportedForUnsupportedSpec() {
+    protected void kmip_notSupportedForUnsupportedSpec() {
         T obj = createDefault();
         boolean expected = expectedSupportedForUnsupportedSpec();
         assertThat(obj.isSupportedFor(KmipSpec.UnsupportedVersion)).isEqualTo(expected);

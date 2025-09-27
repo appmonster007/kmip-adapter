@@ -3,22 +3,27 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.common.AttributeIndex;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
 
 public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attribute> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = Attribute.kmipTag;
+    private final EncodingType encodingType = Attribute.encodingType;
 
     @Override
     public Attribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(Attribute.class, String.format("JSON node cannot be null for Attribute deserialization"));
+            ctxt.reportInputMismatch(Attribute.class, "JSON node cannot be null for Attribute deserialization");
             return null;
         }
 
@@ -26,7 +31,7 @@ public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attr
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Attribute.class, String.format("Invalid KMIP tag for Attribute"));
+                ctxt.reportInputMismatch(Attribute.class, "Invalid KMIP tag for Attribute");
                 return null;
             }
         } catch (Exception e) {
@@ -42,7 +47,7 @@ public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attr
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() || EncodingType.fromName(typeNode.asText()).isEmpty() || EncodingType.fromName(typeNode.asText()).get() != encodingType) {
-            ctxt.reportInputMismatch(Attribute.class, String.format("Missing or non-text 'type' field for Attribute"));
+            ctxt.reportInputMismatch(Attribute.class, "Missing or non-text 'type' field for Attribute");
             return null;
         }
 
@@ -76,19 +81,16 @@ public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attr
 
         KmipSpec spec = KmipContext.getSpec();
 
-        Attribute.AttributeName attrName = p.getCodec().treeToValue(attrNameNode, Attribute.AttributeName.class);
-        String name = StringUtils.covertTitleToPascalCase(attrName.getName());
+        AttributeName attrName = p.getCodec().treeToValue(attrNameNode, AttributeName.class);
 
-        Attribute.AttributeIndex attrIndex;
+        AttributeIndex attrIndex;
         if (attrIndexNode == null) {
             attrIndex = null;
         } else {
-            attrIndex = p.getCodec().treeToValue(attrIndexNode, Attribute.AttributeIndex.class);
+            attrIndex = p.getCodec().treeToValue(attrIndexNode, AttributeIndex.class);
         }
 
-        ObjectNode valueNode = ((ObjectNode) attrValueNode).put("name", name);
-
-        Attribute.AttributeValue attrValue = p.getCodec().treeToValue(valueNode, Attribute.AttributeValue.class);
+        AttributeValue attrValue = p.getCodec().treeToValue(attrValueNode, AttributeValue.class);
 
         Attribute attribute = Attribute.builder()
                 .attributeName(attrName)

@@ -8,19 +8,19 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.AttributeIndex;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class AttributeIndexTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Attribute.AttributeIndex> {
+public class AttributeIndexTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeIndex> {
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
     private final EncodingType encodingType = EncodingType.INTEGER;
 
     @Override
-    public Attribute.AttributeIndex deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public AttributeIndex deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
                 && obj.getType() != encodingType.getTypeValue()) {
@@ -30,7 +30,7 @@ public class AttributeIndexTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int index = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        Attribute.AttributeIndex datatype = Attribute.AttributeIndex.of(index);
+        AttributeIndex datatype = AttributeIndex.of(index);
 
         if (!datatype.isSupportedFor(spec)) {
             throw new NoSuchElementException();

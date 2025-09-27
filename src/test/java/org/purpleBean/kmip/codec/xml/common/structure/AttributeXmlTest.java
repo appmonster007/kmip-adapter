@@ -6,6 +6,7 @@ import org.mockito.MockedStatic;
 import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 import java.time.OffsetDateTime;
@@ -51,7 +52,7 @@ class AttributeXmlTest extends AbstractXmlSerializationSuite<Attribute> {
             HashMap<String, Object> map = new HashMap<>();
             map.put("key", "value");
             map.put("key2", 1);
-            return Attribute.of(Attribute.CustomAttribute.ofStructureString("x-apple", map));
+            return Attribute.of(CustomAttribute.of("x-apple", map));
         } catch (Exception e) {
             log.error("Failed to create variant", e);
             return null;
