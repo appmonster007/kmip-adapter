@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.AttributeValue;
 
@@ -39,9 +39,9 @@ public class AttributeValueBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         obj = AttributeValue.of(fixed);

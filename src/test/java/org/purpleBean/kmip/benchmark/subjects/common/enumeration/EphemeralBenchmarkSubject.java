@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.Ephemeral;
 
@@ -36,11 +36,11 @@ public class EphemeralBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
+        json = KmipCodecManager.getJsonMapper();
 
-        xml = MapperFactory.getXmlMapper();
+        xml = KmipCodecManager.getXmlMapper();
 
-        ttlv = MapperFactory.getTtlvMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         obj = new Ephemeral(Ephemeral.Standard.DATA);
 

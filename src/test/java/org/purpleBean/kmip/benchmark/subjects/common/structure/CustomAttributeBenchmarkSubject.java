@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
@@ -38,9 +38,9 @@ public class CustomAttributeBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         State state = new State(State.Standard.ACTIVE);
         obj = CustomAttribute.of("x-custom-state", state);

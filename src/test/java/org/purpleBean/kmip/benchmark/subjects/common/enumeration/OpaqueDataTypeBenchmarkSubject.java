@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 
@@ -38,9 +38,9 @@ public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         obj = new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
 
