@@ -635,14 +635,14 @@ public class ${DATA_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${D
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(ActivationDate.class, "Missing or invalid '@type' attribute for ActivationDate");
+            ctxt.reportInputMismatch(${DATA_NAME}.class, "Missing or invalid '@type' attribute for ${DATA_NAME}");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(ActivationDate.class,
-                "Missing or non-text 'value' for ActivationDate");
+            ctxt.reportInputMismatch(${DATA_NAME}.class,
+                "Missing or non-text 'value' for ${DATA_NAME}");
             return null;
         }
 
@@ -821,7 +821,6 @@ package org.purpleBean.kmip.${pdot};
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
@@ -939,7 +938,7 @@ import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.${pdot}.${DATA_NAME};
 
@@ -973,9 +972,9 @@ public class ${DATA_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         obj = ${DATA_NAME}.builder().value(fixed).build();

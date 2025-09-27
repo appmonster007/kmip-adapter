@@ -825,7 +825,7 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.nio.ByteBuffer;
@@ -858,9 +858,9 @@ public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject implements KmipBenchmark
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         // Create test object
         obj = ${ATTRIBUTE_NAME}Attribute.builder()

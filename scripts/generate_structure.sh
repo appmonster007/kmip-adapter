@@ -744,7 +744,7 @@ public class ${STRUCTURE_NAME}XmlDeserializer extends KmipDataTypeXmlDeserialize
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
      */
-    private void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(${STRUCTURE_NAME}.${STRUCTURE_NAME}Builder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
         // TODO: Implement field deserialization based on nodeTag
         // Example:
         switch (nodeTag) {
@@ -955,7 +955,7 @@ class ${STRUCTURE_NAME}Test extends AbstractKmipStructureSuite<${STRUCTURE_NAME}
     @Override
     protected ${STRUCTURE_NAME} createDefault() {
         // TODO: Update with actual default values for your structure
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
         return ${STRUCTURE_NAME}.builder()
             .activationDate(activationDate)
@@ -1035,7 +1035,7 @@ class ${suite_name} extends Abstract${format_pascal}SerializationSuite<${STRUCTU
     @Override
     protected ${STRUCTURE_NAME} createDefault() {
         // TODO: Update with actual default values for your structure
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         State state = new State(State.Standard.ACTIVE);
         return ${STRUCTURE_NAME}.builder()
             .activationDate(activationDate)
@@ -1046,7 +1046,7 @@ class ${suite_name} extends Abstract${format_pascal}SerializationSuite<${STRUCTU
     @Override
     protected ${STRUCTURE_NAME} createVariant() {
         // TODO: Update with different values to test variations
-        ActivationDate activationDate = ActivationDate.builder().dateTime(FIXED_TIME.plusDays(1)).build();
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
         State state = new State(State.Standard.DEACTIVATED);
         return ${STRUCTURE_NAME}.builder()
             .activationDate(activationDate)
@@ -1084,7 +1084,7 @@ import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.MapperFactory;
+import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.${pdot}.${STRUCTURE_NAME};
 
@@ -1118,12 +1118,12 @@ public class ${STRUCTURE_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = MapperFactory.getJsonMapper();
-        xml = MapperFactory.getXmlMapper();
-        ttlv = MapperFactory.getTtlvMapper();
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
 
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDate activationDate = ActivationDate.builder().dateTime(fixed).build();
+        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
         State state = new State(State.Standard.ACTIVE);
         obj = ${STRUCTURE_NAME}.builder()
             .activationDate(activationDate)
