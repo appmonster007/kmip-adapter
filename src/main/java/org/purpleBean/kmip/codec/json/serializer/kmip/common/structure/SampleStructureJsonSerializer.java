@@ -24,22 +24,15 @@ public class SampleStructureJsonSerializer extends KmipDataTypeJsonSerializer<Sa
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s",
-                            sampleStructure.getKmipTag().getDescription(), spec)
-            );
+            throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", sampleStructure.getKmipTag().getDescription(), spec));
         }
 
         List<KmipDataType> fields = sampleStructure.getValues();
         // Validation: Field compatibility with KMIP spec
         for (KmipDataType field : fields) {
             if (field != null && !field.isSupportedFor(spec)) {
-                throw new UnsupportedEncodingException(
-                        String.format("%s in %s is not supported for KMIP spec %s",
-                                field.getKmipTag().getDescription(),
-                                sampleStructure.getKmipTag().getDescription(),
-                                spec)
-                );
+                throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
+                        field.getKmipTag().getDescription(), sampleStructure.getKmipTag().getDescription(), spec));
             }
         }
 

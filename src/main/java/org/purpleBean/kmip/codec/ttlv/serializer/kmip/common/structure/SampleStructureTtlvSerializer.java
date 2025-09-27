@@ -23,17 +23,14 @@ public class SampleStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<Sa
     private TtlvObject serializeToTtlvObject(SampleStructure value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s not supported for KMIP spec %s",
-                            value.getClass().getSimpleName(), spec)
-            );
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
         List<KmipDataType> nestedValues = value.getValues();
         byte[] tag = value.getKmipTag().getTagBytes();
         byte type = value.getEncodingType().getTypeValue();
 
-        List<ByteBuffer> nestedObjects = new ArrayList<>();
+        List<ByteBuffer> nestedObjects = new ArrayList<ByteBuffer>();
         for (KmipDataType object : nestedValues) {
             if (object != null) {
                 nestedObjects.add(mapper.writeValueAsByteBuffer(object));

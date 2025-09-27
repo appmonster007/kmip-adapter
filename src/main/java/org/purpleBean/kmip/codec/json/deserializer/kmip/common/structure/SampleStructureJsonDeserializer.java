@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserializer<SampleStructure> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = SampleStructure.kmipTag;
+    private final EncodingType encodingType = SampleStructure.encodingType;
 
     @Override
     public SampleStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(SampleStructure.class, "JSON node cannot be null for SampleStructure deserialization");
+            ctxt.reportInputMismatch(SampleStructure.class, String.format("JSON node cannot be null for SampleStructure deserialization"));
             return null;
         }
 
@@ -32,7 +32,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(SampleStructure.class, "Invalid KMIP tag for SampleStructure");
+                ctxt.reportInputMismatch(SampleStructure.class, String.format("Invalid KMIP tag for SampleStructure"));
                 return null;
             }
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(SampleStructure.class, "Missing or non-text 'type' field for SampleStructure");
+            ctxt.reportInputMismatch(SampleStructure.class, String.format("Missing or non-text 'type' field for SampleStructure"));
             return null;
         }
 
@@ -67,8 +67,9 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
         SampleStructure.SampleStructureBuilder builder = SampleStructure.builder();
 
         for (JsonNode valueNode : values) {
-            if (!valueNode.has("tag")) continue;
-
+            if (!valueNode.has("tag")) {
+                continue;
+            }
             KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
             setValue(builder, nodeTag, valueNode, p, ctxt);
         }
@@ -78,9 +79,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
-            throw new NoSuchElementException(
-                    String.format("SampleStructure is not supported for KMIP spec %s", spec)
-            );
+            throw new NoSuchElementException(String.format("SampleStructure is not supported for KMIP spec %s", spec));
         }
 
         return sampleStructure;
@@ -96,18 +95,14 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
      */
-    private void setValue(SampleStructure.SampleStructureBuilder builder,
-                          KmipTag.Value nodeTag,
-                          JsonNode node,
-                          JsonParser p,
-                          DeserializationContext ctxt) throws IOException {
+    private void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
         // TODO: Implement field deserialization based on tag, preferably using switch case expression
         // Example:
         switch (nodeTag) {
             case KmipTag.Standard.ACTIVATION_DATE ->
                     builder.activationDate(p.getCodec().treeToValue(node, ActivationDate.class));
             case KmipTag.Standard.STATE -> builder.state(p.getCodec().treeToValue(node, State.class));
-            default -> throw new IllegalArgumentException();
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

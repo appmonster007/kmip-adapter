@@ -45,6 +45,7 @@ class SampleStructureTest extends AbstractKmipStructureSuite<SampleStructure> {
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
+        // Add assertions for components if desired
         // TODO: Add validation for each component
         // Example:
         // assertThat(values.get(0).getEncodingType()).isEqualTo(EncodingType.DATE_TIME);

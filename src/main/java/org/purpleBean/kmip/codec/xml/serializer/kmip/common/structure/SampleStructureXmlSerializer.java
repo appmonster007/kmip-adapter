@@ -21,10 +21,7 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!sampleStructure.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s not supported for KMIP spec %s",
-                            sampleStructure.getClass().getSimpleName(), spec)
-            );
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", sampleStructure.getClass().getSimpleName(), spec));
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
@@ -40,8 +37,7 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
         List<KmipDataType> values = sampleStructure.getValues();
         for (KmipDataType kmipDataType : values) {
             if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
-                String fieldName = kmipDataType.getKmipTag().getDescription();
-                serializers.defaultSerializeField(fieldName, kmipDataType, gen);
+                serializers.defaultSerializeField(kmipDataType.getKmipTag().getDescription(), kmipDataType, gen);
             }
         }
 

@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<SampleStructure> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = SampleStructure.kmipTag;
+    private final EncodingType encodingType = SampleStructure.encodingType;
 
     @Override
     public SampleStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -51,8 +51,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
         SampleStructure sampleStructure = builder.build();
 
         if (!sampleStructure.isSupportedFor(spec)) {
-            ctxt.reportInputMismatch(SampleStructure.class,
-                    "SampleStructure not supported for spec " + spec);
+            ctxt.reportInputMismatch(SampleStructure.class, "SampleStructure not supported for spec " + spec);
             return null;
         }
 
@@ -69,11 +68,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
      */
-    private void setValue(SampleStructure.SampleStructureBuilder builder,
-                          KmipTag.Value nodeTag,
-                          JsonNode node,
-                          JsonParser p,
-                          DeserializationContext ctxt) throws IOException {
+    private void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
         // TODO: Implement field deserialization based on nodeTag
         // Example:
         switch (nodeTag) {
