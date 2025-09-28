@@ -916,7 +916,7 @@ import org.purpleBean.kmip.${pkg_dot}.${class_name};
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 
-public class ${class_name}BenchmarkSubject implements KmipBenchmarkSubject {
+public class ${class_name}BenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

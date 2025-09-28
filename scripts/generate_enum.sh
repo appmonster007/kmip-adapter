@@ -1050,7 +1050,7 @@ import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
 import java.nio.ByteBuffer;
 
-public class ${ENUM_NAME}BenchmarkSubject implements KmipBenchmarkSubject {
+public class ${ENUM_NAME}BenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
