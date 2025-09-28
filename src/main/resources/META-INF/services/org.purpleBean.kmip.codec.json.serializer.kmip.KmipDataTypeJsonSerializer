@@ -6,6 +6,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeIndexJsonSerializ
 org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DestroyDateJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.UniqueIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.AdjustmentTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.AlternativeNameTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.AsynchronousIndicatorJsonSerializer
@@ -73,6 +74,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.ValidityIndica
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.WrappingMethodJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.SampleStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestBatchItemJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestHeaderJsonSerializer

@@ -2,6 +2,10 @@ package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.KmipAttribute;
+import org.purpleBean.kmip.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,14 +15,23 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Data
 @Builder
-public class CryptographicAlgorithm implements KmipEnumeration {
+public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
+        // Register with KmipDataType and KmipAttribute
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class, CryptographicAlgorithm::of);
+        }
+        
+        // Register standard values
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
@@ -28,9 +41,23 @@ public class CryptographicAlgorithm implements KmipEnumeration {
     @NonNull
     private final Value value;
 
+    public static CryptographicAlgorithm of(@NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer intValue)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        KmipSpec spec = KmipContext.getSpec();
+        if (spec == null) {
+            spec = KmipSpec.UnknownVersion;
+        }
+        return new CryptographicAlgorithm(CryptographicAlgorithm.fromValue(spec, intValue));
+    }
+    
     public CryptographicAlgorithm(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
+        if (spec == null) {
+            spec = KmipSpec.UnknownVersion;
+        }
         if (!value.isSupportedFor(spec)) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
@@ -124,6 +151,59 @@ public class CryptographicAlgorithm implements KmipEnumeration {
     @Override
     public boolean isSupportedFor(@NonNull KmipSpec spec) {
         return value.isSupportedFor(spec);
+    }
+    
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.builder()
+                .encodingType(encodingType)
+                .value(value.getValue())
+                .build();
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+    
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
+    
+    @Override
+    public boolean isAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
     }
 
     @Getter

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CryptographicAlgorithm Domain Tests")
-class CryptographicAlgorithmTest extends AbstractKmipEnumerationSuite<CryptographicAlgorithm> {
+class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeSuite<CryptographicAlgorithm> {
 
     @Override
     protected Class<CryptographicAlgorithm> type() {
@@ -43,8 +43,67 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationSuite<Cryptograp
         return true;
     }
 
+    // Implementation of AbstractKmipDataTypeAttributeSuite methods
+    @Override
+    public boolean expectAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean expectServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean expectClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server in any state
+    }
+
+    @Override
+    public State stateForServerModifiableFalse() {
+        return new State(State.Standard.PRE_ACTIVE); // Any state would work since it's not modifiable
+    }
+
+    @Override
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client in any state
+    }
+
+    @Override
+    public State stateForClientModifiableFalse() {
+        return new State(State.Standard.ACTIVE); // Any state would work since it's not modifiable
+    }
+
+    @Override
+    protected void attrEnum_serverModifiable_respectsState() {
+        // Not applicable as it's not server modifiable
+    }
+
+    @Override
+    protected void attrEnum_clientModifiable_respectsState() {
+        // Not applicable as it's not client modifiable
+    }
+
     @Override
     protected void assertLookupBehaviour() {
+        // Register a custom value for testing
+        CryptographicAlgorithm.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
+
         // Lookup by name/value
         CryptographicAlgorithm.Value byName = CryptographicAlgorithm.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
         CryptographicAlgorithm.Value byVal = CryptographicAlgorithm.fromValue(KmipSpec.UnknownVersion, 0x80000010);
