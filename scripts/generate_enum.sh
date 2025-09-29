@@ -217,6 +217,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ${ENUM_NAME} implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -226,6 +227,11 @@ public class ${ENUM_NAME} implements KmipEnumeration {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
+
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${ENUM_NAME}.class);
+        }
     }
 
     @NonNull
@@ -234,7 +240,7 @@ public class ${ENUM_NAME} implements KmipEnumeration {
     public ${ENUM_NAME}(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for ${ENUM_NAME} is not supported for KMIP spec %s", value.getDescription(), spec)
             );
@@ -277,10 +283,11 @@ public class ${ENUM_NAME} implements KmipEnumeration {
     /**
      * Look up by name.
      */
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No ${ENUM_NAME} value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -289,11 +296,11 @@ public class ${ENUM_NAME} implements KmipEnumeration {
     /**
      * Look up by value.
      */
-    public static Value fromValue(KmipSpec spec, int value) {
-        // Check standard values first
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No ${ENUM_NAME} value found for %d in KMIP spec %s", value, spec)
                 ));
@@ -325,8 +332,9 @@ public class ${ENUM_NAME} implements KmipEnumeration {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return value.isSupportedFor(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && value.isSupported();
     }
 
     @Getter
@@ -349,7 +357,8 @@ public class ${ENUM_NAME} implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -360,7 +369,7 @@ public class ${ENUM_NAME} implements KmipEnumeration {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
     }
@@ -382,7 +391,8 @@ public class ${ENUM_NAME} implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -435,7 +445,7 @@ public class ${ENUM_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${ENU
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
                             value.getDescription(), spec)
@@ -557,7 +567,7 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
         KmipSpec spec = KmipContext.getSpec();
         ${ENUM_NAME}.Value ${enum_lower}Value;
         try {
-            ${enum_lower}Value = ${ENUM_NAME}.fromName(spec, description);
+            ${enum_lower}Value = ${ENUM_NAME}.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(${ENUM_NAME}.class,
                     String.format("Unknown ${ENUM_NAME} value '%s' for KMIP spec %s", description, spec));
@@ -567,7 +577,7 @@ public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
         ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${enum_lower}Value);
 
         // Final validation: Ensure constructed ${ENUM_NAME} is supported
-        if (!${enum_lower}.isSupportedFor(spec)) {
+        if (!${enum_lower}.isSupported()) {
             throw new NoSuchElementException(
                     String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s", description, spec)
             );
@@ -623,8 +633,11 @@ public class ${ENUM_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${ENUM_
     @Override
     public void serialize(${ENUM_NAME} value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
@@ -727,8 +740,8 @@ public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${E
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromName(spec, description));
-        if (!${enum_lower}.isSupportedFor(spec)) {
+        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromName(description));
+        if (!${enum_lower}.isSupported()) {
             throw new NoSuchElementException(
                 String.format("${ENUM_NAME} '%s' not supported for spec %s", description, spec));
         }
@@ -784,8 +797,11 @@ public class ${ENUM_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${ENU
 
     public TtlvObject serializeToTtlvObject(${ENUM_NAME} value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();
@@ -861,10 +877,11 @@ public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<$
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromValue(spec, value));
+        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromValue(value));
 
-        if (!${enum_lower}.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!${enum_lower}.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("${ENUM_NAME} '%d' not supported for spec %s", value, spec));
         }
         return ${enum_lower};
     }
@@ -940,13 +957,21 @@ class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        ${ENUM_NAME}.Value byName = ${ENUM_NAME}.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        ${ENUM_NAME}.Value byVal = ${ENUM_NAME}.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    ${ENUM_NAME}.Value byName = ${ENUM_NAME}.fromName("X-Enum-Custom");
+                    ${ENUM_NAME}.Value byVal = ${ENUM_NAME}.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> ${ENUM_NAME}.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> ${ENUM_NAME}.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -955,8 +980,13 @@ class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
         ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
@@ -978,6 +1008,8 @@ EOF
 generate_serialization_test_for_format() {
     local ENUM_NAME="$1"
     local format="$2"
+    local format_upper
+    format_upper="$(get_upper_case "${format}")"
     local format_pascal
     format_pascal="$(get_pascal_case "${format}")"
     local suite_name="${ENUM_NAME}${format_pascal}Test"
@@ -1000,7 +1032,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 import org.purpleBean.kmip.test.suite.Abstract${format_pascal}SerializationSuite;
 
-@DisplayName("${ENUM_NAME} ${format} Serialization")
+@DisplayName("${ENUM_NAME} ${format_upper} Serialization")
 class ${ENUM_NAME}${format_pascal}Test extends Abstract${format_pascal}SerializationSuite<${ENUM_NAME}> {
     @Override
     protected Class<${ENUM_NAME}> type() {
