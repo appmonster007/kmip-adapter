@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ClientRegistrationMethod.
  */
 public class ClientRegistrationMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<ClientRegistrationMethod> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CLIENT_REGISTRATION_METHOD);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ClientRegistrationMethod.kmipTag;
+    private final EncodingType encodingType = ClientRegistrationMethod.encodingType;
 
     @Override
     public ClientRegistrationMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ClientRegistrationMethodJsonDeserializer extends KmipDataTypeJsonDe
         KmipSpec spec = KmipContext.getSpec();
         ClientRegistrationMethod.Value clientregistrationmethodValue;
         try {
-            clientregistrationmethodValue = ClientRegistrationMethod.fromName(spec, description);
+            clientregistrationmethodValue = ClientRegistrationMethod.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ClientRegistrationMethod.class,
                     String.format("Unknown ClientRegistrationMethod value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ClientRegistrationMethodJsonDeserializer extends KmipDataTypeJsonDe
         ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(clientregistrationmethodValue);
 
         // Final validation: Ensure constructed ClientRegistrationMethod is supported
-        if (!clientregistrationmethod.isSupportedFor(spec)) {
+        if (!clientregistrationmethod.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ClientRegistrationMethod '%s' is not supported for KMIP spec %s", description, spec)
             );

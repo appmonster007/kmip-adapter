@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for Fips186Variation.
  */
 public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializer<Fips186Variation> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FIPS186_VARIATION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = Fips186Variation.kmipTag;
+    private final EncodingType encodingType = Fips186Variation.encodingType;
 
     @Override
     public Fips186Variation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
         KmipSpec spec = KmipContext.getSpec();
         Fips186Variation.Value fips186variationValue;
         try {
-            fips186variationValue = Fips186Variation.fromName(spec, description);
+            fips186variationValue = Fips186Variation.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(Fips186Variation.class,
                     String.format("Unknown Fips186Variation value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class Fips186VariationJsonDeserializer extends KmipDataTypeJsonDeserializ
         Fips186Variation fips186variation = new Fips186Variation(fips186variationValue);
 
         // Final validation: Ensure constructed Fips186Variation is supported
-        if (!fips186variation.isSupportedFor(spec)) {
+        if (!fips186variation.isSupported()) {
             throw new NoSuchElementException(
                     String.format("Fips186Variation '%s' is not supported for KMIP spec %s", description, spec)
             );

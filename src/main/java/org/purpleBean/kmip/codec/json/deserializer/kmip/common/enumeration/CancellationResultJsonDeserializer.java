@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for CancellationResult.
  */
 public class CancellationResultJsonDeserializer extends KmipDataTypeJsonDeserializer<CancellationResult> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CANCELLATION_RESULT);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = CancellationResult.kmipTag;
+    private final EncodingType encodingType = CancellationResult.encodingType;
 
     @Override
     public CancellationResult deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class CancellationResultJsonDeserializer extends KmipDataTypeJsonDeserial
         KmipSpec spec = KmipContext.getSpec();
         CancellationResult.Value cancellationresultValue;
         try {
-            cancellationresultValue = CancellationResult.fromName(spec, description);
+            cancellationresultValue = CancellationResult.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(CancellationResult.class,
                     String.format("Unknown CancellationResult value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class CancellationResultJsonDeserializer extends KmipDataTypeJsonDeserial
         CancellationResult cancellationresult = new CancellationResult(cancellationresultValue);
 
         // Final validation: Ensure constructed CancellationResult is supported
-        if (!cancellationresult.isSupportedFor(spec)) {
+        if (!cancellationresult.isSupported()) {
             throw new NoSuchElementException(
                     String.format("CancellationResult '%s' is not supported for KMIP spec %s", description, spec)
             );

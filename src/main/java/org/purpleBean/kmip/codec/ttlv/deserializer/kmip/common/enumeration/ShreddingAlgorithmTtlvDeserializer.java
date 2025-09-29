@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ShreddingAlgorithm.
  */
 public class ShreddingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ShreddingAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SHREDDING_ALGORITHM);
+    private final KmipTag kmipTag = ShreddingAlgorithm.kmipTag;
+    private final EncodingType encodingType = ShreddingAlgorithm.encodingType;
 
     @Override
     public ShreddingAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ShreddingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserial
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.fromValue(spec, value));
+        ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.fromValue(value));
 
-        if (!shreddingalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!shreddingalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ShreddingAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return shreddingalgorithm;
     }

@@ -70,7 +70,7 @@ public class ActivationDateJsonDeserializer extends KmipDataTypeJsonDeserializer
         ActivationDate attribute = ActivationDate.builder().value(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ActivationDate '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
             );

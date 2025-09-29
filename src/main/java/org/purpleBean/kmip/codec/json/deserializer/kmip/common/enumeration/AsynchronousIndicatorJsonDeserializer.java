@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for AsynchronousIndicator.
  */
 public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeserializer<AsynchronousIndicator> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ASYNCHRONOUS_INDICATOR);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = AsynchronousIndicator.kmipTag;
+    private final EncodingType encodingType = AsynchronousIndicator.encodingType;
 
     @Override
     public AsynchronousIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeser
         KmipSpec spec = KmipContext.getSpec();
         AsynchronousIndicator.Value asynchronousindicatorValue;
         try {
-            asynchronousindicatorValue = AsynchronousIndicator.fromName(spec, description);
+            asynchronousindicatorValue = AsynchronousIndicator.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(AsynchronousIndicator.class,
                     String.format("Unknown AsynchronousIndicator value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeser
         AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(asynchronousindicatorValue);
 
         // Final validation: Ensure constructed AsynchronousIndicator is supported
-        if (!asynchronousindicator.isSupportedFor(spec)) {
+        if (!asynchronousindicator.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AsynchronousIndicator '%s' is not supported for KMIP spec %s", description, spec)
             );

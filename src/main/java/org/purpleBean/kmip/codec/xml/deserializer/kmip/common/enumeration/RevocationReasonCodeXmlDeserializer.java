@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for RevocationReasonCode.
  */
 public class RevocationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeserializer<RevocationReasonCode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REVOCATION_REASON_CODE);
+    private final KmipTag kmipTag = RevocationReasonCode.kmipTag;
+    private final EncodingType encodingType = RevocationReasonCode.encodingType;
 
     @Override
     public RevocationReasonCode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class RevocationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeserial
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        RevocationReasonCode revocationreasoncode = new RevocationReasonCode(RevocationReasonCode.fromName(spec, description));
-        if (!revocationreasoncode.isSupportedFor(spec)) {
+        RevocationReasonCode revocationreasoncode = new RevocationReasonCode(RevocationReasonCode.fromName(description));
+        if (!revocationreasoncode.isSupported()) {
             throw new NoSuchElementException(
                 String.format("RevocationReasonCode '%s' not supported for spec %s", description, spec));
         }

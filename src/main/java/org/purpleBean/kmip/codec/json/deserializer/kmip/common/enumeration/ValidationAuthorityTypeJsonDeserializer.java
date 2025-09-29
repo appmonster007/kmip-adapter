@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ValidationAuthorityType.
  */
 public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<ValidationAuthorityType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDATION_AUTHORITY_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ValidationAuthorityType.kmipTag;
+    private final EncodingType encodingType = ValidationAuthorityType.encodingType;
 
     @Override
     public ValidationAuthorityType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
         KmipSpec spec = KmipContext.getSpec();
         ValidationAuthorityType.Value validationauthoritytypeValue;
         try {
-            validationauthoritytypeValue = ValidationAuthorityType.fromName(spec, description);
+            validationauthoritytypeValue = ValidationAuthorityType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ValidationAuthorityType.class,
                     String.format("Unknown ValidationAuthorityType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ValidationAuthorityTypeJsonDeserializer extends KmipDataTypeJsonDes
         ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(validationauthoritytypeValue);
 
         // Final validation: Ensure constructed ValidationAuthorityType is supported
-        if (!validationauthoritytype.isSupportedFor(spec)) {
+        if (!validationauthoritytype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ValidationAuthorityType '%s' is not supported for KMIP spec %s", description, spec)
             );

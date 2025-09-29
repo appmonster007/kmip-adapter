@@ -18,14 +18,14 @@ public class SimpleRequestBatchItemJsonSerializer extends KmipDataTypeJsonSerial
     public void serialize(SimpleRequestBatchItem batchItem, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!batchItem.isSupportedFor(spec)) {
+        if (!batchItem.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 
         List<KmipDataType> fields = batchItem.getValues();
         // Validation: Field compatibility with KMIP spec
         for (KmipDataType field : fields) {
-            if (field != null && !field.isSupportedFor(spec)) {
+            if (field != null && !field.isSupported()) {
                 throw new UnsupportedEncodingException(
                         String.format("%s in %s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), batchItem.getKmipTag().getDescription(), spec)
                 );

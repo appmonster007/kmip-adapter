@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for Ephemeral.
  */
 public class EphemeralXmlDeserializer extends KmipDataTypeXmlDeserializer<Ephemeral> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.EPHEMERAL);
+    private final KmipTag kmipTag = Ephemeral.kmipTag;
+    private final EncodingType encodingType = Ephemeral.encodingType;
 
     @Override
     public Ephemeral deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,10 +54,10 @@ public class EphemeralXmlDeserializer extends KmipDataTypeXmlDeserializer<Epheme
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        Ephemeral ephemeral = new Ephemeral(Ephemeral.fromName(spec, description));
-        if (!ephemeral.isSupportedFor(spec)) {
+        Ephemeral ephemeral = new Ephemeral(Ephemeral.fromName(description));
+        if (!ephemeral.isSupported()) {
             throw new NoSuchElementException(
-                    String.format("Ephemeral '%s' not supported for spec %s", description, spec));
+                String.format("Ephemeral '%s' not supported for spec %s", description, spec));
         }
 
         return ephemeral;

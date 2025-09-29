@@ -21,7 +21,7 @@ public class NameValueJsonSerializer extends KmipDataTypeJsonSerializer<NameValu
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!nameValue.isSupportedFor(spec)) {
+        if (!nameValue.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", nameValue.getKmipTag().getDescription(), spec));
         }
 

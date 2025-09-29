@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for EncodingOption.
  */
 public class EncodingOptionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<EncodingOption> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ENCODING_OPTION);
+    private final KmipTag kmipTag = EncodingOption.kmipTag;
+    private final EncodingType encodingType = EncodingOption.encodingType;
 
     @Override
     public EncodingOption deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class EncodingOptionTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        EncodingOption encodingoption = new EncodingOption(EncodingOption.fromValue(spec, value));
+        EncodingOption encodingoption = new EncodingOption(EncodingOption.fromValue(value));
 
-        if (!encodingoption.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!encodingoption.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("EncodingOption '%d' not supported for spec %s", value, spec));
         }
         return encodingoption;
     }

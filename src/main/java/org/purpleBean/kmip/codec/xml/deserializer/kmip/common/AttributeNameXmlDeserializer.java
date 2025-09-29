@@ -56,7 +56,7 @@ public class AttributeNameXmlDeserializer extends KmipDataTypeXmlDeserializer<At
         AttributeName datatype = AttributeName.of(name);
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!datatype.isSupportedFor(spec)) {
+        if (!datatype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AttributeName '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 

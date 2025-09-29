@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for SecretDataType.
  */
 public class SecretDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<SecretDataType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA_TYPE);
+    private final KmipTag kmipTag = SecretDataType.kmipTag;
+    private final EncodingType encodingType = SecretDataType.encodingType;
 
     @Override
     public SecretDataType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class SecretDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<S
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        SecretDataType secretdatatype = new SecretDataType(SecretDataType.fromName(spec, description));
-        if (!secretdatatype.isSupportedFor(spec)) {
+        SecretDataType secretdatatype = new SecretDataType(SecretDataType.fromName(description));
+        if (!secretdatatype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("SecretDataType '%s' not supported for spec %s", description, spec));
         }

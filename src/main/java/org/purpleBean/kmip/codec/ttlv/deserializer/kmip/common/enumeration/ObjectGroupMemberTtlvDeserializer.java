@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ObjectGroupMember.
  */
 public class ObjectGroupMemberTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ObjectGroupMember> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_GROUP_MEMBER);
+    private final KmipTag kmipTag = ObjectGroupMember.kmipTag;
+    private final EncodingType encodingType = ObjectGroupMember.encodingType;
 
     @Override
     public ObjectGroupMember deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ObjectGroupMemberTtlvDeserializer extends KmipDataTypeTtlvDeseriali
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ObjectGroupMember objectgroupmember = new ObjectGroupMember(ObjectGroupMember.fromValue(spec, value));
+        ObjectGroupMember objectgroupmember = new ObjectGroupMember(ObjectGroupMember.fromValue(value));
 
-        if (!objectgroupmember.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!objectgroupmember.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ObjectGroupMember '%d' not supported for spec %s", value, spec));
         }
         return objectgroupmember;
     }

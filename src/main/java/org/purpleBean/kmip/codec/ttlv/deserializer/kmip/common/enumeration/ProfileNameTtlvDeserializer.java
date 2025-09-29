@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ProfileName.
  */
 public class ProfileNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProfileName> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROFILE_NAME);
+    private final KmipTag kmipTag = ProfileName.kmipTag;
+    private final EncodingType encodingType = ProfileName.encodingType;
 
     @Override
     public ProfileName deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ProfileNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Pr
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ProfileName profilename = new ProfileName(ProfileName.fromValue(spec, value));
+        ProfileName profilename = new ProfileName(ProfileName.fromValue(value));
 
-        if (!profilename.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!profilename.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ProfileName '%d' not supported for spec %s", value, spec));
         }
         return profilename;
     }

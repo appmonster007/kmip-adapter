@@ -80,7 +80,7 @@ public class AttributeValueXmlDeserializer extends KmipDataTypeXmlDeserializer<A
 
         AttributeValue attributeValue = AttributeValue.builder().encodingType(encodingType).value(obj).build();
 
-        if (!attributeValue.isSupportedFor(spec)) {
+        if (!attributeValue.isSupported()) {
             ctxt.reportInputMismatch(AttributeValue.class, "AttributeValue not supported for spec " + spec);
             return null;
         }
@@ -112,7 +112,7 @@ public class AttributeValueXmlDeserializer extends KmipDataTypeXmlDeserializer<A
         String type = node.get("type").asText();
         EncodingType encodingType = EncodingType.fromName(type).get();
 
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(spec, tag.getValue(), encodingType);
+        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(tag.getValue(), encodingType);
 
         return p.getCodec().treeToValue(node, clazz);
     }

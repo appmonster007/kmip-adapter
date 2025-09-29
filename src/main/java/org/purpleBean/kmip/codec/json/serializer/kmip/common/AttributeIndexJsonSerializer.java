@@ -20,7 +20,7 @@ public class AttributeIndexJsonSerializer extends KmipDataTypeJsonSerializer<Att
         if (attributeIndex == null) return;
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeIndex.isSupportedFor(spec)) {
+        if (!attributeIndex.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("%s is not supported for KMIP spec %s", attributeIndex.getKmipTag().getDescription(), spec)
             );

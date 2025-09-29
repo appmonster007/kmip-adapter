@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for CryptographicAlgorithm.
  */
 public class CryptographicAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<CryptographicAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
+    private final KmipTag kmipTag = CryptographicAlgorithm.kmipTag;
+    private final EncodingType encodingType = CryptographicAlgorithm.encodingType;
 
     @Override
     public CryptographicAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class CryptographicAlgorithmXmlDeserializer extends KmipDataTypeXmlDeseri
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.fromName(spec, description));
-        if (!cryptographicalgorithm.isSupportedFor(spec)) {
+        CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.fromName(description));
+        if (!cryptographicalgorithm.isSupported()) {
             throw new NoSuchElementException(
                 String.format("CryptographicAlgorithm '%s' not supported for spec %s", description, spec));
         }

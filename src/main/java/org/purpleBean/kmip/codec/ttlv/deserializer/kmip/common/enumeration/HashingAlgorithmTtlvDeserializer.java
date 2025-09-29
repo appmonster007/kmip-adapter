@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for HashingAlgorithm.
  */
 public class HashingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<HashingAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.HASHING_ALGORITHM);
+    private final KmipTag kmipTag = HashingAlgorithm.kmipTag;
+    private final EncodingType encodingType = HashingAlgorithm.encodingType;
 
     @Override
     public HashingAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class HashingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializ
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        HashingAlgorithm hashingalgorithm = new HashingAlgorithm(HashingAlgorithm.fromValue(spec, value));
+        HashingAlgorithm hashingalgorithm = new HashingAlgorithm(HashingAlgorithm.fromValue(value));
 
-        if (!hashingalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!hashingalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("HashingAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return hashingalgorithm;
     }

@@ -4,9 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.structure.Name;
 
@@ -21,7 +18,7 @@ public class NameXmlSerializer extends KmipDataTypeXmlSerializer<Name> {
     public void serialize(Name name, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!name.isSupportedFor(spec)) {
+        if (!name.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", name.getClass().getSimpleName(), spec));
         }
 

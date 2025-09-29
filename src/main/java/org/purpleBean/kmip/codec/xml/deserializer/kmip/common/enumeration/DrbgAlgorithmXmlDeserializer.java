@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DrbgAlgorithm.
  */
 public class DrbgAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<DrbgAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DRBG_ALGORITHM);
+    private final KmipTag kmipTag = DrbgAlgorithm.kmipTag;
+    private final EncodingType encodingType = DrbgAlgorithm.encodingType;
 
     @Override
     public DrbgAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class DrbgAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<Dr
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromName(spec, description));
-        if (!drbgalgorithm.isSupportedFor(spec)) {
+        DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromName(description));
+        if (!drbgalgorithm.isSupported()) {
             throw new NoSuchElementException(
                 String.format("DrbgAlgorithm '%s' not supported for spec %s", description, spec));
         }

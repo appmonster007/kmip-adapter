@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DerivationMethod.
  */
 public class DerivationMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DerivationMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DERIVATION_METHOD);
+    private final KmipTag kmipTag = DerivationMethod.kmipTag;
+    private final EncodingType encodingType = DerivationMethod.encodingType;
 
     @Override
     public DerivationMethod deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DerivationMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializ
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DerivationMethod derivationmethod = new DerivationMethod(DerivationMethod.fromValue(spec, value));
+        DerivationMethod derivationmethod = new DerivationMethod(DerivationMethod.fromValue(value));
 
-        if (!derivationmethod.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!derivationmethod.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DerivationMethod '%d' not supported for spec %s", value, spec));
         }
         return derivationmethod;
     }

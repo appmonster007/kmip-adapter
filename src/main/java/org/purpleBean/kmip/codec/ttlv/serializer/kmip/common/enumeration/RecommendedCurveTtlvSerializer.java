@@ -23,8 +23,11 @@ public class RecommendedCurveTtlvSerializer extends KmipDataTypeTtlvSerializer<R
 
     public TtlvObject serializeToTtlvObject(RecommendedCurve value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("RecommendedCurve '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

@@ -50,7 +50,7 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
 
         Name name = builder.build();
 
-        if (!name.isSupportedFor(spec)) {
+        if (!name.isSupported()) {
             ctxt.reportInputMismatch(Name.class, "Name not supported for spec " + spec);
             return null;
         }

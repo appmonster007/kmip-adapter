@@ -3,7 +3,6 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
@@ -37,7 +36,7 @@ public class SimpleRequestHeaderXmlDeserializer extends KmipDataTypeXmlDeseriali
 
         SimpleRequestHeader header = builder.build();
 
-        if (!header.isSupportedFor(spec)) {
+        if (!header.isSupported()) {
             ctxt.reportInputMismatch(SimpleRequestHeader.class, "SimpleRequestHeader not supported for spec " + spec);
         }
 

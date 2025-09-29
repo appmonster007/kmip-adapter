@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for MaskGenerator.
  */
 public class MaskGeneratorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<MaskGenerator> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MASK_GENERATOR);
+    private final KmipTag kmipTag = MaskGenerator.kmipTag;
+    private final EncodingType encodingType = MaskGenerator.encodingType;
 
     @Override
     public MaskGenerator deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class MaskGeneratorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        MaskGenerator maskgenerator = new MaskGenerator(MaskGenerator.fromValue(spec, value));
+        MaskGenerator maskgenerator = new MaskGenerator(MaskGenerator.fromValue(value));
 
-        if (!maskgenerator.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!maskgenerator.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("MaskGenerator '%d' not supported for spec %s", value, spec));
         }
         return maskgenerator;
     }

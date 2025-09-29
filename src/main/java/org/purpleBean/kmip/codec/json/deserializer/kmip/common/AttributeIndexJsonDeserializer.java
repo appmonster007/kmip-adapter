@@ -69,7 +69,7 @@ public class AttributeIndexJsonDeserializer extends KmipDataTypeJsonDeserializer
         AttributeIndex attributeIndex = AttributeIndex.builder().value(index).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeIndex.isSupportedFor(spec)) {
+        if (!attributeIndex.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AttributeIndex '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
             );

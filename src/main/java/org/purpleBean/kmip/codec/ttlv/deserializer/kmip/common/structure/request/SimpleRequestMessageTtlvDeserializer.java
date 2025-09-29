@@ -41,7 +41,7 @@ public class SimpleRequestMessageTtlvDeserializer extends KmipDataTypeTtlvDeseri
 
         SimpleRequestMessage simpleRequestMessage = builder.build();
 
-        if (!simpleRequestMessage.isSupportedFor(spec)) {
+        if (!simpleRequestMessage.isSupported()) {
             throw new NoSuchElementException();
         }
         return simpleRequestMessage;

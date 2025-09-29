@@ -72,7 +72,7 @@ public class UniqueIdentifierJsonDeserializer extends KmipDataTypeJsonDeserializ
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!uniqueIdentifier.isSupportedFor(spec)) {
+        if (!uniqueIdentifier.isSupported()) {
             throw new NoSuchElementException(String.format("UniqueIdentifier is not supported for KMIP spec %s", spec));
         }
 

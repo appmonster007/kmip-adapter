@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for EndpointRole.
  */
 public class EndpointRoleTtlvDeserializer extends KmipDataTypeTtlvDeserializer<EndpointRole> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ENDPOINT_ROLE);
+    private final KmipTag kmipTag = EndpointRole.kmipTag;
+    private final EncodingType encodingType = EndpointRole.encodingType;
 
     @Override
     public EndpointRole deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class EndpointRoleTtlvDeserializer extends KmipDataTypeTtlvDeserializer<E
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        EndpointRole endpointrole = new EndpointRole(EndpointRole.fromValue(spec, value));
+        EndpointRole endpointrole = new EndpointRole(EndpointRole.fromValue(value));
 
-        if (!endpointrole.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!endpointrole.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("EndpointRole '%d' not supported for spec %s", value, spec));
         }
         return endpointrole;
     }

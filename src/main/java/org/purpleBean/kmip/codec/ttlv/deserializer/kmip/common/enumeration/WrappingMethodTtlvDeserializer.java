@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for WrappingMethod.
  */
 public class WrappingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<WrappingMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.WRAPPING_METHOD);
+    private final KmipTag kmipTag = WrappingMethod.kmipTag;
+    private final EncodingType encodingType = WrappingMethod.encodingType;
 
     @Override
     public WrappingMethod deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class WrappingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        WrappingMethod wrappingmethod = new WrappingMethod(WrappingMethod.fromValue(spec, value));
+        WrappingMethod wrappingmethod = new WrappingMethod(WrappingMethod.fromValue(value));
 
-        if (!wrappingmethod.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!wrappingmethod.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("WrappingMethod '%d' not supported for spec %s", value, spec));
         }
         return wrappingmethod;
     }

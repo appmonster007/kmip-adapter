@@ -2,11 +2,7 @@ package org.purpleBean.kmip.common;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 
 import java.util.Set;
 
@@ -19,6 +15,13 @@ public class AttributeIndex implements KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, AttributeIndex.class);
+        }
+    }
 
     private final int value;
 
@@ -37,7 +40,8 @@ public class AttributeIndex implements KmipDataType {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 }

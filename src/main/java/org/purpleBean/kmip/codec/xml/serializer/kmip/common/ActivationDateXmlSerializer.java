@@ -20,7 +20,7 @@ public class ActivationDateXmlSerializer extends KmipDataTypeXmlSerializer<Activ
     @Override
     public void serialize(ActivationDate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

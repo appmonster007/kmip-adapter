@@ -20,7 +20,7 @@ public class SampleStructureXmlSerializer extends KmipDataTypeXmlSerializer<Samp
     public void serialize(SampleStructure sampleStructure, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!sampleStructure.isSupportedFor(spec)) {
+        if (!sampleStructure.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", sampleStructure.getClass().getSimpleName(), spec));
         }
 

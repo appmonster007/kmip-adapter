@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for SplitKeyMethod.
  */
 public class SplitKeyMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SplitKeyMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_METHOD);
+    private final KmipTag kmipTag = SplitKeyMethod.kmipTag;
+    private final EncodingType encodingType = SplitKeyMethod.encodingType;
 
     @Override
     public SplitKeyMethod deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class SplitKeyMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        SplitKeyMethod splitkeymethod = new SplitKeyMethod(SplitKeyMethod.fromValue(spec, value));
+        SplitKeyMethod splitkeymethod = new SplitKeyMethod(SplitKeyMethod.fromValue(value));
 
-        if (!splitkeymethod.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!splitkeymethod.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("SplitKeyMethod '%d' not supported for spec %s", value, spec));
         }
         return splitkeymethod;
     }

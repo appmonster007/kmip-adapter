@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for SplitKeyMethod.
  */
 public class SplitKeyMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<SplitKeyMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_METHOD);
+    private final KmipTag kmipTag = SplitKeyMethod.kmipTag;
+    private final EncodingType encodingType = SplitKeyMethod.encodingType;
 
     @Override
     public SplitKeyMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class SplitKeyMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<S
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        SplitKeyMethod splitkeymethod = new SplitKeyMethod(SplitKeyMethod.fromName(spec, description));
-        if (!splitkeymethod.isSupportedFor(spec)) {
+        SplitKeyMethod splitkeymethod = new SplitKeyMethod(SplitKeyMethod.fromName(description));
+        if (!splitkeymethod.isSupported()) {
             throw new NoSuchElementException(
                 String.format("SplitKeyMethod '%s' not supported for spec %s", description, spec));
         }

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ProtectionLevel.
  */
 public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserializer<ProtectionLevel> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTECTION_LEVEL);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ProtectionLevel.kmipTag;
+    private final EncodingType encodingType = ProtectionLevel.encodingType;
 
     @Override
     public ProtectionLevel deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
         KmipSpec spec = KmipContext.getSpec();
         ProtectionLevel.Value protectionlevelValue;
         try {
-            protectionlevelValue = ProtectionLevel.fromName(spec, description);
+            protectionlevelValue = ProtectionLevel.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ProtectionLevel.class,
                     String.format("Unknown ProtectionLevel value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ProtectionLevelJsonDeserializer extends KmipDataTypeJsonDeserialize
         ProtectionLevel protectionlevel = new ProtectionLevel(protectionlevelValue);
 
         // Final validation: Ensure constructed ProtectionLevel is supported
-        if (!protectionlevel.isSupportedFor(spec)) {
+        if (!protectionlevel.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ProtectionLevel '%s' is not supported for KMIP spec %s", description, spec)
             );

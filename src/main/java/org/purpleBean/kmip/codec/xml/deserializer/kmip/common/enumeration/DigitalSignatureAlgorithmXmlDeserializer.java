@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DigitalSignatureAlgorithm.
  */
 public class DigitalSignatureAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<DigitalSignatureAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM);
+    private final KmipTag kmipTag = DigitalSignatureAlgorithm.kmipTag;
+    private final EncodingType encodingType = DigitalSignatureAlgorithm.encodingType;
 
     @Override
     public DigitalSignatureAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class DigitalSignatureAlgorithmXmlDeserializer extends KmipDataTypeXmlDes
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.fromName(spec, description));
-        if (!digitalsignaturealgorithm.isSupportedFor(spec)) {
+        DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.fromName(description));
+        if (!digitalsignaturealgorithm.isSupported()) {
             throw new NoSuchElementException(
                 String.format("DigitalSignatureAlgorithm '%s' not supported for spec %s", description, spec));
         }

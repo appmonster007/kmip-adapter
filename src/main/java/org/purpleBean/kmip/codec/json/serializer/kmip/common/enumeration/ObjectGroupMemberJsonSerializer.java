@@ -24,7 +24,7 @@ public class ObjectGroupMemberJsonSerializer extends KmipDataTypeJsonSerializer<
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("ObjectGroupMember '%s' is not supported for KMIP spec %s",
                             value.getDescription(), spec)

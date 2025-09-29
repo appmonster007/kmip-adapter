@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ProcessingStage.
  */
 public class ProcessingStageXmlDeserializer extends KmipDataTypeXmlDeserializer<ProcessingStage> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROCESSING_STAGE);
+    private final KmipTag kmipTag = ProcessingStage.kmipTag;
+    private final EncodingType encodingType = ProcessingStage.encodingType;
 
     @Override
     public ProcessingStage deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ProcessingStageXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ProcessingStage processingstage = new ProcessingStage(ProcessingStage.fromName(spec, description));
-        if (!processingstage.isSupportedFor(spec)) {
+        ProcessingStage processingstage = new ProcessingStage(ProcessingStage.fromName(description));
+        if (!processingstage.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ProcessingStage '%s' not supported for spec %s", description, spec));
         }

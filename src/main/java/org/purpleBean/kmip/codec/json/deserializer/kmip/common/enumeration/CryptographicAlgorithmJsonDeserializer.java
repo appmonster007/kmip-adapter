@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for CryptographicAlgorithm.
  */
 public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<CryptographicAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = CryptographicAlgorithm.kmipTag;
+    private final EncodingType encodingType = CryptographicAlgorithm.encodingType;
 
     @Override
     public CryptographicAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
         KmipSpec spec = KmipContext.getSpec();
         CryptographicAlgorithm.Value cryptographicalgorithmValue;
         try {
-            cryptographicalgorithmValue = CryptographicAlgorithm.fromName(spec, description);
+            cryptographicalgorithmValue = CryptographicAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(CryptographicAlgorithm.class,
                     String.format("Unknown CryptographicAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class CryptographicAlgorithmJsonDeserializer extends KmipDataTypeJsonDese
         CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(cryptographicalgorithmValue);
 
         // Final validation: Ensure constructed CryptographicAlgorithm is supported
-        if (!cryptographicalgorithm.isSupportedFor(spec)) {
+        if (!cryptographicalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("CryptographicAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

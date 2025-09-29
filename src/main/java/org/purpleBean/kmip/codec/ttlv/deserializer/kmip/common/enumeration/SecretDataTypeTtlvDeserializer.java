@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for SecretDataType.
  */
 public class SecretDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SecretDataType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA_TYPE);
+    private final KmipTag kmipTag = SecretDataType.kmipTag;
+    private final EncodingType encodingType = SecretDataType.encodingType;
 
     @Override
     public SecretDataType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class SecretDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        SecretDataType secretdatatype = new SecretDataType(SecretDataType.fromValue(spec, value));
+        SecretDataType secretdatatype = new SecretDataType(SecretDataType.fromValue(value));
 
-        if (!secretdatatype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!secretdatatype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("SecretDataType '%d' not supported for spec %s", value, spec));
         }
         return secretdatatype;
     }

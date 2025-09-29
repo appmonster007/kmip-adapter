@@ -46,13 +46,21 @@ class CertificateTypeTest extends AbstractKmipEnumerationSuite<CertificateType> 
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        CertificateType.Value byName = CertificateType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        CertificateType.Value byVal = CertificateType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    CertificateType.Value byName = CertificateType.fromName("X-Enum-Custom");
+                    CertificateType.Value byVal = CertificateType.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> CertificateType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> CertificateType.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class CertificateTypeTest extends AbstractKmipEnumerationSuite<CertificateType> 
         CertificateType.Value custom = CertificateType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> CertificateType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

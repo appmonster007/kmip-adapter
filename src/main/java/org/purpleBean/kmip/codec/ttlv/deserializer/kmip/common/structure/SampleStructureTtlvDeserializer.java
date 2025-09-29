@@ -39,7 +39,7 @@ public class SampleStructureTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         SampleStructure sampleStructure = builder.build();
 
-        if (!sampleStructure.isSupportedFor(spec)) {
+        if (!sampleStructure.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", sampleStructure.getClass().getSimpleName(), spec));
         }
         return sampleStructure;

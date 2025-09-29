@@ -32,7 +32,7 @@ public class UniqueIdentifierTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!uniqueIdentifier.isSupportedFor(spec)) {
+        if (!uniqueIdentifier.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", uniqueIdentifier.getClass().getSimpleName(), spec));
         }
         return uniqueIdentifier;

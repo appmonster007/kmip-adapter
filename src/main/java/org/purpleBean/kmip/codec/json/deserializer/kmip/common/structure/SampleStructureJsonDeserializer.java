@@ -78,7 +78,7 @@ public class SampleStructureJsonDeserializer extends KmipDataTypeJsonDeserialize
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!sampleStructure.isSupportedFor(spec)) {
+        if (!sampleStructure.isSupported()) {
             throw new NoSuchElementException(String.format("SampleStructure is not supported for KMIP spec %s", spec));
         }
 

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for OtpAlgorithm.
  */
 public class OtpAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<OtpAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OTP_ALGORITHM);
+    private final KmipTag kmipTag = OtpAlgorithm.kmipTag;
+    private final EncodingType encodingType = OtpAlgorithm.encodingType;
 
     @Override
     public OtpAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class OtpAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<O
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        OtpAlgorithm otpalgorithm = new OtpAlgorithm(OtpAlgorithm.fromValue(spec, value));
+        OtpAlgorithm otpalgorithm = new OtpAlgorithm(OtpAlgorithm.fromValue(value));
 
-        if (!otpalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!otpalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("OtpAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return otpalgorithm;
     }

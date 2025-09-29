@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for Operation.
  */
 public class OperationXmlDeserializer extends KmipDataTypeXmlDeserializer<Operation> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPERATION);
+    private final KmipTag kmipTag = Operation.kmipTag;
+    private final EncodingType encodingType = Operation.encodingType;
 
     @Override
     public Operation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class OperationXmlDeserializer extends KmipDataTypeXmlDeserializer<Operat
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        Operation operation = new Operation(Operation.fromName(spec, description));
-        if (!operation.isSupportedFor(spec)) {
+        Operation operation = new Operation(Operation.fromName(description));
+        if (!operation.isSupported()) {
             throw new NoSuchElementException(
                 String.format("Operation '%s' not supported for spec %s", description, spec));
         }

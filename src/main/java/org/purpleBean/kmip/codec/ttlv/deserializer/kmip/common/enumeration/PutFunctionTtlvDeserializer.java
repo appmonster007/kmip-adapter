@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for PutFunction.
  */
 public class PutFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<PutFunction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUT_FUNCTION);
+    private final KmipTag kmipTag = PutFunction.kmipTag;
+    private final EncodingType encodingType = PutFunction.encodingType;
 
     @Override
     public PutFunction deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class PutFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Pu
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        PutFunction putfunction = new PutFunction(PutFunction.fromValue(spec, value));
+        PutFunction putfunction = new PutFunction(PutFunction.fromValue(value));
 
-        if (!putfunction.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!putfunction.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("PutFunction '%d' not supported for spec %s", value, spec));
         }
         return putfunction;
     }

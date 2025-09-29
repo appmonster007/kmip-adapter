@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ClientRegistrationMethod.
  */
 public class ClientRegistrationMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<ClientRegistrationMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CLIENT_REGISTRATION_METHOD);
+    private final KmipTag kmipTag = ClientRegistrationMethod.kmipTag;
+    private final EncodingType encodingType = ClientRegistrationMethod.encodingType;
 
     @Override
     public ClientRegistrationMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ClientRegistrationMethodXmlDeserializer extends KmipDataTypeXmlDese
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(ClientRegistrationMethod.fromName(spec, description));
-        if (!clientregistrationmethod.isSupportedFor(spec)) {
+        ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(ClientRegistrationMethod.fromName(description));
+        if (!clientregistrationmethod.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ClientRegistrationMethod '%s' not supported for spec %s", description, spec));
         }

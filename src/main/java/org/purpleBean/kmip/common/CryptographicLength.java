@@ -18,11 +18,11 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_LENGTH);
     public static final EncodingType encodingType = EncodingType.INTEGER;
-    private static final Set<KmipSpec> SUPPORTED_VERSIONS = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         // Register with KmipDataType and KmipAttribute
-        for (KmipSpec spec : SUPPORTED_VERSIONS) {
+        for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicLength.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicLength.class, CryptographicLength::of);
@@ -81,9 +81,10 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         Objects.requireNonNull(spec, "KMIP spec cannot be null");
-        return SUPPORTED_VERSIONS.contains(spec);
+        return supportedVersions.contains(spec);
     }
 
     // KmipAttribute implementation

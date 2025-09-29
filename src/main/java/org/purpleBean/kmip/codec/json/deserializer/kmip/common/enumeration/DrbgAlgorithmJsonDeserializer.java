@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for DrbgAlgorithm.
  */
 public class DrbgAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<DrbgAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DRBG_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = DrbgAlgorithm.kmipTag;
+    private final EncodingType encodingType = DrbgAlgorithm.encodingType;
 
     @Override
     public DrbgAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class DrbgAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<
         KmipSpec spec = KmipContext.getSpec();
         DrbgAlgorithm.Value drbgalgorithmValue;
         try {
-            drbgalgorithmValue = DrbgAlgorithm.fromName(spec, description);
+            drbgalgorithmValue = DrbgAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(DrbgAlgorithm.class,
                     String.format("Unknown DrbgAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class DrbgAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<
         DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(drbgalgorithmValue);
 
         // Final validation: Ensure constructed DrbgAlgorithm is supported
-        if (!drbgalgorithm.isSupportedFor(spec)) {
+        if (!drbgalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("DrbgAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

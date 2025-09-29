@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for RotateNameType.
  */
 public class RotateNameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<RotateNameType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ROTATE_NAME_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = RotateNameType.kmipTag;
+    private final EncodingType encodingType = RotateNameType.encodingType;
 
     @Override
     public RotateNameType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class RotateNameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         RotateNameType.Value rotatenametypeValue;
         try {
-            rotatenametypeValue = RotateNameType.fromName(spec, description);
+            rotatenametypeValue = RotateNameType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(RotateNameType.class,
                     String.format("Unknown RotateNameType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class RotateNameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         RotateNameType rotatenametype = new RotateNameType(rotatenametypeValue);
 
         // Final validation: Ensure constructed RotateNameType is supported
-        if (!rotatenametype.isSupportedFor(spec)) {
+        if (!rotatenametype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("RotateNameType '%s' is not supported for KMIP spec %s", description, spec)
             );

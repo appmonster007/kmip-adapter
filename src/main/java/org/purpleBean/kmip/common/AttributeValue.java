@@ -22,6 +22,15 @@ public class AttributeValue implements KmipStructure, KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_VALUE);
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            for (EncodingType encodingType : EncodingType.values()) {
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, AttributeValue.class);
+            }
+        }
+    }
+
     @NonNull
     private EncodingType encodingType;
     @NonNull
@@ -96,7 +105,8 @@ public class AttributeValue implements KmipStructure, KmipDataType {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 

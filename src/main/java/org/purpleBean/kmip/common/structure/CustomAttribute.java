@@ -110,7 +110,8 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 

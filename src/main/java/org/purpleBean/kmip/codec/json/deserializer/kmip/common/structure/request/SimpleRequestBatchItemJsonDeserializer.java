@@ -44,7 +44,7 @@ public class SimpleRequestBatchItemJsonDeserializer extends KmipDataTypeJsonDese
         SimpleRequestBatchItem batchItem = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!batchItem.isSupportedFor(spec)) {
+        if (!batchItem.isSupported()) {
             throw new NoSuchElementException();
         }
 

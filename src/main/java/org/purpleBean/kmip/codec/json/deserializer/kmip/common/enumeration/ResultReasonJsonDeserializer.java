@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ResultReason.
  */
 public class ResultReasonJsonDeserializer extends KmipDataTypeJsonDeserializer<ResultReason> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_REASON);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ResultReason.kmipTag;
+    private final EncodingType encodingType = ResultReason.encodingType;
 
     @Override
     public ResultReason deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ResultReasonJsonDeserializer extends KmipDataTypeJsonDeserializer<R
         KmipSpec spec = KmipContext.getSpec();
         ResultReason.Value resultreasonValue;
         try {
-            resultreasonValue = ResultReason.fromName(spec, description);
+            resultreasonValue = ResultReason.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ResultReason.class,
                     String.format("Unknown ResultReason value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ResultReasonJsonDeserializer extends KmipDataTypeJsonDeserializer<R
         ResultReason resultreason = new ResultReason(resultreasonValue);
 
         // Final validation: Ensure constructed ResultReason is supported
-        if (!resultreason.isSupportedFor(spec)) {
+        if (!resultreason.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ResultReason '%s' is not supported for KMIP spec %s", description, spec)
             );

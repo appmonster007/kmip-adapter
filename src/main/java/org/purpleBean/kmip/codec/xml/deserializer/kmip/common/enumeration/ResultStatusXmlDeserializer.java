@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ResultStatus.
  */
 public class ResultStatusXmlDeserializer extends KmipDataTypeXmlDeserializer<ResultStatus> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_STATUS);
+    private final KmipTag kmipTag = ResultStatus.kmipTag;
+    private final EncodingType encodingType = ResultStatus.encodingType;
 
     @Override
     public ResultStatus deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ResultStatusXmlDeserializer extends KmipDataTypeXmlDeserializer<Res
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ResultStatus resultstatus = new ResultStatus(ResultStatus.fromName(spec, description));
-        if (!resultstatus.isSupportedFor(spec)) {
+        ResultStatus resultstatus = new ResultStatus(ResultStatus.fromName(description));
+        if (!resultstatus.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ResultStatus '%s' not supported for spec %s", description, spec));
         }

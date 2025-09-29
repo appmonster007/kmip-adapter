@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for AsynchronousIndicator.
  */
 public class AsynchronousIndicatorXmlDeserializer extends KmipDataTypeXmlDeserializer<AsynchronousIndicator> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ASYNCHRONOUS_INDICATOR);
+    private final KmipTag kmipTag = AsynchronousIndicator.kmipTag;
+    private final EncodingType encodingType = AsynchronousIndicator.encodingType;
 
     @Override
     public AsynchronousIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class AsynchronousIndicatorXmlDeserializer extends KmipDataTypeXmlDeseria
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromName(spec, description));
-        if (!asynchronousindicator.isSupportedFor(spec)) {
+        AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromName(description));
+        if (!asynchronousindicator.isSupported()) {
             throw new NoSuchElementException(
                 String.format("AsynchronousIndicator '%s' not supported for spec %s", description, spec));
         }

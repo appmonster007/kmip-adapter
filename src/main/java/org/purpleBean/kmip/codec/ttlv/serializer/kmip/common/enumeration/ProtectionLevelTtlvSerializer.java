@@ -23,8 +23,11 @@ public class ProtectionLevelTtlvSerializer extends KmipDataTypeTtlvSerializer<Pr
 
     public TtlvObject serializeToTtlvObject(ProtectionLevel value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("ProtectionLevel '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for KeyValueLocationType.
  */
 public class KeyValueLocationTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyValueLocationType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_TYPE);
+    private final KmipTag kmipTag = KeyValueLocationType.kmipTag;
+    private final EncodingType encodingType = KeyValueLocationType.encodingType;
 
     @Override
     public KeyValueLocationType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class KeyValueLocationTypeTtlvDeserializer extends KmipDataTypeTtlvDeseri
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(KeyValueLocationType.fromValue(spec, value));
+        KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(KeyValueLocationType.fromValue(value));
 
-        if (!keyvaluelocationtype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!keyvaluelocationtype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("KeyValueLocationType '%d' not supported for spec %s", value, spec));
         }
         return keyvaluelocationtype;
     }

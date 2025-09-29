@@ -20,8 +20,11 @@ public class EncodingOptionXmlSerializer extends KmipDataTypeXmlSerializer<Encod
     @Override
     public void serialize(EncodingOption value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("EncodingOption '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {

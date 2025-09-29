@@ -21,7 +21,7 @@ public class CryptographicLengthJsonSerializer extends KmipDataTypeJsonSerialize
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!cryptographicLength.isSupportedFor(spec)) {
+        if (!cryptographicLength.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", cryptographicLength.getKmipTag().getDescription(), spec));
         }
 

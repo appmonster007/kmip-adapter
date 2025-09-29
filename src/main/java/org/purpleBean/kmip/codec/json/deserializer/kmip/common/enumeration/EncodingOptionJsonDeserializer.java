@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for EncodingOption.
  */
 public class EncodingOptionJsonDeserializer extends KmipDataTypeJsonDeserializer<EncodingOption> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ENCODING_OPTION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = EncodingOption.kmipTag;
+    private final EncodingType encodingType = EncodingOption.encodingType;
 
     @Override
     public EncodingOption deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class EncodingOptionJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         EncodingOption.Value encodingoptionValue;
         try {
-            encodingoptionValue = EncodingOption.fromName(spec, description);
+            encodingoptionValue = EncodingOption.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(EncodingOption.class,
                     String.format("Unknown EncodingOption value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class EncodingOptionJsonDeserializer extends KmipDataTypeJsonDeserializer
         EncodingOption encodingoption = new EncodingOption(encodingoptionValue);
 
         // Final validation: Ensure constructed EncodingOption is supported
-        if (!encodingoption.isSupportedFor(spec)) {
+        if (!encodingoption.isSupported()) {
             throw new NoSuchElementException(
                     String.format("EncodingOption '%s' is not supported for KMIP spec %s", description, spec)
             );

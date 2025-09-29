@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for AttestationType.
  */
 public class AttestationTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttestationType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTESTATION_TYPE);
+    private final KmipTag kmipTag = AttestationType.kmipTag;
+    private final EncodingType encodingType = AttestationType.encodingType;
 
     @Override
     public AttestationType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class AttestationTypeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        AttestationType attestationtype = new AttestationType(AttestationType.fromValue(spec, value));
+        AttestationType attestationtype = new AttestationType(AttestationType.fromValue(value));
 
-        if (!attestationtype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!attestationtype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("AttestationType '%d' not supported for spec %s", value, spec));
         }
         return attestationtype;
     }

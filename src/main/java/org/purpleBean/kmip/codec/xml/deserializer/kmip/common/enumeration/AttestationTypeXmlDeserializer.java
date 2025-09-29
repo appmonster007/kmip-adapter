@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for AttestationType.
  */
 public class AttestationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<AttestationType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTESTATION_TYPE);
+    private final KmipTag kmipTag = AttestationType.kmipTag;
+    private final EncodingType encodingType = AttestationType.encodingType;
 
     @Override
     public AttestationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class AttestationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        AttestationType attestationtype = new AttestationType(AttestationType.fromName(spec, description));
-        if (!attestationtype.isSupportedFor(spec)) {
+        AttestationType attestationtype = new AttestationType(AttestationType.fromName(description));
+        if (!attestationtype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("AttestationType '%s' not supported for spec %s", description, spec));
         }

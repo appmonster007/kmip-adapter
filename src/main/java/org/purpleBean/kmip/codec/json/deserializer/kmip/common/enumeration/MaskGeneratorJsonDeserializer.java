@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for MaskGenerator.
  */
 public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<MaskGenerator> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MASK_GENERATOR);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = MaskGenerator.kmipTag;
+    private final EncodingType encodingType = MaskGenerator.encodingType;
 
     @Override
     public MaskGenerator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
         KmipSpec spec = KmipContext.getSpec();
         MaskGenerator.Value maskgeneratorValue;
         try {
-            maskgeneratorValue = MaskGenerator.fromName(spec, description);
+            maskgeneratorValue = MaskGenerator.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(MaskGenerator.class,
                     String.format("Unknown MaskGenerator value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class MaskGeneratorJsonDeserializer extends KmipDataTypeJsonDeserializer<
         MaskGenerator maskgenerator = new MaskGenerator(maskgeneratorValue);
 
         // Final validation: Ensure constructed MaskGenerator is supported
-        if (!maskgenerator.isSupportedFor(spec)) {
+        if (!maskgenerator.isSupported()) {
             throw new NoSuchElementException(
                     String.format("MaskGenerator '%s' is not supported for KMIP spec %s", description, spec)
             );

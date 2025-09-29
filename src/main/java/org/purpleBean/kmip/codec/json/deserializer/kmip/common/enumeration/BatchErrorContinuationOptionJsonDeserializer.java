@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for BatchErrorContinuationOption.
  */
 public class BatchErrorContinuationOptionJsonDeserializer extends KmipDataTypeJsonDeserializer<BatchErrorContinuationOption> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ERROR_CONTINUATION_OPTION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = BatchErrorContinuationOption.kmipTag;
+    private final EncodingType encodingType = BatchErrorContinuationOption.encodingType;
 
     @Override
     public BatchErrorContinuationOption deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class BatchErrorContinuationOptionJsonDeserializer extends KmipDataTypeJs
         KmipSpec spec = KmipContext.getSpec();
         BatchErrorContinuationOption.Value batcherrorcontinuationoptionValue;
         try {
-            batcherrorcontinuationoptionValue = BatchErrorContinuationOption.fromName(spec, description);
+            batcherrorcontinuationoptionValue = BatchErrorContinuationOption.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(BatchErrorContinuationOption.class,
                     String.format("Unknown BatchErrorContinuationOption value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class BatchErrorContinuationOptionJsonDeserializer extends KmipDataTypeJs
         BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(batcherrorcontinuationoptionValue);
 
         // Final validation: Ensure constructed BatchErrorContinuationOption is supported
-        if (!batcherrorcontinuationoption.isSupportedFor(spec)) {
+        if (!batcherrorcontinuationoption.isSupported()) {
             throw new NoSuchElementException(
                     String.format("BatchErrorContinuationOption '%s' is not supported for KMIP spec %s", description, spec)
             );

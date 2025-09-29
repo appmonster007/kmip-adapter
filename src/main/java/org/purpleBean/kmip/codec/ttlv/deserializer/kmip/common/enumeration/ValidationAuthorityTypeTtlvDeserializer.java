@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ValidationAuthorityType.
  */
 public class ValidationAuthorityTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ValidationAuthorityType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDATION_AUTHORITY_TYPE);
+    private final KmipTag kmipTag = ValidationAuthorityType.kmipTag;
+    private final EncodingType encodingType = ValidationAuthorityType.encodingType;
 
     @Override
     public ValidationAuthorityType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ValidationAuthorityTypeTtlvDeserializer extends KmipDataTypeTtlvDes
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(ValidationAuthorityType.fromValue(spec, value));
+        ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(ValidationAuthorityType.fromValue(value));
 
-        if (!validationauthoritytype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!validationauthoritytype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ValidationAuthorityType '%d' not supported for spec %s", value, spec));
         }
         return validationauthoritytype;
     }

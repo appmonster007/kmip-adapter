@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for PaddingMethod.
  */
 public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<PaddingMethod> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PADDING_METHOD);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = PaddingMethod.kmipTag;
+    private final EncodingType encodingType = PaddingMethod.encodingType;
 
     @Override
     public PaddingMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
         KmipSpec spec = KmipContext.getSpec();
         PaddingMethod.Value paddingmethodValue;
         try {
-            paddingmethodValue = PaddingMethod.fromName(spec, description);
+            paddingmethodValue = PaddingMethod.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(PaddingMethod.class,
                     String.format("Unknown PaddingMethod value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class PaddingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<
         PaddingMethod paddingmethod = new PaddingMethod(paddingmethodValue);
 
         // Final validation: Ensure constructed PaddingMethod is supported
-        if (!paddingmethod.isSupportedFor(spec)) {
+        if (!paddingmethod.isSupported()) {
             throw new NoSuchElementException(
                     String.format("PaddingMethod '%s' is not supported for KMIP spec %s", description, spec)
             );

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for CancellationResult.
  */
 public class CancellationResultTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CancellationResult> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CANCELLATION_RESULT);
+    private final KmipTag kmipTag = CancellationResult.kmipTag;
+    private final EncodingType encodingType = CancellationResult.encodingType;
 
     @Override
     public CancellationResult deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class CancellationResultTtlvDeserializer extends KmipDataTypeTtlvDeserial
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromValue(spec, value));
+        CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromValue(value));
 
-        if (!cancellationresult.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!cancellationresult.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("CancellationResult '%d' not supported for spec %s", value, spec));
         }
         return cancellationresult;
     }

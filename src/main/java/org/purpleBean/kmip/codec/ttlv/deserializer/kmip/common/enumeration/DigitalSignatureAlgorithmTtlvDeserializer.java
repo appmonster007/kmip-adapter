@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DigitalSignatureAlgorithm.
  */
 public class DigitalSignatureAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DigitalSignatureAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM);
+    private final KmipTag kmipTag = DigitalSignatureAlgorithm.kmipTag;
+    private final EncodingType encodingType = DigitalSignatureAlgorithm.encodingType;
 
     @Override
     public DigitalSignatureAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DigitalSignatureAlgorithmTtlvDeserializer extends KmipDataTypeTtlvD
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.fromValue(spec, value));
+        DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.fromValue(value));
 
-        if (!digitalsignaturealgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!digitalsignaturealgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DigitalSignatureAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return digitalsignaturealgorithm;
     }

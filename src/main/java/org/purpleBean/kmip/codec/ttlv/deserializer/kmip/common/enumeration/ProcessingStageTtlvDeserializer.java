@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ProcessingStage.
  */
 public class ProcessingStageTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProcessingStage> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROCESSING_STAGE);
+    private final KmipTag kmipTag = ProcessingStage.kmipTag;
+    private final EncodingType encodingType = ProcessingStage.encodingType;
 
     @Override
     public ProcessingStage deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ProcessingStageTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ProcessingStage processingstage = new ProcessingStage(ProcessingStage.fromValue(spec, value));
+        ProcessingStage processingstage = new ProcessingStage(ProcessingStage.fromValue(value));
 
-        if (!processingstage.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!processingstage.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ProcessingStage '%d' not supported for spec %s", value, spec));
         }
         return processingstage;
     }

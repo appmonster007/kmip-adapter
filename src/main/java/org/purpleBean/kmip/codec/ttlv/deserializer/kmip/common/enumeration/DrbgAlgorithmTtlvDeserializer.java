@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DrbgAlgorithm.
  */
 public class DrbgAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DrbgAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DRBG_ALGORITHM);
+    private final KmipTag kmipTag = DrbgAlgorithm.kmipTag;
+    private final EncodingType encodingType = DrbgAlgorithm.encodingType;
 
     @Override
     public DrbgAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DrbgAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromValue(spec, value));
+        DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromValue(value));
 
-        if (!drbgalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!drbgalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DrbgAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return drbgalgorithm;
     }

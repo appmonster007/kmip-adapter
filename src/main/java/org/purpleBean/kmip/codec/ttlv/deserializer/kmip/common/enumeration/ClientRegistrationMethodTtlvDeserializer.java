@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ClientRegistrationMethod.
  */
 public class ClientRegistrationMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ClientRegistrationMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CLIENT_REGISTRATION_METHOD);
+    private final KmipTag kmipTag = ClientRegistrationMethod.kmipTag;
+    private final EncodingType encodingType = ClientRegistrationMethod.encodingType;
 
     @Override
     public ClientRegistrationMethod deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ClientRegistrationMethodTtlvDeserializer extends KmipDataTypeTtlvDe
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(ClientRegistrationMethod.fromValue(spec, value));
+        ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(ClientRegistrationMethod.fromValue(value));
 
-        if (!clientregistrationmethod.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!clientregistrationmethod.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ClientRegistrationMethod '%d' not supported for spec %s", value, spec));
         }
         return clientregistrationmethod;
     }

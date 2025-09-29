@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for Operation.
  */
 public class OperationTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Operation> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPERATION);
+    private final KmipTag kmipTag = Operation.kmipTag;
+    private final EncodingType encodingType = Operation.encodingType;
 
     @Override
     public Operation deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class OperationTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Oper
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        Operation operation = new Operation(Operation.fromValue(spec, value));
+        Operation operation = new Operation(Operation.fromValue(value));
 
-        if (!operation.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!operation.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("Operation '%d' not supported for spec %s", value, spec));
         }
         return operation;
     }

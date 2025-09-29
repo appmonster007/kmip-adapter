@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ValidityIndicator.
  */
 public class ValidityIndicatorXmlDeserializer extends KmipDataTypeXmlDeserializer<ValidityIndicator> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDITY_INDICATOR);
+    private final KmipTag kmipTag = ValidityIndicator.kmipTag;
+    private final EncodingType encodingType = ValidityIndicator.encodingType;
 
     @Override
     public ValidityIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ValidityIndicatorXmlDeserializer extends KmipDataTypeXmlDeserialize
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ValidityIndicator validityindicator = new ValidityIndicator(ValidityIndicator.fromName(spec, description));
-        if (!validityindicator.isSupportedFor(spec)) {
+        ValidityIndicator validityindicator = new ValidityIndicator(ValidityIndicator.fromName(description));
+        if (!validityindicator.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ValidityIndicator '%s' not supported for spec %s", description, spec));
         }

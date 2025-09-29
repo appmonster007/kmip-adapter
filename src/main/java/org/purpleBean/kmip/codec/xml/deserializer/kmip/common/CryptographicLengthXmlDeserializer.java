@@ -64,7 +64,7 @@ public class CryptographicLengthXmlDeserializer extends KmipDataTypeXmlDeseriali
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!cryptographicLength.isSupportedFor(spec)) {
+        if (!cryptographicLength.isSupported()) {
             ctxt.reportInputMismatch(CryptographicLength.class, "CryptographicLength not supported for spec " + spec);
             return null;
         }

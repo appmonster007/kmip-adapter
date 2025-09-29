@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DeactivationReasonCode.
  */
 public class DeactivationReasonCodeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DeactivationReasonCode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEACTIVATION_REASON_CODE);
+    private final KmipTag kmipTag = DeactivationReasonCode.kmipTag;
+    private final EncodingType encodingType = DeactivationReasonCode.encodingType;
 
     @Override
     public DeactivationReasonCode deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DeactivationReasonCodeTtlvDeserializer extends KmipDataTypeTtlvDese
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(DeactivationReasonCode.fromValue(spec, value));
+        DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(DeactivationReasonCode.fromValue(value));
 
-        if (!deactivationreasoncode.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!deactivationreasoncode.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DeactivationReasonCode '%d' not supported for spec %s", value, spec));
         }
         return deactivationreasoncode;
     }

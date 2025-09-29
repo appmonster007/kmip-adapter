@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for UniqueIdentifier.
  */
 public class UniqueIdentifierJsonDeserializer extends KmipDataTypeJsonDeserializer<UniqueIdentifier> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = UniqueIdentifier.kmipTag;
+    private final EncodingType encodingType = UniqueIdentifier.encodingType;
 
     @Override
     public UniqueIdentifier deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class UniqueIdentifierJsonDeserializer extends KmipDataTypeJsonDeserializ
         KmipSpec spec = KmipContext.getSpec();
         UniqueIdentifier.Value uniqueidentifierValue;
         try {
-            uniqueidentifierValue = UniqueIdentifier.fromName(spec, description);
+            uniqueidentifierValue = UniqueIdentifier.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(UniqueIdentifier.class,
                     String.format("Unknown UniqueIdentifier value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class UniqueIdentifierJsonDeserializer extends KmipDataTypeJsonDeserializ
         UniqueIdentifier uniqueidentifier = new UniqueIdentifier(uniqueidentifierValue);
 
         // Final validation: Ensure constructed UniqueIdentifier is supported
-        if (!uniqueidentifier.isSupportedFor(spec)) {
+        if (!uniqueidentifier.isSupported()) {
             throw new NoSuchElementException(
                     String.format("UniqueIdentifier '%s' is not supported for KMIP spec %s", description, spec)
             );

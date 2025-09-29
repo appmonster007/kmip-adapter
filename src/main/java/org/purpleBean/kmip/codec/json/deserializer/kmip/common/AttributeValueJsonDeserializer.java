@@ -87,7 +87,7 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
         AttributeValue attributeValue = AttributeValue.builder().encodingType(encodingType).value(obj).build();
 
         // Validate KMIP spec compatibility
-        if (!attributeValue.isSupportedFor(spec)) {
+        if (!attributeValue.isSupported()) {
             throw new NoSuchElementException(String.format("AttributeValue is not supported for KMIP spec %s", spec));
         }
 
@@ -126,7 +126,7 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
 
 
         KmipSpec spec = KmipContext.getSpec();
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(spec, tag.getValue(), encodingType);
+        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(tag.getValue(), encodingType);
 
         return p.getCodec().treeToValue(node, clazz);
     }

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for QueryFunction.
  */
 public class QueryFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<QueryFunction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.QUERY_FUNCTION);
+    private final KmipTag kmipTag = QueryFunction.kmipTag;
+    private final EncodingType encodingType = QueryFunction.encodingType;
 
     @Override
     public QueryFunction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class QueryFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<Qu
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        QueryFunction queryfunction = new QueryFunction(QueryFunction.fromName(spec, description));
-        if (!queryfunction.isSupportedFor(spec)) {
+        QueryFunction queryfunction = new QueryFunction(QueryFunction.fromName(description));
+        if (!queryfunction.isSupported()) {
             throw new NoSuchElementException(
                 String.format("QueryFunction '%s' not supported for spec %s", description, spec));
         }

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for CryptographicAlgorithm.
  */
 public class CryptographicAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CryptographicAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
+    private final KmipTag kmipTag = CryptographicAlgorithm.kmipTag;
+    private final EncodingType encodingType = CryptographicAlgorithm.encodingType;
 
     @Override
     public CryptographicAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class CryptographicAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDese
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.fromValue(spec, value));
+        CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.fromValue(value));
 
-        if (!cryptographicalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!cryptographicalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("CryptographicAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return cryptographicalgorithm;
     }

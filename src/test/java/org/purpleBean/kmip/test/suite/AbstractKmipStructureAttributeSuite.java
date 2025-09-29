@@ -75,7 +75,6 @@ public abstract class AbstractKmipStructureAttributeSuite<T extends KmipStructur
         AttributeName name = obj.getAttributeName();
         AttributeValue value = obj.getAttributeValue();
         BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> buildObjectFromAttributeValue = KmipAttribute.getAttributeBuilderFromRegistry(
-                defaultSpec,
                 obj.getKmipTag().getValue(),
                 obj.getEncodingType()
         );

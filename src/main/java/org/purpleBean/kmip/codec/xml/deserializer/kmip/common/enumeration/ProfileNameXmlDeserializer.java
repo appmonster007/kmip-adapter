@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ProfileName.
  */
 public class ProfileNameXmlDeserializer extends KmipDataTypeXmlDeserializer<ProfileName> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROFILE_NAME);
+    private final KmipTag kmipTag = ProfileName.kmipTag;
+    private final EncodingType encodingType = ProfileName.encodingType;
 
     @Override
     public ProfileName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ProfileNameXmlDeserializer extends KmipDataTypeXmlDeserializer<Prof
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ProfileName profilename = new ProfileName(ProfileName.fromName(spec, description));
-        if (!profilename.isSupportedFor(spec)) {
+        ProfileName profilename = new ProfileName(ProfileName.fromName(description));
+        if (!profilename.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ProfileName '%s' not supported for spec %s", description, spec));
         }

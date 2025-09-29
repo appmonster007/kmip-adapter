@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ObjectType.
  */
 public class ObjectTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<ObjectType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_TYPE);
+    private final KmipTag kmipTag = ObjectType.kmipTag;
+    private final EncodingType encodingType = ObjectType.encodingType;
 
     @Override
     public ObjectType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ObjectTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Objec
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ObjectType objecttype = new ObjectType(ObjectType.fromName(spec, description));
-        if (!objecttype.isSupportedFor(spec)) {
+        ObjectType objecttype = new ObjectType(ObjectType.fromName(description));
+        if (!objecttype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ObjectType '%s' not supported for spec %s", description, spec));
         }

@@ -20,8 +20,11 @@ public class DestroyActionXmlSerializer extends KmipDataTypeXmlSerializer<Destro
     @Override
     public void serialize(DestroyAction value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("DestroyAction '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {

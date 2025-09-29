@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DeactivationReasonCode.
  */
 public class DeactivationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeserializer<DeactivationReasonCode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEACTIVATION_REASON_CODE);
+    private final KmipTag kmipTag = DeactivationReasonCode.kmipTag;
+    private final EncodingType encodingType = DeactivationReasonCode.encodingType;
 
     @Override
     public DeactivationReasonCode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,10 +54,10 @@ public class DeactivationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeseri
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(DeactivationReasonCode.fromName(spec, description));
-        if (!deactivationreasoncode.isSupportedFor(spec)) {
+        DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(DeactivationReasonCode.fromName(description));
+        if (!deactivationreasoncode.isSupported()) {
             throw new NoSuchElementException(
-                    String.format("DeactivationReasonCode '%s' not supported for spec %s", description, spec));
+                String.format("DeactivationReasonCode '%s' not supported for spec %s", description, spec));
         }
 
         return deactivationreasoncode;

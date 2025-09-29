@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for NameType.
  */
 public class NameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<NameType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME_TYPE);
+    private final KmipTag kmipTag = NameType.kmipTag;
+    private final EncodingType encodingType = NameType.encodingType;
 
     @Override
     public NameType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class NameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<NameT
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        NameType nametype = new NameType(NameType.fromValue(spec, value));
+        NameType nametype = new NameType(NameType.fromValue(value));
 
-        if (!nametype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!nametype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("NameType '%d' not supported for spec %s", value, spec));
         }
         return nametype;
     }

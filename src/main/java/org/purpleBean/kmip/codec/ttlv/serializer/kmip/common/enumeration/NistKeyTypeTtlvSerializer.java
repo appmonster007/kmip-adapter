@@ -23,8 +23,11 @@ public class NistKeyTypeTtlvSerializer extends KmipDataTypeTtlvSerializer<NistKe
 
     public TtlvObject serializeToTtlvObject(NistKeyType value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("NistKeyType '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

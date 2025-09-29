@@ -56,7 +56,7 @@ public class UniqueIdentifierXmlDeserializer extends KmipDataTypeXmlDeserializer
         UniqueIdentifier uniqueIdentifier = UniqueIdentifier.builder().value(value).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!uniqueIdentifier.isSupportedFor(spec)) {
+        if (!uniqueIdentifier.isSupported()) {
             ctxt.reportInputMismatch(UniqueIdentifier.class, "UniqueIdentifier not supported for spec " + spec);
             return null;
         }

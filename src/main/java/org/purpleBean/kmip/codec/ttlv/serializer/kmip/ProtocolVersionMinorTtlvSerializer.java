@@ -19,7 +19,7 @@ public class ProtocolVersionMinorTtlvSerializer extends KmipDataTypeTtlvSerializ
 
     private TtlvObject serializeToTtlvObject(ProtocolVersion.ProtocolVersionMinor value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

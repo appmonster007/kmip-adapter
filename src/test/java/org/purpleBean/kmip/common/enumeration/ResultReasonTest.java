@@ -46,13 +46,21 @@ class ResultReasonTest extends AbstractKmipEnumerationSuite<ResultReason> {
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        ResultReason.Value byName = ResultReason.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        ResultReason.Value byVal = ResultReason.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    ResultReason.Value byName = ResultReason.fromName("X-Enum-Custom");
+                    ResultReason.Value byVal = ResultReason.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> ResultReason.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> ResultReason.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class ResultReasonTest extends AbstractKmipEnumerationSuite<ResultReason> {
         ResultReason.Value custom = ResultReason.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> ResultReason.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

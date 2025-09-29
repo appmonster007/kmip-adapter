@@ -50,7 +50,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
 
         SampleStructure sampleStructure = builder.build();
 
-        if (!sampleStructure.isSupportedFor(spec)) {
+        if (!sampleStructure.isSupported()) {
             ctxt.reportInputMismatch(SampleStructure.class, "SampleStructure not supported for spec " + spec);
             return null;
         }

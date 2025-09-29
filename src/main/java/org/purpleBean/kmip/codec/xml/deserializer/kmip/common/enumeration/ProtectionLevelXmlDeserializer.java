@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ProtectionLevel.
  */
 public class ProtectionLevelXmlDeserializer extends KmipDataTypeXmlDeserializer<ProtectionLevel> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTECTION_LEVEL);
+    private final KmipTag kmipTag = ProtectionLevel.kmipTag;
+    private final EncodingType encodingType = ProtectionLevel.encodingType;
 
     @Override
     public ProtectionLevel deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ProtectionLevelXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ProtectionLevel protectionlevel = new ProtectionLevel(ProtectionLevel.fromName(spec, description));
-        if (!protectionlevel.isSupportedFor(spec)) {
+        ProtectionLevel protectionlevel = new ProtectionLevel(ProtectionLevel.fromName(description));
+        if (!protectionlevel.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ProtectionLevel '%s' not supported for spec %s", description, spec));
         }

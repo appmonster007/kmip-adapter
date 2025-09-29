@@ -21,7 +21,7 @@ public class DestroyDateJsonSerializer extends KmipDataTypeJsonSerializer<Destro
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!destroyDate.isSupportedFor(spec)) {
+        if (!destroyDate.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", destroyDate.getKmipTag().getDescription(), spec));
         }
 

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for UnwrapMode.
  */
 public class UnwrapModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<UnwrapMode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNWRAP_MODE);
+    private final KmipTag kmipTag = UnwrapMode.kmipTag;
+    private final EncodingType encodingType = UnwrapMode.encodingType;
 
     @Override
     public UnwrapMode deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class UnwrapModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Unw
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        UnwrapMode unwrapmode = new UnwrapMode(UnwrapMode.fromValue(spec, value));
+        UnwrapMode unwrapmode = new UnwrapMode(UnwrapMode.fromValue(value));
 
-        if (!unwrapmode.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!unwrapmode.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("UnwrapMode '%d' not supported for spec %s", value, spec));
         }
         return unwrapmode;
     }

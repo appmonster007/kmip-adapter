@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for CredentialType.
  */
 public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<CredentialType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CREDENTIAL_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = CredentialType.kmipTag;
+    private final EncodingType encodingType = CredentialType.encodingType;
 
     @Override
     public CredentialType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         CredentialType.Value credentialtypeValue;
         try {
-            credentialtypeValue = CredentialType.fromName(spec, description);
+            credentialtypeValue = CredentialType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(CredentialType.class,
                     String.format("Unknown CredentialType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class CredentialTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         CredentialType credentialtype = new CredentialType(credentialtypeValue);
 
         // Final validation: Ensure constructed CredentialType is supported
-        if (!credentialtype.isSupportedFor(spec)) {
+        if (!credentialtype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("CredentialType '%s' is not supported for KMIP spec %s", description, spec)
             );

@@ -23,8 +23,11 @@ public class WrappingMethodTtlvSerializer extends KmipDataTypeTtlvSerializer<Wra
 
     public TtlvObject serializeToTtlvObject(WrappingMethod value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("WrappingMethod '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

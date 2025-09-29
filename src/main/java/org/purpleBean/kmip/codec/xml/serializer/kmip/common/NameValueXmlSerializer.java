@@ -18,7 +18,7 @@ public class NameValueXmlSerializer extends KmipDataTypeXmlSerializer<NameValue>
     public void serialize(NameValue nameValue, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!nameValue.isSupportedFor(spec)) {
+        if (!nameValue.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", nameValue.getClass().getSimpleName(), spec));
         }
 

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ShreddingAlgorithm.
  */
 public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<ShreddingAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SHREDDING_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ShreddingAlgorithm.kmipTag;
+    private final EncodingType encodingType = ShreddingAlgorithm.encodingType;
 
     @Override
     public ShreddingAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
         KmipSpec spec = KmipContext.getSpec();
         ShreddingAlgorithm.Value shreddingalgorithmValue;
         try {
-            shreddingalgorithmValue = ShreddingAlgorithm.fromName(spec, description);
+            shreddingalgorithmValue = ShreddingAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ShreddingAlgorithm.class,
                     String.format("Unknown ShreddingAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ShreddingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserial
         ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(shreddingalgorithmValue);
 
         // Final validation: Ensure constructed ShreddingAlgorithm is supported
-        if (!shreddingalgorithm.isSupportedFor(spec)) {
+        if (!shreddingalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ShreddingAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

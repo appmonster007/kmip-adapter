@@ -22,14 +22,14 @@ public class CustomAttributeJsonSerializer extends KmipDataTypeJsonSerializer<Cu
         if (attribute == null) return;
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("%s is not supported for KMIP spec %s", attribute.getKmipTag().getDescription(), spec)
             );
         }
         List<KmipDataType> fields = attribute.getValues();
         for (KmipDataType field : fields) {
-            if (field != null && !field.isSupportedFor(spec)) {
+            if (field != null && !field.isSupported()) {
                 throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
                         field.getKmipTag().getDescription(), attribute.getKmipTag().getDescription(), spec));
             }

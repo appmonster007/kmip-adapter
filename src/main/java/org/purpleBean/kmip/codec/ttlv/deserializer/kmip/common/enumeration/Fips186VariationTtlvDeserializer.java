@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for Fips186Variation.
  */
 public class Fips186VariationTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Fips186Variation> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FIPS186_VARIATION);
+    private final KmipTag kmipTag = Fips186Variation.kmipTag;
+    private final EncodingType encodingType = Fips186Variation.encodingType;
 
     @Override
     public Fips186Variation deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class Fips186VariationTtlvDeserializer extends KmipDataTypeTtlvDeserializ
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        Fips186Variation fips186variation = new Fips186Variation(Fips186Variation.fromValue(spec, value));
+        Fips186Variation fips186variation = new Fips186Variation(Fips186Variation.fromValue(value));
 
-        if (!fips186variation.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!fips186variation.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("Fips186Variation '%d' not supported for spec %s", value, spec));
         }
         return fips186variation;
     }

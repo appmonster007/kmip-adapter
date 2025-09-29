@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for CertificateType.
  */
 public class CertificateTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CertificateType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_TYPE);
+    private final KmipTag kmipTag = CertificateType.kmipTag;
+    private final EncodingType encodingType = CertificateType.encodingType;
 
     @Override
     public CertificateType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class CertificateTypeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        CertificateType certificatetype = new CertificateType(CertificateType.fromValue(spec, value));
+        CertificateType certificatetype = new CertificateType(CertificateType.fromValue(value));
 
-        if (!certificatetype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!certificatetype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("CertificateType '%d' not supported for spec %s", value, spec));
         }
         return certificatetype;
     }

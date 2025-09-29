@@ -56,7 +56,7 @@ public class AttributeIndexXmlDeserializer extends KmipDataTypeXmlDeserializer<A
         AttributeIndex attributeIndex = AttributeIndex.of(index);
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeIndex.isSupportedFor(spec)) {
+        if (!attributeIndex.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AttributeIndex '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 

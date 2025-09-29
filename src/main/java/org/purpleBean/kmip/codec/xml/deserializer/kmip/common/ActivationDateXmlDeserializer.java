@@ -57,7 +57,7 @@ public class ActivationDateXmlDeserializer extends KmipDataTypeXmlDeserializer<A
         ActivationDate attribute = ActivationDate.builder().value(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ActivationDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 

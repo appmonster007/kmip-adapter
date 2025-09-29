@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for UnwrapMode.
  */
 public class UnwrapModeJsonDeserializer extends KmipDataTypeJsonDeserializer<UnwrapMode> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNWRAP_MODE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = UnwrapMode.kmipTag;
+    private final EncodingType encodingType = UnwrapMode.encodingType;
 
     @Override
     public UnwrapMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class UnwrapModeJsonDeserializer extends KmipDataTypeJsonDeserializer<Unw
         KmipSpec spec = KmipContext.getSpec();
         UnwrapMode.Value unwrapmodeValue;
         try {
-            unwrapmodeValue = UnwrapMode.fromName(spec, description);
+            unwrapmodeValue = UnwrapMode.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(UnwrapMode.class,
                     String.format("Unknown UnwrapMode value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class UnwrapModeJsonDeserializer extends KmipDataTypeJsonDeserializer<Unw
         UnwrapMode unwrapmode = new UnwrapMode(unwrapmodeValue);
 
         // Final validation: Ensure constructed UnwrapMode is supported
-        if (!unwrapmode.isSupportedFor(spec)) {
+        if (!unwrapmode.isSupported()) {
             throw new NoSuchElementException(
                     String.format("UnwrapMode '%s' is not supported for KMIP spec %s", description, spec)
             );

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for RecommendedCurve.
  */
 public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializer<RecommendedCurve> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RECOMMENDED_CURVE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = RecommendedCurve.kmipTag;
+    private final EncodingType encodingType = RecommendedCurve.encodingType;
 
     @Override
     public RecommendedCurve deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
         KmipSpec spec = KmipContext.getSpec();
         RecommendedCurve.Value recommendedcurveValue;
         try {
-            recommendedcurveValue = RecommendedCurve.fromName(spec, description);
+            recommendedcurveValue = RecommendedCurve.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(RecommendedCurve.class,
                     String.format("Unknown RecommendedCurve value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class RecommendedCurveJsonDeserializer extends KmipDataTypeJsonDeserializ
         RecommendedCurve recommendedcurve = new RecommendedCurve(recommendedcurveValue);
 
         // Final validation: Ensure constructed RecommendedCurve is supported
-        if (!recommendedcurve.isSupportedFor(spec)) {
+        if (!recommendedcurve.isSupported()) {
             throw new NoSuchElementException(
                     String.format("RecommendedCurve '%s' is not supported for KMIP spec %s", description, spec)
             );

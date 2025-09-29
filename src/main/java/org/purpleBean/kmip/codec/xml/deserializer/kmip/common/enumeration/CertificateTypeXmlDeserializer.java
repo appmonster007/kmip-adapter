@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for CertificateType.
  */
 public class CertificateTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<CertificateType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_TYPE);
+    private final KmipTag kmipTag = CertificateType.kmipTag;
+    private final EncodingType encodingType = CertificateType.encodingType;
 
     @Override
     public CertificateType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class CertificateTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        CertificateType certificatetype = new CertificateType(CertificateType.fromName(spec, description));
-        if (!certificatetype.isSupportedFor(spec)) {
+        CertificateType certificatetype = new CertificateType(CertificateType.fromName(description));
+        if (!certificatetype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("CertificateType '%s' not supported for spec %s", description, spec));
         }

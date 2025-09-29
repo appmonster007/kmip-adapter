@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ShreddingAlgorithm.
  */
 public class ShreddingAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<ShreddingAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SHREDDING_ALGORITHM);
+    private final KmipTag kmipTag = ShreddingAlgorithm.kmipTag;
+    private final EncodingType encodingType = ShreddingAlgorithm.encodingType;
 
     @Override
     public ShreddingAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ShreddingAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializ
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.fromName(spec, description));
-        if (!shreddingalgorithm.isSupportedFor(spec)) {
+        ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.fromName(description));
+        if (!shreddingalgorithm.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ShreddingAlgorithm '%s' not supported for spec %s", description, spec));
         }

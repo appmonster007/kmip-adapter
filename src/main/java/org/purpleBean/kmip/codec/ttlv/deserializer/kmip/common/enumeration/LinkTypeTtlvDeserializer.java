@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for LinkType.
  */
 public class LinkTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<LinkType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LINK_TYPE);
+    private final KmipTag kmipTag = LinkType.kmipTag;
+    private final EncodingType encodingType = LinkType.encodingType;
 
     @Override
     public LinkType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class LinkTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<LinkT
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        LinkType linktype = new LinkType(LinkType.fromValue(spec, value));
+        LinkType linktype = new LinkType(LinkType.fromValue(value));
 
-        if (!linktype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!linktype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("LinkType '%d' not supported for spec %s", value, spec));
         }
         return linktype;
     }

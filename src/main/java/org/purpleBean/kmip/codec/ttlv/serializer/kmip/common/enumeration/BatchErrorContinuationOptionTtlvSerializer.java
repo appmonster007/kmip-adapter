@@ -23,8 +23,11 @@ public class BatchErrorContinuationOptionTtlvSerializer extends KmipDataTypeTtlv
 
     public TtlvObject serializeToTtlvObject(BatchErrorContinuationOption value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("BatchErrorContinuationOption '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

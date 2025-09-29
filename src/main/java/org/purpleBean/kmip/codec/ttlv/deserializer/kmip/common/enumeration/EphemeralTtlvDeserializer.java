@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for Ephemeral.
  */
 public class EphemeralTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ephemeral> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.EPHEMERAL);
+    private final KmipTag kmipTag = Ephemeral.kmipTag;
+    private final EncodingType encodingType = Ephemeral.encodingType;
 
     @Override
     public Ephemeral deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class EphemeralTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ephe
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        Ephemeral ephemeral = new Ephemeral(Ephemeral.fromValue(spec, value));
+        Ephemeral ephemeral = new Ephemeral(Ephemeral.fromValue(value));
 
-        if (!ephemeral.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!ephemeral.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("Ephemeral '%d' not supported for spec %s", value, spec));
         }
         return ephemeral;
     }

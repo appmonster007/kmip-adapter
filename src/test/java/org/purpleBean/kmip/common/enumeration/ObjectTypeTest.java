@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
 
 import java.util.Set;
 
@@ -11,12 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("ObjectType Domain Tests")
-class ObjectTypeTest extends AbstractKmipEnumerationAttributeSuite<ObjectType> {
-
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+class ObjectTypeTest extends AbstractKmipEnumerationSuite<ObjectType> {
 
     @Override
     protected Class<ObjectType> type() {
@@ -48,75 +43,24 @@ class ObjectTypeTest extends AbstractKmipEnumerationAttributeSuite<ObjectType> {
         return true;
     }
 
-    // Implementation of AbstractKmipDataTypeAttributeSuite methods
-    @Override
-    public boolean expectAlwaysPresent() {
-        return true;
-    }
-
-    @Override
-    public boolean expectServerInitializable() {
-        return true;
-    }
-
-    @Override
-    public boolean expectClientInitializable() {
-        return false;
-    }
-
-    @Override
-    public boolean expectClientDeletable() {
-        return false;
-    }
-
-    @Override
-    public boolean expectMultiInstanceAllowed() {
-        return false;
-    }
-
-    @Override
-    public State stateForServerModifiableTrue() {
-        return null; // Not modifiable by server in any state
-    }
-
-    @Override
-    public State stateForServerModifiableFalse() {
-        return new State(State.Standard.PRE_ACTIVE); // Any state would work since it's not modifiable
-    }
-
-    @Override
-    public State stateForClientModifiableTrue() {
-        return null; // Not modifiable by client in any state
-    }
-
-    @Override
-    public State stateForClientModifiableFalse() {
-        return new State(State.Standard.ACTIVE); // Any state would work since it's not modifiable
-    }
-
-    @Override
-    protected void attrEnum_serverModifiable_respectsState() {
-        // Not applicable as it's not server modifiable
-    }
-
-    @Override
-    protected void attrEnum_clientModifiable_respectsState() {
-        // Not applicable as it's not client modifiable
-    }
-
     @Override
     protected void assertLookupBehaviour() {
-        // Register a custom value for testing
-        ObjectType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
-
         // Lookup by name/value
-        ObjectType.Value byName = ObjectType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        ObjectType.Value byVal = ObjectType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    ObjectType.Value byName = ObjectType.fromName("X-Enum-Custom");
+                    ObjectType.Value byVal = ObjectType.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> ObjectType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> ObjectType.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -125,8 +69,13 @@ class ObjectTypeTest extends AbstractKmipEnumerationAttributeSuite<ObjectType> {
         ObjectType.Value custom = ObjectType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> ObjectType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

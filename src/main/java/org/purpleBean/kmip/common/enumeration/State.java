@@ -32,7 +32,6 @@ public class State implements KmipEnumeration, KmipAttribute {
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, State.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, State.class, State::of);
         }
-
     }
 
     @NonNull
@@ -41,12 +40,23 @@ public class State implements KmipEnumeration, KmipAttribute {
     public State(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for State is not supported for KMIP spec %s", value.getDescription(), spec)
             );
         }
         this.value = value;
+    }
+
+    public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
+            throw new IllegalArgumentException("Invalid attribute name");
+        }
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
+            throw new IllegalArgumentException("Invalid encoding type");
+        }
+        State.Value v = fromValue(value);
+        return new State(v);
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -84,10 +94,11 @@ public class State implements KmipEnumeration, KmipAttribute {
     /**
      * Look up by name.
      */
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No State value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -96,11 +107,11 @@ public class State implements KmipEnumeration, KmipAttribute {
     /**
      * Look up by value.
      */
-    public static Value fromValue(KmipSpec spec, int value) {
-        // Check standard values first
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No State value found for %d in KMIP spec %s", value, spec)
                 ));
@@ -111,18 +122,6 @@ public class State implements KmipEnumeration, KmipAttribute {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
-    }
-
-    public static State of(@NonNull AttributeName name, @NonNull AttributeValue value) {
-        if (!name.getValue().equals(kmipTag.getDescription())) {
-            throw new IllegalArgumentException("Invalid attribute name");
-        }
-        if (value.getEncodingType() != encodingType) {
-            throw new IllegalArgumentException("Invalid encoding type");
-        }
-        KmipSpec spec = KmipContext.getSpec();
-        State.Value v = fromValue(spec, (int) value.getValue());
-        return new State(v);
     }
 
     @Override
@@ -144,8 +143,9 @@ public class State implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return value.isSupportedFor(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && value.isSupported();
     }
 
     @Override
@@ -222,7 +222,8 @@ public class State implements KmipEnumeration, KmipAttribute {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -233,7 +234,7 @@ public class State implements KmipEnumeration, KmipAttribute {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
     }
@@ -255,7 +256,8 @@ public class State implements KmipEnumeration, KmipAttribute {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }

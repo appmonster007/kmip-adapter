@@ -78,7 +78,6 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
         AttributeName name = obj.getAttributeName();
         AttributeValue value = obj.getAttributeValue();
         BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> buildObjectFromAttributeValue = KmipAttribute.getAttributeBuilderFromRegistry(
-                defaultSpec,
                 obj.getKmipTag().getValue(),
                 obj.getEncodingType()
         );

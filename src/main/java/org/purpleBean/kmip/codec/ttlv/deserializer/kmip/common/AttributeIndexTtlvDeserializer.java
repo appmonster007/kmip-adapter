@@ -32,7 +32,7 @@ public class AttributeIndexTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         KmipSpec spec = KmipContext.getSpec();
         AttributeIndex datatype = AttributeIndex.of(index);
 
-        if (!datatype.isSupportedFor(spec)) {
+        if (!datatype.isSupported()) {
             throw new NoSuchElementException();
         }
         return datatype;

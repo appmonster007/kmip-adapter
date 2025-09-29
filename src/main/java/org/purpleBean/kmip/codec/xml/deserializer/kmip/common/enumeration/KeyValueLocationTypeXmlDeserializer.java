@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyValueLocationType.
  */
 public class KeyValueLocationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyValueLocationType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_TYPE);
+    private final KmipTag kmipTag = KeyValueLocationType.kmipTag;
+    private final EncodingType encodingType = KeyValueLocationType.encodingType;
 
     @Override
     public KeyValueLocationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class KeyValueLocationTypeXmlDeserializer extends KmipDataTypeXmlDeserial
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(KeyValueLocationType.fromName(spec, description));
-        if (!keyvaluelocationtype.isSupportedFor(spec)) {
+        KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(KeyValueLocationType.fromName(description));
+        if (!keyvaluelocationtype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("KeyValueLocationType '%s' not supported for spec %s", description, spec));
         }

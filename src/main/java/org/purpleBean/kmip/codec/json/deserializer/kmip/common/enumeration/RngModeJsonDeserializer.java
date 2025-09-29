@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for RngMode.
  */
 public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMode> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RNG_MODE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = RngMode.kmipTag;
+    private final EncodingType encodingType = RngMode.encodingType;
 
     @Override
     public RngMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
         KmipSpec spec = KmipContext.getSpec();
         RngMode.Value rngmodeValue;
         try {
-            rngmodeValue = RngMode.fromName(spec, description);
+            rngmodeValue = RngMode.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(RngMode.class,
                     String.format("Unknown RngMode value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class RngModeJsonDeserializer extends KmipDataTypeJsonDeserializer<RngMod
         RngMode rngmode = new RngMode(rngmodeValue);
 
         // Final validation: Ensure constructed RngMode is supported
-        if (!rngmode.isSupportedFor(spec)) {
+        if (!rngmode.isSupported()) {
             throw new NoSuchElementException(
                     String.format("RngMode '%s' is not supported for KMIP spec %s", description, spec)
             );

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for UsageLimitsUnit.
  */
 public class UsageLimitsUnitXmlDeserializer extends KmipDataTypeXmlDeserializer<UsageLimitsUnit> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS_UNIT);
+    private final KmipTag kmipTag = UsageLimitsUnit.kmipTag;
+    private final EncodingType encodingType = UsageLimitsUnit.encodingType;
 
     @Override
     public UsageLimitsUnit deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class UsageLimitsUnitXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(UsageLimitsUnit.fromName(spec, description));
-        if (!usagelimitsunit.isSupportedFor(spec)) {
+        UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(UsageLimitsUnit.fromName(description));
+        if (!usagelimitsunit.isSupported()) {
             throw new NoSuchElementException(
                 String.format("UsageLimitsUnit '%s' not supported for spec %s", description, spec));
         }

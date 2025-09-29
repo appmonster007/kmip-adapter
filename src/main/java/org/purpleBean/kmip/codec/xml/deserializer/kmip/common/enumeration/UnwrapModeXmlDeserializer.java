@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for UnwrapMode.
  */
 public class UnwrapModeXmlDeserializer extends KmipDataTypeXmlDeserializer<UnwrapMode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNWRAP_MODE);
+    private final KmipTag kmipTag = UnwrapMode.kmipTag;
+    private final EncodingType encodingType = UnwrapMode.encodingType;
 
     @Override
     public UnwrapMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class UnwrapModeXmlDeserializer extends KmipDataTypeXmlDeserializer<Unwra
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        UnwrapMode unwrapmode = new UnwrapMode(UnwrapMode.fromName(spec, description));
-        if (!unwrapmode.isSupportedFor(spec)) {
+        UnwrapMode unwrapmode = new UnwrapMode(UnwrapMode.fromName(description));
+        if (!unwrapmode.isSupported()) {
             throw new NoSuchElementException(
                 String.format("UnwrapMode '%s' not supported for spec %s", description, spec));
         }

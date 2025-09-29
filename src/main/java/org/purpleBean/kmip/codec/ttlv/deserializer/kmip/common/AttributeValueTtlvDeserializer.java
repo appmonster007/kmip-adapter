@@ -54,7 +54,7 @@ public class AttributeValueTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         AttributeValue attributeValue = AttributeValue.builder().encodingType(encodingType).value(obj).build();
 
 
-        if (!attributeValue.isSupportedFor(spec)) {
+        if (!attributeValue.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", attributeValue.getClass().getSimpleName(), spec));
         }
         return attributeValue;
@@ -64,7 +64,7 @@ public class AttributeValueTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         KmipSpec spec = KmipContext.getSpec();
         KmipTag.Value nodeTag = KmipTag.fromBytes(spec, node.getTag());
         EncodingType encodingType = EncodingType.fromTypeValue(node.getType()).get();
-        Class<? extends KmipDataType> dataType = KmipDataType.getClassFromRegistry(spec, nodeTag, encodingType);
+        Class<? extends KmipDataType> dataType = KmipDataType.getClassFromRegistry(nodeTag, encodingType);
         return mapper.readValue(node.toByteBuffer(), dataType);
     }
 }

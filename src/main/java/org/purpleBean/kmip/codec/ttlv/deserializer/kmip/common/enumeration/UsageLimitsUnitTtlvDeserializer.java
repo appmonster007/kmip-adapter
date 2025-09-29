@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for UsageLimitsUnit.
  */
 public class UsageLimitsUnitTtlvDeserializer extends KmipDataTypeTtlvDeserializer<UsageLimitsUnit> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS_UNIT);
+    private final KmipTag kmipTag = UsageLimitsUnit.kmipTag;
+    private final EncodingType encodingType = UsageLimitsUnit.encodingType;
 
     @Override
     public UsageLimitsUnit deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class UsageLimitsUnitTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(UsageLimitsUnit.fromValue(spec, value));
+        UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(UsageLimitsUnit.fromValue(value));
 
-        if (!usagelimitsunit.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!usagelimitsunit.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("UsageLimitsUnit '%d' not supported for spec %s", value, spec));
         }
         return usagelimitsunit;
     }

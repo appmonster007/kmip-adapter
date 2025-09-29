@@ -23,8 +23,11 @@ public class CancellationResultTtlvSerializer extends KmipDataTypeTtlvSerializer
 
     public TtlvObject serializeToTtlvObject(CancellationResult value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("CancellationResult '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

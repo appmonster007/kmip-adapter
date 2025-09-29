@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for DataEnumeration.
  */
 public class DataEnumerationJsonDeserializer extends KmipDataTypeJsonDeserializer<DataEnumeration> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DATA);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = DataEnumeration.kmipTag;
+    private final EncodingType encodingType = DataEnumeration.encodingType;
 
     @Override
     public DataEnumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class DataEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
         KmipSpec spec = KmipContext.getSpec();
         DataEnumeration.Value dataenumerationValue;
         try {
-            dataenumerationValue = DataEnumeration.fromName(spec, description);
+            dataenumerationValue = DataEnumeration.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(DataEnumeration.class,
                     String.format("Unknown DataEnumeration value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class DataEnumerationJsonDeserializer extends KmipDataTypeJsonDeserialize
         DataEnumeration dataenumeration = new DataEnumeration(dataenumerationValue);
 
         // Final validation: Ensure constructed DataEnumeration is supported
-        if (!dataenumeration.isSupportedFor(spec)) {
+        if (!dataenumeration.isSupported()) {
             throw new NoSuchElementException(
                     String.format("DataEnumeration '%s' is not supported for KMIP spec %s", description, spec)
             );

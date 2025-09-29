@@ -24,7 +24,7 @@ public class ClientRegistrationMethodJsonSerializer extends KmipDataTypeJsonSeri
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("ClientRegistrationMethod '%s' is not supported for KMIP spec %s",
                             value.getDescription(), spec)

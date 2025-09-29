@@ -29,7 +29,7 @@ public class SimpleRequestBatchItemTtlvDeserializer extends KmipDataTypeTtlvDese
         KmipSpec spec = KmipContext.getSpec();
         SimpleRequestBatchItem simpleRequestBatchItem = SimpleRequestBatchItem.builder().build();
 
-        if (!simpleRequestBatchItem.isSupportedFor(spec)) {
+        if (!simpleRequestBatchItem.isSupported()) {
             throw new NoSuchElementException();
         }
         return simpleRequestBatchItem;

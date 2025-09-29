@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for RevocationReasonCode.
  */
 public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeserializer<RevocationReasonCode> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REVOCATION_REASON_CODE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = RevocationReasonCode.kmipTag;
+    private final EncodingType encodingType = RevocationReasonCode.encodingType;
 
     @Override
     public RevocationReasonCode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
         KmipSpec spec = KmipContext.getSpec();
         RevocationReasonCode.Value revocationreasoncodeValue;
         try {
-            revocationreasoncodeValue = RevocationReasonCode.fromName(spec, description);
+            revocationreasoncodeValue = RevocationReasonCode.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(RevocationReasonCode.class,
                     String.format("Unknown RevocationReasonCode value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class RevocationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeseri
         RevocationReasonCode revocationreasoncode = new RevocationReasonCode(revocationreasoncodeValue);
 
         // Final validation: Ensure constructed RevocationReasonCode is supported
-        if (!revocationreasoncode.isSupportedFor(spec)) {
+        if (!revocationreasoncode.isSupported()) {
             throw new NoSuchElementException(
                     String.format("RevocationReasonCode '%s' is not supported for KMIP spec %s", description, spec)
             );

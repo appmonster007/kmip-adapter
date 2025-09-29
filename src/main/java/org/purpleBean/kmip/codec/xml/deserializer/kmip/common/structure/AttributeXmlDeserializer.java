@@ -51,7 +51,7 @@ public class AttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<Attrib
 
         Attribute attribute = builder.build();
 
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             ctxt.reportInputMismatch(Attribute.class, "Attribute not supported for spec " + spec);
             return null;
         }

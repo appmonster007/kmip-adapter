@@ -25,7 +25,7 @@ class AttributeXmlTest extends AbstractXmlSerializationSuite<Attribute> {
     protected void setupTestSpecificResources() {
         super.setupTestSpecificResources();
         mockKmipAttribute = mockStatic(KmipAttribute.class);
-        mockKmipAttribute.when(() -> KmipAttribute.getClassFromRegistry(any(), any(), any())).thenReturn(ActivationDate.class);
+        mockKmipAttribute.when(() -> KmipAttribute.getClassFromRegistry(any(), any())).thenReturn(ActivationDate.class);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class SimpleRequestHeaderJsonDeserializer extends KmipDataTypeJsonDeseria
         SimpleRequestHeader header = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!header.isSupportedFor(spec)) {
+        if (!header.isSupported()) {
             throw new NoSuchElementException();
         }
 

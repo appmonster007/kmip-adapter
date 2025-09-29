@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for TicketType.
  */
 public class TicketTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<TicketType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.TICKET_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = TicketType.kmipTag;
+    private final EncodingType encodingType = TicketType.encodingType;
 
     @Override
     public TicketType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class TicketTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Tic
         KmipSpec spec = KmipContext.getSpec();
         TicketType.Value tickettypeValue;
         try {
-            tickettypeValue = TicketType.fromName(spec, description);
+            tickettypeValue = TicketType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(TicketType.class,
                     String.format("Unknown TicketType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class TicketTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Tic
         TicketType tickettype = new TicketType(tickettypeValue);
 
         // Final validation: Ensure constructed TicketType is supported
-        if (!tickettype.isSupportedFor(spec)) {
+        if (!tickettype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("TicketType '%s' is not supported for KMIP spec %s", description, spec)
             );

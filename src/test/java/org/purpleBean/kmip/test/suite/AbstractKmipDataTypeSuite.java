@@ -58,7 +58,7 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
     @DisplayName("KMIP: supported for default spec")
     protected void kmip_supportedForDefaultSpec() {
         T obj = createDefault();
-        assertThat(obj.isSupportedFor(defaultSpec)).isTrue();
+        assertThat(obj.isSupported()).isTrue();
     }
 
     @Test
@@ -66,6 +66,9 @@ public abstract class AbstractKmipDataTypeSuite<T extends KmipDataType> extends 
     protected void kmip_notSupportedForUnsupportedSpec() {
         T obj = createDefault();
         boolean expected = expectedSupportedForUnsupportedSpec();
-        assertThat(obj.isSupportedFor(KmipSpec.UnsupportedVersion)).isEqualTo(expected);
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThat(obj.isSupported()).isEqualTo(expected)
+        );
     }
 }

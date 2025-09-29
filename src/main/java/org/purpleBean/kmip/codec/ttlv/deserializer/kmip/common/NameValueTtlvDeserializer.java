@@ -32,7 +32,7 @@ public class NameValueTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name
 
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!nameValue.isSupportedFor(spec)) {
+        if (!nameValue.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", nameValue.getClass().getSimpleName(), spec));
         }
         return nameValue;

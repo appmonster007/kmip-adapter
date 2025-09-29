@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for KeyWrapType.
  */
 public class KeyWrapTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyWrapType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_WRAP_TYPE);
+    private final KmipTag kmipTag = KeyWrapType.kmipTag;
+    private final EncodingType encodingType = KeyWrapType.encodingType;
 
     @Override
     public KeyWrapType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class KeyWrapTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ke
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyWrapType keywraptype = new KeyWrapType(KeyWrapType.fromValue(spec, value));
+        KeyWrapType keywraptype = new KeyWrapType(KeyWrapType.fromValue(value));
 
-        if (!keywraptype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!keywraptype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("KeyWrapType '%d' not supported for spec %s", value, spec));
         }
         return keywraptype;
     }

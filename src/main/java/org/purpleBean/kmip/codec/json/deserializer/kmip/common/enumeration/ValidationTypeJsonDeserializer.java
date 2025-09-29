@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ValidationType.
  */
 public class ValidationTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<ValidationType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDATION_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ValidationType.kmipTag;
+    private final EncodingType encodingType = ValidationType.encodingType;
 
     @Override
     public ValidationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ValidationTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         ValidationType.Value validationtypeValue;
         try {
-            validationtypeValue = ValidationType.fromName(spec, description);
+            validationtypeValue = ValidationType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ValidationType.class,
                     String.format("Unknown ValidationType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ValidationTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         ValidationType validationtype = new ValidationType(validationtypeValue);
 
         // Final validation: Ensure constructed ValidationType is supported
-        if (!validationtype.isSupportedFor(spec)) {
+        if (!validationtype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ValidationType '%s' is not supported for KMIP spec %s", description, spec)
             );

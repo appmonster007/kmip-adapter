@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for InteropFunction.
  */
 public class InteropFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<InteropFunction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INTEROP_FUNCTION);
+    private final KmipTag kmipTag = InteropFunction.kmipTag;
+    private final EncodingType encodingType = InteropFunction.encodingType;
 
     @Override
     public InteropFunction deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class InteropFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        InteropFunction interopfunction = new InteropFunction(InteropFunction.fromValue(spec, value));
+        InteropFunction interopfunction = new InteropFunction(InteropFunction.fromValue(value));
 
-        if (!interopfunction.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!interopfunction.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("InteropFunction '%d' not supported for spec %s", value, spec));
         }
         return interopfunction;
     }

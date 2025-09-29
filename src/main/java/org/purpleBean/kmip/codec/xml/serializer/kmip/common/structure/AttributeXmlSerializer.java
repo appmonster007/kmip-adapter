@@ -19,7 +19,7 @@ public class AttributeXmlSerializer extends KmipDataTypeXmlSerializer<Attribute>
     @Override
     public void serialize(Attribute attribute, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

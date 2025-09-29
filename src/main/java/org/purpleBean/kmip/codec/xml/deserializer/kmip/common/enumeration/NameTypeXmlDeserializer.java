@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for NameType.
  */
 public class NameTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<NameType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME_TYPE);
+    private final KmipTag kmipTag = NameType.kmipTag;
+    private final EncodingType encodingType = NameType.encodingType;
 
     @Override
     public NameType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class NameTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<NameTyp
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        NameType nametype = new NameType(NameType.fromName(spec, description));
-        if (!nametype.isSupportedFor(spec)) {
+        NameType nametype = new NameType(NameType.fromName(description));
+        if (!nametype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("NameType '%s' not supported for spec %s", description, spec));
         }

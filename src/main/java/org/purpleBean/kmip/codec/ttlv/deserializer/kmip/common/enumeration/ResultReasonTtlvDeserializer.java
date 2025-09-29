@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ResultReason.
  */
 public class ResultReasonTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ResultReason> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_REASON);
+    private final KmipTag kmipTag = ResultReason.kmipTag;
+    private final EncodingType encodingType = ResultReason.encodingType;
 
     @Override
     public ResultReason deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ResultReasonTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ResultReason resultreason = new ResultReason(ResultReason.fromValue(spec, value));
+        ResultReason resultreason = new ResultReason(ResultReason.fromValue(value));
 
-        if (!resultreason.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!resultreason.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ResultReason '%d' not supported for spec %s", value, spec));
         }
         return resultreason;
     }

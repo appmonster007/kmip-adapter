@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ObjectGroupMember.
  */
 public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeserializer<ObjectGroupMember> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_GROUP_MEMBER);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ObjectGroupMember.kmipTag;
+    private final EncodingType encodingType = ObjectGroupMember.encodingType;
 
     @Override
     public ObjectGroupMember deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
         KmipSpec spec = KmipContext.getSpec();
         ObjectGroupMember.Value objectgroupmemberValue;
         try {
-            objectgroupmemberValue = ObjectGroupMember.fromName(spec, description);
+            objectgroupmemberValue = ObjectGroupMember.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ObjectGroupMember.class,
                     String.format("Unknown ObjectGroupMember value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ObjectGroupMemberJsonDeserializer extends KmipDataTypeJsonDeseriali
         ObjectGroupMember objectgroupmember = new ObjectGroupMember(objectgroupmemberValue);
 
         // Final validation: Ensure constructed ObjectGroupMember is supported
-        if (!objectgroupmember.isSupportedFor(spec)) {
+        if (!objectgroupmember.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ObjectGroupMember '%s' is not supported for KMIP spec %s", description, spec)
             );

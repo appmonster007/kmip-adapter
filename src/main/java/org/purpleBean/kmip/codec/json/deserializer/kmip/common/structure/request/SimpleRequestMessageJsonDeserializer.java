@@ -68,7 +68,7 @@ public class SimpleRequestMessageJsonDeserializer extends KmipDataTypeJsonDeseri
         SimpleRequestMessage message = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!message.isSupportedFor(spec)) {
+        if (!message.isSupported()) {
             throw new NoSuchElementException();
         }
 

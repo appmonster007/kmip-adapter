@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for Fips186Variation.
  */
 public class Fips186VariationXmlDeserializer extends KmipDataTypeXmlDeserializer<Fips186Variation> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FIPS186_VARIATION);
+    private final KmipTag kmipTag = Fips186Variation.kmipTag;
+    private final EncodingType encodingType = Fips186Variation.encodingType;
 
     @Override
     public Fips186Variation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class Fips186VariationXmlDeserializer extends KmipDataTypeXmlDeserializer
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        Fips186Variation fips186variation = new Fips186Variation(Fips186Variation.fromName(spec, description));
-        if (!fips186variation.isSupportedFor(spec)) {
+        Fips186Variation fips186variation = new Fips186Variation(Fips186Variation.fromName(description));
+        if (!fips186variation.isSupported()) {
             throw new NoSuchElementException(
                 String.format("Fips186Variation '%s' not supported for spec %s", description, spec));
         }

@@ -39,7 +39,7 @@ public class CryptographicLengthTtlvDeserializer extends KmipDataTypeTtlvDeseria
 
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!cryptographicLength.isSupportedFor(spec)) {
+        if (!cryptographicLength.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", cryptographicLength.getClass().getSimpleName(), spec));
         }
         return cryptographicLength;

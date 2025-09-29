@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for BlockCipherMode.
  */
 public class BlockCipherModeJsonDeserializer extends KmipDataTypeJsonDeserializer<BlockCipherMode> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BLOCK_CIPHER_MODE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = BlockCipherMode.kmipTag;
+    private final EncodingType encodingType = BlockCipherMode.encodingType;
 
     @Override
     public BlockCipherMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class BlockCipherModeJsonDeserializer extends KmipDataTypeJsonDeserialize
         KmipSpec spec = KmipContext.getSpec();
         BlockCipherMode.Value blockciphermodeValue;
         try {
-            blockciphermodeValue = BlockCipherMode.fromName(spec, description);
+            blockciphermodeValue = BlockCipherMode.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(BlockCipherMode.class,
                     String.format("Unknown BlockCipherMode value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class BlockCipherModeJsonDeserializer extends KmipDataTypeJsonDeserialize
         BlockCipherMode blockciphermode = new BlockCipherMode(blockciphermodeValue);
 
         // Final validation: Ensure constructed BlockCipherMode is supported
-        if (!blockciphermode.isSupportedFor(spec)) {
+        if (!blockciphermode.isSupported()) {
             throw new NoSuchElementException(
                     String.format("BlockCipherMode '%s' is not supported for KMIP spec %s", description, spec)
             );

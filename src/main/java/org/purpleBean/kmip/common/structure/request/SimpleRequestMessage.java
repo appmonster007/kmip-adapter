@@ -17,6 +17,13 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
 
+    static {
+        for (KmipSpec spec : KmipSpec.values()) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestMessage.class);
+        }
+    }
+
     @NonNull
     private final SimpleRequestHeader requestHeader;
     @NonNull
@@ -44,7 +51,8 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 }

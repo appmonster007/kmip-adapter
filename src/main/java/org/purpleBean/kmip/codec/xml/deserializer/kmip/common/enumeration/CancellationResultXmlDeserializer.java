@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for CancellationResult.
  */
 public class CancellationResultXmlDeserializer extends KmipDataTypeXmlDeserializer<CancellationResult> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CANCELLATION_RESULT);
+    private final KmipTag kmipTag = CancellationResult.kmipTag;
+    private final EncodingType encodingType = CancellationResult.encodingType;
 
     @Override
     public CancellationResult deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class CancellationResultXmlDeserializer extends KmipDataTypeXmlDeserializ
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromName(spec, description));
-        if (!cancellationresult.isSupportedFor(spec)) {
+        CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromName(description));
+        if (!cancellationresult.isSupported()) {
             throw new NoSuchElementException(
                 String.format("CancellationResult '%s' not supported for spec %s", description, spec));
         }

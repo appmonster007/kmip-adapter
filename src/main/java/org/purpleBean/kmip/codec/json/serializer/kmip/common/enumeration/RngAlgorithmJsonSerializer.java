@@ -24,7 +24,7 @@ public class RngAlgorithmJsonSerializer extends KmipDataTypeJsonSerializer<RngAl
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("RngAlgorithm '%s' is not supported for KMIP spec %s",
                             value.getDescription(), spec)

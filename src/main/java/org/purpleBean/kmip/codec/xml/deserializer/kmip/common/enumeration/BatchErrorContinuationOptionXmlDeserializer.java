@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for BatchErrorContinuationOption.
  */
 public class BatchErrorContinuationOptionXmlDeserializer extends KmipDataTypeXmlDeserializer<BatchErrorContinuationOption> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ERROR_CONTINUATION_OPTION);
+    private final KmipTag kmipTag = BatchErrorContinuationOption.kmipTag;
+    private final EncodingType encodingType = BatchErrorContinuationOption.encodingType;
 
     @Override
     public BatchErrorContinuationOption deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class BatchErrorContinuationOptionXmlDeserializer extends KmipDataTypeXml
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(BatchErrorContinuationOption.fromName(spec, description));
-        if (!batcherrorcontinuationoption.isSupportedFor(spec)) {
+        BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(BatchErrorContinuationOption.fromName(description));
+        if (!batcherrorcontinuationoption.isSupported()) {
             throw new NoSuchElementException(
                 String.format("BatchErrorContinuationOption '%s' not supported for spec %s", description, spec));
         }

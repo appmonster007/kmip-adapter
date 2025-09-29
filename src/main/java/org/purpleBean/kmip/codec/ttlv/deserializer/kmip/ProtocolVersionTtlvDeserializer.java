@@ -34,7 +34,7 @@ public class ProtocolVersionTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         ProtocolVersion protocolVersion = builder.build();
 
-        if (!protocolVersion.isSupportedFor(spec)) {
+        if (!protocolVersion.isSupported()) {
             throw new NoSuchElementException();
         }
 

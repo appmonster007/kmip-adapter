@@ -46,13 +46,21 @@ class KeyCompressionTypeTest extends AbstractKmipEnumerationSuite<KeyCompression
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        KeyCompressionType.Value byName = KeyCompressionType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        KeyCompressionType.Value byVal = KeyCompressionType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    KeyCompressionType.Value byName = KeyCompressionType.fromName("X-Enum-Custom");
+                    KeyCompressionType.Value byVal = KeyCompressionType.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> KeyCompressionType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> KeyCompressionType.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class KeyCompressionTypeTest extends AbstractKmipEnumerationSuite<KeyCompression
         KeyCompressionType.Value custom = KeyCompressionType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> KeyCompressionType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for AlternativeNameType.
  */
 public class AlternativeNameTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<AlternativeNameType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = AlternativeNameType.kmipTag;
+    private final EncodingType encodingType = AlternativeNameType.encodingType;
 
     @Override
     public AlternativeNameType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class AlternativeNameTypeJsonDeserializer extends KmipDataTypeJsonDeseria
         KmipSpec spec = KmipContext.getSpec();
         AlternativeNameType.Value alternativenametypeValue;
         try {
-            alternativenametypeValue = AlternativeNameType.fromName(spec, description);
+            alternativenametypeValue = AlternativeNameType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(AlternativeNameType.class,
                     String.format("Unknown AlternativeNameType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class AlternativeNameTypeJsonDeserializer extends KmipDataTypeJsonDeseria
         AlternativeNameType alternativenametype = new AlternativeNameType(alternativenametypeValue);
 
         // Final validation: Ensure constructed AlternativeNameType is supported
-        if (!alternativenametype.isSupportedFor(spec)) {
+        if (!alternativenametype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AlternativeNameType '%s' is not supported for KMIP spec %s", description, spec)
             );

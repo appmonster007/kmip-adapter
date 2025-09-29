@@ -24,11 +24,13 @@ public interface KmipAttribute extends KmipDataType {
         ATTRIBUTE_BUILDER_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), attributeBuilder);
     }
 
-    static Class<? extends KmipAttribute> getClassFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
+    static Class<? extends KmipAttribute> getClassFromRegistry(KmipTag.Value kmipTagValue, EncodingType encodingType) {
+        KmipSpec spec = KmipContext.getSpec();
         return ATTRIBUTE_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 
-    static BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> getAttributeBuilderFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
+    static BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> getAttributeBuilderFromRegistry(KmipTag.Value kmipTagValue, EncodingType encodingType) {
+        KmipSpec spec = KmipContext.getSpec();
         return ATTRIBUTE_BUILDER_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 

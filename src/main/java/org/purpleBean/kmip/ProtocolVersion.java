@@ -55,7 +55,8 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 
@@ -80,7 +81,8 @@ public class ProtocolVersion implements KmipStructure {
         }
 
         @Override
-        public boolean isSupportedFor(@NonNull KmipSpec spec) {
+        public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -106,7 +108,8 @@ public class ProtocolVersion implements KmipStructure {
         }
 
         @Override
-        public boolean isSupportedFor(@NonNull KmipSpec spec) {
+        public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }

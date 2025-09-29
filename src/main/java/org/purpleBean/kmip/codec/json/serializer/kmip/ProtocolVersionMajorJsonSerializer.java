@@ -14,7 +14,7 @@ public class ProtocolVersionMajorJsonSerializer extends KmipDataTypeJsonSerializ
     @Override
     public void serialize(ProtocolVersion.ProtocolVersionMajor major, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!major.isSupportedFor(spec)) {
+        if (!major.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

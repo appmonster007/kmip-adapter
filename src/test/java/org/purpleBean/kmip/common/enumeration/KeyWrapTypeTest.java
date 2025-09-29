@@ -46,13 +46,21 @@ class KeyWrapTypeTest extends AbstractKmipEnumerationSuite<KeyWrapType> {
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        KeyWrapType.Value byName = KeyWrapType.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        KeyWrapType.Value byVal = KeyWrapType.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    KeyWrapType.Value byName = KeyWrapType.fromName("X-Enum-Custom");
+                    KeyWrapType.Value byVal = KeyWrapType.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> KeyWrapType.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> KeyWrapType.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class KeyWrapTypeTest extends AbstractKmipEnumerationSuite<KeyWrapType> {
         KeyWrapType.Value custom = KeyWrapType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> KeyWrapType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

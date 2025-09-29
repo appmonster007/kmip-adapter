@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for WrappingMethod.
  */
 public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<WrappingMethod> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.WRAPPING_METHOD);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = WrappingMethod.kmipTag;
+    private final EncodingType encodingType = WrappingMethod.encodingType;
 
     @Override
     public WrappingMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         WrappingMethod.Value wrappingmethodValue;
         try {
-            wrappingmethodValue = WrappingMethod.fromName(spec, description);
+            wrappingmethodValue = WrappingMethod.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(WrappingMethod.class,
                     String.format("Unknown WrappingMethod value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class WrappingMethodJsonDeserializer extends KmipDataTypeJsonDeserializer
         WrappingMethod wrappingmethod = new WrappingMethod(wrappingmethodValue);
 
         // Final validation: Ensure constructed WrappingMethod is supported
-        if (!wrappingmethod.isSupportedFor(spec)) {
+        if (!wrappingmethod.isSupported()) {
             throw new NoSuchElementException(
                     String.format("WrappingMethod '%s' is not supported for KMIP spec %s", description, spec)
             );

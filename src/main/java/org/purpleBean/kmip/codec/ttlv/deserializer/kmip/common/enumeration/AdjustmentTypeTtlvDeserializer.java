@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for AdjustmentType.
  */
 public class AdjustmentTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AdjustmentType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ADJUSTMENT_TYPE);
+    private final KmipTag kmipTag = AdjustmentType.kmipTag;
+    private final EncodingType encodingType = AdjustmentType.encodingType;
 
     @Override
     public AdjustmentType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class AdjustmentTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        AdjustmentType adjustmenttype = new AdjustmentType(AdjustmentType.fromValue(spec, value));
+        AdjustmentType adjustmenttype = new AdjustmentType(AdjustmentType.fromValue(value));
 
-        if (!adjustmenttype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!adjustmenttype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("AdjustmentType '%d' not supported for spec %s", value, spec));
         }
         return adjustmenttype;
     }

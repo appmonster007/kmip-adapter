@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DestroyAction.
  */
 public class DestroyActionXmlDeserializer extends KmipDataTypeXmlDeserializer<DestroyAction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DESTROY_ACTION);
+    private final KmipTag kmipTag = DestroyAction.kmipTag;
+    private final EncodingType encodingType = DestroyAction.encodingType;
 
     @Override
     public DestroyAction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class DestroyActionXmlDeserializer extends KmipDataTypeXmlDeserializer<De
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DestroyAction destroyaction = new DestroyAction(DestroyAction.fromName(spec, description));
-        if (!destroyaction.isSupportedFor(spec)) {
+        DestroyAction destroyaction = new DestroyAction(DestroyAction.fromName(description));
+        if (!destroyaction.isSupported()) {
             throw new NoSuchElementException(
                 String.format("DestroyAction '%s' not supported for spec %s", description, spec));
         }

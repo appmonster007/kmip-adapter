@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for RecommendedCurve.
  */
 public class RecommendedCurveTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RecommendedCurve> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RECOMMENDED_CURVE);
+    private final KmipTag kmipTag = RecommendedCurve.kmipTag;
+    private final EncodingType encodingType = RecommendedCurve.encodingType;
 
     @Override
     public RecommendedCurve deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class RecommendedCurveTtlvDeserializer extends KmipDataTypeTtlvDeserializ
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        RecommendedCurve recommendedcurve = new RecommendedCurve(RecommendedCurve.fromValue(spec, value));
+        RecommendedCurve recommendedcurve = new RecommendedCurve(RecommendedCurve.fromValue(value));
 
-        if (!recommendedcurve.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!recommendedcurve.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("RecommendedCurve '%d' not supported for spec %s", value, spec));
         }
         return recommendedcurve;
     }

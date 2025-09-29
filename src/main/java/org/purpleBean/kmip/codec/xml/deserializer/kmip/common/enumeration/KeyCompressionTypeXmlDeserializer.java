@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyCompressionType.
  */
 public class KeyCompressionTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyCompressionType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_COMPRESSION_TYPE);
+    private final KmipTag kmipTag = KeyCompressionType.kmipTag;
+    private final EncodingType encodingType = KeyCompressionType.encodingType;
 
     @Override
     public KeyCompressionType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class KeyCompressionTypeXmlDeserializer extends KmipDataTypeXmlDeserializ
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromName(spec, description));
-        if (!keycompressiontype.isSupportedFor(spec)) {
+        KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromName(description));
+        if (!keycompressiontype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("KeyCompressionType '%s' not supported for spec %s", description, spec));
         }

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ProfileName.
  */
 public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<ProfileName> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROFILE_NAME);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ProfileName.kmipTag;
+    private final EncodingType encodingType = ProfileName.encodingType;
 
     @Override
     public ProfileName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
         KmipSpec spec = KmipContext.getSpec();
         ProfileName.Value profilenameValue;
         try {
-            profilenameValue = ProfileName.fromName(spec, description);
+            profilenameValue = ProfileName.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ProfileName.class,
                     String.format("Unknown ProfileName value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ProfileNameJsonDeserializer extends KmipDataTypeJsonDeserializer<Pr
         ProfileName profilename = new ProfileName(profilenameValue);
 
         // Final validation: Ensure constructed ProfileName is supported
-        if (!profilename.isSupportedFor(spec)) {
+        if (!profilename.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ProfileName '%s' is not supported for KMIP spec %s", description, spec)
             );

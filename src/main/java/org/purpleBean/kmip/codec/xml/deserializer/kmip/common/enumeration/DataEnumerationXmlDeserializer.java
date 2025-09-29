@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DataEnumeration.
  */
 public class DataEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<DataEnumeration> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DATA);
+    private final KmipTag kmipTag = DataEnumeration.kmipTag;
+    private final EncodingType encodingType = DataEnumeration.encodingType;
 
     @Override
     public DataEnumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,10 +54,10 @@ public class DataEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DataEnumeration dataenumeration = new DataEnumeration(DataEnumeration.fromName(spec, description));
-        if (!dataenumeration.isSupportedFor(spec)) {
+        DataEnumeration dataenumeration = new DataEnumeration(DataEnumeration.fromName(description));
+        if (!dataenumeration.isSupported()) {
             throw new NoSuchElementException(
-                    String.format("DataEnumeration '%s' not supported for spec %s", description, spec));
+                String.format("DataEnumeration '%s' not supported for spec %s", description, spec));
         }
 
         return dataenumeration;

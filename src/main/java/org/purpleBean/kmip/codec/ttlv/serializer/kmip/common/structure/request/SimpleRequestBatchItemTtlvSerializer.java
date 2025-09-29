@@ -19,7 +19,7 @@ public class SimpleRequestBatchItemTtlvSerializer extends KmipDataTypeTtlvSerial
 
     private TtlvObject serializeToTtlvObject(SimpleRequestBatchItem value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

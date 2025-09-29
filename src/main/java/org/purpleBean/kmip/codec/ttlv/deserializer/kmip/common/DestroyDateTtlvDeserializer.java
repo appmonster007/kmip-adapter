@@ -34,7 +34,7 @@ public class DestroyDateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<De
 
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!destroyDate.isSupportedFor(spec)) {
+        if (!destroyDate.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", destroyDate.getClass().getSimpleName(), spec));
         }
         return destroyDate;

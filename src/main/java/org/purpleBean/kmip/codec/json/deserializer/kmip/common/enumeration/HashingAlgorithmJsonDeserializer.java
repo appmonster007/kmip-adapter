@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for HashingAlgorithm.
  */
 public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<HashingAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.HASHING_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = HashingAlgorithm.kmipTag;
+    private final EncodingType encodingType = HashingAlgorithm.encodingType;
 
     @Override
     public HashingAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
         KmipSpec spec = KmipContext.getSpec();
         HashingAlgorithm.Value hashingalgorithmValue;
         try {
-            hashingalgorithmValue = HashingAlgorithm.fromName(spec, description);
+            hashingalgorithmValue = HashingAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(HashingAlgorithm.class,
                     String.format("Unknown HashingAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class HashingAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializ
         HashingAlgorithm hashingalgorithm = new HashingAlgorithm(hashingalgorithmValue);
 
         // Final validation: Ensure constructed HashingAlgorithm is supported
-        if (!hashingalgorithm.isSupportedFor(spec)) {
+        if (!hashingalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("HashingAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

@@ -46,13 +46,21 @@ class ShreddingAlgorithmTest extends AbstractKmipEnumerationSuite<ShreddingAlgor
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        ShreddingAlgorithm.Value byName = ShreddingAlgorithm.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        ShreddingAlgorithm.Value byVal = ShreddingAlgorithm.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    ShreddingAlgorithm.Value byName = ShreddingAlgorithm.fromName("X-Enum-Custom");
+                    ShreddingAlgorithm.Value byVal = ShreddingAlgorithm.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> ShreddingAlgorithm.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> ShreddingAlgorithm.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class ShreddingAlgorithmTest extends AbstractKmipEnumerationSuite<ShreddingAlgor
         ShreddingAlgorithm.Value custom = ShreddingAlgorithm.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> ShreddingAlgorithm.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

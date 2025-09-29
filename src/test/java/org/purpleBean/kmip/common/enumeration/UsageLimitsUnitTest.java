@@ -46,13 +46,21 @@ class UsageLimitsUnitTest extends AbstractKmipEnumerationSuite<UsageLimitsUnit> 
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        UsageLimitsUnit.Value byName = UsageLimitsUnit.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        UsageLimitsUnit.Value byVal = UsageLimitsUnit.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    UsageLimitsUnit.Value byName = UsageLimitsUnit.fromName("X-Enum-Custom");
+                    UsageLimitsUnit.Value byVal = UsageLimitsUnit.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> UsageLimitsUnit.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> UsageLimitsUnit.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class UsageLimitsUnitTest extends AbstractKmipEnumerationSuite<UsageLimitsUnit> 
         UsageLimitsUnit.Value custom = UsageLimitsUnit.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> UsageLimitsUnit.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

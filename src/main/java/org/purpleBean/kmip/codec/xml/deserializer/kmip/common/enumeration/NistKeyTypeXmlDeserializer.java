@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for NistKeyType.
  */
 public class NistKeyTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<NistKeyType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NIST_KEY_TYPE);
+    private final KmipTag kmipTag = NistKeyType.kmipTag;
+    private final EncodingType encodingType = NistKeyType.encodingType;
 
     @Override
     public NistKeyType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class NistKeyTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Nist
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        NistKeyType nistkeytype = new NistKeyType(NistKeyType.fromName(spec, description));
-        if (!nistkeytype.isSupportedFor(spec)) {
+        NistKeyType nistkeytype = new NistKeyType(NistKeyType.fromName(description));
+        if (!nistkeytype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("NistKeyType '%s' not supported for spec %s", description, spec));
         }

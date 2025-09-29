@@ -25,6 +25,13 @@ public class SampleStructure implements KmipStructure {
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SampleStructure.class);
+        }
+    }
+
     // TODO: Add your structure fields here
     // Example:
     @NonNull
@@ -49,7 +56,8 @@ public class SampleStructure implements KmipStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 
@@ -68,7 +76,7 @@ public class SampleStructure implements KmipStructure {
             // Validate KMIP spec compatibility
             KmipSpec spec = KmipContext.getSpec();
             for (KmipDataType field : fields) {
-                if (field != null && !field.isSupportedFor(spec)) {
+                if (field != null && !field.isSupported()) {
                     throw new IllegalArgumentException(
                             String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
                     );

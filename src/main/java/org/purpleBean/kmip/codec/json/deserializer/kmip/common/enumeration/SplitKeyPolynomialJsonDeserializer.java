@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for SplitKeyPolynomial.
  */
 public class SplitKeyPolynomialJsonDeserializer extends KmipDataTypeJsonDeserializer<SplitKeyPolynomial> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_POLYNOMIAL);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = SplitKeyPolynomial.kmipTag;
+    private final EncodingType encodingType = SplitKeyPolynomial.encodingType;
 
     @Override
     public SplitKeyPolynomial deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class SplitKeyPolynomialJsonDeserializer extends KmipDataTypeJsonDeserial
         KmipSpec spec = KmipContext.getSpec();
         SplitKeyPolynomial.Value splitkeypolynomialValue;
         try {
-            splitkeypolynomialValue = SplitKeyPolynomial.fromName(spec, description);
+            splitkeypolynomialValue = SplitKeyPolynomial.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(SplitKeyPolynomial.class,
                     String.format("Unknown SplitKeyPolynomial value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class SplitKeyPolynomialJsonDeserializer extends KmipDataTypeJsonDeserial
         SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(splitkeypolynomialValue);
 
         // Final validation: Ensure constructed SplitKeyPolynomial is supported
-        if (!splitkeypolynomial.isSupportedFor(spec)) {
+        if (!splitkeypolynomial.isSupported()) {
             throw new NoSuchElementException(
                     String.format("SplitKeyPolynomial '%s' is not supported for KMIP spec %s", description, spec)
             );

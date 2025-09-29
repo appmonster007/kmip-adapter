@@ -18,14 +18,14 @@ public class SimpleRequestHeaderJsonSerializer extends KmipDataTypeJsonSerialize
     public void serialize(SimpleRequestHeader header, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!header.isSupportedFor(spec)) {
+        if (!header.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 
         List<KmipDataType> fields = header.getValues();
         // Validation: Field compatibility with KMIP spec
         for (KmipDataType field : fields) {
-            if (field != null && !field.isSupportedFor(spec)) {
+            if (field != null && !field.isSupported()) {
                 throw new UnsupportedEncodingException(
                         String.format("%s in %s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), header.getKmipTag().getDescription(), spec)
                 );

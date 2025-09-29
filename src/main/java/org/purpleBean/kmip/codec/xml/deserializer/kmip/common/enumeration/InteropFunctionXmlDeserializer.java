@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for InteropFunction.
  */
 public class InteropFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<InteropFunction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INTEROP_FUNCTION);
+    private final KmipTag kmipTag = InteropFunction.kmipTag;
+    private final EncodingType encodingType = InteropFunction.encodingType;
 
     @Override
     public InteropFunction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class InteropFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        InteropFunction interopfunction = new InteropFunction(InteropFunction.fromName(spec, description));
-        if (!interopfunction.isSupportedFor(spec)) {
+        InteropFunction interopfunction = new InteropFunction(InteropFunction.fromName(description));
+        if (!interopfunction.isSupported()) {
             throw new NoSuchElementException(
                 String.format("InteropFunction '%s' not supported for spec %s", description, spec));
         }

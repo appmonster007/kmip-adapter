@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for UsageLimitsUnit.
  */
 public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserializer<UsageLimitsUnit> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS_UNIT);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = UsageLimitsUnit.kmipTag;
+    private final EncodingType encodingType = UsageLimitsUnit.encodingType;
 
     @Override
     public UsageLimitsUnit deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
         KmipSpec spec = KmipContext.getSpec();
         UsageLimitsUnit.Value usagelimitsunitValue;
         try {
-            usagelimitsunitValue = UsageLimitsUnit.fromName(spec, description);
+            usagelimitsunitValue = UsageLimitsUnit.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(UsageLimitsUnit.class,
                     String.format("Unknown UsageLimitsUnit value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class UsageLimitsUnitJsonDeserializer extends KmipDataTypeJsonDeserialize
         UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(usagelimitsunitValue);
 
         // Final validation: Ensure constructed UsageLimitsUnit is supported
-        if (!usagelimitsunit.isSupportedFor(spec)) {
+        if (!usagelimitsunit.isSupported()) {
             throw new NoSuchElementException(
                     String.format("UsageLimitsUnit '%s' is not supported for KMIP spec %s", description, spec)
             );

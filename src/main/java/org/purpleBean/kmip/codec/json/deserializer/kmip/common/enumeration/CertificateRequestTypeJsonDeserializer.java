@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for CertificateRequestType.
  */
 public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<CertificateRequestType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_REQUEST_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = CertificateRequestType.kmipTag;
+    private final EncodingType encodingType = CertificateRequestType.encodingType;
 
     @Override
     public CertificateRequestType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
         KmipSpec spec = KmipContext.getSpec();
         CertificateRequestType.Value certificaterequesttypeValue;
         try {
-            certificaterequesttypeValue = CertificateRequestType.fromName(spec, description);
+            certificaterequesttypeValue = CertificateRequestType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(CertificateRequestType.class,
                     String.format("Unknown CertificateRequestType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class CertificateRequestTypeJsonDeserializer extends KmipDataTypeJsonDese
         CertificateRequestType certificaterequesttype = new CertificateRequestType(certificaterequesttypeValue);
 
         // Final validation: Ensure constructed CertificateRequestType is supported
-        if (!certificaterequesttype.isSupportedFor(spec)) {
+        if (!certificaterequesttype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("CertificateRequestType '%s' is not supported for KMIP spec %s", description, spec)
             );

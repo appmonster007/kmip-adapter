@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ProtectionLevel.
  */
 public class ProtectionLevelTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProtectionLevel> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTECTION_LEVEL);
+    private final KmipTag kmipTag = ProtectionLevel.kmipTag;
+    private final EncodingType encodingType = ProtectionLevel.encodingType;
 
     @Override
     public ProtectionLevel deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ProtectionLevelTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ProtectionLevel protectionlevel = new ProtectionLevel(ProtectionLevel.fromValue(spec, value));
+        ProtectionLevel protectionlevel = new ProtectionLevel(ProtectionLevel.fromValue(value));
 
-        if (!protectionlevel.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!protectionlevel.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ProtectionLevel '%d' not supported for spec %s", value, spec));
         }
         return protectionlevel;
     }

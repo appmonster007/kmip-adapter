@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for OpaqueDataType.
  */
 public class OpaqueDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<OpaqueDataType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPAQUE_DATA_TYPE);
+    private final KmipTag kmipTag = OpaqueDataType.kmipTag;
+    private final EncodingType encodingType = OpaqueDataType.encodingType;
 
     @Override
     public OpaqueDataType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class OpaqueDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        OpaqueDataType opaquedatatype = new OpaqueDataType(OpaqueDataType.fromValue(spec, value));
+        OpaqueDataType opaquedatatype = new OpaqueDataType(OpaqueDataType.fromValue(value));
 
-        if (!opaquedatatype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!opaquedatatype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("OpaqueDataType '%d' not supported for spec %s", value, spec));
         }
         return opaquedatatype;
     }

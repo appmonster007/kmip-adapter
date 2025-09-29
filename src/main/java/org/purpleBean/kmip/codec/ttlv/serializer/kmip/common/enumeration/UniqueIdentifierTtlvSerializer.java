@@ -23,8 +23,11 @@ public class UniqueIdentifierTtlvSerializer extends KmipDataTypeTtlvSerializer<U
 
     public TtlvObject serializeToTtlvObject(UniqueIdentifier value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("UniqueIdentifier '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

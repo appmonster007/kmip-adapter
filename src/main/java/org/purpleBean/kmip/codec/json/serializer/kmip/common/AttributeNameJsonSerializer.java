@@ -20,7 +20,7 @@ public class AttributeNameJsonSerializer extends KmipDataTypeJsonSerializer<Attr
         if (attributeName == null) return;
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeName.isSupportedFor(spec)) {
+        if (!attributeName.isSupported()) {
             throw new UnsupportedEncodingException(
                     String.format("%s is not supported for KMIP spec %s", attributeName.getKmipTag().getDescription(), spec)
             );

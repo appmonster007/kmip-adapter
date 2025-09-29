@@ -18,7 +18,7 @@ public class UniqueIdentifierXmlSerializer extends KmipDataTypeXmlSerializer<Uni
     public void serialize(UniqueIdentifier uniqueIdentifier, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!uniqueIdentifier.isSupportedFor(spec)) {
+        if (!uniqueIdentifier.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", uniqueIdentifier.getClass().getSimpleName(), spec));
         }
 

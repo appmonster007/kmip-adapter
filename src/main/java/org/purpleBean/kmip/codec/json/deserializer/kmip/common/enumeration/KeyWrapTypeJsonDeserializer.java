@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for KeyWrapType.
  */
 public class KeyWrapTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<KeyWrapType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_WRAP_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = KeyWrapType.kmipTag;
+    private final EncodingType encodingType = KeyWrapType.encodingType;
 
     @Override
     public KeyWrapType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class KeyWrapTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
         KmipSpec spec = KmipContext.getSpec();
         KeyWrapType.Value keywraptypeValue;
         try {
-            keywraptypeValue = KeyWrapType.fromName(spec, description);
+            keywraptypeValue = KeyWrapType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(KeyWrapType.class,
                     String.format("Unknown KeyWrapType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class KeyWrapTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
         KeyWrapType keywraptype = new KeyWrapType(keywraptypeValue);
 
         // Final validation: Ensure constructed KeyWrapType is supported
-        if (!keywraptype.isSupportedFor(spec)) {
+        if (!keywraptype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("KeyWrapType '%s' is not supported for KMIP spec %s", description, spec)
             );

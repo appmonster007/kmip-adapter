@@ -100,10 +100,11 @@ public class Name implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return SUPPORTED_VERSIONS.contains(spec)
-                && nameValue.isSupportedFor(spec)
-                && nameType.isSupportedFor(spec);
+                && nameValue.isSupported()
+                && nameType.isSupported();
     }
 
     @Override
@@ -168,12 +169,12 @@ public class Name implements KmipStructure, KmipAttribute {
 
             // Validate KMIP spec compatibility
             KmipSpec spec = KmipContext.getSpec();
-            if (!nameValue.isSupportedFor(spec)) {
+            if (!nameValue.isSupported()) {
                 throw new IllegalArgumentException(
                         String.format("Name value is not supported for KMIP spec %s", spec)
                 );
             }
-            if (!nameType.isSupportedFor(spec)) {
+            if (!nameType.isSupported()) {
                 throw new IllegalArgumentException(
                         String.format("Name type is not supported for KMIP spec %s", spec)
                 );

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for AlternativeNameType.
  */
 public class AlternativeNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AlternativeNameType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME_TYPE);
+    private final KmipTag kmipTag = AlternativeNameType.kmipTag;
+    private final EncodingType encodingType = AlternativeNameType.encodingType;
 
     @Override
     public AlternativeNameType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class AlternativeNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeseria
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        AlternativeNameType alternativenametype = new AlternativeNameType(AlternativeNameType.fromValue(spec, value));
+        AlternativeNameType alternativenametype = new AlternativeNameType(AlternativeNameType.fromValue(value));
 
-        if (!alternativenametype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!alternativenametype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("AlternativeNameType '%d' not supported for spec %s", value, spec));
         }
         return alternativenametype;
     }

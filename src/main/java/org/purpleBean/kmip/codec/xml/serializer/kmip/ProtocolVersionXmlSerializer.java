@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
@@ -17,7 +16,7 @@ public class ProtocolVersionXmlSerializer extends KmipDataTypeXmlSerializer<Prot
     @Override
     public void serialize(ProtocolVersion protocolVersion, JsonGenerator gen, SerializerProvider provider) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!protocolVersion.isSupportedFor(spec)) {
+        if (!protocolVersion.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

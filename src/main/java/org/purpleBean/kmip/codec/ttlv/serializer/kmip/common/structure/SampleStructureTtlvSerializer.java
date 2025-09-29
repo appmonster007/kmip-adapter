@@ -22,7 +22,7 @@ public class SampleStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<Sa
 
     private TtlvObject serializeToTtlvObject(SampleStructure value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 

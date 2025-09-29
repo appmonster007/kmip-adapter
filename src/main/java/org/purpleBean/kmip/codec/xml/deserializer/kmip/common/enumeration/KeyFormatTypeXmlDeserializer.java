@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyFormatType.
  */
 public class KeyFormatTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyFormatType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_FORMAT_TYPE);
+    private final KmipTag kmipTag = KeyFormatType.kmipTag;
+    private final EncodingType encodingType = KeyFormatType.encodingType;
 
     @Override
     public KeyFormatType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class KeyFormatTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Ke
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        KeyFormatType keyformattype = new KeyFormatType(KeyFormatType.fromName(spec, description));
-        if (!keyformattype.isSupportedFor(spec)) {
+        KeyFormatType keyformattype = new KeyFormatType(KeyFormatType.fromName(description));
+        if (!keyformattype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("KeyFormatType '%s' not supported for spec %s", description, spec));
         }

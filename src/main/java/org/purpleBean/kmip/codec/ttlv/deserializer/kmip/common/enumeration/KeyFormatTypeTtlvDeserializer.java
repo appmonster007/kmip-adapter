@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for KeyFormatType.
  */
 public class KeyFormatTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyFormatType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_FORMAT_TYPE);
+    private final KmipTag kmipTag = KeyFormatType.kmipTag;
+    private final EncodingType encodingType = KeyFormatType.encodingType;
 
     @Override
     public KeyFormatType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class KeyFormatTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyFormatType keyformattype = new KeyFormatType(KeyFormatType.fromValue(spec, value));
+        KeyFormatType keyformattype = new KeyFormatType(KeyFormatType.fromValue(value));
 
-        if (!keyformattype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!keyformattype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("KeyFormatType '%d' not supported for spec %s", value, spec));
         }
         return keyformattype;
     }

@@ -23,7 +23,7 @@ public class ActivationDateTtlvSerializer extends KmipDataTypeTtlvSerializer<Act
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IOException(
                 String.format("%s is not supported for KMIP spec %s", 
                 value.getKmipTag().getDescription(), spec)

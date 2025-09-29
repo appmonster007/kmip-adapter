@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for KeyValueLocationType.
  */
 public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<KeyValueLocationType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = KeyValueLocationType.kmipTag;
+    private final EncodingType encodingType = KeyValueLocationType.encodingType;
 
     @Override
     public KeyValueLocationType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
         KmipSpec spec = KmipContext.getSpec();
         KeyValueLocationType.Value keyvaluelocationtypeValue;
         try {
-            keyvaluelocationtypeValue = KeyValueLocationType.fromName(spec, description);
+            keyvaluelocationtypeValue = KeyValueLocationType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(KeyValueLocationType.class,
                     String.format("Unknown KeyValueLocationType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class KeyValueLocationTypeJsonDeserializer extends KmipDataTypeJsonDeseri
         KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(keyvaluelocationtypeValue);
 
         // Final validation: Ensure constructed KeyValueLocationType is supported
-        if (!keyvaluelocationtype.isSupportedFor(spec)) {
+        if (!keyvaluelocationtype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("KeyValueLocationType '%s' is not supported for KMIP spec %s", description, spec)
             );

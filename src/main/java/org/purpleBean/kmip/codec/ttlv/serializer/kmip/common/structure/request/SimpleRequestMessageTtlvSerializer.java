@@ -22,7 +22,7 @@ public class SimpleRequestMessageTtlvSerializer extends KmipDataTypeTtlvSerializ
 
     private TtlvObject serializeToTtlvObject(SimpleRequestMessage value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

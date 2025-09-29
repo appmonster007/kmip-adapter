@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DestroyAction.
  */
 public class DestroyActionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DestroyAction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DESTROY_ACTION);
+    private final KmipTag kmipTag = DestroyAction.kmipTag;
+    private final EncodingType encodingType = DestroyAction.encodingType;
 
     @Override
     public DestroyAction deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DestroyActionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DestroyAction destroyaction = new DestroyAction(DestroyAction.fromValue(spec, value));
+        DestroyAction destroyaction = new DestroyAction(DestroyAction.fromValue(value));
 
-        if (!destroyaction.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!destroyaction.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DestroyAction '%d' not supported for spec %s", value, spec));
         }
         return destroyaction;
     }

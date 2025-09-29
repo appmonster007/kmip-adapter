@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for PutFunction.
  */
 public class PutFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<PutFunction> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUT_FUNCTION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = PutFunction.kmipTag;
+    private final EncodingType encodingType = PutFunction.encodingType;
 
     @Override
     public PutFunction deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class PutFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<Pu
         KmipSpec spec = KmipContext.getSpec();
         PutFunction.Value putfunctionValue;
         try {
-            putfunctionValue = PutFunction.fromName(spec, description);
+            putfunctionValue = PutFunction.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(PutFunction.class,
                     String.format("Unknown PutFunction value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class PutFunctionJsonDeserializer extends KmipDataTypeJsonDeserializer<Pu
         PutFunction putfunction = new PutFunction(putfunctionValue);
 
         // Final validation: Ensure constructed PutFunction is supported
-        if (!putfunction.isSupportedFor(spec)) {
+        if (!putfunction.isSupported()) {
             throw new NoSuchElementException(
                     String.format("PutFunction '%s' is not supported for KMIP spec %s", description, spec)
             );

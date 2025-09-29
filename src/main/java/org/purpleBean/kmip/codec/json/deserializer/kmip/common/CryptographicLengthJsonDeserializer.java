@@ -73,7 +73,7 @@ public class CryptographicLengthJsonDeserializer extends KmipDataTypeJsonDeseria
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!cryptographicLength.isSupportedFor(spec)) {
+        if (!cryptographicLength.isSupported()) {
             throw new NoSuchElementException(String.format("CryptographicLength is not supported for KMIP spec %s", spec));
         }
 

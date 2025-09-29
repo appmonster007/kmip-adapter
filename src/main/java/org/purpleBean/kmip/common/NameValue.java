@@ -3,10 +3,7 @@ package org.purpleBean.kmip.common;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 
 import java.util.Set;
 
@@ -23,11 +20,11 @@ public class NameValue implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME_VALUE);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
-    private static final Set<KmipSpec> SUPPORTED_VERSIONS = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         // Register with KmipDataType
-        for (KmipSpec spec : SUPPORTED_VERSIONS) {
+        for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, NameValue.class);
         }
@@ -61,8 +58,9 @@ public class NameValue implements KmipDataType {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return SUPPORTED_VERSIONS.contains(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec);
     }
 
     /**

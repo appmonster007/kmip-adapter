@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for RngAlgorithm.
  */
 public class RngAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<RngAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RNG_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = RngAlgorithm.kmipTag;
+    private final EncodingType encodingType = RngAlgorithm.encodingType;
 
     @Override
     public RngAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class RngAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<R
         KmipSpec spec = KmipContext.getSpec();
         RngAlgorithm.Value rngalgorithmValue;
         try {
-            rngalgorithmValue = RngAlgorithm.fromName(spec, description);
+            rngalgorithmValue = RngAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(RngAlgorithm.class,
                     String.format("Unknown RngAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class RngAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<R
         RngAlgorithm rngalgorithm = new RngAlgorithm(rngalgorithmValue);
 
         // Final validation: Ensure constructed RngAlgorithm is supported
-        if (!rngalgorithm.isSupportedFor(spec)) {
+        if (!rngalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("RngAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

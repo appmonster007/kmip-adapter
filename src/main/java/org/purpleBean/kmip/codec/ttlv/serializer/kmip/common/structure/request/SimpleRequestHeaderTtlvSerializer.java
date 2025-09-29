@@ -19,7 +19,7 @@ public class SimpleRequestHeaderTtlvSerializer extends KmipDataTypeTtlvSerialize
 
     private TtlvObject serializeToTtlvObject(SimpleRequestHeader value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

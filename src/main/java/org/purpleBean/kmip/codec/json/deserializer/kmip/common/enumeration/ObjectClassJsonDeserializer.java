@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for ObjectClass.
  */
 public class ObjectClassJsonDeserializer extends KmipDataTypeJsonDeserializer<ObjectClass> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_CLASS);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = ObjectClass.kmipTag;
+    private final EncodingType encodingType = ObjectClass.encodingType;
 
     @Override
     public ObjectClass deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class ObjectClassJsonDeserializer extends KmipDataTypeJsonDeserializer<Ob
         KmipSpec spec = KmipContext.getSpec();
         ObjectClass.Value objectclassValue;
         try {
-            objectclassValue = ObjectClass.fromName(spec, description);
+            objectclassValue = ObjectClass.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(ObjectClass.class,
                     String.format("Unknown ObjectClass value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class ObjectClassJsonDeserializer extends KmipDataTypeJsonDeserializer<Ob
         ObjectClass objectclass = new ObjectClass(objectclassValue);
 
         // Final validation: Ensure constructed ObjectClass is supported
-        if (!objectclass.isSupportedFor(spec)) {
+        if (!objectclass.isSupported()) {
             throw new NoSuchElementException(
                     String.format("ObjectClass '%s' is not supported for KMIP spec %s", description, spec)
             );

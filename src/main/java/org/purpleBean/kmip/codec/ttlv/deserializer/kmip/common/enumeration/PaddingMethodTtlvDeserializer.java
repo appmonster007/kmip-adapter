@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for PaddingMethod.
  */
 public class PaddingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<PaddingMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PADDING_METHOD);
+    private final KmipTag kmipTag = PaddingMethod.kmipTag;
+    private final EncodingType encodingType = PaddingMethod.encodingType;
 
     @Override
     public PaddingMethod deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class PaddingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        PaddingMethod paddingmethod = new PaddingMethod(PaddingMethod.fromValue(spec, value));
+        PaddingMethod paddingmethod = new PaddingMethod(PaddingMethod.fromValue(value));
 
-        if (!paddingmethod.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!paddingmethod.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("PaddingMethod '%d' not supported for spec %s", value, spec));
         }
         return paddingmethod;
     }

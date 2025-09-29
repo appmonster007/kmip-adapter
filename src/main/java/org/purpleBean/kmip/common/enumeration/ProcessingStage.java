@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ProcessingStage implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROCESSING_STAGE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -23,6 +24,11 @@ public class ProcessingStage implements KmipEnumeration {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
+
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProcessingStage.class);
+        }
     }
 
     @NonNull
@@ -31,7 +37,7 @@ public class ProcessingStage implements KmipEnumeration {
     public ProcessingStage(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for ProcessingStage is not supported for KMIP spec %s", value.getDescription(), spec)
             );
@@ -74,10 +80,11 @@ public class ProcessingStage implements KmipEnumeration {
     /**
      * Look up by name.
      */
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No ProcessingStage value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -86,11 +93,11 @@ public class ProcessingStage implements KmipEnumeration {
     /**
      * Look up by value.
      */
-    public static Value fromValue(KmipSpec spec, int value) {
-        // Check standard values first
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No ProcessingStage value found for %d in KMIP spec %s", value, spec)
                 ));
@@ -122,8 +129,9 @@ public class ProcessingStage implements KmipEnumeration {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return value.isSupportedFor(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && value.isSupported();
     }
 
     @Getter
@@ -147,7 +155,8 @@ public class ProcessingStage implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -158,7 +167,7 @@ public class ProcessingStage implements KmipEnumeration {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
     }
@@ -180,7 +189,8 @@ public class ProcessingStage implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }

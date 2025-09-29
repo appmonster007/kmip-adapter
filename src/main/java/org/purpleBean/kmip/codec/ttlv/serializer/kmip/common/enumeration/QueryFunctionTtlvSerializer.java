@@ -23,8 +23,11 @@ public class QueryFunctionTtlvSerializer extends KmipDataTypeTtlvSerializer<Quer
 
     public TtlvObject serializeToTtlvObject(QueryFunction value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("QueryFunction '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

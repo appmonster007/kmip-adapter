@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for RotateNameType.
  */
 public class RotateNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RotateNameType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ROTATE_NAME_TYPE);
+    private final KmipTag kmipTag = RotateNameType.kmipTag;
+    private final EncodingType encodingType = RotateNameType.encodingType;
 
     @Override
     public RotateNameType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class RotateNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        RotateNameType rotatenametype = new RotateNameType(RotateNameType.fromValue(spec, value));
+        RotateNameType rotatenametype = new RotateNameType(RotateNameType.fromValue(value));
 
-        if (!rotatenametype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!rotatenametype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("RotateNameType '%d' not supported for spec %s", value, spec));
         }
         return rotatenametype;
     }

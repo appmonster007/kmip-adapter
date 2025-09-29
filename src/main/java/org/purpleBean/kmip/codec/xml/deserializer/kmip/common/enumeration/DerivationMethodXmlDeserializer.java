@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for DerivationMethod.
  */
 public class DerivationMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<DerivationMethod> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DERIVATION_METHOD);
+    private final KmipTag kmipTag = DerivationMethod.kmipTag;
+    private final EncodingType encodingType = DerivationMethod.encodingType;
 
     @Override
     public DerivationMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class DerivationMethodXmlDeserializer extends KmipDataTypeXmlDeserializer
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        DerivationMethod derivationmethod = new DerivationMethod(DerivationMethod.fromName(spec, description));
-        if (!derivationmethod.isSupportedFor(spec)) {
+        DerivationMethod derivationmethod = new DerivationMethod(DerivationMethod.fromName(description));
+        if (!derivationmethod.isSupported()) {
             throw new NoSuchElementException(
                 String.format("DerivationMethod '%s' not supported for spec %s", description, spec));
         }

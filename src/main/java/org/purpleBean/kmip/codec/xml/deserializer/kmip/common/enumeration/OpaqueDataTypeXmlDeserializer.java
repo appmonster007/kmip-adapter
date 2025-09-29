@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for OpaqueDataType.
  */
 public class OpaqueDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<OpaqueDataType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPAQUE_DATA_TYPE);
+    private final KmipTag kmipTag = OpaqueDataType.kmipTag;
+    private final EncodingType encodingType = OpaqueDataType.encodingType;
 
     @Override
     public OpaqueDataType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class OpaqueDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<O
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        OpaqueDataType opaquedatatype = new OpaqueDataType(OpaqueDataType.fromName(spec, description));
-        if (!opaquedatatype.isSupportedFor(spec)) {
+        OpaqueDataType opaquedatatype = new OpaqueDataType(OpaqueDataType.fromName(description));
+        if (!opaquedatatype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("OpaqueDataType '%s' not supported for spec %s", description, spec));
         }

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for EndpointRole.
  */
 public class EndpointRoleXmlDeserializer extends KmipDataTypeXmlDeserializer<EndpointRole> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ENDPOINT_ROLE);
+    private final KmipTag kmipTag = EndpointRole.kmipTag;
+    private final EncodingType encodingType = EndpointRole.encodingType;
 
     @Override
     public EndpointRole deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class EndpointRoleXmlDeserializer extends KmipDataTypeXmlDeserializer<End
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        EndpointRole endpointrole = new EndpointRole(EndpointRole.fromName(spec, description));
-        if (!endpointrole.isSupportedFor(spec)) {
+        EndpointRole endpointrole = new EndpointRole(EndpointRole.fromName(description));
+        if (!endpointrole.isSupported()) {
             throw new NoSuchElementException(
                 String.format("EndpointRole '%s' not supported for spec %s", description, spec));
         }

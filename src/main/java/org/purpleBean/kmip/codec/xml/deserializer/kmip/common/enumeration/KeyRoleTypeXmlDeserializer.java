@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for KeyRoleType.
  */
 public class KeyRoleTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyRoleType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_ROLE_TYPE);
+    private final KmipTag kmipTag = KeyRoleType.kmipTag;
+    private final EncodingType encodingType = KeyRoleType.encodingType;
 
     @Override
     public KeyRoleType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class KeyRoleTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyR
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        KeyRoleType keyroletype = new KeyRoleType(KeyRoleType.fromName(spec, description));
-        if (!keyroletype.isSupportedFor(spec)) {
+        KeyRoleType keyroletype = new KeyRoleType(KeyRoleType.fromName(description));
+        if (!keyroletype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("KeyRoleType '%s' not supported for spec %s", description, spec));
         }

@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for DigitalSignatureAlgorithm.
  */
 public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<DigitalSignatureAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = DigitalSignatureAlgorithm.kmipTag;
+    private final EncodingType encodingType = DigitalSignatureAlgorithm.encodingType;
 
     @Override
     public DigitalSignatureAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
         KmipSpec spec = KmipContext.getSpec();
         DigitalSignatureAlgorithm.Value digitalsignaturealgorithmValue;
         try {
-            digitalsignaturealgorithmValue = DigitalSignatureAlgorithm.fromName(spec, description);
+            digitalsignaturealgorithmValue = DigitalSignatureAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(DigitalSignatureAlgorithm.class,
                     String.format("Unknown DigitalSignatureAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class DigitalSignatureAlgorithmJsonDeserializer extends KmipDataTypeJsonD
         DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(digitalsignaturealgorithmValue);
 
         // Final validation: Ensure constructed DigitalSignatureAlgorithm is supported
-        if (!digitalsignaturealgorithm.isSupportedFor(spec)) {
+        if (!digitalsignaturealgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("DigitalSignatureAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

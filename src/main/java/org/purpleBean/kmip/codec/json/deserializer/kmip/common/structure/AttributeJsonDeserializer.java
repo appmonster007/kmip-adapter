@@ -98,7 +98,7 @@ public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attr
                 .attributeValue(attrValue)
                 .build();
 
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             ctxt.reportInputMismatch(Attribute.class, "Attribute not supported for spec " + spec);
             return null;
         }

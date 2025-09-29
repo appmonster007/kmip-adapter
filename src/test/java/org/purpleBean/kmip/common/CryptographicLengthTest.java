@@ -3,6 +3,7 @@ package org.purpleBean.kmip.common;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
@@ -128,14 +129,19 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @DisplayName("should support KMIP specs")
     void shouldSupportKmipSpecs() {
         CryptographicLength length = createDefault();
-        assertThat(length.isSupportedFor(KmipSpec.V1_2)).isTrue();
-        assertThat(length.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
+        withKmipSpec(
+                KmipSpec.V1_2,
+                () -> assertThat(length.isSupported()).isTrue()
+        );
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> assertThat(length.isSupported()).isTrue()
+        );
         // Should not support unsupported versions
-        assertThat(length.isSupportedFor(KmipSpec.V1_0)).isFalse();
-        // Should not throw NPE for null spec
-        assertThatThrownBy(() -> length.isSupportedFor(null))
-                .isInstanceOf(NullPointerException.class)
-                .hasMessage("KMIP spec cannot be null");
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThat(length.isSupported()).isFalse()
+        );
     }
 
     @Test

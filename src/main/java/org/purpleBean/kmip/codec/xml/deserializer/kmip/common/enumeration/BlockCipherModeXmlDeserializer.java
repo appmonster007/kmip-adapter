@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for BlockCipherMode.
  */
 public class BlockCipherModeXmlDeserializer extends KmipDataTypeXmlDeserializer<BlockCipherMode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BLOCK_CIPHER_MODE);
+    private final KmipTag kmipTag = BlockCipherMode.kmipTag;
+    private final EncodingType encodingType = BlockCipherMode.encodingType;
 
     @Override
     public BlockCipherMode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class BlockCipherModeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        BlockCipherMode blockciphermode = new BlockCipherMode(BlockCipherMode.fromName(spec, description));
-        if (!blockciphermode.isSupportedFor(spec)) {
+        BlockCipherMode blockciphermode = new BlockCipherMode(BlockCipherMode.fromName(description));
+        if (!blockciphermode.isSupported()) {
             throw new NoSuchElementException(
                 String.format("BlockCipherMode '%s' not supported for spec %s", description, spec));
         }

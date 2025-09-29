@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ResultReason.
  */
 public class ResultReasonXmlDeserializer extends KmipDataTypeXmlDeserializer<ResultReason> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_REASON);
+    private final KmipTag kmipTag = ResultReason.kmipTag;
+    private final EncodingType encodingType = ResultReason.encodingType;
 
     @Override
     public ResultReason deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ResultReasonXmlDeserializer extends KmipDataTypeXmlDeserializer<Res
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ResultReason resultreason = new ResultReason(ResultReason.fromName(spec, description));
-        if (!resultreason.isSupportedFor(spec)) {
+        ResultReason resultreason = new ResultReason(ResultReason.fromName(description));
+        if (!resultreason.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ResultReason '%s' not supported for spec %s", description, spec));
         }

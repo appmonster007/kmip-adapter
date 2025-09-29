@@ -36,7 +36,7 @@ public class SimpleRequestHeaderTtlvDeserializer extends KmipDataTypeTtlvDeseria
 
         SimpleRequestHeader simpleRequestHeader = builder.build();
 
-        if (!simpleRequestHeader.isSupportedFor(spec)) {
+        if (!simpleRequestHeader.isSupported()) {
             throw new NoSuchElementException();
         }
         return simpleRequestHeader;

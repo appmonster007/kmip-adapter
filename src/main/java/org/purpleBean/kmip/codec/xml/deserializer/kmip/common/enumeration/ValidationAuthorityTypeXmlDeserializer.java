@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for ValidationAuthorityType.
  */
 public class ValidationAuthorityTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<ValidationAuthorityType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDATION_AUTHORITY_TYPE);
+    private final KmipTag kmipTag = ValidationAuthorityType.kmipTag;
+    private final EncodingType encodingType = ValidationAuthorityType.encodingType;
 
     @Override
     public ValidationAuthorityType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class ValidationAuthorityTypeXmlDeserializer extends KmipDataTypeXmlDeser
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(ValidationAuthorityType.fromName(spec, description));
-        if (!validationauthoritytype.isSupportedFor(spec)) {
+        ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(ValidationAuthorityType.fromName(description));
+        if (!validationauthoritytype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("ValidationAuthorityType '%s' not supported for spec %s", description, spec));
         }

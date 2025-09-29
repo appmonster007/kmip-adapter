@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for State.
  */
 public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = State.kmipTag;
+    private final EncodingType encodingType = State.encodingType;
 
     @Override
     public State deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
         KmipSpec spec = KmipContext.getSpec();
         State.Value stateValue;
         try {
-            stateValue = State.fromName(spec, description);
+            stateValue = State.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(State.class,
                     String.format("Unknown State value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class StateJsonDeserializer extends KmipDataTypeJsonDeserializer<State> {
         State state = new State(stateValue);
 
         // Final validation: Ensure constructed State is supported
-        if (!state.isSupportedFor(spec)) {
+        if (!state.isSupported()) {
             throw new NoSuchElementException(
                     String.format("State '%s' is not supported for KMIP spec %s", description, spec)
             );

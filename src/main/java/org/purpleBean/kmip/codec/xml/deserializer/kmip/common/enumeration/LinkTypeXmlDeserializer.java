@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for LinkType.
  */
 public class LinkTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<LinkType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LINK_TYPE);
+    private final KmipTag kmipTag = LinkType.kmipTag;
+    private final EncodingType encodingType = LinkType.encodingType;
 
     @Override
     public LinkType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,8 +54,8 @@ public class LinkTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<LinkTyp
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        LinkType linktype = new LinkType(LinkType.fromName(spec, description));
-        if (!linktype.isSupportedFor(spec)) {
+        LinkType linktype = new LinkType(LinkType.fromName(description));
+        if (!linktype.isSupported()) {
             throw new NoSuchElementException(
                 String.format("LinkType '%s' not supported for spec %s", description, spec));
         }

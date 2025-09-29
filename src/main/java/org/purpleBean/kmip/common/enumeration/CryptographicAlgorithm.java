@@ -16,23 +16,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
-        // Register with KmipDataType and KmipAttribute
+        for (Standard s : Standard.values()) {
+            VALUE_REGISTRY.put(s.value, s);
+            DESCRIPTION_REGISTRY.put(s.description, s);
+        }
+
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class, CryptographicAlgorithm::of);
-        }
-
-        // Register standard values
-        for (Standard s : Standard.values()) {
-            VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
 
@@ -42,10 +40,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     public CryptographicAlgorithm(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
-        if (spec == null) {
-            spec = KmipSpec.UnknownVersion;
-        }
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
             );
@@ -54,14 +49,14 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     }
 
     public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer intValue)) {
-            throw new IllegalArgumentException("Invalid attribute value");
+        if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
+            throw new IllegalArgumentException("Invalid attribute name");
         }
-        KmipSpec spec = KmipContext.getSpec();
-        if (spec == null) {
-            spec = KmipSpec.UnknownVersion;
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
+            throw new IllegalArgumentException("Invalid encoding type");
         }
-        return new CryptographicAlgorithm(CryptographicAlgorithm.fromValue(spec, intValue));
+        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(value);
+        return new CryptographicAlgorithm(v);
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -99,10 +94,11 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     /**
      * Look up by name.
      */
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No CryptographicAlgorithm value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -111,11 +107,11 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     /**
      * Look up by value.
      */
-    public static Value fromValue(KmipSpec spec, int value) {
-        // Check standard values first
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No CryptographicAlgorithm value found for %d in KMIP spec %s", value, spec)
                 ));
@@ -147,8 +143,9 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return value.isSupportedFor(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && value.isSupported();
     }
 
     @Override
@@ -296,7 +293,8 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -307,7 +305,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
     }
@@ -329,7 +327,8 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }

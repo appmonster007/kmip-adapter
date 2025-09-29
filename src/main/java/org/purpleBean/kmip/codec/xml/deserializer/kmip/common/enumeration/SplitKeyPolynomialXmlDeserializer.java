@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for SplitKeyPolynomial.
  */
 public class SplitKeyPolynomialXmlDeserializer extends KmipDataTypeXmlDeserializer<SplitKeyPolynomial> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_POLYNOMIAL);
+    private final KmipTag kmipTag = SplitKeyPolynomial.kmipTag;
+    private final EncodingType encodingType = SplitKeyPolynomial.encodingType;
 
     @Override
     public SplitKeyPolynomial deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,10 +54,10 @@ public class SplitKeyPolynomialXmlDeserializer extends KmipDataTypeXmlDeserializ
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.fromName(spec, description));
-        if (!splitkeypolynomial.isSupportedFor(spec)) {
+        SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.fromName(description));
+        if (!splitkeypolynomial.isSupported()) {
             throw new NoSuchElementException(
-                    String.format("SplitKeyPolynomial '%s' not supported for spec %s", description, spec));
+                String.format("SplitKeyPolynomial '%s' not supported for spec %s", description, spec));
         }
 
         return splitkeypolynomial;

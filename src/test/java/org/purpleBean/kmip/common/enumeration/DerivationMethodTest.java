@@ -46,13 +46,21 @@ class DerivationMethodTest extends AbstractKmipEnumerationSuite<DerivationMethod
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        DerivationMethod.Value byName = DerivationMethod.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        DerivationMethod.Value byVal = DerivationMethod.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    DerivationMethod.Value byName = DerivationMethod.fromName("X-Enum-Custom");
+                    DerivationMethod.Value byVal = DerivationMethod.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> DerivationMethod.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> DerivationMethod.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class DerivationMethodTest extends AbstractKmipEnumerationSuite<DerivationMethod
         DerivationMethod.Value custom = DerivationMethod.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> DerivationMethod.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

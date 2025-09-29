@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for RngMode.
  */
 public class RngModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RngMode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RNG_MODE);
+    private final KmipTag kmipTag = RngMode.kmipTag;
+    private final EncodingType encodingType = RngMode.encodingType;
 
     @Override
     public RngMode deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class RngModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RngMod
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        RngMode rngmode = new RngMode(RngMode.fromValue(spec, value));
+        RngMode rngmode = new RngMode(RngMode.fromValue(value));
 
-        if (!rngmode.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!rngmode.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("RngMode '%d' not supported for spec %s", value, spec));
         }
         return rngmode;
     }

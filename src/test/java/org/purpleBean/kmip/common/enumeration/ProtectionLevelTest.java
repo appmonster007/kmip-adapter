@@ -46,13 +46,21 @@ class ProtectionLevelTest extends AbstractKmipEnumerationSuite<ProtectionLevel> 
     @Override
     protected void assertLookupBehaviour() {
         // Lookup by name/value
-        ProtectionLevel.Value byName = ProtectionLevel.fromName(KmipSpec.UnknownVersion, "X-Enum-Custom");
-        ProtectionLevel.Value byVal = ProtectionLevel.fromValue(KmipSpec.UnknownVersion, 0x80000010);
-        assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        withKmipSpec(
+                KmipSpec.UnknownVersion,
+                () -> {
+                    ProtectionLevel.Value byName = ProtectionLevel.fromName("X-Enum-Custom");
+                    ProtectionLevel.Value byVal = ProtectionLevel.fromValue(0x80000010);
+                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
+                }
+        );
 
         // Lookup by name/value with unsupported version
-        assertThatThrownBy(() -> ProtectionLevel.fromName(KmipSpec.UnsupportedVersion, "X-Enum-Custom"));
+        withKmipSpec(
+                KmipSpec.UnsupportedVersion,
+                () -> assertThatThrownBy(() -> ProtectionLevel.fromName("X-Enum-Custom"))
+        );
     }
 
     @Override
@@ -61,8 +69,13 @@ class ProtectionLevelTest extends AbstractKmipEnumerationSuite<ProtectionLevel> 
         ProtectionLevel.Value custom = ProtectionLevel.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-        assertThat(custom.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-        assertThat(custom.isSupportedFor(KmipSpec.UnsupportedVersion)).isFalse();
+
+        withKmipSpec(KmipSpec.UnknownVersion, () -> {
+            assertThat(custom.isSupported()).isTrue();
+        });
+        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+            assertThat(custom.isSupported()).isFalse();
+        });
 
         // Negative cases: invalid range, empty description, empty versions
         assertThatThrownBy(() -> ProtectionLevel.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))

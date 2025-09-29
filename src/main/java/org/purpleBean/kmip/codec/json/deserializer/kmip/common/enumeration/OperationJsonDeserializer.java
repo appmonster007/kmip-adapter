@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for Operation.
  */
 public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Operation> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPERATION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = Operation.kmipTag;
+    private final EncodingType encodingType = Operation.encodingType;
 
     @Override
     public Operation deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
         KmipSpec spec = KmipContext.getSpec();
         Operation.Value operationValue;
         try {
-            operationValue = Operation.fromName(spec, description);
+            operationValue = Operation.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(Operation.class,
                     String.format("Unknown Operation value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class OperationJsonDeserializer extends KmipDataTypeJsonDeserializer<Oper
         Operation operation = new Operation(operationValue);
 
         // Final validation: Ensure constructed Operation is supported
-        if (!operation.isSupportedFor(spec)) {
+        if (!operation.isSupported()) {
             throw new NoSuchElementException(
                     String.format("Operation '%s' is not supported for KMIP spec %s", description, spec)
             );

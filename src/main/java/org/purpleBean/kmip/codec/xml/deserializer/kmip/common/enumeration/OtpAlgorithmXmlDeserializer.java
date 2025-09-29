@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * XML deserializer for OtpAlgorithm.
  */
 public class OtpAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<OtpAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OTP_ALGORITHM);
+    private final KmipTag kmipTag = OtpAlgorithm.kmipTag;
+    private final EncodingType encodingType = OtpAlgorithm.encodingType;
 
     @Override
     public OtpAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -54,10 +54,10 @@ public class OtpAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<Otp
         String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
-        OtpAlgorithm otpalgorithm = new OtpAlgorithm(OtpAlgorithm.fromName(spec, description));
-        if (!otpalgorithm.isSupportedFor(spec)) {
+        OtpAlgorithm otpalgorithm = new OtpAlgorithm(OtpAlgorithm.fromName(description));
+        if (!otpalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                    String.format("OtpAlgorithm '%s' not supported for spec %s", description, spec));
+                String.format("OtpAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return otpalgorithm;

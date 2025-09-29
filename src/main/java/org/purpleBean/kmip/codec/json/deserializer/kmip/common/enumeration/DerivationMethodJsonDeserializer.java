@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for DerivationMethod.
  */
 public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializer<DerivationMethod> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DERIVATION_METHOD);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = DerivationMethod.kmipTag;
+    private final EncodingType encodingType = DerivationMethod.encodingType;
 
     @Override
     public DerivationMethod deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
         KmipSpec spec = KmipContext.getSpec();
         DerivationMethod.Value derivationmethodValue;
         try {
-            derivationmethodValue = DerivationMethod.fromName(spec, description);
+            derivationmethodValue = DerivationMethod.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(DerivationMethod.class,
                     String.format("Unknown DerivationMethod value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class DerivationMethodJsonDeserializer extends KmipDataTypeJsonDeserializ
         DerivationMethod derivationmethod = new DerivationMethod(derivationmethodValue);
 
         // Final validation: Ensure constructed DerivationMethod is supported
-        if (!derivationmethod.isSupportedFor(spec)) {
+        if (!derivationmethod.isSupported()) {
             throw new NoSuchElementException(
                     String.format("DerivationMethod '%s' is not supported for KMIP spec %s", description, spec)
             );

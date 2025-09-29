@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for TicketType.
  */
 public class TicketTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<TicketType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.TICKET_TYPE);
+    private final KmipTag kmipTag = TicketType.kmipTag;
+    private final EncodingType encodingType = TicketType.encodingType;
 
     @Override
     public TicketType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class TicketTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Tic
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        TicketType tickettype = new TicketType(TicketType.fromValue(spec, value));
+        TicketType tickettype = new TicketType(TicketType.fromValue(value));
 
-        if (!tickettype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!tickettype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("TicketType '%d' not supported for spec %s", value, spec));
         }
         return tickettype;
     }

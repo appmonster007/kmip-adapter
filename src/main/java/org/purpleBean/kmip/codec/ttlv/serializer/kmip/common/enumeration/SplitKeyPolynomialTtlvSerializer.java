@@ -23,8 +23,11 @@ public class SplitKeyPolynomialTtlvSerializer extends KmipDataTypeTtlvSerializer
 
     public TtlvObject serializeToTtlvObject(SplitKeyPolynomial value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("SplitKeyPolynomial '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

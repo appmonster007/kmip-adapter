@@ -23,8 +23,11 @@ public class CredentialTypeTtlvSerializer extends KmipDataTypeTtlvSerializer<Cre
 
     public TtlvObject serializeToTtlvObject(CredentialType value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("CredentialType '%s' is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
+            );
         }
 
         byte[] tag = value.getKmipTag().getTagBytes();

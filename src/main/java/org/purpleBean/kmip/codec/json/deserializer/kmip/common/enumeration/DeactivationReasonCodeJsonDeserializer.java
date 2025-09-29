@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for DeactivationReasonCode.
  */
 public class DeactivationReasonCodeJsonDeserializer extends KmipDataTypeJsonDeserializer<DeactivationReasonCode> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEACTIVATION_REASON_CODE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = DeactivationReasonCode.kmipTag;
+    private final EncodingType encodingType = DeactivationReasonCode.encodingType;
 
     @Override
     public DeactivationReasonCode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class DeactivationReasonCodeJsonDeserializer extends KmipDataTypeJsonDese
         KmipSpec spec = KmipContext.getSpec();
         DeactivationReasonCode.Value deactivationreasoncodeValue;
         try {
-            deactivationreasoncodeValue = DeactivationReasonCode.fromName(spec, description);
+            deactivationreasoncodeValue = DeactivationReasonCode.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(DeactivationReasonCode.class,
                     String.format("Unknown DeactivationReasonCode value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class DeactivationReasonCodeJsonDeserializer extends KmipDataTypeJsonDese
         DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(deactivationreasoncodeValue);
 
         // Final validation: Ensure constructed DeactivationReasonCode is supported
-        if (!deactivationreasoncode.isSupportedFor(spec)) {
+        if (!deactivationreasoncode.isSupported()) {
             throw new NoSuchElementException(
                     String.format("DeactivationReasonCode '%s' is not supported for KMIP spec %s", description, spec)
             );

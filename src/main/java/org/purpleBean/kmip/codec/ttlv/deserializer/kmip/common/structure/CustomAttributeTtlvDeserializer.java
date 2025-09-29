@@ -39,7 +39,7 @@ public class CustomAttributeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         CustomAttribute attribute = builder.build();
 
-        if (!attribute.isSupportedFor(spec)) {
+        if (!attribute.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", attribute.getClass().getSimpleName(), spec));
         }
         return attribute;

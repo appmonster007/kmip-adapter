@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for QueryFunction.
  */
 public class QueryFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<QueryFunction> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.QUERY_FUNCTION);
+    private final KmipTag kmipTag = QueryFunction.kmipTag;
+    private final EncodingType encodingType = QueryFunction.encodingType;
 
     @Override
     public QueryFunction deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class QueryFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        QueryFunction queryfunction = new QueryFunction(QueryFunction.fromValue(spec, value));
+        QueryFunction queryfunction = new QueryFunction(QueryFunction.fromValue(value));
 
-        if (!queryfunction.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!queryfunction.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("QueryFunction '%d' not supported for spec %s", value, spec));
         }
         return queryfunction;
     }

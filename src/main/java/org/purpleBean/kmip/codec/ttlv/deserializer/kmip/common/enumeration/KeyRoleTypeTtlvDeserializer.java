@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for KeyRoleType.
  */
 public class KeyRoleTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyRoleType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_ROLE_TYPE);
+    private final KmipTag kmipTag = KeyRoleType.kmipTag;
+    private final EncodingType encodingType = KeyRoleType.encodingType;
 
     @Override
     public KeyRoleType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class KeyRoleTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ke
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyRoleType keyroletype = new KeyRoleType(KeyRoleType.fromValue(spec, value));
+        KeyRoleType keyroletype = new KeyRoleType(KeyRoleType.fromValue(value));
 
-        if (!keyroletype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!keyroletype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("KeyRoleType '%d' not supported for spec %s", value, spec));
         }
         return keyroletype;
     }

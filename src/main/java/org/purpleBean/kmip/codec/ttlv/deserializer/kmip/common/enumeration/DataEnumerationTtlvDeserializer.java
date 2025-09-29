@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for DataEnumeration.
  */
 public class DataEnumerationTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DataEnumeration> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DATA);
+    private final KmipTag kmipTag = DataEnumeration.kmipTag;
+    private final EncodingType encodingType = DataEnumeration.encodingType;
 
     @Override
     public DataEnumeration deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class DataEnumerationTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        DataEnumeration dataenumeration = new DataEnumeration(DataEnumeration.fromValue(spec, value));
+        DataEnumeration dataenumeration = new DataEnumeration(DataEnumeration.fromValue(value));
 
-        if (!dataenumeration.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!dataenumeration.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("DataEnumeration '%d' not supported for spec %s", value, spec));
         }
         return dataenumeration;
     }

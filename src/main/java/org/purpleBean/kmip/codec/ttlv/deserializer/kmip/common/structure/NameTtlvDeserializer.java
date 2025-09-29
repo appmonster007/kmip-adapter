@@ -39,7 +39,7 @@ public class NameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name> {
 
         Name name = builder.build();
 
-        if (!name.isSupportedFor(spec)) {
+        if (!name.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", name.getClass().getSimpleName(), spec));
         }
         return name;

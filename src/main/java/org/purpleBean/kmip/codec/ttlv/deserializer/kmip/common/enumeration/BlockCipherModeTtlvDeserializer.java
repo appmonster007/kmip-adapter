@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for BlockCipherMode.
  */
 public class BlockCipherModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<BlockCipherMode> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BLOCK_CIPHER_MODE);
+    private final KmipTag kmipTag = BlockCipherMode.kmipTag;
+    private final EncodingType encodingType = BlockCipherMode.encodingType;
 
     @Override
     public BlockCipherMode deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class BlockCipherModeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        BlockCipherMode blockciphermode = new BlockCipherMode(BlockCipherMode.fromValue(spec, value));
+        BlockCipherMode blockciphermode = new BlockCipherMode(BlockCipherMode.fromValue(value));
 
-        if (!blockciphermode.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!blockciphermode.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("BlockCipherMode '%d' not supported for spec %s", value, spec));
         }
         return blockciphermode;
     }

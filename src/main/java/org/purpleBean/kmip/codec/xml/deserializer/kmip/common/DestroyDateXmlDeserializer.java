@@ -53,7 +53,7 @@ public class DestroyDateXmlDeserializer extends KmipDataTypeXmlDeserializer<Dest
         DestroyDate destroyDate = DestroyDate.builder().value(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!destroyDate.isSupportedFor(spec)) {
+        if (!destroyDate.isSupported()) {
             ctxt.reportInputMismatch(DestroyDate.class, "DestroyDate not supported for spec " + spec);
             return null;
         }

@@ -15,6 +15,14 @@ import java.util.stream.Stream;
 public class SimpleRequestHeader implements RequestHeaderStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_HEADER);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
+
+    static {
+        for (KmipSpec spec : KmipSpec.values()) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestHeader.class);
+        }
+    }
+
     @NonNull
     private final ProtocolVersion protocolVersion;
 
@@ -36,7 +44,8 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 }

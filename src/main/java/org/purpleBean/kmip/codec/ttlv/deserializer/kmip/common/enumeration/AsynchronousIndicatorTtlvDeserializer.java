@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for AsynchronousIndicator.
  */
 public class AsynchronousIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AsynchronousIndicator> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ASYNCHRONOUS_INDICATOR);
+    private final KmipTag kmipTag = AsynchronousIndicator.kmipTag;
+    private final EncodingType encodingType = AsynchronousIndicator.encodingType;
 
     @Override
     public AsynchronousIndicator deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class AsynchronousIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeser
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromValue(spec, value));
+        AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromValue(value));
 
-        if (!asynchronousindicator.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!asynchronousindicator.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("AsynchronousIndicator '%d' not supported for spec %s", value, spec));
         }
         return asynchronousindicator;
     }

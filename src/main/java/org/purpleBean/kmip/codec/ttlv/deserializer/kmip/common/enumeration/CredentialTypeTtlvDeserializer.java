@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for CredentialType.
  */
 public class CredentialTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CredentialType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CREDENTIAL_TYPE);
+    private final KmipTag kmipTag = CredentialType.kmipTag;
+    private final EncodingType encodingType = CredentialType.encodingType;
 
     @Override
     public CredentialType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class CredentialTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        CredentialType credentialtype = new CredentialType(CredentialType.fromValue(spec, value));
+        CredentialType credentialtype = new CredentialType(CredentialType.fromValue(value));
 
-        if (!credentialtype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!credentialtype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("CredentialType '%d' not supported for spec %s", value, spec));
         }
         return credentialtype;
     }

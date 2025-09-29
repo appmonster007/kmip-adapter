@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ObjectType.
  */
 public class ObjectTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ObjectType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_TYPE);
+    private final KmipTag kmipTag = ObjectType.kmipTag;
+    private final EncodingType encodingType = ObjectType.encodingType;
 
     @Override
     public ObjectType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ObjectTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Obj
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ObjectType objecttype = new ObjectType(ObjectType.fromValue(spec, value));
+        ObjectType objecttype = new ObjectType(ObjectType.fromValue(value));
 
-        if (!objecttype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!objecttype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ObjectType '%d' not supported for spec %s", value, spec));
         }
         return objecttype;
     }

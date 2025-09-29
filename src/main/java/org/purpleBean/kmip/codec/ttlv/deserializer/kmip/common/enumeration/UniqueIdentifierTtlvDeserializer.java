@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for UniqueIdentifier.
  */
 public class UniqueIdentifierTtlvDeserializer extends KmipDataTypeTtlvDeserializer<UniqueIdentifier> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);
+    private final KmipTag kmipTag = UniqueIdentifier.kmipTag;
+    private final EncodingType encodingType = UniqueIdentifier.encodingType;
 
     @Override
     public UniqueIdentifier deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class UniqueIdentifierTtlvDeserializer extends KmipDataTypeTtlvDeserializ
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        UniqueIdentifier uniqueidentifier = new UniqueIdentifier(UniqueIdentifier.fromValue(spec, value));
+        UniqueIdentifier uniqueidentifier = new UniqueIdentifier(UniqueIdentifier.fromValue(value));
 
-        if (!uniqueidentifier.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!uniqueidentifier.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("UniqueIdentifier '%d' not supported for spec %s", value, spec));
         }
         return uniqueidentifier;
     }

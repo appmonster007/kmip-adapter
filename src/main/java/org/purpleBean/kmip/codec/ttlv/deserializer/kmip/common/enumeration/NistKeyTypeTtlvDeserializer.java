@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for NistKeyType.
  */
 public class NistKeyTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<NistKeyType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NIST_KEY_TYPE);
+    private final KmipTag kmipTag = NistKeyType.kmipTag;
+    private final EncodingType encodingType = NistKeyType.encodingType;
 
     @Override
     public NistKeyType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class NistKeyTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ni
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        NistKeyType nistkeytype = new NistKeyType(NistKeyType.fromValue(spec, value));
+        NistKeyType nistkeytype = new NistKeyType(NistKeyType.fromValue(value));
 
-        if (!nistkeytype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!nistkeytype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("NistKeyType '%d' not supported for spec %s", value, spec));
         }
         return nistkeytype;
     }

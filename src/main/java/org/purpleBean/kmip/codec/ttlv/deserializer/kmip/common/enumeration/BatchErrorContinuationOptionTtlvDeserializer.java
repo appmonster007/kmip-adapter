@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for BatchErrorContinuationOption.
  */
 public class BatchErrorContinuationOptionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<BatchErrorContinuationOption> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ERROR_CONTINUATION_OPTION);
+    private final KmipTag kmipTag = BatchErrorContinuationOption.kmipTag;
+    private final EncodingType encodingType = BatchErrorContinuationOption.encodingType;
 
     @Override
     public BatchErrorContinuationOption deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class BatchErrorContinuationOptionTtlvDeserializer extends KmipDataTypeTt
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(BatchErrorContinuationOption.fromValue(spec, value));
+        BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(BatchErrorContinuationOption.fromValue(value));
 
-        if (!batcherrorcontinuationoption.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!batcherrorcontinuationoption.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("BatchErrorContinuationOption '%d' not supported for spec %s", value, spec));
         }
         return batcherrorcontinuationoption;
     }

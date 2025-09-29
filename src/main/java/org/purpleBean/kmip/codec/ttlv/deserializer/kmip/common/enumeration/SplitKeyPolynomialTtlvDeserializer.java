@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for SplitKeyPolynomial.
  */
 public class SplitKeyPolynomialTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SplitKeyPolynomial> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_POLYNOMIAL);
+    private final KmipTag kmipTag = SplitKeyPolynomial.kmipTag;
+    private final EncodingType encodingType = SplitKeyPolynomial.encodingType;
 
     @Override
     public SplitKeyPolynomial deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class SplitKeyPolynomialTtlvDeserializer extends KmipDataTypeTtlvDeserial
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.fromValue(spec, value));
+        SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.fromValue(value));
 
-        if (!splitkeypolynomial.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!splitkeypolynomial.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("SplitKeyPolynomial '%d' not supported for spec %s", value, spec));
         }
         return splitkeypolynomial;
     }

@@ -69,7 +69,7 @@ public class AttributeNameJsonDeserializer extends KmipDataTypeJsonDeserializer<
         AttributeName attributeName = AttributeName.builder().value(name).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeName.isSupportedFor(spec)) {
+        if (!attributeName.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AttributeName '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
             );

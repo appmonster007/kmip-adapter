@@ -1,7 +1,5 @@
 package org.purpleBean.kmip;
 
-import lombok.NonNull;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,7 +11,8 @@ public interface KmipDataType {
         TAG_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), clazz);
     }
 
-    static Class<? extends KmipDataType> getClassFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
+    static Class<? extends KmipDataType> getClassFromRegistry(KmipTag.Value kmipTagValue, EncodingType encodingType) {
+        KmipSpec spec = KmipContext.getSpec();
         return TAG_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 
@@ -21,7 +20,7 @@ public interface KmipDataType {
 
     EncodingType getEncodingType();
 
-    boolean isSupportedFor(@NonNull KmipSpec spec);
+    boolean isSupported();
 
     record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
     }

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for KeyCompressionType.
  */
 public class KeyCompressionTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KeyCompressionType> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_COMPRESSION_TYPE);
+    private final KmipTag kmipTag = KeyCompressionType.kmipTag;
+    private final EncodingType encodingType = KeyCompressionType.encodingType;
 
     @Override
     public KeyCompressionType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class KeyCompressionTypeTtlvDeserializer extends KmipDataTypeTtlvDeserial
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromValue(spec, value));
+        KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromValue(value));
 
-        if (!keycompressiontype.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!keycompressiontype.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("KeyCompressionType '%d' not supported for spec %s", value, spec));
         }
         return keycompressiontype;
     }

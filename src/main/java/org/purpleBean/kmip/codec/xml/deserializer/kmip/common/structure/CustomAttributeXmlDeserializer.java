@@ -50,7 +50,7 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
 
         CustomAttribute customAttribute = builder.build();
 
-        if (!customAttribute.isSupportedFor(spec)) {
+        if (!customAttribute.isSupported()) {
             ctxt.reportInputMismatch(CustomAttribute.class, "CustomAttribute not supported for spec " + spec);
             return null;
         }

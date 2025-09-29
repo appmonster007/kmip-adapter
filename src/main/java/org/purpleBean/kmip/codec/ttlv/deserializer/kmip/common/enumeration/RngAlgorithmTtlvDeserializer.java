@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for RngAlgorithm.
  */
 public class RngAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RngAlgorithm> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RNG_ALGORITHM);
+    private final KmipTag kmipTag = RngAlgorithm.kmipTag;
+    private final EncodingType encodingType = RngAlgorithm.encodingType;
 
     @Override
     public RngAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class RngAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        RngAlgorithm rngalgorithm = new RngAlgorithm(RngAlgorithm.fromValue(spec, value));
+        RngAlgorithm rngalgorithm = new RngAlgorithm(RngAlgorithm.fromValue(value));
 
-        if (!rngalgorithm.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!rngalgorithm.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("RngAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return rngalgorithm;
     }

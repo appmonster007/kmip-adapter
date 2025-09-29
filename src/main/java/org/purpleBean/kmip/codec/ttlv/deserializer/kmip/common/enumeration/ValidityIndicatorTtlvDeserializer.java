@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ValidityIndicator.
  */
 public class ValidityIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ValidityIndicator> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDITY_INDICATOR);
+    private final KmipTag kmipTag = ValidityIndicator.kmipTag;
+    private final EncodingType encodingType = ValidityIndicator.encodingType;
 
     @Override
     public ValidityIndicator deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ValidityIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeseriali
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ValidityIndicator validityindicator = new ValidityIndicator(ValidityIndicator.fromValue(spec, value));
+        ValidityIndicator validityindicator = new ValidityIndicator(ValidityIndicator.fromValue(value));
 
-        if (!validityindicator.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!validityindicator.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ValidityIndicator '%d' not supported for spec %s", value, spec));
         }
         return validityindicator;
     }

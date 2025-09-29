@@ -22,7 +22,7 @@ public class CustomAttributeXmlSerializer extends KmipDataTypeXmlSerializer<Cust
     @Override
     public void serialize(CustomAttribute customAttribute, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!customAttribute.isSupportedFor(spec)) {
+        if (!customAttribute.isSupported()) {
             throw new UnsupportedEncodingException();
         }
 

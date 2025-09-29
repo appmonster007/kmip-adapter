@@ -26,7 +26,7 @@ public class AttributeValueTtlvSerializer extends KmipDataTypeTtlvSerializer<Att
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attributeValue.isSupportedFor(spec)) {
+        if (!attributeValue.isSupported()) {
             throw new IOException(
                     String.format("%s is not supported for KMIP spec %s",
                             attributeValue.getKmipTag().getDescription(), spec)

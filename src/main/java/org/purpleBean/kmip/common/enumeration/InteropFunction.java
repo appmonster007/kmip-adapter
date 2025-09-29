@@ -12,6 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder
 public class InteropFunction implements KmipEnumeration {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INTEROP_FUNCTION);
+    public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -21,10 +24,12 @@ public class InteropFunction implements KmipEnumeration {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
-    }
 
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INTEROP_FUNCTION);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, InteropFunction.class);
+        }
+    }
 
     @NonNull
     private final Value value;
@@ -32,7 +37,7 @@ public class InteropFunction implements KmipEnumeration {
     public InteropFunction(@NonNull Value value) {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IllegalArgumentException(
                     String.format("Value '%s' for InteropFunction is not supported for KMIP spec %s", value.getDescription(), spec)
             );
@@ -60,20 +65,26 @@ public class InteropFunction implements KmipEnumeration {
         if (supportedVersions.isEmpty()) {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
+        Value existingEnumByValue = VALUE_REGISTRY.get(value);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        if (existingEnumByValue != null || existingEnumByDescription != null) {
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+        }
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.put(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
         return custom;
     }
 
     /**
      * Look up by name.
      */
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No InteropFunction value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -82,11 +93,11 @@ public class InteropFunction implements KmipEnumeration {
     /**
      * Look up by value.
      */
-    public static Value fromValue(KmipSpec spec, int value) {
-        // Check standard values first
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No InteropFunction value found for %d in KMIP spec %s", value, spec)
                 ));
@@ -99,6 +110,16 @@ public class InteropFunction implements KmipEnumeration {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
 
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
     public String getDescription() {
         return value.getDescription();
     }
@@ -108,8 +129,9 @@ public class InteropFunction implements KmipEnumeration {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return value.isSupportedFor(spec);
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && value.isSupported();
     }
 
     @Getter
@@ -133,7 +155,8 @@ public class InteropFunction implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }
@@ -144,7 +167,7 @@ public class InteropFunction implements KmipEnumeration {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
     }
@@ -166,7 +189,8 @@ public class InteropFunction implements KmipEnumeration {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
     }

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for ResultStatus.
  */
 public class ResultStatusTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ResultStatus> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_STATUS);
+    private final KmipTag kmipTag = ResultStatus.kmipTag;
+    private final EncodingType encodingType = ResultStatus.encodingType;
 
     @Override
     public ResultStatus deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class ResultStatusTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        ResultStatus resultstatus = new ResultStatus(ResultStatus.fromValue(spec, value));
+        ResultStatus resultstatus = new ResultStatus(ResultStatus.fromValue(value));
 
-        if (!resultstatus.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!resultstatus.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("ResultStatus '%d' not supported for spec %s", value, spec));
         }
         return resultstatus;
     }

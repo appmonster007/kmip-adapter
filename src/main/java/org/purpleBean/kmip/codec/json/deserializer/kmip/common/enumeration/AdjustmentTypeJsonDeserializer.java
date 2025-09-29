@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for AdjustmentType.
  */
 public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer<AdjustmentType> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ADJUSTMENT_TYPE);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = AdjustmentType.kmipTag;
+    private final EncodingType encodingType = AdjustmentType.encodingType;
 
     @Override
     public AdjustmentType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         KmipSpec spec = KmipContext.getSpec();
         AdjustmentType.Value adjustmenttypeValue;
         try {
-            adjustmenttypeValue = AdjustmentType.fromName(spec, description);
+            adjustmenttypeValue = AdjustmentType.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(AdjustmentType.class,
                     String.format("Unknown AdjustmentType value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class AdjustmentTypeJsonDeserializer extends KmipDataTypeJsonDeserializer
         AdjustmentType adjustmenttype = new AdjustmentType(adjustmenttypeValue);
 
         // Final validation: Ensure constructed AdjustmentType is supported
-        if (!adjustmenttype.isSupportedFor(spec)) {
+        if (!adjustmenttype.isSupported()) {
             throw new NoSuchElementException(
                     String.format("AdjustmentType '%s' is not supported for KMIP spec %s", description, spec)
             );

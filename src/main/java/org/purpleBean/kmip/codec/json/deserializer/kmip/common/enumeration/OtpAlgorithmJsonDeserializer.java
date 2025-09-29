@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
  * JSON deserializer for OtpAlgorithm.
  */
 public class OtpAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<OtpAlgorithm> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OTP_ALGORITHM);
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
+    private final KmipTag kmipTag = OtpAlgorithm.kmipTag;
+    private final EncodingType encodingType = OtpAlgorithm.encodingType;
 
     @Override
     public OtpAlgorithm deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -75,7 +75,7 @@ public class OtpAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<O
         KmipSpec spec = KmipContext.getSpec();
         OtpAlgorithm.Value otpalgorithmValue;
         try {
-            otpalgorithmValue = OtpAlgorithm.fromName(spec, description);
+            otpalgorithmValue = OtpAlgorithm.fromName(description);
         } catch (NoSuchElementException e) {
             ctxt.reportInputMismatch(OtpAlgorithm.class,
                     String.format("Unknown OtpAlgorithm value '%s' for KMIP spec %s", description, spec));
@@ -85,7 +85,7 @@ public class OtpAlgorithmJsonDeserializer extends KmipDataTypeJsonDeserializer<O
         OtpAlgorithm otpalgorithm = new OtpAlgorithm(otpalgorithmValue);
 
         // Final validation: Ensure constructed OtpAlgorithm is supported
-        if (!otpalgorithm.isSupportedFor(spec)) {
+        if (!otpalgorithm.isSupported()) {
             throw new NoSuchElementException(
                     String.format("OtpAlgorithm '%s' is not supported for KMIP spec %s", description, spec)
             );

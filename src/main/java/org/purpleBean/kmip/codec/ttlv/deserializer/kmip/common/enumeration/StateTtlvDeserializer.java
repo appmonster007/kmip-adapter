@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
  * TTLV deserializer for State.
  */
 public class StateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<State> {
-    private final EncodingType encodingType = EncodingType.ENUMERATION;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
+    private final KmipTag kmipTag = State.kmipTag;
+    private final EncodingType encodingType = State.encodingType;
 
     @Override
     public State deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
@@ -33,10 +33,11 @@ public class StateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<State> {
         int value = bb.getInt();
 
         KmipSpec spec = KmipContext.getSpec();
-        State state = new State(State.fromValue(spec, value));
+        State state = new State(State.fromValue(value));
 
-        if (!state.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
+        if (!state.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("State '%d' not supported for spec %s", value, spec));
         }
         return state;
     }

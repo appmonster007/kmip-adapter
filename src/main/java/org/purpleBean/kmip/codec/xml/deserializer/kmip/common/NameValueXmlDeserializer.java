@@ -51,7 +51,7 @@ public class NameValueXmlDeserializer extends KmipDataTypeXmlDeserializer<NameVa
         NameValue nameValue = NameValue.builder().value(valueNode.asText()).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!nameValue.isSupportedFor(spec)) {
+        if (!nameValue.isSupported()) {
             ctxt.reportInputMismatch(NameValue.class, "NameValue not supported for spec " + spec);
             return null;
         }

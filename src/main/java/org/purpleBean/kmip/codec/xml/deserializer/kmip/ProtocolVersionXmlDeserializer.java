@@ -3,7 +3,6 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
@@ -43,7 +42,7 @@ public class ProtocolVersionXmlDeserializer extends KmipDataTypeXmlDeserializer<
         ProtocolVersion protocolVersion = ProtocolVersion.of(major, minor);
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!protocolVersion.isSupportedFor(spec)) {
+        if (!protocolVersion.isSupported()) {
             ctxt.reportInputMismatch(ProtocolVersion.class,
                     "ProtocolVersion not supported for spec " + spec);
         }

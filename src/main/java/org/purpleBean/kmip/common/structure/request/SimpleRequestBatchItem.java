@@ -2,7 +2,6 @@ package org.purpleBean.kmip.common.structure.request;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import org.purpleBean.kmip.*;
 
 import java.util.List;
@@ -12,6 +11,13 @@ import java.util.List;
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ITEM);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
+
+    static {
+        for (KmipSpec spec : KmipSpec.values()) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestBatchItem.class);
+        }
+    }
 
     @Override
     public KmipTag getKmipTag() {
@@ -29,7 +35,8 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 }

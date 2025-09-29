@@ -25,6 +25,13 @@ public class Attribute implements KmipStructure {
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, Attribute.class);
+        }
+    }
+
     @NonNull
     private final AttributeName attributeName;
     private final AttributeIndex attributeIndex;
@@ -52,7 +59,6 @@ public class Attribute implements KmipStructure {
             attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
         }
         return KmipAttribute.getAttributeBuilderFromRegistry(
-                spec,
                 attrTag,
                 attribute.getAttributeValue().getEncodingType()
         ).apply(attribute.getAttributeName(), attribute.getAttributeValue());
@@ -69,7 +75,8 @@ public class Attribute implements KmipStructure {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 
