@@ -3,6 +3,7 @@ package org.purpleBean.kmip.test.suite;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
@@ -46,6 +47,7 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         ByteBuffer buffer;
         try {
             buffer = ttlvMapper.writeValueAsByteBuffer(original);
+            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = ttlvMapper.readValue(buffer, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {
@@ -60,6 +62,7 @@ public abstract class AbstractTtlvSerializationSuite<T> extends BaseKmipTest {
         ByteBuffer buffer;
         try {
             buffer = mapper().writeValueAsByteBuffer(original);
+            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = mapper().readValue(buffer, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {

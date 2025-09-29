@@ -50,6 +50,7 @@ public abstract class AbstractJsonSerializationSuite<T> extends BaseKmipTest {
         T original = createDefault();
         try {
             String json = mapper().writeValueAsString(original);
+            System.out.println("JSON: \n" + json);
             T restored = mapper().readValue(json, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
@@ -63,6 +64,7 @@ public abstract class AbstractJsonSerializationSuite<T> extends BaseKmipTest {
         T original = createVariant();
         try {
             String json = mapper().writeValueAsString(original);
+            System.out.println("JSON: \n" + json);
             T restored = mapper().readValue(json, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
