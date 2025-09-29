@@ -322,10 +322,22 @@ public class ${DATA_NAME} implements KmipDataType {
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${DATA_NAME}.class);
+        }
+    }
+    
+        
     // TODO: Add your dataType field here with required java type and set the var name to value
     // Example:
     @NonNull
     private final OffsetDateTime value;
+    
+    public static ${DATA_NAME} of(@NonNull OffsetDateTime value) {
+        return ${DATA_NAME}.builder().value(value).build();
+    }
 
     @Override
     public KmipTag getKmipTag() {
@@ -338,7 +350,8 @@ public class ${DATA_NAME} implements KmipDataType {
     }
 
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
     }
 }
@@ -389,8 +402,10 @@ public class ${DATA_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${DAT
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", ${varname}.getKmipTag().getDescription(), spec));
+        if (!${varname}.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("%s is not supported for KMIP spec %s", ${varname}.getKmipTag().getDescription(), spec)
+            );
         }
 
         gen.writeStartObject();
@@ -496,8 +511,10 @@ public class ${DATA_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<$
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
-            throw new NoSuchElementException(String.format("${DATA_NAME} is not supported for KMIP spec %s", spec));
+
+        if (!${varname}.isSupported()) {
+            ctxt.reportInputMismatch(${DATA_NAME}.class, "${DATA_NAME} not supported for spec " + spec);
+            return null;
         }
 
         return ${varname};
@@ -550,7 +567,7 @@ public class ${DATA_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${DATA_
     public void serialize(${DATA_NAME} ${varname}, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
+        if (!${varname}.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", ${varname}.getClass().getSimpleName(), spec));
         }
 
@@ -650,7 +667,8 @@ public class ${DATA_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${D
         ${DATA_NAME} ${varname} = ${DATA_NAME}.builder().value(dateTime).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
+
+        if (!${varname}.isSupported()) {
             ctxt.reportInputMismatch(${DATA_NAME}.class, "${DATA_NAME} not supported for spec " + spec);
             return null;
         }
@@ -708,10 +726,10 @@ public class ${DATA_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${DAT
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new IOException(
                 String.format("%s is not supported for KMIP spec %s",
-                value.getKmipTag().getDescription(), spec)
+                        value.getKmipTag().getDescription(), spec)
             );
         }
 
@@ -787,8 +805,8 @@ public class ${DATA_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<$
 
         KmipSpec spec = KmipContext.getSpec();
 
-        if (!${varname}.isSupportedFor(spec)) {
-            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", ${varname}.getClass().getSimpleName(), spec));
+        if (!${varname}.isSupported()) {
+            throw new NoSuchElementException(String.format("${DATA_NAME} not supported for spec %s", spec));
         }
         return ${varname};
     }
@@ -831,8 +849,6 @@ import java.util.List;
 @DisplayName("${DATA_NAME} Domain Tests")
 class ${DATA_NAME}Test extends AbstractKmipDataTypeSuite<${DATA_NAME}> {
 
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
     @Override
     protected Class<${DATA_NAME}> type() {
         return ${DATA_NAME}.class;
@@ -841,11 +857,13 @@ class ${DATA_NAME}Test extends AbstractKmipDataTypeSuite<${DATA_NAME}> {
     @Override
     protected ${DATA_NAME} createDefault() {
         // TODO: Update with actual default values for your dataType
+        OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         return ${DATA_NAME}.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected EncodingType expectedEncodingType() {
+        // TODO: Update with actual encoding type for your dataType
         return EncodingType.DATE_TIME;
     }
 }
