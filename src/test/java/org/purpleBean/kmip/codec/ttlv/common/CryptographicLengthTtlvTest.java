@@ -1,0 +1,25 @@
+package org.purpleBean.kmip.codec.ttlv.common;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.CryptographicLength;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+
+
+@DisplayName("CryptographicLength TTLV Serialization Tests")
+class CryptographicLengthTtlvTest extends AbstractTtlvSerializationSuite<CryptographicLength> {
+
+    @Override
+    protected Class<CryptographicLength> type() {
+        return CryptographicLength.class;
+    }
+
+    @Override
+    protected CryptographicLength createDefault() {
+        return CryptographicLength.of(256);
+    }
+
+    @Override
+    protected CryptographicLength createVariant() {
+        return CryptographicLength.of(512);
+    }
+}

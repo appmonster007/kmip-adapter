@@ -3,6 +3,7 @@ org.purpleBean.kmip.benchmark.subjects.common.ActivationDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.CryptographicLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DestroyDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.NameValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.UniqueIdentifierBenchmarkSubject

@@ -6,6 +6,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ActivationDateTtlvDeseri
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeIndexTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CryptographicLengthTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DestroyDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.NameValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.UniqueIdentifierTtlvDeserializer
