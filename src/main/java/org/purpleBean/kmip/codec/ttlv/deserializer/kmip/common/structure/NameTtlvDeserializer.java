@@ -1,12 +1,14 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
 
 import java.io.IOException;
@@ -21,12 +23,12 @@ public class NameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name> {
 
     @Override
     public Name deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
+        TtlvObject nodeTtlvObject = TtlvObject.fromBuffer(ttlvBuffer);
+        if (Arrays.equals(nodeTtlvObject.getTag(), kmipTag.getTagBytes()) && nodeTtlvObject.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), nodeTtlvObject.getType()));
         }
 
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
+        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(nodeTtlvObject.getValue());
         KmipSpec spec = KmipContext.getSpec();
         Name.NameBuilder builder = Name.builder();
 
@@ -44,11 +46,11 @@ public class NameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name> {
     }
 
     private void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, TtlvObject ttlvObject, TtlvMapper mapper) throws IOException {
-        // TODO: Implement field deserialization based on nodeTag
-        // Example:
         switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(mapper.readValue(ttlvObject.toByteBuffer(), ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(mapper.readValue(ttlvObject.toByteBuffer(), State.class));
+            case KmipTag.Standard.NAME_VALUE ->
+                    builder.nameValue(mapper.readValue(ttlvObject.toByteBuffer(), NameValue.class));
+            case KmipTag.Standard.NAME_TYPE ->
+                    builder.nameType(mapper.readValue(ttlvObject.toByteBuffer(), NameType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

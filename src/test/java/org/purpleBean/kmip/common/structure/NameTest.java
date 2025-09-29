@@ -3,18 +3,23 @@ package org.purpleBean.kmip.common.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.common.ActivationDate;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 
-@DisplayName("Name Domain Tests")
-class NameTest extends AbstractKmipStructureSuite<Name> {
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+@DisplayName("Name Domain Tests")
+class NameTest extends AbstractKmipStructureAttributeSuite<Name> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<Name> type() {
@@ -23,13 +28,10 @@ class NameTest extends AbstractKmipStructureSuite<Name> {
 
     @Override
     protected Name createDefault() {
-        // TODO: Update with actual default values for your structure
-        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
-        State state = new State(State.Standard.ACTIVE);
         return Name.builder()
-            .activationDate(activationDate)
-            .state(state)
-            .build();
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
     }
 
     @Override
@@ -39,16 +41,65 @@ class NameTest extends AbstractKmipStructureSuite<Name> {
 
     @Override
     protected int expectedMinComponentCount() {
-        // TODO: Update with the expected minimum number of components
         return 2;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        // Add assertions for components if desired
-        // TODO: Add validation for each component
-        // Example:
-        // assertThat(values.get(0).getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
-        // assertThat(values.get(1).getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
+        assertThat(values.get(0)).isInstanceOf(NameValue.class);
+        assertThat(values.get(1)).isInstanceOf(NameType.class);
+    }
+
+    @Override
+    protected boolean expectAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    protected boolean expectServerInitializable() {
+        return false;
+    }
+
+    @Override
+    protected boolean expectClientInitializable() {
+        return true;
+    }
+
+    @Override
+    protected boolean expectClientDeletable() {
+        return true;
+    }
+
+    @Override
+    protected boolean expectMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    protected State stateForServerModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    protected State stateForServerModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    protected State stateForClientModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    protected State stateForClientModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    protected void attrStruct_serverModifiable_respectsState() {
+    }
+
+    @Override
+    protected void attrStruct_clientModifiable_respectsState() {
     }
 }

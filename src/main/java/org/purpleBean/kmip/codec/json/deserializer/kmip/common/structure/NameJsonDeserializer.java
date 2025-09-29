@@ -3,10 +3,13 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
 
 import java.io.IOException;
@@ -96,8 +99,8 @@ public class NameJsonDeserializer extends KmipDataTypeJsonDeserializer<Name> {
         // TODO: Implement field deserialization based on tag, preferably using switch case expression
         // Example:
         switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(p.getCodec().treeToValue(node, ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(p.getCodec().treeToValue(node, State.class));
+            case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
+            case KmipTag.Standard.NAME_TYPE -> builder.nameType(p.getCodec().treeToValue(node, NameType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

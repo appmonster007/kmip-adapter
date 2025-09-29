@@ -4,6 +4,7 @@ org.purpleBean.kmip.benchmark.subjects.common.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DestroyDateBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.NameValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.UniqueIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.AdjustmentTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.enumeration.AlternativeNameTypeBenchmarkSubject

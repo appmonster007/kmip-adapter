@@ -5,11 +5,13 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
 
 import java.io.IOException;
@@ -30,7 +32,7 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
         }
 
         if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(Name.class, "Invalid Tag for Name");
             return null;
         }
@@ -67,11 +69,9 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
      * @throws IOException if there is an error deserializing the value
      */
     private void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement field deserialization based on nodeTag
-        // Example:
         switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(p.getCodec().treeToValue(node, ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(p.getCodec().treeToValue(node, State.class));
+            case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
+            case KmipTag.Standard.NAME_TYPE -> builder.nameType(p.getCodec().treeToValue(node, NameType.class));
             default -> throw new IllegalArgumentException();
         }
     }

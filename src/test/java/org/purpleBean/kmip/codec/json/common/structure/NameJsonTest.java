@@ -1,12 +1,10 @@
 package org.purpleBean.kmip.codec.json.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -23,23 +21,17 @@ class NameJsonTest extends AbstractJsonSerializationSuite<Name> {
 
     @Override
     protected Name createDefault() {
-        // TODO: Update with actual default values for your structure
-        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
-        State state = new State(State.Standard.ACTIVE);
         return Name.builder()
-            .activationDate(activationDate)
-            .state(state)
-            .build();
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
     }
 
     @Override
     protected Name createVariant() {
-        // TODO: Update with different values to test variations
-        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
-        State state = new State(State.Standard.DEACTIVATED);
         return Name.builder()
-            .activationDate(activationDate)
-            .state(state)
-            .build();
+                .nameValue(NameValue.of("some-variant-name"))
+                .nameType(new NameType(NameType.Standard.URI))
+                .build();
     }
 }

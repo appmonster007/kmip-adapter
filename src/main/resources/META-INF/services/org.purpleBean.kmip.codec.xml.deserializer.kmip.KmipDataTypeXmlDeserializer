@@ -7,6 +7,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeIndexXmlDeserial
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DestroyDateXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.NameValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.UniqueIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.AdjustmentTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.AlternativeNameTypeXmlDeserializer
