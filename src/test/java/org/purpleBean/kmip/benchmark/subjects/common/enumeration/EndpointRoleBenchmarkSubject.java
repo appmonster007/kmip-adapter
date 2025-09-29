@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.EndpointRole;
 
 import java.nio.ByteBuffer;
 
-public class EndpointRoleBenchmarkSubject implements KmipBenchmarkSubject {
+public class EndpointRoleBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

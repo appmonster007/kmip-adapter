@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.WrappingMethod;
 
 import java.nio.ByteBuffer;
 
-public class WrappingMethodBenchmarkSubject implements KmipBenchmarkSubject {
+public class WrappingMethodBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

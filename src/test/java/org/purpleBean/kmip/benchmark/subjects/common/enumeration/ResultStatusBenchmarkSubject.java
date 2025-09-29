@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.ResultStatus;
 
 import java.nio.ByteBuffer;
 
-public class ResultStatusBenchmarkSubject implements KmipBenchmarkSubject {
+public class ResultStatusBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

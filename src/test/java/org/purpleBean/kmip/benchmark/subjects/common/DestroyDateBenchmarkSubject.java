@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class DestroyDateBenchmarkSubject implements KmipBenchmarkSubject {
+public class DestroyDateBenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

@@ -12,7 +12,7 @@ import org.purpleBean.kmip.common.structure.CustomAttribute;
 
 import java.nio.ByteBuffer;
 
-public class CustomAttributeBenchmarkSubject implements KmipBenchmarkSubject {
+public class CustomAttributeBenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

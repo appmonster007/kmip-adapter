@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.KeyWrapType;
 
 import java.nio.ByteBuffer;
 
-public class KeyWrapTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class KeyWrapTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

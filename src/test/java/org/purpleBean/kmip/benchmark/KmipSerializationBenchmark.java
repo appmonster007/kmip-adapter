@@ -1,6 +1,7 @@
 package org.purpleBean.kmip.benchmark;
 
 import org.openjdk.jmh.annotations.*;
+import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 
@@ -23,34 +24,70 @@ public class KmipSerializationBenchmark {
     // JSON serialize/deserialize
     @Benchmark
     public String jsonSerialize(BenchState s) throws Exception {
-        return s.impl.jsonSerialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.jsonSerialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Benchmark
     public Object jsonDeserialize(BenchState s) throws Exception {
-        return s.impl.jsonDeserialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.jsonDeserialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     // XML serialize/deserialize
     @Benchmark
     public String xmlSerialize(BenchState s) throws Exception {
-        return s.impl.xmlSerialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.xmlSerialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Benchmark
     public Object xmlDeserialize(BenchState s) throws Exception {
-        return s.impl.xmlDeserialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.xmlDeserialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     // TTLV serialize/deserialize
     @Benchmark
     public ByteBuffer ttlvSerialize(BenchState s) throws Exception {
-        return s.impl.ttlvSerialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.ttlvSerialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Benchmark
     public Object ttlvDeserialize(BenchState s) throws Exception {
-        return s.impl.ttlvDeserialize();
+        return KmipContext.withSpec(s.impl.getSpec(), () -> {
+            try {
+                return s.impl.ttlvDeserialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @State(Scope.Benchmark)

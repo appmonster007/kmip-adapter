@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.ShreddingAlgorithm;
 
 import java.nio.ByteBuffer;
 
-public class ShreddingAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
+public class ShreddingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

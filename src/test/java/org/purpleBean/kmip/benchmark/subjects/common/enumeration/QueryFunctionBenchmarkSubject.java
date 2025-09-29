@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.QueryFunction;
 
 import java.nio.ByteBuffer;
 
-public class QueryFunctionBenchmarkSubject implements KmipBenchmarkSubject {
+public class QueryFunctionBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

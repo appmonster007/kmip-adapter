@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.PutFunction;
 
 import java.nio.ByteBuffer;
 
-public class PutFunctionBenchmarkSubject implements KmipBenchmarkSubject {
+public class PutFunctionBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

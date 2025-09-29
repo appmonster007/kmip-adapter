@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.DerivationMethod;
 
 import java.nio.ByteBuffer;
 
-public class DerivationMethodBenchmarkSubject implements KmipBenchmarkSubject {
+public class DerivationMethodBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

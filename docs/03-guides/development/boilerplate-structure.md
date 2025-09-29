@@ -539,7 +539,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class FooDemoStructureBenchmarkSubject implements KmipBenchmarkSubject {
+public class FooDemoStructureBenchmarkSubject extends KmipBenchmarkSubject {
     private ObjectMapper json; private XmlMapper xml; private TtlvMapper ttlv;
     private FooDemoStructure obj; private String jsonStr; private String xmlStr; private ByteBuffer ttlvBuf;
 

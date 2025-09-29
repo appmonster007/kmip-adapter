@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.UniqueIdentifier;
 
 import java.nio.ByteBuffer;
 
-public class UniqueIdentifierBenchmarkSubject implements KmipBenchmarkSubject {
+public class UniqueIdentifierBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.UnwrapMode;
 
 import java.nio.ByteBuffer;
 
-public class UnwrapModeBenchmarkSubject implements KmipBenchmarkSubject {
+public class UnwrapModeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.nio.ByteBuffer;
 
-public class ProtocolVersionBenchmarkSubject implements KmipBenchmarkSubject {
+public class ProtocolVersionBenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

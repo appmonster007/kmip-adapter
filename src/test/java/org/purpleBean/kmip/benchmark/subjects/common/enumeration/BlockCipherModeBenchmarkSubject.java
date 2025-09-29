@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.BlockCipherMode;
 
 import java.nio.ByteBuffer;
 
-public class BlockCipherModeBenchmarkSubject implements KmipBenchmarkSubject {
+public class BlockCipherModeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

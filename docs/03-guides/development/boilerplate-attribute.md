@@ -544,7 +544,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class FooDemoAttributeBenchmarkSubject implements KmipBenchmarkSubject {
+public class FooDemoAttributeBenchmarkSubject extends KmipBenchmarkSubject {
     private ObjectMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

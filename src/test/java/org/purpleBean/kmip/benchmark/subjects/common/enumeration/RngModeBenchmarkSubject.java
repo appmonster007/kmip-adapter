@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.RngMode;
 
 import java.nio.ByteBuffer;
 
-public class RngModeBenchmarkSubject implements KmipBenchmarkSubject {
+public class RngModeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

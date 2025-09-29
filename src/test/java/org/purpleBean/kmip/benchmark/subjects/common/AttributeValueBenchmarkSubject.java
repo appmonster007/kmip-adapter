@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class AttributeValueBenchmarkSubject implements KmipBenchmarkSubject {
+public class AttributeValueBenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

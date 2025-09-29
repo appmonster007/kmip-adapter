@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.OtpAlgorithm;
 
 import java.nio.ByteBuffer;
 
-public class OtpAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
+public class OtpAlgorithmBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

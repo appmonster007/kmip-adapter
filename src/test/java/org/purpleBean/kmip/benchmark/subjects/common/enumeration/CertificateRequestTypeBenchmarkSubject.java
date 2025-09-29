@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.CertificateRequestType;
 
 import java.nio.ByteBuffer;
 
-public class CertificateRequestTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class CertificateRequestTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

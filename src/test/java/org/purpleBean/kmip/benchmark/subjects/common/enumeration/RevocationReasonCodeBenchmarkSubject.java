@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 
 import java.nio.ByteBuffer;
 
-public class RevocationReasonCodeBenchmarkSubject implements KmipBenchmarkSubject {
+public class RevocationReasonCodeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

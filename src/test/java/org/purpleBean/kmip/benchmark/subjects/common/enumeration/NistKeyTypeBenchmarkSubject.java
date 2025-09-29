@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.NistKeyType;
 
 import java.nio.ByteBuffer;
 
-public class NistKeyTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class NistKeyTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.SecretDataType;
 
 import java.nio.ByteBuffer;
 
-public class SecretDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class SecretDataTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

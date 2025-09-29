@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.CryptographicAlgorithm;
 
 import java.nio.ByteBuffer;
 
-public class CryptographicAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
+public class CryptographicAlgorithmBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

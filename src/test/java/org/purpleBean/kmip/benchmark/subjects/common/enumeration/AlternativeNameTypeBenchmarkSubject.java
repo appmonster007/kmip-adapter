@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 
 import java.nio.ByteBuffer;
 
-public class AlternativeNameTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class AlternativeNameTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

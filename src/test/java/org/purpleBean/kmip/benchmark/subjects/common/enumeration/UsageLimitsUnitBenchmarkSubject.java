@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 
 import java.nio.ByteBuffer;
 
-public class UsageLimitsUnitBenchmarkSubject implements KmipBenchmarkSubject {
+public class UsageLimitsUnitBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

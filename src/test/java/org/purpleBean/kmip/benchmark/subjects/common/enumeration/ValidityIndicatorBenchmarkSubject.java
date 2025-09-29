@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.ValidityIndicator;
 
 import java.nio.ByteBuffer;
 
-public class ValidityIndicatorBenchmarkSubject implements KmipBenchmarkSubject {
+public class ValidityIndicatorBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

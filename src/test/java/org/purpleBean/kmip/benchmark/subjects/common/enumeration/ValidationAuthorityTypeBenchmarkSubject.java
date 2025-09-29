@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.ValidationAuthorityType;
 
 import java.nio.ByteBuffer;
 
-public class ValidationAuthorityTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class ValidationAuthorityTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

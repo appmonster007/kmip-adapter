@@ -740,7 +740,7 @@ import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
 
 import java.nio.ByteBuffer;
 
-public class FooDemoEnumBenchmarkSubject implements KmipBenchmarkSubject {
+public class FooDemoEnumBenchmarkSubject extends KmipBenchmarkSubject {
     private ObjectMapper json;
     private ObjectMapper xml;
     private TtlvMapper ttlv;

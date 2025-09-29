@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.AttributeName;
 
 import java.nio.ByteBuffer;
 
-public class AttributeNameBenchmarkSubject implements KmipBenchmarkSubject {
+public class AttributeNameBenchmarkSubject extends KmipBenchmarkSubject {
 
     private JsonMapper json;
     private XmlMapper xml;

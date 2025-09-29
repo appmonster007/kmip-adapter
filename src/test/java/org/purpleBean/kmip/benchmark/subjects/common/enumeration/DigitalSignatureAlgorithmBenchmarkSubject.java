@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.DigitalSignatureAlgorithm;
 
 import java.nio.ByteBuffer;
 
-public class DigitalSignatureAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
+public class DigitalSignatureAlgorithmBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

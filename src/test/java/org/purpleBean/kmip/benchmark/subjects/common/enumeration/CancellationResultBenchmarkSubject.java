@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.CancellationResult;
 
 import java.nio.ByteBuffer;
 
-public class CancellationResultBenchmarkSubject implements KmipBenchmarkSubject {
+public class CancellationResultBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

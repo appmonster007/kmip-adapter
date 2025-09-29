@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.Fips186Variation;
 
 import java.nio.ByteBuffer;
 
-public class Fips186VariationBenchmarkSubject implements KmipBenchmarkSubject {
+public class Fips186VariationBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

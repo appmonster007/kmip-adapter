@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.Ephemeral;
 
 import java.nio.ByteBuffer;
 
-public class EphemeralBenchmarkSubject implements KmipBenchmarkSubject {
+public class EphemeralBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

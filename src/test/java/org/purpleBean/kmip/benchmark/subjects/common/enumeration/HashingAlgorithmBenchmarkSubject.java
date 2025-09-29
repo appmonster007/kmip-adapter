@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 
 import java.nio.ByteBuffer;
 
-public class HashingAlgorithmBenchmarkSubject implements KmipBenchmarkSubject {
+public class HashingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

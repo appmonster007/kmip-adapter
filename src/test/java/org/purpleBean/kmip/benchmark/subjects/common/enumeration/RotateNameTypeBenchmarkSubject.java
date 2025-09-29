@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.RotateNameType;
 
 import java.nio.ByteBuffer;
 
-public class RotateNameTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class RotateNameTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

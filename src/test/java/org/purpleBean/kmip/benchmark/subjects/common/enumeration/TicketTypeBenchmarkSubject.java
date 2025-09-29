@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.TicketType;
 
 import java.nio.ByteBuffer;
 
-public class TicketTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class TicketTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -77,7 +77,7 @@ To add performance tests for a new KMIP object:
 
 Example implementation:
 ```java
-public class YourNewKmipObjectBenchmarkSubject implements KmipBenchmarkSubject {
+public class YourNewKmipObjectBenchmarkSubject extends KmipBenchmarkSubject {
     private ObjectMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.ProtectionLevel;
 
 import java.nio.ByteBuffer;
 
-public class ProtectionLevelBenchmarkSubject implements KmipBenchmarkSubject {
+public class ProtectionLevelBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

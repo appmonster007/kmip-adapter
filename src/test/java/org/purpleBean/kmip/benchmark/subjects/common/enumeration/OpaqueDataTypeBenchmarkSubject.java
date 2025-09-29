@@ -13,7 +13,7 @@ import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
 import java.nio.ByteBuffer;
 import java.util.Set;
 
-public class OpaqueDataTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class OpaqueDataTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

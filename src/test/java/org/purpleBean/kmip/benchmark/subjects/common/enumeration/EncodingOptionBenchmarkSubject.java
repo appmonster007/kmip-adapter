@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.EncodingOption;
 
 import java.nio.ByteBuffer;
 
-public class EncodingOptionBenchmarkSubject implements KmipBenchmarkSubject {
+public class EncodingOptionBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.BatchErrorContinuationOption;
 
 import java.nio.ByteBuffer;
 
-public class BatchErrorContinuationOptionBenchmarkSubject implements KmipBenchmarkSubject {
+public class BatchErrorContinuationOptionBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

@@ -1,46 +1,52 @@
 package org.purpleBean.kmip.benchmark.api;
 
+import lombok.Getter;
+import org.purpleBean.kmip.KmipSpec;
+
 import java.nio.ByteBuffer;
 
 /**
  * SPI for adding new KMIP serialization/deserialization benchmark subjects
  * without modifying the core benchmark class.
  */
-public interface KmipBenchmarkSubject {
+public abstract class KmipBenchmarkSubject {
+
+    @Getter
+    public KmipSpec spec = KmipSpec.UnknownVersion;
 
     /**
      * A short, unique name used to select this subject (e.g., via -p subject=Name).
      */
-    String name();
+    public abstract String name();
 
     /**
      * Prepare mappers and test objects.
      */
-    void setup() throws Exception;
+    public abstract void setup() throws Exception;
 
     /**
      * Cleanup any state after benchmark.
      */
-    void tearDown();
+    public abstract void tearDown();
 
-    String getJsonStr();
+    public abstract String getJsonStr();
 
-    String getXmlStr();
+    public abstract String getXmlStr();
 
-    ByteBuffer getTtlvBuf();
+    public abstract ByteBuffer getTtlvBuf();
 
     // JSON
-    String jsonSerialize() throws Exception;
+    public abstract String jsonSerialize() throws Exception;
 
-    Object jsonDeserialize() throws Exception;
+    public abstract Object jsonDeserialize() throws Exception;
 
     // XML
-    String xmlSerialize() throws Exception;
+    public abstract String xmlSerialize() throws Exception;
 
-    Object xmlDeserialize() throws Exception;
+    public abstract Object xmlDeserialize() throws Exception;
 
     // TTLV
-    ByteBuffer ttlvSerialize() throws Exception;
+    public abstract ByteBuffer ttlvSerialize() throws Exception;
 
-    Object ttlvDeserialize() throws Exception;
+    public abstract Object ttlvDeserialize() throws Exception;
 }

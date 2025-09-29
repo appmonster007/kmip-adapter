@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.DeactivationReasonCode;
 
 import java.nio.ByteBuffer;
 
-public class DeactivationReasonCodeBenchmarkSubject implements KmipBenchmarkSubject {
+public class DeactivationReasonCodeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

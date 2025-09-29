@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.SplitKeyPolynomial;
 
 import java.nio.ByteBuffer;
 
-public class SplitKeyPolynomialBenchmarkSubject implements KmipBenchmarkSubject {
+public class SplitKeyPolynomialBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

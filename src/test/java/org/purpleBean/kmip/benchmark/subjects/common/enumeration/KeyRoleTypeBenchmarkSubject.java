@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.KeyRoleType;
 
 import java.nio.ByteBuffer;
 
-public class KeyRoleTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class KeyRoleTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

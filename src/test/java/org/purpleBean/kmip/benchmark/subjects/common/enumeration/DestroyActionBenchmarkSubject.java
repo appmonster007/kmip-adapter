@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.DestroyAction;
 
 import java.nio.ByteBuffer;
 
-public class DestroyActionBenchmarkSubject implements KmipBenchmarkSubject {
+public class DestroyActionBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

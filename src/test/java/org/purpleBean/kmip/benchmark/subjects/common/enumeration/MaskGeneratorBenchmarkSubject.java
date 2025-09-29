@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.MaskGenerator;
 
 import java.nio.ByteBuffer;
 
-public class MaskGeneratorBenchmarkSubject implements KmipBenchmarkSubject {
+public class MaskGeneratorBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

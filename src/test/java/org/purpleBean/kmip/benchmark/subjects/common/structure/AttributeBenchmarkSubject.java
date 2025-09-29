@@ -1,6 +1,5 @@
 package org.purpleBean.kmip.benchmark.subjects.common.structure;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
@@ -12,27 +11,23 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.structure.Attribute;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class AttributeBenchmarkSubject implements KmipBenchmarkSubject {
+public class AttributeBenchmarkSubject extends KmipBenchmarkSubject {
 
+    private final KmipSpec spec = KmipSpec.V1_2;
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
-
     private Attribute obj;
-
     @Getter
     private String jsonStr;
     @Getter
     private String xmlStr;
     @Getter
     private ByteBuffer ttlvBuf;
-
-    private KmipSpec spec;
 
     public AttributeBenchmarkSubject() throws Exception {
         this.setup();
@@ -56,8 +51,11 @@ public class AttributeBenchmarkSubject implements KmipBenchmarkSubject {
         jsonStr = json.writeValueAsString(obj);
         xmlStr = xml.writeValueAsString(obj);
         ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+    }
 
-        spec = KmipSpec.V1_2;
+    @Override
+    public KmipSpec getSpec() {
+        return spec;
     }
 
     @Override
@@ -67,73 +65,31 @@ public class AttributeBenchmarkSubject implements KmipBenchmarkSubject {
 
     @Override
     public String jsonSerialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return json.writeValueAsString(obj);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return json.writeValueAsString(obj);
     }
 
     @Override
     public Object jsonDeserialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return json.readValue(jsonStr, Attribute.class);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return json.readValue(jsonStr, Attribute.class);
     }
 
     @Override
     public String xmlSerialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return xml.writeValueAsString(obj);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return xml.writeValueAsString(obj);
     }
 
     @Override
     public Object xmlDeserialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return xml.readValue(xmlStr, Attribute.class);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return xml.readValue(xmlStr, Attribute.class);
     }
 
     @Override
     public ByteBuffer ttlvSerialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return ttlv.writeValueAsByteBuffer(obj);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return ttlv.writeValueAsByteBuffer(obj);
     }
 
     @Override
     public Object ttlvDeserialize() throws Exception {
-        return KmipContext.withSpec(spec, () -> {
-                    try {
-                        return ttlv.readValue(ttlvBuf.duplicate(), Attribute.class);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        return ttlv.readValue(ttlvBuf.duplicate(), Attribute.class);
     }
 }

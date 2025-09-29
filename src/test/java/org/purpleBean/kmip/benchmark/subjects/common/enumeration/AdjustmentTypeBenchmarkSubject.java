@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.AdjustmentType;
 
 import java.nio.ByteBuffer;
 
-public class AdjustmentTypeBenchmarkSubject implements KmipBenchmarkSubject {
+public class AdjustmentTypeBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

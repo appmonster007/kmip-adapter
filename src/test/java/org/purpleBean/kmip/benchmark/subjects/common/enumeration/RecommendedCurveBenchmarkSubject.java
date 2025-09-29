@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 
 import java.nio.ByteBuffer;
 
-public class RecommendedCurveBenchmarkSubject implements KmipBenchmarkSubject {
+public class RecommendedCurveBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

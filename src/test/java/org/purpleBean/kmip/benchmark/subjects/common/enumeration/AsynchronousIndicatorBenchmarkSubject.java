@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.AsynchronousIndicator;
 
 import java.nio.ByteBuffer;
 
-public class AsynchronousIndicatorBenchmarkSubject implements KmipBenchmarkSubject {
+public class AsynchronousIndicatorBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;

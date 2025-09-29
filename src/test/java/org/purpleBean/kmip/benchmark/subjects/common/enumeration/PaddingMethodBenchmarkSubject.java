@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.enumeration.PaddingMethod;
 
 import java.nio.ByteBuffer;
 
-public class PaddingMethodBenchmarkSubject implements KmipBenchmarkSubject {
+public class PaddingMethodBenchmarkSubject extends KmipBenchmarkSubject {
     private JsonMapper json;
     private XmlMapper xml;
     private TtlvMapper ttlv;
