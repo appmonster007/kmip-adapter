@@ -21,10 +21,11 @@ public abstract class BaseKmipTest {
     protected JsonMapper jsonMapper;
     protected XmlMapper xmlMapper;
     protected TtlvMapper ttlvMapper;
-    protected KmipSpec defaultSpec = KmipSpec.UnknownVersion;
+    protected KmipSpec defaultSpec;
 
     @BeforeEach
     void setUp() {
+        setupDefaultSpec();
         setupContext();
         setupMappers();
         setupTestSpecificResources();
@@ -34,6 +35,10 @@ public abstract class BaseKmipTest {
     void tearDown() {
         cleanupContext();
         cleanupTestSpecificResources();
+    }
+
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
     }
 
     protected void setupContext() {

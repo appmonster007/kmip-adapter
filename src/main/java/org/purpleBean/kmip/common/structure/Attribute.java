@@ -8,10 +8,11 @@ import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.AttributeName;
 import org.purpleBean.kmip.common.AttributeValue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP Attribute structure.
@@ -45,7 +46,7 @@ public class Attribute implements KmipStructure {
         KmipSpec spec = KmipContext.getSpec();
         String name = attribute.getAttributeName().getValue();
         KmipTag.Value attrTag;
-        if (CustomAttribute.isCustomAttribute(name)) {
+        if (CustomAttribute.isValidCustomAttributeName(name)) {
             attrTag = KmipTag.Standard.ATTRIBUTE;
         } else {
             attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
@@ -54,7 +55,7 @@ public class Attribute implements KmipStructure {
                 spec,
                 attrTag,
                 attribute.getAttributeValue().getEncodingType()
-        ).apply(attribute.getAttributeValue());
+        ).apply(attribute.getAttributeName(), attribute.getAttributeValue());
     }
 
     @Override
@@ -74,10 +75,8 @@ public class Attribute implements KmipStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(attributeName);
-        values.add(attributeIndex);
-        values.add(attributeValue);
-        return values.stream().filter(Objects::nonNull).toList();
+        return Stream.of(attributeName, attributeIndex, attributeValue)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

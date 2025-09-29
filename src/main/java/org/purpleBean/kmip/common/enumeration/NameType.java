@@ -17,11 +17,17 @@ public class NameType implements KmipEnumeration {
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+    private static final Set<KmipSpec> SUPPORTED_VERSIONS = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
+        }
+
+        for (KmipSpec spec : SUPPORTED_VERSIONS) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, NameType.class);
         }
     }
 

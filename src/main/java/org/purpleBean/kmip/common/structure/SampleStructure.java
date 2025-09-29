@@ -9,7 +9,10 @@ import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP SampleStructure structure.
@@ -40,10 +43,9 @@ public class SampleStructure implements KmipStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(activationDate);
-        values.add(state);
-        return values;
+        return Stream.of(activationDate, state)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -4,15 +4,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.AttributeName;
 import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP Attribute structure.
@@ -28,8 +29,8 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class, ActivationDate::of);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CustomAttribute.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CustomAttribute.class, CustomAttribute::of);
         }
     }
 
@@ -39,19 +40,53 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     private final AttributeValue attributeValue;
 
     public CustomAttribute(AttributeName attributeName, AttributeValue attributeValue) {
-        if (!isCustomAttribute(attributeName.getValue())) {
+        if (!isValidCustomAttributeName(attributeName.getValue())) {
             throw new IllegalArgumentException("Custom attribute name is invalid");
+        }
+        if (!isValidCustomAttributeValue(attributeValue)) {
+            throw new IllegalArgumentException("Custom attribute value is invalid");
         }
         this.attributeName = attributeName;
         this.attributeValue = attributeValue;
     }
 
-    public static CustomAttribute of(@NonNull String name, @NonNull Object value) {
-        return CustomAttribute.builder().attributeName(AttributeName.of(name)).attributeValue(AttributeValue.of(value)).build();
+    private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() == EncodingType.STRUCTURE) {
+            return attributeValue.getValues().stream().noneMatch(value -> value instanceof KmipStructure);
+        }
+        return true;
     }
 
-    public static boolean isCustomAttribute(@NonNull String name) {
+    public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        return CustomAttribute.builder().attributeName(attributeName).attributeValue(attributeValue).build();
+    }
+
+    public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue value) {
+        return of(AttributeName.of(name), value);
+    }
+
+    public static CustomAttribute of(@NonNull AttributeName name, @NonNull Object... values) {
+        return of(name, List.of(values));
+    }
+
+    public static CustomAttribute of(@NonNull String name, @NonNull Object... values) {
+        return of(AttributeName.of(name), AttributeValue.of(List.of(values)));
+    }
+
+    public static CustomAttribute of(@NonNull AttributeName name, @NonNull Object value) {
+        return of(name, AttributeValue.of(value));
+    }
+
+    public static CustomAttribute of(@NonNull String name, @NonNull Object value) {
+        return of(AttributeName.of(name), AttributeValue.of(value));
+    }
+
+    public static boolean isValidCustomAttributeName(@NonNull String name) {
         return isCustomServerAttribute(name) || isCustomClientAttribute(name);
+    }
+
+    public static boolean isValidCustomAttributeName(@NonNull AttributeName name) {
+        return isValidCustomAttributeName(name.getValue());
     }
 
     public static boolean isCustomServerAttribute(@NonNull String name) {
@@ -81,10 +116,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
 
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(attributeName);
-        values.add(attributeValue);
-        return values;
+        return Stream.of(attributeName, attributeValue)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

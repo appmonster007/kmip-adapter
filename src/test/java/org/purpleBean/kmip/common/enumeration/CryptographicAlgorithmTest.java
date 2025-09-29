@@ -14,6 +14,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeSuite<CryptographicAlgorithm> {
 
     @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
+
+    @Override
     protected Class<CryptographicAlgorithm> type() {
         return CryptographicAlgorithm.class;
     }

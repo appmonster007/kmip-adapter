@@ -4,7 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.KmipEnumeration;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
+
+import java.util.function.BiFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,5 +68,21 @@ public abstract class AbstractKmipEnumerationAttributeSuite<T extends KmipEnumer
         T obj = createDefault();
         assertThat(obj.isClientModifiable(stateForClientModifiableTrue())).isTrue();
         assertThat(obj.isClientModifiable(stateForClientModifiableFalse())).isFalse();
+    }
+
+
+    @Test
+    @DisplayName("AttrEnum: get AttributeValue and rebuild the object")
+    protected void attrEnum_attributeValue_roundTrip() {
+        T obj = createDefault();
+        AttributeName name = obj.getAttributeName();
+        AttributeValue value = obj.getAttributeValue();
+        BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> buildObjectFromAttributeValue = KmipAttribute.getAttributeBuilderFromRegistry(
+                defaultSpec,
+                obj.getKmipTag().getValue(),
+                obj.getEncodingType()
+        );
+        T deser = (T) buildObjectFromAttributeValue.apply(name, value);
+        assertThat(obj.getAttributeValue()).isEqualTo(deser.getAttributeValue());
     }
 }

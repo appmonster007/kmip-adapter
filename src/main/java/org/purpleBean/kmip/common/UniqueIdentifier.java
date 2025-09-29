@@ -30,7 +30,7 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
-    public static UniqueIdentifier of(@NonNull AttributeValue attributeValue) {
+    public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }

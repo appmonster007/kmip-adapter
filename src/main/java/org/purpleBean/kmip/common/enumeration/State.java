@@ -2,6 +2,8 @@ package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,9 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Data
 @Builder
-public class State implements KmipEnumeration {
+public class State implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -23,6 +26,13 @@ public class State implements KmipEnumeration {
             VALUE_REGISTRY.put(s.value, s);
             DESCRIPTION_REGISTRY.put(s.description, s);
         }
+
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, State.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, State.class, State::of);
+        }
+
     }
 
     @NonNull
@@ -103,6 +113,18 @@ public class State implements KmipEnumeration {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
 
+    public static State of(@NonNull AttributeName name, @NonNull AttributeValue value) {
+        if (!name.getValue().equals(kmipTag.getDescription())) {
+            throw new IllegalArgumentException("Invalid attribute name");
+        }
+        if (value.getEncodingType() != encodingType) {
+            throw new IllegalArgumentException("Invalid encoding type");
+        }
+        KmipSpec spec = KmipContext.getSpec();
+        State.Value v = fromValue(spec, (int) value.getValue());
+        return new State(v);
+    }
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -124,6 +146,56 @@ public class State implements KmipEnumeration {
     @Override
     public boolean isSupportedFor(@NonNull KmipSpec spec) {
         return value.isSupportedFor(spec);
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return true;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.of(value.getValue());
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(kmipTag.getDescription());
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     @Getter

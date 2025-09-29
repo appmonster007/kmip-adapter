@@ -2,11 +2,17 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
 
 @DisplayName("UniqueIdentifier Domain Tests")
 class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeSuite<UniqueIdentifier> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<UniqueIdentifier> type() {

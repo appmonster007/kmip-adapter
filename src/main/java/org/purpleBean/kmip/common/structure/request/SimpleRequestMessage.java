@@ -6,8 +6,10 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder
@@ -36,10 +38,9 @@ public class SimpleRequestMessage implements RequestMessageStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(requestHeader);
-        values.addAll(requestBatchItems);
-        return values;
+        return Stream.concat(Stream.of(requestHeader), requestBatchItems.stream())
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

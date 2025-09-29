@@ -6,19 +6,19 @@ import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface KmipAttribute extends KmipDataType {
     // registry for mapping
     Map<RegistryKey, Class<? extends KmipAttribute>> ATTRIBUTE_REGISTRY = new ConcurrentHashMap<>(); // TODO : remove attribute_registry ?
-    Map<RegistryKey, Function<AttributeValue, ? extends KmipAttribute>> ATTRIBUTE_BUILDER_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute>> ATTRIBUTE_BUILDER_REGISTRY = new ConcurrentHashMap<>();
 
     static void register(
             KmipSpec spec,
             KmipTag.Value kmipTagValue,
             EncodingType encodingType,
             Class<? extends KmipAttribute> clazz,
-            Function<AttributeValue, ? extends KmipAttribute> attributeBuilder
+            BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder
     ) {
         ATTRIBUTE_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), clazz);
         ATTRIBUTE_BUILDER_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), attributeBuilder);
@@ -28,7 +28,7 @@ public interface KmipAttribute extends KmipDataType {
         return ATTRIBUTE_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 
-    static Function<AttributeValue, ? extends KmipAttribute> getAttributeBuilderFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
+    static BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> getAttributeBuilderFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
         return ATTRIBUTE_BUILDER_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 

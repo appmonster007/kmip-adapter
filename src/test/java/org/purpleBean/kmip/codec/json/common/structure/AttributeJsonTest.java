@@ -1,6 +1,5 @@
 package org.purpleBean.kmip.codec.json.common.structure;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.mockito.MockedStatic;
 import org.purpleBean.kmip.KmipAttribute;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 
-@Slf4j
 @DisplayName("Attribute Json Serialization Tests")
 class AttributeJsonTest extends AbstractJsonSerializationSuite<Attribute> {
 
@@ -48,14 +46,9 @@ class AttributeJsonTest extends AbstractJsonSerializationSuite<Attribute> {
 
     @Override
     protected Attribute createVariant() {
-        try {
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("key", "value");
-            map.put("key2", 1);
-            return Attribute.of(CustomAttribute.of("x-apple", map));
-        } catch (Exception e) {
-            log.error("Failed to create variant", e);
-            return null;
-        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("key", "value");
+        map.put("key2", 1);
+        return Attribute.of(CustomAttribute.of("x-apple", map));
     }
 }

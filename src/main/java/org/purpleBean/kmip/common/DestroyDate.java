@@ -20,8 +20,23 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, DestroyDate.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, DestroyDate.class, DestroyDate::of);
+        }
+    }
+
     @NonNull
     private final OffsetDateTime value;
+
+    public static DestroyDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime dateTime)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return new DestroyDate(dateTime);
+    }
 
     @Override
     public KmipTag getKmipTag() {

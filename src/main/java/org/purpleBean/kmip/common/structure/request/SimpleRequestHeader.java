@@ -5,15 +5,18 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder
 public class SimpleRequestHeader implements RequestHeaderStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_HEADER);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
-
+    @NonNull
+    private final ProtocolVersion protocolVersion;
 
     @Override
     public KmipTag getKmipTag() {
@@ -25,14 +28,11 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
         return encodingType;
     }
 
-    @NonNull
-    private final ProtocolVersion protocolVersion;
-
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(protocolVersion);
-        return values;
+        return Stream.of(protocolVersion)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

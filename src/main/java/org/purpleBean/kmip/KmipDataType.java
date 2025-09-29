@@ -7,13 +7,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public interface KmipDataType {
     // registry for mapping
-    Map<RegistryKey, Class<? extends KmipAttribute>> TAG_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Class<? extends KmipDataType>> TAG_REGISTRY = new ConcurrentHashMap<>();
 
-    static void register(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType, Class<? extends KmipAttribute> clazz) {
+    static void register(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType, Class<? extends KmipDataType> clazz) {
         TAG_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), clazz);
     }
 
-    static Class<? extends KmipAttribute> getClassFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
+    static Class<? extends KmipDataType> getClassFromRegistry(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType) {
         return TAG_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
     }
 

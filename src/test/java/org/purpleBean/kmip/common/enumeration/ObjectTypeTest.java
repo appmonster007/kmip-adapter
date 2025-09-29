@@ -3,10 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeSuite;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
 
 import java.util.Set;
 
@@ -15,6 +12,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("ObjectType Domain Tests")
 class ObjectTypeTest extends AbstractKmipEnumerationAttributeSuite<ObjectType> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<ObjectType> type() {
