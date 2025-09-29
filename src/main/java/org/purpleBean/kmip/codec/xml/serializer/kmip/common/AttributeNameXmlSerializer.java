@@ -20,7 +20,7 @@ public class AttributeNameXmlSerializer extends KmipDataTypeXmlSerializer<Attrib
     public void serialize(AttributeName value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
-            throw new UnsupportedEncodingException();
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {

@@ -33,7 +33,7 @@ public class AttributeNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         AttributeName datatype = AttributeName.of(name);
 
         if (!datatype.isSupported()) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", datatype.getClass().getSimpleName(), spec));
         }
         return datatype;
     }

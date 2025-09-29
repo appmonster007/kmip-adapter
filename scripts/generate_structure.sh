@@ -310,6 +310,8 @@ import org.purpleBean.kmip.KmipStructure;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP ${STRUCTURE_NAME} structure.
@@ -322,12 +324,25 @@ public class ${STRUCTURE_NAME} implements KmipStructure {
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${STRUCTURE_NAME}.class);
+        }
+    }
+
     // TODO: Add your structure fields here
     // Example:
     @NonNull
     private final ActivationDate activationDate;
     private final State state;
 
+    // If required, then provide static constructor 'of' methods, with appropriate validation and null checks
+    // Example:
+    public static ${STRUCTURE_NAME} of(@NonNull ActivationDate activationDate, State state) {
+        return ${STRUCTURE_NAME}.builder().activationDate(activationDate).state(state).build();
+    }
+    
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -339,18 +354,19 @@ public class ${STRUCTURE_NAME} implements KmipStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<>();
-        values.add(activationDate);
-        values.add(state);
-        return values;
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
     }
-
+    
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return supportedVersions.contains(spec);
+    public List<KmipDataType> getValues() {
+        return Stream.of(activationDate, state)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
+    // Preferably, add validations in All Arg Constructor
     public static class ${STRUCTURE_NAME}Builder {
         public ${STRUCTURE_NAME} build() {
             // Validate required fields
@@ -359,14 +375,14 @@ public class ${STRUCTURE_NAME} implements KmipStructure {
         }
 
         private void validate() {
-            List<KmipDataType> fields = new ArrayList<>();
-            fields.add(activationDate);
-            fields.add(state);
+            List<KmipDataType> fields = Stream.of(activationDate, state)
+                                              .filter(Objects::nonNull)
+                                              .collect(Collectors.toList());
 
             // Validate KMIP spec compatibility
             KmipSpec spec = KmipContext.getSpec();
             for (KmipDataType field : fields) {
-                if (field != null && !field.isSupportedFor(spec)) {
+                if (field != null && !field.isSupported()) {
                     throw new IllegalArgumentException(
                         String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
                     );
@@ -424,14 +440,14 @@ public class ${STRUCTURE_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
+        if (!${varname}.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", ${varname}.getKmipTag().getDescription(), spec));
         }
 
         List<KmipDataType> fields = ${varname}.getValues();
         // Validation: Field compatibility with KMIP spec
         for (KmipDataType field : fields) {
-            if (field != null && !field.isSupportedFor(spec)) {
+            if (field != null && !field.isSupported()) {
                 throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
                         field.getKmipTag().getDescription(), ${varname}.getKmipTag().getDescription(), spec));
             }
@@ -553,7 +569,7 @@ public class ${STRUCTURE_NAME}JsonDeserializer extends KmipDataTypeJsonDeseriali
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
+        if (!${varname}.isSupported()) {
             throw new NoSuchElementException(String.format("${STRUCTURE_NAME} is not supported for KMIP spec %s", spec));
         }
 
@@ -627,8 +643,8 @@ public class ${STRUCTURE_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${
     public void serialize(${STRUCTURE_NAME} ${varname}, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", ${varname}.getClass().getSimpleName(), spec));
+        if (!${varname}.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("${STRUCTURE_NAME} not supported for spec %s", spec));
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
@@ -726,7 +742,7 @@ public class ${STRUCTURE_NAME}XmlDeserializer extends KmipDataTypeXmlDeserialize
 
         ${STRUCTURE_NAME} ${varname} = builder.build();
 
-        if (!${varname}.isSupportedFor(spec)) {
+        if (!${varname}.isSupported()) {
             ctxt.reportInputMismatch(${STRUCTURE_NAME}.class, "${STRUCTURE_NAME} not supported for spec " + spec);
             return null;
         }
@@ -799,7 +815,7 @@ public class ${STRUCTURE_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<
 
     private TtlvObject serializeToTtlvObject(${STRUCTURE_NAME} value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
@@ -890,7 +906,7 @@ public class ${STRUCTURE_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeseriali
 
         ${STRUCTURE_NAME} ${varname} = builder.build();
 
-        if (!${varname}.isSupportedFor(spec)) {
+        if (!${varname}.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", ${varname}.getClass().getSimpleName(), spec));
         }
         return ${varname};
