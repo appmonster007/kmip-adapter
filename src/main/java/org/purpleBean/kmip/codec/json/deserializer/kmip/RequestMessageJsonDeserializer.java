@@ -20,9 +20,18 @@ public class RequestMessageJsonDeserializer extends KmipDataTypeJsonDeserializer
         SimpleRequestMessage simpleRequestMessage = p.getCodec().treeToValue(node, SimpleRequestMessage.class);
 
         ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
-        KmipContext.setSpec(KmipSpec.fromValue(protocolVersion));
-
-        return deserializeByProtocolVersion(p, node, protocolVersion);
+        KmipSpec previous = KmipContext.getSpec();
+        KmipSpec spec = KmipSpec.fromValue(protocolVersion);
+        KmipContext.setSpec(spec);
+        try {
+            return deserializeByProtocolVersion(p, node, protocolVersion);
+        } finally {
+            if (previous != null) {
+                KmipContext.setSpec(previous);
+            } else {
+                KmipContext.clear();
+            }
+        }
     }
 
     private RequestMessageStructure deserializeByProtocolVersion(JsonParser p, JsonNode node, ProtocolVersion protocolVersion) throws IOException {

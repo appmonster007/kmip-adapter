@@ -2,7 +2,6 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
@@ -21,9 +20,19 @@ public class RequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<R
         SimpleRequestMessage simpleRequestMessage = p.getCodec().treeToValue(node, SimpleRequestMessage.class);
 
         ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
-        KmipContext.setSpec(KmipSpec.fromValue(protocolVersion));
+        KmipSpec previous = KmipContext.getSpec();
+        KmipSpec spec = KmipSpec.fromValue(protocolVersion);
+        KmipContext.setSpec(spec);
+        try {
+            return deserializeByProtocolVersion(p, node, protocolVersion);
+        } finally {
+            if (previous != null) {
+                KmipContext.setSpec(previous);
+            } else {
+                KmipContext.clear();
+            }
+        }
 
-        return deserializeByProtocolVersion(p, node, protocolVersion);
     }
 
     private RequestMessageStructure deserializeByProtocolVersion(JsonParser p, JsonNode node, ProtocolVersion protocolVersion) throws IOException {

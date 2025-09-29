@@ -17,9 +17,18 @@ public class RequestMessageTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         SimpleRequestMessage simpleRequestMessage = mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
         ttlvBuffer.rewind();
         ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
-        KmipContext.setSpec(KmipSpec.fromValue(protocolVersion));
-
-        return deserializeByProtocolVersion(protocolVersion, ttlvBuffer, mapper);
+        KmipSpec previous = KmipContext.getSpec();
+        KmipSpec spec = KmipSpec.fromValue(protocolVersion);
+        KmipContext.setSpec(spec);
+        try {
+            return deserializeByProtocolVersion(protocolVersion, ttlvBuffer, mapper);
+        } finally {
+            if (previous != null) {
+                KmipContext.setSpec(previous);
+            } else {
+                KmipContext.clear();
+            }
+        }
     }
 
     private RequestMessageStructure deserializeByProtocolVersion(ProtocolVersion protocolVersion, ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
