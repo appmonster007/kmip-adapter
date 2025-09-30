@@ -74,6 +74,21 @@ get_var_name() {
     echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
 }
 
+get_upper_case() {
+    to_upper "$@"
+}
+
+to_upper() {
+    # Read from stdin if no arguments provided
+    if [ $# -eq 0 ]; then
+        tr '[:lower:]' '[:upper:]'
+    else
+        # Handle arguments
+        local input="$*"
+        [ -z "$input" ] && { echo ""; return 1; }
+        echo "$input" | tr '[:lower:]' '[:upper:]'
+    fi
+}
 # Converts "MyEnum" -> "MY_ENUM"
 to_snake_upper() {
     local name="$1"
