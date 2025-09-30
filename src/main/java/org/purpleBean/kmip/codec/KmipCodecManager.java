@@ -14,18 +14,38 @@ import org.purpleBean.kmip.codec.xml.KmipXmlModule;
 
 import java.io.IOException;
 
-
+/**
+ * Manager class for KMIP codec.
+ */
 public final class KmipCodecManager {
-    @Getter
-    private static final TtlvMapper ttlvMapper = createTtlvMapper();
-    @Getter
-    private static final XmlMapper xmlMapper = createXmlMapper();
-    @Getter
-    private static final JsonMapper jsonMapper = createJsonMapper();
+    private static TtlvMapper ttlvMapper;
+    private static XmlMapper xmlMapper;
+    private static JsonMapper jsonMapper;
 
     @Getter
     @Setter
     private static MapperType defaultType = MapperType.XML;
+
+    public static TtlvMapper getTtlvMapper() {
+        if (ttlvMapper == null) {
+            ttlvMapper = createTtlvMapper();
+        }
+        return ttlvMapper;
+    }
+
+    public static XmlMapper getXmlMapper() {
+        if (xmlMapper == null) {
+            xmlMapper = createXmlMapper();
+        }
+        return xmlMapper;
+    }
+
+    public static JsonMapper getJsonMapper() {
+        if (jsonMapper == null) {
+            jsonMapper = createJsonMapper();
+        }
+        return jsonMapper;
+    }
 
     // Convenience method to serialize using default mapper
     public static <T> Object serialize(T obj) throws IOException {
@@ -33,8 +53,8 @@ public final class KmipCodecManager {
         return switch (defaultType) {
 //            TODO: Add TTLV support
 //            case TTLV -> {}
-            case XML -> StringEscapeUtils.escapeXml11(xmlMapper.writeValueAsString(obj));
-            case JSON -> StringEscapeUtils.escapeJson(jsonMapper.writeValueAsString(obj));
+            case XML -> StringEscapeUtils.escapeXml11(getXmlMapper().writeValueAsString(obj));
+            case JSON -> StringEscapeUtils.escapeJson(getJsonMapper().writeValueAsString(obj));
             default -> throw new IllegalArgumentException("Unsupported mapper type: " + defaultType);
         };
     }
@@ -45,8 +65,8 @@ public final class KmipCodecManager {
         return switch (defaultType) {
 //            TODO: Add TTLV support
 //            case TTLV -> {}
-            case XML -> xmlMapper.readValue(StringEscapeUtils.unescapeXml((String) value), type);
-            case JSON -> jsonMapper.readValue(StringEscapeUtils.unescapeJson((String) value), type);
+            case XML -> getXmlMapper().readValue(StringEscapeUtils.unescapeXml((String) value), type);
+            case JSON -> getJsonMapper().readValue(StringEscapeUtils.unescapeJson((String) value), type);
             default -> throw new IllegalArgumentException("Unsupported mapper type: " + defaultType);
         };
     }

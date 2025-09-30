@@ -14,9 +14,12 @@ import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.AttributeIndex;
+import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
+import org.purpleBean.kmip.common.structure.Name;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
@@ -27,7 +30,9 @@ import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Main {
@@ -69,13 +74,28 @@ public class Main {
         XmlMapper xmlMapper = buildXmlMapper();
         TtlvMapper ttlvMapper = buildTtlvMapper();
 
-        CustomAttribute customAttribute = CustomAttribute.of("x-asfa", customState);
+        Map<String, Object> customAttributeValues = new HashMap<>();
+        customAttributeValues.put("x-asfa", customState);
+        customAttributeValues.put("x-asf2", activationDate);
+        Name name = Name.of("x-asfa", new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING));
+        AttributeValue attributeValue = AttributeValue.of(List.of(customAttributeValues));
+        var c = name.getAttributeValue();
+        CustomAttribute customAttribute = CustomAttribute.of("x-asfa", name.getAttributeValue());
         Attribute attr = Attribute.builder()
                 .attributeName(activationDate.getAttributeName())
                 .attributeIndex(AttributeIndex.of(0))
                 .attributeValue(activationDate.getAttributeValue()).build();
 
-        KmipDataType[] dataTypes = {protocolVersion, customState, activationDate, sampleStructure, requestMessage, attr, customAttribute};
+        KmipDataType[] dataTypes = {
+                protocolVersion,
+                customState,
+                activationDate,
+                sampleStructure,
+                requestMessage,
+                attr,
+                customAttribute,
+                attributeValue
+        };
 
         demoJson(jsonMapper, dataTypes);
         demoXml(xmlMapper, dataTypes);

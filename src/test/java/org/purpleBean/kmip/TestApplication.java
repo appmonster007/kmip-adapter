@@ -1,8 +1,9 @@
 package org.purpleBean.kmip;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.purpleBean.kmip.codec.KmipCodecManager;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -37,10 +38,8 @@ public class TestApplication {
      */
     @Bean
     @Primary
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
+    public JsonMapper jsonMapper() {
+        return KmipCodecManager.createJsonMapper();
     }
 
     /**
@@ -51,8 +50,17 @@ public class TestApplication {
      */
     @Bean
     public XmlMapper xmlMapper() {
-        XmlMapper mapper = new XmlMapper();
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
+        return KmipCodecManager.createXmlMapper();
+    }
+
+    /**
+     * Provides a configured TTLV mapper for KMIP TTLV serialization.
+     * This bean is used in integration tests for TTLV serialization/deserialization.
+     *
+     * @return configured TtlvMapper
+     */
+    @Bean
+    public TtlvMapper ttlvMapper() {
+        return KmipCodecManager.createTtlvMapper();
     }
 }

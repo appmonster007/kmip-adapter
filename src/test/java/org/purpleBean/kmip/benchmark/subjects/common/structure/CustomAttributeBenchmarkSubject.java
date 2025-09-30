@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -29,6 +30,11 @@ public class CustomAttributeBenchmarkSubject extends KmipBenchmarkSubject {
 
     public CustomAttributeBenchmarkSubject() throws Exception {
         this.setup();
+    }
+
+    @Override
+    public KmipSpec getSpec() {
+        return KmipSpec.V1_2;
     }
 
     @Override

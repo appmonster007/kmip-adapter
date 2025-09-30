@@ -3,11 +3,8 @@ package org.purpleBean.kmip.test.suite;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
-
-import java.util.function.BiFunction;
+import org.purpleBean.kmip.common.structure.Attribute;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -70,13 +67,8 @@ public abstract class AbstractKmipDataTypeAttributeSuite<T extends KmipAttribute
     @DisplayName("Attribute: get AttributeValue and rebuild the object")
     protected void attrEnum_attributeValue_roundTrip() {
         T obj = createDefault();
-        AttributeName name = obj.getAttributeName();
-        AttributeValue value = obj.getAttributeValue();
-        BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> buildObjectFromAttributeValue = KmipAttribute.getAttributeBuilderFromRegistry(
-                obj.getKmipTag().getValue(),
-                obj.getEncodingType()
-        );
-        T deser = (T) buildObjectFromAttributeValue.apply(name, value);
-        assertThat(obj.getAttributeValue()).isEqualTo(deser.getAttributeValue());
+        Attribute attr = Attribute.of(obj);
+        T reconstructed = (T) attr.toKmipAttribute(attr);
+        assertThat(obj.getAttributeValue()).isEqualTo(reconstructed.getAttributeValue());
     }
 }
