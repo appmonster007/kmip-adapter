@@ -21,7 +21,7 @@ classDiagram
         <<interface>>
         +KmipTag getKmipTag()
         +EncodingType getEncodingType()
-        +boolean isSupportedFor(KmipSpec)
+        +boolean isSupported()
     }
     
     class KmipStructure {
@@ -53,24 +53,31 @@ classDiagram
         +int getMinor()
         +KmipTag getKmipTag()
         +EncodingType getEncodingType()
-        +boolean isSupportedFor(KmipSpec)
+        +boolean isSupported()
     }
     
-    class State {
+    class FooEnum {
         <<class>>
         +static interface Value
         +static enum Standard implements Value
         +static class Extension implements Value
-        +static Value fromValue(KmipSpec, int)
-        +static Value fromName(KmipSpec, String)
+        +static Value fromValue(int)
+        +static Value fromName(String)
         +static Value register(int, String, Set<KmipSpec>)
         +static Collection<Value> registeredValues()
         +boolean isCustom()
     }
     
-    class ActivationDateAttribute {
+    class FooDataType {
         +OffsetDateTime value
-        +KmipTag getTag()
+        +static FooDataType of(OffsetDateTime)
+    }
+    
+    class FooStructure {
+        +ActivationDate activationDate
+        +State state
+        +static FooStructure of(ActivationDate, State)
+        +List<KmipDataType> getValues()
     }
     
     %% Relationships
@@ -78,9 +85,10 @@ classDiagram
     KmipDataType <|-- KmipAttribute
     KmipDataType <|-- KmipEnumeration
     KmipStructure <|-- ProtocolVersion
-    KmipAttribute <|-- ActivationDateAttribute
-    KmipEnumeration <|.. State.Value
-    State *-- State.Value : contains
+    KmipStructure <|-- FooStructure
+    KmipDataType <|-- FooDataType
+    KmipEnumeration <|-- FooEnum
+    FooEnum *-- FooEnum.Value : contains
 ```
 
 ## Core Types

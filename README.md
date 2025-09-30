@@ -148,7 +148,7 @@ KmipContext.setSpec(KmipSpec.V1_2);
 // Create basic types
 State activeState = new State(State.Standard.ACTIVE);
 ActivationDate activationDate = ActivationDate.builder()
-        .dateTime(OffsetDateTime.now())
+        .value(OffsetDateTime.now())
         .build();
 
 // Create complex structures

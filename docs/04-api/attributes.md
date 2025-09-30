@@ -1,45 +1,183 @@
 # KMIP Attributes
 
-See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Attribute](../03-guides/development/boilerplate-attribute.md)
+See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Attribute Implementation Guide](../03-guides/development/boilerplate-attribute.md)
 
 ## Overview
 
 Attributes in KMIP represent properties and characteristics of managed objects. This document covers the standard attributes and how to work with them.
 
-## Core Attribute Example
+## Data Types vs Attributes
 
-### ActivationDateAttribute
+### FooDataType (KmipDataType only)
 
-Represents the Activation Date attribute in KMIP.
+Simple data type implementation that only implements `KmipDataType`.
+
+**Properties:**
+- `value` (OffsetDateTime): The datetime value
+- `kmipTag` (KmipTag): `FOO_DATA_TYPE`
+- `encodingType` (EncodingType): `DATE_TIME`
+
+**Example:**
+```java
+// Construct the data type
+OffsetDateTime now = OffsetDateTime.now();
+FooDataType fooData = FooDataType.of(now);
+
+// Accessors
+OffsetDateTime value = fooData.getValue();
+KmipTag tag = fooData.getKmipTag();           // FOO_DATA_TYPE tag
+EncodingType type = fooData.getEncodingType(); // EncodingType.DATE_TIME
+boolean supported = fooData.isSupported();    // checks current KmipContext
+```
+
+### ActivationDate (KmipDataType + KmipAttribute)
+
+Full attribute implementation that implements both `KmipDataType` and `KmipAttribute`.
 
 **Properties:**
 - `value` (OffsetDateTime): The activation timestamp
-- `tag` (KmipTag): `ActivationDate`
-- `encoding` (EncodingType): `DateTime`
+- `kmipTag` (KmipTag): `ACTIVATION_DATE`
+- `encodingType` (EncodingType): `DATE_TIME`
+
+**Key Differences from FooDataType:**
+- **Dual Registration**: Registers with both `KmipDataType.register()` and `KmipAttribute.register()`
+- **Attribute Factory**: Provides `of(AttributeName, AttributeValue)` factory method
+- **Attribute Metadata**: Implements `getAttributeValue()`, `getAttributeName()`, `getCanonicalName()`
+- **State-Aware Behavior**: Implements modifiability checks based on object state
+- **Lifecycle Methods**: Defines initialization, modification, and deletion policies
 
 **Example:**
 ```java
 // Construct the attribute
-OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
-ActivationDateAttribute attr = new ActivationDateAttribute(now);
+OffsetDateTime now = OffsetDateTime.now();
+ActivationDate attr = ActivationDate.builder().value(now).build();
 
-// Accessors
+// KmipDataType interface
 OffsetDateTime value = attr.getValue();
-KmipTag tag = attr.getTag();           // KmipTag.ACTIVATION_DATE
-EncodingType type = attr.getEncoding(); // EncodingType.DATE_TIME
+KmipTag tag = attr.getKmipTag();           // ACTIVATION_DATE tag
+EncodingType type = attr.getEncodingType(); // EncodingType.DATE_TIME
+boolean supported = attr.isSupported();    // checks current KmipContext
+
+// KmipAttribute interface
+AttributeValue attrValue = attr.getAttributeValue();
+AttributeName attrName = attr.getAttributeName();
+String canonicalName = attr.getCanonicalName();
+
+// State-aware behavior
+State preActive = new State(State.Standard.PRE_ACTIVE);
+State active = new State(State.Standard.ACTIVE);
+boolean canModifyPreActive = attr.isClientModifiable(preActive); // true
+boolean canModifyActive = attr.isClientModifiable(active);       // false
+
+// Lifecycle policies
+boolean alwaysPresent = attr.isAlwaysPresent();           // false
+boolean serverInit = attr.isServerInitializable();       // true
+boolean clientInit = attr.isClientInitializable();       // true
+boolean deletable = attr.isClientDeletable();            // false
+boolean multiInstance = attr.isMultiInstanceAllowed();   // false
 ```
 
-## Attribute Patterns and Customization
+## Implementation Patterns
 
-- Attributes implement `KmipAttribute` and therefore also inherit from `KmipDataType`.
-- Each attribute must provide a KMIP tag and encoding type.
-- Validation should be performed in constructors for required fields.
-- Version-aware behavior (when applicable) should rely on `KmipContext.getSpec()`.
+### KmipDataType vs KmipAttribute
 
-If you need custom attributes, follow the patterns in [Implementation Guide](../03-guides/implementation.md) and ensure:
-- Strong typing for the attribute value
-- Correct `KmipTag` mapping
-- Proper `EncodingType`
+**When to implement KmipDataType only (like FooDataType):**
+- Simple value wrappers that don't represent object attributes
+- Internal data structures used in serialization
+- Composite types that aren't directly managed object properties
+
+**When to implement both KmipDataType and KmipAttribute (like ActivationDate):**
+- Properties of managed objects (certificates, keys, etc.)
+- Values that have lifecycle and state-dependent behavior
+- Attributes that need metadata and factory methods
+
+### Required Implementation Elements for KmipAttribute
+
+```java
+public class CustomAttribute implements KmipDataType, KmipAttribute {
+    // 1. Static metadata
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CUSTOM_ATTRIBUTE);
+    public static final EncodingType encodingType = EncodingType.DATE_TIME;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+
+    // 2. Dual registration in static block
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CustomAttribute.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CustomAttribute.class, CustomAttribute::of);
+        }
+    }
+
+    // 3. Attribute factory method
+    public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof ExpectedType)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return new CustomAttribute((ExpectedType) attributeValue.getValue());
+    }
+
+    // 4. Attribute metadata methods
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    // 5. State-aware behavior methods
+    @Override
+    public boolean isClientModifiable(@NonNull State state) {
+        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+    }
+
+    // 6. Lifecycle policy methods
+    @Override
+    public boolean isAlwaysPresent() { return false; }
+    @Override
+    public boolean isServerInitializable() { return true; }
+    @Override
+    public boolean isClientInitializable() { return true; }
+    // ... other lifecycle methods
+}
+```
+
+### Testing Patterns
+
+**For KmipDataType only (like FooDataType):**
+```java
+class FooDataTypeTest {
+    @Test
+    void testDefaultCreation() {
+        FooDataType fooDataType = FooDataType.of(OffsetDateTime.now());
+        assertThat(fooDataType.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+    }
+}
+```
+
+**For KmipAttribute (like ActivationDate):**
+```java
+class ActivationDateTest extends AbstractKmipDataTypeAttributeSuite<ActivationDate> {
+    @Override
+    protected ActivationDate createDefault() {
+        return ActivationDate.builder().value(FIXED_TIME).build();
+    }
+
+    @Override
+    protected State stateForClientModifiableTrue() {
+        return new State(State.Standard.PRE_ACTIVE);
+    }
+
+    @Override
+    protected State stateForClientModifiableFalse() {
+        return new State(State.Standard.ACTIVE);
+    }
+    // ... other test suite methods
+}
+```
 
 ## Serialization Examples
 

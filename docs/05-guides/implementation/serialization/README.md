@@ -116,6 +116,7 @@ public class YourType implements KmipDataType {
     
     // Version-specific behavior
     public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return spec.isAtLeast(KmipSpec.V1_2);
     }
 }

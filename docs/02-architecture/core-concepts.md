@@ -19,7 +19,7 @@ classDiagram
         <<interface>>
         +KmipTag getKmipTag()
         +EncodingType getEncodingType()
-        +boolean isSupportedFor(KmipSpec spec)
+        +boolean isSupported()
     }
     
     class KmipPrimitive {
@@ -53,18 +53,21 @@ classDiagram
 
 2. **Structured Types**
    - Implement `KmipStructure` interface
-   - Examples: `ProtocolVersion`, `SampleStructure`, `SimpleRequestMessage`
+   - Examples: `FooStructure`, `ProtocolVersion`, `SimpleRequestMessage`
    - Can contain nested KMIP data types
+   - Use builder pattern with validation
 
 3. **Enumerations**
    - Type-safe enums implementing `KmipEnumeration`
-   - Examples: `State`, `CryptographicAlgorithm`, `Operation`
-   - Support conversion to/from integer values
+   - Examples: `FooEnum`, `State`, `CryptographicAlgorithm`, `Operation`
+   - Support extension values and custom registrations
+   - Thread-safe value registries
 
-4. **Attributes**
-   - Specialized data types implementing `KmipAttribute`
-   - Examples: `ActivationDateAttribute`, `ObjectTypeAttribute`
-   - Support for standard and custom attributes
+4. **Data Types**
+   - Simple data wrappers implementing `KmipDataType`
+   - Examples: `FooDataType`, `ActivationDate`, `ObjectType`
+   - Immutable design with static factory methods
+   - Support for various encoding types
 
 ## Core Interfaces
 
@@ -84,9 +87,9 @@ public interface KmipDataType {
     EncodingType getEncodingType();
     
     /**
-     * Checks if this type is supported for the given KMIP specification
+     * Checks if this type is supported for the current KMIP specification
      */
-    boolean isSupportedFor(KmipSpec spec);
+    boolean isSupported();
 }
 ```
 

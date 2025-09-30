@@ -85,25 +85,46 @@ import static org.assertj.core.api.Assertions.*;
 
 ```java
 /**
- * Tests for {@link State} enumeration.
+ * Tests for {@link FooEnum} enumeration.
  */
-@DisplayName("State Tests")
-class StateTest {
+@ExtendWith(MockitoExtension.class)
+class FooEnumTest {
 
     @Test
-    @DisplayName("Should return correct state value for valid code")
-    void shouldReturnCorrectValueForValidCode() {
-        // Given
-        int rawCode = 0x02; // ACTIVE state
+    void testDefaultCreation() {
+        FooEnum fooEnum = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(fooEnum.getValue()).isEqualTo(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(fooEnum.getKmipTag()).isEqualTo(FooEnum.kmipTag);
+        assertThat(fooEnum.getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
+    }
+
+    @Test
+    void testEquality() {
+        FooEnum foo1 = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        FooEnum foo2 = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(foo1).isEqualTo(foo2);
+        assertThat(foo1.hashCode()).isEqualTo(foo2.hashCode());
+    }
+
+    @Test
+    void testRegistryBehavior() {
+        // Test that standard values are registered
+        assertThat(FooEnum.fromValue(FooEnum.Standard.PLACEHOLDER_1.getValue()))
+            .isEqualTo(FooEnum.Standard.PLACEHOLDER_1);
         
-        // When
-        State.Value result = State.fromValue(KmipSpec.V1_4, rawCode);
-        
-        // Then
-        assertThat(result)
-            .isEqualTo(State.Standard.ACTIVE)
-            .extracting(State.Value::getValue, State.Value::getDescription)
-            .containsExactly(0x02, "Active");
+        assertThat(FooEnum.fromName("Placeholder1"))
+            .isEqualTo(FooEnum.Standard.PLACEHOLDER_1);
+    }
+
+    @Test
+    void testLookupValidation() {
+        assertThatThrownBy(() -> FooEnum.fromValue(999))
+            .isInstanceOf(NoSuchElementException.class)
+            .hasMessageContaining("No FooEnum found for value: 999");
+            
+        assertThatThrownBy(() -> FooEnum.fromName("InvalidName"))
+            .isInstanceOf(NoSuchElementException.class)
+            .hasMessageContaining("No FooEnum found for name: InvalidName");
     }
 
 ### Reusable Enumeration Suite Hooks
@@ -150,62 +171,55 @@ This split avoids overloading a single method and produces clearer test reports 
 }
 ```
 
-### Testing Attributes
+### Testing Data Types
 
 ```java
 /**
- * Tests for {@link ActivationDateAttribute} attribute.
+ * Tests for {@link FooDataType} data type.
  */
 @ExtendWith(MockitoExtension.class)
-@DisplayName("ActivationDate Tests")
-class ActivationDateAttributeTest extends BaseKmipTest {
+class FooDataTypeTest {
 
     @Test
-    @DisplayName("Should serialize to JSON with correct structure")
-    void shouldSerializeToJson() throws Exception {
-        // Given
-        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
-        ActivationDateAttribute attr = new ActivationDateAttribute(now);
+    void testDefaultCreation() {
+        OffsetDateTime now = OffsetDateTime.now();
+        FooDataType fooDataType = FooDataType.of(now);
         
-        // Set the KMIP spec for the context
-        KmipContext.setSpec(KmipSpec.V1_4);
+        assertThat(fooDataType.getValue()).isEqualTo(now);
+        assertThat(fooDataType.getKmipTag()).isEqualTo(FooDataType.kmipTag);
+        assertThat(fooDataType.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+    }
+
+    @Test
+    void testExpectedEncodingType() {
+        OffsetDateTime now = OffsetDateTime.now();
+        FooDataType fooDataType = FooDataType.of(now);
+        
+        assertThat(fooDataType.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+    }
+
+    @Test
+    void testKmipSpecSupport() {
+        OffsetDateTime now = OffsetDateTime.now();
+        FooDataType fooDataType = FooDataType.of(now);
+        
+        // Test with supported spec
+        KmipContext.setSpec(KmipSpec.V1_2);
         try {
-            // When
-            String json = jsonMapper.writeValueAsString(attr);
-            
-            // Then
-            assertThat(json)
-                .contains("\"tag\":\"ActivationDate\"")
-                .contains("\"type\":\"DateTime\"")
-                .contains(now.toString());
+            assertThat(fooDataType.isSupported()).isTrue();
         } finally {
             KmipContext.clear();
         }
     }
 
     @Test
-    @DisplayName("Should deserialize from JSON")
-    void shouldDeserializeFromJson() throws Exception {
-        // Given
-        OffsetDateTime dateTime = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-        String json = String.format(
-            "{\"tag\":\"ActivationDate\",\"type\":\"DateTime\",\"value\":\"%s\"}",
-            dateTime.toString()
-        );
-
-        // Set the KMIP spec for the context
-        KmipContext.setSpec(KmipSpec.V1_4);
-        try {
-            // When
-            ActivationDateAttribute deserialized = jsonMapper.readValue(json, ActivationDateAttribute.class);
-            
-            // Then
-            assertThat(deserialized)
-                .extracting(ActivationDateAttribute::getValue)
-                .isEqualTo(dateTime);
-        } finally {
-            KmipContext.clear();
-        }
+    void testEquality() {
+        OffsetDateTime now = OffsetDateTime.now();
+        FooDataType foo1 = FooDataType.of(now);
+        FooDataType foo2 = FooDataType.of(now);
+        
+        assertThat(foo1).isEqualTo(foo2);
+        assertThat(foo1.hashCode()).isEqualTo(foo2.hashCode());
     }
 }
 ```
@@ -214,49 +228,71 @@ class ActivationDateAttributeTest extends BaseKmipTest {
 
 ```java
 /**
- * Tests for {@link ProtocolVersion} structure.
+ * Tests for {@link FooStructure} structure.
  */
 @ExtendWith(MockitoExtension.class)
-@DisplayName("ProtocolVersion Tests")
-class ProtocolVersionTest {
+class FooStructureTest {
 
     @Test
-    @DisplayName("Should create valid ProtocolVersion")
-    void shouldCreateValidProtocolVersion() {
-        // Given/When
-        ProtocolVersion version = ProtocolVersion.of(1, 4);
-            
-        // Then
-        assertThat(version)
-            .extracting(
-                ProtocolVersion::getMajor,
-                ProtocolVersion::getMinor,
-                v -> v.isSupportedFor(KmipSpec.V1_4))
-            .containsExactly(1, 4, true);
+    void testDefaultCreation() {
+        ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+        State state = new State(State.Standard.ACTIVE);
+        
+        FooStructure fooStructure = FooStructure.of(activationDate, state);
+        
+        assertThat(fooStructure.getActivationDate()).isEqualTo(activationDate);
+        assertThat(fooStructure.getState()).isEqualTo(state);
+        assertThat(fooStructure.getKmipTag()).isEqualTo(FooStructure.kmipTag);
+        assertThat(fooStructure.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
     }
-    
+
     @Test
-    @DisplayName("Should support version compatibility check")
-    void shouldSupportVersionCompatibility() {
-        // Given
-        ProtocolVersion version = ProtocolVersion.of(1, 2);
-            
-        // When/Then
-        assertThat(version.isSupportedFor(KmipSpec.V1_2)).isTrue();
-        assertThat(version.isSupportedFor(KmipSpec.V1_4)).isFalse();
+    void testExpectedEncodingType() {
+        ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+        FooStructure fooStructure = FooStructure.of(activationDate, null);
+        
+        assertThat(fooStructure.getEncodingType()).isEqualTo(EncodingType.STRUCTURE);
     }
-    
+
     @Test
-    @DisplayName("Should implement equals and hashCode correctly")
-    void shouldImplementEqualsAndHashCode() {
-        // Given
-        ProtocolVersion version1 = ProtocolVersion.of(1, 2);
-        ProtocolVersion version2 = ProtocolVersion.of(1, 2);
+    void testMinimumComponentCount() {
+        ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+        FooStructure fooStructure = FooStructure.of(activationDate, null);
+        
+        assertThat(fooStructure.getValues()).hasSize(1);
+        assertThat(fooStructure.getValues()).contains(activationDate);
+    }
+
+    @Test
+    void testBuilderValidation() {
+        // Test that builder validates KMIP spec compatibility
+        KmipContext.setSpec(KmipSpec.V1_2);
+        try {
+            ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+            State state = new State(State.Standard.ACTIVE);
             
-        // When/Then
-        assertThat(version1)
-            .isEqualTo(version2)
-            .hasSameHashCodeAs(version2);
+            FooStructure structure = FooStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
+                
+            assertThat(structure).isNotNull();
+            assertThat(structure.getValues()).hasSize(2);
+        } finally {
+            KmipContext.clear();
+        }
+    }
+
+    @Test
+    void testEquality() {
+        ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+        State state = new State(State.Standard.ACTIVE);
+        
+        FooStructure foo1 = FooStructure.of(activationDate, state);
+        FooStructure foo2 = FooStructure.of(activationDate, state);
+        
+        assertThat(foo1).isEqualTo(foo2);
+        assertThat(foo1.hashCode()).isEqualTo(foo2.hashCode());
     }
 }
 ```
@@ -267,65 +303,74 @@ class ProtocolVersionTest {
 
 ```java
 /**
- * Integration tests for serialization.
+ * Integration tests for FooEnum, FooDataType, and FooStructure serialization.
  */
-@DisplayName("Serialization Integration Tests")
-class SerializationIntegrationTest {
-
-    private ObjectMapper buildJsonMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        mapper.registerModule(new KmipJsonModule());
-        return mapper;
-    }
-
-    private XmlMapper buildXmlMapper() {
-        XmlMapper mapper = new XmlMapper();
-        mapper.findAndRegisterModules();
-        mapper.registerModule(new KmipXmlModule());
-        return mapper;
-    }
-
-    private TtlvMapper buildTtlvMapper() {
-        TtlvMapper mapper = new TtlvMapper();
-        mapper.registerModule(new KmipTtlvModule());
-        return mapper;
-    }
+@DisplayName("Foo Types Serialization Integration Tests")
+class FooTypesSerializationIntegrationTest extends BaseKmipTest {
 
     @Test
-    @DisplayName("Should perform JSON round-trip for ProtocolVersion")
-    void shouldRoundTripJson() throws Exception {
+    @DisplayName("Should perform JSON round-trip for FooEnum")
+    void shouldRoundTripFooEnumJson() throws Exception {
         ObjectMapper objectMapper = buildJsonMapper();
-        ProtocolVersion original = ProtocolVersion.of(1, 2);
+        FooEnum original = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
 
         String json = objectMapper.writeValueAsString(original);
-        ProtocolVersion deserialized = objectMapper.readValue(json, ProtocolVersion.class);
+        FooEnum deserialized = objectMapper.readValue(json, FooEnum.class);
 
         assertThat(deserialized).isEqualTo(original);
     }
 
     @Test
-    @DisplayName("Should perform XML round-trip for ProtocolVersion")
-    void shouldRoundTripXml() throws Exception {
-        XmlMapper xmlMapper = buildXmlMapper();
-        ProtocolVersion original = ProtocolVersion.of(1, 2);
+    @DisplayName("Should perform JSON round-trip for FooDataType")
+    void shouldRoundTripFooDataTypeJson() throws Exception {
+        ObjectMapper objectMapper = buildJsonMapper();
+        FooDataType original = FooDataType.of(OffsetDateTime.now());
 
-        String xml = xmlMapper.writeValueAsString(original);
-        ProtocolVersion deserialized = xmlMapper.readValue(xml, ProtocolVersion.class);
+        String json = objectMapper.writeValueAsString(original);
+        FooDataType deserialized = objectMapper.readValue(json, FooDataType.class);
 
         assertThat(deserialized).isEqualTo(original);
     }
 
     @Test
-    @DisplayName("Should perform TTLV round-trip for ProtocolVersion")
-    void shouldRoundTripTtlv() throws Exception {
+    @DisplayName("Should perform JSON round-trip for FooStructure")
+    void shouldRoundTripFooStructureJson() throws Exception {
+        ObjectMapper objectMapper = buildJsonMapper();
+        ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+        State state = new State(State.Standard.ACTIVE);
+        FooStructure original = FooStructure.of(activationDate, state);
+
+        String json = objectMapper.writeValueAsString(original);
+        FooStructure deserialized = objectMapper.readValue(json, FooStructure.class);
+
+        assertThat(deserialized).isEqualTo(original);
+    }
+
+    @Test
+    @DisplayName("Should perform TTLV round-trip for all Foo types")
+    void shouldRoundTripFooTypesTtlv() throws Exception {
         TtlvMapper ttlvMapper = buildTtlvMapper();
         KmipContext.setSpec(KmipSpec.V1_2);
         try {
-            ProtocolVersion original = ProtocolVersion.of(1, 2);
-            byte[] ttlv = ttlvMapper.writeValueAsBytes(original);
-            ProtocolVersion deserialized = ttlvMapper.readValue(ttlv, ProtocolVersion.class);
-            assertThat(deserialized).isEqualTo(original);
+            // Test FooEnum
+            FooEnum originalEnum = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+            byte[] enumTtlv = ttlvMapper.writeValueAsBytes(originalEnum);
+            FooEnum deserializedEnum = ttlvMapper.readValue(enumTtlv, FooEnum.class);
+            assertThat(deserializedEnum).isEqualTo(originalEnum);
+
+            // Test FooDataType
+            FooDataType originalData = FooDataType.of(OffsetDateTime.now());
+            byte[] dataTtlv = ttlvMapper.writeValueAsBytes(originalData);
+            FooDataType deserializedData = ttlvMapper.readValue(dataTtlv, FooDataType.class);
+            assertThat(deserializedData).isEqualTo(originalData);
+
+            // Test FooStructure
+            ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+            State state = new State(State.Standard.ACTIVE);
+            FooStructure originalStructure = FooStructure.of(activationDate, state);
+            byte[] structureTtlv = ttlvMapper.writeValueAsBytes(originalStructure);
+            FooStructure deserializedStructure = ttlvMapper.readValue(structureTtlv, FooStructure.class);
+            assertThat(deserializedStructure).isEqualTo(originalStructure);
         } finally {
             KmipContext.clear();
         }

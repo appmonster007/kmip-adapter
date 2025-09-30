@@ -122,15 +122,38 @@ Create a simple test class to verify the installation:
 ```java
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.FooDataType;
+import org.purpleBean.kmip.common.enumeration.FooEnum;
+import org.purpleBean.kmip.common.structure.FooStructure;
+import org.purpleBean.kmip.common.ActivationDate;
+
+import java.time.OffsetDateTime;
 
 public class KmipTest {
     public static void main(String[] args) {
         // Set the KMIP specification version
         KmipContext.setSpec(KmipSpec.V1_2);
         
-        // Verify the context is set correctly
-        System.out.println("KMIP Spec: " + KmipContext.getSpec());
-        System.out.println("KMIP Adapter is working!");
+        try {
+            // Test FooEnum
+            FooEnum fooEnum = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+            System.out.println("FooEnum created: " + fooEnum.getValue().getDescription());
+            
+            // Test FooDataType
+            FooDataType fooData = FooDataType.of(OffsetDateTime.now());
+            System.out.println("FooDataType created with encoding: " + fooData.getEncodingType());
+            
+            // Test FooStructure
+            ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+            FooStructure fooStructure = FooStructure.of(activationDate, null);
+            System.out.println("FooStructure created with " + fooStructure.getValues().size() + " components");
+            
+            // Verify the context is set correctly
+            System.out.println("KMIP Spec: " + KmipContext.getSpec());
+            System.out.println("KMIP Adapter is working!");
+        } finally {
+            KmipContext.clear();
+        }
     }
 }
 ```

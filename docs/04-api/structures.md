@@ -8,29 +8,35 @@ Structures in KMIP represent complex data types that group related information. 
 
 ## Core Structures
 
-### FooDemoStructure
+### FooStructure
 
-Represents a demonstration composite structure for boilerplate patterns.
+Example structure implementation following the KMIP adapter pattern.
 
-Properties:
-- `attribute` (FooDemoAttribute): Required attribute field
-- `mode` (FooDemoEnum): Optional enumeration field
+**Properties:**
+- `activationDate` (ActivationDate): Required activation date field
+- `state` (State): Optional state enumeration field
 
-Example:
+**Example:**
 ```java
-// Required attribute
-FooDemoAttribute attribute = FooDemoAttribute.builder()
-    .dateTime(java.time.OffsetDateTime.now(java.time.ZoneOffset.UTC))
+// Required activation date
+ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+
+// Optional state (may be null)
+State state = new State(State.Standard.ACTIVE);
+
+// Build structure using factory method
+FooStructure foo = FooStructure.of(activationDate, state);
+
+// Or using builder with validation
+FooStructure fooBuilder = FooStructure.builder()
+    .activationDate(activationDate)
+    .state(state)
     .build();
 
-// Optional enum (may be null)
-FooDemoEnum mode = null; // or: new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE)
-
-// Build structure
-FooDemoStructure foo = FooDemoStructure.builder()
-    .attribute(attribute)
-    .mode(mode)
-    .build();
+// Access KMIP metadata
+KmipTag tag = foo.getKmipTag();           // FOO_STRUCTURE tag
+EncodingType type = foo.getEncodingType(); // EncodingType.STRUCTURE
+List<KmipDataType> values = foo.getValues(); // [activationDate, state]
 ```
 
 See also: Boilerplates for [Structure](../03-guides/development/boilerplate-structure.md), [Attribute](../03-guides/development/boilerplate-attribute.md), and [Enumeration](../03-guides/development/boilerplate-enum.md).

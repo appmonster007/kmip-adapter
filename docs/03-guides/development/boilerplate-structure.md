@@ -1,597 +1,260 @@
-# KMIP Structure Boilerplate (Authoritative)
+# KMIP Structure Boilerplate (Generated)
 
-This guide is the authoritative, copy-ready blueprint for creating a new KMIP structure called `FooDemoStructure`, modeled on the production `SampleStructure` and its serializers/deserializers/tests.
+This guide shows the actual generated code for KMIP structure classes using `FooStructure` as an example.
 
-It covers:
-- Core implementation (main/java)
-- JSON/XML/TTLV serializers and deserializers
-- Unit and codec tests using the reusable test suites
-- Optional performance tests (JMH)
-- Import style and legacy references to avoid
+## 1. Core Structure Class
 
-Use this as your single source of truth.
-
----
-
-## 1) Core Structure Implementation
-
-File: `src/main/java/org/purpleBean/kmip/common/structure/FooDemoStructure.java`
+**File:** `src/main/java/org/purpleBean/kmip/common/structure/FooStructure.java`
 
 ```java
 package org.purpleBean.kmip.common.structure;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.KmipStructure;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+/**
+ * KMIP FooStructure structure.
+ */
 @Data
 @Builder
-public class FooDemoStructure implements KmipStructure {
+public class FooStructure implements KmipStructure {
 
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_STRUCTURE); // add this entry
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_STRUCTURE);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, FooStructure.class);
+        }
+    }
 
     @NonNull
-    private final FooDemoAttribute attribute; // required
-    private final FooDemoEnum mode;           // optional
+    private final ActivationDate activationDate;
+    private final State state;
 
+    // If required, then provide static constructor 'of' methods, with appropriate validation and null checks
+    // Example:
+    public static FooStructure of(@NonNull ActivationDate activationDate, State state) {
+        return FooStructure.builder().activationDate(activationDate).state(state).build();
+    }
+    
     @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        if (!supportedVersions.contains(spec)) return false;
-        if (!attribute.isSupportedFor(spec)) return false;
-        if (mode != null && !mode.isSupportedFor(spec)) return false;
-        return true;
+    public KmipTag getKmipTag() {
+        return kmipTag;
     }
 
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+    }
+    
     @Override
     public List<KmipDataType> getValues() {
-        List<KmipDataType> list = new ArrayList<>();
-        list.add(attribute);
-        if (mode != null) list.add(mode);
-        return list;
+        return Stream.of(activationDate, state)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FooDemoStructure that)) return false;
-        return Objects.equals(attribute, that.attribute) && Objects.equals(mode, that.mode);
-    }
+    // Preferably, add validations in All Arg Constructor
+    public static class FooStructureBuilder {
+        public FooStructure build() {
+            // Validate required fields
+            validate();
+            return new FooStructure(activationDate, state);
+        }
 
-    @Override
-    public int hashCode() { return Objects.hash(attribute, mode); }
+        private void validate() {
+            List<KmipDataType> fields = Stream.of(activationDate, state)
+                                              .filter(Objects::nonNull)
+                                              .collect(Collectors.toList());
+
+            // Validate KMIP spec compatibility
+            KmipSpec spec = KmipContext.getSpec();
+            for (KmipDataType field : fields) {
+                if (field != null && !field.isSupported()) {
+                    throw new IllegalArgumentException(
+                        String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
+                    );
+                }
+            }
+
+            // Validate required fields
+            // Add required-field checks as needed
+        }
+    }
 }
 ```
 
-Notes
-- Add `FOO_DEMO_STRUCTURE` to `KmipTag.Standard` with a unique value/description.
-- `getValues()` order is deterministic: required first, then optional.
-- `isSupportedFor` aggregates child support and local tag support.
+## 2. JSON Serializer
 
----
-
-## 2) JSON Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/json/serializer/kmip/common/structure/FooDemoStructureJsonSerializer.java`
+**File:** `src/main/java/org/purpleBean/kmip/codec/json/serializer/kmip/common/structure/FooStructureJsonSerializer.java`
 
 ```java
-package org.purpleBean.kmip.codec.json.serializer.kmip.common.structure;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-public class FooDemoStructureJsonSerializer extends StdSerializer<FooDemoStructure> {
-    public FooDemoStructureJsonSerializer() { super(FooDemoStructure.class); }
+public class FooStructureJsonSerializer extends KmipDataTypeJsonSerializer<FooStructure> {
 
     @Override
-    public void serialize(FooDemoStructure value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) throw new UnsupportedEncodingException();
+    public void serialize(FooStructure fooStructure, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
+        if (fooStructure == null) {
+            return;
+        }
 
-        // Follow SampleStructure: write tag object, type, then value array with children
+        KmipSpec spec = KmipContext.getSpec();
+        if (!fooStructure.isSupported()) {
+            throw new UnsupportedEncodingException(
+                    String.format("%s is not supported for KMIP spec %s", fooStructure.getKmipTag().getDescription(), spec)
+            );
+        }
+
         gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeFieldName("value");
-        gen.writeStartArray();
-        for (KmipDataType child : value.getValues()) {
-            if (child != null) gen.writeObject(child);
+        gen.writeObject(fooStructure.getKmipTag());
+        gen.writeStringField("type", fooStructure.getEncodingType().getDescription());
+        
+        gen.writeArrayFieldStart("value");
+        for (KmipDataType value : fooStructure.getValues()) {
+            gen.writeObject(value);
         }
         gen.writeEndArray();
+        
         gen.writeEndObject();
     }
 }
 ```
 
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/json/deserializer/kmip/common/structure/FooDemoStructureJsonDeserializer.java`
+## 3. JSON Deserializer
+
+**File:** `src/main/java/org/purpleBean/kmip/codec/json/deserializer/kmip/common/structure/FooStructureJsonDeserializer.java`
 
 ```java
-package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.io.IOException;
-import java.util.NoSuchElementException;
-
-public class FooDemoStructureJsonDeserializer extends StdDeserializer<FooDemoStructure> {
-
-    public FooDemoStructureJsonDeserializer() { super(FooDemoStructure.class); }
-
+public class FooStructureJsonDeserializer extends KmipDataTypeJsonDeserializer<FooStructure> {
     @Override
-    public FooDemoStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public FooStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
-        KmipTag.Value tag = p.getCodec().treeToValue(node, KmipTag.class).getValue();
-        if (!node.isObject() || tag != KmipTag.Standard.FOO_DEMO_STRUCTURE) {
-            ctxt.reportInputMismatch(FooDemoStructure.class, "Expected object for FooDemoStructure");
+        // Validation and parsing logic...
+        
+        // Parse structure components from value array
+        JsonNode valueNode = node.get("value");
+        if (!valueNode.isArray()) {
+            ctxt.reportInputMismatch(FooStructure.class, "Expected array for structure value");
             return null;
         }
-
-        JsonNode values = node.get("value");
-        if (values == null || !values.isArray() || values.isEmpty()) {
-            ctxt.reportInputMismatch(FooDemoStructure.class, "FooDemoStructure 'value' must be an array");
-            return null;
+        
+        // Extract components based on expected structure
+        ActivationDate activationDate = null;
+        State state = null;
+        
+        // Parse each component from the array...
+        
+        FooStructure result = FooStructure.builder()
+            .activationDate(activationDate)
+            .state(state)
+            .build();
+        
+        if (!result.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("FooStructure is not supported for KMIP spec %s", spec)
+            );
         }
-
-        var builder = FooDemoStructure.builder();
-        for (JsonNode child : values) {
-            KmipTag.Value childTag = p.getCodec().treeToValue(child, KmipTag.class).getValue();
-            switch (childTag) {
-                case KmipTag.Standard.FOO_DEMO_ATTRIBUTE -> builder.attribute(p.getCodec().treeToValue(child, FooDemoAttribute.class));
-                case KmipTag.Standard.FOO_DEMO_ENUM -> builder.mode(p.getCodec().treeToValue(child, FooDemoEnum.class));
-                default -> throw new IllegalArgumentException();
-            }
-        }
-
-        FooDemoStructure result = builder.build();
-        KmipSpec spec = KmipContext.getSpec();
-        if (!result.isSupportedFor(spec)) throw new NoSuchElementException();
+        
         return result;
     }
 }
 ```
 
----
+## 4. Test Class
 
-## 3) XML Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/xml/serializer/kmip/common/structure/FooDemoStructureXmlSerializer.java`
+**File:** `src/test/java/org/purpleBean/kmip/common/structure/FooStructureTest.java`
 
 ```java
-package org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure;
+@DisplayName("FooStructure Domain Tests")
+class FooStructureTest extends AbstractKmipStructureSuite<FooStructure> {
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-public class FooDemoStructureXmlSerializer extends JsonSerializer<FooDemoStructure> {
-    @Override
-    public void serialize(FooDemoStructure value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) throw new UnsupportedEncodingException();
-        if (!(gen instanceof ToXmlGenerator xmlGen)) throw new IllegalStateException("Expected ToXmlGenerator");
-
-        String elementName = value.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(value);
-
-        // Children as nested elements using provider to default serialize each child
-        for (KmipDataType kmipDataType : value.getValues()) {
-            if (kmipDataType != null) {
-                serializers.defaultSerializeField(
-                        kmipDataType.getKmipTag().getDescription(),
-                        kmipDataType,
-                        gen
-                );
-            }
-        }
-
-        xmlGen.writeEndObject();
-    }
-}
-```
-
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/xml/deserializer/kmip/common/structure/FooDemoStructureXmlDeserializer.java`
-
-```java
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.io.IOException;
-import java.util.NoSuchElementException;
-
-public class FooDemoStructureXmlDeserializer extends JsonDeserializer<FooDemoStructure> {
-    @Override
-    public FooDemoStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(FooDemoStructure.class, "Expected XML element object for FooDemoStructure");
-            return null;
-        }
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() || !EncodingType.STRUCTURE.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(FooDemoStructure.class, "Missing or invalid '@type' attribute for FooDemoStructure");
-            return null;
-        }
-        FooDemoAttribute attribute = p.getCodec().treeToValue(node.get("attribute"), FooDemoAttribute.class);
-        FooDemoEnum mode = node.has("mode") && !node.get("mode").isNull()
-                ? p.getCodec().treeToValue(node.get("mode"), FooDemoEnum.class)
-                : null;
-
-        FooDemoStructure result = FooDemoStructure.builder().attribute(attribute).mode(mode).build();
-        KmipSpec spec = KmipContext.getSpec();
-        if (!result.isSupportedFor(spec)) throw new NoSuchElementException();
-        return result;
-    }
-}
-```
-
----
-
-## 4) TTLV Codec
-
-Serializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/kmip/common/structure/FooDemoStructureTtlvSerializer.java`
-
-```java
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure;
-
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-
-public class FooDemoStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<FooDemoStructure> {
-    @Override
-    public ByteBuffer serialize(FooDemoStructure value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    public TtlvObject serializeToTtlvObject(FooDemoStructure value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) throw new UnsupportedEncodingException();
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = EncodingType.STRUCTURE.getTypeValue();
-
-        byte[] c1 = mapper.writeValueAsByteBuffer(value.getAttribute()).array();
-        byte[] c2 = value.getMode() != null ? mapper.writeValueAsByteBuffer(value.getMode()).array() : new byte[0];
-
-        byte[] payload = ByteBuffer.allocate(c1.length + c2.length)
-                .put(c1)
-                .put(c2)
-                .array();
-
-        return TtlvObject.builder().tag(tag).type(type).value(payload).build();
-    }
-}
-```
-
-Deserializer: `src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/kmip/common/structure/FooDemoStructureTtlvDeserializer.java`
-
-```java
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
-
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-public class FooDemoStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<FooDemoStructure> {
-    EncodingType type = EncodingType.STRUCTURE;
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DEMO_STRUCTURE);
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    public FooDemoStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
-        }
-
-        List<TtlvObject> nested = TtlvObject.fromBytesMultiple(obj.getValue());
-        var builder = FooDemoStructure.builder();
-        KmipSpec spec = KmipContext.getSpec();
-        for (TtlvObject child : nested) {
-            KmipTag.Value childTag = KmipTag.fromBytes(spec, child.getTag());
-            switch (childTag) {
-                case KmipTag.Standard.FOO_DEMO_ATTRIBUTE -> builder.attribute(mapper.readValue(child.toByteBuffer(), FooDemoAttribute.class));
-                case KmipTag.Standard.FOO_DEMO_ENUM -> builder.mode(mapper.readValue(child.toByteBuffer(), FooDemoEnum.class));
-                default -> throw new IllegalArgumentException();
-            }
-        }
-
-        FooDemoStructure result = builder.build();
-        if (!result.isSupportedFor(spec)) throw new NoSuchElementException();
-        return result;
-    }
-}
-```
-
----
-
-## 5) Registration (ServiceLoader)
-
-Register your serializers/deserializers via Java ServiceLoader. Add fully-qualified class names (one per line) to these files in `src/main/resources/META-INF/services/`:
-
-- JSON
-    - `org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer`
-        - `org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.FooDemoStructureJsonSerializer`
-    - `org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer`
-        - `org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.FooDemoStructureJsonDeserializer`
-
-- XML
-    - `org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer`
-        - `org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.FooDemoStructureXmlSerializer`
-    - `org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer`
-        - `org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.FooDemoStructureXmlDeserializer`
-
-- TTLV
-    - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer`
-        - `org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.FooDemoStructureTtlvSerializer`
-    - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer`
-        - `org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.FooDemoStructureTtlvDeserializer`
-
-Notes
-- You do NOT need to modify `KmipJsonModule`, `KmipXmlModule`, or `KmipTtlvModule`. They auto-discover providers via ServiceLoader.
-- JSON/XML base classes (`KmipDataTypeJsonSerializer/Deserializer`, `KmipDataTypeXmlSerializer/Deserializer`) and TTLV abstract contracts (`KmipDataTypeTtlvSerializer`, `KmipDataTypeTtlvDeserializer`) infer the handled type automatically.
-
-
----
-
-## 6) Unit Tests
-
-### Domain (reusable suite)
-
-File: `src/test/java/org/purpleBean/kmip/common/structure/FooDemoStructureTest.java`
-
-```java
-package org.purpleBean.kmip.common.structure;
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
-
-@DisplayName("FooDemoStructure Domain Tests")
-class FooDemoStructureTest extends AbstractKmipStructureSuite<FooDemoStructure> {
-    @Override protected Class<FooDemoStructure> type() { return FooDemoStructure.class; }
-
-    @Override protected FooDemoStructure createDefault() {
-        var attr = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
-        var mode = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
-        return FooDemoStructure.builder().attribute(attr).mode(mode).build();
+    protected Class<FooStructure> type() {
+        return FooStructure.class;
     }
 
-    @Override protected EncodingType expectedEncodingType() { return EncodingType.STRUCTURE; }
-    @Override protected int expectedMinComponentCount() { return 1; }
+    @Override
+    protected FooStructure createDefault() {
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
+        State state = new State(State.Standard.ACTIVE);
+        return FooStructure.builder()
+            .activationDate(activationDate)
+            .state(state)
+            .build();
+    }
 
-    @Override protected void validateComponents(List<KmipDataType> values) {
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
+
+    @Override
+    protected int expectedMinComponentCount() {
+        return 2;
+    }
+
+    @Override
+    protected void validateComponents(List<KmipDataType> values) {
+        // Validate component types
         assertThat(values.get(0).getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
-        if (values.size() > 1) assertThat(values.get(1).getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
+        assertThat(values.get(1).getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
     }
 }
 ```
 
----
+## Key Features
 
-## 7) Codec Tests
+1. **Composite structure** with multiple KMIP data types
+2. **Builder validation** with KMIP spec compatibility checking
+3. **Component management** through `getValues()` method
+4. **Static factory methods** for common construction patterns
+5. **Comprehensive serialization** support (JSON/XML/TTLV)
+6. **Immutable design** for thread safety
+7. **Validation at build time** to ensure consistency
 
-Place these under codec packages and extend abstract suites.
-
-- JSON: `src/test/java/org/purpleBean/kmip/codec/json/common/structure/FooDemoStructureJsonTest.java`
-- XML: `src/test/java/org/purpleBean/kmip/codec/xml/common/structure/FooDemoStructureXmlTest.java`
-- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/structure/FooDemoStructureTtlvTest.java`
+## Usage
 
 ```java
-// JSON
-package org.purpleBean.kmip.codec.json.common.structure;
+// Create with factory method
+ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+State state = new State(State.Standard.ACTIVE);
+FooStructure foo = FooStructure.of(activationDate, state);
 
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+// Create with builder
+FooStructure foo = FooStructure.builder()
+    .activationDate(activationDate)
+    .state(state)
+    .build();
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("FooDemoStructure JSON Serialization")
-class FooDemoStructureJsonTest extends AbstractJsonSerializationSuite<FooDemoStructure> {
-    @Override protected Class<FooDemoStructure> type() { return FooDemoStructure.class; }
-    @Override protected FooDemoStructure createDefault() {
-        var attr = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
-        var mode = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
-        return FooDemoStructure.builder().attribute(attr).mode(mode).build();
-    }
-}
+// Access components
+List<KmipDataType> components = foo.getValues();
+ActivationDate date = foo.getActivationDate();
+State currentState = foo.getState();
 ```
 
-```java
-// XML
-package org.purpleBean.kmip.codec.xml.common.structure;
+## Notes
 
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("FooDemoStructure XML Serialization")
-class FooDemoStructureXmlTest extends AbstractXmlSerializationSuite<FooDemoStructure> {
-    @Override protected Class<FooDemoStructure> type() { return FooDemoStructure.class; }
-    @Override protected FooDemoStructure createDefault() {
-        var attr = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
-        var mode = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
-        return FooDemoStructure.builder().attribute(attr).mode(mode).build();
-    }
-}
-```
-
-```java
-// TTLV
-package org.purpleBean.kmip.codec.ttlv.common.structure;
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("FooDemoStructure TTLV Serialization")
-class FooDemoStructureTtlvTest extends AbstractTtlvSerializationSuite<FooDemoStructure> {
-    @Override protected Class<FooDemoStructure> type() { return FooDemoStructure.class; }
-    @Override protected FooDemoStructure createDefault() {
-        var attr = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
-        var mode = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
-        return FooDemoStructure.builder().attribute(attr).mode(mode).build();
-    }
-}
-```
-
----
-
-## 8) Performance Benchmarks (JMH)
-
-Authoritative reference: `SampleStructureBenchmarkSubject`. Below is a complete boilerplate for `FooDemoStructure`.
-
-Subject: `src/test/java/org/purpleBean/kmip/benchmark/subjects/FooDemoStructureBenchmarkSubject.java`
-
-```java
-package org.purpleBean.kmip.benchmark.subjects;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
-import org.purpleBean.kmip.common.FooDemoAttribute;
-import org.purpleBean.kmip.common.enumeration.FooDemoEnum;
-import org.purpleBean.kmip.common.structure.FooDemoStructure;
-
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-public class FooDemoStructureBenchmarkSubject extends KmipBenchmarkSubject {
-    private ObjectMapper json; private XmlMapper xml; private TtlvMapper ttlv;
-    private FooDemoStructure obj; private String jsonStr; private String xmlStr; private ByteBuffer ttlvBuf;
-
-    @Override public String name() { return "FooDemoStructure"; }
-
-    @Override public void setup() throws Exception {
-        KmipContext.setSpec(KmipSpec.V1_2);
-        json = new ObjectMapper(); json.findAndRegisterModules(); json.registerModule(new JavaTimeModule()); json.registerModule(new KmipJsonModule());
-        xml = new XmlMapper(); xml.findAndRegisterModules(); xml.registerModule(new JavaTimeModule()); xml.registerModule(new KmipXmlModule());
-        ttlv = new TtlvMapper(); ttlv.registerModule(new KmipTtlvModule());
-
-        var attr = FooDemoAttribute.builder().dateTime(OffsetDateTime.of(2024,1,2,3,4,5,0, ZoneOffset.UTC)).build();
-        var mode = new FooDemoEnum(FooDemoEnum.Standard.EXAMPLE_ONE);
-        obj = FooDemoStructure.builder().attribute(attr).mode(mode).build();
-
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
-    }
-
-    @Override public void tearDown() { KmipContext.clear(); }
-    @Override public String jsonSerialize() throws Exception { return json.writeValueAsString(obj); }
-    @Override public Object jsonDeserialize() throws Exception { return json.readValue(jsonStr, FooDemoStructure.class); }
-    @Override public String xmlSerialize() throws Exception { return xml.writeValueAsString(obj); }
-    @Override public Object xmlDeserialize() throws Exception { return xml.readValue(xmlStr, FooDemoStructure.class); }
-    @Override public ByteBuffer ttlvSerialize() throws Exception { return ttlv.writeValueAsByteBuffer(obj); }
-    @Override public Object ttlvDeserialize() throws Exception { return ttlv.readValue(ttlvBuf.duplicate(), FooDemoStructure.class); }
-}
-```
-
-ServiceLoader registration:
-
-```
-org.purpleBean.kmip.benchmark.subjects.FooDemoStructureBenchmarkSubject
-```
-
-Runner (same as attribute/enum guides):
-
-```bash
-mvn -q -DskipTests test-compile \
-  exec:java \
-  -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner" \
-  -Dbench.include=KmipSerializationBenchmark
-```
-
-Outputs:
-- Raw JMH JSON: `target/jmh-results.json`
-- Markdown summary: `target/jmh-report.md`
-
----
-
-## 9) Import Style and Legacy References
-
-- Prefer imports, not FQNs, in tests and examples.
-- For tag registry and lookup tests (non-structure), see `src/test/java/org/purpleBean/kmip/KmipTagTest.java`.
+- The generated template uses `ActivationDate` and `State` as example fields
+- Update the fields based on your actual structure requirements
+- Add validation logic in the builder's `validate()` method
+- Consider adding additional factory methods for common use cases
+- The `getValues()` method returns all non-null components for serialization

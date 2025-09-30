@@ -19,464 +19,267 @@ This guide provides comprehensive instructions for implementing KMIP objects, se
 
 ### Enumerations
 
-KMIP value sets are represented as value-based types with a fixed set of standard values and optional custom extensions. Here's the `State` implementation pattern used in this project:
+KMIP enumerations are implemented using the generated pattern. Here's the `FooEnum` implementation pattern:
 
 ```java
 package org.purpleBean.kmip.common.enumeration;
 
-import lombok.Getter;
-import org.purpleBean.kmip.KmipEnumeration;
-import java.util.Arrays;
+import lombok.*;
+import org.purpleBean.kmip.*;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Represents the state of a cryptographic object in KMIP.
+ * KMIP FooEnum enumeration.
  */
-/**
- * Represents the state of a cryptographic object in KMIP.
- * This is a value-based class that supports both standard and custom states.
- */
-public final class State implements KmipDataType {
-    
+@Data
+@Builder
+public class FooEnum implements KmipEnumeration {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_ENUM);
+    public static final EncodingType encodingType = EncodingType.ENUMERATION;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
+    private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+
+    static {
+        for (Standard s : Standard.values()) {
+            VALUE_REGISTRY.put(s.value, s);
+            DESCRIPTION_REGISTRY.put(s.description, s);
+        }
+
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, FooEnum.class);
+        }
+    }
+
+    @NonNull
+    private final Value value;
+
+    public FooEnum(@NonNull Value value) {
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                String.format("Value '%s' for FooEnum is not supported for KMIP spec %s", 
+                    value.getDescription(), spec)
+            );
+        }
+        this.value = value;
+    }
+
     /**
-     * Standard KMIP state values.
+     * Register an extension value.
      */
+    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
+        // Implementation with validation...
+    }
+
+    /**
+     * Look up by name.
+     */
+    public static Value fromName(String name) {
+        // Implementation with KMIP spec checking...
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @ToString
     public enum Standard implements Value {
-        PRE_ACTIVE(0x01, "PreActive"),
-        ACTIVE(0x02, "Active"),
-        DEACTIVATED(0x03, "Deactivated"),
-        COMPROMISED(0x04, "Compromised"),
-        DESTROYED(0x05, "Destroyed"),
-        DESTROYED_COMPROMISED(0x06, "Destroyed Compromised");
+        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion),
+        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion);
 
         private final int value;
         private final String description;
+        private final Set<KmipSpec> supportedVersions;
+        private final boolean custom = false;
 
-        Standard(int value, String description) {
-            this.value = value;
-            this.description = description;
-        }
-
-        @Override public int getValue() { return value; }
-        @Override public String getDescription() { return description; }
-    }
-
-    /**
-     * Interface for state values, allowing for custom states.
-     */
-    public interface Value {
-        int getValue();
-        String getDescription();
-    }
-
-    private static final Map<Integer, Value> VALUES = new ConcurrentHashMap<>();
-    private static final Map<String, Value> VALUES_BY_NAME = new ConcurrentHashMap<>();
-
-    static {
-        // Register standard values
-        for (Standard standard : Standard.values()) {
-            register(standard);
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
         }
     }
 
-    /**
-     * Registers a custom state value.
-     * @param value The value to register
-     * @return The registered value
-     * @throws IllegalArgumentException if the value is already registered
-     */
-    public static synchronized Value register(Value value) {
-        Objects.requireNonNull(value, "Value cannot be null");
-        if (VALUES.containsKey(value.getValue())) {
-            throw new IllegalArgumentException("Value already registered: " + value.getValue());
-        }
-        VALUES.put(value.getValue(), value);
-        VALUES_BY_NAME.put(value.getDescription().toUpperCase(Locale.ROOT), value);
-        return value;
-    }
-
-    /**
-     * Looks up a state value by its integer value.
-     * @param spec The KMIP specification version
-     * @param value The value to look up
-     * @return The corresponding state value
-     * @throws IllegalArgumentException if the value is not found
-     */
-    public static Value fromValue(KmipSpec spec, int value) {
-        Value result = VALUES.get(value);
-        if (result == null) {
-            throw new IllegalArgumentException("Unknown state value: " + value);
-        }
-        return result;
-    }
-
-    /**
-     * Looks up a state value by its name (case-insensitive).
-     * @param spec The KMIP specification version
-     * @param name The name to look up
-     * @return The corresponding state value
-     * @throws IllegalArgumentException if the name is not found
-     */
-    public static Value fromName(KmipSpec spec, String name) {
-        Objects.requireNonNull(name, "Name cannot be null");
-        Value result = VALUES_BY_NAME.get(name.toUpperCase(Locale.ROOT));
-        if (result == null) {
-            throw new IllegalArgumentException("Unknown state name: " + name);
-        }
-        return result;
-    }
-
-    private final Value value;
-
-    /**
-     * Creates a new State with the given value.
-     * @param value The state value
-     * @throws NullPointerException if value is null
-     */
-    public State(Value value) {
-        this.value = Objects.requireNonNull(value, "Value cannot be null");
-    }
-
-    /**
-     * Gets the state value.
-     * @return The state value
-     */
-    public Value getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value.getDescription();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        State state = (State) o;
-        return value == state.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
+    // Value interface and Extension class...
 }
 ```
 
-### Attributes
+### Data Types
 
-KMIP attributes implement the `KmipAttribute` interface. Example: `ActivationDateAttribute`:
+KMIP data types are simple wrappers around primitive values. Here's the `FooDataType` pattern:
 
 ```java
-package org.purpleBean.kmip.common;
+@Data
+@Builder
+public class FooDataType implements KmipDataType {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DATA_TYPE);
+    public static final EncodingType encodingType = EncodingType.DATE_TIME;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.KmipTag;
-
-import java.time.OffsetDateTime;
-
-/**
- * Represents the Activation Date attribute in KMIP.
- */
-@Getter
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
-public class ActivationDateAttribute implements KmipAttribute {
     @NonNull
     private final OffsetDateTime value;
-
-    @Override
-    public KmipTag getTag() {
-        return KmipTag.ACTIVATION_DATE;
+    
+    public static FooDataType of(@NonNull OffsetDateTime value) {
+        return FooDataType.builder().value(value).build();
     }
 
     @Override
-    public EncodingType getEncoding() {
-        return EncodingType.DATE_TIME;
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec);
     }
 }
 ```
 
 ### Structures
 
-Complex KMIP objects are implemented as structures. Example: `RequestMessage`:
+KMIP structures contain multiple KMIP data types. Here's the `FooStructure` pattern:
 
 ```java
-package org.purpleBean.kmip.common.structure.request;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.extern.jackson.Jacksonized;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipStructure;
-import org.purpleBean.kmip.KmipTag;
-
-import java.util.List;
-import java.util.Set;
-
-/**
- * Represents a KMIP request message structure.
- */
-@Getter
+@Data
 @Builder
-@Jacksonized
-public class RequestMessage implements KmipStructure {
-    @NonNull
-    private final RequestHeader header;
+public class FooStructure implements KmipStructure {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_STRUCTURE);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     
     @NonNull
-    private final List<RequestBatchItem> batchItems;
+    private final ActivationDate activationDate;
+    private final State state;
 
+    public static FooStructure of(@NonNull ActivationDate activationDate, State state) {
+        return FooStructure.builder().activationDate(activationDate).state(state).build();
+    }
+    
     @Override
-    public KmipTag getKmipTag() {
-        return KmipTag.REQUEST_MESSAGE;
+    public List<KmipDataType> getValues() {
+        return Stream.of(activationDate, state)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return EncodingType.STRUCTURE;
-    }
+    // Custom builder with validation
+    public static class FooStructureBuilder {
+        public FooStructure build() {
+            validate();
+            return new FooStructure(activationDate, state);
+        }
 
-    @Override
-    public boolean isSupportedFor(KmipSpec spec) {
-        return spec != null && spec.getMajor() == 1 && spec.getMinor() >= 2;
+        private void validate() {
+            // KMIP spec compatibility validation
+            KmipSpec spec = KmipContext.getSpec();
+            List<KmipDataType> fields = Stream.of(activationDate, state)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+            for (KmipDataType field : fields) {
+                if (field != null && !field.isSupported()) {
+                    throw new IllegalArgumentException(
+                        String.format("%s is not supported for KMIP spec %s", 
+                            field.getKmipTag().getDescription(), spec)
+                    );
+                }
+            }
+        }
     }
 }
 ```
+
+## Key Implementation Patterns
+
+1. **Use Lombok annotations** for boilerplate reduction (`@Data`, `@Builder`, `@NonNull`)
+2. **Static factory methods** for common construction patterns (`of()` methods)
+3. **KMIP spec validation** in constructors and builders
+4. **Thread-safe registries** for enumerations with extension support
+5. **Immutable design** for all data objects
+6. **Builder pattern with validation** for complex structures
+
+## Usage Examples
+
+```java
+// Create enumeration
+FooEnum foo = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+
+// Create data type
+FooDataType data = FooDataType.of(OffsetDateTime.now());
+
+// Create structure
+ActivationDate activationDate = ActivationDate.of(OffsetDateTime.now());
+State state = new State(State.Standard.ACTIVE);
+FooStructure structure = FooStructure.of(activationDate, state);
+
+// Register custom enumeration value
+FooEnum.Value custom = FooEnum.register(0x80000001, "CustomValue", Set.of(KmipSpec.V1_4));
+FooEnum customEnum = new FooEnum(custom);
+```
+
+For complete implementation details, see the boilerplate documentation:
+- [Enumeration Boilerplate](development/boilerplate-enum.md)
+- [Data Type Boilerplate](development/boilerplate-attribute.md)  
+- [Structure Boilerplate](development/boilerplate-structure.md)
 
 ## Serialization and Deserialization
 
+The KMIP adapter supports three serialization formats: JSON, XML, and TTLV. Each KMIP type requires corresponding serializers and deserializers.
+
 ### JSON Serialization
 
 ```java
-// Setup
-ObjectMapper mapper = new ObjectMapper()
-    .registerModule(new KmipJsonModule())
-    .enable(SerializationFeature.INDENT_OUTPUT);
-
-// Serialize
-String json = mapper.writeValueAsString(kmipObject);
-
-// Deserialize
-KmipDataType deserialized = mapper.readValue(json, KmipDataType.class);
-```
-
-### XML Serialization
-
-```java
-// Setup
-XmlMapper xmlMapper = new XmlMapper()
-    .registerModule(new KmipXmlModule())
-    .enable(SerializationFeature.INDENT_OUTPUT);
-
-// Serialize
-String xml = xmlMapper.writeValueAsString(kmipObject);
-
-// Deserialize
-KmipDataType deserialized = xmlMapper.readValue(xml, KmipDataType.class);
-```
-
-### TTLV Serialization
-
-```java
-// Set KMIP spec for the current thread
-KmipContext.setSpec(KmipSpec.V1_4);
-try {
-    // Use TtlvMapper for TTLV (Tag-Type-Length-Value) operations
-    TtlvMapper ttlvMapper = new TtlvMapper();
-    ttlvMapper.registerModule(new KmipTtlvModule());
-
-    // Encode to TTLV bytes
-    byte[] ttlvData = ttlvMapper.writeValueAsBytes(kmipObject);
-
-    // Decode from TTLV bytes
-    KmipDataType decoded = ttlvMapper.readValue(ttlvData, KmipDataType.class);
-} finally {
-    KmipContext.clear();
-}
-```
-
-## Error Handling
-
-Follow these exception patterns (as used across serializers/deserializers):
-
-- `IllegalArgumentException`: Invalid input, unknown values, tag/type mismatches
-- `UnsupportedEncodingException`: Value or type not supported for current KMIP spec
-- `NoSuchElementException`: Lookup failures (e.g., fromName/fromValue not found)
-- `IOException`: I/O-level issues in codec layers
-
-Example error handling:
-
-```java
-KmipContext.setSpec(KmipSpec.V1_4);
-try {
-    byte[] ttlv = ttlvMapper.writeValueAsBytes(kmipObject);
-    return ttlv;
-} catch (UnsupportedEncodingException e) {
-    logger.warn("Not supported for KMIP {}: {}", KmipContext.getSpec(), e.getMessage());
-    throw e;
-} catch (IllegalArgumentException e) {
-    logger.error("Invalid KMIP value: {}", e.getMessage());
-    throw e;
-} catch (IOException e) {
-    logger.error("I/O error during TTLV processing: {}", e.getMessage(), e);
-    throw e;
-} finally {
-    KmipContext.clear();
-}
-```
-
-## Testing
-
-KMIP includes a comprehensive test suite with:
-
-1. **Unit Tests**: Test individual components in isolation
-2. **Integration Tests**: Test component interactions
-3. **Serialization Tests**: Verify JSON/XML/TTLV serialization
-4. **Performance Tests**: Benchmark critical operations
-
-Example test class:
-
-```java
-class ActivationDateAttributeTest extends BaseKmipTest {
-    
-    @Test
-    @DisplayName("Should create valid ProtocolVersion")
-    void shouldCreateValidProtocolVersion() {
-        // Given/When
-        ProtocolVersion version = new ProtocolVersion(1, 4);
-            
-        // Then
-        assertThat(version)
-            .extracting(
-                ProtocolVersion::getMajor,
-                ProtocolVersion::getMinor,
-                v -> v.isSupportedFor(KmipSpec.V1_4))
-            .containsExactly(1, 4, true);
-    }
-    
-    @Test
-    void shouldRejectNullValue() {
-        assertThatThrownBy(() -> new ActivationDateAttribute(null))
-            .isInstanceOf(NullPointerException.class)
-            .hasMessage("value is marked non-null but is null");
-    }
-}
-```
-
-## Best Practices
-
-1. **Immutability**: All KMIP objects should be immutable
-2. **Null Safety**: Use `@NonNull` annotations and validate inputs
-3. **Thread Safety**: Ensure thread safety in shared objects
-4. **Versioning**: Support multiple KMIP spec versions
-5. **Documentation**: Include Javadoc for all public APIs
-6. **Testing**: Maintain high test coverage
-7. **Error Handling**: Provide meaningful error messages
-8. **Performance**: Optimize for high-throughput scenarios
-9. **Validation**: Validate inputs early and fail fast
-10. **Logging**: Include appropriate logging for debugging
-
-### Unit Tests
-
-- Test individual KMIP types in isolation
-- Verify serialization/deserialization round-trips
-- Test edge cases and error conditions
-
-### Integration Tests
-
-- Test end-to-end serialization/deserialization
-- Verify compatibility with different KMIP versions
-- Test with real-world KMIP messages
-
-### Performance Tests
-
-- Measure serialization/deserialization performance
-- Identify bottlenecks and optimize critical paths
-- Ensure acceptable performance under load
-
-## Best Practices
-
-1. **Immutability**: Make KMIP objects immutable where possible
-2. **Validation**: Validate all inputs in constructors and setters
-3. **Thread Safety**: Document thread safety guarantees
-4. **Error Messages**: Provide clear, actionable error messages
-5. **Documentation**: Document all public APIs with Javadoc
-6. **Testing**: Write tests for all new functionality
-7. **Performance**: Be mindful of object creation and memory usage
-8. **Error Handling**: Handle errors gracefully and provide context
-
-## Next Steps
-
-- [Type System](../02-architecture/type-system.md)
-- [Serialization](../02-architecture/serialization.md)
-- [API Reference](../04-api/)
-    }
-
-    // ... other methods ...
-}
-```
-
-### Structures
-
-```java
-public class KeyBlock implements KmipStructure {
-    private final KeyFormatType format;
-    private final byte[] keyMaterial;
-    private final List<CryptographicAlgorithm> algorithms;
-
-    public KeyBlock(KeyFormatType format, byte[] keyMaterial, List<CryptographicAlgorithm> algorithms) {
-        this.format = Objects.requireNonNull(format, "Key format cannot be null");
-        this.keyMaterial = keyMaterial != null ? keyMaterial.clone() : new byte[0];
-        this.algorithms = algorithms != null ? List.copyOf(algorithms) : List.of();
-    }
-
+@Component
+public class FooEnumJsonSerializer extends JsonSerializer<FooEnum> {
     @Override
-    public KmipTag getKmipTag() {
-        return KmipTag.KEY_BLOCK;
-    }
+    public void serialize(FooEnum value, JsonGenerator gen, SerializerProvider serializers) 
+            throws IOException {
+        if (value == null) {
+            gen.writeNull();
+            return;
+        }
 
-    // ... other methods ...
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new JsonGenerationException(
+                String.format("FooEnum is not supported for KMIP spec %s", spec), gen);
+        }
+
+        gen.writeStartObject();
+        gen.writeStringField("tag", value.getKmipTag().getDescription());
+        gen.writeStringField("type", value.getEncodingType().name());
+        gen.writeStringField("value", value.getValue().getDescription());
+        gen.writeEndObject();
+    }
 }
 ```
 
-## Serialization
+### Testing
 
-### JSON Serialization
-
-```java
-ObjectMapper mapper = new ObjectMapper();
-KmipContext context = new KmipContext(KmipSpec.V1_2);
-KmipModule module = new KmipModule(context);
-mapper.registerModule(module);
-
-// Serialize
-String json = mapper.writeValueAsString(keyBlock);
-
-// Deserialize
-KeyBlock deserialized = mapper.readValue(json, KeyBlock.class);
-```
-
-### TTLV Serialization
+All KMIP types should include comprehensive tests:
 
 ```java
-KmipContext context = new KmipContext(KmipSpec.V1_2);
-TtlvEncoder encoder = new TtlvEncoder(context);
-TtlvDecoder decoder = new TtlvDecoder(context);
+@ExtendWith(MockitoExtension.class)
+class FooEnumTest {
+    @Test
+    void testDefaultCreation() {
+        FooEnum fooEnum = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(fooEnum.getValue()).isEqualTo(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(fooEnum.getKmipTag()).isEqualTo(FooEnum.kmipTag);
+        assertThat(fooEnum.getEncodingType()).isEqualTo(EncodingType.ENUMERATION);
+    }
 
-// Serialize
-byte[] ttlv = encoder.encode(keyBlock);
-
-// Deserialize
-KeyBlock deserialized = decoder.decode(ttlv, KeyBlock.class);
+    @Test
+    void testEquality() {
+        FooEnum foo1 = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        FooEnum foo2 = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+        assertThat(foo1).isEqualTo(foo2);
+        assertThat(foo1.hashCode()).isEqualTo(foo2.hashCode());
+    }
+}
 ```
+
+## Best Practices
+
+1. **Always validate KMIP spec compatibility** in constructors
+2. **Use immutable objects** with builder patterns
+3. **Implement proper equals/hashCode** for value objects
+4. **Include comprehensive unit tests** for all scenarios
+5. **Follow naming conventions** for consistency
+6. **Document custom extensions** thoroughly

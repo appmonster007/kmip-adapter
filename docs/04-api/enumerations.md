@@ -4,6 +4,22 @@ See also: [Tests Index](../03-guides/tests-index.md) • [Boilerplate: Enumerati
 
 ## Core Enumerations
 
+### FooEnum
+
+Example enumeration implementation following the KMIP adapter pattern.
+
+**Example:**
+```java
+// Create a FooEnum using a standard value
+FooEnum fooEnum = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+int value = fooEnum.getValue().getValue(); // 0x00000001
+String desc = fooEnum.getValue().getDescription(); // "Placeholder1"
+
+// Access KMIP metadata
+KmipTag tag = fooEnum.getKmipTag(); // FOO_ENUM tag
+EncodingType encoding = fooEnum.getEncodingType(); // ENUMERATION
+```
+
 ### State
 
 Represents the state of a managed object in the KMIP system.
@@ -33,46 +49,47 @@ int value = algo.getValue(); // 3
 String name = algo.name(); // "AES"
 ```
 
-### KeyFormatType
-
-Represents the format of a cryptographic key.
-
-**Example:**
-```java
-KeyFormatType format = KeyFormatType.RAW;
-int value = format.getValue(); // 0x01
-String name = format.name(); // "RAW"
-```
-
 ## Working with Enumerations
 
-### Getting a State value by code or name
+### Getting FooEnum values by code or name
 
 ```java
-// Lookups require a KMIP spec
-KmipContext.setSpec(KmipSpec.V1_4);
-try {
-    // By integer code
-    State.Value activeByValue = State.fromValue(KmipSpec.V1_4, 0x00000002);
+// By integer code
+FooEnum.Value valueByCode = FooEnum.fromValue(0x00000001);
 
-    // By name (case-insensitive)
-    State.Value activeByName = State.fromName(KmipSpec.V1_4, "Active");
+// By name (case-insensitive)
+FooEnum.Value valueByName = FooEnum.fromName("Placeholder1");
 
-    // Construct a State instance
-    State s1 = new State(activeByValue);
-    State s2 = new State(State.Standard.ACTIVE);
-} finally {
-    KmipContext.clear();
-}
+// Construct FooEnum instances
+FooEnum foo1 = new FooEnum(valueByCode);
+FooEnum foo2 = new FooEnum(FooEnum.Standard.PLACEHOLDER_1);
+
+// Check equality
+assertThat(foo1).isEqualTo(foo2);
 ```
 
 ### Accessing standard values
 
 ```java
 // Standard values are available via the nested enum
-State.Standard std = State.Standard.ACTIVE;
-int code = std.getValue();
-String description = std.getDescription();
+FooEnum.Standard std = FooEnum.Standard.PLACEHOLDER_1;
+int code = std.getValue(); // 0x00000001
+String description = std.getDescription(); // "Placeholder1"
+boolean isSupported = std.isSupported(); // checks current KmipContext
+```
+
+### Registry and Extension Support
+
+```java
+// Register custom enumeration values
+FooEnum.Value custom = FooEnum.register(
+    0x80000001, 
+    "CustomValue", 
+    Set.of(KmipSpec.V1_4)
+);
+
+// Use custom value
+FooEnum customEnum = new FooEnum(custom);
 ```
 
 ### Custom Enumerations

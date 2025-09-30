@@ -73,6 +73,7 @@ public final class YourEnumeration implements KmipEnumeration {
     
     // Version support
     public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(KmipContext.getSpec());
     }
     

@@ -3,9 +3,9 @@
 Use these copy‑ready boilerplates when adding new KMIP types. Each guide contains the full implementation, codecs (JSON/XML/TTLV), module registrations, and tests.
 
 Quick links:
-- Enumeration: `docs/03-guides/development/boilerplate-enum.md` (FooDemoEnum)
-- Attribute: `docs/03-guides/development/boilerplate-attribute.md` (FooDemoAttribute)
-- Structure: `docs/03-guides/development/boilerplate-structure.md` (FooDemoStructure)
+- Enumeration: `docs/03-guides/development/boilerplate-enum.md` (FooEnum)
+- Attribute: `docs/03-guides/development/boilerplate-attribute.md` (FooDataType + ActivationDate - KmipDataType vs KmipAttribute)
+- Structure: `docs/03-guides/development/boilerplate-structure.md` (FooStructure)
 
 Related guides:
 - Quick Start: `docs/03-guides/quick-start-new-types.md`
@@ -18,7 +18,7 @@ Common building blocks referenced in all boilerplates:
 - Codec modules: `KmipJsonModule`, `KmipXmlModule`, `KmipTtlvModule`, `TtlvMapper`
 
 Recommended flow:
-1) Open the FooDemo* guide that matches your type.
+1) Open the Foo* guide that matches your type (FooEnum, FooDataType, FooStructure).
 2) Copy the class and the matching serializer/deserializer code blocks.
 3) Register the codecs using ServiceLoader by listing your providers in the correct `META-INF/services` files (see below). No code edits are needed in the `Kmip*Module` classes.
 4) Copy the provided tests and run `mvn test`.
@@ -50,7 +50,7 @@ Recommended flow:
   - [ ] JSON/XML/TTLV round‑trip tests
   - [ ] UnsupportedVersion cases covered
 
-See the FooDemo* boilerplates for exact code you can paste, including example provider entries for all three formats.
+See the Foo* boilerplates for exact code you can paste, including example provider entries for all three formats.
 
 ---
 
@@ -77,7 +77,7 @@ See the FooDemo* boilerplates for exact code you can paste, including example pr
   - [ ] XML: `KmipXmlModule` auto-loads providers from ServiceLoader
   - [ ] TTLV: `KmipTtlvModule` auto-loads providers from ServiceLoader
 
-- Tests (see FooDemo* guides for copy‑ready classes)
+- Tests (see Foo* guides for copy‑ready classes)
   - [ ] Unit tests for construction/validation, equals/hash
   - [ ] JSON/XML/TTLV round‑trip tests
   - [ ] UnsupportedVersion contexts fail as expected
