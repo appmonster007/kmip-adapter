@@ -1081,6 +1081,8 @@ generate_benchmark_subject() {
     local out_file="${out_dir}/${STRUCTURE_NAME}BenchmarkSubject.java"
     local pdot
     pdot="$(pkg_dot)"
+    local var_name
+    var_name=$(echo "${STRUCTURE_NAME:0:1}" | tr '[:upper:]' '[:lower:]')${STRUCTURE_NAME:1}
 
     if [ "${DRY_RUN}" = "true" ]; then
         echo "DRY RUN: would create benchmark subject: ${out_file}"
@@ -1092,39 +1094,32 @@ generate_benchmark_subject() {
     cat > "${out_file}" <<EOF
 package org.purpleBean.kmip.benchmark.subjects.${pdot};
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.${pdot}.${STRUCTURE_NAME};
 
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class ${STRUCTURE_NAME}BenchmarkSubject extends KmipBenchmarkSubject {
-
-    private JsonMapper json;
-    private XmlMapper xml;
-    private TtlvMapper ttlv;
-
-    private ${STRUCTURE_NAME} obj;
+public class ${STRUCTURE_NAME}BenchmarkSubject extends KmipBenchmarkSubject<${STRUCTURE_NAME}> {
 
     @Getter
-    private String jsonStr;
-    @Getter
-    private String xmlStr;
-    @Getter
-    private ByteBuffer ttlvBuf;
+    private KmipSpec spec = KmipSpec.V1_2;
 
     public ${STRUCTURE_NAME}BenchmarkSubject() throws Exception {
-        this.setup();
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
+        State state = new State(State.Standard.ACTIVE);
+        ${STRUCTURE_NAME} ${var_name} = ${STRUCTURE_NAME}.builder()
+            .activationDate(activationDate)
+            .state(state)
+            .build();
+        initialize(${var_name}, ${STRUCTURE_NAME}.class);
     }
 
     @Override
@@ -1134,56 +1129,12 @@ public class ${STRUCTURE_NAME}BenchmarkSubject extends KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = KmipCodecManager.getJsonMapper();
-        xml = KmipCodecManager.getXmlMapper();
-        ttlv = KmipCodecManager.getTtlvMapper();
-
-        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
-        State state = new State(State.Standard.ACTIVE);
-        obj = ${STRUCTURE_NAME}.builder()
-            .activationDate(activationDate)
-            .state(state)
-            .build();
-
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+        KmipContext.setSpec(spec);
     }
 
     @Override
     public void tearDown() {
         KmipContext.clear();
-    }
-
-    @Override
-    public String jsonSerialize() throws Exception {
-        return json.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, ${STRUCTURE_NAME}.class);
-    }
-
-    @Override
-    public String xmlSerialize() throws Exception {
-        return xml.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, ${STRUCTURE_NAME}.class);
-    }
-
-    @Override
-    public ByteBuffer ttlvSerialize() throws Exception {
-        return ttlv.writeValueAsByteBuffer(obj);
-    }
-
-    @Override
-    public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), ${STRUCTURE_NAME}.class);
     }
 }
 EOF

@@ -819,36 +819,25 @@ generate_benchmark_subject() {
     cat > "${path}" << EOF
 package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH};
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
-import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject extends KmipBenchmarkSubject {
-
-    private JsonMapper json;
-    private XmlMapper xml;
-    private TtlvMapper ttlv;
-
-    private ${ATTRIBUTE_NAME}Attribute obj;
+public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject extends KmipBenchmarkSubject<${ATTRIBUTE_NAME}Attribute> {
 
     @Getter
-    private String jsonStr;
-    @Getter
-    private String xmlStr;
-    @Getter
-    private ByteBuffer ttlvBuf;
+    private KmipSpec spec = KmipSpec.V1_2;
 
     public ${ATTRIBUTE_NAME}AttributeBenchmarkSubject() throws Exception {
-        this.setup();
+        ${ATTRIBUTE_NAME}Attribute ${ATTRIBUTE_NAME,} = ${ATTRIBUTE_NAME}Attribute.builder()
+            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
+            .build();
+        initialize(${ATTRIBUTE_NAME,}, ${ATTRIBUTE_NAME}Attribute.class);
     }
 
     @Override
@@ -858,54 +847,12 @@ public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject extends KmipBenchmarkSub
 
     @Override
     public void setup() throws Exception {
-        json = KmipCodecManager.getJsonMapper();
-        xml = KmipCodecManager.getXmlMapper();
-        ttlv = KmipCodecManager.getTtlvMapper();
-
-        // Create test object
-        obj = ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
-            .build();
-
-        // Serialize to all formats for deserialization benchmarks
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ByteBuffer.wrap(ttlv.writeValueAsBytes(obj));
+        KmipContext.setSpec(spec);
     }
 
     @Override
     public void tearDown() {
         KmipContext.clear();
-    }
-
-    @Override
-    public String jsonSerialize() throws Exception {
-        return json.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, ${ATTRIBUTE_NAME}Attribute.class);
-    }
-
-    @Override
-    public String xmlSerialize() throws Exception {
-        return xml.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, ${ATTRIBUTE_NAME}Attribute.class);
-    }
-
-    @Override
-    public ByteBuffer ttlvSerialize() throws Exception {
-        return ttlv.writeValueAsByteBuffer(obj);
-    }
-
-    @Override
-    public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), ${ATTRIBUTE_NAME}Attribute.class);
     }
 }
 EOF

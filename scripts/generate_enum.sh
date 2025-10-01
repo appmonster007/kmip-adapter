@@ -1075,6 +1075,8 @@ generate_benchmark_subject() {
     local out_file="${out_dir}/${ENUM_NAME}BenchmarkSubject.java"
     local pdot
     pdot="$(pkg_dot)"
+    local var_name
+    var_name=$(echo "${ENUM_NAME:0:1}" | tr '[:upper:]' '[:lower:]')${ENUM_NAME:1}
 
     if [ "${DRY_RUN}" = "true" ]; then
         echo "DRY RUN: would create benchmark subject: ${out_file}"
@@ -1086,33 +1088,20 @@ generate_benchmark_subject() {
     cat > "${out_file}" <<EOF
 package org.purpleBean.kmip.benchmark.subjects.${pdot};
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
 
-import java.nio.ByteBuffer;
-
-public class ${ENUM_NAME}BenchmarkSubject extends KmipBenchmarkSubject {
-    private JsonMapper json;
-    private XmlMapper xml;
-    private TtlvMapper ttlv;
-
-    private ${ENUM_NAME} obj;
+public class ${ENUM_NAME}BenchmarkSubject extends KmipBenchmarkSubject<${ENUM_NAME}> {
 
     @Getter
-    private String jsonStr;
-    @Getter
-    private String xmlStr;
-    @Getter
-    private ByteBuffer ttlvBuf;
+    private KmipSpec spec = KmipSpec.V1_2;
 
     public ${ENUM_NAME}BenchmarkSubject() throws Exception {
-        this.setup();
+        ${ENUM_NAME} ${var_name} = new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
+        initialize(${var_name}, ${ENUM_NAME}.class);
     }
 
     @Override
@@ -1122,51 +1111,12 @@ public class ${ENUM_NAME}BenchmarkSubject extends KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = KmipCodecManager.getJsonMapper();
-        xml = KmipCodecManager.getXmlMapper();
-        ttlv = KmipCodecManager.getTtlvMapper();
-
-        obj = new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-
-        // Pre-serialize to ensure all mappers are initialized
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+        KmipContext.setSpec(spec);
     }
 
     @Override
     public void tearDown() {
         KmipContext.clear();
-    }
-
-    @Override
-    public String jsonSerialize() throws Exception {
-        return json.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, ${ENUM_NAME}.class);
-    }
-
-    @Override
-    public String xmlSerialize() throws Exception {
-        return xml.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, ${ENUM_NAME}.class);
-    }
-
-    @Override
-    public ByteBuffer ttlvSerialize() throws Exception {
-        return ttlv.writeValueAsByteBuffer(obj);
-    }
-
-    @Override
-    public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), ${ENUM_NAME}.class);
     }
 }
 EOF
