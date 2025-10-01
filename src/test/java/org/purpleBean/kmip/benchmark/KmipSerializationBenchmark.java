@@ -111,7 +111,7 @@ public class KmipSerializationBenchmark {
         @Param({"__AUTO__"})
         public String subject;
 
-        private KmipBenchmarkSubject impl;
+        private KmipBenchmarkSubject<?> impl;
 
         @Setup(Level.Trial)
         public void setup() throws Exception {

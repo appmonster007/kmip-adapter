@@ -1,39 +1,19 @@
 package org.purpleBean.kmip.benchmark.subjects.common.structure;
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.NameValue;
 import org.purpleBean.kmip.common.enumeration.NameType;
-import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.Name;
 
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-public class NameBenchmarkSubject extends KmipBenchmarkSubject {
-
-    private JsonMapper json;
-    private XmlMapper xml;
-    private TtlvMapper ttlv;
-
-    private Name obj;
-
-    @Getter
-    private String jsonStr;
-    @Getter
-    private String xmlStr;
-    @Getter
-    private ByteBuffer ttlvBuf;
+public class NameBenchmarkSubject extends KmipBenchmarkSubject<Name> {
 
     public NameBenchmarkSubject() throws Exception {
-        this.setup();
+        Name name = Name.builder()
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
+        initialize(name, Name.class);
     }
 
     @Override
@@ -43,55 +23,11 @@ public class NameBenchmarkSubject extends KmipBenchmarkSubject {
 
     @Override
     public void setup() throws Exception {
-        json = KmipCodecManager.getJsonMapper();
-        xml = KmipCodecManager.getXmlMapper();
-        ttlv = KmipCodecManager.getTtlvMapper();
-
-        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
-        State state = new State(State.Standard.ACTIVE);
-        obj = Name.builder()
-                .nameValue(NameValue.of("some-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
-                .build();
-
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+        KmipContext.setSpec(spec);
     }
 
     @Override
     public void tearDown() {
         KmipContext.clear();
-    }
-
-    @Override
-    public String jsonSerialize() throws Exception {
-        return json.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object jsonDeserialize() throws Exception {
-        return json.readValue(jsonStr, Name.class);
-    }
-
-    @Override
-    public String xmlSerialize() throws Exception {
-        return xml.writeValueAsString(obj);
-    }
-
-    @Override
-    public Object xmlDeserialize() throws Exception {
-        return xml.readValue(xmlStr, Name.class);
-    }
-
-    @Override
-    public ByteBuffer ttlvSerialize() throws Exception {
-        return ttlv.writeValueAsByteBuffer(obj);
-    }
-
-    @Override
-    public Object ttlvDeserialize() throws Exception {
-        return ttlv.readValue(ttlvBuf.duplicate(), Name.class);
     }
 }
