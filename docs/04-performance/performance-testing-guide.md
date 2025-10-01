@@ -106,23 +106,15 @@ public class YourNewKmipObjectBenchmarkSubject extends KmipBenchmarkSubject {
 }
 ```
 
-### ServiceLoader Registration (Optional, Zero Code Changes)
+### ServiceLoader Registration (Automatic)
 
-Instead of modifying `KmipSerializationBenchmark`, you can register your subject using Java's ServiceLoader. This lets the benchmark harness auto-discover new subjects at runtime:
+The benchmark framework automatically discovers all `KmipBenchmarkSubject` implementations at runtime using Java's ServiceLoader mechanism. No manual registration is needed.
 
-1) Create the service file at:
+1. **No Configuration Needed**: The framework will automatically find and include all benchmark subjects
+2. **Just Implement**: Simply create your benchmark subject class and it will be included in the next run
+3. **No Code Changes**: No need to modify any existing code to add new benchmark subjects
 
-```
-src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject
-```
-
-2) Add the fully qualified class name of your subject (one per line):
-
-```
-org.purpleBean.kmip.benchmark.subjects.YourNewKmipObjectBenchmarkSubject
-```
-
-The harness will automatically pick this up and make it available via the `subject` parameter.
+For example, creating a new benchmark subject like `CustomAttributeBenchmarkSubject` is automatically discovered and included in the benchmark runs without any additional configuration.
 
 ## Performance Metrics
 
