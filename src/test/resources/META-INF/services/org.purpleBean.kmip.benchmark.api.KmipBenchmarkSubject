@@ -1,5 +1,6 @@
 org.purpleBean.kmip.benchmark.subjects.ProtocolVersionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ActivationDateBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.ArchiveDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueBenchmarkSubject

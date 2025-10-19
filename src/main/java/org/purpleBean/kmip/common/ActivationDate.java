@@ -31,6 +31,10 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     @NonNull
     private final OffsetDateTime value;
 
+    public static ActivationDate of(@NonNull OffsetDateTime value) {
+        return ActivationDate.builder().value(value).build();
+    }
+
     public static ActivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");

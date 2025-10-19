@@ -57,6 +57,24 @@ public final class JmhBenchmarkRunner {
                     "org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject");
         }
         System.out.println("JMH Runner discovered subjects: " + subjects);
+
+        // Allow selecting a subset or a single subject via -Dbench.subject=ArchiveDate[,ActivationDate]
+        String subjectProp = System.getProperty("bench.subject", "").trim();
+        String[] chosenSubjects;
+        if (!subjectProp.isEmpty()) {
+            String[] requested = subjectProp.split(",");
+            for (int i = 0; i < requested.length; i++) {
+                requested[i] = requested[i].trim();
+                if (!subjects.contains(requested[i])) {
+                    throw new IllegalArgumentException("Unknown subject '" + requested[i] + "'. Available: " + subjects);
+                }
+            }
+            chosenSubjects = requested;
+            System.out.println("JMH Runner filtered subjects via bench.subject: " + String.join(", ", requested));
+        } else {
+            chosenSubjects = subjects.toArray(String[]::new);
+        }
+
         System.out.printf("JMH config => threads=%d, forks=%d, wi=%d, wtMs=%d, mi=%d, mtMs=%d, timeUnit=%s%n",
                 threads, forks, warmupIters, warmupMs, measureIters, measureMs, TimeUnit.MICROSECONDS);
 
@@ -73,7 +91,7 @@ public final class JmhBenchmarkRunner {
                 .shouldFailOnError(true)
                 .shouldDoGC(true)
                 .jvmArgs("-Xmx512m", "-Xms512m")
-                .param("subject", subjects.toArray(String[]::new))
+                .param("subject", chosenSubjects)
                 .result(resultPath)
                 .resultFormat(resultFormat);
 

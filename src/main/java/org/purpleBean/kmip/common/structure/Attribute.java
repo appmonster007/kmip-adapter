@@ -11,6 +11,7 @@ import org.purpleBean.kmip.common.AttributeValue;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,10 +59,11 @@ public class Attribute implements KmipStructure {
         } else {
             attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
         }
-        return KmipAttribute.getAttributeBuilderFromRegistry(
+        BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(
                 attrTag,
                 attribute.getAttributeValue().getEncodingType()
-        ).apply(attribute.getAttributeName(), attribute.getAttributeValue());
+        );
+        return attributeBuilder.apply(attribute.getAttributeName(), attribute.getAttributeValue());
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 
 import java.nio.ByteBuffer;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -94,34 +95,42 @@ public class KmipSerializationBenchmark {
     public static class BenchState {
 
         private static final Map<String, KmipBenchmarkSubject> REGISTRY = new HashMap<>();
+        private static Collection<KmipBenchmarkSubject> allSubjects;
 
         static {
-            REGISTRY.putAll(BenchmarkSubjects.discoverMap());
-            if (REGISTRY.isEmpty()) {
+            Map<String, KmipBenchmarkSubject> discovered = BenchmarkSubjects.discoverMap();
+            if (discovered.isEmpty()) {
                 throw new IllegalStateException(
                         "No KmipBenchmarkSubject implementations discovered. " +
                                 "Ensure you have ServiceLoader registrations under src/test/resources/META-INF/services/" +
                                 "org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject");
             }
+            REGISTRY.putAll(discovered);
+            allSubjects = REGISTRY.values();
             System.out.println("Discovered benchmark subjects: " + REGISTRY.keySet());
         }
 
-        // Select which subject to benchmark. Populated by JmhBenchmarkRunner via OptionsBuilder.param("subject", ...)
-        // Default placeholder is only a guard in case the runner does not set params.
-        @Param({"__AUTO__"})
+        // Default to empty string to indicate all subjects
+        @Param(value = {""})
         public String subject;
 
         private KmipBenchmarkSubject<?> impl;
 
         @Setup(Level.Trial)
         public void setup() throws Exception {
-            if ("__AUTO__".equals(subject)) {
-                throw new IllegalStateException("Benchmark param 'subject' was not set by the runner. " +
-                        "Ensure you are invoking JmhBenchmarkRunner which auto-discovers subjects and injects them via OptionsBuilder.param().");
-            }
-            impl = REGISTRY.get(subject);
-            if (impl == null) {
-                throw new IllegalArgumentException("Unknown subject: " + subject + ". Available: " + REGISTRY.keySet());
+            if (subject != null && !subject.isEmpty()) {
+                // Run specific subject if specified
+                impl = REGISTRY.get(subject);
+                if (impl == null) {
+                    throw new IllegalArgumentException("Unknown subject: " + subject +
+                            ". Available: " + REGISTRY.keySet());
+                }
+            } else {
+                // If no subject specified, use the first one
+                impl = allSubjects.iterator().next();
+                if (impl == null) {
+                    throw new IllegalStateException("No benchmark subjects available");
+                }
             }
 //            impl.setup();
         }

@@ -3,6 +3,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeseriali
 org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.RequestMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ActivationDateXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ArchiveDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeIndexXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
