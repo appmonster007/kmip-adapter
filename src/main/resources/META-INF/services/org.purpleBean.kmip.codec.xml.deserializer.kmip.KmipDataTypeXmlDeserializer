@@ -7,9 +7,16 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ArchiveDateXmlDeserialize
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeIndexXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateLengthXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ContactInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CryptographicLengthXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CryptographicUsageMaskXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DestroyDateXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.LastChangeDateXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.LeaseTimeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.NameValueXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ObjectGroupXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.OperationPolicyNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.UniqueIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.AdjustmentTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.AlternativeNameTypeXmlDeserializer

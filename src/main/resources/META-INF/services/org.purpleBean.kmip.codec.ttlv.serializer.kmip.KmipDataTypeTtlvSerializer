@@ -6,9 +6,16 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ArchiveDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateLengthTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ContactInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CryptographicLengthTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CryptographicUsageMaskTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DestroyDateTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LastChangeDateTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LeaseTimeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.NameValueTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ObjectGroupTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.OperationPolicyNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.UniqueIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.AdjustmentTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.AlternativeNameTypeTtlvSerializer
