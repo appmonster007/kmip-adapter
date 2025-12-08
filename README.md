@@ -12,6 +12,7 @@ A comprehensive Java library for building and managing KMIP (Key Management Inte
 - If you are using AI, be frank and upfront about it in the PRs and discusions
 - Contribute by understanding the project goals, if you use AI to blindly create PRs they will be rejected
 - Documentation docs will be heavily scrutinized for brevity and concise explanation
+- All PRs must be to develop or feature branch
 
 ## 📚 Documentation
 
