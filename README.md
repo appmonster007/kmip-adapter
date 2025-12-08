@@ -8,6 +8,11 @@
 
 A comprehensive Java library for building and managing KMIP (Key Management Interoperability Protocol) data types with support for TTLV serialization, JSON/XML mapping, and extensible type systems.
 
+## Rules for Contribution : 
+- If you are using AI, be frank and upfront about it in the PRs and discusions
+- Contribute by understanding the project goals, if you use AI to blindly create PRs they will be rejected
+- Documentation docs will be heavily scrutinized for brevity and concise explanation
+
 ## 📚 Documentation
 
 ### Docs Index
