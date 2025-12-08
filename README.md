@@ -97,6 +97,67 @@ try {
     KmipContext.clear();
 }
 ```
+## 📘 How to Use the KMIP Adapter
+
+This library is designed to be dropped into an existing Java application that needs to
+create, validate, and serialize KMIP objects. A typical integration flow looks like this:
+
+1. **Add the dependency** to your build (Maven example shown above).
+2. **Set the KMIP specification context** using `KmipContext` (for example, KMIP 1.2).
+3. **Create KMIP data types or structures** using the provided classes.
+4. **Serialize or deserialize** those objects using Jackson (JSON/XML) or the TTLV codecs.
+5. **Clear the context** when you are done to avoid leaking state between operations.
+
+### End-to-end usage example
+
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.common.ActivationDate;
+import org.purpleBean.kmip.common.structure.SampleStructure;
+
+import java.time.OffsetDateTime;
+
+public class KmipExample {
+
+    public static void main(String[] args) throws Exception {
+        // 1. Set the KMIP specification for this thread
+        KmipContext.setSpec(KmipSpec.V1_2);
+
+        try {
+            // 2. Build KMIP types and structures
+            State activeState = new State(State.Standard.ACTIVE);
+            ActivationDate activationDate = ActivationDate.builder()
+                    .value(OffsetDateTime.now())
+                    .build();
+
+            SampleStructure structure = SampleStructure.builder()
+                    .activationDate(activationDate)
+                    .state(activeState)
+                    .build();
+
+            // 3. Configure Jackson mapper for JSON
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+
+            // 4. Serialize to JSON
+            String json = mapper.writeValueAsString(structure);
+            System.out.println("Serialized JSON: " + json);
+
+            // 5. Deserialize back to a KMIP structure
+            SampleStructure restored = mapper.readValue(json, SampleStructure.class);
+            System.out.println("Restored structure: " + restored);
+
+        } finally {
+            // 6. Clear the KMIP context to avoid leaking state
+            KmipContext.clear();
+        }
+    }
+}
+
 
 ## 🔍 Features
 
