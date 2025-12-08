@@ -1,6 +1,7 @@
 # KMIP Adapter Developer Guide
 
 A comprehensive guide for extending and contributing to the KMIP Adapter library. This document covers core concepts, architecture, and development workflows.
+Commits should follow guide [freecodecamp](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)
 
 ## Table of Contents
 
