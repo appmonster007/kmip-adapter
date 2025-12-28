@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.{{SUB_PATH}};
 
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -8,7 +8,7 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.ActivationDate;
+import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -16,22 +16,22 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class ActivationDateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ActivationDate> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
-    private final EncodingType encodingType = EncodingType.DATE_TIME;
+public class {{ATTRIBUTE_NAME}}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<{{ATTRIBUTE_NAME}}> {
+    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
+    private final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}}; // TODO : update the encoding type
 
     @Override
-    public ActivationDate deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public {{ATTRIBUTE_NAME}} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
                 && obj.getType() != encodingType.getTypeValue()) {
             throw new IllegalArgumentException(String.format("Expected %s type for %s", encodingType.getTypeValue(), kmipTag.getDescription()));
         }
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        OffsetDateTime value = mapper.readValue(bb, OffsetDateTime.class);
+        {{FIELD_TYPE}} value = mapper.readValue(bb, {{FIELD_TYPE}}.class);
 
         KmipSpec spec = KmipContext.getSpec();
-        ActivationDate attribute = ActivationDate.builder().value(value).build();
+        {{ATTRIBUTE_NAME}} attribute = {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
 
         if (!attribute.isSupported()) {
             throw new NoSuchElementException();
@@ -39,3 +39,4 @@ public class ActivationDateTtlvDeserializer extends KmipDataTypeTtlvDeserializer
         return attribute;
     }
 }
+

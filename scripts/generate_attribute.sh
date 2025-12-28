@@ -26,61 +26,191 @@ GEN_XML_SER=false
 GEN_XML_DES=false
 GEN_TTLV_SER=false
 GEN_TTLV_DES=false
-GEN_TEST_JSON=false
-GEN_TEST_XML=false
-GEN_TEST_TTLV=false
+GEN_DOMAIN_TEST=false
+GEN_JSON_TEST=false
+GEN_XML_TEST=false
+GEN_TTLV_TEST=false
 GEN_BENCHMARK=false
 
 # Dry run toggled automatically when no flags provided
 DRY_RUN=false
+
+TEMPLATE_DIR="scripts/templates/datatype-attribute"
 
 #############################################
 # Helpers
 #############################################
 usage() {
     cat <<EOF
-Usage: $0 [options] <Attribute1> [Attribute2...]
+Usage: $0 [options] <Name1> [Name2 ...]
 
 If no generation options are provided the script performs a DRY RUN (prints what it would do).
 To actually create files pass one or more generation flags.
 
 Options:
-  --class        Generate Attribute class
-  --json-ser     Generate JSON Serializer
-  --json-des     Generate JSON Deserializer
-  --xml-ser      Generate XML Serializer
-  --xml-des      Generate XML Deserializer
-  --ttlv-ser     Generate TTLV Serializer
-  --ttlv-des     Generate TTLV Deserializer
-  --test-json    Generate JSON Test
-  --test-xml     Generate XML Test
-  --test-ttlv    Generate TTLV Test
-  --benchmark    Generate Benchmark Subject
-  --all          Generate all files
-  --help, -h     Show this help
-
-Examples:
-  # Dry run (no files will be written)
-  $0 ActivationDate
-
-  # Generate only class + json serializer
-  $0 --class --json-ser ActivationDate
-
-  # Generate everything for multiple attributes
-  $0 --all ActivationDate DeactivationDate
+  --class         Generate the attribute class
+  --json-ser      Generate JSON serializer
+  --json-des      Generate JSON deserializer
+  --xml-ser       Generate XML serializer
+  --xml-des       Generate XML deserializer
+  --ttlv-ser      Generate TTLV serializer
+  --ttlv-des      Generate TTLV deserializer
+  --domain-test   Generate domain/unit test
+  --json-test     Generate JSON serialization test
+  --xml-test      Generate XML serialization test
+  --ttlv-test     Generate TTLV serialization test
+  --benchmark     Generate benchmark subject
+  --all           Generate everything
+  -h, --help      Show this help
 EOF
     exit 1
 }
 
-get_attribute_var_name() {
-    local name="$1"
-    echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
+# 1) Title Case -> PascalCase
+#    "Abc Def" -> "AbcDef"
+title_to_pascal() {
+    local input="$*"
+    [ -z "$input" ] && { echo ""; return 1; }
+
+    # replace underscores/hyphens with spaces, normalize whitespace, capitalize each word, then concat
+    echo "$input" \
+        | sed -E 's/[_-]+/ /g' \
+        | awk '{
+            for(i=1;i<=NF;i++){
+                $i = toupper(substr($i,1,1)) tolower(substr($i,2))
+            }
+            for(i=1;i<=NF;i++) printf "%s", $i
+            print ""
+        }'
 }
 
+# 2) PascalCase -> Title Case
+#    "AbcDef" -> "Abc Def"
+pascal_to_title() {
+    local input="$*"
+    [ -z "$input" ] && { echo ""; return 1; }
+
+    # insert a space between lower-to-upper transitions (e.g. "abcDef" -> "abc Def"),
+    # also trim leading/trailing whitespace
+    echo "$input" \
+        | sed -E 's/([[:lower:][:digit:]])([[:upper:]])/\1 \2/g' \
+        | sed -E 's/^[[:space:]]+|[[:space:]]+$//g'
+}
+
+# 3) PascalCase -> camelCase
+#    "AbcDef" -> "abcDef"
+pascal_to_camel() {
+    local input="$*"
+    [ -z "$input" ] && { echo ""; return 1; }
+
+    local first="${input:0:1}"
+    local rest="${input:1}"
+    printf "%s%s\n" "$(echo "$first" | tr '[:upper:]' '[:lower:]')" "$rest"
+}
+
+# 4) Title Case -> Snake_Case (preserve capitalization of words)
+#    "Abc Def" -> "Abc_Def"
+title_to_snake() {
+    local input
+    if [ "$#" -eq 0 ]; then
+        # if no arguments, read from stdin
+        input="$(cat)"
+    else
+        input="$*"
+    fi
+    [ -z "$input" ] && { echo ""; return 1; }
+
+    # collapse whitespace into single underscore, strip leading/trailing underscores
+    echo "$input" \
+        | sed -E 's/[[:space:]]+/_/g' \
+        | sed -E 's/^_|_+$//g'
+}
+
+# 5) Snake_Case -> Title Case
+#    "Abc_Def" -> "Abc Def"
+snake_to_title() {
+    local input="$*"
+    [ -z "$input" ] && { echo ""; return 1; }
+
+    echo "$input" \
+        | sed -E 's/_+/ /g' \
+        | awk '{
+            for(i=1;i<=NF;i++){
+                $i = toupper(substr($i,1,1)) tolower(substr($i,2))
+            }
+            for(i=1;i<=NF;i++){
+                printf "%s%s", (i>1?" ":""), $i
+            }
+            print ""
+        }'
+}
+
+# 6) All -> lower case
+#    "Abc" -> "abc"
+to_lower() {
+    local input="$*"
+    [ -z "$input" ] && { echo ""; return 1; }
+    echo "$input" | tr '[:upper:]' '[:lower:]'
+}
+
+# 7) All -> UPPER CASE
+#    "Abc" -> "ABC"
+to_upper() {
+    # Read from stdin if no arguments provided
+    if [ $# -eq 0 ]; then
+        tr '[:lower:]' '[:upper:]'
+    else
+        # Handle arguments
+        local input="$*"
+        [ -z "$input" ] && { echo ""; return 1; }
+        echo "$input" | tr '[:lower:]' '[:upper:]'
+    fi
+}
+# -----------------------
+# Small wrappers / aliases used by the generator
+# -----------------------
+# Convert PascalCase -> MY_DATATYPE (snake upper)
 to_snake_upper() {
-    local name="$1"
-    # convert CamelCase to SNAKE_UPPER (e.g., ActivationDate -> ACTIVATION_DATE)
-    echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
+    # canonical approach: PascalCase -> "Pascal Case" -> "Pascal_Case" -> "PASCAL_CASE"
+    pascal_to_title "$1" | title_to_snake | to_upper
+}
+
+# PascalCase from input tokens (wrapper)
+# Accepts "foo_bar", "foo-bar", "Foo Bar", "foo" etc -> "FooBar"
+get_pascal_case() {
+    title_to_pascal "$*"
+}
+
+# LowerCamelCase (myDataType) from any token
+get_camel_case() {
+    pascal_to_camel "$(get_pascal_case "$@")"
+}
+
+# Convenience alias used throughout the old script
+get_snake_case() { to_snake_upper "$1"; }
+
+get_var_name() {
+    pascal_to_camel "$1"
+}
+
+get_upper_case() {
+    to_upper "$@"
+}
+
+pkg_dot() {
+    echo "${SUB_PATH//\//.}"
+}
+
+# Simple wrapper to either run command or print dry-run message.
+# Usage: do_or_dry "message" command args...
+do_or_dry() {
+    local msg="$1"
+    shift
+    if [ "${DRY_RUN}" = "true" ]; then
+        echo "DRY RUN: ${msg}"
+        return 0
+    fi
+    "$@"
 }
 
 #############################################
@@ -100,10 +230,13 @@ create_directories() {
         echo "  ${main_java}/codec/xml/deserializer/kmip/${sub_path}"
         echo "  ${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
         echo "  ${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
+        echo "  ${test_java}/${sub_path}"
         echo "  ${test_java}/codec/json/${sub_path}"
         echo "  ${test_java}/codec/xml/${sub_path}"
         echo "  ${test_java}/codec/ttlv/${sub_path}"
         echo "  ${test_java}/benchmark/subjects/${sub_path}"
+        echo "  src/main/resources/META-INF/services"
+        echo "  src/test/resources/META-INF/services"
         return 0
     fi
 
@@ -114,68 +247,70 @@ create_directories() {
     mkdir -p "${main_java}/codec/xml/deserializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
     mkdir -p "${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
+    mkdir -p "${test_java}/${sub_path}"
     mkdir -p "${test_java}/codec/json/${sub_path}"
     mkdir -p "${test_java}/codec/xml/${sub_path}"
     mkdir -p "${test_java}/codec/ttlv/${sub_path}"
     mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
+    mkdir -p "src/main/resources/META-INF/services"
+    mkdir -p "src/test/resources/META-INF/services"
 }
 
 #############################################
 # Service registration helper (respects DRY_RUN)
 #############################################
 add_service_entry() {
-    local file="$1"
-    local entry="$2"
+    local service_file="$1"
+    local implementation_class="$2"
 
     if [[ "${DRY_RUN}" == "true" ]]; then
         echo "DRY RUN: would add service entry:"
-        echo "  file: ${file}"
-        echo "  entry: ${entry}"
+        echo "  file: ${service_file}"
+        echo "  entry: ${implementation_class}"
         return 0
     fi
 
-    mkdir -p "$(dirname "$file")"
-    touch "$file"
+    mkdir -p "$(dirname "${service_file}")"
+    touch "${service_file}"
 
-    if ! grep -qF "$entry" "$file"; then
-        echo "$entry" >> "$file"
+    if ! grep -qFx "${implementation_class}" "${service_file}"; then
+        echo "${implementation_class}" >> "${service_file}"
     fi
 
-    local temp_file="${file}.tmp"
-    sort -u "$file" | grep -v '^[[:space:]]*$' > "$temp_file"
-
-    if ! cmp -s "$file" "$temp_file"; then
-        mv "$temp_file" "$file"
-    else
-        rm -f "$temp_file"
-    fi
+    local tmp="${service_file}.tmp.$$"
+    sort -u "${service_file}" | grep -v '^[[:space:]]*$' > "${tmp}" || (sort -u "${service_file}" > "${tmp}")
+    mv -f "${tmp}" "${service_file}"
 }
 
-register_services() {
-    local ATTRIBUTE_NAME="$1"
-    local sub_path="$2"
+escape_sed_replacement() {
+    # escape backslash, ampersand, and delimiter (|)
+    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/&/\\\\&/g' -e 's/|/\\\\|/g'
+}
 
-    # Create META-INF dirs and add entries (add_service_entry handles dry-run)
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-        "org.purpleBean.kmip.codec.json.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeJsonSerializer"
+render_template() {
+    local template_file="$1"
+    local out_file="$2"
+    shift 2
 
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-        "org.purpleBean.kmip.codec.json.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeJsonDeserializer"
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${out_file} (from ${template_file})"
+        return 0
+    fi
 
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-        "org.purpleBean.kmip.codec.xml.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeXmlSerializer"
+    mkdir -p "$(dirname "${out_file}")"
+    local content
+    content="$(cat "${template_file}")"
 
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-        "org.purpleBean.kmip.codec.xml.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeXmlDeserializer"
+    while [[ $# -gt 1 ]]; do
+        local key="$1"
+        local value="$2"
+        shift 2
+        local esc
+        esc="$(escape_sed_replacement "${value}")"
+        content="$(printf "%s" "${content}" | sed -e "s|{{${key}}}|${esc}|g")"
+    done
 
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeTtlvSerializer"
-
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${sub_path}.${ATTRIBUTE_NAME}AttributeTtlvDeserializer"
-
-    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-        "org.purpleBean.kmip.benchmark.subjects.${sub_path}.${ATTRIBUTE_NAME}AttributeBenchmarkSubject"
+    printf "%s" "${content}" > "${out_file}"
 }
 
 #############################################
@@ -186,676 +321,233 @@ generate_attribute_class() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
     local ATTRIBUTE_VAR_NAME="$3"
-    local path="${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Attribute.java"
+    local path="${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local ENCODING_TYPE="DATE_TIME"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    mkdir -p "${MAIN_JAVA}/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/Attribute.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "ATTRIBUTE_VAR_NAME" "${ATTRIBUTE_VAR_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "ENCODING_TYPE" "${ENCODING_TYPE}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
 
-import lombok.*;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.enumeration.State;
-
-import java.time.OffsetDateTime;
-import java.util.Objects;
-import java.util.Set;
-
-/**
- * KMIP ${ATTRIBUTE_NAME} attribute.
- */
-@Data
-@Builder
-public class ${ATTRIBUTE_NAME}Attribute implements KmipAttribute {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ATTRIBUTE_NAME_SNAKE});
-    private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
-
-    // Template supported versions — adjust as needed
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion );
-
-    // TODO : update the capability flags
-    // Capability flags — adjust based on attribute semantics
-    private final boolean alwaysPresent = false;
-    private final boolean serverInitializable = true;
-    private final boolean clientInitializable = true;
-    private final boolean clientDeletable = false;
-    private final boolean multiInstanceAllowed = false;
-
-    @NonNull
-    private final OffsetDateTime dateTime;  // TODO : update the field type and name
-
-    @Override
-    public boolean isClientModifiable(@NonNull State state) {
-        // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO : set conditions for client modifiable
-    }
-
-    @Override
-    public boolean isServerModifiable(@NonNull State state) {
-        // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO : set conditions for server modifiable
-    }
-
-    @Override
-    public boolean isSupportedFor(@NonNull KmipSpec spec) {
-        return supportedVersions.contains(spec);
-    }
-
-    // TODO : override equals
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ${ATTRIBUTE_NAME}Attribute that = (${ATTRIBUTE_NAME}Attribute) o;
-        // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.dateTime.withNano(0).equals(that.dateTime.withNano(0));
-    }
-
-    // TODO : override hashCode
-    @Override
-    public int hashCode() {
-        return Objects.hash(dateTime.withNano(0));
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_json_serializer() {
     local ATTRIBUTE_NAME="$1"
-    local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonSerializer.java"
+    local path="${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}JsonSerializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    render_template "${TEMPLATE_DIR}/AttributeJsonSerializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
 
-    mkdir -p "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.json.serializer.kmip.${SUB_PATH};
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+        "org.purpleBean.kmip.codec.json.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}JsonSerializer"
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-/**
- * JSON serializer for ${ATTRIBUTE_NAME}.
- */
-public class ${ATTRIBUTE_NAME}AttributeJsonSerializer extends KmipDataTypeJsonSerializer<${ATTRIBUTE_NAME}Attribute> {
-
-    @Override
-    public void serialize(${ATTRIBUTE_NAME}Attribute value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeStringField("value", value.getDateTime().toString());
-        gen.writeEndObject();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_json_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonDeserializer.java"
+    local path="${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}JsonDeserializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local ENCODING_TYPE="DATE_TIME"
 
-    mkdir -p "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.json.deserializer.kmip.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeJsonDeserializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "ENCODING_TYPE" "${ENCODING_TYPE}"
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+        "org.purpleBean.kmip.codec.json.deserializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}JsonDeserializer"
 
-import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.NoSuchElementException;
-
-/**
- * JSON deserializer for ${ATTRIBUTE_NAME}.
- */
-public class ${ATTRIBUTE_NAME}AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<${ATTRIBUTE_NAME}Attribute> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ATTRIBUTE_NAME_SNAKE});
-    private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
-
-    @Override
-    public ${ATTRIBUTE_NAME}Attribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-
-        if (node == null) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, String.format("JSON node cannot be null for ${ATTRIBUTE_NAME}Attribute deserialization"));
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, String.format("Invalid KMIP tag for ${ATTRIBUTE_NAME}Attribute"));
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, String.format("Failed to parse KMIP tag for ${ATTRIBUTE_NAME}Attribute: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, "Expected object for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        // Validation: Extract and validate type field
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
-        ) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, String.format("Missing or non-text 'type' field for ${ATTRIBUTE_NAME}Attribute"));
-            return null;
-        }
-
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, "Missing or non-text 'value' for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        // TODO : update the field type and name
-        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        ${ATTRIBUTE_NAME}Attribute attribute = ${ATTRIBUTE_NAME}Attribute.builder().dateTime(dateTime).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
-            throw new NoSuchElementException(
-                    String.format("${ATTRIBUTE_NAME}Attribute '%s' is not supported for KMIP spec %s", valueNode.asText(), spec)
-            );
-        }
-        return attribute;
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_xml_serializer() {
     local ATTRIBUTE_NAME="$1"
-    local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlSerializer.java"
+    local path="${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}XmlSerializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    render_template "${TEMPLATE_DIR}/AttributeXmlSerializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
 
-    mkdir -p "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.xml.serializer.kmip.${SUB_PATH};
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+        "org.purpleBean.kmip.codec.xml.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}XmlSerializer"
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-/**
- * XML serializer for ${ATTRIBUTE_NAME}.
- */
-public class ${ATTRIBUTE_NAME}AttributeXmlSerializer extends KmipDataTypeXmlSerializer<${ATTRIBUTE_NAME}Attribute> {
-
-    @Override
-    public void serialize(${ATTRIBUTE_NAME}Attribute value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException();
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = value.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(value);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", value.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("value", value.getDateTime().toString());
-        xmlGen.writeEndObject();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_xml_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlDeserializer.java"
+    local path="${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}XmlDeserializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local ENCODING_TYPE="DATE_TIME"
 
-    mkdir -p "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeXmlDeserializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "ENCODING_TYPE" "${ENCODING_TYPE}"
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+        "org.purpleBean.kmip.codec.xml.deserializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}XmlDeserializer"
 
-import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.NoSuchElementException;
-
-/**
- * XML deserializer for ${ATTRIBUTE_NAME}.
- */
-public class ${ATTRIBUTE_NAME}AttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<${ATTRIBUTE_NAME}Attribute> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ATTRIBUTE_NAME_SNAKE});
-    private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
-
-    @Override
-    public ${ATTRIBUTE_NAME}Attribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, "Expected XML element object for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, "Invalid Tag for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class, "Missing or invalid '@type' attribute for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${ATTRIBUTE_NAME}Attribute.class,
-                "Missing or non-text 'value' for ${ATTRIBUTE_NAME}Attribute");
-            return null;
-        }
-
-        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        ${ATTRIBUTE_NAME}Attribute attribute = ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(dateTime)
-            .build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupportedFor(spec)) {
-            throw new NoSuchElementException(
-                String.format("${ATTRIBUTE_NAME}Attribute '%s' not supported for spec %s", kmipTag.getDescription(), spec));
-
-        }
-        return attribute;
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_ttlv_serializer() {
     local ATTRIBUTE_NAME="$1"
-    local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvSerializer.java"
+    local path="${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvSerializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    render_template "${TEMPLATE_DIR}/AttributeTtlvSerializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
 
-    mkdir -p "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${SUB_PATH};
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+        "org.purpleBean.kmip.codec.ttlv.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}TtlvSerializer"
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-
-public class ${ATTRIBUTE_NAME}AttributeTtlvSerializer extends KmipDataTypeTtlvSerializer<${ATTRIBUTE_NAME}Attribute> {
-
-    @Override
-    public ByteBuffer serialize(${ATTRIBUTE_NAME}Attribute value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    public TtlvObject serializeToTtlvObject(${ATTRIBUTE_NAME}Attribute value, TtlvMapper mapper) throws IOException {
-        if (value == null) {
-            return null;
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new IOException(
-                String.format("%s is not supported for KMIP spec %s",
-                value.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getDateTime()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_ttlv_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
-    local path="${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvDeserializer.java"
+    local path="${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvDeserializer.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local ENCODING_TYPE="DATE_TIME"
 
-    mkdir -p "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeTtlvDeserializer.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "ENCODING_TYPE" "${ENCODING_TYPE}"
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+        "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}TtlvDeserializer"
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-
-public class ${ATTRIBUTE_NAME}AttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<${ATTRIBUTE_NAME}Attribute> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ATTRIBUTE_NAME_SNAKE});
-    private final EncodingType encodingType = EncodingType.DATE_TIME; // TODO : update the encoding type
-
-    @Override
-    public ${ATTRIBUTE_NAME}Attribute deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", encodingType.getTypeValue(), kmipTag.getDescription()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        OffsetDateTime dt = mapper.readValue(bb, OffsetDateTime.class);
-
-        KmipSpec spec = KmipContext.getSpec();
-        ${ATTRIBUTE_NAME}Attribute attribute = ${ATTRIBUTE_NAME}Attribute.builder().dateTime(dt).build();
-
-        if (!attribute.isSupportedFor(spec)) {
-            throw new NoSuchElementException();
-        }
-        return attribute;
-    }
+    echo "Created: ${path}"
 }
-EOF
+
+generate_domain_test() {
+    local ATTRIBUTE_NAME="$1"
+    local path="${TEST_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Test.java"
+
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local ENCODING_TYPE="DATE_TIME"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
+
+    render_template "${TEMPLATE_DIR}/AttributeTest.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "ENCODING_TYPE" "${ENCODING_TYPE}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
+
+    echo "Created: ${path}"
 }
 
 generate_json_test() {
     local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeJsonTest.java"
+    local path="${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}JsonTest.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    mkdir -p "${TEST_JAVA}/codec/json/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.json.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeJsonTest.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
 
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("${ATTRIBUTE_NAME}Attribute JSON Serialization Tests")
-class ${ATTRIBUTE_NAME}AttributeJsonTest extends AbstractJsonSerializationSuite<${ATTRIBUTE_NAME}Attribute> {
-
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
-    @Override
-    protected Class<${ATTRIBUTE_NAME}Attribute> type() {
-        return ${ATTRIBUTE_NAME}Attribute.class;
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createDefault() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME)
-            .build();
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createVariant() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME.plusDays(1))
-            .build();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_xml_test() {
     local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeXmlTest.java"
+    local path="${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}XmlTest.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    mkdir -p "${TEST_JAVA}/codec/xml/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.xml.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeXmlTest.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
 
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("${ATTRIBUTE_NAME}Attribute XML Serialization Tests")
-class ${ATTRIBUTE_NAME}AttributeXmlTest extends AbstractXmlSerializationSuite<${ATTRIBUTE_NAME}Attribute> {
-
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
-    @Override
-    protected Class<${ATTRIBUTE_NAME}Attribute> type() {
-        return ${ATTRIBUTE_NAME}Attribute.class;
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createDefault() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME)
-            .build();
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createVariant() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME.plusDays(1))
-            .build();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_ttlv_test() {
     local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeTtlvTest.java"
+    local path="${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvTest.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    mkdir -p "${TEST_JAVA}/codec/ttlv/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.codec.ttlv.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeTtlvTest.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
 
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("${ATTRIBUTE_NAME}Attribute TTLV Serialization Tests")
-class ${ATTRIBUTE_NAME}AttributeTtlvTest extends AbstractTtlvSerializationSuite<${ATTRIBUTE_NAME}Attribute> {
-
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
-    @Override
-    protected Class<${ATTRIBUTE_NAME}Attribute> type() {
-        return ${ATTRIBUTE_NAME}Attribute.class;
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createDefault() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME)
-            .build();
-    }
-
-    @Override
-    protected ${ATTRIBUTE_NAME}Attribute createVariant() {
-        return ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(FIXED_TIME.plusDays(1))
-            .build();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 generate_benchmark_subject() {
     local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}AttributeBenchmarkSubject.java"
+    local ATTRIBUTE_VAR_NAME
+    ATTRIBUTE_VAR_NAME="$(get_var_name "${ATTRIBUTE_NAME}")"
+    local path="${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}BenchmarkSubject.java"
 
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${path}"
-        return 0
-    fi
+    local FIELD_TYPE="OffsetDateTime"
+    local FIELD_NAME="value"
+    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    mkdir -p "${TEST_JAVA}/benchmark/subjects/${SUB_PATH}"
-    cat > "${path}" << EOF
-package org.purpleBean.kmip.benchmark.subjects.${SUB_PATH};
+    render_template "${TEMPLATE_DIR}/AttributeBenchmarkSubject.java.template" "${path}" \
+        "SUB_PATH" "${SUB_PATH}" \
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR_NAME" "${ATTRIBUTE_VAR_NAME}" \
+        "FIELD_TYPE" "${FIELD_TYPE}" \
+        "FIELD_NAME" "${FIELD_NAME}" \
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
 
-import lombok.Getter;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.${SUB_PATH}.${ATTRIBUTE_NAME}Attribute;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purpleBean.kmip.benchmark.subjects.$(pkg_dot).${ATTRIBUTE_NAME}BenchmarkSubject"
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-public class ${ATTRIBUTE_NAME}AttributeBenchmarkSubject extends KmipBenchmarkSubject<${ATTRIBUTE_NAME}Attribute> {
-
-    @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
-
-    public ${ATTRIBUTE_NAME}AttributeBenchmarkSubject() throws Exception {
-        ${ATTRIBUTE_NAME}Attribute ${ATTRIBUTE_NAME,} = ${ATTRIBUTE_NAME}Attribute.builder()
-            .dateTime(OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC))
-            .build();
-        initialize(${ATTRIBUTE_NAME,}, ${ATTRIBUTE_NAME}Attribute.class);
-    }
-
-    @Override
-    public String name() {
-        return "${ATTRIBUTE_NAME}Attribute";
-    }
-
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
-}
-EOF
+    echo "Created: ${path}"
 }
 
 #############################################
@@ -864,29 +556,28 @@ EOF
 generate_attribute() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE
-    ATTRIBUTE_NAME_SNAKE="$(to_snake_upper "$ATTRIBUTE_NAME")"
+    ATTRIBUTE_NAME_SNAKE="$(to_snake_upper "${ATTRIBUTE_NAME}")"
     local ATTRIBUTE_VAR_NAME
-    ATTRIBUTE_VAR_NAME="$(get_attribute_var_name "$ATTRIBUTE_NAME")"
+    ATTRIBUTE_VAR_NAME="$(get_var_name "${ATTRIBUTE_NAME}")"
 
-    echo -e "\nProcessing ${ATTRIBUTE_NAME}Attribute..."
+    echo -e "\nProcessing ${ATTRIBUTE_NAME}..."
 
-    $GEN_CLASS       && generate_attribute_class "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR_NAME}"
-    $GEN_JSON_SER    && generate_json_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_JSON_DES    && generate_json_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_XML_SER     && generate_xml_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_XML_DES     && generate_xml_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_TTLV_SER    && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_TTLV_DES    && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_TEST_JSON   && generate_json_test "${ATTRIBUTE_NAME}"
-    $GEN_TEST_XML    && generate_xml_test "${ATTRIBUTE_NAME}"
-    $GEN_TEST_TTLV   && generate_ttlv_test "${ATTRIBUTE_NAME}"
-    $GEN_BENCHMARK   && generate_benchmark_subject "${ATTRIBUTE_NAME}"
+    $GEN_CLASS        && generate_attribute_class "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR_NAME}"
+    $GEN_JSON_SER     && generate_json_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_JSON_DES     && generate_json_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_XML_SER      && generate_xml_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_XML_DES      && generate_xml_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_TTLV_SER     && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_TTLV_DES     && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
+    $GEN_DOMAIN_TEST  && generate_domain_test "${ATTRIBUTE_NAME}"
+    $GEN_JSON_TEST    && generate_json_test "${ATTRIBUTE_NAME}"
+    $GEN_XML_TEST     && generate_xml_test "${ATTRIBUTE_NAME}"
+    $GEN_TTLV_TEST    && generate_ttlv_test "${ATTRIBUTE_NAME}"
+    $GEN_BENCHMARK    && generate_benchmark_subject "${ATTRIBUTE_NAME}"
 
-    register_services "${ATTRIBUTE_NAME}" "${SUB_PATH}"
-
-    echo "Finished (or planned) generation for ${ATTRIBUTE_NAME}Attribute."
+    echo "Finished (or planned) generation for ${ATTRIBUTE_NAME}."
     echo "Suggested enum entry to add to KmipTag.Standard:"
-    echo "    ${ATTRIBUTE_NAME_SNAKE}(0x\$(printf '%x' \$((RANDOM * 1000 % 65000 + 1000))), \"${ATTRIBUTE_NAME}Attribute\");"
+    echo "    ${ATTRIBUTE_NAME_SNAKE}(0x\$(printf '%x' \$((RANDOM * 1000 % 65000 + 1000))), \"${ATTRIBUTE_NAME}\");"
 }
 
 #############################################
@@ -910,13 +601,14 @@ main() {
             --xml-des) GEN_XML_DES=true; any_flag=true ;;
             --ttlv-ser) GEN_TTLV_SER=true; any_flag=true ;;
             --ttlv-des) GEN_TTLV_DES=true; any_flag=true ;;
-            --test-json) GEN_TEST_JSON=true; any_flag=true ;;
-            --test-xml) GEN_TEST_XML=true; any_flag=true ;;
-            --test-ttlv) GEN_TEST_TTLV=true; any_flag=true ;;
+            --domain-test) GEN_DOMAIN_TEST=true; any_flag=true ;;
+            --json-test|--test-json) GEN_JSON_TEST=true; any_flag=true ;;
+            --xml-test|--test-xml) GEN_XML_TEST=true; any_flag=true ;;
+            --ttlv-test|--test-ttlv) GEN_TTLV_TEST=true; any_flag=true ;;
             --benchmark) GEN_BENCHMARK=true; any_flag=true ;;
             --all)
                 GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
-                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_TEST_JSON=true; GEN_TEST_XML=true; GEN_TEST_TTLV=true;
+                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true; GEN_TTLV_TEST=true;
                 GEN_BENCHMARK=true; any_flag=true
                 ;;
             --help|-h) usage ;;
@@ -937,7 +629,7 @@ main() {
         echo "No generation flags provided -> performing DRY RUN (no files will be written)."
         # Plan to show everything in the dry run
         GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
-        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_TEST_JSON=true; GEN_TEST_XML=true; GEN_TEST_TTLV=true
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true; GEN_TTLV_TEST=true
         GEN_BENCHMARK=true
     fi
 

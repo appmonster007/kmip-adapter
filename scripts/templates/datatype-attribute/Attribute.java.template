@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.common;
+package org.purpleBean.kmip.{{SUB_PATH}};
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,40 +11,40 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * KMIP ActivationDate attribute.
+ * KMIP {{ATTRIBUTE_NAME}} attribute.
  */
 @Data
 @Builder
-public class ActivationDate implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
-    public static final EncodingType encodingType = EncodingType.DATE_TIME;
+public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
+    public static final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}};
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ActivationDate.class, ActivationDate::of);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class, {{ATTRIBUTE_NAME}}::of);
         }
     }
 
     @NonNull
-    private final OffsetDateTime value;
+    private final {{FIELD_TYPE}} {{FIELD_NAME}};
 
-    public static ActivationDate of(@NonNull OffsetDateTime value) {
-        return ActivationDate.builder().value(value).build();
+    public static {{ATTRIBUTE_NAME}} of(@NonNull {{FIELD_TYPE}} value) {
+        return {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
     }
 
-    public static ActivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof {{FIELD_TYPE}} value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new ActivationDate(value);
+        return new {{ATTRIBUTE_NAME}}(value);
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+        return AttributeValue.builder().encodingType(encodingType).value({{FIELD_NAME}}).build();
     }
 
     @Override
@@ -114,13 +114,14 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ActivationDate that = (ActivationDate) o;
+        {{ATTRIBUTE_NAME}} that = ({{ATTRIBUTE_NAME}}) o;
         // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.value.withNano(0).equals(that.value.withNano(0));
+        return this.{{FIELD_NAME}}.withNano(0).equals(that.{{FIELD_NAME}}.withNano(0));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value.withNano(0));
+        return Objects.hash({{FIELD_NAME}}.withNano(0));
     }
 }
+

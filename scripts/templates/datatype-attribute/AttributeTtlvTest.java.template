@@ -1,0 +1,34 @@
+package org.purpleBean.kmip.codec.ttlv.{{SUB_PATH}};
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+@DisplayName("{{ATTRIBUTE_NAME}} TTLV Serialization Tests")
+class {{ATTRIBUTE_NAME}}TtlvTest extends AbstractTtlvSerializationSuite<{{ATTRIBUTE_NAME}}> {
+
+    private static final {{FIELD_TYPE}} FIXED_TIME = {{DEFAULT_VALUE}};
+
+    @Override
+    protected Class<{{ATTRIBUTE_NAME}}> type() {
+        return {{ATTRIBUTE_NAME}}.class;
+    }
+
+    @Override
+    protected {{ATTRIBUTE_NAME}} createDefault() {
+        return {{ATTRIBUTE_NAME}}.builder()
+                .{{FIELD_NAME}}(FIXED_TIME)
+                .build();
+    }
+
+    @Override
+    protected {{ATTRIBUTE_NAME}} createVariant() {
+        return {{ATTRIBUTE_NAME}}.builder()
+                .{{FIELD_NAME}}(FIXED_TIME.plusDays(1))
+                .build();
+    }
+}
+
