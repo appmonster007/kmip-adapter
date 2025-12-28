@@ -68,10 +68,7 @@ public class Name implements KmipStructure, KmipAttribute {
 
     public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         NameBuilder nameBuilder = Name.builder();
-        if (attributeValue.getEncodingType() != EncodingType.STRUCTURE) {
-            throw new IllegalArgumentException("Invalid encoding type");
-        }
-        List<KmipDataType> fields = (List<KmipDataType>) attributeValue.getValue();
+        List<KmipDataType> fields = attributeValue.getValues();
         for (KmipDataType field : fields) {
             if (field instanceof NameValue nameValue) {
                 nameBuilder.nameValue(nameValue);
