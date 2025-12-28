@@ -29,7 +29,7 @@ class NameTest extends AbstractKmipStructureAttributeSuite<Name> {
     @Override
     protected Name createDefault() {
         return Name.builder()
-                .nameValue(NameValue.of("some-name"))
+                .nameValue(NameValue.of("test-name"))
                 .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
                 .build();
     }

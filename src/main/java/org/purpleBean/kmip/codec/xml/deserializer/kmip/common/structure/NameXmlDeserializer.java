@@ -68,7 +68,13 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
      */
-    private void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            Name.NameBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonNode node,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
             case KmipTag.Standard.NAME_TYPE -> builder.nameType(p.getCodec().treeToValue(node, NameType.class));

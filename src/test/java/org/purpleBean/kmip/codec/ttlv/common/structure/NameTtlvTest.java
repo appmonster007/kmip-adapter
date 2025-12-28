@@ -9,7 +9,7 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-@DisplayName("Name TTLV Serialization Tests")
+@DisplayName("Name Ttlv Serialization Tests")
 class NameTtlvTest extends AbstractTtlvSerializationSuite<Name> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);

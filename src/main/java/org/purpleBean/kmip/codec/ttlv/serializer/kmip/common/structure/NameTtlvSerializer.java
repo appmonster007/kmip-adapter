@@ -1,6 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure;
 
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
@@ -38,12 +40,9 @@ public class NameTtlvSerializer extends KmipDataTypeTtlvSerializer<Name> {
         int totalLength = nestedObjects.stream().mapToInt(ByteBuffer::remaining).sum();
         ByteBuffer payloadBuffer = ByteBuffer.allocate(totalLength);
         nestedObjects.forEach(payloadBuffer::put);
+
         byte[] payload = payloadBuffer.array();
 
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
+        return TtlvObject.builder().tag(tag).type(type).value(payload).build();
     }
 }

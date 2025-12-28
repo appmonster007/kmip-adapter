@@ -23,12 +23,12 @@ public class NameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name> {
 
     @Override
     public Name deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject nodeTtlvObject = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(nodeTtlvObject.getTag(), kmipTag.getTagBytes()) && nodeTtlvObject.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), nodeTtlvObject.getType()));
+        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
+        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
 
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(nodeTtlvObject.getValue());
+        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
         KmipSpec spec = KmipContext.getSpec();
         Name.NameBuilder builder = Name.builder();
 
@@ -38,14 +38,16 @@ public class NameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Name> {
         }
 
         Name name = builder.build();
-
         if (!name.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", name.getClass().getSimpleName(), spec));
         }
         return name;
     }
 
-    private void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, TtlvObject ttlvObject, TtlvMapper mapper) throws IOException {
+    private void setValue(Name.NameBuilder builder,
+                          KmipTag.Value nodeTag,
+                          TtlvObject ttlvObject,
+                          TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.NAME_VALUE ->
                     builder.nameValue(mapper.readValue(ttlvObject.toByteBuffer(), NameValue.class));

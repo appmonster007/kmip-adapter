@@ -23,16 +23,15 @@ public class NameJsonDeserializer extends KmipDataTypeJsonDeserializer<Name> {
     public Name deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
         if (node == null) {
-            ctxt.reportInputMismatch(Name.class, String.format("JSON node cannot be null for Name deserialization"));
+            ctxt.reportInputMismatch(Name.class, "JSON node cannot be null for Name deserialization");
             return null;
         }
-
         // Validation: Extract and validate KMIP tag
         KmipTag tag;
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Name.class, String.format("Invalid KMIP tag for Name"));
+                ctxt.reportInputMismatch(Name.class, "Invalid KMIP tag for Name");
                 return null;
             }
         } catch (Exception e) {
@@ -45,7 +44,6 @@ public class NameJsonDeserializer extends KmipDataTypeJsonDeserializer<Name> {
                     String.format("Expected object with %s tag for Name, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
-
         // Validation: Extract and validate type field
         JsonNode typeNode = node.get("type");
         if (typeNode == null
@@ -58,20 +56,25 @@ public class NameJsonDeserializer extends KmipDataTypeJsonDeserializer<Name> {
         }
 
         // Validation: Extract and validate fields
-        JsonNode values = node.get("value");
-        if (values == null || !values.isArray() || values.isEmpty()) {
+        JsonNode valuesNode = node.get("value");
+        if (valuesNode == null || !valuesNode.isArray() || valuesNode.isEmpty()) {
             ctxt.reportInputMismatch(Name.class, "Name 'value' must be a non-empty array");
             return null;
         }
 
         Name.NameBuilder builder = Name.builder();
 
-        for (JsonNode valueNode : values) {
-            if (!valueNode.has("tag")) {
+        for (JsonNode valueNode : valuesNode) {
+            if (valueNode == null || !valueNode.has("tag")) {
                 continue;
             }
-            KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
-            setValue(builder, nodeTag, valueNode, p, ctxt);
+            try {
+                KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
+                setValue(builder, nodeTag, valueNode, p, ctxt);
+            } catch (Exception e) {
+                ctxt.reportInputMismatch(Name.class, String.format("Failed to process field in Name: %s", e.getMessage()));
+                return null;
+            }
         }
 
         Name name = builder.build();
@@ -95,9 +98,13 @@ public class NameJsonDeserializer extends KmipDataTypeJsonDeserializer<Name> {
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
      */
-    private void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement field deserialization based on tag, preferably using switch case expression
-        // Example:
+    private void setValue(
+            Name.NameBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonNode node,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
             case KmipTag.Standard.NAME_TYPE -> builder.nameType(p.getCodec().treeToValue(node, NameType.class));

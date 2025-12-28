@@ -235,89 +235,153 @@ import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.KmipStructure;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
- * KMIP ${class_name} structure that implements both KmipAttribute and KmipStructure.
+ * KMIP ${class_name} attribute structure.
+ *
+ * <p>Represents a ${class_name} in KMIP.</p>
  */
 @Data
 @Builder
 public class ${class_name} implements KmipStructure, KmipAttribute {
 
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_snake});
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
-    private final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_snake});
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supported_versions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
-    private final boolean alwaysPresent = false;
-    private final boolean serverInitializable = false;
-    private final boolean clientInitializable = false;
-    private final boolean clientDeletable = false;
-    private final boolean multiInstanceAllowed = false;
-
-    // TODO: Add your structure fields here
-    @NonNull
-    private final ActivationDateAttribute activationDate;
-    private final State state;
-
-    @Override
-    public List<KmipDataType> getValues() {
-        List<KmipDataType> values = new ArrayList<KmipDataType>();
-        values.add(activationDate);
-        if (state != null) {
-            values.add(state);
+    static {
+        for (KmipSpec spec : supported_versions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${class_name}.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ${class_name}.class, ${class_name}::of);
         }
-        return values;
+    }
+
+    @NonNull
+    private final NameValue nameValue;
+
+    @NonNull
+    private final NameType nameType;
+
+    public ${class_name}(@NonNull NameValue nameValue, @NonNull NameType nameType) {
+        this.nameValue = Objects.requireNonNull(nameValue, "Name value cannot be null");
+        this.nameType = Objects.requireNonNull(nameType, "Name type cannot be null");
+    }
+
+    public static ${class_name} of(@NonNull String name, @NonNull NameType type) {
+        return new ${class_name}(NameValue.of(name), type);
+    }
+
+    public static ${class_name} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        ${class_name}Builder builder = ${class_name}.builder();
+        List<KmipDataType> fields = attributeValue.getValues();
+        for (KmipDataType field : fields) {
+            if (field instanceof NameValue nameValue) {
+                builder.nameValue(nameValue);
+            }
+            if (field instanceof NameType nameType) {
+                builder.nameType(nameType);
+            }
+        }
+        return builder.build();
     }
 
     @Override
-    public boolean isSupportedFor(KmipSpec spec) {
-        return supportedVersions.contains(spec);
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        return Stream.of(nameValue, nameType).filter(Objects::nonNull).toList();
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supported_versions.contains(spec)
+                && nameValue.isSupported()
+                && nameType.isSupported();
     }
 
     @Override
     public boolean isAlwaysPresent() {
-        return alwaysPresent;
+        return false;
     }
 
     @Override
     public boolean isServerInitializable() {
-        return serverInitializable;
+        return false;
     }
 
     @Override
     public boolean isClientInitializable() {
-        return clientInitializable;
-    }
-
-    @Override
-    public boolean isClientDeletable() {
-        return clientDeletable;
-    }
-
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return multiInstanceAllowed;
+        return true;
     }
 
     @Override
     public boolean isServerModifiable(State state) {
-        return state.getValue().getValue() == State.Standard.ACTIVE.getValue();
+        return false;
     }
 
     @Override
     public boolean isClientModifiable(State state) {
-        return state.getValue().getValue() == State.Standard.ACTIVE.getValue();
+        return true;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return true;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.of(getValues());
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     public static class ${class_name}Builder {
         public ${class_name} build() {
             validate();
-            // NOTE: This builder body may need actual constructor parameters
-            return new ${class_name}(/* TODO: constructor parameters */);
+            return new ${class_name}(nameValue, nameType);
         }
 
         private void validate() {
+            Objects.requireNonNull(nameValue, "Name value cannot be null");
+            Objects.requireNonNull(nameType, "Name type cannot be null");
+
+            // Validate KMIP spec compatibility
             KmipSpec spec = KmipContext.getSpec();
-            // Add validations if needed
+            if (!nameValue.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("Name value is not supported for KMIP spec %s", spec)
+                );
+            }
+            if (!nameType.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("Name type is not supported for KMIP spec %s", spec)
+                );
+            }
         }
     }
 }
@@ -347,18 +411,22 @@ generate_domain_test() {
 package org.purpleBean.kmip.${pkg_dot};
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.test.suite.AbstractKmipAttributeStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
 
-import java.time.OffsetDateTime;
-import static org.assertj.core.api.Assertions.*;
+import java.util.List;
 
-@DisplayName("${class_name} Tests")
-class ${class_name}Test extends AbstractKmipAttributeStructureSuite<${class_name}> {
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+@DisplayName("${class_name} Domain Tests")
+class ${class_name}Test extends AbstractKmipStructureAttributeSuite<${class_name}> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<${class_name}> type() {
@@ -368,37 +436,78 @@ class ${class_name}Test extends AbstractKmipAttributeStructureSuite<${class_name
     @Override
     protected ${class_name} createDefault() {
         return ${class_name}.builder()
-            .activationDate(ActivationDateAttribute.builder().dateTime(OffsetDateTime.now()).build())
-            .build();
+                .nameValue(NameValue.of("test-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
+    }
+
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
+
+    @Override
+    protected int expectedMinComponentCount() {
+        return 2;
+    }
+
+    @Override
+    protected void validateComponents(List<KmipDataType> values) {
+        assertThat(values.get(0)).isInstanceOf(NameValue.class);
+        assertThat(values.get(1)).isInstanceOf(NameType.class);
     }
 
     @Override
     protected boolean expectAlwaysPresent() {
         return false;
     }
-    @Override
-    protected boolean expectServerInitializable() { return false; }
-    @Override
-    protected boolean expectClientInitializable() { return false; }
-    @Override
-    protected boolean expectClientDeletable() { return false; }
-    @Override
-    protected boolean expectMultiInstanceAllowed() { return false; }
 
     @Override
-    protected State stateForServerModifiableTrue() { return new State(State.Standard.ACTIVE); }
-    @Override
-    protected State stateForServerModifiableFalse() { return new State(State.Standard.DEACTIVATED); }
-    @Override
-    protected State stateForClientModifiableTrue() { return new State(State.Standard.ACTIVE); }
-    @Override
-    protected State stateForClientModifiableFalse() { return new State(State.Standard.DEACTIVATED); }
+    protected boolean expectServerInitializable() {
+        return false;
+    }
 
-    @Test
-    @DisplayName("should have correct KMIP tag")
-    void shouldHaveCorrectKmipTag() {
-        ${class_name} attr = createDefault();
-        assertThat(attr.getKmipTag().getValue()).isEqualTo(KmipTag.Standard.${class_snake});
+    @Override
+    protected boolean expectClientInitializable() {
+        return true;
+    }
+
+    @Override
+    protected boolean expectClientDeletable() {
+        return true;
+    }
+
+    @Override
+    protected boolean expectMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    protected State stateForServerModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    protected State stateForServerModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    protected State stateForClientModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    protected State stateForClientModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    protected void attrStruct_serverModifiable_respectsState() {
+    }
+
+    @Override
+    protected void attrStruct_clientModifiable_respectsState() {
     }
 }
 EOF
@@ -413,8 +522,6 @@ generate_json_serializer() {
     local out_file="${out_dir}/${class_name}JsonSerializer.java"
     local pkg_dot
     pkg_dot=$(slash_to_dot "${package_path}")
-    local class_lower
-    class_lower=$(get_camel_case "${class_name}")
 
     if [ "${DRY_RUN}" = "true" ]; then
         echo "DRY RUN: would create JSON serializer: ${out_file}"
@@ -429,6 +536,8 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.${pkg_dot};
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 
@@ -439,31 +548,31 @@ import java.util.List;
 public class ${class_name}JsonSerializer extends KmipDataTypeJsonSerializer<${class_name}> {
 
     @Override
-    public void serialize(${class_name} ${class_lower}, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        if (${class_lower} == null) {
+    public void serialize(${class_name} value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        // Validation: Null check
+        if (value == null) {
             return;
         }
 
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${class_lower}.isSupportedFor(spec)) {
-            throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", ${class_lower}.getClass().getSimpleName(), spec)
-            );
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", 
+                value.getKmipTag().getDescription(), spec));
         }
 
-        List<KmipDataType> fields = ${class_lower}.getValues();
+        List<KmipDataType> fields = value.getValues();
+        // Validation: Field compatibility with KMIP spec
         for (KmipDataType field : fields) {
-            if (field != null && !field.isSupportedFor(spec)) {
-                throw new UnsupportedEncodingException(
-                    String.format("%s in %s is not supported for KMIP spec %s",
-                        field.getKmipTag().getDescription(), ${class_lower}.getClass().getSimpleName(), spec)
-                );
+            if (field != null && !field.isSupported()) {
+                throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
+                        field.getKmipTag().getDescription(), value.getKmipTag().getDescription(), spec));
             }
         }
 
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(${class_lower}.getKmipTag());
-        jsonGenerator.writeStringField("type", ${class_lower}.getEncodingType().getDescription());
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
         jsonGenerator.writeFieldName("value");
         jsonGenerator.writeStartArray();
         for (KmipDataType field : fields) {
@@ -506,6 +615,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 
@@ -513,8 +624,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class ${class_name}JsonDeserializer extends KmipDataTypeJsonDeserializer<${class_name}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_snake});
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = ${class_name}.kmipTag;
+    private final EncodingType encodingType = ${class_name}.encodingType;
 
     @Override
     public ${class_name} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -523,7 +634,7 @@ public class ${class_name}JsonDeserializer extends KmipDataTypeJsonDeserializer<
             ctxt.reportInputMismatch(${class_name}.class, "JSON node cannot be null for ${class_name} deserialization");
             return null;
         }
-
+        // Validation: Extract and validate KMIP tag
         KmipTag tag;
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
@@ -537,19 +648,25 @@ public class ${class_name}JsonDeserializer extends KmipDataTypeJsonDeserializer<
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(${class_name}.class, "Expected object for ${class_name}");
+            ctxt.reportInputMismatch(${class_name}.class,
+                    String.format("Expected object with %s tag for ${class_name}, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
-
+        // Validation: Extract and validate type field
         JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() || !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(${class_name}.class, String.format("Invalid or missing type field for ${class_name}, expected: %s", encodingType.getDescription()));
+        if (typeNode == null
+                || !typeNode.isTextual()
+                || EncodingType.fromName(typeNode.asText()).isEmpty()
+                || EncodingType.fromName(typeNode.asText()).get() != encodingType
+        ) {
+            ctxt.reportInputMismatch(${class_name}.class, String.format("Missing or non-text 'type' field for ${class_name}"));
             return null;
         }
 
+        // Validation: Extract and validate fields
         JsonNode valuesNode = node.get("value");
-        if (valuesNode == null || !valuesNode.isArray()) {
-            ctxt.reportInputMismatch(${class_name}.class, "Missing or invalid 'value' array for ${class_name}");
+        if (valuesNode == null || !valuesNode.isArray() || valuesNode.isEmpty()) {
+            ctxt.reportInputMismatch(${class_name}.class, "${class_name} 'value' must be a non-empty array");
             return null;
         }
 
@@ -570,19 +687,38 @@ public class ${class_name}JsonDeserializer extends KmipDataTypeJsonDeserializer<
 
         ${class_name} ${class_lower} = builder.build();
 
-        if (!${class_lower}.isSupportedFor(KmipContext.getSpec())) {
-            throw new NoSuchElementException(String.format("${class_name} is not supported for KMIP spec %s", KmipContext.getSpec()));
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!${class_lower}.isSupported()) {
+            throw new NoSuchElementException(String.format("${class_name} is not supported for KMIP spec %s", spec));
         }
 
         return ${class_lower};
     }
 
-    protected void setValue(${class_name}.${class_name}Builder builder,
-                          KmipTag.Value nodeTag,
-                          JsonNode node,
-                          JsonParser p,
-                          DeserializationContext ctxt) throws IOException {
-        throw new UnsupportedOperationException("Field deserialization not implemented for tag: " + nodeTag);
+    /**
+     * Sets the appropriate field in the builder based on the tag and value.
+     *
+     * @param builder the builder to set the field on
+     * @param nodeTag the tag identifying the field to set
+     * @param node    the JSON node containing the field value
+     * @param p       the JsonParser
+     * @param ctxt    the DeserializationContext
+     * @throws IOException if there is an error deserializing the value
+     */
+    private void setValue(
+        ${class_name}.${class_name}Builder builder,
+        KmipTag.Value nodeTag,
+        JsonNode node,
+        JsonParser p,
+        DeserializationContext ctxt
+    ) throws IOException {
+        // TODO: Implement field deserialization based on tag, preferably using switch case expression
+        // Example:
+        switch (nodeTag) {
+            // case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 }
 EOF
@@ -614,6 +750,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 
@@ -626,19 +764,22 @@ public class ${class_name}XmlSerializer extends KmipDataTypeXmlSerializer<${clas
 
     @Override
     public void serialize(${class_name} ${class_lower}, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!${class_lower}.isSupportedFor(spec)) {
+        if (!${class_lower}.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", ${class_lower}.getClass().getSimpleName(), spec));
         }
 
-        if (!(gen instanceof ToXmlGenerator)) {
+        if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
+        // Start element with name from kmipTag
         String elementName = ${class_lower}.getKmipTag().getDescription();
-        ((ToXmlGenerator) gen).setNextName(QName.valueOf(elementName));
-        gen.writeStartObject(${class_lower});
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(${class_lower});
 
+        // Serialize all fields
         List<KmipDataType> values = ${class_lower}.getValues();
         for (KmipDataType kmipDataType : values) {
             if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
@@ -646,7 +787,7 @@ public class ${class_name}XmlSerializer extends KmipDataTypeXmlSerializer<${clas
             }
         }
 
-        gen.writeEndObject();
+        xmlGen.writeEndObject();
     }
 }
 EOF
@@ -682,16 +823,17 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class ${class_name}XmlDeserializer extends KmipDataTypeXmlDeserializer<${class_name}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_snake});
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+    private final KmipTag kmipTag = ${class_name}.kmipTag;
+    private final EncodingType encodingType = ${class_name}.encodingType;
 
     @Override
     public ${class_name} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -703,7 +845,8 @@ public class ${class_name}XmlDeserializer extends KmipDataTypeXmlDeserializer<${
             return null;
         }
 
-        if (p instanceof FromXmlParser && !kmipTag.getDescription().equalsIgnoreCase(((FromXmlParser)p).getStaxReader().getLocalName())) {
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(${class_name}.class, "Invalid Tag for ${class_name}");
             return null;
         }
@@ -711,7 +854,8 @@ public class ${class_name}XmlDeserializer extends KmipDataTypeXmlDeserializer<${
         KmipSpec spec = KmipContext.getSpec();
         ${class_name}.${class_name}Builder builder = ${class_name}.builder();
 
-        java.util.Iterator<java.util.Map.Entry<String, JsonNode>> fields = node.fields();
+        // Process all fields in the XML
+        var fields = node.fields();
         while (fields.hasNext()) {
             Map.Entry<String, JsonNode> entry = fields.next();
             KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
@@ -719,18 +863,36 @@ public class ${class_name}XmlDeserializer extends KmipDataTypeXmlDeserializer<${
         }
 
         ${class_name} ${class_lower} = builder.build();
-        if (!${class_lower}.isSupportedFor(spec)) {
-            throw new NoSuchElementException(String.format("${class_name} is not supported for KMIP spec %s", spec));
+
+        if (!${class_lower}.isSupported()) {
+            ctxt.reportInputMismatch(${class_name}.class, "${class_name} not supported for spec " + spec);
+            return null;
         }
+
         return ${class_lower};
     }
 
-    protected void setValue(${class_name}.${class_name}Builder builder,
-                          KmipTag.Value nodeTag,
-                          JsonNode node,
-                          JsonParser p,
-                          DeserializationContext ctxt) throws IOException {
-        throw new UnsupportedOperationException("Field deserialization not implemented for tag: " + nodeTag);
+    /**
+     * Sets the appropriate field in the builder based on the tag and value.
+     *
+     * @param builder the builder to set the field on
+     * @param nodeTag the tag identifying the field to set
+     * @param node    the XML node containing the field value
+     * @param p       the JsonParser
+     * @param ctxt    the DeserializationContext
+     * @throws IOException if there is an error deserializing the value
+     */
+    private void setValue(
+        ${class_name}.${class_name}Builder builder,
+        KmipTag.Value nodeTag,
+        JsonNode node,
+        JsonParser p,
+        DeserializationContext ctxt
+    ) throws IOException {
+        switch (nodeTag) {
+            // case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
+            default -> throw new IllegalArgumentException();
+        }
     }
 }
 EOF
@@ -756,15 +918,16 @@ generate_ttlv_serializer() {
     cat > "${out_file}" <<EOF
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pkg_dot};
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -777,8 +940,8 @@ public class ${class_name}TtlvSerializer extends KmipDataTypeTtlvSerializer<${cl
 
     private TtlvObject serializeToTtlvObject(${class_name} value, TtlvMapper mapper) throws IOException {
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupportedFor(spec)) {
-            throw new IOException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
         List<KmipDataType> nestedValues = value.getValues();
@@ -792,10 +955,9 @@ public class ${class_name}TtlvSerializer extends KmipDataTypeTtlvSerializer<${cl
             }
         }
 
-        int totalLength = 0;
-        for (ByteBuffer b : nestedObjects) totalLength += b.remaining();
+        int totalLength = nestedObjects.stream().mapToInt(ByteBuffer::remaining).sum();
         ByteBuffer payloadBuffer = ByteBuffer.allocate(totalLength);
-        for (ByteBuffer b : nestedObjects) payloadBuffer.put(b);
+        nestedObjects.forEach(payloadBuffer::put);
 
         byte[] payload = payloadBuffer.array();
 
@@ -848,14 +1010,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ${class_name}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<${class_name}> {
-    private final EncodingType type = EncodingType.STRUCTURE;
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${class_snake});
+    private final KmipTag kmipTag = ${class_name}.kmipTag;
+    private final EncodingType encodingType = ${class_name}.encodingType;
 
     @Override
     public ${class_name} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", type.getTypeValue(), kmipTag.getDescription(), obj.getType()));
+        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
 
         List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
@@ -868,17 +1030,22 @@ public class ${class_name}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<
         }
 
         ${class_name} ${class_lower} = builder.build();
-        if (!${class_lower}.isSupportedFor(spec)) {
+        if (!${class_lower}.isSupported()) {
             throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", ${class_lower}.getClass().getSimpleName(), spec));
         }
         return ${class_lower};
     }
 
-    private void setValue(${class_name}.${class_name}Builder builder,
-                         KmipTag.Value nodeTag,
-                         TtlvObject ttlvObject,
-                         TtlvMapper mapper) throws IOException {
-        throw new UnsupportedOperationException("Field TTLV deserialization not implemented for tag: " + nodeTag);
+    private void setValue(
+        ${class_name}.${class_name}Builder builder,
+        KmipTag.Value nodeTag,
+         TtlvObject ttlvObject,
+         TtlvMapper mapper
+     ) throws IOException {
+        switch (nodeTag) {
+            // case KmipTag.Standard.NAME_VALUE -> builder.nameValue(mapper.readValue(ttlvObject.toByteBuffer(), NameValue.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 }
 EOF
@@ -906,23 +1073,19 @@ generate_benchmark_subject() {
     cat > "${out_file}" <<EOF
 package org.purpleBean.kmip.benchmark.subjects.${pkg_dot};
 
-import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
-import org.purpleBean.kmip.common.structure.ActivationDateAttribute;
-import java.time.OffsetDateTime;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 
 public class ${class_name}BenchmarkSubject extends KmipBenchmarkSubject<${class_name}> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
-
     public ${class_name}BenchmarkSubject() throws Exception {
         ${class_name} ${var_name} = ${class_name}.builder()
-            .activationDate(ActivationDateAttribute.builder().dateTime(OffsetDateTime.now()).build())
-            .build();
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
         initialize(${var_name}, ${class_name}.class);
     }
 
@@ -969,12 +1132,18 @@ generate_serialization_test() {
 package org.purpleBean.kmip.codec.${format}.${pkg_dot};
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.${pkg_dot}.${class_name};
 import org.purpleBean.kmip.test.suite.${base_suite};
+
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 @DisplayName("${class_name} ${format_pascal} Serialization Tests")
 class ${suite_name} extends ${base_suite}<${class_name}> {
+
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
     protected Class<${class_name}> type() { return ${class_name}.class; }
@@ -982,15 +1151,17 @@ class ${suite_name} extends ${base_suite}<${class_name}> {
     @Override
     protected ${class_name} createDefault() {
         return ${class_name}.builder()
-            .activationDate(ActivationDateAttribute.builder().dateTime(OffsetDateTime.now()).build())
-            .build();
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
     }
 
     @Override
     protected ${class_name} createVariant() {
         return ${class_name}.builder()
-            .activationDate(ActivationDateAttribute.builder().dateTime(OffsetDateTime.now()).build())
-            .build();
+                .nameValue(NameValue.of("some-variant-name"))
+                .nameType(new NameType(NameType.Standard.URI))
+                .build();
     }
 }
 EOF
@@ -1087,10 +1258,9 @@ create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
 # Iterate structures
 for s in "${ATTRS[@]}"; do
-    # If passed name doesn't end with "Attribute" append it
     case "${s}" in
         *Attribute) name="${s}" ;;
-        *) name="${s}Attribute" ;;
+        *) name="${s}" ;;
     esac
     generate_attribute_structure "${name}" "${SUB_PATH}"
 done

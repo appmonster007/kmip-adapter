@@ -16,15 +16,9 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 /**
- * KMIP Name attribute.
+ * KMIP Name attribute structure.
  *
- * <p>Represents a human-readable name for identifying Managed Objects in KMIP.</p>
- *
- * <p>According to KMIP v1.2 Section 3.2, a Name is a structure containing:
- * <ul>
- *   <li>Name Value (Text String) - The actual name value</li>
- *   <li>Name Type (Enumeration) - The type/format of the name</li>
- * </ul>
+ * <p>Represents a Name in KMIP.</p>
  *
  * <p>Attributes:
  * <ul>
@@ -67,19 +61,18 @@ public class Name implements KmipStructure, KmipAttribute {
     }
 
     public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        NameBuilder nameBuilder = Name.builder();
+        NameBuilder builder = Name.builder();
         List<KmipDataType> fields = attributeValue.getValues();
         for (KmipDataType field : fields) {
             if (field instanceof NameValue nameValue) {
-                nameBuilder.nameValue(nameValue);
+                builder.nameValue(nameValue);
             }
             if (field instanceof NameType nameType) {
-                nameBuilder.nameType(nameType);
+                builder.nameType(nameType);
             }
         }
-        return nameBuilder.build();
+        return builder.build();
     }
-
 
     @Override
     public KmipTag getKmipTag() {
@@ -116,27 +109,27 @@ public class Name implements KmipStructure, KmipAttribute {
 
     @Override
     public boolean isClientInitializable() {
-        return true; // Client can initialize name
+        return true;
     }
 
     @Override
     public boolean isServerModifiable(State state) {
-        return false; // Only client can modify names
+        return false;
     }
 
     @Override
     public boolean isClientModifiable(State state) {
-        return true; // Client can modify names
+        return true;
     }
 
     @Override
     public boolean isClientDeletable() {
-        return true; // Client can delete names
+        return true;
     }
 
     @Override
     public boolean isMultiInstanceAllowed() {
-        return true; // Multiple names are allowed
+        return true;
     }
 
     @Override
@@ -151,7 +144,7 @@ public class Name implements KmipStructure, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of("Name");
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     public static class NameBuilder {

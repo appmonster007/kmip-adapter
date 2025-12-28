@@ -9,7 +9,7 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-@DisplayName("Name JSON Serialization Tests")
+@DisplayName("Name Json Serialization Tests")
 class NameJsonTest extends AbstractJsonSerializationSuite<Name> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
