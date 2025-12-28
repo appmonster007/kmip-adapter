@@ -18,6 +18,7 @@ public class ResultReason implements KmipEnumeration {
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<Value, Value> PARENT_REASON_MAP = new HashMap<>();
 
     static {
         for (Standard s : Standard.values()) {
@@ -29,6 +30,87 @@ public class ResultReason implements KmipEnumeration {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, ResultReason.class);
         }
+
+        // Map each enum to its parent, ensuring parent value < child value
+        // Level 1 - Direct children of GENERAL_FAILURE (0x00000100)
+        PARENT_REASON_MAP.put(Standard.ITEM_NOT_FOUND, Standard.GENERAL_FAILURE);  // 0x00000001
+        PARENT_REASON_MAP.put(Standard.RESPONSE_TOO_LARGE, Standard.GENERAL_FAILURE);  // 0x00000002
+        PARENT_REASON_MAP.put(Standard.AUTHENTICATION_NOT_SUCCESSFUL, Standard.GENERAL_FAILURE);  // 0x00000003
+        PARENT_REASON_MAP.put(Standard.INVALID_MESSAGE, Standard.GENERAL_FAILURE);  // 0x00000004
+        PARENT_REASON_MAP.put(Standard.OPERATION_NOT_SUPPORTED, Standard.GENERAL_FAILURE);  // 0x00000005
+        PARENT_REASON_MAP.put(Standard.MISSING_DATA, Standard.INVALID_MESSAGE);  // 0x00000006
+        PARENT_REASON_MAP.put(Standard.INVALID_FIELD, Standard.INVALID_MESSAGE);  // 0x00000007
+        PARENT_REASON_MAP.put(Standard.FEATURE_NOT_SUPPORTED, Standard.OPERATION_NOT_SUPPORTED);  // 0x00000008
+        PARENT_REASON_MAP.put(Standard.OPERATION_CANCELED_BY_REQUESTER, Standard.GENERAL_FAILURE);  // 0x00000009
+        PARENT_REASON_MAP.put(Standard.CRYPTOGRAPHIC_FAILURE, Standard.GENERAL_FAILURE);  // 0x0000000A
+        PARENT_REASON_MAP.put(Standard.ILLEGAL_OPERATION, Standard.GENERAL_FAILURE);  // 0x0000000B
+        PARENT_REASON_MAP.put(Standard.PERMISSION_DENIED, Standard.AUTHENTICATION_NOT_SUCCESSFUL);  // 0x0000000C
+        PARENT_REASON_MAP.put(Standard.OBJECT_ARCHIVED, Standard.GENERAL_FAILURE);  // 0x0000000D
+        PARENT_REASON_MAP.put(Standard.INDEX_OUT_OF_BOUNDS, Standard.GENERAL_FAILURE);  // 0x0000000E
+        PARENT_REASON_MAP.put(Standard.APPLICATION_NAMESPACE_NOT_SUPPORTED, Standard.OPERATION_NOT_SUPPORTED);  // 0x0000000F
+        PARENT_REASON_MAP.put(Standard.KEY_FORMAT_TYPE_NOT_SUPPORTED, Standard.OPERATION_NOT_SUPPORTED);  // 0x00000010
+        PARENT_REASON_MAP.put(Standard.KEY_COMPRESSION_TYPE_NOT_SUPPORTED, Standard.OPERATION_NOT_SUPPORTED);  // 0x00000011
+        PARENT_REASON_MAP.put(Standard.ENCODING_OPTION_ERROR, Standard.GENERAL_FAILURE);  // 0x00000012
+        PARENT_REASON_MAP.put(Standard.KEY_VALUE_NOT_PRESENT, Standard.GENERAL_FAILURE);  // 0x00000013
+        PARENT_REASON_MAP.put(Standard.ATTESTATION_REQUIRED, Standard.GENERAL_FAILURE);  // 0x00000014
+        PARENT_REASON_MAP.put(Standard.ATTESTATION_FAILED, Standard.ATTESTATION_REQUIRED);  // 0x00000015
+        PARENT_REASON_MAP.put(Standard.SENSITIVE, Standard.GENERAL_FAILURE);  // 0x00000016
+        PARENT_REASON_MAP.put(Standard.NOT_EXTRACTABLE, Standard.GENERAL_FAILURE);  // 0x00000017
+        PARENT_REASON_MAP.put(Standard.OBJECT_ALREADY_EXISTS, Standard.GENERAL_FAILURE);  // 0x00000018
+        PARENT_REASON_MAP.put(Standard.INVALID_TICKET, Standard.INVALID_MESSAGE);  // 0x00000019
+        PARENT_REASON_MAP.put(Standard.USAGE_LIMIT_EXCEEDED, Standard.GENERAL_FAILURE);  // 0x0000001A
+        PARENT_REASON_MAP.put(Standard.NUMERIC_RANGE, Standard.GENERAL_FAILURE);  // 0x0000001B
+        PARENT_REASON_MAP.put(Standard.INVALID_DATA_TYPE, Standard.INVALID_MESSAGE);  // 0x0000001C
+        PARENT_REASON_MAP.put(Standard.READ_ONLY_ATTRIBUTE, Standard.INVALID_ATTRIBUTE);  // 0x0000001D
+        PARENT_REASON_MAP.put(Standard.MULTI_VALUED_ATTRIBUTE, Standard.INVALID_ATTRIBUTE);  // 0x0000001E
+        PARENT_REASON_MAP.put(Standard.UNSUPPORTED_ATTRIBUTE, Standard.OPERATION_NOT_SUPPORTED);  // 0x0000001F
+        PARENT_REASON_MAP.put(Standard.ATTRIBUTE_INSTANCE_NOT_FOUND, Standard.ATTRIBUTE_NOT_FOUND);  // 0x00000020
+        PARENT_REASON_MAP.put(Standard.ATTRIBUTE_NOT_FOUND, Standard.INVALID_ATTRIBUTE);  // 0x00000021
+        PARENT_REASON_MAP.put(Standard.ATTRIBUTE_READ_ONLY, Standard.READ_ONLY_ATTRIBUTE);  // 0x00000022
+        PARENT_REASON_MAP.put(Standard.ATTRIBUTE_SINGLE_VALUED, Standard.MULTI_VALUED_ATTRIBUTE);  // 0x00000023
+        PARENT_REASON_MAP.put(Standard.BAD_CRYPTOGRAPHIC_PARAMETERS, Standard.CRYPTOGRAPHIC_FAILURE);  // 0x00000024
+        PARENT_REASON_MAP.put(Standard.BAD_PASSWORD, Standard.AUTHENTICATION_NOT_SUCCESSFUL);  // 0x00000025
+        PARENT_REASON_MAP.put(Standard.CODEC_ERROR, Standard.GENERAL_FAILURE);  // 0x00000026
+        PARENT_REASON_MAP.put(Standard.RESERVED, Standard.GENERAL_FAILURE);  // 0x00000027
+        PARENT_REASON_MAP.put(Standard.ILLEGAL_OBJECT_TYPE, Standard.ILLEGAL_OPERATION);  // 0x00000028
+        PARENT_REASON_MAP.put(Standard.INCOMPATIBLE_CRYPTOGRAPHIC_USAGE_MASK, Standard.CRYPTOGRAPHIC_FAILURE);  // 0x00000029
+        PARENT_REASON_MAP.put(Standard.INTERNAL_SERVER_ERROR, Standard.GENERAL_FAILURE);  // 0x0000002A
+        PARENT_REASON_MAP.put(Standard.INVALID_ASYNCHRONOUS_CORRELATION_VALUE, Standard.INVALID_MESSAGE);  // 0x0000002B
+        PARENT_REASON_MAP.put(Standard.INVALID_ATTRIBUTE, Standard.INVALID_MESSAGE);  // 0x0000002C
+        PARENT_REASON_MAP.put(Standard.INVALID_ATTRIBUTE_VALUE, Standard.INVALID_ATTRIBUTE);  // 0x0000002D
+        PARENT_REASON_MAP.put(Standard.INVALID_CORRELATION_VALUE, Standard.INVALID_MESSAGE);  // 0x0000002E
+        PARENT_REASON_MAP.put(Standard.INVALID_CSR, Standard.INVALID_MESSAGE);  // 0x0000002F
+        PARENT_REASON_MAP.put(Standard.INVALID_OBJECT_TYPE, Standard.INVALID_MESSAGE);  // 0x00000030
+        PARENT_REASON_MAP.put(Standard.RESERVED_2, Standard.RESERVED);  // 0x00000031
+        PARENT_REASON_MAP.put(Standard.KEY_WRAP_TYPE_NOT_SUPPORTED, Standard.OPERATION_NOT_SUPPORTED);  // 0x00000032
+        PARENT_REASON_MAP.put(Standard.RESERVED_3, Standard.RESERVED);  // 0x00000033
+        PARENT_REASON_MAP.put(Standard.MISSING_INITIALIZATION_VECTOR, Standard.CRYPTOGRAPHIC_FAILURE);  // 0x00000034
+        PARENT_REASON_MAP.put(Standard.NON_UNIQUE_NAME_ATTRIBUTE, Standard.INVALID_ATTRIBUTE);  // 0x00000035
+        PARENT_REASON_MAP.put(Standard.OBJECT_DESTROYED, Standard.OBJECT_ARCHIVED);  // 0x00000036
+        PARENT_REASON_MAP.put(Standard.OBJECT_NOT_FOUND, Standard.GENERAL_FAILURE);  // 0x00000037
+        PARENT_REASON_MAP.put(Standard.RESERVED_4, Standard.RESERVED);  // 0x00000038
+        PARENT_REASON_MAP.put(Standard.NOT_AUTHORISED, Standard.AUTHENTICATION_NOT_SUCCESSFUL);  // 0x00000039
+        PARENT_REASON_MAP.put(Standard.SERVER_LIMIT_EXCEEDED, Standard.USAGE_LIMIT_EXCEEDED);  // 0x0000003A
+        PARENT_REASON_MAP.put(Standard.UNKNOWN_ENUMERATION, Standard.GENERAL_FAILURE);  // 0x0000003B
+        PARENT_REASON_MAP.put(Standard.UNKNOWN_MESSAGE_EXTENSION, Standard.UNKNOWN_ENUMERATION);  // 0x0000003C
+        PARENT_REASON_MAP.put(Standard.UNKNOWN_TAG, Standard.UNKNOWN_ENUMERATION);  // 0x0000003D
+        PARENT_REASON_MAP.put(Standard.UNSUPPORTED_CRYPTOGRAPHIC_PARAMETERS, Standard.CRYPTOGRAPHIC_FAILURE);  // 0x0000003E
+        PARENT_REASON_MAP.put(Standard.UNSUPPORTED_PROTOCOL_VERSION, Standard.OPERATION_NOT_SUPPORTED);  // 0x0000003F
+        PARENT_REASON_MAP.put(Standard.WRAPPING_OBJECT_ARCHIVED, Standard.OBJECT_ARCHIVED);  // 0x00000040
+        PARENT_REASON_MAP.put(Standard.WRAPPING_OBJECT_DESTROYED, Standard.OBJECT_DESTROYED);  // 0x00000041
+        PARENT_REASON_MAP.put(Standard.WRAPPING_OBJECT_NOT_FOUND, Standard.OBJECT_NOT_FOUND);  // 0x00000042
+        PARENT_REASON_MAP.put(Standard.WRONG_KEY_LIFECYCLE_STATE, Standard.ILLEGAL_OPERATION);  // 0x00000043
+        PARENT_REASON_MAP.put(Standard.PROTECTION_STORAGE_UNAVAILABLE, Standard.INTERNAL_SERVER_ERROR);  // 0x00000044
+        PARENT_REASON_MAP.put(Standard.PKCS11_CODEC_ERROR, Standard.CODEC_ERROR);  // 0x00000045
+        PARENT_REASON_MAP.put(Standard.PKCS11_INVALID_FUNCTION, Standard.PKCS11_CODEC_ERROR);  // 0x00000046
+        PARENT_REASON_MAP.put(Standard.PKCS11_INVALID_INTERFACE, Standard.PKCS11_CODEC_ERROR);  // 0x00000047
+        PARENT_REASON_MAP.put(Standard.PRIVATE_PROTECTION_STORAGE_UNAVAILABLE, Standard.PROTECTION_STORAGE_UNAVAILABLE);  // 0x00000048
+        PARENT_REASON_MAP.put(Standard.PUBLIC_PROTECTION_STORAGE_UNAVAILABLE, Standard.PROTECTION_STORAGE_UNAVAILABLE);  // 0x00000049
+        PARENT_REASON_MAP.put(Standard.UNKNOWN_OBJECT_GROUP, Standard.OBJECT_NOT_FOUND);  // 0x0000004A
+        PARENT_REASON_MAP.put(Standard.CONSTRAINT_VIOLATION, Standard.ILLEGAL_OPERATION);  // 0x0000004B
+        PARENT_REASON_MAP.put(Standard.DUPLICATE_PROCESS_REQUEST, Standard.ILLEGAL_OPERATION);  // 0x0000004C
+        PARENT_REASON_MAP.put(Standard.CIRCULAR_LINK_ERROR, Standard.ILLEGAL_OPERATION);  // 0x0000004D
+        // GENERAL_FAILURE is the root (0x00000100)
     }
 
     @NonNull
@@ -57,7 +139,7 @@ public class ResultReason implements KmipEnumeration {
     /**
      * Register an extension value.
      */
-    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
+    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions, @NonNull Value parentReason) {
         checkValidExtensionValue(value);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
@@ -73,6 +155,7 @@ public class ResultReason implements KmipEnumeration {
         Extension custom = new Extension(value, description, supportedVersions);
         VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
         DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        PARENT_REASON_MAP.putIfAbsent(parentReason, custom);
         EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
         return custom;
     }
@@ -108,6 +191,16 @@ public class ResultReason implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    /**
+     * Gets the parent reason for a given result reason.
+     *
+     * @param reason The result reason to get the parent for
+     * @return The parent reason, or null if the reason is GENERAL_FAILURE or not found
+     */
+    public static Value getParentReason(Value reason) {
+        return PARENT_REASON_MAP.get(reason);
     }
 
     @Override

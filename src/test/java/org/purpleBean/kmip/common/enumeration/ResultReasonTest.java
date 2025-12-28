@@ -66,7 +66,7 @@ class ResultReasonTest extends AbstractKmipEnumerationSuite<ResultReason> {
     @Override
     protected void assertEnumerationRegistryBehavior() {
         // Valid registration in ResultReason requires 8XXXXXXX (hex) range per implementation
-        ResultReason.Value custom = ResultReason.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
+        ResultReason.Value custom = ResultReason.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE);
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
 
@@ -78,13 +78,13 @@ class ResultReasonTest extends AbstractKmipEnumerationSuite<ResultReason> {
         });
 
         // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> ResultReason.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
+        assertThatThrownBy(() -> ResultReason.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
+        assertThatThrownBy(() -> ResultReason.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
+        assertThatThrownBy(() -> ResultReason.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x80000012, "X-Empty-Versions", Set.of()))
+        assertThatThrownBy(() -> ResultReason.register(0x80000012, "X-Empty-Versions", Set.of(), ResultReason.Standard.GENERAL_FAILURE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
