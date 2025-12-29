@@ -14,6 +14,7 @@ BASE_DIR="$(pwd)"
 MAIN_JAVA="src/main/java/org/purpleBean/kmip"
 TEST_JAVA="src/test/java/org/purpleBean/kmip"
 SUB_PATH="common"
+TEMPLATE_DIR="scripts/templates/datatype"
 
 # Generation flags (off by default)
 GEN_CLASS=false
@@ -118,7 +119,7 @@ title_to_snake() {
     # collapse whitespace into single underscore, strip leading/trailing underscores
     echo "$input" \
         | sed -E 's/[[:space:]]+/_/g' \
-        | sed -E 's/^_+|_+$//g'
+        | sed -E 's/^_|_+$//g'
 }
 
 # 5) Snake_Case -> Title Case
@@ -208,6 +209,37 @@ do_or_dry() {
     "$@"
 }
 
+escape_sed_replacement() {
+    # escape backslash, ampersand, and delimiter (|)
+    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/&/\\\\&/g' -e 's/|/\\\\|/g'
+}
+
+render_template() {
+    local template_file="$1"
+    local out_file="$2"
+    shift 2
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${out_file} (from ${template_file})"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "${out_file}")"
+    local content
+    content="$(cat "${template_file}")"
+
+    while [[ $# -gt 1 ]]; do
+        local key="$1"
+        local value="$2"
+        shift 2
+        local esc
+        esc="$(escape_sed_replacement "${value}")"
+        content="$(printf "%s" "${content}" | sed -e "s|{{${key}}}|${esc}|g")"
+    done
+
+    printf "%s" "${content}" > "${out_file}"
+}
+
 #############################################
 # Filesystem & service helpers (respect DRY_RUN)
 #############################################
@@ -291,71 +323,10 @@ generate_data_class() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create dataType class: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.${pdot};
-
-import lombok.*;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.KmipDataType;
-
-import java.time.OffsetDateTime;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
-/**
- * KMIP ${DATA_NAME} dataType.
- */
-@Data
-@Builder
-public class ${DATA_NAME} implements KmipDataType {
-
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${DATA_NAME_SNAKE});
-    public static final EncodingType encodingType = EncodingType.DATE_TIME;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
-
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${DATA_NAME}.class);
-        }
-    }
-    
-        
-    // TODO: Add your dataType field here with required java type and set the var name to value
-    // Example:
-    @NonNull
-    private final OffsetDateTime value;
-    
-    public static ${DATA_NAME} of(@NonNull OffsetDateTime value) {
-        return ${DATA_NAME}.builder().value(value).build();
-    }
-
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
-
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
-
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataType.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}"
 
     echo "Created: ${out_file}"
 }
@@ -368,54 +339,10 @@ generate_json_serializer() {
     pdot="$(pkg_dot)"
     varname="$(get_var_name "${DATA_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create JSON serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.json.serializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.time.OffsetDateTime;
-import java.util.List;
-
-public class ${DATA_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${DATA_NAME}> {
-
-    @Override
-    public void serialize(${DATA_NAME} ${varname}, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (${varname} == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", ${varname}.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(${varname}.getKmipTag());
-        gen.writeStringField("type", ${varname}.getEncodingType().getDescription());
-        gen.writeObjectField("value", ${varname}.getValue());
-        gen.writeEndObject();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeJsonSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "varname" "${varname}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
         "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${DATA_NAME}JsonSerializer"
@@ -432,95 +359,10 @@ generate_json_deserializer() {
     data_snake="$(get_snake_case "${DATA_NAME}")"
     varname="$(get_var_name "${DATA_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create JSON deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.NoSuchElementException;
-
-public class ${DATA_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<${DATA_NAME}> {
-    private final KmipTag kmipTag = ${DATA_NAME}.kmipTag;
-    private final EncodingType encodingType = ${DATA_NAME}.encodingType;
-
-    @Override
-    public ${DATA_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-
-        if (node == null) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, String.format("JSON node cannot be null for ${DATA_NAME} deserialization"));
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(${DATA_NAME}.class, String.format("Invalid KMIP tag for ${DATA_NAME}"));
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, String.format("Failed to parse KMIP tag for ${DATA_NAME}: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class,
-                    String.format("Expected object with %s tag for ${DATA_NAME}, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
-            return null;
-        }
-
-        // Validation: Extract and validate type field
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
-        ) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, String.format("Missing or non-text 'type' field for ${DATA_NAME}"));
-            return null;
-        }
-
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "${DATA_NAME} 'value' must be a non-empty array");
-            return null;
-        }
-
-        // TODO: update with required java type
-        OffsetDateTime dateTime = p.getCodec().treeToValue(valueNode, OffsetDateTime.class);
-        ${DATA_NAME} ${varname} = ${DATA_NAME}.builder().value(dateTime).build();
-
-        // Validate KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!${varname}.isSupported()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "${DATA_NAME} not supported for spec " + spec);
-            return null;
-        }
-
-        return ${varname};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeJsonDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "varname" "${varname}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
         "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${DATA_NAME}JsonDeserializer"
@@ -536,58 +378,10 @@ generate_xml_serializer() {
     pdot="$(pkg_dot)"
     varname="$(get_var_name "${DATA_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create XML serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.time.OffsetDateTime;
-import java.util.List;
-
-public class ${DATA_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${DATA_NAME}> {
-
-    @Override
-    public void serialize(${DATA_NAME} ${varname}, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!${varname}.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", ${varname}.getClass().getSimpleName(), spec));
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = ${varname}.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(${varname});
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", ${varname}.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", ${varname}.getValue());
-        xmlGen.writeEndObject();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeXmlSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "varname" "${varname}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
         "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${DATA_NAME}XmlSerializer"
@@ -604,79 +398,10 @@ generate_xml_deserializer() {
     varname="$(get_var_name "${DATA_NAME}")"
     data_snake="$(get_snake_case "${DATA_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create XML deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.Map;
-
-public class ${DATA_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${DATA_NAME}> {
-    private final KmipTag kmipTag = ${DATA_NAME}.kmipTag;
-    private final EncodingType encodingType = ${DATA_NAME}.encodingType;
-
-    @Override
-    public ${DATA_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "Expected XML object for ${DATA_NAME}");
-            return null;
-        }
-
-        if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "Invalid Tag for ${DATA_NAME}");
-            return null;
-        }
-
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "Missing or invalid '@type' attribute for ${DATA_NAME}");
-            return null;
-        }
-
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class,
-                "Missing or non-text 'value' for ${DATA_NAME}");
-            return null;
-        }
-
-        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        ${DATA_NAME} ${varname} = ${DATA_NAME}.builder().value(dateTime).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!${varname}.isSupported()) {
-            ctxt.reportInputMismatch(${DATA_NAME}.class, "${DATA_NAME} not supported for spec " + spec);
-            return null;
-        }
-
-        return ${varname};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeXmlDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "varname" "${varname}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
         "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${DATA_NAME}XmlDeserializer"
@@ -691,60 +416,9 @@ generate_ttlv_serializer() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create TTLV serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot};
-
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-public class ${DATA_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${DATA_NAME}> {
-    @Override
-    public ByteBuffer serialize(${DATA_NAME} value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    private TtlvObject serializeToTtlvObject(${DATA_NAME} value, TtlvMapper mapper) throws IOException {
-        if (value == null) {
-            return null;
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IOException(
-                String.format("%s is not supported for KMIP spec %s",
-                        value.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeTtlvSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
         "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${DATA_NAME}TtlvSerializer"
@@ -761,57 +435,10 @@ generate_ttlv_deserializer() {
     varname="$(get_var_name "${DATA_NAME}")"
     data_snake="$(get_snake_case "${DATA_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create TTLV deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot};
-
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-public class ${DATA_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<${DATA_NAME}> {
-    private final KmipTag kmipTag = ${DATA_NAME}.kmipTag;
-    private final EncodingType encodingType = ${DATA_NAME}.encodingType;
-
-    @Override
-    public ${DATA_NAME} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        // TODO : update with required java type
-        OffsetDateTime dt = mapper.readValue(bb, OffsetDateTime.class);
-        ${DATA_NAME} ${varname} = ${DATA_NAME}.builder().value(dt).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!${varname}.isSupported()) {
-            throw new NoSuchElementException(String.format("${DATA_NAME} not supported for spec %s", spec));
-        }
-        return ${varname};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeTtlvDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "varname" "${varname}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
         "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${DATA_NAME}TtlvDeserializer"
@@ -826,48 +453,9 @@ generate_domain_test() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create domain test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-
-@DisplayName("${DATA_NAME} Domain Tests")
-class ${DATA_NAME}Test extends AbstractKmipDataTypeSuite<${DATA_NAME}> {
-
-    @Override
-    protected Class<${DATA_NAME}> type() {
-        return ${DATA_NAME}.class;
-    }
-
-    @Override
-    protected ${DATA_NAME} createDefault() {
-        // TODO: Update with actual default values for your dataType
-        OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        return ${DATA_NAME}.builder().value(FIXED_TIME).build();
-    }
-
-    @Override
-    protected EncodingType expectedEncodingType() {
-        // TODO: Update with actual encoding type for your dataType
-        return EncodingType.DATE_TIME;
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeTest.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}"
 
     echo "Created: ${out_file}"
 }
@@ -885,49 +473,13 @@ generate_serialization_test_for_format() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create ${format} serialization test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.${format}.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-import org.purpleBean.kmip.test.suite.Abstract${format_pascal}SerializationSuite;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-@DisplayName("${DATA_NAME} ${format_upper} Serialization Tests")
-class ${suite_name} extends Abstract${format_pascal}SerializationSuite<${DATA_NAME}> {
-
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
-    @Override
-    protected Class<${DATA_NAME}> type() {
-        return ${DATA_NAME}.class;
-    }
-
-    @Override
-    protected ${DATA_NAME} createDefault() {
-        // TODO: Update with actual default values for your dataType
-        return ${DATA_NAME}.builder().value(FIXED_TIME).build();
-    }
-
-    @Override
-    protected ${DATA_NAME} createVariant() {
-        // TODO: Update with different values to test variations
-        return ${DATA_NAME}.builder().value(FIXED_TIME.plusDays(1)).build();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeCodecTest.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "format" "${format}" \
+        "format_upper" "${format_upper}" \
+        "format_pascal" "${format_pascal}" \
+        "suite_name" "${suite_name}"
 
     echo "Created: ${out_file}"
 }
@@ -941,51 +493,10 @@ generate_benchmark_subject() {
     local var_name
     var_name=$(echo "${DATA_NAME:0:1}" | tr '[:upper:]' '[:lower:]')${DATA_NAME:1}
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create benchmark subject: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.benchmark.subjects.${pdot};
-
-import lombok.Getter;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.${pdot}.${DATA_NAME};
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-public class ${DATA_NAME}BenchmarkSubject extends KmipBenchmarkSubject<${DATA_NAME}> {
-
-    @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
-
-    public ${DATA_NAME}BenchmarkSubject() throws Exception {
-        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ${DATA_NAME} ${var_name} = ${DATA_NAME}.builder().value(fixed).build();
-        initialize(${var_name}, ${DATA_NAME}.class);
-    }
-
-    @Override
-    public String name() {
-        return "${DATA_NAME}";
-    }
-
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/DataTypeBenchmarkSubject.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "DATA_NAME" "${DATA_NAME}" \
+        "var_name" "${var_name}"
 
     add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
         "org.purpleBean.kmip.benchmark.subjects.${pdot}.${DATA_NAME}BenchmarkSubject"

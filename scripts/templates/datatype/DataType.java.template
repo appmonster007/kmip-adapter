@@ -1,0 +1,56 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import lombok.*;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.KmipDataType;
+
+import java.time.OffsetDateTime;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * KMIP {{DATA_NAME}} dataType.
+ */
+@Data
+@Builder
+public class {{DATA_NAME}} implements KmipDataType {
+
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{DATA_NAME_SNAKE}});
+    public static final EncodingType encodingType = EncodingType.DATE_TIME;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{DATA_NAME}}.class);
+        }
+    }
+
+
+    // TODO: Add your dataType field here with required java type and set the var name to value
+    // Example:
+    @NonNull
+    private final OffsetDateTime value;
+
+    public static {{DATA_NAME}} of(@NonNull OffsetDateTime value) {
+        return {{DATA_NAME}}.builder().value(value).build();
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec);
+    }
+}

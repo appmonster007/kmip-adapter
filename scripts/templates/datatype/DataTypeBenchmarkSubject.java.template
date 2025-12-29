@@ -1,0 +1,36 @@
+package org.purpleBean.kmip.benchmark.subjects.{{pdot}};
+
+import lombok.Getter;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.{{pdot}}.{{DATA_NAME}};
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+public class {{DATA_NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{DATA_NAME}}> {
+
+    @Getter
+    private KmipSpec spec = KmipSpec.V1_2;
+
+    public {{DATA_NAME}}BenchmarkSubject() throws Exception {
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+        {{DATA_NAME}} {{var_name}} = {{DATA_NAME}}.builder().value(fixed).build();
+        initialize({{var_name}}, {{DATA_NAME}}.class);
+    }
+
+    @Override
+    public String name() {
+        return "{{DATA_NAME}}";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}

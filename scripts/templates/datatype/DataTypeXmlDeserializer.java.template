@@ -1,0 +1,64 @@
+package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{pdot}};
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.{{pdot}}.{{DATA_NAME}};
+
+import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.util.Map;
+
+public class {{DATA_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializer<{{DATA_NAME}}> {
+    private final KmipTag kmipTag = {{DATA_NAME}}.kmipTag;
+    private final EncodingType encodingType = {{DATA_NAME}}.encodingType;
+
+    @Override
+    public {{DATA_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        ObjectCodec codec = p.getCodec();
+        JsonNode node = codec.readTree(p);
+
+        if (!node.isObject()) {
+            ctxt.reportInputMismatch({{DATA_NAME}}.class, "Expected XML object for {{DATA_NAME}}");
+            return null;
+        }
+
+        if (p instanceof FromXmlParser xmlParser
+              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch({{DATA_NAME}}.class, "Invalid Tag for {{DATA_NAME}}");
+            return null;
+        }
+
+        JsonNode typeNode = node.get("type");
+        if (typeNode == null || !typeNode.isTextual() ||
+                !encodingType.getDescription().equals(typeNode.asText())) {
+            ctxt.reportInputMismatch({{DATA_NAME}}.class, "Missing or invalid '@type' attribute for {{DATA_NAME}}");
+            return null;
+        }
+
+        JsonNode valueNode = node.get("value");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch({{DATA_NAME}}.class,
+                "Missing or non-text 'value' for {{DATA_NAME}}");
+            return null;
+        }
+
+        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
+        {{DATA_NAME}} {{varname}} = {{DATA_NAME}}.builder().value(dateTime).build();
+
+        KmipSpec spec = KmipContext.getSpec();
+
+        if (!{{varname}}.isSupported()) {
+            ctxt.reportInputMismatch({{DATA_NAME}}.class, "{{DATA_NAME}} not supported for spec " + spec);
+            return null;
+        }
+
+        return {{varname}};
+    }
+}
