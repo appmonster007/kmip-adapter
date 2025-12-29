@@ -2,7 +2,7 @@
 set -euo pipefail
 
 #############################################
-# generate_attribute.sh
+# generate_datatype_attribute.sh
 #
 # Generator for KMIP attribute artifacts.
 # - Per-artifact generator functions

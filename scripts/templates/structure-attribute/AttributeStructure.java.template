@@ -1,0 +1,160 @@
+package org.purpleBean.kmip.{{pkg_dot}};
+
+import lombok.*;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.KmipAttribute;
+import org.purpleBean.kmip.KmipStructure;
+
+import java.util.*;
+import java.util.stream.Stream;
+
+/**
+ * KMIP {{class_name}} attribute structure.
+ *
+ * <p>Represents a {{class_name}} in KMIP.</p>
+ */
+@Data
+@Builder
+public class {{class_name}} implements KmipStructure, KmipAttribute {
+
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{class_snake}});
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supported_versions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supported_versions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{class_name}}.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, {{class_name}}.class, {{class_name}}::of);
+        }
+    }
+
+    @NonNull
+    private final NameValue nameValue;
+
+    @NonNull
+    private final NameType nameType;
+
+    public {{class_name}}(@NonNull NameValue nameValue, @NonNull NameType nameType) {
+        this.nameValue = Objects.requireNonNull(nameValue, "Name value cannot be null");
+        this.nameType = Objects.requireNonNull(nameType, "Name type cannot be null");
+    }
+
+    public static {{class_name}} of(@NonNull String name, @NonNull NameType type) {
+        return new {{class_name}}(NameValue.of(name), type);
+    }
+
+    public static {{class_name}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        {{class_name}}Builder builder = {{class_name}}.builder();
+        List<KmipDataType> fields = attributeValue.getValues();
+        for (KmipDataType field : fields) {
+            if (field instanceof NameValue nameValue) {
+                builder.nameValue(nameValue);
+            }
+            if (field instanceof NameType nameType) {
+                builder.nameType(nameType);
+            }
+        }
+        return builder.build();
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        return Stream.of(nameValue, nameType).filter(Objects::nonNull).toList();
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supported_versions.contains(spec)
+                && nameValue.isSupported()
+                && nameType.isSupported();
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return true;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return true;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.of(getValues());
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    public static class {{class_name}}Builder {
+        public {{class_name}} build() {
+            validate();
+            return new {{class_name}}(nameValue, nameType);
+        }
+
+        private void validate() {
+            Objects.requireNonNull(nameValue, "Name value cannot be null");
+            Objects.requireNonNull(nameType, "Name type cannot be null");
+
+            // Validate KMIP spec compatibility
+            KmipSpec spec = KmipContext.getSpec();
+            if (!nameValue.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("Name value is not supported for KMIP spec %s", spec)
+                );
+            }
+            if (!nameType.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("Name type is not supported for KMIP spec %s", spec)
+                );
+            }
+        }
+    }
+}

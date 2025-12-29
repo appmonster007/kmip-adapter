@@ -1,0 +1,33 @@
+package org.purpleBean.kmip.benchmark.subjects.{{pkg_dot}};
+
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};
+import org.purpleBean.kmip.common.NameValue;
+import org.purpleBean.kmip.common.enumeration.NameType;
+
+public class {{class_name}}BenchmarkSubject extends KmipBenchmarkSubject<{{class_name}}> {
+
+    public {{class_name}}BenchmarkSubject() throws Exception {
+        {{class_name}} {{var_name}} = {{class_name}}.builder()
+                .nameValue(NameValue.of("some-name"))
+                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
+        initialize({{var_name}}, {{class_name}}.class);
+    }
+
+    @Override
+    public String name() {
+        return "{{class_name}}";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}
