@@ -472,56 +472,25 @@ generate_domain_test() {
     echo "Created: ${path}"
 }
 
-generate_json_test() {
+generate_codec_test() {
     local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/json/${SUB_PATH}/${ATTRIBUTE_NAME}JsonTest.java"
+    local format="$2"
+    local codec_pascal
+    codec_pascal="$(get_pascal_case "${format}")"
+    local path="${TEST_JAVA}/codec/${format}/${SUB_PATH}/${ATTRIBUTE_NAME}${codec_pascal}Test.java"
 
     local FIELD_TYPE="OffsetDateTime"
     local FIELD_NAME="value"
     local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
 
-    render_template "${TEMPLATE_DIR}/AttributeJsonTest.java.template" "${path}" \
+    render_template "${TEMPLATE_DIR}/AttributeCodecTest.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
-        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
-
-    echo "Created: ${path}"
-}
-
-generate_xml_test() {
-    local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/xml/${SUB_PATH}/${ATTRIBUTE_NAME}XmlTest.java"
-
-    local FIELD_TYPE="OffsetDateTime"
-    local FIELD_NAME="value"
-    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
-
-    render_template "${TEMPLATE_DIR}/AttributeXmlTest.java.template" "${path}" \
-        "SUB_PATH" "${SUB_PATH}" \
-        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
-        "FIELD_TYPE" "${FIELD_TYPE}" \
-        "FIELD_NAME" "${FIELD_NAME}" \
-        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
-
-    echo "Created: ${path}"
-}
-
-generate_ttlv_test() {
-    local ATTRIBUTE_NAME="$1"
-    local path="${TEST_JAVA}/codec/ttlv/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvTest.java"
-
-    local FIELD_TYPE="OffsetDateTime"
-    local FIELD_NAME="value"
-    local DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'
-
-    render_template "${TEMPLATE_DIR}/AttributeTtlvTest.java.template" "${path}" \
-        "SUB_PATH" "${SUB_PATH}" \
-        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
-        "FIELD_TYPE" "${FIELD_TYPE}" \
-        "FIELD_NAME" "${FIELD_NAME}" \
-        "DEFAULT_VALUE" "${DEFAULT_VALUE}"
+        "DEFAULT_VALUE" "${DEFAULT_VALUE}" \
+        "CODEC_LOWER" "${format}" \
+        "CODEC_PASCAL" "${codec_pascal}"
 
     echo "Created: ${path}"
 }
@@ -570,9 +539,9 @@ generate_attribute() {
     $GEN_TTLV_SER     && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
     $GEN_TTLV_DES     && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
     $GEN_DOMAIN_TEST  && generate_domain_test "${ATTRIBUTE_NAME}"
-    $GEN_JSON_TEST    && generate_json_test "${ATTRIBUTE_NAME}"
-    $GEN_XML_TEST     && generate_xml_test "${ATTRIBUTE_NAME}"
-    $GEN_TTLV_TEST    && generate_ttlv_test "${ATTRIBUTE_NAME}"
+    $GEN_JSON_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "json"
+    $GEN_XML_TEST     && generate_codec_test "${ATTRIBUTE_NAME}" "xml"
+    $GEN_TTLV_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "ttlv"
     $GEN_BENCHMARK    && generate_benchmark_subject "${ATTRIBUTE_NAME}"
 
     echo "Finished (or planned) generation for ${ATTRIBUTE_NAME}."

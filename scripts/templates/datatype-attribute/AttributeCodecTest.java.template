@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.ttlv.{{SUB_PATH}};
+package org.purpleBean.kmip.codec.{{CODEC_LOWER}}.{{SUB_PATH}};
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.Abstract{{CODEC_PASCAL}}SerializationSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-@DisplayName("{{ATTRIBUTE_NAME}} TTLV Serialization Tests")
-class {{ATTRIBUTE_NAME}}TtlvTest extends AbstractTtlvSerializationSuite<{{ATTRIBUTE_NAME}}> {
+@DisplayName("{{ATTRIBUTE_NAME}} {{CODEC_PASCAL}} Serialization Tests")
+class {{ATTRIBUTE_NAME}}{{CODEC_PASCAL}}Test extends Abstract{{CODEC_PASCAL}}SerializationSuite<{{ATTRIBUTE_NAME}}> {
 
     private static final {{FIELD_TYPE}} FIXED_TIME = {{DEFAULT_VALUE}};
 
