@@ -57,7 +57,7 @@ public class ValidityIndicatorXmlDeserializer extends KmipDataTypeXmlDeserialize
         ValidityIndicator validityindicator = new ValidityIndicator(ValidityIndicator.fromName(description));
         if (!validityindicator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidityIndicator '%s' not supported for spec %s", description, spec));
+                    String.format("ValidityIndicator '%s' not supported for spec %s", description, spec));
         }
 
         return validityindicator;

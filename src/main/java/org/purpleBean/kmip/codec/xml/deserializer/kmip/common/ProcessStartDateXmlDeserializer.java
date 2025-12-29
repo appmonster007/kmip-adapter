@@ -49,7 +49,7 @@ public class ProcessStartDateXmlDeserializer extends KmipDataTypeXmlDeserializer
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(ProcessStartDate.class,
-                "Missing or non-text 'value' for ProcessStartDate");
+                    "Missing or non-text 'value' for ProcessStartDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class ProcessStartDateXmlDeserializer extends KmipDataTypeXmlDeserializer
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProcessStartDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("ProcessStartDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

@@ -37,7 +37,7 @@ public class StateTtlvDeserializer extends KmipDataTypeTtlvDeserializer<State> {
 
         if (!state.isSupported()) {
             throw new NoSuchElementException(
-                String.format("State '%d' not supported for spec %s", value, spec));
+                    String.format("State '%d' not supported for spec %s", value, spec));
         }
         return state;
     }

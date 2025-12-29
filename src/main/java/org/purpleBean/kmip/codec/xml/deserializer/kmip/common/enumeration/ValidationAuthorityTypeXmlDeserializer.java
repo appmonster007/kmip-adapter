@@ -57,7 +57,7 @@ public class ValidationAuthorityTypeXmlDeserializer extends KmipDataTypeXmlDeser
         ValidationAuthorityType validationauthoritytype = new ValidationAuthorityType(ValidationAuthorityType.fromName(description));
         if (!validationauthoritytype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidationAuthorityType '%s' not supported for spec %s", description, spec));
+                    String.format("ValidationAuthorityType '%s' not supported for spec %s", description, spec));
         }
 
         return validationauthoritytype;

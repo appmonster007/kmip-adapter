@@ -140,8 +140,15 @@ public class KmipTag {
         BLOCK_CIPHER_MODE(0x420011, "BlockCipherMode", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CANCELLATION_RESULT(0x420012, "CancellationResult", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFICATE(0x420013, "Certificate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CERTIFICATE_IDENTIFIER(0x420014, "CertificateIdentifier", KmipSpec.UnknownVersion, KmipSpec.V1_1),
+        CERTIFICATE_ISSUER(0x420015, "CertificateIssuer", KmipSpec.UnknownVersion, KmipSpec.V1_1),
+        CERTIFICATE_ISSUER_ALTERNATIVE_NAME(0x420016, "CertificateIssuerAlternativeName", KmipSpec.UnknownVersion, KmipSpec.V1_1),
+        CERTIFICATE_ISSUER_DISTINGUISHED_NAME(0x420017, "CertificateIssuerDistinguishedName", KmipSpec.UnknownVersion, KmipSpec.V1_1),
         CERTIFICATE_REQUEST(0x420018, "CertificateRequest", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFICATE_REQUEST_TYPE(0x420019, "CertificateRequestType", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        CERTIFICATE_SUBJECT(0x42001A, "CertificateSubject", KmipSpec.UnknownVersion, KmipSpec.V1_1),
+        CERTIFICATE_SUBJECT_ALTERNATIVE_NAME(0x42001B, "CertificateSubjectAlternativeName", KmipSpec.UnknownVersion, KmipSpec.V1_1),
+        CERTIFICATE_SUBJECT_DISTINGUISHED_NAME(0x42001C, "CertificateSubjectDistinguishedName", KmipSpec.UnknownVersion, KmipSpec.V1_1),
         CERTIFICATE_TYPE(0x42001D, "CertificateType", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFICATE_VALUE(0x42001E, "CertificateValue", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         COMMON_TEMPLATE_ATTRIBUTE(0x42001F, "CommonTemplateAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2),
@@ -172,6 +179,7 @@ public class KmipTag {
         HASHING_ALGORITHM(0x420038, "HashingAlgorithm", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         INITIAL_DATE(0x420039, "InitialDate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         INITIALIZATION_VECTOR(0x42003A, "InitializationVector", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ISSUER(0x42003B, "Issuer", KmipSpec.UnknownVersion, KmipSpec.V1_1),
         ITERATION_COUNT(0x42003C, "IterationCount", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         IV_COUNTER_NONCE(0x42003D, "IvCounterNonce", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         J(0x42003E, "J", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
@@ -247,6 +255,7 @@ public class KmipTag {
         SALT(0x420084, "Salt", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECRET_DATA(0x420085, "SecretData", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECRET_DATA_TYPE(0x420086, "SecretDataType", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SERIAL_NUMBER(0x420087, "SerialNumber", KmipSpec.UnknownVersion, KmipSpec.V1_1),
         SERVER_INFORMATION(0x420088, "ServerInformation", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SPLIT_KEY(0x420089, "SplitKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SPLIT_KEY_METHOD(0x42008A, "SplitKeyMethod", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
@@ -534,7 +543,6 @@ public class KmipTag {
         SIGN_COUNTER(0x4201C0, "SignCounter", KmipSpec.UnknownVersion, KmipSpec.V3_0),
         SIGNATURE_VERIFY_COUNTER(0x4201C1, "SignatureVerifyCounter", KmipSpec.UnknownVersion, KmipSpec.V3_0),
         NIST_SECURITY_CATEGORY(0x4201C2, "NistSecurityCategory", KmipSpec.UnknownVersion, KmipSpec.V3_0);
-
 
         private final int value;
         private final String description;

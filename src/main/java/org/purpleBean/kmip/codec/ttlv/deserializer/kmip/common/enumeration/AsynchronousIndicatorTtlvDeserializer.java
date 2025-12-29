@@ -37,7 +37,7 @@ public class AsynchronousIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeser
 
         if (!asynchronousindicator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AsynchronousIndicator '%d' not supported for spec %s", value, spec));
+                    String.format("AsynchronousIndicator '%d' not supported for spec %s", value, spec));
         }
         return asynchronousindicator;
     }

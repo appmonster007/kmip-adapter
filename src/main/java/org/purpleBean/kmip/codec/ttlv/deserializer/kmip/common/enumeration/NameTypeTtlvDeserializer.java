@@ -37,7 +37,7 @@ public class NameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<NameT
 
         if (!nametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("NameType '%d' not supported for spec %s", value, spec));
+                    String.format("NameType '%d' not supported for spec %s", value, spec));
         }
         return nametype;
     }

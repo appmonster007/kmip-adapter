@@ -57,7 +57,7 @@ public class MaskGeneratorXmlDeserializer extends KmipDataTypeXmlDeserializer<Ma
         MaskGenerator maskgenerator = new MaskGenerator(MaskGenerator.fromName(description));
         if (!maskgenerator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("MaskGenerator '%s' not supported for spec %s", description, spec));
+                    String.format("MaskGenerator '%s' not supported for spec %s", description, spec));
         }
 
         return maskgenerator;

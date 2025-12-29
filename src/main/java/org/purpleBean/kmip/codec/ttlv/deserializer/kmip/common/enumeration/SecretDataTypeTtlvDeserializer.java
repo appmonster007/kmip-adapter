@@ -37,7 +37,7 @@ public class SecretDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!secretdatatype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("SecretDataType '%d' not supported for spec %s", value, spec));
+                    String.format("SecretDataType '%d' not supported for spec %s", value, spec));
         }
         return secretdatatype;
     }

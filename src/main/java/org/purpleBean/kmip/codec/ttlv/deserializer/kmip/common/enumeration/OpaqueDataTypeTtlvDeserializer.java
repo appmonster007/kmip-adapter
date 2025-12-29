@@ -37,7 +37,7 @@ public class OpaqueDataTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!opaquedatatype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("OpaqueDataType '%d' not supported for spec %s", value, spec));
+                    String.format("OpaqueDataType '%d' not supported for spec %s", value, spec));
         }
         return opaquedatatype;
     }

@@ -37,7 +37,7 @@ public class HashingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         if (!hashingalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("HashingAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("HashingAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return hashingalgorithm;
     }

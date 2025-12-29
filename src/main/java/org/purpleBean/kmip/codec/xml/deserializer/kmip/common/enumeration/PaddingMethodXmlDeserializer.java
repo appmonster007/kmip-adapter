@@ -57,7 +57,7 @@ public class PaddingMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<Pa
         PaddingMethod paddingmethod = new PaddingMethod(PaddingMethod.fromName(description));
         if (!paddingmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("PaddingMethod '%s' not supported for spec %s", description, spec));
+                    String.format("PaddingMethod '%s' not supported for spec %s", description, spec));
         }
 
         return paddingmethod;

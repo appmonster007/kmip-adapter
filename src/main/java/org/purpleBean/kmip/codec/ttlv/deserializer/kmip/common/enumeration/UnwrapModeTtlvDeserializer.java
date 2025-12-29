@@ -37,7 +37,7 @@ public class UnwrapModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Unw
 
         if (!unwrapmode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UnwrapMode '%d' not supported for spec %s", value, spec));
+                    String.format("UnwrapMode '%d' not supported for spec %s", value, spec));
         }
         return unwrapmode;
     }

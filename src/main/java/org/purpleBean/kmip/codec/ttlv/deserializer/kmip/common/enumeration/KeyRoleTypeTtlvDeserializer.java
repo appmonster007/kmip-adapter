@@ -37,7 +37,7 @@ public class KeyRoleTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ke
 
         if (!keyroletype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyRoleType '%d' not supported for spec %s", value, spec));
+                    String.format("KeyRoleType '%d' not supported for spec %s", value, spec));
         }
         return keyroletype;
     }

@@ -37,7 +37,7 @@ public class RevocationReasonCodeTtlvDeserializer extends KmipDataTypeTtlvDeseri
 
         if (!revocationreasoncode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RevocationReasonCode '%d' not supported for spec %s", value, spec));
+                    String.format("RevocationReasonCode '%d' not supported for spec %s", value, spec));
         }
         return revocationreasoncode;
     }

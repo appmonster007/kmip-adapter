@@ -57,7 +57,7 @@ public class OperationXmlDeserializer extends KmipDataTypeXmlDeserializer<Operat
         Operation operation = new Operation(Operation.fromName(description));
         if (!operation.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Operation '%s' not supported for spec %s", description, spec));
+                    String.format("Operation '%s' not supported for spec %s", description, spec));
         }
 
         return operation;

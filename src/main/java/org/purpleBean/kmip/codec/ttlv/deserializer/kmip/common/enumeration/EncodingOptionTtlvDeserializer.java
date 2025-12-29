@@ -37,7 +37,7 @@ public class EncodingOptionTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!encodingoption.isSupported()) {
             throw new NoSuchElementException(
-                String.format("EncodingOption '%d' not supported for spec %s", value, spec));
+                    String.format("EncodingOption '%d' not supported for spec %s", value, spec));
         }
         return encodingoption;
     }

@@ -37,7 +37,7 @@ public class DrbgAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!drbgalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DrbgAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("DrbgAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return drbgalgorithm;
     }

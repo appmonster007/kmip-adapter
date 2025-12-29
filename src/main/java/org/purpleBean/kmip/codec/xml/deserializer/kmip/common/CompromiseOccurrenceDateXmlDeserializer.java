@@ -49,7 +49,7 @@ public class CompromiseOccurrenceDateXmlDeserializer extends KmipDataTypeXmlDese
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(CompromiseOccurrenceDate.class,
-                "Missing or non-text 'value' for CompromiseOccurrenceDate");
+                    "Missing or non-text 'value' for CompromiseOccurrenceDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class CompromiseOccurrenceDateXmlDeserializer extends KmipDataTypeXmlDese
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CompromiseOccurrenceDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("CompromiseOccurrenceDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

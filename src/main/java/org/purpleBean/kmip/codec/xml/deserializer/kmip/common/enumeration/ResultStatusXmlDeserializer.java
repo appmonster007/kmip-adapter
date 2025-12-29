@@ -57,7 +57,7 @@ public class ResultStatusXmlDeserializer extends KmipDataTypeXmlDeserializer<Res
         ResultStatus resultstatus = new ResultStatus(ResultStatus.fromName(description));
         if (!resultstatus.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ResultStatus '%s' not supported for spec %s", description, spec));
+                    String.format("ResultStatus '%s' not supported for spec %s", description, spec));
         }
 
         return resultstatus;

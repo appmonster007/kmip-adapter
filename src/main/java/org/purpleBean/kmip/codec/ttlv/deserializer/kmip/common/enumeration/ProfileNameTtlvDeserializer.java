@@ -37,7 +37,7 @@ public class ProfileNameTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Pr
 
         if (!profilename.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProfileName '%d' not supported for spec %s", value, spec));
+                    String.format("ProfileName '%d' not supported for spec %s", value, spec));
         }
         return profilename;
     }

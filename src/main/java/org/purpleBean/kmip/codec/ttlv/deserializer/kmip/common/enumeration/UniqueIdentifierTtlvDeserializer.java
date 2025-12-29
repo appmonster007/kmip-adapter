@@ -37,7 +37,7 @@ public class UniqueIdentifierTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         if (!uniqueidentifier.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UniqueIdentifier '%d' not supported for spec %s", value, spec));
+                    String.format("UniqueIdentifier '%d' not supported for spec %s", value, spec));
         }
         return uniqueidentifier;
     }

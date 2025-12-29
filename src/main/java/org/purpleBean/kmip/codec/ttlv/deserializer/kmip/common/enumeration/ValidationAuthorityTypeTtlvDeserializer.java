@@ -37,7 +37,7 @@ public class ValidationAuthorityTypeTtlvDeserializer extends KmipDataTypeTtlvDes
 
         if (!validationauthoritytype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidationAuthorityType '%d' not supported for spec %s", value, spec));
+                    String.format("ValidationAuthorityType '%d' not supported for spec %s", value, spec));
         }
         return validationauthoritytype;
     }

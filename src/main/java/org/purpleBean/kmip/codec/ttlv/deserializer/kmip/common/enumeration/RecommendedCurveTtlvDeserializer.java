@@ -37,7 +37,7 @@ public class RecommendedCurveTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         if (!recommendedcurve.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RecommendedCurve '%d' not supported for spec %s", value, spec));
+                    String.format("RecommendedCurve '%d' not supported for spec %s", value, spec));
         }
         return recommendedcurve;
     }

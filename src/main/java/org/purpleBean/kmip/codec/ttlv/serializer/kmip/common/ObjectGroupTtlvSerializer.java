@@ -1,17 +1,14 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common;
 
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.common.ObjectGroup;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ObjectGroupTtlvSerializer extends KmipDataTypeTtlvSerializer<ObjectGroup> {
     @Override
@@ -27,8 +24,8 @@ public class ObjectGroupTtlvSerializer extends KmipDataTypeTtlvSerializer<Object
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s",
-                        value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            value.getKmipTag().getDescription(), spec)
             );
         }
 

@@ -1,14 +1,12 @@
 package org.purpleBean.kmip.common;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.common.enumeration.State;
 
-import java.time.OffsetDateTime;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * KMIP ObjectGroup dataType.
@@ -31,7 +29,7 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
 
     @NonNull
     private final String value;
-    
+
     public static ObjectGroup of(@NonNull String value) {
         return ObjectGroup.builder().value(value).build();
     }

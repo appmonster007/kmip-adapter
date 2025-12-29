@@ -37,7 +37,7 @@ public class Fips186VariationTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         if (!fips186variation.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Fips186Variation '%d' not supported for spec %s", value, spec));
+                    String.format("Fips186Variation '%d' not supported for spec %s", value, spec));
         }
         return fips186variation;
     }

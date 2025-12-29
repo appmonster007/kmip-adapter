@@ -37,7 +37,7 @@ public class DeactivationReasonCodeTtlvDeserializer extends KmipDataTypeTtlvDese
 
         if (!deactivationreasoncode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DeactivationReasonCode '%d' not supported for spec %s", value, spec));
+                    String.format("DeactivationReasonCode '%d' not supported for spec %s", value, spec));
         }
         return deactivationreasoncode;
     }

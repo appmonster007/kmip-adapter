@@ -57,7 +57,7 @@ public class EndpointRoleXmlDeserializer extends KmipDataTypeXmlDeserializer<End
         EndpointRole endpointrole = new EndpointRole(EndpointRole.fromName(description));
         if (!endpointrole.isSupported()) {
             throw new NoSuchElementException(
-                String.format("EndpointRole '%s' not supported for spec %s", description, spec));
+                    String.format("EndpointRole '%s' not supported for spec %s", description, spec));
         }
 
         return endpointrole;

@@ -57,7 +57,7 @@ public class OpaqueDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<O
         OpaqueDataType opaquedatatype = new OpaqueDataType(OpaqueDataType.fromName(description));
         if (!opaquedatatype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("OpaqueDataType '%s' not supported for spec %s", description, spec));
+                    String.format("OpaqueDataType '%s' not supported for spec %s", description, spec));
         }
 
         return opaquedatatype;

@@ -57,7 +57,7 @@ public class DestroyActionXmlDeserializer extends KmipDataTypeXmlDeserializer<De
         DestroyAction destroyaction = new DestroyAction(DestroyAction.fromName(description));
         if (!destroyaction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DestroyAction '%s' not supported for spec %s", description, spec));
+                    String.format("DestroyAction '%s' not supported for spec %s", description, spec));
         }
 
         return destroyaction;

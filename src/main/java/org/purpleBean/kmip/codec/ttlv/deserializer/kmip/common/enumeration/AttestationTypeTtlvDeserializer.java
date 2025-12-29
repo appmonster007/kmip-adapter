@@ -37,7 +37,7 @@ public class AttestationTypeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!attestationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AttestationType '%d' not supported for spec %s", value, spec));
+                    String.format("AttestationType '%d' not supported for spec %s", value, spec));
         }
         return attestationtype;
     }

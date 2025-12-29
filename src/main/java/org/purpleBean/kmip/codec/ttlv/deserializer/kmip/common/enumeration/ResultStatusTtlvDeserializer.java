@@ -37,7 +37,7 @@ public class ResultStatusTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
 
         if (!resultstatus.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ResultStatus '%d' not supported for spec %s", value, spec));
+                    String.format("ResultStatus '%d' not supported for spec %s", value, spec));
         }
         return resultstatus;
     }

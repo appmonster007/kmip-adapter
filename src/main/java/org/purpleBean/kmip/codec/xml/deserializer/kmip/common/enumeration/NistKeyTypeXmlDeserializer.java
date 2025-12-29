@@ -57,7 +57,7 @@ public class NistKeyTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Nist
         NistKeyType nistkeytype = new NistKeyType(NistKeyType.fromName(description));
         if (!nistkeytype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("NistKeyType '%s' not supported for spec %s", description, spec));
+                    String.format("NistKeyType '%s' not supported for spec %s", description, spec));
         }
 
         return nistkeytype;

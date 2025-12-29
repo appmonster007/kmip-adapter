@@ -57,7 +57,7 @@ public class DerivationMethodXmlDeserializer extends KmipDataTypeXmlDeserializer
         DerivationMethod derivationmethod = new DerivationMethod(DerivationMethod.fromName(description));
         if (!derivationmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DerivationMethod '%s' not supported for spec %s", description, spec));
+                    String.format("DerivationMethod '%s' not supported for spec %s", description, spec));
         }
 
         return derivationmethod;

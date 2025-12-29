@@ -1,0 +1,28 @@
+package org.purpleBean.kmip.common;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+
+import java.util.List;
+
+@DisplayName("UsageLimitsTotal Domain Tests")
+class UsageLimitsTotalTest extends AbstractKmipDataTypeSuite<UsageLimitsTotal> {
+
+    @Override
+    protected Class<UsageLimitsTotal> type() {
+        return UsageLimitsTotal.class;
+    }
+
+    @Override
+    protected UsageLimitsTotal createDefault() {
+        return UsageLimitsTotal.builder().value(1000L).build();
+    }
+
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.LONG_INTEGER;
+    }
+}

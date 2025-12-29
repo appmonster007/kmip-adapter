@@ -57,7 +57,7 @@ public class CryptographicAlgorithmXmlDeserializer extends KmipDataTypeXmlDeseri
         CryptographicAlgorithm cryptographicalgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.fromName(description));
         if (!cryptographicalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CryptographicAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("CryptographicAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return cryptographicalgorithm;

@@ -57,7 +57,7 @@ public class UnwrapModeXmlDeserializer extends KmipDataTypeXmlDeserializer<Unwra
         UnwrapMode unwrapmode = new UnwrapMode(UnwrapMode.fromName(description));
         if (!unwrapmode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UnwrapMode '%s' not supported for spec %s", description, spec));
+                    String.format("UnwrapMode '%s' not supported for spec %s", description, spec));
         }
 
         return unwrapmode;

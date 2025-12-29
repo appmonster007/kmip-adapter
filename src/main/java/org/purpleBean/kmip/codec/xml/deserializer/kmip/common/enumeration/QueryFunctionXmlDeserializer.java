@@ -57,7 +57,7 @@ public class QueryFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<Qu
         QueryFunction queryfunction = new QueryFunction(QueryFunction.fromName(description));
         if (!queryfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("QueryFunction '%s' not supported for spec %s", description, spec));
+                    String.format("QueryFunction '%s' not supported for spec %s", description, spec));
         }
 
         return queryfunction;

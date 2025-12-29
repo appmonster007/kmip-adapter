@@ -37,7 +37,7 @@ public class ResultReasonTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
 
         if (!resultreason.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ResultReason '%d' not supported for spec %s", value, spec));
+                    String.format("ResultReason '%d' not supported for spec %s", value, spec));
         }
         return resultreason;
     }

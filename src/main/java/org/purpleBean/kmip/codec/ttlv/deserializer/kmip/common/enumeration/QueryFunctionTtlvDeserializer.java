@@ -37,7 +37,7 @@ public class QueryFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!queryfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("QueryFunction '%d' not supported for spec %s", value, spec));
+                    String.format("QueryFunction '%d' not supported for spec %s", value, spec));
         }
         return queryfunction;
     }

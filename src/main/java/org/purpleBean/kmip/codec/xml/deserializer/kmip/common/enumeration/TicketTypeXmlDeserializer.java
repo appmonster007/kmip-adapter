@@ -57,7 +57,7 @@ public class TicketTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Ticke
         TicketType tickettype = new TicketType(TicketType.fromName(description));
         if (!tickettype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("TicketType '%s' not supported for spec %s", description, spec));
+                    String.format("TicketType '%s' not supported for spec %s", description, spec));
         }
 
         return tickettype;

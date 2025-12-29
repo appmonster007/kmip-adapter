@@ -37,7 +37,7 @@ public class ClientRegistrationMethodTtlvDeserializer extends KmipDataTypeTtlvDe
 
         if (!clientregistrationmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ClientRegistrationMethod '%d' not supported for spec %s", value, spec));
+                    String.format("ClientRegistrationMethod '%d' not supported for spec %s", value, spec));
         }
         return clientregistrationmethod;
     }

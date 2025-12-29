@@ -37,7 +37,7 @@ public class ObjectTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Obj
 
         if (!objecttype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ObjectType '%d' not supported for spec %s", value, spec));
+                    String.format("ObjectType '%d' not supported for spec %s", value, spec));
         }
         return objecttype;
     }

@@ -37,7 +37,7 @@ public class DataEnumerationTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!dataenumeration.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DataEnumeration '%d' not supported for spec %s", value, spec));
+                    String.format("DataEnumeration '%d' not supported for spec %s", value, spec));
         }
         return dataenumeration;
     }

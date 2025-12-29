@@ -37,7 +37,7 @@ public class LinkTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<LinkT
 
         if (!linktype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("LinkType '%d' not supported for spec %s", value, spec));
+                    String.format("LinkType '%d' not supported for spec %s", value, spec));
         }
         return linktype;
     }

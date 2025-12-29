@@ -37,7 +37,7 @@ public class PutFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Pu
 
         if (!putfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("PutFunction '%d' not supported for spec %s", value, spec));
+                    String.format("PutFunction '%d' not supported for spec %s", value, spec));
         }
         return putfunction;
     }

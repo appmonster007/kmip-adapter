@@ -57,7 +57,7 @@ public class BatchErrorContinuationOptionXmlDeserializer extends KmipDataTypeXml
         BatchErrorContinuationOption batcherrorcontinuationoption = new BatchErrorContinuationOption(BatchErrorContinuationOption.fromName(description));
         if (!batcherrorcontinuationoption.isSupported()) {
             throw new NoSuchElementException(
-                String.format("BatchErrorContinuationOption '%s' not supported for spec %s", description, spec));
+                    String.format("BatchErrorContinuationOption '%s' not supported for spec %s", description, spec));
         }
 
         return batcherrorcontinuationoption;

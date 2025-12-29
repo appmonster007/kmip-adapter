@@ -57,7 +57,7 @@ public class ShreddingAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializ
         ShreddingAlgorithm shreddingalgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.fromName(description));
         if (!shreddingalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ShreddingAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("ShreddingAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return shreddingalgorithm;

@@ -57,7 +57,7 @@ public class KeyCompressionTypeXmlDeserializer extends KmipDataTypeXmlDeserializ
         KeyCompressionType keycompressiontype = new KeyCompressionType(KeyCompressionType.fromName(description));
         if (!keycompressiontype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyCompressionType '%s' not supported for spec %s", description, spec));
+                    String.format("KeyCompressionType '%s' not supported for spec %s", description, spec));
         }
 
         return keycompressiontype;

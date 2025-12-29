@@ -37,7 +37,7 @@ public class InteropFunctionTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!interopfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("InteropFunction '%d' not supported for spec %s", value, spec));
+                    String.format("InteropFunction '%d' not supported for spec %s", value, spec));
         }
         return interopfunction;
     }

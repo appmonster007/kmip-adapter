@@ -57,7 +57,7 @@ public class SplitKeyMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<S
         SplitKeyMethod splitkeymethod = new SplitKeyMethod(SplitKeyMethod.fromName(description));
         if (!splitkeymethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("SplitKeyMethod '%s' not supported for spec %s", description, spec));
+                    String.format("SplitKeyMethod '%s' not supported for spec %s", description, spec));
         }
 
         return splitkeymethod;

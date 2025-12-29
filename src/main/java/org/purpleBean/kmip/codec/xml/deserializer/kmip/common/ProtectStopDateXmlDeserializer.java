@@ -49,7 +49,7 @@ public class ProtectStopDateXmlDeserializer extends KmipDataTypeXmlDeserializer<
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(ProtectStopDate.class,
-                "Missing or non-text 'value' for ProtectStopDate");
+                    "Missing or non-text 'value' for ProtectStopDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class ProtectStopDateXmlDeserializer extends KmipDataTypeXmlDeserializer<
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProtectStopDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("ProtectStopDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

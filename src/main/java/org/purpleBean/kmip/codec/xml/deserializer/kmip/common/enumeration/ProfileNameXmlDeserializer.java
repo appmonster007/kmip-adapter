@@ -57,7 +57,7 @@ public class ProfileNameXmlDeserializer extends KmipDataTypeXmlDeserializer<Prof
         ProfileName profilename = new ProfileName(ProfileName.fromName(description));
         if (!profilename.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProfileName '%s' not supported for spec %s", description, spec));
+                    String.format("ProfileName '%s' not supported for spec %s", description, spec));
         }
 
         return profilename;

@@ -57,7 +57,7 @@ public class ValidationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<V
         ValidationType validationtype = new ValidationType(ValidationType.fromName(description));
         if (!validationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidationType '%s' not supported for spec %s", description, spec));
+                    String.format("ValidationType '%s' not supported for spec %s", description, spec));
         }
 
         return validationtype;

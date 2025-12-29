@@ -1,0 +1,27 @@
+package org.purpleBean.kmip.codec.ttlv.common;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.StorageStatusMask;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+
+@DisplayName("StorageStatusMask TTLV Serialization Tests")
+class StorageStatusMaskTtlvTest extends AbstractTtlvSerializationSuite<StorageStatusMask> {
+
+    @Override
+    protected Class<StorageStatusMask> type() {
+        return StorageStatusMask.class;
+    }
+
+    @Override
+    protected StorageStatusMask createDefault() {
+        return StorageStatusMask.builder().value(1).build();
+    }
+
+    @Override
+    protected StorageStatusMask createVariant() {
+        return StorageStatusMask.builder().value(2).build();
+    }
+}

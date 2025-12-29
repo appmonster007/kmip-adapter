@@ -57,7 +57,7 @@ public class CredentialTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<C
         CredentialType credentialtype = new CredentialType(CredentialType.fromName(description));
         if (!credentialtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CredentialType '%s' not supported for spec %s", description, spec));
+                    String.format("CredentialType '%s' not supported for spec %s", description, spec));
         }
 
         return credentialtype;

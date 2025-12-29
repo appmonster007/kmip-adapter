@@ -57,7 +57,7 @@ public class SplitKeyPolynomialXmlDeserializer extends KmipDataTypeXmlDeserializ
         SplitKeyPolynomial splitkeypolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.fromName(description));
         if (!splitkeypolynomial.isSupported()) {
             throw new NoSuchElementException(
-                String.format("SplitKeyPolynomial '%s' not supported for spec %s", description, spec));
+                    String.format("SplitKeyPolynomial '%s' not supported for spec %s", description, spec));
         }
 
         return splitkeypolynomial;

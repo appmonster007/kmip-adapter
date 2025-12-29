@@ -57,7 +57,7 @@ public class EphemeralXmlDeserializer extends KmipDataTypeXmlDeserializer<Epheme
         Ephemeral ephemeral = new Ephemeral(Ephemeral.fromName(description));
         if (!ephemeral.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Ephemeral '%s' not supported for spec %s", description, spec));
+                    String.format("Ephemeral '%s' not supported for spec %s", description, spec));
         }
 
         return ephemeral;

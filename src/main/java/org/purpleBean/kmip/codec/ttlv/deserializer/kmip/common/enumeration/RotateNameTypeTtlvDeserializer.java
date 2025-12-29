@@ -37,7 +37,7 @@ public class RotateNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!rotatenametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RotateNameType '%d' not supported for spec %s", value, spec));
+                    String.format("RotateNameType '%d' not supported for spec %s", value, spec));
         }
         return rotatenametype;
     }

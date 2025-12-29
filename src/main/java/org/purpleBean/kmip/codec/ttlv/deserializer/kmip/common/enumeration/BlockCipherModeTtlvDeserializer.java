@@ -37,7 +37,7 @@ public class BlockCipherModeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!blockciphermode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("BlockCipherMode '%d' not supported for spec %s", value, spec));
+                    String.format("BlockCipherMode '%d' not supported for spec %s", value, spec));
         }
         return blockciphermode;
     }

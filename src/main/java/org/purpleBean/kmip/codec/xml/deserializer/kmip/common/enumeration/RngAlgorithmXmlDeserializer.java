@@ -57,7 +57,7 @@ public class RngAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<Rng
         RngAlgorithm rngalgorithm = new RngAlgorithm(RngAlgorithm.fromName(description));
         if (!rngalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RngAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("RngAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return rngalgorithm;

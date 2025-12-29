@@ -57,7 +57,7 @@ public class CancellationResultXmlDeserializer extends KmipDataTypeXmlDeserializ
         CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromName(description));
         if (!cancellationresult.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CancellationResult '%s' not supported for spec %s", description, spec));
+                    String.format("CancellationResult '%s' not supported for spec %s", description, spec));
         }
 
         return cancellationresult;

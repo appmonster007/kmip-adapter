@@ -57,7 +57,7 @@ public class RevocationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeserial
         RevocationReasonCode revocationreasoncode = new RevocationReasonCode(RevocationReasonCode.fromName(description));
         if (!revocationreasoncode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RevocationReasonCode '%s' not supported for spec %s", description, spec));
+                    String.format("RevocationReasonCode '%s' not supported for spec %s", description, spec));
         }
 
         return revocationreasoncode;

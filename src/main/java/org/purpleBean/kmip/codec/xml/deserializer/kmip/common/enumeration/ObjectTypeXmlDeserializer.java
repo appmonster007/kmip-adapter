@@ -57,7 +57,7 @@ public class ObjectTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Objec
         ObjectType objecttype = new ObjectType(ObjectType.fromName(description));
         if (!objecttype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ObjectType '%s' not supported for spec %s", description, spec));
+                    String.format("ObjectType '%s' not supported for spec %s", description, spec));
         }
 
         return objecttype;

@@ -37,7 +37,7 @@ public class ProcessingStageTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!processingstage.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProcessingStage '%d' not supported for spec %s", value, spec));
+                    String.format("ProcessingStage '%d' not supported for spec %s", value, spec));
         }
         return processingstage;
     }

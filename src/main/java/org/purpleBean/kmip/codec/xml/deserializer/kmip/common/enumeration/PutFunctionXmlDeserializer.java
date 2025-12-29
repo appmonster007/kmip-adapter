@@ -57,7 +57,7 @@ public class PutFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<PutF
         PutFunction putfunction = new PutFunction(PutFunction.fromName(description));
         if (!putfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("PutFunction '%s' not supported for spec %s", description, spec));
+                    String.format("PutFunction '%s' not supported for spec %s", description, spec));
         }
 
         return putfunction;

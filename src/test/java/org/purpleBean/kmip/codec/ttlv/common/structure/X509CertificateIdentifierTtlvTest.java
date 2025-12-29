@@ -1,8 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.CertificateSerialNumber;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
@@ -15,7 +15,9 @@ class X509CertificateIdentifierTtlvTest extends AbstractTtlvSerializationSuite<X
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<X509CertificateIdentifier> type() { return X509CertificateIdentifier.class; }
+    protected Class<X509CertificateIdentifier> type() {
+        return X509CertificateIdentifier.class;
+    }
 
     @Override
     protected X509CertificateIdentifier createDefault() {

@@ -57,7 +57,7 @@ public class StateXmlDeserializer extends KmipDataTypeXmlDeserializer<State> {
         State state = new State(State.fromName(description));
         if (!state.isSupported()) {
             throw new NoSuchElementException(
-                String.format("State '%s' not supported for spec %s", description, spec));
+                    String.format("State '%s' not supported for spec %s", description, spec));
         }
 
         return state;

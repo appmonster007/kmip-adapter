@@ -37,7 +37,7 @@ public class KeyCompressionTypeTtlvDeserializer extends KmipDataTypeTtlvDeserial
 
         if (!keycompressiontype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyCompressionType '%d' not supported for spec %s", value, spec));
+                    String.format("KeyCompressionType '%d' not supported for spec %s", value, spec));
         }
         return keycompressiontype;
     }

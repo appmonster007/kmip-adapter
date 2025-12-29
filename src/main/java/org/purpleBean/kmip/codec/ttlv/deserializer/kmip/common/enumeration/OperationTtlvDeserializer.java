@@ -37,7 +37,7 @@ public class OperationTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Oper
 
         if (!operation.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Operation '%d' not supported for spec %s", value, spec));
+                    String.format("Operation '%d' not supported for spec %s", value, spec));
         }
         return operation;
     }

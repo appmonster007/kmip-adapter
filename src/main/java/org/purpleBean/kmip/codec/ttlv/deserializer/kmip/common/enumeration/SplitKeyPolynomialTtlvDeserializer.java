@@ -37,7 +37,7 @@ public class SplitKeyPolynomialTtlvDeserializer extends KmipDataTypeTtlvDeserial
 
         if (!splitkeypolynomial.isSupported()) {
             throw new NoSuchElementException(
-                String.format("SplitKeyPolynomial '%d' not supported for spec %s", value, spec));
+                    String.format("SplitKeyPolynomial '%d' not supported for spec %s", value, spec));
         }
         return splitkeypolynomial;
     }

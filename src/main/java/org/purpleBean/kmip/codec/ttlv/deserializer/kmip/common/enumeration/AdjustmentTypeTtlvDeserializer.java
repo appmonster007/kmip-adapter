@@ -37,7 +37,7 @@ public class AdjustmentTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!adjustmenttype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AdjustmentType '%d' not supported for spec %s", value, spec));
+                    String.format("AdjustmentType '%d' not supported for spec %s", value, spec));
         }
         return adjustmenttype;
     }

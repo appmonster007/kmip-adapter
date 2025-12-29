@@ -37,7 +37,7 @@ public class ProtectionLevelTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!protectionlevel.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProtectionLevel '%d' not supported for spec %s", value, spec));
+                    String.format("ProtectionLevel '%d' not supported for spec %s", value, spec));
         }
         return protectionlevel;
     }

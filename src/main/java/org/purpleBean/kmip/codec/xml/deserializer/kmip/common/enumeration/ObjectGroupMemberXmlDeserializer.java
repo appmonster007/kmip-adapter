@@ -57,7 +57,7 @@ public class ObjectGroupMemberXmlDeserializer extends KmipDataTypeXmlDeserialize
         ObjectGroupMember objectgroupmember = new ObjectGroupMember(ObjectGroupMember.fromName(description));
         if (!objectgroupmember.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ObjectGroupMember '%s' not supported for spec %s", description, spec));
+                    String.format("ObjectGroupMember '%s' not supported for spec %s", description, spec));
         }
 
         return objectgroupmember;

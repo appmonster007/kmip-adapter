@@ -57,7 +57,7 @@ public class Fips186VariationXmlDeserializer extends KmipDataTypeXmlDeserializer
         Fips186Variation fips186variation = new Fips186Variation(Fips186Variation.fromName(description));
         if (!fips186variation.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Fips186Variation '%s' not supported for spec %s", description, spec));
+                    String.format("Fips186Variation '%s' not supported for spec %s", description, spec));
         }
 
         return fips186variation;

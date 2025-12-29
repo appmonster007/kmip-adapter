@@ -5,15 +5,14 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.CryptographicUsageMask;
 
 import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.Map;
 
 public class CryptographicUsageMaskXmlDeserializer extends KmipDataTypeXmlDeserializer<CryptographicUsageMask> {
     private final KmipTag kmipTag = CryptographicUsageMask.kmipTag;
@@ -30,7 +29,7 @@ public class CryptographicUsageMaskXmlDeserializer extends KmipDataTypeXmlDeseri
         }
 
         if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(CryptographicUsageMask.class, "Invalid Tag for CryptographicUsageMask");
             return null;
         }
@@ -45,7 +44,7 @@ public class CryptographicUsageMaskXmlDeserializer extends KmipDataTypeXmlDeseri
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(CryptographicUsageMask.class,
-                "Missing or non-text 'value' for CryptographicUsageMask");
+                    "Missing or non-text 'value' for CryptographicUsageMask");
             return null;
         }
 

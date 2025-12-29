@@ -49,7 +49,7 @@ public class OriginalCreationDateXmlDeserializer extends KmipDataTypeXmlDeserial
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(OriginalCreationDate.class,
-                "Missing or non-text 'value' for OriginalCreationDate");
+                    "Missing or non-text 'value' for OriginalCreationDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class OriginalCreationDateXmlDeserializer extends KmipDataTypeXmlDeserial
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("OriginalCreationDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("OriginalCreationDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

@@ -37,7 +37,7 @@ public class ValidityIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeseriali
 
         if (!validityindicator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidityIndicator '%d' not supported for spec %s", value, spec));
+                    String.format("ValidityIndicator '%d' not supported for spec %s", value, spec));
         }
         return validityindicator;
     }

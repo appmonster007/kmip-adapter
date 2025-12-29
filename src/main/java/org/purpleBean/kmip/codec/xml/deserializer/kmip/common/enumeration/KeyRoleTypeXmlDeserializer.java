@@ -57,7 +57,7 @@ public class KeyRoleTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyR
         KeyRoleType keyroletype = new KeyRoleType(KeyRoleType.fromName(description));
         if (!keyroletype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyRoleType '%s' not supported for spec %s", description, spec));
+                    String.format("KeyRoleType '%s' not supported for spec %s", description, spec));
         }
 
         return keyroletype;

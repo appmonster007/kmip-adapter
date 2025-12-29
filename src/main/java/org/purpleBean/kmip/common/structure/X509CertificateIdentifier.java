@@ -1,14 +1,19 @@
 package org.purpleBean.kmip.common.structure;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.CertificateSerialNumber;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
+import org.purpleBean.kmip.common.enumeration.State;
 
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**

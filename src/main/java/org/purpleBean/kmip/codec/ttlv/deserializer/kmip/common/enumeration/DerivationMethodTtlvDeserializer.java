@@ -37,7 +37,7 @@ public class DerivationMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializ
 
         if (!derivationmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DerivationMethod '%d' not supported for spec %s", value, spec));
+                    String.format("DerivationMethod '%d' not supported for spec %s", value, spec));
         }
         return derivationmethod;
     }

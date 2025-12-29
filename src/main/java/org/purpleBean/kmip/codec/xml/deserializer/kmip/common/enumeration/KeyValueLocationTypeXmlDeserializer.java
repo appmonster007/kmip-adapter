@@ -57,7 +57,7 @@ public class KeyValueLocationTypeXmlDeserializer extends KmipDataTypeXmlDeserial
         KeyValueLocationType keyvaluelocationtype = new KeyValueLocationType(KeyValueLocationType.fromName(description));
         if (!keyvaluelocationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyValueLocationType '%s' not supported for spec %s", description, spec));
+                    String.format("KeyValueLocationType '%s' not supported for spec %s", description, spec));
         }
 
         return keyvaluelocationtype;

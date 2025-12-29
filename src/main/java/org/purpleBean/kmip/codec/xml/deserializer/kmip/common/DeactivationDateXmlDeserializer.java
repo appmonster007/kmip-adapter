@@ -49,7 +49,7 @@ public class DeactivationDateXmlDeserializer extends KmipDataTypeXmlDeserializer
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(DeactivationDate.class,
-                "Missing or non-text 'value' for DeactivationDate");
+                    "Missing or non-text 'value' for DeactivationDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class DeactivationDateXmlDeserializer extends KmipDataTypeXmlDeserializer
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DeactivationDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("DeactivationDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

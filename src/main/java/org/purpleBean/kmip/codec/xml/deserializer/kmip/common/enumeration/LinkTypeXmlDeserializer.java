@@ -57,7 +57,7 @@ public class LinkTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<LinkTyp
         LinkType linktype = new LinkType(LinkType.fromName(description));
         if (!linktype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("LinkType '%s' not supported for spec %s", description, spec));
+                    String.format("LinkType '%s' not supported for spec %s", description, spec));
         }
 
         return linktype;

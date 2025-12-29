@@ -37,7 +37,7 @@ public class CredentialTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!credentialtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CredentialType '%d' not supported for spec %s", value, spec));
+                    String.format("CredentialType '%d' not supported for spec %s", value, spec));
         }
         return credentialtype;
     }

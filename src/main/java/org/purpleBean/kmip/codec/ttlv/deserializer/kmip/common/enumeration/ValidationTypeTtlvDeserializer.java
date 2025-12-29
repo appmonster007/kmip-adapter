@@ -37,7 +37,7 @@ public class ValidationTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!validationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ValidationType '%d' not supported for spec %s", value, spec));
+                    String.format("ValidationType '%d' not supported for spec %s", value, spec));
         }
         return validationtype;
     }

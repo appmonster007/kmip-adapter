@@ -57,7 +57,7 @@ public class DeactivationReasonCodeXmlDeserializer extends KmipDataTypeXmlDeseri
         DeactivationReasonCode deactivationreasoncode = new DeactivationReasonCode(DeactivationReasonCode.fromName(description));
         if (!deactivationreasoncode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DeactivationReasonCode '%s' not supported for spec %s", description, spec));
+                    String.format("DeactivationReasonCode '%s' not supported for spec %s", description, spec));
         }
 
         return deactivationreasoncode;

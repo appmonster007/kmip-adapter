@@ -57,7 +57,7 @@ public class WrappingMethodXmlDeserializer extends KmipDataTypeXmlDeserializer<W
         WrappingMethod wrappingmethod = new WrappingMethod(WrappingMethod.fromName(description));
         if (!wrappingmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("WrappingMethod '%s' not supported for spec %s", description, spec));
+                    String.format("WrappingMethod '%s' not supported for spec %s", description, spec));
         }
 
         return wrappingmethod;

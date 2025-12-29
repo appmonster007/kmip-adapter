@@ -37,7 +37,7 @@ public class PaddingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!paddingmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("PaddingMethod '%d' not supported for spec %s", value, spec));
+                    String.format("PaddingMethod '%d' not supported for spec %s", value, spec));
         }
         return paddingmethod;
     }

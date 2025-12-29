@@ -25,8 +25,8 @@ public class InitialDateTtlvSerializer extends KmipDataTypeTtlvSerializer<Initia
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s", 
-                value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            value.getKmipTag().getDescription(), spec)
             );
         }
 

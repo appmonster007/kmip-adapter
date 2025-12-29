@@ -57,7 +57,7 @@ public class KeyFormatTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<Ke
         KeyFormatType keyformattype = new KeyFormatType(KeyFormatType.fromName(description));
         if (!keyformattype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyFormatType '%s' not supported for spec %s", description, spec));
+                    String.format("KeyFormatType '%s' not supported for spec %s", description, spec));
         }
 
         return keyformattype;

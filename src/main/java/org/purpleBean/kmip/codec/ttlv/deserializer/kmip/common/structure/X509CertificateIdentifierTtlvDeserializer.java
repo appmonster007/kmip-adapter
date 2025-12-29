@@ -7,9 +7,8 @@ import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.common.CertificateSerialNumber;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIdentifier;
 
 import java.io.IOException;
@@ -46,18 +45,17 @@ public class X509CertificateIdentifierTtlvDeserializer extends KmipDataTypeTtlvD
     }
 
     private void setValue(
-        X509CertificateIdentifier.X509CertificateIdentifierBuilder builder,
-        KmipTag.Value nodeTag,
-        TtlvObject ttlvObject,
-        TtlvMapper mapper
+            X509CertificateIdentifier.X509CertificateIdentifierBuilder builder,
+            KmipTag.Value nodeTag,
+            TtlvObject ttlvObject,
+            TtlvMapper mapper
     ) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME -> 
-                builder.issuerDistinguishedName(mapper.readValue(ttlvObject.toByteBuffer(), IssuerDistinguishedName.class));
-            case KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER -> 
-                builder.certificateSerialNumber(mapper.readValue(ttlvObject.toByteBuffer(), CertificateSerialNumber.class));
-            default -> 
-                throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+            case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME ->
+                    builder.issuerDistinguishedName(mapper.readValue(ttlvObject.toByteBuffer(), IssuerDistinguishedName.class));
+            case KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER ->
+                    builder.certificateSerialNumber(mapper.readValue(ttlvObject.toByteBuffer(), CertificateSerialNumber.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

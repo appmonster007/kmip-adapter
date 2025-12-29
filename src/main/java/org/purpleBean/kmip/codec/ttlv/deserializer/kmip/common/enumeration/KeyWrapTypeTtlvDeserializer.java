@@ -37,7 +37,7 @@ public class KeyWrapTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ke
 
         if (!keywraptype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyWrapType '%d' not supported for spec %s", value, spec));
+                    String.format("KeyWrapType '%d' not supported for spec %s", value, spec));
         }
         return keywraptype;
     }

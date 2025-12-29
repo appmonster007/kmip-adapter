@@ -5,15 +5,14 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.OperationPolicyName;
 
 import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.Map;
 
 public class OperationPolicyNameXmlDeserializer extends KmipDataTypeXmlDeserializer<OperationPolicyName> {
     private final KmipTag kmipTag = OperationPolicyName.kmipTag;
@@ -30,7 +29,7 @@ public class OperationPolicyNameXmlDeserializer extends KmipDataTypeXmlDeseriali
         }
 
         if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(OperationPolicyName.class, "Invalid Tag for OperationPolicyName");
             return null;
         }
@@ -45,7 +44,7 @@ public class OperationPolicyNameXmlDeserializer extends KmipDataTypeXmlDeseriali
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(OperationPolicyName.class,
-                "Missing or non-text 'value' for OperationPolicyName");
+                    "Missing or non-text 'value' for OperationPolicyName");
             return null;
         }
 

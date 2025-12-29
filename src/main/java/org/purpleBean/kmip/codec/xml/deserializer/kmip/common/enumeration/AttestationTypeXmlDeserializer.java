@@ -57,7 +57,7 @@ public class AttestationTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         AttestationType attestationtype = new AttestationType(AttestationType.fromName(description));
         if (!attestationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AttestationType '%s' not supported for spec %s", description, spec));
+                    String.format("AttestationType '%s' not supported for spec %s", description, spec));
         }
 
         return attestationtype;

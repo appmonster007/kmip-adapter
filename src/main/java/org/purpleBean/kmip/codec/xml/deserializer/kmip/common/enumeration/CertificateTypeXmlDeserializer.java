@@ -57,7 +57,7 @@ public class CertificateTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         CertificateType certificatetype = new CertificateType(CertificateType.fromName(description));
         if (!certificatetype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CertificateType '%s' not supported for spec %s", description, spec));
+                    String.format("CertificateType '%s' not supported for spec %s", description, spec));
         }
 
         return certificatetype;

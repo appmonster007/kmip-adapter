@@ -37,7 +37,7 @@ public class AlternativeNameTypeTtlvDeserializer extends KmipDataTypeTtlvDeseria
 
         if (!alternativenametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AlternativeNameType '%d' not supported for spec %s", value, spec));
+                    String.format("AlternativeNameType '%d' not supported for spec %s", value, spec));
         }
         return alternativenametype;
     }

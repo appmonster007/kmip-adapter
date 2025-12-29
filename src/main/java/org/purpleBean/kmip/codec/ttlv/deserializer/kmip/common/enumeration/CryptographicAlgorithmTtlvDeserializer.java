@@ -37,7 +37,7 @@ public class CryptographicAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDese
 
         if (!cryptographicalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CryptographicAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("CryptographicAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return cryptographicalgorithm;
     }

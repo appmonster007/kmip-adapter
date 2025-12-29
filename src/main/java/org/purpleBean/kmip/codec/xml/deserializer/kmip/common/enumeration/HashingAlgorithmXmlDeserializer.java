@@ -57,7 +57,7 @@ public class HashingAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer
         HashingAlgorithm hashingalgorithm = new HashingAlgorithm(HashingAlgorithm.fromName(description));
         if (!hashingalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("HashingAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("HashingAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return hashingalgorithm;

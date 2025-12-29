@@ -37,7 +37,7 @@ public class DestroyActionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!destroyaction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DestroyAction '%d' not supported for spec %s", value, spec));
+                    String.format("DestroyAction '%d' not supported for spec %s", value, spec));
         }
         return destroyaction;
     }

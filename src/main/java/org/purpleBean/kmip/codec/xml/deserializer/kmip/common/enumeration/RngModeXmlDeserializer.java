@@ -57,7 +57,7 @@ public class RngModeXmlDeserializer extends KmipDataTypeXmlDeserializer<RngMode>
         RngMode rngmode = new RngMode(RngMode.fromName(description));
         if (!rngmode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RngMode '%s' not supported for spec %s", description, spec));
+                    String.format("RngMode '%s' not supported for spec %s", description, spec));
         }
 
         return rngmode;

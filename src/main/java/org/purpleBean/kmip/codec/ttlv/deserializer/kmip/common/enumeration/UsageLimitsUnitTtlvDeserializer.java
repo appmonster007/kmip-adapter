@@ -37,7 +37,7 @@ public class UsageLimitsUnitTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!usagelimitsunit.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UsageLimitsUnit '%d' not supported for spec %s", value, spec));
+                    String.format("UsageLimitsUnit '%d' not supported for spec %s", value, spec));
         }
         return usagelimitsunit;
     }

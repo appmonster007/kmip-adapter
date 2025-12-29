@@ -37,7 +37,7 @@ public class TicketTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Tic
 
         if (!tickettype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("TicketType '%d' not supported for spec %s", value, spec));
+                    String.format("TicketType '%d' not supported for spec %s", value, spec));
         }
         return tickettype;
     }

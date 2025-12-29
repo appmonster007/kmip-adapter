@@ -37,7 +37,7 @@ public class MaskGeneratorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!maskgenerator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("MaskGenerator '%d' not supported for spec %s", value, spec));
+                    String.format("MaskGenerator '%d' not supported for spec %s", value, spec));
         }
         return maskgenerator;
     }

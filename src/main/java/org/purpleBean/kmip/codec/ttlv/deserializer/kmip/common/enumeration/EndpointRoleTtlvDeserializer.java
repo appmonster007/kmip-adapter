@@ -37,7 +37,7 @@ public class EndpointRoleTtlvDeserializer extends KmipDataTypeTtlvDeserializer<E
 
         if (!endpointrole.isSupported()) {
             throw new NoSuchElementException(
-                String.format("EndpointRole '%d' not supported for spec %s", value, spec));
+                    String.format("EndpointRole '%d' not supported for spec %s", value, spec));
         }
         return endpointrole;
     }

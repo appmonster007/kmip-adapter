@@ -57,7 +57,7 @@ public class BlockCipherModeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         BlockCipherMode blockciphermode = new BlockCipherMode(BlockCipherMode.fromName(description));
         if (!blockciphermode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("BlockCipherMode '%s' not supported for spec %s", description, spec));
+                    String.format("BlockCipherMode '%s' not supported for spec %s", description, spec));
         }
 
         return blockciphermode;

@@ -37,7 +37,7 @@ public class NistKeyTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ni
 
         if (!nistkeytype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("NistKeyType '%d' not supported for spec %s", value, spec));
+                    String.format("NistKeyType '%d' not supported for spec %s", value, spec));
         }
         return nistkeytype;
     }

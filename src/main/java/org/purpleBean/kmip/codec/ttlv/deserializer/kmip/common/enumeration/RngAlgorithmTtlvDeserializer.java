@@ -37,7 +37,7 @@ public class RngAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<R
 
         if (!rngalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RngAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("RngAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return rngalgorithm;
     }

@@ -5,15 +5,14 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.ContactInformation;
 
 import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.Map;
 
 public class ContactInformationXmlDeserializer extends KmipDataTypeXmlDeserializer<ContactInformation> {
     private final KmipTag kmipTag = ContactInformation.kmipTag;
@@ -30,7 +29,7 @@ public class ContactInformationXmlDeserializer extends KmipDataTypeXmlDeserializ
         }
 
         if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(ContactInformation.class, "Invalid Tag for ContactInformation");
             return null;
         }
@@ -45,7 +44,7 @@ public class ContactInformationXmlDeserializer extends KmipDataTypeXmlDeserializ
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(ContactInformation.class,
-                "Missing or non-text 'value' for ContactInformation");
+                    "Missing or non-text 'value' for ContactInformation");
             return null;
         }
 

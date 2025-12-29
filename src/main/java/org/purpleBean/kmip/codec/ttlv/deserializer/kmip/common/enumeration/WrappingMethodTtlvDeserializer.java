@@ -37,7 +37,7 @@ public class WrappingMethodTtlvDeserializer extends KmipDataTypeTtlvDeserializer
 
         if (!wrappingmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("WrappingMethod '%d' not supported for spec %s", value, spec));
+                    String.format("WrappingMethod '%d' not supported for spec %s", value, spec));
         }
         return wrappingmethod;
     }

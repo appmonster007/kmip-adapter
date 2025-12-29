@@ -57,7 +57,7 @@ public class DrbgAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<Dr
         DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromName(description));
         if (!drbgalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DrbgAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("DrbgAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return drbgalgorithm;

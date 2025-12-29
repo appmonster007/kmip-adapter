@@ -22,7 +22,7 @@ public class ActivationDateJsonSerializer extends KmipDataTypeJsonSerializer<Act
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
             );
         }
 

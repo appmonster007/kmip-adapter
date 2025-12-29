@@ -37,7 +37,7 @@ public class DigitalSignatureAlgorithmTtlvDeserializer extends KmipDataTypeTtlvD
 
         if (!digitalsignaturealgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DigitalSignatureAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("DigitalSignatureAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return digitalsignaturealgorithm;
     }

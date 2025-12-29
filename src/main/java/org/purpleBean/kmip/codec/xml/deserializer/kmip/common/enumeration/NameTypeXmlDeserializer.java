@@ -57,7 +57,7 @@ public class NameTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<NameTyp
         NameType nametype = new NameType(NameType.fromName(description));
         if (!nametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("NameType '%s' not supported for spec %s", description, spec));
+                    String.format("NameType '%s' not supported for spec %s", description, spec));
         }
 
         return nametype;

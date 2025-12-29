@@ -57,7 +57,7 @@ public class ProcessingStageXmlDeserializer extends KmipDataTypeXmlDeserializer<
         ProcessingStage processingstage = new ProcessingStage(ProcessingStage.fromName(description));
         if (!processingstage.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProcessingStage '%s' not supported for spec %s", description, spec));
+                    String.format("ProcessingStage '%s' not supported for spec %s", description, spec));
         }
 
         return processingstage;

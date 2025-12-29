@@ -57,7 +57,7 @@ public class DigitalSignatureAlgorithmXmlDeserializer extends KmipDataTypeXmlDes
         DigitalSignatureAlgorithm digitalsignaturealgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.fromName(description));
         if (!digitalsignaturealgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("DigitalSignatureAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("DigitalSignatureAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return digitalsignaturealgorithm;

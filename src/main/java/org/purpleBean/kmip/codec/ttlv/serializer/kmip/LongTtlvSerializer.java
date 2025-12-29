@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class LongTtlvSerializer extends TtlvSerializer<Long> {
-    private final EncodingType type = EncodingType.INTEGER;
+    private final EncodingType type = EncodingType.LONG_INTEGER;
 
     @Override
     public ByteBuffer serialize(Long value, TtlvMapper mapper) throws IOException {

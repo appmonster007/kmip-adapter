@@ -37,7 +37,7 @@ public class OtpAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<O
 
         if (!otpalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("OtpAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("OtpAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return otpalgorithm;
     }

@@ -37,7 +37,7 @@ public class RngModeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RngMod
 
         if (!rngmode.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RngMode '%d' not supported for spec %s", value, spec));
+                    String.format("RngMode '%d' not supported for spec %s", value, spec));
         }
         return rngmode;
     }

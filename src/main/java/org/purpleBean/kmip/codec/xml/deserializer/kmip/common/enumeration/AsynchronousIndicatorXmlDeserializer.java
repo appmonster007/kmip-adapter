@@ -57,7 +57,7 @@ public class AsynchronousIndicatorXmlDeserializer extends KmipDataTypeXmlDeseria
         AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromName(description));
         if (!asynchronousindicator.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AsynchronousIndicator '%s' not supported for spec %s", description, spec));
+                    String.format("AsynchronousIndicator '%s' not supported for spec %s", description, spec));
         }
 
         return asynchronousindicator;

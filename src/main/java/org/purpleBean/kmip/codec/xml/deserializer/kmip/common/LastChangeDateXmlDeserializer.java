@@ -5,15 +5,15 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.LastChangeDate;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Map;
 
 public class LastChangeDateXmlDeserializer extends KmipDataTypeXmlDeserializer<LastChangeDate> {
     private final KmipTag kmipTag = LastChangeDate.kmipTag;
@@ -30,7 +30,7 @@ public class LastChangeDateXmlDeserializer extends KmipDataTypeXmlDeserializer<L
         }
 
         if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch(LastChangeDate.class, "Invalid Tag for LastChangeDate");
             return null;
         }
@@ -45,7 +45,7 @@ public class LastChangeDateXmlDeserializer extends KmipDataTypeXmlDeserializer<L
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(LastChangeDate.class,
-                "Missing or non-text 'value' for LastChangeDate");
+                    "Missing or non-text 'value' for LastChangeDate");
             return null;
         }
 

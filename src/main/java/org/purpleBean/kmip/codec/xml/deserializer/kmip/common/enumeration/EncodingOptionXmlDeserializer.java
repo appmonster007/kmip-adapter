@@ -57,7 +57,7 @@ public class EncodingOptionXmlDeserializer extends KmipDataTypeXmlDeserializer<E
         EncodingOption encodingoption = new EncodingOption(EncodingOption.fromName(description));
         if (!encodingoption.isSupported()) {
             throw new NoSuchElementException(
-                String.format("EncodingOption '%s' not supported for spec %s", description, spec));
+                    String.format("EncodingOption '%s' not supported for spec %s", description, spec));
         }
 
         return encodingoption;

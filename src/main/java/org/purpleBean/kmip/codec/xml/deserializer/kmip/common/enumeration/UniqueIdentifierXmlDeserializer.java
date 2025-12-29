@@ -57,7 +57,7 @@ public class UniqueIdentifierXmlDeserializer extends KmipDataTypeXmlDeserializer
         UniqueIdentifier uniqueidentifier = new UniqueIdentifier(UniqueIdentifier.fromName(description));
         if (!uniqueidentifier.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UniqueIdentifier '%s' not supported for spec %s", description, spec));
+                    String.format("UniqueIdentifier '%s' not supported for spec %s", description, spec));
         }
 
         return uniqueidentifier;

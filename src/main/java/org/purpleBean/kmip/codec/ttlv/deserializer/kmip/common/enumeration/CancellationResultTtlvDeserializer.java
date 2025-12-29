@@ -37,7 +37,7 @@ public class CancellationResultTtlvDeserializer extends KmipDataTypeTtlvDeserial
 
         if (!cancellationresult.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CancellationResult '%d' not supported for spec %s", value, spec));
+                    String.format("CancellationResult '%d' not supported for spec %s", value, spec));
         }
         return cancellationresult;
     }

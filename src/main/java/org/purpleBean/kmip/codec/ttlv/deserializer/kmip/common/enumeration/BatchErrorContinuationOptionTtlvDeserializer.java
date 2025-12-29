@@ -37,7 +37,7 @@ public class BatchErrorContinuationOptionTtlvDeserializer extends KmipDataTypeTt
 
         if (!batcherrorcontinuationoption.isSupported()) {
             throw new NoSuchElementException(
-                String.format("BatchErrorContinuationOption '%d' not supported for spec %s", value, spec));
+                    String.format("BatchErrorContinuationOption '%d' not supported for spec %s", value, spec));
         }
         return batcherrorcontinuationoption;
     }

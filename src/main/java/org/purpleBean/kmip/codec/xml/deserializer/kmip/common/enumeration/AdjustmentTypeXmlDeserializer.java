@@ -57,7 +57,7 @@ public class AdjustmentTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<A
         AdjustmentType adjustmenttype = new AdjustmentType(AdjustmentType.fromName(description));
         if (!adjustmenttype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AdjustmentType '%s' not supported for spec %s", description, spec));
+                    String.format("AdjustmentType '%s' not supported for spec %s", description, spec));
         }
 
         return adjustmenttype;

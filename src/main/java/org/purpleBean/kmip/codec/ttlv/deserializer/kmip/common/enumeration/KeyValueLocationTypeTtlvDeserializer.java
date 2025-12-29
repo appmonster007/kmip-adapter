@@ -37,7 +37,7 @@ public class KeyValueLocationTypeTtlvDeserializer extends KmipDataTypeTtlvDeseri
 
         if (!keyvaluelocationtype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyValueLocationType '%d' not supported for spec %s", value, spec));
+                    String.format("KeyValueLocationType '%d' not supported for spec %s", value, spec));
         }
         return keyvaluelocationtype;
     }

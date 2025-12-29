@@ -37,7 +37,7 @@ public class ShreddingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserial
 
         if (!shreddingalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ShreddingAlgorithm '%d' not supported for spec %s", value, spec));
+                    String.format("ShreddingAlgorithm '%d' not supported for spec %s", value, spec));
         }
         return shreddingalgorithm;
     }

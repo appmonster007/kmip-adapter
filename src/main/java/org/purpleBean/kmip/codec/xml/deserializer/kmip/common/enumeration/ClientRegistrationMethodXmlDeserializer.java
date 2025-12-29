@@ -57,7 +57,7 @@ public class ClientRegistrationMethodXmlDeserializer extends KmipDataTypeXmlDese
         ClientRegistrationMethod clientregistrationmethod = new ClientRegistrationMethod(ClientRegistrationMethod.fromName(description));
         if (!clientregistrationmethod.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ClientRegistrationMethod '%s' not supported for spec %s", description, spec));
+                    String.format("ClientRegistrationMethod '%s' not supported for spec %s", description, spec));
         }
 
         return clientregistrationmethod;

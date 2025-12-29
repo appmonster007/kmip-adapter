@@ -57,7 +57,7 @@ public class RecommendedCurveXmlDeserializer extends KmipDataTypeXmlDeserializer
         RecommendedCurve recommendedcurve = new RecommendedCurve(RecommendedCurve.fromName(description));
         if (!recommendedcurve.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RecommendedCurve '%s' not supported for spec %s", description, spec));
+                    String.format("RecommendedCurve '%s' not supported for spec %s", description, spec));
         }
 
         return recommendedcurve;

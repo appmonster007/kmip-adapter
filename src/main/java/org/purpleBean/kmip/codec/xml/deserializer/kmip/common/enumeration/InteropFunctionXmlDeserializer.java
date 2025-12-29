@@ -57,7 +57,7 @@ public class InteropFunctionXmlDeserializer extends KmipDataTypeXmlDeserializer<
         InteropFunction interopfunction = new InteropFunction(InteropFunction.fromName(description));
         if (!interopfunction.isSupported()) {
             throw new NoSuchElementException(
-                String.format("InteropFunction '%s' not supported for spec %s", description, spec));
+                    String.format("InteropFunction '%s' not supported for spec %s", description, spec));
         }
 
         return interopfunction;

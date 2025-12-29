@@ -37,7 +37,7 @@ public class ObjectGroupMemberTtlvDeserializer extends KmipDataTypeTtlvDeseriali
 
         if (!objectgroupmember.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ObjectGroupMember '%d' not supported for spec %s", value, spec));
+                    String.format("ObjectGroupMember '%d' not supported for spec %s", value, spec));
         }
         return objectgroupmember;
     }

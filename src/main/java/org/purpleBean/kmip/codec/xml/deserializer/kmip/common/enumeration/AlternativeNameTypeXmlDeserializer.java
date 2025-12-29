@@ -57,7 +57,7 @@ public class AlternativeNameTypeXmlDeserializer extends KmipDataTypeXmlDeseriali
         AlternativeNameType alternativenametype = new AlternativeNameType(AlternativeNameType.fromName(description));
         if (!alternativenametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("AlternativeNameType '%s' not supported for spec %s", description, spec));
+                    String.format("AlternativeNameType '%s' not supported for spec %s", description, spec));
         }
 
         return alternativenametype;

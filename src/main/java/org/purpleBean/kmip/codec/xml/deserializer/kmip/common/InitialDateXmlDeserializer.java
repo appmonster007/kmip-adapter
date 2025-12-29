@@ -49,7 +49,7 @@ public class InitialDateXmlDeserializer extends KmipDataTypeXmlDeserializer<Init
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(InitialDate.class,
-                "Missing or non-text 'value' for InitialDate");
+                    "Missing or non-text 'value' for InitialDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class InitialDateXmlDeserializer extends KmipDataTypeXmlDeserializer<Init
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("InitialDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("InitialDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

@@ -57,7 +57,7 @@ public class KeyWrapTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyW
         KeyWrapType keywraptype = new KeyWrapType(KeyWrapType.fromName(description));
         if (!keywraptype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyWrapType '%s' not supported for spec %s", description, spec));
+                    String.format("KeyWrapType '%s' not supported for spec %s", description, spec));
         }
 
         return keywraptype;

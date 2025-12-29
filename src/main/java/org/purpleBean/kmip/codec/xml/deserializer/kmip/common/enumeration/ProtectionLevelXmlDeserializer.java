@@ -57,7 +57,7 @@ public class ProtectionLevelXmlDeserializer extends KmipDataTypeXmlDeserializer<
         ProtectionLevel protectionlevel = new ProtectionLevel(ProtectionLevel.fromName(description));
         if (!protectionlevel.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ProtectionLevel '%s' not supported for spec %s", description, spec));
+                    String.format("ProtectionLevel '%s' not supported for spec %s", description, spec));
         }
 
         return protectionlevel;

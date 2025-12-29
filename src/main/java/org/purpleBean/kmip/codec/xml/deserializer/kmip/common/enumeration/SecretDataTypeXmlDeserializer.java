@@ -57,7 +57,7 @@ public class SecretDataTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<S
         SecretDataType secretdatatype = new SecretDataType(SecretDataType.fromName(description));
         if (!secretdatatype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("SecretDataType '%s' not supported for spec %s", description, spec));
+                    String.format("SecretDataType '%s' not supported for spec %s", description, spec));
         }
 
         return secretdatatype;

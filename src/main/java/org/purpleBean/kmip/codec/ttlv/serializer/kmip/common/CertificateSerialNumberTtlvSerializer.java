@@ -1,6 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common;
 
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
@@ -23,8 +24,8 @@ public class CertificateSerialNumberTtlvSerializer extends KmipDataTypeTtlvSeria
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s",
-                        value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s",
+                            value.getKmipTag().getDescription(), spec)
             );
         }
 

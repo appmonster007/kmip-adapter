@@ -3,10 +3,13 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.common.CertificateSerialNumber;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIdentifier;
 
 import java.io.IOException;
@@ -96,19 +99,18 @@ public class X509CertificateIdentifierJsonDeserializer extends KmipDataTypeJsonD
      * @throws IOException if there is an error deserializing the value
      */
     private void setValue(
-        X509CertificateIdentifier.X509CertificateIdentifierBuilder builder,
-        KmipTag.Value nodeTag,
-        JsonNode node,
-        JsonParser p,
-        DeserializationContext ctxt
+            X509CertificateIdentifier.X509CertificateIdentifierBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonNode node,
+            JsonParser p,
+            DeserializationContext ctxt
     ) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME -> 
-                builder.issuerDistinguishedName(p.getCodec().treeToValue(node, IssuerDistinguishedName.class));
-            case KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER -> 
-                builder.certificateSerialNumber(p.getCodec().treeToValue(node, CertificateSerialNumber.class));
-            default -> 
-                throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+            case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME ->
+                    builder.issuerDistinguishedName(p.getCodec().treeToValue(node, IssuerDistinguishedName.class));
+            case KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER ->
+                    builder.certificateSerialNumber(p.getCodec().treeToValue(node, CertificateSerialNumber.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

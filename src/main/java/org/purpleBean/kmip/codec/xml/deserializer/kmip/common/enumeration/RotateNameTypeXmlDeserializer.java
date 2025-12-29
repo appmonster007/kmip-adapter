@@ -57,7 +57,7 @@ public class RotateNameTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<R
         RotateNameType rotatenametype = new RotateNameType(RotateNameType.fromName(description));
         if (!rotatenametype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("RotateNameType '%s' not supported for spec %s", description, spec));
+                    String.format("RotateNameType '%s' not supported for spec %s", description, spec));
         }
 
         return rotatenametype;

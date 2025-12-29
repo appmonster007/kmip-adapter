@@ -49,7 +49,7 @@ public class CompromiseDateXmlDeserializer extends KmipDataTypeXmlDeserializer<C
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(CompromiseDate.class,
-                "Missing or non-text 'value' for CompromiseDate");
+                    "Missing or non-text 'value' for CompromiseDate");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class CompromiseDateXmlDeserializer extends KmipDataTypeXmlDeserializer<C
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CompromiseDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
+                    String.format("CompromiseDate '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
         }
         return attribute;

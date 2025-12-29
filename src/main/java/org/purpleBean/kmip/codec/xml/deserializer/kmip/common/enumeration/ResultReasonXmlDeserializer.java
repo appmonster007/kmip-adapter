@@ -57,7 +57,7 @@ public class ResultReasonXmlDeserializer extends KmipDataTypeXmlDeserializer<Res
         ResultReason resultreason = new ResultReason(ResultReason.fromName(description));
         if (!resultreason.isSupported()) {
             throw new NoSuchElementException(
-                String.format("ResultReason '%s' not supported for spec %s", description, spec));
+                    String.format("ResultReason '%s' not supported for spec %s", description, spec));
         }
 
         return resultreason;

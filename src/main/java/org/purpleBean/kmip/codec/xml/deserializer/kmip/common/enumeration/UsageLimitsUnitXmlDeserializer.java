@@ -57,7 +57,7 @@ public class UsageLimitsUnitXmlDeserializer extends KmipDataTypeXmlDeserializer<
         UsageLimitsUnit usagelimitsunit = new UsageLimitsUnit(UsageLimitsUnit.fromName(description));
         if (!usagelimitsunit.isSupported()) {
             throw new NoSuchElementException(
-                String.format("UsageLimitsUnit '%s' not supported for spec %s", description, spec));
+                    String.format("UsageLimitsUnit '%s' not supported for spec %s", description, spec));
         }
 
         return usagelimitsunit;

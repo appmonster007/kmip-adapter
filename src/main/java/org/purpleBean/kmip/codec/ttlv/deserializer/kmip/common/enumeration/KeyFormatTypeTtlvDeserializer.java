@@ -37,7 +37,7 @@ public class KeyFormatTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
 
         if (!keyformattype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("KeyFormatType '%d' not supported for spec %s", value, spec));
+                    String.format("KeyFormatType '%d' not supported for spec %s", value, spec));
         }
         return keyformattype;
     }

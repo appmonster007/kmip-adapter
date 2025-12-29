@@ -37,7 +37,7 @@ public class EphemeralTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ephe
 
         if (!ephemeral.isSupported()) {
             throw new NoSuchElementException(
-                String.format("Ephemeral '%d' not supported for spec %s", value, spec));
+                    String.format("Ephemeral '%d' not supported for spec %s", value, spec));
         }
         return ephemeral;
     }

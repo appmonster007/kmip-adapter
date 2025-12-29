@@ -57,7 +57,7 @@ public class OtpAlgorithmXmlDeserializer extends KmipDataTypeXmlDeserializer<Otp
         OtpAlgorithm otpalgorithm = new OtpAlgorithm(OtpAlgorithm.fromName(description));
         if (!otpalgorithm.isSupported()) {
             throw new NoSuchElementException(
-                String.format("OtpAlgorithm '%s' not supported for spec %s", description, spec));
+                    String.format("OtpAlgorithm '%s' not supported for spec %s", description, spec));
         }
 
         return otpalgorithm;

@@ -37,7 +37,7 @@ public class CertificateTypeTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
         if (!certificatetype.isSupported()) {
             throw new NoSuchElementException(
-                String.format("CertificateType '%d' not supported for spec %s", value, spec));
+                    String.format("CertificateType '%d' not supported for spec %s", value, spec));
         }
         return certificatetype;
     }
