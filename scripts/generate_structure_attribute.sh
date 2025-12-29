@@ -1,7 +1,11 @@
 #!/bin/bash
-# generate_structure_attribute.sh
+# generate_attribute_structure.sh
 
 set -e
+
+# Source the common script
+# shellcheck source=common.sh
+source "$(dirname "$0")/common.sh"
 
 #############################################
 # Defaults / Globals
@@ -63,148 +67,6 @@ Examples:
   $0 --all CustomAttribute SecurityAttribute
 EOF
     exit 1
-}
-
-# camelCase from PascalCase (or leave if already camelCase)
-get_camel_case() {
-    local input="$1"
-    local first_char="$(echo "${input}" | cut -c1)"
-    local lower_first
-    lower_first="$(echo "${first_char}" | tr '[:upper:]' '[:lower:]')"
-    if [ "${lower_first}" = "${first_char}" ]; then
-        echo "${input}"
-    else
-        echo "${lower_first}${input:1}"
-    fi
-}
-
-# PascalCase from strings (space/underscore/dash separated)
-get_pascal_case() {
-    # join all args
-    local input="$*"
-    # convert separators to spaces, then uppercase first letter of each word and remove spaces
-    echo "${input}" | sed -E 's/[_-]/ /g' | awk '{
-        for(i=1;i<=NF;i++){
-            $i = toupper(substr($i,1,1)) tolower(substr($i,2))
-        }
-        printf "%s", $1
-        for(j=2;j<=NF;j++) printf "%s", $j
-    }'
-}
-
-# Convert PascalCase -> SNAKE_UPPER
-to_snake_upper() {
-    local name="$1"
-    # insert underscore before each uppercase (except start), then uppercase
-    echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
-}
-
-# make dotted package path from slash path
-slash_to_dot() {
-    local s="$1"
-    echo "${s//\//.}"
-}
-
-escape_sed_replacement() {
-    # escape backslash, ampersand, and delimiter (|)
-    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/&/\\\\&/g' -e 's/|/\\\\|/g'
-}
-
-render_template() {
-    local template_file="$1"
-    local out_file="$2"
-    shift 2
-
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${out_file} (from ${template_file})"
-        return 0
-    fi
-
-    mkdir -p "$(dirname "${out_file}")"
-    local content
-    content="$(cat "${template_file}")"
-
-    while [[ $# -gt 1 ]]; do
-        local key="$1"
-        local value="$2"
-        shift 2
-        local esc
-        esc="$(escape_sed_replacement "${value}")"
-        content="$(printf "%s" "${content}" | sed -e "s|{{${key}}}|${esc}|g")"
-    done
-
-    printf "%s" "${content}" > "${out_file}"
-}
-
-#############################################
-# FS & service helpers (respect DRY_RUN)
-#############################################
-create_directories() {
-    local main_java="$1"
-    local test_java="$2"
-    local sub_path="$3"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create directories:"
-        echo "  ${main_java}/${sub_path}"
-        echo "  ${main_java}/codec/json/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/json/deserializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/xml/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/xml/deserializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
-        echo "  ${test_java}/codec/json/${sub_path}"
-        echo "  ${test_java}/codec/xml/${sub_path}"
-        echo "  ${test_java}/codec/ttlv/${sub_path}"
-        echo "  ${test_java}/benchmark/subjects/${sub_path}"
-        echo "  src/main/resources/META-INF/services"
-        echo "  src/test/resources/META-INF/services"
-        return 0
-    fi
-
-    mkdir -p "${main_java}/${sub_path}"
-
-    for dir in serializer deserializer; do
-        mkdir -p "${main_java}/codec/json/${dir}/kmip/${sub_path}"
-        mkdir -p "${main_java}/codec/xml/${dir}/kmip/${sub_path}"
-        mkdir -p "${main_java}/codec/ttlv/${dir}/kmip/${sub_path}"
-    done
-
-    mkdir -p "${test_java}/${sub_path}"
-    mkdir -p "${test_java}/codec/json/${sub_path}"
-    mkdir -p "${test_java}/codec/xml/${sub_path}"
-    mkdir -p "${test_java}/codec/ttlv/${sub_path}"
-    mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
-    mkdir -p "src/main/resources/META-INF/services"
-    mkdir -p "src/test/resources/META-INF/services"
-}
-
-add_service_entry() {
-    local file="$1"
-    local entry="$2"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would add service entry:"
-        echo "  file: ${file}"
-        echo "  entry: ${entry}"
-        return 0
-    fi
-
-    mkdir -p "$(dirname "$file")"
-    touch "$file"
-
-    # only add exact line if not present
-    if ! grep -qFx "${entry}" "${file}"; then
-        echo "${entry}" >> "${file}"
-        # sort & unique in-place (sort -u -o available on many systems)
-        sort -u "${file}" -o "${file}" 2>/dev/null || {
-            # fallback if sort -o not supported
-            sort -u "${file}" > "${file}.tmp" && mv "${file}.tmp" "${file}"
-        }
-        echo "Added service entry: ${entry} -> ${file}"
-    else
-        echo "Service entry already present: ${entry} in ${file}"
-    fi
 }
 
 #############################################

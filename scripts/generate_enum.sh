@@ -7,6 +7,10 @@
 # - Compatible with Bash 3.x
 set -e
 
+# Source the common script
+# shellcheck source=common.sh
+source "$(dirname "$0")/common.sh"
+
 #############################################
 # Globals & Defaults
 #############################################
@@ -66,164 +70,6 @@ Examples:
   $0 --class --json-ser State
 EOF
     exit 1
-}
-
-# Converts "MyEnum" -> "myEnum"
-get_var_name() {
-    local name="$1"
-    echo "${name:0:1}" | tr '[:upper:]' '[:lower:]'"${name:1}"
-}
-
-get_upper_case() {
-    to_upper "$@"
-}
-
-to_upper() {
-    # Read from stdin if no arguments provided
-    if [ $# -eq 0 ]; then
-        tr '[:lower:]' '[:upper:]'
-    else
-        # Handle arguments
-        local input="$*"
-        [ -z "$input" ] && { echo ""; return 1; }
-        echo "$input" | tr '[:lower:]' '[:upper:]'
-    fi
-}
-# Converts "MyEnum" -> "MY_ENUM"
-to_snake_upper() {
-    local name="$1"
-    # Use sed and tr; compatible with older bash
-    echo "$name" | sed -r 's/([A-Z])/_\1/g' | sed 's/^_//' | tr '[:lower:]' '[:upper:]'
-}
-
-pkg_dot() {
-    echo "${SUB_PATH//\//.}"
-}
-
-# PascalCase from input tokens: "foo_bar" -> "FooBar"
-get_pascal_case() {
-    local input="$*"
-    echo "$input" | sed -E 's/[_-]+/ /g' | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) tolower(substr($i,2)) }}1' | tr -d ' '
-}
-
-# Run a command or echo dry-run message
-do_or_dry_cmd() {
-    local message="$1"; shift
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: ${message}"
-        return 0
-    fi
-    "$@"
-}
-
-escape_sed_replacement() {
-    # escape backslash, ampersand, and delimiter (|)
-    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/&/\\\\&/g' -e 's/|/\\\\|/g'
-}
-
-render_template() {
-    local template_file="$1"
-    local out_file="$2"
-    shift 2
-
-    if [[ "${DRY_RUN}" == "true" ]]; then
-        echo "DRY RUN: would create file: ${out_file} (from ${template_file})"
-        return 0
-    fi
-
-    mkdir -p "$(dirname "${out_file}")"
-    local content
-    content="$(cat "${template_file}")"
-
-    while [[ $# -gt 1 ]]; do
-        local key="$1"
-        local value="$2"
-        shift 2
-        local esc
-        esc="$(escape_sed_replacement "${value}")"
-        content="$(printf "%s" "${content}" | sed -e "s|{{${key}}}|${esc}|g")"
-    done
-
-    printf "%s" "${content}" > "${out_file}"
-}
-
-#############################################
-# Filesystem & service helpers (respect DRY_RUN)
-#############################################
-create_directories() {
-    local main_java="$1"
-    local test_java="$2"
-    local sub_path="$3"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create directories:"
-        echo "  ${main_java}/${sub_path}"
-        echo "  ${main_java}/codec/json/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/json/deserializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/xml/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/xml/deserializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
-        echo "  ${test_java}/codec/json/${sub_path}"
-        echo "  ${test_java}/codec/xml/${sub_path}"
-        echo "  ${test_java}/codec/ttlv/${sub_path}"
-        echo "  ${test_java}/benchmark/subjects/${sub_path}"
-        echo "  src/main/resources/META-INF/services"
-        echo "  src/test/resources/META-INF/services"
-        return 0
-    fi
-
-    mkdir -p "${main_java}/${sub_path}"
-    mkdir -p "${main_java}/codec/json/serializer/kmip/${sub_path}"
-    mkdir -p "${main_java}/codec/json/deserializer/kmip/${sub_path}"
-    mkdir -p "${main_java}/codec/xml/serializer/kmip/${sub_path}"
-    mkdir -p "${main_java}/codec/xml/deserializer/kmip/${sub_path}"
-    mkdir -p "${main_java}/codec/ttlv/serializer/kmip/${sub_path}"
-    mkdir -p "${main_java}/codec/ttlv/deserializer/kmip/${sub_path}"
-    mkdir -p "${test_java}/codec/json/${sub_path}"
-    mkdir -p "${test_java}/codec/xml/${sub_path}"
-    mkdir -p "${test_java}/codec/ttlv/${sub_path}"
-    mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
-    mkdir -p "src/main/resources/META-INF/services"
-    mkdir -p "src/test/resources/META-INF/services"
-}
-
-add_service_entry() {
-    local file="$1"
-    local entry="$2"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would add service entry:"
-        echo "  file: ${file}"
-        echo "  entry: ${entry}"
-        return 0
-    fi
-
-    mkdir -p "$(dirname "$file")"
-    touch "$file"
-
-    if ! grep -qFx "${entry}" "${file}"; then
-        echo "${entry}" >> "${file}"
-    fi
-
-    local temp_file="${file}.tmp"
-    # portable fallback: some platforms may not support redirecting sort -u's output to same file
-    if sort -u "${file}" > "${temp_file}" 2>/dev/null; then
-        :
-    else
-        # fallback attempt (should be identical)
-        sort -u "${file}" > "${temp_file}"
-    fi
-
-    # remove empty lines
-    grep -v '^[[:space:]]*$' "${temp_file}" > "${temp_file}.2" && mv "${temp_file}.2" "${temp_file}"
-
-    if ! cmp -s "${file}" "${temp_file}"; 2>/dev/null; then
-        # try to move only when different
-        mv "${temp_file}" "${file}"
-    else
-        rm -f "${temp_file}"
-    fi
 }
 
 #############################################
