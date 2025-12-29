@@ -1,0 +1,65 @@
+package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{pdot}};
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.{{pdot}}.{{ENUM_NAME}};
+
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
+/**
+ * XML deserializer for {{ENUM_NAME}}.
+ */
+public class {{ENUM_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializer<{{ENUM_NAME}}> {
+    private final KmipTag kmipTag = {{ENUM_NAME}}.kmipTag;
+    private final EncodingType encodingType = {{ENUM_NAME}}.encodingType;
+
+    @Override
+    public {{ENUM_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        ObjectCodec codec = p.getCodec();
+        JsonNode node = codec.readTree(p);
+
+        if (!node.isObject()) {
+            ctxt.reportInputMismatch({{ENUM_NAME}}.class, "Expected XML element object for {{ENUM_NAME}}");
+            return null;
+        }
+
+        if (p instanceof FromXmlParser xmlParser
+                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+            ctxt.reportInputMismatch({{ENUM_NAME}}.class, "Invalid Tag for {{ENUM_NAME}}");
+            return null;
+        }
+
+        JsonNode typeNode = node.get("type");
+        if (typeNode == null || !typeNode.isTextual() ||
+                !encodingType.getDescription().equals(typeNode.asText())) {
+            ctxt.reportInputMismatch({{ENUM_NAME}}.class, "Missing or invalid '@type' attribute for {{ENUM_NAME}}");
+            return null;
+        }
+
+        JsonNode valueNode = node.get("value");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch({{ENUM_NAME}}.class, "Missing or non-text '@value' attribute for {{ENUM_NAME}}");
+            return null;
+        }
+
+        String description = valueNode.asText();
+        KmipSpec spec = KmipContext.getSpec();
+
+        {{ENUM_NAME}} {{enum_lower}} = new {{ENUM_NAME}}({{ENUM_NAME}}.fromName(description));
+        if (!{{enum_lower}}.isSupported()) {
+            throw new NoSuchElementException(
+                String.format("{{ENUM_NAME}} '%s' not supported for spec %s", description, spec));
+        }
+
+        return {{enum_lower}};
+    }
+}

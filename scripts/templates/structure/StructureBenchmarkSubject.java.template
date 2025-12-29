@@ -1,0 +1,45 @@
+package org.purpleBean.kmip.benchmark.subjects.{{pdot}};
+
+import lombok.Getter;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
+
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+public class {{STRUCTURE_NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{STRUCTURE_NAME}}> {
+
+    @Getter
+    private KmipSpec spec = KmipSpec.V1_2;
+
+    public {{STRUCTURE_NAME}}BenchmarkSubject() throws Exception {
+        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
+        State state = new State(State.Standard.ACTIVE);
+        {{STRUCTURE_NAME}} {{var_name}} = {{STRUCTURE_NAME}}.builder()
+            .activationDate(activationDate)
+            .state(state)
+            .build();
+        initialize({{var_name}}, {{STRUCTURE_NAME}}.class);
+    }
+
+    @Override
+    public String name() {
+        return "{{STRUCTURE_NAME}}";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}

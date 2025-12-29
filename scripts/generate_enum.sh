@@ -3,7 +3,7 @@
 # Refactored generator for KMIP enumerations.
 # - Per-file generator functions
 # - Flags to enable/disable generation of each artifact
-# - Performs a DRY RUN (prints what would be done) when no generation flags provided
+# - Performs a DRY RUN (prints what it would do) when no generation flags provided
 # - Compatible with Bash 3.x
 set -e
 
@@ -14,6 +14,7 @@ BASE_DIR="$(pwd)"
 MAIN_JAVA="src/main/java/org/purpleBean/kmip"
 TEST_JAVA="src/test/java/org/purpleBean/kmip"
 SUB_PATH="common/enumeration"
+TEMPLATE_DIR="scripts/templates/enum"
 
 # Generation flags (off by default)
 GEN_CLASS=false
@@ -28,7 +29,6 @@ GEN_JSON_TEST=false
 GEN_XML_TEST=false
 GEN_TTLV_TEST=false
 GEN_BENCHMARK=false
-GEN_SERVICES=false
 
 DRY_RUN=false
 
@@ -114,6 +114,37 @@ do_or_dry_cmd() {
         return 0
     fi
     "$@"
+}
+
+escape_sed_replacement() {
+    # escape backslash, ampersand, and delimiter (|)
+    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/&/\\\\&/g' -e 's/|/\\\\|/g'
+}
+
+render_template() {
+    local template_file="$1"
+    local out_file="$2"
+    shift 2
+
+    if [[ "${DRY_RUN}" == "true" ]]; then
+        echo "DRY RUN: would create file: ${out_file} (from ${template_file})"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "${out_file}")"
+    local content
+    content="$(cat "${template_file}")"
+
+    while [[ $# -gt 1 ]]; do
+        local key="$1"
+        local value="$2"
+        shift 2
+        local esc
+        esc="$(escape_sed_replacement "${value}")"
+        content="$(printf "%s" "${content}" | sed -e "s|{{${key}}}|${esc}|g")"
+    done
+
+    printf "%s" "${content}" > "${out_file}"
 }
 
 #############################################
@@ -208,211 +239,10 @@ generate_enum_class() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create enum class: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.${pdot};
-
-import lombok.*;
-import org.purpleBean.kmip.*;
-
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
-/**
- * KMIP ${ENUM_NAME} enumeration.
- */
-@Data
-@Builder
-public class ${ENUM_NAME} implements KmipEnumeration {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.${ENUM_NAME_SNAKE});
-    public static final EncodingType encodingType = EncodingType.ENUMERATION;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
-    private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-
-    static {
-        for (Standard s : Standard.values()) {
-            VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description, s);
-        }
-
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ${ENUM_NAME}.class);
-        }
-    }
-
-    @NonNull
-    private final Value value;
-
-    public ${ENUM_NAME}(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for ${ENUM_NAME} is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
-        this.value = value;
-    }
-
-    private static void checkValidExtensionValue(int value) {
-        int extensionStart = 0x80000000;
-        if (value < extensionStart || value > 0) {
-            throw new IllegalArgumentException(
-                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
-            );
-        }
-    }
-
-    /**
-     * Register an extension value.
-     */
-    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        checkValidExtensionValue(value);
-        if (description.trim().isEmpty()) {
-            throw new IllegalArgumentException("Description cannot be empty");
-        }
-        if (supportedVersions.isEmpty()) {
-            throw new IllegalArgumentException("At least one supported version must be specified");
-        }
-        Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
-        if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
-        }
-        Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
-        return custom;
-    }
-
-    /**
-     * Look up by name.
-     */
-    public static Value fromName(String name) {
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(name);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No ${ENUM_NAME} value found for '%s' in KMIP spec %s", name, spec)
-                ));
-    }
-
-    /**
-     * Look up by value.
-     */
-    public static Value fromValue(int value) {
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = VALUE_REGISTRY.get(value);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No ${ENUM_NAME} value found for %d in KMIP spec %s", value, spec)
-                ));
-    }
-
-    /**
-     * Get registered values.
-     */
-    public static Collection<Value> registeredValues() {
-        return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
-    }
-
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
-
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
-
-    public String getDescription() {
-        return value.getDescription();
-    }
-
-    public boolean isCustom() {
-        return value.isCustom();
-    }
-
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && value.isSupported();
-    }
-
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion ),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion );
-
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = false;
-
-        Standard(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-    }
-
-    // ----- Value hierarchy -----
-    public interface Value {
-        int getValue();
-
-        String getDescription();
-
-        boolean isSupported();
-
-        boolean isCustom();
-    }
-
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public static class Extension implements Value {
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = true;
-
-        public Extension(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/Enum.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
 
     echo "Created: ${out_file}"
 }
@@ -423,62 +253,10 @@ generate_json_serializer() {
     local out_file="${out_dir}/${ENUM_NAME}JsonSerializer.java"
     local pdot
     pdot="$(pkg_dot)"
-    local enum_snake
-    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create JSON serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.json.serializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-/**
- * JSON serializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}JsonSerializer extends KmipDataTypeJsonSerializer<${ENUM_NAME}> {
-
-    @Override
-    public void serialize(${ENUM_NAME} value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-
-        if (value == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        if (value.getDescription() == null || value.getDescription().trim().isEmpty()) {
-            throw new IllegalStateException("${ENUM_NAME} must have a valid description");
-        }
-
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(value.getKmipTag());
-        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
-        jsonGenerator.writeStringField("value", value.getDescription());
-        jsonGenerator.writeEndObject();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumJsonSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
         "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${ENUM_NAME}JsonSerializer"
@@ -492,116 +270,13 @@ generate_json_deserializer() {
     local out_file="${out_dir}/${ENUM_NAME}JsonDeserializer.java"
     local pdot
     pdot="$(pkg_dot)"
-    local enum_snake
-    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
     local enum_lower
-    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+    enum_lower="$(get_var_name "${ENUM_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create JSON deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import java.io.IOException;
-import java.util.NoSuchElementException;
-
-/**
- * JSON deserializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}JsonDeserializer extends KmipDataTypeJsonDeserializer<${ENUM_NAME}> {
-    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
-    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
-
-    @Override
-    public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-        if (node == null) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "JSON node cannot be null for ${ENUM_NAME} deserialization");
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(${ENUM_NAME}.class, "Invalid KMIP tag for ${ENUM_NAME}");
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("Failed to parse KMIP tag for ${ENUM_NAME}: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class,
-                    String.format("Expected object with %s tag for ${ENUM_NAME}, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
-            return null;
-        }
-
-        // Validation: Extract and validate type field
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
-        ) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Missing or non-text 'type' field for ${ENUM_NAME}");
-            return null;
-        }
-
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("Missing or non-text 'value' field for %s", kmipTag.getDescription()));
-            return null;
-        }
-
-        String description = valueNode.asText();
-        if (description == null || description.trim().isEmpty()) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, String.format("%s value cannot be empty", kmipTag.getDescription()));
-            return null;
-        }
-
-        // Validation: KMIP spec compatibility and value lookup
-        KmipSpec spec = KmipContext.getSpec();
-        ${ENUM_NAME}.Value ${enum_lower}Value;
-        try {
-            ${enum_lower}Value = ${ENUM_NAME}.fromName(description);
-        } catch (NoSuchElementException e) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class,
-                    String.format("Unknown ${ENUM_NAME} value '%s' for KMIP spec %s", description, spec));
-            return null;
-        }
-
-        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${enum_lower}Value);
-
-        // Final validation: Ensure constructed ${ENUM_NAME} is supported
-        if (!${enum_lower}.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s", description, spec)
-            );
-        }
-
-        return ${enum_lower};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumJsonDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "enum_lower" "${enum_lower}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
         "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${ENUM_NAME}JsonDeserializer"
@@ -615,64 +290,10 @@ generate_xml_serializer() {
     local out_file="${out_dir}/${ENUM_NAME}XmlSerializer.java"
     local pdot
     pdot="$(pkg_dot)"
-    local enum_snake
-    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create XML serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-/**
- * XML serializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}XmlSerializer extends KmipDataTypeXmlSerializer<${ENUM_NAME}> {
-
-    @Override
-    public void serialize(${ENUM_NAME} value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = value.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(value);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", value.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("value", value.getDescription());
-        xmlGen.writeEndObject();
-    }
-}
-
-EOF
+    render_template "${TEMPLATE_DIR}/EnumXmlSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
         "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${ENUM_NAME}XmlSerializer"
@@ -686,85 +307,13 @@ generate_xml_deserializer() {
     local out_file="${out_dir}/${ENUM_NAME}XmlDeserializer.java"
     local pdot
     pdot="$(pkg_dot)"
-    local enum_snake
-    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
     local enum_lower
-    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+    enum_lower="$(get_var_name "${ENUM_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create XML deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot};
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import java.io.IOException;
-import java.util.NoSuchElementException;
-
-/**
- * XML deserializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}XmlDeserializer extends KmipDataTypeXmlDeserializer<${ENUM_NAME}> {
-    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
-    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
-
-    @Override
-    public ${ENUM_NAME} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Expected XML element object for ${ENUM_NAME}");
-            return null;
-        }
-
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Invalid Tag for ${ENUM_NAME}");
-            return null;
-        }
-
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Missing or invalid '@type' attribute for ${ENUM_NAME}");
-            return null;
-        }
-
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(${ENUM_NAME}.class, "Missing or non-text '@value' attribute for ${ENUM_NAME}");
-            return null;
-        }
-
-        String description = valueNode.asText();
-        KmipSpec spec = KmipContext.getSpec();
-
-        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromName(description));
-        if (!${enum_lower}.isSupported()) {
-            throw new NoSuchElementException(
-                String.format("${ENUM_NAME} '%s' not supported for spec %s", description, spec));
-        }
-
-        return ${enum_lower};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumXmlDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "enum_lower" "${enum_lower}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
         "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${ENUM_NAME}XmlDeserializer"
@@ -779,58 +328,9 @@ generate_ttlv_serializer() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create TTLV serializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot};
-
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-
-/**
- * TTLV serializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}TtlvSerializer extends KmipDataTypeTtlvSerializer<${ENUM_NAME}> {
-
-    @Override
-    public ByteBuffer serialize(${ENUM_NAME} value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    public TtlvObject serializeToTtlvObject(${ENUM_NAME} value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("${ENUM_NAME} '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue().getValue()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumTtlvSerializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
         "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${ENUM_NAME}TtlvSerializer"
@@ -844,64 +344,13 @@ generate_ttlv_deserializer() {
     local out_file="${out_dir}/${ENUM_NAME}TtlvDeserializer.java"
     local pdot
     pdot="$(pkg_dot)"
-    local enum_snake
-    enum_snake="$(to_snake_upper "${ENUM_NAME}")"
     local enum_lower
-    enum_lower="$(echo "${ENUM_NAME}" | tr '[:upper:]' '[:lower:]')"
+    enum_lower="$(get_var_name "${ENUM_NAME}")"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create TTLV deserializer: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot};
-
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-
-/**
- * TTLV deserializer for ${ENUM_NAME}.
- */
-public class ${ENUM_NAME}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<${ENUM_NAME}> {
-    private final KmipTag kmipTag = ${ENUM_NAME}.kmipTag;
-    private final EncodingType encodingType = ${ENUM_NAME}.encodingType;
-
-    @Override
-    public ${ENUM_NAME} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for ${ENUM_NAME}", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        ${ENUM_NAME} ${enum_lower} = new ${ENUM_NAME}(${ENUM_NAME}.fromValue(value));
-
-        if (!${enum_lower}.isSupported()) {
-            throw new NoSuchElementException(
-                String.format("${ENUM_NAME} '%d' not supported for spec %s", value, spec));
-        }
-        return ${enum_lower};
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumTtlvDeserializer.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "enum_lower" "${enum_lower}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
             "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${ENUM_NAME}TtlvDeserializer"
@@ -916,106 +365,9 @@ generate_domain_test() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create domain test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
-
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-@DisplayName("${ENUM_NAME} Domain Tests")
-class ${ENUM_NAME}Test extends AbstractKmipEnumerationSuite<${ENUM_NAME}> {
-
-    @Override
-    protected Class<${ENUM_NAME}> type() {
-        return ${ENUM_NAME}.class;
-    }
-
-    @Override
-    protected ${ENUM_NAME} createDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-    }
-
-    @Override
-    protected ${ENUM_NAME} createEqualToDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-    }
-
-    @Override
-    protected ${ENUM_NAME} createDifferentFromDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_2);
-    }
-
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.ENUMERATION;
-    }
-
-    @Override
-    protected boolean supportsRegistryBehavior() {
-        return true;
-    }
-
-    @Override
-    protected void assertLookupBehaviour() {
-        // Lookup by name/value
-        withKmipSpec(
-                KmipSpec.UnknownVersion,
-                () -> {
-                    ${ENUM_NAME}.Value byName = ${ENUM_NAME}.fromName("X-Enum-Custom");
-                    ${ENUM_NAME}.Value byVal = ${ENUM_NAME}.fromValue(0x80000010);
-                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
-                }
-        );
-
-        // Lookup by name/value with unsupported version
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> ${ENUM_NAME}.fromName("X-Enum-Custom"))
-        );
-    }
-
-    @Override
-    protected void assertEnumerationRegistryBehavior() {
-        // Valid registration in ${ENUM_NAME} requires 8XXXXXXX (hex) range per implementation
-        ${ENUM_NAME}.Value custom = ${ENUM_NAME}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
-        assertThat(custom.isCustom()).isTrue();
-        assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
-
-        withKmipSpec(KmipSpec.UnknownVersion, () -> {
-            assertThat(custom.isSupported()).isTrue();
-        });
-        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
-            assertThat(custom.isSupported()).isFalse();
-        });
-
-        // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ${ENUM_NAME}.register(0x80000012, "X-Empty-Versions", Set.of()))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-}
-
-EOF
+    render_template "${TEMPLATE_DIR}/EnumTest.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}"
 
     echo "Created: ${out_file}"
 }
@@ -1033,38 +385,12 @@ generate_serialization_test_for_format() {
     local pdot
     pdot="$(pkg_dot)"
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create ${format} serialization test: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.codec.${format}.${pdot};
-
-import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-import org.purpleBean.kmip.test.suite.Abstract${format_pascal}SerializationSuite;
-
-@DisplayName("${ENUM_NAME} ${format_upper} Serialization")
-class ${ENUM_NAME}${format_pascal}Test extends Abstract${format_pascal}SerializationSuite<${ENUM_NAME}> {
-    @Override
-    protected Class<${ENUM_NAME}> type() {
-        return ${ENUM_NAME}.class;
-    }
-
-    @Override
-    protected ${ENUM_NAME} createDefault() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-    }
-
-    @Override
-    protected ${ENUM_NAME} createVariant() {
-        return new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_2);
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumCodecTest.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "format" "${format}" \
+        "format_upper" "${format_upper}" \
+        "format_pascal" "${format_pascal}"
 
     echo "Created: ${out_file}"
 }
@@ -1076,50 +402,12 @@ generate_benchmark_subject() {
     local pdot
     pdot="$(pkg_dot)"
     local var_name
-    var_name=$(echo "${ENUM_NAME:0:1}" | tr '[:upper:]' '[:lower:]')${ENUM_NAME:1}
+    var_name=$(get_var_name "${ENUM_NAME}")
 
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create benchmark subject: ${out_file}"
-        return 0
-    fi
-
-    mkdir -p "${out_dir}"
-
-    cat > "${out_file}" <<EOF
-package org.purpleBean.kmip.benchmark.subjects.${pdot};
-
-import lombok.Getter;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.${pdot}.${ENUM_NAME};
-
-public class ${ENUM_NAME}BenchmarkSubject extends KmipBenchmarkSubject<${ENUM_NAME}> {
-
-    @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
-
-    public ${ENUM_NAME}BenchmarkSubject() throws Exception {
-        ${ENUM_NAME} ${var_name} = new ${ENUM_NAME}(${ENUM_NAME}.Standard.PLACEHOLDER_1);
-        initialize(${var_name}, ${ENUM_NAME}.class);
-    }
-
-    @Override
-    public String name() {
-        return "${ENUM_NAME}";
-    }
-
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
-}
-EOF
+    render_template "${TEMPLATE_DIR}/EnumBenchmarkSubject.java.template" "${out_file}" \
+        "pdot" "${pdot}" \
+        "ENUM_NAME" "${ENUM_NAME}" \
+        "var_name" "${var_name}"
 
     add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
         "org.purpleBean.kmip.benchmark.subjects.${pdot}.${ENUM_NAME}BenchmarkSubject"
@@ -1179,7 +467,7 @@ while [ $# -gt 0 ]; do
         --all)
             GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
             GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
-            GEN_TTLV_TEST=true; GEN_BENCHMARK=true; GEN_SERVICES=true;
+            GEN_TTLV_TEST=true; GEN_BENCHMARK=true;
             any_flag=true; shift ;;
         -h|--help) usage ;;
         --*) echo "Unknown option: $1"; usage ;;
@@ -1198,7 +486,7 @@ if [ "${any_flag}" = "false" ]; then
     echo "No generation flags provided -> performing DRY RUN (no files will be written)."
     GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
     GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
-    GEN_TTLV_TEST=true; GEN_BENCHMARK=true; GEN_SERVICES=true
+    GEN_TTLV_TEST=true; GEN_BENCHMARK=true
 fi
 
 # Prepare directories (dry-run will only print)
