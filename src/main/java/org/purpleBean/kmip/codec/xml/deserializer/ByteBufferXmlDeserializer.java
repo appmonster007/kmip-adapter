@@ -3,7 +3,6 @@ package org.purpleBean.kmip.codec.xml.deserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -17,16 +16,7 @@ public class ByteBufferXmlDeserializer extends JsonDeserializer<ByteBuffer> {
 
         // Parse hex string to bytes
         HexFormat hexFormat = HexFormat.of();
-        byte[] data;
-        try {
-            data = hexFormat.parseHex(hexString);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid hex string for Byte String: '" + hexString + "'", e);
-        }
-
-        if (!TtlvConstants.isProperlyPadded(data.length)) {
-            throw new IllegalArgumentException("Expected 8n bytes to get value, got " + data.length + " bytes");
-        }
+        byte[] data = hexFormat.parseHex(hexString);
 
         return ByteBuffer.wrap(data);
     }

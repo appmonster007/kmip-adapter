@@ -7,6 +7,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeIndexXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CertificateLengthXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.CertificateSerialNumberXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CompromiseDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CompromiseOccurrenceDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.ContactInformationXmlSerializer
@@ -15,6 +16,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.CryptographicUsageMaskXmlSe
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DeactivationDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DestroyDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.InitialDateXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.IssuerDistinguishedNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.LastChangeDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.LeaseTimeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.NameValueXmlSerializer
@@ -93,6 +95,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.AttributeXmlSeria
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CustomAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.NameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.SampleStructureXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.X509CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestBatchItemXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestHeaderXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.request.SimpleRequestMessageXmlSerializer

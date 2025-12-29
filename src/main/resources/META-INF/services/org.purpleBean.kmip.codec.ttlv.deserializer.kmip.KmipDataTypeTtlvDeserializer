@@ -8,6 +8,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeIndexTtlvDeseri
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CertificateLengthTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CertificateSerialNumberTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CompromiseDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CompromiseOccurrenceDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ContactInformationTtlvDeserializer
@@ -16,6 +17,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CryptographicUsageMaskTt
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DeactivationDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DestroyDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.InitialDateTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.IssuerDistinguishedNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LastChangeDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LeaseTimeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.NameValueTtlvDeserializer
@@ -94,6 +96,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AttributeTtlvD
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.CustomAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.SampleStructureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.X509CertificateIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request.SimpleRequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request.SimpleRequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.request.SimpleRequestMessageTtlvDeserializer

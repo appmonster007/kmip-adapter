@@ -7,6 +7,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeIndexJsonSerializ
 org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.AttributeValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateLengthJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateSerialNumberJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CompromiseDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CompromiseOccurrenceDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.ContactInformationJsonSerializer
@@ -15,6 +16,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.CryptographicUsageMaskJson
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DeactivationDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DestroyDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.InitialDateJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.IssuerDistinguishedNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.LastChangeDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.LeaseTimeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.NameValueJsonSerializer
@@ -93,6 +95,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AttributeJsonSer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.SampleStructureJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestBatchItemJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestHeaderJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestMessageJsonSerializer

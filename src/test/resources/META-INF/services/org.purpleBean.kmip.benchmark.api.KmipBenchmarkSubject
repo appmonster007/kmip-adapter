@@ -5,6 +5,7 @@ org.purpleBean.kmip.benchmark.subjects.common.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CertificateLengthBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.CertificateSerialNumberBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CompromiseDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CompromiseOccurrenceDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ContactInformationBenchmarkSubject
@@ -13,6 +14,7 @@ org.purpleBean.kmip.benchmark.subjects.common.CryptographicUsageMaskBenchmarkSub
 org.purpleBean.kmip.benchmark.subjects.common.DeactivationDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DestroyDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.InitialDateBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.IssuerDistinguishedNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.LastChangeDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.LeaseTimeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.NameValueBenchmarkSubject
@@ -91,3 +93,4 @@ org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubjec
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.NameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.SampleStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.X509CertificateIdentifierBenchmarkSubject
