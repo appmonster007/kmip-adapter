@@ -48,11 +48,11 @@ class AttributeTest extends AbstractKmipStructureSuite<Attribute> {
         assertThat(values.get(0)).isInstanceOf(AttributeName.class);
         assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(StringUtils.covertPascalToTitleCase("Activation Date"));
         if (values.size() == 2) {
-            assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
+            assertThat(values.get(1)).isInstanceOf(AttributeValue.Value.class);
         }
         if (values.size() > 2) {
             assertThat(values.get(1)).isInstanceOf(AttributeIndex.class);
-            assertThat(values.get(2)).isInstanceOf(AttributeValue.class);
+            assertThat(values.get(2)).isInstanceOf(AttributeValue.Value.class);
         }
     }
 }

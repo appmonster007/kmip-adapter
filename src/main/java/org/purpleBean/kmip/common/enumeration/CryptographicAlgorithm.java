@@ -48,14 +48,14 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         this.value = value;
     }
 
-    public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+    public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
         }
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Enumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(value);
+        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
         return new CryptographicAlgorithm(v);
     }
 
@@ -149,11 +149,8 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder()
-                .encodingType(encodingType)
-                .value(value.getValue())
-                .build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Enumeration.of(value.getValue());
     }
 
     @Override

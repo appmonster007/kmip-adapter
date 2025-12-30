@@ -9,7 +9,16 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AsynchronousCorrelationVal
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AsynchronousIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeNameTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueByteStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueIntegerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueLongIntegerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueBigIntegerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueEnumerationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueBooleanTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueTextStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueDateTimeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueIntervalTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchCountTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchOrderOptionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CRTCoefficientTtlvSerializer

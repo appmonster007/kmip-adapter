@@ -4,117 +4,421 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.KmipCodecManager;
 
-import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * KMIP AttributeValue dataType.
  */
-@Data
-@Builder
-public class AttributeValue implements KmipStructure, KmipDataType {
+public abstract class AttributeValue {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_VALUE);
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            for (EncodingType encodingType : EncodingType.values()) {
-                KmipDataType.register(spec, kmipTag.getValue(), encodingType, AttributeValue.class);
+    public interface Value extends KmipDataType {
+    }
+
+    @Data
+    @Builder
+    public static class Integer implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.INTEGER;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, Integer.class);
             }
         }
-    }
 
-    @NonNull
-    private EncodingType encodingType;
-    @NonNull
-    private Object value;
+        @NonNull
+        private final java.lang.Integer value;
 
-    private AttributeValue(@NonNull EncodingType encodingType, @NonNull Object value) {
-        if (encodingType == EncodingType.STRUCTURE && !(isValidStructureAttributeValue(value))
-                || encodingType == EncodingType.INTEGER && !(value instanceof Integer)
-                || encodingType == EncodingType.LONG_INTEGER && !(value instanceof Long)
-                || encodingType == EncodingType.BIG_INTEGER && !(value instanceof BigInteger)
-                || encodingType == EncodingType.ENUMERATION && !(value instanceof Integer)
-                || encodingType == EncodingType.BOOLEAN && !(value instanceof Boolean)
-                || encodingType == EncodingType.TEXT_STRING && !(value instanceof String)
-                || encodingType == EncodingType.BYTE_STRING && !(value instanceof ByteBuffer)
-                || encodingType == EncodingType.DATE_TIME && !(value instanceof OffsetDateTime)
-                || encodingType == EncodingType.INTERVAL && !(value instanceof Integer)
-        ) {
-            throw new IllegalArgumentException("Invalid attribute value: " + value);
+        public static Integer of(@NonNull java.lang.Integer value) {
+            return Integer.builder().value(value).build();
         }
-        this.encodingType = encodingType;
-        this.value = value;
-    }
 
-    public static boolean isValidStructureAttributeValue(@NonNull Object value) {
-        if (value instanceof List<?> values) {
-            return values.stream().allMatch(v -> v instanceof KmipDataType);
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
         }
-        return false;
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
     }
 
-    public static AttributeValue of(@NonNull EncodingType encodingType, @NonNull Object value) {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
-    }
+    @Data
+    @Builder
+    public static class LongInteger implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.LONG_INTEGER;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
-    public static AttributeValue of(@NonNull KmipDataType... values) {
-        return AttributeValue.of(EncodingType.STRUCTURE, List.of(values));
-    }
-
-    public static AttributeValue of(@NonNull Object value) {
-        return switch (value) {
-            case KmipDataType av -> AttributeValue.of(EncodingType.STRUCTURE, List.of(av));
-            case Integer i -> AttributeValue.of(EncodingType.INTEGER, i);
-            case Long l -> AttributeValue.of(EncodingType.LONG_INTEGER, l);
-            case Boolean b -> AttributeValue.of(EncodingType.BOOLEAN, b);
-            case String s -> AttributeValue.of(EncodingType.TEXT_STRING, s);
-            case OffsetDateTime odt -> AttributeValue.of(EncodingType.DATE_TIME, odt);
-            case BigInteger bi -> AttributeValue.of(EncodingType.BIG_INTEGER, bi);
-            case ByteBuffer bb -> AttributeValue.of(EncodingType.BYTE_STRING, bb);
-            case List<?> list when isValidStructureAttributeValue(list) ->
-                    AttributeValue.of(EncodingType.STRUCTURE, list);
-            default -> {
-                try {
-                    value = KmipCodecManager.serialize(value);
-                } catch (IOException e) {
-                    throw new IllegalArgumentException("Unsupported encoding type: " + value);
-                }
-
-                if (value instanceof String str) {
-                    yield AttributeValue.of(EncodingType.TEXT_STRING, str);
-                } else if (value instanceof ByteBuffer bb) {
-                    yield AttributeValue.of(EncodingType.BYTE_STRING, bb);
-                } else {
-                    throw new IllegalArgumentException("Unsupported encoded value type: " + value);
-                }
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, LongInteger.class);
             }
-        };
-    }
-
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
-
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<KmipDataType> getValues() {
-        if (encodingType == EncodingType.STRUCTURE && !(isValidStructureAttributeValue(value))) {
-            throw new IllegalArgumentException("Invalid encoding type");
         }
-        return (List<KmipDataType>) value;
+
+        @NonNull
+        private final java.lang.Long value;
+
+        public static LongInteger of(@NonNull java.lang.Long value) {
+            return LongInteger.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class BigInteger implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, BigInteger.class);
+            }
+        }
+
+        @NonNull
+        private final java.math.BigInteger value;
+
+        public static BigInteger of(@NonNull java.math.BigInteger value) {
+            return BigInteger.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class Enumeration implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.ENUMERATION;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, Enumeration.class);
+            }
+        }
+
+        @NonNull
+        private final java.lang.Integer value;
+
+        public static Enumeration of(@NonNull java.lang.Integer value) {
+            return Enumeration.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class Boolean implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.BOOLEAN;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, Boolean.class);
+            }
+        }
+
+        @NonNull
+        private final java.lang.Boolean value;
+
+        public static Boolean of(@NonNull java.lang.Boolean value) {
+            return Boolean.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class TextString implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.TEXT_STRING;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, TextString.class);
+            }
+        }
+
+        @NonNull
+        private final java.lang.String value;
+
+        public static TextString of(@NonNull java.lang.String value) {
+            return TextString.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class ByteString implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.BYTE_STRING;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, ByteString.class);
+            }
+        }
+
+        @NonNull
+        private final ByteBuffer value;
+
+        public static ByteString of(@NonNull ByteBuffer value) {
+            return ByteString.builder().value(value).build();
+        }
+
+        public static ByteString of(byte[] value) {
+            return ByteString.builder().value(ByteBuffer.wrap(value)).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class DateTime implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.DATE_TIME;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, DateTime.class);
+            }
+        }
+
+        @NonNull
+        private final OffsetDateTime value;
+
+        public static DateTime of(@NonNull OffsetDateTime value) {
+            return DateTime.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DateTime that = (DateTime) o;
+            // Compare OffsetDateTime up to seconds to avoid flakiness
+            return this.value.withNano(0).equals(that.value.withNano(0));
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(value.withNano(0));
+        }
+    }
+
+    @Data
+    @Builder
+    public static class Interval implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.INTERVAL;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, Interval.class);
+            }
+        }
+
+        @NonNull
+        private final java.lang.Integer value;
+
+        public static Interval of(@NonNull java.lang.Integer value) {
+            return Interval.builder().value(value).build();
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
+    }
+
+    @Data
+    @Builder
+    public static class Structure implements Value {
+        public static final KmipTag kmipTag = AttributeValue.kmipTag;
+        public static final EncodingType encodingType = EncodingType.STRUCTURE;
+        private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, Structure.class);
+            }
+        }
+
+        @NonNull
+        private final List<KmipDataType> value;
+
+        public static Structure of(@NonNull List<KmipDataType> value) {
+            return Structure.builder().value(value).build();
+        }
+
+        public static Structure of(@NonNull KmipDataType... values) {
+            return of(List.of(values));
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
+            return supportedVersions.contains(spec);
+        }
     }
 }

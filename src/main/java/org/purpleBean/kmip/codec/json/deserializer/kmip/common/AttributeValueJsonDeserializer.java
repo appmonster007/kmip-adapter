@@ -8,18 +8,14 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserial
 import org.purpleBean.kmip.common.AttributeValue;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
-public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue> {
+public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.Value> {
+
     private final KmipTag kmipTag = AttributeValue.kmipTag;
 
     @Override
-    public AttributeValue deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValue.Value deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
@@ -27,7 +23,6 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        // Validation: Extract and validate KMIP tag
         KmipTag tag;
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
@@ -46,7 +41,6 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
             return null;
         }
 
-        // Validation: Extract and validate type field
         JsonNode typeNode = node.get("type");
         if (typeNode == null
                 || !typeNode.isTextual()
@@ -57,77 +51,18 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
         }
         EncodingType encodingType = EncodingType.fromName(typeNode.asText()).get();
 
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null) {
-            ctxt.reportInputMismatch(AttributeValue.class, "AttributeValue 'value' must be a non-empty");
-            return null;
-        }
-
         KmipSpec spec = KmipContext.getSpec();
-
-        Object obj;
-        switch (encodingType) {
-            case STRUCTURE -> {
-                List<KmipDataType> values = new ArrayList<>();
-                for (JsonNode childNode : valueNode) {
-                    values.add(deserializeObjects(childNode, p, ctxt));
-                }
-                obj = values;
-            }
-            case INTEGER, ENUMERATION, INTERVAL -> obj = valueNode.intValue();
-            case BOOLEAN -> obj = valueNode.asBoolean();
-            case DATE_TIME -> obj = OffsetDateTime.parse(valueNode.asText());
-            case LONG_INTEGER -> obj = valueNode.longValue();
-            case TEXT_STRING -> obj = valueNode.asText();
-            case BYTE_STRING -> obj = p.getCodec().treeToValue(valueNode, ByteBuffer.class);
-            case BIG_INTEGER -> obj = p.getCodec().treeToValue(valueNode, BigInteger.class);
-            default -> throw new IllegalArgumentException("Unsupported encoding type: " + encodingType);
+        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(kmipTag.getValue(), encodingType);
+        if (clazz == null) {
+            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTag.getValue(), encodingType));
         }
-        AttributeValue attributeValue = AttributeValue.builder().encodingType(encodingType).value(obj).build();
 
-        // Validate KMIP spec compatibility
+        AttributeValue.Value attributeValue = (AttributeValue.Value) p.getCodec().treeToValue(node, clazz);
+
         if (!attributeValue.isSupported()) {
             throw new NoSuchElementException(String.format("AttributeValue is not supported for KMIP spec %s", spec));
         }
 
         return attributeValue;
-    }
-
-    private KmipDataType deserializeObjects(JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (!node.has("tag") || !node.has("type") || !node.has("value")) {
-            ctxt.reportInputMismatch(AttributeValue.class, "Missing 'tag', 'type', or 'value' field in JSON");
-            return null;
-        }
-
-        if (!node.has("tag") && !node.get("tag").isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.class, "Invalid 'tag' field in JSON");
-            return null;
-        }
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValue.class, "Invalid KMIP tag for AttributeValue");
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.class, String.format("Failed to parse KMIP tag for AttributeValue: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.has("type") && !node.get("type").isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.class, "Invalid 'type' field in JSON");
-            return null;
-        }
-        String type = node.get("type").asText();
-        EncodingType encodingType = EncodingType.fromName(type).get();
-
-
-        KmipSpec spec = KmipContext.getSpec();
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(tag.getValue(), encodingType);
-
-        return p.getCodec().treeToValue(node, clazz);
     }
 }

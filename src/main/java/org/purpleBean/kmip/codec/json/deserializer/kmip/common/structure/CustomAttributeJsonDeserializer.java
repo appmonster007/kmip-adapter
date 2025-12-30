@@ -84,7 +84,7 @@ public class CustomAttributeJsonDeserializer extends KmipDataTypeJsonDeserialize
 
         AttributeName attrName = p.getCodec().treeToValue(attrNameNode, AttributeName.class);
 
-        AttributeValue attrValue = p.getCodec().treeToValue(attrValueNode, AttributeValue.class);
+        AttributeValue.Value attrValue = p.getCodec().treeToValue(attrValueNode, AttributeValue.Value.class);
 
         CustomAttribute customAttribute = CustomAttribute.builder()
                 .attributeName(attrName)

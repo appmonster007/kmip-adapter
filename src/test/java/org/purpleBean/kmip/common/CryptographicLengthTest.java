@@ -3,7 +3,6 @@ package org.purpleBean.kmip.common;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
@@ -93,18 +92,18 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @Test
     @DisplayName("should create from attribute value")
     void shouldCreateFromAttributeValue() {
-        AttributeValue attrValue = AttributeValue.of(192);
-        CryptographicLength length = CryptographicLength.fromValue(attrValue);
+        AttributeValue.Integer attrValue = AttributeValue.Integer.of(192);
+        CryptographicLength length = CryptographicLength.of(AttributeName.of("Cryptographic Length"), attrValue);
         assertThat(length.getValue()).isEqualTo(192);
     }
 
     @Test
     @DisplayName("should throw for invalid attribute value type")
     void shouldThrowForInvalidAttributeValueType() {
-        AttributeValue invalidAttrValue = AttributeValue.of("invalid");
-        assertThatThrownBy(() -> CryptographicLength.fromValue(invalidAttrValue))
+        AttributeValue.TextString invalidAttrValue = AttributeValue.TextString.of("invalid");
+        assertThatThrownBy(() -> CryptographicLength.of(AttributeName.of("Cryptographic Length"), invalidAttrValue))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Invalid attribute value for CryptographicLength");
+                .hasMessageContaining("Invalid attribute value");
     }
 
     @Test
@@ -119,10 +118,14 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
         assertThat(length.isServerInitializable()).isFalse();
         assertThat(length.isClientDeletable()).isFalse();
 
-        // Test with a sample state - should not be modifiable in any state
-        State sampleState = new State(State.Standard.ACTIVE);
-        assertThat(length.isServerModifiable(sampleState)).isFalse();
-        assertThat(length.isClientModifiable(sampleState)).isFalse();
+        // Test with a sample state
+        State preActiveState = new State(State.Standard.PRE_ACTIVE);
+        assertThat(length.isServerModifiable(preActiveState)).isTrue();
+        assertThat(length.isClientModifiable(preActiveState)).isTrue();
+
+        State activeState = new State(State.Standard.ACTIVE);
+        assertThat(length.isServerModifiable(activeState)).isFalse();
+        assertThat(length.isClientModifiable(activeState)).isFalse();
     }
 
     @Test
@@ -162,10 +165,10 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @DisplayName("should have correct attribute value")
     void shouldHaveCorrectAttributeValue() {
         CryptographicLength length = CryptographicLength.of(512);
-        AttributeValue attrValue = length.getAttributeValue();
+        AttributeValue.Value attrValue = length.getAttributeValue();
 
         assertThat(attrValue.getEncodingType()).isEqualTo(EncodingType.INTEGER);
-        assertThat(attrValue.getValue()).isEqualTo(512);
+        assertThat(((AttributeValue.Integer) attrValue).getValue()).isEqualTo(512);
     }
 
     @Test
@@ -188,15 +191,5 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
 
         // Test with different class
         assertThat(length1).isNotEqualTo("not a CryptographicLength");
-    }
-
-    @Test
-    @DisplayName("should support deprecated of(AttributeValue) method")
-    @SuppressWarnings("deprecation")
-    void shouldSupportDeprecatedOfMethod() {
-        AttributeValue attrValue = AttributeValue.of(384);
-        AttributeName attributeName = AttributeName.of("Cryptographic Length");
-        CryptographicLength length = CryptographicLength.of(attributeName, attrValue);
-        assertThat(length.getValue()).isEqualTo(384);
     }
 }

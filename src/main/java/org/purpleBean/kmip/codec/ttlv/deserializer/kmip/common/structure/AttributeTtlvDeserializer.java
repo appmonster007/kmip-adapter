@@ -53,7 +53,7 @@ public class AttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Attr
             case KmipTag.Standard.ATTRIBUTE_INDEX ->
                     builder.attributeIndex(mapper.readValue(ttlvObject.toByteBuffer(), AttributeIndex.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE ->
-                    builder.attributeValue(mapper.readValue(ttlvObject.toByteBuffer(), AttributeValue.class));
+                    builder.attributeValue(mapper.readValue(ttlvObject.toByteBuffer(), AttributeValue.Value.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

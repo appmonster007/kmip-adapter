@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * KMIP KeyValueByteString dataType.
  */
-public class KeyValue {
+public abstract class KeyValue {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE);
 
     public interface Value extends KmipDataType {

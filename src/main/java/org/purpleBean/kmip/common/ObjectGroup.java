@@ -34,11 +34,11 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
         return ObjectGroup.builder().value(value).build();
     }
 
-    public static ObjectGroup of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
+    public static ObjectGroup of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString textString)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return ObjectGroup.builder().value(value).build();
+        return new ObjectGroup(textString.getValue());
     }
 
     @Override
@@ -93,8 +93,8 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.TextString.of(value);
     }
 
     @Override

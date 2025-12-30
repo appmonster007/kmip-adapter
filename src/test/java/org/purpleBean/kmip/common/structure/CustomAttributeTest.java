@@ -27,8 +27,7 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttr
 
     @Override
     protected CustomAttribute createDefault() {
-        State state = new State(State.Standard.ACTIVE);
-        return CustomAttribute.of("x-custom-state", state);
+        return CustomAttribute.of("x-custom-state", AttributeValue.Enumeration.of(1));
     }
 
     @Override
@@ -44,7 +43,7 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttr
     @Override
     protected void validateComponents(List<KmipDataType> values) {
         Assertions.assertThat(values.get(0)).isInstanceOf(AttributeName.class);
-        Assertions.assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
+        Assertions.assertThat(values.get(1)).isInstanceOf(AttributeValue.Value.class);
     }
 
     @Override
@@ -74,22 +73,22 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttr
 
     @Override
     protected State stateForServerModifiableTrue() {
-        return null;
+        return new State(State.Standard.ACTIVE);
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return null;
+        return new State(State.Standard.PRE_ACTIVE);
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
-        return null;
+        return new State(State.Standard.ACTIVE);
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return null;
+        return new State(State.Standard.PRE_ACTIVE);
     }
 
 

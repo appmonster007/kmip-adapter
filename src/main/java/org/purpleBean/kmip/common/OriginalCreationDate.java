@@ -35,16 +35,16 @@ public class OriginalCreationDate implements KmipDataType, KmipAttribute {
         return OriginalCreationDate.builder().value(value).build();
     }
 
-    public static OriginalCreationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    public static OriginalCreationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.DateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new OriginalCreationDate(value);
+        return new OriginalCreationDate(dateTime.getValue());
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.DateTime.of(value);
     }
 
     @Override

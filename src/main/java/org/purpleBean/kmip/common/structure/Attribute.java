@@ -37,9 +37,9 @@ public class Attribute implements KmipStructure {
     private final AttributeName attributeName;
     private final AttributeIndex attributeIndex;
     @NonNull
-    private final AttributeValue attributeValue;
+    private final AttributeValue.Value attributeValue;
 
-    public static Attribute of(@NonNull String name, @NonNull Object value) {
+    public static Attribute of(@NonNull String name, @NonNull AttributeValue.Value value) {
         return Attribute.of(CustomAttribute.of(name, value));
     }
 
@@ -54,14 +54,17 @@ public class Attribute implements KmipStructure {
         KmipSpec spec = KmipContext.getSpec();
         String name = attribute.getAttributeName().getValue();
         KmipTag.Value attrTag;
+        EncodingType encodingType;
         if (CustomAttribute.isValidCustomAttributeName(name)) {
             attrTag = KmipTag.Standard.ATTRIBUTE;
+            encodingType = EncodingType.STRUCTURE;
         } else {
             attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
+            encodingType = attribute.getAttributeValue().getEncodingType();
         }
-        BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(
+        BiFunction<AttributeName, AttributeValue.Value, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(
                 attrTag,
-                attribute.getAttributeValue().getEncodingType()
+                encodingType
         );
         return attributeBuilder.apply(attribute.getAttributeName(), attribute.getAttributeValue());
     }

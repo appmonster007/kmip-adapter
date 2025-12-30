@@ -11,6 +11,16 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AsynchronousIndicatorTtl
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeIndexTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueByteStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueIntegerTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueLongIntegerTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueBigIntegerTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueEnumerationTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueBooleanTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueTextStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueDateTimeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueIntervalTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.AttributeValueStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.BatchCountTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.BatchOrderOptionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CRTCoefficientTtlvDeserializer

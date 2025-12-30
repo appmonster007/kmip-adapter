@@ -11,6 +11,16 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.AsynchronousIndicatorJso
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeIndexJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeNameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueByteStringJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueIntegerJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueLongIntegerJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueBigIntegerJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueEnumerationJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueBooleanJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueTextStringJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueDateTimeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueIntervalJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.BatchCountJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.BatchOrderOptionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.CRTCoefficientJsonDeserializer

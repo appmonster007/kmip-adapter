@@ -35,16 +35,16 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
         return DeactivationDate.builder().value(value).build();
     }
 
-    public static DeactivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    public static DeactivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.DateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new DeactivationDate(value);
+        return new DeactivationDate(dateTime.getValue());
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.DateTime.of(value);
     }
 
     @Override

@@ -60,9 +60,12 @@ public class Name implements KmipStructure, KmipAttribute {
         return new Name(NameValue.of(name), type);
     }
 
-    public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+    public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
         NameBuilder builder = Name.builder();
-        List<KmipDataType> fields = attributeValue.getValues();
+        List<KmipDataType> fields = structure.getValue();
         for (KmipDataType field : fields) {
             if (field instanceof NameValue nameValue) {
                 builder.nameValue(nameValue);
@@ -138,8 +141,8 @@ public class Name implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.of(getValues());
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Structure.of(getValues());
     }
 
     @Override

@@ -90,7 +90,7 @@ public class AttributeJsonDeserializer extends KmipDataTypeJsonDeserializer<Attr
             attrIndex = p.getCodec().treeToValue(attrIndexNode, AttributeIndex.class);
         }
 
-        AttributeValue attrValue = p.getCodec().treeToValue(attrValueNode, AttributeValue.class);
+        AttributeValue.Value attrValue = p.getCodec().treeToValue(attrValueNode, AttributeValue.Value.class);
 
         Attribute attribute = Attribute.builder()
                 .attributeName(attrName)

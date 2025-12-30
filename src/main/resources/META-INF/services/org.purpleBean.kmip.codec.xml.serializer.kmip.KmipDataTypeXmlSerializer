@@ -9,7 +9,16 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.AsynchronousCorrelationValu
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AsynchronousIndicatorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeIndexXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeNameXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueByteStringXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueIntegerXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueLongIntegerXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueBigIntegerXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueEnumerationXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueBooleanXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueTextStringXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueDateTimeXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueIntervalXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.AttributeValueStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.BatchCountXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.BatchOrderOptionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CRTCoefficientXmlSerializer

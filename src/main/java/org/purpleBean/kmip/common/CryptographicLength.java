@@ -39,12 +39,11 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
      * @return a new CryptographicLength instance
      * @throws IllegalArgumentException if the attribute value is invalid
      */
-    public static CryptographicLength fromValue(@NonNull AttributeValue attributeValue) {
-        Objects.requireNonNull(attributeValue, "Attribute value cannot be null");
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer)) {
-            throw new IllegalArgumentException("Invalid attribute value for CryptographicLength");
+    public static CryptographicLength of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Integer integer)) {
+            throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CryptographicLength((Integer) attributeValue.getValue());
+        return new CryptographicLength(integer.getValue());
     }
 
     /**
@@ -55,19 +54,6 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
      */
     public static CryptographicLength of(int value) {
         return new CryptographicLength(value);
-    }
-
-    /**
-     * Creates a new CryptographicLength instance from an AttributeValue.
-     *
-     * @param attributeValue the attribute value to convert from
-     * @return a new CryptographicLength instance
-     * @throws IllegalArgumentException if the attribute value is invalid
-     * @deprecated Use {@link #fromValue(AttributeValue)} instead
-     */
-    @Deprecated
-    public static CryptographicLength of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        return fromValue(attributeValue);
     }
 
     @Override
@@ -89,8 +75,8 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     // KmipAttribute implementation
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.of(value);
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Integer.of(value);
     }
 
     @Override

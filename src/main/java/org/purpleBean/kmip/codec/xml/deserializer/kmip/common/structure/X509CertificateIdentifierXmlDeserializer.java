@@ -41,9 +41,7 @@ public class X509CertificateIdentifierXmlDeserializer extends KmipDataTypeXmlDes
         X509CertificateIdentifier.X509CertificateIdentifierBuilder builder = X509CertificateIdentifier.builder();
 
         // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
+        for (Map.Entry<String, JsonNode> entry : node.properties()) {
             KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
             setValue(builder, nodeTag, entry.getValue(), p, ctxt);
         }

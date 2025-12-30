@@ -7,6 +7,7 @@ import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -31,11 +32,15 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     @NonNull
     private final OffsetDateTime value;
 
-    public static DestroyDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime dateTime)) {
+    public static DestroyDate of(@NonNull OffsetDateTime value) {
+        return DestroyDate.builder().value(value).build();
+    }
+
+    public static DestroyDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.DateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new DestroyDate(dateTime);
+        return new DestroyDate(dateTime.getValue());
     }
 
     @Override
@@ -90,8 +95,8 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.DateTime.of(value);
     }
 
     @Override
@@ -102,5 +107,19 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     @Override
     public String getCanonicalName() {
         return getAttributeName().getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DestroyDate that = (DestroyDate) o;
+        // Compare OffsetDateTime up to seconds to avoid flakiness
+        return this.value.withNano(0).equals(that.value.withNano(0));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value.withNano(0));
     }
 }

@@ -48,14 +48,14 @@ public class State implements KmipEnumeration, KmipAttribute {
         this.value = value;
     }
 
-    public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+    public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
         }
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Enumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        State.Value v = fromValue(value);
+        State.Value v = fromValue(enumeration.getValue());
         return new State(v);
     }
 
@@ -184,8 +184,8 @@ public class State implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.of(value.getValue());
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Enumeration.of(value.getValue());
     }
 
     @Override

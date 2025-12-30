@@ -11,6 +11,16 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AsynchronousIndicatorXmlD
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeIndexXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueByteStringXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntegerXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueLongIntegerXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueBigIntegerXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueEnumerationXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueBooleanXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueTextStringXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueDateTimeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntervalXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchCountXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchOrderOptionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CRTCoefficientXmlDeserializer

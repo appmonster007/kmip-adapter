@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.xml.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
@@ -26,13 +27,11 @@ class CustomAttributeXmlTest extends AbstractXmlSerializationSuite<CustomAttribu
 
     @Override
     protected CustomAttribute createDefault() {
-        State state = new State(State.Standard.ACTIVE);
-        return CustomAttribute.of("x-custom-state", state);
+        return CustomAttribute.of("x-custom-state", AttributeValue.Enumeration.of(State.Standard.ACTIVE.getValue()));
     }
 
     @Override
     protected CustomAttribute createVariant() {
-        State state = new State(State.Standard.ACTIVE);
-        return CustomAttribute.of("x-custom-date", FIXED_TIME);
+        return CustomAttribute.of("x-custom-date", AttributeValue.DateTime.of(FIXED_TIME));
     }
 }

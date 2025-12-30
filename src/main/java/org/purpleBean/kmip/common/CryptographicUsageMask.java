@@ -34,11 +34,11 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
         return CryptographicUsageMask.builder().value(value).build();
     }
 
-    public static CryptographicUsageMask of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
+    public static CryptographicUsageMask of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Integer integer)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CryptographicUsageMask(value);
+        return new CryptographicUsageMask(integer.getValue());
     }
 
 
@@ -94,8 +94,8 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value(value).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Integer.of(value);
     }
 
     @Override

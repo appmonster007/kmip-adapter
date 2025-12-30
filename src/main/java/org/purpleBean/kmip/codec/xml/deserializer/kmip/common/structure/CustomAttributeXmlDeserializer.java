@@ -41,9 +41,7 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         CustomAttribute.CustomAttributeBuilder builder = CustomAttribute.builder();
 
         // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
+        for (Map.Entry<String, JsonNode> entry : node.properties()) {
             KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
             setValue(builder, nodeTag, entry.getValue(), p, ctxt);
         }
@@ -73,7 +71,7 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
             case KmipTag.Standard.ATTRIBUTE_NAME ->
                     builder.attributeName(p.getCodec().treeToValue(node, AttributeName.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE ->
-                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.class));
+                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.Value.class));
             default -> throw new IllegalArgumentException();
         }
     }

@@ -52,9 +52,12 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
         return new X509CertificateIdentifier(IssuerDistinguishedName.of(issuerDistinguishedName), CertificateSerialNumber.of(certificateSerialNumber));
     }
 
-    public static X509CertificateIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+    public static X509CertificateIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
         X509CertificateIdentifierBuilder builder = X509CertificateIdentifier.builder();
-        List<KmipDataType> fields = attributeValue.getValues();
+        List<KmipDataType> fields = structure.getValue();
         for (KmipDataType field : fields) {
             if (field instanceof IssuerDistinguishedName issuerDistinguishedName) {
                 builder.issuerDistinguishedName(issuerDistinguishedName);
@@ -130,8 +133,8 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.of(getValues());
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Structure.of(getValues());
     }
 
     @Override
