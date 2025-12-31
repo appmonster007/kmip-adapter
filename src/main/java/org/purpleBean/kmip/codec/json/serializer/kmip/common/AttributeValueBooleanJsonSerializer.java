@@ -30,7 +30,7 @@ public class AttributeValueBooleanJsonSerializer extends KmipDataTypeJsonSeriali
         gen.writeStartObject();
         gen.writeObject(attributeValueBoolean.getKmipTag());
         gen.writeStringField("type", attributeValueBoolean.getEncodingType().getDescription());
-        gen.writeObjectField("value", attributeValueBoolean.getValue());
+        gen.writeObjectField("value", attributeValueBoolean.getValue().toString());
         gen.writeEndObject();
     }
 }

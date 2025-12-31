@@ -5,18 +5,18 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.common.CriticalityIndicator;
+import org.purpleBean.kmip.common.KeyValuePresent;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * JSON serializer for CriticalityIndicator.
+ * JSON serializer for KeyValuePresent.
  */
-public class CriticalityIndicatorJsonSerializer extends KmipDataTypeJsonSerializer<CriticalityIndicator> {
+public class KeyValuePresentJsonSerializer extends KmipDataTypeJsonSerializer<KeyValuePresent> {
 
     @Override
-    public void serialize(CriticalityIndicator value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(KeyValuePresent value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
         if (value == null) {
             return;
@@ -26,7 +26,7 @@ public class CriticalityIndicatorJsonSerializer extends KmipDataTypeJsonSerializ
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("CriticalityIndicator is not supported for KMIP spec %s", spec)
+                    String.format("KeyValuePresent is not supported for KMIP spec %s", spec)
             );
         }
 

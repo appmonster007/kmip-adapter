@@ -10,27 +10,30 @@ import org.purpleBean.kmip.common.AsynchronousIndicator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for AsynchronousIndicator.
+ */
 public class AsynchronousIndicatorJsonSerializer extends KmipDataTypeJsonSerializer<AsynchronousIndicator> {
 
     @Override
-    public void serialize(AsynchronousIndicator asynchronousIndicator, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (asynchronousIndicator == null) {
+    public void serialize(AsynchronousIndicator value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
+        if (value == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!asynchronousIndicator.isSupported()) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", asynchronousIndicator.getKmipTag().getDescription(), spec)
+                    String.format("AsynchronousIndicator is not supported for KMIP spec %s", spec)
             );
         }
 
-        gen.writeStartObject();
-        gen.writeObject(asynchronousIndicator.getKmipTag());
-        gen.writeStringField("type", asynchronousIndicator.getEncodingType().getDescription());
-        gen.writeObjectField("value", asynchronousIndicator.getValue());
-        gen.writeEndObject();
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeObjectField("value", value.getValue().toString());
+        jsonGenerator.writeEndObject();
     }
 }

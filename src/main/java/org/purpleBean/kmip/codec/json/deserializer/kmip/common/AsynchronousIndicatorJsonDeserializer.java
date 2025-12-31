@@ -11,7 +11,11 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserial
 import org.purpleBean.kmip.common.AsynchronousIndicator;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
+/**
+ * JSON deserializer for AsynchronousIndicator.
+ */
 public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeserializer<AsynchronousIndicator> {
     private final KmipTag kmipTag = AsynchronousIndicator.kmipTag;
     private final EncodingType encodingType = AsynchronousIndicator.encodingType;
@@ -19,9 +23,8 @@ public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeser
     @Override
     public AsynchronousIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
-
         if (node == null) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, String.format("JSON node cannot be null for AsynchronousIndicator deserialization"));
+            ctxt.reportInputMismatch(AsynchronousIndicator.class, "JSON node cannot be null for AsynchronousIndicator deserialization");
             return null;
         }
 
@@ -30,7 +33,7 @@ public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeser
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AsynchronousIndicator.class, String.format("Invalid KMIP tag for AsynchronousIndicator"));
+                ctxt.reportInputMismatch(AsynchronousIndicator.class, "Invalid KMIP tag for AsynchronousIndicator");
                 return null;
             }
         } catch (Exception e) {
@@ -51,28 +54,34 @@ public class AsynchronousIndicatorJsonDeserializer extends KmipDataTypeJsonDeser
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, String.format("Missing or non-text 'type' field for AsynchronousIndicator"));
+            ctxt.reportInputMismatch(AsynchronousIndicator.class, "Missing or non-text 'type' field for AsynchronousIndicator");
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isBoolean()) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, "AsynchronousIndicator 'value' must be a boolean");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch(AsynchronousIndicator.class, String.format("Missing or non-text 'value' field for %s", kmipTag.getDescription()));
             return null;
         }
 
-        boolean value = valueNode.asBoolean();
-        AsynchronousIndicator asynchronousIndicator = AsynchronousIndicator.builder().value(value).build();
+        String value = valueNode.asText();
+        if (value == null || value.trim().isEmpty()) {
+            ctxt.reportInputMismatch(AsynchronousIndicator.class, String.format("%s value cannot be empty", kmipTag.getDescription()));
+            return null;
+        }
 
-        // Validate KMIP spec compatibility
+        // Validation: KMIP spec compatibility and value lookup
         KmipSpec spec = KmipContext.getSpec();
+        AsynchronousIndicator attribute = AsynchronousIndicator.of(Boolean.valueOf(value));
 
-        if (!asynchronousIndicator.isSupported()) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, "AsynchronousIndicator not supported for spec " + spec);
-            return null;
+        // Final validation: Ensure constructed AsynchronousIndicator is supported
+        if (!attribute.isSupported()) {
+            throw new NoSuchElementException(
+                    String.format("AsynchronousIndicator '%s' is not supported for KMIP spec %s", value, spec)
+            );
         }
 
-        return asynchronousIndicator;
+        return attribute;
     }
 }

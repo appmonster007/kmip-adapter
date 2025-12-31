@@ -57,7 +57,7 @@ public class AttributeValueBooleanJsonDeserializer extends KmipDataTypeJsonDeser
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isBoolean()) {
+        if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(AttributeValue.Boolean.class, "AttributeValue.Boolean 'value' must be a non-empty boolean");
             return null;
         }

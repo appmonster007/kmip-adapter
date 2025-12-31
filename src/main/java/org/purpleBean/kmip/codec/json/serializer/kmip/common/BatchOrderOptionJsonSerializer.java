@@ -10,27 +10,30 @@ import org.purpleBean.kmip.common.BatchOrderOption;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for BatchOrderOption.
+ */
 public class BatchOrderOptionJsonSerializer extends KmipDataTypeJsonSerializer<BatchOrderOption> {
 
     @Override
-    public void serialize(BatchOrderOption batchOrderOption, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (batchOrderOption == null) {
+    public void serialize(BatchOrderOption value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
+        if (value == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!batchOrderOption.isSupported()) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", batchOrderOption.getKmipTag().getDescription(), spec)
+                    String.format("BatchOrderOption is not supported for KMIP spec %s", spec)
             );
         }
 
-        gen.writeStartObject();
-        gen.writeObject(batchOrderOption.getKmipTag());
-        gen.writeStringField("type", batchOrderOption.getEncodingType().getDescription());
-        gen.writeObjectField("value", batchOrderOption.getValue());
-        gen.writeEndObject();
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeObjectField("value", value.getValue().toString());
+        jsonGenerator.writeEndObject();
     }
 }

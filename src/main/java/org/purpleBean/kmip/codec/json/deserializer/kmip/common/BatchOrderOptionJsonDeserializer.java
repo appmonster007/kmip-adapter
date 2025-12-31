@@ -11,7 +11,11 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserial
 import org.purpleBean.kmip.common.BatchOrderOption;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
+/**
+ * JSON deserializer for BatchOrderOption.
+ */
 public class BatchOrderOptionJsonDeserializer extends KmipDataTypeJsonDeserializer<BatchOrderOption> {
     private final KmipTag kmipTag = BatchOrderOption.kmipTag;
     private final EncodingType encodingType = BatchOrderOption.encodingType;
@@ -19,9 +23,8 @@ public class BatchOrderOptionJsonDeserializer extends KmipDataTypeJsonDeserializ
     @Override
     public BatchOrderOption deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
-
         if (node == null) {
-            ctxt.reportInputMismatch(BatchOrderOption.class, String.format("JSON node cannot be null for BatchOrderOption deserialization"));
+            ctxt.reportInputMismatch(BatchOrderOption.class, "JSON node cannot be null for BatchOrderOption deserialization");
             return null;
         }
 
@@ -30,7 +33,7 @@ public class BatchOrderOptionJsonDeserializer extends KmipDataTypeJsonDeserializ
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(BatchOrderOption.class, String.format("Invalid KMIP tag for BatchOrderOption"));
+                ctxt.reportInputMismatch(BatchOrderOption.class, "Invalid KMIP tag for BatchOrderOption");
                 return null;
             }
         } catch (Exception e) {
@@ -51,28 +54,34 @@ public class BatchOrderOptionJsonDeserializer extends KmipDataTypeJsonDeserializ
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(BatchOrderOption.class, String.format("Missing or non-text 'type' field for BatchOrderOption"));
+            ctxt.reportInputMismatch(BatchOrderOption.class, "Missing or non-text 'type' field for BatchOrderOption");
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isBoolean()) {
-            ctxt.reportInputMismatch(BatchOrderOption.class, "BatchOrderOption 'value' must be a boolean");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch(BatchOrderOption.class, String.format("Missing or non-text 'value' field for %s", kmipTag.getDescription()));
             return null;
         }
 
-        boolean value = valueNode.asBoolean();
-        BatchOrderOption batchOrderOption = BatchOrderOption.builder().value(value).build();
+        String value = valueNode.asText();
+        if (value == null || value.trim().isEmpty()) {
+            ctxt.reportInputMismatch(BatchOrderOption.class, String.format("%s value cannot be empty", kmipTag.getDescription()));
+            return null;
+        }
 
-        // Validate KMIP spec compatibility
+        // Validation: KMIP spec compatibility and value lookup
         KmipSpec spec = KmipContext.getSpec();
+        BatchOrderOption attribute = BatchOrderOption.of(Boolean.valueOf(value));
 
-        if (!batchOrderOption.isSupported()) {
-            ctxt.reportInputMismatch(BatchOrderOption.class, "BatchOrderOption not supported for spec " + spec);
-            return null;
+        // Final validation: Ensure constructed BatchOrderOption is supported
+        if (!attribute.isSupported()) {
+            throw new NoSuchElementException(
+                    String.format("BatchOrderOption '%s' is not supported for KMIP spec %s", value, spec)
+            );
         }
 
-        return batchOrderOption;
+        return attribute;
     }
 }

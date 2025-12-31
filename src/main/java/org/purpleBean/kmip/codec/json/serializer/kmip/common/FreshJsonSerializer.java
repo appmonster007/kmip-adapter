@@ -10,27 +10,30 @@ import org.purpleBean.kmip.common.Fresh;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for Fresh.
+ */
 public class FreshJsonSerializer extends KmipDataTypeJsonSerializer<Fresh> {
 
     @Override
-    public void serialize(Fresh fresh, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (fresh == null) {
+    public void serialize(Fresh value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
+        if (value == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!fresh.isSupported()) {
+        if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", fresh.getKmipTag().getDescription(), spec)
+                    String.format("Fresh is not supported for KMIP spec %s", spec)
             );
         }
 
-        gen.writeStartObject();
-        gen.writeObject(fresh.getKmipTag());
-        gen.writeStringField("type", fresh.getEncodingType().getDescription());
-        gen.writeObjectField("value", fresh.getValue());
-        gen.writeEndObject();
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeObjectField("value", value.getValue().toString());
+        jsonGenerator.writeEndObject();
     }
 }

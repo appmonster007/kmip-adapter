@@ -11,7 +11,11 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserial
 import org.purpleBean.kmip.common.CriticalityIndicator;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
+/**
+ * JSON deserializer for CriticalityIndicator.
+ */
 public class CriticalityIndicatorJsonDeserializer extends KmipDataTypeJsonDeserializer<CriticalityIndicator> {
     private final KmipTag kmipTag = CriticalityIndicator.kmipTag;
     private final EncodingType encodingType = CriticalityIndicator.encodingType;
@@ -19,9 +23,8 @@ public class CriticalityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseri
     @Override
     public CriticalityIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
-
         if (node == null) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, String.format("JSON node cannot be null for CriticalityIndicator deserialization"));
+            ctxt.reportInputMismatch(CriticalityIndicator.class, "JSON node cannot be null for CriticalityIndicator deserialization");
             return null;
         }
 
@@ -30,7 +33,7 @@ public class CriticalityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseri
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(CriticalityIndicator.class, String.format("Invalid KMIP tag for CriticalityIndicator"));
+                ctxt.reportInputMismatch(CriticalityIndicator.class, "Invalid KMIP tag for CriticalityIndicator");
                 return null;
             }
         } catch (Exception e) {
@@ -51,28 +54,34 @@ public class CriticalityIndicatorJsonDeserializer extends KmipDataTypeJsonDeseri
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, String.format("Missing or non-text 'type' field for CriticalityIndicator"));
+            ctxt.reportInputMismatch(CriticalityIndicator.class, "Missing or non-text 'type' field for CriticalityIndicator");
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isBoolean()) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, "CriticalityIndicator 'value' must be a boolean");
+        if (valueNode == null || !valueNode.isTextual()) {
+            ctxt.reportInputMismatch(CriticalityIndicator.class, String.format("Missing or non-text 'value' field for %s", kmipTag.getDescription()));
             return null;
         }
 
-        boolean value = valueNode.asBoolean();
-        CriticalityIndicator criticalityIndicator = CriticalityIndicator.builder().value(value).build();
+        String value = valueNode.asText();
+        if (value == null || value.trim().isEmpty()) {
+            ctxt.reportInputMismatch(CriticalityIndicator.class, String.format("%s value cannot be empty", kmipTag.getDescription()));
+            return null;
+        }
 
-        // Validate KMIP spec compatibility
+        // Validation: KMIP spec compatibility and value lookup
         KmipSpec spec = KmipContext.getSpec();
+        CriticalityIndicator attribute = CriticalityIndicator.of(Boolean.valueOf(value));
 
-        if (!criticalityIndicator.isSupported()) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, "CriticalityIndicator not supported for spec " + spec);
-            return null;
+        // Final validation: Ensure constructed CriticalityIndicator is supported
+        if (!attribute.isSupported()) {
+            throw new NoSuchElementException(
+                    String.format("CriticalityIndicator '%s' is not supported for KMIP spec %s", value, spec)
+            );
         }
 
-        return criticalityIndicator;
+        return attribute;
     }
 }
