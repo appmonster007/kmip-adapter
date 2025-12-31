@@ -17,13 +17,14 @@ import java.util.stream.Stream;
 /**
  * KMIP SampleStructure structure.
  */
+@Deprecated(since = "Sample structure object, not to be used for KMIP")
 @Data
 @Builder
 public class SampleStructure implements KmipStructure {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.P);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {
         for (KmipSpec spec : supportedVersions) {
