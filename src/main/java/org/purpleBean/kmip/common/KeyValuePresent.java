@@ -72,22 +72,6 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public boolean isClientModifiable(@NonNull State state) {
-        // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
-    }
-
-    @Override
-    public boolean isClientDeletable() {
-        return false;
-    }
-
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return false;
-    }
-
-    @Override
     public boolean isAlwaysPresent() {
         return false;
     }
@@ -99,12 +83,26 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
 
     @Override
     public boolean isClientInitializable() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isServerModifiable(@NonNull State state) {
-        // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+        return false;
+    }
+
+    @Override
+    public boolean isClientModifiable(@NonNull State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
     }
 }

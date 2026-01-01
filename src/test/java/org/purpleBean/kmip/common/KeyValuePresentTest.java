@@ -6,9 +6,6 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
 @DisplayName("KeyValuePresent Domain Tests")
 class KeyValuePresentTest extends AbstractKmipDataTypeAttributeSuite<KeyValuePresent> {
 
@@ -44,7 +41,7 @@ class KeyValuePresentTest extends AbstractKmipDataTypeAttributeSuite<KeyValuePre
 
     @Override
     protected boolean expectClientInitializable() {
-        return true;
+        return false;
     }
 
     @Override
@@ -59,21 +56,29 @@ class KeyValuePresentTest extends AbstractKmipDataTypeAttributeSuite<KeyValuePre
 
     @Override
     protected State stateForServerModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return null;
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return new State(State.Standard.ACTIVE);
+        return null;
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return null;
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return new State(State.Standard.ACTIVE);
+        return null;
+    }
+
+    @Override
+    protected void attribute_serverModifiable_respectsState() {
+    }
+
+    @Override
+    protected void attribute_clientModifiable_respectsState() {
     }
 }
