@@ -11,27 +11,28 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class FreshTtlvSerializer extends KmipDataTypeTtlvSerializer<Fresh> {
+
     @Override
-    public ByteBuffer serialize(Fresh value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
+    public ByteBuffer serialize(Fresh fresh, TtlvMapper mapper) throws IOException {
+        return serializeToTtlvObject(fresh, mapper).toByteBuffer();
     }
 
-    private TtlvObject serializeToTtlvObject(Fresh value, TtlvMapper mapper) throws IOException {
-        if (value == null) {
+    public TtlvObject serializeToTtlvObject(Fresh fresh, TtlvMapper mapper) throws IOException {
+        if (fresh == null) {
             return null;
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!fresh.isSupported()) {
             throw new IOException(
                     String.format("%s is not supported for KMIP spec %s",
-                            value.getKmipTag().getDescription(), spec)
+                            fresh.getKmipTag().getDescription(), spec)
             );
         }
 
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
+        byte[] tag = fresh.getKmipTag().getTagBytes();
+        byte type = fresh.getEncodingType().getTypeValue();
+        byte[] payload = mapper.writeValueAsByteBuffer(fresh.getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)

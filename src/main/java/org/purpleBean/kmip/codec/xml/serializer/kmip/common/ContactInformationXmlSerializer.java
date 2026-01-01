@@ -12,6 +12,9 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * XML serializer for ContactInformation.
+ */
 public class ContactInformationXmlSerializer extends KmipDataTypeXmlSerializer<ContactInformation> {
 
     @Override

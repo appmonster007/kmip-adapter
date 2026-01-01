@@ -9,12 +9,11 @@ import org.purpleBean.kmip.common.enumeration.State;
 import java.util.Set;
 
 /**
- * KMIP ContactInformation dataType.
+ * KMIP ContactInformation attribute.
  */
 @Data
 @Builder
 public class ContactInformation implements KmipDataType, KmipAttribute {
-
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CONTACT_INFORMATION);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -35,10 +34,25 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     }
 
     public static ContactInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString textString)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new ContactInformation(textString.getValue());
+        return new ContactInformation(value.getValue());
+    }
+
+    @Override
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.TextString.of(value);
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     @Override
@@ -90,20 +104,5 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     @Override
     public boolean isMultiInstanceAllowed() {
         return false;
-    }
-
-    @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.TextString.of(value);
-    }
-
-    @Override
-    public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    @Override
-    public String getCanonicalName() {
-        return getAttributeName().getValue();
     }
 }

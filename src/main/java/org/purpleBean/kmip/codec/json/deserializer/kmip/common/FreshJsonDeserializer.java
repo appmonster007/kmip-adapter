@@ -11,7 +11,6 @@ import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserial
 import org.purpleBean.kmip.common.Fresh;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 
 /**
  * JSON deserializer for Fresh.
@@ -23,8 +22,9 @@ public class FreshJsonDeserializer extends KmipDataTypeJsonDeserializer<Fresh> {
     @Override
     public Fresh deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
+
         if (node == null) {
-            ctxt.reportInputMismatch(Fresh.class, "JSON node cannot be null for Fresh deserialization");
+            ctxt.reportInputMismatch(Fresh.class, String.format("JSON node cannot be null for Fresh deserialization"));
             return null;
         }
 
@@ -33,7 +33,7 @@ public class FreshJsonDeserializer extends KmipDataTypeJsonDeserializer<Fresh> {
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(Fresh.class, "Invalid KMIP tag for Fresh");
+                ctxt.reportInputMismatch(Fresh.class, String.format("Invalid KMIP tag for Fresh"));
                 return null;
             }
         } catch (Exception e) {
@@ -54,34 +54,28 @@ public class FreshJsonDeserializer extends KmipDataTypeJsonDeserializer<Fresh> {
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(Fresh.class, "Missing or non-text 'type' field for Fresh");
+            ctxt.reportInputMismatch(Fresh.class, String.format("Missing or non-text 'type' field for Fresh"));
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(Fresh.class, String.format("Missing or non-text 'value' field for %s", kmipTag.getDescription()));
+            ctxt.reportInputMismatch(Fresh.class, "Fresh 'value' must be a non-empty array");
             return null;
         }
 
-        String value = valueNode.asText();
-        if (value == null || value.trim().isEmpty()) {
-            ctxt.reportInputMismatch(Fresh.class, String.format("%s value cannot be empty", kmipTag.getDescription()));
-            return null;
-        }
+        Boolean value = Boolean.valueOf(valueNode.asText());
+        Fresh fresh = Fresh.builder().value(value).build();
 
-        // Validation: KMIP spec compatibility and value lookup
+        // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        Fresh attribute = Fresh.of(Boolean.valueOf(value));
 
-        // Final validation: Ensure constructed Fresh is supported
-        if (!attribute.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("Fresh '%s' is not supported for KMIP spec %s", value, spec)
-            );
+        if (!fresh.isSupported()) {
+            ctxt.reportInputMismatch(Fresh.class, "Fresh not supported for spec " + spec);
+            return null;
         }
 
-        return attribute;
+        return fresh;
     }
 }

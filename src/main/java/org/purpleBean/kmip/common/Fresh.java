@@ -4,16 +4,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.Set;
 
 /**
- * KMIP Fresh dataType.
+ * KMIP Fresh attribute.
  */
 @Data
 @Builder
-public class Fresh implements KmipDataType {
-
+public class Fresh implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FRESH);
     public static final EncodingType encodingType = EncodingType.BOOLEAN;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -22,15 +22,37 @@ public class Fresh implements KmipDataType {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Fresh.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, Fresh.class, Fresh::of);
         }
     }
-
 
     @NonNull
     private final Boolean value;
 
     public static Fresh of(@NonNull Boolean value) {
         return Fresh.builder().value(value).build();
+    }
+
+    public static Fresh of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Boolean value)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return new Fresh(value.getValue());
+    }
+
+    @Override
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Boolean.of(value);
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     @Override
@@ -47,5 +69,40 @@ public class Fresh implements KmipDataType {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerModifiable(@NonNull State state) {
+        return true;
+    }
+
+    @Override
+    public boolean isClientModifiable(@NonNull State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
     }
 }

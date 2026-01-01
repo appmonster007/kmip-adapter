@@ -12,6 +12,9 @@ import org.purpleBean.kmip.common.ContactInformation;
 
 import java.io.IOException;
 
+/**
+ * JSON deserializer for ContactInformation.
+ */
 public class ContactInformationJsonDeserializer extends KmipDataTypeJsonDeserializer<ContactInformation> {
     private final KmipTag kmipTag = ContactInformation.kmipTag;
     private final EncodingType encodingType = ContactInformation.encodingType;

@@ -14,6 +14,9 @@ import org.purpleBean.kmip.common.Fresh;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for Fresh.
+ */
 public class FreshXmlDeserializer extends KmipDataTypeXmlDeserializer<Fresh> {
     private final KmipTag kmipTag = Fresh.kmipTag;
     private final EncodingType encodingType = Fresh.encodingType;
@@ -44,7 +47,7 @@ public class FreshXmlDeserializer extends KmipDataTypeXmlDeserializer<Fresh> {
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
             ctxt.reportInputMismatch(Fresh.class,
-                    "Missing or non-boolean 'value' for Fresh");
+                    "Missing or non-text 'value' for Fresh");
             return null;
         }
 

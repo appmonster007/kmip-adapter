@@ -10,6 +10,9 @@ import org.purpleBean.kmip.common.ContactInformation;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * JSON serializer for ContactInformation.
+ */
 public class ContactInformationJsonSerializer extends KmipDataTypeJsonSerializer<ContactInformation> {
 
     @Override

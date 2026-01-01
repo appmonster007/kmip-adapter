@@ -12,6 +12,9 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * XML serializer for Fresh.
+ */
 public class FreshXmlSerializer extends KmipDataTypeXmlSerializer<Fresh> {
 
     @Override

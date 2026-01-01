@@ -16,24 +16,24 @@ import java.io.UnsupportedEncodingException;
 public class FreshJsonSerializer extends KmipDataTypeJsonSerializer<Fresh> {
 
     @Override
-    public void serialize(Fresh value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-
-        if (value == null) {
+    public void serialize(Fresh fresh, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
+        // Validation: Null check
+        if (fresh == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!fresh.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("Fresh is not supported for KMIP spec %s", spec)
+                    String.format("%s is not supported for KMIP spec %s", fresh.getKmipTag().getDescription(), spec)
             );
         }
 
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(value.getKmipTag());
-        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
-        jsonGenerator.writeObjectField("value", value.getValue().toString());
-        jsonGenerator.writeEndObject();
+        gen.writeStartObject();
+        gen.writeObject(fresh.getKmipTag());
+        gen.writeStringField("type", fresh.getEncodingType().getDescription());
+        gen.writeObjectField("value", fresh.getValue().toString());
+        gen.writeEndObject();
     }
 }
