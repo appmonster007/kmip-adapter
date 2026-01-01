@@ -77,7 +77,7 @@ EOF
 generate_attribute_class() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
-    local ATTRIBUTE_VAR_NAME="$3"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -89,7 +89,7 @@ generate_attribute_class() {
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
         "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
-        "ATTRIBUTE_VAR_NAME" "${ATTRIBUTE_VAR_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "ENCODING_TYPE" "${ENCODING_TYPE}" \
@@ -100,11 +100,14 @@ generate_attribute_class() {
 
 generate_json_serializer() {
     local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}JsonSerializer.java"
 
     render_template "${TEMPLATE_DIR}/AttributeJsonSerializer.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
-        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
         "org.purpleBean.kmip.codec.json.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}JsonSerializer"
@@ -115,6 +118,7 @@ generate_json_serializer() {
 generate_json_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}JsonDeserializer.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -125,6 +129,7 @@ generate_json_deserializer() {
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
         "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "ENCODING_TYPE" "${ENCODING_TYPE}"
@@ -137,11 +142,14 @@ generate_json_deserializer() {
 
 generate_xml_serializer() {
     local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}XmlSerializer.java"
 
     render_template "${TEMPLATE_DIR}/AttributeXmlSerializer.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
-        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
         "org.purpleBean.kmip.codec.xml.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}XmlSerializer"
@@ -152,6 +160,7 @@ generate_xml_serializer() {
 generate_xml_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}XmlDeserializer.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -162,6 +171,7 @@ generate_xml_deserializer() {
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
         "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "ENCODING_TYPE" "${ENCODING_TYPE}"
@@ -174,11 +184,14 @@ generate_xml_deserializer() {
 
 generate_ttlv_serializer() {
     local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvSerializer.java"
 
     render_template "${TEMPLATE_DIR}/AttributeTtlvSerializer.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
-        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}"
+        "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}"
 
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
         "org.purpleBean.kmip.codec.ttlv.serializer.kmip.$(pkg_dot).${ATTRIBUTE_NAME}TtlvSerializer"
@@ -189,6 +202,7 @@ generate_ttlv_serializer() {
 generate_ttlv_deserializer() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE="$2"
+    local ATTRIBUTE_VAR="$3"
     local path="${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${ATTRIBUTE_NAME}TtlvDeserializer.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -199,6 +213,7 @@ generate_ttlv_deserializer() {
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
         "ATTRIBUTE_NAME_SNAKE" "${ATTRIBUTE_NAME_SNAKE}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "ENCODING_TYPE" "${ENCODING_TYPE}"
@@ -211,6 +226,7 @@ generate_ttlv_deserializer() {
 
 generate_domain_test() {
     local ATTRIBUTE_NAME="$1"
+    local ATTRIBUTE_VAR="$2"
     local path="${TEST_JAVA}/${SUB_PATH}/${ATTRIBUTE_NAME}Test.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -221,6 +237,7 @@ generate_domain_test() {
     render_template "${TEMPLATE_DIR}/AttributeTest.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "ENCODING_TYPE" "${ENCODING_TYPE}" \
@@ -232,6 +249,7 @@ generate_domain_test() {
 generate_codec_test() {
     local ATTRIBUTE_NAME="$1"
     local format="$2"
+    local ATTRIBUTE_VAR="$3"
     local codec_pascal
     codec_pascal="$(get_pascal_case "${format}")"
     local path="${TEST_JAVA}/codec/${format}/${SUB_PATH}/${ATTRIBUTE_NAME}${codec_pascal}Test.java"
@@ -243,6 +261,7 @@ generate_codec_test() {
     render_template "${TEMPLATE_DIR}/AttributeCodecTest.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "DEFAULT_VALUE" "${DEFAULT_VALUE}" \
@@ -254,8 +273,8 @@ generate_codec_test() {
 
 generate_benchmark_subject() {
     local ATTRIBUTE_NAME="$1"
-    local ATTRIBUTE_VAR_NAME
-    ATTRIBUTE_VAR_NAME="$(get_var_name "${ATTRIBUTE_NAME}")"
+    local ATTRIBUTE_VAR
+    ATTRIBUTE_VAR="$(get_var_name "${ATTRIBUTE_NAME}")"
     local path="${TEST_JAVA}/benchmark/subjects/${SUB_PATH}/${ATTRIBUTE_NAME}BenchmarkSubject.java"
 
     local FIELD_TYPE="OffsetDateTime"
@@ -265,7 +284,7 @@ generate_benchmark_subject() {
     render_template "${TEMPLATE_DIR}/AttributeBenchmarkSubject.java.template" "${path}" \
         "SUB_PATH" "${SUB_PATH}" \
         "ATTRIBUTE_NAME" "${ATTRIBUTE_NAME}" \
-        "ATTRIBUTE_VAR_NAME" "${ATTRIBUTE_VAR_NAME}" \
+        "ATTRIBUTE_VAR" "${ATTRIBUTE_VAR}" \
         "FIELD_TYPE" "${FIELD_TYPE}" \
         "FIELD_NAME" "${FIELD_NAME}" \
         "DEFAULT_VALUE" "${DEFAULT_VALUE}"
@@ -283,22 +302,22 @@ generate_attribute() {
     local ATTRIBUTE_NAME="$1"
     local ATTRIBUTE_NAME_SNAKE
     ATTRIBUTE_NAME_SNAKE="$(to_snake_upper "${ATTRIBUTE_NAME}")"
-    local ATTRIBUTE_VAR_NAME
-    ATTRIBUTE_VAR_NAME="$(get_var_name "${ATTRIBUTE_NAME}")"
+    local ATTRIBUTE_VAR
+    ATTRIBUTE_VAR="$(get_var_name "${ATTRIBUTE_NAME}")"
 
     echo -e "\nProcessing ${ATTRIBUTE_NAME}..."
 
-    $GEN_CLASS        && generate_attribute_class "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR_NAME}"
-    $GEN_JSON_SER     && generate_json_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_JSON_DES     && generate_json_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_XML_SER      && generate_xml_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_XML_DES      && generate_xml_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_TTLV_SER     && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_TTLV_DES     && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}"
-    $GEN_DOMAIN_TEST  && generate_domain_test "${ATTRIBUTE_NAME}"
-    $GEN_JSON_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "json"
-    $GEN_XML_TEST     && generate_codec_test "${ATTRIBUTE_NAME}" "xml"
-    $GEN_TTLV_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "ttlv"
+    $GEN_CLASS        && generate_attribute_class "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_JSON_SER     && generate_json_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_JSON_DES     && generate_json_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_XML_SER      && generate_xml_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_XML_DES      && generate_xml_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_TTLV_SER     && generate_ttlv_serializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_TTLV_DES     && generate_ttlv_deserializer "${ATTRIBUTE_NAME}" "${ATTRIBUTE_NAME_SNAKE}" "${ATTRIBUTE_VAR}"
+    $GEN_DOMAIN_TEST  && generate_domain_test "${ATTRIBUTE_NAME}" "${ATTRIBUTE_VAR}"
+    $GEN_JSON_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "json" "${ATTRIBUTE_VAR}"
+    $GEN_XML_TEST     && generate_codec_test "${ATTRIBUTE_NAME}" "xml" "${ATTRIBUTE_VAR}"
+    $GEN_TTLV_TEST    && generate_codec_test "${ATTRIBUTE_NAME}" "ttlv" "${ATTRIBUTE_VAR}"
     $GEN_BENCHMARK    && generate_benchmark_subject "${ATTRIBUTE_NAME}"
 
     echo "Finished (or planned) generation for ${ATTRIBUTE_NAME}."

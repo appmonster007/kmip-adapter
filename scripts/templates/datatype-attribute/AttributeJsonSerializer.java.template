@@ -2,8 +2,9 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.{{SUB_PATH}};
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 
@@ -16,21 +17,24 @@ import java.io.UnsupportedEncodingException;
 public class {{ATTRIBUTE_NAME}}JsonSerializer extends KmipDataTypeJsonSerializer<{{ATTRIBUTE_NAME}}> {
 
     @Override
-    public void serialize({{ATTRIBUTE_NAME}} value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
+    public void serialize({{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}}, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
+        // Validation: Null check
+        if ({{ATTRIBUTE_VAR}} == null) {
+            return;
+        }
 
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!{{ATTRIBUTE_VAR}}.isSupported()) {
             throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s", {{ATTRIBUTE_VAR}}.getKmipTag().getDescription(), spec)
             );
         }
 
         gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeObjectField("value", value.getValue());
+        gen.writeObject({{ATTRIBUTE_VAR}}.getKmipTag());
+        gen.writeStringField("type", {{ATTRIBUTE_VAR}}.getEncodingType().getDescription());
+        gen.writeObjectField("value", {{ATTRIBUTE_VAR}}.getValue());
         gen.writeEndObject();
     }
 }
-

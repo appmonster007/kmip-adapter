@@ -6,7 +6,6 @@ import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.enumeration.State;
 
-import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,16 +34,16 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
         return {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
     }
 
-    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof {{FIELD_TYPE}} value)) {
+    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.{{ATTRIBUTE_VALUE_TYPE}} value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new {{ATTRIBUTE_NAME}}(value);
+        return new {{ATTRIBUTE_NAME}}(value.getValue());
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.builder().encodingType(encodingType).value({{FIELD_NAME}}).build();
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.{{ATTRIBUTE_VALUE_TYPE}}.of({{FIELD_NAME}});
     }
 
     @Override
@@ -74,22 +73,6 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public boolean isClientModifiable(@NonNull State state) {
-        // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
-    }
-
-    @Override
-    public boolean isClientDeletable() {
-        return false;
-    }
-
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return false;
-    }
-
-    @Override
     public boolean isAlwaysPresent() {
         return false;
     }
@@ -111,17 +94,31 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     }
 
     @Override
+    public boolean isClientModifiable(@NonNull State state) {
+        // PRE_ACTIVE is modifiable by default, adjust as needed
+        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         {{ATTRIBUTE_NAME}} that = ({{ATTRIBUTE_NAME}}) o;
-        // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.{{FIELD_NAME}}.withNano(0).equals(that.{{FIELD_NAME}}.withNano(0));
+        return Objects.equals({{FIELD_NAME}}, that.{{FIELD_NAME}});
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash({{FIELD_NAME}}.withNano(0));
+        return Objects.hash({{FIELD_NAME}});
     }
 }
-

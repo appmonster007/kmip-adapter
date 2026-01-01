@@ -3,8 +3,9 @@ package org.purpleBean.kmip.codec.xml.serializer.kmip.{{SUB_PATH}};
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 
@@ -18,10 +19,11 @@ import java.io.UnsupportedEncodingException;
 public class {{ATTRIBUTE_NAME}}XmlSerializer extends KmipDataTypeXmlSerializer<{{ATTRIBUTE_NAME}}> {
 
     @Override
-    public void serialize({{ATTRIBUTE_NAME}} value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize({{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}}, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException();
+        if (!{{ATTRIBUTE_VAR}}.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", {{ATTRIBUTE_VAR}}.getClass().getSimpleName(), spec));
         }
 
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
@@ -29,15 +31,14 @@ public class {{ATTRIBUTE_NAME}}XmlSerializer extends KmipDataTypeXmlSerializer<{
         }
 
         // Start element with name from kmipTag
-        String elementName = value.getKmipTag().getDescription();
+        String elementName = {{ATTRIBUTE_VAR}}.getKmipTag().getDescription();
         xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(value);
+        xmlGen.writeStartObject({{ATTRIBUTE_VAR}});
 
         xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", value.getEncodingType().getDescription());
+        xmlGen.writeStringField("type", {{ATTRIBUTE_VAR}}.getEncodingType().getDescription());
         xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", value.getValue());
+        xmlGen.writeObjectField("value", {{ATTRIBUTE_VAR}}.getValue());
         xmlGen.writeEndObject();
     }
 }
-

@@ -5,12 +5,11 @@ import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 import org.purpleBean.kmip.test.suite.Abstract{{CODEC_PASCAL}}SerializationSuite;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 @DisplayName("{{ATTRIBUTE_NAME}} {{CODEC_PASCAL}} Serialization Tests")
 class {{ATTRIBUTE_NAME}}{{CODEC_PASCAL}}Test extends Abstract{{CODEC_PASCAL}}SerializationSuite<{{ATTRIBUTE_NAME}}> {
 
-    private static final {{FIELD_TYPE}} FIXED_TIME = {{DEFAULT_VALUE}};
+    private static final {{FIELD_TYPE}} DEFAULT_VALUE = {{DEFAULT_VALUE}};
 
     @Override
     protected Class<{{ATTRIBUTE_NAME}}> type() {
@@ -19,16 +18,6 @@ class {{ATTRIBUTE_NAME}}{{CODEC_PASCAL}}Test extends Abstract{{CODEC_PASCAL}}Ser
 
     @Override
     protected {{ATTRIBUTE_NAME}} createDefault() {
-        return {{ATTRIBUTE_NAME}}.builder()
-                .{{FIELD_NAME}}(FIXED_TIME)
-                .build();
-    }
-
-    @Override
-    protected {{ATTRIBUTE_NAME}} createVariant() {
-        return {{ATTRIBUTE_NAME}}.builder()
-                .{{FIELD_NAME}}(FIXED_TIME.plusDays(1))
-                .build();
+        return {{ATTRIBUTE_NAME}}.of(DEFAULT_VALUE);
     }
 }
-

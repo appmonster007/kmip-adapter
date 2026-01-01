@@ -5,23 +5,20 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 
 import java.io.IOException;
-import java.time.OffsetDateTime;
-import java.util.NoSuchElementException;
 
 /**
  * XML deserializer for {{ATTRIBUTE_NAME}}.
  */
 public class {{ATTRIBUTE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializer<{{ATTRIBUTE_NAME}}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
-    private final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}}; // TODO : update the encoding type
+    private final KmipTag kmipTag = {{ATTRIBUTE_NAME}}.kmipTag;
+    private final EncodingType encodingType = {{ATTRIBUTE_NAME}}.encodingType;
 
     @Override
     public {{ATTRIBUTE_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
@@ -29,12 +26,12 @@ public class {{ATTRIBUTE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializ
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Expected XML element object for {{ATTRIBUTE_NAME}}");
+            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Expected XML object for {{ATTRIBUTE_NAME}}");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
             ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Invalid Tag for {{ATTRIBUTE_NAME}}");
             return null;
         }
@@ -47,22 +44,23 @@ public class {{ATTRIBUTE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializ
         }
 
         JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
+        if (valueNode == null || !valueNode.isTextual()) { // TODO: update validation based on type
             ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class,
                 "Missing or non-text 'value' for {{ATTRIBUTE_NAME}}");
             return null;
         }
 
+        // TODO: update with required java type
         {{FIELD_TYPE}} value = {{FIELD_TYPE}}.parse(valueNode.asText());
-        {{ATTRIBUTE_NAME}} attribute = {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
+        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}} = {{ATTRIBUTE_NAME}}.builder().value(value).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!attribute.isSupported()) {
-            throw new NoSuchElementException(
-                String.format("{{ATTRIBUTE_NAME}} '%s' not supported for spec %s", kmipTag.getDescription(), spec));
 
+        if (!{{ATTRIBUTE_VAR}}.isSupported()) {
+            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "{{ATTRIBUTE_NAME}} not supported for spec " + spec);
+            return null;
         }
-        return attribute;
+
+        return {{ATTRIBUTE_VAR}};
     }
 }
-

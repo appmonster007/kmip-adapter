@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.{{SUB_PATH}};
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
@@ -13,26 +12,26 @@ import java.nio.ByteBuffer;
 public class {{ATTRIBUTE_NAME}}TtlvSerializer extends KmipDataTypeTtlvSerializer<{{ATTRIBUTE_NAME}}> {
 
     @Override
-    public ByteBuffer serialize({{ATTRIBUTE_NAME}} value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
+    public ByteBuffer serialize({{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}}, TtlvMapper mapper) throws IOException {
+        return serializeToTtlvObject({{ATTRIBUTE_VAR}}, mapper).toByteBuffer();
     }
 
-    public TtlvObject serializeToTtlvObject({{ATTRIBUTE_NAME}} value, TtlvMapper mapper) throws IOException {
-        if (value == null) {
+    public TtlvObject serializeToTtlvObject({{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}}, TtlvMapper mapper) throws IOException {
+        if ({{ATTRIBUTE_VAR}} == null) {
             return null;
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!{{ATTRIBUTE_VAR}}.isSupported()) {
             throw new IOException(
-                String.format("%s is not supported for KMIP spec %s", 
-                value.getKmipTag().getDescription(), spec)
+                String.format("%s is not supported for KMIP spec %s",
+                {{ATTRIBUTE_VAR}}.getKmipTag().getDescription(), spec)
             );
         }
 
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
+        byte[] tag = {{ATTRIBUTE_VAR}}.getKmipTag().getTagBytes();
+        byte type = {{ATTRIBUTE_VAR}}.getEncodingType().getTypeValue();
+        byte[] payload = mapper.writeValueAsByteBuffer({{ATTRIBUTE_VAR}}.getValue()).array();
 
         return TtlvObject.builder()
                 .tag(tag)
@@ -41,4 +40,3 @@ public class {{ATTRIBUTE_NAME}}TtlvSerializer extends KmipDataTypeTtlvSerializer
                 .build();
     }
 }
-

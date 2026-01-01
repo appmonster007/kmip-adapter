@@ -1,42 +1,40 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.{{SUB_PATH}};
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
+import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.{{ATTRIBUTE_NAME}};
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class {{ATTRIBUTE_NAME}}TtlvDeserializer extends KmipDataTypeTtlvDeserializer<{{ATTRIBUTE_NAME}}> {
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
-    private final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}}; // TODO : update the encoding type
+    private final KmipTag kmipTag = {{ATTRIBUTE_NAME}}.kmipTag;
+    private final EncodingType encodingType = {{ATTRIBUTE_NAME}}.encodingType;
 
     @Override
     public {{ATTRIBUTE_NAME}} deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", encodingType.getTypeValue(), kmipTag.getDescription()));
+        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
+
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
+        // TODO : update with required java type
         {{FIELD_TYPE}} value = mapper.readValue(bb, {{FIELD_TYPE}}.class);
+        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}} = {{ATTRIBUTE_NAME}}.builder().value(value).build();
 
         KmipSpec spec = KmipContext.getSpec();
-        {{ATTRIBUTE_NAME}} attribute = {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
 
-        if (!attribute.isSupported()) {
-            throw new NoSuchElementException();
+        if (!{{ATTRIBUTE_VAR}}.isSupported()) {
+            throw new NoSuchElementException(String.format("{{ATTRIBUTE_NAME}} not supported for spec %s", spec));
         }
-        return attribute;
+        return {{ATTRIBUTE_VAR}};
     }
 }
-

@@ -10,10 +10,10 @@ import java.time.ZoneOffset;
 public class {{ATTRIBUTE_NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{ATTRIBUTE_NAME}}> {
 
     public {{ATTRIBUTE_NAME}}BenchmarkSubject() throws Exception {
-        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR_NAME}} = {{ATTRIBUTE_NAME}}.builder()
+        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}} = {{ATTRIBUTE_NAME}}.builder()
                 .{{FIELD_NAME}}({{DEFAULT_VALUE}})
                 .build();
-        initialize({{ATTRIBUTE_VAR_NAME}}, {{ATTRIBUTE_NAME}}.class);
+        initialize({{ATTRIBUTE_VAR}}, {{ATTRIBUTE_NAME}}.class);
     }
 
     @Override
