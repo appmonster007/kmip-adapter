@@ -1,0 +1,44 @@
+package org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.common.structure.RevocationReason;
+
+import javax.xml.namespace.QName;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+public class RevocationReasonXmlSerializer extends KmipDataTypeXmlSerializer<RevocationReason> {
+
+    @Override
+    public void serialize(RevocationReason value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // Validation: KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
+        }
+
+        if (!(gen instanceof ToXmlGenerator xmlGen)) {
+            throw new IllegalStateException("Expected ToXmlGenerator");
+        }
+
+        // Start element with name from kmipTag
+        String elementName = value.getKmipTag().getDescription();
+        xmlGen.setNextName(QName.valueOf(elementName));
+        xmlGen.writeStartObject(value);
+
+        // Serialize all fields
+        List<KmipDataType> values = value.getValues();
+        for (KmipDataType kmipDataType : values) {
+            if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
+                serializers.defaultSerializeField(kmipDataType.getKmipTag().getDescription(), kmipDataType, gen);
+            }
+        }
+
+        xmlGen.writeEndObject();
+    }
+}

@@ -180,6 +180,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.NameTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.SampleStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.UsageLimitsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateIdentifierTtlvSerializer

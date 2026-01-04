@@ -182,6 +182,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeXmlDes
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CustomAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.DigestXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.NameXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.RevocationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.SampleStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.UsageLimitsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.X509CertificateIdentifierXmlDeserializer
