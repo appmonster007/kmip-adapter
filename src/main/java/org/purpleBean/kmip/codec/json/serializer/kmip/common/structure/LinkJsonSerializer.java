@@ -1,0 +1,54 @@
+package org.purpleBean.kmip.codec.json.serializer.kmip.common.structure;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.common.structure.Link;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+public class LinkJsonSerializer extends KmipDataTypeJsonSerializer<Link> {
+
+    @Override
+    public void serialize(Link value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        // Validation: Null check
+        if (value == null) {
+            return;
+        }
+
+        // Validation: KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s",
+                value.getKmipTag().getDescription(), spec));
+        }
+
+        List<KmipDataType> fields = value.getValues();
+        // Validation: Field compatibility with KMIP spec
+        for (KmipDataType field : fields) {
+            if (field != null && !field.isSupported()) {
+                throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
+                        field.getKmipTag().getDescription(), value.getKmipTag().getDescription(), spec));
+            }
+        }
+
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObject(value.getKmipTag());
+        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
+        jsonGenerator.writeFieldName("value");
+        jsonGenerator.writeStartArray();
+        for (KmipDataType field : fields) {
+            if (field != null) {
+                jsonGenerator.writeObject(field);
+            }
+        }
+        jsonGenerator.writeEndArray();
+        jsonGenerator.writeEndObject();
+    }
+}

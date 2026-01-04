@@ -181,6 +181,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.WrappingMeth
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.CustomAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.DigestTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.LinkTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.RevocationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.SampleStructureTtlvDeserializer

@@ -177,6 +177,7 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.WrappingMethodBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.DigestBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.LinkBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.NameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.RevocationReasonBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.SampleStructureBenchmarkSubject
