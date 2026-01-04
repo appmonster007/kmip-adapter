@@ -100,6 +100,14 @@ to_upper() {
         echo "$input" | tr '[:lower:]' '[:upper:]'
     fi
 }
+
+# 8) slash/path -> dot.path
+#    "a/b" -> "a.b"
+slash_to_dot() {
+    local input="$1"
+    [ -z "$input" ] && { echo ""; return 1; }
+    echo "$input" | sed 's|/|.|g'
+}
 # -----------------------
 # Small wrappers / aliases used by the generator
 # -----------------------

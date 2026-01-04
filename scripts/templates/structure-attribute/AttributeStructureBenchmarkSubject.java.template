@@ -1,19 +1,23 @@
 package org.purpleBean.kmip.benchmark.subjects.{{pkg_dot}};
 
-import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};
-import org.purpleBean.kmip.common.NameValue;
-import org.purpleBean.kmip.common.enumeration.NameType;
 
 public class {{class_name}}BenchmarkSubject extends KmipBenchmarkSubject<{{class_name}}> {
 
     public {{class_name}}BenchmarkSubject() throws Exception {
-        {{class_name}} {{var_name}} = {{class_name}}.builder()
-                .nameValue(NameValue.of("some-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
-                .build();
-        initialize({{var_name}}, {{class_name}}.class);
+        // TODO: Create a new instance of the structure attribute.
+        // For example:
+        // {{class_name}} {{var_name}} = {{class_name}}.builder()
+        //         .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
+        //         .digestValue(DigestValue.of(new byte[0]))
+        //         .keyFormatType(new KeyFormatType(KeyFormatType.Standard.PKCS_1))
+        //         .build();
+        // initialize({{var_name}}, {{class_name}}.class);
     }
 
     @Override

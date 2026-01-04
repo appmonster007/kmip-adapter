@@ -1,15 +1,12 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.{{pkg_dot}};
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};
 
 import java.io.IOException;
@@ -46,14 +43,21 @@ public class {{class_name}}TtlvDeserializer extends KmipDataTypeTtlvDeserializer
     }
 
     private void setValue(
-        {{class_name}}.{{class_name}}Builder builder,
-        KmipTag.Value nodeTag,
-         TtlvObject ttlvObject,
-         TtlvMapper mapper
-     ) throws IOException {
-        switch (nodeTag) {
-            // case KmipTag.Standard.NAME_VALUE -> builder.nameValue(mapper.readValue(ttlvObject.toByteBuffer(), NameValue.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
+            {{class_name}}.{{class_name}}Builder builder,
+            KmipTag.Value nodeTag,
+            TtlvObject ttlvObject,
+            TtlvMapper mapper
+    ) throws IOException {
+        // TODO: Add cases for each field in the structure attribute.
+        // For example:
+        // switch (nodeTag) {
+        //     case KmipTag.Standard.HASHING_ALGORITHM ->
+        //             builder.hashingAlgorithm(mapper.readValue(ttlvObject.toByteBuffer(), HashingAlgorithm.class));
+        //     case KmipTag.Standard.DIGEST_VALUE ->
+        //             builder.digestValue(mapper.readValue(ttlvObject.toByteBuffer(), DigestValue.class));
+        //     case KmipTag.Standard.KEY_FORMAT_TYPE ->
+        //             builder.keyFormatType(mapper.readValue(ttlvObject.toByteBuffer(), KeyFormatType.class));
+        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        // }
     }
 }

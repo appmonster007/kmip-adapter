@@ -3,6 +3,7 @@ package org.purpleBean.kmip.{{pkg_dot}};
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
 
@@ -25,10 +26,14 @@ class {{class_name}}Test extends AbstractKmipStructureAttributeSuite<{{class_nam
 
     @Override
     protected {{class_name}} createDefault() {
-        return {{class_name}}.builder()
-                .nameValue(NameValue.of("test-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
-                .build();
+        // TODO: Create a default instance of the structure attribute.
+        // For example:
+        // return {{class_name}}.builder()
+        //         .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
+        //         .digestValue(DigestValue.of(new byte[0]))
+        //         .keyFormatType(new KeyFormatType(KeyFormatType.Standard.PKCS_1))
+        //         .build();
+        return null;
     }
 
     @Override
@@ -38,13 +43,17 @@ class {{class_name}}Test extends AbstractKmipStructureAttributeSuite<{{class_nam
 
     @Override
     protected int expectedMinComponentCount() {
-        return 2;
+        // TODO: Return the expected minimum number of components.
+        return 0;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values.get(0)).isInstanceOf(NameValue.class);
-        assertThat(values.get(1)).isInstanceOf(NameType.class);
+        // TODO: Validate the components of the structure.
+        // For example:
+        // assertThat(values.get(0)).isInstanceOf(HashingAlgorithm.class);
+        // assertThat(values.get(1)).isInstanceOf(DigestValue.class);
+        // assertThat(values.get(2)).isInstanceOf(KeyFormatType.class);
     }
 
     @Override
@@ -54,17 +63,17 @@ class {{class_name}}Test extends AbstractKmipStructureAttributeSuite<{{class_nam
 
     @Override
     protected boolean expectServerInitializable() {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean expectClientInitializable() {
-        return true;
+        return false;
     }
 
     @Override
     protected boolean expectClientDeletable() {
-        return true;
+        return false;
     }
 
     @Override

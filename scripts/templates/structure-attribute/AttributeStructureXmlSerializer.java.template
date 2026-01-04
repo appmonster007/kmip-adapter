@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};

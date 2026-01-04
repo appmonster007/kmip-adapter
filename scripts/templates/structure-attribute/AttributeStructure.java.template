@@ -1,13 +1,16 @@
 package org.purpleBean.kmip.{{pkg_dot}};
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.KmipStructure;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -21,41 +24,42 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{class_snake}});
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
-    private static final Set<KmipSpec> supported_versions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
-        for (KmipSpec spec : supported_versions) {
+        for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{class_name}}.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, {{class_name}}.class, {{class_name}}::of);
         }
     }
 
-    @NonNull
-    private final NameValue nameValue;
+    // TODO: Add the fields for the structure attribute here.
+    // For example:
+    // @NonNull
+    // private final HashingAlgorithm hashingAlgorithm;
+    // private final DigestValue digestValue;
 
-    @NonNull
-    private final NameType nameType;
-
-    public {{class_name}}(@NonNull NameValue nameValue, @NonNull NameType nameType) {
-        this.nameValue = Objects.requireNonNull(nameValue, "Name value cannot be null");
-        this.nameType = Objects.requireNonNull(nameType, "Name type cannot be null");
+    public {{class_name}}(
+            // TODO: Add the constructor parameters here.
+    ) {
+        // TODO: Initialize the fields here.
     }
 
-    public static {{class_name}} of(@NonNull String name, @NonNull NameType type) {
-        return new {{class_name}}(NameValue.of(name), type);
-    }
-
-    public static {{class_name}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+    public static {{class_name}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
         {{class_name}}Builder builder = {{class_name}}.builder();
-        List<KmipDataType> fields = attributeValue.getValues();
+        List<KmipDataType> fields = structure.getValue();
         for (KmipDataType field : fields) {
-            if (field instanceof NameValue nameValue) {
-                builder.nameValue(nameValue);
-            }
-            if (field instanceof NameType nameType) {
-                builder.nameType(nameType);
-            }
+            // TODO: Add the logic to build the object from the fields.
+            // For example:
+            // if (field instanceof HashingAlgorithm hashingAlgorithm) {
+            //     builder.hashingAlgorithm(hashingAlgorithm);
+            // } else if (field instanceof DigestValue digestValue) {
+            //     builder.digestValue(digestValue);
+            // }
         }
         return builder.build();
     }
@@ -72,15 +76,17 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
 
     @Override
     public List<KmipDataType> getValues() {
-        return Stream.of(nameValue, nameType).filter(Objects::nonNull).toList();
+        // TODO: Return a list of the structure's fields.
+        // For example:
+        // return Stream.of(hashingAlgorithm, digestValue, keyFormatType).filter(Objects::nonNull).toList();
+        return List.of();
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supported_versions.contains(spec)
-                && nameValue.isSupported()
-                && nameType.isSupported();
+        // TODO: Check if all the fields in the structure are supported.
+        return supportedVersions.contains(spec);
     }
 
     @Override
@@ -90,12 +96,12 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
 
     @Override
     public boolean isServerInitializable() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isClientInitializable() {
-        return true;
+        return false;
     }
 
     @Override
@@ -105,12 +111,12 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
 
     @Override
     public boolean isClientModifiable(State state) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isClientDeletable() {
-        return true;
+        return false;
     }
 
     @Override
@@ -124,8 +130,8 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.of(getValues());
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Structure.of(getValues());
     }
 
     @Override
@@ -136,25 +142,16 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
     public static class {{class_name}}Builder {
         public {{class_name}} build() {
             validate();
-            return new {{class_name}}(nameValue, nameType);
+            // TODO: Return a new instance of the structure attribute.
+            return new {{class_name}}(
+                    // TODO: Pass the builder fields to the constructor.
+            );
         }
 
         private void validate() {
-            Objects.requireNonNull(nameValue, "Name value cannot be null");
-            Objects.requireNonNull(nameType, "Name type cannot be null");
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            if (!nameValue.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Name value is not supported for KMIP spec %s", spec)
-                );
-            }
-            if (!nameType.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Name type is not supported for KMIP spec %s", spec)
-                );
-            }
+            // TODO: Add validation logic for the fields.
+            // For example:
+            // Objects.requireNonNull(hashingAlgorithm, "HashingAlgorithm cannot be null");
         }
     }
 }

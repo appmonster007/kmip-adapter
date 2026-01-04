@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};

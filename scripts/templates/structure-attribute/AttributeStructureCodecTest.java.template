@@ -1,35 +1,30 @@
 package org.purpleBean.kmip.codec.{{format}}.{{pkg_dot}};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.NameValue;
-import org.purpleBean.kmip.common.enumeration.NameType;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.structure.*;
+import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.{{pkg_dot}}.{{class_name}};
 import org.purpleBean.kmip.test.suite.Abstract{{format_pascal}}SerializationSuite;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 @DisplayName("{{class_name}} {{format_pascal}} Serialization Tests")
 class {{suite_name}} extends Abstract{{format_pascal}}SerializationSuite<{{class_name}}> {
 
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-
     @Override
-    protected Class<{{class_name}}> type() { return {{class_name}}.class; }
-
-    @Override
-    protected {{class_name}} createDefault() {
-        return {{class_name}}.builder()
-                .nameValue(NameValue.of("some-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
-                .build();
+    protected Class<{{class_name}}> type() {
+        return {{class_name}}.class;
     }
 
     @Override
-    protected {{class_name}} createVariant() {
-        return {{class_name}}.builder()
-                .nameValue(NameValue.of("some-variant-name"))
-                .nameType(new NameType(NameType.Standard.URI))
-                .build();
+    protected {{class_name}} createDefault() {
+        // TODO: Create a default instance of the structure attribute.
+        // For example:
+        // return {{class_name}}.builder()
+        //         .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
+        //         .digestValue(DigestValue.of(new byte[0]))
+        //         .keyFormatType(new KeyFormatType(KeyFormatType.Standard.PKCS_1))
+        //         .build();
+        return null;
     }
 }

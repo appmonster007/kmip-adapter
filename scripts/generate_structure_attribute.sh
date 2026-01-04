@@ -1,5 +1,5 @@
 #!/bin/bash
-# generate_attribute_structure.sh
+# generate_structure_attribute.sh
 
 set -e
 
@@ -339,11 +339,7 @@ create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
 # Iterate structures
 for s in "${ATTRS[@]}"; do
-    case "${s}" in
-        *Attribute) name="${s}" ;;
-        *) name="${s}" ;;
-    esac
-    generate_attribute_structure "${name}" "${SUB_PATH}"
+    generate_attribute_structure "${s}" "${SUB_PATH}"
 done
 
 if [ "${DRY_RUN}" = "true" ]; then
