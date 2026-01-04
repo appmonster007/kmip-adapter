@@ -183,6 +183,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CustomAttribut
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.DigestJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.NameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.SampleStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.UsageLimitsJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.X509CertificateIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestBatchItemJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.request.SimpleRequestHeaderJsonDeserializer

@@ -179,4 +179,5 @@ org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmark
 org.purpleBean.kmip.benchmark.subjects.common.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.NameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.SampleStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.UsageLimitsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.X509CertificateIdentifierBenchmarkSubject
