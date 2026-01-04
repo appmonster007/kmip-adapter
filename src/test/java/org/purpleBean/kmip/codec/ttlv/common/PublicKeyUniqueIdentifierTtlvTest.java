@@ -3,9 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.common;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PublicKeyUniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
 
 @DisplayName("PublicKeyUniqueIdentifier TTLV Serialization Tests")
 class PublicKeyUniqueIdentifierTtlvTest extends AbstractTtlvSerializationSuite<PublicKeyUniqueIdentifier> {

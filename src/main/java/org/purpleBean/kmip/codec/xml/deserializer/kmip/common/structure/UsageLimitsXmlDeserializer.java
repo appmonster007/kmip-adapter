@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.UsageLimitsCount;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
@@ -72,9 +75,12 @@ public class UsageLimitsXmlDeserializer extends KmipDataTypeXmlDeserializer<Usag
             DeserializationContext ctxt
     ) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.USAGE_LIMITS_TOTAL -> builder.usageLimitsTotal(p.getCodec().treeToValue(node, UsageLimitsTotal.class));
-            case KmipTag.Standard.USAGE_LIMITS_COUNT -> builder.usageLimitsCount(p.getCodec().treeToValue(node, UsageLimitsCount.class));
-            case KmipTag.Standard.USAGE_LIMITS_UNIT -> builder.usageLimitsUnit(p.getCodec().treeToValue(node, UsageLimitsUnit.class));
+            case KmipTag.Standard.USAGE_LIMITS_TOTAL ->
+                    builder.usageLimitsTotal(p.getCodec().treeToValue(node, UsageLimitsTotal.class));
+            case KmipTag.Standard.USAGE_LIMITS_COUNT ->
+                    builder.usageLimitsCount(p.getCodec().treeToValue(node, UsageLimitsCount.class));
+            case KmipTag.Standard.USAGE_LIMITS_UNIT ->
+                    builder.usageLimitsUnit(p.getCodec().treeToValue(node, UsageLimitsUnit.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

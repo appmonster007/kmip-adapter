@@ -2,8 +2,6 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -11,6 +9,8 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ProtectStopDate Domain Tests")
 class ProtectStopDateTest extends AbstractKmipDataTypeAttributeSuite<ProtectStopDate> {

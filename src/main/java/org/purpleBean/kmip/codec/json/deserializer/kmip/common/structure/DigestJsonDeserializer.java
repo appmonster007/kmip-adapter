@@ -107,9 +107,12 @@ public class DigestJsonDeserializer extends KmipDataTypeJsonDeserializer<Digest>
             DeserializationContext ctxt
     ) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.HASHING_ALGORITHM -> builder.hashingAlgorithm(p.getCodec().treeToValue(node, HashingAlgorithm.class));
-            case KmipTag.Standard.DIGEST_VALUE -> builder.digestValue(p.getCodec().treeToValue(node, DigestValue.class));
-            case KmipTag.Standard.KEY_FORMAT_TYPE -> builder.keyFormatType(p.getCodec().treeToValue(node, KeyFormatType.class));
+            case KmipTag.Standard.HASHING_ALGORITHM ->
+                    builder.hashingAlgorithm(p.getCodec().treeToValue(node, HashingAlgorithm.class));
+            case KmipTag.Standard.DIGEST_VALUE ->
+                    builder.digestValue(p.getCodec().treeToValue(node, DigestValue.class));
+            case KmipTag.Standard.KEY_FORMAT_TYPE ->
+                    builder.keyFormatType(p.getCodec().treeToValue(node, KeyFormatType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

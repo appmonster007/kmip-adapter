@@ -1,7 +1,9 @@
 package org.purpleBean.kmip.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.DigestValue;
 import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;

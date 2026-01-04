@@ -1,7 +1,9 @@
 package org.purpleBean.kmip.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -28,7 +30,7 @@ class RevocationReasonTest extends AbstractKmipStructureAttributeSuite<Revocatio
     protected RevocationReason createDefault() {
         return RevocationReason.builder()
                 .revocationReasonCode(new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE))
-                .revocationMessage( RevocationMessage.of("test-message"))
+                .revocationMessage(RevocationMessage.of("test-message"))
                 .build();
     }
 

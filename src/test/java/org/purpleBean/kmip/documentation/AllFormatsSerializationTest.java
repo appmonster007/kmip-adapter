@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 
-import javax.xml.stream.*;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;

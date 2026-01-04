@@ -18,7 +18,7 @@ class RevocationReasonTtlvTest extends AbstractTtlvSerializationSuite<Revocation
     protected RevocationReason createDefault() {
         return RevocationReason.builder()
                 .revocationReasonCode(new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE))
-                .revocationMessage( RevocationMessage.of("test-message"))
+                .revocationMessage(RevocationMessage.of("test-message"))
                 .build();
     }
 }

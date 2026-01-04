@@ -5,6 +5,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.common.Q;
+
 import java.math.BigInteger;
 
 public class QBenchmarkSubject extends KmipBenchmarkSubject<Q> {

@@ -83,7 +83,7 @@ class CompromiseOccurrenceDateTest extends AbstractKmipDataTypeAttributeSuite<Co
     protected State stateForClientModifiableFalse() {
         return new State(State.Standard.ACTIVE);
     }
-    
+
     @Test
     @DisplayName("attribute_serverModifiable_isAlwaysFalse")
     @Override

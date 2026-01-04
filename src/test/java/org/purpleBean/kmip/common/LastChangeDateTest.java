@@ -2,15 +2,12 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.List;
 
 @DisplayName("LastChangeDate Domain Tests")
 class LastChangeDateTest extends AbstractKmipDataTypeAttributeSuite<LastChangeDate> {
@@ -60,6 +57,7 @@ class LastChangeDateTest extends AbstractKmipDataTypeAttributeSuite<LastChangeDa
     protected boolean expectMultiInstanceAllowed() {
         return false;
     }
+
     @Override
     protected State stateForServerModifiableTrue() {
         return null;

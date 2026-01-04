@@ -5,7 +5,6 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.common.CertificateRequest;
-import java.nio.ByteBuffer;
 
 public class CertificateRequestBenchmarkSubject extends KmipBenchmarkSubject<CertificateRequest> {
 

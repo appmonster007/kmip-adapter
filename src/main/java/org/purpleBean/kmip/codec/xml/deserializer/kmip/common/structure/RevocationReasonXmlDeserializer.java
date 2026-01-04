@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
@@ -71,8 +74,10 @@ public class RevocationReasonXmlDeserializer extends KmipDataTypeXmlDeserializer
             DeserializationContext ctxt
     ) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.REVOCATION_REASON_CODE -> builder.revocationReasonCode(p.getCodec().treeToValue(node, RevocationReasonCode.class));
-            case KmipTag.Standard.REVOCATION_MESSAGE -> builder.revocationMessage(p.getCodec().treeToValue(node, RevocationMessage.class));
+            case KmipTag.Standard.REVOCATION_REASON_CODE ->
+                    builder.revocationReasonCode(p.getCodec().treeToValue(node, RevocationReasonCode.class));
+            case KmipTag.Standard.REVOCATION_MESSAGE ->
+                    builder.revocationMessage(p.getCodec().treeToValue(node, RevocationMessage.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

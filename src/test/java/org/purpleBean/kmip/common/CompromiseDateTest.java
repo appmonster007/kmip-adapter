@@ -83,7 +83,7 @@ class CompromiseDateTest extends AbstractKmipDataTypeAttributeSuite<CompromiseDa
     protected State stateForClientModifiableFalse() {
         return new State(State.Standard.ACTIVE);
     }
-    
+
     @Test
     @DisplayName("attribute_serverModifiable_isAlwaysFalse")
     @Override

@@ -5,6 +5,7 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.common.PrimeExponentQ;
+
 import java.math.BigInteger;
 
 public class PrimeExponentQBenchmarkSubject extends KmipBenchmarkSubject<PrimeExponentQ> {

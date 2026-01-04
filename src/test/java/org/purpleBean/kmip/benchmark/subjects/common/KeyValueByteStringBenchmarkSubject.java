@@ -5,7 +5,6 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.common.KeyValue;
-import java.nio.ByteBuffer;
 
 public class KeyValueByteStringBenchmarkSubject extends KmipBenchmarkSubject<KeyValue.ByteString> {
 

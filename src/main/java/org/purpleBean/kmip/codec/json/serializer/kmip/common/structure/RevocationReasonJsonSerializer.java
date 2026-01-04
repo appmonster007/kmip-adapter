@@ -2,7 +2,9 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.common.structure.RevocationReason;
 
@@ -23,7 +25,7 @@ public class RevocationReasonJsonSerializer extends KmipDataTypeJsonSerializer<R
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s",
-                value.getKmipTag().getDescription(), spec));
+                    value.getKmipTag().getDescription(), spec));
         }
 
         List<KmipDataType> fields = value.getValues();

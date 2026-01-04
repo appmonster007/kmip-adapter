@@ -1,13 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.KeyValue.ByteString;
+import org.purpleBean.kmip.common.KeyValue;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-
-import java.nio.ByteBuffer;
 
 @DisplayName("KeyValue.ByteString TTLV Serialization Tests")
 class KeyValueByteStringTtlvTest extends AbstractTtlvSerializationSuite<KeyValue.ByteString> {
