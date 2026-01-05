@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP KeyValuePresent attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyValuePresent implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_PRESENT);
     public static final EncodingType encodingType = EncodingType.BOOLEAN;

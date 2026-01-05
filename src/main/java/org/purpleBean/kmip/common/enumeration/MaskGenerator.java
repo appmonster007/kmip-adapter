@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP MaskGenerator enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class MaskGenerator implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MASK_GENERATOR);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

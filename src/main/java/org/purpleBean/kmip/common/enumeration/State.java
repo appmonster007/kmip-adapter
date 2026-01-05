@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP State enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class State implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STATE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

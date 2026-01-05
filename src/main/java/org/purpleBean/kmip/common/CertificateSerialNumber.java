@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP CertificateSerialNumber dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CertificateSerialNumber implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER);

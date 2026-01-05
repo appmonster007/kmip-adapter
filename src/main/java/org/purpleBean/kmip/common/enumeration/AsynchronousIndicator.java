@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP AsynchronousIndicator enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class AsynchronousIndicator implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ASYNCHRONOUS_INDICATOR);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

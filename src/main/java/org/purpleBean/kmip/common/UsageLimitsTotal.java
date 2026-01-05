@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP UsageLimitsTotal dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UsageLimitsTotal implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS_TOTAL);

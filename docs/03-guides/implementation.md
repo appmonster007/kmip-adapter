@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP FooEnum enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooEnum implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_ENUM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
@@ -111,7 +111,7 @@ KMIP data types are simple wrappers around primitive values. Here's the `FooData
 
 ```java
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooDataType implements KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DATA_TYPE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
@@ -138,7 +138,7 @@ KMIP structures contain multiple KMIP data types. Here's the `FooStructure` patt
 
 ```java
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooStructure implements KmipStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_STRUCTURE);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;

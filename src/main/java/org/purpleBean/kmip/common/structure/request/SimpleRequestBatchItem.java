@@ -7,7 +7,7 @@ import org.purpleBean.kmip.*;
 import java.util.List;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ITEM);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;

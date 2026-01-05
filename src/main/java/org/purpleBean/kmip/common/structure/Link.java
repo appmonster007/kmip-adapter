@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * <p>Represents a Link in KMIP.</p>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Link implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LINK);

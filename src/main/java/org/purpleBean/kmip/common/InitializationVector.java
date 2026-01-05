@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP InitializationVector dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class InitializationVector implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INITIALIZATION_VECTOR);

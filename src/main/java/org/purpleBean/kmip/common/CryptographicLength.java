@@ -12,7 +12,7 @@ import java.util.Set;
  * Represents the length in bits of a cryptographic key or secret.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CryptographicLength implements KmipAttribute, KmipDataType {
 

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP RotateNameType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class RotateNameType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ROTATE_NAME_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP Qlength dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Qlength implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.QLENGTH);

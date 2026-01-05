@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP PublicExponent dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PublicExponent implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUBLIC_EXPONENT);

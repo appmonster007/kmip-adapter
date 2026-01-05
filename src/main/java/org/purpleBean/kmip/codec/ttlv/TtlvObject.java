@@ -21,7 +21,7 @@ public final class TtlvObject {
     private final byte[] value;
     private byte[] tag;
 
-    @Builder
+    @Builder(toBuilder = true)
     private TtlvObject(byte[] tag, byte type, byte[] value) {
         TtlvConstants.validateTag(tag);
         this.tag = Arrays.copyOf(tag, tag.length);

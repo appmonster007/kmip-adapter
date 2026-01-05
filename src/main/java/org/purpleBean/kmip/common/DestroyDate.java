@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP DestroyDate dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DestroyDate implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DESTROY_DATE);

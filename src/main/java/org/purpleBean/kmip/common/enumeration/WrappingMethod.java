@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP WrappingMethod enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class WrappingMethod implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.WRAPPING_METHOD);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

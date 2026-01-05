@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP MaximumResponseSize dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class MaximumResponseSize implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MAXIMUM_RESPONSE_SIZE);

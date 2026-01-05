@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP QueryFunction enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class QueryFunction implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.QUERY_FUNCTION);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

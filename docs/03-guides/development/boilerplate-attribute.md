@@ -33,7 +33,7 @@ import java.util.Set;
  * KMIP FooDataType - simple data type implementation.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooDataType implements KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_DATA_TYPE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
@@ -92,7 +92,7 @@ import java.util.Set;
  * KMIP ActivationDate attribute - full attribute implementation.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ActivationDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

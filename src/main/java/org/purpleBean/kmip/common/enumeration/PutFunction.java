@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP PutFunction enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PutFunction implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUT_FUNCTION);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ValidationAuthorityType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ValidationAuthorityType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDATION_AUTHORITY_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

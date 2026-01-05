@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProtocolVersion implements KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
     private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
@@ -61,7 +61,7 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class ProtocolVersionMajor implements KmipDataType {
         private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MAJOR);
         private final EncodingType encodingType = EncodingType.INTEGER;
@@ -88,7 +88,7 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class ProtocolVersionMinor implements KmipDataType {
         private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MINOR);
         private final EncodingType encodingType = EncodingType.INTEGER;

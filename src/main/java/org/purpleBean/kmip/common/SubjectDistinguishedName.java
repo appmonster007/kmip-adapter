@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP SubjectDistinguishedName dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SubjectDistinguishedName implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SUBJECT_DISTINGUISHED_NAME);

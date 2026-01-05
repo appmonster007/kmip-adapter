@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP LeaseTime dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class LeaseTime implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LEASE_TIME);

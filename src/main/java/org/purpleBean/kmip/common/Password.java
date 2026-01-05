@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP Password dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Password implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PASSWORD);

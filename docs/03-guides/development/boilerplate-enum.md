@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP FooEnum enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooEnum implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_ENUM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

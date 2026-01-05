@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP PrimeFieldSize dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PrimeFieldSize implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PRIME_FIELD_SIZE);

@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP ArchiveDate dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ArchiveDate implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ARCHIVE_DATE);

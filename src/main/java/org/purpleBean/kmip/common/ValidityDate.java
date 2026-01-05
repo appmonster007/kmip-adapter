@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP ValidityDate dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ValidityDate implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDITY_DATE);

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP LinkedObjectIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class LinkedObjectIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LINKED_OBJECT_IDENTIFIER);

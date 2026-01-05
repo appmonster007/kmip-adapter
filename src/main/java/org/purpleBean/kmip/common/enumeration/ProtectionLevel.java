@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ProtectionLevel enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProtectionLevel implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTECTION_LEVEL);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

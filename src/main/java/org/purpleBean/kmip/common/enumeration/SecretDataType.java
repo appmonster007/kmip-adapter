@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP SecretDataType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SecretDataType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SECRET_DATA_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

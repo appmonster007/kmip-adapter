@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP KeyMaterialByteString dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyMaterialByteString implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_MATERIAL);

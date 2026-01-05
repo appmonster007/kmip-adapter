@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP EndpointRole enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class EndpointRole implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ENDPOINT_ROLE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * KMIP Attribute structure.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CustomAttribute implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);

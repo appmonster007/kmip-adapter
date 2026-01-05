@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ProfileName enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProfileName implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROFILE_NAME);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

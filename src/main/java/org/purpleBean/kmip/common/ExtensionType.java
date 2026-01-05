@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP ExtensionType dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ExtensionType implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.EXTENSION_TYPE);

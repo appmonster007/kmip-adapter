@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ResultStatus enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ResultStatus implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RESULT_STATUS);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ObjectClass enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ObjectClass implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_CLASS);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

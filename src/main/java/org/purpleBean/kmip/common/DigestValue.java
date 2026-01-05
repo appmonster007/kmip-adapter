@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP DigestValue dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DigestValue implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGEST_VALUE);

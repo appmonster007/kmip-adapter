@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP StorageStatusMask dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class StorageStatusMask implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.STORAGE_STATUS_MASK);

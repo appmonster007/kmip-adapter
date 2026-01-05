@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  */
 @Deprecated(since = "Sample structure object, not to be used for KMIP")
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SampleStructure implements KmipStructure {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.P);

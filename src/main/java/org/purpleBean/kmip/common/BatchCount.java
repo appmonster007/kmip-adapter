@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP BatchCount dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class BatchCount implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_COUNT);

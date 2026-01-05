@@ -10,7 +10,7 @@ import java.util.Set;
  * KMIP AttributeIndex dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class AttributeIndex implements KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_INDEX);
     public static final EncodingType encodingType = EncodingType.INTEGER;

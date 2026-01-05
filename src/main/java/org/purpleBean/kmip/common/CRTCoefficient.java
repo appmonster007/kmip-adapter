@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP CRTCoefficient dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CRTCoefficient implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRT_COEFFICIENT);

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP CriticalityIndicator dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CriticalityIndicator implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRITICALITY_INDICATOR);

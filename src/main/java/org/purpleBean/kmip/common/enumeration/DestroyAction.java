@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP DestroyAction enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DestroyAction implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DESTROY_ACTION);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

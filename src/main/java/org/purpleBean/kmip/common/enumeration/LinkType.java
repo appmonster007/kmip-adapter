@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP LinkType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class LinkType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LINK_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

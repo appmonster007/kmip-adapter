@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP AlternativeNameType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class AlternativeNameType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP DeviceIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DeviceIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEVICE_IDENTIFIER);

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP ReplacedUniqueIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ReplacedUniqueIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REPLACED_UNIQUE_IDENTIFIER);

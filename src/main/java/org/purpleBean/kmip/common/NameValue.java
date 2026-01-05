@@ -15,7 +15,7 @@ import java.util.Set;
  * the actual name value in a Name structure.</p>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class NameValue implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME_VALUE);

@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP MACSignature dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class MACSignature implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MAC_SIGNATURE);

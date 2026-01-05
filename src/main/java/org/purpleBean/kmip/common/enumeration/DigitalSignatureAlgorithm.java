@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP DigitalSignatureAlgorithm enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DigitalSignatureAlgorithm implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

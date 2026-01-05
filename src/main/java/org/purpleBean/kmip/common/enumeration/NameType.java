@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP NameType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class NameType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP NistKeyType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class NistKeyType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NIST_KEY_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

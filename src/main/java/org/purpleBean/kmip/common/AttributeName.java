@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP AttributeName dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class AttributeName implements KmipDataType {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_NAME);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;

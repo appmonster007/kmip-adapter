@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP CompromiseOccurrenceDate attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.COMPROMISE_OCCURRENCE_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

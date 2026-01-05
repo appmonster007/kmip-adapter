@@ -13,7 +13,7 @@ import java.util.Set;
  * KMIP {{ATTRIBUTE_NAME}} attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
     public static final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}};

@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP CertificateRequest dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CertificateRequest implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_REQUEST);

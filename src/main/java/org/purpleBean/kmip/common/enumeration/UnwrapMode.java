@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP UnwrapMode enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UnwrapMode implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNWRAP_MODE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

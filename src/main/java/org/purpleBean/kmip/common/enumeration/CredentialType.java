@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP CredentialType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CredentialType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CREDENTIAL_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

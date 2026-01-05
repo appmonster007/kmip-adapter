@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP MediaIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class MediaIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MEDIA_IDENTIFIER);

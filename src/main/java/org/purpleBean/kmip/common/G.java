@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP G dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class G implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.G);

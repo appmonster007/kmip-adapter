@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP CertificateLength dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CertificateLength implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_LENGTH);

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ProcessingStage enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProcessingStage implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROCESSING_STAGE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

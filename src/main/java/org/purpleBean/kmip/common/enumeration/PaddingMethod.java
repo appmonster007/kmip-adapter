@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP PaddingMethod enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PaddingMethod implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PADDING_METHOD);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

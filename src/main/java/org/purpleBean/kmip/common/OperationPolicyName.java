@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP OperationPolicyName dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class OperationPolicyName implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPERATION_POLICY_NAME);

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP ApplicationData dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ApplicationData implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.APPLICATION_DATA);

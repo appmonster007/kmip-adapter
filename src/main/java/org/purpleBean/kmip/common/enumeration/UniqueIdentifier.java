@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP UniqueIdentifier enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UniqueIdentifier implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP UniqueIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UniqueIdentifier implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER);

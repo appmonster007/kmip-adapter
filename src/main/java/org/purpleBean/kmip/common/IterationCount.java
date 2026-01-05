@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP IterationCount dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class IterationCount implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ITERATION_COUNT);

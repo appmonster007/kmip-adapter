@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP BlockCipherMode enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class BlockCipherMode implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BLOCK_CIPHER_MODE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

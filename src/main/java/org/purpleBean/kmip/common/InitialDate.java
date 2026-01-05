@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP InitialDate attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class InitialDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INITIAL_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

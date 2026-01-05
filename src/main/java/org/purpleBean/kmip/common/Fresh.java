@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP Fresh attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Fresh implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FRESH);
     public static final EncodingType encodingType = EncodingType.BOOLEAN;

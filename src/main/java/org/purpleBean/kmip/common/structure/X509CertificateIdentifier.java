@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * <p>Represents a X509CertificateIdentifier in KMIP.</p>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.X_509_CERTIFICATE_IDENTIFIER);

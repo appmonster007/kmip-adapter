@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP AdjustmentType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class AdjustmentType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ADJUSTMENT_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

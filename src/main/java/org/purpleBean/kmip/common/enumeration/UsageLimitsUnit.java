@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP UsageLimitsUnit enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UsageLimitsUnit implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS_UNIT);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

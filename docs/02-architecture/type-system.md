@@ -143,7 +143,7 @@ Specialized types implementing `KmipAttribute`:
  * Represents the Activation Date attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ActivationDateAttribute implements KmipAttribute {
     @NonNull
     private final OffsetDateTime dateTime;
@@ -168,7 +168,7 @@ Complex types implementing `KmipStructure`:
  * Represents a KMIP Protocol Version.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProtocolVersion implements KmipStructure {
     @NonNull
     private final ProtocolVersionMajor protocolVersionMajor;
@@ -263,7 +263,7 @@ public class ProtocolVersion implements KmipStructure {
  * Example of creating a new KMIP attribute.
  */
 @Value
-@Builder
+@Builder(toBuilder = true)
 public class CustomAttribute implements KmipAttribute {
     public static final int CUSTOM_TAG = 0x540001;
     

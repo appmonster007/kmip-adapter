@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  * KMIP Digest attribute structure.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Digest implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGEST);

@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP IssuerAlternativeName dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class IssuerAlternativeName implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ISSUER_ALTERNATIVE_NAME);

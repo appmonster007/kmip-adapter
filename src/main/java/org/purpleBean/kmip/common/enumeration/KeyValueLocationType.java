@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP KeyValueLocationType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyValueLocationType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

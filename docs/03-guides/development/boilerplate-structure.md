@@ -25,7 +25,7 @@ import java.util.stream.Stream;
  * KMIP FooStructure structure.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FooStructure implements KmipStructure {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FOO_STRUCTURE);

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP Offset dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Offset implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OFFSET);

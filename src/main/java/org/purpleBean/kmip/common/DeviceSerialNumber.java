@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP DeviceSerialNumber dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DeviceSerialNumber implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEVICE_SERIAL_NUMBER);

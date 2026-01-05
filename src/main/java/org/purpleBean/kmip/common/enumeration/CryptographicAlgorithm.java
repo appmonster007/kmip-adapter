@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP CryptographicAlgorithm enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

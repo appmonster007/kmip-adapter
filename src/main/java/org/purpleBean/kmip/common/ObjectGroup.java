@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP ObjectGroup dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ObjectGroup implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_GROUP);

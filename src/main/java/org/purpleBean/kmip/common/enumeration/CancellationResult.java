@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP CancellationResult enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CancellationResult implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CANCELLATION_RESULT);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

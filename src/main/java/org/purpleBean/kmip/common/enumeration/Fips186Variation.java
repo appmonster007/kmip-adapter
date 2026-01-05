@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP Fips186Variation enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Fips186Variation implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FIPS186_VARIATION);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

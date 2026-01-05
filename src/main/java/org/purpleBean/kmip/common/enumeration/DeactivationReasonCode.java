@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP DeactivationReasonCode enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DeactivationReasonCode implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DEACTIVATION_REASON_CODE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

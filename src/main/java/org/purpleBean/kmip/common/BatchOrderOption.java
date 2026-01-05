@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP BatchOrderOption dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class BatchOrderOption implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ORDER_OPTION);

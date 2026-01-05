@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ObjectGroupMember enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ObjectGroupMember implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_GROUP_MEMBER);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

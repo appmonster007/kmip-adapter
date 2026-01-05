@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP RecommendedCurve enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class RecommendedCurve implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RECOMMENDED_CURVE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

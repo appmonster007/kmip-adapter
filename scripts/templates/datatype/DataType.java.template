@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP {{DATA_NAME}} dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class {{DATA_NAME}} implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{DATA_NAME_SNAKE}});

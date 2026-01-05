@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP PrimeExponentQ dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PrimeExponentQ implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PRIME_EXPONENT_Q);

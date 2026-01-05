@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP RevocationMessage dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class RevocationMessage implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REVOCATION_MESSAGE);

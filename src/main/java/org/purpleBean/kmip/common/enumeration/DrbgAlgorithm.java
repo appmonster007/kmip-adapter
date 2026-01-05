@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP DrbgAlgorithm enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DrbgAlgorithm implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DRBG_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

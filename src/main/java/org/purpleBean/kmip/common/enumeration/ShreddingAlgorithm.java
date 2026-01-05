@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ShreddingAlgorithm enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ShreddingAlgorithm implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SHREDDING_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

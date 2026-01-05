@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP CertificateType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CertificateType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP KeyRoleType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyRoleType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_ROLE_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

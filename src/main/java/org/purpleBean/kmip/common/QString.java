@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP QString dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class QString implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.Q_STRING);

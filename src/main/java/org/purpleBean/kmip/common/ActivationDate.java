@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP ActivationDate attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ActivationDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ACTIVATION_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

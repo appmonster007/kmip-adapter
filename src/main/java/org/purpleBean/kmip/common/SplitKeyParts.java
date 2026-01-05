@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP SplitKeyParts dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SplitKeyParts implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_PARTS);

@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP TimeStamp dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class TimeStamp implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.TIME_STAMP);

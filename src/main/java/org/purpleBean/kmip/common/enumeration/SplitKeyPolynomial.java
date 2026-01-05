@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP SplitKeyPolynomial enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SplitKeyPolynomial implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_POLYNOMIAL);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP CompromiseDate attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CompromiseDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.COMPROMISE_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

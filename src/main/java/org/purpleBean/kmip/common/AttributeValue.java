@@ -21,7 +21,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class Integer implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.INTEGER;
@@ -59,7 +59,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class LongInteger implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.LONG_INTEGER;
@@ -97,7 +97,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class BigInteger implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
@@ -135,7 +135,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class Enumeration implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.ENUMERATION;
@@ -173,7 +173,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class Boolean implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.BOOLEAN;
@@ -211,7 +211,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class TextString implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.TEXT_STRING;
@@ -249,7 +249,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class ByteString implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.BYTE_STRING;
@@ -291,7 +291,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class DateTime implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.DATE_TIME;
@@ -343,7 +343,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class Interval implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.INTERVAL;
@@ -381,7 +381,7 @@ public abstract class AttributeValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class Structure implements Value {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.STRUCTURE;

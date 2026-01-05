@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP Modulus dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Modulus implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MODULUS);

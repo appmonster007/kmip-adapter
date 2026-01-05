@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP ContactInformation attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ContactInformation implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CONTACT_INFORMATION);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;

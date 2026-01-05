@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP DerivationMethod enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class DerivationMethod implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DERIVATION_METHOD);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

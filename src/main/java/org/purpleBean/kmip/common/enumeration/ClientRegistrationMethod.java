@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ClientRegistrationMethod enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ClientRegistrationMethod implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CLIENT_REGISTRATION_METHOD);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

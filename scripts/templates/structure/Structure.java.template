@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * KMIP {{STRUCTURE_NAME}} structure.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class {{STRUCTURE_NAME}} implements KmipStructure {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{STRUCTURE_NAME_SNAKE}});

@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP SplitKeyThreshold dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class SplitKeyThreshold implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SPLIT_KEY_THRESHOLD);

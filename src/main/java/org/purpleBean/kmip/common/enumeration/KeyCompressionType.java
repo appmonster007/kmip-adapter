@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP KeyCompressionType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyCompressionType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_COMPRESSION_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

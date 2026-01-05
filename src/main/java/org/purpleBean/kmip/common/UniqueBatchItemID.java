@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP UniqueBatchItemID dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class UniqueBatchItemID implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_BATCH_ITEM_ID);

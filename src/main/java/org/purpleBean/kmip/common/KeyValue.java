@@ -18,7 +18,7 @@ public abstract class KeyValue {
     }
 
     @Data
-    @Builder
+    @Builder(toBuilder = true)
     public static class ByteString implements Value {
 
         public static final KmipTag kmipTag = KeyValue.kmipTag;

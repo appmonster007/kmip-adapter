@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP OpaqueDataValue dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class OpaqueDataValue implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPAQUE_DATA_VALUE);

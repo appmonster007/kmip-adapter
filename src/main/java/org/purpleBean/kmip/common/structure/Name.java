@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  * </ul>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Name implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME);

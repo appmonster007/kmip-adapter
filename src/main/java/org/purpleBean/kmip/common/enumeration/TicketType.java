@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP TicketType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class TicketType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.TICKET_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

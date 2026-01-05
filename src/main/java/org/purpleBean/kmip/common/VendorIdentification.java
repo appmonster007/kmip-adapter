@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP VendorIdentification dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class VendorIdentification implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VENDOR_IDENTIFICATION);

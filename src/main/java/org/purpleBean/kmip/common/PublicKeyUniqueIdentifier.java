@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP PublicKeyUniqueIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PublicKeyUniqueIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUBLIC_KEY_UNIQUE_IDENTIFIER);

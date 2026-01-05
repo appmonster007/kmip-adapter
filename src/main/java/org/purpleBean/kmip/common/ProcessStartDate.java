@@ -14,7 +14,7 @@ import java.util.Set;
  * KMIP ProcessStartDate attribute.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ProcessStartDate implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROCESS_START_DATE);
     public static final EncodingType encodingType = EncodingType.DATE_TIME;

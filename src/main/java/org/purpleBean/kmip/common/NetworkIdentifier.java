@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP NetworkIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class NetworkIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NETWORK_IDENTIFIER);

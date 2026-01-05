@@ -12,7 +12,7 @@ import java.util.Set;
  * KMIP CryptographicUsageMask dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_USAGE_MASK);

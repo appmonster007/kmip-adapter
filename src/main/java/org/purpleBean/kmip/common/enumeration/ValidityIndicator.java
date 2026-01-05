@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP ValidityIndicator enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class ValidityIndicator implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.VALIDITY_INDICATOR);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

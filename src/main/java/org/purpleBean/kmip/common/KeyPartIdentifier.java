@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP KeyPartIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class KeyPartIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_PART_IDENTIFIER);

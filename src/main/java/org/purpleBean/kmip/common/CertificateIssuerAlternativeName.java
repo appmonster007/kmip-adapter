@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP CertificateIssuerAlternativeName dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class CertificateIssuerAlternativeName implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_ISSUER_ALTERNATIVE_NAME);

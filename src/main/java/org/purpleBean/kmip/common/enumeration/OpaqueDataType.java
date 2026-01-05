@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP OpaqueDataType enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class OpaqueDataType implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OPAQUE_DATA_TYPE);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

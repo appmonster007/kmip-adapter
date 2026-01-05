@@ -11,7 +11,7 @@ import java.util.Set;
  * KMIP MachineIdentifier dataType.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class MachineIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MACHINE_IDENTIFIER);

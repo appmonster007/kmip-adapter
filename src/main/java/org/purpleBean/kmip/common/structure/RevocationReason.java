@@ -20,7 +20,7 @@ import java.util.Set;
  * <p>Represents a RevocationReason in KMIP.</p>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class RevocationReason implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REVOCATION_REASON);

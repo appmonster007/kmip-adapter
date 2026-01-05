@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * <p>Represents a {{class_name}} in KMIP.</p>
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class {{class_name}} implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{class_snake}});

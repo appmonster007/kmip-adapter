@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP RngAlgorithm enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class RngAlgorithm implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RNG_ALGORITHM);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

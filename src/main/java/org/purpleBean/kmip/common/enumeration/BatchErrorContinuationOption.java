@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP BatchErrorContinuationOption enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class BatchErrorContinuationOption implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ERROR_CONTINUATION_OPTION);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;

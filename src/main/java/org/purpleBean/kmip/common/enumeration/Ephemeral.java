@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * KMIP Ephemeral enumeration.
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Ephemeral implements KmipEnumeration {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.EPHEMERAL);
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
