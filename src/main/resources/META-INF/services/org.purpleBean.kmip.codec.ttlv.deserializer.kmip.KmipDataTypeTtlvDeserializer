@@ -61,6 +61,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyMaterialByteStringTtl
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyPartIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyValueByteStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyValueLocationValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.KeyValuePresentTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LastChangeDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LeaseTimeTtlvDeserializer
@@ -181,6 +182,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.WrappingMeth
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.CustomAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.DigestTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.KeyValueLocationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.LinkTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.RevocationReasonTtlvDeserializer

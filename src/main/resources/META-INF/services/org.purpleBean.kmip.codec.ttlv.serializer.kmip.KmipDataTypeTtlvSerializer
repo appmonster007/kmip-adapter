@@ -59,6 +59,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyMaterialByteStringTtlvS
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyPartIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyValueByteStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyValueLocationValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.KeyValuePresentTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LastChangeDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LeaseTimeTtlvSerializer
@@ -179,6 +180,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.WrappingMethod
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.KeyValueLocationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.LinkTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.NameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.RevocationReasonTtlvSerializer

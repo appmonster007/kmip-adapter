@@ -61,6 +61,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyMaterialByteStringJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyPartIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyValueByteStringJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyValueLocationValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.KeyValuePresentJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.LastChangeDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.LeaseTimeJsonDeserializer
@@ -181,6 +182,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.WrappingMeth
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CustomAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.DigestJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.KeyValueLocationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.LinkJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.NameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.RevocationReasonJsonDeserializer
