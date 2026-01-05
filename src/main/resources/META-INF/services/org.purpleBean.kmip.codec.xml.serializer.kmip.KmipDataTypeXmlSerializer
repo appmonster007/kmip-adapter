@@ -179,6 +179,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.ValidationTypeX
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.ValidityIndicatorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.WrappingMethodXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.AlternativeNameXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.ApplicationSpecificInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.AttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CustomAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.DigestXmlSerializer

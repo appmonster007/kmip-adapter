@@ -1,0 +1,148 @@
+package org.purpleBean.kmip.common.structure;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.ApplicationData;
+import org.purpleBean.kmip.common.ApplicationNamespace;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.enumeration.State;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * KMIP ApplicationSpecificInformation attribute structure.
+ *
+ * <p>Represents a ApplicationSpecificInformation in KMIP.</p>
+ */
+@Data
+@Builder(toBuilder = true)
+public class ApplicationSpecificInformation implements KmipStructure, KmipAttribute {
+
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.APPLICATION_SPECIFIC_INFORMATION);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ApplicationSpecificInformation.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ApplicationSpecificInformation.class, ApplicationSpecificInformation::of);
+        }
+    }
+
+    @NonNull
+    private final ApplicationNamespace applicationNamespace;
+    @NonNull
+    private final ApplicationData applicationData;
+
+    public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        ApplicationSpecificInformationBuilder builder = ApplicationSpecificInformation.builder();
+        List<KmipDataType> fields = structure.getValue();
+        for (KmipDataType field : fields) {
+            if (field instanceof ApplicationNamespace namespace) {
+                builder.applicationNamespace(namespace);
+            } else if (field instanceof ApplicationData applicationData) {
+                builder.applicationData(applicationData);
+            } else {
+                throw new IllegalArgumentException("Unsupported field type: " + field.getClass());
+            }
+        }
+        return builder.build();
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        return List.of(applicationNamespace, applicationData);
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec)
+                && applicationNamespace.isSupported()
+                && applicationData.isSupported();
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return true;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return true;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return true;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
+
+    @Override
+    public AttributeValue.Value getAttributeValue() {
+        return AttributeValue.Structure.of(getValues());
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    public static class ApplicationSpecificInformationBuilder {
+        public ApplicationSpecificInformation build() {
+            validate();
+            return new ApplicationSpecificInformation(
+                    applicationNamespace,
+                    applicationData
+            );
+        }
+
+        private void validate() {
+            Objects.requireNonNull(applicationNamespace, "applicationNamespace cannot be null");
+            Objects.requireNonNull(applicationData, "applicationData cannot be null");
+        }
+    }
+}

@@ -181,6 +181,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.ValidationTy
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.ValidityIndicatorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration.WrappingMethodTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AlternativeNameTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.ApplicationSpecificInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.AttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.CustomAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.DigestTtlvDeserializer

@@ -181,6 +181,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ValidationTy
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.ValidityIndicatorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.WrappingMethodJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AlternativeNameJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.ApplicationSpecificInformationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CustomAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.DigestJsonDeserializer

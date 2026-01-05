@@ -179,6 +179,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ValidationType
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ValidityIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.WrappingMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AlternativeNameTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.ApplicationSpecificInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
