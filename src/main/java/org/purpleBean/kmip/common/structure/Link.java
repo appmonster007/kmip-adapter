@@ -11,6 +11,7 @@ import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,13 @@ public class Link implements KmipStructure, KmipAttribute {
     private final LinkType linkType;
     @NonNull
     private final LinkedObjectIdentifier linkedObjectIdentifier;
+
+    public static Link of(@NonNull LinkType linkType, @NonNull LinkedObjectIdentifier linkedObjectIdentifier) {
+        return Link.builder()
+                .linkType(linkType)
+                .linkedObjectIdentifier(linkedObjectIdentifier)
+                .build();
+    }
 
     public static Link of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
@@ -122,5 +130,20 @@ public class Link implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(kmipTag.getDescription());
+    }
+
+    public static class LinkBuilder {
+        public Link build() {
+            validate();
+            return new Link(
+                    linkType,
+                    linkedObjectIdentifier
+            );
+        }
+
+        private void validate() {
+            Objects.requireNonNull(linkType, "LinkType cannot be null");
+            Objects.requireNonNull(linkedObjectIdentifier, "LinkedObjectIdentifier cannot be null");
+        }
     }
 }

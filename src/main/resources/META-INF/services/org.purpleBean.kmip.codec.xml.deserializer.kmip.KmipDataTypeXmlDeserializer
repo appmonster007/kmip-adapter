@@ -3,6 +3,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeseriali
 org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.RequestMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ActivationDateXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AlternativeNameValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ApplicationDataXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ApplicationNamespaceXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ArchiveDateXmlDeserializer
@@ -179,6 +180,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ValidationAut
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ValidationTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.ValidityIndicatorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.WrappingMethodXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AlternativeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CustomAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.DigestXmlDeserializer

@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.LinkedObjectIdentifier;
-import org.purpleBean.kmip.common.enumeration.LinkType;
+import org.purpleBean.kmip.common.AlternativeNameValue;
+import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
 
@@ -13,8 +13,8 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DisplayName("Link Domain Tests")
-class LinkTest extends AbstractKmipStructureAttributeSuite<Link> {
+@DisplayName("AlternativeName Domain Tests")
+class AlternativeNameTest extends AbstractKmipStructureAttributeSuite<AlternativeName> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -22,15 +22,15 @@ class LinkTest extends AbstractKmipStructureAttributeSuite<Link> {
     }
 
     @Override
-    protected Class<Link> type() {
-        return Link.class;
+    protected Class<AlternativeName> type() {
+        return AlternativeName.class;
     }
 
     @Override
-    protected Link createDefault() {
-        return Link.of(
-                new LinkType(LinkType.Standard.CERTIFICATE_LINK),
-                LinkedObjectIdentifier.of("some-id")
+    protected AlternativeName createDefault() {
+        return AlternativeName.of(
+                AlternativeNameValue.of("some value"),
+                new AlternativeNameType(AlternativeNameType.Standard.EMAIL_ADDRESS)
         );
     }
 
@@ -46,8 +46,8 @@ class LinkTest extends AbstractKmipStructureAttributeSuite<Link> {
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values.get(0)).isInstanceOf(LinkType.class);
-        assertThat(values.get(1)).isInstanceOf(LinkedObjectIdentifier.class);
+        assertThat(values.get(0)).isInstanceOf(AlternativeNameValue.class);
+        assertThat(values.get(1)).isInstanceOf(AlternativeNameType.class);
     }
 
     @Override
@@ -62,12 +62,12 @@ class LinkTest extends AbstractKmipStructureAttributeSuite<Link> {
 
     @Override
     protected boolean expectClientInitializable() {
-        return true;
+        return false;
     }
 
     @Override
     protected boolean expectClientDeletable() {
-        return true;
+        return false;
     }
 
     @Override

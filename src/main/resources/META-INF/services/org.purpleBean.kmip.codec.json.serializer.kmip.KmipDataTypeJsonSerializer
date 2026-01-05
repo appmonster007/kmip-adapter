@@ -2,6 +2,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.ProtocolVersionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.ProtocolVersionMajorJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.ProtocolVersionMinorJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.ActivationDateJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.AlternativeNameValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.ApplicationDataJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.ApplicationNamespaceJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.ArchiveDateJsonSerializer
@@ -177,6 +178,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.ValidationAuth
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.ValidationTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.ValidityIndicatorJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.WrappingMethodJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AlternativeNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.DigestJsonSerializer

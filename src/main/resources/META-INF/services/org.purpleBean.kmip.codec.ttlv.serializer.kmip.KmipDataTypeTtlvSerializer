@@ -2,6 +2,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMajorTtlvSerialize
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMinorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ActivationDateTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AlternativeNameValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ApplicationDataTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ApplicationNamespaceTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ArchiveDateTtlvSerializer
@@ -177,6 +178,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ValidationAuth
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ValidationTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.ValidityIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.WrappingMethodTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AlternativeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
