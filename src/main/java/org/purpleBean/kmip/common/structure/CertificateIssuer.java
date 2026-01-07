@@ -74,8 +74,7 @@ public class CertificateIssuer implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && certificateIssuerDistinguishedName.isSupported()
-                && certificateIssuerAlternativeNames.stream().allMatch(KmipDataType::isSupported);
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

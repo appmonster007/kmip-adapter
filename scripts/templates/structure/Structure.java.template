@@ -60,6 +60,7 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
 
     @Override
     public List<KmipDataType> getValues() {
+        // TODO: update to get values
         return Stream.of(activationDate, state)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

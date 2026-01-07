@@ -72,8 +72,7 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && issuer.isSupported()
-                && (serialNumber == null || serialNumber.isSupported());
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

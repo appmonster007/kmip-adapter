@@ -84,8 +84,8 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        // TODO: Check if all the fields in the structure are supported.
-        return supportedVersions.contains(spec);
+        return supportedVersions.contains(spec)
+                            && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

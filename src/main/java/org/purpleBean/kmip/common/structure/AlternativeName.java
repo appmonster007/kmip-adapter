@@ -79,8 +79,7 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && alternativeNameType.isSupported()
-                && alternativeNameValue.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

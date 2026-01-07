@@ -79,8 +79,7 @@ public class Link implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && linkType.isSupported()
-                && linkedObjectIdentifier.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

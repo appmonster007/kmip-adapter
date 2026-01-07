@@ -382,7 +382,7 @@ public abstract class AttributeValue {
 
     @Data
     @Builder(toBuilder = true)
-    public static class Structure implements Value {
+    public static class Structure implements Value, KmipStructure {
         public static final KmipTag kmipTag = AttributeValue.kmipTag;
         public static final EncodingType encodingType = EncodingType.STRUCTURE;
         private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -418,7 +418,13 @@ public abstract class AttributeValue {
         @Override
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
+            return supportedVersions.contains(spec)
+                    && getValues().stream().allMatch(KmipDataType::isSupported);
+        }
+
+        @Override
+        public List<KmipDataType> getValues() {
+            return value.stream().filter(Objects::nonNull).toList();
         }
     }
 }

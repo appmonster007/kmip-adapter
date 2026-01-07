@@ -72,8 +72,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && applicationNamespace.isSupported()
-                && applicationData.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

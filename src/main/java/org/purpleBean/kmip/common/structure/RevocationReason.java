@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP RevocationReason attribute structure.
@@ -64,15 +65,14 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
 
     @Override
     public List<KmipDataType> getValues() {
-        return List.of(revocationReasonCode, revocationMessage);
+        return Stream.of(revocationReasonCode, revocationMessage).filter(Objects::nonNull).toList();
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && revocationReasonCode.isSupported()
-                && revocationMessage.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

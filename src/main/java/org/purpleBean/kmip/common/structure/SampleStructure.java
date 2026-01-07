@@ -59,7 +59,8 @@ public class SampleStructure implements KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
+        return supportedVersions.contains(spec)
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     public static class SampleStructureBuilder {

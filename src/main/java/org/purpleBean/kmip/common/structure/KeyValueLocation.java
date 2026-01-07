@@ -72,8 +72,7 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && keyValueLocationType.isSupported()
-                && keyValueLocationValue.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

@@ -83,9 +83,7 @@ public class Digest implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && hashingAlgorithm.isSupported()
-                && digestValue.isSupported()
-                && keyFormatType.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

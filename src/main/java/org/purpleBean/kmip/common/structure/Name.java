@@ -37,10 +37,10 @@ public class Name implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.NAME);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
-    private static final Set<KmipSpec> supported_versions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
-        for (KmipSpec spec : supported_versions) {
+        for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Name.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, Name.class, Name::of);
@@ -91,9 +91,8 @@ public class Name implements KmipStructure, KmipAttribute {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supported_versions.contains(spec)
-                && nameValue.isSupported()
-                && nameType.isSupported();
+        return supportedVersions.contains(spec)
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

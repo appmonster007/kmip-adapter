@@ -71,8 +71,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && (qlength == null || qlength.isSupported())
-                && (recommendedCurve == null || recommendedCurve.isSupported());
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

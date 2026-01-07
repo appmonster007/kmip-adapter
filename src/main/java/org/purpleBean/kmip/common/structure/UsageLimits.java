@@ -77,9 +77,7 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && usageLimitsTotal.isSupported()
-                && usageLimitsCount.isSupported()
-                && usageLimitsUnit.isSupported();
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * KMIP X509CertificateIdentifier attribute structure.
@@ -29,10 +28,10 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.X_509_CERTIFICATE_IDENTIFIER);
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
-    private static final Set<KmipSpec> supported_versions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
-        for (KmipSpec spec : supported_versions) {
+        for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, X509CertificateIdentifier.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, X509CertificateIdentifier.class, X509CertificateIdentifier::of);
@@ -77,15 +76,14 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
 
     @Override
     public List<KmipDataType> getValues() {
-        return Stream.of(issuerDistinguishedName, certificateSerialNumber).filter(Objects::nonNull).toList();
+        return List.of(issuerDistinguishedName, certificateSerialNumber);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supported_versions.contains(spec)
-                && issuerDistinguishedName.isSupported()
-                && certificateSerialNumber.isSupported();
+        return supportedVersions.contains(spec)
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override

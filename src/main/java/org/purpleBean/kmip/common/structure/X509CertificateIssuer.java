@@ -67,15 +67,14 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
         List<KmipDataType> fields = new ArrayList<>();
         fields.add(issuerDistinguishedName);
         fields.addAll(issuerAlternativeNames);
-        return fields;
+        return fields.stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && issuerDistinguishedName.isSupported()
-                && issuerAlternativeNames.stream().allMatch(KmipDataType::isSupported);
+                && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
