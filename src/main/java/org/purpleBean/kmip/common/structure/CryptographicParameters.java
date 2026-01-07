@@ -8,8 +8,10 @@ import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -51,30 +53,22 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        CryptographicParametersBuilder builder = CryptographicParameters.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            switch (field) {
-                case BlockCipherMode blockCipherMode -> builder.blockCipherMode(blockCipherMode);
-                case PaddingMethod paddingMethod -> builder.paddingMethod(paddingMethod);
-                case HashingAlgorithm hashingAlgorithm -> builder.hashingAlgorithm(hashingAlgorithm);
-                case KeyRoleType keyRoleType -> builder.keyRoleType(keyRoleType);
-                case DigitalSignatureAlgorithm digitalSignatureAlgorithm ->
-                        builder.digitalSignatureAlgorithm(digitalSignatureAlgorithm);
-                case CryptographicAlgorithm cryptographicAlgorithm ->
-                        builder.cryptographicAlgorithm(cryptographicAlgorithm);
-                case RandomIv randomIv -> builder.randomIv(randomIv);
-                case IvLength ivLength -> builder.ivLength(ivLength);
-                case TagLength tagLength -> builder.tagLength(tagLength);
-                case FixedFieldLength fixedFieldLength -> builder.fixedFieldLength(fixedFieldLength);
-                case InvocationFieldLength invocationFieldLength ->
-                        builder.invocationFieldLength(invocationFieldLength);
-                case CounterLength counterLength -> builder.counterLength(counterLength);
-                case InitialCounterValue initialCounterValue -> builder.initialCounterValue(initialCounterValue);
-                case null, default -> throw new IllegalArgumentException("Invalid field type");
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return CryptographicParameters.builder()
+                .blockCipherMode((BlockCipherMode) map.get(BlockCipherMode.kmipTag).get(0))
+                .paddingMethod((PaddingMethod) map.get(PaddingMethod.kmipTag).get(0))
+                .hashingAlgorithm((HashingAlgorithm) map.get(HashingAlgorithm.kmipTag).get(0))
+                .keyRoleType((KeyRoleType) map.get(KeyRoleType.kmipTag).get(0))
+                .digitalSignatureAlgorithm((DigitalSignatureAlgorithm) map.get(DigitalSignatureAlgorithm.kmipTag).get(0))
+                .cryptographicAlgorithm((CryptographicAlgorithm) map.get(CryptographicAlgorithm.kmipTag).get(0))
+                .randomIv((RandomIv) map.get(RandomIv.kmipTag).get(0))
+                .ivLength((IvLength) map.get(IvLength.kmipTag).get(0))
+                .tagLength((TagLength) map.get(TagLength.kmipTag).get(0))
+                .fixedFieldLength((FixedFieldLength) map.get(FixedFieldLength.kmipTag).get(0))
+                .invocationFieldLength((InvocationFieldLength) map.get(InvocationFieldLength.kmipTag).get(0))
+                .counterLength((CounterLength) map.get(CounterLength.kmipTag).get(0))
+                .initialCounterValue((InitialCounterValue) map.get(InitialCounterValue.kmipTag).get(0))
+                .build();
     }
 
     @Override

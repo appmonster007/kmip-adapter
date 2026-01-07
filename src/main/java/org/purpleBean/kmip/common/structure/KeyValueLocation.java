@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * KMIP KeyValueLocation attribute structure.
@@ -44,18 +46,11 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        KeyValueLocationBuilder builder = KeyValueLocation.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof KeyValueLocationValue keyValueLocationValue) {
-                builder.keyValueLocationValue(keyValueLocationValue);
-            } else if (field instanceof KeyValueLocationType keyValueLocationType) {
-                builder.keyValueLocationType(keyValueLocationType);
-            } else {
-                throw new IllegalArgumentException("Unsupported field: " + field);
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return KeyValueLocation.builder()
+                .keyValueLocationValue((KeyValueLocationValue) map.get(KeyValueLocationValue.kmipTag).get(0))
+                .keyValueLocationType((KeyValueLocationType) map.get(KeyValueLocationType.kmipTag).get(0))
+                .build();
     }
 
     @Override

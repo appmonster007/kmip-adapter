@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * KMIP ApplicationSpecificInformation attribute structure.
@@ -44,18 +46,11 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        ApplicationSpecificInformationBuilder builder = ApplicationSpecificInformation.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof ApplicationNamespace namespace) {
-                builder.applicationNamespace(namespace);
-            } else if (field instanceof ApplicationData applicationData) {
-                builder.applicationData(applicationData);
-            } else {
-                throw new IllegalArgumentException("Unsupported field type: " + field.getClass());
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return ApplicationSpecificInformation.builder()
+                .applicationNamespace((ApplicationNamespace) map.get(ApplicationNamespace.kmipTag).get(0))
+                .applicationData((ApplicationData) map.get(ApplicationData.kmipTag).get(0))
+                .build();
     }
 
     @Override

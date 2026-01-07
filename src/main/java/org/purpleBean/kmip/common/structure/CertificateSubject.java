@@ -11,10 +11,8 @@ import org.purpleBean.kmip.common.CertificateSubjectAlternativeName;
 import org.purpleBean.kmip.common.CertificateSubjectDistinguishedName;
 import org.purpleBean.kmip.common.enumeration.State;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * KMIP CertificateSubject attribute structure.
@@ -47,16 +45,11 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        CertificateSubjectBuilder builder = CertificateSubject.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof CertificateSubjectDistinguishedName certificateIssuerDistinguishedName) {
-                builder.certificateSubjectDistinguishedName(certificateIssuerDistinguishedName);
-            } else if (field instanceof CertificateSubjectAlternativeName certificateIssuerAlternativeName) {
-                builder.certificateSubjectAlternativeName(certificateIssuerAlternativeName);
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return CertificateSubject.builder()
+                .certificateSubjectDistinguishedName((CertificateSubjectDistinguishedName) map.get(CertificateSubjectDistinguishedName.kmipTag).get(0))
+                .certificateSubjectAlternativeNames(map.get(CertificateSubjectAlternativeName.kmipTag).stream().map(e -> (CertificateSubjectAlternativeName) e).collect(Collectors.toList()))
+                .build();
     }
 
     @Override

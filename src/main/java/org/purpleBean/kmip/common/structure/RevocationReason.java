@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * KMIP RevocationReason attribute structure.
@@ -43,18 +45,11 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        RevocationReasonBuilder builder = RevocationReason.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof RevocationReasonCode revocationReasonCode) {
-                builder.revocationReasonCode(revocationReasonCode);
-            } else if (field instanceof RevocationMessage revocationMessage) {
-                builder.revocationMessage(revocationMessage);
-            } else {
-                throw new IllegalArgumentException("Invalid field");
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return RevocationReason.builder()
+                .revocationReasonCode((RevocationReasonCode) map.get(RevocationReasonCode.kmipTag).get(0))
+                .revocationMessage((RevocationMessage) map.get(RevocationMessage.kmipTag).get(0))
+                .build();
     }
 
     @Override

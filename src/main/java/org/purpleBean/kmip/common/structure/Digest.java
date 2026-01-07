@@ -12,8 +12,10 @@ import org.purpleBean.kmip.common.enumeration.KeyFormatType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -54,18 +56,12 @@ public class Digest implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        DigestBuilder builder = Digest.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof HashingAlgorithm hashingAlgorithm) {
-                builder.hashingAlgorithm(hashingAlgorithm);
-            } else if (field instanceof DigestValue digestValue) {
-                builder.digestValue(digestValue);
-            } else if (field instanceof KeyFormatType keyFormatType) {
-                builder.keyFormatType(keyFormatType);
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return Digest.builder()
+                .hashingAlgorithm((HashingAlgorithm) map.get(HashingAlgorithm.kmipTag).get(0))
+                .digestValue((DigestValue) map.get(DigestValue.kmipTag).get(0))
+                .keyFormatType((KeyFormatType) map.get(KeyFormatType.kmipTag).get(0))
+                .build();
     }
 
     @Override

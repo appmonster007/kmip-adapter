@@ -12,8 +12,10 @@ import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * KMIP UsageLimits attribute structure.
@@ -48,17 +50,12 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        UsageLimitsBuilder builder = UsageLimits.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            switch (field) {
-                case UsageLimitsTotal usageLimitsTotal -> builder.usageLimitsTotal(usageLimitsTotal);
-                case UsageLimitsCount usageLimitsCount -> builder.usageLimitsCount(usageLimitsCount);
-                case UsageLimitsUnit usageLimitsUnit -> builder.usageLimitsUnit(usageLimitsUnit);
-                case null, default -> throw new IllegalArgumentException("Invalid field");
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return UsageLimits.builder()
+                .usageLimitsTotal((UsageLimitsTotal) map.get(UsageLimitsTotal.kmipTag).get(0))
+                .usageLimitsCount((UsageLimitsCount) map.get(UsageLimitsCount.kmipTag).get(0))
+                .usageLimitsUnit((UsageLimitsUnit) map.get(UsageLimitsUnit.kmipTag).get(0))
+                .build();
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,10 +53,10 @@ public class Link implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        var map = structure.getValue().stream().collect(Collectors.toMap(KmipDataType::getKmipTag, i -> i));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return Link.builder()
-                .linkType((LinkType) map.get(LinkType.kmipTag))
-                .linkedObjectIdentifier((LinkedObjectIdentifier) map.get(LinkedObjectIdentifier.kmipTag))
+                .linkType((LinkType) map.get(LinkType.kmipTag).get(0))
+                .linkedObjectIdentifier((LinkedObjectIdentifier) map.get(LinkedObjectIdentifier.kmipTag).get(0))
                 .build();
     }
 

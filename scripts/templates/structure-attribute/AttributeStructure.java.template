@@ -9,8 +9,10 @@ import org.purpleBean.kmip.common.structure.*;
 import org.purpleBean.kmip.common.enumeration.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -50,18 +52,15 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        {{class_name}}Builder builder = {{class_name}}.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            // TODO: Add the logic to build the object from the fields.
-            // For example:
-            // if (field instanceof HashingAlgorithm hashingAlgorithm) {
-            //     builder.hashingAlgorithm(hashingAlgorithm);
-            // } else if (field instanceof DigestValue digestValue) {
-            //     builder.digestValue(digestValue);
-            // }
-        }
-        return builder.build();
+
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return {{class_name}}.builder()
+        // TODO: Add the logic to build the object from the fields.
+        // For example, for a singular field:
+        //    .hashingAlgorithm((HashingAlgorithm) map.get(HashingAlgorithm.kmipTag).get(0))
+        // For example, for a repeated field:
+        //    .certificateIssuerAlternativeNames(map.get(CertificateIssuerAlternativeName.kmipTag).stream().map(e -> (CertificateIssuerAlternativeName) e).collect(Collectors.toList()))
+            .build();
     }
 
     @Override

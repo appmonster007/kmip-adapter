@@ -5,15 +5,14 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.common.AttributeName;
+import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.IssuerAlternativeName;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
+import org.purpleBean.kmip.common.enumeration.State;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * KMIP X509CertificateIssuer attribute structure.
@@ -46,18 +45,11 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        X509CertificateIssuerBuilder builder = X509CertificateIssuer.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof IssuerDistinguishedName issuerDistinguishedName) {
-                builder.issuerDistinguishedName(issuerDistinguishedName);
-            } else if (field instanceof IssuerAlternativeName issuerAlternativeName) {
-                builder.issuerAlternativeName(issuerAlternativeName);
-            } else {
-                throw new IllegalArgumentException("Unsupported field type: " + field.getClass());
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return X509CertificateIssuer.builder()
+                .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
+                .issuerAlternativeNames(map.get(IssuerAlternativeName.kmipTag).stream().map(e -> (IssuerAlternativeName) e).collect(Collectors.toList()))
+                .build();
     }
 
     @Override

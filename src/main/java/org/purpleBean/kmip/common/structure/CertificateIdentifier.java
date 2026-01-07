@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.SerialNumber;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -44,18 +46,11 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        CertificateIdentifierBuilder builder = CertificateIdentifier.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof Issuer issuer) {
-                builder.issuer(issuer);
-            } else if (field instanceof SerialNumber serialNumber) {
-                builder.serialNumber(serialNumber);
-            } else {
-                throw new IllegalArgumentException("Unsupported field type: " + field.getClass());
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return CertificateIdentifier.builder()
+                .issuer((Issuer) map.get(Issuer.kmipTag).get(0))
+                .serialNumber((SerialNumber) map.get(SerialNumber.kmipTag).get(0))
+                .build();
     }
 
     @Override

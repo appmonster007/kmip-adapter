@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * KMIP AlternativeName attribute structure.
@@ -51,18 +53,11 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        AlternativeNameBuilder builder = AlternativeName.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof AlternativeNameValue alternativeNameValue) {
-                builder.alternativeNameValue(alternativeNameValue);
-            } else if (field instanceof AlternativeNameType alternativeNameType) {
-                builder.alternativeNameType(alternativeNameType);
-            } else {
-                throw new IllegalArgumentException("Unsupported field: " + field);
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return AlternativeName.builder()
+                .alternativeNameValue((AlternativeNameValue) map.get(AlternativeNameValue.kmipTag).get(0))
+                .alternativeNameType((AlternativeNameType) map.get(AlternativeNameType.kmipTag).get(0))
+                .build();
     }
 
     @Override

@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -43,18 +45,11 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        CryptographicDomainParametersBuilder builder = CryptographicDomainParameters.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof Qlength qlength) {
-                builder.qlength(qlength);
-            } else if (field instanceof RecommendedCurve recommendedCurve) {
-                builder.recommendedCurve(recommendedCurve);
-            } else {
-                throw new IllegalArgumentException("Unsupported field type: " + field.getClass());
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return CryptographicDomainParameters.builder()
+                .qlength((Qlength) map.get(Qlength.kmipTag).get(0))
+                .recommendedCurve((RecommendedCurve) map.get(RecommendedCurve.kmipTag).get(0))
+                .build();
     }
 
     @Override

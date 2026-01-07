@@ -11,8 +11,10 @@ import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -64,17 +66,11 @@ public class Name implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        NameBuilder builder = Name.builder();
-        List<KmipDataType> fields = structure.getValue();
-        for (KmipDataType field : fields) {
-            if (field instanceof NameValue nameValue) {
-                builder.nameValue(nameValue);
-            }
-            if (field instanceof NameType nameType) {
-                builder.nameType(nameType);
-            }
-        }
-        return builder.build();
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return Name.builder()
+                .nameValue((NameValue) map.get(NameValue.kmipTag).get(0))
+                .nameType((NameType) map.get(NameType.kmipTag).get(0))
+                .build();
     }
 
     @Override
