@@ -185,6 +185,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AttributeJsonSer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CertificateIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CertificateIssuerJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CertificateSubjectJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CryptographicDomainParametersJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.DigestJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.KeyValueLocationJsonSerializer

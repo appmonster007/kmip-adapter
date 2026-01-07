@@ -185,6 +185,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateIssuerTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateSubjectTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CryptographicDomainParametersTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.KeyValueLocationTtlvSerializer

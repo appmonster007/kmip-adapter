@@ -183,6 +183,7 @@ org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubjec
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateSubjectBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.CryptographicDomainParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.KeyValueLocationBenchmarkSubject

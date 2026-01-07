@@ -187,6 +187,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeXmlDes
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateIssuerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateSubjectXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CryptographicDomainParametersXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CustomAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.DigestXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.KeyValueLocationXmlDeserializer
