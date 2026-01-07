@@ -184,6 +184,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.WrappingMetho
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AlternativeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.ApplicationSpecificInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateIssuerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateSubjectXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CustomAttributeXmlDeserializer

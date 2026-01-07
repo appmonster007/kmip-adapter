@@ -180,6 +180,7 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.WrappingMethodBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.structure.AlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.ApplicationSpecificInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateSubjectBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject

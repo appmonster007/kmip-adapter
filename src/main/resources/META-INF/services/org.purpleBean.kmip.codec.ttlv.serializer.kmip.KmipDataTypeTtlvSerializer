@@ -182,6 +182,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.WrappingMethod
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AlternativeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.ApplicationSpecificInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateIssuerTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateSubjectTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer

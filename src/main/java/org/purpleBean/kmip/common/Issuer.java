@@ -16,7 +16,7 @@ public class Issuer implements KmipDataType {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ISSUER);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

@@ -182,6 +182,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.enumeration.WrappingMethodX
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.AlternativeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.ApplicationSpecificInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.AttributeXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CertificateIssuerXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CertificateSubjectXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CustomAttributeXmlSerializer
