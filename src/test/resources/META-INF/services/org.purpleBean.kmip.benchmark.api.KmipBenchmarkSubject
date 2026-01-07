@@ -32,6 +32,7 @@ org.purpleBean.kmip.benchmark.subjects.common.CertificateValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CompromiseDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CompromiseOccurrenceDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ContactInformationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.CounterLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CriticalityIndicatorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CryptographicLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CryptographicUsageMaskBenchmarkSubject
@@ -45,15 +46,19 @@ org.purpleBean.kmip.benchmark.subjects.common.DigestValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ExtensionNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ExtensionTagBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ExtensionTypeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.FixedFieldLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.FreshBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.GBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.IVCounterNonceBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.InitialCounterValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.InitialDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.InitializationVectorBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.InvocationFieldLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.IssuerAlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.IssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.IssuerDistinguishedNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.IterationCountBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.IvLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.JBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.KeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.KeyMaterialByteStringBenchmarkSubject
@@ -92,6 +97,7 @@ org.purpleBean.kmip.benchmark.subjects.common.PublicKeyUniqueIdentifierBenchmark
 org.purpleBean.kmip.benchmark.subjects.common.QBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.QStringBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.QlengthBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.RandomIvBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ReplacedUniqueIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.ResultMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.RevocationMessageBenchmarkSubject
@@ -102,6 +108,7 @@ org.purpleBean.kmip.benchmark.subjects.common.SplitKeyThresholdBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.StorageStatusMaskBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SubjectAlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SubjectDistinguishedNameBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.TagLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.TimeStampBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.UniqueBatchItemIDBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.UniqueIdentifierBenchmarkSubject
@@ -184,6 +191,7 @@ org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIdentifierBen
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateSubjectBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CryptographicDomainParametersBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.CryptographicParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.KeyValueLocationBenchmarkSubject
