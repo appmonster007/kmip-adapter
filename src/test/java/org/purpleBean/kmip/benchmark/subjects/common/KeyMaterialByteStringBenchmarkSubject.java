@@ -4,16 +4,16 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.common.KeyMaterialByteString;
+import org.purpleBean.kmip.common.KeyMaterial;
 
-public class KeyMaterialByteStringBenchmarkSubject extends KmipBenchmarkSubject<KeyMaterialByteString> {
+public class KeyMaterialByteStringBenchmarkSubject extends KmipBenchmarkSubject<KeyMaterial.ByteString> {
 
     @Getter
     private KmipSpec spec = KmipSpec.V1_2;
 
     public KeyMaterialByteStringBenchmarkSubject() throws Exception {
-        KeyMaterialByteString keyMaterialByteString = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
-        initialize(keyMaterialByteString, KeyMaterialByteString.class);
+        KeyMaterial.ByteString keyMaterialByteString = KeyMaterial.ByteString.of(new byte[]{0x01, 0x02, 0x03});
+        initialize(keyMaterialByteString, KeyMaterial.ByteString.class);
     }
 
     @Override

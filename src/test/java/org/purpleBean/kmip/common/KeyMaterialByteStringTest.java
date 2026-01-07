@@ -4,17 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
-@DisplayName("KeyMaterialByteString Domain Tests")
-class KeyMaterialByteStringTest extends AbstractKmipDataTypeSuite<KeyMaterialByteString> {
+@DisplayName("KeyMaterial.ByteString Domain Tests")
+class KeyMaterialByteStringTest extends AbstractKmipDataTypeSuite<KeyMaterial.ByteString> {
 
     @Override
-    protected Class<KeyMaterialByteString> type() {
-        return KeyMaterialByteString.class;
+    protected Class<KeyMaterial.ByteString> type() {
+        return KeyMaterial.ByteString.class;
     }
 
     @Override
-    protected KeyMaterialByteString createDefault() {
-        return KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
+    protected KeyMaterial.ByteString createDefault() {
+        return KeyMaterial.ByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override

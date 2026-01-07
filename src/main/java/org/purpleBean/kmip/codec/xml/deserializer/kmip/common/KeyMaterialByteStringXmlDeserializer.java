@@ -10,52 +10,52 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.KeyMaterialByteString;
+import org.purpleBean.kmip.common.KeyMaterial;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class KeyMaterialByteStringXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyMaterialByteString> {
-    private final KmipTag kmipTag = KeyMaterialByteString.kmipTag;
-    private final EncodingType encodingType = KeyMaterialByteString.encodingType;
+public class KeyMaterialByteStringXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyMaterial.ByteString> {
+    private final KmipTag kmipTag = KeyMaterial.ByteString.kmipTag;
+    private final EncodingType encodingType = KeyMaterial.ByteString.encodingType;
 
     @Override
-    public KeyMaterialByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public KeyMaterial.ByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(KeyMaterialByteString.class, "Expected XML object for KeyMaterialByteString");
+            ctxt.reportInputMismatch(KeyMaterial.ByteString.class, "Expected XML object for KeyMaterial.ByteString");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(KeyMaterialByteString.class, "Invalid Tag for KeyMaterialByteString");
+            ctxt.reportInputMismatch(KeyMaterial.ByteString.class, "Invalid Tag for KeyMaterial.ByteString");
             return null;
         }
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(KeyMaterialByteString.class, "Missing or invalid '@type' attribute for KeyMaterialByteString");
+            ctxt.reportInputMismatch(KeyMaterial.ByteString.class, "Missing or invalid '@type' attribute for KeyMaterial.ByteString");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(KeyMaterialByteString.class,
-                    "Missing or non-text 'value' for KeyMaterialByteString");
+            ctxt.reportInputMismatch(KeyMaterial.ByteString.class,
+                    "Missing or non-text 'value' for KeyMaterial.ByteString");
             return null;
         }
 
         ByteBuffer value = codec.treeToValue(valueNode, ByteBuffer.class);
-        KeyMaterialByteString keyMaterialByteString = KeyMaterialByteString.of(value);
+        KeyMaterial.ByteString keyMaterialByteString = KeyMaterial.ByteString.of(value);
 
         KmipSpec spec = KmipContext.getSpec();
 
         if (!keyMaterialByteString.isSupported()) {
-            ctxt.reportInputMismatch(KeyMaterialByteString.class, "KeyMaterialByteString not supported for spec " + spec);
+            ctxt.reportInputMismatch(KeyMaterial.ByteString.class, "KeyMaterial.ByteString not supported for spec " + spec);
             return null;
         }
 
