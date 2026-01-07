@@ -26,6 +26,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchCountXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchOrderOptionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CRTCoefficientXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateIssuerAlternativeNameXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateIssuerDistinguishedNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateLengthXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateRequestXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CertificateSerialNumberXmlDeserializer
@@ -183,6 +184,8 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration.WrappingMetho
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AlternativeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.ApplicationSpecificInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateIssuerXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CertificateSubjectXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.CustomAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.DigestXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.KeyValueLocationXmlDeserializer
@@ -192,6 +195,8 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.RevocationReaso
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.SampleStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.UsageLimitsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.X509CertificateIdentifierXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.X509CertificateIssuerXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.X509CertificateSubjectXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestBatchItemXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestHeaderXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request.SimpleRequestMessageXmlDeserializer

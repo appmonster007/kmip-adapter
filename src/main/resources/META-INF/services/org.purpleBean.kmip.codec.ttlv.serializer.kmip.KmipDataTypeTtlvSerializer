@@ -24,6 +24,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchCountTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchOrderOptionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CRTCoefficientTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateIssuerAlternativeNameTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateIssuerDistinguishedNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateLengthTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateRequestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CertificateSerialNumberTtlvSerializer
@@ -181,6 +182,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration.WrappingMethod
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AlternativeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.ApplicationSpecificInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateIssuerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CertificateSubjectTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.KeyValueLocationTtlvSerializer
@@ -190,6 +193,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.RevocationReason
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.SampleStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.UsageLimitsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateIdentifierTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateIssuerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateSubjectTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestBatchItemTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestHeaderTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.request.SimpleRequestMessageTtlvSerializer

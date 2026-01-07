@@ -22,6 +22,7 @@ org.purpleBean.kmip.benchmark.subjects.common.BatchCountBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.BatchOrderOptionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CRTCoefficientBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CertificateIssuerAlternativeNameBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.CertificateIssuerDistinguishedNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CertificateLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CertificateRequestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CertificateSerialNumberBenchmarkSubject
@@ -179,6 +180,8 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.WrappingMethodBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.structure.AlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.ApplicationSpecificInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIssuerBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateSubjectBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.KeyValueLocationBenchmarkSubject
@@ -188,3 +191,5 @@ org.purpleBean.kmip.benchmark.subjects.common.structure.RevocationReasonBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.structure.SampleStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.UsageLimitsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.X509CertificateIdentifierBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.X509CertificateIssuerBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.X509CertificateSubjectBenchmarkSubject

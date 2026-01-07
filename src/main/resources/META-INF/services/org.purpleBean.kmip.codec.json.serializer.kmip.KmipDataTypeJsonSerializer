@@ -24,6 +24,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.BatchCountJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.BatchOrderOptionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CRTCoefficientJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateIssuerAlternativeNameJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateIssuerDistinguishedNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateLengthJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateRequestJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CertificateSerialNumberJsonSerializer
@@ -181,6 +182,8 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration.WrappingMethod
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AlternativeNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.ApplicationSpecificInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.AttributeJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CertificateIssuerJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CertificateSubjectJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.DigestJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.KeyValueLocationJsonSerializer
@@ -190,6 +193,8 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.RevocationReason
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.SampleStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.UsageLimitsJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateIdentifierJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateIssuerJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateSubjectJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestBatchItemJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestHeaderJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.request.SimpleRequestMessageJsonSerializer

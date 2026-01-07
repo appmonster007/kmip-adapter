@@ -1,36 +1,38 @@
 package org.purpleBean.kmip.common;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.KmipDataType;
 
-import java.util.Set;
+import java.time.OffsetDateTime;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP CertificateSubjectDistinguishedName dataType.
+ * KMIP CertificateIssuerDistinguishedName dataType.
  */
 @Data
 @Builder(toBuilder = true)
-public class CertificateSubjectDistinguishedName implements KmipDataType {
+public class CertificateIssuerDistinguishedName implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_SUBJECT_DISTINGUISHED_NAME);
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_ISSUER_DISTINGUISHED_NAME);
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CertificateSubjectDistinguishedName.class);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CertificateIssuerDistinguishedName.class);
         }
     }
-
 
     @NonNull
     private final String value;
 
-    public static CertificateSubjectDistinguishedName of(@NonNull String value) {
-        return CertificateSubjectDistinguishedName.builder().value(value).build();
+    public static CertificateIssuerDistinguishedName of(@NonNull String value) {
+        return CertificateIssuerDistinguishedName.builder().value(value).build();
     }
 
     @Override
