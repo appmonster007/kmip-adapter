@@ -41,6 +41,8 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CriticalityIndicatorXmlDe
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CryptographicLengthXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CryptographicUsageMaskXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DataByteStringXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DataLengthXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DeactivationDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DerivationDataXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.DestroyDateXmlDeserializer
@@ -75,6 +77,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.LeaseTimeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.LinkedObjectIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MACSignatureKeyInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MACSignatureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MacDataXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MachineIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MaximumItemsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.MaximumResponseSizeXmlDeserializer
@@ -107,6 +110,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ResultMessageXmlDeseriali
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.RevocationMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.SaltXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.SerialNumberXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.SignatureDataXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.SplitKeyPartsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.SplitKeyThresholdXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.StorageStatusMaskXmlDeserializer

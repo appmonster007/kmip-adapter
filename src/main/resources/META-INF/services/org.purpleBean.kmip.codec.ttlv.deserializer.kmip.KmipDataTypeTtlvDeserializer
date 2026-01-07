@@ -41,6 +41,8 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CriticalityIndicatorTtlv
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CryptographicLengthTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.CryptographicUsageMaskTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DataByteStringTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DataLengthTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DeactivationDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DerivationDataTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.DestroyDateTtlvDeserializer
@@ -75,6 +77,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LeaseTimeTtlvDeserialize
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.LinkedObjectIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MACSignatureKeyInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MACSignatureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MacDataTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MachineIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MaximumItemsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.MaximumResponseSizeTtlvDeserializer
@@ -107,6 +110,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.ResultMessageTtlvDeseria
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.RevocationMessageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.SaltTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.SerialNumberTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.SignatureDataTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.SplitKeyPartsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.SplitKeyThresholdTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.StorageStatusMaskTtlvDeserializer

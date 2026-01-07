@@ -37,6 +37,8 @@ org.purpleBean.kmip.benchmark.subjects.common.CriticalityIndicatorBenchmarkSubje
 org.purpleBean.kmip.benchmark.subjects.common.CryptographicLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.CryptographicUsageMaskBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.DataByteStringBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.DataLengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DeactivationDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DerivationDataBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.DestroyDateBenchmarkSubject
@@ -71,6 +73,7 @@ org.purpleBean.kmip.benchmark.subjects.common.LeaseTimeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.LinkedObjectIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.MACSignatureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.MACSignatureKeyInformationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.MacDataBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.MachineIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.MaximumItemsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.MaximumResponseSizeBenchmarkSubject
@@ -103,6 +106,7 @@ org.purpleBean.kmip.benchmark.subjects.common.ResultMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.RevocationMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SaltBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SerialNumberBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.SignatureDataBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SplitKeyPartsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.SplitKeyThresholdBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.StorageStatusMaskBenchmarkSubject

@@ -39,6 +39,8 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.CriticalityIndicatorXmlSeri
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CryptographicLengthXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.CryptographicUsageMaskXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.DataByteStringXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.DataLengthXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DeactivationDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DerivationDataXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.DestroyDateXmlSerializer
@@ -73,6 +75,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.LeaseTimeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.LinkedObjectIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.MACSignatureKeyInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.MACSignatureXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.MacDataXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.MachineIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.MaximumItemsXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.MaximumResponseSizeXmlSerializer
@@ -105,6 +108,7 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.ResultMessageXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.RevocationMessageXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.SaltXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.SerialNumberXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.SignatureDataXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.SplitKeyPartsXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.SplitKeyThresholdXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.StorageStatusMaskXmlSerializer

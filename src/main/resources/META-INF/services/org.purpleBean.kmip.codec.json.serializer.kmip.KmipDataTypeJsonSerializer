@@ -39,6 +39,8 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.CriticalityIndicatorJsonSe
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CryptographicLengthJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.CryptographicUsageMaskJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.DataByteStringJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.DataLengthJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DeactivationDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DerivationDataJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.DestroyDateJsonSerializer
@@ -73,6 +75,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.LeaseTimeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.LinkedObjectIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.MACSignatureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.MACSignatureKeyInformationJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.MacDataJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.MachineIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.MaximumItemsJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.MaximumResponseSizeJsonSerializer
@@ -105,6 +108,7 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.ResultMessageJsonSerialize
 org.purpleBean.kmip.codec.json.serializer.kmip.common.RevocationMessageJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.SaltJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.SerialNumberJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.SignatureDataJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.SplitKeyPartsJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.SplitKeyThresholdJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.StorageStatusMaskJsonSerializer

@@ -39,6 +39,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CriticalityIndicatorTtlvSe
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CryptographicLengthTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.CryptographicUsageMaskTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DataByteStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DataLengthTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DeactivationDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DerivationDataTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.DestroyDateTtlvSerializer
@@ -73,6 +75,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LeaseTimeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.LinkedObjectIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MACSignatureKeyInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MACSignatureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MacDataTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MachineIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MaximumItemsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.MaximumResponseSizeTtlvSerializer
@@ -105,6 +108,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ResultMessageTtlvSerialize
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.RevocationMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.SaltTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.SerialNumberTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.SignatureDataTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.SplitKeyPartsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.SplitKeyThresholdTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.StorageStatusMaskTtlvSerializer
