@@ -1,0 +1,37 @@
+package org.purpleBean.kmip.codec.json.common.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.QString;
+import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
+import org.purpleBean.kmip.common.structure.TransparentEcdhPublicKey;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+@DisplayName("TransparentEcdhPublicKey JSON Serialization Tests")
+class TransparentEcdhPublicKeyJsonTest extends AbstractJsonSerializationSuite<TransparentEcdhPublicKey> {
+
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+
+    @Override
+    protected Class<TransparentEcdhPublicKey> type() {
+        return TransparentEcdhPublicKey.class;
+    }
+
+    @Override
+    protected TransparentEcdhPublicKey createDefault() {
+        return TransparentEcdhPublicKey.of(
+                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                QString.of("test".getBytes())
+        );
+    }
+
+    @Override
+    protected TransparentEcdhPublicKey createVariant() {
+        return TransparentEcdhPublicKey.of(
+                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                QString.of("test2".getBytes())
+        );
+    }
+}
