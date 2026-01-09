@@ -200,11 +200,13 @@ org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CryptographicDom
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CryptographicParametersJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.CustomAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.DigestJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.KeyMaterialStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.KeyValueLocationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.LinkJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.RevocationReasonJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.SampleStructureJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.TransparentSymmetricKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.UsageLimitsJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.kmip.common.structure.X509CertificateIssuerJsonSerializer

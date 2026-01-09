@@ -200,11 +200,13 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CryptographicDom
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CryptographicParametersTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.DigestTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.KeyMaterialStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.KeyValueLocationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.LinkTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.NameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.SampleStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.TransparentSymmetricKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.UsageLimitsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.X509CertificateIssuerTtlvSerializer

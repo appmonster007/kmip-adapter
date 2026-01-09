@@ -1,0 +1,32 @@
+package org.purpleBean.kmip.codec.ttlv.common.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.common.Key;
+import org.purpleBean.kmip.common.structure.TransparentSymmetricKey;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+@DisplayName("TransparentSymmetricKey TTLV Serialization Tests")
+class TransparentSymmetricKeyTtlvTest extends AbstractTtlvSerializationSuite<TransparentSymmetricKey> {
+
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+
+    @Override
+    protected Class<TransparentSymmetricKey> type() {
+        return TransparentSymmetricKey.class;
+    }
+
+    @Override
+    protected TransparentSymmetricKey createDefault() {
+        Key key = Key.of(new byte[]{0x01, 0x02, 0x03});
+        return TransparentSymmetricKey.of(key);
+    }
+
+    @Override
+    protected TransparentSymmetricKey createVariant() {
+        Key key = Key.of(new byte[]{0x04, 0x05, 0x06});
+        return TransparentSymmetricKey.of(key);
+    }
+}

@@ -200,11 +200,13 @@ org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CryptographicDoma
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CryptographicParametersXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.CustomAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.DigestXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.KeyMaterialStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.KeyValueLocationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.LinkXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.NameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.RevocationReasonXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.SampleStructureXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.TransparentSymmetricKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.UsageLimitsXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.X509CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.X509CertificateIssuerXmlSerializer
