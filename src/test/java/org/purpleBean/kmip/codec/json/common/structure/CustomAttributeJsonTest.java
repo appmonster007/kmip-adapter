@@ -2,7 +2,8 @@ package org.purpleBean.kmip.codec.json.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueDateTime;
+import org.purpleBean.kmip.common.AttributeValueEnumeration;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
@@ -27,11 +28,11 @@ class CustomAttributeJsonTest extends AbstractJsonSerializationSuite<CustomAttri
 
     @Override
     protected CustomAttribute createDefault() {
-        return CustomAttribute.of("x-custom-state", AttributeValue.Enumeration.of(State.Standard.ACTIVE.getValue()));
+        return CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE.getValue()));
     }
 
     @Override
     protected CustomAttribute createVariant() {
-        return CustomAttribute.of("x-custom-date", AttributeValue.DateTime.of(FIXED_TIME));
+        return CustomAttribute.of("x-custom-date", AttributeValueDateTime.of(FIXED_TIME));
     }
 }

@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueByteString;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 @DisplayName("AttributeValue.ByteString TTLV Serialization Tests")
-class AttributeValueByteStringTtlvTest extends AbstractTtlvSerializationSuite<AttributeValue.ByteString> {
+class AttributeValueByteStringTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueByteString> {
 
     @Override
-    protected Class<AttributeValue.ByteString> type() {
-        return AttributeValue.ByteString.class;
+    protected Class<AttributeValueByteString> type() {
+        return AttributeValueByteString.class;
     }
 
     @Override
-    protected AttributeValue.ByteString createDefault() {
-        return AttributeValue.ByteString.of(new byte[]{0x01, 0x02, 0x03});
+    protected AttributeValueByteString createDefault() {
+        return AttributeValueByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected AttributeValue.ByteString createVariant() {
-        return AttributeValue.ByteString.of(new byte[]{0x04, 0x05, 0x06});
+    protected AttributeValueByteString createVariant() {
+        return AttributeValueByteString.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

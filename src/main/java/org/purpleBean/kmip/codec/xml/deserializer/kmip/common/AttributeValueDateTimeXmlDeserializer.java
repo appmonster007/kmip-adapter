@@ -10,52 +10,52 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueDateTime;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
-public class AttributeValueDateTimeXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValue.DateTime> {
-    private final KmipTag kmipTag = AttributeValue.DateTime.kmipTag;
-    private final EncodingType encodingType = AttributeValue.DateTime.encodingType;
+public class AttributeValueDateTimeXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValueDateTime> {
+    private final KmipTag kmipTag = AttributeValueDateTime.kmipTag;
+    private final EncodingType encodingType = AttributeValueDateTime.encodingType;
 
     @Override
-    public AttributeValue.DateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(AttributeValue.DateTime.class, "Expected XML object for AttributeValue.DateTime");
+            ctxt.reportInputMismatch(AttributeValueDateTime.class, "Expected XML object for AttributeValue.DateTime");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(AttributeValue.DateTime.class, "Invalid Tag for AttributeValue.DateTime");
+            ctxt.reportInputMismatch(AttributeValueDateTime.class, "Invalid Tag for AttributeValue.DateTime");
             return null;
         }
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(AttributeValue.DateTime.class, "Missing or invalid '@type' attribute for AttributeValue.DateTime");
+            ctxt.reportInputMismatch(AttributeValueDateTime.class, "Missing or invalid '@type' attribute for AttributeValue.DateTime");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.DateTime.class,
+            ctxt.reportInputMismatch(AttributeValueDateTime.class,
                     "Missing or non-text 'value' for AttributeValue.DateTime");
             return null;
         }
 
         OffsetDateTime value = codec.treeToValue(valueNode, OffsetDateTime.class);
-        AttributeValue.DateTime attributeValueDateTime = AttributeValue.DateTime.of(value);
+        AttributeValueDateTime attributeValueDateTime = AttributeValueDateTime.of(value);
 
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueDateTime.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.DateTime.class, "AttributeValue.DateTime not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueDateTime.class, "AttributeValue.DateTime not supported for spec " + spec);
             return null;
         }
 

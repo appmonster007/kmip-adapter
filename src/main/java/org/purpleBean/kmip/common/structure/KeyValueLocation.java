@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.KeyValueLocationValue;
 import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -42,8 +41,8 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     @NonNull
     private final KeyValueLocationType keyValueLocationType;
 
-    public static KeyValueLocation of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+    public static KeyValueLocation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
@@ -116,8 +115,8 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Structure.of(getValues());
+    public AttributeValue getAttributeValue() {
+        return AttributeValueStructure.of(getValues());
     }
 
     @Override

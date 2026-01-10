@@ -6,16 +6,16 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueDateTime;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class AttributeValueDateTimeXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValue.DateTime> {
+public class AttributeValueDateTimeXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValueDateTime> {
 
     @Override
-    public void serialize(AttributeValue.DateTime attributeValueDateTime, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeValueDateTime attributeValueDateTime, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!attributeValueDateTime.isSupported()) {

@@ -5,16 +5,16 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 @DisplayName("AttributeValue.Enumeration Domain Tests")
-class AttributeValueEnumerationTest extends AbstractKmipDataTypeSuite<AttributeValue.Enumeration> {
+class AttributeValueEnumerationTest extends AbstractKmipDataTypeSuite<AttributeValueEnumeration> {
 
     @Override
-    protected Class<AttributeValue.Enumeration> type() {
-        return AttributeValue.Enumeration.class;
+    protected Class<AttributeValueEnumeration> type() {
+        return AttributeValueEnumeration.class;
     }
 
     @Override
-    protected AttributeValue.Enumeration createDefault() {
-        return AttributeValue.Enumeration.of(123);
+    protected AttributeValueEnumeration createDefault() {
+        return AttributeValueEnumeration.of(123);
     }
 
     @Override

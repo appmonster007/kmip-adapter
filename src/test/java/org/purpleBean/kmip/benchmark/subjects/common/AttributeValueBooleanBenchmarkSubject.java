@@ -4,16 +4,16 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueBoolean;
 
-public class AttributeValueBooleanBenchmarkSubject extends KmipBenchmarkSubject<AttributeValue.Boolean> {
+public class AttributeValueBooleanBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueBoolean> {
 
     @Getter
     private KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueBooleanBenchmarkSubject() throws Exception {
-        AttributeValue.Boolean attributeValueBoolean = AttributeValue.Boolean.of(true);
-        initialize(attributeValueBoolean, AttributeValue.Boolean.class);
+        AttributeValueBoolean attributeValueBoolean = AttributeValueBoolean.of(true);
+        initialize(attributeValueBoolean, AttributeValueBoolean.class);
     }
 
     @Override

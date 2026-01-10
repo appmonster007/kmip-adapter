@@ -2,6 +2,7 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.AttributeValue;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -92,7 +93,7 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @Test
     @DisplayName("should create from attribute value")
     void shouldCreateFromAttributeValue() {
-        AttributeValue.Integer attrValue = AttributeValue.Integer.of(192);
+        AttributeValueInteger attrValue = AttributeValueInteger.of(192);
         CryptographicLength length = CryptographicLength.of(AttributeName.of("Cryptographic Length"), attrValue);
         assertThat(length.getValue()).isEqualTo(192);
     }
@@ -100,7 +101,7 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @Test
     @DisplayName("should throw for invalid attribute value type")
     void shouldThrowForInvalidAttributeValueType() {
-        AttributeValue.TextString invalidAttrValue = AttributeValue.TextString.of("invalid");
+        AttributeValueTextString invalidAttrValue = AttributeValueTextString.of("invalid");
         assertThatThrownBy(() -> CryptographicLength.of(AttributeName.of("Cryptographic Length"), invalidAttrValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Invalid attribute value");
@@ -165,10 +166,10 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<Cryptog
     @DisplayName("should have correct attribute value")
     void shouldHaveCorrectAttributeValue() {
         CryptographicLength length = CryptographicLength.of(512);
-        AttributeValue.Value attrValue = length.getAttributeValue();
+        AttributeValue attrValue = length.getAttributeValue();
 
         assertThat(attrValue.getEncodingType()).isEqualTo(EncodingType.INTEGER);
-        assertThat(((AttributeValue.Integer) attrValue).getValue()).isEqualTo(512);
+        assertThat(((AttributeValueInteger) attrValue).getValue()).isEqualTo(512);
     }
 
     @Test

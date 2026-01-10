@@ -4,18 +4,18 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueDateTime;
 
 import java.time.OffsetDateTime;
 
-public class AttributeValueDateTimeBenchmarkSubject extends KmipBenchmarkSubject<AttributeValue.DateTime> {
+public class AttributeValueDateTimeBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueDateTime> {
 
     @Getter
     private KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueDateTimeBenchmarkSubject() throws Exception {
-        AttributeValue.DateTime attributeValueDateTime = AttributeValue.DateTime.of(OffsetDateTime.now());
-        initialize(attributeValueDateTime, AttributeValue.DateTime.class);
+        AttributeValueDateTime attributeValueDateTime = AttributeValueDateTime.of(OffsetDateTime.now());
+        initialize(attributeValueDateTime, AttributeValueDateTime.class);
     }
 
     @Override

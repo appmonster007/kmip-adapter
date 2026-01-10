@@ -10,51 +10,51 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueEnumeration;
 
 import java.io.IOException;
 
-public class AttributeValueEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValue.Enumeration> {
-    private final KmipTag kmipTag = AttributeValue.Enumeration.kmipTag;
-    private final EncodingType encodingType = AttributeValue.Enumeration.encodingType;
+public class AttributeValueEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValueEnumeration> {
+    private final KmipTag kmipTag = AttributeValueEnumeration.kmipTag;
+    private final EncodingType encodingType = AttributeValueEnumeration.encodingType;
 
     @Override
-    public AttributeValue.Enumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueEnumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "Expected XML object for AttributeValue.Enumeration");
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "Expected XML object for AttributeValue.Enumeration");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "Invalid Tag for AttributeValue.Enumeration");
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "Invalid Tag for AttributeValue.Enumeration");
             return null;
         }
 
         JsonNode typeNode = node.get("type");
         if (typeNode == null || !typeNode.isTextual() ||
                 !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "Missing or invalid '@type' attribute for AttributeValue.Enumeration");
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "Missing or invalid '@type' attribute for AttributeValue.Enumeration");
             return null;
         }
 
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class,
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class,
                     "Missing or non-number 'value' for AttributeValue.Enumeration");
             return null;
         }
 
         java.lang.Integer value = codec.treeToValue(valueNode, java.lang.Integer.class);
-        AttributeValue.Enumeration attributeValueEnumeration = AttributeValue.Enumeration.of(value);
+        AttributeValueEnumeration attributeValueEnumeration = AttributeValueEnumeration.of(value);
 
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueEnumeration.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "AttributeValue.Enumeration not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "AttributeValue.Enumeration not supported for spec " + spec);
             return null;
         }
 

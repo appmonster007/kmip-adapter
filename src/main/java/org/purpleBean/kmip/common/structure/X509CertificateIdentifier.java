@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.CertificateSerialNumber;
 import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -53,8 +52,8 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
         return new X509CertificateIdentifier(IssuerDistinguishedName.of(issuerDistinguishedName), CertificateSerialNumber.of(certificateSerialNumber));
     }
 
-    public static X509CertificateIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+    public static X509CertificateIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
@@ -127,8 +126,8 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Structure.of(getValues());
+    public AttributeValue getAttributeValue() {
+        return AttributeValueStructure.of(getValues());
     }
 
     @Override

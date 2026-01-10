@@ -5,16 +5,16 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 @DisplayName("AttributeValue.Integer Domain Tests")
-class AttributeValueIntegerTest extends AbstractKmipDataTypeSuite<AttributeValue.Integer> {
+class AttributeValueIntegerTest extends AbstractKmipDataTypeSuite<AttributeValueInteger> {
 
     @Override
-    protected Class<AttributeValue.Integer> type() {
-        return AttributeValue.Integer.class;
+    protected Class<AttributeValueInteger> type() {
+        return AttributeValueInteger.class;
     }
 
     @Override
-    protected AttributeValue.Integer createDefault() {
-        return AttributeValue.Integer.of(123);
+    protected AttributeValueInteger createDefault() {
+        return AttributeValueInteger.of(123);
     }
 
     @Override

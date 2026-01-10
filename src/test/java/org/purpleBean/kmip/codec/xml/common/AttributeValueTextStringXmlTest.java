@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("AttributeValue.TextString XML Serialization Tests")
-class AttributeValueTextStringXmlTest extends AbstractXmlSerializationSuite<AttributeValue.TextString> {
+class AttributeValueTextStringXmlTest extends AbstractXmlSerializationSuite<AttributeValueTextString> {
 
     @Override
-    protected Class<AttributeValue.TextString> type() {
-        return AttributeValue.TextString.class;
+    protected Class<AttributeValueTextString> type() {
+        return AttributeValueTextString.class;
     }
 
     @Override
-    protected AttributeValue.TextString createDefault() {
-        return AttributeValue.TextString.of("test");
+    protected AttributeValueTextString createDefault() {
+        return AttributeValueTextString.of("test");
     }
 
     @Override
-    protected AttributeValue.TextString createVariant() {
-        return AttributeValue.TextString.of("variant");
+    protected AttributeValueTextString createVariant() {
+        return AttributeValueTextString.of("variant");
     }
 }

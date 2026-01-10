@@ -5,16 +5,16 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 @DisplayName("AttributeValue.TextString Domain Tests")
-class AttributeValueTextStringTest extends AbstractKmipDataTypeSuite<AttributeValue.TextString> {
+class AttributeValueTextStringTest extends AbstractKmipDataTypeSuite<AttributeValueTextString> {
 
     @Override
-    protected Class<AttributeValue.TextString> type() {
-        return AttributeValue.TextString.class;
+    protected Class<AttributeValueTextString> type() {
+        return AttributeValueTextString.class;
     }
 
     @Override
-    protected AttributeValue.TextString createDefault() {
-        return AttributeValue.TextString.of("test");
+    protected AttributeValueTextString createDefault() {
+        return AttributeValueTextString.of("test");
     }
 
     @Override

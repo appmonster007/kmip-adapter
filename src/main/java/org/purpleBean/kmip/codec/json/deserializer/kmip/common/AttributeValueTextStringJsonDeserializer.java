@@ -8,20 +8,20 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueTextString;
 
 import java.io.IOException;
 
-public class AttributeValueTextStringJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.TextString> {
-    private final KmipTag kmipTag = AttributeValue.TextString.kmipTag;
-    private final EncodingType encodingType = AttributeValue.TextString.encodingType;
+public class AttributeValueTextStringJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValueTextString> {
+    private final KmipTag kmipTag = AttributeValueTextString.kmipTag;
+    private final EncodingType encodingType = AttributeValueTextString.encodingType;
 
     @Override
-    public AttributeValue.TextString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueTextString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class, String.format("JSON node cannot be null for AttributeValue.TextString deserialization"));
+            ctxt.reportInputMismatch(AttributeValueTextString.class, String.format("JSON node cannot be null for AttributeValue.TextString deserialization"));
             return null;
         }
 
@@ -30,16 +30,16 @@ public class AttributeValueTextStringJsonDeserializer extends KmipDataTypeJsonDe
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValue.TextString.class, String.format("Invalid KMIP tag for AttributeValue.TextString"));
+                ctxt.reportInputMismatch(AttributeValueTextString.class, String.format("Invalid KMIP tag for AttributeValue.TextString"));
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class, String.format("Failed to parse KMIP tag for AttributeValue.TextString: %s", e.getMessage()));
+            ctxt.reportInputMismatch(AttributeValueTextString.class, String.format("Failed to parse KMIP tag for AttributeValue.TextString: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class,
+            ctxt.reportInputMismatch(AttributeValueTextString.class,
                     String.format("Expected object with %s tag for AttributeValue.TextString, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
@@ -51,25 +51,25 @@ public class AttributeValueTextStringJsonDeserializer extends KmipDataTypeJsonDe
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class, String.format("Missing or non-text 'type' field for AttributeValue.TextString"));
+            ctxt.reportInputMismatch(AttributeValueTextString.class, String.format("Missing or non-text 'type' field for AttributeValue.TextString"));
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class, "AttributeValue.TextString 'value' must be a non-empty string");
+            ctxt.reportInputMismatch(AttributeValueTextString.class, "AttributeValue.TextString 'value' must be a non-empty string");
             return null;
         }
 
         String value = p.getCodec().treeToValue(valueNode, String.class);
-        AttributeValue.TextString attributeValueTextString = AttributeValue.TextString.of(value);
+        AttributeValueTextString attributeValueTextString = AttributeValueTextString.of(value);
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueTextString.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.TextString.class, "AttributeValue.TextString not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueTextString.class, "AttributeValue.TextString not supported for spec " + spec);
             return null;
         }
 

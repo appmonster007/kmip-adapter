@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueInteger;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 @DisplayName("AttributeValue.Integer TTLV Serialization Tests")
-class AttributeValueIntegerTtlvTest extends AbstractTtlvSerializationSuite<AttributeValue.Integer> {
+class AttributeValueIntegerTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueInteger> {
 
     @Override
-    protected Class<AttributeValue.Integer> type() {
-        return AttributeValue.Integer.class;
+    protected Class<AttributeValueInteger> type() {
+        return AttributeValueInteger.class;
     }
 
     @Override
-    protected AttributeValue.Integer createDefault() {
-        return AttributeValue.Integer.of(123);
+    protected AttributeValueInteger createDefault() {
+        return AttributeValueInteger.of(123);
     }
 
     @Override
-    protected AttributeValue.Integer createVariant() {
-        return AttributeValue.Integer.of(456);
+    protected AttributeValueInteger createVariant() {
+        return AttributeValueInteger.of(456);
     }
 }

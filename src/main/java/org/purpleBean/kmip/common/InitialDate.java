@@ -35,16 +35,16 @@ public class InitialDate implements KmipDataType, KmipAttribute {
         return InitialDate.builder().value(value).build();
     }
 
-    public static InitialDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.DateTime dateTime)) {
+    public static InitialDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new InitialDate(dateTime.getValue());
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.DateTime.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueDateTime.of(value);
     }
 
     @Override

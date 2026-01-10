@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueByteString;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("AttributeValue.ByteString XML Serialization Tests")
-class AttributeValueByteStringXmlTest extends AbstractXmlSerializationSuite<AttributeValue.ByteString> {
+class AttributeValueByteStringXmlTest extends AbstractXmlSerializationSuite<AttributeValueByteString> {
 
     @Override
-    protected Class<AttributeValue.ByteString> type() {
-        return AttributeValue.ByteString.class;
+    protected Class<AttributeValueByteString> type() {
+        return AttributeValueByteString.class;
     }
 
     @Override
-    protected AttributeValue.ByteString createDefault() {
-        return AttributeValue.ByteString.of(new byte[]{0x01, 0x02, 0x03});
+    protected AttributeValueByteString createDefault() {
+        return AttributeValueByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected AttributeValue.ByteString createVariant() {
-        return AttributeValue.ByteString.of(new byte[]{0x04, 0x05, 0x06});
+    protected AttributeValueByteString createVariant() {
+        return AttributeValueByteString.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

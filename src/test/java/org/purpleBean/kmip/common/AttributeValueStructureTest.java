@@ -2,21 +2,22 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 import java.util.List;
 
 @DisplayName("AttributeValue.Structure Domain Tests")
-class AttributeValueStructureTest extends AbstractKmipDataTypeSuite<AttributeValue.Structure> {
+class AttributeValueStructureTest extends AbstractKmipDataTypeSuite<AttributeValueStructure> {
 
     @Override
-    protected Class<AttributeValue.Structure> type() {
-        return AttributeValue.Structure.class;
+    protected Class<AttributeValueStructure> type() {
+        return AttributeValueStructure.class;
     }
 
     @Override
-    protected AttributeValue.Structure createDefault() {
-        return AttributeValue.Structure.of(List.of(AttributeValue.Integer.of(123)));
+    protected AttributeValueStructure createDefault() {
+        return AttributeValueStructure.of(List.of(AttributeValueInteger.of(123)));
     }
 
     @Override

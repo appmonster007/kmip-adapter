@@ -5,13 +5,9 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 
 import java.io.IOException;
@@ -71,7 +67,7 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
             case KmipTag.Standard.ATTRIBUTE_NAME ->
                     builder.attributeName(p.getCodec().treeToValue(node, AttributeName.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE ->
-                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.Value.class));
+                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.class));
             default -> throw new IllegalArgumentException();
         }
     }

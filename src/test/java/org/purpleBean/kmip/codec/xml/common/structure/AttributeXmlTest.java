@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDate;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueInteger;
+import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
@@ -38,8 +40,8 @@ class AttributeXmlTest extends AbstractXmlSerializationSuite<Attribute> {
     @Override
     protected Attribute createVariant() {
         List<KmipDataType> list = new ArrayList<>();
-        list.add(AttributeValue.TextString.of("some-value"));
-        list.add(AttributeValue.Integer.of(1));
-        return Attribute.of(CustomAttribute.of("x-apple", AttributeValue.Structure.of(list)));
+        list.add(AttributeValueTextString.of("some-value"));
+        list.add(AttributeValueInteger.of(1));
+        return Attribute.of(CustomAttribute.of("x-apple", AttributeValueStructure.of(list)));
     }
 }

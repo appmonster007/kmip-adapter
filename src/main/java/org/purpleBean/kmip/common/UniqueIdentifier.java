@@ -34,8 +34,8 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
         return UniqueIdentifier.builder().value(value).build();
     }
 
-    public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString textString)) {
+    public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new UniqueIdentifier(textString.getValue());
@@ -93,8 +93,8 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.TextString.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueTextString.of(value);
     }
 
     @Override

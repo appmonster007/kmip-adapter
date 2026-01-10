@@ -48,7 +48,7 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
         // TODO: Initialize the fields here.
     }
 
-    public static {{class_name}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+    public static {{class_name}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
@@ -129,7 +129,7 @@ public class {{class_name}} implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
+    public AttributeValue getAttributeValue() {
         return AttributeValue.Structure.of(getValues());
     }
 

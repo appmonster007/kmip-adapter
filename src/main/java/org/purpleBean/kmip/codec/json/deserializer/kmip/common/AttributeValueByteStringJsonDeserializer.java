@@ -8,21 +8,21 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueByteString;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttributeValueByteStringJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.ByteString> {
-    private final KmipTag kmipTag = AttributeValue.ByteString.kmipTag;
-    private final EncodingType encodingType = AttributeValue.ByteString.encodingType;
+public class AttributeValueByteStringJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValueByteString> {
+    private final KmipTag kmipTag = AttributeValueByteString.kmipTag;
+    private final EncodingType encodingType = AttributeValueByteString.encodingType;
 
     @Override
-    public AttributeValue.ByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class, String.format("JSON node cannot be null for AttributeValue.ByteString deserialization"));
+            ctxt.reportInputMismatch(AttributeValueByteString.class, String.format("JSON node cannot be null for AttributeValue.ByteString deserialization"));
             return null;
         }
 
@@ -31,16 +31,16 @@ public class AttributeValueByteStringJsonDeserializer extends KmipDataTypeJsonDe
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValue.ByteString.class, String.format("Invalid KMIP tag for AttributeValue.ByteString"));
+                ctxt.reportInputMismatch(AttributeValueByteString.class, String.format("Invalid KMIP tag for AttributeValue.ByteString"));
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class, String.format("Failed to parse KMIP tag for AttributeValue.ByteString: %s", e.getMessage()));
+            ctxt.reportInputMismatch(AttributeValueByteString.class, String.format("Failed to parse KMIP tag for AttributeValue.ByteString: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class,
+            ctxt.reportInputMismatch(AttributeValueByteString.class,
                     String.format("Expected object with %s tag for AttributeValue.ByteString, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
@@ -52,25 +52,25 @@ public class AttributeValueByteStringJsonDeserializer extends KmipDataTypeJsonDe
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class, String.format("Missing or non-text 'type' field for AttributeValue.ByteString"));
+            ctxt.reportInputMismatch(AttributeValueByteString.class, String.format("Missing or non-text 'type' field for AttributeValue.ByteString"));
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class, "AttributeValue.ByteString 'value' must be a non-empty textual value");
+            ctxt.reportInputMismatch(AttributeValueByteString.class, "AttributeValue.ByteString 'value' must be a non-empty textual value");
             return null;
         }
 
         ByteBuffer value = p.getCodec().treeToValue(valueNode, ByteBuffer.class);
-        AttributeValue.ByteString attributeValueByteString = AttributeValue.ByteString.of(value);
+        AttributeValueByteString attributeValueByteString = AttributeValueByteString.of(value);
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueByteString.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.ByteString.class, "AttributeValue.ByteString not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueByteString.class, "AttributeValue.ByteString not supported for spec " + spec);
             return null;
         }
 

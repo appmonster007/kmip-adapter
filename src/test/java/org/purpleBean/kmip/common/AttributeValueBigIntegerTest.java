@@ -7,16 +7,16 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 import java.math.BigInteger;
 
 @DisplayName("AttributeValue.BigInteger Domain Tests")
-class AttributeValueBigIntegerTest extends AbstractKmipDataTypeSuite<AttributeValue.BigInteger> {
+class AttributeValueBigIntegerTest extends AbstractKmipDataTypeSuite<AttributeValueBigInteger> {
 
     @Override
-    protected Class<AttributeValue.BigInteger> type() {
-        return AttributeValue.BigInteger.class;
+    protected Class<AttributeValueBigInteger> type() {
+        return AttributeValueBigInteger.class;
     }
 
     @Override
-    protected AttributeValue.BigInteger createDefault() {
-        return AttributeValue.BigInteger.of(BigInteger.valueOf(123));
+    protected AttributeValueBigInteger createDefault() {
+        return AttributeValueBigInteger.of(BigInteger.valueOf(123));
     }
 
     @Override

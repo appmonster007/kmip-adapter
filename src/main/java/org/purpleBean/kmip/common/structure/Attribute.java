@@ -6,7 +6,6 @@ import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,9 +36,9 @@ public class Attribute implements KmipStructure {
     private final AttributeName attributeName;
     private final AttributeIndex attributeIndex;
     @NonNull
-    private final AttributeValue.Value attributeValue;
+    private final AttributeValue attributeValue;
 
-    public static Attribute of(@NonNull String name, @NonNull AttributeValue.Value value) {
+    public static Attribute of(@NonNull String name, @NonNull AttributeValue value) {
         return Attribute.of(CustomAttribute.of(name, value));
     }
 
@@ -62,7 +61,7 @@ public class Attribute implements KmipStructure {
             attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
             encodingType = attribute.getAttributeValue().getEncodingType();
         }
-        BiFunction<AttributeName, AttributeValue.Value, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(
+        BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(
                 attrTag,
                 encodingType
         );

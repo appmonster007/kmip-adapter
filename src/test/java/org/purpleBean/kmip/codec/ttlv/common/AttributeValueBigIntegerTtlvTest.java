@@ -1,26 +1,26 @@
 package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueBigInteger;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("AttributeValue.BigInteger TTLV Serialization Tests")
-class AttributeValueBigIntegerTtlvTest extends AbstractTtlvSerializationSuite<AttributeValue.BigInteger> {
+class AttributeValueBigIntegerTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueBigInteger> {
 
     @Override
-    protected Class<AttributeValue.BigInteger> type() {
-        return AttributeValue.BigInteger.class;
+    protected Class<AttributeValueBigInteger> type() {
+        return AttributeValueBigInteger.class;
     }
 
     @Override
-    protected AttributeValue.BigInteger createDefault() {
-        return AttributeValue.BigInteger.of(BigInteger.valueOf(123));
+    protected AttributeValueBigInteger createDefault() {
+        return AttributeValueBigInteger.of(BigInteger.valueOf(123));
     }
 
     @Override
-    protected AttributeValue.BigInteger createVariant() {
-        return AttributeValue.BigInteger.of(BigInteger.valueOf(456));
+    protected AttributeValueBigInteger createVariant() {
+        return AttributeValueBigInteger.of(BigInteger.valueOf(456));
     }
 }

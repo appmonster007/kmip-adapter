@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import lombok.*;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueEnumeration;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,11 +48,11 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         this.value = value;
     }
 
-    public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+    public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
         }
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Enumeration enumeration)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
         CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
@@ -149,8 +149,8 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Enumeration.of(value.getValue());
+    public AttributeValue getAttributeValue() {
+        return AttributeValueEnumeration.of(value.getValue());
     }
 
     @Override

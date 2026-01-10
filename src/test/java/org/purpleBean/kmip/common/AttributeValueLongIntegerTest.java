@@ -5,16 +5,16 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 @DisplayName("AttributeValue.LongInteger Domain Tests")
-class AttributeValueLongIntegerTest extends AbstractKmipDataTypeSuite<AttributeValue.LongInteger> {
+class AttributeValueLongIntegerTest extends AbstractKmipDataTypeSuite<AttributeValueLongInteger> {
 
     @Override
-    protected Class<AttributeValue.LongInteger> type() {
-        return AttributeValue.LongInteger.class;
+    protected Class<AttributeValueLongInteger> type() {
+        return AttributeValueLongInteger.class;
     }
 
     @Override
-    protected AttributeValue.LongInteger createDefault() {
-        return AttributeValue.LongInteger.of(123L);
+    protected AttributeValueLongInteger createDefault() {
+        return AttributeValueLongInteger.of(123L);
     }
 
     @Override

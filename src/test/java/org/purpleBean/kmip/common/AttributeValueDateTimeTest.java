@@ -7,16 +7,16 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 import java.time.OffsetDateTime;
 
 @DisplayName("AttributeValue.DateTime Domain Tests")
-class AttributeValueDateTimeTest extends AbstractKmipDataTypeSuite<AttributeValue.DateTime> {
+class AttributeValueDateTimeTest extends AbstractKmipDataTypeSuite<AttributeValueDateTime> {
 
     @Override
-    protected Class<AttributeValue.DateTime> type() {
-        return AttributeValue.DateTime.class;
+    protected Class<AttributeValueDateTime> type() {
+        return AttributeValueDateTime.class;
     }
 
     @Override
-    protected AttributeValue.DateTime createDefault() {
-        return AttributeValue.DateTime.of(OffsetDateTime.now());
+    protected AttributeValueDateTime createDefault() {
+        return AttributeValueDateTime.of(OffsetDateTime.now());
     }
 
     @Override

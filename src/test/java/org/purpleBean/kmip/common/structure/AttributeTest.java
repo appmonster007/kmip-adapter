@@ -1,13 +1,13 @@
 package org.purpleBean.kmip.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.AttributeValue;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.StringUtils;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
 
 import java.time.OffsetDateTime;
@@ -48,11 +48,11 @@ class AttributeTest extends AbstractKmipStructureSuite<Attribute> {
         assertThat(values.get(0)).isInstanceOf(AttributeName.class);
         assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(StringUtils.covertPascalToTitleCase("Activation Date"));
         if (values.size() == 2) {
-            assertThat(values.get(1)).isInstanceOf(AttributeValue.Value.class);
+            assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
         }
         if (values.size() > 2) {
             assertThat(values.get(1)).isInstanceOf(AttributeIndex.class);
-            assertThat(values.get(2)).isInstanceOf(AttributeValue.Value.class);
+            assertThat(values.get(2)).isInstanceOf(AttributeValue.class);
         }
     }
 }

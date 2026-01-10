@@ -35,16 +35,16 @@ public class ProtectStopDate implements KmipDataType, KmipAttribute {
         return ProtectStopDate.builder().value(value).build();
     }
 
-    public static ProtectStopDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.DateTime dateTime)) {
+    public static ProtectStopDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new ProtectStopDate(dateTime.getValue());
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.DateTime.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueDateTime.of(value);
     }
 
     @Override

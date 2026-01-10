@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,23 +15,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class AttributeValueStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValue.Structure> {
-    private final KmipTag kmipTag = AttributeValue.Structure.kmipTag;
-    private final EncodingType encodingType = AttributeValue.Structure.encodingType;
+public class AttributeValueStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValueStructure> {
+    private final KmipTag kmipTag = AttributeValueStructure.kmipTag;
+    private final EncodingType encodingType = AttributeValueStructure.encodingType;
 
     @Override
-    public AttributeValue.Structure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
         if (!node.isObject()) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, "Expected XML object for AttributeValue.Structure");
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "Expected XML object for AttributeValue.Structure");
             return null;
         }
 
         if (p instanceof FromXmlParser xmlParser
                 && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, "Invalid Tag for AttributeValue.Structure");
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "Invalid Tag for AttributeValue.Structure");
             return null;
         }
 
@@ -49,12 +49,12 @@ public class AttributeValueStructureXmlDeserializer extends KmipDataTypeXmlDeser
                 }
             }
         }
-        AttributeValue.Structure attributeValueStructure = AttributeValue.Structure.of(values);
+        AttributeValueStructure attributeValueStructure = AttributeValueStructure.of(values);
 
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueStructure.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, "AttributeValue.Structure not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "AttributeValue.Structure not supported for spec " + spec);
             return null;
         }
 

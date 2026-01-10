@@ -8,20 +8,20 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueEnumeration;
 
 import java.io.IOException;
 
-public class AttributeValueEnumerationJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.Enumeration> {
-    private final KmipTag kmipTag = AttributeValue.Enumeration.kmipTag;
-    private final EncodingType encodingType = AttributeValue.Enumeration.encodingType;
+public class AttributeValueEnumerationJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValueEnumeration> {
+    private final KmipTag kmipTag = AttributeValueEnumeration.kmipTag;
+    private final EncodingType encodingType = AttributeValueEnumeration.encodingType;
 
     @Override
-    public AttributeValue.Enumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueEnumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, String.format("JSON node cannot be null for AttributeValue.Enumeration deserialization"));
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, String.format("JSON node cannot be null for AttributeValue.Enumeration deserialization"));
             return null;
         }
 
@@ -30,16 +30,16 @@ public class AttributeValueEnumerationJsonDeserializer extends KmipDataTypeJsonD
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValue.Enumeration.class, String.format("Invalid KMIP tag for AttributeValue.Enumeration"));
+                ctxt.reportInputMismatch(AttributeValueEnumeration.class, String.format("Invalid KMIP tag for AttributeValue.Enumeration"));
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, String.format("Failed to parse KMIP tag for AttributeValue.Enumeration: %s", e.getMessage()));
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, String.format("Failed to parse KMIP tag for AttributeValue.Enumeration: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class,
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class,
                     String.format("Expected object with %s tag for AttributeValue.Enumeration, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
@@ -51,25 +51,25 @@ public class AttributeValueEnumerationJsonDeserializer extends KmipDataTypeJsonD
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, String.format("Missing or non-text 'type' field for AttributeValue.Enumeration"));
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, String.format("Missing or non-text 'type' field for AttributeValue.Enumeration"));
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isNumber()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "AttributeValue.Enumeration 'value' must be a non-empty number");
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "AttributeValue.Enumeration 'value' must be a non-empty number");
             return null;
         }
 
         java.lang.Integer value = p.getCodec().treeToValue(valueNode, java.lang.Integer.class);
-        AttributeValue.Enumeration attributeValueEnumeration = AttributeValue.Enumeration.of(value);
+        AttributeValueEnumeration attributeValueEnumeration = AttributeValueEnumeration.of(value);
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueEnumeration.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.Enumeration.class, "AttributeValue.Enumeration not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "AttributeValue.Enumeration not supported for spec " + spec);
             return null;
         }
 

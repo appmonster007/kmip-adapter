@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueBoolean;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("AttributeValue.Boolean XML Serialization Tests")
-class AttributeValueBooleanXmlTest extends AbstractXmlSerializationSuite<AttributeValue.Boolean> {
+class AttributeValueBooleanXmlTest extends AbstractXmlSerializationSuite<AttributeValueBoolean> {
 
     @Override
-    protected Class<AttributeValue.Boolean> type() {
-        return AttributeValue.Boolean.class;
+    protected Class<AttributeValueBoolean> type() {
+        return AttributeValueBoolean.class;
     }
 
     @Override
-    protected AttributeValue.Boolean createDefault() {
-        return AttributeValue.Boolean.of(true);
+    protected AttributeValueBoolean createDefault() {
+        return AttributeValueBoolean.of(true);
     }
 
     @Override
-    protected AttributeValue.Boolean createVariant() {
-        return AttributeValue.Boolean.of(false);
+    protected AttributeValueBoolean createVariant() {
+        return AttributeValueBoolean.of(false);
     }
 }

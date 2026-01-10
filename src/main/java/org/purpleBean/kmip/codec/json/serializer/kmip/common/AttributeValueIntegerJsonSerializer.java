@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueInteger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class AttributeValueIntegerJsonSerializer extends KmipDataTypeJsonSerializer<AttributeValue.Integer> {
+public class AttributeValueIntegerJsonSerializer extends KmipDataTypeJsonSerializer<AttributeValueInteger> {
 
     @Override
-    public void serialize(AttributeValue.Integer attributeValueInteger, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(AttributeValueInteger attributeValueInteger, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
         // Validation: Null check
         if (attributeValueInteger == null) {
             return;

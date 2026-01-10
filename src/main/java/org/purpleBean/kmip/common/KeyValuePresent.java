@@ -33,16 +33,16 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
         return KeyValuePresent.builder().value(value).build();
     }
 
-    public static KeyValuePresent of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Boolean value)) {
+    public static KeyValuePresent of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueBoolean value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new KeyValuePresent(value.getValue());
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Boolean.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueBoolean.of(value);
     }
 
     @Override

@@ -5,17 +5,16 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.Value> {
+public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue> {
 
     private final KmipTag kmipTag = AttributeValue.kmipTag;
 
     @Override
-    public AttributeValue.Value deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValue deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
@@ -57,7 +56,7 @@ public class AttributeValueJsonDeserializer extends KmipDataTypeJsonDeserializer
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTag.getValue(), encodingType));
         }
 
-        AttributeValue.Value attributeValue = (AttributeValue.Value) p.getCodec().treeToValue(node, clazz);
+        AttributeValue attributeValue = (AttributeValue) p.getCodec().treeToValue(node, clazz);
 
         if (!attributeValue.isSupported()) {
             throw new NoSuchElementException(String.format("AttributeValue is not supported for KMIP spec %s", spec));

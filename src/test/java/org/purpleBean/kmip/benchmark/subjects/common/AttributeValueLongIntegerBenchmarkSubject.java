@@ -4,16 +4,16 @@ import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueLongInteger;
 
-public class AttributeValueLongIntegerBenchmarkSubject extends KmipBenchmarkSubject<AttributeValue.LongInteger> {
+public class AttributeValueLongIntegerBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueLongInteger> {
 
     @Getter
     private KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueLongIntegerBenchmarkSubject() throws Exception {
-        AttributeValue.LongInteger attributeValueLongInteger = AttributeValue.LongInteger.of(123L);
-        initialize(attributeValueLongInteger, AttributeValue.LongInteger.class);
+        AttributeValueLongInteger attributeValueLongInteger = AttributeValueLongInteger.of(123L);
+        initialize(attributeValueLongInteger, AttributeValueLongInteger.class);
     }
 
     @Override

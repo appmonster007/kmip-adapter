@@ -34,7 +34,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
         return {{ATTRIBUTE_NAME}}.builder().{{FIELD_NAME}}(value).build();
     }
 
-    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.{{ATTRIBUTE_VALUE_TYPE}} value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
@@ -42,7 +42,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
+    public AttributeValue getAttributeValue() {
         return AttributeValue.{{ATTRIBUTE_VALUE_TYPE}}.of({{FIELD_NAME}});
     }
 

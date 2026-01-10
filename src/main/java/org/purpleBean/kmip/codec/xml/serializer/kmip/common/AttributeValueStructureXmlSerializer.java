@@ -7,17 +7,17 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class AttributeValueStructureXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValue.Structure> {
+public class AttributeValueStructureXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValueStructure> {
 
     @Override
-    public void serialize(AttributeValue.Structure attributeValueStructure, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeValueStructure attributeValueStructure, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!attributeValueStructure.isSupported()) {

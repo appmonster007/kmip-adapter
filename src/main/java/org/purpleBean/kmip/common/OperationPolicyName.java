@@ -35,8 +35,8 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
         return OperationPolicyName.builder().value(value).build();
     }
 
-    public static OperationPolicyName of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString textString)) {
+    public static OperationPolicyName of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new OperationPolicyName(textString.getValue());
@@ -94,8 +94,8 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.TextString.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueTextString.of(value);
     }
 
     @Override

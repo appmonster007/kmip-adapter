@@ -33,16 +33,16 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
         return ContactInformation.builder().value(value).build();
     }
 
-    public static ContactInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.TextString value)) {
+    public static ContactInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new ContactInformation(value.getValue());
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.TextString.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueTextString.of(value);
     }
 
     @Override

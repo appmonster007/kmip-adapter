@@ -6,16 +6,16 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueByteString;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class AttributeValueByteStringXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValue.ByteString> {
+public class AttributeValueByteStringXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValueByteString> {
 
     @Override
-    public void serialize(AttributeValue.ByteString attributeValueByteString, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeValueByteString attributeValueByteString, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!attributeValueByteString.isSupported()) {

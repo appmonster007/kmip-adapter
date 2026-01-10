@@ -2,11 +2,12 @@ package org.purpleBean.kmip.common.structure;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.AttributeValue;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueEnumeration;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
 
@@ -27,7 +28,7 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttr
 
     @Override
     protected CustomAttribute createDefault() {
-        return CustomAttribute.of("x-custom-state", AttributeValue.Enumeration.of(1));
+        return CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(1));
     }
 
     @Override
@@ -43,7 +44,7 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttr
     @Override
     protected void validateComponents(List<KmipDataType> values) {
         Assertions.assertThat(values.get(0)).isInstanceOf(AttributeName.class);
-        Assertions.assertThat(values.get(1)).isInstanceOf(AttributeValue.Value.class);
+        Assertions.assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
     }
 
     @Override

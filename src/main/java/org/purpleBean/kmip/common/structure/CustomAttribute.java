@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
@@ -37,9 +36,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     @NonNull
     private final AttributeName attributeName;
     @NonNull
-    private final AttributeValue.Value attributeValue;
+    private final AttributeValue attributeValue;
 
-    public CustomAttribute(AttributeName attributeName, AttributeValue.Value attributeValue) {
+    public CustomAttribute(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!isValidCustomAttributeName(attributeName.getValue())) {
             throw new IllegalArgumentException("Custom attribute name is invalid");
         }
@@ -50,30 +49,30 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
         this.attributeValue = attributeValue;
     }
 
-    private static boolean isValidCustomAttributeValue(@NonNull AttributeValue.Value attributeValue) {
+    private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() == EncodingType.STRUCTURE) {
-            return ((AttributeValue.Structure) attributeValue).getValue().stream().noneMatch(value -> value instanceof KmipStructure);
+            return ((AttributeValueStructure) attributeValue).getValue().stream().noneMatch(value -> value instanceof KmipStructure);
         }
         return true;
     }
 
-    public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
+    public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         return CustomAttribute.builder().attributeName(attributeName).attributeValue(attributeValue).build();
     }
 
-    public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue.Value value) {
+    public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue value) {
         return of(AttributeName.of(name), value);
     }
 
-    public static CustomAttribute of(@NonNull AttributeName name, @NonNull AttributeValue.Value... values) {
-        if (Stream.of(values).anyMatch(v -> v instanceof AttributeValue.Structure)) {
+    public static CustomAttribute of(@NonNull AttributeName name, @NonNull AttributeValue... values) {
+        if (Stream.of(values).anyMatch(v -> v instanceof AttributeValueStructure)) {
             throw new IllegalArgumentException("Custom attribute cannot contain sub-structure");
         }
-        return of(name, AttributeValue.Structure.of(List.of(values)));
+        return of(name, AttributeValueStructure.of(List.of(values)));
     }
 
-    public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue.Value... values) {
-        return of(AttributeName.of(name), AttributeValue.Structure.of(List.of(values)));
+    public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue... values) {
+        return of(AttributeName.of(name), AttributeValueStructure.of(List.of(values)));
     }
 
     public static boolean isValidCustomAttributeName(@NonNull String name) {

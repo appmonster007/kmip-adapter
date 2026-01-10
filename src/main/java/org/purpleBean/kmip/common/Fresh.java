@@ -33,16 +33,16 @@ public class Fresh implements KmipDataType, KmipAttribute {
         return Fresh.builder().value(value).build();
     }
 
-    public static Fresh of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Boolean value)) {
+    public static Fresh of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueBoolean value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return new Fresh(value.getValue());
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Boolean.of(value);
+    public AttributeValue getAttributeValue() {
+        return AttributeValueBoolean.of(value);
     }
 
     @Override

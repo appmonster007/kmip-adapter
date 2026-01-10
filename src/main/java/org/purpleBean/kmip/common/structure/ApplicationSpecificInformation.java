@@ -7,7 +7,6 @@ import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.ApplicationData;
 import org.purpleBean.kmip.common.ApplicationNamespace;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.enumeration.State;
 
 import java.util.List;
@@ -42,8 +41,8 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     @NonNull
     private final ApplicationData applicationData;
 
-    public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue.Value attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValue.Structure structure)) {
+    public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
@@ -116,8 +115,8 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     }
 
     @Override
-    public AttributeValue.Value getAttributeValue() {
-        return AttributeValue.Structure.of(getValues());
+    public AttributeValue getAttributeValue() {
+        return AttributeValueStructure.of(getValues());
     }
 
     @Override

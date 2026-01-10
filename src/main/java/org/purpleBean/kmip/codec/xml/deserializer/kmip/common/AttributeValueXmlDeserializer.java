@@ -7,17 +7,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class AttributeValueXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValue.Value> {
+public class AttributeValueXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValue> {
 
     private final KmipTag kmipTag = AttributeValue.kmipTag;
 
     @Override
-    public AttributeValue.Value deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValue deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectCodec codec = p.getCodec();
         JsonNode node = codec.readTree(p);
 
@@ -46,7 +45,7 @@ public class AttributeValueXmlDeserializer extends KmipDataTypeXmlDeserializer<A
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTag.getValue(), encodingType));
         }
 
-        AttributeValue.Value attributeValue = (AttributeValue.Value) p.getCodec().treeToValue(node, clazz);
+        AttributeValue attributeValue = (AttributeValue) p.getCodec().treeToValue(node, clazz);
 
         if (!attributeValue.isSupported()) {
             ctxt.reportInputMismatch(AttributeValue.class, "AttributeValue not supported for spec " + spec);

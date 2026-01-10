@@ -1,15 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.common.AttributeValue;
 import org.purpleBean.kmip.common.structure.Attribute;
 
 import java.io.IOException;
@@ -53,7 +49,7 @@ public class AttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Attr
             case KmipTag.Standard.ATTRIBUTE_INDEX ->
                     builder.attributeIndex(mapper.readValue(ttlvObject.toByteBuffer(), AttributeIndex.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE ->
-                    builder.attributeValue(mapper.readValue(ttlvObject.toByteBuffer(), AttributeValue.Value.class));
+                    builder.attributeValue(mapper.readValue(ttlvObject.toByteBuffer(), AttributeValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

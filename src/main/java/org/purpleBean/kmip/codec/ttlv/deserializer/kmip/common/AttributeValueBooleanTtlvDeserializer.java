@@ -8,26 +8,26 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueBoolean;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class AttributeValueBooleanTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeValue.Boolean> {
-    private final KmipTag kmipTag = AttributeValue.Boolean.kmipTag;
-    private final EncodingType encodingType = AttributeValue.Boolean.encodingType;
+public class AttributeValueBooleanTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeValueBoolean> {
+    private final KmipTag kmipTag = AttributeValueBoolean.kmipTag;
+    private final EncodingType encodingType = AttributeValueBoolean.encodingType;
 
     @Override
-    public AttributeValue.Boolean deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public AttributeValueBoolean deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
             throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
 
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        AttributeValue.Boolean attributeValueBoolean = AttributeValue.Boolean.of(mapper.readValue(bb, java.lang.Boolean.class));
+        AttributeValueBoolean attributeValueBoolean = AttributeValueBoolean.of(mapper.readValue(bb, java.lang.Boolean.class));
 
         KmipSpec spec = KmipContext.getSpec();
 

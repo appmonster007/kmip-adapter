@@ -6,20 +6,20 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttributeValueStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<AttributeValue.Structure> {
+public class AttributeValueStructureTtlvSerializer extends KmipDataTypeTtlvSerializer<AttributeValueStructure> {
     @Override
-    public ByteBuffer serialize(AttributeValue.Structure value, TtlvMapper mapper) throws IOException {
+    public ByteBuffer serialize(AttributeValueStructure value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
-    private TtlvObject serializeToTtlvObject(AttributeValue.Structure value, TtlvMapper mapper) throws IOException {
+    private TtlvObject serializeToTtlvObject(AttributeValueStructure value, TtlvMapper mapper) throws IOException {
         if (value == null) {
             return null;
         }

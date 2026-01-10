@@ -8,7 +8,7 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueBigInteger;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -16,19 +16,19 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class AttributeValueBigIntegerTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeValue.BigInteger> {
-    private final KmipTag kmipTag = AttributeValue.BigInteger.kmipTag;
-    private final EncodingType encodingType = AttributeValue.BigInteger.encodingType;
+public class AttributeValueBigIntegerTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeValueBigInteger> {
+    private final KmipTag kmipTag = AttributeValueBigInteger.kmipTag;
+    private final EncodingType encodingType = AttributeValueBigInteger.encodingType;
 
     @Override
-    public AttributeValue.BigInteger deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public AttributeValueBigInteger deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
         if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
             throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
 
         ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        AttributeValue.BigInteger attributeValueBigInteger = AttributeValue.BigInteger.of(mapper.readValue(bb, BigInteger.class));
+        AttributeValueBigInteger attributeValueBigInteger = AttributeValueBigInteger.of(mapper.readValue(bb, BigInteger.class));
 
         KmipSpec spec = KmipContext.getSpec();
 

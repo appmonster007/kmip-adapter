@@ -1,24 +1,24 @@
 package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueInteger;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
 @DisplayName("AttributeValue.Integer XML Serialization Tests")
-class AttributeValueIntegerXmlTest extends AbstractXmlSerializationSuite<AttributeValue.Integer> {
+class AttributeValueIntegerXmlTest extends AbstractXmlSerializationSuite<AttributeValueInteger> {
 
     @Override
-    protected Class<AttributeValue.Integer> type() {
-        return AttributeValue.Integer.class;
+    protected Class<AttributeValueInteger> type() {
+        return AttributeValueInteger.class;
     }
 
     @Override
-    protected AttributeValue.Integer createDefault() {
-        return AttributeValue.Integer.of(123);
+    protected AttributeValueInteger createDefault() {
+        return AttributeValueInteger.of(123);
     }
 
     @Override
-    protected AttributeValue.Integer createVariant() {
-        return AttributeValue.Integer.of(456);
+    protected AttributeValueInteger createVariant() {
+        return AttributeValueInteger.of(456);
     }
 }

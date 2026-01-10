@@ -6,16 +6,16 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueLongInteger;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class AttributeValueLongIntegerXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValue.LongInteger> {
+public class AttributeValueLongIntegerXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValueLongInteger> {
 
     @Override
-    public void serialize(AttributeValue.LongInteger attributeValueLongInteger, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeValueLongInteger attributeValueLongInteger, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!attributeValueLongInteger.isSupported()) {

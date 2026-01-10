@@ -6,16 +6,16 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.AttributeValueInterval;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class AttributeValueIntervalXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValue.Interval> {
+public class AttributeValueIntervalXmlSerializer extends KmipDataTypeXmlSerializer<AttributeValueInterval> {
 
     @Override
-    public void serialize(AttributeValue.Interval attributeValueInterval, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(AttributeValueInterval attributeValueInterval, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!attributeValueInterval.isSupported()) {

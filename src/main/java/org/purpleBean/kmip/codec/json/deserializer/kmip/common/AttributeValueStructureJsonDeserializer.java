@@ -5,23 +5,23 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.AttributeValue;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValue.Structure> {
-    private final KmipTag kmipTag = AttributeValue.Structure.kmipTag;
-    private final EncodingType encodingType = AttributeValue.Structure.encodingType;
+public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValueStructure> {
+    private final KmipTag kmipTag = AttributeValueStructure.kmipTag;
+    private final EncodingType encodingType = AttributeValueStructure.encodingType;
 
     @Override
-    public AttributeValue.Structure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, String.format("JSON node cannot be null for AttributeValue.Structure deserialization"));
+            ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("JSON node cannot be null for AttributeValue.Structure deserialization"));
             return null;
         }
 
@@ -30,16 +30,16 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValue.Structure.class, String.format("Invalid KMIP tag for AttributeValue.Structure"));
+                ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("Invalid KMIP tag for AttributeValue.Structure"));
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, String.format("Failed to parse KMIP tag for AttributeValue.Structure: %s", e.getMessage()));
+            ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("Failed to parse KMIP tag for AttributeValue.Structure: %s", e.getMessage()));
             return null;
         }
 
         if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class,
+            ctxt.reportInputMismatch(AttributeValueStructure.class,
                     String.format("Expected object with %s tag for AttributeValue.Structure, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
             return null;
         }
@@ -51,14 +51,14 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, String.format("Missing or non-text 'type' field for AttributeValue.Structure"));
+            ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("Missing or non-text 'type' field for AttributeValue.Structure"));
             return null;
         }
 
         // Validation: Extract and validate value field
         JsonNode valueNode = node.get("value");
         if (valueNode == null || !valueNode.isArray()) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, "AttributeValue.Structure 'value' must be a non-empty array");
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "AttributeValue.Structure 'value' must be a non-empty array");
             return null;
         }
 
@@ -66,13 +66,13 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
         for (JsonNode childNode : valueNode) {
             values.add(deserializeObjects(childNode, p, ctxt));
         }
-        AttributeValue.Structure attributeValueStructure = AttributeValue.Structure.of(values);
+        AttributeValueStructure attributeValueStructure = AttributeValueStructure.of(values);
 
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
 
         if (!attributeValueStructure.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValue.Structure.class, "AttributeValue.Structure not supported for spec " + spec);
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "AttributeValue.Structure not supported for spec " + spec);
             return null;
         }
 
