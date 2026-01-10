@@ -5,11 +5,13 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.common.LinkedObjectIdentifier;
+import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.structure.Link;
 
 import java.io.IOException;
@@ -73,7 +75,8 @@ public class LinkXmlDeserializer extends KmipDataTypeXmlDeserializer<Link> {
     ) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.LINK_TYPE -> builder.linkType(p.getCodec().treeToValue(node, LinkType.class));
-            case KmipTag.Standard.LINKED_OBJECT_IDENTIFIER -> builder.linkedObjectIdentifier(p.getCodec().treeToValue(node, LinkedObjectIdentifier.class));
+            case KmipTag.Standard.LINKED_OBJECT_IDENTIFIER ->
+                    builder.linkedObjectIdentifier(p.getCodec().treeToValue(node, LinkedObjectIdentifier.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

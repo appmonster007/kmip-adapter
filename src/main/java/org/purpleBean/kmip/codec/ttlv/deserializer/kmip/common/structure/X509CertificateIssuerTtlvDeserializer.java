@@ -1,12 +1,14 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.common.IssuerAlternativeName;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIssuer;
 
 import java.io.IOException;

@@ -16,13 +16,14 @@ import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
-public class TransparentDhPublicKey implements KeyMaterial.Structure {
+public class TransparentDhPublicKey implements KeyMaterial, KmipStructure {
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.Value.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_DH_PUBLIC_KEY, TransparentDhPublicKey.class, TransparentDhPublicKey::of);
+            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_DH_PUBLIC_KEY, TransparentDhPublicKey.class, TransparentDhPublicKey::of);
         }
     }
 
@@ -35,8 +36,8 @@ public class TransparentDhPublicKey implements KeyMaterial.Structure {
     @NonNull
     private final Y y;
 
-    public static TransparentDhPublicKey of(@NonNull KeyMaterial.Value value) {
-        if (!(value instanceof KeyMaterial.Structure structure)) {
+    public static TransparentDhPublicKey of(@NonNull KeyMaterial value) {
+        if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));

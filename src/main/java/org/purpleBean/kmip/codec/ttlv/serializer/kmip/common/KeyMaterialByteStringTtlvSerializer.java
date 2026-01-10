@@ -5,18 +5,18 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.common.KeyMaterial;
+import org.purpleBean.kmip.common.KeyMaterialByteString;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class KeyMaterialByteStringTtlvSerializer extends KmipDataTypeTtlvSerializer<KeyMaterial.ByteString> {
+public class KeyMaterialByteStringTtlvSerializer extends KmipDataTypeTtlvSerializer<KeyMaterialByteString> {
     @Override
-    public ByteBuffer serialize(KeyMaterial.ByteString value, TtlvMapper mapper) throws IOException {
+    public ByteBuffer serialize(KeyMaterialByteString value, TtlvMapper mapper) throws IOException {
         return serializeToTtlvObject(value, mapper).toByteBuffer();
     }
 
-    private TtlvObject serializeToTtlvObject(KeyMaterial.ByteString value, TtlvMapper mapper) throws IOException {
+    private TtlvObject serializeToTtlvObject(KeyMaterialByteString value, TtlvMapper mapper) throws IOException {
         if (value == null) {
             return null;
         }

@@ -5,16 +5,16 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
 
 @DisplayName("KeyMaterial.ByteString Domain Tests")
-class KeyMaterialByteStringTest extends AbstractKmipDataTypeSuite<KeyMaterial.ByteString> {
+class KeyMaterialByteStringTest extends AbstractKmipDataTypeSuite<KeyMaterialByteString> {
 
     @Override
-    protected Class<KeyMaterial.ByteString> type() {
-        return KeyMaterial.ByteString.class;
+    protected Class<KeyMaterialByteString> type() {
+        return KeyMaterialByteString.class;
     }
 
     @Override
-    protected KeyMaterial.ByteString createDefault() {
-        return KeyMaterial.ByteString.of(new byte[]{0x01, 0x02, 0x03});
+    protected KeyMaterialByteString createDefault() {
+        return KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override

@@ -5,11 +5,13 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.common.enumeration.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.common.IssuerAlternativeName;
+import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIssuer;
 
 import java.io.IOException;

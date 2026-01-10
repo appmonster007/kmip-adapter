@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.Key;
-import org.purpleBean.kmip.common.KeyMaterial;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;
 
 import java.util.List;
@@ -16,21 +15,22 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder(toBuilder = true)
-public class TransparentSymmetricKey implements KeyMaterial.Structure {
+public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.Value.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_SYMMETRIC_KEY, TransparentSymmetricKey.class, TransparentSymmetricKey::of);
+            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_SYMMETRIC_KEY, TransparentSymmetricKey.class, TransparentSymmetricKey::of);
         }
     }
 
     @NonNull
     private final Key key;
 
-    public static TransparentSymmetricKey of(@NonNull KeyMaterial.Value value) {
-        if (!(value instanceof KeyMaterial.Structure structure)) {
+    public static TransparentSymmetricKey of(@NonNull KeyMaterial value) {
+        if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
