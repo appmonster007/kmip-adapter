@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,39 +19,54 @@ public class KeyPartIdentifierXmlDeserializer extends KmipDataTypeXmlDeserialize
 
     @Override
     public KeyPartIdentifier deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(KeyPartIdentifier.class, "Expected XML object for KeyPartIdentifier");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(KeyPartIdentifier.class, "Invalid Tag for KeyPartIdentifier");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(KeyPartIdentifier.class, "Missing or invalid '@type' attribute for KeyPartIdentifier");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(KeyPartIdentifier.class,
-                    "Missing or non-number 'value' for KeyPartIdentifier");
-            return null;
+        KeyPartIdentifier.KeyPartIdentifierBuilder builder = KeyPartIdentifier.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(KeyPartIdentifier.class, "Missing or invalid 'type' attribute for KeyPartIdentifier");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(KeyPartIdentifier.class,
+                                "Missing or non-number 'value' for KeyPartIdentifier");
+                        return null;
+                    }
+                    builder.value(Integer.parseInt(p.getText()));
+                }
+            }
         }
 
-        int value = Integer.parseInt(valueNode.asText());
-        KeyPartIdentifier keyPartIdentifier = KeyPartIdentifier.builder().value(value).build();
+        KeyPartIdentifier keyPartIdentifier = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!keyPartIdentifier.isSupported()) {
             ctxt.reportInputMismatch(KeyPartIdentifier.class, "KeyPartIdentifier not supported for spec " + spec);
             return null;

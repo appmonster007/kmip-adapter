@@ -18,7 +18,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueEnumerationT
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueIntegerTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueIntervalTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueLongIntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.AttributeValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AttributeValueTextStringTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchCountTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.BatchOrderOptionTtlvSerializer

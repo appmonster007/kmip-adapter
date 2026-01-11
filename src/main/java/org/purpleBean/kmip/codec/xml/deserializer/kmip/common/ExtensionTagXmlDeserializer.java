@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,39 +19,54 @@ public class ExtensionTagXmlDeserializer extends KmipDataTypeXmlDeserializer<Ext
 
     @Override
     public ExtensionTag deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(ExtensionTag.class, "Expected XML object for ExtensionTag");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(ExtensionTag.class, "Invalid Tag for ExtensionTag");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(ExtensionTag.class, "Missing or invalid '@type' attribute for ExtensionTag");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(ExtensionTag.class,
-                    "Missing or non-number 'value' for ExtensionTag");
-            return null;
+        ExtensionTag.ExtensionTagBuilder builder = ExtensionTag.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(ExtensionTag.class, "Missing or invalid 'type' attribute for ExtensionTag");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(ExtensionTag.class,
+                                "Missing or non-number 'value' for ExtensionTag");
+                        return null;
+                    }
+                    builder.value(Integer.parseInt(p.getText()));
+                }
+            }
         }
 
-        int value = Integer.parseInt(valueNode.asText());
-        ExtensionTag extensionTag = ExtensionTag.builder().value(value).build();
+        ExtensionTag extensionTag = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!extensionTag.isSupported()) {
             ctxt.reportInputMismatch(ExtensionTag.class, "ExtensionTag not supported for spec " + spec);
             return null;

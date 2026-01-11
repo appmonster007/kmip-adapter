@@ -1,6 +1,7 @@
 package org.purpleBean.kmip;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.purpleBean.kmip.common.CryptographicLength;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplication.class)
+@Order(Integer.MAX_VALUE)
 class KmipSpringBootIntegrationTest {
 
     @Autowired

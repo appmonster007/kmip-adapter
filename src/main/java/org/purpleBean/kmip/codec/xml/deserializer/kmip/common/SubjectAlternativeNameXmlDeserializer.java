@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -21,39 +20,54 @@ public class SubjectAlternativeNameXmlDeserializer extends KmipDataTypeXmlDeseri
 
     @Override
     public SubjectAlternativeName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(SubjectAlternativeName.class, "Expected XML object for SubjectAlternativeName");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(SubjectAlternativeName.class, "Invalid Tag for SubjectAlternativeName");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(SubjectAlternativeName.class, "Missing or invalid '@type' attribute for SubjectAlternativeName");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(SubjectAlternativeName.class,
-                    "Missing or non-text 'value' for SubjectAlternativeName");
-            return null;
+        SubjectAlternativeName.SubjectAlternativeNameBuilder builder = SubjectAlternativeName.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(SubjectAlternativeName.class, "Missing or invalid 'type' attribute for SubjectAlternativeName");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(SubjectAlternativeName.class,
+                                "Missing or non-text 'value' for SubjectAlternativeName");
+                        return null;
+                    }
+                    builder.value(ctxt.readValue(p, ByteBuffer.class));
+                }
+            }
         }
 
-        ByteBuffer value = codec.treeToValue(valueNode, ByteBuffer.class);
-        SubjectAlternativeName subjectAlternativeName = SubjectAlternativeName.of(value);
+        SubjectAlternativeName subjectAlternativeName = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!subjectAlternativeName.isSupported()) {
             ctxt.reportInputMismatch(SubjectAlternativeName.class, "SubjectAlternativeName not supported for spec " + spec);
             return null;

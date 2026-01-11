@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common;
+package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure;
 
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
@@ -34,7 +34,7 @@ public class AttributeValueStructureTtlvSerializer extends KmipDataTypeTtlvSeria
 
         byte[] tag = value.getKmipTag().getTagBytes();
         byte type = value.getEncodingType().getTypeValue();
-        List<KmipDataType> nestedValues = value.getValue();
+        List<KmipDataType> nestedValues = value.getValues();
 
         List<ByteBuffer> nestedObjects = new ArrayList<ByteBuffer>();
         for (KmipDataType object : nestedValues) {

@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -15,7 +14,6 @@ import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
     private final KmipTag kmipTag = Name.kmipTag;
@@ -23,27 +21,39 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
 
     @Override
     public Name deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(Name.class, "Expected XML object for Name");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(Name.class, "Invalid Tag for Name");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(Name.class, "Invalid Tag for Name");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         Name.NameBuilder builder = Name.builder();
 
-        // Process all fields in the XML
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                p.nextToken(); // Move to the value token
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(Name.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         Name name = builder.build();
@@ -61,7 +71,6 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
      *
      * @param builder the builder to set the field on
      * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
      * @param p       the JsonParser
      * @param ctxt    the DeserializationContext
      * @throws IOException if there is an error deserializing the value
@@ -69,14 +78,14 @@ public class NameXmlDeserializer extends KmipDataTypeXmlDeserializer<Name> {
     private void setValue(
             Name.NameBuilder builder,
             KmipTag.Value nodeTag,
-            JsonNode node,
             JsonParser p,
             DeserializationContext ctxt
     ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.NAME_VALUE -> builder.nameValue(p.getCodec().treeToValue(node, NameValue.class));
-            case KmipTag.Standard.NAME_TYPE -> builder.nameType(p.getCodec().treeToValue(node, NameType.class));
-            default -> throw new IllegalArgumentException();
+            case KmipTag.Standard.NAME_VALUE -> builder.nameValue(ctxt.readValue(p, NameValue.class));
+            case KmipTag.Standard.NAME_TYPE -> builder.nameType(ctxt.readValue(p, NameType.class));
+            default -> throw new IllegalArgumentException("Unsupported tag in Name structure: " + nodeTag);
         }
     }
 }

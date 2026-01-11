@@ -2,7 +2,6 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
@@ -15,16 +14,14 @@ public class RequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<R
 
     @Override
     public RequestMessageStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-
-        SimpleRequestMessage simpleRequestMessage = p.getCodec().treeToValue(node, SimpleRequestMessage.class);
+        SimpleRequestMessage simpleRequestMessage = ctxt.readValue(p, SimpleRequestMessage.class);
 
         ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
         KmipSpec previous = KmipContext.getSpec();
         KmipSpec spec = KmipSpec.fromValue(protocolVersion);
         KmipContext.setSpec(spec);
         try {
-            return deserializeByProtocolVersion(p, node, protocolVersion);
+            return deserializeByProtocolVersion(p, simpleRequestMessage, protocolVersion);
         } finally {
             if (previous != null) {
                 KmipContext.setSpec(previous);
@@ -32,12 +29,15 @@ public class RequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<R
                 KmipContext.clear();
             }
         }
-
     }
 
-    private RequestMessageStructure deserializeByProtocolVersion(JsonParser p, JsonNode node, ProtocolVersion protocolVersion) throws IOException {
+    private RequestMessageStructure deserializeByProtocolVersion(
+            JsonParser p,
+            SimpleRequestMessage simpleRequestMessage,
+            ProtocolVersion protocolVersion
+    ) throws IOException {
         return switch (protocolVersion.toString()) {
-            default -> p.getCodec().treeToValue(node, SimpleRequestMessage.class);
+            default -> simpleRequestMessage;
         };
     }
 }

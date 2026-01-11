@@ -44,7 +44,7 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return X509CertificateIssuer.builder()
                 .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
                 .issuerAlternativeNames(map.get(IssuerAlternativeName.kmipTag).stream().map(e -> (IssuerAlternativeName) e).collect(Collectors.toList()))

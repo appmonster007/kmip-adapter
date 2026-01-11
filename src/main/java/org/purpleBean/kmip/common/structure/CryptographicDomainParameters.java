@@ -44,7 +44,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CryptographicDomainParameters.builder()
                 .qlength((Qlength) map.get(Qlength.kmipTag).get(0))
                 .recommendedCurve((RecommendedCurve) map.get(RecommendedCurve.kmipTag).get(0))

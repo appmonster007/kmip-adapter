@@ -45,7 +45,7 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return KeyValueLocation.builder()
                 .keyValueLocationValue((KeyValueLocationValue) map.get(KeyValueLocationValue.kmipTag).get(0))
                 .keyValueLocationType((KeyValueLocationType) map.get(KeyValueLocationType.kmipTag).get(0))

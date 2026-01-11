@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,49 +19,64 @@ public class BatchCountXmlDeserializer extends KmipDataTypeXmlDeserializer<Batch
 
     @Override
     public BatchCount deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(BatchCount.class, "Expected XML object for BatchCount");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(BatchCount.class, "Invalid Tag for BatchCount");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(BatchCount.class, "Missing or invalid '@type' attribute for BatchCount");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(BatchCount.class,
-                    "Missing or non-text 'value' for BatchCount");
-            return null;
-        }
+        BatchCount.BatchCountBuilder builder = BatchCount.builder();
 
-        BatchCount batchCount;
-        try {
-            int value = Integer.parseInt(valueNode.asText());
-            if (value < 0) {
-                ctxt.reportInputMismatch(BatchCount.class, "BatchCount value must be a non-negative integer");
-                return null;
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(BatchCount.class, "Missing or invalid 'type' attribute for BatchCount");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(BatchCount.class,
+                                "Missing or non-text 'value' for BatchCount");
+                        return null;
+                    }
+                    try {
+                        int value = Integer.parseInt(p.getText());
+                        if (value < 0) {
+                            ctxt.reportInputMismatch(BatchCount.class, "BatchCount value must be a non-negative integer");
+                            return null;
+                        }
+                        builder.value(value);
+                    } catch (NumberFormatException e) {
+                        ctxt.reportInputMismatch(BatchCount.class, "Invalid integer value for BatchCount: " + p.getText());
+                        return null;
+                    }
+                }
             }
-            batchCount = BatchCount.builder().value(value).build();
-        } catch (NumberFormatException e) {
-            ctxt.reportInputMismatch(BatchCount.class, "Invalid integer value for BatchCount: " + valueNode.asText());
-            return null;
         }
+
+        BatchCount batchCount = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!batchCount.isSupported()) {
             ctxt.reportInputMismatch(BatchCount.class, "BatchCount not supported for spec " + spec);
             return null;

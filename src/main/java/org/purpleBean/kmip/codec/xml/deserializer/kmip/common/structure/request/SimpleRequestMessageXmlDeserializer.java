@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -15,56 +15,78 @@ import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 import java.io.IOException;
 
 public class SimpleRequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<SimpleRequestMessage> {
+    private final KmipTag kmipTag = SimpleRequestMessage.kmipTag;
 
     @Override
     public SimpleRequestMessage deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(SimpleRequestMessage.class, "Expected XML object for SimpleRequestMessage");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(SimpleRequestMessage.class, "Invalid Tag for SimpleRequestMessage");
             return null;
+        }
+
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         SimpleRequestMessage.SimpleRequestMessageBuilder builder = SimpleRequestMessage.builder();
 
-        JsonNode headerNode = node.get(KmipTag.Standard.REQUEST_HEADER.getDescription());
-        builder.requestHeader(p.getCodec().treeToValue(headerNode, SimpleRequestHeader.class));
-
-        JsonNode batchItemNode = node.get(KmipTag.Standard.BATCH_ITEM.getDescription());
-        if (!batchItemNode.isArray() && !batchItemNode.isEmpty()) {
-            ctxt.reportInputMismatch(SimpleRequestBatchItem.class, "SimpleRequestBatchItem 'value' must be array");
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(SimpleRequestMessage.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
-        if (batchItemNode.isArray()) {
-            for (var valueNode : batchItemNode.valueStream().toList()) {
-                try {
-                    SimpleRequestBatchItem item = p.getCodec().treeToValue(valueNode, SimpleRequestBatchItem.class);
-                    builder.requestBatchItem(item)
-                            .requestBatchItemError(null);
-                } catch (Exception e) {
-                    builder.requestBatchItem(null)
-                            .requestBatchItemError(e);
+        SimpleRequestMessage simpleRequestMessage = builder.build();
+
+        if (!simpleRequestMessage.isSupported()) {
+            ctxt.reportInputMismatch(SimpleRequestMessage.class, "SimpleRequestMessage not supported for spec " + spec);
+            return null;
+        }
+
+        return simpleRequestMessage;
+    }
+
+    private void setValue(SimpleRequestMessage.SimpleRequestMessageBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
+        switch (nodeTag) {
+            case KmipTag.Standard.REQUEST_HEADER -> builder.requestHeader(ctxt.readValue(p, SimpleRequestHeader.class));
+            case KmipTag.Standard.BATCH_ITEM -> {
+                if (p.isExpectedStartArrayToken()) {
+                    while (p.nextToken() != JsonToken.END_ARRAY) {
+                        try {
+                            builder.requestBatchItem(ctxt.readValue(p, SimpleRequestBatchItem.class));
+                        } catch (Exception e) {
+                            builder.requestBatchItemError(e);
+                        }
+                    }
+                } else {
+                    try {
+                        builder.requestBatchItem(ctxt.readValue(p, SimpleRequestBatchItem.class));
+                    } catch (Exception e) {
+                        builder.requestBatchItemError(e);
+                    }
                 }
             }
-        } else {
-            try {
-                SimpleRequestBatchItem item = p.getCodec().treeToValue(batchItemNode, SimpleRequestBatchItem.class);
-                builder.requestBatchItem(item)
-                        .requestBatchItemError(null);
-            } catch (Exception e) {
-                builder.requestBatchItem(null)
-                        .requestBatchItemError(e);
-            }
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
-
-        SimpleRequestMessage message = builder.build();
-
-        if (!message.isSupported()) {
-            ctxt.reportInputMismatch(SimpleRequestMessage.class, "SimpleRequestMessage not supported for spec " + spec);
-        }
-
-        return message;
     }
 }

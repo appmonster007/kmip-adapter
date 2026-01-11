@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{SUB_PATH}};
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
@@ -22,40 +21,55 @@ public class {{ATTRIBUTE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializ
 
     @Override
     public {{ATTRIBUTE_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Expected XML object for {{ATTRIBUTE_NAME}}");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Invalid Tag for {{ATTRIBUTE_NAME}}");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Missing or invalid '@type' attribute for {{ATTRIBUTE_NAME}}");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) { // TODO: update validation based on type
-            ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class,
-                "Missing or non-text 'value' for {{ATTRIBUTE_NAME}}");
-            return null;
+        {{ATTRIBUTE_NAME}}.{{ATTRIBUTE_NAME}}Builder builder = {{ATTRIBUTE_NAME}}.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "Missing or invalid 'type' attribute for {{ATTRIBUTE_NAME}}");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) { // TODO: update validation based on type
+                        ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class,
+                                "Missing or non-text 'value' for {{ATTRIBUTE_NAME}}");
+                        return null;
+                    }
+                    // TODO: update with required java type
+                    builder.value({{FIELD_TYPE}}.parse(p.getText()));
+                }
+            }
         }
 
-        // TODO: update with required java type
-        {{FIELD_TYPE}} value = {{FIELD_TYPE}}.parse(valueNode.asText());
-        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}} = {{ATTRIBUTE_NAME}}.builder().value(value).build();
+        {{ATTRIBUTE_NAME}} {{ATTRIBUTE_VAR}} = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!{{ATTRIBUTE_VAR}}.isSupported()) {
             ctxt.reportInputMismatch({{ATTRIBUTE_NAME}}.class, "{{ATTRIBUTE_NAME}} not supported for spec " + spec);
             return null;

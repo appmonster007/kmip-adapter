@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -15,35 +13,46 @@ import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.structure.Link;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class LinkXmlDeserializer extends KmipDataTypeXmlDeserializer<Link> {
     private final KmipTag kmipTag = Link.kmipTag;
-    private final EncodingType encodingType = Link.encodingType;
 
     @Override
     public Link deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(Link.class, "Expected XML object for Link");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(Link.class, "Invalid Tag for Link");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(Link.class, "Invalid Tag for Link");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         Link.LinkBuilder builder = Link.builder();
 
-        // Process all fields in the XML
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(Link.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         Link link = builder.build();
@@ -56,27 +65,17 @@ public class LinkXmlDeserializer extends KmipDataTypeXmlDeserializer<Link> {
         return link;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
     private void setValue(
             Link.LinkBuilder builder,
             KmipTag.Value nodeTag,
-            JsonNode node,
             JsonParser p,
             DeserializationContext ctxt
     ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.LINK_TYPE -> builder.linkType(p.getCodec().treeToValue(node, LinkType.class));
+            case KmipTag.Standard.LINK_TYPE -> builder.linkType(ctxt.readValue(p, LinkType.class));
             case KmipTag.Standard.LINKED_OBJECT_IDENTIFIER ->
-                    builder.linkedObjectIdentifier(p.getCodec().treeToValue(node, LinkedObjectIdentifier.class));
+                    builder.linkedObjectIdentifier(ctxt.readValue(p, LinkedObjectIdentifier.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

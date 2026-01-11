@@ -65,7 +65,7 @@ public class Name implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return Name.builder()
                 .nameValue((NameValue) map.get(NameValue.kmipTag).get(0))
                 .nameType((NameType) map.get(NameType.kmipTag).get(0))

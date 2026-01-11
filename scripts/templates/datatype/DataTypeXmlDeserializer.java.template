@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{pdot}};
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
@@ -13,47 +12,62 @@ import org.purpleBean.kmip.{{pdot}}.{{DATA_NAME}};
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Map;
 
 public class {{DATA_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializer<{{DATA_NAME}}> {
+
     private final KmipTag kmipTag = {{DATA_NAME}}.kmipTag;
     private final EncodingType encodingType = {{DATA_NAME}}.encodingType;
 
     @Override
     public {{DATA_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch({{DATA_NAME}}.class, "Expected XML object for {{DATA_NAME}}");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch({{DATA_NAME}}.class, "Invalid Tag for {{DATA_NAME}}");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch({{DATA_NAME}}.class, "Missing or invalid '@type' attribute for {{DATA_NAME}}");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch({{DATA_NAME}}.class,
-                "Missing or non-text 'value' for {{DATA_NAME}}");
-            return null;
+        {{DATA_NAME}}.{{DATA_NAME}}Builder builder = {{DATA_NAME}}.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch({{DATA_NAME}}.class, "Missing or invalid 'type' attribute for {{DATA_NAME}}");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch({{DATA_NAME}}.class,
+                                "Missing or non-text 'value' for {{DATA_NAME}}");
+                        return null;
+                    }
+                    builder.value(OffsetDateTime.parse(p.getText()));
+                }
+            }
         }
 
-        OffsetDateTime dateTime = OffsetDateTime.parse(valueNode.asText());
-        {{DATA_NAME}} {{varname}} = {{DATA_NAME}}.builder().value(dateTime).build();
+        {{DATA_NAME}} {{varname}} = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!{{varname}}.isSupported()) {
             ctxt.reportInputMismatch({{DATA_NAME}}.class, "{{DATA_NAME}} not supported for spec " + spec);
             return null;

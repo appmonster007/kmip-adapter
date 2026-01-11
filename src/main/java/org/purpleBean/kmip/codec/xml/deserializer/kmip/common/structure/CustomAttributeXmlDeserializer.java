@@ -1,45 +1,58 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.AttributeValue;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.AttributeName;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<CustomAttribute> {
     private final KmipTag kmipTag = CustomAttribute.kmipTag;
-    private final EncodingType encodingType = CustomAttribute.encodingType;
 
     @Override
     public CustomAttribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(CustomAttribute.class, "Expected XML object for CustomAttribute");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(CustomAttribute.class, "Invalid Tag for CustomAttribute");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(CustomAttribute.class, "Invalid Tag for CustomAttribute");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         CustomAttribute.CustomAttributeBuilder builder = CustomAttribute.builder();
 
-        // Process all fields in the XML
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(CustomAttribute.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         CustomAttribute customAttribute = builder.build();
@@ -52,23 +65,17 @@ public class CustomAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<
         return customAttribute;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue(CustomAttribute.CustomAttributeBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            CustomAttribute.CustomAttributeBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.ATTRIBUTE_NAME ->
-                    builder.attributeName(p.getCodec().treeToValue(node, AttributeName.class));
-            case KmipTag.Standard.ATTRIBUTE_VALUE ->
-                    builder.attributeValue(p.getCodec().treeToValue(node, AttributeValue.class));
-            default -> throw new IllegalArgumentException();
+            case KmipTag.Standard.ATTRIBUTE_NAME -> builder.attributeName(ctxt.readValue(p, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_VALUE -> builder.attributeValue(ctxt.readValue(p, AttributeValue.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

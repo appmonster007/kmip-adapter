@@ -45,7 +45,7 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return RevocationReason.builder()
                 .revocationReasonCode((RevocationReasonCode) map.get(RevocationReasonCode.kmipTag).get(0))
                 .revocationMessage((RevocationMessage) map.get(RevocationMessage.kmipTag).get(0))

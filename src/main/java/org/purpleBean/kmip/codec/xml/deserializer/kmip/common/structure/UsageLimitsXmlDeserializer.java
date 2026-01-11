@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -16,35 +14,46 @@ import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.common.structure.UsageLimits;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class UsageLimitsXmlDeserializer extends KmipDataTypeXmlDeserializer<UsageLimits> {
     private final KmipTag kmipTag = UsageLimits.kmipTag;
-    private final EncodingType encodingType = UsageLimits.encodingType;
 
     @Override
     public UsageLimits deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(UsageLimits.class, "Expected XML object for UsageLimits");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(UsageLimits.class, "Invalid Tag for UsageLimits");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(UsageLimits.class, "Invalid Tag for UsageLimits");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         UsageLimits.UsageLimitsBuilder builder = UsageLimits.builder();
 
-        // Process all fields in the XML
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(UsageLimits.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         UsageLimits usageLimits = builder.build();
@@ -57,30 +66,20 @@ public class UsageLimitsXmlDeserializer extends KmipDataTypeXmlDeserializer<Usag
         return usageLimits;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
     private void setValue(
             UsageLimits.UsageLimitsBuilder builder,
             KmipTag.Value nodeTag,
-            JsonNode node,
             JsonParser p,
             DeserializationContext ctxt
     ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
             case KmipTag.Standard.USAGE_LIMITS_TOTAL ->
-                    builder.usageLimitsTotal(p.getCodec().treeToValue(node, UsageLimitsTotal.class));
+                    builder.usageLimitsTotal(ctxt.readValue(p, UsageLimitsTotal.class));
             case KmipTag.Standard.USAGE_LIMITS_COUNT ->
-                    builder.usageLimitsCount(p.getCodec().treeToValue(node, UsageLimitsCount.class));
+                    builder.usageLimitsCount(ctxt.readValue(p, UsageLimitsCount.class));
             case KmipTag.Standard.USAGE_LIMITS_UNIT ->
-                    builder.usageLimitsUnit(p.getCodec().treeToValue(node, UsageLimitsUnit.class));
+                    builder.usageLimitsUnit(ctxt.readValue(p, UsageLimitsUnit.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

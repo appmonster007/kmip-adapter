@@ -3,6 +3,7 @@ package org.purpleBean.kmip.common.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.Singular;
 import org.purpleBean.kmip.*;
 
 import java.util.List;
@@ -24,7 +25,8 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     }
 
     @NonNull
-    private final List<KmipDataType> value;
+    @Singular
+    private final List<KmipDataType> values;
 
     public static KeyMaterialStructure of(@NonNull KeyMaterial value) {
         if (!(value instanceof KeyMaterialStructure keyMaterialStructure)) {
@@ -33,8 +35,8 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
         return keyMaterialStructure;
     }
 
-    public static KeyMaterialStructure of(@NonNull List<KmipDataType> value) {
-        return KeyMaterialStructure.builder().value(value).build();
+    public static KeyMaterialStructure of(@NonNull List<KmipDataType> values) {
+        return KeyMaterialStructure.builder().values(values).build();
     }
 
     public static KeyMaterialStructure of(@NonNull KmipDataType... values) {
@@ -60,6 +62,6 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        return value.stream().filter(Objects::nonNull).toList();
+        return values.stream().filter(Objects::nonNull).toList();
     }
 }

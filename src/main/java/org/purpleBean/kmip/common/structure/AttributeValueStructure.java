@@ -3,6 +3,7 @@ package org.purpleBean.kmip.common.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.Singular;
 import org.purpleBean.kmip.*;
 
 import java.util.List;
@@ -24,10 +25,11 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
     }
 
     @NonNull
-    private final List<KmipDataType> value;
+    @Singular
+    private final List<KmipDataType> values;
 
-    public static AttributeValueStructure of(@NonNull List<KmipDataType> value) {
-        return AttributeValueStructure.builder().value(value).build();
+    public static AttributeValueStructure of(@NonNull List<KmipDataType> values) {
+        return AttributeValueStructure.builder().values(values).build();
     }
 
     public static AttributeValueStructure of(@NonNull KmipDataType... values) {
@@ -52,6 +54,6 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        return value.stream().filter(Objects::nonNull).toList();
+        return values.stream().filter(Objects::nonNull).toList();
     }
 }

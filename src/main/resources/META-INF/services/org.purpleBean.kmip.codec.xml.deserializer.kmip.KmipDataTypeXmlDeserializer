@@ -1,3 +1,4 @@
+org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMajorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer
@@ -19,7 +20,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueEnumeration
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntegerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntervalXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueLongIntegerXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.AttributeValueStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueTextStringXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchCountXmlDeserializer

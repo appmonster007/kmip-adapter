@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
@@ -18,6 +19,7 @@ import java.util.HexFormat;
 import java.util.Map;
 import java.util.TreeMap;
 
+@Order(Integer.MAX_VALUE)
 class AllFormatsSerializationTest {
 
     @Test

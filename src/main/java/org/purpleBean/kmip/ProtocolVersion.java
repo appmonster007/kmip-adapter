@@ -12,9 +12,18 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class ProtocolVersion implements KmipStructure {
+
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
-    private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
-    private final EncodingType encodingType = EncodingType.STRUCTURE;
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtocolVersion.class);
+        }
+    }
+
     @NonNull
     private final ProtocolVersionMajor protocolVersionMajor;
     @NonNull
@@ -55,6 +64,16 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return true;
@@ -63,8 +82,15 @@ public class ProtocolVersion implements KmipStructure {
     @Data
     @Builder(toBuilder = true)
     public static class ProtocolVersionMajor implements KmipDataType {
-        private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MAJOR);
-        private final EncodingType encodingType = EncodingType.INTEGER;
+        public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MAJOR);
+        public static final EncodingType encodingType = EncodingType.INTEGER;
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtocolVersionMajor.class);
+            }
+        }
 
         @EqualsAndHashCode.Include
         private final int value;
@@ -81,6 +107,16 @@ public class ProtocolVersion implements KmipStructure {
         }
 
         @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
+        }
+
+        @Override
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
@@ -90,8 +126,15 @@ public class ProtocolVersion implements KmipStructure {
     @Data
     @Builder(toBuilder = true)
     public static class ProtocolVersionMinor implements KmipDataType {
-        private final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MINOR);
-        private final EncodingType encodingType = EncodingType.INTEGER;
+        public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MINOR);
+        public static final EncodingType encodingType = EncodingType.INTEGER;
+
+        static {
+            for (KmipSpec spec : supportedVersions) {
+                if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+                KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtocolVersionMajor.class);
+            }
+        }
 
         @EqualsAndHashCode.Include
         private final int value;
@@ -105,6 +148,16 @@ public class ProtocolVersion implements KmipStructure {
         @Override
         public String toString() {
             return String.valueOf(value);
+        }
+
+        @Override
+        public KmipTag getKmipTag() {
+            return kmipTag;
+        }
+
+        @Override
+        public EncodingType getEncodingType() {
+            return encodingType;
         }
 
         @Override

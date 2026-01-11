@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,39 +19,54 @@ public class FixedFieldLengthXmlDeserializer extends KmipDataTypeXmlDeserializer
 
     @Override
     public FixedFieldLength deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(FixedFieldLength.class, "Expected XML object for FixedFieldLength");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(FixedFieldLength.class, "Invalid Tag for FixedFieldLength");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(FixedFieldLength.class, "Missing or invalid '@type' attribute for FixedFieldLength");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(FixedFieldLength.class,
-                    "Missing or non-numeric 'value' for FixedFieldLength");
-            return null;
+        FixedFieldLength.FixedFieldLengthBuilder builder = FixedFieldLength.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(FixedFieldLength.class, "Missing or invalid 'type' attribute for FixedFieldLength");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(FixedFieldLength.class,
+                                "Missing or non-numeric 'value' for FixedFieldLength");
+                        return null;
+                    }
+                    builder.value(Integer.valueOf(p.getText()));
+                }
+            }
         }
 
-        Integer value = Integer.valueOf(valueNode.asText());
-        FixedFieldLength fixedFieldLength = FixedFieldLength.of(value);
+        FixedFieldLength fixedFieldLength = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!fixedFieldLength.isSupported()) {
             ctxt.reportInputMismatch(FixedFieldLength.class, "FixedFieldLength not supported for spec " + spec);
             return null;

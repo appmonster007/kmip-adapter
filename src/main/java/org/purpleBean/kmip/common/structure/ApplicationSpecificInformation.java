@@ -45,7 +45,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return ApplicationSpecificInformation.builder()
                 .applicationNamespace((ApplicationNamespace) map.get(ApplicationNamespace.kmipTag).get(0))
                 .applicationData((ApplicationData) map.get(ApplicationData.kmipTag).get(0))

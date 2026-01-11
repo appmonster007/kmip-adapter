@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
+package org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -34,7 +34,7 @@ public class AttributeValueStructureXmlSerializer extends KmipDataTypeXmlSeriali
         xmlGen.writeStartObject(attributeValueStructure);
 
         // Serialize all fields
-        List<KmipDataType> values = attributeValueStructure.getValue();
+        List<KmipDataType> values = attributeValueStructure.getValues();
         for (KmipDataType kmipDataType : values) {
             if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
                 serializers.defaultSerializeField(kmipDataType.getKmipTag().getDescription(), kmipDataType, gen);

@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -21,39 +20,54 @@ public class PrivateExponentXmlDeserializer extends KmipDataTypeXmlDeserializer<
 
     @Override
     public PrivateExponent deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(PrivateExponent.class, "Expected XML object for PrivateExponent");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(PrivateExponent.class, "Invalid Tag for PrivateExponent");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(PrivateExponent.class, "Missing or invalid '@type' attribute for PrivateExponent");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(PrivateExponent.class,
-                    "Missing or non-text 'value' for PrivateExponent");
-            return null;
+        PrivateExponent.PrivateExponentBuilder builder = PrivateExponent.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(PrivateExponent.class, "Missing or invalid 'type' attribute for PrivateExponent");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(PrivateExponent.class,
+                                "Missing or non-text 'value' for PrivateExponent");
+                        return null;
+                    }
+                    builder.value(ctxt.readValue(p, BigInteger.class));
+                }
+            }
         }
 
-        BigInteger value = codec.treeToValue(valueNode, BigInteger.class);
-        PrivateExponent privateExponent = PrivateExponent.builder().value(value).build();
+        PrivateExponent privateExponent = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!privateExponent.isSupported()) {
             ctxt.reportInputMismatch(PrivateExponent.class, "PrivateExponent not supported for spec " + spec);
             return null;

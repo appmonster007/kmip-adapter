@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -15,37 +13,46 @@ import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.common.structure.TransparentEcmqvPrivateKey;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class TransparentEcmqvPrivateKeyXmlDeserializer extends KmipDataTypeXmlDeserializer<TransparentEcmqvPrivateKey> {
     private final KmipTag kmipTag = TransparentEcmqvPrivateKey.kmipTag;
-    private final EncodingType encodingType = TransparentEcmqvPrivateKey.encodingType;
 
     @Override
     public TransparentEcmqvPrivateKey deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(TransparentEcmqvPrivateKey.class, "Expected XML object for TransparentEcmqvPrivateKey");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(TransparentEcmqvPrivateKey.class, "Invalid Tag for TransparentEcmqvPrivateKey");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(TransparentEcmqvPrivateKey.class, "Invalid Tag for TransparentEcmqvPrivateKey");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         TransparentEcmqvPrivateKey.TransparentEcmqvPrivateKeyBuilder builder = TransparentEcmqvPrivateKey.builder();
 
-        // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(TransparentEcmqvPrivateKey.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         TransparentEcmqvPrivateKey transparentEcmqvPrivateKey = builder.build();
@@ -58,21 +65,17 @@ public class TransparentEcmqvPrivateKeyXmlDeserializer extends KmipDataTypeXmlDe
         return transparentEcmqvPrivateKey;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue(TransparentEcmqvPrivateKey.TransparentEcmqvPrivateKeyBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            TransparentEcmqvPrivateKey.TransparentEcmqvPrivateKeyBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
             case KmipTag.Standard.RECOMMENDED_CURVE ->
-                    builder.recommendedCurve(p.getCodec().treeToValue(node, RecommendedCurve.class));
-            case KmipTag.Standard.D -> builder.d(p.getCodec().treeToValue(node, D.class));
+                    builder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));
+            case KmipTag.Standard.D -> builder.d(ctxt.readValue(p, D.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

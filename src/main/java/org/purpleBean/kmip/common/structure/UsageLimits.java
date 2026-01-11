@@ -49,7 +49,7 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return UsageLimits.builder()
                 .usageLimitsTotal((UsageLimitsTotal) map.get(UsageLimitsTotal.kmipTag).get(0))
                 .usageLimitsCount((UsageLimitsCount) map.get(UsageLimitsCount.kmipTag).get(0))

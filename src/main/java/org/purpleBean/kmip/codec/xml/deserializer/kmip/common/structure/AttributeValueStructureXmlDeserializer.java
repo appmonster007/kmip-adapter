@@ -5,20 +5,19 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.ActivationDate;
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.common.structure.SampleStructure;
+import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 
 import java.io.IOException;
 
-public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<SampleStructure> {
-    private final KmipTag kmipTag = SampleStructure.kmipTag;
+public class AttributeValueStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValueStructure> {
+    private final KmipTag kmipTag = AttributeValueStructure.kmipTag;
 
     @Override
-    public SampleStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public AttributeValueStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         if (p.currentToken() == null) {
             p.nextToken();
         }
@@ -31,7 +30,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
         }
 
         if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(SampleStructure.class, "Invalid Tag for SampleStructure");
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "Invalid Tag for AttributeValue.Structure");
             return null;
         }
 
@@ -40,7 +39,7 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        SampleStructure.SampleStructureBuilder builder = SampleStructure.builder();
+        AttributeValueStructure.AttributeValueStructureBuilder builder = AttributeValueStructure.builder();
 
         while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
             String fieldName = p.currentName();
@@ -51,33 +50,27 @@ public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<
             } else if (p.currentToken() == JsonToken.FIELD_NAME) {
                 setValue(builder, nodeTag, p, ctxt);
             } else {
-                ctxt.reportInputMismatch(SampleStructure.class, "Unexpected token: " + p.currentToken());
+                ctxt.reportInputMismatch(AttributeValueStructure.class, "Unexpected token: " + p.currentToken());
             }
         }
 
-        SampleStructure sampleStructure = builder.build();
+        AttributeValueStructure attributeValueStructure = builder.build();
 
-        if (!sampleStructure.isSupported()) {
-            ctxt.reportInputMismatch(SampleStructure.class, "SampleStructure not supported for spec " + spec);
+        if (!attributeValueStructure.isSupported()) {
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "AttributeValue.Structure not supported for spec " + spec);
             return null;
         }
 
-        return sampleStructure;
+        return attributeValueStructure;
     }
 
     private void setValue(
-            SampleStructure.SampleStructureBuilder builder,
+            AttributeValueStructure.AttributeValueStructureBuilder builder,
             KmipTag.Value nodeTag,
             JsonParser p,
             DeserializationContext ctxt
     ) throws IOException {
-        // TODO: Implement field deserialization based on nodeTag
-        // Example:
         ctxt.setAttribute("tag", p.currentName());
-        switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(ctxt.readValue(p, ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(ctxt.readValue(p, State.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
+        builder.value(ctxt.readValue(p, KmipDataType.class));
     }
 }

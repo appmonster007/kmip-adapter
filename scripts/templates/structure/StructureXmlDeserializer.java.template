@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{pdot}};
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.*;
@@ -13,37 +12,46 @@ import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializ
 import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
 
 import java.io.IOException;
-import java.util.Map;
 
 public class {{STRUCTURE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializer<{{STRUCTURE_NAME}}> {
     private final KmipTag kmipTag = {{STRUCTURE_NAME}}.kmipTag;
-    private final EncodingType encodingType = {{STRUCTURE_NAME}}.encodingType;
 
     @Override
     public {{STRUCTURE_NAME}} deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch({{STRUCTURE_NAME}}.class, "Expected XML object for {{STRUCTURE_NAME}}");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch({{STRUCTURE_NAME}}.class, "Invalid Tag for {{STRUCTURE_NAME}}");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-              && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch({{STRUCTURE_NAME}}.class, "Invalid Tag for {{STRUCTURE_NAME}}");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder = {{STRUCTURE_NAME}}.builder();
 
-        // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch({{STRUCTURE_NAME}}.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         {{STRUCTURE_NAME}} {{varname}} = builder.build();
@@ -56,23 +64,14 @@ public class {{STRUCTURE_NAME}}XmlDeserializer extends KmipDataTypeXmlDeserializ
         return {{varname}};
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         // TODO: Implement field deserialization based on nodeTag
         // Example:
-        switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(p.getCodec().treeToValue(node, ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(p.getCodec().treeToValue(node, State.class));
-            default -> throw new IllegalArgumentException();
-        }
+        // switch (nodeTag) {
+        //     case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(ctxt.readValue(p, ActivationDate.class));
+        //     case KmipTag.Standard.STATE -> builder.state(ctxt.readValue(p, State.class));
+        //     default -> ctxt.reportWrongTokenException({{STRUCTURE_NAME}}.class, p.currentToken(), "Unexpected field " + p.currentName());
+        // }
     }
 }

@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -15,45 +14,58 @@ import org.purpleBean.kmip.common.UniqueIdentifier;
 import java.io.IOException;
 
 public class UniqueIdentifierXmlDeserializer extends KmipDataTypeXmlDeserializer<UniqueIdentifier> {
+
     private final KmipTag kmipTag = UniqueIdentifier.kmipTag;
     private final EncodingType encodingType = UniqueIdentifier.encodingType;
 
     @Override
     public UniqueIdentifier deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(UniqueIdentifier.class, "Expected XML object for UniqueIdentifier");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(UniqueIdentifier.class, "Invalid Tag for UniqueIdentifier");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(UniqueIdentifier.class, "Missing or invalid '@type' attribute for UniqueIdentifier");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(UniqueIdentifier.class,
-                    "Missing or non-text 'value' for UniqueIdentifier");
-            return null;
+        UniqueIdentifier.UniqueIdentifierBuilder builder = UniqueIdentifier.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(UniqueIdentifier.class, "Missing or invalid 'type' attribute for UniqueIdentifier");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(UniqueIdentifier.class,
+                                "Missing or non-text 'value' for UniqueIdentifier");
+                        return null;
+                    }
+                    builder.value(p.getText());
+                }
+            }
         }
 
-        String value = valueNode.asText();
-        if (value == null || value.trim().isEmpty()) {
-            ctxt.reportInputMismatch(UniqueIdentifier.class, "UniqueIdentifier 'value' cannot be empty");
-            return null;
-        }
-        UniqueIdentifier uniqueIdentifier = UniqueIdentifier.builder().value(value).build();
+        UniqueIdentifier uniqueIdentifier = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
         if (!uniqueIdentifier.isSupported()) {

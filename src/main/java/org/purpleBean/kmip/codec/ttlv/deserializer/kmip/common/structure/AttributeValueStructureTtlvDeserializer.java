@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;

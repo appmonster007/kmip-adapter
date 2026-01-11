@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -15,35 +13,46 @@ import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIdentifier;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class X509CertificateIdentifierXmlDeserializer extends KmipDataTypeXmlDeserializer<X509CertificateIdentifier> {
     private final KmipTag kmipTag = X509CertificateIdentifier.kmipTag;
-    private final EncodingType encodingType = X509CertificateIdentifier.encodingType;
 
     @Override
     public X509CertificateIdentifier deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(X509CertificateIdentifier.class, "Expected XML object for X509CertificateIdentifier");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(X509CertificateIdentifier.class, "Invalid Tag for X509CertificateIdentifier");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(X509CertificateIdentifier.class, "Invalid Tag for X509CertificateIdentifier");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         X509CertificateIdentifier.X509CertificateIdentifierBuilder builder = X509CertificateIdentifier.builder();
 
-        // Process all fields in the XML
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(X509CertificateIdentifier.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         X509CertificateIdentifier x509CertificateIdentifier = builder.build();
@@ -56,28 +65,18 @@ public class X509CertificateIdentifierXmlDeserializer extends KmipDataTypeXmlDes
         return x509CertificateIdentifier;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
     private void setValue(
             X509CertificateIdentifier.X509CertificateIdentifierBuilder builder,
             KmipTag.Value nodeTag,
-            JsonNode node,
             JsonParser p,
             DeserializationContext ctxt
     ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
             case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME ->
-                    builder.issuerDistinguishedName(p.getCodec().treeToValue(node, IssuerDistinguishedName.class));
+                    builder.issuerDistinguishedName(ctxt.readValue(p, IssuerDistinguishedName.class));
             case KmipTag.Standard.CERTIFICATE_SERIAL_NUMBER ->
-                    builder.certificateSerialNumber(p.getCodec().treeToValue(node, CertificateSerialNumber.class));
+                    builder.certificateSerialNumber(ctxt.readValue(p, CertificateSerialNumber.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

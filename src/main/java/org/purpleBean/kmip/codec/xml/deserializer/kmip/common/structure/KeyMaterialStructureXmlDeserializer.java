@@ -1,57 +1,60 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.common.structure.KeyMaterialStructure;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class KeyMaterialStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyMaterialStructure> {
     private final KmipTag kmipTag = KeyMaterialStructure.kmipTag;
-    private final EncodingType encodingType = KeyMaterialStructure.encodingType;
 
     @Override
     public KeyMaterialStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(KeyMaterialStructure.class, "Expected XML object for KeyMaterialStructure");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(KeyMaterialStructure.class, "Invalid Tag for KeyMaterialStructure");
             return null;
         }
 
-        List<KmipDataType> values = new ArrayList<>();
-        for (Map.Entry<String, JsonNode> entry : node.properties()) {
-            if (entry.getValue().isObject()) {
-                values.add(deserializeObjects(entry.getKey(), entry.getValue(), p, ctxt));
-            } else if (entry.getValue().isArray()) {
-                var nestedFields = entry.getValue().values();
-                while (nestedFields.hasNext()) {
-                    JsonNode nestedField = nestedFields.next();
-                    if (nestedField.isObject()) {
-                        values.add(deserializeObjects(entry.getKey(), nestedField, p, ctxt));
-                    }
-                }
-            }
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
-        KeyMaterialStructure keyMaterialStructure = KeyMaterialStructure.of(values);
 
         KmipSpec spec = KmipContext.getSpec();
+        KeyMaterialStructure.KeyMaterialStructureBuilder builder = KeyMaterialStructure.builder();
+
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(KeyMaterialStructure.class, "Unexpected token: " + p.currentToken());
+            }
+        }
+
+        KeyMaterialStructure keyMaterialStructure = builder.build();
 
         if (!keyMaterialStructure.isSupported()) {
             ctxt.reportInputMismatch(KeyMaterialStructure.class, "KeyMaterialStructure not supported for spec " + spec);
@@ -61,35 +64,13 @@ public class KeyMaterialStructureXmlDeserializer extends KmipDataTypeXmlDeserial
         return keyMaterialStructure;
     }
 
-    private KmipDataType deserializeObjects(String nodeName, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (!node.has("type") || !node.has("value")) {
-            ctxt.reportInputMismatch(AttributeValue.class, "Missing 'type', or 'value' field in JSON");
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipSpec spec = KmipContext.getSpec();
-        KmipTag tag;
-        try {
-            tag = new KmipTag(KmipTag.fromName(spec, nodeName));
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValue.class, String.format("Failed to parse KMIP tag for AttributeValue: %s", e.getMessage()));
-            return null;
-        }
-
-
-        if (!node.has("type") && !node.get("type").isTextual()) {
-            ctxt.reportInputMismatch(AttributeValue.class, "Invalid 'type' field in JSON");
-            return null;
-        }
-        String type = node.get("type").asText();
-        EncodingType encodingType = EncodingType.fromName(type).get();
-
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(tag.getValue(), encodingType);
-        if (clazz == null) {
-            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", tag.getValue(), encodingType));
-        }
-
-        return p.getCodec().treeToValue(node, clazz);
+    private void setValue(
+            KeyMaterialStructure.KeyMaterialStructureBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
+        builder.value(ctxt.readValue(p, KmipDataType.class));
     }
 }

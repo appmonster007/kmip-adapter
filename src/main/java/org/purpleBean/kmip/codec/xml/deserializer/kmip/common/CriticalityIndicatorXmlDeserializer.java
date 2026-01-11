@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,39 +19,54 @@ public class CriticalityIndicatorXmlDeserializer extends KmipDataTypeXmlDeserial
 
     @Override
     public CriticalityIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, "Expected XML object for CriticalityIndicator");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(CriticalityIndicator.class, "Invalid Tag for CriticalityIndicator");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class, "Missing or invalid '@type' attribute for CriticalityIndicator");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(CriticalityIndicator.class,
-                    "Missing or non-boolean 'value' for CriticalityIndicator");
-            return null;
+        CriticalityIndicator.CriticalityIndicatorBuilder builder = CriticalityIndicator.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(CriticalityIndicator.class, "Missing or invalid 'type' attribute for CriticalityIndicator");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(CriticalityIndicator.class,
+                                "Missing or non-boolean 'value' for CriticalityIndicator");
+                        return null;
+                    }
+                    builder.value(Boolean.parseBoolean(p.getText()));
+                }
+            }
         }
 
-        boolean value = Boolean.parseBoolean(valueNode.asText());
-        CriticalityIndicator criticalityIndicator = CriticalityIndicator.builder().value(value).build();
+        CriticalityIndicator criticalityIndicator = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!criticalityIndicator.isSupported()) {
             ctxt.reportInputMismatch(CriticalityIndicator.class, "CriticalityIndicator not supported for spec " + spec);
             return null;

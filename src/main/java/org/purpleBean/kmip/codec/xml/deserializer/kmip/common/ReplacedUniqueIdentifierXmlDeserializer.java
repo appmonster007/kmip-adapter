@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -20,39 +19,54 @@ public class ReplacedUniqueIdentifierXmlDeserializer extends KmipDataTypeXmlDese
 
     @Override
     public ReplacedUniqueIdentifier deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class, "Expected XML object for ReplacedUniqueIdentifier");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class, "Invalid Tag for ReplacedUniqueIdentifier");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class, "Missing or invalid '@type' attribute for ReplacedUniqueIdentifier");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class,
-                    "Missing or non-text 'value' for ReplacedUniqueIdentifier");
-            return null;
+        ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder builder = ReplacedUniqueIdentifier.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class, "Missing or invalid 'type' attribute for ReplacedUniqueIdentifier");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class,
+                                "Missing or non-text 'value' for ReplacedUniqueIdentifier");
+                        return null;
+                    }
+                    builder.value(p.getText());
+                }
+            }
         }
 
-        String value = valueNode.asText();
-        ReplacedUniqueIdentifier replacedUniqueIdentifier = ReplacedUniqueIdentifier.builder().value(value).build();
+        ReplacedUniqueIdentifier replacedUniqueIdentifier = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
-
         if (!replacedUniqueIdentifier.isSupported()) {
             ctxt.reportInputMismatch(ReplacedUniqueIdentifier.class, "ReplacedUniqueIdentifier not supported for spec " + spec);
             return null;

@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -14,37 +12,46 @@ import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.structure.TransparentDhPrivateKey;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class TransparentDhPrivateKeyXmlDeserializer extends KmipDataTypeXmlDeserializer<TransparentDhPrivateKey> {
     private final KmipTag kmipTag = TransparentDhPrivateKey.kmipTag;
-    private final EncodingType encodingType = TransparentDhPrivateKey.encodingType;
 
     @Override
     public TransparentDhPrivateKey deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(TransparentDhPrivateKey.class, "Expected XML object for TransparentDhPrivateKey");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(TransparentDhPrivateKey.class, "Invalid Tag for TransparentDhPrivateKey");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(TransparentDhPrivateKey.class, "Invalid Tag for TransparentDhPrivateKey");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         TransparentDhPrivateKey.TransparentDhPrivateKeyBuilder builder = TransparentDhPrivateKey.builder();
 
-        // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(TransparentDhPrivateKey.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         TransparentDhPrivateKey transparentDhPrivateKey = builder.build();
@@ -57,23 +64,19 @@ public class TransparentDhPrivateKeyXmlDeserializer extends KmipDataTypeXmlDeser
         return transparentDhPrivateKey;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue(TransparentDhPrivateKey.TransparentDhPrivateKeyBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            TransparentDhPrivateKey.TransparentDhPrivateKeyBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.P -> builder.p(p.getCodec().treeToValue(node, P.class));
-            case KmipTag.Standard.Q -> builder.q(p.getCodec().treeToValue(node, Q.class));
-            case KmipTag.Standard.G -> builder.g(p.getCodec().treeToValue(node, G.class));
-            case KmipTag.Standard.J -> builder.j(p.getCodec().treeToValue(node, J.class));
-            case KmipTag.Standard.X -> builder.x(p.getCodec().treeToValue(node, X.class));
+            case KmipTag.Standard.P -> builder.p(ctxt.readValue(p, P.class));
+            case KmipTag.Standard.Q -> builder.q(ctxt.readValue(p, Q.class));
+            case KmipTag.Standard.G -> builder.g(ctxt.readValue(p, G.class));
+            case KmipTag.Standard.J -> builder.j(ctxt.readValue(p, J.class));
+            case KmipTag.Standard.X -> builder.x(ctxt.readValue(p, X.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

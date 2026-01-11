@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.serializer.kmip.common;
+package org.purpleBean.kmip.codec.json.serializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -30,7 +30,7 @@ public class AttributeValueStructureJsonSerializer extends KmipDataTypeJsonSeria
         gen.writeStartObject();
         gen.writeObject(attributeValueStructure.getKmipTag());
         gen.writeStringField("type", attributeValueStructure.getEncodingType().getDescription());
-        gen.writeObjectField("value", attributeValueStructure.getValue());
+        gen.writeObjectField("value", attributeValueStructure.getValues());
         gen.writeEndObject();
     }
 }

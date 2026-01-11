@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -14,37 +12,46 @@ import org.purpleBean.kmip.common.Key;
 import org.purpleBean.kmip.common.structure.TransparentSymmetricKey;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class TransparentSymmetricKeyXmlDeserializer extends KmipDataTypeXmlDeserializer<TransparentSymmetricKey> {
     private final KmipTag kmipTag = TransparentSymmetricKey.kmipTag;
-    private final EncodingType encodingType = TransparentSymmetricKey.encodingType;
 
     @Override
     public TransparentSymmetricKey deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(TransparentSymmetricKey.class, "Expected XML object for TransparentSymmetricKey");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(TransparentSymmetricKey.class, "Invalid Tag for TransparentSymmetricKey");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(TransparentSymmetricKey.class, "Invalid Tag for TransparentSymmetricKey");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         TransparentSymmetricKey.TransparentSymmetricKeyBuilder builder = TransparentSymmetricKey.builder();
 
-        // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(TransparentSymmetricKey.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         TransparentSymmetricKey transparentSymmetricKey = builder.build();
@@ -57,20 +64,16 @@ public class TransparentSymmetricKeyXmlDeserializer extends KmipDataTypeXmlDeser
         return transparentSymmetricKey;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue(TransparentSymmetricKey.TransparentSymmetricKeyBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            TransparentSymmetricKey.TransparentSymmetricKeyBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.KEY -> builder.key(p.getCodec().treeToValue(node, Key.class));
-            default -> throw new IllegalArgumentException();
+            case KmipTag.Standard.KEY -> builder.key(ctxt.readValue(p, Key.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -24,34 +23,56 @@ public class MaskGeneratorXmlDeserializer extends KmipDataTypeXmlDeserializer<Ma
 
     @Override
     public MaskGenerator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(MaskGenerator.class, "Expected XML element object for MaskGenerator");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(MaskGenerator.class, "Invalid Tag for MaskGenerator");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(MaskGenerator.class, "Missing or invalid '@type' attribute for MaskGenerator");
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
+        }
+
+        String description = null;
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(MaskGenerator.class, "Missing or invalid 'type' attribute for MaskGenerator");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(MaskGenerator.class,
+                                "Missing or non-text 'value' for MaskGenerator");
+                        return null;
+                    }
+                    description = p.getText();
+                }
+            }
+        }
+
+        if (description == null) {
+            ctxt.reportInputMismatch(MaskGenerator.class, "Missing 'value' for MaskGenerator");
             return null;
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(MaskGenerator.class, "Missing or non-text '@value' attribute for MaskGenerator");
-            return null;
-        }
-
-        String description = valueNode.asText();
         KmipSpec spec = KmipContext.getSpec();
 
         MaskGenerator maskgenerator = new MaskGenerator(MaskGenerator.fromName(description));

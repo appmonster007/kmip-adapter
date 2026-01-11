@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer.kmip.common;
+package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -21,7 +21,7 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
         JsonNode node = p.readValueAsTree();
 
         if (node == null) {
-            ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("JSON node cannot be null for AttributeValue.Structure deserialization"));
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "JSON node cannot be null for AttributeValue.Structure deserialization");
             return null;
         }
 
@@ -30,7 +30,7 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
         try {
             tag = p.getCodec().treeToValue(node, KmipTag.class);
             if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("Invalid KMIP tag for AttributeValue.Structure"));
+                ctxt.reportInputMismatch(AttributeValueStructure.class, "Invalid KMIP tag for AttributeValue.Structure");
                 return null;
             }
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class AttributeValueStructureJsonDeserializer extends KmipDataTypeJsonDes
                 || EncodingType.fromName(typeNode.asText()).isEmpty()
                 || EncodingType.fromName(typeNode.asText()).get() != encodingType
         ) {
-            ctxt.reportInputMismatch(AttributeValueStructure.class, String.format("Missing or non-text 'type' field for AttributeValue.Structure"));
+            ctxt.reportInputMismatch(AttributeValueStructure.class, "Missing or non-text 'type' field for AttributeValue.Structure");
             return null;
         }
 

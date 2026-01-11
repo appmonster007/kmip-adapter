@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
@@ -25,36 +24,52 @@ public class CompromiseOccurrenceDateXmlDeserializer extends KmipDataTypeXmlDese
 
     @Override
     public CompromiseOccurrenceDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
-
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(CompromiseOccurrenceDate.class, "Expected XML element object for CompromiseOccurrenceDate");
-            return null;
+        if (p.currentToken() == null) {
+            p.nextToken();
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
             ctxt.reportInputMismatch(CompromiseOccurrenceDate.class, "Invalid Tag for CompromiseOccurrenceDate");
             return null;
         }
 
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null || !typeNode.isTextual() ||
-                !encodingType.getDescription().equals(typeNode.asText())) {
-            ctxt.reportInputMismatch(CompromiseOccurrenceDate.class, "Missing or invalid '@type' attribute for CompromiseOccurrenceDate");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(CompromiseOccurrenceDate.class,
-                    "Missing or non-text 'value' for CompromiseOccurrenceDate");
-            return null;
+        CompromiseOccurrenceDate.CompromiseOccurrenceDateBuilder builder = CompromiseOccurrenceDate.builder();
+
+        while (p.nextToken() != JsonToken.END_OBJECT) {
+            if (p.currentToken() == JsonToken.FIELD_NAME) {
+                String fieldName = p.currentName();
+
+                p.nextToken(); // Move to the value token
+                if ("type".equalsIgnoreCase(fieldName)) {
+                    String type = p.getText();
+                    if (!encodingType.getDescription().equals(type)) {
+                        ctxt.reportInputMismatch(CompromiseOccurrenceDate.class, "Missing or invalid 'type' attribute for CompromiseOccurrenceDate");
+                        return null;
+                    }
+                }
+                if ("value".equalsIgnoreCase(fieldName)) {
+                    if (p.hasTextCharacters()) {
+                        ctxt.reportInputMismatch(CompromiseOccurrenceDate.class,
+                                "Missing or non-text 'value' for CompromiseOccurrenceDate");
+                        return null;
+                    }
+                    builder.value(OffsetDateTime.parse(p.getText()));
+                }
+            }
         }
 
-        OffsetDateTime value = OffsetDateTime.parse(valueNode.asText());
-        CompromiseOccurrenceDate attribute = CompromiseOccurrenceDate.builder().value(value).build();
+        CompromiseOccurrenceDate attribute = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
         if (!attribute.isSupported()) {

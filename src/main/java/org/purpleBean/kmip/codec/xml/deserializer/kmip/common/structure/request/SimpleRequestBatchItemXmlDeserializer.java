@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -11,26 +10,33 @@ import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializ
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class SimpleRequestBatchItemXmlDeserializer extends KmipDataTypeXmlDeserializer<SimpleRequestBatchItem> {
 
     @Override
     public SimpleRequestBatchItem deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isEmpty() && !node.isObject()) {
-            ctxt.reportInputMismatch(SimpleRequestBatchItem.class, "Expected XML object for SimpleRequestBatchItem");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder = SimpleRequestBatchItem.builder();
 
-        for (Map.Entry<String, JsonNode> entry : node.propertyStream().toList()) {
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken(); // Move to the value token
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(SimpleRequestBatchItem.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         SimpleRequestBatchItem item = builder.build();
@@ -42,13 +48,15 @@ public class SimpleRequestBatchItemXmlDeserializer extends KmipDataTypeXmlDeseri
         return item;
     }
 
-    private void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder,
-                          KmipTag.Value nodeTag,
-                          JsonNode node,
-                          JsonParser p,
-                          DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            default -> throw new IllegalArgumentException();
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 }

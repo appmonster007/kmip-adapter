@@ -63,12 +63,4 @@ public class NameValue implements KmipDataType {
         return supportedVersions.contains(spec);
     }
 
-    /**
-     * Gets the name value as a string.
-     *
-     * @return the name value as a string
-     */
-    public String getValue() {
-        return value;
-    }
 }

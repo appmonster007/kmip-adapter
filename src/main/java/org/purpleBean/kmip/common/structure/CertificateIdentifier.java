@@ -45,7 +45,7 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CertificateIdentifier.builder()
                 .issuer((Issuer) map.get(Issuer.kmipTag).get(0))
                 .serialNumber((SerialNumber) map.get(SerialNumber.kmipTag).get(0))

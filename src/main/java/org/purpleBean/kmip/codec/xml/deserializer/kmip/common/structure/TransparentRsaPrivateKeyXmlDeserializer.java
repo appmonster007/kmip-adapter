@@ -1,11 +1,9 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
@@ -14,37 +12,46 @@ import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.structure.TransparentRsaPrivateKey;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class TransparentRsaPrivateKeyXmlDeserializer extends KmipDataTypeXmlDeserializer<TransparentRsaPrivateKey> {
     private final KmipTag kmipTag = TransparentRsaPrivateKey.kmipTag;
-    private final EncodingType encodingType = TransparentRsaPrivateKey.encodingType;
 
     @Override
     public TransparentRsaPrivateKey deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectCodec codec = p.getCodec();
-        JsonNode node = codec.readTree(p);
+        if (p.currentToken() == null) {
+            p.nextToken();
+        }
 
-        if (!node.isObject()) {
-            ctxt.reportInputMismatch(TransparentRsaPrivateKey.class, "Expected XML object for TransparentRsaPrivateKey");
+        String currentName;
+        if (p instanceof FromXmlParser xmlParser) {
+            currentName = xmlParser.getStaxReader().getLocalName();
+        } else {
+            currentName = (String) ctxt.getAttribute("tag");
+        }
+
+        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
+            ctxt.reportInputMismatch(TransparentRsaPrivateKey.class, "Invalid Tag for TransparentRsaPrivateKey");
             return null;
         }
 
-        if (p instanceof FromXmlParser xmlParser
-                && !kmipTag.getDescription().equalsIgnoreCase(xmlParser.getStaxReader().getLocalName())) {
-            ctxt.reportInputMismatch(TransparentRsaPrivateKey.class, "Invalid Tag for TransparentRsaPrivateKey");
-            return null;
+        if (p.currentToken() != JsonToken.START_OBJECT) {
+            p.nextToken();
         }
 
         KmipSpec spec = KmipContext.getSpec();
         TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder = TransparentRsaPrivateKey.builder();
 
-        // Process all fields in the XML
-        var fields = node.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> entry = fields.next();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, entry.getKey());
-            setValue(builder, nodeTag, entry.getValue(), p, ctxt);
+        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
+            String fieldName = p.currentName();
+            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            if (p.currentToken() == JsonToken.START_OBJECT) {
+                p.nextToken();
+                setValue(builder, nodeTag, p, ctxt);
+            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
+                setValue(builder, nodeTag, p, ctxt);
+            } else {
+                ctxt.reportInputMismatch(TransparentRsaPrivateKey.class, "Unexpected token: " + p.currentToken());
+            }
         }
 
         TransparentRsaPrivateKey transparentRsaPrivateKey = builder.build();
@@ -57,31 +64,22 @@ public class TransparentRsaPrivateKeyXmlDeserializer extends KmipDataTypeXmlDese
         return transparentRsaPrivateKey;
     }
 
-    /**
-     * Sets the appropriate field in the builder based on the tag and value.
-     *
-     * @param builder the builder to set the field on
-     * @param nodeTag the tag identifying the field to set
-     * @param node    the XML node containing the field value
-     * @param p       the JsonParser
-     * @param ctxt    the DeserializationContext
-     * @throws IOException if there is an error deserializing the value
-     */
-    private void setValue(TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder, KmipTag.Value nodeTag, JsonNode node, JsonParser p, DeserializationContext ctxt) throws IOException {
+    private void setValue(
+            TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder,
+            KmipTag.Value nodeTag,
+            JsonParser p,
+            DeserializationContext ctxt
+    ) throws IOException {
+        ctxt.setAttribute("tag", p.currentName());
         switch (nodeTag) {
-            case KmipTag.Standard.MODULUS -> builder.modulus(p.getCodec().treeToValue(node, Modulus.class));
-            case KmipTag.Standard.PRIVATE_EXPONENT ->
-                    builder.privateExponent(p.getCodec().treeToValue(node, PrivateExponent.class));
-            case KmipTag.Standard.PUBLIC_EXPONENT ->
-                    builder.publicExponent(p.getCodec().treeToValue(node, PublicExponent.class));
-            case KmipTag.Standard.P -> builder.p(p.getCodec().treeToValue(node, P.class));
-            case KmipTag.Standard.Q -> builder.q(p.getCodec().treeToValue(node, Q.class));
-            case KmipTag.Standard.PRIME_EXPONENT_P ->
-                    builder.primeExponentP(p.getCodec().treeToValue(node, PrimeExponentP.class));
-            case KmipTag.Standard.PRIME_EXPONENT_Q ->
-                    builder.primeExponentQ(p.getCodec().treeToValue(node, PrimeExponentQ.class));
-            case KmipTag.Standard.CRT_COEFFICIENT ->
-                    builder.crtCoefficient(p.getCodec().treeToValue(node, CRTCoefficient.class));
+            case KmipTag.Standard.MODULUS -> builder.modulus(ctxt.readValue(p, Modulus.class));
+            case KmipTag.Standard.PRIVATE_EXPONENT -> builder.privateExponent(ctxt.readValue(p, PrivateExponent.class));
+            case KmipTag.Standard.PUBLIC_EXPONENT -> builder.publicExponent(ctxt.readValue(p, PublicExponent.class));
+            case KmipTag.Standard.P -> builder.p(ctxt.readValue(p, P.class));
+            case KmipTag.Standard.Q -> builder.q(ctxt.readValue(p, Q.class));
+            case KmipTag.Standard.PRIME_EXPONENT_P -> builder.primeExponentP(ctxt.readValue(p, PrimeExponentP.class));
+            case KmipTag.Standard.PRIME_EXPONENT_Q -> builder.primeExponentQ(ctxt.readValue(p, PrimeExponentQ.class));
+            case KmipTag.Standard.CRT_COEFFICIENT -> builder.crtCoefficient(ctxt.readValue(p, CRTCoefficient.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
