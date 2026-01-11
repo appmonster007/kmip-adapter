@@ -1,3 +1,6 @@
+org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.KmipAttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.KeyMaterialJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMajorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMinorJsonDeserializer
@@ -20,7 +23,6 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueIntegerJso
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueIntervalJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueLongIntegerJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AttributeValueStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.AttributeValueTextStringJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.BatchCountJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.BatchOrderOptionJsonDeserializer
@@ -195,6 +197,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.enumeration.WrappingMeth
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AlternativeNameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.ApplicationSpecificInformationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.AttributeValueStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CertificateIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CertificateIssuerJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CertificateSubjectJsonDeserializer
@@ -204,6 +207,7 @@ org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.CustomAttribut
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.DigestJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.KeyMaterialStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.KeyValueLocationJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.KeyValueStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.LinkJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.NameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.RevocationReasonJsonDeserializer

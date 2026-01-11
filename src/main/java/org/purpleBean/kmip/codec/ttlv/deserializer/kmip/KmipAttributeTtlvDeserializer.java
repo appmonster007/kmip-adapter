@@ -1,21 +1,20 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
 import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.NoSuchElementException;
 
-public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDeserializer<KmipDataType> {
+public class KmipAttributeTtlvDeserializer<T extends KmipAttribute> extends KmipDataTypeTtlvDeserializer<KmipAttribute> {
 
     @Override
-    public KmipDataType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public T deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject ttlvObject = TtlvObject.fromBuffer(ttlvBuffer);
         KmipTag.Value kmipTagValue = KmipTag.fromBytes(KmipContext.getSpec(), ttlvObject.getTag());
         EncodingType encodingType = EncodingType.fromTypeValue(ttlvObject.getType()).orElse(null);
@@ -24,12 +23,12 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
             return null;
         }
 
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(kmipTagValue, encodingType);
-        if (clazz == null) {
+        Class<? extends KmipAttribute> attributeClass = KmipAttribute.getClassFromRegistry(kmipTagValue, encodingType);
+        if (attributeClass == null) {
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType));
         }
 
         ttlvBuffer.rewind();
-        return mapper.readValue(ttlvBuffer, clazz);
+        return (T) mapper.readValue(ttlvBuffer, attributeClass);
     }
 }
