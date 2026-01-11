@@ -1,77 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.SplitKeyParts;
 
-import java.io.IOException;
+public class SplitKeyPartsXmlDeserializer extends AbstractKmipXmlDeserializer<SplitKeyParts, Integer> {
 
-public class SplitKeyPartsXmlDeserializer extends KmipDataTypeXmlDeserializer<SplitKeyParts> {
-    private final KmipTag kmipTag = SplitKeyParts.kmipTag;
-    private final EncodingType encodingType = SplitKeyParts.encodingType;
-
-    @Override
-    public SplitKeyParts deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(SplitKeyParts.class, "Invalid Tag for SplitKeyParts");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        SplitKeyParts.SplitKeyPartsBuilder builder = SplitKeyParts.builder();
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(SplitKeyParts.class, "Missing or invalid 'type' attribute for SplitKeyParts");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(SplitKeyParts.class,
-                                "Missing or non-number 'value' for SplitKeyParts");
-                        return null;
-                    }
-                    builder.value(Integer.parseInt(p.getText()));
-                }
-            }
-        }
-
-        SplitKeyParts splitKeyParts = builder.build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!splitKeyParts.isSupported()) {
-            ctxt.reportInputMismatch(SplitKeyParts.class, "SplitKeyParts not supported for spec " + spec);
-            return null;
-        }
-
-        return splitKeyParts;
+    public SplitKeyPartsXmlDeserializer() {
+        super(SplitKeyParts.kmipTag, SplitKeyParts.encodingType, Integer.class, value -> SplitKeyParts.builder().value(value).build());
     }
 }

@@ -1,77 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.TagLength;
 
-import java.io.IOException;
+public class TagLengthXmlDeserializer extends AbstractKmipXmlDeserializer<TagLength, Integer> {
 
-public class TagLengthXmlDeserializer extends KmipDataTypeXmlDeserializer<TagLength> {
-    private final KmipTag kmipTag = TagLength.kmipTag;
-    private final EncodingType encodingType = TagLength.encodingType;
-
-    @Override
-    public TagLength deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(TagLength.class, "Invalid Tag for TagLength");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        TagLength.TagLengthBuilder builder = TagLength.builder();
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(TagLength.class, "Missing or invalid 'type' attribute for TagLength");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(TagLength.class,
-                                "Missing or non-numeric 'value' for TagLength");
-                        return null;
-                    }
-                    builder.value(Integer.valueOf(p.getText()));
-                }
-            }
-        }
-
-        TagLength tagLength = builder.build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!tagLength.isSupported()) {
-            ctxt.reportInputMismatch(TagLength.class, "TagLength not supported for spec " + spec);
-            return null;
-        }
-
-        return tagLength;
+    public TagLengthXmlDeserializer() {
+        super(TagLength.kmipTag, TagLength.encodingType, Integer.class, value -> TagLength.builder().value(value).build());
     }
 }

@@ -1,77 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.ApplicationData;
 
-import java.io.IOException;
+public class ApplicationDataXmlDeserializer extends AbstractKmipXmlDeserializer<ApplicationData, String> {
 
-public class ApplicationDataXmlDeserializer extends KmipDataTypeXmlDeserializer<ApplicationData> {
-    private final KmipTag kmipTag = ApplicationData.kmipTag;
-    private final EncodingType encodingType = ApplicationData.encodingType;
-
-    @Override
-    public ApplicationData deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(ApplicationData.class, "Invalid Tag for ApplicationData");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        ApplicationData.ApplicationDataBuilder builder = ApplicationData.builder();
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(ApplicationData.class, "Missing or invalid 'type' attribute for ApplicationData");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(ApplicationData.class,
-                                "Missing or non-text 'value' for ApplicationData");
-                        return null;
-                    }
-                    builder.value(p.getText());
-                }
-            }
-        }
-
-        ApplicationData applicationData = builder.build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!applicationData.isSupported()) {
-            ctxt.reportInputMismatch(ApplicationData.class, "ApplicationData not supported for spec " + spec);
-            return null;
-        }
-
-        return applicationData;
+    public ApplicationDataXmlDeserializer() {
+        super(ApplicationData.kmipTag, ApplicationData.encodingType, String.class, value -> ApplicationData.builder().value(value).build());
     }
 }

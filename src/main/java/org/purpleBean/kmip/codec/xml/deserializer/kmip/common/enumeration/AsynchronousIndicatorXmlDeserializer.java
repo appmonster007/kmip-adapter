@@ -1,86 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.AsynchronousIndicator;
 
-import java.io.IOException;
-import java.util.NoSuchElementException;
+public class AsynchronousIndicatorXmlDeserializer extends AbstractKmipXmlDeserializer<AsynchronousIndicator, String> {
 
-/**
- * XML deserializer for AsynchronousIndicator.
- */
-public class AsynchronousIndicatorXmlDeserializer extends KmipDataTypeXmlDeserializer<AsynchronousIndicator> {
-    private final KmipTag kmipTag = AsynchronousIndicator.kmipTag;
-    private final EncodingType encodingType = AsynchronousIndicator.encodingType;
-
-    @Override
-    public AsynchronousIndicator deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, "Invalid Tag for AsynchronousIndicator");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        String description = null;
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(AsynchronousIndicator.class, "Missing or invalid 'type' attribute for AsynchronousIndicator");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(AsynchronousIndicator.class,
-                                "Missing or non-text 'value' for AsynchronousIndicator");
-                        return null;
-                    }
-                    description = p.getText();
-                }
-            }
-        }
-
-        if (description == null) {
-            ctxt.reportInputMismatch(AsynchronousIndicator.class, "Missing 'value' for AsynchronousIndicator");
-            return null;
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        AsynchronousIndicator asynchronousindicator = new AsynchronousIndicator(AsynchronousIndicator.fromName(description));
-        if (!asynchronousindicator.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("AsynchronousIndicator '%s' not supported for spec %s", description, spec));
-        }
-
-        return asynchronousindicator;
+    public AsynchronousIndicatorXmlDeserializer() {
+        super(AsynchronousIndicator.kmipTag, AsynchronousIndicator.encodingType, String.class, value -> new AsynchronousIndicator(AsynchronousIndicator.fromName(value)));
     }
 }

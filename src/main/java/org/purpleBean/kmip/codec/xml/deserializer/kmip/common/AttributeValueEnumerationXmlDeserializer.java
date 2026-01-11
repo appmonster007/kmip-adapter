@@ -1,77 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.AttributeValueEnumeration;
 
-import java.io.IOException;
+public class AttributeValueEnumerationXmlDeserializer extends AbstractKmipXmlDeserializer<AttributeValueEnumeration, Integer> {
 
-public class AttributeValueEnumerationXmlDeserializer extends KmipDataTypeXmlDeserializer<AttributeValueEnumeration> {
-    private final KmipTag kmipTag = AttributeValueEnumeration.kmipTag;
-    private final EncodingType encodingType = AttributeValueEnumeration.encodingType;
-
-    @Override
-    public AttributeValueEnumeration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "Invalid Tag for AttributeValue.Enumeration");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        AttributeValueEnumeration.AttributeValueEnumerationBuilder builder = AttributeValueEnumeration.builder();
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(AttributeValueEnumeration.class, "Missing or invalid 'type' attribute for AttributeValue.Enumeration");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(AttributeValueEnumeration.class,
-                                "Missing or non-number 'value' for AttributeValue.Enumeration");
-                        return null;
-                    }
-                    builder.value(ctxt.readValue(p, Integer.class));
-                }
-            }
-        }
-
-        AttributeValueEnumeration attributeValueEnumeration = builder.build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!attributeValueEnumeration.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValueEnumeration.class, "AttributeValue.Enumeration not supported for spec " + spec);
-            return null;
-        }
-
-        return attributeValueEnumeration;
+    public AttributeValueEnumerationXmlDeserializer() {
+        super(AttributeValueEnumeration.kmipTag, AttributeValueEnumeration.encodingType, Integer.class, value -> AttributeValueEnumeration.builder().value(value).build());
     }
 }

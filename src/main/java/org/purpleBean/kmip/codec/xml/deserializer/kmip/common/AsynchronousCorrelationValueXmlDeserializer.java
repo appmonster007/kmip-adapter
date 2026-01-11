@@ -1,78 +1,13 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.AsynchronousCorrelationValue;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AsynchronousCorrelationValueXmlDeserializer extends KmipDataTypeXmlDeserializer<AsynchronousCorrelationValue> {
-    private final KmipTag kmipTag = AsynchronousCorrelationValue.kmipTag;
-    private final EncodingType encodingType = AsynchronousCorrelationValue.encodingType;
+public class AsynchronousCorrelationValueXmlDeserializer extends AbstractKmipXmlDeserializer<AsynchronousCorrelationValue, ByteBuffer> {
 
-    @Override
-    public AsynchronousCorrelationValue deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(AsynchronousCorrelationValue.class, "Invalid Tag for AsynchronousCorrelationValue");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        AsynchronousCorrelationValue.AsynchronousCorrelationValueBuilder builder = AsynchronousCorrelationValue.builder();
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(AsynchronousCorrelationValue.class, "Missing or invalid 'type' attribute for AsynchronousCorrelationValue");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(AsynchronousCorrelationValue.class,
-                                "Missing or non-text 'value' for AsynchronousCorrelationValue");
-                        return null;
-                    }
-                    builder.value(ctxt.readValue(p, ByteBuffer.class));
-                }
-            }
-        }
-
-        AsynchronousCorrelationValue asynchronousCorrelationValue = builder.build();
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!asynchronousCorrelationValue.isSupported()) {
-            ctxt.reportInputMismatch(AsynchronousCorrelationValue.class, "AsynchronousCorrelationValue not supported for spec " + spec);
-            return null;
-        }
-
-        return asynchronousCorrelationValue;
+    public AsynchronousCorrelationValueXmlDeserializer() {
+        super(AsynchronousCorrelationValue.kmipTag, AsynchronousCorrelationValue.encodingType, ByteBuffer.class, value -> AsynchronousCorrelationValue.builder().value(value).build());
     }
 }

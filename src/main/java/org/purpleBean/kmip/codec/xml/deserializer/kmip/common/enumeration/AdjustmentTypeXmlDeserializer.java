@@ -1,86 +1,11 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.enumeration;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipXmlDeserializer;
 import org.purpleBean.kmip.common.enumeration.AdjustmentType;
 
-import java.io.IOException;
-import java.util.NoSuchElementException;
+public class AdjustmentTypeXmlDeserializer extends AbstractKmipXmlDeserializer<AdjustmentType, String> {
 
-/**
- * XML deserializer for AdjustmentType.
- */
-public class AdjustmentTypeXmlDeserializer extends KmipDataTypeXmlDeserializer<AdjustmentType> {
-    private final KmipTag kmipTag = AdjustmentType.kmipTag;
-    private final EncodingType encodingType = AdjustmentType.encodingType;
-
-    @Override
-    public AdjustmentType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(AdjustmentType.class, "Invalid Tag for AdjustmentType");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        String description = null;
-
-        while (p.nextToken() != JsonToken.END_OBJECT) {
-            if (p.currentToken() == JsonToken.FIELD_NAME) {
-                String fieldName = p.currentName();
-
-                p.nextToken(); // Move to the value token
-                if ("type".equalsIgnoreCase(fieldName)) {
-                    String type = p.getText();
-                    if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(AdjustmentType.class, "Missing or invalid 'type' attribute for AdjustmentType");
-                        return null;
-                    }
-                }
-                if ("value".equalsIgnoreCase(fieldName)) {
-                    if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(AdjustmentType.class,
-                                "Missing or non-text 'value' for AdjustmentType");
-                        return null;
-                    }
-                    description = p.getText();
-                }
-            }
-        }
-
-        if (description == null) {
-            ctxt.reportInputMismatch(AdjustmentType.class, "Missing 'value' for AdjustmentType");
-            return null;
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        AdjustmentType adjustmenttype = new AdjustmentType(AdjustmentType.fromName(description));
-        if (!adjustmenttype.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("AdjustmentType '%s' not supported for spec %s", description, spec));
-        }
-
-        return adjustmenttype;
+    public AdjustmentTypeXmlDeserializer() {
+        super(AdjustmentType.kmipTag, AdjustmentType.encodingType, String.class, value -> new AdjustmentType(AdjustmentType.fromName(value)));
     }
 }
