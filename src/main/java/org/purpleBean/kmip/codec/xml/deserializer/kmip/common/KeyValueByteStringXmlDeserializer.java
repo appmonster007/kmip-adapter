@@ -9,17 +9,17 @@ import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.common.KeyValue;
+import org.purpleBean.kmip.common.KeyValueByteString;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyValue.ByteString> {
-    private final KmipTag kmipTag = KeyValue.ByteString.kmipTag;
-    private final EncodingType encodingType = KeyValue.ByteString.encodingType;
+public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyValueByteString> {
+    private final KmipTag kmipTag = KeyValueByteString.kmipTag;
+    private final EncodingType encodingType = KeyValueByteString.encodingType;
 
     @Override
-    public KeyValue.ByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public KeyValueByteString deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         if (p.currentToken() == null) {
             p.nextToken();
         }
@@ -32,7 +32,7 @@ public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializ
         }
 
         if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(KeyValue.ByteString.class, "Invalid Tag for KeyValue.ByteString");
+            ctxt.reportInputMismatch(KeyValueByteString.class, "Invalid Tag for KeyValue.ByteString");
             return null;
         }
 
@@ -40,7 +40,7 @@ public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializ
             p.nextToken();
         }
 
-        KeyValue.ByteString.ByteStringBuilder builder = KeyValue.ByteString.builder();
+        KeyValueByteString.KeyValueByteStringBuilder builder = KeyValueByteString.builder();
 
         while (p.nextToken() != JsonToken.END_OBJECT) {
             if (p.currentToken() == JsonToken.FIELD_NAME) {
@@ -50,13 +50,13 @@ public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializ
                 if ("type".equalsIgnoreCase(fieldName)) {
                     String type = p.getText();
                     if (!encodingType.getDescription().equals(type)) {
-                        ctxt.reportInputMismatch(KeyValue.ByteString.class, "Missing or invalid 'type' attribute for KeyValue.ByteString");
+                        ctxt.reportInputMismatch(KeyValueByteString.class, "Missing or invalid 'type' attribute for KeyValue.ByteString");
                         return null;
                     }
                 }
                 if ("value".equalsIgnoreCase(fieldName)) {
                     if (p.hasTextCharacters()) {
-                        ctxt.reportInputMismatch(KeyValue.ByteString.class,
+                        ctxt.reportInputMismatch(KeyValueByteString.class,
                                 "Missing or non-text 'value' for KeyValue.ByteString");
                         return null;
                     }
@@ -65,11 +65,11 @@ public class KeyValueByteStringXmlDeserializer extends KmipDataTypeXmlDeserializ
             }
         }
 
-        KeyValue.ByteString keyValueByteString = builder.build();
+        KeyValueByteString keyValueByteString = builder.build();
 
         KmipSpec spec = KmipContext.getSpec();
         if (!keyValueByteString.isSupported()) {
-            ctxt.reportInputMismatch(KeyValue.ByteString.class, "KeyValue.ByteString not supported for spec " + spec);
+            ctxt.reportInputMismatch(KeyValueByteString.class, "KeyValue.ByteString not supported for spec " + spec);
             return null;
         }
 
