@@ -1,79 +1,13 @@
 package org.purpleBean.kmip.codec.json.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.AbstractKmipJsonDeserializer;
 import org.purpleBean.kmip.common.AttributeValueDateTime;
 
-import java.io.IOException;
 import java.time.OffsetDateTime;
 
-public class AttributeValueDateTimeJsonDeserializer extends KmipDataTypeJsonDeserializer<AttributeValueDateTime> {
-    private final KmipTag kmipTag = AttributeValueDateTime.kmipTag;
-    private final EncodingType encodingType = AttributeValueDateTime.encodingType;
+public class AttributeValueDateTimeJsonDeserializer extends AbstractKmipJsonDeserializer<AttributeValueDateTime, OffsetDateTime> {
 
-    @Override
-    public AttributeValueDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-
-        if (node == null) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class, String.format("JSON node cannot be null for AttributeValue.DateTime deserialization"));
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(AttributeValueDateTime.class, String.format("Invalid KMIP tag for AttributeValue.DateTime"));
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class, String.format("Failed to parse KMIP tag for AttributeValue.DateTime: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class,
-                    String.format("Expected object with %s tag for AttributeValue.DateTime, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
-            return null;
-        }
-
-        // Validation: Extract and validate type field
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
-        ) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class, String.format("Missing or non-text 'type' field for AttributeValue.DateTime"));
-            return null;
-        }
-
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class, "AttributeValue.DateTime 'value' must be a non-empty string");
-            return null;
-        }
-
-        OffsetDateTime value = p.getCodec().treeToValue(valueNode, OffsetDateTime.class);
-        AttributeValueDateTime attributeValueDateTime = AttributeValueDateTime.of(value);
-
-        // Validate KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!attributeValueDateTime.isSupported()) {
-            ctxt.reportInputMismatch(AttributeValueDateTime.class, "AttributeValue.DateTime not supported for spec " + spec);
-            return null;
-        }
-
-        return attributeValueDateTime;
+    public AttributeValueDateTimeJsonDeserializer() {
+        super(AttributeValueDateTime.kmipTag, AttributeValueDateTime.encodingType, OffsetDateTime.class, value -> AttributeValueDateTime.builder().value(value).build());
     }
 }

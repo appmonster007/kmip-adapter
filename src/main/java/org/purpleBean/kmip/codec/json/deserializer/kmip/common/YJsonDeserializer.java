@@ -1,79 +1,13 @@
 package org.purpleBean.kmip.codec.json.deserializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.AbstractKmipJsonDeserializer;
 import org.purpleBean.kmip.common.Y;
 
-import java.io.IOException;
 import java.math.BigInteger;
 
-public class YJsonDeserializer extends KmipDataTypeJsonDeserializer<Y> {
-    private final KmipTag kmipTag = Y.kmipTag;
-    private final EncodingType encodingType = Y.encodingType;
+public class YJsonDeserializer extends AbstractKmipJsonDeserializer<Y, BigInteger> {
 
-    @Override
-    public Y deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-
-        if (node == null) {
-            ctxt.reportInputMismatch(Y.class, String.format("JSON node cannot be null for Y deserialization"));
-            return null;
-        }
-
-        // Validation: Extract and validate KMIP tag
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(Y.class, String.format("Invalid KMIP tag for Y"));
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(Y.class, String.format("Failed to parse KMIP tag for Y: %s", e.getMessage()));
-            return null;
-        }
-
-        if (!node.isObject() || tag.getValue().getValue() != kmipTag.getValue().getValue()) {
-            ctxt.reportInputMismatch(Y.class,
-                    String.format("Expected object with %s tag for Y, got tag: %s", kmipTag.getValue().getValue(), tag.getValue().getValue()));
-            return null;
-        }
-
-        // Validation: Extract and validate type field
-        JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
-        ) {
-            ctxt.reportInputMismatch(Y.class, String.format("Missing or non-text 'type' field for Y"));
-            return null;
-        }
-
-        // Validation: Extract and validate value field
-        JsonNode valueNode = node.get("value");
-        if (valueNode == null || !valueNode.isTextual()) {
-            ctxt.reportInputMismatch(Y.class, "Y 'value' must be a number");
-            return null;
-        }
-
-        BigInteger value = p.getCodec().treeToValue(valueNode, BigInteger.class);
-        Y y = Y.builder().value(value).build();
-
-        // Validate KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!y.isSupported()) {
-            ctxt.reportInputMismatch(Y.class, "Y not supported for spec " + spec);
-            return null;
-        }
-
-        return y;
+    public YJsonDeserializer() {
+        super(Y.kmipTag, Y.encodingType, BigInteger.class, value -> Y.builder().value(value).build());
     }
 }

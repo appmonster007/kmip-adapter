@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HexFormat;
 
-public class ByteBufferJsonDeserializer extends JsonDeserializer<ByteBuffer> {
+public class ByteStringJsonDeserializer extends JsonDeserializer<ByteBuffer> {
+
     @Override
     public ByteBuffer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        HexFormat hexFormat = HexFormat.of();
-        byte[] data = hexFormat.parseHex(p.getText());
-
-        return ByteBuffer.wrap(data);
+        return ByteBuffer.wrap(HexFormat.of().parseHex(p.getText()));
     }
 }
