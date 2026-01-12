@@ -10,50 +10,37 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDeserializer<KmipDataType> {
 
     @Override
     public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
-        if (node == null) {
-            ctxt.reportInputMismatch(handledType(), "JSON node cannot be null");
-            return null;
-        }
+        JsonNode node = ctxt.readTree(p);
 
-        KmipTag tag;
-        try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
-            if (tag == null) {
-                ctxt.reportInputMismatch(handledType(), "Invalid KMIP tag");
-                return null;
-            }
-        } catch (Exception e) {
-            ctxt.reportInputMismatch(handledType(), "Failed to parse KMIP tag: " + e.getMessage());
-            return null;
-        }
-
+        JsonNode tagNode = node.get("tag");
         JsonNode typeNode = node.get("type");
-        if (typeNode == null
-                || !typeNode.isTextual()
-        ) {
-            ctxt.reportInputMismatch(handledType(), String.format("Missing or non-text 'type' field for " + handledType().getSimpleName()));
+
+        if (tagNode == null || !tagNode.isTextual() || typeNode == null || !typeNode.isTextual()) {
+            ctxt.handleUnexpectedToken(KmipDataType.class, p);
             return null;
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        EncodingType encodingType = EncodingType.fromName(typeNode.asText()).orElse(null);
+        KmipTag.Value kmipTagValue = KmipTag.fromName(spec, tagNode.asText());
+        Optional<EncodingType> encodingType = EncodingType.fromName(typeNode.asText());
 
-        if (encodingType == null) {
+        if (encodingType.isEmpty()) {
+            ctxt.handleUnexpectedToken(KmipDataType.class, p);
             return null;
         }
 
-        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(tag.getValue(), encodingType);
+        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTagValue, encodingType.get());
         if (clazz == null) {
-            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s for spec %s", tag.getValue(), encodingType, spec));
+            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType.get()));
         }
 
-        return (T) ctxt.readValue(p.getCodec().treeAsTokens(node), clazz);
+        return (T) ctxt.readTreeAsValue(node, clazz);
     }
 
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType) {
@@ -62,8 +49,6 @@ public class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDe
 
     @Override
     public Class<?> handledType() {
-        // Try to infer the generic parameter (T) from the concrete subclass declaration
-        // Handles both raw classes and parameterized types (template classes)
         Type superType = getClass().getGenericSuperclass();
         if (superType instanceof ParameterizedType pt) {
             Type tArg = pt.getActualTypeArguments()[0];

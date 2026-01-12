@@ -27,7 +27,7 @@ public abstract class AbstractKmipJsonDeserializer<T extends KmipDataType, V> ex
 
     @Override
     public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
+        JsonNode node = ctxt.readTree(p);
 
         if (node == null) {
             ctxt.reportInputMismatch(handledType(), "JSON node cannot be null");
@@ -36,13 +36,13 @@ public abstract class AbstractKmipJsonDeserializer<T extends KmipDataType, V> ex
 
         KmipTag tag;
         try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
+            tag = ctxt.readTreeAsValue(node, KmipTag.class);
             if (tag == null) {
                 ctxt.reportInputMismatch(handledType(), "Invalid KMIP tag");
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(handledType(), "Failed to parse KMIP tag: " + e.getMessage());
+            ctxt.handleWeirdStringValue(handledType(), node.toString(), "Failed to parse KMIP tag: " + e.getMessage());
             return null;
         }
 
@@ -54,8 +54,7 @@ public abstract class AbstractKmipJsonDeserializer<T extends KmipDataType, V> ex
         JsonNode typeNode = node.get("type");
         if (typeNode == null
                 || !typeNode.isTextual()
-                || EncodingType.fromName(typeNode.asText()).isEmpty()
-                || EncodingType.fromName(typeNode.asText()).get() != encodingType
+                || !encodingType.getDescription().equals(typeNode.asText())
         ) {
             ctxt.reportInputMismatch(handledType(), "Missing or invalid 'type' field");
             return null;
@@ -67,7 +66,7 @@ public abstract class AbstractKmipJsonDeserializer<T extends KmipDataType, V> ex
             return null;
         }
 
-        V value = p.getCodec().treeToValue(valueNode, valueClass);
+        V value = ctxt.readTreeAsValue(valueNode, valueClass);
         return factory.apply(value);
     }
 }

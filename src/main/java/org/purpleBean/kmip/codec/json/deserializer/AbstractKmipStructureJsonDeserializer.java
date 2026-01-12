@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.common.structure.ApplicationSpecificInformation;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 
 public abstract class AbstractKmipStructureJsonDeserializer<T extends KmipStructure, B> extends KmipDataTypeJsonDeserializer<T> {
 
@@ -22,7 +20,8 @@ public abstract class AbstractKmipStructureJsonDeserializer<T extends KmipStruct
 
     @Override
     public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.readValueAsTree();
+        JsonNode node = ctxt.readTree(p);
+
         if (node == null) {
             ctxt.reportInputMismatch(handledType(), "JSON node cannot be null");
             return null;
@@ -30,13 +29,13 @@ public abstract class AbstractKmipStructureJsonDeserializer<T extends KmipStruct
 
         KmipTag tag;
         try {
-            tag = p.getCodec().treeToValue(node, KmipTag.class);
+            tag = ctxt.readTreeAsValue(node, KmipTag.class);
             if (tag == null) {
                 ctxt.reportInputMismatch(handledType(), "Invalid KMIP tag");
                 return null;
             }
         } catch (Exception e) {
-            ctxt.reportInputMismatch(handledType(), "Failed to parse KMIP tag: " + e.getMessage());
+            ctxt.handleWeirdStringValue(handledType(), node.toString(), "Failed to parse KMIP tag: " + e.getMessage());
             return null;
         }
 
@@ -50,7 +49,7 @@ public abstract class AbstractKmipStructureJsonDeserializer<T extends KmipStruct
                 || !typeNode.isTextual()
                 || !encodingType.getDescription().equals(typeNode.asText())
         ) {
-            ctxt.reportInputMismatch(ApplicationSpecificInformation.class, "Missing or non-text 'type' field for ApplicationSpecificInformation");
+            ctxt.reportInputMismatch(handledType(), "Missing or non-text 'type' field for " + handledType().getSimpleName());
             return null;
         }
 
@@ -60,21 +59,22 @@ public abstract class AbstractKmipStructureJsonDeserializer<T extends KmipStruct
             return null;
         }
 
+        KmipSpec spec = KmipContext.getSpec();
         B builder = createBuilder();
 
         for (JsonNode valueNode : values) {
             if (!valueNode.has("tag")) {
                 continue;
             }
-            KmipTag.Value nodeTag = p.getCodec().treeToValue(valueNode, KmipTag.class).getValue();
+            KmipTag.Value nodeTag = ctxt.readTreeAsValue(valueNode, KmipTag.class).getValue();
             setValue(builder, nodeTag, valueNode.traverse(p.getCodec()), ctxt);
         }
 
         T result = build(builder);
 
-        KmipSpec spec = KmipContext.getSpec();
         if (!result.isSupported()) {
-            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", handledType().getSimpleName(), spec));
+            ctxt.reportInputMismatch(handledType(), String.format("%s not supported for spec %s", handledType().getSimpleName(), spec));
+            return null;
         }
 
         return result;
