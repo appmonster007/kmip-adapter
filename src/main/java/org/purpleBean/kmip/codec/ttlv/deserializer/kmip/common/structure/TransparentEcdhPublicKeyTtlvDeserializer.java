@@ -1,11 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.QString;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
@@ -13,45 +10,35 @@ import org.purpleBean.kmip.common.structure.TransparentEcdhPublicKey;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
 
-public class TransparentEcdhPublicKeyTtlvDeserializer extends KmipDataTypeTtlvDeserializer<TransparentEcdhPublicKey> {
-    private final KmipTag kmipTag = TransparentEcdhPublicKey.kmipTag;
-    private final EncodingType encodingType = TransparentEcdhPublicKey.encodingType;
+public class TransparentEcdhPublicKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<TransparentEcdhPublicKey, TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder> {
 
-    @Override
-    public TransparentEcdhPublicKey deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
-        KmipSpec spec = KmipContext.getSpec();
-        TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder builder = TransparentEcdhPublicKey.builder();
-
-        for (TtlvObject ttlvObject : nestedObjects) {
-            KmipTag.Value nodeTag = KmipTag.fromBytes(spec, ttlvObject.getTag());
-            setValue(builder, nodeTag, ttlvObject, mapper);
-        }
-
-        TransparentEcdhPublicKey transparentEcdhPublicKey = builder.build();
-
-        if (!transparentEcdhPublicKey.isSupported()) {
-            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", transparentEcdhPublicKey.getClass().getSimpleName(), spec));
-        }
-        return transparentEcdhPublicKey;
+    public TransparentEcdhPublicKeyTtlvDeserializer() {
+        super(TransparentEcdhPublicKey.kmipTag);
     }
 
-    private void setValue(TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder builder, KmipTag.Value nodeTag, TtlvObject ttlvObject, TtlvMapper mapper) throws IOException {
+    @Override
+    protected TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder createBuilder() {
+        return TransparentEcdhPublicKey.builder();
+    }
+
+    @Override
+    protected void setValue(TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.RECOMMENDED_CURVE ->
-                    builder.recommendedCurve(mapper.readValue(ttlvObject.toByteBuffer(), RecommendedCurve.class));
-            case KmipTag.Standard.Q_STRING ->
-                    builder.qString(mapper.readValue(ttlvObject.toByteBuffer(), QString.class));
+                    builder.recommendedCurve(mapper.readValue(p, RecommendedCurve.class));
+            case KmipTag.Standard.Q_STRING -> builder.qString(mapper.readValue(p, QString.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected TransparentEcdhPublicKey build(TransparentEcdhPublicKey.TransparentEcdhPublicKeyBuilder builder) {
+        return builder.build();
+    }
+
+    @Override
+    protected EncodingType getEncodingType() {
+        return TransparentEcdhPublicKey.encodingType;
     }
 }

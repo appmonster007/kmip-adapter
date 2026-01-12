@@ -1,11 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
@@ -13,46 +10,34 @@ import org.purpleBean.kmip.common.structure.SampleStructure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
 
-public class SampleStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<SampleStructure> {
-    private final KmipTag kmipTag = SampleStructure.kmipTag;
-    private final EncodingType encodingType = SampleStructure.encodingType;
+public class SampleStructureTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SampleStructure, SampleStructure.SampleStructureBuilder> {
 
-    @Override
-    public SampleStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
-        KmipSpec spec = KmipContext.getSpec();
-        SampleStructure.SampleStructureBuilder builder = SampleStructure.builder();
-
-        for (TtlvObject ttlvObject : nestedObjects) {
-            KmipTag.Value nodeTag = KmipTag.fromBytes(spec, ttlvObject.getTag());
-            setValue(builder, nodeTag, ttlvObject, mapper);
-        }
-
-        SampleStructure sampleStructure = builder.build();
-
-        if (!sampleStructure.isSupported()) {
-            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", sampleStructure.getClass().getSimpleName(), spec));
-        }
-        return sampleStructure;
+    public SampleStructureTtlvDeserializer() {
+        super(SampleStructure.kmipTag);
     }
 
-    private void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, TtlvObject ttlvObject, TtlvMapper mapper) throws IOException {
-        // TODO: Implement field deserialization based on nodeTag
-        // Example:
+    @Override
+    protected SampleStructure.SampleStructureBuilder createBuilder() {
+        return SampleStructure.builder();
+    }
+
+    @Override
+    protected void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.ACTIVATION_DATE ->
-                    builder.activationDate(mapper.readValue(ttlvObject.toByteBuffer(), ActivationDate.class));
-            case KmipTag.Standard.STATE -> builder.state(mapper.readValue(ttlvObject.toByteBuffer(), State.class));
+            case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(mapper.readValue(p, ActivationDate.class));
+            case KmipTag.Standard.STATE -> builder.state(mapper.readValue(p, State.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected SampleStructure build(SampleStructure.SampleStructureBuilder builder) {
+        return builder.build();
+    }
+
+    @Override
+    protected EncodingType getEncodingType() {
+        return SampleStructure.encodingType;
     }
 }

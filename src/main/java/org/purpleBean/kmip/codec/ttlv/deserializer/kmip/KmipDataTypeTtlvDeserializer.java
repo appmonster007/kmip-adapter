@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDeserializer<KmipDataType> {
 
     @Override
-    public KmipDataType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public T deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject ttlvObject = TtlvObject.fromBuffer(ttlvBuffer);
         KmipTag.Value kmipTagValue = KmipTag.fromBytes(KmipContext.getSpec(), ttlvObject.getTag());
         EncodingType encodingType = EncodingType.fromTypeValue(ttlvObject.getType()).orElse(null);
@@ -24,12 +24,16 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
             return null;
         }
 
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(kmipTagValue, encodingType);
+        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTagValue, encodingType);
         if (clazz == null) {
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType));
         }
 
         ttlvBuffer.rewind();
-        return mapper.readValue(ttlvBuffer, clazz);
+        return (T) mapper.readValue(ttlvBuffer, clazz);
+    }
+
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType) {
+        return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 }

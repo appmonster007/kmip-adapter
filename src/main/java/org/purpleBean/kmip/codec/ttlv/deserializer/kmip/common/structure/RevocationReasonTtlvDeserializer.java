@@ -1,11 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
@@ -13,47 +10,36 @@ import org.purpleBean.kmip.common.structure.RevocationReason;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
 
-public class RevocationReasonTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RevocationReason> {
-    private final KmipTag kmipTag = RevocationReason.kmipTag;
-    private final EncodingType encodingType = RevocationReason.encodingType;
+public class RevocationReasonTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RevocationReason, RevocationReason.RevocationReasonBuilder> {
 
-    @Override
-    public RevocationReason deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
-        KmipSpec spec = KmipContext.getSpec();
-        RevocationReason.RevocationReasonBuilder builder = RevocationReason.builder();
-
-        for (TtlvObject ttlvObject : nestedObjects) {
-            KmipTag.Value nodeTag = KmipTag.fromBytes(spec, ttlvObject.getTag());
-            setValue(builder, nodeTag, ttlvObject, mapper);
-        }
-
-        RevocationReason revocationReason = builder.build();
-        if (!revocationReason.isSupported()) {
-            throw new NoSuchElementException(String.format("%s is not supported for KMIP spec %s", revocationReason.getClass().getSimpleName(), spec));
-        }
-        return revocationReason;
+    public RevocationReasonTtlvDeserializer() {
+        super(RevocationReason.kmipTag);
     }
 
-    private void setValue(RevocationReason.RevocationReasonBuilder builder,
-                          KmipTag.Value nodeTag,
-                          TtlvObject ttlvObject,
-                          TtlvMapper mapper) throws IOException {
+    @Override
+    protected RevocationReason.RevocationReasonBuilder createBuilder() {
+        return RevocationReason.builder();
+    }
+
+    @Override
+    protected void setValue(RevocationReason.RevocationReasonBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.REVOCATION_REASON_CODE ->
-                    builder.revocationReasonCode(mapper.readValue(ttlvObject.toByteBuffer(), RevocationReasonCode.class));
+                    builder.revocationReasonCode(mapper.readValue(p, RevocationReasonCode.class));
             case KmipTag.Standard.REVOCATION_MESSAGE ->
-                    builder.revocationMessage(mapper.readValue(ttlvObject.toByteBuffer(), RevocationMessage.class));
+                    builder.revocationMessage(mapper.readValue(p, RevocationMessage.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected RevocationReason build(RevocationReason.RevocationReasonBuilder builder) {
+        return builder.build();
+    }
+
+    @Override
+    protected EncodingType getEncodingType() {
+        return RevocationReason.encodingType;
     }
 }

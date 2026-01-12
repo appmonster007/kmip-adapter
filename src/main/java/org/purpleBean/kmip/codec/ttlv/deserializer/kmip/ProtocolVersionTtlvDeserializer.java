@@ -1,53 +1,43 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
 
-public class ProtocolVersionTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ProtocolVersion> {
-    EncodingType type = EncodingType.STRUCTURE;
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
+public class ProtocolVersionTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
 
-    @Override
-    public ProtocolVersion deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != type.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s", type.getTypeValue(), kmipTag.getDescription()));
-        }
-
-        List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
-
-        KmipSpec spec = KmipContext.getSpec();
-        ProtocolVersion.ProtocolVersionBuilder builder = ProtocolVersion.builder();
-
-        for (TtlvObject ttlvObject : nestedObjects) {
-            KmipTag.Value nodeTag = KmipTag.fromBytes(spec, ttlvObject.getTag());
-            setValue(builder, nodeTag, ttlvObject, mapper);
-        }
-
-        ProtocolVersion protocolVersion = builder.build();
-
-        if (!protocolVersion.isSupported()) {
-            throw new NoSuchElementException();
-        }
-
-        return protocolVersion;
+    public ProtocolVersionTtlvDeserializer() {
+        super(ProtocolVersion.kmipTag);
     }
 
-    private void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, TtlvObject ttlvObject, TtlvMapper mapper) throws IOException {
+    @Override
+    protected ProtocolVersion.ProtocolVersionBuilder createBuilder() {
+        return ProtocolVersion.builder();
+    }
+
+    @Override
+    protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION_MAJOR ->
-                    builder.protocolVersionMajor(mapper.readValue(ttlvObject.toByteBuffer(), ProtocolVersion.ProtocolVersionMajor.class));
+                    builder.protocolVersionMajor(mapper.readValue(p, ProtocolVersion.ProtocolVersionMajor.class));
             case KmipTag.Standard.PROTOCOL_VERSION_MINOR ->
-                    builder.protocolVersionMinor(mapper.readValue(ttlvObject.toByteBuffer(), ProtocolVersion.ProtocolVersionMinor.class));
-            default -> throw new IllegalArgumentException();
+                    builder.protocolVersionMinor(mapper.readValue(p, ProtocolVersion.ProtocolVersionMinor.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected ProtocolVersion build(ProtocolVersion.ProtocolVersionBuilder builder) {
+        return builder.build();
+    }
+
+    @Override
+    protected EncodingType getEncodingType() {
+        return ProtocolVersion.encodingType;
     }
 }
