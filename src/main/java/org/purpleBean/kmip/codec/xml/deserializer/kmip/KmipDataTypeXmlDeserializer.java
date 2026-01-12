@@ -61,13 +61,18 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDes
                 }
             }
         }
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(kmipTag, encodingType);
+
+        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTag, encodingType);
         if (clazz == null) {
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTag.getValue(), encodingType));
         }
 
         ctxt.setAttribute("tag", p.currentName());
         return (T) ctxt.readValue(buffer.asParser(), clazz);
+    }
+
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType) {
+        return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 
     @Override

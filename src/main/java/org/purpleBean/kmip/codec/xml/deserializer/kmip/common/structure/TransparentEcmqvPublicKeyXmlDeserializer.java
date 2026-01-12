@@ -1,82 +1,38 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.common.QString;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.common.structure.TransparentEcmqvPublicKey;
 
 import java.io.IOException;
 
-public class TransparentEcmqvPublicKeyXmlDeserializer extends KmipDataTypeXmlDeserializer<TransparentEcmqvPublicKey> {
-    private final KmipTag kmipTag = TransparentEcmqvPublicKey.kmipTag;
+public class TransparentEcmqvPublicKeyXmlDeserializer extends AbstractKmipStructureXmlDeserializer<TransparentEcmqvPublicKey, TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder> {
 
-    @Override
-    public TransparentEcmqvPublicKey deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(TransparentEcmqvPublicKey.class, "Invalid Tag for TransparentEcmqvPublicKey");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-        TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder = TransparentEcmqvPublicKey.builder();
-
-        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
-            String fieldName = p.currentName();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
-            if (p.currentToken() == JsonToken.START_OBJECT) {
-                p.nextToken();
-                setValue(builder, nodeTag, p, ctxt);
-            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
-                setValue(builder, nodeTag, p, ctxt);
-            } else {
-                ctxt.reportInputMismatch(TransparentEcmqvPublicKey.class, "Unexpected token: " + p.currentToken());
-            }
-        }
-
-        TransparentEcmqvPublicKey transparentEcmqvPublicKey = builder.build();
-
-        if (!transparentEcmqvPublicKey.isSupported()) {
-            ctxt.reportInputMismatch(TransparentEcmqvPublicKey.class, "TransparentEcmqvPublicKey not supported for spec " + spec);
-            return null;
-        }
-
-        return transparentEcmqvPublicKey;
+    public TransparentEcmqvPublicKeyXmlDeserializer() {
+        super(TransparentEcmqvPublicKey.kmipTag);
     }
 
-    private void setValue(
-            TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder,
-            KmipTag.Value nodeTag,
-            JsonParser p,
-            DeserializationContext ctxt
-    ) throws IOException {
-        ctxt.setAttribute("tag", p.currentName());
+    @Override
+    protected TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder createBuilder() {
+        return TransparentEcmqvPublicKey.builder();
+    }
+
+    @Override
+    protected void setValue(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.RECOMMENDED_CURVE ->
                     builder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));
             case KmipTag.Standard.Q_STRING -> builder.qString(ctxt.readValue(p, QString.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected TransparentEcmqvPublicKey build(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder) {
+        return builder.build();
     }
 }

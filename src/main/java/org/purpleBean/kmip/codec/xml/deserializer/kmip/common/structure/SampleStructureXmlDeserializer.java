@@ -1,83 +1,37 @@
 package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 
 import java.io.IOException;
 
-public class SampleStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<SampleStructure> {
-    private final KmipTag kmipTag = SampleStructure.kmipTag;
+public class SampleStructureXmlDeserializer extends AbstractKmipStructureXmlDeserializer<SampleStructure, SampleStructure.SampleStructureBuilder> {
 
-    @Override
-    public SampleStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        if (p.currentToken() == null) {
-            p.nextToken();
-        }
-
-        String currentName;
-        if (p instanceof FromXmlParser xmlParser) {
-            currentName = xmlParser.getStaxReader().getLocalName();
-        } else {
-            currentName = (String) ctxt.getAttribute("tag");
-        }
-
-        if (!kmipTag.getDescription().equalsIgnoreCase(currentName)) {
-            ctxt.reportInputMismatch(SampleStructure.class, "Invalid Tag for SampleStructure");
-            return null;
-        }
-
-        if (p.currentToken() != JsonToken.START_OBJECT) {
-            p.nextToken();
-        }
-
-        KmipSpec spec = KmipContext.getSpec();
-        SampleStructure.SampleStructureBuilder builder = SampleStructure.builder();
-
-        while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
-            String fieldName = p.currentName();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
-            if (p.currentToken() == JsonToken.START_OBJECT) {
-                p.nextToken();
-                setValue(builder, nodeTag, p, ctxt);
-            } else if (p.currentToken() == JsonToken.FIELD_NAME) {
-                setValue(builder, nodeTag, p, ctxt);
-            } else {
-                ctxt.reportInputMismatch(SampleStructure.class, "Unexpected token: " + p.currentToken());
-            }
-        }
-
-        SampleStructure sampleStructure = builder.build();
-
-        if (!sampleStructure.isSupported()) {
-            ctxt.reportInputMismatch(SampleStructure.class, "SampleStructure not supported for spec " + spec);
-            return null;
-        }
-
-        return sampleStructure;
+    public SampleStructureXmlDeserializer() {
+        super(SampleStructure.kmipTag);
     }
 
-    private void setValue(
-            SampleStructure.SampleStructureBuilder builder,
-            KmipTag.Value nodeTag,
-            JsonParser p,
-            DeserializationContext ctxt
-    ) throws IOException {
-        // TODO: Implement field deserialization based on nodeTag
-        // Example:
-        ctxt.setAttribute("tag", p.currentName());
+    @Override
+    protected SampleStructure.SampleStructureBuilder createBuilder() {
+        return SampleStructure.builder();
+    }
+
+    @Override
+    protected void setValue(SampleStructure.SampleStructureBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.ACTIVATION_DATE -> builder.activationDate(ctxt.readValue(p, ActivationDate.class));
             case KmipTag.Standard.STATE -> builder.state(ctxt.readValue(p, State.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+    }
+
+    @Override
+    protected SampleStructure build(SampleStructure.SampleStructureBuilder builder) {
+        return builder.build();
     }
 }
