@@ -1,39 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.AttributeValueLongInteger;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class AttributeValueLongIntegerTtlvDeserializer extends AbstractKmipTtlvDeserializer<AttributeValueLongInteger, Long> {
 
-public class AttributeValueLongIntegerTtlvDeserializer extends KmipDataTypeTtlvDeserializer<AttributeValueLongInteger> {
-    private final KmipTag kmipTag = AttributeValueLongInteger.kmipTag;
-    private final EncodingType encodingType = AttributeValueLongInteger.encodingType;
-
-    @Override
-    public AttributeValueLongInteger deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        AttributeValueLongInteger attributeValueLongInteger = AttributeValueLongInteger.of(mapper.readValue(bb, java.lang.Long.class));
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!attributeValueLongInteger.isSupported()) {
-            throw new NoSuchElementException(String.format("AttributeValue.LongInteger not supported for spec %s", spec));
-        }
-        return attributeValueLongInteger;
+    public AttributeValueLongIntegerTtlvDeserializer() {
+        super(AttributeValueLongInteger.kmipTag, AttributeValueLongInteger.encodingType, Long.class, value -> AttributeValueLongInteger.builder().value(value).build());
     }
 }

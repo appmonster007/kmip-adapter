@@ -1,40 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.UsageLimitsCount;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class UsageLimitsCountTtlvDeserializer extends AbstractKmipTtlvDeserializer<UsageLimitsCount, Long> {
 
-public class UsageLimitsCountTtlvDeserializer extends KmipDataTypeTtlvDeserializer<UsageLimitsCount> {
-    private final KmipTag kmipTag = UsageLimitsCount.kmipTag;
-    private final EncodingType encodingType = UsageLimitsCount.encodingType;
-
-    @Override
-    public UsageLimitsCount deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        Long value = mapper.readValue(bb, Long.class);
-        UsageLimitsCount usageLimitsCount = UsageLimitsCount.builder().value(value).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!usageLimitsCount.isSupported()) {
-            throw new NoSuchElementException(String.format("UsageLimitsCount not supported for spec %s", spec));
-        }
-        return usageLimitsCount;
+    public UsageLimitsCountTtlvDeserializer() {
+        super(UsageLimitsCount.kmipTag, UsageLimitsCount.encodingType, Long.class, value -> UsageLimitsCount.builder().value(value).build());
     }
 }

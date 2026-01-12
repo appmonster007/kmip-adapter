@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class RecommendedCurveTtlvDeserializer extends AbstractKmipTtlvDeserializer<RecommendedCurve, Integer> {
 
-/**
- * TTLV deserializer for RecommendedCurve.
- */
-public class RecommendedCurveTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RecommendedCurve> {
-    private final KmipTag kmipTag = RecommendedCurve.kmipTag;
-    private final EncodingType encodingType = RecommendedCurve.encodingType;
-
-    @Override
-    public RecommendedCurve deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for RecommendedCurve", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        RecommendedCurve recommendedcurve = new RecommendedCurve(RecommendedCurve.fromValue(value));
-
-        if (!recommendedcurve.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("RecommendedCurve '%d' not supported for spec %s", value, spec));
-        }
-        return recommendedcurve;
+    public RecommendedCurveTtlvDeserializer() {
+        super(RecommendedCurve.kmipTag, RecommendedCurve.encodingType, Integer.class, value -> new RecommendedCurve(RecommendedCurve.fromValue(value)));
     }
 }

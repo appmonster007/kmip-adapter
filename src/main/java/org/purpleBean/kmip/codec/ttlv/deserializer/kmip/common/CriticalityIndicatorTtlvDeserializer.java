@@ -1,40 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.CriticalityIndicator;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class CriticalityIndicatorTtlvDeserializer extends AbstractKmipTtlvDeserializer<CriticalityIndicator, Boolean> {
 
-public class CriticalityIndicatorTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CriticalityIndicator> {
-    private final KmipTag kmipTag = CriticalityIndicator.kmipTag;
-    private final EncodingType encodingType = CriticalityIndicator.encodingType;
-
-    @Override
-    public CriticalityIndicator deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        boolean value = mapper.readValue(bb, Boolean.class);
-        CriticalityIndicator criticalityIndicator = CriticalityIndicator.builder().value(value).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!criticalityIndicator.isSupported()) {
-            throw new NoSuchElementException(String.format("CriticalityIndicator not supported for spec %s", spec));
-        }
-        return criticalityIndicator;
+    public CriticalityIndicatorTtlvDeserializer() {
+        super(CriticalityIndicator.kmipTag, CriticalityIndicator.encodingType, Boolean.class, value -> CriticalityIndicator.builder().value(value).build());
     }
 }

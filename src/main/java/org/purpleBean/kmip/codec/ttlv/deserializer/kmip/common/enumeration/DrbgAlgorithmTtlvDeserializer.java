@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.enumeration.DrbgAlgorithm;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class DrbgAlgorithmTtlvDeserializer extends AbstractKmipTtlvDeserializer<DrbgAlgorithm, Integer> {
 
-/**
- * TTLV deserializer for DrbgAlgorithm.
- */
-public class DrbgAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<DrbgAlgorithm> {
-    private final KmipTag kmipTag = DrbgAlgorithm.kmipTag;
-    private final EncodingType encodingType = DrbgAlgorithm.encodingType;
-
-    @Override
-    public DrbgAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for DrbgAlgorithm", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        DrbgAlgorithm drbgalgorithm = new DrbgAlgorithm(DrbgAlgorithm.fromValue(value));
-
-        if (!drbgalgorithm.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("DrbgAlgorithm '%d' not supported for spec %s", value, spec));
-        }
-        return drbgalgorithm;
+    public DrbgAlgorithmTtlvDeserializer() {
+        super(DrbgAlgorithm.kmipTag, DrbgAlgorithm.encodingType, Integer.class, value -> new DrbgAlgorithm(DrbgAlgorithm.fromValue(value)));
     }
 }

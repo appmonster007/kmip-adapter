@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.enumeration.CancellationResult;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class CancellationResultTtlvDeserializer extends AbstractKmipTtlvDeserializer<CancellationResult, Integer> {
 
-/**
- * TTLV deserializer for CancellationResult.
- */
-public class CancellationResultTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CancellationResult> {
-    private final KmipTag kmipTag = CancellationResult.kmipTag;
-    private final EncodingType encodingType = CancellationResult.encodingType;
-
-    @Override
-    public CancellationResult deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for CancellationResult", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        CancellationResult cancellationresult = new CancellationResult(CancellationResult.fromValue(value));
-
-        if (!cancellationresult.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("CancellationResult '%d' not supported for spec %s", value, spec));
-        }
-        return cancellationresult;
+    public CancellationResultTtlvDeserializer() {
+        super(CancellationResult.kmipTag, CancellationResult.encodingType, Integer.class, value -> new CancellationResult(CancellationResult.fromValue(value)));
     }
 }

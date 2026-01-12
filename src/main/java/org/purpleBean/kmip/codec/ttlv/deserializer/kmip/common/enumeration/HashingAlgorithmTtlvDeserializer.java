@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class HashingAlgorithmTtlvDeserializer extends AbstractKmipTtlvDeserializer<HashingAlgorithm, Integer> {
 
-/**
- * TTLV deserializer for HashingAlgorithm.
- */
-public class HashingAlgorithmTtlvDeserializer extends KmipDataTypeTtlvDeserializer<HashingAlgorithm> {
-    private final KmipTag kmipTag = HashingAlgorithm.kmipTag;
-    private final EncodingType encodingType = HashingAlgorithm.encodingType;
-
-    @Override
-    public HashingAlgorithm deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for HashingAlgorithm", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        HashingAlgorithm hashingalgorithm = new HashingAlgorithm(HashingAlgorithm.fromValue(value));
-
-        if (!hashingalgorithm.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("HashingAlgorithm '%d' not supported for spec %s", value, spec));
-        }
-        return hashingalgorithm;
+    public HashingAlgorithmTtlvDeserializer() {
+        super(HashingAlgorithm.kmipTag, HashingAlgorithm.encodingType, Integer.class, value -> new HashingAlgorithm(HashingAlgorithm.fromValue(value)));
     }
 }

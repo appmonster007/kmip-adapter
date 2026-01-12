@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.enumeration.NameType;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class NameTypeTtlvDeserializer extends AbstractKmipTtlvDeserializer<NameType, Integer> {
 
-/**
- * TTLV deserializer for NameType.
- */
-public class NameTypeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<NameType> {
-    private final KmipTag kmipTag = NameType.kmipTag;
-    private final EncodingType encodingType = NameType.encodingType;
-
-    @Override
-    public NameType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes())
-                && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for NameType", encodingType.getTypeValue()));
-        }
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = bb.getInt();
-
-        KmipSpec spec = KmipContext.getSpec();
-        NameType nametype = new NameType(NameType.fromValue(value));
-
-        if (!nametype.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("NameType '%d' not supported for spec %s", value, spec));
-        }
-        return nametype;
+    public NameTypeTtlvDeserializer() {
+        super(NameType.kmipTag, NameType.encodingType, Integer.class, value -> new NameType(NameType.fromValue(value)));
     }
 }

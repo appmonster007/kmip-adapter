@@ -1,40 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
 import org.purpleBean.kmip.common.Offset;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+public class OffsetTtlvDeserializer extends AbstractKmipTtlvDeserializer<Offset, Integer> {
 
-public class OffsetTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Offset> {
-    private final KmipTag kmipTag = Offset.kmipTag;
-    private final EncodingType encodingType = Offset.encodingType;
-
-    @Override
-    public Offset deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), kmipTag.getTagBytes()) && obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
-        }
-
-        ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-        int value = mapper.readValue(bb, Integer.class);
-        Offset offset = Offset.builder().value(value).build();
-
-        KmipSpec spec = KmipContext.getSpec();
-
-        if (!offset.isSupported()) {
-            throw new NoSuchElementException(String.format("Offset not supported for spec %s", spec));
-        }
-        return offset;
+    public OffsetTtlvDeserializer() {
+        super(Offset.kmipTag, Offset.encodingType, Integer.class, value -> Offset.builder().value(value).build());
     }
 }
