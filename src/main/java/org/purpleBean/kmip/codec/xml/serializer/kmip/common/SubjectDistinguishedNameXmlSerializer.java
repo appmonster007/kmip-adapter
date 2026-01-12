@@ -1,40 +1,13 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.SubjectDistinguishedName;
+import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
 
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
-public class SubjectDistinguishedNameXmlSerializer extends KmipDataTypeXmlSerializer<SubjectDistinguishedName> {
+public class SubjectDistinguishedNameXmlSerializer extends AbstractKmipXmlSerializer<SubjectDistinguishedName, ByteBuffer> {
 
-    @Override
-    public void serialize(SubjectDistinguishedName subjectDistinguishedName, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!subjectDistinguishedName.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", subjectDistinguishedName.getClass().getSimpleName(), spec));
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = subjectDistinguishedName.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(subjectDistinguishedName);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", subjectDistinguishedName.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", subjectDistinguishedName.getValue());
-        xmlGen.writeEndObject();
+    public SubjectDistinguishedNameXmlSerializer() {
+        super(SubjectDistinguishedName::getValue);
     }
 }

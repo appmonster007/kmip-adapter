@@ -1,40 +1,11 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.CertificateSubjectAlternativeName;
+import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
 
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+public class CertificateSubjectAlternativeNameXmlSerializer extends AbstractKmipXmlSerializer<CertificateSubjectAlternativeName, String> {
 
-public class CertificateSubjectAlternativeNameXmlSerializer extends KmipDataTypeXmlSerializer<CertificateSubjectAlternativeName> {
-
-    @Override
-    public void serialize(CertificateSubjectAlternativeName certificateSubjectAlternativeName, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!certificateSubjectAlternativeName.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", certificateSubjectAlternativeName.getClass().getSimpleName(), spec));
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = certificateSubjectAlternativeName.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(certificateSubjectAlternativeName);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", certificateSubjectAlternativeName.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", certificateSubjectAlternativeName.getValue());
-        xmlGen.writeEndObject();
+    public CertificateSubjectAlternativeNameXmlSerializer() {
+        super(CertificateSubjectAlternativeName::getValue);
     }
 }

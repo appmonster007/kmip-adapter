@@ -8,14 +8,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HexFormat;
 
-public class ByteBufferXmlSerializer extends JsonSerializer<ByteBuffer> {
+public class ByteStringXmlSerializer extends JsonSerializer<ByteBuffer> {
+
     @Override
     public void serialize(ByteBuffer value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        HexFormat hexFormat = HexFormat.of();
-        // Convert byte[] to hex string or any other string format instead of base64
-        String hexString = hexFormat.formatHex(value.array());
-
-        // Output as XML string
-        gen.writeString(hexString);
+        gen.writeString(HexFormat.of().formatHex(value.array()));
     }
 }

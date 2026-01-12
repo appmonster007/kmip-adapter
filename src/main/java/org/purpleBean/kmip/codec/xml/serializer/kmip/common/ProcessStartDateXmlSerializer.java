@@ -1,42 +1,13 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.ProcessStartDate;
+import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
 
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.time.OffsetDateTime;
 
-/**
- * XML serializer for ProcessStartDate.
- */
-public class ProcessStartDateXmlSerializer extends KmipDataTypeXmlSerializer<ProcessStartDate> {
+public class ProcessStartDateXmlSerializer extends AbstractKmipXmlSerializer<ProcessStartDate, OffsetDateTime> {
 
-    @Override
-    public void serialize(ProcessStartDate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException();
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = value.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(value);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", value.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", value.getValue());
-        xmlGen.writeEndObject();
+    public ProcessStartDateXmlSerializer() {
+        super(ProcessStartDate::getValue);
     }
 }

@@ -1,40 +1,12 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.CertificateValue;
+import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
+import java.nio.ByteBuffer;
 
-import javax.xml.namespace.QName;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+public class CertificateValueXmlSerializer extends AbstractKmipXmlSerializer<CertificateValue, ByteBuffer> {
 
-public class CertificateValueXmlSerializer extends KmipDataTypeXmlSerializer<CertificateValue> {
-
-    @Override
-    public void serialize(CertificateValue certificateValue, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!certificateValue.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", certificateValue.getClass().getSimpleName(), spec));
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        // Start element with name from kmipTag
-        String elementName = certificateValue.getKmipTag().getDescription();
-        xmlGen.setNextName(QName.valueOf(elementName));
-        xmlGen.writeStartObject(certificateValue);
-
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeStringField("type", certificateValue.getEncodingType().getDescription());
-        xmlGen.setNextIsAttribute(true);
-        xmlGen.writeObjectField("value", certificateValue.getValue());
-        xmlGen.writeEndObject();
+    public CertificateValueXmlSerializer() {
+        super(CertificateValue::getValue);
     }
 }
