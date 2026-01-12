@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import org.purpleBean.kmip.common.CounterLength;
 import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
+import org.purpleBean.kmip.common.CounterLength;
 
 public class CounterLengthXmlSerializer extends AbstractKmipXmlSerializer<CounterLength, Integer> {
 

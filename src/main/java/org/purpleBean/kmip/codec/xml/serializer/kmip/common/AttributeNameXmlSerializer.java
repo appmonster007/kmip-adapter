@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import org.purpleBean.kmip.common.AttributeName;
 import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
+import org.purpleBean.kmip.common.AttributeName;
 
 public class AttributeNameXmlSerializer extends AbstractKmipXmlSerializer<AttributeName, String> {
 

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
-import org.purpleBean.kmip.common.CertificateSubjectDistinguishedName;
 import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipXmlSerializer;
-import java.nio.ByteBuffer;
+import org.purpleBean.kmip.common.CertificateSubjectDistinguishedName;
 
 public class CertificateSubjectDistinguishedNameXmlSerializer extends AbstractKmipXmlSerializer<CertificateSubjectDistinguishedName, String> {
 
