@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.util.TokenBuffer;
 import org.purpleBean.kmip.*;
 
 import java.io.IOException;
@@ -16,31 +15,49 @@ public class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDe
 
     @Override
     public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        TokenBuffer buffer = new TokenBuffer(p, ctxt);
-        buffer.copyCurrentStructure(p);
+        JsonNode node = p.readValueAsTree();
+        if (node == null) {
+            ctxt.reportInputMismatch(handledType(), "JSON node cannot be null");
+            return null;
+        }
 
-        JsonNode rootNode = buffer.asParser().getCodec().readTree(buffer.asParser());
-        JsonNode tagNode = rootNode.get("tag");
-        JsonNode typeNode = rootNode.get("type");
+        KmipTag tag;
+        try {
+            tag = p.getCodec().treeToValue(node, KmipTag.class);
+            if (tag == null) {
+                ctxt.reportInputMismatch(handledType(), "Invalid KMIP tag");
+                return null;
+            }
+        } catch (Exception e) {
+            ctxt.reportInputMismatch(handledType(), "Failed to parse KMIP tag: " + e.getMessage());
+            return null;
+        }
 
-        if (tagNode == null || typeNode == null) {
+        JsonNode typeNode = node.get("type");
+        if (typeNode == null
+                || !typeNode.isTextual()
+        ) {
+            ctxt.reportInputMismatch(handledType(), String.format("Missing or non-text 'type' field for " + handledType().getSimpleName()));
             return null;
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        KmipTag.Value kmipTagValue = KmipTag.fromName(spec, tagNode.asText());
         EncodingType encodingType = EncodingType.fromName(typeNode.asText()).orElse(null);
 
-        if (kmipTagValue == null || encodingType == null) {
+        if (encodingType == null) {
             return null;
         }
 
-        Class<? extends KmipDataType> clazz = KmipDataType.getClassFromRegistry(kmipTagValue, encodingType);
+        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(tag.getValue(), encodingType);
         if (clazz == null) {
-            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType));
+            throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s for spec %s", tag.getValue(), encodingType, spec));
         }
 
-        return (T) ctxt.readValue(buffer.asParser(), clazz);
+        return (T) ctxt.readValue(p.getCodec().treeAsTokens(node), clazz);
+    }
+
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType) {
+        return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 
     @Override
