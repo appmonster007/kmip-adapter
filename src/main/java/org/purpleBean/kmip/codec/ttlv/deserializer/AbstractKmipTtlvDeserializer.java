@@ -1,8 +1,6 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
@@ -39,8 +37,9 @@ public abstract class AbstractKmipTtlvDeserializer<T extends KmipDataType, V> ex
         V value = mapper.readValue(bb, valueClass);
         T result = factory.apply(value);
 
+        KmipSpec spec = KmipContext.getSpec();
         if (!result.isSupported()) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException(String.format("%s not supported for spec %s", handledType().getSimpleName(), spec));
         }
         return result;
     }

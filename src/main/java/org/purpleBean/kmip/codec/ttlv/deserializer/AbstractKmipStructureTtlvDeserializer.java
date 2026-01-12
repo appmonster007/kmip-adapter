@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class AbstractKmipStructureTtlvDeserializer<T extends KmipDataType, B> extends KmipDataTypeTtlvDeserializer<T> {
 
@@ -37,7 +38,7 @@ public abstract class AbstractKmipStructureTtlvDeserializer<T extends KmipDataTy
         T result = build(builder);
 
         if (!result.isSupported()) {
-            throw new IllegalArgumentException(String.format("%s not supported for spec %s", handledType().getSimpleName(), spec));
+            throw new NoSuchElementException(String.format("%s not supported for spec %s", handledType().getSimpleName(), spec));
         }
         return result;
     }

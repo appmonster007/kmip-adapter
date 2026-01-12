@@ -42,8 +42,8 @@ public abstract class AbstractKmipStructureXmlDeserializer<T extends KmipDataTyp
             p.nextToken();
         }
 
-        B builder = createBuilder();
         KmipSpec spec = KmipContext.getSpec();
+        B builder = createBuilder();
 
         while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
             String fieldName = p.currentName();

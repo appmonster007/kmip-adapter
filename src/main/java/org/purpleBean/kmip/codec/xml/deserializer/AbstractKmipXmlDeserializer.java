@@ -8,7 +8,6 @@ import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 public abstract class AbstractKmipXmlDeserializer<T extends KmipDataType, V> extends KmipDataTypeXmlDeserializer<T> {
@@ -76,8 +75,8 @@ public abstract class AbstractKmipXmlDeserializer<T extends KmipDataType, V> ext
 
         KmipSpec spec = KmipContext.getSpec();
         if (!result.isSupported()) {
-            throw new NoSuchElementException(
-                    String.format("%s with value '%s' not supported for spec %s", handledType().getSimpleName(), value, spec));
+            ctxt.reportInputMismatch(handledType(), String.format("%s not supported for spec %s", handledType().getSimpleName(), spec));
+            return null;
         }
 
         return result;
