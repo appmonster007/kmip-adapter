@@ -1,43 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.AbstractKmipTtlvSerializer;
 import org.purpleBean.kmip.common.enumeration.MaskGenerator;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
+public class MaskGeneratorTtlvSerializer extends AbstractKmipTtlvSerializer<MaskGenerator, Integer> {
 
-/**
- * TTLV serializer for MaskGenerator.
- */
-public class MaskGeneratorTtlvSerializer extends KmipDataTypeTtlvSerializer<MaskGenerator> {
-
-    @Override
-    public ByteBuffer serialize(MaskGenerator value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    public TtlvObject serializeToTtlvObject(MaskGenerator value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("MaskGenerator '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue().getValue()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
+    public MaskGeneratorTtlvSerializer() {
+        super(value -> value.getValue().getValue());
     }
 }

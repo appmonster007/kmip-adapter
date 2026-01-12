@@ -1,43 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.enumeration;
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.AbstractKmipTtlvSerializer;
 import org.purpleBean.kmip.common.enumeration.PaddingMethod;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
+public class PaddingMethodTtlvSerializer extends AbstractKmipTtlvSerializer<PaddingMethod, Integer> {
 
-/**
- * TTLV serializer for PaddingMethod.
- */
-public class PaddingMethodTtlvSerializer extends KmipDataTypeTtlvSerializer<PaddingMethod> {
-
-    @Override
-    public ByteBuffer serialize(PaddingMethod value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    public TtlvObject serializeToTtlvObject(PaddingMethod value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("PaddingMethod '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = value.getEncodingType().getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue().getValue()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
+    public PaddingMethodTtlvSerializer() {
+        super(value -> value.getValue().getValue());
     }
 }
