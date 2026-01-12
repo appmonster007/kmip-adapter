@@ -1,35 +1,13 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.CompromiseDate;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.time.OffsetDateTime;
 
-/**
- * JSON serializer for CompromiseDate.
- */
-public class CompromiseDateJsonSerializer extends KmipDataTypeJsonSerializer<CompromiseDate> {
+public class CompromiseDateJsonSerializer extends AbstractKmipJsonSerializer<CompromiseDate, OffsetDateTime> {
 
-    @Override
-    public void serialize(CompromiseDate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (value == null) return;
-
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
-        gen.writeObjectField("value", value.getValue());
-        gen.writeEndObject();
+    public CompromiseDateJsonSerializer() {
+        super(CompromiseDate::getValue);
     }
 }

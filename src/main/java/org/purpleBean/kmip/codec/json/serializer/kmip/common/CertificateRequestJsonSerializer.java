@@ -1,36 +1,13 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.CertificateRequest;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
-public class CertificateRequestJsonSerializer extends KmipDataTypeJsonSerializer<CertificateRequest> {
+public class CertificateRequestJsonSerializer extends AbstractKmipJsonSerializer<CertificateRequest, ByteBuffer> {
 
-    @Override
-    public void serialize(CertificateRequest certificateRequest, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (certificateRequest == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!certificateRequest.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", certificateRequest.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(certificateRequest.getKmipTag());
-        gen.writeStringField("type", certificateRequest.getEncodingType().getDescription());
-        gen.writeObjectField("value", certificateRequest.getValue());
-        gen.writeEndObject();
+    public CertificateRequestJsonSerializer() {
+        super(CertificateRequest::getValue);
     }
 }

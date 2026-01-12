@@ -1,36 +1,11 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.DataLength;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+public class DataLengthJsonSerializer extends AbstractKmipJsonSerializer<DataLength, Integer> {
 
-public class DataLengthJsonSerializer extends KmipDataTypeJsonSerializer<DataLength> {
-
-    @Override
-    public void serialize(DataLength dataLength, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (dataLength == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!dataLength.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", dataLength.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(dataLength.getKmipTag());
-        gen.writeStringField("type", dataLength.getEncodingType().getDescription());
-        gen.writeObjectField("value", dataLength.getValue());
-        gen.writeEndObject();
+    public DataLengthJsonSerializer() {
+        super(DataLength::getValue);
     }
 }

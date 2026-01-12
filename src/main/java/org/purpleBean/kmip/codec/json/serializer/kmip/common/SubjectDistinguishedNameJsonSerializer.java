@@ -1,36 +1,13 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.SubjectDistinguishedName;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
-public class SubjectDistinguishedNameJsonSerializer extends KmipDataTypeJsonSerializer<SubjectDistinguishedName> {
+public class SubjectDistinguishedNameJsonSerializer extends AbstractKmipJsonSerializer<SubjectDistinguishedName, ByteBuffer> {
 
-    @Override
-    public void serialize(SubjectDistinguishedName subjectDistinguishedName, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (subjectDistinguishedName == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!subjectDistinguishedName.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", subjectDistinguishedName.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(subjectDistinguishedName.getKmipTag());
-        gen.writeStringField("type", subjectDistinguishedName.getEncodingType().getDescription());
-        gen.writeObjectField("value", subjectDistinguishedName.getValue());
-        gen.writeEndObject();
+    public SubjectDistinguishedNameJsonSerializer() {
+        super(SubjectDistinguishedName::getValue);
     }
 }

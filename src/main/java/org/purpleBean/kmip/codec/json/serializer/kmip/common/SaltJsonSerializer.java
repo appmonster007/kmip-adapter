@@ -1,36 +1,13 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.Salt;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
-public class SaltJsonSerializer extends KmipDataTypeJsonSerializer<Salt> {
+public class SaltJsonSerializer extends AbstractKmipJsonSerializer<Salt, ByteBuffer> {
 
-    @Override
-    public void serialize(Salt salt, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (salt == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!salt.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", salt.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(salt.getKmipTag());
-        gen.writeStringField("type", salt.getEncodingType().getDescription());
-        gen.writeObjectField("value", salt.getValue());
-        gen.writeEndObject();
+    public SaltJsonSerializer() {
+        super(Salt::getValue);
     }
 }

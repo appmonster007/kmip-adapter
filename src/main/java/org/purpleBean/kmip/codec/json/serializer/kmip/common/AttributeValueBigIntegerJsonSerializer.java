@@ -1,36 +1,13 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.AttributeValueBigInteger;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 
-public class AttributeValueBigIntegerJsonSerializer extends KmipDataTypeJsonSerializer<AttributeValueBigInteger> {
+public class AttributeValueBigIntegerJsonSerializer extends AbstractKmipJsonSerializer<AttributeValueBigInteger, BigInteger> {
 
-    @Override
-    public void serialize(AttributeValueBigInteger attributeValueBigInteger, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-        // Validation: Null check
-        if (attributeValueBigInteger == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!attributeValueBigInteger.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", attributeValueBigInteger.getKmipTag().getDescription(), spec)
-            );
-        }
-
-        gen.writeStartObject();
-        gen.writeObject(attributeValueBigInteger.getKmipTag());
-        gen.writeStringField("type", attributeValueBigInteger.getEncodingType().getDescription());
-        gen.writeObjectField("value", attributeValueBigInteger.getValue());
-        gen.writeEndObject();
+    public AttributeValueBigIntegerJsonSerializer() {
+        super(AttributeValueBigInteger::getValue);
     }
 }

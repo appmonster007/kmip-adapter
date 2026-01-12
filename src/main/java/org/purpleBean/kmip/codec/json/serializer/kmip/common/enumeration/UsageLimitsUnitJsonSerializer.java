@@ -1,44 +1,11 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip.common.enumeration;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+public class UsageLimitsUnitJsonSerializer extends AbstractKmipJsonSerializer<UsageLimitsUnit, String> {
 
-/**
- * JSON serializer for UsageLimitsUnit.
- */
-public class UsageLimitsUnitJsonSerializer extends KmipDataTypeJsonSerializer<UsageLimitsUnit> {
-
-    @Override
-    public void serialize(UsageLimitsUnit value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-
-        if (value == null) {
-            return;
-        }
-
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(
-                    String.format("UsageLimitsUnit '%s' is not supported for KMIP spec %s",
-                            value.getDescription(), spec)
-            );
-        }
-
-        if (value.getDescription() == null || value.getDescription().trim().isEmpty()) {
-            throw new IllegalStateException("UsageLimitsUnit must have a valid description");
-        }
-
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeObject(value.getKmipTag());
-        jsonGenerator.writeStringField("type", value.getEncodingType().getDescription());
-        jsonGenerator.writeStringField("value", value.getDescription());
-        jsonGenerator.writeEndObject();
+    public UsageLimitsUnitJsonSerializer() {
+        super(UsageLimitsUnit::getDescription);
     }
 }
