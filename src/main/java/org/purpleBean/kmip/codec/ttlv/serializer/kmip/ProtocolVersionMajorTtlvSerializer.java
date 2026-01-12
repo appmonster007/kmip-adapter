@@ -1,36 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.kmip;
 
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.codec.ttlv.serializer.AbstractKmipTtlvSerializer;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
+public class ProtocolVersionMajorTtlvSerializer extends AbstractKmipTtlvSerializer<ProtocolVersion.ProtocolVersionMajor, Integer> {
 
-public class ProtocolVersionMajorTtlvSerializer extends KmipDataTypeTtlvSerializer<ProtocolVersion.ProtocolVersionMajor> {
-    @Override
-    public ByteBuffer serialize(ProtocolVersion.ProtocolVersionMajor value, TtlvMapper mapper) throws IOException {
-        return serializeToTtlvObject(value, mapper).toByteBuffer();
-    }
-
-    private TtlvObject serializeToTtlvObject(ProtocolVersion.ProtocolVersionMajor value, TtlvMapper mapper) throws IOException {
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new UnsupportedEncodingException();
-        }
-
-        byte[] tag = value.getKmipTag().getTagBytes();
-        byte type = EncodingType.INTEGER.getTypeValue();
-        byte[] payload = mapper.writeValueAsByteBuffer(value.getValue()).array();
-
-        return TtlvObject.builder()
-                .tag(tag)
-                .type(type)
-                .value(payload)
-                .build();
+    public ProtocolVersionMajorTtlvSerializer() {
+        super(ProtocolVersion.ProtocolVersionMajor::getValue);
     }
 }
