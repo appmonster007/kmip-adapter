@@ -9,13 +9,9 @@ import org.purpleBean.kmip.common.structure.TransparentDsaPublicKey;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
 
 import java.math.BigInteger;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 @DisplayName("TransparentDsaPublicKey JSON Serialization Tests")
 class TransparentDsaPublicKeyJsonTest extends AbstractJsonSerializationSuite<TransparentDsaPublicKey> {
-
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
     protected Class<TransparentDsaPublicKey> type() {

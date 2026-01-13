@@ -4,8 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.AdjustmentType;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
 
-@DisplayName("AdjustmentType XML Serialization")
+@DisplayName("AdjustmentType Xml Serialization Tests")
 class AdjustmentTypeXmlTest extends AbstractXmlSerializationSuite<AdjustmentType> {
+
     @Override
     protected Class<AdjustmentType> type() {
         return AdjustmentType.class;

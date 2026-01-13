@@ -1,6 +1,6 @@
-org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KeyMaterialTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMajorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionMinorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.ProtocolVersionTtlvDeserializer

@@ -14,23 +14,41 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AdjustmentTypeTest extends AbstractKmipEnumerationSuite<AdjustmentType> {
 
     @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
     protected Class<AdjustmentType> type() {
         return AdjustmentType.class;
     }
 
     @Override
     protected AdjustmentType createDefault() {
-        return new AdjustmentType(AdjustmentType.Standard.INCREMENT);
+        // For now, using the first available value if any exist.
+        if (AdjustmentType.Standard.values().length > 0) {
+            return new AdjustmentType(AdjustmentType.Standard.values()[0]);
+        }
+        // Fallback for enums with no predefined Standard values (e.g., during initial generation)
+        // This will likely fail if the enum has no values, but that's expected for an incomplete enum.
+        return new AdjustmentType(AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)));
     }
 
     @Override
     protected AdjustmentType createEqualToDefault() {
-        return new AdjustmentType(AdjustmentType.Standard.INCREMENT);
+        if (AdjustmentType.Standard.values().length > 0) {
+            return new AdjustmentType(AdjustmentType.Standard.values()[0]);
+        }
+        return new AdjustmentType(AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)));
     }
 
     @Override
     protected AdjustmentType createDifferentFromDefault() {
-        return new AdjustmentType(AdjustmentType.Standard.DECREMENT);
+        if (AdjustmentType.Standard.values().length > 1) {
+            return new AdjustmentType(AdjustmentType.Standard.values()[1]);
+        }
+        // Fallback for enums with only one or no predefined Standard values
+        return new AdjustmentType(AdjustmentType.register(0x80000002, "X-Variant-Value-2", Set.of(KmipSpec.UnknownVersion)));
     }
 
     @Override

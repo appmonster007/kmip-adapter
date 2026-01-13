@@ -25,7 +25,6 @@ public class BatchCount implements KmipDataType {
         }
     }
 
-
     @NonNull
     private final Integer value;
 

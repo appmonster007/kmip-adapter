@@ -1,6 +1,6 @@
-org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.kmip.KmipAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.KeyMaterialJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.KmipAttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMajorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.kmip.ProtocolVersionMinorJsonDeserializer

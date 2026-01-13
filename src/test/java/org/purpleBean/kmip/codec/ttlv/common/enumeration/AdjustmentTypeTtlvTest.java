@@ -4,8 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.AdjustmentType;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
 
-@DisplayName("AdjustmentType TTLV Serialization")
+@DisplayName("AdjustmentType Ttlv Serialization Tests")
 class AdjustmentTypeTtlvTest extends AbstractTtlvSerializationSuite<AdjustmentType> {
+
     @Override
     protected Class<AdjustmentType> type() {
         return AdjustmentType.class;
