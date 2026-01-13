@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.SignatureData;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.nio.ByteBuffer;
 
 @DisplayName("SignatureData TTLV Serialization Tests")
-class SignatureDataTtlvTest extends AbstractTtlvSerializationSuite<SignatureData> {
+class SignatureDataTtlvTest extends AbstractTtlvSerializationTestSuite<SignatureData> {
 
     @Override
     protected Class<SignatureData> type() {

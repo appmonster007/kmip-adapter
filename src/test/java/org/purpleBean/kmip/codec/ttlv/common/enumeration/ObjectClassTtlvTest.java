@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ObjectClass;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ObjectClass TTLV Serialization")
-class ObjectClassTtlvTest extends AbstractTtlvSerializationSuite<ObjectClass> {
+class ObjectClassTtlvTest extends AbstractTtlvSerializationTestSuite<ObjectClass> {
     @Override
     protected Class<ObjectClass> type() {
         return ObjectClass.class;

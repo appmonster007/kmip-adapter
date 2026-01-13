@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("InitializationVector Domain Tests")
-class InitializationVectorTest extends AbstractKmipDataTypeSuite<InitializationVector> {
+class InitializationVectorTest extends AbstractKmipDataTypeTestSuite<InitializationVector> {
 
     @Override
     protected Class<InitializationVector> type() {

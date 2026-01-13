@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ProtectionLevel;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ProtectionLevel TTLV Serialization")
-class ProtectionLevelTtlvTest extends AbstractTtlvSerializationSuite<ProtectionLevel> {
+class ProtectionLevelTtlvTest extends AbstractTtlvSerializationTestSuite<ProtectionLevel> {
     @Override
     protected Class<ProtectionLevel> type() {
         return ProtectionLevel.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ValidationAuthorityType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ValidationAuthorityType JSON Serialization")
-class ValidationAuthorityTypeJsonTest extends AbstractJsonSerializationSuite<ValidationAuthorityType> {
+class ValidationAuthorityTypeJsonTest extends AbstractJsonSerializationTestSuite<ValidationAuthorityType> {
     @Override
     protected Class<ValidationAuthorityType> type() {
         return ValidationAuthorityType.class;

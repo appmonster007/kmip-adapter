@@ -2,13 +2,13 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("ValidityDate Domain Tests")
-class ValidityDateTest extends AbstractKmipDataTypeSuite<ValidityDate> {
+class ValidityDateTest extends AbstractKmipDataTypeTestSuite<ValidityDate> {
 
     @Override
     protected Class<ValidityDate> type() {

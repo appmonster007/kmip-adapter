@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("StorageStatusMask Domain Tests")
-class StorageStatusMaskTest extends AbstractKmipDataTypeSuite<StorageStatusMask> {
+class StorageStatusMaskTest extends AbstractKmipDataTypeTestSuite<StorageStatusMask> {
 
     @Override
     protected Class<StorageStatusMask> type() {

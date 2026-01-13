@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AsynchronousCorrelationValue JSON Serialization Tests")
-class AsynchronousCorrelationValueJsonTest extends AbstractJsonSerializationSuite<AsynchronousCorrelationValue> {
+class AsynchronousCorrelationValueJsonTest extends AbstractJsonSerializationTestSuite<AsynchronousCorrelationValue> {
 
     @Override
     protected Class<AsynchronousCorrelationValue> type() {

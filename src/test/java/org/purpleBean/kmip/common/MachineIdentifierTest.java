@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("MachineIdentifier Domain Tests")
-class MachineIdentifierTest extends AbstractKmipDataTypeSuite<MachineIdentifier> {
+class MachineIdentifierTest extends AbstractKmipDataTypeTestSuite<MachineIdentifier> {
 
     @Override
     protected Class<MachineIdentifier> type() {

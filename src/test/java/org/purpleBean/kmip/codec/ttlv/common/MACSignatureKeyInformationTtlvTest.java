@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MACSignatureKeyInformation;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("MACSignatureKeyInformation TTLV Serialization Tests")
-class MACSignatureKeyInformationTtlvTest extends AbstractTtlvSerializationSuite<MACSignatureKeyInformation> {
+class MACSignatureKeyInformationTtlvTest extends AbstractTtlvSerializationTestSuite<MACSignatureKeyInformation> {
 
     @Override
     protected Class<MACSignatureKeyInformation> type() {

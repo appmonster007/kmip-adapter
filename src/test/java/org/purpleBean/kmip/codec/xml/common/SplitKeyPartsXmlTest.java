@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.SplitKeyParts;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SplitKeyParts XML Serialization Tests")
-class SplitKeyPartsXmlTest extends AbstractXmlSerializationSuite<SplitKeyParts> {
+class SplitKeyPartsXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyParts> {
 
     @Override
     protected Class<SplitKeyParts> type() {

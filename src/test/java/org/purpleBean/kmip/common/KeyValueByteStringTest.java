@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("KeyValue.ByteString Domain Tests")
-class KeyValueByteStringTest extends AbstractKmipDataTypeSuite<KeyValueByteString> {
+class KeyValueByteStringTest extends AbstractKmipDataTypeTestSuite<KeyValueByteString> {
 
     @Override
     protected Class<KeyValueByteString> type() {

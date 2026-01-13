@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("AttributeValue.LongInteger Domain Tests")
-class AttributeValueLongIntegerTest extends AbstractKmipDataTypeSuite<AttributeValueLongInteger> {
+class AttributeValueLongIntegerTest extends AbstractKmipDataTypeTestSuite<AttributeValueLongInteger> {
 
     @Override
     protected Class<AttributeValueLongInteger> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.IssuerAlternativeName;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("IssuerAlternativeName JSON Serialization Tests")
-class IssuerAlternativeNameJsonTest extends AbstractJsonSerializationSuite<IssuerAlternativeName> {
+class IssuerAlternativeNameJsonTest extends AbstractJsonSerializationTestSuite<IssuerAlternativeName> {
 
     @Override
     protected Class<IssuerAlternativeName> type() {

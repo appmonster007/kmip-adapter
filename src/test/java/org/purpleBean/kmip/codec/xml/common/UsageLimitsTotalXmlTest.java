@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UsageLimitsTotal XML Serialization Tests")
-class UsageLimitsTotalXmlTest extends AbstractXmlSerializationSuite<UsageLimitsTotal> {
+class UsageLimitsTotalXmlTest extends AbstractXmlSerializationTestSuite<UsageLimitsTotal> {
 
     @Override
     protected Class<UsageLimitsTotal> type() {

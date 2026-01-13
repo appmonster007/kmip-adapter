@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.PaddingMethod;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("PaddingMethod JSON Serialization")
-class PaddingMethodJsonTest extends AbstractJsonSerializationSuite<PaddingMethod> {
+class PaddingMethodJsonTest extends AbstractJsonSerializationTestSuite<PaddingMethod> {
     @Override
     protected Class<PaddingMethod> type() {
         return PaddingMethod.class;

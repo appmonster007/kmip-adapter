@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.LinkedObjectIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("LinkedObjectIdentifier JSON Serialization Tests")
-class LinkedObjectIdentifierJsonTest extends AbstractJsonSerializationSuite<LinkedObjectIdentifier> {
+class LinkedObjectIdentifierJsonTest extends AbstractJsonSerializationTestSuite<LinkedObjectIdentifier> {
 
     @Override
     protected Class<LinkedObjectIdentifier> type() {

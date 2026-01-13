@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.SplitKeyThreshold;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SplitKeyThreshold XML Serialization Tests")
-class SplitKeyThresholdXmlTest extends AbstractXmlSerializationSuite<SplitKeyThreshold> {
+class SplitKeyThresholdXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyThreshold> {
 
     @Override
     protected Class<SplitKeyThreshold> type() {

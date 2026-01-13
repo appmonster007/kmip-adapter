@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CryptographicUsageMask;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CryptographicUsageMask JSON Serialization Tests")
-class CryptographicUsageMaskJsonTest extends AbstractJsonSerializationSuite<CryptographicUsageMask> {
+class CryptographicUsageMaskJsonTest extends AbstractJsonSerializationTestSuite<CryptographicUsageMask> {
 
     @Override
     protected Class<CryptographicUsageMask> type() {

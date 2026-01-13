@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RecommendedCurve XML Serialization")
-class RecommendedCurveXmlTest extends AbstractXmlSerializationSuite<RecommendedCurve> {
+class RecommendedCurveXmlTest extends AbstractXmlSerializationTestSuite<RecommendedCurve> {
     @Override
     protected Class<RecommendedCurve> type() {
         return RecommendedCurve.class;

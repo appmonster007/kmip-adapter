@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DeviceIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DeviceIdentifier JSON Serialization Tests")
-class DeviceIdentifierJsonTest extends AbstractJsonSerializationSuite<DeviceIdentifier> {
+class DeviceIdentifierJsonTest extends AbstractJsonSerializationTestSuite<DeviceIdentifier> {
 
     @Override
     protected Class<DeviceIdentifier> type() {

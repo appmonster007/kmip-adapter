@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.TicketType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.util.Set;
 
 @DisplayName("TicketType TTLV Serialization")
-class TicketTypeTtlvTest extends AbstractTtlvSerializationSuite<TicketType> {
+class TicketTypeTtlvTest extends AbstractTtlvSerializationTestSuite<TicketType> {
     @Override
     protected Class<TicketType> type() {
         return TicketType.class;

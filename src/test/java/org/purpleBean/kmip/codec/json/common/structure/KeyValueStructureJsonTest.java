@@ -8,12 +8,12 @@ import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.KeyMaterialByteString;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.common.structure.KeyValueStructure;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.List;
 
 @DisplayName("KeyValueStructure JSON Serialization Tests")
-class KeyValueStructureJsonTest extends AbstractJsonSerializationSuite<KeyValueStructure> {
+class KeyValueStructureJsonTest extends AbstractJsonSerializationTestSuite<KeyValueStructure> {
 
     @Override
     protected void setupDefaultSpec() {

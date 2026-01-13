@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MaximumResponseSize;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("MaximumResponseSize XML Serialization Tests")
-class MaximumResponseSizeXmlTest extends AbstractXmlSerializationSuite<MaximumResponseSize> {
+class MaximumResponseSizeXmlTest extends AbstractXmlSerializationTestSuite<MaximumResponseSize> {
 
     @Override
     protected Class<MaximumResponseSize> type() {

@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CertificateSubjectAlternativeName;
 import org.purpleBean.kmip.common.CertificateSubjectDistinguishedName;
 import org.purpleBean.kmip.common.structure.CertificateSubject;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CertificateSubject Xml Serialization Tests")
-class CertificateSubjectXmlTest extends AbstractXmlSerializationSuite<CertificateSubject> {
+class CertificateSubjectXmlTest extends AbstractXmlSerializationTestSuite<CertificateSubject> {
 
     @Override
     protected Class<CertificateSubject> type() {

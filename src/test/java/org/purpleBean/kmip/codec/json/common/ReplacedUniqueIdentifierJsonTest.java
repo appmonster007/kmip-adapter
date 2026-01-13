@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.ReplacedUniqueIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ReplacedUniqueIdentifier JSON Serialization Tests")
-class ReplacedUniqueIdentifierJsonTest extends AbstractJsonSerializationSuite<ReplacedUniqueIdentifier> {
+class ReplacedUniqueIdentifierJsonTest extends AbstractJsonSerializationTestSuite<ReplacedUniqueIdentifier> {
 
     @Override
     protected Class<ReplacedUniqueIdentifier> type() {

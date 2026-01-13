@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.LinkType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("LinkType XML Serialization")
-class LinkTypeXmlTest extends AbstractXmlSerializationSuite<LinkType> {
+class LinkTypeXmlTest extends AbstractXmlSerializationTestSuite<LinkType> {
     @Override
     protected Class<LinkType> type() {
         return LinkType.class;

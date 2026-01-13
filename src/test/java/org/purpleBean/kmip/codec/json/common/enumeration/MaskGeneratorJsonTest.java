@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.MaskGenerator;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.Set;
 
 @DisplayName("MaskGenerator JSON Serialization")
-class MaskGeneratorJsonTest extends AbstractJsonSerializationSuite<MaskGenerator> {
+class MaskGeneratorJsonTest extends AbstractJsonSerializationTestSuite<MaskGenerator> {
     @Override
     protected Class<MaskGenerator> type() {
         return MaskGenerator.class;

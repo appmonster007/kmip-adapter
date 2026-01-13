@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AlternativeNameValue;
 import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.common.structure.AlternativeName;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AlternativeName Json Serialization Tests")
-class AlternativeNameJsonTest extends AbstractJsonSerializationSuite<AlternativeName> {
+class AlternativeNameJsonTest extends AbstractJsonSerializationTestSuite<AlternativeName> {
 
     @Override
     protected Class<AlternativeName> type() {

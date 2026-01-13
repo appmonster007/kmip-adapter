@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("PublicKeyUniqueIdentifier Domain Tests")
-class PublicKeyUniqueIdentifierTest extends AbstractKmipDataTypeSuite<PublicKeyUniqueIdentifier> {
+class PublicKeyUniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<PublicKeyUniqueIdentifier> {
 
     @Override
     protected Class<PublicKeyUniqueIdentifier> type() {

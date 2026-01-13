@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.LeaseTime;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("LeaseTime XML Serialization Tests")
-class LeaseTimeXmlTest extends AbstractXmlSerializationSuite<LeaseTime> {
+class LeaseTimeXmlTest extends AbstractXmlSerializationTestSuite<LeaseTime> {
 
     @Override
     protected Class<LeaseTime> type() {

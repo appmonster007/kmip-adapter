@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Modulus;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("Modulus XML Serialization Tests")
-class ModulusXmlTest extends AbstractXmlSerializationSuite<Modulus> {
+class ModulusXmlTest extends AbstractXmlSerializationTestSuite<Modulus> {
 
     @Override
     protected Class<Modulus> type() {

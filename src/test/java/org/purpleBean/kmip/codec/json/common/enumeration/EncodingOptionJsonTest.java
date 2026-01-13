@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.EncodingOption;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("EncodingOption JSON Serialization")
-class EncodingOptionJsonTest extends AbstractJsonSerializationSuite<EncodingOption> {
+class EncodingOptionJsonTest extends AbstractJsonSerializationTestSuite<EncodingOption> {
     @Override
     protected Class<EncodingOption> type() {
         return EncodingOption.class;

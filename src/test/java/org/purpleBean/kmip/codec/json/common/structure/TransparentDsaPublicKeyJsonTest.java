@@ -6,12 +6,12 @@ import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.Y;
 import org.purpleBean.kmip.common.structure.TransparentDsaPublicKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("TransparentDsaPublicKey JSON Serialization Tests")
-class TransparentDsaPublicKeyJsonTest extends AbstractJsonSerializationSuite<TransparentDsaPublicKey> {
+class TransparentDsaPublicKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentDsaPublicKey> {
 
     @Override
     protected Class<TransparentDsaPublicKey> type() {

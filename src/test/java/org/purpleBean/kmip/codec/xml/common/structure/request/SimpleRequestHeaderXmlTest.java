@@ -3,10 +3,10 @@ package org.purpleBean.kmip.codec.xml.common.structure.request;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SimpleRequestHeader XML Serialization")
-class SimpleRequestHeaderXmlTest extends AbstractXmlSerializationSuite<SimpleRequestHeader> {
+class SimpleRequestHeaderXmlTest extends AbstractXmlSerializationTestSuite<SimpleRequestHeader> {
 
     @Override
     protected Class<SimpleRequestHeader> type() {

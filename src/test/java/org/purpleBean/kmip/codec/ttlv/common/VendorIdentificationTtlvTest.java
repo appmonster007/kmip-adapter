@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.VendorIdentification;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("VendorIdentification TTLV Serialization Tests")
-class VendorIdentificationTtlvTest extends AbstractTtlvSerializationSuite<VendorIdentification> {
+class VendorIdentificationTtlvTest extends AbstractTtlvSerializationTestSuite<VendorIdentification> {
 
     @Override
     protected Class<VendorIdentification> type() {

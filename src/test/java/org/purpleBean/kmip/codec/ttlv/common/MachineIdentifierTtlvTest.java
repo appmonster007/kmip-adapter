@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MachineIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("MachineIdentifier TTLV Serialization Tests")
-class MachineIdentifierTtlvTest extends AbstractTtlvSerializationSuite<MachineIdentifier> {
+class MachineIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<MachineIdentifier> {
 
     @Override
     protected Class<MachineIdentifier> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueInterval;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AttributeValue.Interval JSON Serialization Tests")
-class AttributeValueIntervalJsonTest extends AbstractJsonSerializationSuite<AttributeValueInterval> {
+class AttributeValueIntervalJsonTest extends AbstractJsonSerializationTestSuite<AttributeValueInterval> {
 
     @Override
     protected Class<AttributeValueInterval> type() {

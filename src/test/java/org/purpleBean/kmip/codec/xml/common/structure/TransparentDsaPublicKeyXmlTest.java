@@ -6,12 +6,12 @@ import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.Y;
 import org.purpleBean.kmip.common.structure.TransparentDsaPublicKey;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("TransparentDsaPublicKey Xml Serialization Tests")
-class TransparentDsaPublicKeyXmlTest extends AbstractXmlSerializationSuite<TransparentDsaPublicKey> {
+class TransparentDsaPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<TransparentDsaPublicKey> {
 
     @Override
     protected Class<TransparentDsaPublicKey> type() {

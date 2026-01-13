@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.SplitKeyPolynomial;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SplitKeyPolynomial XML Serialization")
-class SplitKeyPolynomialXmlTest extends AbstractXmlSerializationSuite<SplitKeyPolynomial> {
+class SplitKeyPolynomialXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyPolynomial> {
     @Override
     protected Class<SplitKeyPolynomial> type() {
         return SplitKeyPolynomial.class;

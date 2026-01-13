@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueLongInteger;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AttributeValue.LongInteger TTLV Serialization Tests")
-class AttributeValueLongIntegerTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueLongInteger> {
+class AttributeValueLongIntegerTtlvTest extends AbstractTtlvSerializationTestSuite<AttributeValueLongInteger> {
 
     @Override
     protected Class<AttributeValueLongInteger> type() {

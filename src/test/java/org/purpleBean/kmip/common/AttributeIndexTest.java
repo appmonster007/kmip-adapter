@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("AttributeIndex Domain Tests")
-class AttributeIndexTest extends AbstractKmipDataTypeSuite<AttributeIndex> {
+class AttributeIndexTest extends AbstractKmipDataTypeTestSuite<AttributeIndex> {
 
     @Override
     protected Class<AttributeIndex> type() {

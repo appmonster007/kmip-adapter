@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.common.structure.RevocationReason;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RevocationReason Xml Serialization Tests")
-class RevocationReasonXmlTest extends AbstractXmlSerializationSuite<RevocationReason> {
+class RevocationReasonXmlTest extends AbstractXmlSerializationTestSuite<RevocationReason> {
 
     @Override
     protected Class<RevocationReason> type() {

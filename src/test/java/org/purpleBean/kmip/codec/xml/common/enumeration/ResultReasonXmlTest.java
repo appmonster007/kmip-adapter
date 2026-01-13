@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ResultReason;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ResultReason XML Serialization")
-class ResultReasonXmlTest extends AbstractXmlSerializationSuite<ResultReason> {
+class ResultReasonXmlTest extends AbstractXmlSerializationTestSuite<ResultReason> {
     @Override
     protected Class<ResultReason> type() {
         return ResultReason.class;

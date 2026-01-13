@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.BatchCount;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("BatchCount JSON Serialization Tests")
-class BatchCountJsonTest extends AbstractJsonSerializationSuite<BatchCount> {
+class BatchCountJsonTest extends AbstractJsonSerializationTestSuite<BatchCount> {
 
     @Override
     protected Class<BatchCount> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.IVCounterNonce;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("IVCounterNonce JSON Serialization Tests")
-class IVCounterNonceJsonTest extends AbstractJsonSerializationSuite<IVCounterNonce> {
+class IVCounterNonceJsonTest extends AbstractJsonSerializationTestSuite<IVCounterNonce> {
 
     @Override
     protected Class<IVCounterNonce> type() {

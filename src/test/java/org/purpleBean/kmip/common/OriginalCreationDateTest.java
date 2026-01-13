@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -13,7 +13,7 @@ import java.time.ZoneOffset;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("OriginalCreationDate Domain Tests")
-class OriginalCreationDateTest extends AbstractKmipDataTypeAttributeSuite<OriginalCreationDate> {
+class OriginalCreationDateTest extends AbstractKmipDataTypeAttributeTestSuite<OriginalCreationDate> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

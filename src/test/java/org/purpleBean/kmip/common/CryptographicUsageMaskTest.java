@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 @DisplayName("CryptographicUsageMask Domain Tests")
-class CryptographicUsageMaskTest extends AbstractKmipDataTypeAttributeSuite<CryptographicUsageMask> {
+class CryptographicUsageMaskTest extends AbstractKmipDataTypeAttributeTestSuite<CryptographicUsageMask> {
 
     @Override
     protected void setupDefaultSpec() {

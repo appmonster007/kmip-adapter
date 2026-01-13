@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.CancellationResult;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CancellationResult TTLV Serialization")
-class CancellationResultTtlvTest extends AbstractTtlvSerializationSuite<CancellationResult> {
+class CancellationResultTtlvTest extends AbstractTtlvSerializationTestSuite<CancellationResult> {
     @Override
     protected Class<CancellationResult> type() {
         return CancellationResult.class;

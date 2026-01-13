@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.ApplicationData;
 import org.purpleBean.kmip.common.ApplicationNamespace;
 import org.purpleBean.kmip.common.structure.ApplicationSpecificInformation;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ApplicationSpecificInformation Json Serialization Tests")
-class ApplicationSpecificInformationJsonTest extends AbstractJsonSerializationSuite<ApplicationSpecificInformation> {
+class ApplicationSpecificInformationJsonTest extends AbstractJsonSerializationTestSuite<ApplicationSpecificInformation> {
 
     @Override
     protected Class<ApplicationSpecificInformation> type() {

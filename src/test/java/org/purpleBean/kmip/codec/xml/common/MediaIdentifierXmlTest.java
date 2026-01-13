@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MediaIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("MediaIdentifier XML Serialization Tests")
-class MediaIdentifierXmlTest extends AbstractXmlSerializationSuite<MediaIdentifier> {
+class MediaIdentifierXmlTest extends AbstractXmlSerializationTestSuite<MediaIdentifier> {
 
     @Override
     protected Class<MediaIdentifier> type() {

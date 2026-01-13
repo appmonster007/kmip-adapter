@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.SignatureData;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.nio.ByteBuffer;
 
 @DisplayName("SignatureData XML Serialization Tests")
-class SignatureDataXmlTest extends AbstractXmlSerializationSuite<SignatureData> {
+class SignatureDataXmlTest extends AbstractXmlSerializationTestSuite<SignatureData> {
 
     @Override
     protected Class<SignatureData> type() {

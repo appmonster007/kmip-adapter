@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.IssuerAlternativeName;
 import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("X509CertificateIssuer Domain Tests")
-class X509CertificateIssuerTest extends AbstractKmipStructureAttributeSuite<X509CertificateIssuer> {
+class X509CertificateIssuerTest extends AbstractKmipStructureAttributeTestSuite<X509CertificateIssuer> {
 
     @Override
     protected void setupDefaultSpec() {

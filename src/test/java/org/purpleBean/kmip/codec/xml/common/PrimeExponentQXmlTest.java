@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PrimeExponentQ;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("PrimeExponentQ XML Serialization Tests")
-class PrimeExponentQXmlTest extends AbstractXmlSerializationSuite<PrimeExponentQ> {
+class PrimeExponentQXmlTest extends AbstractXmlSerializationTestSuite<PrimeExponentQ> {
 
     @Override
     protected Class<PrimeExponentQ> type() {

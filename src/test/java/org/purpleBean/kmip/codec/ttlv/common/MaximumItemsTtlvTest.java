@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MaximumItems;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("MaximumItems TTLV Serialization Tests")
-class MaximumItemsTtlvTest extends AbstractTtlvSerializationSuite<MaximumItems> {
+class MaximumItemsTtlvTest extends AbstractTtlvSerializationTestSuite<MaximumItems> {
 
     @Override
     protected Class<MaximumItems> type() {

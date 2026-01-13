@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueByteString;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AttributeValue.ByteString XML Serialization Tests")
-class AttributeValueByteStringXmlTest extends AbstractXmlSerializationSuite<AttributeValueByteString> {
+class AttributeValueByteStringXmlTest extends AbstractXmlSerializationTestSuite<AttributeValueByteString> {
 
     @Override
     protected Class<AttributeValueByteString> type() {

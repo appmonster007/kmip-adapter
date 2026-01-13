@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeIndex;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AttributeIndex JSON Serialization Tests")
-class AttributeIndexJsonTest extends AbstractJsonSerializationSuite<AttributeIndex> {
+class AttributeIndexJsonTest extends AbstractJsonSerializationTestSuite<AttributeIndex> {
 
     @Override
     protected Class<AttributeIndex> type() {

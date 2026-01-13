@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RecommendedCurve TTLV Serialization")
-class RecommendedCurveTtlvTest extends AbstractTtlvSerializationSuite<RecommendedCurve> {
+class RecommendedCurveTtlvTest extends AbstractTtlvSerializationTestSuite<RecommendedCurve> {
     @Override
     protected Class<RecommendedCurve> type() {
         return RecommendedCurve.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.OpaqueDataValue;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("OpaqueDataValue TTLV Serialization Tests")
-class OpaqueDataValueTtlvTest extends AbstractTtlvSerializationSuite<OpaqueDataValue> {
+class OpaqueDataValueTtlvTest extends AbstractTtlvSerializationTestSuite<OpaqueDataValue> {
 
     @Override
     protected Class<OpaqueDataValue> type() {

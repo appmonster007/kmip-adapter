@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.InteropFunction;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("InteropFunction XML Serialization")
-class InteropFunctionXmlTest extends AbstractXmlSerializationSuite<InteropFunction> {
+class InteropFunctionXmlTest extends AbstractXmlSerializationTestSuite<InteropFunction> {
     @Override
     protected Class<InteropFunction> type() {
         return InteropFunction.class;

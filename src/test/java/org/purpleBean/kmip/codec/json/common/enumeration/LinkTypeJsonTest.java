@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.LinkType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("LinkType JSON Serialization")
-class LinkTypeJsonTest extends AbstractJsonSerializationSuite<LinkType> {
+class LinkTypeJsonTest extends AbstractJsonSerializationTestSuite<LinkType> {
     @Override
     protected Class<LinkType> type() {
         return LinkType.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DeviceIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DeviceIdentifier XML Serialization Tests")
-class DeviceIdentifierXmlTest extends AbstractXmlSerializationSuite<DeviceIdentifier> {
+class DeviceIdentifierXmlTest extends AbstractXmlSerializationTestSuite<DeviceIdentifier> {
 
     @Override
     protected Class<DeviceIdentifier> type() {

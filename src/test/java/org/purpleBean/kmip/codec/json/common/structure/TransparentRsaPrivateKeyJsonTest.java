@@ -6,14 +6,14 @@ import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.PrivateExponent;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.structure.TransparentRsaPrivateKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("TransparentRsaPrivateKey JSON Serialization Tests")
-class TransparentRsaPrivateKeyJsonTest extends AbstractJsonSerializationSuite<TransparentRsaPrivateKey> {
+class TransparentRsaPrivateKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentRsaPrivateKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

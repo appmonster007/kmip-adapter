@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Qlength;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.common.structure.CryptographicDomainParameters;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CryptographicDomainParameters Xml Serialization Tests")
-class CryptographicDomainParametersXmlTest extends AbstractXmlSerializationSuite<CryptographicDomainParameters> {
+class CryptographicDomainParametersXmlTest extends AbstractXmlSerializationTestSuite<CryptographicDomainParameters> {
 
     @Override
     protected Class<CryptographicDomainParameters> type() {

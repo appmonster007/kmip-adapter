@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.BatchCount;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("BatchCount XML Serialization Tests")
-class BatchCountXmlTest extends AbstractXmlSerializationSuite<BatchCount> {
+class BatchCountXmlTest extends AbstractXmlSerializationTestSuite<BatchCount> {
 
     @Override
     protected Class<BatchCount> type() {

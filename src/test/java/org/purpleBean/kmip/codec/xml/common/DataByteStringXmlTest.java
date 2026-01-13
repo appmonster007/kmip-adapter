@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DataByteString;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.nio.ByteBuffer;
 
 @DisplayName("DataByteString XML Serialization Tests")
-class DataByteStringXmlTest extends AbstractXmlSerializationSuite<DataByteString> {
+class DataByteStringXmlTest extends AbstractXmlSerializationTestSuite<DataByteString> {
 
     @Override
     protected Class<DataByteString> type() {

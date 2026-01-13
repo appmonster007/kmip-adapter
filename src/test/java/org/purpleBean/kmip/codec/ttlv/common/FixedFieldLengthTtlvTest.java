@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.FixedFieldLength;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("FixedFieldLength TTLV Serialization Tests")
-class FixedFieldLengthTtlvTest extends AbstractTtlvSerializationSuite<FixedFieldLength> {
+class FixedFieldLengthTtlvTest extends AbstractTtlvSerializationTestSuite<FixedFieldLength> {
 
     @Override
     protected Class<FixedFieldLength> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.NistKeyType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("NistKeyType JSON Serialization")
-class NistKeyTypeJsonTest extends AbstractJsonSerializationSuite<NistKeyType> {
+class NistKeyTypeJsonTest extends AbstractJsonSerializationTestSuite<NistKeyType> {
     @Override
     protected Class<NistKeyType> type() {
         return NistKeyType.class;

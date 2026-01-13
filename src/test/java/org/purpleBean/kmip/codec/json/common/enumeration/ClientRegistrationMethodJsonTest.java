@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ClientRegistrationMethod;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ClientRegistrationMethod JSON Serialization")
-class ClientRegistrationMethodJsonTest extends AbstractJsonSerializationSuite<ClientRegistrationMethod> {
+class ClientRegistrationMethodJsonTest extends AbstractJsonSerializationTestSuite<ClientRegistrationMethod> {
     @Override
     protected Class<ClientRegistrationMethod> type() {
         return ClientRegistrationMethod.class;

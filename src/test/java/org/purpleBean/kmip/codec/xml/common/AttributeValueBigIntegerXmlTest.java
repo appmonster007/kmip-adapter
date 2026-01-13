@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueBigInteger;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("AttributeValue.BigInteger XML Serialization Tests")
-class AttributeValueBigIntegerXmlTest extends AbstractXmlSerializationSuite<AttributeValueBigInteger> {
+class AttributeValueBigIntegerXmlTest extends AbstractXmlSerializationTestSuite<AttributeValueBigInteger> {
 
     @Override
     protected Class<AttributeValueBigInteger> type() {

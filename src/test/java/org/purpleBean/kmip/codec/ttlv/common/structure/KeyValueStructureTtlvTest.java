@@ -8,12 +8,12 @@ import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.KeyMaterialByteString;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.common.structure.KeyValueStructure;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.util.List;
 
 @DisplayName("KeyValueStructure TTLV Serialization Tests")
-class KeyValueStructureTtlvTest extends AbstractTtlvSerializationSuite<KeyValueStructure> {
+class KeyValueStructureTtlvTest extends AbstractTtlvSerializationTestSuite<KeyValueStructure> {
 
     @Override
     protected void setupDefaultSpec() {

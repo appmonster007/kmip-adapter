@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.LinkedObjectIdentifier;
 import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.structure.Link;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Link Xml Serialization Tests")
-class LinkXmlTest extends AbstractXmlSerializationSuite<Link> {
+class LinkXmlTest extends AbstractXmlSerializationTestSuite<Link> {
 
     @Override
     protected Class<Link> type() {

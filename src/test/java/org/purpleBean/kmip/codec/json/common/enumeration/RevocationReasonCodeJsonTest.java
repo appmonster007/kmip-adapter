@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RevocationReasonCode JSON Serialization")
-class RevocationReasonCodeJsonTest extends AbstractJsonSerializationSuite<RevocationReasonCode> {
+class RevocationReasonCodeJsonTest extends AbstractJsonSerializationTestSuite<RevocationReasonCode> {
     @Override
     protected Class<RevocationReasonCode> type() {
         return RevocationReasonCode.class;

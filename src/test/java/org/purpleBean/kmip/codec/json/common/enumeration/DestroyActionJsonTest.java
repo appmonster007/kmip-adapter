@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DestroyAction;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DestroyAction JSON Serialization")
-class DestroyActionJsonTest extends AbstractJsonSerializationSuite<DestroyAction> {
+class DestroyActionJsonTest extends AbstractJsonSerializationTestSuite<DestroyAction> {
     @Override
     protected Class<DestroyAction> type() {
         return DestroyAction.class;

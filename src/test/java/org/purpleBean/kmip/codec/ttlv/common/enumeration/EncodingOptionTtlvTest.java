@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.EncodingOption;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("EncodingOption TTLV Serialization")
-class EncodingOptionTtlvTest extends AbstractTtlvSerializationSuite<EncodingOption> {
+class EncodingOptionTtlvTest extends AbstractTtlvSerializationTestSuite<EncodingOption> {
     @Override
     protected Class<EncodingOption> type() {
         return EncodingOption.class;

@@ -23,7 +23,7 @@ org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntegerXmlD
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueIntervalXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueLongIntegerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueTextStringXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AttributeValueXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.AttributeValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchCountXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.BatchOrderOptionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.CRTCoefficientXmlDeserializer

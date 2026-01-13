@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.OpaqueDataType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.Set;
 
 @DisplayName("OpaqueDataType JSON Serialization")
-class OpaqueDataTypeJsonTest extends AbstractJsonSerializationSuite<OpaqueDataType> {
+class OpaqueDataTypeJsonTest extends AbstractJsonSerializationTestSuite<OpaqueDataType> {
     @Override
     protected Class<OpaqueDataType> type() {
         return OpaqueDataType.class;

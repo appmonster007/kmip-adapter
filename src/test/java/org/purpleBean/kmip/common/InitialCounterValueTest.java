@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("InitialCounterValue Domain Tests")
-class InitialCounterValueTest extends AbstractKmipDataTypeSuite<InitialCounterValue> {
+class InitialCounterValueTest extends AbstractKmipDataTypeTestSuite<InitialCounterValue> {
 
     @Override
     protected Class<InitialCounterValue> type() {

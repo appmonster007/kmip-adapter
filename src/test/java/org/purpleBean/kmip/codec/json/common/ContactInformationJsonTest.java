@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.ContactInformation;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ContactInformation JSON Serialization Tests")
-class ContactInformationJsonTest extends AbstractJsonSerializationSuite<ContactInformation> {
+class ContactInformationJsonTest extends AbstractJsonSerializationTestSuite<ContactInformation> {
 
 
     @Override

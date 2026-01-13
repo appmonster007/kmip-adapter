@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UniqueIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UniqueIdentifier XML Serialization Tests")
-class UniqueIdentifierXmlTest extends AbstractXmlSerializationSuite<UniqueIdentifier> {
+class UniqueIdentifierXmlTest extends AbstractXmlSerializationTestSuite<UniqueIdentifier> {
 
     @Override
     protected Class<UniqueIdentifier> type() {

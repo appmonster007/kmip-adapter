@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.KeyCompressionType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyCompressionType TTLV Serialization")
-class KeyCompressionTypeTtlvTest extends AbstractTtlvSerializationSuite<KeyCompressionType> {
+class KeyCompressionTypeTtlvTest extends AbstractTtlvSerializationTestSuite<KeyCompressionType> {
     @Override
     protected Class<KeyCompressionType> type() {
         return KeyCompressionType.class;

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Fips186Variation Domain Tests")
-class Fips186VariationTest extends AbstractKmipEnumerationSuite<Fips186Variation> {
+class Fips186VariationTest extends AbstractKmipEnumerationTestSuite<Fips186Variation> {
 
     @Override
     protected Class<Fips186Variation> type() {

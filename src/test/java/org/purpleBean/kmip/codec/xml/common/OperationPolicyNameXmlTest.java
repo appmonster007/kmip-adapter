@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.OperationPolicyName;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("OperationPolicyName XML Serialization Tests")
-class OperationPolicyNameXmlTest extends AbstractXmlSerializationSuite<OperationPolicyName> {
+class OperationPolicyNameXmlTest extends AbstractXmlSerializationTestSuite<OperationPolicyName> {
 
     @Override
     protected Class<OperationPolicyName> type() {

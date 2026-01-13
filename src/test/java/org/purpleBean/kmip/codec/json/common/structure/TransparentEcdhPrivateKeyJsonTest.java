@@ -4,14 +4,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.D;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.common.structure.TransparentEcdhPrivateKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("TransparentEcdhPrivateKey JSON Serialization Tests")
-class TransparentEcdhPrivateKeyJsonTest extends AbstractJsonSerializationSuite<TransparentEcdhPrivateKey> {
+class TransparentEcdhPrivateKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentEcdhPrivateKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

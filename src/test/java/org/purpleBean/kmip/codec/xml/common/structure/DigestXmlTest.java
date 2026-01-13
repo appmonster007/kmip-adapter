@@ -5,10 +5,10 @@ import org.purpleBean.kmip.common.DigestValue;
 import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;
 import org.purpleBean.kmip.common.structure.Digest;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Digest Xml Serialization Tests")
-class DigestXmlTest extends AbstractXmlSerializationSuite<Digest> {
+class DigestXmlTest extends AbstractXmlSerializationTestSuite<Digest> {
 
     @Override
     protected Class<Digest> type() {

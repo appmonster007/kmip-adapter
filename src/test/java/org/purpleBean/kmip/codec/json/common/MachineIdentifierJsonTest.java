@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MachineIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("MachineIdentifier JSON Serialization Tests")
-class MachineIdentifierJsonTest extends AbstractJsonSerializationSuite<MachineIdentifier> {
+class MachineIdentifierJsonTest extends AbstractJsonSerializationTestSuite<MachineIdentifier> {
 
     @Override
     protected Class<MachineIdentifier> type() {

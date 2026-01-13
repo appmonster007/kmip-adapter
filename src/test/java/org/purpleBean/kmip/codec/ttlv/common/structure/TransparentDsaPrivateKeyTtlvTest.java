@@ -6,14 +6,14 @@ import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.X;
 import org.purpleBean.kmip.common.structure.TransparentDsaPrivateKey;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("TransparentDsaPrivateKey TTLV Serialization Tests")
-class TransparentDsaPrivateKeyTtlvTest extends AbstractTtlvSerializationSuite<TransparentDsaPrivateKey> {
+class TransparentDsaPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite<TransparentDsaPrivateKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DeactivationReasonCode;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DeactivationReasonCode TTLV Serialization")
-class DeactivationReasonCodeTtlvTest extends AbstractTtlvSerializationSuite<DeactivationReasonCode> {
+class DeactivationReasonCodeTtlvTest extends AbstractTtlvSerializationTestSuite<DeactivationReasonCode> {
     @Override
     protected Class<DeactivationReasonCode> type() {
         return DeactivationReasonCode.class;

@@ -2,12 +2,12 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("P Domain Tests")
-class PTest extends AbstractKmipDataTypeSuite<P> {
+class PTest extends AbstractKmipDataTypeTestSuite<P> {
 
     @Override
     protected Class<P> type() {

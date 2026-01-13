@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeIndex;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AttributeIndex XML Serialization Tests")
-class AttributeIndexXmlTest extends AbstractXmlSerializationSuite<AttributeIndex> {
+class AttributeIndexXmlTest extends AbstractXmlSerializationTestSuite<AttributeIndex> {
 
     @Override
     protected Class<AttributeIndex> type() {

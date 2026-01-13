@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AsynchronousCorrelationValue TTLV Serialization Tests")
-class AsynchronousCorrelationValueTtlvTest extends AbstractTtlvSerializationSuite<AsynchronousCorrelationValue> {
+class AsynchronousCorrelationValueTtlvTest extends AbstractTtlvSerializationTestSuite<AsynchronousCorrelationValue> {
 
     @Override
     protected Class<AsynchronousCorrelationValue> type() {

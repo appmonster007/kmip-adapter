@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.CancellationResult;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CancellationResult XML Serialization")
-class CancellationResultXmlTest extends AbstractXmlSerializationSuite<CancellationResult> {
+class CancellationResultXmlTest extends AbstractXmlSerializationTestSuite<CancellationResult> {
     @Override
     protected Class<CancellationResult> type() {
         return CancellationResult.class;

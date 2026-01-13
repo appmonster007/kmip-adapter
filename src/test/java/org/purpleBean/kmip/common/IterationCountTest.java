@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("IterationCount Domain Tests")
-class IterationCountTest extends AbstractKmipDataTypeSuite<IterationCount> {
+class IterationCountTest extends AbstractKmipDataTypeTestSuite<IterationCount> {
 
     @Override
     protected Class<IterationCount> type() {

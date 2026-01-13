@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("CriticalityIndicator Domain Tests")
-class CriticalityIndicatorTest extends AbstractKmipDataTypeSuite<CriticalityIndicator> {
+class CriticalityIndicatorTest extends AbstractKmipDataTypeTestSuite<CriticalityIndicator> {
 
     @Override
     protected Class<CriticalityIndicator> type() {

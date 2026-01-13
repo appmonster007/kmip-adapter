@@ -3,12 +3,12 @@ package org.purpleBean.kmip.common.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
 
 @DisplayName("ProtocolVersion Structure Semantics")
-class ProtocolVersionTest extends AbstractKmipStructureSuite<ProtocolVersion> {
+class ProtocolVersionTest extends AbstractKmipStructureTestSuite<ProtocolVersion> {
 
     @Override
     protected Class<ProtocolVersion> type() {

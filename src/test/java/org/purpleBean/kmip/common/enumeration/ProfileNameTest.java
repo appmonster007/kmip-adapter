@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("ProfileName Domain Tests")
-class ProfileNameTest extends AbstractKmipEnumerationSuite<ProfileName> {
+class ProfileNameTest extends AbstractKmipEnumerationTestSuite<ProfileName> {
 
     @Override
     protected Class<ProfileName> type() {

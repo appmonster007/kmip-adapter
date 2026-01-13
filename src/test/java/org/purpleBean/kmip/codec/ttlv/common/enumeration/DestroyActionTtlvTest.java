@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DestroyAction;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DestroyAction TTLV Serialization")
-class DestroyActionTtlvTest extends AbstractTtlvSerializationSuite<DestroyAction> {
+class DestroyActionTtlvTest extends AbstractTtlvSerializationTestSuite<DestroyAction> {
     @Override
     protected Class<DestroyAction> type() {
         return DestroyAction.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.StorageStatusMask;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("StorageStatusMask JSON Serialization Tests")
-class StorageStatusMaskJsonTest extends AbstractJsonSerializationSuite<StorageStatusMask> {
+class StorageStatusMaskJsonTest extends AbstractJsonSerializationTestSuite<StorageStatusMask> {
 
     @Override
     protected Class<StorageStatusMask> type() {

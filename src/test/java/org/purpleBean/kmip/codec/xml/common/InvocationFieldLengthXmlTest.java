@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.InvocationFieldLength;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("InvocationFieldLength XML Serialization Tests")
-class InvocationFieldLengthXmlTest extends AbstractXmlSerializationSuite<InvocationFieldLength> {
+class InvocationFieldLengthXmlTest extends AbstractXmlSerializationTestSuite<InvocationFieldLength> {
 
     @Override
     protected Class<InvocationFieldLength> type() {

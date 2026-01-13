@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("Offset Domain Tests")
-class OffsetTest extends AbstractKmipDataTypeSuite<Offset> {
+class OffsetTest extends AbstractKmipDataTypeTestSuite<Offset> {
 
     @Override
     protected Class<Offset> type() {

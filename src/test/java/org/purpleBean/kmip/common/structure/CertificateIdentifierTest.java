@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.Issuer;
 import org.purpleBean.kmip.common.SerialNumber;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("CertificateIdentifier Domain Tests")
-class CertificateIdentifierTest extends AbstractKmipStructureAttributeSuite<CertificateIdentifier> {
+class CertificateIdentifierTest extends AbstractKmipStructureAttributeTestSuite<CertificateIdentifier> {
 
     @Override
     protected void setupDefaultSpec() {

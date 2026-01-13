@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.RevocationMessage;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RevocationMessage XML Serialization Tests")
-class RevocationMessageXmlTest extends AbstractXmlSerializationSuite<RevocationMessage> {
+class RevocationMessageXmlTest extends AbstractXmlSerializationTestSuite<RevocationMessage> {
 
     @Override
     protected Class<RevocationMessage> type() {

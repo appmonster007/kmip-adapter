@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.KeyWrapType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyWrapType JSON Serialization")
-class KeyWrapTypeJsonTest extends AbstractJsonSerializationSuite<KeyWrapType> {
+class KeyWrapTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyWrapType> {
     @Override
     protected Class<KeyWrapType> type() {
         return KeyWrapType.class;

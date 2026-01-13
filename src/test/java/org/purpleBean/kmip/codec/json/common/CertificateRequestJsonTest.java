@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CertificateRequest;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateRequest JSON Serialization Tests")
-class CertificateRequestJsonTest extends AbstractJsonSerializationSuite<CertificateRequest> {
+class CertificateRequestJsonTest extends AbstractJsonSerializationTestSuite<CertificateRequest> {
 
     @Override
     protected Class<CertificateRequest> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.NetworkIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("NetworkIdentifier TTLV Serialization Tests")
-class NetworkIdentifierTtlvTest extends AbstractTtlvSerializationSuite<NetworkIdentifier> {
+class NetworkIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<NetworkIdentifier> {
 
     @Override
     protected Class<NetworkIdentifier> type() {

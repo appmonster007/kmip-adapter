@@ -1,7 +1,7 @@
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.BooleanTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.BigIntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.IntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.LongTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.ByteStringTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.TextStringTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.OffsetDateTimeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.BooleanTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.BigIntegerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.IntegerTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.LongTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.ByteStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.TextStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.OffsetDateTimeTtlvSerializer

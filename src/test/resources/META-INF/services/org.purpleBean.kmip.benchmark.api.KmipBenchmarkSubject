@@ -16,7 +16,6 @@ org.purpleBean.kmip.benchmark.subjects.common.AttributeValueEnumerationBenchmark
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueIntegerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueIntervalBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueLongIntegerBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.common.AttributeValueStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.AttributeValueTextStringBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.BatchCountBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.BatchOrderOptionBenchmarkSubject
@@ -191,6 +190,7 @@ org.purpleBean.kmip.benchmark.subjects.common.enumeration.WrappingMethodBenchmar
 org.purpleBean.kmip.benchmark.subjects.common.structure.AlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.ApplicationSpecificInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.common.structure.AttributeValueStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.common.structure.CertificateSubjectBenchmarkSubject

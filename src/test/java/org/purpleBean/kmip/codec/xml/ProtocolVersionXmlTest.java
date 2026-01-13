@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ProtocolVersion XML Serialization")
-class ProtocolVersionXmlTest extends AbstractXmlSerializationSuite<ProtocolVersion> {
+class ProtocolVersionXmlTest extends AbstractXmlSerializationTestSuite<ProtocolVersion> {
 
     @Override
     protected Class<ProtocolVersion> type() {

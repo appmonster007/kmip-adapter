@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.FixedFieldLength;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("FixedFieldLength XML Serialization Tests")
-class FixedFieldLengthXmlTest extends AbstractXmlSerializationSuite<FixedFieldLength> {
+class FixedFieldLengthXmlTest extends AbstractXmlSerializationTestSuite<FixedFieldLength> {
 
     @Override
     protected Class<FixedFieldLength> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.OpaqueDataValue;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("OpaqueDataValue JSON Serialization Tests")
-class OpaqueDataValueJsonTest extends AbstractJsonSerializationSuite<OpaqueDataValue> {
+class OpaqueDataValueJsonTest extends AbstractJsonSerializationTestSuite<OpaqueDataValue> {
 
     @Override
     protected Class<OpaqueDataValue> type() {

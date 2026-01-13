@@ -5,14 +5,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.KeyMaterialStructure;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
 @DisplayName("KeyMaterialStructure JSON Serialization Tests")
-class KeyMaterialStructureJsonTest extends AbstractJsonSerializationSuite<KeyMaterialStructure> {
+class KeyMaterialStructureJsonTest extends AbstractJsonSerializationTestSuite<KeyMaterialStructure> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

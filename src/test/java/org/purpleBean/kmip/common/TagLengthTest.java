@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("TagLength Domain Tests")
-class TagLengthTest extends AbstractKmipDataTypeSuite<TagLength> {
+class TagLengthTest extends AbstractKmipDataTypeTestSuite<TagLength> {
 
     @Override
     protected Class<TagLength> type() {

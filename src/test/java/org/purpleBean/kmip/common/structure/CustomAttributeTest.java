@@ -9,12 +9,12 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.AttributeName;
 import org.purpleBean.kmip.common.AttributeValueEnumeration;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 @DisplayName("CustomAttribute Domain Tests")
-class CustomAttributeTest extends AbstractKmipStructureAttributeSuite<CustomAttribute> {
+class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<CustomAttribute> {
 
     @Override
     protected void setupDefaultSpec() {

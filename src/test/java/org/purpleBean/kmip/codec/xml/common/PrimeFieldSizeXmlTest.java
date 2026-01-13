@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PrimeFieldSize;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("PrimeFieldSize XML Serialization Tests")
-class PrimeFieldSizeXmlTest extends AbstractXmlSerializationSuite<PrimeFieldSize> {
+class PrimeFieldSizeXmlTest extends AbstractXmlSerializationTestSuite<PrimeFieldSize> {
 
     @Override
     protected Class<PrimeFieldSize> type() {

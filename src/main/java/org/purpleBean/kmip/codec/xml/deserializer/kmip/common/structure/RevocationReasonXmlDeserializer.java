@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.kmip.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.common.structure.RevocationReason;
@@ -24,8 +24,10 @@ public class RevocationReasonXmlDeserializer extends AbstractKmipStructureXmlDes
     @Override
     protected void setValue(RevocationReason.RevocationReasonBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.REVOCATION_REASON_CODE -> builder.revocationReasonCode(ctxt.readValue(p, RevocationReasonCode.class));
-            case KmipTag.Standard.REVOCATION_MESSAGE -> builder.revocationMessage(ctxt.readValue(p, RevocationMessage.class));
+            case KmipTag.Standard.REVOCATION_REASON_CODE ->
+                    builder.revocationReasonCode(ctxt.readValue(p, RevocationReasonCode.class));
+            case KmipTag.Standard.REVOCATION_MESSAGE ->
+                    builder.revocationMessage(ctxt.readValue(p, RevocationMessage.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

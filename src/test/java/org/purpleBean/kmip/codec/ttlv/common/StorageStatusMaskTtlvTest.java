@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.StorageStatusMask;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("StorageStatusMask TTLV Serialization Tests")
-class StorageStatusMaskTtlvTest extends AbstractTtlvSerializationSuite<StorageStatusMask> {
+class StorageStatusMaskTtlvTest extends AbstractTtlvSerializationTestSuite<StorageStatusMask> {
 
     @Override
     protected Class<StorageStatusMask> type() {

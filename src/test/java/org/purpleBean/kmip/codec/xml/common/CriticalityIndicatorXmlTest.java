@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CriticalityIndicator;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CriticalityIndicator XML Serialization Tests")
-class CriticalityIndicatorXmlTest extends AbstractXmlSerializationSuite<CriticalityIndicator> {
+class CriticalityIndicatorXmlTest extends AbstractXmlSerializationTestSuite<CriticalityIndicator> {
 
     @Override
     protected Class<CriticalityIndicator> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyValueByteString;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyValue.ByteString TTLV Serialization Tests")
-class KeyValueByteStringTtlvTest extends AbstractTtlvSerializationSuite<KeyValueByteString> {
+class KeyValueByteStringTtlvTest extends AbstractTtlvSerializationTestSuite<KeyValueByteString> {
 
     @Override
     protected Class<KeyValueByteString> type() {

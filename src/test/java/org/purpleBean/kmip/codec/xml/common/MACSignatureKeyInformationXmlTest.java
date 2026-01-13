@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MACSignatureKeyInformation;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("MACSignatureKeyInformation XML Serialization Tests")
-class MACSignatureKeyInformationXmlTest extends AbstractXmlSerializationSuite<MACSignatureKeyInformation> {
+class MACSignatureKeyInformationXmlTest extends AbstractXmlSerializationTestSuite<MACSignatureKeyInformation> {
 
     @Override
     protected Class<MACSignatureKeyInformation> type() {

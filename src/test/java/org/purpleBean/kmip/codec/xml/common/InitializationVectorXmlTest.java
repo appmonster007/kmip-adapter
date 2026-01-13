@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.InitializationVector;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("InitializationVector XML Serialization Tests")
-class InitializationVectorXmlTest extends AbstractXmlSerializationSuite<InitializationVector> {
+class InitializationVectorXmlTest extends AbstractXmlSerializationTestSuite<InitializationVector> {
 
     @Override
     protected Class<InitializationVector> type() {

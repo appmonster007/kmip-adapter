@@ -4,14 +4,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Modulus;
 import org.purpleBean.kmip.common.PublicExponent;
 import org.purpleBean.kmip.common.structure.TransparentRsaPublicKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("TransparentRsaPublicKey JSON Serialization Tests")
-class TransparentRsaPublicKeyJsonTest extends AbstractJsonSerializationSuite<TransparentRsaPublicKey> {
+class TransparentRsaPublicKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentRsaPublicKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

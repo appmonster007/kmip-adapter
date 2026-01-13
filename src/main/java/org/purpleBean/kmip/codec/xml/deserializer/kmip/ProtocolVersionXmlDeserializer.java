@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.common.ProtocolVersionMajor;
 import org.purpleBean.kmip.common.ProtocolVersionMinor;
 

@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.NameValue;
 import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.structure.Name;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("Name Xml Serialization Tests")
-class NameXmlTest extends AbstractXmlSerializationSuite<Name> {
+class NameXmlTest extends AbstractXmlSerializationTestSuite<Name> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

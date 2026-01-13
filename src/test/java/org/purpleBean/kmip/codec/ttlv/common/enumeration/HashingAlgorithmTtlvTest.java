@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("HashingAlgorithm TTLV Serialization")
-class HashingAlgorithmTtlvTest extends AbstractTtlvSerializationSuite<HashingAlgorithm> {
+class HashingAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<HashingAlgorithm> {
     @Override
     protected Class<HashingAlgorithm> type() {
         return HashingAlgorithm.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AsynchronousIndicator;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AsynchronousIndicator JSON Serialization Tests")
-class AsynchronousIndicatorJsonTest extends AbstractJsonSerializationSuite<AsynchronousIndicator> {
+class AsynchronousIndicatorJsonTest extends AbstractJsonSerializationTestSuite<AsynchronousIndicator> {
 
     @Override
     protected Class<AsynchronousIndicator> type() {

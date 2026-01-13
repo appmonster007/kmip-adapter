@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyPartIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyPartIdentifier JSON Serialization Tests")
-class KeyPartIdentifierJsonTest extends AbstractJsonSerializationSuite<KeyPartIdentifier> {
+class KeyPartIdentifierJsonTest extends AbstractJsonSerializationTestSuite<KeyPartIdentifier> {
 
     @Override
     protected Class<KeyPartIdentifier> type() {

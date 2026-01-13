@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DigitalSignatureAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DigitalSignatureAlgorithm TTLV Serialization")
-class DigitalSignatureAlgorithmTtlvTest extends AbstractTtlvSerializationSuite<DigitalSignatureAlgorithm> {
+class DigitalSignatureAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<DigitalSignatureAlgorithm> {
     @Override
     protected Class<DigitalSignatureAlgorithm> type() {
         return DigitalSignatureAlgorithm.class;

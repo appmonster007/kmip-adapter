@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.CredentialType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CredentialType TTLV Serialization")
-class CredentialTypeTtlvTest extends AbstractTtlvSerializationSuite<CredentialType> {
+class CredentialTypeTtlvTest extends AbstractTtlvSerializationTestSuite<CredentialType> {
     @Override
     protected Class<CredentialType> type() {
         return CredentialType.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.IterationCount;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("IterationCount XML Serialization Tests")
-class IterationCountXmlTest extends AbstractXmlSerializationSuite<IterationCount> {
+class IterationCountXmlTest extends AbstractXmlSerializationTestSuite<IterationCount> {
 
     @Override
     protected Class<IterationCount> type() {

@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.common.structure.CryptographicParameters;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CryptographicParameters Ttlv Serialization Tests")
-class CryptographicParametersTtlvTest extends AbstractTtlvSerializationSuite<CryptographicParameters> {
+class CryptographicParametersTtlvTest extends AbstractTtlvSerializationTestSuite<CryptographicParameters> {
 
     @Override
     protected Class<CryptographicParameters> type() {

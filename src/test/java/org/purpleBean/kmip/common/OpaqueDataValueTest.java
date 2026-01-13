@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("OpaqueDataValue Domain Tests")
-class OpaqueDataValueTest extends AbstractKmipDataTypeSuite<OpaqueDataValue> {
+class OpaqueDataValueTest extends AbstractKmipDataTypeTestSuite<OpaqueDataValue> {
 
     @Override
     protected Class<OpaqueDataValue> type() {

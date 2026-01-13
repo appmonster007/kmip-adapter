@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.SplitKeyParts;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SplitKeyParts TTLV Serialization Tests")
-class SplitKeyPartsTtlvTest extends AbstractTtlvSerializationSuite<SplitKeyParts> {
+class SplitKeyPartsTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKeyParts> {
 
     @Override
     protected Class<SplitKeyParts> type() {

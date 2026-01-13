@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CertificateSerialNumber;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CertificateSerialNumber XML Serialization Tests")
-class CertificateSerialNumberXmlTest extends AbstractXmlSerializationSuite<CertificateSerialNumber> {
+class CertificateSerialNumberXmlTest extends AbstractXmlSerializationTestSuite<CertificateSerialNumber> {
 
     @Override
     protected Class<CertificateSerialNumber> type() {

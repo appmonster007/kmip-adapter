@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RngMode;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RngMode JSON Serialization")
-class RngModeJsonTest extends AbstractJsonSerializationSuite<RngMode> {
+class RngModeJsonTest extends AbstractJsonSerializationTestSuite<RngMode> {
     @Override
     protected Class<RngMode> type() {
         return RngMode.class;

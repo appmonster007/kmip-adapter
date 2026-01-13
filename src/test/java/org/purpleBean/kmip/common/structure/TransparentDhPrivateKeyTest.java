@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("TransparentDhPrivateKey Domain Tests")
-class TransparentDhPrivateKeyTest extends AbstractKmipStructureSuite<TransparentDhPrivateKey> {
+class TransparentDhPrivateKeyTest extends AbstractKmipStructureTestSuite<TransparentDhPrivateKey> {
 
     @Override
     protected Class<TransparentDhPrivateKey> type() {

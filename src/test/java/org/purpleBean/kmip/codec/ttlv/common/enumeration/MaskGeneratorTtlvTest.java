@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.MaskGenerator;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.util.Set;
 
 @DisplayName("MaskGenerator TTLV Serialization")
-class MaskGeneratorTtlvTest extends AbstractTtlvSerializationSuite<MaskGenerator> {
+class MaskGeneratorTtlvTest extends AbstractTtlvSerializationTestSuite<MaskGenerator> {
     @Override
     protected Class<MaskGenerator> type() {
         return MaskGenerator.class;

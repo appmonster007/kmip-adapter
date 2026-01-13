@@ -8,14 +8,14 @@ import org.purpleBean.kmip.common.UsageLimitsCount;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("UsageLimits Domain Tests")
-class UsageLimitsTest extends AbstractKmipStructureAttributeSuite<UsageLimits> {
+class UsageLimitsTest extends AbstractKmipStructureAttributeTestSuite<UsageLimits> {
 
     @Override
     protected void setupDefaultSpec() {

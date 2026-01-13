@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MaximumItems;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("MaximumItems XML Serialization Tests")
-class MaximumItemsXmlTest extends AbstractXmlSerializationSuite<MaximumItems> {
+class MaximumItemsXmlTest extends AbstractXmlSerializationTestSuite<MaximumItems> {
 
     @Override
     protected Class<MaximumItems> type() {

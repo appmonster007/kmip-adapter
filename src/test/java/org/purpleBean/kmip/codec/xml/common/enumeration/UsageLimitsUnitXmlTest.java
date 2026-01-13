@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UsageLimitsUnit XML Serialization")
-class UsageLimitsUnitXmlTest extends AbstractXmlSerializationSuite<UsageLimitsUnit> {
+class UsageLimitsUnitXmlTest extends AbstractXmlSerializationTestSuite<UsageLimitsUnit> {
     @Override
     protected Class<UsageLimitsUnit> type() {
         return UsageLimitsUnit.class;

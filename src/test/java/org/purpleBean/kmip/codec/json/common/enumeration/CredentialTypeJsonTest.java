@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.CredentialType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CredentialType JSON Serialization")
-class CredentialTypeJsonTest extends AbstractJsonSerializationSuite<CredentialType> {
+class CredentialTypeJsonTest extends AbstractJsonSerializationTestSuite<CredentialType> {
     @Override
     protected Class<CredentialType> type() {
         return CredentialType.class;

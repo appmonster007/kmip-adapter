@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueBigInteger;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("AttributeValue.BigInteger JSON Serialization Tests")
-class AttributeValueBigIntegerJsonTest extends AbstractJsonSerializationSuite<AttributeValueBigInteger> {
+class AttributeValueBigIntegerJsonTest extends AbstractJsonSerializationTestSuite<AttributeValueBigInteger> {
 
     @Override
     protected Class<AttributeValueBigInteger> type() {

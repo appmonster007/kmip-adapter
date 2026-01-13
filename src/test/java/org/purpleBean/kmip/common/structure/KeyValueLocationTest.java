@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.KeyValueLocationValue;
 import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("KeyValueLocation Domain Tests")
-class KeyValueLocationTest extends AbstractKmipStructureAttributeSuite<KeyValueLocation> {
+class KeyValueLocationTest extends AbstractKmipStructureAttributeTestSuite<KeyValueLocation> {
 
     @Override
     protected void setupDefaultSpec() {

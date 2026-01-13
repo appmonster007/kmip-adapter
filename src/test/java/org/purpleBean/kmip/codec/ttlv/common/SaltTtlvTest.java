@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Salt;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Salt TTLV Serialization Tests")
-class SaltTtlvTest extends AbstractTtlvSerializationSuite<Salt> {
+class SaltTtlvTest extends AbstractTtlvSerializationTestSuite<Salt> {
 
     @Override
     protected Class<Salt> type() {

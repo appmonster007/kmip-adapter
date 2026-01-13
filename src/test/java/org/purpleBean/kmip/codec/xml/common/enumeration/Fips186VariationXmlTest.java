@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.Fips186Variation;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Fips186Variation XML Serialization")
-class Fips186VariationXmlTest extends AbstractXmlSerializationSuite<Fips186Variation> {
+class Fips186VariationXmlTest extends AbstractXmlSerializationTestSuite<Fips186Variation> {
     @Override
     protected Class<Fips186Variation> type() {
         return Fips186Variation.class;

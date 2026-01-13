@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueInterval;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AttributeValue.Interval XML Serialization Tests")
-class AttributeValueIntervalXmlTest extends AbstractXmlSerializationSuite<AttributeValueInterval> {
+class AttributeValueIntervalXmlTest extends AbstractXmlSerializationTestSuite<AttributeValueInterval> {
 
     @Override
     protected Class<AttributeValueInterval> type() {

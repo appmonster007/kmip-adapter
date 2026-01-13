@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.PutFunction;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PutFunction TTLV Serialization")
-class PutFunctionTtlvTest extends AbstractTtlvSerializationSuite<PutFunction> {
+class PutFunctionTtlvTest extends AbstractTtlvSerializationTestSuite<PutFunction> {
     @Override
     protected Class<PutFunction> type() {
         return PutFunction.class;

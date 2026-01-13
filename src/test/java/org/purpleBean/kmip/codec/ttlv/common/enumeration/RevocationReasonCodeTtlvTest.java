@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RevocationReasonCode TTLV Serialization")
-class RevocationReasonCodeTtlvTest extends AbstractTtlvSerializationSuite<RevocationReasonCode> {
+class RevocationReasonCodeTtlvTest extends AbstractTtlvSerializationTestSuite<RevocationReasonCode> {
     @Override
     protected Class<RevocationReasonCode> type() {
         return RevocationReasonCode.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.WrappingMethod;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("WrappingMethod JSON Serialization")
-class WrappingMethodJsonTest extends AbstractJsonSerializationSuite<WrappingMethod> {
+class WrappingMethodJsonTest extends AbstractJsonSerializationTestSuite<WrappingMethod> {
     @Override
     protected Class<WrappingMethod> type() {
         return WrappingMethod.class;

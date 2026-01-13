@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.InitialCounterValue;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("InitialCounterValue JSON Serialization Tests")
-class InitialCounterValueJsonTest extends AbstractJsonSerializationSuite<InitialCounterValue> {
+class InitialCounterValueJsonTest extends AbstractJsonSerializationTestSuite<InitialCounterValue> {
 
     @Override
     protected Class<InitialCounterValue> type() {

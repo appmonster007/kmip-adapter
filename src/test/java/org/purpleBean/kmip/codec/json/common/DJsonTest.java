@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.D;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("D JSON Serialization Tests")
-class DJsonTest extends AbstractJsonSerializationSuite<D> {
+class DJsonTest extends AbstractJsonSerializationTestSuite<D> {
 
     @Override
     protected Class<D> type() {

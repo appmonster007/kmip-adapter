@@ -6,12 +6,12 @@ import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.Y;
 import org.purpleBean.kmip.common.structure.TransparentDsaPublicKey;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("TransparentDsaPublicKey Ttlv Serialization Tests")
-class TransparentDsaPublicKeyTtlvTest extends AbstractTtlvSerializationSuite<TransparentDsaPublicKey> {
+class TransparentDsaPublicKeyTtlvTest extends AbstractTtlvSerializationTestSuite<TransparentDsaPublicKey> {
 
     @Override
     protected Class<TransparentDsaPublicKey> type() {

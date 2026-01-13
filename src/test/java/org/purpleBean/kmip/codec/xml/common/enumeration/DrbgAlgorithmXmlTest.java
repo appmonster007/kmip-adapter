@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DrbgAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DrbgAlgorithm XML Serialization")
-class DrbgAlgorithmXmlTest extends AbstractXmlSerializationSuite<DrbgAlgorithm> {
+class DrbgAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<DrbgAlgorithm> {
     @Override
     protected Class<DrbgAlgorithm> type() {
         return DrbgAlgorithm.class;

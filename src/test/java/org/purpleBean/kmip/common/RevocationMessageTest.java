@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("RevocationMessage Domain Tests")
-class RevocationMessageTest extends AbstractKmipDataTypeSuite<RevocationMessage> {
+class RevocationMessageTest extends AbstractKmipDataTypeTestSuite<RevocationMessage> {
 
     @Override
     protected Class<RevocationMessage> type() {

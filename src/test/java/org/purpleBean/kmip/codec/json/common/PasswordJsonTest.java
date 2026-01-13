@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Password;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Password JSON Serialization Tests")
-class PasswordJsonTest extends AbstractJsonSerializationSuite<Password> {
+class PasswordJsonTest extends AbstractJsonSerializationTestSuite<Password> {
 
     @Override
     protected Class<Password> type() {

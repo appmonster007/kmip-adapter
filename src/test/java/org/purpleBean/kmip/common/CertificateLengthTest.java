@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 @DisplayName("CertificateLength Domain Tests")
-class CertificateLengthTest extends AbstractKmipDataTypeAttributeSuite<CertificateLength> {
+class CertificateLengthTest extends AbstractKmipDataTypeAttributeTestSuite<CertificateLength> {
 
     @Override
     protected void setupDefaultSpec() {

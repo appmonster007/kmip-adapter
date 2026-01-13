@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.RandomIv;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RandomIv XML Serialization Tests")
-class RandomIvXmlTest extends AbstractXmlSerializationSuite<RandomIv> {
+class RandomIvXmlTest extends AbstractXmlSerializationTestSuite<RandomIv> {
 
     @Override
     protected Class<RandomIv> type() {

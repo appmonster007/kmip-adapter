@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.common.Key;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("TransparentSymmetricKey Domain Tests")
-class TransparentSymmetricKeyTest extends AbstractKmipStructureSuite<TransparentSymmetricKey> {
+class TransparentSymmetricKeyTest extends AbstractKmipStructureTestSuite<TransparentSymmetricKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

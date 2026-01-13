@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.IterationCount;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("IterationCount JSON Serialization Tests")
-class IterationCountJsonTest extends AbstractJsonSerializationSuite<IterationCount> {
+class IterationCountJsonTest extends AbstractJsonSerializationTestSuite<IterationCount> {
 
     @Override
     protected Class<IterationCount> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.OpaqueDataValue;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("OpaqueDataValue XML Serialization Tests")
-class OpaqueDataValueXmlTest extends AbstractXmlSerializationSuite<OpaqueDataValue> {
+class OpaqueDataValueXmlTest extends AbstractXmlSerializationTestSuite<OpaqueDataValue> {
 
     @Override
     protected Class<OpaqueDataValue> type() {

@@ -2,12 +2,12 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 import java.time.OffsetDateTime;
 
 @DisplayName("AttributeValue.DateTime Domain Tests")
-class AttributeValueDateTimeTest extends AbstractKmipDataTypeSuite<AttributeValueDateTime> {
+class AttributeValueDateTimeTest extends AbstractKmipDataTypeTestSuite<AttributeValueDateTime> {
 
     @Override
     protected Class<AttributeValueDateTime> type() {

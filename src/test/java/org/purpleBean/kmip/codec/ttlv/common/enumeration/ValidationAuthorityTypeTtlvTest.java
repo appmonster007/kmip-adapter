@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ValidationAuthorityType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ValidationAuthorityType TTLV Serialization")
-class ValidationAuthorityTypeTtlvTest extends AbstractTtlvSerializationSuite<ValidationAuthorityType> {
+class ValidationAuthorityTypeTtlvTest extends AbstractTtlvSerializationTestSuite<ValidationAuthorityType> {
     @Override
     protected Class<ValidationAuthorityType> type() {
         return ValidationAuthorityType.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.WrappingMethod;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("WrappingMethod XML Serialization")
-class WrappingMethodXmlTest extends AbstractXmlSerializationSuite<WrappingMethod> {
+class WrappingMethodXmlTest extends AbstractXmlSerializationTestSuite<WrappingMethod> {
     @Override
     protected Class<WrappingMethod> type() {
         return WrappingMethod.class;

@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.LinkedObjectIdentifier;
 import org.purpleBean.kmip.common.enumeration.LinkType;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("Link Domain Tests")
-class LinkTest extends AbstractKmipStructureAttributeSuite<Link> {
+class LinkTest extends AbstractKmipStructureAttributeTestSuite<Link> {
 
     @Override
     protected void setupDefaultSpec() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.NameType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("NameType XML Serialization")
-class NameTypeXmlTest extends AbstractXmlSerializationSuite<NameType> {
+class NameTypeXmlTest extends AbstractXmlSerializationTestSuite<NameType> {
     @Override
     protected Class<NameType> type() {
         return NameType.class;

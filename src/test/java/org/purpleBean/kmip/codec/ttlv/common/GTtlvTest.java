@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.G;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("G TTLV Serialization Tests")
-class GTtlvTest extends AbstractTtlvSerializationSuite<G> {
+class GTtlvTest extends AbstractTtlvSerializationTestSuite<G> {
 
     @Override
     protected Class<G> type() {

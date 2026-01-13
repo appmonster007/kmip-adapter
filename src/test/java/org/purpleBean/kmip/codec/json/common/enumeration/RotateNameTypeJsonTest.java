@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RotateNameType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RotateNameType JSON Serialization")
-class RotateNameTypeJsonTest extends AbstractJsonSerializationSuite<RotateNameType> {
+class RotateNameTypeJsonTest extends AbstractJsonSerializationTestSuite<RotateNameType> {
     @Override
     protected Class<RotateNameType> type() {
         return RotateNameType.class;

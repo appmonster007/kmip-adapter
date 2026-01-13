@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.NameType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("NameType JSON Serialization")
-class NameTypeJsonTest extends AbstractJsonSerializationSuite<NameType> {
+class NameTypeJsonTest extends AbstractJsonSerializationTestSuite<NameType> {
     @Override
     protected Class<NameType> type() {
         return NameType.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DataLength;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DataLength XML Serialization Tests")
-class DataLengthXmlTest extends AbstractXmlSerializationSuite<DataLength> {
+class DataLengthXmlTest extends AbstractXmlSerializationTestSuite<DataLength> {
 
     @Override
     protected Class<DataLength> type() {

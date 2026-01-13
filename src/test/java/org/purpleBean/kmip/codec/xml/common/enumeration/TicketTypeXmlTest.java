@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.TicketType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.util.Set;
 
 @DisplayName("TicketType XML Serialization")
-class TicketTypeXmlTest extends AbstractXmlSerializationSuite<TicketType> {
+class TicketTypeXmlTest extends AbstractXmlSerializationTestSuite<TicketType> {
     @Override
     protected Class<TicketType> type() {
         return TicketType.class;

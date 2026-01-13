@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UniqueBatchItemID;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("UniqueBatchItemID JSON Serialization Tests")
-class UniqueBatchItemIDJsonTest extends AbstractJsonSerializationSuite<UniqueBatchItemID> {
+class UniqueBatchItemIDJsonTest extends AbstractJsonSerializationTestSuite<UniqueBatchItemID> {
 
     @Override
     protected Class<UniqueBatchItemID> type() {

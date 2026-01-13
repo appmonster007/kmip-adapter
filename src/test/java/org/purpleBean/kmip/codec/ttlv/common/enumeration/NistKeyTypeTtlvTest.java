@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.NistKeyType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("NistKeyType TTLV Serialization")
-class NistKeyTypeTtlvTest extends AbstractTtlvSerializationSuite<NistKeyType> {
+class NistKeyTypeTtlvTest extends AbstractTtlvSerializationTestSuite<NistKeyType> {
     @Override
     protected Class<NistKeyType> type() {
         return NistKeyType.class;

@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.AlternativeNameValue;
 import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("AlternativeName Domain Tests")
-class AlternativeNameTest extends AbstractKmipStructureAttributeSuite<AlternativeName> {
+class AlternativeNameTest extends AbstractKmipStructureAttributeTestSuite<AlternativeName> {
 
     @Override
     protected void setupDefaultSpec() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UniqueBatchItemID;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UniqueBatchItemID XML Serialization Tests")
-class UniqueBatchItemIDXmlTest extends AbstractXmlSerializationSuite<UniqueBatchItemID> {
+class UniqueBatchItemIDXmlTest extends AbstractXmlSerializationTestSuite<UniqueBatchItemID> {
 
     @Override
     protected Class<UniqueBatchItemID> type() {

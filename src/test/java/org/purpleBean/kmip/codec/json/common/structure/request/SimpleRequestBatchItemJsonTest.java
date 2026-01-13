@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("SimpleRequestBatchItem JSON Serialization")
-class SimpleRequestBatchItemJsonTest extends AbstractJsonSerializationSuite<SimpleRequestBatchItem> {
+class SimpleRequestBatchItemJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestBatchItem> {
 
     @Override
     protected Class<SimpleRequestBatchItem> type() {

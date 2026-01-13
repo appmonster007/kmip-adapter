@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.InitializationVector;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("InitializationVector JSON Serialization Tests")
-class InitializationVectorJsonTest extends AbstractJsonSerializationSuite<InitializationVector> {
+class InitializationVectorJsonTest extends AbstractJsonSerializationTestSuite<InitializationVector> {
 
     @Override
     protected Class<InitializationVector> type() {

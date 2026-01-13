@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.PaddingMethod;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PaddingMethod TTLV Serialization")
-class PaddingMethodTtlvTest extends AbstractTtlvSerializationSuite<PaddingMethod> {
+class PaddingMethodTtlvTest extends AbstractTtlvSerializationTestSuite<PaddingMethod> {
     @Override
     protected Class<PaddingMethod> type() {
         return PaddingMethod.class;

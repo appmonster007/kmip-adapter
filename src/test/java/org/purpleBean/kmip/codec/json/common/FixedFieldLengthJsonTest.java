@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.FixedFieldLength;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("FixedFieldLength JSON Serialization Tests")
-class FixedFieldLengthJsonTest extends AbstractJsonSerializationSuite<FixedFieldLength> {
+class FixedFieldLengthJsonTest extends AbstractJsonSerializationTestSuite<FixedFieldLength> {
 
     @Override
     protected Class<FixedFieldLength> type() {

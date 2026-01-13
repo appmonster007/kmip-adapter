@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Password;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Password XML Serialization Tests")
-class PasswordXmlTest extends AbstractXmlSerializationSuite<Password> {
+class PasswordXmlTest extends AbstractXmlSerializationTestSuite<Password> {
 
     @Override
     protected Class<Password> type() {

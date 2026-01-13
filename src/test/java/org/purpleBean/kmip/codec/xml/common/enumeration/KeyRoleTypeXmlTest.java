@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.KeyRoleType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("KeyRoleType XML Serialization")
-class KeyRoleTypeXmlTest extends AbstractXmlSerializationSuite<KeyRoleType> {
+class KeyRoleTypeXmlTest extends AbstractXmlSerializationTestSuite<KeyRoleType> {
     @Override
     protected Class<KeyRoleType> type() {
         return KeyRoleType.class;

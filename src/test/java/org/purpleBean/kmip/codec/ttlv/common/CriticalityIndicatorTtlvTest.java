@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CriticalityIndicator;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CriticalityIndicator TTLV Serialization Tests")
-class CriticalityIndicatorTtlvTest extends AbstractTtlvSerializationSuite<CriticalityIndicator> {
+class CriticalityIndicatorTtlvTest extends AbstractTtlvSerializationTestSuite<CriticalityIndicator> {
 
     @Override
     protected Class<CriticalityIndicator> type() {

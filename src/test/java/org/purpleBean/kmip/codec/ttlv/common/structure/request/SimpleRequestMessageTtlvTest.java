@@ -5,12 +5,12 @@ import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.util.Objects;
 
 @DisplayName("SimpleRequestMessage TTLV Serialization")
-class SimpleRequestMessageTtlvTest extends AbstractTtlvSerializationSuite<SimpleRequestMessage> {
+class SimpleRequestMessageTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleRequestMessage> {
 
     @Override
     protected Class<SimpleRequestMessage> type() {

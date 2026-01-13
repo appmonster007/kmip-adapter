@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RngAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RngAlgorithm JSON Serialization")
-class RngAlgorithmJsonTest extends AbstractJsonSerializationSuite<RngAlgorithm> {
+class RngAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<RngAlgorithm> {
     @Override
     protected Class<RngAlgorithm> type() {
         return RngAlgorithm.class;

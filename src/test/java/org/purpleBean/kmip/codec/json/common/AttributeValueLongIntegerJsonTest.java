@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueLongInteger;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AttributeValue.LongInteger JSON Serialization Tests")
-class AttributeValueLongIntegerJsonTest extends AbstractJsonSerializationSuite<AttributeValueLongInteger> {
+class AttributeValueLongIntegerJsonTest extends AbstractJsonSerializationTestSuite<AttributeValueLongInteger> {
 
     @Override
     protected Class<AttributeValueLongInteger> type() {

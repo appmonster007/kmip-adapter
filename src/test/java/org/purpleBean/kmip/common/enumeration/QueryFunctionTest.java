@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("QueryFunction Domain Tests")
-class QueryFunctionTest extends AbstractKmipEnumerationSuite<QueryFunction> {
+class QueryFunctionTest extends AbstractKmipEnumerationTestSuite<QueryFunction> {
 
     @Override
     protected Class<QueryFunction> type() {

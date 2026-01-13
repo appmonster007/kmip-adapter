@@ -9,14 +9,14 @@ import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.KeyMaterialByteString;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
 import org.purpleBean.kmip.common.structure.KeyValueStructure;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
 @DisplayName("KeyValueStructure XML Serialization Tests")
-class KeyValueStructureXmlTest extends AbstractXmlSerializationSuite<KeyValueStructure> {
+class KeyValueStructureXmlTest extends AbstractXmlSerializationTestSuite<KeyValueStructure> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

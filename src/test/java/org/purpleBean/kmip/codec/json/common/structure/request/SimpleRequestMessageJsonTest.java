@@ -5,12 +5,12 @@ import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.Objects;
 
 @DisplayName("SimpleRequestMessage JSON Serialization")
-class SimpleRequestMessageJsonTest extends AbstractJsonSerializationSuite<SimpleRequestMessage> {
+class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestMessage> {
 
     @Override
     protected Class<SimpleRequestMessage> type() {

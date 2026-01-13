@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("ActivationDate Domain Tests")
-class ActivationDateTest extends AbstractKmipDataTypeAttributeSuite<ActivationDate> {
+class ActivationDateTest extends AbstractKmipDataTypeAttributeTestSuite<ActivationDate> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

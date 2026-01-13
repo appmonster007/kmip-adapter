@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.AttestationType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AttestationType XML Serialization")
-class AttestationTypeXmlTest extends AbstractXmlSerializationSuite<AttestationType> {
+class AttestationTypeXmlTest extends AbstractXmlSerializationTestSuite<AttestationType> {
     @Override
     protected Class<AttestationType> type() {
         return AttestationType.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueBoolean;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AttributeValue.Boolean TTLV Serialization Tests")
-class AttributeValueBooleanTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueBoolean> {
+class AttributeValueBooleanTtlvTest extends AbstractTtlvSerializationTestSuite<AttributeValueBoolean> {
 
     @Override
     protected Class<AttributeValueBoolean> type() {

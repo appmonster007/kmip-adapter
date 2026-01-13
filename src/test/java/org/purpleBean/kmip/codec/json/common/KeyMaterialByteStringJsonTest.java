@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyMaterialByteString;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyMaterialByteString JSON Serialization Tests")
-class KeyMaterialByteStringJsonTest extends AbstractJsonSerializationSuite<KeyMaterialByteString> {
+class KeyMaterialByteStringJsonTest extends AbstractJsonSerializationTestSuite<KeyMaterialByteString> {
 
     @Override
     protected Class<KeyMaterialByteString> type() {

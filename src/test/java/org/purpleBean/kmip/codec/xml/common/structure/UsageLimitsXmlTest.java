@@ -5,10 +5,10 @@ import org.purpleBean.kmip.common.UsageLimitsCount;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.common.structure.UsageLimits;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UsageLimits Xml Serialization Tests")
-class UsageLimitsXmlTest extends AbstractXmlSerializationSuite<UsageLimits> {
+class UsageLimitsXmlTest extends AbstractXmlSerializationTestSuite<UsageLimits> {
 
     @Override
     protected Class<UsageLimits> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Issuer;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Issuer XML Serialization Tests")
-class IssuerXmlTest extends AbstractXmlSerializationSuite<Issuer> {
+class IssuerXmlTest extends AbstractXmlSerializationTestSuite<Issuer> {
 
     @Override
     protected Class<Issuer> type() {

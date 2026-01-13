@@ -6,13 +6,13 @@ import org.purpleBean.kmip.AttributeValue;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CryptographicLength Domain Tests")
-class CryptographicLengthTest extends AbstractKmipDataTypeAttributeSuite<CryptographicLength> {
+class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<CryptographicLength> {
 
     @Override
     protected void setupDefaultSpec() {

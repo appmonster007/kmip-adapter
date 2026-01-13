@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DrbgAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DrbgAlgorithm JSON Serialization")
-class DrbgAlgorithmJsonTest extends AbstractJsonSerializationSuite<DrbgAlgorithm> {
+class DrbgAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<DrbgAlgorithm> {
     @Override
     protected Class<DrbgAlgorithm> type() {
         return DrbgAlgorithm.class;

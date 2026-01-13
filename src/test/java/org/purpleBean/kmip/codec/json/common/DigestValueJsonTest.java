@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DigestValue;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DigestValue JSON Serialization Tests")
-class DigestValueJsonTest extends AbstractJsonSerializationSuite<DigestValue> {
+class DigestValueJsonTest extends AbstractJsonSerializationTestSuite<DigestValue> {
 
     @Override
     protected Class<DigestValue> type() {

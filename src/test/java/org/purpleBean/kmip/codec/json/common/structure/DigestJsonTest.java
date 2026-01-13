@@ -5,10 +5,10 @@ import org.purpleBean.kmip.common.DigestValue;
 import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;
 import org.purpleBean.kmip.common.structure.Digest;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Digest Json Serialization Tests")
-class DigestJsonTest extends AbstractJsonSerializationSuite<Digest> {
+class DigestJsonTest extends AbstractJsonSerializationTestSuite<Digest> {
 
     @Override
     protected Class<Digest> type() {

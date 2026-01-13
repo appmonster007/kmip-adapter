@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.common.structure.AttributeValueStructure;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DisplayName("Attribute Ttlv Serialization Tests")
-class AttributeTtlvTest extends AbstractTtlvSerializationSuite<Attribute> {
+class AttributeTtlvTest extends AbstractTtlvSerializationTestSuite<Attribute> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

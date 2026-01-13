@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.BlockCipherMode;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("BlockCipherMode JSON Serialization")
-class BlockCipherModeJsonTest extends AbstractJsonSerializationSuite<BlockCipherMode> {
+class BlockCipherModeJsonTest extends AbstractJsonSerializationTestSuite<BlockCipherMode> {
     @Override
     protected Class<BlockCipherMode> type() {
         return BlockCipherMode.class;

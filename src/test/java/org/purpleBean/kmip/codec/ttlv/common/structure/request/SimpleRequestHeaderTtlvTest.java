@@ -3,10 +3,10 @@ package org.purpleBean.kmip.codec.ttlv.common.structure.request;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SimpleRequestHeader TTLV Serialization")
-class SimpleRequestHeaderTtlvTest extends AbstractTtlvSerializationSuite<SimpleRequestHeader> {
+class SimpleRequestHeaderTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleRequestHeader> {
 
     @Override
     protected Class<SimpleRequestHeader> type() {

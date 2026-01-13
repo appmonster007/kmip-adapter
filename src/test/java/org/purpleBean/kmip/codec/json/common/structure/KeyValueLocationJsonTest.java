@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyValueLocationValue;
 import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.common.structure.KeyValueLocation;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyValueLocation Json Serialization Tests")
-class KeyValueLocationJsonTest extends AbstractJsonSerializationSuite<KeyValueLocation> {
+class KeyValueLocationJsonTest extends AbstractJsonSerializationTestSuite<KeyValueLocation> {
 
     @Override
     protected Class<KeyValueLocation> type() {

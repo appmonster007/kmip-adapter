@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PrivateKeyUniqueIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PrivateKeyUniqueIdentifier TTLV Serialization Tests")
-class PrivateKeyUniqueIdentifierTtlvTest extends AbstractTtlvSerializationSuite<PrivateKeyUniqueIdentifier> {
+class PrivateKeyUniqueIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateKeyUniqueIdentifier> {
 
     @Override
     protected Class<PrivateKeyUniqueIdentifier> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CertificateLength;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CertificateLength XML Serialization Tests")
-class CertificateLengthXmlTest extends AbstractXmlSerializationSuite<CertificateLength> {
+class CertificateLengthXmlTest extends AbstractXmlSerializationTestSuite<CertificateLength> {
 
     @Override
     protected Class<CertificateLength> type() {

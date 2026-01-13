@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.RevocationMessage;
 import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("RevocationReason Domain Tests")
-class RevocationReasonTest extends AbstractKmipStructureAttributeSuite<RevocationReason> {
+class RevocationReasonTest extends AbstractKmipStructureAttributeTestSuite<RevocationReason> {
 
     @Override
     protected void setupDefaultSpec() {

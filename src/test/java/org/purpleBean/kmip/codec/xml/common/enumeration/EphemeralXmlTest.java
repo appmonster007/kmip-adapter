@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.Ephemeral;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Ephemeral XML Serialization")
-class EphemeralXmlTest extends AbstractXmlSerializationSuite<Ephemeral> {
+class EphemeralXmlTest extends AbstractXmlSerializationTestSuite<Ephemeral> {
     @Override
     protected Class<Ephemeral> type() {
         return Ephemeral.class;

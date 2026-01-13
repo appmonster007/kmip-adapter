@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.EndpointRole;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("EndpointRole TTLV Serialization")
-class EndpointRoleTtlvTest extends AbstractTtlvSerializationSuite<EndpointRole> {
+class EndpointRoleTtlvTest extends AbstractTtlvSerializationTestSuite<EndpointRole> {
     @Override
     protected Class<EndpointRole> type() {
         return EndpointRole.class;

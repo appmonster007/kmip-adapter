@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("UsageLimitsTotal TTLV Serialization Tests")
-class UsageLimitsTotalTtlvTest extends AbstractTtlvSerializationSuite<UsageLimitsTotal> {
+class UsageLimitsTotalTtlvTest extends AbstractTtlvSerializationTestSuite<UsageLimitsTotal> {
 
     @Override
     protected Class<UsageLimitsTotal> type() {

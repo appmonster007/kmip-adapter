@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CRTCoefficient;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("CRTCoefficient JSON Serialization Tests")
-class CRTCoefficientJsonTest extends AbstractJsonSerializationSuite<CRTCoefficient> {
+class CRTCoefficientJsonTest extends AbstractJsonSerializationTestSuite<CRTCoefficient> {
 
     @Override
     protected Class<CRTCoefficient> type() {

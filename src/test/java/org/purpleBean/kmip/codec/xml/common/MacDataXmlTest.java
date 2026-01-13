@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MacData;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.nio.ByteBuffer;
 
 @DisplayName("MacData XML Serialization Tests")
-class MacDataXmlTest extends AbstractXmlSerializationSuite<MacData> {
+class MacDataXmlTest extends AbstractXmlSerializationTestSuite<MacData> {
 
     @Override
     protected Class<MacData> type() {

@@ -2,11 +2,11 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.CryptographicLength;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 
 @DisplayName("CryptographicLength TTLV Serialization Tests")
-class CryptographicLengthTtlvTest extends AbstractTtlvSerializationSuite<CryptographicLength> {
+class CryptographicLengthTtlvTest extends AbstractTtlvSerializationTestSuite<CryptographicLength> {
 
     @Override
     protected Class<CryptographicLength> type() {

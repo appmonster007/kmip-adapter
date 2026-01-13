@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.Ephemeral;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Ephemeral TTLV Serialization")
-class EphemeralTtlvTest extends AbstractTtlvSerializationSuite<Ephemeral> {
+class EphemeralTtlvTest extends AbstractTtlvSerializationTestSuite<Ephemeral> {
     @Override
     protected Class<Ephemeral> type() {
         return Ephemeral.class;

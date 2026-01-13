@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.IssuerAlternativeName;
 import org.purpleBean.kmip.common.IssuerDistinguishedName;
 import org.purpleBean.kmip.common.structure.X509CertificateIssuer;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("X509CertificateIssuer Json Serialization Tests")
-class X509CertificateIssuerJsonTest extends AbstractJsonSerializationSuite<X509CertificateIssuer> {
+class X509CertificateIssuerJsonTest extends AbstractJsonSerializationTestSuite<X509CertificateIssuer> {
 
     @Override
     protected Class<X509CertificateIssuer> type() {

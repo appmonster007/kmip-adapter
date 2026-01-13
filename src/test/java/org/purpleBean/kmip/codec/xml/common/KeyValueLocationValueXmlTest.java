@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyValueLocationValue;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("KeyValueLocationValue XML Serialization Tests")
-class KeyValueLocationValueXmlTest extends AbstractXmlSerializationSuite<KeyValueLocationValue> {
+class KeyValueLocationValueXmlTest extends AbstractXmlSerializationTestSuite<KeyValueLocationValue> {
 
     @Override
     protected Class<KeyValueLocationValue> type() {

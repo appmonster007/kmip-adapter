@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.ApplicationData;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ApplicationData XML Serialization Tests")
-class ApplicationDataXmlTest extends AbstractXmlSerializationSuite<ApplicationData> {
+class ApplicationDataXmlTest extends AbstractXmlSerializationTestSuite<ApplicationData> {
 
     @Override
     protected Class<ApplicationData> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.ExtensionTag;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ExtensionTag XML Serialization Tests")
-class ExtensionTagXmlTest extends AbstractXmlSerializationSuite<ExtensionTag> {
+class ExtensionTagXmlTest extends AbstractXmlSerializationTestSuite<ExtensionTag> {
 
     @Override
     protected Class<ExtensionTag> type() {

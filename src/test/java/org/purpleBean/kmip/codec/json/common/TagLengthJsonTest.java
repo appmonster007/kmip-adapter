@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.TagLength;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("TagLength JSON Serialization Tests")
-class TagLengthJsonTest extends AbstractJsonSerializationSuite<TagLength> {
+class TagLengthJsonTest extends AbstractJsonSerializationTestSuite<TagLength> {
 
     @Override
     protected Class<TagLength> type() {

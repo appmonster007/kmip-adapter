@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.NetworkIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("NetworkIdentifier JSON Serialization Tests")
-class NetworkIdentifierJsonTest extends AbstractJsonSerializationSuite<NetworkIdentifier> {
+class NetworkIdentifierJsonTest extends AbstractJsonSerializationTestSuite<NetworkIdentifier> {
 
     @Override
     protected Class<NetworkIdentifier> type() {

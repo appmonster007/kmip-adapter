@@ -3,13 +3,13 @@ package org.purpleBean.kmip.codec.json.common.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Key;
 import org.purpleBean.kmip.common.structure.TransparentSymmetricKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("TransparentSymmetricKey JSON Serialization Tests")
-class TransparentSymmetricKeyJsonTest extends AbstractJsonSerializationSuite<TransparentSymmetricKey> {
+class TransparentSymmetricKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentSymmetricKey> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

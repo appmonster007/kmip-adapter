@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.SplitKeyPolynomial;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SplitKeyPolynomial TTLV Serialization")
-class SplitKeyPolynomialTtlvTest extends AbstractTtlvSerializationSuite<SplitKeyPolynomial> {
+class SplitKeyPolynomialTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKeyPolynomial> {
     @Override
     protected Class<SplitKeyPolynomial> type() {
         return SplitKeyPolynomial.class;

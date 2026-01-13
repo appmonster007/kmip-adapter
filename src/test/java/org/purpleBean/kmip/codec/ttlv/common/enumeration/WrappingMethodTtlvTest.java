@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.WrappingMethod;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("WrappingMethod TTLV Serialization")
-class WrappingMethodTtlvTest extends AbstractTtlvSerializationSuite<WrappingMethod> {
+class WrappingMethodTtlvTest extends AbstractTtlvSerializationTestSuite<WrappingMethod> {
     @Override
     protected Class<WrappingMethod> type() {
         return WrappingMethod.class;

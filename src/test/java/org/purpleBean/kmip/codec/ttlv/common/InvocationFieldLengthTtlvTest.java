@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.InvocationFieldLength;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("InvocationFieldLength TTLV Serialization Tests")
-class InvocationFieldLengthTtlvTest extends AbstractTtlvSerializationSuite<InvocationFieldLength> {
+class InvocationFieldLengthTtlvTest extends AbstractTtlvSerializationTestSuite<InvocationFieldLength> {
 
     @Override
     protected Class<InvocationFieldLength> type() {

@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("ArchiveDate Domain Tests")
-class ArchiveDateTest extends AbstractKmipDataTypeAttributeSuite<ArchiveDate> {
+class ArchiveDateTest extends AbstractKmipDataTypeAttributeTestSuite<ArchiveDate> {
 
     @Override
     protected void setupDefaultSpec() {

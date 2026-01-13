@@ -5,7 +5,7 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.common.Modulus;
 import org.purpleBean.kmip.common.PrivateExponent;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("TransparentRsaPrivateKey Domain Tests")
-class TransparentRsaPrivateKeyTest extends AbstractKmipStructureSuite<TransparentRsaPrivateKey> {
+class TransparentRsaPrivateKeyTest extends AbstractKmipStructureTestSuite<TransparentRsaPrivateKey> {
 
     @Override
     protected Class<TransparentRsaPrivateKey> type() {

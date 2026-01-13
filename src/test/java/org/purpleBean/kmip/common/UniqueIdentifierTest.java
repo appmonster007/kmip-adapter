@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 @DisplayName("UniqueIdentifier Domain Tests")
-class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeSuite<UniqueIdentifier> {
+class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeTestSuite<UniqueIdentifier> {
 
     @Override
     protected void setupDefaultSpec() {

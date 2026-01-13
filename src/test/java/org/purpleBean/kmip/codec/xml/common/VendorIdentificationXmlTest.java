@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.VendorIdentification;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("VendorIdentification XML Serialization Tests")
-class VendorIdentificationXmlTest extends AbstractXmlSerializationSuite<VendorIdentification> {
+class VendorIdentificationXmlTest extends AbstractXmlSerializationTestSuite<VendorIdentification> {
 
     @Override
     protected Class<VendorIdentification> type() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.QString;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("QString JSON Serialization Tests")
-class QStringJsonTest extends AbstractJsonSerializationSuite<QString> {
+class QStringJsonTest extends AbstractJsonSerializationTestSuite<QString> {
 
     @Override
     protected Class<QString> type() {

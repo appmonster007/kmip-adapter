@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.G;
 import org.purpleBean.kmip.common.P;
 import org.purpleBean.kmip.common.Q;
 import org.purpleBean.kmip.common.X;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("TransparentDsaPrivateKey Domain Tests")
-class TransparentDsaPrivateKeyTest extends AbstractKmipStructureSuite<TransparentDsaPrivateKey> {
+class TransparentDsaPrivateKeyTest extends AbstractKmipStructureTestSuite<TransparentDsaPrivateKey> {
 
     @Override
     protected Class<TransparentDsaPrivateKey> type() {

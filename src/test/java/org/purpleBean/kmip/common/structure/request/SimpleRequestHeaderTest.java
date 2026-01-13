@@ -3,12 +3,12 @@ package org.purpleBean.kmip.common.structure.request;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
 
 @DisplayName("SimpleRequestHeader Structure Semantics")
-class SimpleRequestHeaderTest extends AbstractKmipStructureSuite<SimpleRequestHeader> {
+class SimpleRequestHeaderTest extends AbstractKmipStructureTestSuite<SimpleRequestHeader> {
 
     @Override
     protected Class<SimpleRequestHeader> type() {

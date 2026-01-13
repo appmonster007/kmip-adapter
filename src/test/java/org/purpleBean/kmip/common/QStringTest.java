@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("QString Domain Tests")
-class QStringTest extends AbstractKmipDataTypeSuite<QString> {
+class QStringTest extends AbstractKmipDataTypeTestSuite<QString> {
 
     @Override
     protected Class<QString> type() {

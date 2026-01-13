@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
 import org.purpleBean.kmip.common.structure.CryptographicParameters;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CryptographicParameters Json Serialization Tests")
-class CryptographicParametersJsonTest extends AbstractJsonSerializationSuite<CryptographicParameters> {
+class CryptographicParametersJsonTest extends AbstractJsonSerializationTestSuite<CryptographicParameters> {
 
     @Override
     protected Class<CryptographicParameters> type() {

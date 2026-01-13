@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RngMode;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RngMode XML Serialization")
-class RngModeXmlTest extends AbstractXmlSerializationSuite<RngMode> {
+class RngModeXmlTest extends AbstractXmlSerializationTestSuite<RngMode> {
     @Override
     protected Class<RngMode> type() {
         return RngMode.class;

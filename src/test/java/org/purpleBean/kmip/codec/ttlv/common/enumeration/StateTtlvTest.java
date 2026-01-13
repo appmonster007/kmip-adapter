@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("State TTLV Serialization")
-class StateTtlvTest extends AbstractTtlvSerializationSuite<State> {
+class StateTtlvTest extends AbstractTtlvSerializationTestSuite<State> {
     @Override
     protected Class<State> type() {
         return State.class;

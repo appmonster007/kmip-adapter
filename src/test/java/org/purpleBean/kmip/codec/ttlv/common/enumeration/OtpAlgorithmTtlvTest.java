@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.OtpAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("OtpAlgorithm TTLV Serialization")
-class OtpAlgorithmTtlvTest extends AbstractTtlvSerializationSuite<OtpAlgorithm> {
+class OtpAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<OtpAlgorithm> {
     @Override
     protected Class<OtpAlgorithm> type() {
         return OtpAlgorithm.class;

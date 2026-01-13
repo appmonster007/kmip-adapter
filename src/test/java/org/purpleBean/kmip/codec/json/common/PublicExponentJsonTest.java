@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PublicExponent;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("PublicExponent JSON Serialization Tests")
-class PublicExponentJsonTest extends AbstractJsonSerializationSuite<PublicExponent> {
+class PublicExponentJsonTest extends AbstractJsonSerializationTestSuite<PublicExponent> {
 
     @Override
     protected Class<PublicExponent> type() {

@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.ApplicationData;
 import org.purpleBean.kmip.common.ApplicationNamespace;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("ApplicationSpecificInformation Domain Tests")
-class ApplicationSpecificInformationTest extends AbstractKmipStructureAttributeSuite<ApplicationSpecificInformation> {
+class ApplicationSpecificInformationTest extends AbstractKmipStructureAttributeTestSuite<ApplicationSpecificInformation> {
 
     @Override
     protected void setupDefaultSpec() {

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ValidityIndicator;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ValidityIndicator XML Serialization")
-class ValidityIndicatorXmlTest extends AbstractXmlSerializationSuite<ValidityIndicator> {
+class ValidityIndicatorXmlTest extends AbstractXmlSerializationTestSuite<ValidityIndicator> {
     @Override
     protected Class<ValidityIndicator> type() {
         return ValidityIndicator.class;

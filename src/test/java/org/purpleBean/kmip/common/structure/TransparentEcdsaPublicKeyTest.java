@@ -5,14 +5,14 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.common.QString;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("TransparentEcdsaPublicKey Domain Tests")
-class TransparentEcdsaPublicKeyTest extends AbstractKmipStructureSuite<TransparentEcdsaPublicKey> {
+class TransparentEcdsaPublicKeyTest extends AbstractKmipStructureTestSuite<TransparentEcdsaPublicKey> {
 
     @Override
     protected Class<TransparentEcdsaPublicKey> type() {

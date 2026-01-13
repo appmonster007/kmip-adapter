@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.LinkedObjectIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("LinkedObjectIdentifier TTLV Serialization Tests")
-class LinkedObjectIdentifierTtlvTest extends AbstractTtlvSerializationSuite<LinkedObjectIdentifier> {
+class LinkedObjectIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<LinkedObjectIdentifier> {
 
     @Override
     protected Class<LinkedObjectIdentifier> type() {

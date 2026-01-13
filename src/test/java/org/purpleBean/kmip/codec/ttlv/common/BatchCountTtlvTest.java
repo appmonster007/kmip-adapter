@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.BatchCount;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("BatchCount TTLV Serialization Tests")
-class BatchCountTtlvTest extends AbstractTtlvSerializationSuite<BatchCount> {
+class BatchCountTtlvTest extends AbstractTtlvSerializationTestSuite<BatchCount> {
 
     @Override
     protected Class<BatchCount> type() {

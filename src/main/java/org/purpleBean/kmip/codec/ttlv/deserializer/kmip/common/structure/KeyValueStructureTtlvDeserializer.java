@@ -4,7 +4,7 @@ import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KeyMaterial;
 import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.KeyValueStructure;
 

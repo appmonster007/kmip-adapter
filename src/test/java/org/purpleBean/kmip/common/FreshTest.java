@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 @DisplayName("Fresh Domain Tests")
-class FreshTest extends AbstractKmipDataTypeAttributeSuite<Fresh> {
+class FreshTest extends AbstractKmipDataTypeAttributeTestSuite<Fresh> {
 
     @Override
     protected void setupDefaultSpec() {

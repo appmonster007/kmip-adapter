@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RecommendedCurve JSON Serialization")
-class RecommendedCurveJsonTest extends AbstractJsonSerializationSuite<RecommendedCurve> {
+class RecommendedCurveJsonTest extends AbstractJsonSerializationTestSuite<RecommendedCurve> {
     @Override
     protected Class<RecommendedCurve> type() {
         return RecommendedCurve.class;

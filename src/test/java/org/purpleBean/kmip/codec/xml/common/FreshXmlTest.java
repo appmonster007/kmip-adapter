@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Fresh;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Fresh XML Serialization Tests")
-class FreshXmlTest extends AbstractXmlSerializationSuite<Fresh> {
+class FreshXmlTest extends AbstractXmlSerializationTestSuite<Fresh> {
 
     @Override
     protected Class<Fresh> type() {

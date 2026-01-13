@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("UsageLimitsTotal Domain Tests")
-class UsageLimitsTotalTest extends AbstractKmipDataTypeSuite<UsageLimitsTotal> {
+class UsageLimitsTotalTest extends AbstractKmipDataTypeTestSuite<UsageLimitsTotal> {
 
     @Override
     protected Class<UsageLimitsTotal> type() {

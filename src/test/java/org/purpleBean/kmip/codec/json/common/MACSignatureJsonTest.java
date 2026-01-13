@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MACSignature;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("MACSignature JSON Serialization Tests")
-class MACSignatureJsonTest extends AbstractJsonSerializationSuite<MACSignature> {
+class MACSignatureJsonTest extends AbstractJsonSerializationTestSuite<MACSignature> {
 
     @Override
     protected Class<MACSignature> type() {

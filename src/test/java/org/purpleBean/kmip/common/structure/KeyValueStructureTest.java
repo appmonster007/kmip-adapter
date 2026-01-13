@@ -7,14 +7,14 @@ import org.purpleBean.kmip.KmipAttribute;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.common.AttributeValueTextString;
 import org.purpleBean.kmip.common.KeyMaterialByteString;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("KeyValueStructure Domain Tests")
-class KeyValueStructureTest extends AbstractKmipStructureSuite<KeyValueStructure> {
+class KeyValueStructureTest extends AbstractKmipStructureTestSuite<KeyValueStructure> {
 
     @Override
     protected Class<KeyValueStructure> type() {

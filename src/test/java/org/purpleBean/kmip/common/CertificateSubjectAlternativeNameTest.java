@@ -2,10 +2,10 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("CertificateSubjectAlternativeName Domain Tests")
-class CertificateSubjectAlternativeNameTest extends AbstractKmipDataTypeSuite<CertificateSubjectAlternativeName> {
+class CertificateSubjectAlternativeNameTest extends AbstractKmipDataTypeTestSuite<CertificateSubjectAlternativeName> {
 
     @Override
     protected Class<CertificateSubjectAlternativeName> type() {

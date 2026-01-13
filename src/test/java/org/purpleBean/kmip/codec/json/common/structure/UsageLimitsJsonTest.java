@@ -5,10 +5,10 @@ import org.purpleBean.kmip.common.UsageLimitsCount;
 import org.purpleBean.kmip.common.UsageLimitsTotal;
 import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.common.structure.UsageLimits;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("UsageLimits Json Serialization Tests")
-class UsageLimitsJsonTest extends AbstractJsonSerializationSuite<UsageLimits> {
+class UsageLimitsJsonTest extends AbstractJsonSerializationTestSuite<UsageLimits> {
 
     @Override
     protected Class<UsageLimits> type() {

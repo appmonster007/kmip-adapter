@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MacData;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.nio.ByteBuffer;
 
 @DisplayName("MacData JSON Serialization Tests")
-class MacDataJsonTest extends AbstractJsonSerializationSuite<MacData> {
+class MacDataJsonTest extends AbstractJsonSerializationTestSuite<MacData> {
 
     @Override
     protected Class<MacData> type() {

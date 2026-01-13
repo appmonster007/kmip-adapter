@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ClientRegistrationMethod;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ClientRegistrationMethod XML Serialization")
-class ClientRegistrationMethodXmlTest extends AbstractXmlSerializationSuite<ClientRegistrationMethod> {
+class ClientRegistrationMethodXmlTest extends AbstractXmlSerializationTestSuite<ClientRegistrationMethod> {
     @Override
     protected Class<ClientRegistrationMethod> type() {
         return ClientRegistrationMethod.class;

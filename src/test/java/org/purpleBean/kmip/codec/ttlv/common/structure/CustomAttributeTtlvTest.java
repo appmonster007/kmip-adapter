@@ -6,13 +6,13 @@ import org.purpleBean.kmip.common.AttributeValueDateTime;
 import org.purpleBean.kmip.common.AttributeValueEnumeration;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.CustomAttribute;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("CustomAttribute TTLV Serialization Tests")
-class CustomAttributeTtlvTest extends AbstractTtlvSerializationSuite<CustomAttribute> {
+class CustomAttributeTtlvTest extends AbstractTtlvSerializationTestSuite<CustomAttribute> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

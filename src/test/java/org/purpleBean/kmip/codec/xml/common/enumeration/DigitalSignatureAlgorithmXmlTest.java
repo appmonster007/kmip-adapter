@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DigitalSignatureAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DigitalSignatureAlgorithm XML Serialization")
-class DigitalSignatureAlgorithmXmlTest extends AbstractXmlSerializationSuite<DigitalSignatureAlgorithm> {
+class DigitalSignatureAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<DigitalSignatureAlgorithm> {
     @Override
     protected Class<DigitalSignatureAlgorithm> type() {
         return DigitalSignatureAlgorithm.class;

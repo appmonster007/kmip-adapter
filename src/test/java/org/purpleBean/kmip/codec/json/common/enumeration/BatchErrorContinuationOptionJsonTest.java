@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.BatchErrorContinuationOption;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("BatchErrorContinuationOption JSON Serialization")
-class BatchErrorContinuationOptionJsonTest extends AbstractJsonSerializationSuite<BatchErrorContinuationOption> {
+class BatchErrorContinuationOptionJsonTest extends AbstractJsonSerializationTestSuite<BatchErrorContinuationOption> {
     @Override
     protected Class<BatchErrorContinuationOption> type() {
         return BatchErrorContinuationOption.class;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.MediaIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("MediaIdentifier TTLV Serialization Tests")
-class MediaIdentifierTtlvTest extends AbstractTtlvSerializationSuite<MediaIdentifier> {
+class MediaIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<MediaIdentifier> {
 
     @Override
     protected Class<MediaIdentifier> type() {

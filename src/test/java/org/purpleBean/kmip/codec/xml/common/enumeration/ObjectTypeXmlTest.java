@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.ObjectType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ObjectType XML Serialization")
-class ObjectTypeXmlTest extends AbstractXmlSerializationSuite<ObjectType> {
+class ObjectTypeXmlTest extends AbstractXmlSerializationTestSuite<ObjectType> {
     @Override
     protected Class<ObjectType> type() {
         return ObjectType.class;

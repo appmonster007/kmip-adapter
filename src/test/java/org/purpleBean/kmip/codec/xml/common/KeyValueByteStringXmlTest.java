@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.KeyValueByteString;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("KeyValue.ByteString XML Serialization Tests")
-class KeyValueByteStringXmlTest extends AbstractXmlSerializationSuite<KeyValueByteString> {
+class KeyValueByteStringXmlTest extends AbstractXmlSerializationTestSuite<KeyValueByteString> {
 
     @Override
     protected Class<KeyValueByteString> type() {

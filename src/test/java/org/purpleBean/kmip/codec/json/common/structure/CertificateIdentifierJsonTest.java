@@ -4,10 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Issuer;
 import org.purpleBean.kmip.common.SerialNumber;
 import org.purpleBean.kmip.common.structure.CertificateIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateIdentifier Json Serialization Tests")
-class CertificateIdentifierJsonTest extends AbstractJsonSerializationSuite<CertificateIdentifier> {
+class CertificateIdentifierJsonTest extends AbstractJsonSerializationTestSuite<CertificateIdentifier> {
 
     @Override
     protected Class<CertificateIdentifier> type() {

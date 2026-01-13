@@ -3,7 +3,7 @@ package org.purpleBean.kmip.common.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CryptographicAlgorithm Domain Tests")
-class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeSuite<CryptographicAlgorithm> {
+class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSuite<CryptographicAlgorithm> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -48,7 +48,7 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeSuite<C
         return true;
     }
 
-    // Implementation of AbstractKmipDataTypeAttributeSuite methods
+    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
     @Override
     public boolean expectAlwaysPresent() {
         return true;

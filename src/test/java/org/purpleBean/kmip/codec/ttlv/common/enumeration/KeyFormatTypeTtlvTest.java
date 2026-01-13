@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyFormatType TTLV Serialization")
-class KeyFormatTypeTtlvTest extends AbstractTtlvSerializationSuite<KeyFormatType> {
+class KeyFormatTypeTtlvTest extends AbstractTtlvSerializationTestSuite<KeyFormatType> {
     @Override
     protected Class<KeyFormatType> type() {
         return KeyFormatType.class;

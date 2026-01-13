@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("LastChangeDate Domain Tests")
-class LastChangeDateTest extends AbstractKmipDataTypeAttributeSuite<LastChangeDate> {
+class LastChangeDateTest extends AbstractKmipDataTypeAttributeTestSuite<LastChangeDate> {
 
     @Override
     protected void setupDefaultSpec() {

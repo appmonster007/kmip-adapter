@@ -8,7 +8,7 @@ import org.purpleBean.kmip.StringUtils;
 import org.purpleBean.kmip.common.ActivationDate;
 import org.purpleBean.kmip.common.AttributeIndex;
 import org.purpleBean.kmip.common.AttributeName;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -17,7 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Attribute Domain Tests")
-class AttributeTest extends AbstractKmipStructureSuite<Attribute> {
+class AttributeTest extends AbstractKmipStructureTestSuite<Attribute> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 

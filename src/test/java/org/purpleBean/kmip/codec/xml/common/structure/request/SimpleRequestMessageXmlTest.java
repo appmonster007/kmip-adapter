@@ -6,14 +6,14 @@ import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("SimpleRequestMessage XML Serialization")
-class SimpleRequestMessageXmlTest extends AbstractXmlSerializationSuite<SimpleRequestMessage> {
+class SimpleRequestMessageXmlTest extends AbstractXmlSerializationTestSuite<SimpleRequestMessage> {
 
     @Override
     protected Class<SimpleRequestMessage> type() {

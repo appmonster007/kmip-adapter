@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Salt;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Salt JSON Serialization Tests")
-class SaltJsonTest extends AbstractJsonSerializationSuite<Salt> {
+class SaltJsonTest extends AbstractJsonSerializationTestSuite<Salt> {
 
     @Override
     protected Class<Salt> type() {

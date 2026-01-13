@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.UsageLimitsCount;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("UsageLimitsCount JSON Serialization Tests")
-class UsageLimitsCountJsonTest extends AbstractJsonSerializationSuite<UsageLimitsCount> {
+class UsageLimitsCountJsonTest extends AbstractJsonSerializationTestSuite<UsageLimitsCount> {
 
     @Override
     protected Class<UsageLimitsCount> type() {

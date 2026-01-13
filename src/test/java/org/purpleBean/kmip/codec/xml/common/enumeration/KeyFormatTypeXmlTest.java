@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.KeyFormatType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("KeyFormatType XML Serialization")
-class KeyFormatTypeXmlTest extends AbstractXmlSerializationSuite<KeyFormatType> {
+class KeyFormatTypeXmlTest extends AbstractXmlSerializationTestSuite<KeyFormatType> {
     @Override
     protected Class<KeyFormatType> type() {
         return KeyFormatType.class;

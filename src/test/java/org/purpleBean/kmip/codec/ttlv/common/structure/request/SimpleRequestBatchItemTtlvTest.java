@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SimpleRequestBatchItem TTLV Serialization")
-class SimpleRequestBatchItemTtlvTest extends AbstractTtlvSerializationSuite<SimpleRequestBatchItem> {
+class SimpleRequestBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleRequestBatchItem> {
 
     @Override
     protected Class<SimpleRequestBatchItem> type() {

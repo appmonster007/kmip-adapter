@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RotateNameType;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RotateNameType TTLV Serialization")
-class RotateNameTypeTtlvTest extends AbstractTtlvSerializationSuite<RotateNameType> {
+class RotateNameTypeTtlvTest extends AbstractTtlvSerializationTestSuite<RotateNameType> {
     @Override
     protected Class<RotateNameType> type() {
         return RotateNameType.class;

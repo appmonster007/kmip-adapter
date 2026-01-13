@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.DeactivationReasonCode;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DeactivationReasonCode XML Serialization")
-class DeactivationReasonCodeXmlTest extends AbstractXmlSerializationSuite<DeactivationReasonCode> {
+class DeactivationReasonCodeXmlTest extends AbstractXmlSerializationTestSuite<DeactivationReasonCode> {
     @Override
     protected Class<DeactivationReasonCode> type() {
         return DeactivationReasonCode.class;

@@ -6,14 +6,14 @@ import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.common.*;
 import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("CryptographicParameters Domain Tests")
-class CryptographicParametersTest extends AbstractKmipStructureAttributeSuite<CryptographicParameters> {
+class CryptographicParametersTest extends AbstractKmipStructureAttributeTestSuite<CryptographicParameters> {
 
     @Override
     protected void setupDefaultSpec() {

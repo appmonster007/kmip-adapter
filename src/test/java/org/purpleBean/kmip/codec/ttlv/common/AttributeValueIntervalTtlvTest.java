@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.AttributeValueInterval;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AttributeValue.Interval TTLV Serialization Tests")
-class AttributeValueIntervalTtlvTest extends AbstractTtlvSerializationSuite<AttributeValueInterval> {
+class AttributeValueIntervalTtlvTest extends AbstractTtlvSerializationTestSuite<AttributeValueInterval> {
 
     @Override
     protected Class<AttributeValueInterval> type() {

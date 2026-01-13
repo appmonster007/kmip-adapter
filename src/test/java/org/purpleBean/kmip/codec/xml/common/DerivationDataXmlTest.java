@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.DerivationData;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DerivationData XML Serialization Tests")
-class DerivationDataXmlTest extends AbstractXmlSerializationSuite<DerivationData> {
+class DerivationDataXmlTest extends AbstractXmlSerializationTestSuite<DerivationData> {
 
     @Override
     protected Class<DerivationData> type() {

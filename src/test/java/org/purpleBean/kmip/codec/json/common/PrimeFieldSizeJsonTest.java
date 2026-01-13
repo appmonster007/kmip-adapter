@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PrimeFieldSize;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("PrimeFieldSize JSON Serialization Tests")
-class PrimeFieldSizeJsonTest extends AbstractJsonSerializationSuite<PrimeFieldSize> {
+class PrimeFieldSizeJsonTest extends AbstractJsonSerializationTestSuite<PrimeFieldSize> {
 
     @Override
     protected Class<PrimeFieldSize> type() {

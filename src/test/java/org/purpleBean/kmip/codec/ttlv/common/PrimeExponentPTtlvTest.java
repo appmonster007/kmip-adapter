@@ -2,12 +2,12 @@ package org.purpleBean.kmip.codec.ttlv.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.PrimeExponentP;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.math.BigInteger;
 
 @DisplayName("PrimeExponentP TTLV Serialization Tests")
-class PrimeExponentPTtlvTest extends AbstractTtlvSerializationSuite<PrimeExponentP> {
+class PrimeExponentPTtlvTest extends AbstractTtlvSerializationTestSuite<PrimeExponentP> {
 
     @Override
     protected Class<PrimeExponentP> type() {

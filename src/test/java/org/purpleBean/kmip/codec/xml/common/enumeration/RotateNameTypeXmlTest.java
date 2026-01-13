@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.xml.common.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.enumeration.RotateNameType;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RotateNameType XML Serialization")
-class RotateNameTypeXmlTest extends AbstractXmlSerializationSuite<RotateNameType> {
+class RotateNameTypeXmlTest extends AbstractXmlSerializationTestSuite<RotateNameType> {
     @Override
     protected Class<RotateNameType> type() {
         return RotateNameType.class;

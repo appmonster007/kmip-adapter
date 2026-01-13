@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure.reques
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.common.Offset;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Offset JSON Serialization Tests")
-class OffsetJsonTest extends AbstractJsonSerializationSuite<Offset> {
+class OffsetJsonTest extends AbstractJsonSerializationTestSuite<Offset> {
 
     @Override
     protected Class<Offset> type() {

@@ -3,10 +3,10 @@ package org.purpleBean.kmip.codec.json.common.structure.request;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationSuite;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("SimpleRequestHeader JSON Serialization")
-class SimpleRequestHeaderJsonTest extends AbstractJsonSerializationSuite<SimpleRequestHeader> {
+class SimpleRequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestHeader> {
 
     @Override
     protected Class<SimpleRequestHeader> type() {
