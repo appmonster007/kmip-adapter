@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.SplitKeyParts;
 public class SplitKeyPartsBenchmarkSubject extends KmipBenchmarkSubject<SplitKeyParts> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public SplitKeyPartsBenchmarkSubject() throws Exception {
         SplitKeyParts splitKeyParts = SplitKeyParts.builder().value(2).build();

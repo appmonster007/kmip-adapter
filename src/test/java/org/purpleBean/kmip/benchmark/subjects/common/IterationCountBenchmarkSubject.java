@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.IterationCount;
 public class IterationCountBenchmarkSubject extends KmipBenchmarkSubject<IterationCount> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public IterationCountBenchmarkSubject() throws Exception {
         IterationCount iterationCount = IterationCount.builder().value(1000).build();

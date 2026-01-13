@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.ApplicationData;
 public class ApplicationDataBenchmarkSubject extends KmipBenchmarkSubject<ApplicationData> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ApplicationDataBenchmarkSubject() throws Exception {
         ApplicationData applicationData = ApplicationData.builder().value("test-data").build();

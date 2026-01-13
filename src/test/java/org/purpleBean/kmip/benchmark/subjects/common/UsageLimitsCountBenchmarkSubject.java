@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.UsageLimitsCount;
 public class UsageLimitsCountBenchmarkSubject extends KmipBenchmarkSubject<UsageLimitsCount> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public UsageLimitsCountBenchmarkSubject() throws Exception {
         UsageLimitsCount usageLimitsCount = UsageLimitsCount.builder().value(100L).build();

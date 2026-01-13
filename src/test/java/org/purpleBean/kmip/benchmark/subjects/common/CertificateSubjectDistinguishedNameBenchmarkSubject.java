@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CertificateSubjectDistinguishedName;
 public class CertificateSubjectDistinguishedNameBenchmarkSubject extends KmipBenchmarkSubject<CertificateSubjectDistinguishedName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CertificateSubjectDistinguishedNameBenchmarkSubject() throws Exception {
         CertificateSubjectDistinguishedName certificateSubjectDistinguishedName = CertificateSubjectDistinguishedName.builder().value("test-subject-dn").build();

@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.InvocationFieldLength;
 public class InvocationFieldLengthBenchmarkSubject extends KmipBenchmarkSubject<InvocationFieldLength> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public InvocationFieldLengthBenchmarkSubject() throws Exception {
         InvocationFieldLength invocationFieldLength = InvocationFieldLength.of(128);

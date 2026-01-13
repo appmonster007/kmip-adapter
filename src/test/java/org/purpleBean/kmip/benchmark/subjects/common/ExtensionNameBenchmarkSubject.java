@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.ExtensionName;
 public class ExtensionNameBenchmarkSubject extends KmipBenchmarkSubject<ExtensionName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ExtensionNameBenchmarkSubject() throws Exception {
         ExtensionName extensionName = ExtensionName.builder().value("test-extension").build();

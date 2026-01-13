@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.Username;
 public class UsernameBenchmarkSubject extends KmipBenchmarkSubject<Username> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public UsernameBenchmarkSubject() throws Exception {
         Username username = Username.builder().value("test-user").build();

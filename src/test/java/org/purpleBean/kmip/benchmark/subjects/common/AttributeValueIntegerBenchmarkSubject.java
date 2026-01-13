@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueInteger;
 public class AttributeValueIntegerBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueInteger> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueIntegerBenchmarkSubject() throws Exception {
         AttributeValueInteger attributeValueInteger = AttributeValueInteger.of(123);

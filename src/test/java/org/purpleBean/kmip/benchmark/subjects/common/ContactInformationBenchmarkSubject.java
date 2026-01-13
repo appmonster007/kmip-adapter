@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.ContactInformation;
 public class ContactInformationBenchmarkSubject extends KmipBenchmarkSubject<ContactInformation> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ContactInformationBenchmarkSubject() throws Exception {
         var fixed = "test";

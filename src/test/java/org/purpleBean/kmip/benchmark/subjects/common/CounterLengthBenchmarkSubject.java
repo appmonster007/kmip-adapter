@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CounterLength;
 public class CounterLengthBenchmarkSubject extends KmipBenchmarkSubject<CounterLength> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CounterLengthBenchmarkSubject() throws Exception {
         CounterLength counterLength = CounterLength.of(128);

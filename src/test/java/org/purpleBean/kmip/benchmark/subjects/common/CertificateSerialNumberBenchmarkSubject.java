@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CertificateSerialNumber;
 public class CertificateSerialNumberBenchmarkSubject extends KmipBenchmarkSubject<CertificateSerialNumber> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CertificateSerialNumberBenchmarkSubject() throws Exception {
         CertificateSerialNumber certificateSerialNumber = CertificateSerialNumber.of("12345".getBytes());

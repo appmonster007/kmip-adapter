@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueEnumeration;
 public class AttributeValueEnumerationBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueEnumeration> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueEnumerationBenchmarkSubject() throws Exception {
         AttributeValueEnumeration attributeValueEnumeration = AttributeValueEnumeration.of(123);

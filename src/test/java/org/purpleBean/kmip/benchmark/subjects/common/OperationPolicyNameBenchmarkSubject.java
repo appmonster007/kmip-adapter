@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.OperationPolicyName;
 public class OperationPolicyNameBenchmarkSubject extends KmipBenchmarkSubject<OperationPolicyName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public OperationPolicyNameBenchmarkSubject() throws Exception {
         OperationPolicyName operationPolicyName = OperationPolicyName.builder().value("test").build();

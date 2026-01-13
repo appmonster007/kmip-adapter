@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.SerialNumber;
 public class SerialNumberBenchmarkSubject extends KmipBenchmarkSubject<SerialNumber> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public SerialNumberBenchmarkSubject() throws Exception {
         SerialNumber serialNumber = SerialNumber.builder().value("12345").build();

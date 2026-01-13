@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.QString;
 public class QStringBenchmarkSubject extends KmipBenchmarkSubject<QString> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public QStringBenchmarkSubject() throws Exception {
         QString qString = QString.of("test-qstring".getBytes());

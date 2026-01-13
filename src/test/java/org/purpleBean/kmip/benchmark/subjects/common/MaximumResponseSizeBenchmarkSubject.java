@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.MaximumResponseSize;
 public class MaximumResponseSizeBenchmarkSubject extends KmipBenchmarkSubject<MaximumResponseSize> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public MaximumResponseSizeBenchmarkSubject() throws Exception {
         MaximumResponseSize maximumResponseSize = MaximumResponseSize.builder().value(1024).build();

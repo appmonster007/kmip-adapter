@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.IVCounterNonce;
 public class IVCounterNonceBenchmarkSubject extends KmipBenchmarkSubject<IVCounterNonce> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public IVCounterNonceBenchmarkSubject() throws Exception {
         IVCounterNonce iVCounterNonce = IVCounterNonce.of(new byte[]{0x01, 0x02, 0x03});

@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AlternativeNameValue;
 public class AlternativeNameValueBenchmarkSubject extends KmipBenchmarkSubject<AlternativeNameValue> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AlternativeNameValueBenchmarkSubject() throws Exception {
         AlternativeNameValue alternativeNameValue = AlternativeNameValue.of("some value");

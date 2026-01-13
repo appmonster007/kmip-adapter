@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 public class ArchiveDateBenchmarkSubject extends KmipBenchmarkSubject<ArchiveDate> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ArchiveDateBenchmarkSubject() throws Exception {
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);

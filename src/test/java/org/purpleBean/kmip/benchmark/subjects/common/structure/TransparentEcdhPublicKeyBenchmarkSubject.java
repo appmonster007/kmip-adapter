@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.structure.TransparentEcdhPublicKey;
 public class TransparentEcdhPublicKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentEcdhPublicKey> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TransparentEcdhPublicKeyBenchmarkSubject() throws Exception {
         TransparentEcdhPublicKey transparentEcdhPublicKey = TransparentEcdhPublicKey.of(

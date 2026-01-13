@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.PrivateKeyUniqueIdentifier;
 public class PrivateKeyUniqueIdentifierBenchmarkSubject extends KmipBenchmarkSubject<PrivateKeyUniqueIdentifier> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public PrivateKeyUniqueIdentifierBenchmarkSubject() throws Exception {
         PrivateKeyUniqueIdentifier privateKeyUniqueIdentifier = PrivateKeyUniqueIdentifier.builder().value("test-private-key-id").build();

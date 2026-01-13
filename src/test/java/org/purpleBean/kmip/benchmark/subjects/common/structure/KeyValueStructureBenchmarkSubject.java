@@ -16,7 +16,7 @@ import java.util.List;
 public class KeyValueStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyValueStructure> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public KeyValueStructureBenchmarkSubject() throws Exception {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});

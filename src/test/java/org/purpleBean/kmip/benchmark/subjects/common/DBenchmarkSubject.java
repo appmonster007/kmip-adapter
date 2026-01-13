@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class DBenchmarkSubject extends KmipBenchmarkSubject<D> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public DBenchmarkSubject() throws Exception {
         D d = D.builder().value(BigInteger.ONE).build();

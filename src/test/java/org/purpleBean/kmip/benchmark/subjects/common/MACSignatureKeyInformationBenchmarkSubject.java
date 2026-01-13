@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.MACSignatureKeyInformation;
 public class MACSignatureKeyInformationBenchmarkSubject extends KmipBenchmarkSubject<MACSignatureKeyInformation> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public MACSignatureKeyInformationBenchmarkSubject() throws Exception {
         MACSignatureKeyInformation mACSignatureKeyInformation = MACSignatureKeyInformation.builder().value("test-info").build();

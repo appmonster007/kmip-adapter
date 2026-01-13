@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.UniqueBatchItemID;
 public class UniqueBatchItemIDBenchmarkSubject extends KmipBenchmarkSubject<UniqueBatchItemID> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public UniqueBatchItemIDBenchmarkSubject() throws Exception {
         UniqueBatchItemID uniqueBatchItemID = UniqueBatchItemID.of(new byte[]{0x01, 0x02, 0x03});

@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.BatchOrderOption;
 public class BatchOrderOptionBenchmarkSubject extends KmipBenchmarkSubject<BatchOrderOption> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public BatchOrderOptionBenchmarkSubject() throws Exception {
         BatchOrderOption batchOrderOption = BatchOrderOption.builder().value(true).build();

@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class QBenchmarkSubject extends KmipBenchmarkSubject<Q> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public QBenchmarkSubject() throws Exception {
         Q q = Q.builder().value(BigInteger.ONE).build();

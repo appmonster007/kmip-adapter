@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.structure.CustomAttribute;
 public class CustomAttributeBenchmarkSubject extends KmipBenchmarkSubject<CustomAttribute> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CustomAttributeBenchmarkSubject() throws Exception {
         CustomAttribute customAttribute = CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE.getValue()));

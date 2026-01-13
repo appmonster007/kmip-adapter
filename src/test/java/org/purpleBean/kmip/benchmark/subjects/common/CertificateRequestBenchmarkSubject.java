@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CertificateRequest;
 public class CertificateRequestBenchmarkSubject extends KmipBenchmarkSubject<CertificateRequest> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CertificateRequestBenchmarkSubject() throws Exception {
         CertificateRequest certificateRequest = CertificateRequest.of(new byte[]{0x01, 0x02, 0x03});

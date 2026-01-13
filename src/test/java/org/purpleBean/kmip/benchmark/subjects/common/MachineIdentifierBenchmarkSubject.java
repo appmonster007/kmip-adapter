@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.MachineIdentifier;
 public class MachineIdentifierBenchmarkSubject extends KmipBenchmarkSubject<MachineIdentifier> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public MachineIdentifierBenchmarkSubject() throws Exception {
         MachineIdentifier machineIdentifier = MachineIdentifier.builder().value("test-machine-id").build();

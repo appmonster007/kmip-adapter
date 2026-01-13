@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.Offset;
 public class OffsetBenchmarkSubject extends KmipBenchmarkSubject<Offset> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public OffsetBenchmarkSubject() throws Exception {
         Offset offset = Offset.builder().value(10).build();

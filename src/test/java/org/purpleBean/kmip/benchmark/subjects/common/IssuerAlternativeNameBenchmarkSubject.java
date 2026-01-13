@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.IssuerAlternativeName;
 public class IssuerAlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<IssuerAlternativeName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public IssuerAlternativeNameBenchmarkSubject() throws Exception {
         IssuerAlternativeName issuerAlternativeName = IssuerAlternativeName.of("test-issuer-alt-name".getBytes());

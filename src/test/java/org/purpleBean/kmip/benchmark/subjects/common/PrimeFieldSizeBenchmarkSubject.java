@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class PrimeFieldSizeBenchmarkSubject extends KmipBenchmarkSubject<PrimeFieldSize> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public PrimeFieldSizeBenchmarkSubject() throws Exception {
         PrimeFieldSize primeFieldSize = PrimeFieldSize.builder().value(BigInteger.valueOf(2048)).build();

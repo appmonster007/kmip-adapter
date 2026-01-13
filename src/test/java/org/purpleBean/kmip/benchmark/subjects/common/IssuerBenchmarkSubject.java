@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.Issuer;
 public class IssuerBenchmarkSubject extends KmipBenchmarkSubject<Issuer> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public IssuerBenchmarkSubject() throws Exception {
         Issuer issuer = Issuer.builder().value("test-issuer").build();

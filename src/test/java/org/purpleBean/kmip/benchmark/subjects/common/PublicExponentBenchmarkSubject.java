@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class PublicExponentBenchmarkSubject extends KmipBenchmarkSubject<PublicExponent> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public PublicExponentBenchmarkSubject() throws Exception {
         PublicExponent publicExponent = PublicExponent.builder().value(BigInteger.valueOf(65537)).build();

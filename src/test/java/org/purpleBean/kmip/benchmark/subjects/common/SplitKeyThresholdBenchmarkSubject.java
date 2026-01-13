@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.SplitKeyThreshold;
 public class SplitKeyThresholdBenchmarkSubject extends KmipBenchmarkSubject<SplitKeyThreshold> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public SplitKeyThresholdBenchmarkSubject() throws Exception {
         SplitKeyThreshold splitKeyThreshold = SplitKeyThreshold.builder().value(2).build();

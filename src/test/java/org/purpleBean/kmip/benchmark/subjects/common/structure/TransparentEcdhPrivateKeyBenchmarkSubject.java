@@ -13,7 +13,7 @@ import java.math.BigInteger;
 public class TransparentEcdhPrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentEcdhPrivateKey> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TransparentEcdhPrivateKeyBenchmarkSubject() throws Exception {
         TransparentEcdhPrivateKey transparentEcdhPrivateKey = TransparentEcdhPrivateKey.of(

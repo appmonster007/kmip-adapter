@@ -15,7 +15,7 @@ import java.math.BigInteger;
 public class TransparentDsaPrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentDsaPrivateKey> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TransparentDsaPrivateKeyBenchmarkSubject() throws Exception {
         TransparentDsaPrivateKey transparentDsaPrivateKey = TransparentDsaPrivateKey.of(

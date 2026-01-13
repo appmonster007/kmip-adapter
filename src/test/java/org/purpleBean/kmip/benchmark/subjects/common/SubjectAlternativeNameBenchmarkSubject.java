@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.SubjectAlternativeName;
 public class SubjectAlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<SubjectAlternativeName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public SubjectAlternativeNameBenchmarkSubject() throws Exception {
         SubjectAlternativeName subjectAlternativeName = SubjectAlternativeName.of(new byte[]{0x01, 0x02, 0x03});

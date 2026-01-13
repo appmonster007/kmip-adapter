@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.Qlength;
 public class QlengthBenchmarkSubject extends KmipBenchmarkSubject<Qlength> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public QlengthBenchmarkSubject() throws Exception {
         Qlength qlength = Qlength.builder().value(128).build();

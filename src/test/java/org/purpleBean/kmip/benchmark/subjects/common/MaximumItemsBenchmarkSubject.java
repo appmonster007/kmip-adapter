@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.MaximumItems;
 public class MaximumItemsBenchmarkSubject extends KmipBenchmarkSubject<MaximumItems> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public MaximumItemsBenchmarkSubject() throws Exception {
         MaximumItems maximumItems = MaximumItems.builder().value(100).build();

@@ -13,7 +13,7 @@ import java.math.BigInteger;
 public class TransparentRsaPrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentRsaPrivateKey> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TransparentRsaPrivateKeyBenchmarkSubject() throws Exception {
         TransparentRsaPrivateKey transparentRsaPrivateKey = TransparentRsaPrivateKey.of(

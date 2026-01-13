@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.TagLength;
 public class TagLengthBenchmarkSubject extends KmipBenchmarkSubject<TagLength> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TagLengthBenchmarkSubject() throws Exception {
         TagLength tagLength = TagLength.of(128);

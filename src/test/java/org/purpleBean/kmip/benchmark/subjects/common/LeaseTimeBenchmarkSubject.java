@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.LeaseTime;
 public class LeaseTimeBenchmarkSubject extends KmipBenchmarkSubject<LeaseTime> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public LeaseTimeBenchmarkSubject() throws Exception {
         var fixed = 100;

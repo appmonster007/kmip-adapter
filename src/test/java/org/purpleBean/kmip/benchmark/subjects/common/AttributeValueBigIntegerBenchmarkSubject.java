@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class AttributeValueBigIntegerBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueBigInteger> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueBigIntegerBenchmarkSubject() throws Exception {
         AttributeValueBigInteger attributeValueBigInteger = AttributeValueBigInteger.of(BigInteger.valueOf(123));

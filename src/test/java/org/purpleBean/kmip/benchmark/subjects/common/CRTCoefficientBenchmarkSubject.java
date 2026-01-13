@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class CRTCoefficientBenchmarkSubject extends KmipBenchmarkSubject<CRTCoefficient> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CRTCoefficientBenchmarkSubject() throws Exception {
         CRTCoefficient cRTCoefficient = CRTCoefficient.builder().value(BigInteger.valueOf(12345)).build();

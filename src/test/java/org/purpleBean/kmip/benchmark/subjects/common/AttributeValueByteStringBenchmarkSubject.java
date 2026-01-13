@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueByteString;
 public class AttributeValueByteStringBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueByteString> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueByteStringBenchmarkSubject() throws Exception {
         AttributeValueByteString attributeValueByteString = AttributeValueByteString.of(new byte[]{0x01, 0x02, 0x03});

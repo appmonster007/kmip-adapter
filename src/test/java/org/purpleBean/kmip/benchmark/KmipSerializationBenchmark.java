@@ -95,7 +95,7 @@ public class KmipSerializationBenchmark {
     public static class BenchState {
 
         private static final Map<String, KmipBenchmarkSubject> REGISTRY = new HashMap<>();
-        private static Collection<KmipBenchmarkSubject> allSubjects;
+        private static final Collection<KmipBenchmarkSubject> allSubjects;
 
         static {
             Map<String, KmipBenchmarkSubject> discovered = BenchmarkSubjects.discoverMap();

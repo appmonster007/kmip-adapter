@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.InitializationVector;
 public class InitializationVectorBenchmarkSubject extends KmipBenchmarkSubject<InitializationVector> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public InitializationVectorBenchmarkSubject() throws Exception {
         InitializationVector initializationVector = InitializationVector.of(new byte[]{0x01, 0x02, 0x03});

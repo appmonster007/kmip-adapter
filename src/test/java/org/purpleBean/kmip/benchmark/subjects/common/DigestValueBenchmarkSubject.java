@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.DigestValue;
 public class DigestValueBenchmarkSubject extends KmipBenchmarkSubject<DigestValue> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public DigestValueBenchmarkSubject() throws Exception {
         DigestValue digestValue = DigestValue.of(new byte[]{0x01, 0x02, 0x03});

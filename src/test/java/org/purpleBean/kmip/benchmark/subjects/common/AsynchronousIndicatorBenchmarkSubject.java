@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AsynchronousIndicator;
 public class AsynchronousIndicatorBenchmarkSubject extends KmipBenchmarkSubject<AsynchronousIndicator> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AsynchronousIndicatorBenchmarkSubject() throws Exception {
         AsynchronousIndicator asynchronousIndicator = AsynchronousIndicator.builder().value(true).build();

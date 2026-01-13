@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CriticalityIndicator;
 public class CriticalityIndicatorBenchmarkSubject extends KmipBenchmarkSubject<CriticalityIndicator> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CriticalityIndicatorBenchmarkSubject() throws Exception {
         CriticalityIndicator criticalityIndicator = CriticalityIndicator.builder().value(true).build();

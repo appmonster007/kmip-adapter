@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CryptographicUsageMask;
 public class CryptographicUsageMaskBenchmarkSubject extends KmipBenchmarkSubject<CryptographicUsageMask> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CryptographicUsageMaskBenchmarkSubject() throws Exception {
         var fixed = 10;

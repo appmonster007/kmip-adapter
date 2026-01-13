@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AsynchronousCorrelationValue;
 public class AsynchronousCorrelationValueBenchmarkSubject extends KmipBenchmarkSubject<AsynchronousCorrelationValue> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AsynchronousCorrelationValueBenchmarkSubject() throws Exception {
         AsynchronousCorrelationValue asynchronousCorrelationValue = AsynchronousCorrelationValue.of(new byte[]{0x01, 0x02, 0x03});

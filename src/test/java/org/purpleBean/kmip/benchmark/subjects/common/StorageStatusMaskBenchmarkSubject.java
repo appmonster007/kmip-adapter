@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.StorageStatusMask;
 public class StorageStatusMaskBenchmarkSubject extends KmipBenchmarkSubject<StorageStatusMask> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public StorageStatusMaskBenchmarkSubject() throws Exception {
         StorageStatusMask storageStatusMask = StorageStatusMask.builder().value(1).build();

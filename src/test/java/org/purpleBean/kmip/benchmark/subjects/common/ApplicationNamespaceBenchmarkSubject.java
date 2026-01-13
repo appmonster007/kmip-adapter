@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.ApplicationNamespace;
 public class ApplicationNamespaceBenchmarkSubject extends KmipBenchmarkSubject<ApplicationNamespace> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ApplicationNamespaceBenchmarkSubject() throws Exception {
         ApplicationNamespace applicationNamespace = ApplicationNamespace.builder().value("test-namespace").build();

@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.DeviceIdentifier;
 public class DeviceIdentifierBenchmarkSubject extends KmipBenchmarkSubject<DeviceIdentifier> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public DeviceIdentifierBenchmarkSubject() throws Exception {
         DeviceIdentifier deviceIdentifier = DeviceIdentifier.builder().value("test-device-id").build();

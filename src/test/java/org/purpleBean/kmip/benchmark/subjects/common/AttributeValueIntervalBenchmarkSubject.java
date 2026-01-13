@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueInterval;
 public class AttributeValueIntervalBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueInterval> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueIntervalBenchmarkSubject() throws Exception {
         AttributeValueInterval attributeValueInterval = AttributeValueInterval.of(123);

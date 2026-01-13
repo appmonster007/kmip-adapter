@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CertificateIssuerAlternativeName;
 public class CertificateIssuerAlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuerAlternativeName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CertificateIssuerAlternativeNameBenchmarkSubject() throws Exception {
         CertificateIssuerAlternativeName certificateIssuerAlternativeName = CertificateIssuerAlternativeName.builder().value("test-issuer-alt-name").build();

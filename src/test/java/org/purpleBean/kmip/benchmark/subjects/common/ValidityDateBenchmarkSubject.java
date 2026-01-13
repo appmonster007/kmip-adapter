@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 public class ValidityDateBenchmarkSubject extends KmipBenchmarkSubject<ValidityDate> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public ValidityDateBenchmarkSubject() throws Exception {
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);

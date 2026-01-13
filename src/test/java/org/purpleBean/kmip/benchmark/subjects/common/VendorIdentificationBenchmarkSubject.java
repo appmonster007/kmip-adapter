@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.VendorIdentification;
 public class VendorIdentificationBenchmarkSubject extends KmipBenchmarkSubject<VendorIdentification> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public VendorIdentificationBenchmarkSubject() throws Exception {
         VendorIdentification vendorIdentification = VendorIdentification.builder().value("test-vendor").build();

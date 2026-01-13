@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 public class AttributeValueDateTimeBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueDateTime> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueDateTimeBenchmarkSubject() throws Exception {
         AttributeValueDateTime attributeValueDateTime = AttributeValueDateTime.of(OffsetDateTime.now());

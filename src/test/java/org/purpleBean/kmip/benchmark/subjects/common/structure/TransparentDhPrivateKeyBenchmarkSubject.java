@@ -12,7 +12,7 @@ import java.math.BigInteger;
 public class TransparentDhPrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentDhPrivateKey> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public TransparentDhPrivateKeyBenchmarkSubject() throws Exception {
         TransparentDhPrivateKey transparentDhPrivateKey = TransparentDhPrivateKey.of(

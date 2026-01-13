@@ -11,7 +11,7 @@ import org.purpleBean.kmip.common.structure.AlternativeName;
 public class AlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<AlternativeName> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AlternativeNameBenchmarkSubject() throws Exception {
         AlternativeName alternativename = AlternativeName.builder()

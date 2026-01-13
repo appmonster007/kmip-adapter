@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.AttributeValueBoolean;
 public class AttributeValueBooleanBenchmarkSubject extends KmipBenchmarkSubject<AttributeValueBoolean> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public AttributeValueBooleanBenchmarkSubject() throws Exception {
         AttributeValueBoolean attributeValueBoolean = AttributeValueBoolean.of(true);

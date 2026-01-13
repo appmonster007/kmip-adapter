@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.RevocationMessage;
 public class RevocationMessageBenchmarkSubject extends KmipBenchmarkSubject<RevocationMessage> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public RevocationMessageBenchmarkSubject() throws Exception {
         RevocationMessage revocationMessage = RevocationMessage.builder().value("test-revocation-message").build();

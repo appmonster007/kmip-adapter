@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.KeyValueByteString;
 public class KeyValueByteStringBenchmarkSubject extends KmipBenchmarkSubject<KeyValueByteString> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public KeyValueByteStringBenchmarkSubject() throws Exception {
         KeyValueByteString keyValueByteString = KeyValueByteString.of(new byte[]{0x01, 0x02, 0x03});

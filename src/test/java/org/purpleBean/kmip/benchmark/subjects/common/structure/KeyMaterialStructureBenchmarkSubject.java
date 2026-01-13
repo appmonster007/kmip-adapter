@@ -15,7 +15,7 @@ import java.util.List;
 public class KeyMaterialStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyMaterialStructure> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public KeyMaterialStructureBenchmarkSubject() throws Exception {
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);

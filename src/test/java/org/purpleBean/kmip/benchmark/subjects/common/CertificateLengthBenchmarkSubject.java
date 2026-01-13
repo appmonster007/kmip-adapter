@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.CertificateLength;
 public class CertificateLengthBenchmarkSubject extends KmipBenchmarkSubject<CertificateLength> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public CertificateLengthBenchmarkSubject() throws Exception {
         Integer value = 10;

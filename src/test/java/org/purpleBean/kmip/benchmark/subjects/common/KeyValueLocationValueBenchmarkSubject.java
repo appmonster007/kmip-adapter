@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.KeyValueLocationValue;
 public class KeyValueLocationValueBenchmarkSubject extends KmipBenchmarkSubject<KeyValueLocationValue> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public KeyValueLocationValueBenchmarkSubject() throws Exception {
         KeyValueLocationValue keyValueLocationValue = KeyValueLocationValue.builder().value("test").build();

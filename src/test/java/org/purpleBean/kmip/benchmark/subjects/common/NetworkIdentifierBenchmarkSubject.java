@@ -9,7 +9,7 @@ import org.purpleBean.kmip.common.NetworkIdentifier;
 public class NetworkIdentifierBenchmarkSubject extends KmipBenchmarkSubject<NetworkIdentifier> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.V1_2;
 
     public NetworkIdentifierBenchmarkSubject() throws Exception {
         NetworkIdentifier networkIdentifier = NetworkIdentifier.builder().value("test-network-id").build();
