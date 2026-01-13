@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.codec.json.serializer.AbstractKmipStructureJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.kmip.AbstractKmipStructureJsonSerializer;
 import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
 
 public class {{STRUCTURE_NAME}}JsonSerializer extends AbstractKmipStructureJsonSerializer<{{STRUCTURE_NAME}}> {

@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
-import org.purpleBean.kmip.codec.xml.serializer.AbstractKmipStructureXmlSerializer;
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipStructureXmlSerializer;
 
 public class {{STRUCTURE_NAME}}XmlSerializer extends AbstractKmipStructureXmlSerializer<{{STRUCTURE_NAME}}> {
 }
