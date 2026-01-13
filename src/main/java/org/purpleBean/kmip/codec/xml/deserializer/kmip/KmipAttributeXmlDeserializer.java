@@ -13,7 +13,7 @@ public class KmipAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<Km
 
     @Override
     public KmipAttribute deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return (KmipAttribute) super.deserialize(p, ctxt);
+        return super.deserialize(p, ctxt);
     }
 
     @Override

@@ -10,6 +10,6 @@ public class KeyMaterialJsonDeserializer extends KmipDataTypeJsonDeserializer<Ke
 
     @Override
     public KeyMaterial deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return (KeyMaterial) super.deserialize(p, ctxt);
+        return super.deserialize(p, ctxt);
     }
 }

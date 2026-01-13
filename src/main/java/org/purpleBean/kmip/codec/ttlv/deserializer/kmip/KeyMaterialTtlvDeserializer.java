@@ -10,6 +10,6 @@ public class KeyMaterialTtlvDeserializer extends KmipDataTypeTtlvDeserializer<Ke
 
     @Override
     public KeyMaterial deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        return (KeyMaterial) super.deserialize(ttlvBuffer, mapper);
+        return super.deserialize(ttlvBuffer, mapper);
     }
 }
