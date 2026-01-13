@@ -1,0 +1,36 @@
+package org.purpleBean.kmip.codec.{{format}}.{{pdot}};
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.{{pdot}}.{{NAME}};
+import org.purpleBean.kmip.test.suite.Abstract{{format_pascal}}SerializationSuite;
+
+@DisplayName("{{NAME}} {{format_pascal}} Serialization Tests")
+class {{suite_name}} extends Abstract{{format_pascal}}SerializationSuite<{{NAME}}> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<{{NAME}}> type() {
+        return {{NAME}}.class;
+    }
+
+    @Override
+    protected {{NAME}} createDefault() {
+        return {{create_default}};  // TODO: Create a default instance
+    }
+
+    @Override
+    protected {{NAME}} createVariant() {
+        return {{create_variant}};  // TODO: Create a variant instance
+    }
+}

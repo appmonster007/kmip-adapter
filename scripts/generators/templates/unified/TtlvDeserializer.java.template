@@ -1,0 +1,18 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.{{pdot}};
+
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
+import org.purpleBean.kmip.{{pdot}}.{{NAME}};
+
+public class {{NAME}}TtlvDeserializer extends AbstractKmipTtlvDeserializer<{{NAME}}, {{DESERIALIZED_TYPE}}> {
+
+    public {{NAME}}TtlvDeserializer() {
+        super({{NAME}}.kmipTag, {{NAME}}.encodingType, {{DESERIALIZED_TYPE}}.class, {{SUPER_CALL}});
+    }
+}

@@ -1,0 +1,55 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Set;
+
+/**
+ * KMIP {{DATA_NAME}} dataType.
+ */
+@Data
+@Builder(toBuilder = true)
+public class {{DATA_NAME}} implements KmipDataType {
+
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{DATA_NAME_SNAKE}});
+    public static final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}};
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{DATA_NAME}}.class);
+        }
+    }
+
+    @NonNull
+    private final {{DATA_TYPE}} value;
+
+    public static {{DATA_NAME}} of(@NonNull {{DATA_TYPE}} value) {
+        return {{DATA_NAME}}.builder().value(value).build();
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec);
+    }
+}

@@ -1,0 +1,35 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+
+@DisplayName("{{DATA_NAME}} Domain Tests")
+class {{DATA_NAME}}Test extends AbstractKmipDataTypeSuite<{{DATA_NAME}}> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<{{DATA_NAME}}> type() {
+        return {{DATA_NAME}}.class;
+    }
+
+    @Override
+    protected {{DATA_NAME}} createDefault() {
+        return {{DATA_NAME}}.of({{DEFAULT_VALUE}});
+    }
+
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.{{ENCODING_TYPE}};
+    }
+}

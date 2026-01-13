@@ -6,6 +6,12 @@ title_to_pascal() {
     local input="$*"
     [ -z "$input" ] && { echo ""; return 1; }
 
+    # If it's a single word and already looks like mixed-case Pascal, leave it.
+    if [[ ! "$input" =~ [_\ -] && "$input" =~ [a-z] && "$input" =~ [A-Z] ]]; then
+        echo "$input"
+        return
+    fi
+
     # replace underscores/hyphens with spaces, normalize whitespace, capitalize each word, then concat
     echo "$input" \
         | sed -E 's/[_-]+/ /g' \
@@ -34,12 +40,31 @@ pascal_to_title() {
 # 3) PascalCase -> camelCase
 #    "AbcDef" -> "abcDef"
 pascal_to_camel() {
-    local input="$*"
-    [ -z "$input" ] && { echo ""; return 1; }
+    local input="$1"
+    # Find the last uppercase letter in the initial uppercase sequence.
+    local i=0
+    while [[ $i -lt ${#input} && "${input:$i:1}" =~ [A-Z] ]]; do
+        i=$((i+1))
+    done
 
-    local first="${input:0:1}"
-    local rest="${input:1}"
-    printf "%s%s\n" "$(echo "$first" | tr '[:upper:]' '[:lower:]')" "$rest"
+    if [[ $i -gt 1 ]]; then
+        # We have an acronym of length i, e.g., "URL" in "URLValue"
+        # Check if there's anything after the acronym
+        if [[ $i -lt ${#input} ]]; then
+            # Case like "URLValue", i=3. We should lowercase "UR"
+            local prefix="${input:0:$((i-1))}"
+            local rest="${input:$((i-1))}"
+            echo "$(echo "$prefix" | tr '[:upper:]' '[:lower:]')$rest"
+        else
+            # Case like "URL", all caps. Lowercase all.
+            echo "$input" | tr '[:upper:]' '[:lower:]'
+        fi
+    else
+        # Standard case like "Value", i=1. Lowercase first letter.
+        local prefix="${input:0:1}"
+        local rest="${input:1}"
+        echo "$(echo "$prefix" | tr '[:upper:]' '[:lower:]')$rest"
+    fi
 }
 
 # 4) Title Case -> Snake_Case (preserve capitalization of words)

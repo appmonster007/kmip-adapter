@@ -1,0 +1,424 @@
+#!/bin/bash
+#
+# A unified script to generate KMIP data types, enums, and structures.
+#
+set -e
+
+# Source the common script from the parent directory
+# shellcheck source=../common.sh
+source "$(dirname "$0")/../common.sh"
+
+# --- Configuration ---
+readonly BASE_DIR="$(pwd)"
+readonly MAIN_JAVA="src/main/java/org/purpleBean/kmip"
+readonly TEST_JAVA="src/test/java/org/purpleBean/kmip"
+readonly TEMPLATE_BASE_DIR="scripts/generators/templates"
+readonly UNIFIED_TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/unified"
+
+# --- Main ---
+main() {
+    if [[ $# -lt 1 ]]; then
+        usage
+        exit 1
+    fi
+
+    local entity_type="$1"
+    shift
+
+    case "${entity_type}" in
+        "enum")
+            generate_enum "$@"
+            ;;
+        "datatype")
+            generate_datatype "$@"
+            ;;
+        "structure")
+            generate_structure "$@"
+            ;;
+        *)
+            echo "Error: Unknown entity type '${entity_type}'"
+            usage
+            exit 1
+            ;;
+    esac
+}
+
+# --- Usage ---
+usage() {
+    cat <<EOF
+Usage: $0 <entity_type> [options] <Name>
+
+Entity Types:
+  enum         - Generate a KMIP enumeration.
+  datatype     - Generate a KMIP data type.
+  structure    - Generate a KMIP structure.
+
+For entity-specific options, use:
+  $0 <entity_type> --help
+EOF
+}
+
+# --- Unified Generator Functions ---
+
+generate_unified_codec_test() {
+    local name="$1" sub_path="$2" format="$3" create_default="$4" create_variant="$5"
+    local format_pascal suite_name pdot
+    format_pascal=$(get_pascal_case "${format}")
+    suite_name="${name}${format_pascal}Test"
+    pdot=$(slash_to_dot "${sub_path}")
+
+    render_template "${UNIFIED_TEMPLATE_DIR}/CodecTest.java.template" "${TEST_JAVA}/codec/${format}/${sub_path}/${suite_name}.java" \
+        "pdot" "${pdot}" "NAME" "${name}" "format" "${format}" "format_pascal" "${format_pascal}" \
+        "suite_name" "${suite_name}" "create_default" "${create_default}" "create_variant" "${create_variant}"
+}
+
+generate_unified_benchmark_subject() {
+    local name="$1" sub_path="$2" create_default="$3"
+    local pdot
+    pdot=$(slash_to_dot "${sub_path}")
+
+    render_template "${UNIFIED_TEMPLATE_DIR}/BenchmarkSubject.java.template" "${TEST_JAVA}/benchmark/subjects/${sub_path}/${name}BenchmarkSubject.java" \
+        "pdot" "${pdot}" "NAME" "${name}" "create_default" "${create_default}"
+    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purpleBean.kmip.benchmark.subjects.${pdot}.${name}BenchmarkSubject"
+}
+
+generate_unified_serializer() {
+    local name="$1" sub_path="$2" format="$3" serialized_type="$4" super_call="$5"
+    local format_pascal pdot
+    format_pascal=$(get_pascal_case "${format}")
+    pdot=$(slash_to_dot "${sub_path}")
+
+    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/kmip/${sub_path}/${name}${format_pascal}Serializer.java" \
+        "pdot" "${pdot}" "NAME" "${name}" "SERIALIZED_TYPE" "${serialized_type}" "SUPER_CALL" "${super_call}"
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.kmip.KmipDataType${format_pascal}Serializer" \
+        "org.purpleBean.kmip.codec.${format}.serializer.kmip.${pdot}.${name}${format_pascal}Serializer"
+}
+
+generate_unified_deserializer() {
+    local name="$1" sub_path="$2" format="$3" deserialized_type="$4" super_call="$5"
+    local format_pascal pdot
+    format_pascal=$(get_pascal_case "${format}")
+    pdot=$(slash_to_dot "${sub_path}")
+
+    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/kmip/${sub_path}/${name}${format_pascal}Deserializer.java" \
+        "pdot" "${pdot}" "NAME" "${name}" "DESERIALIZED_TYPE" "${deserialized_type}" "SUPER_CALL" "${super_call}"
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.kmip.KmipDataType${format_pascal}Deserializer" \
+        "org.purpleBean.kmip.codec.${format}.deserializer.kmip.${pdot}.${name}${format_pascal}Deserializer"
+}
+
+
+# --- Entity-Specific Generator Functions ---
+
+generate_enum() {
+    local SUB_PATH="common/enumeration"
+    local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/enumeration"
+    local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
+    local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
+    local GEN_TTLV_TEST=false GEN_BENCHMARK=false
+    local DRY_RUN=false
+
+    usage_enum() { cat <<EOF
+Usage: $0 enum [options] <Name>
+Options:
+  --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
+  --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
+EOF
+    }
+
+    local NAMES=()
+    local any_flag=false
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --class) GEN_CLASS=true; any_flag=true; shift ;;
+            --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
+            --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
+            --xml-ser) GEN_XML_SER=true; any_flag=true; shift ;;
+            --xml-des) GEN_XML_DES=true; any_flag=true; shift ;;
+            --ttlv-ser) GEN_TTLV_SER=true; any_flag=true; shift ;;
+            --ttlv-des) GEN_TTLV_DES=true; any_flag=true; shift ;;
+            --domain-test) GEN_DOMAIN_TEST=true; any_flag=true; shift ;;
+            --json-test) GEN_JSON_TEST=true; any_flag=true; shift ;;
+            --xml-test) GEN_XML_TEST=true; any_flag=true; shift ;;
+            --ttlv-test) GEN_TTLV_TEST=true; any_flag=true; shift ;;
+            --benchmark) GEN_BENCHMARK=true; any_flag=true; shift ;;
+            --all)
+                GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
+                GEN_TTLV_TEST=true; GEN_BENCHMARK=true;
+                any_flag=true; shift ;;
+            -h|--help) usage_enum; return 0 ;;
+            *) NAMES[${#NAMES[@]}]="$1"; shift ;;
+        esac
+    done
+
+    if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one enum name required."; usage_enum; return 1; fi
+    if [[ "${any_flag}" == "false" ]]; then
+        DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_TTLV_TEST=true; GEN_BENCHMARK=true
+    fi
+
+    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+
+    for name in "${NAMES[@]}"; do
+        echo -e "\nProcessing enum: ${name}"
+        local ENUM_NAME
+        ENUM_NAME=$(get_pascal_case "${name}")
+        local ENUM_NAME_SNAKE
+        ENUM_NAME_SNAKE=$(to_snake_upper "${ENUM_NAME}")
+        local pdot
+        pdot=$(slash_to_dot "${SUB_PATH}")
+
+        if ${GEN_CLASS}; then
+            render_template "${TEMPLATE_DIR}/Enum.java.template" "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" \
+                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
+        fi
+        if ${GEN_DOMAIN_TEST}; then
+            render_template "${TEMPLATE_DIR}/EnumTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" \
+                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}"
+        fi
+
+        local create_default="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[0])"
+        local create_variant="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[1])"
+
+        if ${GEN_JSON_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "json" "String" "${ENUM_NAME}::getDescription"; fi
+        if ${GEN_JSON_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "json" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
+        if ${GEN_XML_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "${ENUM_NAME}::getDescription"; fi
+        if ${GEN_XML_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "value -> value.getValue().getValue()"; fi
+        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromValue(value))"; fi
+
+        if ${GEN_JSON_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "json" "${create_default}" "${create_variant}"; fi
+        if ${GEN_XML_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "xml" "${create_default}" "${create_variant}"; fi
+        if ${GEN_TTLV_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "${create_default}" "${create_variant}"; fi
+        if ${GEN_BENCHMARK}; then generate_unified_benchmark_subject "${ENUM_NAME}" "${SUB_PATH}" "${create_default}"; fi
+    done
+    if [ "${DRY_RUN}" = "true" ]; then echo -e "\nDRY RUN complete."; else echo -e "\nGeneration complete."; fi
+}
+
+generate_datatype() {
+    local SUB_PATH="common"
+    local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/datatype"
+    local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
+    local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
+    local GEN_TTLV_TEST=false GEN_BENCHMARK=false
+    local DRY_RUN=false
+    local DATA_TYPE="java.nio.ByteBuffer"
+
+    usage_datatype() { cat <<EOF
+Usage: $0 datatype [options] <Name>
+Options:
+  --type <java_type>  The underlying Java type (e.g., Integer, String, java.nio.ByteBuffer). Default: java.nio.ByteBuffer
+  --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
+  --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
+EOF
+    }
+
+    local NAMES=()
+    local any_flag=false
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --type) DATA_TYPE="$2"; shift; shift ;;
+            --class) GEN_CLASS=true; any_flag=true; shift ;;
+            --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
+            --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
+            --xml-ser) GEN_XML_SER=true; any_flag=true; shift ;;
+            --xml-des) GEN_XML_DES=true; any_flag=true; shift ;;
+            --ttlv-ser) GEN_TTLV_SER=true; any_flag=true; shift ;;
+            --ttlv-des) GEN_TTLV_DES=true; any_flag=true; shift ;;
+            --domain-test) GEN_DOMAIN_TEST=true; any_flag=true; shift ;;
+            --json-test) GEN_JSON_TEST=true; any_flag=true; shift ;;
+            --xml-test) GEN_XML_TEST=true; any_flag=true; shift ;;
+            --ttlv-test) GEN_TTLV_TEST=true; any_flag=true; shift ;;
+            --benchmark) GEN_BENCHMARK=true; any_flag=true; shift ;;
+            --all)
+                GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
+                GEN_TTLV_TEST=true; GEN_BENCHMARK=true;
+                any_flag=true; shift ;;
+            -h|--help) usage_datatype; return 0 ;;
+            *) NAMES[${#NAMES[@]}]="$1"; shift ;;
+        esac
+    done
+
+    if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one datatype name required."; usage_datatype; return 1; fi
+
+    local ENCODING_TYPE DEFAULT_VALUE VARIANT_VALUE
+    case "${DATA_TYPE}" in
+        "Integer") ENCODING_TYPE="INTEGER"; DEFAULT_VALUE="123"; VARIANT_VALUE="456" ;;
+        "Long") ENCODING_TYPE="LONG_INTEGER"; DEFAULT_VALUE="12345L"; VARIANT_VALUE="54321L" ;;
+        "java.math.BigInteger") ENCODING_TYPE="BIG_INTEGER"; DEFAULT_VALUE='new java.math.BigInteger("1234567890")'; VARIANT_VALUE='new java.math.BigInteger("9876543210")' ;;
+        "Boolean") ENCODING_TYPE="BOOLEAN"; DEFAULT_VALUE="true"; VARIANT_VALUE="false" ;;
+        "String") ENCODING_TYPE="TEXT_STRING"; DEFAULT_VALUE='"default-string"'; VARIANT_VALUE='"variant-string"' ;;
+        "java.nio.ByteBuffer") ENCODING_TYPE="BYTE_STRING"; DEFAULT_VALUE="java.nio.ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03})"; VARIANT_VALUE="java.nio.ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06})" ;;
+        *) echo "Warning: Unknown data type '${DATA_TYPE}'."; ENCODING_TYPE="UNDEFINED"; DEFAULT_VALUE="null"; VARIANT_VALUE="null" ;;
+    esac
+
+    if [[ "${any_flag}" == "false" ]]; then
+        DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_TTLV_TEST=true; GEN_BENCHMARK=true
+    fi
+
+    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+
+    for name in "${NAMES[@]}"; do
+        echo -e "\nProcessing datatype: ${name}"
+        local DATA_NAME
+        DATA_NAME=$(get_pascal_case "${name}")
+        local DATA_NAME_SNAKE
+        DATA_NAME_SNAKE=$(to_snake_upper "${DATA_NAME}")
+        local pdot
+        pdot=$(slash_to_dot "${SUB_PATH}")
+
+        if ${GEN_CLASS}; then
+            render_template "${TEMPLATE_DIR}/DataType.java.template" "${MAIN_JAVA}/${SUB_PATH}/${DATA_NAME}.java" \
+                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}"
+        fi
+        if ${GEN_DOMAIN_TEST}; then
+            render_template "${TEMPLATE_DIR}/DataTypeTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${DATA_NAME}Test.java" \
+                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DEFAULT_VALUE" "${DEFAULT_VALUE}" "ENCODING_TYPE" "${ENCODING_TYPE}"
+        fi
+
+        local super_call_deserializer="value -> ${DATA_NAME}.builder().value(value).build()"
+        if ${GEN_JSON_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "json" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
+        if ${GEN_JSON_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "json" "${DATA_TYPE}" "${super_call_deserializer}"; fi
+        if ${GEN_XML_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "xml" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
+        if ${GEN_XML_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "xml" "${DATA_TYPE}" "${super_call_deserializer}"; fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "ttlv" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
+        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "ttlv" "${DATA_TYPE}" "${super_call_deserializer}"; fi
+
+        local create_default="${DATA_NAME}.of(${DEFAULT_VALUE})"
+        local create_variant="${DATA_NAME}.of(${VARIANT_VALUE})"
+        if ${GEN_JSON_TEST}; then generate_unified_codec_test "${DATA_NAME}" "${SUB_PATH}" "json" "${create_default}" "${create_variant}"; fi
+        if ${GEN_XML_TEST}; then generate_unified_codec_test "${DATA_NAME}" "${SUB_PATH}" "xml" "${create_default}" "${create_variant}"; fi
+        if ${GEN_TTLV_TEST}; then generate_unified_codec_test "${DATA_NAME}" "${SUB_PATH}" "ttlv" "${create_default}" "${create_variant}"; fi
+        if ${GEN_BENCHMARK}; then generate_unified_benchmark_subject "${DATA_NAME}" "${SUB_PATH}" "${create_default}"; fi
+    done
+    if [ "${DRY_RUN}" = "true" ]; then echo -e "\nDRY RUN complete."; else echo -e "\nGeneration complete."; fi
+}
+
+generate_structure() {
+    local SUB_PATH="common/structure"
+    local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/structure"
+    local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
+    local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
+    local GEN_TTLV_TEST=false GEN_BENCHMARK=false
+    local DRY_RUN=false
+
+    usage_structure() { cat <<EOF
+Usage: $0 structure [options] <Name>
+Options:
+  --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
+  --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
+EOF
+    }
+
+    local NAMES=()
+    local any_flag=false
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --class) GEN_CLASS=true; any_flag=true; shift ;;
+            --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
+            --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
+            --xml-ser) GEN_XML_SER=true; any_flag=true; shift ;;
+            --xml-des) GEN_XML_DES=true; any_flag=true; shift ;;
+            --ttlv-ser) GEN_TTLV_SER=true; any_flag=true; shift ;;
+            --ttlv-des) GEN_TTLV_DES=true; any_flag=true; shift ;;
+            --domain-test) GEN_DOMAIN_TEST=true; any_flag=true; shift ;;
+            --json-test) GEN_JSON_TEST=true; any_flag=true; shift ;;
+            --xml-test) GEN_XML_TEST=true; any_flag=true; shift ;;
+            --ttlv-test) GEN_TTLV_TEST=true; any_flag=true; shift ;;
+            --benchmark) GEN_BENCHMARK=true; any_flag=true; shift ;;
+            --all)
+                GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+                GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
+                GEN_TTLV_TEST=true; GEN_BENCHMARK=true;
+                any_flag=true; shift ;;
+            -h|--help) usage_structure; return 0 ;;
+            *) NAMES[${#NAMES[@]}]="$1"; shift ;;
+        esac
+    done
+
+    if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one structure name required."; usage_structure; return 1; fi
+    if [[ "${any_flag}" == "false" ]]; then
+        DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_TTLV_TEST=true; GEN_BENCHMARK=true
+    fi
+
+    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
+
+    for name in "${NAMES[@]}"; do
+        echo -e "\nProcessing structure: ${name}"
+        local STRUCTURE_NAME
+        STRUCTURE_NAME=$(get_pascal_case "${name}")
+        local STRUCTURE_NAME_SNAKE
+        STRUCTURE_NAME_SNAKE=$(to_snake_upper "${STRUCTURE_NAME}")
+        local varname
+        varname=$(get_camel_case "${STRUCTURE_NAME}")
+        local pdot
+        pdot=$(slash_to_dot "${SUB_PATH}")
+
+        if ${GEN_CLASS}; then
+            render_template "${TEMPLATE_DIR}/Structure.java.template" "${MAIN_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}"
+        fi
+        if ${GEN_DOMAIN_TEST}; then
+            render_template "${TEMPLATE_DIR}/StructureTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}Test.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}"
+        fi
+
+        if ${GEN_JSON_SER}; then
+            render_template "${TEMPLATE_DIR}/StructureJsonSerializer.java.template" "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}JsonSerializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+                "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${STRUCTURE_NAME}JsonSerializer"
+        fi
+        if ${GEN_JSON_DES}; then
+            render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+                "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
+        fi
+        if ${GEN_XML_SER}; then
+            render_template "${TEMPLATE_DIR}/StructureXmlSerializer.java.template" "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}XmlSerializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+                "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${STRUCTURE_NAME}XmlSerializer"
+        fi
+        if ${GEN_XML_DES}; then
+            render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+                "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
+        fi
+        if ${GEN_TTLV_SER}; then
+            render_template "${TEMPLATE_DIR}/StructureTtlvSerializer.java.template" "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}TtlvSerializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+                "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${STRUCTURE_NAME}TtlvSerializer"
+        fi
+        if ${GEN_TTLV_DES}; then
+            render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+                "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
+        fi
+
+        local create_default_struct="new ${STRUCTURE_NAME}()"
+        local create_variant_struct="new ${STRUCTURE_NAME}()"
+        if ${GEN_JSON_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "json" "${create_default_struct}" "${create_variant_struct}"; fi
+        if ${GEN_XML_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "xml" "${create_default_struct}" "${create_variant_struct}"; fi
+        if ${GEN_TTLV_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "ttlv" "${create_default_struct}" "${create_variant_struct}"; fi
+        if ${GEN_BENCHMARK}; then generate_unified_benchmark_subject "${STRUCTURE_NAME}" "${SUB_PATH}" "${create_default_struct}"; fi
+    done
+    if [ "${DRY_RUN}" = "true" ]; then echo -e "\nDRY RUN complete."; else echo -e "\nGeneration complete."; fi
+}
+
+# --- Entrypoint ---
+main "$@"

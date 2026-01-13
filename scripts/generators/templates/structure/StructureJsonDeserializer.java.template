@@ -1,0 +1,42 @@
+package org.purpleBean.kmip.codec.json.deserializer.kmip.{{pdot}};
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.codec.json.deserializer.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
+
+import java.io.IOException;
+
+public class {{STRUCTURE_NAME}}JsonDeserializer extends AbstractKmipStructureJsonDeserializer<{{STRUCTURE_NAME}}, {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder> {
+
+    public {{STRUCTURE_NAME}}JsonDeserializer() {
+        super({{STRUCTURE_NAME}}.kmipTag, {{STRUCTURE_NAME}}.encodingType);
+    }
+
+    @Override
+    protected {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder createBuilder() {
+        return {{STRUCTURE_NAME}}.builder();
+    }
+
+    @Override
+    protected void setValue({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        // TODO: Implement setting values on the builder based on the tag
+        // switch (nodeTag) {
+        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
+        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
+        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        // }
+    }
+
+    @Override
+    protected {{STRUCTURE_NAME}} build({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder) {
+        return builder.build();
+    }
+}

@@ -1,0 +1,93 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Data
+@Builder(toBuilder = true)
+public class {{STRUCTURE_NAME}} implements KmipStructure {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{STRUCTURE_NAME_SNAKE}});
+    public static final EncodingType encodingType = EncodingType.STRUCTURE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{STRUCTURE_NAME}}.class);
+            // TODO: Add other register calls as required
+        }
+    }
+
+    // TODO: Add fields for the structure, e.g.:
+    // @NonNull
+    // private final Field1 field1;
+    // @NonNull
+    // private final Field2 field2;
+
+    public static {{STRUCTURE_NAME}} of(@NonNull KmipDataType value) {
+        if (!(value instanceof KmipStructure structure)) {
+            throw new IllegalArgumentException("Invalid value: " + value);
+        }
+        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        // TODO: Update to extract fields from the map and call the other 'of' method
+        // return {{STRUCTURE_NAME}}.of(
+        //         (Field1) map.get(Field1.kmipTag).getFirst(),
+        //         (Field2) map.get(Field2.kmipTag).getFirst()
+        // );
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    // TODO: Add an 'of' method with all the fields as arguments
+    // public static {{STRUCTURE_NAME}} of(@NonNull Field1 field1, @NonNull Field2 field2) {
+    //     return {{STRUCTURE_NAME}}.builder().field1(field1).field2(field2).build();
+    // }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        // TODO: Return a list of all the fields
+        return List.of();
+    }
+
+    public static class {{STRUCTURE_NAME}}Builder {
+        public {{STRUCTURE_NAME}} build() {
+            validate();
+            // TODO: Update the constructor call with all the fields
+            return new {{STRUCTURE_NAME}}();
+        }
+
+        private void validate() {
+            // TODO: Add null checks for all fields
+            // Objects.requireNonNull(field1, "field1 cannot be null");
+            // Objects.requireNonNull(field2, "field2 cannot be null");
+        }
+    }
+}

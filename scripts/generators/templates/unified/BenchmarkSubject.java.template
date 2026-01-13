@@ -1,0 +1,38 @@
+package org.purpleBean.kmip.benchmark.subjects.{{pdot}};
+
+import lombok.Getter;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.{{pdot}}.{{NAME}};
+
+public class {{NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{NAME}}> {
+
+    @Getter
+    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+
+    public {{NAME}}BenchmarkSubject() throws Exception {
+        {{NAME}} subject = {{create_default}};  // TODO: Create a default instance
+        initialize(subject, {{NAME}}.class);
+    }
+
+    @Override
+    public String name() {
+        return "{{NAME}}";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}
