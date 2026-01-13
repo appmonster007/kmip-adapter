@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.xml.deserializer.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.common.ProtocolVersionMajor;
+import org.purpleBean.kmip.common.ProtocolVersionMinor;
 
 import java.io.IOException;
 
@@ -23,9 +25,9 @@ public class ProtocolVersionXmlDeserializer extends AbstractKmipStructureXmlDese
     protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION_MAJOR ->
-                    builder.protocolVersionMajor(ctxt.readValue(p, ProtocolVersion.ProtocolVersionMajor.class));
+                    builder.protocolVersionMajor(ctxt.readValue(p, ProtocolVersionMajor.class));
             case KmipTag.Standard.PROTOCOL_VERSION_MINOR ->
-                    builder.protocolVersionMinor(ctxt.readValue(p, ProtocolVersion.ProtocolVersionMinor.class));
+                    builder.protocolVersionMinor(ctxt.readValue(p, ProtocolVersionMinor.class));
             default ->
                     ctxt.reportWrongTokenException(ProtocolVersion.class, p.currentToken(), "Unexpected field " + p.currentName());
         }

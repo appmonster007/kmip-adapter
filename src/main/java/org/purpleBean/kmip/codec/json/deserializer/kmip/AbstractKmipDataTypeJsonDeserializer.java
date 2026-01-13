@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer;
+package org.purpleBean.kmip.codec.json.deserializer.kmip;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -6,19 +6,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 
 import java.io.IOException;
 import java.util.function.Function;
 
-public abstract class AbstractKmipJsonDeserializer<T extends KmipDataType, V> extends KmipDataTypeJsonDeserializer<T> {
+public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataType, V> extends KmipDataTypeJsonDeserializer<T> {
 
     private final KmipTag kmipTag;
     private final EncodingType encodingType;
     private final Class<V> valueClass;
     private final Function<V, T> factory;
 
-    protected AbstractKmipJsonDeserializer(KmipTag kmipTag, EncodingType encodingType, Class<V> valueClass, Function<V, T> factory) {
+    protected AbstractKmipDataTypeJsonDeserializer(KmipTag kmipTag, EncodingType encodingType, Class<V> valueClass, Function<V, T> factory) {
         this.kmipTag = kmipTag;
         this.encodingType = encodingType;
         this.valueClass = valueClass;

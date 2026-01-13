@@ -5,6 +5,8 @@ import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.common.ProtocolVersionMajor;
+import org.purpleBean.kmip.common.ProtocolVersionMinor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -24,9 +26,9 @@ public class ProtocolVersionTtlvDeserializer extends AbstractKmipStructureTtlvDe
     protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION_MAJOR ->
-                    builder.protocolVersionMajor(mapper.readValue(p, ProtocolVersion.ProtocolVersionMajor.class));
+                    builder.protocolVersionMajor(mapper.readValue(p, ProtocolVersionMajor.class));
             case KmipTag.Standard.PROTOCOL_VERSION_MINOR ->
-                    builder.protocolVersionMinor(mapper.readValue(p, ProtocolVersion.ProtocolVersionMinor.class));
+                    builder.protocolVersionMinor(mapper.readValue(p, ProtocolVersionMinor.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

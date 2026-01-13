@@ -1,11 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
-import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.ttlv.deserializer.AbstractKmipTtlvDeserializer;
+import org.purpleBean.kmip.common.ProtocolVersionMinor;
 
-public class ProtocolVersionMinorTtlvDeserializer extends AbstractKmipTtlvDeserializer<ProtocolVersion.ProtocolVersionMinor, Integer> {
+public class ProtocolVersionMinorTtlvDeserializer extends AbstractKmipTtlvDeserializer<ProtocolVersionMinor, Integer> {
 
     public ProtocolVersionMinorTtlvDeserializer() {
-        super(ProtocolVersion.ProtocolVersionMinor.kmipTag, ProtocolVersion.ProtocolVersionMinor.encodingType, Integer.class, value -> ProtocolVersion.ProtocolVersionMinor.of(value));
+        super(ProtocolVersionMinor.kmipTag, ProtocolVersionMinor.encodingType, Integer.class, value -> ProtocolVersionMinor.of(value));
     }
 }

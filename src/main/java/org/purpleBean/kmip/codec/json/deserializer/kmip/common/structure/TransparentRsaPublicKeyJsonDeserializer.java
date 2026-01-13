@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipStructureJsonDeserializer;
 import org.purpleBean.kmip.common.Modulus;
 import org.purpleBean.kmip.common.PublicExponent;
 import org.purpleBean.kmip.common.structure.TransparentRsaPublicKey;

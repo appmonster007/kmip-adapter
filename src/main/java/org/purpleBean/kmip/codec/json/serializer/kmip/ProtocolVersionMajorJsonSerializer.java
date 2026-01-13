@@ -1,11 +1,10 @@
 package org.purpleBean.kmip.codec.json.serializer.kmip;
 
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.json.serializer.AbstractKmipJsonSerializer;
+import org.purpleBean.kmip.common.ProtocolVersionMajor;
 
-public class ProtocolVersionMajorJsonSerializer extends AbstractKmipJsonSerializer<ProtocolVersion.ProtocolVersionMajor, Integer> {
+public class ProtocolVersionMajorJsonSerializer extends AbstractKmipDataTypeJsonSerializer<ProtocolVersionMajor, Integer> {
 
     public ProtocolVersionMajorJsonSerializer() {
-        super(ProtocolVersion.ProtocolVersionMajor::getValue);
+        super(ProtocolVersionMajor::getValue);
     }
 }
