@@ -1,20 +1,24 @@
 package org.purpleBean.kmip.benchmark.subjects.common.structure;
 
+import lombok.Getter;
 import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.common.AlternativeNameValue;
+import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.common.structure.AlternativeName;
 
 public class AlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<AlternativeName> {
 
+    @Getter
+    private KmipSpec spec = KmipSpec.UnknownVersion;
+
     public AlternativeNameBenchmarkSubject() throws Exception {
-        // TODO: Create a new instance of the structure attribute.
-        // For example:
-        // AlternativeName alternativename = AlternativeName.builder()
-        //         .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
-        //         .digestValue(DigestValue.of(new byte[0]))
-        //         .keyFormatType(new KeyFormatType(KeyFormatType.Standard.PKCS_1))
-        //         .build();
-        // initialize(alternativename, AlternativeName.class);
+        AlternativeName alternativename = AlternativeName.builder()
+                .alternativeNameValue(AlternativeNameValue.of("SomeAliasName"))
+                .alternativeNameType(new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .build();
+        initialize(alternativename, AlternativeName.class);
     }
 
     @Override
