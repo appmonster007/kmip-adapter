@@ -1,0 +1,100 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeSuite;
+
+import java.util.List;
+
+@DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeSuite<{{ATTRIBUTE_NAME}}> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<{{ATTRIBUTE_NAME}}> type() {
+        return {{ATTRIBUTE_NAME}}.class;
+    }
+
+    @Override
+    protected {{ATTRIBUTE_NAME}} createDefault() {
+        // TODO: Create a default instance of the attribute structure
+        return {{ATTRIBUTE_NAME}}.of(List.of());
+    }
+
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
+
+    @Override
+    protected int expectedMinComponentCount() {
+        return 0;
+    }
+
+    @Override
+    protected void validateComponents(List<KmipDataType> values) {
+        // TODO: Validate component as per the structure design
+        // Example:
+        // assertThat(values.get(0)).isInstanceOf(AlternativeNameValue.class);
+        // assertThat(values.get(1)).isInstanceOf(AlternativeNameType.class);
+    }
+
+    @Override
+    protected boolean expectAlwaysPresent() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected boolean expectServerInitializable() {
+        return true;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected boolean expectClientInitializable() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected boolean expectClientDeletable() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected boolean expectMultiInstanceAllowed() {
+        return true;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected State stateForServerModifiableTrue() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected State stateForServerModifiableFalse() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected State stateForClientModifiableTrue() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    protected State stateForClientModifiableFalse() {
+        return null; // TODO: Adjust as needed
+    }
+
+    @Override
+    protected void attrStruct_serverModifiable_respectsState() {
+     // TODO: Adjust as needed or remove to use inherited
+    }
+
+    @Override
+    protected void attrStruct_clientModifiable_respectsState() {
+     // TODO: Adjust as needed or remove to use inherited
+    }
+}

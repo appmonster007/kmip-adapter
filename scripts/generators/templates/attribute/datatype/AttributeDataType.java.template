@@ -1,0 +1,130 @@
+package org.purpleBean.kmip.{{pdot}};
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.*;
+import org.purpleBean.kmip.common.enumeration.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * KMIP {{ATTRIBUTE_NAME}} datatype attribute.
+ */
+@Data
+@Builder(toBuilder = true)
+public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
+    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
+    public static final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}};
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class, {{ATTRIBUTE_NAME}}::of);
+        }
+    }
+
+    @NonNull
+    private final {{DATA_TYPE}} value;
+
+    public static {{ATTRIBUTE_NAME}} of(@NonNull {{DATA_TYPE}} value) {
+        return {{ATTRIBUTE_NAME}}.builder().value(value).build();
+    }
+
+    public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof {{ATTRIBUTE_VALUE_TYPE}} attributeValueTyped)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return new {{ATTRIBUTE_NAME}}(attributeValueTyped.getValue());
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return {{ATTRIBUTE_VALUE_TYPE}}.of(value);
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec);
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isServerModifiable(@NonNull State state) {
+        // PRE_ACTIVE is modifiable by default, adjust as needed
+        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isClientModifiable(@NonNull State state) {
+        // PRE_ACTIVE is modifiable by default, adjust as needed
+        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        {{ATTRIBUTE_NAME}} that = ({{ATTRIBUTE_NAME}}) o;
+        // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0))
+        return Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0))
+        return Objects.hash(value);
+    }
+}

@@ -117,10 +117,12 @@ generate_enum() {
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
+    local IF_ATTR=false
 
     usage_enum() { cat <<EOF
 Usage: $0 enum [options] <Name>
 Options:
+  --attr              Generate an attribute enumeration (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
 EOF
@@ -130,6 +132,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
             --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
@@ -155,8 +158,8 @@ EOF
     if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one enum name required."; usage_enum; return 1; fi
     if [[ "${any_flag}" == "false" ]]; then
         DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
-        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
-        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
@@ -172,12 +175,26 @@ EOF
         pdot=$(slash_to_dot "${SUB_PATH}")
 
         if ${GEN_CLASS}; then
-            render_template "${TEMPLATE_DIR}/Enum.java.template" "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" \
-                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
+            local class_template
+            if ${IF_ATTR}; then
+                class_template="${TEMPLATE_BASE_DIR}/attribute/enumeration/AttributeEnum.java.template"
+            else
+                class_template="${TEMPLATE_DIR}/Enum.java.template"
+            fi
+            render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" \
+                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}" \
+                "ATTRIBUTE_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
         fi
+
         if ${GEN_DOMAIN_TEST}; then
-            render_template "${TEMPLATE_DIR}/EnumTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" \
-                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}"
+            local test_template
+            if ${IF_ATTR}; then
+                test_template="${TEMPLATE_BASE_DIR}/attribute/enumeration/AttributeEnumTest.java.template"
+            else
+                test_template="${TEMPLATE_DIR}/EnumTest.java.template"
+            fi
+            render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" \
+                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME" "${ENUM_NAME}"
         fi
 
         local create_default="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[0])"
@@ -205,12 +222,14 @@ generate_datatype() {
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
-    local DATA_TYPE="java.nio.ByteBuffer"
+    local DATA_TYPE="ByteBuffer"
+    local IF_ATTR=false
 
     usage_datatype() { cat <<EOF
 Usage: $0 datatype [options] <Name>
 Options:
-  --type <java_type>  The underlying Java type (e.g., Integer, String, java.nio.ByteBuffer). Default: java.nio.ByteBuffer
+  --attr              Generate an attribute data type (changes class and domain test templates)
+  --type <java_type>  The underlying Java type (e.g., Integer, String, ByteBuffer). Default: ByteBuffer
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
 EOF
@@ -220,6 +239,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --attr) IF_ATTR=true; shift ;;
             --type) DATA_TYPE="$2"; shift; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
@@ -245,21 +265,22 @@ EOF
 
     if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one datatype name required."; usage_datatype; return 1; fi
 
-    local ENCODING_TYPE DEFAULT_VALUE VARIANT_VALUE
+    local ENCODING_TYPE DEFAULT_VALUE VARIANT_VALUE ATTRIBUTE_VALUE_TYPE
     case "${DATA_TYPE}" in
-        "Integer") ENCODING_TYPE="INTEGER"; DEFAULT_VALUE="123"; VARIANT_VALUE="456" ;;
-        "Long") ENCODING_TYPE="LONG_INTEGER"; DEFAULT_VALUE="12345L"; VARIANT_VALUE="54321L" ;;
-        "java.math.BigInteger") ENCODING_TYPE="BIG_INTEGER"; DEFAULT_VALUE='new java.math.BigInteger("1234567890")'; VARIANT_VALUE='new java.math.BigInteger("9876543210")' ;;
-        "Boolean") ENCODING_TYPE="BOOLEAN"; DEFAULT_VALUE="true"; VARIANT_VALUE="false" ;;
-        "String") ENCODING_TYPE="TEXT_STRING"; DEFAULT_VALUE='"default-string"'; VARIANT_VALUE='"variant-string"' ;;
-        "java.nio.ByteBuffer") ENCODING_TYPE="BYTE_STRING"; DEFAULT_VALUE="java.nio.ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03})"; VARIANT_VALUE="java.nio.ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06})" ;;
-        *) echo "Warning: Unknown data type '${DATA_TYPE}'."; ENCODING_TYPE="UNDEFINED"; DEFAULT_VALUE="null"; VARIANT_VALUE="null" ;;
+        "Integer") ENCODING_TYPE="INTEGER"; DEFAULT_VALUE="123"; VARIANT_VALUE="456"; ATTRIBUTE_VALUE_TYPE="AttributeValueInteger";;
+        "Long") ENCODING_TYPE="LONG_INTEGER"; DEFAULT_VALUE="12345L"; VARIANT_VALUE="54321L"; ATTRIBUTE_VALUE_TYPE="AttributeValueLong";;
+        "BigInteger") ENCODING_TYPE="BIG_INTEGER"; DEFAULT_VALUE='new BigInteger("1234567890")'; VARIANT_VALUE='new BigInteger("9876543210")'; ATTRIBUTE_VALUE_TYPE="AttributeValueBigInteger";;
+        "Boolean") ENCODING_TYPE="BOOLEAN"; DEFAULT_VALUE="true"; VARIANT_VALUE="false"; ATTRIBUTE_VALUE_TYPE="AttributeValueBoolean";;
+        "String") ENCODING_TYPE="TEXT_STRING"; DEFAULT_VALUE='"default-string"'; VARIANT_VALUE='"variant-string"'; ATTRIBUTE_VALUE_TYPE="AttributeValueString";;
+        "ByteBuffer") ENCODING_TYPE="BYTE_STRING"; DEFAULT_VALUE="ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03})"; VARIANT_VALUE="ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06})"; ATTRIBUTE_VALUE_TYPE="AttributeValueByteString";;
+        "OffsetDateTime") ENCODING_TYPE="DATE_TIME"; DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; VARIANT_VALUE='OffsetDateTime.of(2025, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; ATTRIBUTE_VALUE_TYPE="AttributeValueDateTime";;
+        *) echo "Warning: Unknown data type '${DATA_TYPE}'."; ENCODING_TYPE="UNDEFINED"; DEFAULT_VALUE="null"; VARIANT_VALUE="null"; ATTRIBUTE_VALUE_TYPE="AttributeValue";;
     esac
 
     if [[ "${any_flag}" == "false" ]]; then
         DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
-        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
-        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
@@ -275,12 +296,27 @@ EOF
         pdot=$(slash_to_dot "${SUB_PATH}")
 
         if ${GEN_CLASS}; then
-            render_template "${TEMPLATE_DIR}/DataType.java.template" "${MAIN_JAVA}/${SUB_PATH}/${DATA_NAME}.java" \
-                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}"
+            local class_template
+            if ${IF_ATTR}; then
+                class_template="${TEMPLATE_BASE_DIR}/attribute/datatype/AttributeDataType.java.template"
+            else
+                class_template="${TEMPLATE_DIR}/DataType.java.template"
+            fi
+            render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${DATA_NAME}.java" \
+                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}" \
+                "ATTRIBUTE_NAME" "${DATA_NAME}" "ATTRIBUTE_NAME_SNAKE" "${DATA_NAME_SNAKE}" "ATTRIBUTE_VALUE_TYPE" "${ATTRIBUTE_VALUE_TYPE}"
         fi
+
         if ${GEN_DOMAIN_TEST}; then
-            render_template "${TEMPLATE_DIR}/DataTypeTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${DATA_NAME}Test.java" \
-                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DEFAULT_VALUE" "${DEFAULT_VALUE}" "ENCODING_TYPE" "${ENCODING_TYPE}"
+            local test_template
+            if ${IF_ATTR}; then
+                test_template="${TEMPLATE_BASE_DIR}/attribute/datatype/AttributeDataTypeTest.java.template"
+            else
+                test_template="${TEMPLATE_DIR}/DataTypeTest.java.template"
+            fi
+            render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${DATA_NAME}Test.java" \
+                "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DEFAULT_VALUE" "${DEFAULT_VALUE}" "ENCODING_TYPE" "${ENCODING_TYPE}" "DATA_TYPE" "${DATA_TYPE}" \
+                "ATTRIBUTE_NAME" "${DATA_NAME}"
         fi
 
         local super_call_deserializer="value -> ${DATA_NAME}.builder().value(value).build()"
@@ -308,10 +344,12 @@ generate_structure() {
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
+    local IF_ATTR=false
 
     usage_structure() { cat <<EOF
 Usage: $0 structure [options] <Name>
 Options:
+  --attr              Generate an attribute structure (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
 EOF
@@ -321,6 +359,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
             --json-des) GEN_JSON_DES=true; any_flag=true; shift ;;
@@ -346,8 +385,8 @@ EOF
     if [[ ${#NAMES[@]} -eq 0 ]]; then echo "Error: at least one structure name required."; usage_structure; return 1; fi
     if [[ "${any_flag}" == "false" ]]; then
         DRY_RUN=true; echo "No generation flags provided -> performing DRY RUN."
-        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true
-        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true
+        GEN_CLASS=true; GEN_JSON_SER=true; GEN_JSON_DES=true; GEN_XML_SER=true; GEN_XML_DES=true;
+        GEN_TTLV_SER=true; GEN_TTLV_DES=true; GEN_DOMAIN_TEST=true; GEN_JSON_TEST=true; GEN_XML_TEST=true;
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
@@ -365,12 +404,26 @@ EOF
         pdot=$(slash_to_dot "${SUB_PATH}")
 
         if ${GEN_CLASS}; then
-            render_template "${TEMPLATE_DIR}/Structure.java.template" "${MAIN_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}"
+            local class_template
+            if ${IF_ATTR}; then
+                class_template="${TEMPLATE_BASE_DIR}/attribute/structure/AttributeStructure.java.template"
+            else
+                class_template="${TEMPLATE_DIR}/Structure.java.template"
+            fi
+            render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
+                "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}"
         fi
+
         if ${GEN_DOMAIN_TEST}; then
-            render_template "${TEMPLATE_DIR}/StructureTest.java.template" "${TEST_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}Test.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}"
+            local test_template
+            if ${IF_ATTR}; then
+                test_template="${TEMPLATE_BASE_DIR}/attribute/structure/AttributeStructureTest.java.template"
+            else
+                test_template="${TEMPLATE_DIR}/StructureTest.java.template"
+            fi
+            render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}Test.java" \
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME" "${STRUCTURE_NAME}"
         fi
 
         if ${GEN_JSON_SER}; then
