@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.benchmark.subjects;
+package org.purpleBean.kmip.benchmark.subjects.common.structure;
 
 import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 public class ProtocolVersionBenchmarkSubject extends KmipBenchmarkSubject<ProtocolVersion> {
 

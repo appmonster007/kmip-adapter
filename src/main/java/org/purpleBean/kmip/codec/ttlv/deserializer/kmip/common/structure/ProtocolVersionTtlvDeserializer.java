@@ -1,11 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
+package org.purpleBean.kmip.codec.ttlv.deserializer.kmip.common.structure;
 
 import org.purpleBean.kmip.EncodingType;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.common.ProtocolVersionMajor;
 import org.purpleBean.kmip.common.ProtocolVersionMinor;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

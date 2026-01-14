@@ -1,11 +1,12 @@
-package org.purpleBean.kmip.codec.json.deserializer.kmip;
+package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipStructureJsonDeserializer;
 import org.purpleBean.kmip.common.ProtocolVersionMajor;
 import org.purpleBean.kmip.common.ProtocolVersionMinor;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 import java.io.IOException;
 

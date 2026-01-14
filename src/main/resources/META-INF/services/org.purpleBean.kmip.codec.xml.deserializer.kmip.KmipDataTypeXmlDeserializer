@@ -1,9 +1,9 @@
 org.purpleBean.kmip.codec.xml.deserializer.kmip.KeyMaterialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMajorXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionMinorXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.kmip.ProtocolVersionXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ProtocolVersionMajorXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ProtocolVersionMinorXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.common.structure.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.RequestMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.ActivationDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.kmip.common.AlternativeNameValueXmlDeserializer

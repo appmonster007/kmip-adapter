@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purpleBean.kmip.codec.xml.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
-@DisplayName("ProtocolVersion TTLV Serialization")
-class ProtocolVersionTtlvTest extends AbstractTtlvSerializationTestSuite<ProtocolVersion> {
+@DisplayName("ProtocolVersion XML Serialization")
+class ProtocolVersionXmlTest extends AbstractXmlSerializationTestSuite<ProtocolVersion> {
 
     @Override
     protected Class<ProtocolVersion> type() {

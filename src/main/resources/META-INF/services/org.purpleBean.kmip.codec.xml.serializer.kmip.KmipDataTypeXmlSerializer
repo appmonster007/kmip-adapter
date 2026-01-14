@@ -1,6 +1,6 @@
-org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMajorXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionMinorXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.kmip.ProtocolVersionXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.ProtocolVersionMajorXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.ProtocolVersionMinorXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.kmip.common.structure.ProtocolVersionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.ActivationDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.AlternativeNameValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.kmip.common.ApplicationDataXmlSerializer

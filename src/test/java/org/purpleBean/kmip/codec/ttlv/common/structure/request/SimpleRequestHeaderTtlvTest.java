@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.common.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 

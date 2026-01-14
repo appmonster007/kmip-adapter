@@ -2,6 +2,7 @@ package org.purpleBean.kmip;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

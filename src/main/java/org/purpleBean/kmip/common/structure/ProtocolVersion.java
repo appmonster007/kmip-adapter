@@ -1,8 +1,9 @@
-package org.purpleBean.kmip;
+package org.purpleBean.kmip.common.structure;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.common.ProtocolVersionMajor;
 import org.purpleBean.kmip.common.ProtocolVersionMinor;
 

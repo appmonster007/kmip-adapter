@@ -1,6 +1,6 @@
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMajorTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionMinorTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.kmip.ProtocolVersionTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ProtocolVersionMajorTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ProtocolVersionMinorTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.structure.ProtocolVersionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ActivationDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.AlternativeNameValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.kmip.common.ApplicationDataTtlvSerializer

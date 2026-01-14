@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 import java.util.List;
 import java.util.Objects;

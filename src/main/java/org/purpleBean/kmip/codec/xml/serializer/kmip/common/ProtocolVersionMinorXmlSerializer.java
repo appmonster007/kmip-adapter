@@ -1,5 +1,6 @@
-package org.purpleBean.kmip.codec.xml.serializer.kmip;
+package org.purpleBean.kmip.codec.xml.serializer.kmip.common;
 
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.common.ProtocolVersionMinor;
 
 public class ProtocolVersionMinorXmlSerializer extends AbstractKmipDataTypeXmlSerializer<ProtocolVersionMinor, Integer> {

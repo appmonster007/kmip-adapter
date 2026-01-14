@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.xml.common.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;

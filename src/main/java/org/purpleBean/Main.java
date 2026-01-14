@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.ProtocolVersion;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;

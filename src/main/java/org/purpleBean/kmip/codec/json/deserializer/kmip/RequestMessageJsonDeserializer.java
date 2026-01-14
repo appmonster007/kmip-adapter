@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.RequestMessageStructure;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;

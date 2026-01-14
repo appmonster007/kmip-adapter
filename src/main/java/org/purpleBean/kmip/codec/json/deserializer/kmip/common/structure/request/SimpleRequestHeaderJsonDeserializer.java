@@ -3,8 +3,8 @@ package org.purpleBean.kmip.codec.json.deserializer.kmip.common.structure.reques
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.KmipTag;
-import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
 
 import java.io.IOException;

@@ -2,6 +2,7 @@ package org.purpleBean.kmip;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 
 import java.util.HashMap;
 import java.util.Map;

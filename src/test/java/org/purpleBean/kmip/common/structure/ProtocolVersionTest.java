@@ -2,7 +2,6 @@ package org.purpleBean.kmip.common.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
