@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.UniqueIdentifier;
 public class UniqueIdentifierTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<UniqueIdentifier, Integer> {
 
     public UniqueIdentifierTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(UniqueIdentifier::getValue);
     }
 }

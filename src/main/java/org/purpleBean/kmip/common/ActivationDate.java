@@ -76,7 +76,7 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isClientModifiable(@NonNull State state) {
         // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+        return state.getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isServerModifiable(@NonNull State state) {
         // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue();
+        return state.getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
     @Override

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 public class UsageLimitsUnitTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<UsageLimitsUnit, Integer> {
 
     public UsageLimitsUnitTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(UsageLimitsUnit::getValue);
     }
 }

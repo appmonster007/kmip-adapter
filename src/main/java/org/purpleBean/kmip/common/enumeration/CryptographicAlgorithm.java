@@ -198,6 +198,10 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         return false;
     }
 
+    public int getValue() {
+        return value.getValue();
+    }
+
     @Getter
     @AllArgsConstructor
     @ToString

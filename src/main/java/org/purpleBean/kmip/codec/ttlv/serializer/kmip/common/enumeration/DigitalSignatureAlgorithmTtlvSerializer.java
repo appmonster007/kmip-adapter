@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.DigitalSignatureAlgorithm;
 public class DigitalSignatureAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DigitalSignatureAlgorithm, Integer> {
 
     public DigitalSignatureAlgorithmTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(DigitalSignatureAlgorithm::getValue);
     }
 }

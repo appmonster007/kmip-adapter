@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.DataEnumeration;
 public class DataEnumerationTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DataEnumeration, Integer> {
 
     public DataEnumerationTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(DataEnumeration::getValue);
     }
 }

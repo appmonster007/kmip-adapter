@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ClientRegistrationMethod;
 public class ClientRegistrationMethodTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ClientRegistrationMethod, Integer> {
 
     public ClientRegistrationMethodTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ClientRegistrationMethod::getValue);
     }
 }

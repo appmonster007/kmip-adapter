@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.NistKeyType;
 public class NistKeyTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<NistKeyType, Integer> {
 
     public NistKeyTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(NistKeyType::getValue);
     }
 }

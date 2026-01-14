@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.CredentialType;
 public class CredentialTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CredentialType, Integer> {
 
     public CredentialTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(CredentialType::getValue);
     }
 }

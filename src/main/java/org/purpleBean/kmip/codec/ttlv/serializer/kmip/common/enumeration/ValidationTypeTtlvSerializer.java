@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ValidationType;
 public class ValidationTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ValidationType, Integer> {
 
     public ValidationTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ValidationType::getValue);
     }
 }

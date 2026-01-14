@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.AttestationType;
 public class AttestationTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<AttestationType, Integer> {
 
     public AttestationTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(AttestationType::getValue);
     }
 }

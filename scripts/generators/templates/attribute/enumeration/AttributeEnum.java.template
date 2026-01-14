@@ -198,6 +198,10 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         return getAttributeName().getValue();
     }
 
+    public int getValue() {
+        return value.getValue();
+    }
+
     @Getter
     @AllArgsConstructor
     @ToString

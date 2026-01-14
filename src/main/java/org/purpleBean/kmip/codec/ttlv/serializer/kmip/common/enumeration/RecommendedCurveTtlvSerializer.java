@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 public class RecommendedCurveTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RecommendedCurve, Integer> {
 
     public RecommendedCurveTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(RecommendedCurve::getValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.EncodingOption;
 public class EncodingOptionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<EncodingOption, Integer> {
 
     public EncodingOptionTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(EncodingOption::getValue);
     }
 }

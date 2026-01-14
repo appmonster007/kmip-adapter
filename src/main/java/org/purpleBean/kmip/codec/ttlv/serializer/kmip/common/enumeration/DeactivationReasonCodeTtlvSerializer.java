@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.DeactivationReasonCode;
 public class DeactivationReasonCodeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DeactivationReasonCode, Integer> {
 
     public DeactivationReasonCodeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(DeactivationReasonCode::getValue);
     }
 }

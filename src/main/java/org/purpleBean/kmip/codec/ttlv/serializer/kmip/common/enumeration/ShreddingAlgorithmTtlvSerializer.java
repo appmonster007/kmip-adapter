@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ShreddingAlgorithm;
 public class ShreddingAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ShreddingAlgorithm, Integer> {
 
     public ShreddingAlgorithmTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ShreddingAlgorithm::getValue);
     }
 }

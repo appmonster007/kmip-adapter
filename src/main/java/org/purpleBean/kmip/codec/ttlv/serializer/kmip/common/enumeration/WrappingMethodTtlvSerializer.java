@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.WrappingMethod;
 public class WrappingMethodTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<WrappingMethod, Integer> {
 
     public WrappingMethodTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(WrappingMethod::getValue);
     }
 }

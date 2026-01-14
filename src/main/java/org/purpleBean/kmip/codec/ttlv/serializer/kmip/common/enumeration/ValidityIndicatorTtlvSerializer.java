@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ValidityIndicator;
 public class ValidityIndicatorTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ValidityIndicator, Integer> {
 
     public ValidityIndicatorTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ValidityIndicator::getValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.BlockCipherMode;
 public class BlockCipherModeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<BlockCipherMode, Integer> {
 
     public BlockCipherModeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(BlockCipherMode::getValue);
     }
 }

@@ -204,7 +204,7 @@ EOF
         if ${GEN_JSON_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "json" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
         if ${GEN_XML_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "${ENUM_NAME}::getDescription"; fi
         if ${GEN_XML_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
-        if ${GEN_TTLV_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "value -> value.getValue().getValue()"; fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "${ENUM_NAME}::getValue"; fi
         if ${GEN_TTLV_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromValue(value))"; fi
 
         if ${GEN_JSON_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "json" "${create_default}" "${create_variant}"; fi

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.TicketType;
 public class TicketTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<TicketType, Integer> {
 
     public TicketTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(TicketType::getValue);
     }
 }

@@ -108,12 +108,12 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     @Override
     public boolean isServerModifiable(State state) {
-        return state != null && state.getValue() == State.Standard.PRE_ACTIVE;
+        return state != null && state.getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
     @Override
     public boolean isClientModifiable(State state) {
-        return state != null && state.getValue() == State.Standard.PRE_ACTIVE;
+        return state != null && state.getValue() == State.Standard.PRE_ACTIVE.getValue();
     }
 
     @Override

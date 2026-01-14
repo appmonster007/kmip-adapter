@@ -76,8 +76,8 @@ public class ProtectStopDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isClientModifiable(@NonNull State state) {
         return (
-                state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue()
-                        || state.getValue().getValue() == State.Standard.ACTIVE.getValue()
+                state.getValue() == State.Standard.PRE_ACTIVE.getValue()
+                        || state.getValue() == State.Standard.ACTIVE.getValue()
         ) && value.withNano(0).isAfter(OffsetDateTime.now().withNano(0));
     }
 
@@ -109,8 +109,8 @@ public class ProtectStopDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isServerModifiable(@NonNull State state) {
         return (
-                state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue()
-                        || state.getValue().getValue() == State.Standard.ACTIVE.getValue()
+                state.getValue() == State.Standard.PRE_ACTIVE.getValue()
+                        || state.getValue() == State.Standard.ACTIVE.getValue()
         ) && value.withNano(0).isAfter(OffsetDateTime.now().withNano(0));
     }
 

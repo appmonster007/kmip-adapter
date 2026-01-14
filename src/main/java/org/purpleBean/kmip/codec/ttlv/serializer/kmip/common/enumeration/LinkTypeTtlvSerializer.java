@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.LinkType;
 public class LinkTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<LinkType, Integer> {
 
     public LinkTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(LinkType::getValue);
     }
 }

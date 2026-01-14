@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.EndpointRole;
 public class EndpointRoleTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<EndpointRole, Integer> {
 
     public EndpointRoleTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(EndpointRole::getValue);
     }
 }

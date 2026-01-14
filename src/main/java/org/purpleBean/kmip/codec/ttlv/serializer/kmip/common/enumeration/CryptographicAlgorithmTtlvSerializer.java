@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.CryptographicAlgorithm;
 public class CryptographicAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CryptographicAlgorithm, Integer> {
 
     public CryptographicAlgorithmTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(CryptographicAlgorithm::getValue);
     }
 }

@@ -134,6 +134,10 @@ public class DataEnumeration implements KmipEnumeration {
         return supportedVersions.contains(spec) && value.isSupported();
     }
 
+    public int getValue() {
+        return value.getValue();
+    }
+
     @Getter
     @AllArgsConstructor
     @ToString

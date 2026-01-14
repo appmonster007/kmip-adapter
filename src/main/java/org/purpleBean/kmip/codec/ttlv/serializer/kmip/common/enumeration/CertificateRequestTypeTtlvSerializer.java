@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.CertificateRequestType;
 public class CertificateRequestTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CertificateRequestType, Integer> {
 
     public CertificateRequestTypeTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(CertificateRequestType::getValue);
     }
 }

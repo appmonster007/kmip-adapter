@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ObjectGroupMember;
 public class ObjectGroupMemberTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ObjectGroupMember, Integer> {
 
     public ObjectGroupMemberTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ObjectGroupMember::getValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ProtectionLevel;
 public class ProtectionLevelTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ProtectionLevel, Integer> {
 
     public ProtectionLevelTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ProtectionLevel::getValue);
     }
 }

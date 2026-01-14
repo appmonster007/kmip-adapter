@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.InteropFunction;
 public class InteropFunctionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<InteropFunction, Integer> {
 
     public InteropFunctionTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(InteropFunction::getValue);
     }
 }

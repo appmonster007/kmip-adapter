@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ResultStatus;
 public class ResultStatusTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ResultStatus, Integer> {
 
     public ResultStatusTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ResultStatus::getValue);
     }
 }

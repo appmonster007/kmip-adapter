@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ProcessingStage;
 public class ProcessingStageTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ProcessingStage, Integer> {
 
     public ProcessingStageTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ProcessingStage::getValue);
     }
 }

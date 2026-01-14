@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.QueryFunction;
 public class QueryFunctionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<QueryFunction, Integer> {
 
     public QueryFunctionTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(QueryFunction::getValue);
     }
 }

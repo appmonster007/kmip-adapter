@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.OtpAlgorithm;
 public class OtpAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<OtpAlgorithm, Integer> {
 
     public OtpAlgorithmTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(OtpAlgorithm::getValue);
     }
 }

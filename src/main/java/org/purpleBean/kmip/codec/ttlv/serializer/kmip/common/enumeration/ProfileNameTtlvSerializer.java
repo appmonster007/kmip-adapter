@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.ProfileName;
 public class ProfileNameTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ProfileName, Integer> {
 
     public ProfileNameTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(ProfileName::getValue);
     }
 }

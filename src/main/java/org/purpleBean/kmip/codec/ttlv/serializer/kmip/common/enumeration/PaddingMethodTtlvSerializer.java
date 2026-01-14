@@ -6,6 +6,6 @@ import org.purpleBean.kmip.common.enumeration.PaddingMethod;
 public class PaddingMethodTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<PaddingMethod, Integer> {
 
     public PaddingMethodTtlvSerializer() {
-        super(value -> value.getValue().getValue());
+        super(PaddingMethod::getValue);
     }
 }
