@@ -19,7 +19,6 @@ import java.util.stream.Stream;
 @Data
 @Builder(toBuilder = true)
 public class KeyValueStructure implements KeyValue, KmipStructure {
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

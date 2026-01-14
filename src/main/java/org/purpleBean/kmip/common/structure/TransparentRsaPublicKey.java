@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Data
 @Builder(toBuilder = true)
 public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

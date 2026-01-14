@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 public class CryptographicParameters implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS);
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

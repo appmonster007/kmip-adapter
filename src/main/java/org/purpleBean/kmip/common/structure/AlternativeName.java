@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class AlternativeName implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME);
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

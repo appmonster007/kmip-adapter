@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class SimpleRequestHeader implements RequestHeaderStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_HEADER);
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
 
     static {
         for (KmipSpec spec : KmipSpec.values()) {

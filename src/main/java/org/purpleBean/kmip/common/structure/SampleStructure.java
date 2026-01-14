@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 public class SampleStructure implements KmipStructure {
 
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.P);
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {

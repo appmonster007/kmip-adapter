@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class SimpleRequestMessage implements RequestMessageStructure {
     public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
 
     static {
         for (KmipSpec spec : KmipSpec.values()) {

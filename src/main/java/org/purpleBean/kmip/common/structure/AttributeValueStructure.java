@@ -14,7 +14,6 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class AttributeValueStructure implements AttributeValue, KmipStructure {
     public static final KmipTag kmipTag = AttributeValue.kmipTag;
-    public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
