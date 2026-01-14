@@ -47,7 +47,7 @@ public abstract class AbstractTtlvSerializationTestSuite<T> extends BaseKmipTest
         ByteBuffer buffer;
         try {
             buffer = ttlvMapper.writeValueAsByteBuffer(original);
-            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
+//            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = ttlvMapper.readValue(buffer, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {
@@ -62,7 +62,7 @@ public abstract class AbstractTtlvSerializationTestSuite<T> extends BaseKmipTest
         ByteBuffer buffer;
         try {
             buffer = mapper().writeValueAsByteBuffer(original);
-            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
+//            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = mapper().readValue(buffer, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (IOException e) {

@@ -43,7 +43,7 @@ public abstract class AbstractXmlSerializationTestSuite<T> extends BaseKmipTest 
         T original = createDefault();
         try {
             String xml = mapper().writeValueAsString(original);
-            System.out.println("XML: \n" + xml);
+//            System.out.println("XML: \n" + xml);
             T restored = mapper().readValue(xml, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public abstract class AbstractXmlSerializationTestSuite<T> extends BaseKmipTest 
         T original = createVariant();
         try {
             String xml = mapper().writeValueAsString(original);
-            System.out.println("XML: \n" + xml);
+//            System.out.println("XML: \n" + xml);
             T restored = mapper().readValue(xml, type());
             assertThat(equalsRelaxed(original, restored)).isTrue();
         } catch (Exception e) {
