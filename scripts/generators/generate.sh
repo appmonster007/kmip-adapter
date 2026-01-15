@@ -89,10 +89,10 @@ generate_unified_serializer() {
     format_pascal=$(get_pascal_case "${format}")
     pdot=$(slash_to_dot "${sub_path}")
 
-    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/kmip/${sub_path}/${name}${format_pascal}Serializer.java" \
+    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/${sub_path}/${name}${format_pascal}Serializer.java" \
         "pdot" "${pdot}" "NAME" "${name}" "SERIALIZED_TYPE" "${serialized_type}" "SUPER_CALL" "${super_call}"
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.kmip.KmipDataType${format_pascal}Serializer" \
-        "org.purpleBean.kmip.codec.${format}.serializer.kmip.${pdot}.${name}${format_pascal}Serializer"
+        "org.purpleBean.kmip.codec.${format}.serializer.${pdot}.${name}${format_pascal}Serializer"
 }
 
 generate_unified_deserializer() {
@@ -101,27 +101,28 @@ generate_unified_deserializer() {
     format_pascal=$(get_pascal_case "${format}")
     pdot=$(slash_to_dot "${sub_path}")
 
-    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/kmip/${sub_path}/${name}${format_pascal}Deserializer.java" \
+    render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/${sub_path}/${name}${format_pascal}Deserializer.java" \
         "pdot" "${pdot}" "NAME" "${name}" "DESERIALIZED_TYPE" "${deserialized_type}" "SUPER_CALL" "${super_call}"
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.kmip.KmipDataType${format_pascal}Deserializer" \
-        "org.purpleBean.kmip.codec.${format}.deserializer.kmip.${pdot}.${name}${format_pascal}Deserializer"
+        "org.purpleBean.kmip.codec.${format}.deserializer.${pdot}.${name}${format_pascal}Deserializer"
 }
 
 
 # --- Entity-Specific Generator Functions ---
 
 generate_enum() {
-    local SUB_PATH="common/enumeration"
     local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/enumeration"
     local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
     local IF_ATTR=false
+    local scope="core"
 
     usage_enum() { cat <<EOF
 Usage: $0 enum [options] <Name>
 Options:
+  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
   --attr              Generate an attribute enumeration (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
@@ -132,6 +133,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --scope) scope="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
@@ -163,6 +165,7 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUB_PATH="model/${scope}/enumeration"
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
@@ -216,7 +219,6 @@ EOF
 }
 
 generate_datatype() {
-    local SUB_PATH="common"
     local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/datatype"
     local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
@@ -224,10 +226,12 @@ generate_datatype() {
     local DRY_RUN=false
     local DATA_TYPE="ByteBuffer"
     local IF_ATTR=false
+    local scope="core"
 
     usage_datatype() { cat <<EOF
 Usage: $0 datatype [options] <Name>
 Options:
+  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
   --attr              Generate an attribute data type (changes class and domain test templates)
   --type <java_type>  The underlying Java type (e.g., Integer, String, ByteBuffer). Default: ByteBuffer
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
@@ -239,6 +243,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --scope) scope="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --type) DATA_TYPE="$2"; shift; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
@@ -284,6 +289,7 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUB_PATH="model/${scope}/type"
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
@@ -338,17 +344,18 @@ EOF
 }
 
 generate_structure() {
-    local SUB_PATH="common/structure"
     local TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/structure"
     local GEN_CLASS=false GEN_JSON_SER=false GEN_JSON_DES=false GEN_XML_SER=false GEN_XML_DES=false
     local GEN_TTLV_SER=false GEN_TTLV_DES=false GEN_DOMAIN_TEST=false GEN_JSON_TEST=false GEN_XML_TEST=false
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
     local IF_ATTR=false
+    local scope="core"
 
     usage_structure() { cat <<EOF
 Usage: $0 structure [options] <Name>
 Options:
+  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
   --attr              Generate an attribute structure (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
@@ -359,6 +366,7 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --scope) scope="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
@@ -390,6 +398,7 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUB_PATH="model/${scope}/structure"
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
@@ -427,40 +436,40 @@ EOF
         fi
 
         if ${GEN_JSON_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureJsonSerializer.java.template" "${MAIN_JAVA}/codec/json/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}JsonSerializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureJsonSerializer.java.template" "${MAIN_JAVA}/codec/json/serializer/${SUB_PATH}/${STRUCTURE_NAME}JsonSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
-                "org.purpleBean.kmip.codec.json.serializer.kmip.${pdot}.${STRUCTURE_NAME}JsonSerializer"
+                "org.purpleBean.kmip.codec.json.serializer.${pdot}.${STRUCTURE_NAME}JsonSerializer"
         fi
         if ${GEN_JSON_DES}; then
-            render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
-                "org.purpleBean.kmip.codec.json.deserializer.kmip.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
+                "org.purpleBean.kmip.codec.json.deserializer.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
         fi
         if ${GEN_XML_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureXmlSerializer.java.template" "${MAIN_JAVA}/codec/xml/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}XmlSerializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureXmlSerializer.java.template" "${MAIN_JAVA}/codec/xml/serializer/${SUB_PATH}/${STRUCTURE_NAME}XmlSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
-                "org.purpleBean.kmip.codec.xml.serializer.kmip.${pdot}.${STRUCTURE_NAME}XmlSerializer"
+                "org.purpleBean.kmip.codec.xml.serializer.${pdot}.${STRUCTURE_NAME}XmlSerializer"
         fi
         if ${GEN_XML_DES}; then
-            render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
-                "org.purpleBean.kmip.codec.xml.deserializer.kmip.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
+                "org.purpleBean.kmip.codec.xml.deserializer.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
         fi
         if ${GEN_TTLV_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureTtlvSerializer.java.template" "${MAIN_JAVA}/codec/ttlv/serializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}TtlvSerializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureTtlvSerializer.java.template" "${MAIN_JAVA}/codec/ttlv/serializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
-                "org.purpleBean.kmip.codec.ttlv.serializer.kmip.${pdot}.${STRUCTURE_NAME}TtlvSerializer"
+                "org.purpleBean.kmip.codec.ttlv.serializer.${pdot}.${STRUCTURE_NAME}TtlvSerializer"
         fi
         if ${GEN_TTLV_DES}; then
-            render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/kmip/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
+            render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
-                "org.purpleBean.kmip.codec.ttlv.deserializer.kmip.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
+                "org.purpleBean.kmip.codec.ttlv.deserializer.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
         fi
 
         local create_default_struct="new ${STRUCTURE_NAME}()"

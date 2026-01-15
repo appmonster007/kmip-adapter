@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.{{pdot}};
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 import java.util.List;
