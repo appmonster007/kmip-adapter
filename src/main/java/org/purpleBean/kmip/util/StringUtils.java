@@ -1,4 +1,4 @@
-package org.purpleBean.kmip;
+package org.purpleBean.kmip.util;
 
 public class StringUtils {
 

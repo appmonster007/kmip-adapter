@@ -3,12 +3,12 @@ package org.purpleBean.kmip.model.core.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.StringUtils;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.RevocationMessage;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;

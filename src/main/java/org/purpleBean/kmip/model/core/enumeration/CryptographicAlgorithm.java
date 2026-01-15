@@ -1,10 +1,10 @@
 package org.purpleBean.kmip.model.core.enumeration;
 
 import lombok.*;
-import org.purpleBean.kmip.StringUtils;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
