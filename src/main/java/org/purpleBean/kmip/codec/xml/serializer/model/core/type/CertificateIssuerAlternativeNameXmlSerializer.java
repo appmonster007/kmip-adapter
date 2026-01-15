@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.model.core.type.CertificateIssuerAlternativeName;
+
+public class CertificateIssuerAlternativeNameXmlSerializer extends AbstractKmipDataTypeXmlSerializer<CertificateIssuerAlternativeName, String> {
+
+    public CertificateIssuerAlternativeNameXmlSerializer() {
+        super(CertificateIssuerAlternativeName::getValue);
+    }
+}

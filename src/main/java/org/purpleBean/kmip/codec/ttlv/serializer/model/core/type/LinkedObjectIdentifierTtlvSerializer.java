@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.AbstractKmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
+
+public class LinkedObjectIdentifierTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<LinkedObjectIdentifier, String> {
+
+    public LinkedObjectIdentifierTtlvSerializer() {
+        super(LinkedObjectIdentifier::getValue);
+    }
+}

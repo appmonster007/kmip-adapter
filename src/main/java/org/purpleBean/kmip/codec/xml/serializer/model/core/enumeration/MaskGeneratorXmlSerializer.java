@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration;
+
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
+
+public class MaskGeneratorXmlSerializer extends AbstractKmipDataTypeXmlSerializer<MaskGenerator, String> {
+
+    public MaskGeneratorXmlSerializer() {
+        super(MaskGenerator::getDescription);
+    }
+}

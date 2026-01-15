@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.json.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.json.serializer.kmip.AbstractKmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
+
+public class AttributeValueEnumerationJsonSerializer extends AbstractKmipDataTypeJsonSerializer<AttributeValueEnumeration, Integer> {
+
+    public AttributeValueEnumerationJsonSerializer() {
+        super(AttributeValueEnumeration::getValue);
+    }
+}

@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.*;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipTagJsonDeserializer;

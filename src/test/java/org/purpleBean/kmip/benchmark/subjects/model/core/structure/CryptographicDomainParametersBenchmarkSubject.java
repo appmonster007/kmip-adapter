@@ -1,0 +1,33 @@
+package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.type.Qlength;
+import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purpleBean.kmip.model.core.structure.CryptographicDomainParameters;
+
+public class CryptographicDomainParametersBenchmarkSubject extends KmipBenchmarkSubject<CryptographicDomainParameters> {
+
+    public CryptographicDomainParametersBenchmarkSubject() throws Exception {
+        CryptographicDomainParameters cryptographicDomainParameters = CryptographicDomainParameters.builder()
+                .qlength(Qlength.of(256))
+                .recommendedCurve(RecommendedCurve.Standard.P_256.inst())
+                .build();
+        initialize(cryptographicDomainParameters, CryptographicDomainParameters.class);
+    }
+
+    @Override
+    public String name() {
+        return "CryptographicDomainParameters";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}

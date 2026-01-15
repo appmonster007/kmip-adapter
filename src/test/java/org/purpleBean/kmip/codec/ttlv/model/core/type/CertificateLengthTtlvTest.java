@@ -1,0 +1,24 @@
+package org.purpleBean.kmip.codec.ttlv.model.core.type;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.type.CertificateLength;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+@DisplayName("CertificateLength TTLV Serialization Tests")
+class CertificateLengthTtlvTest extends AbstractTtlvSerializationTestSuite<CertificateLength> {
+
+    @Override
+    protected Class<CertificateLength> type() {
+        return CertificateLength.class;
+    }
+
+    @Override
+    protected CertificateLength createDefault() {
+        return CertificateLength.builder().value(10).build();
+    }
+
+    @Override
+    protected CertificateLength createVariant() {
+        return CertificateLength.builder().value(15).build();
+    }
+}

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.api.EncodingType;
 
 import java.nio.ByteBuffer;
 import java.util.*;

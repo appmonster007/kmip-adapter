@@ -1,6 +1,6 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
-import org.purpleBean.kmip.KeyMaterial;
+import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;

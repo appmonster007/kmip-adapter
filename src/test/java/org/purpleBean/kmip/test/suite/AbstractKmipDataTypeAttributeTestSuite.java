@@ -2,9 +2,9 @@ package org.purpleBean.kmip.test.suite;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipAttribute;
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.common.structure.Attribute;
+import org.purpleBean.kmip.api.KmipAttribute;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.structure.Attribute;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

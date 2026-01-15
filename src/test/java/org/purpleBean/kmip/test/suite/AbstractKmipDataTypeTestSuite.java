@@ -2,10 +2,10 @@ package org.purpleBean.kmip.test.suite;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
 import static org.assertj.core.api.Assertions.assertThat;

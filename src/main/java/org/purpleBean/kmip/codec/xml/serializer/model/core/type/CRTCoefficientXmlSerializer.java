@@ -1,0 +1,13 @@
+package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.model.core.type.CRTCoefficient;
+
+import java.math.BigInteger;
+
+public class CRTCoefficientXmlSerializer extends AbstractKmipDataTypeXmlSerializer<CRTCoefficient, BigInteger> {
+
+    public CRTCoefficientXmlSerializer() {
+        super(CRTCoefficient::getValue);
+    }
+}

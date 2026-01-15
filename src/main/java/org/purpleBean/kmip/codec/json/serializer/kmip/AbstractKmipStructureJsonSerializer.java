@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.serializer.kmip;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipStructure;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

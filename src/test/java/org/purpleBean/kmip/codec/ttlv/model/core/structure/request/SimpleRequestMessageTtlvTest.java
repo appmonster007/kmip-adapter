@@ -1,0 +1,55 @@
+package org.purpleBean.kmip.codec.ttlv.model.core.structure.request;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+import java.util.Objects;
+
+@DisplayName("SimpleRequestMessage TTLV Serialization")
+class SimpleRequestMessageTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleRequestMessage> {
+
+    @Override
+    protected Class<SimpleRequestMessage> type() {
+        return SimpleRequestMessage.class;
+    }
+
+    @Override
+    protected SimpleRequestMessage createDefault() {
+        SimpleRequestHeader header = SimpleRequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(1, 2))
+                .build();
+        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+        return SimpleRequestMessage.builder()
+                .requestHeader(header)
+                .requestBatchItem(item)
+                .build();
+    }
+
+    @Override
+    protected SimpleRequestMessage createVariant() {
+        SimpleRequestHeader header = SimpleRequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(2, 0))
+                .build();
+        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+        return SimpleRequestMessage.builder()
+                .requestHeader(header)
+                .requestBatchItem(item)
+                .build();
+    }
+
+    @Override
+    protected boolean unsupportedSpecShouldFailSerialize() {
+        return false; // model supports UnsupportedVersion
+    }
+
+    @Override
+    protected boolean equalsRelaxed(SimpleRequestMessage a, SimpleRequestMessage b) {
+        if (a == null || b == null) return a == b;
+        return Objects.equals(a.getRequestHeader(), b.getRequestHeader())
+                && Objects.equals(a.getRequestBatchItems(), b.getRequestBatchItems());
+    }
+}

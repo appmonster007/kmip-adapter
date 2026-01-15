@@ -1,0 +1,43 @@
+package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.structure.SampleStructure;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
+@DisplayName("SampleStructure TTLV Serialization Tests")
+class SampleStructureTtlvTest extends AbstractTtlvSerializationTestSuite<SampleStructure> {
+
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+
+    @Override
+    protected Class<SampleStructure> type() {
+        return SampleStructure.class;
+    }
+
+    @Override
+    protected SampleStructure createDefault() {
+        // TODO: Update with actual default values for your structure
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
+        State state = State.Standard.ACTIVE.inst();
+        return SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
+    }
+
+    @Override
+    protected SampleStructure createVariant() {
+        // TODO: Update with different values to test variations
+        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
+        State state = State.Standard.DEACTIVATED.inst();
+        return SampleStructure.builder()
+                .activationDate(activationDate)
+                .state(state)
+                .build();
+    }
+}

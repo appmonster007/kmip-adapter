@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
+
+import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.model.core.type.CertificateIssuerAlternativeName;
+
+public class CertificateIssuerAlternativeNameJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<CertificateIssuerAlternativeName, String> {
+
+    public CertificateIssuerAlternativeNameJsonDeserializer() {
+        super(CertificateIssuerAlternativeName.kmipTag, CertificateIssuerAlternativeName.encodingType, String.class, value -> CertificateIssuerAlternativeName.builder().value(value).build());
+    }
+}

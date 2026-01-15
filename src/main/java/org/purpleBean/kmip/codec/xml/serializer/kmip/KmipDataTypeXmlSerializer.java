@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.kmip;
 
 import com.fasterxml.jackson.databind.JsonSerializer;
-import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.api.KmipDataType;
 
 public abstract class KmipDataTypeXmlSerializer<T extends KmipDataType> extends JsonSerializer<T> {
     @SuppressWarnings("unchecked")

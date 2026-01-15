@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.api.EncodingType;
 
 import java.nio.ByteBuffer;
 import java.util.HexFormat;

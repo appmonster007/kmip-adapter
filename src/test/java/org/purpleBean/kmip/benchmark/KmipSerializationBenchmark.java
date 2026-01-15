@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.benchmark;
 
 import org.openjdk.jmh.annotations.*;
-import org.purpleBean.kmip.KmipContext;
+import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
 

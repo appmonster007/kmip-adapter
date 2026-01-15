@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonStreamContext;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipTag;
+import org.purpleBean.kmip.api.KmipTag;
 
 import java.io.IOException;
 

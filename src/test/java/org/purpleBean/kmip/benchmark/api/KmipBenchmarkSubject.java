@@ -3,7 +3,7 @@ package org.purpleBean.kmip.benchmark.api;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Data;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 

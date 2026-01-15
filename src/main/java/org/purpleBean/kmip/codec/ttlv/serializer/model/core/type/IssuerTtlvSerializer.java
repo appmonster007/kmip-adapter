@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.AbstractKmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.model.core.type.Issuer;
+
+public class IssuerTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<Issuer, String> {
+
+    public IssuerTtlvSerializer() {
+        super(Issuer::getValue);
+    }
+}

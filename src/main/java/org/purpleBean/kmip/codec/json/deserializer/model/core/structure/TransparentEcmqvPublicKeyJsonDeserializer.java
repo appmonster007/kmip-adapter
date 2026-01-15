@@ -1,0 +1,38 @@
+package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.model.core.type.QString;
+import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purpleBean.kmip.model.core.structure.TransparentEcmqvPublicKey;
+
+import java.io.IOException;
+
+public class TransparentEcmqvPublicKeyJsonDeserializer extends AbstractKmipStructureJsonDeserializer<TransparentEcmqvPublicKey, TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder> {
+
+    public TransparentEcmqvPublicKeyJsonDeserializer() {
+        super(TransparentEcmqvPublicKey.kmipTag, TransparentEcmqvPublicKey.encodingType);
+    }
+
+    @Override
+    protected TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder createBuilder() {
+        return TransparentEcmqvPublicKey.builder();
+    }
+
+    @Override
+    protected void setValue(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        switch (nodeTag) {
+            case KmipTag.Standard.RECOMMENDED_CURVE ->
+                    builder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));
+            case KmipTag.Standard.Q_STRING -> builder.qString(ctxt.readValue(p, QString.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
+    }
+
+    @Override
+    protected TransparentEcmqvPublicKey build(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder) {
+        return builder.build();
+    }
+}

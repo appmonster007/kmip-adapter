@@ -3,7 +3,7 @@ package org.purpleBean.kmip.test.suite;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.test.BaseKmipTest;
 
 import java.util.Objects;

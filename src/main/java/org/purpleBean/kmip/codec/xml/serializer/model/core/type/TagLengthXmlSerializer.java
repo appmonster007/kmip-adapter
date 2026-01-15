@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.model.core.type.TagLength;
+
+public class TagLengthXmlSerializer extends AbstractKmipDataTypeXmlSerializer<TagLength, Integer> {
+
+    public TagLengthXmlSerializer() {
+        super(TagLength::getValue);
+    }
+}

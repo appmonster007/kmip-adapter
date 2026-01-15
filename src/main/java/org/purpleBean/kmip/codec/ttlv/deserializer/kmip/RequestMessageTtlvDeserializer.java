@@ -1,11 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.RequestMessageStructure;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.request.RequestMessageStructure;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.common.structure.ProtocolVersion;
-import org.purpleBean.kmip.common.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

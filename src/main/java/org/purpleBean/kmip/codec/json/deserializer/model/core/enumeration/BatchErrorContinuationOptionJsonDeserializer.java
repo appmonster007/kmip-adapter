@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
+
+import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
+
+public class BatchErrorContinuationOptionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<BatchErrorContinuationOption, String> {
+
+    public BatchErrorContinuationOptionJsonDeserializer() {
+        super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType, String.class, value -> new BatchErrorContinuationOption(BatchErrorContinuationOption.fromName(value)));
+    }
+}

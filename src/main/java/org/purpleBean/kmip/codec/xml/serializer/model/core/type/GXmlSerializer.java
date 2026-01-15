@@ -1,0 +1,13 @@
+package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.model.core.type.G;
+
+import java.math.BigInteger;
+
+public class GXmlSerializer extends AbstractKmipDataTypeXmlSerializer<G, BigInteger> {
+
+    public GXmlSerializer() {
+        super(G::getValue);
+    }
+}

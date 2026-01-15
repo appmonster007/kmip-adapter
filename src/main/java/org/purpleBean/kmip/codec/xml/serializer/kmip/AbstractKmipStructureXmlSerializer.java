@@ -3,8 +3,8 @@ package org.purpleBean.kmip.codec.xml.serializer.kmip;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipStructure;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;

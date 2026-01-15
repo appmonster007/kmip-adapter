@@ -1,0 +1,29 @@
+package org.purpleBean.kmip.codec.ttlv.model.core.structure.request;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+@DisplayName("SimpleRequestBatchItem TTLV Serialization")
+class SimpleRequestBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleRequestBatchItem> {
+
+    @Override
+    protected Class<SimpleRequestBatchItem> type() {
+        return SimpleRequestBatchItem.class;
+    }
+
+    @Override
+    protected SimpleRequestBatchItem createDefault() {
+        return SimpleRequestBatchItem.builder().build();
+    }
+
+    @Override
+    protected SimpleRequestBatchItem createVariant() {
+        return SimpleRequestBatchItem.builder().build();
+    }
+
+    @Override
+    protected boolean unsupportedSpecShouldFailSerialize() {
+        return false; // model supports UnsupportedVersion
+    }
+}

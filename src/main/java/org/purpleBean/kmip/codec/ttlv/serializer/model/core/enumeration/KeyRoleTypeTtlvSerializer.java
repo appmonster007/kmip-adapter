@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration;
+
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.AbstractKmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
+
+public class KeyRoleTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<KeyRoleType, Integer> {
+
+    public KeyRoleTypeTtlvSerializer() {
+        super(KeyRoleType::getValue);
+    }
+}

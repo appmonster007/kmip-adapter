@@ -2,8 +2,8 @@ package org.purpleBean.kmip.test.suite;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipDataType;
-import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipStructure;
 
 import java.util.List;
 

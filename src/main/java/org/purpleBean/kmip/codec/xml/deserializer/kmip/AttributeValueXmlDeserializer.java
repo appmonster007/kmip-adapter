@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.kmip;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.AttributeValue;
+import org.purpleBean.kmip.api.AttributeValue;
 
 import java.io.IOException;
 

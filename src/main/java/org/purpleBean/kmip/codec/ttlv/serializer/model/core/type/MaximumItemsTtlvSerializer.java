@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.ttlv.serializer.kmip.AbstractKmipDataTypeTtlvSerializer;
+import org.purpleBean.kmip.model.core.type.MaximumItems;
+
+public class MaximumItemsTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<MaximumItems, Integer> {
+
+    public MaximumItemsTtlvSerializer() {
+        super(MaximumItems::getValue);
+    }
+}

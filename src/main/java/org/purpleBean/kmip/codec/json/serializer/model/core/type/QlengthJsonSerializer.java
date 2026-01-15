@@ -1,0 +1,11 @@
+package org.purpleBean.kmip.codec.json.serializer.model.core.type;
+
+import org.purpleBean.kmip.codec.json.serializer.kmip.AbstractKmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.model.core.type.Qlength;
+
+public class QlengthJsonSerializer extends AbstractKmipDataTypeJsonSerializer<Qlength, Integer> {
+
+    public QlengthJsonSerializer() {
+        super(Qlength::getValue);
+    }
+}

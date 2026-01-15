@@ -2,8 +2,7 @@ package org.purpleBean.kmip.test.suite;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.test.BaseKmipTest;
 

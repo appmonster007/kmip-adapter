@@ -1,0 +1,26 @@
+package org.purpleBean.kmip.codec.xml.model.core.type;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.type.AttributeValueBigInteger;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+
+import java.math.BigInteger;
+
+@DisplayName("AttributeValue.BigInteger XML Serialization Tests")
+class AttributeValueBigIntegerXmlTest extends AbstractXmlSerializationTestSuite<AttributeValueBigInteger> {
+
+    @Override
+    protected Class<AttributeValueBigInteger> type() {
+        return AttributeValueBigInteger.class;
+    }
+
+    @Override
+    protected AttributeValueBigInteger createDefault() {
+        return AttributeValueBigInteger.of(BigInteger.valueOf(123));
+    }
+
+    @Override
+    protected AttributeValueBigInteger createVariant() {
+        return AttributeValueBigInteger.of(BigInteger.valueOf(456));
+    }
+}
