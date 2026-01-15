@@ -77,6 +77,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.EncryptionKeyInforma
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyMaterialStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyValueLocationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyValueStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyWrappingDataBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.LinkBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.MACSignatureKeyInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NameBenchmarkSubject

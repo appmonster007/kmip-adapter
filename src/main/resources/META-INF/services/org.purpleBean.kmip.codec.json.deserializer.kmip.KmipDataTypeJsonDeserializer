@@ -82,6 +82,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.EncryptionKeyIn
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyMaterialStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyValueLocationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyValueStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyWrappingDataJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.LinkJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.MACSignatureKeyInformationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.NameJsonDeserializer
