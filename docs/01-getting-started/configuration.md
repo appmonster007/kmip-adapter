@@ -14,14 +14,13 @@
 The KMIP Adapter requires minimal configuration. By default, it uses the latest KMIP specification version (1.2).
 
 ```java
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipContext;
 
 // Set the KMIP spec version for the current thread
-KmipContext.setSpec(KmipSpec.V1_2);
+KmipContext.setSpec(org.purpleBean.kmip.api.KmipSpec.V1_2);
 
 // Get the current KMIP spec
-KmipSpec currentSpec = KmipContext.getSpec();
+org.purpleBean.kmip.api.KmipSpec currentSpec = KmipContext.getSpec();
 ```
 
 ## Thread Safety
@@ -72,20 +71,20 @@ For Spring Boot applications, you can configure the KMIP adapter using a `@Confi
 ### Basic Configuration
 
 ```java
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KmipConfig {
-    
+
     @Bean
     public KmipSpec kmipSpec() {
-        return KmipSpec.V1_2; // or load from configuration
+        return org.purpleBean.kmip.api.KmipSpec.V1_2; // or load from configuration
     }
-    
+
     @Bean
-    public KmipContext kmipContext(KmipSpec spec) {
+    public KmipContext kmipContext(org.purpleBean.kmip.api.KmipSpec spec) {
         return new KmipContext(spec);
     }
 }

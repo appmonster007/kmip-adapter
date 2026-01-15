@@ -24,7 +24,7 @@ package org.purpleBean.kmip.common;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
@@ -82,7 +82,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeName;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -226,7 +228,6 @@ package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.EncodingType;
 
 import java.time.OffsetDateTime;
 
@@ -240,9 +241,9 @@ class FooDataTypeTest {
     void testDefaultCreation() {
         OffsetDateTime now = OffsetDateTime.now();
         FooDataType fooDataType = FooDataType.of(now);
-        
+
         assertThat(fooDataType.getValue()).isEqualTo(now);
-        assertThat(fooDataType.getEncodingType()).isEqualTo(EncodingType.DATE_TIME);
+        assertThat(fooDataType.getEncodingType()).isEqualTo(org.purpleBean.kmip.api.EncodingType.DATE_TIME);
     }
 }
 ```
@@ -255,9 +256,10 @@ class FooDataTypeTest {
 package org.purpleBean.kmip.common;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.enumeration.State;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeSuite;
 
 import java.time.OffsetDateTime;
@@ -348,10 +350,8 @@ package org.purpleBean.kmip.codec.json.serializer.kmip.common;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
 import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.common.ActivationDate;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -362,10 +362,10 @@ public class ActivationDateJsonSerializer extends KmipDataTypeJsonSerializer<Act
     public void serialize(ActivationDate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         if (value == null) return;
 
-        KmipSpec spec = KmipContext.getSpec();
+        org.purpleBean.kmip.api.KmipSpec spec = org.purpleBean.kmip.api.KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new UnsupportedEncodingException(
-                String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
             );
         }
 

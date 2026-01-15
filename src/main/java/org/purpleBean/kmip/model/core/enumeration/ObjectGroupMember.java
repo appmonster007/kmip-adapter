@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.ObjectGroup
+ * @see org.purpleBean.kmip.model.core.structure.ObjectGroup
  */
 @Data
 @Builder(toBuilder = true)

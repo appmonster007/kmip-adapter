@@ -10,14 +10,11 @@ This guide shows the actual generated code for KMIP structure classes using `Foo
 package org.purpleBean.kmip.common.structure;
 
 import lombok.*;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.common.*;
-import org.purpleBean.kmip.common.enumeration.*;
-import org.purpleBean.kmip.common.structure.*;
-import org.purpleBean.kmip.KmipStructure;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,7 +45,7 @@ public class FooStructure implements KmipStructure {
     public static FooStructure of(@NonNull ActivationDate activationDate, State state) {
         return FooStructure.builder().activationDate(activationDate).state(state).build();
     }
-    
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -64,7 +61,7 @@ public class FooStructure implements KmipStructure {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
     }
-    
+
     @Override
     public List<KmipDataType> getValues() {
         return Stream.of(activationDate, state)
@@ -82,15 +79,15 @@ public class FooStructure implements KmipStructure {
 
         private void validate() {
             List<KmipDataType> fields = Stream.of(activationDate, state)
-                                              .filter(Objects::nonNull)
-                                              .collect(Collectors.toList());
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
 
             // Validate KMIP spec compatibility
             KmipSpec spec = KmipContext.getSpec();
             for (KmipDataType field : fields) {
                 if (field != null && !field.isSupported()) {
                     throw new IllegalArgumentException(
-                        String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
+                            String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
                     );
                 }
             }

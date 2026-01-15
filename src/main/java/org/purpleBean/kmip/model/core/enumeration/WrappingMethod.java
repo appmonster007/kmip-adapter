@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * how a key should be wrapped.
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.KeyWrappingSpecification
+ * @see org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification
  */
 @Data
 @Builder(toBuilder = true)

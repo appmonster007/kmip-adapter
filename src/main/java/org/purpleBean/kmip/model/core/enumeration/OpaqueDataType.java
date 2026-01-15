@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * enumeration. It is intended for vendor-specific extensions.</p>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.objects.OpaqueObject
+ * @see org.purpleBean.kmip.model.core.structure.OpaqueObject
  */
 @Data
 @Builder(toBuilder = true)

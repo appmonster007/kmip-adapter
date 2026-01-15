@@ -20,7 +20,7 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
  *
  * @see KmipDataType
  * @see KeyMaterial
- * @see org.purpleBean.kmip.common.structure.KeyBlock
+ * @see org.purpleBean.kmip.model.core.structure.KeyBlock
  */
 public interface KeyValue extends KmipDataType {
     /**

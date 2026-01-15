@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.OtpCredential
+ * @see org.purpleBean.kmip.model.core.structure.OtpCredential
  */
 @Data
 @Builder(toBuilder = true)

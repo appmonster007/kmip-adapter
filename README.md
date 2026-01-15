@@ -85,22 +85,26 @@ Add the dependency to your `pom.xml`:
 
 ```java
 // Minimal JSON round-trip with a built-in type
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.purpleBean.kmip.KmipContext;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.ProtocolVersion;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 
 KmipContext.setSpec(KmipSpec.V1_2);
-try {
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new KmipJsonModule());
+try{
+ObjectMapper mapper = new ObjectMapper();
+    mapper.
 
-    ProtocolVersion original = ProtocolVersion.of(1, 2);
-    String json = mapper.writeValueAsString(original);
-    ProtocolVersion restored = mapper.readValue(json, ProtocolVersion.class);
-} finally {
-    KmipContext.clear();
+registerModule(new KmipJsonModule());
+
+ProtocolVersion original = ProtocolVersion.of(1, 2);
+String json = mapper.writeValueAsString(original);
+ProtocolVersion restored = mapper.readValue(json, ProtocolVersion.class);
+}finally{
+        KmipContext.
+
+clear();
 }
 ```
 
@@ -142,11 +146,10 @@ Add to your `pom.xml`:
 #### Creating KMIP Data Types
 
 ```java
-import org.purpleBean.kmip.common.ActivationDate;
-import org.purpleBean.kmip.common.ActivationDateAttribute;
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.common.structure.SampleStructure;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.structure.SampleStructure;
+import org.purpleBean.kmip.api.KmipSpec;
 
 // Set KMIP specification context
 KmipContext.setSpec(KmipSpec.V1_2);
@@ -167,18 +170,18 @@ SampleStructure structure = SampleStructure.builder()
 #### Custom Enumeration Registration
 
 ```java
-import org.purpleBean.kmip.common.enumeration.State;
-import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.State;
 
 // Register custom state values
 State.Value customState = State.register(
-    -1000001, 
-    "CustomPendingState", 
-    Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
+        -1000001,
+        "CustomPendingState",
+        Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)
 );
 
-// Use custom state
-State myState = new State(customState);
+        // Use custom state
+        State myState = new State(customState);
 ```
 
 #### JSON Serialization
@@ -248,7 +251,7 @@ public interface KmipStructure extends KmipDataType {
 ```
 
 #### Common Types
-- **ActivationDateAttribute**: Date/time attributes with timezone support
+- **ActivationDate**: Date/time attributes with timezone support
 - **State**: Extensible enumeration for object states
 - **ProtocolVersion**: KMIP protocol version management
 - **SampleStructure**: Example composite structure implementation

@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.Ticket
+ * @see org.purpleBean.kmip.model.core.structure.Ticket
  */
 @Data
 @Builder(toBuilder = true)

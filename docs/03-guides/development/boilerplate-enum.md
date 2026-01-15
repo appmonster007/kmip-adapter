@@ -10,7 +10,7 @@ This guide shows the actual generated code for KMIP enumeration classes using `F
 package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,8 +71,8 @@ public class FooEnum implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion ),
-        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion );
+        PLACEHOLDER_1(0x00000001, "Placeholder1", KmipSpec.UnknownVersion),
+        PLACEHOLDER_2(0x00000002, "Placeholder2", KmipSpec.UnknownVersion);
 
         private final int value;
         private final String description;

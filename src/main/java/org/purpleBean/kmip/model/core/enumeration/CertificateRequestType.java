@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.CertificateRequest
+ * @see org.purpleBean.kmip.model.core.structure.CertificateRequest
  */
 @Data
 @Builder(toBuilder = true)

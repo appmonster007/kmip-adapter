@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.common.structure.RngParameters
+ * @see org.purpleBean.kmip.model.core.structure.RngParameters
  */
 @Data
 @Builder(toBuilder = true)

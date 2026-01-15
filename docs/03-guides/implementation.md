@@ -25,7 +25,8 @@ KMIP enumerations are implemented using the generated pattern. Here's the `FooEn
 package org.purpleBean.kmip.common.enumeration;
 
 import lombok.*;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -61,8 +62,8 @@ public class FooEnum implements KmipEnumeration {
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
             throw new IllegalArgumentException(
-                String.format("Value '%s' for FooEnum is not supported for KMIP spec %s", 
-                    value.getDescription(), spec)
+                    String.format("Value '%s' for FooEnum is not supported for KMIP spec %s",
+                            value.getDescription(), spec)
             );
         }
         this.value = value;
