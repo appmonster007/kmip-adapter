@@ -18,7 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("{{STRUCTURE_NAME}} Domain Tests")
-class {{STRUCTURE_NAME}}Test extends AbstractKmipStructureSuite<{{STRUCTURE_NAME}}> {
+class {{STRUCTURE_NAME}}Test extends AbstractKmipStructureTestSuite<{{STRUCTURE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
