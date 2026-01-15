@@ -2,7 +2,6 @@ package org.purpleBean.kmip.codec.json.serializer.{{pdot}};
 
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
