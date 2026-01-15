@@ -7,7 +7,32 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP LinkType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of link between two managed objects.
+ * <p>
+ * Links are used to establish relationships between objects, such as a private key
+ * and its corresponding public key, or a key and the certificate that contains it.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CERTIFICATE_LINK}: A link to a certificate.</li>
+ *   <li>{@code PUBLIC_KEY_LINK}: A link to a public key.</li>
+ *   <li>{@code PRIVATE_KEY_LINK}: A link to a private key.</li>
+ *   <li>{@code DERIVATION_BASE_OBJECT_LINK}: A link to the base object used in a key derivation.</li>
+ *   <li>{@code DERIVED_KEY_LINK}: A link to a key derived from this object.</li>
+ *   <li>{@code REPLACEMENT_OBJECT_LINK}: A link to an object that replaces this one.</li>
+ *   <li>{@code REPLACED_OBJECT_LINK}: A link to an object that this one replaces.</li>
+ *   <li>{@code PARENT_LINK}: A link to a parent object.</li>
+ *   <li>{@code CHILD_LINK}: A link to a child object.</li>
+ *   <li>{@code PREVIOUS_LINK}: A link to a previous version of this object.</li>
+ *   <li>{@code NEXT_LINK}: A link to a next version of this object.</li>
+ *   <li>{@code PKCS_12_CERTIFICATE_LINK}: A link to a certificate in a PKCS#12 bundle.</li>
+ *   <li>{@code PKCS_12_PASSWORD_LINK}: A link to a password used for a PKCS#12 bundle.</li>
+ *   <li>{@code WRAPPING_KEY_LINK}: A link to the key used to wrap this object.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.Link
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +166,9 @@ public class LinkType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Link Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -184,19 +212,40 @@ public class LinkType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Link Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link LinkType} with the current value.
+         */
         LinkType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Link Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

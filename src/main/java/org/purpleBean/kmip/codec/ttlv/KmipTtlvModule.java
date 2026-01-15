@@ -8,8 +8,48 @@ import org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer
 
 import java.util.ServiceLoader;
 
+/**
+ * A {@link TtlvModule} that automatically discovers and registers KMIP-specific TTLV serializers and deserializers.
+ * <p>
+ * This module leverages the Java {@link ServiceLoader} mechanism to find and register custom handlers for
+ * KMIP data types. It simplifies the process of extending the TTLV codec with new or custom KMIP objects
+ * by removing the need for manual registration.
+ *
+ * <p><b>Key Functionality:</b></p>
+ * <ul>
+ *   <li><b>Automatic Discovery:</b> On initialization, this module scans the classpath for implementations of
+ *       {@link TtlvSerializer}, {@link TtlvDeserializer}, {@link KmipDataTypeTtlvSerializer}, and
+ *       {@link KmipDataTypeTtlvDeserializer}.</li>
+ *   <li><b>Service-Based Registration:</b> To be discovered, custom handlers must be declared in the
+ *       {@code META-INF/services} directory, following the standard Java Service Provider Interface (SPI) pattern.</li>
+ *   <li><b>Flexible Handler Support:</b> It supports both generic TTLV handlers and more specific KMIP data type
+ *       handlers, providing flexibility for different use cases.</li>
+ *   <li><b>Error Handling:</b> The module includes robust error handling to log issues during registration without
+ *       halting the application, making it easier to diagnose problems with service provider configurations.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * To use this module, simply create an instance of it and register it with a {@code TtlvMapper}. The module
+ * will handle the rest of the discovery and registration process automatically.
+ *
+ * <pre>
+ * {@code
+ * TtlvMapper mapper = new TtlvMapper();
+ * mapper.registerModule(new KmipTtlvModule());
+ * }
+ * </pre>
+ *
+ * @see TtlvModule
+ * @see TtlvSerializer
+ * @see TtlvDeserializer
+ * @see ServiceLoader
+ */
 public class KmipTtlvModule extends TtlvModule {
 
+    /**
+     * Constructs a new {@code KmipTtlvModule} and triggers the automatic discovery and registration of
+     * TTLV serializers and deserializers.
+     */
     public KmipTtlvModule() {
 
         // Auto-register any TTLV serializers/deserializers exposed via Java ServiceLoader.

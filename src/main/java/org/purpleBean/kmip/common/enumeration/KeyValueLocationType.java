@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP KeyValueLocationType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of location for a key value.
+ * <p>
+ * This enumeration is used in the {@code KeyValueLocation} structure to indicate
+ * how the location value should be interpreted.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNINTERPRETED_TEXT_STRING}: The location is a simple text string
+ *       with no specific format.</li>
+ *   <li>{@code URI}: The location is a Uniform Resource Identifier (URI).</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.KeyValueLocation
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class KeyValueLocationType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Key Value Location Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +189,40 @@ public class KeyValueLocationType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Key Value Location Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link KeyValueLocationType} with the current value.
+         */
         KeyValueLocationType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Key Value Location Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

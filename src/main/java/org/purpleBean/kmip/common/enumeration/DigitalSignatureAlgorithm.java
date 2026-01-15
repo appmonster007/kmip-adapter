@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DigitalSignatureAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * algorithm to be used for digital signatures.
+ * <p>
+ * This enumeration lists various combinations of hashing algorithms and public-key
+ * algorithms that can be used to create and verify digital signatures.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code MD2_WITH_RSA_ENCRYPTION}, {@code MD5_WITH_RSA_ENCRYPTION}: Older RSA-based signature schemes.</li>
+ *   <li>{@code SHA_1_WITH_RSA_ENCRYPTION}, {@code SHA_224_WITH_RSA_ENCRYPTION}, etc.: RSA-based signatures with various SHA hashing algorithms.</li>
+ *   <li>{@code RSASSA_PSS}: The RSA Signature Scheme with Appendix - Probabilistic Signature Scheme.</li>
+ *   <li>{@code DSA_WITH_SHA_1}, {@code DSA_WITH_SHA224}, etc.: DSA-based signatures with various SHA hashing algorithms.</li>
+ *   <li>{@code ECDSA_WITH_SHA_1}, {@code ECDSA_WITH_SHA224}, etc.: ECDSA-based signatures with various SHA hashing algorithms.</li>
+ *   <li>{@code SHA3_256_WITH_RSA_ENCRYPTION}, etc.: RSA-based signatures with SHA-3 hashing algorithms.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see CryptographicAlgorithm
+ * @see HashingAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Digital Signature Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -189,19 +210,40 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Digital Signature Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DigitalSignatureAlgorithm} with the current value.
+         */
         DigitalSignatureAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Digital Signature Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

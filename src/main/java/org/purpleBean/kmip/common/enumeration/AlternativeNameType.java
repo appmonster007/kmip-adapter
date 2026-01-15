@@ -7,7 +7,26 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP AlternativeNameType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of an alternative name for a managed object.
+ * <p>
+ * Alternative names provide additional identifiers for objects, which can be useful
+ * for linking objects to external systems or for providing more descriptive names.
+ * This enumeration defines the format of the alternative name.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNINTERPRETED_TEXT_STRING}: A simple text string with no specific format.</li>
+ *   <li>{@code URI}: A Uniform Resource Identifier.</li>
+ *   <li>{@code OBJECT_SERIAL_NUMBER}: The serial number of a managed object.</li>
+ *   <li>{@code EMAIL_ADDRESS}: An email address.</li>
+ *   <li>{@code DNS_NAME}: A Domain Name System (DNS) name.</li>
+ *   <li>{@code X_500_DISTINGUISHED_NAME}: An X.500 Distinguished Name.</li>
+ *   <li>{@code IP_ADDRESS}: An IP address.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.AlternativeName
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +160,9 @@ public class AlternativeNameType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Alternative Name Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -177,19 +199,40 @@ public class AlternativeNameType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Alternative Name Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link AlternativeNameType} with the current value.
+         */
         AlternativeNameType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Alternative Name Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

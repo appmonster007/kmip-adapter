@@ -9,7 +9,15 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP CryptographicAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * cryptographic algorithm of a key or other cryptographic object.
+ * <p>
+ * This enumeration is a critical attribute for any cryptographic object, as it defines
+ * the mathematical operations that the object can be used for. It includes a wide range
+ * of symmetric and asymmetric algorithms.
+ *
+ * @see KmipEnumeration
+ * @see KmipAttribute
  */
 @Data
 @Builder(toBuilder = true)
@@ -205,6 +213,9 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Cryptographic Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -308,19 +319,40 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Cryptographic Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link CryptographicAlgorithm} with the current value.
+         */
         CryptographicAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Cryptographic Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

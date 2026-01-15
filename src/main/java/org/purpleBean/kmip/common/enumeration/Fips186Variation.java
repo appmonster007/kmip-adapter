@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP Fips186Variation enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
+ * variation of the FIPS 186 standard for digital signatures.
+ * <p>
+ * This enumeration is used to indicate a specific version or change notice of the
+ * FIPS 186 standard that applies to a given cryptographic operation or object.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The variation is not specified.</li>
+ *   <li>{@code GP_X_ORIGINAL}: The original version of the standard.</li>
+ *   <li>{@code GP_X_CHANGE_NOTICE}: A change notice to the standard.</li>
+ *   <li>{@code X_ORIGINAL}: The original version of the X parameter generation.</li>
+ *   <li>{@code X_CHANGE_NOTICE}: A change notice to the X parameter generation.</li>
+ *   <li>{@code K_ORIGINAL}: The original version of the K parameter generation.</li>
+ *   <li>{@code K_CHANGE_NOTICE}: A change notice to the K parameter generation.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see DigitalSignatureAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class Fips186Variation implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of FIPS 186 Variations.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -177,19 +198,40 @@ public class Fips186Variation implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a FIPS 186 Variation value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link Fips186Variation} with the current value.
+         */
         Fips186Variation inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific FIPS 186 Variation.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

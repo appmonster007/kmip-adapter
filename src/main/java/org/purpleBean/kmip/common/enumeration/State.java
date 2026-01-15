@@ -9,7 +9,24 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP State enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * lifecycle state of a managed object.
+ * <p>
+ * This enumeration is a fundamental attribute of every managed object, defining its
+ * current status in the key lifecycle.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code PRE_ACTIVE}: The object has been created but is not yet active.</li>
+ *   <li>{@code ACTIVE}: The object is active and can be used for cryptographic operations.</li>
+ *   <li>{@code DEACTIVATED}: The object has been deactivated and can no longer be used for new operations.</li>
+ *   <li>{@code COMPROMISED}: The object has been compromised and should not be used.</li>
+ *   <li>{@code DESTROYED}: The object has been destroyed and is no longer recoverable.</li>
+ *   <li>{@code DESTROYED_COMPROMISED}: The object was compromised and has been destroyed.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see KmipAttribute
  */
 @Data
 @Builder(toBuilder = true)
@@ -205,6 +222,9 @@ public class State implements KmipEnumeration, KmipAttribute {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of States.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -240,19 +260,40 @@ public class State implements KmipEnumeration, KmipAttribute {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a State value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link State} with the current value.
+         */
         State inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific State.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

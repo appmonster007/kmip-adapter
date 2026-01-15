@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP UnwrapMode enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
+ * the result of an unwrap operation.
+ * <p>
+ * This enumeration is used in the response to an operation that involves unwrapping
+ * a key (e.g., {@code Decrypt}) to indicate whether the unwrap was successful.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The unwrap status is not specified.</li>
+ *   <li>{@code PROCESSED}: The wrapped data was successfully processed.</li>
+ *   <li>{@code NOT_PROCESSED}: The wrapped data was not processed.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class UnwrapMode implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Unwrap Modes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +189,40 @@ public class UnwrapMode implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Unwrap Mode value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link UnwrapMode} with the current value.
+         */
         UnwrapMode inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Unwrap Mode.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

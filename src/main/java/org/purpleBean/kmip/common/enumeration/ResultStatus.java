@@ -7,7 +7,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ResultStatus enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * overall status of a KMIP operation.
+ * <p>
+ * This enumeration is returned in the response to every KMIP operation, indicating
+ * whether the operation succeeded, failed, or is still pending.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code SUCCESS}: The operation completed successfully.</li>
+ *   <li>{@code OPERATION_FAILED}: The operation failed. More details can be found in {@link ResultReason}.</li>
+ *   <li>{@code OPERATION_PENDING}: The operation is still in progress and the result is not yet available.</li>
+ *   <li>{@code OPERATION_UNDONE}: The operation was undone, typically due to a {@code BatchErrorContinuationOption} setting.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see ResultReason
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +156,9 @@ public class ResultStatus implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Result Statuses.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -174,19 +192,40 @@ public class ResultStatus implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Result Status value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ResultStatus} with the current value.
+         */
         ResultStatus inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Result Status.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

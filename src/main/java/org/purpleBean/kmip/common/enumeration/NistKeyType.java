@@ -7,7 +7,14 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP NistKeyType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a cryptographic key according to NIST (National Institute of Standards
+ * and Technology) classifications.
+ * <p>
+ * This enumeration provides a standardized way to categorize keys based on their
+ * intended cryptographic function, such as signing, encryption, or key agreement.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +148,9 @@ public class NistKeyType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of NIST Key Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -189,19 +199,40 @@ public class NistKeyType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a NIST Key Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link NistKeyType} with the current value.
+         */
         NistKeyType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific NIST Key Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP OtpAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * One-Time Password (OTP) algorithm to be used.
+ * <p>
+ * This enumeration is used in the {@code OtpCredential} structure to define the
+ * algorithm for generating and validating one-time passwords.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code HOTP}: HMAC-based One-Time Password algorithm.</li>
+ *   <li>{@code TOTP}: Time-based One-Time Password algorithm.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.OtpCredential
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class OtpAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of OTP Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class OtpAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an OTP Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link OtpAlgorithm} with the current value.
+         */
         OtpAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific OTP Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,34 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP KeyFormatType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * format of a cryptographic key.
+ * <p>
+ * This enumeration is used to indicate the encoding or structure of a key's material,
+ * allowing the server and client to correctly interpret the key data.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code RAW}: The raw bytes of the key.</li>
+ *   <li>{@code OPAQUE}: An opaque, server-specific representation of the key.</li>
+ *   <li>{@code PKCS_1}: The PKCS#1 format, typically for RSA keys.</li>
+ *   <li>{@code PKCS_8}: The PKCS#8 format for private keys.</li>
+ *   <li>{@code X_509}: The X.509 format for public key certificates.</li>
+ *   <li>{@code EC_PRIVATE_KEY}: An elliptic curve private key format.</li>
+ *   <li>{@code TRANSPARENT_SYMMETRIC_KEY}: A transparent symmetric key format.</li>
+ *   <li>{@code TRANSPARENT_DSA_PRIVATE_KEY}, {@code TRANSPARENT_DSA_PUBLIC_KEY}: Transparent DSA key formats.</li>
+ *   <li>{@code TRANSPARENT_RSA_PRIVATE_KEY}, {@code TRANSPARENT_RSA_PUBLIC_KEY}: Transparent RSA key formats.</li>
+ *   <li>{@code TRANSPARENT_DH_PRIVATE_KEY}, {@code TRANSPARENT_DH_PUBLIC_KEY}: Transparent Diffie-Hellman key formats.</li>
+ *   <li>{@code TRANSPARENT_ECDSA_PRIVATE_KEY}, {@code TRANSPARENT_ECDSA_PUBLIC_KEY}: Transparent ECDSA key formats.</li>
+ *   <li>{@code TRANSPARENT_ECDH_PRIVATE_KEY}, {@code TRANSPARENT_ECDH_PUBLIC_KEY}: Transparent ECDH key formats.</li>
+ *   <li>{@code TRANSPARENT_ECMQV_PRIVATE_KEY}, {@code TRANSPARENT_ECMQV_PUBLIC_KEY}: Transparent ECMQV key formats.</li>
+ *   <li>{@code TRANSPARENT_EC_PRIVATE_KEY}, {@code TRANSPARENT_EC_PUBLIC_KEY}: Generic transparent elliptic curve key formats.</li>
+ *   <li>{@code PKCS_12}: The PKCS#12 format for storing cryptographic objects.</li>
+ *   <li>{@code PKCS_10}: The PKCS#10 format for certificate signing requests.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.KeyMaterial
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +168,9 @@ public class KeyFormatType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Key Format Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -193,19 +223,40 @@ public class KeyFormatType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Key Format Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link KeyFormatType} with the current value.
+         */
         KeyFormatType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Key Format Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

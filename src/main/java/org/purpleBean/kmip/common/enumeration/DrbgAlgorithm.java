@@ -7,7 +7,24 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DrbgAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * Deterministic Random Bit Generator (DRBG) algorithm to be used.
+ * <p>
+ * DRBGs are algorithms that produce a sequence of bits that are computationally
+ * indistinguishable from random, based on an initial seed. This enumeration
+ * lists the DRBG algorithms supported by KMIP.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The DRBG algorithm is not specified.</li>
+ *   <li>{@code DUAL_EC}: The Dual Elliptic Curve DRBG.</li>
+ *   <li>{@code HASH}: A hash-based DRBG.</li>
+ *   <li>{@code HMAC}: An HMAC-based DRBG.</li>
+ *   <li>{@code CTR}: A counter-based DRBG.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see RngAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +158,9 @@ public class DrbgAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of DRBG Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -175,19 +195,40 @@ public class DrbgAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a DRBG Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DrbgAlgorithm} with the current value.
+         */
         DrbgAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific DRBG Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

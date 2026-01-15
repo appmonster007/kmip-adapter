@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP RevocationReasonCode enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * reason for the revocation of a managed object.
+ * <p>
+ * This enumeration is used in the {@code RevocationReason} structure to provide a
+ * machine-readable code indicating why an object was revoked.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The reason for revocation is not specified.</li>
+ *   <li>{@code KEY_COMPROMISE}: The key was compromised.</li>
+ *   <li>{@code CA_COMPROMISE}: The Certificate Authority (CA) was compromised.</li>
+ *   <li>{@code AFFILIATION_CHANGED}: The affiliation of the object has changed.</li>
+ *   <li>{@code SUPERSEDED}: The object has been superseded by a newer one.</li>
+ *   <li>{@code CESSATION_OF_OPERATION}: The object is no longer needed because the operation it was used for has ceased.</li>
+ *   <li>{@code PRIVILEGE_WITHDRAWN}: The privileges associated with the object have been withdrawn.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.RevocationReason
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class RevocationReasonCode implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Revocation Reason Codes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -177,19 +198,40 @@ public class RevocationReasonCode implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Revocation Reason Code value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link RevocationReasonCode} with the current value.
+         */
         RevocationReasonCode inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Revocation Reason Code.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

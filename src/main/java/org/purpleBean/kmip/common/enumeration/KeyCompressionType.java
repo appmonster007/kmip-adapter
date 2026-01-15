@@ -7,7 +7,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP KeyCompressionType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * compression type for an elliptic curve public key.
+ * <p>
+ * This enumeration is used to indicate how an elliptic curve point (representing a
+ * public key) is compressed.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code EC_PUBLIC_KEY_TYPE_UNCOMPRESSED}: The public key is uncompressed.</li>
+ *   <li>{@code EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME}: The public key is compressed using the X9.62 prime curve format.</li>
+ *   <li>{@code EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_CHAR2}: The public key is compressed using the X9.62 characteristic-2 curve format.</li>
+ *   <li>{@code EC_PUBLIC_KEY_TYPE_X9_62_HYBRID}: The public key uses the X9.62 hybrid format.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see CryptographicAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +156,9 @@ public class KeyCompressionType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Key Compression Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -174,19 +192,40 @@ public class KeyCompressionType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Key Compression Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link KeyCompressionType} with the current value.
+         */
         KeyCompressionType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Key Compression Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

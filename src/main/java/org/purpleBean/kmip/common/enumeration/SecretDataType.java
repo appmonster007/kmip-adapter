@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP SecretDataType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a secret data object.
+ * <p>
+ * This enumeration is used in the {@code SecretData} object to indicate the nature
+ * of the secret data being managed.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code PASSWORD}: The secret data is a password.</li>
+ *   <li>{@code SEED}: The secret data is a seed for a random number generator.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.objects.SecretData
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class SecretDataType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Secret Data Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class SecretDataType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Secret Data Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link SecretDataType} with the current value.
+         */
         SecretDataType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Secret Data Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

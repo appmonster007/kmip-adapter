@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ResultReason enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * reason for a particular {@link ResultStatus} in a KMIP response.
+ * <p>
+ * This enumeration provides more granular detail about why an operation succeeded,
+ * failed, or was partially successful. It often accompanies a {@link ResultStatus}
+ * of {@code OperationFailed} or {@code OperationPartiallySuccessful}.
+ *
+ * <p><b>Hierarchy of Reasons:</b></p>
+ * This class maintains an internal mapping to reflect this a hierarchy of result
+ * reasons, where some reasons are more specific instances of a broader parent reason,
+ * accessible via {@link #getParentReason(Value)}.
+ * For example, {@code ItemNotFound} is a child of {@code GeneralFailure}.
+ *
+ * @see KmipEnumeration
+ * @see ResultStatus
  */
 @Data
 @Builder(toBuilder = true)
@@ -140,7 +154,13 @@ public class ResultReason implements KmipEnumeration {
     }
 
     /**
-     * Register an extension value.
+     * Registers a custom, vendor-specific Result Reason.
+     *
+     * @param value The integer value of the reason (must be within the extension range).
+     * @param description A unique, non-empty description for the reason.
+     * @param supportedVersions A set of {@link KmipSpec} versions that support this reason.
+     * @param parentReason The parent {@link Value} in the reason hierarchy.
+     * @return The registered {@link Value} instance.
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions, @NonNull Value parentReason) {
         checkValidExtensionValue(value);
@@ -164,7 +184,11 @@ public class ResultReason implements KmipEnumeration {
     }
 
     /**
-     * Look up by name.
+     * Looks up a {@link Value} instance from its descriptive name.
+     *
+     * @param name The case-sensitive description of the reason.
+     * @return The corresponding {@link Value}.
+     * @throws NoSuchElementException if no reason is found for the given name in the current KMIP context.
      */
     public static Value fromName(String name) {
         KmipSpec spec = KmipContext.getSpec();
@@ -177,7 +201,11 @@ public class ResultReason implements KmipEnumeration {
     }
 
     /**
-     * Look up by value.
+     * Looks up a {@link Value} instance from its integer value.
+     *
+     * @param value The integer value of the reason.
+     * @return The corresponding {@link Value}.
+     * @throws NoSuchElementException if no reason is found for the given value in the current KMIP context.
      */
     public static Value fromValue(int value) {
         KmipSpec spec = KmipContext.getSpec();
@@ -190,7 +218,9 @@ public class ResultReason implements KmipEnumeration {
     }
 
     /**
-     * Get registered values.
+     * Gets a collection of all registered custom (extension) Result Reason values.
+     *
+     * @return A {@link Collection} of extension {@link Value} instances.
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
@@ -199,8 +229,8 @@ public class ResultReason implements KmipEnumeration {
     /**
      * Gets the parent reason for a given result reason.
      *
-     * @param reason The result reason to get the parent for
-     * @return The parent reason, or null if the reason is GENERAL_FAILURE or not found
+     * @param reason The result reason to get the parent for.
+     * @return The parent reason, or {@code null} if the reason is {@code GENERAL_FAILURE} or not found.
      */
     public static Value getParentReason(Value reason) {
         return PARENT_REASON_MAP.get(reason);
@@ -234,6 +264,9 @@ public class ResultReason implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Result Reasons.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -341,19 +374,40 @@ public class ResultReason implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Result Reason value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ResultReason} with the current value.
+         */
         ResultReason inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Result Reason.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

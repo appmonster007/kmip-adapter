@@ -7,7 +7,29 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DerivationMethod enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * method used to derive a new key from an existing key or secret.
+ * <p>
+ * Key derivation is the process of generating one or more keys from a master key
+ * or a shared secret, often using a pseudorandom function. This enumeration lists
+ * the key derivation methods supported by KMIP.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code PBKDF2}: Password-Based Key Derivation Function 2.</li>
+ *   <li>{@code HASH}: A hash-based key derivation function.</li>
+ *   <li>{@code HMAC}: An HMAC-based key derivation function.</li>
+ *   <li>{@code ENCRYPT}: A key derivation function based on encryption.</li>
+ *   <li>{@code NIST800_108_C}: NIST SP 800-108 Counter Mode KDF.</li>
+ *   <li>{@code NIST800_108_F}: NIST SP 800-108 Feedback Mode KDF.</li>
+ *   <li>{@code NIST800_108_DPI}: NIST SP 800-108 Double-Pipeline Iteration Mode KDF.</li>
+ *   <li>{@code ASYMMETRIC_KEY}: Key derivation using an asymmetric key.</li>
+ *   <li>{@code AWS_SIGNATURE_VERSION_4}: AWS Signature Version 4 key derivation.</li>
+ *   <li>{@code HKDF}: HMAC-based Extract-and-Expand Key Derivation Function.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.DeriveKey
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +163,9 @@ public class DerivationMethod implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Derivation Methods.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -180,19 +205,40 @@ public class DerivationMethod implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Derivation Method value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DerivationMethod} with the current value.
+         */
         DerivationMethod inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Derivation Method.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP AsynchronousIndicator enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that indicates
+ * whether an operation can be processed asynchronously.
+ * <p>
+ * This enumeration is used in the request header to inform the server about the
+ * client's preference for asynchronous processing.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code MANDATORY}: Asynchronous processing is mandatory.</li>
+ *   <li>{@code OPTIONAL}: Asynchronous processing is optional.</li>
+ *   <li>{@code PROHIBITED}: Asynchronous processing is prohibited.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.RequestHeaderStructure
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class AsynchronousIndicator implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Asynchronous Indicators.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class AsynchronousIndicator implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Asynchronous Indicator value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link AsynchronousIndicator} with the current value.
+         */
         AsynchronousIndicator inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Asynchronous Indicator.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

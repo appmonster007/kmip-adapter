@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP SplitKeyPolynomial enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * polynomial to be used in a polynomial-based key splitting scheme.
+ * <p>
+ * This enumeration is used when the {@link SplitKeyMethod} is a polynomial sharing
+ * scheme, to define the specific polynomial for the finite field arithmetic.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code POLYNOMIAL_283}: The polynomial x^283 + x^12 + x^7 + x^5 + 1.</li>
+ *   <li>{@code POLYNOMIAL_285}: The polynomial x^285 + x^12 + x^7 + x^5 + 1.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see SplitKeyMethod
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class SplitKeyPolynomial implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Split Key Polynomials.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class SplitKeyPolynomial implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Split Key Polynomial value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link SplitKeyPolynomial} with the current value.
+         */
         SplitKeyPolynomial inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Split Key Polynomial.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

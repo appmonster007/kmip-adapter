@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP TicketType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a security ticket.
+ * <p>
+ * This enumeration is used in the {@code Ticket} structure to identify the nature
+ * of the authentication or authorization ticket being used.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code LOGIN}: A ticket used for login or authentication purposes.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.Ticket
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class TicketType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Ticket Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -171,19 +186,40 @@ public class TicketType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Ticket Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link TicketType} with the current value.
+         */
         TicketType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Ticket Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

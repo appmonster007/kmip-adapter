@@ -7,7 +7,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP KeyRoleType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * role of a cryptographic key.
+ * <p>
+ * This enumeration is used to categorize keys based on their intended use in a
+ * specific cryptographic system, such as a payment card system.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +147,9 @@ public class KeyRoleType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Key Role Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -194,19 +203,40 @@ public class KeyRoleType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Key Role Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link KeyRoleType} with the current value.
+         */
         KeyRoleType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Key Role Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

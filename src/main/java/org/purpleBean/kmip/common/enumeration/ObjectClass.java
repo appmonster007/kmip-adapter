@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ObjectClass enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * class of an object.
+ * <p>
+ * This enumeration is used to categorize objects based on their origin or management
+ * context, such as whether they are user-defined or system-defined.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code USER}: The object is a user-defined object.</li>
+ *   <li>{@code SYSTEM}: The object is a system-defined object.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class ObjectClass implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Object Classes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +187,40 @@ public class ObjectClass implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Object Class value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ObjectClass} with the current value.
+         */
         ObjectClass inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Object Class.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

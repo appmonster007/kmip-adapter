@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP Ephemeral enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that indicates
+ * whether an object is ephemeral (i.e., not stored by the server).
+ * <p>
+ * This enumeration is used as an attribute to specify the persistence of an object.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code DATA}: The object's data is ephemeral.</li>
+ *   <li>{@code EMPTY}: The object is an empty ephemeral object.</li>
+ *   <li>{@code UNIQUE_IDENTIFIER}: The object's unique identifier is ephemeral.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class Ephemeral implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Ephemeral values.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +188,40 @@ public class Ephemeral implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Ephemeral value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link Ephemeral} with the current value.
+         */
         Ephemeral inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Ephemeral value.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

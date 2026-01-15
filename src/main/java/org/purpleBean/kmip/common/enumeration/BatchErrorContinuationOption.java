@@ -7,7 +7,23 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP BatchErrorContinuationOption enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies how
+ * to proceed when an error occurs in a batch of operations.
+ * <p>
+ * When multiple operations are sent in a single request batch, this option in the
+ * request header tells the server what to do if one of the operations fails.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CONTINUE}: Continue processing the remaining operations in the batch,
+ *       even if one fails.</li>
+ *   <li>{@code STOP}: Stop processing the batch immediately if an error occurs.</li>
+ *   <li>{@code UNDO}: Stop processing and undo any operations in the batch that have
+ *       already been successfully completed.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.RequestHeaderStructure
  */
 @Data
 @Builder(toBuilder = true)
@@ -71,7 +87,7 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
         Value existingEnumByValue = VALUE_REGISTRY.get(value);
         Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
         if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByValue;
         }
         Extension custom = new Extension(value, description, supportedVersions);
         VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
@@ -141,6 +157,9 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Batch Error Continuation Options.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +192,40 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Batch Error Continuation Option value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link BatchErrorContinuationOption} with the current value.
+         */
         BatchErrorContinuationOption inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Batch Error Continuation Option.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

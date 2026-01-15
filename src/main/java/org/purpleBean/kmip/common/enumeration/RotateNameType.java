@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP RotateNameType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a name used in a key rotation operation.
+ * <p>
+ * This enumeration is used in the {@code RotateName} structure to indicate how the
+ * name value should be interpreted.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNINTERPRETED_TEXT_STRING}: The name is a simple text string with no
+ *       specific format.</li>
+ *   <li>{@code URI}: The name is a Uniform Resource Identifier (URI).</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.RotateName
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class RotateNameType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Rotate Name Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +189,40 @@ public class RotateNameType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Rotate Name Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link RotateNameType} with the current value.
+         */
         RotateNameType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Rotate Name Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

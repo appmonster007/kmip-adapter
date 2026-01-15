@@ -7,7 +7,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ShreddingAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * algorithm to be used for shredding a cryptographic object.
+ * <p>
+ * Shredding is the process of securely deleting an object by overwriting its storage
+ * location with new data. This enumeration defines the methods that can be used for
+ * this purpose.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The shredding algorithm is not specified.</li>
+ *   <li>{@code CRYPTOGRAPHIC}: The object is overwritten with cryptographically random data.</li>
+ *   <li>{@code UNSUPPORTED}: The shredding algorithm is not supported.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see DestroyAction
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +156,9 @@ public class ShreddingAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Shredding Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +191,40 @@ public class ShreddingAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Shredding Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ShreddingAlgorithm} with the current value.
+         */
         ShreddingAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Shredding Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

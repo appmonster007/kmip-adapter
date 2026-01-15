@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ValidationAuthorityType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a validation authority.
+ * <p>
+ * This enumeration is used in the {@code ValidationInformation} structure to indicate
+ * the authority that performed the validation (e.g., NIST, Common Criteria).
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The validation authority is not specified.</li>
+ *   <li>{@code NIST_CMVP}: The NIST Cryptographic Module Validation Program.</li>
+ *   <li>{@code COMMON_CRITERIA}: The Common Criteria for Information Technology Security Evaluation.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.ValidationInformation
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class ValidationAuthorityType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Validation Authority Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class ValidationAuthorityType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Validation Authority Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ValidationAuthorityType} with the current value.
+         */
         ValidationAuthorityType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Validation Authority Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

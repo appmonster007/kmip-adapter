@@ -7,7 +7,29 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP PaddingMethod enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * padding method to be used in cryptographic operations.
+ * <p>
+ * Padding is a process of adding data to a message before encryption to ensure that
+ * the message length is a multiple of the block size of the cipher. This enumeration
+ * lists the padding methods supported by KMIP.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code NONE}: No padding is used.</li>
+ *   <li>{@code OAEP}: Optimal Asymmetric Encryption Padding.</li>
+ *   <li>{@code PKCS5}: PKCS#5 padding.</li>
+ *   <li>{@code SSL3}: SSL 3.0 padding.</li>
+ *   <li>{@code ZEROS}: Padding with zeros.</li>
+ *   <li>{@code ANSI_X9_23}: ANSI X9.23 padding.</li>
+ *   <li>{@code ISO_10126}: ISO 10126 padding.</li>
+ *   <li>{@code PKCS1_V1_5}: PKCS#1 v1.5 padding.</li>
+ *   <li>{@code X9_31}: ANSI X9.31 padding.</li>
+ *   <li>{@code PSS}: Probabilistic Signature Scheme padding.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see BlockCipherMode
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +163,9 @@ public class PaddingMethod implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Padding Methods.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -180,19 +205,40 @@ public class PaddingMethod implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Padding Method value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link PaddingMethod} with the current value.
+         */
         PaddingMethod inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Padding Method.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

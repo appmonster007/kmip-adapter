@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP AdjustmentType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of adjustment to be made to an attribute's value.
+ * <p>
+ * This enumeration is used in the {@code AdjustAttribute} operation to specify how
+ * to modify a numeric attribute.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code INCREMENT}: Increase the attribute's value.</li>
+ *   <li>{@code DECREMENT}: Decrease the attribute's value.</li>
+ *   <li>{@code NEGATE}: Negate the attribute's value.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.AdjustAttribute
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class AdjustmentType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Adjustment Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class AdjustmentType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Adjustment Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link AdjustmentType} with the current value.
+         */
         AdjustmentType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Adjustment Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

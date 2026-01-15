@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP CertificateType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a certificate.
+ * <p>
+ * This enumeration is used to identify the format and standard of a certificate object,
+ * such as X.509 or PGP.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code X_509}: An X.509 certificate.</li>
+ *   <li>{@code PGP}: A Pretty Good Privacy (PGP) certificate.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.objects.Certificate
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class CertificateType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Certificate Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class CertificateType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Certificate Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link CertificateType} with the current value.
+         */
         CertificateType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Certificate Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

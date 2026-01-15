@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ProcessingStage enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * processing stage of an asynchronous operation.
+ * <p>
+ * This enumeration is used in the response to an asynchronous operation to indicate
+ * its current status.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code SUBMITTED}: The operation has been submitted but has not yet started processing.</li>
+ *   <li>{@code IN_PROCESS}: The operation is currently being processed.</li>
+ *   <li>{@code COMPLETED}: The operation has completed.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see AsynchronousIndicator
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class ProcessingStage implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Processing Stages.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class ProcessingStage implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Processing Stage value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ProcessingStage} with the current value.
+         */
         ProcessingStage inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Processing Stage.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

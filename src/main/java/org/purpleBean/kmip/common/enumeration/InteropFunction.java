@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP InteropFunction enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
+ * functions for managing streaming and interoperability contexts.
+ * <p>
+ * This enumeration is used in operations that involve streaming of large objects
+ * or maintaining a persistent context across multiple requests, such as with the
+ * PKCS#11 interoperability features.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code BEGIN}: Indicates the start of a new stream or context.</li>
+ *   <li>{@code END}: Indicates the end of a stream or context.</li>
+ *   <li>{@code RESET}: Indicates that the current stream or context should be reset.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * This enumeration is used in operations like {@code Encrypt}, {@code Decrypt},
+ * and PKCS#11-related functions to manage the lifecycle of a stream or session.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class InteropFunction implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Interop Functions.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +194,40 @@ public class InteropFunction implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Interop Function value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link InteropFunction} with the current value.
+         */
         InteropFunction inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Interop Function.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

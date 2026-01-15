@@ -7,7 +7,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP Operation enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * cryptographic or administrative operation to be performed.
+ * <p>
+ * This enumeration lists all the standard operations defined in the KMIP specifications,
+ * such as creating keys, encrypting data, and managing attributes.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +147,9 @@ public class Operation implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Operations.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -234,19 +243,40 @@ public class Operation implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Operation value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link Operation} with the current value.
+         */
         Operation inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Operation.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP RngMode enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * mode of operation for a Random Number Generator (RNG).
+ * <p>
+ * This enumeration is used in the {@code RNGParameters} structure to indicate how
+ * the RNG is instantiated and managed.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The RNG mode is not specified.</li>
+ *   <li>{@code SHARED_INSTANTIATION}: The RNG is instantiated once and shared among multiple users.</li>
+ *   <li>{@code NON_SHARED_INSTANTIATION}: The RNG is instantiated separately for each user.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.RngParameters
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class RngMode implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of RNG Modes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class RngMode implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an RNG Mode value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link RngMode} with the current value.
+         */
         RngMode inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific RNG Mode.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP PutFunction enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
+ * the action to be taken when adding an attribute to a managed object.
+ * <p>
+ * This enumeration is used in operations like {@code AddAttribute} to control
+ * whether a new attribute should be added or an existing one should be replaced.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code NEW}: Add a new attribute. If an attribute with the same name
+ *       already exists, the operation will fail.</li>
+ *   <li>{@code REPLACE}: Replace an existing attribute. If no attribute with the
+ *       same name exists, a new one will be added.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class PutFunction implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Put Functions.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +189,40 @@ public class PutFunction implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Put Function value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link PutFunction} with the current value.
+         */
         PutFunction inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Put Function.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

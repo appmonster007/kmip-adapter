@@ -7,7 +7,34 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP QueryFunction enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of information being requested in a {@code Query} operation.
+ * <p>
+ * The {@code Query} operation is a general-purpose mechanism for a client to discover
+ * the capabilities and status of a KMIP server. This enumeration defines the different
+ * categories of information that can be queried.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code QUERY_OPERATIONS}: Request a list of the operations supported by the server.</li>
+ *   <li>{@code QUERY_OBJECTS}: Request a list of the object types supported by the server.</li>
+ *   <li>{@code QUERY_SERVER_INFORMATION}: Request general information about the server.</li>
+ *   <li>{@code QUERY_APPLICATION_NAMESPACES}: Request a list of the application namespaces supported by the server.</li>
+ *   <li>{@code QUERY_EXTENSION_LIST}: Request a list of the extensions supported by the server.</li>
+ *   <li>{@code QUERY_EXTENSION_MAP}: Request a map of the extensions supported by the server.</li>
+ *   <li>{@code QUERY_ATTESTATION_TYPES}: Request a list of the attestation types supported by the server.</li>
+ *   <li>{@code QUERY_RNGS}: Request information about the Random Number Generators (RNGs) supported by the server.</li>
+ *   <li>{@code QUERY_VALIDATIONS}: Request information about the validation mechanisms supported by the server.</li>
+ *   <li>{@code QUERY_PROFILES}: Request a list of the profiles supported by the server.</li>
+ *   <li>{@code QUERY_CAPABILITIES}: Request a comprehensive list of the server's capabilities.</li>
+ *   <li>{@code QUERY_CLIENT_REGISTRATION_METHODS}: Request a list of the client registration methods supported by the server.</li>
+ *   <li>{@code QUERY_DEFAULTS_INFORMATION}: Request information about the server's default attribute values.</li>
+ *   <li>{@code QUERY_STORAGE_PROTECTION_MASKS}: Request information about the storage protection masks supported by the server.</li>
+ *   <li>{@code QUERY_CREDENTIAL_INFORMATION}: Request information about the credential types supported by the server.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.Query
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +168,9 @@ public class QueryFunction implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Query Functions.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -185,19 +215,40 @@ public class QueryFunction implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Query Function value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link QueryFunction} with the current value.
+         */
         QueryFunction inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Query Function.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

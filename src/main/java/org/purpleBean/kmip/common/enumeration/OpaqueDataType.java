@@ -7,7 +7,18 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP OpaqueDataType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of an opaque object.
+ * <p>
+ * Opaque objects are used to store data that is not interpreted by the KMIP server.
+ * This enumeration provides a way to give a hint about the nature of the data,
+ * even if the server does not process it.
+ *
+ * <p><b>Note:</b> The KMIP specifications do not define any standard values for this
+ * enumeration. It is intended for vendor-specific extensions.</p>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.objects.OpaqueObject
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +152,9 @@ public class OpaqueDataType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Opaque Data Types. This is empty as per the KMIP specification.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -171,19 +185,40 @@ public class OpaqueDataType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Opaque Data Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link OpaqueDataType} with the current value.
+         */
         OpaqueDataType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Opaque Data Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

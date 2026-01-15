@@ -8,11 +8,55 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * A central class for mapping Java objects to and from their TTLV (Tag-Type-Length-Value) byte representations.
+ * <p>
+ * This class functions similarly to object mappers in other data-binding libraries (like Jackson's {@code ObjectMapper}).
+ * It manages a collection of {@link TtlvSerializer} and {@link TtlvDeserializer} instances and orchestrates the
+ * process of serialization and deserialization.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Serialization/Deserialization:</b> Provides high-level methods like {@link #writeValueAsBytes(Object)} and
+ *       {@link #readValue(byte[], Class)} for easy conversion between Java objects and byte arrays.</li>
+ *   <li><b>Handler Registry:</b> Maintains internal registries for serializers and deserializers, allowing for
+ *       custom handlers to be registered for specific types.</li>
+ *   <li><b>Modular Configuration:</b> Supports the registration of {@link TtlvModule} instances, which can bundle
+ *       multiple serializers and deserializers, making the configuration process more organized and extensible.</li>
+ *   <li><b>Type Hierarchy Lookup:</b> When searching for a handler, it intelligently traverses the class hierarchy
+ *       (including superclasses and interfaces) to find the most appropriate serializer or deserializer.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * Create an instance of {@code TtlvMapper}, register any custom modules, and then use the read/write methods.
+ *
+ * <pre>
+ * {@code
+ * TtlvMapper mapper = new TtlvMapper();
+ * mapper.registerModule(new KmipTtlvModule());
+ *
+ * // Serialize an object to bytes
+ * MyObject obj = new MyObject();
+ * byte[] ttlvBytes = mapper.writeValueAsBytes(obj);
+ *
+ * // Deserialize bytes back to an object
+ * MyObject reconstructedObj = mapper.readValue(ttlvBytes, MyObject.class);
+ * }
+ * </pre>
+ *
+ * @see TtlvSerializer
+ * @see TtlvDeserializer
+ * @see TtlvModule
+ */
 public class TtlvMapper {
     private final Map<Class<?>, TtlvSerializer<?>> serializers = new ConcurrentHashMap<>();
     private final Map<Class<?>, TtlvDeserializer<?>> deserializers = new ConcurrentHashMap<>();
 
+    /**
+     * Registers a {@link TtlvModule}, adding all its serializers and deserializers to this mapper.
+     *
+     * @param module The module to register. Must not be {@code null}.
+     */
     public void registerModule(TtlvModule module) {
         Objects.requireNonNull(module, "module cannot be null");
         serializers.putAll(module.getSerializers());
@@ -20,7 +64,14 @@ public class TtlvMapper {
     }
 
 
-    // Obtain a ByteBuffer containing the full TTLV encoding for the POJO
+    /**
+     * Serializes a Java object into a {@link ByteBuffer} containing its full TTLV encoding.
+     *
+     * @param value The object to serialize. Must not be {@code null}.
+     * @param <T> The type of the value being serialized.
+     * @return A {@link ByteBuffer} containing the TTLV data, ready for reading.
+     * @throws IOException if an error occurs during serialization.
+     */
     public <T> ByteBuffer writeValueAsByteBuffer(T value) throws IOException {
         Objects.requireNonNull(value, "value cannot be null");
         TtlvSerializer<T> ser = getSerializer(value.getClass());
@@ -31,7 +82,15 @@ public class TtlvMapper {
     }
 
 
-    // Deserialize from a ByteBuffer containing a single TTLV element
+    /**
+     * Deserializes a single TTLV element from a {@link ByteBuffer} into a Java object of the specified class.
+     *
+     * @param buffer The buffer containing the TTLV data. Must not be {@code null}.
+     * @param clazz The target class to deserialize into. Must not be {@code null}.
+     * @param <T> The type of the object to be returned.
+     * @return The deserialized Java object.
+     * @throws IOException if an error occurs during deserialization.
+     */
     public <T> T readValue(ByteBuffer buffer, Class<T> clazz) throws IOException {
         Objects.requireNonNull(buffer, "buffer cannot be null");
         Objects.requireNonNull(clazz, "clazz cannot be null");
@@ -40,7 +99,14 @@ public class TtlvMapper {
     }
 
 
-    // Convenience high-level API similar to ObjectMapper
+    /**
+     * A convenience method to serialize a Java object directly into a byte array.
+     *
+     * @param value The object to serialize.
+     * @param <T> The type of the value.
+     * @return A byte array containing the TTLV representation of the object.
+     * @throws IOException if an error occurs during serialization.
+     */
     public <T> byte[] writeValueAsBytes(T value) throws IOException {
         ByteBuffer bb = writeValueAsByteBuffer(value);
         byte[] out = new byte[bb.remaining()];
@@ -49,6 +115,15 @@ public class TtlvMapper {
     }
 
 
+    /**
+     * A convenience method to deserialize a byte array containing TTLV data into a Java object.
+     *
+     * @param data The byte array to deserialize.
+     * @param clazz The target class.
+     * @param <T> The type of the object to be returned.
+     * @return The deserialized Java object.
+     * @throws IOException if an error occurs during deserialization.
+     */
     public <T> T readValue(byte[] data, Class<T> clazz) throws IOException {
         ByteBuffer buffer = ByteBuffer.wrap(data).order(TtlvConstants.BYTE_ORDER);
         return readValue(buffer, clazz);

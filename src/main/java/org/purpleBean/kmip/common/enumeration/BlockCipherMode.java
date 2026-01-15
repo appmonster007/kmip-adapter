@@ -7,7 +7,37 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP BlockCipherMode enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * mode of operation for a block cipher.
+ * <p>
+ * Block cipher modes define how a block cipher, which encrypts fixed-size blocks of
+ * data, can be used to securely handle variable-length messages. This enumeration
+ * includes common modes like CBC, CTR, and GCM.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CBC}: Cipher Block Chaining</li>
+ *   <li>{@code ECB}: Electronic Codebook</li>
+ *   <li>{@code PCBC}: Propagating Cipher Block Chaining</li>
+ *   <li>{@code CFB}: Cipher Feedback</li>
+ *   <li>{@code OFB}: Output Feedback</li>
+ *   <li>{@code CTR}: Counter</li>
+ *   <li>{@code CMAC}: Cipher-based Message Authentication Code</li>
+ *   <li>{@code CCM}: Counter with CBC-MAC</li>
+ *   <li>{@code GCM}: Galois/Counter Mode</li>
+ *   <li>{@code CBC_MAC}: Cipher Block Chaining Message Authentication Code</li>
+ *   <li>{@code XTS}: XEX-based tweaked-codebook mode with ciphertext stealing</li>
+ *   <li>{@code AES_KEY_WRAP_PADDING}: AES Key Wrap with Padding</li>
+ *   <li>{@code NIST_KEY_WRAP}: NIST Key Wrap</li>
+ *   <li>{@code X9_102_AESKW}: ANSI X9.102 AES Key Wrap</li>
+ *   <li>{@code X9_102_TDKW}: ANSI X9.102 Triple-DES Key Wrap</li>
+ *   <li>{@code X9_102_AKW1}: ANSI X9.102 AKW1</li>
+ *   <li>{@code X9_102_AKW2}: ANSI X9.102 AKW2</li>
+ *   <li>{@code AEAD}: Authenticated Encryption with Associated Data</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see CryptographicAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +171,9 @@ public class BlockCipherMode implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Block Cipher Modes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -188,19 +221,40 @@ public class BlockCipherMode implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Block Cipher Mode value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link BlockCipherMode} with the current value.
+         */
         BlockCipherMode inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Block Cipher Mode.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

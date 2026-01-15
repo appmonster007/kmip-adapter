@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP RngAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * algorithm used by a Random Number Generator (RNG).
+ * <p>
+ * This enumeration is used in the {@code RNGParameters} structure to indicate the
+ * specific algorithm employed for generating random numbers.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The RNG algorithm is not specified.</li>
+ *   <li>{@code FIPS_186_2}: FIPS 186-2 compliant RNG.</li>
+ *   <li>{@code DRBG}: Deterministic Random Bit Generator.</li>
+ *   <li>{@code NRBG}: Non-Deterministic Random Bit Generator.</li>
+ *   <li>{@code ANSI_X9_31}: ANSI X9.31 compliant RNG.</li>
+ *   <li>{@code ANSI_X9_62}: ANSI X9.62 compliant RNG.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see DrbgAlgorithm
+ * @see org.purpleBean.kmip.common.structure.RngParameters
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class RngAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of RNG Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -176,19 +197,40 @@ public class RngAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an RNG Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link RngAlgorithm} with the current value.
+         */
         RngAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific RNG Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,29 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP WrappingMethod enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * method used to wrap a key or other sensitive material.
+ * <p>
+ * Key wrapping is the process of encrypting a key with another key to protect it
+ * while it is being stored or transmitted. This enumeration defines the different
+ * techniques that can be used for this purpose, including encryption, signing, and
+ * authenticated encryption.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code ENCRYPT}: The key is encrypted.</li>
+ *   <li>{@code MAC_SIGN}: The key is authenticated with a Message Authentication Code (MAC) or a digital signature.</li>
+ *   <li>{@code ENCRYPT_THEN_MAC_SIGN}: The key is first encrypted and then a MAC or signature is computed over the ciphertext.</li>
+ *   <li>{@code MAC_SIGN_THEN_ENCRYPT}: A MAC or signature is computed over the plaintext key, and then both the key and the MAC/signature are encrypted together.</li>
+ *   <li>{@code TR_31}: The key is wrapped according to the ANSI TR-31 standard.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * This enumeration is used in the {@code KeyWrappingSpecification} structure to define
+ * how a key should be wrapped.
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.KeyWrappingSpecification
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +163,9 @@ public class WrappingMethod implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Wrapping Methods.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -175,19 +200,40 @@ public class WrappingMethod implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Wrapping Method value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link WrappingMethod} with the current value.
+         */
         WrappingMethod inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Wrapping Method.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

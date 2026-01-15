@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ObjectGroupMember enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * role of an object within an object group.
+ * <p>
+ * This enumeration is used in the {@code ObjectGroup} attribute to indicate whether
+ * an object is a fresh member of the group or the default member.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code GROUP_MEMBER_FRESH}: The object is a fresh member of the group.</li>
+ *   <li>{@code GROUP_MEMBER_DEFAULT}: The object is the default member of the group.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.ObjectGroup
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class ObjectGroupMember implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Object Group Members.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class ObjectGroupMember implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Object Group Member value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ObjectGroupMember} with the current value.
+         */
         ObjectGroupMember inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Object Group Member.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

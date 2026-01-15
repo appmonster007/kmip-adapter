@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ProtectionLevel enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
+ * the desired level of protection for a cryptographic object.
+ * <p>
+ * This enumeration is used to indicate the strength or assurance level associated
+ * with the protection of a key or other sensitive material.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code HIGH}: Indicates a high level of protection.</li>
+ *   <li>{@code LOW}: Indicates a low level of protection.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class ProtectionLevel implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Protection Levels.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +187,40 @@ public class ProtectionLevel implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Protection Level value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ProtectionLevel} with the current value.
+         */
         ProtectionLevel inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Protection Level.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

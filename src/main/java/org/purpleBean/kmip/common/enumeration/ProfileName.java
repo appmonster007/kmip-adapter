@@ -7,7 +7,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ProfileName enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
+ * KMIP profile that a server or client conforms to.
+ * <p>
+ * Profiles define subsets of the KMIP specification that are relevant to specific
+ * use cases, ensuring interoperability between different vendors' products.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +147,9 @@ public class ProfileName implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Profile Names.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -207,19 +216,40 @@ public class ProfileName implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Profile Name value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ProfileName} with the current value.
+         */
         ProfileName inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Profile Name.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

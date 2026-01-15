@@ -7,7 +7,23 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ValidationType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of validation performed on a cryptographic module.
+ * <p>
+ * This enumeration is used in the {@code ValidationInformation} structure to indicate
+ * the nature of the validation (e.g., hardware, software).
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The validation type is not specified.</li>
+ *   <li>{@code HARDWARE}: The validation applies to a hardware module.</li>
+ *   <li>{@code SOFTWARE}: The validation applies to a software module.</li>
+ *   <li>{@code FIRMWARE}: The validation applies to a firmware module.</li>
+ *   <li>{@code HYBRID}: The validation applies to a hybrid module (a combination of hardware, software, and/or firmware).</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.ValidationInformation
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +157,9 @@ public class ValidationType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Validation Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -175,19 +194,40 @@ public class ValidationType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Validation Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ValidationType} with the current value.
+         */
         ValidationType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Validation Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

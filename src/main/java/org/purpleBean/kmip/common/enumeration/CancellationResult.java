@@ -7,7 +7,23 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP CancellationResult enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * result of a {@code Cancel} operation.
+ * <p>
+ * This enumeration is used in the response to a {@code Cancel} operation to indicate
+ * whether the requested asynchronous operation was successfully canceled.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CANCELED}: The operation was successfully canceled.</li>
+ *   <li>{@code UNABLE_TO_CANCEL}: The server was unable to cancel the operation.</li>
+ *   <li>{@code COMPLETED}: The operation had already completed before the cancel request was received.</li>
+ *   <li>{@code FAILED}: The cancel operation failed.</li>
+ *   <li>{@code UNAVAILABLE}: The asynchronous operation is unavailable.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.Cancel
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +157,9 @@ public class CancellationResult implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Cancellation Results.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -175,19 +194,40 @@ public class CancellationResult implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Cancellation Result value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link CancellationResult} with the current value.
+         */
         CancellationResult inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Cancellation Result.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

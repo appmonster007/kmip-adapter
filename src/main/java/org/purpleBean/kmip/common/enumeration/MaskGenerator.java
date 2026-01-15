@@ -7,7 +7,24 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP MaskGenerator enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * mask generation function to be used in certain cryptographic operations.
+ * <p>
+ * Mask Generation Functions (MGFs) are typically used in asymmetric cryptography,
+ * such as with the RSA-PSS padding scheme, to generate a mask that is combined with
+ * the message before encryption or signing.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code MFG1}: The Mask Generation Function 1, as defined in PKCS #1.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * This enumeration is used in cryptographic parameters to specify the MGF for
+ * operations like signing or encryption.
+ *
+ * @see KmipEnumeration
+ * @see HashingAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +158,9 @@ public class MaskGenerator implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Mask Generators.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -171,19 +191,40 @@ public class MaskGenerator implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Mask Generator value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link MaskGenerator} with the current value.
+         */
         MaskGenerator inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Mask Generator.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

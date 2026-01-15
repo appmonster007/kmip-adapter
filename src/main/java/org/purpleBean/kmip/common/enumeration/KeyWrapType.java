@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP KeyWrapType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
+ * whether a key is wrapped or not.
+ * <p>
+ * This enumeration is used in operations like {@code Register} to indicate the
+ * wrapping state of the key being registered.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code NOT_WRAPPED}: Indicates that the key is not wrapped.</li>
+ *   <li>{@code AS_REGISTERED}: Indicates that the key is wrapped in the same
+ *       way it was when it was originally registered.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class KeyWrapType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Key Wrap Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class KeyWrapType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Key Wrap Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link KeyWrapType} with the current value.
+         */
         KeyWrapType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Key Wrap Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

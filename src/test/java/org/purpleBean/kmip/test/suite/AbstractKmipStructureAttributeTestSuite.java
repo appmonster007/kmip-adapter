@@ -10,9 +10,35 @@ import org.purpleBean.kmip.common.structure.Attribute;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Combined domain suite for types that implement both KmipAttribute and KmipStructure.
+ * Provides a comprehensive test suite for KMIP data types that function as both a structure and an attribute.
  * <p>
- * Type bound ensures the concrete type implements both interfaces.
+ * This abstract test suite is designed to validate the behavior of KMIP types that implement both the
+ * {@link KmipStructure} and {@link KmipAttribute} interfaces. It extends {@link AbstractKmipStructureTestSuite}
+ * to inherit structure-specific tests and adds further tests to cover attribute-related functionalities.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Dual-Interface Validation:</b> Ensures that the tested type correctly implements the contracts of both
+ *       {@link KmipStructure} and {@link KmipAttribute}.</li>
+ *   <li><b>Capability Flag Testing:</b> Verifies that attribute capability flags (e.g., {@code isAlwaysPresent},
+ *       {@code isServerInitializable}) match the expected values defined in the concrete test class.</li>
+ *   <li><b>State-Dependent Behavior:</b> Tests state-dependent methods like {@code isServerModifiable} and
+ *       {@code isClientModifiable} using representative {@link State} objects.</li>
+ *   <li><b>Attribute Round-Trip:</b> Confirms that an object can be converted to its generic {@link Attribute}
+ *       representation and then reconstructed back into its original type without loss of information.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * To use this suite, create a concrete test class that extends this class and provides implementations for the
+ * abstract methods. These methods define the expected behavior and provide necessary test instances.
+ *
+ * @param <T> The specific KMIP type being tested, which must implement both {@link KmipStructure} and
+ *           {@link KmipAttribute}.
+ *
+ * @see AbstractKmipStructureTestSuite
+ * @see KmipStructure
+ * @see KmipAttribute
+ * @see Attribute
  */
 @DisplayName("Abstract KMIP Attribute+Structure Suite")
 public abstract class AbstractKmipStructureAttributeTestSuite<T extends KmipStructure & KmipAttribute>

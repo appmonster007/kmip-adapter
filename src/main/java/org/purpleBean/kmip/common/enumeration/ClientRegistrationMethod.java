@@ -7,7 +7,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ClientRegistrationMethod enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * method used for client registration.
+ * <p>
+ * This enumeration is used in the server's capability information to indicate which
+ * methods of client registration it supports.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The registration method is not specified.</li>
+ *   <li>{@code SERVER_PRE_GENERATED}: The server pre-generates credentials for the client.</li>
+ *   <li>{@code SERVER_ON_DEMAND}: The server generates credentials for the client on demand.</li>
+ *   <li>{@code CLIENT_GENERATED}: The client generates its own credentials.</li>
+ *   <li>{@code CLIENT_REGISTERED}: The client is already registered.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +156,9 @@ public class ClientRegistrationMethod implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Client Registration Methods.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -175,19 +193,40 @@ public class ClientRegistrationMethod implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Client Registration Method value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ClientRegistrationMethod} with the current value.
+         */
         ClientRegistrationMethod inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Client Registration Method.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

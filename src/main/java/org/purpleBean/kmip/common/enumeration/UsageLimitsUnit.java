@@ -7,7 +7,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP UsageLimitsUnit enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * unit for a usage limit.
+ * <p>
+ * This enumeration is used in the {@code UsageLimits} attribute to define whether
+ * the usage limit is measured in bytes or in number of objects.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code BYTE}: The usage limit is measured in bytes.</li>
+ *   <li>{@code OBJECT}: The usage limit is measured in number of objects.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.UsageLimits
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +154,9 @@ public class UsageLimitsUnit implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Usage Limits Units.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +188,40 @@ public class UsageLimitsUnit implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Usage Limits Unit value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link UsageLimitsUnit} with the current value.
+         */
         UsageLimitsUnit inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Usage Limits Unit.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

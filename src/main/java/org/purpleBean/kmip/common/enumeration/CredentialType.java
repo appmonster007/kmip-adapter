@@ -7,7 +7,26 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP CredentialType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of credential used for authentication.
+ * <p>
+ * This enumeration is used in the {@code Credential} structure to identify the
+ * type of authentication material being provided.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code USERNAME_AND_PASSWORD}: A username and password combination.</li>
+ *   <li>{@code DEVICE}: A device-specific credential, such as a serial number or hardware identifier.</li>
+ *   <li>{@code ATTESTATION}: An attestation credential, used to prove the identity and state of a device.</li>
+ *   <li>{@code ONE_TIME_PASSWORD}: A one-time password.</li>
+ *   <li>{@code HASHED_PASSWORD}: A hashed password.</li>
+ *   <li>{@code TICKET}: A security ticket, such as a Kerberos ticket.</li>
+ *   <li>{@code PASSWORD}: A password.</li>
+ *   <li>{@code CERTIFICATE}: A digital certificate.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.Credential
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +160,9 @@ public class CredentialType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Credential Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -178,19 +200,40 @@ public class CredentialType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Credential Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link CredentialType} with the current value.
+         */
         CredentialType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Credential Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

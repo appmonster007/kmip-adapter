@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP EndpointRole enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * role of an endpoint in a KMIP communication.
+ * <p>
+ * This enumeration is used to identify whether an endpoint is acting as a client
+ * or a server.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CLIENT}: The endpoint is acting as a client.</li>
+ *   <li>{@code SERVER}: The endpoint is acting as a server.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class EndpointRole implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Endpoint Roles.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +187,40 @@ public class EndpointRole implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Endpoint Role value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link EndpointRole} with the current value.
+         */
         EndpointRole inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Endpoint Role.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

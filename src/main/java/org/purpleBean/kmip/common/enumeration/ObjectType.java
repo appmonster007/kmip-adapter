@@ -7,7 +7,33 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ObjectType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a managed object.
+ * <p>
+ * This enumeration is a fundamental attribute of every managed object, defining its
+ * category and intended use.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code CERTIFICATE}: A digital certificate.</li>
+ *   <li>{@code SYMMETRIC_KEY}: A symmetric cryptographic key.</li>
+ *   <li>{@code PUBLIC_KEY}: A public key of an asymmetric key pair.</li>
+ *   <li>{@code PRIVATE_KEY}: A private key of an asymmetric key pair.</li>
+ *   <li>{@code SPLIT_KEY}: A part of a split key.</li>
+ *   <li>{@code TEMPLATE}: A template containing attributes for creating new objects.</li>
+ *   <li>{@code SECRET_DATA}: Generic secret data.</li>
+ *   <li>{@code OPAQUE_OBJECT}: An object whose type is not interpreted by the server.</li>
+ *   <li>{@code PGP_KEY}: A Pretty Good Privacy (PGP) key.</li>
+ *   <li>{@code CERTIFICATE_REQUEST}: A certificate signing request.</li>
+ *   <li>{@code USER}: A user object.</li>
+ *   <li>{@code GROUP}: A group object.</li>
+ *   <li>{@code PASSWORD_CREDENTIAL}: A password-based credential.</li>
+ *   <li>{@code DEVICE_CREDENTIAL}: A device-based credential.</li>
+ *   <li>{@code ONE_TIME_PASSWORD_CREDENTIAL}: A one-time password credential.</li>
+ *   <li>{@code HASHED_PASSWORD_CREDENTIAL}: A hashed password credential.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +167,9 @@ public class ObjectType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Object Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -186,19 +215,40 @@ public class ObjectType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Object Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ObjectType} with the current value.
+         */
         ObjectType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Object Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

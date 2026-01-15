@@ -7,7 +7,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DeactivationReasonCode enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * reason for the deactivation of a managed object.
+ * <p>
+ * This enumeration is used in the {@code DeactivationReason} structure to provide
+ * a machine-readable code indicating why an object was deactivated.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The reason for deactivation is not specified.</li>
+ *   <li>{@code DEACTIVATION_DATE}: The object was deactivated because its deactivation date has passed.</li>
+ *   <li>{@code PROTECT_STOP_DATE}: The object was deactivated because its protect stop date has passed.</li>
+ *   <li>{@code USAGE_LIMIT}: The object was deactivated because its usage limit has been reached.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.DeactivationReason
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +156,9 @@ public class DeactivationReasonCode implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Deactivation Reason Codes.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -174,19 +192,40 @@ public class DeactivationReasonCode implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Deactivation Reason Code value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DeactivationReasonCode} with the current value.
+         */
         DeactivationReasonCode inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Deactivation Reason Code.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

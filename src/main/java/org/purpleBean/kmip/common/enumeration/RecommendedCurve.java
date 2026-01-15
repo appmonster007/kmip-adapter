@@ -7,7 +7,14 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP RecommendedCurve enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
+ * recommended elliptic curve for use in cryptographic operations.
+ * <p>
+ * This enumeration lists standard elliptic curves that are recommended for use in
+ * elliptic curve cryptography (ECC).
+ *
+ * @see KmipEnumeration
+ * @see CryptographicAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +148,9 @@ public class RecommendedCurve implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Recommended Curves.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -240,19 +250,40 @@ public class RecommendedCurve implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Recommended Curve value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link RecommendedCurve} with the current value.
+         */
         RecommendedCurve inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Recommended Curve.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

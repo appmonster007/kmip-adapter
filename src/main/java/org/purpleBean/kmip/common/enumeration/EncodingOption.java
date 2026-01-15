@@ -7,7 +7,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP EncodingOption enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * encoding of a data item.
+ * <p>
+ * This enumeration is used to indicate whether a data item is encoded, and if so,
+ * what encoding is used.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code NO_ENCODING}: The data is not encoded.</li>
+ *   <li>{@code TTLV_ENCODING}: The data is encoded using the Tag-Type-Length-Value (TTLV) format.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +153,9 @@ public class EncodingOption implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Encoding Options.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -172,19 +187,40 @@ public class EncodingOption implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Encoding Option value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link EncodingOption} with the current value.
+         */
         EncodingOption inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Encoding Option.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

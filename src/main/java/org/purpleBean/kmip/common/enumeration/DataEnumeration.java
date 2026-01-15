@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DataEnumeration enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of data being processed in a cryptographic operation.
+ * <p>
+ * This enumeration is used to distinguish between different types of data that can be
+ * the subject of a cryptographic operation, such as data to be encrypted, decrypted,
+ * or signed.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code DECRYPT}: Data to be decrypted.</li>
+ *   <li>{@code ENCRYPT}: Data to be encrypted.</li>
+ *   <li>{@code HASH}: Data to be hashed.</li>
+ *   <li>{@code MACMAC_DATA}: Data for a MAC (Message Authentication Code) operation.</li>
+ *   <li>{@code RNG_RETRIEVE}: Data retrieved from a Random Number Generator.</li>
+ *   <li>{@code SIGN_SIGNATURE_DATA}: Data to be signed.</li>
+ *   <li>{@code SIGNATURE_VERIFY}: Data to be used for signature verification.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class DataEnumeration implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Data Enumerations.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -177,19 +198,40 @@ public class DataEnumeration implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Data Enumeration value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DataEnumeration} with the current value.
+         */
         DataEnumeration inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Data Enumeration.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

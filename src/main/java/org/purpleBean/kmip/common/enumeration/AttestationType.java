@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP AttestationType enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of attestation used to prove the identity and state of a device or application.
+ * <p>
+ * Attestation is a process where a client provides evidence to the server to prove
+ * its identity and that its software and hardware have not been tampered with.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code TPM_QUOTE}: A quote from a Trusted Platform Module (TPM).</li>
+ *   <li>{@code TCG_INTEGRITY_REPORT}: An integrity report from the Trusted Computing Group (TCG).</li>
+ *   <li>{@code SAML_ASSERTION}: A Security Assertion Markup Language (SAML) assertion.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.common.structure.Attestation
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class AttestationType implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Attestation Types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class AttestationType implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing an Attestation Type value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link AttestationType} with the current value.
+         */
         AttestationType inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Attestation Type.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,27 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP HashingAlgorithm enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * hashing algorithm to be used in cryptographic operations.
+ * <p>
+ * Hashing algorithms are used to produce a fixed-size digest of a message, which is
+ * essential for digital signatures, message authentication codes (MACs), and other
+ * cryptographic mechanisms.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code MD2}, {@code MD4}, {@code MD5}: Older hashing algorithms, generally not recommended for new applications.</li>
+ *   <li>{@code SHA_1}: The Secure Hash Algorithm 1.</li>
+ *   <li>{@code SHA_224}, {@code SHA_256}, {@code SHA_384}, {@code SHA_512}: The SHA-2 family of algorithms.</li>
+ *   <li>{@code RIPEMD_160}: The RACE Integrity Primitives Evaluation Message Digest algorithm.</li>
+ *   <li>{@code TIGER}: The Tiger hash function.</li>
+ *   <li>{@code WHIRLPOOL}: The Whirlpool hash function.</li>
+ *   <li>{@code SHA_512_224}, {@code SHA_512_256}: Truncated versions of SHA-512.</li>
+ *   <li>{@code SHA3_224}, {@code SHA3_256}, {@code SHA3_384}, {@code SHA3_512}: The SHA-3 family of algorithms.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see DigitalSignatureAlgorithm
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +161,9 @@ public class HashingAlgorithm implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Hashing Algorithms.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -187,19 +210,40 @@ public class HashingAlgorithm implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Hashing Algorithm value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link HashingAlgorithm} with the current value.
+         */
         HashingAlgorithm inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Hashing Algorithm.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP UniqueIdentifier enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * type of a unique identifier.
+ * <p>
+ * This enumeration is used to provide context for a unique identifier, indicating
+ * what kind of object or operation the identifier refers to.
+ *
+ * @see KmipEnumeration
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +147,9 @@ public class UniqueIdentifier implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Unique Identifier types.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -191,19 +200,40 @@ public class UniqueIdentifier implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Unique Identifier value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link UniqueIdentifier} with the current value.
+         */
         UniqueIdentifier inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Unique Identifier.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

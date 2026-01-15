@@ -7,7 +7,24 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP SplitKeyMethod enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * method used to split a key into multiple parts.
+ * <p>
+ * Key splitting is a technique used to divide a key into multiple shares, where a
+ * certain threshold of shares is required to reconstruct the original key. This
+ * enumeration lists the methods supported by KMIP for this purpose.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code XOR}: The key is split using a simple XOR operation.</li>
+ *   <li>{@code POLYNOMIAL_SHARING_GF_216}: The key is split using Shamir's Secret Sharing over the Galois Field GF(2^16).</li>
+ *   <li>{@code POLYNOMIAL_SHARING_PRIME_FIELD}: The key is split using Shamir's Secret Sharing over a prime field.</li>
+ *   <li>{@code POLYNOMIAL_SHARING_GF_28}: The key is split using Shamir's Secret Sharing over the Galois Field GF(2^8).</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.CreateSplitKey
+ * @see org.purpleBean.kmip.operation.JoinSplitKey
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +158,9 @@ public class SplitKeyMethod implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Split Key Methods.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -174,19 +194,40 @@ public class SplitKeyMethod implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Split Key Method value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link SplitKeyMethod} with the current value.
+         */
         SplitKeyMethod inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Split Key Method.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

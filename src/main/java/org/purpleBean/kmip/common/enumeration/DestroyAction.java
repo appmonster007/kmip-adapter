@@ -7,7 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP DestroyAction enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
+ * action to be taken when destroying a managed object.
+ * <p>
+ * This enumeration is used in the {@code Destroy} operation to indicate the desired
+ * level of destruction.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code UNSPECIFIED}: The destroy action is not specified.</li>
+ *   <li>{@code KEY_MATERIAL_DELETED}: The key material is deleted, but the metadata may be retained.</li>
+ *   <li>{@code KEY_MATERIAL_SHREDDED}: The key material is securely shredded.</li>
+ *   <li>{@code META_DATA_DELETED}: The metadata is deleted, but the key material may be retained.</li>
+ *   <li>{@code META_DATA_SHREDDED}: The metadata is securely shredded.</li>
+ *   <li>{@code DELETED}: Both the key material and metadata are deleted.</li>
+ *   <li>{@code SHREDDED}: Both the key material and metadata are securely shredded.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.Destroy
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +159,9 @@ public class DestroyAction implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Destroy Actions.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -177,19 +198,40 @@ public class DestroyAction implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Destroy Action value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link DestroyAction} with the current value.
+         */
         DestroyAction inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Destroy Action.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

@@ -7,7 +7,21 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * KMIP ValidityIndicator enumeration.
+ * A KMIP (Key Management Interoperability Protocol) enumeration that indicates the
+ * validity of a cryptographic object or other data.
+ * <p>
+ * This enumeration is used in the {@code Validate} operation response to indicate
+ * the result of the validation check.
+ *
+ * <p><b>Standards:</b></p>
+ * <ul>
+ *   <li>{@code VALID}: The object is valid.</li>
+ *   <li>{@code INVALID}: The object is invalid.</li>
+ *   <li>{@code UNKNOWN}: The validity of the object is unknown.</li>
+ * </ul>
+ *
+ * @see KmipEnumeration
+ * @see org.purpleBean.kmip.operation.Validate
  */
 @Data
 @Builder(toBuilder = true)
@@ -141,6 +155,9 @@ public class ValidityIndicator implements KmipEnumeration {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of Validity Indicators.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -173,19 +190,40 @@ public class ValidityIndicator implements KmipEnumeration {
         }
     }
 
-    // ----- Value hierarchy -----
+    /**
+     * An interface representing a Validity Indicator value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value {
+        /**
+         * @return the integer value of the enumeration.
+         */
         int getValue();
 
+        /**
+         * @return the description of the enumeration.
+         */
         String getDescription();
 
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
         boolean isSupported();
 
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
         boolean isCustom();
 
+        /**
+         * @return a new instance of the {@link ValidityIndicator} with the current value.
+         */
         ValidityIndicator inst();
     }
 
+    /**
+     * Represents a custom, vendor-specific Validity Indicator.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
