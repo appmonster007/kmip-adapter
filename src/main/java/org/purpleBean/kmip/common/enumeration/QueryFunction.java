@@ -44,6 +44,10 @@ public class QueryFunction implements KmipEnumeration {
         this.value = value;
     }
 
+    public static QueryFunction of(@NonNull Value value) {
+        return new QueryFunction(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

@@ -44,6 +44,10 @@ public class ProfileName implements KmipEnumeration {
         this.value = value;
     }
 
+    public static ProfileName of(@NonNull Value value) {
+        return new ProfileName(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

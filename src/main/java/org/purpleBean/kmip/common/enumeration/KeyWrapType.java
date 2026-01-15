@@ -44,6 +44,10 @@ public class KeyWrapType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static KeyWrapType of(@NonNull Value value) {
+        return new KeyWrapType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

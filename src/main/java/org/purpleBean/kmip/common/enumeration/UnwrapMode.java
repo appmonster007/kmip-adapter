@@ -44,6 +44,10 @@ public class UnwrapMode implements KmipEnumeration {
         this.value = value;
     }
 
+    public static UnwrapMode of(@NonNull Value value) {
+        return new UnwrapMode(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

@@ -44,6 +44,10 @@ public class AdjustmentType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static AdjustmentType of(@NonNull Value value) {
+        return new AdjustmentType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

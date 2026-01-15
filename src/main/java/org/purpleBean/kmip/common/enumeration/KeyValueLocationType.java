@@ -44,6 +44,10 @@ public class KeyValueLocationType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static KeyValueLocationType of(@NonNull Value value) {
+        return new KeyValueLocationType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

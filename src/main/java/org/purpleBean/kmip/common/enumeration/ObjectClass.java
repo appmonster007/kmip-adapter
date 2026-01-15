@@ -44,6 +44,10 @@ public class ObjectClass implements KmipEnumeration {
         this.value = value;
     }
 
+    public static ObjectClass of(@NonNull Value value) {
+        return new ObjectClass(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

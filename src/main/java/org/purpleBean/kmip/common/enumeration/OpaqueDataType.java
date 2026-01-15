@@ -44,6 +44,10 @@ public class OpaqueDataType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static OpaqueDataType of(@NonNull Value value) {
+        return new OpaqueDataType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

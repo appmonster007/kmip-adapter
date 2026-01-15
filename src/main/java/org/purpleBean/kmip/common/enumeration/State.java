@@ -47,6 +47,10 @@ public class State implements KmipEnumeration, KmipAttribute {
         this.value = value;
     }
 
+    public static State of(@NonNull Value value) {
+        return new State(value);
+    }
+
     public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");

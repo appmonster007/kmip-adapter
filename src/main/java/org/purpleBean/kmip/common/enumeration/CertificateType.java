@@ -44,6 +44,10 @@ public class CertificateType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static CertificateType of(@NonNull Value value) {
+        return new CertificateType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

@@ -44,6 +44,10 @@ public class RngAlgorithm implements KmipEnumeration {
         this.value = value;
     }
 
+    public static RngAlgorithm of(@NonNull Value value) {
+        return new RngAlgorithm(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

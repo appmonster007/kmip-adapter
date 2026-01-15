@@ -44,6 +44,10 @@ public class AsynchronousIndicator implements KmipEnumeration {
         this.value = value;
     }
 
+    public static AsynchronousIndicator of(@NonNull Value value) {
+        return new AsynchronousIndicator(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

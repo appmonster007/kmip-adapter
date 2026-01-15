@@ -44,6 +44,10 @@ public class KeyFormatType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static KeyFormatType of(@NonNull Value value) {
+        return new KeyFormatType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

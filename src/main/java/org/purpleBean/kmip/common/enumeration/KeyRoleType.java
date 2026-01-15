@@ -44,6 +44,10 @@ public class KeyRoleType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static KeyRoleType of(@NonNull Value value) {
+        return new KeyRoleType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

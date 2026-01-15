@@ -44,6 +44,10 @@ public class ValidationAuthorityType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static ValidationAuthorityType of(@NonNull Value value) {
+        return new ValidationAuthorityType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

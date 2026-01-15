@@ -44,6 +44,10 @@ public class AlternativeNameType implements KmipEnumeration {
         this.value = value;
     }
 
+    public static AlternativeNameType of(@NonNull Value value) {
+        return new AlternativeNameType(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

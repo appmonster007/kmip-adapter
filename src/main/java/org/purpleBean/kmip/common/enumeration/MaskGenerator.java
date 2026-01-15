@@ -44,6 +44,10 @@ public class MaskGenerator implements KmipEnumeration {
         this.value = value;
     }
 
+    public static MaskGenerator of(@NonNull Value value) {
+        return new MaskGenerator(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

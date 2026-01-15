@@ -44,6 +44,10 @@ public class Fips186Variation implements KmipEnumeration {
         this.value = value;
     }
 
+    public static Fips186Variation of(@NonNull Value value) {
+        return new Fips186Variation(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

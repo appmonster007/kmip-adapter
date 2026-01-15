@@ -44,6 +44,10 @@ public class ValidityIndicator implements KmipEnumeration {
         this.value = value;
     }
 
+    public static ValidityIndicator of(@NonNull Value value) {
+        return new ValidityIndicator(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

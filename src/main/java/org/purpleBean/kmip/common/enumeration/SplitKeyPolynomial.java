@@ -44,6 +44,10 @@ public class SplitKeyPolynomial implements KmipEnumeration {
         this.value = value;
     }
 
+    public static SplitKeyPolynomial of(@NonNull Value value) {
+        return new SplitKeyPolynomial(value);
+    }
+
     private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x80000000;
         if (value < extensionStart || value > 0) {

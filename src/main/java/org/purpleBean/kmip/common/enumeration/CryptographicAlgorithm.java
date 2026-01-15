@@ -47,6 +47,10 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         this.value = value;
     }
 
+    public static CryptographicAlgorithm of(@NonNull Value value) {
+        return new CryptographicAlgorithm(value);
+    }
+
     public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
