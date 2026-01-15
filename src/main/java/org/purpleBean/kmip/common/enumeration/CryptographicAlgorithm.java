@@ -301,6 +301,11 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public CryptographicAlgorithm inst() {
+            return CryptographicAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -312,6 +317,8 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         boolean isSupported();
 
         boolean isCustom();
+
+        CryptographicAlgorithm inst();
     }
 
     @Getter
@@ -334,6 +341,11 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public CryptographicAlgorithm inst() {
+            return CryptographicAlgorithm.of(this);
         }
     }
 }

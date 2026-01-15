@@ -171,6 +171,11 @@ public class CredentialType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public CredentialType inst() {
+            return CredentialType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -182,6 +187,8 @@ public class CredentialType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        CredentialType inst();
     }
 
     @Getter
@@ -204,6 +211,11 @@ public class CredentialType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public CredentialType inst() {
+            return CredentialType.of(this);
         }
     }
 }

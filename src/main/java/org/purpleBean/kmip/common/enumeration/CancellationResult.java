@@ -168,6 +168,11 @@ public class CancellationResult implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public CancellationResult inst() {
+            return CancellationResult.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -179,6 +184,8 @@ public class CancellationResult implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        CancellationResult inst();
     }
 
     @Getter
@@ -201,6 +208,11 @@ public class CancellationResult implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public CancellationResult inst() {
+            return CancellationResult.of(this);
         }
     }
 }

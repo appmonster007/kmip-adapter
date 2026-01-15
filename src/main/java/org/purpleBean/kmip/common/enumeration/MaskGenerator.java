@@ -164,6 +164,11 @@ public class MaskGenerator implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public MaskGenerator inst() {
+            return MaskGenerator.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -175,6 +180,8 @@ public class MaskGenerator implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        MaskGenerator inst();
     }
 
     @Getter
@@ -197,6 +204,11 @@ public class MaskGenerator implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public MaskGenerator inst() {
+            return MaskGenerator.of(this);
         }
     }
 }

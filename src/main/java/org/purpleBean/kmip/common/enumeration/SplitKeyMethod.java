@@ -167,6 +167,11 @@ public class SplitKeyMethod implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public SplitKeyMethod inst() {
+            return SplitKeyMethod.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -178,6 +183,8 @@ public class SplitKeyMethod implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        SplitKeyMethod inst();
     }
 
     @Getter
@@ -200,6 +207,11 @@ public class SplitKeyMethod implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public SplitKeyMethod inst() {
+            return SplitKeyMethod.of(this);
         }
     }
 }

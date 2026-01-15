@@ -170,6 +170,11 @@ public class Fips186Variation implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public Fips186Variation inst() {
+            return Fips186Variation.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -181,6 +186,8 @@ public class Fips186Variation implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        Fips186Variation inst();
     }
 
     @Getter
@@ -203,6 +210,11 @@ public class Fips186Variation implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public Fips186Variation inst() {
+            return Fips186Variation.of(this);
         }
     }
 }

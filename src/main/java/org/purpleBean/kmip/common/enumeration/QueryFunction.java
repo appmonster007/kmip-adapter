@@ -178,6 +178,11 @@ public class QueryFunction implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public QueryFunction inst() {
+            return QueryFunction.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -189,6 +194,8 @@ public class QueryFunction implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        QueryFunction inst();
     }
 
     @Getter
@@ -211,6 +218,11 @@ public class QueryFunction implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public QueryFunction inst() {
+            return QueryFunction.of(this);
         }
     }
 }

@@ -165,6 +165,11 @@ public class RotateNameType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public RotateNameType inst() {
+            return RotateNameType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class RotateNameType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        RotateNameType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class RotateNameType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public RotateNameType inst() {
+            return RotateNameType.of(this);
         }
     }
 }

@@ -167,6 +167,11 @@ public class KeyCompressionType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public KeyCompressionType inst() {
+            return KeyCompressionType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -178,6 +183,8 @@ public class KeyCompressionType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        KeyCompressionType inst();
     }
 
     @Getter
@@ -200,6 +207,11 @@ public class KeyCompressionType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KeyCompressionType inst() {
+            return KeyCompressionType.of(this);
         }
     }
 }

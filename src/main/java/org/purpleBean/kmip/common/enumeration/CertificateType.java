@@ -165,6 +165,11 @@ public class CertificateType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public CertificateType inst() {
+            return CertificateType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class CertificateType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        CertificateType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class CertificateType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public CertificateType inst() {
+            return CertificateType.of(this);
         }
     }
 }

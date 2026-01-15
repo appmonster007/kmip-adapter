@@ -167,6 +167,11 @@ public class DeactivationReasonCode implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DeactivationReasonCode inst() {
+            return DeactivationReasonCode.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -178,6 +183,8 @@ public class DeactivationReasonCode implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DeactivationReasonCode inst();
     }
 
     @Getter
@@ -200,6 +207,11 @@ public class DeactivationReasonCode implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DeactivationReasonCode inst() {
+            return DeactivationReasonCode.of(this);
         }
     }
 }

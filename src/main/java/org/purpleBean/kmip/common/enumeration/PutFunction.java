@@ -165,6 +165,11 @@ public class PutFunction implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public PutFunction inst() {
+            return PutFunction.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class PutFunction implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        PutFunction inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class PutFunction implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public PutFunction inst() {
+            return PutFunction.of(this);
         }
     }
 }

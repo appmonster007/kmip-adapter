@@ -173,6 +173,11 @@ public class PaddingMethod implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public PaddingMethod inst() {
+            return PaddingMethod.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -184,6 +189,8 @@ public class PaddingMethod implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        PaddingMethod inst();
     }
 
     @Getter
@@ -206,6 +213,11 @@ public class PaddingMethod implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public PaddingMethod inst() {
+            return PaddingMethod.of(this);
         }
     }
 }

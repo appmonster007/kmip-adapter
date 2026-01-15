@@ -168,6 +168,11 @@ public class WrappingMethod implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public WrappingMethod inst() {
+            return WrappingMethod.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -179,6 +184,8 @@ public class WrappingMethod implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        WrappingMethod inst();
     }
 
     @Getter
@@ -201,6 +208,11 @@ public class WrappingMethod implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public WrappingMethod inst() {
+            return WrappingMethod.of(this);
         }
     }
 }

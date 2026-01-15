@@ -233,6 +233,11 @@ public class RecommendedCurve implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public RecommendedCurve inst() {
+            return RecommendedCurve.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -244,6 +249,8 @@ public class RecommendedCurve implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        RecommendedCurve inst();
     }
 
     @Getter
@@ -266,6 +273,11 @@ public class RecommendedCurve implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public RecommendedCurve inst() {
+            return RecommendedCurve.of(this);
         }
     }
 }

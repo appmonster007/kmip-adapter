@@ -166,6 +166,11 @@ public class ValidityIndicator implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ValidityIndicator inst() {
+            return ValidityIndicator.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class ValidityIndicator implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ValidityIndicator inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class ValidityIndicator implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ValidityIndicator inst() {
+            return ValidityIndicator.of(this);
         }
     }
 }

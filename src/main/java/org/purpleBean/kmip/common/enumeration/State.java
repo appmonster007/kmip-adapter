@@ -233,6 +233,11 @@ public class State implements KmipEnumeration, KmipAttribute {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public State inst() {
+            return State.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -244,6 +249,8 @@ public class State implements KmipEnumeration, KmipAttribute {
         boolean isSupported();
 
         boolean isCustom();
+
+        State inst();
     }
 
     @Getter
@@ -266,6 +273,11 @@ public class State implements KmipEnumeration, KmipAttribute {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public State inst() {
+            return State.of(this);
         }
     }
 }

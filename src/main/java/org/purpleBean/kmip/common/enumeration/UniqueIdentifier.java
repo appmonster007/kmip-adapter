@@ -184,6 +184,11 @@ public class UniqueIdentifier implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public UniqueIdentifier inst() {
+            return UniqueIdentifier.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -195,6 +200,8 @@ public class UniqueIdentifier implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        UniqueIdentifier inst();
     }
 
     @Getter
@@ -217,6 +224,11 @@ public class UniqueIdentifier implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public UniqueIdentifier inst() {
+            return UniqueIdentifier.of(this);
         }
     }
 }

@@ -165,6 +165,11 @@ public class ObjectClass implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ObjectClass inst() {
+            return ObjectClass.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class ObjectClass implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ObjectClass inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class ObjectClass implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ObjectClass inst() {
+            return ObjectClass.of(this);
         }
     }
 }

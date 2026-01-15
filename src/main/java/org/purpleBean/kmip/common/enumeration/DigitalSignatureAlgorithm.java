@@ -182,6 +182,11 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DigitalSignatureAlgorithm inst() {
+            return DigitalSignatureAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -193,6 +198,8 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DigitalSignatureAlgorithm inst();
     }
 
     @Getter
@@ -215,6 +222,11 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DigitalSignatureAlgorithm inst() {
+            return DigitalSignatureAlgorithm.of(this);
         }
     }
 }

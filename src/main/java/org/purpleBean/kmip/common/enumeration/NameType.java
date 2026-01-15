@@ -165,6 +165,11 @@ public class NameType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public NameType inst() {
+            return NameType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class NameType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        NameType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class NameType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public NameType inst() {
+            return NameType.of(this);
         }
     }
 }

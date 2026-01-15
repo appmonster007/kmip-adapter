@@ -165,6 +165,11 @@ public class UsageLimitsUnit implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public UsageLimitsUnit inst() {
+            return UsageLimitsUnit.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class UsageLimitsUnit implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        UsageLimitsUnit inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class UsageLimitsUnit implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public UsageLimitsUnit inst() {
+            return UsageLimitsUnit.of(this);
         }
     }
 }

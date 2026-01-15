@@ -165,6 +165,11 @@ public class ProtectionLevel implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ProtectionLevel inst() {
+            return ProtectionLevel.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class ProtectionLevel implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ProtectionLevel inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class ProtectionLevel implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ProtectionLevel inst() {
+            return ProtectionLevel.of(this);
         }
     }
 }

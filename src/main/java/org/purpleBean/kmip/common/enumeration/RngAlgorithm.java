@@ -169,6 +169,11 @@ public class RngAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public RngAlgorithm inst() {
+            return RngAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -180,6 +185,8 @@ public class RngAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        RngAlgorithm inst();
     }
 
     @Getter
@@ -202,6 +209,11 @@ public class RngAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public RngAlgorithm inst() {
+            return RngAlgorithm.of(this);
         }
     }
 }

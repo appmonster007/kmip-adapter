@@ -187,6 +187,11 @@ public class KeyRoleType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public KeyRoleType inst() {
+            return KeyRoleType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -198,6 +203,8 @@ public class KeyRoleType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        KeyRoleType inst();
     }
 
     @Getter
@@ -220,6 +227,11 @@ public class KeyRoleType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KeyRoleType inst() {
+            return KeyRoleType.of(this);
         }
     }
 }

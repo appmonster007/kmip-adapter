@@ -165,6 +165,11 @@ public class KeyValueLocationType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public KeyValueLocationType inst() {
+            return KeyValueLocationType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class KeyValueLocationType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        KeyValueLocationType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class KeyValueLocationType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KeyValueLocationType inst() {
+            return KeyValueLocationType.of(this);
         }
     }
 }

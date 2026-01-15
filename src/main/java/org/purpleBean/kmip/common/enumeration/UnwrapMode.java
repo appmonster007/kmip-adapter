@@ -166,6 +166,11 @@ public class UnwrapMode implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public UnwrapMode inst() {
+            return UnwrapMode.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class UnwrapMode implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        UnwrapMode inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class UnwrapMode implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public UnwrapMode inst() {
+            return UnwrapMode.of(this);
         }
     }
 }

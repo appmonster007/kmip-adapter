@@ -168,6 +168,11 @@ public class ClientRegistrationMethod implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ClientRegistrationMethod inst() {
+            return ClientRegistrationMethod.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -179,6 +184,8 @@ public class ClientRegistrationMethod implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ClientRegistrationMethod inst();
     }
 
     @Getter
@@ -201,6 +208,11 @@ public class ClientRegistrationMethod implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ClientRegistrationMethod inst() {
+            return ClientRegistrationMethod.of(this);
         }
     }
 }

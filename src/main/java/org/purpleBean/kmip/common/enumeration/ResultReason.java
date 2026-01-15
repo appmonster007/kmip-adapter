@@ -334,6 +334,11 @@ public class ResultReason implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ResultReason inst() {
+            return ResultReason.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -345,6 +350,8 @@ public class ResultReason implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ResultReason inst();
     }
 
     @Getter
@@ -367,6 +374,11 @@ public class ResultReason implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ResultReason inst() {
+            return ResultReason.of(this);
         }
     }
 }

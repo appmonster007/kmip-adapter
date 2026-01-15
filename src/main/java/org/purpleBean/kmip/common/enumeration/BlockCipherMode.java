@@ -181,6 +181,11 @@ public class BlockCipherMode implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public BlockCipherMode inst() {
+            return BlockCipherMode.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -192,6 +197,8 @@ public class BlockCipherMode implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        BlockCipherMode inst();
     }
 
     @Getter
@@ -214,6 +221,11 @@ public class BlockCipherMode implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public BlockCipherMode inst() {
+            return BlockCipherMode.of(this);
         }
     }
 }

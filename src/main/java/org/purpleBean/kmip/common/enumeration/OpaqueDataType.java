@@ -164,6 +164,11 @@ public class OpaqueDataType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public OpaqueDataType inst() {
+            return OpaqueDataType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -175,6 +180,8 @@ public class OpaqueDataType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        OpaqueDataType inst();
     }
 
     @Getter
@@ -197,6 +204,11 @@ public class OpaqueDataType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public OpaqueDataType inst() {
+            return OpaqueDataType.of(this);
         }
     }
 }

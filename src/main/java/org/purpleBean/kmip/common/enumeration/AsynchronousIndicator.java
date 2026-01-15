@@ -166,6 +166,11 @@ public class AsynchronousIndicator implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public AsynchronousIndicator inst() {
+            return AsynchronousIndicator.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class AsynchronousIndicator implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        AsynchronousIndicator inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class AsynchronousIndicator implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public AsynchronousIndicator inst() {
+            return AsynchronousIndicator.of(this);
         }
     }
 }

@@ -166,6 +166,11 @@ public class InteropFunction implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public InteropFunction inst() {
+            return InteropFunction.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class InteropFunction implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        InteropFunction inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class InteropFunction implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public InteropFunction inst() {
+            return InteropFunction.of(this);
         }
     }
 }

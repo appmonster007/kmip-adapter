@@ -170,6 +170,11 @@ public class RevocationReasonCode implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public RevocationReasonCode inst() {
+            return RevocationReasonCode.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -181,6 +186,8 @@ public class RevocationReasonCode implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        RevocationReasonCode inst();
     }
 
     @Getter
@@ -203,6 +210,11 @@ public class RevocationReasonCode implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public RevocationReasonCode inst() {
+            return RevocationReasonCode.of(this);
         }
     }
 }

@@ -166,6 +166,11 @@ public class AttestationType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public AttestationType inst() {
+            return AttestationType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class AttestationType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        AttestationType inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class AttestationType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public AttestationType inst() {
+            return AttestationType.of(this);
         }
     }
 }

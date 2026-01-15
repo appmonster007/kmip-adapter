@@ -165,6 +165,11 @@ public class SplitKeyPolynomial implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public SplitKeyPolynomial inst() {
+            return SplitKeyPolynomial.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class SplitKeyPolynomial implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        SplitKeyPolynomial inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class SplitKeyPolynomial implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public SplitKeyPolynomial inst() {
+            return SplitKeyPolynomial.of(this);
         }
     }
 }

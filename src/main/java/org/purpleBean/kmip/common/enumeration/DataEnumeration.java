@@ -170,6 +170,11 @@ public class DataEnumeration implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DataEnumeration inst() {
+            return DataEnumeration.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -181,6 +186,8 @@ public class DataEnumeration implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DataEnumeration inst();
     }
 
     @Getter
@@ -203,6 +210,11 @@ public class DataEnumeration implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DataEnumeration inst() {
+            return DataEnumeration.of(this);
         }
     }
 }

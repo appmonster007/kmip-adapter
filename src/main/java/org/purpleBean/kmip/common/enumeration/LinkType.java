@@ -177,6 +177,11 @@ public class LinkType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public LinkType inst() {
+            return LinkType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -188,6 +193,8 @@ public class LinkType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        LinkType inst();
     }
 
     @Getter
@@ -210,6 +217,11 @@ public class LinkType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public LinkType inst() {
+            return LinkType.of(this);
         }
     }
 }

@@ -180,6 +180,11 @@ public class HashingAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public HashingAlgorithm inst() {
+            return HashingAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -191,6 +196,8 @@ public class HashingAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        HashingAlgorithm inst();
     }
 
     @Getter
@@ -213,6 +220,11 @@ public class HashingAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public HashingAlgorithm inst() {
+            return HashingAlgorithm.of(this);
         }
     }
 }

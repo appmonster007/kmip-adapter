@@ -165,6 +165,11 @@ public class EndpointRole implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public EndpointRole inst() {
+            return EndpointRole.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class EndpointRole implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        EndpointRole inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class EndpointRole implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public EndpointRole inst() {
+            return EndpointRole.of(this);
         }
     }
 }

@@ -170,6 +170,11 @@ public class DestroyAction implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DestroyAction inst() {
+            return DestroyAction.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -181,6 +186,8 @@ public class DestroyAction implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DestroyAction inst();
     }
 
     @Getter
@@ -203,6 +210,11 @@ public class DestroyAction implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DestroyAction inst() {
+            return DestroyAction.of(this);
         }
     }
 }

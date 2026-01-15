@@ -165,6 +165,11 @@ public class OtpAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public OtpAlgorithm inst() {
+            return OtpAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class OtpAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        OtpAlgorithm inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class OtpAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public OtpAlgorithm inst() {
+            return OtpAlgorithm.of(this);
         }
     }
 }

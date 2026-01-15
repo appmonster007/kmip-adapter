@@ -200,6 +200,11 @@ public class ProfileName implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ProfileName inst() {
+            return ProfileName.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -211,6 +216,8 @@ public class ProfileName implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ProfileName inst();
     }
 
     @Getter
@@ -233,6 +240,11 @@ public class ProfileName implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ProfileName inst() {
+            return ProfileName.of(this);
         }
     }
 }

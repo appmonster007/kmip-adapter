@@ -170,14 +170,24 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public {{ENUM_NAME}} inst() {
+            return {{ENUM_NAME}}.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
     public interface Value {
         int getValue();
+
         String getDescription();
+
         boolean isSupported();
+
         boolean isCustom();
+
+        {{ENUM_NAME}} inst();
     }
 
     @Getter
@@ -200,6 +210,11 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public {{ENUM_NAME}} inst() {
+            return {{ENUM_NAME}}.of(this);
         }
     }
 }

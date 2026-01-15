@@ -166,6 +166,11 @@ public class AdjustmentType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public AdjustmentType inst() {
+            return AdjustmentType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class AdjustmentType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        AdjustmentType inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class AdjustmentType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public AdjustmentType inst() {
+            return AdjustmentType.of(this);
         }
     }
 }

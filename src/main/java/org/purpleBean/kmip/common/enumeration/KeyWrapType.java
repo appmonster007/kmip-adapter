@@ -165,6 +165,11 @@ public class KeyWrapType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public KeyWrapType inst() {
+            return KeyWrapType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class KeyWrapType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        KeyWrapType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class KeyWrapType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KeyWrapType inst() {
+            return KeyWrapType.of(this);
         }
     }
 }

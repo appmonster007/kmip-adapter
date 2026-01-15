@@ -227,6 +227,11 @@ public class Operation implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public Operation inst() {
+            return Operation.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -238,6 +243,8 @@ public class Operation implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        Operation inst();
     }
 
     @Getter
@@ -260,6 +267,11 @@ public class Operation implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public Operation inst() {
+            return Operation.of(this);
         }
     }
 }

@@ -166,6 +166,11 @@ public class ProcessingStage implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ProcessingStage inst() {
+            return ProcessingStage.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class ProcessingStage implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ProcessingStage inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class ProcessingStage implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ProcessingStage inst() {
+            return ProcessingStage.of(this);
         }
     }
 }

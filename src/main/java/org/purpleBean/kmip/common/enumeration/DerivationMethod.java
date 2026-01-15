@@ -173,6 +173,11 @@ public class DerivationMethod implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DerivationMethod inst() {
+            return DerivationMethod.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -184,6 +189,8 @@ public class DerivationMethod implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DerivationMethod inst();
     }
 
     @Getter
@@ -206,6 +213,11 @@ public class DerivationMethod implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DerivationMethod inst() {
+            return DerivationMethod.of(this);
         }
     }
 }

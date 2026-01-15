@@ -229,6 +229,11 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public {{ATTRIBUTE_NAME}} inst() {
+            return {{ATTRIBUTE_NAME}}.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -240,6 +245,8 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         boolean isSupported();
 
         boolean isCustom();
+
+        {{ATTRIBUTE_NAME}} inst();
     }
 
     @Getter
@@ -262,6 +269,11 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public {{ATTRIBUTE_NAME}} inst() {
+            return {{ATTRIBUTE_NAME}}.of(this);
         }
     }
 }

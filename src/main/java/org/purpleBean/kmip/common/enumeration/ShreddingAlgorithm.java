@@ -166,6 +166,11 @@ public class ShreddingAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ShreddingAlgorithm inst() {
+            return ShreddingAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -177,6 +182,8 @@ public class ShreddingAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ShreddingAlgorithm inst();
     }
 
     @Getter
@@ -199,6 +206,11 @@ public class ShreddingAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ShreddingAlgorithm inst() {
+            return ShreddingAlgorithm.of(this);
         }
     }
 }

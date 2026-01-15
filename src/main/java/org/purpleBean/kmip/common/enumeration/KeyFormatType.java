@@ -186,6 +186,11 @@ public class KeyFormatType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public KeyFormatType inst() {
+            return KeyFormatType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -197,6 +202,8 @@ public class KeyFormatType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        KeyFormatType inst();
     }
 
     @Getter
@@ -219,6 +226,11 @@ public class KeyFormatType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KeyFormatType inst() {
+            return KeyFormatType.of(this);
         }
     }
 }

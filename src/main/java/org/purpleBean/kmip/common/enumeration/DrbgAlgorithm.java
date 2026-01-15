@@ -168,6 +168,11 @@ public class DrbgAlgorithm implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public DrbgAlgorithm inst() {
+            return DrbgAlgorithm.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -179,6 +184,8 @@ public class DrbgAlgorithm implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        DrbgAlgorithm inst();
     }
 
     @Getter
@@ -201,6 +208,11 @@ public class DrbgAlgorithm implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public DrbgAlgorithm inst() {
+            return DrbgAlgorithm.of(this);
         }
     }
 }

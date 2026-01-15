@@ -165,6 +165,11 @@ public class ObjectGroupMember implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ObjectGroupMember inst() {
+            return ObjectGroupMember.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class ObjectGroupMember implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ObjectGroupMember inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class ObjectGroupMember implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ObjectGroupMember inst() {
+            return ObjectGroupMember.of(this);
         }
     }
 }

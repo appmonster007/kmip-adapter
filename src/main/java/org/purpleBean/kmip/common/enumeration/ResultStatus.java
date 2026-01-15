@@ -167,6 +167,11 @@ public class ResultStatus implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public ResultStatus inst() {
+            return ResultStatus.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -178,6 +183,8 @@ public class ResultStatus implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        ResultStatus inst();
     }
 
     @Getter
@@ -200,6 +207,11 @@ public class ResultStatus implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public ResultStatus inst() {
+            return ResultStatus.of(this);
         }
     }
 }

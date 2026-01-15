@@ -164,6 +164,11 @@ public class TicketType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public TicketType inst() {
+            return TicketType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -175,6 +180,8 @@ public class TicketType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        TicketType inst();
     }
 
     @Getter
@@ -197,6 +204,11 @@ public class TicketType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public TicketType inst() {
+            return TicketType.of(this);
         }
     }
 }

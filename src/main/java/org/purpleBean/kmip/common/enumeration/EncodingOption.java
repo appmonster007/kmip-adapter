@@ -165,6 +165,11 @@ public class EncodingOption implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public EncodingOption inst() {
+            return EncodingOption.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class EncodingOption implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        EncodingOption inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class EncodingOption implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public EncodingOption inst() {
+            return EncodingOption.of(this);
         }
     }
 }

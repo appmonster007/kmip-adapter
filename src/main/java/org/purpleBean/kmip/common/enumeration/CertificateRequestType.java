@@ -167,6 +167,11 @@ public class CertificateRequestType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public CertificateRequestType inst() {
+            return CertificateRequestType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -178,6 +183,8 @@ public class CertificateRequestType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        CertificateRequestType inst();
     }
 
     @Getter
@@ -200,6 +207,11 @@ public class CertificateRequestType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public CertificateRequestType inst() {
+            return CertificateRequestType.of(this);
         }
     }
 }

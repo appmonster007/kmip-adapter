@@ -165,6 +165,11 @@ public class SecretDataType implements KmipEnumeration {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
         }
+
+        @Override
+        public SecretDataType inst() {
+            return SecretDataType.of(this);
+        }
     }
 
     // ----- Value hierarchy -----
@@ -176,6 +181,8 @@ public class SecretDataType implements KmipEnumeration {
         boolean isSupported();
 
         boolean isCustom();
+
+        SecretDataType inst();
     }
 
     @Getter
@@ -198,6 +205,11 @@ public class SecretDataType implements KmipEnumeration {
         public boolean isSupported() {
             KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public SecretDataType inst() {
+            return SecretDataType.of(this);
         }
     }
 }
