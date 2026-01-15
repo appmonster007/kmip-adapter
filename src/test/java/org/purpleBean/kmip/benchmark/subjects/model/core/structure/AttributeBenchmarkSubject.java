@@ -2,8 +2,8 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.structure.Attribute;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

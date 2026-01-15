@@ -6,10 +6,6 @@ import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -2,9 +2,9 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.RevocationMessage;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.model.core.structure.RevocationReason;
+import org.purpleBean.kmip.model.core.type.RevocationMessage;
 
 public class RevocationReasonBenchmarkSubject extends KmipBenchmarkSubject<RevocationReason> {
 

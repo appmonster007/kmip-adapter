@@ -5,8 +5,8 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
+import org.purpleBean.kmip.model.core.type.AttributeName;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

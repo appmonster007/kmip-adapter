@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.structure.Name;
+import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.time.OffsetDateTime;

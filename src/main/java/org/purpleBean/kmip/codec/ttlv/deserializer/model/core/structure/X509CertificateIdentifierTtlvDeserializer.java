@@ -4,9 +4,9 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 import org.purpleBean.kmip.model.core.type.CertificateSerialNumber;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
-import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.AttributeValueDateTime;
-import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
+import org.purpleBean.kmip.model.core.type.AttributeValueDateTime;
+import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.time.OffsetDateTime;

@@ -4,9 +4,9 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.RevocationMessage;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.model.core.structure.RevocationReason;
+import org.purpleBean.kmip.model.core.type.RevocationMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

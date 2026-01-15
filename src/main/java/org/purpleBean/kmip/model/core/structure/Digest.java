@@ -3,13 +3,13 @@ package org.purpleBean.kmip.model.core.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.StringUtils;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.DigestValue;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.DigestValue;
 
 import java.util.List;
 import java.util.Map;

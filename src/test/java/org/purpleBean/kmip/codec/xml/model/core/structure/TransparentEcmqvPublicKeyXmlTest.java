@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.QString;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.TransparentEcmqvPublicKey;
+import org.purpleBean.kmip.model.core.type.QString;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.time.OffsetDateTime;

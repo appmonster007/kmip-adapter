@@ -2,9 +2,9 @@ package org.purpleBean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.structure.KeyMaterialStructure;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.time.OffsetDateTime;

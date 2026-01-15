@@ -5,7 +5,6 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.*;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 

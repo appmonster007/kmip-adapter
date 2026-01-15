@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.Qlength;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.CryptographicDomainParameters;
+import org.purpleBean.kmip.model.core.type.Qlength;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CryptographicDomainParameters Json Serialization Tests")

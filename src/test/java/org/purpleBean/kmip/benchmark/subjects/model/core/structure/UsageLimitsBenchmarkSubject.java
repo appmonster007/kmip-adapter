@@ -2,10 +2,10 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.UsageLimitsCount;
-import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purpleBean.kmip.model.core.type.UsageLimitsCount;
+import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 
 public class UsageLimitsBenchmarkSubject extends KmipBenchmarkSubject<UsageLimits> {
 

@@ -43,7 +43,6 @@ import java.nio.ByteBuffer;
  * </pre>
  *
  * @param <T> The type of the object that this serializer handles.
- *
  * @see TtlvMapper
  * @see TtlvDeserializer
  */
@@ -52,7 +51,7 @@ public abstract class TtlvSerializer<T> {
     /**
      * Serializes an object of type {@code T} into its TTLV byte representation.
      *
-     * @param value The object to be serialized.
+     * @param value  The object to be serialized.
      * @param mapper The {@link TtlvMapper} instance that can be used to recursively serialize nested objects.
      * @return A {@link ByteBuffer} containing the TTLV representation of the object.
      * @throws IOException if an I/O error occurs during serialization.

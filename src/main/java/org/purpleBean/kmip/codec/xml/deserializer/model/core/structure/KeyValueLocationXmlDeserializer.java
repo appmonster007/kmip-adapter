@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.AbstractKmipStructureXmlDeserializer;
-import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.model.core.structure.KeyValueLocation;
+import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 
 import java.io.IOException;
 

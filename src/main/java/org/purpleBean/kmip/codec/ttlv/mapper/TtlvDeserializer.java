@@ -43,7 +43,6 @@ import java.nio.ByteBuffer;
  * </pre>
  *
  * @param <T> The type of the object that this deserializer creates.
- *
  * @see TtlvMapper
  * @see TtlvSerializer
  */
@@ -53,7 +52,7 @@ public abstract class TtlvDeserializer<T> {
      * Deserializes a TTLV byte representation from the given {@link ByteBuffer} into an object of type {@code T}.
      *
      * @param ttlvBuffer The byte buffer containing the TTLV data to be deserialized.
-     * @param mapper The {@link TtlvMapper} instance that can be used to recursively deserialize nested objects.
+     * @param mapper     The {@link TtlvMapper} instance that can be used to recursively deserialize nested objects.
      * @return The deserialized object of type {@code T}.
      * @throws IOException if an I/O error occurs while reading from the buffer.
      */

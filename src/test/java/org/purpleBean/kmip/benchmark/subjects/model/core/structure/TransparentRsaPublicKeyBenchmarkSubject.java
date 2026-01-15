@@ -4,9 +4,9 @@ import lombok.Getter;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey;
 import org.purpleBean.kmip.model.core.type.Modulus;
 import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey;
 
 import java.math.BigInteger;
 

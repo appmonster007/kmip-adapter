@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.ProtectStopDate;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
 import java.time.OffsetDateTime;

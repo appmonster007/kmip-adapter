@@ -4,11 +4,11 @@ import lombok.Getter;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.structure.TransparentDsaPublicKey;
 import org.purpleBean.kmip.model.core.type.G;
 import org.purpleBean.kmip.model.core.type.P;
 import org.purpleBean.kmip.model.core.type.Q;
 import org.purpleBean.kmip.model.core.type.Y;
-import org.purpleBean.kmip.model.core.structure.TransparentDsaPublicKey;
 
 import java.math.BigInteger;
 

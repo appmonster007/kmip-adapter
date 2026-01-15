@@ -2,9 +2,9 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 import org.purpleBean.kmip.model.core.type.CertificateSerialNumber;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
-import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 
 public class X509CertificateIdentifierBenchmarkSubject extends KmipBenchmarkSubject<X509CertificateIdentifier> {
 

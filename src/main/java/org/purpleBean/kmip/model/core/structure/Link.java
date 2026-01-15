@@ -4,10 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
 import org.purpleBean.kmip.model.core.enumeration.LinkType;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
 
 import java.util.List;
 import java.util.Map;

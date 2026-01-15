@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.AbstractKmipStructureXmlDeserializer;
-import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
+import org.purpleBean.kmip.model.core.type.AttributeName;
 
 import java.io.IOException;
 

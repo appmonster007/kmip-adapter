@@ -33,8 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * abstract methods. These methods define the expected behavior and provide necessary test instances.
  *
  * @param <T> The specific KMIP type being tested, which must implement both {@link KmipStructure} and
- *           {@link KmipAttribute}.
- *
+ *            {@link KmipAttribute}.
  * @see AbstractKmipStructureTestSuite
  * @see KmipStructure
  * @see KmipAttribute

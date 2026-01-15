@@ -3,9 +3,8 @@ package org.purpleBean.kmip.model.core.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.model.core.structure.KeyMaterialStructure;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.time.OffsetDateTime;

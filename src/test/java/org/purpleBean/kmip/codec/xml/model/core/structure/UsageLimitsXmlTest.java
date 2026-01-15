@@ -1,10 +1,10 @@
 package org.purpleBean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.UsageLimitsCount;
-import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purpleBean.kmip.model.core.type.UsageLimitsCount;
+import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("UsageLimits Xml Serialization Tests")

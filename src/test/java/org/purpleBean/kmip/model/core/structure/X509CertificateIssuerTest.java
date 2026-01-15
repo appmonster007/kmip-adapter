@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.X509CertificateIssuer;
+import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.IssuerAlternativeName;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
-import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;

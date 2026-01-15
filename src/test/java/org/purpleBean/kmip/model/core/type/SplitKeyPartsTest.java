@@ -2,7 +2,6 @@ package org.purpleBean.kmip.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("SplitKeyParts Domain Tests")

@@ -5,8 +5,6 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipAttribute;
 import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.model.core.structure.CustomAttribute;
-import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
 import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
 import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;

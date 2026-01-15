@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.RevocationReason;
-import org.purpleBean.kmip.model.core.type.RevocationMessage;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.RevocationMessage;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;

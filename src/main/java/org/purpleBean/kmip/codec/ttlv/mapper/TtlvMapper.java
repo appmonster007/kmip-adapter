@@ -68,7 +68,7 @@ public class TtlvMapper {
      * Serializes a Java object into a {@link ByteBuffer} containing its full TTLV encoding.
      *
      * @param value The object to serialize. Must not be {@code null}.
-     * @param <T> The type of the value being serialized.
+     * @param <T>   The type of the value being serialized.
      * @return A {@link ByteBuffer} containing the TTLV data, ready for reading.
      * @throws IOException if an error occurs during serialization.
      */
@@ -86,8 +86,8 @@ public class TtlvMapper {
      * Deserializes a single TTLV element from a {@link ByteBuffer} into a Java object of the specified class.
      *
      * @param buffer The buffer containing the TTLV data. Must not be {@code null}.
-     * @param clazz The target class to deserialize into. Must not be {@code null}.
-     * @param <T> The type of the object to be returned.
+     * @param clazz  The target class to deserialize into. Must not be {@code null}.
+     * @param <T>    The type of the object to be returned.
      * @return The deserialized Java object.
      * @throws IOException if an error occurs during deserialization.
      */
@@ -103,7 +103,7 @@ public class TtlvMapper {
      * A convenience method to serialize a Java object directly into a byte array.
      *
      * @param value The object to serialize.
-     * @param <T> The type of the value.
+     * @param <T>   The type of the value.
      * @return A byte array containing the TTLV representation of the object.
      * @throws IOException if an error occurs during serialization.
      */
@@ -118,9 +118,9 @@ public class TtlvMapper {
     /**
      * A convenience method to deserialize a byte array containing TTLV data into a Java object.
      *
-     * @param data The byte array to deserialize.
+     * @param data  The byte array to deserialize.
      * @param clazz The target class.
-     * @param <T> The type of the object to be returned.
+     * @param <T>   The type of the object to be returned.
      * @return The deserialized Java object.
      * @throws IOException if an error occurs during deserialization.
      */

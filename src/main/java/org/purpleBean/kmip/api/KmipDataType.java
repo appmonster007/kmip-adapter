@@ -47,10 +47,10 @@ public interface KmipDataType {
      * This method should be called once for each supported KMIP specification when a data type class is loaded.
      * It creates a unique key based on the provided parameters and maps it to the given class.
      *
-     * @param spec The {@link KmipSpec} version for which this mapping is valid.
+     * @param spec         The {@link KmipSpec} version for which this mapping is valid.
      * @param kmipTagValue The {@link KmipTag.Value} that identifies the data type.
      * @param encodingType The {@link EncodingType} used for the data type.
-     * @param clazz The {@link Class} that implements the data type.
+     * @param clazz        The {@link Class} that implements the data type.
      */
     static void register(KmipSpec spec, KmipTag.Value kmipTagValue, EncodingType encodingType, Class<? extends KmipDataType> clazz) {
         TAG_REGISTRY.put(new RegistryKey(spec, kmipTagValue, encodingType), clazz);
@@ -97,7 +97,7 @@ public interface KmipDataType {
      * <p>
      * This record uniquely identifies a data type by combining its specification version, tag, and encoding type.
      *
-     * @param spec The KMIP specification version.
+     * @param spec         The KMIP specification version.
      * @param kmipTagValue The KMIP tag.
      * @param encodingType The data's encoding type.
      */

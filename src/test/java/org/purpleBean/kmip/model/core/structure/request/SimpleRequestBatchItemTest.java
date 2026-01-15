@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.model.core.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("SimpleRequestBatchItem Structure Semantics")

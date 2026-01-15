@@ -4,10 +4,10 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.DigestValue;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.structure.Digest;
+import org.purpleBean.kmip.model.core.type.DigestValue;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

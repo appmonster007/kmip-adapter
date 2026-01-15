@@ -4,11 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.type.G;
 import org.purpleBean.kmip.model.core.type.P;
 import org.purpleBean.kmip.model.core.type.Q;
 import org.purpleBean.kmip.model.core.type.X;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 
 import java.util.List;
 import java.util.Map;

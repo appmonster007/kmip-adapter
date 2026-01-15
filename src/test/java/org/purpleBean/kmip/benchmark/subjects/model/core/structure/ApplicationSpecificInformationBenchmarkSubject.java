@@ -2,9 +2,9 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.structure.ApplicationSpecificInformation;
 import org.purpleBean.kmip.model.core.type.ApplicationData;
 import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
-import org.purpleBean.kmip.model.core.structure.ApplicationSpecificInformation;
 
 public class ApplicationSpecificInformationBenchmarkSubject extends KmipBenchmarkSubject<ApplicationSpecificInformation> {
 

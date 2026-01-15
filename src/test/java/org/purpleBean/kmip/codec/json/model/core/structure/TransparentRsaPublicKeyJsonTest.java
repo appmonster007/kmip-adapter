@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey;
 import org.purpleBean.kmip.model.core.type.Modulus;
 import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.math.BigInteger;

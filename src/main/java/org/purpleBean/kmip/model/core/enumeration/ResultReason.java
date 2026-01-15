@@ -156,10 +156,10 @@ public class ResultReason implements KmipEnumeration {
     /**
      * Registers a custom, vendor-specific Result Reason.
      *
-     * @param value The integer value of the reason (must be within the extension range).
-     * @param description A unique, non-empty description for the reason.
+     * @param value             The integer value of the reason (must be within the extension range).
+     * @param description       A unique, non-empty description for the reason.
      * @param supportedVersions A set of {@link KmipSpec} versions that support this reason.
-     * @param parentReason The parent {@link Value} in the reason hierarchy.
+     * @param parentReason      The parent {@link Value} in the reason hierarchy.
      * @return The registered {@link Value} instance.
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions, @NonNull Value parentReason) {

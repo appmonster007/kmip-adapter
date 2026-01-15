@@ -49,10 +49,10 @@ public interface KeyMaterial extends KmipDataType {
      * This method should be called for each supported key material format to enable dynamic
      * handling by the codec.
      *
-     * @param spec The {@link KmipSpec} version for which this mapping is valid.
-     * @param encodingType The {@link EncodingType} of the key material.
-     * @param keyFormatTypeValue The {@link KeyFormatType.Value} that specifies the format of the key material.
-     * @param clazz The {@link Class} that implements the specific key material format.
+     * @param spec                 The {@link KmipSpec} version for which this mapping is valid.
+     * @param encodingType         The {@link EncodingType} of the key material.
+     * @param keyFormatTypeValue   The {@link KeyFormatType.Value} that specifies the format of the key material.
+     * @param clazz                The {@link Class} that implements the specific key material format.
      * @param keyFormatTypeBuilder A {@link Function} that constructs an instance of the specific
      *                             key material format from a generic {@link KeyMaterial} object.
      */
@@ -71,8 +71,8 @@ public interface KeyMaterial extends KmipDataType {
      * Retrieves the corresponding {@link KmipDataType} class from the registry based on
      * the KMIP specification, encoding type, and key format type.
      *
-     * @param spec The {@link KmipSpec} version.
-     * @param encodingType The {@link EncodingType} of the key material.
+     * @param spec               The {@link KmipSpec} version.
+     * @param encodingType       The {@link EncodingType} of the key material.
      * @param keyFormatTypeValue The {@link KeyFormatType.Value} of the key material.
      * @return The registered {@link Class}, or {@code null} if no mapping is found.
      */
@@ -83,8 +83,8 @@ public interface KeyMaterial extends KmipDataType {
     /**
      * Retrieves the builder function for a specific key material format from the registry.
      *
-     * @param spec The {@link KmipSpec} version.
-     * @param encodingType The {@link EncodingType} of the key material.
+     * @param spec               The {@link KmipSpec} version.
+     * @param encodingType       The {@link EncodingType} of the key material.
      * @param keyFormatTypeValue The {@link KeyFormatType.Value} of the key material.
      * @return The registered {@link Function} builder, or {@code null} if no mapping is found.
      */
@@ -96,8 +96,8 @@ public interface KeyMaterial extends KmipDataType {
      * A composite key for the key material registries, uniquely identifying a key material
      * by its specification, encoding type, and key format type.
      *
-     * @param spec The KMIP specification version.
-     * @param encodingType The encoding type of the key material.
+     * @param spec               The KMIP specification version.
+     * @param encodingType       The encoding type of the key material.
      * @param keyFormatTypeValue The format type of the key material.
      */
     record RegistryKey(KmipSpec spec, EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {

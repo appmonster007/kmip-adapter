@@ -4,11 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipAttribute;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.CustomAttribute;
+import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
 import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
 import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
-import org.purpleBean.kmip.model.core.structure.CustomAttribute;
-import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.time.OffsetDateTime;

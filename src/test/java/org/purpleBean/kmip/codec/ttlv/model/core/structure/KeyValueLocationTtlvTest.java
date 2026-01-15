@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.model.core.structure.KeyValueLocation;
+import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyValueLocation Ttlv Serialization Tests")

@@ -6,10 +6,10 @@ import org.purpleBean.kmip.api.KmipAttribute;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
-import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
 import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
+import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 
 import java.util.List;
 

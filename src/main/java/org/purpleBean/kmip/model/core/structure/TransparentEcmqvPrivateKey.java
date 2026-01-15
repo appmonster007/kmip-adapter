@@ -4,9 +4,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.D;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purpleBean.kmip.model.core.type.D;
 
 import java.util.List;
 import java.util.Map;

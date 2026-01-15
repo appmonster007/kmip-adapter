@@ -1,8 +1,8 @@
 package org.purpleBean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.Key;
 import org.purpleBean.kmip.model.core.structure.TransparentSymmetricKey;
+import org.purpleBean.kmip.model.core.type.Key;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.time.OffsetDateTime;

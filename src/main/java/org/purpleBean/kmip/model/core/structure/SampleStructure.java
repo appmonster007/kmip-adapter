@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
 
 import java.util.ArrayList;
 import java.util.List;

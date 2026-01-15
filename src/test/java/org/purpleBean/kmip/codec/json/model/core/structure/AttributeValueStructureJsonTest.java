@@ -2,9 +2,9 @@ package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.AttributeValueStructure;
 import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
 import org.purpleBean.kmip.model.core.type.AttributeValueLongInteger;
-import org.purpleBean.kmip.model.core.structure.AttributeValueStructure;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.List;

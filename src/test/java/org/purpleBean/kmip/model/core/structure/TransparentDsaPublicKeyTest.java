@@ -3,7 +3,6 @@ package org.purpleBean.kmip.model.core.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.model.core.structure.TransparentDsaPublicKey;
 import org.purpleBean.kmip.model.core.type.G;
 import org.purpleBean.kmip.model.core.type.P;
 import org.purpleBean.kmip.model.core.type.Q;

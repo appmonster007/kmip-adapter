@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.structure.CertificateSubject;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectAlternativeName;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectDistinguishedName;
-import org.purpleBean.kmip.model.core.structure.CertificateSubject;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateSubject Json Serialization Tests")

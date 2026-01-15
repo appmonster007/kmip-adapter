@@ -2,9 +2,9 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.Qlength;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.CryptographicDomainParameters;
+import org.purpleBean.kmip.model.core.type.Qlength;
 
 public class CryptographicDomainParametersBenchmarkSubject extends KmipBenchmarkSubject<CryptographicDomainParameters> {
 

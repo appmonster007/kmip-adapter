@@ -2,10 +2,10 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.DigestValue;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.structure.Digest;
+import org.purpleBean.kmip.model.core.type.DigestValue;
 
 public class DigestBenchmarkSubject extends KmipBenchmarkSubject<Digest> {
 

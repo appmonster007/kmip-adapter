@@ -4,8 +4,8 @@ import lombok.Getter;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
 import org.purpleBean.kmip.model.core.structure.AttributeValueStructure;
+import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
 
 import java.util.List;
 

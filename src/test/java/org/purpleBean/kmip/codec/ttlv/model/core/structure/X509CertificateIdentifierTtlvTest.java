@@ -1,9 +1,9 @@
 package org.purpleBean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 import org.purpleBean.kmip.model.core.type.CertificateSerialNumber;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
-import org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.time.OffsetDateTime;

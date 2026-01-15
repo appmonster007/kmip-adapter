@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipStructureJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.structure.Name;
+import org.purpleBean.kmip.model.core.type.NameValue;
 
 import java.io.IOException;
 
