@@ -13,11 +13,11 @@ class InteropFunctionJsonTest extends AbstractJsonSerializationTestSuite<Interop
 
     @Override
     protected InteropFunction createDefault() {
-        return new InteropFunction(InteropFunction.Standard.BEGIN);
+        return InteropFunction.Standard.BEGIN.inst();
     }
 
     @Override
     protected InteropFunction createVariant() {
-        return new InteropFunction(InteropFunction.Standard.END);
+        return InteropFunction.Standard.END.inst();
     }
 }

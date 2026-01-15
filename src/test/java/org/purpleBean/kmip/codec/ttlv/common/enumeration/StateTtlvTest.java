@@ -13,11 +13,11 @@ class StateTtlvTest extends AbstractTtlvSerializationTestSuite<State> {
 
     @Override
     protected State createDefault() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State createVariant() {
-        return new State(State.Standard.DEACTIVATED);
+        return State.Standard.DEACTIVATED.inst();
     }
 }

@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class SignatureData implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.SIGNATURE_DATA);
+    public static final KmipTag kmipTag = KmipTag.Standard.SIGNATURE_DATA.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

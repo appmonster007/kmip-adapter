@@ -20,17 +20,17 @@ class KeyCompressionTypeTest extends AbstractKmipEnumerationTestSuite<KeyCompres
 
     @Override
     protected KeyCompressionType createDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
+        return KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED.inst();
     }
 
     @Override
     protected KeyCompressionType createEqualToDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
+        return KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED.inst();
     }
 
     @Override
     protected KeyCompressionType createDifferentFromDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME);
+        return KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME.inst();
     }
 
     @Override

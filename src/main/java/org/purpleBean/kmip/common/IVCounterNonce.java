@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class IVCounterNonce implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.IV_COUNTER_NONCE);
+    public static final KmipTag kmipTag = KmipTag.Standard.IV_COUNTER_NONCE.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.MaskGenerator;
 public class MaskGeneratorBenchmarkSubject extends KmipBenchmarkSubject<MaskGenerator> {
 
     public MaskGeneratorBenchmarkSubject() throws Exception {
-        MaskGenerator maskGenerator = new MaskGenerator(MaskGenerator.Standard.MFG1);
+        MaskGenerator maskGenerator = MaskGenerator.Standard.MFG1.inst();
         initialize(maskGenerator, MaskGenerator.class);
     }
 

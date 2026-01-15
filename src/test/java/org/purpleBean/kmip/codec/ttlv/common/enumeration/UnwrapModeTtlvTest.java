@@ -13,11 +13,11 @@ class UnwrapModeTtlvTest extends AbstractTtlvSerializationTestSuite<UnwrapMode> 
 
     @Override
     protected UnwrapMode createDefault() {
-        return new UnwrapMode(UnwrapMode.Standard.UNSPECIFIED);
+        return UnwrapMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected UnwrapMode createVariant() {
-        return new UnwrapMode(UnwrapMode.Standard.PROCESSED);
+        return UnwrapMode.Standard.PROCESSED.inst();
     }
 }

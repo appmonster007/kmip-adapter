@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.PutFunction;
 public class PutFunctionBenchmarkSubject extends KmipBenchmarkSubject<PutFunction> {
 
     public PutFunctionBenchmarkSubject() throws Exception {
-        PutFunction putFunction = new PutFunction(PutFunction.Standard.NEW);
+        PutFunction putFunction = PutFunction.Standard.NEW.inst();
         initialize(putFunction, PutFunction.class);
     }
 

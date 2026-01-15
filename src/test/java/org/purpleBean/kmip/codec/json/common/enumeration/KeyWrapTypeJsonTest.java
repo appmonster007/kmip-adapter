@@ -13,11 +13,11 @@ class KeyWrapTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyWrapType
 
     @Override
     protected KeyWrapType createDefault() {
-        return new KeyWrapType(KeyWrapType.Standard.NOT_WRAPPED);
+        return KeyWrapType.Standard.NOT_WRAPPED.inst();
     }
 
     @Override
     protected KeyWrapType createVariant() {
-        return new KeyWrapType(KeyWrapType.Standard.AS_REGISTERED);
+        return KeyWrapType.Standard.AS_REGISTERED.inst();
     }
 }

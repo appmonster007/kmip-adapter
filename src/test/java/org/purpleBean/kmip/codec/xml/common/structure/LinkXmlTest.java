@@ -17,7 +17,7 @@ class LinkXmlTest extends AbstractXmlSerializationTestSuite<Link> {
     @Override
     protected Link createDefault() {
         return Link.builder()
-                .linkType(new LinkType(LinkType.Standard.CERTIFICATE_LINK))
+                .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
                 .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
                 .build();
     }

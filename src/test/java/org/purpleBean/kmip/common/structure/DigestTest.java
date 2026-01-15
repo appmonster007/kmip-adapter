@@ -30,9 +30,9 @@ class DigestTest extends AbstractKmipStructureAttributeTestSuite<Digest> {
     @Override
     protected Digest createDefault() {
         return Digest.builder()
-                .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
+                .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
                 .digestValue(DigestValue.of(new byte[0]))
-                .keyFormatType(new KeyFormatType(KeyFormatType.Standard.PKCS_1))
+                .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
                 .build();
     }
 

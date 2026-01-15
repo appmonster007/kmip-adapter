@@ -13,11 +13,11 @@ class AlternativeNameTypeJsonTest extends AbstractJsonSerializationTestSuite<Alt
 
     @Override
     protected AlternativeNameType createDefault() {
-        return new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected AlternativeNameType createVariant() {
-        return new AlternativeNameType(AlternativeNameType.Standard.URI);
+        return AlternativeNameType.Standard.URI.inst();
     }
 }

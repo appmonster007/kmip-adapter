@@ -20,17 +20,17 @@ class ProfileNameTest extends AbstractKmipEnumerationTestSuite<ProfileName> {
 
     @Override
     protected ProfileName createDefault() {
-        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
+        return ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
     }
 
     @Override
     protected ProfileName createEqualToDefault() {
-        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
+        return ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
     }
 
     @Override
     protected ProfileName createDifferentFromDefault() {
-        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2);
+        return ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2.inst();
     }
 
     @Override

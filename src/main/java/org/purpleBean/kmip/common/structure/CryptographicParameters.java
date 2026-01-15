@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class CryptographicParameters implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS);
+    public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

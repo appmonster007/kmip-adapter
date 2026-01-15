@@ -13,11 +13,11 @@ class DestroyActionTtlvTest extends AbstractTtlvSerializationTestSuite<DestroyAc
 
     @Override
     protected DestroyAction createDefault() {
-        return new DestroyAction(DestroyAction.Standard.UNSPECIFIED);
+        return DestroyAction.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DestroyAction createVariant() {
-        return new DestroyAction(DestroyAction.Standard.KEY_MATERIAL_DELETED);
+        return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
     }
 }

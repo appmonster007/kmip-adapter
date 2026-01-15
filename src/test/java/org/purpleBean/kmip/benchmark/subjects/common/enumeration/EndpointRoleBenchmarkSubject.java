@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.EndpointRole;
 public class EndpointRoleBenchmarkSubject extends KmipBenchmarkSubject<EndpointRole> {
 
     public EndpointRoleBenchmarkSubject() throws Exception {
-        EndpointRole endpointRole = new EndpointRole(EndpointRole.Standard.CLIENT);
+        EndpointRole endpointRole = EndpointRole.Standard.CLIENT.inst();
         initialize(endpointRole, EndpointRole.class);
     }
 

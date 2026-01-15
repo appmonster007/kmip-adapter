@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.SecretDataType;
 public class SecretDataTypeBenchmarkSubject extends KmipBenchmarkSubject<SecretDataType> {
 
     public SecretDataTypeBenchmarkSubject() throws Exception {
-        SecretDataType secretDataType = new SecretDataType(SecretDataType.Standard.PASSWORD);
+        SecretDataType secretDataType = SecretDataType.Standard.PASSWORD.inst();
         initialize(secretDataType, SecretDataType.class);
     }
 

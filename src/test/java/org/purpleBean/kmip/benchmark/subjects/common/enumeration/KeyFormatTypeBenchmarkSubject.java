@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.KeyFormatType;
 public class KeyFormatTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyFormatType> {
 
     public KeyFormatTypeBenchmarkSubject() throws Exception {
-        KeyFormatType keyFormatType = new KeyFormatType(KeyFormatType.Standard.RAW);
+        KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
         initialize(keyFormatType, KeyFormatType.class);
     }
 

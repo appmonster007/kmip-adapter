@@ -23,7 +23,7 @@ class TransparentEcmqvPrivateKeyJsonTest extends AbstractJsonSerializationTestSu
     @Override
     protected TransparentEcmqvPrivateKey createDefault() {
         return TransparentEcmqvPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }
@@ -31,7 +31,7 @@ class TransparentEcmqvPrivateKeyJsonTest extends AbstractJsonSerializationTestSu
     @Override
     protected TransparentEcmqvPrivateKey createVariant() {
         return TransparentEcmqvPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))
         );
     }

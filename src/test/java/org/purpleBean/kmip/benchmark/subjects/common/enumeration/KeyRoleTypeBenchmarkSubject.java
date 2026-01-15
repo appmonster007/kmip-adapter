@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.KeyRoleType;
 public class KeyRoleTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyRoleType> {
 
     public KeyRoleTypeBenchmarkSubject() throws Exception {
-        KeyRoleType keyRoleType = new KeyRoleType(KeyRoleType.Standard.BDK);
+        KeyRoleType keyRoleType = KeyRoleType.Standard.BDK.inst();
         initialize(keyRoleType, KeyRoleType.class);
     }
 

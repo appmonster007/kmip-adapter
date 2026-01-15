@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.QueryFunction;
 public class QueryFunctionBenchmarkSubject extends KmipBenchmarkSubject<QueryFunction> {
 
     public QueryFunctionBenchmarkSubject() throws Exception {
-        QueryFunction queryFunction = new QueryFunction(QueryFunction.Standard.QUERY_SERVER_INFORMATION);
+        QueryFunction queryFunction = QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
         initialize(queryFunction, QueryFunction.class);
     }
 

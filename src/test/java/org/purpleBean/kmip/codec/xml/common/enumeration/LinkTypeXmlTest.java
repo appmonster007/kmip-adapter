@@ -19,6 +19,6 @@ class LinkTypeXmlTest extends AbstractXmlSerializationTestSuite<LinkType> {
 
     @Override
     protected LinkType createVariant() {
-        return new LinkType(LinkType.Standard.PUBLIC_KEY_LINK);
+        return LinkType.Standard.PUBLIC_KEY_LINK.inst();
     }
 }

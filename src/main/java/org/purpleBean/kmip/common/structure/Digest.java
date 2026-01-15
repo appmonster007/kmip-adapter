@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class Digest implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.DIGEST);
+    public static final KmipTag kmipTag = KmipTag.Standard.DIGEST.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

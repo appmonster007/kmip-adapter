@@ -13,11 +13,11 @@ class EphemeralTtlvTest extends AbstractTtlvSerializationTestSuite<Ephemeral> {
 
     @Override
     protected Ephemeral createDefault() {
-        return new Ephemeral(Ephemeral.Standard.DATA);
+        return Ephemeral.Standard.DATA.inst();
     }
 
     @Override
     protected Ephemeral createVariant() {
-        return new Ephemeral(Ephemeral.Standard.EMPTY);
+        return Ephemeral.Standard.EMPTY.inst();
     }
 }

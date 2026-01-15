@@ -20,17 +20,17 @@ class ValidityIndicatorTest extends AbstractKmipEnumerationTestSuite<ValidityInd
 
     @Override
     protected ValidityIndicator createDefault() {
-        return new ValidityIndicator(ValidityIndicator.Standard.VALID);
+        return ValidityIndicator.Standard.VALID.inst();
     }
 
     @Override
     protected ValidityIndicator createEqualToDefault() {
-        return new ValidityIndicator(ValidityIndicator.Standard.VALID);
+        return ValidityIndicator.Standard.VALID.inst();
     }
 
     @Override
     protected ValidityIndicator createDifferentFromDefault() {
-        return new ValidityIndicator(ValidityIndicator.Standard.INVALID);
+        return ValidityIndicator.Standard.INVALID.inst();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class LinkBenchmarkSubject extends KmipBenchmarkSubject<Link> {
 
     public LinkBenchmarkSubject() throws Exception {
         Link link = Link.builder()
-                .linkType(new LinkType(LinkType.Standard.CERTIFICATE_LINK))
+                .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
                 .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
                 .build();
         initialize(link, Link.class);

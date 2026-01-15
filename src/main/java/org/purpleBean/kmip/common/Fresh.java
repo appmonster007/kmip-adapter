@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class Fresh implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.FRESH);
+    public static final KmipTag kmipTag = KmipTag.Standard.FRESH.inst();
     public static final EncodingType encodingType = EncodingType.BOOLEAN;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

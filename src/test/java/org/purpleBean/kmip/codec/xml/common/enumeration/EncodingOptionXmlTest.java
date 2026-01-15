@@ -13,11 +13,11 @@ class EncodingOptionXmlTest extends AbstractXmlSerializationTestSuite<EncodingOp
 
     @Override
     protected EncodingOption createDefault() {
-        return new EncodingOption(EncodingOption.Standard.NO_ENCODING);
+        return EncodingOption.Standard.NO_ENCODING.inst();
     }
 
     @Override
     protected EncodingOption createVariant() {
-        return new EncodingOption(EncodingOption.Standard.TTLV_ENCODING);
+        return EncodingOption.Standard.TTLV_ENCODING.inst();
     }
 }

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.AsynchronousIndicator;
 public class AsynchronousIndicatorBenchmarkSubject extends KmipBenchmarkSubject<AsynchronousIndicator> {
 
     public AsynchronousIndicatorBenchmarkSubject() throws Exception {
-        AsynchronousIndicator asynchronousIndicator = new AsynchronousIndicator(AsynchronousIndicator.Standard.MANDATORY);
+        AsynchronousIndicator asynchronousIndicator = AsynchronousIndicator.Standard.MANDATORY.inst();
         initialize(asynchronousIndicator, AsynchronousIndicator.class);
     }
 

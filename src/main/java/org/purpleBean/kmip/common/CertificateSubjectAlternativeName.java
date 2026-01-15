@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class CertificateSubjectAlternativeName implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_SUBJECT_ALTERNATIVE_NAME);
+    public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE_SUBJECT_ALTERNATIVE_NAME.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
 

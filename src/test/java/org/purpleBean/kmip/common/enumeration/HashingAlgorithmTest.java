@@ -20,17 +20,17 @@ class HashingAlgorithmTest extends AbstractKmipEnumerationTestSuite<HashingAlgor
 
     @Override
     protected HashingAlgorithm createDefault() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.MD5);
+        return HashingAlgorithm.Standard.MD5.inst();
     }
 
     @Override
     protected HashingAlgorithm createEqualToDefault() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.MD5);
+        return HashingAlgorithm.Standard.MD5.inst();
     }
 
     @Override
     protected HashingAlgorithm createDifferentFromDefault() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.SHA_1);
+        return HashingAlgorithm.Standard.SHA_1.inst();
     }
 
     @Override

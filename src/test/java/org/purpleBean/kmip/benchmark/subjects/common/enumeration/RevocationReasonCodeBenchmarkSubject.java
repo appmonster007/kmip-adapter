@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.RevocationReasonCode;
 public class RevocationReasonCodeBenchmarkSubject extends KmipBenchmarkSubject<RevocationReasonCode> {
 
     public RevocationReasonCodeBenchmarkSubject() throws Exception {
-        RevocationReasonCode revocationReasonCode = new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);
+        RevocationReasonCode revocationReasonCode = RevocationReasonCode.Standard.KEY_COMPROMISE.inst();
         initialize(revocationReasonCode, RevocationReasonCode.class);
     }
 

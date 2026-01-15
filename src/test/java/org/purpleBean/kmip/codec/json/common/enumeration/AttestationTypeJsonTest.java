@@ -13,11 +13,11 @@ class AttestationTypeJsonTest extends AbstractJsonSerializationTestSuite<Attesta
 
     @Override
     protected AttestationType createDefault() {
-        return new AttestationType(AttestationType.Standard.TPM_QUOTE);
+        return AttestationType.Standard.TPM_QUOTE.inst();
     }
 
     @Override
     protected AttestationType createVariant() {
-        return new AttestationType(AttestationType.Standard.TCG_INTEGRITY_REPORT);
+        return AttestationType.Standard.TCG_INTEGRITY_REPORT.inst();
     }
 }

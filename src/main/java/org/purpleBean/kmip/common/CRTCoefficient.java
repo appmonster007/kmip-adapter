@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class CRTCoefficient implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRT_COEFFICIENT);
+    public static final KmipTag kmipTag = KmipTag.Standard.CRT_COEFFICIENT.inst();
     public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

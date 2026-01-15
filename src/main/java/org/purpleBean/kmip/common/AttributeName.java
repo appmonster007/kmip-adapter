@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class AttributeName implements KmipDataType {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE_NAME);
+    public static final KmipTag kmipTag = KmipTag.Standard.ATTRIBUTE_NAME.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

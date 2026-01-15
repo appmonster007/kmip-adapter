@@ -13,11 +13,11 @@ class RngModeXmlTest extends AbstractXmlSerializationTestSuite<RngMode> {
 
     @Override
     protected RngMode createDefault() {
-        return new RngMode(RngMode.Standard.UNSPECIFIED);
+        return RngMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngMode createVariant() {
-        return new RngMode(RngMode.Standard.SHARED_INSTANTIATION);
+        return RngMode.Standard.SHARED_INSTANTIATION.inst();
     }
 }

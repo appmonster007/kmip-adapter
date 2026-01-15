@@ -20,17 +20,17 @@ class RevocationReasonCodeTest extends AbstractKmipEnumerationTestSuite<Revocati
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
+        return RevocationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RevocationReasonCode createEqualToDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
+        return RevocationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RevocationReasonCode createDifferentFromDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);
+        return RevocationReasonCode.Standard.KEY_COMPROMISE.inst();
     }
 
     @Override

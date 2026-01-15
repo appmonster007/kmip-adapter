@@ -16,7 +16,7 @@ class TicketTypeTtlvTest extends AbstractTtlvSerializationTestSuite<TicketType> 
 
     @Override
     protected TicketType createDefault() {
-        return new TicketType(TicketType.Standard.LOGIN);
+        return TicketType.Standard.LOGIN.inst();
     }
 
     @Override

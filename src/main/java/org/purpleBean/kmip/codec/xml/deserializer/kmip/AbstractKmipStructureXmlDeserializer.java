@@ -46,7 +46,7 @@ public abstract class AbstractKmipStructureXmlDeserializer<T extends KmipDataTyp
 
         while (p.nextToken() != null && p.currentToken() != JsonToken.END_OBJECT) {
             String fieldName = p.currentName();
-            KmipTag.Value nodeTag = KmipTag.fromName(spec, fieldName);
+            KmipTag.Value nodeTag = KmipTag.fromName(fieldName);
             ctxt.setAttribute("tag", p.currentName());
             if (p.currentToken() == JsonToken.START_OBJECT) {
                 p.nextToken();

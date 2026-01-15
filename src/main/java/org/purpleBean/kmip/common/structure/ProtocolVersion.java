@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class ProtocolVersion implements KmipStructure {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION);
+    public static final KmipTag kmipTag = KmipTag.Standard.PROTOCOL_VERSION.inst();
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.values());
 

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.RngAlgorithm;
 public class RngAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<RngAlgorithm> {
 
     public RngAlgorithmBenchmarkSubject() throws Exception {
-        RngAlgorithm rngAlgorithm = new RngAlgorithm(RngAlgorithm.Standard.UNSPECIFIED);
+        RngAlgorithm rngAlgorithm = RngAlgorithm.Standard.UNSPECIFIED.inst();
         initialize(rngAlgorithm, RngAlgorithm.class);
     }
 

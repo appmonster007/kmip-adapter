@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.KeyCompressionType;
 public class KeyCompressionTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyCompressionType> {
 
     public KeyCompressionTypeBenchmarkSubject() throws Exception {
-        KeyCompressionType keyCompressionType = new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
+        KeyCompressionType keyCompressionType = KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED.inst();
         initialize(keyCompressionType, KeyCompressionType.class);
     }
 

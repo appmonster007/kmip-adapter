@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ProtectionLevel;
 public class ProtectionLevelBenchmarkSubject extends KmipBenchmarkSubject<ProtectionLevel> {
 
     public ProtectionLevelBenchmarkSubject() throws Exception {
-        ProtectionLevel protectionLevel = new ProtectionLevel(ProtectionLevel.Standard.HIGH);
+        ProtectionLevel protectionLevel = ProtectionLevel.Standard.HIGH.inst();
         initialize(protectionLevel, ProtectionLevel.class);
     }
 

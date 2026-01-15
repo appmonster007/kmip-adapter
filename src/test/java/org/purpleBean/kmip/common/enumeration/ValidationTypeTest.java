@@ -20,17 +20,17 @@ class ValidationTypeTest extends AbstractKmipEnumerationTestSuite<ValidationType
 
     @Override
     protected ValidationType createDefault() {
-        return new ValidationType(ValidationType.Standard.UNSPECIFIED);
+        return ValidationType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ValidationType createEqualToDefault() {
-        return new ValidationType(ValidationType.Standard.UNSPECIFIED);
+        return ValidationType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ValidationType createDifferentFromDefault() {
-        return new ValidationType(ValidationType.Standard.HARDWARE);
+        return ValidationType.Standard.HARDWARE.inst();
     }
 
     @Override

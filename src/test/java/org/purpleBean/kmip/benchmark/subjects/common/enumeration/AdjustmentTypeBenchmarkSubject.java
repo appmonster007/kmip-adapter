@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.AdjustmentType;
 public class AdjustmentTypeBenchmarkSubject extends KmipBenchmarkSubject<AdjustmentType> {
 
     public AdjustmentTypeBenchmarkSubject() throws Exception {
-        AdjustmentType adjustmentType = new AdjustmentType(AdjustmentType.Standard.INCREMENT);
+        AdjustmentType adjustmentType = AdjustmentType.Standard.INCREMENT.inst();
         initialize(adjustmentType, AdjustmentType.class);
     }
 

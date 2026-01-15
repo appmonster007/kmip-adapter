@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class ApplicationSpecificInformation implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.APPLICATION_SPECIFIC_INFORMATION);
+    public static final KmipTag kmipTag = KmipTag.Standard.APPLICATION_SPECIFIC_INFORMATION.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

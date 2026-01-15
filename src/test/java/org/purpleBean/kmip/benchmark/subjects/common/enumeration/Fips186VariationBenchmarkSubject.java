@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.Fips186Variation;
 public class Fips186VariationBenchmarkSubject extends KmipBenchmarkSubject<Fips186Variation> {
 
     public Fips186VariationBenchmarkSubject() throws Exception {
-        Fips186Variation fips186Variation = new Fips186Variation(Fips186Variation.Standard.UNSPECIFIED);
+        Fips186Variation fips186Variation = Fips186Variation.Standard.UNSPECIFIED.inst();
         initialize(fips186Variation, Fips186Variation.class);
     }
 

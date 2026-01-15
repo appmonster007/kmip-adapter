@@ -22,7 +22,7 @@ class TransparentEcmqvPublicKeyXmlTest extends AbstractXmlSerializationTestSuite
     @Override
     protected TransparentEcmqvPublicKey createDefault() {
         return TransparentEcmqvPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
         );
     }
@@ -30,7 +30,7 @@ class TransparentEcmqvPublicKeyXmlTest extends AbstractXmlSerializationTestSuite
     @Override
     protected TransparentEcmqvPublicKey createVariant() {
         return TransparentEcmqvPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                RecommendedCurve.Standard.P_224.inst(),
                 QString.of("test2".getBytes())
         );
     }

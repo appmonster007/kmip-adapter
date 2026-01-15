@@ -20,17 +20,17 @@ class Fips186VariationTest extends AbstractKmipEnumerationTestSuite<Fips186Varia
 
     @Override
     protected Fips186Variation createDefault() {
-        return new Fips186Variation(Fips186Variation.Standard.UNSPECIFIED);
+        return Fips186Variation.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected Fips186Variation createEqualToDefault() {
-        return new Fips186Variation(Fips186Variation.Standard.UNSPECIFIED);
+        return Fips186Variation.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected Fips186Variation createDifferentFromDefault() {
-        return new Fips186Variation(Fips186Variation.Standard.GP_X_ORIGINAL);
+        return Fips186Variation.Standard.GP_X_ORIGINAL.inst();
     }
 
     @Override

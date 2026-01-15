@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.TicketType;
 public class TicketTypeBenchmarkSubject extends KmipBenchmarkSubject<TicketType> {
 
     public TicketTypeBenchmarkSubject() throws Exception {
-        TicketType ticketType = new TicketType(TicketType.Standard.LOGIN);
+        TicketType ticketType = TicketType.Standard.LOGIN.inst();
         initialize(ticketType, TicketType.class);
     }
 

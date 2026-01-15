@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.RotateNameType;
 public class RotateNameTypeBenchmarkSubject extends KmipBenchmarkSubject<RotateNameType> {
 
     public RotateNameTypeBenchmarkSubject() throws Exception {
-        RotateNameType rotateNameType = new RotateNameType(RotateNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        RotateNameType rotateNameType = RotateNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
         initialize(rotateNameType, RotateNameType.class);
     }
 

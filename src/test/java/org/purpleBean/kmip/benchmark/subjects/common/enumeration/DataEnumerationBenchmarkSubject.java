@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DataEnumeration;
 public class DataEnumerationBenchmarkSubject extends KmipBenchmarkSubject<DataEnumeration> {
 
     public DataEnumerationBenchmarkSubject() throws Exception {
-        DataEnumeration dataEnumeration = new DataEnumeration(DataEnumeration.Standard.DECRYPT);
+        DataEnumeration dataEnumeration = DataEnumeration.Standard.DECRYPT.inst();
         initialize(dataEnumeration, DataEnumeration.class);
     }
 

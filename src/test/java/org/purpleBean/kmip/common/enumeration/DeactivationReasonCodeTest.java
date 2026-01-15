@@ -20,17 +20,17 @@ class DeactivationReasonCodeTest extends AbstractKmipEnumerationTestSuite<Deacti
 
     @Override
     protected DeactivationReasonCode createDefault() {
-        return new DeactivationReasonCode(DeactivationReasonCode.Standard.UNSPECIFIED);
+        return DeactivationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DeactivationReasonCode createEqualToDefault() {
-        return new DeactivationReasonCode(DeactivationReasonCode.Standard.UNSPECIFIED);
+        return DeactivationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DeactivationReasonCode createDifferentFromDefault() {
-        return new DeactivationReasonCode(DeactivationReasonCode.Standard.DEACTIVATION_DATE);
+        return DeactivationReasonCode.Standard.DEACTIVATION_DATE.inst();
     }
 
     @Override

@@ -13,11 +13,11 @@ class ProcessingStageXmlTest extends AbstractXmlSerializationTestSuite<Processin
 
     @Override
     protected ProcessingStage createDefault() {
-        return new ProcessingStage(ProcessingStage.Standard.SUBMITTED);
+        return ProcessingStage.Standard.SUBMITTED.inst();
     }
 
     @Override
     protected ProcessingStage createVariant() {
-        return new ProcessingStage(ProcessingStage.Standard.IN_PROCESS);
+        return ProcessingStage.Standard.IN_PROCESS.inst();
     }
 }

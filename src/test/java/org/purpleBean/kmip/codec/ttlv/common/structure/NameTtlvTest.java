@@ -23,7 +23,7 @@ class NameTtlvTest extends AbstractTtlvSerializationTestSuite<Name> {
     protected Name createDefault() {
         return Name.builder()
                 .nameValue(NameValue.of("some-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .nameType(NameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .build();
     }
 
@@ -31,7 +31,7 @@ class NameTtlvTest extends AbstractTtlvSerializationTestSuite<Name> {
     protected Name createVariant() {
         return Name.builder()
                 .nameValue(NameValue.of("some-variant-name"))
-                .nameType(new NameType(NameType.Standard.URI))
+                .nameType(NameType.Standard.URI.inst())
                 .build();
     }
 }

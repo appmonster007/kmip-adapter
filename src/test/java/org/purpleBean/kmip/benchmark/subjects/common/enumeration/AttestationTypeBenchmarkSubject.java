@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.AttestationType;
 public class AttestationTypeBenchmarkSubject extends KmipBenchmarkSubject<AttestationType> {
 
     public AttestationTypeBenchmarkSubject() throws Exception {
-        AttestationType attestationType = new AttestationType(AttestationType.Standard.TPM_QUOTE);
+        AttestationType attestationType = AttestationType.Standard.TPM_QUOTE.inst();
         initialize(attestationType, AttestationType.class);
     }
 

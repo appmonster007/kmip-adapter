@@ -20,17 +20,17 @@ class DestroyActionTest extends AbstractKmipEnumerationTestSuite<DestroyAction> 
 
     @Override
     protected DestroyAction createDefault() {
-        return new DestroyAction(DestroyAction.Standard.UNSPECIFIED);
+        return DestroyAction.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DestroyAction createEqualToDefault() {
-        return new DestroyAction(DestroyAction.Standard.UNSPECIFIED);
+        return DestroyAction.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DestroyAction createDifferentFromDefault() {
-        return new DestroyAction(DestroyAction.Standard.KEY_MATERIAL_DELETED);
+        return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
     }
 
     @Override

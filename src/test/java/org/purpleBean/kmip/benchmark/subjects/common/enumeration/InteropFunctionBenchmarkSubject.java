@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.InteropFunction;
 public class InteropFunctionBenchmarkSubject extends KmipBenchmarkSubject<InteropFunction> {
 
     public InteropFunctionBenchmarkSubject() throws Exception {
-        InteropFunction interopFunction = new InteropFunction(InteropFunction.Standard.BEGIN);
+        InteropFunction interopFunction = InteropFunction.Standard.BEGIN.inst();
         initialize(interopFunction, InteropFunction.class);
     }
 

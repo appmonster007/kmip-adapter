@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.AlternativeNameType;
 public class AlternativeNameTypeBenchmarkSubject extends KmipBenchmarkSubject<AlternativeNameType> {
 
     public AlternativeNameTypeBenchmarkSubject() throws Exception {
-        AlternativeNameType alternativeNameType = new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        AlternativeNameType alternativeNameType = AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
         initialize(alternativeNameType, AlternativeNameType.class);
     }
 

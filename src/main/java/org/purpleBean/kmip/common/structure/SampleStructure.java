@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class SampleStructure implements KmipStructure {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.P);
+    public static final KmipTag kmipTag = KmipTag.Standard.P.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {

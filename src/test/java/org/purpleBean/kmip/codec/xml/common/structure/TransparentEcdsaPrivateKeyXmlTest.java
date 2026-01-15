@@ -23,7 +23,7 @@ class TransparentEcdsaPrivateKeyXmlTest extends AbstractXmlSerializationTestSuit
     @Override
     protected TransparentEcdsaPrivateKey createDefault() {
         return TransparentEcdsaPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }
@@ -31,7 +31,7 @@ class TransparentEcdsaPrivateKeyXmlTest extends AbstractXmlSerializationTestSuit
     @Override
     protected TransparentEcdsaPrivateKey createVariant() {
         return TransparentEcdsaPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))
         );
     }

@@ -13,11 +13,11 @@ class CancellationResultTtlvTest extends AbstractTtlvSerializationTestSuite<Canc
 
     @Override
     protected CancellationResult createDefault() {
-        return new CancellationResult(CancellationResult.Standard.CANCELED);
+        return CancellationResult.Standard.CANCELED.inst();
     }
 
     @Override
     protected CancellationResult createVariant() {
-        return new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);
+        return CancellationResult.Standard.UNABLE_TO_CANCEL.inst();
     }
 }

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.BlockCipherMode;
 public class BlockCipherModeBenchmarkSubject extends KmipBenchmarkSubject<BlockCipherMode> {
 
     public BlockCipherModeBenchmarkSubject() throws Exception {
-        BlockCipherMode blockCipherMode = new BlockCipherMode(BlockCipherMode.Standard.CBC);
+        BlockCipherMode blockCipherMode = BlockCipherMode.Standard.CBC.inst();
         initialize(blockCipherMode, BlockCipherMode.class);
     }
 

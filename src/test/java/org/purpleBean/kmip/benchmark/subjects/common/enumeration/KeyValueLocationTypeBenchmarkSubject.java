@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.KeyValueLocationType;
 public class KeyValueLocationTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyValueLocationType> {
 
     public KeyValueLocationTypeBenchmarkSubject() throws Exception {
-        KeyValueLocationType keyValueLocationType = new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING);
+        KeyValueLocationType keyValueLocationType = KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING.inst();
         initialize(keyValueLocationType, KeyValueLocationType.class);
     }
 

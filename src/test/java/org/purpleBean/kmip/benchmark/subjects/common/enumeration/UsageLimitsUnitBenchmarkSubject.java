@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.UsageLimitsUnit;
 public class UsageLimitsUnitBenchmarkSubject extends KmipBenchmarkSubject<UsageLimitsUnit> {
 
     public UsageLimitsUnitBenchmarkSubject() throws Exception {
-        UsageLimitsUnit usageLimitsUnit = new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE);
+        UsageLimitsUnit usageLimitsUnit = UsageLimitsUnit.Standard.BYTE.inst();
         initialize(usageLimitsUnit, UsageLimitsUnit.class);
     }
 

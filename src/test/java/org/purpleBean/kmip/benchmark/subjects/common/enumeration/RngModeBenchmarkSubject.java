@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.RngMode;
 public class RngModeBenchmarkSubject extends KmipBenchmarkSubject<RngMode> {
 
     public RngModeBenchmarkSubject() throws Exception {
-        RngMode rngMode = new RngMode(RngMode.Standard.UNSPECIFIED);
+        RngMode rngMode = RngMode.Standard.UNSPECIFIED.inst();
         initialize(rngMode, RngMode.class);
     }
 

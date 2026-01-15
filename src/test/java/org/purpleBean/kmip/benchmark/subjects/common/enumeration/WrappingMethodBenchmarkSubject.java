@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.WrappingMethod;
 public class WrappingMethodBenchmarkSubject extends KmipBenchmarkSubject<WrappingMethod> {
 
     public WrappingMethodBenchmarkSubject() throws Exception {
-        WrappingMethod wrappingMethod = new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
+        WrappingMethod wrappingMethod = WrappingMethod.Standard.ENCRYPT.inst();
         initialize(wrappingMethod, WrappingMethod.class);
     }
 

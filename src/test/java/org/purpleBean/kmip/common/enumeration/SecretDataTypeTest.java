@@ -20,17 +20,17 @@ class SecretDataTypeTest extends AbstractKmipEnumerationTestSuite<SecretDataType
 
     @Override
     protected SecretDataType createDefault() {
-        return new SecretDataType(SecretDataType.Standard.PASSWORD);
+        return SecretDataType.Standard.PASSWORD.inst();
     }
 
     @Override
     protected SecretDataType createEqualToDefault() {
-        return new SecretDataType(SecretDataType.Standard.PASSWORD);
+        return SecretDataType.Standard.PASSWORD.inst();
     }
 
     @Override
     protected SecretDataType createDifferentFromDefault() {
-        return new SecretDataType(SecretDataType.Standard.SEED);
+        return SecretDataType.Standard.SEED.inst();
     }
 
     @Override

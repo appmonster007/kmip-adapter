@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.NistKeyType;
 public class NistKeyTypeBenchmarkSubject extends KmipBenchmarkSubject<NistKeyType> {
 
     public NistKeyTypeBenchmarkSubject() throws Exception {
-        NistKeyType nistKeyType = new NistKeyType(NistKeyType.Standard.PRIVATE_SIGNATURE_KEY);
+        NistKeyType nistKeyType = NistKeyType.Standard.PRIVATE_SIGNATURE_KEY.inst();
         initialize(nistKeyType, NistKeyType.class);
     }
 

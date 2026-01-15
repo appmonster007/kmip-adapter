@@ -29,7 +29,7 @@ class LinkTest extends AbstractKmipStructureAttributeTestSuite<Link> {
     @Override
     protected Link createDefault() {
         return Link.of(
-                new LinkType(LinkType.Standard.CERTIFICATE_LINK),
+                LinkType.Standard.CERTIFICATE_LINK.inst(),
                 LinkedObjectIdentifier.of("some-id")
         );
     }

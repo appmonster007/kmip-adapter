@@ -13,11 +13,11 @@ class CredentialTypeTtlvTest extends AbstractTtlvSerializationTestSuite<Credenti
 
     @Override
     protected CredentialType createDefault() {
-        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
+        return CredentialType.Standard.USERNAME_AND_PASSWORD.inst();
     }
 
     @Override
     protected CredentialType createVariant() {
-        return new CredentialType(CredentialType.Standard.DEVICE);
+        return CredentialType.Standard.DEVICE.inst();
     }
 }

@@ -13,11 +13,11 @@ class CryptographicAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<Cr
 
     @Override
     protected CryptographicAlgorithm createDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
+        return CryptographicAlgorithm.Standard.DES.inst();
     }
 
     @Override
     protected CryptographicAlgorithm createVariant() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.TRIPLE_DES);
+        return CryptographicAlgorithm.Standard.TRIPLE_DES.inst();
     }
 }

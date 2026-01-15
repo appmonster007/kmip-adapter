@@ -13,11 +13,11 @@ class WrappingMethodXmlTest extends AbstractXmlSerializationTestSuite<WrappingMe
 
     @Override
     protected WrappingMethod createDefault() {
-        return new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
+        return WrappingMethod.Standard.ENCRYPT.inst();
     }
 
     @Override
     protected WrappingMethod createVariant() {
-        return new WrappingMethod(WrappingMethod.Standard.MAC_SIGN);
+        return WrappingMethod.Standard.MAC_SIGN.inst();
     }
 }

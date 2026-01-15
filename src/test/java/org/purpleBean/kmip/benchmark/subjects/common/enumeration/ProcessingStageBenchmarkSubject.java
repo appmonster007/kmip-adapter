@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ProcessingStage;
 public class ProcessingStageBenchmarkSubject extends KmipBenchmarkSubject<ProcessingStage> {
 
     public ProcessingStageBenchmarkSubject() throws Exception {
-        ProcessingStage processingStage = new ProcessingStage(ProcessingStage.Standard.SUBMITTED);
+        ProcessingStage processingStage = ProcessingStage.Standard.SUBMITTED.inst();
         initialize(processingStage, ProcessingStage.class);
     }
 

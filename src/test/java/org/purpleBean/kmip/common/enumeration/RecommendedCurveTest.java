@@ -20,17 +20,17 @@ class RecommendedCurveTest extends AbstractKmipEnumerationTestSuite<RecommendedC
 
     @Override
     protected RecommendedCurve createDefault() {
-        return new RecommendedCurve(RecommendedCurve.Standard.P_192);
+        return RecommendedCurve.Standard.P_192.inst();
     }
 
     @Override
     protected RecommendedCurve createEqualToDefault() {
-        return new RecommendedCurve(RecommendedCurve.Standard.P_192);
+        return RecommendedCurve.Standard.P_192.inst();
     }
 
     @Override
     protected RecommendedCurve createDifferentFromDefault() {
-        return new RecommendedCurve(RecommendedCurve.Standard.K_163);
+        return RecommendedCurve.Standard.K_163.inst();
     }
 
     @Override

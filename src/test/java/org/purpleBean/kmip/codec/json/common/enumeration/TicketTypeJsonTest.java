@@ -16,7 +16,7 @@ class TicketTypeJsonTest extends AbstractJsonSerializationTestSuite<TicketType> 
 
     @Override
     protected TicketType createDefault() {
-        return new TicketType(TicketType.Standard.LOGIN);
+        return TicketType.Standard.LOGIN.inst();
     }
 
     @Override

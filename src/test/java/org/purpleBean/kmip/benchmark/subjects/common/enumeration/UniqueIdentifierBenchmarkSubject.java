@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.UniqueIdentifier;
 public class UniqueIdentifierBenchmarkSubject extends KmipBenchmarkSubject<UniqueIdentifier> {
 
     public UniqueIdentifierBenchmarkSubject() throws Exception {
-        UniqueIdentifier uniqueIdentifier = new UniqueIdentifier(UniqueIdentifier.Standard.ID_PLACEHOLDER);
+        UniqueIdentifier uniqueIdentifier = UniqueIdentifier.Standard.ID_PLACEHOLDER.inst();
         initialize(uniqueIdentifier, UniqueIdentifier.class);
     }
 

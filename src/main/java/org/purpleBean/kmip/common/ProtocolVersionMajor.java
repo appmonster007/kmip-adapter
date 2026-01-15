@@ -3,14 +3,17 @@ package org.purpleBean.kmip.common;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipSpec;
+import org.purpleBean.kmip.KmipTag;
 
 import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
 public class ProtocolVersionMajor implements KmipDataType {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTOCOL_VERSION_MAJOR);
+    public static final KmipTag kmipTag = KmipTag.Standard.PROTOCOL_VERSION_MAJOR.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.values());
 

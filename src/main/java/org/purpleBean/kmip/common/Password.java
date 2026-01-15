@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class Password implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PASSWORD);
+    public static final KmipTag kmipTag = KmipTag.Standard.PASSWORD.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

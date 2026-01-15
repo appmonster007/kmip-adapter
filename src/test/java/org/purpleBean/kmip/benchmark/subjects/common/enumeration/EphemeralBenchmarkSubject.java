@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.Ephemeral;
 public class EphemeralBenchmarkSubject extends KmipBenchmarkSubject<Ephemeral> {
 
     public EphemeralBenchmarkSubject() throws Exception {
-        Ephemeral ephemeral = new Ephemeral(Ephemeral.Standard.DATA);
+        Ephemeral ephemeral = Ephemeral.Standard.DATA.inst();
         initialize(ephemeral, Ephemeral.class);
     }
 

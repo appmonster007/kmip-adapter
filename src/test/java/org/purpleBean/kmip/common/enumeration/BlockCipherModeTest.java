@@ -20,17 +20,17 @@ class BlockCipherModeTest extends AbstractKmipEnumerationTestSuite<BlockCipherMo
 
     @Override
     protected BlockCipherMode createDefault() {
-        return new BlockCipherMode(BlockCipherMode.Standard.CBC);
+        return BlockCipherMode.Standard.CBC.inst();
     }
 
     @Override
     protected BlockCipherMode createEqualToDefault() {
-        return new BlockCipherMode(BlockCipherMode.Standard.CBC);
+        return BlockCipherMode.Standard.CBC.inst();
     }
 
     @Override
     protected BlockCipherMode createDifferentFromDefault() {
-        return new BlockCipherMode(BlockCipherMode.Standard.ECB);
+        return BlockCipherMode.Standard.ECB.inst();
     }
 
     @Override

@@ -13,11 +13,11 @@ class ClientRegistrationMethodJsonTest extends AbstractJsonSerializationTestSuit
 
     @Override
     protected ClientRegistrationMethod createDefault() {
-        return new ClientRegistrationMethod(ClientRegistrationMethod.Standard.UNSPECIFIED);
+        return ClientRegistrationMethod.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ClientRegistrationMethod createVariant() {
-        return new ClientRegistrationMethod(ClientRegistrationMethod.Standard.SERVER_PRE_GENERATED);
+        return ClientRegistrationMethod.Standard.SERVER_PRE_GENERATED.inst();
     }
 }

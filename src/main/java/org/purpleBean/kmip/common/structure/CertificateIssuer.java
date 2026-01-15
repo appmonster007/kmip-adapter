@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class CertificateIssuer implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_ISSUER);
+    public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE_ISSUER.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
 
     static {

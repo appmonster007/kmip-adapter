@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.KeyWrapType;
 public class KeyWrapTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyWrapType> {
 
     public KeyWrapTypeBenchmarkSubject() throws Exception {
-        KeyWrapType keyWrapType = new KeyWrapType(KeyWrapType.Standard.NOT_WRAPPED);
+        KeyWrapType keyWrapType = KeyWrapType.Standard.NOT_WRAPPED.inst();
         initialize(keyWrapType, KeyWrapType.class);
     }
 

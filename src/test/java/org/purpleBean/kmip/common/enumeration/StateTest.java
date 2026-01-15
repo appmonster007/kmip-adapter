@@ -20,17 +20,17 @@ class StateTest extends AbstractKmipEnumerationTestSuite<State> {
 
     @Override
     protected State createDefault() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State createEqualToDefault() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State createDifferentFromDefault() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override

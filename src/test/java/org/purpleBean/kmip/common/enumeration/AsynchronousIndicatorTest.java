@@ -20,17 +20,17 @@ class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<Asynchr
 
     @Override
     protected AsynchronousIndicator createDefault() {
-        return new AsynchronousIndicator(AsynchronousIndicator.Standard.MANDATORY);
+        return AsynchronousIndicator.Standard.MANDATORY.inst();
     }
 
     @Override
     protected AsynchronousIndicator createEqualToDefault() {
-        return new AsynchronousIndicator(AsynchronousIndicator.Standard.MANDATORY);
+        return AsynchronousIndicator.Standard.MANDATORY.inst();
     }
 
     @Override
     protected AsynchronousIndicator createDifferentFromDefault() {
-        return new AsynchronousIndicator(AsynchronousIndicator.Standard.OPTIONAL);
+        return AsynchronousIndicator.Standard.OPTIONAL.inst();
     }
 
     @Override

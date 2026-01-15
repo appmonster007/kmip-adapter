@@ -20,17 +20,17 @@ class DrbgAlgorithmTest extends AbstractKmipEnumerationTestSuite<DrbgAlgorithm> 
 
     @Override
     protected DrbgAlgorithm createDefault() {
-        return new DrbgAlgorithm(DrbgAlgorithm.Standard.UNSPECIFIED);
+        return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DrbgAlgorithm createEqualToDefault() {
-        return new DrbgAlgorithm(DrbgAlgorithm.Standard.UNSPECIFIED);
+        return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DrbgAlgorithm createDifferentFromDefault() {
-        return new DrbgAlgorithm(DrbgAlgorithm.Standard.DUAL_EC);
+        return DrbgAlgorithm.Standard.DUAL_EC.inst();
     }
 
     @Override

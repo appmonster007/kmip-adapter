@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class CertificateIdentifier implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CERTIFICATE_IDENTIFIER);
+    public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE_IDENTIFIER.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
 
     static {

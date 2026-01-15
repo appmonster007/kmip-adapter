@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.X_509_CERTIFICATE_IDENTIFIER);
+    public static final KmipTag kmipTag = KmipTag.Standard.X_509_CERTIFICATE_IDENTIFIER.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

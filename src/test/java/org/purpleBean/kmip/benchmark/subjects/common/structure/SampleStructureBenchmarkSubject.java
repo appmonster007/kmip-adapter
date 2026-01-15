@@ -14,7 +14,7 @@ public class SampleStructureBenchmarkSubject extends KmipBenchmarkSubject<Sample
     public SampleStructureBenchmarkSubject() throws Exception {
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
-        State state = new State(State.Standard.ACTIVE);
+        State state = State.Standard.ACTIVE.inst();
         SampleStructure sampleStructure = SampleStructure.builder()
                 .activationDate(activationDate)
                 .state(state)

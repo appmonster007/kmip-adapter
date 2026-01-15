@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class AlternativeName implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME);
+    public static final KmipTag kmipTag = KmipTag.Standard.ALTERNATIVE_NAME.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

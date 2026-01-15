@@ -11,7 +11,7 @@ public class CryptographicDomainParametersBenchmarkSubject extends KmipBenchmark
     public CryptographicDomainParametersBenchmarkSubject() throws Exception {
         CryptographicDomainParameters cryptographicDomainParameters = CryptographicDomainParameters.builder()
                 .qlength(Qlength.of(256))
-                .recommendedCurve(new RecommendedCurve(RecommendedCurve.Standard.P_256))
+                .recommendedCurve(RecommendedCurve.Standard.P_256.inst())
                 .build();
         initialize(cryptographicDomainParameters, CryptographicDomainParameters.class);
     }

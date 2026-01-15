@@ -13,11 +13,11 @@ class RngAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<RngAlgorit
 
     @Override
     protected RngAlgorithm createDefault() {
-        return new RngAlgorithm(RngAlgorithm.Standard.UNSPECIFIED);
+        return RngAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngAlgorithm createVariant() {
-        return new RngAlgorithm(RngAlgorithm.Standard.FIPS_186_2);
+        return RngAlgorithm.Standard.FIPS_186_2.inst();
     }
 }

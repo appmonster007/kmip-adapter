@@ -20,17 +20,17 @@ class BatchErrorContinuationOptionTest extends AbstractKmipEnumerationTestSuite<
 
     @Override
     protected BatchErrorContinuationOption createDefault() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);
+        return BatchErrorContinuationOption.Standard.CONTINUE.inst();
     }
 
     @Override
     protected BatchErrorContinuationOption createEqualToDefault() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);
+        return BatchErrorContinuationOption.Standard.CONTINUE.inst();
     }
 
     @Override
     protected BatchErrorContinuationOption createDifferentFromDefault() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.STOP);
+        return BatchErrorContinuationOption.Standard.STOP.inst();
     }
 
     @Override

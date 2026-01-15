@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class Key implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY);
+    public static final KmipTag kmipTag = KmipTag.Standard.KEY.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

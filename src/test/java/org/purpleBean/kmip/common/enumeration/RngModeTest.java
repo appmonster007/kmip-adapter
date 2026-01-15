@@ -20,17 +20,17 @@ class RngModeTest extends AbstractKmipEnumerationTestSuite<RngMode> {
 
     @Override
     protected RngMode createDefault() {
-        return new RngMode(RngMode.Standard.UNSPECIFIED);
+        return RngMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngMode createEqualToDefault() {
-        return new RngMode(RngMode.Standard.UNSPECIFIED);
+        return RngMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngMode createDifferentFromDefault() {
-        return new RngMode(RngMode.Standard.SHARED_INSTANTIATION);
+        return RngMode.Standard.SHARED_INSTANTIATION.inst();
     }
 
     @Override

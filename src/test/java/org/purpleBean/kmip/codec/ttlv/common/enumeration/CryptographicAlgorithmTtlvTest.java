@@ -13,11 +13,11 @@ class CryptographicAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<
 
     @Override
     protected CryptographicAlgorithm createDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.AES);
+        return CryptographicAlgorithm.Standard.AES.inst();
     }
 
     @Override
     protected CryptographicAlgorithm createVariant() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.TRIPLE_DES);
+        return CryptographicAlgorithm.Standard.TRIPLE_DES.inst();
     }
 }

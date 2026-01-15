@@ -20,17 +20,17 @@ class ShreddingAlgorithmTest extends AbstractKmipEnumerationTestSuite<ShreddingA
 
     @Override
     protected ShreddingAlgorithm createDefault() {
-        return new ShreddingAlgorithm(ShreddingAlgorithm.Standard.UNSPECIFIED);
+        return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ShreddingAlgorithm createEqualToDefault() {
-        return new ShreddingAlgorithm(ShreddingAlgorithm.Standard.UNSPECIFIED);
+        return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ShreddingAlgorithm createDifferentFromDefault() {
-        return new ShreddingAlgorithm(ShreddingAlgorithm.Standard.CRYPTOGRAPHIC);
+        return ShreddingAlgorithm.Standard.CRYPTOGRAPHIC.inst();
     }
 
     @Override

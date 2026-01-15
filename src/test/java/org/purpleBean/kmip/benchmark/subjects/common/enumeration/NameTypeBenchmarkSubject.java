@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.NameType;
 public class NameTypeBenchmarkSubject extends KmipBenchmarkSubject<NameType> {
 
     public NameTypeBenchmarkSubject() throws Exception {
-        NameType nameType = new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING);
+        NameType nameType = NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
         initialize(nameType, NameType.class);
     }
 

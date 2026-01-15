@@ -13,11 +13,11 @@ class BatchErrorContinuationOptionTtlvTest extends AbstractTtlvSerializationTest
 
     @Override
     protected BatchErrorContinuationOption createDefault() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);
+        return BatchErrorContinuationOption.Standard.CONTINUE.inst();
     }
 
     @Override
     protected BatchErrorContinuationOption createVariant() {
-        return new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.STOP);
+        return BatchErrorContinuationOption.Standard.STOP.inst();
     }
 }

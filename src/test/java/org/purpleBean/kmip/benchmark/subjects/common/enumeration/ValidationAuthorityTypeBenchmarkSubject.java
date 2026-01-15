@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ValidationAuthorityType;
 public class ValidationAuthorityTypeBenchmarkSubject extends KmipBenchmarkSubject<ValidationAuthorityType> {
 
     public ValidationAuthorityTypeBenchmarkSubject() throws Exception {
-        ValidationAuthorityType validationAuthorityType = new ValidationAuthorityType(ValidationAuthorityType.Standard.UNSPECIFIED);
+        ValidationAuthorityType validationAuthorityType = ValidationAuthorityType.Standard.UNSPECIFIED.inst();
         initialize(validationAuthorityType, ValidationAuthorityType.class);
     }
 

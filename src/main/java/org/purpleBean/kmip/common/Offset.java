@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class Offset implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OFFSET);
+    public static final KmipTag kmipTag = KmipTag.Standard.OFFSET.inst();
     public static final EncodingType encodingType = EncodingType.INTERVAL;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

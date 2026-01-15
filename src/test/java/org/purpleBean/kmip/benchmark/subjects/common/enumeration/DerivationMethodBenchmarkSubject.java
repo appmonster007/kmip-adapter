@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DerivationMethod;
 public class DerivationMethodBenchmarkSubject extends KmipBenchmarkSubject<DerivationMethod> {
 
     public DerivationMethodBenchmarkSubject() throws Exception {
-        DerivationMethod derivationMethod = new DerivationMethod(DerivationMethod.Standard.PBKDF2);
+        DerivationMethod derivationMethod = DerivationMethod.Standard.PBKDF2.inst();
         initialize(derivationMethod, DerivationMethod.class);
     }
 

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DrbgAlgorithm;
 public class DrbgAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<DrbgAlgorithm> {
 
     public DrbgAlgorithmBenchmarkSubject() throws Exception {
-        DrbgAlgorithm drbgAlgorithm = new DrbgAlgorithm(DrbgAlgorithm.Standard.UNSPECIFIED);
+        DrbgAlgorithm drbgAlgorithm = DrbgAlgorithm.Standard.UNSPECIFIED.inst();
         initialize(drbgAlgorithm, DrbgAlgorithm.class);
     }
 

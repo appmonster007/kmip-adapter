@@ -20,7 +20,7 @@ public class KeyMaterialStructureBenchmarkSubject extends KmipBenchmarkSubject<K
     public KeyMaterialStructureBenchmarkSubject() throws Exception {
         var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
-        State state = new State(State.Standard.ACTIVE);
+        State state = State.Standard.ACTIVE.inst();
         KeyMaterialStructure keyMaterialStructure = KeyMaterialStructure.of(List.of(activationDate, state));
         initialize(keyMaterialStructure, KeyMaterialStructure.class);
     }

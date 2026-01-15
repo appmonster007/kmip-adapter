@@ -17,7 +17,7 @@ class RevocationReasonJsonTest extends AbstractJsonSerializationTestSuite<Revoca
     @Override
     protected RevocationReason createDefault() {
         return RevocationReason.builder()
-                .revocationReasonCode(new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE))
+                .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
                 .revocationMessage(RevocationMessage.of("test-message"))
                 .build();
     }

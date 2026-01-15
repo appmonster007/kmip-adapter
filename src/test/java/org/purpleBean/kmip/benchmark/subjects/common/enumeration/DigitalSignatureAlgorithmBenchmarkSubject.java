@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DigitalSignatureAlgorithm;
 public class DigitalSignatureAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<DigitalSignatureAlgorithm> {
 
     public DigitalSignatureAlgorithmBenchmarkSubject() throws Exception {
-        DigitalSignatureAlgorithm digitalSignatureAlgorithm = new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION);
+        DigitalSignatureAlgorithm digitalSignatureAlgorithm = DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION.inst();
         initialize(digitalSignatureAlgorithm, DigitalSignatureAlgorithm.class);
     }
 

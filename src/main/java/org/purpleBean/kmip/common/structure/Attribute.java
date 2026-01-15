@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class Attribute implements KmipStructure {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
+    public static final KmipTag kmipTag = KmipTag.Standard.ATTRIBUTE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
@@ -49,7 +49,6 @@ public class Attribute implements KmipStructure {
     }
 
     public static KmipAttribute toKmipAttribute(@NonNull Attribute attribute) {
-        KmipSpec spec = KmipContext.getSpec();
         String name = attribute.getAttributeName().getValue();
         KmipTag.Value attrTag;
         EncodingType encodingType;
@@ -57,7 +56,7 @@ public class Attribute implements KmipStructure {
             attrTag = KmipTag.Standard.ATTRIBUTE;
             encodingType = EncodingType.STRUCTURE;
         } else {
-            attrTag = KmipTag.fromName(spec, StringUtils.covertTitleToPascalCase(name));
+            attrTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(name));
             encodingType = attribute.getAttributeValue().getEncodingType();
         }
         BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(

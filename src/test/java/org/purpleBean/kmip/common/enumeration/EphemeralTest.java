@@ -20,17 +20,17 @@ class EphemeralTest extends AbstractKmipEnumerationTestSuite<Ephemeral> {
 
     @Override
     protected Ephemeral createDefault() {
-        return new Ephemeral(Ephemeral.Standard.DATA);
+        return Ephemeral.Standard.DATA.inst();
     }
 
     @Override
     protected Ephemeral createEqualToDefault() {
-        return new Ephemeral(Ephemeral.Standard.DATA);
+        return Ephemeral.Standard.DATA.inst();
     }
 
     @Override
     protected Ephemeral createDifferentFromDefault() {
-        return new Ephemeral(Ephemeral.Standard.EMPTY);
+        return Ephemeral.Standard.EMPTY.inst();
     }
 
     @Override

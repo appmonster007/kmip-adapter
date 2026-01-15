@@ -30,7 +30,7 @@ class AlternativeNameTest extends AbstractKmipStructureAttributeTestSuite<Altern
     protected AlternativeName createDefault() {
         return AlternativeName.of(
                 AlternativeNameValue.of("some value"),
-                new AlternativeNameType(AlternativeNameType.Standard.EMAIL_ADDRESS)
+                AlternativeNameType.Standard.EMAIL_ADDRESS.inst()
         );
     }
 

@@ -13,11 +13,11 @@ class DerivationMethodJsonTest extends AbstractJsonSerializationTestSuite<Deriva
 
     @Override
     protected DerivationMethod createDefault() {
-        return new DerivationMethod(DerivationMethod.Standard.PBKDF2);
+        return DerivationMethod.Standard.PBKDF2.inst();
     }
 
     @Override
     protected DerivationMethod createVariant() {
-        return new DerivationMethod(DerivationMethod.Standard.HASH);
+        return DerivationMethod.Standard.HASH.inst();
     }
 }

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ResultReason;
 public class ResultReasonBenchmarkSubject extends KmipBenchmarkSubject<ResultReason> {
 
     public ResultReasonBenchmarkSubject() throws Exception {
-        ResultReason resultReason = new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
+        ResultReason resultReason = ResultReason.Standard.ITEM_NOT_FOUND.inst();
         initialize(resultReason, ResultReason.class);
     }
 

@@ -13,11 +13,11 @@ class HashingAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<Hashin
 
     @Override
     protected HashingAlgorithm createDefault() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.MD2);
+        return HashingAlgorithm.Standard.MD2.inst();
     }
 
     @Override
     protected HashingAlgorithm createVariant() {
-        return new HashingAlgorithm(HashingAlgorithm.Standard.MD4);
+        return HashingAlgorithm.Standard.MD4.inst();
     }
 }

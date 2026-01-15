@@ -13,11 +13,11 @@ class KeyCompressionTypeTtlvTest extends AbstractTtlvSerializationTestSuite<KeyC
 
     @Override
     protected KeyCompressionType createDefault() {
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED);
+        return KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED.inst();
     }
 
     @Override
     protected KeyCompressionType createVariant() {
-        return new KeyCompressionType(KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME);
+        return KeyCompressionType.Standard.EC_PUBLIC_KEY_TYPE_X9_62_COMPRESSED_PRIME.inst();
     }
 }

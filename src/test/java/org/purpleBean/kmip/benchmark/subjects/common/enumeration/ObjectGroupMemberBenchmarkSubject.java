@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ObjectGroupMember;
 public class ObjectGroupMemberBenchmarkSubject extends KmipBenchmarkSubject<ObjectGroupMember> {
 
     public ObjectGroupMemberBenchmarkSubject() throws Exception {
-        ObjectGroupMember objectGroupMember = new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
+        ObjectGroupMember objectGroupMember = ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
         initialize(objectGroupMember, ObjectGroupMember.class);
     }
 

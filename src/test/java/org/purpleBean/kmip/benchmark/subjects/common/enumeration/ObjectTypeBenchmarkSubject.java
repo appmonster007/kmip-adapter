@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ObjectType;
 public class ObjectTypeBenchmarkSubject extends KmipBenchmarkSubject<ObjectType> {
 
     public ObjectTypeBenchmarkSubject() throws Exception {
-        ObjectType objectType = new ObjectType(ObjectType.Standard.CERTIFICATE);
+        ObjectType objectType = ObjectType.Standard.CERTIFICATE.inst();
         initialize(objectType, ObjectType.class);
     }
 

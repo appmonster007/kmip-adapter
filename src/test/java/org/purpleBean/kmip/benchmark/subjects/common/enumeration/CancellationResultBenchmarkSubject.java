@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.CancellationResult;
 public class CancellationResultBenchmarkSubject extends KmipBenchmarkSubject<CancellationResult> {
 
     public CancellationResultBenchmarkSubject() throws Exception {
-        CancellationResult cancellationResult = new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);
+        CancellationResult cancellationResult = CancellationResult.Standard.UNABLE_TO_CANCEL.inst();
         initialize(cancellationResult, CancellationResult.class);
     }
 

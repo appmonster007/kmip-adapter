@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class AsynchronousIndicator implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ASYNCHRONOUS_INDICATOR);
+    public static final KmipTag kmipTag = KmipTag.Standard.ASYNCHRONOUS_INDICATOR.inst();
     public static final EncodingType encodingType = EncodingType.BOOLEAN;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.CertificateType;
 public class CertificateTypeBenchmarkSubject extends KmipBenchmarkSubject<CertificateType> {
 
     public CertificateTypeBenchmarkSubject() throws Exception {
-        CertificateType certificateType = new CertificateType(CertificateType.Standard.X_509);
+        CertificateType certificateType = CertificateType.Standard.X_509.inst();
         initialize(certificateType, CertificateType.class);
     }
 

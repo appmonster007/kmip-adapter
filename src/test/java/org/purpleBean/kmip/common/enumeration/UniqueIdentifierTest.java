@@ -20,17 +20,17 @@ class UniqueIdentifierTest extends AbstractKmipEnumerationTestSuite<UniqueIdenti
 
     @Override
     protected UniqueIdentifier createDefault() {
-        return new UniqueIdentifier(UniqueIdentifier.Standard.ID_PLACEHOLDER);
+        return UniqueIdentifier.Standard.ID_PLACEHOLDER.inst();
     }
 
     @Override
     protected UniqueIdentifier createEqualToDefault() {
-        return new UniqueIdentifier(UniqueIdentifier.Standard.ID_PLACEHOLDER);
+        return UniqueIdentifier.Standard.ID_PLACEHOLDER.inst();
     }
 
     @Override
     protected UniqueIdentifier createDifferentFromDefault() {
-        return new UniqueIdentifier(UniqueIdentifier.Standard.CERTIFY);
+        return UniqueIdentifier.Standard.CERTIFY.inst();
     }
 
     @Override

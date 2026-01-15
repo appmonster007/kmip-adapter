@@ -13,11 +13,11 @@ class UniqueIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<Unique
 
     @Override
     protected UniqueIdentifier createDefault() {
-        return new UniqueIdentifier(UniqueIdentifier.Standard.ID_PLACEHOLDER);
+        return UniqueIdentifier.Standard.ID_PLACEHOLDER.inst();
     }
 
     @Override
     protected UniqueIdentifier createVariant() {
-        return new UniqueIdentifier(UniqueIdentifier.Standard.CERTIFY);
+        return UniqueIdentifier.Standard.CERTIFY.inst();
     }
 }

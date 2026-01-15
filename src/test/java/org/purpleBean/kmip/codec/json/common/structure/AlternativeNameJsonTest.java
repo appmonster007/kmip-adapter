@@ -18,7 +18,7 @@ class AlternativeNameJsonTest extends AbstractJsonSerializationTestSuite<Alterna
     protected AlternativeName createDefault() {
         return AlternativeName.builder()
                 .alternativeNameValue(AlternativeNameValue.of("some-name"))
-                .alternativeNameType(new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .build();
     }
 }

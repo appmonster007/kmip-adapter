@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.PaddingMethod;
 public class PaddingMethodBenchmarkSubject extends KmipBenchmarkSubject<PaddingMethod> {
 
     public PaddingMethodBenchmarkSubject() throws Exception {
-        PaddingMethod paddingMethod = new PaddingMethod(PaddingMethod.Standard.NONE);
+        PaddingMethod paddingMethod = PaddingMethod.Standard.NONE.inst();
         initialize(paddingMethod, PaddingMethod.class);
     }
 

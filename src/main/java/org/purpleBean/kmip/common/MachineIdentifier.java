@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class MachineIdentifier implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MACHINE_IDENTIFIER);
+    public static final KmipTag kmipTag = KmipTag.Standard.MACHINE_IDENTIFIER.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

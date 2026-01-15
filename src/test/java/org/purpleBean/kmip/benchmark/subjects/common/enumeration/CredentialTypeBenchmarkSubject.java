@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.CredentialType;
 public class CredentialTypeBenchmarkSubject extends KmipBenchmarkSubject<CredentialType> {
 
     public CredentialTypeBenchmarkSubject() throws Exception {
-        CredentialType credentialType = new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
+        CredentialType credentialType = CredentialType.Standard.USERNAME_AND_PASSWORD.inst();
         initialize(credentialType, CredentialType.class);
     }
 

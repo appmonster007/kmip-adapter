@@ -65,23 +65,23 @@ class CompromiseDateTest extends AbstractKmipDataTypeAttributeTestSuite<Compromi
     @Override
     protected State stateForServerModifiableTrue() {
         // This method is not used since isServerModifiable always returns false
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
         // This method is not used since isClientModifiable always returns false
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Test

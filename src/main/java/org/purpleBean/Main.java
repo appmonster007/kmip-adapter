@@ -8,7 +8,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipSpec;
-import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -18,6 +17,7 @@ import org.purpleBean.kmip.common.enumeration.NameType;
 import org.purpleBean.kmip.common.enumeration.State;
 import org.purpleBean.kmip.common.structure.Attribute;
 import org.purpleBean.kmip.common.structure.Name;
+import org.purpleBean.kmip.common.structure.ProtocolVersion;
 import org.purpleBean.kmip.common.structure.SampleStructure;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.common.structure.request.SimpleRequestHeader;
@@ -58,8 +58,8 @@ public class Main {
                 .value(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
                 .build();
 
-        State activeState = new State(State.Standard.ACTIVE);
-        State customState = new State(State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)));
+        State activeState = State.Standard.ACTIVE.inst();
+        State customState = State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)).inst();
 
         SampleStructure sampleStructure = SampleStructure.builder()
                 .activationDate(activationDate)
@@ -70,7 +70,7 @@ public class Main {
         XmlMapper xmlMapper = buildXmlMapper();
         TtlvMapper ttlvMapper = buildTtlvMapper();
 
-        Name name = Name.of("x-asfa", new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING));
+        Name name = Name.of("x-asfa", NameType.Standard.UNINTERPRETED_TEXT_STRING.inst());
         Attribute attr = Attribute.builder()
                 .attributeName(activationDate.getAttributeName())
                 .attributeIndex(AttributeIndex.of(0))

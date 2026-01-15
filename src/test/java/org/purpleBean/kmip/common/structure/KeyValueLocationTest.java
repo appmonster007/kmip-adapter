@@ -29,7 +29,7 @@ class KeyValueLocationTest extends AbstractKmipStructureAttributeTestSuite<KeyVa
     @Override
     protected KeyValueLocation createDefault() {
         return KeyValueLocation.builder()
-                .keyValueLocationType(new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING))
+                .keyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .keyValueLocationValue(KeyValueLocationValue.builder().value("test").build())
                 .build();
     }

@@ -13,11 +13,11 @@ class OtpAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<OtpAlgorit
 
     @Override
     protected OtpAlgorithm createDefault() {
-        return new OtpAlgorithm(OtpAlgorithm.Standard.HOTP);
+        return OtpAlgorithm.Standard.HOTP.inst();
     }
 
     @Override
     protected OtpAlgorithm createVariant() {
-        return new OtpAlgorithm(OtpAlgorithm.Standard.TOTP);
+        return OtpAlgorithm.Standard.TOTP.inst();
     }
 }

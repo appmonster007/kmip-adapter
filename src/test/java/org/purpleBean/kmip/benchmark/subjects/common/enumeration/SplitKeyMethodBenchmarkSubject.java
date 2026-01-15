@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.SplitKeyMethod;
 public class SplitKeyMethodBenchmarkSubject extends KmipBenchmarkSubject<SplitKeyMethod> {
 
     public SplitKeyMethodBenchmarkSubject() throws Exception {
-        SplitKeyMethod splitKeyMethod = new SplitKeyMethod(SplitKeyMethod.Standard.XOR);
+        SplitKeyMethod splitKeyMethod = SplitKeyMethod.Standard.XOR.inst();
         initialize(splitKeyMethod, SplitKeyMethod.class);
     }
 

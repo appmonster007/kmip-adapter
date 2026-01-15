@@ -8,9 +8,9 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Data
-@EqualsAndHashCode
-@ToString
+@Builder(toBuilder = true)
 public class KmipTag {
+
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -22,56 +22,78 @@ public class KmipTag {
         }
     }
 
-    @EqualsAndHashCode.Include
     @NonNull
     private final Value value;
 
-    private static boolean isValidExtensionValue(int value) {
+    private KmipTag(@NonNull Value value) {
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for KmipTag is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        this.value = value;
+    }
+
+    private static KmipTag of(@NonNull Value value) {
+        return new KmipTag(value);
+    }
+
+    private static void checkValidExtensionValue(int value) {
         int extensionStart = 0x540000;
         int extensionEnd = 0x54FFFF;
-        return !(value < extensionStart || value > extensionEnd);
+        if (value < extensionStart || value > extensionEnd) {
+            throw new IllegalArgumentException(
+                    String.format("Extension value %d must be in range 0x540000 and 0x54FFFF (hex)", value)
+            );
+        }
     }
 
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        if (!isValidExtensionValue(value)) {
-            throw new IllegalArgumentException(String.format("Extension value %d must be between 0x540000 and 0x54FFFF", value));
-        }
+        checkValidExtensionValue(value);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
         if (supportedVersions.isEmpty()) {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
-        Value custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.put(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.put(custom.getDescription(), custom);
-        return VALUE_REGISTRY.compute(value, (k, existing) -> existing != null ? existing : custom);
+        Value existingEnumByValue = VALUE_REGISTRY.get(value);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        if (existingEnumByValue != null || existingEnumByDescription != null) {
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+        }
+        Extension custom = new Extension(value, description, supportedVersions);
+        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        return custom;
     }
 
-    public static Value fromBytes(KmipSpec spec, byte[] bytes) {
+    public static Value fromBytes(byte[] bytes) {
         if (bytes == null || bytes.length != TtlvConstants.TAG_SIZE) {
             throw new IllegalArgumentException(String.format("Expected %s byte array for tag", TtlvConstants.TAG_SIZE));
         }
         int value = ((bytes[0] & 0xFF) << 16) |
                 ((bytes[1] & 0xFF) << 8) |
                 (bytes[2] & 0xFF);
-        return fromValue(spec, value);
+        return fromValue(value);
     }
 
-    public static Value fromValue(KmipSpec spec, int value) {
+    public static Value fromValue(int value) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = VALUE_REGISTRY.get(value);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No value found for %d in KMIP spec %s", value, spec)
                 ));
     }
 
-    public static Value fromName(KmipSpec spec, String name) {
+    public static Value fromName(String name) {
+        KmipSpec spec = KmipContext.getSpec();
         Value v = DESCRIPTION_REGISTRY.get(name);
         return Optional.ofNullable(v)
-                .filter(x -> x.isSupportedFor(spec))
+                .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("No value found for '%s' in KMIP spec %s", name, spec)
                 ));
@@ -87,6 +109,10 @@ public class KmipTag {
 
     public boolean isCustom() {
         return value.isCustom();
+    }
+
+    public boolean isSupported() {
+        return value.isSupported();
     }
 
     public byte[] getTagBytes() {
@@ -110,12 +136,9 @@ public class KmipTag {
         return hexString.toString();
     }
 
-    public boolean isSupportedFor(KmipSpec spec) {
-        if (spec == null) {
-            return true;
-        }
-        return value.isSupportedFor(spec);
-    }
+//    public int getValue() {
+//        return value.getValue();
+//    }
 
     @Getter
     @AllArgsConstructor
@@ -557,8 +580,14 @@ public class KmipTag {
         }
 
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KmipTag inst() {
+            return KmipTag.of(this);
         }
     }
 
@@ -567,26 +596,38 @@ public class KmipTag {
 
         String getDescription();
 
-        boolean isSupportedFor(KmipSpec spec);
+        boolean isSupported();
 
         boolean isCustom();
+
+        KmipTag inst();
     }
 
     @Getter
+    @AllArgsConstructor
     @ToString
-    @RequiredArgsConstructor
-    @EqualsAndHashCode
-    private static final class Extension implements Value {
-        @EqualsAndHashCode.Include
+    public static class Extension implements Value {
         private final int value;
         private final String description;
         private final Set<KmipSpec> supportedVersions;
 
         private final boolean custom = true;
 
+        public Extension(int value, String description, KmipSpec... supportedVersions) {
+            this.value = value;
+            this.description = description;
+            this.supportedVersions = Set.of(supportedVersions);
+        }
+
         @Override
-        public boolean isSupportedFor(KmipSpec spec) {
+        public boolean isSupported() {
+            KmipSpec spec = KmipContext.getSpec();
             return supportedVersions.contains(spec);
+        }
+
+        @Override
+        public KmipTag inst() {
+            return KmipTag.of(this);
         }
     }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class TagLength implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.TAG_LENGTH);
+    public static final KmipTag kmipTag = KmipTag.Standard.TAG_LENGTH.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

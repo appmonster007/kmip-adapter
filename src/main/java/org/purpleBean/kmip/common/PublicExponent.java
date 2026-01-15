@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class PublicExponent implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PUBLIC_EXPONENT);
+    public static final KmipTag kmipTag = KmipTag.Standard.PUBLIC_EXPONENT.inst();
     public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

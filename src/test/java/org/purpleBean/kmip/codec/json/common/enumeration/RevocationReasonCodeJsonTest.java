@@ -13,11 +13,11 @@ class RevocationReasonCodeJsonTest extends AbstractJsonSerializationTestSuite<Re
 
     @Override
     protected RevocationReasonCode createDefault() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.UNSPECIFIED);
+        return RevocationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RevocationReasonCode createVariant() {
-        return new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE);
+        return RevocationReasonCode.Standard.KEY_COMPROMISE.inst();
     }
 }

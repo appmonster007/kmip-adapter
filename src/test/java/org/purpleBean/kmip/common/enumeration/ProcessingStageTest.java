@@ -20,17 +20,17 @@ class ProcessingStageTest extends AbstractKmipEnumerationTestSuite<ProcessingSta
 
     @Override
     protected ProcessingStage createDefault() {
-        return new ProcessingStage(ProcessingStage.Standard.SUBMITTED);
+        return ProcessingStage.Standard.SUBMITTED.inst();
     }
 
     @Override
     protected ProcessingStage createEqualToDefault() {
-        return new ProcessingStage(ProcessingStage.Standard.SUBMITTED);
+        return ProcessingStage.Standard.SUBMITTED.inst();
     }
 
     @Override
     protected ProcessingStage createDifferentFromDefault() {
-        return new ProcessingStage(ProcessingStage.Standard.IN_PROCESS);
+        return ProcessingStage.Standard.IN_PROCESS.inst();
     }
 
     @Override

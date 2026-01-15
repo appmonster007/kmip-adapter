@@ -13,11 +13,11 @@ class ObjectGroupMemberJsonTest extends AbstractJsonSerializationTestSuite<Objec
 
     @Override
     protected ObjectGroupMember createDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
+        return ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
     }
 
     @Override
     protected ObjectGroupMember createVariant() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT);
+        return ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT.inst();
     }
 }

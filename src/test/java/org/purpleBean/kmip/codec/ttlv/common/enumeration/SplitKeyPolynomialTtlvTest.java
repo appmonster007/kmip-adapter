@@ -13,11 +13,11 @@ class SplitKeyPolynomialTtlvTest extends AbstractTtlvSerializationTestSuite<Spli
 
     @Override
     protected SplitKeyPolynomial createDefault() {
-        return new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_283);
+        return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
     }
 
     @Override
     protected SplitKeyPolynomial createVariant() {
-        return new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_285);
+        return SplitKeyPolynomial.Standard.POLYNOMIAL_285.inst();
     }
 }

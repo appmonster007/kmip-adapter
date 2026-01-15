@@ -23,7 +23,7 @@ class TransparentEcmqvPrivateKeyTest extends AbstractKmipStructureTestSuite<Tran
     @Override
     protected TransparentEcmqvPrivateKey createDefault() {
         return TransparentEcmqvPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }

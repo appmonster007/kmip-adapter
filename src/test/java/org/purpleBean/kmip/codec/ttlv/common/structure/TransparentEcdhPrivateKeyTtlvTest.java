@@ -23,7 +23,7 @@ class TransparentEcdhPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSui
     @Override
     protected TransparentEcdhPrivateKey createDefault() {
         return TransparentEcdhPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }
@@ -31,7 +31,7 @@ class TransparentEcdhPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSui
     @Override
     protected TransparentEcdhPrivateKey createVariant() {
         return TransparentEcdhPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))
         );
     }

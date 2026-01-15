@@ -13,7 +13,7 @@ public class UsageLimitsBenchmarkSubject extends KmipBenchmarkSubject<UsageLimit
         UsageLimits usageLimits = UsageLimits.builder()
                 .usageLimitsTotal(UsageLimitsTotal.of(100L))
                 .usageLimitsCount(UsageLimitsCount.of(10L))
-                .usageLimitsUnit(new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE))
+                .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
                 .build();
         initialize(usageLimits, UsageLimits.class);
     }

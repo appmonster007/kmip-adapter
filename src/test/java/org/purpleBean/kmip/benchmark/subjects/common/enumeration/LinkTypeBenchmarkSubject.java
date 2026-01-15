@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.LinkType;
 public class LinkTypeBenchmarkSubject extends KmipBenchmarkSubject<LinkType> {
 
     public LinkTypeBenchmarkSubject() throws Exception {
-        LinkType linkType = new LinkType(LinkType.Standard.CERTIFICATE_LINK);
+        LinkType linkType = LinkType.Standard.CERTIFICATE_LINK.inst();
         initialize(linkType, LinkType.class);
     }
 

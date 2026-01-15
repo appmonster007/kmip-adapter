@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.State;
 public class StateBenchmarkSubject extends KmipBenchmarkSubject<State> {
 
     public StateBenchmarkSubject() throws Exception {
-        State state = new State(State.Standard.ACTIVE);
+        State state = State.Standard.ACTIVE.inst();
         initialize(state, State.class);
     }
 

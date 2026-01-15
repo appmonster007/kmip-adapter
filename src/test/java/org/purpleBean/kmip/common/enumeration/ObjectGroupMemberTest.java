@@ -20,17 +20,17 @@ class ObjectGroupMemberTest extends AbstractKmipEnumerationTestSuite<ObjectGroup
 
     @Override
     protected ObjectGroupMember createDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
+        return ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
     }
 
     @Override
     protected ObjectGroupMember createEqualToDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH);
+        return ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
     }
 
     @Override
     protected ObjectGroupMember createDifferentFromDefault() {
-        return new ObjectGroupMember(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT);
+        return ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT.inst();
     }
 
     @Override

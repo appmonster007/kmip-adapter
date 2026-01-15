@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public interface KeyMaterial extends KmipDataType {
-    KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_MATERIAL);
+    KmipTag kmipTag = KmipTag.Standard.KEY_MATERIAL.inst();
 
     // registry for mapping
     Map<KeyMaterial.RegistryKey, Class<? extends KmipDataType>> KEY_FORMAT_TYPE_REGISTRY = new ConcurrentHashMap<>();

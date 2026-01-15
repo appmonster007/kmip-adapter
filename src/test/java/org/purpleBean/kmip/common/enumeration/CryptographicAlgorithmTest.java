@@ -25,17 +25,17 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
 
     @Override
     protected CryptographicAlgorithm createDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
+        return CryptographicAlgorithm.Standard.DES.inst();
     }
 
     @Override
     protected CryptographicAlgorithm createEqualToDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
+        return CryptographicAlgorithm.Standard.DES.inst();
     }
 
     @Override
     protected CryptographicAlgorithm createDifferentFromDefault() {
-        return new CryptographicAlgorithm(CryptographicAlgorithm.Standard.TRIPLE_DES);
+        return CryptographicAlgorithm.Standard.TRIPLE_DES.inst();
     }
 
     @Override
@@ -81,7 +81,7 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
 
     @Override
     public State stateForServerModifiableFalse() {
-        return new State(State.Standard.PRE_ACTIVE); // Any state would work since it's not modifiable
+        return State.Standard.PRE_ACTIVE.inst(); // Any state would work since it's not modifiable
     }
 
     @Override
@@ -91,7 +91,7 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
 
     @Override
     public State stateForClientModifiableFalse() {
-        return new State(State.Standard.ACTIVE); // Any state would work since it's not modifiable
+        return State.Standard.ACTIVE.inst(); // Any state would work since it's not modifiable
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class ObjectGroup implements KmipDataType, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.OBJECT_GROUP);
+    public static final KmipTag kmipTag = KmipTag.Standard.OBJECT_GROUP.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

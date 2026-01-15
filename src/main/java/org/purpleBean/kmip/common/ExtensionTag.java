@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class ExtensionTag implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.EXTENSION_TAG);
+    public static final KmipTag kmipTag = KmipTag.Standard.EXTENSION_TAG.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

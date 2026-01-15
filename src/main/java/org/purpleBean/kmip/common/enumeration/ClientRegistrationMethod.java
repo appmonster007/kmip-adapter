@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder(toBuilder = true)
 public class ClientRegistrationMethod implements KmipEnumeration {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CLIENT_REGISTRATION_METHOD);
+    public static final KmipTag kmipTag = KmipTag.Standard.CLIENT_REGISTRATION_METHOD.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();

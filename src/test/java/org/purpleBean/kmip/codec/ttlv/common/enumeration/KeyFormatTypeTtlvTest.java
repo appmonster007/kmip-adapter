@@ -13,11 +13,11 @@ class KeyFormatTypeTtlvTest extends AbstractTtlvSerializationTestSuite<KeyFormat
 
     @Override
     protected KeyFormatType createDefault() {
-        return new KeyFormatType(KeyFormatType.Standard.RAW);
+        return KeyFormatType.Standard.RAW.inst();
     }
 
     @Override
     protected KeyFormatType createVariant() {
-        return new KeyFormatType(KeyFormatType.Standard.OPAQUE);
+        return KeyFormatType.Standard.OPAQUE.inst();
     }
 }

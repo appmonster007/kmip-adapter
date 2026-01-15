@@ -20,17 +20,17 @@ class InteropFunctionTest extends AbstractKmipEnumerationTestSuite<InteropFuncti
 
     @Override
     protected InteropFunction createDefault() {
-        return new InteropFunction(InteropFunction.Standard.BEGIN);
+        return InteropFunction.Standard.BEGIN.inst();
     }
 
     @Override
     protected InteropFunction createEqualToDefault() {
-        return new InteropFunction(InteropFunction.Standard.BEGIN);
+        return InteropFunction.Standard.BEGIN.inst();
     }
 
     @Override
     protected InteropFunction createDifferentFromDefault() {
-        return new InteropFunction(InteropFunction.Standard.END);
+        return InteropFunction.Standard.END.inst();
     }
 
     @Override

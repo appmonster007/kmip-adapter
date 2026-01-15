@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class QString implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.Q_STRING);
+    public static final KmipTag kmipTag = KmipTag.Standard.Q_STRING.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

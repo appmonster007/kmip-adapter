@@ -74,22 +74,22 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<Custom
 
     @Override
     protected State stateForServerModifiableTrue() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
 

@@ -13,11 +13,11 @@ class ResultStatusTtlvTest extends AbstractTtlvSerializationTestSuite<ResultStat
 
     @Override
     protected ResultStatus createDefault() {
-        return new ResultStatus(ResultStatus.Standard.OPERATION_FAILED);
+        return ResultStatus.Standard.OPERATION_FAILED.inst();
     }
 
     @Override
     protected ResultStatus createVariant() {
-        return new ResultStatus(ResultStatus.Standard.OPERATION_PENDING);
+        return ResultStatus.Standard.OPERATION_PENDING.inst();
     }
 }

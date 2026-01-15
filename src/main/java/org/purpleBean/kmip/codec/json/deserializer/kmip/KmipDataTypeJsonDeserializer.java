@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipTag;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -26,8 +28,7 @@ public class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDe
             return null;
         }
 
-        KmipSpec spec = KmipContext.getSpec();
-        KmipTag.Value kmipTagValue = KmipTag.fromName(spec, tagNode.asText());
+        KmipTag.Value kmipTagValue = KmipTag.fromName(tagNode.asText());
         Optional<EncodingType> encodingType = EncodingType.fromName(typeNode.asText());
 
         if (encodingType.isEmpty()) {

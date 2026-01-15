@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.BATCH_ITEM);
+    public static final KmipTag kmipTag = KmipTag.Standard.BATCH_ITEM.inst();
 
     static {
         for (KmipSpec spec : KmipSpec.values()) {

@@ -13,11 +13,11 @@ class Fips186VariationJsonTest extends AbstractJsonSerializationTestSuite<Fips18
 
     @Override
     protected Fips186Variation createDefault() {
-        return new Fips186Variation(Fips186Variation.Standard.UNSPECIFIED);
+        return Fips186Variation.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected Fips186Variation createVariant() {
-        return new Fips186Variation(Fips186Variation.Standard.GP_X_ORIGINAL);
+        return Fips186Variation.Standard.GP_X_ORIGINAL.inst();
     }
 }

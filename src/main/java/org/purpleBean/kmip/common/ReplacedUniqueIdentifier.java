@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class ReplacedUniqueIdentifier implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REPLACED_UNIQUE_IDENTIFIER);
+    public static final KmipTag kmipTag = KmipTag.Standard.REPLACED_UNIQUE_IDENTIFIER.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

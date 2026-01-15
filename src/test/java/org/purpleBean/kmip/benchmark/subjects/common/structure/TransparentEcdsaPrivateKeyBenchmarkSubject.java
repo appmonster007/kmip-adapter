@@ -17,7 +17,7 @@ public class TransparentEcdsaPrivateKeyBenchmarkSubject extends KmipBenchmarkSub
 
     public TransparentEcdsaPrivateKeyBenchmarkSubject() throws Exception {
         TransparentEcdsaPrivateKey transparentEcdsaPrivateKey = TransparentEcdsaPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
         initialize(transparentEcdsaPrivateKey, TransparentEcdsaPrivateKey.class);

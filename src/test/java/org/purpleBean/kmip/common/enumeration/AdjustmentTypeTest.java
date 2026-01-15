@@ -27,17 +27,17 @@ class AdjustmentTypeTest extends AbstractKmipEnumerationTestSuite<AdjustmentType
     protected AdjustmentType createDefault() {
         // For now, using the first available value if any exist.
         if (AdjustmentType.Standard.values().length > 0) {
-            return new AdjustmentType(AdjustmentType.Standard.values()[0]);
+            return AdjustmentType.Standard.values()[0].inst();
         }
         // Fallback for enums with no predefined Standard values (e.g., during initial generation)
         // This will likely fail if the enum has no values, but that's expected for an incomplete enum.
-        return new AdjustmentType(AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)));
+        return AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected AdjustmentType createEqualToDefault() {
         if (AdjustmentType.Standard.values().length > 0) {
-            return new AdjustmentType(AdjustmentType.Standard.values()[0]);
+            return AdjustmentType.Standard.values()[0].inst();
         }
         return new AdjustmentType(AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)));
     }
@@ -45,10 +45,10 @@ class AdjustmentTypeTest extends AbstractKmipEnumerationTestSuite<AdjustmentType
     @Override
     protected AdjustmentType createDifferentFromDefault() {
         if (AdjustmentType.Standard.values().length > 1) {
-            return new AdjustmentType(AdjustmentType.Standard.values()[1]);
+            return AdjustmentType.Standard.values()[1].inst();
         }
         // Fallback for enums with only one or no predefined Standard values
-        return new AdjustmentType(AdjustmentType.register(0x80000002, "X-Variant-Value-2", Set.of(KmipSpec.UnknownVersion)));
+        return AdjustmentType.register(0x80000002, "X-Variant-Value-2", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override

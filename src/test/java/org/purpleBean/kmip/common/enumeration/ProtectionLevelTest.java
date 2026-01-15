@@ -20,17 +20,17 @@ class ProtectionLevelTest extends AbstractKmipEnumerationTestSuite<ProtectionLev
 
     @Override
     protected ProtectionLevel createDefault() {
-        return new ProtectionLevel(ProtectionLevel.Standard.HIGH);
+        return ProtectionLevel.Standard.HIGH.inst();
     }
 
     @Override
     protected ProtectionLevel createEqualToDefault() {
-        return new ProtectionLevel(ProtectionLevel.Standard.HIGH);
+        return ProtectionLevel.Standard.HIGH.inst();
     }
 
     @Override
     protected ProtectionLevel createDifferentFromDefault() {
-        return new ProtectionLevel(ProtectionLevel.Standard.LOW);
+        return ProtectionLevel.Standard.LOW.inst();
     }
 
     @Override

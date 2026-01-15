@@ -69,25 +69,25 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<Cry
     @Override
     protected State stateForServerModifiableTrue() {
         // Return a state where server modification is allowed
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
         // Return a state where server modification is not allowed
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
         // Return a state where client modification is allowed
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
         // Return a state where client modification is not allowed
-        return new State(State.Standard.ACTIVE);
+        return State.Standard.ACTIVE.inst();
     }
 
     @Test
@@ -120,11 +120,11 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<Cry
         assertThat(length.isClientDeletable()).isFalse();
 
         // Test with a sample state
-        State preActiveState = new State(State.Standard.PRE_ACTIVE);
+        State preActiveState = State.Standard.PRE_ACTIVE.inst();
         assertThat(length.isServerModifiable(preActiveState)).isTrue();
         assertThat(length.isClientModifiable(preActiveState)).isTrue();
 
-        State activeState = new State(State.Standard.ACTIVE);
+        State activeState = State.Standard.ACTIVE.inst();
         assertThat(length.isServerModifiable(activeState)).isFalse();
         assertThat(length.isClientModifiable(activeState)).isFalse();
     }

@@ -30,7 +30,7 @@ public abstract class AbstractKmipStructureTtlvDeserializer<T extends KmipDataTy
         B builder = createBuilder();
 
         for (TtlvObject ttlvObject : nestedObjects) {
-            KmipTag.Value nodeTag = KmipTag.fromBytes(spec, ttlvObject.getTag());
+            KmipTag.Value nodeTag = KmipTag.fromBytes(ttlvObject.getTag());
             setValue(builder, nodeTag, ttlvObject.toByteBuffer(), mapper);
         }
 

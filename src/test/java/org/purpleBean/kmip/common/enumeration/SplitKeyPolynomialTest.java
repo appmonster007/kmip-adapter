@@ -20,17 +20,17 @@ class SplitKeyPolynomialTest extends AbstractKmipEnumerationTestSuite<SplitKeyPo
 
     @Override
     protected SplitKeyPolynomial createDefault() {
-        return new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_283);
+        return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
     }
 
     @Override
     protected SplitKeyPolynomial createEqualToDefault() {
-        return new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_283);
+        return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
     }
 
     @Override
     protected SplitKeyPolynomial createDifferentFromDefault() {
-        return new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_285);
+        return SplitKeyPolynomial.Standard.POLYNOMIAL_285.inst();
     }
 
     @Override

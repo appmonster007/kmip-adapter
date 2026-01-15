@@ -20,17 +20,17 @@ class NistKeyTypeTest extends AbstractKmipEnumerationTestSuite<NistKeyType> {
 
     @Override
     protected NistKeyType createDefault() {
-        return new NistKeyType(NistKeyType.Standard.PRIVATE_SIGNATURE_KEY);
+        return NistKeyType.Standard.PRIVATE_SIGNATURE_KEY.inst();
     }
 
     @Override
     protected NistKeyType createEqualToDefault() {
-        return new NistKeyType(NistKeyType.Standard.PRIVATE_SIGNATURE_KEY);
+        return NistKeyType.Standard.PRIVATE_SIGNATURE_KEY.inst();
     }
 
     @Override
     protected NistKeyType createDifferentFromDefault() {
-        return new NistKeyType(NistKeyType.Standard.PUBLIC_SIGNATURE_VERIFICATION_KEY);
+        return NistKeyType.Standard.PUBLIC_SIGNATURE_VERIFICATION_KEY.inst();
     }
 
     @Override

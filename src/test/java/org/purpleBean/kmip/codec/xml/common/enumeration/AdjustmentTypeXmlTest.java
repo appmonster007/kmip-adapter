@@ -14,11 +14,11 @@ class AdjustmentTypeXmlTest extends AbstractXmlSerializationTestSuite<Adjustment
 
     @Override
     protected AdjustmentType createDefault() {
-        return new AdjustmentType(AdjustmentType.Standard.INCREMENT);
+        return AdjustmentType.Standard.INCREMENT.inst();
     }
 
     @Override
     protected AdjustmentType createVariant() {
-        return new AdjustmentType(AdjustmentType.Standard.DECREMENT);
+        return AdjustmentType.Standard.DECREMENT.inst();
     }
 }

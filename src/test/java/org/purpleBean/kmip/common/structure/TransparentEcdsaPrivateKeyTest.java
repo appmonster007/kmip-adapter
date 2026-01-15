@@ -23,7 +23,7 @@ class TransparentEcdsaPrivateKeyTest extends AbstractKmipStructureTestSuite<Tran
     @Override
     protected TransparentEcdsaPrivateKey createDefault() {
         return TransparentEcdsaPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }

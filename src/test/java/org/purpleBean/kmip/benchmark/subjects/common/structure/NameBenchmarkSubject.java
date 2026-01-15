@@ -11,7 +11,7 @@ public class NameBenchmarkSubject extends KmipBenchmarkSubject<Name> {
     public NameBenchmarkSubject() throws Exception {
         Name name = Name.builder()
                 .nameValue(NameValue.of("some-name"))
-                .nameType(new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .nameType(NameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .build();
         initialize(name, Name.class);
     }

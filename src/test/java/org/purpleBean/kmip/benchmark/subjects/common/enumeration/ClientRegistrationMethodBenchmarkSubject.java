@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ClientRegistrationMethod;
 public class ClientRegistrationMethodBenchmarkSubject extends KmipBenchmarkSubject<ClientRegistrationMethod> {
 
     public ClientRegistrationMethodBenchmarkSubject() throws Exception {
-        ClientRegistrationMethod clientRegistrationMethod = new ClientRegistrationMethod(ClientRegistrationMethod.Standard.UNSPECIFIED);
+        ClientRegistrationMethod clientRegistrationMethod = ClientRegistrationMethod.Standard.UNSPECIFIED.inst();
         initialize(clientRegistrationMethod, ClientRegistrationMethod.class);
     }
 

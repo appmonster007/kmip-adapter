@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class MACSignatureKeyInformation implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.MAC_SIGNATURE_KEY_INFORMATION);
+    public static final KmipTag kmipTag = KmipTag.Standard.MAC_SIGNATURE_KEY_INFORMATION.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

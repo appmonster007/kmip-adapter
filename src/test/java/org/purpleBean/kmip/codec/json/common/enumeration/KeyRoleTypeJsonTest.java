@@ -13,11 +13,11 @@ class KeyRoleTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyRoleType
 
     @Override
     protected KeyRoleType createDefault() {
-        return new KeyRoleType(KeyRoleType.Standard.BDK);
+        return KeyRoleType.Standard.BDK.inst();
     }
 
     @Override
     protected KeyRoleType createVariant() {
-        return new KeyRoleType(KeyRoleType.Standard.CVK);
+        return KeyRoleType.Standard.CVK.inst();
     }
 }

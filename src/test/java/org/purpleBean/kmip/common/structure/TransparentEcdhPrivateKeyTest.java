@@ -23,7 +23,7 @@ class TransparentEcdhPrivateKeyTest extends AbstractKmipStructureTestSuite<Trans
     @Override
     protected TransparentEcdhPrivateKey createDefault() {
         return TransparentEcdhPrivateKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
         );
     }

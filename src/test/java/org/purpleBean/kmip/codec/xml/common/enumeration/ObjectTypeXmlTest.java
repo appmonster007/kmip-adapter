@@ -13,11 +13,11 @@ class ObjectTypeXmlTest extends AbstractXmlSerializationTestSuite<ObjectType> {
 
     @Override
     protected ObjectType createDefault() {
-        return new ObjectType(ObjectType.Standard.CERTIFICATE);
+        return ObjectType.Standard.CERTIFICATE.inst();
     }
 
     @Override
     protected ObjectType createVariant() {
-        return new ObjectType(ObjectType.Standard.SYMMETRIC_KEY);
+        return ObjectType.Standard.SYMMETRIC_KEY.inst();
     }
 }

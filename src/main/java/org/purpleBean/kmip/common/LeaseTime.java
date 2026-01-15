@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class LeaseTime implements KmipDataType, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LEASE_TIME);
+    public static final KmipTag kmipTag = KmipTag.Standard.LEASE_TIME.inst();
     public static final EncodingType encodingType = EncodingType.INTERVAL;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

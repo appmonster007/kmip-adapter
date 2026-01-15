@@ -13,11 +13,11 @@ class ObjectClassTtlvTest extends AbstractTtlvSerializationTestSuite<ObjectClass
 
     @Override
     protected ObjectClass createDefault() {
-        return new ObjectClass(ObjectClass.Standard.USER);
+        return ObjectClass.Standard.USER.inst();
     }
 
     @Override
     protected ObjectClass createVariant() {
-        return new ObjectClass(ObjectClass.Standard.SYSTEM);
+        return ObjectClass.Standard.SYSTEM.inst();
     }
 }

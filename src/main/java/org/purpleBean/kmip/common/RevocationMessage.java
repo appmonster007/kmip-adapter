@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class RevocationMessage implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.REVOCATION_MESSAGE);
+    public static final KmipTag kmipTag = KmipTag.Standard.REVOCATION_MESSAGE.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

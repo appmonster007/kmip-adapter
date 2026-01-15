@@ -20,17 +20,17 @@ class EndpointRoleTest extends AbstractKmipEnumerationTestSuite<EndpointRole> {
 
     @Override
     protected EndpointRole createDefault() {
-        return new EndpointRole(EndpointRole.Standard.CLIENT);
+        return EndpointRole.Standard.CLIENT.inst();
     }
 
     @Override
     protected EndpointRole createEqualToDefault() {
-        return new EndpointRole(EndpointRole.Standard.CLIENT);
+        return EndpointRole.Standard.CLIENT.inst();
     }
 
     @Override
     protected EndpointRole createDifferentFromDefault() {
-        return new EndpointRole(EndpointRole.Standard.SERVER);
+        return EndpointRole.Standard.SERVER.inst();
     }
 
     @Override

@@ -13,11 +13,11 @@ class DrbgAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<DrbgAlgorit
 
     @Override
     protected DrbgAlgorithm createDefault() {
-        return new DrbgAlgorithm(DrbgAlgorithm.Standard.UNSPECIFIED);
+        return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DrbgAlgorithm createVariant() {
-        return new DrbgAlgorithm(DrbgAlgorithm.Standard.DUAL_EC);
+        return DrbgAlgorithm.Standard.DUAL_EC.inst();
     }
 }

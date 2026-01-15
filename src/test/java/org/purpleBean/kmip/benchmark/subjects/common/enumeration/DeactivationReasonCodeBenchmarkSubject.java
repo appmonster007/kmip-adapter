@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DeactivationReasonCode;
 public class DeactivationReasonCodeBenchmarkSubject extends KmipBenchmarkSubject<DeactivationReasonCode> {
 
     public DeactivationReasonCodeBenchmarkSubject() throws Exception {
-        DeactivationReasonCode deactivationReasonCode = new DeactivationReasonCode(DeactivationReasonCode.Standard.UNSPECIFIED);
+        DeactivationReasonCode deactivationReasonCode = DeactivationReasonCode.Standard.UNSPECIFIED.inst();
         initialize(deactivationReasonCode, DeactivationReasonCode.class);
     }
 

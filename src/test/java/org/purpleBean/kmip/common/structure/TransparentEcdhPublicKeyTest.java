@@ -22,7 +22,7 @@ class TransparentEcdhPublicKeyTest extends AbstractKmipStructureTestSuite<Transp
     @Override
     protected TransparentEcdhPublicKey createDefault() {
         return TransparentEcdhPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
         );
     }

@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class KeyValueLocationValue implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.KEY_VALUE_LOCATION_VALUE);
+    public static final KmipTag kmipTag = KmipTag.Standard.KEY_VALUE_LOCATION_VALUE.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

@@ -13,11 +13,11 @@ class ResultReasonJsonTest extends AbstractJsonSerializationTestSuite<ResultReas
 
     @Override
     protected ResultReason createDefault() {
-        return new ResultReason(ResultReason.Standard.ITEM_NOT_FOUND);
+        return ResultReason.Standard.ITEM_NOT_FOUND.inst();
     }
 
     @Override
     protected ResultReason createVariant() {
-        return new ResultReason(ResultReason.Standard.RESPONSE_TOO_LARGE);
+        return ResultReason.Standard.RESPONSE_TOO_LARGE.inst();
     }
 }

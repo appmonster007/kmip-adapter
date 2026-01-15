@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class CustomAttribute implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ATTRIBUTE);
+    public static final KmipTag kmipTag = KmipTag.Standard.ATTRIBUTE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

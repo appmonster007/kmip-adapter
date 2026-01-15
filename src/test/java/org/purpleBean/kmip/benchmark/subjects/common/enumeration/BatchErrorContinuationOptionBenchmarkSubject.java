@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.BatchErrorContinuationOption;
 public class BatchErrorContinuationOptionBenchmarkSubject extends KmipBenchmarkSubject<BatchErrorContinuationOption> {
 
     public BatchErrorContinuationOptionBenchmarkSubject() throws Exception {
-        BatchErrorContinuationOption batchErrorContinuationOption = new BatchErrorContinuationOption(BatchErrorContinuationOption.Standard.CONTINUE);
+        BatchErrorContinuationOption batchErrorContinuationOption = BatchErrorContinuationOption.Standard.CONTINUE.inst();
         initialize(batchErrorContinuationOption, BatchErrorContinuationOption.class);
     }
 

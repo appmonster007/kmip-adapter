@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class UniqueBatchItemID implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.UNIQUE_BATCH_ITEM_ID);
+    public static final KmipTag kmipTag = KmipTag.Standard.UNIQUE_BATCH_ITEM_ID.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

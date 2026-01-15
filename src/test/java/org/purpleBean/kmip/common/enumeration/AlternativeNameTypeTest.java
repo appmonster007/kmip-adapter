@@ -20,17 +20,17 @@ class AlternativeNameTypeTest extends AbstractKmipEnumerationTestSuite<Alternati
 
     @Override
     protected AlternativeNameType createDefault() {
-        return new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected AlternativeNameType createEqualToDefault() {
-        return new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected AlternativeNameType createDifferentFromDefault() {
-        return new AlternativeNameType(AlternativeNameType.Standard.URI);
+        return AlternativeNameType.Standard.URI.inst();
     }
 
     @Override

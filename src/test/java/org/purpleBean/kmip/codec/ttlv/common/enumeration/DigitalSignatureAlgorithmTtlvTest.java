@@ -13,11 +13,11 @@ class DigitalSignatureAlgorithmTtlvTest extends AbstractTtlvSerializationTestSui
 
     @Override
     protected DigitalSignatureAlgorithm createDefault() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION);
+        return DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION.inst();
     }
 
     @Override
     protected DigitalSignatureAlgorithm createVariant() {
-        return new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION);
+        return DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION.inst();
     }
 }

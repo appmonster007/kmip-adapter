@@ -20,17 +20,17 @@ class CancellationResultTest extends AbstractKmipEnumerationTestSuite<Cancellati
 
     @Override
     protected CancellationResult createDefault() {
-        return new CancellationResult(CancellationResult.Standard.CANCELED);
+        return CancellationResult.Standard.CANCELED.inst();
     }
 
     @Override
     protected CancellationResult createEqualToDefault() {
-        return new CancellationResult(CancellationResult.Standard.CANCELED);
+        return CancellationResult.Standard.CANCELED.inst();
     }
 
     @Override
     protected CancellationResult createDifferentFromDefault() {
-        return new CancellationResult(CancellationResult.Standard.UNABLE_TO_CANCEL);
+        return CancellationResult.Standard.UNABLE_TO_CANCEL.inst();
     }
 
     @Override

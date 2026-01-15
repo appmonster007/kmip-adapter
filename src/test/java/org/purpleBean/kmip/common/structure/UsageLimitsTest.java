@@ -32,7 +32,7 @@ class UsageLimitsTest extends AbstractKmipStructureAttributeTestSuite<UsageLimit
         return UsageLimits.builder()
                 .usageLimitsTotal(UsageLimitsTotal.of(100L))
                 .usageLimitsCount(UsageLimitsCount.of(10L))
-                .usageLimitsUnit(new UsageLimitsUnit(UsageLimitsUnit.Standard.BYTE))
+                .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
                 .build();
     }
 

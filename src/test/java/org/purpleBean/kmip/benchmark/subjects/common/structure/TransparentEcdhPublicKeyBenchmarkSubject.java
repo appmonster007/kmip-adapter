@@ -15,7 +15,7 @@ public class TransparentEcdhPublicKeyBenchmarkSubject extends KmipBenchmarkSubje
 
     public TransparentEcdhPublicKeyBenchmarkSubject() throws Exception {
         TransparentEcdhPublicKey transparentEcdhPublicKey = TransparentEcdhPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
         );
         initialize(transparentEcdhPublicKey, TransparentEcdhPublicKey.class);

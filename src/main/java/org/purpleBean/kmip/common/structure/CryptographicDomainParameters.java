@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class CryptographicDomainParameters implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CRYPTOGRAPHIC_DOMAIN_PARAMETERS);
+    public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_DOMAIN_PARAMETERS.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

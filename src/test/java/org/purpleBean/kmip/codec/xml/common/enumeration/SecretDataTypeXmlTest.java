@@ -13,11 +13,11 @@ class SecretDataTypeXmlTest extends AbstractXmlSerializationTestSuite<SecretData
 
     @Override
     protected SecretDataType createDefault() {
-        return new SecretDataType(SecretDataType.Standard.PASSWORD);
+        return SecretDataType.Standard.PASSWORD.inst();
     }
 
     @Override
     protected SecretDataType createVariant() {
-        return new SecretDataType(SecretDataType.Standard.SEED);
+        return SecretDataType.Standard.SEED.inst();
     }
 }

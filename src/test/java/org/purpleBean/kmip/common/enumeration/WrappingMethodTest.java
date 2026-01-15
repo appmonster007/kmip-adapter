@@ -20,17 +20,17 @@ class WrappingMethodTest extends AbstractKmipEnumerationTestSuite<WrappingMethod
 
     @Override
     protected WrappingMethod createDefault() {
-        return new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
+        return WrappingMethod.Standard.ENCRYPT.inst();
     }
 
     @Override
     protected WrappingMethod createEqualToDefault() {
-        return new WrappingMethod(WrappingMethod.Standard.ENCRYPT);
+        return WrappingMethod.Standard.ENCRYPT.inst();
     }
 
     @Override
     protected WrappingMethod createDifferentFromDefault() {
-        return new WrappingMethod(WrappingMethod.Standard.MAC_SIGN);
+        return WrappingMethod.Standard.MAC_SIGN.inst();
     }
 
     @Override

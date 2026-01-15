@@ -20,17 +20,17 @@ class ClientRegistrationMethodTest extends AbstractKmipEnumerationTestSuite<Clie
 
     @Override
     protected ClientRegistrationMethod createDefault() {
-        return new ClientRegistrationMethod(ClientRegistrationMethod.Standard.UNSPECIFIED);
+        return ClientRegistrationMethod.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ClientRegistrationMethod createEqualToDefault() {
-        return new ClientRegistrationMethod(ClientRegistrationMethod.Standard.UNSPECIFIED);
+        return ClientRegistrationMethod.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ClientRegistrationMethod createDifferentFromDefault() {
-        return new ClientRegistrationMethod(ClientRegistrationMethod.Standard.SERVER_PRE_GENERATED);
+        return ClientRegistrationMethod.Standard.SERVER_PRE_GENERATED.inst();
     }
 
     @Override

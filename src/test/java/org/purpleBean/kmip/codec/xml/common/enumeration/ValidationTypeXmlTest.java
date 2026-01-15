@@ -13,11 +13,11 @@ class ValidationTypeXmlTest extends AbstractXmlSerializationTestSuite<Validation
 
     @Override
     protected ValidationType createDefault() {
-        return new ValidationType(ValidationType.Standard.UNSPECIFIED);
+        return ValidationType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ValidationType createVariant() {
-        return new ValidationType(ValidationType.Standard.HARDWARE);
+        return ValidationType.Standard.HARDWARE.inst();
     }
 }

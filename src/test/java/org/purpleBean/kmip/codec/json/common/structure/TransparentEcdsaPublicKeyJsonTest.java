@@ -22,7 +22,7 @@ class TransparentEcdsaPublicKeyJsonTest extends AbstractJsonSerializationTestSui
     @Override
     protected TransparentEcdsaPublicKey createDefault() {
         return TransparentEcdsaPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_192),
+                RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
         );
     }
@@ -30,7 +30,7 @@ class TransparentEcdsaPublicKeyJsonTest extends AbstractJsonSerializationTestSui
     @Override
     protected TransparentEcdsaPublicKey createVariant() {
         return TransparentEcdsaPublicKey.of(
-                new RecommendedCurve(RecommendedCurve.Standard.P_224),
+                RecommendedCurve.Standard.P_224.inst(),
                 QString.of("test2".getBytes())
         );
     }

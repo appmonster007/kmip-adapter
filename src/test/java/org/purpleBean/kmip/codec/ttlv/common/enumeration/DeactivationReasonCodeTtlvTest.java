@@ -13,11 +13,11 @@ class DeactivationReasonCodeTtlvTest extends AbstractTtlvSerializationTestSuite<
 
     @Override
     protected DeactivationReasonCode createDefault() {
-        return new DeactivationReasonCode(DeactivationReasonCode.Standard.UNSPECIFIED);
+        return DeactivationReasonCode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected DeactivationReasonCode createVariant() {
-        return new DeactivationReasonCode(DeactivationReasonCode.Standard.DEACTIVATION_DATE);
+        return DeactivationReasonCode.Standard.DEACTIVATION_DATE.inst();
     }
 }

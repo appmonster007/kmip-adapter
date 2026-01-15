@@ -13,11 +13,11 @@ class ShreddingAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<Shre
 
     @Override
     protected ShreddingAlgorithm createDefault() {
-        return new ShreddingAlgorithm(ShreddingAlgorithm.Standard.UNSPECIFIED);
+        return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ShreddingAlgorithm createVariant() {
-        return new ShreddingAlgorithm(ShreddingAlgorithm.Standard.CRYPTOGRAPHIC);
+        return ShreddingAlgorithm.Standard.CRYPTOGRAPHIC.inst();
     }
 }

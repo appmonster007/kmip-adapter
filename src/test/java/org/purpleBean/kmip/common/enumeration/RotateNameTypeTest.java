@@ -20,17 +20,17 @@ class RotateNameTypeTest extends AbstractKmipEnumerationTestSuite<RotateNameType
 
     @Override
     protected RotateNameType createDefault() {
-        return new RotateNameType(RotateNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return RotateNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected RotateNameType createEqualToDefault() {
-        return new RotateNameType(RotateNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return RotateNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected RotateNameType createDifferentFromDefault() {
-        return new RotateNameType(RotateNameType.Standard.URI);
+        return RotateNameType.Standard.URI.inst();
     }
 
     @Override

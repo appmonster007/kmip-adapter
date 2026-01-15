@@ -20,17 +20,17 @@ class UnwrapModeTest extends AbstractKmipEnumerationTestSuite<UnwrapMode> {
 
     @Override
     protected UnwrapMode createDefault() {
-        return new UnwrapMode(UnwrapMode.Standard.UNSPECIFIED);
+        return UnwrapMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected UnwrapMode createEqualToDefault() {
-        return new UnwrapMode(UnwrapMode.Standard.UNSPECIFIED);
+        return UnwrapMode.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected UnwrapMode createDifferentFromDefault() {
-        return new UnwrapMode(UnwrapMode.Standard.PROCESSED);
+        return UnwrapMode.Standard.PROCESSED.inst();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class KeyValueLocationBenchmarkSubject extends KmipBenchmarkSubject<KeyVa
 
     public KeyValueLocationBenchmarkSubject() throws Exception {
         KeyValueLocation keyvaluelocation = KeyValueLocation.builder()
-                .keyValueLocationType(new KeyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING))
+                .keyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .keyValueLocationValue(KeyValueLocationValue.builder().value("test").build())
                 .build();
         initialize(keyvaluelocation, KeyValueLocation.class);

@@ -20,17 +20,17 @@ class OtpAlgorithmTest extends AbstractKmipEnumerationTestSuite<OtpAlgorithm> {
 
     @Override
     protected OtpAlgorithm createDefault() {
-        return new OtpAlgorithm(OtpAlgorithm.Standard.HOTP);
+        return OtpAlgorithm.Standard.HOTP.inst();
     }
 
     @Override
     protected OtpAlgorithm createEqualToDefault() {
-        return new OtpAlgorithm(OtpAlgorithm.Standard.HOTP);
+        return OtpAlgorithm.Standard.HOTP.inst();
     }
 
     @Override
     protected OtpAlgorithm createDifferentFromDefault() {
-        return new OtpAlgorithm(OtpAlgorithm.Standard.TOTP);
+        return OtpAlgorithm.Standard.TOTP.inst();
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.UnwrapMode;
 public class UnwrapModeBenchmarkSubject extends KmipBenchmarkSubject<UnwrapMode> {
 
     public UnwrapModeBenchmarkSubject() throws Exception {
-        UnwrapMode unwrapMode = new UnwrapMode(UnwrapMode.Standard.UNSPECIFIED);
+        UnwrapMode unwrapMode = UnwrapMode.Standard.UNSPECIFIED.inst();
         initialize(unwrapMode, UnwrapMode.class);
     }
 

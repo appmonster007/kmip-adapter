@@ -20,17 +20,17 @@ class RngAlgorithmTest extends AbstractKmipEnumerationTestSuite<RngAlgorithm> {
 
     @Override
     protected RngAlgorithm createDefault() {
-        return new RngAlgorithm(RngAlgorithm.Standard.UNSPECIFIED);
+        return RngAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngAlgorithm createEqualToDefault() {
-        return new RngAlgorithm(RngAlgorithm.Standard.UNSPECIFIED);
+        return RngAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected RngAlgorithm createDifferentFromDefault() {
-        return new RngAlgorithm(RngAlgorithm.Standard.FIPS_186_2);
+        return RngAlgorithm.Standard.FIPS_186_2.inst();
     }
 
     @Override

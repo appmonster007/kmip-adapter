@@ -13,11 +13,11 @@ class CertificateRequestTypeXmlTest extends AbstractXmlSerializationTestSuite<Ce
 
     @Override
     protected CertificateRequestType createDefault() {
-        return new CertificateRequestType(CertificateRequestType.Standard.CRMF);
+        return CertificateRequestType.Standard.CRMF.inst();
     }
 
     @Override
     protected CertificateRequestType createVariant() {
-        return new CertificateRequestType(CertificateRequestType.Standard.PKCS_10);
+        return CertificateRequestType.Standard.PKCS_10.inst();
     }
 }

@@ -20,17 +20,17 @@ class KeyWrapTypeTest extends AbstractKmipEnumerationTestSuite<KeyWrapType> {
 
     @Override
     protected KeyWrapType createDefault() {
-        return new KeyWrapType(KeyWrapType.Standard.NOT_WRAPPED);
+        return KeyWrapType.Standard.NOT_WRAPPED.inst();
     }
 
     @Override
     protected KeyWrapType createEqualToDefault() {
-        return new KeyWrapType(KeyWrapType.Standard.NOT_WRAPPED);
+        return KeyWrapType.Standard.NOT_WRAPPED.inst();
     }
 
     @Override
     protected KeyWrapType createDifferentFromDefault() {
-        return new KeyWrapType(KeyWrapType.Standard.AS_REGISTERED);
+        return KeyWrapType.Standard.AS_REGISTERED.inst();
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class ArchiveDate implements KmipDataType, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ARCHIVE_DATE);
+    public static final KmipTag kmipTag = KmipTag.Standard.ARCHIVE_DATE.inst();
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

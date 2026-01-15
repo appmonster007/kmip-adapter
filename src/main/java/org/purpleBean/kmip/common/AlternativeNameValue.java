@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class AlternativeNameValue implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.ALTERNATIVE_NAME_VALUE);
+    public static final KmipTag kmipTag = KmipTag.Standard.ALTERNATIVE_NAME_VALUE.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

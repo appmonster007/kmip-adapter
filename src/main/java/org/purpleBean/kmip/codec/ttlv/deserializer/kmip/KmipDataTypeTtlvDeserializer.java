@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.kmip;
 
 import org.purpleBean.kmip.EncodingType;
-import org.purpleBean.kmip.KmipContext;
 import org.purpleBean.kmip.KmipDataType;
 import org.purpleBean.kmip.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
@@ -17,7 +16,7 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
     @Override
     public T deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject ttlvObject = TtlvObject.fromBuffer(ttlvBuffer);
-        KmipTag.Value kmipTagValue = KmipTag.fromBytes(KmipContext.getSpec(), ttlvObject.getTag());
+        KmipTag.Value kmipTagValue = KmipTag.fromBytes(ttlvObject.getTag());
         EncodingType encodingType = EncodingType.fromTypeValue(ttlvObject.getType()).orElse(null);
 
         if (kmipTagValue == null || encodingType == null) {

@@ -16,7 +16,7 @@ public class AlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<Altern
     public AlternativeNameBenchmarkSubject() throws Exception {
         AlternativeName alternativename = AlternativeName.builder()
                 .alternativeNameValue(AlternativeNameValue.of("SomeAliasName"))
-                .alternativeNameType(new AlternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING))
+                .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .build();
         initialize(alternativename, AlternativeName.class);
     }

@@ -13,11 +13,11 @@ class EndpointRoleJsonTest extends AbstractJsonSerializationTestSuite<EndpointRo
 
     @Override
     protected EndpointRole createDefault() {
-        return new EndpointRole(EndpointRole.Standard.CLIENT);
+        return EndpointRole.Standard.CLIENT.inst();
     }
 
     @Override
     protected EndpointRole createVariant() {
-        return new EndpointRole(EndpointRole.Standard.SERVER);
+        return EndpointRole.Standard.SERVER.inst();
     }
 }

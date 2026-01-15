@@ -13,11 +13,11 @@ class ProtectionLevelXmlTest extends AbstractXmlSerializationTestSuite<Protectio
 
     @Override
     protected ProtectionLevel createDefault() {
-        return new ProtectionLevel(ProtectionLevel.Standard.HIGH);
+        return ProtectionLevel.Standard.HIGH.inst();
     }
 
     @Override
     protected ProtectionLevel createVariant() {
-        return new ProtectionLevel(ProtectionLevel.Standard.LOW);
+        return ProtectionLevel.Standard.LOW.inst();
     }
 }

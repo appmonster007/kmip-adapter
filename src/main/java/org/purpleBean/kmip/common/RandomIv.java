@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class RandomIv implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.RANDOM_IV);
+    public static final KmipTag kmipTag = KmipTag.Standard.RANDOM_IV.inst();
     public static final EncodingType encodingType = EncodingType.BOOLEAN;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

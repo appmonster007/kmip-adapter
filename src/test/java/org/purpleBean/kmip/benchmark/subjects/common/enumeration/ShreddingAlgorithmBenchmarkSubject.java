@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ShreddingAlgorithm;
 public class ShreddingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<ShreddingAlgorithm> {
 
     public ShreddingAlgorithmBenchmarkSubject() throws Exception {
-        ShreddingAlgorithm shreddingAlgorithm = new ShreddingAlgorithm(ShreddingAlgorithm.Standard.UNSPECIFIED);
+        ShreddingAlgorithm shreddingAlgorithm = ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
         initialize(shreddingAlgorithm, ShreddingAlgorithm.class);
     }
 

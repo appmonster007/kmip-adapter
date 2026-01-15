@@ -13,11 +13,11 @@ class DataEnumerationTtlvTest extends AbstractTtlvSerializationTestSuite<DataEnu
 
     @Override
     protected DataEnumeration createDefault() {
-        return new DataEnumeration(DataEnumeration.Standard.DECRYPT);
+        return DataEnumeration.Standard.DECRYPT.inst();
     }
 
     @Override
     protected DataEnumeration createVariant() {
-        return new DataEnumeration(DataEnumeration.Standard.ENCRYPT);
+        return DataEnumeration.Standard.ENCRYPT.inst();
     }
 }

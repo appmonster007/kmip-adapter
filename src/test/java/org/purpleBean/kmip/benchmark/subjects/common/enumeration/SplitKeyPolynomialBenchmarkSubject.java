@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.SplitKeyPolynomial;
 public class SplitKeyPolynomialBenchmarkSubject extends KmipBenchmarkSubject<SplitKeyPolynomial> {
 
     public SplitKeyPolynomialBenchmarkSubject() throws Exception {
-        SplitKeyPolynomial splitKeyPolynomial = new SplitKeyPolynomial(SplitKeyPolynomial.Standard.POLYNOMIAL_283);
+        SplitKeyPolynomial splitKeyPolynomial = SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
         initialize(splitKeyPolynomial, SplitKeyPolynomial.class);
     }
 

@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.HashingAlgorithm;
 public class HashingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<HashingAlgorithm> {
 
     public HashingAlgorithmBenchmarkSubject() throws Exception {
-        HashingAlgorithm hashingAlgorithm = new HashingAlgorithm(HashingAlgorithm.Standard.MD2);
+        HashingAlgorithm hashingAlgorithm = HashingAlgorithm.Standard.MD2.inst();
         initialize(hashingAlgorithm, HashingAlgorithm.class);
     }
 

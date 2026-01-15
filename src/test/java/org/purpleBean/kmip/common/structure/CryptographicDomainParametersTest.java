@@ -30,7 +30,7 @@ class CryptographicDomainParametersTest extends AbstractKmipStructureAttributeTe
     protected CryptographicDomainParameters createDefault() {
         return CryptographicDomainParameters.builder()
                 .qlength(Qlength.of(256))
-                .recommendedCurve(new RecommendedCurve(RecommendedCurve.Standard.P_256))
+                .recommendedCurve(RecommendedCurve.Standard.P_256.inst())
                 .build();
     }
 

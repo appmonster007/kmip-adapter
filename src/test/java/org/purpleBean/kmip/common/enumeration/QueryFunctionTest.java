@@ -20,17 +20,17 @@ class QueryFunctionTest extends AbstractKmipEnumerationTestSuite<QueryFunction> 
 
     @Override
     protected QueryFunction createDefault() {
-        return new QueryFunction(QueryFunction.Standard.QUERY_SERVER_INFORMATION);
+        return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
     }
 
     @Override
     protected QueryFunction createEqualToDefault() {
-        return new QueryFunction(QueryFunction.Standard.QUERY_SERVER_INFORMATION);
+        return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
     }
 
     @Override
     protected QueryFunction createDifferentFromDefault() {
-        return new QueryFunction(QueryFunction.Standard.QUERY_OPERATIONS);
+        return QueryFunction.Standard.QUERY_OPERATIONS.inst();
     }
 
     @Override

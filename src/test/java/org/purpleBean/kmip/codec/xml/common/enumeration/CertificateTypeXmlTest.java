@@ -13,11 +13,11 @@ class CertificateTypeXmlTest extends AbstractXmlSerializationTestSuite<Certifica
 
     @Override
     protected CertificateType createDefault() {
-        return new CertificateType(CertificateType.Standard.X_509);
+        return CertificateType.Standard.X_509.inst();
     }
 
     @Override
     protected CertificateType createVariant() {
-        return new CertificateType(CertificateType.Standard.PGP);
+        return CertificateType.Standard.PGP.inst();
     }
 }

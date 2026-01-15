@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class InitialCounterValue implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.INITIAL_COUNTER_VALUE);
+    public static final KmipTag kmipTag = KmipTag.Standard.INITIAL_COUNTER_VALUE.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

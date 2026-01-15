@@ -13,11 +13,11 @@ class PutFunctionXmlTest extends AbstractXmlSerializationTestSuite<PutFunction> 
 
     @Override
     protected PutFunction createDefault() {
-        return new PutFunction(PutFunction.Standard.NEW);
+        return PutFunction.Standard.NEW.inst();
     }
 
     @Override
     protected PutFunction createVariant() {
-        return new PutFunction(PutFunction.Standard.REPLACE);
+        return PutFunction.Standard.REPLACE.inst();
     }
 }

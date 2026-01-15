@@ -20,17 +20,17 @@ class CredentialTypeTest extends AbstractKmipEnumerationTestSuite<CredentialType
 
     @Override
     protected CredentialType createDefault() {
-        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
+        return CredentialType.Standard.USERNAME_AND_PASSWORD.inst();
     }
 
     @Override
     protected CredentialType createEqualToDefault() {
-        return new CredentialType(CredentialType.Standard.USERNAME_AND_PASSWORD);
+        return CredentialType.Standard.USERNAME_AND_PASSWORD.inst();
     }
 
     @Override
     protected CredentialType createDifferentFromDefault() {
-        return new CredentialType(CredentialType.Standard.DEVICE);
+        return CredentialType.Standard.DEVICE.inst();
     }
 
     @Override

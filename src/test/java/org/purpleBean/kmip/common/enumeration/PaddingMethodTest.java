@@ -20,17 +20,17 @@ class PaddingMethodTest extends AbstractKmipEnumerationTestSuite<PaddingMethod> 
 
     @Override
     protected PaddingMethod createDefault() {
-        return new PaddingMethod(PaddingMethod.Standard.NONE);
+        return PaddingMethod.Standard.NONE.inst();
     }
 
     @Override
     protected PaddingMethod createEqualToDefault() {
-        return new PaddingMethod(PaddingMethod.Standard.NONE);
+        return PaddingMethod.Standard.NONE.inst();
     }
 
     @Override
     protected PaddingMethod createDifferentFromDefault() {
-        return new PaddingMethod(PaddingMethod.Standard.OAEP);
+        return PaddingMethod.Standard.OAEP.inst();
     }
 
     @Override

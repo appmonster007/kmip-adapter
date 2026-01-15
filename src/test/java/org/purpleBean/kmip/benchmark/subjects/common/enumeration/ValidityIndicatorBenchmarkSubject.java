@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ValidityIndicator;
 public class ValidityIndicatorBenchmarkSubject extends KmipBenchmarkSubject<ValidityIndicator> {
 
     public ValidityIndicatorBenchmarkSubject() throws Exception {
-        ValidityIndicator validityIndicator = new ValidityIndicator(ValidityIndicator.Standard.VALID);
+        ValidityIndicator validityIndicator = ValidityIndicator.Standard.VALID.inst();
         initialize(validityIndicator, ValidityIndicator.class);
     }
 

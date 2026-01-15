@@ -13,11 +13,11 @@ class RotateNameTypeJsonTest extends AbstractJsonSerializationTestSuite<RotateNa
 
     @Override
     protected RotateNameType createDefault() {
-        return new RotateNameType(RotateNameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return RotateNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected RotateNameType createVariant() {
-        return new RotateNameType(RotateNameType.Standard.URI);
+        return RotateNameType.Standard.URI.inst();
     }
 }

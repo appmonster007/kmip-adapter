@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class LastChangeDate implements KmipDataType, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.LAST_CHANGE_DATE);
+    public static final KmipTag kmipTag = KmipTag.Standard.LAST_CHANGE_DATE.inst();
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

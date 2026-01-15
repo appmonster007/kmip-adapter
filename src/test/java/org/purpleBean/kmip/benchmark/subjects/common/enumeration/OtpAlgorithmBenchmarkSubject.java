@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.OtpAlgorithm;
 public class OtpAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<OtpAlgorithm> {
 
     public OtpAlgorithmBenchmarkSubject() throws Exception {
-        OtpAlgorithm otpAlgorithm = new OtpAlgorithm(OtpAlgorithm.Standard.HOTP);
+        OtpAlgorithm otpAlgorithm = OtpAlgorithm.Standard.HOTP.inst();
         initialize(otpAlgorithm, OtpAlgorithm.class);
     }
 

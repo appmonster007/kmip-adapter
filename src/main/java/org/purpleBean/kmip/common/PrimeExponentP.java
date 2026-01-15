@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class PrimeExponentP implements KmipDataType {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PRIME_EXPONENT_P);
+    public static final KmipTag kmipTag = KmipTag.Standard.PRIME_EXPONENT_P.inst();
     public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

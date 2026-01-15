@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.EncodingOption;
 public class EncodingOptionBenchmarkSubject extends KmipBenchmarkSubject<EncodingOption> {
 
     public EncodingOptionBenchmarkSubject() throws Exception {
-        EncodingOption encodingOption = new EncodingOption(EncodingOption.Standard.NO_ENCODING);
+        EncodingOption encodingOption = EncodingOption.Standard.NO_ENCODING.inst();
         initialize(encodingOption, EncodingOption.class);
     }
 

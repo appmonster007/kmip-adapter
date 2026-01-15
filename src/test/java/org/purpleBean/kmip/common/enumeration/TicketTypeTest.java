@@ -20,12 +20,12 @@ class TicketTypeTest extends AbstractKmipEnumerationTestSuite<TicketType> {
 
     @Override
     protected TicketType createDefault() {
-        return new TicketType(TicketType.Standard.LOGIN);
+        return TicketType.Standard.LOGIN.inst();
     }
 
     @Override
     protected TicketType createEqualToDefault() {
-        return new TicketType(TicketType.Standard.LOGIN);
+        return TicketType.Standard.LOGIN.inst();
     }
 
     @Override

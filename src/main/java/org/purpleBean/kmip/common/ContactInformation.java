@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class ContactInformation implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.CONTACT_INFORMATION);
+    public static final KmipTag kmipTag = KmipTag.Standard.CONTACT_INFORMATION.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

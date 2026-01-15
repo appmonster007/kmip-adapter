@@ -20,12 +20,12 @@ class MaskGeneratorTest extends AbstractKmipEnumerationTestSuite<MaskGenerator> 
 
     @Override
     protected MaskGenerator createDefault() {
-        return new MaskGenerator(MaskGenerator.Standard.MFG1);
+        return MaskGenerator.Standard.MFG1.inst();
     }
 
     @Override
     protected MaskGenerator createEqualToDefault() {
-        return new MaskGenerator(MaskGenerator.Standard.MFG1);
+        return MaskGenerator.Standard.MFG1.inst();
     }
 
     @Override

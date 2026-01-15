@@ -20,17 +20,17 @@ class KeyFormatTypeTest extends AbstractKmipEnumerationTestSuite<KeyFormatType> 
 
     @Override
     protected KeyFormatType createDefault() {
-        return new KeyFormatType(KeyFormatType.Standard.RAW);
+        return KeyFormatType.Standard.RAW.inst();
     }
 
     @Override
     protected KeyFormatType createEqualToDefault() {
-        return new KeyFormatType(KeyFormatType.Standard.RAW);
+        return KeyFormatType.Standard.RAW.inst();
     }
 
     @Override
     protected KeyFormatType createDifferentFromDefault() {
-        return new KeyFormatType(KeyFormatType.Standard.OPAQUE);
+        return KeyFormatType.Standard.OPAQUE.inst();
     }
 
     @Override

@@ -20,17 +20,17 @@ class ValidationAuthorityTypeTest extends AbstractKmipEnumerationTestSuite<Valid
 
     @Override
     protected ValidationAuthorityType createDefault() {
-        return new ValidationAuthorityType(ValidationAuthorityType.Standard.UNSPECIFIED);
+        return ValidationAuthorityType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ValidationAuthorityType createEqualToDefault() {
-        return new ValidationAuthorityType(ValidationAuthorityType.Standard.UNSPECIFIED);
+        return ValidationAuthorityType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
     protected ValidationAuthorityType createDifferentFromDefault() {
-        return new ValidationAuthorityType(ValidationAuthorityType.Standard.NIST_CMVP);
+        return ValidationAuthorityType.Standard.NIST_CMVP.inst();
     }
 
     @Override

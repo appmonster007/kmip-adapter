@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ResultStatus;
 public class ResultStatusBenchmarkSubject extends KmipBenchmarkSubject<ResultStatus> {
 
     public ResultStatusBenchmarkSubject() throws Exception {
-        ResultStatus resultStatus = new ResultStatus(ResultStatus.Standard.OPERATION_FAILED);
+        ResultStatus resultStatus = ResultStatus.Standard.OPERATION_FAILED.inst();
         initialize(resultStatus, ResultStatus.class);
     }
 

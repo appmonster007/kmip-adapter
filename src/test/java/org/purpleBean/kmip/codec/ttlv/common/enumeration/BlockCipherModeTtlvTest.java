@@ -13,11 +13,11 @@ class BlockCipherModeTtlvTest extends AbstractTtlvSerializationTestSuite<BlockCi
 
     @Override
     protected BlockCipherMode createDefault() {
-        return new BlockCipherMode(BlockCipherMode.Standard.CBC);
+        return BlockCipherMode.Standard.CBC.inst();
     }
 
     @Override
     protected BlockCipherMode createVariant() {
-        return new BlockCipherMode(BlockCipherMode.Standard.ECB);
+        return BlockCipherMode.Standard.ECB.inst();
     }
 }

@@ -6,7 +6,10 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.util.TokenBuffer;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.AttributeValue;
+import org.purpleBean.kmip.EncodingType;
+import org.purpleBean.kmip.KmipDataType;
+import org.purpleBean.kmip.KmipTag;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -26,8 +29,7 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDes
             currentName = (String) ctxt.getAttribute("tag");
         }
 
-        KmipSpec spec = KmipContext.getSpec();
-        KmipTag.Value kmipTag = KmipTag.fromName(spec, currentName);
+        KmipTag.Value kmipTag = KmipTag.fromName(currentName);
 
         TokenBuffer buffer = new TokenBuffer(p, ctxt);
         buffer.copyCurrentStructure(p);

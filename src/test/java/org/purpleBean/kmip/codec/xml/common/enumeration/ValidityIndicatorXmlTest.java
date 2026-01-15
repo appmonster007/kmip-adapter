@@ -13,11 +13,11 @@ class ValidityIndicatorXmlTest extends AbstractXmlSerializationTestSuite<Validit
 
     @Override
     protected ValidityIndicator createDefault() {
-        return new ValidityIndicator(ValidityIndicator.Standard.VALID);
+        return ValidityIndicator.Standard.VALID.inst();
     }
 
     @Override
     protected ValidityIndicator createVariant() {
-        return new ValidityIndicator(ValidityIndicator.Standard.INVALID);
+        return ValidityIndicator.Standard.INVALID.inst();
     }
 }

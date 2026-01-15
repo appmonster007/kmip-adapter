@@ -13,11 +13,11 @@ class NameTypeJsonTest extends AbstractJsonSerializationTestSuite<NameType> {
 
     @Override
     protected NameType createDefault() {
-        return new NameType(NameType.Standard.UNINTERPRETED_TEXT_STRING);
+        return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
     }
 
     @Override
     protected NameType createVariant() {
-        return new NameType(NameType.Standard.URI);
+        return NameType.Standard.URI.inst();
     }
 }

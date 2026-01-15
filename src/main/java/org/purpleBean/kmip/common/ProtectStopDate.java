@@ -16,7 +16,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class ProtectStopDate implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.PROTECT_STOP_DATE);
+    public static final KmipTag kmipTag = KmipTag.Standard.PROTECT_STOP_DATE.inst();
     public static final EncodingType encodingType = EncodingType.DATE_TIME;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 

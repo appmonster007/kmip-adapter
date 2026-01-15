@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.DestroyAction;
 public class DestroyActionBenchmarkSubject extends KmipBenchmarkSubject<DestroyAction> {
 
     public DestroyActionBenchmarkSubject() throws Exception {
-        DestroyAction destroyAction = new DestroyAction(DestroyAction.Standard.UNSPECIFIED);
+        DestroyAction destroyAction = DestroyAction.Standard.UNSPECIFIED.inst();
         initialize(destroyAction, DestroyAction.class);
     }
 

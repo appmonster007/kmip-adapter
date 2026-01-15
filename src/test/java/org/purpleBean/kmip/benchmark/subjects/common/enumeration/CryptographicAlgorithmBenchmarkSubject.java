@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.CryptographicAlgorithm;
 public class CryptographicAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<CryptographicAlgorithm> {
 
     public CryptographicAlgorithmBenchmarkSubject() throws Exception {
-        CryptographicAlgorithm cryptographicAlgorithm = new CryptographicAlgorithm(CryptographicAlgorithm.Standard.DES);
+        CryptographicAlgorithm cryptographicAlgorithm = CryptographicAlgorithm.Standard.DES.inst();
         initialize(cryptographicAlgorithm, CryptographicAlgorithm.class);
     }
 

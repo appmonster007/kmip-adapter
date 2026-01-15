@@ -20,17 +20,17 @@ class SplitKeyMethodTest extends AbstractKmipEnumerationTestSuite<SplitKeyMethod
 
     @Override
     protected SplitKeyMethod createDefault() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.XOR);
+        return SplitKeyMethod.Standard.XOR.inst();
     }
 
     @Override
     protected SplitKeyMethod createEqualToDefault() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.XOR);
+        return SplitKeyMethod.Standard.XOR.inst();
     }
 
     @Override
     protected SplitKeyMethod createDifferentFromDefault() {
-        return new SplitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216);
+        return SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216.inst();
     }
 
     @Override

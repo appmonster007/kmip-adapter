@@ -13,11 +13,11 @@ class ProfileNameJsonTest extends AbstractJsonSerializationTestSuite<ProfileName
 
     @Override
     protected ProfileName createDefault() {
-        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
+        return ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
     }
 
     @Override
     protected ProfileName createVariant() {
-        return new ProfileName(ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2);
+        return ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2.inst();
     }
 }

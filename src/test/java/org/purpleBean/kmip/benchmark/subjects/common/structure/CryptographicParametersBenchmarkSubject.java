@@ -10,12 +10,12 @@ public class CryptographicParametersBenchmarkSubject extends KmipBenchmarkSubjec
 
     public CryptographicParametersBenchmarkSubject() throws Exception {
         CryptographicParameters cryptographicParameters = CryptographicParameters.builder()
-                .blockCipherMode(new BlockCipherMode(BlockCipherMode.Standard.CBC))
-                .paddingMethod(new PaddingMethod(PaddingMethod.Standard.PKCS5))
-                .hashingAlgorithm(new HashingAlgorithm(HashingAlgorithm.Standard.SHA_256))
-                .keyRoleType(new KeyRoleType(KeyRoleType.Standard.KEK))
-                .digitalSignatureAlgorithm(new DigitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.SHA_1_WITH_RSA_ENCRYPTION))
-                .cryptographicAlgorithm(new CryptographicAlgorithm(CryptographicAlgorithm.Standard.AES))
+                .blockCipherMode(BlockCipherMode.Standard.CBC.inst())
+                .paddingMethod(PaddingMethod.Standard.PKCS5.inst())
+                .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
+                .keyRoleType(KeyRoleType.Standard.KEK.inst())
+                .digitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.SHA_1_WITH_RSA_ENCRYPTION.inst())
+                .cryptographicAlgorithm(CryptographicAlgorithm.Standard.AES.inst())
                 .randomIv(RandomIv.of(true))
                 .ivLength(IvLength.of(128))
                 .tagLength(TagLength.of(128))

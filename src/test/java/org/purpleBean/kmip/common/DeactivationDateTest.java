@@ -61,21 +61,21 @@ class DeactivationDateTest extends AbstractKmipDataTypeAttributeTestSuite<Deacti
 
     @Override
     protected State stateForServerModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return new State(State.Standard.DEACTIVATED);
+        return State.Standard.DEACTIVATED.inst();
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE);
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return new State(State.Standard.DEACTIVATED);
+        return State.Standard.DEACTIVATED.inst();
     }
 }

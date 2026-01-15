@@ -20,17 +20,17 @@ class ObjectClassTest extends AbstractKmipEnumerationTestSuite<ObjectClass> {
 
     @Override
     protected ObjectClass createDefault() {
-        return new ObjectClass(ObjectClass.Standard.USER);
+        return ObjectClass.Standard.USER.inst();
     }
 
     @Override
     protected ObjectClass createEqualToDefault() {
-        return new ObjectClass(ObjectClass.Standard.USER);
+        return ObjectClass.Standard.USER.inst();
     }
 
     @Override
     protected ObjectClass createDifferentFromDefault() {
-        return new ObjectClass(ObjectClass.Standard.SYSTEM);
+        return ObjectClass.Standard.SYSTEM.inst();
     }
 
     @Override

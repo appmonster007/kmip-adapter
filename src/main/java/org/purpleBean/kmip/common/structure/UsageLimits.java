@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class UsageLimits implements KmipStructure, KmipAttribute {
 
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.USAGE_LIMITS);
+    public static final KmipTag kmipTag = KmipTag.Standard.USAGE_LIMITS.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {

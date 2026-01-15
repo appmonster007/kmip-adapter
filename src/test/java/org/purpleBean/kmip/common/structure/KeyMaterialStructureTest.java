@@ -27,7 +27,7 @@ class KeyMaterialStructureTest extends AbstractKmipStructureTestSuite<KeyMateria
     protected KeyMaterialStructure createDefault() {
         // TODO: Update with actual default values for your structure
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
-        State state = new State(State.Standard.ACTIVE);
+        State state = State.Standard.ACTIVE.inst();
         return KeyMaterialStructure.of(List.of(activationDate, state));
     }
 

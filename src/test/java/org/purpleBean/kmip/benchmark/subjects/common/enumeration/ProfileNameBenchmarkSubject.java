@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.ProfileName;
 public class ProfileNameBenchmarkSubject extends KmipBenchmarkSubject<ProfileName> {
 
     public ProfileNameBenchmarkSubject() throws Exception {
-        ProfileName profileName = new ProfileName(ProfileName.Standard.COMPLETE_SERVER_BASIC);
+        ProfileName profileName = ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
         initialize(profileName, ProfileName.class);
     }
 

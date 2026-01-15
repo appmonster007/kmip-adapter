@@ -10,7 +10,7 @@ public class RevocationReasonBenchmarkSubject extends KmipBenchmarkSubject<Revoc
 
     public RevocationReasonBenchmarkSubject() throws Exception {
         RevocationReason revocationReason = RevocationReason.builder()
-                .revocationReasonCode(new RevocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE))
+                .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
                 .revocationMessage(RevocationMessage.of("test-message"))
                 .build();
         initialize(revocationReason, RevocationReason.class);

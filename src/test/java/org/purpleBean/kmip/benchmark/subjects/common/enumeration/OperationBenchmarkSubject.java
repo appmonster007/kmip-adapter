@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.Operation;
 public class OperationBenchmarkSubject extends KmipBenchmarkSubject<Operation> {
 
     public OperationBenchmarkSubject() throws Exception {
-        Operation operation = new Operation(Operation.Standard.CREATE);
+        Operation operation = Operation.Standard.CREATE.inst();
         initialize(operation, Operation.class);
     }
 

@@ -13,11 +13,11 @@ class AsynchronousIndicatorXmlTest extends AbstractXmlSerializationTestSuite<Asy
 
     @Override
     protected AsynchronousIndicator createDefault() {
-        return new AsynchronousIndicator(AsynchronousIndicator.Standard.MANDATORY);
+        return AsynchronousIndicator.Standard.MANDATORY.inst();
     }
 
     @Override
     protected AsynchronousIndicator createVariant() {
-        return new AsynchronousIndicator(AsynchronousIndicator.Standard.OPTIONAL);
+        return AsynchronousIndicator.Standard.OPTIONAL.inst();
     }
 }

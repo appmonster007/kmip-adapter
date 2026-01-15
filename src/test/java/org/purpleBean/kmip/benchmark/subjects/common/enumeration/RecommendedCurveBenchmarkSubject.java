@@ -7,7 +7,7 @@ import org.purpleBean.kmip.common.enumeration.RecommendedCurve;
 public class RecommendedCurveBenchmarkSubject extends KmipBenchmarkSubject<RecommendedCurve> {
 
     public RecommendedCurveBenchmarkSubject() throws Exception {
-        RecommendedCurve recommendedCurve = new RecommendedCurve(RecommendedCurve.Standard.P_192);
+        RecommendedCurve recommendedCurve = RecommendedCurve.Standard.P_192.inst();
         initialize(recommendedCurve, RecommendedCurve.class);
     }
 

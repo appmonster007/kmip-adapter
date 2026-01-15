@@ -18,14 +18,14 @@ class KmipTagTest {
         @Test
         @DisplayName("getTagBytes returns 3 bytes for any standard tag")
         void getTagBytes_returnsThreeBytes() {
-            byte[] bytes = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE).getTagBytes();
+            byte[] bytes = KmipTag.Standard.REQUEST_MESSAGE.inst().getTagBytes();
             assertThat(bytes).hasSize(3);
         }
 
         @Test
         @DisplayName("getTagHexString returns 8-char string with 0x prefix")
         void getTagHexString_returnsFormattedHex() {
-            String hex = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE).getTagHexString();
+            String hex = KmipTag.Standard.REQUEST_MESSAGE.inst().getTagHexString();
             assertThat(hex).startsWith("0x").hasSize(8);
         }
     }
@@ -36,9 +36,9 @@ class KmipTagTest {
         @Test
         @DisplayName("isSupportedFor returns true for any spec (including null)")
         void isSupportedFor_alwaysReturnsTrue() {
-            KmipTag tag = new KmipTag(KmipTag.Standard.REQUEST_MESSAGE);
-            assertThat(tag.isSupportedFor(KmipSpec.UnknownVersion)).isTrue();
-            assertThat(tag.isSupportedFor(null)).isTrue();
+            KmipTag tag = KmipTag.Standard.REQUEST_MESSAGE.inst();
+            KmipContext.withSpec(KmipSpec.UnknownVersion, () -> assertThat(tag.isSupported()).isTrue());
+            KmipContext.withSpec(null, () -> assertThat(tag.isSupported()).isTrue());
         }
     }
 
@@ -105,7 +105,7 @@ class KmipTagTest {
         @Test
         @DisplayName("fromName: finds standard tag by name")
         void fromName_findsStandardTag() {
-            KmipTag.Value tag = KmipTag.fromName(KmipSpec.UnknownVersion, KNOWN_TAG_NAME);
+            KmipTag.Value tag = KmipTag.fromName(KNOWN_TAG_NAME);
             assertThat(tag.getValue()).isEqualTo(KNOWN_TAG_VALUE);
         }
 
@@ -113,13 +113,13 @@ class KmipTagTest {
         @DisplayName("fromName: throws NoSuchElementException for unknown name")
         void fromName_throwsForUnknownName() {
             assertThatExceptionOfType(NoSuchElementException.class)
-                    .isThrownBy(() -> KmipTag.fromName(KmipSpec.UnknownVersion, "__NON_EXISTENT__"));
+                    .isThrownBy(() -> KmipTag.fromName("__NON_EXISTENT__"));
         }
 
         @Test
         @DisplayName("fromValue: finds standard tag by value")
         void fromValue_findsStandardTag() {
-            KmipTag.Value tag = KmipTag.fromValue(KmipSpec.UnknownVersion, KNOWN_TAG_VALUE);
+            KmipTag.Value tag = KmipTag.fromValue(KNOWN_TAG_VALUE);
             assertThat(tag.getDescription()).isEqualTo(KNOWN_TAG_NAME);
         }
 
@@ -127,7 +127,7 @@ class KmipTagTest {
         @DisplayName("fromValue: throws NoSuchElementException for unknown value")
         void fromValue_throwsForUnknownValue() {
             assertThatExceptionOfType(NoSuchElementException.class)
-                    .isThrownBy(() -> KmipTag.fromValue(KmipSpec.UnknownVersion, 0x123456));
+                    .isThrownBy(() -> KmipTag.fromValue(0x123456));
         }
     }
 }
