@@ -14,7 +14,7 @@ public class KeyWrappingDataBenchmarkSubject extends KmipBenchmarkSubject<KeyWra
 
     public KeyWrappingDataBenchmarkSubject() throws Exception {
         KeyWrappingData subject = KeyWrappingData.builder()
-                .wrappingMethod(new WrappingMethod(WrappingMethod.Standard.ENCRYPT))
+                .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
                 .build();
         initialize(subject, KeyWrappingData.class);
     }

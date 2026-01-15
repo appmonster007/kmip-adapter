@@ -3,6 +3,7 @@ package org.purpleBean.kmip.{{pdot}};
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.Singular;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
@@ -12,11 +13,13 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -36,7 +39,24 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     // @NonNull
     // private final Field1 field1;
     // @NonNull
-    // private final Field2 field2;
+    // @Singular
+    // private final List<Field2> field2s;
+
+    // TODO: Add a custom constructor for the builder
+    // @Builder
+    private {{STRUCTURE_NAME}}(
+            @NonNull Field1 field1,
+            List<Field2> field2s
+    ) {
+        this.field1 = field1;
+        this.field2s = field2s;
+        validate();
+    }
+
+    // TODO: Add a validate method
+    private void validate() {
+        // Add validation logic here
+    }
 
     public static {{STRUCTURE_NAME}} of(@NonNull KmipDataType value) {
         if (!(value instanceof KmipStructure structure)) {
@@ -44,10 +64,14 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
         }
         Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         // TODO: Update to extract fields from the map and call the other 'of' method
-        // return {{STRUCTURE_NAME}}.of(
-        //         (Field1) map.get(Field1.kmipTag).getFirst(),
-        //         (Field2) map.get(Field2.kmipTag).getFirst()
-        // );
+        // {{STRUCTURE_NAME}}Builder builder = {{STRUCTURE_NAME}}.builder();
+        // if (map.containsKey(Field1.kmipTag)) {
+        //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
+        // }
+        // if (map.containsKey(Field2.kmipTag)) {
+        //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
+        // }
+        // return builder.build();
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -75,20 +99,13 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         // TODO: Return a list of all the fields
+        // return Stream.of(
+        //                 field1,
+        //                 field2s)
+        //         .filter(Objects::nonNull)
+        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+        //         .map(KmipDataType.class::cast)
+        //         .collect(Collectors.toList());
         return List.of();
-    }
-
-    public static class {{STRUCTURE_NAME}}Builder {
-        public {{STRUCTURE_NAME}} build() {
-            validate();
-            // TODO: Update the constructor call with all the fields
-            return new {{STRUCTURE_NAME}}();
-        }
-
-        private void validate() {
-            // TODO: Add null checks for all fields
-            // Objects.requireNonNull(field1, "field1 cannot be null");
-            // Objects.requireNonNull(field2, "field2 cannot be null");
-        }
     }
 }

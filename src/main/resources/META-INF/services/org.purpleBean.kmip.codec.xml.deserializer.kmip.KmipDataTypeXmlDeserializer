@@ -83,6 +83,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyMaterialStruc
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyValueLocationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyValueStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyWrappingDataXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyWrappingSpecificationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.LinkXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.MACSignatureKeyInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NameXmlDeserializer

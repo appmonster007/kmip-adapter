@@ -22,14 +22,14 @@ class KeyWrappingDataTtlvTest extends AbstractTtlvSerializationTestSuite<KeyWrap
     @Override
     protected KeyWrappingData createDefault() {
         return KeyWrappingData.builder()
-                .wrappingMethod(new WrappingMethod(WrappingMethod.Standard.ENCRYPT))
+                .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
                 .build();
     }
 
     @Override
     protected KeyWrappingData createVariant() {
         return KeyWrappingData.builder()
-                .wrappingMethod(new WrappingMethod(WrappingMethod.Standard.MAC_SIGN))
+                .wrappingMethod(WrappingMethod.Standard.MAC_SIGN.inst())
                 .build();
     }
 }

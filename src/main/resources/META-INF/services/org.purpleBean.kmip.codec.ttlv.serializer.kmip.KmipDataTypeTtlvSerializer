@@ -78,6 +78,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyMaterialStruct
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyValueLocationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyWrappingDataTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyWrappingSpecificationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.LinkTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.MACSignatureKeyInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NameTtlvSerializer
