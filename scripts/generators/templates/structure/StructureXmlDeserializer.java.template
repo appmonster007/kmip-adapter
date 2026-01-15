@@ -1,8 +1,9 @@
-package org.purpleBean.kmip.codec.xml.deserializer.kmip.{{pdot}};
+package org.purpleBean.kmip.codec.xml.deserializer.{{pdot}};
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;

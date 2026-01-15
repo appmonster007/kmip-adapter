@@ -2,6 +2,7 @@ package org.purpleBean.kmip.{{pdot}};
 
 import lombok.*;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
@@ -19,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder(toBuilder = true)
 public class {{ENUM_NAME}} implements KmipEnumeration {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ENUM_NAME_SNAKE}});
+    public static final KmipTag kmipTag = KmipTag.Standard.{{ENUM_NAME_SNAKE}}.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
@@ -23,7 +24,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
-    public static final KmipTag kmipTag = new KmipTag(KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}});
+    public static final KmipTag kmipTag = KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}}.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
 
     static {
