@@ -3,7 +3,7 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("DigitalSignatureAlgorithm Domain Tests")
-class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationTestSuite<DigitalSignatureAlgorithm> {
+class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTestSuite<DigitalSignatureAlgorithm> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2; // TODO: Adjust if needed
+    }
 
     @Override
     protected Class<DigitalSignatureAlgorithm> type() {
@@ -20,17 +25,17 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationTestSuite<Dig
 
     @Override
     protected DigitalSignatureAlgorithm createDefault() {
-        return DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION.inst();
+        return DigitalSignatureAlgorithm.Standard.values()[0].inst();
     }
 
     @Override
     protected DigitalSignatureAlgorithm createEqualToDefault() {
-        return DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION.inst();
+        return DigitalSignatureAlgorithm.Standard.values()[0].inst();
     }
 
     @Override
     protected DigitalSignatureAlgorithm createDifferentFromDefault() {
-        return DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION.inst();
+        return DigitalSignatureAlgorithm.Standard.values()[1].inst();
     }
 
     @Override
@@ -41,6 +46,61 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationTestSuite<Dig
     @Override
     protected boolean supportsRegistryBehavior() {
         return true;
+    }
+
+    @Override
+    public boolean expectAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean expectServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean expectClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
+        return true;
+    }
+
+    @Override
+    public State stateForServerModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    public State stateForServerModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    public State stateForClientModifiableTrue() {
+        return null;
+    }
+
+    @Override
+    public State stateForClientModifiableFalse() {
+        return null;
+    }
+
+    @Override
+    protected void attrEnum_serverModifiable_respectsState() {
+        // TODO: Implement if server modifiable
+    }
+
+    @Override
+    protected void attrEnum_clientModifiable_respectsState() {
+        // TODO: Implement if client modifiable
     }
 
     @Override
@@ -88,4 +148,3 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationTestSuite<Dig
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
-
