@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder(toBuilder = true)
-public class CredentialValueStructure implements CredentialValue, KmipStructure {
+public class CredentialValueGenericStructure implements CredentialValue, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CredentialValueStructure.class);
-            CredentialValue.register(spec, encodingType, null, CredentialValueStructure.class, CredentialValueStructure::of);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CredentialValueGenericStructure.class);
+            CredentialValue.register(spec, encodingType, null, CredentialValueGenericStructure.class, CredentialValueGenericStructure::of);
         }
     }
 
@@ -30,21 +30,21 @@ public class CredentialValueStructure implements CredentialValue, KmipStructure 
     private final List<KmipDataType> values;
 
     @Builder
-    private CredentialValueStructure(
+    private CredentialValueGenericStructure(
             List<KmipDataType> values
     ) {
         this.values = (values == null) ? Collections.emptyList() : values;
         validate();
     }
 
-    public static CredentialValueStructure of(KmipDataType... values) {
+    public static CredentialValueGenericStructure of(KmipDataType... values) {
         return of(List.of(values));
     }
 
-    public static CredentialValueStructure of(
+    public static CredentialValueGenericStructure of(
             List<KmipDataType> values
     ) {
-        return CredentialValueStructure.builder()
+        return CredentialValueGenericStructure.builder()
                 .values(values)
                 .build();
     }

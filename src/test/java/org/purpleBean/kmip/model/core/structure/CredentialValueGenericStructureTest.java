@@ -11,8 +11,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("CredentialValueStructure Domain Tests")
-class CredentialValueStructureTest extends AbstractKmipStructureTestSuite<CredentialValueStructure> {
+@DisplayName("CredentialValueGenericStructure Domain Tests")
+class CredentialValueGenericStructureTest extends AbstractKmipStructureTestSuite<CredentialValueGenericStructure> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,13 +20,13 @@ class CredentialValueStructureTest extends AbstractKmipStructureTestSuite<Creden
     }
 
     @Override
-    protected Class<CredentialValueStructure> type() {
-        return CredentialValueStructure.class;
+    protected Class<CredentialValueGenericStructure> type() {
+        return CredentialValueGenericStructure.class;
     }
 
     @Override
-    protected CredentialValueStructure createDefault() {
-        return CredentialValueStructure.builder()
+    protected CredentialValueGenericStructure createDefault() {
+        return CredentialValueGenericStructure.builder()
                 .value(Username.of("test-value"))
                 .build();
     }
