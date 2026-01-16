@@ -88,7 +88,9 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.LinkXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.MACSignatureKeyInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NonceXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.PrivateKeyTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ProtocolVersionXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.PublicKeyTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.RevocationReasonXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.SampleStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TemplateAttributeXmlSerializer

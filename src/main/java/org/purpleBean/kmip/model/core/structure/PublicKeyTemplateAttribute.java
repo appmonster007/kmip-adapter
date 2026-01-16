@@ -6,20 +6,23 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
-public class CommonTemplateAttribute implements KmipStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.COMMON_TEMPLATE_ATTRIBUTE.inst();
+public class PublicKeyTemplateAttribute implements KmipStructure {
+    public static final KmipTag kmipTag = KmipTag.Standard.PUBLIC_KEY_TEMPLATE_ATTRIBUTE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CommonTemplateAttribute.class);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, PublicKeyTemplateAttribute.class);
         }
     }
 
@@ -32,14 +35,14 @@ public class CommonTemplateAttribute implements KmipStructure {
     private final List<Attribute> attributes;
 
     @Builder
-    private CommonTemplateAttribute(List<Name> names, List<Attribute> attributes) {
+    private PublicKeyTemplateAttribute(List<Name> names, List<Attribute> attributes) {
         this.names = (names == null) ? Collections.emptyList() : names;
         this.attributes = (attributes == null) ? Collections.emptyList() : attributes;
         validate();
     }
 
-    public static CommonTemplateAttribute of(List<Name> names, List<Attribute> attributes) {
-        return CommonTemplateAttribute.builder().names(names).attributes(attributes).build();
+    public static PublicKeyTemplateAttribute of(List<Name> names, List<Attribute> attributes) {
+        return PublicKeyTemplateAttribute.builder().names(names).attributes(attributes).build();
     }
 
     private void validate() {

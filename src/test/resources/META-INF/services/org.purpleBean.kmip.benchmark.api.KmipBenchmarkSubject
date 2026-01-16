@@ -88,7 +88,9 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.LinkBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.MACSignatureKeyInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NonceBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.PrivateKeyTemplateAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ProtocolVersionBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.PublicKeyTemplateAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.RevocationReasonBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SampleStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TemplateAttributeBenchmarkSubject
