@@ -69,6 +69,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttributeValueStr
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateIssuerTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateSubjectTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CredentialValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CryptographicDomainParametersTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CryptographicParametersTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CustomAttributeTtlvSerializer
@@ -100,6 +101,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentRsaPri
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentRsaPublicKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentSymmetricKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.UsageLimitsTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.UsernameAndPasswordTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.X509CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.X509CertificateIssuerTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.X509CertificateSubjectTtlvSerializer

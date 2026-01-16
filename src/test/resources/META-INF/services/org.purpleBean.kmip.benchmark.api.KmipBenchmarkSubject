@@ -69,6 +69,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeValueStruct
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateSubjectBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.CredentialValueStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicDomainParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CustomAttributeBenchmarkSubject
@@ -100,6 +101,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentRsaPrivat
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentRsaPublicKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentSymmetricKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.UsageLimitsBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.UsernameAndPasswordBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateSubjectBenchmarkSubject

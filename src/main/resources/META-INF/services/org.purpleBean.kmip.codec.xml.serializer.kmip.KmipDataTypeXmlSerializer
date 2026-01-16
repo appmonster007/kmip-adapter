@@ -69,6 +69,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeXmlSerial
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIssuerXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateSubjectXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CredentialValueStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CryptographicDomainParametersXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CryptographicParametersXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CustomAttributeXmlSerializer
@@ -100,6 +101,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TransparentRsaPriv
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TransparentRsaPublicKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TransparentSymmetricKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.UsageLimitsXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.UsernameAndPasswordXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateIssuerXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateSubjectXmlSerializer
