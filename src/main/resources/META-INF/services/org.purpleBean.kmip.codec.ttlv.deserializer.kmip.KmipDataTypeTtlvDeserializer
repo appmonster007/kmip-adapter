@@ -75,6 +75,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.AttributeValueS
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CertificateIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CertificateIssuerTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CertificateSubjectTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CommonTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CredentialValueGenericStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CryptographicDomainParametersTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CryptographicParametersTtlvDeserializer
