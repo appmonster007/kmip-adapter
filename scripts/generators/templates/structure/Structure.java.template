@@ -43,13 +43,13 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     // private final List<Field2> field2s;
 
     // TODO: Add a custom constructor for the builder
-    // @Builder
+    @Builder
     private {{STRUCTURE_NAME}}(
-            @NonNull Field1 field1,
-            List<Field2> field2s
+            // @NonNull Field1 field1,
+            // List<Field2> field2s
     ) {
-        this.field1 = field1;
-        this.field2s = field2s;
+        // this.field1 = field1;
+        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
         validate();
     }
 
@@ -58,27 +58,34 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
         // Add validation logic here
     }
 
-    public static {{STRUCTURE_NAME}} of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        // TODO: Update to extract fields from the map and call the other 'of' method
-        // {{STRUCTURE_NAME}}Builder builder = {{STRUCTURE_NAME}}.builder();
-        // if (map.containsKey(Field1.kmipTag)) {
-        //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-        // }
-        // if (map.containsKey(Field2.kmipTag)) {
-        //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-        // }
-        // return builder.build();
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
+    // public static {{STRUCTURE_NAME}} of(@NonNull KmipDataType value) {
+    //     if (!(value instanceof KmipStructure structure)) {
+    //         throw new IllegalArgumentException("Invalid value: " + value);
+    //     }
+    //     Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    //     // TODO: Update to extract fields from the map and call the other 'of' method
+    //     // {{STRUCTURE_NAME}}Builder builder = {{STRUCTURE_NAME}}.builder();
+    //     // if (map.containsKey(Field1.kmipTag)) {
+    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
+    //     // }
+    //     // if (map.containsKey(Field2.kmipTag)) {
+    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
+    //     // }
+    //     // return builder.build();
+    //     throw new UnsupportedOperationException("Not yet implemented");
+    // }
 
     // TODO: Add an 'of' method with all the fields as arguments
-    // public static {{STRUCTURE_NAME}} of(@NonNull Field1 field1, @NonNull Field2 field2) {
-    //     return {{STRUCTURE_NAME}}.builder().field1(field1).field2(field2).build();
-    // }
+    public static {{STRUCTURE_NAME}} of(
+                // @NonNull Field1 field1,
+                // @NonNull Field2 field2
+    ) {
+        return {{STRUCTURE_NAME}}.builder()
+                     // .field1(field1)
+                     // .field2(field2)
+                     .build();
+    }
 
     @Override
     public KmipTag getKmipTag() {
