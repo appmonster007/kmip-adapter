@@ -32,6 +32,13 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
     @NonNull
     private final D d;
 
+    @Builder
+    private TransparentEcdhPrivateKey(@NonNull RecommendedCurve recommendedCurve, @NonNull D d) {
+        this.recommendedCurve = recommendedCurve;
+        this.d = d;
+        validate();
+    }
+
     public static TransparentEcdhPrivateKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -45,6 +52,11 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
 
     public static TransparentEcdhPrivateKey of(@NonNull RecommendedCurve recommendedCurve, @NonNull D d) {
         return TransparentEcdhPrivateKey.builder().recommendedCurve(recommendedCurve).d(d).build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
+        Objects.requireNonNull(d, "d cannot be null");
     }
 
     @Override
@@ -66,17 +78,5 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(recommendedCurve, d);
-    }
-
-    public static class TransparentEcdhPrivateKeyBuilder {
-        public TransparentEcdhPrivateKey build() {
-            validate();
-            return new TransparentEcdhPrivateKey(recommendedCurve, d);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
-            Objects.requireNonNull(d, "d cannot be null");
-        }
     }
 }

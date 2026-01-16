@@ -44,6 +44,17 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     @NonNull
     private final UsageLimitsUnit usageLimitsUnit;
 
+    @Builder
+    private UsageLimits(
+            @NonNull UsageLimitsTotal usageLimitsTotal,
+            @NonNull UsageLimitsCount usageLimitsCount,
+            @NonNull UsageLimitsUnit usageLimitsUnit
+    ) {
+        this.usageLimitsTotal = usageLimitsTotal;
+        this.usageLimitsCount = usageLimitsCount;
+        this.usageLimitsUnit = usageLimitsUnit;
+        validate();
+    }
 
     public static UsageLimits of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
@@ -55,6 +66,12 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
                 .usageLimitsCount((UsageLimitsCount) map.get(UsageLimitsCount.kmipTag).get(0))
                 .usageLimitsUnit((UsageLimitsUnit) map.get(UsageLimitsUnit.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(usageLimitsTotal, "UsageLimitsTotal cannot be null");
+        Objects.requireNonNull(usageLimitsCount, "UsageLimitsCount cannot be null");
+        Objects.requireNonNull(usageLimitsUnit, "UsageLimitsUnit cannot be null");
     }
 
     @Override
@@ -127,22 +144,5 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class UsageLimitsBuilder {
-        public UsageLimits build() {
-            validate();
-            return new UsageLimits(
-                    usageLimitsTotal,
-                    usageLimitsCount,
-                    usageLimitsUnit
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(usageLimitsTotal, "UsageLimitsTotal cannot be null");
-            Objects.requireNonNull(usageLimitsCount, "UsageLimitsCount cannot be null");
-            Objects.requireNonNull(usageLimitsUnit, "UsageLimitsUnit cannot be null");
-        }
     }
 }

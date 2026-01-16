@@ -28,6 +28,12 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     @NonNull
     private final Key key;
 
+    @Builder
+    private TransparentSymmetricKey(@NonNull Key key) {
+        this.key = key;
+        validate();
+    }
+
     public static TransparentSymmetricKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -38,6 +44,10 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
 
     public static TransparentSymmetricKey of(@NonNull Key key) {
         return TransparentSymmetricKey.builder().key(key).build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(key, "key cannot be null");
     }
 
     @Override
@@ -59,16 +69,5 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(key);
-    }
-
-    public static class TransparentSymmetricKeyBuilder {
-        public TransparentSymmetricKey build() {
-            validate();
-            return new TransparentSymmetricKey(key);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(key, "key cannot be null");
-        }
     }
 }

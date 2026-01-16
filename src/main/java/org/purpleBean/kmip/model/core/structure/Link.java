@@ -11,7 +11,6 @@ import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,6 +39,13 @@ public class Link implements KmipStructure, KmipAttribute {
     @NonNull
     private final LinkedObjectIdentifier linkedObjectIdentifier;
 
+    @Builder
+    private Link(@NonNull LinkType linkType, @NonNull LinkedObjectIdentifier linkedObjectIdentifier) {
+        this.linkType = linkType;
+        this.linkedObjectIdentifier = linkedObjectIdentifier;
+        validate();
+    }
+
     public static Link of(@NonNull LinkType linkType, @NonNull LinkedObjectIdentifier linkedObjectIdentifier) {
         return Link.builder()
                 .linkType(linkType)
@@ -56,6 +62,10 @@ public class Link implements KmipStructure, KmipAttribute {
                 .linkType((LinkType) map.get(LinkType.kmipTag).get(0))
                 .linkedObjectIdentifier((LinkedObjectIdentifier) map.get(LinkedObjectIdentifier.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -128,20 +138,5 @@ public class Link implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(kmipTag.getDescription());
-    }
-
-    public static class LinkBuilder {
-        public Link build() {
-            validate();
-            return new Link(
-                    linkType,
-                    linkedObjectIdentifier
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(linkType, "LinkType cannot be null");
-            Objects.requireNonNull(linkedObjectIdentifier, "LinkedObjectIdentifier cannot be null");
-        }
     }
 }

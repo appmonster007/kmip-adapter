@@ -52,9 +52,11 @@ public class Name implements KmipStructure, KmipAttribute {
     @NonNull
     private final NameType nameType;
 
-    public Name(@NonNull NameValue nameValue, @NonNull NameType nameType) {
-        this.nameValue = Objects.requireNonNull(nameValue, "Name value cannot be null");
-        this.nameType = Objects.requireNonNull(nameType, "Name type cannot be null");
+    @Builder
+    private Name(@NonNull NameValue nameValue, @NonNull NameType nameType) {
+        this.nameValue = nameValue;
+        this.nameType = nameType;
+        validate();
     }
 
     public static Name of(@NonNull String name, @NonNull NameType type) {
@@ -70,6 +72,21 @@ public class Name implements KmipStructure, KmipAttribute {
                 .nameValue((NameValue) map.get(NameValue.kmipTag).get(0))
                 .nameType((NameType) map.get(NameType.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!nameValue.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Name value is not supported for KMIP spec %s", spec)
+            );
+        }
+        if (!nameType.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Name type is not supported for KMIP spec %s", spec)
+            );
+        }
     }
 
     @Override
@@ -142,30 +159,5 @@ public class Name implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class NameBuilder {
-        public Name build() {
-            validate();
-            return new Name(nameValue, nameType);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(nameValue, "Name value cannot be null");
-            Objects.requireNonNull(nameType, "Name type cannot be null");
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            if (!nameValue.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Name value is not supported for KMIP spec %s", spec)
-                );
-            }
-            if (!nameType.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Name type is not supported for KMIP spec %s", spec)
-                );
-            }
-        }
     }
 }

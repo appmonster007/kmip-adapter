@@ -40,6 +40,16 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
     @Singular
     private final List<IssuerAlternativeName> issuerAlternativeNames;
 
+    @Builder
+    private X509CertificateIssuer(
+            @NonNull IssuerDistinguishedName issuerDistinguishedName,
+            List<IssuerAlternativeName> issuerAlternativeNames
+    ) {
+        this.issuerDistinguishedName = issuerDistinguishedName;
+        this.issuerAlternativeNames = (issuerAlternativeNames == null) ? Collections.emptyList() : issuerAlternativeNames;
+        validate();
+    }
+
     public static X509CertificateIssuer of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -49,6 +59,11 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
                 .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
                 .issuerAlternativeNames(map.get(IssuerAlternativeName.kmipTag).stream().map(e -> (IssuerAlternativeName) e).collect(Collectors.toList()))
                 .build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(issuerDistinguishedName, "IssuerDistinguishedName cannot be null");
+        Objects.requireNonNull(issuerAlternativeNames, "IssuerAlternativeNames cannot be null");
     }
 
     @Override
@@ -124,20 +139,5 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class X509CertificateIssuerBuilder {
-        public X509CertificateIssuer build() {
-            validate();
-            return new X509CertificateIssuer(
-                    issuerDistinguishedName,
-                    issuerAlternativeNames
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(issuerDistinguishedName, "IssuerDistinguishedName cannot be null");
-            Objects.requireNonNull(issuerAlternativeNames, "IssuerAlternativeNames cannot be null");
-        }
     }
 }

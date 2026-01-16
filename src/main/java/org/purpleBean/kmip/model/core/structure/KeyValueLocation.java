@@ -12,7 +12,6 @@ import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,6 +40,13 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     @NonNull
     private final KeyValueLocationType keyValueLocationType;
 
+    @Builder
+    private KeyValueLocation(@NonNull KeyValueLocationValue keyValueLocationValue, @NonNull KeyValueLocationType keyValueLocationType) {
+        this.keyValueLocationValue = keyValueLocationValue;
+        this.keyValueLocationType = keyValueLocationType;
+        validate();
+    }
+
     public static KeyValueLocation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -50,6 +56,10 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
                 .keyValueLocationValue((KeyValueLocationValue) map.get(KeyValueLocationValue.kmipTag).get(0))
                 .keyValueLocationType((KeyValueLocationType) map.get(KeyValueLocationType.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -122,20 +132,5 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class KeyValueLocationBuilder {
-        public KeyValueLocation build() {
-            validate();
-            return new KeyValueLocation(
-                    keyValueLocationValue,
-                    keyValueLocationType
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(keyValueLocationValue, "KeyValueLocationValue cannot be null");
-            Objects.requireNonNull(keyValueLocationType, "KeyValueLocationType cannot be null");
-        }
     }
 }

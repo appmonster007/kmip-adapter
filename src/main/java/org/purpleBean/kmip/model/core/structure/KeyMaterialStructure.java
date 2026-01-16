@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +28,12 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     @Singular
     private final List<KmipDataType> values;
 
+    @Builder
+    private KeyMaterialStructure(List<KmipDataType> values) {
+        this.values = (values == null) ? Collections.emptyList() : values;
+        validate();
+    }
+
     public static KeyMaterialStructure of(@NonNull KeyMaterial value) {
         if (!(value instanceof KeyMaterialStructure keyMaterialStructure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -40,6 +47,10 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
 
     public static KeyMaterialStructure of(@NonNull KmipDataType... values) {
         return of(List.of(values));
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

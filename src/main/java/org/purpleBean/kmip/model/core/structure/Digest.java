@@ -41,14 +41,16 @@ public class Digest implements KmipStructure, KmipAttribute {
     private final DigestValue digestValue;
     private final KeyFormatType keyFormatType;
 
-    public Digest(
+    @Builder
+    private Digest(
             @NonNull HashingAlgorithm hashingAlgorithm,
             DigestValue digestValue,
             KeyFormatType keyFormatType
     ) {
-        this.hashingAlgorithm = Objects.requireNonNull(hashingAlgorithm, "HashingAlgorithm cannot be null");
+        this.hashingAlgorithm = hashingAlgorithm;
         this.digestValue = digestValue;
         this.keyFormatType = keyFormatType;
+        validate();
     }
 
     public static Digest of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
@@ -61,6 +63,26 @@ public class Digest implements KmipStructure, KmipAttribute {
                 .digestValue((DigestValue) map.get(DigestValue.kmipTag).get(0))
                 .keyFormatType((KeyFormatType) map.get(KeyFormatType.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!hashingAlgorithm.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("HashingAlgorithm is not supported for KMIP spec %s", spec)
+            );
+        }
+        if (digestValue != null && !digestValue.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("DigestValue is not supported for KMIP spec %s", spec)
+            );
+        }
+        if (keyFormatType != null && !keyFormatType.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("KeyFormatType is not supported for KMIP spec %s", spec)
+            );
+        }
     }
 
     @Override
@@ -133,34 +155,5 @@ public class Digest implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class DigestBuilder {
-        public Digest build() {
-            validate();
-            return new Digest(hashingAlgorithm, digestValue, keyFormatType);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(hashingAlgorithm, "HashingAlgorithm cannot be null");
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            if (!hashingAlgorithm.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("HashingAlgorithm is not supported for KMIP spec %s", spec)
-                );
-            }
-            if (!digestValue.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("DigestValue is not supported for KMIP spec %s", spec)
-                );
-            }
-            if (!keyFormatType.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("KeyFormatType is not supported for KMIP spec %s", spec)
-                );
-            }
-        }
     }
 }

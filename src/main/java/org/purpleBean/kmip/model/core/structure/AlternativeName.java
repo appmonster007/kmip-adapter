@@ -12,7 +12,6 @@ import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,6 +40,13 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     @NonNull
     private final AlternativeNameType alternativeNameType;
 
+    @Builder
+    private AlternativeName(@NonNull AlternativeNameValue alternativeNameValue, @NonNull AlternativeNameType alternativeNameType) {
+        this.alternativeNameValue = alternativeNameValue;
+        this.alternativeNameType = alternativeNameType;
+        validate();
+    }
+
     public static AlternativeName of(@NonNull AlternativeNameValue alternativeNameValue, @NonNull AlternativeNameType alternativeNameType) {
         return AlternativeName.builder()
                 .alternativeNameValue(alternativeNameValue)
@@ -57,6 +63,10 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
                 .alternativeNameValue((AlternativeNameValue) map.get(AlternativeNameValue.kmipTag).get(0))
                 .alternativeNameType((AlternativeNameType) map.get(AlternativeNameType.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -129,20 +139,5 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class AlternativeNameBuilder {
-        public AlternativeName build() {
-            validate();
-            return new AlternativeName(
-                    alternativeNameValue,
-                    alternativeNameType
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(alternativeNameValue, "AlternativeNameValue cannot be null");
-            Objects.requireNonNull(alternativeNameType, "AlternativeNameType cannot be null");
-        }
     }
 }

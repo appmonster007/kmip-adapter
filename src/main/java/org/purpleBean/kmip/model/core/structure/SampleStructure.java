@@ -38,6 +38,32 @@ public class SampleStructure implements KmipStructure {
     private final ActivationDate activationDate;
     private final State state;
 
+    @Builder
+    private SampleStructure(@NonNull ActivationDate activationDate, State state) {
+        this.activationDate = activationDate;
+        this.state = state;
+        validate();
+    }
+
+    private void validate() {
+        List<KmipDataType> fields = new ArrayList<>();
+        fields.add(activationDate);
+        fields.add(state);
+
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        for (KmipDataType field : fields) {
+            if (field != null && !field.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
+                );
+            }
+        }
+
+        // Validate required fields
+        // Add required-field checks as needed
+    }
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -60,32 +86,5 @@ public class SampleStructure implements KmipStructure {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
                 && getValues().stream().allMatch(KmipDataType::isSupported);
-    }
-
-    public static class SampleStructureBuilder {
-        public SampleStructure build() {
-            // Validate required fields
-            validate();
-            return new SampleStructure(activationDate, state);
-        }
-
-        private void validate() {
-            List<KmipDataType> fields = new ArrayList<>();
-            fields.add(activationDate);
-            fields.add(state);
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            for (KmipDataType field : fields) {
-                if (field != null && !field.isSupported()) {
-                    throw new IllegalArgumentException(
-                            String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
-                    );
-                }
-            }
-
-            // Validate required fields
-            // Add required-field checks as needed
-        }
     }
 }

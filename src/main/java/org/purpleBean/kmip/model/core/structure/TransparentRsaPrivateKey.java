@@ -36,6 +36,28 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     private final PrimeExponentQ primeExponentQ;
     private final CRTCoefficient crtCoefficient;
 
+    @Builder
+    private TransparentRsaPrivateKey(
+            @NonNull Modulus modulus,
+            PrivateExponent privateExponent,
+            PublicExponent publicExponent,
+            P p,
+            Q q,
+            PrimeExponentP primeExponentP,
+            PrimeExponentQ primeExponentQ,
+            CRTCoefficient crtCoefficient
+    ) {
+        this.modulus = modulus;
+        this.privateExponent = privateExponent;
+        this.publicExponent = publicExponent;
+        this.p = p;
+        this.q = q;
+        this.primeExponentP = primeExponentP;
+        this.primeExponentQ = primeExponentQ;
+        this.crtCoefficient = crtCoefficient;
+        validate();
+    }
+
     public static TransparentRsaPrivateKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -66,6 +88,13 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
                 .build();
     }
 
+    private void validate() {
+        Objects.requireNonNull(modulus, "modulus cannot be null");
+        if (privateExponent == null && (p == null || q == null) && (primeExponentP == null || primeExponentQ == null)) {
+            throw new IllegalStateException("One of Private Exponent, (P and Q), or (Prime Exponent P and Prime Exponent Q) must be present");
+        }
+    }
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -87,19 +116,5 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
         return Stream.of(modulus, privateExponent, publicExponent, p, q, primeExponentP, primeExponentQ, crtCoefficient)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-    }
-
-    public static class TransparentRsaPrivateKeyBuilder {
-        public TransparentRsaPrivateKey build() {
-            validate();
-            return new TransparentRsaPrivateKey(modulus, privateExponent, publicExponent, p, q, primeExponentP, primeExponentQ, crtCoefficient);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(modulus, "modulus cannot be null");
-            if (privateExponent == null && (p == null || q == null) && (primeExponentP == null || primeExponentQ == null)) {
-                throw new IllegalStateException("One of Private Exponent, (P and Q), or (Prime Exponent P and Prime Exponent Q) must be present");
-            }
-        }
     }
 }

@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,20 +29,19 @@ public class MACSignatureKeyInformation implements KmipStructure {
     private final UniqueIdentifier uniqueIdentifier;
     private final CryptographicParameters cryptographicParameters;
 
-    public static MACSignatureKeyInformation of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-
-        return MACSignatureKeyInformation.builder()
-                .uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).get(0))
-                .cryptographicParameters((CryptographicParameters) map.get(CryptographicParameters.kmipTag).get(0))
-                .build();
+    @Builder
+    private MACSignatureKeyInformation(@NonNull UniqueIdentifier uniqueIdentifier, CryptographicParameters cryptographicParameters) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.cryptographicParameters = cryptographicParameters;
+        validate();
     }
 
     public static MACSignatureKeyInformation of(@NonNull UniqueIdentifier uniqueIdentifier, CryptographicParameters cryptographicParameters) {
         return MACSignatureKeyInformation.builder().uniqueIdentifier(uniqueIdentifier).cryptographicParameters(cryptographicParameters).build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -67,16 +65,5 @@ public class MACSignatureKeyInformation implements KmipStructure {
         return Stream.of(uniqueIdentifier, cryptographicParameters)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-    }
-
-    public static class MACSignatureKeyInformationBuilder {
-        public MACSignatureKeyInformation build() {
-            validate();
-            return new MACSignatureKeyInformation(uniqueIdentifier, cryptographicParameters);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(uniqueIdentifier, "uniqueIdentifier can not be null");
-        }
     }
 }

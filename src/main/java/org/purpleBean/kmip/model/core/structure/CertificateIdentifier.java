@@ -41,6 +41,13 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
     private final Issuer issuer;
     private final SerialNumber serialNumber;
 
+    @Builder
+    private CertificateIdentifier(@NonNull Issuer issuer, SerialNumber serialNumber) {
+        this.issuer = issuer;
+        this.serialNumber = serialNumber;
+        validate();
+    }
+
     public static CertificateIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -50,6 +57,10 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
                 .issuer((Issuer) map.get(Issuer.kmipTag).get(0))
                 .serialNumber((SerialNumber) map.get(SerialNumber.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -122,19 +133,5 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class CertificateIdentifierBuilder {
-        public CertificateIdentifier build() {
-            validate();
-            return new CertificateIdentifier(
-                    issuer,
-                    serialNumber
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(issuer, "issuer cannot be null");
-        }
     }
 }

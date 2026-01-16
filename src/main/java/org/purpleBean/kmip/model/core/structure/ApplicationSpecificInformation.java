@@ -12,7 +12,6 @@ import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,6 +40,13 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     @NonNull
     private final ApplicationData applicationData;
 
+    @Builder
+    private ApplicationSpecificInformation(@NonNull ApplicationNamespace applicationNamespace, @NonNull ApplicationData applicationData) {
+        this.applicationNamespace = applicationNamespace;
+        this.applicationData = applicationData;
+        validate();
+    }
+
     public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -50,6 +56,10 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
                 .applicationNamespace((ApplicationNamespace) map.get(ApplicationNamespace.kmipTag).get(0))
                 .applicationData((ApplicationData) map.get(ApplicationData.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -122,20 +132,5 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class ApplicationSpecificInformationBuilder {
-        public ApplicationSpecificInformation build() {
-            validate();
-            return new ApplicationSpecificInformation(
-                    applicationNamespace,
-                    applicationData
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(applicationNamespace, "applicationNamespace cannot be null");
-            Objects.requireNonNull(applicationData, "applicationData cannot be null");
-        }
     }
 }

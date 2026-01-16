@@ -4,9 +4,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestMessageStructure;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -33,6 +37,22 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     @Singular
     private final List<Exception> requestBatchItemErrors;
 
+    @Builder
+    private SimpleRequestMessage(
+            @NonNull SimpleRequestHeader requestHeader,
+            List<SimpleRequestBatchItem> requestBatchItems,
+            List<Exception> requestBatchItemErrors
+    ) {
+        this.requestHeader = requestHeader;
+        this.requestBatchItems = (requestBatchItems == null) ? Collections.emptyList() : requestBatchItems;
+        this.requestBatchItemErrors = (requestBatchItemErrors == null) ? Collections.emptyList() : requestBatchItemErrors;
+        validate();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
+    }
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -52,7 +72,6 @@ public class SimpleRequestMessage implements RequestMessageStructure {
 
     @Override
     public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 }

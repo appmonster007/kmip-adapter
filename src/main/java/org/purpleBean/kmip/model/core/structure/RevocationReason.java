@@ -41,6 +41,13 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
     private final RevocationReasonCode revocationReasonCode;
     private final RevocationMessage revocationMessage;
 
+    @Builder
+    private RevocationReason(@NonNull RevocationReasonCode revocationReasonCode, RevocationMessage revocationMessage) {
+        this.revocationReasonCode = revocationReasonCode;
+        this.revocationMessage = revocationMessage;
+        validate();
+    }
+
     public static RevocationReason of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -50,6 +57,10 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
                 .revocationReasonCode((RevocationReasonCode) map.get(RevocationReasonCode.kmipTag).get(0))
                 .revocationMessage((RevocationMessage) map.get(RevocationMessage.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -122,19 +133,5 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class RevocationReasonBuilder {
-        public RevocationReason build() {
-            validate();
-            return new RevocationReason(
-                    revocationReasonCode,
-                    revocationMessage
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(revocationReasonCode, "RevocationReasonCode cannot be null");
-        }
     }
 }

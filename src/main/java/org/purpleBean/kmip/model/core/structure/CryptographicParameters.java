@@ -49,6 +49,38 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     private final CounterLength counterLength;
     private final InitialCounterValue initialCounterValue;
 
+    @Builder
+    private CryptographicParameters(
+            BlockCipherMode blockCipherMode,
+            PaddingMethod paddingMethod,
+            HashingAlgorithm hashingAlgorithm,
+            KeyRoleType keyRoleType,
+            DigitalSignatureAlgorithm digitalSignatureAlgorithm,
+            CryptographicAlgorithm cryptographicAlgorithm,
+            RandomIv randomIv,
+            IvLength ivLength,
+            TagLength tagLength,
+            FixedFieldLength fixedFieldLength,
+            InvocationFieldLength invocationFieldLength,
+            CounterLength counterLength,
+            InitialCounterValue initialCounterValue
+    ) {
+        this.blockCipherMode = blockCipherMode;
+        this.paddingMethod = paddingMethod;
+        this.hashingAlgorithm = hashingAlgorithm;
+        this.keyRoleType = keyRoleType;
+        this.digitalSignatureAlgorithm = digitalSignatureAlgorithm;
+        this.cryptographicAlgorithm = cryptographicAlgorithm;
+        this.randomIv = randomIv;
+        this.ivLength = ivLength;
+        this.tagLength = tagLength;
+        this.fixedFieldLength = fixedFieldLength;
+        this.invocationFieldLength = invocationFieldLength;
+        this.counterLength = counterLength;
+        this.initialCounterValue = initialCounterValue;
+        validate();
+    }
+
     public static CryptographicParameters of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -69,6 +101,10 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
                 .counterLength((CounterLength) map.get(CounterLength.kmipTag).get(0))
                 .initialCounterValue((InitialCounterValue) map.get(InitialCounterValue.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -155,30 +191,5 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class CryptographicParametersBuilder {
-        public CryptographicParameters build() {
-            validate();
-            return new CryptographicParameters(
-                    blockCipherMode,
-                    paddingMethod,
-                    hashingAlgorithm,
-                    keyRoleType,
-                    digitalSignatureAlgorithm,
-                    cryptographicAlgorithm,
-                    randomIv,
-                    ivLength,
-                    tagLength,
-                    fixedFieldLength,
-                    invocationFieldLength,
-                    counterLength,
-                    initialCounterValue
-            );
-        }
-
-        private void validate() {
-
-        }
     }
 }

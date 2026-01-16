@@ -43,9 +43,11 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     @NonNull
     private final CertificateSerialNumber certificateSerialNumber;
 
-    public X509CertificateIdentifier(@NonNull IssuerDistinguishedName issuerDistinguishedName, @NonNull CertificateSerialNumber certificateSerialNumber) {
-        this.issuerDistinguishedName = Objects.requireNonNull(issuerDistinguishedName, "Issuer Distinguished Name cannot be null");
-        this.certificateSerialNumber = Objects.requireNonNull(certificateSerialNumber, "Certificate Serial Number cannot be null");
+    @Builder
+    private X509CertificateIdentifier(@NonNull IssuerDistinguishedName issuerDistinguishedName, @NonNull CertificateSerialNumber certificateSerialNumber) {
+        this.issuerDistinguishedName = issuerDistinguishedName;
+        this.certificateSerialNumber = certificateSerialNumber;
+        validate();
     }
 
     public static X509CertificateIdentifier of(@NonNull ByteBuffer issuerDistinguishedName, @NonNull ByteBuffer certificateSerialNumber) {
@@ -61,6 +63,24 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
                 .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
                 .certificateSerialNumber((CertificateSerialNumber) map.get(CertificateSerialNumber.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(issuerDistinguishedName, "Issuer Distinguished Name cannot be null");
+        Objects.requireNonNull(certificateSerialNumber, "Certificate Serial Number cannot be null");
+
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!issuerDistinguishedName.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Issuer Distinguished Name is not supported for KMIP spec %s", spec)
+            );
+        }
+        if (!certificateSerialNumber.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Certificate Serial Number is not supported for KMIP spec %s", spec)
+            );
+        }
     }
 
     @Override
@@ -133,30 +153,5 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class X509CertificateIdentifierBuilder {
-        public X509CertificateIdentifier build() {
-            validate();
-            return new X509CertificateIdentifier(issuerDistinguishedName, certificateSerialNumber);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(issuerDistinguishedName, "Issuer Distinguished Name cannot be null");
-            Objects.requireNonNull(certificateSerialNumber, "Certificate Serial Number cannot be null");
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            if (!issuerDistinguishedName.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Issuer Distinguished Name is not supported for KMIP spec %s", spec)
-                );
-            }
-            if (!certificateSerialNumber.isSupported()) {
-                throw new IllegalArgumentException(
-                        String.format("Certificate Serial Number is not supported for KMIP spec %s", spec)
-                );
-            }
-        }
     }
 }

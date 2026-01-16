@@ -38,6 +38,14 @@ public class Attribute implements KmipStructure {
     @NonNull
     private final AttributeValue attributeValue;
 
+    @Builder
+    private Attribute(@NonNull AttributeName attributeName, AttributeIndex attributeIndex, @NonNull AttributeValue attributeValue) {
+        this.attributeName = attributeName;
+        this.attributeIndex = attributeIndex;
+        this.attributeValue = attributeValue;
+        validate();
+    }
+
     public static Attribute of(@NonNull String name, @NonNull AttributeValue value) {
         return Attribute.of(CustomAttribute.of(name, value));
     }
@@ -65,6 +73,10 @@ public class Attribute implements KmipStructure {
                 encodingType
         );
         return attributeBuilder.apply(attribute.getAttributeName(), attribute.getAttributeValue());
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

@@ -32,6 +32,13 @@ public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
     @NonNull
     private final QString qString;
 
+    @Builder
+    private TransparentEcdsaPublicKey(@NonNull RecommendedCurve recommendedCurve, @NonNull QString qString) {
+        this.recommendedCurve = recommendedCurve;
+        this.qString = qString;
+        validate();
+    }
+
     public static TransparentEcdsaPublicKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -45,6 +52,11 @@ public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
 
     public static TransparentEcdsaPublicKey of(@NonNull RecommendedCurve recommendedCurve, @NonNull QString qString) {
         return TransparentEcdsaPublicKey.builder().recommendedCurve(recommendedCurve).qString(qString).build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
+        Objects.requireNonNull(qString, "qString cannot be null");
     }
 
     @Override
@@ -66,17 +78,5 @@ public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(recommendedCurve, qString);
-    }
-
-    public static class TransparentEcdsaPublicKeyBuilder {
-        public TransparentEcdsaPublicKey build() {
-            validate();
-            return new TransparentEcdsaPublicKey(recommendedCurve, qString);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
-            Objects.requireNonNull(qString, "qString cannot be null");
-        }
     }
 }

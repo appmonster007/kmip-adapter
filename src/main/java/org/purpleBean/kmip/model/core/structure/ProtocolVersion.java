@@ -31,6 +31,13 @@ public class ProtocolVersion implements KmipStructure {
     @NonNull
     private final ProtocolVersionMinor protocolVersionMinor;
 
+    @Builder
+    private ProtocolVersion(@NonNull ProtocolVersionMajor protocolVersionMajor, @NonNull ProtocolVersionMinor protocolVersionMinor) {
+        this.protocolVersionMajor = protocolVersionMajor;
+        this.protocolVersionMinor = protocolVersionMinor;
+        validate();
+    }
+
     // Static factory methods for validation
     public static ProtocolVersion of(int major, int minor) {
         return ProtocolVersion.builder()
@@ -46,6 +53,10 @@ public class ProtocolVersion implements KmipStructure {
                 .protocolVersionMajor(protocolVersionMajor)
                 .protocolVersionMinor(protocolVersionMinor)
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     public List<KmipDataType> getValues() {

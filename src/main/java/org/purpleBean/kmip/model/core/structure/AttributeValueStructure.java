@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -27,12 +28,22 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
     @Singular
     private final List<KmipDataType> values;
 
+    @Builder
+    private AttributeValueStructure(List<KmipDataType> values) {
+        this.values = (values == null) ? Collections.emptyList() : values;
+        validate();
+    }
+
     public static AttributeValueStructure of(@NonNull List<KmipDataType> values) {
         return AttributeValueStructure.builder().values(values).build();
     }
 
     public static AttributeValueStructure of(@NonNull KmipDataType... values) {
         return of(List.of(values));
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

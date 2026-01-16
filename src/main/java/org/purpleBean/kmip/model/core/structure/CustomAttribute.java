@@ -37,15 +37,11 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     @NonNull
     private final AttributeValue attributeValue;
 
-    public CustomAttribute(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (!isValidCustomAttributeName(attributeName.getValue())) {
-            throw new IllegalArgumentException("Custom attribute name is invalid");
-        }
-        if (!isValidCustomAttributeValue(attributeValue)) {
-            throw new IllegalArgumentException("Custom attribute value is invalid");
-        }
+    @Builder
+    private CustomAttribute(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         this.attributeName = attributeName;
         this.attributeValue = attributeValue;
+        validate();
     }
 
     private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
@@ -90,6 +86,15 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     public static boolean isCustomClientAttribute(@NonNull String name) {
         Pattern pattern = Pattern.compile("^x-.*?", Pattern.CASE_INSENSITIVE);
         return pattern.matcher(name).matches();
+    }
+
+    private void validate() {
+        if (!isValidCustomAttributeName(attributeName.getValue())) {
+            throw new IllegalArgumentException("Custom attribute name is invalid");
+        }
+        if (!isValidCustomAttributeValue(attributeValue)) {
+            throw new IllegalArgumentException("Custom attribute value is invalid");
+        }
     }
 
     @Override

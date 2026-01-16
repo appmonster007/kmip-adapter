@@ -10,7 +10,6 @@ import org.purpleBean.kmip.model.core.type.IVCounterNonce;
 import org.purpleBean.kmip.model.core.type.MACSignature;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,35 +41,26 @@ public class KeyWrappingData implements KmipStructure {
 
     private final EncodingOption encodingOption;
 
-    public static KeyWrappingData of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag.Value, List<KmipDataType>> map = structure.getValues().stream()
-                .collect(Collectors.groupingBy(dt -> dt.getKmipTag().getValue()));
+    @Builder
+    private KeyWrappingData(
+            @NonNull WrappingMethod wrappingMethod,
+            EncryptionKeyInformation encryptionKeyInformation,
+            MACSignatureKeyInformation macSignatureKeyInformation,
+            MACSignature macSignature,
+            IVCounterNonce ivCounterNonce,
+            EncodingOption encodingOption
+    ) {
+        this.wrappingMethod = wrappingMethod;
+        this.encryptionKeyInformation = encryptionKeyInformation;
+        this.macSignatureKeyInformation = macSignatureKeyInformation;
+        this.macSignature = macSignature;
+        this.ivCounterNonce = ivCounterNonce;
+        this.encodingOption = encodingOption;
+        validate();
+    }
 
-        KeyWrappingDataBuilder builder = KeyWrappingData.builder();
-
-        if (map.containsKey(KmipTag.Standard.WRAPPING_METHOD)) {
-            builder.wrappingMethod((WrappingMethod) map.get(KmipTag.Standard.WRAPPING_METHOD).getFirst());
-        }
-        if (map.containsKey(KmipTag.Standard.ENCRYPTION_KEY_INFORMATION)) {
-            builder.encryptionKeyInformation((EncryptionKeyInformation) map.get(KmipTag.Standard.ENCRYPTION_KEY_INFORMATION).getFirst());
-        }
-        if (map.containsKey(KmipTag.Standard.MAC_SIGNATURE_KEY_INFORMATION)) {
-            builder.macSignatureKeyInformation((MACSignatureKeyInformation) map.get(KmipTag.Standard.MAC_SIGNATURE_KEY_INFORMATION).getFirst());
-        }
-        if (map.containsKey(KmipTag.Standard.MAC_SIGNATURE)) {
-            builder.macSignature((MACSignature) map.get(KmipTag.Standard.MAC_SIGNATURE).getFirst());
-        }
-        if (map.containsKey(KmipTag.Standard.IV_COUNTER_NONCE)) {
-            builder.ivCounterNonce((IVCounterNonce) map.get(KmipTag.Standard.IV_COUNTER_NONCE).getFirst());
-        }
-        if (map.containsKey(KmipTag.Standard.ENCODING_OPTION)) {
-            builder.encodingOption((EncodingOption) map.get(KmipTag.Standard.ENCODING_OPTION).getFirst());
-        }
-
-        return builder.build();
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

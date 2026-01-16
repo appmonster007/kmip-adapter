@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,15 +29,11 @@ public class EncryptionKeyInformation implements KmipStructure {
     private final UniqueIdentifier uniqueIdentifier;
     private final CryptographicParameters cryptographicParameters;
 
-    public static EncryptionKeyInformation of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        return EncryptionKeyInformation.builder()
-                .uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).get(0))
-                .cryptographicParameters((CryptographicParameters) map.get(CryptographicParameters.kmipTag).get(0))
-                .build();
+    @Builder
+    private EncryptionKeyInformation(@NonNull UniqueIdentifier uniqueIdentifier, CryptographicParameters cryptographicParameters) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.cryptographicParameters = cryptographicParameters;
+        validate();
     }
 
     public static EncryptionKeyInformation of(@NonNull UniqueIdentifier uniqueIdentifier, CryptographicParameters cryptographicParameters) {
@@ -46,6 +41,10 @@ public class EncryptionKeyInformation implements KmipStructure {
                 .uniqueIdentifier(uniqueIdentifier)
                 .cryptographicParameters(cryptographicParameters)
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -67,19 +66,5 @@ public class EncryptionKeyInformation implements KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return Stream.of(uniqueIdentifier, cryptographicParameters).filter(Objects::nonNull).collect(Collectors.toList());
-    }
-
-    public static class EncryptionKeyInformationBuilder {
-        public EncryptionKeyInformation build() {
-            validate();
-            return new EncryptionKeyInformation(
-                    uniqueIdentifier,
-                    cryptographicParameters
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(uniqueIdentifier, "uniqueIdentifier cannot be null");
-        }
     }
 }

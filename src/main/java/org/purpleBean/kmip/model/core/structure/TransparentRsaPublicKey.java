@@ -32,6 +32,13 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
     @NonNull
     private final PublicExponent publicExponent;
 
+    @Builder
+    private TransparentRsaPublicKey(@NonNull Modulus modulus, @NonNull PublicExponent publicExponent) {
+        this.modulus = modulus;
+        this.publicExponent = publicExponent;
+        validate();
+    }
+
     public static TransparentRsaPublicKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -45,6 +52,11 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
 
     public static TransparentRsaPublicKey of(@NonNull Modulus modulus, @NonNull PublicExponent publicExponent) {
         return TransparentRsaPublicKey.builder().modulus(modulus).publicExponent(publicExponent).build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(modulus, "modulus cannot be null");
+        Objects.requireNonNull(publicExponent, "publicExponent cannot be null");
     }
 
     @Override
@@ -66,17 +78,5 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(modulus, publicExponent);
-    }
-
-    public static class TransparentRsaPublicKeyBuilder {
-        public TransparentRsaPublicKey build() {
-            validate();
-            return new TransparentRsaPublicKey(modulus, publicExponent);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(modulus, "modulus cannot be null");
-            Objects.requireNonNull(publicExponent, "publicExponent cannot be null");
-        }
     }
 }

@@ -3,7 +3,10 @@ package org.purpleBean.kmip.model.core.structure.request;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 
@@ -27,6 +30,16 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     @NonNull
     private final ProtocolVersion protocolVersion;
 
+    @Builder
+    private SimpleRequestHeader(@NonNull ProtocolVersion protocolVersion) {
+        this.protocolVersion = protocolVersion;
+        validate();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
+    }
+
     @Override
     public KmipTag getKmipTag() {
         return kmipTag;
@@ -46,7 +59,6 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
 
     @Override
     public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
         return true;
     }
 }

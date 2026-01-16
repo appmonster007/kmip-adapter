@@ -6,10 +6,7 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,8 +31,32 @@ public class KeyValueStructure implements KeyValue, KmipStructure {
     @Singular
     private final List<KmipAttribute> attributes;
 
+    @Builder
+    private KeyValueStructure(@NonNull KeyMaterial keyMaterial, List<KmipAttribute> attributes) {
+        this.keyMaterial = keyMaterial;
+        this.attributes = (attributes == null) ? Collections.emptyList() : attributes;
+        validate();
+    }
+
     public static KeyValueStructure of(@NonNull KeyMaterial keyMaterial, @NonNull List<KmipAttribute> attributes) {
         return KeyValueStructure.builder().keyMaterial(keyMaterial).attributes(attributes).build();
+    }
+
+    private void validate() {
+        List<KmipDataType> fields = Stream.concat(
+                Stream.of(keyMaterial),
+                attributes.stream()
+        ).filter(Objects::nonNull).collect(Collectors.toList());
+
+        // Validate KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        for (KmipDataType field : fields) {
+            if (field != null && !field.isSupported()) {
+                throw new IllegalArgumentException(
+                        String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
+                );
+            }
+        }
     }
 
     @Override
@@ -60,33 +81,5 @@ public class KeyValueStructure implements KeyValue, KmipStructure {
         fields.add(keyMaterial);
         fields.addAll(attributes);
         return fields.stream().filter(Objects::nonNull).collect(Collectors.toList());
-    }
-
-    // Preferably, add validations in All Arg Constructor
-    public static class KeyValueStructureBuilder {
-        public KeyValueStructure build() {
-            validate();
-            return new KeyValueStructure(keyMaterial, attributes);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(keyMaterial, "keyMaterial cannot be null");
-            Objects.requireNonNull(attributes, "attributes cannot be null");
-
-            List<KmipDataType> fields = Stream.concat(
-                    Stream.of(keyMaterial),
-                    attributes.stream()
-            ).filter(Objects::nonNull).collect(Collectors.toList());
-
-            // Validate KMIP spec compatibility
-            KmipSpec spec = KmipContext.getSpec();
-            for (KmipDataType field : fields) {
-                if (field != null && !field.isSupported()) {
-                    throw new IllegalArgumentException(
-                            String.format("%s is not supported for KMIP spec %s", field.getKmipTag().getDescription(), spec)
-                    );
-                }
-            }
-        }
     }
 }

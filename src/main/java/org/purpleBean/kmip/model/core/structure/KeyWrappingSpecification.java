@@ -9,7 +9,10 @@ import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
 import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,49 +42,20 @@ public class KeyWrappingSpecification implements KmipStructure {
 
     private final EncodingOption encodingOption;
 
-    // Custom constructor for Lombok's builder to handle the @Singular field
     @Builder
     private KeyWrappingSpecification(
             @NonNull WrappingMethod wrappingMethod,
             EncryptionKeyInformation encryptionKeyInformation,
             MACSignatureKeyInformation macSignatureKeyInformation,
-            @NonNull List<AttributeName> attributeNames,
+            List<AttributeName> attributeNames,
             EncodingOption encodingOption
     ) {
         this.wrappingMethod = wrappingMethod;
         this.encryptionKeyInformation = encryptionKeyInformation;
         this.macSignatureKeyInformation = macSignatureKeyInformation;
-        this.attributeNames = attributeNames;
+        this.attributeNames = (attributeNames == null) ? Collections.emptyList() : attributeNames;
         this.encodingOption = encodingOption;
         validate();
-    }
-
-    public static KeyWrappingSpecification of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream()
-                .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-
-        KeyWrappingSpecificationBuilder builder = KeyWrappingSpecification.builder();
-
-        if (map.containsKey(WrappingMethod.kmipTag)) {
-            builder.wrappingMethod((WrappingMethod) map.get(WrappingMethod.kmipTag).getFirst());
-        }
-        if (map.containsKey(EncryptionKeyInformation.kmipTag)) {
-            builder.encryptionKeyInformation((EncryptionKeyInformation) map.get(EncryptionKeyInformation.kmipTag).getFirst());
-        }
-        if (map.containsKey(MACSignatureKeyInformation.kmipTag)) {
-            builder.macSignatureKeyInformation((MACSignatureKeyInformation) map.get(MACSignatureKeyInformation.kmipTag).getFirst());
-        }
-        if (map.containsKey(AttributeName.kmipTag)) {
-            map.get(AttributeName.kmipTag).forEach(item -> builder.attributeName((AttributeName) item));
-        }
-        if (map.containsKey(EncodingOption.kmipTag)) {
-            builder.encodingOption((EncodingOption) map.get(EncodingOption.kmipTag).getFirst());
-        }
-
-        return builder.build();
     }
 
     private void validate() {

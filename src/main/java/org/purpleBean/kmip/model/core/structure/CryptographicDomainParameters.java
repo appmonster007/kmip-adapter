@@ -40,6 +40,13 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     private final Qlength qlength;
     private final RecommendedCurve recommendedCurve;
 
+    @Builder
+    private CryptographicDomainParameters(Qlength qlength, RecommendedCurve recommendedCurve) {
+        this.qlength = qlength;
+        this.recommendedCurve = recommendedCurve;
+        validate();
+    }
+
     public static CryptographicDomainParameters of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -49,6 +56,10 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
                 .qlength((Qlength) map.get(Qlength.kmipTag).get(0))
                 .recommendedCurve((RecommendedCurve) map.get(RecommendedCurve.kmipTag).get(0))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -121,18 +132,5 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class CryptographicDomainParametersBuilder {
-        public CryptographicDomainParameters build() {
-            validate();
-            return new CryptographicDomainParameters(
-                    qlength,
-                    recommendedCurve
-            );
-        }
-
-        private void validate() {
-        }
     }
 }

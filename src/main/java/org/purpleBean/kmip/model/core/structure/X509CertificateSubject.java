@@ -40,6 +40,16 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
     @Singular
     private final List<SubjectAlternativeName> subjectAlternativeNames;
 
+    @Builder
+    private X509CertificateSubject(
+            @NonNull SubjectDistinguishedName subjectDistinguishedName,
+            List<SubjectAlternativeName> subjectAlternativeNames
+    ) {
+        this.subjectDistinguishedName = subjectDistinguishedName;
+        this.subjectAlternativeNames = (subjectAlternativeNames == null) ? Collections.emptyList() : subjectAlternativeNames;
+        validate();
+    }
+
     public static X509CertificateSubject of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -49,6 +59,11 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
                 .subjectDistinguishedName((SubjectDistinguishedName) map.get(SubjectDistinguishedName.kmipTag).get(0))
                 .subjectAlternativeNames(map.get(SubjectAlternativeName.kmipTag).stream().map(e -> (SubjectAlternativeName) e).collect(Collectors.toList()))
                 .build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(subjectDistinguishedName, "SubjectDistinguishedName cannot be null");
+        Objects.requireNonNull(subjectAlternativeNames, "SubjectAlternativeNames cannot be null");
     }
 
     @Override
@@ -124,20 +139,5 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class X509CertificateSubjectBuilder {
-        public X509CertificateSubject build() {
-            validate();
-            return new X509CertificateSubject(
-                    subjectDistinguishedName,
-                    subjectAlternativeNames
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(subjectDistinguishedName, "SubjectDistinguishedName cannot be null");
-            Objects.requireNonNull(subjectAlternativeNames, "SubjectAlternativeNames cannot be null");
-        }
     }
 }

@@ -40,6 +40,16 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     @Singular
     private final List<CertificateSubjectAlternativeName> certificateSubjectAlternativeNames;
 
+    @Builder
+    private CertificateSubject(
+            @NonNull CertificateSubjectDistinguishedName certificateSubjectDistinguishedName,
+            List<CertificateSubjectAlternativeName> certificateSubjectAlternativeNames
+    ) {
+        this.certificateSubjectDistinguishedName = certificateSubjectDistinguishedName;
+        this.certificateSubjectAlternativeNames = (certificateSubjectAlternativeNames == null) ? Collections.emptyList() : certificateSubjectAlternativeNames;
+        validate();
+    }
+
     public static CertificateSubject of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -49,6 +59,10 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
                 .certificateSubjectDistinguishedName((CertificateSubjectDistinguishedName) map.get(CertificateSubjectDistinguishedName.kmipTag).get(0))
                 .certificateSubjectAlternativeNames(map.get(CertificateSubjectAlternativeName.kmipTag).stream().map(e -> (CertificateSubjectAlternativeName) e).collect(Collectors.toList()))
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override
@@ -124,20 +138,5 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     @Override
     public AttributeName getAttributeName() {
         return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    public static class CertificateSubjectBuilder {
-        public CertificateSubject build() {
-            validate();
-            return new CertificateSubject(
-                    certificateSubjectDistinguishedName,
-                    certificateSubjectAlternativeNames
-            );
-        }
-
-        private void validate() {
-            Objects.requireNonNull(certificateSubjectDistinguishedName, "certificateSubjectDistinguishedName cannot be null");
-            Objects.requireNonNull(certificateSubjectAlternativeNames, "certificateSubjectAlternativeNames cannot be null");
-        }
     }
 }

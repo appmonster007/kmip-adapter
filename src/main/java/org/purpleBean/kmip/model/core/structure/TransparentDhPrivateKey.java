@@ -35,6 +35,16 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     @NonNull
     private final X x;
 
+    @Builder
+    private TransparentDhPrivateKey(@NonNull P p, Q q, @NonNull G g, J j, @NonNull X x) {
+        this.p = p;
+        this.q = q;
+        this.g = g;
+        this.j = j;
+        this.x = x;
+        validate();
+    }
+
     public static TransparentDhPrivateKey of(@NonNull KeyMaterial value) {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
@@ -51,6 +61,12 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
 
     public static TransparentDhPrivateKey of(@NonNull P p, Q q, @NonNull G g, J j, @NonNull X x) {
         return TransparentDhPrivateKey.builder().p(p).q(q).g(g).j(j).x(x).build();
+    }
+
+    private void validate() {
+        Objects.requireNonNull(p, "p cannot be null");
+        Objects.requireNonNull(g, "g cannot be null");
+        Objects.requireNonNull(x, "x cannot be null");
     }
 
     @Override
@@ -72,18 +88,5 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return Stream.of(p, q, g, j, x).filter(Objects::nonNull).collect(Collectors.toList());
-    }
-
-    public static class TransparentDhPrivateKeyBuilder {
-        public TransparentDhPrivateKey build() {
-            validate();
-            return new TransparentDhPrivateKey(p, q, g, j, x);
-        }
-
-        private void validate() {
-            Objects.requireNonNull(p, "p cannot be null");
-            Objects.requireNonNull(g, "g cannot be null");
-            Objects.requireNonNull(x, "x cannot be null");
-        }
     }
 }
