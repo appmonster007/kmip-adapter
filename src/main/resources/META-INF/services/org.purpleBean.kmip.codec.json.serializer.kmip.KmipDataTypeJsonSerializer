@@ -68,6 +68,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.AttributeJsonSeri
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.AttributeValueStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateIssuerJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateSubjectJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CommonTemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CredentialValueGenericStructureJsonSerializer

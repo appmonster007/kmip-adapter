@@ -69,6 +69,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeXmlSerial
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIssuerXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateSubjectXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CommonTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CredentialValueGenericStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CryptographicDomainParametersXmlSerializer

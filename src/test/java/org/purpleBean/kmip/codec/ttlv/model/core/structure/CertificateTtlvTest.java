@@ -1,0 +1,38 @@
+package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.CertificateType;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.type.CertificateValue;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+@DisplayName("Certificate Ttlv Serialization Tests")
+class CertificateTtlvTest extends AbstractTtlvSerializationTestSuite<Certificate> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<Certificate> type() {
+        return Certificate.class;
+    }
+
+    @Override
+    protected Certificate createDefault() {
+        return Certificate.builder()
+                .certificateType(CertificateType.Standard.X_509.inst())
+                .certificateValue(CertificateValue.of(new byte[0]))
+                .build();
+    }
+
+    @Override
+    protected Certificate createVariant() {
+        return Certificate.builder()
+                .certificateType(CertificateType.Standard.PGP.inst())
+                .certificateValue(CertificateValue.of(new byte[1]))
+                .build();
+    }
+}
