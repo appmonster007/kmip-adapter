@@ -99,6 +99,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.ProtocolVersion
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PublicKeyTemplateAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.RevocationReasonJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SampleStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SymmetricKeyJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.TemplateAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.TransparentDhPrivateKeyJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.TransparentDhPublicKeyJsonDeserializer
