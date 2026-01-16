@@ -15,7 +15,6 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.CertificateTy
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.ClientRegistrationMethodJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.CredentialTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.CryptographicAlgorithmJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.DataEnumerationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.DeactivationReasonCodeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.DerivationMethodJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.DestroyActionJsonDeserializer

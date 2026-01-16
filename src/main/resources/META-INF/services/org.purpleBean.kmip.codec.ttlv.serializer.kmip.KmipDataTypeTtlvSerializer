@@ -10,7 +10,6 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.CertificateType
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.ClientRegistrationMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.CredentialTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.CryptographicAlgorithmTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.DataEnumerationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.DeactivationReasonCodeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.DerivationMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.DestroyActionTtlvSerializer

@@ -10,7 +10,6 @@ org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.CertificateType
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.ClientRegistrationMethodJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.CredentialTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.CryptographicAlgorithmJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.DataEnumerationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.DeactivationReasonCodeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.DerivationMethodJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.DestroyActionJsonSerializer

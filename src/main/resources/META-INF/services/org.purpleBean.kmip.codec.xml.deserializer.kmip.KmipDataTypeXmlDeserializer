@@ -15,7 +15,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.CertificateTyp
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.ClientRegistrationMethodXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.CredentialTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.CryptographicAlgorithmXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.DataEnumerationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.DeactivationReasonCodeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.DerivationMethodXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.DestroyActionXmlDeserializer

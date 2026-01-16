@@ -10,7 +10,6 @@ org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.CertificateTypeBen
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ClientRegistrationMethodBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.CredentialTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.CryptographicAlgorithmBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.DataEnumerationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.DeactivationReasonCodeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.DerivationMethodBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.DestroyActionBenchmarkSubject
