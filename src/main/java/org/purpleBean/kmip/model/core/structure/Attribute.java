@@ -35,18 +35,17 @@ public class Attribute implements KmipStructure {
     @NonNull
     private final AttributeName attributeName;
     private final AttributeIndex attributeIndex;
-    @NonNull
     private final AttributeValue attributeValue;
 
     @Builder
-    private Attribute(@NonNull AttributeName attributeName, AttributeIndex attributeIndex, @NonNull AttributeValue attributeValue) {
+    private Attribute(@NonNull AttributeName attributeName, AttributeIndex attributeIndex, AttributeValue attributeValue) {
         this.attributeName = attributeName;
         this.attributeIndex = attributeIndex;
         this.attributeValue = attributeValue;
         validate();
     }
 
-    public static Attribute of(@NonNull String name, @NonNull AttributeValue value) {
+    public static Attribute of(@NonNull String name, AttributeValue value) {
         return Attribute.of(CustomAttribute.of(name, value));
     }
 
