@@ -94,6 +94,8 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.LinkTtlvDeseria
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.MACSignatureKeyInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NonceTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.OpaqueObjectTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PgpKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ProtocolVersionTtlvDeserializer
@@ -218,6 +220,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OperationPolicyNameT
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OriginalCreationDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PasswordTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PgpKeyVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentPTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentQTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeFieldSizeTtlvDeserializer

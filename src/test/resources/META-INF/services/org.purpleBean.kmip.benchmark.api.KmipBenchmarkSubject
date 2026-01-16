@@ -89,6 +89,8 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.LinkBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.MACSignatureKeyInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NonceBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.OpaqueObjectBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.PgpKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.PrivateKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.PrivateKeyTemplateAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ProtocolVersionBenchmarkSubject
@@ -210,6 +212,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.OperationPolicyNameBenchm
 org.purpleBean.kmip.benchmark.subjects.model.core.type.OriginalCreationDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PasswordBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.PgpKeyVersionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeExponentPBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeExponentQBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeFieldSizeBenchmarkSubject

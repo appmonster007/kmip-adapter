@@ -89,6 +89,8 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.LinkXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.MACSignatureKeyInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NonceXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.OpaqueObjectXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.PgpKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.PrivateKeyTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.PrivateKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ProtocolVersionXmlSerializer
@@ -213,6 +215,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.OperationPolicyNameXmlS
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.OriginalCreationDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PasswordXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.PgpKeyVersionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentPXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentQXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeFieldSizeXmlSerializer

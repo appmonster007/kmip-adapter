@@ -89,6 +89,8 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.LinkJsonSerialize
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.MACSignatureKeyInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.NonceJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.OpaqueObjectJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.PgpKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PrivateKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PrivateKeyTemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.ProtocolVersionJsonSerializer
@@ -213,6 +215,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.OperationPolicyNameJso
 org.purpleBean.kmip.codec.json.serializer.model.core.type.OriginalCreationDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PasswordJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.PgpKeyVersionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeExponentPJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeExponentQJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeFieldSizeJsonSerializer
