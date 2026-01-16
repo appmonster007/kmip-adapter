@@ -79,6 +79,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CryptographicPar
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CustomAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.DigestXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.EncryptionKeyInformationXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyBlockXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyMaterialStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyValueLocationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyValueStructureXmlDeserializer

@@ -74,6 +74,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicParamet
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CustomAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.EncryptionKeyInformationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyBlockBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyMaterialStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyValueLocationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyValueStructureBenchmarkSubject

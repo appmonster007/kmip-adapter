@@ -74,6 +74,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CryptographicPara
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CustomAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.DigestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.EncryptionKeyInformationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyBlockTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyMaterialStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyValueLocationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyValueStructureTtlvSerializer
