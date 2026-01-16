@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.xml.deserializer.kmip.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
-public class {{NAME}}XmlDeserializer extends AbstractKmipXmlDeserializer<{{NAME}}, {{DESERIALIZED_TYPE}}> {
+public class {{NAME}}XmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<{{NAME}}, {{DESERIALIZED_TYPE}}> {
 
     public {{NAME}}XmlDeserializer() {
         super({{NAME}}.kmipTag, {{NAME}}.encodingType, {{DESERIALIZED_TYPE}}.class, {{SUPER_CALL}});

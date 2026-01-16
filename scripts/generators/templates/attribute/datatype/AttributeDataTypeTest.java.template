@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeAttributeSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     // TODO: Adjust FIXED_VALUE based on DATA_TYPE
     private static final {{DATA_TYPE}} FIXED_VALUE = {{DEFAULT_VALUE}};
