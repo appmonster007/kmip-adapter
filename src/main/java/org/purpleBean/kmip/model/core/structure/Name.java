@@ -63,6 +63,10 @@ public class Name implements KmipStructure, KmipAttribute {
         return new Name(NameValue.of(name), type);
     }
 
+    public static Name of(@NonNull NameValue nameValue, @NonNull NameType nameType) {
+        return new Name(nameValue, nameType);
+    }
+
     public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");

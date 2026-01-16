@@ -90,6 +90,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.NonceBenchmarkSubjec
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ProtocolVersionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.RevocationReasonBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SampleStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.TemplateAttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDhPrivateKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDhPublicKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDsaPrivateKeyBenchmarkSubject

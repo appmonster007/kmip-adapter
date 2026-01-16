@@ -90,6 +90,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.NonceJsonSerializ
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.ProtocolVersionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.RevocationReasonJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SampleStructureJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.TemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDhPrivateKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDhPublicKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDsaPrivateKeyJsonSerializer

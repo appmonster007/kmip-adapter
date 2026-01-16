@@ -90,6 +90,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NonceTtlvSerializ
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ProtocolVersionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SampleStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TemplateAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDhPrivateKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDhPublicKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDsaPrivateKeyTtlvSerializer

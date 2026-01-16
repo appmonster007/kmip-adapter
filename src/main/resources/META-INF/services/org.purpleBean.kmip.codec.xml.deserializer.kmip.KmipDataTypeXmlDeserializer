@@ -95,6 +95,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NonceXmlDeserial
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.RevocationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SampleStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentDhPrivateKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentDhPublicKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentDsaPrivateKeyXmlDeserializer
