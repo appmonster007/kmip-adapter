@@ -69,6 +69,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.ValidityIndic
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.WrappingMethodTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.AlternativeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ApplicationSpecificInformationTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.AttestationCredentialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.AttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.AttributeValueStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CertificateIdentifierTtlvDeserializer
@@ -90,6 +91,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyWrappingSpec
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.LinkTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.MACSignatureKeyInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NameTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NonceTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.RevocationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SampleStructureTtlvDeserializer
@@ -121,6 +123,8 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ApplicationNamespace
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ArchiveDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AsynchronousCorrelationValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AsynchronousIndicatorTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AttestationAssertionTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AttestationMeasurementTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AttributeIndexTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AttributeNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AttributeValueBigIntegerTtlvDeserializer
@@ -194,6 +198,8 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.MediaIdentifierTtlvD
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ModulusTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NameValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NetworkIdentifierTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NonceIdTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NonceValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ObjectGroupTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OffsetTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OpaqueDataValueTtlvDeserializer

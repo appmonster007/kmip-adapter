@@ -64,6 +64,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.ValidityIndicat
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.WrappingMethodTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AlternativeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ApplicationSpecificInformationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttestationCredentialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttributeValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateIdentifierTtlvSerializer
@@ -85,6 +86,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyWrappingSpecif
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.LinkTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.MACSignatureKeyInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NameTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NonceTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ProtocolVersionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SampleStructureTtlvSerializer
@@ -116,6 +118,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ApplicationNamespaceTt
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ArchiveDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AsynchronousCorrelationValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AsynchronousIndicatorTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationAssertionTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationMeasurementTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueBigIntegerTtlvSerializer
@@ -189,6 +193,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.MediaIdentifierTtlvSer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ModulusTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.NameValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.NetworkIdentifierTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.NonceIdTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.NonceValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ObjectGroupTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OffsetTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OpaqueDataValueTtlvSerializer

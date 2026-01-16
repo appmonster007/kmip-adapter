@@ -64,6 +64,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ValidityIndicatorB
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.WrappingMethodBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AlternativeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ApplicationSpecificInformationBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttestationCredentialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeValueStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIdentifierBenchmarkSubject
@@ -85,6 +86,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyWrappingSpecifica
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.LinkBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.MACSignatureKeyInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.NameBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.NonceBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ProtocolVersionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.RevocationReasonBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SampleStructureBenchmarkSubject
@@ -113,6 +115,8 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.ApplicationNamespaceBench
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ArchiveDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AsynchronousCorrelationValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AsynchronousIndicatorBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationAssertionBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationMeasurementBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueBigIntegerBenchmarkSubject
@@ -186,6 +190,8 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.MediaIdentifierBenchmarkS
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ModulusBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.NameValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.NetworkIdentifierBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.NonceIdBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.NonceValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ObjectGroupBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.OffsetBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.OpaqueDataValueBenchmarkSubject

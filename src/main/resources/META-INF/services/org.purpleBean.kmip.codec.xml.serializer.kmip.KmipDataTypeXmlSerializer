@@ -64,6 +64,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.ValidityIndicato
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.WrappingMethodXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AlternativeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ApplicationSpecificInformationXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttestationCredentialXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeValueStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIdentifierXmlSerializer
@@ -85,6 +86,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.KeyWrappingSpecifi
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.LinkXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.MACSignatureKeyInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NameXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.NonceXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ProtocolVersionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.RevocationReasonXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.SampleStructureXmlSerializer
@@ -116,6 +118,8 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.ApplicationNamespaceXml
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ArchiveDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AsynchronousCorrelationValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AsynchronousIndicatorXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttestationAssertionXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttestationMeasurementXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeIndexXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueBigIntegerXmlSerializer
@@ -189,6 +193,8 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.MediaIdentifierXmlSeria
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ModulusXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.NameValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.NetworkIdentifierXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.NonceIdXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.NonceValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ObjectGroupXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.OffsetXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.OpaqueDataValueXmlSerializer
