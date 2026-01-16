@@ -1,0 +1,39 @@
+package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+
+import lombok.Getter;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
+import org.purpleBean.kmip.model.core.structure.KeyBlock;
+import org.purpleBean.kmip.model.core.structure.PublicKey;
+
+public class PublicKeyBenchmarkSubject extends KmipBenchmarkSubject<PublicKey> {
+
+    @Getter
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
+
+    public PublicKeyBenchmarkSubject() throws Exception {
+        PublicKey subject = PublicKey.builder()
+                .keyBlock(KeyBlock.builder()
+                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+                        .build())
+                .build();
+        initialize(subject, PublicKey.class);
+    }
+
+    @Override
+    public String name() {
+        return "PublicKey";
+    }
+
+    @Override
+    public void setup() throws Exception {
+        KmipContext.setSpec(spec);
+    }
+
+    @Override
+    public void tearDown() {
+        KmipContext.clear();
+    }
+}

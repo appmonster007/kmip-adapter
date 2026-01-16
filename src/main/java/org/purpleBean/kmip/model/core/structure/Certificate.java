@@ -19,7 +19,7 @@ public class Certificate implements KmipStructure {
 
     static {
         for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnsupportedVersion) continue;
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Certificate.class);
         }
     }

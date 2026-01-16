@@ -95,10 +95,13 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.MACSignatureKeyI
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NonceXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PrivateKeyTemplateAttributeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PrivateKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyTemplateAttributeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.RevocationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SampleStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SplitKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SymmetricKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentDhPrivateKeyXmlDeserializer

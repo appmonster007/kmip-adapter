@@ -90,10 +90,13 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.MACSignatureKeyIn
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.NonceTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PrivateKeyTemplateAttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PrivateKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ProtocolVersionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PublicKeyTemplateAttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PublicKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SampleStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SplitKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SymmetricKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TemplateAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDhPrivateKeyTtlvSerializer

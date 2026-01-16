@@ -95,10 +95,13 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.MACSignatureKey
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NonceTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTemplateAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTemplateAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.RevocationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SampleStructureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SplitKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SymmetricKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentDhPrivateKeyTtlvDeserializer

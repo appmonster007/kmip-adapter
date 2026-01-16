@@ -89,11 +89,14 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.LinkJsonSerialize
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.MACSignatureKeyInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.NonceJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.PrivateKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PrivateKeyTemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.ProtocolVersionJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.PublicKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PublicKeyTemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.RevocationReasonJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SampleStructureJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.SplitKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SymmetricKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDhPrivateKeyJsonSerializer
