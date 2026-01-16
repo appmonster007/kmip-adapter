@@ -96,6 +96,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PublicKeyTemplate
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.PublicKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.RevocationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SampleStructureTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SecretDataTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SplitKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SymmetricKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TemplateAttributeTtlvSerializer
