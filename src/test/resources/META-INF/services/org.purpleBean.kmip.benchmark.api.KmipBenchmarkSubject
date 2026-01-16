@@ -99,6 +99,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.SampleStructureBench
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SplitKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SymmetricKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TemplateAttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.TemplateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDhPrivateKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDhPublicKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentDsaPrivateKeyBenchmarkSubject

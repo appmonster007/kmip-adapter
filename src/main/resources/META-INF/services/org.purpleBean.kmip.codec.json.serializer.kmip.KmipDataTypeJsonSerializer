@@ -99,6 +99,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.SampleStructureJs
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SplitKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SymmetricKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TemplateAttributeJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.TemplateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDhPrivateKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDhPublicKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.TransparentDsaPrivateKeyJsonSerializer

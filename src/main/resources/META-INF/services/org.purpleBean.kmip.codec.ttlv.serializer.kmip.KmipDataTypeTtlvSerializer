@@ -99,6 +99,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SampleStructureTt
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SplitKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.SymmetricKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TemplateAttributeTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TemplateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDhPrivateKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDhPublicKeyTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.TransparentDsaPrivateKeyTtlvSerializer

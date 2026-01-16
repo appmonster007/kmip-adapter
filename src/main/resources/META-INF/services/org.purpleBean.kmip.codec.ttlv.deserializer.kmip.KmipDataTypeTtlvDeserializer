@@ -104,6 +104,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SampleStructure
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SplitKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SymmetricKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TemplateAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TemplateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentDhPrivateKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentDhPublicKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentDsaPrivateKeyTtlvDeserializer
