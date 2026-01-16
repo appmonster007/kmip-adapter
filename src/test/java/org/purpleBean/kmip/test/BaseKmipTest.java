@@ -26,8 +26,8 @@ public abstract class BaseKmipTest {
     @BeforeEach
     void setUp() {
         setupDefaultSpec();
-        setupContext();
         setupMappers();
+        setupContext();
         setupTestSpecificResources();
     }
 
