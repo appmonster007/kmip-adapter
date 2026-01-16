@@ -78,6 +78,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CredentialValue
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CryptographicDomainParametersJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CryptographicParametersJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CustomAttributeJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.DeviceCredentialJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.DigestJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.EncryptionKeyInformationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyBlockJsonDeserializer

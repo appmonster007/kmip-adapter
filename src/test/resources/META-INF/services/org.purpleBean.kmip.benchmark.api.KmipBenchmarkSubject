@@ -73,6 +73,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.CredentialValueGener
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicDomainParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CustomAttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.DeviceCredentialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.DigestBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.EncryptionKeyInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.KeyBlockBenchmarkSubject
