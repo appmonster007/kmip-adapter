@@ -96,13 +96,13 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     @Override
     public boolean isServerModifiable(@NonNull State state) {
         // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO: Adjust as needed
+        return state.equals(State.Standard.PRE_ACTIVE.inst()); // TODO: Adjust as needed
     }
 
     @Override
     public boolean isClientModifiable(@NonNull State state) {
         // PRE_ACTIVE is modifiable by default, adjust as needed
-        return state.getValue().getValue() == State.Standard.PRE_ACTIVE.getValue(); // TODO: Adjust as needed
+        return state.equals(State.Standard.PRE_ACTIVE.inst()); // TODO: Adjust as needed
     }
 
     @Override

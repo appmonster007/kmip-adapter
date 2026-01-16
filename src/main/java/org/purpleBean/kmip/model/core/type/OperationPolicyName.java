@@ -10,12 +10,11 @@ import org.purpleBean.kmip.util.StringUtils;
 import java.util.Set;
 
 /**
- * KMIP OperationPolicyName dataType.
+ * KMIP OperationPolicyName datatype attribute.
  */
 @Data
 @Builder(toBuilder = true)
 public class OperationPolicyName implements KmipDataType, KmipAttribute {
-
     public static final KmipTag kmipTag = KmipTag.Standard.OPERATION_POLICY_NAME.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -28,7 +27,6 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
         }
     }
 
-
     @NonNull
     private final String value;
 
@@ -37,10 +35,25 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     }
 
     public static OperationPolicyName of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString attributeValueTyped)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new OperationPolicyName(textString.getValue());
+        return new OperationPolicyName(attributeValueTyped.getValue());
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValueTextString.of(value);
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     @Override
@@ -75,12 +88,12 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     }
 
     @Override
-    public boolean isServerModifiable(State state) {
+    public boolean isServerModifiable(@NonNull State state) {
         return true;
     }
 
     @Override
-    public boolean isClientModifiable(State state) {
+    public boolean isClientModifiable(@NonNull State state) {
         return false;
     }
 
@@ -92,20 +105,5 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     @Override
     public boolean isMultiInstanceAllowed() {
         return false;
-    }
-
-    @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValueTextString.of(value);
-    }
-
-    @Override
-    public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
-    }
-
-    @Override
-    public String getCanonicalName() {
-        return getAttributeName().getValue();
     }
 }
