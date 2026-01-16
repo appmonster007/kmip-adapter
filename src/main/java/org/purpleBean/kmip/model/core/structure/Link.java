@@ -8,6 +8,7 @@ import org.purpleBean.kmip.model.core.enumeration.LinkType;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -137,6 +138,6 @@ public class Link implements KmipStructure, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of(kmipTag.getDescription());
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
     }
 }

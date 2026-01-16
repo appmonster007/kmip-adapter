@@ -211,7 +211,7 @@ public class State implements KmipEnumeration, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of(kmipTag.getDescription());
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     @Override

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("{{ENUM_NAME}} Domain Tests")
-class {{ENUM_NAME}}Test extends AbstractKmipEnumerationSuite<{{ENUM_NAME}}> {
+class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {

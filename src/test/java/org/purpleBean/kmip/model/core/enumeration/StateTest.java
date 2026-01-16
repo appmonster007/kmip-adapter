@@ -3,7 +3,7 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("State Domain Tests")
-class StateTest extends AbstractKmipEnumerationTestSuite<State> {
+class StateTest extends AbstractKmipEnumerationAttributeTestSuite<State> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<State> type() {
@@ -41,6 +46,62 @@ class StateTest extends AbstractKmipEnumerationTestSuite<State> {
     @Override
     protected boolean supportsRegistryBehavior() {
         return true;
+    }
+
+    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
+    @Override
+    public boolean expectAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean expectServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean expectClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server in any state
+    }
+
+    @Override
+    public State stateForServerModifiableFalse() {
+        return State.Standard.PRE_ACTIVE.inst(); // Any state would work since it's not modifiable
+    }
+
+    @Override
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client in any state
+    }
+
+    @Override
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Any state would work since it's not modifiable
+    }
+
+    @Override
+    protected void attrEnum_serverModifiable_respectsState() {
+        // Not applicable as it's not server modifiable
+    }
+
+    @Override
+    protected void attrEnum_clientModifiable_respectsState() {
+        // Not applicable as it's not client modifiable
     }
 
     @Override
@@ -88,4 +149,3 @@ class StateTest extends AbstractKmipEnumerationTestSuite<State> {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
-

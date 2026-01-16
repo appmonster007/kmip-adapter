@@ -3,7 +3,8 @@ package org.purpleBean.kmip.{{pdot}};
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2; // TODO: Adjust if needed
+    }
 
     @Override
     protected Class<{{ATTRIBUTE_NAME}}> type() {
@@ -21,19 +27,19 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationSuite<{{ATTRIBUTE_NA
     @Override
     protected {{ATTRIBUTE_NAME}} createDefault() {
         // TODO: Replace with an actual Standard enum value
-        return new {{ATTRIBUTE_NAME}}({{ATTRIBUTE_NAME}}.Standard.values()[0]);
+        return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
     }
 
     @Override
     protected {{ATTRIBUTE_NAME}} createEqualToDefault() {
         // TODO: Replace with an actual Standard enum value
-        return new {{ATTRIBUTE_NAME}}({{ATTRIBUTE_NAME}}.Standard.values()[0]);
+        return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
     }
 
     @Override
     protected {{ATTRIBUTE_NAME}} createDifferentFromDefault() {
         // TODO: Replace with an actual Standard enum value
-        return new {{ATTRIBUTE_NAME}}({{ATTRIBUTE_NAME}}.Standard.values()[1]);
+        return {{ATTRIBUTE_NAME}}.Standard.values()[1].inst();
     }
 
     @Override
@@ -44,6 +50,62 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationSuite<{{ATTRIBUTE_NA
     @Override
     protected boolean supportsRegistryBehavior() {
         return true; // TODO: Adjust as needed
+    }
+
+    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
+    @Override
+    public boolean expectAlwaysPresent() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectServerInitializable() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectClientInitializable() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectClientDeletable() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
+        return false; // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForServerModifiableTrue() {
+        return null; // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForServerModifiableFalse() {
+        return State.Standard.PRE_ACTIVE.inst(); // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForClientModifiableTrue() {
+        return null; // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // TODO: Adjust as needed
+    }
+
+    @Override
+    protected void attrEnum_serverModifiable_respectsState() {
+        // TODO: Implement if server modifiable
+    }
+
+    @Override
+    protected void attrEnum_clientModifiable_respectsState() {
+        // TODO: Implement if client modifiable
     }
 
     @Override

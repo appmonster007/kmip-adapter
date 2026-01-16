@@ -3,6 +3,7 @@ package org.purpleBean.kmip.model.core.type;
 import lombok.*;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.Objects;
 import java.util.Set;
@@ -81,9 +82,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     @Override
     public AttributeName getAttributeName() {
-        // Convert from "CryptographicLength" to "Cryptographic Length"
-        String name = "Cryptographic Length";
-        return AttributeName.of(name);
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     @Override

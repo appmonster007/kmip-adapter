@@ -2,6 +2,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 
 import lombok.*;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,10 +37,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * @see KmipEnumeration
+ * @see KmipAttribute
  */
 @Data
 @Builder(toBuilder = true)
-public class ObjectType implements KmipEnumeration {
+public class ObjectType implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = KmipTag.Standard.OBJECT_TYPE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
@@ -53,6 +57,7 @@ public class ObjectType implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, ObjectType.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ObjectType.class, ObjectType::of);
         }
     }
 
@@ -72,6 +77,17 @@ public class ObjectType implements KmipEnumeration {
 
     public static ObjectType of(@NonNull Value value) {
         return new ObjectType(value);
+    }
+
+    public static ObjectType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
+            throw new IllegalArgumentException("Invalid attribute name");
+        }
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
+            throw new IllegalArgumentException("Invalid encoding type");
+        }
+        ObjectType.Value v = fromValue(enumeration.getValue());
+        return new ObjectType(v);
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -161,6 +177,56 @@ public class ObjectType implements KmipEnumeration {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec) && value.isSupported();
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValueEnumeration.of(value.getValue());
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return getAttributeName().getValue();
     }
 
     public int getValue() {
