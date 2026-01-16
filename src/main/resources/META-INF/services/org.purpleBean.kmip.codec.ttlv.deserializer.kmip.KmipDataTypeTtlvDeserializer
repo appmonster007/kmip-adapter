@@ -83,6 +83,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CustomAttribute
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.DeviceCredentialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.DigestTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.EncryptionKeyInformationTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ExtensionInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyBlockTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyMaterialStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyValueLocationTtlvDeserializer

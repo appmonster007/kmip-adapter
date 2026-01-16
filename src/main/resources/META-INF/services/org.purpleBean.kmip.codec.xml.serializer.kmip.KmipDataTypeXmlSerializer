@@ -78,6 +78,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CustomAttributeXml
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.DeviceCredentialXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.DigestXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.EncryptionKeyInformationXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ExtensionInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.KeyBlockXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.KeyMaterialStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.KeyValueLocationXmlSerializer

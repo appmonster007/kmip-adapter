@@ -78,6 +78,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CustomAttributeTt
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.DeviceCredentialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.DigestTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.EncryptionKeyInformationTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ExtensionInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyBlockTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyMaterialStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.KeyValueLocationTtlvSerializer
