@@ -1,8 +1,11 @@
 package org.purpleBean.kmip.api.request;
 
-import org.purpleBean.kmip.api.KmipStructure;
+import org.purpleBean.kmip.api.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 /**
  * Represents the top-level structure of a KMIP Request Message.
@@ -33,6 +36,37 @@ import java.util.List;
 public interface RequestMessageStructure extends KmipStructure {
 
     /**
+     * The standard KMIP tag for a Request message, which is always {@link KmipTag.Standard#REQUEST_MESSAGE}.
+     */
+    KmipTag kmipTag = KmipTag.Standard.REQUEST_MESSAGE.inst();
+
+    Map<RegistryKey, Class<? extends RequestMessageStructure>> REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Function<List<KmipDataType>, ? extends RequestMessageStructure>> BUILDER_REGISTRY = new ConcurrentHashMap<>();
+
+    static void register(
+            KmipSpec spec,
+            EncodingType encodingType,
+            Class<? extends RequestMessageStructure> clazz,
+            Function<List<KmipDataType>, ? extends RequestMessageStructure> builder
+    ) {
+        REGISTRY.put(new RegistryKey(spec, encodingType), clazz);
+        BUILDER_REGISTRY.put(new RegistryKey(spec, encodingType), builder);
+    }
+
+    static Class<? extends RequestMessageStructure> getClassFromRegistry(KmipSpec spec, EncodingType encodingType) {
+        return REGISTRY.get(new RegistryKey(spec, encodingType));
+    }
+
+    static Function<List<KmipDataType>, ? extends RequestMessageStructure> getBuilderFromRegistry(KmipSpec spec, EncodingType encodingType) {
+        return BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType));
+    }
+
+    static RequestMessageStructure of(List<KmipDataType> values) {
+        KmipSpec spec = KmipContext.getSpec();
+        return getBuilderFromRegistry(spec, encodingType).apply(values);
+    }
+
+    /**
      * Retrieves the {@link RequestHeaderStructure} associated with this request message.
      * The request header contains metadata about the overall request.
      *
@@ -56,4 +90,7 @@ public interface RequestMessageStructure extends KmipStructure {
      * @return A list of {@link Exception} instances related to batch item processing.
      */
     List<? extends Exception> getRequestBatchItemErrors();
+
+    record RegistryKey(KmipSpec spec, EncodingType encodingType) {
+    }
 }

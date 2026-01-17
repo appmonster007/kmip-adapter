@@ -1,6 +1,11 @@
 package org.purpleBean.kmip.api.request;
 
-import org.purpleBean.kmip.api.KmipStructure;
+import org.purpleBean.kmip.api.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 /**
  * Represents a single batch item within a KMIP Request Message.
@@ -19,5 +24,37 @@ import org.purpleBean.kmip.api.KmipStructure;
  * @see RequestMessageStructure
  */
 public interface RequestBatchItemStructure extends KmipStructure {
+    /**
+     * The standard KMIP tag for a Batch Item, which is always {@link KmipTag.Standard#BATCH_ITEM}.
+     */
+    KmipTag kmipTag = KmipTag.Standard.BATCH_ITEM.inst();
 
+    Map<RegistryKey, Class<? extends RequestBatchItemStructure>> REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Function<List<KmipDataType>, ? extends RequestBatchItemStructure>> BUILDER_REGISTRY = new ConcurrentHashMap<>();
+
+    static void register(
+            KmipSpec spec,
+            EncodingType encodingType,
+            Class<? extends RequestBatchItemStructure> clazz,
+            Function<List<KmipDataType>, ? extends RequestBatchItemStructure> builder
+    ) {
+        REGISTRY.put(new RegistryKey(spec, encodingType), clazz);
+        BUILDER_REGISTRY.put(new RegistryKey(spec, encodingType), builder);
+    }
+
+    static Class<? extends RequestBatchItemStructure> getClassFromRegistry(KmipSpec spec, EncodingType encodingType) {
+        return REGISTRY.get(new RegistryKey(spec, encodingType));
+    }
+
+    static Function<List<KmipDataType>, ? extends RequestBatchItemStructure> getBuilderFromRegistry(KmipSpec spec, EncodingType encodingType) {
+        return BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType));
+    }
+
+    static RequestBatchItemStructure of(List<KmipDataType> values) {
+        KmipSpec spec = KmipContext.getSpec();
+        return getBuilderFromRegistry(spec, encodingType).apply(values);
+    }
+
+    record RegistryKey(KmipSpec spec, EncodingType encodingType) {
+    }
 }

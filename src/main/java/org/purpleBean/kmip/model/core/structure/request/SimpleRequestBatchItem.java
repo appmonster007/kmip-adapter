@@ -13,17 +13,22 @@ import java.util.List;
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.BATCH_ITEM.inst();
 
     static {
-        for (KmipSpec spec : KmipSpec.values()) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestBatchItem.class);
-        }
+        KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestBatchItem.class);
+        RequestBatchItemStructure.register(KmipSpec.UnknownVersion, encodingType, SimpleRequestBatchItem.class, SimpleRequestBatchItem::of);
     }
 
     private SimpleRequestBatchItem() {
         validate();
+    }
+
+    public static SimpleRequestBatchItem of(KmipDataType... values) {
+        return of(List.of(values));
+    }
+
+    public static SimpleRequestBatchItem of(List<KmipDataType> kmipDataTypes) {
+        return new SimpleRequestBatchItem();
     }
 
     private void validate() {

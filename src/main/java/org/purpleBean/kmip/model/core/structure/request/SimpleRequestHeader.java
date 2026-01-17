@@ -11,9 +11,12 @@ import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.purpleBean.kmip.api.KmipTag.Standard.PROTOCOL_VERSION;
 
 @Data
 @Builder(toBuilder = true)
@@ -21,10 +24,8 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.REQUEST_HEADER.inst();
 
     static {
-        for (KmipSpec spec : KmipSpec.values()) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestHeader.class);
-        }
+        KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestHeader.class);
+        RequestHeaderStructure.register(KmipSpec.UnknownVersion, encodingType, SimpleRequestHeader.class, SimpleRequestHeader::of);
     }
 
     @NonNull
@@ -34,6 +35,19 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     private SimpleRequestHeader(@NonNull ProtocolVersion protocolVersion) {
         this.protocolVersion = protocolVersion;
         validate();
+    }
+
+    public static SimpleRequestHeader of(KmipDataType... values) {
+        return of(List.of(values));
+    }
+
+    public static SimpleRequestHeader of(List<KmipDataType> values) {
+        var builder = SimpleRequestHeader.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(PROTOCOL_VERSION.inst())) {
+            builder.protocolVersion((ProtocolVersion) map.get(PROTOCOL_VERSION.inst()).get(0));
+        }
+        return builder.build();
     }
 
     private void validate() {
