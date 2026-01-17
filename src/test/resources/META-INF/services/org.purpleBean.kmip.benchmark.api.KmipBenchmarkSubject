@@ -71,6 +71,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIdentifie
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateSubjectBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CommonTemplateAttributeBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.CredentialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CredentialValueGenericStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicDomainParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CryptographicParametersBenchmarkSubject
