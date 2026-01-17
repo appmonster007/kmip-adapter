@@ -129,6 +129,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.ArchiveDateBenchmarkSubje
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AsynchronousCorrelationValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AsynchronousIndicatorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationAssertionBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationCapableIndicatorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationMeasurementBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeNameBenchmarkSubject

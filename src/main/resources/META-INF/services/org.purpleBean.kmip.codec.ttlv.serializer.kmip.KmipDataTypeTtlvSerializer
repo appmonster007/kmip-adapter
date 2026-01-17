@@ -132,6 +132,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ArchiveDateTtlvSeriali
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AsynchronousCorrelationValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AsynchronousIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationAssertionTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationCapableIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationMeasurementTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeNameTtlvSerializer

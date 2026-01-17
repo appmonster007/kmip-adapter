@@ -137,6 +137,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ArchiveDateXmlDeseria
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AsynchronousCorrelationValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AsynchronousIndicatorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttestationAssertionXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttestationCapableIndicatorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttestationMeasurementXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeIndexXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeNameXmlDeserializer

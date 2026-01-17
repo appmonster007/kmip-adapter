@@ -132,6 +132,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.ArchiveDateJsonSeriali
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AsynchronousCorrelationValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AsynchronousIndicatorJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttestationAssertionJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.AttestationCapableIndicatorJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttestationMeasurementJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeIndexJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeNameJsonSerializer
