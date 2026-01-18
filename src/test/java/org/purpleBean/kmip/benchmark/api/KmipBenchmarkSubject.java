@@ -3,6 +3,7 @@ package org.purpleBean.kmip.benchmark.api;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Data;
+import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -44,12 +45,19 @@ public abstract class KmipBenchmarkSubject<T> {
     public void initialize(T obj, Class<T> type) throws Exception {
         this.obj = obj;
         this.type = type;
-        json = KmipCodecManager.createJsonMapper();
-        xml = KmipCodecManager.createXmlMapper();
-        ttlv = KmipCodecManager.createTtlvMapper();
-        jsonStr = json.writeValueAsString(obj);
-        xmlStr = xml.writeValueAsString(obj);
-        ttlvBuf = ttlv.writeValueAsByteBuffer(obj);
+        json = KmipCodecManager.getJsonMapper();
+        xml = KmipCodecManager.getXmlMapper();
+        ttlv = KmipCodecManager.getTtlvMapper();
+        KmipContext.withSpec(getSpec(), () -> {
+            try {
+                jsonStr = jsonSerialize();
+                xmlStr = xmlSerialize();
+                ttlvBuf = ttlvSerialize();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        });
     }
 
     // JSON

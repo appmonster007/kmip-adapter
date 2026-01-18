@@ -11,7 +11,7 @@ import org.purpleBean.kmip.model.core.type.NonceValue;
 public class NonceBenchmarkSubject extends KmipBenchmarkSubject<Nonce> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public NonceBenchmarkSubject() throws Exception {
         Nonce subject = Nonce.builder()

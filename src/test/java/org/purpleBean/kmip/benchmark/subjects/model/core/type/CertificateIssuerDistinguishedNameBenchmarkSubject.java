@@ -9,7 +9,7 @@ import org.purpleBean.kmip.model.core.type.CertificateIssuerDistinguishedName;
 public class CertificateIssuerDistinguishedNameBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuerDistinguishedName> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public CertificateIssuerDistinguishedNameBenchmarkSubject() throws Exception {
         CertificateIssuerDistinguishedName certificateIssuerDistinguishedName = CertificateIssuerDistinguishedName.of("CN=Test Issuer");

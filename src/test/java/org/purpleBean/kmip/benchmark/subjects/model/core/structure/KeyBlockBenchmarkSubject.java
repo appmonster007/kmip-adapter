@@ -10,7 +10,7 @@ import org.purpleBean.kmip.model.core.structure.KeyBlock;
 public class KeyBlockBenchmarkSubject extends KmipBenchmarkSubject<KeyBlock> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public KeyBlockBenchmarkSubject() throws Exception {
         KeyBlock subject = KeyBlock.builder()

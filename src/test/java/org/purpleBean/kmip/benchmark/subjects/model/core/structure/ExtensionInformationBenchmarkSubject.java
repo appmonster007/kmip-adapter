@@ -10,7 +10,7 @@ import org.purpleBean.kmip.model.core.type.ExtensionName;
 public class ExtensionInformationBenchmarkSubject extends KmipBenchmarkSubject<ExtensionInformation> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ExtensionInformationBenchmarkSubject() throws Exception {
         ExtensionInformation subject = ExtensionInformation.builder()

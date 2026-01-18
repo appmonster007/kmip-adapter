@@ -14,7 +14,7 @@ import java.util.UUID;
 public class KeyWrappingSpecificationBenchmarkSubject extends KmipBenchmarkSubject<KeyWrappingSpecification> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public KeyWrappingSpecificationBenchmarkSubject() throws Exception {
         KeyWrappingSpecification subject = KeyWrappingSpecification.builder()

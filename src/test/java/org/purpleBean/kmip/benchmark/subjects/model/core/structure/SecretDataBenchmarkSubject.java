@@ -12,7 +12,7 @@ import org.purpleBean.kmip.model.core.structure.SecretData;
 public class SecretDataBenchmarkSubject extends KmipBenchmarkSubject<SecretData> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public SecretDataBenchmarkSubject() throws Exception {
         SecretData subject = SecretData.builder()

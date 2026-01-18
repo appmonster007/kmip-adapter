@@ -10,7 +10,7 @@ import org.purpleBean.kmip.model.core.type.Username;
 public class CredentialValueGenericStructureBenchmarkSubject extends KmipBenchmarkSubject<CredentialValueGenericStructure> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public CredentialValueGenericStructureBenchmarkSubject() throws Exception {
         CredentialValueGenericStructure subject = CredentialValueGenericStructure.builder()

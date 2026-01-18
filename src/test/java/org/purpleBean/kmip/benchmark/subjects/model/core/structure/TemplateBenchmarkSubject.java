@@ -12,7 +12,7 @@ import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
 public class TemplateBenchmarkSubject extends KmipBenchmarkSubject<Template> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public TemplateBenchmarkSubject() throws Exception {
         Template subject = Template.builder()

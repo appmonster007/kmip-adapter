@@ -13,7 +13,7 @@ import org.purpleBean.kmip.model.core.type.NonceValue;
 public class AttestationCredentialBenchmarkSubject extends KmipBenchmarkSubject<AttestationCredential> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AttestationCredentialBenchmarkSubject() throws Exception {
         AttestationCredential subject = AttestationCredential.builder()

@@ -11,7 +11,7 @@ import org.purpleBean.kmip.model.core.type.Username;
 public class UsernameAndPasswordBenchmarkSubject extends KmipBenchmarkSubject<UsernameAndPassword> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public UsernameAndPasswordBenchmarkSubject() throws Exception {
         UsernameAndPassword subject = UsernameAndPassword.builder()

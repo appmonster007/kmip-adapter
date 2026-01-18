@@ -15,7 +15,7 @@ import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 public class SplitKeyBenchmarkSubject extends KmipBenchmarkSubject<SplitKey> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public SplitKeyBenchmarkSubject() throws Exception {
         SplitKey subject = SplitKey.builder()

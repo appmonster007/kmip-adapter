@@ -13,7 +13,7 @@ import java.util.Set;
 public class OpaqueObjectBenchmarkSubject extends KmipBenchmarkSubject<OpaqueObject> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public OpaqueObjectBenchmarkSubject() throws Exception {
         OpaqueObject subject = OpaqueObject.builder()
