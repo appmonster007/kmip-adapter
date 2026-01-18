@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.*;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.kmip.KmipTagJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.KmipTagJsonDeserializer;
 import org.purpleBean.kmip.codec.json.serializer.*;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.kmip.KmipTagJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.api.KmipTagJsonSerializer;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;

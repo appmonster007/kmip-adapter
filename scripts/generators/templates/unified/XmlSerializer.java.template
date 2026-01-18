@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.AbstractKmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
 public class {{NAME}}XmlSerializer extends AbstractKmipDataTypeXmlSerializer<{{NAME}}, {{SERIALIZED_TYPE}}> {

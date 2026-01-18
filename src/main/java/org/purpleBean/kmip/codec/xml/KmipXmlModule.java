@@ -3,9 +3,9 @@ package org.purpleBean.kmip.codec.xml;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.purpleBean.kmip.codec.xml.deserializer.*;
-import org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.codec.xml.serializer.*;
-import org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer;
+import org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;

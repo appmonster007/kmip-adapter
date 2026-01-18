@@ -1,6 +1,6 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
-import org.purpleBean.kmip.codec.json.deserializer.kmip.AbstractKmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.NistKeyType;
 
 public class NistKeyTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<NistKeyType, String> {
