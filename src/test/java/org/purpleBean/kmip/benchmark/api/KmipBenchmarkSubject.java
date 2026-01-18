@@ -35,12 +35,16 @@ public abstract class KmipBenchmarkSubject<T> {
     /**
      * Prepare mappers and test objects.
      */
-    public abstract void setup() throws Exception;
+    public void setup() throws Exception {
+        KmipContext.setSpec(getSpec());
+    }
 
     /**
      * Cleanup any state after benchmark.
      */
-    public abstract void tearDown();
+    public void tearDown() {
+        KmipContext.clear();
+    }
 
     public void initialize(T obj, Class<T> type) throws Exception {
         this.obj = obj;

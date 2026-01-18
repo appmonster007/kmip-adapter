@@ -80,8 +80,8 @@ perf: ## Run performance benchmarks (perf profile)
 		-Dbench.threads=$$(nproc) \
 		-Dbench.wi=3 \
 		-Dbench.mi=5 \
-		-Dbench.wt.ms=100 \
-		-Dbench.mt.ms=200
+		-Dbench.wt.ms=10 \
+		-Dbench.mt.ms=2
 
 ## Run fast performance benchmarks (perf-fast profile)
 perf-fast: ## Run fast performance benchmarks (perf-fast profile)

@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit;
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Fork(value = 1)
-@Warmup(iterations = 2)
-@Measurement(iterations = 5)
 public class KmipSerializationBenchmark {
 
     // JSON serialize/deserialize
@@ -91,7 +88,7 @@ public class KmipSerializationBenchmark {
         });
     }
 
-    @State(Scope.Benchmark)
+    @State(Scope.Thread)
     public static class BenchState {
 
         private static final Map<String, KmipBenchmarkSubject> REGISTRY = new HashMap<>();
@@ -110,7 +107,12 @@ public class KmipSerializationBenchmark {
             System.out.println("Discovered benchmark subjects: " + REGISTRY.keySet());
         }
 
-        // Default to empty string to indicate all subjects
+        /**
+         * The name of the benchmark subject to run.
+         * This is intended to be provided by the JMH runner.
+         * If not provided, a default subject will be used.
+         * See {@link JmhBenchmarkRunner} for how to specify subjects.
+         */
         @Param(value = {""})
         public String subject;
 
@@ -132,7 +134,7 @@ public class KmipSerializationBenchmark {
                     throw new IllegalStateException("No benchmark subjects available");
                 }
             }
-//            impl.setup();
+            impl.setup();
         }
 
         @TearDown(Level.Trial)

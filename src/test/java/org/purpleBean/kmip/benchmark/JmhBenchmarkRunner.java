@@ -42,11 +42,15 @@ public final class JmhBenchmarkRunner {
 
         // Parallelism and timing are configurable via system properties
         int threads = Integer.getInteger("bench.threads", Math.max(1, Runtime.getRuntime().availableProcessors()));
+        // By default, run in-process (forks = 0) when using this runner directly (e.g., via 'mvn exec:java').
+        // This avoids classpath issues with forked processes, which is a known problem with the exec-maven-plugin.
+        // For reliable, forked benchmarks, build the uber-jar with 'mvn package' and run 'java -jar target/benchmarks.jar'.
+        // You can still force forking with this runner by providing the system property, e.g., -Dbench.forks=4
         int forks = Integer.getInteger("bench.forks", 0);
-        int warmupIters = Integer.getInteger("bench.wi", 2);
-        int measureIters = Integer.getInteger("bench.mi", 3);
-        long warmupMs = Long.getLong("bench.wt.ms", 10L);
-        long measureMs = Long.getLong("bench.mt.ms", 10L);
+        int warmupIters = Integer.getInteger("bench.wi", 1);
+        int measureIters = Integer.getInteger("bench.mi", 1);
+        long warmupMs = Long.getLong("bench.wt.ms", 5L);
+        long measureMs = Long.getLong("bench.mt.ms", 1L);
 
         // Auto-discover benchmark subjects via ServiceLoader and pass them as JMH @Param values
         List<String> subjects = BenchmarkSubjects.discoverNames();
