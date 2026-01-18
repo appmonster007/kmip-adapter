@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
@@ -34,7 +34,8 @@ public class RequestBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvD
             }
             case KmipTag.Standard.UNIQUE_BATCH_ITEM_ID ->
                     builder.uniqueBatchItemID(mapper.readValue(p, UniqueBatchItemID.class));
-            case KmipTag.Standard.REQUEST_PAYLOAD -> builder.requestPayload(mapper.readValue(p, RequestPayload.class));
+            case KmipTag.Standard.REQUEST_PAYLOAD ->
+                    builder.requestPayloadStructure(mapper.readValue(p, RequestPayloadStructure.class));
             case KmipTag.Standard.MESSAGE_EXTENSION ->
                     builder.messageExtension(mapper.readValue(p, MessageExtension.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

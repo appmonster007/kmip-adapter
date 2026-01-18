@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.api.request;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
@@ -12,10 +12,10 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestPayloadTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestPayload> {
+public class RequestPayloadStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestPayloadStructure> {
 
     @Override
-    public RequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+    public RequestPayloadStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         return super.deserialize(ttlvBuffer, mapper);
     }
 
@@ -29,7 +29,7 @@ public class RequestPayloadTtlvDeserializer extends KmipDataTypeTtlvDeserializer
             operationValue = Operation.fromName(ctxtOperation);
         }
 
-        Class<? extends RequestPayload> payloadClass = RequestPayload.getClassFromRegistry(operationValue);
+        Class<? extends RequestPayloadStructure> payloadClass = RequestPayloadStructure.getClassFromRegistry(operationValue);
 
         if (payloadClass == null) {
             payloadClass = SimpleRequestPayload.class;

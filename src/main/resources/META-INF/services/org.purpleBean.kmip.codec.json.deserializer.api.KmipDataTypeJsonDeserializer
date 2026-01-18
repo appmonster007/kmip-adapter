@@ -107,7 +107,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PrivateKeyTempl
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PublicKeyJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PublicKeyTemplateAttributeJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.api.request.RequestPayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.request.RequestPayloadStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.RevocationReasonJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SampleStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SecretDataJsonDeserializer

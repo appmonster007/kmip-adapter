@@ -16,15 +16,15 @@ class SimpleRequestBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<
     @Override
     protected SimpleRequestBatchItem createDefault() {
         return SimpleRequestBatchItem.builder()
-                .requestPayload(SimpleRequestPayload.of())
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
     @Override
     protected SimpleRequestBatchItem createVariant() {
         return SimpleRequestBatchItem.builder()
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 

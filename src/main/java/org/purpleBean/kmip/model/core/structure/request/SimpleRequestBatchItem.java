@@ -8,7 +8,7 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
@@ -30,16 +30,16 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     private final Operation operation;
 
     @NonNull
-    private final RequestPayload requestPayload;
+    private final RequestPayloadStructure requestPayloadStructure;
 
     private SimpleRequestBatchItem(
 //            @NonNull
             Operation operation,
             @NonNull
-            RequestPayload requestPayload
+            RequestPayloadStructure requestPayloadStructure
     ) {
         this.operation = operation;
-        this.requestPayload = requestPayload;
+        this.requestPayloadStructure = requestPayloadStructure;
         validate();
     }
 
@@ -53,8 +53,8 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
         if (map.containsKey(Operation.kmipTag)) {
             builder.operation((Operation) map.get(Operation.kmipTag).get(0));
         }
-        if (map.containsKey(RequestPayload.kmipTag)) {
-            builder.requestPayload((RequestPayload) map.get(RequestPayload.kmipTag).get(0));
+        if (map.containsKey(RequestPayloadStructure.kmipTag)) {
+            builder.requestPayloadStructure((RequestPayloadStructure) map.get(RequestPayloadStructure.kmipTag).get(0));
         }
         return builder.build();
     }
@@ -75,7 +75,7 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
 
     @Override
     public List<KmipDataType> getValues() {
-        return Stream.of(operation, requestPayload).filter(Objects::nonNull).collect(Collectors.toList());
+        return Stream.of(operation, requestPayloadStructure).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override

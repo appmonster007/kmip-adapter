@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
@@ -30,7 +30,7 @@ class RequestBatchItemTest extends AbstractKmipStructureTestSuite<RequestBatchIt
     protected RequestBatchItem createDefault() {
         return RequestBatchItem.builder()
                 .operation(Operation.Standard.CREATE.inst())
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
@@ -48,6 +48,6 @@ class RequestBatchItemTest extends AbstractKmipStructureTestSuite<RequestBatchIt
     protected void validateComponents(List<KmipDataType> values) {
         assertThat(values).hasSize(2);
         assertThat(values.get(0)).isInstanceOf(Operation.class);
-        assertThat(values.get(1)).isInstanceOf(RequestPayload.class);
+        assertThat(values.get(1)).isInstanceOf(RequestPayloadStructure.class);
     }
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
 import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
@@ -37,7 +37,7 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     private final UniqueBatchItemID uniqueBatchItemID;
 
     @NonNull
-    private final RequestPayload requestPayload;
+    private final RequestPayloadStructure requestPayloadStructure;
 
     private final MessageExtension messageExtension;
 
@@ -45,12 +45,12 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     private RequestBatchItem(
             @NonNull Operation operation,
             UniqueBatchItemID uniqueBatchItemID,
-            @NonNull RequestPayload requestPayload,
+            @NonNull RequestPayloadStructure requestPayloadStructure,
             MessageExtension messageExtension
     ) {
         this.operation = operation;
         this.uniqueBatchItemID = uniqueBatchItemID;
-        this.requestPayload = requestPayload;
+        this.requestPayloadStructure = requestPayloadStructure;
         this.messageExtension = messageExtension;
         validate();
     }
@@ -64,8 +64,8 @@ public class RequestBatchItem implements RequestBatchItemStructure {
         if (map.containsKey(UniqueBatchItemID.kmipTag)) {
             builder.uniqueBatchItemID((UniqueBatchItemID) map.get(UniqueBatchItemID.kmipTag).get(0));
         }
-        if (map.containsKey(RequestPayload.kmipTag)) {
-            builder.requestPayload((RequestPayload) map.get(RequestPayload.kmipTag).get(0));
+        if (map.containsKey(RequestPayloadStructure.kmipTag)) {
+            builder.requestPayloadStructure((RequestPayloadStructure) map.get(RequestPayloadStructure.kmipTag).get(0));
         }
         if (map.containsKey(MessageExtension.kmipTag)) {
             builder.messageExtension((MessageExtension) map.get(MessageExtension.kmipTag).get(0));
@@ -75,7 +75,7 @@ public class RequestBatchItem implements RequestBatchItemStructure {
 
     private void validate() {
         Objects.requireNonNull(operation, "Operation cannot be null");
-        Objects.requireNonNull(requestPayload, "RequestPayload cannot be null");
+        Objects.requireNonNull(requestPayloadStructure, "RequestPayloadStructure cannot be null");
     }
 
     @Override
@@ -99,7 +99,7 @@ public class RequestBatchItem implements RequestBatchItemStructure {
         return Stream.of(
                         operation,
                         uniqueBatchItemID,
-                        requestPayload,
+                        requestPayloadStructure,
                         messageExtension)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

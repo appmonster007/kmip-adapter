@@ -24,7 +24,7 @@ class RequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<RequestB
     protected RequestBatchItem createDefault() {
         return RequestBatchItem.builder()
                 .operation(Operation.Standard.CREATE.inst())
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
@@ -32,7 +32,7 @@ class RequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<RequestB
     protected RequestBatchItem createVariant() {
         return RequestBatchItem.builder()
                 .operation(Operation.Standard.GET.inst())
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 }

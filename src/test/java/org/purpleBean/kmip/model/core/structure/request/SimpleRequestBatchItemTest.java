@@ -14,7 +14,7 @@ class SimpleRequestBatchItemTest extends AbstractKmipStructureTestSuite<SimpleRe
     @Override
     protected SimpleRequestBatchItem createDefault() {
         return SimpleRequestBatchItem.builder()
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 

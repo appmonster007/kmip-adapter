@@ -16,7 +16,7 @@ public class RequestBatchItemBenchmarkSubject extends KmipBenchmarkSubject<Reque
     public RequestBatchItemBenchmarkSubject() throws Exception {
         RequestBatchItem subject = RequestBatchItem.builder()
                 .operation(Operation.Standard.CREATE.inst())
-                .requestPayload(SimpleRequestPayload.of())
+                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
         initialize(subject, RequestBatchItem.class);
     }

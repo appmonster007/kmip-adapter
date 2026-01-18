@@ -12,14 +12,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /**
- * The {@code RequestPayload} interface represents the payload of a KMIP request.
+ * The {@code RequestPayloadStructure} interface represents the payload of a KMIP request.
  * It defines methods for registering and retrieving request payload classes and builders based on KMIP specification and operation.
  */
-public interface RequestPayload extends KmipDataType {
+public interface RequestPayloadStructure extends KmipDataType {
 
     KmipTag kmipTag = KmipTag.Standard.REQUEST_PAYLOAD.inst();
-    Map<RegistryKey, Class<? extends RequestPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
-    Map<RegistryKey, Function<List<KmipDataType>, ? extends RequestPayload>> PAYLOAD_BUILDER_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Class<? extends RequestPayloadStructure>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Function<List<KmipDataType>, ? extends RequestPayloadStructure>> PAYLOAD_BUILDER_REGISTRY = new ConcurrentHashMap<>();
 
     static void register(
             /**
@@ -32,8 +32,8 @@ public interface RequestPayload extends KmipDataType {
              */
             KmipSpec spec,
             Operation.Value operationValue,
-            Class<? extends RequestPayload> clazz,
-            Function<List<KmipDataType>, ? extends RequestPayload> payloadBuilder
+            Class<? extends RequestPayloadStructure> clazz,
+            Function<List<KmipDataType>, ? extends RequestPayloadStructure> payloadBuilder
     ) {
         PAYLOAD_REGISTRY.put(new RegistryKey(spec, operationValue), clazz);
         PAYLOAD_BUILDER_REGISTRY.put(new RegistryKey(spec, operationValue), payloadBuilder);
@@ -45,7 +45,7 @@ public interface RequestPayload extends KmipDataType {
      * @param operationValue The KMIP operation value.
      * @return The class representing the request payload, or {@code null} if not found.
      */
-    static Class<? extends RequestPayload> getClassFromRegistry(Operation.Value operationValue) {
+    static Class<? extends RequestPayloadStructure> getClassFromRegistry(Operation.Value operationValue) {
         KmipSpec spec = KmipContext.getSpec();
         return PAYLOAD_REGISTRY.get(new RegistryKey(spec, operationValue));
     }
@@ -56,7 +56,7 @@ public interface RequestPayload extends KmipDataType {
      * @param operationValue The KMIP operation value.
      * @return The function to build the request payload, or {@code null} if not found.
      */
-    static Function<List<KmipDataType>, ? extends RequestPayload> getBuilderFromRegistry(Operation.Value operationValue) {
+    static Function<List<KmipDataType>, ? extends RequestPayloadStructure> getBuilderFromRegistry(Operation.Value operationValue) {
         KmipSpec spec = KmipContext.getSpec();
         return PAYLOAD_BUILDER_REGISTRY.get(new RegistryKey(spec, operationValue));
     }

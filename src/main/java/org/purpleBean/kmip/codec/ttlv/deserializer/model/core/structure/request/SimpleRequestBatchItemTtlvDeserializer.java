@@ -2,7 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
@@ -24,7 +24,7 @@ public class SimpleRequestBatchItemTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // This structure is a wrapper, the logic is in the parent deserializer
-        builder.requestPayload(mapper.readValue(p, RequestPayload.class));
+        builder.requestPayloadStructure(mapper.readValue(p, RequestPayloadStructure.class));
     }
 
     @Override
