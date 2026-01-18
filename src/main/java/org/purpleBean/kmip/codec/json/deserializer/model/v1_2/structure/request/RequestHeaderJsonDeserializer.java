@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
+package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -8,8 +8,8 @@ import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 import org.purpleBean.kmip.model.core.structure.Authentication;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.RequestHeader;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
 
 import java.io.IOException;
 

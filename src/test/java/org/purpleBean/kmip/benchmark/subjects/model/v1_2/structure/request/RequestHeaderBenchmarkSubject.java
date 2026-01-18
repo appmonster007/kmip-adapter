@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request;
 
 import lombok.Getter;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.RequestHeader;
 import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
 
 public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestHeader> {
 

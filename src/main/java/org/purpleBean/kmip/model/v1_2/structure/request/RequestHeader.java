@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purpleBean.kmip.model.v1_2.structure.request;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +8,8 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
+import org.purpleBean.kmip.model.core.structure.Authentication;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.type.*;
 
 import java.util.List;
