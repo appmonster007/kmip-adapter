@@ -32,9 +32,4 @@ class SimpleRequestHeaderTest extends AbstractKmipStructureTestSuite<SimpleReque
         // first element should be ProtocolVersion
         assert values.get(0) instanceof ProtocolVersion;
     }
-
-    @Override
-    protected boolean expectedSupportedForUnsupportedSpec() {
-        return true; // current impl supports all specs
-    }
 }

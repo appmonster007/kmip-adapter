@@ -1,9 +1,6 @@
 package org.purpleBean.kmip.api.request;
 
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.function.Function;
  * The {@code RequestPayloadStructure} interface represents the payload of a KMIP request.
  * It defines methods for registering and retrieving request payload classes and builders based on KMIP specification and operation.
  */
-public interface RequestPayloadStructure extends KmipDataType {
+public interface RequestPayloadStructure extends KmipStructure {
 
     KmipTag kmipTag = KmipTag.Standard.REQUEST_PAYLOAD.inst();
     Map<RegistryKey, Class<? extends RequestPayloadStructure>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
@@ -60,6 +57,8 @@ public interface RequestPayloadStructure extends KmipDataType {
         KmipSpec spec = KmipContext.getSpec();
         return PAYLOAD_BUILDER_REGISTRY.get(new RegistryKey(spec, operationValue));
     }
+
+    Operation getSupportedOperation();
 
     /**
      * A record representing a key for the registry, composed of a KMIP specification and an operation value.

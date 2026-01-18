@@ -3,16 +3,14 @@ package org.purpleBean.kmip.model.core.structure.request;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,7 +19,8 @@ import static org.purpleBean.kmip.api.KmipTag.Standard.PROTOCOL_VERSION;
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestHeader implements RequestHeaderStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.REQUEST_HEADER.inst();
+
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {
         KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestHeader.class);
@@ -73,6 +72,6 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
 
     @Override
     public boolean isSupported() {
-        return true;
+        return supportedVersions.contains(KmipContext.getSpec());
     }
 }

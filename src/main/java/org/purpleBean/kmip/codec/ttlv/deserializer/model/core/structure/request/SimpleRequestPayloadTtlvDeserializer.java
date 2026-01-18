@@ -2,15 +2,12 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public class SimpleRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SimpleRequestPayload, SimpleRequestPayload.SimpleRequestPayloadBuilder> {
 
@@ -38,18 +35,18 @@ public class SimpleRequestPayloadTtlvDeserializer extends AbstractKmipStructureT
         return SimpleRequestPayload.encodingType;
     }
 
-    @Override
-    public SimpleRequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        if (Arrays.equals(obj.getTag(), SimpleRequestPayload.kmipTag.getTagBytes()) && obj.getType() != getEncodingType().getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", getEncodingType().getTypeValue(), SimpleRequestPayload.kmipTag.getDescription(), obj.getType()));
-        }
-
-        SimpleRequestPayload simpleRequestPayload = SimpleRequestPayload.builder().build();
-
-        if (!simpleRequestPayload.isSupported()) {
-            throw new NoSuchElementException();
-        }
-        return simpleRequestPayload;
-    }
+//    @Override
+//    public SimpleRequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+//        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
+//        if (Arrays.equals(obj.getTag(), SimpleRequestPayload.kmipTag.getTagBytes()) && obj.getType() != getEncodingType().getTypeValue()) {
+//            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", getEncodingType().getTypeValue(), SimpleRequestPayload.kmipTag.getDescription(), obj.getType()));
+//        }
+//
+//        SimpleRequestPayload simpleRequestPayload = SimpleRequestPayload.builder().build();
+//
+//        if (!simpleRequestPayload.isSupported()) {
+//            throw new NoSuchElementException();
+//        }
+//        return simpleRequestPayload;
+//    }
 }

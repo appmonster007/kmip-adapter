@@ -4,22 +4,20 @@ import lombok.Builder;
 import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
-public class SimpleRequestPayload implements RequestPayloadStructure, KmipStructure {
+public class SimpleRequestPayload implements RequestPayloadStructure {
 
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestPayload.class);
-            RequestPayloadStructure.register(spec, null, SimpleRequestPayload.class, SimpleRequestPayload::of);
-        }
+        KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestPayload.class);
+        RequestPayloadStructure.register(KmipSpec.UnknownVersion, null, SimpleRequestPayload.class, SimpleRequestPayload::of);
     }
 
     @Builder
@@ -51,12 +49,16 @@ public class SimpleRequestPayload implements RequestPayloadStructure, KmipStruct
 
     @Override
     public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(KmipContext.getSpec());
     }
 
     @Override
     public List<KmipDataType> getValues() {
         return List.of();
+    }
+
+    @Override
+    public Operation getSupportedOperation() {
+        return null;
     }
 }

@@ -59,8 +59,9 @@ public final class TtlvObject {
 
     public static List<TtlvObject> fromBytesMultiple(byte[] data) {
         Objects.requireNonNull(data, TtlvConstants.ERROR_NULL_DATA);
-        validateInput(data);
+        if (data.length == 0) return Collections.emptyList();
 
+        validateInput(data);
         final List<TtlvObject> result = new ArrayList<>();
         ByteBuffer buffer = ByteBuffer.wrap(data).order(TtlvConstants.BYTE_ORDER);
 

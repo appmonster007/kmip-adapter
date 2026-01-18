@@ -135,6 +135,13 @@ class TtlvObjectTest {
             List<TtlvObject> list = TtlvObject.fromBytesMultiple(both);
             assertThat(list).containsExactly(a, b);
         }
+
+        @Test
+        @DisplayName("Returns empty list for empty input")
+        void multiple_emptyInput() {
+            List<TtlvObject> list = TtlvObject.fromBytesMultiple(new byte[]{});
+            assertThat(list).isEmpty();
+        }
     }
 
     @Nested
@@ -179,9 +186,8 @@ class TtlvObjectTest {
 
         @Test
         @DisplayName("fromBytesMultiple should reject null/empty input")
-        void fromBytesMultiple_nullOrEmpty() {
+        void fromBytesMultiple_null() {
             assertThatThrownBy(() -> TtlvObject.fromBytesMultiple(null)).isInstanceOf(NullPointerException.class);
-            assertThatThrownBy(() -> TtlvObject.fromBytesMultiple(new byte[]{})).isInstanceOf(IllegalArgumentException.class);
         }
     }
 

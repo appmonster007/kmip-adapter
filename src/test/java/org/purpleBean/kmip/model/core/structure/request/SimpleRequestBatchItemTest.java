@@ -22,9 +22,4 @@ class SimpleRequestBatchItemTest extends AbstractKmipStructureTestSuite<SimpleRe
     protected int expectedMinComponentCount() {
         return 0; // no inner components for now
     }
-
-    @Override
-    protected boolean expectedSupportedForUnsupportedSpec() {
-        return true; // current impl supports all specs
-    }
 }

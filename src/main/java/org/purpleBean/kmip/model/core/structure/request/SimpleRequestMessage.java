@@ -4,18 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.api.request.RequestMessageStructure;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,7 +19,8 @@ import static org.purpleBean.kmip.api.KmipTag.Standard.REQUEST_HEADER;
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestMessage implements RequestMessageStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.REQUEST_MESSAGE.inst();
+
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {
         KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestMessage.class);
@@ -100,6 +95,6 @@ public class SimpleRequestMessage implements RequestMessageStructure {
 
     @Override
     public boolean isSupported() {
-        return true;
+        return supportedVersions.contains(KmipContext.getSpec());
     }
 }

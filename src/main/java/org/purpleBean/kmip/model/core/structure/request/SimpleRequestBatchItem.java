@@ -3,10 +3,7 @@ package org.purpleBean.kmip.model.core.structure.request;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
@@ -14,12 +11,15 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
+
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion);
 
     static {
         KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestBatchItem.class);
@@ -80,6 +80,6 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
 
     @Override
     public boolean isSupported() {
-        return true;
+        return supportedVersions.contains(KmipContext.getSpec());
     }
 }

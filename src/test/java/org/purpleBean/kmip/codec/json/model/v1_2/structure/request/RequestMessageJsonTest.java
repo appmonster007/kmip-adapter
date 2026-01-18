@@ -2,10 +2,13 @@ package org.purpleBean.kmip.codec.json.model.v1_2.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.model.core.type.BatchCount;
+import org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
@@ -16,7 +19,7 @@ class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestM
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override
@@ -32,7 +35,10 @@ class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestM
                 .build();
         RequestBatchItem item = RequestBatchItem.builder()
                 .operation(Operation.Standard.CREATE.inst())
-                .requestPayloadStructure(SimpleRequestPayload.of())
+                .requestPayloadStructure(CreateOpRequestPayload.builder()
+                        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+                        .templateAttribute(TemplateAttribute.builder().build())
+                        .build())
                 .build();
         return RequestMessage.builder()
                 .requestHeader(header)

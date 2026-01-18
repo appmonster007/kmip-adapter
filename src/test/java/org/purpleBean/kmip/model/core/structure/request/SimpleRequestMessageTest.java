@@ -43,9 +43,4 @@ class SimpleRequestMessageTest extends AbstractKmipStructureTestSuite<SimpleRequ
             assert values.get(i) instanceof SimpleRequestBatchItem;
         }
     }
-
-    @Override
-    protected boolean expectedSupportedForUnsupportedSpec() {
-        return true; // current impl supports all specs
-    }
 }
