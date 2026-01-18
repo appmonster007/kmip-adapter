@@ -19,7 +19,13 @@ public class CredentialValueTtlvDeserializer extends KmipDataTypeTtlvDeserialize
 
     @Override
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
-        CredentialType.Value credentialTypeValue = CredentialType.fromName((String) mapper.getAttribute("credentialType"));
+        String ctxtCredentialType = (String) mapper.getAttribute("credentialType");
+        CredentialType.Value credentialTypeValue;
+        if (ctxtCredentialType == null) {
+            credentialTypeValue = null;
+        } else {
+            credentialTypeValue = CredentialType.fromName(ctxtCredentialType);
+        }
         return CredentialValue.getClassFromRegistry(encodingType, credentialTypeValue);
     }
 }

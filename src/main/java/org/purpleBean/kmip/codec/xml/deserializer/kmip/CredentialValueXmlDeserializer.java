@@ -19,7 +19,13 @@ public class CredentialValueXmlDeserializer extends KmipDataTypeXmlDeserializer<
 
     @Override
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
-        CredentialType.Value credentialTypeValue = CredentialType.fromName((String) ctxt.getAttribute("credentialType"));
+        String ctxtCredentialType = (String) ctxt.getAttribute("credentialType");
+        CredentialType.Value credentialTypeValue;
+        if (ctxtCredentialType == null) {
+            credentialTypeValue = null;
+        } else {
+            credentialTypeValue = CredentialType.fromName(ctxtCredentialType);
+        }
         return CredentialValue.getClassFromRegistry(encodingType, credentialTypeValue);
     }
 }
