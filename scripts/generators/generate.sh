@@ -187,6 +187,7 @@ EOF
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" \
                 "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}" \
                 "ATTRIBUTE_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${ENUM_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then
@@ -311,6 +312,7 @@ EOF
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${DATA_NAME}.java" \
                 "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}" \
                 "ATTRIBUTE_NAME" "${DATA_NAME}" "ATTRIBUTE_NAME_SNAKE" "${DATA_NAME_SNAKE}" "ATTRIBUTE_VALUE_TYPE" "${ATTRIBUTE_VALUE_TYPE}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${DATA_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then
@@ -422,6 +424,7 @@ EOF
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
                 "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}"
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${STRUCTURE_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then

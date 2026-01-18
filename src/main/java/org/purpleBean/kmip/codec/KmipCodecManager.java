@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.text.StringEscapeUtils;
+import org.purpleBean.kmip.api.KmipInitializer;
 import org.purpleBean.kmip.codec.json.KmipJsonModule;
 import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -25,6 +26,10 @@ public final class KmipCodecManager {
     @Getter
     @Setter
     private static MapperType defaultType = MapperType.XML;
+
+    static {
+        KmipInitializer.initialize();
+    }
 
     public static TtlvMapper getTtlvMapper() {
         if (ttlvMapper == null) {
