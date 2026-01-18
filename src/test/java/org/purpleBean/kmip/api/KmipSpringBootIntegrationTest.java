@@ -23,7 +23,6 @@ class KmipSpringBootIntegrationTest {
     @Test
     void shouldSerializeAndDeserializeKmipObject() throws Exception {
         // Arrange
-        KmipDataType.register(KmipSpec.V1_2, KmipTag.Standard.CRYPTOGRAPHIC_LENGTH, EncodingType.INTEGER, CryptographicLength.class);
         CryptographicLength original = CryptographicLength.of(256);
 
         // Act
