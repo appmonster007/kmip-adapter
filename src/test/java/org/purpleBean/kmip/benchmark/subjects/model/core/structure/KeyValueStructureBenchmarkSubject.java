@@ -3,7 +3,6 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 import lombok.Getter;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
@@ -33,13 +32,4 @@ public class KeyValueStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyV
         return "KeyValueStructure";
     }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
 }

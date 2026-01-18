@@ -1,6 +1,5 @@
 package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
-import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.CertificateSubject;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectAlternativeName;
@@ -25,13 +24,4 @@ public class CertificateSubjectBenchmarkSubject extends KmipBenchmarkSubject<Cer
         return "CertificateSubject";
     }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
 }

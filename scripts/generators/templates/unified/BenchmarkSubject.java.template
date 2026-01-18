@@ -27,14 +27,4 @@ public class {{NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{NAME}}> {
     public String name() {
         return "{{NAME}}";
     }
-
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
 }

@@ -1,6 +1,5 @@
 package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
-import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.ActivationDate;
@@ -22,13 +21,4 @@ public class AttributeBenchmarkSubject extends KmipBenchmarkSubject<Attribute> {
         return "Attribute";
     }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
-
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
 }
