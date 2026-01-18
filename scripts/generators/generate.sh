@@ -91,7 +91,7 @@ generate_unified_serializer() {
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/${sub_path}/${name}${format_pascal}Serializer.java" \
         "pdot" "${pdot}" "NAME" "${name}" "SERIALIZED_TYPE" "${serialized_type}" "SUPER_CALL" "${super_call}"
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.kmip.KmipDataType${format_pascal}Serializer" \
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.api.KmipDataType${format_pascal}Serializer" \
         "org.purpleBean.kmip.codec.${format}.serializer.${pdot}.${name}${format_pascal}Serializer"
 }
 
@@ -103,7 +103,7 @@ generate_unified_deserializer() {
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/${sub_path}/${name}${format_pascal}Deserializer.java" \
         "pdot" "${pdot}" "NAME" "${name}" "DESERIALIZED_TYPE" "${deserialized_type}" "SUPER_CALL" "${super_call}"
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.kmip.KmipDataType${format_pascal}Deserializer" \
+    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.api.KmipDataType${format_pascal}Deserializer" \
         "org.purpleBean.kmip.codec.${format}.deserializer.${pdot}.${name}${format_pascal}Deserializer"
 }
 
@@ -465,37 +465,37 @@ EOF
         if ${GEN_JSON_SER}; then
             render_template "${TEMPLATE_DIR}/StructureJsonSerializer.java.template" "${MAIN_JAVA}/codec/json/serializer/${SUB_PATH}/${STRUCTURE_NAME}JsonSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.kmip.KmipDataTypeJsonSerializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer" \
                 "org.purpleBean.kmip.codec.json.serializer.${pdot}.${STRUCTURE_NAME}JsonSerializer"
         fi
         if ${GEN_JSON_DES}; then
             render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.kmip.KmipDataTypeJsonDeserializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer" \
                 "org.purpleBean.kmip.codec.json.deserializer.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
         fi
         if ${GEN_XML_SER}; then
             render_template "${TEMPLATE_DIR}/StructureXmlSerializer.java.template" "${MAIN_JAVA}/codec/xml/serializer/${SUB_PATH}/${STRUCTURE_NAME}XmlSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.kmip.KmipDataTypeXmlSerializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer" \
                 "org.purpleBean.kmip.codec.xml.serializer.${pdot}.${STRUCTURE_NAME}XmlSerializer"
         fi
         if ${GEN_XML_DES}; then
             render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.kmip.KmipDataTypeXmlDeserializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer" \
                 "org.purpleBean.kmip.codec.xml.deserializer.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
         fi
         if ${GEN_TTLV_SER}; then
             render_template "${TEMPLATE_DIR}/StructureTtlvSerializer.java.template" "${MAIN_JAVA}/codec/ttlv/serializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvSerializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.kmip.KmipDataTypeTtlvSerializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer" \
                 "org.purpleBean.kmip.codec.ttlv.serializer.${pdot}.${STRUCTURE_NAME}TtlvSerializer"
         fi
         if ${GEN_TTLV_DES}; then
             render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer" \
+            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer" \
                 "org.purpleBean.kmip.codec.ttlv.deserializer.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
         fi
 
