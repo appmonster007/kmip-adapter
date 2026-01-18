@@ -268,6 +268,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.VendorIdentification
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.XJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.YJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.CreateOpRequestPayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.GetOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestBatchItemJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestHeaderJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestMessageJsonDeserializer

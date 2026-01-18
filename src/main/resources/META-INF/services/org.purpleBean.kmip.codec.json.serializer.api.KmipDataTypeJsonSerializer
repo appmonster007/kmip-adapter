@@ -259,6 +259,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.VendorIdentificationJs
 org.purpleBean.kmip.codec.json.serializer.model.core.type.XJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.YJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.CreateOpRequestPayloadJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.GetOpRequestPayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestBatchItemJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestHeaderJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestMessageJsonSerializer

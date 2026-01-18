@@ -6,12 +6,9 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload;
-import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
-import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
-import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v1_2.structure.request.*;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RequestMessage Json Serialization Tests")
@@ -54,7 +51,9 @@ class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestM
                 .build();
         RequestBatchItem item = RequestBatchItem.builder()
                 .operation(Operation.Standard.GET.inst())
-                .requestPayloadStructure(SimpleRequestPayload.of())
+                .requestPayloadStructure(GetOpRequestPayload.builder()
+                        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+                        .build())
                 .build();
         return RequestMessage.builder()
                 .requestHeader(header)
