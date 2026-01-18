@@ -29,7 +29,7 @@ public class RequestHeader implements RequestHeaderStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, RequestHeader.class);
-            RequestHeaderStructure.register(spec, encodingType, RequestHeader.class, RequestHeader::of);
+            RequestHeaderStructure.register(spec, RequestHeader.class, RequestHeader::of);
         }
     }
 

@@ -5,6 +5,7 @@ import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 import java.util.Objects;
@@ -22,7 +23,10 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .build();
-        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
+                .requestPayload(SimpleRequestPayload.of())
+                .requestPayload(SimpleRequestPayload.of())
+                .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
                 .requestBatchItem(item)
@@ -34,7 +38,9 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(2, 0))
                 .build();
-        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
+                .requestPayload(SimpleRequestPayload.of())
+                .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
                 .requestBatchItem(item)

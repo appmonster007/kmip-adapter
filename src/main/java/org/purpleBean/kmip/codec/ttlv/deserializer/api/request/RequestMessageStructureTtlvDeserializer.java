@@ -11,7 +11,7 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestMessageTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestMessageStructure> {
+public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestMessageStructure> {
 
     @Override
     public RequestMessageStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {

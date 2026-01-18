@@ -25,7 +25,7 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
 
     static {
         KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestHeader.class);
-        RequestHeaderStructure.register(KmipSpec.UnknownVersion, encodingType, SimpleRequestHeader.class, SimpleRequestHeader::of);
+        RequestHeaderStructure.register(KmipSpec.UnknownVersion, SimpleRequestHeader.class, SimpleRequestHeader::of);
     }
 
     @NonNull

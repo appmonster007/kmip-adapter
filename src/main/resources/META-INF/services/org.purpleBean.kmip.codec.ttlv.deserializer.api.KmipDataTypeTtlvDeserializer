@@ -3,7 +3,9 @@ org.purpleBean.kmip.codec.ttlv.deserializer.api.CredentialValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.api.KeyMaterialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.api.request.RequestMessageTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.api.request.RequestMessageStructureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.api.request.RequestBatchItemStructureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.api.request.RequestHeaderStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AdjustmentTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AlternativeNameTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AsynchronousIndicatorTtlvDeserializer

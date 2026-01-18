@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
+import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
@@ -26,9 +26,14 @@ public class SimpleRequestMessageTtlvDeserializer extends AbstractKmipStructureT
     protected void setValue(SimpleRequestMessage.SimpleRequestMessageBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.REQUEST_HEADER ->
-                    builder.requestHeader(mapper.readValue(p, SimpleRequestHeader.class));
-            case KmipTag.Standard.BATCH_ITEM ->
-                    builder.requestBatchItem(mapper.readValue(p, SimpleRequestBatchItem.class));
+                    builder.requestHeader(mapper.readValue(p, RequestHeaderStructure.class));
+            case KmipTag.Standard.BATCH_ITEM -> {
+                try {
+                    builder.requestBatchItem(mapper.readValue(p, RequestBatchItemStructure.class));
+                } catch (Exception e) {
+                    builder.requestBatchItemError(e);
+                }
+            }
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

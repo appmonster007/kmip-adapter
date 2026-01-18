@@ -49,21 +49,22 @@ public interface RequestMessageStructure extends KmipStructure {
             Class<? extends RequestMessageStructure> clazz,
             Function<List<KmipDataType>, ? extends RequestMessageStructure> builder
     ) {
-        REGISTRY.put(new RegistryKey(spec, encodingType), clazz);
-        BUILDER_REGISTRY.put(new RegistryKey(spec, encodingType), builder);
+        REGISTRY.put(new RegistryKey(spec), clazz);
+        BUILDER_REGISTRY.put(new RegistryKey(spec), builder);
     }
 
-    static Class<? extends RequestMessageStructure> getClassFromRegistry(KmipSpec spec, EncodingType encodingType) {
-        return REGISTRY.get(new RegistryKey(spec, encodingType));
+    static Class<? extends RequestMessageStructure> getClassFromRegistry() {
+        KmipSpec spec = KmipContext.getSpec();
+        return REGISTRY.get(new RegistryKey(spec));
     }
 
-    static Function<List<KmipDataType>, ? extends RequestMessageStructure> getBuilderFromRegistry(KmipSpec spec, EncodingType encodingType) {
-        return BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType));
+    static Function<List<KmipDataType>, ? extends RequestMessageStructure> getBuilderFromRegistry() {
+        KmipSpec spec = KmipContext.getSpec();
+        return BUILDER_REGISTRY.get(new RegistryKey(spec));
     }
 
     static RequestMessageStructure of(List<KmipDataType> values) {
-        KmipSpec spec = KmipContext.getSpec();
-        return getBuilderFromRegistry(spec, encodingType).apply(values);
+        return getBuilderFromRegistry().apply(values);
     }
 
     /**
@@ -91,6 +92,6 @@ public interface RequestMessageStructure extends KmipStructure {
      */
     List<? extends Exception> getRequestBatchItemErrors();
 
-    record RegistryKey(KmipSpec spec, EncodingType encodingType) {
+    record RegistryKey(KmipSpec spec) {
     }
 }

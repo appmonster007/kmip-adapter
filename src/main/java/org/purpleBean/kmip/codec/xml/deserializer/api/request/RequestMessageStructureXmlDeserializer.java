@@ -11,7 +11,7 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
 
-public class RequestMessageXmlDeserializer extends KmipDataTypeXmlDeserializer<RequestMessageStructure> {
+public class RequestMessageStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<RequestMessageStructure> {
 
     @Override
     public RequestMessageStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

@@ -8,6 +8,8 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
+import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.api.request.RequestMessageStructure;
 
 import java.util.Collections;
@@ -31,18 +33,18 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     }
 
     @NonNull
-    private final SimpleRequestHeader requestHeader;
+    private final RequestHeaderStructure requestHeader;
     @NonNull
     @Singular
-    private final List<SimpleRequestBatchItem> requestBatchItems;
+    private final List<RequestBatchItemStructure> requestBatchItems;
     @NonNull
     @Singular
     private final List<Exception> requestBatchItemErrors;
 
     @Builder
     private SimpleRequestMessage(
-            @NonNull SimpleRequestHeader requestHeader,
-            List<SimpleRequestBatchItem> requestBatchItems,
+            @NonNull RequestHeaderStructure requestHeader,
+            List<RequestBatchItemStructure> requestBatchItems,
             List<Exception> requestBatchItemErrors
     ) {
         this.requestHeader = requestHeader;

@@ -20,7 +20,9 @@ class SimpleRequestMessageTest extends AbstractKmipStructureTestSuite<SimpleRequ
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .build();
-        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder().build();
+        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
+                .requestPayload(SimpleRequestPayload.of())
+                .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
                 .requestBatchItem(item)

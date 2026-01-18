@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayload;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestPayload implements RequestPayload, KmipStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.REQUEST_PAYLOAD.inst();
+
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
@@ -20,8 +19,6 @@ public class SimpleRequestPayload implements RequestPayload, KmipStructure {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, SimpleRequestPayload.class);
             RequestPayload.register(spec, null, SimpleRequestPayload.class, SimpleRequestPayload::of);
-            RequestPayload.register(spec, Operation.Standard.CREATE, SimpleRequestPayload.class, SimpleRequestPayload::of);
-            RequestPayload.register(spec, Operation.Standard.GET, SimpleRequestPayload.class, SimpleRequestPayload::of);
         }
     }
 

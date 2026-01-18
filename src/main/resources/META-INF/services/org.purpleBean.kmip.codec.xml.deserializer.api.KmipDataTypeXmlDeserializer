@@ -3,7 +3,9 @@ org.purpleBean.kmip.codec.xml.deserializer.api.CredentialValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KeyMaterialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KmipAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestMessageXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestMessageStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestBatchItemStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestHeaderStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AdjustmentTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AlternativeNameTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AsynchronousIndicatorXmlDeserializer
