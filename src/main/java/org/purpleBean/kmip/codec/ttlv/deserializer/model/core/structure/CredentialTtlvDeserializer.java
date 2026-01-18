@@ -25,7 +25,11 @@ public class CredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeseria
     @Override
     protected void setValue(Credential.CredentialBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.CREDENTIAL_TYPE -> builder.credentialType(mapper.readValue(p, CredentialType.class));
+            case KmipTag.Standard.CREDENTIAL_TYPE -> {
+                CredentialType credentialType = mapper.readValue(p, CredentialType.class);
+                builder.credentialType(credentialType);
+                mapper.setAttribute("credentialType", credentialType.getDescription());
+            }
             case KmipTag.Standard.CREDENTIAL_VALUE ->
                     builder.credentialValue(mapper.readValue(p, CredentialValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

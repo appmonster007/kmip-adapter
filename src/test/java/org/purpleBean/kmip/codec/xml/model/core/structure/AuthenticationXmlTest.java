@@ -3,14 +3,15 @@ package org.purpleBean.kmip.codec.xml.model.core.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.CredentialType;
+import org.purpleBean.kmip.model.core.structure.Authentication;
 import org.purpleBean.kmip.model.core.structure.Credential;
 import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
 import org.purpleBean.kmip.model.core.type.Password;
 import org.purpleBean.kmip.model.core.type.Username;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
-@DisplayName("Credential Xml Serialization Tests")
-class CredentialXmlTest extends AbstractXmlSerializationTestSuite<Credential> {
+@DisplayName("Authentication Xml Serialization Tests")
+class AuthenticationXmlTest extends AbstractXmlSerializationTestSuite<Authentication> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -18,29 +19,37 @@ class CredentialXmlTest extends AbstractXmlSerializationTestSuite<Credential> {
     }
 
     @Override
-    protected Class<Credential> type() {
-        return Credential.class;
+    protected Class<Authentication> type() {
+        return Authentication.class;
     }
 
     @Override
-    protected Credential createDefault() {
-        return Credential.builder()
+    protected Authentication createDefault() {
+        Credential credential = Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()
                         .username(Username.of("test-user"))
                         .password(Password.of("test-password"))
                         .build())
                 .build();
+        return Authentication.builder()
+                .credential(credential)
+                .credential(credential)
+                .build();
     }
 
     @Override
-    protected Credential createVariant() {
-        return Credential.builder()
+    protected Authentication createVariant() {
+        Credential credential = Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()
                         .username(Username.of("test-user-variant"))
                         .password(Password.of("test-password-variant"))
                         .build())
+                .build();
+        return Authentication.builder()
+                .credential(credential)
+                .credential(credential)
                 .build();
     }
 }

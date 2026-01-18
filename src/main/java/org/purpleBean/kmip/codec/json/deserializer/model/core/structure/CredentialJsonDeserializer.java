@@ -24,8 +24,14 @@ public class CredentialJsonDeserializer extends AbstractKmipStructureJsonDeseria
     @Override
     protected void setValue(Credential.CredentialBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.CREDENTIAL_TYPE -> builder.credentialType(ctxt.readValue(p, CredentialType.class));
-            case KmipTag.Standard.CREDENTIAL_VALUE -> builder.credentialValue(ctxt.readValue(p, CredentialValue.class));
+            case KmipTag.Standard.CREDENTIAL_TYPE -> {
+                CredentialType credentialType = ctxt.readValue(p, CredentialType.class);
+                builder.credentialType(credentialType);
+                ctxt.setAttribute("credentialType", credentialType.getDescription());
+            }
+            case KmipTag.Standard.CREDENTIAL_VALUE -> {
+                builder.credentialValue(ctxt.readValue(p, CredentialValue.class));
+            }
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

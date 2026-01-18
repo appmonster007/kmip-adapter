@@ -14,7 +14,7 @@ class CredentialJsonTest extends AbstractJsonSerializationTestSuite<Credential> 
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override

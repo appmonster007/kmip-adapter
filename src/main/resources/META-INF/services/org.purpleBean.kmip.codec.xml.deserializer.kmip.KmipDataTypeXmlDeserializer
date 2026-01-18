@@ -71,12 +71,14 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ApplicationSpeci
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttestationCredentialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttributeValueStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttributeXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AuthenticationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CertificateIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CertificateIssuerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CertificateSubjectXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CertificateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CommonTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CredentialValueGenericStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.kmip.CredentialValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CredentialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CryptographicDomainParametersXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CryptographicParametersXmlDeserializer

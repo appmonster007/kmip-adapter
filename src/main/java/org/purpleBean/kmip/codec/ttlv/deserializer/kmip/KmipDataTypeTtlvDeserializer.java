@@ -23,7 +23,7 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
             return null;
         }
 
-        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTagValue, encodingType);
+        Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTagValue, encodingType, mapper);
         if (clazz == null) {
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType));
         }
@@ -32,7 +32,7 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
         return (T) mapper.readValue(ttlvBuffer, clazz);
     }
 
-    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType) {
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
         return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 }

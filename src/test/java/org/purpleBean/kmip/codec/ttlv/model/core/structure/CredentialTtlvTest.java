@@ -14,7 +14,7 @@ class CredentialTtlvTest extends AbstractTtlvSerializationTestSuite<Credential> 
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override

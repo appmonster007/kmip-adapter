@@ -49,6 +49,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @see TtlvModule
  */
 public class TtlvMapper {
+    private final Map<Object, Object> ctxt = new ConcurrentHashMap<>();
     private final Map<Class<?>, TtlvSerializer<?>> serializers = new ConcurrentHashMap<>();
     private final Map<Class<?>, TtlvDeserializer<?>> deserializers = new ConcurrentHashMap<>();
 
@@ -187,4 +188,13 @@ public class TtlvMapper {
 
         throw new IllegalArgumentException("No deserializer found for type: " + type.getName());
     }
+
+    public void setAttribute(Object key, Object value) {
+        ctxt.put(key, value);
+    }
+
+    public Object getAttribute(Object key) {
+        return ctxt.get(key);
+    }
+
 }

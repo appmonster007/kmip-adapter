@@ -66,6 +66,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.ApplicationSpecificI
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttestationCredentialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeValueStructureBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.AuthenticationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIssuerBenchmarkSubject
