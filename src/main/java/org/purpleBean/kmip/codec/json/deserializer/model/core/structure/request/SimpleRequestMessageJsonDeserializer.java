@@ -28,7 +28,7 @@ public class SimpleRequestMessageJsonDeserializer extends AbstractKmipStructureJ
                     builder.requestHeader(ctxt.readValue(p, RequestHeaderStructure.class));
             case KmipTag.Standard.BATCH_ITEM -> {
                 if (p.isExpectedStartArrayToken()) {
-                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
+                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) { // TODO: can be removed?
                         try {
                             builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));
                         } catch (Exception e) {
