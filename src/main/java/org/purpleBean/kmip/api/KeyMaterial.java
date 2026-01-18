@@ -35,13 +35,13 @@ public interface KeyMaterial extends KmipDataType {
      * A registry mapping a unique key (KMIP spec, encoding type, key format type) to the
      * specific {@link KmipDataType} class that represents that key material format.
      */
-    Map<KeyMaterial.RegistryKey, Class<? extends KmipDataType>> KEY_FORMAT_TYPE_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Class<? extends KmipDataType>> KEY_FORMAT_TYPE_REGISTRY = new ConcurrentHashMap<>();
 
     /**
      * A registry mapping a unique key (KMIP spec, encoding type, key format type) to a
      * builder function that can construct a specific {@link KeyMaterial} instance.
      */
-    Map<KeyMaterial.RegistryKey, Function<KeyMaterial, ? extends KeyMaterial>> KEY_FORMAT_TYPE_BUILDER_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Function<KeyMaterial, ? extends KeyMaterial>> KEY_FORMAT_TYPE_BUILDER_REGISTRY = new ConcurrentHashMap<>();
 
     /**
      * Registers a {@link KeyMaterial} class and its builder function with the central registries.
@@ -63,33 +63,33 @@ public interface KeyMaterial extends KmipDataType {
             Class<? extends KmipDataType> clazz,
             Function<KeyMaterial, ? extends KeyMaterial> keyFormatTypeBuilder
     ) {
-        KEY_FORMAT_TYPE_REGISTRY.put(new KeyMaterial.RegistryKey(spec, encodingType, keyFormatTypeValue), clazz);
-        KEY_FORMAT_TYPE_BUILDER_REGISTRY.put(new KeyMaterial.RegistryKey(spec, encodingType, keyFormatTypeValue), keyFormatTypeBuilder);
+        KEY_FORMAT_TYPE_REGISTRY.put(new RegistryKey(spec, encodingType, keyFormatTypeValue), clazz);
+        KEY_FORMAT_TYPE_BUILDER_REGISTRY.put(new RegistryKey(spec, encodingType, keyFormatTypeValue), keyFormatTypeBuilder);
     }
 
     /**
      * Retrieves the corresponding {@link KmipDataType} class from the registry based on
      * the KMIP specification, encoding type, and key format type.
      *
-     * @param spec               The {@link KmipSpec} version.
      * @param encodingType       The {@link EncodingType} of the key material.
      * @param keyFormatTypeValue The {@link KeyFormatType.Value} of the key material.
      * @return The registered {@link Class}, or {@code null} if no mapping is found.
      */
-    static Class<? extends KmipDataType> getClassFromRegistry(KmipSpec spec, EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {
-        return KEY_FORMAT_TYPE_REGISTRY.get(new KeyMaterial.RegistryKey(spec, encodingType, keyFormatTypeValue));
+    static Class<? extends KmipDataType> getClassFromRegistry(EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {
+        KmipSpec spec = KmipContext.getSpec();
+        return KEY_FORMAT_TYPE_REGISTRY.get(new RegistryKey(spec, encodingType, keyFormatTypeValue));
     }
 
     /**
      * Retrieves the builder function for a specific key material format from the registry.
      *
-     * @param spec               The {@link KmipSpec} version.
      * @param encodingType       The {@link EncodingType} of the key material.
      * @param keyFormatTypeValue The {@link KeyFormatType.Value} of the key material.
      * @return The registered {@link Function} builder, or {@code null} if no mapping is found.
      */
-    static Function<KeyMaterial, ? extends KeyMaterial> getBuilderFromRegistry(KmipSpec spec, EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {
-        return KEY_FORMAT_TYPE_BUILDER_REGISTRY.get(new KeyMaterial.RegistryKey(spec, encodingType, keyFormatTypeValue));
+    static Function<KeyMaterial, ? extends KeyMaterial> getBuilderFromRegistry(EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {
+        KmipSpec spec = KmipContext.getSpec();
+        return KEY_FORMAT_TYPE_BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType, keyFormatTypeValue));
     }
 
     /**

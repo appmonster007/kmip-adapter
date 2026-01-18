@@ -74,9 +74,7 @@ public interface KmipAttribute extends KmipDataType {
      * @param kmipTagValue The {@link KmipTag.Value} of the attribute.
      * @param encodingType The {@link EncodingType} of the attribute.
      * @return The registered {@link Class}, or {@code null} if not found.
-     * @deprecated May be removed in favor of {@link #getAttributeBuilderFromRegistry}.
      */
-    @Deprecated
     static Class<? extends KmipAttribute> getClassFromRegistry(KmipTag.Value kmipTagValue, EncodingType encodingType) {
         KmipSpec spec = KmipContext.getSpec();
         return ATTRIBUTE_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));

@@ -72,24 +72,24 @@ public interface CredentialValue extends KmipDataType {
      * Retrieves the corresponding {@link KmipDataType} class from the registry based on
      * the KMIP specification, encoding type, and credential type.
      *
-     * @param spec                The {@link KmipSpec} version.
      * @param encodingType        The {@link EncodingType} of the credential.
      * @param credentialTypeValue The {@link CredentialType.Value} of the credential.
      * @return The registered {@link Class}, or {@code null} if no mapping is found.
      */
-    static Class<? extends KmipDataType> getClassFromRegistry(KmipSpec spec, EncodingType encodingType, CredentialType.Value credentialTypeValue) {
+    static Class<? extends KmipDataType> getClassFromRegistry(EncodingType encodingType, CredentialType.Value credentialTypeValue) {
+        KmipSpec spec = KmipContext.getSpec();
         return CREDENTIAL_TYPE_REGISTRY.get(new RegistryKey(spec, encodingType, credentialTypeValue));
     }
 
     /**
      * Retrieves the builder function for a specific credential format from the registry.
      *
-     * @param spec                The {@link KmipSpec} version.
      * @param encodingType        The {@link EncodingType} of the credential.
      * @param credentialTypeValue The {@link CredentialType.Value} of the credential.
      * @return The registered {@link Function} builder, or {@code null} if no mapping is found.
      */
-    static Function<CredentialValue, ? extends CredentialValue> getBuilderFromRegistry(KmipSpec spec, EncodingType encodingType, CredentialType.Value credentialTypeValue) {
+    static Function<CredentialValue, ? extends CredentialValue> getBuilderFromRegistry(EncodingType encodingType, CredentialType.Value credentialTypeValue) {
+        KmipSpec spec = KmipContext.getSpec();
         return CREDENTIAL_TYPE_BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType, credentialTypeValue));
     }
 
