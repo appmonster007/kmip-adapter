@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_ECDH_PRIVATE_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_ECDH_PRIVATE_KEY, TransparentEcdhPrivateKey.class, TransparentEcdhPrivateKey::of);
+            KeyMaterial.register(spec, encodingType, keyFormatTypeValue, TransparentEcdhPrivateKey.class, TransparentEcdhPrivateKey::of);
         }
     }
 
@@ -78,5 +79,10 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(recommendedCurve, d);
+    }
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return keyFormatTypeValue.inst();
     }
 }

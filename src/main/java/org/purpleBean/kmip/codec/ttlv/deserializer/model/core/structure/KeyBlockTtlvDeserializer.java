@@ -29,7 +29,11 @@ public class KeyBlockTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
     @Override
     protected void setValue(KeyBlock.KeyBlockBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.KEY_FORMAT_TYPE -> builder.keyFormatType(mapper.readValue(p, KeyFormatType.class));
+            case KmipTag.Standard.KEY_FORMAT_TYPE -> {
+                KeyFormatType keyFormatType = mapper.readValue(p, KeyFormatType.class);
+                builder.keyFormatType(keyFormatType);
+                mapper.setAttribute("keyFormatType", keyFormatType.getDescription());
+            }
             case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
                     builder.keyCompressionType(mapper.readValue(p, KeyCompressionType.class));
             case KmipTag.Standard.KEY_VALUE -> builder.keyValue(mapper.readValue(p, KeyValue.class));

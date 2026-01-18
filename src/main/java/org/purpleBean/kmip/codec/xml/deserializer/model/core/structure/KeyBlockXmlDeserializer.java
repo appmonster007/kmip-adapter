@@ -28,7 +28,11 @@ public class KeyBlockXmlDeserializer extends AbstractKmipStructureXmlDeserialize
     @Override
     protected void setValue(KeyBlock.KeyBlockBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.KEY_FORMAT_TYPE -> builder.keyFormatType(ctxt.readValue(p, KeyFormatType.class));
+            case KmipTag.Standard.KEY_FORMAT_TYPE -> {
+                KeyFormatType keyFormatType = ctxt.readValue(p, KeyFormatType.class);
+                builder.keyFormatType(keyFormatType);
+                ctxt.setAttribute("keyFormatType", keyFormatType.getDescription());
+            }
             case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
                     builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
             case KmipTag.Standard.KEY_VALUE -> builder.keyValue(ctxt.readValue(p, KeyValue.class));

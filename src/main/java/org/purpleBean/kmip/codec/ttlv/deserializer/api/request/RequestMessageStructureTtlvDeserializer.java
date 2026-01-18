@@ -22,7 +22,7 @@ public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDes
         KmipSpec spec = KmipSpec.fromValue(protocolVersion);
         KmipContext.setSpec(spec);
         try {
-            return deserializeByProtocolVersion(protocolVersion, ttlvBuffer, mapper);
+            return super.deserialize(ttlvBuffer, mapper);
         } finally {
             if (previous != null) {
                 KmipContext.setSpec(previous);
@@ -30,11 +30,5 @@ public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDes
                 KmipContext.clear();
             }
         }
-    }
-
-    private RequestMessageStructure deserializeByProtocolVersion(ProtocolVersion protocolVersion, ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        return switch (protocolVersion.toString()) {
-            default -> mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
-        };
     }
 }

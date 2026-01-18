@@ -3,8 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.api.request;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestMessageStructure;
 import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
@@ -25,7 +24,7 @@ public class RequestMessageStructureJsonDeserializer extends KmipDataTypeJsonDes
         KmipSpec spec = KmipSpec.fromValue(protocolVersion);
         KmipContext.setSpec(spec);
         try {
-            return deserializeByProtocolVersion(p, node, protocolVersion);
+            return super.deserialize(p, ctxt);
         } finally {
             if (previous != null) {
                 KmipContext.setSpec(previous);
@@ -35,9 +34,8 @@ public class RequestMessageStructureJsonDeserializer extends KmipDataTypeJsonDes
         }
     }
 
-    private RequestMessageStructure deserializeByProtocolVersion(JsonParser p, JsonNode node, ProtocolVersion protocolVersion) throws IOException {
-        return switch (protocolVersion.toString()) {
-            default -> p.getCodec().treeToValue(node, SimpleRequestMessage.class);
-        };
+    @Override
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
+        return RequestMessageStructure.getClassFromRegistry();
     }
 }

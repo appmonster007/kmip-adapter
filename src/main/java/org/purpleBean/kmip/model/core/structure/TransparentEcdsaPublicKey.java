@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_ECDSA_PUBLIC_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_ECDSA_PUBLIC_KEY, TransparentEcdsaPublicKey.class, TransparentEcdsaPublicKey::of);
+            KeyMaterial.register(spec, encodingType, keyFormatTypeValue, TransparentEcdsaPublicKey.class, TransparentEcdsaPublicKey::of);
         }
     }
 
@@ -78,5 +79,10 @@ public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(recommendedCurve, qString);
+    }
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return keyFormatTypeValue.inst();
     }
 }

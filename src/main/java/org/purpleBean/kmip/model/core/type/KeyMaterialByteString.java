@@ -21,7 +21,7 @@ public class KeyMaterialByteString implements KeyMaterial {
 
     static {
         ArrayList<KeyFormatType.Value> byteStringKeyFormatTypes = new ArrayList<>(Arrays.asList(
-                KeyFormatType.Standard.RAW, KeyFormatType.Standard.OPAQUE,
+                null, KeyFormatType.Standard.RAW, KeyFormatType.Standard.OPAQUE,
                 KeyFormatType.Standard.PKCS_1, KeyFormatType.Standard.PKCS_8,
                 KeyFormatType.Standard.EC_PRIVATE_KEY
         ));
@@ -36,6 +36,9 @@ public class KeyMaterialByteString implements KeyMaterial {
         }
     }
 
+    @NonNull
+    @Builder.Default
+    private final KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
     @NonNull
     private final ByteBuffer value;
 

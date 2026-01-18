@@ -20,11 +20,12 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_DSA_PUBLIC_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_DSA_PUBLIC_KEY, TransparentDsaPublicKey.class, TransparentDsaPublicKey::of);
+            KeyMaterial.register(spec, encodingType, keyFormatTypeValue, TransparentDsaPublicKey.class, TransparentDsaPublicKey::of);
         }
     }
 
@@ -92,5 +93,11 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(p, q, g, y);
+    }
+
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return keyFormatTypeValue.inst();
     }
 }

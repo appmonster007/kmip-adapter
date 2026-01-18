@@ -17,11 +17,12 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_SYMMETRIC_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_SYMMETRIC_KEY, TransparentSymmetricKey.class, TransparentSymmetricKey::of);
+            KeyMaterial.register(spec, encodingType, keyFormatTypeValue, TransparentSymmetricKey.class, TransparentSymmetricKey::of);
         }
     }
 
@@ -69,5 +70,10 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     @Override
     public List<KmipDataType> getValues() {
         return List.of(key);
+    }
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return keyFormatTypeValue.inst();
     }
 }

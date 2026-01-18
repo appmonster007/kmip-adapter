@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 
 import java.util.Collections;
 import java.util.List;
@@ -66,12 +67,17 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
+        return spec != KmipSpec.UnsupportedVersion
                 && getValues().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
     public List<KmipDataType> getValues() {
         return values.stream().filter(Objects::nonNull).toList();
+    }
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return null;
     }
 }

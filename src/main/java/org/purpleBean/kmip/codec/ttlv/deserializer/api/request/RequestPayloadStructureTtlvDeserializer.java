@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -28,13 +27,6 @@ public class RequestPayloadStructureTtlvDeserializer extends KmipDataTypeTtlvDes
         } else {
             operationValue = Operation.fromName(ctxtOperation);
         }
-
-        Class<? extends RequestPayloadStructure> payloadClass = RequestPayloadStructure.getClassFromRegistry(operationValue);
-
-        if (payloadClass == null) {
-            payloadClass = SimpleRequestPayload.class;
-        }
-
-        return payloadClass;
+        return RequestPayloadStructure.getClassFromRegistry(operationValue);
     }
 }

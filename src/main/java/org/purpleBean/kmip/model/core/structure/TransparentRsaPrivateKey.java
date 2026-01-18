@@ -18,11 +18,12 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_RSA_PRIVATE_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KeyMaterial.register(spec, encodingType, KeyFormatType.Standard.TRANSPARENT_RSA_PRIVATE_KEY, TransparentRsaPrivateKey.class, TransparentRsaPrivateKey::of);
+            KeyMaterial.register(spec, encodingType, keyFormatTypeValue, TransparentRsaPrivateKey.class, TransparentRsaPrivateKey::of);
         }
     }
 
@@ -116,5 +117,10 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
         return Stream.of(modulus, privateExponent, publicExponent, p, q, primeExponentP, primeExponentQ, crtCoefficient)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public KeyFormatType getKeyFormatType() {
+        return keyFormatTypeValue.inst();
     }
 }
