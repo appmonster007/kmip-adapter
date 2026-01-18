@@ -31,14 +31,18 @@ public class SimpleRequestMessageXmlDeserializer extends AbstractKmipStructureXm
                     while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
                         try {
                             builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));
+                            builder.requestBatchItemError(null);
                         } catch (Exception e) {
+                            builder.requestBatchItem(null);
                             builder.requestBatchItemError(e);
                         }
                     }
                 } else {
                     try {
                         builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));
+                        builder.requestBatchItemError(null);
                     } catch (Exception e) {
+                        builder.requestBatchItem(null);
                         builder.requestBatchItemError(e);
                     }
                 }

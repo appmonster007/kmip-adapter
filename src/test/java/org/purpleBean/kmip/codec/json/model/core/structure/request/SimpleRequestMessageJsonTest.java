@@ -25,11 +25,10 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
                 .build();
         SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
                 .requestPayloadStructure(SimpleRequestPayload.of())
-                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
-                .requestBatchItem(item)
+                .requestBatchItem(item).requestBatchItemError(null)
                 .build();
     }
 
@@ -43,7 +42,7 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
                 .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
-                .requestBatchItem(item)
+                .requestBatchItem(item).requestBatchItemError(null)
                 .build();
     }
 

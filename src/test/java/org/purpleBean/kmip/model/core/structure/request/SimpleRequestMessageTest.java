@@ -25,7 +25,7 @@ class SimpleRequestMessageTest extends AbstractKmipStructureTestSuite<SimpleRequ
                 .build();
         return SimpleRequestMessage.builder()
                 .requestHeader(header)
-                .requestBatchItem(item)
+                .requestBatchItem(item).requestBatchItemError(null)
                 // leave requestBatchItemErrors empty via @Singular
                 .build();
     }

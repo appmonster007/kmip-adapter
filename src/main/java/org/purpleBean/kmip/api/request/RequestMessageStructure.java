@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * Represents the top-level structure of a KMIP Request Message.
@@ -41,13 +41,12 @@ public interface RequestMessageStructure extends KmipStructure {
     KmipTag kmipTag = KmipTag.Standard.REQUEST_MESSAGE.inst();
 
     Map<RegistryKey, Class<? extends RequestMessageStructure>> REGISTRY = new ConcurrentHashMap<>();
-    Map<RegistryKey, Function<List<KmipDataType>, ? extends RequestMessageStructure>> BUILDER_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, BiFunction<List<KmipDataType>, List<Exception>, ? extends RequestMessageStructure>> BUILDER_REGISTRY = new ConcurrentHashMap<>();
 
     static void register(
             KmipSpec spec,
-            EncodingType encodingType,
             Class<? extends RequestMessageStructure> clazz,
-            Function<List<KmipDataType>, ? extends RequestMessageStructure> builder
+            BiFunction<List<KmipDataType>, List<Exception>, ? extends RequestMessageStructure> builder
     ) {
         REGISTRY.put(new RegistryKey(spec), clazz);
         BUILDER_REGISTRY.put(new RegistryKey(spec), builder);
@@ -58,13 +57,13 @@ public interface RequestMessageStructure extends KmipStructure {
         return REGISTRY.get(new RegistryKey(spec));
     }
 
-    static Function<List<KmipDataType>, ? extends RequestMessageStructure> getBuilderFromRegistry() {
+    static BiFunction<List<KmipDataType>, List<Exception>, ? extends RequestMessageStructure> getBuilderFromRegistry() {
         KmipSpec spec = KmipContext.getSpec();
         return BUILDER_REGISTRY.get(new RegistryKey(spec));
     }
 
-    static RequestMessageStructure of(List<KmipDataType> values) {
-        return getBuilderFromRegistry().apply(values);
+    static RequestMessageStructure of(List<KmipDataType> values, List<Exception> errors) {
+        return getBuilderFromRegistry().apply(values, errors);
     }
 
     /**

@@ -29,7 +29,7 @@ public class SimpleRequestMessage implements RequestMessageStructure {
 
     static {
         KmipDataType.register(KmipSpec.UnknownVersion, kmipTag.getValue(), encodingType, SimpleRequestMessage.class);
-        RequestMessageStructure.register(KmipSpec.UnknownVersion, encodingType, SimpleRequestMessage.class, SimpleRequestMessage::of);
+        RequestMessageStructure.register(KmipSpec.UnknownVersion, SimpleRequestMessage.class, SimpleRequestMessage::of);
     }
 
     @NonNull
@@ -54,11 +54,12 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     }
 
     public static SimpleRequestMessage of(KmipDataType... values) {
-        return of(List.of(values));
+        return of(List.of(values), List.of());
     }
 
-    public static SimpleRequestMessage of(List<KmipDataType> values) {
+    public static SimpleRequestMessage of(List<KmipDataType> values, List<Exception> errors) {
         var builder = SimpleRequestMessage.builder();
+        builder.requestBatchItemErrors(errors);
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         if (map.containsKey(REQUEST_HEADER.inst())) {
             builder.requestHeader((SimpleRequestHeader) map.get(REQUEST_HEADER.inst()).get(0));
@@ -74,7 +75,10 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     }
 
     private void validate() {
-        // No validation needed for this structure
+        // Add validation logic here
+        if (requestBatchItems.size() != requestBatchItemErrors.size()) {
+            throw new IllegalArgumentException("requestBatchItems and requestBatchItemErrors must have the same size");
+        }
     }
 
     @Override

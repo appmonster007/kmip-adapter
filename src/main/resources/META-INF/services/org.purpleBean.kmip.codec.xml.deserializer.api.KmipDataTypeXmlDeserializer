@@ -3,9 +3,10 @@ org.purpleBean.kmip.codec.xml.deserializer.api.CredentialValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KeyMaterialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KmipAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestMessageStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestBatchItemStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestHeaderStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestMessageStructureXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestPayloadStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AdjustmentTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AlternativeNameTypeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.AsynchronousIndicatorXmlDeserializer
@@ -107,7 +108,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PrivateKeyXmlDes
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestPayloadStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.RevocationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SampleStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SecretDataXmlDeserializer
@@ -269,3 +269,4 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.XXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.YXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestBatchItemXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestHeaderXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestMessageXmlDeserializer

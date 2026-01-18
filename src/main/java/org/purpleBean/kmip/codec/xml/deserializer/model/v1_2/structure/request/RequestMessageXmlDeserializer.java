@@ -1,34 +1,34 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request;
+package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
 
 import java.io.IOException;
 
-public class SimpleRequestMessageJsonDeserializer extends AbstractKmipStructureJsonDeserializer<SimpleRequestMessage, SimpleRequestMessage.SimpleRequestMessageBuilder> {
+public class RequestMessageXmlDeserializer extends AbstractKmipStructureXmlDeserializer<RequestMessage, RequestMessage.RequestMessageBuilder> {
 
-    public SimpleRequestMessageJsonDeserializer() {
-        super(SimpleRequestMessage.kmipTag, SimpleRequestMessage.encodingType);
+    public RequestMessageXmlDeserializer() {
+        super(RequestMessage.kmipTag);
     }
 
     @Override
-    protected SimpleRequestMessage.SimpleRequestMessageBuilder createBuilder() {
-        return SimpleRequestMessage.builder();
+    protected RequestMessage.RequestMessageBuilder createBuilder() {
+        return RequestMessage.builder();
     }
 
     @Override
-    protected void setValue(SimpleRequestMessage.SimpleRequestMessageBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(RequestMessage.RequestMessageBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.REQUEST_HEADER ->
                     builder.requestHeader(ctxt.readValue(p, RequestHeaderStructure.class));
             case KmipTag.Standard.BATCH_ITEM -> {
-                if (p.isExpectedStartArrayToken()) {
-                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) { // TODO: can be removed?
+                if (p.isExpectedStartArrayToken()) { // TODO: can be removed?
+                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
                         try {
                             builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));
                             builder.requestBatchItemError(null);
@@ -52,7 +52,7 @@ public class SimpleRequestMessageJsonDeserializer extends AbstractKmipStructureJ
     }
 
     @Override
-    protected SimpleRequestMessage build(SimpleRequestMessage.SimpleRequestMessageBuilder builder) {
+    protected RequestMessage build(RequestMessage.RequestMessageBuilder builder) {
         return builder.build();
     }
 }

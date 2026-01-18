@@ -17,7 +17,6 @@ class SimpleRequestBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<
     protected SimpleRequestBatchItem createDefault() {
         return SimpleRequestBatchItem.builder()
                 .requestPayloadStructure(SimpleRequestPayload.of())
-                .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
