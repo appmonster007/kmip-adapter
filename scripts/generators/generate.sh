@@ -117,12 +117,14 @@ generate_enum() {
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
     local IF_ATTR=false
-    local scope="core"
+    local module="core"
+    local sub_package=""
 
     usage_enum() { cat <<EOF
 Usage: $0 enum [options] <Name>
 Options:
-  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute enumeration (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
@@ -133,7 +135,8 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --scope) scope="$2"; shift; shift ;;
+            -m|--module) module="$2"; shift; shift ;;
+            -s|--sub-package) sub_package="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
@@ -165,7 +168,12 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
-    local SUB_PATH="model/${scope}/enumeration"
+    local SUB_PATH="model/${module}"
+    if [[ -n "${sub_package}" ]]; then
+        SUB_PATH="${SUB_PATH}/enumeration/${sub_package}"
+    else
+        SUB_PATH="${SUB_PATH}/enumeration"
+    fi
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
@@ -227,12 +235,14 @@ generate_datatype() {
     local DRY_RUN=false
     local DATA_TYPE="ByteBuffer"
     local IF_ATTR=false
-    local scope="core"
+    local module="core"
+    local sub_package=""
 
     usage_datatype() { cat <<EOF
 Usage: $0 datatype [options] <Name>
 Options:
-  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute data type (changes class and domain test templates)
   --type <java_type>  The underlying Java type (e.g., Integer, String, ByteBuffer). Default: ByteBuffer
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
@@ -244,7 +254,8 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --scope) scope="$2"; shift; shift ;;
+            -m|--module) module="$2"; shift; shift ;;
+            -s|--sub-package) sub_package="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --type) DATA_TYPE="$2"; shift; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
@@ -290,7 +301,12 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
-    local SUB_PATH="model/${scope}/type"
+    local SUB_PATH="model/${module}"
+    if [[ -n "${sub_package}" ]]; then
+        SUB_PATH="${SUB_PATH}/type/${sub_package}"
+    else
+        SUB_PATH="${SUB_PATH}/type"
+    fi
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
@@ -352,12 +368,14 @@ generate_structure() {
     local GEN_TTLV_TEST=false GEN_BENCHMARK=false
     local DRY_RUN=false
     local IF_ATTR=false
-    local scope="core"
+    local module="core"
+    local sub_package=""
 
     usage_structure() { cat <<EOF
 Usage: $0 structure [options] <Name>
 Options:
-  --scope <scope>     Set the scope for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute structure (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
   --domain-test, --json-test, --xml-test, --ttlv-test, --benchmark, --all, -h, --help
@@ -368,7 +386,8 @@ EOF
     local any_flag=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --scope) scope="$2"; shift; shift ;;
+            -m|--module) module="$2"; shift; shift ;;
+            -s|--sub-package) sub_package="$2"; shift; shift ;;
             --attr) IF_ATTR=true; shift ;;
             --class) GEN_CLASS=true; any_flag=true; shift ;;
             --json-ser) GEN_JSON_SER=true; any_flag=true; shift ;;
@@ -400,7 +419,12 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
-    local SUB_PATH="model/${scope}/structure"
+    local SUB_PATH="model/${module}"
+    if [[ -n "${sub_package}" ]]; then
+        SUB_PATH="${SUB_PATH}/structure/${sub_package}"
+    else
+        SUB_PATH="${SUB_PATH}/structure"
+    fi
     create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
