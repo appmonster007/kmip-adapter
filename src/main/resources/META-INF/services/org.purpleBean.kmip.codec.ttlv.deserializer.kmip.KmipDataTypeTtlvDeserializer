@@ -1,4 +1,5 @@
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AttributeValueTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.kmip.CredentialValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KeyMaterialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer
@@ -79,7 +80,6 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CertificateTtlv
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CommonTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CredentialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CredentialValueGenericStructureTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.kmip.CredentialValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CryptographicDomainParametersTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CryptographicParametersTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.CustomAttributeTtlvDeserializer
@@ -104,6 +104,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTtlvD
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.RequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.RevocationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SampleStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SecretDataTtlvDeserializer

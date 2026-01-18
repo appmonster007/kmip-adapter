@@ -98,6 +98,7 @@ org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute
 org.purpleBean.kmip.model.core.structure.ProtocolVersion
 org.purpleBean.kmip.model.core.structure.PublicKey
 org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute
+org.purpleBean.kmip.model.core.structure.RequestHeader
 org.purpleBean.kmip.model.core.structure.RevocationReason
 org.purpleBean.kmip.model.core.structure.SampleStructure
 org.purpleBean.kmip.model.core.structure.SecretData
