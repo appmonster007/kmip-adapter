@@ -95,6 +95,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyWrappingData
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.KeyWrappingSpecificationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.LinkTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.MACSignatureKeyInformationTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.MessageExtensionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.NonceTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.OpaqueObjectTtlvDeserializer
@@ -104,7 +105,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PrivateKeyTtlvD
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.ProtocolVersionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.PublicKeyTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestHeaderTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.api.request.RequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.RevocationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SampleStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.SecretDataTtlvDeserializer
@@ -133,6 +134,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.X509Certificate
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request.SimpleRequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request.SimpleRequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request.SimpleRequestMessageTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request.SimpleRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ActivationDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.AlternativeNameValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ApplicationDataTtlvDeserializer
@@ -263,3 +265,5 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ValidityDateTtlvDese
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.VendorIdentificationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.XTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.YTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestBatchItemTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestHeaderTtlvDeserializer

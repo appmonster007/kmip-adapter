@@ -1,0 +1,53 @@
+package org.purpleBean.kmip.model.v1_2.structure.request;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("RequestBatchItem Domain Tests")
+class RequestBatchItemTest extends AbstractKmipStructureTestSuite<RequestBatchItem> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<RequestBatchItem> type() {
+        return RequestBatchItem.class;
+    }
+
+    @Override
+    protected RequestBatchItem createDefault() {
+        return RequestBatchItem.builder()
+                .operation(Operation.Standard.CREATE.inst())
+                .requestPayload(SimpleRequestPayload.of())
+                .build();
+    }
+
+    @Override
+    protected EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
+
+    @Override
+    protected int expectedMinComponentCount() {
+        return 2;
+    }
+
+    @Override
+    protected void validateComponents(List<KmipDataType> values) {
+        assertThat(values).hasSize(2);
+        assertThat(values.get(0)).isInstanceOf(Operation.class);
+        assertThat(values.get(1)).isInstanceOf(RequestPayload.class);
+    }
+}

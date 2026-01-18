@@ -95,6 +95,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyWrappingData
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.KeyWrappingSpecificationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.LinkJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.MACSignatureKeyInformationJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.MessageExtensionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.NameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.NonceJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.OpaqueObjectJsonDeserializer
@@ -104,7 +105,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PrivateKeyTempl
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.ProtocolVersionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PublicKeyJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.PublicKeyTemplateAttributeJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestHeaderJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.request.RequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.RevocationReasonJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SampleStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.SecretDataJsonDeserializer
@@ -133,6 +134,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.X509Certificate
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestBatchItemJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestHeaderJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestMessageJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ActivationDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.AlternativeNameValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ApplicationDataJsonDeserializer
@@ -263,3 +265,5 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.ValidityDateJsonDese
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.VendorIdentificationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.XJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.YJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestBatchItemJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestHeaderJsonDeserializer

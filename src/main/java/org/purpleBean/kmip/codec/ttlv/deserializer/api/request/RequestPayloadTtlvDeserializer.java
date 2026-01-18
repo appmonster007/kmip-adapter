@@ -1,0 +1,40 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.api.request;
+
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.KmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class RequestPayloadTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestPayload> {
+
+    @Override
+    public RequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+        return super.deserialize(ttlvBuffer, mapper);
+    }
+
+    @Override
+    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
+        String ctxtOperation = (String) mapper.getAttribute("operation");
+        Operation.Value operationValue;
+        if (ctxtOperation == null) {
+            operationValue = null;
+        } else {
+            operationValue = Operation.fromName(ctxtOperation);
+        }
+
+        Class<? extends RequestPayload> payloadClass = RequestPayload.getClassFromRegistry(operationValue);
+
+        if (payloadClass == null) {
+            payloadClass = SimpleRequestPayload.class;
+        }
+
+        return payloadClass;
+    }
+}

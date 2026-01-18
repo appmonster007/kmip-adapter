@@ -1,0 +1,53 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request;
+
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.request.RequestPayload;
+import org.purpleBean.kmip.codec.ttlv.deserializer.kmip.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.MessageExtension;
+import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class RequestBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RequestBatchItem, RequestBatchItem.RequestBatchItemBuilder> {
+
+    public RequestBatchItemTtlvDeserializer() {
+        super(RequestBatchItem.kmipTag);
+    }
+
+    @Override
+    protected RequestBatchItem.RequestBatchItemBuilder createBuilder() {
+        return RequestBatchItem.builder();
+    }
+
+    @Override
+    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        switch (nodeTag) {
+            case KmipTag.Standard.OPERATION -> {
+                Operation operation = mapper.readValue(p, Operation.class);
+                builder.operation(operation);
+                mapper.setAttribute("operation", operation.getDescription());
+            }
+            case KmipTag.Standard.UNIQUE_BATCH_ITEM_ID ->
+                    builder.uniqueBatchItemID(mapper.readValue(p, UniqueBatchItemID.class));
+            case KmipTag.Standard.REQUEST_PAYLOAD -> builder.requestPayload(mapper.readValue(p, RequestPayload.class));
+            case KmipTag.Standard.MESSAGE_EXTENSION ->
+                    builder.messageExtension(mapper.readValue(p, MessageExtension.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
+    }
+
+    @Override
+    protected RequestBatchItem build(RequestBatchItem.RequestBatchItemBuilder builder) {
+        return builder.build();
+    }
+
+    @Override
+    protected EncodingType getEncodingType() {
+        return RequestBatchItem.encodingType;
+    }
+}

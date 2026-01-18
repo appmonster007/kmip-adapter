@@ -18,18 +18,10 @@ public class AbstractKmipStructureJsonSerializer<T extends KmipStructure> extend
         if (value == null) {
             return;
         }
-
+        // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        List<KmipDataType> fields = value.getValues();
-        for (KmipDataType field : fields) {
-            if (field != null && !field.isSupported()) {
-                throw new UnsupportedEncodingException(String.format("%s in %s is not supported for KMIP spec %s",
-                        field.getKmipTag().getDescription(), value.getKmipTag().getDescription(), spec));
-            }
-        }
-
         if (!value.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec));
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
         gen.writeStartObject();

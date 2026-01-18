@@ -89,6 +89,7 @@ org.purpleBean.kmip.model.core.structure.KeyWrappingData
 org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification
 org.purpleBean.kmip.model.core.structure.Link
 org.purpleBean.kmip.model.core.structure.MACSignatureKeyInformation
+org.purpleBean.kmip.model.core.structure.MessageExtension
 org.purpleBean.kmip.model.core.structure.Name
 org.purpleBean.kmip.model.core.structure.Nonce
 org.purpleBean.kmip.model.core.structure.OpaqueObject
@@ -98,7 +99,6 @@ org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute
 org.purpleBean.kmip.model.core.structure.ProtocolVersion
 org.purpleBean.kmip.model.core.structure.PublicKey
 org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute
-org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
 org.purpleBean.kmip.model.core.structure.RevocationReason
 org.purpleBean.kmip.model.core.structure.SampleStructure
 org.purpleBean.kmip.model.core.structure.SecretData
@@ -127,6 +127,7 @@ org.purpleBean.kmip.model.core.structure.X509CertificateSubject
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage
+org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload
 org.purpleBean.kmip.model.core.type.ActivationDate
 org.purpleBean.kmip.model.core.type.AlternativeNameValue
 org.purpleBean.kmip.model.core.type.ApplicationData
@@ -257,3 +258,5 @@ org.purpleBean.kmip.model.core.type.ValidityDate
 org.purpleBean.kmip.model.core.type.VendorIdentification
 org.purpleBean.kmip.model.core.type.X
 org.purpleBean.kmip.model.core.type.Y
+org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
+org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader

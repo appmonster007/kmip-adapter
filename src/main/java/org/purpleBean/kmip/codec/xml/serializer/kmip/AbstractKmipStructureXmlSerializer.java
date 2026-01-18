@@ -3,17 +3,26 @@ package org.purpleBean.kmip.codec.xml.serializer.kmip;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipStructure;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class AbstractKmipStructureXmlSerializer<T extends KmipStructure> extends KmipDataTypeXmlSerializer<T> {
 
     @Override
     public void serialize(T value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // Validation: KMIP spec compatibility
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
+        }
+
         if (!(gen instanceof ToXmlGenerator xmlGen)) {
             throw new IllegalStateException("Expected ToXmlGenerator");
         }

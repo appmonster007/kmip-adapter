@@ -95,6 +95,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyWrappingDataX
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.KeyWrappingSpecificationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.LinkXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.MACSignatureKeyInformationXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.MessageExtensionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.NonceXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.OpaqueObjectXmlDeserializer
@@ -104,7 +105,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PrivateKeyXmlDes
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ProtocolVersionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestHeaderXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.api.request.RequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.RevocationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SampleStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SecretDataXmlDeserializer
@@ -133,6 +134,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.X509CertificateS
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.request.SimpleRequestBatchItemXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.request.SimpleRequestHeaderXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.request.SimpleRequestMessageXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.request.SimpleRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ActivationDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AlternativeNameValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ApplicationDataXmlDeserializer
@@ -263,3 +265,5 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ValidityDateXmlDeseri
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.VendorIdentificationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.XXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.YXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestBatchItemXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestHeaderXmlDeserializer
