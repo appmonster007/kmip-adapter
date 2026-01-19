@@ -49,7 +49,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @see TtlvModule
  */
 public class TtlvMapper {
-    private final Map<Object, Object> ctxt = new ConcurrentHashMap<>();
+    private final ThreadLocal<Map<Object, Object>> ctxtHolder = ThreadLocal.withInitial(ConcurrentHashMap::new);
+    private final ThreadLocal<Integer> callDepth = ThreadLocal.withInitial(() -> 0);
     private final Map<Class<?>, TtlvSerializer<?>> serializers = new ConcurrentHashMap<>();
     private final Map<Class<?>, TtlvDeserializer<?>> deserializers = new ConcurrentHashMap<>();
 
@@ -74,12 +75,17 @@ public class TtlvMapper {
      * @throws IOException if an error occurs during serialization.
      */
     public <T> ByteBuffer writeValueAsByteBuffer(T value) throws IOException {
-        Objects.requireNonNull(value, "value cannot be null");
-        TtlvSerializer<T> ser = getSerializer(value.getClass());
-        ByteBuffer buf = ser.serialize(value, this);
-        // Ensure buffer is positioned for reading
-        buf.rewind();
-        return buf;
+        beginOperation();
+        try {
+            Objects.requireNonNull(value, "value cannot be null");
+            TtlvSerializer<T> ser = getSerializer(value.getClass());
+            ByteBuffer buf = ser.serialize(value, this);
+            // Ensure buffer is positioned for reading
+            buf.rewind();
+            return buf;
+        } finally {
+            endOperation();
+        }
     }
 
 
@@ -93,10 +99,15 @@ public class TtlvMapper {
      * @throws IOException if an error occurs during deserialization.
      */
     public <T> T readValue(ByteBuffer buffer, Class<T> clazz) throws IOException {
-        Objects.requireNonNull(buffer, "buffer cannot be null");
-        Objects.requireNonNull(clazz, "clazz cannot be null");
-        TtlvDeserializer<T> deser = getDeserializer(clazz);
-        return deser.deserialize(buffer, this);
+        beginOperation();
+        try {
+            Objects.requireNonNull(buffer, "buffer cannot be null");
+            Objects.requireNonNull(clazz, "clazz cannot be null");
+            TtlvDeserializer<T> deser = getDeserializer(clazz);
+            return deser.deserialize(buffer, this);
+        } finally {
+            endOperation();
+        }
     }
 
 
@@ -190,11 +201,25 @@ public class TtlvMapper {
     }
 
     public void setAttribute(Object key, Object value) {
-        ctxt.put(key, value);
+        ctxtHolder.get().put(key, value);
     }
 
     public Object getAttribute(Object key) {
-        return ctxt.get(key);
+        return ctxtHolder.get().get(key);
+    }
+
+    private void beginOperation() {
+        callDepth.set(callDepth.get() + 1);
+    }
+
+    private void endOperation() {
+        int depth = callDepth.get();
+        if (depth <= 1) {
+            callDepth.remove();
+            ctxtHolder.remove();
+        } else {
+            callDepth.set(depth - 1);
+        }
     }
 
 }
