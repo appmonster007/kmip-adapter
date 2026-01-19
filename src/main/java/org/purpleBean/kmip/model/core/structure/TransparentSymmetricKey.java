@@ -72,8 +72,4 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
         return List.of(key);
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

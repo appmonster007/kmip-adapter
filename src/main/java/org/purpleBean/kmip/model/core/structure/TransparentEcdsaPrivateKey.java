@@ -81,8 +81,4 @@ public class TransparentEcdsaPrivateKey implements KeyMaterial, KmipStructure {
         return List.of(recommendedCurve, d);
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

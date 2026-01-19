@@ -92,8 +92,6 @@ public interface KeyMaterial extends KmipDataType {
         return KEY_FORMAT_TYPE_BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType, keyFormatTypeValue));
     }
 
-    KeyFormatType getKeyFormatType();
-
     /**
      * A composite key for the key material registries, uniquely identifying a key material
      * by its specification, encoding type, and key format type.

@@ -81,8 +81,4 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
         return List.of(modulus, publicExponent);
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

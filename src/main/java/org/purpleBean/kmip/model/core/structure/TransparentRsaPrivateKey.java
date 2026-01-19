@@ -119,8 +119,4 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

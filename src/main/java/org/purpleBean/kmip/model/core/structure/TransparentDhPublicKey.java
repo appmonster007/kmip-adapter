@@ -91,8 +91,4 @@ public class TransparentDhPublicKey implements KeyMaterial, KmipStructure {
         return Stream.of(p, q, g, j, y).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

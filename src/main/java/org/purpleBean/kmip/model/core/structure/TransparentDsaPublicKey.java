@@ -96,8 +96,4 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     }
 
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

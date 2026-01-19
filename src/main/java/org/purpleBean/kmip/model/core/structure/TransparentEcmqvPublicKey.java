@@ -81,8 +81,4 @@ public class TransparentEcmqvPublicKey implements KeyMaterial, KmipStructure {
         return List.of(recommendedCurve, qString);
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

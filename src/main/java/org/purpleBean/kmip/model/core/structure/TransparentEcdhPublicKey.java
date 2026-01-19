@@ -81,8 +81,4 @@ public class TransparentEcdhPublicKey implements KeyMaterial, KmipStructure {
         return List.of(recommendedCurve, qString);
     }
 
-    @Override
-    public KeyFormatType getKeyFormatType() {
-        return keyFormatTypeValue.inst();
-    }
 }

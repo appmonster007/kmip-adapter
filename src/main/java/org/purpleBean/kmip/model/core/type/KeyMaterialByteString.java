@@ -37,9 +37,6 @@ public class KeyMaterialByteString implements KeyMaterial {
     }
 
     @NonNull
-    @Builder.Default
-    private final KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
-    @NonNull
     private final ByteBuffer value;
 
     public static KeyMaterialByteString of(@NonNull KeyMaterial value) {
