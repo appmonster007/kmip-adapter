@@ -59,6 +59,11 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
         return builder.build();
     }
 
+    @Override
+    public RequestPayloadStructure getRequestPayload() {
+        return requestPayloadStructure;
+    }
+
     private void validate() {
         // No validation needed for this structure
     }

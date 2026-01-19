@@ -73,6 +73,11 @@ public class RequestBatchItem implements RequestBatchItemStructure {
         return builder.build();
     }
 
+    @Override
+    public RequestPayloadStructure getRequestPayload() {
+        return requestPayloadStructure;
+    }
+
     private void validate() {
         Objects.requireNonNull(operation, "Operation cannot be null");
         Objects.requireNonNull(requestPayloadStructure, "RequestPayloadStructure cannot be null");

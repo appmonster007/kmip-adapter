@@ -30,8 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p><b>Usage:</b></p>
  * Create an instance of {@code TtlvMapper}, register any custom modules, and then use the read/write methods.
  *
- * <pre>
- * {@code
+ * <pre>{@code
  * TtlvMapper mapper = new TtlvMapper();
  * mapper.registerModule(new KmipTtlvModule());
  *
@@ -200,10 +199,25 @@ public class TtlvMapper {
         throw new IllegalArgumentException("No deserializer found for type: " + type.getName());
     }
 
+    /**
+     * Sets a contextual attribute for the current operation. These attributes are thread-local
+     * and are cleared when the outermost operation (serialization or deserialization) completes.
+     * This allows for passing state between different parts of the serialization/deserialization
+     * process without modifying the object being processed or the mapper's global state.
+     *
+     * @param key   The key for the attribute.
+     * @param value The value of the attribute.
+     */
     public void setAttribute(Object key, Object value) {
         ctxtHolder.get().put(key, value);
     }
 
+    /**
+     * Retrieves a contextual attribute for the current operation.
+     *
+     * @param key The key of the attribute to retrieve.
+     * @return The value associated with the key, or {@code null} if not found.
+     */
     public Object getAttribute(Object key) {
         return ctxtHolder.get().get(key);
     }
@@ -212,6 +226,11 @@ public class TtlvMapper {
         callDepth.set(callDepth.get() + 1);
     }
 
+    /**
+     * Decrements the call depth counter. If the call depth reaches 0 (meaning the outermost
+     * serialization/deserialization operation has completed), it clears the thread-local
+     * context and call depth.
+     */
     private void endOperation() {
         int depth = callDepth.get();
         if (depth <= 1) {

@@ -5,6 +5,43 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Handles the dynamic initialization of KMIP (Key Management Interoperability Protocol) data types.
+ * <p>
+ * This class uses the Java Service Provider Interface (SPI) pattern to discover and load all
+ * classes that implement the {@link KmipDataType} interface. It reads a service definition file
+ * located at {@code META-INF/services/org.purpleBean.kmip.api.KmipDataType}, which should contain
+ * the fully qualified names of all concrete KMIP data type implementations.
+ *
+ * <p><b>Key Responsibilities:</b></p>
+ * <ul>
+ *   <li><b>Class Initialization:</b> For each class name found, it uses {@code Class.forName()}
+ *       to ensure the class is loaded and its static initializers are executed. This is crucial
+ *       because KMIP data types register themselves with central registries (e.g.,
+ *       {@link KmipDataType#TAG_REGISTRY}) in their static blocks.</li>
+ *   <li><b>Idempotency:</b> The initialization process is designed to run only once, even if
+ *       {@link #initialize()} is called multiple times, thanks to an {@link AtomicBoolean} flag.
+ *       This makes it safe to call from multiple places without side effects.</li>
+ * </ul>
+ *
+ * <p><b>Usage:</b></p>
+ * The {@link #initialize()} method should be called at the application's startup to ensure that
+ * all KMIP data types are registered before any KMIP messages are processed.
+ *
+ * <pre>
+ * {@code
+ * public class MyApplication {
+ *     public static void main(String[] args) {
+ *         KmipInitializer.initialize();
+ *         // Proceed with application logic...
+ *     }
+ * }
+ * }
+ * </pre>
+ *
+ * @see KmipDataType
+ * @see java.util.ServiceLoader
+ */
 public class KmipInitializer {
 
     private static final AtomicBoolean initialized = new AtomicBoolean(false);
@@ -27,7 +64,7 @@ public class KmipInitializer {
                                 Class.forName(className);
                             } catch (ClassNotFoundException e) {
                                 System.err.println("[KmipInitializer] Failed to load KMIP data type "
-                                    + className + ": " + e.getMessage());
+                                        + className + ": " + e.getMessage());
                             }
                         });
                     }
