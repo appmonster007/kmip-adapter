@@ -1,0 +1,43 @@
+package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.ManagedObject;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
+import org.purpleBean.kmip.model.v1_2.structure.request.RegisterOpRequestPayload;
+
+import java.io.IOException;
+
+public class RegisterOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<RegisterOpRequestPayload, RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder> {
+
+    public RegisterOpRequestPayloadJsonDeserializer() {
+        super(RegisterOpRequestPayload.kmipTag, RegisterOpRequestPayload.encodingType);
+    }
+
+    @Override
+    protected RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder createBuilder() {
+        return RegisterOpRequestPayload.builder();
+    }
+
+    @Override
+    protected void setValue(RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        switch (nodeTag) {
+            case KmipTag.Standard.OBJECT_TYPE -> {
+                ObjectType objectType = ctxt.readValue(p, ObjectType.class);
+                ctxt.setAttribute("objectType", objectType.getDescription());
+                builder.objectType(objectType);
+            }
+            case KmipTag.Standard.TEMPLATE_ATTRIBUTE ->
+                    builder.templateAttribute(ctxt.readValue(p, TemplateAttribute.class));
+            default -> builder.object(ctxt.readValue(p, ManagedObject.class));
+        }
+    }
+
+    @Override
+    protected RegisterOpRequestPayload build(RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder builder) {
+        return builder.build();
+    }
+}
