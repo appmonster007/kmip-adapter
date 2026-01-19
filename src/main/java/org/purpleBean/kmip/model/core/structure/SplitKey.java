@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
 import org.purpleBean.kmip.model.core.type.KeyPartIdentifier;
 import org.purpleBean.kmip.model.core.type.PrimeFieldSize;
@@ -11,6 +12,7 @@ import org.purpleBean.kmip.model.core.type.SplitKeyParts;
 import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,14 +20,16 @@ import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
-public class SplitKey implements KmipStructure {
+public class SplitKey implements ManagedObject, KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.SPLIT_KEY.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
+    public static final ObjectType.Value objectTypeValue = ObjectType.Standard.SPLIT_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, SplitKey.class);
+            ManagedObject.register(spec, encodingType, objectTypeValue, SplitKey.class, SplitKey::of);
         }
     }
 
@@ -62,6 +66,30 @@ public class SplitKey implements KmipStructure {
         this.primeFieldSize = primeFieldSize;
         this.keyBlock = keyBlock;
         validate();
+    }
+
+    public static SplitKey of(List<KmipDataType> values) {
+        var builder = SplitKey.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(SplitKeyParts.kmipTag)) {
+            builder.splitKeyParts((SplitKeyParts) map.get(SplitKeyParts.kmipTag).getFirst());
+        }
+        if (map.containsKey(KeyPartIdentifier.kmipTag)) {
+            builder.keyPartIdentifier((KeyPartIdentifier) map.get(KeyPartIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(SplitKeyThreshold.kmipTag)) {
+            builder.splitKeyThreshold((SplitKeyThreshold) map.get(SplitKeyThreshold.kmipTag).getFirst());
+        }
+        if (map.containsKey(SplitKeyMethod.kmipTag)) {
+            builder.splitKeyMethod((SplitKeyMethod) map.get(SplitKeyMethod.kmipTag).getFirst());
+        }
+        if (map.containsKey(PrimeFieldSize.kmipTag)) {
+            builder.primeFieldSize((PrimeFieldSize) map.get(PrimeFieldSize.kmipTag).getFirst());
+        }
+        if (map.containsKey(KeyBlock.kmipTag)) {
+            builder.keyBlock((KeyBlock) map.get(KeyBlock.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {

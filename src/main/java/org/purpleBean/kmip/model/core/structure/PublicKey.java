@@ -4,21 +4,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Builder(toBuilder = true)
-public class PublicKey implements KmipStructure {
+public class PublicKey implements ManagedObject, KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.PUBLIC_KEY.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
+    public static final ObjectType.Value objectTypeValue = ObjectType.Standard.PUBLIC_KEY;
 
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PublicKey.class);
+            ManagedObject.register(spec, encodingType, objectTypeValue, PublicKey.class, PublicKey::of);
         }
     }
 
@@ -39,6 +44,15 @@ public class PublicKey implements KmipStructure {
         return PublicKey.builder()
                 .keyBlock(keyBlock)
                 .build();
+    }
+
+    public static PublicKey of(List<KmipDataType> values) {
+        var builder = PublicKey.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(KeyBlock.kmipTag)) {
+            builder.keyBlock((KeyBlock) map.get(KeyBlock.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
