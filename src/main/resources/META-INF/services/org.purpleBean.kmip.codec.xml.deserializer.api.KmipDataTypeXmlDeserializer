@@ -267,6 +267,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ValidityDateXmlDeseri
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.VendorIdentificationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.XXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.YXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.CreateKeyPairOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.CreateOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.GetOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestBatchItemXmlDeserializer

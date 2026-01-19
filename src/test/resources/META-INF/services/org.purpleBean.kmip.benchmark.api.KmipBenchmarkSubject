@@ -253,6 +253,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.ValidityDateBenchmarkSubj
 org.purpleBean.kmip.benchmark.subjects.model.core.type.VendorIdentificationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.XBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.YBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.CreateKeyPairOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.CreateOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.GetOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RequestBatchItemBenchmarkSubject
