@@ -38,6 +38,9 @@ public abstract class AbstractKmipStructureXmlDeserializer<T extends KmipDataTyp
         }
 
         if (p.currentToken() != JsonToken.START_OBJECT) {
+            if (p.currentToken() == JsonToken.VALUE_STRING && p.getText().isEmpty()) {
+                return build(createBuilder());
+            }
             p.nextToken();
             if (p.currentToken() == JsonToken.VALUE_STRING && p.getText().isEmpty()) {
                 return build(createBuilder());
