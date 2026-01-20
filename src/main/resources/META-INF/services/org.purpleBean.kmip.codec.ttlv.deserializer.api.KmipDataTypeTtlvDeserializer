@@ -276,6 +276,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.Request
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.CreateOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvDeserializer
