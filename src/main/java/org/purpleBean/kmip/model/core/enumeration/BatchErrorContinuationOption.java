@@ -50,19 +50,14 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public BatchErrorContinuationOption(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for BatchErrorContinuationOption is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private BatchErrorContinuationOption(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static BatchErrorContinuationOption of(@NonNull Value value) {
-        return new BatchErrorContinuationOption(value);
+        return BatchErrorContinuationOption.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -88,7 +83,7 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
         Value existingEnumByValue = VALUE_REGISTRY.get(value);
         Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
         if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByValue;
+            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
         }
         Extension custom = new Extension(value, description, supportedVersions);
         VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
@@ -128,6 +123,19 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for BatchErrorContinuationOption is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

@@ -47,19 +47,14 @@ public class RotateNameType implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public RotateNameType(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for RotateNameType is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private RotateNameType(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static RotateNameType of(@NonNull Value value) {
-        return new RotateNameType(value);
+        return RotateNameType.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -125,6 +120,19 @@ public class RotateNameType implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for RotateNameType is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

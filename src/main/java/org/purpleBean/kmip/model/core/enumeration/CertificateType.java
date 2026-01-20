@@ -51,19 +51,14 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
     @NonNull
     private final Value value;
 
-    public CertificateType(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for CertificateType is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private CertificateType(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static CertificateType of(@NonNull Value value) {
-        return new CertificateType(value);
+        return CertificateType.builder().value(value).build();
     }
 
     public static CertificateType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
@@ -74,7 +69,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
             throw new IllegalArgumentException("Invalid encoding type");
         }
         CertificateType.Value v = fromValue(enumeration.getValue());
-        return new CertificateType(v);
+        return CertificateType.builder().value(v).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -140,6 +135,19 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for CertificateType is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

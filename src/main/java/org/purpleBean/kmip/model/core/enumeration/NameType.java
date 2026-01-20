@@ -48,19 +48,14 @@ public class NameType implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public NameType(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for NameType is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private NameType(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static NameType of(@NonNull Value value) {
-        return new NameType(value);
+        return NameType.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -126,6 +121,19 @@ public class NameType implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for NameType is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

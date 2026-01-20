@@ -51,19 +51,14 @@ public class DestroyAction implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public DestroyAction(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for DestroyAction is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private DestroyAction(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static DestroyAction of(@NonNull Value value) {
-        return new DestroyAction(value);
+        return DestroyAction.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -129,6 +124,19 @@ public class DestroyAction implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for DestroyAction is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

@@ -45,19 +45,14 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     @NonNull
     private final Value value;
 
-    public CryptographicAlgorithm(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private CryptographicAlgorithm(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static CryptographicAlgorithm of(@NonNull Value value) {
-        return new CryptographicAlgorithm(value);
+        return CryptographicAlgorithm.builder().value(value).build();
     }
 
     public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
@@ -68,7 +63,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
             throw new IllegalArgumentException("Invalid encoding type");
         }
         CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
-        return new CryptographicAlgorithm(v);
+        return CryptographicAlgorithm.builder().value(v).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -134,6 +129,19 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

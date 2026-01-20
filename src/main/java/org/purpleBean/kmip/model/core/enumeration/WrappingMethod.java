@@ -55,19 +55,14 @@ public class WrappingMethod implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public WrappingMethod(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for WrappingMethod is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private WrappingMethod(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static WrappingMethod of(@NonNull Value value) {
-        return new WrappingMethod(value);
+        return WrappingMethod.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -133,6 +128,19 @@ public class WrappingMethod implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for WrappingMethod is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

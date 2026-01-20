@@ -50,19 +50,14 @@ public class DrbgAlgorithm implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public DrbgAlgorithm(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for DrbgAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private DrbgAlgorithm(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static DrbgAlgorithm of(@NonNull Value value) {
-        return new DrbgAlgorithm(value);
+        return DrbgAlgorithm.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -128,6 +123,19 @@ public class DrbgAlgorithm implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for DrbgAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

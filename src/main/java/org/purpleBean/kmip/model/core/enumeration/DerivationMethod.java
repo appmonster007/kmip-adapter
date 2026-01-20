@@ -55,19 +55,14 @@ public class DerivationMethod implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public DerivationMethod(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for DerivationMethod is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private DerivationMethod(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static DerivationMethod of(@NonNull Value value) {
-        return new DerivationMethod(value);
+        return DerivationMethod.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -133,6 +128,19 @@ public class DerivationMethod implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for DerivationMethod is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

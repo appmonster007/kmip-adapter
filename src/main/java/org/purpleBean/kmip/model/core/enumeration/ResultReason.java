@@ -129,19 +129,14 @@ public class ResultReason implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public ResultReason(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for ResultReason is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private ResultReason(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static ResultReason of(@NonNull Value value) {
-        return new ResultReason(value);
+        return ResultReason.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -234,6 +229,19 @@ public class ResultReason implements KmipEnumeration {
      */
     public static Value getParentReason(Value reason) {
         return PARENT_REASON_MAP.get(reason);
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for ResultReason is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

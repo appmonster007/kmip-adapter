@@ -47,19 +47,14 @@ public class AttestationType implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public AttestationType(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for AttestationType is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private AttestationType(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static AttestationType of(@NonNull Value value) {
-        return new AttestationType(value);
+        return AttestationType.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -125,6 +120,19 @@ public class AttestationType implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for AttestationType is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

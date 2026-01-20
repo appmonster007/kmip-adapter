@@ -45,19 +45,14 @@ public class EncodingOption implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public EncodingOption(@NonNull Value value) {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for EncodingOption is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
+    @Builder
+    private EncodingOption(@NonNull Value value) {
         this.value = value;
+        validate();
     }
 
     public static EncodingOption of(@NonNull Value value) {
-        return new EncodingOption(value);
+        return EncodingOption.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -123,6 +118,19 @@ public class EncodingOption implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for EncodingOption is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override
