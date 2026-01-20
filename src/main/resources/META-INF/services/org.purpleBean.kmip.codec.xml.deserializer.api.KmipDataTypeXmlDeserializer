@@ -279,5 +279,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.CreateOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadXmlDeserializer
