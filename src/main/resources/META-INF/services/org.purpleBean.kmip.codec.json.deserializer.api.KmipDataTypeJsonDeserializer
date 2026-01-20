@@ -235,12 +235,14 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeExponentPJsonDe
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeExponentQJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeFieldSizeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrivateExponentJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrivateKeyTemplateAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrivateKeyUniqueIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ProcessStartDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ProtectStopDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ProtocolVersionMajorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ProtocolVersionMinorJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PublicExponentJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.PublicKeyTemplateAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PublicKeyUniqueIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.QJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.QStringJsonDeserializer
@@ -276,5 +278,6 @@ org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadJsonDeserializer

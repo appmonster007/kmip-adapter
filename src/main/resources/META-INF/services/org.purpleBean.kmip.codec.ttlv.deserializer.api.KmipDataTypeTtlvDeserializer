@@ -235,12 +235,14 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentPTtlvDe
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentQTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeFieldSizeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrivateExponentTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrivateKeyTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrivateKeyUniqueIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ProcessStartDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ProtectStopDateTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ProtocolVersionMajorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ProtocolVersionMinorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PublicExponentTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PublicKeyTemplateAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PublicKeyUniqueIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.QStringTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.QTtlvDeserializer
@@ -276,5 +278,6 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadTtlvDeserializer

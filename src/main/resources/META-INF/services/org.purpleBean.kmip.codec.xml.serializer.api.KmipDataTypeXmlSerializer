@@ -225,12 +225,14 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentPXmlSerial
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentQXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeFieldSizeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrivateExponentXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrivateKeyTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrivateKeyUniqueIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ProcessStartDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ProtectStopDateXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ProtocolVersionMajorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ProtocolVersionMinorXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PublicExponentXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.PublicKeyTemplateAttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PublicKeyUniqueIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.QStringXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.QXmlSerializer
@@ -266,5 +268,6 @@ org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.request.payload.Cr
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.request.payload.GetOpRequestPayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadXmlSerializer

@@ -225,12 +225,14 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeExponentPTtlvSeri
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeExponentQTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeFieldSizeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrivateExponentTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrivateKeyTemplateAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrivateKeyUniqueIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ProcessStartDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ProtectStopDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ProtocolVersionMajorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ProtocolVersionMinorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PublicExponentTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PublicKeyTemplateAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PublicKeyUniqueIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.QStringTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.QTtlvSerializer
@@ -266,5 +268,6 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.C
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.GetOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadTtlvSerializer

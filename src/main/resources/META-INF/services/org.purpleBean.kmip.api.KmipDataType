@@ -225,12 +225,14 @@ org.purpleBean.kmip.model.core.type.PrimeExponentP
 org.purpleBean.kmip.model.core.type.PrimeExponentQ
 org.purpleBean.kmip.model.core.type.PrimeFieldSize
 org.purpleBean.kmip.model.core.type.PrivateExponent
+org.purpleBean.kmip.model.core.type.PrivateKeyTemplateAttribute
 org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier
 org.purpleBean.kmip.model.core.type.ProcessStartDate
 org.purpleBean.kmip.model.core.type.ProtectStopDate
 org.purpleBean.kmip.model.core.type.ProtocolVersionMajor
 org.purpleBean.kmip.model.core.type.ProtocolVersionMinor
 org.purpleBean.kmip.model.core.type.PublicExponent
+org.purpleBean.kmip.model.core.type.PublicKeyTemplateAttribute
 org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier
 org.purpleBean.kmip.model.core.type.Q
 org.purpleBean.kmip.model.core.type.QString
@@ -266,5 +268,6 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RegisterOpResponsePayload

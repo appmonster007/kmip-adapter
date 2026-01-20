@@ -235,12 +235,14 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrimeExponentPXmlDese
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrimeExponentQXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrimeFieldSizeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrivateExponentXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrivateKeyTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PrivateKeyUniqueIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ProcessStartDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ProtectStopDateXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ProtocolVersionMajorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.ProtocolVersionMinorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PublicExponentXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PublicKeyTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.PublicKeyUniqueIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.QStringXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.QXmlDeserializer
@@ -276,5 +278,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadXmlDeserializer
