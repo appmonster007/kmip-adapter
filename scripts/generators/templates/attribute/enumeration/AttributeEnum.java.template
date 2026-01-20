@@ -45,6 +45,13 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
     }
 
     private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for {{ATTRIBUTE_NAME}} is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
