@@ -261,6 +261,7 @@ org.purpleBean.kmip.model.core.type.Y
 org.purpleBean.kmip.model.v1_2.structure.request.CreateKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.GetOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
 org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
