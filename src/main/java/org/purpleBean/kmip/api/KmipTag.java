@@ -209,7 +209,7 @@ public class KmipTag {
         ARCHIVE_DATE(0x420005, "ArchiveDate", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ASYNCHRONOUS_CORRELATION_VALUE(0x420006, "AsynchronousCorrelationValue", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ASYNCHRONOUS_INDICATOR(0x420007, "AsynchronousIndicator", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ATTRIBUTE(0x420008, "Attribute", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ATTRIBUTE(0x420008, "Attribute", KmipSpec.UnknownVersion, KmipSpec.V1_1, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ATTRIBUTE_INDEX(0x420009, "AttributeIndex", KmipSpec.UnknownVersion, KmipSpec.V1_2),
         ATTRIBUTE_NAME(0x42000A, "AttributeName", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         ATTRIBUTE_VALUE(0x42000B, "AttributeValue", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),

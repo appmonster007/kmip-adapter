@@ -93,7 +93,9 @@ public class SplitKey implements ManagedObject, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(splitKeyParts, "SplitKeyParts cannot be null");
         Objects.requireNonNull(keyPartIdentifier, "KeyPartIdentifier cannot be null");
         Objects.requireNonNull(splitKeyThreshold, "SplitKeyThreshold cannot be null");

@@ -68,7 +68,9 @@ public class Certificate implements ManagedObject, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(certificateType, "CertificateType cannot be null");
         Objects.requireNonNull(certificateValue, "CertificateValue cannot be null");
     }

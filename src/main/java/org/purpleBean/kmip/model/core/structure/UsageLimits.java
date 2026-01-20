@@ -69,7 +69,9 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(usageLimitsTotal, "UsageLimitsTotal cannot be null");
         Objects.requireNonNull(usageLimitsCount, "UsageLimitsCount cannot be null");
         Objects.requireNonNull(usageLimitsUnit, "UsageLimitsUnit cannot be null");

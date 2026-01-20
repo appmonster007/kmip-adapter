@@ -50,7 +50,9 @@ public class CredentialValueGenericStructure implements CredentialValue, KmipStr
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(values, "Values cannot be null");
     }
 

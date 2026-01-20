@@ -89,7 +89,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         if (!isValidCustomAttributeName(attributeName.getValue())) {
             throw new IllegalArgumentException("Custom attribute name is invalid");
         }

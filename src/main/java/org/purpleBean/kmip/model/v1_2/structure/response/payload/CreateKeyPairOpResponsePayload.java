@@ -87,7 +87,9 @@ public class CreateKeyPairOpResponsePayload implements ResponsePayloadStructure 
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // Add validation logic here
     }
 

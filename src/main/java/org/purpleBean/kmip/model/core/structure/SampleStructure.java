@@ -46,7 +46,9 @@ public class SampleStructure implements KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         List<KmipDataType> fields = new ArrayList<>();
         fields.add(activationDate);
         fields.add(state);

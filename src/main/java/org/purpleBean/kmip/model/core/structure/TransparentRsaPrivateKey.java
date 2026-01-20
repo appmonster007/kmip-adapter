@@ -90,7 +90,9 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(modulus, "modulus cannot be null");
         if (privateExponent == null && (p == null || q == null) && (primeExponentP == null || primeExponentQ == null)) {
             throw new IllegalStateException("One of Private Exponent, (P and Q), or (Prime Exponent P and Prime Exponent Q) must be present");

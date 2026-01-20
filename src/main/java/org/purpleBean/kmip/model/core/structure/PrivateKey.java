@@ -56,7 +56,9 @@ public class PrivateKey implements ManagedObject, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(keyBlock, "KeyBlock cannot be null");
     }
 

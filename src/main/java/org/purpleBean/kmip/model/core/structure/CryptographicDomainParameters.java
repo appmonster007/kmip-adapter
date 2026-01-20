@@ -59,7 +59,9 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // No validation needed for this structure
     }
 

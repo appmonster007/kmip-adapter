@@ -79,7 +79,9 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(operation, "Operation cannot be null");
         Objects.requireNonNull(requestPayloadStructure, "RequestPayloadStructure cannot be null");
         if (!requestPayloadStructure.getCorrespondingOperation().equals(operation)) {

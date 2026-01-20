@@ -87,7 +87,9 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // No validation required for this structure
     }
 

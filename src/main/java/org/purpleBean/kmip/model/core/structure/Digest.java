@@ -66,7 +66,9 @@ public class Digest implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!hashingAlgorithm.isSupported()) {

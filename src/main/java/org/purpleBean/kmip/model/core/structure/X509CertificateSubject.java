@@ -62,7 +62,9 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(subjectDistinguishedName, "SubjectDistinguishedName cannot be null");
         Objects.requireNonNull(subjectAlternativeNames, "SubjectAlternativeNames cannot be null");
     }

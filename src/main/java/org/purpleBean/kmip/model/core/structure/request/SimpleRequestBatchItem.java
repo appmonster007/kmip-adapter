@@ -65,7 +65,9 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // No validation needed for this structure
     }
 

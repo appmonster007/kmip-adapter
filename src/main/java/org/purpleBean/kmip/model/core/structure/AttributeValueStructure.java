@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class AttributeValueStructure implements AttributeValue, KmipStructure {
     public static final KmipTag kmipTag = AttributeValue.kmipTag;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -43,7 +43,9 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         // No validation needed for this structure
     }
 

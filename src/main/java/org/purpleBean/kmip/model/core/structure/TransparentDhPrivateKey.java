@@ -65,7 +65,9 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
-        isSupported();
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
         Objects.requireNonNull(p, "p cannot be null");
         Objects.requireNonNull(g, "g cannot be null");
         Objects.requireNonNull(x, "x cannot be null");
