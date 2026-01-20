@@ -40,7 +40,13 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
     @NonNull
     private final Value value;
 
-    public {{ENUM_NAME}}(@NonNull Value value) {
+    @Builder
+    private {{ENUM_NAME}}(@NonNull Value value) {
+        this.value = value;
+        validate();
+    }
+
+    private void validate() {
         // KMIP spec compatibility validation
         KmipSpec spec = KmipContext.getSpec();
         if (!value.isSupported()) {
@@ -48,11 +54,13 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
                     String.format("Value '%s' for {{ENUM_NAME}} is not supported for KMIP spec %s", value.getDescription(), spec)
             );
         }
-        this.value = value;
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     public static {{ENUM_NAME}} of(@NonNull Value value) {
-        return new {{ENUM_NAME}}(value);
+        return {{ENUM_NAME}}.builder().value(value).build();
     }
 
     private static void checkValidExtensionValue(int value) {
