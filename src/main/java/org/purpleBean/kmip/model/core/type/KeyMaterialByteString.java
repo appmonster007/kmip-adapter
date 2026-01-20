@@ -39,11 +39,17 @@ public class KeyMaterialByteString implements KeyMaterial {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private KeyMaterialByteString(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static KeyMaterialByteString of(@NonNull KeyMaterial value) {
         if (!(value instanceof KeyMaterialByteString byteString)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        return byteString;
+        return KeyMaterialByteString.builder().value(byteString.getValue()).build();
     }
 
     public static KeyMaterialByteString of(@NonNull ByteBuffer value) {
@@ -52,6 +58,13 @@ public class KeyMaterialByteString implements KeyMaterial {
 
     public static KeyMaterialByteString of(byte[] value) {
         return KeyMaterialByteString.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

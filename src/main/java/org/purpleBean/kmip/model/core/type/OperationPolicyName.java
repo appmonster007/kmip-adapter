@@ -30,6 +30,12 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
+    @Builder
+    private OperationPolicyName(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static OperationPolicyName of(@NonNull String value) {
         return OperationPolicyName.builder().value(value).build();
     }
@@ -38,7 +44,14 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString attributeValueTyped)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new OperationPolicyName(attributeValueTyped.getValue());
+        return OperationPolicyName.builder().value(attributeValueTyped.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

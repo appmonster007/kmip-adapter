@@ -29,12 +29,25 @@ public class AsynchronousCorrelationValue implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private AsynchronousCorrelationValue(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static AsynchronousCorrelationValue of(@NonNull ByteBuffer value) {
         return AsynchronousCorrelationValue.builder().value(value).build();
     }
 
     public static AsynchronousCorrelationValue of(byte[] value) {
         return AsynchronousCorrelationValue.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

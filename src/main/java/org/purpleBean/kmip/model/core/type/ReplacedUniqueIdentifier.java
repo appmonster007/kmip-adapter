@@ -29,8 +29,21 @@ public class ReplacedUniqueIdentifier implements KmipDataType {
     @NonNull
     private final String value;
 
+    @Builder
+    private ReplacedUniqueIdentifier(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static ReplacedUniqueIdentifier of(@NonNull String value) {
         return ReplacedUniqueIdentifier.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

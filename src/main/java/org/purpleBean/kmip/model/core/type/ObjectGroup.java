@@ -31,6 +31,12 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
+    @Builder
+    private ObjectGroup(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static ObjectGroup of(@NonNull String value) {
         return ObjectGroup.builder().value(value).build();
     }
@@ -39,7 +45,14 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new ObjectGroup(textString.getValue());
+        return ObjectGroup.builder().value(textString.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

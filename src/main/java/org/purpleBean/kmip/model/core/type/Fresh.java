@@ -30,6 +30,12 @@ public class Fresh implements KmipDataType, KmipAttribute {
     @NonNull
     private final Boolean value;
 
+    @Builder
+    private Fresh(@NonNull Boolean value) {
+        this.value = value;
+        validate();
+    }
+
     public static Fresh of(@NonNull Boolean value) {
         return Fresh.builder().value(value).build();
     }
@@ -38,7 +44,14 @@ public class Fresh implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueBoolean value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new Fresh(value.getValue());
+        return Fresh.builder().value(value.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

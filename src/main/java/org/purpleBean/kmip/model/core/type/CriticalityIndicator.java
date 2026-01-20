@@ -29,8 +29,21 @@ public class CriticalityIndicator implements KmipDataType {
     @NonNull
     private final Boolean value;
 
+    @Builder
+    private CriticalityIndicator(@NonNull Boolean value) {
+        this.value = value;
+        validate();
+    }
+
     public static CriticalityIndicator of(@NonNull Boolean value) {
         return CriticalityIndicator.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

@@ -31,6 +31,12 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private LeaseTime(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     public static LeaseTime of(@NonNull Integer value) {
         return LeaseTime.builder().value(value).build();
     }
@@ -39,7 +45,14 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInterval interval)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new LeaseTime(interval.getValue());
+        return LeaseTime.builder().value(interval.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

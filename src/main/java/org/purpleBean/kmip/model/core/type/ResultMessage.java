@@ -29,8 +29,21 @@ public class ResultMessage implements KmipDataType {
     @NonNull
     private final String value;
 
+    @Builder
+    private ResultMessage(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static ResultMessage of(@NonNull String value) {
         return ResultMessage.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

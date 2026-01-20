@@ -29,12 +29,25 @@ public class DerivationData implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private DerivationData(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static DerivationData of(@NonNull ByteBuffer value) {
         return DerivationData.builder().value(value).build();
     }
 
     public static DerivationData of(byte[] value) {
         return DerivationData.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

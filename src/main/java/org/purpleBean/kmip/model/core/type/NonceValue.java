@@ -29,12 +29,25 @@ public class NonceValue implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private NonceValue(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static NonceValue of(@NonNull ByteBuffer value) {
         return NonceValue.builder().value(value).build();
     }
 
     public static NonceValue of(byte[] value) {
-        return of(ByteBuffer.wrap(value));
+        return NonceValue.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

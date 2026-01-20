@@ -32,6 +32,12 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
     @NonNull
     private final OffsetDateTime value;
 
+    @Builder
+    private CompromiseOccurrenceDate(@NonNull OffsetDateTime value) {
+        this.value = value;
+        validate();
+    }
+
     public static CompromiseOccurrenceDate of(@NonNull OffsetDateTime value) {
         return CompromiseOccurrenceDate.builder().value(value).build();
     }
@@ -40,7 +46,14 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CompromiseOccurrenceDate(dateTime.getValue());
+        return CompromiseOccurrenceDate.builder().value(dateTime.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

@@ -32,6 +32,12 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private CertificateLength(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     public static CertificateLength of(@NonNull Integer value) {
         return CertificateLength.builder().value(value).build();
     }
@@ -40,7 +46,14 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CertificateLength(integer.getValue());
+        return CertificateLength.builder().value(integer.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

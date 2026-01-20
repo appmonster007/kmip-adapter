@@ -14,7 +14,6 @@ import java.util.Set;
  */
 @Data
 @Builder(toBuilder = true)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_LENGTH.inst();
@@ -33,6 +32,12 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private CryptographicLength(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     /**
      * Creates a new CryptographicLength instance from an AttributeValue.
      *
@@ -44,7 +49,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CryptographicLength(integer.getValue());
+        return CryptographicLength.builder().value(integer.getValue()).build();
     }
 
     /**
@@ -54,7 +59,14 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
      * @return a new CryptographicLength instance
      */
     public static CryptographicLength of(int value) {
-        return new CryptographicLength(value);
+        return CryptographicLength.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

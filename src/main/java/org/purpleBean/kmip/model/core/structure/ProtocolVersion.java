@@ -56,9 +56,6 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
         // No validation needed for this structure
     }
 

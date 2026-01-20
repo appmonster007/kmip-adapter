@@ -31,6 +31,12 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private CryptographicUsageMask(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     public static CryptographicUsageMask of(@NonNull Integer value) {
         return CryptographicUsageMask.builder().value(value).build();
     }
@@ -39,9 +45,15 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CryptographicUsageMask(integer.getValue());
+        return CryptographicUsageMask.builder().value(integer.getValue()).build();
     }
 
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
+    }
 
     @Override
     public KmipTag getKmipTag() {

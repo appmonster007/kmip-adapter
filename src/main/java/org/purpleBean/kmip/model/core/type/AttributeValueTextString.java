@@ -24,8 +24,21 @@ public class AttributeValueTextString implements AttributeValue {
     @NonNull
     private final String value;
 
+    @Builder
+    private AttributeValueTextString(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeValueTextString of(@NonNull String value) {
         return AttributeValueTextString.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

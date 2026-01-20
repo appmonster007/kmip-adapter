@@ -30,6 +30,12 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
+    @Builder
+    private ContactInformation(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static ContactInformation of(@NonNull String value) {
         return ContactInformation.builder().value(value).build();
     }
@@ -38,7 +44,14 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new ContactInformation(value.getValue());
+        return ContactInformation.builder().value(value.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

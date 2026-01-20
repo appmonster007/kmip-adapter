@@ -29,8 +29,21 @@ public class Qlength implements KmipDataType {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private Qlength(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     public static Qlength of(@NonNull Integer value) {
         return Qlength.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

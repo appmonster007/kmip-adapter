@@ -35,8 +35,21 @@ public class {{DATA_NAME}} implements KmipDataType {
     @NonNull
     private final {{DATA_TYPE}} value;
 
+    @Builder
+    private {{DATA_NAME}}(@NonNull {{DATA_TYPE}} value) {
+        this.value = value;
+        validate();
+    }
+
     public static {{DATA_NAME}} of(@NonNull {{DATA_TYPE}} value) {
         return {{DATA_NAME}}.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

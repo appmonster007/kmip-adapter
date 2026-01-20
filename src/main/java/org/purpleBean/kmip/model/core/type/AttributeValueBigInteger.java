@@ -24,8 +24,21 @@ public class AttributeValueBigInteger implements AttributeValue {
     @NonNull
     private final java.math.BigInteger value;
 
+    @Builder
+    private AttributeValueBigInteger(@NonNull java.math.BigInteger value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeValueBigInteger of(@NonNull java.math.BigInteger value) {
         return AttributeValueBigInteger.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

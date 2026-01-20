@@ -28,8 +28,21 @@ public class ExtensionTag implements KmipDataType {
     @NonNull
     private final Integer value;
 
+    @Builder
+    private ExtensionTag(@NonNull Integer value) {
+        this.value = value;
+        validate();
+    }
+
     public static ExtensionTag of(@NonNull Integer value) {
         return ExtensionTag.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

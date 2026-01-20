@@ -30,8 +30,21 @@ public class TimeStamp implements KmipDataType {
     @NonNull
     private final OffsetDateTime value;
 
+    @Builder
+    private TimeStamp(@NonNull OffsetDateTime value) {
+        this.value = value;
+        validate();
+    }
+
     public static TimeStamp of(@NonNull OffsetDateTime value) {
         return TimeStamp.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

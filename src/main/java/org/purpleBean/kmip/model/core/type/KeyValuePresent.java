@@ -30,6 +30,12 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
     @NonNull
     private final Boolean value;
 
+    @Builder
+    private KeyValuePresent(@NonNull Boolean value) {
+        this.value = value;
+        validate();
+    }
+
     public static KeyValuePresent of(@NonNull Boolean value) {
         return KeyValuePresent.builder().value(value).build();
     }
@@ -38,7 +44,14 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueBoolean value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new KeyValuePresent(value.getValue());
+        return KeyValuePresent.builder().value(value.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

@@ -24,8 +24,21 @@ public class AttributeValueBoolean implements AttributeValue {
     @NonNull
     private final java.lang.Boolean value;
 
+    @Builder
+    private AttributeValueBoolean(@NonNull java.lang.Boolean value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeValueBoolean of(@NonNull java.lang.Boolean value) {
         return AttributeValueBoolean.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

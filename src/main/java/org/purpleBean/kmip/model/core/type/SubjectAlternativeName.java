@@ -29,12 +29,25 @@ public class SubjectAlternativeName implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private SubjectAlternativeName(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static SubjectAlternativeName of(@NonNull ByteBuffer value) {
         return SubjectAlternativeName.builder().value(value).build();
     }
 
     public static SubjectAlternativeName of(byte[] value) {
         return SubjectAlternativeName.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

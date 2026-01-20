@@ -30,8 +30,21 @@ public class PrimeFieldSize implements KmipDataType {
     @NonNull
     private final BigInteger value;
 
+    @Builder
+    private PrimeFieldSize(@NonNull BigInteger value) {
+        this.value = value;
+        validate();
+    }
+
     public static PrimeFieldSize of(@NonNull BigInteger value) {
         return PrimeFieldSize.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

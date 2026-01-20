@@ -36,6 +36,11 @@ public class NameValue implements KmipDataType {
     @NonNull
     private final String value;
 
+    @Builder
+    private NameValue(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
 
     /**
      * Creates a new NameValue with the specified TextString value.
@@ -44,7 +49,14 @@ public class NameValue implements KmipDataType {
      * @return a new NameValue instance
      */
     public static NameValue of(String value) {
-        return new NameValue(value);
+        return NameValue.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

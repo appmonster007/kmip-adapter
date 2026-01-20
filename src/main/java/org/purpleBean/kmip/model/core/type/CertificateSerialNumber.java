@@ -29,12 +29,25 @@ public class CertificateSerialNumber implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private CertificateSerialNumber(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static CertificateSerialNumber of(@NonNull ByteBuffer value) {
         return CertificateSerialNumber.builder().value(value).build();
     }
 
     public static CertificateSerialNumber of(byte[] value) {
         return CertificateSerialNumber.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

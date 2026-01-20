@@ -29,12 +29,25 @@ public class IssuerAlternativeName implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private IssuerAlternativeName(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static IssuerAlternativeName of(@NonNull ByteBuffer value) {
         return IssuerAlternativeName.builder().value(value).build();
     }
 
     public static IssuerAlternativeName of(byte[] value) {
         return IssuerAlternativeName.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

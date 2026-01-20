@@ -24,8 +24,21 @@ public class AttributeValueLongInteger implements AttributeValue {
     @NonNull
     private final Long value;
 
+    @Builder
+    private AttributeValueLongInteger(@NonNull Long value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeValueLongInteger of(@NonNull Long value) {
         return AttributeValueLongInteger.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

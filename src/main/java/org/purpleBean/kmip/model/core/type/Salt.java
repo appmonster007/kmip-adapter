@@ -29,12 +29,25 @@ public class Salt implements KmipDataType {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private Salt(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static Salt of(@NonNull ByteBuffer value) {
         return Salt.builder().value(value).build();
     }
 
     public static Salt of(byte[] value) {
         return Salt.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

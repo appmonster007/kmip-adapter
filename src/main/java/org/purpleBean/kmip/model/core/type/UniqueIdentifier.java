@@ -31,6 +31,12 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
+    @Builder
+    private UniqueIdentifier(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static UniqueIdentifier of(@NonNull String value) {
         return UniqueIdentifier.builder().value(value).build();
     }
@@ -39,7 +45,14 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new UniqueIdentifier(textString.getValue());
+        return UniqueIdentifier.builder().value(textString.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

@@ -25,12 +25,25 @@ public class AttributeValueByteString implements AttributeValue {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private AttributeValueByteString(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeValueByteString of(@NonNull ByteBuffer value) {
         return AttributeValueByteString.builder().value(value).build();
     }
 
     public static AttributeValueByteString of(byte[] value) {
         return AttributeValueByteString.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

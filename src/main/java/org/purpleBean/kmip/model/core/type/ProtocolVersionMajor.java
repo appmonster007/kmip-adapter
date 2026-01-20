@@ -27,10 +27,20 @@ public class ProtocolVersionMajor implements KmipDataType {
     @EqualsAndHashCode.Include
     private final int value;
 
+    @Builder
+    private ProtocolVersionMajor(int value) {
+        this.value = value;
+        validate();
+    }
+
     public static ProtocolVersionMajor of(int major) {
         return ProtocolVersionMajor.builder()
                 .value(major)
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

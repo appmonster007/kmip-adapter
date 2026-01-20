@@ -26,12 +26,25 @@ public class KeyValueByteString implements KeyValue {
     @NonNull
     private final ByteBuffer value;
 
+    @Builder
+    private KeyValueByteString(@NonNull ByteBuffer value) {
+        this.value = value;
+        validate();
+    }
+
     public static KeyValueByteString of(@NonNull ByteBuffer value) {
         return KeyValueByteString.builder().value(value).build();
     }
 
     public static KeyValueByteString of(byte[] value) {
         return KeyValueByteString.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

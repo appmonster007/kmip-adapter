@@ -27,10 +27,20 @@ public class ProtocolVersionMinor implements KmipDataType {
     @EqualsAndHashCode.Include
     private final int value;
 
+    @Builder
+    private ProtocolVersionMinor(int value) {
+        this.value = value;
+        validate();
+    }
+
     public static ProtocolVersionMinor of(int minor) {
         return ProtocolVersionMinor.builder()
                 .value(minor)
                 .build();
+    }
+
+    private void validate() {
+        // No validation needed for this structure
     }
 
     @Override

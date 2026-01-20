@@ -29,8 +29,21 @@ public class UsageLimitsCount implements KmipDataType {
     @NonNull
     private final Long value;
 
+    @Builder
+    private UsageLimitsCount(@NonNull Long value) {
+        this.value = value;
+        validate();
+    }
+
     public static UsageLimitsCount of(@NonNull Long value) {
         return UsageLimitsCount.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

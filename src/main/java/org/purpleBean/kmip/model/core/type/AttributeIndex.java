@@ -25,8 +25,21 @@ public class AttributeIndex implements KmipDataType {
 
     private final int value;
 
+    @Builder
+    private AttributeIndex(int value) {
+        this.value = value;
+        validate();
+    }
+
     public static AttributeIndex of(int index) {
         return AttributeIndex.builder().value(index).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

@@ -29,8 +29,21 @@ public class Username implements KmipDataType {
     @NonNull
     private final String value;
 
+    @Builder
+    private Username(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static Username of(@NonNull String value) {
         return Username.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

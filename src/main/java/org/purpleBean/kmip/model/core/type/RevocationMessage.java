@@ -28,8 +28,21 @@ public class RevocationMessage implements KmipDataType {
     @NonNull
     private final String value;
 
+    @Builder
+    private RevocationMessage(@NonNull String value) {
+        this.value = value;
+        validate();
+    }
+
     public static RevocationMessage of(@NonNull String value) {
         return RevocationMessage.builder().value(value).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

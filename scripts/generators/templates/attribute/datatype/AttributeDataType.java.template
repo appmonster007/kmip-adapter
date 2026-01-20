@@ -36,6 +36,12 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     @NonNull
     private final {{DATA_TYPE}} value;
 
+    @Builder
+    private {{ATTRIBUTE_NAME}}(@NonNull {{DATA_TYPE}} value) {
+        this.value = value;
+        validate();
+    }
+
     public static {{ATTRIBUTE_NAME}} of(@NonNull {{DATA_TYPE}} value) {
         return {{ATTRIBUTE_NAME}}.builder().value(value).build();
     }
@@ -44,7 +50,14 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof {{ATTRIBUTE_VALUE_TYPE}} attributeValueTyped)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new {{ATTRIBUTE_NAME}}(attributeValueTyped.getValue());
+        return {{ATTRIBUTE_NAME}}.builder().value(attributeValueTyped.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override

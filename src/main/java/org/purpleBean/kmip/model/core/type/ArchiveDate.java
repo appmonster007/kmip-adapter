@@ -33,6 +33,12 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
     @NonNull
     private final OffsetDateTime value;
 
+    @Builder
+    private ArchiveDate(@NonNull OffsetDateTime value) {
+        this.value = value;
+        validate();
+    }
+
     public static ArchiveDate of(@NonNull OffsetDateTime value) {
         return ArchiveDate.builder().value(value).build();
     }
@@ -41,7 +47,14 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new ArchiveDate(dateTime.getValue());
+        return ArchiveDate.builder().value(dateTime.getValue()).build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // No validation needed for this structure
     }
 
     @Override
