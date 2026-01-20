@@ -65,6 +65,7 @@ public class TransparentDhPublicKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(p, "p cannot be null");
         Objects.requireNonNull(g, "g cannot be null");
         Objects.requireNonNull(y, "y cannot be null");

@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 public class Certificate implements ManagedObject, KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
     public static final ObjectType.Value objectTypeValue = ObjectType.Standard.CERTIFICATE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -68,6 +68,7 @@ public class Certificate implements ManagedObject, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(certificateType, "CertificateType cannot be null");
         Objects.requireNonNull(certificateValue, "CertificateValue cannot be null");
     }

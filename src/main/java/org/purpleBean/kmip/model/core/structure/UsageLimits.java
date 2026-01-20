@@ -69,6 +69,7 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(usageLimitsTotal, "UsageLimitsTotal cannot be null");
         Objects.requireNonNull(usageLimitsCount, "UsageLimitsCount cannot be null");
         Objects.requireNonNull(usageLimitsUnit, "UsageLimitsUnit cannot be null");

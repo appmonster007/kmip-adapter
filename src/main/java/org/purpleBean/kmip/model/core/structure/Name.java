@@ -79,6 +79,7 @@ public class Name implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
+        isSupported();
         // Validate KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
         if (!nameValue.isSupported()) {

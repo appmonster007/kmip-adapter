@@ -50,6 +50,7 @@ public class CredentialValueGenericStructure implements CredentialValue, KmipStr
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(values, "Values cannot be null");
     }
 

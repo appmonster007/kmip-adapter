@@ -46,6 +46,7 @@ public class SampleStructure implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         List<KmipDataType> fields = new ArrayList<>();
         fields.add(activationDate);
         fields.add(state);

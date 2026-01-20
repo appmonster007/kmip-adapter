@@ -78,6 +78,7 @@ public class UsernameAndPassword implements CredentialValue, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(username, "Username cannot be null");
         Objects.requireNonNull(password, "Password cannot be null");
     }

@@ -13,8 +13,8 @@ import java.util.*;
 @Builder(toBuilder = true)
 public class Template implements ManagedObject, KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.TEMPLATE.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
     public static final ObjectType.Value objectTypeValue = ObjectType.Standard.TEMPLATE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -45,6 +45,7 @@ public class Template implements ManagedObject, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(attributes, "Attributes cannot be null");
     }
 

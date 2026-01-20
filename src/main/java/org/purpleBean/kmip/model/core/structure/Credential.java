@@ -50,6 +50,7 @@ public class Credential implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(credentialType, "CredentialType cannot be null");
         Objects.requireNonNull(credentialValue, "CredentialValue cannot be null");
     }

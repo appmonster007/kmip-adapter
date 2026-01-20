@@ -65,6 +65,7 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

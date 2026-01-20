@@ -56,6 +56,7 @@ public class ProtocolVersion implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

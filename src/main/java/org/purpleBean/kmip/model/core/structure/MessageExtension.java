@@ -44,6 +44,7 @@ public class MessageExtension implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation required for this structure
     }
 

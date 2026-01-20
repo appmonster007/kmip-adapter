@@ -43,6 +43,7 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

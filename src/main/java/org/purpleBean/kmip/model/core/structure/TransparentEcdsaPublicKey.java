@@ -56,6 +56,7 @@ public class TransparentEcdsaPublicKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
         Objects.requireNonNull(qString, "qString cannot be null");
     }

@@ -43,6 +43,7 @@ public class KeyValueStructure implements KeyValue, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         List<KmipDataType> fields = Stream.concat(
                 Stream.of(keyMaterial),
                 attributes.stream()

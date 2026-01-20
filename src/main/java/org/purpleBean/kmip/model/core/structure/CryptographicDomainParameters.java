@@ -59,6 +59,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

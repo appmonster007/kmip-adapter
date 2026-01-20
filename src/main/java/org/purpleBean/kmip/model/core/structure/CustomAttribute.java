@@ -89,6 +89,7 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
+        isSupported();
         if (!isValidCustomAttributeName(attributeName.getValue())) {
             throw new IllegalArgumentException("Custom attribute name is invalid");
         }

@@ -41,6 +41,7 @@ public class MACSignatureKeyInformation implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

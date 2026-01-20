@@ -59,6 +59,7 @@ public class KeyWrappingSpecification implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(wrappingMethod, "wrappingMethod cannot be null");
         Objects.requireNonNull(attributeNames, "attributeNames cannot be null");
     }

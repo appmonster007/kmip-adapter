@@ -81,6 +81,7 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation required for this structure
     }
 

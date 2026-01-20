@@ -6,7 +6,10 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,6 +46,7 @@ public class CommonTemplateAttribute implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(names, "Names cannot be null");
         Objects.requireNonNull(attributes, "Attributes cannot be null");
     }

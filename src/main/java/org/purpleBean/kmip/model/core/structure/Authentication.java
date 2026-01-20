@@ -52,6 +52,7 @@ public class Authentication implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

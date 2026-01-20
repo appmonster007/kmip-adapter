@@ -78,6 +78,7 @@ public class KeyBlock implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(keyFormatType, "KeyFormatType cannot be null");
         if (cryptographicAlgorithm != null && cryptographicLength == null) {
             throw new IllegalStateException("CryptographicLength must be present if CryptographicAlgorithm is present");

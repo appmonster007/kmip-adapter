@@ -56,6 +56,7 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(modulus, "modulus cannot be null");
         Objects.requireNonNull(publicExponent, "publicExponent cannot be null");
     }

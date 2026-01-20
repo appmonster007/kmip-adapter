@@ -48,6 +48,7 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(key, "key cannot be null");
     }
 

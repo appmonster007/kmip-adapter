@@ -59,6 +59,7 @@ public class ExtensionInformation implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(extensionName, "ExtensionName cannot be null");
     }
 

@@ -50,6 +50,7 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

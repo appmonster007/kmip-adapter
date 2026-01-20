@@ -66,6 +66,7 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(issuerDistinguishedName, "Issuer Distinguished Name cannot be null");
         Objects.requireNonNull(certificateSerialNumber, "Certificate Serial Number cannot be null");
 

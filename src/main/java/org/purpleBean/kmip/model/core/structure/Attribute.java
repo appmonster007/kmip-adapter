@@ -75,6 +75,7 @@ public class Attribute implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

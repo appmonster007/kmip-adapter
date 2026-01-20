@@ -68,6 +68,7 @@ public class RegisterOpResponsePayload implements ResponsePayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

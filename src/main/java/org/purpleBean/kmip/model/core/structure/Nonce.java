@@ -51,6 +51,7 @@ public class Nonce implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

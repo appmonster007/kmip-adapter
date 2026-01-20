@@ -58,6 +58,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
 
     // TODO: Add a validate method
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

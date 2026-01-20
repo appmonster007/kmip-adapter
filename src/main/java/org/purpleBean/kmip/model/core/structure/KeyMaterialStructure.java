@@ -50,6 +50,7 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

@@ -74,6 +74,7 @@ public class RequestMessage implements RequestMessageStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
         if (requestBatchItems.size() != requestBatchItemErrors.size()) {
             throw new IllegalArgumentException("requestBatchItems and requestBatchItemErrors must have the same size");

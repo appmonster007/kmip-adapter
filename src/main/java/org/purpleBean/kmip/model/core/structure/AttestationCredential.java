@@ -83,6 +83,7 @@ public class AttestationCredential implements CredentialValue, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(nonce, "Nonce cannot be null");
         Objects.requireNonNull(attestationType, "AttestationType cannot be null");
     }

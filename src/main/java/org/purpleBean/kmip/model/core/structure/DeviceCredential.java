@@ -87,6 +87,7 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         // No validation required for this structure
     }
 

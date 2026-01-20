@@ -78,6 +78,7 @@ public class CreateOpResponsePayload implements ResponsePayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

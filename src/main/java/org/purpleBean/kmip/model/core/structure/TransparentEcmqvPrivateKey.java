@@ -56,6 +56,7 @@ public class TransparentEcmqvPrivateKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(recommendedCurve, "recommendedCurve cannot be null");
         Objects.requireNonNull(d, "d cannot be null");
     }

@@ -75,6 +75,7 @@ public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

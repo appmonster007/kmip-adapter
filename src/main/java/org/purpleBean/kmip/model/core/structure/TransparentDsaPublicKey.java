@@ -68,6 +68,7 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(p, "p cannot be null");
         Objects.requireNonNull(q, "q cannot be null");
         Objects.requireNonNull(g, "g cannot be null");

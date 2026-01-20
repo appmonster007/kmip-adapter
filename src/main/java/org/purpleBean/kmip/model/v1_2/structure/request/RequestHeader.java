@@ -56,6 +56,31 @@ public class RequestHeader implements RequestHeaderStructure {
     @NonNull
     private final BatchCount batchCount;
 
+    private RequestHeader(
+            @NonNull ProtocolVersion protocolVersion,
+            MaximumResponseSize maximumResponseSize,
+            AsynchronousIndicator asynchronousIndicator,
+            AttestationCapableIndicator attestationCapableIndicator,
+            List<AttestationType> attestationTypes,
+            Authentication authentication,
+            BatchErrorContinuationOption batchErrorContinuationOption,
+            BatchOrderOption batchOrderOption,
+            TimeStamp timeStamp,
+            @NonNull BatchCount batchCount
+    ) {
+        this.protocolVersion = protocolVersion;
+        this.maximumResponseSize = maximumResponseSize;
+        this.asynchronousIndicator = asynchronousIndicator;
+        this.attestationCapableIndicator = attestationCapableIndicator;
+        this.attestationTypes = attestationTypes;
+        this.authentication = authentication;
+        this.batchErrorContinuationOption = batchErrorContinuationOption;
+        this.batchOrderOption = batchOrderOption;
+        this.timeStamp = timeStamp;
+        this.batchCount = batchCount;
+        validate();
+    }
+
     public static RequestHeader of(List<KmipDataType> values) {
         var builder = RequestHeader.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
@@ -91,6 +116,11 @@ public class RequestHeader implements RequestHeaderStructure {
         }
 
         return builder.build();
+    }
+
+    private void validate() {
+        isSupported();
+        // Add validation logic here
     }
 
     @Override

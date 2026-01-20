@@ -87,6 +87,7 @@ public class CreateKeyPairOpResponsePayload implements ResponsePayloadStructure 
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

@@ -46,6 +46,7 @@ public class PublicKeyTemplateAttribute implements KmipStructure {
     }
 
     private void validate() {
+        isSupported();
         Objects.requireNonNull(names, "Names cannot be null");
         Objects.requireNonNull(attributes, "Attributes cannot be null");
     }

@@ -55,6 +55,7 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
 
     // TODO: Add a validate method
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

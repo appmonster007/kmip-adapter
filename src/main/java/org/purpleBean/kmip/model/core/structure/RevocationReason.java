@@ -60,6 +60,7 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

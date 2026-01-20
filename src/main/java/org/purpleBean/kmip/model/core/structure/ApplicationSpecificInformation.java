@@ -59,6 +59,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     }
 
     private void validate() {
+        isSupported();
         // No validation needed for this structure
     }
 

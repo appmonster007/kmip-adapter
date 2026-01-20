@@ -68,6 +68,7 @@ public class ReKeyOpResponsePayload implements ResponsePayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 

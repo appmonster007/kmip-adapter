@@ -69,6 +69,7 @@ public class CreateOpRequestPayload implements RequestPayloadStructure {
     }
 
     private void validate() {
+        isSupported();
         // Add validation logic here
     }
 
