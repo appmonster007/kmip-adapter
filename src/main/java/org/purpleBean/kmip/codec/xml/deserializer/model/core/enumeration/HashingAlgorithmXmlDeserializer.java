@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 public class HashingAlgorithmXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<HashingAlgorithm, String> {
 
     public HashingAlgorithmXmlDeserializer() {
-        super(HashingAlgorithm.kmipTag, HashingAlgorithm.encodingType, String.class, value -> new HashingAlgorithm(HashingAlgorithm.fromName(value)));
+        super(HashingAlgorithm.kmipTag, HashingAlgorithm.encodingType, String.class, value -> HashingAlgorithm.fromName(value).inst());
     }
 }

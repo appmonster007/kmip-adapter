@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
 public class CryptographicAlgorithmXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CryptographicAlgorithm, String> {
 
     public CryptographicAlgorithmXmlDeserializer() {
-        super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType, String.class, value -> new CryptographicAlgorithm(CryptographicAlgorithm.fromName(value)));
+        super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType, String.class, value -> CryptographicAlgorithm.fromName(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CertificateType;
 public class CertificateTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<CertificateType, String> {
 
     public CertificateTypeJsonDeserializer() {
-        super(CertificateType.kmipTag, CertificateType.encodingType, String.class, value -> new CertificateType(CertificateType.fromName(value)));
+        super(CertificateType.kmipTag, CertificateType.encodingType, String.class, value -> CertificateType.fromName(value).inst());
     }
 }

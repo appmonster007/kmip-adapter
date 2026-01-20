@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
 public class DrbgAlgorithmJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<DrbgAlgorithm, String> {
 
     public DrbgAlgorithmJsonDeserializer() {
-        super(DrbgAlgorithm.kmipTag, DrbgAlgorithm.encodingType, String.class, value -> new DrbgAlgorithm(DrbgAlgorithm.fromName(value)));
+        super(DrbgAlgorithm.kmipTag, DrbgAlgorithm.encodingType, String.class, value -> DrbgAlgorithm.fromName(value).inst());
     }
 }

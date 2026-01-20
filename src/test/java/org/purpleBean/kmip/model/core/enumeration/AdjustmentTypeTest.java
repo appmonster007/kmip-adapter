@@ -39,7 +39,7 @@ class AdjustmentTypeTest extends AbstractKmipEnumerationTestSuite<AdjustmentType
         if (AdjustmentType.Standard.values().length > 0) {
             return AdjustmentType.Standard.values()[0].inst();
         }
-        return new AdjustmentType(AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)));
+        return AdjustmentType.register(0x80000001, "X-Default-Value-1", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override

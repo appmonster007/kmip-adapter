@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ClientRegistrationMethod;
 public class ClientRegistrationMethodTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ClientRegistrationMethod, Integer> {
 
     public ClientRegistrationMethodTtlvDeserializer() {
-        super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType, Integer.class, value -> new ClientRegistrationMethod(ClientRegistrationMethod.fromValue(value)));
+        super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType, Integer.class, value -> ClientRegistrationMethod.fromValue(value).inst());
     }
 }

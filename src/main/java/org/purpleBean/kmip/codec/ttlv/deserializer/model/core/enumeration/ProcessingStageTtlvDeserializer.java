@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ProcessingStage;
 public class ProcessingStageTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProcessingStage, Integer> {
 
     public ProcessingStageTtlvDeserializer() {
-        super(ProcessingStage.kmipTag, ProcessingStage.encodingType, Integer.class, value -> new ProcessingStage(ProcessingStage.fromValue(value)));
+        super(ProcessingStage.kmipTag, ProcessingStage.encodingType, Integer.class, value -> ProcessingStage.fromValue(value).inst());
     }
 }

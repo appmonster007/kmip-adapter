@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.State;
 public class StateTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<State, Integer> {
 
     public StateTtlvDeserializer() {
-        super(State.kmipTag, State.encodingType, Integer.class, value -> new State(State.fromValue(value)));
+        super(State.kmipTag, State.encodingType, Integer.class, value -> State.fromValue(value).inst());
     }
 }

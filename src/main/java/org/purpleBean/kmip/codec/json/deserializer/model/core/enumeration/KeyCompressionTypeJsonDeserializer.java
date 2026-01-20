@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 public class KeyCompressionTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyCompressionType, String> {
 
     public KeyCompressionTypeJsonDeserializer() {
-        super(KeyCompressionType.kmipTag, KeyCompressionType.encodingType, String.class, value -> new KeyCompressionType(KeyCompressionType.fromName(value)));
+        super(KeyCompressionType.kmipTag, KeyCompressionType.encodingType, String.class, value -> KeyCompressionType.fromName(value).inst());
     }
 }

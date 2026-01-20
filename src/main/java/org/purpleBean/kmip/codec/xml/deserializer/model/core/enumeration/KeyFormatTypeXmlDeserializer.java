@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 public class KeyFormatTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<KeyFormatType, String> {
 
     public KeyFormatTypeXmlDeserializer() {
-        super(KeyFormatType.kmipTag, KeyFormatType.encodingType, String.class, value -> new KeyFormatType(KeyFormatType.fromName(value)));
+        super(KeyFormatType.kmipTag, KeyFormatType.encodingType, String.class, value -> KeyFormatType.fromName(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.SecretDataType;
 public class SecretDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SecretDataType, Integer> {
 
     public SecretDataTypeTtlvDeserializer() {
-        super(SecretDataType.kmipTag, SecretDataType.encodingType, Integer.class, value -> new SecretDataType(SecretDataType.fromValue(value)));
+        super(SecretDataType.kmipTag, SecretDataType.encodingType, Integer.class, value -> SecretDataType.fromValue(value).inst());
     }
 }

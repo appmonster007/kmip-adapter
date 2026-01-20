@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
 public class BlockCipherModeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<BlockCipherMode, String> {
 
     public BlockCipherModeJsonDeserializer() {
-        super(BlockCipherMode.kmipTag, BlockCipherMode.encodingType, String.class, value -> new BlockCipherMode(BlockCipherMode.fromName(value)));
+        super(BlockCipherMode.kmipTag, BlockCipherMode.encodingType, String.class, value -> BlockCipherMode.fromName(value).inst());
     }
 }

@@ -21,6 +21,6 @@ class MaskGeneratorXmlTest extends AbstractXmlSerializationTestSuite<MaskGenerat
 
     @Override
     protected MaskGenerator createVariant() {
-        return new MaskGenerator(MaskGenerator.register(0x80000000, "MaskGenExtension", Set.of(KmipSpec.UnknownVersion)));
+        return MaskGenerator.register(0x80000000, "MaskGenExtension", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

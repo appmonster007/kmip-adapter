@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 public class OperationXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Operation, String> {
 
     public OperationXmlDeserializer() {
-        super(Operation.kmipTag, Operation.encodingType, String.class, value -> new Operation(Operation.fromName(value)));
+        super(Operation.kmipTag, Operation.encodingType, String.class, value -> Operation.fromName(value).inst());
     }
 }

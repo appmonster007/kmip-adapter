@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CredentialType;
 public class CredentialTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CredentialType, String> {
 
     public CredentialTypeXmlDeserializer() {
-        super(CredentialType.kmipTag, CredentialType.encodingType, String.class, value -> new CredentialType(CredentialType.fromName(value)));
+        super(CredentialType.kmipTag, CredentialType.encodingType, String.class, value -> CredentialType.fromName(value).inst());
     }
 }

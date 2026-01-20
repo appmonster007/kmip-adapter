@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
 public class KeyRoleTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<KeyRoleType, String> {
 
     public KeyRoleTypeXmlDeserializer() {
-        super(KeyRoleType.kmipTag, KeyRoleType.encodingType, String.class, value -> new KeyRoleType(KeyRoleType.fromName(value)));
+        super(KeyRoleType.kmipTag, KeyRoleType.encodingType, String.class, value -> KeyRoleType.fromName(value).inst());
     }
 }

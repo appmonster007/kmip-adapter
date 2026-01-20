@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 public class AttestationTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<AttestationType, String> {
 
     public AttestationTypeJsonDeserializer() {
-        super(AttestationType.kmipTag, AttestationType.encodingType, String.class, value -> new AttestationType(AttestationType.fromName(value)));
+        super(AttestationType.kmipTag, AttestationType.encodingType, String.class, value -> AttestationType.fromName(value).inst());
     }
 }

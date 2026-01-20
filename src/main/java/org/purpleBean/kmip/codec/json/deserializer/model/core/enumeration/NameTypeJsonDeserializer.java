@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.NameType;
 public class NameTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<NameType, String> {
 
     public NameTypeJsonDeserializer() {
-        super(NameType.kmipTag, NameType.encodingType, String.class, value -> new NameType(NameType.fromName(value)));
+        super(NameType.kmipTag, NameType.encodingType, String.class, value -> NameType.fromName(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ProcessingStage;
 public class ProcessingStageXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ProcessingStage, String> {
 
     public ProcessingStageXmlDeserializer() {
-        super(ProcessingStage.kmipTag, ProcessingStage.encodingType, String.class, value -> new ProcessingStage(ProcessingStage.fromName(value)));
+        super(ProcessingStage.kmipTag, ProcessingStage.encodingType, String.class, value -> ProcessingStage.fromName(value).inst());
     }
 }

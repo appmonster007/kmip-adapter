@@ -16,11 +16,11 @@ class OpaqueDataTypeJsonTest extends AbstractJsonSerializationTestSuite<OpaqueDa
 
     @Override
     protected OpaqueDataType createDefault() {
-        return new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
+        return OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected OpaqueDataType createVariant() {
-        return new OpaqueDataType(OpaqueDataType.register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion)));
+        return OpaqueDataType.register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

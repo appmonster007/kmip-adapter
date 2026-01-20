@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 public class KeyValueLocationTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyValueLocationType, String> {
 
     public KeyValueLocationTypeJsonDeserializer() {
-        super(KeyValueLocationType.kmipTag, KeyValueLocationType.encodingType, String.class, value -> new KeyValueLocationType(KeyValueLocationType.fromName(value)));
+        super(KeyValueLocationType.kmipTag, KeyValueLocationType.encodingType, String.class, value -> KeyValueLocationType.fromName(value).inst());
     }
 }

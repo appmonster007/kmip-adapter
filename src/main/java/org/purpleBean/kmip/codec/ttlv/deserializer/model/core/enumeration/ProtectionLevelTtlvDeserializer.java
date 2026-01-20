@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ProtectionLevel;
 public class ProtectionLevelTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProtectionLevel, Integer> {
 
     public ProtectionLevelTtlvDeserializer() {
-        super(ProtectionLevel.kmipTag, ProtectionLevel.encodingType, Integer.class, value -> new ProtectionLevel(ProtectionLevel.fromValue(value)));
+        super(ProtectionLevel.kmipTag, ProtectionLevel.encodingType, Integer.class, value -> ProtectionLevel.fromValue(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ProfileName;
 public class ProfileNameTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProfileName, Integer> {
 
     public ProfileNameTtlvDeserializer() {
-        super(ProfileName.kmipTag, ProfileName.encodingType, Integer.class, value -> new ProfileName(ProfileName.fromValue(value)));
+        super(ProfileName.kmipTag, ProfileName.encodingType, Integer.class, value -> ProfileName.fromValue(value).inst());
     }
 }

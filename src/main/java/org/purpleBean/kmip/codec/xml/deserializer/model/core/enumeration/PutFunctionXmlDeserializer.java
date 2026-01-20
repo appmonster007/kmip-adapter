@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 public class PutFunctionXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<PutFunction, String> {
 
     public PutFunctionXmlDeserializer() {
-        super(PutFunction.kmipTag, PutFunction.encodingType, String.class, value -> new PutFunction(PutFunction.fromName(value)));
+        super(PutFunction.kmipTag, PutFunction.encodingType, String.class, value -> PutFunction.fromName(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.EndpointRole;
 public class EndpointRoleXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<EndpointRole, String> {
 
     public EndpointRoleXmlDeserializer() {
-        super(EndpointRole.kmipTag, EndpointRole.encodingType, String.class, value -> new EndpointRole(EndpointRole.fromName(value)));
+        super(EndpointRole.kmipTag, EndpointRole.encodingType, String.class, value -> EndpointRole.fromName(value).inst());
     }
 }

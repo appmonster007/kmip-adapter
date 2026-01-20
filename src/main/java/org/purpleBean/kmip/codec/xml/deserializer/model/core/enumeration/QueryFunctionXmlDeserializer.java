@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.QueryFunction;
 public class QueryFunctionXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<QueryFunction, String> {
 
     public QueryFunctionXmlDeserializer() {
-        super(QueryFunction.kmipTag, QueryFunction.encodingType, String.class, value -> new QueryFunction(QueryFunction.fromName(value)));
+        super(QueryFunction.kmipTag, QueryFunction.encodingType, String.class, value -> QueryFunction.fromName(value).inst());
     }
 }

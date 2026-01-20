@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 public class ObjectGroupMemberTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ObjectGroupMember, Integer> {
 
     public ObjectGroupMemberTtlvDeserializer() {
-        super(ObjectGroupMember.kmipTag, ObjectGroupMember.encodingType, Integer.class, value -> new ObjectGroupMember(ObjectGroupMember.fromValue(value)));
+        super(ObjectGroupMember.kmipTag, ObjectGroupMember.encodingType, Integer.class, value -> ObjectGroupMember.fromValue(value).inst());
     }
 }

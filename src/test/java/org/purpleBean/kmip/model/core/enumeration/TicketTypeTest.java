@@ -30,7 +30,7 @@ class TicketTypeTest extends AbstractKmipEnumerationTestSuite<TicketType> {
 
     @Override
     protected TicketType createDifferentFromDefault() {
-        return new TicketType(TicketType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion)));
+        return TicketType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override

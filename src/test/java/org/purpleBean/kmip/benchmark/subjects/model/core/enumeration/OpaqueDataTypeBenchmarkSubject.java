@@ -9,7 +9,7 @@ import java.util.Set;
 public class OpaqueDataTypeBenchmarkSubject extends KmipBenchmarkSubject<OpaqueDataType> {
 
     public OpaqueDataTypeBenchmarkSubject() throws Exception {
-        OpaqueDataType opaqueDataType = new OpaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)));
+        OpaqueDataType opaqueDataType = OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)).inst();
         initialize(opaqueDataType, OpaqueDataType.class);
     }
 

@@ -13,8 +13,7 @@ class LinkTypeXmlTest extends AbstractXmlSerializationTestSuite<LinkType> {
 
     @Override
     protected LinkType createDefault() {
-        return new LinkType(LinkType.Standard.CERTIFICATE_LINK
-        );
+        return  LinkType.Standard.CERTIFICATE_LINK.inst();
     }
 
     @Override

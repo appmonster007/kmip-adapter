@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
 public class MaskGeneratorJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<MaskGenerator, String> {
 
     public MaskGeneratorJsonDeserializer() {
-        super(MaskGenerator.kmipTag, MaskGenerator.encodingType, String.class, value -> new MaskGenerator(MaskGenerator.fromName(value)));
+        super(MaskGenerator.kmipTag, MaskGenerator.encodingType, String.class, value -> MaskGenerator.fromName(value).inst());
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
 public class MaskGeneratorTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MaskGenerator, Integer> {
 
     public MaskGeneratorTtlvDeserializer() {
-        super(MaskGenerator.kmipTag, MaskGenerator.encodingType, Integer.class, value -> new MaskGenerator(MaskGenerator.fromValue(value)));
+        super(MaskGenerator.kmipTag, MaskGenerator.encodingType, Integer.class, value -> MaskGenerator.fromValue(value).inst());
     }
 }

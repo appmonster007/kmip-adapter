@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
 public class PaddingMethodXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<PaddingMethod, String> {
 
     public PaddingMethodXmlDeserializer() {
-        super(PaddingMethod.kmipTag, PaddingMethod.encodingType, String.class, value -> new PaddingMethod(PaddingMethod.fromName(value)));
+        super(PaddingMethod.kmipTag, PaddingMethod.encodingType, String.class, value -> PaddingMethod.fromName(value).inst());
     }
 }

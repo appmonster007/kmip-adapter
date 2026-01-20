@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CertificateType;
 public class CertificateTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CertificateType, Integer> {
 
     public CertificateTypeTtlvDeserializer() {
-        super(CertificateType.kmipTag, CertificateType.encodingType, Integer.class, value -> new CertificateType(CertificateType.fromValue(value)));
+        super(CertificateType.kmipTag, CertificateType.encodingType, Integer.class, value -> CertificateType.fromValue(value).inst());
     }
 }

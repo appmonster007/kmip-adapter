@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.InteropFunction;
 public class InteropFunctionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<InteropFunction, Integer> {
 
     public InteropFunctionTtlvDeserializer() {
-        super(InteropFunction.kmipTag, InteropFunction.encodingType, Integer.class, value -> new InteropFunction(InteropFunction.fromValue(value)));
+        super(InteropFunction.kmipTag, InteropFunction.encodingType, Integer.class, value -> InteropFunction.fromValue(value).inst());
     }
 }

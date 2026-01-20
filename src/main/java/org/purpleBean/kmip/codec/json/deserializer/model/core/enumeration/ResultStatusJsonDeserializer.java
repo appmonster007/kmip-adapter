@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 public class ResultStatusJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ResultStatus, String> {
 
     public ResultStatusJsonDeserializer() {
-        super(ResultStatus.kmipTag, ResultStatus.encodingType, String.class, value -> new ResultStatus(ResultStatus.fromName(value)));
+        super(ResultStatus.kmipTag, ResultStatus.encodingType, String.class, value -> ResultStatus.fromName(value).inst());
     }
 }

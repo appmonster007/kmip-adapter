@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 public class BatchErrorContinuationOptionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<BatchErrorContinuationOption, Integer> {
 
     public BatchErrorContinuationOptionTtlvDeserializer() {
-        super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType, Integer.class, value -> new BatchErrorContinuationOption(BatchErrorContinuationOption.fromValue(value)));
+        super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType, Integer.class, value -> BatchErrorContinuationOption.fromValue(value).inst());
     }
 }

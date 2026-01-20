@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.OtpAlgorithm;
 public class OtpAlgorithmJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<OtpAlgorithm, String> {
 
     public OtpAlgorithmJsonDeserializer() {
-        super(OtpAlgorithm.kmipTag, OtpAlgorithm.encodingType, String.class, value -> new OtpAlgorithm(OtpAlgorithm.fromName(value)));
+        super(OtpAlgorithm.kmipTag, OtpAlgorithm.encodingType, String.class, value -> OtpAlgorithm.fromName(value).inst());
     }
 }

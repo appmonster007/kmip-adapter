@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.OpaqueDataType;
 public class OpaqueDataTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<OpaqueDataType, String> {
 
     public OpaqueDataTypeXmlDeserializer() {
-        super(OpaqueDataType.kmipTag, OpaqueDataType.encodingType, String.class, value -> new OpaqueDataType(OpaqueDataType.fromName(value)));
+        super(OpaqueDataType.kmipTag, OpaqueDataType.encodingType, String.class, value -> OpaqueDataType.fromName(value).inst());
     }
 }

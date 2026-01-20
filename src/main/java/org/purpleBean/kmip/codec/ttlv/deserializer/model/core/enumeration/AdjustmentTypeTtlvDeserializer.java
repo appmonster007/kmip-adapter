@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.AdjustmentType;
 public class AdjustmentTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AdjustmentType, Integer> {
 
     public AdjustmentTypeTtlvDeserializer() {
-        super(AdjustmentType.kmipTag, AdjustmentType.encodingType, Integer.class, value -> new AdjustmentType(AdjustmentType.fromValue(value)));
+        super(AdjustmentType.kmipTag, AdjustmentType.encodingType, Integer.class, value -> AdjustmentType.fromValue(value).inst());
     }
 }

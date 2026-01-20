@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 public class DerivationMethodJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<DerivationMethod, String> {
 
     public DerivationMethodJsonDeserializer() {
-        super(DerivationMethod.kmipTag, DerivationMethod.encodingType, String.class, value -> new DerivationMethod(DerivationMethod.fromName(value)));
+        super(DerivationMethod.kmipTag, DerivationMethod.encodingType, String.class, value -> DerivationMethod.fromName(value).inst());
     }
 }

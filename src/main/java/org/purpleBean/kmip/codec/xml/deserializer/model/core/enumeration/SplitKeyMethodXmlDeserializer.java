@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
 public class SplitKeyMethodXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<SplitKeyMethod, String> {
 
     public SplitKeyMethodXmlDeserializer() {
-        super(SplitKeyMethod.kmipTag, SplitKeyMethod.encodingType, String.class, value -> new SplitKeyMethod(SplitKeyMethod.fromName(value)));
+        super(SplitKeyMethod.kmipTag, SplitKeyMethod.encodingType, String.class, value -> SplitKeyMethod.fromName(value).inst());
     }
 }

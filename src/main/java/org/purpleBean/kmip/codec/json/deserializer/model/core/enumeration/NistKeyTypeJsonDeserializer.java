@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.NistKeyType;
 public class NistKeyTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<NistKeyType, String> {
 
     public NistKeyTypeJsonDeserializer() {
-        super(NistKeyType.kmipTag, NistKeyType.encodingType, String.class, value -> new NistKeyType(NistKeyType.fromName(value)));
+        super(NistKeyType.kmipTag, NistKeyType.encodingType, String.class, value -> NistKeyType.fromName(value).inst());
     }
 }

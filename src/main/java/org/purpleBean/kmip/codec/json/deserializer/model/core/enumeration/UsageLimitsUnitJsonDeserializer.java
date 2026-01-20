@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 public class UsageLimitsUnitJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<UsageLimitsUnit, String> {
 
     public UsageLimitsUnitJsonDeserializer() {
-        super(UsageLimitsUnit.kmipTag, UsageLimitsUnit.encodingType, String.class, value -> new UsageLimitsUnit(UsageLimitsUnit.fromName(value)));
+        super(UsageLimitsUnit.kmipTag, UsageLimitsUnit.encodingType, String.class, value -> UsageLimitsUnit.fromName(value).inst());
     }
 }

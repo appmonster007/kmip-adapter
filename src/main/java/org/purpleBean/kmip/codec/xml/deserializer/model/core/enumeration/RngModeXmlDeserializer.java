@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RngMode;
 public class RngModeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RngMode, String> {
 
     public RngModeXmlDeserializer() {
-        super(RngMode.kmipTag, RngMode.encodingType, String.class, value -> new RngMode(RngMode.fromName(value)));
+        super(RngMode.kmipTag, RngMode.encodingType, String.class, value -> RngMode.fromName(value).inst());
     }
 }

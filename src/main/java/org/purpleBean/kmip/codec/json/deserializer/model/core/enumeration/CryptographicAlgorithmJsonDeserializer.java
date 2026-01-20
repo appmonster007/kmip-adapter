@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
 public class CryptographicAlgorithmJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<CryptographicAlgorithm, String> {
 
     public CryptographicAlgorithmJsonDeserializer() {
-        super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType, String.class, value -> new CryptographicAlgorithm(CryptographicAlgorithm.fromName(value)));
+        super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType, String.class, value -> CryptographicAlgorithm.fromName(value).inst());
     }
 }

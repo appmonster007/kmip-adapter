@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.LinkType;
 public class LinkTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<LinkType, Integer> {
 
     public LinkTypeTtlvDeserializer() {
-        super(LinkType.kmipTag, LinkType.encodingType, Integer.class, value -> new LinkType(LinkType.fromValue(value)));
+        super(LinkType.kmipTag, LinkType.encodingType, Integer.class, value -> LinkType.fromValue(value).inst());
     }
 }

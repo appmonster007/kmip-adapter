@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.AsynchronousIndicator;
 public class AsynchronousIndicatorJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<AsynchronousIndicator, String> {
 
     public AsynchronousIndicatorJsonDeserializer() {
-        super(AsynchronousIndicator.kmipTag, AsynchronousIndicator.encodingType, String.class, value -> new AsynchronousIndicator(AsynchronousIndicator.fromName(value)));
+        super(AsynchronousIndicator.kmipTag, AsynchronousIndicator.encodingType, String.class, value -> AsynchronousIndicator.fromName(value).inst());
     }
 }

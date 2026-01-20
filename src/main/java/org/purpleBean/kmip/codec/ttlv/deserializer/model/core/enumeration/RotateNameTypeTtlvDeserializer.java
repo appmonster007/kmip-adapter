@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RotateNameType;
 public class RotateNameTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RotateNameType, Integer> {
 
     public RotateNameTypeTtlvDeserializer() {
-        super(RotateNameType.kmipTag, RotateNameType.encodingType, Integer.class, value -> new RotateNameType(RotateNameType.fromValue(value)));
+        super(RotateNameType.kmipTag, RotateNameType.encodingType, Integer.class, value -> RotateNameType.fromValue(value).inst());
     }
 }

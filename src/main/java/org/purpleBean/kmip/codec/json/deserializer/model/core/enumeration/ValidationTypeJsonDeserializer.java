@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ValidationType;
 public class ValidationTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ValidationType, String> {
 
     public ValidationTypeJsonDeserializer() {
-        super(ValidationType.kmipTag, ValidationType.encodingType, String.class, value -> new ValidationType(ValidationType.fromName(value)));
+        super(ValidationType.kmipTag, ValidationType.encodingType, String.class, value -> ValidationType.fromName(value).inst());
     }
 }

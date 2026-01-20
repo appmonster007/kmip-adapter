@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.LinkType;
 public class LinkTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<LinkType, String> {
 
     public LinkTypeJsonDeserializer() {
-        super(LinkType.kmipTag, LinkType.encodingType, String.class, value -> new LinkType(LinkType.fromName(value)));
+        super(LinkType.kmipTag, LinkType.encodingType, String.class, value -> LinkType.fromName(value).inst());
     }
 }

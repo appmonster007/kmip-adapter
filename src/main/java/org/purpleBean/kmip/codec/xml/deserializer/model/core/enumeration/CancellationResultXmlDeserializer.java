@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CancellationResult;
 public class CancellationResultXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CancellationResult, String> {
 
     public CancellationResultXmlDeserializer() {
-        super(CancellationResult.kmipTag, CancellationResult.encodingType, String.class, value -> new CancellationResult(CancellationResult.fromName(value)));
+        super(CancellationResult.kmipTag, CancellationResult.encodingType, String.class, value -> CancellationResult.fromName(value).inst());
     }
 }

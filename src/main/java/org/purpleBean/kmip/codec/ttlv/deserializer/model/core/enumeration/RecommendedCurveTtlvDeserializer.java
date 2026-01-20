@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 public class RecommendedCurveTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RecommendedCurve, Integer> {
 
     public RecommendedCurveTtlvDeserializer() {
-        super(RecommendedCurve.kmipTag, RecommendedCurve.encodingType, Integer.class, value -> new RecommendedCurve(RecommendedCurve.fromValue(value)));
+        super(RecommendedCurve.kmipTag, RecommendedCurve.encodingType, Integer.class, value -> RecommendedCurve.fromValue(value).inst());
     }
 }

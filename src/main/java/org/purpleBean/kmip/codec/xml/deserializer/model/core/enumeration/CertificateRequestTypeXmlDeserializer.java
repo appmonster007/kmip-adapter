@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CertificateRequestType;
 public class CertificateRequestTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CertificateRequestType, String> {
 
     public CertificateRequestTypeXmlDeserializer() {
-        super(CertificateRequestType.kmipTag, CertificateRequestType.encodingType, String.class, value -> new CertificateRequestType(CertificateRequestType.fromName(value)));
+        super(CertificateRequestType.kmipTag, CertificateRequestType.encodingType, String.class, value -> CertificateRequestType.fromName(value).inst());
     }
 }

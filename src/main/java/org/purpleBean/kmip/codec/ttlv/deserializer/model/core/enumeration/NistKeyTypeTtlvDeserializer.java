@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.NistKeyType;
 public class NistKeyTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<NistKeyType, Integer> {
 
     public NistKeyTypeTtlvDeserializer() {
-        super(NistKeyType.kmipTag, NistKeyType.encodingType, Integer.class, value -> new NistKeyType(NistKeyType.fromValue(value)));
+        super(NistKeyType.kmipTag, NistKeyType.encodingType, Integer.class, value -> NistKeyType.fromValue(value).inst());
     }
 }

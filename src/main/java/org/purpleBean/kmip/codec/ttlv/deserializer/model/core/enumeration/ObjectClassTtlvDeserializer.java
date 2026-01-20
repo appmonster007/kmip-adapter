@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectClass;
 public class ObjectClassTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ObjectClass, Integer> {
 
     public ObjectClassTtlvDeserializer() {
-        super(ObjectClass.kmipTag, ObjectClass.encodingType, Integer.class, value -> new ObjectClass(ObjectClass.fromValue(value)));
+        super(ObjectClass.kmipTag, ObjectClass.encodingType, Integer.class, value -> ObjectClass.fromValue(value).inst());
     }
 }

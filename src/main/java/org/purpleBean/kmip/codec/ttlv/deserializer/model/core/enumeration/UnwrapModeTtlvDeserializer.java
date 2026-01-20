@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.UnwrapMode;
 public class UnwrapModeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<UnwrapMode, Integer> {
 
     public UnwrapModeTtlvDeserializer() {
-        super(UnwrapMode.kmipTag, UnwrapMode.encodingType, Integer.class, value -> new UnwrapMode(UnwrapMode.fromValue(value)));
+        super(UnwrapMode.kmipTag, UnwrapMode.encodingType, Integer.class, value -> UnwrapMode.fromValue(value).inst());
     }
 }

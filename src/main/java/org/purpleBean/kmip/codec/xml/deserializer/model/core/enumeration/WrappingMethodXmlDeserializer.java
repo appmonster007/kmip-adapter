@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
 public class WrappingMethodXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<WrappingMethod, String> {
 
     public WrappingMethodXmlDeserializer() {
-        super(WrappingMethod.kmipTag, WrappingMethod.encodingType, String.class, value -> new WrappingMethod(WrappingMethod.fromName(value)));
+        super(WrappingMethod.kmipTag, WrappingMethod.encodingType, String.class, value -> WrappingMethod.fromName(value).inst());
     }
 }

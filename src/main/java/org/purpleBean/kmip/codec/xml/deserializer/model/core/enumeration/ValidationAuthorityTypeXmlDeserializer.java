@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ValidationAuthorityType;
 public class ValidationAuthorityTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ValidationAuthorityType, String> {
 
     public ValidationAuthorityTypeXmlDeserializer() {
-        super(ValidationAuthorityType.kmipTag, ValidationAuthorityType.encodingType, String.class, value -> new ValidationAuthorityType(ValidationAuthorityType.fromName(value)));
+        super(ValidationAuthorityType.kmipTag, ValidationAuthorityType.encodingType, String.class, value -> ValidationAuthorityType.fromName(value).inst());
     }
 }

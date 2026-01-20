@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ClientRegistrationMethod;
 public class ClientRegistrationMethodJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ClientRegistrationMethod, String> {
 
     public ClientRegistrationMethodJsonDeserializer() {
-        super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType, String.class, value -> new ClientRegistrationMethod(ClientRegistrationMethod.fromName(value)));
+        super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType, String.class, value -> ClientRegistrationMethod.fromName(value).inst());
     }
 }

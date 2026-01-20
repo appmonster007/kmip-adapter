@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
 public class RngAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RngAlgorithm, Integer> {
 
     public RngAlgorithmTtlvDeserializer() {
-        super(RngAlgorithm.kmipTag, RngAlgorithm.encodingType, Integer.class, value -> new RngAlgorithm(RngAlgorithm.fromValue(value)));
+        super(RngAlgorithm.kmipTag, RngAlgorithm.encodingType, Integer.class, value -> RngAlgorithm.fromValue(value).inst());
     }
 }
