@@ -261,3 +261,4 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RegisterOpRe
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RequestBatchItemBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RequestHeaderBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RequestMessageBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadBenchmarkSubject

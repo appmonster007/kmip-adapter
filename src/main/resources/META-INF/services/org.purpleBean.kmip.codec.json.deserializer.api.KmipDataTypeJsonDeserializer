@@ -276,3 +276,4 @@ org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.Registe
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestBatchItemJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestHeaderJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestMessageJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadJsonDeserializer

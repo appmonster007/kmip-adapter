@@ -266,3 +266,4 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RegisterO
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestBatchItemTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestHeaderTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestMessageTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvSerializer

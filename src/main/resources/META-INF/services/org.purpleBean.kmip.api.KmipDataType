@@ -266,3 +266,4 @@ org.purpleBean.kmip.model.v1_2.structure.request.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
 org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
 org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage
+org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload

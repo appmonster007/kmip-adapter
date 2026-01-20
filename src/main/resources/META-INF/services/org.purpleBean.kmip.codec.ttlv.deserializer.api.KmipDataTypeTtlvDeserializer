@@ -276,3 +276,4 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.Registe
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestMessageTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvDeserializer

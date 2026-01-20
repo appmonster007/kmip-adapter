@@ -276,3 +276,4 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.Register
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestBatchItemXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestHeaderXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.RequestMessageXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadXmlDeserializer
