@@ -8,6 +8,7 @@ import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;

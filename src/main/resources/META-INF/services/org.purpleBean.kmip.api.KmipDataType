@@ -258,11 +258,11 @@ org.purpleBean.kmip.model.core.type.ValidityDate
 org.purpleBean.kmip.model.core.type.VendorIdentification
 org.purpleBean.kmip.model.core.type.X
 org.purpleBean.kmip.model.core.type.Y
-org.purpleBean.kmip.model.v1_2.structure.request.CreateKeyPairOpRequestPayload
-org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload
-org.purpleBean.kmip.model.v1_2.structure.request.GetOpRequestPayload
-org.purpleBean.kmip.model.v1_2.structure.request.ReKeyOpRequestPayload
-org.purpleBean.kmip.model.v1_2.structure.request.RegisterOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
 org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
 org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage

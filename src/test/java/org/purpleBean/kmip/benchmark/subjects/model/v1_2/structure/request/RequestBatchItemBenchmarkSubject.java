@@ -7,7 +7,7 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 
 public class RequestBatchItemBenchmarkSubject extends KmipBenchmarkSubject<RequestBatchItem> {

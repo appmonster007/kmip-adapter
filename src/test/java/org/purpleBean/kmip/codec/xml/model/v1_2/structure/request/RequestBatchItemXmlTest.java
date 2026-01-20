@@ -6,8 +6,8 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1_2.structure.request.CreateOpRequestPayload;
-import org.purpleBean.kmip.model.v1_2.structure.request.GetOpRequestPayload;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 

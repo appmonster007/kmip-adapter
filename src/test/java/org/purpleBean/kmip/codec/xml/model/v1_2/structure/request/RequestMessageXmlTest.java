@@ -9,6 +9,8 @@ import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.*;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RequestMessage Xml Serialization Tests")
