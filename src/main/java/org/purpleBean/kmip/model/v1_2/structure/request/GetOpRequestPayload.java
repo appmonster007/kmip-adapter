@@ -112,7 +112,7 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
     }
 
     @Override
-    public Operation getSupportedOperation() {
+    public Operation getCorrespondingOperation() {
         return operation.inst();
     }
 }

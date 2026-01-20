@@ -81,7 +81,7 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     private void validate() {
         Objects.requireNonNull(operation, "Operation cannot be null");
         Objects.requireNonNull(requestPayloadStructure, "RequestPayloadStructure cannot be null");
-        if (!requestPayloadStructure.getSupportedOperation().equals(operation)) {
+        if (!requestPayloadStructure.getCorrespondingOperation().equals(operation)) {
             throw new IllegalArgumentException("Operation and RequestPayloadStructure do not match");
         }
     }

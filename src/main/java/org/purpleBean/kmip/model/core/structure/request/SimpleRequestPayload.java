@@ -58,7 +58,7 @@ public class SimpleRequestPayload implements RequestPayloadStructure {
     }
 
     @Override
-    public Operation getSupportedOperation() {
+    public Operation getCorrespondingOperation() {
         return null;
     }
 }
