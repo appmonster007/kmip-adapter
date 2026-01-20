@@ -270,5 +270,6 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RegisterOpResponsePayload
