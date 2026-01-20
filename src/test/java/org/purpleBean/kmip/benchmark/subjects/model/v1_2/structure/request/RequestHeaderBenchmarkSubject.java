@@ -1,6 +1,7 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request;
 
 import lombok.Getter;
+import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
@@ -15,6 +16,7 @@ public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestH
     private final KmipSpec spec = KmipSpec.V1_2;
 
     public RequestHeaderBenchmarkSubject() throws Exception {
+        KmipContext.setSpec(getSpec());
         RequestHeader subject = RequestHeader.builder()
                 .protocolVersion(ProtocolVersion.builder()
                         .protocolVersionMajor(ProtocolVersionMajor.of(1))
@@ -23,6 +25,7 @@ public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestH
                 .batchCount(BatchCount.of(1))
                 .build();
         initialize(subject, RequestHeader.class);
+        KmipContext.clear();
     }
 
     @Override
