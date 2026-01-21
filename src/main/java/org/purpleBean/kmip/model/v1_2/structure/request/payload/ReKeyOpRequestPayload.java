@@ -65,8 +65,8 @@ public class ReKeyOpRequestPayload implements RequestPayloadStructure {
         if (map.containsKey(UniqueIdentifier.kmipTag)) {
             builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
         }
-        if (map.containsKey(KmipTag.Standard.OFFSET)) {
-            builder.offset((Offset) map.get(KmipTag.Standard.OFFSET).getFirst());
+        if (map.containsKey(Offset.kmipTag)) {
+            builder.offset((Offset) map.get(Offset.kmipTag).getFirst());
         }
         if (map.containsKey(TemplateAttribute.kmipTag)) {
             builder.templateAttribute((TemplateAttribute) map.get(TemplateAttribute.kmipTag).getFirst());
