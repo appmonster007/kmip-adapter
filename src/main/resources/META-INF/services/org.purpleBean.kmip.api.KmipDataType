@@ -77,6 +77,7 @@ org.purpleBean.kmip.model.core.structure.CredentialValueGenericStructure
 org.purpleBean.kmip.model.core.structure.CryptographicDomainParameters
 org.purpleBean.kmip.model.core.structure.CryptographicParameters
 org.purpleBean.kmip.model.core.structure.CustomAttribute
+org.purpleBean.kmip.model.core.structure.DerivationParameters
 org.purpleBean.kmip.model.core.structure.DeviceCredential
 org.purpleBean.kmip.model.core.structure.Digest
 org.purpleBean.kmip.model.core.structure.EncryptionKeyInformation
