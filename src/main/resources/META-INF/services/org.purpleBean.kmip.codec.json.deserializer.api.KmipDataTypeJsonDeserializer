@@ -281,6 +281,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.RecertifyOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.CertifyOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadJsonDeserializer
@@ -288,4 +289,5 @@ org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.RecertifyOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadJsonDeserializer
