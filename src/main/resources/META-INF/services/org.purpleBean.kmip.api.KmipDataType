@@ -264,6 +264,7 @@ org.purpleBean.kmip.model.core.type.Y
 org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
 org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
 org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage
+org.purpleBean.kmip.model.v1_2.structure.request.payload.CertifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayload
@@ -271,6 +272,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.CertifyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
