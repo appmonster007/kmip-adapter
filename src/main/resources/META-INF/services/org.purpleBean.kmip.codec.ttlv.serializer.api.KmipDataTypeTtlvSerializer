@@ -271,6 +271,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.R
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.CreateOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadTtlvSerializer
