@@ -1,0 +1,86 @@
+package org.purpleBean.kmip.model.v1_2.structure.response.payload;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.Singular;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Data
+@Builder(toBuilder = true)
+public class LocateOpResponsePayload implements ResponsePayloadStructure {
+
+    private static final Operation.Value operation = Operation.Standard.LOCATE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, LocateOpResponsePayload.class);
+            ResponsePayloadStructure.register(spec, operation, LocateOpResponsePayload.class, LocateOpResponsePayload::of);
+        }
+    }
+
+    @Singular
+    private final List<UniqueIdentifier> uniqueIdentifiers;
+
+    @Builder
+    private LocateOpResponsePayload(
+            List<UniqueIdentifier> uniqueIdentifiers
+    ) {
+        this.uniqueIdentifiers = (uniqueIdentifiers == null) ? Collections.emptyList() : uniqueIdentifiers;
+        validate();
+    }
+
+    public static LocateOpResponsePayload of(List<KmipDataType> values) {
+        var builder = LocateOpResponsePayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            map.get(UniqueIdentifier.kmipTag).forEach(item -> builder.uniqueIdentifier((UniqueIdentifier) item));
+        }
+        return builder.build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // Add validation logic here
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        return Stream.of(uniqueIdentifiers)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Operation getCorrespondingOperation() {
+        return operation.inst();
+    }
+}

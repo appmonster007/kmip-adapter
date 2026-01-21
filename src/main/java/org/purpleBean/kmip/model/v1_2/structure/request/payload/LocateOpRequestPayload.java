@@ -1,0 +1,111 @@
+package org.purpleBean.kmip.model.v1_2.structure.request.payload;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.Singular;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.Attribute;
+import org.purpleBean.kmip.model.core.type.MaximumItems;
+import org.purpleBean.kmip.model.core.type.StorageStatusMask;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Data
+@Builder(toBuilder = true)
+public class LocateOpRequestPayload implements RequestPayloadStructure {
+
+    private static final Operation.Value operation = Operation.Standard.LOCATE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, LocateOpRequestPayload.class);
+            RequestPayloadStructure.register(spec, operation, LocateOpRequestPayload.class, LocateOpRequestPayload::of);
+        }
+    }
+
+    private final MaximumItems maximumItems;
+    private final StorageStatusMask storageStatusMask;
+    private final ObjectGroupMember objectGroupMember;
+    @Singular
+    private final List<Attribute> attributes;
+
+    @Builder
+    private LocateOpRequestPayload(
+            MaximumItems maximumItems,
+            StorageStatusMask storageStatusMask,
+            ObjectGroupMember objectGroupMember,
+            List<Attribute> attributes
+    ) {
+        this.maximumItems = maximumItems;
+        this.storageStatusMask = storageStatusMask;
+        this.objectGroupMember = objectGroupMember;
+        this.attributes = (attributes == null) ? Collections.emptyList() : attributes;
+        validate();
+    }
+
+    public static LocateOpRequestPayload of(List<KmipDataType> values) {
+        var builder = LocateOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(MaximumItems.kmipTag)) {
+            builder.maximumItems((MaximumItems) map.get(MaximumItems.kmipTag).getFirst());
+        }
+        if (map.containsKey(StorageStatusMask.kmipTag)) {
+            builder.storageStatusMask((StorageStatusMask) map.get(StorageStatusMask.kmipTag).getFirst());
+        }
+        if (map.containsKey(ObjectGroupMember.kmipTag)) {
+            builder.objectGroupMember((ObjectGroupMember) map.get(ObjectGroupMember.kmipTag).getFirst());
+        }
+        if (map.containsKey(Attribute.kmipTag)) {
+            map.get(Attribute.kmipTag).forEach(item -> builder.attribute((Attribute) item));
+        }
+        return builder.build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // Add validation logic here
+    }
+
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public List<KmipDataType> getValues() {
+        return Stream.of(
+                        maximumItems,
+                        storageStatusMask,
+                        objectGroupMember,
+                        attributes)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Operation getCorrespondingOperation() {
+        return operation.inst();
+    }
+}
