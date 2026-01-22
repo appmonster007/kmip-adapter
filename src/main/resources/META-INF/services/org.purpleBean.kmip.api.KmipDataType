@@ -284,6 +284,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.GetUsageAllocationOpReq
 org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.PollOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.QueryOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
