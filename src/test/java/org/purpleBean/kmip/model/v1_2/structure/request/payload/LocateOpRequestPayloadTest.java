@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.type.MaximumItems;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -25,7 +26,9 @@ class LocateOpRequestPayloadTest extends AbstractKmipStructureTestSuite<LocateOp
 
     @Override
     protected LocateOpRequestPayload createDefault() {
-        return LocateOpRequestPayload.builder().build();
+        return LocateOpRequestPayload.builder()
+                .maximumItems(MaximumItems.of(100))
+                .build();
     }
 
     @Override
@@ -35,11 +38,12 @@ class LocateOpRequestPayloadTest extends AbstractKmipStructureTestSuite<LocateOp
 
     @Override
     protected int expectedMinComponentCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values).isEmpty();
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(MaximumItems.class);
     }
 }

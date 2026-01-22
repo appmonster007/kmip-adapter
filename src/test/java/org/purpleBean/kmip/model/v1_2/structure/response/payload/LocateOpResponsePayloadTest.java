@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -25,7 +26,9 @@ class LocateOpResponsePayloadTest extends AbstractKmipStructureTestSuite<LocateO
 
     @Override
     protected LocateOpResponsePayload createDefault() {
-        return LocateOpResponsePayload.builder().build();
+        return LocateOpResponsePayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.of("12345"))
+                .build();
     }
 
     @Override
@@ -35,11 +38,12 @@ class LocateOpResponsePayloadTest extends AbstractKmipStructureTestSuite<LocateO
 
     @Override
     protected int expectedMinComponentCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values).isEmpty();
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(UniqueIdentifier.class);
     }
 }

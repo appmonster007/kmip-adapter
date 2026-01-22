@@ -2,6 +2,12 @@ package org.purpleBean.kmip.codec.xml.model.v1_2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
+import org.purpleBean.kmip.model.core.structure.Attribute;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.MaximumItems;
+import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
@@ -20,11 +26,21 @@ class LocateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Lo
 
     @Override
     protected LocateOpRequestPayload createDefault() {
-        return LocateOpRequestPayload.builder().build();
+        return LocateOpRequestPayload.builder()
+                .maximumItems(MaximumItems.of(10))
+                .storageStatusMask(StorageStatusMask.of(1))
+                .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
+                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValueTextString.of("test-value")))
+                .build();
     }
 
     @Override
     protected LocateOpRequestPayload createVariant() {
-        return LocateOpRequestPayload.builder().build();
+        return LocateOpRequestPayload.builder()
+                .maximumItems(MaximumItems.of(20))
+                .storageStatusMask(StorageStatusMask.of(2))
+                .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT))
+                .attribute(Attribute.of(AttributeName.of("test-attribute-2"), AttributeValueTextString.of("test-value-2")))
+                .build();
     }
 }
