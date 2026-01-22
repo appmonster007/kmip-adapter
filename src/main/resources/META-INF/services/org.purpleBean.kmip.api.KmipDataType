@@ -273,6 +273,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.CertifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.DecryptOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeleteAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DestroyOpRequestPayload
@@ -302,6 +303,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.CertifyOpResponsePaylo
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CheckOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.DecryptOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeleteAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DestroyOpResponsePayload
