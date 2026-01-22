@@ -264,6 +264,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.YTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestBatchItemTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestHeaderTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestMessageTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.ActivateOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.AddAttributeOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.CertifyOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.CheckOpRequestPayloadTtlvSerializer
@@ -282,6 +283,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.R
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.RecertifyOpRequestPayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.RegisterOpRequestPayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload.RevokeOpRequestPayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ActivateOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.AddAttributeOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.CertifyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.CheckOpResponsePayloadTtlvSerializer
@@ -300,3 +303,4 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.RecertifyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.RegisterOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.RevokeOpResponsePayloadTtlvSerializer
