@@ -103,6 +103,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.PublicKeyTemplateAtt
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.RevocationReasonBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SampleStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SecretDataBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.ServerInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SplitKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.SymmetricKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TemplateAttributeBenchmarkSubject
@@ -269,6 +270,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.Crea
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.DeleteAttributeOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.DestroyOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.DiscoverVersionsOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetAttributeListOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetAttributesOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetOpRequestPayloadBenchmarkSubject
@@ -276,6 +278,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetU
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.LocateOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.QueryOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.RecertifyOpRequestPayloadBenchmarkSubject
@@ -293,6 +296,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.Cre
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.DeleteAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.DestroyOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.DiscoverVersionsOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.GetAttributeListOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.GetAttributesOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.GetOpResponsePayloadBenchmarkSubject
@@ -300,6 +304,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.Get
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.LocateOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ModifyAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ObtainLeaseOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.QueryOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.RecertifyOpResponsePayloadBenchmarkSubject

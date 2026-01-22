@@ -103,6 +103,7 @@ org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute
 org.purpleBean.kmip.model.core.structure.RevocationReason
 org.purpleBean.kmip.model.core.structure.SampleStructure
 org.purpleBean.kmip.model.core.structure.SecretData
+org.purpleBean.kmip.model.core.structure.ServerInformation
 org.purpleBean.kmip.model.core.structure.SplitKey
 org.purpleBean.kmip.model.core.structure.SymmetricKey
 org.purpleBean.kmip.model.core.structure.Template
@@ -274,6 +275,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeleteAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DestroyOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.DiscoverVersionsOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributeListOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributesOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
@@ -281,6 +283,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.GetUsageAllocationOpReq
 org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.QueryOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RecertifyOpRequestPayload
@@ -298,6 +301,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayloa
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeleteAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DestroyOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.DiscoverVersionsOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributeListOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributesOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetOpResponsePayload
@@ -305,6 +309,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.GetUsageAllocationOpRe
 org.purpleBean.kmip.model.v1_2.structure.response.payload.LocateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ModifyAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ObtainLeaseOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.QueryOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePayload
