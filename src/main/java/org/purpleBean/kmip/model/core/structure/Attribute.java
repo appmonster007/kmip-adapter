@@ -49,6 +49,14 @@ public class Attribute implements KmipStructure {
         return Attribute.of(CustomAttribute.of(name, value));
     }
 
+    public static Attribute of(AttributeName name, AttributeValue value) {
+        return Attribute.builder()
+                .attributeName(name)
+                .attributeIndex(AttributeIndex.of(0))
+                .attributeValue(value)
+                .build();
+    }
+
     public static Attribute of(@NonNull KmipAttribute attribute) {
         return Attribute.builder()
                 .attributeName(attribute.getAttributeName())
