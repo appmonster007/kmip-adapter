@@ -6,6 +6,7 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -61,5 +62,19 @@ public class ValidityDate implements KmipDataType {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ValidityDate that = (ValidityDate) o;
+        // Compare OffsetDateTime up to seconds to avoid flakiness
+        return this.value.withNano(0).equals(that.value.withNano(0));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value.withNano(0));
     }
 }

@@ -282,8 +282,10 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPay
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RecertifyOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.RecoverOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RevokeOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.ValidateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ActivateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.AddAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CertifyOpResponsePayload
@@ -302,5 +304,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.ObtainLeaseOpResponseP
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.RecoverOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RegisterOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RevokeOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.ValidateOpResponsePayload
