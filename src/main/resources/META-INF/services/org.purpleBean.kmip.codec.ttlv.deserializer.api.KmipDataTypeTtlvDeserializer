@@ -284,8 +284,10 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetAttributeListOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetAttributesOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetOpRequestPayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.GetUsageAllocationOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.LocateOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.ReKeyOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload.RecertifyOpRequestPayloadTtlvDeserializer
@@ -300,8 +302,10 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.GetAttributeListOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.GetAttributesOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.GetOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.GetUsageAllocationOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.LocateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ModifyAttributeOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ObtainLeaseOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.RecertifyOpResponsePayloadTtlvDeserializer
