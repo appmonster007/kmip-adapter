@@ -39,6 +39,10 @@ public class DataByteString implements KmipDataType {
         return DataByteString.builder().value(value).build();
     }
 
+    public static DataByteString of(byte[] value) {
+        return DataByteString.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
