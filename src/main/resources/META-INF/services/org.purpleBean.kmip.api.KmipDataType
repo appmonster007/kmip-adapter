@@ -269,6 +269,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributesOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload
@@ -280,6 +281,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.CheckOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributesOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.LocateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayload
