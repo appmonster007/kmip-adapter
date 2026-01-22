@@ -290,6 +290,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.CreateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.GetOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.LocateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadTtlvDeserializer

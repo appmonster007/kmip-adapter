@@ -280,6 +280,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.CheckOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.GetOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.LocateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponsePayload

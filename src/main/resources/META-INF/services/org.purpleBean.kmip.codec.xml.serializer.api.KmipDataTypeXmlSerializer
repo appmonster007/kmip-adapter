@@ -280,6 +280,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.C
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.CreateOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayloadXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.GetOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.LocateOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.ReKeyKeyPairOpResponsePayloadXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.payload.ReKeyOpResponsePayloadXmlSerializer
