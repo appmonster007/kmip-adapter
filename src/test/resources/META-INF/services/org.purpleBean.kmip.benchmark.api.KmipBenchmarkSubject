@@ -263,6 +263,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.RequestMessa
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ActivateOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.AddAttributeOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ArchiveOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.CancelOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.CertifyOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.CheckOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayloadBenchmarkSubject
@@ -289,6 +290,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.Vali
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ActivateOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.AddAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ArchiveOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.CancelOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.CertifyOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.CheckOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayloadBenchmarkSubject

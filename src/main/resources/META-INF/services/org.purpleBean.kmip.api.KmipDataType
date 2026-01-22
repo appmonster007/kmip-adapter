@@ -268,6 +268,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ActivateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.AddAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ArchiveOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.CancelOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CertifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
@@ -294,6 +295,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.ValidateOpRequestPayloa
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ActivateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.AddAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ArchiveOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.CancelOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CertifyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CheckOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload

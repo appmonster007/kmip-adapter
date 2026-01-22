@@ -1,0 +1,36 @@
+package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.payload;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.CancelOpRequestPayload;
+
+import java.io.IOException;
+
+public class CancelOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<CancelOpRequestPayload, CancelOpRequestPayload.CancelOpRequestPayloadBuilder> {
+
+    public CancelOpRequestPayloadXmlDeserializer() {
+        super(CancelOpRequestPayload.kmipTag);
+    }
+
+    @Override
+    protected CancelOpRequestPayload.CancelOpRequestPayloadBuilder createBuilder() {
+        return CancelOpRequestPayload.builder();
+    }
+
+    @Override
+    protected void setValue(CancelOpRequestPayload.CancelOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+        if (nodeTag.equals(KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE)) {
+            builder.asynchronousCorrelationValue(ctxt.readValue(p, AsynchronousCorrelationValue.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
+    }
+
+    @Override
+    protected CancelOpRequestPayload build(CancelOpRequestPayload.CancelOpRequestPayloadBuilder builder) {
+        return builder.build();
+    }
+}
