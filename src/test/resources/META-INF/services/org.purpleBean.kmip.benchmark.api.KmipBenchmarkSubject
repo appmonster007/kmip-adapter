@@ -279,6 +279,8 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetA
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.GetUsageAllocationOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.LocateOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.MacOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.MacVerifyOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.PollOpRequestPayloadBenchmarkSubject
@@ -311,6 +313,8 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.Get
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.GetOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.GetUsageAllocationOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.LocateOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.MacOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.MacVerifyOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ModifyAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ObtainLeaseOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.QueryOpResponsePayloadBenchmarkSubject

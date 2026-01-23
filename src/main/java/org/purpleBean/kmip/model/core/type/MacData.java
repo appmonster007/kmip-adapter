@@ -39,6 +39,10 @@ public class MacData implements KmipDataType {
         return MacData.builder().value(value).build();
     }
 
+    public static MacData of(byte[] value) {
+        return MacData.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
