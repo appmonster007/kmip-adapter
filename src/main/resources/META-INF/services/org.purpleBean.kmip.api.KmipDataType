@@ -273,6 +273,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.CertifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateSplitKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DecryptOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeleteAttributeOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpRequestPayload
@@ -284,6 +285,7 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributesOpRequestP
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.GetUsageAllocationOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.HashOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.JoinSplitKeyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.MacOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.MacVerifyOpRequestPayload
@@ -310,6 +312,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.CertifyOpResponsePaylo
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CheckOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateSplitKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DecryptOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeleteAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResponsePayload
@@ -321,6 +324,7 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributesOpRespons
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.GetUsageAllocationOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.JoinSplitKeyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.LocateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.MacOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.MacVerifyOpResponsePayload
