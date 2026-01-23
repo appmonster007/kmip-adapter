@@ -39,6 +39,10 @@ public class SignatureData implements KmipDataType {
         return SignatureData.builder().value(value).build();
     }
 
+    public static SignatureData of(byte[] value) {
+        return SignatureData.builder().value(ByteBuffer.wrap(value)).build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));

@@ -294,6 +294,8 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.RecertifyOpRequestPaylo
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RecoverOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.RevokeOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.SignOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.request.payload.SignatureVerifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ValidateOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ActivateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.AddAttributeOpResponsePayload
@@ -323,4 +325,6 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePay
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RecoverOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RegisterOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.RevokeOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponsePayload
+org.purpleBean.kmip.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ValidateOpResponsePayload
