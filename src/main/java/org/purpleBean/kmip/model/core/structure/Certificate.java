@@ -95,4 +95,9 @@ public class Certificate implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return List.of(certificateType, certificateValue);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

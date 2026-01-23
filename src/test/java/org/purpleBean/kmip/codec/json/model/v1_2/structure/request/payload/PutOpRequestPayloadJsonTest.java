@@ -1,0 +1,51 @@
+package org.purpleBean.kmip.codec.json.model.v1_2.structure.request.payload;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
+import org.purpleBean.kmip.model.core.enumeration.PutFunction;
+import org.purpleBean.kmip.model.core.structure.KeyBlock;
+import org.purpleBean.kmip.model.core.structure.SymmetricKey;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v1_2.structure.request.payload.PutOpRequestPayload;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+
+@DisplayName("PutOpRequestPayload Json Serialization Tests")
+class PutOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<PutOpRequestPayload> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
+
+    @Override
+    protected Class<PutOpRequestPayload> type() {
+        return PutOpRequestPayload.class;
+    }
+
+    @Override
+    protected PutOpRequestPayload createDefault() {
+        return PutOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+                .putFunction(PutFunction.of(PutFunction.Standard.NEW))
+                .managedObject(SymmetricKey.builder()
+                        .keyBlock(KeyBlock.builder()
+                                .keyFormatType(KeyFormatType.Standard.RAW.inst())
+                                .build())
+                        .build())
+                .build();
+    }
+
+    @Override
+    protected PutOpRequestPayload createVariant() {
+        return PutOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+                .putFunction(PutFunction.of(PutFunction.Standard.REPLACE))
+                .managedObject(SymmetricKey.builder()
+                        .keyBlock(KeyBlock.builder()
+                                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+                                .build())
+                        .build())
+                .build();
+    }
+}

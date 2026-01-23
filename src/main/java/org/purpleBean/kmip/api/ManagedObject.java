@@ -46,12 +46,12 @@ public interface ManagedObject extends KmipDataType {
      * This method should be called for each supported managed object type to enable dynamic
      * handling by the codec.
      *
-     * @param spec                 The {@link KmipSpec} version for which this mapping is valid.
-     * @param encodingType         The {@link EncodingType} of the managed object.
-     * @param objectTypeValue      The {@link ObjectType.Value} that specifies the type of the managed object.
-     * @param clazz                The {@link Class} that implements the specific managed object type.
-     * @param objectTypeBuilder    A {@link Function} that constructs an instance of the specific
-     *                             managed object type from a generic {@link ManagedObject} object.
+     * @param spec              The {@link KmipSpec} version for which this mapping is valid.
+     * @param encodingType      The {@link EncodingType} of the managed object.
+     * @param objectTypeValue   The {@link ObjectType.Value} that specifies the type of the managed object.
+     * @param clazz             The {@link Class} that implements the specific managed object type.
+     * @param objectTypeBuilder A {@link Function} that constructs an instance of the specific
+     *                          managed object type from a generic {@link ManagedObject} object.
      */
     static void register(
             KmipSpec spec,
@@ -88,6 +88,13 @@ public interface ManagedObject extends KmipDataType {
         KmipSpec spec = KmipContext.getSpec();
         return OBJECT_TYPE_BUILDER_REGISTRY.get(new RegistryKey(spec, encodingType, objectTypeValue));
     }
+
+    /**
+     * Returns the {@link ObjectType} of this managed object.
+     *
+     * @return the object type.
+     */
+    ObjectType getObjectType();
 
     /**
      * A composite key for the managed object registries, uniquely identifying a managed object

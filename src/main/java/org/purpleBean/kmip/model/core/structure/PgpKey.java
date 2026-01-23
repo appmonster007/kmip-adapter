@@ -94,4 +94,9 @@ public class PgpKey implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return List.of(pgpKeyVersion, keyBlock);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

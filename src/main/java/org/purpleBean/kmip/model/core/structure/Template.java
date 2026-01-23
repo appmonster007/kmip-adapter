@@ -71,4 +71,9 @@ public class Template implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return new ArrayList<>(attributes);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

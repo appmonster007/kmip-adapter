@@ -82,4 +82,9 @@ public class PublicKey implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return List.of(keyBlock);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

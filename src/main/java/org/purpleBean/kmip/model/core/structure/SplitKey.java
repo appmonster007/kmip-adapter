@@ -135,4 +135,9 @@ public class SplitKey implements ManagedObject, KmipStructure {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

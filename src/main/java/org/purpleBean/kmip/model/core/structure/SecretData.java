@@ -94,4 +94,9 @@ public class SecretData implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return List.of(secretDataType, keyBlock);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }

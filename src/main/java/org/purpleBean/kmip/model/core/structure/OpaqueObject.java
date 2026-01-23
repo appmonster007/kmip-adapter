@@ -95,4 +95,9 @@ public class OpaqueObject implements ManagedObject, KmipStructure {
     public List<KmipDataType> getValues() {
         return List.of(opaqueDataType, opaqueDataValue);
     }
+
+    @Override
+    public ObjectType getObjectType() {
+        return objectTypeValue.inst();
+    }
 }
