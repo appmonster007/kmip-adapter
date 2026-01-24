@@ -305,6 +305,9 @@ org.purpleBean.kmip.model.v1_2.structure.request.payload.RngSeedOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.SignOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.SignatureVerifyOpRequestPayload
 org.purpleBean.kmip.model.v1_2.structure.request.payload.ValidateOpRequestPayload
+org.purpleBean.kmip.model.v1_2.structure.response.ResponseBatchItem
+org.purpleBean.kmip.model.v1_2.structure.response.ResponseHeader
+org.purpleBean.kmip.model.v1_2.structure.response.ResponseMessage
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ActivateOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.AddAttributeOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ArchiveOpResponsePayload

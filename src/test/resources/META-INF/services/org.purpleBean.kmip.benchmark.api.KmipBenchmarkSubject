@@ -300,6 +300,9 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.RngS
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.SignOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.SignatureVerifyOpRequestPayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.request.payload.ValidateOpRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.ResponseBatchItemBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.ResponseHeaderBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.ResponseMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ActivateOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.AddAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ArchiveOpResponsePayloadBenchmarkSubject
