@@ -129,6 +129,10 @@ org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage
 org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload
+org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem
+org.purpleBean.kmip.model.core.structure.response.SimpleResponseHeader
+org.purpleBean.kmip.model.core.structure.response.SimpleResponseMessage
+org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload
 org.purpleBean.kmip.model.core.type.ActivationDate
 org.purpleBean.kmip.model.core.type.AlternativeNameValue
 org.purpleBean.kmip.model.core.type.ApplicationData

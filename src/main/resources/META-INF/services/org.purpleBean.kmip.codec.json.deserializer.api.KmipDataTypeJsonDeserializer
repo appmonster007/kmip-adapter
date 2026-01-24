@@ -139,6 +139,10 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleR
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestHeaderJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestMessageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.request.SimpleRequestPayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.response.SimpleResponseBatchItemJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.response.SimpleResponseHeaderJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.response.SimpleResponseMessageJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.structure.response.SimpleResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ActivationDateJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.AlternativeNameValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ApplicationDataJsonDeserializer

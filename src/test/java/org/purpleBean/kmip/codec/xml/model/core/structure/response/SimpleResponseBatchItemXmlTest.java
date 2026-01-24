@@ -1,0 +1,47 @@
+package org.purpleBean.kmip.codec.xml.model.core.structure.response;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.enumeration.ResultReason;
+import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
+import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
+import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
+import org.purpleBean.kmip.model.core.type.ResultMessage;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+
+@DisplayName("SimpleResponseBatchItem Xml Serialization Tests")
+class SimpleResponseBatchItemXmlTest extends AbstractXmlSerializationTestSuite<SimpleResponseBatchItem> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    protected Class<SimpleResponseBatchItem> type() {
+        return SimpleResponseBatchItem.class;
+    }
+
+    @Override
+    protected SimpleResponseBatchItem createDefault() {
+        return SimpleResponseBatchItem.builder()
+                .operation(Operation.of(Operation.Standard.CREATE))
+                .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+                .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
+                .resultMessage(ResultMessage.of("Success"))
+                .responsePayloadStructure(SimpleResponsePayload.builder().build())
+                .build();
+    }
+
+    @Override
+    protected SimpleResponseBatchItem createVariant() {
+        return SimpleResponseBatchItem.builder()
+                .operation(Operation.of(Operation.Standard.GET))
+                .resultStatus(ResultStatus.of(ResultStatus.Standard.OPERATION_FAILED))
+                .resultReason(ResultReason.of(ResultReason.Standard.PERMISSION_DENIED))
+                .resultMessage(ResultMessage.of("Failure"))
+                .responsePayloadStructure(SimpleResponsePayload.builder().build())
+                .build();
+    }
+}

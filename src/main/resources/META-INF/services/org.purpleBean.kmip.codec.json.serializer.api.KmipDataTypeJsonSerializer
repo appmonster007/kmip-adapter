@@ -129,6 +129,10 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.request.SimpleReq
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.request.SimpleRequestHeaderJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.request.SimpleRequestMessageJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.request.SimpleRequestPayloadJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.response.SimpleResponseBatchItemJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.response.SimpleResponseHeaderJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.response.SimpleResponseMessageJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.structure.response.SimpleResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.ActivationDateJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AlternativeNameValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.ApplicationDataJsonSerializer

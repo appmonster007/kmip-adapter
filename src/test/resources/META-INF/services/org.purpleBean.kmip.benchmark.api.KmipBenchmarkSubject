@@ -126,6 +126,10 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIdent
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateSubjectBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.request.SimpleRequestPayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.response.SimpleResponseBatchItemBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.response.SimpleResponseHeaderBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.response.SimpleResponseMessageBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.response.SimpleResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ActivationDateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AlternativeNameValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ApplicationDataBenchmarkSubject

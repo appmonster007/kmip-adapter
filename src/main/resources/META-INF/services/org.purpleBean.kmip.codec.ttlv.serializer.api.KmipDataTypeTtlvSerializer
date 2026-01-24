@@ -129,6 +129,10 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.request.SimpleReq
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.request.SimpleRequestHeaderTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.request.SimpleRequestMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.request.SimpleRequestPayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.response.SimpleResponseBatchItemTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.response.SimpleResponseHeaderTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.response.SimpleResponseMessageTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.response.SimpleResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ActivationDateTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AlternativeNameValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ApplicationDataTtlvSerializer
