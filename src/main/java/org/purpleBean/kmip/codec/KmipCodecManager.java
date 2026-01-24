@@ -79,16 +79,16 @@ public final class KmipCodecManager {
     public static JsonMapper createJsonMapper() {
         JsonMapper jsonMapper = new JsonMapper();
         jsonMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        jsonMapper.registerModule(new KmipJsonModule());
         jsonMapper.registerModule(new JavaTimeModule());
+        jsonMapper.registerModule(new KmipJsonModule());
         return jsonMapper;
     }
 
     public static XmlMapper createXmlMapper() {
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        xmlMapper.registerModule(new KmipXmlModule());
         xmlMapper.registerModule(new JavaTimeModule());
+        xmlMapper.registerModule(new KmipXmlModule());
         return xmlMapper;
     }
 
