@@ -19,7 +19,7 @@ public class PutOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<Pu
         PutOpRequestPayload subject = PutOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .putFunction(PutFunction.of(PutFunction.Standard.NEW))
-                .managedObject(SymmetricKey.builder()
+                .object(SymmetricKey.builder()
                         .keyBlock(KeyBlock.builder()
                                 .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
                                 .build())

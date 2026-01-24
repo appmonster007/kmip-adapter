@@ -32,7 +32,13 @@ public class RegisterOpRequestPayloadJsonDeserializer extends AbstractKmipStruct
             }
             case KmipTag.Standard.TEMPLATE_ATTRIBUTE ->
                     builder.templateAttribute(ctxt.readValue(p, TemplateAttribute.class));
-            default -> builder.object(ctxt.readValue(p, ManagedObject.class));
+            default -> {
+                if (ManagedObject.isManagedObject(nodeTag)) {
+                    builder.object(ctxt.readValue(p, ManagedObject.class));
+                } else {
+                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+                }
+            }
         }
     }
 

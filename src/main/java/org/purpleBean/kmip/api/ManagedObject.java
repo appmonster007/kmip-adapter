@@ -29,6 +29,12 @@ import java.util.function.Function;
 public interface ManagedObject extends KmipDataType {
 
     /**
+     * A registry mapping a KMIP tag value to the specific {@link KmipDataType} class
+     * that represents that managed object type.
+     */
+    Map<KmipTag.Value, Class<? extends KmipDataType>> OBJECT_TAG_REGISTRY = new ConcurrentHashMap<>();
+
+    /**
      * A registry mapping a unique key (KMIP spec, encoding type, object type) to the
      * specific {@link KmipDataType} class that represents that managed object type.
      */
@@ -47,6 +53,7 @@ public interface ManagedObject extends KmipDataType {
      * handling by the codec.
      *
      * @param spec              The {@link KmipSpec} version for which this mapping is valid.
+     * @param kmipTag           The {@link KmipTag.Value} of the managed object.
      * @param encodingType      The {@link EncodingType} of the managed object.
      * @param objectTypeValue   The {@link ObjectType.Value} that specifies the type of the managed object.
      * @param clazz             The {@link Class} that implements the specific managed object type.
@@ -55,13 +62,30 @@ public interface ManagedObject extends KmipDataType {
      */
     static void register(
             KmipSpec spec,
+            KmipTag.Value kmipTag,
             EncodingType encodingType,
             ObjectType.Value objectTypeValue,
             Class<? extends KmipDataType> clazz,
             Function<List<KmipDataType>, ? extends ManagedObject> objectTypeBuilder
     ) {
+        OBJECT_TAG_REGISTRY.put(kmipTag, clazz);
         OBJECT_TYPE_REGISTRY.put(new RegistryKey(spec, encodingType, objectTypeValue), clazz);
         OBJECT_TYPE_BUILDER_REGISTRY.put(new RegistryKey(spec, encodingType, objectTypeValue), objectTypeBuilder);
+    }
+
+    /**
+     * Retrieves the corresponding {@link KmipDataType} class from the registry based on
+     * the KMIP tag.
+     *
+     * @param kmipTag The {@link KmipTag.Value} of the managed object.
+     * @return The registered {@link Class}, or {@code null} if no mapping is found.
+     */
+    static Class<? extends KmipDataType> getClassFromRegistry(KmipTag.Value kmipTag) {
+        return OBJECT_TAG_REGISTRY.get(kmipTag);
+    }
+
+    static boolean isManagedObject(KmipTag.Value kmipTag) {
+        return OBJECT_TAG_REGISTRY.containsKey(kmipTag);
     }
 
     /**

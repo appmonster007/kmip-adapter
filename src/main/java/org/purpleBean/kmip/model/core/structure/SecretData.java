@@ -24,7 +24,7 @@ public class SecretData implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, SecretData.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, SecretData.class, SecretData::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, SecretData.class, SecretData::of);
         }
     }
 

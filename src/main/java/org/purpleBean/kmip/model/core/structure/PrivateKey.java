@@ -23,7 +23,7 @@ public class PrivateKey implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PrivateKey.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, PrivateKey.class, PrivateKey::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, PrivateKey.class, PrivateKey::of);
         }
     }
 

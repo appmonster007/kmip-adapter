@@ -3,9 +3,10 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.ManagedObject;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.PutFunction;
-import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.ReplacedUniqueIdentifier;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.PutOpRequestPayload;
@@ -31,16 +32,14 @@ public class PutOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXml
             case KmipTag.Standard.PUT_FUNCTION -> builder.putFunction(ctxt.readValue(p, PutFunction.class));
             case KmipTag.Standard.REPLACED_UNIQUE_IDENTIFIER ->
                     builder.replacedUniqueIdentifier(ctxt.readValue(p, ReplacedUniqueIdentifier.class));
-            case KmipTag.Standard.CERTIFICATE -> builder.managedObject(ctxt.readValue(p, Certificate.class));
-            case KmipTag.Standard.SYMMETRIC_KEY -> builder.managedObject(ctxt.readValue(p, SymmetricKey.class));
-            case KmipTag.Standard.PRIVATE_KEY -> builder.managedObject(ctxt.readValue(p, PrivateKey.class));
-            case KmipTag.Standard.PUBLIC_KEY -> builder.managedObject(ctxt.readValue(p, PublicKey.class));
-            case KmipTag.Standard.SPLIT_KEY -> builder.managedObject(ctxt.readValue(p, SplitKey.class));
-            case KmipTag.Standard.TEMPLATE -> builder.managedObject(ctxt.readValue(p, Template.class));
-            case KmipTag.Standard.SECRET_DATA -> builder.managedObject(ctxt.readValue(p, SecretData.class));
-            case KmipTag.Standard.OPAQUE_OBJECT -> builder.managedObject(ctxt.readValue(p, OpaqueObject.class));
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(ctxt.readValue(p, Attribute.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+            default -> {
+                if (ManagedObject.isManagedObject(nodeTag)) {
+                    builder.object(ctxt.readValue(p, ManagedObject.class));
+                } else {
+                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+                }
+            }
         }
     }
 

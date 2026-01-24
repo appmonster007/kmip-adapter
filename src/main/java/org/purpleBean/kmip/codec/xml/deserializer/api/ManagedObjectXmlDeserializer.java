@@ -21,11 +21,12 @@ public class ManagedObjectXmlDeserializer extends KmipDataTypeXmlDeserializer<Ma
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
         String ctxtObjectType = (String) ctxt.getAttribute("objectType");
         ObjectType.Value objectTypeValue;
-        if (ctxtObjectType == null) {
-            objectTypeValue = null;
-        } else {
+
+        if (ctxtObjectType != null) {
             objectTypeValue = ObjectType.fromName(ctxtObjectType);
+            return ManagedObject.getClassFromRegistry(encodingType, objectTypeValue);
         }
-        return ManagedObject.getClassFromRegistry(encodingType, objectTypeValue);
+
+        return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 }

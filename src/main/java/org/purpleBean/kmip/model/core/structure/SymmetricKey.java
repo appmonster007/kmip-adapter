@@ -23,7 +23,7 @@ public class SymmetricKey implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, SymmetricKey.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, SymmetricKey.class, SymmetricKey::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, SymmetricKey.class, SymmetricKey::of);
         }
     }
 

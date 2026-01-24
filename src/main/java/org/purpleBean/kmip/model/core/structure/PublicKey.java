@@ -23,7 +23,7 @@ public class PublicKey implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PublicKey.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, PublicKey.class, PublicKey::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, PublicKey.class, PublicKey::of);
         }
     }
 

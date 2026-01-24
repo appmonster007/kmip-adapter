@@ -24,7 +24,7 @@ public class PgpKey implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PgpKey.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, PgpKey.class, PgpKey::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, PgpKey.class, PgpKey::of);
         }
     }
 

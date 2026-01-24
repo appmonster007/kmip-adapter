@@ -25,7 +25,7 @@ public class OpaqueObject implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, OpaqueObject.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, OpaqueObject.class, OpaqueObject::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, OpaqueObject.class, OpaqueObject::of);
         }
     }
 

@@ -25,7 +25,7 @@ public class Certificate implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Certificate.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, Certificate.class, Certificate::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, Certificate.class, Certificate::of);
         }
     }
 

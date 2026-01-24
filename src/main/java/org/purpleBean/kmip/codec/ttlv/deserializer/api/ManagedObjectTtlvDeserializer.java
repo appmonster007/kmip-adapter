@@ -21,11 +21,12 @@ public class ManagedObjectTtlvDeserializer extends KmipDataTypeTtlvDeserializer<
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
         String ctxtObjectType = (String) mapper.getAttribute("objectType");
         ObjectType.Value objectTypeValue;
-        if (ctxtObjectType == null) {
-            objectTypeValue = null;
-        } else {
+
+        if (ctxtObjectType != null) {
             objectTypeValue = ObjectType.fromName(ctxtObjectType);
+            return ManagedObject.getClassFromRegistry(encodingType, objectTypeValue);
         }
-        return ManagedObject.getClassFromRegistry(encodingType, objectTypeValue);
+
+        return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }
 }

@@ -29,7 +29,7 @@ public class SplitKey implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, SplitKey.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, SplitKey.class, SplitKey::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, SplitKey.class, SplitKey::of);
         }
     }
 

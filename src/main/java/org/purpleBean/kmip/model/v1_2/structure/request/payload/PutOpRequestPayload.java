@@ -43,7 +43,7 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
     private final ReplacedUniqueIdentifier replacedUniqueIdentifier;
 
     @NonNull
-    private final ManagedObject managedObject;
+    private final ManagedObject object;
 
     @Singular
     private final List<Attribute> attributes;
@@ -53,13 +53,13 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
             @NonNull UniqueIdentifier uniqueIdentifier,
             @NonNull PutFunction putFunction,
             ReplacedUniqueIdentifier replacedUniqueIdentifier,
-            @NonNull ManagedObject managedObject,
+            @NonNull ManagedObject object,
             List<Attribute> attributes
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.putFunction = putFunction;
         this.replacedUniqueIdentifier = replacedUniqueIdentifier;
-        this.managedObject = managedObject;
+        this.object = object;
         this.attributes = attributes;
         validate();
     }
@@ -78,21 +78,21 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
         }
 
         if (map.containsKey(Certificate.kmipTag)) {
-            builder.managedObject((Certificate) map.get(Certificate.kmipTag).getFirst());
+            builder.object((Certificate) map.get(Certificate.kmipTag).getFirst());
         } else if (map.containsKey(SymmetricKey.kmipTag)) {
-            builder.managedObject((SymmetricKey) map.get(SymmetricKey.kmipTag).getFirst());
+            builder.object((SymmetricKey) map.get(SymmetricKey.kmipTag).getFirst());
         } else if (map.containsKey(PrivateKey.kmipTag)) {
-            builder.managedObject((PrivateKey) map.get(PrivateKey.kmipTag).getFirst());
+            builder.object((PrivateKey) map.get(PrivateKey.kmipTag).getFirst());
         } else if (map.containsKey(PublicKey.kmipTag)) {
-            builder.managedObject((PublicKey) map.get(PublicKey.kmipTag).getFirst());
+            builder.object((PublicKey) map.get(PublicKey.kmipTag).getFirst());
         } else if (map.containsKey(SplitKey.kmipTag)) {
-            builder.managedObject((SplitKey) map.get(SplitKey.kmipTag).getFirst());
+            builder.object((SplitKey) map.get(SplitKey.kmipTag).getFirst());
         } else if (map.containsKey(Template.kmipTag)) {
-            builder.managedObject((Template) map.get(Template.kmipTag).getFirst());
+            builder.object((Template) map.get(Template.kmipTag).getFirst());
         } else if (map.containsKey(SecretData.kmipTag)) {
-            builder.managedObject((SecretData) map.get(SecretData.kmipTag).getFirst());
+            builder.object((SecretData) map.get(SecretData.kmipTag).getFirst());
         } else if (map.containsKey(OpaqueObject.kmipTag)) {
-            builder.managedObject((OpaqueObject) map.get(OpaqueObject.kmipTag).getFirst());
+            builder.object((OpaqueObject) map.get(OpaqueObject.kmipTag).getFirst());
         }
 
         if (map.containsKey(Attribute.kmipTag)) {
@@ -129,7 +129,7 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
                         uniqueIdentifier,
                         putFunction,
                         replacedUniqueIdentifier,
-                        managedObject,
+                        object,
                         attributes)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))

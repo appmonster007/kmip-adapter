@@ -20,7 +20,7 @@ public class Template implements ManagedObject, KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Template.class);
-            ManagedObject.register(spec, encodingType, objectTypeValue, Template.class, Template::of);
+            ManagedObject.register(spec, kmipTag.getValue(), encodingType, objectTypeValue, Template.class, Template::of);
         }
     }
 
