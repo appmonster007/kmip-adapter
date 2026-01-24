@@ -24,7 +24,8 @@ public class SimpleRequestHeaderXmlDeserializer extends AbstractKmipStructureXml
     protected void setValue(SimpleRequestHeader.SimpleRequestHeaderBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION -> builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+            default -> {
+            }
         }
     }
 

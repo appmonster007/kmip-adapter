@@ -26,7 +26,8 @@ public class SimpleResponseHeaderTtlvDeserializer extends AbstractKmipStructureT
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION ->
                     builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+            default -> {
+            }
         }
     }
 
