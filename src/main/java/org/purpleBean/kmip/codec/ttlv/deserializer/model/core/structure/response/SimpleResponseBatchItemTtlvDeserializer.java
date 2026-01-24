@@ -2,13 +2,13 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.respons
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
 import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
 import org.purpleBean.kmip.model.core.type.ResultMessage;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipStructu
             case KmipTag.Standard.RESULT_REASON -> builder.resultReason(mapper.readValue(p, ResultReason.class));
             case KmipTag.Standard.RESULT_MESSAGE -> builder.resultMessage(mapper.readValue(p, ResultMessage.class));
             case KmipTag.Standard.RESPONSE_PAYLOAD ->
-                    builder.responsePayloadStructure(mapper.readValue(p, SimpleResponsePayload.class));
+                    builder.responsePayloadStructure(mapper.readValue(p, ResponsePayloadStructure.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

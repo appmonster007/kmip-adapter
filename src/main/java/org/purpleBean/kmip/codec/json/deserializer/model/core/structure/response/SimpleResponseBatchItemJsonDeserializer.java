@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure.respons
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
 import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
 import org.purpleBean.kmip.model.core.type.ResultMessage;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class SimpleResponseBatchItemJsonDeserializer extends AbstractKmipStructu
             case KmipTag.Standard.RESULT_REASON -> builder.resultReason(ctxt.readValue(p, ResultReason.class));
             case KmipTag.Standard.RESULT_MESSAGE -> builder.resultMessage(ctxt.readValue(p, ResultMessage.class));
             case KmipTag.Standard.RESPONSE_PAYLOAD ->
-                    builder.responsePayloadStructure(ctxt.readValue(p, SimpleResponsePayload.class));
+                    builder.responsePayloadStructure(ctxt.readValue(p, ResponsePayloadStructure.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

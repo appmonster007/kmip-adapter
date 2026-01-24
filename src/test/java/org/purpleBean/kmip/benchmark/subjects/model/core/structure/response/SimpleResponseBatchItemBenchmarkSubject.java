@@ -3,7 +3,6 @@ package org.purpleBean.kmip.benchmark.subjects.model.core.structure.response;
 import lombok.Getter;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
 import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
@@ -17,7 +16,6 @@ public class SimpleResponseBatchItemBenchmarkSubject extends KmipBenchmarkSubjec
 
     public SimpleResponseBatchItemBenchmarkSubject() throws Exception {
         SimpleResponseBatchItem subject = SimpleResponseBatchItem.builder()
-                .operation(Operation.of(Operation.Standard.CREATE))
                 .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
                 .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
                 .resultMessage(ResultMessage.of("Success"))
