@@ -14,13 +14,14 @@ public class RequestMessageStructureXmlDeserializer extends KmipDataTypeXmlDeser
 
     @Override
     public RequestMessageStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        SimpleRequestMessage simpleRequestMessage = ctxt.readValue(p, SimpleRequestMessage.class);
-
-        ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
         KmipSpec previous = KmipContext.getSpec();
-        KmipSpec spec = KmipSpec.fromValue(protocolVersion);
-        KmipContext.setSpec(spec);
         try {
+            KmipContext.clear();
+            RequestMessageStructure requestMessage = super.deserialize(p, ctxt);
+            ProtocolVersion protocolVersion = requestMessage.getRequestHeader().getProtocolVersion();
+
+            KmipSpec spec = KmipSpec.fromValue(protocolVersion);
+            KmipContext.setSpec(spec);
             return super.deserialize(p, ctxt);
         } finally {
             if (previous != null) {

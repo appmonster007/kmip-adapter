@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.request.RequestMessageStructure;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -18,15 +19,21 @@ import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.Certificate;
 import org.purpleBean.kmip.model.core.structure.Name;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.type.CertificateValue;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -38,22 +45,22 @@ public class Main {
         printHeader("KMIP Serialization/Deserialization Demo");
 
         ProtocolVersion protocolVersion = ProtocolVersion.of(1, 2);
-//        SimpleRequestPayload payload = SimpleRequestPayload.builder().build();
-//        SimpleRequestBatchItem batchItem = SimpleRequestBatchItem.builder()
-//                .requestPayloadStructure(payload)
-//                .build();
-//        SimpleRequestHeader requestHeader = SimpleRequestHeader.builder()
-//                .protocolVersion(protocolVersion)
-//                .build();
-//
-//        // Error list is not serialized/deserialized, so we keep it separate
-//        List<Exception> errorList = List.of(new Exception("Error A"), new Exception("Error B"));
+        SimpleRequestPayload payload = SimpleRequestPayload.builder().build();
+        SimpleRequestBatchItem batchItem = SimpleRequestBatchItem.builder()
+                .requestPayloadStructure(payload)
+                .build();
+        SimpleRequestHeader requestHeader = SimpleRequestHeader.builder()
+                .protocolVersion(protocolVersion)
+                .build();
 
-//        SimpleRequestMessage requestMessage = SimpleRequestMessage.builder()
-//                .requestHeader(requestHeader)
-//                .requestBatchItems(List.of(batchItem, batchItem))
-//                .requestBatchItemErrors(errorList)
-//                .build();
+        // Error list is not serialized/deserialized, so we keep it separate
+        List<Exception> errorList = List.of(new Exception("Error A"), new Exception("Error B"));
+
+        SimpleRequestMessage requestMessage = SimpleRequestMessage.builder()
+                .requestHeader(requestHeader)
+                .requestBatchItems(List.of(batchItem, batchItem))
+                .requestBatchItemErrors(errorList)
+                .build();
 
         ActivationDate activationDate = ActivationDate.builder()
                 .value(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
@@ -79,9 +86,9 @@ public class Main {
                 customState,
                 activationDate,
                 name,
-//                requestMessage,
-                attr,
-                certificate,
+                requestMessage,
+//                attr,
+//                certificate,
         };
 
 
@@ -89,7 +96,11 @@ public class Main {
         XmlMapper xmlMapper = buildXmlMapper();
         TtlvMapper ttlvMapper = buildTtlvMapper();
 
-        KmipContext.setSpec(KmipSpec.V1_2);
+        String strx = xmlMapper.writeValueAsString(requestMessage);
+        System.out.println(strx);
+        var desx = xmlMapper.readValue(strx, RequestMessageStructure.class);
+
+//        KmipContext.setSpec(KmipSpec.V1_2);
 
         demoJson(jsonMapper, dataTypes);
         demoXml(xmlMapper, dataTypes);

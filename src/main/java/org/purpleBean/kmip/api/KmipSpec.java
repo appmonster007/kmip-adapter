@@ -91,6 +91,9 @@ public enum KmipSpec {
      * @throws java.util.NoSuchElementException if no matching spec is found.
      */
     public static KmipSpec fromValue(ProtocolVersion protocolVersion) {
+        if (protocolVersion == null) {
+            return KmipSpec.UnknownVersion;
+        }
         Map.Entry<Integer, Integer> key = Map.entry(protocolVersion.getMajor(), protocolVersion.getMinor());
         return Optional.ofNullable(SPEC_MAP.get(key)).orElseThrow();
     }

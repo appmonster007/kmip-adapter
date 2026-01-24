@@ -14,13 +14,15 @@ public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDes
 
     @Override
     public RequestMessageStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        SimpleRequestMessage simpleRequestMessage = mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
-        ttlvBuffer.rewind();
-        ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
         KmipSpec previous = KmipContext.getSpec();
-        KmipSpec spec = KmipSpec.fromValue(protocolVersion);
-        KmipContext.setSpec(spec);
         try {
+            KmipContext.clear();
+            SimpleRequestMessage simpleRequestMessage = mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
+            ttlvBuffer.rewind();
+            ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
+
+            KmipSpec spec = KmipSpec.fromValue(protocolVersion);
+            KmipContext.setSpec(spec);
             return super.deserialize(ttlvBuffer, mapper);
         } finally {
             if (previous != null) {
