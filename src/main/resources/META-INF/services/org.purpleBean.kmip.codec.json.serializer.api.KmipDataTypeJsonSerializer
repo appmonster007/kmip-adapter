@@ -101,7 +101,6 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.ProtocolVersionJs
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PublicKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.PublicKeyTemplateAttributeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.RevocationReasonJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.structure.SampleStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SecretDataJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.ServerInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.SplitKeyJsonSerializer

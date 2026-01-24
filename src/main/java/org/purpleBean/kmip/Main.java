@@ -8,20 +8,18 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.ManagedObject;
 import org.purpleBean.kmip.codec.KmipCodecManager;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.model.core.structure.Attribute;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.structure.Name;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.type.ActivationDate;
+import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.type.CertificateValue;
 
 import java.io.IOException;
@@ -29,7 +27,6 @@ import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -37,28 +34,27 @@ public class Main {
     private static final String SEP = "================================================";
 
     public static void main(String[] args) throws IOException {
-        KmipContext.clear();
+
         printHeader("KMIP Serialization/Deserialization Demo");
 
         ProtocolVersion protocolVersion = ProtocolVersion.of(1, 2);
-        SimpleRequestPayload payload = SimpleRequestPayload.builder().build();
-        SimpleRequestBatchItem batchItem = SimpleRequestBatchItem.builder()
-                .requestPayloadStructure(payload)
-                .build();
-        SimpleRequestHeader requestHeader = SimpleRequestHeader.builder()
-                .protocolVersion(protocolVersion)
-                .build();
+//        SimpleRequestPayload payload = SimpleRequestPayload.builder().build();
+//        SimpleRequestBatchItem batchItem = SimpleRequestBatchItem.builder()
+//                .requestPayloadStructure(payload)
+//                .build();
+//        SimpleRequestHeader requestHeader = SimpleRequestHeader.builder()
+//                .protocolVersion(protocolVersion)
+//                .build();
+//
+//        // Error list is not serialized/deserialized, so we keep it separate
+//        List<Exception> errorList = List.of(new Exception("Error A"), new Exception("Error B"));
 
-        // Error list is not serialized/deserialized, so we keep it separate
-        List<Exception> errorList = List.of(new Exception("Error A"), new Exception("Error B"));
+//        SimpleRequestMessage requestMessage = SimpleRequestMessage.builder()
+//                .requestHeader(requestHeader)
+//                .requestBatchItems(List.of(batchItem, batchItem))
+//                .requestBatchItemErrors(errorList)
+//                .build();
 
-        SimpleRequestMessage requestMessage = SimpleRequestMessage.builder()
-                .requestHeader(requestHeader)
-                .requestBatchItems(List.of(batchItem, batchItem))
-                .requestBatchItemErrors(errorList)
-                .build();
-
-        KmipContext.setSpec(KmipSpec.V1_2);
         ActivationDate activationDate = ActivationDate.builder()
                 .value(Instant.now().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS))
                 .build();
@@ -66,44 +62,38 @@ public class Main {
         State activeState = State.Standard.ACTIVE.inst();
         State customState = State.register(-1341234, "Alive", Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)).inst();
 
-//        SampleStructure sampleStructure = SampleStructure.builder()
-//                .activationDate(activationDate)
-//                .state(activeState)
-//                .build();
-
-        JsonMapper jsonMapper = buildJsonMapper();
-        XmlMapper xmlMapper = buildXmlMapper();
-        TtlvMapper ttlvMapper = buildTtlvMapper();
-
         Name name = Name.of("x-asfa", NameType.Standard.UNINTERPRETED_TEXT_STRING.inst());
         Attribute attr = Attribute.builder()
                 .attributeName(activationDate.getAttributeName())
                 .attributeIndex(AttributeIndex.of(0))
                 .attributeValue(activationDate.getAttributeValue()).build();
 
+        Certificate certificate = Certificate.builder()
+                .certificateType(CertificateType.Standard.X_509.inst())
+                .certificateValue(CertificateValue.of(new byte[]{1, 2, 3}))
+                .build();
+
         KmipDataType[] dataTypes = {
                 protocolVersion,
+                activeState,
                 customState,
                 activationDate,
-//                sampleStructure,
-                requestMessage,
+                name,
+//                requestMessage,
                 attr,
+                certificate,
         };
+
+
+        JsonMapper jsonMapper = buildJsonMapper();
+        XmlMapper xmlMapper = buildXmlMapper();
+        TtlvMapper ttlvMapper = buildTtlvMapper();
+
+        KmipContext.setSpec(KmipSpec.V1_2);
 
         demoJson(jsonMapper, dataTypes);
         demoXml(xmlMapper, dataTypes);
         demoTtlv(ttlvMapper, dataTypes);
-
-
-        var cert = Certificate.builder()
-                .certificateType(CertificateType.Standard.X_509.inst())
-                .certificateValue(CertificateValue.of(new byte[0]))
-                .build();
-
-        var strr = xmlMapper.writeValueAsString(cert);
-        System.out.println(strr);
-
-        var cert2 = xmlMapper.readValue(strr, ManagedObject.class);
 
         printHeader("DONE");
     }

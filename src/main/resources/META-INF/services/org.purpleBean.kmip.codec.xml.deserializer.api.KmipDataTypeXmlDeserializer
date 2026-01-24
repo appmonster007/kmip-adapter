@@ -111,7 +111,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ProtocolVersionX
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyTemplateAttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.PublicKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.RevocationReasonXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SampleStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SecretDataXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ServerInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.SplitKeyXmlDeserializer
