@@ -2,11 +2,11 @@ package org.purpleBean.kmip.codec.xml.deserializer.api.response;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.util.TokenBuffer;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponseMessageStructure;
 import org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponseMessage;
 
 import java.io.IOException;
 
@@ -14,15 +14,24 @@ public class ResponseMessageStructureXmlDeserializer extends KmipDataTypeXmlDese
 
     @Override
     public ResponseMessageStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        TokenBuffer buffer = new TokenBuffer(p, ctxt);
+        buffer.copyCurrentStructure(p);
+
         KmipSpec previous = KmipContext.getSpec();
         try {
             KmipContext.clear();
-            SimpleResponseMessage simpleResponseMessage = ctxt.readValue(p, SimpleResponseMessage.class);
-            ProtocolVersion protocolVersion = simpleResponseMessage.getResponseHeader().getProtocolVersion();
+            JsonParser replay = buffer.asParser();
+            replay.nextToken();
+            ctxt.setAttribute("tag", "ResponseMessage");
+            ResponseMessageStructure responseMessage = super.deserialize(replay, ctxt);
+            ProtocolVersion protocolVersion = responseMessage.getResponseHeader().getProtocolVersion();
 
             KmipSpec spec = KmipSpec.fromValue(protocolVersion);
             KmipContext.setSpec(spec);
-            return super.deserialize(p, ctxt);
+            JsonParser original = buffer.asParser();
+            original.nextToken();
+            ctxt.setAttribute("tag", "ResponseMessage");
+            return super.deserialize(original, ctxt);
         } finally {
             if (previous != null) {
                 KmipContext.setSpec(previous);
