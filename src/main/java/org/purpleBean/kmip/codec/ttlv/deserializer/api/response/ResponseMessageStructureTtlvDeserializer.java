@@ -1,22 +1,22 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.api.request;
+package org.purpleBean.kmip.codec.ttlv.deserializer.api.response;
 
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.request.RequestMessageStructure;
+import org.purpleBean.kmip.api.response.ResponseMessageStructure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purpleBean.kmip.model.core.structure.response.SimpleResponseMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<RequestMessageStructure> {
+public class ResponseMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDeserializer<ResponseMessageStructure> {
 
     @Override
-    public RequestMessageStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        SimpleRequestMessage simpleRequestMessage = mapper.readValue(ttlvBuffer, SimpleRequestMessage.class);
+    public ResponseMessageStructure deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
+        SimpleResponseMessage simpleResponseMessage = mapper.readValue(ttlvBuffer, SimpleResponseMessage.class);
         ttlvBuffer.rewind();
-        ProtocolVersion protocolVersion = simpleRequestMessage.getRequestHeader().getProtocolVersion();
+        ProtocolVersion protocolVersion = simpleResponseMessage.getResponseHeader().getProtocolVersion();
         KmipSpec previous = KmipContext.getSpec();
         KmipSpec spec = KmipSpec.fromValue(protocolVersion);
         KmipContext.setSpec(spec);
@@ -33,6 +33,6 @@ public class RequestMessageStructureTtlvDeserializer extends KmipDataTypeTtlvDes
 
     @Override
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
-        return RequestMessageStructure.getClassFromRegistry();
+        return ResponseMessageStructure.getClassFromRegistry();
     }
 }

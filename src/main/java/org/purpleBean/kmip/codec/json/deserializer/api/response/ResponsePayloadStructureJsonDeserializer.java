@@ -1,20 +1,20 @@
-package org.purpleBean.kmip.codec.xml.deserializer.api.request;
+package org.purpleBean.kmip.codec.json.deserializer.api.response;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.io.IOException;
 
-public class RequestPayloadStructureXmlDeserializer extends KmipDataTypeXmlDeserializer<RequestPayloadStructure> {
+public class ResponsePayloadStructureJsonDeserializer extends KmipDataTypeJsonDeserializer<ResponsePayloadStructure> {
 
     @Override
-    public RequestPayloadStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public ResponsePayloadStructure deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         return super.deserialize(p, ctxt);
     }
 
@@ -27,6 +27,6 @@ public class RequestPayloadStructureXmlDeserializer extends KmipDataTypeXmlDeser
         } else {
             operationValue = Operation.fromName(ctxtOperation);
         }
-        return RequestPayloadStructure.getClassFromRegistry(operationValue);
+        return ResponsePayloadStructure.getClassFromRegistry(operationValue);
     }
 }

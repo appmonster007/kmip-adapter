@@ -8,6 +8,10 @@ org.purpleBean.kmip.codec.json.deserializer.api.request.RequestBatchItemStructur
 org.purpleBean.kmip.codec.json.deserializer.api.request.RequestHeaderStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.request.RequestMessageStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.request.RequestPayloadStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseBatchItemStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseHeaderStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseMessageStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.api.response.ResponsePayloadStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AdjustmentTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AlternativeNameTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AsynchronousIndicatorJsonDeserializer

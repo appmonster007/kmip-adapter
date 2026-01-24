@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
 import org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
 
 import java.io.IOException;
 
@@ -20,12 +19,6 @@ public class RequestHeaderStructureXmlDeserializer extends KmipDataTypeXmlDeseri
 
     @Override
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
-        Class<? extends RequestHeaderStructure> headerClass = RequestHeaderStructure.getClassFromRegistry();
-
-        if (headerClass == null) {
-            headerClass = SimpleRequestHeader.class;
-        }
-
-        return headerClass;
+        return RequestHeaderStructure.getClassFromRegistry();
     }
 }

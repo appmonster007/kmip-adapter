@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 
 import java.io.IOException;
 
@@ -20,12 +19,6 @@ public class RequestBatchItemStructureJsonDeserializer extends KmipDataTypeJsonD
 
     @Override
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
-        Class<? extends RequestBatchItemStructure> batchItemClass = RequestBatchItemStructure.getClassFromRegistry();
-
-        if (batchItemClass == null) {
-            batchItemClass = SimpleRequestBatchItem.class;
-        }
-
-        return batchItemClass;
+        return RequestBatchItemStructure.getClassFromRegistry();
     }
 }
