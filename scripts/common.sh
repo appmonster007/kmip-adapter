@@ -211,46 +211,6 @@ render_template() {
     printf "%s" "${content}" > "${out_file}"
 }
 
-create_directories() {
-    local main_java="$1"
-    local test_java="$2"
-    local sub_path="$3"
-
-    if [ "${DRY_RUN}" = "true" ]; then
-        echo "DRY RUN: would create directories:"
-        echo "  ${main_java}/${sub_path}"
-        echo "  ${main_java}/codec/json/serializer/model/${sub_path}"
-        echo "  ${main_java}/codec/json/deserializer/model/${sub_path}"
-        echo "  ${main_java}/codec/xml/serializer/model/${sub_path}"
-        echo "  ${main_java}/codec/xml/deserializer/model/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/serializer/model/${sub_path}"
-        echo "  ${main_java}/codec/ttlv/deserializer/model/${sub_path}"
-        echo "  ${test_java}/${sub_path}"
-        echo "  ${test_java}/codec/json/${sub_path}"
-        echo "  ${test_java}/codec/xml/${sub_path}"
-        echo "  ${test_java}/codec/ttlv/${sub_path}"
-        echo "  ${test_java}/benchmark/subjects/${sub_path}"
-        echo "  src/main/resources/META-INF/services"
-        echo "  src/test/resources/META-INF/services"
-        return 0
-    fi
-
-    mkdir -p "${main_java}/${sub_path}"
-    mkdir -p "${main_java}/codec/json/serializer/model/${sub_path}"
-    mkdir -p "${main_java}/codec/json/deserializer/model/${sub_path}"
-    mkdir -p "${main_java}/codec/xml/serializer/model/${sub_path}"
-    mkdir -p "${main_java}/codec/xml/deserializer/model/${sub_path}"
-    mkdir -p "${main_java}/codec/ttlv/serializer/model/${sub_path}"
-    mkdir -p "${main_java}/codec/ttlv/deserializer/model/${sub_path}"
-    mkdir -p "${test_java}/${sub_path}"
-    mkdir -p "${test_java}/codec/json/${sub_path}"
-    mkdir -p "${test_java}/codec/xml/${sub_path}"
-    mkdir -p "${test_java}/codec/ttlv/${sub_path}"
-    mkdir -p "${test_java}/benchmark/subjects/${sub_path}"
-    mkdir -p "src/main/resources/META-INF/services"
-    mkdir -p "src/test/resources/META-INF/services"
-}
-
 add_service_entry() {
     local service_file="$1"
     local implementation_class="$2"

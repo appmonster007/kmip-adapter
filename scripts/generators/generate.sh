@@ -174,7 +174,6 @@ EOF
     else
         SUB_PATH="${SUB_PATH}/enumeration"
     fi
-    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
         echo -e "\nProcessing enum: ${name}"
@@ -307,7 +306,6 @@ EOF
     else
         SUB_PATH="${SUB_PATH}/type"
     fi
-    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
         echo -e "\nProcessing datatype: ${name}"
@@ -425,7 +423,6 @@ EOF
     else
         SUB_PATH="${SUB_PATH}/structure"
     fi
-    create_directories "${MAIN_JAVA}" "${TEST_JAVA}" "${SUB_PATH}"
 
     for name in "${NAMES[@]}"; do
         echo -e "\nProcessing structure: ${name}"
