@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KeyValue;
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -36,7 +37,7 @@ public class KeyBlockTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
             }
             case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
                     builder.keyCompressionType(mapper.readValue(p, KeyCompressionType.class));
-            case KmipTag.Standard.KEY_VALUE -> builder.keyValue(mapper.readValue(p, KeyValue.class));
+            case KmipTag.Standard.KEY_VALUE -> builder.keyValue((KeyValue) mapper.readValue(p, KmipDataType.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM ->
                     builder.cryptographicAlgorithm(mapper.readValue(p, CryptographicAlgorithm.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_LENGTH ->

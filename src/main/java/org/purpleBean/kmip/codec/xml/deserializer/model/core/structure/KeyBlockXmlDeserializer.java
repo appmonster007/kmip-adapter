@@ -3,6 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KeyValue;
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
@@ -35,7 +36,7 @@ public class KeyBlockXmlDeserializer extends AbstractKmipStructureXmlDeserialize
             }
             case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
                     builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
-            case KmipTag.Standard.KEY_VALUE -> builder.keyValue(ctxt.readValue(p, KeyValue.class));
+            case KmipTag.Standard.KEY_VALUE -> builder.keyValue((KeyValue) ctxt.readValue(p, KmipDataType.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM ->
                     builder.cryptographicAlgorithm(ctxt.readValue(p, CryptographicAlgorithm.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_LENGTH ->
