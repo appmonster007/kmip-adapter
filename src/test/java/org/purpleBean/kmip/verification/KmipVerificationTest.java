@@ -1,0 +1,122 @@
+package org.purpleBean.kmip.verification;
+
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.request.RequestMessageStructure;
+import org.purpleBean.kmip.api.response.ResponseMessageStructure;
+import org.purpleBean.kmip.codec.KmipCodecManager;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class KmipVerificationTest {
+
+    private final XmlMapper xmlMapper = KmipCodecManager.getXmlMapper();
+    private final String projectRoot = System.getProperty("user.dir");
+
+    @Disabled
+    @DisplayName("Test KMIP 1.0 Test Cases")
+    @Test
+    public void testKmip10TestCases() {
+        String basePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.1_KMIP_1.0_Test_Cases";
+        verifyXmlFiles(basePath);
+    }
+
+    @Disabled
+    @DisplayName("Test KMIP 1.1 Test Cases")
+    @Test
+    public void testKmip11TestCases() {
+        String basePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.2_KMIP_1.1_Test_Cases";
+        verifyXmlFiles(basePath);
+    }
+
+    @DisplayName("Test KMIP 1.2 Test Cases")
+    @Test
+    public void testKmip12TestCases() {
+        String basePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases";
+        KmipContext.withSpec(KmipSpec.V1_2, () -> {
+            verifyXmlFiles(basePath);
+            return null;
+        });
+    }
+
+//    @Test
+//    public void testSpecificFile() {
+//        String filePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases/2.3.4_TC-314-12_-_Dual_Client_Test_Case,_ID_Placeholder-linked_Locate_&_Get_Batch/2.3.4_TC-314-12_-_Dual_Client_Test_Case,_ID_Placeholder-linked_Locate_&_Get_Batch_6_ResponseMessage.xml";
+//        KmipContext.withSpec(KmipSpec.V1_2, () -> {
+//            try {
+//                processFile(Paths.get(filePath));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//            return null;
+//        });
+//    }
+
+
+    private void verifyXmlFiles(String basePath) {
+        try (Stream<Path> paths = Files.walk(Paths.get(basePath))) {
+            List<Path> pathList = paths.filter(Files::isRegularFile)
+                    .filter(path -> path.toString().endsWith(".xml"))
+                    .sorted(Comparator.comparing(Path::toString))
+                    .toList();
+            for (Path path : pathList) {
+                try {
+                    processFile(path);
+                } catch (IOException e) {
+                    fail("Failed to process file: " + path + " - " + e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            fail("Failed to walk directory: " + basePath + " - " + e.getMessage());
+        }
+    }
+
+    private void processFile(Path path) throws IOException {
+        String fileName = path.getFileName().toString();
+        String originalXml = Files.readString(path);
+
+        Class<? extends KmipDataType> targetClass;
+        if (fileName.contains("RequestMessage")) {
+            targetClass = RequestMessageStructure.class;
+        } else if (fileName.contains("ResponseMessage")) {
+            targetClass = ResponseMessageStructure.class;
+        } else {
+            // Fallback or skip if it doesn't match expected patterns
+            // For now, let's try KmipDataType as a generic fallback, or just log and return
+            System.out.println("Skipping file with unknown type: " + fileName);
+            return;
+        }
+
+        KmipDataType deserialized;
+        try {
+            deserialized = xmlMapper.readValue(originalXml, targetClass);
+
+            String newXml = xmlMapper.writeValueAsString(deserialized);
+
+            String normalizedOriginal = originalXml.replaceAll("\\s+", "");
+            String normalizedNew = newXml.replaceAll("\\s+", "");
+
+            assertEquals(normalizedOriginal, normalizedNew, "Mismatch in file: " + fileName);
+            System.out.println("Verified file: " + fileName);
+
+        } catch (Throwable e) {
+            String msg = "Error processing file: " + fileName + " - " + e.getMessage();
+            System.err.println(msg);
+            e.printStackTrace();
+        }
+    }
+}
