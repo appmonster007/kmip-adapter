@@ -1,6 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.response;
 
 import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -27,6 +28,7 @@ public class SimpleResponseHeaderTtlvDeserializer extends AbstractKmipStructureT
             case KmipTag.Standard.PROTOCOL_VERSION ->
                     builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));
             default -> {
+                mapper.readValue(p, KmipDataType.class);
             }
         }
     }

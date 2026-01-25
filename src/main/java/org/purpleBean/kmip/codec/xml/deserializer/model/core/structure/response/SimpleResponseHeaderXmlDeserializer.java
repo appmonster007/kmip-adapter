@@ -1,6 +1,7 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.response;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
@@ -25,6 +26,7 @@ public class SimpleResponseHeaderXmlDeserializer extends AbstractKmipStructureXm
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION -> builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
             default -> {
+                while (p.nextToken() != JsonToken.END_OBJECT) ;
             }
         }
     }
