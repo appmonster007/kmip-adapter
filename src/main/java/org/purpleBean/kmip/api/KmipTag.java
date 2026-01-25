@@ -348,7 +348,7 @@ public class KmipTag {
         TEMPLATE(0x420090, "Template", KmipSpec.UnknownVersion, KmipSpec.V1_2),
         TEMPLATE_ATTRIBUTE(0x420091, "TemplateAttribute", KmipSpec.UnknownVersion, KmipSpec.V1_2),
         TIME_STAMP(0x420092, "TimeStamp", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        UNIQUE_BATCH_ITEM_ID(0x420093, "UniqueBatchItemId", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
+        UNIQUE_BATCH_ITEM_ID(0x420093, "UniqueBatchItemID", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         UNIQUE_IDENTIFIER(0x420094, "UniqueIdentifier", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         USAGE_LIMITS(0x420095, "UsageLimits", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         USAGE_LIMITS_COUNT(0x420096, "UsageLimitsCount", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
