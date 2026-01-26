@@ -177,23 +177,23 @@ public class HashingAlgorithm implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        MD2(0x00000001, "Md2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MD4(0x00000002, "Md4", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MD5(0x00000003, "Md5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_1(0x00000004, "Sha1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_224(0x00000005, "Sha224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_256(0x00000006, "Sha256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_384(0x00000007, "Sha384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_512(0x00000008, "Sha512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RIPEMD_160(0x00000009, "Ripemd160", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        TIGER(0x0000000A, "Tiger", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        WHIRLPOOL(0x0000000B, "Whirlpool", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_512_224(0x0000000C, "Sha512224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_512_256(0x0000000D, "Sha512256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_224(0x0000000E, "Sha3224", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_256(0x0000000F, "Sha3256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_384(0x00000010, "Sha3384", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_512(0x00000011, "Sha3512", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        MD2(0x00000001, "MD_2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD4(0x00000002, "MD_4", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD5(0x00000003, "MD_5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_1(0x00000004, "SHA_1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_224(0x00000005, "SHA_224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_256(0x00000006, "SHA_256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_384(0x00000007, "SHA_384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_512(0x00000008, "SHA_512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RIPEMD_160(0x00000009, "RIPEMD_160", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        TIGER(0x0000000A, "TIGER", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        WHIRLPOOL(0x0000000B, "WHIRLPOOL", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_512_224(0x0000000C, "SHA_512_224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_512_256(0x0000000D, "SHA_512_256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_224(0x0000000E, "SHA3_224", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_256(0x0000000F, "SHA3_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_384(0x00000010, "SHA3_384", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_512(0x00000011, "SHA3_512", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
