@@ -13,7 +13,7 @@ public class CustomAttributeBenchmarkSubject extends KmipBenchmarkSubject<Custom
     private final KmipSpec spec = KmipSpec.V1_2;
 
     public CustomAttributeBenchmarkSubject() throws Exception {
-        CustomAttribute customAttribute = CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE.getValue()));
+        CustomAttribute customAttribute = CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE));
         initialize(customAttribute, CustomAttribute.class);
     }
 

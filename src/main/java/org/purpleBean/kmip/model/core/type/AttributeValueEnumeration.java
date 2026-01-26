@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
-public class AttributeValueEnumeration implements AttributeValue {
+public class AttributeValueEnumeration implements AttributeValue, KmipEnumeration {
     public static final KmipTag kmipTag = AttributeValue.kmipTag;
     public static final EncodingType encodingType = EncodingType.ENUMERATION;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -22,15 +22,15 @@ public class AttributeValueEnumeration implements AttributeValue {
     }
 
     @NonNull
-    private final Integer value;
+    private final KmipEnumeration.Value<?> value;
 
     @Builder
-    private AttributeValueEnumeration(@NonNull Integer value) {
+    private AttributeValueEnumeration(@NonNull KmipEnumeration.Value<?> value) {
         this.value = value;
         validate();
     }
 
-    public static AttributeValueEnumeration of(@NonNull Integer value) {
+    public static AttributeValueEnumeration of(@NonNull KmipEnumeration.Value<?> value) {
         return AttributeValueEnumeration.builder().value(value).build();
     }
 
@@ -55,5 +55,15 @@ public class AttributeValueEnumeration implements AttributeValue {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec);
+    }
+
+    @Override
+    public String getDescription() {
+        return value.getDescription();
+    }
+
+    @Override
+    public int getValue() {
+        return value.getValue();
     }
 }

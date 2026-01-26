@@ -74,6 +74,11 @@ public interface KmipEnumeration extends KmipDataType {
      */
     String getDescription();
 
+    /**
+     * Represents a specific value of a KMIP enumeration.
+     *
+     * @param <T> the type of the enumeration implementation.
+     */
     interface Value<T> {
         /**
          * @return the integer value of the enumeration.

@@ -26,7 +26,11 @@ public class AttributeTtlvDeserializer extends AbstractKmipStructureTtlvDeserial
     @Override
     protected void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.ATTRIBUTE_NAME -> builder.attributeName(mapper.readValue(p, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_NAME -> {
+                AttributeName attributeName = mapper.readValue(p, AttributeName.class);
+                mapper.setAttribute("attributeName", attributeName.getValue());
+                builder.attributeName(attributeName);
+            }
             case KmipTag.Standard.ATTRIBUTE_INDEX -> builder.attributeIndex(mapper.readValue(p, AttributeIndex.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE -> builder.attributeValue(mapper.readValue(p, AttributeValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

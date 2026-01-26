@@ -1,18 +1,13 @@
 package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
 
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 public class AttributeBenchmarkSubject extends KmipBenchmarkSubject<Attribute> {
 
     public AttributeBenchmarkSubject() throws Exception {
-        var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-        ActivationDate activationDate = ActivationDate.builder().value(fixed).build();
-        Attribute attribute = Attribute.of(activationDate);
+        Attribute attribute = Attribute.of(State.Standard.COMPROMISED.inst());
         initialize(attribute, Attribute.class);
     }
 

@@ -2,10 +2,9 @@ package org.purpleBean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
 import org.purpleBean.kmip.model.core.type.AttributeValueDateTime;
-import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
+import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.time.OffsetDateTime;
@@ -28,7 +27,7 @@ class CustomAttributeTtlvTest extends AbstractTtlvSerializationTestSuite<CustomA
 
     @Override
     protected CustomAttribute createDefault() {
-        return CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE.getValue()));
+        return CustomAttribute.of("x-custom-state", AttributeValueInteger.of(1));
     }
 
     @Override

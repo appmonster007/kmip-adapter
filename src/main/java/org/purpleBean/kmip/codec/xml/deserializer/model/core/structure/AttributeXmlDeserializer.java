@@ -25,7 +25,11 @@ public class AttributeXmlDeserializer extends AbstractKmipStructureXmlDeserializ
     @Override
     protected void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
         switch (nodeTag) {
-            case KmipTag.Standard.ATTRIBUTE_NAME -> builder.attributeName(ctxt.readValue(p, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_NAME -> {
+                AttributeName attributeName = ctxt.readValue(p, AttributeName.class);
+                ctxt.setAttribute("attributeName", attributeName.getValue());
+                builder.attributeName(attributeName);
+            }
             case KmipTag.Standard.ATTRIBUTE_INDEX -> builder.attributeIndex(ctxt.readValue(p, AttributeIndex.class));
             case KmipTag.Standard.ATTRIBUTE_VALUE -> builder.attributeValue(ctxt.readValue(p, AttributeValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

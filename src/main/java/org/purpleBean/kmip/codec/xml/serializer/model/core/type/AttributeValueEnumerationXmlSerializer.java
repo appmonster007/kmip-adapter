@@ -3,9 +3,9 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
 
-public class AttributeValueEnumerationXmlSerializer extends AbstractKmipDataTypeXmlSerializer<AttributeValueEnumeration, Integer> {
+public class AttributeValueEnumerationXmlSerializer extends AbstractKmipDataTypeXmlSerializer<AttributeValueEnumeration, String> {
 
     public AttributeValueEnumerationXmlSerializer() {
-        super(AttributeValueEnumeration::getValue);
+        super(AttributeValueEnumeration::getDescription);
     }
 }

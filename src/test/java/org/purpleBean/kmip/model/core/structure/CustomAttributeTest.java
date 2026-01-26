@@ -28,7 +28,7 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<Custom
 
     @Override
     protected CustomAttribute createDefault() {
-        return CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(1));
+        return CustomAttribute.of("x-custom-state", AttributeValueEnumeration.of(State.Standard.ACTIVE));
     }
 
     @Override

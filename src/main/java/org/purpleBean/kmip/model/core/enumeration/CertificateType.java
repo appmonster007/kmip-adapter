@@ -212,7 +212,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueEnumeration.of(value.getValue());
+        return AttributeValueEnumeration.of(value);
     }
 
     @Override
