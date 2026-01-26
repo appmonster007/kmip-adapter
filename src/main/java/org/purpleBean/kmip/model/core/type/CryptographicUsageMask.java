@@ -1,20 +1,19 @@
 package org.purpleBean.kmip.model.core.type;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.util.StringUtils;
 
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * KMIP CryptographicUsageMask dataType.
  */
 @Data
 @Builder(toBuilder = true)
-public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
+public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
     public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_USAGE_MASK.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
@@ -25,6 +24,12 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicUsageMask.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicUsageMask.class, CryptographicUsageMask::of);
+            KmipMaskType.register(spec, kmipTag.getValue(), CryptographicUsageMask::fromMaskString);
+        }
+
+        for (MaskEnum.Standard s : MaskEnum.Standard.values()) {
+            MaskEnum.VALUE_REGISTRY.put(s.value, s);
+            MaskEnum.DESCRIPTION_REGISTRY.put(s.description, s);
         }
     }
 
@@ -46,6 +51,16 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
             throw new IllegalArgumentException("Invalid attribute value");
         }
         return CryptographicUsageMask.builder().value(integer.getValue()).build();
+    }
+
+    public static CryptographicUsageMask fromMaskString(@NonNull String value) {
+        int mask = MaskEnum.fromMaskString(value);
+        return CryptographicUsageMask.builder().value(mask).build();
+    }
+
+
+    public String getMaskString() {
+        return MaskEnum.toMaskString(value);
     }
 
     private void validate() {
@@ -108,7 +123,10 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueInteger.of(value);
+        return AttributeValueInteger.builder()
+                .value(value)
+                .maskStringValue(getMaskString())
+                .build();
     }
 
     @Override
@@ -119,5 +137,140 @@ public class CryptographicUsageMask implements KmipDataType, KmipAttribute {
     @Override
     public String getCanonicalName() {
         return getAttributeName().getValue();
+    }
+
+    public interface MaskEnum {
+        Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
+        Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+        Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+
+        private static void checkValidExtensionValue(int value) {
+            int extensionStart = 0x80000000;
+            if (value < extensionStart || value > 0) {
+                throw new IllegalArgumentException(
+                        String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
+                );
+            }
+        }
+
+        /**
+         * Register an extension value.
+         */
+        static Value register(int value, @NonNull String description) {
+            checkValidExtensionValue(value);
+            if (description.trim().isEmpty()) {
+                throw new IllegalArgumentException("Description cannot be empty");
+            }
+
+            Value existingEnumByValue = VALUE_REGISTRY.get(value);
+            Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+            if (existingEnumByValue != null || existingEnumByDescription != null) {
+                return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+            }
+            Extension custom = new Extension(value, description);
+            VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
+            DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+            EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+            return custom;
+        }
+
+        /**
+         * Look up by name.
+         */
+        static Value fromName(String name) {
+            KmipSpec spec = KmipContext.getSpec();
+            Value v = DESCRIPTION_REGISTRY.get(name);
+            return Optional.ofNullable(v)
+                    .orElseThrow(() -> new NoSuchElementException(
+                            String.format("No CryptographicUsageMask value found for '%s' in KMIP spec %s", name, spec)
+                    ));
+        }
+
+        /**
+         * Look up by value.
+         */
+        static Value fromValue(int value) {
+            KmipSpec spec = KmipContext.getSpec();
+            Value v = VALUE_REGISTRY.get(value);
+            return Optional.ofNullable(v)
+                    .orElseThrow(() -> new NoSuchElementException(
+                            String.format("No CryptographicUsageMask value found for %d in KMIP spec %s", value, spec)
+                    ));
+        }
+
+        static String toMaskString(int value) {
+            StringBuilder sb = new StringBuilder();
+            for (var entry : VALUE_REGISTRY.values()) {
+                if ((value & entry.getValue()) != 0) {
+                    sb.append(entry.getDescription()).append(" ");
+                }
+            }
+            return sb.toString().trim();
+        }
+
+        static int fromMaskString(String value) {
+            List<String> maskNames = List.of(value.split(" "));
+            int maskValue = 0;
+            for (String maskName : maskNames) {
+                if (maskName.isEmpty()) continue;
+                maskValue |= fromName(maskName).getValue();
+            }
+            return maskValue;
+        }
+
+        /**
+         * Get registered values.
+         */
+        static Collection<Value> registeredValues() {
+            return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+        }
+
+        @Getter
+        @AllArgsConstructor
+        @ToString
+        enum Standard implements Value {
+            SIGN(1, "Sign"),
+            VERIFY(2, "Verify"),
+            ENCRYPT(4, "Encrypt"),
+            DECRYPT(8, "Decrypt"),
+            WRAP_KEY(16, "WrapKey"),
+            UNWRAP_KEY(32, "UnwrapKey"),
+            EXPORT(64, "Export"),
+            MAC_GENERATE(128, "MacGenerate"),
+            MAC_VERIFY(256, "MacVerify"),
+            DERIVE_KEY(512, "DeriveKey"),
+            CONTENT_COMMITMENT_NON_REPUDIATION(1_024, "ContentCommitmentNonRepudiation"),
+            KEY_AGREEMENT(2_048, "KeyAgreement"),
+            CERTIFICATE_SIGN(4_096, "CertificateSign"),
+            CRL_SIGN(8_192, "CrlSign"),
+            GENERATE_CRYPTOGRAM(16_384, "GenerateCryptogram"),
+            VALIDATE_CRYPTOGRAM(32_768, "ValidateCryptogram"),
+            TRANSLATE_ENCRYPT(65_536, "TranslateEncrypt"),
+            TRANSLATE_DECRYPT(131_072, "TranslateDecrypt"),
+            TRANSLATE_WRAP(262_144, "TranslateWrap"),
+            TRANSLATE_UNWRAP(524_288, "TranslateUnwrap");
+
+            private final int value;
+            private final String description;
+            private final boolean custom = false;
+        }
+
+        interface Value {
+            int getValue();
+
+            String getDescription();
+
+            boolean isCustom();
+
+        }
+
+        @Getter
+        @AllArgsConstructor
+        @ToString
+        class Extension implements Value {
+            private final int value;
+            private final String description;
+            private final boolean custom = true;
+        }
     }
 }

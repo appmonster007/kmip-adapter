@@ -27,7 +27,7 @@ class CheckOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Che
         return CheckOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .usageLimitsCount(UsageLimitsCount.of(100L))
-                .cryptographicUsageMask(CryptographicUsageMask.of(1))
+                .cryptographicUsageMask(CryptographicUsageMask.of(7))
                 .leaseTime(LeaseTime.of(3600))
                 .build();
     }

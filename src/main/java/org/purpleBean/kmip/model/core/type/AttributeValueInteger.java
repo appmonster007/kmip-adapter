@@ -22,15 +22,19 @@ public class AttributeValueInteger implements AttributeValue {
     }
 
     @NonNull
-    private final java.lang.Integer value;
+    private final Integer value;
+
+    @Builder.Default
+    private final String maskStringValue = null;
 
     @Builder
-    private AttributeValueInteger(@NonNull java.lang.Integer value) {
+    private AttributeValueInteger(@NonNull Integer value, String maskStringValue) {
         this.value = value;
+        this.maskStringValue = maskStringValue;
         validate();
     }
 
-    public static AttributeValueInteger of(@NonNull java.lang.Integer value) {
+    public static AttributeValueInteger of(@NonNull Integer value) {
         return AttributeValueInteger.builder().value(value).build();
     }
 

@@ -19,6 +19,6 @@ class StorageStatusMaskXmlTest extends AbstractXmlSerializationTestSuite<Storage
 
     @Override
     protected StorageStatusMask createVariant() {
-        return StorageStatusMask.builder().value(2).build();
+        return StorageStatusMask.builder().value(3).build();
     }
 }
