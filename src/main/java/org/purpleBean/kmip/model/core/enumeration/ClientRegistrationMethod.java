@@ -42,6 +42,7 @@ public class ClientRegistrationMethod implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, ClientRegistrationMethod.class);
+            KmipEnumeration.register(spec, kmipTag.getValue(), ClientRegistrationMethod::fromName, ClientRegistrationMethod::fromValue);
         }
     }
 
@@ -205,31 +206,7 @@ public class ClientRegistrationMethod implements KmipEnumeration {
      * An interface representing a Client Registration Method value, which can be either a standard
      * value or a custom extension.
      */
-    public interface Value {
-        /**
-         * @return the integer value of the enumeration.
-         */
-        int getValue();
-
-        /**
-         * @return the description of the enumeration.
-         */
-        String getDescription();
-
-        /**
-         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
-         */
-        boolean isSupported();
-
-        /**
-         * @return true if the enumeration is a custom extension, false otherwise.
-         */
-        boolean isCustom();
-
-        /**
-         * @return a new instance of the {@link ClientRegistrationMethod} with the current value.
-         */
-        ClientRegistrationMethod inst();
+    public interface Value extends KmipEnumeration.Value<ClientRegistrationMethod> {
     }
 
     /**

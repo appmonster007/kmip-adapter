@@ -1,5 +1,9 @@
 package org.purpleBean.kmip.api;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) Enumeration data type.
  * <p>
@@ -31,6 +35,29 @@ public interface KmipEnumeration extends KmipDataType {
      */
     EncodingType encodingType = EncodingType.ENUMERATION;
 
+    Map<RegistryKey, Function<String, Value<?>>> FROM_NAME_REGISTRY = new ConcurrentHashMap<>();
+    Map<RegistryKey, Function<Integer, Value<?>>> FROM_VALUE_REGISTRY = new ConcurrentHashMap<>();
+
+    static void register(
+            KmipSpec spec,
+            KmipTag.Value kmipTagValue,
+            Function<String, Value<?>> fromName,
+            Function<Integer, Value<?>> fromValue
+    ) {
+        FROM_NAME_REGISTRY.put(new RegistryKey(spec, kmipTagValue), fromName);
+        FROM_VALUE_REGISTRY.put(new RegistryKey(spec, kmipTagValue), fromValue);
+    }
+
+    static Function<String, Value<?>> getFromName(KmipTag.Value kmipTagValue) {
+        KmipSpec spec = KmipContext.getSpec();
+        return FROM_NAME_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
+    }
+
+    static Function<Integer, Value<?>> getFromValue(KmipTag.Value kmipTagValue) {
+        KmipSpec spec = KmipContext.getSpec();
+        return FROM_VALUE_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
+    }
+
     /**
      * Gets the integer value of the enumeration constant.
      * <p>
@@ -46,4 +73,34 @@ public interface KmipEnumeration extends KmipDataType {
      * @return The string description of the enumeration.
      */
     String getDescription();
+
+    interface Value<T> {
+        /**
+         * @return the integer value of the enumeration.
+         */
+        int getValue();
+
+        /**
+         * @return the description of the enumeration.
+         */
+        String getDescription();
+
+        /**
+         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
+         */
+        boolean isSupported();
+
+        /**
+         * @return true if the enumeration is a custom extension, false otherwise.
+         */
+        boolean isCustom();
+
+        /**
+         * @return a new instance of the {@link T} with the current value.
+         */
+        T inst();
+    }
+
+    record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue) {
+    }
 }

@@ -39,6 +39,7 @@ public class ObjectClass implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, ObjectClass.class);
+            KmipEnumeration.register(spec, kmipTag.getValue(), ObjectClass::fromName, ObjectClass::fromValue);
         }
     }
 
@@ -199,31 +200,7 @@ public class ObjectClass implements KmipEnumeration {
      * An interface representing an Object Class value, which can be either a standard
      * value or a custom extension.
      */
-    public interface Value {
-        /**
-         * @return the integer value of the enumeration.
-         */
-        int getValue();
-
-        /**
-         * @return the description of the enumeration.
-         */
-        String getDescription();
-
-        /**
-         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
-         */
-        boolean isSupported();
-
-        /**
-         * @return true if the enumeration is a custom extension, false otherwise.
-         */
-        boolean isCustom();
-
-        /**
-         * @return a new instance of the {@link ObjectClass} with the current value.
-         */
-        ObjectClass inst();
+    public interface Value extends KmipEnumeration.Value<ObjectClass> {
     }
 
     /**

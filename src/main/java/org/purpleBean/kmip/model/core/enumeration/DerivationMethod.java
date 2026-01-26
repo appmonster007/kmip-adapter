@@ -49,6 +49,7 @@ public class DerivationMethod implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, DerivationMethod.class);
+            KmipEnumeration.register(spec, kmipTag.getValue(), DerivationMethod::fromName, DerivationMethod::fromValue);
         }
     }
 
@@ -217,31 +218,7 @@ public class DerivationMethod implements KmipEnumeration {
      * An interface representing a Derivation Method value, which can be either a standard
      * value or a custom extension.
      */
-    public interface Value {
-        /**
-         * @return the integer value of the enumeration.
-         */
-        int getValue();
-
-        /**
-         * @return the description of the enumeration.
-         */
-        String getDescription();
-
-        /**
-         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
-         */
-        boolean isSupported();
-
-        /**
-         * @return true if the enumeration is a custom extension, false otherwise.
-         */
-        boolean isCustom();
-
-        /**
-         * @return a new instance of the {@link DerivationMethod} with the current value.
-         */
-        DerivationMethod inst();
+    public interface Value extends KmipEnumeration.Value<DerivationMethod> {
     }
 
     /**

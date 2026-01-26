@@ -39,6 +39,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class, CryptographicAlgorithm::of);
+            KmipEnumeration.register(spec, kmipTag.getValue(), CryptographicAlgorithm::fromName, CryptographicAlgorithm::fromValue);
         }
     }
 
@@ -333,31 +334,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
      * An interface representing a Cryptographic Algorithm value, which can be either a standard
      * value or a custom extension.
      */
-    public interface Value {
-        /**
-         * @return the integer value of the enumeration.
-         */
-        int getValue();
-
-        /**
-         * @return the description of the enumeration.
-         */
-        String getDescription();
-
-        /**
-         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
-         */
-        boolean isSupported();
-
-        /**
-         * @return true if the enumeration is a custom extension, false otherwise.
-         */
-        boolean isCustom();
-
-        /**
-         * @return a new instance of the {@link CryptographicAlgorithm} with the current value.
-         */
-        CryptographicAlgorithm inst();
+    public interface Value extends KmipEnumeration.Value<CryptographicAlgorithm> {
     }
 
     /**

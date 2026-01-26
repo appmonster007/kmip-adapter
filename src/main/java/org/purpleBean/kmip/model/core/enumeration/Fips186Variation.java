@@ -45,6 +45,7 @@ public class Fips186Variation implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, Fips186Variation.class);
+            KmipEnumeration.register(spec, kmipTag.getValue(), Fips186Variation::fromName, Fips186Variation::fromValue);
         }
     }
 
@@ -210,31 +211,7 @@ public class Fips186Variation implements KmipEnumeration {
      * An interface representing a FIPS 186 Variation value, which can be either a standard
      * value or a custom extension.
      */
-    public interface Value {
-        /**
-         * @return the integer value of the enumeration.
-         */
-        int getValue();
-
-        /**
-         * @return the description of the enumeration.
-         */
-        String getDescription();
-
-        /**
-         * @return true if the enumeration is supported in the current KMIP context, false otherwise.
-         */
-        boolean isSupported();
-
-        /**
-         * @return true if the enumeration is a custom extension, false otherwise.
-         */
-        boolean isCustom();
-
-        /**
-         * @return a new instance of the {@link Fips186Variation} with the current value.
-         */
-        Fips186Variation inst();
+    public interface Value extends KmipEnumeration.Value<Fips186Variation> {
     }
 
     /**
