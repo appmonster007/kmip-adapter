@@ -1,42 +1,42 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2013-06-21T22:18:59+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<ObjectType type="Enumeration" value="SplitKey"/>
-<UniqueIdentifier type="TextString"                       
-     value="$UNIQUE_IDENTIFIER_2"/>
-<SplitKey>
-<SplitKeyParts type="Integer"
-  value="4"/>
-<KeyPartIdentifier type="Integer"
-  value="2"/>
-<SplitKeyThreshold type="Integer"
-  value="4"/>
-<SplitKeyMethod type="Enumeration"
-  value="XOR"/>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="Raw"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="35ea4f615686230c7b11538693674e89"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="AES"/>
-<CryptographicLength
-  type="Integer"
-  value="128"/>
-</KeyBlock>
-</SplitKey>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2013-06-21T22:18:59+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <ObjectType type="Enumeration" value="SplitKey"/>
+            <UniqueIdentifier type="TextString"
+                              value="$UNIQUE_IDENTIFIER_2"/>
+            <SplitKey>
+                <SplitKeyParts type="Integer"
+                               value="4"/>
+                <KeyPartIdentifier type="Integer"
+                                   value="2"/>
+                <SplitKeyThreshold type="Integer"
+                                   value="4"/>
+                <SplitKeyMethod type="Enumeration"
+                                value="XOR"/>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="Raw"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString" value="35ea4f615686230c7b11538693674e89"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="AES"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="128"/>
+                </KeyBlock>
+            </SplitKey>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

@@ -1,32 +1,32 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
-<BatchCount type="Integer"
-  value="2"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Check"/>
-<UniqueBatchItemID type="ByteString"
-  value="d35a294f9425f06e"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="GetUsageAllocation"/>
-<UniqueBatchItemID type="ByteString"
-  value="80454d8ce4f738fe"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Check"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="d35a294f9425f06e"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetUsageAllocation"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="80454d8ce4f738fe"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

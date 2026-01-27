@@ -1,31 +1,31 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchOrderOption type="Boolean" value="true"/>
-<BatchCount type="Integer"
-  value="2"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Revoke"/>
-<UniqueBatchItemID type="ByteString"
-  value="64bf984d81eee045"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-<RevocationReason>
-<RevocationReasonCode type="Enumeration"                    value="CessationOfOperation"/>
-</RevocationReason>
-</RequestPayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Destroy"/>
-<UniqueBatchItemID type="ByteString"
-  value="6e140354775e324d"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchOrderOption type="Boolean" value="true"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Revoke"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="64bf984d81eee045"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+            <RevocationReason>
+                <RevocationReasonCode type="Enumeration" value="CessationOfOperation"/>
+            </RevocationReason>
+        </RequestPayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Destroy"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="6e140354775e324d"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

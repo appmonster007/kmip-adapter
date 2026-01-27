@@ -1,36 +1,36 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="2"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="AddAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="23a177faa569463c"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="x-attribute1"/>
-<AttributeValue type="TextString"
-  value="Value1"/>
-</Attribute>
-</RequestPayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="AddAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="9b898dc0577f8080"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="x-attribute2"/>
-<AttributeValue type="TextString"
-  value="Value2"/>
-</Attribute>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="2"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="AddAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="23a177faa569463c"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="x-attribute1"/>
+                <AttributeValue type="TextString"
+                                value="Value1"/>
+            </Attribute>
+        </RequestPayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="AddAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="9b898dc0577f8080"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="x-attribute2"/>
+                <AttributeValue type="TextString"
+                                value="Value2"/>
+            </Attribute>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

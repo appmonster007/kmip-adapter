@@ -1,26 +1,26 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="CreateSplitKey"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="SplitKey"/>
-<UniqueIdentifier type="TextString"                          
-  value="$UNIQUE_IDENTIFIER_0"/>
-<SplitKeyParts type="Integer"
-  value="4"/>
-<SplitKeyThreshold type="Integer"
-  value="4"/>
-<SplitKeyMethod type="Enumeration"
-  value="XOR"/>
-<TemplateAttribute>
-</TemplateAttribute>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="CreateSplitKey"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="SplitKey"/>
+            <UniqueIdentifier type="TextString"
+                              value="$UNIQUE_IDENTIFIER_0"/>
+            <SplitKeyParts type="Integer"
+                           value="4"/>
+            <SplitKeyThreshold type="Integer"
+                               value="4"/>
+            <SplitKeyMethod type="Enumeration"
+                            value="XOR"/>
+            <TemplateAttribute>
+            </TemplateAttribute>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

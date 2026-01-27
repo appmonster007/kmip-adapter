@@ -1,49 +1,49 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:36+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<Attribute>
-<AttributeName type="TextString" value="Digital Signature Algorithm"/>
-<AttributeValue type="Enumeration"
-  value="ECDSAWithSHA256"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Identifier"/>
-<AttributeValue>
-<IssuerDistinguishedName type="ByteString"               
-  value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
-<CertificateSerialNumber
-  type="ByteString"               
-  value="020900ec0b7402196d5295"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Issuer"/>
-<AttributeValue>
-<IssuerDistinguishedName type="ByteString"               
-  value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Subject"/>
-<AttributeValue>
-<SubjectDistinguishedName type="ByteString"              
-  value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:36+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Digital Signature Algorithm"/>
+                <AttributeValue type="Enumeration"
+                                value="ECDSAWithSHA256"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Identifier"/>
+                <AttributeValue>
+                    <IssuerDistinguishedName type="ByteString"
+                                             value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
+                    <CertificateSerialNumber
+                            type="ByteString"
+                            value="020900ec0b7402196d5295"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Issuer"/>
+                <AttributeValue>
+                    <IssuerDistinguishedName type="ByteString"
+                                             value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Subject"/>
+                <AttributeValue>
+                    <SubjectDistinguishedName type="ByteString"
+                                              value="3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

@@ -1,64 +1,65 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchOrderOption type="Boolean" value="true"/>
-<BatchCount type="Integer"
-  value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="SymmetricKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Algorithm"/>
-<AttributeValue type="Enumeration"
-  value="AES"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Length"/>
-<AttributeValue type="Integer"
-  value="128"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Encrypt
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchOrderOption type="Boolean" value="true"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="SymmetricKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Algorithm"/>
+                    <AttributeValue type="Enumeration"
+                                    value="AES"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Length"/>
+                    <AttributeValue type="Integer"
+                                    value="128"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Encrypt
   Verify Sign"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Key Value Location"/>
-<AttributeValue>
-<KeyValueLocationValue type="TextString" value="pkcs11:token=My%20Token;object=MDO-M-3;objecttype=secretkey;id=%69%95%3e%5c%f4%bd%ec%91"/>
-<KeyValueLocationType
-  type="Enumeration"
-  value="URI"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="MDO-M-3-12"/>
-<NameType type="Enumeration"                           
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-</TemplateAttribute>
-<SymmetricKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="Raw"/>
-<CryptographicAlgorithm
-  type="Enumeration"
-  value="AES"/>
-<CryptographicLength
-  type="Integer"
-  value="128"/>
-</KeyBlock>
-</SymmetricKey>
-</RequestPayload>
-</BatchItem>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Key Value Location"/>
+                    <AttributeValue>
+                        <KeyValueLocationValue type="TextString"
+                                               value="pkcs11:token=My%20Token;object=MDO-M-3;objecttype=secretkey;id=%69%95%3e%5c%f4%bd%ec%91"/>
+                        <KeyValueLocationType
+                                type="Enumeration"
+                                value="URI"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Name"/>
+                    <AttributeValue>
+                        <NameValue type="TextString" value="MDO-M-3-12"/>
+                        <NameType type="Enumeration"
+                                  value="UninterpretedTextString"/>
+                    </AttributeValue>
+                </Attribute>
+            </TemplateAttribute>
+            <SymmetricKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="Raw"/>
+                    <CryptographicAlgorithm
+                            type="Enumeration"
+                            value="AES"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="128"/>
+                </KeyBlock>
+            </SymmetricKey>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

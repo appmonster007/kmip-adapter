@@ -1,49 +1,50 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="PublicKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Verify"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="PrivateKeyLink"/>
-<LinkedObjectIdentifier
-  type="TextString"              
-  value="$UNIQUE_IDENTIFIER_0"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-ECC-3-10-pubkey1"/>
-</Attribute>
-</TemplateAttribute>
-<PublicKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="X_509"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="3059301306072a8648ce3d020106082a8648ce3d03010703420004b344392fb72aa267f86d7d837de1d96ce960ffc05ceef3f1fa26d8546a6442f3c1397e929aad8dcab25b282ca8a1cf00bef7cb18a0f5ea44493a30a6d223b25b"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="ECDSA"/>
-<CryptographicLength
-  type="Integer"
-  value="256"/>
-</KeyBlock>
-</PublicKey>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="PublicKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Verify"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Link"/>
+                    <AttributeValue>
+                        <LinkType type="Enumeration" value="PrivateKeyLink"/>
+                        <LinkedObjectIdentifier
+                                type="TextString"
+                                value="$UNIQUE_IDENTIFIER_0"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-ECC-3-10-pubkey1"/>
+                </Attribute>
+            </TemplateAttribute>
+            <PublicKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="X_509"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString"
+                                     value="3059301306072a8648ce3d020106082a8648ce3d03010703420004b344392fb72aa267f86d7d837de1d96ce960ffc05ceef3f1fa26d8546a6442f3c1397e929aad8dcab25b282ca8a1cf00bef7cb18a0f5ea44493a30a6d223b25b"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="ECDSA"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="256"/>
+                </KeyBlock>
+            </PublicKey>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

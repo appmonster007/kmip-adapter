@@ -1,42 +1,42 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
-<BatchCount type="Integer"
-  value="2"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="DeleteAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="a3eb249b495e8ad2"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="x-attribute1"/>
-<AttributeValue type="TextString"
-  value="ModifiedValue1"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="DeleteAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="c1fe7b3b4c977730"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="x-attribute2"/>
-<AttributeValue type="TextString"
-  value="ModifiedValue2"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="DeleteAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="a3eb249b495e8ad2"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="x-attribute1"/>
+                <AttributeValue type="TextString"
+                                value="ModifiedValue1"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="DeleteAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="c1fe7b3b4c977730"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="x-attribute2"/>
+                <AttributeValue type="TextString"
+                                value="ModifiedValue2"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

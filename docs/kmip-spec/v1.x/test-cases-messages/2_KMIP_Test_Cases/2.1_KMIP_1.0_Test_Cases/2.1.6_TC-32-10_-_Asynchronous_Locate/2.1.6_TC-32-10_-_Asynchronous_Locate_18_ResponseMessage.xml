@@ -1,23 +1,23 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2009-11-12T11:10:33+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Cancel"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<AsynchronousCorrelationValue type="ByteString"              
-  value="4d6bbfc35fe57fba"/>
-<CancellationResult type="Enumeration"
-  value="Canceled"/>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2009-11-12T11:10:33+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Cancel"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <AsynchronousCorrelationValue type="ByteString"
+                                          value="4d6bbfc35fe57fba"/>
+            <CancellationResult type="Enumeration"
+                                value="Canceled"/>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

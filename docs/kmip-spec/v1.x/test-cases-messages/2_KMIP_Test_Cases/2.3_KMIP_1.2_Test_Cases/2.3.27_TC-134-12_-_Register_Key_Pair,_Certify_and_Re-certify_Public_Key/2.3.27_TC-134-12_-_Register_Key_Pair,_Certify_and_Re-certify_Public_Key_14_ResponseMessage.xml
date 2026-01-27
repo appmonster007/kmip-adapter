@@ -1,87 +1,87 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:42+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Identifier"/>
-<AttributeValue>
-<Issuer type="TextString"                                
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-<SerialNumber type="TextString"
-  value="9BBA23D1B6A48F97"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Issuer"/>
-<AttributeValue>
-<CertificateIssuerDistinguishedName type="TextString"    
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Subject"/>
-<AttributeValue>
-<CertificateSubjectDistinguishedName type="TextString"   
-  value="CN=Client,OU=KMIP,O=ACME,C=US"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Type"/>
-<AttributeValue type="Enumeration"
-  value="X_509"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Digital Signature Algorithm"/>
-<AttributeValue type="Enumeration"                         
-  value="SHA_256WithRSAEncryption"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Length"/>
-<AttributeValue type="Integer"
-  value="2048"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Length"/>
-<AttributeValue type="Integer"
-  value="635"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Identifier"/>
-<AttributeValue>
-<IssuerDistinguishedName type="ByteString"               
-  value="303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950"/>
-<CertificateSerialNumber
-  type="ByteString"               
-  value="0209009bba23d1b6a48f97"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Issuer"/>
-<AttributeValue>
-<IssuerDistinguishedName type="ByteString"               
-  value="303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="X.509 Certificate Subject"/>
-<AttributeValue>
-<SubjectDistinguishedName type="ByteString"              
-  value="303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e74"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:42+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Identifier"/>
+                <AttributeValue>
+                    <Issuer type="TextString"
+                            value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                    <SerialNumber type="TextString"
+                                  value="9BBA23D1B6A48F97"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Issuer"/>
+                <AttributeValue>
+                    <CertificateIssuerDistinguishedName type="TextString"
+                                                        value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Subject"/>
+                <AttributeValue>
+                    <CertificateSubjectDistinguishedName type="TextString"
+                                                         value="CN=Client,OU=KMIP,O=ACME,C=US"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Type"/>
+                <AttributeValue type="Enumeration"
+                                value="X_509"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Digital Signature Algorithm"/>
+                <AttributeValue type="Enumeration"
+                                value="SHA_256WithRSAEncryption"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Cryptographic Length"/>
+                <AttributeValue type="Integer"
+                                value="2048"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Length"/>
+                <AttributeValue type="Integer"
+                                value="635"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Identifier"/>
+                <AttributeValue>
+                    <IssuerDistinguishedName type="ByteString"
+                                             value="303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950"/>
+                    <CertificateSerialNumber
+                            type="ByteString"
+                            value="0209009bba23d1b6a48f97"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Issuer"/>
+                <AttributeValue>
+                    <IssuerDistinguishedName type="ByteString"
+                                             value="303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="X.509 Certificate Subject"/>
+                <AttributeValue>
+                    <SubjectDistinguishedName type="ByteString"
+                                              value="303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e74"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

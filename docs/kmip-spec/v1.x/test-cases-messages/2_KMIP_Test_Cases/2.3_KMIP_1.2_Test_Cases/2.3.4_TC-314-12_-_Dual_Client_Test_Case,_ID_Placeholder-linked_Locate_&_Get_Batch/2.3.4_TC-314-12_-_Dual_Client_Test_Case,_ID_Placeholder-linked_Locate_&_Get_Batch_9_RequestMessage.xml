@@ -1,21 +1,21 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-<AttributeName type="TextString"
-  value="Name"/>
-<AttributeName type="TextString"
-  value="Contact
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+            <AttributeName type="TextString"
+                           value="Name"/>
+            <AttributeName type="TextString"
+                           value="Contact
   Information"/>
-</RequestPayload>
-</BatchItem>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

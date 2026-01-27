@@ -1,67 +1,67 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2013-06-18T08:55:57+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_3"/>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="PublicKeyLink"/>
-<LinkedObjectIdentifier
-  type="TextString"                
-  value="$UNIQUE_IDENTIFIER_0"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeIndex type="Integer"
-  value="1"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="ReplacedObjectLink"/>
-<LinkedObjectIdentifier
-  type="TextString"                
-  value="$UNIQUE_IDENTIFIER_2"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Identifier"/>
-<AttributeValue>
-<Issuer type="TextString"                                
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-<SerialNumber type="TextString"
-  value="CF77F7A23282BC12"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-134-12-certificate2"/>
-<NameType type="Enumeration"                             
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeIndex type="Integer"
-  value="1"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-134-12-certificate1"/>
-<NameType type="Enumeration"                             
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2013-06-18T08:55:57+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Link"/>
+                <AttributeValue>
+                    <LinkType type="Enumeration" value="PublicKeyLink"/>
+                    <LinkedObjectIdentifier
+                            type="TextString"
+                            value="$UNIQUE_IDENTIFIER_0"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Link"/>
+                <AttributeIndex type="Integer"
+                                value="1"/>
+                <AttributeValue>
+                    <LinkType type="Enumeration" value="ReplacedObjectLink"/>
+                    <LinkedObjectIdentifier
+                            type="TextString"
+                            value="$UNIQUE_IDENTIFIER_2"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Identifier"/>
+                <AttributeValue>
+                    <Issuer type="TextString"
+                            value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                    <SerialNumber type="TextString"
+                                  value="CF77F7A23282BC12"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Name"/>
+                <AttributeValue>
+                    <NameValue type="TextString" value="TC-134-12-certificate2"/>
+                    <NameType type="Enumeration"
+                              value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Name"/>
+                <AttributeIndex type="Integer"
+                                value="1"/>
+                <AttributeValue>
+                    <NameValue type="TextString" value="TC-134-12-certificate1"/>
+                    <NameType type="Enumeration"
+                              value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

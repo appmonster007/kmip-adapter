@@ -1,15 +1,15 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="DiscoverVersions"/>
-<RequestPayload>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="DiscoverVersions"/>
+        <RequestPayload>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

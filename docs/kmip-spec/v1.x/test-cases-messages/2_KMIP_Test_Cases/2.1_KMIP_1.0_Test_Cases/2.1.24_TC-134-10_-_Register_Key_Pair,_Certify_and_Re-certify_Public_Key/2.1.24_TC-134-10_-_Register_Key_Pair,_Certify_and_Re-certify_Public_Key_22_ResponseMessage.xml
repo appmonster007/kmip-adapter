@@ -1,41 +1,41 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:42+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="PublicKeyLink"/>
-<LinkedObjectIdentifier
-  type="TextString"      
-            value="$UNIQUE_IDENTIFIER_0"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeIndex type="Integer"
-  value="1"/>
-<AttributeValue>
-<LinkType type="Enumeration"                             
-  value="ReplacementObjectLink"/>
-<LinkedObjectIdentifier
-  type="TextString"                
-  value="$UNIQUE_IDENTIFIER_3"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:42+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Link"/>
+                <AttributeValue>
+                    <LinkType type="Enumeration" value="PublicKeyLink"/>
+                    <LinkedObjectIdentifier
+                            type="TextString"
+                            value="$UNIQUE_IDENTIFIER_0"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Link"/>
+                <AttributeIndex type="Integer"
+                                value="1"/>
+                <AttributeValue>
+                    <LinkType type="Enumeration"
+                              value="ReplacementObjectLink"/>
+                    <LinkedObjectIdentifier
+                            type="TextString"
+                            value="$UNIQUE_IDENTIFIER_3"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

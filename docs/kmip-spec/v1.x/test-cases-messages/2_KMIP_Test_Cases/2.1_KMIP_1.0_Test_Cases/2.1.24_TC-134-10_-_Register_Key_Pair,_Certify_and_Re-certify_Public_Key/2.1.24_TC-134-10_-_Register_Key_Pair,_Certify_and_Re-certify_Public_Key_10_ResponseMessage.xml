@@ -1,27 +1,27 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:41+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<ObjectType type="Enumeration" value="Certificate"/>
-<UniqueIdentifier type="TextString"                          
-  value="$UNIQUE_IDENTIFIER_2"/>
-<Certificate>
-<CertificateType type="Enumeration" value="X_509"/>
-<CertificateValue type="ByteString"                        
-  value="30820277308201e0a0030201020209009bba23d1b6a48f97300d06092a864886f70d01010b0500303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950301e170d3133303631383038353535375a170d3134303631383038353535375a303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e7430820122300d06092a864886f70d01010105000382010f003082010a0282010100ab7f161c0042496ccd6c6d4dadb919973435357776003acf54b7af1e440afb80b64a8755f8002cfeba6b184540a2d66086d74648346d75b8d71812b205387c0f6583bc4d7dc7ec114f3b176b7957c422e7d03fc6267fa2a6f89b9bee9e60a1d7c2d833e5a5f4bb0b1434f4e795a41100f8aa214900df8b65089f98135b1c67b701675abdbc7d5721aac9d14a7f081fcec80b64e8a0ecc8295353c795328abf70e1b42e7bb8b7f4e8ac8c810cdb66e3d21126eba8da7d0ca34142cb76f91f013da809e9c1b7ae64c54130fbc21d80e9c2cb06c5c8d7cce8946a9ac99b1c2815c3612a29a82d73a1f99374fe30e54951662a6eda29c6fc411335d5dc7426b0f6050203010001300d06092a864886f70d01010b050003818100c4fe08d5bd74239648c7faabaed0978527ac01a0fd17b8a65c0d92501c4eab3f487511062eafedc1024e74dc6bfdaae7f66d1fdda7574f6db3f03c6de83586b52c593a4671001a0531bc43eff4849880b07924b7a9a0236d5d64d82d4d8e42dcd3a72c80728804f9ba7f0e80c3fe3eb09cb3ed7fbfbb2167c99be513ff9db0b6"/>
-</Certificate>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:41+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <ObjectType type="Enumeration" value="Certificate"/>
+            <UniqueIdentifier type="TextString"
+                              value="$UNIQUE_IDENTIFIER_2"/>
+            <Certificate>
+                <CertificateType type="Enumeration" value="X_509"/>
+                <CertificateValue type="ByteString"
+                                  value="30820277308201e0a0030201020209009bba23d1b6a48f97300d06092a864886f70d01010b0500303b310b3009060355040613025553310d300b060355040a130454455354310e300c060355040b13054f41534953310d300b060355040313044b4d4950301e170d3133303631383038353535375a170d3134303631383038353535375a303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e7430820122300d06092a864886f70d01010105000382010f003082010a0282010100ab7f161c0042496ccd6c6d4dadb919973435357776003acf54b7af1e440afb80b64a8755f8002cfeba6b184540a2d66086d74648346d75b8d71812b205387c0f6583bc4d7dc7ec114f3b176b7957c422e7d03fc6267fa2a6f89b9bee9e60a1d7c2d833e5a5f4bb0b1434f4e795a41100f8aa214900df8b65089f98135b1c67b701675abdbc7d5721aac9d14a7f081fcec80b64e8a0ecc8295353c795328abf70e1b42e7bb8b7f4e8ac8c810cdb66e3d21126eba8da7d0ca34142cb76f91f013da809e9c1b7ae64c54130fbc21d80e9c2cb06c5c8d7cce8946a9ac99b1c2815c3612a29a82d73a1f99374fe30e54951662a6eda29c6fc411335d5dc7426b0f6050203010001300d06092a864886f70d01010b050003818100c4fe08d5bd74239648c7faabaed0978527ac01a0fd17b8a65c0d92501c4eab3f487511062eafedc1024e74dc6bfdaae7f66d1fdda7574f6db3f03c6de83586b52c593a4671001a0531bc43eff4849880b07924b7a9a0236d5d64d82d4d8e42dcd3a72c80728804f9ba7f0e80c3fe3eb09cb3ed7fbfbb2167c99be513ff9db0b6"/>
+            </Certificate>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

@@ -1,54 +1,54 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="SymmetricKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-141-12-key1"/>
-<NameType type="Enumeration"                           
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="WrapKey"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Parameters"/>
-<AttributeValue>
-<BlockCipherMode type="Enumeration"                     value="NISTKeyWrap"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Activation Date"/>
-<AttributeValue type="DateTime"
-  value="2009-11-12T09:47:30+00:00"/>
-</Attribute>
-</TemplateAttribute>
-<SymmetricKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="Raw"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="000102030405060708090a0b0c0d0e0f"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="AES"/>
-<CryptographicLength
-  type="Integer"
-  value="128"/>
-</KeyBlock>
-</SymmetricKey>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="SymmetricKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Name"/>
+                    <AttributeValue>
+                        <NameValue type="TextString" value="TC-141-12-key1"/>
+                        <NameType type="Enumeration"
+                                  value="UninterpretedTextString"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="WrapKey"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Parameters"/>
+                    <AttributeValue>
+                        <BlockCipherMode type="Enumeration" value="NISTKeyWrap"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Activation Date"/>
+                    <AttributeValue type="DateTime"
+                                    value="2009-11-12T09:47:30+00:00"/>
+                </Attribute>
+            </TemplateAttribute>
+            <SymmetricKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="Raw"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString" value="000102030405060708090a0b0c0d0e0f"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="AES"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="128"/>
+                </KeyBlock>
+            </SymmetricKey>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

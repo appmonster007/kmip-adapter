@@ -1,39 +1,39 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Create"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="SymmetricKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Algorithm"/>
-<AttributeValue type="Enumeration"
-  value="AES"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Length"/>
-<AttributeValue type="Integer"
-  value="256"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Decrypt
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Create"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="SymmetricKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Algorithm"/>
+                    <AttributeValue type="Enumeration"
+                                    value="AES"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Length"/>
+                    <AttributeValue type="Integer"
+                                    value="256"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Decrypt
   Encrypt"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-181-11-key3"/>
-</Attribute>
-</TemplateAttribute>
-</RequestPayload>
-</BatchItem>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-181-11-key3"/>
+                </Attribute>
+            </TemplateAttribute>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

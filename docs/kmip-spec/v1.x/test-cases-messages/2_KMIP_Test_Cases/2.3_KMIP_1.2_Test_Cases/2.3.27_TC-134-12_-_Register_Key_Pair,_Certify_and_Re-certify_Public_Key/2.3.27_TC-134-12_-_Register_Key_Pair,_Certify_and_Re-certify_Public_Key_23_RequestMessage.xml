@@ -1,23 +1,23 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_3"/>
-<AttributeName type="TextString"
-  value="Link"/>
-<AttributeName type="TextString"
-  value="Certificate
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+            <AttributeName type="TextString"
+                           value="Link"/>
+            <AttributeName type="TextString"
+                           value="Certificate
   Identifier"/>
-<AttributeName type="TextString"
-  value="Name"/>
-</RequestPayload>
-</BatchItem>
+            <AttributeName type="TextString"
+                           value="Name"/>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

@@ -1,42 +1,42 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
-<BatchCount type="Integer"
-  value="3"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Destroy"/>
-<UniqueBatchItemID type="ByteString"
-  value="f4cf0a5614786eb7"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Destroy"/>
-<UniqueBatchItemID type="ByteString"
-  value="dd55da10ebe91928"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Destroy"/>
-<UniqueBatchItemID type="ByteString"
-  value="18334af52fee87fa"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
+        <BatchCount type="Integer"
+                    value="3"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Destroy"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="f4cf0a5614786eb7"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Destroy"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="dd55da10ebe91928"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Destroy"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="18334af52fee87fa"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

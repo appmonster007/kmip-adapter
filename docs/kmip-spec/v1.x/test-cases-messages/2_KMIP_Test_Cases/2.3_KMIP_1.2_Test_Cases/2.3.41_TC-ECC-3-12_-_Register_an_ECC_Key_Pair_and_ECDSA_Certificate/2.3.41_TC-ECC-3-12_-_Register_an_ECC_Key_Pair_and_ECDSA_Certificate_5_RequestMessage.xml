@@ -1,43 +1,43 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="Certificate"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Verify
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="Certificate"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Verify
   Sign"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="PublicKeyLink"/>
-<LinkedObjectIdentifier
-  type="TextString"              
-  value="$UNIQUE_IDENTIFIER_0"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-ECC-3-12-cert1"/>
-</Attribute>
-</TemplateAttribute>
-<Certificate>
-<CertificateType type="Enumeration" value="X_509"/>
-<CertificateValue type="ByteString"                        
-  value="308201d53082017aa003020102020900ec0b7402196d5295300a06082a8648ce3d0403023048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31301e170d3133303632353130333331315a170d3233303632333130333331315a3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b313056301006072a8648ce3d020106052b8104000a03420004dab5d3c253113db414abfc1c0ebf5a02559e656aa1c8b0aa8d870aa0324cda4899925ea1e6dbc259a6c7825cf46592ac7594cc40bd604b728d88b636f317d366a350304e301d0603551d0e04160414a098d4bba8817f7e95068c875fbec850b3e177a0301f0603551d23041830168014a098d4bba8817f7e95068c875fbec850b3e177a0300c0603551d13040530030101ff300a06082a8648ce3d0403020349003046022100e9cd14b63e3e57dd26ddfba77a3ed1d05b3721454f617509dff3b9af02d4f5ae022100c9afef9344b8f8b12c525b4618dc3621bce7f8b390ac01ffbe686cc7641c76bb"/>
-</Certificate>
-</RequestPayload>
-</BatchItem>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Link"/>
+                    <AttributeValue>
+                        <LinkType type="Enumeration" value="PublicKeyLink"/>
+                        <LinkedObjectIdentifier
+                                type="TextString"
+                                value="$UNIQUE_IDENTIFIER_0"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-ECC-3-12-cert1"/>
+                </Attribute>
+            </TemplateAttribute>
+            <Certificate>
+                <CertificateType type="Enumeration" value="X_509"/>
+                <CertificateValue type="ByteString"
+                                  value="308201d53082017aa003020102020900ec0b7402196d5295300a06082a8648ce3d0403023048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b31301e170d3133303632353130333331315a170d3233303632333130333331315a3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235366b313056301006072a8648ce3d020106052b8104000a03420004dab5d3c253113db414abfc1c0ebf5a02559e656aa1c8b0aa8d870aa0324cda4899925ea1e6dbc259a6c7825cf46592ac7594cc40bd604b728d88b636f317d366a350304e301d0603551d0e04160414a098d4bba8817f7e95068c875fbec850b3e177a0301f0603551d23041830168014a098d4bba8817f7e95068c875fbec850b3e177a0300c0603551d13040530030101ff300a06082a8648ce3d0403020349003046022100e9cd14b63e3e57dd26ddfba77a3ed1d05b3721454f617509dff3b9af02d4f5ae022100c9afef9344b8f8b12c525b4618dc3621bce7f8b390ac01ffbe686cc7641c76bb"/>
+            </Certificate>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

@@ -1,53 +1,53 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:37+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Identifier"/>
-<AttributeValue>
-<Issuer type="TextString"                                
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-<SerialNumber type="TextString"
-  value="1"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Issuer"/>
-<AttributeValue>
-<CertificateIssuerDistinguishedName type="TextString"    
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Subject"/>
-<AttributeValue>
-<CertificateSubjectDistinguishedName type="TextString"   
-  value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Certificate Type"/>
-<AttributeValue type="Enumeration"
-  value="X_509"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Length"/>
-<AttributeValue type="Integer"
-  value="2048"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:37+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Identifier"/>
+                <AttributeValue>
+                    <Issuer type="TextString"
+                            value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                    <SerialNumber type="TextString"
+                                  value="1"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Issuer"/>
+                <AttributeValue>
+                    <CertificateIssuerDistinguishedName type="TextString"
+                                                        value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Subject"/>
+                <AttributeValue>
+                    <CertificateSubjectDistinguishedName type="TextString"
+                                                         value="CN=KMIP,OU=OASIS,O=TEST,C=US"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Certificate Type"/>
+                <AttributeValue type="Enumeration"
+                                value="X_509"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Cryptographic Length"/>
+                <AttributeValue type="Integer"
+                                value="2048"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

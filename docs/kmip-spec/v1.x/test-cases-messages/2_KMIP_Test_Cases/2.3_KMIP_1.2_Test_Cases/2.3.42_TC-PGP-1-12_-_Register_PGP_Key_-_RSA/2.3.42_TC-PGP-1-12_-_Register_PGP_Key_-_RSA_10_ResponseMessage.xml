@@ -1,63 +1,63 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:37+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="Alternative Name"/>
-<AttributeValue>
-<AlternativeNameValue type="TextString"                   value="kmip3@kmip.com"/>
-<AlternativeNameType
-  type="Enumeration"                  
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Alternative Name"/>
-<AttributeIndex type="Integer"
-  value="1"/>
-<AttributeValue>
-<AlternativeNameValue type="TextString" value="KMIP USER RSA (OASIS Key Management Interoperability
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:37+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Alternative Name"/>
+                <AttributeValue>
+                    <AlternativeNameValue type="TextString" value="kmip3@kmip.com"/>
+                    <AlternativeNameType
+                            type="Enumeration"
+                            value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Alternative Name"/>
+                <AttributeIndex type="Integer"
+                                value="1"/>
+                <AttributeValue>
+                    <AlternativeNameValue type="TextString" value="KMIP USER RSA (OASIS Key Management Interoperability
   Protocol) &lt;kmip3@kmip.com&gt;"/>
-<AlternativeNameType
-  type="Enumeration"                  
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Alternative Name"/>
-<AttributeIndex type="Integer"
-  value="2"/>
-<AttributeValue>
-<AlternativeNameValue type="TextString" value="6CCA0D26"/>
-<AlternativeNameType
-  type="Enumeration"                  
-  value="ObjectSerialNumber"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Alternative Name"/>
-<AttributeIndex type="Integer"
-  value="3"/>
-<AttributeValue>
-<AlternativeNameValue type="TextString"                   value="240C17B36CCA0D26"/>
-<AlternativeNameType
-  type="Enumeration"                  
-  value="ObjectSerialNumber"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+                    <AlternativeNameType
+                            type="Enumeration"
+                            value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Alternative Name"/>
+                <AttributeIndex type="Integer"
+                                value="2"/>
+                <AttributeValue>
+                    <AlternativeNameValue type="TextString" value="6CCA0D26"/>
+                    <AlternativeNameType
+                            type="Enumeration"
+                            value="ObjectSerialNumber"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Alternative Name"/>
+                <AttributeIndex type="Integer"
+                                value="3"/>
+                <AttributeValue>
+                    <AlternativeNameValue type="TextString" value="240C17B36CCA0D26"/>
+                    <AlternativeNameType
+                            type="Enumeration"
+                            value="ObjectSerialNumber"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

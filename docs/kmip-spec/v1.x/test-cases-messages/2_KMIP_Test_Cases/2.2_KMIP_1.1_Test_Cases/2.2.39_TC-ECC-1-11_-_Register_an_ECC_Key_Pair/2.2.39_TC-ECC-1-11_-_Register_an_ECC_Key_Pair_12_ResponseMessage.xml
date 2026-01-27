@@ -1,34 +1,35 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:36+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<ObjectType type="Enumeration" value="PrivateKey"/>
-<UniqueIdentifier type="TextString"                          
-  value="$UNIQUE_IDENTIFIER_0"/>
-<PrivateKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="ECPrivateKey"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="30770201010420912a0e208f5dd734b1851847e4659c4588b16d9f3bc1ada510ea2c969daf9ef4a00a06082a8648ce3d030107a14403420004b344392fb72aa267f86d7d837de1d96ce960ffc05ceef3f1fa26d8546a6442f3c1397e929aad8dcab25b282ca8a1cf00bef7cb18a0f5ea44493a30a6d223b25b"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="ECDSA"/>
-<CryptographicLength
-  type="Integer"
-  value="256"/>
-</KeyBlock>
-</PrivateKey>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:36+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <ObjectType type="Enumeration" value="PrivateKey"/>
+            <UniqueIdentifier type="TextString"
+                              value="$UNIQUE_IDENTIFIER_0"/>
+            <PrivateKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="ECPrivateKey"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString"
+                                     value="30770201010420912a0e208f5dd734b1851847e4659c4588b16d9f3bc1ada510ea2c969daf9ef4a00a06082a8648ce3d030107a14403420004b344392fb72aa267f86d7d837de1d96ce960ffc05ceef3f1fa26d8546a6442f3c1397e929aad8dcab25b282ca8a1cf00bef7cb18a0f5ea44493a30a6d223b25b"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="ECDSA"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="256"/>
+                </KeyBlock>
+            </PrivateKey>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

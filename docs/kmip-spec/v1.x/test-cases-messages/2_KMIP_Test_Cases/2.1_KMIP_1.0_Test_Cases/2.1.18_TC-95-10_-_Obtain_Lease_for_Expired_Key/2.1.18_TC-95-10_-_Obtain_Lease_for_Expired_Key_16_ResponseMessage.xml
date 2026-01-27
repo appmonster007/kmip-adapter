@@ -1,34 +1,34 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2010-02-11T15:45:51+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<ObjectType type="Enumeration" value="SymmetricKey"/>
-<UniqueIdentifier type="TextString"                          
-  value="$UNIQUE_IDENTIFIER_1"/>
-<SymmetricKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="Raw"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="173e9499f7c573712afb9883b5df2bce"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="AES"/>
-<CryptographicLength
-  type="Integer"
-  value="128"/>
-</KeyBlock>
-</SymmetricKey>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2010-02-11T15:45:51+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <ObjectType type="Enumeration" value="SymmetricKey"/>
+            <UniqueIdentifier type="TextString"
+                              value="$UNIQUE_IDENTIFIER_1"/>
+            <SymmetricKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="Raw"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString" value="173e9499f7c573712afb9883b5df2bce"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="AES"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="128"/>
+                </KeyBlock>
+            </SymmetricKey>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

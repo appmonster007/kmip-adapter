@@ -1,39 +1,39 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<BatchOrderOption type="Boolean" value="true"/>
-<BatchCount type="Integer"
-  value="2"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Locate"/>
-<UniqueBatchItemID type="ByteString"
-  value="0e9e1875336e415e"/>
-<RequestPayload>
-<Attribute>
-<AttributeName type="TextString" value="Object Type"/>
-<AttributeValue type="Enumeration"
-  value="SymmetricKey"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="Key1"/>
-<NameType type="Enumeration"                             
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-</RequestPayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<UniqueBatchItemID type="ByteString"
-  value="cfef21dddf1cf5e3"/>
-<RequestPayload>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <BatchOrderOption type="Boolean" value="true"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Locate"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="0e9e1875336e415e"/>
+        <RequestPayload>
+            <Attribute>
+                <AttributeName type="TextString" value="Object Type"/>
+                <AttributeValue type="Enumeration"
+                                value="SymmetricKey"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Name"/>
+                <AttributeValue>
+                    <NameValue type="TextString" value="Key1"/>
+                    <NameType type="Enumeration"
+                              value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+        </RequestPayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="cfef21dddf1cf5e3"/>
+        <RequestPayload>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

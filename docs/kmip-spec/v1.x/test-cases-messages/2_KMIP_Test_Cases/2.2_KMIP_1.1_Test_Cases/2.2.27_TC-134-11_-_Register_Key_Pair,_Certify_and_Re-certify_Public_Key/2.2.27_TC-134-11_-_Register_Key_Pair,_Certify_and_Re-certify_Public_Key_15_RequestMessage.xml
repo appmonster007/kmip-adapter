@@ -1,37 +1,37 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="ReCertify"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<CertificateRequestType
-  type="Enumeration"
-  value="PKCS_10"/>
-<CertificateRequest type="ByteString"                        
-  value="3082028130820169020100303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e7430820122300d06092a864886f70d01010105000382010f003082010a0282010100ab7f161c0042496ccd6c6d4dadb919973435357776003acf54b7af1e440afb80b64a8755f8002cfeba6b184540a2d66086d74648346d75b8d71812b205387c0f6583bc4d7dc7ec114f3b176b7957c422e7d03fc6267fa2a6f89b9bee9e60a1d7c2d833e5a5f4bb0b1434f4e795a41100f8aa214900df8b65089f98135b1c67b701675abdbc7d5721aac9d14a7f081fcec80b64e8a0ecc8295353c795328abf70e1b42e7bb8b7f4e8ac8c810cdb66e3d21126eba8da7d0ca34142cb76f91f013da809e9c1b7ae64c54130fbc21d80e9c2cb06c5c8d7cce8946a9ac99b1c2815c3612a29a82d73a1f99374fe30e54951662a6eda29c6fc411335d5dc7426b0f6050203010001a000300d06092a864886f70d010105050003820101002d90f5492c3df1771df4e87e1087cb952197319a9696e2d588efda580d8d3304427b997cd921ad7c674aea413fba85fd61e6a481de9ab2e8a4ff43c02655015d3437f783fe0c781519cd08ffd3c007c7fade9632fe5659e2cac35bd6aaf3e13dc18097d996df01b66fc5e26ca109380863a209125cc0fd79533f327fa1cad444d89d3ff81b92a91428c469c846090fd1324846e12d01671962c332a7826152daaf486cc867185c2e27caf2f009898db07fe4b45c518192aa493d8f8c0198db67f90672ab6de05a08032941377f473d80716d85adc6182003ab34942302214eb3895f15403f2616adfd6bb5e6aa47fa38c9dfc73f4de80ddb91bdb04d21c82ba6"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Verify
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="ReCertify"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <CertificateRequestType
+                    type="Enumeration"
+                    value="PKCS_10"/>
+            <CertificateRequest type="ByteString"
+                                value="3082028130820169020100303c310b3009060355040613025553310d300b060355040a130441434d45310d300b060355040b13044b4d4950310f300d06035504031306436c69656e7430820122300d06092a864886f70d01010105000382010f003082010a0282010100ab7f161c0042496ccd6c6d4dadb919973435357776003acf54b7af1e440afb80b64a8755f8002cfeba6b184540a2d66086d74648346d75b8d71812b205387c0f6583bc4d7dc7ec114f3b176b7957c422e7d03fc6267fa2a6f89b9bee9e60a1d7c2d833e5a5f4bb0b1434f4e795a41100f8aa214900df8b65089f98135b1c67b701675abdbc7d5721aac9d14a7f081fcec80b64e8a0ecc8295353c795328abf70e1b42e7bb8b7f4e8ac8c810cdb66e3d21126eba8da7d0ca34142cb76f91f013da809e9c1b7ae64c54130fbc21d80e9c2cb06c5c8d7cce8946a9ac99b1c2815c3612a29a82d73a1f99374fe30e54951662a6eda29c6fc411335d5dc7426b0f6050203010001a000300d06092a864886f70d010105050003820101002d90f5492c3df1771df4e87e1087cb952197319a9696e2d588efda580d8d3304427b997cd921ad7c674aea413fba85fd61e6a481de9ab2e8a4ff43c02655015d3437f783fe0c781519cd08ffd3c007c7fade9632fe5659e2cac35bd6aaf3e13dc18097d996df01b66fc5e26ca109380863a209125cc0fd79533f327fa1cad444d89d3ff81b92a91428c469c846090fd1324846e12d01671962c332a7826152daaf486cc867185c2e27caf2f009898db07fe4b45c518192aa493d8f8c0198db67f90672ab6de05a08032941377f473d80716d85adc6182003ab34942302214eb3895f15403f2616adfd6bb5e6aa47fa38c9dfc73f4de80ddb91bdb04d21c82ba6"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Verify
   Sign"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-134-11-certificate2"/>
-<NameType type="Enumeration"                           
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-</TemplateAttribute>
-</RequestPayload>
-</BatchItem>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Name"/>
+                    <AttributeValue>
+                        <NameValue type="TextString" value="TC-134-11-certificate2"/>
+                        <NameType type="Enumeration"
+                                  value="UninterpretedTextString"/>
+                    </AttributeValue>
+                </Attribute>
+            </TemplateAttribute>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

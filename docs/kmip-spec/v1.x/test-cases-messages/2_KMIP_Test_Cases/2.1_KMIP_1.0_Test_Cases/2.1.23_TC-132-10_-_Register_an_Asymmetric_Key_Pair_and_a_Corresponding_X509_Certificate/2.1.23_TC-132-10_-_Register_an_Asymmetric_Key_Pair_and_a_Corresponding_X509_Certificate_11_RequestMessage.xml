@@ -1,31 +1,31 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
-<AttributeName type="TextString"
-  value="Certificate
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+            <AttributeName type="TextString"
+                           value="Certificate
   Identifier"/>
-<AttributeName type="TextString"
-  value="Certificate
+            <AttributeName type="TextString"
+                           value="Certificate
   Issuer"/>
-<AttributeName type="TextString"
-  value="Certificate
+            <AttributeName type="TextString"
+                           value="Certificate
   Subject"/>
-<AttributeName type="TextString"
-  value="Certificate
+            <AttributeName type="TextString"
+                           value="Certificate
   Type"/>
-<AttributeName type="TextString"
-  value="Cryptographic
+            <AttributeName type="TextString"
+                           value="Cryptographic
   Length"/>
-</RequestPayload>
-</BatchItem>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

@@ -1,32 +1,32 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
-<BatchCount type="Integer"
-  value="2"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Locate"/>
-<UniqueBatchItemID type="ByteString"
-  value="657339bdf375bfa2"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<UniqueBatchItemID type="ByteString"
-  value="5713c4911444b36e"/>
-<ResultStatus type="Enumeration"
-  value="OperationFailed"/>
-<ResultReason type="Enumeration"
-  value="ItemNotFound"/>
-<ResultMessage type="TextString"
-  value="NOT_FOUND"/>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Locate"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="657339bdf375bfa2"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="5713c4911444b36e"/>
+        <ResultStatus type="Enumeration"
+                      value="OperationFailed"/>
+        <ResultReason type="Enumeration"
+                      value="ItemNotFound"/>
+        <ResultMessage type="TextString"
+                       value="NOT_FOUND"/>
+    </BatchItem>
 </ResponseMessage>

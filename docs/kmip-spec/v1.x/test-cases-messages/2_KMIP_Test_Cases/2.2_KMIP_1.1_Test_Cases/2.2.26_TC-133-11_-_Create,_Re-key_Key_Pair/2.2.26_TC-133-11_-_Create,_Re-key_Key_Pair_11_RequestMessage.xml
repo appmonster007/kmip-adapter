@@ -1,41 +1,41 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<BatchOrderOption type="Boolean" value="true"/>
-<BatchCount type="Integer"
-  value="2"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Locate"/>
-<UniqueBatchItemID type="ByteString"
-  value="5df01d7748d64a16"/>
-<RequestPayload>
-<MaximumItems type="Integer" value="1"/>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-133-11-publicKey1"/>
-<NameType type="Enumeration"                             
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Object Type"/>
-<AttributeValue type="Enumeration"
-  value="PublicKey"/>
-</Attribute>
-</RequestPayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<UniqueBatchItemID type="ByteString"
-  value="7c7f588280a61c24"/>
-<RequestPayload>
-<KeyFormatType type="Enumeration"                             value="TransparentRSAPublicKey"/>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <BatchOrderOption type="Boolean" value="true"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Locate"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="5df01d7748d64a16"/>
+        <RequestPayload>
+            <MaximumItems type="Integer" value="1"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Name"/>
+                <AttributeValue>
+                    <NameValue type="TextString" value="TC-133-11-publicKey1"/>
+                    <NameType type="Enumeration"
+                              value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Object Type"/>
+                <AttributeValue type="Enumeration"
+                                value="PublicKey"/>
+            </Attribute>
+        </RequestPayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="7c7f588280a61c24"/>
+        <RequestPayload>
+            <KeyFormatType type="Enumeration" value="TransparentRSAPublicKey"/>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

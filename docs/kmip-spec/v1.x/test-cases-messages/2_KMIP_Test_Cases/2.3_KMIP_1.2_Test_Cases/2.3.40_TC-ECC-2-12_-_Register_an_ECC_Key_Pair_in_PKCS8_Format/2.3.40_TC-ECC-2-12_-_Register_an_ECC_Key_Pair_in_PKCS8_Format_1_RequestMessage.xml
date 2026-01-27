@@ -1,40 +1,41 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="PrivateKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Sign"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-ECC-2-12-prikey1"/>
-</Attribute>
-</TemplateAttribute>
-<PrivateKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="PKCS_8"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="3081a9301c060a2a864886f70d010c0103300e0408dc4dc656aa7bcc0402020800048188824b0a6786064a1d5686b852d8ff3073cb3379397dee978c60031353e1835a1a3c6289f16ff617b2d8b2d32829c265b997b406a69b96894caa39cee1c556cda380e7174271606a4dfde4bc6182943de6e827573ce3d877b72f1cdd3a59a3721b34740466fa43390ab29fb8ac01df172f9af6bb222aeee0f9be744b425e9620902ebc76ab8ceaa555"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="EC"/>
-<CryptographicLength
-  type="Integer"
-  value="256"/>
-</KeyBlock>
-</PrivateKey>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="PrivateKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Sign"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-ECC-2-12-prikey1"/>
+                </Attribute>
+            </TemplateAttribute>
+            <PrivateKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="PKCS_8"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString"
+                                     value="3081a9301c060a2a864886f70d010c0103300e0408dc4dc656aa7bcc0402020800048188824b0a6786064a1d5686b852d8ff3073cb3379397dee978c60031353e1835a1a3c6289f16ff617b2d8b2d32829c265b997b406a69b96894caa39cee1c556cda380e7174271606a4dfde4bc6182943de6e827573ce3d877b72f1cdd3a59a3721b34740466fa43390ab29fb8ac01df172f9af6bb222aeee0f9be744b425e9620902ebc76ab8ceaa555"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="EC"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="256"/>
+                </KeyBlock>
+            </PrivateKey>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

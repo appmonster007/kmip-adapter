@@ -1,42 +1,42 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="1"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:12:27+00:00"/>
-<BatchCount type="Integer"
-  value="2"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="AddAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="606051f958d79b0f"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="Activation Date"/>
-<AttributeValue type="DateTime"
-  value="2009-11-12T10:47:30+00:00"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="AddAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="7cb12802f6a52cf1"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="Deactivation Date"/>
-<AttributeValue type="DateTime"
-  value="2009-11-12T10:49:30+00:00"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="1"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:12:27+00:00"/>
+        <BatchCount type="Integer"
+                    value="2"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="AddAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="606051f958d79b0f"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Activation Date"/>
+                <AttributeValue type="DateTime"
+                                value="2009-11-12T10:47:30+00:00"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="AddAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="7cb12802f6a52cf1"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Deactivation Date"/>
+                <AttributeValue type="DateTime"
+                                value="2009-11-12T10:49:30+00:00"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

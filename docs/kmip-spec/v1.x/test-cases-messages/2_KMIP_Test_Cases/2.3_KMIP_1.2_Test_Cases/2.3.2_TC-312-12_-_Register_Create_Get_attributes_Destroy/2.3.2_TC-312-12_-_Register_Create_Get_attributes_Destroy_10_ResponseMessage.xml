@@ -1,53 +1,53 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2013-06-17T08:40:15+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Get"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<ObjectType type="Enumeration" value="Template"/>
-<UniqueIdentifier type="TextString"
-  value="8590e6e9-61c1-4b81-98d3-053a3c6a521b"/>
-<Template>
-<Attribute>
-<AttributeName type="TextString" value="Object Group"/>
-<AttributeValue type="TextString"
-  value="Group1"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Application Specific Information"/>
-<AttributeValue>
-<ApplicationNamespace type="TextString" value="ssl"/>
-<ApplicationData
-  type="TextString"                     
-  value="www.example.com"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Contact Information"/>
-<AttributeValue type="TextString"
-  value="Joe"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-Purpose"/>
-<AttributeValue type="TextString"
-  value="demonstration"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-312-12-from-template"/>
-</Attribute>
-</Template>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2013-06-17T08:40:15+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <ObjectType type="Enumeration" value="Template"/>
+            <UniqueIdentifier type="TextString"
+                              value="8590e6e9-61c1-4b81-98d3-053a3c6a521b"/>
+            <Template>
+                <Attribute>
+                    <AttributeName type="TextString" value="Object Group"/>
+                    <AttributeValue type="TextString"
+                                    value="Group1"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Application Specific Information"/>
+                    <AttributeValue>
+                        <ApplicationNamespace type="TextString" value="ssl"/>
+                        <ApplicationData
+                                type="TextString"
+                                value="www.example.com"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Contact Information"/>
+                    <AttributeValue type="TextString"
+                                    value="Joe"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-Purpose"/>
+                    <AttributeValue type="TextString"
+                                    value="demonstration"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-312-12-from-template"/>
+                </Attribute>
+            </Template>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

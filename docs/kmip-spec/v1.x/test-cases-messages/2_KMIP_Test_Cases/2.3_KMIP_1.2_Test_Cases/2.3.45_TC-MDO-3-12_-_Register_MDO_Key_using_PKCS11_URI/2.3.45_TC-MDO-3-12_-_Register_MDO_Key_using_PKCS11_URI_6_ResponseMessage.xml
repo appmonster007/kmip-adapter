@@ -1,34 +1,35 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-11-28T00:48:54+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="Key Value Location"/>
-<AttributeValue>
-<KeyValueLocationValue type="TextString" value="pkcs11:token=My%20Token;object=MDO-M-3;objecttype=secretkey;id=%69%95%3e%5c%f4%bd%ec%91"/>
-<KeyValueLocationType
-  type="Enumeration"
-  value="URI"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Key Value Present"/>
-<AttributeValue type="Boolean"
-  value="false"/>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-11-28T00:48:54+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Key Value Location"/>
+                <AttributeValue>
+                    <KeyValueLocationValue type="TextString"
+                                           value="pkcs11:token=My%20Token;object=MDO-M-3;objecttype=secretkey;id=%69%95%3e%5c%f4%bd%ec%91"/>
+                    <KeyValueLocationType
+                            type="Enumeration"
+                            value="URI"/>
+                </AttributeValue>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Key Value Present"/>
+                <AttributeValue type="Boolean"
+                                value="false"/>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

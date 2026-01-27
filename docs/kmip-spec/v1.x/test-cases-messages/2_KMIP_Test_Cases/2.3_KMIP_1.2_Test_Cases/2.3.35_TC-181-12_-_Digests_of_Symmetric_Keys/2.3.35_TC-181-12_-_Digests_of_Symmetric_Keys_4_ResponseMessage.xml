@@ -1,30 +1,30 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2012-04-27T08:14:45+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString" value="Digest"/>
-<AttributeValue>
-<HashingAlgorithm type="Enumeration" value="SHA_256"/>
-<DigestValue type="ByteString"                           
-  value="6c064fe051add11edc07727b594eb48711df843e08445bba2cd786bc16bc58e8"/>
-<KeyFormatType type="Enumeration"
-  value="Raw"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2012-04-27T08:14:45+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString" value="Digest"/>
+                <AttributeValue>
+                    <HashingAlgorithm type="Enumeration" value="SHA_256"/>
+                    <DigestValue type="ByteString"
+                                 value="6c064fe051add11edc07727b594eb48711df843e08445bba2cd786bc16bc58e8"/>
+                    <KeyFormatType type="Enumeration"
+                                   value="Raw"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

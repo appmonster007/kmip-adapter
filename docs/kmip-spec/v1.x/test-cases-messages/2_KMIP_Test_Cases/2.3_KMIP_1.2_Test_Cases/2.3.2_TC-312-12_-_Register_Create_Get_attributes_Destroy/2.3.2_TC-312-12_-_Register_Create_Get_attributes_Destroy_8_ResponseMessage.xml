@@ -1,59 +1,59 @@
 <ResponseMessage>
-<ResponseHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<TimeStamp type="DateTime" value="2013-06-17T08:24:02+00:00"/>
-<BatchCount type="Integer"
-  value="1"/>
-</ResponseHeader>
-<BatchItem>
-<Operation type="Enumeration" value="GetAttributes"/>
-<ResultStatus type="Enumeration"
-  value="Success"/>
-<ResponsePayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
-<Attribute>
-<AttributeName type="TextString"
-  value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-312-12"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Unique Identifier"/>
-<AttributeValue type="TextString"   
-                         value="$UNIQUE_IDENTIFIER_0"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Object Type"/>
-<AttributeValue type="Enumeration"
-  value="Template"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Initial Date"/>
-<AttributeValue type="DateTime"
-  value="2013-06-17T08:24:02+00:00"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Last Change Date"/>
-<AttributeValue type="DateTime"
-  value="2013-06-17T08:24:02+00:00"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Lease Time"/>
-<AttributeValue type="Interval"
-  value="3600"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Name"/>
-<AttributeValue>
-<NameValue type="TextString" value="TC-312-12-template1"/>
-<NameType type="Enumeration"                             
-  value="UninterpretedTextString"/>
-</AttributeValue>
-</Attribute>
-</ResponsePayload>
-</BatchItem>
+    <ResponseHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <TimeStamp type="DateTime" value="2013-06-17T08:24:02+00:00"/>
+        <BatchCount type="Integer"
+                    value="1"/>
+    </ResponseHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="GetAttributes"/>
+        <ResultStatus type="Enumeration"
+                      value="Success"/>
+        <ResponsePayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+            <Attribute>
+                <AttributeName type="TextString"
+                               value="x-ID"/>
+                <AttributeValue type="TextString"
+                                value="TC-312-12"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Unique Identifier"/>
+                <AttributeValue type="TextString"
+                                value="$UNIQUE_IDENTIFIER_0"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Object Type"/>
+                <AttributeValue type="Enumeration"
+                                value="Template"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Initial Date"/>
+                <AttributeValue type="DateTime"
+                                value="2013-06-17T08:24:02+00:00"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Last Change Date"/>
+                <AttributeValue type="DateTime"
+                                value="2013-06-17T08:24:02+00:00"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Lease Time"/>
+                <AttributeValue type="Interval"
+                                value="3600"/>
+            </Attribute>
+            <Attribute>
+                <AttributeName type="TextString" value="Name"/>
+                <AttributeValue>
+                    <NameValue type="TextString" value="TC-312-12-template1"/>
+                    <NameType type="Enumeration"
+                              value="UninterpretedTextString"/>
+                </AttributeValue>
+            </Attribute>
+        </ResponsePayload>
+    </BatchItem>
 </ResponseMessage>

@@ -1,30 +1,30 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="0"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="2"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="DeleteAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="d5c6df842daeecd8"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-<AttributeName type="TextString"
-  value="x-attribute1"/>
-</RequestPayload>
-</BatchItem>
-<BatchItem>
-<Operation type="Enumeration" value="DeleteAttribute"/>
-<UniqueBatchItemID type="ByteString"
-  value="572d4f0d433dab10"/>
-<RequestPayload>
-<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
-<AttributeName type="TextString"
-  value="x-attribute2"/>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="0"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="2"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="DeleteAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="d5c6df842daeecd8"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+            <AttributeName type="TextString"
+                           value="x-attribute1"/>
+        </RequestPayload>
+    </BatchItem>
+    <BatchItem>
+        <Operation type="Enumeration" value="DeleteAttribute"/>
+        <UniqueBatchItemID type="ByteString"
+                           value="572d4f0d433dab10"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+            <AttributeName type="TextString"
+                           value="x-attribute2"/>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>

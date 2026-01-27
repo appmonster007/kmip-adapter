@@ -1,49 +1,50 @@
 <RequestMessage>
-<RequestHeader>
-<ProtocolVersion>
-<ProtocolVersionMajor type="Integer" value="1"/>
-<ProtocolVersionMinor type="Integer"
-  value="2"/>
-</ProtocolVersion>
-<BatchCount type="Integer" value="1"/>
-</RequestHeader>
-<BatchItem>
-<Operation type="Enumeration" value="Register"/>
-<RequestPayload>
-<ObjectType type="Enumeration" value="PublicKey"/>
-<TemplateAttribute>
-<Attribute>
-<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
-<AttributeValue type="Integer"
-  value="Verify"/>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="Link"/>
-<AttributeValue>
-<LinkType type="Enumeration" value="PrivateKeyLink"/>
-<LinkedObjectIdentifier
-  type="TextString"              
-  value="$UNIQUE_IDENTIFIER_0"/>
-</AttributeValue>
-</Attribute>
-<Attribute>
-<AttributeName type="TextString" value="x-ID"/>
-<AttributeValue type="TextString"
-  value="TC-82-12-pubkey"/>
-</Attribute>
-</TemplateAttribute>
-<PublicKey>
-<KeyBlock>
-<KeyFormatType type="Enumeration" value="X_509"/>
-<KeyValue>
-<KeyMaterial type="ByteString"                          value="30819f300d06092a864886f70d010101050003818d0030818902818100930451c9ecd94f5bb9da17dd09381bd23be43eca8c7539f301fc8a8cd5d5274c3e7699dbdc711c97a7aa91e2c50a82bd0b1034f0df493dec16362427e58acce7f6ce0f9bcc617bbd8c90d0094a2703ba0d09eb19d1005f2fb265526aac75af32f8bc782cded2a57f811e03eaf67a944de5e78413dca8f232d074e6dcea4cec9f0203010001"/>
-</KeyValue>
-<CryptographicAlgorithm type="Enumeration" value="RSA"/>
-<CryptographicLength
-  type="Integer"
-  value="1024"/>
-</KeyBlock>
-</PublicKey>
-</RequestPayload>
-</BatchItem>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="1"/>
+            <ProtocolVersionMinor type="Integer"
+                                  value="2"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Register"/>
+        <RequestPayload>
+            <ObjectType type="Enumeration" value="PublicKey"/>
+            <TemplateAttribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+                    <AttributeValue type="Integer"
+                                    value="Verify"/>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="Link"/>
+                    <AttributeValue>
+                        <LinkType type="Enumeration" value="PrivateKeyLink"/>
+                        <LinkedObjectIdentifier
+                                type="TextString"
+                                value="$UNIQUE_IDENTIFIER_0"/>
+                    </AttributeValue>
+                </Attribute>
+                <Attribute>
+                    <AttributeName type="TextString" value="x-ID"/>
+                    <AttributeValue type="TextString"
+                                    value="TC-82-12-pubkey"/>
+                </Attribute>
+            </TemplateAttribute>
+            <PublicKey>
+                <KeyBlock>
+                    <KeyFormatType type="Enumeration" value="X_509"/>
+                    <KeyValue>
+                        <KeyMaterial type="ByteString"
+                                     value="30819f300d06092a864886f70d010101050003818d0030818902818100930451c9ecd94f5bb9da17dd09381bd23be43eca8c7539f301fc8a8cd5d5274c3e7699dbdc711c97a7aa91e2c50a82bd0b1034f0df493dec16362427e58acce7f6ce0f9bcc617bbd8c90d0094a2703ba0d09eb19d1005f2fb265526aac75af32f8bc782cded2a57f811e03eaf67a944de5e78413dca8f232d074e6dcea4cec9f0203010001"/>
+                    </KeyValue>
+                    <CryptographicAlgorithm type="Enumeration" value="RSA"/>
+                    <CryptographicLength
+                            type="Integer"
+                            value="1024"/>
+                </KeyBlock>
+            </PublicKey>
+        </RequestPayload>
+    </BatchItem>
 </RequestMessage>
