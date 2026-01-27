@@ -15,6 +15,6 @@
   value="OperationPending"/>
 <AsynchronousCorrelationValue
   type="ByteString"                
-  value="$ASYNCHRONOUS_CORRELATION_VALUE"/>
+  value="123456789abc"/>
 </BatchItem>
 </ResponseMessage>

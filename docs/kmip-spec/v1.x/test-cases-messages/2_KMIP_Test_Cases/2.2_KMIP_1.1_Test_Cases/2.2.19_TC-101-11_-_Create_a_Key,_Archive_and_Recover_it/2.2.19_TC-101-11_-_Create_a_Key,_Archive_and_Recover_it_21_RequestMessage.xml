@@ -11,7 +11,7 @@
 <Operation type="Enumeration" value="Poll"/>
 <RequestPayload>
 <AsynchronousCorrelationValue type="ByteString"              
-  value="$ASYNCHRONOUS_CORRELATION_VALUE"/>
+  value="123456789abc"/>
 </RequestPayload>
 </BatchItem>
 </RequestMessage>
