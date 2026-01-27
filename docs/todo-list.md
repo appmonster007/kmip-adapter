@@ -3,4 +3,6 @@
     - [ ] AttributeValue type Enumeration
     - [ ] AttributeValue for Mask type Attributes
 - [ ] Fix Xml deserialization and serialization for Mask type KmipDataTypes
-- [ ] Update Enumeration description strings to correct value for Xml and Json deserialization and serialization  
+- [ ] Update Enumeration description strings to correct value for Xml and Json deserialization and serialization
+- [ ] AttributeValue to be single object instead of multiple type
+- [ ] Handle unrecognised vendor tag in message extension
