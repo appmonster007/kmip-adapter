@@ -173,7 +173,7 @@ public class KeyValueLocationType implements KmipEnumeration {
     @ToString
     public enum Standard implements Value {
         UNINTERPRETED_TEXT_STRING(0x00000001, "UninterpretedTextString", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        URI(0x00000002, "Uri", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        URI(0x00000002, "URI", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

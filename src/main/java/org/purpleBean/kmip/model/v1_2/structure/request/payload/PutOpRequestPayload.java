@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 import org.purpleBean.kmip.model.core.structure.*;
@@ -77,23 +78,11 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
             builder.replacedUniqueIdentifier((ReplacedUniqueIdentifier) map.get(ReplacedUniqueIdentifier.kmipTag).getFirst());
         }
 
-        if (map.containsKey(Certificate.kmipTag)) {
-            builder.object((Certificate) map.get(Certificate.kmipTag).getFirst());
-        } else if (map.containsKey(SymmetricKey.kmipTag)) {
-            builder.object((SymmetricKey) map.get(SymmetricKey.kmipTag).getFirst());
-        } else if (map.containsKey(PrivateKey.kmipTag)) {
-            builder.object((PrivateKey) map.get(PrivateKey.kmipTag).getFirst());
-        } else if (map.containsKey(PublicKey.kmipTag)) {
-            builder.object((PublicKey) map.get(PublicKey.kmipTag).getFirst());
-        } else if (map.containsKey(SplitKey.kmipTag)) {
-            builder.object((SplitKey) map.get(SplitKey.kmipTag).getFirst());
-        } else if (map.containsKey(Template.kmipTag)) {
-            builder.object((Template) map.get(Template.kmipTag).getFirst());
-        } else if (map.containsKey(SecretData.kmipTag)) {
-            builder.object((SecretData) map.get(SecretData.kmipTag).getFirst());
-        } else if (map.containsKey(OpaqueObject.kmipTag)) {
-            builder.object((OpaqueObject) map.get(OpaqueObject.kmipTag).getFirst());
-        }
+        values.stream()
+                .filter(v -> !v.getKmipTag().equals(ObjectType.kmipTag) && !v.getKmipTag().equals(TemplateAttribute.kmipTag))
+                .filter(v -> v instanceof ManagedObject)
+                .findFirst()
+                .ifPresent(v -> builder.object((ManagedObject) v));
 
         if (map.containsKey(Attribute.kmipTag)) {
             map.get(Attribute.kmipTag).forEach(item -> builder.attribute((Attribute) item));

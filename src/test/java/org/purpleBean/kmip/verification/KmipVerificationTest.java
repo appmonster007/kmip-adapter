@@ -1,5 +1,6 @@
 package org.purpleBean.kmip.verification;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -53,18 +54,18 @@ public class KmipVerificationTest {
         });
     }
 
-//    @Test
-//    public void testSpecificFile() {
-//        String filePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases/2.3.4_TC-314-12_-_Dual_Client_Test_Case,_ID_Placeholder-linked_Locate_&_Get_Batch/2.3.4_TC-314-12_-_Dual_Client_Test_Case,_ID_Placeholder-linked_Locate_&_Get_Batch_5_RequestMessage.xml";
-//        KmipContext.withSpec(KmipSpec.V1_2, () -> {
-//            try {
-//                verifyXmlCodec(Paths.get(filePath));
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            return null;
-//        });
-//    }
+    @Test
+    public void testSpecificFile() {
+        String filePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases/2.3.19_TC-101-12_-_Create_a_Key,_Archive_and_Recover_it/2.3.19_TC-101-12_-_Create_a_Key,_Archive_and_Recover_it_17_RequestMessage.xml";
+        KmipContext.withSpec(KmipSpec.V1_2, () -> {
+            try {
+                verifyXmlCodec(Paths.get(filePath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        });
+    }
 
 
     private void verifyXmlFiles(String basePath) {
@@ -112,15 +113,15 @@ public class KmipVerificationTest {
 
         String newXml = xmlMapper.writeValueAsString(deserialized);
 
-        String normalizedOriginal = normalizeXml(originalXml);
-        String normalizedNew = normalizeXml(newXml);
+        XmlMapper verificationMapper = new XmlMapper();
+        // Minify XML strings by removing whitespace between tags
+        String minifiedOriginal = originalXml.replaceAll(">\\s+<", "><").trim();
+        String minifiedNew = newXml.replaceAll(">\\s+<", "><").trim();
 
-        assertEquals(normalizedOriginal, normalizedNew, "Mismatch in file: " + fileName);
+        JsonNode originalNode = verificationMapper.readTree(minifiedOriginal);
+        JsonNode newNode = verificationMapper.readTree(minifiedNew);
+
+        assertEquals(originalNode, newNode, "Mismatch in file: " + fileName);
         System.out.println("Verified file: " + fileName);
-    }
-
-    private String normalizeXml(String xml) {
-        return xml.replaceAll("\\s+", "")
-                .replaceAll("<([^/>]+)/>", "<$1></$1>");
     }
 }

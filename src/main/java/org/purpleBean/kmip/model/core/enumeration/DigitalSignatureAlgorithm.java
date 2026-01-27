@@ -240,25 +240,25 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        MD2_WITH_RSA_ENCRYPTION(0x00000001, "Md2WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MD5_WITH_RSA_ENCRYPTION(0x00000002, "Md5WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_1_WITH_RSA_ENCRYPTION(0x00000003, "Sha1WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_224_WITH_RSA_ENCRYPTION(0x00000004, "Sha224WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_256_WITH_RSA_ENCRYPTION(0x00000005, "Sha256WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_384_WITH_RSA_ENCRYPTION(0x00000006, "Sha384WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA_512_WITH_RSA_ENCRYPTION(0x00000007, "Sha512WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RSASSA_PSS(0x00000008, "RsassaPss", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DSA_WITH_SHA_1(0x00000009, "DsaWithSha1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DSA_WITH_SHA224(0x0000000A, "DsaWithSha224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DSA_WITH_SHA256(0x0000000B, "DsaWithSha256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA_WITH_SHA_1(0x0000000C, "EcdsaWithSha1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA_WITH_SHA224(0x0000000D, "EcdsaWithSha224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA_WITH_SHA256(0x0000000E, "EcdsaWithSha256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA_WITH_SHA384(0x0000000F, "EcdsaWithSha384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA_WITH_SHA512(0x00000010, "EcdsaWithSha512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_256_WITH_RSA_ENCRYPTION(0x00000011, "Sha3256WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_384_WITH_RSA_ENCRYPTION(0x00000012, "Sha3384WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_512_WITH_RSA_ENCRYPTION(0x00000013, "Sha3512WithRsaEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        MD2_WITH_RSA_ENCRYPTION(0x00000001, "MD2WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        MD5_WITH_RSA_ENCRYPTION(0x00000002, "MD5WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_1_WITH_RSA_ENCRYPTION(0x00000003, "SHA_1WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_224_WITH_RSA_ENCRYPTION(0x00000004, "SHA_224WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_256_WITH_RSA_ENCRYPTION(0x00000005, "SHA_256WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_384_WITH_RSA_ENCRYPTION(0x00000006, "SHA_384WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA_512_WITH_RSA_ENCRYPTION(0x00000007, "SHA_512WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        RSASSA_PSS(0x00000008, "RSASSAPSS", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA_1(0x00000009, "DSAWithSHA1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA224(0x0000000A, "DSAWithSHA224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        DSA_WITH_SHA256(0x0000000B, "DSAWithSHA256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA_1(0x0000000C, "ECDSAWithSHA1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA224(0x0000000D, "ECDSAWithSHA224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA256(0x0000000E, "ECDSAWithSHA256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA384(0x0000000F, "ECDSAWithSHA384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        ECDSA_WITH_SHA512(0x00000010, "ECDSAWithSHA512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_256_WITH_RSA_ENCRYPTION(0x00000011, "SHA_3256WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_384_WITH_RSA_ENCRYPTION(0x00000012, "SHA_3384WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SHA3_512_WITH_RSA_ENCRYPTION(0x00000013, "SHA_3512WithRSAEncryption", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

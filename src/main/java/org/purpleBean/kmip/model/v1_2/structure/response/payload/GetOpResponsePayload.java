@@ -38,38 +38,18 @@ public class GetOpResponsePayload implements ResponsePayloadStructure {
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
-    private final Certificate certificate;
-    private final SymmetricKey symmetricKey;
-    private final PrivateKey privateKey;
-    private final PublicKey publicKey;
-    private final SplitKey splitKey;
-    private final Template template;
-    private final SecretData secretData;
-    private final OpaqueObject opaqueObject;
+    @NonNull
+    private final ManagedObject object;
 
     @Builder
     private GetOpResponsePayload(
             @NonNull ObjectType objectType,
             @NonNull UniqueIdentifier uniqueIdentifier,
-            Certificate certificate,
-            SymmetricKey symmetricKey,
-            PrivateKey privateKey,
-            PublicKey publicKey,
-            SplitKey splitKey,
-            Template template,
-            SecretData secretData,
-            OpaqueObject opaqueObject
+            @NonNull ManagedObject object
     ) {
         this.objectType = objectType;
         this.uniqueIdentifier = uniqueIdentifier;
-        this.certificate = certificate;
-        this.symmetricKey = symmetricKey;
-        this.privateKey = privateKey;
-        this.publicKey = publicKey;
-        this.splitKey = splitKey;
-        this.template = template;
-        this.secretData = secretData;
-        this.opaqueObject = opaqueObject;
+        this.object = object;
         validate();
     }
 
@@ -82,30 +62,13 @@ public class GetOpResponsePayload implements ResponsePayloadStructure {
         if (map.containsKey(UniqueIdentifier.kmipTag)) {
             builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
         }
-        if (map.containsKey(Certificate.kmipTag)) {
-            builder.certificate((Certificate) map.get(Certificate.kmipTag).getFirst());
-        }
-        if (map.containsKey(SymmetricKey.kmipTag)) {
-            builder.symmetricKey((SymmetricKey) map.get(SymmetricKey.kmipTag).getFirst());
-        }
-        if (map.containsKey(PrivateKey.kmipTag)) {
-            builder.privateKey((PrivateKey) map.get(PrivateKey.kmipTag).getFirst());
-        }
-        if (map.containsKey(PublicKey.kmipTag)) {
-            builder.publicKey((PublicKey) map.get(PublicKey.kmipTag).getFirst());
-        }
-        if (map.containsKey(SplitKey.kmipTag)) {
-            builder.splitKey((SplitKey) map.get(SplitKey.kmipTag).getFirst());
-        }
-        if (map.containsKey(Template.kmipTag)) {
-            builder.template((Template) map.get(Template.kmipTag).getFirst());
-        }
-        if (map.containsKey(SecretData.kmipTag)) {
-            builder.secretData((SecretData) map.get(SecretData.kmipTag).getFirst());
-        }
-        if (map.containsKey(OpaqueObject.kmipTag)) {
-            builder.opaqueObject((OpaqueObject) map.get(OpaqueObject.kmipTag).getFirst());
-        }
+
+        values.stream()
+                .filter(v -> !v.getKmipTag().equals(ObjectType.kmipTag) && !v.getKmipTag().equals(TemplateAttribute.kmipTag))
+                .filter(v -> v instanceof ManagedObject)
+                .findFirst()
+                .ifPresent(v -> builder.object((ManagedObject) v));
+
         return builder.build();
     }
 
@@ -136,14 +99,7 @@ public class GetOpResponsePayload implements ResponsePayloadStructure {
         return Stream.of(
                         objectType,
                         uniqueIdentifier,
-                        certificate,
-                        symmetricKey,
-                        privateKey,
-                        publicKey,
-                        splitKey,
-                        template,
-                        secretData,
-                        opaqueObject)
+                        object)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }

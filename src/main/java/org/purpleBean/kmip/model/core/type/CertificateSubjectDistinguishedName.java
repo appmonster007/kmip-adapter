@@ -16,7 +16,7 @@ public class CertificateSubjectDistinguishedName implements KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE_SUBJECT_DISTINGUISHED_NAME.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

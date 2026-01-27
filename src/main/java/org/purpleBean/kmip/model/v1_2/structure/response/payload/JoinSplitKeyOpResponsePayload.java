@@ -32,7 +32,8 @@ public class JoinSplitKeyOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @NonNull
+    // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
+    // @NonNull
     private final ObjectType objectType;
 
     @NonNull
@@ -42,7 +43,9 @@ public class JoinSplitKeyOpResponsePayload implements ResponsePayloadStructure {
 
     @Builder
     private JoinSplitKeyOpResponsePayload(
-            @NonNull ObjectType objectType,
+            // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
+            // @NonNull
+            ObjectType objectType,
             @NonNull UniqueIdentifier uniqueIdentifier,
             TemplateAttribute templateAttribute
     ) {

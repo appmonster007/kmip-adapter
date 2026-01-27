@@ -257,7 +257,7 @@ public class ObjectType implements KmipEnumeration, KmipAttribute {
         TEMPLATE(0x00000006, "Template", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         SECRET_DATA(0x00000007, "SecretData", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         OPAQUE_OBJECT(0x00000008, "OpaqueObject", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PGP_KEY(0x00000009, "PgpKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PGP_KEY(0x00000009, "PGPKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFICATE_REQUEST(0x0000000A, "CertificateRequest", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         USER(0x0000000B, "User", KmipSpec.UnknownVersion, KmipSpec.V3_0),
         GROUP(0x0000000C, "Group", KmipSpec.UnknownVersion, KmipSpec.V3_0),

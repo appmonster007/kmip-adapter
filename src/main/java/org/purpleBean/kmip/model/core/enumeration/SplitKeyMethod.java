@@ -175,9 +175,9 @@ public class SplitKeyMethod implements KmipEnumeration {
     @ToString
     public enum Standard implements Value {
         XOR(0x00000001, "XOR", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_GF_216(0x00000002, "POLYNOMIAL_SHARING_GF_216", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_PRIME_FIELD(0x00000003, "POLYNOMIAL_SHARING_PRIME_FIELD", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_GF_28(0x00000004, "POLYNOMIAL_SHARING_GF_28", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        POLYNOMIAL_SHARING_GF_216(0x00000002, "PolynomialSharingGF2_16", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLYNOMIAL_SHARING_PRIME_FIELD(0x00000003, "PolynomialSharingPrimeField", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLYNOMIAL_SHARING_GF_28(0x00000004, "PolynomialSharingGF2_8", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

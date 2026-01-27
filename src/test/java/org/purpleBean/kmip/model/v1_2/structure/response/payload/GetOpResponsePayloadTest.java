@@ -4,7 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.ManagedObject;
+import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purpleBean.kmip.model.core.structure.KeyBlock;
+import org.purpleBean.kmip.model.core.structure.SymmetricKey;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
@@ -30,6 +34,11 @@ class GetOpResponsePayloadTest extends AbstractKmipStructureTestSuite<GetOpRespo
         return GetOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+                .object(SymmetricKey.builder()
+                        .keyBlock(KeyBlock.builder()
+                                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+                                .build())
+                        .build())
                 .build();
     }
 
@@ -40,13 +49,14 @@ class GetOpResponsePayloadTest extends AbstractKmipStructureTestSuite<GetOpRespo
 
     @Override
     protected int expectedMinComponentCount() {
-        return 2;
+        return 3;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values).hasSize(2);
+        assertThat(values).hasSize(3);
         assertThat(values.get(0)).isInstanceOf(ObjectType.class);
         assertThat(values.get(1)).isInstanceOf(UniqueIdentifier.class);
+        assertThat(values.get(2)).isInstanceOf(ManagedObject.class);
     }
 }
