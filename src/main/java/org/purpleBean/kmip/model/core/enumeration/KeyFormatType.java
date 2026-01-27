@@ -186,9 +186,9 @@ public class KeyFormatType implements KmipEnumeration {
     public enum Standard implements Value {
         RAW(0x00000001, "Raw", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         OPAQUE(0x00000002, "Opaque", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PKCS_1(0x00000003, "Pkcs1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        PKCS_8(0x00000004, "Pkcs8", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        X_509(0x00000005, "X509", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PKCS_1(0x00000003, "PKCS_1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        PKCS_8(0x00000004, "PKCS_8", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        X_509(0x00000005, "X_509", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         EC_PRIVATE_KEY(0x00000006, "EcPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         TRANSPARENT_SYMMETRIC_KEY(0x00000007, "TransparentSymmetricKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         TRANSPARENT_DSA_PRIVATE_KEY(0x00000008, "TransparentDsaPrivateKey", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),

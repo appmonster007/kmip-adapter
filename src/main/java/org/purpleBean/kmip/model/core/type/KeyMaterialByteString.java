@@ -23,7 +23,7 @@ public class KeyMaterialByteString implements KeyMaterial {
         ArrayList<KeyFormatType.Value> byteStringKeyFormatTypes = new ArrayList<>(Arrays.asList(
                 null, KeyFormatType.Standard.RAW, KeyFormatType.Standard.OPAQUE,
                 KeyFormatType.Standard.PKCS_1, KeyFormatType.Standard.PKCS_8,
-                KeyFormatType.Standard.EC_PRIVATE_KEY
+                KeyFormatType.Standard.EC_PRIVATE_KEY, KeyFormatType.Standard.X_509
         ));
         byteStringKeyFormatTypes.addAll(KeyFormatType.registeredValues());
 
