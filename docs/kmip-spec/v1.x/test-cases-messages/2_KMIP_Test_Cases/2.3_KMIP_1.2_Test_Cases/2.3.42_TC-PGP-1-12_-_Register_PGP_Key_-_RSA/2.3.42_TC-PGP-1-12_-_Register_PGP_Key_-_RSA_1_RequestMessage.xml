@@ -29,8 +29,7 @@
 <Attribute>
 <AttributeName type="TextString" value="Alternative Name"/>
 <AttributeValue>
-<AlternativeNameValue type="TextString" value="KMIP USER RSA (OASIS Key Management Interoperability
-  Protocol) &lt;kmip3@kmip.com&gt;"/>
+<AlternativeNameValue type="TextString" value="KMIP USER RSA (OASIS Key Management Interoperability Protocol) &lt;kmip3@kmip.com&gt;"/>
 <AlternativeNameType
   type="Enumeration"                       
   value="UninterpretedTextString"/>
@@ -48,7 +47,7 @@
 <Attribute>
 <AttributeName type="TextString" value="Alternative Name"/>
 <AttributeValue>
-<AlternativeNameValue type="TextString"                        value="240C17B36CCA0D26"/>
+<AlternativeNameValue type="TextString"                        value="240c17b36cca0d26"/>
 <AlternativeNameType
   type="Enumeration"                       
   value="ObjectSerialNumber"/>

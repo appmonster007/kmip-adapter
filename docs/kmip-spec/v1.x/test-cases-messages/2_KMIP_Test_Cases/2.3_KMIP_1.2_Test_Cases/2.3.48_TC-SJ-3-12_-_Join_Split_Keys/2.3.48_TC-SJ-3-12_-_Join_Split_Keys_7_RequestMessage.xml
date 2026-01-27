@@ -30,7 +30,7 @@
 <KeyBlock>
 <KeyFormatType type="Enumeration" value="Raw"/>
 <KeyValue>
-<KeyMaterial type="ByteString"                          value="803DBAD55CDD329FAD19D99AE2C5A415"/>
+<KeyMaterial type="ByteString"                          value="803dbad55cdd329fad19d99ae2c5a415"/>
 </KeyValue>
 </KeyBlock>
 </SplitKey>

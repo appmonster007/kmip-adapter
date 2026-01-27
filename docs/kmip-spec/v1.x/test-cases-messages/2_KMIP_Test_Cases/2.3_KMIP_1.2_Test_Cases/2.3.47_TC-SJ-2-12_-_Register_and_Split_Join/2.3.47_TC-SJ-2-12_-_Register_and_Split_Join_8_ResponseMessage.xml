@@ -29,7 +29,7 @@
 <KeyBlock>
 <KeyFormatType type="Enumeration" value="Raw"/>
 <KeyValue>
-<KeyMaterial type="ByteString"                          value="CF93D1E2A7E593CD5B8D6247F4E5D49C"/>
+<KeyMaterial type="ByteString"                          value="cf93d1e2a7e593cd5b8d6247f4e5d49c"/>
 </KeyValue>
 <CryptographicAlgorithm type="Enumeration" value="AES"/>
 <CryptographicLength

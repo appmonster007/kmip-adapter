@@ -10,7 +10,7 @@
 <BatchItem>
 <Operation type="Enumeration" value="Locate"/>
 <RequestPayload>
-<StorageStatusMask type="Integer" value="ArchivalStorage OnLineStorage"/>
+<StorageStatusMask type="Integer" value="OnLineStorage ArchivalStorage"/>
 <Attribute>
 <AttributeName type="TextString" value="Object Type"/>
 <AttributeValue type="Enumeration"

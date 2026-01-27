@@ -21,7 +21,7 @@
 <KeyBlock>
 <KeyFormatType type="Enumeration" value="Raw"/>
 <KeyValue>
-<KeyMaterial type="ByteString"                          value="0102030405060708090A0B0C0D0E0F10"/>
+<KeyMaterial type="ByteString"                          value="0102030405060708090a0b0c0d0e0f10"/>
 </KeyValue>
 <CryptographicAlgorithm type="Enumeration" value="AES"/>
 <CryptographicLength
