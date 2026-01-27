@@ -174,10 +174,10 @@ public class SplitKeyMethod implements KmipEnumeration {
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        XOR(0x00000001, "Xor", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_GF_216(0x00000002, "PolynomialSharingGf216", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_PRIME_FIELD(0x00000003, "PolynomialSharingPrimeField", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLYNOMIAL_SHARING_GF_28(0x00000004, "PolynomialSharingGf28", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+        XOR(0x00000001, "XOR", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLYNOMIAL_SHARING_GF_216(0x00000002, "POLYNOMIAL_SHARING_GF_216", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLYNOMIAL_SHARING_PRIME_FIELD(0x00000003, "POLYNOMIAL_SHARING_PRIME_FIELD", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        POLYNOMIAL_SHARING_GF_28(0x00000004, "POLYNOMIAL_SHARING_GF_28", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;
