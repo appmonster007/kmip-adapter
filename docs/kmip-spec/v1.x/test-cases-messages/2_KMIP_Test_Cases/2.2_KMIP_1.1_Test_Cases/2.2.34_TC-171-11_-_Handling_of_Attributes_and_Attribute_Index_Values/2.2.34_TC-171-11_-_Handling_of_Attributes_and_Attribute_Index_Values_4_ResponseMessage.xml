@@ -1,0 +1,22 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<ResultStatus type="Enumeration"
+  value="OperationFailed"/>
+<ResultReason type="Enumeration"
+  value="InvalidMessage"/>
+<ResultMessage type="TextString"
+  value="Attribute
+  Name specified more than once: Object Type"/>
+</BatchItem>
+</ResponseMessage>

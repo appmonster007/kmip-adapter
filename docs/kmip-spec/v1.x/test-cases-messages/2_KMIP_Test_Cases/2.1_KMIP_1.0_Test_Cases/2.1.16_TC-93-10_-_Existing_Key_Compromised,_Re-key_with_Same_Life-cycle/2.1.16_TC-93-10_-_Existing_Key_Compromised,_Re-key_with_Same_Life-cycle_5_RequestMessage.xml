@@ -1,0 +1,21 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Revoke"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<RevocationReason>
+<RevocationReasonCode type="Enumeration"                    value="KeyCompromise"/>
+</RevocationReason>
+<CompromiseOccurrenceDate type="DateTime"
+  value="2010-02-11T14:12:24+00:00"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

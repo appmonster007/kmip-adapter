@@ -1,0 +1,46 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2009-11-12T11:10:28+00:00"/>
+<BatchCount type="Integer"
+  value="2"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<UniqueBatchItemID type="ByteString"
+  value="0e9e1875336e415e"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<UniqueBatchItemID type="ByteString"
+  value="cfef21dddf1cf5e3"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_1"/>
+<SymmetricKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="Raw"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                          value="755d03c639648fb5828d5f1cc9fe9b57"/>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="AES"/>
+<CryptographicLength
+  type="Integer"
+  value="128"/>
+</KeyBlock>
+</SymmetricKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

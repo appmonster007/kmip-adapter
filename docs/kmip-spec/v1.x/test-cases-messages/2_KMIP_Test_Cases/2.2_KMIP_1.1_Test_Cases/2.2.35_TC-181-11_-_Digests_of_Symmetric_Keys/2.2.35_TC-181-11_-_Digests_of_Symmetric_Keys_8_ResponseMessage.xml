@@ -1,0 +1,30 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:45+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+<Attribute>
+<AttributeName type="TextString" value="Digest"/>
+<AttributeValue>
+<HashingAlgorithm type="Enumeration" value="SHA_256"/>
+<DigestValue type="ByteString"                           
+  value="499ce96ff6f5e19fe9fe7a2fe4c3e92b88db0001a4e8df28d9966856b6c4b87c"/>
+<KeyFormatType type="Enumeration"                        
+  value="TransparentSymmetricKey"/>
+</AttributeValue>
+</Attribute>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

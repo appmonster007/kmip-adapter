@@ -1,0 +1,58 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:12:23+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributeList"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+<AttributeName type="TextString"
+  value="Cryptographic
+  Length"/>
+<AttributeName type="TextString"
+  value="Cryptographic
+  Algorithm"/>
+<AttributeName type="TextString"
+  value="State"/>
+<AttributeName type="TextString"
+  value="Digest"/>
+<AttributeName type="TextString"
+  value="Lease
+  Time"/>
+<AttributeName type="TextString"
+  value="Initial
+  Date"/>
+<AttributeName type="TextString"
+  value="Unique
+  Identifier"/>
+<AttributeName type="TextString"
+  value="Name"/>
+<AttributeName type="TextString"
+  value="Cryptographic
+  Usage Mask"/>
+<AttributeName type="TextString"
+  value="Object
+  Type"/>
+<AttributeName type="TextString"
+  value="Contact
+  Information"/>
+<AttributeName type="TextString"
+  value="Last
+  Change Date"/>
+<AttributeName type="TextString"
+  value="Original
+  Creation Date"/>
+<AttributeName type="TextString"
+  value="Fresh"/>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

@@ -1,0 +1,44 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:43+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_1"/>
+<SymmetricKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="Raw"/>
+<KeyValue type="ByteString"                              
+  value="0dc0f8cb416e7b4422d85805d3dd80e49c6c75f763d1be99748de568e4eecdc05b94b1c1946fd3def14cfe184daada0daf07c93e038ceb9f501bdd8a82c7d6b33152dbf9d415924b9f13f6cb75ff880ab09dc862e473f74bdaf9398ec7695d41"/>
+<CryptographicAlgorithm
+  type="Enumeration"
+  value="AES"/>
+<CryptographicLength
+  type="Integer"
+  value="128"/>
+<KeyWrappingData>
+<WrappingMethod type="Enumeration" value="Encrypt"/>
+<EncryptionKeyInformation>
+<UniqueIdentifier type="TextString"                   value="$UNIQUE_IDENTIFIER_0"/>
+<CryptographicParameters>
+<BlockCipherMode type="Enumeration"                 value="NISTKeyWrap"/>
+</CryptographicParameters>
+</EncryptionKeyInformation>
+</KeyWrappingData>
+</KeyBlock>
+</SymmetricKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

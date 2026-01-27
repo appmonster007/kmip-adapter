@@ -1,0 +1,35 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:36+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="PublicKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_1"/>
+<PublicKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="X_509"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                                
+  value="3056301006072a8648ce3d020106052b8104000a03420004dab5d3c253113db414abfc1c0ebf5a02559e656aa1c8b0aa8d870aa0324cda4899925ea1e6dbc259a6c7825cf46592ac7594cc40bd604b728d88b636f317d366"/>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="EC"/>
+<CryptographicLength
+  type="Integer"
+  value="256"/>
+</KeyBlock>
+</PublicKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

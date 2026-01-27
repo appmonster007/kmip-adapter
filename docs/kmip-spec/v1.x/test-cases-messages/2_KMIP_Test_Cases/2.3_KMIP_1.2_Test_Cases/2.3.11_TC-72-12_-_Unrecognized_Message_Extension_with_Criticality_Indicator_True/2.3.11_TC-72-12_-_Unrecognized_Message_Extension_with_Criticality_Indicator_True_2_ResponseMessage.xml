@@ -1,0 +1,22 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Create"/>
+<ResultStatus type="Enumeration"
+  value="OperationFailed"/>
+<ResultReason type="Enumeration"
+  value="FeatureNotSupported"/>
+<ResultMessage type="TextString"
+  value="Critical
+  Message Extension not recognized"/>
+</BatchItem>
+</ResponseMessage>

@@ -1,0 +1,67 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:41+00:00"/>
+<BatchCount type="Integer"
+  value="2"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<UniqueBatchItemID type="ByteString"
+  value="f409f9adc43f836f"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<UniqueBatchItemID type="ByteString"
+  value="396c4d8b5bde0667"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="PrivateKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_2"/>
+<PrivateKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration"                         value="TransparentRSAPrivateKey"/>
+<KeyValue>
+<KeyMaterial>
+<Modulus type="BigInteger"                            value="0000000000000000eab4492bbb2364359408c57b8af47003572c81aaed719ed92d9b13c741cc196b717d1c98f0c250580e37ac3ade11a7cd1aaede3a0424b53d33200510ce7eef71ded7e96e585d1d7ba3767a8dbfad4d2701b5831a34552a827fc2cd398e659fd5063e1dfd28a994b0e6a7449bbad8dcf40e22943b841aa9e58519fa3575b4409abfeb57f5723b45f7ce4e5277a2d0acccbcd49608d6ff8a7c933d4d70a9e8c8df24829b58404a5af1b0d4c8668c35e3549e28204f2249bfc13b20c05ab0252c975e53f604f68c6e498c7b14adb72debac91221a8eb1ad581080144eb8900b4bf9d9792be37ec6191ad183e2b60b80174eecb66ca08c3ac07f51ba1c056130ec69"/>
+<PrivateExponent
+  type="BigInteger"                   
+  value="42e22587e4c86d2227916855907f9ffc13b7872c228622725960bbfe286df5407d12de376744b8889f64961c20747f911f6d7dbea2b7a33e51776a7a239e60b5de7f40f2451423f6bbda638a497925675c41519f0212d30e65422a21a0c6ad0993c1d7e1f0d8829af6dfebd94521cfb56ce1c5c4401d2915531cd804ac0a35ee57d2a43ffd7671aeaad0ab090f17f8419073445ac6fb218bd3c7c5beb9f3e7bf41e4e5f9632d8492eb0cb2ada41083e040535ae409ad866d1998a0335f253cda2d21a95b2feebacee64b969aaccab322fa0ecbc75c3f0c15c267dbf431abedecae191b72000b612e41e65eb93c9f08eef67740b84ba32d9c5697ed91e1c8ccd1"/>
+<PublicExponent
+  type="BigInteger"                    
+  value="0000000000010001"/>
+<P type="BigInteger"                                 
+  value="0000000000000000f88c737435b8b3f5bdb2b2eb73dd5a665e2ee56c64e055169038f754ed3021d3e72ae82234dacd4a5fa12edeb4874b70c5915bba4571bef55964389d8a4b8a79b628771bb4d634fbd18a27ab5fb6973309c4af9e27d269b1c4054b62012d1c52847e3679f71f91cf7ff6b646c9edaafe5b46845fc1190fa0ef80b8a45de63973"/>
+<Q type="BigInteger"                                 
+  value="0000000000000000f1bd952150d189707c316486f205429680230505581b40ed503901bef82cec4e2a0a564c58365e8c82b7d34a0305d407194b1d15c273015d1212969906267322827303b276d0c7585a21ee6758a74e95bfecc5b544686325754e5d2602f0d5734c58f870aa2ca00e08122e940e4d6d0e11611d47966482df8845b8ff88d1fbb3"/>
+<PrimeExponentP
+  type="BigInteger"                    
+  value="0000000000000000e9717156eac62a305b15a63ac33e5a13dfce0829c0ad7afd904410f9b1350df0ab247f96f131b8b36c1245a562c5d833793cc77cb290dd1c2ff393c1540d1368b1905c1ea7c0b14efb45d9707a9b5273db6ee2cb96f767d2511befeb82d34dd0ab24a821f1dbb2e5c3788347058db696e43fdd40da6aa16534ce1f9e319b74c5"/>
+<PrimeExponentQ
+  type="BigInteger"                    
+  value="0000000000000000eb6294819a364dc3afca507e6dcedd65ba635f12331666842d6734e204b989671adc71e768c5980eed819d4525e858ea88a07133ace15ae48b227a6d8a658a1a823707d49088fe72736132c882b4767aae2518e64633f6c69490b776b9ca53ad2f1c3add4976a66ac34521019d639adae5e5502352b7900fa49b6f65b28df4ad"/>
+<CRTCoefficient
+  type="BigInteger"  
+                    value="0000000000000000cc75a52cab58eb65878acf7c19070c0a495d5376f40b86531b98b1e3b44e28d39db55898db8aa317ce214814efdd00c1d234d4c27168710a1a68cfdae310f1a56e17e1a51f43d069137beeb7a6aeef4da2b3dfde54d222e24c77209dc5c8c831b8f09f816d3ee628e76e93bae2594229a59b36ea1f507be2db99ae358896956e"/>
+</KeyMaterial>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="RSA"/>
+<CryptographicLength
+  type="Integer"
+  value="2048"/>
+</KeyBlock>
+</PrivateKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

@@ -1,0 +1,24 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2010-02-11T15:45:50+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="ObtainLease"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<LeaseTime type="Interval"
+  value="16"/>
+<LastChangeDate type="DateTime"
+  value="2010-02-11T15:45:49+00:00"/>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

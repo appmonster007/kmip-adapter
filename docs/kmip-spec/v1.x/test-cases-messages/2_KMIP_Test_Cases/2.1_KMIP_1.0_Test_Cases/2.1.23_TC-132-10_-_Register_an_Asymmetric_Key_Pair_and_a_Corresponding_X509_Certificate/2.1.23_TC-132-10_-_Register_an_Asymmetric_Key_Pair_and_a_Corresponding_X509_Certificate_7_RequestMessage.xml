@@ -1,0 +1,44 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="2"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="31f81bfb0f0492bd"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Link"/>
+<AttributeValue>
+<LinkType type="Enumeration" value="PrivateKeyLink"/>
+<LinkedObjectIdentifier
+  type="TextString"                
+  value="$UNIQUE_IDENTIFIER_1"/>
+</AttributeValue>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="ba865701c7837be2"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Link"/>
+<AttributeValue>
+<LinkType type="Enumeration" value="CertificateLink"/>
+<LinkedObjectIdentifier
+  type="TextString"                
+  value="$UNIQUE_IDENTIFIER_2"/>
+</AttributeValue>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

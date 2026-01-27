@@ -1,0 +1,21 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="DiscoverVersions"/>
+<RequestPayload>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor
+  type="Integer"
+  value="2"/>
+</ProtocolVersion>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

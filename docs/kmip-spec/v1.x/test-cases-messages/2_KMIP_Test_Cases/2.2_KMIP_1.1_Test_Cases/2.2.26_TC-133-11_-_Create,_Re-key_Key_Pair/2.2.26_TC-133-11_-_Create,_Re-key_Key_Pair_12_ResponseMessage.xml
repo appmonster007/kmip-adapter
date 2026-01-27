@@ -1,0 +1,51 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:41+00:00"/>
+<BatchCount type="Integer"
+  value="2"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<UniqueBatchItemID type="ByteString"
+  value="5df01d7748d64a16"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_3"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<UniqueBatchItemID type="ByteString"
+  value="7c7f588280a61c24"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="PublicKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_3"/>
+<PublicKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration"                         value="TransparentRSAPublicKey"/>
+<KeyValue>
+<KeyMaterial>
+<Modulus type="BigInteger"                            value="0000000000000000eab4492bbb2364359408c57b8af47003572c81aaed719ed92d9b13c741cc196b717d1c98f0c250580e37ac3ade11a7cd1aaede3a0424b53d33200510ce7eef71ded7e96e585d1d7ba3767a8dbfad4d2701b5831a34552a827fc2cd398e659fd5063e1dfd28a994b0e6a7449bbad8dcf40e22943b841aa9e58519fa3575b4409abfeb57f5723b45f7ce4e5277a2d0acccbcd49608d6ff8a7c933d4d70a9e8c8df24829b58404a5af1b0d4c8668c35e3549e28204f2249bfc13b20c05ab0252c975e53f604f68c6e498c7b14adb72debac91221a8eb1ad581080144eb8900b4bf9d9792be37ec6191ad183e2b60b80174eecb66ca08c3ac07f51ba1c056130ec69"/>
+<PublicExponent
+  type="BigInteger"                    
+  value="0000000000010001"/>
+</KeyMaterial>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="RSA"/>
+<CryptographicLength
+  type="Integer"
+  value="2048"/>
+</KeyBlock>
+</PublicKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

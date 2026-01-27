@@ -1,0 +1,61 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Register"/>
+<RequestPayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<TemplateAttribute>
+<Attribute>
+<AttributeName type="TextString" value="Cryptographic Algorithm"/>
+<AttributeValue type="Enumeration"
+  value="AES"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Cryptographic Length"/>
+<AttributeValue type="Integer"
+  value="256"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+<AttributeValue type="Integer"
+  value="Decrypt
+  Encrypt"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Object Group"/>
+<AttributeValue type="TextString"                        
+  value="ClientFreshTest"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Fresh"/>
+<AttributeValue type="Boolean"
+  value="true"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="x-ID"/>
+<AttributeValue type="TextString"
+  value="TC-152-11-key1"/>
+</Attribute>
+</TemplateAttribute>
+<SymmetricKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="Raw"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                          value="000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"/>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="AES"/>
+<CryptographicLength
+  type="Integer"
+  value="256"/>
+</KeyBlock>
+</SymmetricKey>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

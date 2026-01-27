@@ -1,0 +1,43 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Register"/>
+<RequestPayload>
+<ObjectType type="Enumeration" value="Certificate"/>
+<TemplateAttribute>
+<Attribute>
+<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+<AttributeValue type="Integer"
+  value="Verify
+  Sign"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Link"/>
+<AttributeValue>
+<LinkType type="Enumeration" value="PublicKeyLink"/>
+<LinkedObjectIdentifier
+  type="TextString"              
+  value="$UNIQUE_IDENTIFIER_0"/>
+</AttributeValue>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="x-ID"/>
+<AttributeValue type="TextString"
+  value="TC-ECC-3-11-cert1"/>
+</Attribute>
+</TemplateAttribute>
+<Certificate>
+<CertificateType type="Enumeration" value="X_509"/>
+<CertificateValue type="ByteString"                        
+  value="308201d73082017da003020102020900dada16a58d2924d9300a06082a8648ce3d0403023048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d736563703235367231301e170d3133303632363033353434335a170d3233303632343033353434335a3048310b3009060355040613025553310d300b060355040a0c0454455354310e300c060355040b0c054f41534953311a301806035504030c114b4d49502d45432d7365637032353672313059301306072a8648ce3d020106082a8648ce3d03010703420004b344392fb72aa267f86d7d837de1d96ce960ffc05ceef3f1fa26d8546a6442f3c1397e929aad8dcab25b282ca8a1cf00bef7cb18a0f5ea44493a30a6d223b25ba350304e301d0603551d0e04160414c74bdb9d456b3b14868fd9c8867de0fcdfefd493301f0603551d23041830168014c74bdb9d456b3b14868fd9c8867de0fcdfefd493300c0603551d13040530030101ff300a06082a8648ce3d04030203480030450220235f5fcb375dd606af3a121a7876ce9c1a15d257449a0eaa600f8e1266904bdf022100a9b85e143d8925a2ebb08bc8434d56af2f73005fff429bcd8245fd5fb21a7b45"/>
+</Certificate>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

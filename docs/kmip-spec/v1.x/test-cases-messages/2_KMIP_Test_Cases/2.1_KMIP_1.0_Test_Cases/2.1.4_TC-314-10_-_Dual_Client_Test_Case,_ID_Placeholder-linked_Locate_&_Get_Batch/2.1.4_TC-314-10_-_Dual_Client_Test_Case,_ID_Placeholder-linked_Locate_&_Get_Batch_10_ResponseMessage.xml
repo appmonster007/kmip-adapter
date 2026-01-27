@@ -1,0 +1,33 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2009-11-12T11:10:28+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+<Attribute>
+<AttributeName type="TextString" value="Name"/>
+<AttributeValue>
+<NameValue type="TextString" value="Key1"/>
+<NameType type="Enumeration"                             
+  value="UninterpretedTextString"/>
+</AttributeValue>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Contact Information"/>
+<AttributeValue type="TextString"
+  value="Foo"/>
+</Attribute>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

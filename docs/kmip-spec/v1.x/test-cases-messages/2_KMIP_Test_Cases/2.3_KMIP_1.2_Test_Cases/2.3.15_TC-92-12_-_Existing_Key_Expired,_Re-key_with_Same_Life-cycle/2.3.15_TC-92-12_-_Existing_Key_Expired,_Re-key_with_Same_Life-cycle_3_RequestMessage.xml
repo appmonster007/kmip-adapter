@@ -1,0 +1,36 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="2"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="606051f958d79b0f"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Activation Date"/>
+<AttributeValue type="DateTime"
+  value="2009-11-12T10:47:30+00:00"/>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="7cb12802f6a52cf1"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Deactivation Date"/>
+<AttributeValue type="DateTime"
+  value="2009-11-12T10:49:30+00:00"/>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

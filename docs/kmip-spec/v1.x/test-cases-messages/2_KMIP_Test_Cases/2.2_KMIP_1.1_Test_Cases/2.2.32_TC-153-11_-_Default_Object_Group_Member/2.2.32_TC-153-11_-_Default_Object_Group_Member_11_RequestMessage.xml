@@ -1,0 +1,39 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<BatchErrorContinuationOption type="Enumeration"               
+  value="Continue"/>
+<BatchOrderOption type="Boolean"
+  value="true"/>
+<BatchCount type="Integer"
+  value="3"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Destroy"/>
+<UniqueBatchItemID type="ByteString"
+  value="f4cf0a5614786eb7"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Destroy"/>
+<UniqueBatchItemID type="ByteString"
+  value="dd55da10ebe91928"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Destroy"/>
+<UniqueBatchItemID type="ByteString"
+  value="18334af52fee87fa"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

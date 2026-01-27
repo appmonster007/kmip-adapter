@@ -1,0 +1,41 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Create"/>
+<RequestPayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<TemplateAttribute>
+<Name>
+<NameValue type="TextString" value="TC-314-12-template1"/>
+<NameType type="Enumeration"                             
+  value="UninterpretedTextString"/>
+</Name>
+<Attribute>
+<AttributeName type="TextString" value="Name"/>
+<AttributeValue>
+<NameValue type="TextString" value="TC-314-12-key1"/>
+<NameType type="Enumeration"                           
+  value="UninterpretedTextString"/>
+</AttributeValue>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Cryptographic Usage Mask"/>
+<AttributeValue type="Integer"
+  value="Encrypt"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Contact Information"/>
+<AttributeValue type="TextString"
+  value="Foo"/>
+</Attribute>
+</TemplateAttribute>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

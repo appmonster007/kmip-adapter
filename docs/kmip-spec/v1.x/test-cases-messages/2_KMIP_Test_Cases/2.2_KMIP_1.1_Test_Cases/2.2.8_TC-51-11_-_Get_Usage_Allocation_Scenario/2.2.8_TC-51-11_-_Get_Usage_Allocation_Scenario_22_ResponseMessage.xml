@@ -1,0 +1,32 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
+<BatchCount type="Integer"
+  value="2"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Revoke"/>
+<UniqueBatchItemID type="ByteString"
+  value="79b998c5f29465f4"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Destroy"/>
+<UniqueBatchItemID type="ByteString"
+  value="b0633f0e41187345"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

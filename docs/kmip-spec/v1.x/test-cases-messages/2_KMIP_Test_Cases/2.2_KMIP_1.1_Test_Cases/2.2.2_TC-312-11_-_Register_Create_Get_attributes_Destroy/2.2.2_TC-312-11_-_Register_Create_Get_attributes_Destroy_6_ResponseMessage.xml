@@ -1,0 +1,43 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:12:22+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_1"/>
+<Attribute>
+<AttributeName type="TextString" value="Object Group"/>
+<AttributeValue type="TextString"
+  value="Group1"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Application Specific Information"/>
+<AttributeValue>
+<ApplicationNamespace type="TextString" value="ssl"/>
+<ApplicationData type="TextString"                       
+  value="www.example.com"/>
+</AttributeValue>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Contact Information"/>
+<AttributeValue type="TextString"
+  value="Joe"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="x-Purpose"/>
+<AttributeValue type="TextString"
+  value="demonstration"/>
+</Attribute>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

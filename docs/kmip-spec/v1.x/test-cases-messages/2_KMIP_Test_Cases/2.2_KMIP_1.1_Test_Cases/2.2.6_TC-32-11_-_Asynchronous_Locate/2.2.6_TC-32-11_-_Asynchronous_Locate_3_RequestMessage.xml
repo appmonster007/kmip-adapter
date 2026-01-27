@@ -1,0 +1,30 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<AsynchronousIndicator type="Boolean" value="true"/>
+<BatchCount type="Integer"
+  value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<RequestPayload>
+<Attribute>
+<AttributeName type="TextString" value="Object Type"/>
+<AttributeValue type="Enumeration"
+  value="SymmetricKey"/>
+</Attribute>
+<Attribute>
+<AttributeName type="TextString" value="Name"/>
+<AttributeValue>
+<NameValue type="TextString" value="TC-32-12-key1"/>
+<NameType type="Enumeration"                             
+  value="UninterpretedTextString"/>
+</AttributeValue>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

@@ -1,0 +1,34 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchOrderOption type="Boolean" value="true"/>
+<BatchCount type="Integer"
+  value="2"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<UniqueBatchItemID type="ByteString"
+  value="657339bdf375bfa2"/>
+<RequestPayload>
+<MaximumItems type="Integer" value="1"/>
+<ObjectGroupMember type="Enumeration"                        
+  value="GroupMemberFresh"/>
+<Attribute>
+<AttributeName type="TextString" value="Object Group"/>
+<AttributeValue type="TextString"
+  value="ClientFreshTest"/>
+</Attribute>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<UniqueBatchItemID type="ByteString"
+  value="5713c4911444b36e"/>
+<RequestPayload>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

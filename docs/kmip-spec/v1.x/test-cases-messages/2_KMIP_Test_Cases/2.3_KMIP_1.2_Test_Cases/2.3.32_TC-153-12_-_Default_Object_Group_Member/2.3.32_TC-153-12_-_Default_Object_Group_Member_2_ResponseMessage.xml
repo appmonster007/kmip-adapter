@@ -1,0 +1,48 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:44+00:00"/>
+<BatchCount type="Integer"
+  value="3"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Create"/>
+<UniqueBatchItemID type="ByteString"
+  value="75e8bdb337aec40e"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_0"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Create"/>
+<UniqueBatchItemID type="ByteString"
+  value="ac0e6e56e8d99f66"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_1"/>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="Create"/>
+<UniqueBatchItemID type="ByteString"
+  value="77e87d356ba09da1"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SymmetricKey"/>
+<UniqueIdentifier type="TextString"                          
+  value="$UNIQUE_IDENTIFIER_2"/>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

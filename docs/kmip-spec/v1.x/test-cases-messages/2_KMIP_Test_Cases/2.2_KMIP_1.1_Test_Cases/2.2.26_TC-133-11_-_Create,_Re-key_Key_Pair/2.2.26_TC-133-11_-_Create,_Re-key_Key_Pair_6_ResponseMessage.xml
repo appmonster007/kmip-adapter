@@ -1,0 +1,34 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:14:39+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="PublicKey"/>
+<UniqueIdentifier type="TextString"                 
+           value="$UNIQUE_IDENTIFIER_1"/>
+<PublicKey>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="PKCS_1"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                          value="3082010a0282010100b0612bccafdd11d41819a274526d68dbf3c3f25667c402a0e0e8e4cce007ea6b6ea53699e8bd7ccab7d5ae66c00b28fd678b81ba1d4e841c3a36caf13f852004633f80d840be7aad9bcdeabde11514b6ab3bce602e11305cf5e9c34ebee32c3c468b9b146502738c0ae82e63ab8bd1fc4db0c6a09eb0c9f6e01b9cc8d22317aedab328209a1dc5d2ce8529d81521c41730c1c8c76249d233e89096ca44dfeb469e3532bb90d6691c6932d0c63dbb7647c6e64337b719a1f100b1366cff3bbb213b17c716beb2c9ad88b3b76abacc378c4898636480fff1108e1fa1e7573c096606e21b18a05245ebd976701bb676dc2962a328d39385ef7571bc48ae134b37410203010001"/>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="RSA"/>
+<CryptographicLength
+  type="Integer"
+  value="2048"/>
+</KeyBlock>
+</PublicKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

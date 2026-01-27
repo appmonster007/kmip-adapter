@@ -1,0 +1,42 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2013-06-21T22:18:59+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Get"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<ObjectType type="Enumeration" value="SplitKey"/>
+<UniqueIdentifier type="TextString"            
+                value="$UNIQUE_IDENTIFIER_2"/>
+<SplitKey>
+<SplitKeyParts type="Integer"
+  value="4"/>
+<KeyPartIdentifier type="Integer"
+  value="2"/>
+<SplitKeyThreshold type="Integer"
+  value="2"/>
+<SplitKeyMethod type="Enumeration"
+  value="PolynomialSharingGF2_8"/>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="Raw"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                          value="CF93D1E2A7E593CD5B8D6247F4E5D49C"/>
+</KeyValue>
+<CryptographicAlgorithm type="Enumeration" value="AES"/>
+<CryptographicLength
+  type="Integer"
+  value="128"/>
+</KeyBlock>
+</SplitKey>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

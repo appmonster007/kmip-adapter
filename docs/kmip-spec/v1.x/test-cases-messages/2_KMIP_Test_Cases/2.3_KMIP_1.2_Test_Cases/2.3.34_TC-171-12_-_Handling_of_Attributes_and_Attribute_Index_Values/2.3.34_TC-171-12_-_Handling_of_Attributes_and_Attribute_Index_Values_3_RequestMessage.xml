@@ -1,0 +1,22 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<AttributeName type="TextString"
+  value="Object
+  Type"/>
+<AttributeName type="TextString"
+  value="Object
+  Type"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

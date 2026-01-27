@@ -1,0 +1,39 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Register"/>
+<RequestPayload>
+<ObjectType type="Enumeration" value="SplitKey"/>
+<TemplateAttribute>
+<Attribute>
+<AttributeName type="TextString" value="x-ID"/>
+<AttributeValue type="TextString"
+  value="TC-SJ-3-12-split3"/>
+</Attribute>
+</TemplateAttribute>
+<SplitKey>
+<SplitKeyParts type="Integer"
+  value="4"/>
+<KeyPartIdentifier type="Integer"
+  value="3"/>
+<SplitKeyThreshold type="Integer"
+  value="2"/>
+<SplitKeyMethod type="Enumeration"
+  value="PolynomialSharingGF2_8"/>
+<KeyBlock>
+<KeyFormatType type="Enumeration" value="Raw"/>
+<KeyValue>
+<KeyMaterial type="ByteString"                          value="A855B891F61AD9217240D8EC061E37DA"/>
+</KeyValue>
+</KeyBlock>
+</SplitKey>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

@@ -1,0 +1,24 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2010-02-11T08:35:06+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="CreateKeyPair"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<PrivateKeyUniqueIdentifier type="TextString"                
+  value="$UNIQUE_IDENTIFIER_0"/>
+<PublicKeyUniqueIdentifier
+  type="TextString"                 
+  value="$UNIQUE_IDENTIFIER_1"/>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

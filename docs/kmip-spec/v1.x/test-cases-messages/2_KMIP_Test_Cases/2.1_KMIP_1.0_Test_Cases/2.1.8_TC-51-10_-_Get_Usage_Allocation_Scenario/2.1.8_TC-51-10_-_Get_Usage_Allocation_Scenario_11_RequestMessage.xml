@@ -1,0 +1,32 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<BatchOrderOption type="Boolean" value="true"/>
+<BatchCount type="Integer"
+  value="2"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Check"/>
+<UniqueBatchItemID type="ByteString"
+  value="19d4f3dc9635307a"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<UsageLimitsCount type="LongInteger"
+  value="500"/>
+</RequestPayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="GetUsageAllocation"/>
+<UniqueBatchItemID type="ByteString"
+  value="20c8dffd55bdeee8"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<UsageLimitsCount type="LongInteger"
+  value="500"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

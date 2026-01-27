@@ -1,0 +1,19 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="0"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2010-02-12T09:30:20+00:00"/>
+<BatchCount type="Integer"
+  value="1"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Locate"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

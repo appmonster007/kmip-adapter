@@ -1,0 +1,34 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="2"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="GetAttributes"/>
+<RequestPayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_2"/>
+<AttributeName type="TextString"
+  value="Certificate
+  Identifier"/>
+<AttributeName type="TextString"
+  value="Certificate
+  Issuer"/>
+<AttributeName type="TextString"
+  value="Certificate
+  Subject"/>
+<AttributeName type="TextString"
+  value="Certificate
+  Type"/>
+<AttributeName type="TextString"
+  value="Digital
+  Signature Algorithm"/>
+<AttributeName type="TextString"
+  value="Cryptographic
+  Length"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>

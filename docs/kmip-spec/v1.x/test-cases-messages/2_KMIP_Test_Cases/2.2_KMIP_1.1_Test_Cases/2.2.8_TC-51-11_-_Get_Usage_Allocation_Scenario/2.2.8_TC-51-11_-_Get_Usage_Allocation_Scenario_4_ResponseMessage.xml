@@ -1,0 +1,42 @@
+<ResponseMessage>
+<ResponseHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<TimeStamp type="DateTime" value="2012-04-27T08:12:25+00:00"/>
+<BatchCount type="Integer"
+  value="2"/>
+</ResponseHeader>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="369f6802ee57532b"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Activation Date"/>
+<AttributeValue type="DateTime"
+  value="2009-11-12T09:47:30+00:00"/>
+</Attribute>
+</ResponsePayload>
+</BatchItem>
+<BatchItem>
+<Operation type="Enumeration" value="AddAttribute"/>
+<UniqueBatchItemID type="ByteString"
+  value="b7ca806e52825bf4"/>
+<ResultStatus type="Enumeration"
+  value="Success"/>
+<ResponsePayload>
+<UniqueIdentifier type="TextString"                           value="$UNIQUE_IDENTIFIER_0"/>
+<Attribute>
+<AttributeName type="TextString" value="Protect Stop Date"/>
+<AttributeValue type="DateTime"
+  value="2009-11-12T10:57:30+00:00"/>
+</Attribute>
+</ResponsePayload>
+</BatchItem>
+</ResponseMessage>

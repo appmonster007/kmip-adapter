@@ -1,0 +1,17 @@
+<RequestMessage>
+<RequestHeader>
+<ProtocolVersion>
+<ProtocolVersionMajor type="Integer" value="1"/>
+<ProtocolVersionMinor type="Integer"
+  value="1"/>
+</ProtocolVersion>
+<BatchCount type="Integer" value="1"/>
+</RequestHeader>
+<BatchItem>
+<Operation type="Enumeration" value="Cancel"/>
+<RequestPayload>
+<AsynchronousCorrelationValue type="ByteString"              
+  value="$ASYNCHRONOUS_CORRELATION_VALUE"/>
+</RequestPayload>
+</BatchItem>
+</RequestMessage>
