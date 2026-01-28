@@ -2,10 +2,10 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.VendorExtension;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
+import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.model.core.type.CriticalityIndicator;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
 

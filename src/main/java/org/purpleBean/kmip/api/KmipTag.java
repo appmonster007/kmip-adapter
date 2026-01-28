@@ -6,6 +6,8 @@ import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
 import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) tag.
@@ -19,7 +21,8 @@ public class KmipTag {
 
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<Integer, Extension> EXTENSION_VALUE_REGISTRY = new ConcurrentHashMap<>();
+    private static final Map<String, Extension> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
 
     static {
         for (Standard s : Standard.values()) {
@@ -80,14 +83,38 @@ public class KmipTag {
         if (supportedVersions.isEmpty()) {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
-        Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
-        if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
+
+        Extension existing = EXTENSION_VALUE_REGISTRY.get(value);
+        if (existing != null) {
+            Set<KmipSpec> currentlySupported = existing.getSupportedVersions();
+            if (!currentlySupported.containsAll(supportedVersions.stream().toList())) {
+                existing = existing.toBuilder()
+                        .supportedVersions(Stream.concat(
+                                currentlySupported.stream(),
+                                supportedVersions.stream()
+                        ).collect(Collectors.toSet())).build();
+                VALUE_REGISTRY.put(existing.getValue(), existing);
+                DESCRIPTION_REGISTRY.put(existing.getDescription(), existing);
+                EXTENSION_VALUE_REGISTRY.put(existing.getValue(), existing);
+                EXTENSION_DESCRIPTION_REGISTRY.put(existing.getDescription(), existing);
+            }
+            return existing;
         }
+
+        Value existingEnumByValue = VALUE_REGISTRY.get(value);
+        if (existingEnumByValue != null) {
+            throw new IllegalArgumentException(String.format("KMIP Tag already exists for %d: %s", value, existingEnumByValue));
+        }
+
+        Value existingEnumByDescription = DESCRIPTION_REGISTRY.get(description);
+        if (existingEnumByDescription != null) {
+            throw new IllegalArgumentException(String.format("KMIP Tag already exists for %s: %s", description, existingEnumByDescription));
+        }
+
         Extension custom = new Extension(value, description, supportedVersions);
         VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
         DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        EXTENSION_VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
         EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
         return custom;
     }
@@ -166,6 +193,13 @@ public class KmipTag {
      */
     public boolean isSupported() {
         return value.isSupported();
+    }
+
+    /**
+     * @return Set of KMIP specifications that support this tag.
+     */
+    public Set<KmipSpec> getSupportedVersions() {
+        return value.getSupportedVersions();
     }
 
     /**
@@ -680,6 +714,8 @@ public class KmipTag {
          */
         boolean isSupported();
 
+        Set<KmipSpec> getSupportedVersions();
+
         /**
          * @return True if the tag is a custom extension, false otherwise.
          */
@@ -697,6 +733,7 @@ public class KmipTag {
     @Getter
     @AllArgsConstructor
     @ToString
+    @Builder(toBuilder = true)
     public static class Extension implements Value {
         /**
          * The integer value of the tag.

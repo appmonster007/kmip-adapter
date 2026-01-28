@@ -3,9 +3,9 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.VendorExtension;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
+import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.model.core.type.CriticalityIndicator;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
 
