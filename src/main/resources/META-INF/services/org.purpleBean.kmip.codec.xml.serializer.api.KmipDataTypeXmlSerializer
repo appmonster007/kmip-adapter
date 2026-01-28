@@ -122,6 +122,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TransparentRsaPubl
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.TransparentSymmetricKeyXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.UsageLimitsXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.UsernameAndPasswordXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.structure.VendorExtensionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateIssuerXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.X509CertificateSubjectXmlSerializer

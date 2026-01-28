@@ -32,8 +32,15 @@ public abstract class AbstractKmipDataTypeXmlSerializer<T extends KmipDataType, 
             throw new IllegalStateException("Expected ToXmlGenerator");
         }
 
-        xmlGen.setNextName(new QName(value.getKmipTag().getDescription()));
-        xmlGen.writeStartObject();
+        if (!value.getKmipTag().getDescription().matches("^[0-9][xX].*")) {
+            xmlGen.setNextName(new QName(value.getKmipTag().getDescription()));
+            xmlGen.writeStartObject();
+        } else {
+            xmlGen.setNextName(new QName("TTLV"));
+            xmlGen.writeStartObject();
+            xmlGen.setNextIsAttribute(true);
+            xmlGen.writeStringField("tag", value.getKmipTag().getDescription());
+        }
 
         xmlGen.setNextIsAttribute(true);
         xmlGen.writeStringField("type", value.getEncodingType().getDescription());

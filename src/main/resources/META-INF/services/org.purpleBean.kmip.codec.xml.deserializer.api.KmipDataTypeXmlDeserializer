@@ -136,6 +136,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentRsaPu
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.TransparentSymmetricKeyXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.UsageLimitsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.UsernameAndPasswordXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.VendorExtensionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.X509CertificateIdentifierXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.X509CertificateIssuerXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.X509CertificateSubjectXmlDeserializer

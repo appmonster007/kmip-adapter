@@ -122,6 +122,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentRsaPublic
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.TransparentSymmetricKeyBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.UsageLimitsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.UsernameAndPasswordBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.structure.VendorExtensionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateIssuerBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.X509CertificateSubjectBenchmarkSubject

@@ -136,6 +136,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentRsaP
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.TransparentSymmetricKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.UsageLimitsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.UsernameAndPasswordTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.VendorExtensionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.X509CertificateIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.X509CertificateIssuerTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.X509CertificateSubjectTtlvDeserializer

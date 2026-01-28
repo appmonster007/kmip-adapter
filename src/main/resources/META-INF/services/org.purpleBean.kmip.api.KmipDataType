@@ -122,6 +122,7 @@ org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey
 org.purpleBean.kmip.model.core.structure.TransparentSymmetricKey
 org.purpleBean.kmip.model.core.structure.UsageLimits
 org.purpleBean.kmip.model.core.structure.UsernameAndPassword
+org.purpleBean.kmip.model.core.structure.VendorExtension
 org.purpleBean.kmip.model.core.structure.X509CertificateIdentifier
 org.purpleBean.kmip.model.core.structure.X509CertificateIssuer
 org.purpleBean.kmip.model.core.structure.X509CertificateSubject
