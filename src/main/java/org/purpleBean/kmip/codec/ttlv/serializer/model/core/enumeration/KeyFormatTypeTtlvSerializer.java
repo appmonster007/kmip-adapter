@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 public class KeyFormatTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<KeyFormatType, Integer> {
 
     public KeyFormatTypeTtlvSerializer() {
-        super(KeyFormatType::getValue);
+        super(KeyFormatType::getIntValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 public class KeyValueLocationTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<KeyValueLocationType, Integer> {
 
     public KeyValueLocationTypeTtlvSerializer() {
-        super(KeyValueLocationType::getValue);
+        super(KeyValueLocationType::getIntValue);
     }
 }

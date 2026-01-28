@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 public class HashingAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<HashingAlgorithm, Integer> {
 
     public HashingAlgorithmTtlvSerializer() {
-        super(HashingAlgorithm::getValue);
+        super(HashingAlgorithm::getIntValue);
     }
 }

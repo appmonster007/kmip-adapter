@@ -89,8 +89,8 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
 
     @Override
     public boolean isClientModifiable(@NonNull State state) {
-        return state.getValue() == State.Standard.PRE_ACTIVE.getValue() ||
-                state.getValue() == State.Standard.ACTIVE.getValue();
+        return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue() ||
+                state.getIntValue() == State.Standard.ACTIVE.getValue();
     }
 
     @Override
@@ -120,8 +120,8 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
 
     @Override
     public boolean isServerModifiable(@NonNull State state) {
-        return state.getValue() == State.Standard.PRE_ACTIVE.getValue() ||
-                state.getValue() == State.Standard.ACTIVE.getValue();
+        return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue() ||
+                state.getIntValue() == State.Standard.ACTIVE.getValue();
     }
 
     @Override

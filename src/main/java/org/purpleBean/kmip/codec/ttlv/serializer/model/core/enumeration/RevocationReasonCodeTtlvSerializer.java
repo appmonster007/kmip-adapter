@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 public class RevocationReasonCodeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RevocationReasonCode, Integer> {
 
     public RevocationReasonCodeTtlvSerializer() {
-        super(RevocationReasonCode::getValue);
+        super(RevocationReasonCode::getIntValue);
     }
 }

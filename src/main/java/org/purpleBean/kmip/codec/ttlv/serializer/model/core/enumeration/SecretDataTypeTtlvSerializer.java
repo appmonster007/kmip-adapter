@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.SecretDataType;
 public class SecretDataTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<SecretDataType, Integer> {
 
     public SecretDataTypeTtlvSerializer() {
-        super(SecretDataType::getValue);
+        super(SecretDataType::getIntValue);
     }
 }

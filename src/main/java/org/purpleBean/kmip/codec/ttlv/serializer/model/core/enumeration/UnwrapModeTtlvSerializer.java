@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.UnwrapMode;
 public class UnwrapModeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<UnwrapMode, Integer> {
 
     public UnwrapModeTtlvSerializer() {
-        super(UnwrapMode::getValue);
+        super(UnwrapMode::getIntValue);
     }
 }

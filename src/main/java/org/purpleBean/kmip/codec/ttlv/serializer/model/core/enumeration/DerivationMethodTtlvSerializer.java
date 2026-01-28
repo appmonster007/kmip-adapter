@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 public class DerivationMethodTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DerivationMethod, Integer> {
 
     public DerivationMethodTtlvSerializer() {
-        super(DerivationMethod::getValue);
+        super(DerivationMethod::getIntValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 public class BatchErrorContinuationOptionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<BatchErrorContinuationOption, Integer> {
 
     public BatchErrorContinuationOptionTtlvSerializer() {
-        super(BatchErrorContinuationOption::getValue);
+        super(BatchErrorContinuationOption::getIntValue);
     }
 }

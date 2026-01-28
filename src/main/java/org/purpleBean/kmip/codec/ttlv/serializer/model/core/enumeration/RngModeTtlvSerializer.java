@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RngMode;
 public class RngModeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RngMode, Integer> {
 
     public RngModeTtlvSerializer() {
-        super(RngMode::getValue);
+        super(RngMode::getIntValue);
     }
 }

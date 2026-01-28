@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
 public class RngAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RngAlgorithm, Integer> {
 
     public RngAlgorithmTtlvSerializer() {
-        super(RngAlgorithm::getValue);
+        super(RngAlgorithm::getIntValue);
     }
 }

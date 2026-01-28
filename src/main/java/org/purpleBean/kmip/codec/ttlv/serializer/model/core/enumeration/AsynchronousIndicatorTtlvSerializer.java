@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.AsynchronousIndicator;
 public class AsynchronousIndicatorTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<AsynchronousIndicator, Integer> {
 
     public AsynchronousIndicatorTtlvSerializer() {
-        super(AsynchronousIndicator::getValue);
+        super(AsynchronousIndicator::getIntValue);
     }
 }

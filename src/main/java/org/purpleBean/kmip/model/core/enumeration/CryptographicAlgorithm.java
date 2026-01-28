@@ -63,7 +63,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
+        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getIntValue());
         return CryptographicAlgorithm.builder().value(v).build();
     }
 
@@ -219,7 +219,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
         return false;
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

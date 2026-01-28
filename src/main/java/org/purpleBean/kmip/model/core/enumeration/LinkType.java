@@ -172,7 +172,7 @@ public class LinkType implements KmipEnumeration {
         return supportedVersions.contains(spec) && value.isSupported();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

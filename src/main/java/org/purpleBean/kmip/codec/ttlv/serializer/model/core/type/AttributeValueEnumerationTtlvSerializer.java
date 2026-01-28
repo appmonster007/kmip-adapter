@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
 public class AttributeValueEnumerationTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<AttributeValueEnumeration, Integer> {
 
     public AttributeValueEnumerationTtlvSerializer() {
-        super(AttributeValueEnumeration::getValue);
+        super(AttributeValueEnumeration::getIntValue);
     }
 }

@@ -85,6 +85,8 @@ public interface KmipDataType {
      */
     EncodingType getEncodingType();
 
+    Object getValue();
+    
     /**
      * Checks if this data type is supported in the current KMIP specification context.
      *

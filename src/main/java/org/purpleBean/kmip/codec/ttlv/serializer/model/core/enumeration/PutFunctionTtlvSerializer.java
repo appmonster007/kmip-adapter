@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 public class PutFunctionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<PutFunction, Integer> {
 
     public PutFunctionTtlvSerializer() {
-        super(PutFunction::getValue);
+        super(PutFunction::getIntValue);
     }
 }

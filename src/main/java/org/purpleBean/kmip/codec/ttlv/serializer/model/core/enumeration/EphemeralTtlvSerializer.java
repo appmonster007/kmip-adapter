@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.Ephemeral;
 public class EphemeralTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<Ephemeral, Integer> {
 
     public EphemeralTtlvSerializer() {
-        super(Ephemeral::getValue);
+        super(Ephemeral::getIntValue);
     }
 }

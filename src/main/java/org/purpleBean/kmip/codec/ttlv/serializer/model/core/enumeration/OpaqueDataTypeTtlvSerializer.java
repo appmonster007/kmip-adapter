@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.OpaqueDataType;
 public class OpaqueDataTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<OpaqueDataType, Integer> {
 
     public OpaqueDataTypeTtlvSerializer() {
-        super(OpaqueDataType::getValue);
+        super(OpaqueDataType::getIntValue);
     }
 }

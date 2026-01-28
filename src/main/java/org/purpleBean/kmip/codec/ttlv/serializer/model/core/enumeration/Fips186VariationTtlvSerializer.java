@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.Fips186Variation;
 public class Fips186VariationTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<Fips186Variation, Integer> {
 
     public Fips186VariationTtlvSerializer() {
-        super(Fips186Variation::getValue);
+        super(Fips186Variation::getIntValue);
     }
 }

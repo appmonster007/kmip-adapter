@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 public class ObjectTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ObjectType, Integer> {
 
     public ObjectTypeTtlvSerializer() {
-        super(ObjectType::getValue);
+        super(ObjectType::getIntValue);
     }
 }

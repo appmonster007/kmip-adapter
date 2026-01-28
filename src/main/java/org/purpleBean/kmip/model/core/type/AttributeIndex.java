@@ -2,6 +2,7 @@ package org.purpleBean.kmip.model.core.type;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
 import java.util.Set;
@@ -23,7 +24,8 @@ public class AttributeIndex implements KmipDataType {
         }
     }
 
-    private final int value;
+    @NonNull
+    private final Integer value;
 
     @Builder
     private AttributeIndex(int value) {

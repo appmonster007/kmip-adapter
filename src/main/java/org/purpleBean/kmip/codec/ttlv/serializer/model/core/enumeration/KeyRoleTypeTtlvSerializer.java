@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
 public class KeyRoleTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<KeyRoleType, Integer> {
 
     public KeyRoleTypeTtlvSerializer() {
-        super(KeyRoleType::getValue);
+        super(KeyRoleType::getIntValue);
     }
 }

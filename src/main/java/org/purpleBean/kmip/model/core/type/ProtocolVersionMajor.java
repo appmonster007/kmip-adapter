@@ -3,6 +3,7 @@ package org.purpleBean.kmip.model.core.type;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
@@ -25,7 +26,8 @@ public class ProtocolVersionMajor implements KmipDataType {
     }
 
     @EqualsAndHashCode.Include
-    private final int value;
+    @NonNull
+    private final Integer value;
 
     @Builder
     private ProtocolVersionMajor(int value) {

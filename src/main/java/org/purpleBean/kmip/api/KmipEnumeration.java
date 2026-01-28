@@ -65,7 +65,7 @@ public interface KmipEnumeration extends KmipDataType {
      *
      * @return The integer value of the enumeration.
      */
-    int getValue();
+    int getIntValue();
 
     /**
      * Gets the human-readable description of the enumeration constant.

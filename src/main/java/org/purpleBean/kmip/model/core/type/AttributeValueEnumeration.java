@@ -63,7 +63,7 @@ public class AttributeValueEnumeration implements AttributeValue, KmipEnumeratio
     }
 
     @Override
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 }

@@ -73,7 +73,7 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        DigitalSignatureAlgorithm.Value v = fromValue(enumeration.getValue());
+        DigitalSignatureAlgorithm.Value v = fromValue(enumeration.getIntValue());
         return DigitalSignatureAlgorithm.builder().value(v).build();
     }
 
@@ -229,7 +229,7 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
         return getAttributeName().getValue();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
 public class DrbgAlgorithmTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DrbgAlgorithm, Integer> {
 
     public DrbgAlgorithmTtlvSerializer() {
-        super(DrbgAlgorithm::getValue);
+        super(DrbgAlgorithm::getIntValue);
     }
 }

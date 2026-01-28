@@ -90,8 +90,8 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isClientModifiable(@NonNull State state) {
         return (
-                state.getValue() == State.Standard.PRE_ACTIVE.getValue()
-                        || state.getValue() == State.Standard.ACTIVE.getValue()
+                state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
+                        || state.getIntValue() == State.Standard.ACTIVE.getValue()
         ) && value.withNano(0).isAfter(OffsetDateTime.now().withNano(0));
     }
 
@@ -123,8 +123,8 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     @Override
     public boolean isServerModifiable(@NonNull State state) {
         return (
-                state.getValue() == State.Standard.PRE_ACTIVE.getValue()
-                        || state.getValue() == State.Standard.ACTIVE.getValue()
+                state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
+                        || state.getIntValue() == State.Standard.ACTIVE.getValue()
         ) && value.withNano(0).isAfter(OffsetDateTime.now().withNano(0));
     }
 

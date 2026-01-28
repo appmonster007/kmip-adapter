@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 public class KeyCompressionTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<KeyCompressionType, Integer> {
 
     public KeyCompressionTypeTtlvSerializer() {
-        super(KeyCompressionType::getValue);
+        super(KeyCompressionType::getIntValue);
     }
 }

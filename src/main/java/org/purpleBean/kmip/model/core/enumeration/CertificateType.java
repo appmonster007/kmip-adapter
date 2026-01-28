@@ -69,7 +69,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        CertificateType.Value v = fromValue(enumeration.getValue());
+        CertificateType.Value v = fromValue(enumeration.getIntValue());
         return CertificateType.builder().value(v).build();
     }
 
@@ -225,7 +225,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
         return getAttributeName().getValue();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

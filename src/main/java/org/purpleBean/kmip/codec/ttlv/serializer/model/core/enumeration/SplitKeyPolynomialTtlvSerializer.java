@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.SplitKeyPolynomial;
 public class SplitKeyPolynomialTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<SplitKeyPolynomial, Integer> {
 
     public SplitKeyPolynomialTtlvSerializer() {
-        super(SplitKeyPolynomial::getValue);
+        super(SplitKeyPolynomial::getIntValue);
     }
 }

@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.DestroyAction;
 public class DestroyActionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DestroyAction, Integer> {
 
     public DestroyActionTtlvSerializer() {
-        super(DestroyAction::getValue);
+        super(DestroyAction::getIntValue);
     }
 }

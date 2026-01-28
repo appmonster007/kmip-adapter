@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
 public class MaskGeneratorTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<MaskGenerator, Integer> {
 
     public MaskGeneratorTtlvSerializer() {
-        super(MaskGenerator::getValue);
+        super(MaskGenerator::getIntValue);
     }
 }

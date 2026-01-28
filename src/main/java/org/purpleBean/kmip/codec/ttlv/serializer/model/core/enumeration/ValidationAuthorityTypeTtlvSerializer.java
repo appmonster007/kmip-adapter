@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.ValidationAuthorityType;
 public class ValidationAuthorityTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ValidationAuthorityType, Integer> {
 
     public ValidationAuthorityTypeTtlvSerializer() {
-        super(ValidationAuthorityType::getValue);
+        super(ValidationAuthorityType::getIntValue);
     }
 }

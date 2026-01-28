@@ -72,7 +72,7 @@ public class State implements KmipEnumeration, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        State.Value v = fromValue(enumeration.getValue());
+        State.Value v = fromValue(enumeration.getIntValue());
         return State.builder().value(v).build();
     }
 
@@ -228,7 +228,7 @@ public class State implements KmipEnumeration, KmipAttribute {
         return getAttributeName().getValue();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

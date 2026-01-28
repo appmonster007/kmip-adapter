@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.RotateNameType;
 public class RotateNameTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RotateNameType, Integer> {
 
     public RotateNameTypeTtlvSerializer() {
-        super(RotateNameType::getValue);
+        super(RotateNameType::getIntValue);
     }
 }

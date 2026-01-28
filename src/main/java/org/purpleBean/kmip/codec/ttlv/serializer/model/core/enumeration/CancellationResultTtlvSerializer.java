@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.CancellationResult;
 public class CancellationResultTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CancellationResult, Integer> {
 
     public CancellationResultTtlvSerializer() {
-        super(CancellationResult::getValue);
+        super(CancellationResult::getIntValue);
     }
 }

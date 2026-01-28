@@ -168,7 +168,7 @@ public class PaddingMethod implements KmipEnumeration {
         return supportedVersions.contains(spec) && value.isSupported();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 

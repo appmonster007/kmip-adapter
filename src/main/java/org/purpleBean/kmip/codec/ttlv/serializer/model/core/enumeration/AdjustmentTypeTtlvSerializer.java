@@ -6,6 +6,6 @@ import org.purpleBean.kmip.model.core.enumeration.AdjustmentType;
 public class AdjustmentTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<AdjustmentType, Integer> {
 
     public AdjustmentTypeTtlvSerializer() {
-        super(AdjustmentType::getValue);
+        super(AdjustmentType::getIntValue);
     }
 }
