@@ -10,6 +10,7 @@ import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -59,8 +60,12 @@ public class ProtocolVersion implements KmipStructure {
         // No validation needed for this structure
     }
 
-    public List<KmipDataType> getValue() {
-        return List.of(protocolVersionMajor, protocolVersionMinor);
+    public KmipDataType[] getValue() {
+        return Stream.of(protocolVersionMajor, protocolVersionMinor)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     public int getMajor() {

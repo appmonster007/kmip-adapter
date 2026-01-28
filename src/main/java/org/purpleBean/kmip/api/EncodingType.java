@@ -1,7 +1,10 @@
 package org.purpleBean.kmip.api;
 
 import lombok.Getter;
+import org.purpleBean.kmip.model.core.type.Offset;
 
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -21,43 +24,44 @@ public enum EncodingType {
     /**
      * A container for other TTLV items. Its length is the total size of the contained items.
      */
-    STRUCTURE((byte) 0x01, "Structure", -1),
+    STRUCTURE((byte) 0x01, "Structure", -1, KmipDataType[].class),
     /**
      * A 32-bit signed integer.
      */
-    INTEGER((byte) 0x02, "Integer", 4),
+    INTEGER((byte) 0x02, "Integer", 4, Integer.class),
     /**
      * A 64-bit signed integer.
      */
-    LONG_INTEGER((byte) 0x03, "LongInteger", 8),
+    LONG_INTEGER((byte) 0x03, "LongInteger", 8, Long.class),
     /**
      * A variable-length signed integer.
      */
-    BIG_INTEGER((byte) 0x04, "BigInteger", -1),
+    BIG_INTEGER((byte) 0x04, "BigInteger", -1, BigInteger.class),
     /**
      * A 32-bit signed integer representing an enumerated value.
      */
-    ENUMERATION((byte) 0x05, "Enumeration", 4),
+    ENUMERATION((byte) 0x05, "Enumeration", 4, KmipEnumeration.Value.class),
     /**
      * An 8-byte value where the least significant bit of the last byte is 1 for true and 0 for false.
      */
-    BOOLEAN((byte) 0x06, "Boolean", 8),
+    BOOLEAN((byte) 0x06, "Boolean", 8, Boolean.class),
     /**
      * A variable-length string of UTF-8 characters.
      */
-    TEXT_STRING((byte) 0x07, "TextString", -1),
+    TEXT_STRING((byte) 0x07, "TextString", -1, String.class),
     /**
      * A variable-length string of bytes.
      */
-    BYTE_STRING((byte) 0x08, "ByteString", -1),
+    BYTE_STRING((byte) 0x08, "ByteString", -1, ByteBuffer.class),
     /**
      * A 64-bit integer representing the number of microseconds since the Unix epoch.
      */
-    DATE_TIME((byte) 0x09, "DateTime", 8),
+    DATE_TIME((byte) 0x09, "DateTime", 8, Offset.class),
     /**
      * A 32-bit unsigned integer representing a duration in seconds.
      */
-    INTERVAL((byte) 0x0A, "Interval", 4);
+    INTERVAL((byte) 0x0A, "Interval", 4, Integer.class),
+    ;
 
     /**
      * Constant indicating a variable-length encoding.
@@ -92,6 +96,10 @@ public enum EncodingType {
      * The raw byte size of the value field for fixed-size types. For variable-size types, this is -1.
      */
     private final int rawByteSize;
+    /**
+     * The corresponding expected class for encoded type
+     */
+    private final Class<?> clazz;
 
     /**
      * Constructs an EncodingType with the specified parameters.
@@ -99,11 +107,13 @@ public enum EncodingType {
      * @param typeValue   the byte value representing this encoding type.
      * @param description a human-readable description of the type.
      * @param rawByteSize the raw byte size of the value, or -1 for variable-length types.
+     * @param clazz       the corresponding expected class for encoded type
      */
-    EncodingType(byte typeValue, String description, int rawByteSize) {
+    EncodingType(byte typeValue, String description, int rawByteSize, Class<?> clazz) {
         this.typeValue = typeValue;
         this.description = description;
         this.rawByteSize = rawByteSize;
+        this.clazz = clazz;
     }
 
     /**

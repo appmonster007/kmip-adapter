@@ -109,7 +109,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public KmipDataType[] getValues() {
         // TODO: Return a list of all the fields
         // return Stream.of(
         //                 field1,
@@ -117,7 +117,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
         //         .filter(Objects::nonNull)
         //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
         //         .map(KmipDataType.class::cast)
-        //         .collect(Collectors.toList());
+        //         .toArray(KmipDataType[]::new);
         return List.of();
     }
 

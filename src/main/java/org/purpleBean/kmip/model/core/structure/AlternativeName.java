@@ -12,8 +12,10 @@ import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP AlternativeName attribute structure.
@@ -58,7 +60,7 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return AlternativeName.builder()
                 .alternativeNameValue((AlternativeNameValue) map.get(AlternativeNameValue.kmipTag).get(0))
                 .alternativeNameType((AlternativeNameType) map.get(AlternativeNameType.kmipTag).get(0))
@@ -83,15 +85,18 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return List.of(alternativeNameValue, alternativeNameType);
+    public KmipDataType[] getValue() {
+        return Stream.of(alternativeNameValue, alternativeNameType)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override

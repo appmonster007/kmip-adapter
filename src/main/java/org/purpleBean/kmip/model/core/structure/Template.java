@@ -8,6 +8,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -64,12 +65,16 @@ public class Template implements ManagedObject, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return new ArrayList<>(attributes);
+    public KmipDataType[] getValue() {
+        return Stream.of(attributes)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

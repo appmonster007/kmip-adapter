@@ -13,6 +13,7 @@ import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP CertificateIssuer attribute structure.
@@ -54,7 +55,7 @@ public class CertificateIssuer implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CertificateIssuer.builder()
                 .certificateIssuerDistinguishedName((CertificateIssuerDistinguishedName) map.get(CertificateIssuerDistinguishedName.kmipTag).get(0))
                 .certificateIssuerAlternativeNames(map.get(CertificateIssuerAlternativeName.kmipTag).stream().map(e -> (CertificateIssuerAlternativeName) e).collect(Collectors.toList()))
@@ -79,18 +80,18 @@ public class CertificateIssuer implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        List<KmipDataType> fields = new ArrayList<>();
-        fields.add(certificateIssuerDistinguishedName);
-        fields.addAll(certificateIssuerAlternativeNames);
-        return fields;
+    public KmipDataType[] getValue() {
+        return Stream.of(certificateIssuerDistinguishedName, certificateIssuerAlternativeNames)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override

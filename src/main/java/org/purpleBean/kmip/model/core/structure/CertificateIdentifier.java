@@ -52,7 +52,7 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CertificateIdentifier.builder()
                 .issuer((Issuer) map.get(Issuer.kmipTag).get(0))
                 .serialNumber((SerialNumber) map.get(SerialNumber.kmipTag).get(0))
@@ -77,15 +77,18 @@ public class CertificateIdentifier implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return Stream.of(issuer, serialNumber).filter(Objects::nonNull).toList();
+    public KmipDataType[] getValue() {
+        return Stream.of(issuer, serialNumber)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override

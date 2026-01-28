@@ -38,5 +38,5 @@ public interface KmipStructure extends KmipDataType {
      *
      * @return A {@link List} of {@link KmipDataType} objects contained within this structure.
      */
-    List<KmipDataType> getValue();
+    KmipDataType[] getValue();
 }

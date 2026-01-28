@@ -103,11 +103,11 @@ public class ReKeyKeyPairOpResponsePayload implements ResponsePayloadStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
+    public KmipDataType[] getValue() {
         return Stream.of(
                         privateKeyUniqueIdentifier,
                         publicKeyUniqueIdentifier,
@@ -116,7 +116,7 @@ public class ReKeyKeyPairOpResponsePayload implements ResponsePayloadStructure {
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)
-                .collect(Collectors.toList());
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

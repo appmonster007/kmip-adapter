@@ -7,7 +7,9 @@ import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -56,8 +58,12 @@ public class SimpleRequestPayload implements RequestPayloadStructure {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return List.of();
+    public KmipDataType[] getValue() {
+        return Stream.of()
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

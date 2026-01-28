@@ -8,7 +8,9 @@ import org.purpleBean.kmip.model.core.type.NonceId;
 import org.purpleBean.kmip.model.core.type.NonceValue;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -70,11 +72,15 @@ public class Nonce implements KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return List.of(nonceId, nonceValue);
+    public KmipDataType[] getValue() {
+        return Stream.of(nonceId, nonceValue)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

@@ -120,11 +120,11 @@ public class SplitKey implements ManagedObject, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
+    public KmipDataType[] getValue() {
         return Stream.of(
                         splitKeyParts,
                         keyPartIdentifier,
@@ -133,7 +133,9 @@ public class SplitKey implements ManagedObject, KmipStructure {
                         primeFieldSize,
                         keyBlock)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

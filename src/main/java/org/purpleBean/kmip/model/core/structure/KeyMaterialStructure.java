@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -69,13 +70,16 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return spec != KmipSpec.UnsupportedVersion
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return spec != KmipSpec.UnsupportedVersion && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return values.stream().filter(Objects::nonNull).toList();
+    public KmipDataType[] getValue() {
+        return values.stream()
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
 }

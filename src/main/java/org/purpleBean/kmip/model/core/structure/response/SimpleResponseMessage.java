@@ -89,10 +89,12 @@ public class SimpleResponseMessage implements ResponseMessageStructure {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return Stream.concat(Stream.of(responseHeader), responseBatchItems.stream())
+    public KmipDataType[] getValue() {
+        return Stream.of(responseHeader, responseBatchItems)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

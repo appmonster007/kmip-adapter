@@ -85,7 +85,7 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CryptographicParameters.builder()
                 .blockCipherMode((BlockCipherMode) map.get(BlockCipherMode.kmipTag).get(0))
                 .paddingMethod((PaddingMethod) map.get(PaddingMethod.kmipTag).get(0))
@@ -121,7 +121,7 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
+    public KmipDataType[] getValue() {
         return Stream.of(
                 blockCipherMode,
                 paddingMethod,
@@ -136,14 +136,17 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
                 invocationFieldLength,
                 counterLength,
                 initialCounterValue
-        ).filter(Objects::nonNull).toList();
+        )
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override

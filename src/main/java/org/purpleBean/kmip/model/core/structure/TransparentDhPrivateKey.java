@@ -50,7 +50,7 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return TransparentDhPrivateKey.of(
                 (P) map.get(P.kmipTag).getFirst(),
                 (Q) map.get(Q.kmipTag).getFirst(),
@@ -86,12 +86,16 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return Stream.of(p, q, g, j, x).filter(Objects::nonNull).collect(Collectors.toList());
+    public KmipDataType[] getValue() {
+        return Stream.of(p, q, g, j, x)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
 }

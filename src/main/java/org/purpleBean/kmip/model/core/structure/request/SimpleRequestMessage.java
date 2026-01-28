@@ -90,10 +90,12 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return Stream.concat(Stream.of(requestHeader), requestBatchItems.stream())
+    public KmipDataType[] getValue() {
+        return Stream.of(requestHeader, requestBatchItems)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

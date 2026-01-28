@@ -29,7 +29,7 @@ public class AbstractKmipStructureJsonSerializer<T extends KmipStructure> extend
         gen.writeObject(value.getKmipTag());
         gen.writeStringField("type", value.getEncodingType().getDescription());
 
-        List<KmipDataType> values = value.getValue();
+        KmipDataType[] values = value.getValue();
         if (values != null) {
             gen.writeFieldName("value");
             gen.writeStartArray();

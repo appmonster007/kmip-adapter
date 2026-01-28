@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * KMIP X509CertificateIdentifier attribute structure.
@@ -58,7 +59,7 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return X509CertificateIdentifier.builder()
                 .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
                 .certificateSerialNumber((CertificateSerialNumber) map.get(CertificateSerialNumber.kmipTag).get(0))
@@ -97,15 +98,20 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return List.of(issuerDistinguishedName, certificateSerialNumber);
+    public KmipDataType[] getValue() {
+        return Stream.of(
+                        issuerDistinguishedName,
+                        certificateSerialNumber)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec)
-                && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override

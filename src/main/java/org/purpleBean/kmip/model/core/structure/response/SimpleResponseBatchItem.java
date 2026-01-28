@@ -113,8 +113,12 @@ public class SimpleResponseBatchItem implements ResponseBatchItemStructure {
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return Stream.of(operation, resultStatus, resultReason, resultMessage, responsePayloadStructure).filter(Objects::nonNull).collect(Collectors.toList());
+    public KmipDataType[] getValue() {
+        return Stream.of(operation, resultStatus, resultReason, resultMessage, responsePayloadStructure)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

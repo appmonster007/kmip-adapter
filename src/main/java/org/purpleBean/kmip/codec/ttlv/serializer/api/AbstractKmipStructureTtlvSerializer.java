@@ -22,7 +22,7 @@ public class AbstractKmipStructureTtlvSerializer<T extends KmipStructure> extend
             throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", value.getClass().getSimpleName(), spec));
         }
 
-        List<KmipDataType> nestedValues = value.getValue();
+        KmipDataType[] nestedValues = value.getValue();
         byte[] tag = value.getKmipTag().getTagBytes();
         byte type = value.getEncodingType().getTypeValue();
 

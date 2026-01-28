@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -44,7 +45,7 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return TransparentEcdhPrivateKey.of(
                 (RecommendedCurve) map.get(RecommendedCurve.kmipTag).getFirst(),
                 (D) map.get(D.kmipTag).getFirst()
@@ -76,12 +77,16 @@ public class TransparentEcdhPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValue() {
-        return List.of(recommendedCurve, d);
+    public KmipDataType[] getValue() {
+        return Stream.of(recommendedCurve, d)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
 }
