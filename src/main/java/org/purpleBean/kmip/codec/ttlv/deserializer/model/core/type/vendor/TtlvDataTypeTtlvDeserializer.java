@@ -66,11 +66,14 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
             case INTERVAL -> mapper.readValue(buffer, Integer.class);
             case ENUMERATION ->
                     mapper.readValue(buffer, KmipDataType.getClassFromRegistry(kmipTag, EncodingType.ENUMERATION));
-//            case STRUCTURE -> {
-//                List<KmipDataType> kmipDataTypes = new ArrayList<>();
-//                TtlvObject.fromBytesMultiple(buffer)
-//                while ()
-//            }
+            case STRUCTURE -> {
+                List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(buffer.array());
+                List<KmipDataType> values = new ArrayList<>();
+                for (TtlvObject ttlvObject : nestedObjects) {
+                    values.add(mapper.readValue(ttlvObject.toByteBuffer(), TtlvDataType.class));
+                }
+                yield values;
+            }
             default -> throw new IllegalArgumentException("Unsupported encoding type: " + encodingType);
         };
     }
