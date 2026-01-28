@@ -70,6 +70,22 @@ public class KmipTag {
     /**
      * Registers a new extension tag.
      *
+     * @param bytes             The 3-byte array representing the tag.
+     * @param description       A description of the tag.
+     * @param supportedVersions The KMIP specifications that support this tag.
+     * @return The newly registered Value.
+     */
+    public static Value register(byte[] bytes, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
+        return register(
+                getValueFromBytes(bytes),
+                description,
+                supportedVersions
+        );
+    }
+
+    /**
+     * Registers a new extension tag.
+     *
      * @param value             The integer value of the tag.
      * @param description       A description of the tag.
      * @param supportedVersions The KMIP specifications that support this tag.
@@ -129,10 +145,14 @@ public class KmipTag {
         if (bytes == null || bytes.length != TtlvConstants.TAG_SIZE) {
             throw new IllegalArgumentException(String.format("Expected %s byte array for tag", TtlvConstants.TAG_SIZE));
         }
-        int value = ((bytes[0] & 0xFF) << 16) |
+        int value = getValueFromBytes(bytes);
+        return fromValue(value);
+    }
+
+    private static int getValueFromBytes(byte[] bytes) {
+        return ((bytes[0] & 0xFF) << 16) |
                 ((bytes[1] & 0xFF) << 8) |
                 (bytes[2] & 0xFF);
-        return fromValue(value);
     }
 
     /**

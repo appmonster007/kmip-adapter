@@ -280,6 +280,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ValidityDateTtlvDese
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.VendorIdentificationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.XTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.YTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.vendor.TtlvDataTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestMessageTtlvDeserializer

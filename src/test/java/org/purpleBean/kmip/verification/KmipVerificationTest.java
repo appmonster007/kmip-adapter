@@ -56,7 +56,9 @@ public class KmipVerificationTest {
 
     @Test
     public void testSpecificFile() {
-        String filePath = projectRoot + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases/2.3.19_TC-101-12_-_Create_a_Key,_Archive_and_Recover_it/2.3.19_TC-101-12_-_Create_a_Key,_Archive_and_Recover_it_17_RequestMessage.xml";
+        String filePath = projectRoot +
+"/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases/2.3.10_TC-71-12_-_Unrecognized_Message_Extension_with_Criticality_Indicator_False/2.3.10_TC-71-12_-_Unrecognized_Message_Extension_with_Criticality_Indicator_False_1_RequestMessage.xml"
+                ;
         KmipContext.withSpec(KmipSpec.V1_2, () -> {
             try {
                 verifyXmlCodec(Paths.get(filePath));
