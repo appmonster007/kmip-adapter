@@ -56,7 +56,7 @@ public class SimpleRequestPayload implements RequestPayloadStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return List.of();
     }
 

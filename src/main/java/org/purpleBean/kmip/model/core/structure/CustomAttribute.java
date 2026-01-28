@@ -46,7 +46,7 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
 
     private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() == EncodingType.STRUCTURE) {
-            return ((AttributeValueStructure) attributeValue).getValues().stream().noneMatch(value -> value instanceof KmipStructure);
+            return ((AttributeValueStructure) attributeValue).getValue().stream().noneMatch(value -> value instanceof KmipStructure);
         }
         return true;
     }
@@ -114,11 +114,11 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(attributeName, attributeValue)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

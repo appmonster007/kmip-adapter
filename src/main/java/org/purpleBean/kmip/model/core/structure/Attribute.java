@@ -103,11 +103,11 @@ public class Attribute implements KmipStructure {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(attributeName, attributeIndex, attributeValue)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

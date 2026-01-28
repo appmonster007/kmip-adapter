@@ -63,7 +63,7 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return TransparentRsaPrivateKey.of(
                 (Modulus) map.get(Modulus.kmipTag).getFirst(),
                 (PrivateExponent) map.get(PrivateExponent.kmipTag).getFirst(),
@@ -112,11 +112,11 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(modulus, privateExponent, publicExponent, p, q, primeExponentP, primeExponentQ, crtCoefficient)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

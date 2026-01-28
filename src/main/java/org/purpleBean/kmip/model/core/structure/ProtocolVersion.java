@@ -59,7 +59,7 @@ public class ProtocolVersion implements KmipStructure {
         // No validation needed for this structure
     }
 
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return List.of(protocolVersionMajor, protocolVersionMinor);
     }
 

@@ -51,7 +51,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return ApplicationSpecificInformation.builder()
                 .applicationNamespace((ApplicationNamespace) map.get(ApplicationNamespace.kmipTag).get(0))
                 .applicationData((ApplicationData) map.get(ApplicationData.kmipTag).get(0))
@@ -76,7 +76,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return List.of(applicationNamespace, applicationData);
     }
 
@@ -84,7 +84,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValues());
+        return AttributeValueStructure.of(getValue());
     }
 
     @Override

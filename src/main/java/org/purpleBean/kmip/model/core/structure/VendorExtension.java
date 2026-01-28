@@ -66,7 +66,7 @@ public class VendorExtension implements KmipStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(ttlvDataType)
                 .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)

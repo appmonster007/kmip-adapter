@@ -54,7 +54,7 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CertificateSubject.builder()
                 .certificateSubjectDistinguishedName((CertificateSubjectDistinguishedName) map.get(CertificateSubjectDistinguishedName.kmipTag).get(0))
                 .certificateSubjectAlternativeNames(map.get(CertificateSubjectAlternativeName.kmipTag).stream().map(e -> (CertificateSubjectAlternativeName) e).collect(Collectors.toList()))
@@ -79,7 +79,7 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         ArrayList<KmipDataType> fields = new ArrayList<>();
         fields.add(certificateSubjectDistinguishedName);
         fields.addAll(certificateSubjectAlternativeNames);
@@ -90,7 +90,7 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValues());
+        return AttributeValueStructure.of(getValue());
     }
 
     @Override

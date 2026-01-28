@@ -55,7 +55,7 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid credential value: " + value);
         }
-        return of(structure.getValues());
+        return of(structure.getValue());
     }
 
     public static DeviceCredential of(KmipDataType... values) {
@@ -106,11 +106,11 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(
                         deviceSerialNumber,
                         password,

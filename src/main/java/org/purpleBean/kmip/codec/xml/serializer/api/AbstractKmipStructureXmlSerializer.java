@@ -31,7 +31,7 @@ public class AbstractKmipStructureXmlSerializer<T extends KmipStructure> extends
         xmlGen.setNextName(QName.valueOf(elementName));
         xmlGen.writeStartObject(value);
 
-        List<KmipDataType> values = value.getValues();
+        List<KmipDataType> values = value.getValue();
         if (values != null) {
             for (KmipDataType kmipDataType : values) {
                 if (kmipDataType != null && kmipDataType.getKmipTag() != null) {

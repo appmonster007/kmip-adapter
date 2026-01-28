@@ -51,7 +51,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CryptographicDomainParameters.builder()
                 .qlength((Qlength) map.get(Qlength.kmipTag).get(0))
                 .recommendedCurve((RecommendedCurve) map.get(RecommendedCurve.kmipTag).get(0))
@@ -76,7 +76,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(qlength, recommendedCurve).filter(Objects::nonNull).toList();
     }
 
@@ -84,7 +84,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return supportedVersions.contains(spec)
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValues());
+        return AttributeValueStructure.of(getValue());
     }
 
     @Override

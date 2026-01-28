@@ -82,7 +82,7 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(operation, requestPayloadStructure).filter(Objects::nonNull).collect(Collectors.toList());
     }
 

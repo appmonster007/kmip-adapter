@@ -67,7 +67,7 @@ public class SimpleRequestHeader implements RequestHeaderStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(protocolVersion)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

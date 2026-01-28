@@ -54,7 +54,7 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
         if (!(value instanceof KmipStructure structure)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        Map<KmipTag, List<KmipDataType>> map = structure.getValues().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = structure.getValue().stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return TransparentDsaPublicKey.of(
                 (P) map.get(P.kmipTag).getFirst(),
                 (Q) map.get(Q.kmipTag).getFirst(),
@@ -90,11 +90,11 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return List.of(p, q, g, y);
     }
 

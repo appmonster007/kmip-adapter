@@ -113,7 +113,7 @@ public class SimpleResponseBatchItem implements ResponseBatchItemStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return Stream.of(operation, resultStatus, resultReason, resultMessage, responsePayloadStructure).filter(Objects::nonNull).collect(Collectors.toList());
     }
 

@@ -70,11 +70,11 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
         return spec != KmipSpec.UnsupportedVersion
-                && getValues().stream().allMatch(KmipDataType::isSupported);
+                && getValue().stream().allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return values.stream().filter(Objects::nonNull).toList();
     }
 

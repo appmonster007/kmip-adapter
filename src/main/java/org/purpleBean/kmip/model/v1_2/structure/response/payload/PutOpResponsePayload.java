@@ -56,7 +56,7 @@ public class PutOpResponsePayload implements ResponsePayloadStructure {
     }
 
     @Override
-    public List<KmipDataType> getValues() {
+    public List<KmipDataType> getValue() {
         return List.of();
     }
 
