@@ -19,7 +19,7 @@ public class SignatureDataTtlvDeserializer extends AbstractKmipDataTypeTtlvDeser
     }
 
     @Override
-    protected void setValue(SignatureData.SignatureDataBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(SignatureData.SignatureDataBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

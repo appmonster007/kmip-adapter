@@ -19,7 +19,7 @@ public class ObjectGroupMemberTtlvDeserializer extends AbstractKmipDataTypeTtlvD
     }
 
     @Override
-    protected void setValue(ObjectGroupMember.ObjectGroupMemberBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ObjectGroupMember.ObjectGroupMemberBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ObjectGroupMember.fromValue(value));
     }

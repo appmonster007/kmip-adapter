@@ -19,7 +19,7 @@ public class OperationTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseriali
     }
 
     @Override
-    protected void setValue(Operation.OperationBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Operation.OperationBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(Operation.fromValue(value));
     }

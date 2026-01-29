@@ -19,7 +19,7 @@ public class PutOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(PutOpResponsePayload.PutOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PutOpResponsePayload.PutOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // No fields to deserialize
     }
 

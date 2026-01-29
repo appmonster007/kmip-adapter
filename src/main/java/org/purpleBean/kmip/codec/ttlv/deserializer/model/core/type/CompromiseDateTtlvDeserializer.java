@@ -20,7 +20,7 @@ public class CompromiseDateTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(CompromiseDate.CompromiseDateBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(CompromiseDate.CompromiseDateBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, OffsetDateTime.class));
     }
 

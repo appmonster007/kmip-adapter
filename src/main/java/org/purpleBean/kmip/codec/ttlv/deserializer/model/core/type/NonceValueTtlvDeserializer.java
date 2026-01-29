@@ -19,7 +19,7 @@ public class NonceValueTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserial
     }
 
     @Override
-    protected void setValue(NonceValue.NonceValueBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(NonceValue.NonceValueBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

@@ -21,7 +21,7 @@ public class RngSeedOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(RngSeedOpRequestPayload.RngSeedOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RngSeedOpRequestPayload.RngSeedOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.DATA)) {
             builder.data(mapper.readValue(p, DataByteString.class));

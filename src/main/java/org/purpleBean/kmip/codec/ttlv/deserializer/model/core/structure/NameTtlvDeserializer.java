@@ -22,7 +22,7 @@ public class NameTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<N
     }
 
     @Override
-    protected void setValue(Name.NameBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Name.NameBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.NAME_VALUE -> builder.nameValue(mapper.readValue(p, NameValue.class));

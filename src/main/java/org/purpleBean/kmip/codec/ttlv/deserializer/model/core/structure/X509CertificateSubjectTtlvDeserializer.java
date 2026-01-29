@@ -22,7 +22,7 @@ public class X509CertificateSubjectTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(X509CertificateSubject.X509CertificateSubjectBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(X509CertificateSubject.X509CertificateSubjectBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.SUBJECT_DISTINGUISHED_NAME ->

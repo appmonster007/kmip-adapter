@@ -19,7 +19,7 @@ public class SplitKeyPolynomialTtlvDeserializer extends AbstractKmipDataTypeTtlv
     }
 
     @Override
-    protected void setValue(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(SplitKeyPolynomial.fromValue(value));
     }

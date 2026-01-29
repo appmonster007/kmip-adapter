@@ -22,7 +22,7 @@ public class PgpKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer
     }
 
     @Override
-    protected void setValue(PgpKey.PgpKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PgpKey.PgpKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PGP_KEY_VERSION -> builder.pgpKeyVersion(mapper.readValue(p, PgpKeyVersion.class));

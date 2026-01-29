@@ -19,7 +19,7 @@ public class BatchErrorContinuationOptionTtlvDeserializer extends AbstractKmipDa
     }
 
     @Override
-    protected void setValue(BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(BatchErrorContinuationOption.fromValue(value));
     }

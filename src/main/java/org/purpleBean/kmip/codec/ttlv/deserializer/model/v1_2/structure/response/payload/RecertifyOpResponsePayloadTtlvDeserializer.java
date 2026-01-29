@@ -22,7 +22,7 @@ public class RecertifyOpResponsePayloadTtlvDeserializer extends AbstractKmipData
     }
 
     @Override
-    protected void setValue(RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

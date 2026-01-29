@@ -19,7 +19,7 @@ public class UsageLimitsTotalTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(UsageLimitsTotal.UsageLimitsTotalBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(UsageLimitsTotal.UsageLimitsTotalBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(p, Long.class));
     }
 

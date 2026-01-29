@@ -19,7 +19,7 @@ public class MaskGeneratorTtlvDeserializer extends AbstractKmipDataTypeTtlvDeser
     }
 
     @Override
-    protected void setValue(MaskGenerator.MaskGeneratorBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(MaskGenerator.MaskGeneratorBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(MaskGenerator.fromValue(value));
     }

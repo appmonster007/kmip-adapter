@@ -23,7 +23,7 @@ public class DeleteAttributeOpRequestPayloadTtlvDeserializer extends AbstractKmi
     }
 
     @Override
-    protected void setValue(DeleteAttributeOpRequestPayload.DeleteAttributeOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DeleteAttributeOpRequestPayload.DeleteAttributeOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

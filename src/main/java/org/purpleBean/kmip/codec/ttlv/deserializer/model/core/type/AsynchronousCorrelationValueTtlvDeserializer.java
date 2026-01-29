@@ -19,7 +19,7 @@ public class AsynchronousCorrelationValueTtlvDeserializer extends AbstractKmipDa
     }
 
     @Override
-    protected void setValue(AsynchronousCorrelationValue.AsynchronousCorrelationValueBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AsynchronousCorrelationValue.AsynchronousCorrelationValueBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

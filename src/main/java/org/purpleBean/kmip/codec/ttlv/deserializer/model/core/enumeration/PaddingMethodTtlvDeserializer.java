@@ -19,7 +19,7 @@ public class PaddingMethodTtlvDeserializer extends AbstractKmipDataTypeTtlvDeser
     }
 
     @Override
-    protected void setValue(PaddingMethod.PaddingMethodBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PaddingMethod.PaddingMethodBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(PaddingMethod.fromValue(value));
     }

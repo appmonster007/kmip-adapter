@@ -19,7 +19,7 @@ public class OtpAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(OtpAlgorithm.OtpAlgorithmBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(OtpAlgorithm.OtpAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(OtpAlgorithm.fromValue(value));
     }

@@ -20,7 +20,7 @@ public class GTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<G, G
     }
 
     @Override
-    protected void setValue(G.GBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(G.GBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, BigInteger.class));
     }
 

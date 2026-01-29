@@ -19,7 +19,7 @@ public class AttributeValueByteStringTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(AttributeValueByteString.AttributeValueByteStringBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueByteString.AttributeValueByteStringBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

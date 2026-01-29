@@ -19,7 +19,7 @@ public class StateTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<
     }
 
     @Override
-    protected void setValue(State.StateBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(State.StateBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(State.fromValue(value));
     }

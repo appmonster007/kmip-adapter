@@ -22,7 +22,7 @@ public class SignOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(SignOpResponsePayload.SignOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SignOpResponsePayload.SignOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

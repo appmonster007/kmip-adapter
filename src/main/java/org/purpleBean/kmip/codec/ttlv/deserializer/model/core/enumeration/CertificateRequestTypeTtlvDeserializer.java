@@ -19,7 +19,7 @@ public class CertificateRequestTypeTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(CertificateRequestType.CertificateRequestTypeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CertificateRequestType.CertificateRequestTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(CertificateRequestType.fromValue(value));
     }

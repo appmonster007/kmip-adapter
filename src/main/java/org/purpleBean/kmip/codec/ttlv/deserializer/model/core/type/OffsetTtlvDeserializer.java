@@ -19,7 +19,7 @@ public class OffsetTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer
     }
 
     @Override
-    protected void setValue(Offset.OffsetBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(Offset.OffsetBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

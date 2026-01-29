@@ -24,7 +24,7 @@ public class ReKeyKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmipD
     }
 
     @Override
-    protected void setValue(ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER ->

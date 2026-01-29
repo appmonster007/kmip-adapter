@@ -19,7 +19,7 @@ public class FreshTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<
     }
 
     @Override
-    protected void setValue(Fresh.FreshBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(Fresh.FreshBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Boolean.class));
     }
 

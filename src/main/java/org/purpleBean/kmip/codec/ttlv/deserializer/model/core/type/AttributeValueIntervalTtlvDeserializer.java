@@ -19,7 +19,7 @@ public class AttributeValueIntervalTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(AttributeValueInterval.AttributeValueIntervalBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueInterval.AttributeValueIntervalBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

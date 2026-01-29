@@ -23,7 +23,7 @@ public class DigestTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer
     }
 
     @Override
-    protected void setValue(Digest.DigestBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Digest.DigestBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.HASHING_ALGORITHM ->

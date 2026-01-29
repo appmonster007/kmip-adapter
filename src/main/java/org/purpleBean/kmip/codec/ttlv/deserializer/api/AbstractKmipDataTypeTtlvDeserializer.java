@@ -24,20 +24,19 @@ public abstract class AbstractKmipDataTypeTtlvDeserializer<T extends KmipDataTyp
     @Override
     public T deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
         TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-        verifyTag(obj, mapper);
-        verifyType(obj, mapper);
+        byte[] tag = verifyTag(obj, mapper);
+        byte type = verifyType(obj, mapper);
 
         B builder = createBuilder();
 
-        if (encodingType == EncodingType.STRUCTURE) {
+        if (EncodingType.STRUCTURE.getTypeValue() == type) {
             List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(obj.getValue());
             for (TtlvObject ttlvObject : nestedObjects) {
-                setValue(builder, ttlvObject.getTag(), ttlvObject.toByteBuffer(), mapper);
+                setValue(builder, ttlvObject.getTag(), ttlvObject.getType(), ttlvObject.toByteBuffer(), mapper);
             }
         } else {
             ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-            KmipTag.Value nodeTag = KmipTag.fromBytes(obj.getTag());
-            setValue(builder, obj.getTag(), bb, mapper);
+            setValue(builder, tag, type, bb, mapper);
         }
 
         T result = build(builder);
@@ -53,21 +52,23 @@ public abstract class AbstractKmipDataTypeTtlvDeserializer<T extends KmipDataTyp
         }
     }
 
-    protected void verifyTag(TtlvObject obj, TtlvMapper mapper) {
+    protected byte[] verifyTag(TtlvObject obj, TtlvMapper mapper) {
         if (!Arrays.equals(obj.getTag(), kmipTag.getTagBytes())) {
             throw new IllegalArgumentException(String.format("Expected %s tag, got %s", kmipTag.getDescription(), obj.getType()));
         }
+        return obj.getTag();
     }
 
-    protected void verifyType(TtlvObject obj, TtlvMapper mapper) {
+    protected byte verifyType(TtlvObject obj, TtlvMapper mapper) {
         if (obj.getType() != encodingType.getTypeValue()) {
             throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
         }
+        return obj.getType();
     }
 
     protected abstract B createBuilder();
 
-    protected abstract void setValue(B builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException;
+    protected abstract void setValue(B builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException;
 
     protected abstract T build(B builder);
 }

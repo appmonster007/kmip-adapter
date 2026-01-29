@@ -28,7 +28,7 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(TtlvDataType.TtlvDataTypeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(TtlvDataType.TtlvDataTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag;
         try {
             nodeTag = KmipTag.fromBytes(tagBytes);
@@ -40,7 +40,9 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
                     Stream.of(KmipSpec.UnknownVersion, KmipContext.getSpec()).collect(Collectors.toSet())
             );
         }
-        EncodingType encodingType = (EncodingType) mapper.getAttribute("encodingType");
+        EncodingType encodingType = EncodingType.fromTypeValue(type).orElseThrow(
+                () -> new IllegalArgumentException("Unknown encoding type: " + type)
+        );
         builder.kmipTag(nodeTag.inst()).encodingType(encodingType).value(readValue(nodeTag, encodingType, p, mapper));
     }
 
@@ -76,14 +78,12 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void verifyTag(TtlvObject obj, TtlvMapper mapper) {
+    protected byte[] verifyTag(TtlvObject obj, TtlvMapper mapper) {
+        return obj.getTag();
     }
 
     @Override
-    protected void verifyType(TtlvObject obj, TtlvMapper mapper) {
-        EncodingType encodingType = EncodingType.fromTypeValue(obj.getType()).orElseThrow(
-                () -> new IllegalArgumentException("Unknown encoding type: " + obj.getType())
-        );
-        mapper.setAttribute("encodingType", encodingType);
+    protected byte verifyType(TtlvObject obj, TtlvMapper mapper) {
+        return obj.getType();
     }
 }

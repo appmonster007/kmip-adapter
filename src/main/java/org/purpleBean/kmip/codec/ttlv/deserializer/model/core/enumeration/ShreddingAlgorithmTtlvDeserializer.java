@@ -19,7 +19,7 @@ public class ShreddingAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlv
     }
 
     @Override
-    protected void setValue(ShreddingAlgorithm.ShreddingAlgorithmBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ShreddingAlgorithm.ShreddingAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ShreddingAlgorithm.fromValue(value));
     }

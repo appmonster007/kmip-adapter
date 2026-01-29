@@ -20,7 +20,7 @@ public class DTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<D, D
     }
 
     @Override
-    protected void setValue(D.DBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(D.DBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, BigInteger.class));
     }
 

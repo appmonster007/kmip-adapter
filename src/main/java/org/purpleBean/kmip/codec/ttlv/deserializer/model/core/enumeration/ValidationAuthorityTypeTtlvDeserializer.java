@@ -19,7 +19,7 @@ public class ValidationAuthorityTypeTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(ValidationAuthorityType.ValidationAuthorityTypeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ValidationAuthorityType.ValidationAuthorityTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ValidationAuthorityType.fromValue(value));
     }

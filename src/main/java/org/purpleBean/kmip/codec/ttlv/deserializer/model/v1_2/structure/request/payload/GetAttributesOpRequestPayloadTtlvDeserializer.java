@@ -22,7 +22,7 @@ public class GetAttributesOpRequestPayloadTtlvDeserializer extends AbstractKmipD
     }
 
     @Override
-    protected void setValue(GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

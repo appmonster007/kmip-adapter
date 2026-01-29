@@ -19,7 +19,7 @@ public class BlockCipherModeTtlvDeserializer extends AbstractKmipDataTypeTtlvDes
     }
 
     @Override
-    protected void setValue(BlockCipherMode.BlockCipherModeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(BlockCipherMode.BlockCipherModeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(BlockCipherMode.fromValue(value));
     }

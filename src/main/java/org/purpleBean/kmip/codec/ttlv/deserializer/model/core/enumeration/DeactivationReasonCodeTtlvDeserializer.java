@@ -19,7 +19,7 @@ public class DeactivationReasonCodeTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(DeactivationReasonCode.DeactivationReasonCodeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DeactivationReasonCode.DeactivationReasonCodeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(DeactivationReasonCode.fromValue(value));
     }

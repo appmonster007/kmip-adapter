@@ -22,7 +22,7 @@ public class UsernameAndPasswordTtlvDeserializer extends AbstractKmipDataTypeTtl
     }
 
     @Override
-    protected void setValue(UsernameAndPassword.UsernameAndPasswordBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(UsernameAndPassword.UsernameAndPasswordBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.USERNAME -> builder.username(mapper.readValue(p, Username.class));

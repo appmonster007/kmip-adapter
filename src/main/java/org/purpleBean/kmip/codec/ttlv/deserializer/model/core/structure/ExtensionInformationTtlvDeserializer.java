@@ -23,7 +23,7 @@ public class ExtensionInformationTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(ExtensionInformation.ExtensionInformationBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ExtensionInformation.ExtensionInformationBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.EXTENSION_NAME -> builder.extensionName(mapper.readValue(p, ExtensionName.class));

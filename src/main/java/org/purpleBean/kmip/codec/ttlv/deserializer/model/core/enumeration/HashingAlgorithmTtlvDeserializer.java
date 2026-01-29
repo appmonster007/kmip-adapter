@@ -19,7 +19,7 @@ public class HashingAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(HashingAlgorithm.HashingAlgorithmBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(HashingAlgorithm.HashingAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(HashingAlgorithm.fromValue(value));
     }

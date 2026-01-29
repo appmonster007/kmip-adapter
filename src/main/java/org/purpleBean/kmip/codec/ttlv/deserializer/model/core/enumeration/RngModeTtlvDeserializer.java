@@ -19,7 +19,7 @@ public class RngModeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserialize
     }
 
     @Override
-    protected void setValue(RngMode.RngModeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RngMode.RngModeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(RngMode.fromValue(value));
     }

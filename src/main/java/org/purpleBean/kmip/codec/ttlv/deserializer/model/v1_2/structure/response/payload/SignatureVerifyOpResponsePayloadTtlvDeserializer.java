@@ -23,7 +23,7 @@ public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends AbstractKm
     }
 
     @Override
-    protected void setValue(SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

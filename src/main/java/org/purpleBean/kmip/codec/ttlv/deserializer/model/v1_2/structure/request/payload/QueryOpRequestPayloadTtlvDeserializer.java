@@ -21,7 +21,7 @@ public class QueryOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(QueryOpRequestPayload.QueryOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(QueryOpRequestPayload.QueryOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.QUERY_FUNCTION)) {
             builder.queryFunction(mapper.readValue(p, QueryFunction.class));

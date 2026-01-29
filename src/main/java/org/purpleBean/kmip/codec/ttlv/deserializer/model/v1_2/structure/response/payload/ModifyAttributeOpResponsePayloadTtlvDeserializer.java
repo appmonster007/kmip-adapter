@@ -22,7 +22,7 @@ public class ModifyAttributeOpResponsePayloadTtlvDeserializer extends AbstractKm
     }
 
     @Override
-    protected void setValue(ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

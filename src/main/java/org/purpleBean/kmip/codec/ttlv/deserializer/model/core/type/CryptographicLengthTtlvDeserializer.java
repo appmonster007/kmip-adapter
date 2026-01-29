@@ -19,7 +19,7 @@ public class CryptographicLengthTtlvDeserializer extends AbstractKmipDataTypeTtl
     }
 
     @Override
-    protected void setValue(CryptographicLength.CryptographicLengthBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(CryptographicLength.CryptographicLengthBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

@@ -21,7 +21,7 @@ public class ValidateOpResponsePayloadTtlvDeserializer extends AbstractKmipDataT
     }
 
     @Override
-    protected void setValue(ValidateOpResponsePayload.ValidateOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ValidateOpResponsePayload.ValidateOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.VALIDITY_INDICATOR)) {
             builder.validityIndicator(mapper.readValue(p, ValidityIndicator.class));

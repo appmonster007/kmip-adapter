@@ -19,7 +19,7 @@ public class RecommendedCurveTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(RecommendedCurve.RecommendedCurveBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RecommendedCurve.RecommendedCurveBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(RecommendedCurve.fromValue(value));
     }

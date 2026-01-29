@@ -21,7 +21,7 @@ public class TransparentDhPrivateKeyTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(TransparentDhPrivateKey.TransparentDhPrivateKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(TransparentDhPrivateKey.TransparentDhPrivateKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.P -> builder.p(mapper.readValue(p, P.class));

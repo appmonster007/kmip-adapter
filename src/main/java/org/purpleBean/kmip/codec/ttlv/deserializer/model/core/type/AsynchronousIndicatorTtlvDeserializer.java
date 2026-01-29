@@ -19,7 +19,7 @@ public class AsynchronousIndicatorTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(AsynchronousIndicator.AsynchronousIndicatorBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AsynchronousIndicator.AsynchronousIndicatorBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Boolean.class));
     }
 

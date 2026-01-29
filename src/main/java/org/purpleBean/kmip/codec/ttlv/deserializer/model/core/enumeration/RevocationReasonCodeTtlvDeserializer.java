@@ -19,7 +19,7 @@ public class RevocationReasonCodeTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(RevocationReasonCode.RevocationReasonCodeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RevocationReasonCode.RevocationReasonCodeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(RevocationReasonCode.fromValue(value));
     }
