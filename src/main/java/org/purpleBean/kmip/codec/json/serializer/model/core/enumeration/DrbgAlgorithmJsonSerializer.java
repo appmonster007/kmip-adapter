@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
 
-public class DrbgAlgorithmJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DrbgAlgorithm, String> {
-
-    public DrbgAlgorithmJsonSerializer() {
-        super(DrbgAlgorithm::getDescription);
-    }
+public class DrbgAlgorithmJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DrbgAlgorithm> {
 }

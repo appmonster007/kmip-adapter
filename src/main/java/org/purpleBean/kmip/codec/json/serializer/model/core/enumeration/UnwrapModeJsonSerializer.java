@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.UnwrapMode;
 
-public class UnwrapModeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<UnwrapMode, String> {
-
-    public UnwrapModeJsonSerializer() {
-        super(UnwrapMode::getDescription);
-    }
+public class UnwrapModeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<UnwrapMode> {
 }

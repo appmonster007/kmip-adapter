@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 
-public class KeyFormatTypeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<KeyFormatType, String> {
-
-    public KeyFormatTypeJsonSerializer() {
-        super(KeyFormatType::getDescription);
-    }
+public class KeyFormatTypeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<KeyFormatType> {
 }

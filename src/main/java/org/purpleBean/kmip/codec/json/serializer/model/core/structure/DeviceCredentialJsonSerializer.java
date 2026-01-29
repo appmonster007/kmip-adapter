@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.json.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipStructureJsonSerializer;
+import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.structure.DeviceCredential;
 
-public class DeviceCredentialJsonSerializer extends AbstractKmipStructureJsonSerializer<DeviceCredential> {
+public class DeviceCredentialJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DeviceCredential> {
 }

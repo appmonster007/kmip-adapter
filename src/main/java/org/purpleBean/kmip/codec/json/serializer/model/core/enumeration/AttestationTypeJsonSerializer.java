@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 
-public class AttestationTypeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<AttestationType, String> {
-
-    public AttestationTypeJsonSerializer() {
-        super(AttestationType::getDescription);
-    }
+public class AttestationTypeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<AttestationType> {
 }

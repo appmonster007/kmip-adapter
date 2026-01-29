@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
 
-public class RngAlgorithmJsonSerializer extends AbstractKmipDataTypeJsonSerializer<RngAlgorithm, String> {
-
-    public RngAlgorithmJsonSerializer() {
-        super(RngAlgorithm::getDescription);
-    }
+public class RngAlgorithmJsonSerializer extends AbstractKmipDataTypeJsonSerializer<RngAlgorithm> {
 }

@@ -2,45 +2,51 @@ package org.purpleBean.kmip.codec.json.serializer.api;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.function.Function;
 
-public abstract class AbstractKmipDataTypeJsonSerializer<T extends KmipDataType, V> extends KmipDataTypeJsonSerializer<T> {
-
-    private final Function<T, V> valueExtractor;
-
-    protected AbstractKmipDataTypeJsonSerializer(Function<T, V> valueExtractor) {
-        this.valueExtractor = valueExtractor;
-    }
+public abstract class AbstractKmipDataTypeJsonSerializer<T extends KmipDataType> extends KmipDataTypeJsonSerializer<T> {
 
     @Override
-    public void serialize(T value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(T obj, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         // Validation: Null check
-        if (value == null) {
+        if (obj == null) {
             return;
         }
 
         // Validation: KMIP spec compatibility
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!obj.isSupported()) {
             throw new UnsupportedEncodingException(
-                    String.format("%s is not supported for KMIP spec %s", value.getKmipTag().getDescription(), spec)
+                    String.format("%s is not supported for KMIP spec %s", obj.getKmipTag().getDescription(), spec)
             );
         }
 
         gen.writeStartObject();
 //        gen.writeObjectField("tag", value.getKmipTag().getDescription());
-        gen.writeObject(value.getKmipTag());
-        gen.writeStringField("type", value.getEncodingType().getDescription());
+        gen.writeObject(obj.getKmipTag());
+        gen.writeStringField("type", obj.getEncodingType().getDescription());
 
-        V rawValue = valueExtractor.apply(value);
         gen.writeFieldName("value");
-        serializers.defaultSerializeValue(rawValue, gen);
+        var value = obj.getValue();
+        if (obj.getEncodingType() == EncodingType.STRUCTURE) {
+            KmipDataType[] nestedValues = (KmipDataType[]) value;
+            if (nestedValues != null) {
+                gen.writeStartArray();
+                for (KmipDataType kmipDataType : nestedValues) {
+                    if (kmipDataType != null) {
+                        serializers.defaultSerializeValue(kmipDataType, gen);
+                    }
+                }
+                gen.writeEndArray();
+            }
+        } else if (obj.getEncodingType() == EncodingType.ENUMERATION) {
+            serializers.defaultSerializeValue(((KmipEnumeration.Value<?>) value).getDescription(), gen);
+        } else {
+            serializers.defaultSerializeValue(value, gen);
+        }
 
         gen.writeEndObject();
     }

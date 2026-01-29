@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 
-public class DerivationMethodJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DerivationMethod, String> {
-
-    public DerivationMethodJsonSerializer() {
-        super(DerivationMethod::getDescription);
-    }
+public class DerivationMethodJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DerivationMethod> {
 }
