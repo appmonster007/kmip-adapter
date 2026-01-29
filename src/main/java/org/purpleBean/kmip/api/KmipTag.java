@@ -75,10 +75,10 @@ public class KmipTag {
      * @param supportedVersions The KMIP specifications that support this tag.
      * @return The newly registered Value.
      */
-    public static Value register(byte[] bytes, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
+    public static Value register(byte[] bytes, String description, @NonNull Set<KmipSpec> supportedVersions) {
         return register(
                 getValueFromBytes(bytes),
-                description,
+                description == null ? getHexString(bytes) : description,
                 supportedVersions
         );
     }
@@ -194,6 +194,15 @@ public class KmipTag {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
     }
 
+    private static String getHexString(byte[] tagBytes) {
+        StringBuilder hexString = new StringBuilder().append("0x");
+
+        for (byte b : tagBytes) {
+            hexString.append(String.format("%02X", b));
+        }
+        return hexString.toString().toLowerCase();
+    }
+
     /**
      * @return The description of the tag.
      */
@@ -241,12 +250,7 @@ public class KmipTag {
      */
     public String getTagHexString() {
         byte[] tagBytes = getTagBytes();
-        StringBuilder hexString = new StringBuilder().append("0x");
-
-        for (byte b : tagBytes) {
-            hexString.append(String.format("%02X", b));
-        }
-        return hexString.toString();
+        return getHexString(tagBytes);
     }
 
     /**
