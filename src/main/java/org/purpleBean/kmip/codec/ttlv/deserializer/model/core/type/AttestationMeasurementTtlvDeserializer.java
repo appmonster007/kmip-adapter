@@ -1,13 +1,30 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.AttestationMeasurement;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttestationMeasurementTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AttestationMeasurement, ByteBuffer> {
+public class AttestationMeasurementTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AttestationMeasurement, AttestationMeasurement.AttestationMeasurementBuilder> {
 
     public AttestationMeasurementTtlvDeserializer() {
-        super(AttestationMeasurement.kmipTag, AttestationMeasurement.encodingType, ByteBuffer.class, value -> AttestationMeasurement.builder().value(value).build());
+        super(AttestationMeasurement.kmipTag, AttestationMeasurement.encodingType);
+    }
+
+    @Override
+    protected AttestationMeasurement.AttestationMeasurementBuilder createBuilder() {
+        return AttestationMeasurement.builder();
+    }
+
+    @Override
+    protected void setValue(AttestationMeasurement.AttestationMeasurementBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+        builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
+    }
+
+    @Override
+    protected AttestationMeasurement build(AttestationMeasurement.AttestationMeasurementBuilder builder) {
+        return builder.build();
     }
 }

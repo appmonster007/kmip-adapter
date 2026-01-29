@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.IVCounterNonce;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.EncryptOpRespon
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class EncryptOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<EncryptOpResponsePayload, EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder> {
+public class EncryptOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<EncryptOpResponsePayload, EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder> {
 
     public EncryptOpResponsePayloadTtlvDeserializer() {
-        super(EncryptOpResponsePayload.kmipTag);
+        super(EncryptOpResponsePayload.kmipTag, EncryptOpResponsePayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class EncryptOpResponsePayloadTtlvDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -37,10 +37,5 @@ public class EncryptOpResponsePayloadTtlvDeserializer extends AbstractKmipStruct
     @Override
     protected EncryptOpResponsePayload build(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return EncryptOpResponsePayload.encodingType;
     }
 }

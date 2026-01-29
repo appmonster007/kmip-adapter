@@ -1,20 +1,19 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.response;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.response.ResponseBatchItemStructure;
 import org.purpleBean.kmip.api.response.ResponseHeaderStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SimpleResponseMessageTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SimpleResponseMessage, SimpleResponseMessage.SimpleResponseMessageBuilder> {
+public class SimpleResponseMessageTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SimpleResponseMessage, SimpleResponseMessage.SimpleResponseMessageBuilder> {
 
     public SimpleResponseMessageTtlvDeserializer() {
-        super(SimpleResponseMessage.kmipTag);
+        super(SimpleResponseMessage.kmipTag, SimpleResponseMessage.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class SimpleResponseMessageTtlvDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(SimpleResponseMessage.SimpleResponseMessageBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleResponseMessage.SimpleResponseMessageBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.RESPONSE_HEADER ->
                     builder.responseHeader(mapper.readValue(p, ResponseHeaderStructure.class));
@@ -43,10 +43,5 @@ public class SimpleResponseMessageTtlvDeserializer extends AbstractKmipStructure
     @Override
     protected SimpleResponseMessage build(SimpleResponseMessage.SimpleResponseMessageBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SimpleResponseMessage.encodingType;
     }
 }

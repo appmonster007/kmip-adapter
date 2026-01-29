@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 
-public class RecommendedCurveTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RecommendedCurve, Integer> {
-
-    public RecommendedCurveTtlvSerializer() {
-        super(RecommendedCurve::getIntValue);
-    }
+public class RecommendedCurveTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RecommendedCurve> {
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Nonce;
 import org.purpleBean.kmip.model.core.type.NonceId;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.NonceValue;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class NonceTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<Nonce, Nonce.NonceBuilder> {
+public class NonceTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Nonce, Nonce.NonceBuilder> {
 
     public NonceTtlvDeserializer() {
-        super(Nonce.kmipTag);
+        super(Nonce.kmipTag, Nonce.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class NonceTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer
     }
 
     @Override
-    protected void setValue(Nonce.NonceBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Nonce.NonceBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.NONCE_ID -> builder.nonceId(mapper.readValue(p, NonceId.class));
             case KmipTag.Standard.NONCE_VALUE -> builder.nonceValue(mapper.readValue(p, NonceValue.class));
@@ -34,10 +34,5 @@ public class NonceTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer
     @Override
     protected Nonce build(Nonce.NonceBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return Nonce.encodingType;
     }
 }

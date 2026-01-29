@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 import org.purpleBean.kmip.model.core.structure.UsageLimits;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class UsageLimitsTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<UsageLimits, UsageLimits.UsageLimitsBuilder> {
+public class UsageLimitsTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<UsageLimits, UsageLimits.UsageLimitsBuilder> {
 
     public UsageLimitsTtlvDeserializer() {
-        super(UsageLimits.kmipTag);
+        super(UsageLimits.kmipTag, UsageLimits.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class UsageLimitsTtlvDeserializer extends AbstractKmipStructureTtlvDeseri
     }
 
     @Override
-    protected void setValue(UsageLimits.UsageLimitsBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(UsageLimits.UsageLimitsBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.USAGE_LIMITS_TOTAL ->
                     builder.usageLimitsTotal(mapper.readValue(p, UsageLimitsTotal.class));
@@ -39,10 +39,5 @@ public class UsageLimitsTtlvDeserializer extends AbstractKmipStructureTtlvDeseri
     @Override
     protected UsageLimits build(UsageLimits.UsageLimitsBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return UsageLimits.encodingType;
     }
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purpleBean.kmip.model.core.type.DataByteString;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.SignatureVerify
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SignatureVerifyOpResponsePayload, SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder> {
+public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SignatureVerifyOpResponsePayload, SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder> {
 
     public SignatureVerifyOpResponsePayloadTtlvDeserializer() {
-        super(SignatureVerifyOpResponsePayload.kmipTag);
+        super(SignatureVerifyOpResponsePayload.kmipTag, SignatureVerifyOpResponsePayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends AbstractKm
     }
 
     @Override
-    protected void setValue(SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -38,10 +38,5 @@ public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends AbstractKm
     @Override
     protected SignatureVerifyOpResponsePayload build(SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SignatureVerifyOpResponsePayload.encodingType;
     }
 }

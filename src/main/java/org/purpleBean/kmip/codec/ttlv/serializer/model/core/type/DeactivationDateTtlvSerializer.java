@@ -3,11 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.type.DeactivationDate;
 
-import java.time.OffsetDateTime;
-
-public class DeactivationDateTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DeactivationDate, OffsetDateTime> {
-
-    public DeactivationDateTtlvSerializer() {
-        super(DeactivationDate::getValue);
-    }
+public class DeactivationDateTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DeactivationDate> {
 }

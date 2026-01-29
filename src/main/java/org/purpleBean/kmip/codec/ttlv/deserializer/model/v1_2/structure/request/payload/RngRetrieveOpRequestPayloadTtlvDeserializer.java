@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.DataLength;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.RngRetrieveOpRequestPayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RngRetrieveOpReq
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RngRetrieveOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RngRetrieveOpRequestPayload, RngRetrieveOpRequestPayload.RngRetrieveOpRequestPayloadBuilder> {
+public class RngRetrieveOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RngRetrieveOpRequestPayload, RngRetrieveOpRequestPayload.RngRetrieveOpRequestPayloadBuilder> {
 
     public RngRetrieveOpRequestPayloadTtlvDeserializer() {
-        super(RngRetrieveOpRequestPayload.kmipTag);
+        super(RngRetrieveOpRequestPayload.kmipTag, RngRetrieveOpRequestPayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class RngRetrieveOpRequestPayloadTtlvDeserializer extends AbstractKmipStr
     }
 
     @Override
-    protected void setValue(RngRetrieveOpRequestPayload.RngRetrieveOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RngRetrieveOpRequestPayload.RngRetrieveOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.DATA_LENGTH)) {
             builder.dataLength(mapper.readValue(p, DataLength.class));
         } else {
@@ -33,10 +33,5 @@ public class RngRetrieveOpRequestPayloadTtlvDeserializer extends AbstractKmipStr
     @Override
     protected RngRetrieveOpRequestPayload build(RngRetrieveOpRequestPayload.RngRetrieveOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RngRetrieveOpRequestPayload.encodingType;
     }
 }

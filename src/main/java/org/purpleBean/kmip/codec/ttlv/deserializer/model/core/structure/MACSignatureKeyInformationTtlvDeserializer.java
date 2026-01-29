@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.structure.MACSignatureKeyInformation;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class MACSignatureKeyInformationTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<MACSignatureKeyInformation, MACSignatureKeyInformation.MACSignatureKeyInformationBuilder> {
+public class MACSignatureKeyInformationTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MACSignatureKeyInformation, MACSignatureKeyInformation.MACSignatureKeyInformationBuilder> {
 
     public MACSignatureKeyInformationTtlvDeserializer() {
-        super(MACSignatureKeyInformation.kmipTag);
+        super(MACSignatureKeyInformation.kmipTag, MACSignatureKeyInformation.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class MACSignatureKeyInformationTtlvDeserializer extends AbstractKmipStru
     }
 
     @Override
-    protected void setValue(MACSignatureKeyInformation.MACSignatureKeyInformationBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(MACSignatureKeyInformation.MACSignatureKeyInformationBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -36,10 +36,5 @@ public class MACSignatureKeyInformationTtlvDeserializer extends AbstractKmipStru
     @Override
     protected MACSignatureKeyInformation build(MACSignatureKeyInformation.MACSignatureKeyInformationBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return MACSignatureKeyInformation.encodingType;
     }
 }

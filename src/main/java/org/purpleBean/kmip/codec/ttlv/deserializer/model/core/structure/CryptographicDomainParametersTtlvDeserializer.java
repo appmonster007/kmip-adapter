@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.CryptographicDomainParameters;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.Qlength;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CryptographicDomainParametersTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CryptographicDomainParameters, CryptographicDomainParameters.CryptographicDomainParametersBuilder> {
+public class CryptographicDomainParametersTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CryptographicDomainParameters, CryptographicDomainParameters.CryptographicDomainParametersBuilder> {
 
     public CryptographicDomainParametersTtlvDeserializer() {
-        super(CryptographicDomainParameters.kmipTag);
+        super(CryptographicDomainParameters.kmipTag, CryptographicDomainParameters.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CryptographicDomainParametersTtlvDeserializer extends AbstractKmipS
     }
 
     @Override
-    protected void setValue(CryptographicDomainParameters.CryptographicDomainParametersBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CryptographicDomainParameters.CryptographicDomainParametersBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.QLENGTH -> builder.qlength(mapper.readValue(p, Qlength.class));
             case KmipTag.Standard.RECOMMENDED_CURVE ->
@@ -35,10 +35,5 @@ public class CryptographicDomainParametersTtlvDeserializer extends AbstractKmipS
     @Override
     protected CryptographicDomainParameters build(CryptographicDomainParameters.CryptographicDomainParametersBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CryptographicDomainParameters.encodingType;
     }
 }

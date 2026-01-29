@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ActivateOpRequestPayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ActivateOpReques
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ActivateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<ActivateOpRequestPayload, ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder> {
+public class ActivateOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ActivateOpRequestPayload, ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder> {
 
     public ActivateOpRequestPayloadTtlvDeserializer() {
-        super(ActivateOpRequestPayload.kmipTag);
+        super(ActivateOpRequestPayload.kmipTag, ActivateOpRequestPayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class ActivateOpRequestPayloadTtlvDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.UNIQUE_IDENTIFIER)) {
             builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
         } else {
@@ -33,10 +33,5 @@ public class ActivateOpRequestPayloadTtlvDeserializer extends AbstractKmipStruct
     @Override
     protected ActivateOpRequestPayload build(ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return ActivateOpRequestPayload.encodingType;
     }
 }

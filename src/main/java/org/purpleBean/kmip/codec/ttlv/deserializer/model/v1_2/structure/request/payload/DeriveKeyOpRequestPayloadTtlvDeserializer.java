@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
@@ -14,10 +13,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.DeriveKeyOpReque
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class DeriveKeyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<DeriveKeyOpRequestPayload, DeriveKeyOpRequestPayload.DeriveKeyOpRequestPayloadBuilder> {
+public class DeriveKeyOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<DeriveKeyOpRequestPayload, DeriveKeyOpRequestPayload.DeriveKeyOpRequestPayloadBuilder> {
 
     public DeriveKeyOpRequestPayloadTtlvDeserializer() {
-        super(DeriveKeyOpRequestPayload.kmipTag);
+        super(DeriveKeyOpRequestPayload.kmipTag, DeriveKeyOpRequestPayload.encodingType);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class DeriveKeyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(DeriveKeyOpRequestPayload.DeriveKeyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DeriveKeyOpRequestPayload.DeriveKeyOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
@@ -44,10 +44,5 @@ public class DeriveKeyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     @Override
     protected DeriveKeyOpRequestPayload build(DeriveKeyOpRequestPayload.DeriveKeyOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return DeriveKeyOpRequestPayload.encodingType;
     }
 }

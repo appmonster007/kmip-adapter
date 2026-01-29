@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CryptographicParametersTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CryptographicParameters, CryptographicParameters.CryptographicParametersBuilder> {
+public class CryptographicParametersTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CryptographicParameters, CryptographicParameters.CryptographicParametersBuilder> {
 
     public CryptographicParametersTtlvDeserializer() {
-        super(CryptographicParameters.kmipTag);
+        super(CryptographicParameters.kmipTag, CryptographicParameters.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CryptographicParametersTtlvDeserializer extends AbstractKmipStructu
     }
 
     @Override
-    protected void setValue(CryptographicParameters.CryptographicParametersBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CryptographicParameters.CryptographicParametersBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.BLOCK_CIPHER_MODE ->
                     builder.blockCipherMode(mapper.readValue(p, BlockCipherMode.class));
@@ -52,10 +52,5 @@ public class CryptographicParametersTtlvDeserializer extends AbstractKmipStructu
     @Override
     protected CryptographicParameters build(CryptographicParameters.CryptographicParametersBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CryptographicParameters.encodingType;
     }
 }

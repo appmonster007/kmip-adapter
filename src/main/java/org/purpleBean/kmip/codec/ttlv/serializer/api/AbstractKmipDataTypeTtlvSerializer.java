@@ -1,43 +1,54 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.api;
 
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class AbstractKmipDataTypeTtlvSerializer<T extends KmipDataType, V> extends KmipDataTypeTtlvSerializer<T> {
-
-    private final Function<T, V> valueExtractor;
-
-    protected AbstractKmipDataTypeTtlvSerializer(Function<T, V> valueExtractor) {
-        this.valueExtractor = valueExtractor;
-    }
+public abstract class AbstractKmipDataTypeTtlvSerializer<T extends KmipDataType> extends KmipDataTypeTtlvSerializer<T> {
 
     @Override
-    public ByteBuffer serialize(T value, TtlvMapper mapper) throws IOException {
-        if (value == null) {
+    public ByteBuffer serialize(T obj, TtlvMapper mapper) throws IOException {
+        if (obj == null) {
             return null;
         }
 
         KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
+        if (!obj.isSupported()) {
             throw new IOException(
                     String.format("%s is not supported for KMIP spec %s",
-                            value.getKmipTag().getDescription(), spec)
+                            obj.getKmipTag().getDescription(), spec)
             );
         }
 
-        V rawValue = valueExtractor.apply(value);
-        byte[] payload = mapper.writeValueAsByteBuffer(rawValue).array();
+        var value = obj.getValue();
+        byte[] payload;
+        if (obj.getEncodingType() == EncodingType.STRUCTURE) {
+            KmipDataType[] nestedValues = (KmipDataType[]) value;
+            List<ByteBuffer> nestedObjects = new ArrayList<>();
+            for (KmipDataType object : nestedValues) {
+                if (object != null) {
+                    nestedObjects.add(mapper.writeValueAsByteBuffer(object));
+                }
+            }
+
+            int totalLength = nestedObjects.stream().mapToInt(ByteBuffer::remaining).sum();
+            ByteBuffer payloadBuffer = ByteBuffer.allocate(totalLength);
+            nestedObjects.forEach(payloadBuffer::put);
+            payload = payloadBuffer.array();
+        } else if (obj.getEncodingType() == EncodingType.ENUMERATION) {
+            payload = mapper.writeValueAsByteBuffer(((KmipEnumeration.Value<?>) value).getValue()).array();
+        } else {
+            payload = mapper.writeValueAsByteBuffer(value).array();
+        }
 
         return TtlvObject.builder()
-                .tag(value.getKmipTag().getTagBytes())
-                .type(value.getEncodingType().getTypeValue())
+                .tag(obj.getKmipTag().getTagBytes())
+                .type(obj.getEncodingType().getTypeValue())
                 .value(payload)
                 .build()
                 .toByteBuffer();

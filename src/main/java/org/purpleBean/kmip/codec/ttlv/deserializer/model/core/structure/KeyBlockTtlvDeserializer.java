@@ -1,10 +1,9 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KeyValue;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
@@ -16,10 +15,10 @@ import org.purpleBean.kmip.model.core.type.CryptographicLength;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class KeyBlockTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {
+public class KeyBlockTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {
 
     public KeyBlockTtlvDeserializer() {
-        super(KeyBlock.kmipTag);
+        super(KeyBlock.kmipTag, KeyBlock.encodingType);
     }
 
     @Override
@@ -28,7 +27,8 @@ public class KeyBlockTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
     }
 
     @Override
-    protected void setValue(KeyBlock.KeyBlockBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyBlock.KeyBlockBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_FORMAT_TYPE -> {
                 KeyFormatType keyFormatType = mapper.readValue(p, KeyFormatType.class);
@@ -51,10 +51,5 @@ public class KeyBlockTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
     @Override
     protected KeyBlock build(KeyBlock.KeyBlockBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return KeyBlock.encodingType;
     }
 }

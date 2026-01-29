@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
 import org.purpleBean.kmip.model.core.structure.KeyBlock;
@@ -15,10 +14,10 @@ import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SplitKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
+public class SplitKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
 
     public SplitKeyTtlvDeserializer() {
-        super(SplitKey.kmipTag);
+        super(SplitKey.kmipTag, SplitKey.encodingType);
     }
 
     @Override
@@ -27,7 +26,8 @@ public class SplitKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
     }
 
     @Override
-    protected void setValue(SplitKey.SplitKeyBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SplitKey.SplitKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.SPLIT_KEY_PARTS -> builder.splitKeyParts(mapper.readValue(p, SplitKeyParts.class));
             case KmipTag.Standard.KEY_PART_IDENTIFIER ->
@@ -44,10 +44,5 @@ public class SplitKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeseriali
     @Override
     protected SplitKey build(SplitKey.SplitKeyBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SplitKey.encodingType;
     }
 }

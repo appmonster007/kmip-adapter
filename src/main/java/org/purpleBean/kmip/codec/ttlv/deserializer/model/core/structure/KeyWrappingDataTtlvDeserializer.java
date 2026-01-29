@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
 import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
@@ -15,10 +14,10 @@ import org.purpleBean.kmip.model.core.type.MACSignature;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class KeyWrappingDataTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {
+public class KeyWrappingDataTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {
 
     public KeyWrappingDataTtlvDeserializer() {
-        super(KeyWrappingData.kmipTag);
+        super(KeyWrappingData.kmipTag, KeyWrappingData.encodingType);
     }
 
     @Override
@@ -27,7 +26,8 @@ public class KeyWrappingDataTtlvDeserializer extends AbstractKmipStructureTtlvDe
     }
 
     @Override
-    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.WRAPPING_METHOD -> builder.wrappingMethod(mapper.readValue(p, WrappingMethod.class));
             case KmipTag.Standard.ENCRYPTION_KEY_INFORMATION ->
@@ -44,10 +44,5 @@ public class KeyWrappingDataTtlvDeserializer extends AbstractKmipStructureTtlvDe
     @Override
     protected KeyWrappingData build(KeyWrappingData.KeyWrappingDataBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return KeyWrappingData.encodingType;
     }
 }

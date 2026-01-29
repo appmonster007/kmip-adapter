@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import org.purpleBean.kmip.api.CredentialValue;
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.CredentialType;
 import org.purpleBean.kmip.model.core.structure.Credential;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.structure.Credential;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<Credential, Credential.CredentialBuilder> {
+public class CredentialTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Credential, Credential.CredentialBuilder> {
 
     public CredentialTtlvDeserializer() {
-        super(Credential.kmipTag);
+        super(Credential.kmipTag, Credential.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeseria
     }
 
     @Override
-    protected void setValue(Credential.CredentialBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Credential.CredentialBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.CREDENTIAL_TYPE -> {
                 CredentialType credentialType = mapper.readValue(p, CredentialType.class);
@@ -39,10 +39,5 @@ public class CredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeseria
     @Override
     protected Credential build(Credential.CredentialBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return Credential.encodingType;
     }
 }

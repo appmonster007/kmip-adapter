@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 import org.purpleBean.kmip.model.core.structure.Attribute;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class LocateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
+public class LocateOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
 
     public LocateOpRequestPayloadTtlvDeserializer() {
-        super(LocateOpRequestPayload.kmipTag);
+        super(LocateOpRequestPayload.kmipTag, LocateOpRequestPayload.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class LocateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.MAXIMUM_ITEMS -> builder.maximumItems(mapper.readValue(p, MaximumItems.class));
             case KmipTag.Standard.STORAGE_STATUS_MASK ->
@@ -40,10 +40,5 @@ public class LocateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected LocateOpRequestPayload build(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return LocateOpRequestPayload.encodingType;
     }
 }

@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import org.purpleBean.kmip.api.AttributeValue;
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.AttributeName;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttributeTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<Attribute, Attribute.AttributeBuilder> {
+public class AttributeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Attribute, Attribute.AttributeBuilder> {
 
     public AttributeTtlvDeserializer() {
-        super(Attribute.kmipTag);
+        super(Attribute.kmipTag, Attribute.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class AttributeTtlvDeserializer extends AbstractKmipStructureTtlvDeserial
     }
 
     @Override
-    protected void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Attribute.AttributeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.ATTRIBUTE_NAME -> {
                 AttributeName attributeName = mapper.readValue(p, AttributeName.class);
@@ -40,10 +40,5 @@ public class AttributeTtlvDeserializer extends AbstractKmipStructureTtlvDeserial
     @Override
     protected Attribute build(Attribute.AttributeBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return Attribute.encodingType;
     }
 }

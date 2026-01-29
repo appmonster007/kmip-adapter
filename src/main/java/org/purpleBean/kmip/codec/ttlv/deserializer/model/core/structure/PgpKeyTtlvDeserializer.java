@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.KeyBlock;
 import org.purpleBean.kmip.model.core.structure.PgpKey;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.PgpKeyVersion;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class PgpKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<PgpKey, PgpKey.PgpKeyBuilder> {
+public class PgpKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<PgpKey, PgpKey.PgpKeyBuilder> {
 
     public PgpKeyTtlvDeserializer() {
-        super(PgpKey.kmipTag);
+        super(PgpKey.kmipTag, PgpKey.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class PgpKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserialize
     }
 
     @Override
-    protected void setValue(PgpKey.PgpKeyBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PgpKey.PgpKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PGP_KEY_VERSION -> builder.pgpKeyVersion(mapper.readValue(p, PgpKeyVersion.class));
             case KmipTag.Standard.KEY_BLOCK -> builder.keyBlock(mapper.readValue(p, KeyBlock.class));
@@ -34,10 +34,5 @@ public class PgpKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserialize
     @Override
     protected PgpKey build(PgpKey.PgpKeyBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return PgpKey.encodingType;
     }
 }

@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
 
-public class ResultReasonTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ResultReason, Integer> {
-
-    public ResultReasonTtlvSerializer() {
-        super(ResultReason::getIntValue);
-    }
+public class ResultReasonTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ResultReason> {
 }

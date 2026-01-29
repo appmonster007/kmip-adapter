@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpR
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CreateKeyPairOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CreateKeyPairOpRequestPayload, CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder> {
+public class CreateKeyPairOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CreateKeyPairOpRequestPayload, CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder> {
 
     public CreateKeyPairOpRequestPayloadTtlvDeserializer() {
-        super(CreateKeyPairOpRequestPayload.kmipTag);
+        super(CreateKeyPairOpRequestPayload.kmipTag, CreateKeyPairOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class CreateKeyPairOpRequestPayloadTtlvDeserializer extends AbstractKmipS
     }
 
     @Override
-    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.COMMON_TEMPLATE_ATTRIBUTE ->
                     builder.commonTemplateAttribute(mapper.readValue(p, CommonTemplateAttribute.class));
@@ -39,10 +39,5 @@ public class CreateKeyPairOpRequestPayloadTtlvDeserializer extends AbstractKmipS
     @Override
     protected CreateKeyPairOpRequestPayload build(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CreateKeyPairOpRequestPayload.encodingType;
     }
 }

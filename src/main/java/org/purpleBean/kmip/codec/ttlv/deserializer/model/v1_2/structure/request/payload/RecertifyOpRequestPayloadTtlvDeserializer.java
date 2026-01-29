@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.CertificateRequestType;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
@@ -14,10 +13,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RecertifyOpReque
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RecertifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RecertifyOpRequestPayload, RecertifyOpRequestPayload.RecertifyOpRequestPayloadBuilder> {
+public class RecertifyOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RecertifyOpRequestPayload, RecertifyOpRequestPayload.RecertifyOpRequestPayloadBuilder> {
 
     public RecertifyOpRequestPayloadTtlvDeserializer() {
-        super(RecertifyOpRequestPayload.kmipTag);
+        super(RecertifyOpRequestPayload.kmipTag, RecertifyOpRequestPayload.encodingType);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class RecertifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(RecertifyOpRequestPayload.RecertifyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RecertifyOpRequestPayload.RecertifyOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -44,10 +44,5 @@ public class RecertifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     @Override
     protected RecertifyOpRequestPayload build(RecertifyOpRequestPayload.RecertifyOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RecertifyOpRequestPayload.encodingType;
     }
 }

@@ -1,11 +1,31 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
 
-public class WrappingMethodTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<WrappingMethod, Integer> {
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class WrappingMethodTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<WrappingMethod, WrappingMethod.WrappingMethodBuilder> {
 
     public WrappingMethodTtlvDeserializer() {
-        super(WrappingMethod.kmipTag, WrappingMethod.encodingType, Integer.class, value -> WrappingMethod.fromValue(value).inst());
+        super(WrappingMethod.kmipTag, WrappingMethod.encodingType);
+    }
+
+    @Override
+    protected WrappingMethod.WrappingMethodBuilder createBuilder() {
+        return WrappingMethod.builder();
+    }
+
+    @Override
+    protected void setValue(WrappingMethod.WrappingMethodBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        Integer value = mapper.readValue(p, Integer.class);
+        builder.value(WrappingMethod.fromValue(value));
+    }
+
+    @Override
+    protected WrappingMethod build(WrappingMethod.WrappingMethodBuilder builder) {
+        return builder.build();
     }
 }

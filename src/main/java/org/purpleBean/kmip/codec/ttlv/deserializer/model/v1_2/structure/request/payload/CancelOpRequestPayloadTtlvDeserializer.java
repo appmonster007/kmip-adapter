@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.CancelOpRequestPayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CancelOpRequestP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CancelOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CancelOpRequestPayload, CancelOpRequestPayload.CancelOpRequestPayloadBuilder> {
+public class CancelOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CancelOpRequestPayload, CancelOpRequestPayload.CancelOpRequestPayloadBuilder> {
 
     public CancelOpRequestPayloadTtlvDeserializer() {
-        super(CancelOpRequestPayload.kmipTag);
+        super(CancelOpRequestPayload.kmipTag, CancelOpRequestPayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class CancelOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(CancelOpRequestPayload.CancelOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CancelOpRequestPayload.CancelOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE)) {
             builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
         } else {
@@ -33,10 +33,5 @@ public class CancelOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected CancelOpRequestPayload build(CancelOpRequestPayload.CancelOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CancelOpRequestPayload.encodingType;
     }
 }

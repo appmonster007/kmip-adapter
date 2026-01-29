@@ -1,20 +1,19 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestMessageTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RequestMessage, RequestMessage.RequestMessageBuilder> {
+public class RequestMessageTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RequestMessage, RequestMessage.RequestMessageBuilder> {
 
     public RequestMessageTtlvDeserializer() {
-        super(RequestMessage.kmipTag);
+        super(RequestMessage.kmipTag, RequestMessage.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class RequestMessageTtlvDeserializer extends AbstractKmipStructureTtlvDes
     }
 
     @Override
-    protected void setValue(RequestMessage.RequestMessageBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RequestMessage.RequestMessageBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.REQUEST_HEADER ->
                     builder.requestHeader(mapper.readValue(p, RequestHeaderStructure.class));
@@ -43,10 +43,5 @@ public class RequestMessageTtlvDeserializer extends AbstractKmipStructureTtlvDes
     @Override
     protected RequestMessage build(RequestMessage.RequestMessageBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RequestMessage.encodingType;
     }
 }

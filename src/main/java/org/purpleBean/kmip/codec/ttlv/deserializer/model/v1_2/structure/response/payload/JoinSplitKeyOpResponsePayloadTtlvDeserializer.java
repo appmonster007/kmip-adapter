@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.JoinSplitKeyOpR
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class JoinSplitKeyOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<JoinSplitKeyOpResponsePayload, JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder> {
+public class JoinSplitKeyOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<JoinSplitKeyOpResponsePayload, JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder> {
 
     public JoinSplitKeyOpResponsePayloadTtlvDeserializer() {
-        super(JoinSplitKeyOpResponsePayload.kmipTag);
+        super(JoinSplitKeyOpResponsePayload.kmipTag, JoinSplitKeyOpResponsePayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class JoinSplitKeyOpResponsePayloadTtlvDeserializer extends AbstractKmipS
     }
 
     @Override
-    protected void setValue(JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
@@ -38,10 +38,5 @@ public class JoinSplitKeyOpResponsePayloadTtlvDeserializer extends AbstractKmipS
     @Override
     protected JoinSplitKeyOpResponsePayload build(JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return JoinSplitKeyOpResponsePayload.encodingType;
     }
 }

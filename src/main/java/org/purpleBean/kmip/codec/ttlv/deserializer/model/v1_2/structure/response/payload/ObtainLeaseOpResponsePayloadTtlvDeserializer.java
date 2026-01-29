@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.LastChangeDate;
 import org.purpleBean.kmip.model.core.type.LeaseTime;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ObtainLeaseOpRe
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ObtainLeaseOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<ObtainLeaseOpResponsePayload, ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder> {
+public class ObtainLeaseOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ObtainLeaseOpResponsePayload, ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder> {
 
     public ObtainLeaseOpResponsePayloadTtlvDeserializer() {
-        super(ObtainLeaseOpResponsePayload.kmipTag);
+        super(ObtainLeaseOpResponsePayload.kmipTag, ObtainLeaseOpResponsePayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class ObtainLeaseOpResponsePayloadTtlvDeserializer extends AbstractKmipSt
     }
 
     @Override
-    protected void setValue(ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -37,10 +37,5 @@ public class ObtainLeaseOpResponsePayloadTtlvDeserializer extends AbstractKmipSt
     @Override
     protected ObtainLeaseOpResponsePayload build(ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return ObtainLeaseOpResponsePayload.encodingType;
     }
 }

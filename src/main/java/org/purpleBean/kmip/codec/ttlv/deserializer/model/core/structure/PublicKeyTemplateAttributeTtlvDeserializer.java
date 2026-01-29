@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.Name;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class PublicKeyTemplateAttributeTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<PublicKeyTemplateAttribute, PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder> {
+public class PublicKeyTemplateAttributeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<PublicKeyTemplateAttribute, PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder> {
 
     public PublicKeyTemplateAttributeTtlvDeserializer() {
-        super(PublicKeyTemplateAttribute.kmipTag);
+        super(PublicKeyTemplateAttribute.kmipTag, PublicKeyTemplateAttribute.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class PublicKeyTemplateAttributeTtlvDeserializer extends AbstractKmipStru
     }
 
     @Override
-    protected void setValue(PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.NAME -> builder.name(mapper.readValue(p, Name.class));
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(mapper.readValue(p, Attribute.class));
@@ -34,10 +34,5 @@ public class PublicKeyTemplateAttributeTtlvDeserializer extends AbstractKmipStru
     @Override
     protected PublicKeyTemplateAttribute build(PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return PublicKeyTemplateAttribute.encodingType;
     }
 }

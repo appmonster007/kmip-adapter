@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RequestBatchItem, RequestBatchItem.RequestBatchItemBuilder> {
+public class RequestBatchItemTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RequestBatchItem, RequestBatchItem.RequestBatchItemBuilder> {
 
     public RequestBatchItemTtlvDeserializer() {
-        super(RequestBatchItem.kmipTag);
+        super(RequestBatchItem.kmipTag, RequestBatchItem.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class RequestBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvD
     }
 
     @Override
-    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> {
                 Operation operation = mapper.readValue(p, Operation.class);
@@ -45,10 +45,5 @@ public class RequestBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvD
     @Override
     protected RequestBatchItem build(RequestBatchItem.RequestBatchItemBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RequestBatchItem.encodingType;
     }
 }

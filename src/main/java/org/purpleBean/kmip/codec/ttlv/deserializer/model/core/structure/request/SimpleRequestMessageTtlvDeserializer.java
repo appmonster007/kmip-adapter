@@ -1,20 +1,19 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
 import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SimpleRequestMessageTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SimpleRequestMessage, SimpleRequestMessage.SimpleRequestMessageBuilder> {
+public class SimpleRequestMessageTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SimpleRequestMessage, SimpleRequestMessage.SimpleRequestMessageBuilder> {
 
     public SimpleRequestMessageTtlvDeserializer() {
-        super(SimpleRequestMessage.kmipTag);
+        super(SimpleRequestMessage.kmipTag, SimpleRequestMessage.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class SimpleRequestMessageTtlvDeserializer extends AbstractKmipStructureT
     }
 
     @Override
-    protected void setValue(SimpleRequestMessage.SimpleRequestMessageBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleRequestMessage.SimpleRequestMessageBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.REQUEST_HEADER ->
                     builder.requestHeader(mapper.readValue(p, RequestHeaderStructure.class));
@@ -43,10 +43,5 @@ public class SimpleRequestMessageTtlvDeserializer extends AbstractKmipStructureT
     @Override
     protected SimpleRequestMessage build(SimpleRequestMessage.SimpleRequestMessageBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SimpleRequestMessage.encodingType;
     }
 }

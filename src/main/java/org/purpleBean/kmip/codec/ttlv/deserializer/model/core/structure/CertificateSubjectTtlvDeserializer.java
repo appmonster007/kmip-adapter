@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CertificateSubject;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectAlternativeName;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.CertificateSubjectDistinguishedName;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CertificateSubjectTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CertificateSubject, CertificateSubject.CertificateSubjectBuilder> {
+public class CertificateSubjectTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CertificateSubject, CertificateSubject.CertificateSubjectBuilder> {
 
     public CertificateSubjectTtlvDeserializer() {
-        super(CertificateSubject.kmipTag);
+        super(CertificateSubject.kmipTag, CertificateSubject.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CertificateSubjectTtlvDeserializer extends AbstractKmipStructureTtl
     }
 
     @Override
-    protected void setValue(CertificateSubject.CertificateSubjectBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CertificateSubject.CertificateSubjectBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.CERTIFICATE_SUBJECT_DISTINGUISHED_NAME ->
                     builder.certificateSubjectDistinguishedName(mapper.readValue(p, CertificateSubjectDistinguishedName.class));
@@ -36,10 +36,5 @@ public class CertificateSubjectTtlvDeserializer extends AbstractKmipStructureTtl
     @Override
     protected CertificateSubject build(CertificateSubject.CertificateSubjectBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CertificateSubject.encodingType;
     }
 }

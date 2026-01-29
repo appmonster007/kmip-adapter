@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.DigestValue;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class DigestTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<Digest, Digest.DigestBuilder> {
+public class DigestTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Digest, Digest.DigestBuilder> {
 
     public DigestTtlvDeserializer() {
-        super(Digest.kmipTag);
+        super(Digest.kmipTag, Digest.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class DigestTtlvDeserializer extends AbstractKmipStructureTtlvDeserialize
     }
 
     @Override
-    protected void setValue(Digest.DigestBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Digest.DigestBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.HASHING_ALGORITHM ->
                     builder.hashingAlgorithm(mapper.readValue(p, HashingAlgorithm.class));
@@ -37,10 +37,5 @@ public class DigestTtlvDeserializer extends AbstractKmipStructureTtlvDeserialize
     @Override
     protected Digest build(Digest.DigestBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return Digest.encodingType;
     }
 }

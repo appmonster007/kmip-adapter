@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
@@ -14,10 +13,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RequestHeaderTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
+public class RequestHeaderTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
 
     public RequestHeaderTtlvDeserializer() {
-        super(RequestHeader.kmipTag);
+        super(RequestHeader.kmipTag, RequestHeader.encodingType);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class RequestHeaderTtlvDeserializer extends AbstractKmipStructureTtlvDese
     }
 
     @Override
-    protected void setValue(RequestHeader.RequestHeaderBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RequestHeader.RequestHeaderBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION ->
                     builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));
@@ -52,10 +52,5 @@ public class RequestHeaderTtlvDeserializer extends AbstractKmipStructureTtlvDese
     @Override
     protected RequestHeader build(RequestHeader.RequestHeaderBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RequestHeader.encodingType;
     }
 }

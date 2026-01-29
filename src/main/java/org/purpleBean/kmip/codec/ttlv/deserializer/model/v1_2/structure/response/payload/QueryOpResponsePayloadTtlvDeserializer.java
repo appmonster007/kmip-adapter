@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
@@ -16,10 +15,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.QueryOpResponse
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class QueryOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<QueryOpResponsePayload, QueryOpResponsePayload.QueryOpResponsePayloadBuilder> {
+public class QueryOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<QueryOpResponsePayload, QueryOpResponsePayload.QueryOpResponsePayloadBuilder> {
 
     public QueryOpResponsePayloadTtlvDeserializer() {
-        super(QueryOpResponsePayload.kmipTag);
+        super(QueryOpResponsePayload.kmipTag, QueryOpResponsePayload.encodingType);
     }
 
     @Override
@@ -28,7 +27,8 @@ public class QueryOpResponsePayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(QueryOpResponsePayload.QueryOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(QueryOpResponsePayload.QueryOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> builder.operation(mapper.readValue(p, Operation.class));
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
@@ -49,10 +49,5 @@ public class QueryOpResponsePayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected QueryOpResponsePayload build(QueryOpResponsePayload.QueryOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return QueryOpResponsePayload.encodingType;
     }
 }

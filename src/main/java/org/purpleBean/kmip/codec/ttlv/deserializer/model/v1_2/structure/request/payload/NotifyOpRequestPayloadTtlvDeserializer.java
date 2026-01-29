@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.NotifyOpRequestP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class NotifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<NotifyOpRequestPayload, NotifyOpRequestPayload.NotifyOpRequestPayloadBuilder> {
+public class NotifyOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<NotifyOpRequestPayload, NotifyOpRequestPayload.NotifyOpRequestPayloadBuilder> {
 
     public NotifyOpRequestPayloadTtlvDeserializer() {
-        super(NotifyOpRequestPayload.kmipTag);
+        super(NotifyOpRequestPayload.kmipTag, NotifyOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class NotifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(NotifyOpRequestPayload.NotifyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(NotifyOpRequestPayload.NotifyOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -35,10 +35,5 @@ public class NotifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected NotifyOpRequestPayload build(NotifyOpRequestPayload.NotifyOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return NotifyOpRequestPayload.encodingType;
     }
 }

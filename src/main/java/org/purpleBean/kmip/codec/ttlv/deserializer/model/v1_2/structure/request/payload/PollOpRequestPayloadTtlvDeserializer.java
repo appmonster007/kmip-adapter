@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.PollOpRequestPayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.PollOpRequestPay
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class PollOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<PollOpRequestPayload, PollOpRequestPayload.PollOpRequestPayloadBuilder> {
+public class PollOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<PollOpRequestPayload, PollOpRequestPayload.PollOpRequestPayloadBuilder> {
 
     public PollOpRequestPayloadTtlvDeserializer() {
-        super(PollOpRequestPayload.kmipTag);
+        super(PollOpRequestPayload.kmipTag, PollOpRequestPayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class PollOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureT
     }
 
     @Override
-    protected void setValue(PollOpRequestPayload.PollOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PollOpRequestPayload.PollOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE)) {
             builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
         } else {
@@ -33,10 +33,5 @@ public class PollOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureT
     @Override
     protected PollOpRequestPayload build(PollOpRequestPayload.PollOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return PollOpRequestPayload.encodingType;
     }
 }

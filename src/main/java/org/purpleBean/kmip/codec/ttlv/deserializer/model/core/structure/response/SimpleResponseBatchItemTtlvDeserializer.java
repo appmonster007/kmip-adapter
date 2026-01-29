@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.response;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
@@ -14,10 +13,10 @@ import org.purpleBean.kmip.model.core.type.ResultMessage;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SimpleResponseBatchItem, SimpleResponseBatchItem.SimpleResponseBatchItemBuilder> {
+public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SimpleResponseBatchItem, SimpleResponseBatchItem.SimpleResponseBatchItemBuilder> {
 
     public SimpleResponseBatchItemTtlvDeserializer() {
-        super(SimpleResponseBatchItem.kmipTag);
+        super(SimpleResponseBatchItem.kmipTag, SimpleResponseBatchItem.encodingType);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipStructu
     }
 
     @Override
-    protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> {
                 Operation operation = mapper.readValue(p, Operation.class);
@@ -45,10 +45,5 @@ public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipStructu
     @Override
     protected SimpleResponseBatchItem build(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SimpleResponseBatchItem.encodingType;
     }
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.DiscoverVersionsOpResponsePayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.DiscoverVersion
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class DiscoverVersionsOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<DiscoverVersionsOpResponsePayload, DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder> {
+public class DiscoverVersionsOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<DiscoverVersionsOpResponsePayload, DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder> {
 
     public DiscoverVersionsOpResponsePayloadTtlvDeserializer() {
-        super(DiscoverVersionsOpResponsePayload.kmipTag);
+        super(DiscoverVersionsOpResponsePayload.kmipTag, DiscoverVersionsOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class DiscoverVersionsOpResponsePayloadTtlvDeserializer extends AbstractK
     }
 
     @Override
-    protected void setValue(DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.PROTOCOL_VERSION)) {
             builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));
         } else {
@@ -33,10 +33,5 @@ public class DiscoverVersionsOpResponsePayloadTtlvDeserializer extends AbstractK
     @Override
     protected DiscoverVersionsOpResponsePayload build(DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return DiscoverVersionsOpResponsePayload.encodingType;
     }
 }

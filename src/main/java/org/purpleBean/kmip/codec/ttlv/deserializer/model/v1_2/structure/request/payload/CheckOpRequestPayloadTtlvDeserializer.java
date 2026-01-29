@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.CryptographicUsageMask;
 import org.purpleBean.kmip.model.core.type.LeaseTime;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPa
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CheckOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CheckOpRequestPayload, CheckOpRequestPayload.CheckOpRequestPayloadBuilder> {
+public class CheckOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CheckOpRequestPayload, CheckOpRequestPayload.CheckOpRequestPayloadBuilder> {
 
     public CheckOpRequestPayloadTtlvDeserializer() {
-        super(CheckOpRequestPayload.kmipTag);
+        super(CheckOpRequestPayload.kmipTag, CheckOpRequestPayload.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class CheckOpRequestPayloadTtlvDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(CheckOpRequestPayload.CheckOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CheckOpRequestPayload.CheckOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -41,10 +41,5 @@ public class CheckOpRequestPayloadTtlvDeserializer extends AbstractKmipStructure
     @Override
     protected CheckOpRequestPayload build(CheckOpRequestPayload.CheckOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CheckOpRequestPayload.encodingType;
     }
 }

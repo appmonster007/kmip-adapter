@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CreateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CreateOpRequestPayload, CreateOpRequestPayload.CreateOpRequestPayloadBuilder> {
+public class CreateOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CreateOpRequestPayload, CreateOpRequestPayload.CreateOpRequestPayloadBuilder> {
 
     public CreateOpRequestPayloadTtlvDeserializer() {
-        super(CreateOpRequestPayload.kmipTag);
+        super(CreateOpRequestPayload.kmipTag, CreateOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CreateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(CreateOpRequestPayload.CreateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CreateOpRequestPayload.CreateOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
             case KmipTag.Standard.TEMPLATE_ATTRIBUTE ->
@@ -35,10 +35,5 @@ public class CreateOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected CreateOpRequestPayload build(CreateOpRequestPayload.CreateOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CreateOpRequestPayload.encodingType;
     }
 }

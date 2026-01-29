@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.OperationPolicyName;
 
-public class OperationPolicyNameTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<OperationPolicyName, String> {
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class OperationPolicyNameTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<OperationPolicyName, OperationPolicyName.OperationPolicyNameBuilder> {
 
     public OperationPolicyNameTtlvDeserializer() {
-        super(OperationPolicyName.kmipTag, OperationPolicyName.encodingType, String.class, value -> OperationPolicyName.builder().value(value).build());
+        super(OperationPolicyName.kmipTag, OperationPolicyName.encodingType);
+    }
+
+    @Override
+    protected OperationPolicyName.OperationPolicyNameBuilder createBuilder() {
+        return OperationPolicyName.builder();
+    }
+
+    @Override
+    protected void setValue(OperationPolicyName.OperationPolicyNameBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+        builder.value(mapper.readValue(byteBuffer, String.class));
+    }
+
+    @Override
+    protected OperationPolicyName build(OperationPolicyName.OperationPolicyNameBuilder builder) {
+        return builder.build();
     }
 }

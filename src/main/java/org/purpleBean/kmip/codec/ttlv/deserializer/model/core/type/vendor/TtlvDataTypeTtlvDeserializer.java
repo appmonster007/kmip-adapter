@@ -16,45 +16,40 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<TtlvDataType, Object> {
+public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<TtlvDataType, TtlvDataType.TtlvDataTypeBuilder> {
 
     public TtlvDataTypeTtlvDeserializer() {
-        super(null, null, null, null);
+        super(null, null);
     }
 
     @Override
-    public TtlvDataType deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws IOException {
-        TtlvObject ttlvObject = TtlvObject.fromBuffer(ttlvBuffer);
+    protected TtlvDataType.TtlvDataTypeBuilder createBuilder() {
+        return TtlvDataType.builder();
+    }
 
-        // Read Tag
-        KmipTag.Value kmipTag;
+    @Override
+    protected void setValue(TtlvDataType.TtlvDataTypeBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag;
         try {
-            kmipTag = KmipTag.fromBytes(ttlvObject.getTag());
+            nodeTag = KmipTag.fromBytes(tagBytes);
         } catch (NoSuchElementException e) {
             // Register Tag if unknown
-            kmipTag = KmipTag.register(
-                    ttlvObject.getTag(),
-                    ttlvObject.getTagHexString(),
+            nodeTag = KmipTag.register(
+                    tagBytes,
+                    null,
                     Stream.of(KmipSpec.UnknownVersion, KmipContext.getSpec()).collect(Collectors.toSet())
             );
         }
-
-        // Read Type
-        EncodingType encodingType = EncodingType.fromTypeValue(ttlvObject.getType()).orElseThrow(
-                () -> new IllegalArgumentException("Unknown encoding type: " + ttlvObject.getType())
-        );
-
-        // Read Value based on EncodingType
-        Object value = readValue(ByteBuffer.wrap(ttlvObject.getValue()), encodingType, kmipTag, mapper);
-
-        return TtlvDataType.builder()
-                .kmipTag(kmipTag.inst())
-                .encodingType(encodingType)
-                .value(value)
-                .build();
+        EncodingType encodingType = (EncodingType) mapper.getAttribute("encodingType");
+        builder.kmipTag(nodeTag.inst()).encodingType(encodingType).value(readValue(nodeTag, encodingType, p, mapper));
     }
 
-    private Object readValue(ByteBuffer buffer, EncodingType encodingType, KmipTag.Value kmipTag, TtlvMapper mapper) throws IOException {
+    @Override
+    protected TtlvDataType build(TtlvDataType.TtlvDataTypeBuilder builder) {
+        return builder.build();
+    }
+
+    private Object readValue(KmipTag.Value kmipTag, EncodingType encodingType, ByteBuffer buffer, TtlvMapper mapper) throws IOException {
         return switch (encodingType) {
             case INTEGER -> mapper.readValue(buffer, Integer.class);
             case LONG_INTEGER -> mapper.readValue(buffer, Long.class);
@@ -64,8 +59,10 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
             case BYTE_STRING -> mapper.readValue(buffer, ByteBuffer.class);
             case DATE_TIME -> mapper.readValue(buffer, OffsetDateTime.class);
             case INTERVAL -> mapper.readValue(buffer, Integer.class);
-            case ENUMERATION ->
-                    mapper.readValue(buffer, KmipDataType.getClassFromRegistry(kmipTag, EncodingType.ENUMERATION));
+            case ENUMERATION -> {
+                Class<?> clazz = KmipDataType.getClassFromRegistry(kmipTag, EncodingType.ENUMERATION);
+                yield mapper.readValue(buffer, clazz);
+            }
             case STRUCTURE -> {
                 List<TtlvObject> nestedObjects = TtlvObject.fromBytesMultiple(buffer.array());
                 List<KmipDataType> values = new ArrayList<>();
@@ -76,5 +73,17 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
             }
             default -> throw new IllegalArgumentException("Unsupported encoding type: " + encodingType);
         };
+    }
+
+    @Override
+    protected void verifyTag(TtlvObject obj, TtlvMapper mapper) {
+    }
+
+    @Override
+    protected void verifyType(TtlvObject obj, TtlvMapper mapper) {
+        EncodingType encodingType = EncodingType.fromTypeValue(obj.getType()).orElseThrow(
+                () -> new IllegalArgumentException("Unknown encoding type: " + obj.getType())
+        );
+        mapper.setAttribute("encodingType", encodingType);
     }
 }

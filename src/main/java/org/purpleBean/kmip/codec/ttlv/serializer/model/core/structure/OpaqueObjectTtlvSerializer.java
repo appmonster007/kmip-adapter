@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipStructureTtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.structure.OpaqueObject;
 
-public class OpaqueObjectTtlvSerializer extends AbstractKmipStructureTtlvSerializer<OpaqueObject> {
+public class OpaqueObjectTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<OpaqueObject> {
 }

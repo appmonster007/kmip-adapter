@@ -1,18 +1,16 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure.request;
 
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SimpleRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SimpleRequestPayload, SimpleRequestPayload.SimpleRequestPayloadBuilder> {
+public class SimpleRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SimpleRequestPayload, SimpleRequestPayload.SimpleRequestPayloadBuilder> {
 
     public SimpleRequestPayloadTtlvDeserializer() {
-        super(SimpleRequestPayload.kmipTag);
+        super(SimpleRequestPayload.kmipTag, SimpleRequestPayload.encodingType);
     }
 
     @Override
@@ -21,18 +19,13 @@ public class SimpleRequestPayloadTtlvDeserializer extends AbstractKmipStructureT
     }
 
     @Override
-    protected void setValue(SimpleRequestPayload.SimpleRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleRequestPayload.SimpleRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // No fields to set
     }
 
     @Override
     protected SimpleRequestPayload build(SimpleRequestPayload.SimpleRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SimpleRequestPayload.encodingType;
     }
 
 //    @Override

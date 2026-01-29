@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.MaximumResponseSize;
 
-public class MaximumResponseSizeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MaximumResponseSize, Integer> {
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class MaximumResponseSizeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MaximumResponseSize, MaximumResponseSize.MaximumResponseSizeBuilder> {
 
     public MaximumResponseSizeTtlvDeserializer() {
-        super(MaximumResponseSize.kmipTag, MaximumResponseSize.encodingType, Integer.class, value -> MaximumResponseSize.builder().value(value).build());
+        super(MaximumResponseSize.kmipTag, MaximumResponseSize.encodingType);
+    }
+
+    @Override
+    protected MaximumResponseSize.MaximumResponseSizeBuilder createBuilder() {
+        return MaximumResponseSize.builder();
+    }
+
+    @Override
+    protected void setValue(MaximumResponseSize.MaximumResponseSizeBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+        builder.value(mapper.readValue(byteBuffer, Integer.class));
+    }
+
+    @Override
+    protected MaximumResponseSize build(MaximumResponseSize.MaximumResponseSizeBuilder builder) {
+        return builder.build();
     }
 }

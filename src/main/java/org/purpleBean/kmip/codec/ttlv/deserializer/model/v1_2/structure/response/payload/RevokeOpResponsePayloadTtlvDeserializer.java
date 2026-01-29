@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RevokeOpResponsePayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RevokeOpRespons
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RevokeOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RevokeOpResponsePayload, RevokeOpResponsePayload.RevokeOpResponsePayloadBuilder> {
+public class RevokeOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RevokeOpResponsePayload, RevokeOpResponsePayload.RevokeOpResponsePayloadBuilder> {
 
     public RevokeOpResponsePayloadTtlvDeserializer() {
-        super(RevokeOpResponsePayload.kmipTag);
+        super(RevokeOpResponsePayload.kmipTag, RevokeOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class RevokeOpResponsePayloadTtlvDeserializer extends AbstractKmipStructu
     }
 
     @Override
-    protected void setValue(RevokeOpResponsePayload.RevokeOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RevokeOpResponsePayload.RevokeOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.UNIQUE_IDENTIFIER)) {
             builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
         } else {
@@ -33,10 +33,5 @@ public class RevokeOpResponsePayloadTtlvDeserializer extends AbstractKmipStructu
     @Override
     protected RevokeOpResponsePayload build(RevokeOpResponsePayload.RevokeOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RevokeOpResponsePayload.encodingType;
     }
 }

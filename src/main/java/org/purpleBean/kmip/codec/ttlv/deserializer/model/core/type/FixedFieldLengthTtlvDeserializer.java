@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.FixedFieldLength;
 
-public class FixedFieldLengthTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<FixedFieldLength, Integer> {
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class FixedFieldLengthTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<FixedFieldLength, FixedFieldLength.FixedFieldLengthBuilder> {
 
     public FixedFieldLengthTtlvDeserializer() {
-        super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType, Integer.class, value -> FixedFieldLength.builder().value(value).build());
+        super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
+    }
+
+    @Override
+    protected FixedFieldLength.FixedFieldLengthBuilder createBuilder() {
+        return FixedFieldLength.builder();
+    }
+
+    @Override
+    protected void setValue(FixedFieldLength.FixedFieldLengthBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+        builder.value(mapper.readValue(byteBuffer, Integer.class));
+    }
+
+    @Override
+    protected FixedFieldLength build(FixedFieldLength.FixedFieldLengthBuilder builder) {
+        return builder.build();
     }
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.MacOpRequestPayl
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class MacOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<MacOpRequestPayload, MacOpRequestPayload.MacOpRequestPayloadBuilder> {
+public class MacOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MacOpRequestPayload, MacOpRequestPayload.MacOpRequestPayloadBuilder> {
 
     public MacOpRequestPayloadTtlvDeserializer() {
-        super(MacOpRequestPayload.kmipTag);
+        super(MacOpRequestPayload.kmipTag, MacOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class MacOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     }
 
     @Override
-    protected void setValue(MacOpRequestPayload.MacOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(MacOpRequestPayload.MacOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -38,10 +38,5 @@ public class MacOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     @Override
     protected MacOpRequestPayload build(MacOpRequestPayload.MacOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return MacOpRequestPayload.encodingType;
     }
 }

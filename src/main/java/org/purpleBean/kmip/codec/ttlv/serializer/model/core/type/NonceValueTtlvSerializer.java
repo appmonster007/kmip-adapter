@@ -3,11 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.type.NonceValue;
 
-import java.nio.ByteBuffer;
-
-public class NonceValueTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<NonceValue, ByteBuffer> {
-
-    public NonceValueTtlvSerializer() {
-        super(NonceValue::getValue);
-    }
+public class NonceValueTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<NonceValue> {
 }

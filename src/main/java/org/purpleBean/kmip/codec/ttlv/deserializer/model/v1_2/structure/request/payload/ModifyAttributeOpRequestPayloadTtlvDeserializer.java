@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ModifyAttributeO
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ModifyAttributeOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<ModifyAttributeOpRequestPayload, ModifyAttributeOpRequestPayload.ModifyAttributeOpRequestPayloadBuilder> {
+public class ModifyAttributeOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ModifyAttributeOpRequestPayload, ModifyAttributeOpRequestPayload.ModifyAttributeOpRequestPayloadBuilder> {
 
     public ModifyAttributeOpRequestPayloadTtlvDeserializer() {
-        super(ModifyAttributeOpRequestPayload.kmipTag);
+        super(ModifyAttributeOpRequestPayload.kmipTag, ModifyAttributeOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class ModifyAttributeOpRequestPayloadTtlvDeserializer extends AbstractKmi
     }
 
     @Override
-    protected void setValue(ModifyAttributeOpRequestPayload.ModifyAttributeOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ModifyAttributeOpRequestPayload.ModifyAttributeOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -35,10 +35,5 @@ public class ModifyAttributeOpRequestPayloadTtlvDeserializer extends AbstractKmi
     @Override
     protected ModifyAttributeOpRequestPayload build(ModifyAttributeOpRequestPayload.ModifyAttributeOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return ModifyAttributeOpRequestPayload.encodingType;
     }
 }

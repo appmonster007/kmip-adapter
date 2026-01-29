@@ -1,9 +1,8 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.ManagedObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 import org.purpleBean.kmip.model.core.structure.Attribute;
@@ -14,10 +13,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.PutOpRequestPayl
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class PutOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<PutOpRequestPayload, PutOpRequestPayload.PutOpRequestPayloadBuilder> {
+public class PutOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<PutOpRequestPayload, PutOpRequestPayload.PutOpRequestPayloadBuilder> {
 
     public PutOpRequestPayloadTtlvDeserializer() {
-        super(PutOpRequestPayload.kmipTag);
+        super(PutOpRequestPayload.kmipTag, PutOpRequestPayload.encodingType);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class PutOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     }
 
     @Override
-    protected void setValue(PutOpRequestPayload.PutOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PutOpRequestPayload.PutOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -47,10 +47,5 @@ public class PutOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     @Override
     protected PutOpRequestPayload build(PutOpRequestPayload.PutOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return PutOpRequestPayload.encodingType;
     }
 }

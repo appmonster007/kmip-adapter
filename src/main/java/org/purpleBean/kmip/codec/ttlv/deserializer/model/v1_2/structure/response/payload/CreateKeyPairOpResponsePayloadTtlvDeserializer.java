@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOp
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CreateKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<CreateKeyPairOpResponsePayload, CreateKeyPairOpResponsePayload.CreateKeyPairOpResponsePayloadBuilder> {
+public class CreateKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CreateKeyPairOpResponsePayload, CreateKeyPairOpResponsePayload.CreateKeyPairOpResponsePayloadBuilder> {
 
     public CreateKeyPairOpResponsePayloadTtlvDeserializer() {
-        super(CreateKeyPairOpResponsePayload.kmipTag);
+        super(CreateKeyPairOpResponsePayload.kmipTag, CreateKeyPairOpResponsePayload.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class CreateKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmip
     }
 
     @Override
-    protected void setValue(CreateKeyPairOpResponsePayload.CreateKeyPairOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CreateKeyPairOpResponsePayload.CreateKeyPairOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER ->
                     builder.privateKeyUniqueIdentifier(mapper.readValue(p, PrivateKeyUniqueIdentifier.class));
@@ -42,10 +42,5 @@ public class CreateKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmip
     @Override
     protected CreateKeyPairOpResponsePayload build(CreateKeyPairOpResponsePayload.CreateKeyPairOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return CreateKeyPairOpResponsePayload.encodingType;
     }
 }

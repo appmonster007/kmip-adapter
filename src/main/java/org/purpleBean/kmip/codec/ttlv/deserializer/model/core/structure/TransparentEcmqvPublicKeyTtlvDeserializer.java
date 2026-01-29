@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.TransparentEcmqvPublicKey;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.QString;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class TransparentEcmqvPublicKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<TransparentEcmqvPublicKey, TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder> {
+public class TransparentEcmqvPublicKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<TransparentEcmqvPublicKey, TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder> {
 
     public TransparentEcmqvPublicKeyTtlvDeserializer() {
-        super(TransparentEcmqvPublicKey.kmipTag);
+        super(TransparentEcmqvPublicKey.kmipTag, TransparentEcmqvPublicKey.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class TransparentEcmqvPublicKeyTtlvDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.RECOMMENDED_CURVE ->
                     builder.recommendedCurve(mapper.readValue(p, RecommendedCurve.class));
@@ -35,10 +35,5 @@ public class TransparentEcmqvPublicKeyTtlvDeserializer extends AbstractKmipStruc
     @Override
     protected TransparentEcmqvPublicKey build(TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return TransparentEcmqvPublicKey.encodingType;
     }
 }

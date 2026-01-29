@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.CertificateType;
 import org.purpleBean.kmip.model.core.structure.Certificate;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.CertificateValue;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class CertificateTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<Certificate, Certificate.CertificateBuilder> {
+public class CertificateTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Certificate, Certificate.CertificateBuilder> {
 
     public CertificateTtlvDeserializer() {
-        super(Certificate.kmipTag);
+        super(Certificate.kmipTag, Certificate.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class CertificateTtlvDeserializer extends AbstractKmipStructureTtlvDeseri
     }
 
     @Override
-    protected void setValue(Certificate.CertificateBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Certificate.CertificateBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.CERTIFICATE_TYPE ->
                     builder.certificateType(mapper.readValue(p, CertificateType.class));
@@ -36,10 +36,5 @@ public class CertificateTtlvDeserializer extends AbstractKmipStructureTtlvDeseri
     @Override
     protected Certificate build(Certificate.CertificateBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return Certificate.encodingType;
     }
 }

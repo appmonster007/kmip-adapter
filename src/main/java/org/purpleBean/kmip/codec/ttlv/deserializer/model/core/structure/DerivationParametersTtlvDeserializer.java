@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.structure.DerivationParameters;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.InitializationVector;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class DerivationParametersTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<DerivationParameters, DerivationParameters.DerivationParametersBuilder> {
+public class DerivationParametersTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<DerivationParameters, DerivationParameters.DerivationParametersBuilder> {
 
     public DerivationParametersTtlvDeserializer() {
-        super(DerivationParameters.kmipTag);
+        super(DerivationParameters.kmipTag, DerivationParameters.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class DerivationParametersTtlvDeserializer extends AbstractKmipStructureT
     }
 
     @Override
-    protected void setValue(DerivationParameters.DerivationParametersBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DerivationParameters.DerivationParametersBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS ->
                     builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));
@@ -38,10 +38,5 @@ public class DerivationParametersTtlvDeserializer extends AbstractKmipStructureT
     @Override
     protected DerivationParameters build(DerivationParameters.DerivationParametersBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return DerivationParameters.encodingType;
     }
 }

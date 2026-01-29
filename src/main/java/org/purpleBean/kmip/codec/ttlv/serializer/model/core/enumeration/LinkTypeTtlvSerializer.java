@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.enumeration.LinkType;
 
-public class LinkTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<LinkType, Integer> {
-
-    public LinkTypeTtlvSerializer() {
-        super(LinkType::getIntValue);
-    }
+public class LinkTypeTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<LinkType> {
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ProtocolVersionTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
+public class ProtocolVersionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
 
     public ProtocolVersionTtlvDeserializer() {
-        super(ProtocolVersion.kmipTag);
+        super(ProtocolVersion.kmipTag, ProtocolVersion.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class ProtocolVersionTtlvDeserializer extends AbstractKmipStructureTtlvDe
     }
 
     @Override
-    protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION_MAJOR ->
                     builder.protocolVersionMajor(mapper.readValue(p, ProtocolVersionMajor.class));
@@ -36,10 +36,5 @@ public class ProtocolVersionTtlvDeserializer extends AbstractKmipStructureTtlvDe
     @Override
     protected ProtocolVersion build(ProtocolVersion.ProtocolVersionBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return ProtocolVersion.encodingType;
     }
 }

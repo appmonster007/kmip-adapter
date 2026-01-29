@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponsePayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponseP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<HashOpResponsePayload, HashOpResponsePayload.HashOpResponsePayloadBuilder> {
+public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<HashOpResponsePayload, HashOpResponsePayload.HashOpResponsePayloadBuilder> {
 
     public HashOpResponsePayloadTtlvDeserializer() {
-        super(HashOpResponsePayload.kmipTag);
+        super(HashOpResponsePayload.kmipTag, HashOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.DATA)) {
             builder.data(mapper.readValue(p, DataByteString.class));
         } else {
@@ -33,10 +33,5 @@ public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipStructure
     @Override
     protected HashOpResponsePayload build(HashOpResponsePayload.HashOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return HashOpResponsePayload.encodingType;
     }
 }

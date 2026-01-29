@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecoverOpResponsePayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecoverOpRespon
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RecoverOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RecoverOpResponsePayload, RecoverOpResponsePayload.RecoverOpResponsePayloadBuilder> {
+public class RecoverOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RecoverOpResponsePayload, RecoverOpResponsePayload.RecoverOpResponsePayloadBuilder> {
 
     public RecoverOpResponsePayloadTtlvDeserializer() {
-        super(RecoverOpResponsePayload.kmipTag);
+        super(RecoverOpResponsePayload.kmipTag, RecoverOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class RecoverOpResponsePayloadTtlvDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(RecoverOpResponsePayload.RecoverOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RecoverOpResponsePayload.RecoverOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.UNIQUE_IDENTIFIER)) {
             builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
         } else {
@@ -33,10 +33,5 @@ public class RecoverOpResponsePayloadTtlvDeserializer extends AbstractKmipStruct
     @Override
     protected RecoverOpResponsePayload build(RecoverOpResponsePayload.RecoverOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RecoverOpResponsePayload.encodingType;
     }
 }

@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipStructureTtlvSerializer;
+import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.QueryOpRequestPayload;
 
-public class QueryOpRequestPayloadTtlvSerializer extends AbstractKmipStructureTtlvSerializer<QueryOpRequestPayload> {
+public class QueryOpRequestPayloadTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<QueryOpRequestPayload> {
 }

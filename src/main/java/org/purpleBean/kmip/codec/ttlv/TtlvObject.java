@@ -156,10 +156,6 @@ public final class TtlvObject {
         this.tag = Arrays.copyOf(tag, tag.length);
     }
 
-    public String getTagHexString() {
-        return "0x" + HexFormat.of().formatHex(tag);
-    }
-
     public byte[] getValue() {
         return Arrays.copyOf(value, value.length);
     }

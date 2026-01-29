@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.MacVerifyOpReque
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class MacVerifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<MacVerifyOpRequestPayload, MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder> {
+public class MacVerifyOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MacVerifyOpRequestPayload, MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder> {
 
     public MacVerifyOpRequestPayloadTtlvDeserializer() {
-        super(MacVerifyOpRequestPayload.kmipTag);
+        super(MacVerifyOpRequestPayload.kmipTag, MacVerifyOpRequestPayload.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class MacVerifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -40,10 +40,5 @@ public class MacVerifyOpRequestPayloadTtlvDeserializer extends AbstractKmipStruc
     @Override
     protected MacVerifyOpRequestPayload build(MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return MacVerifyOpRequestPayload.encodingType;
     }
 }

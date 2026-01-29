@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayl
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class GetOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<GetOpRequestPayload, GetOpRequestPayload.GetOpRequestPayloadBuilder> {
+public class GetOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<GetOpRequestPayload, GetOpRequestPayload.GetOpRequestPayloadBuilder> {
 
     public GetOpRequestPayloadTtlvDeserializer() {
-        super(GetOpRequestPayload.kmipTag);
+        super(GetOpRequestPayload.kmipTag, GetOpRequestPayload.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class GetOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     }
 
     @Override
-    protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -41,10 +41,5 @@ public class GetOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTt
     @Override
     protected GetOpRequestPayload build(GetOpRequestPayload.GetOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return GetOpRequestPayload.encodingType;
     }
 }

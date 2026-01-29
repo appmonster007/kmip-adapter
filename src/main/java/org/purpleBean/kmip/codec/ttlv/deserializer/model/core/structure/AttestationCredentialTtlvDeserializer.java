@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.structure.AttestationCredential;
@@ -13,10 +12,10 @@ import org.purpleBean.kmip.model.core.type.AttestationMeasurement;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class AttestationCredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<AttestationCredential, AttestationCredential.AttestationCredentialBuilder> {
+public class AttestationCredentialTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AttestationCredential, AttestationCredential.AttestationCredentialBuilder> {
 
     public AttestationCredentialTtlvDeserializer() {
-        super(AttestationCredential.kmipTag);
+        super(AttestationCredential.kmipTag, AttestationCredential.encodingType);
     }
 
     @Override
@@ -25,7 +24,8 @@ public class AttestationCredentialTtlvDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(AttestationCredential.AttestationCredentialBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttestationCredential.AttestationCredentialBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.NONCE -> builder.nonce(mapper.readValue(p, Nonce.class));
             case KmipTag.Standard.ATTESTATION_TYPE ->
@@ -41,10 +41,5 @@ public class AttestationCredentialTtlvDeserializer extends AbstractKmipStructure
     @Override
     protected AttestationCredential build(AttestationCredential.AttestationCredentialBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return AttestationCredential.encodingType;
     }
 }

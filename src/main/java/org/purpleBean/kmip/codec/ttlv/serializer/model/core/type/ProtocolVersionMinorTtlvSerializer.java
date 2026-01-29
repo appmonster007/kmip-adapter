@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 
-public class ProtocolVersionMinorTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ProtocolVersionMinor, Integer> {
-
-    public ProtocolVersionMinorTtlvSerializer() {
-        super(ProtocolVersionMinor::getValue);
-    }
+public class ProtocolVersionMinorTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ProtocolVersionMinor> {
 }

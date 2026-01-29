@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.DeviceCredential;
 import org.purpleBean.kmip.model.core.type.*;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.core.type.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class DeviceCredentialTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<DeviceCredential, DeviceCredential.DeviceCredentialBuilder> {
+public class DeviceCredentialTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<DeviceCredential, DeviceCredential.DeviceCredentialBuilder> {
 
     public DeviceCredentialTtlvDeserializer() {
-        super(DeviceCredential.kmipTag);
+        super(DeviceCredential.kmipTag, DeviceCredential.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class DeviceCredentialTtlvDeserializer extends AbstractKmipStructureTtlvD
     }
 
     @Override
-    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.DEVICE_SERIAL_NUMBER ->
                     builder.deviceSerialNumber(mapper.readValue(p, DeviceSerialNumber.class));
@@ -42,10 +42,5 @@ public class DeviceCredentialTtlvDeserializer extends AbstractKmipStructureTtlvD
     @Override
     protected DeviceCredential build(DeviceCredential.DeviceCredentialBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return DeviceCredential.encodingType;
     }
 }

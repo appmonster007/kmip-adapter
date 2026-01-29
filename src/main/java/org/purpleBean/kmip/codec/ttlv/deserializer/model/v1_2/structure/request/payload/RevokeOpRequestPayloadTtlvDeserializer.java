@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.RevocationReason;
 import org.purpleBean.kmip.model.core.type.CompromiseOccurrenceDate;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RevokeOpRequestP
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class RevokeOpRequestPayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<RevokeOpRequestPayload, RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder> {
+public class RevokeOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<RevokeOpRequestPayload, RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder> {
 
     public RevokeOpRequestPayloadTtlvDeserializer() {
-        super(RevokeOpRequestPayload.kmipTag);
+        super(RevokeOpRequestPayload.kmipTag, RevokeOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class RevokeOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -39,10 +39,5 @@ public class RevokeOpRequestPayloadTtlvDeserializer extends AbstractKmipStructur
     @Override
     protected RevokeOpRequestPayload build(RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return RevokeOpRequestPayload.encodingType;
     }
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetUsageAllocationOpResponsePayload;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetUsageAllocat
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class GetUsageAllocationOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<GetUsageAllocationOpResponsePayload, GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder> {
+public class GetUsageAllocationOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<GetUsageAllocationOpResponsePayload, GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder> {
 
     public GetUsageAllocationOpResponsePayloadTtlvDeserializer() {
-        super(GetUsageAllocationOpResponsePayload.kmipTag);
+        super(GetUsageAllocationOpResponsePayload.kmipTag, GetUsageAllocationOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class GetUsageAllocationOpResponsePayloadTtlvDeserializer extends Abstrac
     }
 
     @Override
-    protected void setValue(GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         if (nodeTag.equals(KmipTag.Standard.UNIQUE_IDENTIFIER)) {
             builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
         } else {
@@ -33,10 +33,5 @@ public class GetUsageAllocationOpResponsePayloadTtlvDeserializer extends Abstrac
     @Override
     protected GetUsageAllocationOpResponsePayload build(GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return GetUsageAllocationOpResponsePayload.encodingType;
     }
 }

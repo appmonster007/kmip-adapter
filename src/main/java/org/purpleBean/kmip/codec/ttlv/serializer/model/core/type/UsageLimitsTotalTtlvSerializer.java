@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 
-public class UsageLimitsTotalTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<UsageLimitsTotal, Long> {
-
-    public UsageLimitsTotalTtlvSerializer() {
-        super(UsageLimitsTotal::getValue);
-    }
+public class UsageLimitsTotalTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<UsageLimitsTotal> {
 }

@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.KeyBlock;
 import org.purpleBean.kmip.model.core.structure.SymmetricKey;
@@ -10,10 +9,10 @@ import org.purpleBean.kmip.model.core.structure.SymmetricKey;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class SymmetricKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<SymmetricKey, SymmetricKey.SymmetricKeyBuilder> {
+public class SymmetricKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SymmetricKey, SymmetricKey.SymmetricKeyBuilder> {
 
     public SymmetricKeyTtlvDeserializer() {
-        super(SymmetricKey.kmipTag);
+        super(SymmetricKey.kmipTag, SymmetricKey.encodingType);
     }
 
     @Override
@@ -22,7 +21,8 @@ public class SymmetricKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeser
     }
 
     @Override
-    protected void setValue(SymmetricKey.SymmetricKeyBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SymmetricKey.SymmetricKeyBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_BLOCK -> builder.keyBlock(mapper.readValue(p, KeyBlock.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
@@ -32,10 +32,5 @@ public class SymmetricKeyTtlvDeserializer extends AbstractKmipStructureTtlvDeser
     @Override
     protected SymmetricKey build(SymmetricKey.SymmetricKeyBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return SymmetricKey.encodingType;
     }
 }

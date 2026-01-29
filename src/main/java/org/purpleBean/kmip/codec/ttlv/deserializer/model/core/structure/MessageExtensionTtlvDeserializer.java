@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
 import org.purpleBean.kmip.model.core.structure.VendorExtension;
@@ -12,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.VendorIdentification;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class MessageExtensionTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<MessageExtension, MessageExtension.MessageExtensionBuilder> {
+public class MessageExtensionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MessageExtension, MessageExtension.MessageExtensionBuilder> {
 
     public MessageExtensionTtlvDeserializer() {
-        super(MessageExtension.kmipTag);
+        super(MessageExtension.kmipTag, MessageExtension.encodingType);
     }
 
     @Override
@@ -24,7 +23,8 @@ public class MessageExtensionTtlvDeserializer extends AbstractKmipStructureTtlvD
     }
 
     @Override
-    protected void setValue(MessageExtension.MessageExtensionBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(MessageExtension.MessageExtensionBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.VENDOR_IDENTIFICATION ->
                     builder.vendorIdentification(mapper.readValue(p, VendorIdentification.class));
@@ -39,10 +39,5 @@ public class MessageExtensionTtlvDeserializer extends AbstractKmipStructureTtlvD
     @Override
     protected MessageExtension build(MessageExtension.MessageExtensionBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return MessageExtension.encodingType;
     }
 }

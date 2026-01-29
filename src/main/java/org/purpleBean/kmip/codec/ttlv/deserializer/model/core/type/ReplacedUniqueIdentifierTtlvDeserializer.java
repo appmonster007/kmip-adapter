@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.ReplacedUniqueIdentifier;
 
-public class ReplacedUniqueIdentifierTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ReplacedUniqueIdentifier, String> {
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+public class ReplacedUniqueIdentifierTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ReplacedUniqueIdentifier, ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder> {
 
     public ReplacedUniqueIdentifierTtlvDeserializer() {
-        super(ReplacedUniqueIdentifier.kmipTag, ReplacedUniqueIdentifier.encodingType, String.class, value -> ReplacedUniqueIdentifier.builder().value(value).build());
+        super(ReplacedUniqueIdentifier.kmipTag, ReplacedUniqueIdentifier.encodingType);
+    }
+
+    @Override
+    protected ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder createBuilder() {
+        return ReplacedUniqueIdentifier.builder();
+    }
+
+    @Override
+    protected void setValue(ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder builder, byte[] tagBytes, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+        builder.value(mapper.readValue(byteBuffer, String.class));
+    }
+
+    @Override
+    protected ReplacedUniqueIdentifier build(ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder builder) {
+        return builder.build();
     }
 }

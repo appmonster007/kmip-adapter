@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributesOp
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class GetAttributesOpResponsePayloadTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<GetAttributesOpResponsePayload, GetAttributesOpResponsePayload.GetAttributesOpResponsePayloadBuilder> {
+public class GetAttributesOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<GetAttributesOpResponsePayload, GetAttributesOpResponsePayload.GetAttributesOpResponsePayloadBuilder> {
 
     public GetAttributesOpResponsePayloadTtlvDeserializer() {
-        super(GetAttributesOpResponsePayload.kmipTag);
+        super(GetAttributesOpResponsePayload.kmipTag, GetAttributesOpResponsePayload.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class GetAttributesOpResponsePayloadTtlvDeserializer extends AbstractKmip
     }
 
     @Override
-    protected void setValue(GetAttributesOpResponsePayload.GetAttributesOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(GetAttributesOpResponsePayload.GetAttributesOpResponsePayloadBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -35,10 +35,5 @@ public class GetAttributesOpResponsePayloadTtlvDeserializer extends AbstractKmip
     @Override
     protected GetAttributesOpResponsePayload build(GetAttributesOpResponsePayload.GetAttributesOpResponsePayloadBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return GetAttributesOpResponsePayload.encodingType;
     }
 }

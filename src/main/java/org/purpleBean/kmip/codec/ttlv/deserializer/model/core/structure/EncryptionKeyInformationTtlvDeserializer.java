@@ -1,8 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
-import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipStructureTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.structure.EncryptionKeyInformation;
@@ -11,10 +10,10 @@ import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class EncryptionKeyInformationTtlvDeserializer extends AbstractKmipStructureTtlvDeserializer<EncryptionKeyInformation, EncryptionKeyInformation.EncryptionKeyInformationBuilder> {
+public class EncryptionKeyInformationTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<EncryptionKeyInformation, EncryptionKeyInformation.EncryptionKeyInformationBuilder> {
 
     public EncryptionKeyInformationTtlvDeserializer() {
-        super(EncryptionKeyInformation.kmipTag);
+        super(EncryptionKeyInformation.kmipTag, EncryptionKeyInformation.encodingType);
     }
 
     @Override
@@ -23,7 +22,8 @@ public class EncryptionKeyInformationTtlvDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(EncryptionKeyInformation.EncryptionKeyInformationBuilder builder, KmipTag.Value nodeTag, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(EncryptionKeyInformation.EncryptionKeyInformationBuilder builder, byte[] tagBytes, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
@@ -36,10 +36,5 @@ public class EncryptionKeyInformationTtlvDeserializer extends AbstractKmipStruct
     @Override
     protected EncryptionKeyInformation build(EncryptionKeyInformation.EncryptionKeyInformationBuilder builder) {
         return builder.build();
-    }
-
-    @Override
-    protected EncodingType getEncodingType() {
-        return EncryptionKeyInformation.encodingType;
     }
 }
