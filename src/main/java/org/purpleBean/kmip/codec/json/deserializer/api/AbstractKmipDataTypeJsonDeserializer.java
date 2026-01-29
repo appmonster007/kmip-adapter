@@ -65,7 +65,9 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
             return null;
         }
 
-        V value = ctxt.readTreeAsValue(valueNode, valueClass);
+        JsonParser valueParser = valueNode.traverse(p.getCodec());
+        valueParser.nextToken();
+        V value = ctxt.readValue(valueParser, valueClass);
         return factory.apply(value);
     }
 }

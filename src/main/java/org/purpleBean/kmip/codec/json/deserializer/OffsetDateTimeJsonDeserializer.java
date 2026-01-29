@@ -3,6 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -13,6 +14,7 @@ public class OffsetDateTimeJsonDeserializer extends JsonDeserializer<OffsetDateT
 
     @Override
     public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return OffsetDateTime.ofInstant(Instant.parse(p.getText()), ZoneOffset.UTC);
+        JsonNode node = p.getCodec().readTree(p);
+        return OffsetDateTime.ofInstant(Instant.parse(node.asText()), ZoneOffset.UTC);
     }
 }

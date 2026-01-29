@@ -41,7 +41,9 @@ public class KmipDataTypeJsonDeserializer<T extends KmipDataType> extends JsonDe
             throw new NoSuchElementException(String.format("No class registered for tag %s and encoding type %s", kmipTagValue.getValue(), encodingType.get()));
         }
 
-        return (T) ctxt.readTreeAsValue(node, clazz);
+        JsonParser valueParser = node.traverse(p.getCodec());
+        valueParser.nextToken();
+        return (T) ctxt.readValue(valueParser, clazz);
     }
 
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
