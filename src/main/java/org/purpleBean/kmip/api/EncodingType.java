@@ -1,10 +1,10 @@
 package org.purpleBean.kmip.api;
 
 import lombok.Getter;
-import org.purpleBean.kmip.model.core.type.Offset;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -56,7 +56,7 @@ public enum EncodingType {
     /**
      * A 64-bit integer representing the number of microseconds since the Unix epoch.
      */
-    DATE_TIME((byte) 0x09, "DateTime", 8, Offset.class),
+    DATE_TIME((byte) 0x09, "DateTime", 8, OffsetDateTime.class),
     /**
      * A 32-bit unsigned integer representing a duration in seconds.
      */

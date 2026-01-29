@@ -40,6 +40,9 @@ public class TtlvDataType implements KmipDataType {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
+        if (!encodingType.getClazz().isInstance(value)) {
+            throw new IllegalArgumentException(String.format("Invalid value for %s: %s", KmipContext.getSpec(), value));
+        }
         // No validation needed for this structure
     }
 
