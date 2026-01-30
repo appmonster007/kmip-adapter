@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
 
-public class VendorIdentificationXmlSerializer extends AbstractKmipDataTypeXmlSerializer<VendorIdentification, String> {
-
-    public VendorIdentificationXmlSerializer() {
-        super(VendorIdentification::getValue);
-    }
+public class VendorIdentificationXmlSerializer extends AbstractKmipDataTypeXmlSerializer<VendorIdentification> {
 }

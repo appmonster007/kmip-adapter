@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.BatchCount;
 
-public class BatchCountXmlSerializer extends AbstractKmipDataTypeXmlSerializer<BatchCount, Integer> {
-
-    public BatchCountXmlSerializer() {
-        super(BatchCount::getValue);
-    }
+public class BatchCountXmlSerializer extends AbstractKmipDataTypeXmlSerializer<BatchCount> {
 }

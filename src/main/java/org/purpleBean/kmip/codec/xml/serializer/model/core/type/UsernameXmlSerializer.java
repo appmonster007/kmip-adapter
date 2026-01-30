@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.Username;
 
-public class UsernameXmlSerializer extends AbstractKmipDataTypeXmlSerializer<Username, String> {
-
-    public UsernameXmlSerializer() {
-        super(Username::getValue);
-    }
+public class UsernameXmlSerializer extends AbstractKmipDataTypeXmlSerializer<Username> {
 }

@@ -3,11 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.P;
 
-import java.math.BigInteger;
-
-public class PXmlSerializer extends AbstractKmipDataTypeXmlSerializer<P, BigInteger> {
-
-    public PXmlSerializer() {
-        super(P::getValue);
-    }
+public class PXmlSerializer extends AbstractKmipDataTypeXmlSerializer<P> {
 }

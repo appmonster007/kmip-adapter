@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.enumeration.RotateNameType;
 
-public class RotateNameTypeXmlSerializer extends AbstractKmipDataTypeXmlSerializer<RotateNameType, String> {
-
-    public RotateNameTypeXmlSerializer() {
-        super(RotateNameType::getDescription);
-    }
+public class RotateNameTypeXmlSerializer extends AbstractKmipDataTypeXmlSerializer<RotateNameType> {
 }

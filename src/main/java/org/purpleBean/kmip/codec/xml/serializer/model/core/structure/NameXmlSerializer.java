@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipStructureXmlSerializer;
+import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.structure.Name;
 
-public class NameXmlSerializer extends AbstractKmipStructureXmlSerializer<Name> {
+public class NameXmlSerializer extends AbstractKmipDataTypeXmlSerializer<Name> {
 }

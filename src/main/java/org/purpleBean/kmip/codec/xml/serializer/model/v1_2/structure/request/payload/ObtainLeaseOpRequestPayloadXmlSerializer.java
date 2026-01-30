@@ -1,7 +1,7 @@
 package org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.request.payload;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipStructureXmlSerializer;
+import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayload;
 
-public class ObtainLeaseOpRequestPayloadXmlSerializer extends AbstractKmipStructureXmlSerializer<ObtainLeaseOpRequestPayload> {
+public class ObtainLeaseOpRequestPayloadXmlSerializer extends AbstractKmipDataTypeXmlSerializer<ObtainLeaseOpRequestPayload> {
 }

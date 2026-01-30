@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 
-public class ObjectGroupMemberXmlSerializer extends AbstractKmipDataTypeXmlSerializer<ObjectGroupMember, String> {
-
-    public ObjectGroupMemberXmlSerializer() {
-        super(ObjectGroupMember::getDescription);
-    }
+public class ObjectGroupMemberXmlSerializer extends AbstractKmipDataTypeXmlSerializer<ObjectGroupMember> {
 }

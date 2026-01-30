@@ -3,9 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 
-public class StorageStatusMaskXmlSerializer extends AbstractKmipDataTypeXmlSerializer<StorageStatusMask, String> {
-
-    public StorageStatusMaskXmlSerializer() {
-        super(StorageStatusMask::getMaskString);
-    }
+public class StorageStatusMaskXmlSerializer extends AbstractKmipDataTypeXmlSerializer<StorageStatusMask> {
 }

@@ -3,11 +3,5 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.AttestationAssertion;
 
-import java.nio.ByteBuffer;
-
-public class AttestationAssertionXmlSerializer extends AbstractKmipDataTypeXmlSerializer<AttestationAssertion, ByteBuffer> {
-
-    public AttestationAssertionXmlSerializer() {
-        super(AttestationAssertion::getValue);
-    }
+public class AttestationAssertionXmlSerializer extends AbstractKmipDataTypeXmlSerializer<AttestationAssertion> {
 }
