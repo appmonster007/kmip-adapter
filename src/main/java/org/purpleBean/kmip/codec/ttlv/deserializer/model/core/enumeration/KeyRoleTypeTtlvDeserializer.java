@@ -19,7 +19,7 @@ public class KeyRoleTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseria
     }
 
     @Override
-    protected void setValue(KeyRoleType.KeyRoleTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyRoleType.KeyRoleTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(KeyRoleType.fromValue(value));
     }

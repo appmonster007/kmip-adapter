@@ -19,7 +19,7 @@ public class NotifyOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // No fields to deserialize
     }
 

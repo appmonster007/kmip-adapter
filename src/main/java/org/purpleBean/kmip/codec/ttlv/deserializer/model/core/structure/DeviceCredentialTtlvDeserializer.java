@@ -21,8 +21,8 @@ public class DeviceCredentialTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.DEVICE_SERIAL_NUMBER ->
                     builder.deviceSerialNumber(mapper.readValue(p, DeviceSerialNumber.class));

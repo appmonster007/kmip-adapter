@@ -20,7 +20,7 @@ public class TimeStampTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseriali
     }
 
     @Override
-    protected void setValue(TimeStamp.TimeStampBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(TimeStamp.TimeStampBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, OffsetDateTime.class));
     }
 

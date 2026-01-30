@@ -19,7 +19,7 @@ public class UsernameTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializ
     }
 
     @Override
-    protected void setValue(Username.UsernameBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Username.UsernameBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(p, String.class));
     }
 

@@ -20,7 +20,7 @@ public class CredentialValueGenericStructureTtlvDeserializer extends AbstractKmi
     }
 
     @Override
-    protected void setValue(CredentialValueGenericStructure.CredentialValueGenericStructureBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CredentialValueGenericStructure.CredentialValueGenericStructureBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(p, KmipDataType.class));
     }
 

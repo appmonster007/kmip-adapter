@@ -19,7 +19,7 @@ public class AlternativeNameTypeTtlvDeserializer extends AbstractKmipDataTypeTtl
     }
 
     @Override
-    protected void setValue(AlternativeNameType.AlternativeNameTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(AlternativeNameType.AlternativeNameTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(AlternativeNameType.fromValue(value));
     }

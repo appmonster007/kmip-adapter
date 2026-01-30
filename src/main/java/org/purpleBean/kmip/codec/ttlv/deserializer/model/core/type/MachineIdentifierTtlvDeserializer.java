@@ -19,7 +19,7 @@ public class MachineIdentifierTtlvDeserializer extends AbstractKmipDataTypeTtlvD
     }
 
     @Override
-    protected void setValue(MachineIdentifier.MachineIdentifierBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(MachineIdentifier.MachineIdentifierBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

@@ -19,7 +19,7 @@ public class KeyWrapTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseria
     }
 
     @Override
-    protected void setValue(KeyWrapType.KeyWrapTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyWrapType.KeyWrapTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(KeyWrapType.fromValue(value));
     }

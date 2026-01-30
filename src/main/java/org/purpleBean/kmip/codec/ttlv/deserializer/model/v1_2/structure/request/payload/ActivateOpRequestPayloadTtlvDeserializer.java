@@ -21,8 +21,8 @@ public class ActivateOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(ActivateOpRequestPayload.ActivateOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         if (nodeTag.equals(KmipTag.Standard.UNIQUE_IDENTIFIER)) {
             builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
         } else {

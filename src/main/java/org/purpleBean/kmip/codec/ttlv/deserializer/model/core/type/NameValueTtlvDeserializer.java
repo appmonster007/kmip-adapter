@@ -19,7 +19,7 @@ public class NameValueTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseriali
     }
 
     @Override
-    protected void setValue(NameValue.NameValueBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(NameValue.NameValueBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

@@ -22,8 +22,8 @@ public class LinkTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<L
     }
 
     @Override
-    protected void setValue(Link.LinkBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(Link.LinkBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.LINK_TYPE -> builder.linkType(mapper.readValue(p, LinkType.class));
             case KmipTag.Standard.LINKED_OBJECT_IDENTIFIER ->

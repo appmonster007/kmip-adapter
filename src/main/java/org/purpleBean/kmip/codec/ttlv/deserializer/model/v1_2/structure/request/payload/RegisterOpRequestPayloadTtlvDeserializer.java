@@ -23,8 +23,8 @@ public class RegisterOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> {
                 ObjectType objectType = mapper.readValue(p, ObjectType.class);

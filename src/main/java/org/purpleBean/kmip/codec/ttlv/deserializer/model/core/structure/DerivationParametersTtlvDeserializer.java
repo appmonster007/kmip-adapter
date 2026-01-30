@@ -23,8 +23,8 @@ public class DerivationParametersTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(DerivationParameters.DerivationParametersBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(DerivationParameters.DerivationParametersBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS ->
                     builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));

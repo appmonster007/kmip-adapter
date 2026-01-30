@@ -19,7 +19,7 @@ public class ClientRegistrationMethodTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(ClientRegistrationMethod.ClientRegistrationMethodBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ClientRegistrationMethod.ClientRegistrationMethodBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ClientRegistrationMethod.fromValue(value));
     }

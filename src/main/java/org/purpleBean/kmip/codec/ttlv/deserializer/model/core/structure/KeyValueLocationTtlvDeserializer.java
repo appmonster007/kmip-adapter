@@ -22,8 +22,8 @@ public class KeyValueLocationTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(KeyValueLocation.KeyValueLocationBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(KeyValueLocation.KeyValueLocationBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_VALUE_LOCATION_TYPE ->
                     builder.keyValueLocationType(mapper.readValue(p, KeyValueLocationType.class));

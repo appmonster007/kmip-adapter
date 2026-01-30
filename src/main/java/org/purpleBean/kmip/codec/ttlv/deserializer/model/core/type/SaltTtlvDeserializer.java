@@ -19,7 +19,7 @@ public class SaltTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<S
     }
 
     @Override
-    protected void setValue(Salt.SaltBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(Salt.SaltBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

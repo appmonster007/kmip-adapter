@@ -19,7 +19,7 @@ public class PublicKeyTemplateAttributeTtlvDeserializer extends AbstractKmipData
     }
 
     @Override
-    protected void setValue(PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

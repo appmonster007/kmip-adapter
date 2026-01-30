@@ -22,8 +22,8 @@ public class OpaqueObjectTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(OpaqueObject.OpaqueObjectBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(OpaqueObject.OpaqueObjectBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OPAQUE_DATA_TYPE -> builder.opaqueDataType(mapper.readValue(p, OpaqueDataType.class));
             case KmipTag.Standard.OPAQUE_DATA_VALUE ->

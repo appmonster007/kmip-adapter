@@ -19,7 +19,7 @@ public class ValidityIndicatorTtlvDeserializer extends AbstractKmipDataTypeTtlvD
     }
 
     @Override
-    protected void setValue(ValidityIndicator.ValidityIndicatorBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ValidityIndicator.ValidityIndicatorBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ValidityIndicator.fromValue(value));
     }

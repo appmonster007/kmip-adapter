@@ -20,7 +20,7 @@ public class XTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<X, X
     }
 
     @Override
-    protected void setValue(X.XBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(X.XBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(p, BigInteger.class));
     }
 

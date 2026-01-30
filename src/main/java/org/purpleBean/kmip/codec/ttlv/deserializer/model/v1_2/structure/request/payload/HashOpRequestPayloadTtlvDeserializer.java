@@ -22,8 +22,8 @@ public class HashOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(HashOpRequestPayload.HashOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(HashOpRequestPayload.HashOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS ->
                     builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));

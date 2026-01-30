@@ -21,8 +21,8 @@ public class DiscoverVersionsOpRequestPayloadTtlvDeserializer extends AbstractKm
     }
 
     @Override
-    protected void setValue(DiscoverVersionsOpRequestPayload.DiscoverVersionsOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(DiscoverVersionsOpRequestPayload.DiscoverVersionsOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         if (nodeTag.equals(KmipTag.Standard.PROTOCOL_VERSION)) {
             builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));
         } else {

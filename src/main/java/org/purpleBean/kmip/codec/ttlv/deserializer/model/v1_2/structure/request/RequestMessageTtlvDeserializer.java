@@ -22,8 +22,8 @@ public class RequestMessageTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(RequestMessage.RequestMessageBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(RequestMessage.RequestMessageBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.REQUEST_HEADER ->
                     builder.requestHeader(mapper.readValue(p, RequestHeaderStructure.class));

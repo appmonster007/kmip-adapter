@@ -22,7 +22,7 @@ public class AttributeValueEnumerationTtlvDeserializer extends AbstractKmipDataT
     }
 
     @Override
-    protected void setValue(AttributeValueEnumeration.AttributeValueEnumerationBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueEnumeration.AttributeValueEnumerationBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         int value = mapper.readValue(byteBuffer, Integer.class);
         String attributeName = (String) mapper.getAttribute("attributeName");
         if (attributeName == null) {

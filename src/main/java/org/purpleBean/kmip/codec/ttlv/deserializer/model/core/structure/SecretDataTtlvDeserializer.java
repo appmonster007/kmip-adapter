@@ -22,8 +22,8 @@ public class SecretDataTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserial
     }
 
     @Override
-    protected void setValue(SecretData.SecretDataBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(SecretData.SecretDataBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.SECRET_DATA_TYPE -> builder.secretDataType(mapper.readValue(p, SecretDataType.class));
             case KmipTag.Standard.KEY_BLOCK -> builder.keyBlock(mapper.readValue(p, KeyBlock.class));

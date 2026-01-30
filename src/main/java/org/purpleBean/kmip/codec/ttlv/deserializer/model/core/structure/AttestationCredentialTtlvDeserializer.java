@@ -24,8 +24,8 @@ public class AttestationCredentialTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(AttestationCredential.AttestationCredentialBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(AttestationCredential.AttestationCredentialBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NONCE -> builder.nonce(mapper.readValue(p, Nonce.class));
             case KmipTag.Standard.ATTESTATION_TYPE ->

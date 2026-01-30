@@ -19,7 +19,7 @@ public class ObjectTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserial
     }
 
     @Override
-    protected void setValue(ObjectType.ObjectTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ObjectType.ObjectTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ObjectType.fromValue(value));
     }

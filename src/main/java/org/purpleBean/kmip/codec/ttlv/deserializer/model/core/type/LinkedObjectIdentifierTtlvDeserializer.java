@@ -19,7 +19,7 @@ public class LinkedObjectIdentifierTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(LinkedObjectIdentifier.LinkedObjectIdentifierBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(LinkedObjectIdentifier.LinkedObjectIdentifierBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

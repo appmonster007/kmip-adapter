@@ -23,8 +23,8 @@ public class MessageExtensionTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(MessageExtension.MessageExtensionBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(MessageExtension.MessageExtensionBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.VENDOR_IDENTIFICATION ->
                     builder.vendorIdentification(mapper.readValue(p, VendorIdentification.class));

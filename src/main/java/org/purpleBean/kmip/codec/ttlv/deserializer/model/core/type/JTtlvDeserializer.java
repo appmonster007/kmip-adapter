@@ -20,7 +20,7 @@ public class JTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<J, J
     }
 
     @Override
-    protected void setValue(J.JBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(J.JBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, BigInteger.class));
     }
 

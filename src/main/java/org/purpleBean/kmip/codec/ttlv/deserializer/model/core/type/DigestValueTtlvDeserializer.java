@@ -19,7 +19,7 @@ public class DigestValueTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseria
     }
 
     @Override
-    protected void setValue(DigestValue.DigestValueBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(DigestValue.DigestValueBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

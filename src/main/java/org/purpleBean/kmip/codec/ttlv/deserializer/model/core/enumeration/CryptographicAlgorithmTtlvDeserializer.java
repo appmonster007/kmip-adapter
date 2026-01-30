@@ -19,7 +19,7 @@ public class CryptographicAlgorithmTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(CryptographicAlgorithm.CryptographicAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CryptographicAlgorithm.CryptographicAlgorithmBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(CryptographicAlgorithm.fromValue(value));
     }

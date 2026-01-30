@@ -19,7 +19,7 @@ public class CertificateSubjectAlternativeNameTtlvDeserializer extends AbstractK
     }
 
     @Override
-    protected void setValue(CertificateSubjectAlternativeName.CertificateSubjectAlternativeNameBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(CertificateSubjectAlternativeName.CertificateSubjectAlternativeNameBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

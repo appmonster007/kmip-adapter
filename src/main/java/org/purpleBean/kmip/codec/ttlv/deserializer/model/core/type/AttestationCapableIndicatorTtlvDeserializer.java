@@ -19,7 +19,7 @@ public class AttestationCapableIndicatorTtlvDeserializer extends AbstractKmipDat
     }
 
     @Override
-    protected void setValue(AttestationCapableIndicator.AttestationCapableIndicatorBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttestationCapableIndicator.AttestationCapableIndicatorBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Boolean.class));
     }
 

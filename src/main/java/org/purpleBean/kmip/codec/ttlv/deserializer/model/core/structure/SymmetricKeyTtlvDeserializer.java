@@ -21,8 +21,8 @@ public class SymmetricKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(SymmetricKey.SymmetricKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(SymmetricKey.SymmetricKeyBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_BLOCK -> builder.keyBlock(mapper.readValue(p, KeyBlock.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

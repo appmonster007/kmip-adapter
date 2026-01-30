@@ -24,8 +24,8 @@ public class RequestBatchItemTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> {
                 Operation operation = mapper.readValue(p, Operation.class);

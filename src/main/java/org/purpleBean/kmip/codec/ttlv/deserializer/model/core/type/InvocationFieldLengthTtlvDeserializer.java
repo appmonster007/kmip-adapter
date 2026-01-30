@@ -19,7 +19,7 @@ public class InvocationFieldLengthTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(InvocationFieldLength.InvocationFieldLengthBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(InvocationFieldLength.InvocationFieldLengthBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

@@ -20,7 +20,7 @@ public class VendorExtensionTtlvDeserializer extends AbstractKmipDataTypeTtlvDes
     }
 
     @Override
-    protected void setValue(VendorExtension.VendorExtensionBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(VendorExtension.VendorExtensionBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.ttlvDataType(mapper.readValue(p, TtlvDataType.class));
     }
 

@@ -20,7 +20,7 @@ public class ModulusTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserialize
     }
 
     @Override
-    protected void setValue(Modulus.ModulusBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(Modulus.ModulusBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, BigInteger.class));
     }
 

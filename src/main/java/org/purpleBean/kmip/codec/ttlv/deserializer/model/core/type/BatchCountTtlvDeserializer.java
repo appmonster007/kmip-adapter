@@ -19,7 +19,7 @@ public class BatchCountTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserial
     }
 
     @Override
-    protected void setValue(BatchCount.BatchCountBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(BatchCount.BatchCountBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

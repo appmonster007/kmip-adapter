@@ -21,8 +21,8 @@ public class PollOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(PollOpRequestPayload.PollOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(PollOpRequestPayload.PollOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         if (nodeTag.equals(KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE)) {
             builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
         } else {

@@ -19,7 +19,7 @@ public class PutFunctionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseria
     }
 
     @Override
-    protected void setValue(PutFunction.PutFunctionBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(PutFunction.PutFunctionBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(PutFunction.fromValue(value));
     }

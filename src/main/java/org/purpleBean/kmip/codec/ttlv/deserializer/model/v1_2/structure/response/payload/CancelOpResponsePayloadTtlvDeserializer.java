@@ -22,8 +22,8 @@ public class CancelOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(CancelOpResponsePayload.CancelOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(CancelOpResponsePayload.CancelOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE ->
                     builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));

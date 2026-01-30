@@ -19,7 +19,7 @@ public class EphemeralTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseriali
     }
 
     @Override
-    protected void setValue(Ephemeral.EphemeralBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(Ephemeral.EphemeralBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(Ephemeral.fromValue(value));
     }

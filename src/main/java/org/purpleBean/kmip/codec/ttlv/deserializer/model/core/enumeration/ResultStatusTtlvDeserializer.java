@@ -19,7 +19,7 @@ public class ResultStatusTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(ResultStatus.ResultStatusBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ResultStatus.ResultStatusBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(ResultStatus.fromValue(value));
     }

@@ -23,8 +23,8 @@ public class UsageLimitsTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseria
     }
 
     @Override
-    protected void setValue(UsageLimits.UsageLimitsBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(UsageLimits.UsageLimitsBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.USAGE_LIMITS_TOTAL ->
                     builder.usageLimitsTotal(mapper.readValue(p, UsageLimitsTotal.class));

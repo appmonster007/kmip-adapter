@@ -22,8 +22,8 @@ public class CommonTemplateAttributeTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(CommonTemplateAttribute.CommonTemplateAttributeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(CommonTemplateAttribute.CommonTemplateAttributeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NAME -> builder.name(mapper.readValue(p, Name.class));
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(mapper.readValue(p, Attribute.class));

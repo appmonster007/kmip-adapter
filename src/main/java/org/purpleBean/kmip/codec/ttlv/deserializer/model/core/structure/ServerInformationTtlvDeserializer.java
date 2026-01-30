@@ -20,7 +20,7 @@ public class ServerInformationTtlvDeserializer extends AbstractKmipDataTypeTtlvD
     }
 
     @Override
-    protected void setValue(ServerInformation.ServerInformationBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(ServerInformation.ServerInformationBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(p, KmipDataType.class));
     }
 

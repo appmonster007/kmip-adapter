@@ -26,8 +26,8 @@ public class SplitKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializ
     }
 
     @Override
-    protected void setValue(SplitKey.SplitKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(SplitKey.SplitKeyBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.SPLIT_KEY_PARTS -> builder.splitKeyParts(mapper.readValue(p, SplitKeyParts.class));
             case KmipTag.Standard.KEY_PART_IDENTIFIER ->

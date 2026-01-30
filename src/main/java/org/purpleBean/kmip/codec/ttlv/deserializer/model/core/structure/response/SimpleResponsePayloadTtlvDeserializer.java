@@ -19,7 +19,7 @@ public class SimpleResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(SimpleResponsePayload.SimpleResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleResponsePayload.SimpleResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // No fields to set
     }
 

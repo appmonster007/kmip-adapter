@@ -22,8 +22,8 @@ public class ResponseMessageTtlvDeserializer extends AbstractKmipDataTypeTtlvDes
     }
 
     @Override
-    protected void setValue(ResponseMessage.ResponseMessageBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(ResponseMessage.ResponseMessageBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.RESPONSE_HEADER -> builder.responseHeader(mapper.readValue(p, ResponseHeader.class));
             case KmipTag.Standard.BATCH_ITEM -> {

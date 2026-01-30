@@ -22,8 +22,8 @@ public class NonceTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<
     }
 
     @Override
-    protected void setValue(Nonce.NonceBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(Nonce.NonceBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NONCE_ID -> builder.nonceId(mapper.readValue(p, NonceId.class));
             case KmipTag.Standard.NONCE_VALUE -> builder.nonceValue(mapper.readValue(p, NonceValue.class));

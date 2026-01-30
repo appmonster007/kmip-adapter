@@ -19,7 +19,7 @@ public class DigitalSignatureAlgorithmTtlvDeserializer extends AbstractKmipDataT
     }
 
     @Override
-    protected void setValue(DigitalSignatureAlgorithm.DigitalSignatureAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DigitalSignatureAlgorithm.DigitalSignatureAlgorithmBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(DigitalSignatureAlgorithm.fromValue(value));
     }

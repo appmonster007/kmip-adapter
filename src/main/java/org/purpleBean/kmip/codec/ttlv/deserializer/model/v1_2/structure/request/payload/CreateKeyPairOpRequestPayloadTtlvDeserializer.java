@@ -23,8 +23,8 @@ public class CreateKeyPairOpRequestPayloadTtlvDeserializer extends AbstractKmipD
     }
 
     @Override
-    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.COMMON_TEMPLATE_ATTRIBUTE ->
                     builder.commonTemplateAttribute(mapper.readValue(p, CommonTemplateAttribute.class));

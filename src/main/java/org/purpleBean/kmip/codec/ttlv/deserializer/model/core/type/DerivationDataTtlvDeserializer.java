@@ -19,7 +19,7 @@ public class DerivationDataTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(DerivationData.DerivationDataBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(DerivationData.DerivationDataBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

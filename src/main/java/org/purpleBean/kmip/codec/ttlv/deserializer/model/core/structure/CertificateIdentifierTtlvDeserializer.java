@@ -22,8 +22,8 @@ public class CertificateIdentifierTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(CertificateIdentifier.CertificateIdentifierBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(CertificateIdentifier.CertificateIdentifierBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ISSUER -> builder.issuer(mapper.readValue(p, Issuer.class));
             case KmipTag.Standard.SERIAL_NUMBER -> builder.serialNumber(mapper.readValue(p, SerialNumber.class));

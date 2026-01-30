@@ -19,7 +19,7 @@ public class PgpKeyVersionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeser
     }
 
     @Override
-    protected void setValue(PgpKeyVersion.PgpKeyVersionBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(PgpKeyVersion.PgpKeyVersionBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

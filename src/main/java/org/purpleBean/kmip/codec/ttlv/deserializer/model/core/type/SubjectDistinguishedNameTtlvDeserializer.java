@@ -19,7 +19,7 @@ public class SubjectDistinguishedNameTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(SubjectDistinguishedName.SubjectDistinguishedNameBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(SubjectDistinguishedName.SubjectDistinguishedNameBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

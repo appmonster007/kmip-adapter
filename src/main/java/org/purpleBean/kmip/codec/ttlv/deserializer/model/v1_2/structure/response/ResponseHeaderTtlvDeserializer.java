@@ -25,8 +25,8 @@ public class ResponseHeaderTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(ResponseHeader.ResponseHeaderBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(ResponseHeader.ResponseHeaderBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION ->
                     builder.protocolVersion(mapper.readValue(p, ProtocolVersion.class));

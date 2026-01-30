@@ -19,7 +19,7 @@ public class ProtocolVersionMajorTtlvDeserializer extends AbstractKmipDataTypeTt
     }
 
     @Override
-    protected void setValue(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Integer.class));
     }
 

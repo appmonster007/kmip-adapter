@@ -25,8 +25,8 @@ public class SimpleResponseBatchItemTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> {
                 Operation operation = mapper.readValue(p, Operation.class);

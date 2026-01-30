@@ -26,8 +26,8 @@ public class KeyWrappingDataTtlvDeserializer extends AbstractKmipDataTypeTtlvDes
     }
 
     @Override
-    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.WRAPPING_METHOD -> builder.wrappingMethod(mapper.readValue(p, WrappingMethod.class));
             case KmipTag.Standard.ENCRYPTION_KEY_INFORMATION ->

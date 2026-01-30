@@ -22,8 +22,8 @@ public class RevocationReasonTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
     }
 
     @Override
-    protected void setValue(RevocationReason.RevocationReasonBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(RevocationReason.RevocationReasonBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.REVOCATION_REASON_CODE ->
                     builder.revocationReasonCode(mapper.readValue(p, RevocationReasonCode.class));

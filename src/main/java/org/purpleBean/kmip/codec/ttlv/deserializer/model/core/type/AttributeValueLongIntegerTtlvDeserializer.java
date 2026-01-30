@@ -19,7 +19,7 @@ public class AttributeValueLongIntegerTtlvDeserializer extends AbstractKmipDataT
     }
 
     @Override
-    protected void setValue(AttributeValueLongInteger.AttributeValueLongIntegerBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueLongInteger.AttributeValueLongIntegerBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Long.class));
     }
 

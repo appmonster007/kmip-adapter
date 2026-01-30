@@ -19,7 +19,7 @@ public class RotateNameTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(RotateNameType.RotateNameTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RotateNameType.RotateNameTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(RotateNameType.fromValue(value));
     }

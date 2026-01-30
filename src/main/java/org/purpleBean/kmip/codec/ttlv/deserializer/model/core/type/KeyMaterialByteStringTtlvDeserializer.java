@@ -19,7 +19,7 @@ public class KeyMaterialByteStringTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(KeyMaterialByteString.KeyMaterialByteStringBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyMaterialByteString.KeyMaterialByteStringBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, ByteBuffer.class));
     }
 

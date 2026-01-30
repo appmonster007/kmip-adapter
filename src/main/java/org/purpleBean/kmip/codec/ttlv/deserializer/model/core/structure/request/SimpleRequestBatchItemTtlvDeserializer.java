@@ -20,7 +20,7 @@ public class SimpleRequestBatchItemTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         // This structure is a wrapper, the logic is in the parent deserializer
         builder.requestPayloadStructure(mapper.readValue(p, RequestPayloadStructure.class));
     }

@@ -19,7 +19,7 @@ public class KeyCompressionTypeTtlvDeserializer extends AbstractKmipDataTypeTtlv
     }
 
     @Override
-    protected void setValue(KeyCompressionType.KeyCompressionTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(KeyCompressionType.KeyCompressionTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(KeyCompressionType.fromValue(value));
     }

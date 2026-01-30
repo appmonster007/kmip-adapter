@@ -19,7 +19,7 @@ public class CancellationResultTtlvDeserializer extends AbstractKmipDataTypeTtlv
     }
 
     @Override
-    protected void setValue(CancellationResult.CancellationResultBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(CancellationResult.CancellationResultBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(CancellationResult.fromValue(value));
     }

@@ -23,8 +23,8 @@ public class AttributeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseriali
     }
 
     @Override
-    protected void setValue(Attribute.AttributeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(Attribute.AttributeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ATTRIBUTE_NAME -> {
                 AttributeName attributeName = mapper.readValue(p, AttributeName.class);

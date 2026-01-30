@@ -22,8 +22,8 @@ public class KeyValueStructureTtlvDeserializer extends AbstractKmipDataTypeTtlvD
     }
 
     @Override
-    protected void setValue(KeyValueStructure.KeyValueStructureBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(KeyValueStructure.KeyValueStructureBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_MATERIAL -> builder.keyMaterial(mapper.readValue(p, KeyMaterial.class));
             default -> builder.attribute(mapper.readValue(p, KmipAttribute.class));

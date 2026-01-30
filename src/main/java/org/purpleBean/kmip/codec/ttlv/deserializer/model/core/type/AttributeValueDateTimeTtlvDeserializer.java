@@ -20,7 +20,7 @@ public class AttributeValueDateTimeTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(AttributeValueDateTime.AttributeValueDateTimeBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueDateTime.AttributeValueDateTimeBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, OffsetDateTime.class));
     }
 

@@ -22,8 +22,8 @@ public class ApplicationSpecificInformationTtlvDeserializer extends AbstractKmip
     }
 
     @Override
-    protected void setValue(ApplicationSpecificInformation.ApplicationSpecificInformationBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(ApplicationSpecificInformation.ApplicationSpecificInformationBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.APPLICATION_NAMESPACE ->
                     builder.applicationNamespace(mapper.readValue(p, ApplicationNamespace.class));

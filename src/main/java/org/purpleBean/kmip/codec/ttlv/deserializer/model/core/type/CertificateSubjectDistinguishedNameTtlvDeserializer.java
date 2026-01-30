@@ -19,7 +19,7 @@ public class CertificateSubjectDistinguishedNameTtlvDeserializer extends Abstrac
     }
 
     @Override
-    protected void setValue(CertificateSubjectDistinguishedName.CertificateSubjectDistinguishedNameBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(CertificateSubjectDistinguishedName.CertificateSubjectDistinguishedNameBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

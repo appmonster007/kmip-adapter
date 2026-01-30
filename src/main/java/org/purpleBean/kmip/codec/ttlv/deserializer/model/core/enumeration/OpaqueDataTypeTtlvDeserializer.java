@@ -19,7 +19,7 @@ public class OpaqueDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
     }
 
     @Override
-    protected void setValue(OpaqueDataType.OpaqueDataTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(OpaqueDataType.OpaqueDataTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(OpaqueDataType.fromValue(value));
     }

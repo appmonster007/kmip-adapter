@@ -24,8 +24,8 @@ public class LocateOpRequestPayloadTtlvDeserializer extends AbstractKmipDataType
     }
 
     @Override
-    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.MAXIMUM_ITEMS -> builder.maximumItems(mapper.readValue(p, MaximumItems.class));
             case KmipTag.Standard.STORAGE_STATUS_MASK ->

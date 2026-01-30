@@ -19,7 +19,7 @@ public class LinkTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializ
     }
 
     @Override
-    protected void setValue(LinkType.LinkTypeBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(LinkType.LinkTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(LinkType.fromValue(value));
     }

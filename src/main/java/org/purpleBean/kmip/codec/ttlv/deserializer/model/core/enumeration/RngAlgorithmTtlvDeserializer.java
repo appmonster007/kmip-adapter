@@ -19,7 +19,7 @@ public class RngAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
     }
 
     @Override
-    protected void setValue(RngAlgorithm.RngAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(RngAlgorithm.RngAlgorithmBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(RngAlgorithm.fromValue(value));
     }

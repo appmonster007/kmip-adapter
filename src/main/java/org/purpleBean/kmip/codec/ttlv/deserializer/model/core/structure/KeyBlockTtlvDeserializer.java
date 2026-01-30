@@ -27,8 +27,8 @@ public class KeyBlockTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializ
     }
 
     @Override
-    protected void setValue(KeyBlock.KeyBlockBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(KeyBlock.KeyBlockBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_FORMAT_TYPE -> {
                 KeyFormatType keyFormatType = mapper.readValue(p, KeyFormatType.class);

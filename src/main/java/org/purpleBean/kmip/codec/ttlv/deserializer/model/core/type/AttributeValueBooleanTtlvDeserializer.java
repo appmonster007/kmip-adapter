@@ -19,7 +19,7 @@ public class AttributeValueBooleanTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(AttributeValueBoolean.AttributeValueBooleanBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(AttributeValueBoolean.AttributeValueBooleanBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, Boolean.class));
     }
 

@@ -19,7 +19,7 @@ public class DrbgAlgorithmTtlvDeserializer extends AbstractKmipDataTypeTtlvDeser
     }
 
     @Override
-    protected void setValue(DrbgAlgorithm.DrbgAlgorithmBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    protected void setValue(DrbgAlgorithm.DrbgAlgorithmBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         Integer value = mapper.readValue(p, Integer.class);
         builder.value(DrbgAlgorithm.fromValue(value));
     }

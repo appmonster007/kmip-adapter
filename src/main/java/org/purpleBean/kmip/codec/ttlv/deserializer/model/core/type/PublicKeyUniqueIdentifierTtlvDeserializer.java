@@ -19,7 +19,7 @@ public class PublicKeyUniqueIdentifierTtlvDeserializer extends AbstractKmipDataT
     }
 
     @Override
-    protected void setValue(PublicKeyUniqueIdentifier.PublicKeyUniqueIdentifierBuilder builder, byte[] tagBytes, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    protected void setValue(PublicKeyUniqueIdentifier.PublicKeyUniqueIdentifierBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
         builder.value(mapper.readValue(byteBuffer, String.class));
     }
 

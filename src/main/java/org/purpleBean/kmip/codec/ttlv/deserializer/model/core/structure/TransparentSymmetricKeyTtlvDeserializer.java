@@ -21,8 +21,8 @@ public class TransparentSymmetricKeyTtlvDeserializer extends AbstractKmipDataTyp
     }
 
     @Override
-    protected void setValue(TransparentSymmetricKey.TransparentSymmetricKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(TransparentSymmetricKey.TransparentSymmetricKeyBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY -> builder.key(mapper.readValue(p, Key.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

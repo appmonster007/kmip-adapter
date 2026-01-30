@@ -22,8 +22,8 @@ public class AlternativeNameTtlvDeserializer extends AbstractKmipDataTypeTtlvDes
     }
 
     @Override
-    protected void setValue(AlternativeName.AlternativeNameBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(AlternativeName.AlternativeNameBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ALTERNATIVE_NAME_TYPE ->
                     builder.alternativeNameType(mapper.readValue(p, AlternativeNameType.class));

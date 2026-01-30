@@ -21,8 +21,8 @@ public class TransparentRsaPrivateKeyTtlvDeserializer extends AbstractKmipDataTy
     }
 
     @Override
-    protected void setValue(TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.MODULUS -> builder.modulus(mapper.readValue(p, Modulus.class));
             case KmipTag.Standard.PRIVATE_EXPONENT ->

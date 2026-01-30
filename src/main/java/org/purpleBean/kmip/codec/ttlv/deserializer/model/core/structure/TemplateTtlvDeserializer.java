@@ -21,8 +21,8 @@ public class TemplateTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializ
     }
 
     @Override
-    protected void setValue(Template.TemplateBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(Template.TemplateBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(mapper.readValue(p, Attribute.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

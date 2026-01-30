@@ -21,8 +21,8 @@ public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeT
     }
 
     @Override
-    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, byte[] tagBytes, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tagBytes);
+    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         if (nodeTag.equals(KmipTag.Standard.DATA)) {
             builder.data(mapper.readValue(p, DataByteString.class));
         } else {
