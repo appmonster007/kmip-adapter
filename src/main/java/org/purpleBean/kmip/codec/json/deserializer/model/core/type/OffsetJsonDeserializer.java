@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.Offset;
 
-public class OffsetJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Offset, Integer> {
+import java.io.IOException;
+
+public class OffsetJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Offset, Offset.OffsetBuilder> {
 
     public OffsetJsonDeserializer() {
-        super(Offset.kmipTag, Offset.encodingType, Integer.class, value -> Offset.builder().value(value).build());
+        super(Offset.kmipTag, Offset.encodingType);
+    }
+
+    @Override
+    protected Offset.OffsetBuilder createBuilder() {
+        return Offset.builder();
+    }
+
+    @Override
+    protected void setValue(Offset.OffsetBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, Integer.class));
+    }
+
+    @Override
+    protected Offset build(Offset.OffsetBuilder builder) {
+        return builder.build();
     }
 }

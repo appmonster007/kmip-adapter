@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.ServerInformation;
 
 import java.io.IOException;
 
-public class ServerInformationJsonDeserializer extends AbstractKmipStructureJsonDeserializer<ServerInformation, ServerInformation.ServerInformationBuilder> {
+public class ServerInformationJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ServerInformation, ServerInformation.ServerInformationBuilder> {
 
     public ServerInformationJsonDeserializer() {
         super(ServerInformation.kmipTag, ServerInformation.encodingType);
@@ -21,7 +21,8 @@ public class ServerInformationJsonDeserializer extends AbstractKmipStructureJson
     }
 
     @Override
-    protected void setValue(ServerInformation.ServerInformationBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ServerInformation.ServerInformationBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         builder.value(ctxt.readValue(p, KmipDataType.class));
     }
 

@@ -4,13 +4,13 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.CredentialValue;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.CredentialType;
 import org.purpleBean.kmip.model.core.structure.Credential;
 
 import java.io.IOException;
 
-public class CredentialJsonDeserializer extends AbstractKmipStructureJsonDeserializer<Credential, Credential.CredentialBuilder> {
+public class CredentialJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Credential, Credential.CredentialBuilder> {
 
     public CredentialJsonDeserializer() {
         super(Credential.kmipTag, Credential.encodingType);
@@ -22,7 +22,8 @@ public class CredentialJsonDeserializer extends AbstractKmipStructureJsonDeseria
     }
 
     @Override
-    protected void setValue(Credential.CredentialBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Credential.CredentialBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.CREDENTIAL_TYPE -> {
                 CredentialType credentialType = ctxt.readValue(p, CredentialType.class);

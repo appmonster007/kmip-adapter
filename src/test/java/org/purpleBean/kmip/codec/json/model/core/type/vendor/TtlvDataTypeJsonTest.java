@@ -2,13 +2,18 @@ package org.purpleBean.kmip.codec.json.model.core.type.vendor;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.testcontainers.shaded.org.checkerframework.checker.units.qual.K;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @DisplayName("TtlvDataType Json Serialization Tests")
 class TtlvDataTypeJsonTest extends AbstractJsonSerializationTestSuite<TtlvDataType> {
@@ -34,10 +39,21 @@ class TtlvDataTypeJsonTest extends AbstractJsonSerializationTestSuite<TtlvDataTy
 
     @Override
     protected TtlvDataType createVariant() {
+        List<KmipDataType> fields = new ArrayList<>();
+        fields.add(TtlvDataType.builder()
+                .kmipTag(KmipTag.register(0x540125, "0x540125", Set.of(KmipSpec.V1_2)).inst())
+                .encodingType(EncodingType.TEXT_STRING)
+                .value("test-value-a")
+                .build());
+        fields.add(TtlvDataType.builder()
+                .kmipTag(KmipTag.register(0x540126, "0x540126", Set.of(KmipSpec.V1_2)).inst())
+                .encodingType(EncodingType.TEXT_STRING)
+                .value("test-value-b")
+                .build());
         return TtlvDataType.builder()
-                .kmipTag(KmipTag.Standard.ATTRIBUTE_NAME.inst())
-                .encodingType(EncodingType.BYTE_STRING)
-                .value(ByteBuffer.wrap("test-value".getBytes()))
+                .kmipTag(KmipTag.register(0x540124, "0x540124", Set.of(KmipSpec.V1_2)).inst())
+                .encodingType(EncodingType.STRUCTURE)
+                .value(fields.toArray(KmipDataType[]::new))
                 .build();
     }
 }

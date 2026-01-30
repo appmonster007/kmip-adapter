@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.CertificateType;
 import org.purpleBean.kmip.model.core.structure.Certificate;
 import org.purpleBean.kmip.model.core.type.CertificateValue;
 
 import java.io.IOException;
 
-public class CertificateJsonDeserializer extends AbstractKmipStructureJsonDeserializer<Certificate, Certificate.CertificateBuilder> {
+public class CertificateJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Certificate, Certificate.CertificateBuilder> {
 
     public CertificateJsonDeserializer() {
         super(Certificate.kmipTag, Certificate.encodingType);
@@ -22,7 +22,8 @@ public class CertificateJsonDeserializer extends AbstractKmipStructureJsonDeseri
     }
 
     @Override
-    protected void setValue(Certificate.CertificateBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Certificate.CertificateBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.CERTIFICATE_TYPE -> builder.certificateType(ctxt.readValue(p, CertificateType.class));
             case KmipTag.Standard.CERTIFICATE_VALUE ->

@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.structure.Name;
 import org.purpleBean.kmip.model.core.type.NameValue;
 
 import java.io.IOException;
 
-public class NameJsonDeserializer extends AbstractKmipStructureJsonDeserializer<Name, Name.NameBuilder> {
+public class NameJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Name, Name.NameBuilder> {
 
     public NameJsonDeserializer() {
         super(Name.kmipTag, Name.encodingType);
@@ -22,7 +22,8 @@ public class NameJsonDeserializer extends AbstractKmipStructureJsonDeserializer<
     }
 
     @Override
-    protected void setValue(Name.NameBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Name.NameBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NAME_VALUE -> builder.nameValue(ctxt.readValue(p, NameValue.class));
             case KmipTag.Standard.NAME_TYPE -> builder.nameType(ctxt.readValue(p, NameType.class));

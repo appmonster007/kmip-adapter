@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.EndpointRole;
 
-public class EndpointRoleJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<EndpointRole, String> {
+import java.io.IOException;
+
+public class EndpointRoleJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<EndpointRole, EndpointRole.EndpointRoleBuilder> {
 
     public EndpointRoleJsonDeserializer() {
-        super(EndpointRole.kmipTag, EndpointRole.encodingType, String.class, value -> EndpointRole.fromName(value).inst());
+        super(EndpointRole.kmipTag, EndpointRole.encodingType);
+    }
+
+    @Override
+    protected EndpointRole.EndpointRoleBuilder createBuilder() {
+        return EndpointRole.builder();
+    }
+
+    @Override
+    protected void setValue(EndpointRole.EndpointRoleBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(EndpointRole.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected EndpointRole build(EndpointRole.EndpointRoleBuilder builder) {
+        return builder.build();
     }
 }

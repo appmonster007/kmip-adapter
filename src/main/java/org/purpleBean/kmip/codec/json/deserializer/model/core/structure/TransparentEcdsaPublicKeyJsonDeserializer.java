@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.TransparentEcdsaPublicKey;
 import org.purpleBean.kmip.model.core.type.QString;
 
 import java.io.IOException;
 
-public class TransparentEcdsaPublicKeyJsonDeserializer extends AbstractKmipStructureJsonDeserializer<TransparentEcdsaPublicKey, TransparentEcdsaPublicKey.TransparentEcdsaPublicKeyBuilder> {
+public class TransparentEcdsaPublicKeyJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<TransparentEcdsaPublicKey, TransparentEcdsaPublicKey.TransparentEcdsaPublicKeyBuilder> {
 
     public TransparentEcdsaPublicKeyJsonDeserializer() {
         super(TransparentEcdsaPublicKey.kmipTag, TransparentEcdsaPublicKey.encodingType);
@@ -22,7 +22,8 @@ public class TransparentEcdsaPublicKeyJsonDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(TransparentEcdsaPublicKey.TransparentEcdsaPublicKeyBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(TransparentEcdsaPublicKey.TransparentEcdsaPublicKeyBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.RECOMMENDED_CURVE ->
                     builder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));

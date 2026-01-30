@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 
 import java.io.IOException;
 
-public class ProtocolVersionJsonDeserializer extends AbstractKmipStructureJsonDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
+public class ProtocolVersionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
 
     public ProtocolVersionJsonDeserializer() {
         super(ProtocolVersion.kmipTag, ProtocolVersion.encodingType);
@@ -22,7 +22,8 @@ public class ProtocolVersionJsonDeserializer extends AbstractKmipStructureJsonDe
     }
 
     @Override
-    protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ProtocolVersion.ProtocolVersionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION_MAJOR ->
                     builder.protocolVersionMajor(ctxt.readValue(p, ProtocolVersionMajor.class));

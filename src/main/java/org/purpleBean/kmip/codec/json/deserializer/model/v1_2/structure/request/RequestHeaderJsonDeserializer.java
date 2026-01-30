@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.AttestationType;
 import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 import org.purpleBean.kmip.model.core.structure.Authentication;
@@ -13,7 +13,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
 
 import java.io.IOException;
 
-public class RequestHeaderJsonDeserializer extends AbstractKmipStructureJsonDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
+public class RequestHeaderJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
 
     public RequestHeaderJsonDeserializer() {
         super(RequestHeader.kmipTag, RequestHeader.encodingType);
@@ -25,7 +25,8 @@ public class RequestHeaderJsonDeserializer extends AbstractKmipStructureJsonDese
     }
 
     @Override
-    protected void setValue(RequestHeader.RequestHeaderBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(RequestHeader.RequestHeaderBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.PROTOCOL_VERSION -> builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
             case KmipTag.Standard.MAXIMUM_RESPONSE_SIZE ->

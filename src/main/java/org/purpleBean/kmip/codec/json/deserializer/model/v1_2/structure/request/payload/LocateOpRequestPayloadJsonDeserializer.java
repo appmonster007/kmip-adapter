@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.MaximumItems;
@@ -12,7 +12,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestP
 
 import java.io.IOException;
 
-public class LocateOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
+public class LocateOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
 
     public LocateOpRequestPayloadJsonDeserializer() {
         super(LocateOpRequestPayload.kmipTag, LocateOpRequestPayload.encodingType);
@@ -24,7 +24,8 @@ public class LocateOpRequestPayloadJsonDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.MAXIMUM_ITEMS -> builder.maximumItems(ctxt.readValue(p, MaximumItems.class));
             case KmipTag.Standard.STORAGE_STATUS_MASK ->

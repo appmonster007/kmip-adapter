@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
 
-public class PaddingMethodJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<PaddingMethod, String> {
+import java.io.IOException;
+
+public class PaddingMethodJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<PaddingMethod, PaddingMethod.PaddingMethodBuilder> {
 
     public PaddingMethodJsonDeserializer() {
-        super(PaddingMethod.kmipTag, PaddingMethod.encodingType, String.class, value -> PaddingMethod.fromName(value).inst());
+        super(PaddingMethod.kmipTag, PaddingMethod.encodingType);
+    }
+
+    @Override
+    protected PaddingMethod.PaddingMethodBuilder createBuilder() {
+        return PaddingMethod.builder();
+    }
+
+    @Override
+    protected void setValue(PaddingMethod.PaddingMethodBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(PaddingMethod.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected PaddingMethod build(PaddingMethod.PaddingMethodBuilder builder) {
+        return builder.build();
     }
 }

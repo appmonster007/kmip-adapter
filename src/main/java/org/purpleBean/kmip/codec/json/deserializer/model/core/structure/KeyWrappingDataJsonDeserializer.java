@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
 import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
 import org.purpleBean.kmip.model.core.structure.EncryptionKeyInformation;
@@ -14,7 +14,7 @@ import org.purpleBean.kmip.model.core.type.MACSignature;
 
 import java.io.IOException;
 
-public class KeyWrappingDataJsonDeserializer extends AbstractKmipStructureJsonDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {
+public class KeyWrappingDataJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {
 
     public KeyWrappingDataJsonDeserializer() {
         super(KeyWrappingData.kmipTag, KeyWrappingData.encodingType);
@@ -26,7 +26,8 @@ public class KeyWrappingDataJsonDeserializer extends AbstractKmipStructureJsonDe
     }
 
     @Override
-    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(KeyWrappingData.KeyWrappingDataBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.WRAPPING_METHOD -> builder.wrappingMethod(ctxt.readValue(p, WrappingMethod.class));
             case KmipTag.Standard.ENCRYPTION_KEY_INFORMATION ->

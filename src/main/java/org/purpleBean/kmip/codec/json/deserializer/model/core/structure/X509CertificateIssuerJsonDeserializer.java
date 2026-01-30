@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.X509CertificateIssuer;
 import org.purpleBean.kmip.model.core.type.IssuerAlternativeName;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
 
 import java.io.IOException;
 
-public class X509CertificateIssuerJsonDeserializer extends AbstractKmipStructureJsonDeserializer<X509CertificateIssuer, X509CertificateIssuer.X509CertificateIssuerBuilder> {
+public class X509CertificateIssuerJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<X509CertificateIssuer, X509CertificateIssuer.X509CertificateIssuerBuilder> {
 
     public X509CertificateIssuerJsonDeserializer() {
         super(X509CertificateIssuer.kmipTag, X509CertificateIssuer.encodingType);
@@ -22,7 +22,8 @@ public class X509CertificateIssuerJsonDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(X509CertificateIssuer.X509CertificateIssuerBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(X509CertificateIssuer.X509CertificateIssuerBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ISSUER_DISTINGUISHED_NAME ->
                     builder.issuerDistinguishedName(ctxt.readValue(p, IssuerDistinguishedName.class));

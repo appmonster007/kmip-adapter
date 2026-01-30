@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * KMIP TtlvDataType dataType.
  */
@@ -49,5 +52,39 @@ public class TtlvDataType implements KmipDataType {
     @Override
     public boolean isSupported() {
         return kmipTag.isSupported();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TtlvDataType that)) return false;
+        return Objects.equals(kmipTag, that.kmipTag) &&
+                encodingType == that.encodingType &&
+                deepEqualsValue(this.value, that.value);
+    }
+
+    private boolean deepEqualsValue(Object v1, Object v2) {
+        if (v1 == v2) return true;
+        if (v1 == null || v2 == null) return false;
+
+        // Handle KmipDataType[] arrays
+        if (v1 instanceof KmipDataType[] && v2 instanceof KmipDataType[]) {
+            return Arrays.deepEquals((KmipDataType[]) v1, (KmipDataType[]) v2);
+        }
+
+        // Fallback to standard equals (for other types)
+        return Objects.equals(v1, v2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(kmipTag, encodingType, hashCodeValue(value));
+    }
+
+    private int hashCodeValue(Object value) {
+        if (value instanceof KmipDataType[] kmipDataTypes) {
+            return Arrays.hashCode(kmipDataTypes);
+        }
+        return Objects.hashCode(value);
     }
 }

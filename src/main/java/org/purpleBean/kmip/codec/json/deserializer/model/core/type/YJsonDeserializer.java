@@ -1,13 +1,31 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.Y;
 
+import java.io.IOException;
 import java.math.BigInteger;
 
-public class YJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Y, BigInteger> {
+public class YJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Y, Y.YBuilder> {
 
     public YJsonDeserializer() {
-        super(Y.kmipTag, Y.encodingType, BigInteger.class, value -> Y.builder().value(value).build());
+        super(Y.kmipTag, Y.encodingType);
+    }
+
+    @Override
+    protected Y.YBuilder createBuilder() {
+        return Y.builder();
+    }
+
+    @Override
+    protected void setValue(Y.YBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, BigInteger.class));
+    }
+
+    @Override
+    protected Y build(Y.YBuilder builder) {
+        return builder.build();
     }
 }

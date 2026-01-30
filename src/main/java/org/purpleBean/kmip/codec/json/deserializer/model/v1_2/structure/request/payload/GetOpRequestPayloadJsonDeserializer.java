@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
@@ -12,7 +12,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayl
 
 import java.io.IOException;
 
-public class GetOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<GetOpRequestPayload, GetOpRequestPayload.GetOpRequestPayloadBuilder> {
+public class GetOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<GetOpRequestPayload, GetOpRequestPayload.GetOpRequestPayloadBuilder> {
 
     public GetOpRequestPayloadJsonDeserializer() {
         super(GetOpRequestPayload.kmipTag, GetOpRequestPayload.encodingType);
@@ -24,7 +24,8 @@ public class GetOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJs
     }
 
     @Override
-    protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

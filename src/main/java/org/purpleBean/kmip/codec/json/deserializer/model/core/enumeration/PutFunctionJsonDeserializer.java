@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 
-public class PutFunctionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<PutFunction, String> {
+import java.io.IOException;
+
+public class PutFunctionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<PutFunction, PutFunction.PutFunctionBuilder> {
 
     public PutFunctionJsonDeserializer() {
-        super(PutFunction.kmipTag, PutFunction.encodingType, String.class, value -> PutFunction.fromName(value).inst());
+        super(PutFunction.kmipTag, PutFunction.encodingType);
+    }
+
+    @Override
+    protected PutFunction.PutFunctionBuilder createBuilder() {
+        return PutFunction.builder();
+    }
+
+    @Override
+    protected void setValue(PutFunction.PutFunctionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(PutFunction.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected PutFunction build(PutFunction.PutFunctionBuilder builder) {
+        return builder.build();
     }
 }

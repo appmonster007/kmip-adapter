@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
 
-public class AttributeIndexJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<AttributeIndex, Integer> {
+import java.io.IOException;
+
+public class AttributeIndexJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<AttributeIndex, AttributeIndex.AttributeIndexBuilder> {
 
     public AttributeIndexJsonDeserializer() {
-        super(AttributeIndex.kmipTag, AttributeIndex.encodingType, Integer.class, value -> AttributeIndex.builder().value(value).build());
+        super(AttributeIndex.kmipTag, AttributeIndex.encodingType);
+    }
+
+    @Override
+    protected AttributeIndex.AttributeIndexBuilder createBuilder() {
+        return AttributeIndex.builder();
+    }
+
+    @Override
+    protected void setValue(AttributeIndex.AttributeIndexBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, Integer.class));
+    }
+
+    @Override
+    protected AttributeIndex build(AttributeIndex.AttributeIndexBuilder builder) {
+        return builder.build();
     }
 }

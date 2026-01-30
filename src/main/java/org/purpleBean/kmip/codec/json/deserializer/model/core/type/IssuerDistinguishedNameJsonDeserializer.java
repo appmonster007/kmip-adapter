@@ -1,13 +1,31 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class IssuerDistinguishedNameJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<IssuerDistinguishedName, ByteBuffer> {
+public class IssuerDistinguishedNameJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<IssuerDistinguishedName, IssuerDistinguishedName.IssuerDistinguishedNameBuilder> {
 
     public IssuerDistinguishedNameJsonDeserializer() {
-        super(IssuerDistinguishedName.kmipTag, IssuerDistinguishedName.encodingType, ByteBuffer.class, value -> IssuerDistinguishedName.builder().value(value).build());
+        super(IssuerDistinguishedName.kmipTag, IssuerDistinguishedName.encodingType);
+    }
+
+    @Override
+    protected IssuerDistinguishedName.IssuerDistinguishedNameBuilder createBuilder() {
+        return IssuerDistinguishedName.builder();
+    }
+
+    @Override
+    protected void setValue(IssuerDistinguishedName.IssuerDistinguishedNameBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, ByteBuffer.class));
+    }
+
+    @Override
+    protected IssuerDistinguishedName build(IssuerDistinguishedName.IssuerDistinguishedNameBuilder builder) {
+        return builder.build();
     }
 }

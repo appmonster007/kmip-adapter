@@ -4,14 +4,14 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 
 import java.io.IOException;
 
-public class AttributeJsonDeserializer extends AbstractKmipStructureJsonDeserializer<Attribute, Attribute.AttributeBuilder> {
+public class AttributeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Attribute, Attribute.AttributeBuilder> {
 
     public AttributeJsonDeserializer() {
         super(Attribute.kmipTag, Attribute.encodingType);
@@ -23,7 +23,8 @@ public class AttributeJsonDeserializer extends AbstractKmipStructureJsonDeserial
     }
 
     @Override
-    protected void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Attribute.AttributeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ATTRIBUTE_NAME -> {
                 AttributeName attributeName = ctxt.readValue(p, AttributeName.class);

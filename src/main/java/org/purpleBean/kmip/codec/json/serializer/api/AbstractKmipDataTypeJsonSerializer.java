@@ -25,8 +25,14 @@ public abstract class AbstractKmipDataTypeJsonSerializer<T extends KmipDataType>
         }
 
         gen.writeStartObject();
-//        gen.writeObjectField("tag", value.getKmipTag().getDescription());
-        gen.writeObject(obj.getKmipTag());
+
+        KmipTag kmipTag = obj.getKmipTag();
+        if (kmipTag.isCustom()) {
+            gen.writeStringField("tag", kmipTag.getTagHexString());
+            gen.writeStringField("name", kmipTag.getDescription());
+        } else {
+            gen.writeStringField("tag", kmipTag.getDescription());
+        }
         gen.writeStringField("type", obj.getEncodingType().getDescription());
 
         gen.writeFieldName("value");

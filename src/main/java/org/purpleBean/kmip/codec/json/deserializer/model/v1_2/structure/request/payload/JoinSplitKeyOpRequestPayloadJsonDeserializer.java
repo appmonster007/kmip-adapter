@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.SecretDataType;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
@@ -12,7 +12,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.JoinSplitKeyOpRe
 
 import java.io.IOException;
 
-public class JoinSplitKeyOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<JoinSplitKeyOpRequestPayload, JoinSplitKeyOpRequestPayload.JoinSplitKeyOpRequestPayloadBuilder> {
+public class JoinSplitKeyOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<JoinSplitKeyOpRequestPayload, JoinSplitKeyOpRequestPayload.JoinSplitKeyOpRequestPayloadBuilder> {
 
     public JoinSplitKeyOpRequestPayloadJsonDeserializer() {
         super(JoinSplitKeyOpRequestPayload.kmipTag, JoinSplitKeyOpRequestPayload.encodingType);
@@ -24,7 +24,8 @@ public class JoinSplitKeyOpRequestPayloadJsonDeserializer extends AbstractKmipSt
     }
 
     @Override
-    protected void setValue(JoinSplitKeyOpRequestPayload.JoinSplitKeyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(JoinSplitKeyOpRequestPayload.JoinSplitKeyOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

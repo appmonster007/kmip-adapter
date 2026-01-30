@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ResultReason;
 import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
@@ -16,7 +16,7 @@ import org.purpleBean.kmip.model.v1_2.structure.response.ResponseBatchItem;
 
 import java.io.IOException;
 
-public class ResponseBatchItemJsonDeserializer extends AbstractKmipStructureJsonDeserializer<ResponseBatchItem, ResponseBatchItem.ResponseBatchItemBuilder> {
+public class ResponseBatchItemJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ResponseBatchItem, ResponseBatchItem.ResponseBatchItemBuilder> {
 
     public ResponseBatchItemJsonDeserializer() {
         super(ResponseBatchItem.kmipTag, ResponseBatchItem.encodingType);
@@ -28,7 +28,8 @@ public class ResponseBatchItemJsonDeserializer extends AbstractKmipStructureJson
     }
 
     @Override
-    protected void setValue(ResponseBatchItem.ResponseBatchItemBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ResponseBatchItem.ResponseBatchItemBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OPERATION -> {
                 Operation operation = ctxt.readValue(p, Operation.class);

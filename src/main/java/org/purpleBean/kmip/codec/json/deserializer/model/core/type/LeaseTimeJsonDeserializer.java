@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.LeaseTime;
 
-public class LeaseTimeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<LeaseTime, Integer> {
+import java.io.IOException;
+
+public class LeaseTimeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<LeaseTime, LeaseTime.LeaseTimeBuilder> {
 
     public LeaseTimeJsonDeserializer() {
-        super(LeaseTime.kmipTag, LeaseTime.encodingType, Integer.class, value -> LeaseTime.builder().value(value).build());
+        super(LeaseTime.kmipTag, LeaseTime.encodingType);
+    }
+
+    @Override
+    protected LeaseTime.LeaseTimeBuilder createBuilder() {
+        return LeaseTime.builder();
+    }
+
+    @Override
+    protected void setValue(LeaseTime.LeaseTimeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, Integer.class));
+    }
+
+    @Override
+    protected LeaseTime build(LeaseTime.LeaseTimeBuilder builder) {
+        return builder.build();
     }
 }

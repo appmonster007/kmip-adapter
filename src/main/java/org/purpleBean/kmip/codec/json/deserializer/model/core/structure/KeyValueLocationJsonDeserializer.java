@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.model.core.structure.KeyValueLocation;
 import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 
 import java.io.IOException;
 
-public class KeyValueLocationJsonDeserializer extends AbstractKmipStructureJsonDeserializer<KeyValueLocation, KeyValueLocation.KeyValueLocationBuilder> {
+public class KeyValueLocationJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyValueLocation, KeyValueLocation.KeyValueLocationBuilder> {
 
     public KeyValueLocationJsonDeserializer() {
         super(KeyValueLocation.kmipTag, KeyValueLocation.encodingType);
@@ -22,7 +22,8 @@ public class KeyValueLocationJsonDeserializer extends AbstractKmipStructureJsonD
     }
 
     @Override
-    protected void setValue(KeyValueLocation.KeyValueLocationBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(KeyValueLocation.KeyValueLocationBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_VALUE_LOCATION_TYPE ->
                     builder.keyValueLocationType(ctxt.readValue(p, KeyValueLocationType.class));

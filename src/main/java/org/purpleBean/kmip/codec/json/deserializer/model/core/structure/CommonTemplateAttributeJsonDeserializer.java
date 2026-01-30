@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.Name;
 
 import java.io.IOException;
 
-public class CommonTemplateAttributeJsonDeserializer extends AbstractKmipStructureJsonDeserializer<CommonTemplateAttribute, CommonTemplateAttribute.CommonTemplateAttributeBuilder> {
+public class CommonTemplateAttributeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<CommonTemplateAttribute, CommonTemplateAttribute.CommonTemplateAttributeBuilder> {
 
     public CommonTemplateAttributeJsonDeserializer() {
         super(CommonTemplateAttribute.kmipTag, CommonTemplateAttribute.encodingType);
@@ -22,7 +22,8 @@ public class CommonTemplateAttributeJsonDeserializer extends AbstractKmipStructu
     }
 
     @Override
-    protected void setValue(CommonTemplateAttribute.CommonTemplateAttributeBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(CommonTemplateAttribute.CommonTemplateAttributeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NAME -> builder.name(ctxt.readValue(p, Name.class));
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(ctxt.readValue(p, Attribute.class));

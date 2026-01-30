@@ -3,12 +3,12 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.respons
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.NotifyOpResponsePayload;
 
 import java.io.IOException;
 
-public class NotifyOpResponsePayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<NotifyOpResponsePayload, NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder> {
+public class NotifyOpResponsePayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<NotifyOpResponsePayload, NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder> {
 
     public NotifyOpResponsePayloadJsonDeserializer() {
         super(NotifyOpResponsePayload.kmipTag, NotifyOpResponsePayload.encodingType);
@@ -20,8 +20,9 @@ public class NotifyOpResponsePayloadJsonDeserializer extends AbstractKmipStructu
     }
 
     @Override
-    protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // No fields to deserialize
+    protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+// No fields to deserialize
     }
 
     @Override

@@ -3,13 +3,13 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.DeviceCredential;
 import org.purpleBean.kmip.model.core.type.*;
 
 import java.io.IOException;
 
-public class DeviceCredentialJsonDeserializer extends AbstractKmipStructureJsonDeserializer<DeviceCredential, DeviceCredential.DeviceCredentialBuilder> {
+public class DeviceCredentialJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<DeviceCredential, DeviceCredential.DeviceCredentialBuilder> {
 
     public DeviceCredentialJsonDeserializer() {
         super(DeviceCredential.kmipTag, DeviceCredential.encodingType);
@@ -21,7 +21,8 @@ public class DeviceCredentialJsonDeserializer extends AbstractKmipStructureJsonD
     }
 
     @Override
-    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(DeviceCredential.DeviceCredentialBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.DEVICE_SERIAL_NUMBER ->
                     builder.deviceSerialNumber(ctxt.readValue(p, DeviceSerialNumber.class));

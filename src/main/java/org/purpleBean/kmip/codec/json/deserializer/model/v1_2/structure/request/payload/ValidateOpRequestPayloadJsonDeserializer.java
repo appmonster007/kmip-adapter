@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.Certificate;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.core.type.ValidityDate;
@@ -11,7 +11,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ValidateOpReques
 
 import java.io.IOException;
 
-public class ValidateOpRequestPayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<ValidateOpRequestPayload, ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder> {
+public class ValidateOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ValidateOpRequestPayload, ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder> {
 
     public ValidateOpRequestPayloadJsonDeserializer() {
         super(ValidateOpRequestPayload.kmipTag, ValidateOpRequestPayload.encodingType);
@@ -23,7 +23,8 @@ public class ValidateOpRequestPayloadJsonDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.CERTIFICATE -> builder.certificate(ctxt.readValue(p, Certificate.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

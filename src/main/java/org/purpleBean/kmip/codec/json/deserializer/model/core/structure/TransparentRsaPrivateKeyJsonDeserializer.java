@@ -3,13 +3,13 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.TransparentRsaPrivateKey;
 import org.purpleBean.kmip.model.core.type.*;
 
 import java.io.IOException;
 
-public class TransparentRsaPrivateKeyJsonDeserializer extends AbstractKmipStructureJsonDeserializer<TransparentRsaPrivateKey, TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder> {
+public class TransparentRsaPrivateKeyJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<TransparentRsaPrivateKey, TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder> {
 
     public TransparentRsaPrivateKeyJsonDeserializer() {
         super(TransparentRsaPrivateKey.kmipTag, TransparentRsaPrivateKey.encodingType);
@@ -21,7 +21,8 @@ public class TransparentRsaPrivateKeyJsonDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.MODULUS -> builder.modulus(ctxt.readValue(p, Modulus.class));
             case KmipTag.Standard.PRIVATE_EXPONENT -> builder.privateExponent(ctxt.readValue(p, PrivateExponent.class));

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 
 import java.io.IOException;
 
-public class SimpleRequestBatchItemJsonDeserializer extends AbstractKmipStructureJsonDeserializer<SimpleRequestBatchItem, SimpleRequestBatchItem.SimpleRequestBatchItemBuilder> {
+public class SimpleRequestBatchItemJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<SimpleRequestBatchItem, SimpleRequestBatchItem.SimpleRequestBatchItemBuilder> {
 
     public SimpleRequestBatchItemJsonDeserializer() {
         super(SimpleRequestBatchItem.kmipTag, SimpleRequestBatchItem.encodingType);
@@ -21,7 +21,8 @@ public class SimpleRequestBatchItemJsonDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(SimpleRequestBatchItem.SimpleRequestBatchItemBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         // This structure is a wrapper, the logic is in the parent deserializer
         builder.requestPayloadStructure(ctxt.readValue(p, RequestPayloadStructure.class));
     }

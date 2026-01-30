@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.KeyWrapType;
 
-public class KeyWrapTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyWrapType, String> {
+import java.io.IOException;
+
+public class KeyWrapTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<KeyWrapType, KeyWrapType.KeyWrapTypeBuilder> {
 
     public KeyWrapTypeJsonDeserializer() {
-        super(KeyWrapType.kmipTag, KeyWrapType.encodingType, String.class, value -> KeyWrapType.fromName(value).inst());
+        super(KeyWrapType.kmipTag, KeyWrapType.encodingType);
+    }
+
+    @Override
+    protected KeyWrapType.KeyWrapTypeBuilder createBuilder() {
+        return KeyWrapType.builder();
+    }
+
+    @Override
+    protected void setValue(KeyWrapType.KeyWrapTypeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(KeyWrapType.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected KeyWrapType build(KeyWrapType.KeyWrapTypeBuilder builder) {
+        return builder.build();
     }
 }

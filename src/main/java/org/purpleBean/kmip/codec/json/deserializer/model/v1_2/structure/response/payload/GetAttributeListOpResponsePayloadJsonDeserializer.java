@@ -3,14 +3,14 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.respons
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipStructureJsonDeserializer;
+import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributeListOpResponsePayload;
 
 import java.io.IOException;
 
-public class GetAttributeListOpResponsePayloadJsonDeserializer extends AbstractKmipStructureJsonDeserializer<GetAttributeListOpResponsePayload, GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder> {
+public class GetAttributeListOpResponsePayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<GetAttributeListOpResponsePayload, GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder> {
 
     public GetAttributeListOpResponsePayloadJsonDeserializer() {
         super(GetAttributeListOpResponsePayload.kmipTag, GetAttributeListOpResponsePayload.encodingType);
@@ -22,7 +22,8 @@ public class GetAttributeListOpResponsePayloadJsonDeserializer extends AbstractK
     }
 
     @Override
-    protected void setValue(GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
