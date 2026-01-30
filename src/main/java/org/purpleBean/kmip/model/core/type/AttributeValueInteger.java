@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
-public class AttributeValueInteger implements AttributeValue {
+public class AttributeValueInteger implements KmipMaskType, AttributeValue {
     public static final KmipTag kmipTag = AttributeValue.kmipTag;
     public static final EncodingType encodingType = EncodingType.INTEGER;
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
@@ -25,12 +25,12 @@ public class AttributeValueInteger implements AttributeValue {
     private final Integer value;
 
     @Builder.Default
-    private final String maskStringValue = null;
+    private final String maskString = null;
 
     @Builder
-    private AttributeValueInteger(@NonNull Integer value, String maskStringValue) {
+    private AttributeValueInteger(@NonNull Integer value, String maskString) {
         this.value = value;
-        this.maskStringValue = maskStringValue;
+        this.maskString = maskString;
         validate();
     }
 

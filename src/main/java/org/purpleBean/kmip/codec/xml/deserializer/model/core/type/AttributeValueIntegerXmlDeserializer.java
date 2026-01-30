@@ -75,7 +75,7 @@ public class AttributeValueIntegerXmlDeserializer extends AbstractKmipDataTypeXm
             Function<String, ? extends KmipMaskType> fromMaskString = KmipMaskType.getFromMaskString(kmipTag);
             result = AttributeValueInteger.builder()
                     .value(fromMaskString.apply(value).getValue())
-                    .maskStringValue(value)
+                    .maskString(value)
                     .build();
         } else {
             result = AttributeValueInteger.builder().value(Integer.parseInt(value)).build();

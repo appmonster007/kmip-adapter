@@ -125,7 +125,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
     public AttributeValue getAttributeValue() {
         return AttributeValueInteger.builder()
                 .value(value)
-                .maskStringValue(getMaskString())
+                .maskString(getMaskString())
                 .build();
     }
 
