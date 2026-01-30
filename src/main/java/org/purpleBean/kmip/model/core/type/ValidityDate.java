@@ -6,6 +6,7 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.Set;
 
@@ -70,11 +71,11 @@ public class ValidityDate implements KmipDataType {
         if (o == null || getClass() != o.getClass()) return false;
         ValidityDate that = (ValidityDate) o;
         // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.value.withNano(0).equals(that.value.withNano(0));
+        return this.value.withNano(0).atZoneSameInstant(ZoneOffset.UTC).equals(that.value.withNano(0).atZoneSameInstant(ZoneOffset.UTC));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value.withNano(0));
+        return Objects.hash(value.withNano(0).atZoneSameInstant(ZoneOffset.UTC));
     }
 }

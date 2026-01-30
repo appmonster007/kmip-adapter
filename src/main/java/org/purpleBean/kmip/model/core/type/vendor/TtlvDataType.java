@@ -5,7 +5,12 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -37,6 +42,90 @@ public class TtlvDataType implements KmipDataType {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion || !kmipTag.isCustom()) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, TtlvDataType.class);
         }
+    }
+
+    public static TtlvDataType structureOf(KmipTag.Value kmipTag, List<KmipDataType> kmipDataTypes) {
+        return structureOf(kmipTag, kmipDataTypes.toArray(KmipDataType[]::new));
+    }
+
+    public static TtlvDataType structureOf(KmipTag.Value kmipTag, KmipDataType... kmipDataTypes) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.STRUCTURE)
+                .value(kmipDataTypes)
+                .build();
+    }
+
+    public static TtlvDataType integerOf(KmipTag.Value kmipTag, Integer value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.INTEGER)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType longIntegerOf(KmipTag.Value kmipTag, Long value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.LONG_INTEGER)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType bigIntegerOf(KmipTag.Value kmipTag, BigInteger value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.BIG_INTEGER)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType enumerationOf(KmipTag.Value kmipTag, KmipEnumeration.Value<?> value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.ENUMERATION)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType booleanOf(KmipTag.Value kmipTag, Boolean value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.BOOLEAN)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType textStringOf(KmipTag.Value kmipTag, String value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.TEXT_STRING)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType byteStringOf(KmipTag.Value kmipTag, ByteBuffer value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.BYTE_STRING)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType dateTimeOf(KmipTag.Value kmipTag, OffsetDateTime value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.DATE_TIME)
+                .value(value)
+                .build();
+    }
+
+    public static TtlvDataType intervalOf(KmipTag.Value kmipTag, Integer value) {
+        return TtlvDataType.builder()
+                .kmipTag(kmipTag.inst())
+                .encodingType(EncodingType.INTERVAL)
+                .value(value)
+                .build();
     }
 
     private void validate() {
@@ -72,6 +161,12 @@ public class TtlvDataType implements KmipDataType {
             return Arrays.deepEquals((KmipDataType[]) v1, (KmipDataType[]) v2);
         }
 
+        if (v1 instanceof OffsetDateTime d1 && v2 instanceof OffsetDateTime d2) {
+            return Objects.equals(
+                    d1.withNano(0).atZoneSameInstant(ZoneOffset.UTC),
+                    d2.withNano(0).atZoneSameInstant(ZoneOffset.UTC)
+            );
+        }
         // Fallback to standard equals (for other types)
         return Objects.equals(v1, v2);
     }

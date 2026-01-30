@@ -43,8 +43,12 @@ public class TtlvDataTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeseri
             case INTERVAL -> valueStack.push(mapper.readValue(p, Integer.class));
             case ENUMERATION -> {
                 KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-                Class<?> clazz = KmipDataType.getClassFromRegistry(nodeTag, encodingType);
-                valueStack.push(mapper.readValue(p, clazz));
+                var factory = KmipEnumeration.getFromValue(nodeTag);
+                Integer value = mapper.readValue(p, Integer.class);
+                if (factory == null) {
+                    throw new IllegalArgumentException(String.format("Invalid value [%d] for enumeration tag %s", value, nodeTag.getDescription()));
+                }
+                valueStack.push(factory.apply(value));
             }
             case STRUCTURE -> {
                 if (valueStack.peek() instanceof List<?>) {

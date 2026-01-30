@@ -46,8 +46,12 @@ public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeseri
             case INTERVAL -> valueStack.push(ctxt.readTreeAsValue(node, Integer.class));
             case ENUMERATION -> {
                 KmipTag.Value nodeTag = KmipTag.fromName(tag);
-                Class<?> clazz = KmipDataType.getClassFromRegistry(nodeTag, encodingType);
-                valueStack.push(ctxt.readTreeAsValue(node, clazz));
+                var factory = KmipEnumeration.getFromName(nodeTag);
+                String value = ctxt.readTreeAsValue(node, String.class);
+                if (factory == null) {
+                    throw new IllegalArgumentException(String.format("Invalid value [%s] for enumeration tag %s", value, nodeTag.getDescription()));
+                }
+                valueStack.push(factory.apply(value));
             }
             case STRUCTURE -> {
                 if (valueStack.peek() instanceof List<?>) {

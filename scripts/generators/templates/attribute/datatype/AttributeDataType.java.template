@@ -133,13 +133,13 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         {{ATTRIBUTE_NAME}} that = ({{ATTRIBUTE_NAME}}) o;
-        // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0))
+        // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
         return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0))
+        // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
         return Objects.hash(value);
     }
 }

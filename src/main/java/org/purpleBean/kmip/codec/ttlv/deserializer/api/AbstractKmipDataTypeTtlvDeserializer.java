@@ -36,7 +36,7 @@ public abstract class AbstractKmipDataTypeTtlvDeserializer<T extends KmipDataTyp
             }
         } else {
             ByteBuffer bb = ByteBuffer.wrap(obj.getValue()).order(TtlvConstants.BYTE_ORDER);
-            setValue(builder, null, type, bb, mapper);
+            setValue(builder, tag, type, bb, mapper);
         }
 
         T result = build(builder);

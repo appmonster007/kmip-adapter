@@ -8,6 +8,7 @@ import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.util.StringUtils;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.Set;
 
@@ -129,11 +130,11 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
         if (o == null || getClass() != o.getClass()) return false;
         DestroyDate that = (DestroyDate) o;
         // Compare OffsetDateTime up to seconds to avoid flakiness
-        return this.value.withNano(0).equals(that.value.withNano(0));
+        return this.value.withNano(0).atZoneSameInstant(ZoneOffset.UTC).equals(that.value.withNano(0).atZoneSameInstant(ZoneOffset.UTC));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value.withNano(0));
+        return Objects.hash(value.withNano(0).atZoneSameInstant(ZoneOffset.UTC));
     }
 }
