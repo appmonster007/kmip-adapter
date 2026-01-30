@@ -2,13 +2,10 @@ package org.purpleBean.kmip.codec.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.*;
 import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.api.KmipTagJsonDeserializer;
 import org.purpleBean.kmip.codec.json.serializer.*;
 import org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.api.KmipTagJsonSerializer;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
@@ -18,9 +15,6 @@ import java.util.ServiceLoader;
 public class KmipJsonModule extends SimpleModule {
     public KmipJsonModule() {
         super("KmipJsonModule", Version.unknownVersion());
-
-        addSerializer(KmipTag.class, new KmipTagJsonSerializer());
-        addDeserializer(KmipTag.class, new KmipTagJsonDeserializer());
 
         addSerializer(ByteBuffer.class, new ByteStringJsonSerializer());
         addDeserializer(ByteBuffer.class, new ByteStringJsonDeserializer());
