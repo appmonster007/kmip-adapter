@@ -9,6 +9,26 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract base class for TTLV serialization of {@link KmipDataType} objects.
+ * <p>
+ * This class implements the core logic for serializing KMIP objects to TTLV format.
+ * It handles the construction of the {@link TtlvObject}, including the tag, type,
+ * and value. It supports recursive serialization of nested structures and proper
+ * encoding of enumerations and other data types.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Version Checking:</b> Verifies that the object is supported by the current
+ *       {@link KmipSpec} before serialization.</li>
+ *   <li><b>Structure Support:</b> Recursively serializes nested {@link KmipStructure}
+ *       objects by concatenating their byte representations.</li>
+ *   <li><b>Enumeration Support:</b> Serializes {@link KmipEnumeration} values using
+ *       their integer values.</li>
+ * </ul>
+ *
+ * @param <T> The type of {@link KmipDataType} to serialize.
+ */
 public abstract class AbstractKmipDataTypeTtlvSerializer<T extends KmipDataType> extends KmipDataTypeTtlvSerializer<T> {
 
     @Override

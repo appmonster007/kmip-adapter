@@ -15,6 +15,12 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+/**
+ * Concurrency tests for {@link KmipContext}.
+ * <p>
+ * These tests verify that the KmipContext behaves correctly in a multi-threaded environment,
+ * ensuring that the thread-local storage isolates the context for each thread.
+ */
 @DisplayName("KmipContext Concurrency Tests")
 @Execution(ExecutionMode.SAME_THREAD) // Ensure thread safety tests run sequentially
 class KmipContextConcurrencyTest extends BaseKmipTest {

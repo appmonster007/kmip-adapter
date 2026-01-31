@@ -6,6 +6,16 @@ import org.purpleBean.kmip.api.KmipDataType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * Base JSON serializer for {@link KmipDataType} objects.
+ * <p>
+ * This abstract class extends Jackson's {@link JsonSerializer} and provides a mechanism
+ * to automatically determine the handled type based on the generic type argument of the
+ * concrete subclass. This simplifies the registration of serializers with the Jackson
+ * module.
+ *
+ * @param <T> The specific type of {@link KmipDataType} to serialize.
+ */
 public abstract class KmipDataTypeJsonSerializer<T extends KmipDataType> extends JsonSerializer<T> {
     @SuppressWarnings("unchecked")
     @Override

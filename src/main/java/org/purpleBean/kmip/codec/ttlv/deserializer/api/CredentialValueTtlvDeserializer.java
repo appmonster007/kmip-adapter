@@ -10,6 +10,13 @@ import org.purpleBean.kmip.model.core.enumeration.CredentialType;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+/**
+ * TTLV deserializer for {@link CredentialValue} objects.
+ * <p>
+ * This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
+ * for deserializing KMIP Credential Values from TTLV. It uses the {@code credentialType} attribute
+ * from the deserialization context (mapper) to determine the concrete class to instantiate.
+ */
 public class CredentialValueTtlvDeserializer extends KmipDataTypeTtlvDeserializer<CredentialValue> {
 
     @Override

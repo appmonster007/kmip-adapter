@@ -10,6 +10,13 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for {@link KeyMaterial} objects.
+ * <p>
+ * This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
+ * for deserializing KMIP Key Material from XML. It uses the {@code keyFormatType} attribute
+ * from the deserialization context to determine the concrete class to instantiate.
+ */
 public class KeyMaterialXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyMaterial> {
 
     @Override

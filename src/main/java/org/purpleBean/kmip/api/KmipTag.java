@@ -12,8 +12,25 @@ import java.util.stream.Stream;
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) tag.
  * <p>
- * A KMIP tag is a 3-byte value that identifies a specific element in a KMIP message.
- * This class provides a way to work with both standard and extension KMIP tags.
+ * A KMIP tag is a 3-byte value that uniquely identifies a specific element (item) within a KMIP message.
+ * Tags are fundamental to the Tag-Type-Length-Value (TTLV) encoding scheme used by KMIP.
+ * This class provides a comprehensive way to work with both standard tags defined in the KMIP specification
+ * and custom extension tags defined by vendors.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Standard Tags:</b> Includes an extensive enumeration ({@link Standard}) of all standard tags
+ *       defined across various KMIP versions (1.0 to 3.0).</li>
+ *   <li><b>Extension Support:</b> Allows for the dynamic registration and handling of vendor-specific
+ *       extension tags via the {@link #register(int, String, Set)} method.</li>
+ *   <li><b>Tag Resolution:</b> Provides static methods to resolve tags from their integer values,
+ *       byte arrays, or string descriptions.</li>
+ *   <li><b>Version Awareness:</b> Each tag (standard or extension) is aware of the KMIP specifications
+ *       it supports, allowing for validation against the current context.</li>
+ * </ul>
+ *
+ * @see KmipDataType
+ * @see KmipSpec
  */
 @Data
 @Builder(toBuilder = true)
@@ -32,7 +49,7 @@ public class KmipTag {
     }
 
     /**
-     * The underlying value of the KMIP tag.
+     * The underlying value definition of the KMIP tag.
      */
     @NonNull
     private final Value value;
@@ -48,9 +65,9 @@ public class KmipTag {
     }
 
     /**
-     * Creates a new KmipTag instance from the given Value.
+     * Creates a new KmipTag instance from the given Value definition.
      *
-     * @param value The value of the tag.
+     * @param value The value definition of the tag.
      * @return A new KmipTag instance.
      */
     private static KmipTag of(@NonNull Value value) {
@@ -68,12 +85,12 @@ public class KmipTag {
     }
 
     /**
-     * Registers a new extension tag.
+     * Registers a new extension tag using a byte array.
      *
-     * @param bytes             The 3-byte array representing the tag.
-     * @param description       A description of the tag.
-     * @param supportedVersions The KMIP specifications that support this tag.
-     * @return The newly registered Value.
+     * @param bytes             The 3-byte array representing the tag value.
+     * @param description       A human-readable description of the tag. If null, a hex string representation is used.
+     * @param supportedVersions The set of KMIP specifications that support this extension tag.
+     * @return The newly registered {@link Value} definition.
      */
     public static Value register(byte[] bytes, String description, @NonNull Set<KmipSpec> supportedVersions) {
         return register(
@@ -84,12 +101,17 @@ public class KmipTag {
     }
 
     /**
-     * Registers a new extension tag.
+     * Registers a new extension tag using an integer value.
+     * <p>
+     * This method allows applications to define custom tags within the designated extension range
+     * (0x540000 - 0x54FFFF). If the tag is already registered, it updates the supported versions if necessary.
      *
      * @param value             The integer value of the tag.
-     * @param description       A description of the tag.
-     * @param supportedVersions The KMIP specifications that support this tag.
-     * @return The newly registered Value.
+     * @param description       A human-readable description of the tag.
+     * @param supportedVersions The set of KMIP specifications that support this extension tag.
+     * @return The registered {@link Value} definition.
+     * @throws IllegalArgumentException if the value is outside the extension range, the description is empty,
+     *                                  or the tag conflicts with an existing standard tag.
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
         checkValidExtensionValue(value);
@@ -136,10 +158,11 @@ public class KmipTag {
     }
 
     /**
-     * Creates a KmipTag.Value from a 3-byte array.
+     * Resolves a KmipTag.Value from a 3-byte array.
      *
      * @param bytes The 3-byte array representing the tag.
-     * @return The corresponding KmipTag.Value.
+     * @return The corresponding {@link Value} definition.
+     * @throws IllegalArgumentException if the byte array is not of the expected size.
      */
     public static Value fromBytes(byte[] bytes) {
         if (bytes == null || bytes.length != TtlvConstants.TAG_SIZE) {
@@ -156,10 +179,11 @@ public class KmipTag {
     }
 
     /**
-     * Creates a KmipTag.Value from an integer value.
+     * Resolves a KmipTag.Value from its integer value.
      *
      * @param value The integer value of the tag.
-     * @return The corresponding KmipTag.Value.
+     * @return The corresponding {@link Value} definition.
+     * @throws NoSuchElementException if no tag is found for the given value in the current KMIP context.
      */
     public static Value fromValue(int value) {
         KmipSpec spec = KmipContext.getSpec();
@@ -172,10 +196,11 @@ public class KmipTag {
     }
 
     /**
-     * Creates a KmipTag.Value from its name/description.
+     * Resolves a KmipTag.Value from its name or description.
      *
-     * @param name The name/description of the tag.
-     * @return The corresponding KmipTag.Value.
+     * @param name The name or description of the tag.
+     * @return The corresponding {@link Value} definition.
+     * @throws NoSuchElementException if no tag is found for the given name in the current KMIP context.
      */
     public static Value fromName(String name) {
         KmipSpec spec = KmipContext.getSpec();
@@ -188,7 +213,9 @@ public class KmipTag {
     }
 
     /**
-     * @return A collection of all registered extension values.
+     * Retrieves all currently registered extension values.
+     *
+     * @return A collection of all registered extension {@link Value}s.
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
@@ -204,35 +231,45 @@ public class KmipTag {
     }
 
     /**
-     * @return The description of the tag.
+     * Gets the description of the tag.
+     *
+     * @return The description string.
      */
     public String getDescription() {
         return value.getDescription();
     }
 
     /**
-     * @return True if the tag is a custom extension, false otherwise.
+     * Checks if the tag is a custom extension.
+     *
+     * @return {@code true} if the tag is a custom extension, {@code false} otherwise.
      */
     public boolean isCustom() {
         return value.isCustom();
     }
 
     /**
-     * @return True if the tag is supported by the current KMIP specification, false otherwise.
+     * Checks if the tag is supported by the current KMIP specification context.
+     *
+     * @return {@code true} if supported, {@code false} otherwise.
      */
     public boolean isSupported() {
         return value.isSupported();
     }
 
     /**
-     * @return Set of KMIP specifications that support this tag.
+     * Gets the set of KMIP specifications that support this tag.
+     *
+     * @return A set of {@link KmipSpec}.
      */
     public Set<KmipSpec> getSupportedVersions() {
         return value.getSupportedVersions();
     }
 
     /**
-     * @return The 3-byte array representation of the tag.
+     * Gets the 3-byte array representation of the tag.
+     *
+     * @return A byte array of size 3.
      */
     public byte[] getTagBytes() {
         ByteBuffer buffer = ByteBuffer.allocate(EncodingType.INTEGER.getRawByteSize());
@@ -246,7 +283,9 @@ public class KmipTag {
     }
 
     /**
-     * @return The hexadecimal string representation of the tag.
+     * Gets the hexadecimal string representation of the tag (e.g., "0x420078").
+     *
+     * @return The hex string.
      */
     public String getTagHexString() {
         byte[] tagBytes = getTagBytes();

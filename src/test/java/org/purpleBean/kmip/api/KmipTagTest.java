@@ -9,6 +9,12 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * Unit tests for {@link KmipTag}.
+ * <p>
+ * These tests verify the behavior of KMIP tags, including encoding, version support,
+ * registry operations, and lookup mechanisms.
+ */
 @DisplayName("KmipTag Tests")
 class KmipTagTest {
 

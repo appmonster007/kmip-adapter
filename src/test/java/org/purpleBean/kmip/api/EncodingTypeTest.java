@@ -7,6 +7,12 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Unit tests for {@link EncodingType}.
+ * <p>
+ * These tests verify the invariants of the EncodingType enum, including value lookup,
+ * name lookup, and property checks.
+ */
 @DisplayName("EncodingType basic invariants")
 class EncodingTypeTest {
 

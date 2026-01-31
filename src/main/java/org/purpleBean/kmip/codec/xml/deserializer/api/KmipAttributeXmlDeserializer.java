@@ -9,6 +9,13 @@ import org.purpleBean.kmip.api.KmipTag;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for {@link KmipAttribute} objects.
+ * <p>
+ * This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
+ * for deserializing KMIP Attributes from XML. It delegates the class lookup to the
+ * {@link KmipAttribute} registry.
+ */
 public class KmipAttributeXmlDeserializer extends KmipDataTypeXmlDeserializer<KmipAttribute> {
 
     @Override

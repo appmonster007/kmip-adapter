@@ -8,11 +8,27 @@ import org.purpleBean.kmip.api.*;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
+/**
+ * Abstract base class for custom JSON deserializers of specific {@link KmipDataType} implementations.
+ * <p>
+ * This class provides a template for deserializing complex KMIP objects from JSON. It handles
+ * the validation of the KMIP tag and encoding type, and orchestrates the parsing of the
+ * JSON structure into a builder object, which is then used to construct the final result.
+ *
+ * @param <T> The type of {@link KmipDataType} being deserialized.
+ * @param <B> The type of the builder used to construct the object.
+ */
 public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataType, B> extends KmipDataTypeJsonDeserializer<T> {
 
     private final KmipTag kmipTag;
     private final EncodingType encodingType;
 
+    /**
+     * Constructs a new deserializer for the specified KMIP tag and encoding type.
+     *
+     * @param kmipTag      The expected KMIP tag of the object.
+     * @param encodingType The expected encoding type of the object.
+     */
     protected AbstractKmipDataTypeJsonDeserializer(KmipTag kmipTag, EncodingType encodingType) {
         this.kmipTag = kmipTag;
         this.encodingType = encodingType;
@@ -73,6 +89,12 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
         return result;
     }
 
+    /**
+     * Verifies that the deserialized object is supported by the current KMIP specification.
+     *
+     * @param result The deserialized object.
+     * @throws NoSuchElementException if the object is not supported.
+     */
     protected void verifyVersionSupport(T result) {
         KmipSpec spec = KmipContext.getSpec();
         if (!result.isSupported()) {
@@ -80,6 +102,15 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
         }
     }
 
+    /**
+     * Extracts and validates the KMIP tag from the JSON node.
+     *
+     * @param node    The JSON node.
+     * @param ctxt    The deserialization context.
+     * @param builder The builder object.
+     * @return The tag string if valid, or null if validation fails.
+     * @throws IOException if an I/O error occurs.
+     */
     protected String getTag(JsonNode node, DeserializationContext ctxt, B builder) throws IOException {
         JsonNode nameNode = node.get("name");
         JsonNode tagNode = node.get("tag");
@@ -104,6 +135,15 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
         return value;
     }
 
+    /**
+     * Extracts and validates the encoding type from the JSON node.
+     *
+     * @param node    The JSON node.
+     * @param ctxt    The deserialization context.
+     * @param builder The builder object.
+     * @return The type string if valid, or null if validation fails.
+     * @throws IOException if an I/O error occurs.
+     */
     protected String getType(JsonNode node, DeserializationContext ctxt, B builder) throws IOException {
         JsonNode typeNode = node.get("type");
         if (typeNode == null
@@ -116,10 +156,31 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
         return typeNode.asText();
     }
 
+    /**
+     * Creates a new builder instance for constructing the object.
+     *
+     * @return A new builder instance.
+     */
     protected abstract B createBuilder();
 
+    /**
+     * Sets a value on the builder based on the parsed JSON data.
+     *
+     * @param builder The builder instance.
+     * @param tag     The tag of the value being set.
+     * @param type    The type of the value being set.
+     * @param p       The JSON parser positioned at the value.
+     * @param ctxt    The deserialization context.
+     * @throws IOException if an I/O error occurs.
+     */
     protected abstract void setValue(B builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException;
 
+    /**
+     * Builds the final object from the builder.
+     *
+     * @param builder The builder instance.
+     * @return The constructed object.
+     */
     protected abstract T build(B builder);
 
 }

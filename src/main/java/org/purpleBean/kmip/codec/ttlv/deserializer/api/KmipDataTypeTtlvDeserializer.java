@@ -11,6 +11,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.NoSuchElementException;
 
+/**
+ * Base TTLV deserializer for {@link KmipDataType} objects.
+ * <p>
+ * This class provides the common logic for deserializing KMIP data types from TTLV (Tag-Type-Length-Value)
+ * format. It reads the tag and type from the TTLV buffer and uses the {@link KmipDataType} registry
+ * to find the appropriate concrete class to instantiate.
+ *
+ * @param <T> The specific type of {@link KmipDataType} to deserialize.
+ */
 public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDeserializer<KmipDataType> {
 
     @Override
@@ -32,6 +41,14 @@ public class KmipDataTypeTtlvDeserializer<T extends KmipDataType> extends TtlvDe
         return (T) mapper.readValue(ttlvBuffer, clazz);
     }
 
+    /**
+     * Determines the concrete {@link KmipDataType} class to instantiate based on the tag and encoding type.
+     *
+     * @param kmipTag      The KMIP tag.
+     * @param encodingType The encoding type.
+     * @param mapper       The TTLV mapper.
+     * @return The concrete class to instantiate.
+     */
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, TtlvMapper mapper) {
         return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }

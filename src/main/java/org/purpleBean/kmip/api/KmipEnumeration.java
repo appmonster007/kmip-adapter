@@ -35,9 +35,26 @@ public interface KmipEnumeration extends KmipDataType {
      */
     EncodingType encodingType = EncodingType.ENUMERATION;
 
+    /**
+     * A registry mapping a unique key (KMIP spec, KMIP tag) to a function that can
+     * resolve an enumeration value from its name.
+     */
     Map<RegistryKey, Function<String, Value<?>>> FROM_NAME_REGISTRY = new ConcurrentHashMap<>();
+
+    /**
+     * A registry mapping a unique key (KMIP spec, KMIP tag) to a function that can
+     * resolve an enumeration value from its integer value.
+     */
     Map<RegistryKey, Function<Integer, Value<?>>> FROM_VALUE_REGISTRY = new ConcurrentHashMap<>();
 
+    /**
+     * Registers functions to resolve enumeration values from names and integer values.
+     *
+     * @param spec         The {@link KmipSpec} version.
+     * @param kmipTagValue The {@link KmipTag.Value} of the enumeration.
+     * @param fromName     The function to resolve from name.
+     * @param fromValue    The function to resolve from integer value.
+     */
     static void register(
             KmipSpec spec,
             KmipTag.Value kmipTagValue,
@@ -48,11 +65,23 @@ public interface KmipEnumeration extends KmipDataType {
         FROM_VALUE_REGISTRY.put(new RegistryKey(spec, kmipTagValue), fromValue);
     }
 
+    /**
+     * Retrieves the registered function to resolve an enumeration value from its name.
+     *
+     * @param kmipTagValue The {@link KmipTag.Value} of the enumeration.
+     * @return The registered function, or {@code null} if not found.
+     */
     static Function<String, Value<?>> getFromName(KmipTag.Value kmipTagValue) {
         KmipSpec spec = KmipContext.getSpec();
         return FROM_NAME_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
     }
 
+    /**
+     * Retrieves the registered function to resolve an enumeration value from its integer value.
+     *
+     * @param kmipTagValue The {@link KmipTag.Value} of the enumeration.
+     * @return The registered function, or {@code null} if not found.
+     */
     static Function<Integer, Value<?>> getFromValue(KmipTag.Value kmipTagValue) {
         KmipSpec spec = KmipContext.getSpec();
         return FROM_VALUE_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
@@ -106,6 +135,12 @@ public interface KmipEnumeration extends KmipDataType {
         T inst();
     }
 
+    /**
+     * A composite key for the enumeration registries.
+     *
+     * @param spec         The KMIP specification version.
+     * @param kmipTagValue The KMIP tag.
+     */
     record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue) {
     }
 }

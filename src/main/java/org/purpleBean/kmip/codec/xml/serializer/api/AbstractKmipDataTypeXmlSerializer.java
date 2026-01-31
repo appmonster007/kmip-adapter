@@ -9,6 +9,29 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * Abstract base class for XML serialization of {@link KmipDataType} objects.
+ * <p>
+ * This class implements the core logic for serializing KMIP objects to XML, ensuring
+ * compliance with the KMIP XML encoding specification. It handles the serialization
+ * of the KMIP tag (as the element name or 'tag' attribute), type (as the 'type' attribute),
+ * and value, including support for nested structures and enumerations.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Version Checking:</b> Verifies that the object is supported by the current
+ *       {@link KmipSpec} before serialization.</li>
+ *   <li><b>Tag Handling:</b> Uses the KMIP tag description as the XML element name for
+ *       standard tags, or uses a generic "TTLV" element with a "tag" attribute for
+ *       custom tags (hex strings).</li>
+ *   <li><b>Structure Support:</b> Recursively serializes nested {@link KmipStructure}
+ *       objects.</li>
+ *   <li><b>Enumeration Support:</b> Serializes {@link KmipEnumeration} values using
+ *       their string descriptions.</li>
+ * </ul>
+ *
+ * @param <T> The type of {@link KmipDataType} to serialize.
+ */
 public abstract class AbstractKmipDataTypeXmlSerializer<T extends KmipDataType> extends KmipDataTypeXmlSerializer<T> {
 
     @Override

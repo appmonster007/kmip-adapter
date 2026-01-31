@@ -150,6 +150,11 @@ public interface KmipAttribute extends KmipDataType {
      */
     AttributeValue getAttributeValue();
 
+    /**
+     * Gets the name of this attribute, wrapped in an {@link AttributeName} object.
+     *
+     * @return The {@link AttributeName} representation of this attribute's name.
+     */
     AttributeName getAttributeName();
 
     /**

@@ -10,6 +10,13 @@ import org.purpleBean.kmip.model.core.enumeration.CredentialType;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for {@link CredentialValue} objects.
+ * <p>
+ * This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
+ * for deserializing KMIP Credential Values from XML. It uses the {@code credentialType} attribute
+ * from the deserialization context to determine the concrete class to instantiate.
+ */
 public class CredentialValueXmlDeserializer extends KmipDataTypeXmlDeserializer<CredentialValue> {
 
     @Override

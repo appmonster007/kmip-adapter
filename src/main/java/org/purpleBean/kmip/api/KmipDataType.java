@@ -85,8 +85,13 @@ public interface KmipDataType {
      */
     EncodingType getEncodingType();
 
+    /**
+     * Gets the underlying value of the data type.
+     *
+     * @return The value of the data type.
+     */
     Object getValue();
-    
+
     /**
      * Checks if this data type is supported in the current KMIP specification context.
      *

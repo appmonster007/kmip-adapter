@@ -7,6 +7,28 @@ import org.purpleBean.kmip.api.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * Abstract base class for JSON serialization of {@link KmipDataType} objects.
+ * <p>
+ * This class implements the core logic for serializing KMIP objects to JSON, ensuring
+ * compliance with the KMIP JSON encoding specification. It handles the serialization
+ * of the KMIP tag, type, and value, including support for nested structures and
+ * enumerations.
+ *
+ * <p><b>Key Features:</b></p>
+ * <ul>
+ *   <li><b>Version Checking:</b> Verifies that the object is supported by the current
+ *       {@link KmipSpec} before serialization.</li>
+ *   <li><b>Standard Format:</b> Serializes objects as JSON objects with "tag", "type",
+ *       and "value" fields.</li>
+ *   <li><b>Structure Support:</b> Recursively serializes nested {@link KmipStructure}
+ *       objects.</li>
+ *   <li><b>Enumeration Support:</b> Serializes {@link KmipEnumeration} values using
+ *       their string descriptions.</li>
+ * </ul>
+ *
+ * @param <T> The type of {@link KmipDataType} to serialize.
+ */
 public abstract class AbstractKmipDataTypeJsonSerializer<T extends KmipDataType> extends KmipDataTypeJsonSerializer<T> {
 
     @Override

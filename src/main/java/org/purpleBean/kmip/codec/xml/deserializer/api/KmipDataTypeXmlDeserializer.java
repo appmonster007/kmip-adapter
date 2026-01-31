@@ -17,6 +17,16 @@ import java.lang.reflect.Type;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * Base XML deserializer for {@link KmipDataType} objects.
+ * <p>
+ * This class provides the common logic for deserializing KMIP data types from XML.
+ * It handles the extraction of the KMIP tag (from the XML element name) and encoding type
+ * (from the 'type' attribute) and uses the {@link KmipDataType} registry to find the
+ * appropriate concrete class to instantiate.
+ *
+ * @param <T> The specific type of {@link KmipDataType} to deserialize.
+ */
 public class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDeserializer<KmipDataType> {
 
     @Override
@@ -73,6 +83,14 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDes
         return (T) ctxt.readValue(buffer.asParser(), clazz);
     }
 
+    /**
+     * Determines the concrete {@link KmipDataType} class to instantiate based on the tag and encoding type.
+     *
+     * @param kmipTag      The KMIP tag.
+     * @param encodingType The encoding type.
+     * @param ctxt         The deserialization context.
+     * @return The concrete class to instantiate.
+     */
     public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
         return KmipDataType.getClassFromRegistry(kmipTag, encodingType);
     }

@@ -12,6 +12,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Integration test for KMIP serialization within a Spring Boot context.
+ * <p>
+ * This test verifies that the KMIP serialization infrastructure is correctly configured
+ * and functional when running inside a Spring Boot application.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplication.class)
 @Order(Integer.MAX_VALUE)

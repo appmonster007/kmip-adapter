@@ -9,6 +9,13 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+/**
+ * TTLV deserializer for {@link KmipAttribute} objects.
+ * <p>
+ * This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
+ * for deserializing KMIP Attributes from TTLV. It delegates the class lookup to the
+ * {@link KmipAttribute} registry.
+ */
 public class KmipAttributeTtlvDeserializer extends KmipDataTypeTtlvDeserializer<KmipAttribute> {
 
     @Override
