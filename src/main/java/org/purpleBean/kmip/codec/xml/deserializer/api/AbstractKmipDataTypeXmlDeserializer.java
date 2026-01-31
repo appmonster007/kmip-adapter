@@ -153,12 +153,15 @@ public abstract class AbstractKmipDataTypeXmlDeserializer<T extends KmipDataType
             return tag;
         }
 
-        if (kmipTag.getDescription().equals(tag)) {
+        if (kmipTag != null && kmipTag.getDescription().equals(tag)) {
             return tag;
         }
 
-        ctxt.reportInputMismatch(handledType(), "Expected object with tag " + kmipTag.getDescription());
-        return null;
+        if (kmipTag != null) {
+            ctxt.reportInputMismatch(handledType(), "Expected object with tag " + kmipTag.getDescription());
+            return null;
+        }
+        return tag;
     }
 
     /**
@@ -181,7 +184,7 @@ public abstract class AbstractKmipDataTypeXmlDeserializer<T extends KmipDataType
         }
 
         String type = typeNode.asText();
-        if (!encodingType.getDescription().equals(type)) {
+        if (encodingType != null && !encodingType.getDescription().equals(type)) {
             ctxt.reportInputMismatch(handledType(), "Missing or invalid 'type' field");
             return null;
         }

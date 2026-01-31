@@ -128,7 +128,7 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
             return null;
         }
 
-        if (!value.equals(kmipTag.getDescription())) {
+        if (kmipTag != null && !value.equals(kmipTag.getDescription())) {
             ctxt.reportInputMismatch(handledType(), "Expected object with tag " + kmipTag.getValue());
             return null;
         }
@@ -148,7 +148,7 @@ public abstract class AbstractKmipDataTypeJsonDeserializer<T extends KmipDataTyp
         JsonNode typeNode = node.get("type");
         if (typeNode == null
                 || !typeNode.isTextual()
-                || !encodingType.getDescription().equals(typeNode.asText())
+                || (encodingType != null && !encodingType.getDescription().equals(typeNode.asText()))
         ) {
             ctxt.reportInputMismatch(handledType(), "Missing or invalid 'type' field");
             return null;

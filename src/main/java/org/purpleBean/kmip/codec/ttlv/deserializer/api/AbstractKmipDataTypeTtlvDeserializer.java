@@ -84,8 +84,8 @@ public abstract class AbstractKmipDataTypeTtlvDeserializer<T extends KmipDataTyp
      * @throws IllegalArgumentException if the tag does not match.
      */
     protected byte[] verifyTag(TtlvObject obj, TtlvMapper mapper, B builder) {
-        if (!Arrays.equals(obj.getTag(), kmipTag.getTagBytes())) {
-            throw new IllegalArgumentException(String.format("Expected %s tag, got %s", kmipTag.getDescription(), obj.getType()));
+        if (kmipTag != null && !Arrays.equals(obj.getTag(), kmipTag.getTagBytes())) {
+             throw new IllegalArgumentException(String.format("Expected %s tag, got %s", kmipTag.getDescription(), obj.getType()));
         }
         return obj.getTag();
     }
@@ -100,8 +100,8 @@ public abstract class AbstractKmipDataTypeTtlvDeserializer<T extends KmipDataTyp
      * @throws IllegalArgumentException if the type does not match.
      */
     protected byte verifyType(TtlvObject obj, TtlvMapper mapper, B builder) {
-        if (obj.getType() != encodingType.getTypeValue()) {
-            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag.getDescription(), obj.getType()));
+        if (encodingType != null && obj.getType() != encodingType.getTypeValue()) {
+            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s", encodingType.getTypeValue(), kmipTag != null ? kmipTag.getDescription() : "unknown", obj.getType()));
         }
         return obj.getType();
     }

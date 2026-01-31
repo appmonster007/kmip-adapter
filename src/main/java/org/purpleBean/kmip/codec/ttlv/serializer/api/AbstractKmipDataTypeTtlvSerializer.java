@@ -49,16 +49,20 @@ public abstract class AbstractKmipDataTypeTtlvSerializer<T extends KmipDataType>
         byte[] payload;
         if (obj.getEncodingType() == EncodingType.STRUCTURE) {
             KmipDataType[] nestedValues = (KmipDataType[]) value;
-            List<ByteBuffer> nestedObjects = new ArrayList<>();
+            List<ByteBuffer> nestedObjects = new ArrayList<>(nestedValues.length);
+            int totalLength = 0;
             for (KmipDataType object : nestedValues) {
                 if (object != null) {
-                    nestedObjects.add(mapper.writeValueAsByteBuffer(object));
+                    ByteBuffer buffer = mapper.writeValueAsByteBuffer(object);
+                    nestedObjects.add(buffer);
+                    totalLength += buffer.remaining();
                 }
             }
 
-            int totalLength = nestedObjects.stream().mapToInt(ByteBuffer::remaining).sum();
             ByteBuffer payloadBuffer = ByteBuffer.allocate(totalLength);
-            nestedObjects.forEach(payloadBuffer::put);
+            for (ByteBuffer buffer : nestedObjects) {
+                payloadBuffer.put(buffer);
+            }
             payload = payloadBuffer.array();
         } else if (obj.getEncodingType() == EncodingType.ENUMERATION) {
             payload = mapper.writeValueAsByteBuffer(((KmipEnumeration.Value<?>) value).getValue()).array();
