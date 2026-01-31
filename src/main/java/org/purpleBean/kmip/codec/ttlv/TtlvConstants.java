@@ -124,7 +124,8 @@ public final class TtlvConstants {
      * @return length padded to multiple of PADDING_SIZE
      */
     public static int calculatePaddedLength(int length) {
-        return ((length + PADDING_SIZE - 1) / PADDING_SIZE) * PADDING_SIZE;
+        // Optimized for PADDING_SIZE = 8 (power of 2)
+        return (length + 7) & ~7;
     }
 
     /**
@@ -134,7 +135,8 @@ public final class TtlvConstants {
      * @return true if the length is a multiple of PADDING_SIZE, false otherwise
      */
     public static boolean isProperlyPadded(int length) {
-        return length % PADDING_SIZE == 0;
+        // Optimized for PADDING_SIZE = 8
+        return (length & 7) == 0;
     }
 
     /**
@@ -185,7 +187,7 @@ public final class TtlvConstants {
      * @throws IllegalArgumentException if the data length is invalid
      */
     public static void validateDataLength(int dataLength) {
-        if (dataLength % PADDING_SIZE != 0) {
+        if (!isProperlyPadded(dataLength)) {
             throw new IllegalArgumentException(String.format(ERROR_INVALID_PADDING, dataLength));
         }
     }

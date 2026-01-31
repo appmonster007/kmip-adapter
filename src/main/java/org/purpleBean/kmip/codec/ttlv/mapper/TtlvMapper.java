@@ -154,6 +154,8 @@ public class TtlvMapper {
         while (current != null && current != Object.class) {
             serializer = serializers.get(current);
             if (serializer != null) {
+                // Cache the result for faster lookup next time
+                serializers.put(type, serializer);
                 return (TtlvSerializer<T>) serializer;
             }
             current = current.getSuperclass();
@@ -163,6 +165,8 @@ public class TtlvMapper {
         for (Class<?> iface : type.getInterfaces()) {
             serializer = serializers.get(iface);
             if (serializer != null) {
+                // Cache the result for faster lookup next time
+                serializers.put(type, serializer);
                 return (TtlvSerializer<T>) serializer;
             }
         }
@@ -183,6 +187,8 @@ public class TtlvMapper {
         while (current != null && current != Object.class) {
             deserializer = deserializers.get(current);
             if (deserializer != null) {
+                // Cache the result for faster lookup next time
+                deserializers.put(type, deserializer);
                 return (TtlvDeserializer<T>) deserializer;
             }
             current = current.getSuperclass();
@@ -192,6 +198,8 @@ public class TtlvMapper {
         for (Class<?> iface : type.getInterfaces()) {
             deserializer = deserializers.get(iface);
             if (deserializer != null) {
+                // Cache the result for faster lookup next time
+                deserializers.put(type, deserializer);
                 return (TtlvDeserializer<T>) deserializer;
             }
         }

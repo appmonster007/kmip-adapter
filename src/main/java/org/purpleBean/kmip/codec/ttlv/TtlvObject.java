@@ -30,6 +30,19 @@ public final class TtlvObject {
         this.value = Arrays.copyOf(value, value.length);
     }
 
+    private TtlvObject(byte[] tag, byte type, byte[] value, boolean trusted) {
+        if (trusted) {
+            this.tag = tag;
+            this.value = value;
+        } else {
+            TtlvConstants.validateTag(tag);
+            this.tag = Arrays.copyOf(tag, tag.length);
+            this.value = Arrays.copyOf(value, value.length);
+        }
+        this.type = type;
+        this.length = this.value.length;
+    }
+
     public static byte[] toBytesMultiple(TtlvObject... ttlvObjects) {
         return serializeMultiple(ttlvObjects);
     }
@@ -37,13 +50,13 @@ public final class TtlvObject {
     private static byte[] serializeMultiple(TtlvObject... ttlvObjects) {
         Objects.requireNonNull(ttlvObjects, "TTLVObjects array cannot be null");
 
-        int totalLength = Stream.of(ttlvObjects).peek(Objects::requireNonNull).mapToInt(o -> calculateTotalLength(o.getValue().length)).sum();
+        int totalLength = Stream.of(ttlvObjects).peek(Objects::requireNonNull).mapToInt(o -> calculateTotalLength(o.value.length)).sum();
 
         ByteBuffer buffer = ByteBuffer.allocate(totalLength).order(TtlvConstants.BYTE_ORDER);
 
         for (TtlvObject obj : ttlvObjects) {
             writeHeader(buffer, obj);
-            byte[] v = obj.getValue();
+            byte[] v = obj.value;
             if (v.length > 0) buffer.put(v);
             addPadding(buffer, v.length);
         }
@@ -92,7 +105,7 @@ public final class TtlvObject {
         if (valueLength > 0) buffer.get(value);
         skipPadding(buffer, valueLength);
 
-        return TtlvObject.builder().tag(tag).type(type).value(value).build();
+        return new TtlvObject(tag, type, value, true);
     }
 
     private static void writeHeader(ByteBuffer buffer, TtlvObject obj) {
@@ -187,7 +200,7 @@ public final class TtlvObject {
     // Deserialization
 
     public byte[] toBytes() {
-        byte[] valueBytes = getValue();
+        byte[] valueBytes = this.value;
         int totalLength = calculateTotalLength(valueBytes.length);
         ByteBuffer buffer = ByteBuffer.allocate(totalLength).order(TtlvConstants.BYTE_ORDER);
 

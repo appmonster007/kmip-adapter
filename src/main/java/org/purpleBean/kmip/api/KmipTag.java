@@ -222,12 +222,7 @@ public class KmipTag {
     }
 
     private static String getHexString(byte[] tagBytes) {
-        StringBuilder hexString = new StringBuilder().append("0x");
-
-        for (byte b : tagBytes) {
-            hexString.append(String.format("%02X", b));
-        }
-        return hexString.toString().toLowerCase();
+        return "0x" + HexFormat.of().formatHex(tagBytes);
     }
 
     /**
@@ -272,14 +267,12 @@ public class KmipTag {
      * @return A byte array of size 3.
      */
     public byte[] getTagBytes() {
-        ByteBuffer buffer = ByteBuffer.allocate(EncodingType.INTEGER.getRawByteSize());
-        buffer.putInt(value.getValue());
-
-        // Convert last 3 bytes to String using UTF-8
-        byte[] tagBytes = new byte[3];
-        System.arraycopy(buffer.array(), 1, tagBytes, 0, 3);
-
-        return tagBytes;
+        int v = value.getValue();
+        return new byte[] {
+                (byte) ((v >> 16) & 0xFF),
+                (byte) ((v >> 8) & 0xFF),
+                (byte) (v & 0xFF)
+        };
     }
 
     /**
