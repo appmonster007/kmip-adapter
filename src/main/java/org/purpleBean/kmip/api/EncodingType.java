@@ -73,14 +73,15 @@ public enum EncodingType {
      */
     private static final Map<Byte, EncodingType> VALUE_MAP = new HashMap<>();
     /**
-     * Map for fast lookup of an {@link EncodingType} by its description string.
+     * Map for fast lookup of an {@link EncodingType} by its name or description.
      */
-    private static final Map<String, EncodingType> DESCRIPTION_MAP = new HashMap<>();
+    private static final Map<String, EncodingType> NAME_LOOKUP = new HashMap<>();
 
     static {
         for (EncodingType encodingType : values()) {
             VALUE_MAP.put(encodingType.typeValue, encodingType);
-            DESCRIPTION_MAP.put(encodingType.description, encodingType);
+            NAME_LOOKUP.put(encodingType.description, encodingType);
+            NAME_LOOKUP.put(encodingType.name(), encodingType);
         }
     }
 
@@ -133,13 +134,7 @@ public enum EncodingType {
      * @return an {@link Optional} containing the {@link EncodingType} if found, otherwise an empty Optional.
      */
     public static Optional<EncodingType> fromName(String name) {
-        // First try to find by enum name
-        try {
-            return Optional.of(EncodingType.valueOf(name));
-        } catch (IllegalArgumentException e) {
-            // If not found by enum name, try by description
-            return Optional.ofNullable(DESCRIPTION_MAP.get(name));
-        }
+        return Optional.ofNullable(NAME_LOOKUP.get(name));
     }
 
     /**

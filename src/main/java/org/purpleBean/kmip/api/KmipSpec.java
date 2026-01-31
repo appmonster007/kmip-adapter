@@ -72,16 +72,20 @@ public enum KmipSpec {
      */
     V3_0(3, 0);
 
-    private static final Map<Map.Entry<Integer, Integer>, KmipSpec> SPEC_MAP = new HashMap<>();
+    private static final Map<Integer, KmipSpec> SPEC_MAP = new HashMap<>();
 
     static {
         for (KmipSpec spec : KmipSpec.values()) {
-            SPEC_MAP.put(Map.entry(spec.major, spec.minor), spec);
+            SPEC_MAP.put(getKey(spec.major, spec.minor), spec);
         }
     }
 
     private final int major;
     private final int minor;
+
+    private static int getKey(int major, int minor) {
+        return (major << 16) | (minor & 0xFFFF);
+    }
 
     /**
      * Converts a {@link ProtocolVersion} object into the corresponding {@link KmipSpec} enum constant.
@@ -94,7 +98,7 @@ public enum KmipSpec {
         if (protocolVersion == null) {
             return KmipSpec.UnknownVersion;
         }
-        Map.Entry<Integer, Integer> key = Map.entry(protocolVersion.getMajor(), protocolVersion.getMinor());
+        int key = getKey(protocolVersion.getMajor(), protocolVersion.getMinor());
         return Optional.ofNullable(SPEC_MAP.get(key)).orElseThrow();
     }
 

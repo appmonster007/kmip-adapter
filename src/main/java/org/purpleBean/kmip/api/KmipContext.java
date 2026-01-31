@@ -76,7 +76,6 @@ public final class KmipContext {
      */
     public static void clear() {
         currentSpec.remove();
-        currentSpec.set(KmipSpec.UnknownVersion);
     }
 
     /**
@@ -92,7 +91,7 @@ public final class KmipContext {
      * @return the value returned by the supplier.
      */
     public static <T> T withSpec(KmipSpec spec, Supplier<T> supplier) {
-        KmipSpec previous = getSpec();
+        KmipSpec previous = currentSpec.get();
         try {
             setSpec(spec);
             return supplier.get();
