@@ -45,7 +45,7 @@ public abstract class AbstractXmlSerializationTestSuite<T> extends BaseKmipTest 
             String xml = mapper().writeValueAsString(original);
 //            System.out.println("XML: \n" + xml);
             T restored = mapper().readValue(xml, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (Exception e) {
             throw new AssertionError("XML round-trip failed", e);
         }
@@ -59,7 +59,7 @@ public abstract class AbstractXmlSerializationTestSuite<T> extends BaseKmipTest 
             String xml = mapper().writeValueAsString(original);
 //            System.out.println("XML: \n" + xml);
             T restored = mapper().readValue(xml, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (Exception e) {
             throw new AssertionError("XML round-trip failed", e);
         }

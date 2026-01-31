@@ -48,7 +48,7 @@ public abstract class AbstractTtlvSerializationTestSuite<T> extends BaseKmipTest
             buffer = ttlvMapper.writeValueAsByteBuffer(original);
 //            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = ttlvMapper.readValue(buffer, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (IOException e) {
             throw new AssertionError("TTLV round-trip failed", e);
         }
@@ -63,7 +63,7 @@ public abstract class AbstractTtlvSerializationTestSuite<T> extends BaseKmipTest
             buffer = mapper().writeValueAsByteBuffer(original);
 //            System.out.println("TTLV: \n" + TtlvObject.fromBuffer(buffer.duplicate()).getStructuredByteString());
             T restored = mapper().readValue(buffer, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (IOException e) {
             throw new AssertionError("TTLV round-trip failed", e);
         }

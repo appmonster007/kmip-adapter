@@ -52,7 +52,7 @@ public abstract class AbstractJsonSerializationTestSuite<T> extends BaseKmipTest
             String json = mapper().writeValueAsString(original);
 //            System.out.println("JSON: \n" + json);
             T restored = mapper().readValue(json, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (Exception e) {
             throw new AssertionError("JSON round-trip failed", e);
         }
@@ -66,7 +66,7 @@ public abstract class AbstractJsonSerializationTestSuite<T> extends BaseKmipTest
             String json = mapper().writeValueAsString(original);
 //            System.out.println("JSON: \n" + json);
             T restored = mapper().readValue(json, type());
-            assertThat(equalsRelaxed(original, restored)).isTrue();
+            assertThat(original).isEqualTo(restored);
         } catch (Exception e) {
             throw new AssertionError("JSON round-trip failed", e);
         }
