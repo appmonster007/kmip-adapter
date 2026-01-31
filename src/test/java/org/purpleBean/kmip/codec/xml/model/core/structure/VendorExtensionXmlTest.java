@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.structure.VendorExtension;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;

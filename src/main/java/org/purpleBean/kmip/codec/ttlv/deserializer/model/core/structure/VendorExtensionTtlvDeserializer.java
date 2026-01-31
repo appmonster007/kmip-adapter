@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.structure.VendorExtension;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

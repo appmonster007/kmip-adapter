@@ -1,20 +1,20 @@
-package org.purpleBean.kmip.codec.json.model.core.type.vendor;
+package org.purpleBean.kmip.codec.xml.model.core;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.core.TtlvDataType;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-@DisplayName("TtlvDataType Json Serialization Tests")
-class TtlvDataTypeJsonTest extends AbstractJsonSerializationTestSuite<TtlvDataType> {
+@DisplayName("TtlvDataType Xml Serialization Tests")
+class TtlvDataTypeXmlTest extends AbstractXmlSerializationTestSuite<TtlvDataType> {
 
     @Override
     protected void setupDefaultSpec() {

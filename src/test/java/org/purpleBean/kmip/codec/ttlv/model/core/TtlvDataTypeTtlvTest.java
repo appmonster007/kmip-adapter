@@ -1,19 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.type.vendor;
+package org.purpleBean.kmip.codec.ttlv.model.core;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @DisplayName("TtlvDataType Ttlv Serialization Tests")

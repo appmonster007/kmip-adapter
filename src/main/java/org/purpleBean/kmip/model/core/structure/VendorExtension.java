@@ -3,7 +3,7 @@ package org.purpleBean.kmip.model.core.structure;
 import lombok.Builder;
 import lombok.Data;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 import java.util.List;
 import java.util.Objects;

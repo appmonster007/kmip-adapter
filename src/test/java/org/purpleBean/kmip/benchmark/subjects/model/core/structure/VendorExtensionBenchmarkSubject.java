@@ -6,7 +6,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.VendorExtension;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 public class VendorExtensionBenchmarkSubject extends KmipBenchmarkSubject<VendorExtension> {
 

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.core.type.vendor;
+package org.purpleBean.kmip.model.core;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.type.vendor;
+package org.purpleBean.kmip.benchmark.subjects.model.core;
 
 import lombok.Getter;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;

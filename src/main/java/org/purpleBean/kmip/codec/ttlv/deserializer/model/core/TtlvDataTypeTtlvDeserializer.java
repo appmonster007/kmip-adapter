@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.vendor;
+package org.purpleBean.kmip.codec.ttlv.deserializer.model.core;
 
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.codec.ttlv.TtlvObject;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 import java.io.IOException;
 import java.math.BigInteger;

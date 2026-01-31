@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.type.vendor;
+package org.purpleBean.kmip.codec.xml.deserializer.model.core;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.model.core.TtlvDataType;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -15,13 +15,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<TtlvDataType, TtlvDataType.TtlvDataTypeBuilder> {
+public class TtlvDataTypeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<TtlvDataType, TtlvDataType.TtlvDataTypeBuilder> {
 
     private final Stack<KmipTag.Value> kmipTagStack = new Stack<>();
     private final Stack<EncodingType> encodingTypeStack = new Stack<>();
     private final Stack<Object> valueStack = new Stack<>();
 
-    public TtlvDataTypeJsonDeserializer() {
+    public TtlvDataTypeXmlDeserializer() {
         super(null, null);
     }
 
@@ -56,13 +56,6 @@ public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeseri
             case STRUCTURE -> {
                 if (valueStack.peek() instanceof List<?>) {
                     List<KmipDataType> valueList = (List<KmipDataType>) valueStack.peek();
-
-                    if (!node.has("tag")) {
-                        return;
-                    }
-                    if (!node.has("type")) {
-                        return;
-                    }
                     valueList.add(ctxt.readTreeAsValue(node, TtlvDataType.class));
                 }
             }
@@ -84,23 +77,27 @@ public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeseri
     }
 
     @Override
-    protected String getTag(JsonNode node, DeserializationContext ctxt, TtlvDataType.TtlvDataTypeBuilder builder) throws IOException {
-        JsonNode nameNode = node.get("name");
-        JsonNode tagNode = node.get("tag");
-
-        String tag = null;
+    protected String getTag(String xmlTagName, JsonNode node, DeserializationContext ctxt, TtlvDataType.TtlvDataTypeBuilder builder) throws IOException {
+        String tag = xmlTagName;
         String name = null;
-        if (tagNode != null && tagNode.isTextual()) {
-            tag = tagNode.asText();
+
+        if ("TTLV".equals(tag) && node.has("tag")) {
+            tag = node.get("tag").asText();
         }
 
-        if (nameNode != null && nameNode.isTextual()) {
-            name = nameNode.asText();
+        // If tag is still null or empty, try to get from node if possible (though xmlTagName should be populated)
+        if (tag == null || tag.isEmpty()) {
+            if (node.has("tag")) {
+                tag = node.get("tag").asText();
+            } else if (node.has("name")) {
+                name = node.get("name").asText();
+                // If we have name but no tag, we might infer tag from name if it's a standard KMIP tag
+                tag = name;
+            }
         }
 
         if (tag == null) {
-            ctxt.reportInputMismatch(KmipTag.class,
-                    "Expected 'name' or 'tag' field with string value in object");
+            ctxt.reportInputMismatch(KmipTag.class, "Could not determine tag");
             return null;
         }
 
@@ -109,15 +106,22 @@ public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeseri
             nodeTag = KmipTag.fromName(tag);
         } catch (NoSuchElementException e) {
             // Register Tag if unknown
-            if (tag.matches("^[0-9][xX].*")) {
-                tag = tag.replaceFirst("^[0-9][xX]", "");
+            String hexTag = tag;
+            if (hexTag.matches("^[0-9][xX].*")) {
+                hexTag = hexTag.replaceFirst("^[0-9][xX]", "");
             }
-            byte[] tagBytes = HexFormat.of().parseHex(tag);
-            nodeTag = KmipTag.register(
-                    tagBytes,
-                    name,
-                    Stream.of(KmipSpec.UnknownVersion, KmipContext.getSpec()).collect(Collectors.toSet())
-            );
+            try {
+                byte[] tagBytes = HexFormat.of().parseHex(hexTag);
+                nodeTag = KmipTag.register(
+                        tagBytes,
+                        name,
+                        Stream.of(KmipSpec.UnknownVersion, KmipContext.getSpec()).collect(Collectors.toSet())
+                );
+            } catch (IllegalArgumentException ex) {
+                // If not hex, maybe it's a custom name that isn't registered yet?
+                // For now, rethrow or handle as error
+                throw new IllegalArgumentException("Unknown tag and not valid hex: " + tag, e);
+            }
         }
         kmipTagStack.push(nodeTag);
         builder.kmipTag(nodeTag.inst());
@@ -128,16 +132,16 @@ public class TtlvDataTypeJsonDeserializer extends AbstractKmipDataTypeJsonDeseri
     @Override
     protected String getType(JsonNode node, DeserializationContext ctxt, TtlvDataType.TtlvDataTypeBuilder builder) throws IOException {
         JsonNode typeNode = node.get("type");
+        String type;
         if (typeNode == null || !typeNode.isTextual()) {
-            ctxt.reportInputMismatch(handledType(), "Missing or invalid 'type' field");
-            return null;
+            type = EncodingType.STRUCTURE.getDescription();
+        } else {
+            type = typeNode.asText();
         }
 
-        String type = typeNode.asText();
         EncodingType encodingType = EncodingType.fromName(type).orElseThrow(
                 () -> new IllegalArgumentException("Unknown encoding type: " + type)
         );
-
         encodingTypeStack.push(encodingType);
         if (encodingType == EncodingType.STRUCTURE) {
             valueStack.push(new ArrayList<KmipDataType>());
