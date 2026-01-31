@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
 
-public class AttributeValueTextStringXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<AttributeValueTextString, String> {
+import java.io.IOException;
+
+public class AttributeValueTextStringXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<AttributeValueTextString, AttributeValueTextString.AttributeValueTextStringBuilder> {
 
     public AttributeValueTextStringXmlDeserializer() {
-        super(AttributeValueTextString.kmipTag, AttributeValueTextString.encodingType, String.class, value -> AttributeValueTextString.builder().value(value).build());
+        super(AttributeValueTextString.kmipTag, AttributeValueTextString.encodingType);
+    }
+
+    @Override
+    protected AttributeValueTextString.AttributeValueTextStringBuilder createBuilder() {
+        return AttributeValueTextString.builder();
+    }
+
+    @Override
+    protected void setValue(AttributeValueTextString.AttributeValueTextStringBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, String.class));
+    }
+
+    @Override
+    protected AttributeValueTextString build(AttributeValueTextString.AttributeValueTextStringBuilder builder) {
+        return builder.build();
     }
 }

@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.MacOpRequestPayl
 
 import java.io.IOException;
 
-public class MacOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<MacOpRequestPayload, MacOpRequestPayload.MacOpRequestPayloadBuilder> {
+public class MacOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<MacOpRequestPayload, MacOpRequestPayload.MacOpRequestPayloadBuilder> {
 
     public MacOpRequestPayloadXmlDeserializer() {
-        super(MacOpRequestPayload.kmipTag);
+        super(MacOpRequestPayload.kmipTag, MacOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class MacOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXml
     }
 
     @Override
-    protected void setValue(MacOpRequestPayload.MacOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(MacOpRequestPayload.MacOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

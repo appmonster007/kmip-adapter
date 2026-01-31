@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributesOpRequestPayload;
 
 import java.io.IOException;
 
-public class GetAttributesOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<GetAttributesOpRequestPayload, GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder> {
+public class GetAttributesOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<GetAttributesOpRequestPayload, GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder> {
 
     public GetAttributesOpRequestPayloadXmlDeserializer() {
-        super(GetAttributesOpRequestPayload.kmipTag);
+        super(GetAttributesOpRequestPayload.kmipTag, GetAttributesOpRequestPayload.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class GetAttributesOpRequestPayloadXmlDeserializer extends AbstractKmipSt
     }
 
     @Override
-    protected void setValue(GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

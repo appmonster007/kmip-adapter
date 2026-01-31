@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.AttributeValueLongInteger;
 
-public class AttributeValueLongIntegerXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<AttributeValueLongInteger, Long> {
+import java.io.IOException;
+
+public class AttributeValueLongIntegerXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<AttributeValueLongInteger, AttributeValueLongInteger.AttributeValueLongIntegerBuilder> {
 
     public AttributeValueLongIntegerXmlDeserializer() {
-        super(AttributeValueLongInteger.kmipTag, AttributeValueLongInteger.encodingType, Long.class, value -> AttributeValueLongInteger.builder().value(value).build());
+        super(AttributeValueLongInteger.kmipTag, AttributeValueLongInteger.encodingType);
+    }
+
+    @Override
+    protected AttributeValueLongInteger.AttributeValueLongIntegerBuilder createBuilder() {
+        return AttributeValueLongInteger.builder();
+    }
+
+    @Override
+    protected void setValue(AttributeValueLongInteger.AttributeValueLongIntegerBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, Long.class));
+    }
+
+    @Override
+    protected AttributeValueLongInteger build(AttributeValueLongInteger.AttributeValueLongIntegerBuilder builder) {
+        return builder.build();
     }
 }

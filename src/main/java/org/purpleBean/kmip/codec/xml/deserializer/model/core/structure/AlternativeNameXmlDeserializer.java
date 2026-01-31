@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.model.core.structure.AlternativeName;
 import org.purpleBean.kmip.model.core.type.AlternativeNameValue;
 
 import java.io.IOException;
 
-public class AlternativeNameXmlDeserializer extends AbstractKmipStructureXmlDeserializer<AlternativeName, AlternativeName.AlternativeNameBuilder> {
+public class AlternativeNameXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<AlternativeName, AlternativeName.AlternativeNameBuilder> {
 
     public AlternativeNameXmlDeserializer() {
-        super(AlternativeName.kmipTag);
+        super(AlternativeName.kmipTag, AlternativeName.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class AlternativeNameXmlDeserializer extends AbstractKmipStructureXmlDese
     }
 
     @Override
-    protected void setValue(AlternativeName.AlternativeNameBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(AlternativeName.AlternativeNameBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ALTERNATIVE_NAME_TYPE ->
                     builder.alternativeNameType(ctxt.readValue(p, AlternativeNameType.class));

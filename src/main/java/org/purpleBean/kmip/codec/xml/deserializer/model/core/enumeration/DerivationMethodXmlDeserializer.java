@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 
-public class DerivationMethodXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DerivationMethod, String> {
+import java.io.IOException;
+
+public class DerivationMethodXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DerivationMethod, DerivationMethod.DerivationMethodBuilder> {
 
     public DerivationMethodXmlDeserializer() {
-        super(DerivationMethod.kmipTag, DerivationMethod.encodingType, String.class, value -> DerivationMethod.fromName(value).inst());
+        super(DerivationMethod.kmipTag, DerivationMethod.encodingType);
+    }
+
+    @Override
+    protected DerivationMethod.DerivationMethodBuilder createBuilder() {
+        return DerivationMethod.builder();
+    }
+
+    @Override
+    protected void setValue(DerivationMethod.DerivationMethodBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(DerivationMethod.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected DerivationMethod build(DerivationMethod.DerivationMethodBuilder builder) {
+        return builder.build();
     }
 }

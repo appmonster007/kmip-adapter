@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePayload;
 
 import java.io.IOException;
 
-public class RecertifyOpResponsePayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<RecertifyOpResponsePayload, RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder> {
+public class RecertifyOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RecertifyOpResponsePayload, RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder> {
 
     public RecertifyOpResponsePayloadXmlDeserializer() {
-        super(RecertifyOpResponsePayload.kmipTag);
+        super(RecertifyOpResponsePayload.kmipTag, RecertifyOpResponsePayload.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class RecertifyOpResponsePayloadXmlDeserializer extends AbstractKmipStruc
     }
 
     @Override
-    protected void setValue(RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(RecertifyOpResponsePayload.RecertifyOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

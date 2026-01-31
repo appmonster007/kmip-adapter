@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.NameValue;
 
-public class NameValueXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<NameValue, String> {
+import java.io.IOException;
+
+public class NameValueXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<NameValue, NameValue.NameValueBuilder> {
 
     public NameValueXmlDeserializer() {
-        super(NameValue.kmipTag, NameValue.encodingType, String.class, value -> NameValue.builder().value(value).build());
+        super(NameValue.kmipTag, NameValue.encodingType);
+    }
+
+    @Override
+    protected NameValue.NameValueBuilder createBuilder() {
+        return NameValue.builder();
+    }
+
+    @Override
+    protected void setValue(NameValue.NameValueBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, String.class));
+    }
+
+    @Override
+    protected NameValue build(NameValue.NameValueBuilder builder) {
+        return builder.build();
     }
 }

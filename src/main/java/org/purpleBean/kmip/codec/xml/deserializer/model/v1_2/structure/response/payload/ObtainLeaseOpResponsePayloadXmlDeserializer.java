@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.LastChangeDate;
 import org.purpleBean.kmip.model.core.type.LeaseTime;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ObtainLeaseOpRe
 
 import java.io.IOException;
 
-public class ObtainLeaseOpResponsePayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<ObtainLeaseOpResponsePayload, ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder> {
+public class ObtainLeaseOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ObtainLeaseOpResponsePayload, ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder> {
 
     public ObtainLeaseOpResponsePayloadXmlDeserializer() {
-        super(ObtainLeaseOpResponsePayload.kmipTag);
+        super(ObtainLeaseOpResponsePayload.kmipTag, ObtainLeaseOpResponsePayload.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class ObtainLeaseOpResponsePayloadXmlDeserializer extends AbstractKmipStr
     }
 
     @Override
-    protected void setValue(ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

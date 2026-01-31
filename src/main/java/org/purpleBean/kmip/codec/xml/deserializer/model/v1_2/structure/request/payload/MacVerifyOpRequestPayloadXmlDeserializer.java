@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.MacData;
@@ -12,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.MacVerifyOpReque
 
 import java.io.IOException;
 
-public class MacVerifyOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<MacVerifyOpRequestPayload, MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder> {
+public class MacVerifyOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<MacVerifyOpRequestPayload, MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder> {
 
     public MacVerifyOpRequestPayloadXmlDeserializer() {
-        super(MacVerifyOpRequestPayload.kmipTag);
+        super(MacVerifyOpRequestPayload.kmipTag, MacVerifyOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +24,8 @@ public class MacVerifyOpRequestPayloadXmlDeserializer extends AbstractKmipStruct
     }
 
     @Override
-    protected void setValue(MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purpleBean.kmip.model.core.structure.RevocationReason;
 import org.purpleBean.kmip.model.core.type.RevocationMessage;
 
 import java.io.IOException;
 
-public class RevocationReasonXmlDeserializer extends AbstractKmipStructureXmlDeserializer<RevocationReason, RevocationReason.RevocationReasonBuilder> {
+public class RevocationReasonXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RevocationReason, RevocationReason.RevocationReasonBuilder> {
 
     public RevocationReasonXmlDeserializer() {
-        super(RevocationReason.kmipTag);
+        super(RevocationReason.kmipTag, RevocationReason.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class RevocationReasonXmlDeserializer extends AbstractKmipStructureXmlDes
     }
 
     @Override
-    protected void setValue(RevocationReason.RevocationReasonBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(RevocationReason.RevocationReasonBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.REVOCATION_REASON_CODE ->
                     builder.revocationReasonCode(ctxt.readValue(p, RevocationReasonCode.class));

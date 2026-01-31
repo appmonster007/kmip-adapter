@@ -1,14 +1,31 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.InitializationVector;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
-
-public class InitializationVectorXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<InitializationVector, ByteBuffer> {
+public class InitializationVectorXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<InitializationVector, InitializationVector.InitializationVectorBuilder> {
 
     public InitializationVectorXmlDeserializer() {
-        super(InitializationVector.kmipTag, InitializationVector.encodingType, ByteBuffer.class, value -> InitializationVector.builder().value(value).build());
+        super(InitializationVector.kmipTag, InitializationVector.encodingType);
+    }
+
+    @Override
+    protected InitializationVector.InitializationVectorBuilder createBuilder() {
+        return InitializationVector.builder();
+    }
+
+    @Override
+    protected void setValue(InitializationVector.InitializationVectorBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, ByteBuffer.class));
+    }
+
+    @Override
+    protected InitializationVector build(InitializationVector.InitializationVectorBuilder builder) {
+        return builder.build();
     }
 }

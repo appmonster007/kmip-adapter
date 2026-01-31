@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.LinkType;
 import org.purpleBean.kmip.model.core.structure.Link;
 import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
 
 import java.io.IOException;
 
-public class LinkXmlDeserializer extends AbstractKmipStructureXmlDeserializer<Link, Link.LinkBuilder> {
+public class LinkXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Link, Link.LinkBuilder> {
 
     public LinkXmlDeserializer() {
-        super(Link.kmipTag);
+        super(Link.kmipTag, Link.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class LinkXmlDeserializer extends AbstractKmipStructureXmlDeserializer<Li
     }
 
     @Override
-    protected void setValue(Link.LinkBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Link.LinkBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.LINK_TYPE -> builder.linkType(ctxt.readValue(p, LinkType.class));
             case KmipTag.Standard.LINKED_OBJECT_IDENTIFIER ->

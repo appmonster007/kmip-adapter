@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.JoinSplitKeyOpR
 
 import java.io.IOException;
 
-public class JoinSplitKeyOpResponsePayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<JoinSplitKeyOpResponsePayload, JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder> {
+public class JoinSplitKeyOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<JoinSplitKeyOpResponsePayload, JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder> {
 
     public JoinSplitKeyOpResponsePayloadXmlDeserializer() {
-        super(JoinSplitKeyOpResponsePayload.kmipTag);
+        super(JoinSplitKeyOpResponsePayload.kmipTag, JoinSplitKeyOpResponsePayload.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class JoinSplitKeyOpResponsePayloadXmlDeserializer extends AbstractKmipSt
     }
 
     @Override
-    protected void setValue(JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->

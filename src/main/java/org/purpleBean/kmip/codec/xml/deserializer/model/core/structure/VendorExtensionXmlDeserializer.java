@@ -2,17 +2,16 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.model.core.type.vendor.TtlvDataType;
 
 import java.io.IOException;
 
-public class VendorExtensionXmlDeserializer extends AbstractKmipStructureXmlDeserializer<VendorExtension, VendorExtension.VendorExtensionBuilder> {
+public class VendorExtensionXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<VendorExtension, VendorExtension.VendorExtensionBuilder> {
 
     public VendorExtensionXmlDeserializer() {
-        super(VendorExtension.kmipTag);
+        super(VendorExtension.kmipTag, VendorExtension.encodingType);
     }
 
     @Override
@@ -21,7 +20,7 @@ public class VendorExtensionXmlDeserializer extends AbstractKmipStructureXmlDese
     }
 
     @Override
-    protected void setValue(VendorExtension.VendorExtensionBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(VendorExtension.VendorExtensionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         // If the XML is:
         // <VendorExtension>
         //    <SomeVendorTag tag="0x..." type="..." value="..." />

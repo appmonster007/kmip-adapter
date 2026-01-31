@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
@@ -13,10 +13,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRe
 
 import java.io.IOException;
 
-public class ReKeyKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<ReKeyKeyPairOpRequestPayload, ReKeyKeyPairOpRequestPayload.ReKeyKeyPairOpRequestPayloadBuilder> {
+public class ReKeyKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ReKeyKeyPairOpRequestPayload, ReKeyKeyPairOpRequestPayload.ReKeyKeyPairOpRequestPayloadBuilder> {
 
     public ReKeyKeyPairOpRequestPayloadXmlDeserializer() {
-        super(ReKeyKeyPairOpRequestPayload.kmipTag);
+        super(ReKeyKeyPairOpRequestPayload.kmipTag, ReKeyKeyPairOpRequestPayload.encodingType);
     }
 
     @Override
@@ -25,7 +25,8 @@ public class ReKeyKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipStr
     }
 
     @Override
-    protected void setValue(ReKeyKeyPairOpRequestPayload.ReKeyKeyPairOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(ReKeyKeyPairOpRequestPayload.ReKeyKeyPairOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER ->
                     builder.privateKeyUniqueIdentifier(ctxt.readValue(p, PrivateKeyUniqueIdentifier.class));

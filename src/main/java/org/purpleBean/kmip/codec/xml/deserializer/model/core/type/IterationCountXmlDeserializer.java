@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.IterationCount;
 
-public class IterationCountXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<IterationCount, Integer> {
+import java.io.IOException;
+
+public class IterationCountXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<IterationCount, IterationCount.IterationCountBuilder> {
 
     public IterationCountXmlDeserializer() {
-        super(IterationCount.kmipTag, IterationCount.encodingType, Integer.class, value -> IterationCount.builder().value(value).build());
+        super(IterationCount.kmipTag, IterationCount.encodingType);
+    }
+
+    @Override
+    protected IterationCount.IterationCountBuilder createBuilder() {
+        return IterationCount.builder();
+    }
+
+    @Override
+    protected void setValue(IterationCount.IterationCountBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(ctxt.readValue(p, Integer.class));
+    }
+
+    @Override
+    protected IterationCount build(IterationCount.IterationCountBuilder builder) {
+        return builder.build();
     }
 }

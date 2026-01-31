@@ -9,6 +9,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -157,8 +158,13 @@ public class TtlvDataType implements KmipDataType {
         if (v1 == null || v2 == null) return false;
 
         // Handle KmipDataType[] arrays
-        if (v1 instanceof KmipDataType[] && v2 instanceof KmipDataType[]) {
-            return Arrays.deepEquals((KmipDataType[]) v1, (KmipDataType[]) v2);
+        if (v1 instanceof KmipDataType[] a1 && v2 instanceof KmipDataType[] a2) {
+            if (a1.length != a2.length) return false;
+            List<KmipDataType> list = new ArrayList<>(Arrays.asList(a2));
+            for (KmipDataType o : a1) {
+                if (!list.remove(o)) return false;
+            }
+            return true;
         }
 
         if (v1 instanceof OffsetDateTime d1 && v2 instanceof OffsetDateTime d2) {
@@ -178,7 +184,11 @@ public class TtlvDataType implements KmipDataType {
 
     private int hashCodeValue(Object value) {
         if (value instanceof KmipDataType[] kmipDataTypes) {
-            return Arrays.hashCode(kmipDataTypes);
+            int result = 0;
+            for (KmipDataType element : kmipDataTypes) {
+                result += Objects.hashCode(element);
+            }
+            return result;
         }
         return Objects.hashCode(value);
     }

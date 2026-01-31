@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.Name;
 import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 
 import java.io.IOException;
 
-public class PrivateKeyTemplateAttributeXmlDeserializer extends AbstractKmipStructureXmlDeserializer<PrivateKeyTemplateAttribute, PrivateKeyTemplateAttribute.PrivateKeyTemplateAttributeBuilder> {
+public class PrivateKeyTemplateAttributeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<PrivateKeyTemplateAttribute, PrivateKeyTemplateAttribute.PrivateKeyTemplateAttributeBuilder> {
 
     public PrivateKeyTemplateAttributeXmlDeserializer() {
-        super(PrivateKeyTemplateAttribute.kmipTag);
+        super(PrivateKeyTemplateAttribute.kmipTag, PrivateKeyTemplateAttribute.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class PrivateKeyTemplateAttributeXmlDeserializer extends AbstractKmipStru
     }
 
     @Override
-    protected void setValue(PrivateKeyTemplateAttribute.PrivateKeyTemplateAttributeBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(PrivateKeyTemplateAttribute.PrivateKeyTemplateAttributeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NAME -> builder.name(ctxt.readValue(p, Name.class));
             case KmipTag.Standard.ATTRIBUTE -> builder.attribute(ctxt.readValue(p, Attribute.class));

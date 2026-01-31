@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipAttribute;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
 
 import java.io.IOException;
 
-public class KeyValueStructureXmlDeserializer extends AbstractKmipStructureXmlDeserializer<KeyValueStructure, KeyValueStructure.KeyValueStructureBuilder> {
+public class KeyValueStructureXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<KeyValueStructure, KeyValueStructure.KeyValueStructureBuilder> {
 
     public KeyValueStructureXmlDeserializer() {
-        super(KeyValueStructure.kmipTag);
+        super(KeyValueStructure.kmipTag, KeyValueStructure.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class KeyValueStructureXmlDeserializer extends AbstractKmipStructureXmlDe
     }
 
     @Override
-    protected void setValue(KeyValueStructure.KeyValueStructureBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(KeyValueStructure.KeyValueStructureBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_MATERIAL -> builder.keyMaterial(ctxt.readValue(p, KeyMaterial.class));
             default -> builder.attribute(ctxt.readValue(p, KmipAttribute.class));

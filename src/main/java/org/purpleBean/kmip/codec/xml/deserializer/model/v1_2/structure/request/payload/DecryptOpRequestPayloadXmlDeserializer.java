@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.IVCounterNonce;
@@ -12,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.DecryptOpRequest
 
 import java.io.IOException;
 
-public class DecryptOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<DecryptOpRequestPayload, DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder> {
+public class DecryptOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DecryptOpRequestPayload, DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder> {
 
     public DecryptOpRequestPayloadXmlDeserializer() {
-        super(DecryptOpRequestPayload.kmipTag);
+        super(DecryptOpRequestPayload.kmipTag, DecryptOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +24,8 @@ public class DecryptOpRequestPayloadXmlDeserializer extends AbstractKmipStructur
     }
 
     @Override
-    protected void setValue(DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

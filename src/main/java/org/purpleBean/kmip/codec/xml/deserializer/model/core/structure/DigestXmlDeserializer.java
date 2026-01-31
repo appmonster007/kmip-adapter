@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.structure.Digest;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.core.type.DigestValue;
 
 import java.io.IOException;
 
-public class DigestXmlDeserializer extends AbstractKmipStructureXmlDeserializer<Digest, Digest.DigestBuilder> {
+public class DigestXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Digest, Digest.DigestBuilder> {
 
     public DigestXmlDeserializer() {
-        super(Digest.kmipTag);
+        super(Digest.kmipTag, Digest.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class DigestXmlDeserializer extends AbstractKmipStructureXmlDeserializer<
     }
 
     @Override
-    protected void setValue(Digest.DigestBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Digest.DigestBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.HASHING_ALGORITHM ->
                     builder.hashingAlgorithm(ctxt.readValue(p, HashingAlgorithm.class));

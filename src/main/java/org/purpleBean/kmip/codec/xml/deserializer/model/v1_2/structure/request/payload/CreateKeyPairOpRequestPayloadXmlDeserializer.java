@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpR
 
 import java.io.IOException;
 
-public class CreateKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<CreateKeyPairOpRequestPayload, CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder> {
+public class CreateKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CreateKeyPairOpRequestPayload, CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder> {
 
     public CreateKeyPairOpRequestPayloadXmlDeserializer() {
-        super(CreateKeyPairOpRequestPayload.kmipTag);
+        super(CreateKeyPairOpRequestPayload.kmipTag, CreateKeyPairOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class CreateKeyPairOpRequestPayloadXmlDeserializer extends AbstractKmipSt
     }
 
     @Override
-    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.COMMON_TEMPLATE_ATTRIBUTE ->
                     builder.commonTemplateAttribute(ctxt.readValue(p, CommonTemplateAttribute.class));

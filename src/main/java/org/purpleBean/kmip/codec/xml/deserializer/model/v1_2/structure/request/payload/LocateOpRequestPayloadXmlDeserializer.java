@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.MaximumItems;
@@ -12,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestP
 
 import java.io.IOException;
 
-public class LocateOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
+public class LocateOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<LocateOpRequestPayload, LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
 
     public LocateOpRequestPayloadXmlDeserializer() {
-        super(LocateOpRequestPayload.kmipTag);
+        super(LocateOpRequestPayload.kmipTag, LocateOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +24,8 @@ public class LocateOpRequestPayloadXmlDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(LocateOpRequestPayload.LocateOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.MAXIMUM_ITEMS -> builder.maximumItems(ctxt.readValue(p, MaximumItems.class));
             case KmipTag.Standard.STORAGE_STATUS_MASK ->

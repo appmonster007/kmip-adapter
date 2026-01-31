@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.CryptographicUsageMask;
 import org.purpleBean.kmip.model.core.type.LeaseTime;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -12,10 +12,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPa
 
 import java.io.IOException;
 
-public class CheckOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<CheckOpRequestPayload, CheckOpRequestPayload.CheckOpRequestPayloadBuilder> {
+public class CheckOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CheckOpRequestPayload, CheckOpRequestPayload.CheckOpRequestPayloadBuilder> {
 
     public CheckOpRequestPayloadXmlDeserializer() {
-        super(CheckOpRequestPayload.kmipTag);
+        super(CheckOpRequestPayload.kmipTag, CheckOpRequestPayload.encodingType);
     }
 
     @Override
@@ -24,7 +24,8 @@ public class CheckOpRequestPayloadXmlDeserializer extends AbstractKmipStructureX
     }
 
     @Override
-    protected void setValue(CheckOpRequestPayload.CheckOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(CheckOpRequestPayload.CheckOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

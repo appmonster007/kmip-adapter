@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KeyValue;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
@@ -15,10 +15,10 @@ import org.purpleBean.kmip.model.core.type.CryptographicLength;
 
 import java.io.IOException;
 
-public class KeyBlockXmlDeserializer extends AbstractKmipStructureXmlDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {
+public class KeyBlockXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {
 
     public KeyBlockXmlDeserializer() {
-        super(KeyBlock.kmipTag);
+        super(KeyBlock.kmipTag, KeyBlock.encodingType);
     }
 
     @Override
@@ -27,7 +27,8 @@ public class KeyBlockXmlDeserializer extends AbstractKmipStructureXmlDeserialize
     }
 
     @Override
-    protected void setValue(KeyBlock.KeyBlockBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(KeyBlock.KeyBlockBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.KEY_FORMAT_TYPE -> {
                 KeyFormatType keyFormatType = ctxt.readValue(p, KeyFormatType.class);

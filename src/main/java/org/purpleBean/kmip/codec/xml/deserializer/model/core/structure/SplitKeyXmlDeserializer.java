@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
 import org.purpleBean.kmip.model.core.structure.KeyBlock;
 import org.purpleBean.kmip.model.core.structure.SplitKey;
@@ -14,10 +14,10 @@ import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 
 import java.io.IOException;
 
-public class SplitKeyXmlDeserializer extends AbstractKmipStructureXmlDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
+public class SplitKeyXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
 
     public SplitKeyXmlDeserializer() {
-        super(SplitKey.kmipTag);
+        super(SplitKey.kmipTag, SplitKey.encodingType);
     }
 
     @Override
@@ -26,7 +26,8 @@ public class SplitKeyXmlDeserializer extends AbstractKmipStructureXmlDeserialize
     }
 
     @Override
-    protected void setValue(SplitKey.SplitKeyBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(SplitKey.SplitKeyBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.SPLIT_KEY_PARTS -> builder.splitKeyParts(ctxt.readValue(p, SplitKeyParts.class));
             case KmipTag.Standard.KEY_PART_IDENTIFIER ->

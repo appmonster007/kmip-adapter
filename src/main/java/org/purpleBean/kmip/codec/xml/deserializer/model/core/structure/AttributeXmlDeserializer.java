@@ -4,17 +4,17 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 
 import java.io.IOException;
 
-public class AttributeXmlDeserializer extends AbstractKmipStructureXmlDeserializer<Attribute, Attribute.AttributeBuilder> {
+public class AttributeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Attribute, Attribute.AttributeBuilder> {
 
     public AttributeXmlDeserializer() {
-        super(Attribute.kmipTag);
+        super(Attribute.kmipTag, Attribute.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class AttributeXmlDeserializer extends AbstractKmipStructureXmlDeserializ
     }
 
     @Override
-    protected void setValue(Attribute.AttributeBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Attribute.AttributeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.ATTRIBUTE_NAME -> {
                 AttributeName attributeName = ctxt.readValue(p, AttributeName.class);

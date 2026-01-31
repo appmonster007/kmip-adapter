@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.request.
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.RevocationReason;
 import org.purpleBean.kmip.model.core.type.CompromiseOccurrenceDate;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -11,10 +11,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RevokeOpRequestP
 
 import java.io.IOException;
 
-public class RevokeOpRequestPayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<RevokeOpRequestPayload, RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder> {
+public class RevokeOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RevokeOpRequestPayload, RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder> {
 
     public RevokeOpRequestPayloadXmlDeserializer() {
-        super(RevokeOpRequestPayload.kmipTag);
+        super(RevokeOpRequestPayload.kmipTag, RevokeOpRequestPayload.encodingType);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class RevokeOpRequestPayloadXmlDeserializer extends AbstractKmipStructure
     }
 
     @Override
-    protected void setValue(RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));

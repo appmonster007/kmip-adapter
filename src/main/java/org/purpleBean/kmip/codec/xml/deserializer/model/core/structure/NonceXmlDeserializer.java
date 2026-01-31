@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.structure.Nonce;
 import org.purpleBean.kmip.model.core.type.NonceId;
 import org.purpleBean.kmip.model.core.type.NonceValue;
 
 import java.io.IOException;
 
-public class NonceXmlDeserializer extends AbstractKmipStructureXmlDeserializer<Nonce, Nonce.NonceBuilder> {
+public class NonceXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Nonce, Nonce.NonceBuilder> {
 
     public NonceXmlDeserializer() {
-        super(Nonce.kmipTag);
+        super(Nonce.kmipTag, Nonce.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class NonceXmlDeserializer extends AbstractKmipStructureXmlDeserializer<N
     }
 
     @Override
-    protected void setValue(Nonce.NonceBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(Nonce.NonceBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.NONCE_ID -> builder.nonceId(ctxt.readValue(p, NonceId.class));
             case KmipTag.Standard.NONCE_VALUE -> builder.nonceValue(ctxt.readValue(p, NonceValue.class));

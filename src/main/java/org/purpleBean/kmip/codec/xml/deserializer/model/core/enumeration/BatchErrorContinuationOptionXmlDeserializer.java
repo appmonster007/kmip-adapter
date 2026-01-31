@@ -1,11 +1,30 @@
 package org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 
-public class BatchErrorContinuationOptionXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<BatchErrorContinuationOption, String> {
+import java.io.IOException;
+
+public class BatchErrorContinuationOptionXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<BatchErrorContinuationOption, BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder> {
 
     public BatchErrorContinuationOptionXmlDeserializer() {
-        super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType, String.class, value -> BatchErrorContinuationOption.fromName(value).inst());
+        super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType);
+    }
+
+    @Override
+    protected BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder createBuilder() {
+        return BatchErrorContinuationOption.builder();
+    }
+
+    @Override
+    protected void setValue(BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value(BatchErrorContinuationOption.fromName(ctxt.readValue(p, String.class)));
+    }
+
+    @Override
+    protected BatchErrorContinuationOption build(BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder builder) {
+        return builder.build();
     }
 }

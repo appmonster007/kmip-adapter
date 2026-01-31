@@ -3,16 +3,16 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v1_2.structure.response
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponsePayload;
 
 import java.io.IOException;
 
-public class HashOpResponsePayloadXmlDeserializer extends AbstractKmipStructureXmlDeserializer<HashOpResponsePayload, HashOpResponsePayload.HashOpResponsePayloadBuilder> {
+public class HashOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<HashOpResponsePayload, HashOpResponsePayload.HashOpResponsePayloadBuilder> {
 
     public HashOpResponsePayloadXmlDeserializer() {
-        super(HashOpResponsePayload.kmipTag);
+        super(HashOpResponsePayload.kmipTag, HashOpResponsePayload.encodingType);
     }
 
     @Override
@@ -21,7 +21,9 @@ public class HashOpResponsePayloadXmlDeserializer extends AbstractKmipStructureX
     }
 
     @Override
-    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(HashOpResponsePayload.HashOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+
         if (nodeTag.equals(KmipTag.Standard.DATA)) {
             builder.data(ctxt.readValue(p, DataByteString.class));
         } else {

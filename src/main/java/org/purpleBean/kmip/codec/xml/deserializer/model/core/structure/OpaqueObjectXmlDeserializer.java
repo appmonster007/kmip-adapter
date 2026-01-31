@@ -3,17 +3,17 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.OpaqueDataType;
 import org.purpleBean.kmip.model.core.structure.OpaqueObject;
 import org.purpleBean.kmip.model.core.type.OpaqueDataValue;
 
 import java.io.IOException;
 
-public class OpaqueObjectXmlDeserializer extends AbstractKmipStructureXmlDeserializer<OpaqueObject, OpaqueObject.OpaqueObjectBuilder> {
+public class OpaqueObjectXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<OpaqueObject, OpaqueObject.OpaqueObjectBuilder> {
 
     public OpaqueObjectXmlDeserializer() {
-        super(OpaqueObject.kmipTag);
+        super(OpaqueObject.kmipTag, OpaqueObject.encodingType);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class OpaqueObjectXmlDeserializer extends AbstractKmipStructureXmlDeseria
     }
 
     @Override
-    protected void setValue(OpaqueObject.OpaqueObjectBuilder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue(OpaqueObject.OpaqueObjectBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OPAQUE_DATA_TYPE -> builder.opaqueDataType(ctxt.readValue(p, OpaqueDataType.class));
             case KmipTag.Standard.OPAQUE_DATA_VALUE ->
