@@ -32,33 +32,32 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
 
     @Override
     protected {{ENUM_NAME}} createDefault() {
-        // TODO: Replace with an actual Standard enum value, e.g., new {{ENUM_NAME}}({{ENUM_NAME}}.Standard.SOME_VALUE);
+        // TODO: Replace with an actual Standard enum value, e.g., {{ENUM_NAME}}.Standard.SOME_VALUE.inst();
         // For now, using the first available value if any exist.
         if ({{ENUM_NAME}}.Standard.values().length > 0) {
-            return new {{ENUM_NAME}}({{ENUM_NAME}}.Standard.values()[0]);
+            return {{ENUM_NAME}}.Standard.values()[0].inst();
         }
         // Fallback for enums with no predefined Standard values (e.g., during initial generation)
-        // This will likely fail if the enum has no values, but that's expected for an incomplete enum.
-        return new {{ENUM_NAME}}({{ENUM_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)));
+        return {{ENUM_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected {{ENUM_NAME}} createEqualToDefault() {
         // TODO: Replace with an actual Standard enum value equal to the one in createDefault()
         if ({{ENUM_NAME}}.Standard.values().length > 0) {
-            return new {{ENUM_NAME}}({{ENUM_NAME}}.Standard.values()[0]);
+            return {{ENUM_NAME}}.Standard.values()[0].inst();
         }
-        return new {{ENUM_NAME}}({{ENUM_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)));
+        return {{ENUM_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected {{ENUM_NAME}} createDifferentFromDefault() {
         // TODO: Replace with an actual Standard enum value different from the one in createDefault()
         if ({{ENUM_NAME}}.Standard.values().length > 1) {
-            return new {{ENUM_NAME}}({{ENUM_NAME}}.Standard.values()[1]);
+            return {{ENUM_NAME}}.Standard.values()[1].inst();
         }
         // Fallback for enums with only one or no predefined Standard values
-        return new {{ENUM_NAME}}({{ENUM_NAME}}.register(0x80000002, "X-Variant-Value", Set.of(KmipSpec.UnknownVersion)));
+        return {{ENUM_NAME}}.register(0x80000002, "X-Variant-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override

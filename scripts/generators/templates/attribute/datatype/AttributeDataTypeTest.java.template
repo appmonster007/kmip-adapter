@@ -6,9 +6,6 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneOffset;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -67,21 +64,21 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeAttributeTestSuite<{{AT
 
     @Override
     protected State stateForServerModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE); // TODO: Adjust as needed
+        return State.Standard.PRE_ACTIVE.inst(); // TODO: Adjust as needed
     }
 
     @Override
     protected State stateForServerModifiableFalse() {
-        return new State(State.Standard.ACTIVE); // TODO: Adjust as needed
+        return State.Standard.ACTIVE.inst(); // TODO: Adjust as needed
     }
 
     @Override
     protected State stateForClientModifiableTrue() {
-        return new State(State.Standard.PRE_ACTIVE); // TODO: Adjust as needed
+        return State.Standard.PRE_ACTIVE.inst(); // TODO: Adjust as needed
     }
 
     @Override
     protected State stateForClientModifiableFalse() {
-        return new State(State.Standard.ACTIVE); // TODO: Adjust as needed
+        return State.Standard.ACTIVE.inst(); // TODO: Adjust as needed
     }
 }

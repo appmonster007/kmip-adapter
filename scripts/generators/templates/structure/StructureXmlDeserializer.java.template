@@ -11,15 +11,15 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipStructureXmlDeserializer;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
 
 import java.io.IOException;
 
-public class {{STRUCTURE_NAME}}XmlDeserializer extends AbstractKmipStructureXmlDeserializer<{{STRUCTURE_NAME}}, {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder> {
+public class {{STRUCTURE_NAME}}XmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<{{STRUCTURE_NAME}}, {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder> {
 
     public {{STRUCTURE_NAME}}XmlDeserializer() {
-        super({{STRUCTURE_NAME}}.kmipTag);
+        super({{STRUCTURE_NAME}}.kmipTag, {{STRUCTURE_NAME}}.encodingType);
     }
 
     @Override
@@ -28,8 +28,9 @@ public class {{STRUCTURE_NAME}}XmlDeserializer extends AbstractKmipStructureXmlD
     }
 
     @Override
-    protected void setValue({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder, KmipTag.Value nodeTag, JsonParser p, DeserializationContext ctxt) throws IOException {
+    protected void setValue({{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         // TODO: Implement setting values on the builder based on the tag
+        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
         // switch (nodeTag) {
         //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
         //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));

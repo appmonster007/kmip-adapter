@@ -66,7 +66,7 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     //     if (!(value instanceof KmipStructure structure)) {
     //         throw new IllegalArgumentException("Invalid value: " + value);
     //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
     //     // TODO: Update to extract fields from the map and call the other 'of' method
     //     // {{STRUCTURE_NAME}}Builder builder = {{STRUCTURE_NAME}}.builder();
     //     // if (map.containsKey(Field1.kmipTag)) {
@@ -107,7 +107,7 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     }
 
     @Override
-    public KmipDataType[] getValues() {
+    public KmipDataType[] getValue() {
         // TODO: Return a list of all the fields
         // return Stream.of(
         //                 field1,
@@ -116,6 +116,6 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
         //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
         //         .map(KmipDataType.class::cast)
         //         .toArray(KmipDataType[]::new);
-        return List.of();
+        return new KmipDataType[0];
     }
 }

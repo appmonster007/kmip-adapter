@@ -17,22 +17,17 @@ import org.purpleBean.kmip.test.suite.Abstract{{format_pascal}}SerializationTest
 class {{suite_name}} extends Abstract{{format_pascal}}SerializationTestSuite<{{NAME}}> {
 
     @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
-
-    @Override
     protected Class<{{NAME}}> type() {
         return {{NAME}}.class;
     }
 
     @Override
     protected {{NAME}} createDefault() {
-        return {{create_default}};  // TODO: Create a default instance
+        return {{create_default}};
     }
 
     @Override
     protected {{NAME}} createVariant() {
-        return {{create_variant}};  // TODO: Create a variant instance
+        return {{create_variant}};
     }
 }

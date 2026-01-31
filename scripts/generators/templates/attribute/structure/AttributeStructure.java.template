@@ -9,6 +9,8 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.util.StringUtils;
+
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -105,11 +107,11 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
     @Override
     public boolean isSupported() {
         KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && getValues().stream().allMatch(KmipDataType::isSupported);
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
     }
 
     @Override
-    public KmipDataType[] getValues() {
+    public KmipDataType[] getValue() {
         // TODO: Return a list of all the fields
         // return Stream.of(
         //                 field1,
@@ -118,12 +120,12 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
         //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
         //         .map(KmipDataType.class::cast)
         //         .toArray(KmipDataType[]::new);
-        return List.of();
+        return new KmipDataType[0];
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValues());
+        return AttributeValueStructure.of(getValue());
     }
 
     @Override

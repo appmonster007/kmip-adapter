@@ -2,12 +2,15 @@ package org.purpleBean.kmip.{{pdot}};
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
 
 import java.util.List;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -22,7 +25,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeSuite<{{ATTRIBUTE_NAME}
     @Override
     protected {{ATTRIBUTE_NAME}} createDefault() {
         // TODO: Create a default instance of the attribute structure
-        return {{ATTRIBUTE_NAME}}.of(List.of());
+        return {{ATTRIBUTE_NAME}}.of();
     }
 
     @Override

@@ -3,7 +3,9 @@ package org.purpleBean.kmip.{{pdot}};
 import lombok.*;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
 import org.purpleBean.kmip.util.StringUtils;
 
@@ -32,6 +34,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class);
             KmipAttribute.register(spec, kmipTag.getValue(), encodingType, {{ATTRIBUTE_NAME}}.class, {{ATTRIBUTE_NAME}}::of);
+            KmipEnumeration.register(spec, kmipTag.getValue(), {{ATTRIBUTE_NAME}}::fromName, {{ATTRIBUTE_NAME}}::fromValue);
         }
     }
 
@@ -177,12 +180,12 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
     }
 
     @Override
-    public boolean isServerModifiable(State state) {
+    public boolean isServerModifiable(@NonNull State state) {
         return true; // TODO: Adjust as needed
     }
 
     @Override
-    public boolean isClientModifiable(State state) {
+    public boolean isClientModifiable(@NonNull State state) {
         return false; // TODO: Adjust as needed
     }
 
@@ -247,16 +250,7 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
     }
 
     // ----- Value hierarchy -----
-    public interface Value {
-        int getValue();
-
-        String getDescription();
-
-        boolean isSupported();
-
-        boolean isCustom();
-
-        {{ATTRIBUTE_NAME}} inst();
+    public interface Value extends KmipEnumeration.Value<{{ATTRIBUTE_NAME}}> {
     }
 
     @Getter

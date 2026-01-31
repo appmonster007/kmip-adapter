@@ -27,19 +27,28 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{
     @Override
     protected {{ATTRIBUTE_NAME}} createDefault() {
         // TODO: Replace with an actual Standard enum value
-        return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
+        if ({{ATTRIBUTE_NAME}}.Standard.values().length > 0) {
+            return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
+        }
+        return {{ATTRIBUTE_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected {{ATTRIBUTE_NAME}} createEqualToDefault() {
         // TODO: Replace with an actual Standard enum value
-        return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
+        if ({{ATTRIBUTE_NAME}}.Standard.values().length > 0) {
+            return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
+        }
+        return {{ATTRIBUTE_NAME}}.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected {{ATTRIBUTE_NAME}} createDifferentFromDefault() {
         // TODO: Replace with an actual Standard enum value
-        return {{ATTRIBUTE_NAME}}.Standard.values()[1].inst();
+        if ({{ATTRIBUTE_NAME}}.Standard.values().length > 1) {
+            return {{ATTRIBUTE_NAME}}.Standard.values()[1].inst();
+        }
+        return {{ATTRIBUTE_NAME}}.register(0x80000002, "X-Variant-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override

@@ -84,25 +84,25 @@ generate_unified_benchmark_subject() {
 }
 
 generate_unified_serializer() {
-    local name="$1" sub_path="$2" format="$3" serialized_type="$4" super_call="$5"
+    local name="$1" sub_path="$2" format="$3"
     local format_pascal pdot
     format_pascal=$(get_pascal_case "${format}")
     pdot=$(slash_to_dot "${sub_path}")
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/${sub_path}/${name}${format_pascal}Serializer.java" \
-        "pdot" "${pdot}" "NAME" "${name}" "SERIALIZED_TYPE" "${serialized_type}" "SUPER_CALL" "${super_call}"
+        "pdot" "${pdot}" "NAME" "${name}"
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.api.KmipDataType${format_pascal}Serializer" \
         "org.purpleBean.kmip.codec.${format}.serializer.${pdot}.${name}${format_pascal}Serializer"
 }
 
 generate_unified_deserializer() {
-    local name="$1" sub_path="$2" format="$3" deserialized_type="$4" super_call="$5"
+    local name="$1" sub_path="$2" format="$3" super_call="$4"
     local format_pascal pdot
     format_pascal=$(get_pascal_case "${format}")
     pdot=$(slash_to_dot "${sub_path}")
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/${sub_path}/${name}${format_pascal}Deserializer.java" \
-        "pdot" "${pdot}" "NAME" "${name}" "DESERIALIZED_TYPE" "${deserialized_type}" "SUPER_CALL" "${super_call}"
+        "pdot" "${pdot}" "NAME" "${name}" "SUPER_CALL" "${super_call}"
     add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.api.KmipDataType${format_pascal}Deserializer" \
         "org.purpleBean.kmip.codec.${format}.deserializer.${pdot}.${name}${format_pascal}Deserializer"
 }
@@ -211,12 +211,12 @@ EOF
         local create_default="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[0])"
         local create_variant="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[1])"
 
-        if ${GEN_JSON_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "json" "String" "${ENUM_NAME}::getDescription"; fi
-        if ${GEN_JSON_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "json" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
-        if ${GEN_XML_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "${ENUM_NAME}::getDescription"; fi
-        if ${GEN_XML_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "String" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromName(value))"; fi
-        if ${GEN_TTLV_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "${ENUM_NAME}::getValue"; fi
-        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "Integer" "value -> new ${ENUM_NAME}(${ENUM_NAME}.fromValue(value))"; fi
+        if ${GEN_JSON_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "json"; fi
+        if ${GEN_JSON_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "json" "${ENUM_NAME}.fromName(ctxt.readValue(p, String.class))"; fi
+        if ${GEN_XML_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "xml"; fi
+        if ${GEN_XML_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "xml" "${ENUM_NAME}.fromName(ctxt.readValue(p, String.class))"; fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv"; fi
+        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "ttlv" "${ENUM_NAME}.fromValue(mapper.readValue(p, Integer.class))"; fi
 
         if ${GEN_JSON_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "json" "${create_default}" "${create_variant}"; fi
         if ${GEN_XML_TEST}; then generate_unified_codec_test "${ENUM_NAME}" "${SUB_PATH}" "xml" "${create_default}" "${create_variant}"; fi
@@ -341,13 +341,12 @@ EOF
                 "ATTRIBUTE_NAME" "${DATA_NAME}"
         fi
 
-        local super_call_deserializer="value -> ${DATA_NAME}.builder().value(value).build()"
-        if ${GEN_JSON_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "json" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
-        if ${GEN_JSON_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "json" "${DATA_TYPE}" "${super_call_deserializer}"; fi
-        if ${GEN_XML_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "xml" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
-        if ${GEN_XML_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "xml" "${DATA_TYPE}" "${super_call_deserializer}"; fi
-        if ${GEN_TTLV_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "ttlv" "${DATA_TYPE}" "${DATA_NAME}::getValue"; fi
-        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "ttlv" "${DATA_TYPE}" "${super_call_deserializer}"; fi
+        if ${GEN_JSON_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "json"; fi
+        if ${GEN_JSON_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "json" "ctxt.readValue(p, ${DATA_TYPE}.class)"; fi
+        if ${GEN_XML_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "xml"; fi
+        if ${GEN_XML_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "xml" "ctxt.readValue(p, ${DATA_TYPE}.class)"; fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "ttlv"; fi
+        if ${GEN_TTLV_DES}; then generate_unified_deserializer "${DATA_NAME}" "${SUB_PATH}" "ttlv" "mapper.readValue(p, ${DATA_TYPE}.class)"; fi
 
         local create_default="${DATA_NAME}.of(${DEFAULT_VALUE})"
         local create_variant="${DATA_NAME}.of(${VARIANT_VALUE})"
@@ -459,36 +458,21 @@ EOF
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME" "${STRUCTURE_NAME}"
         fi
 
-        if ${GEN_JSON_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureJsonSerializer.java.template" "${MAIN_JAVA}/codec/json/serializer/${SUB_PATH}/${STRUCTURE_NAME}JsonSerializer.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer" \
-                "org.purpleBean.kmip.codec.json.serializer.${pdot}.${STRUCTURE_NAME}JsonSerializer"
-        fi
+        if ${GEN_JSON_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "json"; fi
         if ${GEN_JSON_DES}; then
             render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer" \
                 "org.purpleBean.kmip.codec.json.deserializer.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
         fi
-        if ${GEN_XML_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureXmlSerializer.java.template" "${MAIN_JAVA}/codec/xml/serializer/${SUB_PATH}/${STRUCTURE_NAME}XmlSerializer.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer" \
-                "org.purpleBean.kmip.codec.xml.serializer.${pdot}.${STRUCTURE_NAME}XmlSerializer"
-        fi
+        if ${GEN_XML_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "xml"; fi
         if ${GEN_XML_DES}; then
             render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer" \
                 "org.purpleBean.kmip.codec.xml.deserializer.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
         fi
-        if ${GEN_TTLV_SER}; then
-            render_template "${TEMPLATE_DIR}/StructureTtlvSerializer.java.template" "${MAIN_JAVA}/codec/ttlv/serializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvSerializer.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer" \
-                "org.purpleBean.kmip.codec.ttlv.serializer.${pdot}.${STRUCTURE_NAME}TtlvSerializer"
-        fi
+        if ${GEN_TTLV_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "ttlv"; fi
         if ${GEN_TTLV_DES}; then
             render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"

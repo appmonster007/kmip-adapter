@@ -8,6 +8,8 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.util.StringUtils;
+
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;

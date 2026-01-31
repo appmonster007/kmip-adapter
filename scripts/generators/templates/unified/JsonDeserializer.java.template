@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.json.deserializer.{{pdot}};
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
@@ -12,9 +14,26 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
-public class {{NAME}}JsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<{{NAME}}, {{DESERIALIZED_TYPE}}> {
+import java.io.IOException;
+
+public class {{NAME}}JsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<{{NAME}}, {{NAME}}.{{NAME}}Builder> {
 
     public {{NAME}}JsonDeserializer() {
-        super({{NAME}}.kmipTag, {{NAME}}.encodingType, {{DESERIALIZED_TYPE}}.class, {{SUPER_CALL}});
+        super({{NAME}}.kmipTag, {{NAME}}.encodingType);
+    }
+
+    @Override
+    protected {{NAME}}.{{NAME}}Builder createBuilder() {
+        return {{NAME}}.builder();
+    }
+
+    @Override
+    protected void setValue({{NAME}}.{{NAME}}Builder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+        builder.value({{SUPER_CALL}});
+    }
+
+    @Override
+    protected {{NAME}} build({{NAME}}.{{NAME}}Builder builder) {
+        return builder.build();
     }
 }

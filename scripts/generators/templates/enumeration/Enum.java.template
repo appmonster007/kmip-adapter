@@ -34,6 +34,7 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, {{ENUM_NAME}}.class);
+            KmipEnumeration.register(spec, kmipTag.getValue(), {{ENUM_NAME}}::fromName, {{ENUM_NAME}}::fromValue);
         }
     }
 
@@ -152,7 +153,7 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         return supportedVersions.contains(spec) && value.isSupported();
     }
 
-    public int getValue() {
+    public int getIntValue() {
         return value.getValue();
     }
 
@@ -188,16 +189,7 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
     }
 
     // ----- Value hierarchy -----
-    public interface Value {
-        int getValue();
-
-        String getDescription();
-
-        boolean isSupported();
-
-        boolean isCustom();
-
-        {{ENUM_NAME}} inst();
+    public interface Value extends KmipEnumeration.Value<{{ENUM_NAME}}> {
     }
 
     @Getter
