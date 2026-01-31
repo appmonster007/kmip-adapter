@@ -31,7 +31,7 @@ public class AttributeValueEnumeration implements AttributeValue, KmipEnumeratio
     }
 
     public static AttributeValueEnumeration of(@NonNull KmipEnumeration.Value<?> value) {
-        return AttributeValueEnumeration.builder().value(value).build();
+        return new AttributeValueEnumeration(value);
     }
 
     private void validate() {

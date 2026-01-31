@@ -56,7 +56,7 @@ public class DeactivationReasonCode implements KmipEnumeration {
     }
 
     public static DeactivationReasonCode of(@NonNull Value value) {
-        return DeactivationReasonCode.builder().value(value).build();
+        return new DeactivationReasonCode(value);
     }
 
     private static void checkValidExtensionValue(int value) {

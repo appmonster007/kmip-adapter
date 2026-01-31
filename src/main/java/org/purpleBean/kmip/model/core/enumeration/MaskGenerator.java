@@ -58,7 +58,7 @@ public class MaskGenerator implements KmipEnumeration {
     }
 
     public static MaskGenerator of(@NonNull Value value) {
-        return MaskGenerator.builder().value(value).build();
+        return new MaskGenerator(value);
     }
 
     private static void checkValidExtensionValue(int value) {

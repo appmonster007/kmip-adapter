@@ -54,7 +54,7 @@ public class KeyWrapType implements KmipEnumeration {
     }
 
     public static KeyWrapType of(@NonNull Value value) {
-        return KeyWrapType.builder().value(value).build();
+        return new KeyWrapType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

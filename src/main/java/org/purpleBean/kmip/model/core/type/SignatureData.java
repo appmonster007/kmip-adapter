@@ -36,7 +36,7 @@ public class SignatureData implements KmipDataType {
     }
 
     public static SignatureData of(@NonNull ByteBuffer value) {
-        return SignatureData.builder().value(value).build();
+        return new SignatureData(value);
     }
 
     public static SignatureData of(byte[] value) {

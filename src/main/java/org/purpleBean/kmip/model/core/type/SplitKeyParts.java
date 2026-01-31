@@ -36,7 +36,7 @@ public class SplitKeyParts implements KmipDataType {
     }
 
     public static SplitKeyParts of(@NonNull Integer value) {
-        return SplitKeyParts.builder().value(value).build();
+        return new SplitKeyParts(value);
     }
 
     private void validate() {

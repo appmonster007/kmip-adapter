@@ -52,7 +52,7 @@ public class OpaqueDataType implements KmipEnumeration {
     }
 
     public static OpaqueDataType of(@NonNull Value value) {
-        return OpaqueDataType.builder().value(value).build();
+        return new OpaqueDataType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

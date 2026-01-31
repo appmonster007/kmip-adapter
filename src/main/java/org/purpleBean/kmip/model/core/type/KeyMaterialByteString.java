@@ -49,11 +49,11 @@ public class KeyMaterialByteString implements KeyMaterial {
         if (!(value instanceof KeyMaterialByteString byteString)) {
             throw new IllegalArgumentException("Invalid key material: " + value);
         }
-        return KeyMaterialByteString.builder().value(byteString.getValue()).build();
+        return new KeyMaterialByteString(byteString.getValue());
     }
 
     public static KeyMaterialByteString of(@NonNull ByteBuffer value) {
-        return KeyMaterialByteString.builder().value(value).build();
+        return new KeyMaterialByteString(value);
     }
 
     public static KeyMaterialByteString of(byte[] value) {

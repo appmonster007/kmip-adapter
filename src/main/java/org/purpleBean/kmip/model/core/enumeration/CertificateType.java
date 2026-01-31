@@ -59,7 +59,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
     }
 
     public static CertificateType of(@NonNull Value value) {
-        return CertificateType.builder().value(value).build();
+        return new CertificateType(value);
     }
 
     public static CertificateType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

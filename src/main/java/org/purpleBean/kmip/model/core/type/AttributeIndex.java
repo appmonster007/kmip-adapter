@@ -34,7 +34,7 @@ public class AttributeIndex implements KmipDataType {
     }
 
     public static AttributeIndex of(int index) {
-        return AttributeIndex.builder().value(index).build();
+        return new AttributeIndex(index);
     }
 
     private void validate() {

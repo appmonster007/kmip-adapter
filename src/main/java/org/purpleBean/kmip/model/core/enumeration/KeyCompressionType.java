@@ -56,7 +56,7 @@ public class KeyCompressionType implements KmipEnumeration {
     }
 
     public static KeyCompressionType of(@NonNull Value value) {
-        return KeyCompressionType.builder().value(value).build();
+        return new KeyCompressionType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

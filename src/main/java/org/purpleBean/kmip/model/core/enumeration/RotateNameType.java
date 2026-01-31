@@ -55,7 +55,7 @@ public class RotateNameType implements KmipEnumeration {
     }
 
     public static RotateNameType of(@NonNull Value value) {
-        return RotateNameType.builder().value(value).build();
+        return new RotateNameType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

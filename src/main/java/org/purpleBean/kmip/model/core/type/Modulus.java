@@ -37,7 +37,7 @@ public class Modulus implements KmipDataType {
     }
 
     public static Modulus of(@NonNull BigInteger value) {
-        return Modulus.builder().value(value).build();
+        return new Modulus(value);
     }
 
     private void validate() {

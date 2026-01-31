@@ -58,7 +58,7 @@ public class SplitKeyMethod implements KmipEnumeration {
     }
 
     public static SplitKeyMethod of(@NonNull Value value) {
-        return SplitKeyMethod.builder().value(value).build();
+        return new SplitKeyMethod(value);
     }
 
     private static void checkValidExtensionValue(int value) {

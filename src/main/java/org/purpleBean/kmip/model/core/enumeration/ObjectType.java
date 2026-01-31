@@ -72,7 +72,7 @@ public class ObjectType implements KmipEnumeration, KmipAttribute {
     }
 
     public static ObjectType of(@NonNull Value value) {
-        return ObjectType.builder().value(value).build();
+        return new ObjectType(value);
     }
 
     public static ObjectType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

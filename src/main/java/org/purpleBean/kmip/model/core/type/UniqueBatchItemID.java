@@ -36,7 +36,7 @@ public class UniqueBatchItemID implements KmipDataType {
     }
 
     public static UniqueBatchItemID of(@NonNull ByteBuffer value) {
-        return UniqueBatchItemID.builder().value(value).build();
+        return new UniqueBatchItemID(value);
     }
 
     public static UniqueBatchItemID of(byte[] value) {

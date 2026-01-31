@@ -59,7 +59,7 @@ public class RngAlgorithm implements KmipEnumeration {
     }
 
     public static RngAlgorithm of(@NonNull Value value) {
-        return RngAlgorithm.builder().value(value).build();
+        return new RngAlgorithm(value);
     }
 
     private static void checkValidExtensionValue(int value) {

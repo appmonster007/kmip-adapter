@@ -37,7 +37,7 @@ public class CRTCoefficient implements KmipDataType {
     }
 
     public static CRTCoefficient of(@NonNull BigInteger value) {
-        return CRTCoefficient.builder().value(value).build();
+        return new CRTCoefficient(value);
     }
 
     private void validate() {

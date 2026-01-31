@@ -35,7 +35,7 @@ public class KeyValueLocationValue implements KmipDataType {
     }
 
     public static KeyValueLocationValue of(@NonNull String value) {
-        return KeyValueLocationValue.builder().value(value).build();
+        return new KeyValueLocationValue(value);
     }
 
     private void validate() {

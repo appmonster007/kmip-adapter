@@ -36,7 +36,7 @@ public class Offset implements KmipDataType {
     }
 
     public static Offset of(@NonNull Integer value) {
-        return Offset.builder().value(value).build();
+        return new Offset(value);
     }
 
     private void validate() {

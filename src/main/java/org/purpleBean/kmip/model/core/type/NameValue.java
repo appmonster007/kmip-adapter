@@ -48,8 +48,8 @@ public class NameValue implements KmipDataType {
      * @param value the name value as a TextString
      * @return a new NameValue instance
      */
-    public static NameValue of(String value) {
-        return NameValue.builder().value(value).build();
+    public static NameValue of(@NonNull String value) {
+        return new NameValue(value);
     }
 
     private void validate() {

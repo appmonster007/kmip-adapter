@@ -56,7 +56,7 @@ public class AsynchronousIndicator implements KmipEnumeration {
     }
 
     public static AsynchronousIndicator of(@NonNull Value value) {
-        return AsynchronousIndicator.builder().value(value).build();
+        return new AsynchronousIndicator(value);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -37,7 +37,7 @@ public class PrimeFieldSize implements KmipDataType {
     }
 
     public static PrimeFieldSize of(@NonNull BigInteger value) {
-        return PrimeFieldSize.builder().value(value).build();
+        return new PrimeFieldSize(value);
     }
 
     private void validate() {

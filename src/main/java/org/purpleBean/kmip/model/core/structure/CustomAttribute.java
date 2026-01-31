@@ -52,7 +52,7 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     }
 
     public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        return CustomAttribute.builder().attributeName(attributeName).attributeValue(attributeValue).build();
+        return new CustomAttribute(attributeName, attributeValue);
     }
 
     public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue value) {

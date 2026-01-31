@@ -31,7 +31,7 @@ public class AttributeValueInterval implements AttributeValue {
     }
 
     public static AttributeValueInterval of(@NonNull Integer value) {
-        return AttributeValueInterval.builder().value(value).build();
+        return new AttributeValueInterval(value);
     }
 
     private void validate() {

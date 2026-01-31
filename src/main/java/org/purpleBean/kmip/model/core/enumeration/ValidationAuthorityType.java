@@ -55,7 +55,7 @@ public class ValidationAuthorityType implements KmipEnumeration {
     }
 
     public static ValidationAuthorityType of(@NonNull Value value) {
-        return ValidationAuthorityType.builder().value(value).build();
+        return new ValidationAuthorityType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

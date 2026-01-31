@@ -48,7 +48,7 @@ public class RecommendedCurve implements KmipEnumeration {
     }
 
     public static RecommendedCurve of(@NonNull Value value) {
-        return RecommendedCurve.builder().value(value).build();
+        return new RecommendedCurve(value);
     }
 
     private static void checkValidExtensionValue(int value) {

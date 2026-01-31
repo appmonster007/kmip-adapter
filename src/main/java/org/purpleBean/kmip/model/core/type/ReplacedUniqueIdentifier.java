@@ -36,7 +36,7 @@ public class ReplacedUniqueIdentifier implements KmipDataType {
     }
 
     public static ReplacedUniqueIdentifier of(@NonNull String value) {
-        return ReplacedUniqueIdentifier.builder().value(value).build();
+        return new ReplacedUniqueIdentifier(value);
     }
 
     private void validate() {

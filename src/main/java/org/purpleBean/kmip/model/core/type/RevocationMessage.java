@@ -35,7 +35,7 @@ public class RevocationMessage implements KmipDataType {
     }
 
     public static RevocationMessage of(@NonNull String value) {
-        return RevocationMessage.builder().value(value).build();
+        return new RevocationMessage(value);
     }
 
     private void validate() {

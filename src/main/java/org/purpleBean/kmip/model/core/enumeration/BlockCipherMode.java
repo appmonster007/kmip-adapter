@@ -71,7 +71,7 @@ public class BlockCipherMode implements KmipEnumeration {
     }
 
     public static BlockCipherMode of(@NonNull Value value) {
-        return BlockCipherMode.builder().value(value).build();
+        return new BlockCipherMode(value);
     }
 
     private static void checkValidExtensionValue(int value) {

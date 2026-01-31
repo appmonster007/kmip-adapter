@@ -36,7 +36,7 @@ public class SerialNumber implements KmipDataType {
     }
 
     public static SerialNumber of(@NonNull String value) {
-        return SerialNumber.builder().value(value).build();
+        return new SerialNumber(value);
     }
 
     private void validate() {

@@ -35,7 +35,7 @@ public class PgpKeyVersion implements KmipDataType {
     }
 
     public static PgpKeyVersion of(@NonNull Integer value) {
-        return PgpKeyVersion.builder().value(value).build();
+        return new PgpKeyVersion(value);
     }
 
     private void validate() {

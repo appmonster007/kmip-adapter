@@ -1,6 +1,8 @@
 package org.purpleBean.kmip.model.core.type;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.util.StringUtils;
@@ -49,7 +51,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return CryptographicLength.builder().value(integer.getValue()).build();
+        return new CryptographicLength(integer.getValue());
     }
 
     /**
@@ -59,7 +61,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
      * @return a new CryptographicLength instance
      */
     public static CryptographicLength of(int value) {
-        return CryptographicLength.builder().value(value).build();
+        return new CryptographicLength(value);
     }
 
     private void validate() {

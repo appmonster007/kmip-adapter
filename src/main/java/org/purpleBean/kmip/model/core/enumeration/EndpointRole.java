@@ -53,7 +53,7 @@ public class EndpointRole implements KmipEnumeration {
     }
 
     public static EndpointRole of(@NonNull Value value) {
-        return EndpointRole.builder().value(value).build();
+        return new EndpointRole(value);
     }
 
     private static void checkValidExtensionValue(int value) {

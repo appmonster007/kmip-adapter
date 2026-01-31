@@ -36,7 +36,7 @@ public class MediaIdentifier implements KmipDataType {
     }
 
     public static MediaIdentifier of(@NonNull String value) {
-        return MediaIdentifier.builder().value(value).build();
+        return new MediaIdentifier(value);
     }
 
     private void validate() {

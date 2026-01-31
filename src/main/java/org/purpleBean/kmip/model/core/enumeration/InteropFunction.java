@@ -59,7 +59,7 @@ public class InteropFunction implements KmipEnumeration {
     }
 
     public static InteropFunction of(@NonNull Value value) {
-        return InteropFunction.builder().value(value).build();
+        return new InteropFunction(value);
     }
 
     private static void checkValidExtensionValue(int value) {

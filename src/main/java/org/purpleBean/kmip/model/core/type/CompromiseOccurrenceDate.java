@@ -40,7 +40,7 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
     }
 
     public static CompromiseOccurrenceDate of(@NonNull OffsetDateTime value) {
-        return CompromiseOccurrenceDate.builder().value(value).build();
+        return new CompromiseOccurrenceDate(value);
     }
 
     public static CompromiseOccurrenceDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

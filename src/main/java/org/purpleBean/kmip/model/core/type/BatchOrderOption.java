@@ -36,7 +36,7 @@ public class BatchOrderOption implements KmipDataType {
     }
 
     public static BatchOrderOption of(@NonNull Boolean value) {
-        return BatchOrderOption.builder().value(value).build();
+        return new BatchOrderOption(value);
     }
 
     private void validate() {

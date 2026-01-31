@@ -36,7 +36,7 @@ public class MacData implements KmipDataType {
     }
 
     public static MacData of(@NonNull ByteBuffer value) {
-        return MacData.builder().value(value).build();
+        return new MacData(value);
     }
 
     public static MacData of(byte[] value) {

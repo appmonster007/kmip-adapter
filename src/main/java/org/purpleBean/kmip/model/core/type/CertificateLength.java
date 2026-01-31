@@ -39,7 +39,7 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
     }
 
     public static CertificateLength of(@NonNull Integer value) {
-        return CertificateLength.builder().value(value).build();
+        return new CertificateLength(value);
     }
 
     public static CertificateLength of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

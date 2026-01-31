@@ -36,7 +36,7 @@ public class IterationCount implements KmipDataType {
     }
 
     public static IterationCount of(@NonNull Integer value) {
-        return IterationCount.builder().value(value).build();
+        return new IterationCount(value);
     }
 
     private void validate() {

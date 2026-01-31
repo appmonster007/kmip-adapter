@@ -40,7 +40,7 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     }
 
     public static ProcessStartDate of(@NonNull OffsetDateTime value) {
-        return ProcessStartDate.builder().value(value).build();
+        return new ProcessStartDate(value);
     }
 
     public static ProcessStartDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

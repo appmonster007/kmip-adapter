@@ -55,7 +55,7 @@ public class AdjustmentType implements KmipEnumeration {
     }
 
     public static AdjustmentType of(@NonNull Value value) {
-        return AdjustmentType.builder().value(value).build();
+        return new AdjustmentType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

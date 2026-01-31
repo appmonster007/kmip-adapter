@@ -36,7 +36,7 @@ public class AttestationAssertion implements KmipDataType {
     }
 
     public static AttestationAssertion of(@NonNull ByteBuffer value) {
-        return AttestationAssertion.builder().value(value).build();
+        return new AttestationAssertion(value);
     }
 
     public static AttestationAssertion of(byte[] value) {

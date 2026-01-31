@@ -53,7 +53,7 @@ public class ProtectionLevel implements KmipEnumeration {
     }
 
     public static ProtectionLevel of(@NonNull Value value) {
-        return ProtectionLevel.builder().value(value).build();
+        return new ProtectionLevel(value);
     }
 
     private static void checkValidExtensionValue(int value) {

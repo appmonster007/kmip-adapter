@@ -36,7 +36,7 @@ public class AsynchronousCorrelationValue implements KmipDataType {
     }
 
     public static AsynchronousCorrelationValue of(@NonNull ByteBuffer value) {
-        return AsynchronousCorrelationValue.builder().value(value).build();
+        return new AsynchronousCorrelationValue(value);
     }
 
     public static AsynchronousCorrelationValue of(byte[] value) {

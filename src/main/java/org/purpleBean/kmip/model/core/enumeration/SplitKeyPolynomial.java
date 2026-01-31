@@ -54,7 +54,7 @@ public class SplitKeyPolynomial implements KmipEnumeration {
     }
 
     public static SplitKeyPolynomial of(@NonNull Value value) {
-        return SplitKeyPolynomial.builder().value(value).build();
+        return new SplitKeyPolynomial(value);
     }
 
     private static void checkValidExtensionValue(int value) {

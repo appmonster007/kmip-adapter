@@ -36,7 +36,7 @@ public class CertificateSubjectAlternativeName implements KmipDataType {
     }
 
     public static CertificateSubjectAlternativeName of(@NonNull String value) {
-        return CertificateSubjectAlternativeName.builder().value(value).build();
+        return new CertificateSubjectAlternativeName(value);
     }
 
     private void validate() {

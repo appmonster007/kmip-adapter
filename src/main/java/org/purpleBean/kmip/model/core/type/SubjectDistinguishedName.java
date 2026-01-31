@@ -36,7 +36,7 @@ public class SubjectDistinguishedName implements KmipDataType {
     }
 
     public static SubjectDistinguishedName of(@NonNull ByteBuffer value) {
-        return SubjectDistinguishedName.builder().value(value).build();
+        return new SubjectDistinguishedName(value);
     }
 
     public static SubjectDistinguishedName of(byte[] value) {

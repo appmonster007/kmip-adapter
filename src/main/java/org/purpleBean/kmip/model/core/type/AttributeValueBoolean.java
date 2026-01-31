@@ -31,7 +31,7 @@ public class AttributeValueBoolean implements AttributeValue {
     }
 
     public static AttributeValueBoolean of(@NonNull java.lang.Boolean value) {
-        return AttributeValueBoolean.builder().value(value).build();
+        return new AttributeValueBoolean(value);
     }
 
     private void validate() {

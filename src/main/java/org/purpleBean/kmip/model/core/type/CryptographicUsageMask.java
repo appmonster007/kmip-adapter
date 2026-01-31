@@ -43,7 +43,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
     }
 
     public static CryptographicUsageMask of(@NonNull Integer value) {
-        return CryptographicUsageMask.builder().value(value).build();
+        return new CryptographicUsageMask(value);
     }
 
     public static CryptographicUsageMask of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

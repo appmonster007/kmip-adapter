@@ -41,7 +41,7 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
     }
 
     public static LastChangeDate of(@NonNull OffsetDateTime value) {
-        return LastChangeDate.builder().value(value).build();
+        return new LastChangeDate(value);
     }
 
     public static LastChangeDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

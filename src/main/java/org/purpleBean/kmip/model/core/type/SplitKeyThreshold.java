@@ -36,7 +36,7 @@ public class SplitKeyThreshold implements KmipDataType {
     }
 
     public static SplitKeyThreshold of(@NonNull Integer value) {
-        return SplitKeyThreshold.builder().value(value).build();
+        return new SplitKeyThreshold(value);
     }
 
     private void validate() {

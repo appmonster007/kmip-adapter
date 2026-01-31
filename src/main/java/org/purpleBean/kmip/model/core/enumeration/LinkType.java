@@ -67,7 +67,7 @@ public class LinkType implements KmipEnumeration {
     }
 
     public static LinkType of(@NonNull Value value) {
-        return LinkType.builder().value(value).build();
+        return new LinkType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

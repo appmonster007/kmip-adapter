@@ -34,7 +34,7 @@ public class AttributeValueDateTime implements AttributeValue {
     }
 
     public static AttributeValueDateTime of(@NonNull OffsetDateTime value) {
-        return AttributeValueDateTime.builder().value(value).build();
+        return new AttributeValueDateTime(value);
     }
 
     private void validate() {

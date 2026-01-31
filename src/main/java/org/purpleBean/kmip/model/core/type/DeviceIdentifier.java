@@ -36,7 +36,7 @@ public class DeviceIdentifier implements KmipDataType {
     }
 
     public static DeviceIdentifier of(@NonNull String value) {
-        return DeviceIdentifier.builder().value(value).build();
+        return new DeviceIdentifier(value);
     }
 
     private void validate() {

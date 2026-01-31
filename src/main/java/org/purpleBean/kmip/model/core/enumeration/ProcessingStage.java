@@ -55,7 +55,7 @@ public class ProcessingStage implements KmipEnumeration {
     }
 
     public static ProcessingStage of(@NonNull Value value) {
-        return ProcessingStage.builder().value(value).build();
+        return new ProcessingStage(value);
     }
 
     private static void checkValidExtensionValue(int value) {

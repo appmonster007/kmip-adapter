@@ -36,7 +36,7 @@ public class IVCounterNonce implements KmipDataType {
     }
 
     public static IVCounterNonce of(@NonNull ByteBuffer value) {
-        return IVCounterNonce.builder().value(value).build();
+        return new IVCounterNonce(value);
     }
 
     public static IVCounterNonce of(byte[] value) {

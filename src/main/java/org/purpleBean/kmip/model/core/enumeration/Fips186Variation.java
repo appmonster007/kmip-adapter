@@ -59,7 +59,7 @@ public class Fips186Variation implements KmipEnumeration {
     }
 
     public static Fips186Variation of(@NonNull Value value) {
-        return Fips186Variation.builder().value(value).build();
+        return new Fips186Variation(value);
     }
 
     private static void checkValidExtensionValue(int value) {

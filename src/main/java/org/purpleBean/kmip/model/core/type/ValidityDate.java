@@ -39,7 +39,7 @@ public class ValidityDate implements KmipDataType {
     }
 
     public static ValidityDate of(@NonNull OffsetDateTime value) {
-        return ValidityDate.builder().value(value).build();
+        return new ValidityDate(value);
     }
 
     private void validate() {

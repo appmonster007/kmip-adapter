@@ -60,7 +60,7 @@ public class CredentialType implements KmipEnumeration {
     }
 
     public static CredentialType of(@NonNull Value value) {
-        return CredentialType.builder().value(value).build();
+        return new CredentialType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

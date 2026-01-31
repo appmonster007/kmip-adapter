@@ -47,7 +47,7 @@ public class Operation implements KmipEnumeration {
     }
 
     public static Operation of(@NonNull Value value) {
-        return Operation.builder().value(value).build();
+        return new Operation(value);
     }
 
     private static void checkValidExtensionValue(int value) {

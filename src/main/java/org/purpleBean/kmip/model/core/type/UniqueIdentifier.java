@@ -38,7 +38,7 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     }
 
     public static UniqueIdentifier of(@NonNull String value) {
-        return UniqueIdentifier.builder().value(value).build();
+        return new UniqueIdentifier(value);
     }
 
     public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

@@ -35,7 +35,7 @@ public class RandomIv implements KmipDataType {
     }
 
     public static RandomIv of(@NonNull Boolean value) {
-        return RandomIv.builder().value(value).build();
+        return new RandomIv(value);
     }
 
     private void validate() {

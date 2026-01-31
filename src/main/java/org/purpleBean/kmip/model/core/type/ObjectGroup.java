@@ -38,7 +38,7 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
     }
 
     public static ObjectGroup of(@NonNull String value) {
-        return ObjectGroup.builder().value(value).build();
+        return new ObjectGroup(value);
     }
 
     public static ObjectGroup of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

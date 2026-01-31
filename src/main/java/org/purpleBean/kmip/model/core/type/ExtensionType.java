@@ -36,7 +36,7 @@ public class ExtensionType implements KmipDataType {
     }
 
     public static ExtensionType of(@NonNull Integer value) {
-        return ExtensionType.builder().value(value).build();
+        return new ExtensionType(value);
     }
 
     private void validate() {

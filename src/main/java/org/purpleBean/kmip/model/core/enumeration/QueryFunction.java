@@ -68,7 +68,7 @@ public class QueryFunction implements KmipEnumeration {
     }
 
     public static QueryFunction of(@NonNull Value value) {
-        return QueryFunction.builder().value(value).build();
+        return new QueryFunction(value);
     }
 
     private static void checkValidExtensionValue(int value) {

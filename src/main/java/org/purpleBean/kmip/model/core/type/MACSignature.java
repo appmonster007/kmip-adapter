@@ -36,7 +36,7 @@ public class MACSignature implements KmipDataType {
     }
 
     public static MACSignature of(@NonNull ByteBuffer value) {
-        return MACSignature.builder().value(value).build();
+        return new MACSignature(value);
     }
 
     public static MACSignature of(byte[] value) {

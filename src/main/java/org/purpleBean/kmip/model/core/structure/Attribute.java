@@ -50,18 +50,11 @@ public class Attribute implements KmipStructure {
     }
 
     public static Attribute of(AttributeName name, AttributeValue value) {
-        return Attribute.builder()
-                .attributeName(name)
-                .attributeIndex(AttributeIndex.of(0))
-                .attributeValue(value)
-                .build();
+        return new Attribute(name, AttributeIndex.of(0), value);
     }
 
     public static Attribute of(@NonNull KmipAttribute attribute) {
-        return Attribute.builder()
-                .attributeName(attribute.getAttributeName())
-                .attributeValue(attribute.getAttributeValue())
-                .build();
+        return new Attribute(attribute.getAttributeName(), null, attribute.getAttributeValue());
     }
 
     public static KmipAttribute toKmipAttribute(@NonNull Attribute attribute) {

@@ -35,7 +35,7 @@ public class AttestationCapableIndicator implements KmipDataType {
     }
 
     public static AttestationCapableIndicator of(@NonNull Boolean value) {
-        return AttestationCapableIndicator.builder().value(value).build();
+        return new AttestationCapableIndicator(value);
     }
 
     private void validate() {

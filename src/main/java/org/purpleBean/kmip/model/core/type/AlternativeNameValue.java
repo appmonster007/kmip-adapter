@@ -35,7 +35,7 @@ public class AlternativeNameValue implements KmipDataType {
     }
 
     public static AlternativeNameValue of(@NonNull String value) {
-        return AlternativeNameValue.builder().value(value).build();
+        return new AlternativeNameValue(value);
     }
 
     private void validate() {

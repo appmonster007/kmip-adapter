@@ -56,7 +56,7 @@ public class ClientRegistrationMethod implements KmipEnumeration {
     }
 
     public static ClientRegistrationMethod of(@NonNull Value value) {
-        return ClientRegistrationMethod.builder().value(value).build();
+        return new ClientRegistrationMethod(value);
     }
 
     private static void checkValidExtensionValue(int value) {

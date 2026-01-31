@@ -37,7 +37,7 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     }
 
     public static OperationPolicyName of(@NonNull String value) {
-        return OperationPolicyName.builder().value(value).build();
+        return new OperationPolicyName(value);
     }
 
     public static OperationPolicyName of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

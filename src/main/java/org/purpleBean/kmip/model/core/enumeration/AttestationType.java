@@ -55,7 +55,7 @@ public class AttestationType implements KmipEnumeration {
     }
 
     public static AttestationType of(@NonNull Value value) {
-        return AttestationType.builder().value(value).build();
+        return new AttestationType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -54,7 +54,7 @@ public class OtpAlgorithm implements KmipEnumeration {
     }
 
     public static OtpAlgorithm of(@NonNull Value value) {
-        return OtpAlgorithm.builder().value(value).build();
+        return new OtpAlgorithm(value);
     }
 
     private static void checkValidExtensionValue(int value) {

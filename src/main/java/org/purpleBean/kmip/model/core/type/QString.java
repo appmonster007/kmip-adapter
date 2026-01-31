@@ -36,7 +36,7 @@ public class QString implements KmipDataType {
     }
 
     public static QString of(@NonNull ByteBuffer value) {
-        return QString.builder().value(value).build();
+        return new QString(value);
     }
 
     public static QString of(byte[] value) {

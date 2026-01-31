@@ -35,7 +35,7 @@ public class DataLength implements KmipDataType {
     }
 
     public static DataLength of(@NonNull Integer value) {
-        return DataLength.builder().value(value).build();
+        return new DataLength(value);
     }
 
     private void validate() {

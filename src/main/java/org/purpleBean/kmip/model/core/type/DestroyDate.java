@@ -41,7 +41,7 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     }
 
     public static DestroyDate of(@NonNull OffsetDateTime value) {
-        return DestroyDate.builder().value(value).build();
+        return new DestroyDate(value);
     }
 
     public static DestroyDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

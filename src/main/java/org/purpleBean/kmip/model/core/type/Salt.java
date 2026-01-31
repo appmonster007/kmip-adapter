@@ -36,7 +36,7 @@ public class Salt implements KmipDataType {
     }
 
     public static Salt of(@NonNull ByteBuffer value) {
-        return Salt.builder().value(value).build();
+        return new Salt(value);
     }
 
     public static Salt of(byte[] value) {

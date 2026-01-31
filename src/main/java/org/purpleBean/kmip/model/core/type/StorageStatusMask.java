@@ -41,7 +41,7 @@ public class StorageStatusMask implements KmipMaskType {
     }
 
     public static StorageStatusMask of(@NonNull Integer value) {
-        return StorageStatusMask.builder().value(value).build();
+        return new StorageStatusMask(value);
     }
 
     public static StorageStatusMask fromMaskString(@NonNull String value) {

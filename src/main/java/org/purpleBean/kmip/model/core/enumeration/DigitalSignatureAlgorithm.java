@@ -63,7 +63,7 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
     }
 
     public static DigitalSignatureAlgorithm of(@NonNull Value value) {
-        return DigitalSignatureAlgorithm.builder().value(value).build();
+        return new DigitalSignatureAlgorithm(value);
     }
 
     public static DigitalSignatureAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

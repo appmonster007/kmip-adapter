@@ -32,11 +32,11 @@ public class AttributeValueByteString implements AttributeValue {
     }
 
     public static AttributeValueByteString of(@NonNull ByteBuffer value) {
-        return AttributeValueByteString.builder().value(value).build();
+        return new AttributeValueByteString(value);
     }
 
     public static AttributeValueByteString of(byte[] value) {
-        return AttributeValueByteString.builder().value(ByteBuffer.wrap(value)).build();
+        return new AttributeValueByteString(ByteBuffer.wrap(value));
     }
 
     private void validate() {

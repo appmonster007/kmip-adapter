@@ -55,7 +55,7 @@ public class RngMode implements KmipEnumeration {
     }
 
     public static RngMode of(@NonNull Value value) {
-        return RngMode.builder().value(value).build();
+        return new RngMode(value);
     }
 
     private static void checkValidExtensionValue(int value) {

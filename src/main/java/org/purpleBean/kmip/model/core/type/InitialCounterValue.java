@@ -35,7 +35,7 @@ public class InitialCounterValue implements KmipDataType {
     }
 
     public static InitialCounterValue of(@NonNull Integer value) {
-        return InitialCounterValue.builder().value(value).build();
+        return new InitialCounterValue(value);
     }
 
     private void validate() {

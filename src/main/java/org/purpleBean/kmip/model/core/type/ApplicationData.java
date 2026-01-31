@@ -36,7 +36,7 @@ public class ApplicationData implements KmipDataType {
     }
 
     public static ApplicationData of(@NonNull String value) {
-        return ApplicationData.builder().value(value).build();
+        return new ApplicationData(value);
     }
 
     private void validate() {

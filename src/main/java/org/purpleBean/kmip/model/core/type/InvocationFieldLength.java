@@ -35,7 +35,7 @@ public class InvocationFieldLength implements KmipDataType {
     }
 
     public static InvocationFieldLength of(@NonNull Integer value) {
-        return InvocationFieldLength.builder().value(value).build();
+        return new InvocationFieldLength(value);
     }
 
     private void validate() {

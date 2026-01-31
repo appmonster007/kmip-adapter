@@ -37,7 +37,7 @@ public class Fresh implements KmipDataType, KmipAttribute {
     }
 
     public static Fresh of(@NonNull Boolean value) {
-        return Fresh.builder().value(value).build();
+        return new Fresh(value);
     }
 
     public static Fresh of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

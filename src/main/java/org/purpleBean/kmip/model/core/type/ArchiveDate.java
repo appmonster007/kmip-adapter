@@ -41,7 +41,7 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
     }
 
     public static ArchiveDate of(@NonNull OffsetDateTime value) {
-        return ArchiveDate.builder().value(value).build();
+        return new ArchiveDate(value);
     }
 
     public static ArchiveDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

@@ -36,7 +36,7 @@ public class PublicKeyUniqueIdentifier implements KmipDataType {
     }
 
     public static PublicKeyUniqueIdentifier of(@NonNull String value) {
-        return PublicKeyUniqueIdentifier.builder().value(value).build();
+        return new PublicKeyUniqueIdentifier(value);
     }
 
     private void validate() {

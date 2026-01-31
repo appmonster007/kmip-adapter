@@ -48,7 +48,7 @@ public class NistKeyType implements KmipEnumeration {
     }
 
     public static NistKeyType of(@NonNull Value value) {
-        return NistKeyType.builder().value(value).build();
+        return new NistKeyType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -37,7 +37,7 @@ public class PrimeExponentQ implements KmipDataType {
     }
 
     public static PrimeExponentQ of(@NonNull BigInteger value) {
-        return PrimeExponentQ.builder().value(value).build();
+        return new PrimeExponentQ(value);
     }
 
     private void validate() {

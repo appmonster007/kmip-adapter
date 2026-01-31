@@ -35,7 +35,7 @@ public class IvLength implements KmipDataType {
     }
 
     public static IvLength of(@NonNull Integer value) {
-        return IvLength.builder().value(value).build();
+        return new IvLength(value);
     }
 
     private void validate() {

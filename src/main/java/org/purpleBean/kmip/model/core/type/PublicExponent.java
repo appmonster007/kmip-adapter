@@ -37,7 +37,7 @@ public class PublicExponent implements KmipDataType {
     }
 
     public static PublicExponent of(@NonNull BigInteger value) {
-        return PublicExponent.builder().value(value).build();
+        return new PublicExponent(value);
     }
 
     private void validate() {

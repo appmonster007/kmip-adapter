@@ -40,7 +40,7 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
     }
 
     public static DeactivationDate of(@NonNull OffsetDateTime value) {
-        return DeactivationDate.builder().value(value).build();
+        return new DeactivationDate(value);
     }
 
     public static DeactivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

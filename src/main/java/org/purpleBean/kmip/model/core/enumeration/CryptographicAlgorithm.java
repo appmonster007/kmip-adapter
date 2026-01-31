@@ -53,7 +53,7 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     }
 
     public static CryptographicAlgorithm of(@NonNull Value value) {
-        return CryptographicAlgorithm.builder().value(value).build();
+        return new CryptographicAlgorithm(value);
     }
 
     public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

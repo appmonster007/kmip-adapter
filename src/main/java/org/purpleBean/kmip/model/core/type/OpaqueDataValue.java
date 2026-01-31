@@ -36,7 +36,7 @@ public class OpaqueDataValue implements KmipDataType {
     }
 
     public static OpaqueDataValue of(@NonNull ByteBuffer value) {
-        return OpaqueDataValue.builder().value(value).build();
+        return new OpaqueDataValue(value);
     }
 
     public static OpaqueDataValue of(byte[] value) {

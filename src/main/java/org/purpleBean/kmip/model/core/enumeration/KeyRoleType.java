@@ -47,7 +47,7 @@ public class KeyRoleType implements KmipEnumeration {
     }
 
     public static KeyRoleType of(@NonNull Value value) {
-        return KeyRoleType.builder().value(value).build();
+        return new KeyRoleType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

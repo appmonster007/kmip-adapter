@@ -55,7 +55,7 @@ public class UsageLimitsUnit implements KmipEnumeration {
     }
 
     public static UsageLimitsUnit of(@NonNull Value value) {
-        return UsageLimitsUnit.builder().value(value).build();
+        return new UsageLimitsUnit(value);
     }
 
     private static void checkValidExtensionValue(int value) {

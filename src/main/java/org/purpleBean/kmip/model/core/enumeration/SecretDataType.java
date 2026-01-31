@@ -54,7 +54,7 @@ public class SecretDataType implements KmipEnumeration {
     }
 
     public static SecretDataType of(@NonNull Value value) {
-        return SecretDataType.builder().value(value).build();
+        return new SecretDataType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

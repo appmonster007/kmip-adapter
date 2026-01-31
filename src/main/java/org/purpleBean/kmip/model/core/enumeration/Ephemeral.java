@@ -53,7 +53,7 @@ public class Ephemeral implements KmipEnumeration {
     }
 
     public static Ephemeral of(@NonNull Value value) {
-        return Ephemeral.builder().value(value).build();
+        return new Ephemeral(value);
     }
 
     private static void checkValidExtensionValue(int value) {

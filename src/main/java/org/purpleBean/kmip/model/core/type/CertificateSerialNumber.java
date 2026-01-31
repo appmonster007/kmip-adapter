@@ -36,7 +36,7 @@ public class CertificateSerialNumber implements KmipDataType {
     }
 
     public static CertificateSerialNumber of(@NonNull ByteBuffer value) {
-        return CertificateSerialNumber.builder().value(value).build();
+        return new CertificateSerialNumber(value);
     }
 
     public static CertificateSerialNumber of(byte[] value) {

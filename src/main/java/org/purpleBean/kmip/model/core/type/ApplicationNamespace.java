@@ -36,7 +36,7 @@ public class ApplicationNamespace implements KmipDataType {
     }
 
     public static ApplicationNamespace of(@NonNull String value) {
-        return ApplicationNamespace.builder().value(value).build();
+        return new ApplicationNamespace(value);
     }
 
     private void validate() {

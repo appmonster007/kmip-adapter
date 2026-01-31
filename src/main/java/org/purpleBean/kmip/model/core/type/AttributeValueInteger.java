@@ -35,7 +35,7 @@ public class AttributeValueInteger implements KmipMaskType, AttributeValue {
     }
 
     public static AttributeValueInteger of(@NonNull Integer value) {
-        return AttributeValueInteger.builder().value(value).build();
+        return new AttributeValueInteger(value, null);
     }
 
     private void validate() {

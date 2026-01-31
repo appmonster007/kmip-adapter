@@ -56,7 +56,7 @@ public class ShreddingAlgorithm implements KmipEnumeration {
     }
 
     public static ShreddingAlgorithm of(@NonNull Value value) {
-        return ShreddingAlgorithm.builder().value(value).build();
+        return new ShreddingAlgorithm(value);
     }
 
     private static void checkValidExtensionValue(int value) {

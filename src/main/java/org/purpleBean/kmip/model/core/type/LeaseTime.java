@@ -38,7 +38,7 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
     }
 
     public static LeaseTime of(@NonNull Integer value) {
-        return LeaseTime.builder().value(value).build();
+        return new LeaseTime(value);
     }
 
     public static LeaseTime of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

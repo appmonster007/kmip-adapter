@@ -36,7 +36,7 @@ public class IssuerAlternativeName implements KmipDataType {
     }
 
     public static IssuerAlternativeName of(@NonNull ByteBuffer value) {
-        return IssuerAlternativeName.builder().value(value).build();
+        return new IssuerAlternativeName(value);
     }
 
     public static IssuerAlternativeName of(byte[] value) {

@@ -36,7 +36,7 @@ public class ResultMessage implements KmipDataType {
     }
 
     public static ResultMessage of(@NonNull String value) {
-        return ResultMessage.builder().value(value).build();
+        return new ResultMessage(value);
     }
 
     private void validate() {

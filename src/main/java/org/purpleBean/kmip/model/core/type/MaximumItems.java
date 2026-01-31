@@ -36,7 +36,7 @@ public class MaximumItems implements KmipDataType {
     }
 
     public static MaximumItems of(@NonNull Integer value) {
-        return MaximumItems.builder().value(value).build();
+        return new MaximumItems(value);
     }
 
     private void validate() {

@@ -36,7 +36,7 @@ public class DataByteString implements KmipDataType {
     }
 
     public static DataByteString of(@NonNull ByteBuffer value) {
-        return DataByteString.builder().value(value).build();
+        return new DataByteString(value);
     }
 
     public static DataByteString of(byte[] value) {

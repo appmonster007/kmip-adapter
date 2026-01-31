@@ -56,7 +56,7 @@ public class NameType implements KmipEnumeration {
     }
 
     public static NameType of(@NonNull Value value) {
-        return NameType.builder().value(value).build();
+        return new NameType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

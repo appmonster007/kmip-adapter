@@ -35,7 +35,7 @@ public class PrivateKeyTemplateAttribute implements KmipDataType {
     }
 
     public static PrivateKeyTemplateAttribute of(@NonNull String value) {
-        return PrivateKeyTemplateAttribute.builder().value(value).build();
+        return new PrivateKeyTemplateAttribute(value);
     }
 
     private void validate() {

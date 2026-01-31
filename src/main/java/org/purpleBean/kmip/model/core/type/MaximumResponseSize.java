@@ -36,7 +36,7 @@ public class MaximumResponseSize implements KmipDataType {
     }
 
     public static MaximumResponseSize of(@NonNull Integer value) {
-        return MaximumResponseSize.builder().value(value).build();
+        return new MaximumResponseSize(value);
     }
 
     private void validate() {

@@ -36,7 +36,7 @@ public class CertificateRequest implements KmipDataType {
     }
 
     public static CertificateRequest of(@NonNull ByteBuffer value) {
-        return CertificateRequest.builder().value(value).build();
+        return new CertificateRequest(value);
     }
 
     public static CertificateRequest of(byte[] value) {

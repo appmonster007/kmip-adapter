@@ -54,7 +54,7 @@ public class ObjectGroupMember implements KmipEnumeration {
     }
 
     public static ObjectGroupMember of(@NonNull Value value) {
-        return ObjectGroupMember.builder().value(value).build();
+        return new ObjectGroupMember(value);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -36,7 +36,7 @@ public class AsynchronousIndicator implements KmipDataType {
     }
 
     public static AsynchronousIndicator of(@NonNull Boolean value) {
-        return AsynchronousIndicator.builder().value(value).build();
+        return new AsynchronousIndicator(value);
     }
 
     private void validate() {

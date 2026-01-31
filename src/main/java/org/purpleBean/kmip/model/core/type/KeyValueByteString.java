@@ -33,7 +33,7 @@ public class KeyValueByteString implements KeyValue {
     }
 
     public static KeyValueByteString of(@NonNull ByteBuffer value) {
-        return KeyValueByteString.builder().value(value).build();
+        return new KeyValueByteString(value);
     }
 
     public static KeyValueByteString of(byte[] value) {

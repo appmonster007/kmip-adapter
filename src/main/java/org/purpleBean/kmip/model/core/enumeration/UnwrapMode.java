@@ -54,7 +54,7 @@ public class UnwrapMode implements KmipEnumeration {
     }
 
     public static UnwrapMode of(@NonNull Value value) {
-        return UnwrapMode.builder().value(value).build();
+        return new UnwrapMode(value);
     }
 
     private static void checkValidExtensionValue(int value) {

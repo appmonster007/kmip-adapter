@@ -36,7 +36,7 @@ public class Qlength implements KmipDataType {
     }
 
     public static Qlength of(@NonNull Integer value) {
-        return Qlength.builder().value(value).build();
+        return new Qlength(value);
     }
 
     private void validate() {

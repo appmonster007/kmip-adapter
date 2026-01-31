@@ -36,7 +36,7 @@ public class NetworkIdentifier implements KmipDataType {
     }
 
     public static NetworkIdentifier of(@NonNull String value) {
-        return NetworkIdentifier.builder().value(value).build();
+        return new NetworkIdentifier(value);
     }
 
     private void validate() {

@@ -59,7 +59,7 @@ public class DestroyAction implements KmipEnumeration {
     }
 
     public static DestroyAction of(@NonNull Value value) {
-        return DestroyAction.builder().value(value).build();
+        return new DestroyAction(value);
     }
 
     private static void checkValidExtensionValue(int value) {

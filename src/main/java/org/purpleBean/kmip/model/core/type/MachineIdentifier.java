@@ -36,7 +36,7 @@ public class MachineIdentifier implements KmipDataType {
     }
 
     public static MachineIdentifier of(@NonNull String value) {
-        return MachineIdentifier.builder().value(value).build();
+        return new MachineIdentifier(value);
     }
 
     private void validate() {

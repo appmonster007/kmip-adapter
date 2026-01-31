@@ -53,7 +53,7 @@ public class TicketType implements KmipEnumeration {
     }
 
     public static TicketType of(@NonNull Value value) {
-        return TicketType.builder().value(value).build();
+        return new TicketType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

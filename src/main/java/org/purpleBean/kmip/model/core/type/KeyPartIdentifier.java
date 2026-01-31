@@ -36,7 +36,7 @@ public class KeyPartIdentifier implements KmipDataType {
     }
 
     public static KeyPartIdentifier of(@NonNull Integer value) {
-        return KeyPartIdentifier.builder().value(value).build();
+        return new KeyPartIdentifier(value);
     }
 
     private void validate() {

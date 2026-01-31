@@ -36,7 +36,7 @@ public class InitializationVector implements KmipDataType {
     }
 
     public static InitializationVector of(@NonNull ByteBuffer value) {
-        return InitializationVector.builder().value(value).build();
+        return new InitializationVector(value);
     }
 
     public static InitializationVector of(byte[] value) {

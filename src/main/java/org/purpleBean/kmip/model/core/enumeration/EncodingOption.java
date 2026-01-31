@@ -53,7 +53,7 @@ public class EncodingOption implements KmipEnumeration {
     }
 
     public static EncodingOption of(@NonNull Value value) {
-        return EncodingOption.builder().value(value).build();
+        return new EncodingOption(value);
     }
 
     private static void checkValidExtensionValue(int value) {

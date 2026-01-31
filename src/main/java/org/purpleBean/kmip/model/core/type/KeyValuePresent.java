@@ -37,7 +37,7 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
     }
 
     public static KeyValuePresent of(@NonNull Boolean value) {
-        return KeyValuePresent.builder().value(value).build();
+        return new KeyValuePresent(value);
     }
 
     public static KeyValuePresent of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

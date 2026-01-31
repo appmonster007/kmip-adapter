@@ -58,7 +58,7 @@ public class DrbgAlgorithm implements KmipEnumeration {
     }
 
     public static DrbgAlgorithm of(@NonNull Value value) {
-        return DrbgAlgorithm.builder().value(value).build();
+        return new DrbgAlgorithm(value);
     }
 
     private static void checkValidExtensionValue(int value) {

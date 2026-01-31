@@ -37,7 +37,7 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     }
 
     public static ContactInformation of(@NonNull String value) {
-        return ContactInformation.builder().value(value).build();
+        return new ContactInformation(value);
     }
 
     public static ContactInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

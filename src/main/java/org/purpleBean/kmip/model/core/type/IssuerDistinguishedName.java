@@ -36,7 +36,7 @@ public class IssuerDistinguishedName implements KmipDataType {
     }
 
     public static IssuerDistinguishedName of(@NonNull ByteBuffer value) {
-        return IssuerDistinguishedName.builder().value(value).build();
+        return new IssuerDistinguishedName(value);
     }
 
     public static IssuerDistinguishedName of(byte[] value) {

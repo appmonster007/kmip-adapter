@@ -37,7 +37,7 @@ public class G implements KmipDataType {
     }
 
     public static G of(@NonNull BigInteger value) {
-        return G.builder().value(value).build();
+        return new G(value);
     }
 
     private void validate() {

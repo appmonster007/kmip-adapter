@@ -36,7 +36,7 @@ public class Username implements KmipDataType {
     }
 
     public static Username of(@NonNull String value) {
-        return Username.builder().value(value).build();
+        return new Username(value);
     }
 
     private void validate() {

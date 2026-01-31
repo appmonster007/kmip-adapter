@@ -56,7 +56,7 @@ public class CertificateRequestType implements KmipEnumeration {
     }
 
     public static CertificateRequestType of(@NonNull Value value) {
-        return CertificateRequestType.builder().value(value).build();
+        return new CertificateRequestType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

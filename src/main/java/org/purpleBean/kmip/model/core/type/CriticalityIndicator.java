@@ -36,7 +36,7 @@ public class CriticalityIndicator implements KmipDataType {
     }
 
     public static CriticalityIndicator of(@NonNull Boolean value) {
-        return CriticalityIndicator.builder().value(value).build();
+        return new CriticalityIndicator(value);
     }
 
     private void validate() {

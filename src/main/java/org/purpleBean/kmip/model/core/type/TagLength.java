@@ -35,7 +35,7 @@ public class TagLength implements KmipDataType {
     }
 
     public static TagLength of(@NonNull Integer value) {
-        return TagLength.builder().value(value).build();
+        return new TagLength(value);
     }
 
     private void validate() {

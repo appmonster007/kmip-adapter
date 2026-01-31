@@ -36,7 +36,7 @@ public class Key implements KmipDataType {
     }
 
     public static Key of(@NonNull ByteBuffer value) {
-        return Key.builder().value(value).build();
+        return new Key(value);
     }
 
     public static Key of(byte[] value) {

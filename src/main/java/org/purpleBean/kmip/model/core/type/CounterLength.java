@@ -35,7 +35,7 @@ public class CounterLength implements KmipDataType {
     }
 
     public static CounterLength of(@NonNull Integer value) {
-        return CounterLength.builder().value(value).build();
+        return new CounterLength(value);
     }
 
     private void validate() {

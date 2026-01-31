@@ -35,7 +35,7 @@ public class FixedFieldLength implements KmipDataType {
     }
 
     public static FixedFieldLength of(@NonNull Integer value) {
-        return FixedFieldLength.builder().value(value).build();
+        return new FixedFieldLength(value);
     }
 
     private void validate() {

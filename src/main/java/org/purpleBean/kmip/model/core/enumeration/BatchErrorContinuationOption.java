@@ -58,7 +58,7 @@ public class BatchErrorContinuationOption implements KmipEnumeration {
     }
 
     public static BatchErrorContinuationOption of(@NonNull Value value) {
-        return BatchErrorContinuationOption.builder().value(value).build();
+        return new BatchErrorContinuationOption(value);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -40,7 +40,7 @@ public class ProtectStopDate implements KmipDataType, KmipAttribute {
     }
 
     public static ProtectStopDate of(@NonNull OffsetDateTime value) {
-        return ProtectStopDate.builder().value(value).build();
+        return new ProtectStopDate(value);
     }
 
     public static ProtectStopDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

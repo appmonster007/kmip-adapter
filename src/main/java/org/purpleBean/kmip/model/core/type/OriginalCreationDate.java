@@ -40,7 +40,7 @@ public class OriginalCreationDate implements KmipDataType, KmipAttribute {
     }
 
     public static OriginalCreationDate of(@NonNull OffsetDateTime value) {
-        return OriginalCreationDate.builder().value(value).build();
+        return new OriginalCreationDate(value);
     }
 
     public static OriginalCreationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

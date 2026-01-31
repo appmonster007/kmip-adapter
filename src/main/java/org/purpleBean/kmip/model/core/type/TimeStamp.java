@@ -39,7 +39,7 @@ public class TimeStamp implements KmipDataType {
     }
 
     public static TimeStamp of(@NonNull OffsetDateTime value) {
-        return TimeStamp.builder().value(value).build();
+        return new TimeStamp(value);
     }
 
     private void validate() {

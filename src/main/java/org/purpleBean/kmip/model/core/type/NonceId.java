@@ -36,7 +36,7 @@ public class NonceId implements KmipDataType {
     }
 
     public static NonceId of(@NonNull ByteBuffer value) {
-        return NonceId.builder().value(value).build();
+        return new NonceId(value);
     }
 
     public static NonceId of(byte[] value) {

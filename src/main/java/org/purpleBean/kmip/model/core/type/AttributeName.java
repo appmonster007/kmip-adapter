@@ -34,7 +34,7 @@ public class AttributeName implements KmipDataType {
     }
 
     public static AttributeName of(@NonNull String name) {
-        return AttributeName.builder().value(name).build();
+        return new AttributeName(name);
     }
 
     private void validate() {

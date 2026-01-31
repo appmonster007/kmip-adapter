@@ -31,7 +31,7 @@ public class AttributeValueLongInteger implements AttributeValue {
     }
 
     public static AttributeValueLongInteger of(@NonNull Long value) {
-        return AttributeValueLongInteger.builder().value(value).build();
+        return new AttributeValueLongInteger(value);
     }
 
     private void validate() {

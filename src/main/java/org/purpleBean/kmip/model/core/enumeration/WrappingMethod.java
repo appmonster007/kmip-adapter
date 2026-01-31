@@ -63,7 +63,7 @@ public class WrappingMethod implements KmipEnumeration {
     }
 
     public static WrappingMethod of(@NonNull Value value) {
-        return WrappingMethod.builder().value(value).build();
+        return new WrappingMethod(value);
     }
 
     private static void checkValidExtensionValue(int value) {

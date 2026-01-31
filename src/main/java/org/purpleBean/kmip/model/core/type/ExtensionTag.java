@@ -35,7 +35,7 @@ public class ExtensionTag implements KmipDataType {
     }
 
     public static ExtensionTag of(@NonNull Integer value) {
-        return ExtensionTag.builder().value(value).build();
+        return new ExtensionTag(value);
     }
 
     private void validate() {

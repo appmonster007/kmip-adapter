@@ -61,7 +61,7 @@ public class AlternativeNameType implements KmipEnumeration {
     }
 
     public static AlternativeNameType of(@NonNull Value value) {
-        return AlternativeNameType.builder().value(value).build();
+        return new AlternativeNameType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

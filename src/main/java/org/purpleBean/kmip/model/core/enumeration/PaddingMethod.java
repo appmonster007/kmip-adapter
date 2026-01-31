@@ -63,7 +63,7 @@ public class PaddingMethod implements KmipEnumeration {
     }
 
     public static PaddingMethod of(@NonNull Value value) {
-        return PaddingMethod.builder().value(value).build();
+        return new PaddingMethod(value);
     }
 
     private static void checkValidExtensionValue(int value) {

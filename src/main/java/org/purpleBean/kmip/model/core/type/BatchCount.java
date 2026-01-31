@@ -35,7 +35,7 @@ public class BatchCount implements KmipDataType {
     }
 
     public static BatchCount of(@NonNull Integer value) {
-        return BatchCount.builder().value(value).build();
+        return new BatchCount(value);
     }
 
     private void validate() {

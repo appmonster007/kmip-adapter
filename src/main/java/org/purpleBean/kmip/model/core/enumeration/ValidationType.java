@@ -57,7 +57,7 @@ public class ValidationType implements KmipEnumeration {
     }
 
     public static ValidationType of(@NonNull Value value) {
-        return ValidationType.builder().value(value).build();
+        return new ValidationType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

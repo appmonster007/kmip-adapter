@@ -62,7 +62,7 @@ public class State implements KmipEnumeration, KmipAttribute {
     }
 
     public static State of(@NonNull Value value) {
-        return State.builder().value(value).build();
+        return new State(value);
     }
 
     public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
@@ -73,7 +73,7 @@ public class State implements KmipEnumeration, KmipAttribute {
             throw new IllegalArgumentException("Invalid encoding type");
         }
         State.Value v = fromValue(enumeration.getIntValue());
-        return State.builder().value(v).build();
+        return new State(v);
     }
 
     private static void checkValidExtensionValue(int value) {

@@ -31,7 +31,7 @@ public class AttributeValueBigInteger implements AttributeValue {
     }
 
     public static AttributeValueBigInteger of(@NonNull java.math.BigInteger value) {
-        return AttributeValueBigInteger.builder().value(value).build();
+        return new AttributeValueBigInteger(value);
     }
 
     private void validate() {

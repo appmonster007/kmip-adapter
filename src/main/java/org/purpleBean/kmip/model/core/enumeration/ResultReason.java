@@ -137,7 +137,7 @@ public class ResultReason implements KmipEnumeration {
     }
 
     public static ResultReason of(@NonNull Value value) {
-        return ResultReason.builder().value(value).build();
+        return new ResultReason(value);
     }
 
     private static void checkValidExtensionValue(int value) {

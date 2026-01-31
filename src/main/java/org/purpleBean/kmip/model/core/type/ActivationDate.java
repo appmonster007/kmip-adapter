@@ -40,14 +40,14 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     }
 
     public static ActivationDate of(@NonNull OffsetDateTime value) {
-        return ActivationDate.builder().value(value).build();
+        return new ActivationDate(value);
     }
 
     public static ActivationDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return ActivationDate.builder().value(dateTime.getValue()).build();
+        return new ActivationDate(dateTime.getValue());
     }
 
     private void validate() {

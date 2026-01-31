@@ -36,7 +36,7 @@ public class Password implements KmipDataType {
     }
 
     public static Password of(@NonNull String value) {
-        return Password.builder().value(value).build();
+        return new Password(value);
     }
 
     private void validate() {

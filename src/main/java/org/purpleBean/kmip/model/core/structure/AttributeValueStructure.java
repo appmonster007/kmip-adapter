@@ -36,7 +36,7 @@ public class AttributeValueStructure implements AttributeValue, KmipStructure {
     }
 
     public static AttributeValueStructure of(@NonNull List<KmipDataType> values) {
-        return AttributeValueStructure.builder().values(values).build();
+        return new AttributeValueStructure(values);
     }
 
     public static AttributeValueStructure of(@NonNull KmipDataType... values) {

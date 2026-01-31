@@ -63,7 +63,7 @@ public class DerivationMethod implements KmipEnumeration {
     }
 
     public static DerivationMethod of(@NonNull Value value) {
-        return DerivationMethod.builder().value(value).build();
+        return new DerivationMethod(value);
     }
 
     private static void checkValidExtensionValue(int value) {

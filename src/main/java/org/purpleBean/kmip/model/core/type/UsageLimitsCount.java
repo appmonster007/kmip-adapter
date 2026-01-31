@@ -36,7 +36,7 @@ public class UsageLimitsCount implements KmipDataType {
     }
 
     public static UsageLimitsCount of(@NonNull Long value) {
-        return UsageLimitsCount.builder().value(value).build();
+        return new UsageLimitsCount(value);
     }
 
     private void validate() {

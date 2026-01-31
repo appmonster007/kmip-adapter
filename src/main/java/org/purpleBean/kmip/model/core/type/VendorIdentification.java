@@ -36,7 +36,7 @@ public class VendorIdentification implements KmipDataType {
     }
 
     public static VendorIdentification of(@NonNull String value) {
-        return VendorIdentification.builder().value(value).build();
+        return new VendorIdentification(value);
     }
 
     private void validate() {

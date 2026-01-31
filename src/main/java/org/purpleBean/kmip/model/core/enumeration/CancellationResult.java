@@ -57,7 +57,7 @@ public class CancellationResult implements KmipEnumeration {
     }
 
     public static CancellationResult of(@NonNull Value value) {
-        return CancellationResult.builder().value(value).build();
+        return new CancellationResult(value);
     }
 
     private static void checkValidExtensionValue(int value) {

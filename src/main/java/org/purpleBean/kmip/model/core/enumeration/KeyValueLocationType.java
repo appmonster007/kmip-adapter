@@ -56,7 +56,7 @@ public class KeyValueLocationType implements KmipEnumeration {
     }
 
     public static KeyValueLocationType of(@NonNull Value value) {
-        return KeyValueLocationType.builder().value(value).build();
+        return new KeyValueLocationType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

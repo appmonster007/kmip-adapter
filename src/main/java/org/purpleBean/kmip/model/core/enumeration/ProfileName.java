@@ -47,7 +47,7 @@ public class ProfileName implements KmipEnumeration {
     }
 
     public static ProfileName of(@NonNull Value value) {
-        return ProfileName.builder().value(value).build();
+        return new ProfileName(value);
     }
 
     private static void checkValidExtensionValue(int value) {

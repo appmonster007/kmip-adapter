@@ -40,7 +40,7 @@ public class InitialDate implements KmipDataType, KmipAttribute {
     }
 
     public static InitialDate of(@NonNull OffsetDateTime value) {
-        return InitialDate.builder().value(value).build();
+        return new InitialDate(value);
     }
 
     public static InitialDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

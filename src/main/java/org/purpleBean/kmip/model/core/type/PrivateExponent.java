@@ -37,7 +37,7 @@ public class PrivateExponent implements KmipDataType {
     }
 
     public static PrivateExponent of(@NonNull BigInteger value) {
-        return PrivateExponent.builder().value(value).build();
+        return new PrivateExponent(value);
     }
 
     private void validate() {

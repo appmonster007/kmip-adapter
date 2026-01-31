@@ -36,7 +36,7 @@ public class LinkedObjectIdentifier implements KmipDataType {
     }
 
     public static LinkedObjectIdentifier of(@NonNull String value) {
-        return LinkedObjectIdentifier.builder().value(value).build();
+        return new LinkedObjectIdentifier(value);
     }
 
     private void validate() {

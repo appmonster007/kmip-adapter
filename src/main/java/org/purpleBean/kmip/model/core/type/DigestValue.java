@@ -36,7 +36,7 @@ public class DigestValue implements KmipDataType {
     }
 
     public static DigestValue of(@NonNull ByteBuffer value) {
-        return DigestValue.builder().value(value).build();
+        return new DigestValue(value);
     }
 
     public static DigestValue of(byte[] value) {

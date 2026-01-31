@@ -56,7 +56,7 @@ public class ResultStatus implements KmipEnumeration {
     }
 
     public static ResultStatus of(@NonNull Value value) {
-        return ResultStatus.builder().value(value).build();
+        return new ResultStatus(value);
     }
 
     private static void checkValidExtensionValue(int value) {

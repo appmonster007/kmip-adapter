@@ -60,7 +60,7 @@ public class RevocationReasonCode implements KmipEnumeration {
     }
 
     public static RevocationReasonCode of(@NonNull Value value) {
-        return RevocationReasonCode.builder().value(value).build();
+        return new RevocationReasonCode(value);
     }
 
     private static void checkValidExtensionValue(int value) {

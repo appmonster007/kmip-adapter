@@ -36,7 +36,7 @@ public class DeviceSerialNumber implements KmipDataType {
     }
 
     public static DeviceSerialNumber of(@NonNull String value) {
-        return DeviceSerialNumber.builder().value(value).build();
+        return new DeviceSerialNumber(value);
     }
 
     private void validate() {

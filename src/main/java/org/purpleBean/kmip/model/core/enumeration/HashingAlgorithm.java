@@ -61,7 +61,7 @@ public class HashingAlgorithm implements KmipEnumeration {
     }
 
     public static HashingAlgorithm of(@NonNull Value value) {
-        return HashingAlgorithm.builder().value(value).build();
+        return new HashingAlgorithm(value);
     }
 
     private static void checkValidExtensionValue(int value) {

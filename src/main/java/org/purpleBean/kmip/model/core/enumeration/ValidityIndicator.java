@@ -55,7 +55,7 @@ public class ValidityIndicator implements KmipEnumeration {
     }
 
     public static ValidityIndicator of(@NonNull Value value) {
-        return ValidityIndicator.builder().value(value).build();
+        return new ValidityIndicator(value);
     }
 
     private static void checkValidExtensionValue(int value) {

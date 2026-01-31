@@ -36,7 +36,7 @@ public class Issuer implements KmipDataType {
     }
 
     public static Issuer of(@NonNull String value) {
-        return Issuer.builder().value(value).build();
+        return new Issuer(value);
     }
 
     private void validate() {

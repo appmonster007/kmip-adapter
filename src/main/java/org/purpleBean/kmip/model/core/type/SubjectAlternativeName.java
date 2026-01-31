@@ -36,7 +36,7 @@ public class SubjectAlternativeName implements KmipDataType {
     }
 
     public static SubjectAlternativeName of(@NonNull ByteBuffer value) {
-        return SubjectAlternativeName.builder().value(value).build();
+        return new SubjectAlternativeName(value);
     }
 
     public static SubjectAlternativeName of(byte[] value) {

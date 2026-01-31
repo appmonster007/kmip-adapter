@@ -36,7 +36,7 @@ public class AttestationMeasurement implements KmipDataType {
     }
 
     public static AttestationMeasurement of(@NonNull ByteBuffer value) {
-        return AttestationMeasurement.builder().value(value).build();
+        return new AttestationMeasurement(value);
     }
 
     public static AttestationMeasurement of(byte[] value) {

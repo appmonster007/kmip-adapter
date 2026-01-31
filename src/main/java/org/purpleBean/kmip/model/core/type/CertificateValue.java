@@ -36,7 +36,7 @@ public class CertificateValue implements KmipDataType {
     }
 
     public static CertificateValue of(@NonNull ByteBuffer value) {
-        return CertificateValue.builder().value(value).build();
+        return new CertificateValue(value);
     }
 
     public static CertificateValue of(byte[] value) {

@@ -31,7 +31,7 @@ public class AttributeValueTextString implements AttributeValue {
     }
 
     public static AttributeValueTextString of(@NonNull String value) {
-        return AttributeValueTextString.builder().value(value).build();
+        return new AttributeValueTextString(value);
     }
 
     private void validate() {

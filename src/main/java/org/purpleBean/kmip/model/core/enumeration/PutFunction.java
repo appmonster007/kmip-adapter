@@ -55,7 +55,7 @@ public class PutFunction implements KmipEnumeration {
     }
 
     public static PutFunction of(@NonNull Value value) {
-        return PutFunction.builder().value(value).build();
+        return new PutFunction(value);
     }
 
     private static void checkValidExtensionValue(int value) {

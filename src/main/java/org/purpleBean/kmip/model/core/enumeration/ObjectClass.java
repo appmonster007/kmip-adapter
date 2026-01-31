@@ -53,7 +53,7 @@ public class ObjectClass implements KmipEnumeration {
     }
 
     public static ObjectClass of(@NonNull Value value) {
-        return ObjectClass.builder().value(value).build();
+        return new ObjectClass(value);
     }
 
     private static void checkValidExtensionValue(int value) {

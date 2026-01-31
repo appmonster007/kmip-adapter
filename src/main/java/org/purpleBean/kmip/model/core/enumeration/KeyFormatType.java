@@ -68,7 +68,7 @@ public class KeyFormatType implements KmipEnumeration {
     }
 
     public static KeyFormatType of(@NonNull Value value) {
-        return KeyFormatType.builder().value(value).build();
+        return new KeyFormatType(value);
     }
 
     private static void checkValidExtensionValue(int value) {

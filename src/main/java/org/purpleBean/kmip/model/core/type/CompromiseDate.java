@@ -40,7 +40,7 @@ public class CompromiseDate implements KmipDataType, KmipAttribute {
     }
 
     public static CompromiseDate of(@NonNull OffsetDateTime value) {
-        return CompromiseDate.builder().value(value).build();
+        return new CompromiseDate(value);
     }
 
     public static CompromiseDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {

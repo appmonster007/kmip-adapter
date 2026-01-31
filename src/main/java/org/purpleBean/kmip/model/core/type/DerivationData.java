@@ -36,7 +36,7 @@ public class DerivationData implements KmipDataType {
     }
 
     public static DerivationData of(@NonNull ByteBuffer value) {
-        return DerivationData.builder().value(value).build();
+        return new DerivationData(value);
     }
 
     public static DerivationData of(byte[] value) {
