@@ -47,21 +47,8 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         validate();
     }
 
-    private void validate() {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for {{ENUM_NAME}} is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
-
     public static {{ENUM_NAME}} of(@NonNull Value value) {
-        return {{ENUM_NAME}}.builder().value(value).build();
+        return new {{ENUM_NAME}}(value);
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -127,6 +114,19 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
      */
     public static Collection<Value> registeredValues() {
         return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    }
+
+    private void validate() {
+        // KMIP spec compatibility validation
+        KmipSpec spec = KmipContext.getSpec();
+        if (!value.isSupported()) {
+            throw new IllegalArgumentException(
+                    String.format("Value '%s' for {{ENUM_NAME}} is not supported for KMIP spec %s", value.getDescription(), spec)
+            );
+        }
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
     }
 
     @Override

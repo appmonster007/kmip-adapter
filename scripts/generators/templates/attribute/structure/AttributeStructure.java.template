@@ -58,14 +58,6 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
         validate();
     }
 
-    // TODO: Add a validate method
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        // Add validation logic here
-    }
-
     public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -92,6 +84,14 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
                      // .field1(field1)
                      // .field2(field2)
                      .build();
+    }
+
+    // TODO: Add a validate method
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // Add validation logic here
     }
 
     @Override

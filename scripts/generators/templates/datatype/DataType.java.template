@@ -42,7 +42,7 @@ public class {{DATA_NAME}} implements KmipDataType {
     }
 
     public static {{DATA_NAME}} of(@NonNull {{DATA_TYPE}} value) {
-        return {{DATA_NAME}}.builder().value(value).build();
+        return new {{DATA_NAME}}(value);
     }
 
     private void validate() {

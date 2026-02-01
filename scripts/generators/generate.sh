@@ -208,8 +208,8 @@ EOF
                 "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME" "${ENUM_NAME}"
         fi
 
-        local create_default="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[0])"
-        local create_variant="new ${ENUM_NAME}(${ENUM_NAME}.Standard.values()[1])"
+        local create_default="${ENUM_NAME}.Standard.values()[0].inst()"
+        local create_variant="${ENUM_NAME}.Standard.values()[1].inst()"
 
         if ${GEN_JSON_SER}; then generate_unified_serializer "${ENUM_NAME}" "${SUB_PATH}" "json"; fi
         if ${GEN_JSON_DES}; then generate_unified_deserializer "${ENUM_NAME}" "${SUB_PATH}" "json" "${ENUM_NAME}.fromName(ctxt.readValue(p, String.class))"; fi
@@ -480,8 +480,8 @@ EOF
                 "org.purpleBean.kmip.codec.ttlv.deserializer.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
         fi
 
-        local create_default_struct="new ${STRUCTURE_NAME}()"
-        local create_variant_struct="new ${STRUCTURE_NAME}()"
+        local create_default_struct="${STRUCTURE_NAME}.builder().build()"
+        local create_variant_struct="${STRUCTURE_NAME}.builder().build()"
         if ${GEN_JSON_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "json" "${create_default_struct}" "${create_variant_struct}"; fi
         if ${GEN_XML_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "xml" "${create_default_struct}" "${create_variant_struct}"; fi
         if ${GEN_TTLV_TEST}; then generate_unified_codec_test "${STRUCTURE_NAME}" "${SUB_PATH}" "ttlv" "${create_default_struct}" "${create_variant_struct}"; fi

@@ -1,3 +1,4 @@
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.TtlvDataTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.AdjustmentTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.AlternativeNameTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.AsynchronousIndicatorTtlvSerializer
@@ -266,7 +267,6 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ValidityDateTtlvSerial
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.VendorIdentificationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.XTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.YTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.TtlvDataTypeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestBatchItemTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestHeaderTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.RequestMessageTtlvSerializer

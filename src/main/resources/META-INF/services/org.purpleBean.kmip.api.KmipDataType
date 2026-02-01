@@ -1,3 +1,4 @@
+org.purpleBean.kmip.model.core.TtlvDataType
 org.purpleBean.kmip.model.core.enumeration.AdjustmentType
 org.purpleBean.kmip.model.core.enumeration.AlternativeNameType
 org.purpleBean.kmip.model.core.enumeration.AsynchronousIndicator
@@ -266,7 +267,6 @@ org.purpleBean.kmip.model.core.type.ValidityDate
 org.purpleBean.kmip.model.core.type.VendorIdentification
 org.purpleBean.kmip.model.core.type.X
 org.purpleBean.kmip.model.core.type.Y
-org.purpleBean.kmip.model.core.TtlvDataType
 org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem
 org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader
 org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage

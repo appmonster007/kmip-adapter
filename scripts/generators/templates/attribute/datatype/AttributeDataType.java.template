@@ -45,14 +45,14 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     }
 
     public static {{ATTRIBUTE_NAME}} of(@NonNull {{DATA_TYPE}} value) {
-        return {{ATTRIBUTE_NAME}}.builder().value(value).build();
+        return new {{ATTRIBUTE_NAME}}(value);
     }
 
     public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof {{ATTRIBUTE_VALUE_TYPE}} attributeValueTyped)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return {{ATTRIBUTE_NAME}}.builder().value(attributeValueTyped.getValue()).build();
+        return new {{ATTRIBUTE_NAME}}(attributeValueTyped.getValue());
     }
 
     private void validate() {

@@ -1,3 +1,4 @@
+org.purpleBean.kmip.codec.json.serializer.model.core.TtlvDataTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.AdjustmentTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.AlternativeNameTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.AsynchronousIndicatorJsonSerializer
@@ -266,7 +267,6 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.ValidityDateJsonSerial
 org.purpleBean.kmip.codec.json.serializer.model.core.type.VendorIdentificationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.XJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.YJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.TtlvDataTypeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestBatchItemJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestHeaderJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.RequestMessageJsonSerializer

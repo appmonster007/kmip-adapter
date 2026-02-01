@@ -53,14 +53,6 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
         validate();
     }
 
-    // TODO: Add a validate method
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        // Add validation logic here
-    }
-
     // TODO: Add an 'of' method with a single argument of KmipStructure, if required
     // public static {{STRUCTURE_NAME}} of(@NonNull KmipDataType value) {
     //     if (!(value instanceof KmipStructure structure)) {
@@ -88,6 +80,14 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
                      // .field1(field1)
                      // .field2(field2)
                      .build();
+    }
+
+    // TODO: Add a validate method
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+        // Add validation logic here
     }
 
     @Override

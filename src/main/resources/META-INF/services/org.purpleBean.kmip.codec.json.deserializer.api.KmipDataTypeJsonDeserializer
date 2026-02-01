@@ -12,6 +12,7 @@ org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseBatchItemStruct
 org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseHeaderStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.response.ResponseMessageStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.response.ResponsePayloadStructureJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.TtlvDataTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AdjustmentTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AlternativeNameTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.AsynchronousIndicatorJsonDeserializer
@@ -280,7 +281,6 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.ValidityDateJsonDese
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.VendorIdentificationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.XJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.YJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.TtlvDataTypeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestBatchItemJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestHeaderJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request.RequestMessageJsonDeserializer

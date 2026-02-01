@@ -12,6 +12,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.api.response.ResponseBatchItemStruct
 org.purpleBean.kmip.codec.ttlv.deserializer.api.response.ResponseHeaderStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.api.response.ResponseMessageStructureTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.api.response.ResponsePayloadStructureTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.TtlvDataTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AdjustmentTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AlternativeNameTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.AsynchronousIndicatorTtlvDeserializer
@@ -280,7 +281,6 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ValidityDateTtlvDese
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.VendorIdentificationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.XTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.YTtlvDeserializer
-org.purpleBean.kmip.codec.ttlv.deserializer.model.core.TtlvDataTypeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestBatchItemTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestHeaderTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.RequestMessageTtlvDeserializer
