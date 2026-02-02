@@ -21,7 +21,7 @@ public class ProtocolVersionMinor implements KmipDataType {
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtocolVersionMajor.class);
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtocolVersionMinor.class);
         }
     }
 

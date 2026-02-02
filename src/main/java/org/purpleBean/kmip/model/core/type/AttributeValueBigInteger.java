@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 
+import java.math.BigInteger;
 import java.util.Set;
 
 @Data
@@ -22,7 +23,7 @@ public class AttributeValueBigInteger implements AttributeValue {
     }
 
     @NonNull
-    private final java.math.BigInteger value;
+    private final BigInteger value;
 
     @Builder
     private AttributeValueBigInteger(@NonNull java.math.BigInteger value) {
