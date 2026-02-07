@@ -283,13 +283,13 @@ EOF
 
     local ENCODING_TYPE DEFAULT_VALUE VARIANT_VALUE ATTRIBUTE_VALUE_TYPE
     case "${DATA_TYPE}" in
-        "Integer") ENCODING_TYPE="INTEGER"; DEFAULT_VALUE="123"; VARIANT_VALUE="456"; ATTRIBUTE_VALUE_TYPE="AttributeValueInteger";;
-        "Long") ENCODING_TYPE="LONG_INTEGER"; DEFAULT_VALUE="12345L"; VARIANT_VALUE="54321L"; ATTRIBUTE_VALUE_TYPE="AttributeValueLong";;
-        "BigInteger") ENCODING_TYPE="BIG_INTEGER"; DEFAULT_VALUE='new BigInteger("1234567890")'; VARIANT_VALUE='new BigInteger("9876543210")'; ATTRIBUTE_VALUE_TYPE="AttributeValueBigInteger";;
-        "Boolean") ENCODING_TYPE="BOOLEAN"; DEFAULT_VALUE="true"; VARIANT_VALUE="false"; ATTRIBUTE_VALUE_TYPE="AttributeValueBoolean";;
-        "String") ENCODING_TYPE="TEXT_STRING"; DEFAULT_VALUE='"default-string"'; VARIANT_VALUE='"variant-string"'; ATTRIBUTE_VALUE_TYPE="AttributeValueString";;
-        "ByteBuffer") ENCODING_TYPE="BYTE_STRING"; DEFAULT_VALUE="ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03})"; VARIANT_VALUE="ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06})"; ATTRIBUTE_VALUE_TYPE="AttributeValueByteString";;
-        "OffsetDateTime") ENCODING_TYPE="DATE_TIME"; DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; VARIANT_VALUE='OffsetDateTime.of(2025, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; ATTRIBUTE_VALUE_TYPE="AttributeValueDateTime";;
+        "Integer") ENCODING_TYPE="INTEGER"; DEFAULT_VALUE="123"; VARIANT_VALUE="456"; ATTRIBUTE_VALUE_TYPE="Integer";;
+        "Long") ENCODING_TYPE="LONG_INTEGER"; DEFAULT_VALUE="12345L"; VARIANT_VALUE="54321L"; ATTRIBUTE_VALUE_TYPE="LongInteger";;
+        "BigInteger") ENCODING_TYPE="BIG_INTEGER"; DEFAULT_VALUE='new BigInteger("1234567890")'; VARIANT_VALUE='new BigInteger("9876543210")'; ATTRIBUTE_VALUE_TYPE="BigInteger";;
+        "Boolean") ENCODING_TYPE="BOOLEAN"; DEFAULT_VALUE="true"; VARIANT_VALUE="false"; ATTRIBUTE_VALUE_TYPE="Boolean";;
+        "String") ENCODING_TYPE="TEXT_STRING"; DEFAULT_VALUE='"default-string"'; VARIANT_VALUE='"variant-string"'; ATTRIBUTE_VALUE_TYPE="TextString";;
+        "ByteBuffer") ENCODING_TYPE="BYTE_STRING"; DEFAULT_VALUE="ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03})"; VARIANT_VALUE="ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06})"; ATTRIBUTE_VALUE_TYPE="ByteString";;
+        "OffsetDateTime") ENCODING_TYPE="DATE_TIME"; DEFAULT_VALUE='OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; VARIANT_VALUE='OffsetDateTime.of(2025, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC)'; ATTRIBUTE_VALUE_TYPE="DateTime";;
         *) echo "Warning: Unknown data type '${DATA_TYPE}'."; ENCODING_TYPE="UNDEFINED"; DEFAULT_VALUE="null"; VARIANT_VALUE="null"; ATTRIBUTE_VALUE_TYPE="AttributeValue";;
     esac
 
