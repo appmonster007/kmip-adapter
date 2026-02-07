@@ -1,8 +1,12 @@
 # TODO
-- [ ] Fix Xml vs Json vs Ttlv deserialization and serialization for   
-    - [ ] AttributeValue type Enumeration
-    - [ ] AttributeValue for Mask type Attributes
-- [ ] Fix Xml deserialization and serialization for Mask type KmipDataTypes
+- [X] Fix Xml vs Json vs Ttlv deserialization and serialization for   
+    - [X] AttributeValue type Enumeration - read value, check if valid KmipEnumeration.Value for given attribute name
+    - [X] AttributeValue for Mask type Attributes - custom mask deserialization for XML 
+- [X] Fix Xml deserialization and serialization for Mask type KmipDataTypes - KmipMaskType.java
 - [ ] Update Enumeration description strings to correct value for Xml and Json deserialization and serialization
-- [ ] AttributeValue to be single object instead of multiple type
-- [ ] Handle unrecognised vendor tag in message extension
+- [X] AttributeValue to be single object instead of multiple type - AttributeValue.java
+- [ ] Unify Attribute test suites, possibly to interface
+- [X] Handle unrecognised vendor tag in message extension - TtlvDataType.java
+- [ ] add v2.1 enumerations
+- [ ] add v2.1 datatypes
+- [ ] add v2.1 structures and request/response structures
