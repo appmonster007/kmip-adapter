@@ -123,7 +123,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValue.ofMask(value, getMaskString());
+        return AttributeValue.ofMaskInteger(value, getMaskString());
     }
 
     @Override

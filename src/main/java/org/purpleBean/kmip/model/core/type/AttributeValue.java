@@ -61,7 +61,7 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
                 .build();
     }
 
-    public static AttributeValue ofMask(Integer value, String maskString) {
+    public static AttributeValue ofMaskInteger(Integer value, String maskString) {
         return AttributeValue.builder()
                 .encodingType(EncodingType.INTEGER)
                 .value(value)
