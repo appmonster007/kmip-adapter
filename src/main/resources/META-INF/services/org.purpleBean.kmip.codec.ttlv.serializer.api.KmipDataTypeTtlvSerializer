@@ -345,3 +345,5 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.SignOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.TransparentEcPrivateKeyTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.TransparentEcPublicKeyTtlvSerializer

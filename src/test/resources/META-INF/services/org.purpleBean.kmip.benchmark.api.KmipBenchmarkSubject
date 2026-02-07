@@ -340,3 +340,5 @@ org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.Rng
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.SignOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response.payload.ValidateOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.TransparentEcPrivateKeyBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.TransparentEcPublicKeyBenchmarkSubject

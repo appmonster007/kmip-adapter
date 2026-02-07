@@ -358,3 +358,5 @@ org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.SignOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.TransparentEcPrivateKeyJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.TransparentEcPublicKeyJsonDeserializer

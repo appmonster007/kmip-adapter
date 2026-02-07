@@ -345,3 +345,5 @@ org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.SignOpResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.TransparentEcPrivateKeyJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.TransparentEcPublicKeyJsonSerializer

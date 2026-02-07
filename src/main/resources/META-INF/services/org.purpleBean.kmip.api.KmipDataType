@@ -345,3 +345,5 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.RngSeedOpResponsePaylo
 org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ValidateOpResponsePayload
+org.purpleBean.kmip.model.v2_1.structure.TransparentEcPrivateKey
+org.purpleBean.kmip.model.v2_1.structure.TransparentEcPublicKey

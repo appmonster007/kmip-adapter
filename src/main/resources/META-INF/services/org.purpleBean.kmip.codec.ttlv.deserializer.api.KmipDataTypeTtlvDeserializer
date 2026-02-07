@@ -358,3 +358,5 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.SignOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.TransparentEcPrivateKeyTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.TransparentEcPublicKeyTtlvDeserializer

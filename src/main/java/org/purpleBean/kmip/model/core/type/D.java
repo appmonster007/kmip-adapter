@@ -17,7 +17,7 @@ public class D implements KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.D.inst();
     public static final EncodingType encodingType = EncodingType.BIG_INTEGER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {
