@@ -7,6 +7,7 @@ import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectAlternativeName;
 import org.purpleBean.kmip.model.core.type.CertificateSubjectDistinguishedName;
 import org.purpleBean.kmip.util.StringUtils;
@@ -52,13 +53,13 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     }
 
     public static CertificateSubject of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CertificateSubject.builder()
                 .certificateSubjectDistinguishedName((CertificateSubjectDistinguishedName) map.get(CertificateSubjectDistinguishedName.kmipTag).get(0))
-                .certificateSubjectAlternativeNames(map.get(CertificateSubjectAlternativeName.kmipTag).stream().map(e -> (CertificateSubjectAlternativeName) e).collect(Collectors.toList()))
+                .certificateSubjectAlternativeNames(map.containsKey(CertificateSubjectAlternativeName.kmipTag) ? map.get(CertificateSubjectAlternativeName.kmipTag).stream().map(e -> (CertificateSubjectAlternativeName) e).collect(Collectors.toList()) : Collections.emptyList())
                 .build();
     }
 
@@ -131,12 +132,12 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

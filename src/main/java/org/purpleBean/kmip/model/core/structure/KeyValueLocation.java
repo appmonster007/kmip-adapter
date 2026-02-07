@@ -7,6 +7,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 import org.purpleBean.kmip.util.StringUtils;
 
@@ -50,10 +51,10 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     }
 
     public static KeyValueLocation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return KeyValueLocation.builder()
                 .keyValueLocationValue((KeyValueLocationValue) map.get(KeyValueLocationValue.kmipTag).get(0))
                 .keyValueLocationType((KeyValueLocationType) map.get(KeyValueLocationType.kmipTag).get(0))
@@ -129,12 +130,12 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

@@ -45,10 +45,10 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
     }
 
     public static ArchiveDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return ArchiveDate.builder().value(dateTime.getValue()).build();
+        return ArchiveDate.builder().value(value).build();
     }
 
     private void validate() {
@@ -111,7 +111,7 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueDateTime.of(value);
+        return AttributeValue.ofDateTime(value);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.MaximumItems;
 import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload;
@@ -30,7 +30,7 @@ class LocateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<
                 .maximumItems(MaximumItems.of(10))
                 .storageStatusMask(StorageStatusMask.of(1))
                 .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValueTextString.of("test-value")))
+                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
                 .build();
     }
 
@@ -40,7 +40,7 @@ class LocateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<
                 .maximumItems(MaximumItems.of(20))
                 .storageStatusMask(StorageStatusMask.of(2))
                 .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT))
-                .attribute(Attribute.of(AttributeName.of("test-attribute-2"), AttributeValueTextString.of("test-value-2")))
+                .attribute(Attribute.of(AttributeName.of("test-attribute-2"), AttributeValue.ofTextString("test-value-2")))
                 .build();
     }
 }

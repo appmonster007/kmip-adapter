@@ -1,4 +1,3 @@
-org.purpleBean.kmip.codec.xml.deserializer.api.AttributeValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.CredentialValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KeyMaterialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.api.KmipAttributeXmlDeserializer
@@ -79,7 +78,6 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration.WrappingMethod
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AlternativeNameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.ApplicationSpecificInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttestationCredentialXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttributeValueStructureXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AttributeXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.AuthenticationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.CertificateIdentifierXmlDeserializer
@@ -161,15 +159,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttestationCapableInd
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttestationMeasurementXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeIndexXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeNameXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueBigIntegerXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueBooleanXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueByteStringXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueDateTimeXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueEnumerationXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueIntegerXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueIntervalXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueLongIntegerXmlDeserializer
-org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueTextStringXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.core.type.AttributeValueXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.BatchCountXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.BatchOrderOptionXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.core.type.CRTCoefficientXmlDeserializer

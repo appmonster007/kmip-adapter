@@ -42,10 +42,10 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
     }
 
     public static LeaseTime of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInterval interval)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return LeaseTime.builder().value(interval.getValue()).build();
+        return LeaseTime.builder().value(value).build();
     }
 
     private void validate() {
@@ -108,7 +108,7 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueInterval.of(value);
+        return AttributeValue.ofInterval(value);
     }
 
     @Override
@@ -118,6 +118,6 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 }

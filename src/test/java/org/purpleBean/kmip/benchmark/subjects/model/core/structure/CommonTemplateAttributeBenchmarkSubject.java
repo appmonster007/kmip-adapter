@@ -6,7 +6,7 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 
 public class CommonTemplateAttributeBenchmarkSubject extends KmipBenchmarkSubject<CommonTemplateAttribute> {
 
@@ -17,7 +17,7 @@ public class CommonTemplateAttributeBenchmarkSubject extends KmipBenchmarkSubjec
         CommonTemplateAttribute subject = CommonTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValueInteger.of(1))
+                        .attributeValue(AttributeValue.ofInteger(1))
                         .build())
                 .build();
         initialize(subject, CommonTemplateAttribute.class);

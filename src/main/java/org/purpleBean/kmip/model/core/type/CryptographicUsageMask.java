@@ -47,10 +47,10 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
     }
 
     public static CryptographicUsageMask of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return CryptographicUsageMask.builder().value(integer.getValue()).build();
+        return CryptographicUsageMask.builder().value(value).build();
     }
 
     public static CryptographicUsageMask fromMaskString(@NonNull String value) {
@@ -123,10 +123,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueInteger.builder()
-                .value(value)
-                .maskString(getMaskString())
-                .build();
+        return AttributeValue.ofMask(value, getMaskString());
     }
 
     @Override
@@ -136,7 +133,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     public interface MaskEnum {

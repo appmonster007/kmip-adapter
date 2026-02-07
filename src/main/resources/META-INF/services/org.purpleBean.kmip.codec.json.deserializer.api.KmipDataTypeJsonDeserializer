@@ -1,4 +1,3 @@
-org.purpleBean.kmip.codec.json.deserializer.api.AttributeValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.CredentialValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.KeyMaterialJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.api.KmipAttributeJsonDeserializer
@@ -80,7 +79,6 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.structure.AlternativeName
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.ApplicationSpecificInformationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.AttestationCredentialJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.AttributeJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.structure.AttributeValueStructureJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.AuthenticationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CertificateIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.structure.CertificateIssuerJsonDeserializer
@@ -161,15 +159,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttestationCapableIn
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttestationMeasurementJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeIndexJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeNameJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueBigIntegerJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueBooleanJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueByteStringJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueDateTimeJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueEnumerationJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueIntegerJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueIntervalJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueLongIntegerJsonDeserializer
-org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueTextStringJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.AttributeValueJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.BatchCountJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.BatchOrderOptionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.CRTCoefficientJsonDeserializer

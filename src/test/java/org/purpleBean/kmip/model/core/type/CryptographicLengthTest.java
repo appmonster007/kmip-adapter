@@ -2,7 +2,6 @@ package org.purpleBean.kmip.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
@@ -93,7 +92,7 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<Cry
     @Test
     @DisplayName("should create from attribute value")
     void shouldCreateFromAttributeValue() {
-        AttributeValueInteger attrValue = AttributeValueInteger.of(192);
+        AttributeValue attrValue = AttributeValue.ofInteger(192);
         CryptographicLength length = CryptographicLength.of(AttributeName.of("Cryptographic Length"), attrValue);
         assertThat(length.getValue()).isEqualTo(192);
     }
@@ -101,7 +100,7 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<Cry
     @Test
     @DisplayName("should throw for invalid attribute value type")
     void shouldThrowForInvalidAttributeValueType() {
-        AttributeValueTextString invalidAttrValue = AttributeValueTextString.of("invalid");
+        AttributeValue invalidAttrValue = AttributeValue.ofTextString("invalid");
         assertThatThrownBy(() -> CryptographicLength.of(AttributeName.of("Cryptographic Length"), invalidAttrValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Invalid attribute value");
@@ -169,7 +168,7 @@ class CryptographicLengthTest extends AbstractKmipDataTypeAttributeTestSuite<Cry
         AttributeValue attrValue = length.getAttributeValue();
 
         assertThat(attrValue.getEncodingType()).isEqualTo(EncodingType.INTEGER);
-        assertThat(((AttributeValueInteger) attrValue).getValue()).isEqualTo(512);
+        assertThat(attrValue.getValue()).isEqualTo(512);
     }
 
     @Test

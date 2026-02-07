@@ -63,13 +63,6 @@ public interface KmipMaskType extends KmipDataType {
     String getMaskString();
 
     /**
-     * Gets the integer value of the mask.
-     *
-     * @return The integer value.
-     */
-    Integer getValue();
-
-    /**
      * A composite key for the mask string registry.
      *
      * @param spec         The KMIP specification version.

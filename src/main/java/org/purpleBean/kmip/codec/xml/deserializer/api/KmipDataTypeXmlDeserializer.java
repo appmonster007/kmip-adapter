@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.util.TokenBuffer;
 import com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser;
-import org.purpleBean.kmip.api.AttributeValue;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
@@ -65,7 +64,7 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType> extends JsonDes
                         String type = peeker.getText();
                         Optional<EncodingType> optionalEncodingType = EncodingType.fromName(type);
                         if (optionalEncodingType.isEmpty()) {
-                            ctxt.reportInputMismatch(AttributeValue.class, "Missing or invalid 'type' attribute for AttributeValue");
+                            ctxt.reportInputMismatch(KmipDataType.class, "Missing or invalid 'type' KmipDataType");
                             return null;
                         }
                         encodingType = optionalEncodingType.get();

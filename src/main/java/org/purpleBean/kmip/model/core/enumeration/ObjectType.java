@@ -3,7 +3,7 @@ package org.purpleBean.kmip.model.core.enumeration;
 import lombok.*;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueEnumeration;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.*;
@@ -79,10 +79,10 @@ public class ObjectType implements KmipEnumeration, KmipAttribute {
         if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
         }
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueEnumeration enumeration)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
             throw new IllegalArgumentException("Invalid encoding type");
         }
-        ObjectType.Value v = fromValue(enumeration.getIntValue());
+        ObjectType.Value v = fromValue(enumeration.getValue());
         return ObjectType.builder().value(v).build();
     }
 
@@ -225,7 +225,7 @@ public class ObjectType implements KmipEnumeration, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueEnumeration.of(value);
+        return AttributeValue.ofEnumeration(value);
     }
 
     @Override
@@ -235,7 +235,7 @@ public class ObjectType implements KmipEnumeration, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     public int getIntValue() {

@@ -2,6 +2,7 @@ package org.purpleBean.kmip.api;
 
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

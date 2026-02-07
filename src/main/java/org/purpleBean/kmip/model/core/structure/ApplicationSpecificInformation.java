@@ -8,6 +8,7 @@ import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.ApplicationData;
 import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
@@ -50,10 +51,10 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     }
 
     public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return ApplicationSpecificInformation.builder()
                 .applicationNamespace((ApplicationNamespace) map.get(ApplicationNamespace.kmipTag).get(0))
                 .applicationData((ApplicationData) map.get(ApplicationData.kmipTag).get(0))
@@ -129,12 +130,12 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

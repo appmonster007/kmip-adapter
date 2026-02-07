@@ -8,6 +8,7 @@ import org.purpleBean.kmip.model.core.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AlternativeNameValue;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
@@ -57,10 +58,10 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     }
 
     public static AlternativeName of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return AlternativeName.builder()
                 .alternativeNameValue((AlternativeNameValue) map.get(AlternativeNameValue.kmipTag).get(0))
                 .alternativeNameType((AlternativeNameType) map.get(AlternativeNameType.kmipTag).get(0))
@@ -136,12 +137,12 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

@@ -66,7 +66,6 @@ org.purpleBean.kmip.benchmark.subjects.model.core.structure.AlternativeNameBench
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.ApplicationSpecificInformationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttestationCredentialBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.structure.AttributeValueStructureBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.AuthenticationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.structure.CertificateIdentifierBenchmarkSubject
@@ -144,15 +143,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationCapableIndicat
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttestationMeasurementBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeIndexBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeNameBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueBigIntegerBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueBooleanBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueByteStringBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueDateTimeBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueEnumerationBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueIntegerBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueIntervalBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueLongIntegerBenchmarkSubject
-org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueTextStringBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.AttributeValueBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.BatchCountBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.BatchOrderOptionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.CRTCoefficientBenchmarkSubject

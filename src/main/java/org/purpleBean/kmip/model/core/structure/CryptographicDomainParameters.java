@@ -7,6 +7,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.Qlength;
 import org.purpleBean.kmip.util.StringUtils;
 
@@ -48,10 +49,10 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     }
 
     public static CryptographicDomainParameters of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CryptographicDomainParameters.builder()
                 .qlength((Qlength) map.get(Qlength.kmipTag).get(0))
                 .recommendedCurve((RecommendedCurve) map.get(RecommendedCurve.kmipTag).get(0))
@@ -129,12 +130,12 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

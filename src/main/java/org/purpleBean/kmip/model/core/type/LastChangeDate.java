@@ -45,10 +45,10 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
     }
 
     public static LastChangeDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return LastChangeDate.builder().value(dateTime.getValue()).build();
+        return LastChangeDate.builder().value(value).build();
     }
 
     private void validate() {
@@ -111,7 +111,7 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueDateTime.of(value);
+        return AttributeValue.ofDateTime(value);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override

@@ -82,24 +82,24 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     }
 
     public static CryptographicParameters of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return CryptographicParameters.builder()
-                .blockCipherMode((BlockCipherMode) map.get(BlockCipherMode.kmipTag).get(0))
-                .paddingMethod((PaddingMethod) map.get(PaddingMethod.kmipTag).get(0))
-                .hashingAlgorithm((HashingAlgorithm) map.get(HashingAlgorithm.kmipTag).get(0))
-                .keyRoleType((KeyRoleType) map.get(KeyRoleType.kmipTag).get(0))
-                .digitalSignatureAlgorithm((DigitalSignatureAlgorithm) map.get(DigitalSignatureAlgorithm.kmipTag).get(0))
-                .cryptographicAlgorithm((CryptographicAlgorithm) map.get(CryptographicAlgorithm.kmipTag).get(0))
-                .randomIv((RandomIv) map.get(RandomIv.kmipTag).get(0))
-                .ivLength((IvLength) map.get(IvLength.kmipTag).get(0))
-                .tagLength((TagLength) map.get(TagLength.kmipTag).get(0))
-                .fixedFieldLength((FixedFieldLength) map.get(FixedFieldLength.kmipTag).get(0))
-                .invocationFieldLength((InvocationFieldLength) map.get(InvocationFieldLength.kmipTag).get(0))
-                .counterLength((CounterLength) map.get(CounterLength.kmipTag).get(0))
-                .initialCounterValue((InitialCounterValue) map.get(InitialCounterValue.kmipTag).get(0))
+                .blockCipherMode(map.containsKey(BlockCipherMode.kmipTag) ? (BlockCipherMode) map.get(BlockCipherMode.kmipTag).get(0) : null)
+                .paddingMethod(map.containsKey(PaddingMethod.kmipTag) ? (PaddingMethod) map.get(PaddingMethod.kmipTag).get(0) : null)
+                .hashingAlgorithm(map.containsKey(HashingAlgorithm.kmipTag) ? (HashingAlgorithm) map.get(HashingAlgorithm.kmipTag).get(0) : null)
+                .keyRoleType(map.containsKey(KeyRoleType.kmipTag) ? (KeyRoleType) map.get(KeyRoleType.kmipTag).get(0) : null)
+                .digitalSignatureAlgorithm(map.containsKey(DigitalSignatureAlgorithm.kmipTag) ? (DigitalSignatureAlgorithm) map.get(DigitalSignatureAlgorithm.kmipTag).get(0) : null)
+                .cryptographicAlgorithm(map.containsKey(CryptographicAlgorithm.kmipTag) ? (CryptographicAlgorithm) map.get(CryptographicAlgorithm.kmipTag).get(0) : null)
+                .randomIv(map.containsKey(RandomIv.kmipTag) ? (RandomIv) map.get(RandomIv.kmipTag).get(0) : null)
+                .ivLength(map.containsKey(IvLength.kmipTag) ? (IvLength) map.get(IvLength.kmipTag).get(0) : null)
+                .tagLength(map.containsKey(TagLength.kmipTag) ? (TagLength) map.get(TagLength.kmipTag).get(0) : null)
+                .fixedFieldLength(map.containsKey(FixedFieldLength.kmipTag) ? (FixedFieldLength) map.get(FixedFieldLength.kmipTag).get(0) : null)
+                .invocationFieldLength(map.containsKey(InvocationFieldLength.kmipTag) ? (InvocationFieldLength) map.get(InvocationFieldLength.kmipTag).get(0) : null)
+                .counterLength(map.containsKey(CounterLength.kmipTag) ? (CounterLength) map.get(CounterLength.kmipTag).get(0) : null)
+                .initialCounterValue(map.containsKey(InitialCounterValue.kmipTag) ? (InitialCounterValue) map.get(InitialCounterValue.kmipTag).get(0) : null)
                 .build();
     }
 
@@ -123,20 +123,20 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     @Override
     public KmipDataType[] getValue() {
         return Stream.of(
-                blockCipherMode,
-                paddingMethod,
-                hashingAlgorithm,
-                keyRoleType,
-                digitalSignatureAlgorithm,
-                cryptographicAlgorithm,
-                randomIv,
-                ivLength,
-                tagLength,
-                fixedFieldLength,
-                invocationFieldLength,
-                counterLength,
-                initialCounterValue
-        )
+                        blockCipherMode,
+                        paddingMethod,
+                        hashingAlgorithm,
+                        keyRoleType,
+                        digitalSignatureAlgorithm,
+                        cryptographicAlgorithm,
+                        randomIv,
+                        ivLength,
+                        tagLength,
+                        fixedFieldLength,
+                        invocationFieldLength,
+                        counterLength,
+                        initialCounterValue
+                )
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)
@@ -186,12 +186,12 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

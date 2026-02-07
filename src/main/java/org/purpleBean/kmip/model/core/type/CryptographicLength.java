@@ -48,10 +48,10 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
      * @throws IllegalArgumentException if the attribute value is invalid
      */
     public static CryptographicLength of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return new CryptographicLength(integer.getValue());
+        return new CryptographicLength(value);
     }
 
     /**
@@ -91,7 +91,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
     // KmipAttribute implementation
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueInteger.of(value);
+        return AttributeValue.ofInteger(value);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     @Override
     public String getCanonicalName() {
-        return "CryptographicLength";
+        return kmipTag.getDescription();
     }
 
     @Override

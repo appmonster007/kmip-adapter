@@ -43,10 +43,10 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
     }
 
     public static CertificateLength of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueInteger integer)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return CertificateLength.builder().value(integer.getValue()).build();
+        return CertificateLength.builder().value(value).build();
     }
 
     private void validate() {
@@ -109,7 +109,7 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueInteger.of(value);
+        return AttributeValue.ofInteger(value);
     }
 
     @Override
@@ -119,6 +119,6 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 }

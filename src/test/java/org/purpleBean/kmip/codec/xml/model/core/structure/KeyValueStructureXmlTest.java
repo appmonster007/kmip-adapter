@@ -7,7 +7,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
 import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
 import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
@@ -33,7 +33,7 @@ class KeyValueStructureXmlTest extends AbstractXmlSerializationTestSuite<KeyValu
     @Override
     protected KeyValueStructure createDefault() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
-        KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute", AttributeValueTextString.of("test-value"));
+        KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute", AttributeValue.ofTextString("test-value"));
         KmipAttribute attribute2 = ActivationDate.of(FIXED_TIME);
         return KeyValueStructure.builder()
                 .keyMaterial(keyMaterial)
@@ -44,7 +44,7 @@ class KeyValueStructureXmlTest extends AbstractXmlSerializationTestSuite<KeyValu
     @Override
     protected KeyValueStructure createVariant() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x04, 0x05, 0x06});
-        KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute-2", AttributeValueTextString.of("test-value-2"));
+        KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute-2", AttributeValue.ofTextString("test-value-2"));
         KmipAttribute attribute2 = ActivationDate.of(FIXED_TIME.plusDays(10));
         return KeyValueStructure.builder()
                 .keyMaterial(keyMaterial)

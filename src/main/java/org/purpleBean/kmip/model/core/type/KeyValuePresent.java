@@ -41,10 +41,10 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
     }
 
     public static KeyValuePresent of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueBoolean value)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Boolean value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return KeyValuePresent.builder().value(value.getValue()).build();
+        return KeyValuePresent.builder().value(value).build();
     }
 
     private void validate() {
@@ -56,7 +56,7 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueBoolean.of(value);
+        return AttributeValue.ofBoolean(value);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override

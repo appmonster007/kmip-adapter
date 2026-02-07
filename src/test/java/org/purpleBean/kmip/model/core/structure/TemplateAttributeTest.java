@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.NameType;
-import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
@@ -34,7 +34,7 @@ class TemplateAttributeTest extends AbstractKmipStructureTestSuite<TemplateAttri
                         NameType.Standard.UNINTERPRETED_TEXT_STRING.inst()
                 ))
                 .attribute(Attribute.of(
-                        CustomAttribute.of("x-apple", AttributeValueInteger.of(1))
+                        CustomAttribute.of("x-apple", AttributeValue.ofInteger(1))
                 ))
                 .build();
     }

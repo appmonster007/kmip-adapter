@@ -66,7 +66,6 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AlternativeNameTt
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.ApplicationSpecificInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttestationCredentialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttributeTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AttributeValueStructureTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.AuthenticationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.CertificateIssuerTtlvSerializer
@@ -147,15 +146,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationCapableIndi
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttestationMeasurementTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeIndexTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeNameTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueBigIntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueBooleanTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueByteStringTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueDateTimeTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueEnumerationTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueIntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueIntervalTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueLongIntegerTtlvSerializer
-org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueTextStringTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.AttributeValueTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.BatchCountTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.BatchOrderOptionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.CRTCoefficientTtlvSerializer

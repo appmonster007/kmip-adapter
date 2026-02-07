@@ -44,10 +44,10 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
     }
 
     public static CompromiseOccurrenceDate of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueDateTime dateTime)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return CompromiseOccurrenceDate.builder().value(dateTime.getValue()).build();
+        return CompromiseOccurrenceDate.builder().value(value).build();
     }
 
     private void validate() {
@@ -59,7 +59,7 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueDateTime.of(value);
+        return AttributeValue.ofDateTime(value);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override

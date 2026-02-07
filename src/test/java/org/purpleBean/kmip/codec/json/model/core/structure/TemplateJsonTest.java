@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.structure.Template;
 import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueInteger;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Template Json Serialization Tests")
@@ -26,7 +26,7 @@ class TemplateJsonTest extends AbstractJsonSerializationTestSuite<Template> {
         return Template.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValueInteger.of(1))
+                        .attributeValue(AttributeValue.ofInteger(1))
                         .build())
                 .build();
     }
@@ -36,7 +36,7 @@ class TemplateJsonTest extends AbstractJsonSerializationTestSuite<Template> {
         return Template.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute-variant"))
-                        .attributeValue(AttributeValueInteger.of(1))
+                        .attributeValue(AttributeValue.ofInteger(1))
                         .build())
                 .build();
     }

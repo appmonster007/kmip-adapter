@@ -45,11 +45,11 @@ public class TtlvDataType implements KmipDataType {
         }
     }
 
-    public static TtlvDataType structureOf(KmipTag.Value kmipTag, List<KmipDataType> kmipDataTypes) {
-        return structureOf(kmipTag, kmipDataTypes.toArray(KmipDataType[]::new));
+    public static TtlvDataType ofStructure(KmipTag.Value kmipTag, List<KmipDataType> kmipDataTypes) {
+        return ofStructure(kmipTag, kmipDataTypes.toArray(KmipDataType[]::new));
     }
 
-    public static TtlvDataType structureOf(KmipTag.Value kmipTag, KmipDataType... kmipDataTypes) {
+    public static TtlvDataType ofStructure(KmipTag.Value kmipTag, KmipDataType... kmipDataTypes) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.STRUCTURE)
@@ -57,7 +57,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType integerOf(KmipTag.Value kmipTag, Integer value) {
+    public static TtlvDataType ofInteger(KmipTag.Value kmipTag, Integer value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.INTEGER)
@@ -65,7 +65,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType longIntegerOf(KmipTag.Value kmipTag, Long value) {
+    public static TtlvDataType ofLongInteger(KmipTag.Value kmipTag, Long value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.LONG_INTEGER)
@@ -73,7 +73,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType bigIntegerOf(KmipTag.Value kmipTag, BigInteger value) {
+    public static TtlvDataType ofBigInteger(KmipTag.Value kmipTag, BigInteger value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.BIG_INTEGER)
@@ -81,7 +81,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType enumerationOf(KmipTag.Value kmipTag, KmipEnumeration.Value<?> value) {
+    public static TtlvDataType ofEnumeration(KmipTag.Value kmipTag, KmipEnumeration.Value<?> value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.ENUMERATION)
@@ -89,7 +89,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType booleanOf(KmipTag.Value kmipTag, Boolean value) {
+    public static TtlvDataType ofBoolean(KmipTag.Value kmipTag, Boolean value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.BOOLEAN)
@@ -97,7 +97,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType textStringOf(KmipTag.Value kmipTag, String value) {
+    public static TtlvDataType ofTextString(KmipTag.Value kmipTag, String value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.TEXT_STRING)
@@ -105,7 +105,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType byteStringOf(KmipTag.Value kmipTag, ByteBuffer value) {
+    public static TtlvDataType ofByteString(KmipTag.Value kmipTag, ByteBuffer value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.BYTE_STRING)
@@ -113,7 +113,11 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType dateTimeOf(KmipTag.Value kmipTag, OffsetDateTime value) {
+    public static TtlvDataType ofByteString(KmipTag.Value kmipTag, byte[] value) {
+        return ofByteString(kmipTag, ByteBuffer.wrap(value));
+    }
+
+    public static TtlvDataType ofDateTime(KmipTag.Value kmipTag, OffsetDateTime value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.DATE_TIME)
@@ -121,7 +125,7 @@ public class TtlvDataType implements KmipDataType {
                 .build();
     }
 
-    public static TtlvDataType intervalOf(KmipTag.Value kmipTag, Integer value) {
+    public static TtlvDataType ofInterval(KmipTag.Value kmipTag, Integer value) {
         return TtlvDataType.builder()
                 .kmipTag(kmipTag.inst())
                 .encodingType(EncodingType.INTERVAL)
@@ -147,10 +151,10 @@ public class TtlvDataType implements KmipDataType {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TtlvDataType that)) return false;
-        return Objects.equals(kmipTag, that.kmipTag) &&
-                encodingType == that.encodingType &&
-                deepEqualsValue(this.value, that.value);
+        if (!(o instanceof KmipDataType that)) return false;
+        return Objects.equals(kmipTag, that.getKmipTag()) &&
+                encodingType == that.getEncodingType() &&
+                deepEqualsValue(this.value, that.getValue());
     }
 
     private boolean deepEqualsValue(Object v1, Object v2) {

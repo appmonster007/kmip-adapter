@@ -66,7 +66,6 @@ org.purpleBean.kmip.codec.json.serializer.model.core.structure.AlternativeNameJs
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.ApplicationSpecificInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.AttestationCredentialJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.AttributeJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.structure.AttributeValueStructureJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.AuthenticationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.structure.CertificateIssuerJsonSerializer
@@ -147,15 +146,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.AttestationCapableIndi
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttestationMeasurementJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeIndexJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeNameJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueBigIntegerJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueBooleanJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueByteStringJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueDateTimeJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueEnumerationJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueIntegerJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueIntervalJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueLongIntegerJsonSerializer
-org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueTextStringJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.AttributeValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.BatchCountJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.BatchOrderOptionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.CRTCoefficientJsonSerializer

@@ -65,7 +65,6 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.WrappingMethodXm
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AlternativeNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.ApplicationSpecificInformationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttestationCredentialXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeValueStructureXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AttributeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.AuthenticationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.structure.CertificateIdentifierXmlSerializer
@@ -147,15 +146,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttestationCapableIndic
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttestationMeasurementXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeIndexXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeNameXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueBigIntegerXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueBooleanXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueByteStringXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueDateTimeXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueEnumerationXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueIntegerXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueIntervalXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueLongIntegerXmlSerializer
-org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueTextStringXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.AttributeValueXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.BatchCountXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.BatchOrderOptionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.CRTCoefficientXmlSerializer

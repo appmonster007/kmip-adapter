@@ -7,6 +7,7 @@ import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.IssuerAlternativeName;
 import org.purpleBean.kmip.model.core.type.IssuerDistinguishedName;
 import org.purpleBean.kmip.util.StringUtils;
@@ -52,10 +53,10 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
     }
 
     public static X509CertificateIssuer of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueStructure structure)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return X509CertificateIssuer.builder()
                 .issuerDistinguishedName((IssuerDistinguishedName) map.get(IssuerDistinguishedName.kmipTag).get(0))
                 .issuerAlternativeNames(map.get(IssuerAlternativeName.kmipTag).stream().map(e -> (IssuerAlternativeName) e).collect(Collectors.toList()))
@@ -134,12 +135,12 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueStructure.of(getValue());
+        return AttributeValue.ofStructure(getValue());
     }
 
     @Override

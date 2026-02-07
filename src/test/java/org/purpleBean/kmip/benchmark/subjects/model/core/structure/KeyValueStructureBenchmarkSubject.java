@@ -7,7 +7,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.CustomAttribute;
 import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class KeyValueStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyV
 
     public KeyValueStructureBenchmarkSubject() throws Exception {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
-        KmipAttribute attribute = CustomAttribute.of("x-test-attribute", AttributeValueTextString.of("test-value"));
+        KmipAttribute attribute = CustomAttribute.of("x-test-attribute", AttributeValue.ofTextString("test-value"));
         KeyValueStructure keyValueStructure = KeyValueStructure.builder()
                 .keyMaterial(keyMaterial)
                 .attributes(List.of(attribute))

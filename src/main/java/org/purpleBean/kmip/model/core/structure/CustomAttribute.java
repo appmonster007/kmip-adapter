@@ -6,12 +6,12 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -44,13 +44,6 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
         validate();
     }
 
-    private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() == EncodingType.STRUCTURE) {
-            return Stream.of(((AttributeValueStructure) attributeValue).getValue()).noneMatch(value -> value instanceof KmipStructure);
-        }
-        return true;
-    }
-
     public static CustomAttribute of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         return new CustomAttribute(attributeName, attributeValue);
     }
@@ -59,15 +52,15 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
         return of(AttributeName.of(name), value);
     }
 
-    public static CustomAttribute of(@NonNull AttributeName name, @NonNull AttributeValue... values) {
-        if (Stream.of(values).anyMatch(v -> v instanceof AttributeValueStructure)) {
+    public static CustomAttribute of(@NonNull AttributeName name, @NonNull KmipDataType... values) {
+        if (Stream.of(values).anyMatch(v -> v.getEncodingType() == EncodingType.STRUCTURE)) {
             throw new IllegalArgumentException("Custom attribute cannot contain sub-structure");
         }
-        return of(name, AttributeValueStructure.of(List.of(values)));
+        return of(name, AttributeValue.ofStructure(values));
     }
 
     public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue... values) {
-        return of(AttributeName.of(name), AttributeValueStructure.of(List.of(values)));
+        return of(AttributeName.of(name), AttributeValue.ofStructure(values));
     }
 
     public static boolean isValidCustomAttributeName(@NonNull String name) {
@@ -76,6 +69,14 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
 
     public static boolean isValidCustomAttributeName(@NonNull AttributeName name) {
         return isValidCustomAttributeName(name.getValue());
+    }
+
+    private static boolean isValidCustomAttributeValue(@NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() == EncodingType.STRUCTURE) {
+            return (attributeValue.getValue() instanceof KmipDataType[] structure)
+                    && Stream.of(structure).noneMatch(value -> value instanceof KmipStructure);
+        }
+        return true;
     }
 
     public static boolean isCustomServerAttribute(@NonNull String name) {
@@ -92,7 +93,7 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        if (!isValidCustomAttributeName(attributeName.getValue())) {
+        if (!isValidCustomAttributeName(attributeName)) {
             throw new IllegalArgumentException("Custom attribute name is invalid");
         }
         if (!isValidCustomAttributeValue(attributeValue)) {
@@ -162,6 +163,6 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 }

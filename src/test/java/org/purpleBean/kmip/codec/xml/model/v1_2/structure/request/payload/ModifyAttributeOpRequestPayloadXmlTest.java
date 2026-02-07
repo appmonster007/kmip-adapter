@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.structure.Attribute;
 import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ModifyAttributeOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
@@ -26,7 +26,7 @@ class ModifyAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     protected ModifyAttributeOpRequestPayload createDefault() {
         return ModifyAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValueTextString.of("test-value")))
+                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
                 .build();
     }
 
@@ -34,7 +34,7 @@ class ModifyAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     protected ModifyAttributeOpRequestPayload createVariant() {
         return ModifyAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValueTextString.of("variant-value")))
+                .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))
                 .build();
     }
 }

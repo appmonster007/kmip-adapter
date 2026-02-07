@@ -41,10 +41,10 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     }
 
     public static ContactInformation of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString value)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return ContactInformation.builder().value(value.getValue()).build();
+        return ContactInformation.builder().value(value).build();
     }
 
     private void validate() {
@@ -56,7 +56,7 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueTextString.of(value);
+        return AttributeValue.ofTextString(value);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 
     @Override

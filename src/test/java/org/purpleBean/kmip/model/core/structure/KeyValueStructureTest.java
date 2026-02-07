@@ -5,7 +5,7 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipAttribute;
 import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.model.core.type.AttributeValueTextString;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
@@ -24,7 +24,7 @@ class KeyValueStructureTest extends AbstractKmipStructureTestSuite<KeyValueStruc
     @Override
     protected KeyValueStructure createDefault() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
-        KmipAttribute attribute = CustomAttribute.of("x-test-attribute", AttributeValueTextString.of("test-value"));
+        KmipAttribute attribute = CustomAttribute.of("x-test-attribute", AttributeValue.ofTextString("test-value"));
         return KeyValueStructure.builder()
                 .keyMaterial(keyMaterial)
                 .attributes(List.of(attribute))

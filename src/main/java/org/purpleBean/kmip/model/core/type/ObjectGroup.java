@@ -42,10 +42,10 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
     }
 
     public static ObjectGroup of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue instanceof AttributeValueTextString textString)) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        return ObjectGroup.builder().value(textString.getValue()).build();
+        return ObjectGroup.builder().value(value).build();
     }
 
     private void validate() {
@@ -108,7 +108,7 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeValue getAttributeValue() {
-        return AttributeValueTextString.of(value);
+        return AttributeValue.ofTextString(value);
     }
 
     @Override
@@ -118,6 +118,6 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
 
     @Override
     public String getCanonicalName() {
-        return getAttributeName().getValue();
+        return kmipTag.getDescription();
     }
 }
