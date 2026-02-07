@@ -20,11 +20,11 @@ class PgpKeyVersionXmlTest extends AbstractXmlSerializationTestSuite<PgpKeyVersi
 
     @Override
     protected PgpKeyVersion createDefault() {
-        return PgpKeyVersion.of(123);  // TODO: Create a default instance
+        return PgpKeyVersion.of(123);
     }
 
     @Override
     protected PgpKeyVersion createVariant() {
-        return PgpKeyVersion.of(456);  // TODO: Create a variant instance
+        return PgpKeyVersion.of(456);
     }
 }

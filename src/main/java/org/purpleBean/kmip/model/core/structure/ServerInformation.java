@@ -10,14 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
 public class ServerInformation implements KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.SERVER_INFORMATION.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

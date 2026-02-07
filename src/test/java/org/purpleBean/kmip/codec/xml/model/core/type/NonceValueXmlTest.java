@@ -22,11 +22,11 @@ class NonceValueXmlTest extends AbstractXmlSerializationTestSuite<NonceValue> {
 
     @Override
     protected NonceValue createDefault() {
-        return NonceValue.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));  // TODO: Create a default instance
+        return NonceValue.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
     }
 
     @Override
     protected NonceValue createVariant() {
-        return NonceValue.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));  // TODO: Create a variant instance
+        return NonceValue.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
     }
 }

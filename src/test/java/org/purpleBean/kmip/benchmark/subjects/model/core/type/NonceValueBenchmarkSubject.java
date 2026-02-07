@@ -10,10 +10,10 @@ import java.nio.ByteBuffer;
 public class NonceValueBenchmarkSubject extends KmipBenchmarkSubject<NonceValue> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public NonceValueBenchmarkSubject() throws Exception {
-        NonceValue subject = NonceValue.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));  // TODO: Create a default instance
+        NonceValue subject = NonceValue.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
         initialize(subject, NonceValue.class);
     }
 

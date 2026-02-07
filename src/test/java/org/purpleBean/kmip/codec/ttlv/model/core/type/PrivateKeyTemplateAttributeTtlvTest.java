@@ -20,11 +20,11 @@ class PrivateKeyTemplateAttributeTtlvTest extends AbstractTtlvSerializationTestS
 
     @Override
     protected PrivateKeyTemplateAttribute createDefault() {
-        return PrivateKeyTemplateAttribute.of("default-string");  // TODO: Create a default instance
+        return PrivateKeyTemplateAttribute.of("default-string");
     }
 
     @Override
     protected PrivateKeyTemplateAttribute createVariant() {
-        return PrivateKeyTemplateAttribute.of("variant-string");  // TODO: Create a variant instance
+        return PrivateKeyTemplateAttribute.of("variant-string");
     }
 }

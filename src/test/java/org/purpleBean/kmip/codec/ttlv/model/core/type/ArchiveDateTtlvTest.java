@@ -19,13 +19,13 @@ class ArchiveDateTtlvTest extends AbstractTtlvSerializationTestSuite<ArchiveDate
 
     @Override
     protected ArchiveDate createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return ArchiveDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected ArchiveDate createVariant() {
-        // TODO: Update with different values to test variations
+
         return ArchiveDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }
 }

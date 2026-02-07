@@ -36,7 +36,7 @@ class KeyMaterialStructureJsonTest extends AbstractJsonSerializationTestSuite<Ke
 
     @Override
     protected KeyMaterialStructure createVariant() {
-        // TODO: Update with different values to test variations
+
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
         State state = State.Standard.DEACTIVATED.inst();
         return KeyMaterialStructure.of(List.of(activationDate, state));

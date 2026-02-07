@@ -10,10 +10,10 @@ import java.nio.ByteBuffer;
 public class NonceIdBenchmarkSubject extends KmipBenchmarkSubject<NonceId> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public NonceIdBenchmarkSubject() throws Exception {
-        NonceId subject = NonceId.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));  // TODO: Create a default instance
+        NonceId subject = NonceId.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
         initialize(subject, NonceId.class);
     }
 

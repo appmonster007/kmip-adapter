@@ -16,7 +16,7 @@ public class PgpKeyVersion implements KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.PGP_KEY_VERSION.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

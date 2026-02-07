@@ -10,10 +10,10 @@ import java.nio.ByteBuffer;
 public class AttestationAssertionBenchmarkSubject extends KmipBenchmarkSubject<AttestationAssertion> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AttestationAssertionBenchmarkSubject() throws Exception {
-        AttestationAssertion subject = AttestationAssertion.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));  // TODO: Create a default instance
+        AttestationAssertion subject = AttestationAssertion.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
         initialize(subject, AttestationAssertion.class);
     }
 

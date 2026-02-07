@@ -19,13 +19,13 @@ class ValidityDateXmlTest extends AbstractXmlSerializationTestSuite<ValidityDate
 
     @Override
     protected ValidityDate createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return ValidityDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected ValidityDate createVariant() {
-        // TODO: Update with different values to test variations
+
         return ValidityDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }
 }

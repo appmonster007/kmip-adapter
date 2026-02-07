@@ -8,10 +8,10 @@ import org.purpleBean.kmip.model.core.type.PgpKeyVersion;
 public class PgpKeyVersionBenchmarkSubject extends KmipBenchmarkSubject<PgpKeyVersion> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public PgpKeyVersionBenchmarkSubject() throws Exception {
-        PgpKeyVersion subject = PgpKeyVersion.of(123);  // TODO: Create a default instance
+        PgpKeyVersion subject = PgpKeyVersion.of(123);
         initialize(subject, PgpKeyVersion.class);
     }
 

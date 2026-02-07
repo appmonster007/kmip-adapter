@@ -8,7 +8,7 @@ import org.purpleBean.kmip.model.core.type.AttributeValue;
 public class AttributeValueBenchmarkSubject extends KmipBenchmarkSubject<AttributeValue> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AttributeValueBenchmarkSubject() throws Exception {
         AttributeValue subject = AttributeValue.ofTextString("default-string");

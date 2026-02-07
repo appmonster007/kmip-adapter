@@ -19,13 +19,13 @@ class TimeStampJsonTest extends AbstractJsonSerializationTestSuite<TimeStamp> {
 
     @Override
     protected TimeStamp createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return TimeStamp.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected TimeStamp createVariant() {
-        // TODO: Update with different values to test variations
+
         return TimeStamp.builder().value(FIXED_TIME.plusDays(1)).build();
     }
 }

@@ -15,7 +15,7 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTest
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2; // TODO: Adjust if needed
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override
@@ -95,12 +95,10 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTest
 
     @Override
     protected void attrEnum_serverModifiable_respectsState() {
-        // TODO: Implement if server modifiable
     }
 
     @Override
     protected void attrEnum_clientModifiable_respectsState() {
-        // TODO: Implement if client modifiable
     }
 
     @Override

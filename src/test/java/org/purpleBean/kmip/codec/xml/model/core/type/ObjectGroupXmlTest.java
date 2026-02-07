@@ -14,13 +14,13 @@ class ObjectGroupXmlTest extends AbstractXmlSerializationTestSuite<ObjectGroup> 
 
     @Override
     protected ObjectGroup createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return ObjectGroup.builder().value("test").build();
     }
 
     @Override
     protected ObjectGroup createVariant() {
-        // TODO: Update with different values to test variations
+
         return ObjectGroup.builder().value("test-2").build();
     }
 }

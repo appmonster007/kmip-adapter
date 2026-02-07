@@ -19,13 +19,13 @@ class LastChangeDateXmlTest extends AbstractXmlSerializationTestSuite<LastChange
 
     @Override
     protected LastChangeDate createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return LastChangeDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected LastChangeDate createVariant() {
-        // TODO: Update with different values to test variations
+
         return LastChangeDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }
 }

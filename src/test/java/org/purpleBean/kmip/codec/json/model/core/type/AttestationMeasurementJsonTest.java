@@ -22,11 +22,11 @@ class AttestationMeasurementJsonTest extends AbstractJsonSerializationTestSuite<
 
     @Override
     protected AttestationMeasurement createDefault() {
-        return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));  // TODO: Create a default instance
+        return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
     }
 
     @Override
     protected AttestationMeasurement createVariant() {
-        return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));  // TODO: Create a variant instance
+        return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
     }
 }

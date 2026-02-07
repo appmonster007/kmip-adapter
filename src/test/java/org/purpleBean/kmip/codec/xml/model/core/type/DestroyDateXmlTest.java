@@ -19,13 +19,13 @@ class DestroyDateXmlTest extends AbstractXmlSerializationTestSuite<DestroyDate> 
 
     @Override
     protected DestroyDate createDefault() {
-        // TODO: Update with actual default values for your dataType
+
         return DestroyDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected DestroyDate createVariant() {
-        // TODO: Update with different values to test variations
+
         return DestroyDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }
 }

@@ -17,14 +17,12 @@ class ValidityDateTest extends AbstractKmipDataTypeTestSuite<ValidityDate> {
 
     @Override
     protected ValidityDate createDefault() {
-        // TODO: Update with actual default values for your dataType
         OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
         return ValidityDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
     protected EncodingType expectedEncodingType() {
-        // TODO: Update with actual encoding type for your dataType
         return EncodingType.DATE_TIME;
     }
 }

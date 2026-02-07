@@ -8,10 +8,10 @@ import org.purpleBean.kmip.model.core.type.PublicKeyTemplateAttribute;
 public class PublicKeyTemplateAttributeBenchmarkSubject extends KmipBenchmarkSubject<PublicKeyTemplateAttribute> {
 
     @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private final KmipSpec spec = KmipSpec.UnknownVersion;
 
     public PublicKeyTemplateAttributeBenchmarkSubject() throws Exception {
-        PublicKeyTemplateAttribute subject = PublicKeyTemplateAttribute.of("default-string");  // TODO: Create a default instance
+        PublicKeyTemplateAttribute subject = PublicKeyTemplateAttribute.of("default-string");
         initialize(subject, PublicKeyTemplateAttribute.class);
     }
 

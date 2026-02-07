@@ -19,7 +19,7 @@ class ContactInformationTtlvTest extends AbstractTtlvSerializationTestSuite<Cont
 
     @Override
     protected ContactInformation createVariant() {
-        // TODO: Update with different values to test variations
+
         return ContactInformation.builder().value("test-2").build();
     }
 }
