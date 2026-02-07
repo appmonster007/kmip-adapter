@@ -142,6 +142,6 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
     }
 }

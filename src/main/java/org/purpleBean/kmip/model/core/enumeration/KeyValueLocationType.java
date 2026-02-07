@@ -36,7 +36,7 @@ public class KeyValueLocationType implements KmipEnumeration {
     static {
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description, s);
+            DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
         }
 
         for (KmipSpec spec : supportedVersions) {
@@ -73,6 +73,8 @@ public class KeyValueLocationType implements KmipEnumeration {
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
         checkValidExtensionValue(value);
+
+        final String name = description.toLowerCase(Locale.ROOT);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
@@ -80,14 +82,14 @@ public class KeyValueLocationType implements KmipEnumeration {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
         Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
         if (existingEnumByValue != null || existingEnumByDescription != null) {
             return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
         }
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(value, custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
         return custom;
     }
 
@@ -95,8 +97,9 @@ public class KeyValueLocationType implements KmipEnumeration {
      * Look up by name.
      */
     public static Value fromName(String name) {
+        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
         KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(name);
+        Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
         return Optional.ofNullable(v)
                 .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(

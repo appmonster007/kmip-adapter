@@ -65,7 +65,7 @@ public class Attribute implements KmipStructure {
             attrTag = KmipTag.Standard.ATTRIBUTE;
             encodingType = EncodingType.STRUCTURE;
         } else {
-            attrTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(name));
+            attrTag = KmipTag.fromName(StringUtils.convertTitleToPascalCase(name));
             encodingType = attribute.getAttributeValue().getEncodingType();
         }
         BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> attributeBuilder = KmipAttribute.getAttributeBuilderFromRegistry(

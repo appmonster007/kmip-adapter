@@ -41,7 +41,7 @@ public class AttributeValueXmlDeserializer extends AbstractKmipDataTypeXmlDeseri
                 String value = ctxt.readTreeAsValue(node, String.class);
                 String attributeName = (String) ctxt.getAttribute("attributeName");
                 if (attributeName != null && attributeName.toLowerCase().contains("mask")) {
-                    KmipTag.Value kmipTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(attributeName));
+                    KmipTag.Value kmipTag = KmipTag.fromName(StringUtils.convertTitleToPascalCase(attributeName));
                     Function<String, ? extends KmipMaskType> fromMaskString = KmipMaskType.getFromMaskString(kmipTag);
                     valueStack.push(fromMaskString.apply(value).getValue());
                     builder.maskString(value);
@@ -58,7 +58,7 @@ public class AttributeValueXmlDeserializer extends AbstractKmipDataTypeXmlDeseri
             case INTERVAL -> valueStack.push(ctxt.readTreeAsValue(node, Integer.class));
             case ENUMERATION -> {
                 String attributeName = (String) ctxt.getAttribute("attributeName");
-                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(attributeName));
+                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.convertTitleToPascalCase(attributeName));
                 var factory = KmipEnumeration.getFromName(nodeTag);
                 String value = ctxt.readTreeAsValue(node, String.class);
                 if (factory == null) {

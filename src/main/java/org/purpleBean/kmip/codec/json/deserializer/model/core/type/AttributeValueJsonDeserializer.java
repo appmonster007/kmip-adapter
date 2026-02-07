@@ -49,7 +49,7 @@ public class AttributeValueJsonDeserializer extends AbstractKmipDataTypeJsonDese
             case INTERVAL -> valueStack.push(ctxt.readTreeAsValue(node, Integer.class));
             case ENUMERATION -> {
                 String attributeName = (String) ctxt.getAttribute("attributeName");
-                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(attributeName));
+                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.convertTitleToPascalCase(attributeName));
                 var factory = KmipEnumeration.getFromName(nodeTag);
                 String value = ctxt.readTreeAsValue(node, String.class);
                 if (factory == null) {

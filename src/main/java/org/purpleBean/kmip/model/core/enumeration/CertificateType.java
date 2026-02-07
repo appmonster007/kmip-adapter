@@ -38,7 +38,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
     static {
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description, s);
+            DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
         }
 
         for (KmipSpec spec : supportedVersions) {
@@ -63,7 +63,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
     }
 
     public static CertificateType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (!attributeName.getValue().equals(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()))) {
+        if (!attributeName.getValue().equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
         }
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
@@ -87,6 +87,8 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
         checkValidExtensionValue(value);
+
+        final String name = description.toLowerCase(Locale.ROOT);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
@@ -94,14 +96,14 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
             throw new IllegalArgumentException("At least one supported version must be specified");
         }
         Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(description);
+        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
         if (existingEnumByValue != null || existingEnumByDescription != null) {
             return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
         }
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(value, custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
         return custom;
     }
 
@@ -109,8 +111,9 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
      * Look up by name.
      */
     public static Value fromName(String name) {
+        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
         KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(name);
+        Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
         return Optional.ofNullable(v)
                 .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(
@@ -217,7 +220,7 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     @Override

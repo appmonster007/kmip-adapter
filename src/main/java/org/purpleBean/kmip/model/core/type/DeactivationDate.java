@@ -64,7 +64,7 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
 
     @Override
     public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.covertPascalToTitleCase(kmipTag.getDescription()));
+        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
     }
 
     @Override

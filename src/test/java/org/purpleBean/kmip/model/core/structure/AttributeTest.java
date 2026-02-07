@@ -46,7 +46,7 @@ class AttributeTest extends AbstractKmipStructureTestSuite<Attribute> {
     protected void validateComponents(List<KmipDataType> values) {
         // Add assertions for components if desired
         assertThat(values.get(0)).isInstanceOf(AttributeName.class);
-        assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(StringUtils.covertPascalToTitleCase("Activation Date"));
+        assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(StringUtils.convertPascalToTitleCase("Activation Date"));
         if (values.size() == 2) {
             assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
         }

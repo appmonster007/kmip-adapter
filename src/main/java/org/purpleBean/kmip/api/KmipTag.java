@@ -44,7 +44,7 @@ public class KmipTag {
     static {
         for (Standard s : Standard.values()) {
             VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description, s);
+            DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
         }
     }
 
@@ -115,6 +115,8 @@ public class KmipTag {
      */
     public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
         checkValidExtensionValue(value);
+
+        final String name = description.toLowerCase(Locale.ROOT);
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
@@ -132,9 +134,9 @@ public class KmipTag {
                                 supportedVersions.stream()
                         ).collect(Collectors.toSet())).build();
                 VALUE_REGISTRY.put(existing.getValue(), existing);
-                DESCRIPTION_REGISTRY.put(existing.getDescription(), existing);
+                DESCRIPTION_REGISTRY.put(existing.getDescription().toLowerCase(Locale.ROOT), existing);
                 EXTENSION_VALUE_REGISTRY.put(existing.getValue(), existing);
-                EXTENSION_DESCRIPTION_REGISTRY.put(existing.getDescription(), existing);
+                EXTENSION_DESCRIPTION_REGISTRY.put(existing.getDescription().toLowerCase(Locale.ROOT), existing);
             }
             return existing;
         }
@@ -144,16 +146,16 @@ public class KmipTag {
             throw new IllegalArgumentException(String.format("KMIP Tag already exists for %d: %s", value, existingEnumByValue));
         }
 
-        Value existingEnumByDescription = DESCRIPTION_REGISTRY.get(description);
+        Value existingEnumByDescription = DESCRIPTION_REGISTRY.get(name);
         if (existingEnumByDescription != null) {
             throw new IllegalArgumentException(String.format("KMIP Tag already exists for %s: %s", description, existingEnumByDescription));
         }
 
         Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
-        EXTENSION_VALUE_REGISTRY.putIfAbsent(custom.getValue(), custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(custom.getDescription(), custom);
+        VALUE_REGISTRY.putIfAbsent(value, custom);
+        DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+        EXTENSION_VALUE_REGISTRY.putIfAbsent(value, custom);
+        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
         return custom;
     }
 
@@ -203,8 +205,9 @@ public class KmipTag {
      * @throws NoSuchElementException if no tag is found for the given name in the current KMIP context.
      */
     public static Value fromName(String name) {
+        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
         KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(name);
+        Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
         return Optional.ofNullable(v)
                 .filter(Value::isSupported)
                 .orElseThrow(() -> new NoSuchElementException(

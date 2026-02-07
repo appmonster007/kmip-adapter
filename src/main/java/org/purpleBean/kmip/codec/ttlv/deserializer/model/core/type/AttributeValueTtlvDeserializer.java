@@ -47,7 +47,7 @@ public class AttributeValueTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
             case INTERVAL -> valueStack.push(mapper.readValue(p, Integer.class));
             case ENUMERATION -> {
                 String attributeName = (String) mapper.getAttribute("attributeName");
-                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.covertTitleToPascalCase(attributeName));
+                KmipTag.Value nodeTag = KmipTag.fromName(StringUtils.convertTitleToPascalCase(attributeName));
                 var factory = KmipEnumeration.getFromValue(nodeTag);
                 Integer value = mapper.readValue(p, Integer.class);
                 if (factory == null) {
