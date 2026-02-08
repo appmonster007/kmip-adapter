@@ -17,12 +17,12 @@ class CreateOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<C
     }
 
     @Override
-    protected Class<CreateOpResponsePayload> type() {
+    public Class<CreateOpResponsePayload> type() {
         return CreateOpResponsePayload.class;
     }
 
     @Override
-    protected CreateOpResponsePayload createDefault() {
+    public CreateOpResponsePayload createDefault() {
         return CreateOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
@@ -31,7 +31,7 @@ class CreateOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<C
     }
 
     @Override
-    protected CreateOpResponsePayload createVariant() {
+    public CreateOpResponsePayload createVariant() {
         return CreateOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())

@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class KeyMaterialByteStringTtlvTest extends AbstractTtlvSerializationTestSuite<KeyMaterialByteString> {
 
     @Override
-    protected Class<KeyMaterialByteString> type() {
+    public Class<KeyMaterialByteString> type() {
         return KeyMaterialByteString.class;
     }
 
     @Override
-    protected KeyMaterialByteString createDefault() {
+    public KeyMaterialByteString createDefault() {
         return KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected KeyMaterialByteString createVariant() {
+    public KeyMaterialByteString createVariant() {
         return KeyMaterialByteString.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

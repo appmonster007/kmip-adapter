@@ -11,12 +11,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class DigestJsonTest extends AbstractJsonSerializationTestSuite<Digest> {
 
     @Override
-    protected Class<Digest> type() {
+    public Class<Digest> type() {
         return Digest.class;
     }
 
     @Override
-    protected Digest createDefault() {
+    public Digest createDefault() {
         return Digest.builder()
                 .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
                 .digestValue(DigestValue.of(new byte[0]))

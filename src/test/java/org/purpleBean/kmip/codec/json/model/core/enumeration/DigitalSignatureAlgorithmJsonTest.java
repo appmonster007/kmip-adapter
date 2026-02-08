@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("DigitalSignatureAlgorithm JSON Serialization")
 class DigitalSignatureAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<DigitalSignatureAlgorithm> {
     @Override
-    protected Class<DigitalSignatureAlgorithm> type() {
+    public Class<DigitalSignatureAlgorithm> type() {
         return DigitalSignatureAlgorithm.class;
     }
 
     @Override
-    protected DigitalSignatureAlgorithm createDefault() {
+    public DigitalSignatureAlgorithm createDefault() {
         return DigitalSignatureAlgorithm.Standard.MD2_WITH_RSA_ENCRYPTION.inst();
     }
 
     @Override
-    protected DigitalSignatureAlgorithm createVariant() {
+    public DigitalSignatureAlgorithm createVariant() {
         return DigitalSignatureAlgorithm.Standard.MD5_WITH_RSA_ENCRYPTION.inst();
     }
 }

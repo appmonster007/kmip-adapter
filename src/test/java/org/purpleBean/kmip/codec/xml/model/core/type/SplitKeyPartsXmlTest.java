@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class SplitKeyPartsXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyParts> {
 
     @Override
-    protected Class<SplitKeyParts> type() {
+    public Class<SplitKeyParts> type() {
         return SplitKeyParts.class;
     }
 
     @Override
-    protected SplitKeyParts createDefault() {
+    public SplitKeyParts createDefault() {
         return SplitKeyParts.builder().value(2).build();
     }
 
     @Override
-    protected SplitKeyParts createVariant() {
+    public SplitKeyParts createVariant() {
         return SplitKeyParts.builder().value(3).build();
     }
 }

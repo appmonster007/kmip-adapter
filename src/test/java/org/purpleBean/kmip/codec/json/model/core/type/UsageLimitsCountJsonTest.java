@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class UsageLimitsCountJsonTest extends AbstractJsonSerializationTestSuite<UsageLimitsCount> {
 
     @Override
-    protected Class<UsageLimitsCount> type() {
+    public Class<UsageLimitsCount> type() {
         return UsageLimitsCount.class;
     }
 
     @Override
-    protected UsageLimitsCount createDefault() {
+    public UsageLimitsCount createDefault() {
         return UsageLimitsCount.builder().value(100L).build();
     }
 
     @Override
-    protected UsageLimitsCount createVariant() {
+    public UsageLimitsCount createVariant() {
         return UsageLimitsCount.builder().value(200L).build();
     }
 }

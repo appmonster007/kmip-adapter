@@ -21,12 +21,12 @@ class KeyValueStructureJsonTest extends AbstractJsonSerializationTestSuite<KeyVa
     }
 
     @Override
-    protected Class<KeyValueStructure> type() {
+    public Class<KeyValueStructure> type() {
         return KeyValueStructure.class;
     }
 
     @Override
-    protected KeyValueStructure createDefault() {
+    public KeyValueStructure createDefault() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
         KmipAttribute attribute = CustomAttribute.of("x-test-attribute", AttributeValue.ofTextString("test-value"));
         return KeyValueStructure.builder()
@@ -36,7 +36,7 @@ class KeyValueStructureJsonTest extends AbstractJsonSerializationTestSuite<KeyVa
     }
 
     @Override
-    protected KeyValueStructure createVariant() {
+    public KeyValueStructure createVariant() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x04, 0x05, 0x06});
         KmipAttribute attribute = CustomAttribute.of("x-test-attribute-2", AttributeValue.ofTextString("test-value"));
         return KeyValueStructure.builder()

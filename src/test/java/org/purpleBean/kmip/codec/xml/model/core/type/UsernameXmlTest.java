@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class UsernameXmlTest extends AbstractXmlSerializationTestSuite<Username> {
 
     @Override
-    protected Class<Username> type() {
+    public Class<Username> type() {
         return Username.class;
     }
 
     @Override
-    protected Username createDefault() {
+    public Username createDefault() {
         return Username.builder().value("test-user").build();
     }
 
     @Override
-    protected Username createVariant() {
+    public Username createVariant() {
         return Username.builder().value("another-user").build();
     }
 }

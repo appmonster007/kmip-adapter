@@ -13,18 +13,18 @@ class DestroyDateTtlvTest extends AbstractTtlvSerializationTestSuite<DestroyDate
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<DestroyDate> type() {
+    public Class<DestroyDate> type() {
         return DestroyDate.class;
     }
 
     @Override
-    protected DestroyDate createDefault() {
+    public DestroyDate createDefault() {
 
         return DestroyDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
-    protected DestroyDate createVariant() {
+    public DestroyDate createVariant() {
 
         return DestroyDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }

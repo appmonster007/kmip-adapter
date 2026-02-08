@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class LinkTtlvTest extends AbstractTtlvSerializationTestSuite<Link> {
 
     @Override
-    protected Class<Link> type() {
+    public Class<Link> type() {
         return Link.class;
     }
 
     @Override
-    protected Link createDefault() {
+    public Link createDefault() {
         return Link.builder()
                 .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
                 .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))

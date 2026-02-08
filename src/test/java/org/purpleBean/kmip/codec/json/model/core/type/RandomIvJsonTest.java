@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class RandomIvJsonTest extends AbstractJsonSerializationTestSuite<RandomIv> {
 
     @Override
-    protected Class<RandomIv> type() {
+    public Class<RandomIv> type() {
         return RandomIv.class;
     }
 
     @Override
-    protected RandomIv createDefault() {
+    public RandomIv createDefault() {
         return RandomIv.of(true);
     }
 
     @Override
-    protected RandomIv createVariant() {
+    public RandomIv createVariant() {
         return RandomIv.of(false);
     }
 }

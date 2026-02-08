@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CertificateIssuerAlternativeNameXmlTest extends AbstractXmlSerializationTestSuite<CertificateIssuerAlternativeName> {
 
     @Override
-    protected Class<CertificateIssuerAlternativeName> type() {
+    public Class<CertificateIssuerAlternativeName> type() {
         return CertificateIssuerAlternativeName.class;
     }
 
     @Override
-    protected CertificateIssuerAlternativeName createDefault() {
+    public CertificateIssuerAlternativeName createDefault() {
         return CertificateIssuerAlternativeName.builder().value("test-issuer-alt-name").build();
     }
 
     @Override
-    protected CertificateIssuerAlternativeName createVariant() {
+    public CertificateIssuerAlternativeName createVariant() {
         return CertificateIssuerAlternativeName.builder().value("another-issuer-alt-name").build();
     }
 }

@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ProcessingStage JSON Serialization")
 class ProcessingStageJsonTest extends AbstractJsonSerializationTestSuite<ProcessingStage> {
     @Override
-    protected Class<ProcessingStage> type() {
+    public Class<ProcessingStage> type() {
         return ProcessingStage.class;
     }
 
     @Override
-    protected ProcessingStage createDefault() {
+    public ProcessingStage createDefault() {
         return ProcessingStage.Standard.SUBMITTED.inst();
     }
 
     @Override
-    protected ProcessingStage createVariant() {
+    public ProcessingStage createVariant() {
         return ProcessingStage.Standard.IN_PROCESS.inst();
     }
 }

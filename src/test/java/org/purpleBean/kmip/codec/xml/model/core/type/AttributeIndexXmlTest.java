@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class AttributeIndexXmlTest extends AbstractXmlSerializationTestSuite<AttributeIndex> {
 
     @Override
-    protected Class<AttributeIndex> type() {
+    public Class<AttributeIndex> type() {
         return AttributeIndex.class;
     }
 
     @Override
-    protected AttributeIndex createDefault() {
+    public AttributeIndex createDefault() {
         return AttributeIndex.builder().value(10).build();
     }
 
     @Override
-    protected AttributeIndex createVariant() {
+    public AttributeIndex createVariant() {
         return AttributeIndex.builder().value(50).build();
     }
 }

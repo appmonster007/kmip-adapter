@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class LinkedObjectIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<LinkedObjectIdentifier> {
 
     @Override
-    protected Class<LinkedObjectIdentifier> type() {
+    public Class<LinkedObjectIdentifier> type() {
         return LinkedObjectIdentifier.class;
     }
 
     @Override
-    protected LinkedObjectIdentifier createDefault() {
+    public LinkedObjectIdentifier createDefault() {
         return LinkedObjectIdentifier.builder().value("test-linked-id").build();
     }
 
     @Override
-    protected LinkedObjectIdentifier createVariant() {
+    public LinkedObjectIdentifier createVariant() {
         return LinkedObjectIdentifier.builder().value("another-linked-id").build();
     }
 }

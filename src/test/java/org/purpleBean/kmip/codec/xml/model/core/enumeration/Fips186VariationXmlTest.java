@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("Fips186Variation XML Serialization")
 class Fips186VariationXmlTest extends AbstractXmlSerializationTestSuite<Fips186Variation> {
     @Override
-    protected Class<Fips186Variation> type() {
+    public Class<Fips186Variation> type() {
         return Fips186Variation.class;
     }
 
     @Override
-    protected Fips186Variation createDefault() {
+    public Fips186Variation createDefault() {
         return Fips186Variation.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected Fips186Variation createVariant() {
+    public Fips186Variation createVariant() {
         return Fips186Variation.Standard.GP_X_ORIGINAL.inst();
     }
 }

@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class X509CertificateIssuerTtlvTest extends AbstractTtlvSerializationTestSuite<X509CertificateIssuer> {
 
     @Override
-    protected Class<X509CertificateIssuer> type() {
+    public Class<X509CertificateIssuer> type() {
         return X509CertificateIssuer.class;
     }
 
     @Override
-    protected X509CertificateIssuer createDefault() {
+    public X509CertificateIssuer createDefault() {
         return X509CertificateIssuer.builder()
                 .issuerDistinguishedName(
                         IssuerDistinguishedName.of("CN=Test Issuer".getBytes())

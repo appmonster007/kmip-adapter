@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("KeyRoleType JSON Serialization")
 class KeyRoleTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyRoleType> {
     @Override
-    protected Class<KeyRoleType> type() {
+    public Class<KeyRoleType> type() {
         return KeyRoleType.class;
     }
 
     @Override
-    protected KeyRoleType createDefault() {
+    public KeyRoleType createDefault() {
         return KeyRoleType.Standard.BDK.inst();
     }
 
     @Override
-    protected KeyRoleType createVariant() {
+    public KeyRoleType createVariant() {
         return KeyRoleType.Standard.CVK.inst();
     }
 }

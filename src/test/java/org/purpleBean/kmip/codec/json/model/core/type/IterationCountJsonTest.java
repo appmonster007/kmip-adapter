@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class IterationCountJsonTest extends AbstractJsonSerializationTestSuite<IterationCount> {
 
     @Override
-    protected Class<IterationCount> type() {
+    public Class<IterationCount> type() {
         return IterationCount.class;
     }
 
     @Override
-    protected IterationCount createDefault() {
+    public IterationCount createDefault() {
         return IterationCount.builder().value(1000).build();
     }
 
     @Override
-    protected IterationCount createVariant() {
+    public IterationCount createVariant() {
         return IterationCount.builder().value(2000).build();
     }
 }

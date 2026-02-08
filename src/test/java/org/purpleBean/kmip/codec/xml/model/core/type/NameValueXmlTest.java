@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class NameValueXmlTest extends AbstractXmlSerializationTestSuite<NameValue> {
 
     @Override
-    protected Class<NameValue> type() {
+    public Class<NameValue> type() {
         return NameValue.class;
     }
 
     @Override
-    protected NameValue createDefault() {
+    public NameValue createDefault() {
         return NameValue.of("some-name");
     }
 
     @Override
-    protected NameValue createVariant() {
+    public NameValue createVariant() {
         return NameValue.of("some-variant-name");
     }
 }

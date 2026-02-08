@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class CertificateLengthJsonTest extends AbstractJsonSerializationTestSuite<CertificateLength> {
 
     @Override
-    protected Class<CertificateLength> type() {
+    public Class<CertificateLength> type() {
         return CertificateLength.class;
     }
 
     @Override
-    protected CertificateLength createDefault() {
+    public CertificateLength createDefault() {
         return CertificateLength.builder().value(10).build();
     }
 
     @Override
-    protected CertificateLength createVariant() {
+    public CertificateLength createVariant() {
         return CertificateLength.builder().value(15).build();
     }
 }

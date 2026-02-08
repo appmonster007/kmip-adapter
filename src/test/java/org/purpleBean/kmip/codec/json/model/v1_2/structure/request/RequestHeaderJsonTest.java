@@ -18,12 +18,12 @@ class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHe
     }
 
     @Override
-    protected Class<RequestHeader> type() {
+    public Class<RequestHeader> type() {
         return RequestHeader.class;
     }
 
     @Override
-    protected RequestHeader createDefault() {
+    public RequestHeader createDefault() {
         return RequestHeader.builder()
                 .protocolVersion(ProtocolVersion.builder()
                         .protocolVersionMajor(ProtocolVersionMajor.of(1))
@@ -34,7 +34,7 @@ class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHe
     }
 
     @Override
-    protected RequestHeader createVariant() {
+    public RequestHeader createVariant() {
         return RequestHeader.builder()
                 .protocolVersion(ProtocolVersion.builder()
                         .protocolVersionMajor(ProtocolVersionMajor.of(2))

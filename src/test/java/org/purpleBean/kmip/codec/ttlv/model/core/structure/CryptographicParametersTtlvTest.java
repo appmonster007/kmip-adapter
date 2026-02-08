@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class CryptographicParametersTtlvTest extends AbstractTtlvSerializationTestSuite<CryptographicParameters> {
 
     @Override
-    protected Class<CryptographicParameters> type() {
+    public Class<CryptographicParameters> type() {
         return CryptographicParameters.class;
     }
 
     @Override
-    protected CryptographicParameters createDefault() {
+    public CryptographicParameters createDefault() {
         return CryptographicParameters.builder()
                 .blockCipherMode(BlockCipherMode.Standard.CBC.inst())
                 .paddingMethod(PaddingMethod.Standard.PKCS5.inst())

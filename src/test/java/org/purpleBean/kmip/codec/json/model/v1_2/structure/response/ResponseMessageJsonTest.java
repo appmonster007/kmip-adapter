@@ -26,12 +26,12 @@ class ResponseMessageJsonTest extends AbstractJsonSerializationTestSuite<Respons
     }
 
     @Override
-    protected Class<ResponseMessage> type() {
+    public Class<ResponseMessage> type() {
         return ResponseMessage.class;
     }
 
     @Override
-    protected ResponseMessage createDefault() {
+    public ResponseMessage createDefault() {
         return ResponseMessage.builder()
                 .responseHeader(ResponseHeader.builder()
                         .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
@@ -47,7 +47,7 @@ class ResponseMessageJsonTest extends AbstractJsonSerializationTestSuite<Respons
     }
 
     @Override
-    protected ResponseMessage createVariant() {
+    public ResponseMessage createVariant() {
         return ResponseMessage.builder()
                 .responseHeader(ResponseHeader.builder()
                         .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))

@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class IvLengthJsonTest extends AbstractJsonSerializationTestSuite<IvLength> {
 
     @Override
-    protected Class<IvLength> type() {
+    public Class<IvLength> type() {
         return IvLength.class;
     }
 
     @Override
-    protected IvLength createDefault() {
+    public IvLength createDefault() {
         return IvLength.of(128);
     }
 
     @Override
-    protected IvLength createVariant() {
+    public IvLength createVariant() {
         return IvLength.of(256);
     }
 }

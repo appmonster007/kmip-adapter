@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("State JSON Serialization")
 class StateJsonTest extends AbstractJsonSerializationTestSuite<State> {
     @Override
-    protected Class<State> type() {
+    public Class<State> type() {
         return State.class;
     }
 
     @Override
-    protected State createDefault() {
+    public State createDefault() {
         return State.Standard.ACTIVE.inst();
     }
 
     @Override
-    protected State createVariant() {
+    public State createVariant() {
         return State.Standard.DEACTIVATED.inst();
     }
 }

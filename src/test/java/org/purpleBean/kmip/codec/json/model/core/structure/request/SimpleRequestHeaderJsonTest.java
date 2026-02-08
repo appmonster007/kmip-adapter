@@ -9,26 +9,26 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class SimpleRequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestHeader> {
 
     @Override
-    protected Class<SimpleRequestHeader> type() {
+    public Class<SimpleRequestHeader> type() {
         return SimpleRequestHeader.class;
     }
 
     @Override
-    protected SimpleRequestHeader createDefault() {
+    public SimpleRequestHeader createDefault() {
         return SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .build();
     }
 
     @Override
-    protected SimpleRequestHeader createVariant() {
+    public SimpleRequestHeader createVariant() {
         return SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(2, 0))
                 .build();
     }
 
     @Override
-    protected boolean unsupportedSpecShouldFailSerialize() {
+    public boolean unsupportedSpecShouldFailSerialize() {
         return false; // model supports UnsupportedVersion
     }
 }

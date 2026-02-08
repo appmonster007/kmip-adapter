@@ -22,12 +22,12 @@ class TtlvDataTypeXmlTest extends AbstractXmlSerializationTestSuite<TtlvDataType
     }
 
     @Override
-    protected Class<TtlvDataType> type() {
+    public Class<TtlvDataType> type() {
         return TtlvDataType.class;
     }
 
     @Override
-    protected TtlvDataType createDefault() {
+    public TtlvDataType createDefault() {
         return TtlvDataType.builder()
                 .kmipTag(KmipTag.register(0x540123, "0x540123", Set.of(KmipSpec.V1_2)).inst())
                 .encodingType(EncodingType.TEXT_STRING)
@@ -36,7 +36,7 @@ class TtlvDataTypeXmlTest extends AbstractXmlSerializationTestSuite<TtlvDataType
     }
 
     @Override
-    protected TtlvDataType createVariant() {
+    public TtlvDataType createVariant() {
         return TtlvDataType.ofStructure(
                 KmipTag.register(0x540124, "0x540124", Set.of(KmipSpec.V1_2)),
                 TtlvDataType.ofTextString(

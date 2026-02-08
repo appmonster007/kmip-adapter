@@ -16,12 +16,12 @@ class GetUsageAllocationOpRequestPayloadXmlTest extends AbstractXmlSerialization
     }
 
     @Override
-    protected Class<GetUsageAllocationOpRequestPayload> type() {
+    public Class<GetUsageAllocationOpRequestPayload> type() {
         return GetUsageAllocationOpRequestPayload.class;
     }
 
     @Override
-    protected GetUsageAllocationOpRequestPayload createDefault() {
+    public GetUsageAllocationOpRequestPayload createDefault() {
         return GetUsageAllocationOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .usageLimitsCount(UsageLimitsCount.of(100L))
@@ -29,7 +29,7 @@ class GetUsageAllocationOpRequestPayloadXmlTest extends AbstractXmlSerialization
     }
 
     @Override
-    protected GetUsageAllocationOpRequestPayload createVariant() {
+    public GetUsageAllocationOpRequestPayload createVariant() {
         return GetUsageAllocationOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .usageLimitsCount(UsageLimitsCount.of(200L))

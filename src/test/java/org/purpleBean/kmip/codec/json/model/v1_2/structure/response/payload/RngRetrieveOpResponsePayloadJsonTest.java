@@ -15,19 +15,19 @@ class RngRetrieveOpResponsePayloadJsonTest extends AbstractJsonSerializationTest
     }
 
     @Override
-    protected Class<RngRetrieveOpResponsePayload> type() {
+    public Class<RngRetrieveOpResponsePayload> type() {
         return RngRetrieveOpResponsePayload.class;
     }
 
     @Override
-    protected RngRetrieveOpResponsePayload createDefault() {
+    public RngRetrieveOpResponsePayload createDefault() {
         return RngRetrieveOpResponsePayload.builder()
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
                 .build();
     }
 
     @Override
-    protected RngRetrieveOpResponsePayload createVariant() {
+    public RngRetrieveOpResponsePayload createVariant() {
         return RngRetrieveOpResponsePayload.builder()
                 .data(DataByteString.of(new byte[]{4, 5, 6}))
                 .build();

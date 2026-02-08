@@ -15,19 +15,19 @@ class ArchiveOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuit
     }
 
     @Override
-    protected Class<ArchiveOpResponsePayload> type() {
+    public Class<ArchiveOpResponsePayload> type() {
         return ArchiveOpResponsePayload.class;
     }
 
     @Override
-    protected ArchiveOpResponsePayload createDefault() {
+    public ArchiveOpResponsePayload createDefault() {
         return ArchiveOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected ArchiveOpResponsePayload createVariant() {
+    public ArchiveOpResponsePayload createVariant() {
         return ArchiveOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

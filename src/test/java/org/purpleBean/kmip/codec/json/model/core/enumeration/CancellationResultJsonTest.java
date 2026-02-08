@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("CancellationResult JSON Serialization")
 class CancellationResultJsonTest extends AbstractJsonSerializationTestSuite<CancellationResult> {
     @Override
-    protected Class<CancellationResult> type() {
+    public Class<CancellationResult> type() {
         return CancellationResult.class;
     }
 
     @Override
-    protected CancellationResult createDefault() {
+    public CancellationResult createDefault() {
         return CancellationResult.Standard.CANCELED.inst();
     }
 
     @Override
-    protected CancellationResult createVariant() {
+    public CancellationResult createVariant() {
         return CancellationResult.Standard.UNABLE_TO_CANCEL.inst();
     }
 }

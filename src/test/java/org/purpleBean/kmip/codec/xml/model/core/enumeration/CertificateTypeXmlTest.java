@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("CertificateType XML Serialization")
 class CertificateTypeXmlTest extends AbstractXmlSerializationTestSuite<CertificateType> {
     @Override
-    protected Class<CertificateType> type() {
+    public Class<CertificateType> type() {
         return CertificateType.class;
     }
 
     @Override
-    protected CertificateType createDefault() {
+    public CertificateType createDefault() {
         return CertificateType.Standard.X_509.inst();
     }
 
     @Override
-    protected CertificateType createVariant() {
+    public CertificateType createVariant() {
         return CertificateType.Standard.PGP.inst();
     }
 }

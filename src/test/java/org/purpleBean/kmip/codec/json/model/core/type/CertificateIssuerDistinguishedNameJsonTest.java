@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class CertificateIssuerDistinguishedNameJsonTest extends AbstractJsonSerializationTestSuite<CertificateIssuerDistinguishedName> {
 
     @Override
-    protected Class<CertificateIssuerDistinguishedName> type() {
+    public Class<CertificateIssuerDistinguishedName> type() {
         return CertificateIssuerDistinguishedName.class;
     }
 
     @Override
-    protected CertificateIssuerDistinguishedName createDefault() {
+    public CertificateIssuerDistinguishedName createDefault() {
         return CertificateIssuerDistinguishedName.of("CN=Test Issuer");
     }
 
     @Override
-    protected CertificateIssuerDistinguishedName createVariant() {
+    public CertificateIssuerDistinguishedName createVariant() {
         return CertificateIssuerDistinguishedName.of("CN=Another Issuer");
     }
 }

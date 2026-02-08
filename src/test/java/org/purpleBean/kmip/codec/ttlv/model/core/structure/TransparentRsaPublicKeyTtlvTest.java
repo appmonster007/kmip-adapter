@@ -16,12 +16,12 @@ class TransparentRsaPublicKeyTtlvTest extends AbstractTtlvSerializationTestSuite
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentRsaPublicKey> type() {
+    public Class<TransparentRsaPublicKey> type() {
         return TransparentRsaPublicKey.class;
     }
 
     @Override
-    protected TransparentRsaPublicKey createDefault() {
+    public TransparentRsaPublicKey createDefault() {
         return TransparentRsaPublicKey.of(
                 Modulus.of(BigInteger.valueOf(1)),
                 PublicExponent.of(BigInteger.valueOf(2))
@@ -29,7 +29,7 @@ class TransparentRsaPublicKeyTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected TransparentRsaPublicKey createVariant() {
+    public TransparentRsaPublicKey createVariant() {
         return TransparentRsaPublicKey.of(
                 Modulus.of(BigInteger.valueOf(3)),
                 PublicExponent.of(BigInteger.valueOf(4))

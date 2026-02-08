@@ -14,18 +14,18 @@ class TransparentSymmetricKeyXmlTest extends AbstractXmlSerializationTestSuite<T
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentSymmetricKey> type() {
+    public Class<TransparentSymmetricKey> type() {
         return TransparentSymmetricKey.class;
     }
 
     @Override
-    protected TransparentSymmetricKey createDefault() {
+    public TransparentSymmetricKey createDefault() {
         Key key = Key.of(new byte[]{0x01, 0x02, 0x03});
         return TransparentSymmetricKey.of(key);
     }
 
     @Override
-    protected TransparentSymmetricKey createVariant() {
+    public TransparentSymmetricKey createVariant() {
         Key key = Key.of(new byte[]{0x04, 0x05, 0x06});
         return TransparentSymmetricKey.of(key);
     }

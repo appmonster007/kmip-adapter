@@ -15,19 +15,19 @@ class PollOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<Po
     }
 
     @Override
-    protected Class<PollOpRequestPayload> type() {
+    public Class<PollOpRequestPayload> type() {
         return PollOpRequestPayload.class;
     }
 
     @Override
-    protected PollOpRequestPayload createDefault() {
+    public PollOpRequestPayload createDefault() {
         return PollOpRequestPayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
                 .build();
     }
 
     @Override
-    protected PollOpRequestPayload createVariant() {
+    public PollOpRequestPayload createVariant() {
         return PollOpRequestPayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
                 .build();

@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class PrivateExponentXmlTest extends AbstractXmlSerializationTestSuite<PrivateExponent> {
 
     @Override
-    protected Class<PrivateExponent> type() {
+    public Class<PrivateExponent> type() {
         return PrivateExponent.class;
     }
 
     @Override
-    protected PrivateExponent createDefault() {
+    public PrivateExponent createDefault() {
         return PrivateExponent.builder().value(BigInteger.valueOf(12345)).build();
     }
 
     @Override
-    protected PrivateExponent createVariant() {
+    public PrivateExponent createVariant() {
         return PrivateExponent.builder().value(BigInteger.valueOf(54321)).build();
     }
 }

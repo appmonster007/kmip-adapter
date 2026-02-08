@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CertificateRequestXmlTest extends AbstractXmlSerializationTestSuite<CertificateRequest> {
 
     @Override
-    protected Class<CertificateRequest> type() {
+    public Class<CertificateRequest> type() {
         return CertificateRequest.class;
     }
 
     @Override
-    protected CertificateRequest createDefault() {
+    public CertificateRequest createDefault() {
         return CertificateRequest.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected CertificateRequest createVariant() {
+    public CertificateRequest createVariant() {
         return CertificateRequest.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

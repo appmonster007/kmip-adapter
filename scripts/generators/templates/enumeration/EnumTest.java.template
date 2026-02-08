@@ -10,7 +10,8 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.suite.KmipEnumerationTestSuite;
 
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("{{ENUM_NAME}} Domain Tests")
-class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> {
+class {{ENUM_NAME}}Test extends BaseKmipTest implements KmipEnumerationTestSuite<{{ENUM_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -26,12 +27,12 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
     }
 
     @Override
-    protected Class<{{ENUM_NAME}}> type() {
+    public Class<{{ENUM_NAME}}> type() {
         return {{ENUM_NAME}}.class;
     }
 
     @Override
-    protected {{ENUM_NAME}} createDefault() {
+    public {{ENUM_NAME}} createDefault() {
         // TODO: Replace with an actual Standard enum value, e.g., {{ENUM_NAME}}.Standard.SOME_VALUE.inst();
         // For now, using the first available value if any exist.
         if ({{ENUM_NAME}}.Standard.values().length > 0) {
@@ -42,7 +43,7 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
     }
 
     @Override
-    protected {{ENUM_NAME}} createEqualToDefault() {
+    public {{ENUM_NAME}} createEqualToDefault() {
         // TODO: Replace with an actual Standard enum value equal to the one in createDefault()
         if ({{ENUM_NAME}}.Standard.values().length > 0) {
             return {{ENUM_NAME}}.Standard.values()[0].inst();
@@ -51,7 +52,7 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
     }
 
     @Override
-    protected {{ENUM_NAME}} createDifferentFromDefault() {
+    public {{ENUM_NAME}} createDifferentFromDefault() {
         // TODO: Replace with an actual Standard enum value different from the one in createDefault()
         if ({{ENUM_NAME}}.Standard.values().length > 1) {
             return {{ENUM_NAME}}.Standard.values()[1].inst();
@@ -61,18 +62,18 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
     }
 
     @Override
-    protected EncodingType expectedEncodingType() {
+    public EncodingType expectedEncodingType() {
         return EncodingType.ENUMERATION;
     }
 
     @Override
-    protected boolean supportsRegistryBehavior() {
+    public boolean supportsRegistryBehavior() {
         // Set to true if the enum supports custom extension values and lookup methods
         return true; // Assuming all generated enums will support this
     }
 
     @Override
-    protected void assertLookupBehaviour() {
+    public void assertLookupBehaviour() {
         // TODO: Customize these assertions based on actual enum values and expected lookup behavior
         // Example:
         withKmipSpec(
@@ -92,7 +93,7 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
     }
 
     @Override
-    protected void assertEnumerationRegistryBehavior() {
+    public void assertEnumerationRegistryBehavior() {
         // TODO: Customize these assertions based on actual enum values and expected registry behavior
         // Example:
         {{ENUM_NAME}}.Value custom = {{ENUM_NAME}}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));

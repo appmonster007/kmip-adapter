@@ -21,12 +21,12 @@ class RevokeOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected Class<RevokeOpRequestPayload> type() {
+    public Class<RevokeOpRequestPayload> type() {
         return RevokeOpRequestPayload.class;
     }
 
     @Override
-    protected RevokeOpRequestPayload createDefault() {
+    public RevokeOpRequestPayload createDefault() {
         return RevokeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .revocationReason(
@@ -39,7 +39,7 @@ class RevokeOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected RevokeOpRequestPayload createVariant() {
+    public RevokeOpRequestPayload createVariant() {
         return RevokeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .revocationReason(

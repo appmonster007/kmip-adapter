@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class TagLengthTtlvTest extends AbstractTtlvSerializationTestSuite<TagLength> {
 
     @Override
-    protected Class<TagLength> type() {
+    public Class<TagLength> type() {
         return TagLength.class;
     }
 
     @Override
-    protected TagLength createDefault() {
+    public TagLength createDefault() {
         return TagLength.of(128);
     }
 
     @Override
-    protected TagLength createVariant() {
+    public TagLength createVariant() {
         return TagLength.of(256);
     }
 }

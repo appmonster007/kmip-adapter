@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class CRTCoefficientJsonTest extends AbstractJsonSerializationTestSuite<CRTCoefficient> {
 
     @Override
-    protected Class<CRTCoefficient> type() {
+    public Class<CRTCoefficient> type() {
         return CRTCoefficient.class;
     }
 
     @Override
-    protected CRTCoefficient createDefault() {
+    public CRTCoefficient createDefault() {
         return CRTCoefficient.builder().value(BigInteger.valueOf(12345)).build();
     }
 
     @Override
-    protected CRTCoefficient createVariant() {
+    public CRTCoefficient createVariant() {
         return CRTCoefficient.builder().value(BigInteger.valueOf(54321)).build();
     }
 }

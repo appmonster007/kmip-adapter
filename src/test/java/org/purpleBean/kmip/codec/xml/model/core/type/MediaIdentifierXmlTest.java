@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class MediaIdentifierXmlTest extends AbstractXmlSerializationTestSuite<MediaIdentifier> {
 
     @Override
-    protected Class<MediaIdentifier> type() {
+    public Class<MediaIdentifier> type() {
         return MediaIdentifier.class;
     }
 
     @Override
-    protected MediaIdentifier createDefault() {
+    public MediaIdentifier createDefault() {
         return MediaIdentifier.builder().value("test-media-id").build();
     }
 
     @Override
-    protected MediaIdentifier createVariant() {
+    public MediaIdentifier createVariant() {
         return MediaIdentifier.builder().value("another-media-id").build();
     }
 }

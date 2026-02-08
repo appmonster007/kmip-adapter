@@ -15,19 +15,19 @@ class RecoverOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<R
     }
 
     @Override
-    protected Class<RecoverOpRequestPayload> type() {
+    public Class<RecoverOpRequestPayload> type() {
         return RecoverOpRequestPayload.class;
     }
 
     @Override
-    protected RecoverOpRequestPayload createDefault() {
+    public RecoverOpRequestPayload createDefault() {
         return RecoverOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected RecoverOpRequestPayload createVariant() {
+    public RecoverOpRequestPayload createVariant() {
         return RecoverOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

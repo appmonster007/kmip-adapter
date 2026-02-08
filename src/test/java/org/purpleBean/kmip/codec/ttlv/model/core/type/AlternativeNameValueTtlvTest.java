@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class AlternativeNameValueTtlvTest extends AbstractTtlvSerializationTestSuite<AlternativeNameValue> {
 
     @Override
-    protected Class<AlternativeNameValue> type() {
+    public Class<AlternativeNameValue> type() {
         return AlternativeNameValue.class;
     }
 
     @Override
-    protected AlternativeNameValue createDefault() {
+    public AlternativeNameValue createDefault() {
         return AlternativeNameValue.builder().value("some-value").build();
     }
 
     @Override
-    protected AlternativeNameValue createVariant() {
+    public AlternativeNameValue createVariant() {
         return AlternativeNameValue.builder().value("some-other-value").build();
     }
 }

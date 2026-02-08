@@ -12,12 +12,12 @@ import java.math.BigInteger;
 class TransparentEcPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite<TransparentEcPrivateKey> {
 
     @Override
-    protected Class<TransparentEcPrivateKey> type() {
+    public Class<TransparentEcPrivateKey> type() {
         return TransparentEcPrivateKey.class;
     }
 
     @Override
-    protected TransparentEcPrivateKey createDefault() {
+    public TransparentEcPrivateKey createDefault() {
         return TransparentEcPrivateKey.builder()
                 .recommendedCurve(RecommendedCurve.Standard.P_192.inst())
                 .d(D.of(BigInteger.ONE))
@@ -25,7 +25,7 @@ class TransparentEcPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected TransparentEcPrivateKey createVariant() {
+    public TransparentEcPrivateKey createVariant() {
         return TransparentEcPrivateKey.builder()
                 .recommendedCurve(RecommendedCurve.Standard.P_224.inst())
                 .d(D.of(BigInteger.TEN))

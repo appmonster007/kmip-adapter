@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("CryptographicAlgorithm JSON Serialization")
 class CryptographicAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<CryptographicAlgorithm> {
     @Override
-    protected Class<CryptographicAlgorithm> type() {
+    public Class<CryptographicAlgorithm> type() {
         return CryptographicAlgorithm.class;
     }
 
     @Override
-    protected CryptographicAlgorithm createDefault() {
+    public CryptographicAlgorithm createDefault() {
         return CryptographicAlgorithm.Standard.DES.inst();
     }
 
     @Override
-    protected CryptographicAlgorithm createVariant() {
+    public CryptographicAlgorithm createVariant() {
         return CryptographicAlgorithm.Standard.TRIPLE_DES.inst();
     }
 }

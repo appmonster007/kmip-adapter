@@ -19,12 +19,12 @@ class ValidateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuit
     }
 
     @Override
-    protected Class<ValidateOpRequestPayload> type() {
+    public Class<ValidateOpRequestPayload> type() {
         return ValidateOpRequestPayload.class;
     }
 
     @Override
-    protected ValidateOpRequestPayload createDefault() {
+    public ValidateOpRequestPayload createDefault() {
         return ValidateOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .validityDate(ValidityDate.of(OffsetDateTime.now(ZoneOffset.UTC)))
@@ -32,7 +32,7 @@ class ValidateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuit
     }
 
     @Override
-    protected ValidateOpRequestPayload createVariant() {
+    public ValidateOpRequestPayload createVariant() {
         return ValidateOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .validityDate(ValidityDate.of(OffsetDateTime.now(ZoneOffset.UTC).plusDays(1)))

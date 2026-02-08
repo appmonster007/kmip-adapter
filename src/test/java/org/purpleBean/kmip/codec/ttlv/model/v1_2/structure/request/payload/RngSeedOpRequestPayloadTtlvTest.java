@@ -15,19 +15,19 @@ class RngSeedOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected Class<RngSeedOpRequestPayload> type() {
+    public Class<RngSeedOpRequestPayload> type() {
         return RngSeedOpRequestPayload.class;
     }
 
     @Override
-    protected RngSeedOpRequestPayload createDefault() {
+    public RngSeedOpRequestPayload createDefault() {
         return RngSeedOpRequestPayload.builder()
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
                 .build();
     }
 
     @Override
-    protected RngSeedOpRequestPayload createVariant() {
+    public RngSeedOpRequestPayload createVariant() {
         return RngSeedOpRequestPayload.builder()
                 .data(DataByteString.of(new byte[]{4, 5, 6}))
                 .build();

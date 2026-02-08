@@ -15,19 +15,19 @@ class MessageExtensionTtlvTest extends AbstractTtlvSerializationTestSuite<Messag
     }
 
     @Override
-    protected Class<MessageExtension> type() {
+    public Class<MessageExtension> type() {
         return MessageExtension.class;
     }
 
     @Override
-    protected MessageExtension createDefault() {
+    public MessageExtension createDefault() {
         return MessageExtension.builder()
                 .vendorIdentification(VendorIdentification.of("test-vendor"))
                 .build();
     }
 
     @Override
-    protected MessageExtension createVariant() {
+    public MessageExtension createVariant() {
         return MessageExtension.builder()
                 .vendorIdentification(VendorIdentification.of("test-vendor-variant"))
                 .build();

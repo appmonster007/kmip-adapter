@@ -18,12 +18,12 @@ class CheckOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Che
     }
 
     @Override
-    protected Class<CheckOpRequestPayload> type() {
+    public Class<CheckOpRequestPayload> type() {
         return CheckOpRequestPayload.class;
     }
 
     @Override
-    protected CheckOpRequestPayload createDefault() {
+    public CheckOpRequestPayload createDefault() {
         return CheckOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .usageLimitsCount(UsageLimitsCount.of(100L))
@@ -33,7 +33,7 @@ class CheckOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Che
     }
 
     @Override
-    protected CheckOpRequestPayload createVariant() {
+    public CheckOpRequestPayload createVariant() {
         return CheckOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .usageLimitsCount(UsageLimitsCount.of(200L))

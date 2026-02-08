@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class PrimeFieldSizeJsonTest extends AbstractJsonSerializationTestSuite<PrimeFieldSize> {
 
     @Override
-    protected Class<PrimeFieldSize> type() {
+    public Class<PrimeFieldSize> type() {
         return PrimeFieldSize.class;
     }
 
     @Override
-    protected PrimeFieldSize createDefault() {
+    public PrimeFieldSize createDefault() {
         return PrimeFieldSize.builder().value(BigInteger.valueOf(2048)).build();
     }
 
     @Override
-    protected PrimeFieldSize createVariant() {
+    public PrimeFieldSize createVariant() {
         return PrimeFieldSize.builder().value(BigInteger.valueOf(3072)).build();
     }
 }

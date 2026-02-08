@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("EndpointRole JSON Serialization")
 class EndpointRoleJsonTest extends AbstractJsonSerializationTestSuite<EndpointRole> {
     @Override
-    protected Class<EndpointRole> type() {
+    public Class<EndpointRole> type() {
         return EndpointRole.class;
     }
 
     @Override
-    protected EndpointRole createDefault() {
+    public EndpointRole createDefault() {
         return EndpointRole.Standard.CLIENT.inst();
     }
 
     @Override
-    protected EndpointRole createVariant() {
+    public EndpointRole createVariant() {
         return EndpointRole.Standard.SERVER.inst();
     }
 }

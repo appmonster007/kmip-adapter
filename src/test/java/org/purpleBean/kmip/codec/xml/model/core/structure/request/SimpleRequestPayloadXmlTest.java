@@ -14,17 +14,17 @@ class SimpleRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Simp
     }
 
     @Override
-    protected Class<SimpleRequestPayload> type() {
+    public Class<SimpleRequestPayload> type() {
         return SimpleRequestPayload.class;
     }
 
     @Override
-    protected SimpleRequestPayload createDefault() {
+    public SimpleRequestPayload createDefault() {
         return SimpleRequestPayload.builder().build();
     }
 
     @Override
-    protected SimpleRequestPayload createVariant() {
+    public SimpleRequestPayload createVariant() {
         return SimpleRequestPayload.builder().build();
     }
 }

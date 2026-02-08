@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("WrappingMethod TTLV Serialization")
 class WrappingMethodTtlvTest extends AbstractTtlvSerializationTestSuite<WrappingMethod> {
     @Override
-    protected Class<WrappingMethod> type() {
+    public Class<WrappingMethod> type() {
         return WrappingMethod.class;
     }
 
     @Override
-    protected WrappingMethod createDefault() {
+    public WrappingMethod createDefault() {
         return WrappingMethod.Standard.ENCRYPT.inst();
     }
 
     @Override
-    protected WrappingMethod createVariant() {
+    public WrappingMethod createVariant() {
         return WrappingMethod.Standard.MAC_SIGN.inst();
     }
 }

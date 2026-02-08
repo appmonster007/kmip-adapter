@@ -15,19 +15,19 @@ class RngRetrieveOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSui
     }
 
     @Override
-    protected Class<RngRetrieveOpRequestPayload> type() {
+    public Class<RngRetrieveOpRequestPayload> type() {
         return RngRetrieveOpRequestPayload.class;
     }
 
     @Override
-    protected RngRetrieveOpRequestPayload createDefault() {
+    public RngRetrieveOpRequestPayload createDefault() {
         return RngRetrieveOpRequestPayload.builder()
                 .dataLength(DataLength.of(16))
                 .build();
     }
 
     @Override
-    protected RngRetrieveOpRequestPayload createVariant() {
+    public RngRetrieveOpRequestPayload createVariant() {
         return RngRetrieveOpRequestPayload.builder()
                 .dataLength(DataLength.of(32))
                 .build();

@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class VendorIdentificationXmlTest extends AbstractXmlSerializationTestSuite<VendorIdentification> {
 
     @Override
-    protected Class<VendorIdentification> type() {
+    public Class<VendorIdentification> type() {
         return VendorIdentification.class;
     }
 
     @Override
-    protected VendorIdentification createDefault() {
+    public VendorIdentification createDefault() {
         return VendorIdentification.builder().value("test-vendor").build();
     }
 
     @Override
-    protected VendorIdentification createVariant() {
+    public VendorIdentification createVariant() {
         return VendorIdentification.builder().value("another-vendor").build();
     }
 }

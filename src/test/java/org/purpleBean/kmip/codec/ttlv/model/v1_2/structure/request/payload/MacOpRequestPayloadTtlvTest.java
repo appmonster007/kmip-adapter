@@ -16,12 +16,12 @@ class MacOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Mac
     }
 
     @Override
-    protected Class<MacOpRequestPayload> type() {
+    public Class<MacOpRequestPayload> type() {
         return MacOpRequestPayload.class;
     }
 
     @Override
-    protected MacOpRequestPayload createDefault() {
+    public MacOpRequestPayload createDefault() {
         return MacOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class MacOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Mac
     }
 
     @Override
-    protected MacOpRequestPayload createVariant() {
+    public MacOpRequestPayload createVariant() {
         return MacOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .data(DataByteString.of(new byte[]{4, 5, 6}))

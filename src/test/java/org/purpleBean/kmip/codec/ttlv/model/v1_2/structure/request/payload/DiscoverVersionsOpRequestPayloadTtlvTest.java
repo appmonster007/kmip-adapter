@@ -17,19 +17,19 @@ class DiscoverVersionsOpRequestPayloadTtlvTest extends AbstractTtlvSerialization
     }
 
     @Override
-    protected Class<DiscoverVersionsOpRequestPayload> type() {
+    public Class<DiscoverVersionsOpRequestPayload> type() {
         return DiscoverVersionsOpRequestPayload.class;
     }
 
     @Override
-    protected DiscoverVersionsOpRequestPayload createDefault() {
+    public DiscoverVersionsOpRequestPayload createDefault() {
         return DiscoverVersionsOpRequestPayload.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
                 .build();
     }
 
     @Override
-    protected DiscoverVersionsOpRequestPayload createVariant() {
+    public DiscoverVersionsOpRequestPayload createVariant() {
         return DiscoverVersionsOpRequestPayload.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
                 .build();

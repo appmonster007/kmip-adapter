@@ -13,19 +13,19 @@ class CompromiseOccurrenceDateTtlvTest extends AbstractTtlvSerializationTestSuit
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<CompromiseOccurrenceDate> type() {
+    public Class<CompromiseOccurrenceDate> type() {
         return CompromiseOccurrenceDate.class;
     }
 
     @Override
-    protected CompromiseOccurrenceDate createDefault() {
+    public CompromiseOccurrenceDate createDefault() {
         return CompromiseOccurrenceDate.builder()
                 .value(FIXED_TIME)
                 .build();
     }
 
     @Override
-    protected CompromiseOccurrenceDate createVariant() {
+    public CompromiseOccurrenceDate createVariant() {
         return CompromiseOccurrenceDate.builder()
                 .value(FIXED_TIME.plusDays(1))
                 .build();

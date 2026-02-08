@@ -10,17 +10,17 @@ import java.nio.ByteBuffer;
 class DataByteStringTtlvTest extends AbstractTtlvSerializationTestSuite<DataByteString> {
 
     @Override
-    protected Class<DataByteString> type() {
+    public Class<DataByteString> type() {
         return DataByteString.class;
     }
 
     @Override
-    protected DataByteString createDefault() {
+    public DataByteString createDefault() {
         return DataByteString.of(ByteBuffer.wrap("test data".getBytes()));
     }
 
     @Override
-    protected DataByteString createVariant() {
+    public DataByteString createVariant() {
         return DataByteString.of(ByteBuffer.wrap("variant data".getBytes()));
     }
 }

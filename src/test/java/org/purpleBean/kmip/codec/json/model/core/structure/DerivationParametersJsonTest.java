@@ -21,12 +21,12 @@ class DerivationParametersJsonTest extends AbstractJsonSerializationTestSuite<De
     }
 
     @Override
-    protected Class<DerivationParameters> type() {
+    public Class<DerivationParameters> type() {
         return DerivationParameters.class;
     }
 
     @Override
-    protected DerivationParameters createDefault() {
+    public DerivationParameters createDefault() {
         return DerivationParameters.builder()
                 .cryptographicParameters(CryptographicParameters.builder()
                         .blockCipherMode(BlockCipherMode.Standard.CBC.inst())
@@ -40,7 +40,7 @@ class DerivationParametersJsonTest extends AbstractJsonSerializationTestSuite<De
     }
 
     @Override
-    protected DerivationParameters createVariant() {
+    public DerivationParameters createVariant() {
         return DerivationParameters.builder()
                 .cryptographicParameters(CryptographicParameters.builder()
                         .blockCipherMode(BlockCipherMode.Standard.ECB.inst())

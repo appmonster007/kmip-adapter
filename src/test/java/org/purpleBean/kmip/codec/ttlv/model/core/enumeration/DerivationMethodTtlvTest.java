@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("DerivationMethod TTLV Serialization")
 class DerivationMethodTtlvTest extends AbstractTtlvSerializationTestSuite<DerivationMethod> {
     @Override
-    protected Class<DerivationMethod> type() {
+    public Class<DerivationMethod> type() {
         return DerivationMethod.class;
     }
 
     @Override
-    protected DerivationMethod createDefault() {
+    public DerivationMethod createDefault() {
         return DerivationMethod.Standard.PBKDF2.inst();
     }
 
     @Override
-    protected DerivationMethod createVariant() {
+    public DerivationMethod createVariant() {
         return DerivationMethod.Standard.HASH.inst();
     }
 }

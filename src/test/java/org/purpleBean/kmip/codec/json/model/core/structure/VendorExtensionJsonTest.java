@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.model.core.TtlvDataType;
+import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("VendorExtension Json Serialization Tests")
@@ -17,12 +17,12 @@ class VendorExtensionJsonTest extends AbstractJsonSerializationTestSuite<VendorE
     }
 
     @Override
-    protected Class<VendorExtension> type() {
+    public Class<VendorExtension> type() {
         return VendorExtension.class;
     }
 
     @Override
-    protected VendorExtension createDefault() {
+    public VendorExtension createDefault() {
         return VendorExtension.builder()
                 .ttlvDataType(TtlvDataType.builder()
                         .kmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER.inst())
@@ -33,7 +33,7 @@ class VendorExtensionJsonTest extends AbstractJsonSerializationTestSuite<VendorE
     }
 
     @Override
-    protected VendorExtension createVariant() {
+    public VendorExtension createVariant() {
         return VendorExtension.builder()
                 .ttlvDataType(TtlvDataType.builder()
                         .kmipTag(KmipTag.Standard.ATTRIBUTE_NAME.inst())

@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ProfileName XML Serialization")
 class ProfileNameXmlTest extends AbstractXmlSerializationTestSuite<ProfileName> {
     @Override
-    protected Class<ProfileName> type() {
+    public Class<ProfileName> type() {
         return ProfileName.class;
     }
 
     @Override
-    protected ProfileName createDefault() {
+    public ProfileName createDefault() {
         return ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
     }
 
     @Override
-    protected ProfileName createVariant() {
+    public ProfileName createVariant() {
         return ProfileName.Standard.COMPLETE_SERVER_TLS_V1_2.inst();
     }
 }

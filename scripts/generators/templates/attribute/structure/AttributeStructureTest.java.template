@@ -6,13 +6,14 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipStructureTestSuite;
 
 import java.util.List;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends BaseKmipTest implements KmipStructureTestSuite<{{ATTRIBUTE_NAME}}>, KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,7 +21,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_
     }
 
     @Override
-    protected Class<{{ATTRIBUTE_NAME}}> type() {
+    public Class<{{ATTRIBUTE_NAME}}> type() {
         return {{ATTRIBUTE_NAME}}.class;
     }
 
@@ -31,17 +32,17 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_
     }
 
     @Override
-    protected EncodingType expectedEncodingType() {
+    public EncodingType expectedEncodingType() {
         return EncodingType.STRUCTURE;
     }
 
     @Override
-    protected int expectedMinComponentCount() {
+    public int expectedMinComponentCount() {
         return 0;
     }
 
     @Override
-    protected void validateComponents(List<KmipDataType> values) {
+    public void validateComponents(List<KmipDataType> values) {
         // TODO: Validate component as per the structure design
         // Example:
         // assertThat(values.get(0)).isInstanceOf(AlternativeNameValue.class);

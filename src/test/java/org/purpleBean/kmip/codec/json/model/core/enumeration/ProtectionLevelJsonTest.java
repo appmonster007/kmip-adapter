@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ProtectionLevel JSON Serialization")
 class ProtectionLevelJsonTest extends AbstractJsonSerializationTestSuite<ProtectionLevel> {
     @Override
-    protected Class<ProtectionLevel> type() {
+    public Class<ProtectionLevel> type() {
         return ProtectionLevel.class;
     }
 
     @Override
-    protected ProtectionLevel createDefault() {
+    public ProtectionLevel createDefault() {
         return ProtectionLevel.Standard.HIGH.inst();
     }
 
     @Override
-    protected ProtectionLevel createVariant() {
+    public ProtectionLevel createVariant() {
         return ProtectionLevel.Standard.LOW.inst();
     }
 }

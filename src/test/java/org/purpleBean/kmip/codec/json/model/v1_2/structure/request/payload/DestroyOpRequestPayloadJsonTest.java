@@ -15,19 +15,19 @@ class DestroyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected Class<DestroyOpRequestPayload> type() {
+    public Class<DestroyOpRequestPayload> type() {
         return DestroyOpRequestPayload.class;
     }
 
     @Override
-    protected DestroyOpRequestPayload createDefault() {
+    public DestroyOpRequestPayload createDefault() {
         return DestroyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected DestroyOpRequestPayload createVariant() {
+    public DestroyOpRequestPayload createVariant() {
         return DestroyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

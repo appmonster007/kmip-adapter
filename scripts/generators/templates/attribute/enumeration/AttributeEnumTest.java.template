@@ -5,8 +5,9 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipEnumerationTestSuite;
 
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends BaseKmipTest implements KmipEnumerationTestSuite<{{ATTRIBUTE_NAME}}>, KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -22,7 +23,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected Class<{{ATTRIBUTE_NAME}}> type() {
+    public Class<{{ATTRIBUTE_NAME}}> type() {
         return {{ATTRIBUTE_NAME}}.class;
     }
 
@@ -36,7 +37,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected {{ATTRIBUTE_NAME}} createEqualToDefault() {
+    public {{ATTRIBUTE_NAME}} createEqualToDefault() {
         // TODO: Replace with an actual Standard enum value
         if ({{ATTRIBUTE_NAME}}.Standard.values().length > 0) {
             return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
@@ -45,7 +46,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected {{ATTRIBUTE_NAME}} createDifferentFromDefault() {
+    public {{ATTRIBUTE_NAME}} createDifferentFromDefault() {
         // TODO: Replace with an actual Standard enum value
         if ({{ATTRIBUTE_NAME}}.Standard.values().length > 1) {
             return {{ATTRIBUTE_NAME}}.Standard.values()[1].inst();
@@ -54,12 +55,12 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected EncodingType expectedEncodingType() {
+    public EncodingType expectedEncodingType() {
         return EncodingType.ENUMERATION;
     }
 
     @Override
-    protected boolean supportsRegistryBehavior() {
+    public boolean supportsRegistryBehavior() {
         return true; // TODO: Adjust as needed
     }
 
@@ -127,7 +128,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected void assertLookupBehaviour() {
+    public void assertLookupBehaviour() {
         // TODO: Customize these assertions based on actual enum values and expected lookup behavior
         // Lookup by name/value
         withKmipSpec(
@@ -148,7 +149,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
     }
 
     @Override
-    protected void assertEnumerationRegistryBehavior() {
+    public void assertEnumerationRegistryBehavior() {
         // TODO: Customize these assertions based on actual enum values and expected registry behavior
         // Valid registration in {{ATTRIBUTE_NAME}} requires 8XXXXXXX (hex) range per implementation
         {{ATTRIBUTE_NAME}}.Value custom = {{ATTRIBUTE_NAME}}.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));

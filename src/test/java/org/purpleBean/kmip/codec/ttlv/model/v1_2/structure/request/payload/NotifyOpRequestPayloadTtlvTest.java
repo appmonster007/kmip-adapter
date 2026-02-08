@@ -18,12 +18,12 @@ class NotifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected Class<NotifyOpRequestPayload> type() {
+    public Class<NotifyOpRequestPayload> type() {
         return NotifyOpRequestPayload.class;
     }
 
     @Override
-    protected NotifyOpRequestPayload createDefault() {
+    public NotifyOpRequestPayload createDefault() {
         return NotifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
@@ -31,7 +31,7 @@ class NotifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected NotifyOpRequestPayload createVariant() {
+    public NotifyOpRequestPayload createVariant() {
         return NotifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))

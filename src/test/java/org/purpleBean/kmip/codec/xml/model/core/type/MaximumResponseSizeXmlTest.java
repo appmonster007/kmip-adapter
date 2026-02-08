@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class MaximumResponseSizeXmlTest extends AbstractXmlSerializationTestSuite<MaximumResponseSize> {
 
     @Override
-    protected Class<MaximumResponseSize> type() {
+    public Class<MaximumResponseSize> type() {
         return MaximumResponseSize.class;
     }
 
     @Override
-    protected MaximumResponseSize createDefault() {
+    public MaximumResponseSize createDefault() {
         return MaximumResponseSize.builder().value(1024).build();
     }
 
     @Override
-    protected MaximumResponseSize createVariant() {
+    public MaximumResponseSize createVariant() {
         return MaximumResponseSize.builder().value(2048).build();
     }
 }

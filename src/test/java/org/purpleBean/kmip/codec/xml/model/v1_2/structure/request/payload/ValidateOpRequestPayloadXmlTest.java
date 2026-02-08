@@ -22,12 +22,12 @@ class ValidateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected Class<ValidateOpRequestPayload> type() {
+    public Class<ValidateOpRequestPayload> type() {
         return ValidateOpRequestPayload.class;
     }
 
     @Override
-    protected ValidateOpRequestPayload createDefault() {
+    public ValidateOpRequestPayload createDefault() {
         return ValidateOpRequestPayload.builder()
                 .certificate(Certificate.of(
                         CertificateType.Standard.X_509.inst(),
@@ -38,7 +38,7 @@ class ValidateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected ValidateOpRequestPayload createVariant() {
+    public ValidateOpRequestPayload createVariant() {
         return ValidateOpRequestPayload.builder()
                 .certificate(Certificate.of(
                         CertificateType.Standard.X_509.inst(),

@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class AttributeValueXmlTest extends AbstractXmlSerializationTestSuite<AttributeValue> {
 
     @Override
-    protected Class<AttributeValue> type() {
+    public Class<AttributeValue> type() {
         return AttributeValue.class;
     }
 
     @Override
-    protected AttributeValue createDefault() {
+    public AttributeValue createDefault() {
         return AttributeValue.ofTextString("default-string");
     }
 
     @Override
-    protected AttributeValue createVariant() {
+    public AttributeValue createVariant() {
         return AttributeValue.ofInteger(123);
     }
 }

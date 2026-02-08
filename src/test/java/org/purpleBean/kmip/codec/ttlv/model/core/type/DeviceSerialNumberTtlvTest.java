@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class DeviceSerialNumberTtlvTest extends AbstractTtlvSerializationTestSuite<DeviceSerialNumber> {
 
     @Override
-    protected Class<DeviceSerialNumber> type() {
+    public Class<DeviceSerialNumber> type() {
         return DeviceSerialNumber.class;
     }
 
     @Override
-    protected DeviceSerialNumber createDefault() {
+    public DeviceSerialNumber createDefault() {
         return DeviceSerialNumber.builder().value("12345").build();
     }
 
     @Override
-    protected DeviceSerialNumber createVariant() {
+    public DeviceSerialNumber createVariant() {
         return DeviceSerialNumber.builder().value("67890").build();
     }
 }

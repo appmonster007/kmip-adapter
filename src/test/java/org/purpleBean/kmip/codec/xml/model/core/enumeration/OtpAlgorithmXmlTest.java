@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("OtpAlgorithm XML Serialization")
 class OtpAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<OtpAlgorithm> {
     @Override
-    protected Class<OtpAlgorithm> type() {
+    public Class<OtpAlgorithm> type() {
         return OtpAlgorithm.class;
     }
 
     @Override
-    protected OtpAlgorithm createDefault() {
+    public OtpAlgorithm createDefault() {
         return OtpAlgorithm.Standard.HOTP.inst();
     }
 
     @Override
-    protected OtpAlgorithm createVariant() {
+    public OtpAlgorithm createVariant() {
         return OtpAlgorithm.Standard.TOTP.inst();
     }
 }

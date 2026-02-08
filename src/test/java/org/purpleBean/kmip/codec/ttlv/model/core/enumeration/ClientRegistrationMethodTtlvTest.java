@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ClientRegistrationMethod TTLV Serialization")
 class ClientRegistrationMethodTtlvTest extends AbstractTtlvSerializationTestSuite<ClientRegistrationMethod> {
     @Override
-    protected Class<ClientRegistrationMethod> type() {
+    public Class<ClientRegistrationMethod> type() {
         return ClientRegistrationMethod.class;
     }
 
     @Override
-    protected ClientRegistrationMethod createDefault() {
+    public ClientRegistrationMethod createDefault() {
         return ClientRegistrationMethod.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected ClientRegistrationMethod createVariant() {
+    public ClientRegistrationMethod createVariant() {
         return ClientRegistrationMethod.Standard.SERVER_PRE_GENERATED.inst();
     }
 }

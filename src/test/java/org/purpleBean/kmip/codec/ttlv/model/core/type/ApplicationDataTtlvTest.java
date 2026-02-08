@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class ApplicationDataTtlvTest extends AbstractTtlvSerializationTestSuite<ApplicationData> {
 
     @Override
-    protected Class<ApplicationData> type() {
+    public Class<ApplicationData> type() {
         return ApplicationData.class;
     }
 
     @Override
-    protected ApplicationData createDefault() {
+    public ApplicationData createDefault() {
         return ApplicationData.builder().value("test-data").build();
     }
 
     @Override
-    protected ApplicationData createVariant() {
+    public ApplicationData createVariant() {
         return ApplicationData.builder().value("another-data").build();
     }
 }

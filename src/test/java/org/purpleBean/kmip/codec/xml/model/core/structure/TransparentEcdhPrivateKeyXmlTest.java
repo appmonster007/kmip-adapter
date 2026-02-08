@@ -16,12 +16,12 @@ class TransparentEcdhPrivateKeyXmlTest extends AbstractXmlSerializationTestSuite
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentEcdhPrivateKey> type() {
+    public Class<TransparentEcdhPrivateKey> type() {
         return TransparentEcdhPrivateKey.class;
     }
 
     @Override
-    protected TransparentEcdhPrivateKey createDefault() {
+    public TransparentEcdhPrivateKey createDefault() {
         return TransparentEcdhPrivateKey.of(
                 RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
@@ -29,7 +29,7 @@ class TransparentEcdhPrivateKeyXmlTest extends AbstractXmlSerializationTestSuite
     }
 
     @Override
-    protected TransparentEcdhPrivateKey createVariant() {
+    public TransparentEcdhPrivateKey createVariant() {
         return TransparentEcdhPrivateKey.of(
                 RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))

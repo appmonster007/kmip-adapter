@@ -16,12 +16,12 @@ class TransparentEcmqvPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSu
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentEcmqvPrivateKey> type() {
+    public Class<TransparentEcmqvPrivateKey> type() {
         return TransparentEcmqvPrivateKey.class;
     }
 
     @Override
-    protected TransparentEcmqvPrivateKey createDefault() {
+    public TransparentEcmqvPrivateKey createDefault() {
         return TransparentEcmqvPrivateKey.of(
                 RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
@@ -29,7 +29,7 @@ class TransparentEcmqvPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSu
     }
 
     @Override
-    protected TransparentEcmqvPrivateKey createVariant() {
+    public TransparentEcmqvPrivateKey createVariant() {
         return TransparentEcmqvPrivateKey.of(
                 RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))

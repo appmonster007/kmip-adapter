@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class DerivationDataJsonTest extends AbstractJsonSerializationTestSuite<DerivationData> {
 
     @Override
-    protected Class<DerivationData> type() {
+    public Class<DerivationData> type() {
         return DerivationData.class;
     }
 
     @Override
-    protected DerivationData createDefault() {
+    public DerivationData createDefault() {
         return DerivationData.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected DerivationData createVariant() {
+    public DerivationData createVariant() {
         return DerivationData.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

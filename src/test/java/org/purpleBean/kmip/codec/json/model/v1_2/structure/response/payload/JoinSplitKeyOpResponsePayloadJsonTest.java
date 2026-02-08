@@ -16,12 +16,12 @@ class JoinSplitKeyOpResponsePayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected Class<JoinSplitKeyOpResponsePayload> type() {
+    public Class<JoinSplitKeyOpResponsePayload> type() {
         return JoinSplitKeyOpResponsePayload.class;
     }
 
     @Override
-    protected JoinSplitKeyOpResponsePayload createDefault() {
+    public JoinSplitKeyOpResponsePayload createDefault() {
         return JoinSplitKeyOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
@@ -29,7 +29,7 @@ class JoinSplitKeyOpResponsePayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected JoinSplitKeyOpResponsePayload createVariant() {
+    public JoinSplitKeyOpResponsePayload createVariant() {
         return JoinSplitKeyOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))

@@ -16,12 +16,12 @@ class ResponseBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<Respo
     }
 
     @Override
-    protected Class<ResponseBatchItem> type() {
+    public Class<ResponseBatchItem> type() {
         return ResponseBatchItem.class;
     }
 
     @Override
-    protected ResponseBatchItem createDefault() {
+    public ResponseBatchItem createDefault() {
         return ResponseBatchItem.builder()
                 .operation(Operation.of(Operation.Standard.CREATE))
                 .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
@@ -29,7 +29,7 @@ class ResponseBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<Respo
     }
 
     @Override
-    protected ResponseBatchItem createVariant() {
+    public ResponseBatchItem createVariant() {
         return ResponseBatchItem.builder()
                 .operation(Operation.of(Operation.Standard.GET))
                 .resultStatus(ResultStatus.of(ResultStatus.Standard.OPERATION_FAILED))

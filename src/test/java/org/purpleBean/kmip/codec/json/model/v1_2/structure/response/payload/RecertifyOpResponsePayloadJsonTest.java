@@ -16,12 +16,12 @@ class RecertifyOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSu
     }
 
     @Override
-    protected Class<RecertifyOpResponsePayload> type() {
+    public Class<RecertifyOpResponsePayload> type() {
         return RecertifyOpResponsePayload.class;
     }
 
     @Override
-    protected RecertifyOpResponsePayload createDefault() {
+    public RecertifyOpResponsePayload createDefault() {
         return RecertifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class RecertifyOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSu
     }
 
     @Override
-    protected RecertifyOpResponsePayload createVariant() {
+    public RecertifyOpResponsePayload createVariant() {
         return RecertifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .build();

@@ -17,19 +17,19 @@ class DiscoverVersionsOpResponsePayloadJsonTest extends AbstractJsonSerializatio
     }
 
     @Override
-    protected Class<DiscoverVersionsOpResponsePayload> type() {
+    public Class<DiscoverVersionsOpResponsePayload> type() {
         return DiscoverVersionsOpResponsePayload.class;
     }
 
     @Override
-    protected DiscoverVersionsOpResponsePayload createDefault() {
+    public DiscoverVersionsOpResponsePayload createDefault() {
         return DiscoverVersionsOpResponsePayload.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
                 .build();
     }
 
     @Override
-    protected DiscoverVersionsOpResponsePayload createVariant() {
+    public DiscoverVersionsOpResponsePayload createVariant() {
         return DiscoverVersionsOpResponsePayload.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
                 .build();

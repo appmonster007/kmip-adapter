@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class IVCounterNonceXmlTest extends AbstractXmlSerializationTestSuite<IVCounterNonce> {
 
     @Override
-    protected Class<IVCounterNonce> type() {
+    public Class<IVCounterNonce> type() {
         return IVCounterNonce.class;
     }
 
     @Override
-    protected IVCounterNonce createDefault() {
+    public IVCounterNonce createDefault() {
         return IVCounterNonce.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected IVCounterNonce createVariant() {
+    public IVCounterNonce createVariant() {
         return IVCounterNonce.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

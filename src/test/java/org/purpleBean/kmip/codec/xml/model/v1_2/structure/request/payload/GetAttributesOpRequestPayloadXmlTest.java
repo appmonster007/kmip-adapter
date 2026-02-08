@@ -16,12 +16,12 @@ class GetAttributesOpRequestPayloadXmlTest extends AbstractXmlSerializationTestS
     }
 
     @Override
-    protected Class<GetAttributesOpRequestPayload> type() {
+    public Class<GetAttributesOpRequestPayload> type() {
         return GetAttributesOpRequestPayload.class;
     }
 
     @Override
-    protected GetAttributesOpRequestPayload createDefault() {
+    public GetAttributesOpRequestPayload createDefault() {
         return GetAttributesOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attributeName(AttributeName.of("Attribute1"))
@@ -29,7 +29,7 @@ class GetAttributesOpRequestPayloadXmlTest extends AbstractXmlSerializationTestS
     }
 
     @Override
-    protected GetAttributesOpRequestPayload createVariant() {
+    public GetAttributesOpRequestPayload createVariant() {
         return GetAttributesOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attributeName(AttributeName.of("AttributeA"))

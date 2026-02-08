@@ -17,12 +17,12 @@ class CreateKeyPairOpRequestPayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected Class<CreateKeyPairOpRequestPayload> type() {
+    public Class<CreateKeyPairOpRequestPayload> type() {
         return CreateKeyPairOpRequestPayload.class;
     }
 
     @Override
-    protected CreateKeyPairOpRequestPayload createDefault() {
+    public CreateKeyPairOpRequestPayload createDefault() {
         return CreateKeyPairOpRequestPayload.builder()
                 .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
                 .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
@@ -31,7 +31,7 @@ class CreateKeyPairOpRequestPayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected CreateKeyPairOpRequestPayload createVariant() {
+    public CreateKeyPairOpRequestPayload createVariant() {
         return CreateKeyPairOpRequestPayload.builder()
                 .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
                 .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())

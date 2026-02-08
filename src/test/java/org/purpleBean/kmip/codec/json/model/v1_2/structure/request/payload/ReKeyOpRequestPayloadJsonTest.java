@@ -17,12 +17,12 @@ class ReKeyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<R
     }
 
     @Override
-    protected Class<ReKeyOpRequestPayload> type() {
+    public Class<ReKeyOpRequestPayload> type() {
         return ReKeyOpRequestPayload.class;
     }
 
     @Override
-    protected ReKeyOpRequestPayload createDefault() {
+    public ReKeyOpRequestPayload createDefault() {
         return ReKeyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .offset(Offset.builder().value(100).build())
@@ -31,7 +31,7 @@ class ReKeyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<R
     }
 
     @Override
-    protected ReKeyOpRequestPayload createVariant() {
+    public ReKeyOpRequestPayload createVariant() {
         return ReKeyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .offset(Offset.builder().value(200).build())

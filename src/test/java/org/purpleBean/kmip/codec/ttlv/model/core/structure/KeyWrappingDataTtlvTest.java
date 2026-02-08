@@ -15,19 +15,19 @@ class KeyWrappingDataTtlvTest extends AbstractTtlvSerializationTestSuite<KeyWrap
     }
 
     @Override
-    protected Class<KeyWrappingData> type() {
+    public Class<KeyWrappingData> type() {
         return KeyWrappingData.class;
     }
 
     @Override
-    protected KeyWrappingData createDefault() {
+    public KeyWrappingData createDefault() {
         return KeyWrappingData.builder()
                 .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
                 .build();
     }
 
     @Override
-    protected KeyWrappingData createVariant() {
+    public KeyWrappingData createVariant() {
         return KeyWrappingData.builder()
                 .wrappingMethod(WrappingMethod.Standard.MAC_SIGN.inst())
                 .build();

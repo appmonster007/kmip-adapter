@@ -15,19 +15,19 @@ class CredentialValueGenericStructureXmlTest extends AbstractXmlSerializationTes
     }
 
     @Override
-    protected Class<CredentialValueGenericStructure> type() {
+    public Class<CredentialValueGenericStructure> type() {
         return CredentialValueGenericStructure.class;
     }
 
     @Override
-    protected CredentialValueGenericStructure createDefault() {
+    public CredentialValueGenericStructure createDefault() {
         return CredentialValueGenericStructure.builder()
                 .value(Username.of("test-value"))
                 .build();
     }
 
     @Override
-    protected CredentialValueGenericStructure createVariant() {
+    public CredentialValueGenericStructure createVariant() {
         return CredentialValueGenericStructure.builder()
                 .value(Username.of("test-value-variant"))
                 .build();

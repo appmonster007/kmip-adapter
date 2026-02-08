@@ -17,12 +17,12 @@ class SecretDataXmlTest extends AbstractXmlSerializationTestSuite<SecretData> {
     }
 
     @Override
-    protected Class<SecretData> type() {
+    public Class<SecretData> type() {
         return SecretData.class;
     }
 
     @Override
-    protected SecretData createDefault() {
+    public SecretData createDefault() {
         return SecretData.builder()
                 .secretDataType(SecretDataType.Standard.PASSWORD.inst())
                 .keyBlock(KeyBlock.builder()
@@ -32,7 +32,7 @@ class SecretDataXmlTest extends AbstractXmlSerializationTestSuite<SecretData> {
     }
 
     @Override
-    protected SecretData createVariant() {
+    public SecretData createVariant() {
         return SecretData.builder()
                 .secretDataType(SecretDataType.Standard.SEED.inst())
                 .keyBlock(KeyBlock.builder()

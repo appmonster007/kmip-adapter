@@ -15,19 +15,19 @@ class RecoverOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuit
     }
 
     @Override
-    protected Class<RecoverOpResponsePayload> type() {
+    public Class<RecoverOpResponsePayload> type() {
         return RecoverOpResponsePayload.class;
     }
 
     @Override
-    protected RecoverOpResponsePayload createDefault() {
+    public RecoverOpResponsePayload createDefault() {
         return RecoverOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected RecoverOpResponsePayload createVariant() {
+    public RecoverOpResponsePayload createVariant() {
         return RecoverOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

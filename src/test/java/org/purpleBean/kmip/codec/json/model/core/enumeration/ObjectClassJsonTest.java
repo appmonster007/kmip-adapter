@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ObjectClass JSON Serialization")
 class ObjectClassJsonTest extends AbstractJsonSerializationTestSuite<ObjectClass> {
     @Override
-    protected Class<ObjectClass> type() {
+    public Class<ObjectClass> type() {
         return ObjectClass.class;
     }
 
     @Override
-    protected ObjectClass createDefault() {
+    public ObjectClass createDefault() {
         return ObjectClass.Standard.USER.inst();
     }
 
     @Override
-    protected ObjectClass createVariant() {
+    public ObjectClass createVariant() {
         return ObjectClass.Standard.SYSTEM.inst();
     }
 }

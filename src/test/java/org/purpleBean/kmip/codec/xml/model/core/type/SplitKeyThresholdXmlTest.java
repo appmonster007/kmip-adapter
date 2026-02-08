@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class SplitKeyThresholdXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyThreshold> {
 
     @Override
-    protected Class<SplitKeyThreshold> type() {
+    public Class<SplitKeyThreshold> type() {
         return SplitKeyThreshold.class;
     }
 
     @Override
-    protected SplitKeyThreshold createDefault() {
+    public SplitKeyThreshold createDefault() {
         return SplitKeyThreshold.builder().value(2).build();
     }
 
     @Override
-    protected SplitKeyThreshold createVariant() {
+    public SplitKeyThreshold createVariant() {
         return SplitKeyThreshold.builder().value(3).build();
     }
 }

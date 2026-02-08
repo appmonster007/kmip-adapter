@@ -20,17 +20,17 @@ class CustomAttributeXmlTest extends AbstractXmlSerializationTestSuite<CustomAtt
     }
 
     @Override
-    protected Class<CustomAttribute> type() {
+    public Class<CustomAttribute> type() {
         return CustomAttribute.class;
     }
 
     @Override
-    protected CustomAttribute createDefault() {
+    public CustomAttribute createDefault() {
         return CustomAttribute.of("x-custom-state", AttributeValue.ofInteger(1));
     }
 
     @Override
-    protected CustomAttribute createVariant() {
+    public CustomAttribute createVariant() {
         return CustomAttribute.of("x-custom-date", AttributeValue.ofDateTime(FIXED_TIME));
     }
 }

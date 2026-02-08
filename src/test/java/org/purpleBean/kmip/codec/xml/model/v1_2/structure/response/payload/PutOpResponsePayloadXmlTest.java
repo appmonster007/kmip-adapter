@@ -14,18 +14,18 @@ class PutOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<PutO
     }
 
     @Override
-    protected Class<PutOpResponsePayload> type() {
+    public Class<PutOpResponsePayload> type() {
         return PutOpResponsePayload.class;
     }
 
     @Override
-    protected PutOpResponsePayload createDefault() {
+    public PutOpResponsePayload createDefault() {
         return PutOpResponsePayload.builder()
                 .build();
     }
 
     @Override
-    protected PutOpResponsePayload createVariant() {
+    public PutOpResponsePayload createVariant() {
         return PutOpResponsePayload.builder()
                 .build();
     }

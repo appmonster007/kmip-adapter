@@ -18,12 +18,12 @@ class ModifyAttributeOpResponsePayloadJsonTest extends AbstractJsonSerialization
     }
 
     @Override
-    protected Class<ModifyAttributeOpResponsePayload> type() {
+    public Class<ModifyAttributeOpResponsePayload> type() {
         return ModifyAttributeOpResponsePayload.class;
     }
 
     @Override
-    protected ModifyAttributeOpResponsePayload createDefault() {
+    public ModifyAttributeOpResponsePayload createDefault() {
         return ModifyAttributeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
@@ -31,7 +31,7 @@ class ModifyAttributeOpResponsePayloadJsonTest extends AbstractJsonSerialization
     }
 
     @Override
-    protected ModifyAttributeOpResponsePayload createVariant() {
+    public ModifyAttributeOpResponsePayload createVariant() {
         return ModifyAttributeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))

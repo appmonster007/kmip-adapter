@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("RngAlgorithm XML Serialization")
 class RngAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<RngAlgorithm> {
     @Override
-    protected Class<RngAlgorithm> type() {
+    public Class<RngAlgorithm> type() {
         return RngAlgorithm.class;
     }
 
     @Override
-    protected RngAlgorithm createDefault() {
+    public RngAlgorithm createDefault() {
         return RngAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected RngAlgorithm createVariant() {
+    public RngAlgorithm createVariant() {
         return RngAlgorithm.Standard.FIPS_186_2.inst();
     }
 }

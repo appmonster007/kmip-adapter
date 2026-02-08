@@ -16,12 +16,12 @@ class JoinSplitKeyOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSu
     }
 
     @Override
-    protected Class<JoinSplitKeyOpRequestPayload> type() {
+    public Class<JoinSplitKeyOpRequestPayload> type() {
         return JoinSplitKeyOpRequestPayload.class;
     }
 
     @Override
-    protected JoinSplitKeyOpRequestPayload createDefault() {
+    public JoinSplitKeyOpRequestPayload createDefault() {
         return JoinSplitKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
@@ -30,7 +30,7 @@ class JoinSplitKeyOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSu
     }
 
     @Override
-    protected JoinSplitKeyOpRequestPayload createVariant() {
+    public JoinSplitKeyOpRequestPayload createVariant() {
         return JoinSplitKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))

@@ -17,12 +17,12 @@ class SignatureVerifyOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     }
 
     @Override
-    protected Class<SignatureVerifyOpRequestPayload> type() {
+    public Class<SignatureVerifyOpRequestPayload> type() {
         return SignatureVerifyOpRequestPayload.class;
     }
 
     @Override
-    protected SignatureVerifyOpRequestPayload createDefault() {
+    public SignatureVerifyOpRequestPayload createDefault() {
         return SignatureVerifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -31,7 +31,7 @@ class SignatureVerifyOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     }
 
     @Override
-    protected SignatureVerifyOpRequestPayload createVariant() {
+    public SignatureVerifyOpRequestPayload createVariant() {
         return SignatureVerifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .data(DataByteString.of(new byte[]{7, 8, 9}))

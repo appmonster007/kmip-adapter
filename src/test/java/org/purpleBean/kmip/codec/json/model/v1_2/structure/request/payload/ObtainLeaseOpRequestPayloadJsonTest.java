@@ -15,19 +15,19 @@ class ObtainLeaseOpRequestPayloadJsonTest extends AbstractJsonSerializationTestS
     }
 
     @Override
-    protected Class<ObtainLeaseOpRequestPayload> type() {
+    public Class<ObtainLeaseOpRequestPayload> type() {
         return ObtainLeaseOpRequestPayload.class;
     }
 
     @Override
-    protected ObtainLeaseOpRequestPayload createDefault() {
+    public ObtainLeaseOpRequestPayload createDefault() {
         return ObtainLeaseOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected ObtainLeaseOpRequestPayload createVariant() {
+    public ObtainLeaseOpRequestPayload createVariant() {
         return ObtainLeaseOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

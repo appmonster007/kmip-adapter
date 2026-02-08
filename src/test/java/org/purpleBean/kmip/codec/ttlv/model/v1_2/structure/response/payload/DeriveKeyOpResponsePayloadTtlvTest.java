@@ -16,12 +16,12 @@ class DeriveKeyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSu
     }
 
     @Override
-    protected Class<DeriveKeyOpResponsePayload> type() {
+    public Class<DeriveKeyOpResponsePayload> type() {
         return DeriveKeyOpResponsePayload.class;
     }
 
     @Override
-    protected DeriveKeyOpResponsePayload createDefault() {
+    public DeriveKeyOpResponsePayload createDefault() {
         return DeriveKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class DeriveKeyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSu
     }
 
     @Override
-    protected DeriveKeyOpResponsePayload createVariant() {
+    public DeriveKeyOpResponsePayload createVariant() {
         return DeriveKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .build();

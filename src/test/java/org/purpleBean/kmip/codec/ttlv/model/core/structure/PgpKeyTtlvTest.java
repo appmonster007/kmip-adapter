@@ -17,12 +17,12 @@ class PgpKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PgpKey> {
     }
 
     @Override
-    protected Class<PgpKey> type() {
+    public Class<PgpKey> type() {
         return PgpKey.class;
     }
 
     @Override
-    protected PgpKey createDefault() {
+    public PgpKey createDefault() {
         return PgpKey.builder()
                 .pgpKeyVersion(PgpKeyVersion.of(4))
                 .keyBlock(KeyBlock.builder()
@@ -32,7 +32,7 @@ class PgpKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PgpKey> {
     }
 
     @Override
-    protected PgpKey createVariant() {
+    public PgpKey createVariant() {
         return PgpKey.builder()
                 .pgpKeyVersion(PgpKeyVersion.of(5))
                 .keyBlock(KeyBlock.builder()

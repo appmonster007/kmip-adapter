@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class SubjectDistinguishedNameXmlTest extends AbstractXmlSerializationTestSuite<SubjectDistinguishedName> {
 
     @Override
-    protected Class<SubjectDistinguishedName> type() {
+    public Class<SubjectDistinguishedName> type() {
         return SubjectDistinguishedName.class;
     }
 
     @Override
-    protected SubjectDistinguishedName createDefault() {
+    public SubjectDistinguishedName createDefault() {
         return SubjectDistinguishedName.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected SubjectDistinguishedName createVariant() {
+    public SubjectDistinguishedName createVariant() {
         return SubjectDistinguishedName.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

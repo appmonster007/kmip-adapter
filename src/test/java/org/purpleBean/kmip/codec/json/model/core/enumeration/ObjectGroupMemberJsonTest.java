@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ObjectGroupMember JSON Serialization")
 class ObjectGroupMemberJsonTest extends AbstractJsonSerializationTestSuite<ObjectGroupMember> {
     @Override
-    protected Class<ObjectGroupMember> type() {
+    public Class<ObjectGroupMember> type() {
         return ObjectGroupMember.class;
     }
 
     @Override
-    protected ObjectGroupMember createDefault() {
+    public ObjectGroupMember createDefault() {
         return ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
     }
 
     @Override
-    protected ObjectGroupMember createVariant() {
+    public ObjectGroupMember createVariant() {
         return ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT.inst();
     }
 }

@@ -8,18 +8,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class ObjectGroupXmlTest extends AbstractXmlSerializationTestSuite<ObjectGroup> {
 
     @Override
-    protected Class<ObjectGroup> type() {
+    public Class<ObjectGroup> type() {
         return ObjectGroup.class;
     }
 
     @Override
-    protected ObjectGroup createDefault() {
+    public ObjectGroup createDefault() {
 
         return ObjectGroup.builder().value("test").build();
     }
 
     @Override
-    protected ObjectGroup createVariant() {
+    public ObjectGroup createVariant() {
 
         return ObjectGroup.builder().value("test-2").build();
     }

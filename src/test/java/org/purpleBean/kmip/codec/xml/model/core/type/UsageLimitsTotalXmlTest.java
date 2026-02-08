@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class UsageLimitsTotalXmlTest extends AbstractXmlSerializationTestSuite<UsageLimitsTotal> {
 
     @Override
-    protected Class<UsageLimitsTotal> type() {
+    public Class<UsageLimitsTotal> type() {
         return UsageLimitsTotal.class;
     }
 
     @Override
-    protected UsageLimitsTotal createDefault() {
+    public UsageLimitsTotal createDefault() {
         return UsageLimitsTotal.builder().value(1000L).build();
     }
 
     @Override
-    protected UsageLimitsTotal createVariant() {
+    public UsageLimitsTotal createVariant() {
         return UsageLimitsTotal.builder().value(2000L).build();
     }
 }

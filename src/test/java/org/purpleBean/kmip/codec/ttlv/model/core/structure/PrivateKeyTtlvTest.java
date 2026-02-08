@@ -16,12 +16,12 @@ class PrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateKey> 
     }
 
     @Override
-    protected Class<PrivateKey> type() {
+    public Class<PrivateKey> type() {
         return PrivateKey.class;
     }
 
     @Override
-    protected PrivateKey createDefault() {
+    public PrivateKey createDefault() {
         return PrivateKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
@@ -30,7 +30,7 @@ class PrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateKey> 
     }
 
     @Override
-    protected PrivateKey createVariant() {
+    public PrivateKey createVariant() {
         return PrivateKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())

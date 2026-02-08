@@ -19,12 +19,12 @@ class AuthenticationXmlTest extends AbstractXmlSerializationTestSuite<Authentica
     }
 
     @Override
-    protected Class<Authentication> type() {
+    public Class<Authentication> type() {
         return Authentication.class;
     }
 
     @Override
-    protected Authentication createDefault() {
+    public Authentication createDefault() {
         Credential credential = Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()
@@ -39,7 +39,7 @@ class AuthenticationXmlTest extends AbstractXmlSerializationTestSuite<Authentica
     }
 
     @Override
-    protected Authentication createVariant() {
+    public Authentication createVariant() {
         Credential credential = Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()

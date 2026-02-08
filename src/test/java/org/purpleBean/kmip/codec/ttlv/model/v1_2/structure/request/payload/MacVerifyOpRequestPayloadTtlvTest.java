@@ -17,12 +17,12 @@ class MacVerifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSui
     }
 
     @Override
-    protected Class<MacVerifyOpRequestPayload> type() {
+    public Class<MacVerifyOpRequestPayload> type() {
         return MacVerifyOpRequestPayload.class;
     }
 
     @Override
-    protected MacVerifyOpRequestPayload createDefault() {
+    public MacVerifyOpRequestPayload createDefault() {
         return MacVerifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -31,7 +31,7 @@ class MacVerifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSui
     }
 
     @Override
-    protected MacVerifyOpRequestPayload createVariant() {
+    public MacVerifyOpRequestPayload createVariant() {
         return MacVerifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .data(DataByteString.of(new byte[]{7, 8, 9}))

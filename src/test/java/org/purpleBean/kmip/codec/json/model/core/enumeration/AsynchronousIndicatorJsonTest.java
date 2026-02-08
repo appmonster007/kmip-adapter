@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("AsynchronousIndicator JSON Serialization")
 class AsynchronousIndicatorJsonTest extends AbstractJsonSerializationTestSuite<AsynchronousIndicator> {
     @Override
-    protected Class<AsynchronousIndicator> type() {
+    public Class<AsynchronousIndicator> type() {
         return AsynchronousIndicator.class;
     }
 
     @Override
-    protected AsynchronousIndicator createDefault() {
+    public AsynchronousIndicator createDefault() {
         return AsynchronousIndicator.Standard.MANDATORY.inst();
     }
 
     @Override
-    protected AsynchronousIndicator createVariant() {
+    public AsynchronousIndicator createVariant() {
         return AsynchronousIndicator.Standard.OPTIONAL.inst();
     }
 }

@@ -16,12 +16,12 @@ class NonceJsonTest extends AbstractJsonSerializationTestSuite<Nonce> {
     }
 
     @Override
-    protected Class<Nonce> type() {
+    public Class<Nonce> type() {
         return Nonce.class;
     }
 
     @Override
-    protected Nonce createDefault() {
+    public Nonce createDefault() {
         return Nonce.builder()
                 .nonceId(NonceId.of("test-id".getBytes()))
                 .nonceValue(NonceValue.of(new byte[8]))
@@ -29,7 +29,7 @@ class NonceJsonTest extends AbstractJsonSerializationTestSuite<Nonce> {
     }
 
     @Override
-    protected Nonce createVariant() {
+    public Nonce createVariant() {
         return Nonce.builder()
                 .nonceId(NonceId.of("test-id-variant".getBytes()))
                 .nonceValue(NonceValue.of(new byte[8]))

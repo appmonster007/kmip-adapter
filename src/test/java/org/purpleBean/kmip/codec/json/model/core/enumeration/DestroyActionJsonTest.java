@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("DestroyAction JSON Serialization")
 class DestroyActionJsonTest extends AbstractJsonSerializationTestSuite<DestroyAction> {
     @Override
-    protected Class<DestroyAction> type() {
+    public Class<DestroyAction> type() {
         return DestroyAction.class;
     }
 
     @Override
-    protected DestroyAction createDefault() {
+    public DestroyAction createDefault() {
         return DestroyAction.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected DestroyAction createVariant() {
+    public DestroyAction createVariant() {
         return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
     }
 }

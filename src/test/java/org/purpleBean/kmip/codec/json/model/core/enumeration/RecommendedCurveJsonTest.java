@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("RecommendedCurve JSON Serialization")
 class RecommendedCurveJsonTest extends AbstractJsonSerializationTestSuite<RecommendedCurve> {
     @Override
-    protected Class<RecommendedCurve> type() {
+    public Class<RecommendedCurve> type() {
         return RecommendedCurve.class;
     }
 
     @Override
-    protected RecommendedCurve createDefault() {
+    public RecommendedCurve createDefault() {
         return RecommendedCurve.Standard.P_192.inst();
     }
 
     @Override
-    protected RecommendedCurve createVariant() {
+    public RecommendedCurve createVariant() {
         return RecommendedCurve.Standard.K_163.inst();
     }
 }

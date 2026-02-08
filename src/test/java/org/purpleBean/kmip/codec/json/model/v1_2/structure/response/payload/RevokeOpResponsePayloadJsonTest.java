@@ -15,19 +15,19 @@ class RevokeOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected Class<RevokeOpResponsePayload> type() {
+    public Class<RevokeOpResponsePayload> type() {
         return RevokeOpResponsePayload.class;
     }
 
     @Override
-    protected RevokeOpResponsePayload createDefault() {
+    public RevokeOpResponsePayload createDefault() {
         return RevokeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected RevokeOpResponsePayload createVariant() {
+    public RevokeOpResponsePayload createVariant() {
         return RevokeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

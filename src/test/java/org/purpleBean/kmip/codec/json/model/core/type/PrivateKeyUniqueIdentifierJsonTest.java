@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class PrivateKeyUniqueIdentifierJsonTest extends AbstractJsonSerializationTestSuite<PrivateKeyUniqueIdentifier> {
 
     @Override
-    protected Class<PrivateKeyUniqueIdentifier> type() {
+    public Class<PrivateKeyUniqueIdentifier> type() {
         return PrivateKeyUniqueIdentifier.class;
     }
 
     @Override
-    protected PrivateKeyUniqueIdentifier createDefault() {
+    public PrivateKeyUniqueIdentifier createDefault() {
         return PrivateKeyUniqueIdentifier.builder().value("test-private-key-id").build();
     }
 
     @Override
-    protected PrivateKeyUniqueIdentifier createVariant() {
+    public PrivateKeyUniqueIdentifier createVariant() {
         return PrivateKeyUniqueIdentifier.builder().value("another-private-key-id").build();
     }
 }

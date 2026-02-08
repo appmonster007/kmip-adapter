@@ -10,17 +10,17 @@ import java.util.Set;
 @DisplayName("TicketType TTLV Serialization")
 class TicketTypeTtlvTest extends AbstractTtlvSerializationTestSuite<TicketType> {
     @Override
-    protected Class<TicketType> type() {
+    public Class<TicketType> type() {
         return TicketType.class;
     }
 
     @Override
-    protected TicketType createDefault() {
+    public TicketType createDefault() {
         return TicketType.Standard.LOGIN.inst();
     }
 
     @Override
-    protected TicketType createVariant() {
+    public TicketType createVariant() {
         return TicketType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

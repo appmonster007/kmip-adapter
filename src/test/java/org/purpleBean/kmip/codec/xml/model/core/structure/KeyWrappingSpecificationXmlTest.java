@@ -19,12 +19,12 @@ class KeyWrappingSpecificationXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected Class<KeyWrappingSpecification> type() {
+    public Class<KeyWrappingSpecification> type() {
         return KeyWrappingSpecification.class;
     }
 
     @Override
-    protected KeyWrappingSpecification createDefault() {
+    public KeyWrappingSpecification createDefault() {
         return KeyWrappingSpecification.builder()
                 .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
                 .encryptionKeyInformation(EncryptionKeyInformation.builder()
@@ -33,7 +33,7 @@ class KeyWrappingSpecificationXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected KeyWrappingSpecification createVariant() {
+    public KeyWrappingSpecification createVariant() {
         return KeyWrappingSpecification.builder()
                 .wrappingMethod(WrappingMethod.Standard.MAC_SIGN.inst())
                 .encryptionKeyInformation(EncryptionKeyInformation.builder()

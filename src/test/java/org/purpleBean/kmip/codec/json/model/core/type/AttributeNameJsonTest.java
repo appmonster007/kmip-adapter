@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class AttributeNameJsonTest extends AbstractJsonSerializationTestSuite<AttributeName> {
 
     @Override
-    protected Class<AttributeName> type() {
+    public Class<AttributeName> type() {
         return AttributeName.class;
     }
 
     @Override
-    protected AttributeName createDefault() {
+    public AttributeName createDefault() {
         return AttributeName.builder().value("attribute name").build();
     }
 
     @Override
-    protected AttributeName createVariant() {
+    public AttributeName createVariant() {
         return AttributeName.builder().value("attribute name variant").build();
     }
 }

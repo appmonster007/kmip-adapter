@@ -21,12 +21,12 @@ class SimpleResponseMessageXmlTest extends AbstractXmlSerializationTestSuite<Sim
     }
 
     @Override
-    protected Class<SimpleResponseMessage> type() {
+    public Class<SimpleResponseMessage> type() {
         return SimpleResponseMessage.class;
     }
 
     @Override
-    protected SimpleResponseMessage createDefault() {
+    public SimpleResponseMessage createDefault() {
         return SimpleResponseMessage.builder()
                 .responseHeader(SimpleResponseHeader.builder()
                         .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
@@ -40,7 +40,7 @@ class SimpleResponseMessageXmlTest extends AbstractXmlSerializationTestSuite<Sim
     }
 
     @Override
-    protected SimpleResponseMessage createVariant() {
+    public SimpleResponseMessage createVariant() {
         return SimpleResponseMessage.builder()
                 .responseHeader(SimpleResponseHeader.builder()
                         .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))

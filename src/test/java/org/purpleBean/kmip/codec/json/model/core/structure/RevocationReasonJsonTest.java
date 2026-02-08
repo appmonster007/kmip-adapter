@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class RevocationReasonJsonTest extends AbstractJsonSerializationTestSuite<RevocationReason> {
 
     @Override
-    protected Class<RevocationReason> type() {
+    public Class<RevocationReason> type() {
         return RevocationReason.class;
     }
 
     @Override
-    protected RevocationReason createDefault() {
+    public RevocationReason createDefault() {
         return RevocationReason.builder()
                 .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
                 .revocationMessage(RevocationMessage.of("test-message"))

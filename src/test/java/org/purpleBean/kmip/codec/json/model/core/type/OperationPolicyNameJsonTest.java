@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class OperationPolicyNameJsonTest extends AbstractJsonSerializationTestSuite<OperationPolicyName> {
 
     @Override
-    protected Class<OperationPolicyName> type() {
+    public Class<OperationPolicyName> type() {
         return OperationPolicyName.class;
     }
 
     @Override
-    protected OperationPolicyName createDefault() {
+    public OperationPolicyName createDefault() {
         return OperationPolicyName.builder().value("test").build();
     }
 
     @Override
-    protected OperationPolicyName createVariant() {
+    public OperationPolicyName createVariant() {
         return OperationPolicyName.builder().value("test2").build();
     }
 }

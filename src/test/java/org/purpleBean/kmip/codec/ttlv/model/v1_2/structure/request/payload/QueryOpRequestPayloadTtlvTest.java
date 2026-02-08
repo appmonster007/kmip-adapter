@@ -15,19 +15,19 @@ class QueryOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Q
     }
 
     @Override
-    protected Class<QueryOpRequestPayload> type() {
+    public Class<QueryOpRequestPayload> type() {
         return QueryOpRequestPayload.class;
     }
 
     @Override
-    protected QueryOpRequestPayload createDefault() {
+    public QueryOpRequestPayload createDefault() {
         return QueryOpRequestPayload.builder()
                 .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OPERATIONS))
                 .build();
     }
 
     @Override
-    protected QueryOpRequestPayload createVariant() {
+    public QueryOpRequestPayload createVariant() {
         return QueryOpRequestPayload.builder()
                 .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OBJECTS))
                 .build();

@@ -15,19 +15,19 @@ class KeyBlockJsonTest extends AbstractJsonSerializationTestSuite<KeyBlock> {
     }
 
     @Override
-    protected Class<KeyBlock> type() {
+    public Class<KeyBlock> type() {
         return KeyBlock.class;
     }
 
     @Override
-    protected KeyBlock createDefault() {
+    public KeyBlock createDefault() {
         return KeyBlock.builder()
                 .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
                 .build();
     }
 
     @Override
-    protected KeyBlock createVariant() {
+    public KeyBlock createVariant() {
         return KeyBlock.builder()
                 .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
                 .build();

@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CertificateIssuerXmlTest extends AbstractXmlSerializationTestSuite<CertificateIssuer> {
 
     @Override
-    protected Class<CertificateIssuer> type() {
+    public Class<CertificateIssuer> type() {
         return CertificateIssuer.class;
     }
 
     @Override
-    protected CertificateIssuer createDefault() {
+    public CertificateIssuer createDefault() {
         return CertificateIssuer.builder()
                 .certificateIssuerDistinguishedName(
                         CertificateIssuerDistinguishedName.of("CN=Test Issuer")

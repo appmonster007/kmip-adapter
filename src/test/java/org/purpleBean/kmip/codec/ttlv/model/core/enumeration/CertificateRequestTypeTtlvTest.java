@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("CertificateRequestType TTLV Serialization")
 class CertificateRequestTypeTtlvTest extends AbstractTtlvSerializationTestSuite<CertificateRequestType> {
     @Override
-    protected Class<CertificateRequestType> type() {
+    public Class<CertificateRequestType> type() {
         return CertificateRequestType.class;
     }
 
     @Override
-    protected CertificateRequestType createDefault() {
+    public CertificateRequestType createDefault() {
         return CertificateRequestType.Standard.CRMF.inst();
     }
 
     @Override
-    protected CertificateRequestType createVariant() {
+    public CertificateRequestType createVariant() {
         return CertificateRequestType.Standard.PKCS_10.inst();
     }
 }

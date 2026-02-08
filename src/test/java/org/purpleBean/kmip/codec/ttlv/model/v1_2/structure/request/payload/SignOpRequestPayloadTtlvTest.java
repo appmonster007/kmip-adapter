@@ -16,12 +16,12 @@ class SignOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Si
     }
 
     @Override
-    protected Class<SignOpRequestPayload> type() {
+    public Class<SignOpRequestPayload> type() {
         return SignOpRequestPayload.class;
     }
 
     @Override
-    protected SignOpRequestPayload createDefault() {
+    public SignOpRequestPayload createDefault() {
         return SignOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class SignOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Si
     }
 
     @Override
-    protected SignOpRequestPayload createVariant() {
+    public SignOpRequestPayload createVariant() {
         return SignOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .data(DataByteString.of(new byte[]{4, 5, 6}))

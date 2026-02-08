@@ -18,12 +18,12 @@ class OpaqueObjectXmlTest extends AbstractXmlSerializationTestSuite<OpaqueObject
     }
 
     @Override
-    protected Class<OpaqueObject> type() {
+    public Class<OpaqueObject> type() {
         return OpaqueObject.class;
     }
 
     @Override
-    protected OpaqueObject createDefault() {
+    public OpaqueObject createDefault() {
         return OpaqueObject.builder()
                 .opaqueDataType(OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)).inst())
                 .opaqueDataValue(OpaqueDataValue.of(new byte[0]))
@@ -31,7 +31,7 @@ class OpaqueObjectXmlTest extends AbstractXmlSerializationTestSuite<OpaqueObject
     }
 
     @Override
-    protected OpaqueObject createVariant() {
+    public OpaqueObject createVariant() {
         return OpaqueObject.builder()
                 .opaqueDataType(OpaqueDataType.register(0x80000001, "Custom-2", Set.of(KmipSpec.UnknownVersion)).inst())
                 .opaqueDataValue(OpaqueDataValue.of(new byte[1]))

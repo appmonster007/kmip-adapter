@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class InvocationFieldLengthJsonTest extends AbstractJsonSerializationTestSuite<InvocationFieldLength> {
 
     @Override
-    protected Class<InvocationFieldLength> type() {
+    public Class<InvocationFieldLength> type() {
         return InvocationFieldLength.class;
     }
 
     @Override
-    protected InvocationFieldLength createDefault() {
+    public InvocationFieldLength createDefault() {
         return InvocationFieldLength.of(128);
     }
 
     @Override
-    protected InvocationFieldLength createVariant() {
+    public InvocationFieldLength createVariant() {
         return InvocationFieldLength.of(256);
     }
 }

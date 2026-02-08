@@ -16,12 +16,12 @@ class SymmetricKeyTtlvTest extends AbstractTtlvSerializationTestSuite<SymmetricK
     }
 
     @Override
-    protected Class<SymmetricKey> type() {
+    public Class<SymmetricKey> type() {
         return SymmetricKey.class;
     }
 
     @Override
-    protected SymmetricKey createDefault() {
+    public SymmetricKey createDefault() {
         return SymmetricKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
@@ -30,7 +30,7 @@ class SymmetricKeyTtlvTest extends AbstractTtlvSerializationTestSuite<SymmetricK
     }
 
     @Override
-    protected SymmetricKey createVariant() {
+    public SymmetricKey createVariant() {
         return SymmetricKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())

@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class KeyValueLocationJsonTest extends AbstractJsonSerializationTestSuite<KeyValueLocation> {
 
     @Override
-    protected Class<KeyValueLocation> type() {
+    public Class<KeyValueLocation> type() {
         return KeyValueLocation.class;
     }
 
     @Override
-    protected KeyValueLocation createDefault() {
+    public KeyValueLocation createDefault() {
         return KeyValueLocation.builder()
                 .keyValueLocationType(KeyValueLocationType.Standard.UNINTERPRETED_TEXT_STRING.inst())
                 .keyValueLocationValue(KeyValueLocationValue.builder().value("test").build())

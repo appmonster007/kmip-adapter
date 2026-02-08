@@ -13,19 +13,19 @@ class OriginalCreationDateJsonTest extends AbstractJsonSerializationTestSuite<Or
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<OriginalCreationDate> type() {
+    public Class<OriginalCreationDate> type() {
         return OriginalCreationDate.class;
     }
 
     @Override
-    protected OriginalCreationDate createDefault() {
+    public OriginalCreationDate createDefault() {
         return OriginalCreationDate.builder()
                 .value(FIXED_TIME)
                 .build();
     }
 
     @Override
-    protected OriginalCreationDate createVariant() {
+    public OriginalCreationDate createVariant() {
         return OriginalCreationDate.builder()
                 .value(FIXED_TIME.plusDays(1))
                 .build();

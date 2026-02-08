@@ -16,12 +16,12 @@ class UsernameAndPasswordJsonTest extends AbstractJsonSerializationTestSuite<Use
     }
 
     @Override
-    protected Class<UsernameAndPassword> type() {
+    public Class<UsernameAndPassword> type() {
         return UsernameAndPassword.class;
     }
 
     @Override
-    protected UsernameAndPassword createDefault() {
+    public UsernameAndPassword createDefault() {
         return UsernameAndPassword.builder()
                 .username(Username.of("test-user"))
                 .password(Password.of("test-password"))
@@ -29,7 +29,7 @@ class UsernameAndPasswordJsonTest extends AbstractJsonSerializationTestSuite<Use
     }
 
     @Override
-    protected UsernameAndPassword createVariant() {
+    public UsernameAndPassword createVariant() {
         return UsernameAndPassword.builder()
                 .username(Username.of("test-user-variant"))
                 .password(Password.of("test-password-variant"))

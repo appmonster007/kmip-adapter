@@ -16,12 +16,12 @@ class ReKeyOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected Class<ReKeyOpResponsePayload> type() {
+    public Class<ReKeyOpResponsePayload> type() {
         return ReKeyOpResponsePayload.class;
     }
 
     @Override
-    protected ReKeyOpResponsePayload createDefault() {
+    public ReKeyOpResponsePayload createDefault() {
         return ReKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class ReKeyOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected ReKeyOpResponsePayload createVariant() {
+    public ReKeyOpResponsePayload createVariant() {
         return ReKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .build();

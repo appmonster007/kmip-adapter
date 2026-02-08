@@ -15,12 +15,12 @@ class TransparentEcmqvPublicKeyXmlTest extends AbstractXmlSerializationTestSuite
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentEcmqvPublicKey> type() {
+    public Class<TransparentEcmqvPublicKey> type() {
         return TransparentEcmqvPublicKey.class;
     }
 
     @Override
-    protected TransparentEcmqvPublicKey createDefault() {
+    public TransparentEcmqvPublicKey createDefault() {
         return TransparentEcmqvPublicKey.of(
                 RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
@@ -28,7 +28,7 @@ class TransparentEcmqvPublicKeyXmlTest extends AbstractXmlSerializationTestSuite
     }
 
     @Override
-    protected TransparentEcmqvPublicKey createVariant() {
+    public TransparentEcmqvPublicKey createVariant() {
         return TransparentEcmqvPublicKey.of(
                 RecommendedCurve.Standard.P_224.inst(),
                 QString.of("test2".getBytes())

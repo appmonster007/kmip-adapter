@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CertificateSerialNumberXmlTest extends AbstractXmlSerializationTestSuite<CertificateSerialNumber> {
 
     @Override
-    protected Class<CertificateSerialNumber> type() {
+    public Class<CertificateSerialNumber> type() {
         return CertificateSerialNumber.class;
     }
 
     @Override
-    protected CertificateSerialNumber createDefault() {
+    public CertificateSerialNumber createDefault() {
         return CertificateSerialNumber.of("12345".getBytes());
     }
 
     @Override
-    protected CertificateSerialNumber createVariant() {
+    public CertificateSerialNumber createVariant() {
         return CertificateSerialNumber.of("67890".getBytes());
     }
 }

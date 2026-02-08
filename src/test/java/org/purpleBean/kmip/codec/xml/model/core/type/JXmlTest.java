@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class JXmlTest extends AbstractXmlSerializationTestSuite<J> {
 
     @Override
-    protected Class<J> type() {
+    public Class<J> type() {
         return J.class;
     }
 
     @Override
-    protected J createDefault() {
+    public J createDefault() {
         return J.builder().value(BigInteger.ONE).build();
     }
 
     @Override
-    protected J createVariant() {
+    public J createVariant() {
         return J.builder().value(BigInteger.TEN).build();
     }
 }

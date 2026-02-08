@@ -15,19 +15,19 @@ class QueryOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected Class<QueryOpResponsePayload> type() {
+    public Class<QueryOpResponsePayload> type() {
         return QueryOpResponsePayload.class;
     }
 
     @Override
-    protected QueryOpResponsePayload createDefault() {
+    public QueryOpResponsePayload createDefault() {
         return QueryOpResponsePayload.builder()
                 .operation(Operation.of(Operation.Standard.QUERY))
                 .build();
     }
 
     @Override
-    protected QueryOpResponsePayload createVariant() {
+    public QueryOpResponsePayload createVariant() {
         return QueryOpResponsePayload.builder()
                 .operation(Operation.of(Operation.Standard.CREATE))
                 .build();

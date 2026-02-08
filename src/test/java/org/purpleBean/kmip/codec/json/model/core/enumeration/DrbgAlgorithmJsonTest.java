@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("DrbgAlgorithm JSON Serialization")
 class DrbgAlgorithmJsonTest extends AbstractJsonSerializationTestSuite<DrbgAlgorithm> {
     @Override
-    protected Class<DrbgAlgorithm> type() {
+    public Class<DrbgAlgorithm> type() {
         return DrbgAlgorithm.class;
     }
 
     @Override
-    protected DrbgAlgorithm createDefault() {
+    public DrbgAlgorithm createDefault() {
         return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected DrbgAlgorithm createVariant() {
+    public DrbgAlgorithm createVariant() {
         return DrbgAlgorithm.Standard.DUAL_EC.inst();
     }
 }

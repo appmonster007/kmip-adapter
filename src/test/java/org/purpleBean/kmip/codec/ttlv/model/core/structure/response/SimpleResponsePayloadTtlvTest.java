@@ -14,17 +14,17 @@ class SimpleResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<S
     }
 
     @Override
-    protected Class<SimpleResponsePayload> type() {
+    public Class<SimpleResponsePayload> type() {
         return SimpleResponsePayload.class;
     }
 
     @Override
-    protected SimpleResponsePayload createDefault() {
+    public SimpleResponsePayload createDefault() {
         return SimpleResponsePayload.builder().build();
     }
 
     @Override
-    protected SimpleResponsePayload createVariant() {
+    public SimpleResponsePayload createVariant() {
         return SimpleResponsePayload.builder().build();
     }
 }

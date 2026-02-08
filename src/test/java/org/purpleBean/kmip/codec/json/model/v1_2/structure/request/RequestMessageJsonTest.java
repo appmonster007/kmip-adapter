@@ -8,7 +8,9 @@ import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1_2.structure.request.*;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestHeader;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestMessage;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
@@ -22,12 +24,12 @@ class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestM
     }
 
     @Override
-    protected Class<RequestMessage> type() {
+    public Class<RequestMessage> type() {
         return RequestMessage.class;
     }
 
     @Override
-    protected RequestMessage createDefault() {
+    public RequestMessage createDefault() {
         RequestHeader header = RequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .batchCount(BatchCount.of(0))
@@ -46,7 +48,7 @@ class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestM
     }
 
     @Override
-    protected RequestMessage createVariant() {
+    public RequestMessage createVariant() {
         RequestHeader header = RequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .batchCount(BatchCount.of(0))

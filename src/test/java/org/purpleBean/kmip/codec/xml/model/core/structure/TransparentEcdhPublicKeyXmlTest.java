@@ -15,12 +15,12 @@ class TransparentEcdhPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentEcdhPublicKey> type() {
+    public Class<TransparentEcdhPublicKey> type() {
         return TransparentEcdhPublicKey.class;
     }
 
     @Override
-    protected TransparentEcdhPublicKey createDefault() {
+    public TransparentEcdhPublicKey createDefault() {
         return TransparentEcdhPublicKey.of(
                 RecommendedCurve.Standard.P_192.inst(),
                 QString.of("test".getBytes())
@@ -28,7 +28,7 @@ class TransparentEcdhPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected TransparentEcdhPublicKey createVariant() {
+    public TransparentEcdhPublicKey createVariant() {
         return TransparentEcdhPublicKey.of(
                 RecommendedCurve.Standard.P_224.inst(),
                 QString.of("test2".getBytes())

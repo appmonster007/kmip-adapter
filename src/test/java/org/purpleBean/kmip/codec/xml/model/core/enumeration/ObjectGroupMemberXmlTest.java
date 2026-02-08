@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ObjectGroupMember XML Serialization")
 class ObjectGroupMemberXmlTest extends AbstractXmlSerializationTestSuite<ObjectGroupMember> {
     @Override
-    protected Class<ObjectGroupMember> type() {
+    public Class<ObjectGroupMember> type() {
         return ObjectGroupMember.class;
     }
 
     @Override
-    protected ObjectGroupMember createDefault() {
+    public ObjectGroupMember createDefault() {
         return ObjectGroupMember.Standard.GROUP_MEMBER_FRESH.inst();
     }
 
     @Override
-    protected ObjectGroupMember createVariant() {
+    public ObjectGroupMember createVariant() {
         return ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT.inst();
     }
 }

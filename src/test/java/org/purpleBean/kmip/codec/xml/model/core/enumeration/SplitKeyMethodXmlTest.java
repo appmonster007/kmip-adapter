@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("SplitKeyMethod XML Serialization")
 class SplitKeyMethodXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyMethod> {
     @Override
-    protected Class<SplitKeyMethod> type() {
+    public Class<SplitKeyMethod> type() {
         return SplitKeyMethod.class;
     }
 
     @Override
-    protected SplitKeyMethod createDefault() {
+    public SplitKeyMethod createDefault() {
         return SplitKeyMethod.Standard.XOR.inst();
     }
 
     @Override
-    protected SplitKeyMethod createVariant() {
+    public SplitKeyMethod createVariant() {
         return SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216.inst();
     }
 }

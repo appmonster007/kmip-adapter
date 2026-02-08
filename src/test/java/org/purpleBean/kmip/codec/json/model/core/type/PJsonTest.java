@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class PJsonTest extends AbstractJsonSerializationTestSuite<P> {
 
     @Override
-    protected Class<P> type() {
+    public Class<P> type() {
         return P.class;
     }
 
     @Override
-    protected P createDefault() {
+    public P createDefault() {
         return P.builder().value(BigInteger.ONE).build();
     }
 
     @Override
-    protected P createVariant() {
+    public P createVariant() {
         return P.builder().value(BigInteger.TEN).build();
     }
 }

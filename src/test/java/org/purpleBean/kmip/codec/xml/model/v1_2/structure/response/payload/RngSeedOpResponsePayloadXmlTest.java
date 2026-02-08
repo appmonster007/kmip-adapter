@@ -15,19 +15,19 @@ class RngSeedOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected Class<RngSeedOpResponsePayload> type() {
+    public Class<RngSeedOpResponsePayload> type() {
         return RngSeedOpResponsePayload.class;
     }
 
     @Override
-    protected RngSeedOpResponsePayload createDefault() {
+    public RngSeedOpResponsePayload createDefault() {
         return RngSeedOpResponsePayload.builder()
                 .dataLength(DataLength.of(16))
                 .build();
     }
 
     @Override
-    protected RngSeedOpResponsePayload createVariant() {
+    public RngSeedOpResponsePayload createVariant() {
         return RngSeedOpResponsePayload.builder()
                 .dataLength(DataLength.of(32))
                 .build();

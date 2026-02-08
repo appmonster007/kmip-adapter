@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class LeaseTimeJsonTest extends AbstractJsonSerializationTestSuite<LeaseTime> {
 
     @Override
-    protected Class<LeaseTime> type() {
+    public Class<LeaseTime> type() {
         return LeaseTime.class;
     }
 
     @Override
-    protected LeaseTime createDefault() {
+    public LeaseTime createDefault() {
         return LeaseTime.builder().value(10).build();
     }
 
     @Override
-    protected LeaseTime createVariant() {
+    public LeaseTime createVariant() {
         return LeaseTime.builder().value(100).build();
     }
 }

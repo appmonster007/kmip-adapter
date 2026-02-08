@@ -17,12 +17,12 @@ class DeleteAttributeOpRequestPayloadTtlvTest extends AbstractTtlvSerializationT
     }
 
     @Override
-    protected Class<DeleteAttributeOpRequestPayload> type() {
+    public Class<DeleteAttributeOpRequestPayload> type() {
         return DeleteAttributeOpRequestPayload.class;
     }
 
     @Override
-    protected DeleteAttributeOpRequestPayload createDefault() {
+    public DeleteAttributeOpRequestPayload createDefault() {
         return DeleteAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attributeName(AttributeName.of("test-attribute"))
@@ -31,7 +31,7 @@ class DeleteAttributeOpRequestPayloadTtlvTest extends AbstractTtlvSerializationT
     }
 
     @Override
-    protected DeleteAttributeOpRequestPayload createVariant() {
+    public DeleteAttributeOpRequestPayload createVariant() {
         return DeleteAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attributeName(AttributeName.of("variant-attribute"))

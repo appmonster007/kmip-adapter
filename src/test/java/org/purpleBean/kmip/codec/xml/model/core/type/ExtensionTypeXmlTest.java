@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class ExtensionTypeXmlTest extends AbstractXmlSerializationTestSuite<ExtensionType> {
 
     @Override
-    protected Class<ExtensionType> type() {
+    public Class<ExtensionType> type() {
         return ExtensionType.class;
     }
 
     @Override
-    protected ExtensionType createDefault() {
+    public ExtensionType createDefault() {
         return ExtensionType.builder().value(1).build();
     }
 
     @Override
-    protected ExtensionType createVariant() {
+    public ExtensionType createVariant() {
         return ExtensionType.builder().value(2).build();
     }
 }

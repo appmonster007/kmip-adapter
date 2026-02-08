@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class MaximumItemsXmlTest extends AbstractXmlSerializationTestSuite<MaximumItems> {
 
     @Override
-    protected Class<MaximumItems> type() {
+    public Class<MaximumItems> type() {
         return MaximumItems.class;
     }
 
     @Override
-    protected MaximumItems createDefault() {
+    public MaximumItems createDefault() {
         return MaximumItems.builder().value(100).build();
     }
 
     @Override
-    protected MaximumItems createVariant() {
+    public MaximumItems createVariant() {
         return MaximumItems.builder().value(200).build();
     }
 }

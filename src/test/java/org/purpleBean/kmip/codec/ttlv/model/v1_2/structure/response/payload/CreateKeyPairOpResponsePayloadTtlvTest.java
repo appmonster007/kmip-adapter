@@ -18,12 +18,12 @@ class CreateKeyPairOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTe
     }
 
     @Override
-    protected Class<CreateKeyPairOpResponsePayload> type() {
+    public Class<CreateKeyPairOpResponsePayload> type() {
         return CreateKeyPairOpResponsePayload.class;
     }
 
     @Override
-    protected CreateKeyPairOpResponsePayload createDefault() {
+    public CreateKeyPairOpResponsePayload createDefault() {
         return CreateKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid").build())
@@ -33,7 +33,7 @@ class CreateKeyPairOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTe
     }
 
     @Override
-    protected CreateKeyPairOpResponsePayload createVariant() {
+    public CreateKeyPairOpResponsePayload createVariant() {
         return CreateKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid2").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid2").build())

@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("PutFunction XML Serialization")
 class PutFunctionXmlTest extends AbstractXmlSerializationTestSuite<PutFunction> {
     @Override
-    protected Class<PutFunction> type() {
+    public Class<PutFunction> type() {
         return PutFunction.class;
     }
 
     @Override
-    protected PutFunction createDefault() {
+    public PutFunction createDefault() {
         return PutFunction.Standard.NEW.inst();
     }
 
     @Override
-    protected PutFunction createVariant() {
+    public PutFunction createVariant() {
         return PutFunction.Standard.REPLACE.inst();
     }
 }

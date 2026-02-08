@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class UniqueBatchItemIDJsonTest extends AbstractJsonSerializationTestSuite<UniqueBatchItemID> {
 
     @Override
-    protected Class<UniqueBatchItemID> type() {
+    public Class<UniqueBatchItemID> type() {
         return UniqueBatchItemID.class;
     }
 
     @Override
-    protected UniqueBatchItemID createDefault() {
+    public UniqueBatchItemID createDefault() {
         return UniqueBatchItemID.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected UniqueBatchItemID createVariant() {
+    public UniqueBatchItemID createVariant() {
         return UniqueBatchItemID.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

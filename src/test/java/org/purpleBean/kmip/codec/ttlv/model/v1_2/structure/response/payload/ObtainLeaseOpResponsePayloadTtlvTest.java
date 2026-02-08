@@ -20,12 +20,12 @@ class ObtainLeaseOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTest
     }
 
     @Override
-    protected Class<ObtainLeaseOpResponsePayload> type() {
+    public Class<ObtainLeaseOpResponsePayload> type() {
         return ObtainLeaseOpResponsePayload.class;
     }
 
     @Override
-    protected ObtainLeaseOpResponsePayload createDefault() {
+    public ObtainLeaseOpResponsePayload createDefault() {
         return ObtainLeaseOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .leaseTime(LeaseTime.of(3600))
@@ -34,7 +34,7 @@ class ObtainLeaseOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTest
     }
 
     @Override
-    protected ObtainLeaseOpResponsePayload createVariant() {
+    public ObtainLeaseOpResponsePayload createVariant() {
         return ObtainLeaseOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .leaseTime(LeaseTime.of(7200))

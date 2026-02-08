@@ -15,19 +15,19 @@ class ServerInformationTtlvTest extends AbstractTtlvSerializationTestSuite<Serve
     }
 
     @Override
-    protected Class<ServerInformation> type() {
+    public Class<ServerInformation> type() {
         return ServerInformation.class;
     }
 
     @Override
-    protected ServerInformation createDefault() {
+    public ServerInformation createDefault() {
         return ServerInformation.builder()
                 .value(NameValue.of("Test Server"))
                 .build();
     }
 
     @Override
-    protected ServerInformation createVariant() {
+    public ServerInformation createVariant() {
         return ServerInformation.builder()
                 .value(NameValue.of("Variant Server"))
                 .build();

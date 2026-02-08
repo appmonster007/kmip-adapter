@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("EndpointRole XML Serialization")
 class EndpointRoleXmlTest extends AbstractXmlSerializationTestSuite<EndpointRole> {
     @Override
-    protected Class<EndpointRole> type() {
+    public Class<EndpointRole> type() {
         return EndpointRole.class;
     }
 
     @Override
-    protected EndpointRole createDefault() {
+    public EndpointRole createDefault() {
         return EndpointRole.Standard.CLIENT.inst();
     }
 
     @Override
-    protected EndpointRole createVariant() {
+    public EndpointRole createVariant() {
         return EndpointRole.Standard.SERVER.inst();
     }
 }

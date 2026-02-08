@@ -16,12 +16,12 @@ class DecryptOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected Class<DecryptOpResponsePayload> type() {
+    public Class<DecryptOpResponsePayload> type() {
         return DecryptOpResponsePayload.class;
     }
 
     @Override
-    protected DecryptOpResponsePayload createDefault() {
+    public DecryptOpResponsePayload createDefault() {
         return DecryptOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class DecryptOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected DecryptOpResponsePayload createVariant() {
+    public DecryptOpResponsePayload createVariant() {
         return DecryptOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .data(DataByteString.of(new byte[]{4, 5, 6}))

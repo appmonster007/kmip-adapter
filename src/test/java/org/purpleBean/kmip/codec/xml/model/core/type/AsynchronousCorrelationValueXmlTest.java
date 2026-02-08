@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class AsynchronousCorrelationValueXmlTest extends AbstractXmlSerializationTestSuite<AsynchronousCorrelationValue> {
 
     @Override
-    protected Class<AsynchronousCorrelationValue> type() {
+    public Class<AsynchronousCorrelationValue> type() {
         return AsynchronousCorrelationValue.class;
     }
 
     @Override
-    protected AsynchronousCorrelationValue createDefault() {
+    public AsynchronousCorrelationValue createDefault() {
         return AsynchronousCorrelationValue.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected AsynchronousCorrelationValue createVariant() {
+    public AsynchronousCorrelationValue createVariant() {
         return AsynchronousCorrelationValue.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

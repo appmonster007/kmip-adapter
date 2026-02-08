@@ -15,19 +15,19 @@ class ArchiveOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<A
     }
 
     @Override
-    protected Class<ArchiveOpRequestPayload> type() {
+    public Class<ArchiveOpRequestPayload> type() {
         return ArchiveOpRequestPayload.class;
     }
 
     @Override
-    protected ArchiveOpRequestPayload createDefault() {
+    public ArchiveOpRequestPayload createDefault() {
         return ArchiveOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected ArchiveOpRequestPayload createVariant() {
+    public ArchiveOpRequestPayload createVariant() {
         return ArchiveOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

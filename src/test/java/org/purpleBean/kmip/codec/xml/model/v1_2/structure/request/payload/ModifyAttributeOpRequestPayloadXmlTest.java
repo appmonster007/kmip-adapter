@@ -18,12 +18,12 @@ class ModifyAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     }
 
     @Override
-    protected Class<ModifyAttributeOpRequestPayload> type() {
+    public Class<ModifyAttributeOpRequestPayload> type() {
         return ModifyAttributeOpRequestPayload.class;
     }
 
     @Override
-    protected ModifyAttributeOpRequestPayload createDefault() {
+    public ModifyAttributeOpRequestPayload createDefault() {
         return ModifyAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
@@ -31,7 +31,7 @@ class ModifyAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTes
     }
 
     @Override
-    protected ModifyAttributeOpRequestPayload createVariant() {
+    public ModifyAttributeOpRequestPayload createVariant() {
         return ModifyAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))

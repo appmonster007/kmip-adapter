@@ -21,17 +21,17 @@ class AttributeXmlTest extends AbstractXmlSerializationTestSuite<Attribute> {
     }
 
     @Override
-    protected Class<Attribute> type() {
+    public Class<Attribute> type() {
         return Attribute.class;
     }
 
     @Override
-    protected Attribute createDefault() {
+    public Attribute createDefault() {
         return Attribute.of(State.Standard.COMPROMISED.inst());
     }
 
     @Override
-    protected Attribute createVariant() {
+    public Attribute createVariant() {
         List<KmipDataType> list = new ArrayList<>();
         list.add(AttributeValue.ofTextString("some-value"));
         list.add(AttributeValue.ofInteger(1));

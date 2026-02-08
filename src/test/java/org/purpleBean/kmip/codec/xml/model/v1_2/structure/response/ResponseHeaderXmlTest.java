@@ -22,12 +22,12 @@ class ResponseHeaderXmlTest extends AbstractXmlSerializationTestSuite<ResponseHe
     }
 
     @Override
-    protected Class<ResponseHeader> type() {
+    public Class<ResponseHeader> type() {
         return ResponseHeader.class;
     }
 
     @Override
-    protected ResponseHeader createDefault() {
+    public ResponseHeader createDefault() {
         return ResponseHeader.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
                 .timeStamp(TimeStamp.of(OffsetDateTime.now(ZoneOffset.UTC)))
@@ -36,7 +36,7 @@ class ResponseHeaderXmlTest extends AbstractXmlSerializationTestSuite<ResponseHe
     }
 
     @Override
-    protected ResponseHeader createVariant() {
+    public ResponseHeader createVariant() {
         return ResponseHeader.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
                 .timeStamp(TimeStamp.of(OffsetDateTime.now(ZoneOffset.UTC).plusDays(1)))

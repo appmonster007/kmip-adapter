@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class IssuerAlternativeNameTtlvTest extends AbstractTtlvSerializationTestSuite<IssuerAlternativeName> {
 
     @Override
-    protected Class<IssuerAlternativeName> type() {
+    public Class<IssuerAlternativeName> type() {
         return IssuerAlternativeName.class;
     }
 
     @Override
-    protected IssuerAlternativeName createDefault() {
+    public IssuerAlternativeName createDefault() {
         return IssuerAlternativeName.of("test-issuer-alt-name".getBytes());
     }
 
     @Override
-    protected IssuerAlternativeName createVariant() {
+    public IssuerAlternativeName createVariant() {
         return IssuerAlternativeName.of("another-issuer-alt-name".getBytes());
     }
 }

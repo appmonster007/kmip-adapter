@@ -16,12 +16,12 @@ class CertifyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuit
     }
 
     @Override
-    protected Class<CertifyOpResponsePayload> type() {
+    public Class<CertifyOpResponsePayload> type() {
         return CertifyOpResponsePayload.class;
     }
 
     @Override
-    protected CertifyOpResponsePayload createDefault() {
+    public CertifyOpResponsePayload createDefault() {
         return CertifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class CertifyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuit
     }
 
     @Override
-    protected CertifyOpResponsePayload createVariant() {
+    public CertifyOpResponsePayload createVariant() {
         return CertifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .build();

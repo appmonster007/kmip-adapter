@@ -15,19 +15,19 @@ class ValidateOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSui
     }
 
     @Override
-    protected Class<ValidateOpResponsePayload> type() {
+    public Class<ValidateOpResponsePayload> type() {
         return ValidateOpResponsePayload.class;
     }
 
     @Override
-    protected ValidateOpResponsePayload createDefault() {
+    public ValidateOpResponsePayload createDefault() {
         return ValidateOpResponsePayload.builder()
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.VALID))
                 .build();
     }
 
     @Override
-    protected ValidateOpResponsePayload createVariant() {
+    public ValidateOpResponsePayload createVariant() {
         return ValidateOpResponsePayload.builder()
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.INVALID))
                 .build();

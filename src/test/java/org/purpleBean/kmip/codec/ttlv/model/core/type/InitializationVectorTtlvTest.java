@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class InitializationVectorTtlvTest extends AbstractTtlvSerializationTestSuite<InitializationVector> {
 
     @Override
-    protected Class<InitializationVector> type() {
+    public Class<InitializationVector> type() {
         return InitializationVector.class;
     }
 
     @Override
-    protected InitializationVector createDefault() {
+    public InitializationVector createDefault() {
         return InitializationVector.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected InitializationVector createVariant() {
+    public InitializationVector createVariant() {
         return InitializationVector.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

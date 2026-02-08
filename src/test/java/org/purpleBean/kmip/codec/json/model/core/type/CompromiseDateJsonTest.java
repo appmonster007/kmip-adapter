@@ -13,19 +13,19 @@ class CompromiseDateJsonTest extends AbstractJsonSerializationTestSuite<Compromi
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<CompromiseDate> type() {
+    public Class<CompromiseDate> type() {
         return CompromiseDate.class;
     }
 
     @Override
-    protected CompromiseDate createDefault() {
+    public CompromiseDate createDefault() {
         return CompromiseDate.builder()
                 .value(FIXED_TIME)
                 .build();
     }
 
     @Override
-    protected CompromiseDate createVariant() {
+    public CompromiseDate createVariant() {
         return CompromiseDate.builder()
                 .value(FIXED_TIME.plusDays(1))
                 .build();

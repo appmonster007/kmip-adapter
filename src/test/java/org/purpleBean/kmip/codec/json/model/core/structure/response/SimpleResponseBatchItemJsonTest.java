@@ -18,12 +18,12 @@ class SimpleResponseBatchItemJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected Class<SimpleResponseBatchItem> type() {
+    public Class<SimpleResponseBatchItem> type() {
         return SimpleResponseBatchItem.class;
     }
 
     @Override
-    protected SimpleResponseBatchItem createDefault() {
+    public SimpleResponseBatchItem createDefault() {
         return SimpleResponseBatchItem.builder()
                 .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
                 .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
@@ -33,7 +33,7 @@ class SimpleResponseBatchItemJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected SimpleResponseBatchItem createVariant() {
+    public SimpleResponseBatchItem createVariant() {
         return SimpleResponseBatchItem.builder()
                 .resultStatus(ResultStatus.of(ResultStatus.Standard.OPERATION_FAILED))
                 .resultReason(ResultReason.of(ResultReason.Standard.PERMISSION_DENIED))

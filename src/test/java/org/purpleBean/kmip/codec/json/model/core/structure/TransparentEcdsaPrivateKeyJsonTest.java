@@ -16,12 +16,12 @@ class TransparentEcdsaPrivateKeyJsonTest extends AbstractJsonSerializationTestSu
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentEcdsaPrivateKey> type() {
+    public Class<TransparentEcdsaPrivateKey> type() {
         return TransparentEcdsaPrivateKey.class;
     }
 
     @Override
-    protected TransparentEcdsaPrivateKey createDefault() {
+    public TransparentEcdsaPrivateKey createDefault() {
         return TransparentEcdsaPrivateKey.of(
                 RecommendedCurve.Standard.P_192.inst(),
                 D.of(BigInteger.valueOf(1))
@@ -29,7 +29,7 @@ class TransparentEcdsaPrivateKeyJsonTest extends AbstractJsonSerializationTestSu
     }
 
     @Override
-    protected TransparentEcdsaPrivateKey createVariant() {
+    public TransparentEcdsaPrivateKey createVariant() {
         return TransparentEcdsaPrivateKey.of(
                 RecommendedCurve.Standard.P_224.inst(),
                 D.of(BigInteger.valueOf(2))

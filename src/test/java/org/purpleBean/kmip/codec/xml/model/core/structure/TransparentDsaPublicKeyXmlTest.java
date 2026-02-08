@@ -14,12 +14,12 @@ import java.math.BigInteger;
 class TransparentDsaPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<TransparentDsaPublicKey> {
 
     @Override
-    protected Class<TransparentDsaPublicKey> type() {
+    public Class<TransparentDsaPublicKey> type() {
         return TransparentDsaPublicKey.class;
     }
 
     @Override
-    protected TransparentDsaPublicKey createDefault() {
+    public TransparentDsaPublicKey createDefault() {
         return TransparentDsaPublicKey.of(
                 P.of(BigInteger.valueOf(1)),
                 Q.of(BigInteger.valueOf(2)),
@@ -29,7 +29,7 @@ class TransparentDsaPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<T
     }
 
     @Override
-    protected TransparentDsaPublicKey createVariant() {
+    public TransparentDsaPublicKey createVariant() {
         return TransparentDsaPublicKey.of(
                 P.of(BigInteger.valueOf(5)),
                 Q.of(BigInteger.valueOf(6)),

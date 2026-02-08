@@ -19,12 +19,12 @@ class PutOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<PutOp
     }
 
     @Override
-    protected Class<PutOpRequestPayload> type() {
+    public Class<PutOpRequestPayload> type() {
         return PutOpRequestPayload.class;
     }
 
     @Override
-    protected PutOpRequestPayload createDefault() {
+    public PutOpRequestPayload createDefault() {
         return PutOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .putFunction(PutFunction.of(PutFunction.Standard.NEW))
@@ -37,7 +37,7 @@ class PutOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<PutOp
     }
 
     @Override
-    protected PutOpRequestPayload createVariant() {
+    public PutOpRequestPayload createVariant() {
         return PutOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .putFunction(PutFunction.of(PutFunction.Standard.REPLACE))

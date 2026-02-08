@@ -18,12 +18,12 @@ class AttestationCredentialJsonTest extends AbstractJsonSerializationTestSuite<A
     }
 
     @Override
-    protected Class<AttestationCredential> type() {
+    public Class<AttestationCredential> type() {
         return AttestationCredential.class;
     }
 
     @Override
-    protected AttestationCredential createDefault() {
+    public AttestationCredential createDefault() {
         return AttestationCredential.builder()
                 .nonce(Nonce.of(
                         NonceId.of(new byte[8]),
@@ -34,7 +34,7 @@ class AttestationCredentialJsonTest extends AbstractJsonSerializationTestSuite<A
     }
 
     @Override
-    protected AttestationCredential createVariant() {
+    public AttestationCredential createVariant() {
         return AttestationCredential.builder()
                 .nonce(Nonce.of(
                         NonceId.of(new byte[8]),

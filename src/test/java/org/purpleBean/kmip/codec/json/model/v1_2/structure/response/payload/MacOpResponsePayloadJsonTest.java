@@ -16,12 +16,12 @@ class MacOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<Ma
     }
 
     @Override
-    protected Class<MacOpResponsePayload> type() {
+    public Class<MacOpResponsePayload> type() {
         return MacOpResponsePayload.class;
     }
 
     @Override
-    protected MacOpResponsePayload createDefault() {
+    public MacOpResponsePayload createDefault() {
         return MacOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .macData(MacData.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class MacOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<Ma
     }
 
     @Override
-    protected MacOpResponsePayload createVariant() {
+    public MacOpResponsePayload createVariant() {
         return MacOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .macData(MacData.of(new byte[]{4, 5, 6}))

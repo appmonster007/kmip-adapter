@@ -17,12 +17,12 @@ class TemplateTtlvTest extends AbstractTtlvSerializationTestSuite<Template> {
     }
 
     @Override
-    protected Class<Template> type() {
+    public Class<Template> type() {
         return Template.class;
     }
 
     @Override
-    protected Template createDefault() {
+    public Template createDefault() {
         return Template.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
@@ -32,7 +32,7 @@ class TemplateTtlvTest extends AbstractTtlvSerializationTestSuite<Template> {
     }
 
     @Override
-    protected Template createVariant() {
+    public Template createVariant() {
         return Template.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute-variant"))

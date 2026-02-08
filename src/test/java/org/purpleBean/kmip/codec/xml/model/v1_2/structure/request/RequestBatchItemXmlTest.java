@@ -6,9 +6,9 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestPayload;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload;
-import org.purpleBean.kmip.model.v1_2.structure.request.RequestBatchItem;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RequestBatchItem Xml Serialization Tests")
@@ -20,12 +20,12 @@ class RequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<RequestB
     }
 
     @Override
-    protected Class<RequestBatchItem> type() {
+    public Class<RequestBatchItem> type() {
         return RequestBatchItem.class;
     }
 
     @Override
-    protected RequestBatchItem createDefault() {
+    public RequestBatchItem createDefault() {
         return RequestBatchItem.builder()
                 .operation(Operation.Standard.CREATE.inst())
                 .requestPayloadStructure(CreateOpRequestPayload.builder()
@@ -36,7 +36,7 @@ class RequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<RequestB
     }
 
     @Override
-    protected RequestBatchItem createVariant() {
+    public RequestBatchItem createVariant() {
         return RequestBatchItem.builder()
                 .operation(Operation.Standard.GET.inst())
                 .requestPayloadStructure(GetOpRequestPayload.builder()

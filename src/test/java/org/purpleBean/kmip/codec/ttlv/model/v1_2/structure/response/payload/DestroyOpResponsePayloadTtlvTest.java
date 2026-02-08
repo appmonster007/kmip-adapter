@@ -15,19 +15,19 @@ class DestroyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuit
     }
 
     @Override
-    protected Class<DestroyOpResponsePayload> type() {
+    public Class<DestroyOpResponsePayload> type() {
         return DestroyOpResponsePayload.class;
     }
 
     @Override
-    protected DestroyOpResponsePayload createDefault() {
+    public DestroyOpResponsePayload createDefault() {
         return DestroyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected DestroyOpResponsePayload createVariant() {
+    public DestroyOpResponsePayload createVariant() {
         return DestroyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

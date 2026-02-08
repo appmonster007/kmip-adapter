@@ -15,12 +15,12 @@ class NameXmlTest extends AbstractXmlSerializationTestSuite<Name> {
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<Name> type() {
+    public Class<Name> type() {
         return Name.class;
     }
 
     @Override
-    protected Name createDefault() {
+    public Name createDefault() {
         return Name.builder()
                 .nameValue(NameValue.of("some-name"))
                 .nameType(NameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
@@ -28,7 +28,7 @@ class NameXmlTest extends AbstractXmlSerializationTestSuite<Name> {
     }
 
     @Override
-    protected Name createVariant() {
+    public Name createVariant() {
         return Name.builder()
                 .nameValue(NameValue.of("some-variant-name"))
                 .nameType(NameType.Standard.URI.inst())

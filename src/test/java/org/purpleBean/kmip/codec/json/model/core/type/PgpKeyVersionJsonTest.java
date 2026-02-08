@@ -14,17 +14,17 @@ class PgpKeyVersionJsonTest extends AbstractJsonSerializationTestSuite<PgpKeyVer
     }
 
     @Override
-    protected Class<PgpKeyVersion> type() {
+    public Class<PgpKeyVersion> type() {
         return PgpKeyVersion.class;
     }
 
     @Override
-    protected PgpKeyVersion createDefault() {
+    public PgpKeyVersion createDefault() {
         return PgpKeyVersion.of(123);
     }
 
     @Override
-    protected PgpKeyVersion createVariant() {
+    public PgpKeyVersion createVariant() {
         return PgpKeyVersion.of(456);
     }
 }

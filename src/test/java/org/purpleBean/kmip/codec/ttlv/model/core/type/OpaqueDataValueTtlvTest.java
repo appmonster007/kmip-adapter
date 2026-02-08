@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class OpaqueDataValueTtlvTest extends AbstractTtlvSerializationTestSuite<OpaqueDataValue> {
 
     @Override
-    protected Class<OpaqueDataValue> type() {
+    public Class<OpaqueDataValue> type() {
         return OpaqueDataValue.class;
     }
 
     @Override
-    protected OpaqueDataValue createDefault() {
+    public OpaqueDataValue createDefault() {
         return OpaqueDataValue.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected OpaqueDataValue createVariant() {
+    public OpaqueDataValue createVariant() {
         return OpaqueDataValue.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

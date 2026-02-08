@@ -16,12 +16,12 @@ class HashOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Ha
     }
 
     @Override
-    protected Class<HashOpRequestPayload> type() {
+    public Class<HashOpRequestPayload> type() {
         return HashOpRequestPayload.class;
     }
 
     @Override
-    protected HashOpRequestPayload createDefault() {
+    public HashOpRequestPayload createDefault() {
         return HashOpRequestPayload.builder()
                 .cryptographicParameters(CryptographicParameters.builder().build())
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class HashOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Ha
     }
 
     @Override
-    protected HashOpRequestPayload createVariant() {
+    public HashOpRequestPayload createVariant() {
         return HashOpRequestPayload.builder()
                 .cryptographicParameters(CryptographicParameters.builder().build())
                 .data(DataByteString.of(new byte[]{4, 5, 6}))

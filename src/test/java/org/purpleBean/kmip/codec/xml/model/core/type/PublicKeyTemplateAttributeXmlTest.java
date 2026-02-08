@@ -14,17 +14,17 @@ class PublicKeyTemplateAttributeXmlTest extends AbstractXmlSerializationTestSuit
     }
 
     @Override
-    protected Class<PublicKeyTemplateAttribute> type() {
+    public Class<PublicKeyTemplateAttribute> type() {
         return PublicKeyTemplateAttribute.class;
     }
 
     @Override
-    protected PublicKeyTemplateAttribute createDefault() {
+    public PublicKeyTemplateAttribute createDefault() {
         return PublicKeyTemplateAttribute.of("default-string");
     }
 
     @Override
-    protected PublicKeyTemplateAttribute createVariant() {
+    public PublicKeyTemplateAttribute createVariant() {
         return PublicKeyTemplateAttribute.of("variant-string");
     }
 }

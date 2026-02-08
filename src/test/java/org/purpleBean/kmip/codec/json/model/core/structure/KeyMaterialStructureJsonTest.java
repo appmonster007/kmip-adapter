@@ -22,12 +22,12 @@ class KeyMaterialStructureJsonTest extends AbstractJsonSerializationTestSuite<Ke
     }
 
     @Override
-    protected Class<KeyMaterialStructure> type() {
+    public Class<KeyMaterialStructure> type() {
         return KeyMaterialStructure.class;
     }
 
     @Override
-    protected KeyMaterialStructure createDefault() {
+    public KeyMaterialStructure createDefault() {
         // TODO: Update with actual default values for your structure
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         State state = State.Standard.ACTIVE.inst();
@@ -35,7 +35,7 @@ class KeyMaterialStructureJsonTest extends AbstractJsonSerializationTestSuite<Ke
     }
 
     @Override
-    protected KeyMaterialStructure createVariant() {
+    public KeyMaterialStructure createVariant() {
 
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
         State state = State.Standard.DEACTIVATED.inst();

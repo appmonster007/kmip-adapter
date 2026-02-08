@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ShreddingAlgorithm XML Serialization")
 class ShreddingAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<ShreddingAlgorithm> {
     @Override
-    protected Class<ShreddingAlgorithm> type() {
+    public Class<ShreddingAlgorithm> type() {
         return ShreddingAlgorithm.class;
     }
 
     @Override
-    protected ShreddingAlgorithm createDefault() {
+    public ShreddingAlgorithm createDefault() {
         return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected ShreddingAlgorithm createVariant() {
+    public ShreddingAlgorithm createVariant() {
         return ShreddingAlgorithm.Standard.CRYPTOGRAPHIC.inst();
     }
 }

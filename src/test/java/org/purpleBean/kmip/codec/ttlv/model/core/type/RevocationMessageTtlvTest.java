@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class RevocationMessageTtlvTest extends AbstractTtlvSerializationTestSuite<RevocationMessage> {
 
     @Override
-    protected Class<RevocationMessage> type() {
+    public Class<RevocationMessage> type() {
         return RevocationMessage.class;
     }
 
     @Override
-    protected RevocationMessage createDefault() {
+    public RevocationMessage createDefault() {
         return RevocationMessage.builder().value("test-revocation-message").build();
     }
 
     @Override
-    protected RevocationMessage createVariant() {
+    public RevocationMessage createVariant() {
         return RevocationMessage.builder().value("another-revocation-message").build();
     }
 }

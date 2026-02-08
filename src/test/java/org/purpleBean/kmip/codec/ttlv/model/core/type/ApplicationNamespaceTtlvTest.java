@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class ApplicationNamespaceTtlvTest extends AbstractTtlvSerializationTestSuite<ApplicationNamespace> {
 
     @Override
-    protected Class<ApplicationNamespace> type() {
+    public Class<ApplicationNamespace> type() {
         return ApplicationNamespace.class;
     }
 
     @Override
-    protected ApplicationNamespace createDefault() {
+    public ApplicationNamespace createDefault() {
         return ApplicationNamespace.builder().value("test-namespace").build();
     }
 
     @Override
-    protected ApplicationNamespace createVariant() {
+    public ApplicationNamespace createVariant() {
         return ApplicationNamespace.builder().value("another-namespace").build();
     }
 }

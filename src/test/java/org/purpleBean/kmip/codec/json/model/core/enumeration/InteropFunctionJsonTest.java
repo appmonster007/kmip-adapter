@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("InteropFunction JSON Serialization")
 class InteropFunctionJsonTest extends AbstractJsonSerializationTestSuite<InteropFunction> {
     @Override
-    protected Class<InteropFunction> type() {
+    public Class<InteropFunction> type() {
         return InteropFunction.class;
     }
 
     @Override
-    protected InteropFunction createDefault() {
+    public InteropFunction createDefault() {
         return InteropFunction.Standard.BEGIN.inst();
     }
 
     @Override
-    protected InteropFunction createVariant() {
+    public InteropFunction createVariant() {
         return InteropFunction.Standard.END.inst();
     }
 }

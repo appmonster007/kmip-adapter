@@ -10,17 +10,17 @@ import java.nio.ByteBuffer;
 class MacDataXmlTest extends AbstractXmlSerializationTestSuite<MacData> {
 
     @Override
-    protected Class<MacData> type() {
+    public Class<MacData> type() {
         return MacData.class;
     }
 
     @Override
-    protected MacData createDefault() {
+    public MacData createDefault() {
         return MacData.of(ByteBuffer.wrap("test mac data".getBytes()));
     }
 
     @Override
-    protected MacData createVariant() {
+    public MacData createVariant() {
         return MacData.of(ByteBuffer.wrap("variant mac data".getBytes()));
     }
 }

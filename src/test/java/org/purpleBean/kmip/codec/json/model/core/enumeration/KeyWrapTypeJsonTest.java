@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("KeyWrapType JSON Serialization")
 class KeyWrapTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyWrapType> {
     @Override
-    protected Class<KeyWrapType> type() {
+    public Class<KeyWrapType> type() {
         return KeyWrapType.class;
     }
 
     @Override
-    protected KeyWrapType createDefault() {
+    public KeyWrapType createDefault() {
         return KeyWrapType.Standard.NOT_WRAPPED.inst();
     }
 
     @Override
-    protected KeyWrapType createVariant() {
+    public KeyWrapType createVariant() {
         return KeyWrapType.Standard.AS_REGISTERED.inst();
     }
 }

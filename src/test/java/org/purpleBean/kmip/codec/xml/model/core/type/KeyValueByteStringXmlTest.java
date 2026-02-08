@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class KeyValueByteStringXmlTest extends AbstractXmlSerializationTestSuite<KeyValueByteString> {
 
     @Override
-    protected Class<KeyValueByteString> type() {
+    public Class<KeyValueByteString> type() {
         return KeyValueByteString.class;
     }
 
     @Override
-    protected KeyValueByteString createDefault() {
+    public KeyValueByteString createDefault() {
         return KeyValueByteString.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected KeyValueByteString createVariant() {
+    public KeyValueByteString createVariant() {
         return KeyValueByteString.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

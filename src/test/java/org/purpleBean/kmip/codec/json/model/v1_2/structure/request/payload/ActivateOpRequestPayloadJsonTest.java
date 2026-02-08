@@ -15,19 +15,19 @@ class ActivateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuit
     }
 
     @Override
-    protected Class<ActivateOpRequestPayload> type() {
+    public Class<ActivateOpRequestPayload> type() {
         return ActivateOpRequestPayload.class;
     }
 
     @Override
-    protected ActivateOpRequestPayload createDefault() {
+    public ActivateOpRequestPayload createDefault() {
         return ActivateOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected ActivateOpRequestPayload createVariant() {
+    public ActivateOpRequestPayload createVariant() {
         return ActivateOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

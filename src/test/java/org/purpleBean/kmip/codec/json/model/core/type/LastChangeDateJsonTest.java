@@ -13,18 +13,18 @@ class LastChangeDateJsonTest extends AbstractJsonSerializationTestSuite<LastChan
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<LastChangeDate> type() {
+    public Class<LastChangeDate> type() {
         return LastChangeDate.class;
     }
 
     @Override
-    protected LastChangeDate createDefault() {
+    public LastChangeDate createDefault() {
 
         return LastChangeDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
-    protected LastChangeDate createVariant() {
+    public LastChangeDate createVariant() {
 
         return LastChangeDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }

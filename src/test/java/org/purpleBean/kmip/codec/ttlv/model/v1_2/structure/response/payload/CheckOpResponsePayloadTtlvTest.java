@@ -18,12 +18,12 @@ class CheckOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected Class<CheckOpResponsePayload> type() {
+    public Class<CheckOpResponsePayload> type() {
         return CheckOpResponsePayload.class;
     }
 
     @Override
-    protected CheckOpResponsePayload createDefault() {
+    public CheckOpResponsePayload createDefault() {
         return CheckOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .usageLimitsCount(UsageLimitsCount.of(100L))
@@ -33,7 +33,7 @@ class CheckOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected CheckOpResponsePayload createVariant() {
+    public CheckOpResponsePayload createVariant() {
         return CheckOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .usageLimitsCount(UsageLimitsCount.of(200L))

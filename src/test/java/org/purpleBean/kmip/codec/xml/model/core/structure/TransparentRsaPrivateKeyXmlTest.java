@@ -18,12 +18,12 @@ class TransparentRsaPrivateKeyXmlTest extends AbstractXmlSerializationTestSuite<
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentRsaPrivateKey> type() {
+    public Class<TransparentRsaPrivateKey> type() {
         return TransparentRsaPrivateKey.class;
     }
 
     @Override
-    protected TransparentRsaPrivateKey createDefault() {
+    public TransparentRsaPrivateKey createDefault() {
         return TransparentRsaPrivateKey.of(
                 Modulus.of(BigInteger.valueOf(1)),
                 PrivateExponent.of(BigInteger.valueOf(2)),
@@ -37,7 +37,7 @@ class TransparentRsaPrivateKeyXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected TransparentRsaPrivateKey createVariant() {
+    public TransparentRsaPrivateKey createVariant() {
         return TransparentRsaPrivateKey.of(
                 Modulus.of(BigInteger.valueOf(3)),
                 null,

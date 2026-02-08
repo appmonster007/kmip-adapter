@@ -18,12 +18,12 @@ class AddAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSu
     }
 
     @Override
-    protected Class<AddAttributeOpRequestPayload> type() {
+    public Class<AddAttributeOpRequestPayload> type() {
         return AddAttributeOpRequestPayload.class;
     }
 
     @Override
-    protected AddAttributeOpRequestPayload createDefault() {
+    public AddAttributeOpRequestPayload createDefault() {
         return AddAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
@@ -31,7 +31,7 @@ class AddAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSu
     }
 
     @Override
-    protected AddAttributeOpRequestPayload createVariant() {
+    public AddAttributeOpRequestPayload createVariant() {
         return AddAttributeOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))

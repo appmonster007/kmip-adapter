@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class ObjectGroupJsonTest extends AbstractJsonSerializationTestSuite<ObjectGroup> {
 
     @Override
-    protected Class<ObjectGroup> type() {
+    public Class<ObjectGroup> type() {
         return ObjectGroup.class;
     }
 
     @Override
-    protected ObjectGroup createDefault() {
+    public ObjectGroup createDefault() {
         return ObjectGroup.builder().value("test").build();
     }
 
     @Override
-    protected ObjectGroup createVariant() {
+    public ObjectGroup createVariant() {
         return ObjectGroup.builder().value("test-2").build();
     }
 }

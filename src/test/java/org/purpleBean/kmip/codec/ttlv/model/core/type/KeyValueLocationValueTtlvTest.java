@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class KeyValueLocationValueTtlvTest extends AbstractTtlvSerializationTestSuite<KeyValueLocationValue> {
 
     @Override
-    protected Class<KeyValueLocationValue> type() {
+    public Class<KeyValueLocationValue> type() {
         return KeyValueLocationValue.class;
     }
 
     @Override
-    protected KeyValueLocationValue createDefault() {
+    public KeyValueLocationValue createDefault() {
         return KeyValueLocationValue.builder().value("test").build();
     }
 
     @Override
-    protected KeyValueLocationValue createVariant() {
+    public KeyValueLocationValue createVariant() {
         return KeyValueLocationValue.builder().value("test-2").build();
     }
 }

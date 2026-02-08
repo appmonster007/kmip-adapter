@@ -16,17 +16,17 @@ class NonceIdTtlvTest extends AbstractTtlvSerializationTestSuite<NonceId> {
     }
 
     @Override
-    protected Class<NonceId> type() {
+    public Class<NonceId> type() {
         return NonceId.class;
     }
 
     @Override
-    protected NonceId createDefault() {
+    public NonceId createDefault() {
         return NonceId.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
     }
 
     @Override
-    protected NonceId createVariant() {
+    public NonceId createVariant() {
         return NonceId.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
     }
 }

@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class QStringTtlvTest extends AbstractTtlvSerializationTestSuite<QString> {
 
     @Override
-    protected Class<QString> type() {
+    public Class<QString> type() {
         return QString.class;
     }
 
     @Override
-    protected QString createDefault() {
+    public QString createDefault() {
         return QString.of("test-qstring".getBytes());
     }
 
     @Override
-    protected QString createVariant() {
+    public QString createVariant() {
         return QString.of("another-qstring".getBytes());
     }
 }

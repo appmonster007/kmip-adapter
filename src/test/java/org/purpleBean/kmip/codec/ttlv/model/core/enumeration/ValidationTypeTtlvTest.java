@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ValidationType TTLV Serialization")
 class ValidationTypeTtlvTest extends AbstractTtlvSerializationTestSuite<ValidationType> {
     @Override
-    protected Class<ValidationType> type() {
+    public Class<ValidationType> type() {
         return ValidationType.class;
     }
 
     @Override
-    protected ValidationType createDefault() {
+    public ValidationType createDefault() {
         return ValidationType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected ValidationType createVariant() {
+    public ValidationType createVariant() {
         return ValidationType.Standard.HARDWARE.inst();
     }
 }

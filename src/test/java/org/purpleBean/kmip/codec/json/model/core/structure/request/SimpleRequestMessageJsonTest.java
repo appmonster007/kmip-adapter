@@ -8,18 +8,16 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
-import java.util.Objects;
-
 @DisplayName("SimpleRequestMessage JSON Serialization")
 class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestMessage> {
 
     @Override
-    protected Class<SimpleRequestMessage> type() {
+    public Class<SimpleRequestMessage> type() {
         return SimpleRequestMessage.class;
     }
 
     @Override
-    protected SimpleRequestMessage createDefault() {
+    public SimpleRequestMessage createDefault() {
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .build();
@@ -33,7 +31,7 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
     }
 
     @Override
-    protected SimpleRequestMessage createVariant() {
+    public SimpleRequestMessage createVariant() {
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(2, 0))
                 .build();
@@ -47,14 +45,7 @@ class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<Si
     }
 
     @Override
-    protected boolean unsupportedSpecShouldFailSerialize() {
+    public boolean unsupportedSpecShouldFailSerialize() {
         return false; // model supports UnsupportedVersion
-    }
-
-    @Override
-    protected boolean equalsRelaxed(SimpleRequestMessage a, SimpleRequestMessage b) {
-        if (a == null || b == null) return a == b;
-        return Objects.equals(a.getRequestHeader(), b.getRequestHeader())
-                && Objects.equals(a.getRequestBatchItems(), b.getRequestBatchItems());
     }
 }

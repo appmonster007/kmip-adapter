@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("CredentialType TTLV Serialization")
 class CredentialTypeTtlvTest extends AbstractTtlvSerializationTestSuite<CredentialType> {
     @Override
-    protected Class<CredentialType> type() {
+    public Class<CredentialType> type() {
         return CredentialType.class;
     }
 
     @Override
-    protected CredentialType createDefault() {
+    public CredentialType createDefault() {
         return CredentialType.Standard.USERNAME_AND_PASSWORD.inst();
     }
 
     @Override
-    protected CredentialType createVariant() {
+    public CredentialType createVariant() {
         return CredentialType.Standard.DEVICE.inst();
     }
 }

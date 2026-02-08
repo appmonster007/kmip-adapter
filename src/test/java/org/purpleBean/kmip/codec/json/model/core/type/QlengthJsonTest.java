@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class QlengthJsonTest extends AbstractJsonSerializationTestSuite<Qlength> {
 
     @Override
-    protected Class<Qlength> type() {
+    public Class<Qlength> type() {
         return Qlength.class;
     }
 
     @Override
-    protected Qlength createDefault() {
+    public Qlength createDefault() {
         return Qlength.builder().value(128).build();
     }
 
     @Override
-    protected Qlength createVariant() {
+    public Qlength createVariant() {
         return Qlength.builder().value(256).build();
     }
 }

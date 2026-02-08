@@ -23,12 +23,12 @@ class SplitKeyTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKey> {
     }
 
     @Override
-    protected Class<SplitKey> type() {
+    public Class<SplitKey> type() {
         return SplitKey.class;
     }
 
     @Override
-    protected SplitKey createDefault() {
+    public SplitKey createDefault() {
         return SplitKey.builder()
                 .splitKeyParts(SplitKeyParts.of(1))
                 .keyPartIdentifier(KeyPartIdentifier.of(1))
@@ -41,7 +41,7 @@ class SplitKeyTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKey> {
     }
 
     @Override
-    protected SplitKey createVariant() {
+    public SplitKey createVariant() {
         return SplitKey.builder()
                 .splitKeyParts(SplitKeyParts.of(2))
                 .keyPartIdentifier(KeyPartIdentifier.of(2))

@@ -10,10 +10,11 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.suite.KmipDataTypeTestSuite;
 
 @DisplayName("{{DATA_NAME}} Domain Tests")
-class {{DATA_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{DATA_NAME}}> {
+class {{DATA_NAME}}Test extends BaseKmipTest implements KmipDataTypeTestSuite<{{DATA_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -21,17 +22,17 @@ class {{DATA_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{DATA_NAME}}> {
     }
 
     @Override
-    protected Class<{{DATA_NAME}}> type() {
+    public Class<{{DATA_NAME}}> type() {
         return {{DATA_NAME}}.class;
     }
 
     @Override
-    protected {{DATA_NAME}} createDefault() {
+    public {{DATA_NAME}} createDefault() {
         return {{DATA_NAME}}.of({{DEFAULT_VALUE}});
     }
 
     @Override
-    protected EncodingType expectedEncodingType() {
+    public EncodingType expectedEncodingType() {
         return EncodingType.{{ENCODING_TYPE}};
     }
 }

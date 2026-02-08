@@ -19,12 +19,12 @@ class CreateSplitKeyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTe
     }
 
     @Override
-    protected Class<CreateSplitKeyOpRequestPayload> type() {
+    public Class<CreateSplitKeyOpRequestPayload> type() {
         return CreateSplitKeyOpRequestPayload.class;
     }
 
     @Override
-    protected CreateSplitKeyOpRequestPayload createDefault() {
+    public CreateSplitKeyOpRequestPayload createDefault() {
         return CreateSplitKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .splitKeyParts(SplitKeyParts.of(3))
@@ -35,7 +35,7 @@ class CreateSplitKeyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTe
     }
 
     @Override
-    protected CreateSplitKeyOpRequestPayload createVariant() {
+    public CreateSplitKeyOpRequestPayload createVariant() {
         return CreateSplitKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
                 .splitKeyParts(SplitKeyParts.of(5))

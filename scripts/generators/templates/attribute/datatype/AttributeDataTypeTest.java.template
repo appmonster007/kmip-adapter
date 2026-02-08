@@ -5,8 +5,9 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.BaseKmipTest;
 import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipDataTypeTestSuite;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
@@ -14,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends BaseKmipTest implements KmipDataTypeTestSuite<{{ATTRIBUTE_NAME}}>, KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     // TODO: Adjust FIXED_VALUE based on DATA_TYPE
     private static final {{DATA_TYPE}} FIXED_VALUE = {{DEFAULT_VALUE}};
@@ -25,7 +26,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{ATTRIBUTE_N
     }
 
     @Override
-    protected Class<{{ATTRIBUTE_NAME}}> type() {
+    public Class<{{ATTRIBUTE_NAME}}> type() {
         return {{ATTRIBUTE_NAME}}.class;
     }
 
@@ -35,7 +36,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{ATTRIBUTE_N
     }
 
     @Override
-    protected EncodingType expectedEncodingType() {
+    public EncodingType expectedEncodingType() {
         return EncodingType.{{ENCODING_TYPE}};
     }
 
@@ -94,12 +95,12 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{ATTRIBUTE_N
     @Override
     public void attribute_serverModifiable_respectsState() {
         // TODO: Implement or remove if using default
-        super.attribute_serverModifiable_respectsState();
+        KmipAttributeTestSuite.super.attribute_serverModifiable_respectsState();
     }
 
     @Override
     public void attribute_clientModifiable_respectsState() {
         // TODO: Implement or remove if using default
-        super.attribute_clientModifiable_respectsState();
+        KmipAttributeTestSuite.super.attribute_clientModifiable_respectsState();
     }
 }

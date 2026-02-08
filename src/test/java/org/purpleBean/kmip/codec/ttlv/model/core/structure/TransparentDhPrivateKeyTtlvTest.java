@@ -15,12 +15,12 @@ class TransparentDhPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentDhPrivateKey> type() {
+    public Class<TransparentDhPrivateKey> type() {
         return TransparentDhPrivateKey.class;
     }
 
     @Override
-    protected TransparentDhPrivateKey createDefault() {
+    public TransparentDhPrivateKey createDefault() {
         return TransparentDhPrivateKey.of(
                 P.of(BigInteger.valueOf(1)),
                 Q.of(BigInteger.valueOf(2)),
@@ -31,7 +31,7 @@ class TransparentDhPrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected TransparentDhPrivateKey createVariant() {
+    public TransparentDhPrivateKey createVariant() {
         return TransparentDhPrivateKey.of(
                 P.of(BigInteger.valueOf(6)),
                 Q.of(BigInteger.valueOf(7)),

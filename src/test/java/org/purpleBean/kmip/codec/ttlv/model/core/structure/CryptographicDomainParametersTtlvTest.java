@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class CryptographicDomainParametersTtlvTest extends AbstractTtlvSerializationTestSuite<CryptographicDomainParameters> {
 
     @Override
-    protected Class<CryptographicDomainParameters> type() {
+    public Class<CryptographicDomainParameters> type() {
         return CryptographicDomainParameters.class;
     }
 
     @Override
-    protected CryptographicDomainParameters createDefault() {
+    public CryptographicDomainParameters createDefault() {
         return CryptographicDomainParameters.builder()
                 .qlength(Qlength.of(256))
                 .recommendedCurve(RecommendedCurve.Standard.P_256.inst())

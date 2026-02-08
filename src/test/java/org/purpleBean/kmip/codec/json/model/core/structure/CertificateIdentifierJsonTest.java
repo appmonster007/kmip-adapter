@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class CertificateIdentifierJsonTest extends AbstractJsonSerializationTestSuite<CertificateIdentifier> {
 
     @Override
-    protected Class<CertificateIdentifier> type() {
+    public Class<CertificateIdentifier> type() {
         return CertificateIdentifier.class;
     }
 
     @Override
-    protected CertificateIdentifier createDefault() {
+    public CertificateIdentifier createDefault() {
         return CertificateIdentifier.builder()
                 .issuer(Issuer.of("CN=Test Issuer"))
                 .serialNumber(SerialNumber.of("12345"))

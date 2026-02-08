@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class PasswordTtlvTest extends AbstractTtlvSerializationTestSuite<Password> {
 
     @Override
-    protected Class<Password> type() {
+    public Class<Password> type() {
         return Password.class;
     }
 
     @Override
-    protected Password createDefault() {
+    public Password createDefault() {
         return Password.builder().value("test-password").build();
     }
 
     @Override
-    protected Password createVariant() {
+    public Password createVariant() {
         return Password.builder().value("another-password").build();
     }
 }

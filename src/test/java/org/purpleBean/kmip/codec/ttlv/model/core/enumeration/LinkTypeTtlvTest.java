@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("LinkType TTLV Serialization")
 class LinkTypeTtlvTest extends AbstractTtlvSerializationTestSuite<LinkType> {
     @Override
-    protected Class<LinkType> type() {
+    public Class<LinkType> type() {
         return LinkType.class;
     }
 
     @Override
-    protected LinkType createDefault() {
+    public LinkType createDefault() {
         return LinkType.Standard.CERTIFICATE_LINK.inst();
     }
 
     @Override
-    protected LinkType createVariant() {
+    public LinkType createVariant() {
         return LinkType.Standard.PUBLIC_KEY_LINK.inst();
     }
 }

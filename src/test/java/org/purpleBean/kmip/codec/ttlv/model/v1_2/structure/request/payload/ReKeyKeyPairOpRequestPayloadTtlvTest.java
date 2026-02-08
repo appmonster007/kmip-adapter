@@ -19,12 +19,12 @@ class ReKeyKeyPairOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTest
     }
 
     @Override
-    protected Class<ReKeyKeyPairOpRequestPayload> type() {
+    public Class<ReKeyKeyPairOpRequestPayload> type() {
         return ReKeyKeyPairOpRequestPayload.class;
     }
 
     @Override
-    protected ReKeyKeyPairOpRequestPayload createDefault() {
+    public ReKeyKeyPairOpRequestPayload createDefault() {
         return ReKeyKeyPairOpRequestPayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
                 .offset(Offset.builder().value(100).build())
@@ -35,7 +35,7 @@ class ReKeyKeyPairOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTest
     }
 
     @Override
-    protected ReKeyKeyPairOpRequestPayload createVariant() {
+    public ReKeyKeyPairOpRequestPayload createVariant() {
         return ReKeyKeyPairOpRequestPayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid2").build())
                 .offset(Offset.builder().value(200).build())

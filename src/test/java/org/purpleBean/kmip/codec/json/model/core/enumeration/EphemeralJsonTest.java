@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Ephemeral JSON Serialization")
 class EphemeralJsonTest extends AbstractJsonSerializationTestSuite<Ephemeral> {
     @Override
-    protected Class<Ephemeral> type() {
+    public Class<Ephemeral> type() {
         return Ephemeral.class;
     }
 
     @Override
-    protected Ephemeral createDefault() {
+    public Ephemeral createDefault() {
         return Ephemeral.Standard.DATA.inst();
     }
 
     @Override
-    protected Ephemeral createVariant() {
+    public Ephemeral createVariant() {
         return Ephemeral.Standard.EMPTY.inst();
     }
 }

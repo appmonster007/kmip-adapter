@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class ApplicationSpecificInformationJsonTest extends AbstractJsonSerializationTestSuite<ApplicationSpecificInformation> {
 
     @Override
-    protected Class<ApplicationSpecificInformation> type() {
+    public Class<ApplicationSpecificInformation> type() {
         return ApplicationSpecificInformation.class;
     }
 
     @Override
-    protected ApplicationSpecificInformation createDefault() {
+    public ApplicationSpecificInformation createDefault() {
         return ApplicationSpecificInformation.builder()
                 .applicationNamespace(ApplicationNamespace.of("namespace"))
                 .applicationData(ApplicationData.of("data"))

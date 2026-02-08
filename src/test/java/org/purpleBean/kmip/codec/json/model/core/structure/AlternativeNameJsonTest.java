@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class AlternativeNameJsonTest extends AbstractJsonSerializationTestSuite<AlternativeName> {
 
     @Override
-    protected Class<AlternativeName> type() {
+    public Class<AlternativeName> type() {
         return AlternativeName.class;
     }
 
     @Override
-    protected AlternativeName createDefault() {
+    public AlternativeName createDefault() {
         return AlternativeName.builder()
                 .alternativeNameValue(AlternativeNameValue.of("some-name"))
                 .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())

@@ -15,19 +15,19 @@ class ExtensionInformationJsonTest extends AbstractJsonSerializationTestSuite<Ex
     }
 
     @Override
-    protected Class<ExtensionInformation> type() {
+    public Class<ExtensionInformation> type() {
         return ExtensionInformation.class;
     }
 
     @Override
-    protected ExtensionInformation createDefault() {
+    public ExtensionInformation createDefault() {
         return ExtensionInformation.builder()
                 .extensionName(ExtensionName.of("test-extension"))
                 .build();
     }
 
     @Override
-    protected ExtensionInformation createVariant() {
+    public ExtensionInformation createVariant() {
         return ExtensionInformation.builder()
                 .extensionName(ExtensionName.of("test-extension-variant"))
                 .build();

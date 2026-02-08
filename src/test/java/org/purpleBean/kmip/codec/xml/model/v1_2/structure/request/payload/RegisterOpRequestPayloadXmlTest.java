@@ -20,12 +20,12 @@ class RegisterOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected Class<RegisterOpRequestPayload> type() {
+    public Class<RegisterOpRequestPayload> type() {
         return RegisterOpRequestPayload.class;
     }
 
     @Override
-    protected RegisterOpRequestPayload createDefault() {
+    public RegisterOpRequestPayload createDefault() {
         return RegisterOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -38,7 +38,7 @@ class RegisterOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<
     }
 
     @Override
-    protected RegisterOpRequestPayload createVariant() {
+    public RegisterOpRequestPayload createVariant() {
         return RegisterOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
                 .templateAttribute(TemplateAttribute.builder().build())

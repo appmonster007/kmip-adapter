@@ -15,19 +15,19 @@ class CancelOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected Class<CancelOpRequestPayload> type() {
+    public Class<CancelOpRequestPayload> type() {
         return CancelOpRequestPayload.class;
     }
 
     @Override
-    protected CancelOpRequestPayload createDefault() {
+    public CancelOpRequestPayload createDefault() {
         return CancelOpRequestPayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
                 .build();
     }
 
     @Override
-    protected CancelOpRequestPayload createVariant() {
+    public CancelOpRequestPayload createVariant() {
         return CancelOpRequestPayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
                 .build();

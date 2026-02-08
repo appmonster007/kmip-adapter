@@ -10,17 +10,17 @@ import java.nio.ByteBuffer;
 class SignatureDataTtlvTest extends AbstractTtlvSerializationTestSuite<SignatureData> {
 
     @Override
-    protected Class<SignatureData> type() {
+    public Class<SignatureData> type() {
         return SignatureData.class;
     }
 
     @Override
-    protected SignatureData createDefault() {
+    public SignatureData createDefault() {
         return SignatureData.of(ByteBuffer.wrap("test signature data".getBytes()));
     }
 
     @Override
-    protected SignatureData createVariant() {
+    public SignatureData createVariant() {
         return SignatureData.of(ByteBuffer.wrap("variant signature data".getBytes()));
     }
 }

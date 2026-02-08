@@ -13,18 +13,18 @@ class ValidityDateJsonTest extends AbstractJsonSerializationTestSuite<ValidityDa
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ValidityDate> type() {
+    public Class<ValidityDate> type() {
         return ValidityDate.class;
     }
 
     @Override
-    protected ValidityDate createDefault() {
+    public ValidityDate createDefault() {
 
         return ValidityDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
-    protected ValidityDate createVariant() {
+    public ValidityDate createVariant() {
 
         return ValidityDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }

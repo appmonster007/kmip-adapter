@@ -9,17 +9,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CryptographicLengthXmlTest extends AbstractXmlSerializationTestSuite<CryptographicLength> {
 
     @Override
-    protected Class<CryptographicLength> type() {
+    public Class<CryptographicLength> type() {
         return CryptographicLength.class;
     }
 
     @Override
-    protected CryptographicLength createDefault() {
+    public CryptographicLength createDefault() {
         return CryptographicLength.of(256);
     }
 
     @Override
-    protected CryptographicLength createVariant() {
+    public CryptographicLength createVariant() {
         return CryptographicLength.of(512);
     }
 }

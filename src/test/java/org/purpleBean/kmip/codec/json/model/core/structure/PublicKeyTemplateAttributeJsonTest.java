@@ -17,12 +17,12 @@ class PublicKeyTemplateAttributeJsonTest extends AbstractJsonSerializationTestSu
     }
 
     @Override
-    protected Class<PublicKeyTemplateAttribute> type() {
+    public Class<PublicKeyTemplateAttribute> type() {
         return PublicKeyTemplateAttribute.class;
     }
 
     @Override
-    protected PublicKeyTemplateAttribute createDefault() {
+    public PublicKeyTemplateAttribute createDefault() {
         return PublicKeyTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
@@ -32,7 +32,7 @@ class PublicKeyTemplateAttributeJsonTest extends AbstractJsonSerializationTestSu
     }
 
     @Override
-    protected PublicKeyTemplateAttribute createVariant() {
+    public PublicKeyTemplateAttribute createVariant() {
         return PublicKeyTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute-variant"))

@@ -17,12 +17,12 @@ class CommonTemplateAttributeJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected Class<CommonTemplateAttribute> type() {
+    public Class<CommonTemplateAttribute> type() {
         return CommonTemplateAttribute.class;
     }
 
     @Override
-    protected CommonTemplateAttribute createDefault() {
+    public CommonTemplateAttribute createDefault() {
         return CommonTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
@@ -32,7 +32,7 @@ class CommonTemplateAttributeJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected CommonTemplateAttribute createVariant() {
+    public CommonTemplateAttribute createVariant() {
         return CommonTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute-variant"))

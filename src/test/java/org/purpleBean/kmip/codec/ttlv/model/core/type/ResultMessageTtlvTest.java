@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class ResultMessageTtlvTest extends AbstractTtlvSerializationTestSuite<ResultMessage> {
 
     @Override
-    protected Class<ResultMessage> type() {
+    public Class<ResultMessage> type() {
         return ResultMessage.class;
     }
 
     @Override
-    protected ResultMessage createDefault() {
+    public ResultMessage createDefault() {
         return ResultMessage.builder().value("Success").build();
     }
 
     @Override
-    protected ResultMessage createVariant() {
+    public ResultMessage createVariant() {
         return ResultMessage.builder().value("Failure").build();
     }
 }

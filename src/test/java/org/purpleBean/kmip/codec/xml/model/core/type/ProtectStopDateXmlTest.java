@@ -13,19 +13,19 @@ class ProtectStopDateXmlTest extends AbstractXmlSerializationTestSuite<ProtectSt
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ProtectStopDate> type() {
+    public Class<ProtectStopDate> type() {
         return ProtectStopDate.class;
     }
 
     @Override
-    protected ProtectStopDate createDefault() {
+    public ProtectStopDate createDefault() {
         return ProtectStopDate.builder()
                 .value(FIXED_TIME)
                 .build();
     }
 
     @Override
-    protected ProtectStopDate createVariant() {
+    public ProtectStopDate createVariant() {
         return ProtectStopDate.builder()
                 .value(FIXED_TIME.plusDays(1))
                 .build();

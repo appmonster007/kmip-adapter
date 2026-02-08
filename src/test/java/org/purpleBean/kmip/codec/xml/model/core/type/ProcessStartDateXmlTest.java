@@ -13,19 +13,19 @@ class ProcessStartDateXmlTest extends AbstractXmlSerializationTestSuite<ProcessS
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ProcessStartDate> type() {
+    public Class<ProcessStartDate> type() {
         return ProcessStartDate.class;
     }
 
     @Override
-    protected ProcessStartDate createDefault() {
+    public ProcessStartDate createDefault() {
         return ProcessStartDate.builder()
                 .value(FIXED_TIME)
                 .build();
     }
 
     @Override
-    protected ProcessStartDate createVariant() {
+    public ProcessStartDate createVariant() {
         return ProcessStartDate.builder()
                 .value(FIXED_TIME.plusDays(1))
                 .build();

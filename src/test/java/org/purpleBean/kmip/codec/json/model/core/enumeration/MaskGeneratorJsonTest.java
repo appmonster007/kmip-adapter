@@ -10,17 +10,17 @@ import java.util.Set;
 @DisplayName("MaskGenerator JSON Serialization")
 class MaskGeneratorJsonTest extends AbstractJsonSerializationTestSuite<MaskGenerator> {
     @Override
-    protected Class<MaskGenerator> type() {
+    public Class<MaskGenerator> type() {
         return MaskGenerator.class;
     }
 
     @Override
-    protected MaskGenerator createDefault() {
+    public MaskGenerator createDefault() {
         return MaskGenerator.Standard.MFG1.inst();
     }
 
     @Override
-    protected MaskGenerator createVariant() {
+    public MaskGenerator createVariant() {
         return MaskGenerator.register(0x80000000, "MaskGenExtension", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

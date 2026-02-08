@@ -18,12 +18,12 @@ class AddAttributeOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTes
     }
 
     @Override
-    protected Class<AddAttributeOpResponsePayload> type() {
+    public Class<AddAttributeOpResponsePayload> type() {
         return AddAttributeOpResponsePayload.class;
     }
 
     @Override
-    protected AddAttributeOpResponsePayload createDefault() {
+    public AddAttributeOpResponsePayload createDefault() {
         return AddAttributeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
@@ -31,7 +31,7 @@ class AddAttributeOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTes
     }
 
     @Override
-    protected AddAttributeOpResponsePayload createVariant() {
+    public AddAttributeOpResponsePayload createVariant() {
         return AddAttributeOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))

@@ -15,12 +15,12 @@ class TransparentDhPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<Tr
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<TransparentDhPublicKey> type() {
+    public Class<TransparentDhPublicKey> type() {
         return TransparentDhPublicKey.class;
     }
 
     @Override
-    protected TransparentDhPublicKey createDefault() {
+    public TransparentDhPublicKey createDefault() {
         return TransparentDhPublicKey.of(
                 P.of(BigInteger.valueOf(1)),
                 Q.of(BigInteger.valueOf(2)),
@@ -31,7 +31,7 @@ class TransparentDhPublicKeyXmlTest extends AbstractXmlSerializationTestSuite<Tr
     }
 
     @Override
-    protected TransparentDhPublicKey createVariant() {
+    public TransparentDhPublicKey createVariant() {
         return TransparentDhPublicKey.of(
                 P.of(BigInteger.valueOf(6)),
                 Q.of(BigInteger.valueOf(7)),

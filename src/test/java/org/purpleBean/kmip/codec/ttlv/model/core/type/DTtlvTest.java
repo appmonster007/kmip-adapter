@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class DTtlvTest extends AbstractTtlvSerializationTestSuite<D> {
 
     @Override
-    protected Class<D> type() {
+    public Class<D> type() {
         return D.class;
     }
 
     @Override
-    protected D createDefault() {
+    public D createDefault() {
         return D.builder().value(BigInteger.ONE).build();
     }
 
     @Override
-    protected D createVariant() {
+    public D createVariant() {
         return D.builder().value(BigInteger.TEN).build();
     }
 }

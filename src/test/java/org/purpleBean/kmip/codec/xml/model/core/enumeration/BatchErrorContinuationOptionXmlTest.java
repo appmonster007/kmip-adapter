@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("BatchErrorContinuationOption XML Serialization")
 class BatchErrorContinuationOptionXmlTest extends AbstractXmlSerializationTestSuite<BatchErrorContinuationOption> {
     @Override
-    protected Class<BatchErrorContinuationOption> type() {
+    public Class<BatchErrorContinuationOption> type() {
         return BatchErrorContinuationOption.class;
     }
 
     @Override
-    protected BatchErrorContinuationOption createDefault() {
+    public BatchErrorContinuationOption createDefault() {
         return BatchErrorContinuationOption.Standard.CONTINUE.inst();
     }
 
     @Override
-    protected BatchErrorContinuationOption createVariant() {
+    public BatchErrorContinuationOption createVariant() {
         return BatchErrorContinuationOption.Standard.STOP.inst();
     }
 }

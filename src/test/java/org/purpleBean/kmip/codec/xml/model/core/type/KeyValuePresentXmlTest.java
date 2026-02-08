@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class KeyValuePresentXmlTest extends AbstractXmlSerializationTestSuite<KeyValuePresent> {
 
     @Override
-    protected Class<KeyValuePresent> type() {
+    public Class<KeyValuePresent> type() {
         return KeyValuePresent.class;
     }
 
     @Override
-    protected KeyValuePresent createDefault() {
+    public KeyValuePresent createDefault() {
         return KeyValuePresent.of(Boolean.FALSE);
     }
 
     @Override
-    protected KeyValuePresent createVariant() {
+    public KeyValuePresent createVariant() {
         return KeyValuePresent.of(Boolean.TRUE);
     }
 }

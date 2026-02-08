@@ -22,19 +22,19 @@ class KeyMaterialStructureTtlvTest extends AbstractTtlvSerializationTestSuite<Ke
     }
 
     @Override
-    protected Class<KeyMaterialStructure> type() {
+    public Class<KeyMaterialStructure> type() {
         return KeyMaterialStructure.class;
     }
 
     @Override
-    protected KeyMaterialStructure createDefault() {
+    public KeyMaterialStructure createDefault() {
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
         State state = State.Standard.ACTIVE.inst();
         return KeyMaterialStructure.of(List.of(activationDate, state));
     }
 
     @Override
-    protected KeyMaterialStructure createVariant() {
+    public KeyMaterialStructure createVariant() {
 
         ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME.plusDays(1)).build();
         State state = State.Standard.DEACTIVATED.inst();

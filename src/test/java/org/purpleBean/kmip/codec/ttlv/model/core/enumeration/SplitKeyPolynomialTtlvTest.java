@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("SplitKeyPolynomial TTLV Serialization")
 class SplitKeyPolynomialTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKeyPolynomial> {
     @Override
-    protected Class<SplitKeyPolynomial> type() {
+    public Class<SplitKeyPolynomial> type() {
         return SplitKeyPolynomial.class;
     }
 
     @Override
-    protected SplitKeyPolynomial createDefault() {
+    public SplitKeyPolynomial createDefault() {
         return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
     }
 
     @Override
-    protected SplitKeyPolynomial createVariant() {
+    public SplitKeyPolynomial createVariant() {
         return SplitKeyPolynomial.Standard.POLYNOMIAL_285.inst();
     }
 }

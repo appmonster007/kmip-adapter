@@ -10,17 +10,17 @@ import java.math.BigInteger;
 class PrimeExponentQTtlvTest extends AbstractTtlvSerializationTestSuite<PrimeExponentQ> {
 
     @Override
-    protected Class<PrimeExponentQ> type() {
+    public Class<PrimeExponentQ> type() {
         return PrimeExponentQ.class;
     }
 
     @Override
-    protected PrimeExponentQ createDefault() {
+    public PrimeExponentQ createDefault() {
         return PrimeExponentQ.builder().value(BigInteger.valueOf(65537)).build();
     }
 
     @Override
-    protected PrimeExponentQ createVariant() {
+    public PrimeExponentQ createVariant() {
         return PrimeExponentQ.builder().value(BigInteger.valueOf(3)).build();
     }
 }

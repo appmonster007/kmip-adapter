@@ -16,17 +16,17 @@ class AttestationAssertionJsonTest extends AbstractJsonSerializationTestSuite<At
     }
 
     @Override
-    protected Class<AttestationAssertion> type() {
+    public Class<AttestationAssertion> type() {
         return AttestationAssertion.class;
     }
 
     @Override
-    protected AttestationAssertion createDefault() {
+    public AttestationAssertion createDefault() {
         return AttestationAssertion.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
     }
 
     @Override
-    protected AttestationAssertion createVariant() {
+    public AttestationAssertion createVariant() {
         return AttestationAssertion.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
     }
 }

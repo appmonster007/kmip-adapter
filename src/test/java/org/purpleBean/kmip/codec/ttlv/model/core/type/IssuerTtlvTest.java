@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class IssuerTtlvTest extends AbstractTtlvSerializationTestSuite<Issuer> {
 
     @Override
-    protected Class<Issuer> type() {
+    public Class<Issuer> type() {
         return Issuer.class;
     }
 
     @Override
-    protected Issuer createDefault() {
+    public Issuer createDefault() {
         return Issuer.builder().value("test-issuer").build();
     }
 
     @Override
-    protected Issuer createVariant() {
+    public Issuer createVariant() {
         return Issuer.builder().value("another-issuer").build();
     }
 }

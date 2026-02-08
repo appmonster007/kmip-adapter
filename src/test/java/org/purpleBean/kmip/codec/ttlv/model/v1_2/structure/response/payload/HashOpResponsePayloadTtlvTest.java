@@ -15,19 +15,19 @@ class HashOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<H
     }
 
     @Override
-    protected Class<HashOpResponsePayload> type() {
+    public Class<HashOpResponsePayload> type() {
         return HashOpResponsePayload.class;
     }
 
     @Override
-    protected HashOpResponsePayload createDefault() {
+    public HashOpResponsePayload createDefault() {
         return HashOpResponsePayload.builder()
                 .data(DataByteString.of(new byte[]{1, 2, 3}))
                 .build();
     }
 
     @Override
-    protected HashOpResponsePayload createVariant() {
+    public HashOpResponsePayload createVariant() {
         return HashOpResponsePayload.builder()
                 .data(DataByteString.of(new byte[]{4, 5, 6}))
                 .build();

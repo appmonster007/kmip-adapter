@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("State TTLV Serialization")
 class StateTtlvTest extends AbstractTtlvSerializationTestSuite<State> {
     @Override
-    protected Class<State> type() {
+    public Class<State> type() {
         return State.class;
     }
 
     @Override
-    protected State createDefault() {
+    public State createDefault() {
         return State.Standard.ACTIVE.inst();
     }
 
     @Override
-    protected State createVariant() {
+    public State createVariant() {
         return State.Standard.DEACTIVATED.inst();
     }
 }

@@ -16,12 +16,12 @@ class SignOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<S
     }
 
     @Override
-    protected Class<SignOpResponsePayload> type() {
+    public Class<SignOpResponsePayload> type() {
         return SignOpResponsePayload.class;
     }
 
     @Override
-    protected SignOpResponsePayload createDefault() {
+    public SignOpResponsePayload createDefault() {
         return SignOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .signatureData(SignatureData.of(new byte[]{1, 2, 3}))
@@ -29,7 +29,7 @@ class SignOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<S
     }
 
     @Override
-    protected SignOpResponsePayload createVariant() {
+    public SignOpResponsePayload createVariant() {
         return SignOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .signatureData(SignatureData.of(new byte[]{4, 5, 6}))

@@ -13,18 +13,18 @@ class ArchiveDateXmlTest extends AbstractXmlSerializationTestSuite<ArchiveDate> 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
-    protected Class<ArchiveDate> type() {
+    public Class<ArchiveDate> type() {
         return ArchiveDate.class;
     }
 
     @Override
-    protected ArchiveDate createDefault() {
+    public ArchiveDate createDefault() {
 
         return ArchiveDate.builder().value(FIXED_TIME).build();
     }
 
     @Override
-    protected ArchiveDate createVariant() {
+    public ArchiveDate createVariant() {
 
         return ArchiveDate.builder().value(FIXED_TIME.plusDays(1)).build();
     }

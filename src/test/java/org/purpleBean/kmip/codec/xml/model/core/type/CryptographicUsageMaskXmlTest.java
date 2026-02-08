@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CryptographicUsageMaskXmlTest extends AbstractXmlSerializationTestSuite<CryptographicUsageMask> {
 
     @Override
-    protected Class<CryptographicUsageMask> type() {
+    public Class<CryptographicUsageMask> type() {
         return CryptographicUsageMask.class;
     }
 
     @Override
-    protected CryptographicUsageMask createDefault() {
+    public CryptographicUsageMask createDefault() {
         return CryptographicUsageMask.builder().value(10).build();
     }
 
     @Override
-    protected CryptographicUsageMask createVariant() {
+    public CryptographicUsageMask createVariant() {
         return CryptographicUsageMask.builder().value(100).build();
     }
 }

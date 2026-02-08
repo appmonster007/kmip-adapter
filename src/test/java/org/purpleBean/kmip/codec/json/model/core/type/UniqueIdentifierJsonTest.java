@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class UniqueIdentifierJsonTest extends AbstractJsonSerializationTestSuite<UniqueIdentifier> {
 
     @Override
-    protected Class<UniqueIdentifier> type() {
+    public Class<UniqueIdentifier> type() {
         return UniqueIdentifier.class;
     }
 
     @Override
-    protected UniqueIdentifier createDefault() {
+    public UniqueIdentifier createDefault() {
         return UniqueIdentifier.builder().value("FIXED_STRING").build();
     }
 
     @Override
-    protected UniqueIdentifier createVariant() {
+    public UniqueIdentifier createVariant() {
         return UniqueIdentifier.builder().value("VARIANT_STRING").build();
     }
 }

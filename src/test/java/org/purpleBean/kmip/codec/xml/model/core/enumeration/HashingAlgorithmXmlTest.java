@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("HashingAlgorithm XML Serialization")
 class HashingAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<HashingAlgorithm> {
     @Override
-    protected Class<HashingAlgorithm> type() {
+    public Class<HashingAlgorithm> type() {
         return HashingAlgorithm.class;
     }
 
     @Override
-    protected HashingAlgorithm createDefault() {
+    public HashingAlgorithm createDefault() {
         return HashingAlgorithm.Standard.MD2.inst();
     }
 
     @Override
-    protected HashingAlgorithm createVariant() {
+    public HashingAlgorithm createVariant() {
         return HashingAlgorithm.Standard.MD4.inst();
     }
 }

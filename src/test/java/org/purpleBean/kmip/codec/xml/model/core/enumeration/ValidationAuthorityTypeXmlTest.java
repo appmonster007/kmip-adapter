@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ValidationAuthorityType XML Serialization")
 class ValidationAuthorityTypeXmlTest extends AbstractXmlSerializationTestSuite<ValidationAuthorityType> {
     @Override
-    protected Class<ValidationAuthorityType> type() {
+    public Class<ValidationAuthorityType> type() {
         return ValidationAuthorityType.class;
     }
 
     @Override
-    protected ValidationAuthorityType createDefault() {
+    public ValidationAuthorityType createDefault() {
         return ValidationAuthorityType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected ValidationAuthorityType createVariant() {
+    public ValidationAuthorityType createVariant() {
         return ValidationAuthorityType.Standard.NIST_CMVP.inst();
     }
 }

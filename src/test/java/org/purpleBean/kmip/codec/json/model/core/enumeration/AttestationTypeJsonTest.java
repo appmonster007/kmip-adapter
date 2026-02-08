@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("AttestationType JSON Serialization")
 class AttestationTypeJsonTest extends AbstractJsonSerializationTestSuite<AttestationType> {
     @Override
-    protected Class<AttestationType> type() {
+    public Class<AttestationType> type() {
         return AttestationType.class;
     }
 
     @Override
-    protected AttestationType createDefault() {
+    public AttestationType createDefault() {
         return AttestationType.Standard.TPM_QUOTE.inst();
     }
 
     @Override
-    protected AttestationType createVariant() {
+    public AttestationType createVariant() {
         return AttestationType.Standard.TCG_INTEGRITY_REPORT.inst();
     }
 }

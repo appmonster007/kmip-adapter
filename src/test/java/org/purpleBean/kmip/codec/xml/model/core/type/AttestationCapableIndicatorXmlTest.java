@@ -14,17 +14,17 @@ class AttestationCapableIndicatorXmlTest extends AbstractXmlSerializationTestSui
     }
 
     @Override
-    protected Class<AttestationCapableIndicator> type() {
+    public Class<AttestationCapableIndicator> type() {
         return AttestationCapableIndicator.class;
     }
 
     @Override
-    protected AttestationCapableIndicator createDefault() {
+    public AttestationCapableIndicator createDefault() {
         return AttestationCapableIndicator.of(true);
     }
 
     @Override
-    protected AttestationCapableIndicator createVariant() {
+    public AttestationCapableIndicator createVariant() {
         return AttestationCapableIndicator.of(false);
     }
 }

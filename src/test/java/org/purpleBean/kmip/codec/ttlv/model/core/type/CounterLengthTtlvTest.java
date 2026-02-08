@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class CounterLengthTtlvTest extends AbstractTtlvSerializationTestSuite<CounterLength> {
 
     @Override
-    protected Class<CounterLength> type() {
+    public Class<CounterLength> type() {
         return CounterLength.class;
     }
 
     @Override
-    protected CounterLength createDefault() {
+    public CounterLength createDefault() {
         return CounterLength.of(128);
     }
 
     @Override
-    protected CounterLength createVariant() {
+    public CounterLength createVariant() {
         return CounterLength.of(256);
     }
 }

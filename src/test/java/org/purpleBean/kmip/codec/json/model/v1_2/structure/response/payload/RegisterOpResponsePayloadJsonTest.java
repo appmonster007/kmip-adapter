@@ -16,12 +16,12 @@ class RegisterOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSui
     }
 
     @Override
-    protected Class<RegisterOpResponsePayload> type() {
+    public Class<RegisterOpResponsePayload> type() {
         return RegisterOpResponsePayload.class;
     }
 
     @Override
-    protected RegisterOpResponsePayload createDefault() {
+    public RegisterOpResponsePayload createDefault() {
         return RegisterOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class RegisterOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSui
     }
 
     @Override
-    protected RegisterOpResponsePayload createVariant() {
+    public RegisterOpResponsePayload createVariant() {
         return RegisterOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .build();

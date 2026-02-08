@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ValidityIndicator JSON Serialization")
 class ValidityIndicatorJsonTest extends AbstractJsonSerializationTestSuite<ValidityIndicator> {
     @Override
-    protected Class<ValidityIndicator> type() {
+    public Class<ValidityIndicator> type() {
         return ValidityIndicator.class;
     }
 
     @Override
-    protected ValidityIndicator createDefault() {
+    public ValidityIndicator createDefault() {
         return ValidityIndicator.Standard.VALID.inst();
     }
 
     @Override
-    protected ValidityIndicator createVariant() {
+    public ValidityIndicator createVariant() {
         return ValidityIndicator.Standard.INVALID.inst();
     }
 }

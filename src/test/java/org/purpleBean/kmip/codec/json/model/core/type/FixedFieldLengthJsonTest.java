@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class FixedFieldLengthJsonTest extends AbstractJsonSerializationTestSuite<FixedFieldLength> {
 
     @Override
-    protected Class<FixedFieldLength> type() {
+    public Class<FixedFieldLength> type() {
         return FixedFieldLength.class;
     }
 
     @Override
-    protected FixedFieldLength createDefault() {
+    public FixedFieldLength createDefault() {
         return FixedFieldLength.of(128);
     }
 
     @Override
-    protected FixedFieldLength createVariant() {
+    public FixedFieldLength createVariant() {
         return FixedFieldLength.of(256);
     }
 }

@@ -17,12 +17,12 @@ class SignatureVerifyOpResponsePayloadXmlTest extends AbstractXmlSerializationTe
     }
 
     @Override
-    protected Class<SignatureVerifyOpResponsePayload> type() {
+    public Class<SignatureVerifyOpResponsePayload> type() {
         return SignatureVerifyOpResponsePayload.class;
     }
 
     @Override
-    protected SignatureVerifyOpResponsePayload createDefault() {
+    public SignatureVerifyOpResponsePayload createDefault() {
         return SignatureVerifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.VALID))
@@ -31,7 +31,7 @@ class SignatureVerifyOpResponsePayloadXmlTest extends AbstractXmlSerializationTe
     }
 
     @Override
-    protected SignatureVerifyOpResponsePayload createVariant() {
+    public SignatureVerifyOpResponsePayload createVariant() {
         return SignatureVerifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.INVALID))

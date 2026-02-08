@@ -16,12 +16,12 @@ class PublicKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PublicKey> {
     }
 
     @Override
-    protected Class<PublicKey> type() {
+    public Class<PublicKey> type() {
         return PublicKey.class;
     }
 
     @Override
-    protected PublicKey createDefault() {
+    public PublicKey createDefault() {
         return PublicKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
@@ -30,7 +30,7 @@ class PublicKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PublicKey> {
     }
 
     @Override
-    protected PublicKey createVariant() {
+    public PublicKey createVariant() {
         return PublicKey.builder()
                 .keyBlock(KeyBlock.builder()
                         .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())

@@ -10,12 +10,12 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class TransparentEcPublicKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentEcPublicKey> {
 
     @Override
-    protected Class<TransparentEcPublicKey> type() {
+    public Class<TransparentEcPublicKey> type() {
         return TransparentEcPublicKey.class;
     }
 
     @Override
-    protected TransparentEcPublicKey createDefault() {
+    public TransparentEcPublicKey createDefault() {
         return TransparentEcPublicKey.builder()
                 .recommendedCurve(RecommendedCurve.Standard.P_192.inst())
                 .qString(QString.of(new byte[]{0x01, 0x02, 0x03}))
@@ -23,7 +23,7 @@ class TransparentEcPublicKeyJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected TransparentEcPublicKey createVariant() {
+    public TransparentEcPublicKey createVariant() {
         return TransparentEcPublicKey.builder()
                 .recommendedCurve(RecommendedCurve.Standard.P_224.inst())
                 .qString(QString.of(new byte[]{0x04, 0x05, 0x06}))

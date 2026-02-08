@@ -22,12 +22,12 @@ class VendorExtensionXmlTest extends AbstractXmlSerializationTestSuite<VendorExt
     }
 
     @Override
-    protected Class<VendorExtension> type() {
+    public Class<VendorExtension> type() {
         return VendorExtension.class;
     }
 
     @Override
-    protected VendorExtension createDefault() {
+    public VendorExtension createDefault() {
         return VendorExtension.builder()
                 .ttlvDataType(TtlvDataType.ofTextString(
                         KmipTag.Standard.UNIQUE_IDENTIFIER,
@@ -37,7 +37,7 @@ class VendorExtensionXmlTest extends AbstractXmlSerializationTestSuite<VendorExt
     }
 
     @Override
-    protected VendorExtension createVariant() {
+    public VendorExtension createVariant() {
         return VendorExtension.builder()
                 .ttlvDataType(TtlvDataType.ofStructure(
                         KmipTag.register(0x540124, "0x540124", Set.of(KmipSpec.V1_2)),

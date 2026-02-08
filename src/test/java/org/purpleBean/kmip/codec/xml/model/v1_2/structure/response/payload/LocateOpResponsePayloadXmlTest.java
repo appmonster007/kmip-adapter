@@ -15,19 +15,19 @@ class LocateOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<L
     }
 
     @Override
-    protected Class<LocateOpResponsePayload> type() {
+    public Class<LocateOpResponsePayload> type() {
         return LocateOpResponsePayload.class;
     }
 
     @Override
-    protected LocateOpResponsePayload createDefault() {
+    public LocateOpResponsePayload createDefault() {
         return LocateOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected LocateOpResponsePayload createVariant() {
+    public LocateOpResponsePayload createVariant() {
         return LocateOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))

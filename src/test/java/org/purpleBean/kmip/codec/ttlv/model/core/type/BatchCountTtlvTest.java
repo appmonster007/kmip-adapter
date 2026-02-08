@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class BatchCountTtlvTest extends AbstractTtlvSerializationTestSuite<BatchCount> {
 
     @Override
-    protected Class<BatchCount> type() {
+    public Class<BatchCount> type() {
         return BatchCount.class;
     }
 
     @Override
-    protected BatchCount createDefault() {
+    public BatchCount createDefault() {
         return BatchCount.builder().value(5).build();
     }
 
     @Override
-    protected BatchCount createVariant() {
+    public BatchCount createVariant() {
         return BatchCount.builder().value(10).build();
     }
 }

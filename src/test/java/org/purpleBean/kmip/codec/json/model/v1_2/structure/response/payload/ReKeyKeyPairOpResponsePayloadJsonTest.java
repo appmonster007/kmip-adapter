@@ -18,12 +18,12 @@ class ReKeyKeyPairOpResponsePayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected Class<ReKeyKeyPairOpResponsePayload> type() {
+    public Class<ReKeyKeyPairOpResponsePayload> type() {
         return ReKeyKeyPairOpResponsePayload.class;
     }
 
     @Override
-    protected ReKeyKeyPairOpResponsePayload createDefault() {
+    public ReKeyKeyPairOpResponsePayload createDefault() {
         return ReKeyKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid").build())
@@ -33,7 +33,7 @@ class ReKeyKeyPairOpResponsePayloadJsonTest extends AbstractJsonSerializationTes
     }
 
     @Override
-    protected ReKeyKeyPairOpResponsePayload createVariant() {
+    public ReKeyKeyPairOpResponsePayload createVariant() {
         return ReKeyKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid2").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid2").build())

@@ -15,19 +15,19 @@ class ActivateOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSui
     }
 
     @Override
-    protected Class<ActivateOpResponsePayload> type() {
+    public Class<ActivateOpResponsePayload> type() {
         return ActivateOpResponsePayload.class;
     }
 
     @Override
-    protected ActivateOpResponsePayload createDefault() {
+    public ActivateOpResponsePayload createDefault() {
         return ActivateOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected ActivateOpResponsePayload createVariant() {
+    public ActivateOpResponsePayload createVariant() {
         return ActivateOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

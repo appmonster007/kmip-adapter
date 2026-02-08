@@ -16,12 +16,12 @@ class CancelOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected Class<CancelOpResponsePayload> type() {
+    public Class<CancelOpResponsePayload> type() {
         return CancelOpResponsePayload.class;
     }
 
     @Override
-    protected CancelOpResponsePayload createDefault() {
+    public CancelOpResponsePayload createDefault() {
         return CancelOpResponsePayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
                 .cancellationResult(CancellationResult.of(CancellationResult.Standard.CANCELED))
@@ -29,7 +29,7 @@ class CancelOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected CancelOpResponsePayload createVariant() {
+    public CancelOpResponsePayload createVariant() {
         return CancelOpResponsePayload.builder()
                 .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
                 .cancellationResult(CancellationResult.of(CancellationResult.Standard.UNABLE_TO_CANCEL))

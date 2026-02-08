@@ -15,19 +15,19 @@ class DeviceCredentialJsonTest extends AbstractJsonSerializationTestSuite<Device
     }
 
     @Override
-    protected Class<DeviceCredential> type() {
+    public Class<DeviceCredential> type() {
         return DeviceCredential.class;
     }
 
     @Override
-    protected DeviceCredential createDefault() {
+    public DeviceCredential createDefault() {
         return DeviceCredential.builder()
                 .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number"))
                 .build();
     }
 
     @Override
-    protected DeviceCredential createVariant() {
+    public DeviceCredential createVariant() {
         return DeviceCredential.builder()
                 .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number-variant"))
                 .build();

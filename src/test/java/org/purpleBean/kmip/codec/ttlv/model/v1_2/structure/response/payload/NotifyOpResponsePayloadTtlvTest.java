@@ -14,18 +14,18 @@ class NotifyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite
     }
 
     @Override
-    protected Class<NotifyOpResponsePayload> type() {
+    public Class<NotifyOpResponsePayload> type() {
         return NotifyOpResponsePayload.class;
     }
 
     @Override
-    protected NotifyOpResponsePayload createDefault() {
+    public NotifyOpResponsePayload createDefault() {
         return NotifyOpResponsePayload.builder()
                 .build();
     }
 
     @Override
-    protected NotifyOpResponsePayload createVariant() {
+    public NotifyOpResponsePayload createVariant() {
         return NotifyOpResponsePayload.builder()
                 .build();
     }

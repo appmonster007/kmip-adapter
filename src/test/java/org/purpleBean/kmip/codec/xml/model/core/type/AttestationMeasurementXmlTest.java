@@ -16,17 +16,17 @@ class AttestationMeasurementXmlTest extends AbstractXmlSerializationTestSuite<At
     }
 
     @Override
-    protected Class<AttestationMeasurement> type() {
+    public Class<AttestationMeasurement> type() {
         return AttestationMeasurement.class;
     }
 
     @Override
-    protected AttestationMeasurement createDefault() {
+    public AttestationMeasurement createDefault() {
         return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
     }
 
     @Override
-    protected AttestationMeasurement createVariant() {
+    public AttestationMeasurement createVariant() {
         return AttestationMeasurement.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
     }
 }

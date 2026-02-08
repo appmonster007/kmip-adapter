@@ -16,12 +16,12 @@ class CreateOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected Class<CreateOpRequestPayload> type() {
+    public Class<CreateOpRequestPayload> type() {
         return CreateOpRequestPayload.class;
     }
 
     @Override
-    protected CreateOpRequestPayload createDefault() {
+    public CreateOpRequestPayload createDefault() {
         return CreateOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .templateAttribute(TemplateAttribute.builder().build())
@@ -29,7 +29,7 @@ class CreateOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     }
 
     @Override
-    protected CreateOpRequestPayload createVariant() {
+    public CreateOpRequestPayload createVariant() {
         return CreateOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
                 .templateAttribute(TemplateAttribute.builder().build())

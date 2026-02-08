@@ -19,12 +19,12 @@ class GetOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Ge
     }
 
     @Override
-    protected Class<GetOpResponsePayload> type() {
+    public Class<GetOpResponsePayload> type() {
         return GetOpResponsePayload.class;
     }
 
     @Override
-    protected GetOpResponsePayload createDefault() {
+    public GetOpResponsePayload createDefault() {
         return GetOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
@@ -37,7 +37,7 @@ class GetOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Ge
     }
 
     @Override
-    protected GetOpResponsePayload createVariant() {
+    public GetOpResponsePayload createVariant() {
         return GetOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))

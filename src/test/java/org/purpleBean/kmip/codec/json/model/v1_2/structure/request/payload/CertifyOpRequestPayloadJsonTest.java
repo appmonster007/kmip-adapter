@@ -18,12 +18,12 @@ class CertifyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected Class<CertifyOpRequestPayload> type() {
+    public Class<CertifyOpRequestPayload> type() {
         return CertifyOpRequestPayload.class;
     }
 
     @Override
-    protected CertifyOpRequestPayload createDefault() {
+    public CertifyOpRequestPayload createDefault() {
         return CertifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
@@ -33,7 +33,7 @@ class CertifyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite
     }
 
     @Override
-    protected CertifyOpRequestPayload createVariant() {
+    public CertifyOpRequestPayload createVariant() {
         return CertifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .certificateRequestType(CertificateRequestType.Standard.PEM.inst())

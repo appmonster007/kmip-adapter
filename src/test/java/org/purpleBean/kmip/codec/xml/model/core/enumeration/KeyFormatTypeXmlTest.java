@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("KeyFormatType XML Serialization")
 class KeyFormatTypeXmlTest extends AbstractXmlSerializationTestSuite<KeyFormatType> {
     @Override
-    protected Class<KeyFormatType> type() {
+    public Class<KeyFormatType> type() {
         return KeyFormatType.class;
     }
 
     @Override
-    protected KeyFormatType createDefault() {
+    public KeyFormatType createDefault() {
         return KeyFormatType.Standard.RAW.inst();
     }
 
     @Override
-    protected KeyFormatType createVariant() {
+    public KeyFormatType createVariant() {
         return KeyFormatType.Standard.OPAQUE.inst();
     }
 }

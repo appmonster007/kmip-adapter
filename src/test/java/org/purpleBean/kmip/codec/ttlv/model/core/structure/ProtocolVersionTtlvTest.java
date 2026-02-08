@@ -8,22 +8,22 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class ProtocolVersionTtlvTest extends AbstractTtlvSerializationTestSuite<ProtocolVersion> {
 
     @Override
-    protected Class<ProtocolVersion> type() {
+    public Class<ProtocolVersion> type() {
         return ProtocolVersion.class;
     }
 
     @Override
-    protected ProtocolVersion createDefault() {
+    public ProtocolVersion createDefault() {
         return ProtocolVersion.of(1, 2);
     }
 
     @Override
-    protected ProtocolVersion createVariant() {
+    public ProtocolVersion createVariant() {
         return ProtocolVersion.of(2, 0);
     }
 
     @Override
-    protected boolean unsupportedSpecShouldFailSerialize() {
+    public boolean unsupportedSpecShouldFailSerialize() {
         return false;
     }
 }

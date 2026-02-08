@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("WrappingMethod JSON Serialization")
 class WrappingMethodJsonTest extends AbstractJsonSerializationTestSuite<WrappingMethod> {
     @Override
-    protected Class<WrappingMethod> type() {
+    public Class<WrappingMethod> type() {
         return WrappingMethod.class;
     }
 
     @Override
-    protected WrappingMethod createDefault() {
+    public WrappingMethod createDefault() {
         return WrappingMethod.Standard.ENCRYPT.inst();
     }
 
     @Override
-    protected WrappingMethod createVariant() {
+    public WrappingMethod createVariant() {
         return WrappingMethod.Standard.MAC_SIGN.inst();
     }
 }

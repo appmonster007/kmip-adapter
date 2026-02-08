@@ -16,12 +16,12 @@ class MacVerifyOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuit
     }
 
     @Override
-    protected Class<MacVerifyOpResponsePayload> type() {
+    public Class<MacVerifyOpResponsePayload> type() {
         return MacVerifyOpResponsePayload.class;
     }
 
     @Override
-    protected MacVerifyOpResponsePayload createDefault() {
+    public MacVerifyOpResponsePayload createDefault() {
         return MacVerifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.VALID))
@@ -29,7 +29,7 @@ class MacVerifyOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuit
     }
 
     @Override
-    protected MacVerifyOpResponsePayload createVariant() {
+    public MacVerifyOpResponsePayload createVariant() {
         return MacVerifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.INVALID))

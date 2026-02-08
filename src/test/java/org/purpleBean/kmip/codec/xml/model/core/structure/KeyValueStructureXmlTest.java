@@ -26,12 +26,12 @@ class KeyValueStructureXmlTest extends AbstractXmlSerializationTestSuite<KeyValu
     }
 
     @Override
-    protected Class<KeyValueStructure> type() {
+    public Class<KeyValueStructure> type() {
         return KeyValueStructure.class;
     }
 
     @Override
-    protected KeyValueStructure createDefault() {
+    public KeyValueStructure createDefault() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x01, 0x02, 0x03});
         KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute", AttributeValue.ofTextString("test-value"));
         KmipAttribute attribute2 = ActivationDate.of(FIXED_TIME);
@@ -42,7 +42,7 @@ class KeyValueStructureXmlTest extends AbstractXmlSerializationTestSuite<KeyValu
     }
 
     @Override
-    protected KeyValueStructure createVariant() {
+    public KeyValueStructure createVariant() {
         KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[]{0x04, 0x05, 0x06});
         KmipAttribute attribute1 = CustomAttribute.of("x-test-attribute-2", AttributeValue.ofTextString("test-value-2"));
         KmipAttribute attribute2 = ActivationDate.of(FIXED_TIME.plusDays(10));

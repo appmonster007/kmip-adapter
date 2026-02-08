@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class SerialNumberXmlTest extends AbstractXmlSerializationTestSuite<SerialNumber> {
 
     @Override
-    protected Class<SerialNumber> type() {
+    public Class<SerialNumber> type() {
         return SerialNumber.class;
     }
 
     @Override
-    protected SerialNumber createDefault() {
+    public SerialNumber createDefault() {
         return SerialNumber.builder().value("12345").build();
     }
 
     @Override
-    protected SerialNumber createVariant() {
+    public SerialNumber createVariant() {
         return SerialNumber.builder().value("67890").build();
     }
 }

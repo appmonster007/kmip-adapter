@@ -17,12 +17,12 @@ class TemplateAttributeXmlTest extends AbstractXmlSerializationTestSuite<Templat
     }
 
     @Override
-    protected Class<TemplateAttribute> type() {
+    public Class<TemplateAttribute> type() {
         return TemplateAttribute.class;
     }
 
     @Override
-    protected TemplateAttribute createDefault() {
+    public TemplateAttribute createDefault() {
         return TemplateAttribute.builder()
                 .name(Name.of(
                         NameValue.of("test-name"),
@@ -32,7 +32,7 @@ class TemplateAttributeXmlTest extends AbstractXmlSerializationTestSuite<Templat
     }
 
     @Override
-    protected TemplateAttribute createVariant() {
+    public TemplateAttribute createVariant() {
         return TemplateAttribute.builder()
                 .name(Name.of(
                         NameValue.of("test-name-2"),

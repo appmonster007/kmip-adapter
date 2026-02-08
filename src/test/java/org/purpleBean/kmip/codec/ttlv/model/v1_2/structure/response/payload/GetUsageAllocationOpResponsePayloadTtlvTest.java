@@ -15,19 +15,19 @@ class GetUsageAllocationOpResponsePayloadTtlvTest extends AbstractTtlvSerializat
     }
 
     @Override
-    protected Class<GetUsageAllocationOpResponsePayload> type() {
+    public Class<GetUsageAllocationOpResponsePayload> type() {
         return GetUsageAllocationOpResponsePayload.class;
     }
 
     @Override
-    protected GetUsageAllocationOpResponsePayload createDefault() {
+    public GetUsageAllocationOpResponsePayload createDefault() {
         return GetUsageAllocationOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
                 .build();
     }
 
     @Override
-    protected GetUsageAllocationOpResponsePayload createVariant() {
+    public GetUsageAllocationOpResponsePayload createVariant() {
         return GetUsageAllocationOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
                 .build();

@@ -17,12 +17,12 @@ class PrivateKeyTemplateAttributeXmlTest extends AbstractXmlSerializationTestSui
     }
 
     @Override
-    protected Class<PrivateKeyTemplateAttribute> type() {
+    public Class<PrivateKeyTemplateAttribute> type() {
         return PrivateKeyTemplateAttribute.class;
     }
 
     @Override
-    protected PrivateKeyTemplateAttribute createDefault() {
+    public PrivateKeyTemplateAttribute createDefault() {
         return PrivateKeyTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute"))
@@ -32,7 +32,7 @@ class PrivateKeyTemplateAttributeXmlTest extends AbstractXmlSerializationTestSui
     }
 
     @Override
-    protected PrivateKeyTemplateAttribute createVariant() {
+    public PrivateKeyTemplateAttribute createVariant() {
         return PrivateKeyTemplateAttribute.builder()
                 .attribute(Attribute.builder()
                         .attributeName(AttributeName.of("test-attribute-variant"))

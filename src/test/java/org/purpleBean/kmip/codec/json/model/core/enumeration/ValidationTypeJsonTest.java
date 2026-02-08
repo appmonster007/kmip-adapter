@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ValidationType JSON Serialization")
 class ValidationTypeJsonTest extends AbstractJsonSerializationTestSuite<ValidationType> {
     @Override
-    protected Class<ValidationType> type() {
+    public Class<ValidationType> type() {
         return ValidationType.class;
     }
 
     @Override
-    protected ValidationType createDefault() {
+    public ValidationType createDefault() {
         return ValidationType.Standard.UNSPECIFIED.inst();
     }
 
     @Override
-    protected ValidationType createVariant() {
+    public ValidationType createVariant() {
         return ValidationType.Standard.HARDWARE.inst();
     }
 }

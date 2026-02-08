@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class DeviceIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<DeviceIdentifier> {
 
     @Override
-    protected Class<DeviceIdentifier> type() {
+    public Class<DeviceIdentifier> type() {
         return DeviceIdentifier.class;
     }
 
     @Override
-    protected DeviceIdentifier createDefault() {
+    public DeviceIdentifier createDefault() {
         return DeviceIdentifier.builder().value("test-device-id").build();
     }
 
     @Override
-    protected DeviceIdentifier createVariant() {
+    public DeviceIdentifier createVariant() {
         return DeviceIdentifier.builder().value("another-device-id").build();
     }
 }

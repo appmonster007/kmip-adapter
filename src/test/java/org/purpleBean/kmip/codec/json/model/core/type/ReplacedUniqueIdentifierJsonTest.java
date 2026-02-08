@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class ReplacedUniqueIdentifierJsonTest extends AbstractJsonSerializationTestSuite<ReplacedUniqueIdentifier> {
 
     @Override
-    protected Class<ReplacedUniqueIdentifier> type() {
+    public Class<ReplacedUniqueIdentifier> type() {
         return ReplacedUniqueIdentifier.class;
     }
 
     @Override
-    protected ReplacedUniqueIdentifier createDefault() {
+    public ReplacedUniqueIdentifier createDefault() {
         return ReplacedUniqueIdentifier.builder().value("test-id").build();
     }
 
     @Override
-    protected ReplacedUniqueIdentifier createVariant() {
+    public ReplacedUniqueIdentifier createVariant() {
         return ReplacedUniqueIdentifier.builder().value("another-id").build();
     }
 }

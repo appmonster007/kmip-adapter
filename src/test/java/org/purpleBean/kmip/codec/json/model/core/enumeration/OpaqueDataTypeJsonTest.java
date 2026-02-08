@@ -10,17 +10,17 @@ import java.util.Set;
 @DisplayName("OpaqueDataType JSON Serialization")
 class OpaqueDataTypeJsonTest extends AbstractJsonSerializationTestSuite<OpaqueDataType> {
     @Override
-    protected Class<OpaqueDataType> type() {
+    public Class<OpaqueDataType> type() {
         return OpaqueDataType.class;
     }
 
     @Override
-    protected OpaqueDataType createDefault() {
+    public OpaqueDataType createDefault() {
         return OpaqueDataType.register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
-    protected OpaqueDataType createVariant() {
+    public OpaqueDataType createVariant() {
         return OpaqueDataType.register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

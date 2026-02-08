@@ -15,19 +15,19 @@ class GetOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Get
     }
 
     @Override
-    protected Class<GetOpRequestPayload> type() {
+    public Class<GetOpRequestPayload> type() {
         return GetOpRequestPayload.class;
     }
 
     @Override
-    protected GetOpRequestPayload createDefault() {
+    public GetOpRequestPayload createDefault() {
         return GetOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
                 .build();
     }
 
     @Override
-    protected GetOpRequestPayload createVariant() {
+    public GetOpRequestPayload createVariant() {
         return GetOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("test-uid-variant"))
                 .build();

@@ -1,7 +1,6 @@
 package org.purpleBean.kmip.codec.xml.model.core.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
@@ -9,20 +8,16 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
 import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
-import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("SimpleRequestMessage XML Serialization")
 class SimpleRequestMessageXmlTest extends AbstractXmlSerializationTestSuite<SimpleRequestMessage> {
 
     @Override
-    protected Class<SimpleRequestMessage> type() {
+    public Class<SimpleRequestMessage> type() {
         return SimpleRequestMessage.class;
     }
 
     @Override
-    protected SimpleRequestMessage createDefault() {
+    public SimpleRequestMessage createDefault() {
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(1, 2))
                 .build();
@@ -36,7 +31,7 @@ class SimpleRequestMessageXmlTest extends AbstractXmlSerializationTestSuite<Simp
     }
 
     @Override
-    protected SimpleRequestMessage createVariant() {
+    public SimpleRequestMessage createVariant() {
         SimpleRequestHeader header = SimpleRequestHeader.builder()
                 .protocolVersion(ProtocolVersion.of(2, 0))
                 .build();
@@ -50,40 +45,7 @@ class SimpleRequestMessageXmlTest extends AbstractXmlSerializationTestSuite<Simp
     }
 
     @Override
-    protected boolean unsupportedSpecShouldFailSerialize() {
+    public boolean unsupportedSpecShouldFailSerialize() {
         return false; // model supports UnsupportedVersion
-    }
-
-    // Override to avoid strict equality on requestBatchItemErrors which may deserialize as [null]
-    @Test
-    @DisplayName("XML: round-trip default instance (ignore errors list)")
-    void xml_roundTrip_default_custom() throws Exception {
-        SimpleRequestMessage original = createDefault();
-        String xml = mapper().writeValueAsString(original);
-        SimpleRequestMessage restored = mapper().readValue(xml, SimpleRequestMessage.class);
-        // Compare significant fields
-        assertThat(restored.getRequestHeader())
-                .isEqualTo(original.getRequestHeader());
-        assertThat(restored.getRequestBatchItems())
-                .isEqualTo(original.getRequestBatchItems());
-    }
-
-    @Test
-    @DisplayName("XML: round-trip variant instance (ignore errors list)")
-    void xml_roundTrip_variant_custom() throws Exception {
-        SimpleRequestMessage original = createVariant();
-        String xml = mapper().writeValueAsString(original);
-        SimpleRequestMessage restored = mapper().readValue(xml, SimpleRequestMessage.class);
-        assertThat(restored.getRequestHeader())
-                .isEqualTo(original.getRequestHeader());
-        assertThat(restored.getRequestBatchItems())
-                .isEqualTo(original.getRequestBatchItems());
-    }
-
-    @Override
-    protected boolean equalsRelaxed(SimpleRequestMessage a, SimpleRequestMessage b) {
-        if (a == null || b == null) return a == b;
-        return Objects.equals(a.getRequestHeader().getProtocolVersion(), b.getRequestHeader().getProtocolVersion())
-                && Objects.equals(a.getRequestBatchItems().size(), b.getRequestBatchItems().size());
     }
 }

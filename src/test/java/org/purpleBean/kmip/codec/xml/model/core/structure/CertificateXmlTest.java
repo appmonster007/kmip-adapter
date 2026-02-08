@@ -16,12 +16,12 @@ class CertificateXmlTest extends AbstractXmlSerializationTestSuite<Certificate> 
     }
 
     @Override
-    protected Class<Certificate> type() {
+    public Class<Certificate> type() {
         return Certificate.class;
     }
 
     @Override
-    protected Certificate createDefault() {
+    public Certificate createDefault() {
         return Certificate.builder()
                 .certificateType(CertificateType.Standard.X_509.inst())
                 .certificateValue(CertificateValue.of(new byte[0]))
@@ -29,7 +29,7 @@ class CertificateXmlTest extends AbstractXmlSerializationTestSuite<Certificate> 
     }
 
     @Override
-    protected Certificate createVariant() {
+    public Certificate createVariant() {
         return Certificate.builder()
                 .certificateType(CertificateType.Standard.PGP.inst())
                 .certificateValue(CertificateValue.of(new byte[1]))

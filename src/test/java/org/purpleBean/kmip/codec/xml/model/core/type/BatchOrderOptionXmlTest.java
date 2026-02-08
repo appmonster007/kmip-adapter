@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class BatchOrderOptionXmlTest extends AbstractXmlSerializationTestSuite<BatchOrderOption> {
 
     @Override
-    protected Class<BatchOrderOption> type() {
+    public Class<BatchOrderOption> type() {
         return BatchOrderOption.class;
     }
 
     @Override
-    protected BatchOrderOption createDefault() {
+    public BatchOrderOption createDefault() {
         return BatchOrderOption.builder().value(true).build();
     }
 
     @Override
-    protected BatchOrderOption createVariant() {
+    public BatchOrderOption createVariant() {
         return BatchOrderOption.builder().value(false).build();
     }
 }

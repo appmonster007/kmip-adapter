@@ -19,12 +19,12 @@ class RecertifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSui
     }
 
     @Override
-    protected Class<RecertifyOpRequestPayload> type() {
+    public Class<RecertifyOpRequestPayload> type() {
         return RecertifyOpRequestPayload.class;
     }
 
     @Override
-    protected RecertifyOpRequestPayload createDefault() {
+    public RecertifyOpRequestPayload createDefault() {
         return RecertifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
@@ -35,7 +35,7 @@ class RecertifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSui
     }
 
     @Override
-    protected RecertifyOpRequestPayload createVariant() {
+    public RecertifyOpRequestPayload createVariant() {
         return RecertifyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
                 .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())

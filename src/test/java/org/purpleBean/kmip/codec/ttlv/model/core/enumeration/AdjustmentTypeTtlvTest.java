@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class AdjustmentTypeTtlvTest extends AbstractTtlvSerializationTestSuite<AdjustmentType> {
 
     @Override
-    protected Class<AdjustmentType> type() {
+    public Class<AdjustmentType> type() {
         return AdjustmentType.class;
     }
 
     @Override
-    protected AdjustmentType createDefault() {
+    public AdjustmentType createDefault() {
         return AdjustmentType.Standard.INCREMENT.inst();
     }
 
     @Override
-    protected AdjustmentType createVariant() {
+    public AdjustmentType createVariant() {
         return AdjustmentType.Standard.DECREMENT.inst();
     }
 }

@@ -21,12 +21,12 @@ class DeriveKeyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSui
     }
 
     @Override
-    protected Class<DeriveKeyOpRequestPayload> type() {
+    public Class<DeriveKeyOpRequestPayload> type() {
         return DeriveKeyOpRequestPayload.class;
     }
 
     @Override
-    protected DeriveKeyOpRequestPayload createDefault() {
+    public DeriveKeyOpRequestPayload createDefault() {
         return DeriveKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
@@ -46,7 +46,7 @@ class DeriveKeyOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSui
     }
 
     @Override
-    protected DeriveKeyOpRequestPayload createVariant() {
+    public DeriveKeyOpRequestPayload createVariant() {
         return DeriveKeyOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())

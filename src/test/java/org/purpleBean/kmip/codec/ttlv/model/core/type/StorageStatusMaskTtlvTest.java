@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 class StorageStatusMaskTtlvTest extends AbstractTtlvSerializationTestSuite<StorageStatusMask> {
 
     @Override
-    protected Class<StorageStatusMask> type() {
+    public Class<StorageStatusMask> type() {
         return StorageStatusMask.class;
     }
 
     @Override
-    protected StorageStatusMask createDefault() {
+    public StorageStatusMask createDefault() {
         return StorageStatusMask.builder().value(1).build();
     }
 
     @Override
-    protected StorageStatusMask createVariant() {
+    public StorageStatusMask createVariant() {
         return StorageStatusMask.builder().value(2).build();
     }
 }

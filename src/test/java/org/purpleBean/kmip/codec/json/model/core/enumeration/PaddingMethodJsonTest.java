@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("PaddingMethod JSON Serialization")
 class PaddingMethodJsonTest extends AbstractJsonSerializationTestSuite<PaddingMethod> {
     @Override
-    protected Class<PaddingMethod> type() {
+    public Class<PaddingMethod> type() {
         return PaddingMethod.class;
     }
 
     @Override
-    protected PaddingMethod createDefault() {
+    public PaddingMethod createDefault() {
         return PaddingMethod.Standard.NONE.inst();
     }
 
     @Override
-    protected PaddingMethod createVariant() {
+    public PaddingMethod createVariant() {
         return PaddingMethod.Standard.PKCS5.inst();
     }
 }

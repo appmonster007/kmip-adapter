@@ -20,12 +20,12 @@ class LocateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected Class<LocateOpRequestPayload> type() {
+    public Class<LocateOpRequestPayload> type() {
         return LocateOpRequestPayload.class;
     }
 
     @Override
-    protected LocateOpRequestPayload createDefault() {
+    public LocateOpRequestPayload createDefault() {
         return LocateOpRequestPayload.builder()
                 .maximumItems(MaximumItems.of(10))
                 .storageStatusMask(StorageStatusMask.of(1))
@@ -35,7 +35,7 @@ class LocateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<
     }
 
     @Override
-    protected LocateOpRequestPayload createVariant() {
+    public LocateOpRequestPayload createVariant() {
         return LocateOpRequestPayload.builder()
                 .maximumItems(MaximumItems.of(20))
                 .storageStatusMask(StorageStatusMask.of(2))

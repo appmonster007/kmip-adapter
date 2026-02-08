@@ -18,12 +18,12 @@ class CredentialJsonTest extends AbstractJsonSerializationTestSuite<Credential> 
     }
 
     @Override
-    protected Class<Credential> type() {
+    public Class<Credential> type() {
         return Credential.class;
     }
 
     @Override
-    protected Credential createDefault() {
+    public Credential createDefault() {
         return Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()
@@ -34,7 +34,7 @@ class CredentialJsonTest extends AbstractJsonSerializationTestSuite<Credential> 
     }
 
     @Override
-    protected Credential createVariant() {
+    public Credential createVariant() {
         return Credential.builder()
                 .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
                 .credentialValue(UsernameAndPassword.builder()

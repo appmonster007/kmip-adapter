@@ -17,19 +17,19 @@ class SimpleResponseHeaderXmlTest extends AbstractXmlSerializationTestSuite<Simp
     }
 
     @Override
-    protected Class<SimpleResponseHeader> type() {
+    public Class<SimpleResponseHeader> type() {
         return SimpleResponseHeader.class;
     }
 
     @Override
-    protected SimpleResponseHeader createDefault() {
+    public SimpleResponseHeader createDefault() {
         return SimpleResponseHeader.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
                 .build();
     }
 
     @Override
-    protected SimpleResponseHeader createVariant() {
+    public SimpleResponseHeader createVariant() {
         return SimpleResponseHeader.builder()
                 .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
                 .build();

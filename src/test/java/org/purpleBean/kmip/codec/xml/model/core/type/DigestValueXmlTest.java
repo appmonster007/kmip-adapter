@@ -8,17 +8,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class DigestValueXmlTest extends AbstractXmlSerializationTestSuite<DigestValue> {
 
     @Override
-    protected Class<DigestValue> type() {
+    public Class<DigestValue> type() {
         return DigestValue.class;
     }
 
     @Override
-    protected DigestValue createDefault() {
+    public DigestValue createDefault() {
         return DigestValue.of(new byte[]{0x01, 0x02, 0x03});
     }
 
     @Override
-    protected DigestValue createVariant() {
+    public DigestValue createVariant() {
         return DigestValue.of(new byte[]{0x04, 0x05, 0x06});
     }
 }

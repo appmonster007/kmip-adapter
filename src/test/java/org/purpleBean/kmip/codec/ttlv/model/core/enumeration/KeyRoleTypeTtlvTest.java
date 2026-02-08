@@ -7,17 +7,17 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("KeyRoleType TTLV Serialization")
 class KeyRoleTypeTtlvTest extends AbstractTtlvSerializationTestSuite<KeyRoleType> {
     @Override
-    protected Class<KeyRoleType> type() {
+    public Class<KeyRoleType> type() {
         return KeyRoleType.class;
     }
 
     @Override
-    protected KeyRoleType createDefault() {
+    public KeyRoleType createDefault() {
         return KeyRoleType.Standard.BDK.inst();
     }
 
     @Override
-    protected KeyRoleType createVariant() {
+    public KeyRoleType createVariant() {
         return KeyRoleType.Standard.CVK.inst();
     }
 }

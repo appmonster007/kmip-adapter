@@ -9,26 +9,26 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class SimpleRequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<SimpleRequestBatchItem> {
 
     @Override
-    protected Class<SimpleRequestBatchItem> type() {
+    public Class<SimpleRequestBatchItem> type() {
         return SimpleRequestBatchItem.class;
     }
 
     @Override
-    protected SimpleRequestBatchItem createDefault() {
+    public SimpleRequestBatchItem createDefault() {
         return SimpleRequestBatchItem.builder()
                 .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
     @Override
-    protected SimpleRequestBatchItem createVariant() {
+    public SimpleRequestBatchItem createVariant() {
         return SimpleRequestBatchItem.builder()
                 .requestPayloadStructure(SimpleRequestPayload.of())
                 .build();
     }
 
     @Override
-    protected boolean unsupportedSpecShouldFailSerialize() {
+    public boolean unsupportedSpecShouldFailSerialize() {
         return false; // model supports UnsupportedVersion
     }
 }
