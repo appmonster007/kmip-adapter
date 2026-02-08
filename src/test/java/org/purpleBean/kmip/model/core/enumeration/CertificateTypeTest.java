@@ -3,7 +3,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CertificateType Domain Tests")
-class CertificateTypeTest extends AbstractKmipEnumerationAttributeTestSuite<CertificateType> {
+class CertificateTypeTest extends AbstractKmipEnumerationTestSuite<CertificateType> implements KmipAttributeTestSuite<CertificateType> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -24,7 +26,7 @@ class CertificateTypeTest extends AbstractKmipEnumerationAttributeTestSuite<Cert
     }
 
     @Override
-    protected CertificateType createDefault() {
+    public CertificateType createDefault() {
         return CertificateType.Standard.X_509.inst();
     }
 
@@ -94,12 +96,17 @@ class CertificateTypeTest extends AbstractKmipEnumerationAttributeTestSuite<Cert
     }
 
     @Override
-    protected void attrEnum_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofEnumeration(CertificateType.Standard.X_509);
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
         // Not applicable as it's not server modifiable
     }
 
     @Override
-    protected void attrEnum_clientModifiable_respectsState() {
+    public void attribute_clientModifiable_respectsState() {
         // Not applicable as it's not client modifiable
     }
 

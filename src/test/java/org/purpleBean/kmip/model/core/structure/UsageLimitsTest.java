@@ -6,16 +6,18 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.UsageLimitsCount;
 import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("UsageLimits Domain Tests")
-class UsageLimitsTest extends AbstractKmipStructureAttributeTestSuite<UsageLimits> {
+class UsageLimitsTest extends AbstractKmipStructureTestSuite<UsageLimits> implements KmipAttributeTestSuite<UsageLimits> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -28,7 +30,7 @@ class UsageLimitsTest extends AbstractKmipStructureAttributeTestSuite<UsageLimit
     }
 
     @Override
-    protected UsageLimits createDefault() {
+    public UsageLimits createDefault() {
         return UsageLimits.builder()
                 .usageLimitsTotal(UsageLimitsTotal.of(100L))
                 .usageLimitsCount(UsageLimitsCount.of(10L))
@@ -54,55 +56,60 @@ class UsageLimitsTest extends AbstractKmipStructureAttributeTestSuite<UsageLimit
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return true;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
+    public State stateForServerModifiableTrue() {
         return null;
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
+    public State stateForServerModifiableFalse() {
         return null;
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
+    public State stateForClientModifiableTrue() {
         return null;
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
+    public State stateForClientModifiableFalse() {
         return null;
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
     }
 }

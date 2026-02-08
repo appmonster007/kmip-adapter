@@ -4,13 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("LastChangeDate Domain Tests")
-class LastChangeDateTest extends AbstractKmipDataTypeAttributeTestSuite<LastChangeDate> {
+class LastChangeDateTest extends AbstractKmipDataTypeTestSuite<LastChangeDate> implements KmipAttributeTestSuite<LastChangeDate> {
+
+    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
     @Override
     protected void setupDefaultSpec() {
@@ -23,8 +26,7 @@ class LastChangeDateTest extends AbstractKmipDataTypeAttributeTestSuite<LastChan
     }
 
     @Override
-    protected LastChangeDate createDefault() {
-        OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+    public LastChangeDate createDefault() {
         return LastChangeDate.builder().value(FIXED_TIME).build();
     }
 
@@ -34,55 +36,62 @@ class LastChangeDateTest extends AbstractKmipDataTypeAttributeTestSuite<LastChan
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return true;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attribute_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofDateTime(FIXED_TIME);
     }
 
     @Override
-    protected void attribute_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always true
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

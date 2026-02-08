@@ -7,14 +7,16 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.AlternativeNameType;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AlternativeNameValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("AlternativeName Domain Tests")
-class AlternativeNameTest extends AbstractKmipStructureAttributeTestSuite<AlternativeName> {
+class AlternativeNameTest extends AbstractKmipStructureTestSuite<AlternativeName> implements KmipAttributeTestSuite<AlternativeName> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -27,11 +29,11 @@ class AlternativeNameTest extends AbstractKmipStructureAttributeTestSuite<Altern
     }
 
     @Override
-    protected AlternativeName createDefault() {
-        return AlternativeName.of(
-                AlternativeNameValue.of("some value"),
-                AlternativeNameType.Standard.EMAIL_ADDRESS.inst()
-        );
+    public AlternativeName createDefault() {
+        return AlternativeName.builder()
+                .alternativeNameValue(AlternativeNameValue.of("test-value"))
+                .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
+                .build();
     }
 
     @Override
@@ -51,55 +53,62 @@ class AlternativeNameTest extends AbstractKmipStructureAttributeTestSuite<Altern
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

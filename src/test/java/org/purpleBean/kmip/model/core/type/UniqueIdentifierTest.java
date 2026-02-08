@@ -4,10 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("UniqueIdentifier Domain Tests")
-class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeTestSuite<UniqueIdentifier> {
+class UniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<UniqueIdentifier> implements KmipAttributeTestSuite<UniqueIdentifier> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,8 +21,8 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeTestSuite<Unique
     }
 
     @Override
-    protected UniqueIdentifier createDefault() {
-        return UniqueIdentifier.builder().value("unique-id-123").build();
+    public UniqueIdentifier createDefault() {
+        return UniqueIdentifier.of("test-uuid");
     }
 
     @Override
@@ -30,53 +31,62 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeAttributeTestSuite<Unique
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return true;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
-    protected void attribute_serverModifiable_respectsState() {
+    @Override
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofTextString("test-uuid");
     }
 
-    protected void attribute_clientModifiable_respectsState() {
+    @Override
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

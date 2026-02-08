@@ -1,6 +1,5 @@
 package org.purpleBean.kmip.model.core.structure;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
@@ -8,12 +7,15 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @DisplayName("CustomAttribute Domain Tests")
-class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<CustomAttribute> {
+class CustomAttributeTest extends AbstractKmipStructureTestSuite<CustomAttribute> implements KmipAttributeTestSuite<CustomAttribute> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -26,8 +28,11 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<Custom
     }
 
     @Override
-    protected CustomAttribute createDefault() {
-        return CustomAttribute.of("x-custom-state", AttributeValue.ofEnumeration(State.Standard.ACTIVE));
+    public CustomAttribute createDefault() {
+        return CustomAttribute.builder()
+                .attributeName(AttributeName.of("x-Custom-Attr"))
+                .attributeValue(AttributeValue.ofInteger(123))
+                .build();
     }
 
     @Override
@@ -42,61 +47,72 @@ class CustomAttributeTest extends AbstractKmipStructureAttributeTestSuite<Custom
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        Assertions.assertThat(values.get(0)).isInstanceOf(AttributeName.class);
-        Assertions.assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
+        assertThat(values.get(0)).isInstanceOf(AttributeName.class);
+        assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
+        return true; // x- attributes are client deletable
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
-        return true;
+    public State stateForServerModifiableTrue() {
+        return null; // x- attributes are not server modifiable
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return State.Standard.ACTIVE.inst();
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // x- attributes are not server modifiable
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return State.Standard.PRE_ACTIVE.inst();
+    public State stateForClientModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // x- attributes are client modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return State.Standard.ACTIVE.inst();
+    public State stateForClientModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return State.Standard.PRE_ACTIVE.inst();
-    }
-
-
-    @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofInteger(123);
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public String expectedAttributeName() {
+        return "x-Custom-Attr";
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
+        // Depends on attribute name prefix (x- vs y-)
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Depends on attribute name prefix (x- vs y-)
     }
 }

@@ -5,12 +5,14 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -23,7 +25,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureAttributeTestSuite<{{A
     }
 
     @Override
-    protected {{ATTRIBUTE_NAME}} createDefault() {
+    public {{ATTRIBUTE_NAME}} createDefault() {
         // TODO: Create a default instance of the attribute structure
         return {{ATTRIBUTE_NAME}}.of();
     }
@@ -47,57 +49,62 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureAttributeTestSuite<{{A
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;  // TODO: Adjust as needed
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;  // TODO: Adjust as needed
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;  // TODO: Adjust as needed
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;  // TODO: Adjust as needed
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;  // TODO: Adjust as needed
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
+    public State stateForServerModifiableTrue() {
         return null;  // TODO: Adjust as needed
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
+    public State stateForServerModifiableFalse() {
         return null;  // TODO: Adjust as needed
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
+    public State stateForClientModifiableTrue() {
         return null;  // TODO: Adjust as needed
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
+    public State stateForClientModifiableFalse() {
         return null; // TODO: Adjust as needed
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
      // TODO: Adjust as needed or remove to use inherited
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_clientModifiable_respectsState() {
      // TODO: Adjust as needed or remove to use inherited
     }
 }

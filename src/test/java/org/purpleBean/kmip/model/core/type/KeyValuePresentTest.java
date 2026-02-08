@@ -4,10 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("KeyValuePresent Domain Tests")
-class KeyValuePresentTest extends AbstractKmipDataTypeAttributeTestSuite<KeyValuePresent> {
+class KeyValuePresentTest extends AbstractKmipDataTypeTestSuite<KeyValuePresent> implements KmipAttributeTestSuite<KeyValuePresent> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,8 +21,8 @@ class KeyValuePresentTest extends AbstractKmipDataTypeAttributeTestSuite<KeyValu
     }
 
     @Override
-    protected KeyValuePresent createDefault() {
-        return KeyValuePresent.of(Boolean.FALSE);
+    public KeyValuePresent createDefault() {
+        return KeyValuePresent.of(true);
     }
 
     @Override
@@ -30,55 +31,62 @@ class KeyValuePresentTest extends AbstractKmipDataTypeAttributeTestSuite<KeyValu
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attribute_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofBoolean(true);
     }
 
     @Override
-    protected void attribute_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

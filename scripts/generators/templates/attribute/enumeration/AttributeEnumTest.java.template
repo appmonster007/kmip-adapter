@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.Set;
 
@@ -12,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -25,7 +27,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{
     }
 
     @Override
-    protected {{ATTRIBUTE_NAME}} createDefault() {
+    public {{ATTRIBUTE_NAME}} createDefault() {
         // TODO: Replace with an actual Standard enum value
         if ({{ATTRIBUTE_NAME}}.Standard.values().length > 0) {
             return {{ATTRIBUTE_NAME}}.Standard.values()[0].inst();
@@ -61,7 +63,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{
         return true; // TODO: Adjust as needed
     }
 
-    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
+    // Implementation of KmipAttributeTestSuite methods
     @Override
     public boolean expectAlwaysPresent() {
         return false; // TODO: Adjust as needed
@@ -108,12 +110,19 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationAttributeTestSuite<{
     }
 
     @Override
-    protected void attrEnum_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        // TODO: Return expected AttributeValue
+        // Example: return AttributeValue.ofEnumeration({{ATTRIBUTE_NAME}}.Standard.values()[0]);
+        return null;
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
         // TODO: Implement if server modifiable
     }
 
     @Override
-    protected void attrEnum_clientModifiable_respectsState() {
+    public void attribute_clientModifiable_respectsState() {
         // TODO: Implement if client modifiable
     }
 

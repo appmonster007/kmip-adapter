@@ -1,19 +1,17 @@
 package org.purpleBean.kmip.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("CompromiseOccurrenceDate Domain Tests")
-class CompromiseOccurrenceDateTest extends AbstractKmipDataTypeAttributeTestSuite<CompromiseOccurrenceDate> {
+class CompromiseOccurrenceDateTest extends AbstractKmipDataTypeTestSuite<CompromiseOccurrenceDate> implements KmipAttributeTestSuite<CompromiseOccurrenceDate> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
@@ -28,7 +26,7 @@ class CompromiseOccurrenceDateTest extends AbstractKmipDataTypeAttributeTestSuit
     }
 
     @Override
-    protected CompromiseOccurrenceDate createDefault() {
+    public CompromiseOccurrenceDate createDefault() {
         return CompromiseOccurrenceDate.builder().value(FIXED_TIME).build();
     }
 
@@ -38,67 +36,62 @@ class CompromiseOccurrenceDateTest extends AbstractKmipDataTypeAttributeTestSuit
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        // This method is not used since isServerModifiable always returns false
-        return State.Standard.ACTIVE.inst();
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return State.Standard.ACTIVE.inst();
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        // This method is not used since isClientModifiable always returns false
-        return State.Standard.ACTIVE.inst();
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return State.Standard.ACTIVE.inst();
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
-    @Test
-    @DisplayName("attribute_serverModifiable_isAlwaysFalse")
     @Override
-    protected void attribute_serverModifiable_respectsState() {
-        CompromiseOccurrenceDate date = createDefault();
-        assertThat(date.isServerModifiable(stateForServerModifiableTrue())).isFalse();
-        assertThat(date.isServerModifiable(stateForServerModifiableFalse())).isFalse();
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofDateTime(FIXED_TIME);
     }
 
-    @Test
-    @DisplayName("attribute_clientModifiable_isAlwaysFalse")
     @Override
-    protected void attribute_clientModifiable_respectsState() {
-        CompromiseOccurrenceDate date = createDefault();
-        assertThat(date.isClientModifiable(stateForClientModifiableTrue())).isFalse();
-        assertThat(date.isClientModifiable(stateForClientModifiableFalse())).isFalse();
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

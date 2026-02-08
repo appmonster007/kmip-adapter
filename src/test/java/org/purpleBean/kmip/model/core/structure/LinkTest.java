@@ -6,15 +6,17 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.LinkType;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Link Domain Tests")
-class LinkTest extends AbstractKmipStructureAttributeTestSuite<Link> {
+class LinkTest extends AbstractKmipStructureTestSuite<Link> implements KmipAttributeTestSuite<Link> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -27,11 +29,11 @@ class LinkTest extends AbstractKmipStructureAttributeTestSuite<Link> {
     }
 
     @Override
-    protected Link createDefault() {
-        return Link.of(
-                LinkType.Standard.CERTIFICATE_LINK.inst(),
-                LinkedObjectIdentifier.of("some-id")
-        );
+    public Link createDefault() {
+        return Link.builder()
+                .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
+                .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
+                .build();
     }
 
     @Override
@@ -51,55 +53,62 @@ class LinkTest extends AbstractKmipStructureAttributeTestSuite<Link> {
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return true;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always true
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always true
     }
 }

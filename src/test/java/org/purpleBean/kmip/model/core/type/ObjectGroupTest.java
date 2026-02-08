@@ -4,10 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("ObjectGroup Domain Tests")
-class ObjectGroupTest extends AbstractKmipDataTypeAttributeTestSuite<ObjectGroup> {
+class ObjectGroupTest extends AbstractKmipDataTypeTestSuite<ObjectGroup> implements KmipAttributeTestSuite<ObjectGroup> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,8 +21,8 @@ class ObjectGroupTest extends AbstractKmipDataTypeAttributeTestSuite<ObjectGroup
     }
 
     @Override
-    protected ObjectGroup createDefault() {
-        return ObjectGroup.builder().value("test").build();
+    public ObjectGroup createDefault() {
+        return ObjectGroup.of("test-group");
     }
 
     @Override
@@ -30,55 +31,62 @@ class ObjectGroupTest extends AbstractKmipDataTypeAttributeTestSuite<ObjectGroup
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return true;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected void attribute_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofTextString("test-group");
     }
 
     @Override
-    protected void attribute_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always true
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always true
     }
 }

@@ -7,14 +7,16 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.ApplicationData;
 import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ApplicationSpecificInformation Domain Tests")
-class ApplicationSpecificInformationTest extends AbstractKmipStructureAttributeTestSuite<ApplicationSpecificInformation> {
+class ApplicationSpecificInformationTest extends AbstractKmipStructureTestSuite<ApplicationSpecificInformation> implements KmipAttributeTestSuite<ApplicationSpecificInformation> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -27,10 +29,10 @@ class ApplicationSpecificInformationTest extends AbstractKmipStructureAttributeT
     }
 
     @Override
-    protected ApplicationSpecificInformation createDefault() {
+    public ApplicationSpecificInformation createDefault() {
         return ApplicationSpecificInformation.builder()
-                .applicationNamespace(ApplicationNamespace.of("namespace"))
-                .applicationData(ApplicationData.of("data"))
+                .applicationNamespace(ApplicationNamespace.of("test-namespace"))
+                .applicationData(ApplicationData.of("test-data"))
                 .build();
     }
 
@@ -51,55 +53,62 @@ class ApplicationSpecificInformationTest extends AbstractKmipStructureAttributeT
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return true;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always true
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always true
     }
 }

@@ -4,13 +4,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @DisplayName("DeactivationDate Domain Tests")
-class DeactivationDateTest extends AbstractKmipDataTypeAttributeTestSuite<DeactivationDate> {
+class DeactivationDateTest extends AbstractKmipDataTypeTestSuite<DeactivationDate> implements KmipAttributeTestSuite<DeactivationDate> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
@@ -25,7 +26,7 @@ class DeactivationDateTest extends AbstractKmipDataTypeAttributeTestSuite<Deacti
     }
 
     @Override
-    protected DeactivationDate createDefault() {
+    public DeactivationDate createDefault() {
         return DeactivationDate.builder().value(FIXED_TIME).build();
     }
 
@@ -35,47 +36,52 @@ class DeactivationDateTest extends AbstractKmipDataTypeAttributeTestSuite<Deacti
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
+    public State stateForServerModifiableTrue() {
         return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
+    public State stateForServerModifiableFalse() {
         return State.Standard.DEACTIVATED.inst();
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
+    public State stateForClientModifiableTrue() {
         return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
+    public State stateForClientModifiableFalse() {
         return State.Standard.DEACTIVATED.inst();
+    }
+
+    @Override
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofDateTime(FIXED_TIME);
     }
 }

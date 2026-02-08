@@ -3,6 +3,7 @@ package org.purpleBean.kmip.model.core.structure;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.type.ActivationDate;
 import org.purpleBean.kmip.model.core.type.AttributeIndex;
 import org.purpleBean.kmip.model.core.type.AttributeName;
@@ -20,6 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AttributeTest extends AbstractKmipStructureTestSuite<Attribute> {
 
     private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V1_2;
+    }
 
     @Override
     protected Class<Attribute> type() {

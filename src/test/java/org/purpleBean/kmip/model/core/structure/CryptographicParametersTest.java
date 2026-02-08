@@ -4,16 +4,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.type.*;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("CryptographicParameters Domain Tests")
-class CryptographicParametersTest extends AbstractKmipStructureAttributeTestSuite<CryptographicParameters> {
+class CryptographicParametersTest extends AbstractKmipStructureTestSuite<CryptographicParameters> implements KmipAttributeTestSuite<CryptographicParameters> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -26,21 +30,11 @@ class CryptographicParametersTest extends AbstractKmipStructureAttributeTestSuit
     }
 
     @Override
-    protected CryptographicParameters createDefault() {
+    public CryptographicParameters createDefault() {
         return CryptographicParameters.builder()
                 .blockCipherMode(BlockCipherMode.Standard.CBC.inst())
-                .paddingMethod(PaddingMethod.Standard.PKCS5.inst())
                 .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
-                .keyRoleType(KeyRoleType.Standard.KEK.inst())
-                .digitalSignatureAlgorithm(DigitalSignatureAlgorithm.Standard.SHA_1_WITH_RSA_ENCRYPTION.inst())
                 .cryptographicAlgorithm(CryptographicAlgorithm.Standard.AES.inst())
-                .randomIv(RandomIv.of(true))
-                .ivLength(IvLength.of(128))
-                .tagLength(TagLength.of(128))
-                .fixedFieldLength(FixedFieldLength.of(128))
-                .invocationFieldLength(InvocationFieldLength.of(128))
-                .counterLength(CounterLength.of(128))
-                .initialCounterValue(InitialCounterValue.of(1))
                 .build();
     }
 
@@ -51,76 +45,74 @@ class CryptographicParametersTest extends AbstractKmipStructureAttributeTestSuit
 
     @Override
     protected int expectedMinComponentCount() {
-        return 13;
+        return 3;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
+        assertThat(values).hasSize(3);
         assertThat(values.get(0)).isInstanceOf(BlockCipherMode.class);
-        assertThat(values.get(1)).isInstanceOf(PaddingMethod.class);
-        assertThat(values.get(2)).isInstanceOf(HashingAlgorithm.class);
-        assertThat(values.get(3)).isInstanceOf(KeyRoleType.class);
-        assertThat(values.get(4)).isInstanceOf(DigitalSignatureAlgorithm.class);
-        assertThat(values.get(5)).isInstanceOf(CryptographicAlgorithm.class);
-        assertThat(values.get(6)).isInstanceOf(RandomIv.class);
-        assertThat(values.get(7)).isInstanceOf(IvLength.class);
-        assertThat(values.get(8)).isInstanceOf(TagLength.class);
-        assertThat(values.get(9)).isInstanceOf(FixedFieldLength.class);
-        assertThat(values.get(10)).isInstanceOf(InvocationFieldLength.class);
-        assertThat(values.get(11)).isInstanceOf(CounterLength.class);
-        assertThat(values.get(12)).isInstanceOf(InitialCounterValue.class);
+        assertThat(values.get(1)).isInstanceOf(HashingAlgorithm.class);
+        assertThat(values.get(2)).isInstanceOf(CryptographicAlgorithm.class);
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

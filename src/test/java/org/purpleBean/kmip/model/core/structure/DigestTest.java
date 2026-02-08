@@ -7,15 +7,17 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.DigestValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Digest Domain Tests")
-class DigestTest extends AbstractKmipStructureAttributeTestSuite<Digest> {
+class DigestTest extends AbstractKmipStructureTestSuite<Digest> implements KmipAttributeTestSuite<Digest> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -28,11 +30,11 @@ class DigestTest extends AbstractKmipStructureAttributeTestSuite<Digest> {
     }
 
     @Override
-    protected Digest createDefault() {
+    public Digest createDefault() {
         return Digest.builder()
                 .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
-                .digestValue(DigestValue.of(new byte[0]))
-                .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+                .digestValue(DigestValue.of(new byte[]{1, 2, 3}))
+                .keyFormatType(KeyFormatType.Standard.RAW.inst())
                 .build();
     }
 
@@ -43,7 +45,7 @@ class DigestTest extends AbstractKmipStructureAttributeTestSuite<Digest> {
 
     @Override
     protected int expectedMinComponentCount() {
-        return 1;
+        return 3;
     }
 
     @Override
@@ -54,55 +56,62 @@ class DigestTest extends AbstractKmipStructureAttributeTestSuite<Digest> {
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return false;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return true;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return null; // Not modifiable by server
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by server
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attrStruct_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
     }
 
     @Override
-    protected void attrStruct_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always false
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

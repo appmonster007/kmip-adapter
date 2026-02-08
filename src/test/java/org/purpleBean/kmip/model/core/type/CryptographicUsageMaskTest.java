@@ -4,10 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("CryptographicUsageMask Domain Tests")
-class CryptographicUsageMaskTest extends AbstractKmipDataTypeAttributeTestSuite<CryptographicUsageMask> {
+class CryptographicUsageMaskTest extends AbstractKmipDataTypeTestSuite<CryptographicUsageMask> implements KmipAttributeTestSuite<CryptographicUsageMask> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -20,8 +21,8 @@ class CryptographicUsageMaskTest extends AbstractKmipDataTypeAttributeTestSuite<
     }
 
     @Override
-    protected CryptographicUsageMask createDefault() {
-        return CryptographicUsageMask.builder().value(10).build();
+    public CryptographicUsageMask createDefault() {
+        return CryptographicUsageMask.of(1);
     }
 
     @Override
@@ -30,55 +31,62 @@ class CryptographicUsageMaskTest extends AbstractKmipDataTypeAttributeTestSuite<
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return true;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
-        return null;
+    public State stateForServerModifiableTrue() {
+        return State.Standard.ACTIVE.inst(); // Modifiable in any state
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
-        return null;
+    public State stateForServerModifiableFalse() {
+        return null; // Always modifiable
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
-        return null;
+    public State stateForClientModifiableTrue() {
+        return null; // Not modifiable by client
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
-        return null;
+    public State stateForClientModifiableFalse() {
+        return State.Standard.ACTIVE.inst(); // Never modifiable by client
     }
 
     @Override
-    protected void attribute_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofMaskInteger(1, "Sign");
     }
 
     @Override
-    protected void attribute_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+        // Always true
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+        // Always false
     }
 }

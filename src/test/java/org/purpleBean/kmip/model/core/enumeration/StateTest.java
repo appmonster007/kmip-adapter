@@ -3,7 +3,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("State Domain Tests")
-class StateTest extends AbstractKmipEnumerationAttributeTestSuite<State> {
+class StateTest extends AbstractKmipEnumerationTestSuite<State> implements KmipAttributeTestSuite<State> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -24,7 +26,7 @@ class StateTest extends AbstractKmipEnumerationAttributeTestSuite<State> {
     }
 
     @Override
-    protected State createDefault() {
+    public State createDefault() {
         return State.Standard.PRE_ACTIVE.inst();
     }
 
@@ -48,7 +50,7 @@ class StateTest extends AbstractKmipEnumerationAttributeTestSuite<State> {
         return true;
     }
 
-    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
+    // Implementation of KmipAttributeTestSuite methods
     @Override
     public boolean expectAlwaysPresent() {
         return true;
@@ -95,12 +97,17 @@ class StateTest extends AbstractKmipEnumerationAttributeTestSuite<State> {
     }
 
     @Override
-    protected void attrEnum_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofEnumeration(State.Standard.PRE_ACTIVE);
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
         // Not applicable as it's not server modifiable
     }
 
     @Override
-    protected void attrEnum_clientModifiable_respectsState() {
+    public void attribute_clientModifiable_respectsState() {
         // Not applicable as it's not client modifiable
     }
 

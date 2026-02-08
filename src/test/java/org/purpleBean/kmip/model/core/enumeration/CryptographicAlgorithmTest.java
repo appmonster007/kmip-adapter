@@ -3,7 +3,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CryptographicAlgorithm Domain Tests")
-class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSuite<CryptographicAlgorithm> {
+class CryptographicAlgorithmTest extends AbstractKmipEnumerationTestSuite<CryptographicAlgorithm> implements KmipAttributeTestSuite<CryptographicAlgorithm> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -24,7 +26,7 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
     }
 
     @Override
-    protected CryptographicAlgorithm createDefault() {
+    public CryptographicAlgorithm createDefault() {
         return CryptographicAlgorithm.Standard.DES.inst();
     }
 
@@ -48,7 +50,7 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
         return true;
     }
 
-    // Implementation of AbstractKmipDataTypeAttributeTestSuite methods
+    // Implementation of KmipAttributeTestSuite methods
     @Override
     public boolean expectAlwaysPresent() {
         return true;
@@ -95,12 +97,17 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
     }
 
     @Override
-    protected void attrEnum_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofEnumeration(CryptographicAlgorithm.Standard.DES);
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
         // Not applicable as it's not server modifiable
     }
 
     @Override
-    protected void attrEnum_clientModifiable_respectsState() {
+    public void attribute_clientModifiable_respectsState() {
         // Not applicable as it's not client modifiable
     }
 
@@ -149,4 +156,3 @@ class CryptographicAlgorithmTest extends AbstractKmipEnumerationAttributeTestSui
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
-

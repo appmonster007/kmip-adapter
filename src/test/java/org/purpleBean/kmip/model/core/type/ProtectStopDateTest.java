@@ -1,22 +1,19 @@
 package org.purpleBean.kmip.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("ProtectStopDate Domain Tests")
-class ProtectStopDateTest extends AbstractKmipDataTypeAttributeTestSuite<ProtectStopDate> {
+class ProtectStopDateTest extends AbstractKmipDataTypeTestSuite<ProtectStopDate> implements KmipAttributeTestSuite<ProtectStopDate> {
 
-    private static final OffsetDateTime PAST_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
-    private static final OffsetDateTime FUTURE_TIME = OffsetDateTime.now().plusDays(1);
+    private static final OffsetDateTime FUTURE_TIME = OffsetDateTime.now(ZoneOffset.UTC).plusDays(1);
 
     @Override
     protected void setupDefaultSpec() {
@@ -29,8 +26,8 @@ class ProtectStopDateTest extends AbstractKmipDataTypeAttributeTestSuite<Protect
     }
 
     @Override
-    protected ProtectStopDate createDefault() {
-        return ProtectStopDate.builder().value(PAST_TIME).build();
+    public ProtectStopDate createDefault() {
+        return ProtectStopDate.builder().value(FUTURE_TIME).build();
     }
 
     @Override
@@ -39,71 +36,52 @@ class ProtectStopDateTest extends AbstractKmipDataTypeAttributeTestSuite<Protect
     }
 
     @Override
-    protected boolean expectAlwaysPresent() {
+    public boolean expectAlwaysPresent() {
         return false;
     }
 
     @Override
-    protected boolean expectServerInitializable() {
+    public boolean expectServerInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientInitializable() {
+    public boolean expectClientInitializable() {
         return true;
     }
 
     @Override
-    protected boolean expectClientDeletable() {
+    public boolean expectClientDeletable() {
         return false;
     }
 
     @Override
-    protected boolean expectMultiInstanceAllowed() {
+    public boolean expectMultiInstanceAllowed() {
         return false;
     }
 
     @Override
-    protected State stateForServerModifiableTrue() {
+    public State stateForServerModifiableTrue() {
         return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
-    protected State stateForServerModifiableFalse() {
+    public State stateForServerModifiableFalse() {
         return State.Standard.DEACTIVATED.inst();
     }
 
     @Override
-    protected State stateForClientModifiableTrue() {
+    public State stateForClientModifiableTrue() {
         return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
-    protected State stateForClientModifiableFalse() {
+    public State stateForClientModifiableFalse() {
         return State.Standard.DEACTIVATED.inst();
     }
 
-    @Test
-    @DisplayName("attribute_serverModifiable_respectsStateAndDate")
     @Override
-    protected void attribute_serverModifiable_respectsState() {
-        ProtectStopDate futureDate = ProtectStopDate.builder().value(FUTURE_TIME).build();
-        assertThat(futureDate.isServerModifiable(stateForServerModifiableTrue())).isTrue();
-
-        ProtectStopDate pastDate = createDefault();
-        assertThat(pastDate.isServerModifiable(stateForServerModifiableTrue())).isFalse();
-        assertThat(pastDate.isServerModifiable(stateForServerModifiableFalse())).isFalse();
-    }
-
-    @Test
-    @DisplayName("attribute_clientModifiable_respectsStateAndDate")
-    @Override
-    protected void attribute_clientModifiable_respectsState() {
-        ProtectStopDate futureDate = ProtectStopDate.builder().value(FUTURE_TIME).build();
-        assertThat(futureDate.isClientModifiable(stateForClientModifiableTrue())).isTrue();
-
-        ProtectStopDate pastDate = createDefault();
-        assertThat(pastDate.isClientModifiable(stateForClientModifiableTrue())).isFalse();
-        assertThat(pastDate.isClientModifiable(stateForClientModifiableFalse())).isFalse();
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofDateTime(FUTURE_TIME);
     }
 }

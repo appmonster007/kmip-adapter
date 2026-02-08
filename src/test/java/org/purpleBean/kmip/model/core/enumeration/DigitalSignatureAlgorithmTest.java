@@ -3,7 +3,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationAttributeTestSuite;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("DigitalSignatureAlgorithm Domain Tests")
-class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTestSuite<DigitalSignatureAlgorithm> {
+class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationTestSuite<DigitalSignatureAlgorithm> implements KmipAttributeTestSuite<DigitalSignatureAlgorithm> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -24,7 +26,7 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTest
     }
 
     @Override
-    protected DigitalSignatureAlgorithm createDefault() {
+    public DigitalSignatureAlgorithm createDefault() {
         return DigitalSignatureAlgorithm.Standard.values()[0].inst();
     }
 
@@ -94,11 +96,16 @@ class DigitalSignatureAlgorithmTest extends AbstractKmipEnumerationAttributeTest
     }
 
     @Override
-    protected void attrEnum_serverModifiable_respectsState() {
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofEnumeration(DigitalSignatureAlgorithm.Standard.values()[0]);
     }
 
     @Override
-    protected void attrEnum_clientModifiable_respectsState() {
+    public void attribute_serverModifiable_respectsState() {
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
     }
 
     @Override
