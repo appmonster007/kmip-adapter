@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Builder(toBuilder = true)
 public class InteropFunction implements KmipEnumeration {
     public static final KmipTag kmipTag = KmipTag.Standard.INTEROP_FUNCTION.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();

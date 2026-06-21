@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 public class CertificateIssuer implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE_ISSUER.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_1, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

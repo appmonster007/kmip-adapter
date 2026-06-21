@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 public class Link implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = KmipTag.Standard.LINK.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {
