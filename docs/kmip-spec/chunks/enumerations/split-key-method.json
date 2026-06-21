@@ -1,0 +1,62 @@
+{
+  "name": "Split Key Method",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "XOR",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Polynomial Sharing GF (216)",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Polynomial Sharing Prime Field",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Polynomial Sharing GF (28)",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

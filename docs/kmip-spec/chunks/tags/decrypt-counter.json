@@ -1,0 +1,14 @@
+{
+  "name": "Decrypt Counter",
+  "hex": "0x000DECCE",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0x000DECCE",
+      "reserved": false
+    }
+  }
+}

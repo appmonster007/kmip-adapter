@@ -1,0 +1,14 @@
+{
+  "name": "Rotate Name Value",
+  "hex": "0x00AEAEAE",
+  "appears_in": [
+    "2.1"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "2.1": {
+      "tag": "0x00AEAEAE",
+      "reserved": false
+    }
+  }
+}

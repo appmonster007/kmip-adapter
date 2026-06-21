@@ -1,0 +1,14 @@
+{
+  "name": "PKCS#12 Certificate Link",
+  "hex": null,
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "PKCS#12 Certificate Link",
+      "reserved": false
+    }
+  }
+}

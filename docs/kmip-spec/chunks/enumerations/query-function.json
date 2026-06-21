@@ -1,0 +1,178 @@
+{
+  "name": "Query Function",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "Query Operations",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Objects",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Server Information",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Application Namespaces",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Extension List",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Extension Map",
+      "value": "0x00000006",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Attestation Types",
+      "value": "0x00000007",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query RNGs",
+      "value": "0x00000008",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Validations",
+      "value": "0x00000009",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Profiles",
+      "value": "0x0000000A",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Capabilities",
+      "value": "0x0000000B",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Client Registration Methods",
+      "value": "0x0000000C",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Defaults Information",
+      "value": "0x0000000D",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Storage Protection Masks",
+      "value": "0x0000000E",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Query Credential Information",
+      "value": "0x0000000F",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

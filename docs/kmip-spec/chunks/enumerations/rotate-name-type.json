@@ -1,0 +1,23 @@
+{
+  "name": "Rotate Name Type",
+  "spec_versions": [
+    "2.1"
+  ],
+  "introduced_in": "2.1",
+  "values": [
+    {
+      "name": "Uninterpreted Text String",
+      "value": "0x00000001",
+      "versions": [
+        "2.1"
+      ]
+    },
+    {
+      "name": "URI",
+      "value": "0x00000002",
+      "versions": [
+        "2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Object Group",
+  "hex": null,
+  "appears_in": [
+    "2.0",
+    "2.1"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "2.0": {
+      "tag": "Object Group",
+      "reserved": false
+    },
+    "2.1": {
+      "tag": "Object Group",
+      "reserved": false
+    }
+  }
+}

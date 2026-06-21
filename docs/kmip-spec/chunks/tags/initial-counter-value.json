@@ -1,0 +1,24 @@
+{
+  "name": "Initial Counter Value",
+  "hex": "0x000ACEAE",
+  "appears_in": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "2.0": {
+      "tag": "0x000ACEAE",
+      "reserved": false
+    },
+    "2.1": {
+      "tag": "0x000ACEAE",
+      "reserved": false
+    },
+    "3.0": {
+      "tag": "0x000ACEAE",
+      "reserved": false
+    }
+  }
+}

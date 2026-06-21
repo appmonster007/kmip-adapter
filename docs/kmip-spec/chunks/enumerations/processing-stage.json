@@ -1,0 +1,34 @@
+{
+  "name": "Processing Stage",
+  "spec_versions": [
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "2.1",
+  "values": [
+    {
+      "name": "Submitted",
+      "value": "0x00000001",
+      "versions": [
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "In Process",
+      "value": "0x00000002",
+      "versions": [
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Completed",
+      "value": "0x00000003",
+      "versions": [
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1558 @@
+{
+  "name": "Profile Name",
+  "spec_versions": [
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.3",
+  "values": [
+    {
+      "name": "Baseline Server Basic KMIP v1.2",
+      "value": "0x00000001",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Server TLS v1.2 KMIP v1.2",
+      "value": "0x00000002",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client Basic KMIP v1.2",
+      "value": "0x00000003",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client TLS v1.2 KMIP v1.2",
+      "value": "0x00000004",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server Basic KMIP v1.2",
+      "value": "0x00000005",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server TLS v1.2 KMIP v1.2",
+      "value": "0x00000006",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Client KMIP v1.0",
+      "value": "0x00000007",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Client KMIP v1.1",
+      "value": "0x00000008",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Client KMIP v1.2",
+      "value": "0x00000009",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Server KMIP v1.0",
+      "value": "0x0000000A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Server KMIP v1.1",
+      "value": "0x0000000B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Server KMIP v1.2",
+      "value": "0x0000000C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client KMIP v1.0",
+      "value": "0x0000000D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client KMIP v1.1",
+      "value": "0x0000000E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client KMIP v1.2",
+      "value": "0x0000000F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server KMIP v1.0",
+      "value": "0x00000010",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server KMIP v1.1",
+      "value": "0x00000011",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server KMIP v1.2",
+      "value": "0x00000012",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client KMIP v1.0",
+      "value": "0x00000013",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client KMIP v1.1",
+      "value": "0x00000014",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client KMIP v1.2",
+      "value": "0x00000015",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server KMIP v1.0",
+      "value": "0x00000016",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server KMIP v1.1",
+      "value": "0x00000017",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server KMIP v1.2",
+      "value": "0x00000018",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Client KMIP v1.2",
+      "value": "0x00000019",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Server KMIP v1.2",
+      "value": "0x0000001A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Client KMIP v1.2",
+      "value": "0x0000001B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Server KMIP v1.2",
+      "value": "0x0000001C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Client KMIP v1.2",
+      "value": "0x0000001D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Server KMIP v1.2",
+      "value": "0x0000001E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client KMIP v1.0",
+      "value": "0x0000001F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client KMIP v1.0",
+      "value": "0x00000020",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client KMIP v1.0",
+      "value": "0x00000021",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client KMIP v1.1",
+      "value": "0x00000022",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client KMIP v1.1",
+      "value": "0x00000023",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client KMIP v1.1",
+      "value": "0x00000024",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client KMIP v1.2",
+      "value": "0x00000025",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client KMIP v1.2",
+      "value": "0x00000026",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client KMIP v1.2",
+      "value": "0x00000027",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server KMIP v1.0",
+      "value": "0x00000028",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server KMIP v1.1",
+      "value": "0x00000029",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server KMIP v1.2",
+      "value": "0x0000002A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client KMIP v1.0",
+      "value": "0x0000002B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client KMIP v1.1",
+      "value": "0x0000002C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client KMIP v1.2",
+      "value": "0x0000002D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server KMIP v1.0",
+      "value": "0x0000002E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server KMIP v1.1",
+      "value": "0x0000002F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server KMIP v1.2",
+      "value": "0x00000030",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Client KMIP v1.0",
+      "value": "0x00000031",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Client KMIP v1.1",
+      "value": "0x00000032",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Client KMIP v1.2",
+      "value": "0x00000033",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Server KMIP v1.0",
+      "value": "0x00000034",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Server KMIP v1.1",
+      "value": "0x00000035",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Server KMIP v1.2",
+      "value": "0x00000036",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Client KMIP v1.0",
+      "value": "0x00000037",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Client KMIP v1.1",
+      "value": "0x00000038",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Client KMIP v1.2",
+      "value": "0x00000039",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Server KMIP v1.0",
+      "value": "0x0000003A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Server KMIP v1.1",
+      "value": "0x0000003B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Server KMIP v1.2",
+      "value": "0x0000003C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client KMIP v1.0",
+      "value": "0x0000003D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client KMIP v1.1",
+      "value": "0x0000003E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client KMIP v1.2",
+      "value": "0x0000003F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server KMIP v1.0",
+      "value": "0x00000040",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server KMIP v1.1",
+      "value": "0x00000041",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server KMIP v1.2",
+      "value": "0x00000042",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Client KMIP v1.0",
+      "value": "0x00000043",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Client KMIP v1.1",
+      "value": "0x00000044",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Client KMIP v1.2",
+      "value": "0x00000045",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Server KMIP v1.0",
+      "value": "0x00000046",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Server KMIP v1.1",
+      "value": "0x00000047",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Server KMIP v1.2",
+      "value": "0x00000048",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Client KMIP v1.0",
+      "value": "0x00000049",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Client KMIP v1.1",
+      "value": "0x0000004A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Client KMIP v1.2",
+      "value": "0x0000004B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Server KMIP v1.0",
+      "value": "0x0000004C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Server KMIP v1.1",
+      "value": "0x0000004D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Server KMIP v1.2",
+      "value": "0x0000004E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Client KMIP v1.0",
+      "value": "0x0000004F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Client KMIP v1.1",
+      "value": "0x00000050",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Client KMIP v1.2",
+      "value": "0x00000051",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Server KMIP v1.0",
+      "value": "0x00000052",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Server KMIP v1.1",
+      "value": "0x00000053",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Server KMIP v1.2",
+      "value": "0x00000054",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Server Basic KMIP v1.3",
+      "value": "0x00000055",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Server TLS v1.2 KMIP v1.3",
+      "value": "0x00000056",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client Basic KMIP v1.3",
+      "value": "0x00000057",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client TLS v1.2 KMIP v1.3",
+      "value": "0x00000058",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server Basic KMIP v1.3",
+      "value": "0x00000059",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server TLS v1.2 KMIP v1.3",
+      "value": "0x0000005A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Client KMIP v1.3",
+      "value": "0x0000005B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Server KMIP v1.3",
+      "value": "0x0000005C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client KMIP v1.3",
+      "value": "0x0000005D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server KMIP v1.3",
+      "value": "0x0000005E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client KMIP v1.3",
+      "value": "0x0000005F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server KMIP v1.3",
+      "value": "0x00000060",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Client KMIP v1.3",
+      "value": "0x00000061",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Server KMIP v1.3",
+      "value": "0x00000062",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Client KMIP v1.3",
+      "value": "0x00000063",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Server KMIP v1.3",
+      "value": "0x00000064",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Client KMIP v1.3",
+      "value": "0x00000065",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Server KMIP v1.3",
+      "value": "0x00000066",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client KMIP v1.3",
+      "value": "0x00000067",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client KMIP v1.3",
+      "value": "0x00000068",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client KMIP v1.3",
+      "value": "0x00000069",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server KMIP v1.3",
+      "value": "0x0000006A",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client KMIP v1.3",
+      "value": "0x0000006B",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server KMIP v1.3",
+      "value": "0x0000006C",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Client KMIP v1.3",
+      "value": "0x0000006D",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Server KMIP v1.3",
+      "value": "0x0000006E",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Client KMIP v1.3",
+      "value": "0x0000006F",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Server KMIP v1.3",
+      "value": "0x00000070",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client KMIP v1.3",
+      "value": "0x00000071",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server KMIP v1.3",
+      "value": "0x00000072",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Client KMIP v1.3",
+      "value": "0x00000073",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Server KMIP v1.3",
+      "value": "0x00000074",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Client KMIP v1.3",
+      "value": "0x00000075",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Server KMIP v1.3",
+      "value": "0x00000076",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Client KMIP v1.3",
+      "value": "0x00000077",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Server KMIP v1.3",
+      "value": "0x00000078",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Server Basic KMIP v1.4",
+      "value": "0x00000079",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Server TLS v1.2 KMIP v1.4",
+      "value": "0x0000007A",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client Basic KMIP v1.4",
+      "value": "0x0000007B",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Baseline Client TLS v1.2 KMIP v1.4",
+      "value": "0x0000007C",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server Basic KMIP v1.4",
+      "value": "0x0000007D",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server TLS v1.2 KMIP v1.4",
+      "value": "0x0000007E",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Client KMIP v1.4",
+      "value": "0x0000007F",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Tape Library Server KMIP v1.4",
+      "value": "0x00000080",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client KMIP v1.4",
+      "value": "0x00000081",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server KMIP v1.4",
+      "value": "0x00000082",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client KMIP v1.4",
+      "value": "0x00000083",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server KMIP v1.4",
+      "value": "0x00000084",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Client KMIP v1.4",
+      "value": "0x00000085",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Server KMIP v1.4",
+      "value": "0x00000086",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Client KMIP v1.4",
+      "value": "0x00000087",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Server KMIP v1.4",
+      "value": "0x00000088",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Client KMIP v1.4",
+      "value": "0x00000089",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Server KMIP v1.4",
+      "value": "0x0000008A",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client KMIP v1.4",
+      "value": "0x0000008B",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client KMIP v1.4",
+      "value": "0x0000008C",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client KMIP v1.4",
+      "value": "0x0000008D",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server KMIP v1.4",
+      "value": "0x0000008E",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client KMIP v1.4",
+      "value": "0x0000008F",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server KMIP v1.4",
+      "value": "0x00000090",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Client KMIP v1.4",
+      "value": "0x00000091",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_128 Server KMIP v1.4",
+      "value": "0x00000092",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Client KMIP v1.4",
+      "value": "0x00000093",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Suite B minLOS_192 Server KMIP v1.4",
+      "value": "0x00000094",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client KMIP v1.4",
+      "value": "0x00000095",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server KMIP v1.4",
+      "value": "0x00000096",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Client KMIP v1.4",
+      "value": "0x00000097",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "HTTPS Server KMIP v1.4",
+      "value": "0x00000098",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Client KMIP v1.4",
+      "value": "0x00000099",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "JSON Server KMIP v1.4",
+      "value": "0x0000009A",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Client KMIP v1.4",
+      "value": "0x0000009B",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "XML Server KMIP v1.4",
+      "value": "0x0000009C",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "Complete Server Basic",
+      "value": "0x00000104",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Complete Server TLS v1.2",
+      "value": "0x00000105",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Tape Library Client",
+      "value": "0x00000106",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Tape Library Server",
+      "value": "0x00000107",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Client",
+      "value": "0x00000108",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric Key Lifecycle Server",
+      "value": "0x00000109",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Client",
+      "value": "0x0000010A",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Asymmetric Key Lifecycle Server",
+      "value": "0x0000010B",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Client",
+      "value": "0x0000010C",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Basic Cryptographic Server",
+      "value": "0x0000010D",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Client",
+      "value": "0x0000010E",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Advanced Cryptographic Server",
+      "value": "0x0000010F",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Client",
+      "value": "0x00000110",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "RNG Cryptographic Server",
+      "value": "0x00000111",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Basic Symmetric Key Foundry Client",
+      "value": "0x00000112",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Intermediate Symmetric Key Foundry Client",
+      "value": "0x00000113",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Advanced Symmetric Key Foundry Client",
+      "value": "0x00000114",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric Key Foundry Server",
+      "value": "0x00000115",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Client",
+      "value": "0x00000116",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Opaque Managed Object Store Server",
+      "value": "0x00000117",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Client",
+      "value": "0x0000011C",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Storage Array with Self Encrypting Drive Server",
+      "value": "0x0000011D",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "HTTPS Client",
+      "value": "0x0000011E",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "HTTPS Server",
+      "value": "0x0000011F",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "JSON Client",
+      "value": "0x00000120",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "JSON Server",
+      "value": "0x00000121",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "XML Client",
+      "value": "0x00000122",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "XML Server",
+      "value": "0x00000123",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "AES XTS Client",
+      "value": "0x00000124",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "AES XTS Server",
+      "value": "0x00000125",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Quantum Safe Client",
+      "value": "0x00000126",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Quantum Safe Server",
+      "value": "0x00000127",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "PKCS#11 Client",
+      "value": "0x00000128",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "PKCS#11 Server",
+      "value": "0x00000129",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Baseline Client",
+      "value": "0x0000012A",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Baseline Server",
+      "value": "0x0000012B",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Complete Server",
+      "value": "0x0000012C",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

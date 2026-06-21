@@ -1,0 +1,106 @@
+## 8. Version Tagging Notes (V1_3, V1_4, V2_0)
+
+No enumeration value in the project references `KmipSpec.V1_3`, `KmipSpec.V1_4`, or `KmipSpec.V2_0`. The diff tables below (from spec parsing) show what changed in these versions.
+
+### v1.3 — changes relative to v1.2
+
+**New enumerations**: Client Registration Method, DRBG Algorithm, Destroy Action, FIPS186 Variation, Profile Name, RNG Algorithm, RNG Mode, Shredding Algorithm, Unwrap Mode, Validation Authority Type, Validation Type
+
+**New enumeration values:**
+
+| Enumeration | New Values |
+|---|---|
+| Client Registration Method (✅) | Client Generated, Client Registered, Server On-Demand, Server Pre-Generated, Unspecified |
+| Cryptographic Algorithm (✅) | One Time Pad |
+| DRBG Algorithm (✅) | CTR, Dual-EC, HMAC, Hash, Unspecified |
+| Destroy Action (✅) | Deleted, Key Material Deleted, Key Material Shredded, Meta Data Deleted, Meta Data Shredded, Shredded, Unspecified |
+| FIPS186 Variation (✅) | GP x-Change Notice, GP x-Original, Unspecified, k-Change Notice, k-Original, x-Change Notice, x-Original |
+| Key Format Type (✅) | Transparent EC Private Key, Transparent EC Public Key |
+| Profile Name (✅) | Advanced Cryptographic Client KMIP v1.2, Advanced Cryptographic Client KMIP v1.3, Advanced Cryptographic Server KMIP v1.2, Advanced Cryptographic Server KMIP v1.3, Advanced Symmetric Key Foundry Client KMIP v1.0, Advanced Symmetric Key Foundry Client KMIP v1.1, Advanced Symmetric Key Foundry Client KMIP v1.2, Advanced Symmetric Key Foundry Client KMIP v1.3, Asymmetric Key Lifecycle Client KMIP v1.0, Asymmetric Key Lifecycle Client KMIP v1.1, Asymmetric Key Lifecycle Client KMIP v1.2, Asymmetric Key Lifecycle Client KMIP v1.3, Asymmetric Key Lifecycle Server KMIP v1.0, Asymmetric Key Lifecycle Server KMIP v1.1, Asymmetric Key Lifecycle Server KMIP v1.2, Asymmetric Key Lifecycle Server KMIP v1.3, Baseline Client Basic KMIP v1.2, Baseline Client Basic KMIP v1.3, Baseline Client TLS v1.2 KMIP v1.2, Baseline Client TLS v1.2 KMIP v1.3, Baseline Server Basic KMIP v1.2, Baseline Server Basic KMIP v1.3, Baseline Server TLS v1.2 KMIP v1.2, Baseline Server TLS v1.2 KMIP v1.3, Basic Cryptographic Client KMIP v1.2, Basic Cryptographic Client KMIP v1.3, Basic Cryptographic Server KMIP v1.2, Basic Cryptographic Server KMIP v1.3, Basic Symmetric Key Foundry Client KMIP v1.0, Basic Symmetric Key Foundry Client KMIP v1.1, Basic Symmetric Key Foundry Client KMIP v1.2, Basic Symmetric Key Foundry Client KMIP v1.3, Complete Server Basic KMIP v1.2, Complete Server Basic KMIP v1.3, Complete Server TLS v1.2 KMIP v1.2, Complete Server TLS v1.2 KMIP v1.3, HTTPS Client KMIP v1.0, HTTPS Client KMIP v1.1, HTTPS Client KMIP v1.2, HTTPS Client KMIP v1.3, HTTPS Server KMIP v1.0, HTTPS Server KMIP v1.1, HTTPS Server KMIP v1.2, HTTPS Server KMIP v1.3, Intermediate Symmetric Key Foundry Client KMIP v1.0, Intermediate Symmetric Key Foundry Client KMIP v1.1, Intermediate Symmetric Key Foundry Client KMIP v1.2, Intermediate Symmetric Key Foundry Client KMIP v1.3, JSON Client KMIP v1.0, JSON Client KMIP v1.1, JSON Client KMIP v1.2, JSON Client KMIP v1.3, JSON Server KMIP v1.0, JSON Server KMIP v1.1, JSON Server KMIP v1.2, JSON Server KMIP v1.3, Opaque Managed Object Store Client KMIP v1.0, Opaque Managed Object Store Client KMIP v1.1, Opaque Managed Object Store Client KMIP v1.2, Opaque Managed Object Store Client KMIP v1.3, Opaque Managed Object Store Server KMIP v1.0, Opaque Managed Object Store Server KMIP v1.1, Opaque Managed Object Store Server KMIP v1.2, Opaque Managed Object Store Server KMIP v1.3, RNG Cryptographic Client KMIP v1.2, RNG Cryptographic Client KMIP v1.3, RNG Cryptographic Server KMIP v1.2, RNG Cryptographic Server KMIP v1.3, Storage Array with Self Encrypting Drive Client KMIP v1.0, Storage Array with Self Encrypting Drive Client KMIP v1.1, Storage Array with Self Encrypting Drive Client KMIP v1.2, Storage Array with Self Encrypting Drive Client KMIP v1.3, Storage Array with Self Encrypting Drive Server KMIP v1.0, Storage Array with Self Encrypting Drive Server KMIP v1.1, Storage Array with Self Encrypting Drive Server KMIP v1.2, Storage Array with Self Encrypting Drive Server KMIP v1.3, Suite B minLOS_128 Client KMIP v1.0, Suite B minLOS_128 Client KMIP v1.1, Suite B minLOS_128 Client KMIP v1.2, Suite B minLOS_128 Client KMIP v1.3, Suite B minLOS_128 Server KMIP v1.0, Suite B minLOS_128 Server KMIP v1.1, Suite B minLOS_128 Server KMIP v1.2, Suite B minLOS_128 Server KMIP v1.3, Suite B minLOS_192 Client KMIP v1.0, Suite B minLOS_192 Client KMIP v1.1, Suite B minLOS_192 Client KMIP v1.2, Suite B minLOS_192 Client KMIP v1.3, Suite B minLOS_192 Server KMIP v1.0, Suite B minLOS_192 Server KMIP v1.1, Suite B minLOS_192 Server KMIP v1.2, Suite B minLOS_192 Server KMIP v1.3, Symmetric Key Foundry Server KMIP v1.0, Symmetric Key Foundry Server KMIP v1.1, Symmetric Key Foundry Server KMIP v1.2, Symmetric Key Foundry Server KMIP v1.3, Symmetric Key Lifecycle Client KMIP v1.0, Symmetric Key Lifecycle Client KMIP v1.1, Symmetric Key Lifecycle Client KMIP v1.2, Symmetric Key Lifecycle Client KMIP v1.3, Symmetric Key Lifecycle Server KMIP v1.0, Symmetric Key Lifecycle Server KMIP v1.1, Symmetric Key Lifecycle Server KMIP v1.2, Symmetric Key Lifecycle Server KMIP v1.3, Tape Library Client KMIP v1.0, Tape Library Client KMIP v1.1, Tape Library Client KMIP v1.2, Tape Library Client KMIP v1.3, Tape Library Server KMIP v1.0, Tape Library Server KMIP v1.1, Tape Library Server KMIP v1.2, Tape Library Server KMIP v1.3, XML Client KMIP v1.0, XML Client KMIP v1.1, XML Client KMIP v1.2, XML Client KMIP v1.3, XML Server KMIP v1.0, XML Server KMIP v1.1, XML Server KMIP v1.2, XML Server KMIP v1.3 |
+| Query Function (✅) | Query Capabilities, Query Client Registration Methods, Query Profiles, Query RNGs, Query Validations |
+| RNG Algorithm (✅) | ANSI X9.31, ANSI X9.62, DRBG, FIPS 186-2, NRBG, Unspecified |
+| RNG Mode (✅) | Non-Shared Instantiation, Shared Instantiation, Unspecified |
+| Shredding Algorithm (✅) | Cryptographic, Unspecified, Unsupported |
+| Unwrap Mode (✅) | Not Processed, Processed, Unspecified |
+| Validation Authority Type (✅) | Common Criteria, NIST CMVP, Unspecified |
+| Validation Type (✅) | Firmware, Hardware, Hybrid, Software, Unspecified |
+
+### v1.4 — changes relative to v1.3
+
+**New enumerations**: Key Wrap Type, Mask Generator
+
+**New enumeration values:**
+
+| Enumeration | New Values |
+|---|---|
+| Block Cipher Mode (✅) | AEAD |
+| Cryptographic Algorithm (✅) | ChaCha20, ChaCha20Poly1305, HMAC-SHA3-224, HMAC-SHA3-256, HMAC-SHA3-384, HMAC-SHA3-512, Poly1305, SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256 |
+| Derivation Method (✅) | Asymmetric Key |
+| Digital Signature Algorithm (✅) | SHA3-256 with RSA Encryption, SHA3-384 with RSA Encryption, SHA3-512 with RSA Encryption |
+| Hashing Algorithm (✅) | SHA-3-224, SHA-3-256, SHA-3-384, SHA-3-512 |
+| Key Format Type (✅) | PKCS#12 |
+| Key Role Type (✅) | DUKPT, IV, TRKBK |
+| Key Wrap Type (✅) | As Registered, Not Wrapped |
+| Link Type (✅) | PKCS#12 Certificate Link, PKCS#12 Password Link |
+| Mask Generator (✅) | MGF1 |
+| Operation (✅) | Export, Import |
+| Profile Name (✅) | Advanced Cryptographic Client KMIP v1.4, Advanced Cryptographic Server KMIP v1.4, Advanced Symmetric Key Foundry Client KMIP v1.4, Asymmetric Key Lifecycle Client KMIP v1.4, Asymmetric Key Lifecycle Server KMIP v1.4, Baseline Client Basic KMIP v1.4, Baseline Client TLS v1.2 KMIP v1.4, Baseline Server Basic KMIP v1.4, Baseline Server TLS v1.2 KMIP v1.4, Basic Cryptographic Client KMIP v1.4, Basic Cryptographic Server KMIP v1.4, Basic Symmetric Key Foundry Client KMIP v1.4, Complete Server Basic KMIP v1.4, Complete Server TLS v1.2 KMIP v1.4, HTTPS Client KMIP v1.4, HTTPS Server KMIP v1.4, Intermediate Symmetric Key Foundry Client KMIP v1.4, JSON Client KMIP v1.4, JSON Server KMIP v1.4, Opaque Managed Object Store Client KMIP v1.4, Opaque Managed Object Store Server KMIP v1.4, RNG Cryptographic Client KMIP v1.4, RNG Cryptographic Server KMIP v1.4, Storage Array with Self Encrypting Drive Client KMIP v1.4, Storage Array with Self Encrypting Drive Server KMIP v1.4, Suite B minLOS_128 Client KMIP v1.4, Suite B minLOS_128 Server KMIP v1.4, Suite B minLOS_192 Client KMIP v1.4, Suite B minLOS_192 Server KMIP v1.4, Symmetric Key Foundry Server KMIP v1.4, Symmetric Key Lifecycle Client KMIP v1.4, Symmetric Key Lifecycle Server KMIP v1.4, Tape Library Client KMIP v1.4, Tape Library Server KMIP v1.4, XML Client KMIP v1.4, XML Server KMIP v1.4 |
+| Result Reason (✅) | Not Extractable, Object Already Exists, Sensitive |
+
+### v2.0 — changes relative to v1.4
+
+**New enumerations**: Adjustment Type, Asynchronous Indicator, Data, Endpoint Role, Interop Function, Item Type, NIST Key Type, Protection Level, Ticket Type, Unique Identifier
+
+**New enumeration values:**
+
+| Enumeration | New Values |
+|---|---|
+| Adjustment Type (✅) | Decrement, Negate |
+| Asynchronous Indicator (✅) | Optional, Prohibited |
+| Certificate Type (✅) | (PGP |
+| Credential Type (✅) | Hashed Password, One Time Password, Ticket |
+| Cryptographic Algorithm (✅) | ARIA, Ed25519, Ed448, GOST 28147-89, GOST R 34.10-2012, GOST R 34.11-2012, GOST R 34.13-2015, McEliece, McEliece-6960119, McEliece-8192128, SEED, SM2, SM3, SM4, SPHINCS-256, XMSS |
+| Data (✅) | Decrypt, Encrypt, Hash, MAC MAC Data, RNG Retrieve, Sign Signature Data, Signature Verify |
+| Derivation Method (✅) | AWS Signature Version 4, HKDF |
+| Digital Signature Algorithm (✅) | MD2 with RSA Encryption, MD5 with RSA Encryption, RSASSA-PSS, SHA-1 with RSA Encryption, SHA-224 with RSA Encryption, SHA-256 with RSA Encryption, SHA-384 with RSA Encryption, SHA-512 with RSA Encryption |
+| Endpoint Role (✅) | Server |
+| Hashing Algorithm (✅) | SHA3-224, SHA3-256, SHA3-384, SHA3-512 |
+| Interop Function (✅) | End, Reset |
+| Item Type (❌ not impl) | Big Integer, Boolean, Byte String, Date Time, Date Time Extended, Enumeration, Integer, Interval, Long Integer, Text String |
+| Key Format Type (✅) | PKCS1, PKCS8, Several Transparent Key types |
+| Link Type (✅) | Wrapping Key Link |
+| Mask Generator (✅) | MFG1 |
+| NIST Key Type (✅) | Private authentication key, Private authorization key, Private ephemeral key agreement key, Private key transport key, Private signature key, Private static key agreement key, Public authentication key, Public authorization key, Public ephemeral key agreement key, Public key transport key, Public signature verification key, Public static key agreement key, Symmetric authentication key, Symmetric authorization key, Symmetric data encryption key, Symmetric key agreement key, Symmetric key wrapping key, Symmetric master key, Symmetric random number generation key |
+| Object Type (✅) | Certificate Request |
+| Operation (✅) | Adjust Attribute, Delegated Login, Interop, Log, Login, Logout, PKCS#11, Re-Provision, Set Attribute, Set Endpoint Role |
+| Profile Name (✅) | AES XTS Client, AES XTS Server, Advanced Cryptographic Client, Advanced Cryptographic Server, Advanced Symmetric Key Foundry Client, Asymmetric Key Lifecycle Client, Asymmetric Key Lifecycle Server, Baseline Client, Baseline Server, Basic Cryptographic Client, Basic Cryptographic Server, Basic Symmetric Key Foundry Client, Complete Server, Complete Server Basic, Complete Server TLS v1.2, HTTPS Client, HTTPS Server, Intermediate Symmetric Key Foundry Client, JSON Client, JSON Server, Opaque Managed Object Store Client, Opaque Managed Object Store Server, PKCS#11 Client, PKCS#11 Server, Quantum Safe Client, Quantum Safe Server, RNG Cryptographic Client, RNG Cryptographic Server, Storage Array with Self Encrypting Drive Client, Storage Array with Self Encrypting Drive Server, Symmetric Key Foundry Server, Symmetric Key Lifecycle Client, Symmetric Key Lifecycle Server, Tape Library Client, Tape Library Server, XML Client, XML Server |
+| Protection Level (✅) | High, Low |
+| Query Function (✅) | Query Defaults Information, Query Storage Protection Masks |
+| Recommended Curve (✅) | CURVE25519, CURVE448 |
+| Result Reason (✅) | Attribute Instance Not Found, Attribute Not Found, Attribute Read Only, Attribute Single Instance, Authentication not successful, Bad Cryptographic Parameters, Bad Password, Codec Error, General failure, Illegal Object Type, Incompatible Cryptographic Usage Mask, Internal Server Error, Invalid Asynchronous Correlation Value, Invalid Attribute, Invalid Attribute Value, Invalid CSR, Invalid Correlation Value, Invalid Data Type, Invalid Object Type, Invalid Password, Invalid Ticket, Key Wrap Type Not Supported, Missing Initialization Vector, Missing data, Multi Valued Attribute, Non Unique Name Attribute, Numeric Range, Object Archived, Object Destroyed, Object Not Found, Object Type, Operation canceled by requester, PKCS#11 Codec Error, PKCS#11 Invalid Function, PKCS#11 Invalid Interface, Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable, Read Only Attribute, Server Limit Exceeded, Unknown Enumeration, Unknown Message Extension, Unknown Tag, Unsupported Attribute, Unsupported Cryptographic Parameters, Unsupported Protocol Version, Usage Limit Exceeded, Wrapping Object Archived, Wrapping Object Destroyed, Wrapping Object Not Found, Wrong Key Lifecycle State |
+| Ticket Type (✅) | Login |
+| Unique Identifier (✅) | Certify, Create, Create Key Pair, Create Key Pair Private Key, Create Key Pair Public Key, Create Split Key, Derive Key, ID Placeholder, Import, Join Split Key, Locate, Re-certify, Re-key, Re-key Key Pair, Re-key Key Pair Private Key, Re-key Key Pair Public Key, Register |
+| Wrapping Method (✅) | MAC/sign only, MAC/sign then encrypt. |
+
+**Removed enumeration values:**
+
+| Enumeration | Removed Values |
+|---|---|
+| Batch Error Continuation Option | Undo |
+| Cancellation Result | Canceled |
+| Certificate Request Type | PGP |
+| Certificate Type | PGP |
+| Client Registration Method | Server Pre-Generated, Unspecified |
+| Derivation Method | PBKDF2 |
+| Digital Signature Algorithm | MD2 with RSA Encryption (PKCS#1 v1.5), MD5 with RSA Encryption (PKCS#1 v1.5), RSASSA-PSS (PKCS#1 v2.1), SHA-1 with RSA Encryption (PKCS#1 v1.5), SHA-224 with RSA Encryption (PKCS#1 v1.5), SHA-256 with RSA Encryption (PKCS#1 v1.5), SHA-384 with RSA Encryption (PKCS#1 v1.5), SHA-512 with RSA Encryption (PKCS#1 v1.5) |
+| Encoding Option | No Encoding |
+| Hashing Algorithm | SHA-3-224, SHA-3-256, SHA-3-384, SHA-3-512 |
+| Key Format Type | PKCS#1, PKCS#12, PKCS#8, Raw, Transparent DH Private Key, Transparent DH Public Key, Transparent DSA Private Key, Transparent DSA Public Key, Transparent EC Private Key, Transparent EC Public Key, Transparent ECDH Private Key, Transparent ECDH Public Key, Transparent ECDSA Private Key, Transparent ECDSA Public Key, Transparent ECMQV Private Key, Transparent ECMQV Public Key, Transparent RSA Private Key, Transparent RSA Public Key, Transparent Symmetric Key |
+| Link Type | Private Key Link |
+| Mask Generator | MGF1 |
+| Object Type | Template |
+| Profile Name | Advanced Cryptographic Client KMIP v1.2, Advanced Cryptographic Client KMIP v1.3, Advanced Cryptographic Client KMIP v1.4, Advanced Cryptographic Server KMIP v1.2, Advanced Cryptographic Server KMIP v1.3, Advanced Cryptographic Server KMIP v1.4, Advanced Symmetric Key Foundry Client KMIP v1.0, Advanced Symmetric Key Foundry Client KMIP v1.1, Advanced Symmetric Key Foundry Client KMIP v1.2, Advanced Symmetric Key Foundry Client KMIP v1.3, Advanced Symmetric Key Foundry Client KMIP v1.4, Asymmetric Key Lifecycle Client KMIP v1.0, Asymmetric Key Lifecycle Client KMIP v1.1, Asymmetric Key Lifecycle Client KMIP v1.2, Asymmetric Key Lifecycle Client KMIP v1.3, Asymmetric Key Lifecycle Client KMIP v1.4, Asymmetric Key Lifecycle Server KMIP v1.0, Asymmetric Key Lifecycle Server KMIP v1.1, Asymmetric Key Lifecycle Server KMIP v1.2, Asymmetric Key Lifecycle Server KMIP v1.3, Asymmetric Key Lifecycle Server KMIP v1.4, Baseline Client Basic KMIP v1.2, Baseline Client Basic KMIP v1.3, Baseline Client Basic KMIP v1.4, Baseline Client TLS v1.2 KMIP v1.2, Baseline Client TLS v1.2 KMIP v1.3, Baseline Client TLS v1.2 KMIP v1.4, Baseline Server Basic KMIP v1.2, Baseline Server Basic KMIP v1.3, Baseline Server Basic KMIP v1.4, Baseline Server TLS v1.2 KMIP v1.2, Baseline Server TLS v1.2 KMIP v1.3, Baseline Server TLS v1.2 KMIP v1.4, Basic Cryptographic Client KMIP v1.2, Basic Cryptographic Client KMIP v1.3, Basic Cryptographic Client KMIP v1.4, Basic Cryptographic Server KMIP v1.2, Basic Cryptographic Server KMIP v1.3, Basic Cryptographic Server KMIP v1.4, Basic Symmetric Key Foundry Client KMIP v1.0, Basic Symmetric Key Foundry Client KMIP v1.1, Basic Symmetric Key Foundry Client KMIP v1.2, Basic Symmetric Key Foundry Client KMIP v1.3, Basic Symmetric Key Foundry Client KMIP v1.4, Complete Server Basic KMIP v1.2, Complete Server Basic KMIP v1.3, Complete Server Basic KMIP v1.4, Complete Server TLS v1.2 KMIP v1.2, Complete Server TLS v1.2 KMIP v1.3, Complete Server TLS v1.2 KMIP v1.4, HTTPS Client KMIP v1.0, HTTPS Client KMIP v1.1, HTTPS Client KMIP v1.2, HTTPS Client KMIP v1.3, HTTPS Client KMIP v1.4, HTTPS Server KMIP v1.0, HTTPS Server KMIP v1.1, HTTPS Server KMIP v1.2, HTTPS Server KMIP v1.3, HTTPS Server KMIP v1.4, Intermediate Symmetric Key Foundry Client KMIP v1.0, Intermediate Symmetric Key Foundry Client KMIP v1.1, Intermediate Symmetric Key Foundry Client KMIP v1.2, Intermediate Symmetric Key Foundry Client KMIP v1.3, Intermediate Symmetric Key Foundry Client KMIP v1.4, JSON Client KMIP v1.0, JSON Client KMIP v1.1, JSON Client KMIP v1.2, JSON Client KMIP v1.3, JSON Client KMIP v1.4, JSON Server KMIP v1.0, JSON Server KMIP v1.1, JSON Server KMIP v1.2, JSON Server KMIP v1.3, JSON Server KMIP v1.4, Opaque Managed Object Store Client KMIP v1.0, Opaque Managed Object Store Client KMIP v1.1, Opaque Managed Object Store Client KMIP v1.2, Opaque Managed Object Store Client KMIP v1.3, Opaque Managed Object Store Client KMIP v1.4, Opaque Managed Object Store Server KMIP v1.0, Opaque Managed Object Store Server KMIP v1.1, Opaque Managed Object Store Server KMIP v1.2, Opaque Managed Object Store Server KMIP v1.3, Opaque Managed Object Store Server KMIP v1.4, RNG Cryptographic Client KMIP v1.2, RNG Cryptographic Client KMIP v1.3, RNG Cryptographic Client KMIP v1.4, RNG Cryptographic Server KMIP v1.2, RNG Cryptographic Server KMIP v1.3, RNG Cryptographic Server KMIP v1.4, Storage Array with Self Encrypting Drive Client KMIP v1.0, Storage Array with Self Encrypting Drive Client KMIP v1.1, Storage Array with Self Encrypting Drive Client KMIP v1.2, Storage Array with Self Encrypting Drive Client KMIP v1.3, Storage Array with Self Encrypting Drive Client KMIP v1.4, Storage Array with Self Encrypting Drive Server KMIP v1.0, Storage Array with Self Encrypting Drive Server KMIP v1.1, Storage Array with Self Encrypting Drive Server KMIP v1.2, Storage Array with Self Encrypting Drive Server KMIP v1.3, Storage Array with Self Encrypting Drive Server KMIP v1.4, Suite B minLOS_128 Client KMIP v1.0, Suite B minLOS_128 Client KMIP v1.1, Suite B minLOS_128 Client KMIP v1.2, Suite B minLOS_128 Client KMIP v1.3, Suite B minLOS_128 Client KMIP v1.4, Suite B minLOS_128 Server KMIP v1.0, Suite B minLOS_128 Server KMIP v1.1, Suite B minLOS_128 Server KMIP v1.2, Suite B minLOS_128 Server KMIP v1.3, Suite B minLOS_128 Server KMIP v1.4, Suite B minLOS_192 Client KMIP v1.0, Suite B minLOS_192 Client KMIP v1.1, Suite B minLOS_192 Client KMIP v1.2, Suite B minLOS_192 Client KMIP v1.3, Suite B minLOS_192 Client KMIP v1.4, Suite B minLOS_192 Server KMIP v1.0, Suite B minLOS_192 Server KMIP v1.1, Suite B minLOS_192 Server KMIP v1.2, Suite B minLOS_192 Server KMIP v1.3, Suite B minLOS_192 Server KMIP v1.4, Symmetric Key Foundry Server KMIP v1.0, Symmetric Key Foundry Server KMIP v1.1, Symmetric Key Foundry Server KMIP v1.2, Symmetric Key Foundry Server KMIP v1.3, Symmetric Key Foundry Server KMIP v1.4, Symmetric Key Lifecycle Client KMIP v1.0, Symmetric Key Lifecycle Client KMIP v1.1, Symmetric Key Lifecycle Client KMIP v1.2, Symmetric Key Lifecycle Client KMIP v1.3, Symmetric Key Lifecycle Client KMIP v1.4, Symmetric Key Lifecycle Server KMIP v1.0, Symmetric Key Lifecycle Server KMIP v1.1, Symmetric Key Lifecycle Server KMIP v1.2, Symmetric Key Lifecycle Server KMIP v1.3, Symmetric Key Lifecycle Server KMIP v1.4, Tape Library Client KMIP v1.0, Tape Library Client KMIP v1.1, Tape Library Client KMIP v1.2, Tape Library Client KMIP v1.3, Tape Library Client KMIP v1.4, Tape Library Server KMIP v1.0, Tape Library Server KMIP v1.1, Tape Library Server KMIP v1.2, Tape Library Server KMIP v1.3, Tape Library Server KMIP v1.4, XML Client KMIP v1.0, XML Client KMIP v1.1, XML Client KMIP v1.2, XML Client KMIP v1.3, XML Client KMIP v1.4, XML Server KMIP v1.0, XML Server KMIP v1.1, XML Server KMIP v1.2, XML Server KMIP v1.3, XML Server KMIP v1.4 |
+| Result Reason | Application Namespace Not Supported, Authentication Not Successful, General Failure, Illegal Operation, Index Out of Bounds, Missing Data, Object archived, Operation Canceled By Requester |
+| Wrapping Method | Encrypt, MAC/sign, MAC/sign then encrypt |
+
+**New tags**: 336 — see Section 5.

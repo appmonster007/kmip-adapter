@@ -1,0 +1,95 @@
+{
+  "name": "Cancellation Result",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "Canceled",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Unable to Cancel",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Completed",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Failed",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Unavailable",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Unable to Cancel",
+      "value": "The cancel operation is unable to cancel the pending operation.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Completed",
+      "value": "The pending operation completed successfully before the cancellation operation was able to cancel it.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Failed",
+      "value": "The pending operation completed with a failure before the cancellation operation was able to cancel it.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Unavailable",
+      "value": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

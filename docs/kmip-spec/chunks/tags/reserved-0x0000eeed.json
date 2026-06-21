@@ -1,0 +1,24 @@
+{
+  "name": "(Reserved:0x0000EEED)",
+  "hex": "0x0000EEED",
+  "appears_in": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "reserved_in_some_version": true,
+  "per_version": {
+    "2.0": {
+      "tag": "0x0000EEED",
+      "reserved": true
+    },
+    "2.1": {
+      "tag": "0x0000EEED",
+      "reserved": true
+    },
+    "3.0": {
+      "tag": "0x0000EEED",
+      "reserved": true
+    }
+  }
+}

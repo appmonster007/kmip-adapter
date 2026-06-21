@@ -1,0 +1,41 @@
+{
+  "name": "Encoding Option",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "No Encoding",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "TTLV Encoding",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "TTLV Encoding",
+      "value": "the wrapped TTLV-encoded Key Value structure",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

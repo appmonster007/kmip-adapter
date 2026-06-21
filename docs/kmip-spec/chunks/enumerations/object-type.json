@@ -1,0 +1,176 @@
+{
+  "name": "Object Type",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "Template",
+      "value": "00000006 (deprecated)",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Certificate",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric Key",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public Key",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private Key",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Split Key",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Template",
+      "value": "0x00000006",
+      "versions": [
+        "1.2"
+      ]
+    },
+    {
+      "name": "Secret Data",
+      "value": "0x00000007",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Opaque Object",
+      "value": "0x00000008",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "PGP Key",
+      "value": "0x00000009",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Certificate Request",
+      "value": "0x0000000A",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "User",
+      "value": "0x0000000B",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Group",
+      "value": "0x0000000C",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Password Credential",
+      "value": "0x0000000D",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Device Credential",
+      "value": "0x0000000E",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "One Time Password Credential",
+      "value": "0x0000000F",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Hashed Password Credential",
+      "value": "0x00000010",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

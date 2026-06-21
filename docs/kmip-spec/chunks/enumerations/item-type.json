@@ -1,0 +1,122 @@
+{
+  "name": "Item Type",
+  "spec_versions": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "2.0",
+  "values": [
+    {
+      "name": "Boolean",
+      "value": "0x0EAEEFAE",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Big Integer",
+      "value": "A sequence of eight-bit bytes",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Date Time Extended",
+      "value": "Eight-byte long (64 bit) POSIX Time values in micro-seconds.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Date Time",
+      "value": "Eight-byte long (64 bit) POSIX Time values in seconds. .",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Long Integer",
+      "value": "Eight-byte long (64 bit) signed numbers.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Integer",
+      "value": "Four-byte long (32 bit) signed numbers",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Enumeration",
+      "value": "Four-byte long (32 bit) unsigned numbers",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Interval",
+      "value": "Four-byte long (32 bit) unsigned numbers in seconds",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Name Reference",
+      "value": "Sequence of character values.",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Byte String",
+      "value": "Sequences of bytes containing individual unspecified eight-bit binary values",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Text String",
+      "value": "Sequences of character values.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Identifier",
+      "value": "Sequences of character values.",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Reference",
+      "value": "Sequences of character values.",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

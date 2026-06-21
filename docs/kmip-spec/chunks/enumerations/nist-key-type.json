@@ -1,0 +1,182 @@
+{
+  "name": "NIST Key Type",
+  "spec_versions": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "2.0",
+  "values": [
+    {
+      "name": "Private signature key",
+      "value": "0x00000001",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public signature verification key",
+      "value": "0x00000002",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric authentication key",
+      "value": "0x00000003",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private authentication key",
+      "value": "0x00000004",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public authentication key",
+      "value": "0x00000005",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric data encryption key",
+      "value": "0x00000006",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric key wrapping key",
+      "value": "0x00000007",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric random number generation key",
+      "value": "0x00000008",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric master key",
+      "value": "0x00000009",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private key transport key",
+      "value": "0x0000000A",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public key transport key",
+      "value": "0x0000000B",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric key agreement key",
+      "value": "0x0000000C",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private static key agreement key",
+      "value": "0x0000000D",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public static key agreement key",
+      "value": "0x0000000E",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private ephemeral key agreement key",
+      "value": "0x0000000F",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public ephemeral key agreement key",
+      "value": "0x00000010",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Symmetric authorization key",
+      "value": "0x00000011",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Private authorization key",
+      "value": "0x00000012",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Public authorization key",
+      "value": "0x00000013",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

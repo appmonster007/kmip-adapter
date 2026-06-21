@@ -1,0 +1,165 @@
+{
+  "name": "Derivation Method",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "PBKDF2",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HASH",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "HMAC",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "ENCRYPT",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "NIST800-108-C",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "NIST800-108-F",
+      "value": "0x00000006",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "NIST800-108-DPI",
+      "value": "0x00000007",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Asymmetric Key",
+      "value": "0x00000008",
+      "versions": [
+        "1.4"
+      ]
+    },
+    {
+      "name": "AWS Signature Version 4",
+      "value": "As defined in Amazon Web Services Signature Version 4.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "HKDF",
+      "value": "HMAC-based Extract-and-Expand Key Derivation Function",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "HASH",
+      "value": "This method derives a key by computing a hash over the derivation key or the derivation data.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "HMAC",
+      "value": "This method derives a key by computing an HMAC over the derivation data.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "NIST800-108-C",
+      "value": "This method derives a key by computing the KDF in Counter Mode",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "NIST800-108-DPI",
+      "value": "This method derives a key by computing the KDF in Double-Pipeline Iteration Mode",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "NIST800-108-F",
+      "value": "This method derives a key by computing the KDF in Feedback Mode",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ENCRYPT",
+      "value": "This method derives a key by encrypting the derivation data.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Asymmetric Key",
+      "value": "This method derives a key using asymmetric key agreement between a private and public key.",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

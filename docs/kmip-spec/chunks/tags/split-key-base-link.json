@@ -1,0 +1,14 @@
+{
+  "name": "Split Key Base Link",
+  "hex": "0x0000EBAE",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0x0000EBAE",
+      "reserved": false
+    }
+  }
+}

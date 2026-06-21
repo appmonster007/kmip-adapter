@@ -1,0 +1,24 @@
+{
+  "name": "Last Change Date",
+  "hex": "0x0ACAEDAE",
+  "appears_in": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "2.0": {
+      "tag": "0x0ACAEDAE",
+      "reserved": false
+    },
+    "2.1": {
+      "tag": "0x0ACAEDAE",
+      "reserved": false
+    },
+    "3.0": {
+      "tag": "0x0ACAEDAE",
+      "reserved": false
+    }
+  }
+}

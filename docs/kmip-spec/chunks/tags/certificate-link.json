@@ -1,0 +1,14 @@
+{
+  "name": "Certificate Link",
+  "hex": "0x00CEFCAE",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0x00CEFCAE",
+      "reserved": false
+    }
+  }
+}

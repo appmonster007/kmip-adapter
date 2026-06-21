@@ -1,0 +1,23 @@
+{
+  "name": "Split Key Polynomial",
+  "spec_versions": [
+    "3.0"
+  ],
+  "introduced_in": "3.0",
+  "values": [
+    {
+      "name": "Polynomial-283",
+      "value": "0x00000001",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Polynomial-285",
+      "value": "0x00000002",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

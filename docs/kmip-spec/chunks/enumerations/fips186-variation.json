@@ -1,0 +1,90 @@
+{
+  "name": "FIPS186 Variation",
+  "spec_versions": [
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.3",
+  "values": [
+    {
+      "name": "Unspecified",
+      "value": "0x00000001",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "GP x-Original",
+      "value": "0x00000002",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "GP x-Change Notice",
+      "value": "0x00000003",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "x-Original",
+      "value": "0x00000004",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "x-Change Notice",
+      "value": "0x00000005",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "k-Original",
+      "value": "0x00000006",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "k-Change Notice",
+      "value": "0x00000007",
+      "versions": [
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

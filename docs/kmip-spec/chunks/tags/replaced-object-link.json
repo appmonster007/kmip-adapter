@@ -1,0 +1,14 @@
+{
+  "name": "Replaced Object Link",
+  "hex": "0xEACEDBEC",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0xEACEDBEC",
+      "reserved": false
+    }
+  }
+}

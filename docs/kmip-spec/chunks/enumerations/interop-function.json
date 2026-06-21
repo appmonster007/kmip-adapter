@@ -1,0 +1,29 @@
+{
+  "name": "Interop Function",
+  "spec_versions": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "2.0",
+  "values": [
+    {
+      "name": "End",
+      "value": "A specified test has ended",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Reset",
+      "value": "Resets the server to the state it would be in at the beginning of an interop session",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

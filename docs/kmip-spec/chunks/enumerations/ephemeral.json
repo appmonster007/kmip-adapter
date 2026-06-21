@@ -1,0 +1,23 @@
+{
+  "name": "Ephemeral",
+  "spec_versions": [
+    "3.0"
+  ],
+  "introduced_in": "3.0",
+  "values": [
+    {
+      "name": "Unique Identifier",
+      "value": "All fields in the Response Payload other than the Unique Identifier are omitted.",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Empty",
+      "value": "The Response Payload is returned as empty (all fields are omitted)",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

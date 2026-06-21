@@ -1,0 +1,24 @@
+{
+  "name": "Storage Status Mask",
+  "hex": "0x0000AEAA",
+  "appears_in": [
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "2.0": {
+      "tag": "0x0000AEAA",
+      "reserved": false
+    },
+    "2.1": {
+      "tag": "0x0000AEAA",
+      "reserved": false
+    },
+    "3.0": {
+      "tag": "0x0000AEAA",
+      "reserved": false
+    }
+  }
+}

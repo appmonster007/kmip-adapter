@@ -1,0 +1,37 @@
+{
+  "name": "Deactivation Reason Code",
+  "spec_versions": [
+    "3.0"
+  ],
+  "introduced_in": "3.0",
+  "values": [
+    {
+      "name": "Unspecified",
+      "value": "0x00000001",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Deactivation Date",
+      "value": "0x00000002",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Protect Stop Date",
+      "value": "0x00000003",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Usage Limit",
+      "value": "0x00000004",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

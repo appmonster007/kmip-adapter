@@ -1,0 +1,95 @@
+{
+  "name": "Wrapping Method",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "Encrypt then MAC/sign",
+      "value": "",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "MAC/sign then encrypt.",
+      "value": "",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "TR-31",
+      "value": "",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Encrypt",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "MAC/sign",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "Encrypt then MAC/sign",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "MAC/sign then encrypt",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "TR-31",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "MAC/sign only",
+      "value": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

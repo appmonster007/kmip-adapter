@@ -1,0 +1,14 @@
+{
+  "name": "Derived Object Link",
+  "hex": "0x0DEEDBEC",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0x0DEEDBEC",
+      "reserved": false
+    }
+  }
+}

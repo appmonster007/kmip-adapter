@@ -1,0 +1,284 @@
+{
+  "name": "Digital Signature Algorithm",
+  "spec_versions": [
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.0",
+    "2.1",
+    "3.0"
+  ],
+  "introduced_in": "1.2",
+  "values": [
+    {
+      "name": "MD2 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000001",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "MD2 with RSA Encryption",
+      "value": "0x00000001",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "MD5 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000002",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "MD5 with RSA Encryption",
+      "value": "0x00000002",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000003",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "SHA-1 with RSA Encryption",
+      "value": "0x00000003",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000004",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "SHA-224 with RSA Encryption",
+      "value": "0x00000004",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000005",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "SHA-256 with RSA Encryption",
+      "value": "0x00000005",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000006",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "SHA-384 with RSA Encryption",
+      "value": "0x00000006",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA-512 with RSA Encryption (PKCS#1 v1.5)",
+      "value": "0x00000007",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "SHA-512 with RSA Encryption",
+      "value": "0x00000007",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "RSASSA-PSS (PKCS#1 v2.1)",
+      "value": "0x00000008",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "RSASSA-PSS",
+      "value": "0x00000008",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "DSA with SHA-1",
+      "value": "0x00000009",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "DSA with SHA224",
+      "value": "0x0000000A",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "DSA with SHA256",
+      "value": "0x0000000B",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ECDSA with SHA-1",
+      "value": "0x0000000C",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ECDSA with SHA224",
+      "value": "0x0000000D",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ECDSA with SHA256",
+      "value": "0x0000000E",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ECDSA with SHA384",
+      "value": "0x0000000F",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "ECDSA with SHA512",
+      "value": "0x00000010",
+      "versions": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA3-256 with RSA Encryption",
+      "value": "0x00000011",
+      "versions": [
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA3-384 with RSA Encryption",
+      "value": "0x00000012",
+      "versions": [
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "SHA3-512 with RSA Encryption",
+      "value": "0x00000013",
+      "versions": [
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    }
+  ]
+}

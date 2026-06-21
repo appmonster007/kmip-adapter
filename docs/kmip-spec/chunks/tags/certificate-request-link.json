@@ -1,0 +1,14 @@
+{
+  "name": "Certificate Request Link",
+  "hex": "0xCEFCAEEE",
+  "appears_in": [
+    "3.0"
+  ],
+  "reserved_in_some_version": false,
+  "per_version": {
+    "3.0": {
+      "tag": "0xCEFCAEEE",
+      "reserved": false
+    }
+  }
+}

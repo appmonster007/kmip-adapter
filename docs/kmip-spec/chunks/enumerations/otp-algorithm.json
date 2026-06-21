@@ -1,0 +1,16 @@
+{
+  "name": "OTP Algorithm",
+  "spec_versions": [
+    "3.0"
+  ],
+  "introduced_in": "3.0",
+  "values": [
+    {
+      "name": "TOTP",
+      "value": "Time-Based One-Time Password Algorithm [RFC6238]",
+      "versions": [
+        "3.0"
+      ]
+    }
+  ]
+}

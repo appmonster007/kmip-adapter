@@ -1,0 +1,13 @@
+# State
+
+- **Spec versions**: `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
+- **Introduced**: v1.2
+
+| Name | Value | Versions |
+|---|---|---|
+| Pre-Active | `0x00000001` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| Active | `0x00000002` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| Deactivated | `0x00000003` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| Compromised | `0x00000004` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| Destroyed | `0x00000005` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| Destroyed Compromised | `0x00000006` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
