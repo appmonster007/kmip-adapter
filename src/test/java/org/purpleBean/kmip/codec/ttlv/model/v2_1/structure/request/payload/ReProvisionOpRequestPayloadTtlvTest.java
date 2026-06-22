@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.ReProvisionOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
@@ -23,11 +24,11 @@ class ReProvisionOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestS
 
     @Override
     public ReProvisionOpRequestPayload createDefault() {
-        return ReProvisionOpRequestPayload.builder().build();
+        return ReProvisionOpRequestPayload.of(UniqueIdentifier.builder().value("test-uid-1").build());
     }
 
     @Override
     public ReProvisionOpRequestPayload createVariant() {
-        return ReProvisionOpRequestPayload.builder().build();
+        return ReProvisionOpRequestPayload.of(UniqueIdentifier.builder().value("test-uid-variant").build());
     }
 }

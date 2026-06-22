@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP Ping Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Ping.
+ * KMIP Ping Request Payload (V2_1).
+ *
+ * <p>Per KMIP v2.1 spec §6, this request payload defines no fields.
  */
 @Data
 @Builder(toBuilder = true)

@@ -31,7 +31,6 @@ class GetConstraintsOpRequestPayloadTest extends AbstractKmipStructureTestSuite<
 
     @Override
     protected GetConstraintsOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
         return GetConstraintsOpRequestPayload.builder().build();
     }
 
@@ -42,13 +41,11 @@ class GetConstraintsOpRequestPayloadTest extends AbstractKmipStructureTestSuite<
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
         return 0;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSizeLessThanOrEqualTo(1);
     }
 }

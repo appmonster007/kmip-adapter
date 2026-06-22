@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP SetDefaults Response Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for SetDefaults.
+ * KMIP SetDefaults Response Payload (V2_1).
+ *
+ * <p>Per KMIP v2.1 spec §6, this response payload defines no fields.
  */
 @Data
 @Builder(toBuilder = true)

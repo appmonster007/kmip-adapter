@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP Obliterate Response Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Obliterate.
+ * KMIP Obliterate Response Payload (V3_0).
+ *
+ * <p>Per KMIP v3.0 spec §6, this response payload defines no fields.
  */
 @Data
 @Builder(toBuilder = true)

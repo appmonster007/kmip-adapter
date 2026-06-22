@@ -2,17 +2,24 @@ package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP SetAttribute Response Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for SetAttribute.
+ * KMIP SetAttribute Response Payload (V2_1, V3_0).
+ *
+ * <p>Per KMIP v2.1 spec:
+ * <ul>
+ *   <li>UniqueIdentifier — Required</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +36,25 @@ public class SetAttributeOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
+    @NonNull
+    private final UniqueIdentifier uniqueIdentifier;
+
     @Builder
-    private SetAttributeOpResponsePayload() {
+    private SetAttributeOpResponsePayload(@NonNull UniqueIdentifier uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
         validate();
     }
 
     public static SetAttributeOpResponsePayload of(List<KmipDataType> values) {
-        return SetAttributeOpResponsePayload.builder().build();
+        var builder = SetAttributeOpResponsePayload.builder();
+        values.forEach(value -> {
+            if (value instanceof UniqueIdentifier) builder.uniqueIdentifier((UniqueIdentifier) value);
+        });
+        return builder.build();
+    }
+
+    public static SetAttributeOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
+        return SetAttributeOpResponsePayload.builder().uniqueIdentifier(uniqueIdentifier).build();
     }
 
     private void validate() {
@@ -51,10 +70,18 @@ public class SetAttributeOpResponsePayload implements ResponsePayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

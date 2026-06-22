@@ -17,10 +17,10 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.GetConstraintsOp
 public class GetConstraintsOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<GetConstraintsOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public GetConstraintsOpRequestPayloadBenchmarkSubject() throws Exception {
-        GetConstraintsOpRequestPayload subject = GetConstraintsOpRequestPayload.builder().build();  // TODO: Create a default instance
+        GetConstraintsOpRequestPayload subject = GetConstraintsOpRequestPayload.builder().build();
         initialize(subject, GetConstraintsOpRequestPayload.class);
     }
 

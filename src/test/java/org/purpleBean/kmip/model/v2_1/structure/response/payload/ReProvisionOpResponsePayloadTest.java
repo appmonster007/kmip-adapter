@@ -31,7 +31,6 @@ class ReProvisionOpResponsePayloadTest extends AbstractKmipStructureTestSuite<Re
 
     @Override
     protected ReProvisionOpResponsePayload createDefault() {
-        // TODO: Create a default instance of the structure
         return ReProvisionOpResponsePayload.builder().build();
     }
 
@@ -42,13 +41,11 @@ class ReProvisionOpResponsePayloadTest extends AbstractKmipStructureTestSuite<Re
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
         return 0;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).isEmpty();
     }
 }

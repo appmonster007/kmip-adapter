@@ -6,6 +6,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -31,8 +32,7 @@ class SetAttributeOpResponsePayloadTest extends AbstractKmipStructureTestSuite<S
 
     @Override
     protected SetAttributeOpResponsePayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return SetAttributeOpResponsePayload.builder().build();
+        return SetAttributeOpResponsePayload.of(UniqueIdentifier.builder().value("test-uid-1").build());
     }
 
     @Override
@@ -42,13 +42,12 @@ class SetAttributeOpResponsePayloadTest extends AbstractKmipStructureTestSuite<S
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(UniqueIdentifier.class);
     }
 }

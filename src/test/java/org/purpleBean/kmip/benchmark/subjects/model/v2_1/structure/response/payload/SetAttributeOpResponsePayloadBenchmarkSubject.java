@@ -12,15 +12,16 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.SetAttributeOpResponsePayload;
 
 public class SetAttributeOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<SetAttributeOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public SetAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
-        SetAttributeOpResponsePayload subject = SetAttributeOpResponsePayload.builder().build();  // TODO: Create a default instance
+        SetAttributeOpResponsePayload subject = SetAttributeOpResponsePayload.of(UniqueIdentifier.builder().value("test-uid-1").build());
         initialize(subject, SetAttributeOpResponsePayload.class);
     }
 

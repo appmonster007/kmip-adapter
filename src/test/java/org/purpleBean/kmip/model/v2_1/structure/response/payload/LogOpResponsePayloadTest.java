@@ -31,7 +31,6 @@ class LogOpResponsePayloadTest extends AbstractKmipStructureTestSuite<LogOpRespo
 
     @Override
     protected LogOpResponsePayload createDefault() {
-        // TODO: Create a default instance of the structure
         return LogOpResponsePayload.builder().build();
     }
 
@@ -42,13 +41,11 @@ class LogOpResponsePayloadTest extends AbstractKmipStructureTestSuite<LogOpRespo
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
         return 0;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).isEmpty();
     }
 }

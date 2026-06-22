@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.GetConstraintsOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
@@ -28,6 +29,6 @@ class GetConstraintsOpRequestPayloadJsonTest extends AbstractJsonSerializationTe
 
     @Override
     public GetConstraintsOpRequestPayload createVariant() {
-        return GetConstraintsOpRequestPayload.builder().build();
+        return GetConstraintsOpRequestPayload.builder().uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-1").build()).build();
     }
 }
