@@ -20,7 +20,9 @@ public class CredentialInformationBenchmarkSubject extends KmipBenchmarkSubject<
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public CredentialInformationBenchmarkSubject() throws Exception {
-        CredentialInformation subject = CredentialInformation.builder().build();  // TODO: Create a default instance
+        CredentialInformation subject = CredentialInformation.builder()
+                .credentialType(CredentialType.of(CredentialType.Standard.USERNAME_AND_PASSWORD))
+                .build();
         initialize(subject, CredentialInformation.class);
     }
 

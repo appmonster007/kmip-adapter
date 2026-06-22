@@ -3,27 +3,28 @@ package org.purpleBean.kmip.model.v3_0.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import org.purpleBean.kmip.model.core.enumeration.DeactivationReasonCode;
+import org.purpleBean.kmip.model.core.type.DeactivationMessage;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP DeactivationReason structure (KMIP v3.0).
+ *
+ * <p>Per KMIP v3.0 spec Table 97. Encodes the reason a managed object was deactivated.</p>
+ *
+ * <ul>
+ *   <li>{@code deactivationReasonCode} — required enumeration (tag DEACTIVATION_REASON_CODE 0x4201B9)</li>
+ *   <li>{@code deactivationMessage}    — optional TextString (tag DEACTIVATION_MESSAGE 0x4201B7)</li>
+ * </ul>
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeactivationReason implements KmipStructure {
+
     public static final KmipTag kmipTag = KmipTag.Standard.DEACTIVATION_REASON.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
@@ -31,63 +32,42 @@ public class DeactivationReason implements KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, DeactivationReason.class);
-            // TODO: Add other register calls as required
         }
     }
 
-    // TODO: Add fields for the structure, e.g.:
-    // @NonNull
-    // private final Field1 field1;
-    // @NonNull
-    // @Singular
-    // private final List<Field2> field2s;
+    @NonNull
+    private final DeactivationReasonCode deactivationReasonCode;
 
-    // TODO: Add a custom constructor for the builder
+    private final DeactivationMessage deactivationMessage;
+
     @Builder
     private DeactivationReason(
-            // @NonNull Field1 field1,
-            // List<Field2> field2s
-    ) {
-        // this.field1 = field1;
-        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
+            @NonNull DeactivationReasonCode deactivationReasonCode,
+            DeactivationMessage deactivationMessage) {
+        this.deactivationReasonCode = deactivationReasonCode;
+        this.deactivationMessage = deactivationMessage;
         validate();
     }
 
-    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
-    // public static DeactivationReason of(@NonNull KmipDataType value) {
-    //     if (!(value instanceof KmipStructure structure)) {
-    //         throw new IllegalArgumentException("Invalid value: " + value);
-    //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    //     // TODO: Update to extract fields from the map and call the other 'of' method
-    //     // DeactivationReasonBuilder builder = DeactivationReason.builder();
-    //     // if (map.containsKey(Field1.kmipTag)) {
-    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-    //     // }
-    //     // if (map.containsKey(Field2.kmipTag)) {
-    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-    //     // }
-    //     // return builder.build();
-    //     throw new UnsupportedOperationException("Not yet implemented");
-    // }
-
-    // TODO: Add an 'of' method with all the fields as arguments
     public static DeactivationReason of(
-                // @NonNull Field1 field1,
-                // @NonNull Field2 field2
-    ) {
+            @NonNull DeactivationReasonCode deactivationReasonCode,
+            DeactivationMessage deactivationMessage) {
         return DeactivationReason.builder()
-                     // .field1(field1)
-                     // .field2(field2)
-                     .build();
+                .deactivationReasonCode(deactivationReasonCode)
+                .deactivationMessage(deactivationMessage)
+                .build();
     }
 
-    // TODO: Add a validate method
+    public static DeactivationReason of(@NonNull DeactivationReasonCode deactivationReasonCode) {
+        return DeactivationReason.builder()
+                .deactivationReasonCode(deactivationReasonCode)
+                .build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Add validation logic here
     }
 
     @Override
@@ -108,14 +88,9 @@ public class DeactivationReason implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        // TODO: Return a list of all the fields
-        // return Stream.of(
-        //                 field1,
-        //                 field2s)
-        //         .filter(Objects::nonNull)
-        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-        //         .map(KmipDataType.class::cast)
-        //         .toArray(KmipDataType[]::new);
-        return new KmipDataType[0];
+        return Stream.of(deactivationReasonCode, deactivationMessage)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

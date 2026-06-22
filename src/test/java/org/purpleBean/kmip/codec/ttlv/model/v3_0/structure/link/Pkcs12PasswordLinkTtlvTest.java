@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.Pkcs12PasswordLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Pkcs12PasswordLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class Pkcs12PasswordLinkTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs
 
     @Override
     public Pkcs12PasswordLink createDefault() {
-        return Pkcs12PasswordLink.builder().build();
+        return Pkcs12PasswordLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public Pkcs12PasswordLink createVariant() {
-        return Pkcs12PasswordLink.builder().build();
+        return Pkcs12PasswordLink.of(UniqueIdentifier.of("test-id"));
     }
 }

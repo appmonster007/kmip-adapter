@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.DerivedObjectLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DerivedObjectLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class DerivedObjectLinkTtlvTest extends AbstractTtlvSerializationTestSuite<Deriv
 
     @Override
     public DerivedObjectLink createDefault() {
-        return DerivedObjectLink.builder().build();
+        return DerivedObjectLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public DerivedObjectLink createVariant() {
-        return DerivedObjectLink.builder().build();
+        return DerivedObjectLink.of(UniqueIdentifier.of("test-id"));
     }
 }

@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ class WrappingKeyLinkTest extends AbstractKmipStructureTestSuite<WrappingKeyLink
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V3_0;
     }
 
     @Override
@@ -32,7 +33,7 @@ class WrappingKeyLinkTest extends AbstractKmipStructureTestSuite<WrappingKeyLink
     @Override
     protected WrappingKeyLink createDefault() {
         // TODO: Create a default instance of the structure
-        return WrappingKeyLink.builder().build();
+        return WrappingKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
@@ -43,12 +44,12 @@ class WrappingKeyLinkTest extends AbstractKmipStructureTestSuite<WrappingKeyLink
     @Override
     public int expectedMinComponentCount() {
         // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
         // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
     }
 }

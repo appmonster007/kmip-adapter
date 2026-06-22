@@ -23,11 +23,16 @@ class PasswordCredentialTtlvTest extends AbstractTtlvSerializationTestSuite<Pass
 
     @Override
     public PasswordCredential createDefault() {
-        return PasswordCredential.builder().build();
+        return PasswordCredential.builder()
+                .password(Password.of("s3cr3t"))
+                .build();
     }
 
     @Override
     public PasswordCredential createVariant() {
-        return PasswordCredential.builder().build();
+        return PasswordCredential.builder()
+                .password(Password.of("passw0rd"))
+                .iterationCount(IterationCount.of(1000))
+                .build();
     }
 }

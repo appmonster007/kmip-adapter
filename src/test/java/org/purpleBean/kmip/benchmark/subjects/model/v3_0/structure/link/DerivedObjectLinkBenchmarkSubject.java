@@ -13,14 +13,15 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v3_0.structure.link.DerivedObjectLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class DerivedObjectLinkBenchmarkSubject extends KmipBenchmarkSubject<DerivedObjectLink> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public DerivedObjectLinkBenchmarkSubject() throws Exception {
-        DerivedObjectLink subject = DerivedObjectLink.builder().build();  // TODO: Create a default instance
+        DerivedObjectLink subject = DerivedObjectLink.of(UniqueIdentifier.of("test-id"));
         initialize(subject, DerivedObjectLink.class);
     }
 

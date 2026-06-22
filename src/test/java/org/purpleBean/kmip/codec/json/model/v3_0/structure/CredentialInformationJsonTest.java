@@ -23,11 +23,16 @@ class CredentialInformationJsonTest extends AbstractJsonSerializationTestSuite<C
 
     @Override
     public CredentialInformation createDefault() {
-        return CredentialInformation.builder().build();
+        return CredentialInformation.builder()
+                .credentialType(CredentialType.of(CredentialType.Standard.USERNAME_AND_PASSWORD))
+                .build();
     }
 
     @Override
     public CredentialInformation createVariant() {
-        return CredentialInformation.builder().build();
+        return CredentialInformation.builder()
+                .credentialType(CredentialType.of(CredentialType.Standard.ONE_TIME_PASSWORD))
+                .credentialType(CredentialType.of(CredentialType.Standard.HASHED_PASSWORD))
+                .build();
     }
 }

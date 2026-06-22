@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.ChildLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ChildLink Json Serialization Tests")
@@ -23,11 +24,11 @@ class ChildLinkJsonTest extends AbstractJsonSerializationTestSuite<ChildLink> {
 
     @Override
     public ChildLink createDefault() {
-        return ChildLink.builder().build();
+        return ChildLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public ChildLink createVariant() {
-        return ChildLink.builder().build();
+        return ChildLink.of(UniqueIdentifier.of("test-id"));
     }
 }

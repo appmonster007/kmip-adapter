@@ -31,8 +31,9 @@ class PasswordCredentialTest extends AbstractKmipStructureTestSuite<PasswordCred
 
     @Override
     protected PasswordCredential createDefault() {
-        // TODO: Create a default instance of the structure
-        return PasswordCredential.builder().build();
+        return PasswordCredential.builder()
+                .password(Password.of("s3cr3t"))
+                .build();
     }
 
     @Override
@@ -42,13 +43,12 @@ class PasswordCredentialTest extends AbstractKmipStructureTestSuite<PasswordCred
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(Password.class);
     }
 }

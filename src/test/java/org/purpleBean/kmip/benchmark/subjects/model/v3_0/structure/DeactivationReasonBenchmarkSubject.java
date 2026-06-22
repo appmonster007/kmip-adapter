@@ -20,7 +20,9 @@ public class DeactivationReasonBenchmarkSubject extends KmipBenchmarkSubject<Dea
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public DeactivationReasonBenchmarkSubject() throws Exception {
-        DeactivationReason subject = DeactivationReason.builder().build();  // TODO: Create a default instance
+        DeactivationReason subject = DeactivationReason.builder()
+                .deactivationReasonCode(DeactivationReasonCode.of(DeactivationReasonCode.Standard.UNSPECIFIED))
+                .build();
         initialize(subject, DeactivationReason.class);
     }
 

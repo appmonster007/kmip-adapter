@@ -171,6 +171,7 @@ org.purpleBean.kmip.model.core.type.D
 org.purpleBean.kmip.model.core.type.DataByteString
 org.purpleBean.kmip.model.core.type.DataLength
 org.purpleBean.kmip.model.core.type.DeactivationDate
+org.purpleBean.kmip.model.core.type.DeactivationMessage
 org.purpleBean.kmip.model.core.type.DerivationData
 org.purpleBean.kmip.model.core.type.DestroyDate
 org.purpleBean.kmip.model.core.type.DeviceIdentifier
@@ -182,8 +183,11 @@ org.purpleBean.kmip.model.core.type.ExtensionType
 org.purpleBean.kmip.model.core.type.FixedFieldLength
 org.purpleBean.kmip.model.core.type.Fresh
 org.purpleBean.kmip.model.core.type.G
+org.purpleBean.kmip.model.core.type.HashedPasswordUsername
+org.purpleBean.kmip.model.core.type.HashedUsernamePassword
 org.purpleBean.kmip.model.core.type.IVCounterNonce
 org.purpleBean.kmip.model.core.type.InitialCounterValue
+org.purpleBean.kmip.model.core.type.InteropIdentifier
 org.purpleBean.kmip.model.core.type.InitialDate
 org.purpleBean.kmip.model.core.type.InitializationVector
 org.purpleBean.kmip.model.core.type.InvocationFieldLength
@@ -202,6 +206,7 @@ org.purpleBean.kmip.model.core.type.KeyValuePresent
 org.purpleBean.kmip.model.core.type.LastChangeDate
 org.purpleBean.kmip.model.core.type.LeaseTime
 org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier
+org.purpleBean.kmip.model.core.type.LogMessage
 org.purpleBean.kmip.model.core.type.MACSignature
 org.purpleBean.kmip.model.core.type.MacData
 org.purpleBean.kmip.model.core.type.MachineIdentifier
@@ -218,8 +223,16 @@ org.purpleBean.kmip.model.core.type.Offset
 org.purpleBean.kmip.model.core.type.OpaqueDataValue
 org.purpleBean.kmip.model.core.type.OperationPolicyName
 org.purpleBean.kmip.model.core.type.OriginalCreationDate
+org.purpleBean.kmip.model.core.type.OtpCounter
+org.purpleBean.kmip.model.core.type.OtpDigest
+org.purpleBean.kmip.model.core.type.OtpDigits
+org.purpleBean.kmip.model.core.type.OtpInterval
+org.purpleBean.kmip.model.core.type.OtpSeed
+org.purpleBean.kmip.model.core.type.OtpSerial
 org.purpleBean.kmip.model.core.type.P
 org.purpleBean.kmip.model.core.type.Password
+org.purpleBean.kmip.model.core.type.PasswordSalt
+org.purpleBean.kmip.model.core.type.PasswordSaltAlgorithm
 org.purpleBean.kmip.model.core.type.PgpKeyVersion
 org.purpleBean.kmip.model.core.type.PrimeExponentP
 org.purpleBean.kmip.model.core.type.PrimeExponentQ
@@ -242,6 +255,7 @@ org.purpleBean.kmip.model.core.type.ReplacedUniqueIdentifier
 org.purpleBean.kmip.model.core.type.ResultMessage
 org.purpleBean.kmip.model.core.type.RevocationMessage
 org.purpleBean.kmip.model.core.type.Salt
+org.purpleBean.kmip.model.core.type.SaltedPassword
 org.purpleBean.kmip.model.core.type.SerialNumber
 org.purpleBean.kmip.model.core.type.SignatureData
 org.purpleBean.kmip.model.core.type.SplitKeyParts

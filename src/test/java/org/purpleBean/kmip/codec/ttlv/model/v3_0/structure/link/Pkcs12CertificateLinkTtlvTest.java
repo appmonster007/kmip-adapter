@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.Pkcs12CertificateLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Pkcs12CertificateLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class Pkcs12CertificateLinkTtlvTest extends AbstractTtlvSerializationTestSuite<P
 
     @Override
     public Pkcs12CertificateLink createDefault() {
-        return Pkcs12CertificateLink.builder().build();
+        return Pkcs12CertificateLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public Pkcs12CertificateLink createVariant() {
-        return Pkcs12CertificateLink.builder().build();
+        return Pkcs12CertificateLink.of(UniqueIdentifier.of("test-id"));
     }
 }

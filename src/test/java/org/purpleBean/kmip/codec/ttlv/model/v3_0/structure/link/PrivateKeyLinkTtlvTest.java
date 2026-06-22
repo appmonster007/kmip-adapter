@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.PrivateKeyLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PrivateKeyLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class PrivateKeyLinkTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateK
 
     @Override
     public PrivateKeyLink createDefault() {
-        return PrivateKeyLink.builder().build();
+        return PrivateKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public PrivateKeyLink createVariant() {
-        return PrivateKeyLink.builder().build();
+        return PrivateKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 }

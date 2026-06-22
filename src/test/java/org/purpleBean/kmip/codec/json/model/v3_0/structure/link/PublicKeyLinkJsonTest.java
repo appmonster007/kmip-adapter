@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.PublicKeyLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("PublicKeyLink Json Serialization Tests")
@@ -23,11 +24,11 @@ class PublicKeyLinkJsonTest extends AbstractJsonSerializationTestSuite<PublicKey
 
     @Override
     public PublicKeyLink createDefault() {
-        return PublicKeyLink.builder().build();
+        return PublicKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public PublicKeyLink createVariant() {
-        return PublicKeyLink.builder().build();
+        return PublicKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 }

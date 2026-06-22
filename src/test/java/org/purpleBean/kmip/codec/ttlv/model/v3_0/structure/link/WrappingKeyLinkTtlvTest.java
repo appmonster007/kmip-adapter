@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.WrappingKeyLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("WrappingKeyLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class WrappingKeyLinkTtlvTest extends AbstractTtlvSerializationTestSuite<Wrappin
 
     @Override
     public WrappingKeyLink createDefault() {
-        return WrappingKeyLink.builder().build();
+        return WrappingKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public WrappingKeyLink createVariant() {
-        return WrappingKeyLink.builder().build();
+        return WrappingKeyLink.of(UniqueIdentifier.of("test-id"));
     }
 }

@@ -23,11 +23,19 @@ class OtpCredentialJsonTest extends AbstractJsonSerializationTestSuite<OtpCreden
 
     @Override
     public OtpCredential createDefault() {
-        return OtpCredential.builder().build();
+        return OtpCredential.builder()
+                .otpAlgorithm(OtpAlgorithm.of(OtpAlgorithm.Standard.TOTP))
+                .build();
     }
 
     @Override
     public OtpCredential createVariant() {
-        return OtpCredential.builder().build();
+        return OtpCredential.builder()
+                .otpAlgorithm(OtpAlgorithm.of(OtpAlgorithm.Standard.HOTP))
+                .otpSerial(OtpSerial.of("SN-12345"))
+                .otpInterval(OtpInterval.of(30))
+                .otpDigits(OtpDigits.of(6))
+                .otpCounter(OtpCounter.of(42))
+                .build();
     }
 }

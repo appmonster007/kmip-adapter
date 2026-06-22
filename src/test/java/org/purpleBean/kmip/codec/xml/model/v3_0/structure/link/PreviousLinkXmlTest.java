@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.PreviousLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PreviousLink Xml Serialization Tests")
@@ -23,11 +24,11 @@ class PreviousLinkXmlTest extends AbstractXmlSerializationTestSuite<PreviousLink
 
     @Override
     public PreviousLink createDefault() {
-        return PreviousLink.builder().build();
+        return PreviousLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public PreviousLink createVariant() {
-        return PreviousLink.builder().build();
+        return PreviousLink.of(UniqueIdentifier.of("test-id"));
     }
 }

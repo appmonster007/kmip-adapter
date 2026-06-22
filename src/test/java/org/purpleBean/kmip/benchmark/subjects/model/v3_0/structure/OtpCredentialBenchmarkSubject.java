@@ -20,7 +20,9 @@ public class OtpCredentialBenchmarkSubject extends KmipBenchmarkSubject<OtpCrede
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public OtpCredentialBenchmarkSubject() throws Exception {
-        OtpCredential subject = OtpCredential.builder().build();  // TODO: Create a default instance
+        OtpCredential subject = OtpCredential.builder()
+                .otpAlgorithm(OtpAlgorithm.of(OtpAlgorithm.Standard.TOTP))
+                .build();
         initialize(subject, OtpCredential.class);
     }
 

@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.ReplacementObjectLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ReplacementObjectLink Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class ReplacementObjectLinkTtlvTest extends AbstractTtlvSerializationTestSuite<R
 
     @Override
     public ReplacementObjectLink createDefault() {
-        return ReplacementObjectLink.builder().build();
+        return ReplacementObjectLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public ReplacementObjectLink createVariant() {
-        return ReplacementObjectLink.builder().build();
+        return ReplacementObjectLink.of(UniqueIdentifier.of("test-id"));
     }
 }

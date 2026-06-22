@@ -3,27 +3,38 @@ package org.purpleBean.kmip.model.v3_0.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import org.purpleBean.kmip.model.core.enumeration.OtpAlgorithm;
+import org.purpleBean.kmip.model.core.type.OtpCounter;
+import org.purpleBean.kmip.model.core.type.OtpDigest;
+import org.purpleBean.kmip.model.core.type.OtpDigits;
+import org.purpleBean.kmip.model.core.type.OtpInterval;
+import org.purpleBean.kmip.model.core.type.OtpSeed;
+import org.purpleBean.kmip.model.core.type.OtpSerial;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP OtpCredential structure (KMIP v3.0).
+ *
+ * <p>Encodes a One-Time Password credential per KMIP v3.0 spec.</p>
+ *
+ * <ul>
+ *   <li>{@code otpAlgorithm} — required Enumeration (tag OTP_ALGORITHM 0x4201A8)</li>
+ *   <li>{@code otpDigest}    — optional Enumeration wrapping CryptographicAlgorithm (tag OTP_DIGEST 0x4201A9)</li>
+ *   <li>{@code otpSerial}    — optional TextString (tag OTP_SERIAL 0x4201AA)</li>
+ *   <li>{@code otpSeed}      — optional ByteString (tag OTP_SEED 0x4201AB)</li>
+ *   <li>{@code otpInterval}  — optional Interval (tag OTP_INTERVAL 0x4201AC)</li>
+ *   <li>{@code otpDigits}    — optional Integer (tag OTP_DIGITS 0x4201AD)</li>
+ *   <li>{@code otpCounter}   — optional Integer (tag OTP_COUNTER 0x4201AE)</li>
+ * </ul>
+ */
 @Data
 @Builder(toBuilder = true)
 public class OtpCredential implements KmipStructure {
+
     public static final KmipTag kmipTag = KmipTag.Standard.OTP_CREDENTIAL.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
@@ -31,63 +42,67 @@ public class OtpCredential implements KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, OtpCredential.class);
-            // TODO: Add other register calls as required
         }
     }
 
-    // TODO: Add fields for the structure, e.g.:
-    // @NonNull
-    // private final Field1 field1;
-    // @NonNull
-    // @Singular
-    // private final List<Field2> field2s;
+    @NonNull
+    private final OtpAlgorithm otpAlgorithm;
 
-    // TODO: Add a custom constructor for the builder
+    private final OtpDigest otpDigest;
+    private final OtpSerial otpSerial;
+    private final OtpSeed otpSeed;
+    private final OtpInterval otpInterval;
+    private final OtpDigits otpDigits;
+    private final OtpCounter otpCounter;
+
     @Builder
     private OtpCredential(
-            // @NonNull Field1 field1,
-            // List<Field2> field2s
-    ) {
-        // this.field1 = field1;
-        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
+            @NonNull OtpAlgorithm otpAlgorithm,
+            OtpDigest otpDigest,
+            OtpSerial otpSerial,
+            OtpSeed otpSeed,
+            OtpInterval otpInterval,
+            OtpDigits otpDigits,
+            OtpCounter otpCounter) {
+        this.otpAlgorithm = otpAlgorithm;
+        this.otpDigest = otpDigest;
+        this.otpSerial = otpSerial;
+        this.otpSeed = otpSeed;
+        this.otpInterval = otpInterval;
+        this.otpDigits = otpDigits;
+        this.otpCounter = otpCounter;
         validate();
     }
 
-    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
-    // public static OtpCredential of(@NonNull KmipDataType value) {
-    //     if (!(value instanceof KmipStructure structure)) {
-    //         throw new IllegalArgumentException("Invalid value: " + value);
-    //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    //     // TODO: Update to extract fields from the map and call the other 'of' method
-    //     // OtpCredentialBuilder builder = OtpCredential.builder();
-    //     // if (map.containsKey(Field1.kmipTag)) {
-    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-    //     // }
-    //     // if (map.containsKey(Field2.kmipTag)) {
-    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-    //     // }
-    //     // return builder.build();
-    //     throw new UnsupportedOperationException("Not yet implemented");
-    // }
-
-    // TODO: Add an 'of' method with all the fields as arguments
     public static OtpCredential of(
-                // @NonNull Field1 field1,
-                // @NonNull Field2 field2
-    ) {
+            @NonNull OtpAlgorithm otpAlgorithm,
+            OtpDigest otpDigest,
+            OtpSerial otpSerial,
+            OtpSeed otpSeed,
+            OtpInterval otpInterval,
+            OtpDigits otpDigits,
+            OtpCounter otpCounter) {
         return OtpCredential.builder()
-                     // .field1(field1)
-                     // .field2(field2)
-                     .build();
+                .otpAlgorithm(otpAlgorithm)
+                .otpDigest(otpDigest)
+                .otpSerial(otpSerial)
+                .otpSeed(otpSeed)
+                .otpInterval(otpInterval)
+                .otpDigits(otpDigits)
+                .otpCounter(otpCounter)
+                .build();
     }
 
-    // TODO: Add a validate method
+    public static OtpCredential of(@NonNull OtpAlgorithm otpAlgorithm) {
+        return OtpCredential.builder()
+                .otpAlgorithm(otpAlgorithm)
+                .build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Add validation logic here
     }
 
     @Override
@@ -108,14 +123,9 @@ public class OtpCredential implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        // TODO: Return a list of all the fields
-        // return Stream.of(
-        //                 field1,
-        //                 field2s)
-        //         .filter(Objects::nonNull)
-        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-        //         .map(KmipDataType.class::cast)
-        //         .toArray(KmipDataType[]::new);
-        return new KmipDataType[0];
+        return Stream.of(otpAlgorithm, otpDigest, otpSerial, otpSeed, otpInterval, otpDigits, otpCounter)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

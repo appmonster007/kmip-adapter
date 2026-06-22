@@ -2,28 +2,36 @@ package org.purpleBean.kmip.model.v3_0.structure;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import org.purpleBean.kmip.model.core.type.IterationCount;
+import org.purpleBean.kmip.model.core.type.Password;
+import org.purpleBean.kmip.model.core.type.PasswordSalt;
+import org.purpleBean.kmip.model.core.type.PasswordSaltAlgorithm;
+import org.purpleBean.kmip.model.core.type.SaltedPassword;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP PasswordCredential structure (KMIP v3.0).
+ *
+ * <p>Encodes a password-based credential per KMIP v3.0. All fields are optional
+ * at the encoding level; the application is responsible for ensuring at least
+ * one meaningful field is present.</p>
+ *
+ * <ul>
+ *   <li>{@code password}              — optional TextString (tag PASSWORD 0x4200A1)</li>
+ *   <li>{@code passwordSalt}          — optional ByteString (tag PASSWORD_SALT 0x4201A2)</li>
+ *   <li>{@code passwordSaltAlgorithm} — optional Enumeration (tag PASSWORD_SALT_ALGORITHM 0x4201A3)</li>
+ *   <li>{@code saltedPassword}        — optional ByteString (tag SALTED_PASSWORD 0x4201A4)</li>
+ *   <li>{@code iterationCount}        — optional Integer (tag ITERATION_COUNT 0x42003C)</li>
+ * </ul>
+ */
 @Data
 @Builder(toBuilder = true)
 public class PasswordCredential implements KmipStructure {
+
     public static final KmipTag kmipTag = KmipTag.Standard.PASSWORD_CREDENTIAL.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
@@ -31,63 +39,49 @@ public class PasswordCredential implements KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PasswordCredential.class);
-            // TODO: Add other register calls as required
         }
     }
 
-    // TODO: Add fields for the structure, e.g.:
-    // @NonNull
-    // private final Field1 field1;
-    // @NonNull
-    // @Singular
-    // private final List<Field2> field2s;
+    private final Password password;
+    private final PasswordSalt passwordSalt;
+    private final PasswordSaltAlgorithm passwordSaltAlgorithm;
+    private final SaltedPassword saltedPassword;
+    private final IterationCount iterationCount;
 
-    // TODO: Add a custom constructor for the builder
     @Builder
     private PasswordCredential(
-            // @NonNull Field1 field1,
-            // List<Field2> field2s
-    ) {
-        // this.field1 = field1;
-        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
+            Password password,
+            PasswordSalt passwordSalt,
+            PasswordSaltAlgorithm passwordSaltAlgorithm,
+            SaltedPassword saltedPassword,
+            IterationCount iterationCount) {
+        this.password = password;
+        this.passwordSalt = passwordSalt;
+        this.passwordSaltAlgorithm = passwordSaltAlgorithm;
+        this.saltedPassword = saltedPassword;
+        this.iterationCount = iterationCount;
         validate();
     }
 
-    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
-    // public static PasswordCredential of(@NonNull KmipDataType value) {
-    //     if (!(value instanceof KmipStructure structure)) {
-    //         throw new IllegalArgumentException("Invalid value: " + value);
-    //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    //     // TODO: Update to extract fields from the map and call the other 'of' method
-    //     // PasswordCredentialBuilder builder = PasswordCredential.builder();
-    //     // if (map.containsKey(Field1.kmipTag)) {
-    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-    //     // }
-    //     // if (map.containsKey(Field2.kmipTag)) {
-    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-    //     // }
-    //     // return builder.build();
-    //     throw new UnsupportedOperationException("Not yet implemented");
-    // }
-
-    // TODO: Add an 'of' method with all the fields as arguments
     public static PasswordCredential of(
-                // @NonNull Field1 field1,
-                // @NonNull Field2 field2
-    ) {
+            Password password,
+            PasswordSalt passwordSalt,
+            PasswordSaltAlgorithm passwordSaltAlgorithm,
+            SaltedPassword saltedPassword,
+            IterationCount iterationCount) {
         return PasswordCredential.builder()
-                     // .field1(field1)
-                     // .field2(field2)
-                     .build();
+                .password(password)
+                .passwordSalt(passwordSalt)
+                .passwordSaltAlgorithm(passwordSaltAlgorithm)
+                .saltedPassword(saltedPassword)
+                .iterationCount(iterationCount)
+                .build();
     }
 
-    // TODO: Add a validate method
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Add validation logic here
     }
 
     @Override
@@ -108,14 +102,9 @@ public class PasswordCredential implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        // TODO: Return a list of all the fields
-        // return Stream.of(
-        //                 field1,
-        //                 field2s)
-        //         .filter(Objects::nonNull)
-        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-        //         .map(KmipDataType.class::cast)
-        //         .toArray(KmipDataType[]::new);
-        return new KmipDataType[0];
+        return Stream.of(password, passwordSalt, passwordSaltAlgorithm, saltedPassword, iterationCount)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

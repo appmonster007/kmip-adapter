@@ -31,8 +31,9 @@ class OtpCredentialTest extends AbstractKmipStructureTestSuite<OtpCredential> {
 
     @Override
     protected OtpCredential createDefault() {
-        // TODO: Create a default instance of the structure
-        return OtpCredential.builder().build();
+        return OtpCredential.builder()
+                .otpAlgorithm(OtpAlgorithm.of(OtpAlgorithm.Standard.TOTP))
+                .build();
     }
 
     @Override
@@ -42,13 +43,12 @@ class OtpCredentialTest extends AbstractKmipStructureTestSuite<OtpCredential> {
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(OtpAlgorithm.class);
     }
 }

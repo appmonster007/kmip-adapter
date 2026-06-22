@@ -4,26 +4,29 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.enumeration.CredentialType;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP CredentialInformation structure (KMIP v3.0).
+ *
+ * <p>Contains one or more {@link CredentialType} values indicating the types of
+ * credentials associated with a managed object.</p>
+ *
+ * <ul>
+ *   <li>{@code credentialTypes} — one or more CredentialType enumerations (tag CREDENTIAL_TYPE 0x420024)</li>
+ * </ul>
+ */
 @Data
 @Builder(toBuilder = true)
 public class CredentialInformation implements KmipStructure {
+
     public static final KmipTag kmipTag = KmipTag.Standard.CREDENTIAL_INFORMATION.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
@@ -31,63 +34,38 @@ public class CredentialInformation implements KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, CredentialInformation.class);
-            // TODO: Add other register calls as required
         }
     }
 
-    // TODO: Add fields for the structure, e.g.:
-    // @NonNull
-    // private final Field1 field1;
-    // @NonNull
-    // @Singular
-    // private final List<Field2> field2s;
+    @NonNull
+    @Singular
+    private final List<CredentialType> credentialTypes;
 
-    // TODO: Add a custom constructor for the builder
     @Builder
-    private CredentialInformation(
-            // @NonNull Field1 field1,
-            // List<Field2> field2s
-    ) {
-        // this.field1 = field1;
-        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
+    private CredentialInformation(@NonNull List<CredentialType> credentialTypes) {
+        this.credentialTypes = (credentialTypes == null) ? Collections.emptyList() : List.copyOf(credentialTypes);
         validate();
     }
 
-    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
-    // public static CredentialInformation of(@NonNull KmipDataType value) {
-    //     if (!(value instanceof KmipStructure structure)) {
-    //         throw new IllegalArgumentException("Invalid value: " + value);
-    //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    //     // TODO: Update to extract fields from the map and call the other 'of' method
-    //     // CredentialInformationBuilder builder = CredentialInformation.builder();
-    //     // if (map.containsKey(Field1.kmipTag)) {
-    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-    //     // }
-    //     // if (map.containsKey(Field2.kmipTag)) {
-    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-    //     // }
-    //     // return builder.build();
-    //     throw new UnsupportedOperationException("Not yet implemented");
-    // }
-
-    // TODO: Add an 'of' method with all the fields as arguments
-    public static CredentialInformation of(
-                // @NonNull Field1 field1,
-                // @NonNull Field2 field2
-    ) {
+    public static CredentialInformation of(@NonNull List<CredentialType> credentialTypes) {
         return CredentialInformation.builder()
-                     // .field1(field1)
-                     // .field2(field2)
-                     .build();
+                .credentialTypes(credentialTypes)
+                .build();
     }
 
-    // TODO: Add a validate method
+    public static CredentialInformation of(@NonNull CredentialType credentialType) {
+        return CredentialInformation.builder()
+                .credentialType(credentialType)
+                .build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Add validation logic here
+        if (credentialTypes == null || credentialTypes.isEmpty()) {
+            throw new IllegalArgumentException("CredentialInformation requires at least one CredentialType");
+        }
     }
 
     @Override
@@ -108,14 +86,9 @@ public class CredentialInformation implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        // TODO: Return a list of all the fields
-        // return Stream.of(
-        //                 field1,
-        //                 field2s)
-        //         .filter(Objects::nonNull)
-        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-        //         .map(KmipDataType.class::cast)
-        //         .toArray(KmipDataType[]::new);
-        return new KmipDataType[0];
+        return credentialTypes.stream()
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

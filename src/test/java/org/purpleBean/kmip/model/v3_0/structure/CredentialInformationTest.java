@@ -31,8 +31,9 @@ class CredentialInformationTest extends AbstractKmipStructureTestSuite<Credentia
 
     @Override
     protected CredentialInformation createDefault() {
-        // TODO: Create a default instance of the structure
-        return CredentialInformation.builder().build();
+        return CredentialInformation.builder()
+                .credentialType(CredentialType.of(CredentialType.Standard.USERNAME_AND_PASSWORD))
+                .build();
     }
 
     @Override
@@ -42,13 +43,12 @@ class CredentialInformationTest extends AbstractKmipStructureTestSuite<Credentia
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(CredentialType.class);
     }
 }

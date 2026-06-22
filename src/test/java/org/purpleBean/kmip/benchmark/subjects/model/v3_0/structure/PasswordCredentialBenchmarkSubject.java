@@ -20,7 +20,9 @@ public class PasswordCredentialBenchmarkSubject extends KmipBenchmarkSubject<Pas
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public PasswordCredentialBenchmarkSubject() throws Exception {
-        PasswordCredential subject = PasswordCredential.builder().build();  // TODO: Create a default instance
+        PasswordCredential subject = PasswordCredential.builder()
+                .password(Password.of("s3cr3t"))
+                .build();
         initialize(subject, PasswordCredential.class);
     }
 

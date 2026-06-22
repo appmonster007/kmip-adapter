@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.link.CertificateLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CertificateLink Xml Serialization Tests")
@@ -23,11 +24,11 @@ class CertificateLinkXmlTest extends AbstractXmlSerializationTestSuite<Certifica
 
     @Override
     public CertificateLink createDefault() {
-        return CertificateLink.builder().build();
+        return CertificateLink.of(UniqueIdentifier.of("test-id"));
     }
 
     @Override
     public CertificateLink createVariant() {
-        return CertificateLink.builder().build();
+        return CertificateLink.of(UniqueIdentifier.of("test-id"));
     }
 }

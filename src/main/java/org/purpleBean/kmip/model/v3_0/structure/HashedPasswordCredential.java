@@ -3,27 +3,30 @@ package org.purpleBean.kmip.model.v3_0.structure;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purpleBean.kmip.model.core.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.core.type.HashedUsernamePassword;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP HashedPasswordCredential structure (KMIP v3.0).
+ *
+ * <p>Encodes a hashed-password credential per KMIP v3.0 spec.</p>
+ *
+ * <ul>
+ *   <li>{@code cryptographicAlgorithm} — optional Enumeration (tag CRYPTOGRAPHIC_ALGORITHM 0x420028)</li>
+ *   <li>{@code hashedUsernamePassword}  — required ByteString (tag HASHED_USERNAME_PASSWORD 0x4201B0)</li>
+ *   <li>{@code hashedPasswordUsername}  — required ByteString (tag HASHED_PASSWORD_USERNAME 0x4201B1)</li>
+ * </ul>
+ */
 @Data
 @Builder(toBuilder = true)
 public class HashedPasswordCredential implements KmipStructure {
+
     public static final KmipTag kmipTag = KmipTag.Standard.HASHED_PASSWORD_CREDENTIAL.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
@@ -31,63 +34,52 @@ public class HashedPasswordCredential implements KmipStructure {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, HashedPasswordCredential.class);
-            // TODO: Add other register calls as required
         }
     }
 
-    // TODO: Add fields for the structure, e.g.:
-    // @NonNull
-    // private final Field1 field1;
-    // @NonNull
-    // @Singular
-    // private final List<Field2> field2s;
+    private final CryptographicAlgorithm cryptographicAlgorithm;
 
-    // TODO: Add a custom constructor for the builder
+    @NonNull
+    private final HashedUsernamePassword hashedUsernamePassword;
+
+    @NonNull
+    private final HashedPasswordUsername hashedPasswordUsername;
+
     @Builder
     private HashedPasswordCredential(
-            // @NonNull Field1 field1,
-            // List<Field2> field2s
-    ) {
-        // this.field1 = field1;
-        // this.field2s = (field2s == null) ? Collections.emptyList() : field2s;
+            CryptographicAlgorithm cryptographicAlgorithm,
+            @NonNull HashedUsernamePassword hashedUsernamePassword,
+            @NonNull HashedPasswordUsername hashedPasswordUsername) {
+        this.cryptographicAlgorithm = cryptographicAlgorithm;
+        this.hashedUsernamePassword = hashedUsernamePassword;
+        this.hashedPasswordUsername = hashedPasswordUsername;
         validate();
     }
 
-    // TODO: Add an 'of' method with a single argument of KmipStructure, if required
-    // public static HashedPasswordCredential of(@NonNull KmipDataType value) {
-    //     if (!(value instanceof KmipStructure structure)) {
-    //         throw new IllegalArgumentException("Invalid value: " + value);
-    //     }
-    //     Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue()).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    //     // TODO: Update to extract fields from the map and call the other 'of' method
-    //     // HashedPasswordCredentialBuilder builder = HashedPasswordCredential.builder();
-    //     // if (map.containsKey(Field1.kmipTag)) {
-    //     //     builder.field1((Field1) map.get(Field1.kmipTag).getFirst());
-    //     // }
-    //     // if (map.containsKey(Field2.kmipTag)) {
-    //     //     map.get(Field2.kmipTag).forEach(item -> builder.field2((Field2) item));
-    //     // }
-    //     // return builder.build();
-    //     throw new UnsupportedOperationException("Not yet implemented");
-    // }
-
-    // TODO: Add an 'of' method with all the fields as arguments
     public static HashedPasswordCredential of(
-                // @NonNull Field1 field1,
-                // @NonNull Field2 field2
-    ) {
+            CryptographicAlgorithm cryptographicAlgorithm,
+            @NonNull HashedUsernamePassword hashedUsernamePassword,
+            @NonNull HashedPasswordUsername hashedPasswordUsername) {
         return HashedPasswordCredential.builder()
-                     // .field1(field1)
-                     // .field2(field2)
-                     .build();
+                .cryptographicAlgorithm(cryptographicAlgorithm)
+                .hashedUsernamePassword(hashedUsernamePassword)
+                .hashedPasswordUsername(hashedPasswordUsername)
+                .build();
     }
 
-    // TODO: Add a validate method
+    public static HashedPasswordCredential of(
+            @NonNull HashedUsernamePassword hashedUsernamePassword,
+            @NonNull HashedPasswordUsername hashedPasswordUsername) {
+        return HashedPasswordCredential.builder()
+                .hashedUsernamePassword(hashedUsernamePassword)
+                .hashedPasswordUsername(hashedPasswordUsername)
+                .build();
+    }
+
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Add validation logic here
     }
 
     @Override
@@ -108,14 +100,9 @@ public class HashedPasswordCredential implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        // TODO: Return a list of all the fields
-        // return Stream.of(
-        //                 field1,
-        //                 field2s)
-        //         .filter(Objects::nonNull)
-        //         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-        //         .map(KmipDataType.class::cast)
-        //         .toArray(KmipDataType[]::new);
-        return new KmipDataType[0];
+        return Stream.of(cryptographicAlgorithm, hashedUsernamePassword, hashedPasswordUsername)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 }

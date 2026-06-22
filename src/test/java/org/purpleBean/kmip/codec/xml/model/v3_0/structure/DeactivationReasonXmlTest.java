@@ -23,11 +23,16 @@ class DeactivationReasonXmlTest extends AbstractXmlSerializationTestSuite<Deacti
 
     @Override
     public DeactivationReason createDefault() {
-        return DeactivationReason.builder().build();
+        return DeactivationReason.builder()
+                .deactivationReasonCode(DeactivationReasonCode.of(DeactivationReasonCode.Standard.UNSPECIFIED))
+                .build();
     }
 
     @Override
     public DeactivationReason createVariant() {
-        return DeactivationReason.builder().build();
+        return DeactivationReason.builder()
+                .deactivationReasonCode(DeactivationReasonCode.of(DeactivationReasonCode.Standard.DEACTIVATION_DATE))
+                .deactivationMessage(DeactivationMessage.of("expired"))
+                .build();
     }
 }

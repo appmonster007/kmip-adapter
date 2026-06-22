@@ -13,14 +13,15 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v3_0.structure.link.Pkcs12PasswordLink;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class Pkcs12PasswordLinkBenchmarkSubject extends KmipBenchmarkSubject<Pkcs12PasswordLink> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public Pkcs12PasswordLinkBenchmarkSubject() throws Exception {
-        Pkcs12PasswordLink subject = Pkcs12PasswordLink.builder().build();  // TODO: Create a default instance
+        Pkcs12PasswordLink subject = Pkcs12PasswordLink.of(UniqueIdentifier.of("test-id"));
         initialize(subject, Pkcs12PasswordLink.class);
     }
 

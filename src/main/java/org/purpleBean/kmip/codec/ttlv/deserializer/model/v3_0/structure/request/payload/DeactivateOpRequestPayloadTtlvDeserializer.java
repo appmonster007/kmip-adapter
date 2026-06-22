@@ -11,6 +11,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.type.DeactivationDate;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 import org.purpleBean.kmip.model.v3_0.structure.request.payload.DeactivateOpRequestPayload;
 
 import java.io.IOException;
@@ -29,13 +32,13 @@ public class DeactivateOpRequestPayloadTtlvDeserializer extends AbstractKmipData
 
     @Override
     protected void setValue(DeactivateOpRequestPayload.DeactivateOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.DEACTIVATION_REASON -> builder.deactivationReason(mapper.readValue(p, DeactivationReason.class));
+            case KmipTag.Standard.DEACTIVATION_DATE -> builder.deactivationDate(mapper.readValue(p, DeactivationDate.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

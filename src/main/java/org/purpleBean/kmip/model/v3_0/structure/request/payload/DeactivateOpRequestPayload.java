@@ -2,17 +2,28 @@ package org.purpleBean.kmip.model.v3_0.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.DeactivationDate;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP Deactivate Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Deactivate.
+ * KMIP Deactivate Request Payload (V3_0).
+ *
+ * <p>Per KMIP v3.0 spec:
+ * <ul>
+ *   <li>UniqueIdentifier — Required</li>
+ *   <li>DeactivationReason — Optional</li>
+ *   <li>DeactivationDate — Optional</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +40,43 @@ public class DeactivateOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    @NonNull
+    private final UniqueIdentifier uniqueIdentifier;
+    private final DeactivationReason deactivationReason;
+    private final DeactivationDate deactivationDate;
+
     @Builder
-    private DeactivateOpRequestPayload() {
+    private DeactivateOpRequestPayload(
+            @NonNull UniqueIdentifier uniqueIdentifier,
+            DeactivationReason deactivationReason,
+            DeactivationDate deactivationDate
+    ) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.deactivationReason = deactivationReason;
+        this.deactivationDate = deactivationDate;
         validate();
     }
 
     public static DeactivateOpRequestPayload of(List<KmipDataType> values) {
-        return DeactivateOpRequestPayload.builder().build();
+        var builder = DeactivateOpRequestPayload.builder();
+        values.forEach(value -> {
+            if (value instanceof UniqueIdentifier) builder.uniqueIdentifier((UniqueIdentifier) value);
+            else if (value instanceof DeactivationReason) builder.deactivationReason((DeactivationReason) value);
+            else if (value instanceof DeactivationDate) builder.deactivationDate((DeactivationDate) value);
+        });
+        return builder.build();
+    }
+
+    public static DeactivateOpRequestPayload of(
+            @NonNull UniqueIdentifier uniqueIdentifier,
+            DeactivationReason deactivationReason,
+            DeactivationDate deactivationDate
+    ) {
+        return DeactivateOpRequestPayload.builder()
+                .uniqueIdentifier(uniqueIdentifier)
+                .deactivationReason(deactivationReason)
+                .deactivationDate(deactivationDate)
+                .build();
     }
 
     private void validate() {
@@ -51,10 +92,21 @@ public class DeactivateOpRequestPayload implements RequestPayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(
+                        uniqueIdentifier,
+                        deactivationReason,
+                        deactivationDate)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }
