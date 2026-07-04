@@ -2,17 +2,28 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.AdjustmentType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP AdjustAttribute Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for AdjustAttribute.
+ * KMIP AdjustAttribute Request Payload (V2_1, V3_0).
+ *
+ * <p>Per KMIP v2.1 spec:
+ * <ul>
+ *   <li>UniqueIdentifier — Optional</li>
+ *   <li>CurrentAttribute — Required</li>
+ *   <li>AdjustmentType — Required</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +40,30 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
         }
     }
 
+    private final UniqueIdentifier uniqueIdentifier;
+
+    @NonNull
+    private final CurrentAttribute currentAttribute;
+
+    @NonNull
+    private final AdjustmentType adjustmentType;
+
     @Builder
-    private AdjustAttributeOpRequestPayload() {
+    private AdjustAttributeOpRequestPayload(UniqueIdentifier uniqueIdentifier, @NonNull CurrentAttribute currentAttribute, @NonNull AdjustmentType adjustmentType) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.currentAttribute = currentAttribute;
+        this.adjustmentType = adjustmentType;
         validate();
     }
 
     public static AdjustAttributeOpRequestPayload of(List<KmipDataType> values) {
-        return AdjustAttributeOpRequestPayload.builder().build();
+        var builder = AdjustAttributeOpRequestPayload.builder();
+        values.forEach(value -> {
+            if (value instanceof UniqueIdentifier) builder.uniqueIdentifier((UniqueIdentifier) value);
+            else if (value instanceof CurrentAttribute) builder.currentAttribute((CurrentAttribute) value);
+            else if (value instanceof AdjustmentType) builder.adjustmentType((AdjustmentType) value);
+        });
+        return builder.build();
     }
 
     private void validate() {
@@ -51,10 +79,18 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier, currentAttribute, adjustmentType)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

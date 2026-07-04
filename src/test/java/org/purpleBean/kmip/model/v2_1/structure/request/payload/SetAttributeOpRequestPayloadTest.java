@@ -6,10 +6,12 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.structure.NewAttribute;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -31,8 +33,10 @@ class SetAttributeOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Se
 
     @Override
     protected SetAttributeOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return SetAttributeOpRequestPayload.builder().build();
+        return SetAttributeOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("set-attr-uid-1").build())
+                .newAttribute(NewAttribute.builder().attribute(CryptographicAlgorithm.Standard.AES.inst()).build())
+                .build();
     }
 
     @Override
@@ -42,13 +46,12 @@ class SetAttributeOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Se
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSizeGreaterThanOrEqualTo(1);
+        assertThat(values).anyMatch(v -> v instanceof NewAttribute);
     }
 }

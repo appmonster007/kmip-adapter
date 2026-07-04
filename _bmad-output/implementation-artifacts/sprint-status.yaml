@@ -52,7 +52,7 @@ development_status:
   epic-1: in-progress
   1-1-implement-newattribute-and-currentattribute-structures: review
   1-2-implement-ticket-structure: review
-  1-3-complete-setattribute-and-adjustattribute-operation-payloads: ready-for-dev
+  1-3-complete-setattribute-and-adjustattribute-operation-payloads: review
   1-4-verify-and-complete-login-logout-and-delegatedlogin-operation-payloads: ready-for-dev
   epic-1-retrospective: optional
 
