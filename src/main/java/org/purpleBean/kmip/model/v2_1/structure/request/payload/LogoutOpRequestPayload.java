@@ -2,21 +2,24 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP Logout Request Payload (stub).
+ * KMIP Logout Request Payload (V2.1+, §6.1.31).
  *
- * <p>Per KMIP v2.1 spec §6.1.31:
+ * <p>Fields:
  * <ul>
  *   <li>Ticket — Required — the ticket to be invalidated</li>
  * </ul>
- * Blocked: {@code Ticket} structure not yet implemented.
  */
 @Data
 @Builder(toBuilder = true)
@@ -33,13 +36,21 @@ public class LogoutOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    @NonNull
+    private final Ticket ticket;
+
     @Builder
-    private LogoutOpRequestPayload() {
+    private LogoutOpRequestPayload(@NonNull Ticket ticket) {
+        this.ticket = ticket;
         validate();
     }
 
     public static LogoutOpRequestPayload of(List<KmipDataType> values) {
-        return LogoutOpRequestPayload.builder().build();
+        var builder = LogoutOpRequestPayload.builder();
+        values.forEach(value -> {
+            if (value instanceof Ticket) builder.ticket((Ticket) value);
+        });
+        return builder.build();
     }
 
     private void validate() {
@@ -55,10 +66,15 @@ public class LogoutOpRequestPayload implements RequestPayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(ticket).filter(Objects::nonNull).map(KmipDataType.class::cast).toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

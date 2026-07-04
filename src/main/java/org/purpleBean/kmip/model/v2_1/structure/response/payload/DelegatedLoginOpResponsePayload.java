@@ -2,17 +2,24 @@ package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP DelegatedLogin Response Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for DelegatedLogin.
+ * KMIP DelegatedLogin Response Payload (V2.1+, §6.1.12).
+ *
+ * <p>Fields:
+ * <ul>
+ *   <li>Ticket — Required — the delegated ticket returned to the requester</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +36,21 @@ public class DelegatedLoginOpResponsePayload implements ResponsePayloadStructure
         }
     }
 
+    @NonNull
+    private final Ticket ticket;
+
     @Builder
-    private DelegatedLoginOpResponsePayload() {
+    private DelegatedLoginOpResponsePayload(@NonNull Ticket ticket) {
+        this.ticket = ticket;
         validate();
     }
 
     public static DelegatedLoginOpResponsePayload of(List<KmipDataType> values) {
-        return DelegatedLoginOpResponsePayload.builder().build();
+        var builder = DelegatedLoginOpResponsePayload.builder();
+        values.forEach(value -> {
+            if (value instanceof Ticket) builder.ticket((Ticket) value);
+        });
+        return builder.build();
     }
 
     private void validate() {
@@ -51,10 +66,15 @@ public class DelegatedLoginOpResponsePayload implements ResponsePayloadStructure
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(ticket).filter(Objects::nonNull).map(KmipDataType.class::cast).toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

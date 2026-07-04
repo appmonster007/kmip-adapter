@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP Login Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Login.
+ * KMIP Login Request Payload (V2.1+, §6.1.30).
+ *
+ * <p>Per spec, all request fields are optional (LeaseTime, RequestCount, UsageLimits).
+ * None of these field types currently support V2.1 in the model layer; an empty
+ * payload is spec-valid for the minimal case (server uses session defaults).
+ * Full field implementation is deferred until those types are extended to V2.1.
  */
 @Data
 @Builder(toBuilder = true)

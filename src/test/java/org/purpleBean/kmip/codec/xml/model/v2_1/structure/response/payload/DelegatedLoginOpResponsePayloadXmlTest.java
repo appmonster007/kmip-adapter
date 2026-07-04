@@ -10,11 +10,17 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DelegatedLoginOpResponsePayload Xml Serialization Tests")
 class DelegatedLoginOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<DelegatedLoginOpResponsePayload> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
 
     @Override
     public Class<DelegatedLoginOpResponsePayload> type() {
@@ -23,11 +29,21 @@ class DelegatedLoginOpResponsePayloadXmlTest extends AbstractXmlSerializationTes
 
     @Override
     public DelegatedLoginOpResponsePayload createDefault() {
-        return DelegatedLoginOpResponsePayload.builder().build();
+        return DelegatedLoginOpResponsePayload.builder()
+                .ticket(Ticket.builder()
+                        .ticketType(TicketType.Standard.LOGIN.inst())
+                        .ticketValue(TicketValue.of(new byte[]{0x01, 0x02, 0x03}))
+                        .build())
+                .build();
     }
 
     @Override
     public DelegatedLoginOpResponsePayload createVariant() {
-        return DelegatedLoginOpResponsePayload.builder().build();
+        return DelegatedLoginOpResponsePayload.builder()
+                .ticket(Ticket.builder()
+                        .ticketType(TicketType.Standard.LOGIN.inst())
+                        .ticketValue(TicketValue.of(new byte[]{0x04, 0x05, 0x06, 0x07}))
+                        .build())
+                .build();
     }
 }

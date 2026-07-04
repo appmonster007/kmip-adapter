@@ -12,15 +12,23 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.enumeration.TicketType;
+import org.purpleBean.kmip.model.core.type.TicketValue;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload;
 
 public class DelegatedLoginOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<DelegatedLoginOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public DelegatedLoginOpResponsePayloadBenchmarkSubject() throws Exception {
-        DelegatedLoginOpResponsePayload subject = DelegatedLoginOpResponsePayload.builder().build();  // TODO: Create a default instance
+        DelegatedLoginOpResponsePayload subject = DelegatedLoginOpResponsePayload.builder()
+                .ticket(Ticket.builder()
+                        .ticketType(TicketType.Standard.LOGIN.inst())
+                        .ticketValue(TicketValue.of(new byte[]{0x01, 0x02, 0x03}))
+                        .build())
+                .build();
         initialize(subject, DelegatedLoginOpResponsePayload.class);
     }
 

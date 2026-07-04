@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP DelegatedLogin Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for DelegatedLogin.
+ * KMIP DelegatedLogin Request Payload (V2.1+, §6.1.12).
+ *
+ * <p>Per spec, required field: Rights (structure containing Right sub-structures that define
+ * allowed operations, objects, and object groups). Optional fields: LeaseTime, RequestCount, UsageLimits.
+ * Full implementation is deferred until Rights/Right structures are implemented (they depend on
+ * Operations, Objects, ObjectGroups sub-structures that do not yet exist in the model layer).
  */
 @Data
 @Builder(toBuilder = true)

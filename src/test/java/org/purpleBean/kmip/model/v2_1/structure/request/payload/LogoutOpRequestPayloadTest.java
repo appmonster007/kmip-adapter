@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -31,7 +32,12 @@ class LogoutOpRequestPayloadTest extends AbstractKmipStructureTestSuite<LogoutOp
 
     @Override
     protected LogoutOpRequestPayload createDefault() {
-        return LogoutOpRequestPayload.builder().build();
+        return LogoutOpRequestPayload.builder()
+                .ticket(Ticket.builder()
+                        .ticketType(TicketType.Standard.LOGIN.inst())
+                        .ticketValue(TicketValue.of(new byte[]{0x01, 0x02, 0x03}))
+                        .build())
+                .build();
     }
 
     @Override
@@ -41,11 +47,12 @@ class LogoutOpRequestPayloadTest extends AbstractKmipStructureTestSuite<LogoutOp
 
     @Override
     public int expectedMinComponentCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        assertThat(values).isEmpty();
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(Ticket.class);
     }
 }
