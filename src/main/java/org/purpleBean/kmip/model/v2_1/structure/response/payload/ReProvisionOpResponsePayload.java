@@ -5,14 +5,20 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP ReProvision Response Payload (V2_1).
+ * KMIP ReProvision Response Payload (V2_1, V3_0).
  *
- * <p>Per KMIP v2.1 spec §6, this response payload defines no fields.
+ * <p>Per KMIP v2.1 spec §6.1.48:
+ * <ul>
+ *   <li>UniqueIdentifier — Optional — the Certificate or Private Key unique identifier</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +35,24 @@ public class ReProvisionOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
+    private final UniqueIdentifier uniqueIdentifier;
+
     @Builder
-    private ReProvisionOpResponsePayload() {
+    private ReProvisionOpResponsePayload(UniqueIdentifier uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
         validate();
     }
 
     public static ReProvisionOpResponsePayload of(List<KmipDataType> values) {
-        return ReProvisionOpResponsePayload.builder().build();
+        var builder = ReProvisionOpResponsePayload.builder();
+        values.forEach(value -> {
+            if (value instanceof UniqueIdentifier) builder.uniqueIdentifier((UniqueIdentifier) value);
+        });
+        return builder.build();
+    }
+
+    public static ReProvisionOpResponsePayload of(UniqueIdentifier uniqueIdentifier) {
+        return ReProvisionOpResponsePayload.builder().uniqueIdentifier(uniqueIdentifier).build();
     }
 
     private void validate() {
@@ -51,10 +68,18 @@ public class ReProvisionOpResponsePayload implements ResponsePayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

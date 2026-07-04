@@ -6,6 +6,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -23,11 +24,11 @@ class ReProvisionOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTest
 
     @Override
     public ReProvisionOpResponsePayload createDefault() {
-        return ReProvisionOpResponsePayload.builder().build();
+        return ReProvisionOpResponsePayload.builder().uniqueIdentifier(UniqueIdentifier.builder().value("reprovision-uid-1").build()).build();
     }
 
     @Override
     public ReProvisionOpResponsePayload createVariant() {
-        return ReProvisionOpResponsePayload.builder().build();
+        return ReProvisionOpResponsePayload.builder().uniqueIdentifier(UniqueIdentifier.builder().value("reprovision-uid-2").build()).build();
     }
 }

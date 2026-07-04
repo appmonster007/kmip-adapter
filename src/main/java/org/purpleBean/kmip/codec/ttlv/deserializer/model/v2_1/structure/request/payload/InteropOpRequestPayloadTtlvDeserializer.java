@@ -29,13 +29,12 @@ public class InteropOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTyp
 
     @Override
     protected void setValue(InteropOpRequestPayload.InteropOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.INTEROP_FUNCTION -> builder.interopFunction(mapper.readValue(p, InteropFunction.class));
+            case KmipTag.Standard.INTEROP_IDENTIFIER -> builder.interopIdentifier(mapper.readValue(p, InteropIdentifier.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

@@ -29,13 +29,20 @@ public class PasswordCredentialJsonDeserializer extends AbstractKmipDataTypeJson
 
     @Override
     protected void setValue(PasswordCredential.PasswordCredentialBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        if (nodeTag == Password.kmipTag.getValue()) {
+            builder.password(ctxt.readValue(p, Password.class));
+        } else if (nodeTag == PasswordSalt.kmipTag.getValue()) {
+            builder.passwordSalt(ctxt.readValue(p, PasswordSalt.class));
+        } else if (nodeTag == PasswordSaltAlgorithm.kmipTag.getValue()) {
+            builder.passwordSaltAlgorithm(ctxt.readValue(p, PasswordSaltAlgorithm.class));
+        } else if (nodeTag == SaltedPassword.kmipTag.getValue()) {
+            builder.saltedPassword(ctxt.readValue(p, SaltedPassword.class));
+        } else if (nodeTag == IterationCount.kmipTag.getValue()) {
+            builder.iterationCount(ctxt.readValue(p, IterationCount.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

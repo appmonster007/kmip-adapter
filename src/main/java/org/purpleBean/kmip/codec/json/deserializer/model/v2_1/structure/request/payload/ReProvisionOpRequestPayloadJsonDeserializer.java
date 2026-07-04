@@ -12,7 +12,8 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.type.CertificateRequest;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.ReProvisionOpRequestPayload;
 
 import java.io.IOException;
@@ -32,7 +33,8 @@ public class ReProvisionOpRequestPayloadJsonDeserializer extends AbstractKmipDat
     protected void setValue(ReProvisionOpRequestPayload.ReProvisionOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.CERTIFICATE_REQUEST -> builder.certificateRequest(ctxt.readValue(p, CertificateRequest.class));
+            case KmipTag.Standard.CERTIFICATE -> builder.certificate(ctxt.readValue(p, Certificate.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

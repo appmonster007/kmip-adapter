@@ -2,17 +2,24 @@ package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.EndpointRole;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
- * KMIP SetEndpointRole Response Payload (V2_1).
+ * KMIP SetEndpointRole Response Payload (V2_1, V3_0).
  *
- * <p>Per KMIP v2.1 spec §6, this response payload defines no fields.
+ * <p>Per KMIP v2.1 spec §6.1.49:
+ * <ul>
+ *   <li>EndpointRole — Required — the accepted endpoint role as applied by the server</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +36,25 @@ public class SetEndpointRoleOpResponsePayload implements ResponsePayloadStructur
         }
     }
 
+    @NonNull
+    private final EndpointRole endpointRole;
+
     @Builder
-    private SetEndpointRoleOpResponsePayload() {
+    private SetEndpointRoleOpResponsePayload(@NonNull EndpointRole endpointRole) {
+        this.endpointRole = endpointRole;
         validate();
     }
 
     public static SetEndpointRoleOpResponsePayload of(List<KmipDataType> values) {
-        return SetEndpointRoleOpResponsePayload.builder().build();
+        var builder = SetEndpointRoleOpResponsePayload.builder();
+        values.forEach(value -> {
+            if (value instanceof EndpointRole) builder.endpointRole((EndpointRole) value);
+        });
+        return builder.build();
+    }
+
+    public static SetEndpointRoleOpResponsePayload of(@NonNull EndpointRole endpointRole) {
+        return SetEndpointRoleOpResponsePayload.builder().endpointRole(endpointRole).build();
     }
 
     private void validate() {
@@ -51,10 +70,18 @@ public class SetEndpointRoleOpResponsePayload implements ResponsePayloadStructur
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(endpointRole)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

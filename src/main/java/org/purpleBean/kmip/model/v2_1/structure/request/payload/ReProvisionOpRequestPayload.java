@@ -2,11 +2,11 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.type.CertificateRequest;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,9 +16,10 @@ import java.util.stream.Stream;
 /**
  * KMIP ReProvision Request Payload (V2_1, V3_0).
  *
- * <p>Per KMIP v2.1 spec:
+ * <p>Per KMIP v2.1 spec §6.1.48:
  * <ul>
- *   <li>UniqueIdentifier — Required</li>
+ *   <li>CertificateRequest — Optional — the certificate request (CSR) to be signed</li>
+ *   <li>Certificate — Optional — the certificate to replace the existing one</li>
  * </ul>
  */
 @Data
@@ -36,25 +37,26 @@ public class ReProvisionOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    @NonNull
-    private final UniqueIdentifier uniqueIdentifier;
+    private final CertificateRequest certificateRequest;
+    private final Certificate certificate;
 
     @Builder
-    private ReProvisionOpRequestPayload(@NonNull UniqueIdentifier uniqueIdentifier) {
-        this.uniqueIdentifier = uniqueIdentifier;
+    private ReProvisionOpRequestPayload(
+            CertificateRequest certificateRequest,
+            Certificate certificate
+    ) {
+        this.certificateRequest = certificateRequest;
+        this.certificate = certificate;
         validate();
     }
 
     public static ReProvisionOpRequestPayload of(List<KmipDataType> values) {
         var builder = ReProvisionOpRequestPayload.builder();
         values.forEach(value -> {
-            if (value instanceof UniqueIdentifier) builder.uniqueIdentifier((UniqueIdentifier) value);
+            if (value instanceof CertificateRequest) builder.certificateRequest((CertificateRequest) value);
+            else if (value instanceof Certificate) builder.certificate((Certificate) value);
         });
         return builder.build();
-    }
-
-    public static ReProvisionOpRequestPayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
-        return ReProvisionOpRequestPayload.builder().uniqueIdentifier(uniqueIdentifier).build();
     }
 
     private void validate() {
@@ -77,7 +79,7 @@ public class ReProvisionOpRequestPayload implements RequestPayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(uniqueIdentifier)
+        return Stream.of(certificateRequest, certificate)
                 .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);

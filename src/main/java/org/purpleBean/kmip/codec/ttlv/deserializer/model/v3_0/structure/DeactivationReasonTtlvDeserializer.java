@@ -29,13 +29,14 @@ public class DeactivationReasonTtlvDeserializer extends AbstractKmipDataTypeTtlv
 
     @Override
     protected void setValue(DeactivationReason.DeactivationReasonBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        if (nodeTag == DeactivationReasonCode.kmipTag.getValue()) {
+            builder.deactivationReasonCode(mapper.readValue(p, DeactivationReasonCode.class));
+        } else if (nodeTag == DeactivationMessage.kmipTag.getValue()) {
+            builder.deactivationMessage(mapper.readValue(p, DeactivationMessage.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

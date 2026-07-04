@@ -1,0 +1,96 @@
+# generated: 2026-07-03
+# last_updated: 2026-07-04
+# project: kmip-adapter
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; sprint-status surfaces open ones
+
+generated: 2026-07-03
+last_updated: 2026-07-04
+project: kmip-adapter
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # ── Epic 1: Auth, Attribute & Session Operations ──────────────────────────
+  epic-1: in-progress
+  1-1-implement-newattribute-and-currentattribute-structures: review
+  1-2-implement-ticket-structure: review
+  1-3-complete-setattribute-and-adjustattribute-operation-payloads: ready-for-dev
+  1-4-verify-and-complete-login-logout-and-delegatedlogin-operation-payloads: ready-for-dev
+  epic-1-retrospective: optional
+
+  # ── Epic 2: Constraint, Key Material & Async Operations ───────────────────
+  epic-2: backlog
+  2-1-implement-constraints-structure: backlog
+  2-2-complete-getconstraints-and-setconstraints-operation-payloads: backlog
+  2-3-implement-defaultsinformation-and-objectdefaults-structures: backlog
+  2-4-complete-setdefaults-operation-payload: backlog
+  2-5-implement-asynchronouscorrelationvalue-type: backlog
+  2-6-complete-queryasyncrequests-and-poll-operation-payloads: backlog
+  2-7-implement-pkcs11interface-structure: backlog
+  2-8-complete-pkcs11-operation-payloads: backlog
+  2-9-audit-managedobject-hierarchy-and-implement-keywrappingdata-structure: backlog
+  2-10-complete-import-and-export-operation-payloads: backlog
+  2-11-clarify-and-implement-process-operation-payloads: backlog
+  epic-2-retrospective: optional
+
+  # ── Epic 3: v3.0 Identity & Full Server Query ─────────────────────────────
+  epic-3: backlog
+  3-1-implement-objectgroups-structure-and-extend-username-to-v3-0: backlog
+  3-2-implement-credentialvalue-structure: backlog
+  3-3-complete-v3-0-identity-operation-payloads: backlog
+  3-4a-implement-capability-sub-structures: backlog
+  3-4b-implement-capabilityinformation-aggregate-structure: backlog
+  3-5-implement-profileinformation-clusterinfo-and-validationinformation-structures: backlog
+  3-6-implement-rngparameters-randomnumbergenerator-and-protectionstoragemasks-structures: backlog
+  3-7-wire-capability-structures-into-query-response-payload: backlog
+  epic-3-retrospective: optional
+
+  # ── Epic 4: Spec Completeness & Quality Gate ──────────────────────────────
+  epic-4: backlog
+  4-1-implement-itemtype-enumeration: backlog
+  4-2-audit-and-fix-all-enumeration-description-strings-for-xml-json-deserialization: backlog
+  4-3-audit-supportedversions-for-all-version-removed-enum-values: backlog
+  4-4a-complete-test-suites-for-epic-1-payloads: backlog
+  4-4b-complete-test-suites-for-epic-2-payloads: backlog
+  4-4c-complete-test-suites-for-epic-3-payloads-and-capability-structures: backlog
+  4-5-audit-and-complete-meta-inf-services-spi-registrations: backlog
+  4-6-unify-remaining-attribute-test-suites-to-interface-pattern: backlog
+  epic-4-retrospective: optional

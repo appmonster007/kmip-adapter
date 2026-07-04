@@ -23,11 +23,15 @@ class InteropOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite
 
     @Override
     public InteropOpRequestPayload createDefault() {
-        return InteropOpRequestPayload.builder().build();
+        return InteropOpRequestPayload.builder()
+                .interopFunction(InteropFunction.Standard.BEGIN.inst())
+                .build();
     }
 
     @Override
     public InteropOpRequestPayload createVariant() {
-        return InteropOpRequestPayload.builder().build();
+        return InteropOpRequestPayload.builder()
+                .interopFunction(InteropFunction.Standard.BEGIN.inst())
+                .build();
     }
 }

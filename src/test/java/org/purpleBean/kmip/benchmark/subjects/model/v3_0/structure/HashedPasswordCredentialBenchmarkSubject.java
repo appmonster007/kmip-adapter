@@ -20,7 +20,10 @@ public class HashedPasswordCredentialBenchmarkSubject extends KmipBenchmarkSubje
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public HashedPasswordCredentialBenchmarkSubject() throws Exception {
-        HashedPasswordCredential subject = HashedPasswordCredential.builder().build();  // TODO: Create a default instance
+        HashedPasswordCredential subject = HashedPasswordCredential.builder()
+                .hashedUsernamePassword(HashedUsernamePassword.of(new byte[]{0x01, 0x02, 0x03}))
+                .hashedPasswordUsername(HashedPasswordUsername.of(new byte[]{0x04, 0x05, 0x06}))
+                .build();
         initialize(subject, HashedPasswordCredential.class);
     }
 

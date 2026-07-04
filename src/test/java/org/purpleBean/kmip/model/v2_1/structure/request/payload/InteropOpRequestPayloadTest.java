@@ -31,8 +31,9 @@ class InteropOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Interop
 
     @Override
     protected InteropOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return InteropOpRequestPayload.builder().build();
+        return InteropOpRequestPayload.builder()
+                .interopFunction(InteropFunction.Standard.BEGIN.inst())
+                .build();
     }
 
     @Override
@@ -42,13 +43,12 @@ class InteropOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Interop
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(InteropFunction.class);
     }
 }

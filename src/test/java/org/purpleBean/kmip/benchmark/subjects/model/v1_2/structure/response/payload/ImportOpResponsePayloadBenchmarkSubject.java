@@ -18,7 +18,7 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ImportOpRespons
 public class ImportOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<ImportOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.V1_2;
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public ImportOpResponsePayloadBenchmarkSubject() throws Exception {
         ImportOpResponsePayload subject = ImportOpResponsePayload.of(UniqueIdentifier.builder().value("test-uid-1").build());

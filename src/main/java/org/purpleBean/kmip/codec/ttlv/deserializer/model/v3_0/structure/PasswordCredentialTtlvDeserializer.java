@@ -29,13 +29,20 @@ public class PasswordCredentialTtlvDeserializer extends AbstractKmipDataTypeTtlv
 
     @Override
     protected void setValue(PasswordCredential.PasswordCredentialBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        if (nodeTag == Password.kmipTag.getValue()) {
+            builder.password(mapper.readValue(p, Password.class));
+        } else if (nodeTag == PasswordSalt.kmipTag.getValue()) {
+            builder.passwordSalt(mapper.readValue(p, PasswordSalt.class));
+        } else if (nodeTag == PasswordSaltAlgorithm.kmipTag.getValue()) {
+            builder.passwordSaltAlgorithm(mapper.readValue(p, PasswordSaltAlgorithm.class));
+        } else if (nodeTag == SaltedPassword.kmipTag.getValue()) {
+            builder.saltedPassword(mapper.readValue(p, SaltedPassword.class));
+        } else if (nodeTag == IterationCount.kmipTag.getValue()) {
+            builder.iterationCount(mapper.readValue(p, IterationCount.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

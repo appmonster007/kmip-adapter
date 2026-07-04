@@ -226,6 +226,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NameValueTtlvDeseria
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NetworkIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NonceIdTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.NonceValueTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.TicketValueTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ObjectGroupTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OffsetTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OpaqueDataValueTtlvDeserializer
@@ -367,6 +368,9 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.TransparentEcPrivateKeyTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.TransparentEcPublicKeyTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.NewAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.CurrentAttributeTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.TicketTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request.payload.AdjustAttributeOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request.payload.GetConstraintsOpRequestPayloadTtlvDeserializer
@@ -428,3 +432,12 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.CreateUserOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.DeactivateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.ObliterateOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OtpSerialTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OtpIntervalTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OtpDigitsTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.OtpCounterTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.DeactivationMessageTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.LogMessageTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.InteropIdentifierTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.HashedUsernamePasswordTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.HashedPasswordUsernameTtlvDeserializer

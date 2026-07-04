@@ -11,7 +11,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.type.CertificateRequest;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.ReProvisionOpRequestPayload;
 
 import java.io.IOException;
@@ -32,7 +33,8 @@ public class ReProvisionOpRequestPayloadTtlvDeserializer extends AbstractKmipDat
     protected void setValue(ReProvisionOpRequestPayload.ReProvisionOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.CERTIFICATE_REQUEST -> builder.certificateRequest(mapper.readValue(p, CertificateRequest.class));
+            case KmipTag.Standard.CERTIFICATE -> builder.certificate(mapper.readValue(p, Certificate.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

@@ -31,7 +31,9 @@ class SetEndpointRoleOpResponsePayloadTest extends AbstractKmipStructureTestSuit
 
     @Override
     protected SetEndpointRoleOpResponsePayload createDefault() {
-        return SetEndpointRoleOpResponsePayload.builder().build();
+        return SetEndpointRoleOpResponsePayload.builder()
+                .endpointRole(EndpointRole.Standard.SERVER.inst())
+                .build();
     }
 
     @Override
@@ -41,11 +43,12 @@ class SetEndpointRoleOpResponsePayloadTest extends AbstractKmipStructureTestSuit
 
     @Override
     public int expectedMinComponentCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        assertThat(values).isEmpty();
+        assertThat(values).hasSize(1);
+        assertThat(values.get(0)).isInstanceOf(EndpointRole.class);
     }
 }

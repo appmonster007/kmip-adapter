@@ -29,13 +29,14 @@ public class DeactivationReasonXmlDeserializer extends AbstractKmipDataTypeXmlDe
 
     @Override
     protected void setValue(DeactivationReason.DeactivationReasonBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        if (nodeTag == DeactivationReasonCode.kmipTag.getValue()) {
+            builder.deactivationReasonCode(ctxt.readValue(p, DeactivationReasonCode.class));
+        } else if (nodeTag == DeactivationMessage.kmipTag.getValue()) {
+            builder.deactivationMessage(ctxt.readValue(p, DeactivationMessage.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

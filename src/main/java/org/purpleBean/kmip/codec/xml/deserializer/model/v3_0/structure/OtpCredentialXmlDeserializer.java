@@ -29,13 +29,24 @@ public class OtpCredentialXmlDeserializer extends AbstractKmipDataTypeXmlDeseria
 
     @Override
     protected void setValue(OtpCredential.OtpCredentialBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        if (nodeTag == OtpAlgorithm.kmipTag.getValue()) {
+            builder.otpAlgorithm(ctxt.readValue(p, OtpAlgorithm.class));
+        } else if (nodeTag == OtpDigest.kmipTag.getValue()) {
+            builder.otpDigest(ctxt.readValue(p, OtpDigest.class));
+        } else if (nodeTag == OtpSerial.kmipTag.getValue()) {
+            builder.otpSerial(ctxt.readValue(p, OtpSerial.class));
+        } else if (nodeTag == OtpSeed.kmipTag.getValue()) {
+            builder.otpSeed(ctxt.readValue(p, OtpSeed.class));
+        } else if (nodeTag == OtpInterval.kmipTag.getValue()) {
+            builder.otpInterval(ctxt.readValue(p, OtpInterval.class));
+        } else if (nodeTag == OtpDigits.kmipTag.getValue()) {
+            builder.otpDigits(ctxt.readValue(p, OtpDigits.class));
+        } else if (nodeTag == OtpCounter.kmipTag.getValue()) {
+            builder.otpCounter(ctxt.readValue(p, OtpCounter.class));
+        } else {
+            throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

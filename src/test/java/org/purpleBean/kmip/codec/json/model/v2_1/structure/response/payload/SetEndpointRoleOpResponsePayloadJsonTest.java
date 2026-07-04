@@ -23,11 +23,15 @@ class SetEndpointRoleOpResponsePayloadJsonTest extends AbstractJsonSerialization
 
     @Override
     public SetEndpointRoleOpResponsePayload createDefault() {
-        return SetEndpointRoleOpResponsePayload.builder().build();
+        return SetEndpointRoleOpResponsePayload.builder()
+                .endpointRole(EndpointRole.Standard.SERVER.inst())
+                .build();
     }
 
     @Override
     public SetEndpointRoleOpResponsePayload createVariant() {
-        return SetEndpointRoleOpResponsePayload.builder().build();
+        return SetEndpointRoleOpResponsePayload.builder()
+                .endpointRole(EndpointRole.Standard.CLIENT.inst())
+                .build();
     }
 }

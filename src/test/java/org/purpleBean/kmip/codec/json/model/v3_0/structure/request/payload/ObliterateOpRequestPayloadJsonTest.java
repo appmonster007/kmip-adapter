@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v3_0.structure.request.payload.ObliterateOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
@@ -23,11 +24,15 @@ class ObliterateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSu
 
     @Override
     public ObliterateOpRequestPayload createDefault() {
-        return ObliterateOpRequestPayload.builder().build();
+        return ObliterateOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-1").build())
+                .build();
     }
 
     @Override
     public ObliterateOpRequestPayload createVariant() {
-        return ObliterateOpRequestPayload.builder().build();
+        return ObliterateOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-2").build())
+                .build();
     }
 }

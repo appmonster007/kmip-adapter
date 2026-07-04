@@ -6,6 +6,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -23,11 +24,15 @@ class ObliterateOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSu
 
     @Override
     public ObliterateOpRequestPayload createDefault() {
-        return ObliterateOpRequestPayload.builder().build();
+        return ObliterateOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-1").build())
+                .build();
     }
 
     @Override
     public ObliterateOpRequestPayload createVariant() {
-        return ObliterateOpRequestPayload.builder().build();
+        return ObliterateOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-2").build())
+                .build();
     }
 }

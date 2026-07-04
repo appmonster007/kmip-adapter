@@ -31,8 +31,10 @@ class HashedPasswordCredentialTest extends AbstractKmipStructureTestSuite<Hashed
 
     @Override
     protected HashedPasswordCredential createDefault() {
-        // TODO: Create a default instance of the structure
-        return HashedPasswordCredential.builder().build();
+        return HashedPasswordCredential.builder()
+                .hashedUsernamePassword(HashedUsernamePassword.of(new byte[]{0x01, 0x02, 0x03}))
+                .hashedPasswordUsername(HashedPasswordUsername.of(new byte[]{0x04, 0x05, 0x06}))
+                .build();
     }
 
     @Override
@@ -42,13 +44,13 @@ class HashedPasswordCredentialTest extends AbstractKmipStructureTestSuite<Hashed
 
     @Override
     public int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 2;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values.size()).isGreaterThanOrEqualTo(2);
+        assertThat(values.get(0)).isInstanceOf(HashedUsernamePassword.class);
+        assertThat(values.get(1)).isInstanceOf(HashedPasswordUsername.class);
     }
 }

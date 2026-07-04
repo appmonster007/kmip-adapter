@@ -20,7 +20,9 @@ public class LogOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<Lo
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public LogOpRequestPayloadBenchmarkSubject() throws Exception {
-        LogOpRequestPayload subject = LogOpRequestPayload.builder().build();  // TODO: Create a default instance
+        LogOpRequestPayload subject = LogOpRequestPayload.builder()
+                .logMessage(LogMessage.builder().value("test-log-message").build())
+                .build();
         initialize(subject, LogOpRequestPayload.class);
     }
 

@@ -20,7 +20,9 @@ public class SetEndpointRoleOpRequestPayloadBenchmarkSubject extends KmipBenchma
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public SetEndpointRoleOpRequestPayloadBenchmarkSubject() throws Exception {
-        SetEndpointRoleOpRequestPayload subject = SetEndpointRoleOpRequestPayload.builder().build();  // TODO: Create a default instance
+        SetEndpointRoleOpRequestPayload subject = SetEndpointRoleOpRequestPayload.builder()
+                .endpointRole(EndpointRole.Standard.CLIENT.inst())
+                .build();
         initialize(subject, SetEndpointRoleOpRequestPayload.class);
     }
 

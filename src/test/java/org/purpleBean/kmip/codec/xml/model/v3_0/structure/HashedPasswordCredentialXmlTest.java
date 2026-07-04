@@ -23,11 +23,17 @@ class HashedPasswordCredentialXmlTest extends AbstractXmlSerializationTestSuite<
 
     @Override
     public HashedPasswordCredential createDefault() {
-        return HashedPasswordCredential.builder().build();
+        return HashedPasswordCredential.builder()
+                .hashedUsernamePassword(HashedUsernamePassword.of(new byte[]{0x01, 0x02, 0x03}))
+                .hashedPasswordUsername(HashedPasswordUsername.of(new byte[]{0x04, 0x05, 0x06}))
+                .build();
     }
 
     @Override
     public HashedPasswordCredential createVariant() {
-        return HashedPasswordCredential.builder().build();
+        return HashedPasswordCredential.builder()
+                .hashedUsernamePassword(HashedUsernamePassword.of(new byte[]{0x07, 0x08, 0x09}))
+                .hashedPasswordUsername(HashedPasswordUsername.of(new byte[]{0x0A, 0x0B, 0x0C}))
+                .build();
     }
 }

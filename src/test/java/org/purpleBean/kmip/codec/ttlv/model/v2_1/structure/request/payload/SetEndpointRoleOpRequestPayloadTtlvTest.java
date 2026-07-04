@@ -23,11 +23,15 @@ class SetEndpointRoleOpRequestPayloadTtlvTest extends AbstractTtlvSerializationT
 
     @Override
     public SetEndpointRoleOpRequestPayload createDefault() {
-        return SetEndpointRoleOpRequestPayload.builder().build();
+        return SetEndpointRoleOpRequestPayload.builder()
+                .endpointRole(EndpointRole.Standard.CLIENT.inst())
+                .build();
     }
 
     @Override
     public SetEndpointRoleOpRequestPayload createVariant() {
-        return SetEndpointRoleOpRequestPayload.builder().build();
+        return SetEndpointRoleOpRequestPayload.builder()
+                .endpointRole(EndpointRole.Standard.SERVER.inst())
+                .build();
     }
 }

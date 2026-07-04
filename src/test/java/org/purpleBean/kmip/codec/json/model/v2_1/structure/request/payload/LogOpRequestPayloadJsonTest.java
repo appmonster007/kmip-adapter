@@ -23,11 +23,15 @@ class LogOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<Log
 
     @Override
     public LogOpRequestPayload createDefault() {
-        return LogOpRequestPayload.builder().build();
+        return LogOpRequestPayload.builder()
+                .logMessage(LogMessage.builder().value("test-log-message").build())
+                .build();
     }
 
     @Override
     public LogOpRequestPayload createVariant() {
-        return LogOpRequestPayload.builder().build();
+        return LogOpRequestPayload.builder()
+                .logMessage(LogMessage.builder().value("test-log-message-variant").build())
+                .build();
     }
 }

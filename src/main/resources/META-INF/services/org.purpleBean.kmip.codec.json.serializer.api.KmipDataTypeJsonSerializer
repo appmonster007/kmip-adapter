@@ -213,6 +213,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.NameValueJsonSerialize
 org.purpleBean.kmip.codec.json.serializer.model.core.type.NetworkIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.NonceIdJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.NonceValueJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.TicketValueJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.ObjectGroupJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.OffsetJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.OpaqueDataValueJsonSerializer
@@ -354,6 +355,9 @@ org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.
 org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.payload.ValidateOpResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.TransparentEcPrivateKeyJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.TransparentEcPublicKeyJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.NewAttributeJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.CurrentAttributeJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.TicketJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.request.payload.AdjustAttributeOpRequestPayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure.request.payload.GetConstraintsOpRequestPayloadJsonSerializer
@@ -415,3 +419,12 @@ org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.response.payload.
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.response.payload.CreateUserOpResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.response.payload.DeactivateOpResponsePayloadJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.response.payload.ObliterateOpResponsePayloadJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.OtpSerialJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.OtpIntervalJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.OtpDigitsJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.OtpCounterJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.DeactivationMessageJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.LogMessageJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.InteropIdentifierJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.HashedUsernamePasswordJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.HashedPasswordUsernameJsonSerializer

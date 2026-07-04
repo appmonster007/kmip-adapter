@@ -20,7 +20,9 @@ public class InteropOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubjec
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public InteropOpRequestPayloadBenchmarkSubject() throws Exception {
-        InteropOpRequestPayload subject = InteropOpRequestPayload.builder().build();  // TODO: Create a default instance
+        InteropOpRequestPayload subject = InteropOpRequestPayload.builder()
+                .interopFunction(InteropFunction.Standard.BEGIN.inst())
+                .build();
         initialize(subject, InteropOpRequestPayload.class);
     }
 

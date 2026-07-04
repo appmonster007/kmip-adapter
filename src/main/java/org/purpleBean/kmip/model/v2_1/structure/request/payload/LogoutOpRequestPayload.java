@@ -10,9 +10,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * KMIP Logout Request Payload (V2_1).
+ * KMIP Logout Request Payload (stub).
  *
- * <p>Per KMIP v2.1 spec §6, this request payload defines no fields.
+ * <p>Per KMIP v2.1 spec §6.1.31:
+ * <ul>
+ *   <li>Ticket — Required — the ticket to be invalidated</li>
+ * </ul>
+ * Blocked: {@code Ticket} structure not yet implemented.
  */
 @Data
 @Builder(toBuilder = true)

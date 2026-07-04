@@ -6,6 +6,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -20,7 +21,9 @@ public class CreateCredentialOpResponsePayloadBenchmarkSubject extends KmipBench
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public CreateCredentialOpResponsePayloadBenchmarkSubject() throws Exception {
-        CreateCredentialOpResponsePayload subject = CreateCredentialOpResponsePayload.builder().build();  // TODO: Create a default instance
+        CreateCredentialOpResponsePayload subject = CreateCredentialOpResponsePayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-1").build())
+                .build();
         initialize(subject, CreateCredentialOpResponsePayload.class);
     }
 

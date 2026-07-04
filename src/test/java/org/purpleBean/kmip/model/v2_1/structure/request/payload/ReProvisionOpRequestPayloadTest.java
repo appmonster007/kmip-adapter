@@ -32,7 +32,7 @@ class ReProvisionOpRequestPayloadTest extends AbstractKmipStructureTestSuite<ReP
 
     @Override
     protected ReProvisionOpRequestPayload createDefault() {
-        return ReProvisionOpRequestPayload.of(UniqueIdentifier.builder().value("test-uid-1").build());
+        return ReProvisionOpRequestPayload.builder().build();
     }
 
     @Override
@@ -42,12 +42,11 @@ class ReProvisionOpRequestPayloadTest extends AbstractKmipStructureTestSuite<ReP
 
     @Override
     public int expectedMinComponentCount() {
-        return 1;
+        return 0;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        assertThat(values).hasSize(1);
-        assertThat(values.get(0)).isInstanceOf(UniqueIdentifier.class);
+        assertThat(values).isEmpty();
     }
 }
