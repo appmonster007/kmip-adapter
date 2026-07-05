@@ -20,36 +20,19 @@ So that I can model the credential payload used in CreateCredential operations.
 **When** the dispatch model is designed
 **Then** no new structure duplication occurs — existing types are reused
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the `CredentialValue` structure and manage its subtypes.
 
-- Implement the `CredentialValue` structure.
-- This structure will act as a wrapper for different credential types.
-- Reuse existing credential-related classes where possible.
+Run the following command to generate the `CredentialValue` structure:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure CredentialValue
+```
 
-- Create a new class in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- Implement `KmipStructure`.
-- Design a dispatch model to handle the different `CredentialType` values.
+The `bmad-generate-kmip-code` skill will also be used to:
+-   Define the dispatch model for handling different `CredentialType` values.
+-   Reuse existing credential-related classes (`HashedPasswordCredential`, `OtpCredential`, `PasswordCredential`) to avoid duplication.
+-   Generate any new required credential subtypes.
 
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/structure/CredentialValue.java`
-- Corresponding test file.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite for `CredentialValue`.
-- The test suite must cover all supported `CredentialType` values.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This approach will ensure that the `CredentialValue` structure is implemented correctly and that all acceptance criteria are met.

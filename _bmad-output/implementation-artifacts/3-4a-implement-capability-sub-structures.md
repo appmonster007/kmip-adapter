@@ -18,40 +18,18 @@ So that the building blocks for `CapabilityInformation` are available for compos
 **Given** all five implementations are complete and `META-INF/services` is audited
 **Then** all five classes appear in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the required capability sub-structures.
 
-- Implement the following five capability sub-structures:
-    - `AttestationCapability`
-    - `AsynchronousCapability`
-    - `BatchContinueCapability`
-    - `BatchUndoCapability`
-    - `QuantumSafeCapability`
-- All are v2.1+.
+Run the following commands to generate each structure:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --version 2.1 AttestationCapability
+./scripts/generators/generate.sh structure --version 2.1 AsynchronousCapability
+./scripts/generators/generate.sh structure --version 2.1 BatchContinueCapability
+./scripts/generators/generate.sh structure --version 2.1 BatchUndoCapability
+./scripts/generators/generate.sh structure --version 2.1 QuantumSafeCapability
+```
 
-- Create new classes in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- All classes must implement `KmipStructure`.
-- Ensure immutability.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- Create new Java files for each of the five structures.
-- Create corresponding test files.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create full round-trip serialization test suites for each of the five structures.
-- Tests must cover TTLV, JSON, and XML.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+These commands will generate the Java classes, test suites, and update the `META-INF/services` files for each of the five capability sub-structures, ensuring all acceptance criteria are met.

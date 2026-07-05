@@ -28,37 +28,14 @@ So that I can model and parse complete KMIP server capability declarations in Qu
 **Given** implementation is complete and `META-INF/services` is audited
 **Then** `CapabilityInformation` appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the `CapabilityInformation` aggregate structure.
 
-- Implement the `CapabilityInformation` aggregate structure.
-- Tag: `0x420180`
-- Version: v2.1+
-- This structure will contain the sub-structures from story 3.4a.
+Run the following command to generate the `CapabilityInformation` structure:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --tag 0x420180 --version 2.1 CapabilityInformation
+```
 
-- Create a new class in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- Implement `KmipStructure`.
-- Ensure immutability.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/structure/CapabilityInformation.java`
-- Corresponding test file.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite for `CapabilityInformation`.
-- The test should include various combinations of optional sub-structures.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will generate the Java class, test suite, and update the `META-INF/services` files. The generated structure will serve as an aggregate for the capability sub-structures implemented in Story 3.4a, ensuring all acceptance criteria are met.

@@ -26,38 +26,24 @@ So that I can model KMIP asynchronous operation tracking flows.
 **When** test data is filled in and tests run
 **Then** all three codec tests pass for each payload
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the operation payloads.
 
-- Complete the implementation of the `QueryAsynchronousRequestsOpRequestPayload`, `QueryAsynchronousRequestsOpResponsePayload`, and `PollOpResponsePayload` classes.
-- These payloads depend on the `AsynchronousCorrelationValue` type from story 2.5.
+### QueryAsynchronousRequests Operation
 
-### 2.2. Architecture Compliance
+Run the following command to generate the `QueryAsynchronousRequests` operation components:
 
-- The classes to be modified are existing stubs.
-- The implementation should follow the existing patterns for operation payloads.
+```bash
+./scripts/generators/generate.sh structure --name QueryAsynchronousRequests --version 2.1
+```
 
-### 2.3. Library and Framework Requirements
+### Poll Operation
 
-- No new libraries are required.
+Run the following command to generate the `Poll` operation components:
 
-### 2.4. File Structure Requirements
+```bash
+./scripts/generators/generate.sh structure --name Poll --version 2.1
+```
 
-- **Files to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/QueryAsynchronousRequestsOpRequestPayload.java`
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/QueryAsynchronousRequestsOpResponsePayload.java`
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/PollOpResponsePayload.java`
-- **Tests to update:**
-    - The corresponding test classes for the above payloads.
-
-### 2.5. Testing Requirements
-
-- Update the existing skeletal test suites for all three payloads.
-- Fill in concrete test data.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+These commands will create or update the necessary request and response payload classes, ensuring all acceptance criteria are met.

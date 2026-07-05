@@ -22,36 +22,14 @@ So that I can model the KMIP SetDefaults operation that configures server-side d
 **When** concrete test data is filled in and tests run
 **Then** all three codec tests pass
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the `SetDefaults` operation payload.
 
-- Complete the implementation of the `SetDefaultsOpRequestPayload` class.
-- This payload depends on the `DefaultsInformation` structure from story 2.3.
+Run the following command to generate the `SetDefaults` operation components:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --name SetDefaults --version 2.1
+```
 
-- The class to be modified is an existing stub.
-- The implementation should follow the existing patterns for operation payloads.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **File to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/SetDefaultsOpRequestPayload.java`
-- **Test to update:**
-    - The corresponding test class for the above payload.
-
-### 2.5. Testing Requirements
-
-- Update the existing skeletal test suite for the payload.
-- Fill in concrete test data.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will create or update the `SetDefaultsOpRequestPayload` class, ensuring it correctly includes the `DefaultsInformation` structure and meets all acceptance criteria.

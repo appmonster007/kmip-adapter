@@ -59,7 +59,7 @@ NFR7: Performance: registry lookups O(1) via hash maps; immutable objects for ze
 - All new types must be registered in `META-INF/services` for their TTLV, JSON, and XML codec interfaces; use the `kmip-codec-registrar` agent to verify.
 - Each type must implement `KmipDataType` (primitive) or `KmipStructure` (composite) interface from `api/`.
 - Operation payloads live in `model/v{maj}_{min}/structure/request/payload/` or `response/payload/` by convention.
-- Generator scripts exist under `docs/` — use them to scaffold new type skeletons; fill in field logic manually.
+- **To improve efficiency, developers should use the `bmad-generate-kmip-code` skill to scaffold new type skeletons, then fill in the logic manually.**
 - Stub payloads already have codec suites and skeletal tests wired — implementation only requires filling `getValue()` and any builder/constructor logic.
 
 ### UX Design Requirements
@@ -119,6 +119,8 @@ As a library consumer,
 I want `NewAttribute` (tag `0x420121`) and `CurrentAttribute` (tag `0x420120`) structures implemented with TTLV/JSON/XML codecs,
 So that I can model attribute-carrying KMIP structures used in SetAttribute and AdjustAttribute operations.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `NewAttribute` and `CurrentAttribute`.
+
 **Acceptance Criteria:**
 
 **Given** a `NewAttribute` instance is constructed with a valid inner `Attribute` child
@@ -148,6 +150,8 @@ So that I can model attribute-carrying KMIP structures used in SetAttribute and 
 As a library consumer,
 I want the `Ticket` structure (tag `0x420190`, v2.1+) implemented with TTLV/JSON/XML codecs,
 So that I can model ticket-based session objects used in Login and DelegatedLogin operations.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `Ticket`.
 
 **Acceptance Criteria:**
 
@@ -257,6 +261,8 @@ As a library consumer,
 I want the `Constraints` structure (tag `0x420162`, v2.1+) implemented with TTLV/JSON/XML codecs,
 So that I can model object-level constraints used in GetConstraints and SetConstraints operations.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `Constraints`.
+
 **Acceptance Criteria:**
 
 **Given** a `Constraints` instance constructed with spec-defined child fields (consult KMIP v2.1 §2 for exact fields before implementing)
@@ -297,7 +303,7 @@ So that I can model KMIP object constraint management operations.
 
 **Given** both payloads' skeletal test suites
 **When** test data is filled in and tests run
-**Then** TTLV, JSON, and XML tests all pass
+**Then** all three codec tests pass
 
 ---
 
@@ -306,6 +312,8 @@ So that I can model KMIP object constraint management operations.
 As a library consumer,
 I want `DefaultsInformation` (tag `0x420157`, v2.1+) and its child `ObjectDefaults` (tag `0x420158`, v2.1+) implemented,
 So that I can model default server attribute settings used in SetDefaults operations.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `DefaultsInformation` and `ObjectDefaults`.
 
 **Acceptance Criteria:**
 
@@ -356,6 +364,8 @@ So that I can model the KMIP SetDefaults operation that configures server-side d
 As a library consumer,
 I want the `AsynchronousCorrelationValue` ByteString wrapper type (v2.1+) implemented,
 So that I can model async request correlation identifiers used in QueryAsyncRequests and Poll operations.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `datatype` entity type and `--type ByteBuffer` to generate the initial boilerplate for `AsynchronousCorrelationValue`.
 
 **Acceptance Criteria:**
 
@@ -410,6 +420,8 @@ As a library consumer,
 I want the `Pkcs11Interface` structure (tag `0xC11EFACE`, v2.1+) implemented with TTLV/JSON/XML codecs,
 So that I can model PKCS#11 passthrough operation data used in Pkcs11 request/response payloads.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `Pkcs11Interface`.
+
 **Acceptance Criteria:**
 
 **Given** a `Pkcs11Interface` instance with all required fields (confirm exact fields from KMIP v2.1 §6.32 before implementing)
@@ -455,6 +467,8 @@ So that I can model KMIP PKCS#11 passthrough operations.
 As a library consumer,
 I want a clear audit of how `ManagedObject` and its subtypes are currently implemented in the codebase, existing gaps identified against the KMIP spec, and `KeyWrappingData` (structure, v1.2+) implemented,
 So that I can model managed cryptographic objects and their wrapping metadata correctly in Import/Export operations.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `KeyWrappingData`.
 
 **Acceptance Criteria:**
 
@@ -540,6 +554,8 @@ As a library consumer,
 I want `ObjectGroups` (tag `0x420166`, v2.1+) implemented and `Username.supportedVersions` extended to include `V3_0`,
 So that I can model v3.0 user and group management operations.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `ObjectGroups`.
+
 **Acceptance Criteria:**
 
 **Given** an `ObjectGroups` instance with its child field(s)
@@ -566,6 +582,8 @@ So that I can model v3.0 user and group management operations.
 As a library consumer,
 I want `CredentialValue` implemented for all KMIP credential subtypes (UsernameAndPassword, Device, Attestation, HashedPassword, OTP, Ticket, Certificate, Password),
 So that I can model the credential payload used in CreateCredential operations.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `CredentialValue`.
 
 **Acceptance Criteria:**
 
@@ -617,6 +635,8 @@ As a library consumer,
 I want `AttestationCapability`, `AsynchronousCapability`, `BatchContinueCapability`, `BatchUndoCapability`, and `QuantumSafeCapability` implemented with TTLV/JSON/XML codecs,
 So that the building blocks for `CapabilityInformation` are available for composing full server capability responses.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for each of these capability structures.
+
 **Acceptance Criteria:**
 
 **Given** each of the five capability sub-structures is implemented with its spec-defined fields (consult KMIP v2.1 spec for each structure's field list before implementing)
@@ -638,6 +658,8 @@ I want `CapabilityInformation` (tag `0x420180`, v2.1+) implemented as an aggrega
 So that I can model and parse complete KMIP server capability declarations in Query responses.
 
 **Depends on:** Story 3.4a (capability sub-structures)
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for `CapabilityInformation`.
 
 **Acceptance Criteria:**
 
@@ -667,6 +689,8 @@ As a library consumer,
 I want `ProfileInformation` (tag `0x420100`), `ProfileVersion` (tag `0x420101`), `ClusterInfo` (tag `0x420139`), and `ValidationInformation` (tag `0x420107`) implemented,
 So that I can model and parse server profile, cluster, and validation data in Query responses.
 
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for each of these structures.
+
 **Acceptance Criteria:**
 
 **Given** a `ProfileInformation` instance with `ProfileName` and one or more `ProfileVersion` children
@@ -692,6 +716,8 @@ So that I can model and parse server profile, cluster, and validation data in Qu
 As a library consumer,
 I want `RngParameters` (tag `0x4200D0`), `RandomNumberGenerator` (tag `0x4200D3`), and `ProtectionStorageMasks` (tag `0x420146`) implemented,
 So that I can model and parse RNG capability and storage protection data in Query responses and object attributes.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `structure` entity type to generate the initial boilerplate for each of these structures.
 
 **Acceptance Criteria:**
 
@@ -746,6 +772,8 @@ Library is fully spec-compliant with no enumeration gaps, no description string 
 As a library consumer,
 I want the `ItemType` enumeration (v2.0+) implemented with all spec-defined values,
 So that I can use the last missing KMIP enumeration without gaps.
+
+**Developer Note:** Use the `bmad-generate-kmip-code` skill with the `enum` entity type to generate the initial boilerplate for `ItemType`.
 
 **Acceptance Criteria:**
 

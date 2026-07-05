@@ -22,37 +22,14 @@ So that I can model KMIP PKCS#11 passthrough operations.
 **When** test data is filled in and tests run
 **Then** all three codec tests pass
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the `Pkcs11` operation payloads.
 
-- Complete the implementation of the `Pkcs11OpRequestPayload` and `Pkcs11OpResponsePayload` classes.
-- These payloads depend on the `Pkcs11Interface` structure from story 2.7.
+Run the following command to generate the `Pkcs11` operation components:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --name Pkcs11 --version 2.1
+```
 
-- The classes to be modified are existing stubs.
-- The implementation should follow the existing patterns for operation payloads.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/Pkcs11OpRequestPayload.java`
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/Pkcs11OpResponsePayload.java`
-- **Tests to update:**
-    - The corresponding test classes for the above payloads.
-
-### 2.5. Testing Requirements
-
-- Update the existing skeletal test suites for both payloads.
-- Fill in concrete test data.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will create or update the `Pkcs11OpRequestPayload` and `Pkcs11OpResponsePayload` classes, ensuring they correctly include the `Pkcs11Interface` structure and meet all acceptance criteria.

@@ -23,36 +23,14 @@ So that I can model async request correlation identifiers used in QueryAsyncRequ
 **When** `META-INF/services` is audited
 **Then** the class appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the `AsynchronousCorrelationValue` data type.
 
-- Implement the `AsynchronousCorrelationValue` type.
-- This is a ByteString wrapper.
-- It is v2.1+.
+Run the following command to generate the `AsynchronousCorrelationValue` data type:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh datatype --version 2.1 AsynchronousCorrelationValue
+```
 
-- Create a new class in the appropriate `model/core/type` directory.
-- The class must implement the correct `KmipDataType` interface.
-- Ensure immutability.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/type/AsynchronousCorrelationValue.java`
-- Corresponding test file.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite.
-- Test must cover TTLV, JSON, and XML.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will generate the Java class, test suite, and update the `META-INF/services` files, ensuring all acceptance criteria are met.

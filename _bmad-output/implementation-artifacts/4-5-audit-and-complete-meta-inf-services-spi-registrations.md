@@ -20,33 +20,19 @@ So that the runtime codec system discovers every type automatically without sile
 **When** it is added
 **Then** the corresponding codec round-trip test passes
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to audit and complete the `META-INF/services` SPI registrations.
 
-- Audit the `META-INF/services` files for all three codecs.
-- Ensure that all new types from Epics 1-4 are registered.
+The `generate.sh` script, when used to create new types, automatically updates the `META-INF/services` files. This story will leverage that capability to ensure all new types are correctly registered.
 
-### 2.2. Architecture Compliance
+The process will be:
+1.  Use the `bmad-generate-kmip-code` skill to get a list of all types that should be registered.
+2.  Audit the `META-INF/services` files for the TTLV, JSON, and XML codecs against this list.
+3.  For any missing registrations, use the `generate.sh` script's registration feature to add them. For example:
 
-- This is a verification and correction task.
+```bash
+./scripts/generators/generate.sh --register-only <fully.qualified.ClassName>
+```
 
-### 2.3. Library and Framework Requirements
-
-- The `kmip-codec-registrar` agent should be used for the audit.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - `src/main/resources/META-INF/services/org.purplebean.kmip.codec.ttlv.KmipTtlvCodec`
-    - `src/main/resources/META-INF/services/org.purplebean.kmip.codec.json.KmipJsonCodec`
-    - `src/main/resources/META-INF/services/org.purplebean.kmip.codec.xml.KmipXmlCodec`
-
-### 2.5. Testing Requirements
-
-- This change should fix existing failing tests or prevent future failures.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will ensure that all new types from Epics 1–4 are correctly registered for all three codecs, fulfilling all acceptance criteria.

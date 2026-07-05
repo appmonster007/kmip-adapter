@@ -22,35 +22,14 @@ So that I can use the last missing KMIP enumeration without gaps.
 **Given** the implementation is complete and `META-INF/services` is audited
 **Then** `ItemType` appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the `ItemType` enumeration.
 
-- Implement the `ItemType` enumeration.
-- This is a v2.0+ enumeration.
+Run the following command to generate the `ItemType` enumeration:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh enum --version 2.0 ItemType
+```
 
-- Create a new class in `src/main/java/org/purpleBean/kmip/model/core/enumeration/`.
-- The class must follow the existing pattern for enumerations.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/enumeration/ItemType.java`
-- Corresponding test file.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite for `ItemType`.
-- The test must cover JSON and XML deserialization from string values.
-- The test must verify the `supportedVersions` for each value.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will generate the Java class, test suite, and update the `META-INF/services` files. The `bmad-generate-kmip-code` skill will also be used to add the v3.0 values and correctly set the `supportedVersions` for all enum values, ensuring all acceptance criteria are met.

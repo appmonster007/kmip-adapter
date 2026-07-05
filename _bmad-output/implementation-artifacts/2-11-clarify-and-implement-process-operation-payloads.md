@@ -20,37 +20,14 @@ So that I can model KMIP cryptographic processing operations.
 **When** test data is filled in
 **Then** all three codec tests pass
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the `Process` operation payloads.
 
-- Implement the `ProcessOpRequestPayload` and `ProcessOpResponsePayload` classes.
-- The implementation must be based on KMIP v2.1 §6.33.
+Run the following command to generate the `Process` operation components:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --name Process --version 2.1
+```
 
-- The classes to be modified are existing stubs.
-- The implementation should follow the existing patterns for operation payloads.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/ProcessOpRequestPayload.java`
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/ProcessOpResponsePayload.java`
-- **Tests to update:**
-    - The corresponding test classes for the above payloads.
-
-### 2.5. Testing Requirements
-
-- Update the existing skeletal test suites for both payloads.
-- Fill in concrete test data.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will create or update the `ProcessOpRequestPayload` and `ProcessOpResponsePayload` classes, ensuring they are implemented according to the KMIP v2.1 specification and meet all acceptance criteria.

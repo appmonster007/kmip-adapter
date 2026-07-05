@@ -28,35 +28,20 @@ So that I can model managed cryptographic objects and their wrapping metadata co
 **Given** all implementations are complete and `META-INF/services` is audited
 **Then** every new or modified class appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the `KeyWrappingData` structure and audit the `ManagedObject` hierarchy.
 
-- Audit the `ManagedObject` hierarchy.
-- Implement the `KeyWrappingData` structure (v1.2+).
+### KeyWrappingData Structure
 
-### 2.2. Architecture Compliance
+Run the following command to generate the `KeyWrappingData` structure:
 
-- Follow existing patterns for `ManagedObject` subtypes.
-- `KeyWrappingData` should be a new structure in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
+```bash
+./scripts/generators/generate.sh structure --version 1.2 KeyWrappingData
+```
 
-### 2.3. Library and Framework Requirements
+### ManagedObject Hierarchy Audit
 
-- No new libraries are required.
+The `bmad-generate-kmip-code` skill will also be used to audit the `ManagedObject` hierarchy. This will involve using the script's auditing capabilities to identify existing subtypes, partial implementations, and missing components. The necessary `ManagedObject` subtypes required for `Import` and `Export` operations will be generated or completed as needed.
 
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/structure/KeyWrappingData.java`
-- Corresponding test file.
-- Update `META-INF/services` for all codecs.
-- Potentially modify existing `ManagedObject` subtype classes.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite for `KeyWrappingData`.
-- Update tests for any modified `ManagedObject` subtypes.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This approach will ensure that the `KeyWrappingData` structure is correctly implemented and that the `ManagedObject` hierarchy is consistent with the KMIP specification for the required operations.

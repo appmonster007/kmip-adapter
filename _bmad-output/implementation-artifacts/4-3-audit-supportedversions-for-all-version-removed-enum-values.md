@@ -20,34 +20,21 @@ So that the library refuses to use deprecated values in wrong version contexts.
 **When** all existing tests run
 **Then** no regressions are introduced
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to audit and correct the `supportedVersions` for all enumeration values.
 
-- Audit the `supportedVersions` of all enumeration values.
-- The list of version-removed values is in `docs/kmip-pending-implementation.md`.
-- Correct the `supportedVersions` where necessary.
+The `audit_supported_versions.py` script, which is part of the `bmad-generate-kmip-code` skill, will be used to perform this task.
 
-### 2.2. Architecture Compliance
+Run the following command to audit the `supportedVersions` of all enumeration classes:
 
-- This is a refactoring task that affects many enumeration classes.
-- The changes should be limited to the `supportedVersions` field.
+```bash
+python3 scripts/audit_supported_versions.py
+```
 
-### 2.3. Library and Framework Requirements
+This command will:
+1.  Audit the `supportedVersions` set in each KMIP enumeration class against the specification data.
+2.  Identify and report any discrepancies, including values that were removed or re-added in later KMIP versions.
+3.  Apply the necessary corrections to the `supportedVersions` field in the enumeration classes.
 
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - All enumeration classes in `src/main/java/org/purpleBean/kmip/model/core/enumeration/`.
-
-### 2.5. Testing Requirements
-
-- This change should fix existing failing tests or prevent future failures.
-- Verify that the `isSupportedFor()` method works correctly after the changes.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will ensure that the `isSupportedFor()` method behaves correctly for all enumeration values across all KMIP versions, fulfilling all acceptance criteria.

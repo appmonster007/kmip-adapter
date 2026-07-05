@@ -22,35 +22,14 @@ So that I can parse complete KMIP v2.1+ Query responses with full server capabil
 **When** serialized
 **Then** optional capability fields are absent from the output (not serialized as null/empty)
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to update the `Query` operation payload.
 
-- Update the `QueryOpResponsePayload` to include the new capability and profile structures.
+Run the following command to update the `Query` operation components:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --name Query --version 2.1
+```
 
-- The class to be modified is an existing stub.
-- The implementation should follow the existing patterns for operation payloads.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **File to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/QueryOpResponsePayload.java`
-- **Test to update:**
-    - The corresponding test class for the above payload.
-
-### 2.5. Testing Requirements
-
-- Update the existing skeletal test suite for the payload.
-- Fill in concrete test data, including a fully populated instance with all capability structures.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This command will update the `QueryOpResponsePayload` class to include the capability and profile structures from the dependent stories, ensuring that all acceptance criteria are met.

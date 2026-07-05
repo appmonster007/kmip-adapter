@@ -24,39 +24,14 @@ So that I can model object-level constraints used in GetConstraints and SetConst
 **When** `META-INF/services` is audited
 **Then** `Constraints` appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill.
 
-- The `Constraints` class must be a new structure.
-- It must have the KMIP tag `0x420162`.
-- It is only supported from KMIP v2.1 onwards.
+Run the following command to generate the `Constraints` structure:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --tag 0x420162 --version 2.1 Constraints
+```
 
-- The new class `Constraints` should be created in the `src/main/java/org/purpleBean/kmip/model/core/structure/` directory.
-- It must implement the `KmipStructure` interface from the `org.purpleBean.kmip.api` package.
-- The class should be immutable, using `@Value` or final fields with a builder.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/structure/Constraints.java`: The new Java class for the `Constraints` structure.
-- `src/test/java/org/purpleBean/kmip/model/core/structure/ConstraintsTest.java`: The test suite for the `Constraints` class.
-- `src/main/resources/META-INF/services/org.purplebean.kmip.codec.ttlv.KmipTtlvCodec`: Add an entry for `org.purpleBean.kmip.model.core.structure.Constraints`.
-- `src/main/resources/META-INF/services/org.purplebean.kmip.codec.json.KmipJsonCodec`: Add an entry for `org.purpleBean.kmip.model.core.structure.Constraints`.
-- `src/main/resources/META-INF/services/org.purplebean.kmip.codec.xml.KmipXmlCodec`: Add an entry for `org.purpleBean.kmip.model.core.structure.Constraints`.
-
-### 2.5. Testing Requirements
-
-- A full round-trip serialization test suite (`KmipSerializationTestSuite`) must be created for the `Constraints` class.
-- The test suite must cover TTLV, JSON, and XML codecs.
-- The test must verify that the class is not supported for KMIP versions before 2.1.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will generate the required Java class, test suite, and update the `META-INF/services` files, fulfilling the story's requirements.

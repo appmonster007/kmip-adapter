@@ -16,32 +16,18 @@ So that the attribute test suite is consistent with the rest of the library's te
 **When** all tests run
 **Then** no test regressions are introduced and JaCoCo coverage does not decrease
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to refactor the remaining attribute test suites.
 
-- Refactor attribute test classes to use the `KmipSerializationTestSuite` interface pattern.
-- The convention to follow is from commit `f778fbf3`.
+The `generate.sh` script's test generation capabilities will be used to audit and update the attribute test classes.
 
-### 2.2. Architecture Compliance
+The process will be:
+1.  Use the `bmad-generate-kmip-code` skill to identify all attribute test classes that do not implement the `KmipSerializationTestSuite` interface.
+2.  For each identified test class, use the `generate.sh` script to regenerate the test suite using the interface pattern. For example:
 
-- This is a refactoring task to improve test consistency.
+```bash
+./scripts/generators/generate.sh attribute --name <AttributeName> --with-tests
+```
 
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - Attribute test classes that do not follow the interface pattern.
-
-### 2.5. Testing Requirements
-
-- This story is all about improving the test structure.
-- No regressions should be introduced.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will ensure that all attribute test suites are migrated to the `KmipSerializationTestSuite` interface pattern, improving consistency across the library's test suite and fulfilling all acceptance criteria.

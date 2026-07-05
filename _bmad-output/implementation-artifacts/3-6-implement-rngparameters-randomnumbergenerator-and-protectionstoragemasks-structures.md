@@ -24,37 +24,16 @@ So that I can model and parse RNG capability and storage protection data in Quer
 **When** `META-INF/services` is audited
 **Then** all new classes appear in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the required structures.
 
-- Implement the following structures:
-    - `RngParameters` (tag `0x4200D0`)
-    - `RandomNumberGenerator` (tag `0x4200D3`)
-    - `ProtectionStorageMasks` (tag `0x420146`)
+Run the following commands to generate each structure:
 
-### 2.2. Architecture Compliance
+```bash
+./scripts/generators/generate.sh structure --tag 0x4200D0 RngParameters
+./scripts/generators/generate.sh structure --tag 0x4200D3 RandomNumberGenerator
+./scripts/generators/generate.sh structure --tag 0x420146 ProtectionStorageMasks
+```
 
-- Create new classes in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- All classes must implement `KmipStructure`.
-- Ensure immutability.
-
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- Create new Java files for each of the three structures.
-- Create corresponding test files.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create full round-trip serialization test suites for each of the three structures.
-- Tests must cover TTLV, JSON, and XML.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+These commands will generate the Java classes, test suites, and update the `META-INF/services` files for each of the three structures, ensuring all acceptance criteria are met.

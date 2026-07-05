@@ -25,36 +25,20 @@ So that I can model v3.0 user and group management operations.
 **Given** `ObjectGroups` is complete and `META-INF/services` is audited
 **Then** it appears in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill.
 
-- Implement the `ObjectGroups` structure (tag `0x420166`, v2.1+).
-- Extend the `Username` class to support KMIP v3.0.
+### ObjectGroups Structure
 
-### 2.2. Architecture Compliance
+Run the following command to generate the `ObjectGroups` structure:
 
-- `ObjectGroups` should be a new class in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- It must implement `KmipStructure`.
-- The `Username` class is an existing class that needs modification.
+```bash
+./scripts/generators/generate.sh structure --tag 0x420166 --version 2.1 ObjectGroups
+```
 
-### 2.3. Library and Framework Requirements
+### Extend Username Support
 
-- No new libraries are required.
+The `bmad-generate-kmip-code` skill will be used to extend the `Username` class to support KMIP v3.0. This will involve using the script's auditing and modification capabilities to update the `supportedVersions` of the `Username` class.
 
-### 2.4. File Structure Requirements
-
-- `src/main/java/org/purpleBean/kmip/model/core/structure/ObjectGroups.java`
-- `src/main/java/org/purpleBean/kmip/model/core/type/Username.java` (to be modified)
-- Corresponding test files.
-- Update `META-INF/services` for `ObjectGroups`.
-
-### 2.5. Testing Requirements
-
-- Create a full round-trip serialization test suite for `ObjectGroups`.
-- Update the tests for `Username` to include v3.0 checks.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This approach will ensure that the `ObjectGroups` structure is correctly implemented and that the `Username` class is updated to support KMIP v3.0 while preserving existing functionality.

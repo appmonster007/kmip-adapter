@@ -24,37 +24,24 @@ So that I can model default server attribute settings used in SetDefaults operat
 **When** `META-INF/services` is audited
 **Then** both classes appear in all three codec service files
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to generate the required structures.
 
-- Implement the `DefaultsInformation` and `ObjectDefaults` structures.
-- `DefaultsInformation` has tag `0x420157` and is v2.1+.
-- `ObjectDefaults` has tag `0x420158` and is v2.1+.
+### ObjectDefaults Structure
 
-### 2.2. Architecture Compliance
+Run the following command to generate the `ObjectDefaults` structure:
 
-- Create new classes in `src/main/java/org/purpleBean/kmip/model/core/structure/`.
-- Both classes must implement `KmipStructure`.
-- Ensure immutability.
+```bash
+./scripts/generators/generate.sh structure --tag 0x420158 --version 2.1 ObjectDefaults
+```
 
-### 2.3. Library and Framework Requirements
+### DefaultsInformation Structure
 
-- No new libraries are required.
+Run the following command to generate the `DefaultsInformation` structure:
 
-### 2.4. File Structure Requirements
+```bash
+./scripts/generators/generate.sh structure --tag 0x420157 --version 2.1 DefaultsInformation
+```
 
-- `src/main/java/org/purpleBean/kmip/model/core/structure/DefaultsInformation.java`
-- `src/main/java/org/purpleBean/kmip/model/core/structure/ObjectDefaults.java`
-- Corresponding test files.
-- Update `META-INF/services` for all codecs.
-
-### 2.5. Testing Requirements
-
-- Create full round-trip serialization test suites for both classes.
-- Tests must cover TTLV, JSON, and XML.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+These commands will generate the Java classes, test suites, and update the `META-INF/services` files, ensuring all acceptance criteria are met.

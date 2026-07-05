@@ -28,34 +28,21 @@ So that deserialization from any spec-compliant XML/JSON document succeeds witho
 **When** the full test suite runs
 **Then** no test regressions are introduced and any previously-failing deserialization round-trips now pass
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to audit and correct all enumeration description strings.
 
-- Audit all enumeration description strings.
-- The authoritative source is `docs/kmip-spec/chunks/enumerations/`.
-- Correct any mismatches.
+The `comprehensive_enum_sync.py` script, which is part of the `bmad-generate-kmip-code` skill, will be used to perform this task.
 
-### 2.2. Architecture Compliance
+Run the following command to synchronize the enumeration files with the specification data:
 
-- This is a refactoring task that affects many enumeration classes.
-- The changes should be limited to the description strings.
+```bash
+python3 scripts/comprehensive_enum_sync.py --csv <path_to_spec_csv> --write
+```
 
-### 2.3. Library and Framework Requirements
+This command will:
+1.  Compare the description strings in all enumeration classes against the authoritative specification data.
+2.  Generate a change list of all mismatches.
+3.  Apply the corrections to the enumeration classes.
 
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - All enumeration classes in `src/main/java/org/purpleBean/kmip/model/core/enumeration/`.
-
-### 2.5. Testing Requirements
-
-- This change should fix existing failing tests or prevent future failures.
-- Verify that JSON and XML deserialization works correctly after the changes.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will ensure that all enumeration description strings are spec-compliant and that XML/JSON deserialization works correctly, fulfilling all acceptance criteria.

@@ -22,37 +22,28 @@ So that I can model KMIP object constraint management operations.
 **When** test data is filled in and tests run
 **Then** TTLV, JSON, and XML tests all pass
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the operation payloads.
 
-- Complete the implementation of the `GetConstraintsOpResponsePayload` and `SetConstraintsOpRequestPayload` classes.
-- These payloads depend on the `Constraints` structure from story 2.1.
+### GetConstraints Operation
 
-### 2.2. Architecture Compliance
+Run the following command to generate the `GetConstraints` operation components:
 
-- The classes to be modified are existing stubs.
-- The implementation should follow the existing patterns for operation payloads.
+```bash
+./scripts/generators/generate.sh structure --name GetConstraints --version 2.1
+```
 
-### 2.3. Library and Framework Requirements
+This will create or update the necessary request and response payload classes.
 
-- No new libraries are required.
+### SetConstraints Operation
 
-### 2.4. File Structure Requirements
+Run the following command to generate the `SetConstraints` operation components:
 
-- **Files to modify:**
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/GetConstraintsOpResponsePayload.java`
-    - `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/SetConstraintsOpRequestPayload.java`
-- **Tests to update:**
-    - The corresponding test classes for the above payloads.
+```bash
+./scripts/generators/generate.sh structure --name SetConstraints --version 2.1
+```
 
-### 2.5. Testing Requirements
+This will create or update the necessary request and response payload classes.
 
-- Update the existing skeletal test suites for both payloads.
-- Fill in concrete test data.
-- Ensure all TTLV, JSON, and XML serialization tests pass.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+These commands will ensure that the `GetConstraintsOpResponsePayload` and `SetConstraintsOpRequestPayload` are correctly implemented and all acceptance criteria are met.

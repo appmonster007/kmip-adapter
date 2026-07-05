@@ -20,32 +20,22 @@ So that Epic 3 implementations are verified correct and the full Query response 
 **When** JaCoCo coverage is measured
 **Then** line coverage is ≥90% across all Epic 3 classes
 
-## 2. Developer Context
+## 2. Implementation Plan
 
-### 2.1. Technical Requirements
+This story will be implemented by using the `bmad-generate-kmip-code` skill to complete the test suites for the Epic 3 payloads and capability structures.
 
-- Complete the test suites for all payloads and structures from Epic 3.
-- This includes an integration-level test for the `QueryOpResponsePayload`.
-- Achieve ≥90% line coverage for these classes.
+The `generate.sh` script's test generation capabilities will be used to create or update the test suites for the following:
+-   **Payloads:** CreateUser, CreateGroup, CreateCredential
+-   **Capability Structures:** CapabilityInformation and its sub-structures, ProfileInformation, ClusterInfo, ValidationInformation, RngParameters, RandomNumberGenerator, ProtectionStorageMasks
 
-### 2.2. Architecture Compliance
+For each item, the script will be run with the appropriate parameters to generate a comprehensive `KmipSerializationTestSuite`. For example:
 
-- This task involves updating existing test classes to be more comprehensive.
+```bash
+./scripts/generators/generate.sh structure --name CreateUser --version <version> --with-tests
+./scripts/generators/generate.sh structure --name CapabilityInformation --version <version> --with-tests
+```
 
-### 2.3. Library and Framework Requirements
-
-- No new libraries are required.
-
-### 2.4. File Structure Requirements
-
-- **Files to modify:**
-    - Test classes for all Epic 3 payloads and capability structures.
-
-### 2.5. Testing Requirements
-
-- This story is all about testing.
-
-## 3. Story Completion Status
-
-- **Status:** ready-for-dev
-- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
+This will ensure that:
+-   Each payload and structure has a full test suite with concrete test data.
+-   The integration-level test for `QueryOpResponsePayload` is created and passes.
+-   The line coverage for all Epic 3 classes meets the ≥90% requirement.
