@@ -57,40 +57,40 @@ development_status:
   epic-1-retrospective: optional
 
   # ── Epic 2: Constraint, Key Material & Async Operations ───────────────────
-  epic-2: backlog
-  2-1-implement-constraints-structure: backlog
-  2-2-complete-getconstraints-and-setconstraints-operation-payloads: backlog
-  2-3-implement-defaultsinformation-and-objectdefaults-structures: backlog
-  2-4-complete-setdefaults-operation-payload: backlog
-  2-5-implement-asynchronouscorrelationvalue-type: backlog
-  2-6-complete-queryasyncrequests-and-poll-operation-payloads: backlog
-  2-7-implement-pkcs11interface-structure: backlog
-  2-8-complete-pkcs11-operation-payloads: backlog
-  2-9-audit-managedobject-hierarchy-and-implement-keywrappingdata-structure: backlog
-  2-10-complete-import-and-export-operation-payloads: backlog
-  2-11-clarify-and-implement-process-operation-payloads: backlog
+  epic-2: in-progress
+  2-1-implement-constraints-structure: ready-for-dev
+  2-2-complete-getconstraints-and-setconstraints-operation-payloads: ready-for-dev
+  2-3-implement-defaultsinformation-and-objectdefaults-structures: ready-for-dev
+  2-4-complete-setdefaults-operation-payload: ready-for-dev
+  2-5-implement-asynchronouscorrelationvalue-type: ready-for-dev
+  2-6-complete-queryasyncrequests-and-poll-operation-payloads: ready-for-dev
+  2-7-implement-pkcs11interface-structure: ready-for-dev
+  2-8-complete-pkcs11-operation-payloads: ready-for-dev
+  2-9-audit-managedobject-hierarchy-and-implement-keywrappingdata-structure: ready-for-dev
+  2-10-complete-import-and-export-operation-payloads: ready-for-dev
+  2-11-clarify-and-implement-process-operation-payloads: ready-for-dev
   epic-2-retrospective: optional
 
   # ── Epic 3: v3.0 Identity & Full Server Query ─────────────────────────────
-  epic-3: backlog
-  3-1-implement-objectgroups-structure-and-extend-username-to-v3-0: backlog
-  3-2-implement-credentialvalue-structure: backlog
-  3-3-complete-v3-0-identity-operation-payloads: backlog
-  3-4a-implement-capability-sub-structures: backlog
-  3-4b-implement-capabilityinformation-aggregate-structure: backlog
-  3-5-implement-profileinformation-clusterinfo-and-validationinformation-structures: backlog
-  3-6-implement-rngparameters-randomnumbergenerator-and-protectionstoragemasks-structures: backlog
-  3-7-wire-capability-structures-into-query-response-payload: backlog
+  epic-3: in-progress
+  3-1-implement-objectgroups-structure-and-extend-username-to-v3-0: ready-for-dev
+  3-2-implement-credentialvalue-structure: ready-for-dev
+  3-3-complete-v3-0-identity-operation-payloads: ready-for-dev
+  3-4a-implement-capability-sub-structures: ready-for-dev
+  3-4b-implement-capabilityinformation-aggregate-structure: ready-for-dev
+  3-5-implement-profileinformation-clusterinfo-and-validationinformation-structures: ready-for-dev
+  3-6-implement-rngparameters-randomnumbergenerator-and-protectionstoragemasks-structures: ready-for-dev
+  3-7-wire-capability-structures-into-query-response-payload: ready-for-dev
   epic-3-retrospective: optional
 
   # ── Epic 4: Spec Completeness & Quality Gate ──────────────────────────────
-  epic-4: backlog
-  4-1-implement-itemtype-enumeration: backlog
-  4-2-audit-and-fix-all-enumeration-description-strings-for-xml-json-deserialization: backlog
-  4-3-audit-supportedversions-for-all-version-removed-enum-values: backlog
-  4-4a-complete-test-suites-for-epic-1-payloads: backlog
-  4-4b-complete-test-suites-for-epic-2-payloads: backlog
-  4-4c-complete-test-suites-for-epic-3-payloads-and-capability-structures: backlog
-  4-5-audit-and-complete-meta-inf-services-spi-registrations: backlog
-  4-6-unify-remaining-attribute-test-suites-to-interface-pattern: backlog
+  epic-4: in-progress
+  4-1-implement-itemtype-enumeration: ready-for-dev
+  4-2-audit-and-fix-all-enumeration-description-strings-for-xml-json-deserialization: ready-for-dev
+  4-3-audit-supportedversions-for-all-version-removed-enum-values: ready-for-dev
+  4-4a-complete-test-suites-for-epic-1-payloads: ready-for-dev
+  4-4b-complete-test-suites-for-epic-2-payloads: ready-for-dev
+  4-4c-complete-test-suites-for-epic-3-payloads-and-capability-structures: ready-for-dev
+  4-5-audit-and-complete-meta-inf-services-spi-registrations: ready-for-dev
+  4-6-unify-remaining-attribute-test-suites-to-interface-pattern: ready-for-dev
   epic-4-retrospective: optional

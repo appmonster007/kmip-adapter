@@ -1,0 +1,51 @@
+# Story 4.4a: Complete Test Suites for Epic 1 Payloads
+
+## 1. Story Requirements
+
+**As a developer,**
+I want full `KmipSerializationTestSuite` test suites for all payloads implemented in Epic 1 (Login, Logout, DelegatedLogin, SetAttribute, AdjustAttribute — 7 payloads),
+So that Epic 1 payload implementations are verified correct and regressions are detected.
+
+### 1.1. Acceptance Criteria
+
+**Given** each of the 7 Epic 1 payloads now has a full implementation
+**When** its test suite is upgraded with concrete test data (minimum: one minimal instance, one fully-populated instance per payload)
+**Then** TTLV, JSON, and XML serialization tests all pass for every payload
+
+**Given** any Epic 1 test still has `// TODO validateComponents` annotations
+**When** this story is complete
+**Then** all such annotations are resolved — either with actual validation logic or with a justified removal
+
+**Given** Epic 1 test suites run
+**When** JaCoCo coverage is measured for Epic 1 classes
+**Then** line coverage is ≥90% for all Epic 1 payload classes
+
+## 2. Developer Context
+
+### 2.1. Technical Requirements
+
+- Complete the test suites for all 7 payloads from Epic 1.
+- Remove all `// TODO validateComponents` annotations.
+- Achieve ≥90% line coverage for these classes.
+
+### 2.2. Architecture Compliance
+
+- This task involves updating existing test classes to be more comprehensive.
+
+### 2.3. Library and Framework Requirements
+
+- No new libraries are required.
+
+### 2.4. File Structure Requirements
+
+- **Files to modify:**
+    - Test classes for all Epic 1 payloads.
+
+### 2.5. Testing Requirements
+
+- This story is all about testing.
+
+## 3. Story Completion Status
+
+- **Status:** ready-for-dev
+- **Completion Note:** Ultimate context engine analysis completed - comprehensive developer guide created
