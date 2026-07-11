@@ -166,6 +166,7 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
     public enum Standard implements Value {
         // TODO: Add enum values here. E.g.:
         // EXAMPLE(0x00000001, "Example", KmipSpec.UnknownVersion, KmipSpec.V1_2);
+        ;
 
         private final int value;
         private final String description;

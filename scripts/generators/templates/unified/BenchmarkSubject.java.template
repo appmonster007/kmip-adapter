@@ -17,10 +17,10 @@ import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 public class {{NAME}}BenchmarkSubject extends KmipBenchmarkSubject<{{NAME}}> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public {{NAME}}BenchmarkSubject() throws Exception {
-        {{NAME}} subject = {{create_default}};  // TODO: Create a default instance
+        {{NAME}} subject = {{create_default}};
         initialize(subject, {{NAME}}.class);
     }
 

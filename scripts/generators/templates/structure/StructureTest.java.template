@@ -10,15 +10,15 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import org.purpleBean.kmip.test.BaseKmipTest;
-import org.purpleBean.kmip.test.suite.KmipStructureTestSuite;
+import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("{{STRUCTURE_NAME}} Domain Tests")
-class {{STRUCTURE_NAME}}Test extends BaseKmipTest implements KmipStructureTestSuite<{{STRUCTURE_NAME}}> {
+class {{STRUCTURE_NAME}}Test extends AbstractKmipStructureTestSuite<{{STRUCTURE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
@@ -26,29 +26,29 @@ class {{STRUCTURE_NAME}}Test extends BaseKmipTest implements KmipStructureTestSu
     }
 
     @Override
-    public Class<{{STRUCTURE_NAME}}> type() {
+    protected Class<{{STRUCTURE_NAME}}> type() {
         return {{STRUCTURE_NAME}}.class;
     }
 
     @Override
-    public {{STRUCTURE_NAME}} createDefault() {
+    protected {{STRUCTURE_NAME}} createDefault() {
         // TODO: Create a default instance of the structure
         return new {{STRUCTURE_NAME}}();
     }
 
     @Override
-    public EncodingType expectedEncodingType() {
+    protected EncodingType expectedEncodingType() {
         return EncodingType.STRUCTURE;
     }
 
     @Override
-    public int expectedMinComponentCount() {
+    protected int expectedMinComponentCount() {
         // TODO: Set the expected minimum number of components
         return 0;
     }
 
     @Override
-    public void validateComponents(List<KmipDataType> values) {
+    protected void validateComponents(List<KmipDataType> values) {
         // TODO: Validate the components of the structure
         // assertThat(values).hasSize(0);
     }
