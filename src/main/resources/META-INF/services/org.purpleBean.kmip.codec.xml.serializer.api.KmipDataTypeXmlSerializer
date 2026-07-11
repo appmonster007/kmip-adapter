@@ -40,6 +40,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.OpaqueDataTypeXm
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.OperationXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.OtpAlgorithmXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.PaddingMethodXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.Pkcs11FunctionXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.ProcessingStageXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.ProfileNameXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration.ProtectionLevelXmlSerializer
@@ -243,6 +244,9 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.PasswordSaltAlgorithmXm
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PasswordSaltXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PasswordXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PgpKeyVersionXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.Pkcs11InputParametersXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.Pkcs11OutputParametersXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.Pkcs11ReturnCodeXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentPXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeExponentQXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.PrimeFieldSizeXmlSerializer
@@ -260,6 +264,7 @@ org.purpleBean.kmip.codec.xml.serializer.model.core.type.QStringXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.QXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.QlengthXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.RandomIvXmlSerializer
+org.purpleBean.kmip.codec.xml.serializer.model.core.type.ReplaceExistingXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ReplacedUniqueIdentifierXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.ResultMessageXmlSerializer
 org.purpleBean.kmip.codec.xml.serializer.model.core.type.RevocationMessageXmlSerializer

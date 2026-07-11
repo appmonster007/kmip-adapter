@@ -40,6 +40,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.OpaqueDataTypeJ
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.OperationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.OtpAlgorithmJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.PaddingMethodJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.Pkcs11FunctionJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.ProcessingStageJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.ProfileNameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.enumeration.ProtectionLevelJsonSerializer
@@ -243,6 +244,9 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.PasswordJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PasswordSaltAlgorithmJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PasswordSaltJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PgpKeyVersionJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.Pkcs11InputParametersJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.Pkcs11OutputParametersJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.Pkcs11ReturnCodeJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeExponentPJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeExponentQJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.PrimeFieldSizeJsonSerializer
@@ -260,6 +264,7 @@ org.purpleBean.kmip.codec.json.serializer.model.core.type.QJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.QStringJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.QlengthJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.RandomIvJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.core.type.ReplaceExistingJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.ReplacedUniqueIdentifierJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.ResultMessageJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.core.type.RevocationMessageJsonSerializer

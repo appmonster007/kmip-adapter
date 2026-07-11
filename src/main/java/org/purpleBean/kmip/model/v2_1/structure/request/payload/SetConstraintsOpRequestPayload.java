@@ -2,18 +2,20 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.Constraints;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP SetConstraints Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for SetConstraints.
- */
 @Data
 @Builder(toBuilder = true)
 public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
@@ -29,13 +31,27 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    private final UniqueIdentifier uniqueIdentifier;
+    @NonNull
+    private final Constraints constraints;
+
     @Builder
-    private SetConstraintsOpRequestPayload() {
+    private SetConstraintsOpRequestPayload(UniqueIdentifier uniqueIdentifier, @NonNull Constraints constraints) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.constraints = constraints;
         validate();
     }
 
     public static SetConstraintsOpRequestPayload of(List<KmipDataType> values) {
-        return SetConstraintsOpRequestPayload.builder().build();
+        var builder = SetConstraintsOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(Constraints.kmipTag)) {
+            builder.constraints((Constraints) map.get(Constraints.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
@@ -51,10 +67,18 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier, constraints)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

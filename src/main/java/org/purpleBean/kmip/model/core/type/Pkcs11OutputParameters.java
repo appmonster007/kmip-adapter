@@ -3,15 +3,9 @@ package org.purpleBean.kmip.model.core.type;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
+
 import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.Set;
 
 /**
@@ -21,9 +15,9 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class Pkcs11OutputParameters implements KmipDataType {
 
-    public static final KmipTag kmipTag = KmipTag.Standard.PKCS11_OUTPUT_PARAMETERS.inst();
+    public static final KmipTag kmipTag = KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -43,6 +37,10 @@ public class Pkcs11OutputParameters implements KmipDataType {
 
     public static Pkcs11OutputParameters of(@NonNull ByteBuffer value) {
         return new Pkcs11OutputParameters(value);
+    }
+
+    public static Pkcs11OutputParameters of(byte[] value) {
+        return Pkcs11OutputParameters.builder().value(ByteBuffer.wrap(value)).build();
     }
 
     private void validate() {

@@ -53,6 +53,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.OpaqueDataTyp
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.OperationJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.OtpAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.PaddingMethodJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.Pkcs11FunctionJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.ProcessingStageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.ProfileNameJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration.ProtectionLevelJsonDeserializer
@@ -256,6 +257,9 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.PasswordJsonDeserial
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PasswordSaltAlgorithmJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PasswordSaltJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PgpKeyVersionJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.Pkcs11InputParametersJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.Pkcs11OutputParametersJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.Pkcs11ReturnCodeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeExponentPJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeExponentQJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.PrimeFieldSizeJsonDeserializer
@@ -273,6 +277,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.QJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.QStringJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.QlengthJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.RandomIvJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.ReplaceExistingJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ReplacedUniqueIdentifierJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.ResultMessageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.RevocationMessageJsonDeserializer

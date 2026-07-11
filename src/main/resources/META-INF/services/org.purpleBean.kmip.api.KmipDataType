@@ -40,6 +40,7 @@ org.purpleBean.kmip.model.core.enumeration.OpaqueDataType
 org.purpleBean.kmip.model.core.enumeration.Operation
 org.purpleBean.kmip.model.core.enumeration.OtpAlgorithm
 org.purpleBean.kmip.model.core.enumeration.PaddingMethod
+org.purpleBean.kmip.model.core.enumeration.Pkcs11Function
 org.purpleBean.kmip.model.core.enumeration.ProcessingStage
 org.purpleBean.kmip.model.core.enumeration.ProfileName
 org.purpleBean.kmip.model.core.enumeration.ProtectionLevel
@@ -243,6 +244,9 @@ org.purpleBean.kmip.model.core.type.Password
 org.purpleBean.kmip.model.core.type.PasswordSalt
 org.purpleBean.kmip.model.core.type.PasswordSaltAlgorithm
 org.purpleBean.kmip.model.core.type.PgpKeyVersion
+org.purpleBean.kmip.model.core.type.Pkcs11InputParameters
+org.purpleBean.kmip.model.core.type.Pkcs11OutputParameters
+org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode
 org.purpleBean.kmip.model.core.type.PrimeExponentP
 org.purpleBean.kmip.model.core.type.PrimeExponentQ
 org.purpleBean.kmip.model.core.type.PrimeFieldSize
@@ -260,6 +264,7 @@ org.purpleBean.kmip.model.core.type.Q
 org.purpleBean.kmip.model.core.type.QString
 org.purpleBean.kmip.model.core.type.Qlength
 org.purpleBean.kmip.model.core.type.RandomIv
+org.purpleBean.kmip.model.core.type.ReplaceExisting
 org.purpleBean.kmip.model.core.type.ReplacedUniqueIdentifier
 org.purpleBean.kmip.model.core.type.ResultMessage
 org.purpleBean.kmip.model.core.type.RevocationMessage

@@ -40,6 +40,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.OpaqueDataTypeT
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.OperationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.OtpAlgorithmTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.PaddingMethodTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.Pkcs11FunctionTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.ProcessingStageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.ProfileNameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.ProtectionLevelTtlvSerializer
@@ -243,6 +244,9 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PasswordSaltAlgorithmT
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PasswordSaltTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PasswordTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PgpKeyVersionTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.Pkcs11InputParametersTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.Pkcs11OutputParametersTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.Pkcs11ReturnCodeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeExponentPTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeExponentQTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PrimeFieldSizeTtlvSerializer
@@ -260,6 +264,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.QStringTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.QTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.QlengthTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.RandomIvTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ReplaceExistingTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ReplacedUniqueIdentifierTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.ResultMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.RevocationMessageTtlvSerializer

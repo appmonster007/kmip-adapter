@@ -53,6 +53,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.OpaqueDataTyp
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.OperationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.OtpAlgorithmTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.PaddingMethodTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.Pkcs11FunctionTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.ProcessingStageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.ProfileNameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration.ProtectionLevelTtlvDeserializer
@@ -256,6 +257,9 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PasswordSaltAlgorith
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PasswordSaltTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PasswordTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PgpKeyVersionTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.Pkcs11InputParametersTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.Pkcs11OutputParametersTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.Pkcs11ReturnCodeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentPTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeExponentQTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.PrimeFieldSizeTtlvDeserializer
@@ -273,6 +277,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.QStringTtlvDeseriali
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.QTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.QlengthTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.RandomIvTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ReplaceExistingTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ReplacedUniqueIdentifierTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.ResultMessageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type.RevocationMessageTtlvDeserializer

@@ -18,7 +18,7 @@ class Pkcs11InputParametersTest extends AbstractKmipDataTypeTestSuite<Pkcs11Inpu
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V2_1;
     }
 
     @Override

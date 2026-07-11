@@ -2,21 +2,20 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.Credential;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP DelegatedLogin Request Payload (V2.1+, §6.1.12).
- *
- * <p>Per spec, required field: Rights (structure containing Right sub-structures that define
- * allowed operations, objects, and object groups). Optional fields: LeaseTime, RequestCount, UsageLimits.
- * Full implementation is deferred until Rights/Right structures are implemented (they depend on
- * Operations, Objects, ObjectGroups sub-structures that do not yet exist in the model layer).
- */
 @Data
 @Builder(toBuilder = true)
 public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
@@ -32,13 +31,31 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    private final UniqueIdentifier uniqueIdentifier;
+
+    @NonNull
+    private final Credential credential;
+
     @Builder
-    private DelegatedLoginOpRequestPayload() {
+    private DelegatedLoginOpRequestPayload(
+            UniqueIdentifier uniqueIdentifier,
+            @NonNull Credential credential
+    ) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.credential = credential;
         validate();
     }
 
     public static DelegatedLoginOpRequestPayload of(List<KmipDataType> values) {
-        return DelegatedLoginOpRequestPayload.builder().build();
+        var builder = DelegatedLoginOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(Credential.kmipTag)) {
+            builder.credential((Credential) map.get(Credential.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
@@ -57,7 +74,12 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
     public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier, credential)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

@@ -40,6 +40,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.OpaqueDataTypeBenc
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.OperationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.OtpAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.PaddingMethodBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.Pkcs11FunctionBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ProcessingStageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ProfileNameBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ProtectionLevelBenchmarkSubject
@@ -227,6 +228,9 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.OriginalCreationDateBench
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PasswordBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PgpKeyVersionBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.Pkcs11InputParametersBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.Pkcs11OutputParametersBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.Pkcs11ReturnCodeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeExponentPBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeExponentQBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.PrimeFieldSizeBenchmarkSubject
@@ -242,6 +246,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.type.QBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.QStringBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.QlengthBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.RandomIvBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.type.ReplaceExistingBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ReplacedUniqueIdentifierBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.ResultMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.type.RevocationMessageBenchmarkSubject
