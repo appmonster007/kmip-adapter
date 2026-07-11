@@ -29,7 +29,7 @@ public class RequestMessageJsonDeserializer extends AbstractKmipDataTypeJsonDese
                     builder.requestHeader(ctxt.readValue(p, RequestHeaderStructure.class));
             case KmipTag.Standard.BATCH_ITEM -> {
                 if (p.isExpectedStartArrayToken()) {
-                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) { // TODO: can be removed?
+                    while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
                         try {
                             builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));
                             builder.requestBatchItemError(null);

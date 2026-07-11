@@ -28,7 +28,7 @@ public class RequestMessageXmlDeserializer extends AbstractKmipDataTypeXmlDeseri
             case KmipTag.Standard.REQUEST_HEADER ->
                     builder.requestHeader(ctxt.readValue(p, RequestHeaderStructure.class));
             case KmipTag.Standard.BATCH_ITEM -> {
-                if (p.isExpectedStartArrayToken()) { // TODO: can be removed?
+                if (p.isExpectedStartArrayToken()) {
                     while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
                         try {
                             builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));

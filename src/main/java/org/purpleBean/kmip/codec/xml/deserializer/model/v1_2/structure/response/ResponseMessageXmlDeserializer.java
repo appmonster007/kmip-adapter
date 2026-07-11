@@ -28,7 +28,7 @@ public class ResponseMessageXmlDeserializer extends AbstractKmipDataTypeXmlDeser
         switch (nodeTag) {
             case KmipTag.Standard.RESPONSE_HEADER -> builder.responseHeader(ctxt.readValue(p, ResponseHeader.class));
             case KmipTag.Standard.BATCH_ITEM -> {
-                if (p.isExpectedStartArrayToken()) { // TODO: can be removed?
+                if (p.isExpectedStartArrayToken()) {
                     while (p.nextToken() != JsonToken.END_ARRAY) {
                         try {
                             builder.responseBatchItem(ctxt.readValue(p, ResponseBatchItem.class));

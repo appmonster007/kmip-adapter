@@ -1,0 +1,111 @@
+package org.purpleBean.kmip.model.core.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purpleBean.kmip.test.suite.KmipStructureTestSuite;
+
+import java.util.List;
+
+@DisplayName("RandomNumberGenerator Domain Tests")
+class RandomNumberGeneratorTest extends BaseKmipTest implements KmipStructureTestSuite<RandomNumberGenerator>, KmipAttributeTestSuite<RandomNumberGenerator> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.UnknownVersion;
+    }
+
+    @Override
+    public Class<RandomNumberGenerator> type() {
+        return RandomNumberGenerator.class;
+    }
+
+    @Override
+    public RandomNumberGenerator createDefault() {
+        // TODO: Create a default instance of the attribute structure
+        return RandomNumberGenerator.of();
+    }
+
+    @Override
+    public EncodingType expectedEncodingType() {
+        return EncodingType.STRUCTURE;
+    }
+
+    @Override
+    public int expectedMinComponentCount() {
+        return 0;
+    }
+
+    @Override
+    public void validateComponents(List<KmipDataType> values) {
+        // TODO: Validate component as per the structure design
+        // Example:
+        // assertThat(values.get(0)).isInstanceOf(AlternativeNameValue.class);
+        // assertThat(values.get(1)).isInstanceOf(AlternativeNameType.class);
+    }
+
+    @Override
+    public boolean expectAlwaysPresent() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectServerInitializable() {
+        return true;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectClientInitializable() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectClientDeletable() {
+        return false;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public boolean expectMultiInstanceAllowed() {
+        return true;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForServerModifiableTrue() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForServerModifiableFalse() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForClientModifiableTrue() {
+        return null;  // TODO: Adjust as needed
+    }
+
+    @Override
+    public State stateForClientModifiableFalse() {
+        return null; // TODO: Adjust as needed
+    }
+
+    @Override
+    public AttributeValue expectedAttributeValue() {
+        return AttributeValue.ofStructure(createDefault().getValue());
+    }
+
+    @Override
+    public void attribute_serverModifiable_respectsState() {
+     // TODO: Adjust as needed or remove to use inherited
+    }
+
+    @Override
+    public void attribute_clientModifiable_respectsState() {
+     // TODO: Adjust as needed or remove to use inherited
+    }
+}
