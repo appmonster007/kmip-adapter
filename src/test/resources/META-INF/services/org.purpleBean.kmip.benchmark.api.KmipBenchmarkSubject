@@ -23,6 +23,7 @@ org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.EphemeralBenchmark
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.Fips186VariationBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.HashingAlgorithmBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.InteropFunctionBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.ItemTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.KeyCompressionTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.KeyFormatTypeBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.core.enumeration.KeyRoleTypeBenchmarkSubject

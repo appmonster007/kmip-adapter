@@ -23,6 +23,7 @@ org.purpleBean.kmip.model.core.enumeration.Ephemeral
 org.purpleBean.kmip.model.core.enumeration.Fips186Variation
 org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm
 org.purpleBean.kmip.model.core.enumeration.InteropFunction
+org.purpleBean.kmip.model.core.enumeration.ItemType
 org.purpleBean.kmip.model.core.enumeration.KeyCompressionType
 org.purpleBean.kmip.model.core.enumeration.KeyFormatType
 org.purpleBean.kmip.model.core.enumeration.KeyRoleType
@@ -187,9 +188,9 @@ org.purpleBean.kmip.model.core.type.HashedPasswordUsername
 org.purpleBean.kmip.model.core.type.HashedUsernamePassword
 org.purpleBean.kmip.model.core.type.IVCounterNonce
 org.purpleBean.kmip.model.core.type.InitialCounterValue
-org.purpleBean.kmip.model.core.type.InteropIdentifier
 org.purpleBean.kmip.model.core.type.InitialDate
 org.purpleBean.kmip.model.core.type.InitializationVector
+org.purpleBean.kmip.model.core.type.InteropIdentifier
 org.purpleBean.kmip.model.core.type.InvocationFieldLength
 org.purpleBean.kmip.model.core.type.Issuer
 org.purpleBean.kmip.model.core.type.IssuerAlternativeName
@@ -218,7 +219,6 @@ org.purpleBean.kmip.model.core.type.NameValue
 org.purpleBean.kmip.model.core.type.NetworkIdentifier
 org.purpleBean.kmip.model.core.type.NonceId
 org.purpleBean.kmip.model.core.type.NonceValue
-org.purpleBean.kmip.model.core.type.TicketValue
 org.purpleBean.kmip.model.core.type.ObjectGroup
 org.purpleBean.kmip.model.core.type.Offset
 org.purpleBean.kmip.model.core.type.OpaqueDataValue
@@ -265,6 +265,7 @@ org.purpleBean.kmip.model.core.type.StorageStatusMask
 org.purpleBean.kmip.model.core.type.SubjectAlternativeName
 org.purpleBean.kmip.model.core.type.SubjectDistinguishedName
 org.purpleBean.kmip.model.core.type.TagLength
+org.purpleBean.kmip.model.core.type.TicketValue
 org.purpleBean.kmip.model.core.type.TimeStamp
 org.purpleBean.kmip.model.core.type.UniqueBatchItemID
 org.purpleBean.kmip.model.core.type.UniqueIdentifier
@@ -367,11 +368,11 @@ org.purpleBean.kmip.model.v1_2.structure.response.payload.RngSeedOpResponsePaylo
 org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.SignatureVerifyOpResponsePayload
 org.purpleBean.kmip.model.v1_2.structure.response.payload.ValidateOpResponsePayload
+org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute
+org.purpleBean.kmip.model.v2_1.structure.NewAttribute
+org.purpleBean.kmip.model.v2_1.structure.Ticket
 org.purpleBean.kmip.model.v2_1.structure.TransparentEcPrivateKey
 org.purpleBean.kmip.model.v2_1.structure.TransparentEcPublicKey
-org.purpleBean.kmip.model.v2_1.structure.NewAttribute
-org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute
-org.purpleBean.kmip.model.v2_1.structure.Ticket
 org.purpleBean.kmip.model.v2_1.structure.request.payload.AdjustAttributeOpRequestPayload
 org.purpleBean.kmip.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayload
 org.purpleBean.kmip.model.v2_1.structure.request.payload.GetConstraintsOpRequestPayload
