@@ -2,18 +2,20 @@ package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP Pkcs11 Response Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Pkcs11.
- */
 @Data
 @Builder(toBuilder = true)
 public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
@@ -29,13 +31,29 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
+    @NonNull
+    private final Pkcs11ReturnCode pkcs11ReturnCode;
+
+    private final Pkcs11OutputParameters pkcs11OutputParameters;
+
     @Builder
-    private Pkcs11OpResponsePayload() {
+    private Pkcs11OpResponsePayload(
+            @NonNull Pkcs11ReturnCode pkcs11ReturnCode,
+            Pkcs11OutputParameters pkcs11OutputParameters
+    ) {
+        this.pkcs11ReturnCode = pkcs11ReturnCode;
+        this.pkcs11OutputParameters = pkcs11OutputParameters;
         validate();
     }
 
     public static Pkcs11OpResponsePayload of(List<KmipDataType> values) {
-        return Pkcs11OpResponsePayload.builder().build();
+        var builder = Pkcs11OpResponsePayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        builder.pkcs11ReturnCode((Pkcs11ReturnCode) map.get(Pkcs11ReturnCode.kmipTag).getFirst());
+        if (map.containsKey(Pkcs11OutputParameters.kmipTag)) {
+            builder.pkcs11OutputParameters((Pkcs11OutputParameters) map.get(Pkcs11OutputParameters.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
@@ -51,10 +69,18 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(pkcs11ReturnCode, pkcs11OutputParameters)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

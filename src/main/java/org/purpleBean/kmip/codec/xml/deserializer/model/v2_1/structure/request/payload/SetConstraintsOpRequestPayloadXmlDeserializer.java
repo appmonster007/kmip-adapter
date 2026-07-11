@@ -7,6 +7,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
@@ -29,13 +30,12 @@ public class SetConstraintsOpRequestPayloadXmlDeserializer extends AbstractKmipD
 
     @Override
     protected void setValue(SetConstraintsOpRequestPayload.SetConstraintsOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.CONSTRAINTS -> builder.constraints(ctxt.readValue(p, Constraints.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

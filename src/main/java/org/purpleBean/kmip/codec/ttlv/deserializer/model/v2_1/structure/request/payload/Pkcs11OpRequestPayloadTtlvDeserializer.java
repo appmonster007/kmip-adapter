@@ -11,6 +11,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.Pkcs11OpRequestPayload;
 
 import java.io.IOException;
@@ -29,13 +30,14 @@ public class Pkcs11OpRequestPayloadTtlvDeserializer extends AbstractKmipDataType
 
     @Override
     protected void setValue(Pkcs11OpRequestPayload.Pkcs11OpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.PKCS_11_FUNCTION -> builder.pkcs11Function(mapper.readValue(p, Pkcs11Function.class));
+            case KmipTag.Standard.PKCS_11_INPUT_PARAMETERS -> builder.pkcs11InputParameters(mapper.readValue(p, Pkcs11InputParameters.class));
+            case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS -> builder.pkcs11OutputParameters(mapper.readValue(p, Pkcs11OutputParameters.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

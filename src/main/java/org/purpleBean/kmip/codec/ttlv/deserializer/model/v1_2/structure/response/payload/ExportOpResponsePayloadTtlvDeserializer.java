@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ExportOpRespons
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class ExportOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ExportOpResponsePayload, ExportOpResponsePayload.ExportOpResponsePayloadBuilder> {
 
@@ -29,13 +30,18 @@ public class ExportOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTyp
 
     @Override
     protected void setValue(ExportOpResponsePayload.ExportOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            default -> {
+                if (ManagedObject.isManagedObject(nodeTag)) {
+                    builder.object(mapper.readValue(p, ManagedObject.class));
+                } else {
+                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+                }
+            }
+        }
     }
 
     @Override

@@ -5,13 +5,15 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP Poll Response Payload (stub).
- */
 @Data
 @Builder(toBuilder = true)
 public class PollOpResponsePayload implements ResponsePayloadStructure {
@@ -27,10 +29,22 @@ public class PollOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @Builder
-    private PollOpResponsePayload() { validate(); }
+    private final AsynchronousCorrelationValue asynchronousCorrelationValue;
 
-    public static PollOpResponsePayload of(List<KmipDataType> values) { return PollOpResponsePayload.builder().build(); }
+    @Builder
+    private PollOpResponsePayload(AsynchronousCorrelationValue asynchronousCorrelationValue) {
+        this.asynchronousCorrelationValue = asynchronousCorrelationValue;
+        validate();
+    }
+
+    public static PollOpResponsePayload of(List<KmipDataType> values) {
+        var builder = PollOpResponsePayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(AsynchronousCorrelationValue.kmipTag)) {
+            builder.asynchronousCorrelationValue((AsynchronousCorrelationValue) map.get(AsynchronousCorrelationValue.kmipTag).getFirst());
+        }
+        return builder.build();
+    }
 
     private void validate() {
         if (!isSupported()) {
@@ -40,7 +54,20 @@ public class PollOpResponsePayload implements ResponsePayloadStructure {
 
     @Override public KmipTag getKmipTag() { return kmipTag; }
     @Override public EncodingType getEncodingType() { return encodingType; }
-    @Override public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
-    @Override public KmipDataType[] getValue() { return new KmipDataType[0]; }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public KmipDataType[] getValue() {
+        return Stream.of(asynchronousCorrelationValue)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
+
     @Override public Operation getCorrespondingOperation() { return operation.inst(); }
 }

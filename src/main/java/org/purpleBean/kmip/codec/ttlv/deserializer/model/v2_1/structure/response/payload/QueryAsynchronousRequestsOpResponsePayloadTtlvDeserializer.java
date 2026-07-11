@@ -29,13 +29,11 @@ public class QueryAsynchronousRequestsOpResponsePayloadTtlvDeserializer extends 
 
     @Override
     protected void setValue(QueryAsynchronousRequestsOpResponsePayload.QueryAsynchronousRequestsOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

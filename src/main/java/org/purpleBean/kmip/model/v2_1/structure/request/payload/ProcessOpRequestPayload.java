@@ -2,17 +2,22 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * KMIP Process Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for Process.
+ * KMIP Process Request Payload.
  */
 @Data
 @Builder(toBuilder = true)
@@ -29,13 +34,41 @@ public class ProcessOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    @NonNull
+    private final UniqueIdentifier uniqueIdentifier;
+
+    private final AsynchronousCorrelationValue asynchronousCorrelationValue;
+
+    private final ManagedObject object;
+
     @Builder
-    private ProcessOpRequestPayload() {
+    private ProcessOpRequestPayload(
+            @NonNull UniqueIdentifier uniqueIdentifier,
+            AsynchronousCorrelationValue asynchronousCorrelationValue,
+            ManagedObject object
+    ) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.asynchronousCorrelationValue = asynchronousCorrelationValue;
+        this.object = object;
         validate();
     }
 
     public static ProcessOpRequestPayload of(List<KmipDataType> values) {
-        return ProcessOpRequestPayload.builder().build();
+        var builder = ProcessOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(AsynchronousCorrelationValue.kmipTag)) {
+            builder.asynchronousCorrelationValue((AsynchronousCorrelationValue) map.get(AsynchronousCorrelationValue.kmipTag).getFirst());
+        }
+        values.stream()
+                .filter(v -> !v.getKmipTag().equals(UniqueIdentifier.kmipTag)
+                        && !v.getKmipTag().equals(AsynchronousCorrelationValue.kmipTag))
+                .filter(v -> v instanceof ManagedObject)
+                .findFirst()
+                .ifPresent(v -> builder.object((ManagedObject) v));
+        return builder.build();
     }
 
     private void validate() {
@@ -45,17 +78,35 @@ public class ProcessOpRequestPayload implements RequestPayloadStructure {
     }
 
     @Override
-    public KmipTag getKmipTag() { return kmipTag; }
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
 
     @Override
-    public EncodingType getEncodingType() { return encodingType; }
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(
+                        uniqueIdentifier,
+                        asynchronousCorrelationValue,
+                        object)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
-    public Operation getCorrespondingOperation() { return operation.inst(); }
+    public Operation getCorrespondingOperation() {
+        return operation.inst();
+    }
 }

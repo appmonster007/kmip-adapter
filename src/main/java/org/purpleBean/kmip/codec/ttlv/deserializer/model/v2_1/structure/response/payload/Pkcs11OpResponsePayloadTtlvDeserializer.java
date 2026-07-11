@@ -29,13 +29,12 @@ public class Pkcs11OpResponsePayloadTtlvDeserializer extends AbstractKmipDataTyp
 
     @Override
     protected void setValue(Pkcs11OpResponsePayload.Pkcs11OpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.PKCS_11_RETURN_CODE -> builder.pkcs11ReturnCode(mapper.readValue(p, Pkcs11ReturnCode.class));
+            case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS -> builder.pkcs11OutputParameters(mapper.readValue(p, Pkcs11OutputParameters.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

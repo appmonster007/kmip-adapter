@@ -2,18 +2,18 @@ package org.purpleBean.kmip.model.v3_0.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.Attributes;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP CreateGroup Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for CreateGroup.
- */
 @Data
 @Builder(toBuilder = true)
 public class CreateGroupOpRequestPayload implements RequestPayloadStructure {
@@ -29,13 +29,20 @@ public class CreateGroupOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    @NonNull
+    private final Attributes attributes;
+
     @Builder
-    private CreateGroupOpRequestPayload() {
+    private CreateGroupOpRequestPayload(@NonNull Attributes attributes) {
+        this.attributes = attributes;
         validate();
     }
 
     public static CreateGroupOpRequestPayload of(List<KmipDataType> values) {
-        return CreateGroupOpRequestPayload.builder().build();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        return CreateGroupOpRequestPayload.builder()
+                .attributes((Attributes) map.get(Attributes.kmipTag).getFirst())
+                .build();
     }
 
     private void validate() {
@@ -51,10 +58,15 @@ public class CreateGroupOpRequestPayload implements RequestPayloadStructure {
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return new KmipDataType[]{ attributes };
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

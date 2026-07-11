@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ImportOpRequestP
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class ImportOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ImportOpRequestPayload, ImportOpRequestPayload.ImportOpRequestPayloadBuilder> {
 
@@ -29,13 +30,20 @@ public class ImportOpRequestPayloadTtlvDeserializer extends AbstractKmipDataType
 
     @Override
     protected void setValue(ImportOpRequestPayload.ImportOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(mapper.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(mapper.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
+            case KmipTag.Standard.REPLACE_EXISTING -> builder.replaceExisting(mapper.readValue(p, ReplaceExisting.class));
+            case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION -> builder.keyWrappingSpecification(mapper.readValue(p, KeyWrappingSpecification.class));
+            default -> {
+                if (ManagedObject.isManagedObject(nodeTag)) {
+                    builder.object(mapper.readValue(p, ManagedObject.class));
+                } else {
+                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+                }
+            }
+        }
     }
 
     @Override

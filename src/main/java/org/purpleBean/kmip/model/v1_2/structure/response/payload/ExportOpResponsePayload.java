@@ -2,15 +2,23 @@ package org.purpleBean.kmip.model.v1_2.structure.response.payload;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * KMIP Export Response Payload (stub).
+ * KMIP Export Response Payload.
  */
 @Data
 @Builder(toBuilder = true)
@@ -27,10 +35,45 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @Builder
-    private ExportOpResponsePayload() { validate(); }
+    @NonNull
+    private final ObjectType objectType;
 
-    public static ExportOpResponsePayload of(List<KmipDataType> values) { return ExportOpResponsePayload.builder().build(); }
+    @NonNull
+    private final UniqueIdentifier uniqueIdentifier;
+
+    @NonNull
+    private final ManagedObject object;
+
+    @Builder
+    private ExportOpResponsePayload(
+            @NonNull ObjectType objectType,
+            @NonNull UniqueIdentifier uniqueIdentifier,
+            @NonNull ManagedObject object
+    ) {
+        this.objectType = objectType;
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.object = object;
+        validate();
+    }
+
+    public static ExportOpResponsePayload of(List<KmipDataType> values) {
+        var builder = ExportOpResponsePayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(ObjectType.kmipTag)) {
+            builder.objectType((ObjectType) map.get(ObjectType.kmipTag).getFirst());
+        }
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+
+        values.stream()
+                .filter(v -> !v.getKmipTag().equals(ObjectType.kmipTag) && !v.getKmipTag().equals(TemplateAttribute.kmipTag))
+                .filter(v -> v instanceof ManagedObject)
+                .findFirst()
+                .ifPresent(v -> builder.object((ManagedObject) v));
+
+        return builder.build();
+    }
 
     private void validate() {
         if (!isSupported()) {
@@ -38,9 +81,36 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @Override public KmipTag getKmipTag() { return kmipTag; }
-    @Override public EncodingType getEncodingType() { return encodingType; }
-    @Override public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
-    @Override public KmipDataType[] getValue() { return new KmipDataType[0]; }
-    @Override public Operation getCorrespondingOperation() { return operation.inst(); }
+    @Override
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
+
+    @Override
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public KmipDataType[] getValue() {
+        return Stream.of(
+                        objectType,
+                        uniqueIdentifier,
+                        object)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
+
+    @Override
+    public Operation getCorrespondingOperation() {
+        return operation.inst();
+    }
 }

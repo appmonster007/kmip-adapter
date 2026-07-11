@@ -15,6 +15,7 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ImportOpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class ImportOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ImportOpRequestPayload, ImportOpRequestPayload.ImportOpRequestPayloadBuilder> {
 
@@ -29,13 +30,20 @@ public class ImportOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeX
 
     @Override
     protected void setValue(ImportOpRequestPayload.ImportOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        // TODO: Implement setting values on the builder based on the tag
-        // KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        // switch (nodeTag) {
-        //     case KmipTag.Standard.FIELD_1 -> builder.field1(ctxt.readValue(p, Field1.class));
-        //     case KmipTag.Standard.FIELD_2 -> builder.field2(ctxt.readValue(p, Field2.class));
-        //     default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        // }
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
+            case KmipTag.Standard.REPLACE_EXISTING -> builder.replaceExisting(ctxt.readValue(p, ReplaceExisting.class));
+            case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION -> builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
+            default -> {
+                if (ManagedObject.isManagedObject(nodeTag)) {
+                    builder.object(ctxt.readValue(p, ManagedObject.class));
+                } else {
+                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+                }
+            }
+        }
     }
 
     @Override

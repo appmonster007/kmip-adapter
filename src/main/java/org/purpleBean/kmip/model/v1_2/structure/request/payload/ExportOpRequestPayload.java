@@ -5,13 +5,16 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/**
- * KMIP Export Request Payload (stub).
- */
 @Data
 @Builder(toBuilder = true)
 public class ExportOpRequestPayload implements RequestPayloadStructure {
@@ -27,10 +30,27 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    @Builder
-    private ExportOpRequestPayload() { validate(); }
+    private final UniqueIdentifier uniqueIdentifier;
+    private final KeyWrappingSpecification keyWrappingSpecification;
 
-    public static ExportOpRequestPayload of(List<KmipDataType> values) { return ExportOpRequestPayload.builder().build(); }
+    @Builder
+    private ExportOpRequestPayload(UniqueIdentifier uniqueIdentifier, KeyWrappingSpecification keyWrappingSpecification) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.keyWrappingSpecification = keyWrappingSpecification;
+        validate();
+    }
+
+    public static ExportOpRequestPayload of(List<KmipDataType> values) {
+        var builder = ExportOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(UniqueIdentifier.kmipTag)) {
+            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(KeyWrappingSpecification.kmipTag)) {
+            builder.keyWrappingSpecification((KeyWrappingSpecification) map.get(KeyWrappingSpecification.kmipTag).getFirst());
+        }
+        return builder.build();
+    }
 
     private void validate() {
         if (!isSupported()) {
@@ -40,7 +60,20 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
 
     @Override public KmipTag getKmipTag() { return kmipTag; }
     @Override public EncodingType getEncodingType() { return encodingType; }
-    @Override public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
-    @Override public KmipDataType[] getValue() { return new KmipDataType[0]; }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public KmipDataType[] getValue() {
+        return Stream.of(uniqueIdentifier, keyWrappingSpecification)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
+
     @Override public Operation getCorrespondingOperation() { return operation.inst(); }
 }
