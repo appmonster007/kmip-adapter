@@ -1,0 +1,32 @@
+package org.purpleBean.kmip.codec.xml.model.core.structure;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.Attributes;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+
+import java.util.Collections;
+
+@DisplayName("Attributes Xml Serialization Tests")
+class AttributesXmlTest extends AbstractXmlSerializationTestSuite<Attributes> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+    @Override
+    public Class<Attributes> type() {
+        return Attributes.class;
+    }
+
+    @Override
+    public Attributes createDefault() {
+        return Attributes.of(Collections.emptyList());
+    }
+
+    @Override
+    public Attributes createVariant() {
+        return Attributes.of(Collections.emptyList());
+    }
+}
