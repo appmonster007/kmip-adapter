@@ -423,6 +423,11 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpSerialTtlvSerialize
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpIntervalTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpDigitsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpCounterTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpDigestTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.OtpSeedTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PasswordSaltTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.PasswordSaltAlgorithmTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.SaltedPasswordTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.DeactivationMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.LogMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.core.type.InteropIdentifierTtlvSerializer

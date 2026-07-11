@@ -18,7 +18,7 @@ import org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateUserOpRes
 public class CreateUserOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<CreateUserOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateUserOpResponsePayloadBenchmarkSubject() throws Exception {
         CreateUserOpResponsePayload subject = CreateUserOpResponsePayload.builder()

@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v3_0.structure.CredentialInformation;
 public class CredentialInformationBenchmarkSubject extends KmipBenchmarkSubject<CredentialInformation> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public CredentialInformationBenchmarkSubject() throws Exception {
         CredentialInformation subject = CredentialInformation.builder()

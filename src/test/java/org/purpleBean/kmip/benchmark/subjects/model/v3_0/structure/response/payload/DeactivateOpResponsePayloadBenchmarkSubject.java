@@ -18,7 +18,7 @@ import org.purpleBean.kmip.model.v3_0.structure.response.payload.DeactivateOpRes
 public class DeactivateOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<DeactivateOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public DeactivateOpResponsePayloadBenchmarkSubject() throws Exception {
         DeactivateOpResponsePayload subject = DeactivateOpResponsePayload.builder()

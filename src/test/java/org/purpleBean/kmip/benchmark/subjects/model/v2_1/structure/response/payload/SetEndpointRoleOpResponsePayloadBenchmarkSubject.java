@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v2_1.structure.response.payload.SetEndpointRole
 public class SetEndpointRoleOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<SetEndpointRoleOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public SetEndpointRoleOpResponsePayloadBenchmarkSubject() throws Exception {
         SetEndpointRoleOpResponsePayload subject = SetEndpointRoleOpResponsePayload.builder()

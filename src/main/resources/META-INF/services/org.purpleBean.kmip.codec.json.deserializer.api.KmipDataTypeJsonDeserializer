@@ -436,6 +436,11 @@ org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpSerialJsonDeseria
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpIntervalJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpDigitsJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpCounterJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpDigestJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.OtpSeedJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.PasswordSaltJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.PasswordSaltAlgorithmJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.core.type.SaltedPasswordJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.DeactivationMessageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.LogMessageJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.core.type.InteropIdentifierJsonDeserializer

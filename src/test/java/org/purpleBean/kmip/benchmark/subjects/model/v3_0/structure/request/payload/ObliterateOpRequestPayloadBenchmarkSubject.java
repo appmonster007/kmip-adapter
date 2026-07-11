@@ -18,7 +18,7 @@ import org.purpleBean.kmip.model.v3_0.structure.request.payload.ObliterateOpRequ
 public class ObliterateOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<ObliterateOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public ObliterateOpRequestPayloadBenchmarkSubject() throws Exception {
         ObliterateOpRequestPayload subject = ObliterateOpRequestPayload.builder()

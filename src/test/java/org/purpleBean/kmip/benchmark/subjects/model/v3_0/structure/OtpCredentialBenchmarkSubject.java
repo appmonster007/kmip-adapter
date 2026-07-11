@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v3_0.structure.OtpCredential;
 public class OtpCredentialBenchmarkSubject extends KmipBenchmarkSubject<OtpCredential> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public OtpCredentialBenchmarkSubject() throws Exception {
         OtpCredential subject = OtpCredential.builder()

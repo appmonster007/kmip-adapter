@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.LogOpRequestPayl
 public class LogOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<LogOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public LogOpRequestPayloadBenchmarkSubject() throws Exception {
         LogOpRequestPayload subject = LogOpRequestPayload.builder()

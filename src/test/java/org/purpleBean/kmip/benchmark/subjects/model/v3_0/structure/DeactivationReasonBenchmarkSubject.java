@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 public class DeactivationReasonBenchmarkSubject extends KmipBenchmarkSubject<DeactivationReason> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public DeactivationReasonBenchmarkSubject() throws Exception {
         DeactivationReason subject = DeactivationReason.builder()

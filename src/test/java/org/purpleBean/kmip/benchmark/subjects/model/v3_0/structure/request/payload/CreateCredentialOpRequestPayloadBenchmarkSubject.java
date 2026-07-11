@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v3_0.structure.request.payload.CreateCredential
 public class CreateCredentialOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<CreateCredentialOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateCredentialOpRequestPayloadBenchmarkSubject() throws Exception {
         CreateCredentialOpRequestPayload subject = CreateCredentialOpRequestPayload.builder().build();  // TODO: Create a default instance

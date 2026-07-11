@@ -18,7 +18,7 @@ import org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateGroupOpRe
 public class CreateGroupOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<CreateGroupOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateGroupOpResponsePayloadBenchmarkSubject() throws Exception {
         CreateGroupOpResponsePayload subject = CreateGroupOpResponsePayload.builder()

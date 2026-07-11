@@ -17,7 +17,7 @@ import org.purpleBean.kmip.model.v3_0.structure.PasswordCredential;
 public class PasswordCredentialBenchmarkSubject extends KmipBenchmarkSubject<PasswordCredential> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public PasswordCredentialBenchmarkSubject() throws Exception {
         PasswordCredential subject = PasswordCredential.builder()
