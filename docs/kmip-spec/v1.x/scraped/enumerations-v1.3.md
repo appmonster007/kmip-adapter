@@ -1,6 +1,6 @@
-# KMIP 1.4 — Enumerations
+# KMIP 1.3 — Enumerations
 
-Total: **48** enumeration types
+Total: **46** enumeration types
 
 ## Alternative Name Type
 
@@ -51,7 +51,6 @@ Total: **48** enumeration types
 | X9.102 TDKW       | 0x0000000F |  |
 | X9.102 AKW1       | 0x00000010 |  |
 | X9.102 AKW2       | 0x00000011 |  |
-| AEAD              | 0x00000012 |  |
 
 ## Cancellation Result
 
@@ -99,48 +98,35 @@ Total: **48** enumeration types
 
 ## Cryptographic Algorithm
 
-| Name             | Hex        | Description |
-| ---------------- | ---------- | ----------- |
-| DES              | 0x00000001 |  |
-| 3DES             | 0x00000002 |  |
-| AES              | 0x00000003 |  |
-| RSA              | 0x00000004 |  |
-| DSA              | 0x00000005 |  |
-| ECDSA            | 0x00000006 |  |
-| HMAC-SHA1        | 0x00000007 |  |
-| HMAC-SHA224      | 0x00000008 |  |
-| HMAC-SHA256      | 0x00000009 |  |
-| HMAC-SHA384      | 0x0000000A |  |
-| HMAC-SHA512      | 0x0000000B |  |
-| HMAC-MD5         | 0x0000000C |  |
-| DH               | 0x0000000D |  |
-| ECDH             | 0x0000000E |  |
-| ECMQV            | 0x0000000F |  |
-| Blowfish         | 0x00000010 |  |
-| Camellia         | 0x00000011 |  |
-| CAST5            | 0x00000012 |  |
-| IDEA             | 0x00000013 |  |
-| MARS             | 0x00000014 |  |
-| RC2              | 0x00000015 |  |
-| RC4              | 0x00000016 |  |
-| RC5              | 0x00000017 |  |
-| SKIPJACK         | 0x00000018 |  |
-| Twofish          | 0x00000019 |  |
-| EC               | 0x0000001A |  |
-| One Time Pad     | 0x0000001B |  |
-| ChaCha20         | 0x0000001C |  |
-| Poly1305         | 0x0000001D |  |
-| ChaCha20Poly1305 | 0x0000001E |  |
-| SHA3-224         | 0x0000001F |  |
-| SHA3-256         | 0x00000020 |  |
-| SHA3-384         | 0x00000021 |  |
-| SHA3-512         | 0x00000022 |  |
-| HMAC-SHA3-224    | 0x00000023 |  |
-| HMAC-SHA3-256    | 0x00000024 |  |
-| HMAC-SHA3-384    | 0x00000025 |  |
-| HMAC-SHA3-512    | 0x00000026 |  |
-| SHAKE-128        | 0x00000027 |  |
-| SHAKE-256        | 0x00000028 |  |
+| Name         | Hex        | Description |
+| ------------ | ---------- | ----------- |
+| DES          | 0x00000001 |  |
+| 3DES         | 0x00000002 |  |
+| AES          | 0x00000003 |  |
+| RSA          | 0x00000004 |  |
+| DSA          | 0x00000005 |  |
+| ECDSA        | 0x00000006 |  |
+| HMAC-SHA1    | 0x00000007 |  |
+| HMAC-SHA224  | 0x00000008 |  |
+| HMAC-SHA256  | 0x00000009 |  |
+| HMAC-SHA384  | 0x0000000A |  |
+| HMAC-SHA512  | 0x0000000B |  |
+| HMAC-MD5     | 0x0000000C |  |
+| DH           | 0x0000000D |  |
+| ECDH         | 0x0000000E |  |
+| ECMQV        | 0x0000000F |  |
+| Blowfish     | 0x00000010 |  |
+| Camellia     | 0x00000011 |  |
+| CAST5        | 0x00000012 |  |
+| IDEA         | 0x00000013 |  |
+| MARS         | 0x00000014 |  |
+| RC2          | 0x00000015 |  |
+| RC4          | 0x00000016 |  |
+| RC5          | 0x00000017 |  |
+| SKIPJACK     | 0x00000018 |  |
+| Twofish      | 0x00000019 |  |
+| EC           | 0x0000001A |  |
+| One Time Pad | 0x0000001B |  |
 
 ## DRBG Algorithm
 
@@ -163,7 +149,6 @@ Total: **48** enumeration types
 | NIST800-108-C   | 0x00000005 |  |
 | NIST800-108-F   | 0x00000006 |  |
 | NIST800-108-DPI | 0x00000007 |  |
-| Asymmetric Key  | 0x00000008 |  |
 
 ## Destroy Action
 
@@ -197,9 +182,6 @@ Total: **48** enumeration types
 | ECDSA with SHA256                         | 0x0000000E |  |
 | ECDSA with SHA384                         | 0x0000000F |  |
 | ECDSA with SHA512                         | 0x00000010 |  |
-| SHA3-256 with RSA Encryption              | 0x00000011 |  |
-| SHA3-384 with RSA Encryption              | 0x00000012 |  |
-| SHA3-512 with RSA Encryption              | 0x00000013 |  |
 
 ## Encoding Option
 
@@ -237,10 +219,6 @@ Total: **48** enumeration types
 | Whirlpool   | 0x0000000B |  |
 | SHA-512/224 | 0x0000000C |  |
 | SHA-512/256 | 0x0000000D |  |
-| SHA-3-224   | 0x0000000E |  |
-| SHA-3-256   | 0x0000000F |  |
-| SHA-3-384   | 0x00000010 |  |
-| SHA-3-512   | 0x00000011 |  |
 
 ## Key Compression Type
 
@@ -276,7 +254,6 @@ Total: **48** enumeration types
 | Transparent ECMQV Public Key  | 00000013 (deprecated) |  |
 | Transparent EC Private Key    | 0x00000014            |  |
 | Transparent EC Public Key     | 0x00000015            |  |
-| PKCS#12                       | 0x00000016            |  |
 
 ## Key Role Type
 
@@ -303,9 +280,6 @@ Total: **48** enumeration types
 | PVKIBM   | 0x00000013 |  |
 | PVKPVV   | 0x00000014 |  |
 | PVKOTH   | 0x00000015 |  |
-| DUKPT    | 0x00000016 |  |
-| IV       | 0x00000017 |  |
-| TRKBK    | 0x00000018 |  |
 
 ## Key Value Location Type
 
@@ -313,13 +287,6 @@ Total: **48** enumeration types
 | ------------------------- | ---------- | ----------- |
 | Uninterpreted Text String | 0x00000001 |  |
 | URI                       | 0x00000002 |  |
-
-## Key Wrap Type
-
-| Name          | Hex        | Description |
-| ------------- | ---------- | ----------- |
-| Not Wrapped   | 0x00000001 |  |
-| As Registered | 0x00000002 |  |
 
 ## Link Type
 
@@ -336,14 +303,6 @@ Total: **48** enumeration types
 | Child Link                  | 0x00000109 | For all object types: the subordinate, derived or other child object corresponding to the object. |
 | Previous Link               | 0x0000010A | For all object types: the previous object to this object. |
 | Next Link                   | 0x0000010B | For all object types: the next object to this object. |
-| PKCS#12 Certificate Link    | 0x0000010C |  |
-| PKCS#12 Password Link       | 0x0000010D |  |
-
-## Mask Generator
-
-| Name | Hex        | Description |
-| ---- | ---------- | ----------- |
-| MGF1 | 0x00000001 |  |
 
 ## Name Type
 
@@ -418,8 +377,6 @@ Total: **48** enumeration types
 | Hash                 | 0x00000027 |  |
 | Create Split Key     | 0x00000028 |  |
 | Join Split Key       | 0x00000029 |  |
-| Import               | 0x0000002A |  |
-| Export               | 0x0000002B |  |
 
 ## Padding Method
 
@@ -560,42 +517,6 @@ Total: **48** enumeration types
 | JSON Server KMIP v1.3                                     | 0x00000076 |  |
 | XML Client KMIP v1.3                                      | 0x00000077 |  |
 | XML Server KMIP v1.3                                      | 0x00000078 |  |
-| Baseline Server Basic KMIP v1.4                           | 0x00000079 |  |
-| Baseline Server TLS v1.2 KMIP v1.4                        | 0x0000007A |  |
-| Baseline Client Basic KMIP v1.4                           | 0x0000007B |  |
-| Baseline Client TLS v1.2 KMIP v1.4                        | 0x0000007C |  |
-| Complete Server Basic KMIP v1.4                           | 0x0000007D |  |
-| Complete Server TLS v1.2 KMIP v1.4                        | 0x0000007E |  |
-| Tape Library Client KMIP v1.4                             | 0x0000007F |  |
-| Tape Library Server KMIP v1.4                             | 0x00000080 |  |
-| Symmetric Key Lifecycle Client KMIP v1.4                  | 0x00000081 |  |
-| Symmetric Key Lifecycle Server KMIP v1.4                  | 0x00000082 |  |
-| Asymmetric Key Lifecycle Client KMIP v1.4                 | 0x00000083 |  |
-| Asymmetric Key Lifecycle Server KMIP v1.4                 | 0x00000084 |  |
-| Basic Cryptographic Client KMIP v1.4                      | 0x00000085 |  |
-| Basic Cryptographic Server KMIP v1.4                      | 0x00000086 |  |
-| Advanced Cryptographic Client KMIP v1.4                   | 0x00000087 |  |
-| Advanced Cryptographic Server KMIP v1.4                   | 0x00000088 |  |
-| RNG Cryptographic Client KMIP v1.4                        | 0x00000089 |  |
-| RNG Cryptographic Server KMIP v1.4                        | 0x0000008A |  |
-| Basic Symmetric Key Foundry Client KMIP v1.4              | 0x0000008B |  |
-| Intermediate Symmetric Key Foundry Client KMIP v1.4       | 0x0000008C |  |
-| Advanced Symmetric Key Foundry Client KMIP v1.4           | 0x0000008D |  |
-| Symmetric Key Foundry Server KMIP v1.4                    | 0x0000008E |  |
-| Opaque Managed Object Store Client KMIP v1.4              | 0x0000008F |  |
-| Opaque Managed Object Store Server KMIP v1.4              | 0x00000090 |  |
-| Suite B minLOS_128 Client KMIP v1.4                       | 0x00000091 |  |
-| Suite B minLOS_128 Server KMIP v1.4                       | 0x00000092 |  |
-| Suite B minLOS_192 Client KMIP v1.4                       | 0x00000093 |  |
-| Suite B minLOS_192 Server KMIP v1.4                       | 0x00000094 |  |
-| Storage Array with Self Encrypting Drive Client KMIP v1.4 | 0x00000095 |  |
-| Storage Array with Self Encrypting Drive Server KMIP v1.4 | 0x00000096 |  |
-| HTTPS Client KMIP v1.4                                    | 0x00000097 |  |
-| HTTPS Server KMIP v1.4                                    | 0x00000098 |  |
-| JSON Client KMIP v1.4                                     | 0x00000099 |  |
-| JSON Server KMIP v1.4                                     | 0x0000009A |  |
-| XML Client KMIP v1.4                                      | 0x0000009B |  |
-| XML Server KMIP v1.4                                      | 0x0000009C |  |
 
 ## Put Function
 
@@ -738,9 +659,6 @@ Total: **48** enumeration types
 | Key Value Not Present               | 0x00000013 | A meta data only object. The key value is not present on the server |
 | Attestation Required                | 0x00000014 | Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True |
 | Attestation Failed                  | 0x00000015 | Operation requires attestation data and the attestation data provided by the client does not validate |
-| Sensitive                           | 0x00000016 | Sensitive keys may not be retrieved unwrapped |
-| Not Extractable                     | 0x00000017 | Object is not Extractable |
-| Object Already Exists               | 0x00000018 | for operations such as Import that require that no object with a specific unique identifier exists on a server |
 | General Failure                     | 0x00000100 |  |
 
 ## Result Status

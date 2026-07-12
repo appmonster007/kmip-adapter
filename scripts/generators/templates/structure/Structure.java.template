@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class {{STRUCTURE_NAME}} implements KmipStructure {
     public static final KmipTag kmipTag = KmipTag.Standard.{{STRUCTURE_NAME_SNAKE}}.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2); // TODO: Adjust supported versions
+    private static final Set<KmipSpec> supportedVersions = {{SUPPORTED_VERSIONS}}; // introduced in KMIP {{KMIP_VERSION}} — extend if present in later specs
 
     static {
         for (KmipSpec spec : supportedVersions) {

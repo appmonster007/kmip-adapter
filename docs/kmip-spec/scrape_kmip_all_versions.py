@@ -115,6 +115,29 @@ def table_to_rows(table: Tag) -> List[List[str]]:
     return rows
 
 
+def parse_desc_table(rows: List[List[str]]) -> Dict[str, str]:
+    """
+    Given table rows, extract {value_name → description} from a 'Value|Description' table.
+    Returns empty dict if the table does not match that shape.
+    """
+    if not rows:
+        return {}
+    header = [c.lower() for c in rows[0]]
+    vi = next((i for i, h in enumerate(header) if h in ("value", "name")), None)
+    di = next((i for i, h in enumerate(header) if "desc" in h), None)
+    if vi is None or di is None:
+        return {}
+    result: Dict[str, str] = {}
+    for row in rows[1:]:
+        if len(row) <= max(vi, di):
+            continue
+        name = row[vi].strip()
+        desc = row[di].strip()
+        if name and not is_reserved(name) and name.lower() not in ("value", "name"):
+            result[name] = desc
+    return result
+
+
 def parse_enum_table(rows: List[List[str]]) -> List[Dict]:
     """
     Given table rows, extract Name+Value pairs for an enumeration.
@@ -130,12 +153,21 @@ def parse_enum_table(rows: List[List[str]]) -> List[Dict]:
         # Try without header — sometimes first row is a section title, second is real header
         if len(rows) > 1:
             header2 = [c.lower() for c in rows[1]]
-            ni = next((i for i, h in enumerate(header2) if h == "name"), None)
-            vi = next((i for i, h in enumerate(header2) if h == "value"), None)
-            if ni is None or vi is None:
-                # Last resort: assume col0=Name, col1=Value
+            ni2 = next((i for i, h in enumerate(header2) if h == "name"), None)
+            vi2 = next((i for i, h in enumerate(header2) if h == "value"), None)
+            if ni2 is not None and vi2 is not None:
+                ni, vi = ni2, vi2
+                start = 2
+            else:
+                # Bail out if any partial column header was found (e.g. 'value' without 'name'
+                # indicates a Value|Description table — do not misread it as hex data).
+                has_partial = any(h in ("name", "value") for h in header) or \
+                              any(h in ("name", "value") for h in header2)
+                if has_partial:
+                    return []
+                # True last resort (no headers found at all): assume col0=Name, col1=Value
                 ni, vi = 0, 1
-            start = 2
+                start = 2
         else:
             return []
     else:
@@ -166,6 +198,8 @@ class SpecData:
         self.label = label
         # enum_name → {values: [{name, value}]}
         self.enumerations: Dict[str, Dict] = {}
+        # enum_name → {value_name → description string}
+        self.descriptions: Dict[str, Dict[str, str]] = {}
         # tag_name → {tag, reserved}
         self.tags: Dict[str, Dict] = {}
 
@@ -174,6 +208,7 @@ class SpecData:
             "version": self.version,
             "label": self.label,
             "enumerations": self.enumerations,
+            "descriptions": self.descriptions,
             "tags": self.tags,
         }
 
@@ -248,6 +283,16 @@ def parse_spec(cfg: dict) -> SpecData:
                         sd.enumerations[enum_name]["values"].append(v)
                         existing.add(v["name"])
                 break  # first table with data wins
+
+        # Also collect descriptions from Value|Description tables in the same section
+        for table in tables:
+            rows = table_to_rows(table)
+            descs = parse_desc_table(rows)
+            if descs:
+                if enum_name not in sd.descriptions:
+                    sd.descriptions[enum_name] = {}
+                sd.descriptions[enum_name].update(descs)
+                break  # first description table wins
 
     # ------------------------------------------------------------------ #
     # 2. TAGS                                                               #
@@ -470,6 +515,85 @@ IMPLEMENTED_STRUCTURES = {
     "PreviousLink", "PrivateKeyLink", "PublicKeyLink", "ReplacedObjectLink",
     "ReplacementObjectLink", "WrappingKeyLink",
 }
+
+
+# ---------------------------------------------------------------------------
+# Per-version scraped enumeration markdown
+# ---------------------------------------------------------------------------
+
+VERSION_TO_SUBDIR = {
+    "1.2": "v1.x", "1.3": "v1.x", "1.4": "v1.x",
+    "2.0": "v2.x", "2.1": "v2.x",
+    "3.0": "v3.x",
+}
+
+
+def write_scraped_enumerations(all_data: List["SpecData"]) -> None:
+    """
+    Write per-version scraped/enumerations.md files with unified:
+      Name | Hex | Description
+    Descriptions come from the same spec version where available, falling back to
+    the next higher version that has one.
+    """
+    # Build a fallback description map: enum_name → {value_name → desc} from all versions
+    fallback: Dict[str, Dict[str, str]] = {}
+    for sd in all_data:
+        for ename, descs in sd.descriptions.items():
+            if ename not in fallback:
+                fallback[ename] = {}
+            for vname, desc in descs.items():
+                if desc and vname not in fallback[ename]:
+                    fallback[ename][vname] = desc
+
+    # Track the highest version per family so the shared scraped/ dir gets the latest
+    family_latest: Dict[str, "SpecData"] = {}
+    for sd in all_data:
+        subdir = VERSION_TO_SUBDIR.get(sd.version)
+        if subdir:
+            family_latest[subdir] = sd  # later entries overwrite → highest version wins
+
+    for sd in all_data:
+        subdir = VERSION_TO_SUBDIR.get(sd.version)
+        if not subdir:
+            continue
+        out_dir = SPEC_DIR / subdir / "scraped"
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        # Write per-version file (e.g. enumerations-v1.2.md) for every version
+        per_ver_path = out_dir / f"enumerations-v{sd.version}.md"
+        # Also write shared enumerations.md for the highest version in each family
+        is_latest = (family_latest[subdir] is sd)
+
+        lines: List[str] = []
+        lines.append(f"# KMIP {sd.version} — Enumerations\n")
+        lines.append(f"Total: **{len(sd.enumerations)}** enumeration types\n")
+
+        for ename in sorted(sd.enumerations.keys()):
+            vals = sd.enumerations[ename].get("values", [])
+            lines.append(f"## {ename}\n")
+
+            col_w_name = max((len(v["name"]) for v in vals), default=4)
+            col_w_hex  = max((len(v["value"]) for v in vals), default=12)
+
+            lines.append(f"| {'Name':<{col_w_name}} | {'Hex':<{col_w_hex}} | Description |")
+            lines.append(f"| {'-'*col_w_name} | {'-'*col_w_hex} | ----------- |")
+
+            ver_descs = sd.descriptions.get(ename, {})
+            fb_descs  = fallback.get(ename, {})
+            for v in vals:
+                desc = ver_descs.get(v["name"], fb_descs.get(v["name"], ""))
+                lines.append(f"| {v['name']:<{col_w_name}} | {v['value']:<{col_w_hex}} | {desc} |")
+
+            lines.append("")
+
+        content = "\n".join(lines)
+        per_ver_path.write_text(content, encoding="utf-8")
+        print(f"  Wrote {per_ver_path.relative_to(SPEC_DIR)}")
+
+        if is_latest:
+            shared_path = out_dir / "enumerations.md"
+            shared_path.write_text(content, encoding="utf-8")
+            print(f"  Wrote {shared_path.relative_to(SPEC_DIR)} (latest for {subdir})")
 
 
 # ---------------------------------------------------------------------------
@@ -798,6 +922,9 @@ def main():
                    "new_in": analysis["new_in"],
                    "removed_in": analysis["removed_in"]},
                   f, indent=2, default=str)
+
+    print(f"\nWriting per-version scraped/enumerations.md files…")
+    write_scraped_enumerations(all_data)
 
     print(f"Writing markdown to {OUT_MD} …")
     md = generate_markdown(all_data, analysis)

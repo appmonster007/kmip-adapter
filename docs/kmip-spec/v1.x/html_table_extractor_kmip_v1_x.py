@@ -84,6 +84,10 @@ def parse_table_to_markdown(table_element, table_type='enumeration') -> Tuple[st
         if not headers:
             headers = ['Name', 'Value']  # Default headers
     
+    # Add Description column to enumeration tables for unified output format
+    if table_type == 'enumeration' and 'Description' not in headers:
+        headers = list(headers) + ['Description']
+
     # Create markdown header row
     markdown_lines.append('| ' + ' | '.join(headers) + ' |')
     # Create separator row
@@ -124,10 +128,14 @@ def parse_table_to_markdown(table_element, table_type='enumeration') -> Tuple[st
         while len(cell_texts) < len(headers):
             cell_texts.append('')
         
+        # Pad enumeration rows with empty Description cell if needed
+        if table_type == 'enumeration' and len(cell_texts) == len(headers) - 1:
+            cell_texts.append('')
+
         # Only process rows with the expected number of columns
         if len(cell_texts) <= len(headers):
             markdown_lines.append('| ' + ' | '.join(cell_texts) + ' |')
-            
+
             # Add to CSV rows if this is a data row (not a header or separator)
             if i > header_row_idx and len(cell_texts) >= 2:
                 # For tag values, use the specific column mapping
@@ -139,8 +147,9 @@ def parse_table_to_markdown(table_element, table_type='enumeration') -> Tuple[st
                 # For enumerations, use the first two columns as name/value
                 elif table_type == 'enumeration' and len(headers) >= 2:
                     csv_rows.append({
-                        'name': cell_texts[0],  # Name
-                        'value': cell_texts[1]   # Value
+                        'name': cell_texts[0],       # Name
+                        'value': cell_texts[1],      # Hex
+                        'description': cell_texts[2] if len(cell_texts) > 2 else '',
                     })
     
     return '\n'.join(markdown_lines), csv_rows

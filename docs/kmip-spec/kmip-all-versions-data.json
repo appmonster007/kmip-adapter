@@ -1589,6 +1589,7 @@
           ]
         }
       },
+      "descriptions": {},
       "tags": {}
     },
     {
@@ -3924,6 +3925,7 @@
           ]
         }
       },
+      "descriptions": {},
       "tags": {}
     },
     {
@@ -6555,6 +6557,7 @@
           ]
         }
       },
+      "descriptions": {},
       "tags": {}
     },
     {
@@ -6564,12 +6567,16 @@
         "Adjustment Type": {
           "values": [
             {
+              "name": "Increment",
+              "value": "0x00000001"
+            },
+            {
               "name": "Decrement",
-              "value": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended."
+              "value": "0x00000002"
             },
             {
               "name": "Negate",
-              "value": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+              "value": "0x00000003"
             }
           ]
         },
@@ -6608,12 +6615,16 @@
         "Asynchronous Indicator": {
           "values": [
             {
+              "name": "Mandatory",
+              "value": "0x00000001"
+            },
+            {
               "name": "Optional",
-              "value": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol."
+              "value": "0x00000002"
             },
             {
               "name": "Prohibited",
-              "value": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+              "value": "0x00000003"
             }
           ]
         },
@@ -6636,12 +6647,16 @@
         "Batch Error Continuation Option": {
           "values": [
             {
-              "name": "Stop",
-              "value": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally."
+              "name": "Continue",
+              "value": "0x00000001"
             },
             {
-              "name": "Continue",
-              "value": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+              "name": "Stop",
+              "value": "0x00000002"
+            },
+            {
+              "name": "Undo",
+              "value": "0x00000003"
             }
           ]
         },
@@ -6724,20 +6739,24 @@
         "Cancellation Result": {
           "values": [
             {
+              "name": "Canceled",
+              "value": "0x00000001"
+            },
+            {
               "name": "Unable to Cancel",
-              "value": "The cancel operation is unable to cancel the pending operation."
+              "value": "0x00000002"
             },
             {
               "name": "Completed",
-              "value": "The pending operation completed successfully before the cancellation operation was able to cancel it."
+              "value": "0x00000003"
             },
             {
               "name": "Failed",
-              "value": "The pending operation completed with a failure before the cancellation operation was able to cancel it."
+              "value": "0x00000004"
             },
             {
               "name": "Unavailable",
-              "value": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+              "value": "0x00000005"
             }
           ]
         },
@@ -6772,16 +6791,24 @@
         "Client Registration Method": {
           "values": [
             {
+              "name": "Unspecified",
+              "value": "0x00000001"
+            },
+            {
+              "name": "Server Pre-Generated",
+              "value": "0x00000002"
+            },
+            {
               "name": "Server On-Demand",
-              "value": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000003"
             },
             {
               "name": "Client Generated",
-              "value": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000004"
             },
             {
               "name": "Client Registered",
-              "value": "The client generates the private key and the certificates and registers the certificate with the server."
+              "value": "0x00000005"
             }
           ]
         },
@@ -7252,16 +7279,24 @@
         "Encoding Option": {
           "values": [
             {
+              "name": "No Encoding",
+              "value": "0x00000001"
+            },
+            {
               "name": "TTLV Encoding",
-              "value": "the wrapped TTLV-encoded Key Value structure"
+              "value": "0x00000002"
             }
           ]
         },
         "Endpoint Role": {
           "values": [
             {
+              "name": "Client",
+              "value": "0x00000001"
+            },
+            {
               "name": "Server",
-              "value": "The endpoint that receives requests and sends responses."
+              "value": "0x00000002"
             }
           ]
         },
@@ -7384,44 +7419,48 @@
         "Item Type": {
           "values": [
             {
+              "name": "Structure",
+              "value": "0x00000001"
+            },
+            {
               "name": "Integer",
-              "value": "Four-byte long (32 bit) signed numbers"
+              "value": "0x00000002"
             },
             {
               "name": "Long Integer",
-              "value": "Eight-byte long (64 bit) signed numbers."
+              "value": "0x00000003"
             },
             {
               "name": "Big Integer",
-              "value": "A sequence of eight-bit bytes"
+              "value": "0x00000004"
             },
             {
               "name": "Enumeration",
-              "value": "Four-byte long (32 bit) unsigned numbers"
+              "value": "0x00000005"
             },
             {
               "name": "Boolean",
-              "value": "0x0EAEEFAE"
+              "value": "0x00000006"
             },
             {
               "name": "Text String",
-              "value": "Sequences of character values."
+              "value": "0x00000007"
             },
             {
               "name": "Byte String",
-              "value": "Sequences of bytes containing individual unspecified eight-bit binary values"
+              "value": "0x00000008"
             },
             {
               "name": "Date Time",
-              "value": "Eight-byte long (64 bit) POSIX Time values in seconds. ."
+              "value": "0x00000009"
             },
             {
               "name": "Interval",
-              "value": "Four-byte long (32 bit) unsigned numbers in seconds"
+              "value": "0x0000000A"
             },
             {
               "name": "Date Time Extended",
-              "value": "Eight-byte long (64 bit) POSIX Time values in micro-seconds."
+              "value": "0x0000000B"
             }
           ]
         },
@@ -7448,28 +7487,72 @@
         "Key Format Type": {
           "values": [
             {
+              "name": "Raw",
+              "value": "0x00000001"
+            },
+            {
               "name": "Opaque",
-              "value": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes."
+              "value": "0x00000002"
             },
             {
-              "name": "PKCS1",
-              "value": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object."
+              "name": "PKCS#1",
+              "value": "0x00000003"
             },
             {
-              "name": "PKCS8",
-              "value": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey"
+              "name": "PKCS#8",
+              "value": "0x00000004"
             },
             {
               "name": "X.509",
-              "value": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object."
+              "value": "0x00000005"
             },
             {
               "name": "ECPrivateKey",
-              "value": "An ASN.1 encoded elliptic curve private key."
+              "value": "0x00000006"
             },
             {
-              "name": "Several Transparent Key types",
-              "value": "algorithm-specific structures containing defined values for the various key types."
+              "name": "Transparent Symmetric Key",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Transparent DSA Private Key",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Transparent DSA Public Key",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Transparent RSA Private Key",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Transparent RSA Public Key",
+              "value": "0x0000000B"
+            },
+            {
+              "name": "Transparent DH Private Key",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Transparent DH Public Key",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Transparent EC Private Key",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Transparent EC Public Key",
+              "value": "0x00000015"
+            },
+            {
+              "name": "PKCS#12",
+              "value": "0x00000016"
+            },
+            {
+              "name": "PKCS#10",
+              "value": "0x00000017"
             }
           ]
         },
@@ -7588,56 +7671,60 @@
         "Link Type": {
           "values": [
             {
-              "name": "Public Key Link",
-              "value": "For a Private Key object: the public key corresponding to the private key. For a Certificate object: the public key contained in the certificate."
+              "name": "Certificate Link",
+              "value": "0x00000101"
             },
             {
-              "name": "Certificate Link",
-              "value": "For Certificate objects: the parent certificate for a certificate in a certificate chain. For Public Key objects: the corresponding certificate(s), containing the same public key."
+              "name": "Public Key Link",
+              "value": "0x00000102"
+            },
+            {
+              "name": "Private Key Link",
+              "value": "0x00000103"
             },
             {
               "name": "Derivation Base Object Link",
-              "value": "For a derived Symmetric Key or Secret Data object: the object(s) from which the current symmetric key was derived."
+              "value": "0x00000104"
             },
             {
               "name": "Derived Key Link",
-              "value": "The symmetric key(s) or Secret Data object(s) that were derived from the current object."
+              "value": "0x00000105"
             },
             {
               "name": "Replacement Object Link",
-              "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that resulted from the re-key of the current key. For a Certificate object: the certificate that resulted from the re-certify. Note that there SHALL be only one such replacement object per Managed Object."
+              "value": "0x00000106"
             },
             {
               "name": "Replaced Object Link",
-              "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that was re-keyed to obtain the current key. For a Certificate object: the certificate that was re-certified to obtain the current certificate."
+              "value": "0x00000107"
             },
             {
               "name": "Parent Link",
-              "value": "For all object types: the container or other parent object corresponding to the object."
+              "value": "0x00000108"
             },
             {
               "name": "Child Link",
-              "value": "For all object types: the subordinate, derived or other child object corresponding to the object."
+              "value": "0x00000109"
             },
             {
               "name": "Previous Link",
-              "value": "For all object types: the previous object to this object."
+              "value": "0x0000010A"
             },
             {
               "name": "Next Link",
-              "value": "For all object types: the next object to this object."
+              "value": "0x0000010B"
             },
             {
               "name": "PKCS#12 Certificate Link",
-              "value": ""
+              "value": "0x0000010C"
             },
             {
               "name": "PKCS#12 Password Link",
-              "value": ""
+              "value": "0x0000010D"
             },
             {
               "name": "Wrapping Key Link",
-              "value": "For wrapped objects: the object that was used to wrap this object."
+              "value": "0x0000010E"
             }
           ]
         },
@@ -8588,268 +8675,276 @@
         "Result Reason": {
           "values": [
             {
-              "name": "Attestation Failed",
-              "value": "Operation requires attestation data and the attestation data provided by the client does not validate"
-            },
-            {
-              "name": "Attestation Required",
-              "value": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True"
-            },
-            {
-              "name": "Attribute Instance Not Found",
-              "value": "A referenced attribute was found, but the specific instance was not found"
-            },
-            {
-              "name": "Attribute Not Found",
-              "value": "A referenced attribute was not found at all on an object"
-            },
-            {
-              "name": "Attribute Read Only",
-              "value": "Attempt to set a Read Only Attribute"
-            },
-            {
-              "name": "Attribute Single Instance",
-              "value": "Attempt to provide multiple values for a single instance attribute"
-            },
-            {
-              "name": "Authentication not successful",
-              "value": "The authentication information in the request could not be validated, or was not found"
-            },
-            {
-              "name": "Bad Cryptographic Parameters",
-              "value": "Bad Cryptographic Parameters"
-            },
-            {
-              "name": "Bad Password",
-              "value": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active"
-            },
-            {
-              "name": "Codec Error",
-              "value": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated"
-            },
-            {
-              "name": "Cryptographic Failure",
-              "value": "The operation failed due to a cryptographic error"
-            },
-            {
-              "name": "Encoding Option Error",
-              "value": "The Encoding Option is not supported as specified by the Encoding Option Enumeration"
-            },
-            {
-              "name": "Feature Not Supported",
-              "value": "The operation is supported, but not a specific feature specified in the request is not supported"
-            },
-            {
-              "name": "General failure",
-              "value": "The request failed for a reason other than the defined reasons above"
-            },
-            {
-              "name": "Illegal Object Type",
-              "value": "Check cannot be performed on this object type"
-            },
-            {
-              "name": "Incompatible Cryptographic Usage Mask",
-              "value": "The cryptographic algorithm or other parameters is not valid for the requested operation"
-            },
-            {
-              "name": "Internal Server Error",
-              "value": "The server had an internal error and could not process the request at this time."
-            },
-            {
-              "name": "Invalid Asynchronous Correlation Value",
-              "value": "No outstanding operation with the specified Asynchronous Correlation Value exists"
-            },
-            {
-              "name": "Invalid Attribute",
-              "value": "An attribute is invalid for this object for this operation"
-            },
-            {
-              "name": "Invalid Attribute Value",
-              "value": "The value supplied for an attribute is invalid"
-            },
-            {
-              "name": "Invalid Correlation Value",
-              "value": "0xFEACACEA"
-            },
-            {
-              "name": "Invalid CSR",
-              "value": "Invalid Certifcate Signing Request"
-            },
-            {
-              "name": "Invalid Data Type",
-              "value": "A data type was invalid for the requested operation"
-            },
-            {
-              "name": "Invalid Field",
-              "value": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value"
-            },
-            {
-              "name": "Invalid Message",
-              "value": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag"
-            },
-            {
-              "name": "Invalid Object Type",
-              "value": "Specificed object is not valid for the requested operation"
-            },
-            {
-              "name": "Invalid Password",
-              "value": ""
-            },
-            {
-              "name": "Invalid Ticket",
-              "value": "0x00ECEAAD"
-            },
-            {
               "name": "Item Not Found",
-              "value": "No object with the specified Unique Identifier exists"
-            },
-            {
-              "name": "Key Compression Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Compression Type"
-            },
-            {
-              "name": "Key Format Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Format Type"
-            },
-            {
-              "name": "Key Value Not Present",
-              "value": "A meta data only object. The key value is not present on the server"
-            },
-            {
-              "name": "Key Wrap Type Not Supported",
-              "value": "Key Wrap Type Type is not supported by the server"
-            },
-            {
-              "name": "Missing data",
-              "value": "The operation REQUIRED additional information in the request, which was not present"
-            },
-            {
-              "name": "Missing Initialization Vector",
-              "value": "0xEEEDFCEA"
-            },
-            {
-              "name": "Multi Valued Attribute",
-              "value": "Attempt to Set or Adjust an attribute that has multiple values"
-            },
-            {
-              "name": "Non Unique Name Attribute",
-              "value": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique"
-            },
-            {
-              "name": "Not Extractable",
-              "value": "Object is not Extractable"
-            },
-            {
-              "name": "Numeric Range",
-              "value": "An operation produced a number that is to large or too small to be stored in the specified data type"
-            },
-            {
-              "name": "Object Already Exists",
-              "value": "for operations such as Import that require that no object with a specific unique identifier exists on a server"
-            },
-            {
-              "name": "Object Archived",
-              "value": "The object SHALL be recovered from the archive before performing the operation"
-            },
-            {
-              "name": "Object Destroyed",
-              "value": "Object exists, but has already been destroyed"
-            },
-            {
-              "name": "Object Not Found",
-              "value": "A requested managed object was not found or did not exist"
-            },
-            {
-              "name": "Object Type",
-              "value": "Invalid object type for the operation"
-            },
-            {
-              "name": "Operation canceled by requester",
-              "value": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully"
-            },
-            {
-              "name": "Operation Not Supported",
-              "value": "The operation requested by the request message is not supported by the server"
-            },
-            {
-              "name": "Permission Denied",
-              "value": "Client is not allowed to perform the specified operation"
-            },
-            {
-              "name": "PKCS#11 Codec Error",
-              "value": "There is a Codec error in the Input parameter"
-            },
-            {
-              "name": "PKCS#11 Invalid Function",
-              "value": "The PKCS function is not in the interface"
-            },
-            {
-              "name": "PKCS#11 Invalid Interface",
-              "value": "The interface is unknown or unavailable in the server"
-            },
-            {
-              "name": "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable",
-              "value": "The operation could not be completed with the protections requested (or defaulted)."
-            },
-            {
-              "name": "Read Only Attribute",
-              "value": "Attempt to set a Read Only Attribute"
+              "value": "0x00000001"
             },
             {
               "name": "Response Too Large",
-              "value": "Maximum Response Size has been exceeded"
+              "value": "0x00000002"
+            },
+            {
+              "name": "Authentication Not Successful",
+              "value": "0x00000003"
+            },
+            {
+              "name": "Invalid Message",
+              "value": "0x00000004"
+            },
+            {
+              "name": "Operation Not Supported",
+              "value": "0x00000005"
+            },
+            {
+              "name": "Missing Data",
+              "value": "0x00000006"
+            },
+            {
+              "name": "Invalid Field",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Feature Not Supported",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Operation Canceled By Requester",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Cryptographic Failure",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Permission Denied",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Object Archived",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Application Namespace Not Supported",
+              "value": "0x0000000F"
+            },
+            {
+              "name": "Key Format Type Not Supported",
+              "value": "0x00000010"
+            },
+            {
+              "name": "Key Compression Type Not Supported",
+              "value": "0x00000011"
+            },
+            {
+              "name": "Encoding Option Error",
+              "value": "0x00000012"
+            },
+            {
+              "name": "Key Value Not Present",
+              "value": "0x00000013"
+            },
+            {
+              "name": "Attestation Required",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Attestation Failed",
+              "value": "0x00000015"
             },
             {
               "name": "Sensitive",
-              "value": "Sensitive keys may not be retrieved unwrapped"
+              "value": "0x00000016"
             },
             {
-              "name": "Server Limit Exceeded",
-              "value": "Some limit on the server such as database size has been exceeded"
+              "name": "Not Extractable",
+              "value": "0x00000017"
             },
             {
-              "name": "Unknown Enumeration",
-              "value": "An enumerated value is not known by the server"
+              "name": "Object Already Exists",
+              "value": "0x00000018"
             },
             {
-              "name": "Unknown Message Extension",
-              "value": "The server does not support the supplied Message Extension"
-            },
-            {
-              "name": "Unknown Tag",
-              "value": "0x00AABEEE"
-            },
-            {
-              "name": "Unsupported Attribute",
-              "value": "Attribute is valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Cryptographic Parameters",
-              "value": "Cryptographic Parameters are valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Protocol Version",
-              "value": "The operation cannot be performed with the provided protocol version"
+              "name": "Invalid Ticket",
+              "value": "0x00000019"
             },
             {
               "name": "Usage Limit Exceeded",
-              "value": "The usage limits or request count has been exceeded"
+              "value": "0x0000001A"
+            },
+            {
+              "name": "Numeric Range",
+              "value": "0x0000001B"
+            },
+            {
+              "name": "Invalid Data Type",
+              "value": "0x0000001C"
+            },
+            {
+              "name": "Read Only Attribute",
+              "value": "0x0000001D"
+            },
+            {
+              "name": "Multi Valued Attribute",
+              "value": "0x0000001E"
+            },
+            {
+              "name": "Unsupported Attribute",
+              "value": "0x0000001F"
+            },
+            {
+              "name": "Attribute Instance Not Found",
+              "value": "0x00000020"
+            },
+            {
+              "name": "Attribute Not Found",
+              "value": "0x00000021"
+            },
+            {
+              "name": "Attribute Read Only",
+              "value": "0x00000022"
+            },
+            {
+              "name": "Attribute Single Valued",
+              "value": "0x00000023"
+            },
+            {
+              "name": "Bad Cryptographic Parameters",
+              "value": "0x00000024"
+            },
+            {
+              "name": "Bad Password",
+              "value": "0x00000025"
+            },
+            {
+              "name": "Codec Error",
+              "value": "0x00000026"
+            },
+            {
+              "name": "Illegal Object Type",
+              "value": "0x00000028"
+            },
+            {
+              "name": "Incompatible Cryptographic Usage Mask",
+              "value": "0x00000029"
+            },
+            {
+              "name": "Internal Server Error",
+              "value": "0x0000002A"
+            },
+            {
+              "name": "Invalid Asynchronous Correlation Value",
+              "value": "0x0000002B"
+            },
+            {
+              "name": "Invalid Attribute",
+              "value": "0x0000002C"
+            },
+            {
+              "name": "Invalid Attribute Value",
+              "value": "0x0000002D"
+            },
+            {
+              "name": "Invalid Correlation Value",
+              "value": "0x0000002E"
+            },
+            {
+              "name": "Invalid CSR",
+              "value": "0x0000002F"
+            },
+            {
+              "name": "Invalid Object Type",
+              "value": "0x00000030"
+            },
+            {
+              "name": "Key Wrap Type Not Supported",
+              "value": "0x00000032"
+            },
+            {
+              "name": "Missing Initialization Vector",
+              "value": "0x00000034"
+            },
+            {
+              "name": "Non Unique Name Attribute",
+              "value": "0x00000035"
+            },
+            {
+              "name": "Object Destroyed",
+              "value": "0x00000036"
+            },
+            {
+              "name": "Object Not Found",
+              "value": "0x00000037"
+            },
+            {
+              "name": "Not Authorised",
+              "value": "0x00000039"
+            },
+            {
+              "name": "Server Limit Exceeded",
+              "value": "0x0000003A"
+            },
+            {
+              "name": "Unknown Enumeration",
+              "value": "0x0000003B"
+            },
+            {
+              "name": "Unknown Message Extension",
+              "value": "0x0000003C"
+            },
+            {
+              "name": "Unknown Tag",
+              "value": "0x0000003D"
+            },
+            {
+              "name": "Unsupported Cryptographic Parameters",
+              "value": "0x0000003E"
+            },
+            {
+              "name": "Unsupported Protocol Version",
+              "value": "0x0000003F"
             },
             {
               "name": "Wrapping Object Archived",
-              "value": "0xABECACED"
+              "value": "0x00000040"
             },
             {
               "name": "Wrapping Object Destroyed",
-              "value": "The object exists, but is destroyed"
+              "value": "0x00000041"
             },
             {
               "name": "Wrapping Object Not Found",
-              "value": "0x0ABECDEE"
+              "value": "0x00000042"
             },
             {
               "name": "Wrong Key Lifecycle State",
-              "value": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+              "value": "0x00000043"
+            },
+            {
+              "name": "Protection Storage Unavailable",
+              "value": "0x00000044"
+            },
+            {
+              "name": "PKCS#11 Codec Error",
+              "value": "0x00000045"
+            },
+            {
+              "name": "PKCS#11 Invalid Function",
+              "value": "0x00000046"
+            },
+            {
+              "name": "PKCS#11 Invalid Interface",
+              "value": "0x00000047"
+            },
+            {
+              "name": "Private Protection Storage Unavailable",
+              "value": "0x00000048"
+            },
+            {
+              "name": "Public Protection Storage Unavailable",
+              "value": "0x00000049"
+            },
+            {
+              "name": "General Failure",
+              "value": "0x00000100"
             }
           ]
         },
@@ -9152,20 +9247,24 @@
         "Wrapping Method": {
           "values": [
             {
-              "name": "MAC/sign only",
-              "value": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key"
+              "name": "Encrypt",
+              "value": "0x00000001"
+            },
+            {
+              "name": "MAC/sign",
+              "value": "0x00000002"
             },
             {
               "name": "Encrypt then MAC/sign",
-              "value": ""
+              "value": "0x00000003"
             },
             {
-              "name": "MAC/sign then encrypt.",
-              "value": ""
+              "name": "MAC/sign then encrypt",
+              "value": "0x00000004"
             },
             {
               "name": "TR-31",
-              "value": ""
+              "value": "0x00000005"
             }
           ]
         },
@@ -9208,6 +9307,160 @@
               "value": "0x00000005"
             }
           ]
+        }
+      },
+      "descriptions": {
+        "Adjustment Type": {
+          "Increment": "Add the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Decrement": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Negate": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+        },
+        "Asynchronous Indicator": {
+          "Mandatory": "The server SHALL process all batch items in the request asynchronously (returning an Asynchronous Correlation Value for each batch item).",
+          "Optional": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol.",
+          "Prohibited": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+        },
+        "Batch Error Continuation Option": {
+          "Undo": "If any operation in the request fails, then the server SHALL undo all the previous operations. Batch item fails and Result Status is set to Operation Failed. Responses to batch items that have already been processed are returned normally. Responses to batch items that have not been processed are not returned.",
+          "Stop": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally.",
+          "Continue": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+        },
+        "Cancellation Result": {
+          "Canceled": "The cancel operation succeeded in canceling the pending operation.",
+          "Unable to Cancel": "The cancel operation is unable to cancel the pending operation.",
+          "Completed": "The pending operation completed successfully before the cancellation operation was able to cancel it.",
+          "Failed": "The pending operation completed with a failure before the cancellation operation was able to cancel it.",
+          "Unavailable": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+        },
+        "Client Registration Method": {
+          "Server Pre-Generated": "The server has pre-generated the client\u2019s private key. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Server On-Demand": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Generated": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Registered": "The client generates the private key and the certificates and registers the certificate with the server."
+        },
+        "Encoding Option": {
+          "No Encoding": "the wrapped un-encoded value of the Byte String Key Material field in the Key Value structure",
+          "TTLV Encoding": "the wrapped TTLV-encoded Key Value structure"
+        },
+        "Endpoint Role": {
+          "Client": "The endpoint that sends requests and receives responses.",
+          "Server": "The endpoint that receives requests and sends responses."
+        },
+        "Item Type": {
+          "Structure": "The ordered concatenation of items.",
+          "Integer": "Four-byte long (32 bit) signed numbers",
+          "Long Integer": "Eight-byte long (64 bit) signed numbers.",
+          "Big Integer": "A sequence of eight-bit bytes",
+          "Enumeration": "Four-byte long (32 bit) unsigned numbers",
+          "Boolean": "The value True or False.",
+          "Text String": "Sequences of character values.",
+          "Byte String": "Sequences of bytes containing individual unspecified eight-bit binary values",
+          "Date Time": "Eight-byte long (64 bit) POSIX Time values in seconds. .",
+          "Interval": "Four-byte long (32 bit) unsigned numbers in seconds",
+          "Date Time Extended": "Eight-byte long (64 bit) POSIX Time values in micro-seconds."
+        },
+        "Key Format Type": {
+          "Raw": "A key that contains only cryptographic key material, encoded as a string of bytes.",
+          "Opaque": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes.",
+          "PKCS1": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object.",
+          "PKCS8": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey",
+          "X.509": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object.",
+          "ECPrivateKey": "An ASN.1 encoded elliptic curve private key.",
+          "Several Transparent Key types": "algorithm-specific structures containing defined values for the various key types.",
+          "Extensions": "Vendor-specific extensions to allow for proprietary or legacy key formats."
+        },
+        "Link Type": {
+          "Private Key Link": "For a Public Key object: the private key corresponding to the public key.",
+          "Public Key Link": "For a Private Key object: the public key corresponding to the private key. For a Certificate object: the public key contained in the certificate.",
+          "Certificate Link": "For Certificate objects: the parent certificate for a certificate in a certificate chain. For Public Key objects: the corresponding certificate(s), containing the same public key.",
+          "Derivation Base Object Link": "For a derived Symmetric Key or Secret Data object: the object(s) from which the current symmetric key was derived.",
+          "Derived Key Link": "The symmetric key(s) or Secret Data object(s) that were derived from the current object.",
+          "Replacement Object Link": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that resulted from the re-key of the current key. For a Certificate object: the certificate that resulted from the re-certify. Note that there SHALL be only one such replacement object per Managed Object.",
+          "Replaced Object Link": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that was re-keyed to obtain the current key. For a Certificate object: the certificate that was re-certified to obtain the current certificate.",
+          "Parent Link": "For all object types: the container or other parent object corresponding to the object.",
+          "Child Link": "For all object types: the subordinate, derived or other child object corresponding to the object.",
+          "Previous Link": "For all object types: the previous object to this object.",
+          "Next Link": "For all object types: the next object to this object.",
+          "PKCS#12 Certificate Link": "",
+          "PKCS#12 Password Link": "",
+          "Wrapping Key Link": "For wrapped objects: the object that was used to wrap this object."
+        },
+        "Result Reason": {
+          "Application Namespace Not Supported": "The particular Application Namespace is not supported, and the server was not able to generate the Application Data field of an Application Specific Information attribute if the field was omitted from the client request",
+          "Attestation Failed": "Operation requires attestation data and the attestation data provided by the client does not validate",
+          "Attestation Required": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True",
+          "Attribute Instance Not Found": "A referenced attribute was found, but the specific instance was not found",
+          "Attribute Not Found": "A referenced attribute was not found at all on an object",
+          "Attribute Read Only": "Attempt to set a Read Only Attribute",
+          "Attribute Single Instance": "Attempt to provide multiple values for a single instance attribute",
+          "Authentication not successful": "The authentication information in the request could not be validated, or was not found",
+          "Bad Cryptographic Parameters": "Bad Cryptographic Parameters",
+          "Bad Password": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active",
+          "Codec Error": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated",
+          "Cryptographic Failure": "The operation failed due to a cryptographic error",
+          "Encoding Option Error": "The Encoding Option is not supported as specified by the Encoding Option Enumeration",
+          "Feature Not Supported": "The operation is supported, but not a specific feature specified in the request is not supported",
+          "General failure": "The request failed for a reason other than any other reason enumeration value.",
+          "Illegal Object Type": "Check cannot be performed on this object type",
+          "Incompatible Cryptographic Usage Mask": "The cryptographic algorithm or other parameters is not valid for the requested operation",
+          "Internal Server Error": "The server had an internal error and could not process the request at this time.",
+          "Invalid Asynchronous Correlation Value": "No outstanding operation with the specified Asynchronous Correlation Value exists",
+          "Invalid Attribute": "An attribute is invalid for this object for this operation",
+          "Invalid Attribute Value": "The value supplied for an attribute is invalid",
+          "Invalid Correlation Value": "For streaming cryptographic operations",
+          "Invalid CSR": "Invalid Certifcate Signing Request",
+          "Invalid Data Type": "A data type was invalid for the requested operation",
+          "Invalid Field": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value",
+          "Invalid Message": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag",
+          "Invalid Object Type": "Specificed object is not valid for the requested operation",
+          "Invalid Password": "",
+          "Invalid Ticket": "The ticket was invalid",
+          "Item Not Found": "No object with the specified Unique Identifier exists",
+          "Key Compression Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Compression Type",
+          "Key Format Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Format Type",
+          "Key Value Not Present": "A meta data only object. The key value is not present on the server",
+          "Key Wrap Type Not Supported": "Key Wrap Type Type is not supported by the server",
+          "Missing data": "The operation REQUIRED additional information in the request, which was not present",
+          "Missing Initialization Vector": "Missing IV when required for crypto operation",
+          "Multi Valued Attribute": "Attempt to Set or Adjust an attribute that has multiple values",
+          "Non Unique Name Attribute": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique",
+          "Not Extractable": "Object is not Extractable",
+          "Numeric Range": "An operation produced a number that is to large or too small to be stored in the specified data type",
+          "Object Already Exists": "for operations such as Import that require that no object with a specific unique identifier exists on a server",
+          "Object Archived": "The object SHALL be recovered from the archive before performing the operation",
+          "Object Destroyed": "Object exists, but has already been destroyed",
+          "Object Not Found": "A requested managed object was not found or did not exist",
+          "Object Type": "Invalid object type for the operation",
+          "Operation canceled by requester": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully",
+          "Operation Not Supported": "The operation requested by the request message is not supported by the server",
+          "Permission Denied": "Client is not allowed to perform the specified operation",
+          "PKCS#11 Codec Error": "There is a Codec error in the Input parameter",
+          "PKCS#11 Invalid Function": "The PKCS function is not in the interface",
+          "PKCS#11 Invalid Interface": "The interface is unknown or unavailable in the server",
+          "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable": "The operation could not be completed with the protections requested (or defaulted).",
+          "Read Only Attribute": "Attempt to set a Read Only Attribute",
+          "Response Too Large": "Maximum Response Size has been exceeded",
+          "Sensitive": "Sensitive keys may not be retrieved unwrapped",
+          "Server Limit Exceeded": "Some limit on the server such as database size has been exceeded",
+          "Unknown Enumeration": "An enumerated value is not known by the server",
+          "Unknown Message Extension": "The server does not support the supplied Message Extension",
+          "Unknown Tag": "A tag is not known by the server",
+          "Unsupported Attribute": "Attribute is valid in the specification but unsupported by the Server",
+          "Unsupported Cryptographic Parameters": "Cryptographic Parameters are valid in the specification but unsupported by the Server",
+          "Unsupported Protocol Version": "The operation cannot be performed with the provided protocol version",
+          "Usage Limit Exceeded": "The usage limits or request count has been exceeded",
+          "Wrapping Object Archived": "Wrapping Object is archived",
+          "Wrapping Object Destroyed": "The object exists, but is destroyed",
+          "Wrapping Object Not Found": "Wrapping object does not exist",
+          "Wrong Key Lifecycle State": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+        },
+        "Wrapping Method": {
+          "Encrypt only": "encryption using a symmetric key or public key, or authenticated encryption algorithms that use a single key",
+          "MAC/sign only": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key",
+          "Encrypt then MAC/sign": "",
+          "MAC/sign then encrypt.": "",
+          "TR-31": "",
+          "Extensions": ""
         }
       },
       "tags": {
@@ -10572,12 +10825,16 @@
         "Adjustment Type": {
           "values": [
             {
+              "name": "Increment",
+              "value": "0x00000001"
+            },
+            {
               "name": "Decrement",
-              "value": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended."
+              "value": "0x00000002"
             },
             {
               "name": "Negate",
-              "value": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+              "value": "0x00000003"
             }
           ]
         },
@@ -10616,12 +10873,16 @@
         "Asynchronous Indicator": {
           "values": [
             {
+              "name": "Mandatory",
+              "value": "0x00000001"
+            },
+            {
               "name": "Optional",
-              "value": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol."
+              "value": "0x00000002"
             },
             {
               "name": "Prohibited",
-              "value": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+              "value": "0x00000003"
             }
           ]
         },
@@ -10644,12 +10905,16 @@
         "Batch Error Continuation Option": {
           "values": [
             {
-              "name": "Stop",
-              "value": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally."
+              "name": "Continue",
+              "value": "0x00000001"
             },
             {
-              "name": "Continue",
-              "value": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+              "name": "Stop",
+              "value": "0x00000002"
+            },
+            {
+              "name": "Undo",
+              "value": "0x00000003"
             }
           ]
         },
@@ -10732,20 +10997,24 @@
         "Cancellation Result": {
           "values": [
             {
+              "name": "Canceled",
+              "value": "0x00000001"
+            },
+            {
               "name": "Unable to Cancel",
-              "value": "The cancel operation is unable to cancel the pending operation."
+              "value": "0x00000002"
             },
             {
               "name": "Completed",
-              "value": "The pending operation completed successfully before the cancellation operation was able to cancel it."
+              "value": "0x00000003"
             },
             {
               "name": "Failed",
-              "value": "The pending operation completed with a failure before the cancellation operation was able to cancel it."
+              "value": "0x00000004"
             },
             {
               "name": "Unavailable",
-              "value": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+              "value": "0x00000005"
             }
           ]
         },
@@ -10780,16 +11049,24 @@
         "Client Registration Method": {
           "values": [
             {
+              "name": "Unspecified",
+              "value": "0x00000001"
+            },
+            {
+              "name": "Server Pre-Generated",
+              "value": "0x00000002"
+            },
+            {
               "name": "Server On-Demand",
-              "value": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000003"
             },
             {
               "name": "Client Generated",
-              "value": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000004"
             },
             {
               "name": "Client Registered",
-              "value": "The client generates the private key and the certificates and registers the certificate with the server."
+              "value": "0x00000005"
             }
           ]
         },
@@ -11260,16 +11537,24 @@
         "Encoding Option": {
           "values": [
             {
+              "name": "No Encoding",
+              "value": "0x00000001"
+            },
+            {
               "name": "TTLV Encoding",
-              "value": "the wrapped TTLV-encoded Key Value structure"
+              "value": "0x00000002"
             }
           ]
         },
         "Endpoint Role": {
           "values": [
             {
+              "name": "Client",
+              "value": "0x00000001"
+            },
+            {
               "name": "Server",
-              "value": "The endpoint that receives requests and sends responses."
+              "value": "0x00000002"
             }
           ]
         },
@@ -11392,44 +11677,48 @@
         "Item Type": {
           "values": [
             {
+              "name": "Structure",
+              "value": "0x00000001"
+            },
+            {
               "name": "Integer",
-              "value": "Four-byte long (32 bit) signed numbers"
+              "value": "0x00000002"
             },
             {
               "name": "Long Integer",
-              "value": "Eight-byte long (64 bit) signed numbers."
+              "value": "0x00000003"
             },
             {
               "name": "Big Integer",
-              "value": "A sequence of eight-bit bytes"
+              "value": "0x00000004"
             },
             {
               "name": "Enumeration",
-              "value": "Four-byte long (32 bit) unsigned numbers"
+              "value": "0x00000005"
             },
             {
               "name": "Boolean",
-              "value": "0x0EAEEFAE"
+              "value": "0x00000006"
             },
             {
               "name": "Text String",
-              "value": "Sequences of character values."
+              "value": "0x00000007"
             },
             {
               "name": "Byte String",
-              "value": "Sequences of bytes containing individual unspecified eight-bit binary values"
+              "value": "0x00000008"
             },
             {
               "name": "Date Time",
-              "value": "Eight-byte long (64 bit) POSIX Time values in seconds. ."
+              "value": "0x00000009"
             },
             {
               "name": "Interval",
-              "value": "Four-byte long (32 bit) unsigned numbers in seconds"
+              "value": "0x0000000A"
             },
             {
               "name": "Date Time Extended",
-              "value": "Eight-byte long (64 bit) POSIX Time values in micro-seconds."
+              "value": "0x0000000B"
             }
           ]
         },
@@ -11456,28 +11745,72 @@
         "Key Format Type": {
           "values": [
             {
+              "name": "Raw",
+              "value": "0x00000001"
+            },
+            {
               "name": "Opaque",
-              "value": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes."
+              "value": "0x00000002"
             },
             {
-              "name": "PKCS1",
-              "value": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object."
+              "name": "PKCS#1",
+              "value": "0x00000003"
             },
             {
-              "name": "PKCS8",
-              "value": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey"
+              "name": "PKCS#8",
+              "value": "0x00000004"
             },
             {
               "name": "X.509",
-              "value": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object."
+              "value": "0x00000005"
             },
             {
               "name": "ECPrivateKey",
-              "value": "An ASN.1 encoded elliptic curve private key."
+              "value": "0x00000006"
             },
             {
-              "name": "Several Transparent Key types",
-              "value": "algorithm-specific structures containing defined values for the various key types."
+              "name": "Transparent Symmetric Key",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Transparent DSA Private Key",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Transparent DSA Public Key",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Transparent RSA Private Key",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Transparent RSA Public Key",
+              "value": "0x0000000B"
+            },
+            {
+              "name": "Transparent DH Private Key",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Transparent DH Public Key",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Transparent EC Private Key",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Transparent EC Public Key",
+              "value": "0x00000015"
+            },
+            {
+              "name": "PKCS#12",
+              "value": "0x00000016"
+            },
+            {
+              "name": "PKCS#10",
+              "value": "0x00000017"
             }
           ]
         },
@@ -11596,56 +11929,60 @@
         "Link Type": {
           "values": [
             {
-              "name": "Public Key Link",
-              "value": "For a Private Key object: the public key corresponding to the private key. For a Certificate object: the public key contained in the certificate."
+              "name": "Certificate Link",
+              "value": "0x00000101"
             },
             {
-              "name": "Certificate Link",
-              "value": "For Certificate objects: the parent certificate for a certificate in a certificate chain. For Public Key objects: the corresponding certificate(s), containing the same public key."
+              "name": "Public Key Link",
+              "value": "0x00000102"
+            },
+            {
+              "name": "Private Key Link",
+              "value": "0x00000103"
             },
             {
               "name": "Derivation Base Object Link",
-              "value": "For a derived Symmetric Key or Secret Data object: the object(s) from which the current symmetric key was derived."
+              "value": "0x00000104"
             },
             {
               "name": "Derived Key Link",
-              "value": "The symmetric key(s) or Secret Data object(s) that were derived from the current object."
+              "value": "0x00000105"
             },
             {
               "name": "Replacement Object Link",
-              "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that resulted from the re-key of the current key. For a Certificate object: the certificate that resulted from the re-certify. Note that there SHALL be only one such replacement object per Managed Object."
+              "value": "0x00000106"
             },
             {
               "name": "Replaced Object Link",
-              "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that was re-keyed to obtain the current key. For a Certificate object: the certificate that was re-certified to obtain the current certificate."
+              "value": "0x00000107"
             },
             {
               "name": "Parent Link",
-              "value": "For all object types: the container or other parent object corresponding to the object."
+              "value": "0x00000108"
             },
             {
               "name": "Child Link",
-              "value": "For all object types: the subordinate, derived or other child object corresponding to the object."
+              "value": "0x00000109"
             },
             {
               "name": "Previous Link",
-              "value": "For all object types: the previous object to this object."
+              "value": "0x0000010A"
             },
             {
               "name": "Next Link",
-              "value": "For all object types: the next object to this object."
+              "value": "0x0000010B"
             },
             {
               "name": "PKCS#12 Certificate Link",
-              "value": ""
+              "value": "0x0000010C"
             },
             {
               "name": "PKCS#12 Password Link",
-              "value": ""
+              "value": "0x0000010D"
             },
             {
               "name": "Wrapping Key Link",
-              "value": "For wrapped objects: the object that was used to wrap this object."
+              "value": "0x0000010E"
             }
           ]
         },
@@ -12636,280 +12973,288 @@
         "Result Reason": {
           "values": [
             {
-              "name": "Attestation Failed",
-              "value": "Operation requires attestation data and the attestation data provided by the client does not validate"
-            },
-            {
-              "name": "Attestation Required",
-              "value": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True"
-            },
-            {
-              "name": "Attribute Instance Not Found",
-              "value": "A referenced attribute was found, but the specific instance was not found"
-            },
-            {
-              "name": "Attribute Not Found",
-              "value": "A referenced attribute was not found at all on an object"
-            },
-            {
-              "name": "Attribute Read Only",
-              "value": "Attempt to set a Read Only Attribute"
-            },
-            {
-              "name": "Attribute Single Instance",
-              "value": "Attempt to provide multiple values for a single instance attribute"
-            },
-            {
-              "name": "Authentication not successful",
-              "value": "The authentication information in the request could not be validated, or was not found"
-            },
-            {
-              "name": "Bad Cryptographic Parameters",
-              "value": "Bad Cryptographic Parameters"
-            },
-            {
-              "name": "Bad Password",
-              "value": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active"
-            },
-            {
-              "name": "Codec Error",
-              "value": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated"
-            },
-            {
-              "name": "Constraint Violation",
-              "value": "The request failed because one or more constraints were violated"
-            },
-            {
-              "name": "Cryptographic Failure",
-              "value": "The operation failed due to a cryptographic error"
-            },
-            {
-              "name": "Duplicate Process Request",
-              "value": "The asynchronous request specified was already processed"
-            },
-            {
-              "name": "Encoding Option Error",
-              "value": "The Encoding Option is not supported as specified by the Encoding Option Enumeration"
-            },
-            {
-              "name": "Feature Not Supported",
-              "value": "The operation is supported, but not a specific feature specified in the request is not supported"
-            },
-            {
-              "name": "General failure",
-              "value": "The request failed for a reason other than the defined reasons above"
-            },
-            {
-              "name": "Illegal Object Type",
-              "value": "Check cannot be performed on this object type"
-            },
-            {
-              "name": "Incompatible Cryptographic Usage Mask",
-              "value": "The cryptographic algorithm or other parameters is not valid for the requested operation"
-            },
-            {
-              "name": "Internal Server Error",
-              "value": "The server had an internal error and could not process the request at this time."
-            },
-            {
-              "name": "Invalid Asynchronous Correlation Value",
-              "value": "No outstanding operation with the specified Asynchronous Correlation Value exists"
-            },
-            {
-              "name": "Invalid Attribute",
-              "value": "An attribute is invalid for this object for this operation"
-            },
-            {
-              "name": "Invalid Attribute Value",
-              "value": "The value supplied for an attribute is invalid"
-            },
-            {
-              "name": "Invalid Correlation Value",
-              "value": "0xFEACACEA"
-            },
-            {
-              "name": "Invalid CSR",
-              "value": "Invalid Certifcate Signing Request"
-            },
-            {
-              "name": "Invalid Data Type",
-              "value": "A data type was invalid for the requested operation"
-            },
-            {
-              "name": "Invalid Field",
-              "value": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value"
-            },
-            {
-              "name": "Invalid Message",
-              "value": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag"
-            },
-            {
-              "name": "Invalid Object Type",
-              "value": "Specified object is not valid for the requested operation"
-            },
-            {
-              "name": "Invalid Password",
-              "value": ""
-            },
-            {
-              "name": "Invalid Ticket",
-              "value": "0x00ECEAAD"
-            },
-            {
               "name": "Item Not Found",
-              "value": "No object with the specified Unique Identifier exists"
-            },
-            {
-              "name": "Key Compression Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Compression Type"
-            },
-            {
-              "name": "Key Format Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Format Type"
-            },
-            {
-              "name": "Key Value Not Present",
-              "value": "A meta data only object. The key value is not present on the server"
-            },
-            {
-              "name": "Key Wrap Type Not Supported",
-              "value": "Key Wrap Type Type is not supported by the server"
-            },
-            {
-              "name": "Missing data",
-              "value": "The operation REQUIRED additional information in the request, which was not present"
-            },
-            {
-              "name": "Missing Initialization Vector",
-              "value": "0xEEEDFCEA"
-            },
-            {
-              "name": "Multi Valued Attribute",
-              "value": "Attempt to Set or Adjust an attribute that has multiple values"
-            },
-            {
-              "name": "Non Unique Name Attribute",
-              "value": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique"
-            },
-            {
-              "name": "Not Extractable",
-              "value": "Object is not Extractable"
-            },
-            {
-              "name": "Numeric Range",
-              "value": "An operation produced a number that is to large or too small to be stored in the specified data type"
-            },
-            {
-              "name": "Object Already Exists",
-              "value": "for operations such as Import that require that no object with a specific unique identifier exists on a server"
-            },
-            {
-              "name": "Object Archived",
-              "value": "The object SHALL be recovered from the archive before performing the operation"
-            },
-            {
-              "name": "Object Destroyed",
-              "value": "Object exists, but has already been destroyed"
-            },
-            {
-              "name": "Object Not Found",
-              "value": "A requested managed object was not found or did not exist"
-            },
-            {
-              "name": "Object Type",
-              "value": "Invalid object type for the operation"
-            },
-            {
-              "name": "Operation canceled by requester",
-              "value": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully"
-            },
-            {
-              "name": "Operation Not Supported",
-              "value": "The operation requested by the request message is not supported by the server"
-            },
-            {
-              "name": "Permission Denied",
-              "value": "Client is not allowed to perform the specified operation"
-            },
-            {
-              "name": "PKCS#11 Codec Error",
-              "value": "There is a Codec error in the Input parameter"
-            },
-            {
-              "name": "PKCS#11 Invalid Function",
-              "value": "The PKCS function is not in the interface"
-            },
-            {
-              "name": "PKCS#11 Invalid Interface",
-              "value": "The interface is unknown or unavailable in the server"
-            },
-            {
-              "name": "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable",
-              "value": "The operation could not be completed with the protections requested (or defaulted)."
-            },
-            {
-              "name": "Read Only Attribute",
-              "value": "Attempt to set a Read Only Attribute"
+              "value": "0x00000001"
             },
             {
               "name": "Response Too Large",
-              "value": "Maximum Response Size has been exceeded"
+              "value": "0x00000002"
+            },
+            {
+              "name": "Authentication Not Successful",
+              "value": "0x00000003"
+            },
+            {
+              "name": "Invalid Message",
+              "value": "0x00000004"
+            },
+            {
+              "name": "Operation Not Supported",
+              "value": "0x00000005"
+            },
+            {
+              "name": "Missing Data",
+              "value": "0x00000006"
+            },
+            {
+              "name": "Invalid Field",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Feature Not Supported",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Operation Canceled By Requester",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Cryptographic Failure",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Permission Denied",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Object Archived",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Application Namespace Not Supported",
+              "value": "0x0000000F"
+            },
+            {
+              "name": "Key Format Type Not Supported",
+              "value": "0x00000010"
+            },
+            {
+              "name": "Key Compression Type Not Supported",
+              "value": "0x00000011"
+            },
+            {
+              "name": "Encoding Option Error",
+              "value": "0x00000012"
+            },
+            {
+              "name": "Key Value Not Present",
+              "value": "0x00000013"
+            },
+            {
+              "name": "Attestation Required",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Attestation Failed",
+              "value": "0x00000015"
             },
             {
               "name": "Sensitive",
-              "value": "Sensitive keys may not be retrieved unwrapped"
+              "value": "0x00000016"
             },
             {
-              "name": "Server Limit Exceeded",
-              "value": "Some limit on the server such as database size has been exceeded"
+              "name": "Not Extractable",
+              "value": "0x00000017"
             },
             {
-              "name": "Unknown Enumeration",
-              "value": "An enumerated value is not known by the server"
+              "name": "Object Already Exists",
+              "value": "0x00000018"
             },
             {
-              "name": "Unknown Message Extension",
-              "value": "The server does not support the supplied Message Extension"
-            },
-            {
-              "name": "Unknown Object Group",
-              "value": "<insert>"
-            },
-            {
-              "name": "Unknown Tag",
-              "value": "0x00AABEEE"
-            },
-            {
-              "name": "Unsupported Attribute",
-              "value": "Attribute is valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Cryptographic Parameters",
-              "value": "Cryptographic Parameters are valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Protocol Version",
-              "value": "The operation cannot be performed with the provided protocol version"
+              "name": "Invalid Ticket",
+              "value": "0x00000019"
             },
             {
               "name": "Usage Limit Exceeded",
-              "value": "The usage limits or request count has been exceeded"
+              "value": "0x0000001A"
+            },
+            {
+              "name": "Numeric Range",
+              "value": "0x0000001B"
+            },
+            {
+              "name": "Invalid Data Type",
+              "value": "0x0000001C"
+            },
+            {
+              "name": "Read Only Attribute",
+              "value": "0x0000001D"
+            },
+            {
+              "name": "Multi Valued Attribute",
+              "value": "0x0000001E"
+            },
+            {
+              "name": "Unsupported Attribute",
+              "value": "0x0000001F"
+            },
+            {
+              "name": "Attribute Instance Not Found",
+              "value": "0x00000020"
+            },
+            {
+              "name": "Attribute Not Found",
+              "value": "0x00000021"
+            },
+            {
+              "name": "Attribute Read Only",
+              "value": "0x00000022"
+            },
+            {
+              "name": "Attribute Single Valued",
+              "value": "0x00000023"
+            },
+            {
+              "name": "Bad Cryptographic Parameters",
+              "value": "0x00000024"
+            },
+            {
+              "name": "Bad Password",
+              "value": "0x00000025"
+            },
+            {
+              "name": "Codec Error",
+              "value": "0x00000026"
+            },
+            {
+              "name": "Illegal Object Type",
+              "value": "0x00000028"
+            },
+            {
+              "name": "Incompatible Cryptographic Usage Mask",
+              "value": "0x00000029"
+            },
+            {
+              "name": "Internal Server Error",
+              "value": "0x0000002A"
+            },
+            {
+              "name": "Invalid Asynchronous Correlation Value",
+              "value": "0x0000002B"
+            },
+            {
+              "name": "Invalid Attribute",
+              "value": "0x0000002C"
+            },
+            {
+              "name": "Invalid Attribute Value",
+              "value": "0x0000002D"
+            },
+            {
+              "name": "Invalid Correlation Value",
+              "value": "0x0000002E"
+            },
+            {
+              "name": "Invalid CSR",
+              "value": "0x0000002F"
+            },
+            {
+              "name": "Invalid Object Type",
+              "value": "0x00000030"
+            },
+            {
+              "name": "Key Wrap Type Not Supported",
+              "value": "0x00000032"
+            },
+            {
+              "name": "Missing Initialization Vector",
+              "value": "0x00000034"
+            },
+            {
+              "name": "Non Unique Name Attribute",
+              "value": "0x00000035"
+            },
+            {
+              "name": "Object Destroyed",
+              "value": "0x00000036"
+            },
+            {
+              "name": "Object Not Found",
+              "value": "0x00000037"
+            },
+            {
+              "name": "Not Authorised",
+              "value": "0x00000039"
+            },
+            {
+              "name": "Server Limit Exceeded",
+              "value": "0x0000003A"
+            },
+            {
+              "name": "Unknown Enumeration",
+              "value": "0x0000003B"
+            },
+            {
+              "name": "Unknown Message Extension",
+              "value": "0x0000003C"
+            },
+            {
+              "name": "Unknown Tag",
+              "value": "0x0000003D"
+            },
+            {
+              "name": "Unsupported Cryptographic Parameters",
+              "value": "0x0000003E"
+            },
+            {
+              "name": "Unsupported Protocol Version",
+              "value": "0x0000003F"
             },
             {
               "name": "Wrapping Object Archived",
-              "value": "0xABECACED"
+              "value": "0x00000040"
             },
             {
               "name": "Wrapping Object Destroyed",
-              "value": "The object exists, but is destroyed"
+              "value": "0x00000041"
             },
             {
               "name": "Wrapping Object Not Found",
-              "value": "0x0ABECDEE"
+              "value": "0x00000042"
             },
             {
               "name": "Wrong Key Lifecycle State",
-              "value": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+              "value": "0x00000043"
+            },
+            {
+              "name": "Protection Storage Unavailable",
+              "value": "0x00000044"
+            },
+            {
+              "name": "PKCS#11 Codec Error",
+              "value": "0x00000045"
+            },
+            {
+              "name": "PKCS#11 Invalid Function",
+              "value": "0x00000046"
+            },
+            {
+              "name": "PKCS#11 Invalid Interface",
+              "value": "0x00000047"
+            },
+            {
+              "name": "Private Protection Storage Unavailable",
+              "value": "0x00000048"
+            },
+            {
+              "name": "Public Protection Storage Unavailable",
+              "value": "0x00000049"
+            },
+            {
+              "name": "Unknown Object Group",
+              "value": "0x0000004A"
+            },
+            {
+              "name": "Constraint Violation",
+              "value": "0x0000004B"
+            },
+            {
+              "name": "Duplicate Process Request",
+              "value": "0x0000004C"
+            },
+            {
+              "name": "General Failure",
+              "value": "0x00000100"
             }
           ]
         },
@@ -13224,20 +13569,24 @@
         "Wrapping Method": {
           "values": [
             {
-              "name": "MAC/sign only",
-              "value": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key"
+              "name": "Encrypt",
+              "value": "0x00000001"
+            },
+            {
+              "name": "MAC/sign",
+              "value": "0x00000002"
             },
             {
               "name": "Encrypt then MAC/sign",
-              "value": ""
+              "value": "0x00000003"
             },
             {
-              "name": "MAC/sign then encrypt.",
-              "value": ""
+              "name": "MAC/sign then encrypt",
+              "value": "0x00000004"
             },
             {
               "name": "TR-31",
-              "value": ""
+              "value": "0x00000005"
             }
           ]
         },
@@ -13280,6 +13629,163 @@
               "value": "0x00000005"
             }
           ]
+        }
+      },
+      "descriptions": {
+        "Adjustment Type": {
+          "Increment": "Add the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Decrement": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Negate": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+        },
+        "Asynchronous Indicator": {
+          "Mandatory": "The server SHALL process all batch items in the request asynchronously (returning an Asynchronous Correlation Value for each batch item).",
+          "Optional": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol.",
+          "Prohibited": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+        },
+        "Batch Error Continuation Option": {
+          "Undo": "If any operation in the request fails, then the server SHALL undo all the previous operations. Batch item fails and Result Status is set to Operation Failed. Responses to batch items that have already been processed are returned normally. Responses to batch items that have not been processed are not returned.",
+          "Stop": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally.",
+          "Continue": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+        },
+        "Cancellation Result": {
+          "Canceled": "The cancel operation succeeded in canceling the pending operation.",
+          "Unable to Cancel": "The cancel operation is unable to cancel the pending operation.",
+          "Completed": "The pending operation completed successfully before the cancellation operation was able to cancel it.",
+          "Failed": "The pending operation completed with a failure before the cancellation operation was able to cancel it.",
+          "Unavailable": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+        },
+        "Client Registration Method": {
+          "Server Pre-Generated": "The server has pre-generated the client\u2019s private key. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Server On-Demand": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Generated": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Registered": "The client generates the private key and the certificates and registers the certificate with the server."
+        },
+        "Encoding Option": {
+          "No Encoding": "the wrapped un-encoded value of the Byte String Key Material field in the Key Value structure",
+          "TTLV Encoding": "the wrapped TTLV-encoded Key Value structure"
+        },
+        "Endpoint Role": {
+          "Client": "The endpoint that sends requests and receives responses.",
+          "Server": "The endpoint that receives requests and sends responses."
+        },
+        "Item Type": {
+          "Structure": "The ordered concatenation of items.",
+          "Integer": "Four-byte long (32 bit) signed numbers",
+          "Long Integer": "Eight-byte long (64 bit) signed numbers.",
+          "Big Integer": "A sequence of eight-bit bytes",
+          "Enumeration": "Four-byte long (32 bit) unsigned numbers",
+          "Boolean": "The value True or False.",
+          "Text String": "Sequences of character values.",
+          "Byte String": "Sequences of bytes containing individual unspecified eight-bit binary values",
+          "Date Time": "Eight-byte long (64 bit) POSIX Time values in seconds. .",
+          "Interval": "Four-byte long (32 bit) unsigned numbers in seconds",
+          "Date Time Extended": "Eight-byte long (64 bit) POSIX Time values in micro-seconds."
+        },
+        "Key Format Type": {
+          "Raw": "A key that contains only cryptographic key material, encoded as a string of bytes.",
+          "Opaque": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes.",
+          "PKCS1": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object.",
+          "PKCS8": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey",
+          "X.509": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object.",
+          "ECPrivateKey": "An ASN.1 encoded elliptic curve private key.",
+          "Several Transparent Key types": "algorithm-specific structures containing defined values for the various key types.",
+          "Extensions": "Vendor-specific extensions to allow for proprietary or legacy key formats."
+        },
+        "Link Type": {
+          "Private Key Link": "For a Public Key object: the private key corresponding to the public key.",
+          "Public Key Link": "For a Private Key object: the public key corresponding to the private key. For a Certificate object: the public key contained in the certificate.",
+          "Certificate Link": "For Certificate objects: the parent certificate for a certificate in a certificate chain. For Public Key objects: the corresponding certificate(s), containing the same public key.",
+          "Derivation Base Object Link": "For a derived Symmetric Key or Secret Data object: the object(s) from which the current symmetric key was derived.",
+          "Derived Key Link": "The symmetric key(s) or Secret Data object(s) that were derived from the current object.",
+          "Replacement Object Link": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that resulted from the re-key of the current key. For a Certificate object: the certificate that resulted from the re-certify. Note that there SHALL be only one such replacement object per Managed Object.",
+          "Replaced Object Link": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that was re-keyed to obtain the current key. For a Certificate object: the certificate that was re-certified to obtain the current certificate.",
+          "Parent Link": "For all object types: the container or other parent object corresponding to the object.",
+          "Child Link": "For all object types: the subordinate, derived or other child object corresponding to the object.",
+          "Previous Link": "For all object types: the previous object to this object.",
+          "Next Link": "For all object types: the next object to this object.",
+          "PKCS#12 Certificate Link": "",
+          "PKCS#12 Password Link": "",
+          "Wrapping Key Link": "For wrapped objects: the object that was used to wrap this object."
+        },
+        "Result Reason": {
+          "Application Namespace Not Supported": "The particular Application Namespace is not supported, and the server was not able to generate the Application Data field of an Application Specific Information attribute if the field was omitted from the client request",
+          "Attestation Failed": "Operation requires attestation data and the attestation data provided by the client does not validate",
+          "Attestation Required": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True",
+          "Attribute Instance Not Found": "A referenced attribute was found, but the specific instance was not found",
+          "Attribute Not Found": "A referenced attribute was not found at all on an object",
+          "Attribute Read Only": "Attempt to set a Read Only Attribute",
+          "Attribute Single Instance": "Attempt to provide multiple values for a single instance attribute",
+          "Authentication not successful": "The authentication information in the request could not be validated, or was not found",
+          "Bad Cryptographic Parameters": "Bad Cryptographic Parameters",
+          "Bad Password": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active",
+          "Codec Error": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated",
+          "Constraint Violation": "The request failed because one or more constraints were violated",
+          "Cryptographic Failure": "The operation failed due to a cryptographic error",
+          "Duplicate Process Request": "The asynchronous request specified was already processed",
+          "Encoding Option Error": "The Encoding Option is not supported as specified by the Encoding Option Enumeration",
+          "Feature Not Supported": "The operation is supported, but not a specific feature specified in the request is not supported",
+          "General failure": "The request failed for a reason other than any other reason enumeration value.",
+          "Illegal Object Type": "Check cannot be performed on this object type",
+          "Incompatible Cryptographic Usage Mask": "The cryptographic algorithm or other parameters is not valid for the requested operation",
+          "Internal Server Error": "The server had an internal error and could not process the request at this time.",
+          "Invalid Asynchronous Correlation Value": "No outstanding operation with the specified Asynchronous Correlation Value exists",
+          "Invalid Attribute": "An attribute is invalid for this object for this operation",
+          "Invalid Attribute Value": "The value supplied for an attribute is invalid",
+          "Invalid Correlation Value": "For streaming cryptographic operations",
+          "Invalid CSR": "Invalid Certifcate Signing Request",
+          "Invalid Data Type": "A data type was invalid for the requested operation",
+          "Invalid Field": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value",
+          "Invalid Message": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag",
+          "Invalid Object Type": "Specified object is not valid for the requested operation",
+          "Invalid Password": "",
+          "Invalid Ticket": "The ticket was invalid",
+          "Item Not Found": "No object with the specified Unique Identifier exists",
+          "Key Compression Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Compression Type",
+          "Key Format Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Format Type",
+          "Key Value Not Present": "A meta data only object. The key value is not present on the server",
+          "Key Wrap Type Not Supported": "Key Wrap Type Type is not supported by the server",
+          "Missing data": "The operation REQUIRED additional information in the request, which was not present",
+          "Missing Initialization Vector": "Missing IV when required for crypto operation",
+          "Multi Valued Attribute": "Attempt to Set or Adjust an attribute that has multiple values",
+          "Non Unique Name Attribute": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique",
+          "Not Extractable": "Object is not Extractable",
+          "Numeric Range": "An operation produced a number that is to large or too small to be stored in the specified data type",
+          "Object Already Exists": "for operations such as Import that require that no object with a specific unique identifier exists on a server",
+          "Object Archived": "The object SHALL be recovered from the archive before performing the operation",
+          "Object Destroyed": "Object exists, but has already been destroyed",
+          "Object Not Found": "A requested managed object was not found or did not exist",
+          "Object Type": "Invalid object type for the operation",
+          "Operation canceled by requester": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully",
+          "Operation Not Supported": "The operation requested by the request message is not supported by the server",
+          "Permission Denied": "Client is not allowed to perform the specified operation",
+          "PKCS#11 Codec Error": "There is a Codec error in the Input parameter",
+          "PKCS#11 Invalid Function": "The PKCS function is not in the interface",
+          "PKCS#11 Invalid Interface": "The interface is unknown or unavailable in the server",
+          "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable": "The operation could not be completed with the protections requested (or defaulted).",
+          "Read Only Attribute": "Attempt to set a Read Only Attribute",
+          "Response Too Large": "Maximum Response Size has been exceeded",
+          "Sensitive": "Sensitive keys may not be retrieved unwrapped",
+          "Server Limit Exceeded": "Some limit on the server such as database size has been exceeded",
+          "Unknown Enumeration": "An enumerated value is not known by the server",
+          "Unknown Message Extension": "The server does not support the supplied Message Extension",
+          "Unknown Object Group": "<insert>",
+          "Unknown Tag": "A tag is not known by the server",
+          "Unsupported Attribute": "Attribute is valid in the specification but unsupported by the Server",
+          "Unsupported Cryptographic Parameters": "Cryptographic Parameters are valid in the specification but unsupported by the Server",
+          "Unsupported Protocol Version": "The operation cannot be performed with the provided protocol version",
+          "Usage Limit Exceeded": "The usage limits or request count has been exceeded",
+          "Wrapping Object Archived": "Wrapping Object is archived",
+          "Wrapping Object Destroyed": "The object exists, but is destroyed",
+          "Wrapping Object Not Found": "Wrapping object does not exist",
+          "Wrong Key Lifecycle State": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+        },
+        "Wrapping Method": {
+          "Encrypt only": "encryption using a symmetric key or public key, or authenticated encryption algorithms that use a single key",
+          "MAC/sign only": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key",
+          "Encrypt then MAC/sign": "",
+          "MAC/sign then encrypt.": "",
+          "TR-31": "",
+          "Extensions": ""
         }
       },
       "tags": {
@@ -14712,12 +15218,16 @@
         "Adjustment Type": {
           "values": [
             {
+              "name": "Increment",
+              "value": "0x00000001"
+            },
+            {
               "name": "Decrement",
-              "value": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended."
+              "value": "0x00000002"
             },
             {
               "name": "Negate",
-              "value": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+              "value": "0x00000003"
             }
           ]
         },
@@ -14756,12 +15266,16 @@
         "Asynchronous Indicator": {
           "values": [
             {
+              "name": "Mandatory",
+              "value": "0x00000001"
+            },
+            {
               "name": "Optional",
-              "value": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol."
+              "value": "0x00000002"
             },
             {
               "name": "Prohibited",
-              "value": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+              "value": "0x00000003"
             }
           ]
         },
@@ -14784,12 +15298,16 @@
         "Batch Error Continuation Option": {
           "values": [
             {
-              "name": "Stop",
-              "value": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally."
+              "name": "Continue",
+              "value": "0x00000001"
             },
             {
-              "name": "Continue",
-              "value": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+              "name": "Stop",
+              "value": "0x00000002"
+            },
+            {
+              "name": "Undo",
+              "value": "0x00000003"
             }
           ]
         },
@@ -14872,20 +15390,24 @@
         "Cancellation Result": {
           "values": [
             {
+              "name": "Canceled",
+              "value": "0x00000001"
+            },
+            {
               "name": "Unable to Cancel",
-              "value": "The cancel operation is unable to cancel the pending operation."
+              "value": "0x00000002"
             },
             {
               "name": "Completed",
-              "value": "The pending operation completed successfully before the cancellation operation was able to cancel it."
+              "value": "0x00000003"
             },
             {
               "name": "Failed",
-              "value": "The pending operation completed with a failure before the cancellation operation was able to cancel it."
+              "value": "0x00000004"
             },
             {
               "name": "Unavailable",
-              "value": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+              "value": "0x00000005"
             }
           ]
         },
@@ -14920,16 +15442,24 @@
         "Client Registration Method": {
           "values": [
             {
+              "name": "Unspecified",
+              "value": "0x00000001"
+            },
+            {
+              "name": "Server Pre-Generated",
+              "value": "0x00000002"
+            },
+            {
               "name": "Server On-Demand",
-              "value": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000003"
             },
             {
               "name": "Client Generated",
-              "value": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password))."
+              "value": "0x00000004"
             },
             {
               "name": "Client Registered",
-              "value": "The client generates the private key and the certificates and registers the certificate with the server."
+              "value": "0x00000005"
             }
           ]
         },
@@ -15500,28 +16030,40 @@
         "Encoding Option": {
           "values": [
             {
+              "name": "No Encoding",
+              "value": "0x00000001"
+            },
+            {
               "name": "TTLV Encoding",
-              "value": "the wrapped TTLV-encoded Key Value structure"
+              "value": "0x00000002"
             }
           ]
         },
         "Endpoint Role": {
           "values": [
             {
+              "name": "Client",
+              "value": "0x00000001"
+            },
+            {
               "name": "Server",
-              "value": "The endpoint that receives requests and sends responses."
+              "value": "0x00000002"
             }
           ]
         },
         "Ephemeral": {
           "values": [
             {
+              "name": "Data",
+              "value": "0x00000001"
+            },
+            {
               "name": "Empty",
-              "value": "The Response Payload is returned as empty (all fields are omitted)"
+              "value": "0x00000002"
             },
             {
               "name": "Unique Identifier",
-              "value": "All fields in the Response Payload other than the Unique Identifier are omitted."
+              "value": "0x00000003"
             }
           ]
         },
@@ -15644,56 +16186,60 @@
         "Item Type": {
           "values": [
             {
+              "name": "Structure",
+              "value": "0x00000001"
+            },
+            {
               "name": "Integer",
-              "value": "Four-byte long (32 bit) signed numbers"
+              "value": "0x00000002"
             },
             {
               "name": "Long Integer",
-              "value": "Eight-byte long (64 bit) signed numbers."
+              "value": "0x00000003"
             },
             {
               "name": "Big Integer",
-              "value": "A sequence of eight-bit bytes"
+              "value": "0x00000004"
             },
             {
               "name": "Enumeration",
-              "value": "Four-byte long (32 bit) unsigned numbers"
+              "value": "0x00000005"
             },
             {
               "name": "Boolean",
-              "value": "0x0EAEEFAE"
+              "value": "0x00000006"
             },
             {
               "name": "Text String",
-              "value": "Sequences of character values."
+              "value": "0x00000007"
             },
             {
               "name": "Byte String",
-              "value": "Sequences of bytes containing individual unspecified eight-bit binary values"
+              "value": "0x00000008"
             },
             {
               "name": "Date Time",
-              "value": "Eight-byte long (64 bit) POSIX Time values in seconds. ."
+              "value": "0x00000009"
             },
             {
               "name": "Interval",
-              "value": "Four-byte long (32 bit) unsigned numbers in seconds"
+              "value": "0x0000000A"
             },
             {
               "name": "Date Time Extended",
-              "value": "Eight-byte long (64 bit) POSIX Time values in micro-seconds."
+              "value": "0x0000000B"
             },
             {
               "name": "Identifier",
-              "value": "Sequences of character values."
+              "value": "0x0000000C"
             },
             {
               "name": "Reference",
-              "value": "Sequences of character values."
+              "value": "0x0000000D"
             },
             {
               "name": "Name Reference",
-              "value": "Sequence of character values."
+              "value": "0x0000000E"
             }
           ]
         },
@@ -15720,28 +16266,72 @@
         "Key Format Type": {
           "values": [
             {
+              "name": "Raw",
+              "value": "0x00000001"
+            },
+            {
               "name": "Opaque",
-              "value": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes."
+              "value": "0x00000002"
             },
             {
-              "name": "PKCS1",
-              "value": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object."
+              "name": "PKCS#1",
+              "value": "0x00000003"
             },
             {
-              "name": "PKCS8",
-              "value": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey"
+              "name": "PKCS#8",
+              "value": "0x00000004"
             },
             {
               "name": "X.509",
-              "value": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object."
+              "value": "0x00000005"
             },
             {
               "name": "ECPrivateKey",
-              "value": "An ASN.1 encoded elliptic curve private key."
+              "value": "0x00000006"
             },
             {
-              "name": "Several Transparent Key types",
-              "value": "algorithm-specific structures containing defined values for the various key types."
+              "name": "Transparent Symmetric Key",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Transparent DSA Private Key",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Transparent DSA Public Key",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Transparent RSA Private Key",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Transparent RSA Public Key",
+              "value": "0x0000000B"
+            },
+            {
+              "name": "Transparent DH Private Key",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Transparent DH Public Key",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Transparent EC Private Key",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Transparent EC Public Key",
+              "value": "0x00000015"
+            },
+            {
+              "name": "PKCS#12",
+              "value": "0x00000016"
+            },
+            {
+              "name": "PKCS#10",
+              "value": "0x00000017"
             }
           ]
         },
@@ -16296,8 +16886,12 @@
         "OTP Algorithm": {
           "values": [
             {
+              "name": "HOTP",
+              "value": "0x00000001"
+            },
+            {
               "name": "TOTP",
-              "value": "Time-Based One-Time Password Algorithm [RFC6238]"
+              "value": "0x00000002"
             }
           ]
         },
@@ -16888,280 +17482,288 @@
         "Result Reason": {
           "values": [
             {
-              "name": "Attestation Failed",
-              "value": "Operation requires attestation data and the attestation data provided by the client does not validate"
-            },
-            {
-              "name": "Attestation Required",
-              "value": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True"
-            },
-            {
-              "name": "Attribute Instance Not Found",
-              "value": "A referenced attribute was found, but the specific instance was not found"
-            },
-            {
-              "name": "Attribute Not Found",
-              "value": "A referenced attribute was not found at all on an object"
-            },
-            {
-              "name": "Attribute Read Only",
-              "value": "Attempt to set a Read Only Attribute"
-            },
-            {
-              "name": "Attribute Single Instance",
-              "value": "Attempt to provide multiple values for a single instance attribute"
-            },
-            {
-              "name": "Authentication not successful",
-              "value": "The authentication information in the request could not be validated, or was not found"
-            },
-            {
-              "name": "Bad Cryptographic Parameters",
-              "value": "Bad Cryptographic Parameters"
-            },
-            {
-              "name": "Bad Password",
-              "value": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active"
-            },
-            {
-              "name": "Circular Link Error",
-              "value": "A ParentLink sets up a directed acyclic relationship. Detection of a cycle in the relationship graph results in this reason code."
-            },
-            {
-              "name": "Codec Error",
-              "value": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated"
-            },
-            {
-              "name": "Constraint Violation",
-              "value": "The request failed because one or more constraints were violated"
-            },
-            {
-              "name": "Cryptographic Failure",
-              "value": "The operation failed due to a cryptographic error"
-            },
-            {
-              "name": "Duplicate Process Request",
-              "value": "The asynchronous request specified was already processed"
-            },
-            {
-              "name": "Encoding Option Error",
-              "value": "The Encoding Option is not supported as specified by the Encoding Option Enumeration"
-            },
-            {
-              "name": "Feature Not Supported",
-              "value": "The operation is supported, but not a specific feature specified in the request is not supported"
-            },
-            {
-              "name": "General failure",
-              "value": "The request failed for a reason other than the defined reasons above"
-            },
-            {
-              "name": "Illegal Object Type",
-              "value": "Check cannot be performed on this object type"
-            },
-            {
-              "name": "Incompatible Cryptographic Usage Mask",
-              "value": "The cryptographic algorithm or other parameters is not valid for the requested operation"
-            },
-            {
-              "name": "Internal Server Error",
-              "value": "The server had an internal error and could not process the request at this time."
-            },
-            {
-              "name": "Invalid Asynchronous Correlation Value",
-              "value": "No outstanding operation with the specified Asynchronous Correlation Value exists"
-            },
-            {
-              "name": "Invalid Attribute",
-              "value": "An attribute is invalid for this object for this operation"
-            },
-            {
-              "name": "Invalid Attribute Value",
-              "value": "The value supplied for an attribute is invalid"
-            },
-            {
-              "name": "Invalid Correlation Value",
-              "value": "0xFEACACEA"
-            },
-            {
-              "name": "Invalid CSR",
-              "value": "Invalid Certificate Signing Request"
-            },
-            {
-              "name": "Invalid Data Type",
-              "value": "A data type was invalid for the requested operation"
-            },
-            {
-              "name": "Invalid Field",
-              "value": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value"
-            },
-            {
-              "name": "Invalid Message",
-              "value": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag"
-            },
-            {
-              "name": "Invalid Object Type",
-              "value": "Specified object is not valid for the requested operation"
-            },
-            {
-              "name": "Invalid Password",
-              "value": ""
-            },
-            {
-              "name": "Invalid Ticket",
-              "value": "0x00ECEAAD"
-            },
-            {
               "name": "Item Not Found",
-              "value": "No object with the specified Unique Identifier exists"
-            },
-            {
-              "name": "Key Compression Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Compression Type"
-            },
-            {
-              "name": "Key Format Type Not Supported",
-              "value": "The object exists, but the server is unable to provide it in the desired Key Format Type"
-            },
-            {
-              "name": "Key Value Not Present",
-              "value": "A meta data only object. The key value is not present on the server"
-            },
-            {
-              "name": "Key Wrap Type Not Supported",
-              "value": "Key Wrap Type Type is not supported by the server"
-            },
-            {
-              "name": "Missing data",
-              "value": "The operation REQUIRED additional information in the request, which was not present"
-            },
-            {
-              "name": "Missing Initialization Vector",
-              "value": "0xEEEDFCEA"
-            },
-            {
-              "name": "Multi Valued Attribute",
-              "value": "Attempt to Set or Adjust an attribute that has multiple values"
-            },
-            {
-              "name": "Non Unique Name Attribute",
-              "value": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique"
-            },
-            {
-              "name": "Not Extractable",
-              "value": "Object is not Extractable"
-            },
-            {
-              "name": "Numeric Range",
-              "value": "An operation produced a number that is too large or too small to be stored in the specified data type"
-            },
-            {
-              "name": "Object Already Exists",
-              "value": "for operations such as Import that require that no object with a specific unique identifier exists on a server"
-            },
-            {
-              "name": "Object Archived",
-              "value": "The object SHALL be recovered from the archive before performing the operation"
-            },
-            {
-              "name": "Object Destroyed",
-              "value": "Object exists, but has already been destroyed"
-            },
-            {
-              "name": "Object Not Found",
-              "value": "A requested managed object was not found or did not exist"
-            },
-            {
-              "name": "Object Type",
-              "value": "Invalid object type for the operation"
-            },
-            {
-              "name": "Operation canceled by requester",
-              "value": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully"
-            },
-            {
-              "name": "Operation Not Supported",
-              "value": "The operation requested by the request message is not supported by the server"
-            },
-            {
-              "name": "Permission Denied",
-              "value": "Client is not allowed to perform the specified operation"
-            },
-            {
-              "name": "PKCS#11 Codec Error",
-              "value": "There is a Codec error in the Input parameter"
-            },
-            {
-              "name": "PKCS#11 Invalid Function",
-              "value": "The PKCS function is not in the interface"
-            },
-            {
-              "name": "PKCS#11 Invalid Interface",
-              "value": "The interface is unknown or unavailable in the server"
-            },
-            {
-              "name": "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable",
-              "value": "The operation could not be completed with the protections requested (or defaulted)."
-            },
-            {
-              "name": "Read Only Attribute",
-              "value": "Attempt to set a Read Only Attribute"
+              "value": "0x00000001"
             },
             {
               "name": "Response Too Large",
-              "value": "Maximum Response Size has been exceeded"
+              "value": "0x00000002"
+            },
+            {
+              "name": "Authentication Not Successful",
+              "value": "0x00000003"
+            },
+            {
+              "name": "Invalid Message",
+              "value": "0x00000004"
+            },
+            {
+              "name": "Operation Not Supported",
+              "value": "0x00000005"
+            },
+            {
+              "name": "Missing Data",
+              "value": "0x00000006"
+            },
+            {
+              "name": "Invalid Field",
+              "value": "0x00000007"
+            },
+            {
+              "name": "Feature Not Supported",
+              "value": "0x00000008"
+            },
+            {
+              "name": "Operation Canceled By Requester",
+              "value": "0x00000009"
+            },
+            {
+              "name": "Cryptographic Failure",
+              "value": "0x0000000A"
+            },
+            {
+              "name": "Permission Denied",
+              "value": "0x0000000C"
+            },
+            {
+              "name": "Object Archived",
+              "value": "0x0000000D"
+            },
+            {
+              "name": "Application Namespace Not Supported",
+              "value": "0x0000000F"
+            },
+            {
+              "name": "Key Format Type Not Supported",
+              "value": "0x00000010"
+            },
+            {
+              "name": "Key Compression Type Not Supported",
+              "value": "0x00000011"
+            },
+            {
+              "name": "Encoding Option Error",
+              "value": "0x00000012"
+            },
+            {
+              "name": "Key Value Not Present",
+              "value": "0x00000013"
+            },
+            {
+              "name": "Attestation Required",
+              "value": "0x00000014"
+            },
+            {
+              "name": "Attestation Failed",
+              "value": "0x00000015"
             },
             {
               "name": "Sensitive",
-              "value": "Sensitive keys may not be retrieved unwrapped"
+              "value": "0x00000016"
             },
             {
-              "name": "Server Limit Exceeded",
-              "value": "Some limit on the server such as database size has been exceeded"
+              "name": "Not Extractable",
+              "value": "0x00000017"
             },
             {
-              "name": "Unknown Enumeration",
-              "value": "An enumerated value is not known by the server"
+              "name": "Object Already Exists",
+              "value": "0x00000018"
             },
             {
-              "name": "Unknown Message Extension",
-              "value": "The server does not support the supplied Message Extension"
-            },
-            {
-              "name": "Unknown Tag",
-              "value": "0x00AABEEE"
-            },
-            {
-              "name": "Unsupported Attribute",
-              "value": "Attribute is valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Cryptographic Parameters",
-              "value": "Cryptographic Parameters are valid in the specification but unsupported by the Server"
-            },
-            {
-              "name": "Unsupported Protocol Version",
-              "value": "The operation cannot be performed with the provided protocol version"
+              "name": "Invalid Ticket",
+              "value": "0x00000019"
             },
             {
               "name": "Usage Limit Exceeded",
-              "value": "The usage limits or request count has been exceeded"
+              "value": "0x0000001A"
+            },
+            {
+              "name": "Numeric Range",
+              "value": "0x0000001B"
+            },
+            {
+              "name": "Invalid Data Type",
+              "value": "0x0000001C"
+            },
+            {
+              "name": "Read Only Attribute",
+              "value": "0x0000001D"
+            },
+            {
+              "name": "Multi Valued Attribute",
+              "value": "0x0000001E"
+            },
+            {
+              "name": "Unsupported Attribute",
+              "value": "0x0000001F"
+            },
+            {
+              "name": "Attribute Instance Not Found",
+              "value": "0x00000020"
+            },
+            {
+              "name": "Attribute Not Found",
+              "value": "0x00000021"
+            },
+            {
+              "name": "Attribute Read Only",
+              "value": "0x00000022"
+            },
+            {
+              "name": "Attribute Single Valued",
+              "value": "0x00000023"
+            },
+            {
+              "name": "Bad Cryptographic Parameters",
+              "value": "0x00000024"
+            },
+            {
+              "name": "Bad Password",
+              "value": "0x00000025"
+            },
+            {
+              "name": "Codec Error",
+              "value": "0x00000026"
+            },
+            {
+              "name": "Illegal Object Type",
+              "value": "0x00000028"
+            },
+            {
+              "name": "Incompatible Cryptographic Usage Mask",
+              "value": "0x00000029"
+            },
+            {
+              "name": "Internal Server Error",
+              "value": "0x0000002A"
+            },
+            {
+              "name": "Invalid Asynchronous Correlation Value",
+              "value": "0x0000002B"
+            },
+            {
+              "name": "Invalid Attribute",
+              "value": "0x0000002C"
+            },
+            {
+              "name": "Invalid Attribute Value",
+              "value": "0x0000002D"
+            },
+            {
+              "name": "Invalid Correlation Value",
+              "value": "0x0000002E"
+            },
+            {
+              "name": "Invalid CSR",
+              "value": "0x0000002F"
+            },
+            {
+              "name": "Invalid Object Type",
+              "value": "0x00000030"
+            },
+            {
+              "name": "Key Wrap Type Not Supported",
+              "value": "0x00000032"
+            },
+            {
+              "name": "Missing Initialization Vector",
+              "value": "0x00000034"
+            },
+            {
+              "name": "Non Unique Name Attribute",
+              "value": "0x00000035"
+            },
+            {
+              "name": "Object Destroyed",
+              "value": "0x00000036"
+            },
+            {
+              "name": "Object Not Found",
+              "value": "0x00000037"
+            },
+            {
+              "name": "Not Authorised",
+              "value": "0x00000039"
+            },
+            {
+              "name": "Server Limit Exceeded",
+              "value": "0x0000003A"
+            },
+            {
+              "name": "Unknown Enumeration",
+              "value": "0x0000003B"
+            },
+            {
+              "name": "Unknown Message Extension",
+              "value": "0x0000003C"
+            },
+            {
+              "name": "Unknown Tag",
+              "value": "0x0000003D"
+            },
+            {
+              "name": "Unsupported Cryptographic Parameters",
+              "value": "0x0000003E"
+            },
+            {
+              "name": "Unsupported Protocol Version",
+              "value": "0x0000003F"
             },
             {
               "name": "Wrapping Object Archived",
-              "value": "0xABECACED"
+              "value": "0x00000040"
             },
             {
               "name": "Wrapping Object Destroyed",
-              "value": "The object exists, but is destroyed"
+              "value": "0x00000041"
             },
             {
               "name": "Wrapping Object Not Found",
-              "value": "0x0ABECDEE"
+              "value": "0x00000042"
             },
             {
               "name": "Wrong Key Lifecycle State",
-              "value": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+              "value": "0x00000043"
+            },
+            {
+              "name": "Protection Storage Unavailable",
+              "value": "0x00000044"
+            },
+            {
+              "name": "PKCS#11 Codec Error",
+              "value": "0x00000045"
+            },
+            {
+              "name": "PKCS#11 Invalid Function",
+              "value": "0x00000046"
+            },
+            {
+              "name": "PKCS#11 Invalid Interface",
+              "value": "0x00000047"
+            },
+            {
+              "name": "Private Protection Storage Unavailable",
+              "value": "0x00000048"
+            },
+            {
+              "name": "Public Protection Storage Unavailable",
+              "value": "0x00000049"
+            },
+            {
+              "name": "Constraint Violation",
+              "value": "0x0000004B"
+            },
+            {
+              "name": "Duplicate Process Request",
+              "value": "0x0000004C"
+            },
+            {
+              "name": "Circular Link Error",
+              "value": "0x0000004D"
+            },
+            {
+              "name": "General Failure",
+              "value": "0x00000100"
             }
           ]
         },
@@ -17492,20 +18094,24 @@
         "Wrapping Method": {
           "values": [
             {
-              "name": "MAC/sign only",
-              "value": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key"
+              "name": "Encrypt",
+              "value": "0x00000001"
+            },
+            {
+              "name": "MAC/sign",
+              "value": "0x00000002"
             },
             {
               "name": "Encrypt then MAC/sign",
-              "value": ""
+              "value": "0x00000003"
             },
             {
-              "name": "MAC/sign then encrypt.",
-              "value": ""
+              "name": "MAC/sign then encrypt",
+              "value": "0x00000004"
             },
             {
               "name": "TR-31",
-              "value": ""
+              "value": "0x00000005"
             }
           ]
         },
@@ -17548,6 +18154,159 @@
               "value": "0x00000005"
             }
           ]
+        }
+      },
+      "descriptions": {
+        "Adjustment Type": {
+          "Increment": "Add the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Decrement": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+          "Negate": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types."
+        },
+        "Asynchronous Indicator": {
+          "Mandatory": "The server SHALL process all batch items in the request asynchronously (returning an Asynchronous Correlation Value for each batch item).",
+          "Optional": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol.",
+          "Prohibited": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously."
+        },
+        "Batch Error Continuation Option": {
+          "Undo": "If any operation in the request fails, then the server SHALL undo all the previous operations. Batch item fails and Result Status is set to Operation Failed. Responses to batch items that have already been processed are returned normally. Responses to batch items that have not been processed are not returned.",
+          "Stop": "If an operation fails, then the server SHALL NOT continue processing subsequent operations in the request. Completed operations SHALL NOT be undone. Batch item fails and Result Status is set to Operation Failed. Responses to other batch items are returned normally.",
+          "Continue": "Return an error for the failed operation, and continue processing subsequent operations in the request. Batch item fails and Result Status is set to Operation Failed. Batch items that had been processed have been undone and their responses are returned with Undone result status."
+        },
+        "Cancellation Result": {
+          "Canceled": "The cancel operation succeeded in canceling the pending operation.",
+          "Unable to Cancel": "The cancel operation is unable to cancel the pending operation.",
+          "Completed": "The pending operation completed successfully before the cancellation operation was able to cancel it.",
+          "Failed": "The pending operation completed with a failure before the cancellation operation was able to cancel it.",
+          "Unavailable": "Unavailable \u2013 The specified correlation value did not match any recently pending or completed asynchronous operations."
+        },
+        "Client Registration Method": {
+          "Server Pre-Generated": "The server has pre-generated the client\u2019s private key. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Server On-Demand": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Generated": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
+          "Client Registered": "The client generates the private key and the certificates and registers the certificate with the server."
+        },
+        "Encoding Option": {
+          "No Encoding": "the wrapped un-encoded value of the Byte String Key Material field in the Key Value structure",
+          "TTLV Encoding": "the wrapped TTLV-encoded Key Value structure"
+        },
+        "Endpoint Role": {
+          "Client": "The endpoint that sends requests and receives responses.",
+          "Server": "The endpoint that receives requests and sends responses."
+        },
+        "Ephemeral": {
+          "Data": "Only the Data tag is omitted from the Response Payload",
+          "Empty": "The Response Payload is returned as empty (all fields are omitted)",
+          "Unique Identifier": "All fields in the Response Payload other than the Unique Identifier are omitted."
+        },
+        "Item Type": {
+          "Structure": "The ordered concatenation of items.",
+          "Integer": "Four-byte long (32 bit) signed numbers",
+          "Long Integer": "Eight-byte long (64 bit) signed numbers.",
+          "Big Integer": "A sequence of eight-bit bytes",
+          "Enumeration": "Four-byte long (32 bit) unsigned numbers",
+          "Boolean": "The value True or False.",
+          "Text String": "Sequences of character values.",
+          "Byte String": "Sequences of bytes containing individual unspecified eight-bit binary values",
+          "Date Time": "Eight-byte long (64 bit) POSIX Time values in seconds. .",
+          "Interval": "Four-byte long (32 bit) unsigned numbers in seconds",
+          "Date Time Extended": "Eight-byte long (64 bit) POSIX Time values in micro-seconds.",
+          "Identifier": "Sequences of character values.",
+          "Reference": "Sequences of character values.",
+          "Name Reference": "Sequence of character values."
+        },
+        "Key Format Type": {
+          "Raw": "A key that contains only cryptographic key material, encoded as a string of bytes.",
+          "Opaque": "an encoded key for which the encoding is unknown to the key management system. It is encoded as a string of bytes.",
+          "PKCS1": "an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object.",
+          "PKCS8": "An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey",
+          "X.509": "An encoded object, expressed as a DER-encoded ASN.1 X.509 object.",
+          "ECPrivateKey": "An ASN.1 encoded elliptic curve private key.",
+          "Several Transparent Key types": "algorithm-specific structures containing defined values for the various key types.",
+          "Extensions": "Vendor-specific extensions to allow for proprietary or legacy key formats."
+        },
+        "OTP Algorithm": {
+          "HOTP": "HMAC-Based One-Time Password Algorithm [RFC4226]",
+          "TOTP": "Time-Based One-Time Password Algorithm [RFC6238]"
+        },
+        "Result Reason": {
+          "Application Namespace Not Supported": "The particular Application Namespace is not supported, and the server was not able to generate the Application Data field of an Application Specific Information attribute if the field was omitted from the client request",
+          "Attestation Failed": "Operation requires attestation data and the attestation data provided by the client does not validate",
+          "Attestation Required": "Operation requires attestation data which was not provided by the client, and the client has set the Attestation Capable indicator to True",
+          "Attribute Instance Not Found": "A referenced attribute was found, but the specific instance was not found",
+          "Attribute Not Found": "A referenced attribute was not found at all on an object",
+          "Attribute Read Only": "Attempt to set a Read Only Attribute",
+          "Attribute Single Instance": "Attempt to provide multiple values for a single instance attribute",
+          "Authentication not successful": "The authentication information in the request could not be validated, or was not found",
+          "Bad Cryptographic Parameters": "Bad Cryptographic Parameters",
+          "Bad Password": "Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active",
+          "Circular Link Error": "A ParentLink sets up a directed acyclic relationship. Detection of a cycle in the relationship graph results in this reason code.",
+          "Codec Error": "The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated",
+          "Constraint Violation": "The request failed because one or more constraints were violated",
+          "Cryptographic Failure": "The operation failed due to a cryptographic error",
+          "Duplicate Process Request": "The asynchronous request specified was already processed",
+          "Encoding Option Error": "The Encoding Option is not supported as specified by the Encoding Option Enumeration",
+          "Feature Not Supported": "The operation is supported, but not a specific feature specified in the request is not supported",
+          "General failure": "The request failed for a reason other than any other reason enumeration value.",
+          "Illegal Object Type": "Check cannot be performed on this object type",
+          "Incompatible Cryptographic Usage Mask": "The cryptographic algorithm or other parameters is not valid for the requested operation",
+          "Internal Server Error": "The server had an internal error and could not process the request at this time.",
+          "Invalid Asynchronous Correlation Value": "No outstanding operation with the specified Asynchronous Correlation Value exists",
+          "Invalid Attribute": "An attribute is invalid for this object for this operation",
+          "Invalid Attribute Value": "The value supplied for an attribute is invalid",
+          "Invalid Correlation Value": "For streaming cryptographic operations",
+          "Invalid CSR": "Invalid Certificate Signing Request",
+          "Invalid Data Type": "A data type was invalid for the requested operation",
+          "Invalid Field": "The request is syntactically valid but some data in the request (other than an attribute value) has an invalid value",
+          "Invalid Message": "The request message was not syntactically understood by the server. For example - the invalid use of a known tag",
+          "Invalid Object Type": "Specified object is not valid for the requested operation",
+          "Invalid Password": "",
+          "Invalid Ticket": "The ticket was invalid",
+          "Item Not Found": "No object with the specified Unique Identifier exists",
+          "Key Compression Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Compression Type",
+          "Key Format Type Not Supported": "The object exists, but the server is unable to provide it in the desired Key Format Type",
+          "Key Value Not Present": "A meta data only object. The key value is not present on the server",
+          "Key Wrap Type Not Supported": "Key Wrap Type Type is not supported by the server",
+          "Missing data": "The operation REQUIRED additional information in the request, which was not present",
+          "Missing Initialization Vector": "Missing IV when required for crypto operation",
+          "Multi Valued Attribute": "Attempt to Set or Adjust an attribute that has multiple values",
+          "Non Unique Name Attribute": "Trying to perform an operation that requests the server to break the constraint on Name attribute being unique",
+          "Not Extractable": "Object is not Extractable",
+          "Numeric Range": "An operation produced a number that is too large or too small to be stored in the specified data type",
+          "Object Already Exists": "for operations such as Import that require that no object with a specific unique identifier exists on a server",
+          "Object Archived": "The object SHALL be recovered from the archive before performing the operation",
+          "Object Destroyed": "Object exists, but has already been destroyed",
+          "Object Not Found": "A requested managed object was not found or did not exist",
+          "Object Type": "Invalid object type for the operation",
+          "Operation canceled by requester": "The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully",
+          "Operation Not Supported": "The operation requested by the request message is not supported by the server",
+          "Permission Denied": "Client is not allowed to perform the specified operation",
+          "PKCS#11 Codec Error": "There is a Codec error in the Input parameter",
+          "PKCS#11 Invalid Function": "The PKCS function is not in the interface",
+          "PKCS#11 Invalid Interface": "The interface is unknown or unavailable in the server",
+          "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable": "The operation could not be completed with the protections requested (or defaulted).",
+          "Read Only Attribute": "Attempt to set a Read Only Attribute",
+          "Response Too Large": "Maximum Response Size has been exceeded",
+          "Sensitive": "Sensitive keys may not be retrieved unwrapped",
+          "Server Limit Exceeded": "Some limit on the server such as database size has been exceeded",
+          "Unknown Enumeration": "An enumerated value is not known by the server",
+          "Unknown Message Extension": "The server does not support the supplied Message Extension",
+          "Unknown Tag": "A tag is not known by the server",
+          "Unsupported Attribute": "Attribute is valid in the specification but unsupported by the Server",
+          "Unsupported Cryptographic Parameters": "Cryptographic Parameters are valid in the specification but unsupported by the Server",
+          "Unsupported Protocol Version": "The operation cannot be performed with the provided protocol version",
+          "Usage Limit Exceeded": "The usage limits or request count has been exceeded",
+          "Wrapping Object Archived": "Wrapping Object is archived",
+          "Wrapping Object Destroyed": "The object exists, but is destroyed",
+          "Wrapping Object Not Found": "Wrapping object does not exist",
+          "Wrong Key Lifecycle State": "The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation"
+        },
+        "Wrapping Method": {
+          "Encrypt only": "encryption using a symmetric key or public key, or authenticated encryption algorithms that use a single key",
+          "MAC/sign only": "either MACing the Key Value with a symmetric key, or signing the Key Value with a private key",
+          "Encrypt then MAC/sign": "",
+          "MAC/sign then encrypt.": "",
+          "TR-31": "",
+          "Extensions": ""
         }
       },
       "tags": {
@@ -19170,109 +19929,6 @@
         "Wrapping Method"
       ],
       "enum_values": {
-        "Name Type": [
-          "URI",
-          "Uninterpreted Text String"
-        ],
-        "Certificate Type": [
-          "PGP",
-          "X.509"
-        ],
-        "Encoding Option": [
-          "No Encoding",
-          "TTLV Encoding"
-        ],
-        "Object Group Member": [
-          "Group Member Default",
-          "Group Member Fresh"
-        ],
-        "Usage Limits Unit": [
-          "Byte",
-          "Object"
-        ],
-        "Attestation Type": [
-          "SAML Assertion",
-          "TCG Integrity Report",
-          "TPM Quote"
-        ],
-        "Result Status": [
-          "Operation Failed",
-          "Operation Pending",
-          "Operation Undone",
-          "Success"
-        ],
-        "Wrapping Method": [
-          "Encrypt",
-          "Encrypt then MAC/sign",
-          "MAC/sign",
-          "MAC/sign then encrypt",
-          "TR-31"
-        ],
-        "Put Function": [
-          "New",
-          "Replace"
-        ],
-        "Validity Indicator": [
-          "Invalid",
-          "Unknown",
-          "Valid"
-        ],
-        "Certificate Request Type": [
-          "CRMF",
-          "PEM",
-          "PGP",
-          "PKCS#10"
-        ],
-        "Batch Error Continuation Option": [
-          "Continue",
-          "Stop",
-          "Undo"
-        ],
-        "Split Key Method": [
-          "Polynomial Sharing GF (216)",
-          "Polynomial Sharing GF (28)",
-          "Polynomial Sharing Prime Field",
-          "XOR"
-        ],
-        "Revocation Reason Code": [
-          "Affiliation Changed",
-          "CA Compromise",
-          "Cessation of Operation",
-          "Key Compromise",
-          "Privilege Withdrawn",
-          "Superseded",
-          "Unspecified"
-        ],
-        "Secret Data Type": [
-          "Password",
-          "Seed"
-        ],
-        "State": [
-          "Active",
-          "Compromised",
-          "Deactivated",
-          "Destroyed",
-          "Destroyed Compromised",
-          "Pre-Active"
-        ],
-        "Cancellation Result": [
-          "Canceled",
-          "Completed",
-          "Failed",
-          "Unable to Cancel",
-          "Unavailable"
-        ],
-        "Object Type": [
-          "Certificate",
-          "Opaque Object",
-          "PGP Key",
-          "Private Key",
-          "Public Key",
-          "Secret Data",
-          "Split Key",
-          "Symmetric Key",
-          "Template"
-        ],
         "Operation": [
           "Activate",
           "Add Attribute",
@@ -19316,216 +19972,14 @@
           "Signature Verify",
           "Validate"
         ],
-        "Derivation Method": [
-          "ENCRYPT",
-          "HASH",
-          "HMAC",
-          "NIST800-108-C",
-          "NIST800-108-DPI",
-          "NIST800-108-F",
-          "PBKDF2"
+        "Put Function": [
+          "New",
+          "Replace"
         ],
-        "Block Cipher Mode": [
-          "AESKeyWrapPadding",
-          "CBC",
-          "CBC-MAC",
-          "CCM",
-          "CFB",
-          "CMAC",
-          "CTR",
-          "ECB",
-          "GCM",
-          "NISTKeyWrap",
-          "OFB",
-          "PCBC",
-          "X9.102 AESKW",
-          "X9.102 AKW1",
-          "X9.102 AKW2",
-          "X9.102 TDKW",
-          "XTS"
-        ],
-        "Query Function": [
-          "Query Application Namespaces",
-          "Query Attestation Types",
-          "Query Extension List",
-          "Query Extension Map",
-          "Query Objects",
-          "Query Operations",
-          "Query Server Information"
-        ],
-        "Key Format Type": [
-          "ECPrivateKey",
-          "Opaque",
-          "PKCS#1",
-          "PKCS#8",
-          "Raw",
-          "Transparent DH Private Key",
-          "Transparent DH Public Key",
-          "Transparent DSA Private Key",
-          "Transparent DSA Public Key",
-          "Transparent ECDH Private Key",
-          "Transparent ECDH Public Key",
-          "Transparent ECDSA Private Key",
-          "Transparent ECDSA Public Key",
-          "Transparent ECMQV Private Key",
-          "Transparent ECMQV Public Key",
-          "Transparent RSA Private Key",
-          "Transparent RSA Public Key",
-          "Transparent Symmetric Key",
-          "X.509"
-        ],
-        "Hashing Algorithm": [
-          "MD2",
-          "MD4",
-          "MD5",
-          "RIPEMD-160",
-          "SHA-1",
-          "SHA-224",
-          "SHA-256",
-          "SHA-384",
-          "SHA-512",
-          "SHA-512/224",
-          "SHA-512/256",
-          "Tiger",
-          "Whirlpool"
-        ],
-        "Digital Signature Algorithm": [
-          "DSA with SHA-1",
-          "DSA with SHA224",
-          "DSA with SHA256",
-          "ECDSA with SHA-1",
-          "ECDSA with SHA224",
-          "ECDSA with SHA256",
-          "ECDSA with SHA384",
-          "ECDSA with SHA512",
-          "MD2 with RSA Encryption (PKCS#1 v1.5)",
-          "MD5 with RSA Encryption (PKCS#1 v1.5)",
-          "RSASSA-PSS (PKCS#1 v2.1)",
-          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
-        ],
-        "Key Compression Type": [
-          "EC Public Key Type Uncompressed",
-          "EC Public Key Type X9.62 Compressed Char2",
-          "EC Public Key Type X9.62 Compressed Prime",
-          "EC Public Key Type X9.62 Hybrid"
-        ],
-        "Credential Type": [
-          "Attestation",
-          "Device",
-          "Username and Password"
-        ],
-        "Cryptographic Algorithm": [
-          "3DES",
-          "AES",
-          "Blowfish",
-          "CAST5",
-          "Camellia",
-          "DES",
-          "DH",
-          "DSA",
-          "EC",
-          "ECDH",
-          "ECDSA",
-          "ECMQV",
-          "HMAC-MD5",
-          "HMAC-SHA1",
-          "HMAC-SHA224",
-          "HMAC-SHA256",
-          "HMAC-SHA384",
-          "HMAC-SHA512",
-          "IDEA",
-          "MARS",
-          "RC2",
-          "RC4",
-          "RC5",
-          "RSA",
-          "SKIPJACK",
-          "Twofish"
-        ],
-        "Padding Method": [
-          "ANSI X9.23",
-          "ISO 10126",
-          "None",
-          "OAEP",
-          "PKCS1 v1.5",
-          "PKCS5",
-          "PSS",
-          "SSL3",
-          "X9.31",
-          "Zeros"
-        ],
-        "Result Reason": [
-          "Application Namespace Not Supported",
-          "Attestation Failed",
-          "Attestation Required",
-          "Authentication Not Successful",
-          "Cryptographic Failure",
-          "Encoding Option Error",
-          "Feature Not Supported",
-          "General Failure",
-          "Illegal Operation",
-          "Index Out of Bounds",
-          "Invalid Field",
-          "Invalid Message",
-          "Item Not Found",
-          "Key Compression Type Not Supported",
-          "Key Format Type Not Supported",
-          "Key Value Not Present",
-          "Missing Data",
-          "Object archived",
-          "Operation Canceled By Requester",
-          "Operation Not Supported",
-          "Permission Denied",
-          "Response Too Large"
-        ],
-        "Alternative Name Type": [
-          "DNS Name",
-          "Email Address",
-          "IP Address",
-          "Object Serial Number",
-          "URI",
-          "Uninterpreted Text String",
-          "X.500 Distinguished Name"
-        ],
-        "Key Role Type": [
-          "BDK",
-          "CVK",
-          "DEK",
-          "KEK",
-          "MAC16609",
-          "MAC97971",
-          "MAC97972",
-          "MAC97973",
-          "MAC97974",
-          "MAC97975",
-          "MKAC",
-          "MKCP",
-          "MKDAC",
-          "MKDN",
-          "MKOTH",
-          "MKSMC",
-          "MKSMI",
-          "PVKIBM",
-          "PVKOTH",
-          "PVKPVV",
-          "ZPK"
-        ],
-        "Link Type": [
-          "Certificate Link",
-          "Child Link",
-          "Derivation Base Object Link",
-          "Derived Key Link",
-          "Next Link",
-          "Parent Link",
-          "Previous Link",
-          "Private Key Link",
-          "Public Key Link",
-          "Replaced Object Link",
-          "Replacement Object Link"
+        "Attestation Type": [
+          "SAML Assertion",
+          "TCG Integrity Report",
+          "TPM Quote"
         ],
         "Recommended Curve": [
           "ANSIX9C2PNB163V1",
@@ -19597,9 +20051,314 @@
           "SECT193R2",
           "SECT239K1"
         ],
+        "Name Type": [
+          "URI",
+          "Uninterpreted Text String"
+        ],
+        "Alternative Name Type": [
+          "DNS Name",
+          "Email Address",
+          "IP Address",
+          "Object Serial Number",
+          "URI",
+          "Uninterpreted Text String",
+          "X.500 Distinguished Name"
+        ],
+        "Batch Error Continuation Option": [
+          "Continue",
+          "Stop",
+          "Undo"
+        ],
+        "Key Role Type": [
+          "BDK",
+          "CVK",
+          "DEK",
+          "KEK",
+          "MAC16609",
+          "MAC97971",
+          "MAC97972",
+          "MAC97973",
+          "MAC97974",
+          "MAC97975",
+          "MKAC",
+          "MKCP",
+          "MKDAC",
+          "MKDN",
+          "MKOTH",
+          "MKSMC",
+          "MKSMI",
+          "PVKIBM",
+          "PVKOTH",
+          "PVKPVV",
+          "ZPK"
+        ],
+        "Usage Limits Unit": [
+          "Byte",
+          "Object"
+        ],
+        "Cancellation Result": [
+          "Canceled",
+          "Completed",
+          "Failed",
+          "Unable to Cancel",
+          "Unavailable"
+        ],
+        "Key Compression Type": [
+          "EC Public Key Type Uncompressed",
+          "EC Public Key Type X9.62 Compressed Char2",
+          "EC Public Key Type X9.62 Compressed Prime",
+          "EC Public Key Type X9.62 Hybrid"
+        ],
+        "Padding Method": [
+          "ANSI X9.23",
+          "ISO 10126",
+          "None",
+          "OAEP",
+          "PKCS1 v1.5",
+          "PKCS5",
+          "PSS",
+          "SSL3",
+          "X9.31",
+          "Zeros"
+        ],
+        "Validity Indicator": [
+          "Invalid",
+          "Unknown",
+          "Valid"
+        ],
+        "Object Group Member": [
+          "Group Member Default",
+          "Group Member Fresh"
+        ],
+        "Credential Type": [
+          "Attestation",
+          "Device",
+          "Username and Password"
+        ],
+        "Result Reason": [
+          "Application Namespace Not Supported",
+          "Attestation Failed",
+          "Attestation Required",
+          "Authentication Not Successful",
+          "Cryptographic Failure",
+          "Encoding Option Error",
+          "Feature Not Supported",
+          "General Failure",
+          "Illegal Operation",
+          "Index Out of Bounds",
+          "Invalid Field",
+          "Invalid Message",
+          "Item Not Found",
+          "Key Compression Type Not Supported",
+          "Key Format Type Not Supported",
+          "Key Value Not Present",
+          "Missing Data",
+          "Object archived",
+          "Operation Canceled By Requester",
+          "Operation Not Supported",
+          "Permission Denied",
+          "Response Too Large"
+        ],
+        "Cryptographic Algorithm": [
+          "3DES",
+          "AES",
+          "Blowfish",
+          "CAST5",
+          "Camellia",
+          "DES",
+          "DH",
+          "DSA",
+          "EC",
+          "ECDH",
+          "ECDSA",
+          "ECMQV",
+          "HMAC-MD5",
+          "HMAC-SHA1",
+          "HMAC-SHA224",
+          "HMAC-SHA256",
+          "HMAC-SHA384",
+          "HMAC-SHA512",
+          "IDEA",
+          "MARS",
+          "RC2",
+          "RC4",
+          "RC5",
+          "RSA",
+          "SKIPJACK",
+          "Twofish"
+        ],
+        "Certificate Type": [
+          "PGP",
+          "X.509"
+        ],
+        "Digital Signature Algorithm": [
+          "DSA with SHA-1",
+          "DSA with SHA224",
+          "DSA with SHA256",
+          "ECDSA with SHA-1",
+          "ECDSA with SHA224",
+          "ECDSA with SHA256",
+          "ECDSA with SHA384",
+          "ECDSA with SHA512",
+          "MD2 with RSA Encryption (PKCS#1 v1.5)",
+          "MD5 with RSA Encryption (PKCS#1 v1.5)",
+          "RSASSA-PSS (PKCS#1 v2.1)",
+          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
+        ],
+        "Revocation Reason Code": [
+          "Affiliation Changed",
+          "CA Compromise",
+          "Cessation of Operation",
+          "Key Compromise",
+          "Privilege Withdrawn",
+          "Superseded",
+          "Unspecified"
+        ],
+        "Block Cipher Mode": [
+          "AESKeyWrapPadding",
+          "CBC",
+          "CBC-MAC",
+          "CCM",
+          "CFB",
+          "CMAC",
+          "CTR",
+          "ECB",
+          "GCM",
+          "NISTKeyWrap",
+          "OFB",
+          "PCBC",
+          "X9.102 AESKW",
+          "X9.102 AKW1",
+          "X9.102 AKW2",
+          "X9.102 TDKW",
+          "XTS"
+        ],
+        "Object Type": [
+          "Certificate",
+          "Opaque Object",
+          "PGP Key",
+          "Private Key",
+          "Public Key",
+          "Secret Data",
+          "Split Key",
+          "Symmetric Key",
+          "Template"
+        ],
+        "Query Function": [
+          "Query Application Namespaces",
+          "Query Attestation Types",
+          "Query Extension List",
+          "Query Extension Map",
+          "Query Objects",
+          "Query Operations",
+          "Query Server Information"
+        ],
+        "Certificate Request Type": [
+          "CRMF",
+          "PEM",
+          "PGP",
+          "PKCS#10"
+        ],
+        "State": [
+          "Active",
+          "Compromised",
+          "Deactivated",
+          "Destroyed",
+          "Destroyed Compromised",
+          "Pre-Active"
+        ],
+        "Key Format Type": [
+          "ECPrivateKey",
+          "Opaque",
+          "PKCS#1",
+          "PKCS#8",
+          "Raw",
+          "Transparent DH Private Key",
+          "Transparent DH Public Key",
+          "Transparent DSA Private Key",
+          "Transparent DSA Public Key",
+          "Transparent ECDH Private Key",
+          "Transparent ECDH Public Key",
+          "Transparent ECDSA Private Key",
+          "Transparent ECDSA Public Key",
+          "Transparent ECMQV Private Key",
+          "Transparent ECMQV Public Key",
+          "Transparent RSA Private Key",
+          "Transparent RSA Public Key",
+          "Transparent Symmetric Key",
+          "X.509"
+        ],
+        "Result Status": [
+          "Operation Failed",
+          "Operation Pending",
+          "Operation Undone",
+          "Success"
+        ],
+        "Encoding Option": [
+          "No Encoding",
+          "TTLV Encoding"
+        ],
+        "Split Key Method": [
+          "Polynomial Sharing GF (216)",
+          "Polynomial Sharing GF (28)",
+          "Polynomial Sharing Prime Field",
+          "XOR"
+        ],
+        "Derivation Method": [
+          "ENCRYPT",
+          "HASH",
+          "HMAC",
+          "NIST800-108-C",
+          "NIST800-108-DPI",
+          "NIST800-108-F",
+          "PBKDF2"
+        ],
         "Key Value Location Type": [
           "URI",
           "Uninterpreted Text String"
+        ],
+        "Wrapping Method": [
+          "Encrypt",
+          "Encrypt then MAC/sign",
+          "MAC/sign",
+          "MAC/sign then encrypt",
+          "TR-31"
+        ],
+        "Secret Data Type": [
+          "Password",
+          "Seed"
+        ],
+        "Link Type": [
+          "Certificate Link",
+          "Child Link",
+          "Derivation Base Object Link",
+          "Derived Key Link",
+          "Next Link",
+          "Parent Link",
+          "Previous Link",
+          "Private Key Link",
+          "Public Key Link",
+          "Replaced Object Link",
+          "Replacement Object Link"
+        ],
+        "Hashing Algorithm": [
+          "MD2",
+          "MD4",
+          "MD5",
+          "RIPEMD-160",
+          "SHA-1",
+          "SHA-224",
+          "SHA-256",
+          "SHA-384",
+          "SHA-512",
+          "SHA-512/224",
+          "SHA-512/256",
+          "Tiger",
+          "Whirlpool"
         ]
       },
       "tags": []
@@ -19619,48 +20378,12 @@
         "Validation Type"
       ],
       "enum_values": {
-        "DRBG Algorithm": [
-          "CTR",
-          "Dual-EC",
-          "HMAC",
-          "Hash",
-          "Unspecified"
-        ],
-        "Validation Authority Type": [
-          "Common Criteria",
-          "NIST CMVP",
-          "Unspecified"
-        ],
-        "Shredding Algorithm": [
-          "Cryptographic",
-          "Unspecified",
-          "Unsupported"
-        ],
         "Client Registration Method": [
           "Client Generated",
           "Client Registered",
           "Server On-Demand",
           "Server Pre-Generated",
           "Unspecified"
-        ],
-        "Validation Type": [
-          "Firmware",
-          "Hardware",
-          "Hybrid",
-          "Software",
-          "Unspecified"
-        ],
-        "Cryptographic Algorithm": [
-          "One Time Pad"
-        ],
-        "FIPS186 Variation": [
-          "GP x-Change Notice",
-          "GP x-Original",
-          "Unspecified",
-          "k-Change Notice",
-          "k-Original",
-          "x-Change Notice",
-          "x-Original"
         ],
         "RNG Algorithm": [
           "ANSI X9.31",
@@ -19678,6 +20401,28 @@
           "Meta Data Shredded",
           "Shredded",
           "Unspecified"
+        ],
+        "Validation Type": [
+          "Firmware",
+          "Hardware",
+          "Hybrid",
+          "Software",
+          "Unspecified"
+        ],
+        "RNG Mode": [
+          "Non-Shared Instantiation",
+          "Shared Instantiation",
+          "Unspecified"
+        ],
+        "DRBG Algorithm": [
+          "CTR",
+          "Dual-EC",
+          "HMAC",
+          "Hash",
+          "Unspecified"
+        ],
+        "Cryptographic Algorithm": [
+          "One Time Pad"
         ],
         "Profile Name": [
           "Advanced Cryptographic Client KMIP v1.2",
@@ -19812,15 +20557,29 @@
           "Transparent EC Private Key",
           "Transparent EC Public Key"
         ],
+        "Validation Authority Type": [
+          "Common Criteria",
+          "NIST CMVP",
+          "Unspecified"
+        ],
+        "FIPS186 Variation": [
+          "GP x-Change Notice",
+          "GP x-Original",
+          "Unspecified",
+          "k-Change Notice",
+          "k-Original",
+          "x-Change Notice",
+          "x-Original"
+        ],
         "Unwrap Mode": [
           "Not Processed",
           "Processed",
           "Unspecified"
         ],
-        "RNG Mode": [
-          "Non-Shared Instantiation",
-          "Shared Instantiation",
-          "Unspecified"
+        "Shredding Algorithm": [
+          "Cryptographic",
+          "Unspecified",
+          "Unsupported"
         ]
       },
       "tags": []
@@ -19831,15 +20590,30 @@
         "Mask Generator"
       ],
       "enum_values": {
-        "Operation": [
-          "Export",
-          "Import"
+        "Key Role Type": [
+          "DUKPT",
+          "IV",
+          "TRKBK"
+        ],
+        "Result Reason": [
+          "Not Extractable",
+          "Object Already Exists",
+          "Sensitive"
         ],
         "Derivation Method": [
           "Asymmetric Key"
         ],
-        "Block Cipher Mode": [
-          "AEAD"
+        "Link Type": [
+          "PKCS#12 Certificate Link",
+          "PKCS#12 Password Link"
+        ],
+        "Operation": [
+          "Export",
+          "Import"
+        ],
+        "Key Wrap Type": [
+          "As Registered",
+          "Not Wrapped"
         ],
         "Cryptographic Algorithm": [
           "ChaCha20",
@@ -19856,17 +20630,10 @@
           "SHAKE-128",
           "SHAKE-256"
         ],
-        "Result Reason": [
-          "Not Extractable",
-          "Object Already Exists",
-          "Sensitive"
-        ],
-        "Mask Generator": [
-          "MGF1"
-        ],
-        "Key Wrap Type": [
-          "As Registered",
-          "Not Wrapped"
+        "Digital Signature Algorithm": [
+          "SHA3-256 with RSA Encryption",
+          "SHA3-384 with RSA Encryption",
+          "SHA3-512 with RSA Encryption"
         ],
         "Profile Name": [
           "Advanced Cryptographic Client KMIP v1.4",
@@ -19906,28 +20673,20 @@
           "XML Client KMIP v1.4",
           "XML Server KMIP v1.4"
         ],
+        "Block Cipher Mode": [
+          "AEAD"
+        ],
         "Key Format Type": [
           "PKCS#12"
+        ],
+        "Mask Generator": [
+          "MGF1"
         ],
         "Hashing Algorithm": [
           "SHA-3-224",
           "SHA-3-256",
           "SHA-3-384",
           "SHA-3-512"
-        ],
-        "Digital Signature Algorithm": [
-          "SHA3-256 with RSA Encryption",
-          "SHA3-384 with RSA Encryption",
-          "SHA3-512 with RSA Encryption"
-        ],
-        "Key Role Type": [
-          "DUKPT",
-          "IV",
-          "TRKBK"
-        ],
-        "Link Type": [
-          "PKCS#12 Certificate Link",
-          "PKCS#12 Password Link"
         ]
       },
       "tags": []
@@ -19946,18 +20705,98 @@
         "Unique Identifier"
       ],
       "enum_values": {
+        "Recommended Curve": [
+          "CURVE25519",
+          "CURVE448"
+        ],
+        "Credential Type": [
+          "Hashed Password",
+          "One Time Password",
+          "Ticket"
+        ],
+        "Result Reason": [
+          "Attribute Instance Not Found",
+          "Attribute Not Found",
+          "Attribute Read Only",
+          "Attribute Single Valued",
+          "Bad Cryptographic Parameters",
+          "Bad Password",
+          "Codec Error",
+          "Illegal Object Type",
+          "Incompatible Cryptographic Usage Mask",
+          "Internal Server Error",
+          "Invalid Asynchronous Correlation Value",
+          "Invalid Attribute",
+          "Invalid Attribute Value",
+          "Invalid CSR",
+          "Invalid Correlation Value",
+          "Invalid Data Type",
+          "Invalid Object Type",
+          "Invalid Ticket",
+          "Key Wrap Type Not Supported",
+          "Missing Initialization Vector",
+          "Multi Valued Attribute",
+          "Non Unique Name Attribute",
+          "Not Authorised",
+          "Numeric Range",
+          "Object Archived",
+          "Object Destroyed",
+          "Object Not Found",
+          "PKCS#11 Codec Error",
+          "PKCS#11 Invalid Function",
+          "PKCS#11 Invalid Interface",
+          "Private Protection Storage Unavailable",
+          "Protection Storage Unavailable",
+          "Public Protection Storage Unavailable",
+          "Read Only Attribute",
+          "Server Limit Exceeded",
+          "Unknown Enumeration",
+          "Unknown Message Extension",
+          "Unknown Tag",
+          "Unsupported Attribute",
+          "Unsupported Cryptographic Parameters",
+          "Unsupported Protocol Version",
+          "Usage Limit Exceeded",
+          "Wrapping Object Archived",
+          "Wrapping Object Destroyed",
+          "Wrapping Object Not Found",
+          "Wrong Key Lifecycle State"
+        ],
         "Certificate Type": [
           "(PGP"
         ],
+        "Interop Function": [
+          "End",
+          "Reset"
+        ],
+        "Asynchronous Indicator": [
+          "Mandatory",
+          "Optional",
+          "Prohibited"
+        ],
+        "Derivation Method": [
+          "AWS Signature Version 4",
+          "HKDF"
+        ],
+        "Data": [
+          "Decrypt",
+          "Encrypt",
+          "Hash",
+          "MAC MAC Data",
+          "RNG Retrieve",
+          "Sign Signature Data",
+          "Signature Verify"
+        ],
+        "Protection Level": [
+          "High",
+          "Low"
+        ],
         "Endpoint Role": [
+          "Client",
           "Server"
         ],
-        "Wrapping Method": [
-          "MAC/sign only",
-          "MAC/sign then encrypt."
-        ],
-        "Object Type": [
-          "Certificate Request"
+        "Link Type": [
+          "Wrapping Key Link"
         ],
         "Operation": [
           "Adjust Attribute",
@@ -19970,15 +20809,6 @@
           "Re-Provision",
           "Set Attribute",
           "Set Endpoint Role"
-        ],
-        "Derivation Method": [
-          "AWS Signature Version 4",
-          "HKDF"
-        ],
-        "Credential Type": [
-          "Hashed Password",
-          "One Time Password",
-          "Ticket"
         ],
         "Cryptographic Algorithm": [
           "ARIA",
@@ -19998,112 +20828,6 @@
           "SPHINCS-256",
           "XMSS"
         ],
-        "NIST Key Type": [
-          "Private authentication key",
-          "Private authorization key",
-          "Private ephemeral key agreement key",
-          "Private key transport key",
-          "Private signature key",
-          "Private static key agreement key",
-          "Public authentication key",
-          "Public authorization key",
-          "Public ephemeral key agreement key",
-          "Public key transport key",
-          "Public signature verification key",
-          "Public static key agreement key",
-          "Symmetric authentication key",
-          "Symmetric authorization key",
-          "Symmetric data encryption key",
-          "Symmetric key agreement key",
-          "Symmetric key wrapping key",
-          "Symmetric master key",
-          "Symmetric random number generation key"
-        ],
-        "Result Reason": [
-          "Attribute Instance Not Found",
-          "Attribute Not Found",
-          "Attribute Read Only",
-          "Attribute Single Instance",
-          "Authentication not successful",
-          "Bad Cryptographic Parameters",
-          "Bad Password",
-          "Codec Error",
-          "General failure",
-          "Illegal Object Type",
-          "Incompatible Cryptographic Usage Mask",
-          "Internal Server Error",
-          "Invalid Asynchronous Correlation Value",
-          "Invalid Attribute",
-          "Invalid Attribute Value",
-          "Invalid CSR",
-          "Invalid Correlation Value",
-          "Invalid Data Type",
-          "Invalid Object Type",
-          "Invalid Password",
-          "Invalid Ticket",
-          "Key Wrap Type Not Supported",
-          "Missing Initialization Vector",
-          "Missing data",
-          "Multi Valued Attribute",
-          "Non Unique Name Attribute",
-          "Numeric Range",
-          "Object Archived",
-          "Object Destroyed",
-          "Object Not Found",
-          "Object Type",
-          "Operation canceled by requester",
-          "PKCS#11 Codec Error",
-          "PKCS#11 Invalid Function",
-          "PKCS#11 Invalid Interface",
-          "Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable",
-          "Read Only Attribute",
-          "Server Limit Exceeded",
-          "Unknown Enumeration",
-          "Unknown Message Extension",
-          "Unknown Tag",
-          "Unsupported Attribute",
-          "Unsupported Cryptographic Parameters",
-          "Unsupported Protocol Version",
-          "Usage Limit Exceeded",
-          "Wrapping Object Archived",
-          "Wrapping Object Destroyed",
-          "Wrapping Object Not Found",
-          "Wrong Key Lifecycle State"
-        ],
-        "Data": [
-          "Decrypt",
-          "Encrypt",
-          "Hash",
-          "MAC MAC Data",
-          "RNG Retrieve",
-          "Sign Signature Data",
-          "Signature Verify"
-        ],
-        "Unique Identifier": [
-          "Certify",
-          "Create",
-          "Create Key Pair",
-          "Create Key Pair Private Key",
-          "Create Key Pair Public Key",
-          "Create Split Key",
-          "Derive Key",
-          "ID Placeholder",
-          "Import",
-          "Join Split Key",
-          "Locate",
-          "Re-certify",
-          "Re-key",
-          "Re-key Key Pair",
-          "Re-key Key Pair Private Key",
-          "Re-key Key Pair Public Key",
-          "Register"
-        ],
-        "Ticket Type": [
-          "Login"
-        ],
-        "Mask Generator": [
-          "MFG1"
-        ],
         "Item Type": [
           "Big Integer",
           "Boolean",
@@ -20114,11 +20838,18 @@
           "Integer",
           "Interval",
           "Long Integer",
+          "Structure",
           "Text String"
         ],
-        "Protection Level": [
-          "High",
-          "Low"
+        "Digital Signature Algorithm": [
+          "MD2 with RSA Encryption",
+          "MD5 with RSA Encryption",
+          "RSASSA-PSS",
+          "SHA-1 with RSA Encryption",
+          "SHA-224 with RSA Encryption",
+          "SHA-256 with RSA Encryption",
+          "SHA-384 with RSA Encryption",
+          "SHA-512 with RSA Encryption"
         ],
         "Profile Name": [
           "AES XTS Client",
@@ -20159,49 +20890,72 @@
           "XML Client",
           "XML Server"
         ],
+        "NIST Key Type": [
+          "Private authentication key",
+          "Private authorization key",
+          "Private ephemeral key agreement key",
+          "Private key transport key",
+          "Private signature key",
+          "Private static key agreement key",
+          "Public authentication key",
+          "Public authorization key",
+          "Public ephemeral key agreement key",
+          "Public key transport key",
+          "Public signature verification key",
+          "Public static key agreement key",
+          "Symmetric authentication key",
+          "Symmetric authorization key",
+          "Symmetric data encryption key",
+          "Symmetric key agreement key",
+          "Symmetric key wrapping key",
+          "Symmetric master key",
+          "Symmetric random number generation key"
+        ],
+        "Object Type": [
+          "Certificate Request"
+        ],
+        "Unique Identifier": [
+          "Certify",
+          "Create",
+          "Create Key Pair",
+          "Create Key Pair Private Key",
+          "Create Key Pair Public Key",
+          "Create Split Key",
+          "Derive Key",
+          "ID Placeholder",
+          "Import",
+          "Join Split Key",
+          "Locate",
+          "Re-certify",
+          "Re-key",
+          "Re-key Key Pair",
+          "Re-key Key Pair Private Key",
+          "Re-key Key Pair Public Key",
+          "Register"
+        ],
         "Query Function": [
           "Query Defaults Information",
           "Query Storage Protection Masks"
         ],
         "Key Format Type": [
-          "PKCS1",
-          "PKCS8",
-          "Several Transparent Key types"
+          "PKCS#10"
+        ],
+        "Adjustment Type": [
+          "Decrement",
+          "Increment",
+          "Negate"
+        ],
+        "Mask Generator": [
+          "MFG1"
+        ],
+        "Ticket Type": [
+          "Login"
         ],
         "Hashing Algorithm": [
           "SHA3-224",
           "SHA3-256",
           "SHA3-384",
           "SHA3-512"
-        ],
-        "Digital Signature Algorithm": [
-          "MD2 with RSA Encryption",
-          "MD5 with RSA Encryption",
-          "RSASSA-PSS",
-          "SHA-1 with RSA Encryption",
-          "SHA-224 with RSA Encryption",
-          "SHA-256 with RSA Encryption",
-          "SHA-384 with RSA Encryption",
-          "SHA-512 with RSA Encryption"
-        ],
-        "Asynchronous Indicator": [
-          "Optional",
-          "Prohibited"
-        ],
-        "Interop Function": [
-          "End",
-          "Reset"
-        ],
-        "Adjustment Type": [
-          "Decrement",
-          "Negate"
-        ],
-        "Link Type": [
-          "Wrapping Key Link"
-        ],
-        "Recommended Curve": [
-          "CURVE25519",
-          "CURVE448"
         ]
       },
       "tags": [
@@ -20549,8 +21303,22 @@
         "Rotate Name Type"
       ],
       "enum_values": {
+        "Rotate Name Type": [
+          "URI",
+          "Uninterpreted Text String"
+        ],
+        "Result Reason": [
+          "Constraint Violation",
+          "Duplicate Process Request",
+          "Unknown Object Group"
+        ],
         "Certificate Type": [
           "PGP"
+        ],
+        "Processing Stage": [
+          "Completed",
+          "In Process",
+          "Submitted"
         ],
         "Operation": [
           "Get Constraints",
@@ -20559,20 +21327,6 @@
           "Query Asynchronous Requests",
           "Set Constraints",
           "Set Defaults"
-        ],
-        "Processing Stage": [
-          "Completed",
-          "In Process",
-          "Submitted"
-        ],
-        "Result Reason": [
-          "Constraint Violation",
-          "Duplicate Process Request",
-          "Unknown Object Group"
-        ],
-        "Rotate Name Type": [
-          "URI",
-          "Uninterpreted Text String"
         ]
       },
       "tags": [
@@ -20604,17 +21358,23 @@
         "Split Key Polynomial"
       ],
       "enum_values": {
-        "Object Type": [
-          "Device Credential",
-          "Group",
-          "Hashed Password Credential",
-          "One Time Password Credential",
-          "Password Credential",
-          "User"
+        "Ephemeral": [
+          "Data",
+          "Empty",
+          "Unique Identifier"
         ],
-        "Object Class": [
-          "System",
-          "User"
+        "Deactivation Reason Code": [
+          "Deactivation Date",
+          "Protect Stop Date",
+          "Unspecified",
+          "Usage Limit"
+        ],
+        "Credential Type": [
+          "Certificate",
+          "Password"
+        ],
+        "Result Reason": [
+          "Circular Link Error"
         ],
         "Operation": [
           "Create Credential",
@@ -20623,9 +21383,13 @@
           "Deactivate",
           "Obliterate"
         ],
-        "Credential Type": [
-          "Certificate",
-          "Password"
+        "Object Class": [
+          "System",
+          "User"
+        ],
+        "Split Key Polynomial": [
+          "Polynomial-283",
+          "Polynomial-285"
         ],
         "Cryptographic Algorithm": [
           "ML-DSA-44",
@@ -20647,8 +21411,18 @@
           "SLH-DSA-SHAKE-256f",
           "SLH-DSA-SHAKE-256s"
         ],
-        "Result Reason": [
-          "Circular Link Error"
+        "Item Type": [
+          "Identifier",
+          "Name Reference",
+          "Reference"
+        ],
+        "Object Type": [
+          "Device Credential",
+          "Group",
+          "Hashed Password Credential",
+          "One Time Password Credential",
+          "Password Credential",
+          "User"
         ],
         "Unique Identifier": [
           "Create Credential",
@@ -20656,30 +21430,12 @@
           "Create User",
           "Re-Provision"
         ],
-        "Ephemeral": [
-          "Empty",
-          "Unique Identifier"
-        ],
-        "Item Type": [
-          "Identifier",
-          "Name Reference",
-          "Reference"
-        ],
-        "Deactivation Reason Code": [
-          "Deactivation Date",
-          "Protect Stop Date",
-          "Unspecified",
-          "Usage Limit"
-        ],
-        "OTP Algorithm": [
-          "TOTP"
-        ],
         "Query Function": [
           "Query Credential Information"
         ],
-        "Split Key Polynomial": [
-          "Polynomial-283",
-          "Polynomial-285"
+        "OTP Algorithm": [
+          "HOTP",
+          "TOTP"
         ]
       },
       "tags": [
@@ -20752,48 +21508,29 @@
     },
     "2.0": {
       "enum_values": {
+        "Result Reason": [
+          "Illegal Operation",
+          "Index Out of Bounds",
+          "Object archived"
+        ],
         "Certificate Type": [
           "PGP"
-        ],
-        "Encoding Option": [
-          "No Encoding"
-        ],
-        "Wrapping Method": [
-          "Encrypt",
-          "MAC/sign",
-          "MAC/sign then encrypt"
         ],
         "Certificate Request Type": [
           "PGP"
         ],
-        "Batch Error Continuation Option": [
-          "Undo"
-        ],
-        "Cancellation Result": [
-          "Canceled"
-        ],
-        "Object Type": [
-          "Template"
-        ],
-        "Client Registration Method": [
-          "Server Pre-Generated",
-          "Unspecified"
-        ],
         "Derivation Method": [
           "PBKDF2"
         ],
-        "Result Reason": [
-          "Application Namespace Not Supported",
-          "Authentication Not Successful",
-          "General Failure",
-          "Illegal Operation",
-          "Index Out of Bounds",
-          "Missing Data",
-          "Object archived",
-          "Operation Canceled By Requester"
-        ],
-        "Mask Generator": [
-          "MGF1"
+        "Digital Signature Algorithm": [
+          "MD2 with RSA Encryption (PKCS#1 v1.5)",
+          "MD5 with RSA Encryption (PKCS#1 v1.5)",
+          "RSASSA-PSS (PKCS#1 v2.1)",
+          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
         ],
         "Profile Name": [
           "Advanced Cryptographic Client KMIP v1.2",
@@ -20953,45 +21690,25 @@
           "XML Server KMIP v1.3",
           "XML Server KMIP v1.4"
         ],
+        "Object Type": [
+          "Template"
+        ],
         "Key Format Type": [
-          "PKCS#1",
-          "PKCS#12",
-          "PKCS#8",
-          "Raw",
-          "Transparent DH Private Key",
-          "Transparent DH Public Key",
-          "Transparent DSA Private Key",
-          "Transparent DSA Public Key",
-          "Transparent EC Private Key",
-          "Transparent EC Public Key",
           "Transparent ECDH Private Key",
           "Transparent ECDH Public Key",
           "Transparent ECDSA Private Key",
           "Transparent ECDSA Public Key",
           "Transparent ECMQV Private Key",
-          "Transparent ECMQV Public Key",
-          "Transparent RSA Private Key",
-          "Transparent RSA Public Key",
-          "Transparent Symmetric Key"
+          "Transparent ECMQV Public Key"
+        ],
+        "Mask Generator": [
+          "MGF1"
         ],
         "Hashing Algorithm": [
           "SHA-3-224",
           "SHA-3-256",
           "SHA-3-384",
           "SHA-3-512"
-        ],
-        "Digital Signature Algorithm": [
-          "MD2 with RSA Encryption (PKCS#1 v1.5)",
-          "MD5 with RSA Encryption (PKCS#1 v1.5)",
-          "RSASSA-PSS (PKCS#1 v2.1)",
-          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
-        ],
-        "Link Type": [
-          "Private Key Link"
         ]
       },
       "tags": []
@@ -21006,20 +21723,16 @@
     },
     "3.0": {
       "enum_values": {
+        "Rotate Name Type": [
+          "URI",
+          "Uninterpreted Text String"
+        ],
         "Name Type": [
           "URI",
           "Uninterpreted Text String"
         ],
         "Result Reason": [
           "Unknown Object Group"
-        ],
-        "Rotate Name Type": [
-          "URI",
-          "Uninterpreted Text String"
-        ],
-        "Object Group Member": [
-          "Group Member Default",
-          "Group Member Fresh"
         ],
         "Link Type": [
           "Certificate Link",
@@ -21031,10 +21744,15 @@
           "PKCS#12 Password Link",
           "Parent Link",
           "Previous Link",
+          "Private Key Link",
           "Public Key Link",
           "Replaced Object Link",
           "Replacement Object Link",
           "Wrapping Key Link"
+        ],
+        "Object Group Member": [
+          "Group Member Default",
+          "Group Member Fresh"
         ]
       },
       "tags": [

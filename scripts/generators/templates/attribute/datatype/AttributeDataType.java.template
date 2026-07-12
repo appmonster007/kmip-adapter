@@ -25,7 +25,7 @@ import java.util.Set;
 public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
     public static final KmipTag kmipTag = KmipTag.Standard.{{ATTRIBUTE_NAME_SNAKE}}.inst();
     public static final EncodingType encodingType = EncodingType.{{ENCODING_TYPE}};
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0); // TODO: Narrow to only the versions that introduce this attribute
+    private static final Set<KmipSpec> supportedVersions = {{SUPPORTED_VERSIONS}}; // introduced in KMIP {{KMIP_VERSION}} — extend if present in later specs
 
     static {
         for (KmipSpec spec : supportedVersions) {

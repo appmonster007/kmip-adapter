@@ -19,7 +19,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ATTRIBUT
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2; // TODO: Adjust if needed
+        defaultSpec = {{DEFAULT_SPEC}};
     }
 
     @Override

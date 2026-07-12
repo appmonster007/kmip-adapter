@@ -23,7 +23,7 @@ class {{ENUM_NAME}}Test extends AbstractKmipEnumerationTestSuite<{{ENUM_NAME}}> 
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = {{DEFAULT_SPEC}};
     }
 
     @Override

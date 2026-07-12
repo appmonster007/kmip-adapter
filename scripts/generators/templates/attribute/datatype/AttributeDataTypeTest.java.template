@@ -22,7 +22,7 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{ATTRIBUTE_N
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2; // TODO: Adjust default spec if needed
+        defaultSpec = {{DEFAULT_SPEC}};
     }
 
     @Override

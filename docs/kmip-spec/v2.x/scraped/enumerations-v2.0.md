@@ -1,6 +1,6 @@
-# KMIP 2.1 — Enumerations
+# KMIP 2.0 — Enumerations
 
-Total: **60** enumeration types
+Total: **58** enumeration types
 
 ## Adjustment Type
 
@@ -92,7 +92,7 @@ Total: **60** enumeration types
 | Name  | Hex        | Description |
 | ----- | ---------- | ----------- |
 | X.509 | 0x00000001 |  |
-| PGP   | 0x00000002 |  |
+| (PGP  | 0x00000002 |  |
 
 ## Client Registration Method
 
@@ -472,67 +472,61 @@ Total: **60** enumeration types
 
 ## Operation
 
-| Name                        | Hex        | Description |
-| --------------------------- | ---------- | ----------- |
-| Create                      | 0x00000001 |  |
-| Create Key Pair             | 0x00000002 |  |
-| Register                    | 0x00000003 |  |
-| Re-key                      | 0x00000004 |  |
-| Derive Key                  | 0x00000005 |  |
-| Certify                     | 0x00000006 |  |
-| Re-certify                  | 0x00000007 |  |
-| Locate                      | 0x00000008 |  |
-| Check                       | 0x00000009 |  |
-| Get                         | 0x0000000A |  |
-| Get Attributes              | 0x0000000B |  |
-| Get Attribute List          | 0x0000000C |  |
-| Add Attribute               | 0x0000000D |  |
-| Modify Attribute            | 0x0000000E |  |
-| Delete Attribute            | 0x0000000F |  |
-| Obtain Lease                | 0x00000010 |  |
-| Get Usage Allocation        | 0x00000011 |  |
-| Activate                    | 0x00000012 |  |
-| Revoke                      | 0x00000013 |  |
-| Destroy                     | 0x00000014 |  |
-| Archive                     | 0x00000015 |  |
-| Recover                     | 0x00000016 |  |
-| Validate                    | 0x00000017 |  |
-| Query                       | 0x00000018 |  |
-| Cancel                      | 0x00000019 |  |
-| Poll                        | 0x0000001A |  |
-| Notify                      | 0x0000001B |  |
-| Put                         | 0x0000001C |  |
-| Re-key Key Pair             | 0x0000001D |  |
-| Discover Versions           | 0x0000001E |  |
-| Encrypt                     | 0x0000001F |  |
-| Decrypt                     | 0x00000020 |  |
-| Sign                        | 0x00000021 |  |
-| Signature Verify            | 0x00000022 |  |
-| MAC                         | 0x00000023 |  |
-| MAC Verify                  | 0x00000024 |  |
-| RNG Retrieve                | 0x00000025 |  |
-| RNG Seed                    | 0x00000026 |  |
-| Hash                        | 0x00000027 |  |
-| Create Split Key            | 0x00000028 |  |
-| Join Split Key              | 0x00000029 |  |
-| Import                      | 0x0000002A |  |
-| Export                      | 0x0000002B |  |
-| Log                         | 0x0000002C |  |
-| Login                       | 0x0000002D |  |
-| Logout                      | 0x0000002E |  |
-| Delegated Login             | 0x0000002F |  |
-| Adjust Attribute            | 0x00000030 |  |
-| Set Attribute               | 0x00000031 |  |
-| Set Endpoint Role           | 0x00000032 |  |
-| PKCS#11                     | 0x00000033 |  |
-| Interop                     | 0x00000034 |  |
-| Re-Provision                | 0x00000035 |  |
-| Set Defaults                | 0x00000036 |  |
-| Set Constraints             | 0x00000037 |  |
-| Get Constraints             | 0x00000038 |  |
-| Query Asynchronous Requests | 0x00000039 |  |
-| Process                     | 0x0000003A |  |
-| Ping                        | 0x0000003B |  |
+| Name                 | Hex        | Description |
+| -------------------- | ---------- | ----------- |
+| Create               | 0x00000001 |  |
+| Create Key Pair      | 0x00000002 |  |
+| Register             | 0x00000003 |  |
+| Re-key               | 0x00000004 |  |
+| Derive Key           | 0x00000005 |  |
+| Certify              | 0x00000006 |  |
+| Re-certify           | 0x00000007 |  |
+| Locate               | 0x00000008 |  |
+| Check                | 0x00000009 |  |
+| Get                  | 0x0000000A |  |
+| Get Attributes       | 0x0000000B |  |
+| Get Attribute List   | 0x0000000C |  |
+| Add Attribute        | 0x0000000D |  |
+| Modify Attribute     | 0x0000000E |  |
+| Delete Attribute     | 0x0000000F |  |
+| Obtain Lease         | 0x00000010 |  |
+| Get Usage Allocation | 0x00000011 |  |
+| Activate             | 0x00000012 |  |
+| Revoke               | 0x00000013 |  |
+| Destroy              | 0x00000014 |  |
+| Archive              | 0x00000015 |  |
+| Recover              | 0x00000016 |  |
+| Validate             | 0x00000017 |  |
+| Query                | 0x00000018 |  |
+| Cancel               | 0x00000019 |  |
+| Poll                 | 0x0000001A |  |
+| Notify               | 0x0000001B |  |
+| Put                  | 0x0000001C |  |
+| Re-key Key Pair      | 0x0000001D |  |
+| Discover Versions    | 0x0000001E |  |
+| Encrypt              | 0x0000001F |  |
+| Decrypt              | 0x00000020 |  |
+| Sign                 | 0x00000021 |  |
+| Signature Verify     | 0x00000022 |  |
+| MAC                  | 0x00000023 |  |
+| MAC Verify           | 0x00000024 |  |
+| RNG Retrieve         | 0x00000025 |  |
+| RNG Seed             | 0x00000026 |  |
+| Hash                 | 0x00000027 |  |
+| Create Split Key     | 0x00000028 |  |
+| Join Split Key       | 0x00000029 |  |
+| Import               | 0x0000002A |  |
+| Export               | 0x0000002B |  |
+| Log                  | 0x0000002C |  |
+| Login                | 0x0000002D |  |
+| Logout               | 0x0000002E |  |
+| Delegated Login      | 0x0000002F |  |
+| Adjust Attribute     | 0x00000030 |  |
+| Set Attribute        | 0x00000031 |  |
+| Set Endpoint Role    | 0x00000032 |  |
+| PKCS#11              | 0x00000033 |  |
+| Interop              | 0x00000034 |  |
+| Re-Provision         | 0x00000035 |  |
 
 ## Padding Method
 
@@ -548,14 +542,6 @@ Total: **60** enumeration types
 | PKCS1 v1.5 | 0x00000008 |  |
 | X9.31      | 0x00000009 |  |
 | PSS        | 0x0000000A |  |
-
-## Processing Stage
-
-| Name       | Hex        | Description |
-| ---------- | ---------- | ----------- |
-| Submitted  | 0x00000001 |  |
-| In Process | 0x00000002 |  |
-| Completed  | 0x00000003 |  |
 
 ## Profile Name
 
@@ -774,7 +760,7 @@ Total: **60** enumeration types
 | Invalid Attribute Value                | 0x0000002D | The value supplied for an attribute is invalid |
 | Invalid Correlation Value              | 0x0000002E | For streaming cryptographic operations |
 | Invalid CSR                            | 0x0000002F | Invalid Certifcate Signing Request |
-| Invalid Object Type                    | 0x00000030 | Specified object is not valid for the requested operation |
+| Invalid Object Type                    | 0x00000030 | Specificed object is not valid for the requested operation |
 | Key Wrap Type Not Supported            | 0x00000032 | Key Wrap Type Type is not supported by the server |
 | Missing Initialization Vector          | 0x00000034 | Missing IV when required for crypto operation |
 | Non Unique Name Attribute              | 0x00000035 | Trying to perform an operation that requests the server to break the constraint on Name attribute being unique |
@@ -797,9 +783,6 @@ Total: **60** enumeration types
 | PKCS#11 Invalid Interface              | 0x00000047 | The interface is unknown or unavailable in the server |
 | Private Protection Storage Unavailable | 0x00000048 |  |
 | Public Protection Storage Unavailable  | 0x00000049 |  |
-| Unknown Object Group                   | 0x0000004A | <insert> |
-| Constraint Violation                   | 0x0000004B | The request failed because one or more constraints were violated |
-| Duplicate Process Request              | 0x0000004C | The asynchronous request specified was already processed |
 | General Failure                        | 0x00000100 |  |
 
 ## Result Status
@@ -822,13 +805,6 @@ Total: **60** enumeration types
 | Superseded             | 0x00000005 |  |
 | Cessation of Operation | 0x00000006 |  |
 | Privilege Withdrawn    | 0x00000007 |  |
-
-## Rotate Name Type
-
-| Name                      | Hex        | Description |
-| ------------------------- | ---------- | ----------- |
-| Uninterpreted Text String | 0x00000001 |  |
-| URI                       | 0x00000002 |  |
 
 ## Secret Data Type
 

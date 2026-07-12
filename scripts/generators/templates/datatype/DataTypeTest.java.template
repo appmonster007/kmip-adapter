@@ -18,7 +18,7 @@ class {{DATA_NAME}}Test extends AbstractKmipDataTypeTestSuite<{{DATA_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = {{DEFAULT_SPEC}};
     }
 
     @Override

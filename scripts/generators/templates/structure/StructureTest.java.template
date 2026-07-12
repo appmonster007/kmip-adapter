@@ -22,7 +22,7 @@ class {{STRUCTURE_NAME}}Test extends AbstractKmipStructureTestSuite<{{STRUCTURE_
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = {{DEFAULT_SPEC}};
     }
 
     @Override

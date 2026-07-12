@@ -15,6 +15,52 @@ readonly TEST_JAVA="src/test/java/org/purpleBean/kmip"
 readonly TEMPLATE_BASE_DIR="scripts/generators/templates"
 readonly UNIFIED_TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/unified"
 
+# --- Version helpers ---
+
+# Compute SUPPORTED_VERSIONS and DEFAULT_SPEC from a module name.
+# Sets variables in the caller's scope.
+compute_version_vars() {
+    local module="$1"
+    case "${module}" in
+        "core"|"v1_2")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)"
+            DEFAULT_SPEC="KmipSpec.V1_2"
+            KMIP_VERSION="1.2"
+            ;;
+        "v1_3")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_3)"
+            DEFAULT_SPEC="KmipSpec.V1_3"
+            KMIP_VERSION="1.3"
+            ;;
+        "v1_4")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_4)"
+            DEFAULT_SPEC="KmipSpec.V1_4"
+            KMIP_VERSION="1.4"
+            ;;
+        "v2_0")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_0)"
+            DEFAULT_SPEC="KmipSpec.V2_0"
+            KMIP_VERSION="2.0"
+            ;;
+        "v2_1")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0)"
+            DEFAULT_SPEC="KmipSpec.V2_1"
+            KMIP_VERSION="2.1"
+            ;;
+        "v3_0")
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0)"
+            DEFAULT_SPEC="KmipSpec.V3_0"
+            KMIP_VERSION="3.0"
+            ;;
+        *)
+            echo "Warning: Unknown module '${module}', defaulting to core (KMIP 1.2)"
+            SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)"
+            DEFAULT_SPEC="KmipSpec.V1_2"
+            KMIP_VERSION="1.2"
+            ;;
+    esac
+}
+
 # --- Main ---
 main() {
     if [[ $# -lt 1 ]]; then
@@ -168,6 +214,9 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUPPORTED_VERSIONS DEFAULT_SPEC KMIP_VERSION
+    compute_version_vars "${module}"
+
     local SUB_PATH="model/${module}"
     if [[ -n "${sub_package}" ]]; then
         SUB_PATH="${SUB_PATH}/enumeration/${sub_package}"
@@ -193,7 +242,9 @@ EOF
             fi
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${ENUM_NAME}.java" \
                 "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ENUM_NAME_SNAKE" "${ENUM_NAME_SNAKE}" \
-                "ATTRIBUTE_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME_SNAKE" "${ENUM_NAME_SNAKE}"
+                "ATTRIBUTE_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME_SNAKE" "${ENUM_NAME_SNAKE}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" \
+                "KMIP_VERSION" "${KMIP_VERSION}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${ENUM_NAME}"
         fi
 
@@ -205,7 +256,9 @@ EOF
                 test_template="${TEMPLATE_DIR}/EnumTest.java.template"
             fi
             render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${ENUM_NAME}Test.java" \
-                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME" "${ENUM_NAME}"
+                "pdot" "${pdot}" "ENUM_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME" "${ENUM_NAME}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" \
+                "KMIP_VERSION" "${KMIP_VERSION}"
         fi
 
         local create_default="${ENUM_NAME}.Standard.values()[0].inst()"
@@ -300,6 +353,9 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUPPORTED_VERSIONS DEFAULT_SPEC KMIP_VERSION
+    compute_version_vars "${module}"
+
     local SUB_PATH="model/${module}"
     if [[ -n "${sub_package}" ]]; then
         SUB_PATH="${SUB_PATH}/type/${sub_package}"
@@ -325,7 +381,8 @@ EOF
             fi
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${DATA_NAME}.java" \
                 "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}" \
-                "ATTRIBUTE_NAME" "${DATA_NAME}" "ATTRIBUTE_NAME_SNAKE" "${DATA_NAME_SNAKE}" "ATTRIBUTE_VALUE_TYPE" "${ATTRIBUTE_VALUE_TYPE}"
+                "ATTRIBUTE_NAME" "${DATA_NAME}" "ATTRIBUTE_NAME_SNAKE" "${DATA_NAME_SNAKE}" "ATTRIBUTE_VALUE_TYPE" "${ATTRIBUTE_VALUE_TYPE}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${DATA_NAME}"
         fi
 
@@ -338,7 +395,8 @@ EOF
             fi
             render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${DATA_NAME}Test.java" \
                 "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DEFAULT_VALUE" "${DEFAULT_VALUE}" "ENCODING_TYPE" "${ENCODING_TYPE}" "DATA_TYPE" "${DATA_TYPE}" \
-                "ATTRIBUTE_NAME" "${DATA_NAME}"
+                "ATTRIBUTE_NAME" "${DATA_NAME}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
         fi
 
         if ${GEN_JSON_SER}; then generate_unified_serializer "${DATA_NAME}" "${SUB_PATH}" "json"; fi
@@ -416,6 +474,9 @@ EOF
         GEN_TTLV_TEST=true; GEN_BENCHMARK=true
     fi
 
+    local SUPPORTED_VERSIONS DEFAULT_SPEC KMIP_VERSION
+    compute_version_vars "${module}"
+
     local SUB_PATH="model/${module}"
     if [[ -n "${sub_package}" ]]; then
         SUB_PATH="${SUB_PATH}/structure/${sub_package}"
@@ -443,7 +504,8 @@ EOF
             fi
             render_template "${class_template}" "${MAIN_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
-                "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}"
+                "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
             add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${STRUCTURE_NAME}"
         fi
 
@@ -455,7 +517,8 @@ EOF
                 test_template="${TEMPLATE_DIR}/StructureTest.java.template"
             fi
             render_template "${test_template}" "${TEST_JAVA}/${SUB_PATH}/${STRUCTURE_NAME}Test.java" \
-                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME" "${STRUCTURE_NAME}"
+                "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" \
+                "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
         fi
 
         if ${GEN_JSON_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "json"; fi
