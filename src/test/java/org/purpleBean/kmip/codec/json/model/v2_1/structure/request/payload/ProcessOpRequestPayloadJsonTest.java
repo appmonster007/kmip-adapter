@@ -23,11 +23,11 @@ class ProcessOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite
 
     @Override
     public ProcessOpRequestPayload createDefault() {
-        return ProcessOpRequestPayload.builder().build();
+        return ProcessOpRequestPayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("test-id")).build();
     }
 
     @Override
     public ProcessOpRequestPayload createVariant() {
-        return ProcessOpRequestPayload.builder().build();
+        return ProcessOpRequestPayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("variant-id")).build();
     }
 }

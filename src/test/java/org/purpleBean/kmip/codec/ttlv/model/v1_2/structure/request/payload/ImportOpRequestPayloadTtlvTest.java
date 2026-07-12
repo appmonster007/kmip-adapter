@@ -20,14 +20,20 @@ class ImportOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<
     public Class<ImportOpRequestPayload> type() {
         return ImportOpRequestPayload.class;
     }
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+
 
     @Override
     public ImportOpRequestPayload createDefault() {
-        return ImportOpRequestPayload.builder().build();
+        return ImportOpRequestPayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
     }
 
     @Override
     public ImportOpRequestPayload createVariant() {
-        return ImportOpRequestPayload.builder().build();
+        return ImportOpRequestPayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x02}))).build();
     }
 }

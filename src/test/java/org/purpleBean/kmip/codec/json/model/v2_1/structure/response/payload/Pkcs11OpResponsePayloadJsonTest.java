@@ -23,11 +23,11 @@ class Pkcs11OpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite
 
     @Override
     public Pkcs11OpResponsePayload createDefault() {
-        return Pkcs11OpResponsePayload.builder().build();
+        return Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(Pkcs11ReturnCode.of(0)).build();
     }
 
     @Override
     public Pkcs11OpResponsePayload createVariant() {
-        return Pkcs11OpResponsePayload.builder().build();
+        return Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(Pkcs11ReturnCode.of(1)).build();
     }
 }

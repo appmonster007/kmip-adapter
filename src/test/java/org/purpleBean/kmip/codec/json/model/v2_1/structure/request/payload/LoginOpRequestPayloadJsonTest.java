@@ -20,14 +20,20 @@ class LoginOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<L
     public Class<LoginOpRequestPayload> type() {
         return LoginOpRequestPayload.class;
     }
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+
 
     @Override
     public LoginOpRequestPayload createDefault() {
-        return LoginOpRequestPayload.builder().build();
+        return LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("user", "pass"))).build();
     }
 
     @Override
     public LoginOpRequestPayload createVariant() {
-        return LoginOpRequestPayload.builder().build();
+        return LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("admin", "secret"))).build();
     }
 }

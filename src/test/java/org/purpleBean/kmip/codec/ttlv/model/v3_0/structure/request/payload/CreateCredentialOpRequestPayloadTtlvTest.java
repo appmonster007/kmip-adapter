@@ -20,14 +20,20 @@ class CreateCredentialOpRequestPayloadTtlvTest extends AbstractTtlvSerialization
     public Class<CreateCredentialOpRequestPayload> type() {
         return CreateCredentialOpRequestPayload.class;
     }
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V3_0;
+    }
+
+
 
     @Override
     public CreateCredentialOpRequestPayload createDefault() {
-        return CreateCredentialOpRequestPayload.builder().build();
+        return CreateCredentialOpRequestPayload.builder().credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst()).credentialValue(UsernameAndPassword.of("user", "pass")).build();
     }
 
     @Override
     public CreateCredentialOpRequestPayload createVariant() {
-        return CreateCredentialOpRequestPayload.builder().build();
+        return CreateCredentialOpRequestPayload.builder().credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst()).credentialValue(UsernameAndPassword.of("admin", "secret")).build();
     }
 }

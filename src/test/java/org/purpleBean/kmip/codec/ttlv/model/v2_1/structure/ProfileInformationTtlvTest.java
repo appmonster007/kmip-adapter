@@ -23,11 +23,11 @@ class ProfileInformationTtlvTest extends AbstractTtlvSerializationTestSuite<Prof
 
     @Override
     public ProfileInformation createDefault() {
-        return ProfileInformation.builder().build();
+        return ProfileInformation.of(ProfileName.Standard.COMPLETE_SERVER_BASIC.inst());
     }
 
     @Override
     public ProfileInformation createVariant() {
-        return ProfileInformation.builder().build();
+        return ProfileInformation.of(ProfileName.Standard.COMPLETE_SERVER_BASIC.inst());
     }
 }

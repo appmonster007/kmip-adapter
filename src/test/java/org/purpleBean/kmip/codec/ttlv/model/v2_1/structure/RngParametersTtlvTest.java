@@ -23,11 +23,11 @@ class RngParametersTtlvTest extends AbstractTtlvSerializationTestSuite<RngParame
 
     @Override
     public RngParameters createDefault() {
-        return RngParameters.builder().build();
+        return RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst());
     }
 
     @Override
     public RngParameters createVariant() {
-        return RngParameters.builder().build();
+        return RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst());
     }
 }

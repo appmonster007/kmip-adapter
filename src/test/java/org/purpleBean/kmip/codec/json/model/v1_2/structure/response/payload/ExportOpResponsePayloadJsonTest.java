@@ -20,14 +20,20 @@ class ExportOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite
     public Class<ExportOpResponsePayload> type() {
         return ExportOpResponsePayload.class;
     }
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+
 
     @Override
     public ExportOpResponsePayload createDefault() {
-        return ExportOpResponsePayload.builder().build();
+        return ExportOpResponsePayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-1")).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
     }
 
     @Override
     public ExportOpResponsePayload createVariant() {
-        return ExportOpResponsePayload.builder().build();
+        return ExportOpResponsePayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-2")).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x02}))).build();
     }
 }

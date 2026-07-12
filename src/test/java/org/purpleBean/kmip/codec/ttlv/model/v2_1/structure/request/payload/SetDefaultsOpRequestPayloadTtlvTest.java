@@ -23,11 +23,11 @@ class SetDefaultsOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestS
 
     @Override
     public SetDefaultsOpRequestPayload createDefault() {
-        return SetDefaultsOpRequestPayload.builder().build();
+        return SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(java.util.List.of(ObjectDefaults.of(ObjectType.Standard.CERTIFICATE.inst(), Attributes.of(java.util.List.of()))))).build();
     }
 
     @Override
     public SetDefaultsOpRequestPayload createVariant() {
-        return SetDefaultsOpRequestPayload.builder().build();
+        return SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(java.util.List.of(ObjectDefaults.of(ObjectType.Standard.SYMMETRIC_KEY.inst(), Attributes.of(java.util.List.of()))))).build();
     }
 }

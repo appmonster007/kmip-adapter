@@ -13,6 +13,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.core.enumeration.Pkcs11Function;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
+import java.util.Set;
+
 @DisplayName("Pkcs11Function Ttlv Serialization Tests")
 class Pkcs11FunctionTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs11Function> {
 
@@ -23,11 +25,11 @@ class Pkcs11FunctionTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs11Fu
 
     @Override
     public Pkcs11Function createDefault() {
-        return Pkcs11Function.Standard.values()[0].inst();
+        return Pkcs11Function.register(0x80000031, "X-Ttlv-Default", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     public Pkcs11Function createVariant() {
-        return Pkcs11Function.Standard.values()[1].inst();
+        return Pkcs11Function.register(0x80000032, "X-Ttlv-Variant", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

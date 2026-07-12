@@ -23,11 +23,11 @@ class CreateUserOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSu
 
     @Override
     public CreateUserOpRequestPayload createDefault() {
-        return CreateUserOpRequestPayload.builder().build();
+        return CreateUserOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
     }
 
     @Override
     public CreateUserOpRequestPayload createVariant() {
-        return CreateUserOpRequestPayload.builder().build();
+        return CreateUserOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
     }
 }

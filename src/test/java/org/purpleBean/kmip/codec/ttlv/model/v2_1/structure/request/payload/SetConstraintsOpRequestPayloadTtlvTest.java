@@ -23,11 +23,11 @@ class SetConstraintsOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTe
 
     @Override
     public SetConstraintsOpRequestPayload createDefault() {
-        return SetConstraintsOpRequestPayload.builder().build();
+        return SetConstraintsOpRequestPayload.builder().constraints(Constraints.of(java.util.List.of())).build();
     }
 
     @Override
     public SetConstraintsOpRequestPayload createVariant() {
-        return SetConstraintsOpRequestPayload.builder().build();
+        return SetConstraintsOpRequestPayload.builder().constraints(Constraints.of(java.util.List.of())).build();
     }
 }

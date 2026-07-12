@@ -20,14 +20,20 @@ class DelegatedLoginOpRequestPayloadXmlTest extends AbstractXmlSerializationTest
     public Class<DelegatedLoginOpRequestPayload> type() {
         return DelegatedLoginOpRequestPayload.class;
     }
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+
 
     @Override
     public DelegatedLoginOpRequestPayload createDefault() {
-        return DelegatedLoginOpRequestPayload.builder().build();
+        return DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("user", "pass"))).build();
     }
 
     @Override
     public DelegatedLoginOpRequestPayload createVariant() {
-        return DelegatedLoginOpRequestPayload.builder().build();
+        return DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("admin", "secret"))).build();
     }
 }

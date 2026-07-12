@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.core.structure.RandomNumberGenerator;
+import org.purpleBean.kmip.model.v2_1.structure.RngParameters;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RandomNumberGenerator Ttlv Serialization Tests")
@@ -23,11 +24,11 @@ class RandomNumberGeneratorTtlvTest extends AbstractTtlvSerializationTestSuite<R
 
     @Override
     public RandomNumberGenerator createDefault() {
-        return RandomNumberGenerator.builder().build();
+        return RandomNumberGenerator.of(RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst()));
     }
 
     @Override
     public RandomNumberGenerator createVariant() {
-        return RandomNumberGenerator.builder().build();
+        return RandomNumberGenerator.of(RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst()));
     }
 }

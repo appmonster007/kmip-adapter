@@ -23,11 +23,11 @@ class CreateGroupOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSui
 
     @Override
     public CreateGroupOpRequestPayload createDefault() {
-        return CreateGroupOpRequestPayload.builder().build();
+        return CreateGroupOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
     }
 
     @Override
     public CreateGroupOpRequestPayload createVariant() {
-        return CreateGroupOpRequestPayload.builder().build();
+        return CreateGroupOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
     }
 }

@@ -23,11 +23,11 @@ class GetConstraintsOpResponsePayloadJsonTest extends AbstractJsonSerializationT
 
     @Override
     public GetConstraintsOpResponsePayload createDefault() {
-        return GetConstraintsOpResponsePayload.builder().build();
+        return GetConstraintsOpResponsePayload.builder().constraints(Constraints.of(java.util.List.of())).build();
     }
 
     @Override
     public GetConstraintsOpResponsePayload createVariant() {
-        return GetConstraintsOpResponsePayload.builder().build();
+        return GetConstraintsOpResponsePayload.builder().constraints(Constraints.of(java.util.List.of())).build();
     }
 }

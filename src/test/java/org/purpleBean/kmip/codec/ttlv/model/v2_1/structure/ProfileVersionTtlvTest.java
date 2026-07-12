@@ -23,11 +23,11 @@ class ProfileVersionTtlvTest extends AbstractTtlvSerializationTestSuite<ProfileV
 
     @Override
     public ProfileVersion createDefault() {
-        return ProfileVersion.builder().build();
+        return ProfileVersion.of(2, 1);
     }
 
     @Override
     public ProfileVersion createVariant() {
-        return ProfileVersion.builder().build();
+        return ProfileVersion.of(3, 0);
     }
 }

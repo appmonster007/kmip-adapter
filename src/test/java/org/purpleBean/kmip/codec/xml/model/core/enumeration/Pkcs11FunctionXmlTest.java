@@ -13,6 +13,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.core.enumeration.Pkcs11Function;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
+import java.util.Set;
+
 @DisplayName("Pkcs11Function Xml Serialization Tests")
 class Pkcs11FunctionXmlTest extends AbstractXmlSerializationTestSuite<Pkcs11Function> {
 
@@ -23,11 +25,11 @@ class Pkcs11FunctionXmlTest extends AbstractXmlSerializationTestSuite<Pkcs11Func
 
     @Override
     public Pkcs11Function createDefault() {
-        return Pkcs11Function.Standard.values()[0].inst();
+        return Pkcs11Function.register(0x80000041, "X-Xml-Default", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     public Pkcs11Function createVariant() {
-        return Pkcs11Function.Standard.values()[1].inst();
+        return Pkcs11Function.register(0x80000042, "X-Xml-Variant", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 }

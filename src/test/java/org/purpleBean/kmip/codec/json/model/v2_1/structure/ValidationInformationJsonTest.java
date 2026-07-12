@@ -11,6 +11,8 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.ValidationInformation;
+import org.purpleBean.kmip.model.v2_1.type.ValidationVersionMajor;
+import org.purpleBean.kmip.model.v2_1.type.ValidationLevel;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ValidationInformation Json Serialization Tests")
@@ -23,11 +25,19 @@ class ValidationInformationJsonTest extends AbstractJsonSerializationTestSuite<V
 
     @Override
     public ValidationInformation createDefault() {
-        return ValidationInformation.builder().build();
+        return ValidationInformation.of(
+                ValidationAuthorityType.Standard.UNSPECIFIED.inst(),
+                ValidationVersionMajor.of(1),
+                ValidationType.Standard.UNSPECIFIED.inst(),
+                ValidationLevel.of(1));
     }
 
     @Override
     public ValidationInformation createVariant() {
-        return ValidationInformation.builder().build();
+        return ValidationInformation.of(
+                ValidationAuthorityType.Standard.UNSPECIFIED.inst(),
+                ValidationVersionMajor.of(1),
+                ValidationType.Standard.UNSPECIFIED.inst(),
+                ValidationLevel.of(2));
     }
 }

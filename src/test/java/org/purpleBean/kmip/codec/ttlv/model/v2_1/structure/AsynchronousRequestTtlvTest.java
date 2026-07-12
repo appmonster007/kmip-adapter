@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.AsynchronousRequest;
+import org.purpleBean.kmip.model.v2_1.type.SubmissionDate;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AsynchronousRequest Ttlv Serialization Tests")
@@ -23,11 +24,19 @@ class AsynchronousRequestTtlvTest extends AbstractTtlvSerializationTestSuite<Asy
 
     @Override
     public AsynchronousRequest createDefault() {
-        return AsynchronousRequest.builder().build();
+        return AsynchronousRequest.of(
+                AsynchronousCorrelationValue.of(new byte[]{0x01}),
+                Operation.Standard.CREATE.inst(),
+                SubmissionDate.of(OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)),
+                ProcessingStage.Standard.SUBMITTED.inst());
     }
 
     @Override
     public AsynchronousRequest createVariant() {
-        return AsynchronousRequest.builder().build();
+        return AsynchronousRequest.of(
+                AsynchronousCorrelationValue.of(new byte[]{0x02}),
+                Operation.Standard.GET.inst(),
+                SubmissionDate.of(OffsetDateTime.of(2024, 6, 1, 0, 0, 0, 0, ZoneOffset.UTC)),
+                ProcessingStage.Standard.SUBMITTED.inst());
     }
 }

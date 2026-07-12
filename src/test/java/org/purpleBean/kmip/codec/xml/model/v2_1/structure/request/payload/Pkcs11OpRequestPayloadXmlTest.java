@@ -23,11 +23,11 @@ class Pkcs11OpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Pk
 
     @Override
     public Pkcs11OpRequestPayload createDefault() {
-        return Pkcs11OpRequestPayload.builder().build();
+        return Pkcs11OpRequestPayload.builder().pkcs11Function(Pkcs11Function.register(0x80000003, "X-Test-Fn", java.util.Set.of(org.purpleBean.kmip.api.KmipSpec.UnknownVersion)).inst()).build();
     }
 
     @Override
     public Pkcs11OpRequestPayload createVariant() {
-        return Pkcs11OpRequestPayload.builder().build();
+        return Pkcs11OpRequestPayload.builder().pkcs11Function(Pkcs11Function.register(0x80000004, "X-Var-Fn", java.util.Set.of(org.purpleBean.kmip.api.KmipSpec.UnknownVersion)).inst()).build();
     }
 }
