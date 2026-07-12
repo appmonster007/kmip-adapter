@@ -12,7 +12,7 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<UniqueIdentifie
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
+        defaultSpec = KmipSpec.V2_1;
     }
 
     @Override

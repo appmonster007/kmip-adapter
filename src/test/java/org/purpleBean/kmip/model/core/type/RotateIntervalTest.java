@@ -22,7 +22,7 @@ class RotateIntervalTest extends AbstractKmipDataTypeTestSuite<RotateInterval> i
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2; // TODO: Adjust default spec if needed
+        defaultSpec = KmipSpec.V2_1; // TODO: Adjust default spec if needed
     }
 
     @Override
