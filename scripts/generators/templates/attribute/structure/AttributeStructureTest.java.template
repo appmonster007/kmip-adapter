@@ -13,7 +13,7 @@ import org.purpleBean.kmip.test.suite.KmipStructureTestSuite;
 import java.util.List;
 
 @DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends BaseKmipTest implements KmipStructureTestSuite<{{ATTRIBUTE_NAME}}>, KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_NAME}}>, KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
 
     @Override
     protected void setupDefaultSpec() {

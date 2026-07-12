@@ -10,11 +10,6 @@ import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
 import org.purpleBean.kmip.util.StringUtils;
 
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -95,12 +90,12 @@ public class NistSecurityCategory implements KmipDataType, KmipAttribute {
 
     @Override
     public boolean isAlwaysPresent() {
-        return false; // TODO: Adjust as needed
+        return false;
     }
 
     @Override
     public boolean isServerInitializable() {
-        return true; // TODO: Adjust as needed
+        return true;
     }
 
     @Override
@@ -126,20 +121,5 @@ public class NistSecurityCategory implements KmipDataType, KmipAttribute {
     @Override
     public boolean isMultiInstanceAllowed() {
         return false;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NistSecurityCategory that = (NistSecurityCategory) o;
-        // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
-        return Objects.hash(value);
     }
 }
