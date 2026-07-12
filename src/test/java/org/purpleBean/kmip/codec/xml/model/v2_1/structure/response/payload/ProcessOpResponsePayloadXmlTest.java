@@ -23,11 +23,11 @@ class ProcessOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<
 
     @Override
     public ProcessOpResponsePayload createDefault() {
-        return ProcessOpResponsePayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("test-id")).build();
+        return ProcessOpResponsePayload.builder().asynchronousCorrelationValue(org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(new byte[]{0x01, 0x02})).build();
     }
 
     @Override
     public ProcessOpResponsePayload createVariant() {
-        return ProcessOpResponsePayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("variant-id")).build();
+        return ProcessOpResponsePayload.builder().asynchronousCorrelationValue(org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(new byte[]{0x03, 0x04})).build();
     }
 }

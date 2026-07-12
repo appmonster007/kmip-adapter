@@ -6,7 +6,7 @@ import lombok.Singular;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purpleBean.kmip.model.v2_1.structure.AsynchronousRequest;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,19 +30,19 @@ public class QueryAsynchronousRequestsOpResponsePayload implements ResponsePaylo
     }
 
     @Singular
-    private final List<AsynchronousCorrelationValue> asynchronousCorrelationValues;
+    private final List<AsynchronousRequest> asynchronousRequests;
 
     @Builder
-    private QueryAsynchronousRequestsOpResponsePayload(List<AsynchronousCorrelationValue> asynchronousCorrelationValues) {
-        this.asynchronousCorrelationValues = (asynchronousCorrelationValues == null) ? Collections.emptyList() : asynchronousCorrelationValues;
+    private QueryAsynchronousRequestsOpResponsePayload(List<AsynchronousRequest> asynchronousRequests) {
+        this.asynchronousRequests = (asynchronousRequests == null) ? Collections.emptyList() : asynchronousRequests;
         validate();
     }
 
     public static QueryAsynchronousRequestsOpResponsePayload of(List<KmipDataType> values) {
         QueryAsynchronousRequestsOpResponsePayloadBuilder builder = QueryAsynchronousRequestsOpResponsePayload.builder();
         values.stream()
-                .filter(v -> v instanceof AsynchronousCorrelationValue)
-                .forEach(v -> builder.asynchronousCorrelationValue((AsynchronousCorrelationValue) v));
+                .filter(v -> v instanceof AsynchronousRequest)
+                .forEach(v -> builder.asynchronousRequest((AsynchronousRequest) v));
         return builder.build();
     }
 
@@ -63,9 +63,8 @@ public class QueryAsynchronousRequestsOpResponsePayload implements ResponsePaylo
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(asynchronousCorrelationValues)
+        return asynchronousRequests.stream()
                 .filter(Objects::nonNull)
-                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);
     }

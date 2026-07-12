@@ -33,7 +33,7 @@ public class QueryAsynchronousRequestsOpRequestPayloadXmlDeserializer extends Ab
     protected void setValue(QueryAsynchronousRequestsOpRequestPayload.QueryAsynchronousRequestsOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValues(ctxt.readValue(p, AsynchronousCorrelationValues.class));
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUES -> builder.asynchronousCorrelationValues(ctxt.readValue(p, AsynchronousCorrelationValues.class));
             case KmipTag.Standard.OPERATIONS -> builder.operations(ctxt.readValue(p, Operations.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }

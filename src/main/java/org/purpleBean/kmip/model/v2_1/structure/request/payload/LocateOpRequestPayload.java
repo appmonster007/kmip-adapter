@@ -1,0 +1,86 @@
+package org.purpleBean.kmip.model.v2_1.structure.request.payload;
+
+import lombok.Builder;
+import lombok.Data;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.StorageStatusMask;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Data
+@Builder(toBuilder = true)
+public class LocateOpRequestPayload implements RequestPayloadStructure {
+
+    private static final Operation.Value operation = Operation.Standard.LOCATE;
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, LocateOpRequestPayload.class);
+            RequestPayloadStructure.register(spec, operation, LocateOpRequestPayload.class, LocateOpRequestPayload::of);
+        }
+    }
+
+    private final StorageStatusMask storageStatusMask;
+    private final Attributes attributes;
+
+    @Builder
+    private LocateOpRequestPayload(
+            StorageStatusMask storageStatusMask,
+            Attributes attributes
+    ) {
+        this.storageStatusMask = storageStatusMask;
+        this.attributes = attributes;
+        validate();
+    }
+
+    public static LocateOpRequestPayload of(List<KmipDataType> values) {
+        var builder = LocateOpRequestPayload.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(StorageStatusMask.kmipTag)) {
+            builder.storageStatusMask((StorageStatusMask) map.get(StorageStatusMask.kmipTag).getFirst());
+        }
+        if (map.containsKey(Attributes.kmipTag)) {
+            builder.attributes((Attributes) map.get(Attributes.kmipTag).getFirst());
+        }
+        return builder.build();
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+    }
+
+    @Override
+    public KmipTag getKmipTag() { return kmipTag; }
+
+    @Override
+    public EncodingType getEncodingType() { return encodingType; }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public KmipDataType[] getValue() {
+        return Stream.of(storageStatusMask, attributes)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
+
+    @Override
+    public Operation getCorrespondingOperation() { return operation.inst(); }
+}

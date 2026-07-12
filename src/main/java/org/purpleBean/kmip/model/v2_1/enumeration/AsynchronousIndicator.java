@@ -1,34 +1,26 @@
 package org.purpleBean.kmip.model.v2_1.enumeration;
 
 import lombok.*;
+import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-
+import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.type.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * A KMIP (Key Management Interoperability Protocol) enumeration that indicates
- * whether an operation can be processed asynchronously.
- * <p>
- * This enumeration is used in the request header to inform the server about the
- * client's preference for asynchronous processing.
- *
- * <p><b>Standards:</b></p>
- * <ul>
- *   <li>{@code MANDATORY}: Asynchronous processing is mandatory.</li>
- *   <li>{@code OPTIONAL}: Asynchronous processing is optional.</li>
- *   <li>{@code PROHIBITED}: Asynchronous processing is prohibited.</li>
- * </ul>
- *
- * @see KmipEnumeration
- * @see RequestHeaderStructure
+ * KMIP AsynchronousIndicator enumeration.
  */
 @Data
 @Builder(toBuilder = true)
 public class AsynchronousIndicator implements KmipEnumeration {
     public static final KmipTag kmipTag = KmipTag.Standard.ASYNCHRONOUS_INDICATOR.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0); // introduced in KMIP 2.1 — extend if present in later specs
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -168,9 +160,6 @@ public class AsynchronousIndicator implements KmipEnumeration {
         return value.getValue();
     }
 
-    /**
-     * The standard enumeration of Asynchronous Indicators.
-     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -178,6 +167,7 @@ public class AsynchronousIndicator implements KmipEnumeration {
         MANDATORY(0x00000001, "Mandatory", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         OPTIONAL(0x00000002, "Optional", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         PROHIBITED(0x00000003, "Prohibited", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+
 
         private final int value;
         private final String description;
@@ -203,16 +193,10 @@ public class AsynchronousIndicator implements KmipEnumeration {
         }
     }
 
-    /**
-     * An interface representing an Asynchronous Indicator value, which can be either a standard
-     * value or a custom extension.
-     */
+    // ----- Value hierarchy -----
     public interface Value extends KmipEnumeration.Value<AsynchronousIndicator> {
     }
 
-    /**
-     * Represents a custom, vendor-specific Asynchronous Indicator.
-     */
     @Getter
     @AllArgsConstructor
     @ToString

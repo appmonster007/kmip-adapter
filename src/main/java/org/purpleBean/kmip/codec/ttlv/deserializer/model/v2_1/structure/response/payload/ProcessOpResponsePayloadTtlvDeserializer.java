@@ -32,7 +32,7 @@ public class ProcessOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTy
     protected void setValue(ProcessOpResponsePayload.ProcessOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

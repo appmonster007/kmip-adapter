@@ -15,7 +15,7 @@ public class StorageStatusMask implements KmipMaskType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.STORAGE_STATUS_MASK.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -138,11 +138,10 @@ public class StorageStatusMask implements KmipMaskType {
 
         static String toMaskString(int value) {
             StringBuilder sb = new StringBuilder();
-            for (var entry : VALUE_REGISTRY.values()) {
-                if ((value & entry.getValue()) != 0) {
-                    sb.append(entry.getDescription()).append(" ");
-                }
-            }
+            VALUE_REGISTRY.values().stream()
+                    .filter(entry -> (value & entry.getValue()) != 0)
+                    .sorted(Comparator.comparing(Value::getDescription))
+                    .forEach(entry -> sb.append(entry.getDescription()).append(" "));
             return sb.toString().trim();
         }
 

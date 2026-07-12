@@ -33,6 +33,6 @@ class SubmissionDateTest extends AbstractKmipDataTypeTestSuite<SubmissionDate> {
 
     @Override
     protected EncodingType expectedEncodingType() {
-        return EncodingType.DATE_TIME;
+        return EncodingType.DATE_TIME_EXTENDED;
     }
 }

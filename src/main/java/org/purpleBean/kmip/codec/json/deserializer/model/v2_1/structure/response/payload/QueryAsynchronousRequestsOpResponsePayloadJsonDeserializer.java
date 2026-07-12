@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.model.v2_1.structure.AsynchronousRequest;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class QueryAsynchronousRequestsOpResponsePayloadJsonDeserializer extends 
     protected void setValue(QueryAsynchronousRequestsOpResponsePayload.QueryAsynchronousRequestsOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(ctxt.readValue(p, AsynchronousCorrelationValue.class));
+            case KmipTag.Standard.ASYNCHRONOUS_REQUEST -> builder.asynchronousRequest(ctxt.readValue(p, AsynchronousRequest.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

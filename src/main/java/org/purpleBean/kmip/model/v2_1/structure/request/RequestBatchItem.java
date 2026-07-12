@@ -1,0 +1,117 @@
+package org.purpleBean.kmip.model.v2_1.structure.request;
+
+import lombok.Builder;
+import lombok.Data;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
+import org.purpleBean.kmip.api.request.RequestPayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.MessageExtension;
+import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Data
+@Builder(toBuilder = true)
+public class RequestBatchItem implements RequestBatchItemStructure {
+
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+
+    static {
+        for (KmipSpec spec : supportedVersions) {
+            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+            KmipDataType.register(spec, kmipTag.getValue(), encodingType, RequestBatchItem.class);
+            RequestBatchItemStructure.register(spec, RequestBatchItem.class, RequestBatchItem::of);
+        }
+    }
+
+    private final Operation operation;
+
+    private final UniqueBatchItemID uniqueBatchItemID;
+
+    private final AsynchronousCorrelationValue asynchronousCorrelationValue;
+
+    private final RequestPayloadStructure requestPayloadStructure;
+
+    private final MessageExtension messageExtension;
+
+    @Builder
+    private RequestBatchItem(
+            Operation operation,
+            UniqueBatchItemID uniqueBatchItemID,
+            AsynchronousCorrelationValue asynchronousCorrelationValue,
+            RequestPayloadStructure requestPayloadStructure,
+            MessageExtension messageExtension
+    ) {
+        this.operation = operation;
+        this.uniqueBatchItemID = uniqueBatchItemID;
+        this.asynchronousCorrelationValue = asynchronousCorrelationValue;
+        this.requestPayloadStructure = requestPayloadStructure;
+        this.messageExtension = messageExtension;
+        validate();
+    }
+
+    public static RequestBatchItem of(List<KmipDataType> values) {
+        var builder = RequestBatchItem.builder();
+        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(Operation.kmipTag)) {
+            builder.operation((Operation) map.get(Operation.kmipTag).get(0));
+        }
+        if (map.containsKey(UniqueBatchItemID.kmipTag)) {
+            builder.uniqueBatchItemID((UniqueBatchItemID) map.get(UniqueBatchItemID.kmipTag).get(0));
+        }
+        if (map.containsKey(AsynchronousCorrelationValue.kmipTag)) {
+            builder.asynchronousCorrelationValue((AsynchronousCorrelationValue) map.get(AsynchronousCorrelationValue.kmipTag).get(0));
+        }
+        if (map.containsKey(RequestPayloadStructure.kmipTag)) {
+            builder.requestPayloadStructure((RequestPayloadStructure) map.get(RequestPayloadStructure.kmipTag).get(0));
+        }
+        if (map.containsKey(MessageExtension.kmipTag)) {
+            builder.messageExtension((MessageExtension) map.get(MessageExtension.kmipTag).get(0));
+        }
+        return builder.build();
+    }
+
+    @Override
+    public RequestPayloadStructure getRequestPayload() {
+        return requestPayloadStructure;
+    }
+
+    private void validate() {
+        if (!isSupported()) {
+            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+        }
+    }
+
+    @Override
+    public KmipTag getKmipTag() { return kmipTag; }
+
+    @Override
+    public EncodingType getEncodingType() { return encodingType; }
+
+    @Override
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
+
+    @Override
+    public KmipDataType[] getValue() {
+        return Stream.of(
+                        operation,
+                        uniqueBatchItemID,
+                        asynchronousCorrelationValue,
+                        requestPayloadStructure,
+                        messageExtension)
+                .filter(Objects::nonNull)
+                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
+}

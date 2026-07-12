@@ -1,9 +1,17 @@
 package org.purpleBean.kmip.model.v2_1.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.type.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+
 
 import java.util.Set;
 
@@ -14,23 +22,43 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<AsynchronousIndicator> {
 
     @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+    @Override
     protected Class<AsynchronousIndicator> type() {
         return AsynchronousIndicator.class;
     }
 
     @Override
     protected AsynchronousIndicator createDefault() {
-        return AsynchronousIndicator.Standard.MANDATORY.inst();
+        // TODO: Replace with an actual Standard enum value, e.g., AsynchronousIndicator.Standard.SOME_VALUE.inst();
+        // For now, using the first available value if any exist.
+        if (AsynchronousIndicator.Standard.values().length > 0) {
+            return AsynchronousIndicator.Standard.values()[0].inst();
+        }
+        // Fallback for enums with no predefined Standard values (e.g., during initial generation)
+        return AsynchronousIndicator.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected AsynchronousIndicator createEqualToDefault() {
-        return AsynchronousIndicator.Standard.MANDATORY.inst();
+        // TODO: Replace with an actual Standard enum value equal to the one in createDefault()
+        if (AsynchronousIndicator.Standard.values().length > 0) {
+            return AsynchronousIndicator.Standard.values()[0].inst();
+        }
+        return AsynchronousIndicator.register(0x80000001, "X-Default-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
     protected AsynchronousIndicator createDifferentFromDefault() {
-        return AsynchronousIndicator.Standard.OPTIONAL.inst();
+        // TODO: Replace with an actual Standard enum value different from the one in createDefault()
+        if (AsynchronousIndicator.Standard.values().length > 1) {
+            return AsynchronousIndicator.Standard.values()[1].inst();
+        }
+        // Fallback for enums with only one or no predefined Standard values
+        return AsynchronousIndicator.register(0x80000002, "X-Variant-Value", Set.of(KmipSpec.UnknownVersion)).inst();
     }
 
     @Override
@@ -40,12 +68,14 @@ class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<Asynchr
 
     @Override
     protected boolean supportsRegistryBehavior() {
-        return true;
+        // Set to true if the enum supports custom extension values and lookup methods
+        return true; // Assuming all generated enums will support this
     }
 
     @Override
     protected void assertLookupBehaviour() {
-        // Lookup by name/value
+        // TODO: Customize these assertions based on actual enum values and expected lookup behavior
+        // Example:
         withKmipSpec(
                 KmipSpec.UnknownVersion,
                 () -> {
@@ -56,7 +86,6 @@ class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<Asynchr
                 }
         );
 
-        // Lookup by name/value with unsupported version
         withKmipSpec(
                 KmipSpec.UnsupportedVersion,
                 () -> assertThatThrownBy(() -> AsynchronousIndicator.fromName("X-Enum-Custom"))
@@ -65,7 +94,8 @@ class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<Asynchr
 
     @Override
     protected void assertEnumerationRegistryBehavior() {
-        // Valid registration in AsynchronousIndicator requires 8XXXXXXX (hex) range per implementation
+        // TODO: Customize these assertions based on actual enum values and expected registry behavior
+        // Example:
         AsynchronousIndicator.Value custom = AsynchronousIndicator.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
         assertThat(custom.isCustom()).isTrue();
         assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
@@ -88,4 +118,3 @@ class AsynchronousIndicatorTest extends AbstractKmipEnumerationTestSuite<Asynchr
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
-

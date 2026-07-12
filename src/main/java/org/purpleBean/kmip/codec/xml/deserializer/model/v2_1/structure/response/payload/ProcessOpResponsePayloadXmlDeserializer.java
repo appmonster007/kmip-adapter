@@ -32,7 +32,7 @@ public class ProcessOpResponsePayloadXmlDeserializer extends AbstractKmipDataTyp
     protected void setValue(ProcessOpResponsePayload.ProcessOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(ctxt.readValue(p, AsynchronousCorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

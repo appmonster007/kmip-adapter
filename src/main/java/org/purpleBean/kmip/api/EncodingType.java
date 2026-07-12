@@ -61,6 +61,10 @@ public enum EncodingType {
      * A 32-bit unsigned integer representing a duration in seconds.
      */
     INTERVAL((byte) 0x0A, "Interval", 4, Integer.class),
+    /**
+     * A 64-bit integer representing the number of microseconds since the Unix epoch (KMIP 2.x+).
+     */
+    DATE_TIME_EXTENDED((byte) 0x0B, "DateTimeExtended", 8, OffsetDateTime.class),
     ;
 
     /**

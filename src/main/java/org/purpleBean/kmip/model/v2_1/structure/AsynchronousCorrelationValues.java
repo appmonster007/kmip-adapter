@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class AsynchronousCorrelationValues implements KmipStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE.inst();
+    public static final KmipTag kmipTag = KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUES.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {

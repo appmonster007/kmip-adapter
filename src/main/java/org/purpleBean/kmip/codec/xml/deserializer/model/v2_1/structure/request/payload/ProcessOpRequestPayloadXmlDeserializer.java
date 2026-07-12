@@ -15,8 +15,6 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.ProcessOpRequestPayload;
 
 import java.io.IOException;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-
 public class ProcessOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ProcessOpRequestPayload, ProcessOpRequestPayload.ProcessOpRequestPayloadBuilder> {
 
     public ProcessOpRequestPayloadXmlDeserializer() {
@@ -32,15 +30,8 @@ public class ProcessOpRequestPayloadXmlDeserializer extends AbstractKmipDataType
     protected void setValue(ProcessOpRequestPayload.ProcessOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(ctxt.readValue(p, AsynchronousCorrelationValue.class));
-            default -> {
-                if (ManagedObject.isManagedObject(nodeTag)) {
-                    builder.object(ctxt.readValue(p, ManagedObject.class));
-                } else {
-                    throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-                }
-            }
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }
 

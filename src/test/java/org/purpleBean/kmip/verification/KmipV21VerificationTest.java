@@ -83,7 +83,7 @@ public class KmipV21VerificationTest {
     private void diagnoseFile(Path path) {
         try {
             String rawXml = Files.readString(path);
-            String xml = rawXml.replace("$NOW", FIXED_TIMESTAMP).replace("$SERVER_CORRELATION_VALUE", FIXED_CORRELATION);
+            String xml = replacePlaceholders(rawXml);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             Document doc = factory.newDocumentBuilder()
@@ -149,9 +149,7 @@ public class KmipV21VerificationTest {
     private int[] verifyXmlFile(Path path) throws Exception {
         String rawXml = Files.readString(path);
         // Replace dynamic placeholders with stable values so DateTime parsing succeeds
-        String xml = rawXml
-                .replace("$NOW", FIXED_TIMESTAMP)
-                .replace("$SERVER_CORRELATION_VALUE", FIXED_CORRELATION);
+        String xml = replacePlaceholders(rawXml);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
@@ -182,6 +180,15 @@ public class KmipV21VerificationTest {
             }
         }
         return new int[]{pass, total};
+    }
+
+    private String replacePlaceholders(String xml) {
+        return xml
+                .replace("$NOW", FIXED_TIMESTAMP)
+                .replace("$SERVER_CORRELATION_VALUE", FIXED_CORRELATION)
+                .replaceAll("\\$ASYNCHRONOUS_CORRELATION_VALUE(?:_\\d+)?", "aabbccdd00112233aabbccdd00112233")
+                .replaceAll("\\$KEY_MATERIAL(?:_\\d+)?", "000102030405060708090a0b0c0d0e0f")
+                .replaceAll("\\$UNIQUE_IDENTIFIER(?:_\\d+)?", "test-unique-id-00000000");
     }
 
     private void verifyMessageFragment(String fragment, String tag, String fileName) throws Exception {

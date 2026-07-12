@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @Data
 @Builder(toBuilder = true)
 public class TransparentDsaPrivateKey implements KeyMaterial, KmipStructure {
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final KeyFormatType.Value keyFormatTypeValue = KeyFormatType.Standard.TRANSPARENT_DSA_PRIVATE_KEY;
 
     static {

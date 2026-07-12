@@ -33,7 +33,7 @@ public class QueryAsynchronousRequestsOpRequestPayloadTtlvDeserializer extends A
     protected void setValue(QueryAsynchronousRequestsOpRequestPayload.QueryAsynchronousRequestsOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValues(mapper.readValue(p, AsynchronousCorrelationValues.class));
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUES -> builder.asynchronousCorrelationValues(mapper.readValue(p, AsynchronousCorrelationValues.class));
             case KmipTag.Standard.OPERATIONS -> builder.operations(mapper.readValue(p, Operations.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }

@@ -6,10 +6,11 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,18 +31,18 @@ public class ProcessOpResponsePayload implements ResponsePayloadStructure {
     }
 
     @NonNull
-    private final UniqueIdentifier uniqueIdentifier;
+    private final AsynchronousCorrelationValue asynchronousCorrelationValue;
 
     @Builder
-    private ProcessOpResponsePayload(@NonNull UniqueIdentifier uniqueIdentifier) {
-        this.uniqueIdentifier = uniqueIdentifier;
+    private ProcessOpResponsePayload(@NonNull AsynchronousCorrelationValue asynchronousCorrelationValue) {
+        this.asynchronousCorrelationValue = asynchronousCorrelationValue;
         validate();
     }
 
     public static ProcessOpResponsePayload of(List<KmipDataType> values) {
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         return ProcessOpResponsePayload.builder()
-                .uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst())
+                .asynchronousCorrelationValue((AsynchronousCorrelationValue) map.get(AsynchronousCorrelationValue.kmipTag).getFirst())
                 .build();
     }
 
@@ -65,7 +66,10 @@ public class ProcessOpResponsePayload implements ResponsePayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return new KmipDataType[]{uniqueIdentifier};
+        return Stream.of(asynchronousCorrelationValue)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

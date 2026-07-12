@@ -20,7 +20,7 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_LENGTH.inst();
     public static final EncodingType encodingType = EncodingType.INTEGER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         // Register with KmipDataType and KmipAttribute
