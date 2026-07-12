@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.SetEndpointRoleOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.EndpointRole;
 
 @DisplayName("SetEndpointRoleOpResponsePayload Json Serialization Tests")
 class SetEndpointRoleOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<SetEndpointRoleOpResponsePayload> {

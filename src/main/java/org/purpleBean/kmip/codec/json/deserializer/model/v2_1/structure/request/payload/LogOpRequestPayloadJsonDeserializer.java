@@ -15,6 +15,7 @@ import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.LogOpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.type.LogMessage;
 
 public class LogOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<LogOpRequestPayload, LogOpRequestPayload.LogOpRequestPayloadBuilder> {
 

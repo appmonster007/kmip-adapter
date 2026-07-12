@@ -13,6 +13,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 
 @DisplayName("DelegatedLoginOpResponsePayload Json Serialization Tests")
 class DelegatedLoginOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<DelegatedLoginOpResponsePayload> {

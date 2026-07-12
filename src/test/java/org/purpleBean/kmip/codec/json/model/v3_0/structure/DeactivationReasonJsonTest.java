@@ -12,6 +12,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.v3_0.enumeration.DeactivationReasonCode;
+import org.purpleBean.kmip.model.v3_0.type.DeactivationMessage;
 
 @DisplayName("DeactivationReason Json Serialization Tests")
 class DeactivationReasonJsonTest extends AbstractJsonSerializationTestSuite<DeactivationReason> {

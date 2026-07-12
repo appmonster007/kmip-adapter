@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.ProcessingStage;
+import org.purpleBean.kmip.model.v2_1.enumeration.ProcessingStage;
 import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purpleBean.kmip.model.v2_1.type.SubmissionDate;
 

@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.TicketType;
-import org.purpleBean.kmip.model.core.type.TicketValue;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 
 import java.util.List;
 import java.util.Map;

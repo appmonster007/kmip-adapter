@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.Pkcs11OpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.Pkcs11Function;
 
 @DisplayName("Pkcs11OpRequestPayload Ttlv Serialization Tests")
 class Pkcs11OpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs11OpRequestPayload> {

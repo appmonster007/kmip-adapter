@@ -16,6 +16,7 @@ import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.SetConstraintsOpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.structure.Constraints;
 
 public class SetConstraintsOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<SetConstraintsOpRequestPayload, SetConstraintsOpRequestPayload.SetConstraintsOpRequestPayloadBuilder> {
 

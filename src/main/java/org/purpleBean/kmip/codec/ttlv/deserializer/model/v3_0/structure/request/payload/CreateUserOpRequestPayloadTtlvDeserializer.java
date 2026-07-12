@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v3_0.structure.request.payload.CreateUserOpRequ
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 
 public class CreateUserOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CreateUserOpRequestPayload, CreateUserOpRequestPayload.CreateUserOpRequestPayloadBuilder> {
 

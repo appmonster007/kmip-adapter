@@ -13,6 +13,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.LogoutOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 
 @DisplayName("LogoutOpRequestPayload Ttlv Serialization Tests")
 class LogoutOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<LogoutOpRequestPayload> {

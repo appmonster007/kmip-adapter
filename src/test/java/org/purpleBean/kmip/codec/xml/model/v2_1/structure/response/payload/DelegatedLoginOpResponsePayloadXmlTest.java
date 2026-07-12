@@ -13,6 +13,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 
 @DisplayName("DelegatedLoginOpResponsePayload Xml Serialization Tests")
 class DelegatedLoginOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<DelegatedLoginOpResponsePayload> {

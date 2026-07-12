@@ -15,6 +15,8 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v3_0.enumeration.DeactivationReasonCode;
+import org.purpleBean.kmip.model.v3_0.type.DeactivationMessage;
 
 public class DeactivationReasonXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DeactivationReason, DeactivationReason.DeactivationReasonBuilder> {
 

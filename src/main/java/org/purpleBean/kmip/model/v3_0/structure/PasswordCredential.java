@@ -5,9 +5,9 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.IterationCount;
 import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.core.type.PasswordSalt;
-import org.purpleBean.kmip.model.core.type.PasswordSaltAlgorithm;
-import org.purpleBean.kmip.model.core.type.SaltedPassword;
+import org.purpleBean.kmip.model.v3_0.type.PasswordSalt;
+import org.purpleBean.kmip.model.v3_0.type.PasswordSaltAlgorithm;
+import org.purpleBean.kmip.model.v3_0.type.SaltedPassword;
 
 import java.util.Objects;
 import java.util.Set;

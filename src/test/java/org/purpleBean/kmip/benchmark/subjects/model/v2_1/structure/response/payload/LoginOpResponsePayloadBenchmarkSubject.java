@@ -12,8 +12,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.TicketType;
-import org.purpleBean.kmip.model.core.type.TicketValue;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.LoginOpResponsePayload;
 

@@ -16,6 +16,7 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.SetConstraintsOp
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.structure.Constraints;
 
 public class SetConstraintsOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SetConstraintsOpRequestPayload, SetConstraintsOpRequestPayload.SetConstraintsOpRequestPayloadBuilder> {
 

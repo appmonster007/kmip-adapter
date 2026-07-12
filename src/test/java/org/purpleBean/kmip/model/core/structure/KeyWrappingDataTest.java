@@ -16,7 +16,7 @@ class KeyWrappingDataTest extends AbstractKmipStructureTestSuite<KeyWrappingData
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override

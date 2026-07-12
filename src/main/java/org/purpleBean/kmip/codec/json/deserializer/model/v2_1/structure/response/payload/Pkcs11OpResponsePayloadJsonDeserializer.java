@@ -15,6 +15,8 @@ import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.Pkcs11OpResponsePayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 public class Pkcs11OpResponsePayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<Pkcs11OpResponsePayload, Pkcs11OpResponsePayload.Pkcs11OpResponsePayloadBuilder> {
 

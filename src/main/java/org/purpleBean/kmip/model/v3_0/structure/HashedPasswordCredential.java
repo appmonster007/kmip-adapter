@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.type.HashedPasswordUsername;
-import org.purpleBean.kmip.model.core.type.HashedUsernamePassword;
+import org.purpleBean.kmip.model.v3_0.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.v3_0.type.HashedUsernamePassword;
 
 import java.util.Objects;
 import java.util.Set;

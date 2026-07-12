@@ -12,6 +12,11 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.OtpCredential;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purpleBean.kmip.model.v3_0.enumeration.OtpAlgorithm;
+import org.purpleBean.kmip.model.v3_0.type.OtpCounter;
+import org.purpleBean.kmip.model.v3_0.type.OtpDigits;
+import org.purpleBean.kmip.model.v3_0.type.OtpInterval;
+import org.purpleBean.kmip.model.v3_0.type.OtpSerial;
 
 @DisplayName("OtpCredential Xml Serialization Tests")
 class OtpCredentialXmlTest extends AbstractXmlSerializationTestSuite<OtpCredential> {

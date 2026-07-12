@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
+import org.purpleBean.kmip.model.v3_0.enumeration.DeactivationReasonCode;
 
 public class DeactivationReasonBenchmarkSubject extends KmipBenchmarkSubject<DeactivationReason> {
 

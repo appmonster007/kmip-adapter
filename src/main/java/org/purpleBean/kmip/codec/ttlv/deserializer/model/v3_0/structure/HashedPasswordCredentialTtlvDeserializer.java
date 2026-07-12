@@ -15,6 +15,8 @@ import org.purpleBean.kmip.model.v3_0.structure.HashedPasswordCredential;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v3_0.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.v3_0.type.HashedUsernamePassword;
 
 public class HashedPasswordCredentialTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<HashedPasswordCredential, HashedPasswordCredential.HashedPasswordCredentialBuilder> {
 

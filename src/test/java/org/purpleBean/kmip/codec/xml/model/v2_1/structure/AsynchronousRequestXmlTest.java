@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.AsynchronousRequest;
 import org.purpleBean.kmip.model.v2_1.type.SubmissionDate;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.ProcessingStage;
 
 @DisplayName("AsynchronousRequest Xml Serialization Tests")
 class AsynchronousRequestXmlTest extends AbstractXmlSerializationTestSuite<AsynchronousRequest> {

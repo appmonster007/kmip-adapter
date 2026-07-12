@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.LogOpRequestPayl
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.type.LogMessage;
 
 public class LogOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<LogOpRequestPayload, LogOpRequestPayload.LogOpRequestPayloadBuilder> {
 

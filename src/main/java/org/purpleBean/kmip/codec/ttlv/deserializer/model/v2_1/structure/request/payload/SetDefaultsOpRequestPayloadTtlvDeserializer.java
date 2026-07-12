@@ -3,7 +3,7 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.DefaultsInformation;
+import org.purpleBean.kmip.model.v2_1.structure.DefaultsInformation;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.SetDefaultsOpRequestPayload;
 
 import java.io.IOException;

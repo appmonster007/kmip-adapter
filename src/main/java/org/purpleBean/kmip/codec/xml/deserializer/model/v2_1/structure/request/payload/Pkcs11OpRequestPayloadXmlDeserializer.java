@@ -16,6 +16,9 @@ import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.Pkcs11OpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.enumeration.Pkcs11Function;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11InputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
 
 public class Pkcs11OpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Pkcs11OpRequestPayload, Pkcs11OpRequestPayload.Pkcs11OpRequestPayloadBuilder> {
 

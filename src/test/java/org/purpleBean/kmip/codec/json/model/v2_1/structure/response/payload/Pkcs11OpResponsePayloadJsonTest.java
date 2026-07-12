@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.Pkcs11OpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 @DisplayName("Pkcs11OpResponsePayload Json Serialization Tests")
 class Pkcs11OpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<Pkcs11OpResponsePayload> {

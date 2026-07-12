@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v2_1.structure.ProtectionStorageMasks;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.type.ProtectionStorageMask;
 
 public class ProtectionStorageMasksTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProtectionStorageMasks, ProtectionStorageMasks.ProtectionStorageMasksBuilder> {
 

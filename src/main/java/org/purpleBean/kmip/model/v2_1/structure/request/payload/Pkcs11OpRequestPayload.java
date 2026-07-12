@@ -6,9 +6,9 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.Pkcs11Function;
-import org.purpleBean.kmip.model.core.type.Pkcs11InputParameters;
-import org.purpleBean.kmip.model.core.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.v2_1.enumeration.Pkcs11Function;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11InputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 import java.util.List;

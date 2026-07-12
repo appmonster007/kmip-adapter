@@ -15,6 +15,8 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.InteropOpRequest
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.enumeration.InteropFunction;
+import org.purpleBean.kmip.model.v2_1.type.InteropIdentifier;
 
 public class InteropOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<InteropOpRequestPayload, InteropOpRequestPayload.InteropOpRequestPayloadBuilder> {
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.ProtectionStorageMask;
+import org.purpleBean.kmip.model.v2_1.type.ProtectionStorageMask;
 
 import java.util.Collections;
 import java.util.List;

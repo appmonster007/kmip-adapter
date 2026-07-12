@@ -13,7 +13,7 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<UniqueIdentifie
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override
@@ -89,10 +89,5 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<UniqueIdentifie
         @Override
     public void attribute_clientModifiable_respectsState() {
         assertThat(createDefault().isClientModifiable(stateForClientModifiableFalse())).isFalse();
-    }
-
-    @Override
-    public void attribute_roundTrip() {
-        // Not applicable: Attribute wrapper structure only supports V1.x; these types are V2.1+ only
     }
 }

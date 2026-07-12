@@ -15,6 +15,7 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v3_0.structure.request.payload.CreateGroupOpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 
 public class CreateGroupOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<CreateGroupOpRequestPayload, CreateGroupOpRequestPayload.CreateGroupOpRequestPayloadBuilder> {
 

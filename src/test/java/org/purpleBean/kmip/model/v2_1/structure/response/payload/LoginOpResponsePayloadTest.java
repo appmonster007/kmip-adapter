@@ -16,6 +16,8 @@ import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 
 @DisplayName("LoginOpResponsePayload Domain Tests")
 class LoginOpResponsePayloadTest extends AbstractKmipStructureTestSuite<LoginOpResponsePayload> {

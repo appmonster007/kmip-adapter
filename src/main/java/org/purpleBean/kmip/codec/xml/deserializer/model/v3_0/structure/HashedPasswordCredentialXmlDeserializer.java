@@ -15,6 +15,8 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v3_0.structure.HashedPasswordCredential;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v3_0.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.v3_0.type.HashedUsernamePassword;
 
 public class HashedPasswordCredentialXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<HashedPasswordCredential, HashedPasswordCredential.HashedPasswordCredentialBuilder> {
 

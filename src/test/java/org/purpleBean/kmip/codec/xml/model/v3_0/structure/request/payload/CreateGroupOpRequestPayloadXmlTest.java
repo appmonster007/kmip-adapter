@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.request.payload.CreateGroupOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 
 @DisplayName("CreateGroupOpRequestPayload Xml Serialization Tests")
 class CreateGroupOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<CreateGroupOpRequestPayload> {

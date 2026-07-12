@@ -15,6 +15,8 @@ import org.purpleBean.kmip.model.v2_1.structure.response.payload.Pkcs11OpRespons
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 public class Pkcs11OpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<Pkcs11OpResponsePayload, Pkcs11OpResponsePayload.Pkcs11OpResponsePayloadBuilder> {
 

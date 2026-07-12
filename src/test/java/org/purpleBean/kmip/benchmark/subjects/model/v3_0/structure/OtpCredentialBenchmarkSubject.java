@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v3_0.structure.OtpCredential;
+import org.purpleBean.kmip.model.v3_0.enumeration.OtpAlgorithm;
 
 public class OtpCredentialBenchmarkSubject extends KmipBenchmarkSubject<OtpCredential> {
 

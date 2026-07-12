@@ -15,6 +15,7 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.AdjustAttributeOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.enumeration.AdjustmentType;
 
 public class AdjustAttributeOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<AdjustAttributeOpRequestPayload> {
 

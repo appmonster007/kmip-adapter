@@ -10,7 +10,7 @@ class AttributeValueTest extends AbstractKmipDataTypeTestSuite<AttributeValue> {
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
+        defaultSpec = KmipSpec.V1_2;
     }
 
     @Override

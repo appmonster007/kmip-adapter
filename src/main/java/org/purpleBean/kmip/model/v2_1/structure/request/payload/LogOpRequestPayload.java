@@ -6,7 +6,7 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.LogMessage;
+import org.purpleBean.kmip.model.v2_1.type.LogMessage;
 
 import java.util.List;
 import java.util.Objects;

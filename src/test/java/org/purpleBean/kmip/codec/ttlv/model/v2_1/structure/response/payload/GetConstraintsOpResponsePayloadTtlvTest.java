@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.GetConstraintsOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.structure.Constraints;
 
 @DisplayName("GetConstraintsOpResponsePayload Ttlv Serialization Tests")
 class GetConstraintsOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<GetConstraintsOpResponsePayload> {

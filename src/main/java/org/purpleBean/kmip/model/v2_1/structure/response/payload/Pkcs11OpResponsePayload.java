@@ -6,8 +6,8 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.Pkcs11OutputParameters;
-import org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 import java.util.List;
 import java.util.Map;

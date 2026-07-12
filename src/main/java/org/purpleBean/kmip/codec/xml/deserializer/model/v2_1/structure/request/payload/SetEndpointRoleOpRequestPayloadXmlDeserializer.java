@@ -15,6 +15,7 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.SetEndpointRoleOpRequestPayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.enumeration.EndpointRole;
 
 public class SetEndpointRoleOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<SetEndpointRoleOpRequestPayload, SetEndpointRoleOpRequestPayload.SetEndpointRoleOpRequestPayloadBuilder> {
 

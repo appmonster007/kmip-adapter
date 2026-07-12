@@ -15,6 +15,8 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.Pkcs11OpResponsePayload;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11OutputParameters;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 public class Pkcs11OpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Pkcs11OpResponsePayload, Pkcs11OpResponsePayload.Pkcs11OpResponsePayloadBuilder> {
 

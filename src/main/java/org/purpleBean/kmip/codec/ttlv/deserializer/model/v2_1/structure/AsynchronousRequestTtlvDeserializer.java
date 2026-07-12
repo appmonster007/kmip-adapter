@@ -16,6 +16,7 @@ import org.purpleBean.kmip.model.v2_1.structure.AsynchronousRequest;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.purpleBean.kmip.model.v2_1.type.SubmissionDate;
+import org.purpleBean.kmip.model.v2_1.enumeration.ProcessingStage;
 
 public class AsynchronousRequestTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AsynchronousRequest, AsynchronousRequest.AsynchronousRequestBuilder> {
 

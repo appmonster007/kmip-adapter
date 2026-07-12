@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.purpleBean.kmip.model.v2_1.enumeration.Pkcs11Function;
 
 @DisplayName("Pkcs11OpRequestPayload Domain Tests")
 class Pkcs11OpRequestPayloadTest extends AbstractKmipStructureTestSuite<Pkcs11OpRequestPayload> {

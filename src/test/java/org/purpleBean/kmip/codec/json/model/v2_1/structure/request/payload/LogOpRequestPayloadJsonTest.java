@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.LogOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.type.LogMessage;
 
 @DisplayName("LogOpRequestPayload Json Serialization Tests")
 class LogOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<LogOpRequestPayload> {

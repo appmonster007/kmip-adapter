@@ -15,6 +15,8 @@ import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.purpleBean.kmip.model.v3_0.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.v3_0.type.HashedUsernamePassword;
 
 @DisplayName("HashedPasswordCredential Domain Tests")
 class HashedPasswordCredentialTest extends AbstractKmipStructureTestSuite<HashedPasswordCredential> {

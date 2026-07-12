@@ -15,6 +15,7 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.SetEndpointRoleO
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.enumeration.EndpointRole;
 
 public class SetEndpointRoleOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<SetEndpointRoleOpRequestPayload, SetEndpointRoleOpRequestPayload.SetEndpointRoleOpRequestPayloadBuilder> {
 

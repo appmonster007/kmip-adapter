@@ -12,6 +12,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v3_0.structure.HashedPasswordCredential;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purpleBean.kmip.model.v3_0.type.HashedPasswordUsername;
+import org.purpleBean.kmip.model.v3_0.type.HashedUsernamePassword;
 
 @DisplayName("HashedPasswordCredential Ttlv Serialization Tests")
 class HashedPasswordCredentialTtlvTest extends AbstractTtlvSerializationTestSuite<HashedPasswordCredential> {

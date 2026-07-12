@@ -15,6 +15,7 @@ import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purpleBean.kmip.model.v2_1.structure.ProtectionStorageMasks;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.type.ProtectionStorageMask;
 
 public class ProtectionStorageMasksJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ProtectionStorageMasks, ProtectionStorageMasks.ProtectionStorageMasksBuilder> {
 

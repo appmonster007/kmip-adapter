@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.Pkcs11OpResponsePayload;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 public class Pkcs11OpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<Pkcs11OpResponsePayload> {
 
@@ -20,7 +21,7 @@ public class Pkcs11OpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubjec
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public Pkcs11OpResponsePayloadBenchmarkSubject() throws Exception {
-        Pkcs11OpResponsePayload subject = Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode.of(0)).build();
+        Pkcs11OpResponsePayload subject = Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode.of(0)).build();
         initialize(subject, Pkcs11OpResponsePayload.class);
     }
 

@@ -15,6 +15,13 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v3_0.structure.OtpCredential;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v3_0.enumeration.OtpAlgorithm;
+import org.purpleBean.kmip.model.v3_0.type.OtpCounter;
+import org.purpleBean.kmip.model.v3_0.type.OtpDigest;
+import org.purpleBean.kmip.model.v3_0.type.OtpDigits;
+import org.purpleBean.kmip.model.v3_0.type.OtpInterval;
+import org.purpleBean.kmip.model.v3_0.type.OtpSeed;
+import org.purpleBean.kmip.model.v3_0.type.OtpSerial;
 
 public class OtpCredentialXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<OtpCredential, OtpCredential.OtpCredentialBuilder> {
 

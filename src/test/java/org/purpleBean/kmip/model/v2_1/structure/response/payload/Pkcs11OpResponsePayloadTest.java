@@ -15,6 +15,7 @@ import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode;
 
 @DisplayName("Pkcs11OpResponsePayload Domain Tests")
 class Pkcs11OpResponsePayloadTest extends AbstractKmipStructureTestSuite<Pkcs11OpResponsePayload> {
@@ -31,7 +32,7 @@ class Pkcs11OpResponsePayloadTest extends AbstractKmipStructureTestSuite<Pkcs11O
 
     @Override
     protected Pkcs11OpResponsePayload createDefault() {
-        return Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode.of(0)).build();
+        return Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.v2_1.type.Pkcs11ReturnCode.of(0)).build();
     }
 
     @Override

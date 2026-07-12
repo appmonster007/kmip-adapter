@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.EndpointRole;
+import org.purpleBean.kmip.model.v2_1.enumeration.EndpointRole;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 import java.util.List;

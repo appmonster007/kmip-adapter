@@ -15,6 +15,9 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.v3_0.structure.PasswordCredential;
 
 import java.io.IOException;
+import org.purpleBean.kmip.model.v3_0.type.PasswordSalt;
+import org.purpleBean.kmip.model.v3_0.type.PasswordSaltAlgorithm;
+import org.purpleBean.kmip.model.v3_0.type.SaltedPassword;
 
 public class PasswordCredentialXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<PasswordCredential, PasswordCredential.PasswordCredentialBuilder> {
 

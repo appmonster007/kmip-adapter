@@ -3,8 +3,8 @@ package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.TicketType;
-import org.purpleBean.kmip.model.core.type.TicketValue;
+import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
+import org.purpleBean.kmip.model.v2_1.type.TicketValue;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 
 import java.io.IOException;

@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.DeactivationReasonCode;
-import org.purpleBean.kmip.model.core.type.DeactivationMessage;
+import org.purpleBean.kmip.model.v3_0.enumeration.DeactivationReasonCode;
+import org.purpleBean.kmip.model.v3_0.type.DeactivationMessage;
 
 import java.util.Objects;
 import java.util.Set;

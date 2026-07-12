@@ -14,6 +14,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.AdjustAttributeOpRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purpleBean.kmip.model.v2_1.enumeration.AdjustmentType;
 
 @DisplayName("AdjustAttributeOpRequestPayload Xml Serialization Tests")
 class AdjustAttributeOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<AdjustAttributeOpRequestPayload> {

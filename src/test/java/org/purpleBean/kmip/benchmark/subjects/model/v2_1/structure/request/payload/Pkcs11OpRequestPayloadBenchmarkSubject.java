@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.Pkcs11OpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.enumeration.Pkcs11Function;
 
 public class Pkcs11OpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<Pkcs11OpRequestPayload> {
 
