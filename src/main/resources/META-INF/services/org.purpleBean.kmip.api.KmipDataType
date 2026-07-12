@@ -480,6 +480,7 @@ org.purpleBean.kmip.model.v2_1.type.ValidationVersionMinor
 org.purpleBean.kmip.model.v3_0.structure.CredentialInformation
 org.purpleBean.kmip.model.v3_0.structure.DeactivationReason
 org.purpleBean.kmip.model.v3_0.structure.HashedPasswordCredential
+org.purpleBean.kmip.model.v3_0.structure.Name
 org.purpleBean.kmip.model.v3_0.structure.OtpCredential
 org.purpleBean.kmip.model.v3_0.structure.PasswordCredential
 org.purpleBean.kmip.model.v3_0.structure.link.CertificateLink

@@ -493,6 +493,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.ValidationVersionMino
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.CredentialInformationXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.DeactivationReasonXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.HashedPasswordCredentialXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.NameXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.OtpCredentialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.PasswordCredentialXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.link.CertificateLinkXmlDeserializer

@@ -480,6 +480,7 @@ org.purpleBean.kmip.codec.json.serializer.model.v2_1.type.ValidationVersionMinor
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.CredentialInformationJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.DeactivationReasonJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.HashedPasswordCredentialJsonSerializer
+org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.NameJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.OtpCredentialJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.PasswordCredentialJsonSerializer
 org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.link.CertificateLinkJsonSerializer

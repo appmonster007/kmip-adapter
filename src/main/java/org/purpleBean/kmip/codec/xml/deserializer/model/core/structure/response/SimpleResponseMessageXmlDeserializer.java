@@ -28,7 +28,7 @@ public class SimpleResponseMessageXmlDeserializer extends AbstractKmipDataTypeXm
             case KmipTag.Standard.RESPONSE_HEADER ->
                     builder.responseHeader(ctxt.readValue(p, ResponseHeaderStructure.class));
             case KmipTag.Standard.BATCH_ITEM -> {
-                if (p.isExpectedStartArrayToken()) { // TODO: can be removed?
+                if (p.isExpectedStartArrayToken()) { // Jackson XML may present repeated elements as an array token sequence
                     while (p.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
                         try {
                             builder.responseBatchItem(ctxt.readValue(p, ResponseBatchItemStructure.class));

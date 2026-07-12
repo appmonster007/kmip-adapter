@@ -493,6 +493,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.ValidationVersionMin
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.CredentialInformationTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.DeactivationReasonTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.HashedPasswordCredentialTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.NameTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.OtpCredentialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.PasswordCredentialTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.link.CertificateLinkTtlvDeserializer

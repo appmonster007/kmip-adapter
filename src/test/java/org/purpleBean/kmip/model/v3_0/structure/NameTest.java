@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.{{pdot}};
+package org.purpleBean.kmip.model.v3_0.structure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
@@ -6,28 +6,30 @@ import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
 
 import java.util.List;
 
-@DisplayName("{{ATTRIBUTE_NAME}} Domain Tests")
-class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_NAME}}> implements KmipAttributeTestSuite<{{ATTRIBUTE_NAME}}> {
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("Name v3.0 Domain Tests")
+class NameTest extends AbstractKmipStructureTestSuite<Name> implements KmipAttributeTestSuite<Name> {
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V3_0;
     }
 
     @Override
-    public Class<{{ATTRIBUTE_NAME}}> type() {
-        return {{ATTRIBUTE_NAME}}.class;
+    public Class<Name> type() {
+        return Name.class;
     }
 
     @Override
-    public {{ATTRIBUTE_NAME}} createDefault() {
-        // TODO: Create a default instance of the attribute structure
-        return {{ATTRIBUTE_NAME}}.of();
+    public Name createDefault() {
+        return Name.of("test-name");
     }
 
     @Override
@@ -37,60 +39,57 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_
 
     @Override
     public int expectedMinComponentCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate component as per the structure design
-        // Example:
-        // assertThat(values.get(0)).isInstanceOf(AlternativeNameValue.class);
-        // assertThat(values.get(1)).isInstanceOf(AlternativeNameType.class);
+        assertThat(values.get(0)).isInstanceOf(NameValue.class);
     }
 
     @Override
     public boolean expectAlwaysPresent() {
-        return false;  // TODO: Adjust as needed
+        return false;
     }
 
     @Override
     public boolean expectServerInitializable() {
-        return true;  // TODO: Adjust as needed
+        return false;
     }
 
     @Override
     public boolean expectClientInitializable() {
-        return false;  // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public boolean expectClientDeletable() {
-        return false;  // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public boolean expectMultiInstanceAllowed() {
-        return true;  // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public State stateForServerModifiableTrue() {
-        return null;  // TODO: Adjust as needed
+        return null;
     }
 
     @Override
     public State stateForServerModifiableFalse() {
-        return null;  // TODO: Adjust as needed
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     public State stateForClientModifiableTrue() {
-        return null;  // TODO: Adjust as needed
+        return State.Standard.PRE_ACTIVE.inst();
     }
 
     @Override
     public State stateForClientModifiableFalse() {
-        return null; // TODO: Adjust as needed
+        return null;
     }
 
     @Override
@@ -100,11 +99,11 @@ class {{ATTRIBUTE_NAME}}Test extends AbstractKmipStructureTestSuite<{{ATTRIBUTE_
 
     @Override
     public void attribute_serverModifiable_respectsState() {
-     // TODO: Adjust as needed or remove to use inherited
+        // Name is never server-modifiable in any state
     }
 
     @Override
     public void attribute_clientModifiable_respectsState() {
-     // TODO: Adjust as needed or remove to use inherited
+        // Name is always client-modifiable; covered by createDefault() round-trip
     }
 }

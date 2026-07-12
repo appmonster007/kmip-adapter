@@ -480,6 +480,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.ValidationVersionMinor
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.CredentialInformationTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.DeactivationReasonTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.HashedPasswordCredentialTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.NameTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.OtpCredentialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.PasswordCredentialTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.link.CertificateLinkTtlvSerializer

@@ -391,9 +391,11 @@ IMPLEMENTED_ENUMS = {
     "Unique Identifier",  # implemented as enumeration/UniqueIdentifier coexisting with type/UniqueIdentifier (different encodingType) per AsynchronousIndicator precedent
     "Unwrap Mode", "Usage Limits Unit", "Validation Authority Type",
     "Validation Type", "Validity Indicator", "Wrapping Method",
-    # NOTE: "Item Type" intentionally omitted — the spec's Item Type Enumeration is
-    # the TTLV item-type discriminator and is implemented as `org.purpleBean.kmip.api.EncodingType`
-    # (an untagged Java enum). There is no separate KmipEnumeration class for it.
+    "Item Type",  # Implemented as org.purpleBean.kmip.model.core.enumeration.ItemType (KmipEnumeration).
+    # Architecture note: ItemType (KMIP tag 0x4200A7 = EXTENSION_TYPE) represents the TTLV type byte
+    # within KMIP Extension structures. It is a distinct KmipEnumeration separate from EncodingType
+    # (which is an untagged Java enum for the codec layer). The two serve different roles:
+    # EncodingType = internal protocol discriminator; ItemType = a first-class KMIP attribute value.
 }
 
 def _norm(name: str) -> str:

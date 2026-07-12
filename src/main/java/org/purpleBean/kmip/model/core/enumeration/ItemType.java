@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder(toBuilder = true)
 public class ItemType implements KmipEnumeration {
-    public static final KmipTag kmipTag = KmipTag.Standard.EXTENSION_ENUMERATION.inst();
+    public static final KmipTag kmipTag = KmipTag.Standard.EXTENSION_TYPE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();

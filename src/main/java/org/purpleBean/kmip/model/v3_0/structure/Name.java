@@ -1,10 +1,9 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purpleBean.kmip.model.v3_0.structure;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.NameType;
 import org.purpleBean.kmip.model.core.enumeration.State;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
@@ -12,32 +11,19 @@ import org.purpleBean.kmip.model.core.type.NameValue;
 import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * KMIP Name attribute structure.
- *
- * <p>Represents a Name in KMIP.</p>
- *
- * <p>Attributes:
- * <ul>
- *   <li>Initially Set By: Client</li>
- *   <li>Modifiable By Client: Yes</li>
- *   <li>Deletable By Client: Yes</li>
- *   <li>Multiple Instances: Yes</li>
- *   <li>Applies To: All Managed Objects</li>
- * </ul>
+ * KMIP v3.0 Name attribute structure. NameType was reserved in v3.0, so only NameValue is present.
  */
 @Data
 @Builder(toBuilder = true)
 public class Name implements KmipStructure, KmipAttribute {
 
     public static final KmipTag kmipTag = KmipTag.Standard.NAME.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -50,49 +36,39 @@ public class Name implements KmipStructure, KmipAttribute {
     @NonNull
     private final NameValue nameValue;
 
-    @NonNull
-    private final NameType nameType;
-
     @Builder
-    private Name(@NonNull NameValue nameValue, @NonNull NameType nameType) {
+    private Name(@NonNull NameValue nameValue) {
         this.nameValue = nameValue;
-        this.nameType = nameType;
         validate();
     }
 
-    public static Name of(@NonNull String name, @NonNull NameType type) {
-        return new Name(NameValue.of(name), type);
+    public static Name of(@NonNull String name) {
+        return new Name(NameValue.of(name));
     }
 
-    public static Name of(@NonNull NameValue nameValue, @NonNull NameType nameType) {
-        return new Name(nameValue, nameType);
+    public static Name of(@NonNull NameValue nameValue) {
+        return new Name(nameValue);
     }
 
     public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
         }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure).collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        return Name.builder()
-                .nameValue((NameValue) map.get(NameValue.kmipTag).get(0))
-                .nameType((NameType) map.get(NameType.kmipTag).get(0))
-                .build();
+        for (KmipDataType component : structure) {
+            if (component instanceof NameValue nv) {
+                return new Name(nv);
+            }
+        }
+        throw new IllegalArgumentException("NameValue not found in attribute value");
     }
 
     private void validate() {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // Validate KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
         if (!nameValue.isSupported()) {
             throw new IllegalArgumentException(
-                    String.format("Name value is not supported for KMIP spec %s", spec)
-            );
-        }
-        if (!nameType.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Name type is not supported for KMIP spec %s", spec)
+                    String.format("Name value is not supported for KMIP spec %s", KmipContext.getSpec())
             );
         }
     }
@@ -109,11 +85,7 @@ public class Name implements KmipStructure, KmipAttribute {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(nameValue, nameType)
-                .filter(Objects::nonNull)
-                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-                .map(KmipDataType.class::cast)
-                .toArray(KmipDataType[]::new);
+        return new KmipDataType[]{nameValue};
     }
 
     @Override
