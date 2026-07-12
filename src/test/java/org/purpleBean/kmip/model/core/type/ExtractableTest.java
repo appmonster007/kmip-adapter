@@ -31,7 +31,7 @@ class ExtractableTest extends AbstractKmipDataTypeTestSuite<Extractable> impleme
     }
 
     @Override
-    protected Extractable createDefault() {
+    public Extractable createDefault() {
         return Extractable.of(FIXED_VALUE);
     }
 

@@ -31,7 +31,7 @@ class RotateAutomaticTest extends AbstractKmipDataTypeTestSuite<RotateAutomatic>
     }
 
     @Override
-    protected RotateAutomatic createDefault() {
+    public RotateAutomatic createDefault() {
         return RotateAutomatic.of(FIXED_VALUE);
     }
 

@@ -31,7 +31,7 @@ class DescriptionTest extends AbstractKmipDataTypeTestSuite<Description> impleme
     }
 
     @Override
-    protected Description createDefault() {
+    public Description createDefault() {
         return Description.of(FIXED_VALUE);
     }
 

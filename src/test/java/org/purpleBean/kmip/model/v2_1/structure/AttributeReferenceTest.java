@@ -32,8 +32,7 @@ class AttributeReferenceTest extends AbstractKmipStructureTestSuite<AttributeRef
 
     @Override
     protected AttributeReference createDefault() {
-        // TODO: Create a default instance of the structure
-        return new AttributeReference();
+        return AttributeReference.builder().build();
     }
 
     @Override

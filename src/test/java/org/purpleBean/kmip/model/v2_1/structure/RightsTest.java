@@ -32,8 +32,7 @@ class RightsTest extends AbstractKmipStructureTestSuite<Rights> {
 
     @Override
     protected Rights createDefault() {
-        // TODO: Create a default instance of the structure
-        return new Rights();
+        return Rights.of(List.of(Right.builder().build()));
     }
 
     @Override

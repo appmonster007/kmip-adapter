@@ -10,6 +10,8 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.type.ValidationLevel;
+import org.purpleBean.kmip.model.v2_1.type.ValidationVersionMajor;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 
@@ -32,8 +34,11 @@ class ValidationInformationTest extends AbstractKmipStructureTestSuite<Validatio
 
     @Override
     protected ValidationInformation createDefault() {
-        // TODO: Create a default instance of the structure
-        return new ValidationInformation();
+        return ValidationInformation.of(
+                ValidationAuthorityType.Standard.UNSPECIFIED.inst(),
+                ValidationVersionMajor.of(1),
+                ValidationType.Standard.UNSPECIFIED.inst(),
+                ValidationLevel.of(1));
     }
 
     @Override

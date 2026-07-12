@@ -32,8 +32,7 @@ class OperationsTest extends AbstractKmipStructureTestSuite<Operations> {
 
     @Override
     protected Operations createDefault() {
-        // TODO: Create a default instance of the structure
-        return new Operations();
+        return Operations.of(Operation.Standard.CREATE.inst());
     }
 
     @Override

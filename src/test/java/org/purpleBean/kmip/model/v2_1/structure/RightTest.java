@@ -32,8 +32,7 @@ class RightTest extends AbstractKmipStructureTestSuite<Right> {
 
     @Override
     protected Right createDefault() {
-        // TODO: Create a default instance of the structure
-        return new Right();
+        return Right.builder().build();
     }
 
     @Override

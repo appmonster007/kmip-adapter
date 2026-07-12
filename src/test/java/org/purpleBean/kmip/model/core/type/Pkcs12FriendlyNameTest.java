@@ -31,7 +31,7 @@ class Pkcs12FriendlyNameTest extends AbstractKmipDataTypeTestSuite<Pkcs12Friendl
     }
 
     @Override
-    protected Pkcs12FriendlyName createDefault() {
+    public Pkcs12FriendlyName createDefault() {
         return Pkcs12FriendlyName.of(FIXED_VALUE);
     }
 

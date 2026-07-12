@@ -32,8 +32,7 @@ class ObjectGroupsTest extends AbstractKmipStructureTestSuite<ObjectGroups> {
 
     @Override
     protected ObjectGroups createDefault() {
-        // TODO: Create a default instance of the structure
-        return new ObjectGroups();
+        return ObjectGroups.of(List.of(ObjectGroup.of("test-group")));
     }
 
     @Override

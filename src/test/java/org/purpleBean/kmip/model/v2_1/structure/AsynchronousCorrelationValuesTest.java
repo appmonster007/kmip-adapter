@@ -32,8 +32,8 @@ class AsynchronousCorrelationValuesTest extends AbstractKmipStructureTestSuite<A
 
     @Override
     protected AsynchronousCorrelationValues createDefault() {
-        // TODO: Create a default instance of the structure
-        return new AsynchronousCorrelationValues();
+        return AsynchronousCorrelationValues.of(
+                List.of(AsynchronousCorrelationValue.of(new byte[]{0x01, 0x02})));
     }
 
     @Override

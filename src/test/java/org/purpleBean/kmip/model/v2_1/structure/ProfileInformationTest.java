@@ -32,8 +32,7 @@ class ProfileInformationTest extends AbstractKmipStructureTestSuite<ProfileInfor
 
     @Override
     protected ProfileInformation createDefault() {
-        // TODO: Create a default instance of the structure
-        return new ProfileInformation();
+        return ProfileInformation.of(ProfileName.Standard.COMPLETE_SERVER_BASIC.inst());
     }
 
     @Override

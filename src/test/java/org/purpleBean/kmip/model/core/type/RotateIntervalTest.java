@@ -31,7 +31,7 @@ class RotateIntervalTest extends AbstractKmipDataTypeTestSuite<RotateInterval> i
     }
 
     @Override
-    protected RotateInterval createDefault() {
+    public RotateInterval createDefault() {
         return RotateInterval.of(FIXED_VALUE);
     }
 

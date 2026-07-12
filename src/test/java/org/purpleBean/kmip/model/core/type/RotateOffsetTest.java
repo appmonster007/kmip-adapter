@@ -31,7 +31,7 @@ class RotateOffsetTest extends AbstractKmipDataTypeTestSuite<RotateOffset> imple
     }
 
     @Override
-    protected RotateOffset createDefault() {
+    public RotateOffset createDefault() {
         return RotateOffset.of(FIXED_VALUE);
     }
 

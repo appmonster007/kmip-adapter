@@ -11,6 +11,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.v2_1.structure.AsynchronousCorrelationValues;
+import org.purpleBean.kmip.model.v2_1.structure.Operations;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.QueryAsynchronousRequestsOpRequestPayload;
 
 import java.io.IOException;
@@ -29,7 +31,12 @@ public class QueryAsynchronousRequestsOpRequestPayloadTtlvDeserializer extends A
 
     @Override
     protected void setValue(QueryAsynchronousRequestsOpRequestPayload.QueryAsynchronousRequestsOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // No fields per KMIP spec
+        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValues(mapper.readValue(p, AsynchronousCorrelationValues.class));
+            case KmipTag.Standard.OPERATIONS -> builder.operations(mapper.readValue(p, Operations.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
     }
 
     @Override

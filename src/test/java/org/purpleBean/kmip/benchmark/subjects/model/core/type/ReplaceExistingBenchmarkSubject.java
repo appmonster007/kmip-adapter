@@ -20,7 +20,7 @@ public class ReplaceExistingBenchmarkSubject extends KmipBenchmarkSubject<Replac
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ReplaceExistingBenchmarkSubject() throws Exception {
-        ReplaceExisting subject = ReplaceExisting.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
+        ReplaceExisting subject = ReplaceExisting.of(true);
         initialize(subject, ReplaceExisting.class);
     }
 

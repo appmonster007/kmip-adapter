@@ -31,7 +31,7 @@ class ShortUniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<ShortUniqu
     }
 
     @Override
-    protected ShortUniqueIdentifier createDefault() {
+    public ShortUniqueIdentifier createDefault() {
         return ShortUniqueIdentifier.of(FIXED_VALUE);
     }
 

@@ -32,8 +32,7 @@ class RngParametersTest extends AbstractKmipStructureTestSuite<RngParameters> {
 
     @Override
     protected RngParameters createDefault() {
-        // TODO: Create a default instance of the structure
-        return new RngParameters();
+        return RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst());
     }
 
     @Override

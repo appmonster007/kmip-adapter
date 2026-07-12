@@ -31,7 +31,7 @@ class RotateLatestTest extends AbstractKmipDataTypeTestSuite<RotateLatest> imple
     }
 
     @Override
-    protected RotateLatest createDefault() {
+    public RotateLatest createDefault() {
         return RotateLatest.of(FIXED_VALUE);
     }
 

@@ -23,11 +23,11 @@ class Pkcs11ReturnCodeJsonTest extends AbstractJsonSerializationTestSuite<Pkcs11
 
     @Override
     public Pkcs11ReturnCode createDefault() {
-        return Pkcs11ReturnCode.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
+        return Pkcs11ReturnCode.of(1);
     }
 
     @Override
     public Pkcs11ReturnCode createVariant() {
-        return Pkcs11ReturnCode.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
+        return Pkcs11ReturnCode.of(2);
     }
 }

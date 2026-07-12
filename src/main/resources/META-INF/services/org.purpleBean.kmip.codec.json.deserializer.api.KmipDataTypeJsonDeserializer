@@ -419,6 +419,7 @@ org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.CapabilityInfor
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.CurrentAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.NewAttributeJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.ObjectGroupsJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.ObjectTypesJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.ObjectsJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.OperationsJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.ProfileInformationJsonDeserializer
@@ -518,3 +519,4 @@ org.purpleBean.kmip.codec.json.deserializer.model.v3_0.structure.response.payloa
 org.purpleBean.kmip.codec.json.deserializer.model.v3_0.structure.response.payload.CreateUserOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v3_0.structure.response.payload.DeactivateOpResponsePayloadJsonDeserializer
 org.purpleBean.kmip.codec.json.deserializer.model.v3_0.structure.response.payload.ObliterateOpResponsePayloadJsonDeserializer
+org.purpleBean.kmip.codec.json.deserializer.model.v3_0.type.NistSecurityCategoryJsonDeserializer

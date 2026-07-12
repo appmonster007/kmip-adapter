@@ -32,8 +32,7 @@ class CapabilityInformationTest extends AbstractKmipStructureTestSuite<Capabilit
 
     @Override
     protected CapabilityInformation createDefault() {
-        // TODO: Create a default instance of the structure
-        return new CapabilityInformation();
+        return CapabilityInformation.builder().build();
     }
 
     @Override

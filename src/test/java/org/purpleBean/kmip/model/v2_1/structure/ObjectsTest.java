@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 
@@ -32,8 +33,7 @@ class ObjectsTest extends AbstractKmipStructureTestSuite<Objects> {
 
     @Override
     protected Objects createDefault() {
-        // TODO: Create a default instance of the structure
-        return new Objects();
+        return Objects.of(List.of(UniqueIdentifier.of("test-uid-1")));
     }
 
     @Override

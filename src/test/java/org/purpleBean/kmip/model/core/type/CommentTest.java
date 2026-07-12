@@ -31,7 +31,7 @@ class CommentTest extends AbstractKmipDataTypeTestSuite<Comment> implements Kmip
     }
 
     @Override
-    protected Comment createDefault() {
+    public Comment createDefault() {
         return Comment.of(FIXED_VALUE);
     }
 

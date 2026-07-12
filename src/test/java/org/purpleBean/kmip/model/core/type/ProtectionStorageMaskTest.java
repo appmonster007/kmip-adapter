@@ -31,7 +31,7 @@ class ProtectionStorageMaskTest extends AbstractKmipDataTypeTestSuite<Protection
     }
 
     @Override
-    protected ProtectionStorageMask createDefault() {
+    public ProtectionStorageMask createDefault() {
         return ProtectionStorageMask.of(FIXED_VALUE);
     }
 

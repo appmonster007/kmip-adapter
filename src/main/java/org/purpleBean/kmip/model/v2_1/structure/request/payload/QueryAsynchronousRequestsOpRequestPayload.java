@@ -5,15 +5,14 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.v2_1.structure.AsynchronousCorrelationValues;
+import org.purpleBean.kmip.model.v2_1.structure.Operations;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
-/**
- * KMIP QueryAsynchronousRequests Request Payload (stub). Field-level design pending — currently registers as an
- * empty structure so the codec registry is populated; downstream work needs to add the
- * actual request fields per OASIS KMIP spec for QueryAsynchronousRequests.
- */
 @Data
 @Builder(toBuilder = true)
 public class QueryAsynchronousRequestsOpRequestPayload implements RequestPayloadStructure {
@@ -29,13 +28,24 @@ public class QueryAsynchronousRequestsOpRequestPayload implements RequestPayload
         }
     }
 
+    private final AsynchronousCorrelationValues asynchronousCorrelationValues;
+    private final Operations operations;
+
     @Builder
-    private QueryAsynchronousRequestsOpRequestPayload() {
+    private QueryAsynchronousRequestsOpRequestPayload(AsynchronousCorrelationValues asynchronousCorrelationValues,
+                                                       Operations operations) {
+        this.asynchronousCorrelationValues = asynchronousCorrelationValues;
+        this.operations = operations;
         validate();
     }
 
     public static QueryAsynchronousRequestsOpRequestPayload of(List<KmipDataType> values) {
-        return QueryAsynchronousRequestsOpRequestPayload.builder().build();
+        var builder = QueryAsynchronousRequestsOpRequestPayload.builder();
+        values.forEach(value -> {
+            if (value instanceof AsynchronousCorrelationValues v) builder.asynchronousCorrelationValues(v);
+            else if (value instanceof Operations v) builder.operations(v);
+        });
+        return builder.build();
     }
 
     private void validate() {
@@ -51,10 +61,18 @@ public class QueryAsynchronousRequestsOpRequestPayload implements RequestPayload
     public EncodingType getEncodingType() { return encodingType; }
 
     @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
+    public boolean isSupported() {
+        KmipSpec spec = KmipContext.getSpec();
+        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
+    }
 
     @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
+    public KmipDataType[] getValue() {
+        return Stream.of(asynchronousCorrelationValues, operations)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
+    }
 
     @Override
     public Operation getCorrespondingOperation() { return operation.inst(); }

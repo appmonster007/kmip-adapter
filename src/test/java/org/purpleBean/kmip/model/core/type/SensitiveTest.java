@@ -31,7 +31,7 @@ class SensitiveTest extends AbstractKmipDataTypeTestSuite<Sensitive> implements 
     }
 
     @Override
-    protected Sensitive createDefault() {
+    public Sensitive createDefault() {
         return Sensitive.of(FIXED_VALUE);
     }
 

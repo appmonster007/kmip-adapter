@@ -406,6 +406,7 @@ org.purpleBean.kmip.model.v2_1.structure.CapabilityInformation
 org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute
 org.purpleBean.kmip.model.v2_1.structure.NewAttribute
 org.purpleBean.kmip.model.v2_1.structure.ObjectGroups
+org.purpleBean.kmip.model.v2_1.structure.ObjectTypes
 org.purpleBean.kmip.model.v2_1.structure.Objects
 org.purpleBean.kmip.model.v2_1.structure.Operations
 org.purpleBean.kmip.model.v2_1.structure.ProfileInformation
@@ -505,3 +506,4 @@ org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateGroupOpResponseP
 org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateUserOpResponsePayload
 org.purpleBean.kmip.model.v3_0.structure.response.payload.DeactivateOpResponsePayload
 org.purpleBean.kmip.model.v3_0.structure.response.payload.ObliterateOpResponsePayload
+org.purpleBean.kmip.model.v3_0.type.NistSecurityCategory

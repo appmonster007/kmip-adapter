@@ -31,7 +31,7 @@ class RotateDateTest extends AbstractKmipDataTypeTestSuite<RotateDate> implement
     }
 
     @Override
-    protected RotateDate createDefault() {
+    public RotateDate createDefault() {
         return RotateDate.of(FIXED_VALUE);
     }
 

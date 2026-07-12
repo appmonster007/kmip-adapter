@@ -23,11 +23,11 @@ class ReplaceExistingTtlvTest extends AbstractTtlvSerializationTestSuite<Replace
 
     @Override
     public ReplaceExisting createDefault() {
-        return ReplaceExisting.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
+        return ReplaceExisting.of(true);
     }
 
     @Override
     public ReplaceExisting createVariant() {
-        return ReplaceExisting.of(ByteBuffer.wrap(new byte[]{0x04, 0x05, 0x06}));
+        return ReplaceExisting.of(false);
     }
 }

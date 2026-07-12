@@ -31,7 +31,7 @@ class NeverExtractableTest extends AbstractKmipDataTypeTestSuite<NeverExtractabl
     }
 
     @Override
-    protected NeverExtractable createDefault() {
+    public NeverExtractable createDefault() {
         return NeverExtractable.of(FIXED_VALUE);
     }
 

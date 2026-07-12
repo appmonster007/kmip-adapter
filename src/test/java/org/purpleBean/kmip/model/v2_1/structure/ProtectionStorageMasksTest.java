@@ -32,8 +32,7 @@ class ProtectionStorageMasksTest extends AbstractKmipStructureTestSuite<Protecti
 
     @Override
     protected ProtectionStorageMasks createDefault() {
-        // TODO: Create a default instance of the structure
-        return new ProtectionStorageMasks();
+        return ProtectionStorageMasks.of(List.of(ProtectionStorageMask.of(1)));
     }
 
     @Override

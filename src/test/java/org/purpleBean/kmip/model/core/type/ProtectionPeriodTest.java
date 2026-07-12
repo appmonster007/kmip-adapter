@@ -31,7 +31,7 @@ class ProtectionPeriodTest extends AbstractKmipDataTypeTestSuite<ProtectionPerio
     }
 
     @Override
-    protected ProtectionPeriod createDefault() {
+    public ProtectionPeriod createDefault() {
         return ProtectionPeriod.of(FIXED_VALUE);
     }
 

@@ -20,7 +20,7 @@ public class Pkcs11ReturnCodeBenchmarkSubject extends KmipBenchmarkSubject<Pkcs1
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public Pkcs11ReturnCodeBenchmarkSubject() throws Exception {
-        Pkcs11ReturnCode subject = Pkcs11ReturnCode.of(ByteBuffer.wrap(new byte[]{0x01, 0x02, 0x03}));
+        Pkcs11ReturnCode subject = Pkcs11ReturnCode.of(1);
         initialize(subject, Pkcs11ReturnCode.class);
     }
 

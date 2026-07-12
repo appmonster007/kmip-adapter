@@ -32,8 +32,7 @@ class ProfileVersionTest extends AbstractKmipStructureTestSuite<ProfileVersion> 
 
     @Override
     protected ProfileVersion createDefault() {
-        // TODO: Create a default instance of the structure
-        return new ProfileVersion();
+        return ProfileVersion.of(2, 1);
     }
 
     @Override

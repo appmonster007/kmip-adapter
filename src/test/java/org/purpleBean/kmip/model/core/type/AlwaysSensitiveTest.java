@@ -31,7 +31,7 @@ class AlwaysSensitiveTest extends AbstractKmipDataTypeTestSuite<AlwaysSensitive>
     }
 
     @Override
-    protected AlwaysSensitive createDefault() {
+    public AlwaysSensitive createDefault() {
         return AlwaysSensitive.of(FIXED_VALUE);
     }
 

@@ -406,6 +406,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.CapabilityInforma
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.CurrentAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.NewAttributeTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.ObjectGroupsTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.ObjectTypesTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.ObjectsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.OperationsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.ProfileInformationTtlvSerializer
@@ -505,3 +506,4 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.response.payload.
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.response.payload.CreateUserOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.response.payload.DeactivateOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.response.payload.ObliterateOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.type.NistSecurityCategoryTtlvSerializer

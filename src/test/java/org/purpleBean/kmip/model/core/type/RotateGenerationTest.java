@@ -31,7 +31,7 @@ class RotateGenerationTest extends AbstractKmipDataTypeTestSuite<RotateGeneratio
     }
 
     @Override
-    protected RotateGeneration createDefault() {
+    public RotateGeneration createDefault() {
         return RotateGeneration.of(FIXED_VALUE);
     }
 

@@ -31,7 +31,7 @@ class QuantumSafeTest extends AbstractKmipDataTypeTestSuite<QuantumSafe> impleme
     }
 
     @Override
-    protected QuantumSafe createDefault() {
+    public QuantumSafe createDefault() {
         return QuantumSafe.of(FIXED_VALUE);
     }
 

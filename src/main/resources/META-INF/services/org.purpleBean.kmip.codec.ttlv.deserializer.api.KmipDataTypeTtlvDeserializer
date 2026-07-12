@@ -419,6 +419,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.CapabilityInfor
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.CurrentAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.NewAttributeTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.ObjectGroupsTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.ObjectTypesTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.ObjectsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.OperationsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.ProfileInformationTtlvDeserializer
@@ -518,3 +519,4 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.CreateUserOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.DeactivateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload.ObliterateOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.type.NistSecurityCategoryTtlvDeserializer

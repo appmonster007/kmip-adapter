@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.type.SubmissionDate;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 
@@ -32,8 +33,11 @@ class AsynchronousRequestTest extends AbstractKmipStructureTestSuite<Asynchronou
 
     @Override
     protected AsynchronousRequest createDefault() {
-        // TODO: Create a default instance of the structure
-        return new AsynchronousRequest();
+        return AsynchronousRequest.of(
+                AsynchronousCorrelationValue.of(new byte[]{0x01}),
+                Operation.Standard.CREATE.inst(),
+                SubmissionDate.of(java.time.OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, java.time.ZoneOffset.UTC)),
+                ProcessingStage.Standard.SUBMITTED.inst());
     }
 
     @Override
