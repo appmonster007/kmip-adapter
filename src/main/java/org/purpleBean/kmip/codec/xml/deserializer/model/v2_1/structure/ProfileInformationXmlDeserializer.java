@@ -1,0 +1,49 @@
+package org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.type.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.model.v2_1.structure.ProfileInformation;
+
+import java.io.IOException;
+import org.purpleBean.kmip.model.v2_1.structure.ProfileVersion;
+import org.purpleBean.kmip.model.v2_1.type.ServerUri;
+import org.purpleBean.kmip.model.v2_1.type.ServerPort;
+
+public class ProfileInformationXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ProfileInformation, ProfileInformation.ProfileInformationBuilder> {
+
+    public ProfileInformationXmlDeserializer() {
+        super(ProfileInformation.kmipTag, ProfileInformation.encodingType);
+    }
+
+    @Override
+    protected ProfileInformation.ProfileInformationBuilder createBuilder() {
+        return ProfileInformation.builder();
+    }
+
+    @Override
+    protected void setValue(ProfileInformation.ProfileInformationBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+                KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.PROFILE_NAME -> builder.profileName(ctxt.readValue(p, ProfileName.class));
+            case KmipTag.Standard.PROFILE_VERSION -> builder.profileVersion(ctxt.readValue(p, ProfileVersion.class));
+            case KmipTag.Standard.SERVER_URI -> builder.serverUri(ctxt.readValue(p, ServerUri.class));
+            case KmipTag.Standard.SERVER_PORT -> builder.serverPort(ctxt.readValue(p, ServerPort.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
+    }
+
+    @Override
+    protected ProfileInformation build(ProfileInformation.ProfileInformationBuilder builder) {
+        return builder.build();
+    }
+}

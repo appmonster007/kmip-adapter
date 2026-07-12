@@ -1,0 +1,49 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure;
+
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.type.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.v2_1.structure.ProfileInformation;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import org.purpleBean.kmip.model.v2_1.structure.ProfileVersion;
+import org.purpleBean.kmip.model.v2_1.type.ServerUri;
+import org.purpleBean.kmip.model.v2_1.type.ServerPort;
+
+public class ProfileInformationTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProfileInformation, ProfileInformation.ProfileInformationBuilder> {
+
+    public ProfileInformationTtlvDeserializer() {
+        super(ProfileInformation.kmipTag, ProfileInformation.encodingType);
+    }
+
+    @Override
+    protected ProfileInformation.ProfileInformationBuilder createBuilder() {
+        return ProfileInformation.builder();
+    }
+
+    @Override
+    protected void setValue(ProfileInformation.ProfileInformationBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+                KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+        switch (nodeTag) {
+            case KmipTag.Standard.PROFILE_NAME -> builder.profileName(mapper.readValue(p, ProfileName.class));
+            case KmipTag.Standard.PROFILE_VERSION -> builder.profileVersion(mapper.readValue(p, ProfileVersion.class));
+            case KmipTag.Standard.SERVER_URI -> builder.serverUri(mapper.readValue(p, ServerUri.class));
+            case KmipTag.Standard.SERVER_PORT -> builder.serverPort(mapper.readValue(p, ServerPort.class));
+            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+        }
+    }
+
+    @Override
+    protected ProfileInformation build(ProfileInformation.ProfileInformationBuilder builder) {
+        return builder.build();
+    }
+}
