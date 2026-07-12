@@ -9,6 +9,118 @@ description: "Scaffolds new KMIP enums, data types, and structures by running th
 
 ---
 
+## Core design principle: version-separated implementations
+
+**Any KMIP type that differs between spec versions MUST be implemented as a separate Java class in a separate version package.** This applies to ALL type categories — enums, datatypes, and structures — not just message framing types. Never modify an existing version's class to accommodate a later version's changes.
+
+### What counts as "changed" (triggers version separation)
+
+| Change kind | Examples |
+|-------------|---------|
+| New child field added | `ClientCorrelationValue` added to `RequestHeader` in v2.1 |
+| Child field removed | A field dropped between versions |
+| Encoding type changed | Tag changes from INTEGER to TEXT_STRING |
+| Java/KMIP data type changed | Field type changes between versions |
+| Attribute status changed | Field becomes/stops being a KMIP attribute |
+| Structure composition changed | Child field's own type changes, requiring a different class |
+| Enum value set changed | Values added or removed for a given version |
+
+### The rule
+
+| Situation | Action |
+|-----------|--------|
+| Type exists only in one version range | Single class in that version's package |
+| Type changes in any way in a later version | New class in the new version's package; existing class untouched |
+| New class's `supportedVersions` overlaps with an older class | **Narrow the older class first**, then add the new class |
+
+### Why
+
+The codec registry is keyed on `(KmipSpec, tag)`. When two classes register for the same `(spec, tag)` pair, the last one loaded wins — which is non-deterministic. The only safe design is one class per `(version-range, tag)` pair, with no overlapping spec sets.
+
+### Examples
+
+```
+# Structure with new fields in v2.1:
+v1_2/structure/request/RequestHeader.java   supportedVersions = {V1_0, V1_1, V1_2, V1_3, V1_4}
+v2_1/structure/request/RequestHeader.java   supportedVersions = {V2_0, V2_1, V3_0}
+
+# Enum where values were added in v2.1:
+core/enumeration/Operation.java             supportedVersions = {UnknownVersion, V1_2} (values up to v1.2)
+v2_1/enumeration/Operation.java             supportedVersions = {UnknownVersion, V2_1, V3_0} (adds new values)
+
+# Datatype where encoding type changed in v3.0:
+v2_1/type/SomeValue.java                    supportedVersions = {V2_1}
+v3_0/type/SomeValue.java                    supportedVersions = {V3_0} (different encoding)
+```
+
+If v3.0 further changes a v2.1 type: create the `v3_0/` class and narrow the v2_1 class's `supportedVersions` to exclude `V3_0`.
+
+---
+
+## Message framing types — a canonical version-separation example
+
+The six message framing types illustrate the pattern and change with nearly every KMIP version. They also implement special interfaces and need additional `register()` calls — but the version-separation rule itself is the same as for any other type.
+
+| Type | Sub-package flag |
+|------|-----------------|
+| `RequestMessage` | `-s request` |
+| `RequestHeader` | `-s request` |
+| `RequestBatchItem` | `-s request` |
+| `ResponseMessage` | `-s response` |
+| `ResponseHeader` | `-s response` |
+| `ResponseBatchItem` | `-s response` |
+
+These types implement special interfaces (`RequestMessageStructure`, `RequestHeaderStructure`, etc.) and must call `RequestMessageStructure.register(...)` / `RequestHeaderStructure.register(...)` in their static blocks — in addition to `KmipDataType.register(...)`. See the v1.2 classes as the authoritative template.
+
+### Version-separated generation workflow (message framing types as example)
+
+**Step A — Narrow the previous version's class** if its `supportedVersions` includes the new version's specs. Edit the field directly:
+
+```java
+// v1_2/structure/request/RequestBatchItem.java — before generating v2_1 version
+// Change from: Set.of(UnknownVersion, V1_2, V1_3, V1_4, V2_0, V2_1, V3_0)
+// Change to:   Set.of(UnknownVersion, V1_2, V1_3, V1_4)
+```
+
+Also update the static block's loop condition to match.
+
+**Step B — Scaffold with the generator:**
+
+```bash
+# v2.1 message framing — all six types
+./scripts/generators/generate.sh structure --all -m v2_1 -s request \
+    RequestMessage RequestHeader RequestBatchItem
+
+./scripts/generators/generate.sh structure --all -m v2_1 -s response \
+    ResponseMessage ResponseHeader ResponseBatchItem
+```
+
+**Step C — Fill in fields** using the previous version's class as a template. Copy all fields from the older version and add/remove/change fields per the spec. Update:
+- The `@Builder` field list and constructor
+- `of(List<KmipDataType>, List<Exception>)` factory — map lookups for each field
+- `getValue()` — return fields in spec-mandated wire order
+- `validate()` — same logic as previous version
+- Static block — add `XxxStructure.register(spec, ClassName.class, ClassName::of)` alongside `KmipDataType.register(...)`
+- Deserializer `setValue()` switch — one case per child tag, copying from old deserializer and adding new cases
+
+**Step D — Fill in scalar prerequisites.** If a new version introduces new scalar fields (e.g., `ClientCorrelationValue` in v2.1), generate them first:
+
+```bash
+./scripts/generators/generate.sh datatype --all -m v2_1 --type String \
+    ClientCorrelationValue ServerCorrelationValue
+```
+
+Scalar datatypes (TextString, ByteString, etc.) do NOT need custom deserializer/serializer bodies — the abstract base classes handle them. The generated empty-body codec classes are correct as-is.
+
+**Step E — Compile and run the verification test:**
+
+```bash
+mvn compile -pl . -q
+mvn test -pl . -Dtest="KmipV21VerificationTest#diagnoseFirst10" 2>&1 | grep -E "FAIL|Verified|Passed"
+```
+
+---
+
 ## Pre-flight: collect all required inputs before running anything
 
 For **every** entity type, the caller must confirm:
@@ -22,6 +134,7 @@ For **every** entity type, the caller must confirm:
 | Is KMIP attribute? | Boolean — drives `--attr` flag and attribute test suite |
 | Encoding type | For `datatype` only (see `--type` table below) |
 | Child fields (structure only) | Recursively: name, type, version range, attr flag |
+| Is this a version-separated re-implementation? | Applies to ANY type (enum/datatype/structure) that changed in any way — fields, encoding, composition, attribute status. If yes: identify the previous version's class to narrow and use as template |
 
 For child fields of a structure, resolve each child type first (bottom-up): check whether the child already exists in the source tree. If it does not, generate and fill it before the parent.
 
@@ -46,6 +159,8 @@ Map the KMIP "introduced in" version to the correct `-m` flag:
 - `docs/kmip-spec/v3.x/scraped/enumerations-v3.0.md`
 
 If the entity appears in v1.2, use `core`. If it first appears in v2.1, use `v2_1`. If it's present across multiple versions, choose the earliest as the module and note the ceiling (last-seen version) — you'll need it for per-value `supportedVersions` in the `Standard` enum.
+
+**For version-separated re-implementations** (e.g., a v2.1 variant of a v1.2 structure), use the *new* version's module (`-m v2_1`) even though the type name existed before.
 
 ---
 
@@ -129,10 +244,43 @@ protected ExampleEnum createDifferentFromDefault() {
 
 ## Step 3 — Fill in structure fields (structure entity only)
 
+The generator produces a scaffold with TODO markers. For a **new type** (no predecessor):
 1. All child types must already exist (generate bottom-up if any are missing).
 2. Add `@Builder` fields for each child with their types.
 3. Update `createDefault()` in the test to build a valid instance.
 4. Update `expectedMinComponentCount()` and `validateComponents()` in the test.
+
+For a **version-separated re-implementation** (e.g., v2.1 variant of a v1.2 structure):
+1. Open the previous version's class alongside the new scaffold.
+2. Copy all fields from the old class into the new scaffold.
+3. Add new fields introduced in the new version (at the correct position per wire order).
+4. Remove fields that were removed in the new version.
+5. Copy the `of()` factory, `getValue()`, `validate()`, and `isSupported()` bodies from the old class, adapting to the new field set.
+6. Copy the deserializer's `setValue()` switch from the old deserializer, adding new tag cases for new fields.
+7. The serializer body stays empty — the abstract base handles it.
+8. Update the test's `createDefault()` to build a valid instance using the new version's required fields.
+
+### Static block for version-separated types with named interfaces
+
+When the type implements a named structure interface (e.g., `RequestHeaderStructure`), the static block must call BOTH `KmipDataType.register` AND the interface-specific register. Plain structures, enums, and datatypes only need `KmipDataType.register`:
+
+```java
+static {
+    for (KmipSpec spec : supportedVersions) {
+        if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
+        KmipDataType.register(spec, kmipTag.getValue(), encodingType, RequestHeader.class);
+        RequestHeaderStructure.register(spec, RequestHeader.class, RequestHeader::of);  // interface-specific
+    }
+}
+```
+
+The interface-specific register call varies by type:
+- `RequestMessage` → `RequestMessageStructure.register(...)`
+- `RequestHeader` → `RequestHeaderStructure.register(...)`
+- `RequestBatchItem` → `RequestBatchItemStructure.register(...)`
+- `ResponseMessage` → `ResponseMessageStructure.register(...)`
+- `ResponseHeader` → `ResponseHeaderStructure.register(...)`
+- `ResponseBatchItem` → `ResponseBatchItemStructure.register(...)`
 
 ---
 
@@ -143,6 +291,12 @@ mvn test
 ```
 
 All tests must pass (including codec tests and benchmarks). Fix any failures before reporting done.
+
+For message framing types, also run the version-specific verification test:
+
+```bash
+mvn test -pl . -Dtest="KmipV21VerificationTest#diagnoseFirst10" 2>&1 | grep -E "FAIL|Verified|Passed"
+```
 
 ---
 
@@ -192,6 +346,24 @@ src/test/java/org/purpleBean/kmip/benchmark/subjects/model/v2_1/enumeration/Adju
 META-INF/services entries updated automatically
 ```
 
+For `./scripts/generators/generate.sh structure --all -m v2_1 -s request RequestHeader`:
+
+```
+src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/RequestHeader.java
+src/main/java/org/purpleBean/kmip/codec/xml/deserializer/model/v2_1/structure/request/RequestHeaderXmlDeserializer.java
+src/main/java/org/purpleBean/kmip/codec/xml/serializer/model/v2_1/structure/request/RequestHeaderXmlSerializer.java
+src/main/java/org/purpleBean/kmip/codec/json/deserializer/model/v2_1/structure/request/RequestHeaderJsonDeserializer.java
+src/main/java/org/purpleBean/kmip/codec/json/serializer/model/v2_1/structure/request/RequestHeaderJsonSerializer.java
+src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/model/v2_1/structure/request/RequestHeaderTtlvDeserializer.java
+src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/model/v2_1/structure/request/RequestHeaderTtlvSerializer.java
+src/test/java/org/purpleBean/kmip/model/v2_1/structure/request/RequestHeaderTest.java
+src/test/java/org/purpleBean/kmip/codec/xml/model/v2_1/structure/request/RequestHeaderXmlTest.java
+src/test/java/org/purpleBean/kmip/codec/json/model/v2_1/structure/request/RequestHeaderJsonTest.java
+src/test/java/org/purpleBean/kmip/codec/ttlv/model/v2_1/structure/request/RequestHeaderTtlvTest.java
+src/test/java/org/purpleBean/kmip/benchmark/subjects/model/v2_1/structure/request/RequestHeaderBenchmarkSubject.java
+META-INF/services entries updated automatically
+```
+
 ---
 
 ## Examples
@@ -209,9 +381,48 @@ META-INF/services entries updated automatically
 # v1.2 string-backed datatype (attribute)
 ./scripts/generators/generate.sh datatype --all --attr --type String UniqueIdentifier
 
-# Sub-packaged structure
+# Sub-packaged structure (generic)
 ./scripts/generators/generate.sh structure --all -m core -s request CreateRequestPayload
 
 # Scaffold only (class + domain test, no codecs)
 ./scripts/generators/generate.sh enum --class --domain-test -m v2_1 AdjustmentType
+
+# v2.1 scalar prerequisite types for message framing
+./scripts/generators/generate.sh datatype --all -m v2_1 --type String \
+    ClientCorrelationValue ServerCorrelationValue
+
+# v2.1 message framing types (version-separated re-implementations)
+./scripts/generators/generate.sh structure --all -m v2_1 -s request \
+    RequestMessage RequestHeader RequestBatchItem
+./scripts/generators/generate.sh structure --all -m v2_1 -s response \
+    ResponseMessage ResponseHeader ResponseBatchItem
+
+# v3.0 message framing types (only if v3.0 changes fields vs v2.1)
+./scripts/generators/generate.sh structure --all -m v3_0 -s request \
+    RequestMessage RequestHeader RequestBatchItem
+./scripts/generators/generate.sh structure --all -m v3_0 -s response \
+    ResponseMessage ResponseHeader ResponseBatchItem
 ```
+
+---
+
+## Version-separated implementation checklist
+
+Applies whenever ANY KMIP type (enum, datatype, structure) differs between spec versions:
+
+**Before generating:**
+- [ ] Confirm the type actually changed (see "What counts as changed" table above)
+- [ ] Identify which existing class(es) register for the new version's specs
+- [ ] Narrow those class(es)' `supportedVersions` (and static block) to exclude the new version's specs
+
+**Generate and fill:**
+- [ ] Generate any new scalar/enum prerequisite types first (bottom-up)
+- [ ] Scaffold the new-version class(es) using the appropriate module flag (`-m v2_1`, `-m v3_0`, etc.)
+- [ ] Fill each model class: copy from old version, apply spec delta (add/remove/change fields, encoding, composition), update `of()`, `getValue()`, `validate()`
+- [ ] Fill each deserializer's `setValue()` switch: copy from old version, add/remove cases per spec delta
+- [ ] For structure types implementing a named interface (e.g., `RequestHeaderStructure`): add the interface-specific `register()` call to the static block
+
+**Validate:**
+- [ ] `mvn compile` — zero errors
+- [ ] `mvn test` — all tests pass (including any version-specific verification tests)
+- [ ] For message framing types specifically: `mvn test -Dtest="KmipV21VerificationTest#diagnoseFirst10"` resolves framing errors
