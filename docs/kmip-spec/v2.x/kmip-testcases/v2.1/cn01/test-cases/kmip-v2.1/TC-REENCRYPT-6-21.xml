@@ -1,0 +1,1196 @@
+<KMIP>
+<!--
+     Key Management Interoperability Protocol Test Cases Version 2.1
+     Committee Note 01
+     07 May 2020
+     Copyright (c) OASIS Open 2020. All Rights Reserved.
+     Source: https://docs.oasis-open.org/kmip/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1/
+     Latest version of the specification: https://docs.oasis-open.org/kmip/kmip-testcases/v2.1/kmip-testcases-v2.1.html
+     TC IPR Statement: https://www.oasis-open.org/committees/kmip/ipr.php
+-->
+<RequestMessage>
+  <RequestHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <ClientCorrelationValue type="TextString" value="TC-REENCRYPT-6-21 step=0"/>
+    <BatchCount type="Integer" value="10"/>
+  </RequestHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0000"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key0"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0001"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key1"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0002"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key2"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0003"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key3"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0004"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key4"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0005"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key5"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0006"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key6"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0007"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key7"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0008"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key8"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0009"/>
+    <RequestPayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <Attributes>
+        <CryptographicAlgorithm type="Enumeration" value="AES"/>
+        <CryptographicLength type="Integer" value="256"/>
+        <CryptographicUsageMask type="Integer" value="Decrypt Encrypt"/>
+        <Attribute>
+          <VendorIdentification type="TextString" value="x"/>
+          <AttributeName type="TextString" value="Name"/>
+          <AttributeValue type="TextString" value="TC-REENCRYPT-6-21-key9"/>
+        </Attribute>
+        <ActivationDate type="DateTime" value="$NOW-3600"/>
+      </Attributes>
+    </RequestPayload>
+  </BatchItem>
+</RequestMessage>
+
+<ResponseMessage>
+  <ResponseHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <TimeStamp type="DateTime" value="$NOW"/>
+    <BatchCount type="Integer" value="10"/>
+  </ResponseHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0000"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0001"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0002"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0003"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0004"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0005"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0006"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0007"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0008"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Create"/>
+    <UniqueBatchItemID type="ByteString" value="0009"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <ObjectType type="Enumeration" value="SymmetricKey"/>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+    </ResponsePayload>
+  </BatchItem>
+</ResponseMessage>
+
+<RequestMessage>
+  <RequestHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <ClientCorrelationValue type="TextString" value="TC-REENCRYPT-6-21 step=1"/>
+    <BatchCount type="Integer" value="23"/>
+  </RequestHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="RNGRetrieve"/>
+    <UniqueBatchItemID type="ByteString" value="1fff"/>
+    <RequestPayload>
+      <DataLength type="Integer" value="32"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eee"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Enumeration" value="RNGRetrieve"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1ddd"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Enumeration" value="Encrypt"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee0"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee1"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee2"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee3"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee4"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee5"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee6"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee7"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee8"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <Ephemeral type="Boolean" value="true"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee9"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd9"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd8"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd7"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd6"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd5"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd4"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd3"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd2"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd1"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <Ephemeral type="Boolean" value="false"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd0"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <CryptographicParameters>
+        <BlockCipherMode type="Enumeration" value="CBC"/>
+        <PaddingMethod type="Enumeration" value="PKCS5"/>
+      </CryptographicParameters>
+      <Data type="Integer" value="-1"/>
+      <IVCounterNonce type="ByteString" value="01020304050607080910111213141516"/>
+    </RequestPayload>
+  </BatchItem>
+</RequestMessage>
+
+<ResponseMessage>
+  <ResponseHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <TimeStamp type="DateTime" value="$NOW"/>
+    <BatchCount type="Integer" value="23"/>
+  </ResponseHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="RNGRetrieve"/>
+    <UniqueBatchItemID type="ByteString" value="1fff"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <Data type="ByteString" value="$DATA_0"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eee"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <Data type="ByteString" value="$DATA_1"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1ddd"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee0"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee1"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee2"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee3"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee4"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee5"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee6"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee7"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee8"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Encrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1eeee9"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd9"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+      <Data type="ByteString" value="$DATA_2"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd8"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+      <Data type="ByteString" value="$DATA_3"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd7"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+      <Data type="ByteString" value="$DATA_4"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd6"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+      <Data type="ByteString" value="$DATA_5"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd5"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+      <Data type="ByteString" value="$DATA_6"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd4"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+      <Data type="ByteString" value="$DATA_7"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd3"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+      <Data type="ByteString" value="$DATA_8"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd2"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+      <Data type="ByteString" value="$DATA_9"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd1"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+      <Data type="ByteString" value="$DATA_1"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Decrypt"/>
+    <UniqueBatchItemID type="ByteString" value="1dddd0"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <Data type="ByteString" value="$DATA_0"/>
+    </ResponsePayload>
+  </BatchItem>
+</ResponseMessage>
+
+<RequestMessage>
+  <RequestHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <ClientCorrelationValue type="TextString" value="TC-REENCRYPT-6-21 step=2"/>
+    <BatchCount type="Integer" value="10"/>
+  </RequestHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2000"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2001"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2002"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2003"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2004"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2005"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2006"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2007"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2008"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2009"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+      <RevocationReason>
+        <RevocationReasonCode type="Enumeration" value="Unspecified"/>
+      </RevocationReason>
+    </RequestPayload>
+  </BatchItem>
+</RequestMessage>
+
+<ResponseMessage>
+  <ResponseHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <TimeStamp type="DateTime" value="$NOW"/>
+    <BatchCount type="Integer" value="10"/>
+  </ResponseHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2000"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2001"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2002"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2003"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2004"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2005"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2006"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2007"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2008"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Revoke"/>
+    <UniqueBatchItemID type="ByteString" value="2009"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+    </ResponsePayload>
+  </BatchItem>
+</ResponseMessage>
+
+<RequestMessage>
+  <RequestHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <ClientCorrelationValue type="TextString" value="TC-REENCRYPT-6-21 step=3"/>
+    <BatchCount type="Integer" value="10"/>
+  </RequestHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3000"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3001"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3002"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3003"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3004"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3005"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3006"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3007"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3008"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+    </RequestPayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3009"/>
+    <RequestPayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+    </RequestPayload>
+  </BatchItem>
+</RequestMessage>
+
+<ResponseMessage>
+  <ResponseHeader>
+    <ProtocolVersion>
+      <ProtocolVersionMajor type="Integer" value="2"/>
+      <ProtocolVersionMinor type="Integer" value="1"/>
+    </ProtocolVersion>
+    <TimeStamp type="DateTime" value="$NOW"/>
+    <BatchCount type="Integer" value="10"/>
+  </ResponseHeader>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3000"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_0"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3001"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_1"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3002"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_2"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3003"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_3"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3004"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_4"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3005"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_5"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3006"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_6"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3007"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_7"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3008"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_8"/>
+    </ResponsePayload>
+  </BatchItem>
+  <BatchItem>
+    <Operation type="Enumeration" value="Destroy"/>
+    <UniqueBatchItemID type="ByteString" value="3009"/>
+    <ResultStatus type="Enumeration" value="Success"/>
+    <ResponsePayload>
+      <UniqueIdentifier type="TextString" value="$UNIQUE_IDENTIFIER_9"/>
+    </ResponsePayload>
+  </BatchItem>
+</ResponseMessage>
+</KMIP>
