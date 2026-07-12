@@ -20,7 +20,7 @@ public class ProcessOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubje
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public ProcessOpResponsePayloadBenchmarkSubject() throws Exception {
-        ProcessOpResponsePayload subject = ProcessOpResponsePayload.builder().build();  // TODO: Create a default instance
+        ProcessOpResponsePayload subject = ProcessOpResponsePayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("test-id")).build();
         initialize(subject, ProcessOpResponsePayload.class);
     }
 

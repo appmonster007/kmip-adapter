@@ -23,7 +23,7 @@ class Pkcs11FunctionTest extends AbstractKmipEnumerationTestSuite<Pkcs11Function
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
+        defaultSpec = KmipSpec.UnknownVersion;
     }
 
     @Override

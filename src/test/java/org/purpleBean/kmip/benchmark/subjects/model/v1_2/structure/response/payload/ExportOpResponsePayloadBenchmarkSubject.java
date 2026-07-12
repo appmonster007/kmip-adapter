@@ -17,10 +17,10 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ExportOpRespons
 public class ExportOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<ExportOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1; // TODO: Adjust if needed
 
     public ExportOpResponsePayloadBenchmarkSubject() throws Exception {
-        ExportOpResponsePayload subject = ExportOpResponsePayload.builder().build();  // TODO: Create a default instance
+        ExportOpResponsePayload subject = ExportOpResponsePayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-1")).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
         initialize(subject, ExportOpResponsePayload.class);
     }
 

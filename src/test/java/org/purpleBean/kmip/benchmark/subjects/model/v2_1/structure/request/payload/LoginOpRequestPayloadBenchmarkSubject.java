@@ -20,7 +20,7 @@ public class LoginOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public LoginOpRequestPayloadBenchmarkSubject() throws Exception {
-        LoginOpRequestPayload subject = LoginOpRequestPayload.builder().build();  // TODO: Create a default instance
+        LoginOpRequestPayload subject = LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), org.purpleBean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"), Password.of("pass")))).build();
         initialize(subject, LoginOpRequestPayload.class);
     }
 

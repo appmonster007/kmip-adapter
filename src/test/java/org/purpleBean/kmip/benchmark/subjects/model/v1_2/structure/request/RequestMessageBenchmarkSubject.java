@@ -29,7 +29,7 @@ public class RequestMessageBenchmarkSubject extends KmipBenchmarkSubject<Request
                 .operation(Operation.Standard.CREATE.inst())
                 .requestPayloadStructure(CreateOpRequestPayload.builder()
                         .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                        .templateAttribute(TemplateAttribute.builder().build())
+                        .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                         .build())
                 .build();
         RequestMessage subject = RequestMessage.builder()

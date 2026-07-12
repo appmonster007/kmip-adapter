@@ -20,7 +20,7 @@ public class ProtectionStorageMasksBenchmarkSubject extends KmipBenchmarkSubject
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ProtectionStorageMasksBenchmarkSubject() throws Exception {
-        ProtectionStorageMasks subject = ProtectionStorageMasks.builder().build();
+        ProtectionStorageMasks subject = ProtectionStorageMasks.of(java.util.List.of());
         initialize(subject, ProtectionStorageMasks.class);
     }
 

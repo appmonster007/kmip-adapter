@@ -20,7 +20,7 @@ public class AsynchronousCorrelationValuesBenchmarkSubject extends KmipBenchmark
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AsynchronousCorrelationValuesBenchmarkSubject() throws Exception {
-        AsynchronousCorrelationValues subject = AsynchronousCorrelationValues.builder().build();
+        AsynchronousCorrelationValues subject = AsynchronousCorrelationValues.of(java.util.List.of());
         initialize(subject, AsynchronousCorrelationValues.class);
     }
 

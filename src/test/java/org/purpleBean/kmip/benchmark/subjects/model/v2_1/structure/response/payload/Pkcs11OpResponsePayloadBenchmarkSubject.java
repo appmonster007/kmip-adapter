@@ -20,7 +20,7 @@ public class Pkcs11OpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubjec
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public Pkcs11OpResponsePayloadBenchmarkSubject() throws Exception {
-        Pkcs11OpResponsePayload subject = Pkcs11OpResponsePayload.builder().build();  // TODO: Create a default instance
+        Pkcs11OpResponsePayload subject = Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode.of(0)).build();
         initialize(subject, Pkcs11OpResponsePayload.class);
     }
 

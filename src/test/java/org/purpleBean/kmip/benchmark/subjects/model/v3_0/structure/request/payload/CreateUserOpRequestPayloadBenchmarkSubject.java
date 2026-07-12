@@ -20,7 +20,7 @@ public class CreateUserOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSub
     private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateUserOpRequestPayloadBenchmarkSubject() throws Exception {
-        CreateUserOpRequestPayload subject = CreateUserOpRequestPayload.builder().build();  // TODO: Create a default instance
+        CreateUserOpRequestPayload subject = CreateUserOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
         initialize(subject, CreateUserOpRequestPayload.class);
     }
 

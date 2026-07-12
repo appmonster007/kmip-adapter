@@ -31,8 +31,7 @@ class Pkcs11OpResponsePayloadTest extends AbstractKmipStructureTestSuite<Pkcs11O
 
     @Override
     protected Pkcs11OpResponsePayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return Pkcs11OpResponsePayload.builder().build();
+        return Pkcs11OpResponsePayload.builder().pkcs11ReturnCode(org.purpleBean.kmip.model.core.type.Pkcs11ReturnCode.of(0)).build();
     }
 
     @Override

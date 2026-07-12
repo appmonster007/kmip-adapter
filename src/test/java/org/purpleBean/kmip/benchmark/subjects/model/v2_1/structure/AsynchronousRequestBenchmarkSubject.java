@@ -20,7 +20,7 @@ public class AsynchronousRequestBenchmarkSubject extends KmipBenchmarkSubject<As
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public AsynchronousRequestBenchmarkSubject() throws Exception {
-        AsynchronousRequest subject = AsynchronousRequest.builder().build();
+        AsynchronousRequest subject = AsynchronousRequest.of(AsynchronousCorrelationValue.of(new byte[]{0x01}), Operation.Standard.CREATE.inst(), org.purpleBean.kmip.model.v2_1.type.SubmissionDate.of(java.time.OffsetDateTime.of(2024,1,1,0,0,0,0,java.time.ZoneOffset.UTC)), ProcessingStage.Standard.SUBMITTED.inst());
         initialize(subject, AsynchronousRequest.class);
     }
 

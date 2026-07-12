@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -21,7 +22,7 @@ class CreateCredentialOpRequestPayloadTest extends AbstractKmipStructureTestSuit
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V3_0;
     }
 
     @Override
@@ -31,8 +32,7 @@ class CreateCredentialOpRequestPayloadTest extends AbstractKmipStructureTestSuit
 
     @Override
     protected CreateCredentialOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return CreateCredentialOpRequestPayload.builder().build();
+        return CreateCredentialOpRequestPayload.builder().credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst()).credentialValue(UsernameAndPassword.of(Username.of("test"), Password.of("pass"))).build();
     }
 
     @Override

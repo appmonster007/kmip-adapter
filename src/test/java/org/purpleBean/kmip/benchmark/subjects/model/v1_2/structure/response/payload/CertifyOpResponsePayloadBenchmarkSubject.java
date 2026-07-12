@@ -16,7 +16,7 @@ public class CertifyOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubje
     public CertifyOpResponsePayloadBenchmarkSubject() throws Exception {
         CertifyOpResponsePayload subject = CertifyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CertifyOpResponsePayload.class);
     }

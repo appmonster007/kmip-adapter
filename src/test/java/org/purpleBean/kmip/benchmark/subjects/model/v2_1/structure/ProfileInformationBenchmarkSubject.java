@@ -20,7 +20,7 @@ public class ProfileInformationBenchmarkSubject extends KmipBenchmarkSubject<Pro
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ProfileInformationBenchmarkSubject() throws Exception {
-        ProfileInformation subject = ProfileInformation.builder().build();
+        ProfileInformation subject = ProfileInformation.of(ProfileName.Standard.COMPLETE_SERVER_BASIC.inst());
         initialize(subject, ProfileInformation.class);
     }
 

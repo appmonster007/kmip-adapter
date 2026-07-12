@@ -20,7 +20,7 @@ public class RightsBenchmarkSubject extends KmipBenchmarkSubject<Rights> {
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public RightsBenchmarkSubject() throws Exception {
-        Rights subject = Rights.builder().build();
+        Rights subject = Rights.of(java.util.List.of());
         initialize(subject, Rights.class);
     }
 

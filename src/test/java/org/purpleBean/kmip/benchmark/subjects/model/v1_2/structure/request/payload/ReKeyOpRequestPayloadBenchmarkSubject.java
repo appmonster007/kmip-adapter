@@ -18,7 +18,7 @@ public class ReKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<
         ReKeyOpRequestPayload subject = ReKeyOpRequestPayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .offset(Offset.builder().value(100).build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, ReKeyOpRequestPayload.class);
     }

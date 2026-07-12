@@ -20,7 +20,7 @@ public class Pkcs11OpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public Pkcs11OpRequestPayloadBenchmarkSubject() throws Exception {
-        Pkcs11OpRequestPayload subject = Pkcs11OpRequestPayload.builder().build();  // TODO: Create a default instance
+        Pkcs11OpRequestPayload subject = Pkcs11OpRequestPayload.builder().pkcs11Function(Pkcs11Function.register(0x80000007, "X-Bench", java.util.Set.of(KmipSpec.UnknownVersion)).inst()).build();
         initialize(subject, Pkcs11OpRequestPayload.class);
     }
 

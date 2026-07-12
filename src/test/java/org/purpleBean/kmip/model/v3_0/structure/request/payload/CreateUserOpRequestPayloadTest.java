@@ -21,7 +21,7 @@ class CreateUserOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Crea
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V3_0;
     }
 
     @Override
@@ -31,8 +31,7 @@ class CreateUserOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Crea
 
     @Override
     protected CreateUserOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return CreateUserOpRequestPayload.builder().build();
+        return CreateUserOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
     }
 
     @Override

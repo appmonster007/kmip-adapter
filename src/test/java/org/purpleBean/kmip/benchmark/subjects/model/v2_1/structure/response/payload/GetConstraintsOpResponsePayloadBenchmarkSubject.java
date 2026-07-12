@@ -20,7 +20,7 @@ public class GetConstraintsOpResponsePayloadBenchmarkSubject extends KmipBenchma
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public GetConstraintsOpResponsePayloadBenchmarkSubject() throws Exception {
-        GetConstraintsOpResponsePayload subject = GetConstraintsOpResponsePayload.builder().build();  // TODO: Create a default instance
+        GetConstraintsOpResponsePayload subject = GetConstraintsOpResponsePayload.builder().constraints(Constraints.of(java.util.List.of())).build();
         initialize(subject, GetConstraintsOpResponsePayload.class);
     }
 

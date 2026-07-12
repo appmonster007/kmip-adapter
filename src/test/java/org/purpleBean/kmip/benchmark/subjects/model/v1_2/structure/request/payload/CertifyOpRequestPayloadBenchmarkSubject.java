@@ -20,7 +20,7 @@ public class CertifyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubjec
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
                 .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
                 .certificateRequest(CertificateRequest.of(new byte[]{0x01, 0x02, 0x03}))
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CertifyOpRequestPayload.class);
     }

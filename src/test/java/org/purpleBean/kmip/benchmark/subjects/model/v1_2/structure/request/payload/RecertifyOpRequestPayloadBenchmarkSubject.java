@@ -22,7 +22,7 @@ public class RecertifyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubj
                 .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
                 .certificateRequest(CertificateRequest.of(new byte[]{0x01, 0x02, 0x03}))
                 .offset(Offset.builder().value(100).build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, RecertifyOpRequestPayload.class);
     }

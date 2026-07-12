@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,8 +32,7 @@ class Pkcs11OpRequestPayloadTest extends AbstractKmipStructureTestSuite<Pkcs11Op
 
     @Override
     protected Pkcs11OpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return Pkcs11OpRequestPayload.builder().build();
+        return Pkcs11OpRequestPayload.builder().pkcs11Function(Pkcs11Function.register(0x80000005, "X-Domain-Test", Set.of(KmipSpec.UnknownVersion)).inst()).build();
     }
 
     @Override

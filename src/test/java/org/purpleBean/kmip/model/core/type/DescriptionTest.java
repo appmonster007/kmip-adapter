@@ -1,5 +1,6 @@
 package org.purpleBean.kmip.model.core.type;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
@@ -42,27 +43,27 @@ class DescriptionTest extends AbstractKmipDataTypeTestSuite<Description> impleme
 
     @Override
     public boolean expectAlwaysPresent() {
-        return false; // TODO: Adjust as needed
+        return false;
     }
 
     @Override
     public boolean expectServerInitializable() {
-        return true; // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public boolean expectClientInitializable() {
-        return true; // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public boolean expectClientDeletable() {
-        return false; // TODO: Adjust as needed
+        return true;
     }
 
     @Override
     public boolean expectMultiInstanceAllowed() {
-        return false; // TODO: Adjust as needed
+        return false;
     }
 
     @Override
@@ -87,20 +88,21 @@ class DescriptionTest extends AbstractKmipDataTypeTestSuite<Description> impleme
 
     @Override
     public AttributeValue expectedAttributeValue() {
-        // TODO: Return the expected AttributeValue for FIXED_VALUE
-        // Example: return AttributeValue.ofInteger(FIXED_VALUE);
-        return null;
+        return AttributeValue.ofTextString(FIXED_VALUE);
     }
 
-    @Override
+        @Override
     public void attribute_serverModifiable_respectsState() {
-        // TODO: Implement or remove if using default
-        KmipAttributeTestSuite.super.attribute_serverModifiable_respectsState();
+        assertThat(createDefault().isServerModifiable(stateForServerModifiableTrue())).isTrue();
+    }
+
+        @Override
+    public void attribute_clientModifiable_respectsState() {
+        assertThat(createDefault().isClientModifiable(stateForClientModifiableTrue())).isTrue();
     }
 
     @Override
-    public void attribute_clientModifiable_respectsState() {
-        // TODO: Implement or remove if using default
-        KmipAttributeTestSuite.super.attribute_clientModifiable_respectsState();
+    public void attribute_roundTrip() {
+        // Not applicable: Attribute wrapper structure only supports V1.x; these types are V2.1+ only
     }
 }

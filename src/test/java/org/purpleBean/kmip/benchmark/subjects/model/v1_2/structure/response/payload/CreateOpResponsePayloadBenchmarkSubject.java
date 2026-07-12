@@ -18,7 +18,7 @@ public class CreateOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubjec
         CreateOpResponsePayload subject = CreateOpResponsePayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CreateOpResponsePayload.class);
     }

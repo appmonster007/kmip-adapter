@@ -33,7 +33,7 @@ public class DeriveKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubj
                         .initializationVector(InitializationVector.of(new byte[]{0x01, 0x02, 0x03}))
                         .derivationData(DerivationData.of(new byte[]{0x04, 0x05, 0x06}))
                         .build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, DeriveKeyOpRequestPayload.class);
     }

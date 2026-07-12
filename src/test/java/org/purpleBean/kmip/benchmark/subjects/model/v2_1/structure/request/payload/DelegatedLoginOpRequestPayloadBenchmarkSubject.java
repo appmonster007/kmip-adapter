@@ -20,7 +20,7 @@ public class DelegatedLoginOpRequestPayloadBenchmarkSubject extends KmipBenchmar
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public DelegatedLoginOpRequestPayloadBenchmarkSubject() throws Exception {
-        DelegatedLoginOpRequestPayload subject = DelegatedLoginOpRequestPayload.builder().build();  // TODO: Create a default instance
+        DelegatedLoginOpRequestPayload subject = DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), org.purpleBean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"), Password.of("pass")))).build();
         initialize(subject, DelegatedLoginOpRequestPayload.class);
     }
 

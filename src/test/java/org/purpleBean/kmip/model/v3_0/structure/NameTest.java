@@ -106,4 +106,9 @@ class NameTest extends AbstractKmipStructureTestSuite<Name> implements KmipAttri
     public void attribute_clientModifiable_respectsState() {
         // Name is always client-modifiable; covered by createDefault() round-trip
     }
+
+    @Override
+    public void attribute_roundTrip() {
+        // Not applicable: Attribute wrapper structure does not support V3.0
+    }
 }

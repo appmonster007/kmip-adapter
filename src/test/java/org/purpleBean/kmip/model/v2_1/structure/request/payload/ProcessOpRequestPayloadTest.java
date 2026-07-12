@@ -31,8 +31,7 @@ class ProcessOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Process
 
     @Override
     protected ProcessOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return ProcessOpRequestPayload.builder().build();
+        return ProcessOpRequestPayload.builder().uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("test-id")).build();
     }
 
     @Override

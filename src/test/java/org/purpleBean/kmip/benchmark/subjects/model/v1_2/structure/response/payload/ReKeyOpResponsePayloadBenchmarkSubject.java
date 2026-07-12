@@ -16,7 +16,7 @@ public class ReKeyOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject
     public ReKeyOpResponsePayloadBenchmarkSubject() throws Exception {
         ReKeyOpResponsePayload subject = ReKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, ReKeyOpResponsePayload.class);
     }

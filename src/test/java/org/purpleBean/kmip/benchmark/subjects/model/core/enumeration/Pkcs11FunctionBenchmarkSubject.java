@@ -14,13 +14,15 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.enumeration.Pkcs11Function;
 
+import java.util.Set;
+
 public class Pkcs11FunctionBenchmarkSubject extends KmipBenchmarkSubject<Pkcs11Function> {
 
     @Getter
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public Pkcs11FunctionBenchmarkSubject() throws Exception {
-        Pkcs11Function subject = Pkcs11Function.Standard.values()[0].inst();
+        Pkcs11Function subject = Pkcs11Function.register(0x80000099, "X-Benchmark", Set.of(KmipSpec.UnknownVersion)).inst();
         initialize(subject, Pkcs11Function.class);
     }
 

@@ -16,7 +16,7 @@ public class DeriveKeyOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSub
     public DeriveKeyOpResponsePayloadBenchmarkSubject() throws Exception {
         DeriveKeyOpResponsePayload subject = DeriveKeyOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, DeriveKeyOpResponsePayload.class);
     }

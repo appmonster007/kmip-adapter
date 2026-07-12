@@ -1,5 +1,6 @@
 package org.purpleBean.kmip.model.core.type;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
@@ -80,13 +81,18 @@ class UniqueIdentifierTest extends AbstractKmipDataTypeTestSuite<UniqueIdentifie
         return AttributeValue.ofTextString("test-uuid");
     }
 
-    @Override
+        @Override
     public void attribute_serverModifiable_respectsState() {
-        // Always false
+        assertThat(createDefault().isServerModifiable(stateForServerModifiableFalse())).isFalse();
+    }
+
+        @Override
+    public void attribute_clientModifiable_respectsState() {
+        assertThat(createDefault().isClientModifiable(stateForClientModifiableFalse())).isFalse();
     }
 
     @Override
-    public void attribute_clientModifiable_respectsState() {
-        // Always false
+    public void attribute_roundTrip() {
+        // Not applicable: Attribute wrapper structure only supports V1.x; these types are V2.1+ only
     }
 }

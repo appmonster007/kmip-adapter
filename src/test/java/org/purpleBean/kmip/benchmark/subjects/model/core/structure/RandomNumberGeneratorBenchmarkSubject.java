@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.v2_1.structure.RngParameters;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.RandomNumberGenerator;
 
@@ -20,7 +21,7 @@ public class RandomNumberGeneratorBenchmarkSubject extends KmipBenchmarkSubject<
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public RandomNumberGeneratorBenchmarkSubject() throws Exception {
-        RandomNumberGenerator subject = RandomNumberGenerator.builder().build();
+        RandomNumberGenerator subject = RandomNumberGenerator.of(RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst()));
         initialize(subject, RandomNumberGenerator.class);
     }
 

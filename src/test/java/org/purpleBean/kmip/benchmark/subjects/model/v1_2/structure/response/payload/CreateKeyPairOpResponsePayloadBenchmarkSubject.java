@@ -19,8 +19,8 @@ public class CreateKeyPairOpResponsePayloadBenchmarkSubject extends KmipBenchmar
         CreateKeyPairOpResponsePayload subject = CreateKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid").build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
+                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CreateKeyPairOpResponsePayload.class);
     }

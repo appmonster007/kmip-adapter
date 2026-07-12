@@ -19,7 +19,7 @@ public class RegisterOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubje
     public RegisterOpRequestPayloadBenchmarkSubject() throws Exception {
         RegisterOpRequestPayload subject = RegisterOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .object(SymmetricKey.builder()
                         .keyBlock(KeyBlock.builder()
                                 .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())

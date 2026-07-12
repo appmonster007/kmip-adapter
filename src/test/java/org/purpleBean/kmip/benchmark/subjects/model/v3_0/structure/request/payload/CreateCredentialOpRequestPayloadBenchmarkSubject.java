@@ -20,7 +20,7 @@ public class CreateCredentialOpRequestPayloadBenchmarkSubject extends KmipBenchm
     private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateCredentialOpRequestPayloadBenchmarkSubject() throws Exception {
-        CreateCredentialOpRequestPayload subject = CreateCredentialOpRequestPayload.builder().build();  // TODO: Create a default instance
+        CreateCredentialOpRequestPayload subject = CreateCredentialOpRequestPayload.builder().credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst()).credentialValue(org.purpleBean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"), Password.of("pass"))).build();
         initialize(subject, CreateCredentialOpRequestPayload.class);
     }
 

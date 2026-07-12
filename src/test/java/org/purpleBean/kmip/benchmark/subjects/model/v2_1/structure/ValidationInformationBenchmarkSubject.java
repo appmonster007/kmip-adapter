@@ -20,7 +20,7 @@ public class ValidationInformationBenchmarkSubject extends KmipBenchmarkSubject<
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ValidationInformationBenchmarkSubject() throws Exception {
-        ValidationInformation subject = ValidationInformation.builder().build();
+        ValidationInformation subject = ValidationInformation.of(ValidationAuthorityType.Standard.UNSPECIFIED.inst(), org.purpleBean.kmip.model.v2_1.type.ValidationVersionMajor.of(1), ValidationType.Standard.UNSPECIFIED.inst(), org.purpleBean.kmip.model.v2_1.type.ValidationLevel.of(1));
         initialize(subject, ValidationInformation.class);
     }
 

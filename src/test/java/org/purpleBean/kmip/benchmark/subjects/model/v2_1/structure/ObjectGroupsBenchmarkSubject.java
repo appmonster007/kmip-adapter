@@ -20,7 +20,7 @@ public class ObjectGroupsBenchmarkSubject extends KmipBenchmarkSubject<ObjectGro
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ObjectGroupsBenchmarkSubject() throws Exception {
-        ObjectGroups subject = ObjectGroups.builder().build();
+        ObjectGroups subject = ObjectGroups.of(java.util.List.of());
         initialize(subject, ObjectGroups.class);
     }
 

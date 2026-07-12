@@ -20,7 +20,7 @@ public class SetDefaultsOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSu
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public SetDefaultsOpRequestPayloadBenchmarkSubject() throws Exception {
-        SetDefaultsOpRequestPayload subject = SetDefaultsOpRequestPayload.builder().build();  // TODO: Create a default instance
+        SetDefaultsOpRequestPayload subject = SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(java.util.List.of(ObjectDefaults.of(ObjectType.Standard.CERTIFICATE.inst(), Attributes.of(java.util.List.of()))))).build();
         initialize(subject, SetDefaultsOpRequestPayload.class);
     }
 

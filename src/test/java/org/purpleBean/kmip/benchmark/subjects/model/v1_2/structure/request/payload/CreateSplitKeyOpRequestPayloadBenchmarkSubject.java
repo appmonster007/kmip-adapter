@@ -21,7 +21,7 @@ public class CreateSplitKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmar
                 .splitKeyParts(SplitKeyParts.of(3))
                 .splitKeyThreshold(SplitKeyThreshold.of(2))
                 .splitKeyMethod(SplitKeyMethod.of(SplitKeyMethod.Standard.XOR))
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CreateSplitKeyOpRequestPayload.class);
     }

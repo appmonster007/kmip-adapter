@@ -20,7 +20,7 @@ public class RngParametersBenchmarkSubject extends KmipBenchmarkSubject<RngParam
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public RngParametersBenchmarkSubject() throws Exception {
-        RngParameters subject = RngParameters.builder().build();
+        RngParameters subject = RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst());
         initialize(subject, RngParameters.class);
     }
 

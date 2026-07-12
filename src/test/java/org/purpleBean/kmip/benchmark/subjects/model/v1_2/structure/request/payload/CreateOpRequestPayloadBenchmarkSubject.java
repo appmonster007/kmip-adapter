@@ -16,7 +16,7 @@ public class CreateOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject
     public CreateOpRequestPayloadBenchmarkSubject() throws Exception {
         CreateOpRequestPayload subject = CreateOpRequestPayload.builder()
                 .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
+                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CreateOpRequestPayload.class);
     }

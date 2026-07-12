@@ -21,7 +21,7 @@ class ImportOpRequestPayloadTest extends AbstractKmipStructureTestSuite<ImportOp
 
     @Override
     protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
+        defaultSpec = KmipSpec.V2_1;
     }
 
     @Override
@@ -31,8 +31,7 @@ class ImportOpRequestPayloadTest extends AbstractKmipStructureTestSuite<ImportOp
 
     @Override
     protected ImportOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return ImportOpRequestPayload.builder().build();
+        return ImportOpRequestPayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
     }
 
     @Override

@@ -20,7 +20,7 @@ public class SetConstraintsOpRequestPayloadBenchmarkSubject extends KmipBenchmar
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public SetConstraintsOpRequestPayloadBenchmarkSubject() throws Exception {
-        SetConstraintsOpRequestPayload subject = SetConstraintsOpRequestPayload.builder().build();  // TODO: Create a default instance
+        SetConstraintsOpRequestPayload subject = SetConstraintsOpRequestPayload.builder().constraints(Constraints.of(java.util.List.of())).build();
         initialize(subject, SetConstraintsOpRequestPayload.class);
     }
 

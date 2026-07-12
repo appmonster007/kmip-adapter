@@ -17,10 +17,10 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ImportOpRequestP
 public class ImportOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<ImportOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
+    private KmipSpec spec = KmipSpec.V2_1; // TODO: Adjust if needed
 
     public ImportOpRequestPayloadBenchmarkSubject() throws Exception {
-        ImportOpRequestPayload subject = ImportOpRequestPayload.builder().build();  // TODO: Create a default instance
+        ImportOpRequestPayload subject = ImportOpRequestPayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
         initialize(subject, ImportOpRequestPayload.class);
     }
 

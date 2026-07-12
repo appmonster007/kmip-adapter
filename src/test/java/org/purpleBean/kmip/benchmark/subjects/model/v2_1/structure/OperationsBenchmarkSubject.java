@@ -20,7 +20,7 @@ public class OperationsBenchmarkSubject extends KmipBenchmarkSubject<Operations>
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public OperationsBenchmarkSubject() throws Exception {
-        Operations subject = Operations.builder().build();
+        Operations subject = Operations.of(java.util.List.of());
         initialize(subject, Operations.class);
     }
 

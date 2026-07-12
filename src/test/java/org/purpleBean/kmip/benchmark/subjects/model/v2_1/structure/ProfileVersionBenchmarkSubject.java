@@ -20,7 +20,7 @@ public class ProfileVersionBenchmarkSubject extends KmipBenchmarkSubject<Profile
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ProfileVersionBenchmarkSubject() throws Exception {
-        ProfileVersion subject = ProfileVersion.builder().build();
+        ProfileVersion subject = ProfileVersion.of(2, 1);
         initialize(subject, ProfileVersion.class);
     }
 

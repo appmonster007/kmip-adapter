@@ -19,8 +19,8 @@ public class ReKeyKeyPairOpResponsePayloadBenchmarkSubject extends KmipBenchmark
         ReKeyKeyPairOpResponsePayload subject = ReKeyKeyPairOpResponsePayload.builder()
                 .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
                 .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid").build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
+                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, ReKeyKeyPairOpResponsePayload.class);
     }

@@ -20,7 +20,7 @@ public class CreateGroupOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSu
     private KmipSpec spec = KmipSpec.V3_0;
 
     public CreateGroupOpRequestPayloadBenchmarkSubject() throws Exception {
-        CreateGroupOpRequestPayload subject = CreateGroupOpRequestPayload.builder().build();  // TODO: Create a default instance
+        CreateGroupOpRequestPayload subject = CreateGroupOpRequestPayload.builder().attributes(Attributes.of(java.util.List.of())).build();
         initialize(subject, CreateGroupOpRequestPayload.class);
     }
 

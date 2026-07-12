@@ -16,9 +16,9 @@ public class CreateKeyPairOpRequestPayloadBenchmarkSubject extends KmipBenchmark
 
     public CreateKeyPairOpRequestPayloadBenchmarkSubject() throws Exception {
         CreateKeyPairOpRequestPayload subject = CreateKeyPairOpRequestPayload.builder()
-                .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
+                .commonTemplateAttribute(CommonTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
                 .build();
         initialize(subject, CreateKeyPairOpRequestPayload.class);
     }

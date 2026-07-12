@@ -20,7 +20,7 @@ public class ObjectTypesBenchmarkSubject extends KmipBenchmarkSubject<ObjectType
     private KmipSpec spec = KmipSpec.UnknownVersion;
 
     public ObjectTypesBenchmarkSubject() throws Exception {
-        ObjectTypes subject = ObjectTypes.builder().build();
+        ObjectTypes subject = ObjectTypes.of(java.util.List.of());
         initialize(subject, ObjectTypes.class);
     }
 

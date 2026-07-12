@@ -31,8 +31,7 @@ class SetDefaultsOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Set
 
     @Override
     protected SetDefaultsOpRequestPayload createDefault() {
-        // TODO: Create a default instance of the structure
-        return SetDefaultsOpRequestPayload.builder().build();
+        return SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(java.util.List.of(ObjectDefaults.of(ObjectType.Standard.CERTIFICATE.inst(), Attributes.of(java.util.List.of()))))).build();
     }
 
     @Override
