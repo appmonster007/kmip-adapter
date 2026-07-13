@@ -433,6 +433,8 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.Respon
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.ResponseMessageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.AddAttributeOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.AdjustAttributeOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.CreateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.DecryptOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.EncryptOpResponsePayloadTtlvDeserializer
@@ -442,6 +444,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payloa
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.HashOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.ImportOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.InteropOpResponsePayloadTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.LocateOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.LogOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.LoginOpResponsePayloadTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload.LogoutOpResponsePayloadTtlvDeserializer
@@ -489,6 +492,7 @@ org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.ExtractableTtlvDeser
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.FinalIndicatorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.InitIndicatorTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.InteropIdentifierTtlvDeserializer
+org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.LocatedItemsTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.LogMessageTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.NeverExtractableTtlvDeserializer
 org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type.OffsetItemsTtlvDeserializer

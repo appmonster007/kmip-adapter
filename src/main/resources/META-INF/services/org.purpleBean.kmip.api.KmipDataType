@@ -420,6 +420,8 @@ org.purpleBean.kmip.model.v2_1.structure.response.ResponseHeader
 org.purpleBean.kmip.model.v2_1.structure.response.ResponseMessage
 org.purpleBean.kmip.model.v2_1.structure.response.payload.AddAttributeOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.AdjustAttributeOpResponsePayload
+org.purpleBean.kmip.model.v2_1.structure.response.payload.CreateKeyPairOpResponsePayload
+org.purpleBean.kmip.model.v2_1.structure.response.payload.CreateOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.DecryptOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.EncryptOpResponsePayload
@@ -429,6 +431,7 @@ org.purpleBean.kmip.model.v2_1.structure.response.payload.GetConstraintsOpRespon
 org.purpleBean.kmip.model.v2_1.structure.response.payload.HashOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.ImportOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.InteropOpResponsePayload
+org.purpleBean.kmip.model.v2_1.structure.response.payload.LocateOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.LogOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.LoginOpResponsePayload
 org.purpleBean.kmip.model.v2_1.structure.response.payload.LogoutOpResponsePayload
@@ -476,6 +479,7 @@ org.purpleBean.kmip.model.v2_1.type.Extractable
 org.purpleBean.kmip.model.v2_1.type.FinalIndicator
 org.purpleBean.kmip.model.v2_1.type.InitIndicator
 org.purpleBean.kmip.model.v2_1.type.InteropIdentifier
+org.purpleBean.kmip.model.v2_1.type.LocatedItems
 org.purpleBean.kmip.model.v2_1.type.LogMessage
 org.purpleBean.kmip.model.v2_1.type.NeverExtractable
 org.purpleBean.kmip.model.v2_1.type.OffsetItems

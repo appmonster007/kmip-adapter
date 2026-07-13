@@ -420,6 +420,8 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.Response
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.ResponseMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.AddAttributeOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.AdjustAttributeOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.CreateKeyPairOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.CreateOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.DecryptOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.EncryptOpResponsePayloadTtlvSerializer
@@ -429,6 +431,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.HashOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.ImportOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.InteropOpResponsePayloadTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.LocateOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.LogOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.LoginOpResponsePayloadTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure.response.payload.LogoutOpResponsePayloadTtlvSerializer
@@ -476,6 +479,7 @@ org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.ExtractableTtlvSeriali
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.FinalIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.InitIndicatorTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.InteropIdentifierTtlvSerializer
+org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.LocatedItemsTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.LogMessageTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.NeverExtractableTtlvSerializer
 org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.type.OffsetItemsTtlvSerializer

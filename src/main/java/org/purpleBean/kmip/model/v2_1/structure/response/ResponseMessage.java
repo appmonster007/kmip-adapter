@@ -71,9 +71,6 @@ public class ResponseMessage implements ResponseMessageStructure {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        if (responseBatchItems.size() != responseBatchItemErrors.size()) {
-            throw new IllegalArgumentException("responseBatchItems and responseBatchItemErrors must have the same size");
-        }
     }
 
     @Override

@@ -433,6 +433,8 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.Respons
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.ResponseMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.AddAttributeOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.AdjustAttributeOpResponsePayloadXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.CreateKeyPairOpResponsePayloadXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.CreateOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.DecryptOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.EncryptOpResponsePayloadXmlDeserializer
@@ -442,6 +444,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.HashOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.ImportOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.InteropOpResponsePayloadXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.LocateOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.LogOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.LoginOpResponsePayloadXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response.payload.LogoutOpResponsePayloadXmlDeserializer
@@ -489,6 +492,7 @@ org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.ExtractableXmlDeseria
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.FinalIndicatorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.InitIndicatorXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.InteropIdentifierXmlDeserializer
+org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.LocatedItemsXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.LogMessageXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.NeverExtractableXmlDeserializer
 org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.type.OffsetItemsXmlDeserializer

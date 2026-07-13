@@ -1,17 +1,11 @@
 package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
 import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
+import java.util.List;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
-
 
 import java.util.List;
 
@@ -34,6 +28,7 @@ class GetAttributesOpResponsePayloadTest extends AbstractKmipStructureTestSuite<
     protected GetAttributesOpResponsePayload createDefault() {
         return GetAttributesOpResponsePayload.builder()
                 .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+                .attributes(Attributes.of(List.of()))
                 .build();
     }
 
@@ -44,11 +39,12 @@ class GetAttributesOpResponsePayloadTest extends AbstractKmipStructureTestSuite<
 
     @Override
     protected int expectedMinComponentCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values).hasSizeGreaterThanOrEqualTo(1);
+        assertThat(values.stream().filter(v -> v instanceof UniqueIdentifier).count()).isEqualTo(1);
+        assertThat(values.stream().filter(v -> v instanceof Attributes).count()).isEqualTo(1);
     }
 }

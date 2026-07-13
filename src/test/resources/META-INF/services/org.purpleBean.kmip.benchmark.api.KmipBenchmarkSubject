@@ -412,6 +412,8 @@ org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.ResponseHea
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.ResponseMessageBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.AddAttributeOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.AdjustAttributeOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.CreateKeyPairOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.CreateOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.DecryptOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.EncryptOpResponsePayloadBenchmarkSubject
@@ -421,6 +423,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.Get
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.HashOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.ImportOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.InteropOpResponsePayloadBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.LocateOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.LogOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.LoginOpResponsePayloadBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.response.payload.LogoutOpResponsePayloadBenchmarkSubject
@@ -466,6 +469,7 @@ org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.DigestedDataBenchmarkSubj
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.ExtractableBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.FinalIndicatorBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.InitIndicatorBenchmarkSubject
+org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.LocatedItemsBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.NeverExtractableBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.Pkcs11InputParametersBenchmarkSubject
 org.purpleBean.kmip.benchmark.subjects.model.v2_1.type.Pkcs11InterfaceBenchmarkSubject

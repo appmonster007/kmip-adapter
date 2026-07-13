@@ -33,13 +33,13 @@ public class GetAttributesOpResponsePayload implements ResponsePayloadStructure 
 
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
-
+    @NonNull
     private final Attributes attributes;
 
     @Builder
     private GetAttributesOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
-            Attributes attributes
+            @NonNull Attributes attributes
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.attributes = attributes;
