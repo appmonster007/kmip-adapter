@@ -1,0 +1,33 @@
+package org.purpleBean.kmip.codec.xml.model.v2_1.structure.request.payload;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.*;
+import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.structure.*;
+import org.purpleBean.kmip.model.core.type.*;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import org.purpleBean.kmip.model.v2_1.structure.request.payload.CertifyOpRequestPayload;
+import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+
+@DisplayName("CertifyOpRequestPayload Xml Serialization Tests")
+class CertifyOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<CertifyOpRequestPayload> {
+
+    @Override
+    public Class<CertifyOpRequestPayload> type() {
+        return CertifyOpRequestPayload.class;
+    }
+
+    @Override
+    public CertifyOpRequestPayload createDefault() {
+        return CertifyOpRequestPayload.builder().build();
+    }
+
+    @Override
+    public CertifyOpRequestPayload createVariant() {
+        return CertifyOpRequestPayload.builder().build();
+    }
+}

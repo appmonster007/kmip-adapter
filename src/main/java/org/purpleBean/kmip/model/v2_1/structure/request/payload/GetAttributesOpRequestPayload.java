@@ -11,10 +11,8 @@ import org.purpleBean.kmip.model.v2_1.type.AttributeReferenceTag;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
@@ -34,13 +32,13 @@ public class GetAttributesOpRequestPayload implements RequestPayloadStructure {
 
     private final UniqueIdentifier uniqueIdentifier;
 
-    @Singular
-    private final List<AttributeReferenceTag> attributeReferences;
+    @Singular("attributeReference")
+    private final List<KmipDataType> attributeReferences;
 
     @Builder
     private GetAttributesOpRequestPayload(
             UniqueIdentifier uniqueIdentifier,
-            List<AttributeReferenceTag> attributeReferences
+            List<KmipDataType> attributeReferences
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.attributeReferences = (attributeReferences == null) ? Collections.emptyList() : attributeReferences;
@@ -49,12 +47,12 @@ public class GetAttributesOpRequestPayload implements RequestPayloadStructure {
 
     public static GetAttributesOpRequestPayload of(List<KmipDataType> values) {
         var builder = GetAttributesOpRequestPayload.builder();
-        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        if (map.containsKey(UniqueIdentifier.kmipTag)) {
-            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
-        }
-        if (map.containsKey(AttributeReferenceTag.kmipTag)) {
-            map.get(AttributeReferenceTag.kmipTag).forEach(item -> builder.attributeReference((AttributeReferenceTag) item));
+        for (KmipDataType value : values) {
+            if (value instanceof UniqueIdentifier u) {
+                builder.uniqueIdentifier(u);
+            } else if (value.getKmipTag().getValue() == AttributeReferenceTag.kmipTag.getValue()) {
+                builder.attributeReference(value);
+            }
         }
         return builder.build();
     }

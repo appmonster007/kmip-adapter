@@ -7,6 +7,7 @@ import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purpleBean.kmip.model.core.type.SignatureData;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponsePayload;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.io.IOException;
 
@@ -28,6 +29,7 @@ public class SignOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXm
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.SIGNATURE_DATA -> builder.signatureData(ctxt.readValue(p, SignatureData.class));
+            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(ctxt.readValue(p, CorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

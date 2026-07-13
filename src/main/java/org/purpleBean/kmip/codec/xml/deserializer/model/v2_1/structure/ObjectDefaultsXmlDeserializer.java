@@ -16,6 +16,8 @@ import org.purpleBean.kmip.model.v2_1.structure.ObjectDefaults;
 
 import java.io.IOException;
 import org.purpleBean.kmip.model.v2_1.structure.Attributes;
+import org.purpleBean.kmip.model.v2_1.structure.ObjectGroups;
+import org.purpleBean.kmip.model.v2_1.structure.ObjectTypes;
 
 public class ObjectDefaultsXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ObjectDefaults, ObjectDefaults.ObjectDefaultsBuilder> {
 
@@ -32,8 +34,9 @@ public class ObjectDefaultsXmlDeserializer extends AbstractKmipDataTypeXmlDeseri
     protected void setValue(ObjectDefaults.ObjectDefaultsBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
+            case KmipTag.Standard.OBJECT_TYPES -> builder.objectTypes(ctxt.readValue(p, ObjectTypes.class));
             case KmipTag.Standard.ATTRIBUTES -> builder.attributes(ctxt.readValue(p, Attributes.class));
+            case KmipTag.Standard.OBJECT_GROUPS -> builder.objectGroups(ctxt.readValue(p, ObjectGroups.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

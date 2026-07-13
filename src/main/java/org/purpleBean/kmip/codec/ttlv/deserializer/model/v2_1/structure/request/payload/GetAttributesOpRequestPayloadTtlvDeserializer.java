@@ -1,11 +1,11 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request.payload;
 
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.GetAttributesOpRequestPayload;
-import org.purpleBean.kmip.model.v2_1.type.AttributeReferenceTag;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -28,7 +28,7 @@ public class GetAttributesOpRequestPayloadTtlvDeserializer extends AbstractKmipD
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.ATTRIBUTE_REFERENCE ->
-                    builder.attributeReference(mapper.readValue(p, AttributeReferenceTag.class));
+                    builder.attributeReference(mapper.readValue(p, KmipDataType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

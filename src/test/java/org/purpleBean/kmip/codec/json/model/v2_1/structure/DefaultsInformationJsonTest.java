@@ -27,20 +27,20 @@ class DefaultsInformationJsonTest extends AbstractJsonSerializationTestSuite<Def
     @Override
     public DefaultsInformation createDefault() {
         return DefaultsInformation.of(List.of(
-                ObjectDefaults.of(
-                        ObjectType.Standard.SYMMETRIC_KEY.inst(),
-                        Attributes.of(Collections.emptyList())
-                )
+                ObjectDefaults.builder()
+                        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+                        .attributes(Attributes.of(Collections.emptyList()))
+                        .build()
         ));
     }
 
     @Override
     public DefaultsInformation createVariant() {
         return DefaultsInformation.of(List.of(
-                ObjectDefaults.of(
-                        ObjectType.Standard.CERTIFICATE.inst(),
-                        Attributes.of(Collections.emptyList())
-                )
+                ObjectDefaults.builder()
+                        .objectType(ObjectType.Standard.CERTIFICATE.inst())
+                        .attributes(Attributes.of(Collections.emptyList()))
+                        .build()
         ));
     }
 }

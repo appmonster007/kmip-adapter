@@ -197,8 +197,8 @@ public class LinkType implements KmipEnumeration {
         CHILD_LINK(0x00000109, "ChildLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         PREVIOUS_LINK(0x0000010A, "PreviousLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
         NEXT_LINK(0x0000010B, "NextLink", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1),
-        PKCS_12_CERTIFICATE_LINK(0x0000010C, "Pkcs12CertificateLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
-        PKCS_12_PASSWORD_LINK(0x0000010D, "Pkcs12PasswordLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        PKCS_12_CERTIFICATE_LINK(0x0000010C, "PKCS_12CertificateLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
+        PKCS_12_PASSWORD_LINK(0x0000010D, "PKCS_12PasswordLink", KmipSpec.UnknownVersion, KmipSpec.V2_1),
         WRAPPING_KEY_LINK(0x0000010E, "WrappingKeyLink", KmipSpec.UnknownVersion, KmipSpec.V2_1);
 
         private final int value;

@@ -24,17 +24,17 @@ class ObjectDefaultsJsonTest extends AbstractJsonSerializationTestSuite<ObjectDe
 
     @Override
     public ObjectDefaults createDefault() {
-        return ObjectDefaults.of(
-                ObjectType.Standard.SYMMETRIC_KEY.inst(),
-                Attributes.of(Collections.emptyList())
-        );
+        return ObjectDefaults.builder()
+                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+                .attributes(Attributes.of(Collections.emptyList()))
+                .build();
     }
 
     @Override
     public ObjectDefaults createVariant() {
-        return ObjectDefaults.of(
-                ObjectType.Standard.CERTIFICATE.inst(),
-                Attributes.of(Collections.emptyList())
-        );
+        return ObjectDefaults.builder()
+                .objectType(ObjectType.Standard.CERTIFICATE.inst())
+                .attributes(Attributes.of(Collections.emptyList()))
+                .build();
     }
 }

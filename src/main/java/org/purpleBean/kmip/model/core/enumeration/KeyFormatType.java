@@ -2,6 +2,9 @@ package org.purpleBean.kmip.model.core.enumeration;
 
 import lombok.*;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,7 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Data
 @Builder(toBuilder = true)
-public class KeyFormatType implements KmipEnumeration {
+public class KeyFormatType implements KmipEnumeration, KmipAttribute {
     public static final KmipTag kmipTag = KmipTag.Standard.KEY_FORMAT_TYPE.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
@@ -54,6 +57,7 @@ public class KeyFormatType implements KmipEnumeration {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, KeyFormatType.class);
+            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, KeyFormatType.class, KeyFormatType::of);
             KmipEnumeration.register(spec, kmipTag.getValue(), KeyFormatType::fromName, KeyFormatType::fromValue);
         }
     }
@@ -69,6 +73,13 @@ public class KeyFormatType implements KmipEnumeration {
 
     public static KeyFormatType of(@NonNull Value value) {
         return new KeyFormatType(value);
+    }
+
+    public static KeyFormatType of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
+        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+            throw new IllegalArgumentException("Invalid attribute value");
+        }
+        return KeyFormatType.builder().value(fromValue(enumeration.getValue())).build();
     }
 
     private static void checkValidExtensionValue(int value) {
@@ -178,6 +189,56 @@ public class KeyFormatType implements KmipEnumeration {
 
     public int getIntValue() {
         return value.getValue();
+    }
+
+    @Override
+    public boolean isAlwaysPresent() {
+        return false;
+    }
+
+    @Override
+    public boolean isServerInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isClientInitializable() {
+        return true;
+    }
+
+    @Override
+    public boolean isServerModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientModifiable(State state) {
+        return false;
+    }
+
+    @Override
+    public boolean isClientDeletable() {
+        return false;
+    }
+
+    @Override
+    public boolean isMultiInstanceAllowed() {
+        return false;
+    }
+
+    @Override
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.ofEnumeration(value);
+    }
+
+    @Override
+    public AttributeName getAttributeName() {
+        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
+    }
+
+    @Override
+    public String getCanonicalName() {
+        return kmipTag.getDescription();
     }
 
     /**

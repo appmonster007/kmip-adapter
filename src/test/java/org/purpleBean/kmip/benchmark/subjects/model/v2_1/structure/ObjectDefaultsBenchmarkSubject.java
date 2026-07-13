@@ -15,10 +15,10 @@ public class ObjectDefaultsBenchmarkSubject extends KmipBenchmarkSubject<ObjectD
     private KmipSpec spec = KmipSpec.V2_1;
 
     public ObjectDefaultsBenchmarkSubject() throws Exception {
-        ObjectDefaults subject = ObjectDefaults.of(
-                ObjectType.Standard.SYMMETRIC_KEY.inst(),
-                Attributes.of(Collections.emptyList())
-        );
+        ObjectDefaults subject = ObjectDefaults.builder()
+                .objectType(ObjectType.Standard.CERTIFICATE.inst())
+                .attributes(Attributes.of(Collections.emptyList()))
+                .build();
         initialize(subject, ObjectDefaults.class);
     }
 

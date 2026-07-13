@@ -8,6 +8,7 @@ import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.type.MacData;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.stream.Stream;
 public class MacOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.MAC;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -34,16 +35,19 @@ public class MacOpResponsePayload implements ResponsePayloadStructure {
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
-    @NonNull
     private final MacData macData;
+
+    private final CorrelationValue correlationValue;
 
     @Builder
     private MacOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
-            @NonNull MacData macData
+            MacData macData,
+            CorrelationValue correlationValue
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.macData = macData;
+        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -56,6 +60,7 @@ public class MacOpResponsePayload implements ResponsePayloadStructure {
         if (map.containsKey(MacData.kmipTag)) {
             builder.macData((MacData) map.get(MacData.kmipTag).getFirst());
         }
+        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -85,7 +90,8 @@ public class MacOpResponsePayload implements ResponsePayloadStructure {
     public KmipDataType[] getValue() {
         return Stream.of(
                         uniqueIdentifier,
-                        macData)
+                        macData,
+                        correlationValue)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

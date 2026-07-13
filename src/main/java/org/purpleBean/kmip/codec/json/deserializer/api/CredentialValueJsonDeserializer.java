@@ -33,6 +33,10 @@ public class CredentialValueJsonDeserializer extends KmipDataTypeJsonDeserialize
         } else {
             credentialTypeValue = CredentialType.fromName(ctxtCredentialType);
         }
-        return CredentialValue.getClassFromRegistry(encodingType, credentialTypeValue);
+        Class<? extends KmipDataType> clazz = CredentialValue.getClassFromRegistry(encodingType, credentialTypeValue);
+        if (clazz == null && credentialTypeValue != null) {
+            clazz = CredentialValue.getClassFromRegistry(encodingType, null);
+        }
+        return clazz;
     }
 }

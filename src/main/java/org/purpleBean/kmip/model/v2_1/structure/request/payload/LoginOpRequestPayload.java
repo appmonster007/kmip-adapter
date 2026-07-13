@@ -2,16 +2,18 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.Credential;
+import org.purpleBean.kmip.model.core.type.LeaseTime;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
@@ -28,20 +30,26 @@ public class LoginOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    @NonNull
-    private final Credential credential;
+    private final LeaseTime leaseTime;
+    private final RequestCount requestCount;
 
     @Builder
-    private LoginOpRequestPayload(@NonNull Credential credential) {
-        this.credential = credential;
+    private LoginOpRequestPayload(LeaseTime leaseTime, RequestCount requestCount) {
+        this.leaseTime = leaseTime;
+        this.requestCount = requestCount;
         validate();
     }
 
     public static LoginOpRequestPayload of(List<KmipDataType> values) {
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        return LoginOpRequestPayload.builder()
-                .credential((Credential) map.get(Credential.kmipTag).getFirst())
-                .build();
+        var builder = LoginOpRequestPayload.builder();
+        if (map.containsKey(LeaseTime.kmipTag)) {
+            builder.leaseTime((LeaseTime) map.get(LeaseTime.kmipTag).getFirst());
+        }
+        if (map.containsKey(RequestCount.kmipTag)) {
+            builder.requestCount((RequestCount) map.get(RequestCount.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
@@ -61,7 +69,10 @@ public class LoginOpRequestPayload implements RequestPayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return new KmipDataType[]{credential};
+        return Stream.of(leaseTime, requestCount)
+                .filter(Objects::nonNull)
+                .map(KmipDataType.class::cast)
+                .toArray(KmipDataType[]::new);
     }
 
     @Override

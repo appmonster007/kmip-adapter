@@ -25,10 +25,10 @@ class ObjectDefaultsTest extends AbstractKmipStructureTestSuite<ObjectDefaults> 
 
     @Override
     protected ObjectDefaults createDefault() {
-        return ObjectDefaults.of(
-                ObjectType.Standard.SYMMETRIC_KEY.inst(),
-                Attributes.of(Collections.emptyList())
-        );
+        return ObjectDefaults.builder()
+                .objectType(ObjectType.Standard.CERTIFICATE.inst())
+                .attributes(Attributes.of(Collections.emptyList()))
+                .build();
     }
 
     @Override

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class GetAttributeListOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.GET_ATTRIBUTE_LIST;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {

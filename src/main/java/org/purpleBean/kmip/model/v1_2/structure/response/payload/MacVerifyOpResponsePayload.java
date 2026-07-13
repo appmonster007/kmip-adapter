@@ -8,6 +8,7 @@ import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.stream.Stream;
 public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.MAC_VERIFY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -34,16 +35,19 @@ public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
-    @NonNull
     private final ValidityIndicator validityIndicator;
+
+    private final CorrelationValue correlationValue;
 
     @Builder
     private MacVerifyOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
-            @NonNull ValidityIndicator validityIndicator
+            ValidityIndicator validityIndicator,
+            CorrelationValue correlationValue
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.validityIndicator = validityIndicator;
+        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -55,6 +59,9 @@ public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
         }
         if (map.containsKey(ValidityIndicator.kmipTag)) {
             builder.validityIndicator((ValidityIndicator) map.get(ValidityIndicator.kmipTag).getFirst());
+        }
+        if (map.containsKey(CorrelationValue.kmipTag)) {
+            builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         }
         return builder.build();
     }
@@ -85,7 +92,8 @@ public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
     public KmipDataType[] getValue() {
         return Stream.of(
                         uniqueIdentifier,
-                        validityIndicator)
+                        validityIndicator,
+                        correlationValue)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

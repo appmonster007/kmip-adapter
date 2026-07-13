@@ -18,10 +18,10 @@ public class DefaultsInformationBenchmarkSubject extends KmipBenchmarkSubject<De
 
     public DefaultsInformationBenchmarkSubject() throws Exception {
         DefaultsInformation subject = DefaultsInformation.of(List.of(
-                ObjectDefaults.of(
-                        ObjectType.Standard.SYMMETRIC_KEY.inst(),
-                        Attributes.of(Collections.emptyList())
-                )
+                ObjectDefaults.builder()
+                        .objectType(ObjectType.Standard.CERTIFICATE.inst())
+                        .attributes(Attributes.of(Collections.emptyList()))
+                        .build()
         ));
         initialize(subject, DefaultsInformation.class);
     }

@@ -6,6 +6,7 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.MacVerifyOpResponsePayload;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -29,6 +30,7 @@ public class MacVerifyOpResponsePayloadTtlvDeserializer extends AbstractKmipData
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.VALIDITY_INDICATOR ->
                     builder.validityIndicator(mapper.readValue(p, ValidityIndicator.class));
+            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

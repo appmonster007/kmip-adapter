@@ -11,6 +11,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.ExportOpResponsePayload;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class ExportOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTyp
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
             case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+            case KmipTag.Standard.ATTRIBUTES -> builder.attributes(mapper.readValue(p, Attributes.class));
             default -> {
                 if (ManagedObject.isManagedObject(nodeTag)) {
                     builder.object(mapper.readValue(p, ManagedObject.class));

@@ -9,6 +9,7 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,8 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
+    private final Attributes attributes;
+
     @NonNull
     private final ManagedObject object;
 
@@ -48,10 +51,12 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
     private ExportOpResponsePayload(
             @NonNull ObjectType objectType,
             @NonNull UniqueIdentifier uniqueIdentifier,
+            Attributes attributes,
             @NonNull ManagedObject object
     ) {
         this.objectType = objectType;
         this.uniqueIdentifier = uniqueIdentifier;
+        this.attributes = attributes;
         this.object = object;
         validate();
     }
@@ -64,6 +69,9 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
         }
         if (map.containsKey(UniqueIdentifier.kmipTag)) {
             builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        }
+        if (map.containsKey(Attributes.kmipTag)) {
+            builder.attributes((Attributes) map.get(Attributes.kmipTag).getFirst());
         }
 
         values.stream()
@@ -102,6 +110,7 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
         return Stream.of(
                         objectType,
                         uniqueIdentifier,
+                        attributes,
                         object)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))

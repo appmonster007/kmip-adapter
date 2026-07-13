@@ -47,21 +47,26 @@ public class KmipV21VerificationTest {
     public void testSpecificFile() {
         String filePath = projectRoot +
                 "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1/TC-ASYNC-1-21.xml";
+        List<String> failures = new java.util.ArrayList<>();
         KmipContext.withSpec(KmipSpec.V2_1, () -> {
             try {
-                int[] counts = verifyXmlFile(Paths.get(filePath));
-                System.out.printf("Passed: %d, Total messages: %d%n", counts[0], counts[1]);
+                int[] counts = verifyXmlFile(Paths.get(filePath), failures);
+                System.out.printf("Passed: %d / %d messages%n", counts[0], counts[1]);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                failures.add("Error: " + e.getMessage());
             }
             return null;
         });
+        if (!failures.isEmpty()) {
+            fail(failures.size() + " verification failure(s):\n" + String.join("\n", failures));
+        }
     }
 
     @DisplayName("Diagnose first 10 KMIP 2.1 test case files")
     @Test
     public void diagnoseFirst10() {
         String base = projectRoot + "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1";
+        List<String> allFailures = new java.util.ArrayList<>();
         KmipContext.withSpec(KmipSpec.V2_1, () -> {
             try (java.util.stream.Stream<Path> s = Files.walk(Paths.get(base))) {
                 List<Path> files = s.filter(Files::isRegularFile)
@@ -71,16 +76,20 @@ public class KmipV21VerificationTest {
                         .toList();
                 for (Path path : files) {
                     System.out.println("\n>>> FILE: " + path.getFileName());
-                    diagnoseFile(path);
+                    allFailures.addAll(diagnoseFile(path));
                 }
             } catch (IOException e) {
                 fail(e.getMessage());
             }
             return null;
         });
+        if (!allFailures.isEmpty()) {
+            fail(allFailures.size() + " verification failure(s):\n" + String.join("\n", allFailures));
+        }
     }
 
-    private void diagnoseFile(Path path) {
+    private List<String> diagnoseFile(Path path) {
+        List<String> failures = new java.util.ArrayList<>();
         try {
             String rawXml = Files.readString(path);
             String xml = replacePlaceholders(rawXml);
@@ -98,7 +107,9 @@ public class KmipV21VerificationTest {
                     try {
                         verifyMessageFragment(fragment, tag, path.getFileName().toString());
                     } catch (Throwable e) {
-                        System.err.printf("  FAIL %s[%d]: %s%n", tag, i, e.getMessage());
+                        String msg = String.format("FAIL %s %s[%d]: %s", path.getFileName(), tag, i, e.getMessage());
+                        failures.add(msg);
+                        System.err.println("  " + msg);
                         Throwable cause = e.getCause();
                         while (cause != null) {
                             System.err.printf("    caused by: %s%n", cause.getMessage());
@@ -108,8 +119,11 @@ public class KmipV21VerificationTest {
                 }
             }
         } catch (Throwable e) {
-            System.err.println("  PARSE ERROR: " + e.getMessage());
+            String msg = "PARSE ERROR " + path.getFileName() + ": " + e.getMessage();
+            failures.add(msg);
+            System.err.println("  " + msg);
         }
+        return failures;
     }
 
     @DisplayName("Test KMIP 2.1 Test Cases")
@@ -125,6 +139,7 @@ public class KmipV21VerificationTest {
     private void verifyXmlFiles(String basePath) {
         int passCount = 0;
         int totalMessages = 0;
+        List<String> failures = new java.util.ArrayList<>();
         try (Stream<Path> paths = Files.walk(Paths.get(basePath))) {
             List<Path> pathList = paths.filter(Files::isRegularFile)
                     .filter(path -> path.toString().endsWith(".xml"))
@@ -132,21 +147,26 @@ public class KmipV21VerificationTest {
                     .toList();
             for (Path path : pathList) {
                 try {
-                    int[] counts = verifyXmlFile(path);
+                    int[] counts = verifyXmlFile(path, failures);
                     passCount += counts[0];
                     totalMessages += counts[1];
                 } catch (Throwable e) {
-                    System.err.println("Error processing file: " + path + " - " + e.getMessage());
+                    String msg = "Error processing file: " + path.getFileName() + " - " + e.getMessage();
+                    failures.add(msg);
+                    System.err.println(msg);
                 }
             }
-            System.out.printf("Passed: %d, Total messages: %d%n", passCount, totalMessages);
+            System.out.printf("Passed: %d / %d messages%n", passCount, totalMessages);
         } catch (IOException e) {
             fail("Failed to walk directory: " + basePath + " - " + e.getMessage());
+        }
+        if (!failures.isEmpty()) {
+            fail(failures.size() + " verification failure(s):\n" + String.join("\n", failures));
         }
     }
 
     // Returns [passCount, totalCount] for messages in the file
-    private int[] verifyXmlFile(Path path) throws Exception {
+    private int[] verifyXmlFile(Path path, List<String> failures) throws Exception {
         String rawXml = Files.readString(path);
         // Replace dynamic placeholders with stable values so DateTime parsing succeeds
         String xml = replacePlaceholders(rawXml);
@@ -175,19 +195,32 @@ public class KmipV21VerificationTest {
                     verifyMessageFragment(fragment, tag, path.getFileName().toString());
                     pass++;
                 } catch (Throwable e) {
-                    System.err.printf("  [%s] %s[%d]: %s%n", path.getFileName(), tag, i, e.getMessage());
+                    String msg = String.format("[%s] %s[%d]: %s", path.getFileName(), tag, i, e.getMessage());
+                    failures.add(msg);
+                    System.err.println("  " + msg);
                 }
             }
         }
         return new int[]{pass, total};
     }
 
+    private static final String FIXED_HEX_16 = "aabbccdd00112233aabbccdd00112233";
+    private static final String FIXED_HEX_4 = "aabbccdd";
+
     private String replacePlaceholders(String xml) {
         return xml
+                // $NOW+N and $NOW-N must be replaced before plain $NOW
+                .replaceAll("\\$NOW[+\\-]\\d+", FIXED_TIMESTAMP)
                 .replace("$NOW", FIXED_TIMESTAMP)
                 .replace("$SERVER_CORRELATION_VALUE", FIXED_CORRELATION)
-                .replaceAll("\\$ASYNCHRONOUS_CORRELATION_VALUE(?:_\\d+)?", "aabbccdd00112233aabbccdd00112233")
+                .replaceAll("\\$ASYNCHRONOUS_CORRELATION_VALUE(?:_\\d+)?", FIXED_HEX_16)
                 .replaceAll("\\$KEY_MATERIAL(?:_\\d+)?", "000102030405060708090a0b0c0d0e0f")
+                .replaceAll("\\$KEY_VALUE(?:_\\d+)?", FIXED_HEX_16)
+                .replaceAll("\\$CORRELATION_VALUE(?:_\\d+)?", FIXED_HEX_16)
+                .replaceAll("\\$DATA(?:_\\d+)?", FIXED_HEX_16)
+                .replaceAll("\\$SHORT_UNIQUE_IDENTIFIER(?:_RANDOM)?(?:_\\d+)?", FIXED_HEX_4)
+                .replaceAll("\\$SIGNATURE_DATA(?:_\\d+)?", FIXED_HEX_16)
+                .replaceAll("\\$TICKET_VALUE(?:_\\d+)?", FIXED_HEX_16)
                 .replaceAll("\\$UNIQUE_IDENTIFIER(?:_\\d+)?", "test-unique-id-00000000");
     }
 

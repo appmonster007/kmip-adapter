@@ -12,6 +12,7 @@ import org.purpleBean.kmip.model.core.structure.ExtensionInformation;
 import org.purpleBean.kmip.model.core.structure.ServerInformation;
 import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
+import org.purpleBean.kmip.model.v2_1.structure.DefaultsInformation;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ import java.util.stream.Stream;
 public class QueryOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.QUERY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -54,6 +55,8 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
     @Singular
     private final List<AttestationType> attestationTypes;
 
+    private final DefaultsInformation defaultsInformation;
+
     @Builder
     private QueryOpResponsePayload(
             List<Operation> operations,
@@ -62,7 +65,8 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
             ServerInformation serverInformation,
             List<ApplicationNamespace> applicationNamespaces,
             List<ExtensionInformation> extensionInformations,
-            List<AttestationType> attestationTypes
+            List<AttestationType> attestationTypes,
+            DefaultsInformation defaultsInformation
     ) {
         this.operations = operations;
         this.objectTypes = objectTypes;
@@ -71,6 +75,7 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
         this.applicationNamespaces = applicationNamespaces;
         this.extensionInformations = extensionInformations;
         this.attestationTypes = attestationTypes;
+        this.defaultsInformation = defaultsInformation;
         validate();
     }
 
@@ -97,6 +102,9 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
         }
         if (map.containsKey(AttestationType.kmipTag)) {
             map.get(AttestationType.kmipTag).forEach(item -> builder.attestationType((AttestationType) item));
+        }
+        if (map.containsKey(DefaultsInformation.kmipTag)) {
+            builder.defaultsInformation((DefaultsInformation) map.get(DefaultsInformation.kmipTag).getFirst());
         }
         return builder.build();
     }
@@ -132,7 +140,8 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
                         serverInformation,
                         applicationNamespaces,
                         extensionInformations,
-                        attestationTypes)
+                        attestationTypes,
+                        defaultsInformation)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

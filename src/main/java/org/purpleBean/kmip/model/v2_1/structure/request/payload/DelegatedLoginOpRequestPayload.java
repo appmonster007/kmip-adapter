@@ -2,12 +2,13 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.Credential;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purpleBean.kmip.model.core.type.LeaseTime;
+import org.purpleBean.kmip.model.v2_1.structure.Rights;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 
 import java.util.List;
 import java.util.Map;
@@ -31,29 +32,39 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    private final UniqueIdentifier uniqueIdentifier;
-
-    @NonNull
-    private final Credential credential;
+    private final LeaseTime leaseTime;
+    private final RequestCount requestCount;
+    private final UsageLimits usageLimits;
+    private final Rights rights;
 
     @Builder
     private DelegatedLoginOpRequestPayload(
-            UniqueIdentifier uniqueIdentifier,
-            @NonNull Credential credential
+            LeaseTime leaseTime,
+            RequestCount requestCount,
+            UsageLimits usageLimits,
+            Rights rights
     ) {
-        this.uniqueIdentifier = uniqueIdentifier;
-        this.credential = credential;
+        this.leaseTime = leaseTime;
+        this.requestCount = requestCount;
+        this.usageLimits = usageLimits;
+        this.rights = rights;
         validate();
     }
 
     public static DelegatedLoginOpRequestPayload of(List<KmipDataType> values) {
         var builder = DelegatedLoginOpRequestPayload.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        if (map.containsKey(UniqueIdentifier.kmipTag)) {
-            builder.uniqueIdentifier((UniqueIdentifier) map.get(UniqueIdentifier.kmipTag).getFirst());
+        if (map.containsKey(LeaseTime.kmipTag)) {
+            builder.leaseTime((LeaseTime) map.get(LeaseTime.kmipTag).getFirst());
         }
-        if (map.containsKey(Credential.kmipTag)) {
-            builder.credential((Credential) map.get(Credential.kmipTag).getFirst());
+        if (map.containsKey(RequestCount.kmipTag)) {
+            builder.requestCount((RequestCount) map.get(RequestCount.kmipTag).getFirst());
+        }
+        if (map.containsKey(UsageLimits.kmipTag)) {
+            builder.usageLimits((UsageLimits) map.get(UsageLimits.kmipTag).getFirst());
+        }
+        if (map.containsKey(Rights.kmipTag)) {
+            builder.rights((Rights) map.get(Rights.kmipTag).getFirst());
         }
         return builder.build();
     }
@@ -75,7 +86,7 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(uniqueIdentifier, credential)
+        return Stream.of(leaseTime, requestCount, usageLimits, rights)
                 .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);

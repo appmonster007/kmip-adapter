@@ -9,6 +9,7 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.IVCounterNonce;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.stream.Stream;
 public class EncryptOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.ENCRYPT;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -35,20 +36,23 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
-    @NonNull
     private final DataByteString data;
 
     private final IVCounterNonce ivCounterNonce;
 
+    private final CorrelationValue correlationValue;
+
     @Builder
     private EncryptOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
-            @NonNull DataByteString data,
-            IVCounterNonce ivCounterNonce
+            DataByteString data,
+            IVCounterNonce ivCounterNonce,
+            CorrelationValue correlationValue
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.data = data;
         this.ivCounterNonce = ivCounterNonce;
+        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -64,6 +68,7 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
         if (map.containsKey(IVCounterNonce.kmipTag)) {
             builder.ivCounterNonce((IVCounterNonce) map.get(IVCounterNonce.kmipTag).getFirst());
         }
+        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -94,7 +99,8 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
         return Stream.of(
                         uniqueIdentifier,
                         data,
-                        ivCounterNonce)
+                        ivCounterNonce,
+                        correlationValue)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

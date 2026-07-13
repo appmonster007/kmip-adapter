@@ -2,11 +2,11 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.request.
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.GetAttributesOpRequestPayload;
-import org.purpleBean.kmip.model.v2_1.type.AttributeReferenceTag;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public class GetAttributesOpRequestPayloadXmlDeserializer extends AbstractKmipDa
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.ATTRIBUTE_REFERENCE ->
-                    builder.attributeReference(ctxt.readValue(p, AttributeReferenceTag.class));
+                    builder.attributeReference(ctxt.readValue(p, KmipDataType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

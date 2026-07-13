@@ -191,7 +191,7 @@ public class RecommendedCurve implements KmipEnumeration {
         SECP160R2(0x00000016, "Secp160r2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECP192K1(0x00000017, "Secp192k1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECP224K1(0x00000018, "Secp224k1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SECP256K1(0x00000019, "Secp256k1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+        SECP256K1(0x00000019, "SECP256K1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECT113R1(0x0000001A, "Sect113r1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECT113R2(0x0000001B, "Sect113r2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
         SECT131R1(0x0000001C, "Sect131r1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),

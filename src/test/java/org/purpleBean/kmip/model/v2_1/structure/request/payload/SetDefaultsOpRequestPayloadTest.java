@@ -6,15 +6,19 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.*;
 import org.purpleBean.kmip.model.core.structure.*;
 import org.purpleBean.kmip.model.core.type.*;
+
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 import org.purpleBean.kmip.model.v2_1.structure.DefaultsInformation;
 import org.purpleBean.kmip.model.v2_1.structure.ObjectDefaults;
@@ -34,7 +38,7 @@ class SetDefaultsOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Set
 
     @Override
     protected SetDefaultsOpRequestPayload createDefault() {
-        return SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(java.util.List.of(ObjectDefaults.of(ObjectType.Standard.CERTIFICATE.inst(), Attributes.of(java.util.List.of()))))).build();
+        return SetDefaultsOpRequestPayload.builder().defaultsInformation(DefaultsInformation.of(List.of(ObjectDefaults.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).attributes(Attributes.of(Collections.emptyList())).build()))).build();
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DelegatedLoginOpRequestPayload Xml Serialization Tests")
@@ -25,15 +26,19 @@ class DelegatedLoginOpRequestPayloadXmlTest extends AbstractXmlSerializationTest
         defaultSpec = KmipSpec.V2_1;
     }
 
-
-
     @Override
     public DelegatedLoginOpRequestPayload createDefault() {
-        return DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("user", "pass"))).build();
+        return DelegatedLoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(3600))
+                .requestCount(RequestCount.of(10))
+                .build();
     }
 
     @Override
     public DelegatedLoginOpRequestPayload createVariant() {
-        return DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("admin", "secret"))).build();
+        return DelegatedLoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(7200))
+                .requestCount(RequestCount.of(20))
+                .build();
     }
 }

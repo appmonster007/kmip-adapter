@@ -8,6 +8,9 @@ import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
+import org.purpleBean.kmip.model.v2_1.type.FinalIndicator;
+import org.purpleBean.kmip.model.v2_1.type.InitIndicator;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +24,7 @@ import java.util.stream.Stream;
 public class HashOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.HASH;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -31,19 +34,29 @@ public class HashOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    @NonNull
     private final CryptographicParameters cryptographicParameters;
 
-    @NonNull
     private final DataByteString data;
+
+    private final InitIndicator initIndicator;
+
+    private final FinalIndicator finalIndicator;
+
+    private final CorrelationValue correlationValue;
 
     @Builder
     private HashOpRequestPayload(
-            @NonNull CryptographicParameters cryptographicParameters,
-            @NonNull DataByteString data
+            CryptographicParameters cryptographicParameters,
+            DataByteString data,
+            InitIndicator initIndicator,
+            FinalIndicator finalIndicator,
+            CorrelationValue correlationValue
     ) {
         this.cryptographicParameters = cryptographicParameters;
         this.data = data;
+        this.initIndicator = initIndicator;
+        this.finalIndicator = finalIndicator;
+        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -56,6 +69,9 @@ public class HashOpRequestPayload implements RequestPayloadStructure {
         if (map.containsKey(DataByteString.kmipTag)) {
             builder.data((DataByteString) map.get(DataByteString.kmipTag).getFirst());
         }
+        if (map.containsKey(InitIndicator.kmipTag)) builder.initIndicator((InitIndicator) map.get(InitIndicator.kmipTag).getFirst());
+        if (map.containsKey(FinalIndicator.kmipTag)) builder.finalIndicator((FinalIndicator) map.get(FinalIndicator.kmipTag).getFirst());
+        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -85,7 +101,10 @@ public class HashOpRequestPayload implements RequestPayloadStructure {
     public KmipDataType[] getValue() {
         return Stream.of(
                         cryptographicParameters,
-                        data)
+                        data,
+                        initIndicator,
+                        finalIndicator,
+                        correlationValue)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 import java.util.List;
@@ -32,7 +33,10 @@ class DelegatedLoginOpRequestPayloadTest extends AbstractKmipStructureTestSuite<
 
     @Override
     protected DelegatedLoginOpRequestPayload createDefault() {
-        return DelegatedLoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of(Username.of("test"), Password.of("pass")))).build();
+        return DelegatedLoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(3600))
+                .requestCount(RequestCount.of(10))
+                .build();
     }
 
     @Override

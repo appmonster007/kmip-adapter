@@ -5,8 +5,10 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.type.MaximumItems;
 import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 import org.purpleBean.kmip.model.v2_1.structure.Attributes;
+import org.purpleBean.kmip.model.v2_1.type.OffsetItems;
 
 import java.util.List;
 import java.util.Map;
@@ -30,14 +32,20 @@ public class LocateOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
+    private final MaximumItems maximumItems;
+    private final OffsetItems offsetItems;
     private final StorageStatusMask storageStatusMask;
     private final Attributes attributes;
 
     @Builder
     private LocateOpRequestPayload(
+            MaximumItems maximumItems,
+            OffsetItems offsetItems,
             StorageStatusMask storageStatusMask,
             Attributes attributes
     ) {
+        this.maximumItems = maximumItems;
+        this.offsetItems = offsetItems;
         this.storageStatusMask = storageStatusMask;
         this.attributes = attributes;
         validate();
@@ -46,6 +54,12 @@ public class LocateOpRequestPayload implements RequestPayloadStructure {
     public static LocateOpRequestPayload of(List<KmipDataType> values) {
         var builder = LocateOpRequestPayload.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+        if (map.containsKey(MaximumItems.kmipTag)) {
+            builder.maximumItems((MaximumItems) map.get(MaximumItems.kmipTag).getFirst());
+        }
+        if (map.containsKey(OffsetItems.kmipTag)) {
+            builder.offsetItems((OffsetItems) map.get(OffsetItems.kmipTag).getFirst());
+        }
         if (map.containsKey(StorageStatusMask.kmipTag)) {
             builder.storageStatusMask((StorageStatusMask) map.get(StorageStatusMask.kmipTag).getFirst());
         }
@@ -75,7 +89,7 @@ public class LocateOpRequestPayload implements RequestPayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(storageStatusMask, attributes)
+        return Stream.of(maximumItems, offsetItems, storageStatusMask, attributes)
                 .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);

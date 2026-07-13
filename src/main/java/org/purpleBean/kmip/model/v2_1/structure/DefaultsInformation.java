@@ -43,9 +43,6 @@ public class DefaultsInformation implements KmipStructure {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        if (objectDefaults == null || objectDefaults.isEmpty()) {
-            throw new IllegalArgumentException("DefaultsInformation requires at least one ObjectDefaults entry");
-        }
     }
 
     @Override

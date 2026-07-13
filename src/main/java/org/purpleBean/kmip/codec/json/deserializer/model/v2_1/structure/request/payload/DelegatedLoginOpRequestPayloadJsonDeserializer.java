@@ -2,18 +2,13 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.request
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purpleBean.kmip.model.core.type.LeaseTime;
+import org.purpleBean.kmip.model.v2_1.structure.Rights;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 
 import java.io.IOException;
 
@@ -32,8 +27,10 @@ public class DelegatedLoginOpRequestPayloadJsonDeserializer extends AbstractKmip
     protected void setValue(DelegatedLoginOpRequestPayload.DelegatedLoginOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
-            case KmipTag.Standard.CREDENTIAL -> builder.credential(ctxt.readValue(p, Credential.class));
+            case KmipTag.Standard.LEASE_TIME -> builder.leaseTime(ctxt.readValue(p, LeaseTime.class));
+            case KmipTag.Standard.REQUEST_COUNT -> builder.requestCount(ctxt.readValue(p, RequestCount.class));
+            case KmipTag.Standard.USAGE_LIMITS -> builder.usageLimits(ctxt.readValue(p, UsageLimits.class));
+            case KmipTag.Standard.RIGHTS -> builder.rights(ctxt.readValue(p, Rights.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

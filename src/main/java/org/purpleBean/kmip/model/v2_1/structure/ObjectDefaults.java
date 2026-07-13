@@ -6,11 +6,8 @@ import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
@@ -26,32 +23,20 @@ public class ObjectDefaults implements KmipStructure {
         }
     }
 
-    @NonNull
+    // Either objectTypes (plural wrapper) or objectType (singular) is set, not both
+    private final ObjectTypes objectTypes;
     private final ObjectType objectType;
     @NonNull
     private final Attributes attributes;
+    private final ObjectGroups objectGroups;
 
     @Builder
-    private ObjectDefaults(@NonNull ObjectType objectType, @NonNull Attributes attributes) {
+    private ObjectDefaults(ObjectTypes objectTypes, ObjectType objectType, @NonNull Attributes attributes, ObjectGroups objectGroups) {
+        this.objectTypes = objectTypes;
         this.objectType = objectType;
         this.attributes = attributes;
+        this.objectGroups = objectGroups;
         validate();
-    }
-
-    public static ObjectDefaults of(@NonNull KmipDataType value) {
-        if (!(value instanceof KmipStructure structure)) {
-            throw new IllegalArgumentException("Invalid value: " + value);
-        }
-        Map<KmipTag, List<KmipDataType>> map = Stream.of(structure.getValue())
-                .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        return ObjectDefaults.of(
-                (ObjectType) map.get(ObjectType.kmipTag).getFirst(),
-                (Attributes) map.get(Attributes.kmipTag).getFirst()
-        );
-    }
-
-    public static ObjectDefaults of(@NonNull ObjectType objectType, @NonNull Attributes attributes) {
-        return ObjectDefaults.builder().objectType(objectType).attributes(attributes).build();
     }
 
     private void validate() {
@@ -78,7 +63,7 @@ public class ObjectDefaults implements KmipStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(objectType, attributes)
+        return Stream.of(objectTypes, objectType, attributes, objectGroups)
                 .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);

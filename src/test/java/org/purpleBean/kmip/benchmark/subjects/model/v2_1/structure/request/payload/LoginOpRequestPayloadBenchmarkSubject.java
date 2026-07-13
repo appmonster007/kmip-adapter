@@ -13,6 +13,7 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.LoginOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 
 public class LoginOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<LoginOpRequestPayload> {
 
@@ -20,7 +21,10 @@ public class LoginOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<
     private KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
     public LoginOpRequestPayloadBenchmarkSubject() throws Exception {
-        LoginOpRequestPayload subject = LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), org.purpleBean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"), Password.of("pass")))).build();
+        LoginOpRequestPayload subject = LoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(3600))
+                .requestCount(RequestCount.of(10))
+                .build();
         initialize(subject, LoginOpRequestPayload.class);
     }
 

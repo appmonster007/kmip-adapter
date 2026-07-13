@@ -1,18 +1,13 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.request.payload;
 
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purpleBean.kmip.model.core.type.LeaseTime;
+import org.purpleBean.kmip.model.v2_1.structure.Rights;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -32,8 +27,10 @@ public class DelegatedLoginOpRequestPayloadTtlvDeserializer extends AbstractKmip
     protected void setValue(DelegatedLoginOpRequestPayload.DelegatedLoginOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
-            case KmipTag.Standard.CREDENTIAL -> builder.credential(mapper.readValue(p, Credential.class));
+            case KmipTag.Standard.LEASE_TIME -> builder.leaseTime(mapper.readValue(p, LeaseTime.class));
+            case KmipTag.Standard.REQUEST_COUNT -> builder.requestCount(mapper.readValue(p, RequestCount.class));
+            case KmipTag.Standard.USAGE_LIMITS -> builder.usageLimits(mapper.readValue(p, UsageLimits.class));
+            case KmipTag.Standard.RIGHTS -> builder.rights(mapper.readValue(p, Rights.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

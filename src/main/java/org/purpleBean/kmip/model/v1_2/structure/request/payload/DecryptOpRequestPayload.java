@@ -10,6 +10,9 @@ import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.IVCounterNonce;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
+import org.purpleBean.kmip.model.v2_1.type.FinalIndicator;
+import org.purpleBean.kmip.model.v2_1.type.InitIndicator;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +26,7 @@ import java.util.stream.Stream;
 public class DecryptOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.DECRYPT;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -37,22 +40,33 @@ public class DecryptOpRequestPayload implements RequestPayloadStructure {
 
     private final CryptographicParameters cryptographicParameters;
 
-    @NonNull
     private final DataByteString data;
 
     private final IVCounterNonce ivCounterNonce;
+
+    private final InitIndicator initIndicator;
+
+    private final FinalIndicator finalIndicator;
+
+    private final CorrelationValue correlationValue;
 
     @Builder
     private DecryptOpRequestPayload(
             UniqueIdentifier uniqueIdentifier,
             CryptographicParameters cryptographicParameters,
-            @NonNull DataByteString data,
-            IVCounterNonce ivCounterNonce
+            DataByteString data,
+            IVCounterNonce ivCounterNonce,
+            InitIndicator initIndicator,
+            FinalIndicator finalIndicator,
+            CorrelationValue correlationValue
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.cryptographicParameters = cryptographicParameters;
         this.data = data;
         this.ivCounterNonce = ivCounterNonce;
+        this.initIndicator = initIndicator;
+        this.finalIndicator = finalIndicator;
+        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -71,6 +85,9 @@ public class DecryptOpRequestPayload implements RequestPayloadStructure {
         if (map.containsKey(IVCounterNonce.kmipTag)) {
             builder.ivCounterNonce((IVCounterNonce) map.get(IVCounterNonce.kmipTag).getFirst());
         }
+        if (map.containsKey(InitIndicator.kmipTag)) builder.initIndicator((InitIndicator) map.get(InitIndicator.kmipTag).getFirst());
+        if (map.containsKey(FinalIndicator.kmipTag)) builder.finalIndicator((FinalIndicator) map.get(FinalIndicator.kmipTag).getFirst());
+        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -102,7 +119,10 @@ public class DecryptOpRequestPayload implements RequestPayloadStructure {
                         uniqueIdentifier,
                         cryptographicParameters,
                         data,
-                        ivCounterNonce)
+                        ivCounterNonce,
+                        initIndicator,
+                        finalIndicator,
+                        correlationValue)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

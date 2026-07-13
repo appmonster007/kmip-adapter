@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.structure.request.payload.LoginOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.type.RequestCount;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("LoginOpRequestPayload Xml Serialization Tests")
@@ -29,11 +30,16 @@ class LoginOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<Log
 
     @Override
     public LoginOpRequestPayload createDefault() {
-        return LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("user", "pass"))).build();
-    }
+        return LoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(3600))
+                .requestCount(RequestCount.of(10))
+                .build();    }
 
     @Override
     public LoginOpRequestPayload createVariant() {
-        return LoginOpRequestPayload.builder().credential(Credential.of(CredentialType.Standard.USERNAME_AND_PASSWORD.inst(), UsernameAndPassword.of("admin", "secret"))).build();
+        return LoginOpRequestPayload.builder()
+                .leaseTime(LeaseTime.of(7200))
+                .requestCount(RequestCount.of(20))
+                .build();
     }
 }

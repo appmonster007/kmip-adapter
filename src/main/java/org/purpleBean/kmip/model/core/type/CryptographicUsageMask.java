@@ -238,7 +238,7 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
             MAC_GENERATE(128, "MacGenerate"),
             MAC_VERIFY(256, "MacVerify"),
             DERIVE_KEY(512, "DeriveKey"),
-            CONTENT_COMMITMENT_NON_REPUDIATION(1_024, "ContentCommitmentNonRepudiation"),
+            CONTENT_COMMITMENT_NON_REPUDIATION(1_024, "ContentCommitment"),
             KEY_AGREEMENT(2_048, "KeyAgreement"),
             CERTIFICATE_SIGN(4_096, "CertificateSign"),
             CRL_SIGN(8_192, "CrlSign"),
