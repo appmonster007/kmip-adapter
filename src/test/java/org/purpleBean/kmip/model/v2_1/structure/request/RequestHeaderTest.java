@@ -32,8 +32,10 @@ class RequestHeaderTest extends AbstractKmipStructureTestSuite<RequestHeader> {
 
     @Override
     protected RequestHeader createDefault() {
-        // TODO: Create a default instance of the structure
-        throw new UnsupportedOperationException("Not yet implemented");
+        return RequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(2, 1))
+                .batchCount(BatchCount.of(1))
+                .build();
     }
 
     @Override
@@ -43,8 +45,7 @@ class RequestHeaderTest extends AbstractKmipStructureTestSuite<RequestHeader> {
 
     @Override
     protected int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 2;
     }
 
     @Override

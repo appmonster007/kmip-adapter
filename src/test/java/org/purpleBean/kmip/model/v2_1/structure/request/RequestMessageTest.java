@@ -1,17 +1,12 @@
 package org.purpleBean.kmip.model.v2_1.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
-
 
 import java.util.List;
 
@@ -32,8 +27,12 @@ class RequestMessageTest extends AbstractKmipStructureTestSuite<RequestMessage> 
 
     @Override
     protected RequestMessage createDefault() {
-        // TODO: Create a default instance of the structure
-        throw new UnsupportedOperationException("Not yet implemented");
+        return RequestMessage.builder()
+                .requestHeader(RequestHeader.builder()
+                        .protocolVersion(ProtocolVersion.of(2, 1))
+                        .batchCount(BatchCount.of(0))
+                        .build())
+                .build();
     }
 
     @Override
@@ -43,13 +42,12 @@ class RequestMessageTest extends AbstractKmipStructureTestSuite<RequestMessage> 
 
     @Override
     protected int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 1;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values.size()).isGreaterThanOrEqualTo(1);
+        assertThat(values.get(0)).isInstanceOf(RequestHeader.class);
     }
 }

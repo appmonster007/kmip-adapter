@@ -1,27 +1,26 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v2_1.structure.request;
 
 import lombok.Getter;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.model.v2_1.structure.request.RequestHeader;
 
 public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestHeader> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private final KmipSpec spec = KmipSpec.V2_1;
 
     public RequestHeaderBenchmarkSubject() throws Exception {
-        RequestHeader subject = RequestHeader.builder().build();
+        KmipContext.setSpec(getSpec());
+        RequestHeader subject = RequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(2, 1))
+                .batchCount(BatchCount.of(1))
+                .build();
         initialize(subject, RequestHeader.class);
+        KmipContext.clear();
     }
 
     @Override

@@ -1,20 +1,19 @@
 package org.purpleBean.kmip.codec.json.model.v2_1.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purpleBean.kmip.model.core.type.BatchCount;
 import org.purpleBean.kmip.model.v2_1.structure.request.RequestHeader;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RequestHeader Json Serialization Tests")
 class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHeader> {
+
+    @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
 
     @Override
     public Class<RequestHeader> type() {
@@ -23,11 +22,17 @@ class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHe
 
     @Override
     public RequestHeader createDefault() {
-        return RequestHeader.builder().build();
+        return RequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(2, 1))
+                .batchCount(BatchCount.of(1))
+                .build();
     }
 
     @Override
     public RequestHeader createVariant() {
-        return RequestHeader.builder().build();
+        return RequestHeader.builder()
+                .protocolVersion(ProtocolVersion.of(2, 1))
+                .batchCount(BatchCount.of(2))
+                .build();
     }
 }

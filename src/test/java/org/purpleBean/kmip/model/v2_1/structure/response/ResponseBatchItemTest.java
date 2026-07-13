@@ -1,17 +1,12 @@
 package org.purpleBean.kmip.model.v2_1.structure.response;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
-
 
 import java.util.List;
 
@@ -32,8 +27,10 @@ class ResponseBatchItemTest extends AbstractKmipStructureTestSuite<ResponseBatch
 
     @Override
     protected ResponseBatchItem createDefault() {
-        // TODO: Create a default instance of the structure
-        throw new UnsupportedOperationException("Not yet implemented");
+        return ResponseBatchItem.builder()
+                .operation(Operation.of(Operation.Standard.CREATE))
+                .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+                .build();
     }
 
     @Override
@@ -43,13 +40,13 @@ class ResponseBatchItemTest extends AbstractKmipStructureTestSuite<ResponseBatch
 
     @Override
     protected int expectedMinComponentCount() {
-        // TODO: Set the expected minimum number of components
-        return 0;
+        return 2;
     }
 
     @Override
     protected void validateComponents(List<KmipDataType> values) {
-        // TODO: Validate the components of the structure
-        // assertThat(values).hasSize(0);
+        assertThat(values).hasSize(2);
+        assertThat(values.get(0)).isInstanceOf(Operation.class);
+        assertThat(values.get(1)).isInstanceOf(ResultStatus.class);
     }
 }

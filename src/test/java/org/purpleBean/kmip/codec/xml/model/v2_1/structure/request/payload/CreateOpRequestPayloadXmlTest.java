@@ -17,6 +17,11 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class CreateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<CreateOpRequestPayload> {
 
     @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = KmipSpec.V2_1;
+    }
+
+    @Override
     public Class<CreateOpRequestPayload> type() {
         return CreateOpRequestPayload.class;
     }
