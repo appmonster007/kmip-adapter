@@ -6,7 +6,6 @@ import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponsePayload;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.io.IOException;
 
@@ -27,7 +26,6 @@ public class HashOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXm
 
         switch (nodeTag) {
             case KmipTag.Standard.DATA -> builder.data(ctxt.readValue(p, DataByteString.class));
-            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(ctxt.readValue(p, CorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

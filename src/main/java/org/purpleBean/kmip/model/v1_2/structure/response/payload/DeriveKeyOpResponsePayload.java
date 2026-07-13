@@ -22,7 +22,7 @@ public class DeriveKeyOpResponsePayload implements ResponsePayloadStructure {
 
     public static final EncodingType encodingType = EncodingType.STRUCTURE;
     private static final Operation.Value operation = Operation.Standard.DERIVE_KEY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
 
     static {
         for (KmipSpec spec : supportedVersions) {

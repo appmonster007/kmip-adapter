@@ -5,7 +5,6 @@ import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponsePayload;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -26,7 +25,6 @@ public class HashOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeT
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.DATA -> builder.data(mapper.readValue(p, DataByteString.class));
-            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

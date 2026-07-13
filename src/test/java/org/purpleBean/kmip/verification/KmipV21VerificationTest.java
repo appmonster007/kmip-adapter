@@ -240,6 +240,6 @@ public class KmipV21VerificationTest {
         JsonNode newNode = verificationMapper.readTree(minifiedNew);
 
         assertEquals(originalNode, newNode, "Round-trip mismatch in " + fileName + " <" + tag + ">");
-        System.out.println("Verified: " + fileName + " <" + tag + ">");
+//        System.out.println("Verified: " + fileName + " <" + tag + ">");
     }
 }

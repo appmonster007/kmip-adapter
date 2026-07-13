@@ -8,9 +8,6 @@ import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.SignatureData;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.SignatureVerifyOpRequestPayload;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
-import org.purpleBean.kmip.model.v2_1.type.FinalIndicator;
-import org.purpleBean.kmip.model.v2_1.type.InitIndicator;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -36,9 +33,6 @@ public class SignatureVerifyOpRequestPayloadTtlvDeserializer extends AbstractKmi
                     builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));
             case KmipTag.Standard.DATA -> builder.data(mapper.readValue(p, DataByteString.class));
             case KmipTag.Standard.SIGNATURE_DATA -> builder.signatureData(mapper.readValue(p, SignatureData.class));
-            case KmipTag.Standard.INIT_INDICATOR -> builder.initIndicator(mapper.readValue(p, InitIndicator.class));
-            case KmipTag.Standard.FINAL_INDICATOR -> builder.finalIndicator(mapper.readValue(p, FinalIndicator.class));
-            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

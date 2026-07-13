@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class DiscoverVersionsOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.DISCOVER_VERSIONS;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
 
     static {
         for (KmipSpec spec : supportedVersions) {

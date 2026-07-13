@@ -10,9 +10,6 @@ import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.SignatureData;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
-import org.purpleBean.kmip.model.v2_1.type.FinalIndicator;
-import org.purpleBean.kmip.model.v2_1.type.InitIndicator;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +23,7 @@ import java.util.stream.Stream;
 public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.SIGNATURE_VERIFY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -44,29 +41,17 @@ public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure 
 
     private final SignatureData signatureData;
 
-    private final InitIndicator initIndicator;
-
-    private final FinalIndicator finalIndicator;
-
-    private final CorrelationValue correlationValue;
-
     @Builder
     private SignatureVerifyOpRequestPayload(
             UniqueIdentifier uniqueIdentifier,
             CryptographicParameters cryptographicParameters,
             DataByteString data,
-            SignatureData signatureData,
-            InitIndicator initIndicator,
-            FinalIndicator finalIndicator,
-            CorrelationValue correlationValue
+            SignatureData signatureData
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.cryptographicParameters = cryptographicParameters;
         this.data = data;
         this.signatureData = signatureData;
-        this.initIndicator = initIndicator;
-        this.finalIndicator = finalIndicator;
-        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -85,9 +70,6 @@ public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure 
         if (map.containsKey(SignatureData.kmipTag)) {
             builder.signatureData((SignatureData) map.get(SignatureData.kmipTag).getFirst());
         }
-        if (map.containsKey(InitIndicator.kmipTag)) builder.initIndicator((InitIndicator) map.get(InitIndicator.kmipTag).getFirst());
-        if (map.containsKey(FinalIndicator.kmipTag)) builder.finalIndicator((FinalIndicator) map.get(FinalIndicator.kmipTag).getFirst());
-        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -119,10 +101,7 @@ public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure 
                         uniqueIdentifier,
                         cryptographicParameters,
                         data,
-                        signatureData,
-                        initIndicator,
-                        finalIndicator,
-                        correlationValue)
+                        signatureData)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

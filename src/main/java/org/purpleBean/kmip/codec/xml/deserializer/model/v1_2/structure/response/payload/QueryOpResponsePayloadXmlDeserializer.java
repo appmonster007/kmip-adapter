@@ -12,7 +12,6 @@ import org.purpleBean.kmip.model.core.structure.ServerInformation;
 import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.QueryOpResponsePayload;
-import org.purpleBean.kmip.model.v2_1.structure.DefaultsInformation;
 
 import java.io.IOException;
 
@@ -42,7 +41,6 @@ public class QueryOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeX
             case KmipTag.Standard.EXTENSION_INFORMATION ->
                     builder.extensionInformation(ctxt.readValue(p, ExtensionInformation.class));
             case KmipTag.Standard.ATTESTATION_TYPE -> builder.attestationType(ctxt.readValue(p, AttestationType.class));
-            case KmipTag.Standard.DEFAULTS_INFORMATION -> builder.defaultsInformation(ctxt.readValue(p, DefaultsInformation.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

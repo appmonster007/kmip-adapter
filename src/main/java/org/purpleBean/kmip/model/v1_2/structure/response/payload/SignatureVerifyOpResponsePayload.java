@@ -9,7 +9,6 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purpleBean.kmip.model.core.type.DataByteString;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import java.util.stream.Stream;
 public class SignatureVerifyOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.SIGNATURE_VERIFY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -40,19 +39,15 @@ public class SignatureVerifyOpResponsePayload implements ResponsePayloadStructur
 
     private final DataByteString data;
 
-    private final CorrelationValue correlationValue;
-
     @Builder
     private SignatureVerifyOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
             ValidityIndicator validityIndicator,
-            DataByteString data,
-            CorrelationValue correlationValue
+            DataByteString data
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.validityIndicator = validityIndicator;
         this.data = data;
-        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -68,7 +63,6 @@ public class SignatureVerifyOpResponsePayload implements ResponsePayloadStructur
         if (map.containsKey(DataByteString.kmipTag)) {
             builder.data((DataByteString) map.get(DataByteString.kmipTag).getFirst());
         }
-        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -99,8 +93,7 @@ public class SignatureVerifyOpResponsePayload implements ResponsePayloadStructur
         return Stream.of(
                         uniqueIdentifier,
                         validityIndicator,
-                        data,
-                        correlationValue)
+                        data)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

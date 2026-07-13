@@ -7,7 +7,6 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.type.DataByteString;
-import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ import java.util.stream.Stream;
 public class HashOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.HASH;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -33,15 +32,11 @@ public class HashOpResponsePayload implements ResponsePayloadStructure {
 
     private final DataByteString data;
 
-    private final CorrelationValue correlationValue;
-
     @Builder
     private HashOpResponsePayload(
-            DataByteString data,
-            CorrelationValue correlationValue
+            DataByteString data
     ) {
         this.data = data;
-        this.correlationValue = correlationValue;
         validate();
     }
 
@@ -51,7 +46,6 @@ public class HashOpResponsePayload implements ResponsePayloadStructure {
         if (map.containsKey(DataByteString.kmipTag)) {
             builder.data((DataByteString) map.get(DataByteString.kmipTag).getFirst());
         }
-        if (map.containsKey(CorrelationValue.kmipTag)) builder.correlationValue((CorrelationValue) map.get(CorrelationValue.kmipTag).getFirst());
         return builder.build();
     }
 
@@ -79,7 +73,7 @@ public class HashOpResponsePayload implements ResponsePayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(data, correlationValue)
+        return Stream.of(data)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

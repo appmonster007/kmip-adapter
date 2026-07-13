@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 public class GetAttributeListOpResponsePayload implements ResponsePayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.GET_ATTRIBUTE_LIST;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
