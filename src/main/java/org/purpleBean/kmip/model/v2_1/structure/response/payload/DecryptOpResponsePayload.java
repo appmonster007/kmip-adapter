@@ -32,14 +32,13 @@ public class DecryptOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @NonNull
     private final UniqueIdentifier uniqueIdentifier;
     private final DataByteString data;
     private final CorrelationValue correlationValue;
 
     @Builder
     private DecryptOpResponsePayload(
-            @NonNull UniqueIdentifier uniqueIdentifier,
+            UniqueIdentifier uniqueIdentifier,
             DataByteString data,
             CorrelationValue correlationValue
     ) {

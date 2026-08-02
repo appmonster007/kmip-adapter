@@ -8,6 +8,8 @@ import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
 import org.purpleBean.kmip.model.core.structure.DerivationParameters;
 import org.purpleBean.kmip.model.core.type.DerivationData;
 import org.purpleBean.kmip.model.core.type.InitializationVector;
+import org.purpleBean.kmip.model.core.type.IterationCount;
+import org.purpleBean.kmip.model.core.type.Salt;
 
 import java.io.IOException;
 
@@ -31,6 +33,8 @@ public class DerivationParametersXmlDeserializer extends AbstractKmipDataTypeXml
             case KmipTag.Standard.INITIALIZATION_VECTOR ->
                     builder.initializationVector(ctxt.readValue(p, InitializationVector.class));
             case KmipTag.Standard.DERIVATION_DATA -> builder.derivationData(ctxt.readValue(p, DerivationData.class));
+            case KmipTag.Standard.SALT -> builder.salt(ctxt.readValue(p, Salt.class));
+            case KmipTag.Standard.ITERATION_COUNT -> builder.iterationCount(ctxt.readValue(p, IterationCount.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

@@ -71,7 +71,13 @@ public abstract class AbstractKmipDataTypeJsonSerializer<T extends KmipDataType>
                 gen.writeEndArray();
             }
         } else if (obj.getEncodingType() == EncodingType.ENUMERATION) {
-            serializers.defaultSerializeValue(((KmipEnumeration.Value<?>) value).getDescription(), gen);
+            if (value instanceof KmipEnumeration.Value<?> enumValue) {
+                serializers.defaultSerializeValue(enumValue.getDescription(), gen);
+            } else {
+                // KMIP polymorphic types (e.g. UniqueIdentifier) may report ENUMERATION encoding
+                // while storing the value as a plain String (enum name). Serialize as-is.
+                serializers.defaultSerializeValue(value, gen);
+            }
         } else {
             serializers.defaultSerializeValue(value, gen);
         }

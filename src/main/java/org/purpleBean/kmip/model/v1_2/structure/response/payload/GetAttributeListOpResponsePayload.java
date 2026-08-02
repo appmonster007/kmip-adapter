@@ -35,17 +35,21 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
     @NonNull
     private final UniqueIdentifier uniqueIdentifier;
 
-    @NonNull
     @Singular
     private final List<AttributeName> attributeNames;
+
+    @Singular
+    private final List<KmipDataType> attributeReferences;
 
     @Builder
     private GetAttributeListOpResponsePayload(
             @NonNull UniqueIdentifier uniqueIdentifier,
-            @NonNull List<AttributeName> attributeNames
+            List<AttributeName> attributeNames,
+            List<KmipDataType> attributeReferences
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
-        this.attributeNames = attributeNames;
+        this.attributeNames = (attributeNames == null) ? java.util.Collections.emptyList() : attributeNames;
+        this.attributeReferences = (attributeReferences == null) ? java.util.Collections.emptyList() : attributeReferences;
         validate();
     }
 
@@ -58,6 +62,9 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
         if (map.containsKey(AttributeName.kmipTag)) {
             map.get(AttributeName.kmipTag).forEach(item -> builder.attributeName((AttributeName) item));
         }
+        if (map.containsKey(org.purpleBean.kmip.model.v2_1.structure.AttributeReference.kmipTag)) {
+            map.get(org.purpleBean.kmip.model.v2_1.structure.AttributeReference.kmipTag).forEach(builder::attributeReference);
+        }
         return builder.build();
     }
 
@@ -65,7 +72,7 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        if (attributeNames.isEmpty()) {
+        if (attributeNames.isEmpty() && attributeReferences.isEmpty()) {
             throw new IllegalArgumentException(String.format("Empty attribute list for %s", getKmipTag()));
         }
     }
@@ -90,7 +97,8 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
     public KmipDataType[] getValue() {
         return Stream.of(
                         uniqueIdentifier,
-                        attributeNames)
+                        attributeNames,
+                        attributeReferences)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

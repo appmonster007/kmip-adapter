@@ -30,6 +30,7 @@ public class GetOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJso
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.KEY_FORMAT_TYPE -> builder.keyFormatType(ctxt.readValue(p, KeyFormatType.class));
+            case KmipTag.Standard.KEY_WRAP_TYPE -> builder.keyWrapType(ctxt.readValue(p, org.purpleBean.kmip.model.core.enumeration.KeyWrapType.class));
             case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
                     builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
             case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->

@@ -10,6 +10,9 @@ import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.type.Offset;
 import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload;
+import org.purpleBean.kmip.model.v2_1.structure.CommonAttributes;
+import org.purpleBean.kmip.model.v2_1.structure.PrivateKeyAttributes;
+import org.purpleBean.kmip.model.v2_1.structure.PublicKeyAttributes;
 
 import java.io.IOException;
 
@@ -37,6 +40,12 @@ public class ReKeyKeyPairOpRequestPayloadJsonDeserializer extends AbstractKmipDa
                     builder.privateKeyTemplateAttribute(ctxt.readValue(p, PrivateKeyTemplateAttribute.class));
             case KmipTag.Standard.PUBLIC_KEY_TEMPLATE_ATTRIBUTE ->
                     builder.publicKeyTemplateAttribute(ctxt.readValue(p, PublicKeyTemplateAttribute.class));
+            case KmipTag.Standard.COMMON_ATTRIBUTES ->
+                    builder.commonAttributes(ctxt.readValue(p, CommonAttributes.class));
+            case KmipTag.Standard.PRIVATE_KEY_ATTRIBUTES ->
+                    builder.privateKeyAttributes(ctxt.readValue(p, PrivateKeyAttributes.class));
+            case KmipTag.Standard.PUBLIC_KEY_ATTRIBUTES ->
+                    builder.publicKeyAttributes(ctxt.readValue(p, PublicKeyAttributes.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

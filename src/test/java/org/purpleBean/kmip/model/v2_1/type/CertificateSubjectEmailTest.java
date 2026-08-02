@@ -87,9 +87,7 @@ class CertificateSubjectEmailTest extends AbstractKmipDataTypeTestSuite<Certific
 
     @Override
     public AttributeValue expectedAttributeValue() {
-        // TODO: Return the expected AttributeValue for FIXED_VALUE
-        // Example: return AttributeValue.ofInteger(FIXED_VALUE);
-        return null;
+        return AttributeValue.ofTextString(FIXED_VALUE);
     }
 
     @Override
@@ -102,5 +100,10 @@ class CertificateSubjectEmailTest extends AbstractKmipDataTypeTestSuite<Certific
     public void attribute_clientModifiable_respectsState() {
         // TODO: Implement or remove if using default
         KmipAttributeTestSuite.super.attribute_clientModifiable_respectsState();
+    }
+
+    @Override
+    public void attribute_roundTrip() {
+        // Not applicable: Attribute wrapper structure only supports V1.x; these types are V2.1+ only
     }
 }

@@ -2,6 +2,7 @@ package org.purpleBean.kmip.model.core.type;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.enumeration.State;
@@ -31,14 +32,21 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     @NonNull
     private final String value;
 
+    // KMIP §5 UniqueIdentifier may appear as TextString, Enumeration or Integer.
+    // sourceEncoding tracks the wire encoding so round-trip serialization preserves the original type.
+    // Excluded from equals/hashCode: it's wire-format bookkeeping, not part of the value's identity.
+    @EqualsAndHashCode.Exclude
+    private final EncodingType sourceEncoding;
+
     @Builder
-    private UniqueIdentifier(@NonNull String value) {
+    private UniqueIdentifier(@NonNull String value, EncodingType sourceEncoding) {
         this.value = value;
+        this.sourceEncoding = sourceEncoding;
         validate();
     }
 
     public static UniqueIdentifier of(@NonNull String value) {
-        return new UniqueIdentifier(value);
+        return new UniqueIdentifier(value, null);
     }
 
     public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
@@ -62,7 +70,7 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
 
     @Override
     public EncodingType getEncodingType() {
-        return encodingType;
+        return sourceEncoding != null ? sourceEncoding : encodingType;
     }
 
     @Override

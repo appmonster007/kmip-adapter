@@ -2,20 +2,20 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.Fips186Variation;
+import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
+import org.purpleBean.kmip.model.core.type.CryptographicLength;
 import org.purpleBean.kmip.model.v2_1.structure.RandomNumberGenerator;
+import org.purpleBean.kmip.model.v2_1.structure.RngParameters;
+import org.purpleBean.kmip.model.v2_1.type.PredictionResistance;
 
 import java.io.IOException;
-import org.purpleBean.kmip.model.v2_1.structure.RngParameters;
 
 public class RandomNumberGeneratorXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RandomNumberGenerator, RandomNumberGenerator.RandomNumberGeneratorBuilder> {
 
@@ -25,16 +25,31 @@ public class RandomNumberGeneratorXmlDeserializer extends AbstractKmipDataTypeXm
 
     @Override
     protected RandomNumberGenerator.RandomNumberGeneratorBuilder createBuilder() {
-        return RandomNumberGenerator.builder();
+        return RandomNumberGenerator.builder().rngParameters(RngParameters.builder().build());
     }
 
     @Override
     protected void setValue(RandomNumberGenerator.RandomNumberGeneratorBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-                KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        // KMIP §4.46: RandomNumberGenerator wraps the parameter fields directly (no <RngParameters> XML tag).
+        RngParameters current = builder.build().getRngParameters();
+        RngParameters.RngParametersBuilder rngBuilder = current == null ? RngParameters.builder() : current.toBuilder();
         switch (nodeTag) {
-            case KmipTag.Standard.RNG_PARAMETERS -> builder.rngParameters(ctxt.readValue(p, RngParameters.class));
+            case KmipTag.Standard.RNG_PARAMETERS -> {
+                builder.rngParameters(ctxt.readValue(p, RngParameters.class));
+                return;
+            }
+            case KmipTag.Standard.RNG_ALGORITHM -> rngBuilder.rngAlgorithm(ctxt.readValue(p, RngAlgorithm.class));
+            case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM -> rngBuilder.cryptographicAlgorithm(ctxt.readValue(p, CryptographicAlgorithm.class));
+            case KmipTag.Standard.CRYPTOGRAPHIC_LENGTH -> rngBuilder.cryptographicLength(ctxt.readValue(p, CryptographicLength.class));
+            case KmipTag.Standard.HASHING_ALGORITHM -> rngBuilder.hashingAlgorithm(ctxt.readValue(p, HashingAlgorithm.class));
+            case KmipTag.Standard.DRBG_ALGORITHM -> rngBuilder.drbgAlgorithm(ctxt.readValue(p, DrbgAlgorithm.class));
+            case KmipTag.Standard.RECOMMENDED_CURVE -> rngBuilder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));
+            case KmipTag.Standard.FIPS186_VARIATION -> rngBuilder.fips186Variation(ctxt.readValue(p, Fips186Variation.class));
+            case KmipTag.Standard.PREDICTION_RESISTANCE -> rngBuilder.predictionResistance(ctxt.readValue(p, PredictionResistance.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+        builder.rngParameters(rngBuilder.build());
     }
 
     @Override

@@ -37,6 +37,7 @@ public class ImportOpRequestPayloadXmlDeserializer extends AbstractKmipDataTypeX
             case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
             case KmipTag.Standard.REPLACE_EXISTING -> builder.replaceExisting(ctxt.readValue(p, ReplaceExisting.class));
             case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION -> builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
+            case KmipTag.Standard.ATTRIBUTES -> builder.attributes(ctxt.readValue(p, org.purpleBean.kmip.model.v2_1.structure.Attributes.class));
             default -> {
                 if (ManagedObject.isManagedObject(nodeTag)) {
                     builder.object(ctxt.readValue(p, ManagedObject.class));

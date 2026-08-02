@@ -20,9 +20,7 @@ public class ProtectionStorageMaskJsonDeserializer extends AbstractKmipDataTypeJ
 
     @Override
     protected void setValue(ProtectionStorageMask.ProtectionStorageMaskBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        String maskString = ctxt.readValue(p, String.class);
-        ProtectionStorageMask mask = ProtectionStorageMask.fromMaskString(maskString);
-        builder.value(mask.getValue());
+        builder.value(ctxt.readValue(p, Integer.class));
     }
 
     @Override

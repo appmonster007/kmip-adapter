@@ -153,7 +153,7 @@ public abstract class AbstractKmipDataTypeXmlDeserializer<T extends KmipDataType
             return tag;
         }
 
-        if (kmipTag != null && kmipTag.getDescription().equals(tag)) {
+        if (kmipTag != null && kmipTag.getDescription().equalsIgnoreCase(tag)) {
             return tag;
         }
 

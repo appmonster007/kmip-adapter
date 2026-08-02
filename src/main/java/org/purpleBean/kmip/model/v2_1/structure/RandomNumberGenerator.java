@@ -34,11 +34,10 @@ public class RandomNumberGenerator implements KmipStructure, KmipAttribute {
         }
     }
 
-    @NonNull
     private final RngParameters rngParameters;
 
     @Builder
-    private RandomNumberGenerator(@NonNull RngParameters rngParameters) {
+    private RandomNumberGenerator(RngParameters rngParameters) {
         this.rngParameters = rngParameters;
         validate();
     }
@@ -76,7 +75,9 @@ public class RandomNumberGenerator implements KmipStructure, KmipAttribute {
 
     @Override
     public KmipDataType[] getValue() {
-        return Stream.of(rngParameters).filter(Objects::nonNull).map(KmipDataType.class::cast).toArray(KmipDataType[]::new);
+        // KMIP §4.46: RandomNumberGenerator emits the RngParameters fields inline (no RngParameters wrapper tag).
+        if (rngParameters == null) return new KmipDataType[0];
+        return rngParameters.getValue();
     }
 
     @Override

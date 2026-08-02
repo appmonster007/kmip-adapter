@@ -28,6 +28,7 @@ public class GetAttributeListOpResponsePayloadJsonDeserializer extends AbstractK
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.ATTRIBUTE_NAME -> builder.attributeName(ctxt.readValue(p, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_REFERENCE -> builder.attributeReference(ctxt.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

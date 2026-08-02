@@ -9,6 +9,7 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.MessageExtension;
 import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
+import org.purpleBean.kmip.model.v2_1.type.Ephemeral;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,8 @@ public class RequestBatchItem implements RequestBatchItemStructure {
 
     private final Operation operation;
 
+    private final Ephemeral ephemeral;
+
     private final UniqueBatchItemID uniqueBatchItemID;
 
     private final AsynchronousCorrelationValue asynchronousCorrelationValue;
@@ -44,12 +47,14 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     @Builder
     private RequestBatchItem(
             Operation operation,
+            Ephemeral ephemeral,
             UniqueBatchItemID uniqueBatchItemID,
             AsynchronousCorrelationValue asynchronousCorrelationValue,
             RequestPayloadStructure requestPayloadStructure,
             MessageExtension messageExtension
     ) {
         this.operation = operation;
+        this.ephemeral = ephemeral;
         this.uniqueBatchItemID = uniqueBatchItemID;
         this.asynchronousCorrelationValue = asynchronousCorrelationValue;
         this.requestPayloadStructure = requestPayloadStructure;
@@ -62,6 +67,9 @@ public class RequestBatchItem implements RequestBatchItemStructure {
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
         if (map.containsKey(Operation.kmipTag)) {
             builder.operation((Operation) map.get(Operation.kmipTag).get(0));
+        }
+        if (map.containsKey(Ephemeral.kmipTag)) {
+            builder.ephemeral((Ephemeral) map.get(Ephemeral.kmipTag).get(0));
         }
         if (map.containsKey(UniqueBatchItemID.kmipTag)) {
             builder.uniqueBatchItemID((UniqueBatchItemID) map.get(UniqueBatchItemID.kmipTag).get(0));
@@ -105,6 +113,7 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     public KmipDataType[] getValue() {
         return Stream.of(
                         operation,
+                        ephemeral,
                         uniqueBatchItemID,
                         asynchronousCorrelationValue,
                         requestPayloadStructure,

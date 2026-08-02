@@ -34,7 +34,6 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @NonNull
     private final UniqueIdentifier uniqueIdentifier;
     private final DataByteString data;
     private final IVCounterNonce ivCounterNonce;
@@ -43,7 +42,7 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
 
     @Builder
     private EncryptOpResponsePayload(
-            @NonNull UniqueIdentifier uniqueIdentifier,
+            UniqueIdentifier uniqueIdentifier,
             DataByteString data,
             IVCounterNonce ivCounterNonce,
             CorrelationValue correlationValue,

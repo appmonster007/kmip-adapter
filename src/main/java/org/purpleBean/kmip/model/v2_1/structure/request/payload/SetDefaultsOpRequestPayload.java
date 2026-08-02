@@ -29,20 +29,21 @@ public class SetDefaultsOpRequestPayload implements RequestPayloadStructure {
         }
     }
 
-    @NonNull
     private final DefaultsInformation defaultsInformation;
 
     @Builder
-    private SetDefaultsOpRequestPayload(@NonNull DefaultsInformation defaultsInformation) {
+    private SetDefaultsOpRequestPayload(DefaultsInformation defaultsInformation) {
         this.defaultsInformation = defaultsInformation;
         validate();
     }
 
     public static SetDefaultsOpRequestPayload of(List<KmipDataType> values) {
+        var builder = SetDefaultsOpRequestPayload.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        return SetDefaultsOpRequestPayload.builder()
-                .defaultsInformation((DefaultsInformation) map.get(DefaultsInformation.kmipTag).getFirst())
-                .build();
+        if (map.containsKey(DefaultsInformation.kmipTag)) {
+            builder.defaultsInformation((DefaultsInformation) map.get(DefaultsInformation.kmipTag).getFirst());
+        }
+        return builder.build();
     }
 
     private void validate() {
@@ -65,7 +66,7 @@ public class SetDefaultsOpRequestPayload implements RequestPayloadStructure {
 
     @Override
     public KmipDataType[] getValue() {
-        return new KmipDataType[]{defaultsInformation};
+        return defaultsInformation == null ? new KmipDataType[0] : new KmipDataType[]{defaultsInformation};
     }
 
     @Override

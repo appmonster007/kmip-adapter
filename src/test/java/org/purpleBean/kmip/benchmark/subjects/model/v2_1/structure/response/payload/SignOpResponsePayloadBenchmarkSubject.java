@@ -17,10 +17,12 @@ import org.purpleBean.kmip.model.v2_1.structure.response.payload.SignOpResponseP
 public class SignOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<SignOpResponsePayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public SignOpResponsePayloadBenchmarkSubject() throws Exception {
-        SignOpResponsePayload subject = SignOpResponsePayload.builder().build();
+        SignOpResponsePayload subject = SignOpResponsePayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+                .build();
         initialize(subject, SignOpResponsePayload.class);
     }
 

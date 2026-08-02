@@ -32,14 +32,13 @@ public class MacOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @NonNull
     private final UniqueIdentifier uniqueIdentifier;
     private final MacData macData;
     private final CorrelationValue correlationValue;
 
     @Builder
     private MacOpResponsePayload(
-            @NonNull UniqueIdentifier uniqueIdentifier,
+            UniqueIdentifier uniqueIdentifier,
             MacData macData,
             CorrelationValue correlationValue
     ) {

@@ -285,7 +285,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Xlint:all</arg>
+                        <!-- -Xlint:all removed for build speed; re-enable in CI -->
                     </compilerArgs>
                 </configuration>
             </plugin>

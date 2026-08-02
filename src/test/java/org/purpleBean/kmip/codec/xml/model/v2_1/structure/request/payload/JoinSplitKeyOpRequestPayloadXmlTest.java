@@ -17,17 +17,30 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 class JoinSplitKeyOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<JoinSplitKeyOpRequestPayload> {
 
     @Override
+    protected void setupDefaultSpec() {
+        defaultSpec = org.purpleBean.kmip.api.KmipSpec.V2_1;
+    }
+
+    @Override
     public Class<JoinSplitKeyOpRequestPayload> type() {
         return JoinSplitKeyOpRequestPayload.class;
     }
 
     @Override
     public JoinSplitKeyOpRequestPayload createDefault() {
-        return JoinSplitKeyOpRequestPayload.builder().build();
+        return JoinSplitKeyOpRequestPayload.builder()
+                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-1").build())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-2").build())
+                .build();
     }
 
     @Override
     public JoinSplitKeyOpRequestPayload createVariant() {
-        return JoinSplitKeyOpRequestPayload.builder().build();
+        return JoinSplitKeyOpRequestPayload.builder()
+                .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-3").build())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-4").build())
+                .build();
     }
 }

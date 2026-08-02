@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Data
 @Builder(toBuilder = true)
-public class DataByteString implements KmipDataType {
+public class DataByteString implements org.purpleBean.kmip.api.DataValue {
 
     public static final KmipTag kmipTag = KmipTag.Standard.DATA.inst();
     public static final EncodingType encodingType = EncodingType.BYTE_STRING;

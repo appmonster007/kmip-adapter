@@ -32,14 +32,13 @@ public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
         }
     }
 
-    @NonNull
     private final UniqueIdentifier uniqueIdentifier;
     private final ValidityIndicator validityIndicator;
     private final CorrelationValue correlationValue;
 
     @Builder
     private MacVerifyOpResponsePayload(
-            @NonNull UniqueIdentifier uniqueIdentifier,
+            UniqueIdentifier uniqueIdentifier,
             ValidityIndicator validityIndicator,
             CorrelationValue correlationValue
     ) {

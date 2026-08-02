@@ -68,7 +68,14 @@ public abstract class AbstractKmipDataTypeXmlSerializer<T extends KmipDataType> 
         } else {
             Object value;
             if (obj.getEncodingType() == EncodingType.ENUMERATION) {
-                value = ((KmipEnumeration.Value<?>) obj.getValue()).getDescription();
+                Object rawValue = obj.getValue();
+                if (rawValue instanceof KmipEnumeration.Value<?> enumValue) {
+                    value = enumValue.getDescription();
+                } else {
+                    // KMIP polymorphic types (e.g. UniqueIdentifier) may report ENUMERATION encoding
+                    // while storing the value as a plain String (enum name). Serialize as-is.
+                    value = rawValue;
+                }
             } else {
                 if (obj instanceof KmipMaskType mask) {
                     value = mask.getMaskString() != null ? mask.getMaskString() : obj.getValue();

@@ -20,7 +20,7 @@ public class MacDataBenchmarkSubject extends KmipBenchmarkSubject<MacData> {
 
     @Override
     public String name() {
-        return "MacData";
+        return "MACData";
     }
 
 }

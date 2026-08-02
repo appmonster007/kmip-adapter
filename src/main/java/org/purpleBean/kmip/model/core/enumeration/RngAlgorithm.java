@@ -179,11 +179,11 @@ public class RngAlgorithm implements KmipEnumeration {
     @ToString
     public enum Standard implements Value {
         UNSPECIFIED(0x00000001, "Unspecified", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        FIPS_186_2(0x00000002, "Fips1862", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        DRBG(0x00000003, "Drbg", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        NRBG(0x00000004, "Nrbg", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ANSI_X9_31(0x00000005, "AnsiX931", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ANSI_X9_62(0x00000006, "AnsiX962", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+        FIPS_186_2(0x00000002, "FIPS186_2", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        DRBG(0x00000003, "DRBG", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        NRBG(0x00000004, "NRBG", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        ANSI_X9_31(0x00000005, "ANSIX9_31", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        ANSI_X9_62(0x00000006, "ANSIX9_62", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
         private final int value;
         private final String description;

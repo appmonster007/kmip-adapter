@@ -25,7 +25,6 @@ public class RngParameters implements KmipStructure {
         }
     }
 
-    @NonNull
     private final RngAlgorithm rngAlgorithm;
     private final CryptographicAlgorithm cryptographicAlgorithm;
     private final CryptographicLength cryptographicLength;
@@ -36,7 +35,7 @@ public class RngParameters implements KmipStructure {
     private final PredictionResistance predictionResistance;
 
     @Builder
-    private RngParameters(@NonNull RngAlgorithm rngAlgorithm, CryptographicAlgorithm cryptographicAlgorithm,
+    private RngParameters(RngAlgorithm rngAlgorithm, CryptographicAlgorithm cryptographicAlgorithm,
                           CryptographicLength cryptographicLength, HashingAlgorithm hashingAlgorithm,
                           DrbgAlgorithm drbgAlgorithm, RecommendedCurve recommendedCurve,
                           Fips186Variation fips186Variation, PredictionResistance predictionResistance) {

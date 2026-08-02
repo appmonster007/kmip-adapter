@@ -29,7 +29,7 @@ import org.purpleBean.kmip.model.v2_1.type.Description;
  */
 @Data
 @Builder(toBuilder = true)
-public class DataEnumeration implements KmipEnumeration {
+public class DataEnumeration implements KmipEnumeration, org.purpleBean.kmip.api.DataValue {
     public static final KmipTag kmipTag = KmipTag.Standard.DATA.inst();
     private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
     private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
@@ -178,8 +178,8 @@ public class DataEnumeration implements KmipEnumeration {
         DECRYPT(0x00000001, "Decrypt", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         ENCRYPT(0x00000002, "Encrypt", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         HASH(0x00000003, "Hash", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        MAC_MAC_DATA(0x00000004, "MacMacData", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        RNG_RETRIEVE(0x00000005, "RngRetrieve", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        MAC_MAC_DATA(0x00000004, "MACMACData", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        RNG_RETRIEVE(0x00000005, "RNGRetrieve", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         SIGN_SIGNATURE_DATA(0x00000006, "SignSignatureData", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         SIGNATURE_VERIFY(0x00000007, "SignatureVerify", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 

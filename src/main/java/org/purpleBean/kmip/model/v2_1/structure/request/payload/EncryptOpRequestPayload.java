@@ -3,6 +3,7 @@ package org.purpleBean.kmip.model.v2_1.structure.request.payload;
 import lombok.Builder;
 import lombok.Data;
 import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.DataValue;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
@@ -38,7 +39,7 @@ public class EncryptOpRequestPayload implements RequestPayloadStructure {
 
     private final UniqueIdentifier uniqueIdentifier;
     private final CryptographicParameters cryptographicParameters;
-    private final DataByteString data;
+    private final DataValue data;
     private final IVCounterNonce ivCounterNonce;
     private final CorrelationValue correlationValue;
     private final InitIndicator initIndicator;
@@ -49,7 +50,7 @@ public class EncryptOpRequestPayload implements RequestPayloadStructure {
     private EncryptOpRequestPayload(
             UniqueIdentifier uniqueIdentifier,
             CryptographicParameters cryptographicParameters,
-            DataByteString data,
+            DataValue data,
             IVCounterNonce ivCounterNonce,
             CorrelationValue correlationValue,
             InitIndicator initIndicator,
@@ -77,7 +78,7 @@ public class EncryptOpRequestPayload implements RequestPayloadStructure {
             builder.cryptographicParameters((CryptographicParameters) map.get(CryptographicParameters.kmipTag).getFirst());
         }
         if (map.containsKey(DataByteString.kmipTag)) {
-            builder.data((DataByteString) map.get(DataByteString.kmipTag).getFirst());
+            builder.data((DataValue) map.get(DataByteString.kmipTag).getFirst());
         }
         if (map.containsKey(IVCounterNonce.kmipTag)) {
             builder.ivCounterNonce((IVCounterNonce) map.get(IVCounterNonce.kmipTag).getFirst());

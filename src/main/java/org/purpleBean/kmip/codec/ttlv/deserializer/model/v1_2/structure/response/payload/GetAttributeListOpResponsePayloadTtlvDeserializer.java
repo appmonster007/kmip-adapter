@@ -28,6 +28,7 @@ public class GetAttributeListOpResponsePayloadTtlvDeserializer extends AbstractK
             case KmipTag.Standard.UNIQUE_IDENTIFIER ->
                     builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.ATTRIBUTE_NAME -> builder.attributeName(mapper.readValue(p, AttributeName.class));
+            case KmipTag.Standard.ATTRIBUTE_REFERENCE -> builder.attributeReference(mapper.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
     }

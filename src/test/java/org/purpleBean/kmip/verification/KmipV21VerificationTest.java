@@ -62,6 +62,61 @@ public class KmipV21VerificationTest {
         }
     }
 
+    @DisplayName("Diagnose specific failing files")
+    @Test
+    public void diagnoseTargetedFiles() {
+        String base = projectRoot + "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1";
+        String[] targets = {
+                "TC-STREAM-MAC-1-21.xml",
+                "TC-PKCS12-2-21.xml",
+                "TC-PKCS12-1-21.xml",
+                "TC-REENCRYPT-1-21.xml",
+                "TC-REENCRYPT-2-21.xml",
+                "TC-REENCRYPT-3-21.xml",
+                "TC-REENCRYPT-4-21.xml",
+                "TC-REENCRYPT-5-21.xml",
+                "TC-REENCRYPT-6-21.xml",
+                "TC-WRAP-1-21.xml",
+                "TC-WRAP-2-21.xml",
+                "TC-WRAP-3-21.xml",
+                "TC-RNG-ATTR-1-21.xml",
+                "TC-RNG-ATTR-2-21.xml",
+                "TC-REKEY-5-21.xml",
+                "TC-REKEY-6-21.xml",
+                "TC-REKEY-7-21.xml",
+                "TC-REKEY-8-21.xml",
+                "TC-ECC-3-21.xml",
+                "TC-ECDSA-SIGN-1-21.xml",
+                "TC-ECDSA-SIGN-DIGESTEDDATA-1-21.xml",
+                "TC-RSA-SIGN-DIGESTEDDATA-1-21.xml",
+                "TC-PGP-1-21.xml",
+                "TC-DERIVEKEY-3-21.xml",
+                "TC-DERIVEKEY-4-21.xml",
+                "TC-DERIVEKEY-5-21.xml",
+                "TC-IMPEXP-2-21.xml",
+                "TC-IMPEXP-3-21.xml",
+                "TC-IMPEXP-4-21.xml",
+                "TC-IMPEXP-5-21.xml",
+                "TC-MD-21-21.xml",
+                "TC-MD-22-21.xml",
+                "TC-MD-23-21.xml",
+                "TC-MD-24-21.xml"
+        };
+        List<String> allFailures = new java.util.ArrayList<>();
+        KmipContext.withSpec(KmipSpec.V2_1, () -> {
+            for (String name : targets) {
+                Path p = Paths.get(base, name);
+                if (!Files.exists(p)) {
+                    System.err.println("Missing: " + name);
+                    continue;
+                }
+                System.out.println("\n>>> FILE: " + name);
+                allFailures.addAll(diagnoseFile(p));
+            }
+            return null;
+        });
+    }
+
     @DisplayName("Diagnose first 10 KMIP 2.1 test case files")
     @Test
     public void diagnoseFirst10() {
@@ -105,15 +160,58 @@ public class KmipV21VerificationTest {
                     transformer.transform(new DOMSource((Element) nodes.item(i)), new StreamResult(sw));
                     String fragment = sw.toString();
                     try {
+                        // Also print batch item errors for diagnostic path.
+                        Class<? extends KmipDataType> targetCls = tag.equals("RequestMessage")
+                                ? RequestMessageStructure.class
+                                : ResponseMessageStructure.class;
+                        KmipDataType deserialized = xmlMapper.readValue(fragment, targetCls);
+                        List<? extends Exception> batchErrors = List.of();
+                        if (deserialized instanceof RequestMessageStructure rm) {
+                            batchErrors = rm.getRequestBatchItemErrors();
+                        } else if (deserialized instanceof ResponseMessageStructure rm) {
+                            batchErrors = rm.getResponseBatchItemErrors();
+                        }
+                        for (int j = 0; j < batchErrors.size(); j++) {
+                            Exception be = batchErrors.get(j);
+                            if (be != null) {
+                                System.err.printf("  BATCH-ITEM-ERR %s %s[%d].batch[%d]: %s: %s%n",
+                                        path.getFileName(), tag, i, j,
+                                        be.getClass().getSimpleName(), be.getMessage());
+                                Throwable cur = be;
+                                int depth = 0;
+                                while (cur != null && depth < 4) {
+                                    for (StackTraceElement fr : cur.getStackTrace()) {
+                                        if (fr.getClassName().startsWith("org.purpleBean")) {
+                                            System.err.printf("      at %s%n", fr);
+                                            break;
+                                        }
+                                    }
+                                    cur = cur.getCause();
+                                    depth++;
+                                }
+                            }
+                        }
                         verifyMessageFragment(fragment, tag, path.getFileName().toString());
                     } catch (Throwable e) {
-                        String msg = String.format("FAIL %s %s[%d]: %s", path.getFileName(), tag, i, e.getMessage());
+                        String msg = String.format("FAIL %s %s[%d]: [%s] %s",
+                                path.getFileName(), tag, i, e.getClass().getSimpleName(), e.getMessage());
                         failures.add(msg);
                         System.err.println("  " + msg);
-                        Throwable cause = e.getCause();
-                        while (cause != null) {
-                            System.err.printf("    caused by: %s%n", cause.getMessage());
-                            cause = cause.getCause();
+                        Throwable cur = e;
+                        int depth = 0;
+                        while (cur != null && depth < 8) {
+                            System.err.printf("    [%d] %s: %s%n", depth, cur.getClass().getSimpleName(), cur.getMessage());
+                            StackTraceElement[] st = cur.getStackTrace();
+                            int printed = 0;
+                            for (StackTraceElement fr : st) {
+                                String cn = fr.getClassName();
+                                if (cn.startsWith("org.purpleBean")) {
+                                    System.err.printf("        at %s%n", fr);
+                                    if (++printed >= 8) break;
+                                }
+                            }
+                            cur = cur.getCause();
+                            depth++;
                         }
                     }
                 }
@@ -239,7 +337,60 @@ public class KmipV21VerificationTest {
         JsonNode originalNode = verificationMapper.readTree(minifiedOriginal);
         JsonNode newNode = verificationMapper.readTree(minifiedNew);
 
+        // Normalize semantic-equivalence differences that are not real bugs:
+        //  - ByteString hex values: lowercase both sides (KMIP wire is bytes, hex case is cosmetic)
+        //  - CryptographicUsageMask value: bit-flag token order is irrelevant (represents same int)
+        normalizeSemanticEquivalents(originalNode);
+        normalizeSemanticEquivalents(newNode);
+
         assertEquals(originalNode, newNode, "Round-trip mismatch in " + fileName + " <" + tag + ">");
 //        System.out.println("Verified: " + fileName + " <" + tag + ">");
+    }
+
+    /**
+     * Walks a Jackson JSON tree parsed from KMIP XML and normalizes semantically-equivalent
+     * differences that should not fail round-trip tests:
+     *
+     * <ul>
+     *   <li>ByteString {@code value} strings are lowercased (spec allows either case).</li>
+     *   <li>Integer {@code value} strings for CryptographicUsageMask are token-sorted
+     *       (bit-flag order is not observable on the wire — the wire type is a single Integer).</li>
+     * </ul>
+     */
+    private void normalizeSemanticEquivalents(JsonNode node) {
+        normalizeSemanticEquivalents(node, null);
+    }
+
+    private void normalizeSemanticEquivalents(JsonNode node, String parentField) {
+        if (node == null || node.isNull()) return;
+        if (node.isObject()) {
+            com.fasterxml.jackson.databind.node.ObjectNode obj = (com.fasterxml.jackson.databind.node.ObjectNode) node;
+            JsonNode typeNode = obj.get("type");
+            JsonNode valueNode = obj.get("value");
+            if (typeNode != null && valueNode != null && valueNode.isTextual()) {
+                String type = typeNode.asText();
+                String value = valueNode.asText();
+                if ("ByteString".equals(type)) {
+                    obj.put("value", value.toLowerCase(java.util.Locale.ROOT));
+                } else if ("Integer".equals(type)
+                        && ("CryptographicUsageMask".equals(parentField)
+                            || "ProtectionStorageMask".equals(parentField)
+                            || "StorageStatusMask".equals(parentField))
+                        && value.contains(" ")) {
+                    String[] tokens = value.trim().split("\\s+");
+                    java.util.Arrays.sort(tokens);
+                    obj.put("value", String.join(" ", tokens));
+                }
+            }
+            java.util.Iterator<java.util.Map.Entry<String, JsonNode>> it = obj.fields();
+            while (it.hasNext()) {
+                java.util.Map.Entry<String, JsonNode> e = it.next();
+                normalizeSemanticEquivalents(e.getValue(), e.getKey());
+            }
+        } else if (node.isArray()) {
+            for (JsonNode child : node) {
+                normalizeSemanticEquivalents(child, parentField);
+            }
+        }
     }
 }

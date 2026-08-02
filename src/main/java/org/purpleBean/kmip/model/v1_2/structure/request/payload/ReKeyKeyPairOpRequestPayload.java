@@ -10,6 +10,9 @@ import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.type.Offset;
 import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
+import org.purpleBean.kmip.model.v2_1.structure.CommonAttributes;
+import org.purpleBean.kmip.model.v2_1.structure.PrivateKeyAttributes;
+import org.purpleBean.kmip.model.v2_1.structure.PublicKeyAttributes;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +26,10 @@ import java.util.stream.Stream;
 public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
 
     private static final Operation.Value operation = Operation.Standard.RE_KEY_KEY_PAIR;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
+    private static final Set<KmipSpec> supportedVersions = Set.of(
+            KmipSpec.UnknownVersion,
+            KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4,
+            KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -38,6 +44,9 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
     private final CommonTemplateAttribute commonTemplateAttribute;
     private final PrivateKeyTemplateAttribute privateKeyTemplateAttribute;
     private final PublicKeyTemplateAttribute publicKeyTemplateAttribute;
+    private final CommonAttributes commonAttributes;
+    private final PrivateKeyAttributes privateKeyAttributes;
+    private final PublicKeyAttributes publicKeyAttributes;
 
     @Builder
     private ReKeyKeyPairOpRequestPayload(
@@ -45,13 +54,19 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
             Offset offset,
             CommonTemplateAttribute commonTemplateAttribute,
             PrivateKeyTemplateAttribute privateKeyTemplateAttribute,
-            PublicKeyTemplateAttribute publicKeyTemplateAttribute
+            PublicKeyTemplateAttribute publicKeyTemplateAttribute,
+            CommonAttributes commonAttributes,
+            PrivateKeyAttributes privateKeyAttributes,
+            PublicKeyAttributes publicKeyAttributes
     ) {
         this.privateKeyUniqueIdentifier = privateKeyUniqueIdentifier;
         this.offset = offset;
         this.commonTemplateAttribute = commonTemplateAttribute;
         this.privateKeyTemplateAttribute = privateKeyTemplateAttribute;
         this.publicKeyTemplateAttribute = publicKeyTemplateAttribute;
+        this.commonAttributes = commonAttributes;
+        this.privateKeyAttributes = privateKeyAttributes;
+        this.publicKeyAttributes = publicKeyAttributes;
         validate();
     }
 
@@ -89,6 +104,15 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
         if (map.containsKey(PublicKeyTemplateAttribute.kmipTag)) {
             builder.publicKeyTemplateAttribute((PublicKeyTemplateAttribute) map.get(PublicKeyTemplateAttribute.kmipTag).getFirst());
         }
+        if (map.containsKey(CommonAttributes.kmipTag)) {
+            builder.commonAttributes((CommonAttributes) map.get(CommonAttributes.kmipTag).getFirst());
+        }
+        if (map.containsKey(PrivateKeyAttributes.kmipTag)) {
+            builder.privateKeyAttributes((PrivateKeyAttributes) map.get(PrivateKeyAttributes.kmipTag).getFirst());
+        }
+        if (map.containsKey(PublicKeyAttributes.kmipTag)) {
+            builder.publicKeyAttributes((PublicKeyAttributes) map.get(PublicKeyAttributes.kmipTag).getFirst());
+        }
         return builder.build();
     }
 
@@ -122,7 +146,10 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
                         offset,
                         commonTemplateAttribute,
                         privateKeyTemplateAttribute,
-                        publicKeyTemplateAttribute)
+                        publicKeyTemplateAttribute,
+                        commonAttributes,
+                        privateKeyAttributes,
+                        publicKeyAttributes)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

@@ -33,7 +33,7 @@ public class EncryptOpRequestPayloadJsonDeserializer extends AbstractKmipDataTyp
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS -> builder.cryptographicParameters(ctxt.readValue(p, CryptographicParameters.class));
-            case KmipTag.Standard.DATA -> builder.data(ctxt.readValue(p, DataByteString.class));
+            case KmipTag.Standard.DATA -> builder.data((org.purpleBean.kmip.api.DataValue) ctxt.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
             case KmipTag.Standard.IV_COUNTER_NONCE -> builder.ivCounterNonce(ctxt.readValue(p, IVCounterNonce.class));
             case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(ctxt.readValue(p, CorrelationValue.class));
             case KmipTag.Standard.INIT_INDICATOR -> builder.initIndicator(ctxt.readValue(p, InitIndicator.class));

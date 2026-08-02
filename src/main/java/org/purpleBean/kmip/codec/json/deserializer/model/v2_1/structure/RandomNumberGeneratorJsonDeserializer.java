@@ -25,16 +25,30 @@ public class RandomNumberGeneratorJsonDeserializer extends AbstractKmipDataTypeJ
 
     @Override
     protected RandomNumberGenerator.RandomNumberGeneratorBuilder createBuilder() {
-        return RandomNumberGenerator.builder();
+        return RandomNumberGenerator.builder().rngParameters(RngParameters.builder().build());
     }
 
     @Override
     protected void setValue(RandomNumberGenerator.RandomNumberGeneratorBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-                KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        KmipTag.Value nodeTag = KmipTag.fromName(tag);
+        RngParameters current = builder.build().getRngParameters();
+        RngParameters.RngParametersBuilder rngBuilder = current == null ? RngParameters.builder() : current.toBuilder();
         switch (nodeTag) {
-            case KmipTag.Standard.RNG_PARAMETERS -> builder.rngParameters(ctxt.readValue(p, RngParameters.class));
+            case KmipTag.Standard.RNG_PARAMETERS -> {
+                builder.rngParameters(ctxt.readValue(p, RngParameters.class));
+                return;
+            }
+            case KmipTag.Standard.RNG_ALGORITHM -> rngBuilder.rngAlgorithm(ctxt.readValue(p, RngAlgorithm.class));
+            case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM -> rngBuilder.cryptographicAlgorithm(ctxt.readValue(p, CryptographicAlgorithm.class));
+            case KmipTag.Standard.CRYPTOGRAPHIC_LENGTH -> rngBuilder.cryptographicLength(ctxt.readValue(p, CryptographicLength.class));
+            case KmipTag.Standard.HASHING_ALGORITHM -> rngBuilder.hashingAlgorithm(ctxt.readValue(p, HashingAlgorithm.class));
+            case KmipTag.Standard.DRBG_ALGORITHM -> rngBuilder.drbgAlgorithm(ctxt.readValue(p, DrbgAlgorithm.class));
+            case KmipTag.Standard.RECOMMENDED_CURVE -> rngBuilder.recommendedCurve(ctxt.readValue(p, RecommendedCurve.class));
+            case KmipTag.Standard.FIPS186_VARIATION -> rngBuilder.fips186Variation(ctxt.readValue(p, Fips186Variation.class));
+            case KmipTag.Standard.PREDICTION_RESISTANCE -> rngBuilder.predictionResistance(ctxt.readValue(p, org.purpleBean.kmip.model.v2_1.type.PredictionResistance.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
         }
+        builder.rngParameters(rngBuilder.build());
     }
 
     @Override

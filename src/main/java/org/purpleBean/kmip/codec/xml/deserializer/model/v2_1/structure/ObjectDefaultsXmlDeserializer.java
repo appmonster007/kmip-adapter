@@ -35,6 +35,7 @@ public class ObjectDefaultsXmlDeserializer extends AbstractKmipDataTypeXmlDeseri
         KmipTag.Value nodeTag = KmipTag.fromName(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPES -> builder.objectTypes(ctxt.readValue(p, ObjectTypes.class));
+            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
             case KmipTag.Standard.ATTRIBUTES -> builder.attributes(ctxt.readValue(p, Attributes.class));
             case KmipTag.Standard.OBJECT_GROUPS -> builder.objectGroups(ctxt.readValue(p, ObjectGroups.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

@@ -17,10 +17,12 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.SignatureVerifyO
 public class SignatureVerifyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<SignatureVerifyOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public SignatureVerifyOpRequestPayloadBenchmarkSubject() throws Exception {
-        SignatureVerifyOpRequestPayload subject = SignatureVerifyOpRequestPayload.builder().build();
+        SignatureVerifyOpRequestPayload subject = SignatureVerifyOpRequestPayload.builder()
+                .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+                .build();
         initialize(subject, SignatureVerifyOpRequestPayload.class);
     }
 

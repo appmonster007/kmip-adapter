@@ -35,6 +35,7 @@ public class ObjectDefaultsTtlvDeserializer extends AbstractKmipDataTypeTtlvDese
         KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
         switch (nodeTag) {
             case KmipTag.Standard.OBJECT_TYPES -> builder.objectTypes(mapper.readValue(p, ObjectTypes.class));
+            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
             case KmipTag.Standard.ATTRIBUTES -> builder.attributes(mapper.readValue(p, Attributes.class));
             case KmipTag.Standard.OBJECT_GROUPS -> builder.objectGroups(mapper.readValue(p, ObjectGroups.class));
             default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

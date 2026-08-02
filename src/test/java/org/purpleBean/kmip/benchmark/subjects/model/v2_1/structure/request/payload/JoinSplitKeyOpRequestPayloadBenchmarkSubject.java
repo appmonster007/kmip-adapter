@@ -17,10 +17,14 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.JoinSplitKeyOpRe
 public class JoinSplitKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<JoinSplitKeyOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public JoinSplitKeyOpRequestPayloadBenchmarkSubject() throws Exception {
-        JoinSplitKeyOpRequestPayload subject = JoinSplitKeyOpRequestPayload.builder().build();
+        JoinSplitKeyOpRequestPayload subject = JoinSplitKeyOpRequestPayload.builder()
+                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-1").build())
+                .uniqueIdentifier(UniqueIdentifier.builder().value("part-2").build())
+                .build();
         initialize(subject, JoinSplitKeyOpRequestPayload.class);
     }
 

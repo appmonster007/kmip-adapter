@@ -32,11 +32,10 @@ public class GetConstraintsOpResponsePayload implements ResponsePayloadStructure
     }
 
     private final UniqueIdentifier uniqueIdentifier;
-    @NonNull
     private final Constraints constraints;
 
     @Builder
-    private GetConstraintsOpResponsePayload(UniqueIdentifier uniqueIdentifier, @NonNull Constraints constraints) {
+    private GetConstraintsOpResponsePayload(UniqueIdentifier uniqueIdentifier, Constraints constraints) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.constraints = constraints;
         validate();

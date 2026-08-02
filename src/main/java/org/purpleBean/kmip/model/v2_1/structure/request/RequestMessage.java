@@ -88,6 +88,7 @@ public class RequestMessage implements RequestMessageStructure {
         return Stream.of(requestHeader, requestBatchItems)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+                .filter(Objects::nonNull)
                 .map(KmipDataType.class::cast)
                 .toArray(KmipDataType[]::new);
     }

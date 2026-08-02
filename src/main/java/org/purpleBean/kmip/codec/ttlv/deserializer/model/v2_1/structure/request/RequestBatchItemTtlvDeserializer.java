@@ -9,6 +9,7 @@ import org.purpleBean.kmip.model.core.structure.MessageExtension;
 import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
 import org.purpleBean.kmip.model.v2_1.structure.request.RequestBatchItem;
+import org.purpleBean.kmip.model.v2_1.type.Ephemeral;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -33,6 +34,7 @@ public class RequestBatchItemTtlvDeserializer extends AbstractKmipDataTypeTtlvDe
                 builder.operation(operation);
                 mapper.setAttribute("operation", operation.getDescription());
             }
+            case KmipTag.Standard.EPHEMERAL -> builder.ephemeral(mapper.readValue(p, Ephemeral.class));
             case KmipTag.Standard.UNIQUE_BATCH_ITEM_ID -> builder.uniqueBatchItemID(mapper.readValue(p, UniqueBatchItemID.class));
             case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(mapper.readValue(p, AsynchronousCorrelationValue.class));
             case KmipTag.Standard.REQUEST_PAYLOAD -> builder.requestPayloadStructure(mapper.readValue(p, RequestPayloadStructure.class));

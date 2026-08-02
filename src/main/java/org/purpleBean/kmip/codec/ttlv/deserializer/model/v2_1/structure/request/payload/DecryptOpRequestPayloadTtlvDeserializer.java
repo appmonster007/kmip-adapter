@@ -34,7 +34,7 @@ public class DecryptOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTyp
         switch (nodeTag) {
             case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
             case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS -> builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));
-            case KmipTag.Standard.DATA -> builder.data(mapper.readValue(p, DataByteString.class));
+            case KmipTag.Standard.DATA -> builder.data((org.purpleBean.kmip.api.DataValue) mapper.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
             case KmipTag.Standard.IV_COUNTER_NONCE -> builder.ivCounterNonce(mapper.readValue(p, IVCounterNonce.class));
             case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
             case KmipTag.Standard.INIT_INDICATOR -> builder.initIndicator(mapper.readValue(p, InitIndicator.class));

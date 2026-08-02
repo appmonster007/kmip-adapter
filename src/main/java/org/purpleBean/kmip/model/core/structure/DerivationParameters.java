@@ -5,6 +5,8 @@ import lombok.Data;
 import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.model.core.type.DerivationData;
 import org.purpleBean.kmip.model.core.type.InitializationVector;
+import org.purpleBean.kmip.model.core.type.IterationCount;
+import org.purpleBean.kmip.model.core.type.Salt;
 
 import java.util.List;
 import java.util.Map;
@@ -29,16 +31,22 @@ public class DerivationParameters implements KmipStructure {
     private final CryptographicParameters cryptographicParameters;
     private final InitializationVector initializationVector;
     private final DerivationData derivationData;
+    private final Salt salt;
+    private final IterationCount iterationCount;
 
     @Builder
     private DerivationParameters(
             CryptographicParameters cryptographicParameters,
             InitializationVector initializationVector,
-            DerivationData derivationData
+            DerivationData derivationData,
+            Salt salt,
+            IterationCount iterationCount
     ) {
         this.cryptographicParameters = cryptographicParameters;
         this.initializationVector = initializationVector;
         this.derivationData = derivationData;
+        this.salt = salt;
+        this.iterationCount = iterationCount;
         validate();
     }
 
@@ -53,6 +61,12 @@ public class DerivationParameters implements KmipStructure {
         }
         if (map.containsKey(DerivationData.kmipTag)) {
             builder.derivationData((DerivationData) map.get(DerivationData.kmipTag).getFirst());
+        }
+        if (map.containsKey(Salt.kmipTag)) {
+            builder.salt((Salt) map.get(Salt.kmipTag).getFirst());
+        }
+        if (map.containsKey(IterationCount.kmipTag)) {
+            builder.iterationCount((IterationCount) map.get(IterationCount.kmipTag).getFirst());
         }
         return builder.build();
     }
@@ -85,7 +99,9 @@ public class DerivationParameters implements KmipStructure {
         return Stream.of(
                         cryptographicParameters,
                         initializationVector,
-                        derivationData)
+                        derivationData,
+                        salt,
+                        iterationCount)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
                 .map(KmipDataType.class::cast)

@@ -6,6 +6,7 @@ import org.purpleBean.kmip.api.*;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
+import org.purpleBean.kmip.model.core.enumeration.KeyWrapType;
 import org.purpleBean.kmip.model.core.enumeration.Operation;
 import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
@@ -33,6 +34,7 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
 
     private final UniqueIdentifier uniqueIdentifier;
     private final KeyFormatType keyFormatType;
+    private final KeyWrapType keyWrapType;
     private final KeyCompressionType keyCompressionType;
     private final KeyWrappingSpecification keyWrappingSpecification;
 
@@ -40,11 +42,13 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
     private GetOpRequestPayload(
             UniqueIdentifier uniqueIdentifier,
             KeyFormatType keyFormatType,
+            KeyWrapType keyWrapType,
             KeyCompressionType keyCompressionType,
             KeyWrappingSpecification keyWrappingSpecification
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.keyFormatType = keyFormatType;
+        this.keyWrapType = keyWrapType;
         this.keyCompressionType = keyCompressionType;
         this.keyWrappingSpecification = keyWrappingSpecification;
         validate();
@@ -57,6 +61,8 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
                 builder.uniqueIdentifier((UniqueIdentifier) value);
             } else if (value instanceof KeyFormatType) {
                 builder.keyFormatType((KeyFormatType) value);
+            } else if (value instanceof KeyWrapType) {
+                builder.keyWrapType((KeyWrapType) value);
             } else if (value instanceof KeyCompressionType) {
                 builder.keyCompressionType((KeyCompressionType) value);
             } else if (value instanceof KeyWrappingSpecification) {
@@ -108,6 +114,7 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
         return Stream.of(
                         uniqueIdentifier,
                         keyFormatType,
+                        keyWrapType,
                         keyCompressionType,
                         keyWrappingSpecification)
                 .filter(Objects::nonNull)

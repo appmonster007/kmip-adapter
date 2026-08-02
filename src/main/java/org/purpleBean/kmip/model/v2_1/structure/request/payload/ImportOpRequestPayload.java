@@ -46,6 +46,8 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
 
     private final KeyWrappingSpecification keyWrappingSpecification;
 
+    private final Attributes attributes;
+
     @NonNull
     private final ManagedObject object;
 
@@ -55,12 +57,14 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
             @NonNull ObjectType objectType,
             ReplaceExisting replaceExisting,
             KeyWrappingSpecification keyWrappingSpecification,
+            Attributes attributes,
             @NonNull ManagedObject object
     ) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.objectType = objectType;
         this.replaceExisting = replaceExisting;
         this.keyWrappingSpecification = keyWrappingSpecification;
+        this.attributes = attributes;
         this.object = object;
         validate();
     }
@@ -80,11 +84,15 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
         if (map.containsKey(KeyWrappingSpecification.kmipTag)) {
             builder.keyWrappingSpecification((KeyWrappingSpecification) map.get(KeyWrappingSpecification.kmipTag).getFirst());
         }
+        if (map.containsKey(Attributes.kmipTag)) {
+            builder.attributes((Attributes) map.get(Attributes.kmipTag).getFirst());
+        }
         values.stream()
                 .filter(v -> !v.getKmipTag().equals(ObjectType.kmipTag)
                         && !v.getKmipTag().equals(UniqueIdentifier.kmipTag)
                         && !v.getKmipTag().equals(ReplaceExisting.kmipTag)
-                        && !v.getKmipTag().equals(KeyWrappingSpecification.kmipTag))
+                        && !v.getKmipTag().equals(KeyWrappingSpecification.kmipTag)
+                        && !v.getKmipTag().equals(Attributes.kmipTag))
                 .filter(v -> v instanceof ManagedObject)
                 .findFirst()
                 .ifPresent(v -> builder.object((ManagedObject) v));
@@ -120,6 +128,7 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
                         objectType,
                         replaceExisting,
                         keyWrappingSpecification,
+                        attributes,
                         object)
                 .filter(Objects::nonNull)
                 .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))

@@ -17,10 +17,14 @@ import org.purpleBean.kmip.model.v2_1.structure.request.payload.HashOpRequestPay
 public class HashOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<HashOpRequestPayload> {
 
     @Getter
-    private KmipSpec spec = KmipSpec.UnknownVersion;
+    private KmipSpec spec = KmipSpec.V2_1;
 
     public HashOpRequestPayloadBenchmarkSubject() throws Exception {
-        HashOpRequestPayload subject = HashOpRequestPayload.builder().build();
+        HashOpRequestPayload subject = HashOpRequestPayload.builder()
+                .cryptographicParameters(CryptographicParameters.builder()
+                        .cryptographicAlgorithm(CryptographicAlgorithm.Standard.AES.inst())
+                        .build())
+                .build();
         initialize(subject, HashOpRequestPayload.class);
     }
 
