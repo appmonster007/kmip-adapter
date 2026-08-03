@@ -19,8 +19,8 @@ public abstract class KmipDataTypeXmlSerializer<T extends KmipDataType> extends 
   public Class<T> handledType() {
     java.lang.reflect.Type superType = getClass().getGenericSuperclass();
     if (superType instanceof java.lang.reflect.ParameterizedType pt) {
-      java.lang.reflect.Type tArg = pt.getActualTypeArguments()[0];
-      if (tArg instanceof Class<?> c) {
+      java.lang.reflect.Type typeArg = pt.getActualTypeArguments()[0];
+      if (typeArg instanceof Class<?> c) {
         return (Class<T>) c;
       }
     }

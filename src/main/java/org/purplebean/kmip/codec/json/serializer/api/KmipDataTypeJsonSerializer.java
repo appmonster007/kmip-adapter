@@ -25,8 +25,8 @@ public abstract class KmipDataTypeJsonSerializer<T extends KmipDataType> extends
     // explicitly
     Type superType = getClass().getGenericSuperclass();
     if (superType instanceof ParameterizedType pt) {
-      Type tArg = pt.getActualTypeArguments()[0];
-      if (tArg instanceof Class<?> c) {
+      Type typeArg = pt.getActualTypeArguments()[0];
+      if (typeArg instanceof Class<?> c) {
         return (Class<T>) c;
       }
     }

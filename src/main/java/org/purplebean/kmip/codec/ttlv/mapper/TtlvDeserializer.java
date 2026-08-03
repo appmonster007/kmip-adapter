@@ -82,8 +82,8 @@ public abstract class TtlvDeserializer<T> {
     // Prefer generic superclass
     Type superType = getClass().getGenericSuperclass();
     if (superType instanceof ParameterizedType pt) {
-      Type tArg = pt.getActualTypeArguments()[0];
-      if (tArg instanceof Class<?> c) {
+      Type typeArg = pt.getActualTypeArguments()[0];
+      if (typeArg instanceof Class<?> c) {
         return (Class<T>) c;
       }
     }
@@ -93,8 +93,8 @@ public abstract class TtlvDeserializer<T> {
         if (itfPt.getRawType() instanceof Class<?> raw && raw
             .getName()
             .equals(TtlvDeserializer.class.getName())) {
-          Type tArg = itfPt.getActualTypeArguments()[0];
-          if (tArg instanceof Class<?> c) {
+          Type typeArg = itfPt.getActualTypeArguments()[0];
+          if (typeArg instanceof Class<?> c) {
             return (Class<T>) c;
           }
         }

@@ -20,6 +20,10 @@
     <suppress checks="GoogleNonConstantFieldName"
               message="'(d|g|j|p|q|x|y|qString)'"/>
 
+    <!-- Same identifiers as above, appearing as constructor/method parameter names. -->
+    <suppress checks="ParameterName"
+              message="'(d|g|j|p|q|x|y|qString)'"/>
+
     <!--
         QueryAsynchronousRequestsOp{Request,Response}Payload.QueryAsynchronousRequestsOp{Request,
         Response}PayloadBuilder is ~95 characters on its own, a single unbreakable Java type

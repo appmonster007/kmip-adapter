@@ -78,11 +78,11 @@ public class KmipDataTypeJsonDeserializer<T extends KmipDataType>
   public Class<?> handledType() {
     Type superType = getClass().getGenericSuperclass();
     if (superType instanceof ParameterizedType pt) {
-      Type tArg = pt.getActualTypeArguments()[0];
-      if (tArg instanceof Class<?> c) {
+      Type typeArg = pt.getActualTypeArguments()[0];
+      if (typeArg instanceof Class<?> c) {
         return c;
       }
-      if (tArg instanceof ParameterizedType parameterized) {
+      if (typeArg instanceof ParameterizedType parameterized) {
         Type raw = parameterized.getRawType();
         if (raw instanceof Class<?> rc) {
           return rc;

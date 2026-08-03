@@ -78,8 +78,8 @@ public abstract class TtlvSerializer<T> {
     // Prefer generic superclass (if subclasses extend this with a concrete type)
     Type superType = getClass().getGenericSuperclass();
     if (superType instanceof ParameterizedType pt) {
-      Type tArg = pt.getActualTypeArguments()[0];
-      if (tArg instanceof Class<?> c) {
+      Type typeArg = pt.getActualTypeArguments()[0];
+      if (typeArg instanceof Class<?> c) {
         return (Class<T>) c;
       }
     }
@@ -89,8 +89,8 @@ public abstract class TtlvSerializer<T> {
         if (itfPt.getRawType() instanceof Class<?> raw && raw
             .getName()
             .equals(TtlvSerializer.class.getName())) {
-          Type tArg = itfPt.getActualTypeArguments()[0];
-          if (tArg instanceof Class<?> c) {
+          Type typeArg = itfPt.getActualTypeArguments()[0];
+          if (typeArg instanceof Class<?> c) {
             return (Class<T>) c;
           }
         }
