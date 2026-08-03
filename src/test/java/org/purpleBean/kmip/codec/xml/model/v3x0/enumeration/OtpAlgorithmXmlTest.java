@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.v3x0.enumeration;
+package org.purplebean.kmip.codec.xml.model.v3x0.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.enumeration.OtpAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.enumeration.OtpAlgorithm;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("OtpAlgorithm XML Serialization")
 class OtpAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<OtpAlgorithm> {

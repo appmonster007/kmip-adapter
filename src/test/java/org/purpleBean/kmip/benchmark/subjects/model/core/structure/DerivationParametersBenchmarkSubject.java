@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.structure.DerivationParameters;
-import org.purpleBean.kmip.model.core.type.DerivationData;
-import org.purpleBean.kmip.model.core.type.InitializationVector;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.structure.DerivationParameters;
+import org.purplebean.kmip.model.core.type.DerivationData;
+import org.purplebean.kmip.model.core.type.InitializationVector;
 
 public class DerivationParametersBenchmarkSubject
     extends KmipBenchmarkSubject<DerivationParameters> {

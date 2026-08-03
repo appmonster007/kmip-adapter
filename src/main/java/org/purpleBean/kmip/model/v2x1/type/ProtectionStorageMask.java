@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.type;
+package org.purplebean.kmip.model.v2x1.type;
 
 import java.util.List;
 import java.util.Map;
@@ -12,17 +12,17 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipMaskType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipMaskType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 /**
  * KMIP ProtectionStorageMask datatype attribute.

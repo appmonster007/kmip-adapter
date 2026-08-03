@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
+package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.model.core.type.CompromiseOccurrenceDate;
+import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
+import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 
 public class CompromiseOccurrenceDateXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<CompromiseOccurrenceDate> {

@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.TransparentDsaPublicKey;
-import org.purpleBean.kmip.model.core.type.G;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.Q;
-import org.purpleBean.kmip.model.core.type.Y;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.TransparentDsaPublicKey;
+import org.purplebean.kmip.model.core.type.G;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.Q;
+import org.purplebean.kmip.model.core.type.Y;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("TransparentDsaPublicKey JSON Serialization Tests")
 class TransparentDsaPublicKeyJsonTest

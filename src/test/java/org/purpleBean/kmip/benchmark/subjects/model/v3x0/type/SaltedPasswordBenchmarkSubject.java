@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v3x0.type;
+package org.purplebean.kmip.benchmark.subjects.model.v3x0.type;
 
 import java.nio.ByteBuffer;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v3x0.type.SaltedPassword;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
 public class SaltedPasswordBenchmarkSubject extends KmipBenchmarkSubject<SaltedPassword> {
 

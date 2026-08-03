@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.QueryFunction;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.QueryOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.QueryFunction;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("QueryOpRequestPayload Json Serialization Tests")
 class QueryOpRequestPayloadJsonTest

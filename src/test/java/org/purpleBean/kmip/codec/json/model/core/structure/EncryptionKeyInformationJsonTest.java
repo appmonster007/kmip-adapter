@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.structure.EncryptionKeyInformation;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("EncryptionKeyInformation Json Serialization Tests")
 class EncryptionKeyInformationJsonTest

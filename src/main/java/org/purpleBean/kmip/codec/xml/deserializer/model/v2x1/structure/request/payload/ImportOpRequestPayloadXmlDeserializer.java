@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.ManagedObject;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.ReplaceExisting;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.ManagedObject;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.ReplaceExisting;
 
 public class ImportOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ImportOpRequestPayload,
@@ -39,7 +39,7 @@ public class ImportOpRequestPayloadXmlDeserializer extends
       case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
           builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
       case KmipTag.Standard.ATTRIBUTES -> builder.attributes(
-          ctxt.readValue(p, org.purpleBean.kmip.model.v2x1.structure.Attributes.class));
+          ctxt.readValue(p, org.purplebean.kmip.model.v2x1.structure.Attributes.class));
       default -> {
         if (ManagedObject.isManagedObject(nodeTag)) {
           builder.object(ctxt.readValue(p, ManagedObject.class));

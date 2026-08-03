@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.ObjectTypes;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.ObjectTypes;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ObjectTypes Json Serialization Tests")
 class ObjectTypesJsonTest extends AbstractJsonSerializationTestSuite<ObjectTypes> {

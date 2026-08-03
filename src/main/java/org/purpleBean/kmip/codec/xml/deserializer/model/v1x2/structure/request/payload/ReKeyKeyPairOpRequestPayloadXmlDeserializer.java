@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.type.Offset;
-import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.ReKeyKeyPairOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.structure.CommonAttributes;
-import org.purpleBean.kmip.model.v2x1.structure.PrivateKeyAttributes;
-import org.purpleBean.kmip.model.v2x1.structure.PublicKeyAttributes;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.type.Offset;
+import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.ReKeyKeyPairOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.structure.CommonAttributes;
+import org.purplebean.kmip.model.v2x1.structure.PrivateKeyAttributes;
+import org.purplebean.kmip.model.v2x1.structure.PublicKeyAttributes;
 
 public class ReKeyKeyPairOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ReKeyKeyPairOpRequestPayload,

@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.DataByteString;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.MacOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.CorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.FinalIndicator;
-import org.purpleBean.kmip.model.v2x1.type.InitIndicator;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.type.DataByteString;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.MacOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
+import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
 public class MacOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MacOpRequestPayload,

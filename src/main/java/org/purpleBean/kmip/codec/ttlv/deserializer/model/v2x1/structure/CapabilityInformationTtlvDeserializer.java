@@ -1,21 +1,21 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.DestroyAction;
-import org.purpleBean.kmip.model.core.enumeration.RngMode;
-import org.purpleBean.kmip.model.core.enumeration.ShreddingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.UnwrapMode;
-import org.purpleBean.kmip.model.v2x1.structure.CapabilityInformation;
-import org.purpleBean.kmip.model.v2x1.type.AsynchronousCapability;
-import org.purpleBean.kmip.model.v2x1.type.AttestationCapability;
-import org.purpleBean.kmip.model.v2x1.type.BatchContinueCapability;
-import org.purpleBean.kmip.model.v2x1.type.BatchUndoCapability;
-import org.purpleBean.kmip.model.v2x1.type.QuantumSafeCapability;
-import org.purpleBean.kmip.model.v2x1.type.StreamingCapability;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.DestroyAction;
+import org.purplebean.kmip.model.core.enumeration.RngMode;
+import org.purplebean.kmip.model.core.enumeration.ShreddingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.UnwrapMode;
+import org.purplebean.kmip.model.v2x1.structure.CapabilityInformation;
+import org.purplebean.kmip.model.v2x1.type.AsynchronousCapability;
+import org.purplebean.kmip.model.v2x1.type.AttestationCapability;
+import org.purplebean.kmip.model.v2x1.type.BatchContinueCapability;
+import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
+import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
+import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
 public class CapabilityInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CapabilityInformation,

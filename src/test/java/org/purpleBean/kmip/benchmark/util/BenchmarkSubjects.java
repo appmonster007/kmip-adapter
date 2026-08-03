@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.benchmark.util;
+package org.purplebean.kmip.benchmark.util;
 
 import java.util.ArrayList;
 import java.util.HexFormat;
@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 
 /**
  * Utilities to discover benchmark subjects in a single, reusable place.

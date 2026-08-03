@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.CertificateSubject;
-import org.purpleBean.kmip.model.core.type.CertificateSubjectAlternativeName;
-import org.purpleBean.kmip.model.core.type.CertificateSubjectDistinguishedName;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.CertificateSubject;
+import org.purplebean.kmip.model.core.type.CertificateSubjectAlternativeName;
+import org.purplebean.kmip.model.core.type.CertificateSubjectDistinguishedName;
 
 public class CertificateSubjectBenchmarkSubject extends KmipBenchmarkSubject<CertificateSubject> {
 

@@ -23,7 +23,7 @@ From `docs/kmip-pending-implementation.md` §6 and the OASIS KMIP spec section f
 Cross-reference `docs/kmip-spec/kmip-all-versions-data.json` for tags.
 
 ### 2. Read a peer operation
-Look at an existing complete operation pair under `src/main/java/org/purpleBean/kmip/api/request/` and `.../api/response/`. Mirror its package layout and naming:
+Look at an existing complete operation pair under `src/main/java/org/purplebean/kmip/api/request/` and `.../api/response/`. Mirror its package layout and naming:
 - `<Op>RequestPayload` and `<Op>ResponsePayload` are KMIP structures
 - They typically live under `api/request/<op>/` and `api/response/<op>/` as sub-packages
 

@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 
 public class PaddingMethodXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<PaddingMethod, PaddingMethod.PaddingMethodBuilder> {

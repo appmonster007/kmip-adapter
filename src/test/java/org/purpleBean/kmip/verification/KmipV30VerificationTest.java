@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.verification;
+package org.purplebean.kmip.verification;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.request.RequestMessageStructure;
-import org.purpleBean.kmip.api.response.ResponseMessageStructure;
-import org.purpleBean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.request.RequestMessageStructure;
+import org.purplebean.kmip.api.response.ResponseMessageStructure;
+import org.purplebean.kmip.codec.KmipCodecManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -167,7 +167,7 @@ public class KmipV30VerificationTest {
                             int printed = 0;
                             for (StackTraceElement fr : st) {
                                 String cn = fr.getClassName();
-                                if (cn.startsWith("org.purpleBean")) {
+                                if (cn.startsWith("org.purplebean")) {
                                     System.err.printf("        at %s%n", fr);
                                     if (++printed >= 8) break;
                                 }

@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * Represents the Key Material data type in KMIP.

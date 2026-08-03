@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v2x1.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SymmetricKey;
-import org.purpleBean.kmip.model.v2x1.structure.Attributes;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.RegisterOpRequestPayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SymmetricKey;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.RegisterOpRequestPayload;
 
 public class RegisterOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RegisterOpRequestPayload> {

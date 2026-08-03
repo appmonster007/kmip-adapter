@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.verification;
+package org.purplebean.kmip.verification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -24,12 +24,12 @@ import javax.xml.transform.stream.StreamResult;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.request.RequestMessageStructure;
-import org.purpleBean.kmip.api.response.ResponseMessageStructure;
-import org.purpleBean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.request.RequestMessageStructure;
+import org.purplebean.kmip.api.response.ResponseMessageStructure;
+import org.purplebean.kmip.codec.KmipCodecManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -199,7 +199,7 @@ public class KmipV21VerificationTest {
                   for (StackTraceElement fr : cur.getStackTrace()) {
                     if (fr
                         .getClassName()
-                        .startsWith("org.purpleBean")) {
+                        .startsWith("org.purplebean")) {
                       System.err.printf("      at %s%n", fr);
                       break;
                     }
@@ -229,7 +229,7 @@ public class KmipV21VerificationTest {
               int printed = 0;
               for (StackTraceElement fr : st) {
                 String cn = fr.getClassName();
-                if (cn.startsWith("org.purpleBean")) {
+                if (cn.startsWith("org.purplebean")) {
                   System.err.printf("        at %s%n", fr);
                   if (++printed >= 8) {
                     break;

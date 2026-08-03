@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.LinkType;
-import org.purpleBean.kmip.model.core.structure.Link;
-import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.LinkType;
+import org.purplebean.kmip.model.core.structure.Link;
+import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Link Xml Serialization Tests")
 class LinkXmlTest extends AbstractXmlSerializationTestSuite<Link> {

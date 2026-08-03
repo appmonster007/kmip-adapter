@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Reusable TTLV serialization/deserialization test suite for KMIP objects.

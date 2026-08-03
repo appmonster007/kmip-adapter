@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.json.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.DiscoverVersionsOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.DiscoverVersionsOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DiscoverVersionsOpRequestPayload Json Serialization Tests")
 class DiscoverVersionsOpRequestPayloadJsonTest

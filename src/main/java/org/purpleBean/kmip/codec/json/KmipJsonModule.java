@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json;
+package org.purplebean.kmip.codec.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -6,20 +6,20 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.ServiceLoader;
-import org.purpleBean.kmip.codec.json.deserializer.BigIntegerJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.BooleanJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.ByteStringJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.IntegerJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.LongJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.OffsetDateTimeJsonDeserializer;
-import org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.codec.json.serializer.BigIntegerJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.BooleanJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.ByteStringJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.IntegerJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.LongJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.OffsetDateTimeJsonSerializer;
-import org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer;
+import org.purplebean.kmip.codec.json.deserializer.BigIntegerJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.BooleanJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.ByteStringJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.IntegerJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.LongJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.OffsetDateTimeJsonDeserializer;
+import org.purplebean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.codec.json.serializer.BigIntegerJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.BooleanJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.ByteStringJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.IntegerJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.LongJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.OffsetDateTimeJsonSerializer;
+import org.purplebean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer;
 
 public class KmipJsonModule extends SimpleModule {
   public KmipJsonModule() {

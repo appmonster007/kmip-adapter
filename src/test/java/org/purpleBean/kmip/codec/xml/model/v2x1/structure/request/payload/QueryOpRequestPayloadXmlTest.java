@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.QueryFunction;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.QueryOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.QueryFunction;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("QueryOpRequestPayload Xml Serialization Tests")
 class QueryOpRequestPayloadXmlTest

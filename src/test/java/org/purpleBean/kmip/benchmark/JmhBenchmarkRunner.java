@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.benchmark;
+package org.purplebean.kmip.benchmark;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -9,15 +9,15 @@ import org.openjdk.jmh.runner.options.ChainedOptionsBuilder;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import org.purpleBean.kmip.benchmark.report.JmhReportGenerator;
-import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
+import org.purplebean.kmip.benchmark.report.JmhReportGenerator;
+import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
 
 /**
  * Standalone JMH runner to execute benchmarks only when explicitly invoked.
  * This is not picked up by Surefire/Failsafe.
  * <p>
  * Usage examples:
- * - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark
+ * - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purplebean.kmip.benchmark
  * .JmhBenchmarkRunner"
  * - mvn -q -DskipTests verify -P perf
  * - mvn -q -DskipTests verify -P perf-fast
@@ -65,7 +65,7 @@ public final class JmhBenchmarkRunner {
       throw new IllegalStateException(
           "No KmipBenchmarkSubject implementations discovered via ServiceLoader. " +
               "Ensure service entries exist under src/test/resources/META-INF/services/" +
-              "org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject");
+              "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
     }
     System.out.println("JMH Runner discovered subjects: " + subjects);
 

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.json.model.v2x1.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.AdjustmentType;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AdjustmentType Json Serialization Tests")
 class AdjustmentTypeJsonTest extends AbstractJsonSerializationTestSuite<AdjustmentType> {

@@ -60,15 +60,15 @@ So that ticket-based authentication and delegation operations are spec-correct a
 
 - [ ] **Task 2: Complete Payload Implementations**
     - [ ] **`LogoutOpRequestPayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/LogoutOpRequestPayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/LogoutOpRequestPayload.java`.
         - Add the required `@NonNull Ticket ticket` field.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
     - [ ] **`LoginOpResponsePayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/LoginOpResponsePayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/LoginOpResponsePayload.java`.
         - Add the required `@NonNull Ticket ticket` field.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
     - [ ] **`DelegatedLoginOpResponsePayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/DelegatedLoginOpResponsePayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/DelegatedLoginOpResponsePayload.java`.
         - Add the required `@NonNull Ticket ticket` field.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
 
@@ -86,12 +86,12 @@ So that ticket-based authentication and delegation operations are spec-correct a
 
 ### Existing Stub Files
 All 6 payload files already exist as stubs:
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/LoginOpRequestPayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/LoginOpResponsePayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/LogoutOpRequestPayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/LogoutOpResponsePayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/DelegatedLoginOpRequestPayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/DelegatedLoginOpResponsePayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/LoginOpRequestPayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/LoginOpResponsePayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/LogoutOpRequestPayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/LogoutOpResponsePayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/DelegatedLoginOpRequestPayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/DelegatedLoginOpResponsePayload.java`
 
 ### Implementation Pattern
 Follow the pattern for completing stubs:

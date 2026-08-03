@@ -10,8 +10,8 @@ source "$(dirname "$0")/../common.sh"
 
 # --- Configuration ---
 readonly BASE_DIR="$(pwd)"
-readonly MAIN_JAVA="src/main/java/org/purpleBean/kmip"
-readonly TEST_JAVA="src/test/java/org/purpleBean/kmip"
+readonly MAIN_JAVA="src/main/java/org/purplebean/kmip"
+readonly TEST_JAVA="src/test/java/org/purplebean/kmip"
 readonly TEMPLATE_BASE_DIR="scripts/generators/templates"
 readonly UNIFIED_TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/unified"
 
@@ -22,32 +22,32 @@ readonly UNIFIED_TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/unified"
 compute_version_vars() {
     local module="$1"
     case "${module}" in
-        "core"|"v1_2")
+        "core"|"v1x2")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2)"
             DEFAULT_SPEC="KmipSpec.V1_2"
             KMIP_VERSION="1.2"
             ;;
-        "v1_3")
+        "v1x3")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_3)"
             DEFAULT_SPEC="KmipSpec.V1_3"
             KMIP_VERSION="1.3"
             ;;
-        "v1_4")
+        "v1x4")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_4)"
             DEFAULT_SPEC="KmipSpec.V1_4"
             KMIP_VERSION="1.4"
             ;;
-        "v2_0")
+        "v2x0")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_0)"
             DEFAULT_SPEC="KmipSpec.V2_0"
             KMIP_VERSION="2.0"
             ;;
-        "v2_1")
+        "v2x1")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0)"
             DEFAULT_SPEC="KmipSpec.V2_1"
             KMIP_VERSION="2.1"
             ;;
-        "v3_0")
+        "v3x0")
             SUPPORTED_VERSIONS="Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0)"
             DEFAULT_SPEC="KmipSpec.V3_0"
             KMIP_VERSION="3.0"
@@ -125,8 +125,8 @@ generate_unified_benchmark_subject() {
 
     render_template "${UNIFIED_TEMPLATE_DIR}/BenchmarkSubject.java.template" "${TEST_JAVA}/benchmark/subjects/${sub_path}/${name}BenchmarkSubject.java" \
         "pdot" "${pdot}" "NAME" "${name}" "create_default" "${create_default}"
-    add_service_entry "src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject" \
-        "org.purpleBean.kmip.benchmark.subjects.${pdot}.${name}BenchmarkSubject"
+    add_service_entry "src/test/resources/META-INF/services/org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject" \
+        "org.purplebean.kmip.benchmark.subjects.${pdot}.${name}BenchmarkSubject"
 }
 
 generate_unified_serializer() {
@@ -137,8 +137,8 @@ generate_unified_serializer() {
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Serializer.java.template" "${MAIN_JAVA}/codec/${format}/serializer/${sub_path}/${name}${format_pascal}Serializer.java" \
         "pdot" "${pdot}" "NAME" "${name}"
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.serializer.api.KmipDataType${format_pascal}Serializer" \
-        "org.purpleBean.kmip.codec.${format}.serializer.${pdot}.${name}${format_pascal}Serializer"
+    add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.codec.${format}.serializer.api.KmipDataType${format_pascal}Serializer" \
+        "org.purplebean.kmip.codec.${format}.serializer.${pdot}.${name}${format_pascal}Serializer"
 }
 
 generate_unified_deserializer() {
@@ -149,8 +149,8 @@ generate_unified_deserializer() {
 
     render_template "${UNIFIED_TEMPLATE_DIR}/${format_pascal}Deserializer.java.template" "${MAIN_JAVA}/codec/${format}/deserializer/${sub_path}/${name}${format_pascal}Deserializer.java" \
         "pdot" "${pdot}" "NAME" "${name}" "SUPER_CALL" "${super_call}"
-    add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.${format}.deserializer.api.KmipDataType${format_pascal}Deserializer" \
-        "org.purpleBean.kmip.codec.${format}.deserializer.${pdot}.${name}${format_pascal}Deserializer"
+    add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.codec.${format}.deserializer.api.KmipDataType${format_pascal}Deserializer" \
+        "org.purplebean.kmip.codec.${format}.deserializer.${pdot}.${name}${format_pascal}Deserializer"
 }
 
 
@@ -169,7 +169,7 @@ generate_enum() {
     usage_enum() { cat <<EOF
 Usage: $0 enum [options] <Name>
 Options:
-  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1x2'). Default: 'core'
   -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute enumeration (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
@@ -245,7 +245,7 @@ EOF
                 "ATTRIBUTE_NAME" "${ENUM_NAME}" "ATTRIBUTE_NAME_SNAKE" "${ENUM_NAME_SNAKE}" \
                 "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" \
                 "KMIP_VERSION" "${KMIP_VERSION}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${ENUM_NAME}"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.api.KmipDataType" "org.purplebean.kmip.${pdot}.${ENUM_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then
@@ -293,7 +293,7 @@ generate_datatype() {
     usage_datatype() { cat <<EOF
 Usage: $0 datatype [options] <Name>
 Options:
-  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1x2'). Default: 'core'
   -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute data type (changes class and domain test templates)
   --type <java_type>  The underlying Java type (e.g., Integer, String, ByteBuffer). Default: ByteBuffer
@@ -383,7 +383,7 @@ EOF
                 "pdot" "${pdot}" "DATA_NAME" "${DATA_NAME}" "DATA_NAME_SNAKE" "${DATA_NAME_SNAKE}" "DATA_TYPE" "${DATA_TYPE}" "ENCODING_TYPE" "${ENCODING_TYPE}" \
                 "ATTRIBUTE_NAME" "${DATA_NAME}" "ATTRIBUTE_NAME_SNAKE" "${DATA_NAME_SNAKE}" "ATTRIBUTE_VALUE_TYPE" "${ATTRIBUTE_VALUE_TYPE}" \
                 "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${DATA_NAME}"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.api.KmipDataType" "org.purplebean.kmip.${pdot}.${DATA_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then
@@ -429,7 +429,7 @@ generate_structure() {
     usage_structure() { cat <<EOF
 Usage: $0 structure [options] <Name>
 Options:
-  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1_2'). Default: 'core'
+  -m, --module <module>     Set the module for generation (e.g., 'core', 'v1x2'). Default: 'core'
   -s, --sub-package <pkg>   Set a nested sub-package for generation.
   --attr              Generate an attribute structure (changes class and domain test templates)
   --class, --json-ser, --json-des, --xml-ser, --xml-des, --ttlv-ser, --ttlv-des,
@@ -506,7 +506,7 @@ EOF
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "STRUCTURE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
                 "ATTRIBUTE_NAME" "${STRUCTURE_NAME}" "ATTRIBUTE_NAME_SNAKE" "${STRUCTURE_NAME_SNAKE}" \
                 "SUPPORTED_VERSIONS" "${SUPPORTED_VERSIONS}" "DEFAULT_SPEC" "${DEFAULT_SPEC}" "KMIP_VERSION" "${KMIP_VERSION}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType" "org.purpleBean.kmip.${pdot}.${STRUCTURE_NAME}"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.api.KmipDataType" "org.purplebean.kmip.${pdot}.${STRUCTURE_NAME}"
         fi
 
         if ${GEN_DOMAIN_TEST}; then
@@ -525,22 +525,22 @@ EOF
         if ${GEN_JSON_DES}; then
             render_template "${TEMPLATE_DIR}/StructureJsonDeserializer.java.template" "${MAIN_JAVA}/codec/json/deserializer/${SUB_PATH}/${STRUCTURE_NAME}JsonDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer" \
-                "org.purpleBean.kmip.codec.json.deserializer.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer" \
+                "org.purplebean.kmip.codec.json.deserializer.${pdot}.${STRUCTURE_NAME}JsonDeserializer"
         fi
         if ${GEN_XML_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "xml"; fi
         if ${GEN_XML_DES}; then
             render_template "${TEMPLATE_DIR}/StructureXmlDeserializer.java.template" "${MAIN_JAVA}/codec/xml/deserializer/${SUB_PATH}/${STRUCTURE_NAME}XmlDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer" \
-                "org.purpleBean.kmip.codec.xml.deserializer.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer" \
+                "org.purplebean.kmip.codec.xml.deserializer.${pdot}.${STRUCTURE_NAME}XmlDeserializer"
         fi
         if ${GEN_TTLV_SER}; then generate_unified_serializer "${STRUCTURE_NAME}" "${SUB_PATH}" "ttlv"; fi
         if ${GEN_TTLV_DES}; then
             render_template "${TEMPLATE_DIR}/StructureTtlvDeserializer.java.template" "${MAIN_JAVA}/codec/ttlv/deserializer/${SUB_PATH}/${STRUCTURE_NAME}TtlvDeserializer.java" \
                 "pdot" "${pdot}" "STRUCTURE_NAME" "${STRUCTURE_NAME}" "varname" "${varname}"
-            add_service_entry "src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer" \
-                "org.purpleBean.kmip.codec.ttlv.deserializer.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
+            add_service_entry "src/main/resources/META-INF/services/org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer" \
+                "org.purplebean.kmip.codec.ttlv.deserializer.${pdot}.${STRUCTURE_NAME}TtlvDeserializer"
         fi
 
         local create_default_struct="${STRUCTURE_NAME}.builder().build()"

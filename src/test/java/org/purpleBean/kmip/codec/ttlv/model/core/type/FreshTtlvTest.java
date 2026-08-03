@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.type;
+package org.purplebean.kmip.codec.ttlv.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.Fresh;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.Fresh;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Fresh TTLV Serialization Tests")
 class FreshTtlvTest extends AbstractTtlvSerializationTestSuite<Fresh> {

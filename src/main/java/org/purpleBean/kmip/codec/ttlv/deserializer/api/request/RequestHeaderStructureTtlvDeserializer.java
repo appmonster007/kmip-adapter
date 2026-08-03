@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.api.request;
+package org.purplebean.kmip.codec.ttlv.deserializer.api.request;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestHeaderStructure;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestHeader;
 
 public class RequestHeaderStructureTtlvDeserializer
     extends KmipDataTypeTtlvDeserializer<RequestHeaderStructure> {

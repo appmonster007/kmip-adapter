@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.CertificateRequestType;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.CertificateRequest;
-import org.purpleBean.kmip.model.core.type.Offset;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.RecertifyOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.CertificateRequestType;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.core.type.CertificateRequest;
+import org.purplebean.kmip.model.core.type.Offset;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.RecertifyOpRequestPayload;
 
 public class RecertifyOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RecertifyOpRequestPayload,

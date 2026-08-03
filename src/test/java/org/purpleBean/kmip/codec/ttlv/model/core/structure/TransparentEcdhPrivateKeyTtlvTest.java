@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.structure.TransparentEcdhPrivateKey;
-import org.purpleBean.kmip.model.core.type.D;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.structure.TransparentEcdhPrivateKey;
+import org.purplebean.kmip.model.core.type.D;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("TransparentEcdhPrivateKey TTLV Serialization Tests")
 class TransparentEcdhPrivateKeyTtlvTest

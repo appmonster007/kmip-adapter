@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.model.v2x1.structure.response.payload;
 
 import java.util.List;
 import java.util.Map;
@@ -9,20 +9,20 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.AttestationType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.ExtensionInformation;
-import org.purpleBean.kmip.model.core.structure.ServerInformation;
-import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
-import org.purpleBean.kmip.model.core.type.VendorIdentification;
-import org.purpleBean.kmip.model.v2x1.structure.DefaultsInformation;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.response.ResponsePayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.AttestationType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.ExtensionInformation;
+import org.purplebean.kmip.model.core.structure.ServerInformation;
+import org.purplebean.kmip.model.core.type.ApplicationNamespace;
+import org.purplebean.kmip.model.core.type.VendorIdentification;
+import org.purplebean.kmip.model.v2x1.structure.DefaultsInformation;
 
 /**
  * KMIP Query operation response payload (v2.1+, tag {@code 0x42007C}).

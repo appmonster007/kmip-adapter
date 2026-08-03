@@ -1,21 +1,21 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.AttestationType;
-import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
-import org.purpleBean.kmip.model.core.structure.Authentication;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.AttestationCapableIndicator;
-import org.purpleBean.kmip.model.core.type.MaximumResponseSize;
-import org.purpleBean.kmip.model.core.type.TimeStamp;
-import org.purpleBean.kmip.model.v2x1.enumeration.AsynchronousIndicator;
-import org.purpleBean.kmip.model.v2x1.type.ClientCorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.ServerCorrelationValue;
-import org.purpleBean.kmip.model.v3x0.structure.request.RequestHeader;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.AttestationType;
+import org.purplebean.kmip.model.core.enumeration.BatchErrorContinuationOption;
+import org.purplebean.kmip.model.core.structure.Authentication;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.AttestationCapableIndicator;
+import org.purplebean.kmip.model.core.type.MaximumResponseSize;
+import org.purplebean.kmip.model.core.type.TimeStamp;
+import org.purplebean.kmip.model.v2x1.enumeration.AsynchronousIndicator;
+import org.purplebean.kmip.model.v2x1.type.ClientCorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.ServerCorrelationValue;
+import org.purplebean.kmip.model.v3x0.structure.request.RequestHeader;
 
 public class RequestHeaderTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {

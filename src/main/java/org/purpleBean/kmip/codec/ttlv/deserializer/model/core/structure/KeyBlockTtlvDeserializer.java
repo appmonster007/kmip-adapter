@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KeyValue;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingData;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.api.KeyValue;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.KeyWrappingData;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
 
 public class KeyBlockTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purplebean.kmip.model.core.structure;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,14 +10,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.ManagedObject;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.ManagedObject;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
 @Data
 @Builder(toBuilder = true)

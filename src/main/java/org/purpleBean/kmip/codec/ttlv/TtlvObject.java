@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purplebean.kmip.codec.ttlv;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.purpleBean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.EncodingType;
 
 /**
  * TTLV object that can be built via a builder and converted to/from bytes.

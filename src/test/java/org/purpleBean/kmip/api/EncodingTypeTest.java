@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

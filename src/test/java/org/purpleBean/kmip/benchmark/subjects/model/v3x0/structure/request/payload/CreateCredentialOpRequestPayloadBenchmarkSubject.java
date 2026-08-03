@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v3x0.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.CredentialType;
-import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.core.type.Username;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.core.type.Password;
+import org.purplebean.kmip.model.core.type.Username;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
 
 public class CreateCredentialOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CreateCredentialOpRequestPayload> {
@@ -19,7 +19,7 @@ public class CreateCredentialOpRequestPayloadBenchmarkSubject
         .builder()
         .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
         .credentialValue(
-            org.purpleBean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"),
+            org.purplebean.kmip.model.core.structure.UsernameAndPassword.of(Username.of("test"),
                 Password.of("pass")))
         .build();
     initialize(subject, CreateCredentialOpRequestPayload.class);

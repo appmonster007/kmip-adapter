@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.NotifyOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.Attribute;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.NotifyOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("NotifyOpRequestPayload Ttlv Serialization Tests")
 class NotifyOpRequestPayloadTtlvTest

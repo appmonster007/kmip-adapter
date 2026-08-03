@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.core.type;
+package org.purplebean.kmip.codec.xml.model.core.type;
 
 import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.PublicExponent;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PublicExponent XML Serialization Tests")
 class PublicExponentXmlTest extends AbstractXmlSerializationTestSuite<PublicExponent> {

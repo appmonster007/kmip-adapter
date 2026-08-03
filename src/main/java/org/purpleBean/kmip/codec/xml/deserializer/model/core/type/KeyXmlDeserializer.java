@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.type.Key;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.type.Key;
 
 public class KeyXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Key, Key.KeyBuilder> {
 

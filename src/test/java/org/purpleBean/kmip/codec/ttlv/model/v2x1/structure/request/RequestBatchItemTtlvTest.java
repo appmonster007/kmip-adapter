@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.request;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.request.RequestBatchItem;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.request.RequestBatchItem;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RequestBatchItem Ttlv Serialization Tests")
 class RequestBatchItemTtlvTest extends AbstractTtlvSerializationTestSuite<RequestBatchItem> {

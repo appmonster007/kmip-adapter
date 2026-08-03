@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.ApplicationSpecificInformation;
-import org.purpleBean.kmip.model.core.type.ApplicationData;
-import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.ApplicationSpecificInformation;
+import org.purplebean.kmip.model.core.type.ApplicationData;
+import org.purplebean.kmip.model.core.type.ApplicationNamespace;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ApplicationSpecificInformation Json Serialization Tests")
 class ApplicationSpecificInformationJsonTest

@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.IterationCount;
-import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.v3x0.structure.PasswordCredential;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSalt;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
-import org.purpleBean.kmip.model.v3x0.type.SaltedPassword;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.IterationCount;
+import org.purplebean.kmip.model.core.type.Password;
+import org.purplebean.kmip.model.v3x0.structure.PasswordCredential;
+import org.purplebean.kmip.model.v3x0.type.PasswordSalt;
+import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
+import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
 public class PasswordCredentialTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PasswordCredential,

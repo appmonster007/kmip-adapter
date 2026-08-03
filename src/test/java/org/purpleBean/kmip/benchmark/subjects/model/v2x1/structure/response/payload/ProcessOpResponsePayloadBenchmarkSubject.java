@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v2x1.structure.response.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.ProcessOpResponsePayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.ProcessOpResponsePayload;
 
 public class ProcessOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ProcessOpResponsePayload> {
@@ -15,7 +15,7 @@ public class ProcessOpResponsePayloadBenchmarkSubject
     ProcessOpResponsePayload subject = ProcessOpResponsePayload
         .builder()
         .asynchronousCorrelationValue(
-            org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(
+            org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue.of(
                 new byte[] {0x01, 0x02}))
         .build();
     initialize(subject, ProcessOpResponsePayload.class);

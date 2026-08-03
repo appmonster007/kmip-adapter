@@ -41,7 +41,7 @@ This creates:
 - 3× serializer + 3× deserializer under `src/main/java/.../codec/<format>/[serializer|deserializer]/...`
 - 3× codec test under `src/test/java/.../codec/<format>/...`
 - A benchmark subject under `src/test/java/.../benchmark/subjects/...`
-- SPI entries appended to `src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType` and the codec service files
+- SPI entries appended to `src/main/resources/META-INF/services/org.purplebean.kmip.api.KmipDataType` and the codec service files
 
 ### Step 4 — Fill in the class body
 The generator produces a skeleton. You must:
@@ -67,11 +67,11 @@ The generator appends entries — but always confirm they sorted in cleanly:
 grep -n "<Name>" src/main/resources/META-INF/services/* src/test/resources/META-INF/services/*
 ```
 You should see entries in:
-- `org.purpleBean.kmip.api.KmipDataType`
-- `org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer` (and deserializer)
-- `org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer` (and deserializer)
-- `org.purpleBean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer` (and deserializer)
-- `org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject` (test resources)
+- `org.purplebean.kmip.api.KmipDataType`
+- `org.purplebean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer` (and deserializer)
+- `org.purplebean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer` (and deserializer)
+- `org.purplebean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer` (and deserializer)
+- `org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject` (test resources)
 
 If any are missing, append them manually and keep the file alphabetically sorted.
 

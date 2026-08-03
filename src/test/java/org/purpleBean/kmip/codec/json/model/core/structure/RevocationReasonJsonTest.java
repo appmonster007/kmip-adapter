@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
-import org.purpleBean.kmip.model.core.structure.RevocationReason;
-import org.purpleBean.kmip.model.core.type.RevocationMessage;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RevocationReasonCode;
+import org.purplebean.kmip.model.core.structure.RevocationReason;
+import org.purplebean.kmip.model.core.type.RevocationMessage;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RevocationReason Json Serialization Tests")
 class RevocationReasonJsonTest extends AbstractJsonSerializationTestSuite<RevocationReason> {

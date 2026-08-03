@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
 /**
  * Represents the Managed Object data type in KMIP.

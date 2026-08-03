@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.model.v2x1.structure;
+package org.purplebean.kmip.model.v2x1.structure;
 
 import java.util.Set;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.structure.UsageLimits;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.structure.UsageLimits;
 
 @Data
 @Builder(toBuilder = true)
@@ -31,12 +31,12 @@ public class Right implements KmipStructure {
 
   private final UsageLimits usageLimits;
   private final Operations operations;
-  private final org.purpleBean.kmip.model.v2x1.structure.Objects managedObjects;
+  private final org.purplebean.kmip.model.v2x1.structure.Objects managedObjects;
   private final ObjectGroups objectGroups;
 
   @Builder
   private Right(UsageLimits usageLimits, Operations operations,
-                org.purpleBean.kmip.model.v2x1.structure.Objects managedObjects,
+                org.purplebean.kmip.model.v2x1.structure.Objects managedObjects,
                 ObjectGroups objectGroups) {
     this.usageLimits = usageLimits;
     this.operations = operations;
@@ -55,7 +55,7 @@ public class Right implements KmipStructure {
         builder.usageLimits(u);
       } else if (field instanceof Operations o) {
         builder.operations(o);
-      } else if (field instanceof org.purpleBean.kmip.model.v2x1.structure.Objects o) {
+      } else if (field instanceof org.purplebean.kmip.model.v2x1.structure.Objects o) {
         builder.managedObjects(o);
       } else if (field instanceof ObjectGroups g) {
         builder.objectGroups(g);

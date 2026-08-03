@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
-import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Concurrency tests for {@link KmipContext}.

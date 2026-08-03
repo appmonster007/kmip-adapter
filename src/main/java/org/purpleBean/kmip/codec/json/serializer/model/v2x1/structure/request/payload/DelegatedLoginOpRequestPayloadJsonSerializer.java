@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
 
 public class DelegatedLoginOpRequestPayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<DelegatedLoginOpRequestPayload> {

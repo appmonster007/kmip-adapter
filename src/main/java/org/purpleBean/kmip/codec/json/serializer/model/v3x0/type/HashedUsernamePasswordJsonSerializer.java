@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v3x0.type;
+package org.purplebean.kmip.codec.json.serializer.model.v3x0.type;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v3x0.type.HashedUsernamePassword;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v3x0.type.HashedUsernamePassword;
 
 public class HashedUsernamePasswordJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<HashedUsernamePassword> {

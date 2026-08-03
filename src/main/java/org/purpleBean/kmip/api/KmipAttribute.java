@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) attribute.

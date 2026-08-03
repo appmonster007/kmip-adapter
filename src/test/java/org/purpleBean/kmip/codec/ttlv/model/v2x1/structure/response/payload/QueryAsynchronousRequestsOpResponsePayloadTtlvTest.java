@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("QueryAsynchronousRequestsOpResponsePayload Ttlv Serialization Tests")
 class QueryAsynchronousRequestsOpResponsePayloadTtlvTest

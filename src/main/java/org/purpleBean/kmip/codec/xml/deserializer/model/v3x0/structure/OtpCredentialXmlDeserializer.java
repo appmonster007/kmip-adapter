@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v3x0.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.v3x0.enumeration.OtpAlgorithm;
-import org.purpleBean.kmip.model.v3x0.structure.OtpCredential;
-import org.purpleBean.kmip.model.v3x0.type.OtpCounter;
-import org.purpleBean.kmip.model.v3x0.type.OtpDigest;
-import org.purpleBean.kmip.model.v3x0.type.OtpDigits;
-import org.purpleBean.kmip.model.v3x0.type.OtpInterval;
-import org.purpleBean.kmip.model.v3x0.type.OtpSeed;
-import org.purpleBean.kmip.model.v3x0.type.OtpSerial;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v3x0.enumeration.OtpAlgorithm;
+import org.purplebean.kmip.model.v3x0.structure.OtpCredential;
+import org.purplebean.kmip.model.v3x0.type.OtpCounter;
+import org.purplebean.kmip.model.v3x0.type.OtpDigest;
+import org.purplebean.kmip.model.v3x0.type.OtpDigits;
+import org.purplebean.kmip.model.v3x0.type.OtpInterval;
+import org.purplebean.kmip.model.v3x0.type.OtpSeed;
+import org.purplebean.kmip.model.v3x0.type.OtpSerial;
 
 public class OtpCredentialXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<OtpCredential, OtpCredential.OtpCredentialBuilder> {

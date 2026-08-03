@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v3x0.structure.response;
+package org.purplebean.kmip.benchmark.subjects.model.v3x0.structure.response;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.TimeStamp;
-import org.purpleBean.kmip.model.v3x0.structure.response.ResponseHeader;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.TimeStamp;
+import org.purplebean.kmip.model.v3x0.structure.response.ResponseHeader;
 
 public class ResponseHeaderBenchmarkSubject extends KmipBenchmarkSubject<ResponseHeader> {
 

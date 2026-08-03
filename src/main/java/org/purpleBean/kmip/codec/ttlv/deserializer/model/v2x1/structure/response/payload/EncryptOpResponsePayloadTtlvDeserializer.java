@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.response.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.DataByteString;
-import org.purpleBean.kmip.model.core.type.IVCounterNonce;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.EncryptOpResponsePayload;
-import org.purpleBean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
-import org.purpleBean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.DataByteString;
+import org.purplebean.kmip.model.core.type.IVCounterNonce;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.EncryptOpResponsePayload;
+import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
 public class EncryptOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<EncryptOpResponsePayload,

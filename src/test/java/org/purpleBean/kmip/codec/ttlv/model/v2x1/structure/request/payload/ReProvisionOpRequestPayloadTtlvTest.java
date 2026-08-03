@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.CertificateRequest;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ReProvisionOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.CertificateRequest;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ReProvisionOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ReProvisionOpRequestPayload Ttlv Serialization Tests")
 class ReProvisionOpRequestPayloadTtlvTest

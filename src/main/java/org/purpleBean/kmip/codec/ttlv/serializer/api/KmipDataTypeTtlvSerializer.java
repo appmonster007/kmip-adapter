@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.api;
+package org.purplebean.kmip.codec.ttlv.serializer.api;
 
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
 /**
  * Base TTLV serializer for {@link KmipDataType} objects.

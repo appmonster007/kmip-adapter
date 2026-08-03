@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.api.response;
+package org.purplebean.kmip.api.response;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.ResultReason;
-import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
-import org.purpleBean.kmip.model.core.type.ResultMessage;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.enumeration.ResultReason;
+import org.purplebean.kmip.model.core.enumeration.ResultStatus;
+import org.purplebean.kmip.model.core.type.ResultMessage;
 
 /**
  * Represents a single batch item within a KMIP (Key Management Interoperability Protocol)

@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v1x2.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.ObjectGroupMember;
-import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.type.MaximumItems;
-import org.purpleBean.kmip.model.core.type.StorageStatusMask;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.LocateOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.ObjectGroupMember;
+import org.purplebean.kmip.model.core.structure.Attribute;
+import org.purplebean.kmip.model.core.type.MaximumItems;
+import org.purplebean.kmip.model.core.type.StorageStatusMask;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.LocateOpRequestPayload;
 
 public class LocateOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LocateOpRequestPayload,

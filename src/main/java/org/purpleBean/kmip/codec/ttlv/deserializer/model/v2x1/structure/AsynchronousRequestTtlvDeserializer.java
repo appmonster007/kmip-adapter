@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.v2x1.enumeration.ProcessingStage;
-import org.purpleBean.kmip.model.v2x1.structure.AsynchronousRequest;
-import org.purpleBean.kmip.model.v2x1.type.SubmissionDate;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
+import org.purplebean.kmip.model.v2x1.structure.AsynchronousRequest;
+import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
 
 public class AsynchronousRequestTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AsynchronousRequest,

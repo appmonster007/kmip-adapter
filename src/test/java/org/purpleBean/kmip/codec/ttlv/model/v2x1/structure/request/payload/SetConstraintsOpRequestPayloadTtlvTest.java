@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.Constraints;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.Constraints;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SetConstraintsOpRequestPayload Ttlv Serialization Tests")
 class SetConstraintsOpRequestPayloadTtlvTest

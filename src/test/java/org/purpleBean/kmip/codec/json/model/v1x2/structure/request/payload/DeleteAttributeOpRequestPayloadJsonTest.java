@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.json.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.AttributeIndex;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.DeleteAttributeOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.AttributeIndex;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.DeleteAttributeOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DeleteAttributeOpRequestPayload Json Serialization Tests")
 class DeleteAttributeOpRequestPayloadJsonTest

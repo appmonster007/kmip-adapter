@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml.serializer;
+package org.purplebean.kmip.codec.xml.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

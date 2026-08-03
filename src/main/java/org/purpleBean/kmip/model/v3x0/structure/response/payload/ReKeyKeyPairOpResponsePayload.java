@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v3x0.structure.response.payload;
+package org.purplebean.kmip.model.v3x0.structure.response.payload;
 
 import java.util.List;
 import java.util.Map;
@@ -9,23 +9,23 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.v3x0.type.PublicKeyUniqueIdentifier;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.response.ResponsePayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
+import org.purplebean.kmip.model.v3x0.type.PublicKeyUniqueIdentifier;
 
 /**
  * KMIP ReKeyKeyPair Response Payload (V3_0).
  * <p>
  * Fork of
- * {@link org.purpleBean.kmip.model.v1x2.structure.response.payload.ReKeyKeyPairOpResponsePayload} for
+ * {@link org.purplebean.kmip.model.v1x2.structure.response.payload.ReKeyKeyPairOpResponsePayload} for
  * KMIP 3.0, where {@code PrivateKeyUniqueIdentifier}/{@code PublicKeyUniqueIdentifier} are
  * encoded as
  * {@code Identifier} rather than {@code TextString} (see {@link PrivateKeyUniqueIdentifier},

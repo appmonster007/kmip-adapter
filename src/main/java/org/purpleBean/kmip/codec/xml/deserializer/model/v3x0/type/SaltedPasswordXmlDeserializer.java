@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v3x0.type;
+package org.purplebean.kmip.codec.xml.deserializer.model.v3x0.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.v3x0.type.SaltedPassword;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
 public class SaltedPasswordXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SaltedPassword, SaltedPassword.SaltedPasswordBuilder> {

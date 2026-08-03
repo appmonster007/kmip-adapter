@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.type.QString;
-import org.purpleBean.kmip.model.v2x1.structure.TransparentEcPublicKey;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.type.QString;
+import org.purplebean.kmip.model.v2x1.structure.TransparentEcPublicKey;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("TransparentEcPublicKey Ttlv Serialization Tests")
 class TransparentEcPublicKeyTtlvTest

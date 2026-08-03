@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v3x0.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CredentialType;
-import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CreateCredentialOpRequestPayload Json Serialization Tests")
 class CreateCredentialOpRequestPayloadJsonTest

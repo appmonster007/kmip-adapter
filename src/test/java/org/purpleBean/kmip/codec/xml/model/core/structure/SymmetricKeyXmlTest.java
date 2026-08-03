@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SymmetricKey;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SymmetricKey;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SymmetricKey Xml Serialization Tests")
 class SymmetricKeyXmlTest extends AbstractXmlSerializationTestSuite<SymmetricKey> {

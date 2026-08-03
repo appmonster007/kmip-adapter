@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.TransparentRsaPrivateKey;
-import org.purpleBean.kmip.model.core.type.CRTCoefficient;
-import org.purpleBean.kmip.model.core.type.Modulus;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.PrimeExponentP;
-import org.purpleBean.kmip.model.core.type.PrimeExponentQ;
-import org.purpleBean.kmip.model.core.type.PrivateExponent;
-import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.model.core.type.Q;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.TransparentRsaPrivateKey;
+import org.purplebean.kmip.model.core.type.CRTCoefficient;
+import org.purplebean.kmip.model.core.type.Modulus;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.PrimeExponentP;
+import org.purplebean.kmip.model.core.type.PrimeExponentQ;
+import org.purplebean.kmip.model.core.type.PrivateExponent;
+import org.purplebean.kmip.model.core.type.PublicExponent;
+import org.purplebean.kmip.model.core.type.Q;
 
 public class TransparentRsaPrivateKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentRsaPrivateKey,

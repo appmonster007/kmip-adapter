@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.PollOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.PollOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PollOpRequestPayload Xml Serialization Tests")
 class PollOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<PollOpRequestPayload> {

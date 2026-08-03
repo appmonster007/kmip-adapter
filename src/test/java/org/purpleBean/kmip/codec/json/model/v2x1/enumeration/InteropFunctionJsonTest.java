@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.json.model.v2x1.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.InteropFunction;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("InteropFunction JSON Serialization")
 class InteropFunctionJsonTest extends AbstractJsonSerializationTestSuite<InteropFunction> {

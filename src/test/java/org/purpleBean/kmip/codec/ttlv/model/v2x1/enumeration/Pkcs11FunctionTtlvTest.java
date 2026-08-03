@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.enumeration;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.v2x1.enumeration.Pkcs11Function;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Pkcs11Function Ttlv Serialization Tests")
 class Pkcs11FunctionTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs11Function> {

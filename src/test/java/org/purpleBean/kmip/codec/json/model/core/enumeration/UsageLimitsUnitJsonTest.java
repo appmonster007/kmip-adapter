@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.core.enumeration;
+package org.purplebean.kmip.codec.json.model.core.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.UsageLimitsUnit;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("UsageLimitsUnit JSON Serialization")
 class UsageLimitsUnitJsonTest extends AbstractJsonSerializationTestSuite<UsageLimitsUnit> {

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.ObjectTypes;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.ObjectTypes;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ObjectTypes Xml Serialization Tests")
 class ObjectTypesXmlTest extends AbstractXmlSerializationTestSuite<ObjectTypes> {

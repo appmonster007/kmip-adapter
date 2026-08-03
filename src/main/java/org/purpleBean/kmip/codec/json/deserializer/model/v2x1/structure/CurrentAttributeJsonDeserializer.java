@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.v2x1.structure.CurrentAttribute;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
 
 public class CurrentAttributeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CurrentAttribute,

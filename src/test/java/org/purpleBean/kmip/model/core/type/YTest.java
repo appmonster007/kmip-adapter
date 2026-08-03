@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.model.core.type;
+package org.purplebean.kmip.model.core.type;
 
 import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("Y Domain Tests")
 class YTest extends AbstractKmipDataTypeTestSuite<Y> {

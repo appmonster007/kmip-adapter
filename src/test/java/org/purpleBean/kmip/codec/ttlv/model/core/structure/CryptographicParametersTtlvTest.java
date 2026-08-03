@@ -1,21 +1,21 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
-import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.CounterLength;
-import org.purpleBean.kmip.model.core.type.FixedFieldLength;
-import org.purpleBean.kmip.model.core.type.InitialCounterValue;
-import org.purpleBean.kmip.model.core.type.InvocationFieldLength;
-import org.purpleBean.kmip.model.core.type.IvLength;
-import org.purpleBean.kmip.model.core.type.RandomIv;
-import org.purpleBean.kmip.model.core.type.TagLength;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.KeyRoleType;
+import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.type.CounterLength;
+import org.purplebean.kmip.model.core.type.FixedFieldLength;
+import org.purplebean.kmip.model.core.type.InitialCounterValue;
+import org.purplebean.kmip.model.core.type.InvocationFieldLength;
+import org.purplebean.kmip.model.core.type.IvLength;
+import org.purplebean.kmip.model.core.type.RandomIv;
+import org.purplebean.kmip.model.core.type.TagLength;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CryptographicParameters Ttlv Serialization Tests")
 class CryptographicParametersTtlvTest

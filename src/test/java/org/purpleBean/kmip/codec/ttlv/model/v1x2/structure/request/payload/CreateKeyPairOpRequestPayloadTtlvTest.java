@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateKeyPairOpRequestPayload Ttlv Serialization Tests")
 class CreateKeyPairOpRequestPayloadTtlvTest

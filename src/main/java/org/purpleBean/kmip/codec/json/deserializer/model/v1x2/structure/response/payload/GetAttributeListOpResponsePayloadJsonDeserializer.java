@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v1x2.structure.response.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.GetAttributeListOpResponsePayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.GetAttributeListOpResponsePayload;
 
 public class GetAttributeListOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<GetAttributeListOpResponsePayload,
@@ -34,7 +34,7 @@ public class GetAttributeListOpResponsePayloadJsonDeserializer extends
       case KmipTag.Standard.ATTRIBUTE_NAME ->
           builder.attributeName(ctxt.readValue(p, AttributeName.class));
       case KmipTag.Standard.ATTRIBUTE_REFERENCE ->
-          builder.attributeReference(ctxt.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
+          builder.attributeReference(ctxt.readValue(p, org.purplebean.kmip.api.KmipDataType.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

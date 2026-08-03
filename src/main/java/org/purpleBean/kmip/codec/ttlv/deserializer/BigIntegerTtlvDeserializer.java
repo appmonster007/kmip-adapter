@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer;
+package org.purplebean.kmip.codec.ttlv.deserializer;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.Objects;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 public class BigIntegerTtlvDeserializer extends TtlvDeserializer<BigInteger> {
   private final EncodingType type = EncodingType.BIG_INTEGER;

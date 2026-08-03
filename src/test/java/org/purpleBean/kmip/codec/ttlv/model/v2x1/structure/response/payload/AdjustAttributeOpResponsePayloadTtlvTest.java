@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.NewAttribute;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.AdjustAttributeOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.AdjustAttributeOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AdjustAttributeOpResponsePayload Ttlv Serialization Tests")
 class AdjustAttributeOpResponsePayloadTtlvTest

@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.AddAttributeOpResponsePayload;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.AddAttributeOpResponsePayload;
 
 public class AddAttributeOpResponsePayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<AddAttributeOpResponsePayload> {

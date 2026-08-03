@@ -42,15 +42,15 @@ So that I can model KMIP attribute management operations end-to-end.
 
 - [ ] **Task 1: Complete Payload Implementations**
     - [ ] **`SetAttributeOpRequestPayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/SetAttributeOpRequestPayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/SetAttributeOpRequestPayload.java`.
         - Add `@NonNull UniqueIdentifier uniqueIdentifier` and `@NonNull NewAttribute newAttribute`.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
     - [ ] **`AdjustAttributeOpRequestPayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/AdjustAttributeOpRequestPayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/AdjustAttributeOpRequestPayload.java`.
         - Add `@NonNull UniqueIdentifier uniqueIdentifier`, `@NonNull CurrentAttribute currentAttribute`, and `@NonNull AdjustmentType adjustmentType`.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
     - [ ] **`AdjustAttributeOpResponsePayload`:**
-        - Edit `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/AdjustAttributeOpResponsePayload.java`.
+        - Edit `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/AdjustAttributeOpResponsePayload.java`.
         - Add `@NonNull UniqueIdentifier uniqueIdentifier` and `@NonNull NewAttribute newAttribute`.
         - Update the `@Builder` constructor, `of()` factory, `getValue()`, and `isSupported()` methods.
 
@@ -67,16 +67,16 @@ So that I can model KMIP attribute management operations end-to-end.
 
 ### Existing Stub Files (already registered in codec)
 These files exist as stubs with empty `getValue()` — add fields directly:
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/SetAttributeOpRequestPayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/payload/AdjustAttributeOpRequestPayload.java`
-- `src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/AdjustAttributeOpResponsePayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/SetAttributeOpRequestPayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/request/payload/AdjustAttributeOpRequestPayload.java`
+- `src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/AdjustAttributeOpResponsePayload.java`
 
 Note: `SetAttributeOpResponsePayload` is **already complete** (has `UniqueIdentifier` field). Do not modify it.
 
 ### Implementation Pattern — Filling Stubs
 See `SetAttributeOpResponsePayload` as the reference for a completed payload with fields:
 ```
-src/main/java/org/purpleBean/kmip/model/v2_1/structure/response/payload/SetAttributeOpResponsePayload.java
+src/main/java/org/purplebean/kmip/model/v2x1/structure/response/payload/SetAttributeOpResponsePayload.java
 ```
 Key changes from stub to full implementation:
 1. Add `@NonNull` field declarations before the static block
@@ -86,10 +86,10 @@ Key changes from stub to full implementation:
 5. Update `isSupported()` to chain child field checks
 
 ### Field Types
-- `UniqueIdentifier`: `org.purpleBean.kmip.model.core.type.UniqueIdentifier`
-- `NewAttribute`: `org.purpleBean.kmip.model.v2_1.structure.NewAttribute` (Story 1.1)
-- `CurrentAttribute`: `org.purpleBean.kmip.model.v2_1.structure.CurrentAttribute` (Story 1.1)
-- `AdjustmentType`: `org.purpleBean.kmip.model.core.enumeration.AdjustmentType` (already exists)
+- `UniqueIdentifier`: `org.purplebean.kmip.model.core.type.UniqueIdentifier`
+- `NewAttribute`: `org.purplebean.kmip.model.v2x1.structure.NewAttribute` (Story 1.1)
+- `CurrentAttribute`: `org.purplebean.kmip.model.v2x1.structure.CurrentAttribute` (Story 1.1)
+- `AdjustmentType`: `org.purplebean.kmip.model.core.enumeration.AdjustmentType` (already exists)
 
 ### KMIP Spec Field Order (v2.1)
 - **SetAttributeOpRequest**: UniqueIdentifier (optional per spec, check §6.16), NewAttribute (required)

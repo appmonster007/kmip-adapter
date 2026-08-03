@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
+package org.purplebean.kmip.codec.json.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,13 +10,13 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 public class AttributeValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttributeValue, AttributeValue.AttributeValueBuilder> {

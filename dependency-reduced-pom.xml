@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.purpleBean</groupId>
+  <groupId>org.purplebean</groupId>
   <artifactId>kmip-adapter</artifactId>
   <name>KMIP Adapter</name>
   <version>1.0-SNAPSHOT</version>
@@ -27,6 +27,35 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>config/checkstyle/google_checks.xml</configLocation>
+          <propertyExpansion>org.checkstyle.google.severity=error</propertyExpansion>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
+          <failsOnError>true</failsOnError>
+          <violationSeverity>error</violationSeverity>
+          <linkXRef>false</linkXRef>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
@@ -43,28 +72,12 @@
               <version>${jmh.version}</version>
             </path>
           </annotationProcessorPaths>
-          <compilerArgs>
-            <arg>-Xlint:all</arg>
-          </compilerArgs>
+          <compilerArgs />
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite-engine</artifactId>
-            <version>${junit-platform.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <useModulePath>false</useModulePath>
-          <excludedGroups>integration,perf</excludedGroups>
-          <properties>
-            <configurationParameters>junit.jupiter.testinstance.lifecycle.default=per_class</configurationParameters>
-          </properties>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -81,11 +94,25 @@
           <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <version>${junit-platform.version}</version>
+            <version>${junit.platform.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>${junit.platform.version}</version>
           </dependency>
         </dependencies>
         <configuration>
           <useModulePath>false</useModulePath>
+          <includes>
+            <include>**/*IT.java</include>
+            <include>**/*ITCase.java</include>
+          </includes>
         </configuration>
       </plugin>
       <plugin>
@@ -93,7 +120,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.1</version>
         <configuration>
-          <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+          <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
           <classpathScope>test</classpathScope>
         </configuration>
       </plugin>
@@ -108,8 +135,8 @@
             </goals>
             <configuration>
               <includes>
-                <include>org/purpleBean/*</include>
-                <include>org/purpleBean/**</include>
+                <include>org/purplebean/*</include>
+                <include>org/purplebean/**</include>
               </includes>
             </configuration>
           </execution>
@@ -228,7 +255,7 @@
                   <goal>java</goal>
                 </goals>
                 <configuration>
-                  <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                  <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                   <classpathScope>test</classpathScope>
                   <arguments>${bench.args}</arguments>
                 </configuration>
@@ -243,6 +270,31 @@
       <build>
         <plugins>
           <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.3.1</version>
+            <executions>
+              <execution>
+                <id>copy-test-resources</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>testResources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${project.basedir}/src/test/resources</directory>
+                      <filtering>true</filtering>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.5.1</version>
@@ -254,10 +306,12 @@
                   <goal>java</goal>
                 </goals>
                 <configuration>
-                  <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                  <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                   <classpathScope>test</classpathScope>
+                  <cleanupDaemonThreads>false</cleanupDaemonThreads>
                   <arguments>-Dbench.args=-wi\ 1\ -i\ 2\ -f\ 1
                                         ${bench.args}</arguments>
+                  <includePluginDependencies>true</includePluginDependencies>
                 </configuration>
               </execution>
             </executions>
@@ -274,58 +328,82 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>1.10.0</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>3.5.5</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>apiguardian-api</artifactId>
-          <groupId>org.apiguardian</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-commons</artifactId>
-      <version>1.10.0</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>apiguardian-api</artifactId>
-          <groupId>org.apiguardian</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-engine</artifactId>
-      <version>1.10.0</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>opentest4j</artifactId>
-          <groupId>org.opentest4j</groupId>
+          <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>apiguardian-api</artifactId>
-          <groupId>org.apiguardian</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+          <groupId>org.junit.vintage</groupId>
         </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.10.0</version>
-      <scope>test</scope>
-      <exclusions>
         <exclusion>
-          <artifactId>junit-jupiter-params</artifactId>
+          <artifactId>*</artifactId>
           <groupId>org.junit.jupiter</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>junit-jupiter-engine</artifactId>
-          <groupId>org.junit.jupiter</groupId>
+          <artifactId>*</artifactId>
+          <groupId>org.junit.platform</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>assertj-core</artifactId>
+          <groupId>org.assertj</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-starter</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-test</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-test-autoconfigure</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>json-path</artifactId>
+          <groupId>com.jayway.jsonpath</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jakarta.xml.bind-api</artifactId>
+          <groupId>jakarta.xml.bind</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>json-smart</artifactId>
+          <groupId>net.minidev</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>awaitility</artifactId>
+          <groupId>org.awaitility</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hamcrest</artifactId>
+          <groupId>org.hamcrest</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jsonassert</artifactId>
+          <groupId>org.skyscreamer</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-core</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-test</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>xmlunit-core</artifactId>
+          <groupId>org.xmlunit</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -339,6 +417,50 @@
           <artifactId>opentest4j</artifactId>
           <groupId>org.opentest4j</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>junit-platform-engine</artifactId>
+          <groupId>org.junit.platform</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>1.10.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>junit-platform-engine</artifactId>
+          <groupId>org.junit.platform</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.10.0</version>
+      <scope>test</scope>
+      <exclusions>
         <exclusion>
           <artifactId>apiguardian-api</artifactId>
           <groupId>org.apiguardian</groupId>
@@ -371,15 +493,41 @@
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
-      <artifactId>junit-jupiter</artifactId>
+      <artifactId>testcontainers</artifactId>
       <version>1.21.3</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>testcontainers</artifactId>
-          <groupId>org.testcontainers</groupId>
+          <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-compress</artifactId>
+          <groupId>org.apache.commons</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>duct-tape</artifactId>
+          <groupId>org.rnorth.duct-tape</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>docker-java-api</artifactId>
+          <groupId>com.github.docker-java</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>docker-java-transport-zerodep</artifactId>
+          <groupId>com.github.docker-java</groupId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>1.21.3</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
@@ -403,69 +551,20 @@
       <version>1.36</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>3.5.5</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit-vintage-engine</artifactId>
-          <groupId>org.junit.vintage</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>spring-boot-test</artifactId>
-          <groupId>org.springframework.boot</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>spring-boot-test-autoconfigure</artifactId>
-          <groupId>org.springframework.boot</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>json-path</artifactId>
-          <groupId>com.jayway.jsonpath</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jakarta.xml.bind-api</artifactId>
-          <groupId>jakarta.xml.bind</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>json-smart</artifactId>
-          <groupId>net.minidev</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>awaitility</artifactId>
-          <groupId>org.awaitility</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>hamcrest</artifactId>
-          <groupId>org.hamcrest</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsonassert</artifactId>
-          <groupId>org.skyscreamer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>spring-test</artifactId>
-          <groupId>org.springframework</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>xmlunit-core</artifactId>
-          <groupId>org.xmlunit</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>mockito-core</artifactId>
-          <groupId>org.mockito</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
+        <version>${junit.jupiter.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -479,31 +578,33 @@
     </dependencies>
   </dependencyManagement>
   <properties>
-    <maven.compiler.release>21</maven.compiler.release>
-    <jmh.version>1.36</jmh.version>
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
     <jackson.version>2.20.0</jackson.version>
-    <spring-boot.version>3.5.5</spring-boot.version>
-    <surefire.version>${maven-surefire-plugin.version}</surefire.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <assertj.version>3.24.2</assertj.version>
-    <junit.version>5.10.0</junit.version>
-    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
-    <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
-    <java.version>21</java.version>
+    <junit.platform.version>1.10.0</junit.platform.version>
     <maven.compiler.source>21</maven.compiler.source>
     <spring.version>6.2.10</spring.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <mockito.version>5.5.0</mockito.version>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jackson-annotations.version>2.20</jackson-annotations.version>
-    <spotbugs-maven-plugin.version>4.8.2.0</spotbugs-maven-plugin.version>
-    <lombok.version>1.18.40</lombok.version>
-    <maven.compiler.target>21</maven.compiler.target>
     <maven-pmd-plugin.version>3.21.0</maven-pmd-plugin.version>
-    <junit-platform.version>1.10.0</junit-platform.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <testcontainers.version>1.21.3</testcontainers.version>
     <failsafe.version>${maven-failsafe-plugin.version}</failsafe.version>
+    <maven.compiler.release>21</maven.compiler.release>
+    <jmh.version>1.36</jmh.version>
+    <spring-boot.version>3.5.5</spring-boot.version>
+    <surefire.version>${maven-surefire-plugin.version}</surefire.version>
+    <bench.args>-wi 1 -i 2 -f 1</bench.args>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <assertj.version>3.24.2</assertj.version>
+    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+    <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
+    <java.version>21</java.version>
+    <mockito.version>5.5.0</mockito.version>
+    <junit.jupiter.version>5.10.0</junit.jupiter.version>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spotbugs-maven-plugin.version>4.8.2.0</spotbugs-maven-plugin.version>
+    <lombok.version>1.18.40</lombok.version>
+    <maven.compiler.target>21</maven.compiler.target>
+    <checkstyle.version>13.8.0</checkstyle.version>
   </properties>
 </project>

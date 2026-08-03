@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml;
+package org.purplebean.kmip.codec.xml;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -6,20 +6,20 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.ServiceLoader;
-import org.purpleBean.kmip.codec.xml.deserializer.BigIntegerXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.BooleanXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.ByteStringXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.IntegerXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.LongXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.OffsetDateTimeXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.codec.xml.serializer.BigIntegerXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.BooleanXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.ByteStringXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.IntegerXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.LongXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.OffsetDateTimeXmlSerializer;
-import org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer;
+import org.purplebean.kmip.codec.xml.deserializer.BigIntegerXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.BooleanXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.ByteStringXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.IntegerXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.LongXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.OffsetDateTimeXmlDeserializer;
+import org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.codec.xml.serializer.BigIntegerXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.BooleanXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.ByteStringXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.IntegerXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.LongXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.OffsetDateTimeXmlSerializer;
+import org.purplebean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer;
 
 public class KmipXmlModule extends SimpleModule {
   public KmipXmlModule() {

@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v1x2.structure.response.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.AttestationType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.ExtensionInformation;
-import org.purpleBean.kmip.model.core.structure.ServerInformation;
-import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
-import org.purpleBean.kmip.model.core.type.VendorIdentification;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.QueryOpResponsePayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.AttestationType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.ExtensionInformation;
+import org.purplebean.kmip.model.core.structure.ServerInformation;
+import org.purplebean.kmip.model.core.type.ApplicationNamespace;
+import org.purplebean.kmip.model.core.type.VendorIdentification;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.QueryOpResponsePayload;
 
 public class QueryOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<QueryOpResponsePayload,

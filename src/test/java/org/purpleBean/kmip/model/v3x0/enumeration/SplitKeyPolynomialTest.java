@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.model.v3x0.enumeration;
+package org.purplebean.kmip.model.v3x0.enumeration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
 @DisplayName("SplitKeyPolynomial Domain Tests")
 class SplitKeyPolynomialTest extends AbstractKmipEnumerationTestSuite<SplitKeyPolynomial> {

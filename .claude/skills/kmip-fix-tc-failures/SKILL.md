@@ -18,7 +18,7 @@ description: >
 ## Fundamental constraints (always enforce)
 
 1. **Spec is source of truth.** Before touching code, read the relevant section in `docs/kmip-spec/v2.x/scraped/` (or the raw HTML under `docs/kmip-spec/v2.x/`) to confirm the correct field names, types, optionality, and wire order.
-2. **Version separation.** Any type that differs between KMIP spec versions lives in a separate Java class in its version package. Never add v2.x fields to a `v1_2/` class — create a new class in `v2_1/` and narrow the old class's `supportedVersions` to exclude v2.1+. See `bmad-generate-kmip-code` skill for the full rule set.
+2. **Version separation.** Any type that differs between KMIP spec versions lives in a separate Java class in its version package. Never add v2.x fields to a `v1x2/` class — create a new class in `v2x1/` and narrow the old class's `supportedVersions` to exclude v2.1+. See `bmad-generate-kmip-code` skill for the full rule set.
 3. **Round-trip fidelity.** The test does `XML → domain object → XML` and compares JSON trees. Every field that appears in the TC file must round-trip exactly: same element name, same encoding type, same ordering within the parent, same presence/absence.
 4. **Generator first.** For any completely new type (class doesn't exist), use `./scripts/generators/generate.sh` with `--all`. Never hand-write codec files. After generation, fix the known template bug: `protected createDefault()` → `public createDefault()` in generated test files.
 5. **Skip, don't guess.** If the root cause is unclear after spec + code lookup, log the failure to the skip log and move on. Never apply a speculative fix.
@@ -75,13 +75,13 @@ The batch item parser threw an exception that was silently swallowed. Root cause
    ```
 3. For each element name, look up its KmipTag description in `KmipTag.java`:
    ```bash
-   grep -n '"ElementName"' src/main/java/org/purpleBean/kmip/api/KmipTag.java
+   grep -n '"ElementName"' src/main/java/org/purplebean/kmip/api/KmipTag.java
    ```
 4. Check if a Java class is registered for that tag in the relevant spec+encoding combination:
    ```bash
    # Find which class uses this tag constant
    TAG_CONST="THE_TAG_CONSTANT"
-   grep -rn "KmipTag\.Standard\.${TAG_CONST}" src/main/java/org/purpleBean/kmip/model/
+   grep -rn "KmipTag\.Standard\.${TAG_CONST}" src/main/java/org/purplebean/kmip/model/
    ```
 5. Check if the operation's request/response payload deserializer has a case for each tag:
    ```bash
@@ -211,7 +211,7 @@ If the TC file omits a field that the model marks `@NonNull` or that `validate()
 ### `TAG_DESCRIPTION_WRONG` — Fix KmipTag description
 
 ```bash
-grep -n "THE_OLD_DESCRIPTION" src/main/java/org/purpleBean/kmip/api/KmipTag.java
+grep -n "THE_OLD_DESCRIPTION" src/main/java/org/purplebean/kmip/api/KmipTag.java
 # Edit the description string to match TC element name exactly
 # Verify with: grep "THE_NEW_DESCRIPTION" docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1/*.xml | head -3
 ```
@@ -234,7 +234,7 @@ When a v2.1 TC reveals that an existing v1.x class is missing a field:
 2. Narrow the v1.x class: change `supportedVersions` to exclude V2_0, V2_1, V3_0, etc.
 3. Generate a new v2.1 class:
    ```bash
-   ./scripts/generators/generate.sh structure --all -m v2_1 -s <sub_package> StructureName
+   ./scripts/generators/generate.sh structure --all -m v2x1 -s <sub_package> StructureName
    ```
 4. In the new class: copy all fields from v1.x, add v2.1-specific fields.
 5. Copy deserializer switch cases from v1.x deserializer, add new cases.
@@ -299,13 +299,13 @@ After the run, print the full skip log and ask the user for direction on each en
 
 The v1.2 `QueryOpResponsePayload` must NOT be modified. Instead, create a v2.1 version:
 ```bash
-./scripts/generators/generate.sh structure --all -m v2_1 -s response/payload QueryOpResponsePayload
+./scripts/generators/generate.sh structure --all -m v2x1 -s response/payload QueryOpResponsePayload
 ```
 Copy all v1.2 fields, add `DefaultsInformation defaultsInformation` (optional). Register for V2_0, V2_1, V3_0. Narrow the v1.2 class to V1_2, V1_3, V1_4.
 
 ### LocatedItems in Locate response
 
-`LocateOpResponsePayload` in v1.2 lacks `LocatedItems`. Create `v2_1/structure/response/payload/LocateOpResponsePayload.java` with `LocatedItems locatedItems` (optional Integer, tag `LOCATED_ITEMS`) and all existing fields. Narrow v1.2 to exclude V2_x.
+`LocateOpResponsePayload` in v1.2 lacks `LocatedItems`. Create `v2x1/structure/response/payload/LocateOpResponsePayload.java` with `LocatedItems locatedItems` (optional Integer, tag `LOCATED_ITEMS`) and all existing fields. Narrow v1.2 to exclude V2_x.
 
 ### ObjectType vs ObjectTypes in ObjectDefaults
 

@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.Authentication;
-import org.purpleBean.kmip.model.core.structure.Credential;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.Authentication;
+import org.purplebean.kmip.model.core.structure.Credential;
 
 public class AuthenticationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Authentication, Authentication.AuthenticationBuilder> {

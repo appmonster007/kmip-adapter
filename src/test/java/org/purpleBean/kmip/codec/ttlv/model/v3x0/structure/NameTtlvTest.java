@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.v3x0.structure;
+package org.purplebean.kmip.codec.ttlv.model.v3x0.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.structure.Name;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.structure.Name;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Name Ttlv Serialization Tests")
 class NameTtlvTest extends AbstractTtlvSerializationTestSuite<Name> {

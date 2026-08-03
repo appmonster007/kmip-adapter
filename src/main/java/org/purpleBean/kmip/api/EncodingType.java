@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;

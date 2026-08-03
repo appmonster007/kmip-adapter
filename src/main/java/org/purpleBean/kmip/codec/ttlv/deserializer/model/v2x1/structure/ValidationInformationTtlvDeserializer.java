@@ -1,22 +1,22 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.ValidationAuthorityType;
-import org.purpleBean.kmip.model.core.enumeration.ValidationType;
-import org.purpleBean.kmip.model.v2x1.structure.ValidationInformation;
-import org.purpleBean.kmip.model.v2x1.type.ValidationAuthorityCountry;
-import org.purpleBean.kmip.model.v2x1.type.ValidationAuthorityUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationCertificateIdentifier;
-import org.purpleBean.kmip.model.v2x1.type.ValidationCertificateUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationLevel;
-import org.purpleBean.kmip.model.v2x1.type.ValidationProfile;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVendorUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVersionMajor;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVersionMinor;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.ValidationAuthorityType;
+import org.purplebean.kmip.model.core.enumeration.ValidationType;
+import org.purplebean.kmip.model.v2x1.structure.ValidationInformation;
+import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityCountry;
+import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationCertificateIdentifier;
+import org.purplebean.kmip.model.v2x1.type.ValidationCertificateUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationLevel;
+import org.purplebean.kmip.model.v2x1.type.ValidationProfile;
+import org.purplebean.kmip.model.v2x1.type.ValidationVendorUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationVersionMajor;
+import org.purplebean.kmip.model.v2x1.type.ValidationVersionMinor;
 
 public class ValidationInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidationInformation,

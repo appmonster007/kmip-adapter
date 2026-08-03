@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
 /**
  * An enumeration representing the different versions of the Key Management

@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.benchmark.api;
+package org.purplebean.kmip.benchmark.api;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.nio.ByteBuffer;
 import lombok.Data;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * SPI for adding new KMIP serialization/deserialization benchmark subjects

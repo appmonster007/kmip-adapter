@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v1x2.structure.response.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.CreateKeyPairOpResponsePayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
+import org.purplebean.kmip.model.core.type.PublicKeyUniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.CreateKeyPairOpResponsePayload;
 
 public class CreateKeyPairOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CreateKeyPairOpResponsePayload,

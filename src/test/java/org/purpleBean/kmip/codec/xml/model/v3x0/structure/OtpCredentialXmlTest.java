@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.xml.model.v3x0.structure;
+package org.purplebean.kmip.codec.xml.model.v3x0.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.enumeration.OtpAlgorithm;
-import org.purpleBean.kmip.model.v3x0.structure.OtpCredential;
-import org.purpleBean.kmip.model.v3x0.type.OtpCounter;
-import org.purpleBean.kmip.model.v3x0.type.OtpDigits;
-import org.purpleBean.kmip.model.v3x0.type.OtpInterval;
-import org.purpleBean.kmip.model.v3x0.type.OtpSerial;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.enumeration.OtpAlgorithm;
+import org.purplebean.kmip.model.v3x0.structure.OtpCredential;
+import org.purplebean.kmip.model.v3x0.type.OtpCounter;
+import org.purplebean.kmip.model.v3x0.type.OtpDigits;
+import org.purplebean.kmip.model.v3x0.type.OtpInterval;
+import org.purplebean.kmip.model.v3x0.type.OtpSerial;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("OtpCredential Xml Serialization Tests")
 class OtpCredentialXmlTest extends AbstractXmlSerializationTestSuite<OtpCredential> {

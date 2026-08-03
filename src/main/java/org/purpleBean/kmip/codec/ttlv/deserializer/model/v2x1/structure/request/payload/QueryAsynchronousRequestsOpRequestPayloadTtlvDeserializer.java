@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.v2x1.structure.AsynchronousCorrelationValues;
-import org.purpleBean.kmip.model.v2x1.structure.Operations;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.QueryAsynchronousRequestsOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.v2x1.structure.AsynchronousCorrelationValues;
+import org.purplebean.kmip.model.v2x1.structure.Operations;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryAsynchronousRequestsOpRequestPayload;
 
 public class QueryAsynchronousRequestsOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<QueryAsynchronousRequestsOpRequestPayload,

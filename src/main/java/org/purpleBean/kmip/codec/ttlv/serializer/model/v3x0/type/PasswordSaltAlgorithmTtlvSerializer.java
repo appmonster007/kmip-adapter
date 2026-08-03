@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.v3x0.type;
+package org.purplebean.kmip.codec.ttlv.serializer.model.v3x0.type;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.codec.ttlv.TtlvObject;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
 
 public class PasswordSaltAlgorithmTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<PasswordSaltAlgorithm> {

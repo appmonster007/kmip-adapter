@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.v3x0.structure.HashedPasswordCredential;
-import org.purpleBean.kmip.model.v3x0.type.HashedPasswordUsername;
-import org.purpleBean.kmip.model.v3x0.type.HashedUsernamePassword;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.v3x0.structure.HashedPasswordCredential;
+import org.purplebean.kmip.model.v3x0.type.HashedPasswordUsername;
+import org.purplebean.kmip.model.v3x0.type.HashedUsernamePassword;
 
 public class HashedPasswordCredentialTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<HashedPasswordCredential,

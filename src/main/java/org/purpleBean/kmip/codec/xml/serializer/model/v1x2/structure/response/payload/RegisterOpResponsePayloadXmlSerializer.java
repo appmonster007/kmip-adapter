@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.xml.serializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.xml.serializer.model.v1x2.structure.response.payload;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.RegisterOpResponsePayload;
+import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.RegisterOpResponsePayload;
 
 public class RegisterOpResponsePayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<RegisterOpResponsePayload> {

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.model.v1x2.structure.request.payload;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,15 +6,15 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.structure.Certificate;
-import org.purpleBean.kmip.model.core.type.CertificateValue;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.core.type.ValidityDate;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CertificateType;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.core.type.CertificateValue;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.core.type.ValidityDate;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("ValidateOpRequestPayload Domain Tests")
 class ValidateOpRequestPayloadTest

@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v3x0.structure.link;
+package org.purplebean.kmip.codec.json.deserializer.model.v3x0.structure.link;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v3x0.structure.link.WrappingKeyLink;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v3x0.structure.link.WrappingKeyLink;
 
 public class WrappingKeyLinkJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<WrappingKeyLink, WrappingKeyLink.WrappingKeyLinkBuilder> {

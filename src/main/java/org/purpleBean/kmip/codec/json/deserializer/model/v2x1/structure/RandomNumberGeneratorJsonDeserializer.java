@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.Fips186Variation;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
-import org.purpleBean.kmip.model.v2x1.structure.RandomNumberGenerator;
-import org.purpleBean.kmip.model.v2x1.structure.RngParameters;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DrbgAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.Fips186Variation;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.model.v2x1.structure.RandomNumberGenerator;
+import org.purplebean.kmip.model.v2x1.structure.RngParameters;
 
 public class RandomNumberGeneratorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RandomNumberGenerator,
@@ -62,7 +62,7 @@ public class RandomNumberGeneratorJsonDeserializer extends
       case KmipTag.Standard.FIPS186_VARIATION ->
           rngBuilder.fips186Variation(ctxt.readValue(p, Fips186Variation.class));
       case KmipTag.Standard.PREDICTION_RESISTANCE -> rngBuilder.predictionResistance(
-          ctxt.readValue(p, org.purpleBean.kmip.model.v2x1.type.PredictionResistance.class));
+          ctxt.readValue(p, org.purplebean.kmip.model.v2x1.type.PredictionResistance.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
     builder.rngParameters(rngBuilder.build());

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.core.type;
+package org.purplebean.kmip.codec.xml.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.BatchOrderOption;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.BatchOrderOption;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("BatchOrderOption XML Serialization Tests")
 class BatchOrderOptionXmlTest extends AbstractXmlSerializationTestSuite<BatchOrderOption> {

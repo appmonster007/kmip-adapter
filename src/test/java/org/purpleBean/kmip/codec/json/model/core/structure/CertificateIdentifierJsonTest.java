@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.CertificateIdentifier;
-import org.purpleBean.kmip.model.core.type.Issuer;
-import org.purpleBean.kmip.model.core.type.SerialNumber;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.CertificateIdentifier;
+import org.purplebean.kmip.model.core.type.Issuer;
+import org.purplebean.kmip.model.core.type.SerialNumber;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateIdentifier Json Serialization Tests")
 class CertificateIdentifierJsonTest

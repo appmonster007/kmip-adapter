@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.CreateKeyPairOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
+import org.purplebean.kmip.model.core.type.PublicKeyUniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.CreateKeyPairOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CreateKeyPairOpResponsePayload Json Serialization Tests")
 class CreateKeyPairOpResponsePayloadJsonTest

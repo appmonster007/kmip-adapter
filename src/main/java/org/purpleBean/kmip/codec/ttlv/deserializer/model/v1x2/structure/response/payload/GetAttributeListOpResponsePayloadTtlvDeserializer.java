@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v1x2.structure.response.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.GetAttributeListOpResponsePayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.GetAttributeListOpResponsePayload;
 
 public class GetAttributeListOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<GetAttributeListOpResponsePayload,
@@ -34,7 +34,7 @@ public class GetAttributeListOpResponsePayloadTtlvDeserializer extends
       case KmipTag.Standard.ATTRIBUTE_NAME ->
           builder.attributeName(mapper.readValue(p, AttributeName.class));
       case KmipTag.Standard.ATTRIBUTE_REFERENCE -> builder.attributeReference(
-          mapper.readValue(p, org.purpleBean.kmip.api.KmipDataType.class));
+          mapper.readValue(p, org.purplebean.kmip.api.KmipDataType.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

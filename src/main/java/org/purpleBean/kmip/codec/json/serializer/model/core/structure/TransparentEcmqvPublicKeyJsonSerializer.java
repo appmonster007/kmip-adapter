@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.core.structure;
+package org.purplebean.kmip.codec.json.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.core.structure.TransparentEcmqvPublicKey;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.core.structure.TransparentEcmqvPublicKey;
 
 public class TransparentEcmqvPublicKeyJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<TransparentEcmqvPublicKey> {

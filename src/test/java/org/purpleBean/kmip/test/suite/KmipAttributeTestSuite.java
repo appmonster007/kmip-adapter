@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.structure.Attribute;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 /**
  * Interface defining the test contract for KMIP attributes.

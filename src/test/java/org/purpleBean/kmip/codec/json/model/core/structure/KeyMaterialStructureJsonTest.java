@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.KeyMaterialStructure;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.structure.KeyMaterialStructure;
+import org.purplebean.kmip.model.core.type.ActivationDate;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyMaterialStructure JSON Serialization Tests")
 class KeyMaterialStructureJsonTest

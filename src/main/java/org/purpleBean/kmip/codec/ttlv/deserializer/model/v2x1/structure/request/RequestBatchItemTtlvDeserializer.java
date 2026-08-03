@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.MessageExtension;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
-import org.purpleBean.kmip.model.v2x1.structure.request.RequestBatchItem;
-import org.purpleBean.kmip.model.v2x1.type.Ephemeral;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.MessageExtension;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
+import org.purplebean.kmip.model.v2x1.structure.request.RequestBatchItem;
+import org.purplebean.kmip.model.v2x1.type.Ephemeral;
 
 public class RequestBatchItemTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RequestBatchItem,

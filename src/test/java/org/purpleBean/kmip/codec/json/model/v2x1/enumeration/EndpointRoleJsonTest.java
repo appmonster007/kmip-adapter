@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.json.model.v2x1.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.EndpointRole;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("EndpointRole JSON Serialization")
 class EndpointRoleJsonTest extends AbstractJsonSerializationTestSuite<EndpointRole> {

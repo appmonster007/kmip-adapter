@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.ProfileName;
-import org.purpleBean.kmip.model.v2x1.structure.ProfileInformation;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.ProfileName;
+import org.purplebean.kmip.model.v2x1.structure.ProfileInformation;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ProfileInformation Ttlv Serialization Tests")
 class ProfileInformationTtlvTest extends AbstractTtlvSerializationTestSuite<ProfileInformation> {

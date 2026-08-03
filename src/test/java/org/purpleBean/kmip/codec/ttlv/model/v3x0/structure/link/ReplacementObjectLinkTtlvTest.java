@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v3x0.structure.link;
+package org.purplebean.kmip.codec.ttlv.model.v3x0.structure.link;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v3x0.structure.link.ReplacementObjectLink;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v3x0.structure.link.ReplacementObjectLink;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ReplacementObjectLink Ttlv Serialization Tests")
 class ReplacementObjectLinkTtlvTest

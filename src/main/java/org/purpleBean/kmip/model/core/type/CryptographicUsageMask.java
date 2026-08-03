@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.model.core.type;
+package org.purplebean.kmip.model.core.type;
 
 import lombok.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.*;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.json.model.v1x2.structure.request;
+package org.purplebean.kmip.codec.json.model.v1x2.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
-import org.purpleBean.kmip.model.v1x2.structure.request.RequestHeader;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.BatchCount;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
+import org.purplebean.kmip.model.v1x2.structure.request.RequestHeader;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RequestHeader Json Serialization Tests")
 class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHeader> {

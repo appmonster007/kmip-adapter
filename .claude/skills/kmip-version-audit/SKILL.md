@@ -34,7 +34,7 @@ The audit runs `scripts/audit_supported_versions.py` which:
 cd /Users/prathitaswar/Desktop/Dev/IdeaProjects/kmip-adapter
 # Check if regeneration needed
 git log -1 --format='%ai' docs/kmip-spec/kmip-all-versions-data.json
-git log -1 --format='%ai' src/main/java/org/purpleBean/kmip/model/
+git log -1 --format='%ai' src/main/java/org/purplebean/kmip/model/
 ```
 If the model is newer, invoke the `kmip-scrape-spec` skill first.
 
@@ -85,6 +85,6 @@ Summary to user:
 - **Always trust the spec over project history.** If a class has historically included `V1_2` for a v2.0+ enum, that's drift to fix, not "established convention".
 - **Per-value `supportedVersions` matter too.** When tightening class-level versions, also tighten any `Standard.X(value, "Name", KmipSpec.<dropped>)` entries that referenced the dropped version. The audit doesn't catch this yet — manually grep:
   ```bash
-  grep -nE 'KmipSpec\.<DROPPED>' src/main/java/org/purpleBean/kmip/model/core/enumeration/<ClassName>.java
+  grep -nE 'KmipSpec\.<DROPPED>' src/main/java/org/purplebean/kmip/model/core/enumeration/<ClassName>.java
   ```
 - **UNMATCHED entries are not always wrong** — `OpaqueDataType` exists in the project but the spec defines no Standard values for it (vendor-extensions only). Investigate before concluding the audit is wrong.

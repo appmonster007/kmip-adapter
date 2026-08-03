@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purplebean.kmip.model.core.structure;
 
 import java.util.List;
 import java.util.Map;
@@ -8,16 +8,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.type.DerivationData;
-import org.purpleBean.kmip.model.core.type.InitializationVector;
-import org.purpleBean.kmip.model.core.type.IterationCount;
-import org.purpleBean.kmip.model.core.type.Salt;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.type.DerivationData;
+import org.purplebean.kmip.model.core.type.InitializationVector;
+import org.purplebean.kmip.model.core.type.IterationCount;
+import org.purplebean.kmip.model.core.type.Salt;
 
 @Data
 @Builder(toBuilder = true)

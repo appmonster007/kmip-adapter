@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.enumeration.PutFunction;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SymmetricKey;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.PutOpRequestPayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.PutFunction;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SymmetricKey;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.PutOpRequestPayload;
 
 public class PutOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<PutOpRequestPayload> {
 

@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.v2x1.structure.PrivateKeyAttributes;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.v2x1.structure.PrivateKeyAttributes;
 
 public class PrivateKeyAttributesTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PrivateKeyAttributes,

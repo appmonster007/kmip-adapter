@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.structure;
+package org.purplebean.kmip.model.v2x1.structure;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,23 +9,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.enumeration.ValidationAuthorityType;
-import org.purpleBean.kmip.model.core.enumeration.ValidationType;
-import org.purpleBean.kmip.model.v2x1.type.ValidationAuthorityCountry;
-import org.purpleBean.kmip.model.v2x1.type.ValidationAuthorityUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationCertificateIdentifier;
-import org.purpleBean.kmip.model.v2x1.type.ValidationCertificateUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationLevel;
-import org.purpleBean.kmip.model.v2x1.type.ValidationProfile;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVendorUri;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVersionMajor;
-import org.purpleBean.kmip.model.v2x1.type.ValidationVersionMinor;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.ValidationAuthorityType;
+import org.purplebean.kmip.model.core.enumeration.ValidationType;
+import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityCountry;
+import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationCertificateIdentifier;
+import org.purplebean.kmip.model.v2x1.type.ValidationCertificateUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationLevel;
+import org.purplebean.kmip.model.v2x1.type.ValidationProfile;
+import org.purplebean.kmip.model.v2x1.type.ValidationVendorUri;
+import org.purplebean.kmip.model.v2x1.type.ValidationVersionMajor;
+import org.purplebean.kmip.model.v2x1.type.ValidationVersionMinor;
 
 @Data
 @Builder(toBuilder = true)

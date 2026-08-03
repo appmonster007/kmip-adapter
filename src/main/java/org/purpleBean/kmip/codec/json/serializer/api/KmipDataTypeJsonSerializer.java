@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.json.serializer.api;
+package org.purplebean.kmip.codec.json.serializer.api;
 
 import com.fasterxml.jackson.databind.JsonSerializer;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import org.purpleBean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipDataType;
 
 /**
  * Base JSON serializer for {@link KmipDataType} objects.

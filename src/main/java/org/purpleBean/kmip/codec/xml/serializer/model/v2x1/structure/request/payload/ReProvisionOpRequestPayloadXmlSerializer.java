@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ReProvisionOpRequestPayload;
+import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ReProvisionOpRequestPayload;
 
 public class ReProvisionOpRequestPayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<ReProvisionOpRequestPayload> {

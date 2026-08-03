@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purplebean.kmip.codec.ttlv;
 
 import java.util.ServiceLoader;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvModule;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvSerializer;
-import org.purpleBean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvModule;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
+import org.purplebean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer;
 
 /**
  * A {@link TtlvModule} that automatically discovers and registers KMIP-specific TTLV serializers

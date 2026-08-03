@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.serializer.model.v2x1.structure;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v2x1.structure.CapabilityInformation;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v2x1.structure.CapabilityInformation;
 
 public class CapabilityInformationJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<CapabilityInformation> {

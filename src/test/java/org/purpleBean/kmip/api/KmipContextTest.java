@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Unit tests for {@link KmipContext}.

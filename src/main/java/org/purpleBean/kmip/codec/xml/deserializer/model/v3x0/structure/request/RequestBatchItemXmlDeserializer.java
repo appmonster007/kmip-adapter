@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v3x0.structure.request;
+package org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.MessageExtension;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.Ephemeral;
-import org.purpleBean.kmip.model.v3x0.structure.request.RequestBatchItem;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.MessageExtension;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.Ephemeral;
+import org.purplebean.kmip.model.v3x0.structure.request.RequestBatchItem;
 
 public class RequestBatchItemXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RequestBatchItem,

@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.xml.model.v2x1.enumeration;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.v2x1.enumeration.Pkcs11Function;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Pkcs11Function Xml Serialization Tests")
 class Pkcs11FunctionXmlTest extends AbstractXmlSerializationTestSuite<Pkcs11Function> {

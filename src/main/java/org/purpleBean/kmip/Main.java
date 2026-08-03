@@ -1,4 +1,4 @@
-package org.purpleBean.kmip;
+package org.purplebean.kmip;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,26 +12,26 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.request.RequestMessageStructure;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.enumeration.NameType;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.structure.Certificate;
-import org.purpleBean.kmip.model.core.structure.Name;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.model.core.type.AttributeIndex;
-import org.purpleBean.kmip.model.core.type.CertificateValue;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.request.RequestMessageStructure;
+import org.purplebean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.codec.ttlv.TtlvObject;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.CertificateType;
+import org.purplebean.kmip.model.core.enumeration.NameType;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.structure.Attribute;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.core.structure.Name;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestBatchItem;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestHeader;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestPayload;
+import org.purplebean.kmip.model.core.type.ActivationDate;
+import org.purplebean.kmip.model.core.type.AttributeIndex;
+import org.purplebean.kmip.model.core.type.CertificateValue;
 
 public class Main {
 

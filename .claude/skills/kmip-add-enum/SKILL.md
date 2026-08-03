@@ -22,10 +22,10 @@ KMIP overloads several tags across encoding types — the SAME KMIP tag can carr
 ```bash
 NAME=YourEnum   # e.g., Data, UniqueIdentifier, ItemType
 # 1. Does the KMIP tag already exist in KmipTag.Standard?
-grep -nE "\b${NAME^^/ /_}\b|${NAME^^}\b" src/main/java/org/purpleBean/kmip/api/KmipTag.java
+grep -nE "\b${NAME^^/ /_}\b|${NAME^^}\b" src/main/java/org/purplebean/kmip/api/KmipTag.java
 # 2. Does any existing Java class already register that tag?
-TAG_CONST=$(grep -E "^\s+[A-Z_]+\(0x[0-9A-Fa-f]+, \"${NAME}\"" src/main/java/org/purpleBean/kmip/api/KmipTag.java | sed -E 's/^\s+([A-Z_]+).*/\1/')
-grep -rn "KmipTag\.Standard\.${TAG_CONST}\.inst()" src/main/java/org/purpleBean/kmip/model/
+TAG_CONST=$(grep -E "^\s+[A-Z_]+\(0x[0-9A-Fa-f]+, \"${NAME}\"" src/main/java/org/purplebean/kmip/api/KmipTag.java | sed -E 's/^\s+([A-Z_]+).*/\1/')
+grep -rn "KmipTag\.Standard\.${TAG_CONST}\.inst()" src/main/java/org/purplebean/kmip/model/
 ```
 
 **Three outcomes**:
@@ -81,8 +81,8 @@ If the entry is missing or malformed, stop — recommend running the `kmip-scrap
 
 ### 2. Read a peer class
 For shape conventions, read one of:
-- `src/main/java/org/purpleBean/kmip/model/core/enumeration/State.java` — full reference, also implements `KmipAttribute`
-- `src/main/java/org/purpleBean/kmip/model/core/enumeration/ObjectClass.java` — v3.0-only example
+- `src/main/java/org/purplebean/kmip/model/core/enumeration/State.java` — full reference, also implements `KmipAttribute`
+- `src/main/java/org/purplebean/kmip/model/core/enumeration/ObjectClass.java` — v3.0-only example
 
 Note the static-block registration pattern: `KmipDataType.register`, `KmipAttribute.register` (if applicable), `KmipEnumeration.register`.
 

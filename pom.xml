@@ -372,7 +372,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
-                    <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                    <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                     <classpathScope>test</classpathScope>
                 </configuration>
             </plugin>
@@ -428,8 +428,8 @@
                         <configuration>
                             <!-- Restrict instrumentation to project classes to avoid instrumenting JDK modules -->
                             <includes>
-                                <include>org/purpleBean/*</include>
-                                <include>org/purpleBean/**</include>
+                                <include>org/purplebean/*</include>
+                                <include>org/purplebean/**</include>
                             </includes>
                         </configuration>
                     </execution>
@@ -554,7 +554,7 @@
                                     <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                                    <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                                     <classpathScope>test</classpathScope>
                                     <arguments>
                                         <!-- keep default runner settings; users can override with -Dbench.args=... -->
@@ -610,7 +610,7 @@
                                     <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <mainClass>org.purpleBean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
+                                    <mainClass>org.purplebean.kmip.benchmark.JmhBenchmarkRunner</mainClass>
                                     <classpathScope>test</classpathScope>
                                     <cleanupDaemonThreads>false</cleanupDaemonThreads>
                                     <arguments>

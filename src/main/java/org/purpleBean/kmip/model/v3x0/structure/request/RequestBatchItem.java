@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v3x0.structure.request;
+package org.purplebean.kmip.model.v3x0.structure.request;
 
 import java.util.List;
 import java.util.Map;
@@ -8,17 +8,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
-import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.MessageExtension;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.Ephemeral;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestBatchItemStructure;
+import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.MessageExtension;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.Ephemeral;
 
 /**
  * KMIP 3.0 Request Batch Item. Identical to the v2.1 Request Batch Item (§8.1.3, v2.1) except

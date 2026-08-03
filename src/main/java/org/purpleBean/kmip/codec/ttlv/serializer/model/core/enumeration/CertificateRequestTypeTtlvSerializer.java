@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration;
+package org.purplebean.kmip.codec.ttlv.serializer.model.core.enumeration;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.core.enumeration.CertificateRequestType;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.core.enumeration.CertificateRequestType;
 
 public class CertificateRequestTypeTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<CertificateRequestType> {

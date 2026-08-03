@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import java.util.List;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KeyMaterial;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.CustomAttribute;
-import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.model.core.type.KeyMaterialByteString;
+import org.purplebean.kmip.api.KeyMaterial;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.CustomAttribute;
+import org.purplebean.kmip.model.core.structure.KeyValueStructure;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.model.core.type.KeyMaterialByteString;
 
 public class KeyValueStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyValueStructure> {
 

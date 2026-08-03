@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipStructure;
 
 /**
  * Base domain suite for objects implementing KmipStructure.

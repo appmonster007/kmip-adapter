@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.model.v2x1.type;
+package org.purplebean.kmip.model.v2x1.type;
 
 import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 
 @DisplayName("Pkcs11InputParameters Domain Tests")

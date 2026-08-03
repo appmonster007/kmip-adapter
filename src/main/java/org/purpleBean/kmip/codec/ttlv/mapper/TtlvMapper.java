@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv.mapper;
+package org.purplebean.kmip.codec.ttlv.mapper;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
 /**
  * A central class for mapping Java objects to and from their TTLV (Tag-Type-Length-Value) byte

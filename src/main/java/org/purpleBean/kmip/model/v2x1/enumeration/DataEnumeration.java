@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.enumeration;
+package org.purplebean.kmip.model.v2x1.enumeration;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,19 +14,19 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
 
 /**
  * KMIP Data Enumeration (OASIS kmip-spec-v2.0 §11.13, Table 406 / v2.1 Table 406 / v3.0).
  *
  * <p>Discriminates the kind of data carried in operation payloads (Encrypt, Decrypt, Hash,
  * MAC, RNG Retrieve, Sign, Signature Verify). Shares KMIP tag {@code 0x4200C2} with
- * {@link org.purpleBean.kmip.model.core.type.DataByteString}; the two are distinguished by
+ * {@link org.purplebean.kmip.model.core.type.DataByteString}; the two are distinguished by
  * encoding type — {@code Enumeration} (this class) versus {@code ByteString} (DataByteString).</p>
  *
  * <p><b>Java-naming note:</b> the spec name is just "Data" but the bare identifier
@@ -35,7 +35,7 @@ import org.purpleBean.kmip.api.KmipTag;
  */
 @Data
 @Builder(toBuilder = true)
-public class DataEnumeration implements KmipEnumeration, org.purpleBean.kmip.api.DataValue {
+public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api.DataValue {
   public static final KmipTag kmipTag = KmipTag.Standard.DATA.inst();
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);

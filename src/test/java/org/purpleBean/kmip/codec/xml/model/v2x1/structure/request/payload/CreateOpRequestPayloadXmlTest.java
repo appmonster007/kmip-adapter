@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.CreateOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.CreateOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CreateOpRequestPayload Xml Serialization Tests")
 class CreateOpRequestPayloadXmlTest
@@ -26,7 +26,7 @@ class CreateOpRequestPayloadXmlTest
     return CreateOpRequestPayload
         .builder()
         .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-        .attributes(org.purpleBean.kmip.model.v2x1.structure.Attributes
+        .attributes(org.purplebean.kmip.model.v2x1.structure.Attributes
             .builder()
             .attribute(CryptographicAlgorithm.Standard.AES.inst())
             .build())
@@ -38,7 +38,7 @@ class CreateOpRequestPayloadXmlTest
     return CreateOpRequestPayload
         .builder()
         .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-        .attributes(org.purpleBean.kmip.model.v2x1.structure.Attributes
+        .attributes(org.purplebean.kmip.model.v2x1.structure.Attributes
             .builder()
             .attribute(CryptographicAlgorithm.Standard.AES.inst())
             .build())

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v3x0.type;
+package org.purplebean.kmip.codec.json.model.v3x0.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.type.OtpInterval;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.type.OtpInterval;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("OtpInterval Json Serialization Tests")
 class OtpIntervalJsonTest extends AbstractJsonSerializationTestSuite<OtpInterval> {

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.type;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.CertificateIssuerO;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.CertificateIssuerO;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CertificateIssuerO Ttlv Serialization Tests")
 class CertificateIssuerOTtlvTest extends AbstractTtlvSerializationTestSuite<CertificateIssuerO> {

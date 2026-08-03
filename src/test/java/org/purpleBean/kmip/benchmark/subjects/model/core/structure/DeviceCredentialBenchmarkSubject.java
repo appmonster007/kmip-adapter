@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.DeviceCredential;
-import org.purpleBean.kmip.model.core.type.DeviceSerialNumber;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.DeviceCredential;
+import org.purplebean.kmip.model.core.type.DeviceSerialNumber;
 
 public class DeviceCredentialBenchmarkSubject extends KmipBenchmarkSubject<DeviceCredential> {
 

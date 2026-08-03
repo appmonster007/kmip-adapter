@@ -1,20 +1,20 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.DataValue;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.IVCounterNonce;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.EncryptOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
-import org.purpleBean.kmip.model.v2x1.type.CorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.FinalIndicator;
-import org.purpleBean.kmip.model.v2x1.type.InitIndicator;
+import org.purplebean.kmip.api.DataValue;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.type.IVCounterNonce;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.EncryptOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
+import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
 public class EncryptOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<EncryptOpRequestPayload,

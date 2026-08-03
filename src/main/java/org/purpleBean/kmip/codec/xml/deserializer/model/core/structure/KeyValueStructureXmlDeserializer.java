@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KeyMaterial;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.KeyValueStructure;
+import org.purplebean.kmip.api.KeyMaterial;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.KeyValueStructure;
 
 public class KeyValueStructureXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyValueStructure,

@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.json.model.v3x0.structure.link;
+package org.purplebean.kmip.codec.json.model.v3x0.structure.link;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v3x0.structure.link.DerivedObjectLink;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v3x0.structure.link.DerivedObjectLink;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DerivedObjectLink Json Serialization Tests")
 class DerivedObjectLinkJsonTest extends AbstractJsonSerializationTestSuite<DerivedObjectLink> {

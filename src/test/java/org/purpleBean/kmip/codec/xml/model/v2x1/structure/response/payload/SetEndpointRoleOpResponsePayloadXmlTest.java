@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.EndpointRole;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SetEndpointRoleOpResponsePayload Xml Serialization Tests")
 class SetEndpointRoleOpResponsePayloadXmlTest

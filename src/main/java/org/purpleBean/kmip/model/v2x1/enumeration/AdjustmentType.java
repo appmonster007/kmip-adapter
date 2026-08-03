@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.enumeration;
+package org.purplebean.kmip.model.v2x1.enumeration;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,12 +14,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
 
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
@@ -36,7 +36,7 @@ import org.purpleBean.kmip.api.KmipTag;
  * </ul>
  *
  * @see KmipEnumeration
- * @see org.purpleBean.kmip.operation.AdjustAttribute
+ * @see org.purplebean.kmip.operation.AdjustAttribute
  */
 @Data
 @Builder(toBuilder = true)

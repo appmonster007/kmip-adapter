@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.json.serializer.model.v1x2.structure.response.payload;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.JoinSplitKeyOpResponsePayload;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.JoinSplitKeyOpResponsePayload;
 
 public class JoinSplitKeyOpResponsePayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<JoinSplitKeyOpResponsePayload> {

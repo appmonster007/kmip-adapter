@@ -13,16 +13,16 @@ You verify that every KMIP type is correctly registered across all six SPI files
 
 | File | Purpose |
 |---|---|
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.api.KmipDataType` | Master type registry — every KmipDataType implementation |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer` | TTLV serializers |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer` | TTLV deserializers |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer` | JSON serializers |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer` | JSON deserializers |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer` | XML serializers |
-| `src/main/resources/META-INF/services/org.purpleBean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer` | XML deserializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.api.KmipDataType` | Master type registry — every KmipDataType implementation |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer` | TTLV serializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeserializer` | TTLV deserializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer` | JSON serializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer` | JSON deserializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer` | XML serializers |
+| `src/main/resources/META-INF/services/org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer` | XML deserializers |
 
 Plus the benchmark registry under test resources:
-- `src/test/resources/META-INF/services/org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject`
+- `src/test/resources/META-INF/services/org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject`
 
 ## Standard workflow
 
@@ -48,9 +48,9 @@ A type listed in `KmipDataType` master file but missing from one of the six code
 python3 - <<'PY'
 import pathlib
 base = pathlib.Path("src/main/resources/META-INF/services")
-master = set((base / "org.purpleBean.kmip.api.KmipDataType").read_text().splitlines())
+master = set((base / "org.purplebean.kmip.api.KmipDataType").read_text().splitlines())
 for f in base.iterdir():
-    if f.name == "org.purpleBean.kmip.api.KmipDataType": continue
+    if f.name == "org.purplebean.kmip.api.KmipDataType": continue
     s = set(f.read_text().splitlines())
     # codec lines look like ...codec.<fmt>.serializer.model.core.enumeration.State<Fmt>Serializer
     # strip codec/format prefix + trailing TypeSer/TypeDes suffix to compare against master
@@ -61,7 +61,7 @@ PY
 (In practice: list the type FQNs from each file, normalize by stripping the codec/format prefix and the trailing `Json|Xml|Ttlv`+`Serializer|Deserializer`, and diff against the master FQN set.)
 
 ### Repair workflow
-1. **Determine the missing entries.** Each missing entry has a deterministic FQN — for type `org.purpleBean.kmip.model.core.enumeration.Data`, the TTLV serializer is `org.purpleBean.kmip.codec.ttlv.serializer.model.core.enumeration.DataTtlvSerializer`.
+1. **Determine the missing entries.** Each missing entry has a deterministic FQN — for type `org.purplebean.kmip.model.core.enumeration.Data`, the TTLV serializer is `org.purplebean.kmip.codec.ttlv.serializer.model.core.enumeration.DataTtlvSerializer`.
 2. **Append to the correct file.** Use `Edit` with `old_string` = the alphabetically preceding line and `new_string` = preceding + new + (no trailing newline manipulation).
 3. **Re-sort the file** by reading it, sorting lines, and writing back.
 4. **Verify**:

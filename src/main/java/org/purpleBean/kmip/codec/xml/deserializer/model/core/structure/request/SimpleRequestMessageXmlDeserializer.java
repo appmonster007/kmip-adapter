@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.request;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.structure.request;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestBatchItemStructure;
-import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestBatchItemStructure;
+import org.purplebean.kmip.api.request.RequestHeaderStructure;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestMessage;
 
 public class SimpleRequestMessageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SimpleRequestMessage,

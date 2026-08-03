@@ -42,7 +42,7 @@ So that I can model ticket-based session objects used in Login and DelegatedLogi
     - This will generate the model, serializers, deserializers, and test stubs.
 
 - [ ] **Task 2: Review and Refine Generated Code**
-    - [ ] **Model:** Verify `Ticket.java` in `src/main/java/org/purpleBean/kmip/model/v2_1/structure/` has the correct fields (`TicketType` and `TicketValue`), supported versions, and required field enforcement.
+    - [ ] **Model:** Verify `Ticket.java` in `src/main/java/org/purplebean/kmip/model/v2x1/structure/` has the correct fields (`TicketType` and `TicketValue`), supported versions, and required field enforcement.
     - [ ] **SPI Registration:** Confirm that the `bmad-generate-kmip-code` skill has correctly registered `Ticket` in the `META-INF/services` files.
 
 - [ ] **Task 3: Complete and Verify Tests**
@@ -58,8 +58,8 @@ So that I can model ticket-based session objects used in Login and DelegatedLogi
 ## Dev Notes
 
 ### Package Location
-- New structure: `src/main/java/org/purpleBean/kmip/model/v2_1/structure/`
-- New tests: `src/test/java/org/purpleBean/kmip/codec/{ttlv,json,xml}/model/v2_1/structure/TicketXxxTest.java`
+- New structure: `src/main/java/org/purplebean/kmip/model/v2x1/structure/`
+- New tests: `src/test/java/org/purplebean/kmip/codec/{ttlv,json,xml}/model/v2x1/structure/TicketXxxTest.java`
 
 ### Key Tags (already defined in `KmipTag.java`)
 - `KmipTag.Standard.TICKET` → 0x420149, supported from V2_1
@@ -67,7 +67,7 @@ So that I can model ticket-based session objects used in Login and DelegatedLogi
 - `KmipTag.Standard.TICKET_VALUE` → 0x42014B
 
 ### Known Dependencies
-- `TicketType` enumeration: `src/main/java/org/purpleBean/kmip/model/core/enumeration/TicketType.java` (already exists, codec-registered)
+- `TicketType` enumeration: `src/main/java/org/purplebean/kmip/model/core/enumeration/TicketType.java` (already exists, codec-registered)
 - `TicketValue`: likely a `ByteString` or similar core type in `model/core/type/` — check `KmipTag.Standard.TICKET_VALUE`'s encoding type; if no dedicated class exists, use the raw `ByteString` / `OctetString` type
 
 ### Downstream Dependency

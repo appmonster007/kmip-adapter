@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.model.v2x1.structure;
 
 import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.type.D;
-import org.purpleBean.kmip.model.v2x1.structure.TransparentEcPrivateKey;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.type.D;
+import org.purplebean.kmip.model.v2x1.structure.TransparentEcPrivateKey;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("TransparentEcPrivateKey Json Serialization Tests")
 class TransparentEcPrivateKeyJsonTest

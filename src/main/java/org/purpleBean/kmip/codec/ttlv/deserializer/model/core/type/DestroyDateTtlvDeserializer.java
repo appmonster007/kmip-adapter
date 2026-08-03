@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.DestroyDate;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.DestroyDate;
 
 public class DestroyDateTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<DestroyDate, DestroyDate.DestroyDateBuilder> {

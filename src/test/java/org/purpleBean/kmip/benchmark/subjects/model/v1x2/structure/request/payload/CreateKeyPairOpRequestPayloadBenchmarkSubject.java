@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
 
 public class CreateKeyPairOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CreateKeyPairOpRequestPayload> {

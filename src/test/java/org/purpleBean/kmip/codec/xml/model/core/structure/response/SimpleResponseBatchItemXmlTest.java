@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure.response;
+package org.purplebean.kmip.codec.xml.model.core.structure.response;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.ResultReason;
-import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
-import org.purpleBean.kmip.model.core.type.ResultMessage;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.ResultReason;
+import org.purplebean.kmip.model.core.enumeration.ResultStatus;
+import org.purplebean.kmip.model.core.structure.response.SimpleResponseBatchItem;
+import org.purplebean.kmip.model.core.structure.response.SimpleResponsePayload;
+import org.purplebean.kmip.model.core.type.ResultMessage;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SimpleResponseBatchItem Xml Serialization Tests")
 class SimpleResponseBatchItemXmlTest

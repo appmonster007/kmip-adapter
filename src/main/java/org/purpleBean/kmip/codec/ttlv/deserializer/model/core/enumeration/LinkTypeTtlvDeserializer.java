@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.enumeration;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.LinkType;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.LinkType;
 
 public class LinkTypeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<LinkType, LinkType.LinkTypeBuilder> {

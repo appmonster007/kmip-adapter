@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.json.deserializer;
+package org.purplebean.kmip.codec.json.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

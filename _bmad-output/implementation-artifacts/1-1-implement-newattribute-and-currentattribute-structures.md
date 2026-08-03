@@ -43,7 +43,7 @@ So that I can model attribute-carrying KMIP structures used in SetAttribute and 
     - This will generate the model, serializers, deserializers, and test stubs for both structures.
 
 - [ ] **Task 2: Review and Refine Generated Code**
-    - [ ] **Model:** Verify `NewAttribute.java` and `CurrentAttribute.java` in `src/main/java/org/purpleBean/kmip/model/v2_1/structure/` correctly wrap a single `Attribute` child and have the correct supported versions.
+    - [ ] **Model:** Verify `NewAttribute.java` and `CurrentAttribute.java` in `src/main/java/org/purplebean/kmip/model/v2x1/structure/` correctly wrap a single `Attribute` child and have the correct supported versions.
     - [ ] **SPI Registration:** Confirm that the `bmad-generate-kmip-code` skill has correctly registered `NewAttribute` and `CurrentAttribute` in the `META-INF/services` files.
 
 - [ ] **Task 3: Complete and Verify Tests**
@@ -62,10 +62,10 @@ So that I can model attribute-carrying KMIP structures used in SetAttribute and 
 ## Dev Notes
 
 ### Package Location
-- New structures: `src/main/java/org/purpleBean/kmip/model/v2_1/structure/`
-- New tests (Ttlv): `src/test/java/org/purpleBean/kmip/codec/ttlv/model/v2_1/structure/`
-- New tests (Json): `src/test/java/org/purpleBean/kmip/codec/json/model/v2_1/structure/`
-- New tests (Xml): `src/test/java/org/purpleBean/kmip/codec/xml/model/v2_1/structure/`
+- New structures: `src/main/java/org/purplebean/kmip/model/v2x1/structure/`
+- New tests (Ttlv): `src/test/java/org/purplebean/kmip/codec/ttlv/model/v2x1/structure/`
+- New tests (Json): `src/test/java/org/purplebean/kmip/codec/json/model/v2x1/structure/`
+- New tests (Xml): `src/test/java/org/purplebean/kmip/codec/xml/model/v2x1/structure/`
 
 ### Key Tags (already defined in `KmipTag.java`)
 - `KmipTag.Standard.NEW_ATTRIBUTE` → 0x42013D, supported from V2_1

@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.TtlvDataType;
-import org.purpleBean.kmip.model.core.structure.VendorExtension;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.TtlvDataType;
+import org.purplebean.kmip.model.core.structure.VendorExtension;
 
 public class VendorExtensionBenchmarkSubject extends KmipBenchmarkSubject<VendorExtension> {
 

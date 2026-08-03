@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.Fips186Variation;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
-import org.purpleBean.kmip.model.v2x1.structure.RngParameters;
-import org.purpleBean.kmip.model.v2x1.type.PredictionResistance;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DrbgAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.Fips186Variation;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.model.v2x1.structure.RngParameters;
+import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
 public class RngParametersJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RngParameters, RngParameters.RngParametersBuilder> {

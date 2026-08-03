@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.Certificate;
-import org.purpleBean.kmip.model.core.type.CertificateValue;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CertificateType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.core.type.CertificateValue;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ImportOpRequestPayload Json Serialization Tests")
 class ImportOpRequestPayloadJsonTest

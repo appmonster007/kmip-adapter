@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.model.v2x1.structure.response.payload;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("ProcessOpResponsePayload Domain Tests")
 class ProcessOpResponsePayloadTest
@@ -26,7 +26,7 @@ class ProcessOpResponsePayloadTest
     return ProcessOpResponsePayload
         .builder()
         .asynchronousCorrelationValue(
-            org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(
+            org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue.of(
                 new byte[] {0x01, 0x02}))
         .build();
   }

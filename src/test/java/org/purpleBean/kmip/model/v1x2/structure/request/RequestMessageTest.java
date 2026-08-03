@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.model.v1x2.structure.request;
+package org.purplebean.kmip.model.v1x2.structure.request;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CreateOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.core.type.BatchCount;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("RequestMessage Domain Tests")
 class RequestMessageTest extends AbstractKmipStructureTestSuite<RequestMessage> {

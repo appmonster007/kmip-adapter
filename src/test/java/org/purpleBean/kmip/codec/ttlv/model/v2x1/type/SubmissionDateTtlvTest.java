@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.type;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.type;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.SubmissionDate;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SubmissionDate Ttlv Serialization Tests")
 class SubmissionDateTtlvTest extends AbstractTtlvSerializationTestSuite<SubmissionDate> {

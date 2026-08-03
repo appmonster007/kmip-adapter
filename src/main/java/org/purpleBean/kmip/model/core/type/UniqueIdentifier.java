@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.model.core.type;
+package org.purplebean.kmip.model.core.type;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.*;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.util.StringUtils;
 
 import java.util.Set;
 
@@ -20,11 +20,11 @@ import java.util.Set;
  * round-trip (de)serialization preserves it.
  * <p>
  * The Enumeration variant (v2.1+ ID-Placeholder / batch-item references) is NOT represented here
- * — it is owned exclusively by {@link org.purpleBean.kmip.model.v2x1.enumeration.UniqueIdentifier}
- * (a proper {@link org.purpleBean.kmip.api.KmipEnumeration}), to avoid a registry collision on
+ * — it is owned exclusively by {@link org.purplebean.kmip.model.v2x1.enumeration.UniqueIdentifier}
+ * (a proper {@link org.purplebean.kmip.api.KmipEnumeration}), to avoid a registry collision on
  * {@code (tag=UNIQUE_IDENTIFIER, encoding=ENUMERATION)}.
  *
- * @see org.purpleBean.kmip.model.v2x1.enumeration.UniqueIdentifier
+ * @see org.purplebean.kmip.model.v2x1.enumeration.UniqueIdentifier
  */
 @Data
 @Builder(toBuilder = true)

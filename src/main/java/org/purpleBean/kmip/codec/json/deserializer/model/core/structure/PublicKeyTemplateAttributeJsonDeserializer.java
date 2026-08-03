@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.structure.Attribute;
-import org.purpleBean.kmip.model.core.structure.Name;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.structure.Attribute;
+import org.purplebean.kmip.model.core.structure.Name;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 
 public class PublicKeyTemplateAttributeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PublicKeyTemplateAttribute,

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.test;
+package org.purplebean.kmip.test;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * Base test class providing common setup and utilities for KMIP tests. Follows the Template Method

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.model.core.type;
+package org.purplebean.kmip.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("IVCounterNonce Domain Tests")
 class IVCounterNonceTest extends AbstractKmipDataTypeTestSuite<IVCounterNonce> {

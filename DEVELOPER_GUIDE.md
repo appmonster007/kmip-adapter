@@ -44,7 +44,7 @@ Git
 ### Project Structure
 
 ```
-src/main/java/org/purpleBean/kmip/
+src/main/java/org/purplebean/kmip/
 ├── KmipDataType.java           # Base interface
 ├── KmipEnumeration.java        # Enumeration interface
 ├── KmipAttribute.java          # Attribute interface
@@ -57,7 +57,7 @@ src/main/java/org/purpleBean/kmip/
 │   ├── enumeration/          # KMIP enumerations
 │   ├── structure/            # KMIP structures
 │   └── ActivationDateAttribute.java
-└── v1_2/                     # Version-specific types
+└── v1x2/                     # Version-specific types
 ```
 
 ## KMIP Type Architecture

@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.type;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs12FriendlyName;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Pkcs12FriendlyName Ttlv Serialization Tests")
 class Pkcs12FriendlyNameTtlvTest extends AbstractTtlvSerializationTestSuite<Pkcs12FriendlyName> {

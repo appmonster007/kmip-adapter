@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipEnumeration;
 
 /**
  * Base domain suite for objects implementing KmipEnumeration.

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v3x0.structure.response;
+package org.purplebean.kmip.model.v3x0.structure.response;
 
 import java.util.List;
 import java.util.Map;
@@ -8,19 +8,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.response.ResponseBatchItemStructure;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.ResultReason;
-import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
-import org.purpleBean.kmip.model.core.structure.MessageExtension;
-import org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue;
-import org.purpleBean.kmip.model.core.type.ResultMessage;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.response.ResponseBatchItemStructure;
+import org.purplebean.kmip.api.response.ResponsePayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.enumeration.ResultReason;
+import org.purplebean.kmip.model.core.enumeration.ResultStatus;
+import org.purplebean.kmip.model.core.structure.MessageExtension;
+import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
+import org.purplebean.kmip.model.core.type.ResultMessage;
 
 /**
  * KMIP 3.0 Response Batch Item. Identical to the v2.1 Response Batch Item (§8.2.3, v2.1) except

@@ -74,7 +74,7 @@ tasks:
     desc: Run JMH using JmhBenchmarkRunner (skip tests)
     cmds:
       - echo "Running performance benchmarks via runner..."
-      - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purpleBean.kmip.benchmark.JmhBenchmarkRunner"
+      - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purplebean.kmip.benchmark.JmhBenchmarkRunner"
     deps: [install]
 
   perf:

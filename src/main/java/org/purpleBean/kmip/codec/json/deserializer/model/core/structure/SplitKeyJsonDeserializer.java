@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SplitKey;
-import org.purpleBean.kmip.model.core.type.KeyPartIdentifier;
-import org.purpleBean.kmip.model.core.type.PrimeFieldSize;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
-import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SplitKey;
+import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
+import org.purplebean.kmip.model.core.type.PrimeFieldSize;
+import org.purplebean.kmip.model.core.type.SplitKeyParts;
+import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
 public class SplitKeyJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {

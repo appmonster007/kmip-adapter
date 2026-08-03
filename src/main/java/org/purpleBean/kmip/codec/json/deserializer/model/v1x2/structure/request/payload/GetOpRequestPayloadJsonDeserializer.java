@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v1x2.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.GetOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.GetOpRequestPayload;
 
 public class GetOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<GetOpRequestPayload,
@@ -35,7 +35,7 @@ public class GetOpRequestPayloadJsonDeserializer extends
       case KmipTag.Standard.KEY_FORMAT_TYPE ->
           builder.keyFormatType(ctxt.readValue(p, KeyFormatType.class));
       case KmipTag.Standard.KEY_WRAP_TYPE -> builder.keyWrapType(
-          ctxt.readValue(p, org.purpleBean.kmip.model.core.enumeration.KeyWrapType.class));
+          ctxt.readValue(p, org.purplebean.kmip.model.core.enumeration.KeyWrapType.class));
       case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
           builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
       case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->

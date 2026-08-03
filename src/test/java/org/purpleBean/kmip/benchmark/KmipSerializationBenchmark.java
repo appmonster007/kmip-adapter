@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.benchmark;
+package org.purplebean.kmip.benchmark;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
@@ -15,9 +15,9 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
 
 /**
  * JMH benchmark harness delegating to pluggable KmipBenchmarkSubject implementations.
@@ -109,7 +109,7 @@ public class KmipSerializationBenchmark {
             "No KmipBenchmarkSubject implementations discovered. " +
                 "Ensure you have ServiceLoader registrations under " +
                 "src/test/resources/META-INF/services/" +
-                "org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject");
+                "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
       }
       REGISTRY.putAll(discovered);
       allSubjects = REGISTRY.values();

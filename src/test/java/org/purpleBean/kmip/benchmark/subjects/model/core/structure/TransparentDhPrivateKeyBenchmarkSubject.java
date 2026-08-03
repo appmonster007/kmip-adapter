@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import java.math.BigInteger;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.TransparentDhPrivateKey;
-import org.purpleBean.kmip.model.core.type.G;
-import org.purpleBean.kmip.model.core.type.J;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.Q;
-import org.purpleBean.kmip.model.core.type.X;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.TransparentDhPrivateKey;
+import org.purplebean.kmip.model.core.type.G;
+import org.purplebean.kmip.model.core.type.J;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.Q;
+import org.purplebean.kmip.model.core.type.X;
 
 public class TransparentDhPrivateKeyBenchmarkSubject
     extends KmipBenchmarkSubject<TransparentDhPrivateKey> {

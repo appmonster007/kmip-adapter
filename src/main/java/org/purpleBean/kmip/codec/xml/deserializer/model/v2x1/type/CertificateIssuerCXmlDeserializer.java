@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v2x1.type;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.v2x1.type.CertificateIssuerC;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v2x1.type.CertificateIssuerC;
 
 public class CertificateIssuerCXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CertificateIssuerC,

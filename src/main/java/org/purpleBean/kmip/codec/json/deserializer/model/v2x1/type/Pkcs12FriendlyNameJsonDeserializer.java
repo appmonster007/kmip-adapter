@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.type;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs12FriendlyName;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
 
 public class Pkcs12FriendlyNameJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs12FriendlyName,

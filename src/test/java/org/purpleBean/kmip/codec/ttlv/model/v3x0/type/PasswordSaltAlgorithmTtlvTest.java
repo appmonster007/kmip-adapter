@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v3x0.type;
+package org.purplebean.kmip.codec.ttlv.model.v3x0.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PasswordSaltAlgorithm Ttlv Serialization Tests")
 class PasswordSaltAlgorithmTtlvTest

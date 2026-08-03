@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.response.payload;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.type.LastChangeDate;
-import org.purpleBean.kmip.model.core.type.LeaseTime;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.ObtainLeaseOpResponsePayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.type.LastChangeDate;
+import org.purplebean.kmip.model.core.type.LeaseTime;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.ObtainLeaseOpResponsePayload;
 
 public class ObtainLeaseOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ObtainLeaseOpResponsePayload> {

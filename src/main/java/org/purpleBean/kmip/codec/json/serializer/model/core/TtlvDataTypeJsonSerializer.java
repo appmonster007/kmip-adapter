@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.core;
+package org.purplebean.kmip.codec.json.serializer.model.core;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.core.TtlvDataType;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.core.TtlvDataType;
 
 public class TtlvDataTypeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<TtlvDataType> {
 }

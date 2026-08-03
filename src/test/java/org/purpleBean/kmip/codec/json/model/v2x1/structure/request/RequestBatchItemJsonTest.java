@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.request;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.request.RequestBatchItem;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.request.RequestBatchItem;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RequestBatchItem Json Serialization Tests")
 class RequestBatchItemJsonTest extends AbstractJsonSerializationTestSuite<RequestBatchItem> {

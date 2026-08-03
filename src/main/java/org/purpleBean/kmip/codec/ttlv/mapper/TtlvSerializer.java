@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.mapper;
+package org.purplebean.kmip.codec.ttlv.mapper;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;

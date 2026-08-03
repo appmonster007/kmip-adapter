@@ -1,21 +1,21 @@
-package org.purpleBean.kmip.model.v3x0.structure;
+package org.purplebean.kmip.model.v3x0.structure;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.type.IterationCount;
-import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSalt;
-import org.purpleBean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
-import org.purpleBean.kmip.model.v3x0.type.SaltedPassword;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.type.IterationCount;
+import org.purplebean.kmip.model.core.type.Password;
+import org.purplebean.kmip.model.v3x0.type.PasswordSalt;
+import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
+import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
 /**
  * KMIP PasswordCredential structure (KMIP v3.0).

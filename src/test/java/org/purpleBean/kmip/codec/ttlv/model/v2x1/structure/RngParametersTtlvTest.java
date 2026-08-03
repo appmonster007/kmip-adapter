@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
-import org.purpleBean.kmip.model.v2x1.structure.RngParameters;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
+import org.purplebean.kmip.model.v2x1.structure.RngParameters;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RngParameters Ttlv Serialization Tests")
 class RngParametersTtlvTest extends AbstractTtlvSerializationTestSuite<RngParameters> {

@@ -1,22 +1,22 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.structure.DerivationParameters;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.DerivationData;
-import org.purpleBean.kmip.model.core.type.InitializationVector;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.DeriveKeyOpRequestPayload;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DerivationMethod;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.structure.DerivationParameters;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.core.type.DerivationData;
+import org.purplebean.kmip.model.core.type.InitializationVector;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.DeriveKeyOpRequestPayload;
 
 public class DeriveKeyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DeriveKeyOpRequestPayload> {

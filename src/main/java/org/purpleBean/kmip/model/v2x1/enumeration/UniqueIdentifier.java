@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.enumeration;
+package org.purplebean.kmip.model.v2x1.enumeration;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,32 +14,32 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.type.AttributeValue;
 
 /**
  * KMIP Unique Identifier Enumeration (OASIS kmip-spec-v2.0+ §11.58 / v2.1 Table 489).
  *
  * <p>Identifies an object that the server should resolve to a managed object in operation
  * payloads. Shares KMIP tag {@code 0x420094} with
- * {@link org.purpleBean.kmip.model.core.type.UniqueIdentifier} (the TextString form used in
+ * {@link org.purplebean.kmip.model.core.type.UniqueIdentifier} (the TextString form used in
  * v1.x); the two are distinguished by encoding type — {@code Enumeration} (this class) versus
  * {@code TextString} (the type-package sibling).</p>
  *
  * <p>The class name matches the type-package peer (the
- * {@link org.purpleBean.kmip.model.core.type.AsynchronousIndicator}
- * / {@link org.purpleBean.kmip.model.v2x1.enumeration.AsynchronousIndicator} precedent);
+ * {@link org.purplebean.kmip.model.core.type.AsynchronousIndicator}
+ * / {@link org.purplebean.kmip.model.v2x1.enumeration.AsynchronousIndicator} precedent);
  * consumers disambiguate by import.</p>
  *
- * <p>{@link org.purpleBean.kmip.model.core.type.UniqueIdentifier} is a concrete class (not an
+ * <p>{@link org.purplebean.kmip.model.core.type.UniqueIdentifier} is a concrete class (not an
  * interface), so this class cannot implement it — it only shares the KMIP tag value with it, not
  * a Java type relationship. The two are independently registered under different
- * {@link org.purpleBean.kmip.api.EncodingType} keys ({@code Enumeration} here vs.
+ * {@link org.purplebean.kmip.api.EncodingType} keys ({@code Enumeration} here vs.
  * {@code TextString}/{@code Integer}/{@code Identifier}/{@code Reference}/{@code NameReference}
  * there), so generic {@code KmipDataType} dispatch never needs to cross-cast between them.</p>
  */

@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.core.structure.TransparentDhPublicKey;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.core.structure.TransparentDhPublicKey;
 
 public class TransparentDhPublicKeyTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<TransparentDhPublicKey> {

@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v3x0.structure;
+package org.purplebean.kmip.codec.ttlv.model.v3x0.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.enumeration.DeactivationReasonCode;
-import org.purpleBean.kmip.model.v3x0.structure.DeactivationReason;
-import org.purpleBean.kmip.model.v3x0.type.DeactivationMessage;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.enumeration.DeactivationReasonCode;
+import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
+import org.purplebean.kmip.model.v3x0.type.DeactivationMessage;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DeactivationReason Ttlv Serialization Tests")
 class DeactivationReasonTtlvTest extends AbstractTtlvSerializationTestSuite<DeactivationReason> {

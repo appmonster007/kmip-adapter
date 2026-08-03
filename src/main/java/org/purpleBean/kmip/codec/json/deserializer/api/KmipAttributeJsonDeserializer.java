@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.json.deserializer.api;
+package org.purplebean.kmip.codec.json.deserializer.api;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipAttribute;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipAttribute;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipTag;
 
 /**
  * JSON deserializer for {@link KmipAttribute} objects.

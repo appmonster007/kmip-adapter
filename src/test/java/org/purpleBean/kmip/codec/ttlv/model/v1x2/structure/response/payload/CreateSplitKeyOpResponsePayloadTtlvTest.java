@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.model.v1x2.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.CreateSplitKeyOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.CreateSplitKeyOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateSplitKeyOpResponsePayload Ttlv Serialization Tests")
 class CreateSplitKeyOpResponsePayloadTtlvTest

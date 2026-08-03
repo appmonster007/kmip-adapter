@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v2x1.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.Certificate;
-import org.purpleBean.kmip.model.core.type.CertificateValue;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.CertificateType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.core.type.CertificateValue;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
 
 public class ImportOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ImportOpRequestPayload> {

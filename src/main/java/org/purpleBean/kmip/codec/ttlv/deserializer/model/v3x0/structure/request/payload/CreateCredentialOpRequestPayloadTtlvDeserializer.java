@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.CredentialValue;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.CredentialType;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
+import org.purplebean.kmip.api.CredentialValue;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
 
 public class CreateCredentialOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CreateCredentialOpRequestPayload,

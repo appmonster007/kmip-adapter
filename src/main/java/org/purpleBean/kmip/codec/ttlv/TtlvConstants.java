@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purplebean.kmip.codec.ttlv;
 
 import java.nio.ByteOrder;
 

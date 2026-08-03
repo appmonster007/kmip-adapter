@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.PgpKey;
-import org.purpleBean.kmip.model.core.type.PgpKeyVersion;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.PgpKey;
+import org.purplebean.kmip.model.core.type.PgpKeyVersion;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PgpKey Xml Serialization Tests")
 class PgpKeyXmlTest extends AbstractXmlSerializationTestSuite<PgpKey> {

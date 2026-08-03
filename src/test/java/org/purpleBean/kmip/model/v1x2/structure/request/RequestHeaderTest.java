@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.model.v1x2.structure.request;
+package org.purplebean.kmip.model.v1x2.structure.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
-import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.BatchCount;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
+import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("RequestHeader Domain Tests")
 class RequestHeaderTest extends AbstractKmipStructureTestSuite<RequestHeader> {

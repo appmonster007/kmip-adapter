@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.test;
+package org.purplebean.kmip.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

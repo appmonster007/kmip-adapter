@@ -41,19 +41,19 @@ The codec registry is keyed on `(KmipSpec, tag)`. When two classes register for 
 
 ```
 # Structure with new fields in v2.1:
-v1_2/structure/request/RequestHeader.java   supportedVersions = {V1_0, V1_1, V1_2, V1_3, V1_4}
-v2_1/structure/request/RequestHeader.java   supportedVersions = {V2_0, V2_1, V3_0}
+v1x2/structure/request/RequestHeader.java   supportedVersions = {V1_0, V1_1, V1_2, V1_3, V1_4}
+v2x1/structure/request/RequestHeader.java   supportedVersions = {V2_0, V2_1, V3_0}
 
 # Enum where values were added in v2.1:
 core/enumeration/Operation.java             supportedVersions = {UnknownVersion, V1_2} (values up to v1.2)
-v2_1/enumeration/Operation.java             supportedVersions = {UnknownVersion, V2_1, V3_0} (adds new values)
+v2x1/enumeration/Operation.java             supportedVersions = {UnknownVersion, V2_1, V3_0} (adds new values)
 
 # Datatype where encoding type changed in v3.0:
-v2_1/type/SomeValue.java                    supportedVersions = {V2_1}
-v3_0/type/SomeValue.java                    supportedVersions = {V3_0} (different encoding)
+v2x1/type/SomeValue.java                    supportedVersions = {V2_1}
+v3x0/type/SomeValue.java                    supportedVersions = {V3_0} (different encoding)
 ```
 
-If v3.0 further changes a v2.1 type: create the `v3_0/` class and narrow the v2_1 class's `supportedVersions` to exclude `V3_0`.
+If v3.0 further changes a v2.1 type: create the `v3x0/` class and narrow the v2x1 class's `supportedVersions` to exclude `V3_0`.
 
 ---
 
@@ -77,7 +77,7 @@ These types implement special interfaces (`RequestMessageStructure`, `RequestHea
 **Step A — Narrow the previous version's class** if its `supportedVersions` includes the new version's specs. Edit the field directly:
 
 ```java
-// v1_2/structure/request/RequestBatchItem.java — before generating v2_1 version
+// v1x2/structure/request/RequestBatchItem.java — before generating v2x1 version
 // Change from: Set.of(UnknownVersion, V1_2, V1_3, V1_4, V2_0, V2_1, V3_0)
 // Change to:   Set.of(UnknownVersion, V1_2, V1_3, V1_4)
 ```
@@ -88,10 +88,10 @@ Also update the static block's loop condition to match.
 
 ```bash
 # v2.1 message framing — all six types
-./scripts/generators/generate.sh structure --all -m v2_1 -s request \
+./scripts/generators/generate.sh structure --all -m v2x1 -s request \
     RequestMessage RequestHeader RequestBatchItem
 
-./scripts/generators/generate.sh structure --all -m v2_1 -s response \
+./scripts/generators/generate.sh structure --all -m v2x1 -s response \
     ResponseMessage ResponseHeader ResponseBatchItem
 ```
 
@@ -106,7 +106,7 @@ Also update the static block's loop condition to match.
 **Step D — Fill in scalar prerequisites.** If a new version introduces new scalar fields (e.g., `ClientCorrelationValue` in v2.1), generate them first:
 
 ```bash
-./scripts/generators/generate.sh datatype --all -m v2_1 --type String \
+./scripts/generators/generate.sh datatype --all -m v2x1 --type String \
     ClientCorrelationValue ServerCorrelationValue
 ```
 
@@ -147,20 +147,20 @@ Map the KMIP "introduced in" version to the correct `-m` flag:
 | Introduced in | Module flag | `supportedVersions` generated | `defaultSpec` generated |
 |---------------|-------------|-------------------------------|-------------------------|
 | 1.2           | `-m core`   | `{UnknownVersion, V1_2}`      | `KmipSpec.V1_2`         |
-| 1.3           | `-m v1_3`   | `{UnknownVersion, V1_3}`      | `KmipSpec.V1_3`         |
-| 1.4           | `-m v1_4`   | `{UnknownVersion, V1_4}`      | `KmipSpec.V1_4`         |
-| 2.0           | `-m v2_0`   | `{UnknownVersion, V2_0}`      | `KmipSpec.V2_0`         |
-| 2.1           | `-m v2_1`   | `{UnknownVersion, V2_1, V3_0}`| `KmipSpec.V2_1`         |
-| 3.0           | `-m v3_0`   | `{UnknownVersion, V3_0}`      | `KmipSpec.V3_0`         |
+| 1.3           | `-m v1x3`   | `{UnknownVersion, V1_3}`      | `KmipSpec.V1_3`         |
+| 1.4           | `-m v1x4`   | `{UnknownVersion, V1_4}`      | `KmipSpec.V1_4`         |
+| 2.0           | `-m v2x0`   | `{UnknownVersion, V2_0}`      | `KmipSpec.V2_0`         |
+| 2.1           | `-m v2x1`   | `{UnknownVersion, V2_1, V3_0}`| `KmipSpec.V2_1`         |
+| 3.0           | `-m v3x0`   | `{UnknownVersion, V3_0}`      | `KmipSpec.V3_0`         |
 
 **Cross-verify in spec HTML before choosing a module.** Read the relevant heading in:
 - `docs/kmip-spec/v1.x/scraped/enumerations-v1.2.md` (and v1.3, v1.4)
 - `docs/kmip-spec/v2.x/scraped/enumerations-v2.0.md` (and v2.1)
 - `docs/kmip-spec/v3.x/scraped/enumerations-v3.0.md`
 
-If the entity appears in v1.2, use `core`. If it first appears in v2.1, use `v2_1`. If it's present across multiple versions, choose the earliest as the module and note the ceiling (last-seen version) — you'll need it for per-value `supportedVersions` in the `Standard` enum.
+If the entity appears in v1.2, use `core`. If it first appears in v2.1, use `v2x1`. If it's present across multiple versions, choose the earliest as the module and note the ceiling (last-seen version) — you'll need it for per-value `supportedVersions` in the `Standard` enum.
 
-**For version-separated re-implementations** (e.g., a v2.1 variant of a v1.2 structure), use the *new* version's module (`-m v2_1`) even though the type name existed before.
+**For version-separated re-implementations** (e.g., a v2.1 variant of a v1.2 structure), use the *new* version's module (`-m v2x1`) even though the type name existed before.
 
 ---
 
@@ -204,7 +204,7 @@ For each value:
 1. Find its first appearance (check v1.2 → v3.0 scraped files in order).
 2. Find its last appearance (last version where the row is present).
 3. Map to the `KmipSpec` set:
-   - Present from v1.2 through v3.0 → `KmipSpec.UnknownVersion, KmipSpec.V1_2`  *(ceiling is the current maximum; if v1_3, v1_4 etc. also have it add those)*
+   - Present from v1.2 through v3.0 → `KmipSpec.UnknownVersion, KmipSpec.V1_2`  *(ceiling is the current maximum; if v1x3, v1x4 etc. also have it add those)*
    - Removed in v2.0 → `KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4`
    - Introduced in v2.1, still in v3.0 → `KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0`
    - Only in v3.0 → `KmipSpec.UnknownVersion, KmipSpec.V3_0`
@@ -321,46 +321,46 @@ mvn test -pl . -Dtest="KmipV21VerificationTest#diagnoseFirst10" 2>&1 | grep -E "
 Omit `--all` and all individual flags:
 
 ```bash
-./scripts/generators/generate.sh enum -m v2_1 MyNewEnum
+./scripts/generators/generate.sh enum -m v2x1 MyNewEnum
 ```
 
 ---
 
 ## Generated file layout
 
-For `./scripts/generators/generate.sh enum --all -m v2_1 AdjustmentType`:
+For `./scripts/generators/generate.sh enum --all -m v2x1 AdjustmentType`:
 
 ```
-src/main/java/org/purpleBean/kmip/model/v2_1/enumeration/AdjustmentType.java
-src/main/java/org/purpleBean/kmip/codec/json/serializer/model/v2_1/enumeration/AdjustmentTypeJsonSerializer.java
-src/main/java/org/purpleBean/kmip/codec/json/deserializer/model/v2_1/enumeration/AdjustmentTypeJsonDeserializer.java
-src/main/java/org/purpleBean/kmip/codec/xml/serializer/model/v2_1/enumeration/AdjustmentTypeXmlSerializer.java
-src/main/java/org/purpleBean/kmip/codec/xml/deserializer/model/v2_1/enumeration/AdjustmentTypeXmlDeserializer.java
-src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/model/v2_1/enumeration/AdjustmentTypeTtlvSerializer.java
-src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/model/v2_1/enumeration/AdjustmentTypeTtlvDeserializer.java
-src/test/java/org/purpleBean/kmip/model/v2_1/enumeration/AdjustmentTypeTest.java
-src/test/java/org/purpleBean/kmip/codec/json/model/v2_1/enumeration/AdjustmentTypeJsonTest.java
-src/test/java/org/purpleBean/kmip/codec/xml/model/v2_1/enumeration/AdjustmentTypeXmlTest.java
-src/test/java/org/purpleBean/kmip/codec/ttlv/model/v2_1/enumeration/AdjustmentTypeTtlvTest.java
-src/test/java/org/purpleBean/kmip/benchmark/subjects/model/v2_1/enumeration/AdjustmentTypeBenchmarkSubject.java
+src/main/java/org/purplebean/kmip/model/v2x1/enumeration/AdjustmentType.java
+src/main/java/org/purplebean/kmip/codec/json/serializer/model/v2x1/enumeration/AdjustmentTypeJsonSerializer.java
+src/main/java/org/purplebean/kmip/codec/json/deserializer/model/v2x1/enumeration/AdjustmentTypeJsonDeserializer.java
+src/main/java/org/purplebean/kmip/codec/xml/serializer/model/v2x1/enumeration/AdjustmentTypeXmlSerializer.java
+src/main/java/org/purplebean/kmip/codec/xml/deserializer/model/v2x1/enumeration/AdjustmentTypeXmlDeserializer.java
+src/main/java/org/purplebean/kmip/codec/ttlv/serializer/model/v2x1/enumeration/AdjustmentTypeTtlvSerializer.java
+src/main/java/org/purplebean/kmip/codec/ttlv/deserializer/model/v2x1/enumeration/AdjustmentTypeTtlvDeserializer.java
+src/test/java/org/purplebean/kmip/model/v2x1/enumeration/AdjustmentTypeTest.java
+src/test/java/org/purplebean/kmip/codec/json/model/v2x1/enumeration/AdjustmentTypeJsonTest.java
+src/test/java/org/purplebean/kmip/codec/xml/model/v2x1/enumeration/AdjustmentTypeXmlTest.java
+src/test/java/org/purplebean/kmip/codec/ttlv/model/v2x1/enumeration/AdjustmentTypeTtlvTest.java
+src/test/java/org/purplebean/kmip/benchmark/subjects/model/v2x1/enumeration/AdjustmentTypeBenchmarkSubject.java
 META-INF/services entries updated automatically
 ```
 
-For `./scripts/generators/generate.sh structure --all -m v2_1 -s request RequestHeader`:
+For `./scripts/generators/generate.sh structure --all -m v2x1 -s request RequestHeader`:
 
 ```
-src/main/java/org/purpleBean/kmip/model/v2_1/structure/request/RequestHeader.java
-src/main/java/org/purpleBean/kmip/codec/xml/deserializer/model/v2_1/structure/request/RequestHeaderXmlDeserializer.java
-src/main/java/org/purpleBean/kmip/codec/xml/serializer/model/v2_1/structure/request/RequestHeaderXmlSerializer.java
-src/main/java/org/purpleBean/kmip/codec/json/deserializer/model/v2_1/structure/request/RequestHeaderJsonDeserializer.java
-src/main/java/org/purpleBean/kmip/codec/json/serializer/model/v2_1/structure/request/RequestHeaderJsonSerializer.java
-src/main/java/org/purpleBean/kmip/codec/ttlv/deserializer/model/v2_1/structure/request/RequestHeaderTtlvDeserializer.java
-src/main/java/org/purpleBean/kmip/codec/ttlv/serializer/model/v2_1/structure/request/RequestHeaderTtlvSerializer.java
-src/test/java/org/purpleBean/kmip/model/v2_1/structure/request/RequestHeaderTest.java
-src/test/java/org/purpleBean/kmip/codec/xml/model/v2_1/structure/request/RequestHeaderXmlTest.java
-src/test/java/org/purpleBean/kmip/codec/json/model/v2_1/structure/request/RequestHeaderJsonTest.java
-src/test/java/org/purpleBean/kmip/codec/ttlv/model/v2_1/structure/request/RequestHeaderTtlvTest.java
-src/test/java/org/purpleBean/kmip/benchmark/subjects/model/v2_1/structure/request/RequestHeaderBenchmarkSubject.java
+src/main/java/org/purplebean/kmip/model/v2x1/structure/request/RequestHeader.java
+src/main/java/org/purplebean/kmip/codec/xml/deserializer/model/v2x1/structure/request/RequestHeaderXmlDeserializer.java
+src/main/java/org/purplebean/kmip/codec/xml/serializer/model/v2x1/structure/request/RequestHeaderXmlSerializer.java
+src/main/java/org/purplebean/kmip/codec/json/deserializer/model/v2x1/structure/request/RequestHeaderJsonDeserializer.java
+src/main/java/org/purplebean/kmip/codec/json/serializer/model/v2x1/structure/request/RequestHeaderJsonSerializer.java
+src/main/java/org/purplebean/kmip/codec/ttlv/deserializer/model/v2x1/structure/request/RequestHeaderTtlvDeserializer.java
+src/main/java/org/purplebean/kmip/codec/ttlv/serializer/model/v2x1/structure/request/RequestHeaderTtlvSerializer.java
+src/test/java/org/purplebean/kmip/model/v2x1/structure/request/RequestHeaderTest.java
+src/test/java/org/purplebean/kmip/codec/xml/model/v2x1/structure/request/RequestHeaderXmlTest.java
+src/test/java/org/purplebean/kmip/codec/json/model/v2x1/structure/request/RequestHeaderJsonTest.java
+src/test/java/org/purplebean/kmip/codec/ttlv/model/v2x1/structure/request/RequestHeaderTtlvTest.java
+src/test/java/org/purplebean/kmip/benchmark/subjects/model/v2x1/structure/request/RequestHeaderBenchmarkSubject.java
 META-INF/services entries updated automatically
 ```
 
@@ -370,13 +370,13 @@ META-INF/services entries updated automatically
 
 ```bash
 # v2.1 enum — full generation
-./scripts/generators/generate.sh enum --all -m v2_1 AdjustmentType
+./scripts/generators/generate.sh enum --all -m v2x1 AdjustmentType
 
 # v1.2 attribute enum in core
 ./scripts/generators/generate.sh enum --all --attr -m core CryptographicAlgorithm
 
 # v3.0-only structure
-./scripts/generators/generate.sh structure --all -m v3_0 DeactivationReason
+./scripts/generators/generate.sh structure --all -m v3x0 DeactivationReason
 
 # v1.2 string-backed datatype (attribute)
 ./scripts/generators/generate.sh datatype --all --attr --type String UniqueIdentifier
@@ -385,22 +385,22 @@ META-INF/services entries updated automatically
 ./scripts/generators/generate.sh structure --all -m core -s request CreateRequestPayload
 
 # Scaffold only (class + domain test, no codecs)
-./scripts/generators/generate.sh enum --class --domain-test -m v2_1 AdjustmentType
+./scripts/generators/generate.sh enum --class --domain-test -m v2x1 AdjustmentType
 
 # v2.1 scalar prerequisite types for message framing
-./scripts/generators/generate.sh datatype --all -m v2_1 --type String \
+./scripts/generators/generate.sh datatype --all -m v2x1 --type String \
     ClientCorrelationValue ServerCorrelationValue
 
 # v2.1 message framing types (version-separated re-implementations)
-./scripts/generators/generate.sh structure --all -m v2_1 -s request \
+./scripts/generators/generate.sh structure --all -m v2x1 -s request \
     RequestMessage RequestHeader RequestBatchItem
-./scripts/generators/generate.sh structure --all -m v2_1 -s response \
+./scripts/generators/generate.sh structure --all -m v2x1 -s response \
     ResponseMessage ResponseHeader ResponseBatchItem
 
 # v3.0 message framing types (only if v3.0 changes fields vs v2.1)
-./scripts/generators/generate.sh structure --all -m v3_0 -s request \
+./scripts/generators/generate.sh structure --all -m v3x0 -s request \
     RequestMessage RequestHeader RequestBatchItem
-./scripts/generators/generate.sh structure --all -m v3_0 -s response \
+./scripts/generators/generate.sh structure --all -m v3x0 -s response \
     ResponseMessage ResponseHeader ResponseBatchItem
 ```
 
@@ -417,7 +417,7 @@ Applies whenever ANY KMIP type (enum, datatype, structure) differs between spec 
 
 **Generate and fill:**
 - [ ] Generate any new scalar/enum prerequisite types first (bottom-up)
-- [ ] Scaffold the new-version class(es) using the appropriate module flag (`-m v2_1`, `-m v3_0`, etc.)
+- [ ] Scaffold the new-version class(es) using the appropriate module flag (`-m v2x1`, `-m v3x0`, etc.)
 - [ ] Fill each model class: copy from old version, apply spec delta (add/remove/change fields, encoding, composition), update `of()`, `getValue()`, `validate()`
 - [ ] Fill each deserializer's `setValue()` switch: copy from old version, add/remove cases per spec delta
 - [ ] For structure types implementing a named interface (e.g., `RequestHeaderStructure`): add the interface-specific `register()` call to the static block

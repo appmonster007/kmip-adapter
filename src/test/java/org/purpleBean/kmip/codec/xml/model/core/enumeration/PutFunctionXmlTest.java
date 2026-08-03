@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.core.enumeration;
+package org.purplebean.kmip.codec.xml.model.core.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.PutFunction;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.PutFunction;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PutFunction XML Serialization")
 class PutFunctionXmlTest extends AbstractXmlSerializationTestSuite<PutFunction> {

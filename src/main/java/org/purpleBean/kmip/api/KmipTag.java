@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.Collection;
 import java.util.HexFormat;
@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) tag.

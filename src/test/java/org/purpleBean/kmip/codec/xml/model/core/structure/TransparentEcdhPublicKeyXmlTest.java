@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.structure.TransparentEcdhPublicKey;
-import org.purpleBean.kmip.model.core.type.QString;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.structure.TransparentEcdhPublicKey;
+import org.purplebean.kmip.model.core.type.QString;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("TransparentEcdhPublicKey XML Serialization Tests")
 class TransparentEcdhPublicKeyXmlTest

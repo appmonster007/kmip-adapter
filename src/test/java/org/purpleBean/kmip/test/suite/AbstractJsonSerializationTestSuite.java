@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.test.BaseKmipTest;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Reusable JSON serialization/deserialization test suite for KMIP objects.

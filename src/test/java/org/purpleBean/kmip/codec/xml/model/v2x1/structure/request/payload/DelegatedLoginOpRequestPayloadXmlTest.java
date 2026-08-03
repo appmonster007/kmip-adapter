@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.LeaseTime;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.RequestCount;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.LeaseTime;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.RequestCount;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DelegatedLoginOpRequestPayload Xml Serialization Tests")
 class DelegatedLoginOpRequestPayloadXmlTest

@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.Pkcs11Function;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Pkcs11OpRequestPayload Xml Serialization Tests")
 class Pkcs11OpRequestPayloadXmlTest
@@ -20,7 +20,7 @@ class Pkcs11OpRequestPayloadXmlTest
         .builder()
         .pkcs11Function(Pkcs11Function
             .register(0x80000003, "X-Test-Fn",
-                java.util.Set.of(org.purpleBean.kmip.api.KmipSpec.UnknownVersion))
+                java.util.Set.of(org.purplebean.kmip.api.KmipSpec.UnknownVersion))
             .inst())
         .build();
   }
@@ -31,7 +31,7 @@ class Pkcs11OpRequestPayloadXmlTest
         .builder()
         .pkcs11Function(Pkcs11Function
             .register(0x80000004, "X-Var-Fn",
-                java.util.Set.of(org.purpleBean.kmip.api.KmipSpec.UnknownVersion))
+                java.util.Set.of(org.purplebean.kmip.api.KmipSpec.UnknownVersion))
             .inst())
         .build();
   }

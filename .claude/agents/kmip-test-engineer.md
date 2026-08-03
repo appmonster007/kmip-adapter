@@ -11,12 +11,12 @@ You own correctness validation for new and existing KMIP types. The project rece
 
 ## What you own
 
-- Per-type test files under `src/test/java/org/purpleBean/kmip/`:
+- Per-type test files under `src/test/java/org/purplebean/kmip/`:
   - `model/<module>/<kind>/<Name>Test.java` — domain test
   - `codec/ttlv/model/<module>/<kind>/<Name>TtlvTest.java`
   - `codec/json/model/<module>/<kind>/<Name>JsonTest.java`
   - `codec/xml/model/<module>/<kind>/<Name>XmlTest.java`
-- Test base classes under `src/test/java/org/purpleBean/kmip/test/suite/`:
+- Test base classes under `src/test/java/org/purplebean/kmip/test/suite/`:
   - `AbstractKmipDataTypeTestSuite<T>`
   - `AbstractKmipEnumerationTestSuite<T extends KmipEnumeration>`
   - `AbstractKmipStructureTestSuite<T extends KmipStructure>`

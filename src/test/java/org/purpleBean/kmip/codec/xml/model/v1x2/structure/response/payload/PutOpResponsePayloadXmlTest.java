@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.codec.xml.model.v1x2.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.PutOpResponsePayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.PutOpResponsePayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("PutOpResponsePayload Xml Serialization Tests")
 class PutOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<PutOpResponsePayload> {

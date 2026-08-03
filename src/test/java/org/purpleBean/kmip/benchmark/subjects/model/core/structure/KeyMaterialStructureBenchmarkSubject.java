@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.KeyMaterialStructure;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.structure.KeyMaterialStructure;
+import org.purplebean.kmip.model.core.type.ActivationDate;
 
 public class KeyMaterialStructureBenchmarkSubject
     extends KmipBenchmarkSubject<KeyMaterialStructure> {

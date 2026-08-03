@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.TransparentDhPrivateKey;
-import org.purpleBean.kmip.model.core.type.G;
-import org.purpleBean.kmip.model.core.type.J;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.Q;
-import org.purpleBean.kmip.model.core.type.X;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.TransparentDhPrivateKey;
+import org.purplebean.kmip.model.core.type.G;
+import org.purplebean.kmip.model.core.type.J;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.Q;
+import org.purplebean.kmip.model.core.type.X;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("TransparentDhPrivateKey TTLV Serialization Tests")
 class TransparentDhPrivateKeyTtlvTest

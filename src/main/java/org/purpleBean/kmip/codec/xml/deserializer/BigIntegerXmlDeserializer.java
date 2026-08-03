@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml.deserializer;
+package org.purplebean.kmip.codec.xml.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.HexFormat;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
 public class BigIntegerXmlDeserializer extends JsonDeserializer<BigInteger> {
   @Override

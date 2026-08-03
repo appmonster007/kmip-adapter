@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.json.serializer.model.v1x2.structure.request.payload;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CheckOpRequestPayload;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CheckOpRequestPayload;
 
 public class CheckOpRequestPayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<CheckOpRequestPayload> {

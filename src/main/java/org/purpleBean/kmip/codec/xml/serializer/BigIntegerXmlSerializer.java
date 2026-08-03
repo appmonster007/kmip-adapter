@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml.serializer;
+package org.purplebean.kmip.codec.xml.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HexFormat;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
 public class BigIntegerXmlSerializer extends JsonSerializer<BigInteger> {
   @Override

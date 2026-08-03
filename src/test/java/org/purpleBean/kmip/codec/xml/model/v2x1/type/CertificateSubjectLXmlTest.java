@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.type;
+package org.purplebean.kmip.codec.xml.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.CertificateSubjectL;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.CertificateSubjectL;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CertificateSubjectL Xml Serialization Tests")
 class CertificateSubjectLXmlTest extends AbstractXmlSerializationTestSuite<CertificateSubjectL> {

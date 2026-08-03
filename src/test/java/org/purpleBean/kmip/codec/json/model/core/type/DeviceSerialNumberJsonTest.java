@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.core.type;
+package org.purplebean.kmip.codec.json.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.DeviceSerialNumber;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.DeviceSerialNumber;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DeviceSerialNumber JSON Serialization Tests")
 class DeviceSerialNumberJsonTest extends AbstractJsonSerializationTestSuite<DeviceSerialNumber> {

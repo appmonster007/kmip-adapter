@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.xml.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v1x2.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
-import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CreateSplitKeyOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.core.type.SplitKeyParts;
+import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateSplitKeyOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CreateSplitKeyOpRequestPayload Xml Serialization Tests")
 class CreateSplitKeyOpRequestPayloadXmlTest

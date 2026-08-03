@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purplebean.kmip.model.core.structure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.model.core.type.SubjectAlternativeName;
-import org.purpleBean.kmip.model.core.type.SubjectDistinguishedName;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
-import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.model.core.type.SubjectAlternativeName;
+import org.purplebean.kmip.model.core.type.SubjectDistinguishedName;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("X509CertificateSubject Domain Tests")
 class X509CertificateSubjectTest extends AbstractKmipStructureTestSuite<X509CertificateSubject>

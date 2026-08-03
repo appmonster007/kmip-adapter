@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.xml.serializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.serializer.model.v1x2.structure.request.payload;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.CancelOpRequestPayload;
+import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.CancelOpRequestPayload;
 
 public class CancelOpRequestPayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<CancelOpRequestPayload> {

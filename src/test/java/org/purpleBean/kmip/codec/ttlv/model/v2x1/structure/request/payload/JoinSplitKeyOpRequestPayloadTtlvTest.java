@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.JoinSplitKeyOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.JoinSplitKeyOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("JoinSplitKeyOpRequestPayload Ttlv Serialization Tests")
 class JoinSplitKeyOpRequestPayloadTtlvTest
@@ -12,7 +12,7 @@ class JoinSplitKeyOpRequestPayloadTtlvTest
 
   @Override
   protected void setupDefaultSpec() {
-    defaultSpec = org.purpleBean.kmip.api.KmipSpec.V2_1;
+    defaultSpec = org.purplebean.kmip.api.KmipSpec.V2_1;
   }
 
   @Override

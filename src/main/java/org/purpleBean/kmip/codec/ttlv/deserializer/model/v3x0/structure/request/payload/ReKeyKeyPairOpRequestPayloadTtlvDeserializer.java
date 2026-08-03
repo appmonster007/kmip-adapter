@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
-import org.purpleBean.kmip.model.core.type.Offset;
-import org.purpleBean.kmip.model.v2x1.structure.CommonAttributes;
-import org.purpleBean.kmip.model.v2x1.structure.PrivateKeyAttributes;
-import org.purpleBean.kmip.model.v2x1.structure.PublicKeyAttributes;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayload;
-import org.purpleBean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
+import org.purplebean.kmip.model.core.type.Offset;
+import org.purplebean.kmip.model.v2x1.structure.CommonAttributes;
+import org.purplebean.kmip.model.v2x1.structure.PrivateKeyAttributes;
+import org.purplebean.kmip.model.v2x1.structure.PublicKeyAttributes;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayload;
+import org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
 
 public class ReKeyKeyPairOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ReKeyKeyPairOpRequestPayload,

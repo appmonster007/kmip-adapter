@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.model.v3x0.structure.request.payload;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CredentialType;
-import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
-import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.core.type.Username;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
+import org.purplebean.kmip.model.core.type.Password;
+import org.purplebean.kmip.model.core.type.Username;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("CreateCredentialOpRequestPayload Domain Tests")
 class CreateCredentialOpRequestPayloadTest

@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v2x1.structure;
+package org.purplebean.kmip.benchmark.subjects.model.v2x1.structure;
 
 import java.nio.ByteBuffer;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v2x1.enumeration.TicketType;
-import org.purpleBean.kmip.model.v2x1.structure.Ticket;
-import org.purpleBean.kmip.model.v2x1.type.TicketValue;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
+import org.purplebean.kmip.model.v2x1.structure.Ticket;
+import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
 public class TicketBenchmarkSubject extends KmipBenchmarkSubject<Ticket> {
 

@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.model.v2x1.type;
+package org.purplebean.kmip.model.v2x1.type;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
-import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("ProtectionStorageMask Domain Tests")
 class ProtectionStorageMaskTest extends AbstractKmipDataTypeTestSuite<ProtectionStorageMask>

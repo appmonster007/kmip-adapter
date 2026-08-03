@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KeyValue;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingData;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.api.KeyValue;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.KeyWrappingData;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
 
 public class KeyBlockJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {

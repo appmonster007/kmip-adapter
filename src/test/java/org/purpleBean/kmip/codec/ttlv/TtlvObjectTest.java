@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv;
+package org.purplebean.kmip.codec.ttlv;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.EncodingType;
 
 @DisplayName("TtlvObject Tests")
 class TtlvObjectTest {

@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.type;
+package org.purplebean.kmip.codec.ttlv.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.AttestationCapableIndicator;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.AttestationCapableIndicator;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AttestationCapableIndicator Ttlv Serialization Tests")
 class AttestationCapableIndicatorTtlvTest

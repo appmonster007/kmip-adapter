@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.ManagedObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.ReplaceExisting;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.ManagedObject;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.ReplaceExisting;
 
 public class ImportOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ImportOpRequestPayload,
@@ -39,7 +39,7 @@ public class ImportOpRequestPayloadTtlvDeserializer extends
       case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
           builder.keyWrappingSpecification(mapper.readValue(p, KeyWrappingSpecification.class));
       case KmipTag.Standard.ATTRIBUTES -> builder.attributes(
-          mapper.readValue(p, org.purpleBean.kmip.model.v2x1.structure.Attributes.class));
+          mapper.readValue(p, org.purplebean.kmip.model.v2x1.structure.Attributes.class));
       default -> {
         if (ManagedObject.isManagedObject(nodeTag)) {
           builder.object(mapper.readValue(p, ManagedObject.class));

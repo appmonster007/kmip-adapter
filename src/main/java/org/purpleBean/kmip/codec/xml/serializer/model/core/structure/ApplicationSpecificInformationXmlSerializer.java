@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.xml.serializer.model.core.structure;
+package org.purplebean.kmip.codec.xml.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
-import org.purpleBean.kmip.model.core.structure.ApplicationSpecificInformation;
+import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
+import org.purplebean.kmip.model.core.structure.ApplicationSpecificInformation;
 
 public class ApplicationSpecificInformationXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<ApplicationSpecificInformation> {

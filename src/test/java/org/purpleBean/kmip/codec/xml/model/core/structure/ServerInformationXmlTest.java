@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ServerInformation;
-import org.purpleBean.kmip.model.core.type.NameValue;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ServerInformation;
+import org.purplebean.kmip.model.core.type.NameValue;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ServerInformation Xml Serialization Tests")
 class ServerInformationXmlTest extends AbstractXmlSerializationTestSuite<ServerInformation> {

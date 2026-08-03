@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.core.enumeration;
+package org.purplebean.kmip.codec.xml.model.core.enumeration;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("MaskGenerator XML Serialization")
 class MaskGeneratorXmlTest extends AbstractXmlSerializationTestSuite<MaskGenerator> {

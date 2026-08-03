@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure.request;
+package org.purplebean.kmip.codec.ttlv.model.core.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestBatchItem;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestHeader;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestMessage;
-import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestBatchItem;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestHeader;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestMessage;
+import org.purplebean.kmip.model.core.structure.request.SimpleRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SimpleRequestMessage TTLV Serialization")
 class SimpleRequestMessageTtlvTest

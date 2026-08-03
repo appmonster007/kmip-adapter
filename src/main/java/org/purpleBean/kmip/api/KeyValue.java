@@ -1,6 +1,6 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * Represents the Key Value data type in KMIP.
@@ -20,7 +20,7 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
  *
  * @see KmipDataType
  * @see KeyMaterial
- * @see org.purpleBean.kmip.model.core.structure.KeyBlock
+ * @see org.purplebean.kmip.model.core.structure.KeyBlock
  */
 public interface KeyValue extends KmipDataType {
   /**

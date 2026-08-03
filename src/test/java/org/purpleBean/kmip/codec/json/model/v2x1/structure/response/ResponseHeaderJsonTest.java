@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.response;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.response;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.core.type.TimeStamp;
-import org.purpleBean.kmip.model.v2x1.structure.response.ResponseHeader;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.BatchCount;
+import org.purplebean.kmip.model.core.type.TimeStamp;
+import org.purplebean.kmip.model.v2x1.structure.response.ResponseHeader;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ResponseHeader Json Serialization Tests")
 class ResponseHeaderJsonTest extends AbstractJsonSerializationTestSuite<ResponseHeader> {

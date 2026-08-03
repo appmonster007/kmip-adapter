@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.v2x1.structure.Objects;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.v2x1.structure.Objects;
 
 public class ObjectsJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Objects, Objects.ObjectsBuilder> {
@@ -25,7 +25,7 @@ public class ObjectsJsonDeserializer
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
     switch (nodeTag) {
       case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(
-          ctxt.readValue(p, org.purpleBean.kmip.model.core.type.UniqueIdentifier.class));
+          ctxt.readValue(p, org.purplebean.kmip.model.core.type.UniqueIdentifier.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

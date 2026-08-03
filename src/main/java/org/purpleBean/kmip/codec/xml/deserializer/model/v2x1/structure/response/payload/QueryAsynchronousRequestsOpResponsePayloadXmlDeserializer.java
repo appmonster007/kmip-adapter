@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.structure.response.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.v2x1.structure.AsynchronousRequest;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v2x1.structure.AsynchronousRequest;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
 
 public class QueryAsynchronousRequestsOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<QueryAsynchronousRequestsOpResponsePayload,

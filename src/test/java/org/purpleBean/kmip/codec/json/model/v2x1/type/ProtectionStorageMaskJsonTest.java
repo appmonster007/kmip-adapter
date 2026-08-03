@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.type;
+package org.purplebean.kmip.codec.json.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.ProtectionStorageMask;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ProtectionStorageMask Json Serialization Tests")
 class ProtectionStorageMaskJsonTest

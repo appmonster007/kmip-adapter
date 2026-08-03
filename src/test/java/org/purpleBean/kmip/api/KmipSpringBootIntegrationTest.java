@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.purpleBean.kmip.TestApplication;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.TestApplication;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;

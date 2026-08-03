@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.IVCounterNonce;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.DecryptOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
-import org.purpleBean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
-import org.purpleBean.kmip.model.v2x1.type.CorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.FinalIndicator;
-import org.purpleBean.kmip.model.v2x1.type.InitIndicator;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.type.IVCounterNonce;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.DecryptOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
+import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
+import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
 public class DecryptOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DecryptOpRequestPayload,
@@ -39,8 +39,8 @@ public class DecryptOpRequestPayloadTtlvDeserializer extends
       case KmipTag.Standard.CRYPTOGRAPHIC_PARAMETERS ->
           builder.cryptographicParameters(mapper.readValue(p, CryptographicParameters.class));
       case KmipTag.Standard.DATA -> builder.data(
-          (org.purpleBean.kmip.api.DataValue) mapper.readValue(p,
-              org.purpleBean.kmip.api.KmipDataType.class));
+          (org.purplebean.kmip.api.DataValue) mapper.readValue(p,
+              org.purplebean.kmip.api.KmipDataType.class));
       case KmipTag.Standard.IV_COUNTER_NONCE ->
           builder.ivCounterNonce(mapper.readValue(p, IVCounterNonce.class));
       case KmipTag.Standard.CORRELATION_VALUE ->

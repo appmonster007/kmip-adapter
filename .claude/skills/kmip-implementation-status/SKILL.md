@@ -21,7 +21,7 @@ Quick read-only summary of the current implementation status from `docs/kmip-pen
 ```bash
 cd /Users/prathitaswar/Desktop/Dev/IdeaProjects/kmip-adapter
 git log -1 --format='%ai' docs/kmip-pending-implementation.md
-git log -1 --format='%ai' src/main/java/org/purpleBean/kmip/model/
+git log -1 --format='%ai' src/main/java/org/purplebean/kmip/model/
 ```
 If the model directory is newer than the report, warn the user that counts may be stale and suggest `kmip-scrape-spec`.
 

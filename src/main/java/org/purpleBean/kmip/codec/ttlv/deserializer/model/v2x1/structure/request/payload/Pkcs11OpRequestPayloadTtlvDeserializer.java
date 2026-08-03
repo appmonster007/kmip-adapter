@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.enumeration.Pkcs11Function;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs11InputParameters;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs11OutputParameters;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
 public class Pkcs11OpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Pkcs11OpRequestPayload,

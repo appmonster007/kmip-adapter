@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
+package org.purplebean.kmip.codec.ttlv.serializer.model.core.type;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.core.type.FixedFieldLength;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.core.type.FixedFieldLength;
 
 public class FixedFieldLengthTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<FixedFieldLength> {

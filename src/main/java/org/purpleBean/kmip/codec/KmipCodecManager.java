@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec;
+package org.purplebean.kmip.codec;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -8,11 +8,11 @@ import java.io.IOException;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.text.StringEscapeUtils;
-import org.purpleBean.kmip.api.KmipInitializer;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
-import org.purpleBean.kmip.codec.ttlv.KmipTtlvModule;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.codec.xml.KmipXmlModule;
+import org.purplebean.kmip.api.KmipInitializer;
+import org.purplebean.kmip.codec.json.KmipJsonModule;
+import org.purplebean.kmip.codec.ttlv.KmipTtlvModule;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.codec.xml.KmipXmlModule;
 
 /**
  * Manager class for KMIP codec.

@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SplitKey;
-import org.purpleBean.kmip.model.core.type.KeyPartIdentifier;
-import org.purpleBean.kmip.model.core.type.PrimeFieldSize;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
-import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SplitKey;
+import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
+import org.purplebean.kmip.model.core.type.PrimeFieldSize;
+import org.purplebean.kmip.model.core.type.SplitKeyParts;
+import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
 public class SplitKeyTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {

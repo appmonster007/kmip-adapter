@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v3x0.enumeration;
+package org.purplebean.kmip.codec.json.serializer.model.v3x0.enumeration;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v3x0.enumeration.SplitKeyPolynomial;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.v3x0.enumeration.SplitKeyPolynomial;
 
 public class SplitKeyPolynomialJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<SplitKeyPolynomial> {

@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.codec.xml.deserializer.model.v1x2.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.enumeration.KeyWrapType;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.GetOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.KeyWrapType;
+import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.GetOpRequestPayload;
 
 public class GetOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<GetOpRequestPayload,

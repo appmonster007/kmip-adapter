@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v3x0.structure.request.payload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.DeactivationDate;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v3x0.structure.DeactivationReason;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.DeactivateOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.DeactivationDate;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.DeactivateOpRequestPayload;
 
 public class DeactivateOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeactivateOpRequestPayload,

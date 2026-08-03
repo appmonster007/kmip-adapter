@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.structure.UsageLimits;
-import org.purpleBean.kmip.model.v2x1.structure.ObjectGroups;
-import org.purpleBean.kmip.model.v2x1.structure.Operations;
-import org.purpleBean.kmip.model.v2x1.structure.Right;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.UsageLimits;
+import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
+import org.purplebean.kmip.model.v2x1.structure.Operations;
+import org.purplebean.kmip.model.v2x1.structure.Right;
 
 public class RightTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Right, Right.RightBuilder> {
@@ -31,7 +31,7 @@ public class RightTtlvDeserializer
           builder.usageLimits(mapper.readValue(p, UsageLimits.class));
       case KmipTag.Standard.OPERATIONS -> builder.operations(mapper.readValue(p, Operations.class));
       case KmipTag.Standard.OBJECTS -> builder.managedObjects(
-          mapper.readValue(p, org.purpleBean.kmip.model.v2x1.structure.Objects.class));
+          mapper.readValue(p, org.purplebean.kmip.model.v2x1.structure.Objects.class));
       case KmipTag.Standard.OBJECT_GROUPS ->
           builder.objectGroups(mapper.readValue(p, ObjectGroups.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.v2x1.structure.Constraint;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v2x1.structure.Constraint;
 
 public class ConstraintXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Constraint, Constraint.ConstraintBuilder> {

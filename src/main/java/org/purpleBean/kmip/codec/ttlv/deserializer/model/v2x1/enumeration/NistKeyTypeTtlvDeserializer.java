@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.v2x1.enumeration.NistKeyType;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.v2x1.enumeration.NistKeyType;
 
 public class NistKeyTypeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NistKeyType, NistKeyType.NistKeyTypeBuilder> {

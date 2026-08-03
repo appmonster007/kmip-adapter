@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.model.v1x2.structure.response;
+package org.purplebean.kmip.codec.json.model.v1x2.structure.response;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
-import org.purpleBean.kmip.model.v1x2.structure.response.ResponseBatchItem;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.enumeration.ResultStatus;
+import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ResponseBatchItem Json Serialization Tests")
 class ResponseBatchItemJsonTest extends AbstractJsonSerializationTestSuite<ResponseBatchItem> {

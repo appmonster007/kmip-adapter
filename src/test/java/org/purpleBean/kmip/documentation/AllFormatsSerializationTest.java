@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.documentation;
+package org.purplebean.kmip.documentation;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -23,8 +23,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
+import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
+import org.purplebean.kmip.codec.ttlv.TtlvObject;
 
 @Order(Integer.MAX_VALUE)
 class AllFormatsSerializationTest {

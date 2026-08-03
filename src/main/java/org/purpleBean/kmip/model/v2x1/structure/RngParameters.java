@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.structure;
+package org.purplebean.kmip.model.v2x1.structure;
 
 import java.util.Objects;
 import java.util.Set;
@@ -6,20 +6,20 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.Fips186Variation;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
-import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
-import org.purpleBean.kmip.model.core.type.CryptographicLength;
-import org.purpleBean.kmip.model.v2x1.type.PredictionResistance;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DrbgAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.Fips186Variation;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
+import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
+import org.purplebean.kmip.model.core.type.CryptographicLength;
+import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
 @Data
 @Builder(toBuilder = true)

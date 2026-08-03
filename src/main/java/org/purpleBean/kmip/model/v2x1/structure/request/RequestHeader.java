@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.model.v2x1.structure.request;
+package org.purplebean.kmip.model.v2x1.structure.request;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.request.RequestHeaderStructure;
-import org.purpleBean.kmip.model.core.enumeration.AttestationType;
-import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
-import org.purpleBean.kmip.model.core.structure.Authentication;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.*;
-import org.purpleBean.kmip.model.v2x1.enumeration.AsynchronousIndicator;
-import org.purpleBean.kmip.model.v2x1.type.ClientCorrelationValue;
-import org.purpleBean.kmip.model.v2x1.type.ServerCorrelationValue;
+import org.purplebean.kmip.api.*;
+import org.purplebean.kmip.api.request.RequestHeaderStructure;
+import org.purplebean.kmip.model.core.enumeration.AttestationType;
+import org.purplebean.kmip.model.core.enumeration.BatchErrorContinuationOption;
+import org.purplebean.kmip.model.core.structure.Authentication;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.*;
+import org.purplebean.kmip.model.v2x1.enumeration.AsynchronousIndicator;
+import org.purplebean.kmip.model.v2x1.type.ClientCorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.ServerCorrelationValue;
 
 import java.util.List;
 import java.util.Map;

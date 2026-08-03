@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.model.v1x2.structure.response.payload;
 
 import java.util.List;
 import java.util.Map;
@@ -10,15 +10,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.response.ResponsePayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
 @Data
 @Builder(toBuilder = true)
@@ -79,9 +79,9 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
           .get(AttributeName.kmipTag)
           .forEach(item -> builder.attributeName((AttributeName) item));
     }
-    if (map.containsKey(org.purpleBean.kmip.model.v2x1.structure.AttributeReference.kmipTag)) {
+    if (map.containsKey(org.purplebean.kmip.model.v2x1.structure.AttributeReference.kmipTag)) {
       map
-          .get(org.purpleBean.kmip.model.v2x1.structure.AttributeReference.kmipTag)
+          .get(org.purplebean.kmip.model.v2x1.structure.AttributeReference.kmipTag)
           .forEach(builder::attributeReference);
     }
     return builder.build();

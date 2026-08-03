@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.TransparentRsaPublicKey;
-import org.purpleBean.kmip.model.core.type.Modulus;
-import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.TransparentRsaPublicKey;
+import org.purplebean.kmip.model.core.type.Modulus;
+import org.purplebean.kmip.model.core.type.PublicExponent;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("TransparentRsaPublicKey TTLV Serialization Tests")
 class TransparentRsaPublicKeyTtlvTest

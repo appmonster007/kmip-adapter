@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.response.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.response.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v1x2.structure.response.payload.RegisterOpResponsePayload;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v1x2.structure.response.payload.RegisterOpResponsePayload;
 
 public class RegisterOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RegisterOpResponsePayload> {

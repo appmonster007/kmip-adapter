@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.api;
+package org.purplebean.kmip.codec.ttlv.deserializer.api;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvConstants;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.TtlvConstants;
+import org.purplebean.kmip.codec.ttlv.TtlvObject;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * Abstract base class for custom TTLV deserializers of specific {@link KmipDataType}

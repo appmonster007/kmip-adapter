@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.type;
+package org.purplebean.kmip.codec.xml.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs12FriendlyName;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Pkcs12FriendlyName Xml Serialization Tests")
 class Pkcs12FriendlyNameXmlTest extends AbstractXmlSerializationTestSuite<Pkcs12FriendlyName> {

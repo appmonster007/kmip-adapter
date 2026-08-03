@@ -1,13 +1,13 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.structure.response;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.structure.response;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.response.ResponseBatchItemStructure;
-import org.purpleBean.kmip.api.response.ResponseHeaderStructure;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.v2x1.structure.response.ResponseMessage;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.response.ResponseBatchItemStructure;
+import org.purplebean.kmip.api.response.ResponseHeaderStructure;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.v2x1.structure.response.ResponseMessage;
 
 public class ResponseMessageTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ResponseMessage, ResponseMessage.ResponseMessageBuilder> {

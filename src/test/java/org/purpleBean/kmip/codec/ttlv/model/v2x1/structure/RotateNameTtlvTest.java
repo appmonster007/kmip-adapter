@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.enumeration.RotateNameType;
-import org.purpleBean.kmip.model.v2x1.structure.RotateName;
-import org.purpleBean.kmip.model.v2x1.type.RotateNameValue;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.enumeration.RotateNameType;
+import org.purplebean.kmip.model.v2x1.structure.RotateName;
+import org.purplebean.kmip.model.v2x1.type.RotateNameValue;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RotateName Ttlv Serialization Tests")
 class RotateNameTtlvTest extends AbstractTtlvSerializationTestSuite<RotateName> {

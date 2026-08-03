@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.ProfileName;
-import org.purpleBean.kmip.model.v2x1.structure.ProfileInformation;
-import org.purpleBean.kmip.model.v2x1.structure.ProfileVersion;
-import org.purpleBean.kmip.model.v2x1.type.ServerPort;
-import org.purpleBean.kmip.model.v2x1.type.ServerUri;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.ProfileName;
+import org.purplebean.kmip.model.v2x1.structure.ProfileInformation;
+import org.purplebean.kmip.model.v2x1.structure.ProfileVersion;
+import org.purplebean.kmip.model.v2x1.type.ServerPort;
+import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
 public class ProfileInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProfileInformation,

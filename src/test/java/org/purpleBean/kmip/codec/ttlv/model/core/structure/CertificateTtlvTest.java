@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.CertificateType;
-import org.purpleBean.kmip.model.core.structure.Certificate;
-import org.purpleBean.kmip.model.core.type.CertificateValue;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CertificateType;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.core.type.CertificateValue;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Certificate Ttlv Serialization Tests")
 class CertificateTtlvTest extends AbstractTtlvSerializationTestSuite<Certificate> {

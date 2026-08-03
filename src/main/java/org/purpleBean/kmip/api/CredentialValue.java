@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import org.purpleBean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.core.enumeration.CredentialType;
 
 /**
  * Represents the CredentialValue data type in KMIP.
@@ -21,9 +21,9 @@ import org.purpleBean.kmip.model.core.enumeration.CredentialType;
  * </ul>
  *
  * @see KmipDataType
- * @see org.purpleBean.kmip.model.core.structure.Credential
- * @see org.purpleBean.kmip.model.core.structure.UsernameAndPassword
- * @see org.purpleBean.kmip.model.core.structure.X509Certificate
+ * @see org.purplebean.kmip.model.core.structure.Credential
+ * @see org.purplebean.kmip.model.core.structure.UsernameAndPassword
+ * @see org.purplebean.kmip.model.core.structure.X509Certificate
  */
 public interface CredentialValue extends KmipDataType {
   /**

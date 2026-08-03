@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.type;
+package org.purplebean.kmip.codec.ttlv.model.core.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.KeyPartIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyPartIdentifier TTLV Serialization Tests")
 class KeyPartIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<KeyPartIdentifier> {

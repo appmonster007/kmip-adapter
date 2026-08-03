@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.Constraints;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.Constraints;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SetConstraintsOpRequestPayload Xml Serialization Tests")
 class SetConstraintsOpRequestPayloadXmlTest

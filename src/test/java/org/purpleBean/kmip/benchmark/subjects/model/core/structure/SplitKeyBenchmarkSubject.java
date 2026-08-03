@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.structure;
+package org.purplebean.kmip.benchmark.subjects.model.core.structure;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SplitKey;
-import org.purpleBean.kmip.model.core.type.KeyPartIdentifier;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
-import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SplitKey;
+import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
+import org.purplebean.kmip.model.core.type.SplitKeyParts;
+import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
 public class SplitKeyBenchmarkSubject extends KmipBenchmarkSubject<SplitKey> {
 

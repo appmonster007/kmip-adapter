@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure;
 
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.v2x1.structure.Attributes;
-import org.purpleBean.kmip.model.v2x1.structure.DefaultsInformation;
-import org.purpleBean.kmip.model.v2x1.structure.ObjectDefaults;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
+import org.purplebean.kmip.model.v2x1.structure.DefaultsInformation;
+import org.purplebean.kmip.model.v2x1.structure.ObjectDefaults;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DefaultsInformation Xml Serialization Tests")
 class DefaultsInformationXmlTest extends AbstractXmlSerializationTestSuite<DefaultsInformation> {

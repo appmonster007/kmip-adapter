@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.xml.serializer.api;
+package org.purplebean.kmip.codec.xml.serializer.api;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -6,13 +6,13 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.xml.namespace.QName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipMaskType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipMaskType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
 
 /**
  * Abstract base class for XML serialization of {@link KmipDataType} objects.

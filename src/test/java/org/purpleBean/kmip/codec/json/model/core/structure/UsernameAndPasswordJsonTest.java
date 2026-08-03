@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.model.core.structure;
+package org.purplebean.kmip.codec.json.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.UsernameAndPassword;
-import org.purpleBean.kmip.model.core.type.Password;
-import org.purpleBean.kmip.model.core.type.Username;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
+import org.purplebean.kmip.model.core.type.Password;
+import org.purplebean.kmip.model.core.type.Username;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("UsernameAndPassword Json Serialization Tests")
 class UsernameAndPasswordJsonTest extends AbstractJsonSerializationTestSuite<UsernameAndPassword> {

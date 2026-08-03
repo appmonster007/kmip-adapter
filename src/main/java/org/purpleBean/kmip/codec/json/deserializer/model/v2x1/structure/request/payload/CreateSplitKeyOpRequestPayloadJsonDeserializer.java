@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.model.core.type.SplitKeyParts;
-import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import org.purpleBean.kmip.model.v2x1.structure.Attributes;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.CreateSplitKeyOpRequestPayload;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.model.core.type.SplitKeyParts;
+import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.CreateSplitKeyOpRequestPayload;
 
 public class CreateSplitKeyOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CreateSplitKeyOpRequestPayload,

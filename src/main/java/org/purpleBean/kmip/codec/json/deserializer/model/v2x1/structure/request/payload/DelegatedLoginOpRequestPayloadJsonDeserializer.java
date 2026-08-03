@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.request.payload;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.structure.UsageLimits;
-import org.purpleBean.kmip.model.core.type.LeaseTime;
-import org.purpleBean.kmip.model.v2x1.structure.Rights;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
-import org.purpleBean.kmip.model.v2x1.type.RequestCount;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.structure.UsageLimits;
+import org.purplebean.kmip.model.core.type.LeaseTime;
+import org.purplebean.kmip.model.v2x1.structure.Rights;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
 public class DelegatedLoginOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DelegatedLoginOpRequestPayload,

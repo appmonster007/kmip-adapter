@@ -75,7 +75,7 @@ Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>org.purpleBean</groupId>
+    <groupId>org.purplebean</groupId>
     <artifactId>kmip-adapter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
@@ -87,9 +87,9 @@ Add the dependency to your `pom.xml`:
 // Minimal JSON round-trip with a built-in type
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.ProtocolVersion;
-import org.purpleBean.kmip.codec.json.KmipJsonModule;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.ProtocolVersion;
+import org.purplebean.kmip.codec.json.KmipJsonModule;
 
 KmipContext.setSpec(KmipSpec.V1_2);
 try{
@@ -135,7 +135,7 @@ Add to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>org.purpleBean</groupId>
+    <groupId>org.purplebean</groupId>
     <artifactId>kmip-adapter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
@@ -146,10 +146,10 @@ Add to your `pom.xml`:
 #### Creating KMIP Data Types
 
 ```java
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.model.core.enumeration.State;
-import org.purpleBean.kmip.model.core.structure.SampleStructure;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.ActivationDate;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.structure.SampleStructure;
+import org.purplebean.kmip.api.KmipSpec;
 
 // Set KMIP specification context
 KmipContext.setSpec(KmipSpec.V1_2);
@@ -170,8 +170,8 @@ SampleStructure structure = SampleStructure.builder()
 #### Custom Enumeration Registration
 
 ```java
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.State;
 
 // Register custom state values
 State.Value customState = State.register(
@@ -411,9 +411,9 @@ Current test coverage includes:
 
 Note: Per-class codec tests are organized to mirror runtime packages for easier discoverability, for example:
 
-- JSON: `src/test/java/org/purpleBean/kmip/codec/json/common/...`
-- XML: `src/test/java/org/purpleBean/kmip/codec/xml/common/...`
-- TTLV: `src/test/java/org/purpleBean/kmip/codec/ttlv/common/...`
+- JSON: `src/test/java/org/purplebean/kmip/codec/json/common/...`
+- XML: `src/test/java/org/purplebean/kmip/codec/xml/common/...`
+- TTLV: `src/test/java/org/purplebean/kmip/codec/ttlv/common/...`
 
 ## Configuration
 

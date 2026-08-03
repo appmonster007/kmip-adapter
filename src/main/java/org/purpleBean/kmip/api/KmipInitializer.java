@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <p>
  * This class uses the Java Service Provider Interface (SPI) pattern to discover and load all
  * classes that implement the {@link KmipDataType} interface. It reads a service definition file
- * located at {@code META-INF/services/org.purpleBean.kmip.api.KmipDataType}, which should contain
+ * located at {@code META-INF/services/org.purplebean.kmip.api.KmipDataType}, which should contain
  * the fully qualified names of all concrete KMIP data type implementations.
  *
  * <p><b>Key Responsibilities:</b></p>
@@ -57,7 +57,7 @@ public class KmipInitializer {
       try {
         ClassLoader classLoader = KmipInitializer.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(
-            "META-INF/services/org.purpleBean.kmip.api.KmipDataType");
+            "META-INF/services/org.purplebean.kmip.api.KmipDataType");
         if (inputStream != null) {
           try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             reader

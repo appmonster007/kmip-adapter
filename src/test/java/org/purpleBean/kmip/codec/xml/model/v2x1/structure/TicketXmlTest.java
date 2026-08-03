@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.model.v2x1.structure;
+package org.purplebean.kmip.codec.xml.model.v2x1.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.v2x1.enumeration.TicketType;
-import org.purpleBean.kmip.model.v2x1.structure.Ticket;
-import org.purpleBean.kmip.model.v2x1.type.TicketValue;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
+import org.purplebean.kmip.model.v2x1.structure.Ticket;
+import org.purplebean.kmip.model.v2x1.type.TicketValue;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Ticket Xml Serialization Tests")
 class TicketXmlTest extends AbstractXmlSerializationTestSuite<Ticket> {

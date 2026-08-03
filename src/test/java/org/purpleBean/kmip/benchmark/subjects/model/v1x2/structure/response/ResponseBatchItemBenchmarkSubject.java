@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.response;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.response;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
-import org.purpleBean.kmip.model.v1x2.structure.response.ResponseBatchItem;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.core.enumeration.ResultStatus;
+import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
 
 public class ResponseBatchItemBenchmarkSubject extends KmipBenchmarkSubject<ResponseBatchItem> {
 

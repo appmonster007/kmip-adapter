@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.xml.model.v3x0.type;
+package org.purplebean.kmip.codec.xml.model.v3x0.type;
 
 import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v3x0.type.SaltedPassword;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SaltedPassword Xml Serialization Tests")
 class SaltedPasswordXmlTest extends AbstractXmlSerializationTestSuite<SaltedPassword> {

@@ -1,18 +1,18 @@
-package org.purpleBean.kmip.model.v2x1.structure;
+package org.purplebean.kmip.model.v2x1.structure;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.core.type.AttributeName;
-import org.purpleBean.kmip.model.core.type.VendorIdentification;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.VendorIdentification;
 
 /**
  * §5.5 Attribute Reference — identifies an attribute either by vendor+name (custom attributes)

@@ -9,7 +9,7 @@ End-to-end workflow for implementing one of the missing structures listed in `do
 
 ## Inputs needed from user
 - **Structure name** (PascalCase)
-- (Optional) `--module` if version-scoped (e.g., `v3_0`)
+- (Optional) `--module` if version-scoped (e.g., `v3x0`)
 - (Optional) `-s <sub-package>` for nested categorization (e.g., `link` for the typed-link family)
 - (Optional) `--attr` if the structure also implements `KmipAttribute`
 
@@ -44,7 +44,7 @@ Note the conventions:
 ```bash
 cd /Users/prathitaswar/Desktop/Dev/IdeaProjects/kmip-adapter
 ./scripts/generators/generate.sh structure <Name>          # default module=core
-./scripts/generators/generate.sh structure -m v3_0 <Name>  # version-scoped
+./scripts/generators/generate.sh structure -m v3x0 <Name>  # version-scoped
 ./scripts/generators/generate.sh structure -s link <Name>  # nested sub-package
 ```
 

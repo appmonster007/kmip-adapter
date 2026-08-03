@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
+package org.purplebean.kmip.benchmark.subjects.model.v1x2.structure.request.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.structure.KeyBlock;
-import org.purpleBean.kmip.model.core.structure.SymmetricKey;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.v1x2.structure.request.payload.RegisterOpRequestPayload;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.ObjectType;
+import org.purplebean.kmip.model.core.structure.KeyBlock;
+import org.purplebean.kmip.model.core.structure.SymmetricKey;
+import org.purplebean.kmip.model.core.structure.TemplateAttribute;
+import org.purplebean.kmip.model.v1x2.structure.request.payload.RegisterOpRequestPayload;
 
 public class RegisterOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RegisterOpRequestPayload> {

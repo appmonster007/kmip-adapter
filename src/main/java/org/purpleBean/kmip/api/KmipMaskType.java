@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.api;
+package org.purplebean.kmip.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

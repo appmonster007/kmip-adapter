@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.type;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Stack;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipEnumeration;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.TtlvObject;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.util.StringUtils;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipEnumeration;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.TtlvObject;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 public class AttributeValueTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AttributeValue, AttributeValue.AttributeValueBuilder> {

@@ -27,7 +27,7 @@ A **design spec** with these mandatory sections:
 - Java class name (PascalCase, e.g., `OtpCredential`)
 - KMIP tag (hex, e.g., `0x4201A1`) — cite source: spec page or scraper JSON path
 - KMIP encoding type (Enumeration, Structure, ByteString, TextString, Integer, etc.)
-- Package path under `org.purpleBean.kmip.model.<module>.<kind>` — choose `core` unless the type is version-scoped (then `v1_2` / `v2_1` / `v3_0`).
+- Package path under `org.purplebean.kmip.model.<module>.<kind>` — choose `core` unless the type is version-scoped (then `v1x2` / `v2x1` / `v3x0`).
 
 ### 2. Supported versions
 - The `Set<KmipSpec>` that the class will register itself for. Always include `KmipSpec.UnknownVersion` for forward-compat. Then list each `KmipSpec.V*` from the spec coverage.

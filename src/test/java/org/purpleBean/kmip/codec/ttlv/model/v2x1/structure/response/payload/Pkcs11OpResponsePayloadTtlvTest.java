@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
+package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
-import org.purpleBean.kmip.model.v2x1.type.Pkcs11ReturnCode;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Pkcs11OpResponsePayload Ttlv Serialization Tests")
 class Pkcs11OpResponsePayloadTtlvTest

@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.model.core.type;
+package org.purplebean.kmip.model.core.type;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("TimeStamp Domain Tests")
 class TimeStampTest extends AbstractKmipDataTypeTestSuite<TimeStamp> {

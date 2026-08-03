@@ -1,17 +1,17 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
-import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
-import org.purpleBean.kmip.model.core.structure.EncryptionKeyInformation;
-import org.purpleBean.kmip.model.core.structure.KeyWrappingData;
-import org.purpleBean.kmip.model.core.structure.MACSignatureKeyInformation;
-import org.purpleBean.kmip.model.core.type.IVCounterNonce;
-import org.purpleBean.kmip.model.core.type.MACSignature;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.EncodingOption;
+import org.purplebean.kmip.model.core.enumeration.WrappingMethod;
+import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
+import org.purplebean.kmip.model.core.structure.KeyWrappingData;
+import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
+import org.purplebean.kmip.model.core.type.IVCounterNonce;
+import org.purplebean.kmip.model.core.type.MACSignature;
 
 public class KeyWrappingDataXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {

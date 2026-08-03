@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.v1x2.structure.response;
+package org.purplebean.kmip.codec.xml.deserializer.model.v1x2.structure.response;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.AttestationType;
-import org.purpleBean.kmip.model.core.structure.Nonce;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.BatchCount;
-import org.purpleBean.kmip.model.core.type.TimeStamp;
-import org.purpleBean.kmip.model.v1x2.structure.response.ResponseHeader;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.AttestationType;
+import org.purplebean.kmip.model.core.structure.Nonce;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.BatchCount;
+import org.purplebean.kmip.model.core.type.TimeStamp;
+import org.purplebean.kmip.model.v1x2.structure.response.ResponseHeader;
 
 public class ResponseHeaderXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ResponseHeader, ResponseHeader.ResponseHeaderBuilder> {

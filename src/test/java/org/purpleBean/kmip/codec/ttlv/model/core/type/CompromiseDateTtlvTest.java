@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.type;
+package org.purplebean.kmip.codec.ttlv.model.core.type;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.CompromiseDate;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.CompromiseDate;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CompromiseDate TTLV Serialization Tests")
 class CompromiseDateTtlvTest extends AbstractTtlvSerializationTestSuite<CompromiseDate> {

@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.benchmark.report;
+package org.purplebean.kmip.benchmark.report;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import org.purpleBean.kmip.benchmark.util.BenchmarkSubjects;
+import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
 
 /**
  * Utility to transform JMH JSON results into a concise Markdown summary report.

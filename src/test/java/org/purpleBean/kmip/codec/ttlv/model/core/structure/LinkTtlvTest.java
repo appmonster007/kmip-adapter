@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.LinkType;
-import org.purpleBean.kmip.model.core.structure.Link;
-import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.LinkType;
+import org.purplebean.kmip.model.core.structure.Link;
+import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Link Ttlv Serialization Tests")
 class LinkTtlvTest extends AbstractTtlvSerializationTestSuite<Link> {

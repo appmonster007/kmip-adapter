@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.codec.json.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.request.payload.ProcessOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.request.payload.ProcessOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ProcessOpRequestPayload Json Serialization Tests")
 class ProcessOpRequestPayloadJsonTest
@@ -18,7 +18,7 @@ class ProcessOpRequestPayloadJsonTest
     return ProcessOpRequestPayload
         .builder()
         .asynchronousCorrelationValue(
-            org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(
+            org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue.of(
                 new byte[] {0x01, 0x02}))
         .build();
   }
@@ -28,7 +28,7 @@ class ProcessOpRequestPayloadJsonTest
     return ProcessOpRequestPayload
         .builder()
         .asynchronousCorrelationValue(
-            org.purpleBean.kmip.model.core.type.AsynchronousCorrelationValue.of(
+            org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue.of(
                 new byte[] {0x03, 0x04}))
         .build();
   }

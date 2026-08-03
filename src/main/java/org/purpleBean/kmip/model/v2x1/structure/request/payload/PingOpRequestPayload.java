@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.model.v2x1.structure.request.payload;
 
 import java.util.List;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.api.request.RequestPayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.Operation;
 
 /**
  * KMIP Ping Request Payload (V2_1).

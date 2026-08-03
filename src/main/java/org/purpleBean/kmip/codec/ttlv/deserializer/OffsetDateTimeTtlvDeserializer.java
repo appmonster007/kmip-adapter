@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer;
+package org.purplebean.kmip.codec.ttlv.deserializer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -6,9 +6,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Objects;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 public class OffsetDateTimeTtlvDeserializer extends TtlvDeserializer<OffsetDateTime> {
   private final EncodingType type = EncodingType.DATE_TIME;

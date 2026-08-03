@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core.enumeration;
+package org.purplebean.kmip.benchmark.subjects.model.core.enumeration;
 
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
 
 public class HashingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<HashingAlgorithm> {
 

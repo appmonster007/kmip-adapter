@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.model.core.type;
+package org.purplebean.kmip.codec.json.model.core.type;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.ActivationDate;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.ActivationDate;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ActivationDate JSON Serialization Tests")
 class ActivationDateJsonTest extends AbstractJsonSerializationTestSuite<ActivationDate> {

@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
+package org.purplebean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.MaskGenerator;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
 
 public class MaskGeneratorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MaskGenerator, MaskGenerator.MaskGeneratorBuilder> {

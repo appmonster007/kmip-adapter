@@ -1,4 +1,4 @@
-package org.purpleBean.kmip.model.v2x1.structure;
+package org.purplebean.kmip.model.v2x1.structure;
 
 import java.util.List;
 import java.util.Map;
@@ -9,14 +9,14 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipStructure;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.model.v2x1.enumeration.TicketType;
-import org.purpleBean.kmip.model.v2x1.type.TicketValue;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipStructure;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
+import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
 /**
  * KMIP Ticket structure (V2.1+, tag 0x420149).

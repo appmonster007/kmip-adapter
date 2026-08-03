@@ -1,14 +1,14 @@
-package org.purpleBean.kmip.model.v3x0.type;
+package org.purplebean.kmip.model.v3x0.type;
 
 import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipContext;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipContext;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
 
 /**
  * KMIP {@code PrivateKeyUniqueIdentifier} dataType ({@code 0x420066}), encoded as an {@code
@@ -16,7 +16,7 @@ import org.purpleBean.kmip.api.KmipTag;
  * (KMIP 3.0 {@code §4.68} only — same underlying bytes as {@code TextString} but a distinct TTLV
  * Item Type).
  * <p>
- * Unrelated to {@link org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier} (the pre-3
+ * Unrelated to {@link org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier} (the pre-3
  * .0 {@code TextString}
  * form) — the two are separate Java types that happen to share a KMIP tag and value shape; no
  * single KMIP message

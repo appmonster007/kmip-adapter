@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.enumeration;
+package org.purplebean.kmip.codec.ttlv.model.core.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.SplitKeyMethod;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SplitKeyMethod TTLV Serialization")
 class SplitKeyMethodTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKeyMethod> {

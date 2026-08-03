@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.benchmark.subjects.model.core;
+package org.purplebean.kmip.benchmark.subjects.model.core;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.Getter;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.core.TtlvDataType;
-import org.purpleBean.kmip.model.core.enumeration.NameType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purplebean.kmip.model.core.TtlvDataType;
+import org.purplebean.kmip.model.core.enumeration.NameType;
 
 public class TtlvDataTypeBenchmarkSubject extends KmipBenchmarkSubject<TtlvDataType> {
 

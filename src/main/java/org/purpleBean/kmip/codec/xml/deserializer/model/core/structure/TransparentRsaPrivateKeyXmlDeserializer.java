@@ -1,19 +1,19 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.TransparentRsaPrivateKey;
-import org.purpleBean.kmip.model.core.type.CRTCoefficient;
-import org.purpleBean.kmip.model.core.type.Modulus;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.PrimeExponentP;
-import org.purpleBean.kmip.model.core.type.PrimeExponentQ;
-import org.purpleBean.kmip.model.core.type.PrivateExponent;
-import org.purpleBean.kmip.model.core.type.PublicExponent;
-import org.purpleBean.kmip.model.core.type.Q;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.TransparentRsaPrivateKey;
+import org.purplebean.kmip.model.core.type.CRTCoefficient;
+import org.purplebean.kmip.model.core.type.Modulus;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.PrimeExponentP;
+import org.purplebean.kmip.model.core.type.PrimeExponentQ;
+import org.purplebean.kmip.model.core.type.PrivateExponent;
+import org.purplebean.kmip.model.core.type.PublicExponent;
+import org.purplebean.kmip.model.core.type.Q;
 
 public class TransparentRsaPrivateKeyXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<TransparentRsaPrivateKey,

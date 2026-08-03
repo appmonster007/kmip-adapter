@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure.response;
+package org.purplebean.kmip.codec.ttlv.serializer.model.core.structure.response;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.core.structure.response.SimpleResponseBatchItem;
 
 public class SimpleResponseBatchItemTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<SimpleResponseBatchItem> {

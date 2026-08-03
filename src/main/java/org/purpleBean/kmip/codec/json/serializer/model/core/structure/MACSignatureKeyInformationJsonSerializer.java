@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.json.serializer.model.core.structure;
+package org.purplebean.kmip.codec.json.serializer.model.core.structure;
 
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.core.structure.MACSignatureKeyInformation;
+import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
+import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
 
 public class MACSignatureKeyInformationJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<MACSignatureKeyInformation> {

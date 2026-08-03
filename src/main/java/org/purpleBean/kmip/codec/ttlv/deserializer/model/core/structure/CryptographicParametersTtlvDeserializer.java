@@ -1,24 +1,24 @@
-package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.core.structure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
-import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
-import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
-import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
-import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.CounterLength;
-import org.purpleBean.kmip.model.core.type.FixedFieldLength;
-import org.purpleBean.kmip.model.core.type.InitialCounterValue;
-import org.purpleBean.kmip.model.core.type.InvocationFieldLength;
-import org.purpleBean.kmip.model.core.type.IvLength;
-import org.purpleBean.kmip.model.core.type.RandomIv;
-import org.purpleBean.kmip.model.core.type.TagLength;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purplebean.kmip.model.core.enumeration.KeyRoleType;
+import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
+import org.purplebean.kmip.model.core.structure.CryptographicParameters;
+import org.purplebean.kmip.model.core.type.CounterLength;
+import org.purplebean.kmip.model.core.type.FixedFieldLength;
+import org.purplebean.kmip.model.core.type.InitialCounterValue;
+import org.purplebean.kmip.model.core.type.InvocationFieldLength;
+import org.purplebean.kmip.model.core.type.IvLength;
+import org.purplebean.kmip.model.core.type.RandomIv;
+import org.purplebean.kmip.model.core.type.TagLength;
 
 public class CryptographicParametersTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CryptographicParameters,

@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.xml.model.v3x0.structure.request;
+package org.purplebean.kmip.codec.xml.model.v3x0.structure.request;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
-import org.purpleBean.kmip.model.core.type.MaximumResponseSize;
-import org.purpleBean.kmip.model.v3x0.structure.request.RequestHeader;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.ProtocolVersion;
+import org.purplebean.kmip.model.core.type.MaximumResponseSize;
+import org.purplebean.kmip.model.v3x0.structure.request.RequestHeader;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RequestHeader Xml Serialization Tests")
 class RequestHeaderXmlTest extends AbstractXmlSerializationTestSuite<RequestHeader> {

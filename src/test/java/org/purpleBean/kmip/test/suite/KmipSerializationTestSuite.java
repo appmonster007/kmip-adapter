@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.test.suite;
+package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.purpleBean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipSpec;
 
 /**
  * Interface defining the test contract for KMIP serialization (JSON, XML, TTLV).

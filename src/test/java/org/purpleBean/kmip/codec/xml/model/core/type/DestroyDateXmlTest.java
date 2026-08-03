@@ -1,10 +1,10 @@
-package org.purpleBean.kmip.codec.xml.model.core.type;
+package org.purplebean.kmip.codec.xml.model.core.type;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.type.DestroyDate;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.type.DestroyDate;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DestroyDate XML Serialization Tests")
 class DestroyDateXmlTest extends AbstractXmlSerializationTestSuite<DestroyDate> {

@@ -1,11 +1,11 @@
-package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
+package org.purplebean.kmip.codec.json.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.type.ValidityDate;
+import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.core.type.ValidityDate;
 
 public class ValidityDateJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<ValidityDate, ValidityDate.ValidityDateBuilder> {

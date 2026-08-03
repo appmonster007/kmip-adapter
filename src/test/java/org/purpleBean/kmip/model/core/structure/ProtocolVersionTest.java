@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.model.core.structure;
+package org.purplebean.kmip.model.core.structure;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipDataType;
-import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("ProtocolVersion Structure Semantics")
 class ProtocolVersionTest extends AbstractKmipStructureTestSuite<ProtocolVersion> {

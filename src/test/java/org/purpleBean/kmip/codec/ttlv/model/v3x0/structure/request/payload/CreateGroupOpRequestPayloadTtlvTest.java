@@ -1,9 +1,9 @@
-package org.purpleBean.kmip.codec.ttlv.model.v3x0.structure.request.payload;
+package org.purplebean.kmip.codec.ttlv.model.v3x0.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.structure.Attributes;
-import org.purpleBean.kmip.model.v3x0.structure.request.payload.CreateGroupOpRequestPayload;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
+import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateGroupOpRequestPayload;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateGroupOpRequestPayload Ttlv Serialization Tests")
 class CreateGroupOpRequestPayloadTtlvTest

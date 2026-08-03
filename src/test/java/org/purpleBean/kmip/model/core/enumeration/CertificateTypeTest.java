@@ -1,15 +1,15 @@
-package org.purpleBean.kmip.model.core.enumeration;
+package org.purplebean.kmip.model.core.enumeration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.EncodingType;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
-import org.purpleBean.kmip.test.suite.KmipAttributeTestSuite;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
+import org.purplebean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("CertificateType Domain Tests")
 class CertificateTypeTest extends AbstractKmipEnumerationTestSuite<CertificateType>

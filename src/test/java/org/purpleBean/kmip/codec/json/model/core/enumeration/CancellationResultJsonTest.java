@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.core.enumeration;
+package org.purplebean.kmip.codec.json.model.core.enumeration;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.enumeration.CancellationResult;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.core.enumeration.CancellationResult;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CancellationResult JSON Serialization")
 class CancellationResultJsonTest extends AbstractJsonSerializationTestSuite<CancellationResult> {

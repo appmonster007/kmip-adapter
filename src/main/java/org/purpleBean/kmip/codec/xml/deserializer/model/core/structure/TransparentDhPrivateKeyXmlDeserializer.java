@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure;
+package org.purplebean.kmip.codec.xml.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purpleBean.kmip.api.KmipTag;
-import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purpleBean.kmip.model.core.structure.TransparentDhPrivateKey;
-import org.purpleBean.kmip.model.core.type.G;
-import org.purpleBean.kmip.model.core.type.J;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.Q;
-import org.purpleBean.kmip.model.core.type.X;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.TransparentDhPrivateKey;
+import org.purplebean.kmip.model.core.type.G;
+import org.purplebean.kmip.model.core.type.J;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.Q;
+import org.purplebean.kmip.model.core.type.X;
 
 public class TransparentDhPrivateKeyXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<TransparentDhPrivateKey,

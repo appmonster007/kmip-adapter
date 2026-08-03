@@ -1,9 +1,9 @@
-package org.purpleBean.kmip;
+package org.purplebean.kmip;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.purpleBean.kmip.codec.KmipCodecManager;
-import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.codec.KmipCodecManager;
+import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

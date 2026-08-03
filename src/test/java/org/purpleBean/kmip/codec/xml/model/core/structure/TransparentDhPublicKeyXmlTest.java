@@ -1,16 +1,16 @@
-package org.purpleBean.kmip.codec.xml.model.core.structure;
+package org.purplebean.kmip.codec.xml.model.core.structure;
 
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.core.structure.TransparentDhPublicKey;
-import org.purpleBean.kmip.model.core.type.G;
-import org.purpleBean.kmip.model.core.type.J;
-import org.purpleBean.kmip.model.core.type.P;
-import org.purpleBean.kmip.model.core.type.Q;
-import org.purpleBean.kmip.model.core.type.Y;
-import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
+import org.purplebean.kmip.model.core.structure.TransparentDhPublicKey;
+import org.purplebean.kmip.model.core.type.G;
+import org.purplebean.kmip.model.core.type.J;
+import org.purplebean.kmip.model.core.type.P;
+import org.purplebean.kmip.model.core.type.Q;
+import org.purplebean.kmip.model.core.type.Y;
+import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("TransparentDhPublicKey XML Serialization Tests")
 class TransparentDhPublicKeyXmlTest

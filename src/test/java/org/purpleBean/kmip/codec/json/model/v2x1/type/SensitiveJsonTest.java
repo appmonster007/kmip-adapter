@@ -1,8 +1,8 @@
-package org.purpleBean.kmip.codec.json.model.v2x1.type;
+package org.purplebean.kmip.codec.json.model.v2x1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.model.v2x1.type.Sensitive;
-import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+import org.purplebean.kmip.model.v2x1.type.Sensitive;
+import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Sensitive Json Serialization Tests")
 class SensitiveJsonTest extends AbstractJsonSerializationTestSuite<Sensitive> {

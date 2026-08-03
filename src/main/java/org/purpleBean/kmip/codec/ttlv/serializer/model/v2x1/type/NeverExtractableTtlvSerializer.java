@@ -1,7 +1,7 @@
-package org.purpleBean.kmip.codec.ttlv.serializer.model.v2x1.type;
+package org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type;
 
-import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
-import org.purpleBean.kmip.model.v2x1.type.NeverExtractable;
+import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
+import org.purplebean.kmip.model.v2x1.type.NeverExtractable;
 
 public class NeverExtractableTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<NeverExtractable> {

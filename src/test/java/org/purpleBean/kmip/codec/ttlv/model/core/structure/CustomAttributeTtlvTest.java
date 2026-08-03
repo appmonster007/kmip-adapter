@@ -1,12 +1,12 @@
-package org.purpleBean.kmip.codec.ttlv.model.core.structure;
+package org.purplebean.kmip.codec.ttlv.model.core.structure;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.KmipSpec;
-import org.purpleBean.kmip.model.core.structure.CustomAttribute;
-import org.purpleBean.kmip.model.core.type.AttributeValue;
-import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.structure.CustomAttribute;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CustomAttribute TTLV Serialization Tests")
 class CustomAttributeTtlvTest extends AbstractTtlvSerializationTestSuite<CustomAttribute> {
