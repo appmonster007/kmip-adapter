@@ -65,6 +65,21 @@ public enum EncodingType {
      * A 64-bit integer representing the number of microseconds since the Unix epoch (KMIP 2.x+).
      */
     DATE_TIME_EXTENDED((byte) 0x0B, "DateTimeExtended", 8, OffsetDateTime.class),
+    /**
+     * A variable-length string of UTF-8 characters identifying a Managed Object as an attribute
+     * of that object (KMIP 3.0+). Same underlying shape as TextString, distinct TTLV byte.
+     */
+    IDENTIFIER((byte) 0x0C, "Identifier", -1, String.class),
+    /**
+     * A variable-length string of UTF-8 characters, early-binding reference to a Managed Object
+     * (KMIP 3.0+). Same underlying shape as TextString, distinct TTLV byte.
+     */
+    REFERENCE((byte) 0x0D, "Reference", -1, String.class),
+    /**
+     * A variable-length string of UTF-8 characters, late-binding reference to a Managed Object
+     * by its Name attribute (KMIP 3.0+). Same underlying shape as TextString, distinct TTLV byte.
+     */
+    NAME_REFERENCE((byte) 0x0E, "NameReference", -1, String.class),
     ;
 
     /**

@@ -632,7 +632,7 @@ public class KmipTag {
         DEFAULTS_INFORMATION(0x420152, "DefaultsInformation", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         OBJECT_DEFAULTS(0x420153, "ObjectDefaults", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         EPHEMERAL(0x420154, "Ephemeral", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SERVER_HASHED_PASSWORD(0x420155, "ServerHashedPassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        SERVER_HASHED_PASSWORD(0x420155, "ServerHashedPassword", KmipSpec.UnknownVersion, KmipSpec.V3_0),
         ONE_TIME_PASSWORD(0x420156, "OneTimePassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         HASHED_PASSWORD(0x420157, "HashedPassword", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         ADJUSTMENT_TYPE(0x420158, "AdjustmentType", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),

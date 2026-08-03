@@ -11,7 +11,20 @@ import org.purpleBean.kmip.util.StringUtils;
 import java.util.Set;
 
 /**
- * KMIP UniqueIdentifier dataType.
+ * KMIP {@code UniqueIdentifier} dataType ({@code 0x420094}, KMIP §5 / 3.0 §4.68).
+ * <p>
+ * Polymorphic across wire encodings — TextString (v1.2+, the default form), Integer (v2.1+
+ * batch-index reference) and, in KMIP 3.0 (§4.68), Identifier/Reference/NameReference. All of
+ * these share the same underlying character/string shape and are represented by this single
+ * class, with {@link #sourceEncoding} tracking which wire variant was actually parsed so that
+ * round-trip (de)serialization preserves it.
+ * <p>
+ * The Enumeration variant (v2.1+ ID-Placeholder / batch-item references) is NOT represented here
+ * — it is owned exclusively by {@link org.purpleBean.kmip.model.v2_1.enumeration.UniqueIdentifier}
+ * (a proper {@link org.purpleBean.kmip.api.KmipEnumeration}), to avoid a registry collision on
+ * {@code (tag=UNIQUE_IDENTIFIER, encoding=ENUMERATION)}.
+ *
+ * @see org.purpleBean.kmip.model.v2_1.enumeration.UniqueIdentifier
  */
 @Data
 @Builder(toBuilder = true)
@@ -24,17 +37,26 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
     static {
         for (KmipSpec spec : supportedVersions) {
             if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, UniqueIdentifier.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, UniqueIdentifier.class, UniqueIdentifier::of);
+            // Registered under every wire encoding it may appear as (§5 / KMIP 3.0 §4.68) so that
+            // polymorphic dispatch (e.g. inside an Attributes wrapper) resolves regardless of which
+            // variant is on the wire, not just the class-level default (TextString).
+            // NOTE: ENUMERATION is intentionally excluded — that variant is owned exclusively by
+            // model.v2_1.enumeration.UniqueIdentifier (proper KmipEnumeration semantics for
+            // "IDPlaceholder" etc.); registering it here too would collide on the same registry key.
+            for (EncodingType variant : new EncodingType[]{encodingType, EncodingType.INTEGER, EncodingType.IDENTIFIER, EncodingType.REFERENCE, EncodingType.NAME_REFERENCE}) {
+                KmipDataType.register(spec, kmipTag.getValue(), variant, UniqueIdentifier.class);
+                KmipAttribute.register(spec, kmipTag.getValue(), variant, UniqueIdentifier.class, UniqueIdentifier::of);
+            }
         }
     }
 
     @NonNull
     private final String value;
 
-    // KMIP §5 UniqueIdentifier may appear as TextString, Enumeration or Integer.
-    // sourceEncoding tracks the wire encoding so round-trip serialization preserves the original type.
-    // Excluded from equals/hashCode: it's wire-format bookkeeping, not part of the value's identity.
+    // KMIP §5 UniqueIdentifier may appear as TextString, Integer (v2.1+ batch-index reference), or,
+    // in KMIP 3.0 (§4.68), Identifier/Reference/NameReference. sourceEncoding tracks the wire encoding
+    // so round-trip serialization preserves the original type. Excluded from equals/hashCode: it's
+    // wire-format bookkeeping, not part of the value's identity.
     @EqualsAndHashCode.Exclude
     private final EncodingType sourceEncoding;
 

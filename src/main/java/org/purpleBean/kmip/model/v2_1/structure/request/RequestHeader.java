@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class RequestHeader implements RequestHeaderStructure {
 
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -96,16 +96,26 @@ public class RequestHeader implements RequestHeaderStructure {
     public static RequestHeader of(List<KmipDataType> values) {
         var builder = RequestHeader.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        if (map.containsKey(ProtocolVersion.kmipTag)) builder.protocolVersion((ProtocolVersion) map.get(ProtocolVersion.kmipTag).get(0));
-        if (map.containsKey(MaximumResponseSize.kmipTag)) builder.maximumResponseSize((MaximumResponseSize) map.get(MaximumResponseSize.kmipTag).get(0));
-        if (map.containsKey(ClientCorrelationValue.kmipTag)) builder.clientCorrelationValue((ClientCorrelationValue) map.get(ClientCorrelationValue.kmipTag).get(0));
-        if (map.containsKey(ServerCorrelationValue.kmipTag)) builder.serverCorrelationValue((ServerCorrelationValue) map.get(ServerCorrelationValue.kmipTag).get(0));
-        if (map.containsKey(AsynchronousIndicator.kmipTag)) builder.asynchronousIndicator((AsynchronousIndicator) map.get(AsynchronousIndicator.kmipTag).get(0));
-        if (map.containsKey(AttestationCapableIndicator.kmipTag)) builder.attestationCapableIndicator((AttestationCapableIndicator) map.get(AttestationCapableIndicator.kmipTag).get(0));
-        if (map.containsKey(AttestationType.kmipTag)) builder.attestationTypes(map.get(AttestationType.kmipTag).stream().map(AttestationType.class::cast).toList());
-        if (map.containsKey(Authentication.kmipTag)) builder.authentication((Authentication) map.get(Authentication.kmipTag).get(0));
-        if (map.containsKey(BatchErrorContinuationOption.kmipTag)) builder.batchErrorContinuationOption((BatchErrorContinuationOption) map.get(BatchErrorContinuationOption.kmipTag).get(0));
-        if (map.containsKey(BatchOrderOption.kmipTag)) builder.batchOrderOption((BatchOrderOption) map.get(BatchOrderOption.kmipTag).get(0));
+        if (map.containsKey(ProtocolVersion.kmipTag))
+            builder.protocolVersion((ProtocolVersion) map.get(ProtocolVersion.kmipTag).get(0));
+        if (map.containsKey(MaximumResponseSize.kmipTag))
+            builder.maximumResponseSize((MaximumResponseSize) map.get(MaximumResponseSize.kmipTag).get(0));
+        if (map.containsKey(ClientCorrelationValue.kmipTag))
+            builder.clientCorrelationValue((ClientCorrelationValue) map.get(ClientCorrelationValue.kmipTag).get(0));
+        if (map.containsKey(ServerCorrelationValue.kmipTag))
+            builder.serverCorrelationValue((ServerCorrelationValue) map.get(ServerCorrelationValue.kmipTag).get(0));
+        if (map.containsKey(AsynchronousIndicator.kmipTag))
+            builder.asynchronousIndicator((AsynchronousIndicator) map.get(AsynchronousIndicator.kmipTag).get(0));
+        if (map.containsKey(AttestationCapableIndicator.kmipTag))
+            builder.attestationCapableIndicator((AttestationCapableIndicator) map.get(AttestationCapableIndicator.kmipTag).get(0));
+        if (map.containsKey(AttestationType.kmipTag))
+            builder.attestationTypes(map.get(AttestationType.kmipTag).stream().map(AttestationType.class::cast).toList());
+        if (map.containsKey(Authentication.kmipTag))
+            builder.authentication((Authentication) map.get(Authentication.kmipTag).get(0));
+        if (map.containsKey(BatchErrorContinuationOption.kmipTag))
+            builder.batchErrorContinuationOption((BatchErrorContinuationOption) map.get(BatchErrorContinuationOption.kmipTag).get(0));
+        if (map.containsKey(BatchOrderOption.kmipTag))
+            builder.batchOrderOption((BatchOrderOption) map.get(BatchOrderOption.kmipTag).get(0));
         if (map.containsKey(TimeStamp.kmipTag)) builder.timeStamp((TimeStamp) map.get(TimeStamp.kmipTag).get(0));
         if (map.containsKey(BatchCount.kmipTag)) builder.batchCount((BatchCount) map.get(BatchCount.kmipTag).get(0));
         return builder.build();
@@ -118,10 +128,14 @@ public class RequestHeader implements RequestHeaderStructure {
     }
 
     @Override
-    public KmipTag getKmipTag() { return kmipTag; }
+    public KmipTag getKmipTag() {
+        return kmipTag;
+    }
 
     @Override
-    public EncodingType getEncodingType() { return encodingType; }
+    public EncodingType getEncodingType() {
+        return encodingType;
+    }
 
     @Override
     public KmipDataType[] getValue() {

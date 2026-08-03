@@ -8,7 +8,10 @@ import org.purpleBean.kmip.api.*;
 import java.util.Set;
 
 /**
- * KMIP PrivateKeyUniqueIdentifier dataType.
+ * KMIP {@code PrivateKeyUniqueIdentifier} dataType ({@code 0x420066}), encoded as a {@code TextString} (v1.2-v2.1).
+ * <p>
+ * Sibling of {@link org.purpleBean.kmip.model.v3_0.type.PrivateKeyUniqueIdentifier} (KMIP 3.0-only {@code Identifier}
+ * wire type) — the two are unrelated Java types that happen to share a KMIP tag and value shape.
  */
 @Data
 @Builder(toBuilder = true)
@@ -16,7 +19,7 @@ public class PrivateKeyUniqueIdentifier implements KmipDataType {
 
     public static final KmipTag kmipTag = KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER.inst();
     public static final EncodingType encodingType = EncodingType.TEXT_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {
@@ -24,7 +27,6 @@ public class PrivateKeyUniqueIdentifier implements KmipDataType {
             KmipDataType.register(spec, kmipTag.getValue(), encodingType, PrivateKeyUniqueIdentifier.class);
         }
     }
-
 
     @NonNull
     private final String value;
@@ -43,7 +45,6 @@ public class PrivateKeyUniqueIdentifier implements KmipDataType {
         if (!isSupported()) {
             throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
         }
-        // No validation needed for this structure
     }
 
     @Override

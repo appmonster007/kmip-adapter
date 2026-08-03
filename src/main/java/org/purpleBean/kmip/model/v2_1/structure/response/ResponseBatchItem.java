@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class ResponseBatchItem implements ResponseBatchItemStructure {
 
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1);
 
     static {
         for (KmipSpec spec : supportedVersions) {

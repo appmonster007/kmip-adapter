@@ -27,6 +27,13 @@ import org.purpleBean.kmip.model.v2_1.type.Description;
  * <p>The class name matches the type-package peer (the {@link org.purpleBean.kmip.model.core.type.AsynchronousIndicator}
  * / {@link org.purpleBean.kmip.model.v2_1.enumeration.AsynchronousIndicator} precedent);
  * consumers disambiguate by import.</p>
+ *
+ * <p>{@link org.purpleBean.kmip.model.core.type.UniqueIdentifier} is a concrete class (not an
+ * interface), so this class cannot implement it — it only shares the KMIP tag value with it, not
+ * a Java type relationship. The two are independently registered under different
+ * {@link org.purpleBean.kmip.api.EncodingType} keys ({@code Enumeration} here vs.
+ * {@code TextString}/{@code Integer}/{@code Identifier}/{@code Reference}/{@code NameReference}
+ * there), so generic {@code KmipDataType} dispatch never needs to cross-cast between them.</p>
  */
 @Data
 @Builder(toBuilder = true)
@@ -172,11 +179,20 @@ public class UniqueIdentifier implements KmipEnumeration {
         return value.getValue();
     }
 
+    // This class is a plain KmipEnumeration/KmipDataType, not a KmipAttribute: it is not
+    // registered against the KmipAttribute registry (see the static block above, which only calls
+    // KmipDataType.register / KmipEnumeration.register), so no KmipAttribute capability-flag
+    // methods (isAlwaysPresent, getAttributeName, getCanonicalName, etc.) are declared here.
+
+    public AttributeValue getAttributeValue() {
+        return AttributeValue.ofEnumeration(value);
+    }
+
     @Getter
     @AllArgsConstructor
     @ToString
     public enum Standard implements Value {
-        ID_PLACEHOLDER(0x00000001,                 "IdPlaceholder",            KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+        ID_PLACEHOLDER(0x00000001,                 "IDPlaceholder",            KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         CERTIFY(0x00000002,                        "Certify",                  KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         CREATE(0x00000003,                         "Create",                   KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
         CREATE_KEY_PAIR(0x00000004,                "CreateKeyPair",            KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),

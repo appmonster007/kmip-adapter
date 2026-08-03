@@ -2,6 +2,7 @@ package org.purpleBean.kmip.verification;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purpleBean.kmip.api.KmipContext;
@@ -43,6 +44,7 @@ public class KmipV21VerificationTest {
     private final String projectRoot = System.getProperty("user.dir");
 
     @DisplayName("Test KMIP 2.1 Specific File")
+    @Disabled("Duplicate of testKmip21TestCases; kept as a debug entry point, not run by default")
     @Test
     public void testSpecificFile() {
         String filePath = projectRoot +
@@ -63,6 +65,7 @@ public class KmipV21VerificationTest {
     }
 
     @DisplayName("Diagnose specific failing files")
+    @Disabled("Duplicate of testKmip21TestCases; kept as a debug entry point, not run by default")
     @Test
     public void diagnoseTargetedFiles() {
         String base = projectRoot + "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1";
@@ -118,6 +121,7 @@ public class KmipV21VerificationTest {
     }
 
     @DisplayName("Diagnose first 10 KMIP 2.1 test case files")
+    @Disabled("Duplicate of testKmip21TestCases; kept as a debug entry point, not run by default")
     @Test
     public void diagnoseFirst10() {
         String base = projectRoot + "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1";

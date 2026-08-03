@@ -22,14 +22,22 @@ public class UniqueIdentifierXmlDeserializer extends AbstractKmipDataTypeXmlDese
 
     @Override
     protected String getType(JsonNode node, DeserializationContext ctxt, UniqueIdentifier.UniqueIdentifierBuilder builder) throws IOException {
-        // In KMIP 2.1+, UniqueIdentifier may appear as TextString, Enumeration (e.g. "IDPlaceholder"),
-        // or Integer (batch item index). All three encode as a String internally.
+        // In KMIP 2.1+, UniqueIdentifier may appear as TextString, Enumeration (e.g. "IDPlaceholder",
+        // batch-item / ID-Placeholder references — same string shape as the separate
+        // model.v2_1.enumeration.UniqueIdentifier class used for generic KmipDataType-dispatch
+        // contexts, but accepted here too since this class is the fixed Java type of most
+        // UniqueIdentifier fields), or Integer (batch item index). KMIP 3.0 §4.68 additionally
+        // allows Identifier/Reference/NameReference — distinct TTLV Item Types (bytes 0x0C-0x0E)
+        // with the same underlying character-sequence shape as TextString.
         JsonNode typeNode = node.get("type");
         if (typeNode != null && typeNode.isTextual()) {
             String type = typeNode.asText();
             if (EncodingType.TEXT_STRING.getDescription().equals(type)
                     || EncodingType.ENUMERATION.getDescription().equals(type)
-                    || EncodingType.INTEGER.getDescription().equals(type)) {
+                    || EncodingType.INTEGER.getDescription().equals(type)
+                    || EncodingType.IDENTIFIER.getDescription().equals(type)
+                    || EncodingType.REFERENCE.getDescription().equals(type)
+                    || EncodingType.NAME_REFERENCE.getDescription().equals(type)) {
                 return type;
             }
         }
