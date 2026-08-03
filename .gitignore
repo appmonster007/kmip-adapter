@@ -38,3 +38,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Local tooling / scratch ###
+.mcp.json
+*.log
+*.diff
