@@ -15,10 +15,16 @@ import org.purplebean.kmip.model.core.type.PrivateExponent;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 import org.purplebean.kmip.model.core.type.Q;
 
+/**
+ * TTLV deserializer for {@link TransparentRsaPrivateKey}.
+ */
 public class TransparentRsaPrivateKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentRsaPrivateKey,
         TransparentRsaPrivateKey.TransparentRsaPrivateKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentRsaPrivateKeyTtlvDeserializer}.
+   */
   public TransparentRsaPrivateKeyTtlvDeserializer() {
     super(TransparentRsaPrivateKey.kmipTag, TransparentRsaPrivateKey.encodingType);
   }

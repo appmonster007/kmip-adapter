@@ -47,10 +47,16 @@ public class AlwaysSensitive implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link AlwaysSensitive} instance wrapping the given value.
+   */
   public static AlwaysSensitive of(@NonNull Boolean value) {
     return new AlwaysSensitive(value);
   }
 
+  /**
+   * Returns the {@link AlwaysSensitive} instance wrapping the given value.
+   */
   public static AlwaysSensitive of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

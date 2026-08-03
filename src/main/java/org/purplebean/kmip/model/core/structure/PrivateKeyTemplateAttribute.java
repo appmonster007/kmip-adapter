@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP PrivateKeyTemplateAttribute attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PrivateKeyTemplateAttribute implements KmipStructure {
@@ -49,6 +52,9 @@ public class PrivateKeyTemplateAttribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PrivateKeyTemplateAttribute} instance wrapping the given value.
+   */
   public static PrivateKeyTemplateAttribute of(List<Name> names, List<Attribute> attributes) {
     return PrivateKeyTemplateAttribute
         .builder()

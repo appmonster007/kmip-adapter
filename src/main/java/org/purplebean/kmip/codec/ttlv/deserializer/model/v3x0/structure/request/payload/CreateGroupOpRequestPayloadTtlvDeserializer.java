@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateGroupOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link CreateGroupOpRequestPayload}.
+ */
 public class CreateGroupOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CreateGroupOpRequestPayload,
         CreateGroupOpRequestPayload.CreateGroupOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateGroupOpRequestPayloadTtlvDeserializer}.
+   */
   public CreateGroupOpRequestPayloadTtlvDeserializer() {
     super(CreateGroupOpRequestPayload.kmipTag, CreateGroupOpRequestPayload.encodingType);
   }

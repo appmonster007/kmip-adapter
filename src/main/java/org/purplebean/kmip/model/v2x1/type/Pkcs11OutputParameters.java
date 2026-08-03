@@ -41,10 +41,16 @@ public class Pkcs11OutputParameters implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11OutputParameters} instance wrapping the given value.
+   */
   public static Pkcs11OutputParameters of(@NonNull ByteBuffer value) {
     return new Pkcs11OutputParameters(value);
   }
 
+  /**
+   * Returns the {@link Pkcs11OutputParameters} instance wrapping the given value.
+   */
   public static Pkcs11OutputParameters of(byte[] value) {
     return Pkcs11OutputParameters
         .builder()

@@ -41,6 +41,9 @@ public class ValidationVersionMajor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationVersionMajor} instance wrapping the given value.
+   */
   public static ValidationVersionMajor of(@NonNull Integer value) {
     return new ValidationVersionMajor(value);
   }

@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.type.OtpSeed;
 
+/**
+ * JSON deserializer for {@link OtpSeed}.
+ */
 public class OtpSeedJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<OtpSeed, OtpSeed.OtpSeedBuilder> {
 
+  /**
+   * Constructs a new {@link OtpSeedJsonDeserializer}.
+   */
   public OtpSeedJsonDeserializer() {
     super(OtpSeed.kmipTag, OtpSeed.encodingType);
   }

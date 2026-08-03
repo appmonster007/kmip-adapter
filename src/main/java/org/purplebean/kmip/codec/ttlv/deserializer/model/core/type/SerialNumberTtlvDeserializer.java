@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.SerialNumber;
 
+/**
+ * TTLV deserializer for {@link SerialNumber}.
+ */
 public class SerialNumberTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<SerialNumber, SerialNumber.SerialNumberBuilder> {
 
+  /**
+   * Constructs a new {@link SerialNumberTtlvDeserializer}.
+   */
   public SerialNumberTtlvDeserializer() {
     super(SerialNumber.kmipTag, SerialNumber.encodingType);
   }

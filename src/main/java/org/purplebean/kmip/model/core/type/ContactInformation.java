@@ -45,10 +45,16 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ContactInformation} instance wrapping the given value.
+   */
   public static ContactInformation of(@NonNull String value) {
     return new ContactInformation(value);
   }
 
+  /**
+   * Returns the {@link ContactInformation} instance wrapping the given value.
+   */
   public static ContactInformation of(@NonNull AttributeName attributeName,
                                       @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

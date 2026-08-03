@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ValidateOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link ValidateOpRequestPayload}.
+ */
 public class ValidateOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidateOpRequestPayload,
         ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ValidateOpRequestPayloadTtlvDeserializer}.
+   */
   public ValidateOpRequestPayloadTtlvDeserializer() {
     super(ValidateOpRequestPayload.kmipTag, ValidateOpRequestPayload.encodingType);
   }

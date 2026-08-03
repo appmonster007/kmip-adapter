@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.UnwrapMode;
 
+/**
+ * TTLV deserializer for {@link UnwrapMode}.
+ */
 public class UnwrapModeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<UnwrapMode, UnwrapMode.UnwrapModeBuilder> {
 
+  /**
+   * Constructs a new {@link UnwrapModeTtlvDeserializer}.
+   */
   public UnwrapModeTtlvDeserializer() {
     super(UnwrapMode.kmipTag, UnwrapMode.encodingType);
   }

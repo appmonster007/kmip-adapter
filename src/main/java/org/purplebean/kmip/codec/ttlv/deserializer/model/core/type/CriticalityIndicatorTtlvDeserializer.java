@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CriticalityIndicator;
 
+/**
+ * TTLV deserializer for {@link CriticalityIndicator}.
+ */
 public class CriticalityIndicatorTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CriticalityIndicator,
         CriticalityIndicator.CriticalityIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link CriticalityIndicatorTtlvDeserializer}.
+   */
   public CriticalityIndicatorTtlvDeserializer() {
     super(CriticalityIndicator.kmipTag, CriticalityIndicator.encodingType);
   }

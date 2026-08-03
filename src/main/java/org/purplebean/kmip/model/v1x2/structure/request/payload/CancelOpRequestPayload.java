@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 
+/**
+ * KMIP CancelOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CancelOpRequestPayload implements RequestPayloadStructure {
@@ -49,6 +52,9 @@ public class CancelOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CancelOpRequestPayload} instance wrapping the given value.
+   */
   public static CancelOpRequestPayload of(List<KmipDataType> values) {
     var builder = CancelOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

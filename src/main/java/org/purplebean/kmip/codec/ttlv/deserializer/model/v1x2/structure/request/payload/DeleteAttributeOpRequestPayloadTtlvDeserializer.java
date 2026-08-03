@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.DeleteAttributeOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link DeleteAttributeOpRequestPayload}.
+ */
 public class DeleteAttributeOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeleteAttributeOpRequestPayload,
         DeleteAttributeOpRequestPayload.DeleteAttributeOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DeleteAttributeOpRequestPayloadTtlvDeserializer}.
+   */
   public DeleteAttributeOpRequestPayloadTtlvDeserializer() {
     super(DeleteAttributeOpRequestPayload.kmipTag, DeleteAttributeOpRequestPayload.encodingType);
   }

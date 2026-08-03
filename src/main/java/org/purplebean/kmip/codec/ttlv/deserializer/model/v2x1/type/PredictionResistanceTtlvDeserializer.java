@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
+/**
+ * TTLV deserializer for {@link PredictionResistance}.
+ */
 public class PredictionResistanceTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PredictionResistance,
         PredictionResistance.PredictionResistanceBuilder> {
 
+  /**
+   * Constructs a new {@link PredictionResistanceTtlvDeserializer}.
+   */
   public PredictionResistanceTtlvDeserializer() {
     super(PredictionResistance.kmipTag, PredictionResistance.encodingType);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.DestroyAction;
 
+/**
+ * XML deserializer for {@link DestroyAction}.
+ */
 public class DestroyActionXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<DestroyAction, DestroyAction.DestroyActionBuilder> {
 
+  /**
+   * Constructs a new {@link DestroyActionXmlDeserializer}.
+   */
   public DestroyActionXmlDeserializer() {
     super(DestroyAction.kmipTag, DestroyAction.encodingType);
   }

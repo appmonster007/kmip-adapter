@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.v3x0.structure;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v3x0.structure.HashedPasswordCredential;
 
+/**
+ * TTLV serializer for {@link HashedPasswordCredential}.
+ */
 public class HashedPasswordCredentialTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<HashedPasswordCredential> {
 }

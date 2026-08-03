@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP DeleteAttributeOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeleteAttributeOpResponsePayload implements ResponsePayloadStructure {
@@ -55,6 +58,9 @@ public class DeleteAttributeOpResponsePayload implements ResponsePayloadStructur
     validate();
   }
 
+  /**
+   * Returns the {@link DeleteAttributeOpResponsePayload} instance wrapping the given value.
+   */
   public static DeleteAttributeOpResponsePayload of(List<KmipDataType> values) {
     var builder = DeleteAttributeOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

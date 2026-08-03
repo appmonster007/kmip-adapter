@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.AsynchronousCapability;
 
+/**
+ * TTLV deserializer for {@link AsynchronousCapability}.
+ */
 public class AsynchronousCapabilityTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AsynchronousCapability,
         AsynchronousCapability.AsynchronousCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link AsynchronousCapabilityTtlvDeserializer}.
+   */
   public AsynchronousCapabilityTtlvDeserializer() {
     super(AsynchronousCapability.kmipTag, AsynchronousCapability.encodingType);
   }

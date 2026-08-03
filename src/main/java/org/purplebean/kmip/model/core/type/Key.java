@@ -42,10 +42,16 @@ public class Key implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Key} instance wrapping the given value.
+   */
   public static Key of(@NonNull ByteBuffer value) {
     return new Key(value);
   }
 
+  /**
+   * Returns the {@link Key} instance wrapping the given value.
+   */
   public static Key of(byte[] value) {
     return Key
         .builder()

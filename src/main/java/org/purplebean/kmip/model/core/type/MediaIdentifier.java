@@ -42,6 +42,9 @@ public class MediaIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MediaIdentifier} instance wrapping the given value.
+   */
   public static MediaIdentifier of(@NonNull String value) {
     return new MediaIdentifier(value);
   }

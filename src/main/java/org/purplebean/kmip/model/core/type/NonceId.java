@@ -42,10 +42,16 @@ public class NonceId implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link NonceId} instance wrapping the given value.
+   */
   public static NonceId of(@NonNull ByteBuffer value) {
     return new NonceId(value);
   }
 
+  /**
+   * Returns the {@link NonceId} instance wrapping the given value.
+   */
   public static NonceId of(byte[] value) {
     return NonceId
         .builder()

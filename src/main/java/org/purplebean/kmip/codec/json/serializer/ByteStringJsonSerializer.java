@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HexFormat;
 
+/**
+ * JSON serializer for {@link ByteBuffer}.
+ */
 public class ByteStringJsonSerializer extends JsonSerializer<ByteBuffer> {
 
   @Override

@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.type.InitialDate;
 
+/**
+ * XML serializer for {@link InitialDate}.
+ */
 public class InitialDateXmlSerializer extends AbstractKmipDataTypeXmlSerializer<InitialDate> {
 }

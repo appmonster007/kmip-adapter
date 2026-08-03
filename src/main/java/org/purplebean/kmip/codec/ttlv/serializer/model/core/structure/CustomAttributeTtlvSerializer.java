@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.structure;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.structure.CustomAttribute;
 
+/**
+ * TTLV serializer for {@link CustomAttribute}.
+ */
 public class CustomAttributeTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<CustomAttribute> {
 }

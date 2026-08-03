@@ -75,6 +75,9 @@ public class CertificateRequestType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateRequestType} instance wrapping the given value.
+   */
   public static CertificateRequestType of(@NonNull Value value) {
     return new CertificateRequestType(value);
   }
@@ -254,6 +257,9 @@ public class CertificateRequestType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

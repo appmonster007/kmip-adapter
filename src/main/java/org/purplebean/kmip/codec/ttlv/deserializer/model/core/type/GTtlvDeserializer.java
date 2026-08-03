@@ -7,8 +7,14 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.G;
 
+/**
+ * TTLV deserializer for {@link G}.
+ */
 public class GTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<G, G.GBuilder> {
 
+  /**
+   * Constructs a new {@link GTtlvDeserializer}.
+   */
   public GTtlvDeserializer() {
     super(G.kmipTag, G.encodingType);
   }

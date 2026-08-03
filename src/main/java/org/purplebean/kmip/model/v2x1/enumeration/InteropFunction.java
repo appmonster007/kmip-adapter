@@ -78,6 +78,9 @@ public class InteropFunction implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link InteropFunction} instance wrapping the given value.
+   */
   public static InteropFunction of(@NonNull Value value) {
     return new InteropFunction(value);
   }
@@ -253,6 +256,9 @@ public class InteropFunction implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

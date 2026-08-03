@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.type.MaximumItems;
 import org.purplebean.kmip.model.core.type.StorageStatusMask;
 
+/**
+ * KMIP LocateOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class LocateOpRequestPayload implements RequestPayloadStructure {
@@ -61,6 +64,9 @@ public class LocateOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LocateOpRequestPayload} instance wrapping the given value.
+   */
   public static LocateOpRequestPayload of(List<KmipDataType> values) {
     var builder = LocateOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

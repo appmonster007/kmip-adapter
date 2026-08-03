@@ -49,10 +49,16 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link DestroyDate} instance wrapping the given value.
+   */
   public static DestroyDate of(@NonNull OffsetDateTime value) {
     return new DestroyDate(value);
   }
 
+  /**
+   * Returns the {@link DestroyDate} instance wrapping the given value.
+   */
   public static DestroyDate of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

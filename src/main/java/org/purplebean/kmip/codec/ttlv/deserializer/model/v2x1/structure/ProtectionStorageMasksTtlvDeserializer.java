@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.ProtectionStorageMasks;
 import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
 
+/**
+ * TTLV deserializer for {@link ProtectionStorageMasks}.
+ */
 public class ProtectionStorageMasksTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtectionStorageMasks,
         ProtectionStorageMasks.ProtectionStorageMasksBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionStorageMasksTtlvDeserializer}.
+   */
   public ProtectionStorageMasksTtlvDeserializer() {
     super(ProtectionStorageMasks.kmipTag, ProtectionStorageMasks.encodingType);
   }

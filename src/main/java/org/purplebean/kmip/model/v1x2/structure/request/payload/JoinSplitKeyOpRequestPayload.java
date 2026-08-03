@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP JoinSplitKeyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class JoinSplitKeyOpRequestPayload implements RequestPayloadStructure {
@@ -67,6 +70,9 @@ public class JoinSplitKeyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link JoinSplitKeyOpRequestPayload} instance wrapping the given value.
+   */
   public static JoinSplitKeyOpRequestPayload of(List<KmipDataType> values) {
     var builder = JoinSplitKeyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

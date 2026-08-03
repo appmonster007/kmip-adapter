@@ -9,10 +9,16 @@ import org.purplebean.kmip.api.request.RequestHeaderStructure;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestMessage;
 
+/**
+ * JSON deserializer for {@link SimpleRequestMessage}.
+ */
 public class SimpleRequestMessageJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SimpleRequestMessage,
         SimpleRequestMessage.SimpleRequestMessageBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleRequestMessageJsonDeserializer}.
+   */
   public SimpleRequestMessageJsonDeserializer() {
     super(SimpleRequestMessage.kmipTag, SimpleRequestMessage.encodingType);
   }

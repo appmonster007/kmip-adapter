@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.LocateOpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.LocatedItems;
 
+/**
+ * JSON deserializer for {@link LocateOpResponsePayload}.
+ */
 public class LocateOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<LocateOpResponsePayload,
         LocateOpResponsePayload.LocateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LocateOpResponsePayloadJsonDeserializer}.
+   */
   public LocateOpResponsePayloadJsonDeserializer() {
     super(LocateOpResponsePayload.kmipTag, LocateOpResponsePayload.encodingType);
   }

@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 import org.purplebean.kmip.model.v2x1.structure.AsynchronousRequest;
 import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
 
+/**
+ * TTLV deserializer for {@link AsynchronousRequest}.
+ */
 public class AsynchronousRequestTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AsynchronousRequest,
         AsynchronousRequest.AsynchronousRequestBuilder> {
 
+  /**
+   * Constructs a new {@link AsynchronousRequestTtlvDeserializer}.
+   */
   public AsynchronousRequestTtlvDeserializer() {
     super(AsynchronousRequest.kmipTag, AsynchronousRequest.encodingType);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.NistKeyType;
 
+/**
+ * XML deserializer for {@link NistKeyType}.
+ */
 public class NistKeyTypeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<NistKeyType, NistKeyType.NistKeyTypeBuilder> {
 
+  /**
+   * Constructs a new {@link NistKeyTypeXmlDeserializer}.
+   */
   public NistKeyTypeXmlDeserializer() {
     super(NistKeyType.kmipTag, NistKeyType.encodingType);
   }

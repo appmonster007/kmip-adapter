@@ -43,6 +43,9 @@ public class PrimeExponentQ implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PrimeExponentQ} instance wrapping the given value.
+   */
   public static PrimeExponentQ of(@NonNull BigInteger value) {
     return new PrimeExponentQ(value);
   }

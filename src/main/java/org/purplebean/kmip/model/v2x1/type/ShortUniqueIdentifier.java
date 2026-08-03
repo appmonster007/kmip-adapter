@@ -48,10 +48,16 @@ public class ShortUniqueIdentifier implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ShortUniqueIdentifier} instance wrapping the given value.
+   */
   public static ShortUniqueIdentifier of(@NonNull ByteBuffer value) {
     return new ShortUniqueIdentifier(value);
   }
 
+  /**
+   * Returns the {@link ShortUniqueIdentifier} instance wrapping the given value.
+   */
   public static ShortUniqueIdentifier of(@NonNull AttributeName attributeName,
                                          @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

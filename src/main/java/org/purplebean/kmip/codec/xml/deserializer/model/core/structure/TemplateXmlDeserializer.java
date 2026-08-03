@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.structure.Template;
 
+/**
+ * XML deserializer for {@link Template}.
+ */
 public class TemplateXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Template, Template.TemplateBuilder> {
 
+  /**
+   * Constructs a new {@link TemplateXmlDeserializer}.
+   */
   public TemplateXmlDeserializer() {
     super(Template.kmipTag, Template.encodingType);
   }

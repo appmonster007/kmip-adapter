@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP EncryptionKeyInformation attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class EncryptionKeyInformation implements KmipStructure {
@@ -44,6 +47,9 @@ public class EncryptionKeyInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link EncryptionKeyInformation} instance wrapping the given value.
+   */
   public static EncryptionKeyInformation of(@NonNull UniqueIdentifier uniqueIdentifier,
                                             CryptographicParameters cryptographicParameters) {
     return EncryptionKeyInformation

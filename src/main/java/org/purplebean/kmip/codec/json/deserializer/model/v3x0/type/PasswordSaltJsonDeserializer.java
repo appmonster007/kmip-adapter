@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.type.PasswordSalt;
 
+/**
+ * JSON deserializer for {@link PasswordSalt}.
+ */
 public class PasswordSaltJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<PasswordSalt, PasswordSalt.PasswordSaltBuilder> {
 
+  /**
+   * Constructs a new {@link PasswordSaltJsonDeserializer}.
+   */
   public PasswordSaltJsonDeserializer() {
     super(PasswordSalt.kmipTag, PasswordSalt.encodingType);
   }

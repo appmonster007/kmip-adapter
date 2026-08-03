@@ -30,6 +30,9 @@ public final class KmipCodecManager {
     KmipInitializer.initialize();
   }
 
+  /**
+   * Returns the shared {@link TtlvMapper} instance used for TTLV encoding.
+   */
   public static TtlvMapper getTtlvMapper() {
     if (ttlvMapper == null) {
       ttlvMapper = createTtlvMapper();
@@ -37,6 +40,9 @@ public final class KmipCodecManager {
     return ttlvMapper;
   }
 
+  /**
+   * Returns the shared {@link XmlMapper} instance used for KMIP XML encoding.
+   */
   public static XmlMapper getXmlMapper() {
     if (xmlMapper == null) {
       xmlMapper = createXmlMapper();
@@ -44,6 +50,9 @@ public final class KmipCodecManager {
     return xmlMapper;
   }
 
+  /**
+   * Returns the shared {@link JsonMapper} instance used for KMIP JSON encoding.
+   */
   public static JsonMapper getJsonMapper() {
     if (jsonMapper == null) {
       jsonMapper = createJsonMapper();
@@ -52,6 +61,9 @@ public final class KmipCodecManager {
   }
 
   // Convenience method to serialize using default mapper
+  /**
+   * Serializes the given object using the mapper appropriate for its registered KMIP encoding.
+   */
   public static <T> Object serialize(T obj) throws IOException {
 
     return switch (defaultType) {
@@ -64,6 +76,10 @@ public final class KmipCodecManager {
   }
 
   // Convenience method to serialize using default mapper
+  /**
+   * Deserializes the given value into an instance of the given type using the mapper
+   * appropriate for its registered KMIP encoding.
+   */
   public static <T> T deserialize(Object value, Class<T> type) throws IOException {
 
     return switch (defaultType) {
@@ -75,6 +91,9 @@ public final class KmipCodecManager {
     };
   }
 
+  /**
+   * Creates a new {@link JsonMapper} configured with the KMIP JSON module.
+   */
   public static JsonMapper createJsonMapper() {
     JsonMapper jsonMapper = new JsonMapper();
     jsonMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -83,6 +102,9 @@ public final class KmipCodecManager {
     return jsonMapper;
   }
 
+  /**
+   * Creates a new {@link XmlMapper} configured with the KMIP XML module.
+   */
   public static XmlMapper createXmlMapper() {
     XmlMapper xmlMapper = new XmlMapper();
     xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -91,12 +113,18 @@ public final class KmipCodecManager {
     return xmlMapper;
   }
 
+  /**
+   * Creates a new {@link TtlvMapper} configured with the KMIP TTLV module.
+   */
   public static TtlvMapper createTtlvMapper() {
     TtlvMapper ttlvMapper = new TtlvMapper();
     ttlvMapper.registerModule(new KmipTtlvModule());
     return ttlvMapper;
   }
 
+  /**
+   * Identifies which KMIP wire-format mapper (TTLV, XML, or JSON) to use.
+   */
   public enum MapperType {
     TTLV,
     XML,

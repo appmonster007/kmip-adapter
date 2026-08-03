@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.PrimeExponentP;
 
+/**
+ * TTLV deserializer for {@link PrimeExponentP}.
+ */
 public class PrimeExponentPTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PrimeExponentP, PrimeExponentP.PrimeExponentPBuilder> {
 
+  /**
+   * Constructs a new {@link PrimeExponentPTtlvDeserializer}.
+   */
   public PrimeExponentPTtlvDeserializer() {
     super(PrimeExponentP.kmipTag, PrimeExponentP.encodingType);
   }

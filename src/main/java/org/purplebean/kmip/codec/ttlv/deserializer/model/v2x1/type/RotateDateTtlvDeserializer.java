@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.RotateDate;
 
+/**
+ * TTLV deserializer for {@link RotateDate}.
+ */
 public class RotateDateTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<RotateDate, RotateDate.RotateDateBuilder> {
 
+  /**
+   * Constructs a new {@link RotateDateTtlvDeserializer}.
+   */
   public RotateDateTtlvDeserializer() {
     super(RotateDate.kmipTag, RotateDate.encodingType);
   }

@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.Nonce;
 import org.purplebean.kmip.model.core.type.NonceId;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * JSON deserializer for {@link Nonce}.
+ */
 public class NonceJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Nonce, Nonce.NonceBuilder> {
 
+  /**
+   * Constructs a new {@link NonceJsonDeserializer}.
+   */
   public NonceJsonDeserializer() {
     super(Nonce.kmipTag, Nonce.encodingType);
   }

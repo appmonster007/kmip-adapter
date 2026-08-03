@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.CryptographicDomainParameters;
 import org.purplebean.kmip.model.core.type.Qlength;
 
+/**
+ * TTLV deserializer for {@link CryptographicDomainParameters}.
+ */
 public class CryptographicDomainParametersTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CryptographicDomainParameters,
         CryptographicDomainParameters.CryptographicDomainParametersBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicDomainParametersTtlvDeserializer}.
+   */
   public CryptographicDomainParametersTtlvDeserializer() {
     super(CryptographicDomainParameters.kmipTag, CryptographicDomainParameters.encodingType);
   }

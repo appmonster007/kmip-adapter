@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RevocationReasonCode;
 import org.purplebean.kmip.model.core.structure.RevocationReason;
 import org.purplebean.kmip.model.core.type.RevocationMessage;
 
+/**
+ * JSON deserializer for {@link RevocationReason}.
+ */
 public class RevocationReasonJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RevocationReason,
         RevocationReason.RevocationReasonBuilder> {
 
+  /**
+   * Constructs a new {@link RevocationReasonJsonDeserializer}.
+   */
   public RevocationReasonJsonDeserializer() {
     super(RevocationReason.kmipTag, RevocationReason.encodingType);
   }

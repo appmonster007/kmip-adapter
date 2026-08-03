@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.Pkcs12CertificateLink;
 
+/**
+ * TTLV deserializer for {@link Pkcs12CertificateLink}.
+ */
 public class Pkcs12CertificateLinkTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Pkcs12CertificateLink,
         Pkcs12CertificateLink.Pkcs12CertificateLinkBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12CertificateLinkTtlvDeserializer}.
+   */
   public Pkcs12CertificateLinkTtlvDeserializer() {
     super(Pkcs12CertificateLink.kmipTag, Pkcs12CertificateLink.encodingType);
   }

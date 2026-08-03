@@ -47,10 +47,16 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateLength} instance wrapping the given value.
+   */
   public static CertificateLength of(@NonNull Integer value) {
     return new CertificateLength(value);
   }
 
+  /**
+   * Returns the {@link CertificateLength} instance wrapping the given value.
+   */
   public static CertificateLength of(@NonNull AttributeName attributeName,
                                      @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

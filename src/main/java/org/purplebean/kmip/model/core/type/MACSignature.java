@@ -42,10 +42,16 @@ public class MACSignature implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MACSignature} instance wrapping the given value.
+   */
   public static MACSignature of(@NonNull ByteBuffer value) {
     return new MACSignature(value);
   }
 
+  /**
+   * Returns the {@link MACSignature} instance wrapping the given value.
+   */
   public static MACSignature of(byte[] value) {
     return MACSignature
         .builder()

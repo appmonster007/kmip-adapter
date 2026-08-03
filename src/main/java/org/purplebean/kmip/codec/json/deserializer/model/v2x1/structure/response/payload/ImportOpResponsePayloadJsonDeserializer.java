@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.ImportOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link ImportOpResponsePayload}.
+ */
 public class ImportOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ImportOpResponsePayload,
         ImportOpResponsePayload.ImportOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ImportOpResponsePayloadJsonDeserializer}.
+   */
   public ImportOpResponsePayloadJsonDeserializer() {
     super(ImportOpResponsePayload.kmipTag, ImportOpResponsePayload.encodingType);
   }

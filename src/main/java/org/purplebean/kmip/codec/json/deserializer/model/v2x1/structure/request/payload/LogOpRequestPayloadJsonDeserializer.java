@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LogOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.LogMessage;
 
+/**
+ * JSON deserializer for {@link LogOpRequestPayload}.
+ */
 public class LogOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<LogOpRequestPayload,
         LogOpRequestPayload.LogOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LogOpRequestPayloadJsonDeserializer}.
+   */
   public LogOpRequestPayloadJsonDeserializer() {
     super(LogOpRequestPayload.kmipTag, LogOpRequestPayload.encodingType);
   }

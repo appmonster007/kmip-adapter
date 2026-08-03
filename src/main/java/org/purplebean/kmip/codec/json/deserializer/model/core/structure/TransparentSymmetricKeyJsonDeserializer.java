@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.structure.TransparentSymmetricKey;
 import org.purplebean.kmip.model.core.type.Key;
 
+/**
+ * JSON deserializer for {@link TransparentSymmetricKey}.
+ */
 public class TransparentSymmetricKeyJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<TransparentSymmetricKey,
         TransparentSymmetricKey.TransparentSymmetricKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentSymmetricKeyJsonDeserializer}.
+   */
   public TransparentSymmetricKeyJsonDeserializer() {
     super(TransparentSymmetricKey.kmipTag, TransparentSymmetricKey.encodingType);
   }

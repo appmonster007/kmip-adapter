@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.DeviceSerialNumber;
 
+/**
+ * JSON deserializer for {@link DeviceSerialNumber}.
+ */
 public class DeviceSerialNumberJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DeviceSerialNumber,
         DeviceSerialNumber.DeviceSerialNumberBuilder> {
 
+  /**
+   * Constructs a new {@link DeviceSerialNumberJsonDeserializer}.
+   */
   public DeviceSerialNumberJsonDeserializer() {
     super(DeviceSerialNumber.kmipTag, DeviceSerialNumber.encodingType);
   }

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ShreddingAlgorithm;
 
+/**
+ * XML deserializer for {@link ShreddingAlgorithm}.
+ */
 public class ShreddingAlgorithmXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ShreddingAlgorithm,
         ShreddingAlgorithm.ShreddingAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link ShreddingAlgorithmXmlDeserializer}.
+   */
   public ShreddingAlgorithmXmlDeserializer() {
     super(ShreddingAlgorithm.kmipTag, ShreddingAlgorithm.encodingType);
   }

@@ -41,6 +41,9 @@ public class ValidationLevel implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationLevel} instance wrapping the given value.
+   */
   public static ValidationLevel of(@NonNull Integer value) {
     return new ValidationLevel(value);
   }

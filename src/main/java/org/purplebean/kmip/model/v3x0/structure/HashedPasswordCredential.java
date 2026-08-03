@@ -66,6 +66,9 @@ public class HashedPasswordCredential implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link HashedPasswordCredential} instance wrapping the given value.
+   */
   public static HashedPasswordCredential of(
       CryptographicAlgorithm cryptographicAlgorithm,
       @NonNull HashedUsernamePassword hashedUsernamePassword,
@@ -78,6 +81,9 @@ public class HashedPasswordCredential implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link HashedPasswordCredential} instance wrapping the given value.
+   */
   public static HashedPasswordCredential of(
       @NonNull HashedUsernamePassword hashedUsernamePassword,
       @NonNull HashedPasswordUsername hashedPasswordUsername) {

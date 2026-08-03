@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.v3x0.enumeration.DeactivationReasonCode;
 import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
 import org.purplebean.kmip.model.v3x0.type.DeactivationMessage;
 
+/**
+ * TTLV deserializer for {@link DeactivationReason}.
+ */
 public class DeactivationReasonTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeactivationReason,
         DeactivationReason.DeactivationReasonBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationReasonTtlvDeserializer}.
+   */
   public DeactivationReasonTtlvDeserializer() {
     super(DeactivationReason.kmipTag, DeactivationReason.encodingType);
   }

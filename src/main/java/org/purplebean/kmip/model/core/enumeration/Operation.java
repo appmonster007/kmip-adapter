@@ -65,6 +65,9 @@ public class Operation implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link Operation} instance wrapping the given value.
+   */
   public static Operation of(@NonNull Value value) {
     return new Operation(value);
   }
@@ -343,6 +346,9 @@ public class Operation implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

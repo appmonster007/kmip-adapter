@@ -40,6 +40,9 @@ public class Pkcs11Interface implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11Interface} instance wrapping the given value.
+   */
   public static Pkcs11Interface of(@NonNull String value) {
     return new Pkcs11Interface(value);
   }

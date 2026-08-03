@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.IterationCount;
 
+/**
+ * TTLV deserializer for {@link IterationCount}.
+ */
 public class IterationCountTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<IterationCount, IterationCount.IterationCountBuilder> {
 
+  /**
+   * Constructs a new {@link IterationCountTtlvDeserializer}.
+   */
   public IterationCountTtlvDeserializer() {
     super(IterationCount.kmipTag, IterationCount.encodingType);
   }

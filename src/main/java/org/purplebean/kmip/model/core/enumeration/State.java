@@ -61,10 +61,16 @@ public class State implements KmipEnumeration, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link State} instance wrapping the given value.
+     */
     public static State of(@NonNull Value value) {
         return new State(value);
     }
 
+    /**
+     * Returns the {@link State} instance wrapping the given value.
+     */
     public static State of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
@@ -293,6 +299,9 @@ public class State implements KmipEnumeration, KmipAttribute {
 
         private final boolean custom = true;
 
+        /**
+         * Constructs a custom vendor extension value.
+         */
         public Extension(int value, String description, KmipSpec... supportedVersions) {
             this.value = value;
             this.description = description;

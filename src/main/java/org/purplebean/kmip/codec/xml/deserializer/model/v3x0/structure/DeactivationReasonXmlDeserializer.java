@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.v3x0.enumeration.DeactivationReasonCode;
 import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
 import org.purplebean.kmip.model.v3x0.type.DeactivationMessage;
 
+/**
+ * XML deserializer for {@link DeactivationReason}.
+ */
 public class DeactivationReasonXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DeactivationReason,
         DeactivationReason.DeactivationReasonBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationReasonXmlDeserializer}.
+   */
   public DeactivationReasonXmlDeserializer() {
     super(DeactivationReason.kmipTag, DeactivationReason.encodingType);
   }

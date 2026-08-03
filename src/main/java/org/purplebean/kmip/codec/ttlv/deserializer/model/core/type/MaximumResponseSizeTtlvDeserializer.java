@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.MaximumResponseSize;
 
+/**
+ * TTLV deserializer for {@link MaximumResponseSize}.
+ */
 public class MaximumResponseSizeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MaximumResponseSize,
         MaximumResponseSize.MaximumResponseSizeBuilder> {
 
+  /**
+   * Constructs a new {@link MaximumResponseSizeTtlvDeserializer}.
+   */
   public MaximumResponseSizeTtlvDeserializer() {
     super(MaximumResponseSize.kmipTag, MaximumResponseSize.encodingType);
   }

@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.PublicKey;
 
+/**
+ * JSON deserializer for {@link PublicKey}.
+ */
 public class PublicKeyJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<PublicKey, PublicKey.PublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link PublicKeyJsonDeserializer}.
+   */
   public PublicKeyJsonDeserializer() {
     super(PublicKey.kmipTag, PublicKey.encodingType);
   }

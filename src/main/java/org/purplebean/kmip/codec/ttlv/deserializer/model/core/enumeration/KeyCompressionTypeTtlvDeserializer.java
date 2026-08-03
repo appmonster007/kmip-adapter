@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
 
+/**
+ * TTLV deserializer for {@link KeyCompressionType}.
+ */
 public class KeyCompressionTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<KeyCompressionType,
         KeyCompressionType.KeyCompressionTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyCompressionTypeTtlvDeserializer}.
+   */
   public KeyCompressionTypeTtlvDeserializer() {
     super(KeyCompressionType.kmipTag, KeyCompressionType.encodingType);
   }

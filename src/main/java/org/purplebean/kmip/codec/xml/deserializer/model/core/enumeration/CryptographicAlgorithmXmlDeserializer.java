@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 
+/**
+ * XML deserializer for {@link CryptographicAlgorithm}.
+ */
 public class CryptographicAlgorithmXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CryptographicAlgorithm,
         CryptographicAlgorithm.CryptographicAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicAlgorithmXmlDeserializer}.
+   */
   public CryptographicAlgorithmXmlDeserializer() {
     super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType);
   }

@@ -41,6 +41,9 @@ public class IvLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link IvLength} instance wrapping the given value.
+   */
   public static IvLength of(@NonNull Integer value) {
     return new IvLength(value);
   }

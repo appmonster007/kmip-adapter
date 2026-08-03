@@ -14,10 +14,16 @@ import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateSplitKeyOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link CreateSplitKeyOpRequestPayload}.
+ */
 public class CreateSplitKeyOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CreateSplitKeyOpRequestPayload,
         CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateSplitKeyOpRequestPayloadTtlvDeserializer}.
+   */
   public CreateSplitKeyOpRequestPayloadTtlvDeserializer() {
     super(CreateSplitKeyOpRequestPayload.kmipTag, CreateSplitKeyOpRequestPayload.encodingType);
   }

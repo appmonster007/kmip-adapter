@@ -9,6 +9,9 @@ import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
+/**
+ * TTLV serializer for {@link BigInteger}.
+ */
 public class BigIntegerTtlvSerializer extends TtlvSerializer<BigInteger> {
   private final EncodingType type = EncodingType.BIG_INTEGER;
 

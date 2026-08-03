@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.type.AttributeReferenceTag;
 
+/**
+ * KMIP GetAttributesOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class GetAttributesOpRequestPayload implements RequestPayloadStructure {
@@ -54,6 +57,9 @@ public class GetAttributesOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link GetAttributesOpRequestPayload} instance wrapping the given value.
+   */
   public static GetAttributesOpRequestPayload of(List<KmipDataType> values) {
     var builder = GetAttributesOpRequestPayload.builder();
     for (KmipDataType value : values) {

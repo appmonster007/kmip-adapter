@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP CreateUserOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateUserOpRequestPayload implements RequestPayloadStructure {
@@ -46,6 +49,9 @@ public class CreateUserOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateUserOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateUserOpRequestPayload of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

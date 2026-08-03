@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.type.InitializationVector;
 import org.purplebean.kmip.model.core.type.IterationCount;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * JSON deserializer for {@link DerivationParameters}.
+ */
 public class DerivationParametersJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DerivationParameters,
         DerivationParameters.DerivationParametersBuilder> {
 
+  /**
+   * Constructs a new {@link DerivationParametersJsonDeserializer}.
+   */
   public DerivationParametersJsonDeserializer() {
     super(DerivationParameters.kmipTag, DerivationParameters.encodingType);
   }

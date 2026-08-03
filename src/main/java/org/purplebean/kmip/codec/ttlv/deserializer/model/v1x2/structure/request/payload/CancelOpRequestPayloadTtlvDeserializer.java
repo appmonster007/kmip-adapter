@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CancelOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link CancelOpRequestPayload}.
+ */
 public class CancelOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CancelOpRequestPayload,
         CancelOpRequestPayload.CancelOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CancelOpRequestPayloadTtlvDeserializer}.
+   */
   public CancelOpRequestPayloadTtlvDeserializer() {
     super(CancelOpRequestPayload.kmipTag, CancelOpRequestPayload.encodingType);
   }

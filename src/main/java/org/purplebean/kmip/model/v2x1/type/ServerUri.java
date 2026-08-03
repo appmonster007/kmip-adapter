@@ -41,6 +41,9 @@ public class ServerUri implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ServerUri} instance wrapping the given value.
+   */
   public static ServerUri of(@NonNull String value) {
     return new ServerUri(value);
   }

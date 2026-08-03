@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP ProtocolVersionMinor dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProtocolVersionMinor implements KmipDataType {
@@ -36,6 +39,9 @@ public class ProtocolVersionMinor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtocolVersionMinor} instance wrapping the given value.
+   */
   public static ProtocolVersionMinor of(int minor) {
     return ProtocolVersionMinor
         .builder()

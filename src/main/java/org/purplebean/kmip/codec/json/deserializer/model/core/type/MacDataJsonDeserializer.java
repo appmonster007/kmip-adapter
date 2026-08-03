@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.MacData;
 
+/**
+ * JSON deserializer for {@link MacData}.
+ */
 public class MacDataJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<MacData, MacData.MacDataBuilder> {
 
+  /**
+   * Constructs a new {@link MacDataJsonDeserializer}.
+   */
   public MacDataJsonDeserializer() {
     super(MacData.kmipTag, MacData.encodingType);
   }

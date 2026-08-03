@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.AlwaysSensitive;
 
+/**
+ * TTLV deserializer for {@link AlwaysSensitive}.
+ */
 public class AlwaysSensitiveTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AlwaysSensitive, AlwaysSensitive.AlwaysSensitiveBuilder> {
 
+  /**
+   * Constructs a new {@link AlwaysSensitiveTtlvDeserializer}.
+   */
   public AlwaysSensitiveTtlvDeserializer() {
     super(AlwaysSensitive.kmipTag, AlwaysSensitive.encodingType);
   }

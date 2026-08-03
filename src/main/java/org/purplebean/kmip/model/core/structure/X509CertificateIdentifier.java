@@ -64,12 +64,18 @@ public class X509CertificateIdentifier implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link X509CertificateIdentifier} instance wrapping the given value.
+   */
   public static X509CertificateIdentifier of(@NonNull ByteBuffer issuerDistinguishedName,
                                              @NonNull ByteBuffer certificateSerialNumber) {
     return new X509CertificateIdentifier(IssuerDistinguishedName.of(issuerDistinguishedName),
         CertificateSerialNumber.of(certificateSerialNumber));
   }
 
+  /**
+   * Returns the {@link X509CertificateIdentifier} instance wrapping the given value.
+   */
   public static X509CertificateIdentifier of(@NonNull AttributeName attributeName,
                                              @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

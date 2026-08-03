@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP KeyMaterialStructure attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
@@ -45,6 +48,9 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyMaterialStructure} instance wrapping the given value.
+   */
   public static KeyMaterialStructure of(@NonNull KeyMaterial value) {
     if (!(value instanceof KeyMaterialStructure keyMaterialStructure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -52,6 +58,9 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
     return keyMaterialStructure;
   }
 
+  /**
+   * Returns the {@link KeyMaterialStructure} instance wrapping the given value.
+   */
   public static KeyMaterialStructure of(@NonNull List<KmipDataType> values) {
     return KeyMaterialStructure
         .builder()
@@ -59,6 +68,9 @@ public class KeyMaterialStructure implements KeyMaterial, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link KeyMaterialStructure} instance wrapping the given value.
+   */
   public static KeyMaterialStructure of(@NonNull KmipDataType... values) {
     return of(List.of(values));
   }

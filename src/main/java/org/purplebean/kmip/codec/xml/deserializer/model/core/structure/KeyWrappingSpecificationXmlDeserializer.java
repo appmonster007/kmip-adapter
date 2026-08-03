@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
 import org.purplebean.kmip.model.core.type.AttributeName;
 
+/**
+ * XML deserializer for {@link KeyWrappingSpecification}.
+ */
 public class KeyWrappingSpecificationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyWrappingSpecification,
         KeyWrappingSpecification.KeyWrappingSpecificationBuilder> {
 
+  /**
+   * Constructs a new {@link KeyWrappingSpecificationXmlDeserializer}.
+   */
   public KeyWrappingSpecificationXmlDeserializer() {
     super(KeyWrappingSpecification.kmipTag, KeyWrappingSpecification.encodingType);
   }

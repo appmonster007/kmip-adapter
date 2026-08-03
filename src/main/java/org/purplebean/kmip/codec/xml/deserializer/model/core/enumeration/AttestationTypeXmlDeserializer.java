@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.AttestationType;
 
+/**
+ * XML deserializer for {@link AttestationType}.
+ */
 public class AttestationTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AttestationType, AttestationType.AttestationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationTypeXmlDeserializer}.
+   */
   public AttestationTypeXmlDeserializer() {
     super(AttestationType.kmipTag, AttestationType.encodingType);
   }

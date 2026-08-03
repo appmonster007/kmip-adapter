@@ -49,6 +49,9 @@ public class RandomNumberGenerator implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RandomNumberGenerator} instance wrapping the given value.
+   */
   public static RandomNumberGenerator of(@NonNull RngParameters rngParameters) {
     return RandomNumberGenerator
         .builder()
@@ -56,6 +59,9 @@ public class RandomNumberGenerator implements KmipStructure, KmipAttribute {
         .build();
   }
 
+  /**
+   * Returns the {@link RandomNumberGenerator} instance wrapping the given value.
+   */
   public static RandomNumberGenerator of(@NonNull AttributeName attributeName,
                                          @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

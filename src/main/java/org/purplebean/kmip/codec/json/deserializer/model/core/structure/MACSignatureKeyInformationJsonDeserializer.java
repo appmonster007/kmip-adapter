@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * JSON deserializer for {@link MACSignatureKeyInformation}.
+ */
 public class MACSignatureKeyInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MACSignatureKeyInformation,
         MACSignatureKeyInformation.MACSignatureKeyInformationBuilder> {
 
+  /**
+   * Constructs a new {@link MACSignatureKeyInformationJsonDeserializer}.
+   */
   public MACSignatureKeyInformationJsonDeserializer() {
     super(MACSignatureKeyInformation.kmipTag, MACSignatureKeyInformation.encodingType);
   }

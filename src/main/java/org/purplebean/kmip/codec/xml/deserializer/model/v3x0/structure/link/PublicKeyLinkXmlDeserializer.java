@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.PublicKeyLink;
 
+/**
+ * XML deserializer for {@link PublicKeyLink}.
+ */
 public class PublicKeyLinkXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<PublicKeyLink, PublicKeyLink.PublicKeyLinkBuilder> {
 
+  /**
+   * Constructs a new {@link PublicKeyLinkXmlDeserializer}.
+   */
   public PublicKeyLinkXmlDeserializer() {
     super(PublicKeyLink.kmipTag, PublicKeyLink.encodingType);
   }

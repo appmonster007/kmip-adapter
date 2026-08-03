@@ -16,6 +16,9 @@ import org.purplebean.kmip.model.core.enumeration.ProfileName;
 import org.purplebean.kmip.model.v2x1.type.ServerPort;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * KMIP ProfileInformation structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProfileInformation implements KmipStructure {
@@ -48,6 +51,9 @@ public class ProfileInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ProfileInformation} instance wrapping the given value.
+   */
   public static ProfileInformation of(@NonNull ProfileName profileName) {
     return ProfileInformation
         .builder()
@@ -55,6 +61,9 @@ public class ProfileInformation implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ProfileInformation} instance wrapping the given value.
+   */
   public static ProfileInformation of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
+/**
+ * TTLV deserializer for {@link KeyFormatType}.
+ */
 public class KeyFormatTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<KeyFormatType, KeyFormatType.KeyFormatTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyFormatTypeTtlvDeserializer}.
+   */
   public KeyFormatTypeTtlvDeserializer() {
     super(KeyFormatType.kmipTag, KeyFormatType.encodingType);
   }

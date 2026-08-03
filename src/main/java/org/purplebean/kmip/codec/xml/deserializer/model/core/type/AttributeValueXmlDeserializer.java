@@ -20,12 +20,18 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.util.StringUtils;
 
+/**
+ * XML deserializer for {@link AttributeValue}.
+ */
 public class AttributeValueXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AttributeValue, AttributeValue.AttributeValueBuilder> {
 
   private final Stack<EncodingType> encodingTypeStack = new Stack<>();
   private final Stack<Object> valueStack = new Stack<>();
 
+  /**
+   * Constructs a new {@link AttributeValueXmlDeserializer}.
+   */
   public AttributeValueXmlDeserializer() {
     super(AttributeValue.kmipTag, null);
   }

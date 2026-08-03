@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 
+/**
+ * JSON deserializer for {@link Pkcs11Interface}.
+ */
 public class Pkcs11InterfaceJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs11Interface, Pkcs11Interface.Pkcs11InterfaceBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11InterfaceJsonDeserializer}.
+   */
   public Pkcs11InterfaceJsonDeserializer() {
     super(Pkcs11Interface.kmipTag, Pkcs11Interface.encodingType);
   }

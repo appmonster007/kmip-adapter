@@ -74,6 +74,9 @@ public class RotateNameType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateNameType} instance wrapping the given value.
+   */
   public static RotateNameType of(@NonNull Value value) {
     return new RotateNameType(value);
   }
@@ -249,6 +252,9 @@ public class RotateNameType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

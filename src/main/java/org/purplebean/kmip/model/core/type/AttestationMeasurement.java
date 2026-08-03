@@ -42,10 +42,16 @@ public class AttestationMeasurement implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttestationMeasurement} instance wrapping the given value.
+   */
   public static AttestationMeasurement of(@NonNull ByteBuffer value) {
     return new AttestationMeasurement(value);
   }
 
+  /**
+   * Returns the {@link AttestationMeasurement} instance wrapping the given value.
+   */
   public static AttestationMeasurement of(byte[] value) {
     return of(ByteBuffer.wrap(value));
   }

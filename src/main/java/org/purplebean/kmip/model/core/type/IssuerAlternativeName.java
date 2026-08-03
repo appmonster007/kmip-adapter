@@ -42,10 +42,16 @@ public class IssuerAlternativeName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link IssuerAlternativeName} instance wrapping the given value.
+   */
   public static IssuerAlternativeName of(@NonNull ByteBuffer value) {
     return new IssuerAlternativeName(value);
   }
 
+  /**
+   * Returns the {@link IssuerAlternativeName} instance wrapping the given value.
+   */
   public static IssuerAlternativeName of(byte[] value) {
     return IssuerAlternativeName
         .builder()

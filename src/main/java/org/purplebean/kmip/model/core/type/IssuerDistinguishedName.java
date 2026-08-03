@@ -42,10 +42,16 @@ public class IssuerDistinguishedName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link IssuerDistinguishedName} instance wrapping the given value.
+   */
   public static IssuerDistinguishedName of(@NonNull ByteBuffer value) {
     return new IssuerDistinguishedName(value);
   }
 
+  /**
+   * Returns the {@link IssuerDistinguishedName} instance wrapping the given value.
+   */
   public static IssuerDistinguishedName of(byte[] value) {
     return IssuerDistinguishedName
         .builder()

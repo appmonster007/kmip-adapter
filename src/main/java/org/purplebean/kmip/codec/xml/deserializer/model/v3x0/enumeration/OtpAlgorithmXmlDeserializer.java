@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.enumeration.OtpAlgorithm;
 
+/**
+ * XML deserializer for {@link OtpAlgorithm}.
+ */
 public class OtpAlgorithmXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<OtpAlgorithm, OtpAlgorithm.OtpAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link OtpAlgorithmXmlDeserializer}.
+   */
   public OtpAlgorithmXmlDeserializer() {
     super(OtpAlgorithm.kmipTag, OtpAlgorithm.encodingType);
   }

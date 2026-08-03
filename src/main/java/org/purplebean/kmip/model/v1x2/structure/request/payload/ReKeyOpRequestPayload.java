@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.Offset;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ReKeyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ReKeyOpRequestPayload implements RequestPayloadStructure {
@@ -54,6 +57,9 @@ public class ReKeyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReKeyOpRequestPayload} instance wrapping the given value.
+   */
   public static ReKeyOpRequestPayload of(
       UniqueIdentifier uniqueIdentifier,
       Offset offset,
@@ -67,6 +73,9 @@ public class ReKeyOpRequestPayload implements RequestPayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ReKeyOpRequestPayload} instance wrapping the given value.
+   */
   public static ReKeyOpRequestPayload of(List<KmipDataType> values) {
     var builder = ReKeyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

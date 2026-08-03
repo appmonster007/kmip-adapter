@@ -61,6 +61,9 @@ public class KeyValueLocation implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValueLocation} instance wrapping the given value.
+   */
   public static KeyValueLocation of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

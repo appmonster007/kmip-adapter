@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * XML deserializer for {@link QString}.
+ */
 public class QStringXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<QString, QString.QStringBuilder> {
 
+  /**
+   * Constructs a new {@link QStringXmlDeserializer}.
+   */
   public QStringXmlDeserializer() {
     super(QString.kmipTag, QString.encodingType);
   }

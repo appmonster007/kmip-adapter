@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.core.structure.UsageLimits;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.core.type.UsageLimitsTotal;
 
+/**
+ * TTLV deserializer for {@link UsageLimits}.
+ */
 public class UsageLimitsTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<UsageLimits, UsageLimits.UsageLimitsBuilder> {
 
+  /**
+   * Constructs a new {@link UsageLimitsTtlvDeserializer}.
+   */
   public UsageLimitsTtlvDeserializer() {
     super(UsageLimits.kmipTag, UsageLimits.encodingType);
   }

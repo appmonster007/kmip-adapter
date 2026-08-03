@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.Pkcs12CertificateLink;
 
+/**
+ * XML deserializer for {@link Pkcs12CertificateLink}.
+ */
 public class Pkcs12CertificateLinkXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs12CertificateLink,
         Pkcs12CertificateLink.Pkcs12CertificateLinkBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12CertificateLinkXmlDeserializer}.
+   */
   public Pkcs12CertificateLinkXmlDeserializer() {
     super(Pkcs12CertificateLink.kmipTag, Pkcs12CertificateLink.encodingType);
   }

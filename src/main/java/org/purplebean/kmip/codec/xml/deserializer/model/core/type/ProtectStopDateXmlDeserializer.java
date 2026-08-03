@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ProtectStopDate;
 
+/**
+ * XML deserializer for {@link ProtectStopDate}.
+ */
 public class ProtectStopDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProtectStopDate, ProtectStopDate.ProtectStopDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectStopDateXmlDeserializer}.
+   */
   public ProtectStopDateXmlDeserializer() {
     super(ProtectStopDate.kmipTag, ProtectStopDate.encodingType);
   }

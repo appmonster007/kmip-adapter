@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
+/**
+ * JSON deserializer for {@link Long}.
+ */
 public class LongJsonDeserializer extends JsonDeserializer<Long> {
 
   @Override

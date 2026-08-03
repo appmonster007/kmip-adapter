@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.type.HashedUsernamePassword;
 
+/**
+ * JSON deserializer for {@link HashedUsernamePassword}.
+ */
 public class HashedUsernamePasswordJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<HashedUsernamePassword,
         HashedUsernamePassword.HashedUsernamePasswordBuilder> {
 
+  /**
+   * Constructs a new {@link HashedUsernamePasswordJsonDeserializer}.
+   */
   public HashedUsernamePasswordJsonDeserializer() {
     super(HashedUsernamePassword.kmipTag, HashedUsernamePassword.encodingType);
   }

@@ -47,10 +47,16 @@ public class Pkcs12FriendlyName implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs12FriendlyName} instance wrapping the given value.
+   */
   public static Pkcs12FriendlyName of(@NonNull String value) {
     return new Pkcs12FriendlyName(value);
   }
 
+  /**
+   * Returns the {@link Pkcs12FriendlyName} instance wrapping the given value.
+   */
   public static Pkcs12FriendlyName of(@NonNull AttributeName attributeName,
                                       @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * TTLV deserializer for {@link TransparentDhPublicKey}.
+ */
 public class TransparentDhPublicKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentDhPublicKey,
         TransparentDhPublicKey.TransparentDhPublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentDhPublicKeyTtlvDeserializer}.
+   */
   public TransparentDhPublicKeyTtlvDeserializer() {
     super(TransparentDhPublicKey.kmipTag, TransparentDhPublicKey.encodingType);
   }

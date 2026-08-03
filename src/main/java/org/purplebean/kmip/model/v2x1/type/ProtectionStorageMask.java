@@ -62,10 +62,16 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtectionStorageMask} instance wrapping the given value.
+   */
   public static ProtectionStorageMask of(@NonNull Integer value) {
     return new ProtectionStorageMask(value);
   }
 
+  /**
+   * Returns the {@link ProtectionStorageMask} instance wrapping the given value.
+   */
   public static ProtectionStorageMask of(@NonNull AttributeName attributeName,
                                          @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||
@@ -75,6 +81,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
     return new ProtectionStorageMask(value);
   }
 
+  /**
+   * Parses a space-separated mask description string into a {@link ProtectionStorageMask}.
+   */
   public static ProtectionStorageMask fromMaskString(@NonNull String value) {
     int mask = MaskEnum.fromMaskString(value);
     return new ProtectionStorageMask(mask);
@@ -157,11 +166,17 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
     return kmipTag.getDescription();
   }
 
+  /**
+   * Marker interface for mask-based enumeration values.
+   */
   public interface MaskEnum {
     Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
     Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
     Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
 
+    /**
+     * Looks up the {@link Value} matching the given name.
+     */
     static Value fromName(String name) {
       KmipSpec spec = KmipContext.getSpec();
       Value v = DESCRIPTION_REGISTRY.get(name);
@@ -173,6 +188,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
           ));
     }
 
+    /**
+     * Converts a protection storage mask bit value into its space-separated description string.
+     */
     static String toMaskString(int value) {
       StringBuilder sb = new StringBuilder();
       VALUE_REGISTRY
@@ -197,6 +215,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
           .trim();
     }
 
+    /**
+     * Parses a space-separated mask description string into its integer bit value.
+     */
     static int fromMaskString(String value) {
       List<String> maskNames = List.of(value.split(" "));
       int maskValue = 0;
@@ -209,6 +230,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
       return maskValue;
     }
 
+    /**
+     * Standard KMIP-defined values.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -233,6 +257,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
       private final boolean custom = false;
     }
 
+    /**
+     * Represents a specific value of the enclosing enumeration.
+     */
     interface Value {
       int getValue();
 
@@ -241,6 +268,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
       boolean isCustom();
     }
 
+    /**
+     * Vendor-defined extension value.
+     */
     @Getter
     @AllArgsConstructor
     @ToString

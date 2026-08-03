@@ -91,6 +91,9 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link QueryOpResponsePayload} instance wrapping the given value.
+   */
   public static QueryOpResponsePayload of(List<KmipDataType> values) {
     var builder = QueryOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

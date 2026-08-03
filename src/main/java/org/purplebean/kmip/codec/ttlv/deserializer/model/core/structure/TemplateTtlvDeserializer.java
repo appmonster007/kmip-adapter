@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.structure.Template;
 
+/**
+ * TTLV deserializer for {@link Template}.
+ */
 public class TemplateTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Template, Template.TemplateBuilder> {
 
+  /**
+   * Constructs a new {@link TemplateTtlvDeserializer}.
+   */
   public TemplateTtlvDeserializer() {
     super(Template.kmipTag, Template.encodingType);
   }

@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
 import org.purplebean.kmip.model.v2x1.structure.Ticket;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * XML deserializer for {@link Ticket}.
+ */
 public class TicketXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Ticket, Ticket.TicketBuilder> {
 
+  /**
+   * Constructs a new {@link TicketXmlDeserializer}.
+   */
   public TicketXmlDeserializer() {
     super(Ticket.kmipTag, Ticket.encodingType);
   }

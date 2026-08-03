@@ -23,6 +23,9 @@ import org.purplebean.kmip.api.request.RequestBatchItemStructure;
 import org.purplebean.kmip.api.request.RequestHeaderStructure;
 import org.purplebean.kmip.api.request.RequestMessageStructure;
 
+/**
+ * KMIP SimpleRequestMessage structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestMessage implements RequestMessageStructure {
@@ -59,10 +62,16 @@ public class SimpleRequestMessage implements RequestMessageStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SimpleRequestMessage} instance wrapping the given value.
+   */
   public static SimpleRequestMessage of(KmipDataType... values) {
     return of(List.of(values), List.of());
   }
 
+  /**
+   * Returns the {@link SimpleRequestMessage} instance wrapping the given value.
+   */
   public static SimpleRequestMessage of(List<KmipDataType> values, List<Exception> errors) {
     var builder = SimpleRequestMessage.builder();
     builder.requestBatchItemErrors(errors);

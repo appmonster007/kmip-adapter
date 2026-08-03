@@ -41,6 +41,9 @@ public class LinkedObjectIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link LinkedObjectIdentifier} instance wrapping the given value.
+   */
   public static LinkedObjectIdentifier of(@NonNull String value) {
     return new LinkedObjectIdentifier(value);
   }

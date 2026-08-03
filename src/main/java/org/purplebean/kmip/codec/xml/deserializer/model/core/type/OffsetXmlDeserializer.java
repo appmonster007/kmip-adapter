@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.Offset;
 
+/**
+ * XML deserializer for {@link Offset}.
+ */
 public class OffsetXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Offset, Offset.OffsetBuilder> {
 
+  /**
+   * Constructs a new {@link OffsetXmlDeserializer}.
+   */
   public OffsetXmlDeserializer() {
     super(Offset.kmipTag, Offset.encodingType);
   }

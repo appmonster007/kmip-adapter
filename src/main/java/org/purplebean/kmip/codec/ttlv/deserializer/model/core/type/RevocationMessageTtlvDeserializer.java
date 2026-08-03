@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.RevocationMessage;
 
+/**
+ * TTLV deserializer for {@link RevocationMessage}.
+ */
 public class RevocationMessageTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RevocationMessage,
         RevocationMessage.RevocationMessageBuilder> {
 
+  /**
+   * Constructs a new {@link RevocationMessageTtlvDeserializer}.
+   */
   public RevocationMessageTtlvDeserializer() {
     super(RevocationMessage.kmipTag, RevocationMessage.encodingType);
   }

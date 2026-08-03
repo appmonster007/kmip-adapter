@@ -41,6 +41,9 @@ public class ValidationVendorUri implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationVendorUri} instance wrapping the given value.
+   */
   public static ValidationVendorUri of(@NonNull String value) {
     return new ValidationVendorUri(value);
   }

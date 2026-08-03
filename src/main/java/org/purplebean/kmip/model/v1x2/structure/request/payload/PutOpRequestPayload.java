@@ -25,6 +25,9 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.ReplacedUniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP PutOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PutOpRequestPayload implements RequestPayloadStructure {
@@ -74,6 +77,9 @@ public class PutOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PutOpRequestPayload} instance wrapping the given value.
+   */
   public static PutOpRequestPayload of(List<KmipDataType> values) {
     var builder = PutOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

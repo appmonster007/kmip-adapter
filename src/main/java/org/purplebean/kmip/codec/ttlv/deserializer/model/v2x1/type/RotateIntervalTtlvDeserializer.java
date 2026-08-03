@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.RotateInterval;
 
+/**
+ * TTLV deserializer for {@link RotateInterval}.
+ */
 public class RotateIntervalTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RotateInterval, RotateInterval.RotateIntervalBuilder> {
 
+  /**
+   * Constructs a new {@link RotateIntervalTtlvDeserializer}.
+   */
   public RotateIntervalTtlvDeserializer() {
     super(RotateInterval.kmipTag, RotateInterval.encodingType);
   }

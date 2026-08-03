@@ -14,9 +14,15 @@ import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.KeyWrappingData;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 
+/**
+ * TTLV deserializer for {@link KeyBlock}.
+ */
 public class KeyBlockTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<KeyBlock, KeyBlock.KeyBlockBuilder> {
 
+  /**
+   * Constructs a new {@link KeyBlockTtlvDeserializer}.
+   */
   public KeyBlockTtlvDeserializer() {
     super(KeyBlock.kmipTag, KeyBlock.encodingType);
   }

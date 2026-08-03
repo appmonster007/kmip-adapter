@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.type.QString;
 import org.purplebean.kmip.model.v2x1.structure.TransparentEcPublicKey;
 
+/**
+ * TTLV deserializer for {@link TransparentEcPublicKey}.
+ */
 public class TransparentEcPublicKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentEcPublicKey,
         TransparentEcPublicKey.TransparentEcPublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentEcPublicKeyTtlvDeserializer}.
+   */
   public TransparentEcPublicKeyTtlvDeserializer() {
     super(TransparentEcPublicKey.kmipTag, TransparentEcPublicKey.encodingType);
   }

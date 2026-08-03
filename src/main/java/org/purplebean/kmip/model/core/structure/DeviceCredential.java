@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.core.type.MediaIdentifier;
 import org.purplebean.kmip.model.core.type.NetworkIdentifier;
 import org.purplebean.kmip.model.core.type.Password;
 
+/**
+ * KMIP DeviceCredential attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeviceCredential implements CredentialValue, KmipStructure {
@@ -66,6 +69,9 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeviceCredential} instance wrapping the given value.
+   */
   public static DeviceCredential of(CredentialValue value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid credential value: " + value);
@@ -73,10 +79,16 @@ public class DeviceCredential implements CredentialValue, KmipStructure {
     return of(structure.getValue());
   }
 
+  /**
+   * Returns the {@link DeviceCredential} instance wrapping the given value.
+   */
   public static DeviceCredential of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link DeviceCredential} instance wrapping the given value.
+   */
   public static DeviceCredential of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

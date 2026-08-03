@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.EncodingOption;
 import org.purplebean.kmip.model.core.enumeration.WrappingMethod;
 import org.purplebean.kmip.model.core.type.AttributeName;
 
+/**
+ * KMIP KeyWrappingSpecification attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyWrappingSpecification implements KmipStructure {

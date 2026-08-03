@@ -59,6 +59,9 @@ public class InteropOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link InteropOpRequestPayload} instance wrapping the given value.
+   */
   public static InteropOpRequestPayload of(List<KmipDataType> values) {
     var builder = InteropOpRequestPayload.builder();
     values.forEach(value -> {
@@ -71,6 +74,9 @@ public class InteropOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link InteropOpRequestPayload} instance wrapping the given value.
+   */
   public static InteropOpRequestPayload of(
       @NonNull InteropFunction interopFunction,
       InteropIdentifier interopIdentifier

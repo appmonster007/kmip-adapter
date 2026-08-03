@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.TransparentSymmetricKey;
 import org.purplebean.kmip.model.core.type.Key;
 
+/**
+ * TTLV deserializer for {@link TransparentSymmetricKey}.
+ */
 public class TransparentSymmetricKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentSymmetricKey,
         TransparentSymmetricKey.TransparentSymmetricKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentSymmetricKeyTtlvDeserializer}.
+   */
   public TransparentSymmetricKeyTtlvDeserializer() {
     super(TransparentSymmetricKey.kmipTag, TransparentSymmetricKey.encodingType);
   }

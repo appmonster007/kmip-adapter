@@ -53,6 +53,9 @@ public class SetEndpointRoleOpResponsePayload implements ResponsePayloadStructur
     validate();
   }
 
+  /**
+   * Returns the {@link SetEndpointRoleOpResponsePayload} instance wrapping the given value.
+   */
   public static SetEndpointRoleOpResponsePayload of(List<KmipDataType> values) {
     var builder = SetEndpointRoleOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class SetEndpointRoleOpResponsePayload implements ResponsePayloadStructur
     return builder.build();
   }
 
+  /**
+   * Returns the {@link SetEndpointRoleOpResponsePayload} instance wrapping the given value.
+   */
   public static SetEndpointRoleOpResponsePayload of(@NonNull EndpointRole endpointRole) {
     return SetEndpointRoleOpResponsePayload
         .builder()

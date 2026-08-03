@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * XML deserializer for {@link TransparentDhPublicKey}.
+ */
 public class TransparentDhPublicKeyXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<TransparentDhPublicKey,
         TransparentDhPublicKey.TransparentDhPublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentDhPublicKeyXmlDeserializer}.
+   */
   public TransparentDhPublicKeyXmlDeserializer() {
     super(TransparentDhPublicKey.kmipTag, TransparentDhPublicKey.encodingType);
   }

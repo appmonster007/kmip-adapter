@@ -47,10 +47,16 @@ public class QuantumSafe implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link QuantumSafe} instance wrapping the given value.
+   */
   public static QuantumSafe of(@NonNull Boolean value) {
     return new QuantumSafe(value);
   }
 
+  /**
+   * Returns the {@link QuantumSafe} instance wrapping the given value.
+   */
   public static QuantumSafe of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

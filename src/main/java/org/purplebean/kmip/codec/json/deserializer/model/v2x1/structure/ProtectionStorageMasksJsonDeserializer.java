@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.v2x1.structure.ProtectionStorageMasks;
 import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
 
+/**
+ * JSON deserializer for {@link ProtectionStorageMasks}.
+ */
 public class ProtectionStorageMasksJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtectionStorageMasks,
         ProtectionStorageMasks.ProtectionStorageMasksBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionStorageMasksJsonDeserializer}.
+   */
   public ProtectionStorageMasksJsonDeserializer() {
     super(ProtectionStorageMasks.kmipTag, ProtectionStorageMasks.encodingType);
   }

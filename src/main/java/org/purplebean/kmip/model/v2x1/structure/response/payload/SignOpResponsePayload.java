@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.SignatureData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * KMIP SignOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SignOpResponsePayload implements ResponsePayloadStructure {
@@ -56,6 +59,9 @@ public class SignOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SignOpResponsePayload} instance wrapping the given value.
+   */
   public static SignOpResponsePayload of(List<KmipDataType> values) {
     var builder = SignOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

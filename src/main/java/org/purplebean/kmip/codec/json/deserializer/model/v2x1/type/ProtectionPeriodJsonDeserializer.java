@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ProtectionPeriod;
 
+/**
+ * JSON deserializer for {@link ProtectionPeriod}.
+ */
 public class ProtectionPeriodJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtectionPeriod,
         ProtectionPeriod.ProtectionPeriodBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionPeriodJsonDeserializer}.
+   */
   public ProtectionPeriodJsonDeserializer() {
     super(ProtectionPeriod.kmipTag, ProtectionPeriod.encodingType);
   }

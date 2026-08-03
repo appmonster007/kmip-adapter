@@ -47,10 +47,16 @@ public class RotateAutomatic implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateAutomatic} instance wrapping the given value.
+   */
   public static RotateAutomatic of(@NonNull Boolean value) {
     return new RotateAutomatic(value);
   }
 
+  /**
+   * Returns the {@link RotateAutomatic} instance wrapping the given value.
+   */
   public static RotateAutomatic of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

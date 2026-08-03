@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
 
+/**
+ * XML deserializer for {@link AdjustmentType}.
+ */
 public class AdjustmentTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AdjustmentType, AdjustmentType.AdjustmentTypeBuilder> {
 
+  /**
+   * Constructs a new {@link AdjustmentTypeXmlDeserializer}.
+   */
   public AdjustmentTypeXmlDeserializer() {
     super(AdjustmentType.kmipTag, AdjustmentType.encodingType);
   }

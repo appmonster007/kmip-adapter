@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * KMIP LoginOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class LoginOpRequestPayload implements RequestPayloadStructure {
@@ -47,6 +50,9 @@ public class LoginOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LoginOpRequestPayload} instance wrapping the given value.
+   */
   public static LoginOpRequestPayload of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

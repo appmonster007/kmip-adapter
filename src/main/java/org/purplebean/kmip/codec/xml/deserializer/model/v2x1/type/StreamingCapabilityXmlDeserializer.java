@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
+/**
+ * XML deserializer for {@link StreamingCapability}.
+ */
 public class StreamingCapabilityXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<StreamingCapability,
         StreamingCapability.StreamingCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link StreamingCapabilityXmlDeserializer}.
+   */
   public StreamingCapabilityXmlDeserializer() {
     super(StreamingCapability.kmipTag, StreamingCapability.encodingType);
   }

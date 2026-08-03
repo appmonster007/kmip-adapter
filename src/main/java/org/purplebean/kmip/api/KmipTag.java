@@ -1126,6 +1126,9 @@ public class KmipTag {
      */
     boolean isSupported();
 
+    /**
+     * @return the set of KMIP specification versions this tag is supported in.
+     */
     Set<KmipSpec> getSupportedVersions();
 
     /**
@@ -1165,6 +1168,9 @@ public class KmipTag {
      */
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

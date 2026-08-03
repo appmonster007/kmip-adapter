@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.NeverExtractable;
 
+/**
+ * TTLV deserializer for {@link NeverExtractable}.
+ */
 public class NeverExtractableTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<NeverExtractable,
         NeverExtractable.NeverExtractableBuilder> {
 
+  /**
+   * Constructs a new {@link NeverExtractableTtlvDeserializer}.
+   */
   public NeverExtractableTtlvDeserializer() {
     super(NeverExtractable.kmipTag, NeverExtractable.encodingType);
   }

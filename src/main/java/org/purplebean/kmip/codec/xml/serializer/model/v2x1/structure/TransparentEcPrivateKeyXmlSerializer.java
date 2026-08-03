@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v2x1.structure.TransparentEcPrivateKey;
 
+/**
+ * XML serializer for {@link TransparentEcPrivateKey}.
+ */
 public class TransparentEcPrivateKeyXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<TransparentEcPrivateKey> {
 }

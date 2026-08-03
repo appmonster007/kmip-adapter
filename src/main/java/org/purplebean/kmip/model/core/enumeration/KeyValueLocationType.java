@@ -75,6 +75,9 @@ public class KeyValueLocationType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValueLocationType} instance wrapping the given value.
+   */
   public static KeyValueLocationType of(@NonNull Value value) {
     return new KeyValueLocationType(value);
   }
@@ -251,6 +254,9 @@ public class KeyValueLocationType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

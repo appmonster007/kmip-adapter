@@ -7,9 +7,15 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.PrimeExponentQ;
 
+/**
+ * JSON deserializer for {@link PrimeExponentQ}.
+ */
 public class PrimeExponentQJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PrimeExponentQ, PrimeExponentQ.PrimeExponentQBuilder> {
 
+  /**
+   * Constructs a new {@link PrimeExponentQJsonDeserializer}.
+   */
   public PrimeExponentQJsonDeserializer() {
     super(PrimeExponentQ.kmipTag, PrimeExponentQ.encodingType);
   }

@@ -41,6 +41,9 @@ public class CounterLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CounterLength} instance wrapping the given value.
+   */
   public static CounterLength of(@NonNull Integer value) {
     return new CounterLength(value);
   }

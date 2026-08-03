@@ -42,10 +42,16 @@ public class InitializationVector implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link InitializationVector} instance wrapping the given value.
+   */
   public static InitializationVector of(@NonNull ByteBuffer value) {
     return new InitializationVector(value);
   }
 
+  /**
+   * Returns the {@link InitializationVector} instance wrapping the given value.
+   */
   public static InitializationVector of(byte[] value) {
     return InitializationVector
         .builder()

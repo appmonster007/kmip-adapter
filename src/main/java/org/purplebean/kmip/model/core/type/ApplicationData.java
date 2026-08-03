@@ -42,6 +42,9 @@ public class ApplicationData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ApplicationData} instance wrapping the given value.
+   */
   public static ApplicationData of(@NonNull String value) {
     return new ApplicationData(value);
   }

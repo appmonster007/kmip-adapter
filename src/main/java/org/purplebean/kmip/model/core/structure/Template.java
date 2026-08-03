@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
+/**
+ * KMIP Template attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Template implements ManagedObject, KmipStructure {
@@ -49,6 +52,9 @@ public class Template implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Template} instance wrapping the given value.
+   */
   public static Template of(List<KmipDataType> values) {
     List<Attribute> attributes = new ArrayList<>();
     for (KmipDataType value : values) {

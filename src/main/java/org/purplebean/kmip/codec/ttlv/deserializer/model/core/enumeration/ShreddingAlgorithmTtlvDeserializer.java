@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.ShreddingAlgorithm;
 
+/**
+ * TTLV deserializer for {@link ShreddingAlgorithm}.
+ */
 public class ShreddingAlgorithmTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ShreddingAlgorithm,
         ShreddingAlgorithm.ShreddingAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link ShreddingAlgorithmTtlvDeserializer}.
+   */
   public ShreddingAlgorithmTtlvDeserializer() {
     super(ShreddingAlgorithm.kmipTag, ShreddingAlgorithm.encodingType);
   }

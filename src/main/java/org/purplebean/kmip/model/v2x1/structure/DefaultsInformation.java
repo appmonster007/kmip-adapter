@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP DefaultsInformation structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DefaultsInformation implements KmipStructure {
@@ -43,6 +46,9 @@ public class DefaultsInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DefaultsInformation} instance wrapping the given value.
+   */
   public static DefaultsInformation of(List<ObjectDefaults> objectDefaults) {
     return DefaultsInformation
         .builder()

@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ParentLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ParentLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class ParentLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ParentLink} instance wrapping the given value.
+   */
   public static ParentLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return ParentLink
         .builder()

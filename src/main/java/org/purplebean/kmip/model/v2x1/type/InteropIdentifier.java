@@ -42,6 +42,9 @@ public class InteropIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link InteropIdentifier} instance wrapping the given value.
+   */
   public static InteropIdentifier of(@NonNull String value) {
     return new InteropIdentifier(value);
   }

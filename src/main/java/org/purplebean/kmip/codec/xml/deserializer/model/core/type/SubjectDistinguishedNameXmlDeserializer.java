@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.SubjectDistinguishedName;
 
+/**
+ * XML deserializer for {@link SubjectDistinguishedName}.
+ */
 public class SubjectDistinguishedNameXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SubjectDistinguishedName,
         SubjectDistinguishedName.SubjectDistinguishedNameBuilder> {
 
+  /**
+   * Constructs a new {@link SubjectDistinguishedNameXmlDeserializer}.
+   */
   public SubjectDistinguishedNameXmlDeserializer() {
     super(SubjectDistinguishedName.kmipTag, SubjectDistinguishedName.encodingType);
   }

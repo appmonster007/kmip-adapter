@@ -41,6 +41,9 @@ public class Password implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Password} instance wrapping the given value.
+   */
   public static Password of(@NonNull String value) {
     return new Password(value);
   }

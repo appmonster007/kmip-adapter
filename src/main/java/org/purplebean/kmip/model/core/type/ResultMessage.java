@@ -42,6 +42,9 @@ public class ResultMessage implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ResultMessage} instance wrapping the given value.
+   */
   public static ResultMessage of(@NonNull String value) {
     return new ResultMessage(value);
   }

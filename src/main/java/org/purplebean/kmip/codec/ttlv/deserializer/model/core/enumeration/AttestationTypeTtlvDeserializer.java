@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.AttestationType;
 
+/**
+ * TTLV deserializer for {@link AttestationType}.
+ */
 public class AttestationTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AttestationType, AttestationType.AttestationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationTypeTtlvDeserializer}.
+   */
   public AttestationTypeTtlvDeserializer() {
     super(AttestationType.kmipTag, AttestationType.encodingType);
   }

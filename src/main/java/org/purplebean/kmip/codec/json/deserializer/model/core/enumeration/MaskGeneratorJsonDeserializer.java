@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
 
+/**
+ * JSON deserializer for {@link MaskGenerator}.
+ */
 public class MaskGeneratorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MaskGenerator, MaskGenerator.MaskGeneratorBuilder> {
 
+  /**
+   * Constructs a new {@link MaskGeneratorJsonDeserializer}.
+   */
   public MaskGeneratorJsonDeserializer() {
     super(MaskGenerator.kmipTag, MaskGenerator.encodingType);
   }

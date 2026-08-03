@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.Fips186Variation;
 
+/**
+ * TTLV deserializer for {@link Fips186Variation}.
+ */
 public class Fips186VariationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Fips186Variation,
         Fips186Variation.Fips186VariationBuilder> {
 
+  /**
+   * Constructs a new {@link Fips186VariationTtlvDeserializer}.
+   */
   public Fips186VariationTtlvDeserializer() {
     super(Fips186Variation.kmipTag, Fips186Variation.encodingType);
   }

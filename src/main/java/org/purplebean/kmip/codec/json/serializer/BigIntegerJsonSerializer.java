@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.HexFormat;
 import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
+/**
+ * JSON serializer for {@link BigInteger}.
+ */
 public class BigIntegerJsonSerializer extends JsonSerializer<BigInteger> {
   @Override
   public void serialize(BigInteger value, JsonGenerator gen, SerializerProvider serializers)

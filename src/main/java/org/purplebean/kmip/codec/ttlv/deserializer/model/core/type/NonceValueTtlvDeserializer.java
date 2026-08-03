@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * TTLV deserializer for {@link NonceValue}.
+ */
 public class NonceValueTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NonceValue, NonceValue.NonceValueBuilder> {
 
+  /**
+   * Constructs a new {@link NonceValueTtlvDeserializer}.
+   */
   public NonceValueTtlvDeserializer() {
     super(NonceValue.kmipTag, NonceValue.encodingType);
   }

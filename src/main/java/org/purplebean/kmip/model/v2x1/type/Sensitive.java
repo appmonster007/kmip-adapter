@@ -47,10 +47,16 @@ public class Sensitive implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Sensitive} instance wrapping the given value.
+   */
   public static Sensitive of(@NonNull Boolean value) {
     return new Sensitive(value);
   }
 
+  /**
+   * Returns the {@link Sensitive} instance wrapping the given value.
+   */
   public static Sensitive of(@NonNull AttributeName attributeName,
                              @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

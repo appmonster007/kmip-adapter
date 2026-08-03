@@ -41,6 +41,9 @@ public class SerialNumber implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SerialNumber} instance wrapping the given value.
+   */
   public static SerialNumber of(@NonNull String value) {
     return new SerialNumber(value);
   }

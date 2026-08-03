@@ -42,6 +42,9 @@ public class ValidationAuthorityCountry implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationAuthorityCountry} instance wrapping the given value.
+   */
   public static ValidationAuthorityCountry of(@NonNull String value) {
     return new ValidationAuthorityCountry(value);
   }

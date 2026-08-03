@@ -9,10 +9,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
 
+/**
+ * XML deserializer for {@link CreateCredentialOpRequestPayload}.
+ */
 public class CreateCredentialOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CreateCredentialOpRequestPayload,
         CreateCredentialOpRequestPayload.CreateCredentialOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateCredentialOpRequestPayloadXmlDeserializer}.
+   */
   public CreateCredentialOpRequestPayloadXmlDeserializer() {
     super(CreateCredentialOpRequestPayload.kmipTag, CreateCredentialOpRequestPayload.encodingType);
   }

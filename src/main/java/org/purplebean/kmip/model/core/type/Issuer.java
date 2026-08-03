@@ -41,6 +41,9 @@ public class Issuer implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Issuer} instance wrapping the given value.
+   */
   public static Issuer of(@NonNull String value) {
     return new Issuer(value);
   }

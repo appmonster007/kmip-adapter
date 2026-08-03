@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.TransparentEcdhPrivateKey;
 import org.purplebean.kmip.model.core.type.D;
 
+/**
+ * JSON deserializer for {@link TransparentEcdhPrivateKey}.
+ */
 public class TransparentEcdhPrivateKeyJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<TransparentEcdhPrivateKey,
         TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentEcdhPrivateKeyJsonDeserializer}.
+   */
   public TransparentEcdhPrivateKeyJsonDeserializer() {
     super(TransparentEcdhPrivateKey.kmipTag, TransparentEcdhPrivateKey.encodingType);
   }

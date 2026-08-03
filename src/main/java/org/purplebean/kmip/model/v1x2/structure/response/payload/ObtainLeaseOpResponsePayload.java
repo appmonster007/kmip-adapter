@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.LastChangeDate;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ObtainLeaseOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ObtainLeaseOpResponsePayload implements ResponsePayloadStructure {
@@ -62,6 +65,9 @@ public class ObtainLeaseOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObtainLeaseOpResponsePayload} instance wrapping the given value.
+   */
   public static ObtainLeaseOpResponsePayload of(List<KmipDataType> values) {
     var builder = ObtainLeaseOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

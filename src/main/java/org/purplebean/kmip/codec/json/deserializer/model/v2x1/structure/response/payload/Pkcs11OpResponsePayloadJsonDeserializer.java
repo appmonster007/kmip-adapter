@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpRespons
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
+/**
+ * JSON deserializer for {@link Pkcs11OpResponsePayload}.
+ */
 public class Pkcs11OpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs11OpResponsePayload,
         Pkcs11OpResponsePayload.Pkcs11OpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11OpResponsePayloadJsonDeserializer}.
+   */
   public Pkcs11OpResponsePayloadJsonDeserializer() {
     super(Pkcs11OpResponsePayload.kmipTag, Pkcs11OpResponsePayload.encodingType);
   }

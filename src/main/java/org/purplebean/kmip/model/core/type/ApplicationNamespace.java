@@ -42,6 +42,9 @@ public class ApplicationNamespace implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ApplicationNamespace} instance wrapping the given value.
+   */
   public static ApplicationNamespace of(@NonNull String value) {
     return new ApplicationNamespace(value);
   }

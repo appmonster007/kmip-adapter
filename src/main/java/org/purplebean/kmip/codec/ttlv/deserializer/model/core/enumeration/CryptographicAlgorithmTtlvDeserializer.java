@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 
+/**
+ * TTLV deserializer for {@link CryptographicAlgorithm}.
+ */
 public class CryptographicAlgorithmTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CryptographicAlgorithm,
         CryptographicAlgorithm.CryptographicAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicAlgorithmTtlvDeserializer}.
+   */
   public CryptographicAlgorithmTtlvDeserializer() {
     super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType);
   }

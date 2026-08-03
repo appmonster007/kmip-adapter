@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.BatchOrderOption;
 
+/**
+ * TTLV deserializer for {@link BatchOrderOption}.
+ */
 public class BatchOrderOptionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<BatchOrderOption,
         BatchOrderOption.BatchOrderOptionBuilder> {
 
+  /**
+   * Constructs a new {@link BatchOrderOptionTtlvDeserializer}.
+   */
   public BatchOrderOptionTtlvDeserializer() {
     super(BatchOrderOption.kmipTag, BatchOrderOption.encodingType);
   }

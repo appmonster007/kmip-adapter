@@ -62,6 +62,9 @@ public class ApplicationSpecificInformation implements KmipStructure, KmipAttrib
     validate();
   }
 
+  /**
+   * Returns the {@link ApplicationSpecificInformation} instance wrapping the given value.
+   */
   public static ApplicationSpecificInformation of(@NonNull AttributeName attributeName,
                                                   @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

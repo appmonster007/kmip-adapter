@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.ShortUniqueIdentifier;
 
+/**
+ * TTLV deserializer for {@link ShortUniqueIdentifier}.
+ */
 public class ShortUniqueIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ShortUniqueIdentifier,
         ShortUniqueIdentifier.ShortUniqueIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link ShortUniqueIdentifierTtlvDeserializer}.
+   */
   public ShortUniqueIdentifierTtlvDeserializer() {
     super(ShortUniqueIdentifier.kmipTag, ShortUniqueIdentifier.encodingType);
   }

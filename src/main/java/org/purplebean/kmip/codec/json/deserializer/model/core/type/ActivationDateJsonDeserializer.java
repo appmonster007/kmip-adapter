@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.ActivationDate;
 
+/**
+ * JSON deserializer for {@link ActivationDate}.
+ */
 public class ActivationDateJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ActivationDate, ActivationDate.ActivationDateBuilder> {
 
+  /**
+   * Constructs a new {@link ActivationDateJsonDeserializer}.
+   */
   public ActivationDateJsonDeserializer() {
     super(ActivationDate.kmipTag, ActivationDate.encodingType);
   }

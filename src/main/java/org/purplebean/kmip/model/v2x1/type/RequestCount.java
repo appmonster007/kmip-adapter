@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP RequestCount dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RequestCount implements KmipDataType {
@@ -37,6 +40,9 @@ public class RequestCount implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link RequestCount} instance wrapping the given value.
+   */
   public static RequestCount of(@NonNull Integer value) {
     return new RequestCount(value);
   }

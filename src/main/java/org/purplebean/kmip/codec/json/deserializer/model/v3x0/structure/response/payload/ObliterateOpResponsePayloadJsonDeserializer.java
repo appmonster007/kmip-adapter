@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.structure.response.payload.ObliterateOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link ObliterateOpResponsePayload}.
+ */
 public class ObliterateOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ObliterateOpResponsePayload,
         ObliterateOpResponsePayload.ObliterateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ObliterateOpResponsePayloadJsonDeserializer}.
+   */
   public ObliterateOpResponsePayloadJsonDeserializer() {
     super(ObliterateOpResponsePayload.kmipTag, ObliterateOpResponsePayload.encodingType);
   }

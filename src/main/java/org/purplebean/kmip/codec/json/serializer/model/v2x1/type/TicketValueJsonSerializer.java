@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.json.serializer.model.v2x1.type;
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * JSON serializer for {@link TicketValue}.
+ */
 public class TicketValueJsonSerializer extends AbstractKmipDataTypeJsonSerializer<TicketValue> {
 }

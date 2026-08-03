@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.PollOpResponsePayload;
 
+/**
+ * XML deserializer for {@link PollOpResponsePayload}.
+ */
 public class PollOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PollOpResponsePayload,
         PollOpResponsePayload.PollOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PollOpResponsePayloadXmlDeserializer}.
+   */
   public PollOpResponsePayloadXmlDeserializer() {
     super(PollOpResponsePayload.kmipTag, PollOpResponsePayload.encodingType);
   }

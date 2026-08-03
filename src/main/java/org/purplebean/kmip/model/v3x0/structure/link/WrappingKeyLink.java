@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP WrappingKeyLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class WrappingKeyLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class WrappingKeyLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link WrappingKeyLink} instance wrapping the given value.
+   */
   public static WrappingKeyLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return WrappingKeyLink
         .builder()

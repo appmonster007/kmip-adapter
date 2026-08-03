@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.InvocationFieldLength;
 
+/**
+ * JSON deserializer for {@link InvocationFieldLength}.
+ */
 public class InvocationFieldLengthJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<InvocationFieldLength,
         InvocationFieldLength.InvocationFieldLengthBuilder> {
 
+  /**
+   * Constructs a new {@link InvocationFieldLengthJsonDeserializer}.
+   */
   public InvocationFieldLengthJsonDeserializer() {
     super(InvocationFieldLength.kmipTag, InvocationFieldLength.encodingType);
   }

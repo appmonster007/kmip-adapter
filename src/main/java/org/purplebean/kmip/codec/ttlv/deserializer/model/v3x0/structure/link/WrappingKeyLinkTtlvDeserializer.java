@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.WrappingKeyLink;
 
+/**
+ * TTLV deserializer for {@link WrappingKeyLink}.
+ */
 public class WrappingKeyLinkTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<WrappingKeyLink, WrappingKeyLink.WrappingKeyLinkBuilder> {
 
+  /**
+   * Constructs a new {@link WrappingKeyLinkTtlvDeserializer}.
+   */
   public WrappingKeyLinkTtlvDeserializer() {
     super(WrappingKeyLink.kmipTag, WrappingKeyLink.encodingType);
   }

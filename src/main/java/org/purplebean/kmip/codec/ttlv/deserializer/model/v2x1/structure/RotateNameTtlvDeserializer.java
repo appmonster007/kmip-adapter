@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.v2x1.enumeration.RotateNameType;
 import org.purplebean.kmip.model.v2x1.structure.RotateName;
 import org.purplebean.kmip.model.v2x1.type.RotateNameValue;
 
+/**
+ * TTLV deserializer for {@link RotateName}.
+ */
 public class RotateNameTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<RotateName, RotateName.RotateNameBuilder> {
 
+  /**
+   * Constructs a new {@link RotateNameTtlvDeserializer}.
+   */
   public RotateNameTtlvDeserializer() {
     super(RotateName.kmipTag, RotateName.encodingType);
   }

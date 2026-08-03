@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CompromiseDate;
 
+/**
+ * TTLV deserializer for {@link CompromiseDate}.
+ */
 public class CompromiseDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CompromiseDate, CompromiseDate.CompromiseDateBuilder> {
 
+  /**
+   * Constructs a new {@link CompromiseDateTtlvDeserializer}.
+   */
   public CompromiseDateTtlvDeserializer() {
     super(CompromiseDate.kmipTag, CompromiseDate.encodingType);
   }

@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 
+/**
+ * TTLV deserializer for {@link BatchErrorContinuationOption}.
+ */
 public class BatchErrorContinuationOptionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<BatchErrorContinuationOption,
         BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder> {
 
+  /**
+   * Constructs a new {@link BatchErrorContinuationOptionTtlvDeserializer}.
+   */
   public BatchErrorContinuationOptionTtlvDeserializer() {
     super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType);
   }

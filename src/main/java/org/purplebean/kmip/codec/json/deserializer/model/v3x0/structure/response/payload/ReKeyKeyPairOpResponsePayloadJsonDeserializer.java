@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v3x0.structure.response.payload.ReKeyKeyPairOpR
 import org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.type.PublicKeyUniqueIdentifier;
 
+/**
+ * JSON deserializer for {@link ReKeyKeyPairOpResponsePayload}.
+ */
 public class ReKeyKeyPairOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ReKeyKeyPairOpResponsePayload,
         ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ReKeyKeyPairOpResponsePayloadJsonDeserializer}.
+   */
   public ReKeyKeyPairOpResponsePayloadJsonDeserializer() {
     super(ReKeyKeyPairOpResponsePayload.kmipTag, ReKeyKeyPairOpResponsePayload.encodingType);
   }

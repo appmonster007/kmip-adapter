@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.response.ResponseHeaderStructure;
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
+/**
+ * KMIP SimpleResponseHeader structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SimpleResponseHeader implements ResponseHeaderStructure {
@@ -41,10 +44,16 @@ public class SimpleResponseHeader implements ResponseHeaderStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SimpleResponseHeader} instance wrapping the given value.
+   */
   public static SimpleResponseHeader of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link SimpleResponseHeader} instance wrapping the given value.
+   */
   public static SimpleResponseHeader of(List<KmipDataType> values) {
     var builder = SimpleResponseHeader.builder();
     Map<KmipTag, List<KmipDataType>> map = values

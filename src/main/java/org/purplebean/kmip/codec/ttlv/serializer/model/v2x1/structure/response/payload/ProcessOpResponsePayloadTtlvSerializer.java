@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.response.
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.ProcessOpResponsePayload;
 
+/**
+ * TTLV serializer for {@link ProcessOpResponsePayload}.
+ */
 public class ProcessOpResponsePayloadTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<ProcessOpResponsePayload> {
 }

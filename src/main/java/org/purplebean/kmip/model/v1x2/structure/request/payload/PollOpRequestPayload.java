@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 
+/**
+ * KMIP PollOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PollOpRequestPayload implements RequestPayloadStructure {
@@ -49,6 +52,9 @@ public class PollOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PollOpRequestPayload} instance wrapping the given value.
+   */
   public static PollOpRequestPayload of(List<KmipDataType> values) {
     var builder = PollOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

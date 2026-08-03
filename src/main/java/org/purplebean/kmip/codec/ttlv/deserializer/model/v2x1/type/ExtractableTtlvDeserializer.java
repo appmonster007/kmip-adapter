@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.Extractable;
 
+/**
+ * TTLV deserializer for {@link Extractable}.
+ */
 public class ExtractableTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Extractable, Extractable.ExtractableBuilder> {
 
+  /**
+   * Constructs a new {@link ExtractableTtlvDeserializer}.
+   */
   public ExtractableTtlvDeserializer() {
     super(Extractable.kmipTag, Extractable.encodingType);
   }

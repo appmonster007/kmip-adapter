@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.CertificateIssuerC;
 
+/**
+ * TTLV deserializer for {@link CertificateIssuerC}.
+ */
 public class CertificateIssuerCTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CertificateIssuerC,
         CertificateIssuerC.CertificateIssuerCBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateIssuerCTtlvDeserializer}.
+   */
   public CertificateIssuerCTtlvDeserializer() {
     super(CertificateIssuerC.kmipTag, CertificateIssuerC.encodingType);
   }

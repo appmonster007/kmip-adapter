@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.core.type.AttributeIndex;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 
+/**
+ * XML deserializer for {@link Attribute}.
+ */
 public class AttributeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Attribute, Attribute.AttributeBuilder> {
 
+  /**
+   * Constructs a new {@link AttributeXmlDeserializer}.
+   */
   public AttributeXmlDeserializer() {
     super(Attribute.kmipTag, Attribute.encodingType);
   }

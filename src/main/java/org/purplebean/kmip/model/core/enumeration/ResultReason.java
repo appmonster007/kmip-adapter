@@ -195,6 +195,9 @@ public class ResultReason implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ResultReason} instance wrapping the given value.
+   */
   public static ResultReason of(@NonNull Value value) {
     return new ResultReason(value);
   }
@@ -542,6 +545,9 @@ public class ResultReason implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

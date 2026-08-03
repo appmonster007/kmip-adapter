@@ -46,10 +46,16 @@ public class NistSecurityCategory implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link NistSecurityCategory} instance wrapping the given value.
+   */
   public static NistSecurityCategory of(@NonNull Integer value) {
     return new NistSecurityCategory(value);
   }
 
+  /**
+   * Returns the {@link NistSecurityCategory} instance wrapping the given value.
+   */
   public static NistSecurityCategory of(@NonNull AttributeName attributeName,
                                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

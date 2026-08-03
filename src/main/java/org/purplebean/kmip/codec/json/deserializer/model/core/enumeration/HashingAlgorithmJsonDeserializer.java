@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
 
+/**
+ * JSON deserializer for {@link HashingAlgorithm}.
+ */
 public class HashingAlgorithmJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<HashingAlgorithm,
         HashingAlgorithm.HashingAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link HashingAlgorithmJsonDeserializer}.
+   */
   public HashingAlgorithmJsonDeserializer() {
     super(HashingAlgorithm.kmipTag, HashingAlgorithm.encodingType);
   }

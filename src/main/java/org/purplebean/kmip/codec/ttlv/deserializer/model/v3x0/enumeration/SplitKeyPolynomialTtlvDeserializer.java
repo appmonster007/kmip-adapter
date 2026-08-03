@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.enumeration.SplitKeyPolynomial;
 
+/**
+ * TTLV deserializer for {@link SplitKeyPolynomial}.
+ */
 public class SplitKeyPolynomialTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SplitKeyPolynomial,
         SplitKeyPolynomial.SplitKeyPolynomialBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyPolynomialTtlvDeserializer}.
+   */
   public SplitKeyPolynomialTtlvDeserializer() {
     super(SplitKeyPolynomial.kmipTag, SplitKeyPolynomial.encodingType);
   }

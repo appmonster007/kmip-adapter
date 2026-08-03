@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.core.type.Username;
 
+/**
+ * TTLV deserializer for {@link UsernameAndPassword}.
+ */
 public class UsernameAndPasswordTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<UsernameAndPassword,
         UsernameAndPassword.UsernameAndPasswordBuilder> {
 
+  /**
+   * Constructs a new {@link UsernameAndPasswordTtlvDeserializer}.
+   */
   public UsernameAndPasswordTtlvDeserializer() {
     super(UsernameAndPassword.kmipTag, UsernameAndPassword.encodingType);
   }

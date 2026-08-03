@@ -42,10 +42,16 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link CryptographicUsageMask} instance wrapping the given value.
+     */
     public static CryptographicUsageMask of(@NonNull Integer value) {
         return new CryptographicUsageMask(value);
     }
 
+    /**
+     * Returns the {@link CryptographicUsageMask} instance wrapping the given value.
+     */
     public static CryptographicUsageMask of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -53,6 +59,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
         return CryptographicUsageMask.builder().value(value).build();
     }
 
+    /**
+     * Parses a space-separated mask description string into a {@link CryptographicUsageMask}.
+     */
     public static CryptographicUsageMask fromMaskString(@NonNull String value) {
         int mask = MaskEnum.fromMaskString(value);
         return CryptographicUsageMask.builder().value(mask).build();
@@ -136,6 +145,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
         return kmipTag.getDescription();
     }
 
+    /**
+     * Marker interface for mask-based enumeration values.
+     */
     public interface MaskEnum {
         Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
         Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -195,6 +207,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
                     ));
         }
 
+        /**
+         * Converts a cryptographic usage mask bit value into its space-separated description string.
+         */
         static String toMaskString(int value) {
             StringBuilder sb = new StringBuilder();
             VALUE_REGISTRY.values().stream()
@@ -204,6 +219,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
             return sb.toString().trim();
         }
 
+        /**
+         * Parses a space-separated mask description string into its integer bit value.
+         */
         static int fromMaskString(String value) {
             List<String> maskNames = List.of(value.split(" "));
             int maskValue = 0;
@@ -221,6 +239,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
             return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
         }
 
+        /**
+         * Standard KMIP-defined values.
+         */
         @Getter
         @AllArgsConstructor
         @ToString
@@ -251,6 +272,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
             private final boolean custom = false;
         }
 
+        /**
+         * Represents a specific value of the enclosing enumeration.
+         */
         interface Value {
             int getValue();
 
@@ -260,6 +284,9 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
         }
 
+        /**
+         * Vendor-defined extension value.
+         */
         @Getter
         @AllArgsConstructor
         @ToString

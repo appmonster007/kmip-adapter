@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.ValidationVendorUri;
 
+/**
+ * TTLV deserializer for {@link ValidationVendorUri}.
+ */
 public class ValidationVendorUriTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidationVendorUri,
         ValidationVendorUri.ValidationVendorUriBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationVendorUriTtlvDeserializer}.
+   */
   public ValidationVendorUriTtlvDeserializer() {
     super(ValidationVendorUri.kmipTag, ValidationVendorUri.encodingType);
   }

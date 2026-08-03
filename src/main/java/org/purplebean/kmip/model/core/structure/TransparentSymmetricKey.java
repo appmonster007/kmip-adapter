@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.type.Key;
 
+/**
+ * KMIP TransparentSymmetricKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
@@ -47,6 +50,9 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentSymmetricKey} instance wrapping the given value.
+   */
   public static TransparentSymmetricKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -59,6 +65,9 @@ public class TransparentSymmetricKey implements KeyMaterial, KmipStructure {
         .getFirst());
   }
 
+  /**
+   * Returns the {@link TransparentSymmetricKey} instance wrapping the given value.
+   */
   public static TransparentSymmetricKey of(@NonNull Key key) {
     return TransparentSymmetricKey
         .builder()

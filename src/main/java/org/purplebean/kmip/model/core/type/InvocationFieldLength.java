@@ -41,6 +41,9 @@ public class InvocationFieldLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link InvocationFieldLength} instance wrapping the given value.
+   */
   public static InvocationFieldLength of(@NonNull Integer value) {
     return new InvocationFieldLength(value);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
 
+/**
+ * XML deserializer for {@link InteropFunction}.
+ */
 public class InteropFunctionXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<InteropFunction, InteropFunction.InteropFunctionBuilder> {
 
+  /**
+   * Constructs a new {@link InteropFunctionXmlDeserializer}.
+   */
   public InteropFunctionXmlDeserializer() {
     super(InteropFunction.kmipTag, InteropFunction.encodingType);
   }

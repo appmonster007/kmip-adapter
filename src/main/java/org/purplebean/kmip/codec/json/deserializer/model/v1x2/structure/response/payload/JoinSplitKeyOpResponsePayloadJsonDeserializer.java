@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.JoinSplitKeyOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link JoinSplitKeyOpResponsePayload}.
+ */
 public class JoinSplitKeyOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<JoinSplitKeyOpResponsePayload,
         JoinSplitKeyOpResponsePayload.JoinSplitKeyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link JoinSplitKeyOpResponsePayloadJsonDeserializer}.
+   */
   public JoinSplitKeyOpResponsePayloadJsonDeserializer() {
     super(JoinSplitKeyOpResponsePayload.kmipTag, JoinSplitKeyOpResponsePayload.encodingType);
   }

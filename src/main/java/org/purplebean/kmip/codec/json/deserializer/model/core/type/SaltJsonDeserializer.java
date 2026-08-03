@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * JSON deserializer for {@link Salt}.
+ */
 public class SaltJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Salt, Salt.SaltBuilder> {
 
+  /**
+   * Constructs a new {@link SaltJsonDeserializer}.
+   */
   public SaltJsonDeserializer() {
     super(Salt.kmipTag, Salt.encodingType);
   }

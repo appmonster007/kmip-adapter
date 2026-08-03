@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.CertificateValue;
 
+/**
+ * JSON deserializer for {@link CertificateValue}.
+ */
 public class CertificateValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CertificateValue,
         CertificateValue.CertificateValueBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateValueJsonDeserializer}.
+   */
   public CertificateValueJsonDeserializer() {
     super(CertificateValue.kmipTag, CertificateValue.encodingType);
   }

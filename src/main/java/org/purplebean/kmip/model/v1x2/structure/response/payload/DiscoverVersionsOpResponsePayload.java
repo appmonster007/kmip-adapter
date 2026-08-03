@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
+/**
+ * KMIP DiscoverVersionsOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DiscoverVersionsOpResponsePayload implements ResponsePayloadStructure {
@@ -50,6 +53,9 @@ public class DiscoverVersionsOpResponsePayload implements ResponsePayloadStructu
     validate();
   }
 
+  /**
+   * Returns the {@link DiscoverVersionsOpResponsePayload} instance wrapping the given value.
+   */
   public static DiscoverVersionsOpResponsePayload of(List<KmipDataType> values) {
     var builder = DiscoverVersionsOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

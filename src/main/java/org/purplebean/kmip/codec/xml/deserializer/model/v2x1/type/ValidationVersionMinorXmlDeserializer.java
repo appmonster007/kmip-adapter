@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ValidationVersionMinor;
 
+/**
+ * XML deserializer for {@link ValidationVersionMinor}.
+ */
 public class ValidationVersionMinorXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ValidationVersionMinor,
         ValidationVersionMinor.ValidationVersionMinorBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationVersionMinorXmlDeserializer}.
+   */
   public ValidationVersionMinorXmlDeserializer() {
     super(ValidationVersionMinor.kmipTag, ValidationVersionMinor.encodingType);
   }

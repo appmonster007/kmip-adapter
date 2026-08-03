@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.PgpKey;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * TTLV deserializer for {@link PgpKey}.
+ */
 public class PgpKeyTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<PgpKey, PgpKey.PgpKeyBuilder> {
 
+  /**
+   * Constructs a new {@link PgpKeyTtlvDeserializer}.
+   */
   public PgpKeyTtlvDeserializer() {
     super(PgpKey.kmipTag, PgpKey.encodingType);
   }

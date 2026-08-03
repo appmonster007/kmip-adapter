@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
 
+/**
+ * TTLV deserializer for {@link MaskGenerator}.
+ */
 public class MaskGeneratorTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MaskGenerator, MaskGenerator.MaskGeneratorBuilder> {
 
+  /**
+   * Constructs a new {@link MaskGeneratorTtlvDeserializer}.
+   */
   public MaskGeneratorTtlvDeserializer() {
     super(MaskGenerator.kmipTag, MaskGenerator.encodingType);
   }

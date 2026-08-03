@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.PgpKey;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * JSON deserializer for {@link PgpKey}.
+ */
 public class PgpKeyJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<PgpKey, PgpKey.PgpKeyBuilder> {
 
+  /**
+   * Constructs a new {@link PgpKeyJsonDeserializer}.
+   */
   public PgpKeyJsonDeserializer() {
     super(PgpKey.kmipTag, PgpKey.encodingType);
   }

@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.CryptographicDomainParameters;
 import org.purplebean.kmip.model.core.type.Qlength;
 
+/**
+ * JSON deserializer for {@link CryptographicDomainParameters}.
+ */
 public class CryptographicDomainParametersJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CryptographicDomainParameters,
         CryptographicDomainParameters.CryptographicDomainParametersBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicDomainParametersJsonDeserializer}.
+   */
   public CryptographicDomainParametersJsonDeserializer() {
     super(CryptographicDomainParameters.kmipTag, CryptographicDomainParameters.encodingType);
   }

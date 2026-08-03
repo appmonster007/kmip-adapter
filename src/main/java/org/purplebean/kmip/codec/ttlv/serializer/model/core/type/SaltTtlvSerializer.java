@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * TTLV serializer for {@link Salt}.
+ */
 public class SaltTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<Salt> {
 }

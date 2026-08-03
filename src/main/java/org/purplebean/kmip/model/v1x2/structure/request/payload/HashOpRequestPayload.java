@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.DataByteString;
 
+/**
+ * KMIP HashOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class HashOpRequestPayload implements RequestPayloadStructure {
@@ -51,6 +54,9 @@ public class HashOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link HashOpRequestPayload} instance wrapping the given value.
+   */
   public static HashOpRequestPayload of(List<KmipDataType> values) {
     var builder = HashOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

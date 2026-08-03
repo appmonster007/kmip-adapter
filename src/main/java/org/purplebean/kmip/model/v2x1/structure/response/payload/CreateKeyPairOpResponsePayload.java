@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 import org.purplebean.kmip.model.core.type.PublicKeyUniqueIdentifier;
 
+/**
+ * KMIP CreateKeyPairOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateKeyPairOpResponsePayload implements ResponsePayloadStructure {
@@ -54,6 +57,9 @@ public class CreateKeyPairOpResponsePayload implements ResponsePayloadStructure 
     validate();
   }
 
+  /**
+   * Returns the {@link CreateKeyPairOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateKeyPairOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateKeyPairOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

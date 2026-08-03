@@ -41,6 +41,9 @@ public class LogMessage implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link LogMessage} instance wrapping the given value.
+   */
   public static LogMessage of(@NonNull String value) {
     return new LogMessage(value);
   }

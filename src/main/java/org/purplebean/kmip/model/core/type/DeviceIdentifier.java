@@ -42,6 +42,9 @@ public class DeviceIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DeviceIdentifier} instance wrapping the given value.
+   */
   public static DeviceIdentifier of(@NonNull String value) {
     return new DeviceIdentifier(value);
   }

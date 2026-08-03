@@ -42,6 +42,9 @@ public class PublicKeyTemplateAttribute implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PublicKeyTemplateAttribute} instance wrapping the given value.
+   */
   public static PublicKeyTemplateAttribute of(@NonNull String value) {
     return new PublicKeyTemplateAttribute(value);
   }

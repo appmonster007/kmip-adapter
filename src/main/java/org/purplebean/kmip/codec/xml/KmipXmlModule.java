@@ -21,7 +21,13 @@ import org.purplebean.kmip.codec.xml.serializer.LongXmlSerializer;
 import org.purplebean.kmip.codec.xml.serializer.OffsetDateTimeXmlSerializer;
 import org.purplebean.kmip.codec.xml.serializer.api.KmipDataTypeXmlSerializer;
 
+/**
+ * Jackson module registering KMIP's XML (de)serializers.
+ */
 public class KmipXmlModule extends SimpleModule {
+  /**
+   * Registers the KMIP XML (de)serializers with this module.
+   */
   public KmipXmlModule() {
     super("KmipXmlModule", Version.unknownVersion());
 

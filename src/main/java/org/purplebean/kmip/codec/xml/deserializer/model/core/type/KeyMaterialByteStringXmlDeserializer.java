@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.KeyMaterialByteString;
 
+/**
+ * XML deserializer for {@link KeyMaterialByteString}.
+ */
 public class KeyMaterialByteStringXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyMaterialByteString,
         KeyMaterialByteString.KeyMaterialByteStringBuilder> {
 
+  /**
+   * Constructs a new {@link KeyMaterialByteStringXmlDeserializer}.
+   */
   public KeyMaterialByteStringXmlDeserializer() {
     super(KeyMaterialByteString.kmipTag, KeyMaterialByteString.encodingType);
   }

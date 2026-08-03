@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
+/**
+ * XML deserializer for {@link SaltedPassword}.
+ */
 public class SaltedPasswordXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SaltedPassword, SaltedPassword.SaltedPasswordBuilder> {
 
+  /**
+   * Constructs a new {@link SaltedPasswordXmlDeserializer}.
+   */
   public SaltedPasswordXmlDeserializer() {
     super(SaltedPassword.kmipTag, SaltedPassword.encodingType);
   }

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
 
+/**
+ * TTLV deserializer for {@link AdjustmentType}.
+ */
 public class AdjustmentTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AdjustmentType, AdjustmentType.AdjustmentTypeBuilder> {
 
+  /**
+   * Constructs a new {@link AdjustmentTypeTtlvDeserializer}.
+   */
   public AdjustmentTypeTtlvDeserializer() {
     super(AdjustmentType.kmipTag, AdjustmentType.encodingType);
   }

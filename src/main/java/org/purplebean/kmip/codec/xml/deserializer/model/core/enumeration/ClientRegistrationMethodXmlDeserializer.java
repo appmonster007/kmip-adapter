@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ClientRegistrationMethod;
 
+/**
+ * XML deserializer for {@link ClientRegistrationMethod}.
+ */
 public class ClientRegistrationMethodXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ClientRegistrationMethod,
         ClientRegistrationMethod.ClientRegistrationMethodBuilder> {
 
+  /**
+   * Constructs a new {@link ClientRegistrationMethodXmlDeserializer}.
+   */
   public ClientRegistrationMethodXmlDeserializer() {
     super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType);
   }

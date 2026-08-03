@@ -23,6 +23,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.TtlvDataType;
 
+/**
+ * JSON deserializer for {@link TtlvDataType}.
+ */
 public class TtlvDataTypeJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<TtlvDataType, TtlvDataType.TtlvDataTypeBuilder> {
 
@@ -30,6 +33,9 @@ public class TtlvDataTypeJsonDeserializer
   private final Stack<EncodingType> encodingTypeStack = new Stack<>();
   private final Stack<Object> valueStack = new Stack<>();
 
+  /**
+   * Constructs a new {@link TtlvDataTypeJsonDeserializer}.
+   */
   public TtlvDataTypeJsonDeserializer() {
     super(null, null);
   }

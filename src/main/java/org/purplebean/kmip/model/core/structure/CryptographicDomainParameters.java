@@ -59,6 +59,9 @@ public class CryptographicDomainParameters implements KmipStructure, KmipAttribu
     validate();
   }
 
+  /**
+   * Returns the {@link CryptographicDomainParameters} instance wrapping the given value.
+   */
   public static CryptographicDomainParameters of(@NonNull AttributeName attributeName,
                                                  @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

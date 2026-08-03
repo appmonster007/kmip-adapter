@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.PutOpResponsePayload;
 
+/**
+ * TTLV deserializer for {@link PutOpResponsePayload}.
+ */
 public class PutOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PutOpResponsePayload,
         PutOpResponsePayload.PutOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PutOpResponsePayloadTtlvDeserializer}.
+   */
   public PutOpResponsePayloadTtlvDeserializer() {
     super(PutOpResponsePayload.kmipTag, PutOpResponsePayload.encodingType);
   }

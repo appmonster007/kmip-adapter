@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.RotateInterval;
 
+/**
+ * XML deserializer for {@link RotateInterval}.
+ */
 public class RotateIntervalXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RotateInterval, RotateInterval.RotateIntervalBuilder> {
 
+  /**
+   * Constructs a new {@link RotateIntervalXmlDeserializer}.
+   */
   public RotateIntervalXmlDeserializer() {
     super(RotateInterval.kmipTag, RotateInterval.encodingType);
   }

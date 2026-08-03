@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 
+/**
+ * KMIP CreateKeyPairOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
@@ -55,6 +58,9 @@ public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateKeyPairOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateKeyPairOpRequestPayload of(
       CommonTemplateAttribute commonTemplateAttribute,
       PrivateKeyTemplateAttribute privateKeyTemplateAttribute,
@@ -68,6 +74,9 @@ public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link CreateKeyPairOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateKeyPairOpRequestPayload of(List<KmipDataType> values) {
     var builder = CreateKeyPairOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

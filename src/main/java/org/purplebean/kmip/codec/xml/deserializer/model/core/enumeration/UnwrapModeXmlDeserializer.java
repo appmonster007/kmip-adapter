@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.UnwrapMode;
 
+/**
+ * XML deserializer for {@link UnwrapMode}.
+ */
 public class UnwrapModeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<UnwrapMode, UnwrapMode.UnwrapModeBuilder> {
 
+  /**
+   * Constructs a new {@link UnwrapModeXmlDeserializer}.
+   */
   public UnwrapModeXmlDeserializer() {
     super(UnwrapMode.kmipTag, UnwrapMode.encodingType);
   }

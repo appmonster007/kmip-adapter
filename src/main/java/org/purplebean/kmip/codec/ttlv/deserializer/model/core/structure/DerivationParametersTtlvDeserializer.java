@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.type.InitializationVector;
 import org.purplebean.kmip.model.core.type.IterationCount;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * TTLV deserializer for {@link DerivationParameters}.
+ */
 public class DerivationParametersTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DerivationParameters,
         DerivationParameters.DerivationParametersBuilder> {
 
+  /**
+   * Constructs a new {@link DerivationParametersTtlvDeserializer}.
+   */
   public DerivationParametersTtlvDeserializer() {
     super(DerivationParameters.kmipTag, DerivationParameters.encodingType);
   }

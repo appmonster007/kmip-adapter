@@ -21,7 +21,13 @@ import org.purplebean.kmip.codec.json.serializer.LongJsonSerializer;
 import org.purplebean.kmip.codec.json.serializer.OffsetDateTimeJsonSerializer;
 import org.purplebean.kmip.codec.json.serializer.api.KmipDataTypeJsonSerializer;
 
+/**
+ * Jackson module registering KMIP's JSON (de)serializers.
+ */
 public class KmipJsonModule extends SimpleModule {
+  /**
+   * Registers the KMIP JSON (de)serializers with this module.
+   */
   public KmipJsonModule() {
     super("KmipJsonModule", Version.unknownVersion());
 

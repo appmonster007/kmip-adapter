@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.X509CertificateSubject;
 import org.purplebean.kmip.model.core.type.SubjectAlternativeName;
 import org.purplebean.kmip.model.core.type.SubjectDistinguishedName;
 
+/**
+ * TTLV deserializer for {@link X509CertificateSubject}.
+ */
 public class X509CertificateSubjectTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<X509CertificateSubject,
         X509CertificateSubject.X509CertificateSubjectBuilder> {
 
+  /**
+   * Constructs a new {@link X509CertificateSubjectTtlvDeserializer}.
+   */
   public X509CertificateSubjectTtlvDeserializer() {
     super(X509CertificateSubject.kmipTag, X509CertificateSubject.encodingType);
   }

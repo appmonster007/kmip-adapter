@@ -7,6 +7,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
+/**
+ * TTLV serializer for {@link ByteBuffer}.
+ */
 public class ByteStringTtlvSerializer extends TtlvSerializer<ByteBuffer> {
   private final EncodingType type = EncodingType.BYTE_STRING;
 

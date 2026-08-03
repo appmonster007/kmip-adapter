@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
 
+/**
+ * XML deserializer for {@link AuthenticatedEncryptionTag}.
+ */
 public class AuthenticatedEncryptionTagXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AuthenticatedEncryptionTag,
         AuthenticatedEncryptionTag.AuthenticatedEncryptionTagBuilder> {
 
+  /**
+   * Constructs a new {@link AuthenticatedEncryptionTagXmlDeserializer}.
+   */
   public AuthenticatedEncryptionTagXmlDeserializer() {
     super(AuthenticatedEncryptionTag.kmipTag, AuthenticatedEncryptionTag.encodingType);
   }

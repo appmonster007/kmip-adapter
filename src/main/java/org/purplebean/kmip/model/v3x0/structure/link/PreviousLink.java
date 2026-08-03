@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP PreviousLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PreviousLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class PreviousLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PreviousLink} instance wrapping the given value.
+   */
   public static PreviousLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return PreviousLink
         .builder()

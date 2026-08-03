@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.PublicKeyTemplateAttribute;
 
+/**
+ * XML deserializer for {@link PublicKeyTemplateAttribute}.
+ */
 public class PublicKeyTemplateAttributeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PublicKeyTemplateAttribute,
         PublicKeyTemplateAttribute.PublicKeyTemplateAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link PublicKeyTemplateAttributeXmlDeserializer}.
+   */
   public PublicKeyTemplateAttributeXmlDeserializer() {
     super(PublicKeyTemplateAttribute.kmipTag, PublicKeyTemplateAttribute.encodingType);
   }

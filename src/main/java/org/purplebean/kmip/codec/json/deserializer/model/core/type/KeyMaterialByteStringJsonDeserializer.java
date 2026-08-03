@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.KeyMaterialByteString;
 
+/**
+ * JSON deserializer for {@link KeyMaterialByteString}.
+ */
 public class KeyMaterialByteStringJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyMaterialByteString,
         KeyMaterialByteString.KeyMaterialByteStringBuilder> {
 
+  /**
+   * Constructs a new {@link KeyMaterialByteStringJsonDeserializer}.
+   */
   public KeyMaterialByteStringJsonDeserializer() {
     super(KeyMaterialByteString.kmipTag, KeyMaterialByteString.encodingType);
   }

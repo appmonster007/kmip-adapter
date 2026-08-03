@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.CertificateSubjectCn;
 
+/**
+ * JSON deserializer for {@link CertificateSubjectCn}.
+ */
 public class CertificateSubjectCnJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CertificateSubjectCn,
         CertificateSubjectCn.CertificateSubjectCnBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateSubjectCnJsonDeserializer}.
+   */
   public CertificateSubjectCnJsonDeserializer() {
     super(CertificateSubjectCn.kmipTag, CertificateSubjectCn.encodingType);
   }

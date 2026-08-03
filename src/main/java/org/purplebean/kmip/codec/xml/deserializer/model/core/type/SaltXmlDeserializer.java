@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * XML deserializer for {@link Salt}.
+ */
 public class SaltXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Salt, Salt.SaltBuilder> {
 
+  /**
+   * Constructs a new {@link SaltXmlDeserializer}.
+   */
   public SaltXmlDeserializer() {
     super(Salt.kmipTag, Salt.encodingType);
   }

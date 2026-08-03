@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * TTLV deserializer for {@link VendorIdentification}.
+ */
 public class VendorIdentificationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<VendorIdentification,
         VendorIdentification.VendorIdentificationBuilder> {
 
+  /**
+   * Constructs a new {@link VendorIdentificationTtlvDeserializer}.
+   */
   public VendorIdentificationTtlvDeserializer() {
     super(VendorIdentification.kmipTag, VendorIdentification.encodingType);
   }

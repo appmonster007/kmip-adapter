@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * KMIP PgpKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PgpKey implements ManagedObject, KmipStructure {
@@ -55,6 +58,9 @@ public class PgpKey implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PgpKey} instance wrapping the given value.
+   */
   public static PgpKey of(
       @NonNull PgpKeyVersion pgpKeyVersion,
       @NonNull KeyBlock keyBlock
@@ -66,6 +72,9 @@ public class PgpKey implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link PgpKey} instance wrapping the given value.
+   */
   public static PgpKey of(List<KmipDataType> values) {
     var builder = PgpKey.builder();
     Map<KmipTag, List<KmipDataType>> map = values

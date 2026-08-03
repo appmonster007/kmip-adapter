@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP DerivationObjectLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DerivationObjectLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class DerivationObjectLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DerivationObjectLink} instance wrapping the given value.
+   */
   public static DerivationObjectLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return DerivationObjectLink
         .builder()

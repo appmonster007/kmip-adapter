@@ -65,6 +65,9 @@ public class DeactivateOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeactivateOpRequestPayload} instance wrapping the given value.
+   */
   public static DeactivateOpRequestPayload of(List<KmipDataType> values) {
     var builder = DeactivateOpRequestPayload.builder();
     values.forEach(value -> {
@@ -79,6 +82,9 @@ public class DeactivateOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link DeactivateOpRequestPayload} instance wrapping the given value.
+   */
   public static DeactivateOpRequestPayload of(
       @NonNull UniqueIdentifier uniqueIdentifier,
       DeactivationReason deactivationReason,

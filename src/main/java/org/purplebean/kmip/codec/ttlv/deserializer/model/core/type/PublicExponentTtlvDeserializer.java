@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * TTLV deserializer for {@link PublicExponent}.
+ */
 public class PublicExponentTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PublicExponent, PublicExponent.PublicExponentBuilder> {
 
+  /**
+   * Constructs a new {@link PublicExponentTtlvDeserializer}.
+   */
   public PublicExponentTtlvDeserializer() {
     super(PublicExponent.kmipTag, PublicExponent.encodingType);
   }

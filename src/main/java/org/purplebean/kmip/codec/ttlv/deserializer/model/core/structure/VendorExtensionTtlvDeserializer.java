@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.TtlvDataType;
 import org.purplebean.kmip.model.core.structure.VendorExtension;
 
+/**
+ * TTLV deserializer for {@link VendorExtension}.
+ */
 public class VendorExtensionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<VendorExtension, VendorExtension.VendorExtensionBuilder> {
 
+  /**
+   * Constructs a new {@link VendorExtensionTtlvDeserializer}.
+   */
   public VendorExtensionTtlvDeserializer() {
     super(VendorExtension.kmipTag, VendorExtension.encodingType);
   }

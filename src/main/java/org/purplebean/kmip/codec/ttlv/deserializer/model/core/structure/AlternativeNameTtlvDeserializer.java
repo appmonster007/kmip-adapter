@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.AlternativeNameType;
 import org.purplebean.kmip.model.core.structure.AlternativeName;
 import org.purplebean.kmip.model.core.type.AlternativeNameValue;
 
+/**
+ * TTLV deserializer for {@link AlternativeName}.
+ */
 public class AlternativeNameTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AlternativeName, AlternativeName.AlternativeNameBuilder> {
 
+  /**
+   * Constructs a new {@link AlternativeNameTtlvDeserializer}.
+   */
   public AlternativeNameTtlvDeserializer() {
     super(AlternativeName.kmipTag, AlternativeName.encodingType);
   }

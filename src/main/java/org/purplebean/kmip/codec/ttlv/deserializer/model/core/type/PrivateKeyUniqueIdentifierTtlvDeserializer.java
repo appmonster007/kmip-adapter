@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 
+/**
+ * TTLV deserializer for {@link PrivateKeyUniqueIdentifier}.
+ */
 public class PrivateKeyUniqueIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PrivateKeyUniqueIdentifier,
         PrivateKeyUniqueIdentifier.PrivateKeyUniqueIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link PrivateKeyUniqueIdentifierTtlvDeserializer}.
+   */
   public PrivateKeyUniqueIdentifierTtlvDeserializer() {
     super(PrivateKeyUniqueIdentifier.kmipTag, PrivateKeyUniqueIdentifier.encodingType);
   }

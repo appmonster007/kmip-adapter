@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v1x2.structure.response.p
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.RngSeedOpResponsePayload;
 
+/**
+ * XML serializer for {@link RngSeedOpResponsePayload}.
+ */
 public class RngSeedOpResponsePayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<RngSeedOpResponsePayload> {
 }

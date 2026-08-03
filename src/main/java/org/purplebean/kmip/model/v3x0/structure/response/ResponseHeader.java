@@ -78,6 +78,9 @@ public class ResponseHeader implements ResponseHeaderStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ResponseHeader} instance wrapping the given value.
+   */
   public static ResponseHeader of(List<KmipDataType> values) {
     var builder = ResponseHeader.builder();
     Map<KmipTag, List<KmipDataType>> map = values

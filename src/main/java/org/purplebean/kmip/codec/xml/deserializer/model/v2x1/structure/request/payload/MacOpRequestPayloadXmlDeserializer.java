@@ -13,10 +13,16 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * XML deserializer for {@link MacOpRequestPayload}.
+ */
 public class MacOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<MacOpRequestPayload,
         MacOpRequestPayload.MacOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link MacOpRequestPayloadXmlDeserializer}.
+   */
   public MacOpRequestPayloadXmlDeserializer() {
     super(MacOpRequestPayload.kmipTag, MacOpRequestPayload.encodingType);
   }

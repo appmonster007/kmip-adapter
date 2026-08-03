@@ -42,6 +42,9 @@ public class AuthenticatedEncryptionTag implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AuthenticatedEncryptionTag} instance wrapping the given value.
+   */
   public static AuthenticatedEncryptionTag of(@NonNull ByteBuffer value) {
     return new AuthenticatedEncryptionTag(value);
   }

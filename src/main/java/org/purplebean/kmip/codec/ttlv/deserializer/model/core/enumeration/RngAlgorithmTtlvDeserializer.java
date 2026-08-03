@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
 
+/**
+ * TTLV deserializer for {@link RngAlgorithm}.
+ */
 public class RngAlgorithmTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<RngAlgorithm, RngAlgorithm.RngAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link RngAlgorithmTtlvDeserializer}.
+   */
   public RngAlgorithmTtlvDeserializer() {
     super(RngAlgorithm.kmipTag, RngAlgorithm.encodingType);
   }

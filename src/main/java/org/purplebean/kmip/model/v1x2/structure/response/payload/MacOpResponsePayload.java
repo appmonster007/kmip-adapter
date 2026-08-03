@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.MacData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP MacOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacOpResponsePayload implements ResponsePayloadStructure {
@@ -53,6 +56,9 @@ public class MacOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacOpResponsePayload} instance wrapping the given value.
+   */
   public static MacOpResponsePayload of(List<KmipDataType> values) {
     var builder = MacOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

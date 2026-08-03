@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LocateOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.OffsetItems;
 
+/**
+ * XML deserializer for {@link LocateOpRequestPayload}.
+ */
 public class LocateOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<LocateOpRequestPayload,
         LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LocateOpRequestPayloadXmlDeserializer}.
+   */
   public LocateOpRequestPayloadXmlDeserializer() {
     super(LocateOpRequestPayload.kmipTag, LocateOpRequestPayload.encodingType);
   }

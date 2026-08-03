@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.QueryFunction;
 import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link QueryOpRequestPayload}.
+ */
 public class QueryOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<QueryOpRequestPayload,
         QueryOpRequestPayload.QueryOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link QueryOpRequestPayloadJsonDeserializer}.
+   */
   public QueryOpRequestPayloadJsonDeserializer() {
     super(QueryOpRequestPayload.kmipTag, QueryOpRequestPayload.encodingType);
   }

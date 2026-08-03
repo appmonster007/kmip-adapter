@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
 
+/**
+ * TTLV deserializer for {@link KeyPartIdentifier}.
+ */
 public class KeyPartIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<KeyPartIdentifier,
         KeyPartIdentifier.KeyPartIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link KeyPartIdentifierTtlvDeserializer}.
+   */
   public KeyPartIdentifierTtlvDeserializer() {
     super(KeyPartIdentifier.kmipTag, KeyPartIdentifier.encodingType);
   }

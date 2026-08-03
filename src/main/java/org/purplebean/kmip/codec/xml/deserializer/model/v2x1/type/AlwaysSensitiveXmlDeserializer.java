@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AlwaysSensitive;
 
+/**
+ * XML deserializer for {@link AlwaysSensitive}.
+ */
 public class AlwaysSensitiveXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AlwaysSensitive, AlwaysSensitive.AlwaysSensitiveBuilder> {
 
+  /**
+   * Constructs a new {@link AlwaysSensitiveXmlDeserializer}.
+   */
   public AlwaysSensitiveXmlDeserializer() {
     super(AlwaysSensitive.kmipTag, AlwaysSensitive.encodingType);
   }

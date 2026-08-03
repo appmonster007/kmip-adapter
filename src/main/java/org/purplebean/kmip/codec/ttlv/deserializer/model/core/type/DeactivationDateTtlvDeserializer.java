@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.DeactivationDate;
 
+/**
+ * TTLV deserializer for {@link DeactivationDate}.
+ */
 public class DeactivationDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeactivationDate,
         DeactivationDate.DeactivationDateBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationDateTtlvDeserializer}.
+   */
   public DeactivationDateTtlvDeserializer() {
     super(DeactivationDate.kmipTag, DeactivationDate.encodingType);
   }

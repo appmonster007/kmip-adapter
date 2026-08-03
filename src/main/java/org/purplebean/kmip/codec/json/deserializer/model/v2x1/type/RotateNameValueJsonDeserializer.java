@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.RotateNameValue;
 
+/**
+ * JSON deserializer for {@link RotateNameValue}.
+ */
 public class RotateNameValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RotateNameValue, RotateNameValue.RotateNameValueBuilder> {
 
+  /**
+   * Constructs a new {@link RotateNameValueJsonDeserializer}.
+   */
   public RotateNameValueJsonDeserializer() {
     super(RotateNameValue.kmipTag, RotateNameValue.encodingType);
   }

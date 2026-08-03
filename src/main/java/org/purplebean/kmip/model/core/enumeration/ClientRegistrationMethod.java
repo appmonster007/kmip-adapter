@@ -75,6 +75,9 @@ public class ClientRegistrationMethod implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ClientRegistrationMethod} instance wrapping the given value.
+   */
   public static ClientRegistrationMethod of(@NonNull Value value) {
     return new ClientRegistrationMethod(value);
   }
@@ -258,6 +261,9 @@ public class ClientRegistrationMethod implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.Fresh;
 
+/**
+ * JSON deserializer for {@link Fresh}.
+ */
 public class FreshJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Fresh, Fresh.FreshBuilder> {
 
+  /**
+   * Constructs a new {@link FreshJsonDeserializer}.
+   */
   public FreshJsonDeserializer() {
     super(Fresh.kmipTag, Fresh.encodingType);
   }

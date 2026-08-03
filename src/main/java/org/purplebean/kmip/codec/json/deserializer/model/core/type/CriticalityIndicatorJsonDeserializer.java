@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.CriticalityIndicator;
 
+/**
+ * JSON deserializer for {@link CriticalityIndicator}.
+ */
 public class CriticalityIndicatorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CriticalityIndicator,
         CriticalityIndicator.CriticalityIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link CriticalityIndicatorJsonDeserializer}.
+   */
   public CriticalityIndicatorJsonDeserializer() {
     super(CriticalityIndicator.kmipTag, CriticalityIndicator.encodingType);
   }

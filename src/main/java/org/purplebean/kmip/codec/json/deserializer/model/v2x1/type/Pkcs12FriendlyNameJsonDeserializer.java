@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
 
+/**
+ * JSON deserializer for {@link Pkcs12FriendlyName}.
+ */
 public class Pkcs12FriendlyNameJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs12FriendlyName,
         Pkcs12FriendlyName.Pkcs12FriendlyNameBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12FriendlyNameJsonDeserializer}.
+   */
   public Pkcs12FriendlyNameJsonDeserializer() {
     super(Pkcs12FriendlyName.kmipTag, Pkcs12FriendlyName.encodingType);
   }

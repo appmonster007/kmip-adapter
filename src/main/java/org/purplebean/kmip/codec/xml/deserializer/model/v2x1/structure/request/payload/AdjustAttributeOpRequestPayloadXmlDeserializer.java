@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
 import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.AdjustAttributeOpRequestPayload;
 
+/**
+ * XML deserializer for {@link AdjustAttributeOpRequestPayload}.
+ */
 public class AdjustAttributeOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AdjustAttributeOpRequestPayload,
         AdjustAttributeOpRequestPayload.AdjustAttributeOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link AdjustAttributeOpRequestPayloadXmlDeserializer}.
+   */
   public AdjustAttributeOpRequestPayloadXmlDeserializer() {
     super(AdjustAttributeOpRequestPayload.kmipTag, AdjustAttributeOpRequestPayload.encodingType);
   }

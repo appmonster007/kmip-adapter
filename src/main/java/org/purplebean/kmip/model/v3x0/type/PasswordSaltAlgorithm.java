@@ -48,14 +48,23 @@ public class PasswordSaltAlgorithm implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PasswordSaltAlgorithm} instance wrapping the given value.
+   */
   public static PasswordSaltAlgorithm of(@NonNull CryptographicAlgorithm.Value value) {
     return new PasswordSaltAlgorithm(value);
   }
 
+  /**
+   * Looks up the {@link CryptographicAlgorithm.Value} matching the given name.
+   */
   public static CryptographicAlgorithm.Value fromName(String name) {
     return CryptographicAlgorithm.fromName(name);
   }
 
+  /**
+   * Looks up the {@link CryptographicAlgorithm.Value} matching the given integer value.
+   */
   public static CryptographicAlgorithm.Value fromValue(int value) {
     return CryptographicAlgorithm.fromValue(value);
   }

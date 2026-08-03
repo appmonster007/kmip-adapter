@@ -47,6 +47,9 @@ public class PrivateKeyUniqueIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PrivateKeyUniqueIdentifier} instance wrapping the given value.
+   */
   public static PrivateKeyUniqueIdentifier of(@NonNull String value) {
     return new PrivateKeyUniqueIdentifier(value);
   }

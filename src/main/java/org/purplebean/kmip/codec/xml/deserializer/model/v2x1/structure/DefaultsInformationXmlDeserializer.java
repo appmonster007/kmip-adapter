@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.v2x1.structure.DefaultsInformation;
 import org.purplebean.kmip.model.v2x1.structure.ObjectDefaults;
 
+/**
+ * XML deserializer for {@link DefaultsInformation}.
+ */
 public class DefaultsInformationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DefaultsInformation,
         DefaultsInformation.DefaultsInformationBuilder> {
 
+  /**
+   * Constructs a new {@link DefaultsInformationXmlDeserializer}.
+   */
   public DefaultsInformationXmlDeserializer() {
     super(DefaultsInformation.kmipTag, DefaultsInformation.encodingType);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
 
+/**
+ * XML deserializer for {@link MaskGenerator}.
+ */
 public class MaskGeneratorXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<MaskGenerator, MaskGenerator.MaskGeneratorBuilder> {
 
+  /**
+   * Constructs a new {@link MaskGeneratorXmlDeserializer}.
+   */
   public MaskGeneratorXmlDeserializer() {
     super(MaskGenerator.kmipTag, MaskGenerator.encodingType);
   }

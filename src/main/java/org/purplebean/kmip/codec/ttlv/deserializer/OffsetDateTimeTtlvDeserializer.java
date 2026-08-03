@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
+/**
+ * TTLV deserializer for {@link OffsetDateTime}.
+ */
 public class OffsetDateTimeTtlvDeserializer extends TtlvDeserializer<OffsetDateTime> {
   private final EncodingType type = EncodingType.DATE_TIME;
 

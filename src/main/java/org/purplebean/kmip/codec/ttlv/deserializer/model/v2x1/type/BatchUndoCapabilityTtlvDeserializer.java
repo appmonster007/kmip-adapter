@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 
+/**
+ * TTLV deserializer for {@link BatchUndoCapability}.
+ */
 public class BatchUndoCapabilityTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<BatchUndoCapability,
         BatchUndoCapability.BatchUndoCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link BatchUndoCapabilityTtlvDeserializer}.
+   */
   public BatchUndoCapabilityTtlvDeserializer() {
     super(BatchUndoCapability.kmipTag, BatchUndoCapability.encodingType);
   }

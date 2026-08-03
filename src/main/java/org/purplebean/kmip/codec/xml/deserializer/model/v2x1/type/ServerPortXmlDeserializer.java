@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ServerPort;
 
+/**
+ * XML deserializer for {@link ServerPort}.
+ */
 public class ServerPortXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<ServerPort, ServerPort.ServerPortBuilder> {
 
+  /**
+   * Constructs a new {@link ServerPortXmlDeserializer}.
+   */
   public ServerPortXmlDeserializer() {
     super(ServerPort.kmipTag, ServerPort.encodingType);
   }

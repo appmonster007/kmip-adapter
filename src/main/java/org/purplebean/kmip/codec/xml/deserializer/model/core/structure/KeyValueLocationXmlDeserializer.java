@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purplebean.kmip.model.core.structure.KeyValueLocation;
 import org.purplebean.kmip.model.core.type.KeyValueLocationValue;
 
+/**
+ * XML deserializer for {@link KeyValueLocation}.
+ */
 public class KeyValueLocationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyValueLocation,
         KeyValueLocation.KeyValueLocationBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueLocationXmlDeserializer}.
+   */
   public KeyValueLocationXmlDeserializer() {
     super(KeyValueLocation.kmipTag, KeyValueLocation.encodingType);
   }

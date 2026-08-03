@@ -47,10 +47,16 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link DeactivationDate} instance wrapping the given value.
+   */
   public static DeactivationDate of(@NonNull OffsetDateTime value) {
     return new DeactivationDate(value);
   }
 
+  /**
+   * Returns the {@link DeactivationDate} instance wrapping the given value.
+   */
   public static DeactivationDate of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

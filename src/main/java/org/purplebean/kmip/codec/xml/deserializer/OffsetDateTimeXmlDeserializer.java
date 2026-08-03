@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
+/**
+ * XML deserializer for {@link OffsetDateTime}.
+ */
 public class OffsetDateTimeXmlDeserializer extends JsonDeserializer<OffsetDateTime> {
 
   @Override

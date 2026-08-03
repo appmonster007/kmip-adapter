@@ -42,6 +42,9 @@ public class SubmissionDate implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SubmissionDate} instance wrapping the given value.
+   */
   public static SubmissionDate of(@NonNull OffsetDateTime value) {
     return new SubmissionDate(value);
   }

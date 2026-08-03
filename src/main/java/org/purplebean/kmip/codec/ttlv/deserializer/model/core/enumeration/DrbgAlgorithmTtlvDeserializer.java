@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.DrbgAlgorithm;
 
+/**
+ * TTLV deserializer for {@link DrbgAlgorithm}.
+ */
 public class DrbgAlgorithmTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DrbgAlgorithm, DrbgAlgorithm.DrbgAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link DrbgAlgorithmTtlvDeserializer}.
+   */
   public DrbgAlgorithmTtlvDeserializer() {
     super(DrbgAlgorithm.kmipTag, DrbgAlgorithm.encodingType);
   }

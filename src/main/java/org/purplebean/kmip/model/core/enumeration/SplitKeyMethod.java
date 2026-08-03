@@ -80,6 +80,9 @@ public class SplitKeyMethod implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link SplitKeyMethod} instance wrapping the given value.
+   */
   public static SplitKeyMethod of(@NonNull Value value) {
     return new SplitKeyMethod(value);
   }
@@ -259,6 +262,9 @@ public class SplitKeyMethod implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -42,6 +42,9 @@ public class Qlength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Qlength} instance wrapping the given value.
+   */
   public static Qlength of(@NonNull Integer value) {
     return new Qlength(value);
   }

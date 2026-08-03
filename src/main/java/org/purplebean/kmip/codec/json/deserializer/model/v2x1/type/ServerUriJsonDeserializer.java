@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * JSON deserializer for {@link ServerUri}.
+ */
 public class ServerUriJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<ServerUri, ServerUri.ServerUriBuilder> {
 
+  /**
+   * Constructs a new {@link ServerUriJsonDeserializer}.
+   */
   public ServerUriJsonDeserializer() {
     super(ServerUri.kmipTag, ServerUri.encodingType);
   }

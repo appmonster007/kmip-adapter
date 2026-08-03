@@ -42,6 +42,9 @@ public class NetworkIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link NetworkIdentifier} instance wrapping the given value.
+   */
   public static NetworkIdentifier of(@NonNull String value) {
     return new NetworkIdentifier(value);
   }

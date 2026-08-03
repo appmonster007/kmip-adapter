@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
+/**
+ * KMIP CapabilityInformation structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CapabilityInformation implements KmipStructure {
@@ -71,6 +74,9 @@ public class CapabilityInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CapabilityInformation} instance wrapping the given value.
+   */
   public static CapabilityInformation of(@lombok.NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

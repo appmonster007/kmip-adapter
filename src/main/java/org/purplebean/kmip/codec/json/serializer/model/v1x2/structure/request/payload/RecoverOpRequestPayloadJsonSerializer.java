@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.json.serializer.model.v1x2.structure.request.p
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.RecoverOpRequestPayload;
 
+/**
+ * JSON serializer for {@link RecoverOpRequestPayload}.
+ */
 public class RecoverOpRequestPayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<RecoverOpRequestPayload> {
 }

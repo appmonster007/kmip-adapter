@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.DigestedData;
 
+/**
+ * TTLV deserializer for {@link DigestedData}.
+ */
 public class DigestedDataTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<DigestedData, DigestedData.DigestedDataBuilder> {
 
+  /**
+   * Constructs a new {@link DigestedDataTtlvDeserializer}.
+   */
   public DigestedDataTtlvDeserializer() {
     super(DigestedData.kmipTag, DigestedData.encodingType);
   }

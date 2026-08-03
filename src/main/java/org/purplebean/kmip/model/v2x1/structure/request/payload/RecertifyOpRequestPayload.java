@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.type.Offset;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP RecertifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RecertifyOpRequestPayload implements RequestPayloadStructure {
@@ -63,6 +66,9 @@ public class RecertifyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RecertifyOpRequestPayload} instance wrapping the given value.
+   */
   public static RecertifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = RecertifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

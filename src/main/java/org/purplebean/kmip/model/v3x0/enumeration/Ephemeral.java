@@ -71,6 +71,9 @@ public class Ephemeral implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link Ephemeral} instance wrapping the given value.
+   */
   public static Ephemeral of(@NonNull Value value) {
     return new Ephemeral(value);
   }
@@ -246,6 +249,9 @@ public class Ephemeral implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

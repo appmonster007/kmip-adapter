@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
+/**
+ * KMIP ObjectTypes structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ObjectTypes implements KmipStructure {
@@ -41,6 +44,9 @@ public class ObjectTypes implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObjectTypes} instance wrapping the given value.
+   */
   public static ObjectTypes of(@NonNull List<ObjectType> objectTypes) {
     return ObjectTypes
         .builder()

@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.CertificateSubject;
 import org.purplebean.kmip.model.core.type.CertificateSubjectAlternativeName;
 import org.purplebean.kmip.model.core.type.CertificateSubjectDistinguishedName;
 
+/**
+ * JSON deserializer for {@link CertificateSubject}.
+ */
 public class CertificateSubjectJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CertificateSubject,
         CertificateSubject.CertificateSubjectBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateSubjectJsonDeserializer}.
+   */
   public CertificateSubjectJsonDeserializer() {
     super(CertificateSubject.kmipTag, CertificateSubject.encodingType);
   }

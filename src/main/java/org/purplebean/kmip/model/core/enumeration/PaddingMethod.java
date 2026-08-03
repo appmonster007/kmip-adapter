@@ -82,6 +82,9 @@ public class PaddingMethod implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link PaddingMethod} instance wrapping the given value.
+   */
   public static PaddingMethod of(@NonNull Value value) {
     return new PaddingMethod(value);
   }
@@ -270,6 +273,9 @@ public class PaddingMethod implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

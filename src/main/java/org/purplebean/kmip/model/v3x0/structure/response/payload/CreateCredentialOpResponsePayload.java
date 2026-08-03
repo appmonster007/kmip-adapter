@@ -53,6 +53,9 @@ public class CreateCredentialOpResponsePayload implements ResponsePayloadStructu
     validate();
   }
 
+  /**
+   * Returns the {@link CreateCredentialOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateCredentialOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateCredentialOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class CreateCredentialOpResponsePayload implements ResponsePayloadStructu
     return builder.build();
   }
 
+  /**
+   * Returns the {@link CreateCredentialOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateCredentialOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return CreateCredentialOpResponsePayload
         .builder()

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.ObtainLeaseOpResponsePayload;
 
+/**
+ * XML deserializer for {@link ObtainLeaseOpResponsePayload}.
+ */
 public class ObtainLeaseOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ObtainLeaseOpResponsePayload,
         ObtainLeaseOpResponsePayload.ObtainLeaseOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ObtainLeaseOpResponsePayloadXmlDeserializer}.
+   */
   public ObtainLeaseOpResponsePayloadXmlDeserializer() {
     super(ObtainLeaseOpResponsePayload.kmipTag, ObtainLeaseOpResponsePayload.encodingType);
   }

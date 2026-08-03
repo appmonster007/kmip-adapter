@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.MacVerifyOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link MacVerifyOpResponsePayload}.
+ */
 public class MacVerifyOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MacVerifyOpResponsePayload,
         MacVerifyOpResponsePayload.MacVerifyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link MacVerifyOpResponsePayloadJsonDeserializer}.
+   */
   public MacVerifyOpResponsePayloadJsonDeserializer() {
     super(MacVerifyOpResponsePayload.kmipTag, MacVerifyOpResponsePayload.encodingType);
   }

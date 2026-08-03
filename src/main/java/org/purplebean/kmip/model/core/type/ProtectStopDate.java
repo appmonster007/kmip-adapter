@@ -48,10 +48,16 @@ public class ProtectStopDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtectStopDate} instance wrapping the given value.
+   */
   public static ProtectStopDate of(@NonNull OffsetDateTime value) {
     return new ProtectStopDate(value);
   }
 
+  /**
+   * Returns the {@link ProtectStopDate} instance wrapping the given value.
+   */
   public static ProtectStopDate of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

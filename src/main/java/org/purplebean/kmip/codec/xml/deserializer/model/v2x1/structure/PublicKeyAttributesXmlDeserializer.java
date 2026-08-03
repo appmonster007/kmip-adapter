@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.PublicKeyAttributes;
 
+/**
+ * XML deserializer for {@link PublicKeyAttributes}.
+ */
 public class PublicKeyAttributesXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PublicKeyAttributes,
         PublicKeyAttributes.PublicKeyAttributesBuilder> {
 
+  /**
+   * Constructs a new {@link PublicKeyAttributesXmlDeserializer}.
+   */
   public PublicKeyAttributesXmlDeserializer() {
     super(PublicKeyAttributes.kmipTag, PublicKeyAttributes.encodingType);
   }

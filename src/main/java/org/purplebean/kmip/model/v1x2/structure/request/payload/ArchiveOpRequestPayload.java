@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ArchiveOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ArchiveOpRequestPayload implements RequestPayloadStructure {
@@ -47,6 +50,9 @@ public class ArchiveOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ArchiveOpRequestPayload} instance wrapping the given value.
+   */
   public static ArchiveOpRequestPayload of(List<KmipDataType> values) {
     var builder = ArchiveOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

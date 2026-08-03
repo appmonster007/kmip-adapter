@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.CertificateRequest;
 
+/**
+ * XML deserializer for {@link CertificateRequest}.
+ */
 public class CertificateRequestXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CertificateRequest,
         CertificateRequest.CertificateRequestBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateRequestXmlDeserializer}.
+   */
   public CertificateRequestXmlDeserializer() {
     super(CertificateRequest.kmipTag, CertificateRequest.encodingType);
   }

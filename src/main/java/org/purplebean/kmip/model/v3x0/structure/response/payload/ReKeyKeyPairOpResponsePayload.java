@@ -72,6 +72,9 @@ public class ReKeyKeyPairOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReKeyKeyPairOpResponsePayload} instance wrapping the given value.
+   */
   public static ReKeyKeyPairOpResponsePayload of(
       @NonNull PrivateKeyUniqueIdentifier privateKeyUniqueIdentifier,
       @NonNull PublicKeyUniqueIdentifier publicKeyUniqueIdentifier,
@@ -87,6 +90,9 @@ public class ReKeyKeyPairOpResponsePayload implements ResponsePayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ReKeyKeyPairOpResponsePayload} instance wrapping the given value.
+   */
   public static ReKeyKeyPairOpResponsePayload of(List<KmipDataType> values) {
     var builder = ReKeyKeyPairOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

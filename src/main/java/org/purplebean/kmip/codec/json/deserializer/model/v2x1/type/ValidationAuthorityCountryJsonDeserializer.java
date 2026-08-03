@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityCountry;
 
+/**
+ * JSON deserializer for {@link ValidationAuthorityCountry}.
+ */
 public class ValidationAuthorityCountryJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ValidationAuthorityCountry,
         ValidationAuthorityCountry.ValidationAuthorityCountryBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationAuthorityCountryJsonDeserializer}.
+   */
   public ValidationAuthorityCountryJsonDeserializer() {
     super(ValidationAuthorityCountry.kmipTag, ValidationAuthorityCountry.encodingType);
   }

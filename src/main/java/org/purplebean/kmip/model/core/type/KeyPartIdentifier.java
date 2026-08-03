@@ -42,6 +42,9 @@ public class KeyPartIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyPartIdentifier} instance wrapping the given value.
+   */
   public static KeyPartIdentifier of(@NonNull Integer value) {
     return new KeyPartIdentifier(value);
   }

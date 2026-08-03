@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.CredentialInformation;
 
+/**
+ * TTLV deserializer for {@link CredentialInformation}.
+ */
 public class CredentialInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CredentialInformation,
         CredentialInformation.CredentialInformationBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialInformationTtlvDeserializer}.
+   */
   public CredentialInformationTtlvDeserializer() {
     super(CredentialInformation.kmipTag, CredentialInformation.encodingType);
   }

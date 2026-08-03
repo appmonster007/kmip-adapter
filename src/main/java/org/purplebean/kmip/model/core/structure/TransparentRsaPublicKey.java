@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.type.Modulus;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * KMIP TransparentRsaPublicKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
@@ -53,6 +56,9 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentRsaPublicKey} instance wrapping the given value.
+   */
   public static TransparentRsaPublicKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -70,6 +76,9 @@ public class TransparentRsaPublicKey implements KeyMaterial, KmipStructure {
     );
   }
 
+  /**
+   * Returns the {@link TransparentRsaPublicKey} instance wrapping the given value.
+   */
   public static TransparentRsaPublicKey of(@NonNull Modulus modulus,
                                            @NonNull PublicExponent publicExponent) {
     return TransparentRsaPublicKey

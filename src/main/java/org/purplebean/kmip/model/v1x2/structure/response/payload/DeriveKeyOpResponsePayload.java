@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP DeriveKeyOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeriveKeyOpResponsePayload implements ResponsePayloadStructure {
@@ -55,6 +58,9 @@ public class DeriveKeyOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeriveKeyOpResponsePayload} instance wrapping the given value.
+   */
   public static DeriveKeyOpResponsePayload of(
       @NonNull UniqueIdentifier uniqueIdentifier,
       TemplateAttribute templateAttribute
@@ -66,6 +72,9 @@ public class DeriveKeyOpResponsePayload implements ResponsePayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link DeriveKeyOpResponsePayload} instance wrapping the given value.
+   */
   public static DeriveKeyOpResponsePayload of(List<KmipDataType> values) {
     var builder = DeriveKeyOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

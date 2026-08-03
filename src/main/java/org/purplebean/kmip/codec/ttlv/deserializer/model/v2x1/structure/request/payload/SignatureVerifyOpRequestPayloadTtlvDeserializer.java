@@ -15,10 +15,16 @@ import org.purplebean.kmip.model.v2x1.type.DigestedData;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * TTLV deserializer for {@link SignatureVerifyOpRequestPayload}.
+ */
 public class SignatureVerifyOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SignatureVerifyOpRequestPayload,
         SignatureVerifyOpRequestPayload.SignatureVerifyOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SignatureVerifyOpRequestPayloadTtlvDeserializer}.
+   */
   public SignatureVerifyOpRequestPayloadTtlvDeserializer() {
     super(SignatureVerifyOpRequestPayload.kmipTag, SignatureVerifyOpRequestPayload.encodingType);
   }

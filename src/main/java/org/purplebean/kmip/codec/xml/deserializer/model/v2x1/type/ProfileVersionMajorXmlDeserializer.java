@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMajor;
 
+/**
+ * XML deserializer for {@link ProfileVersionMajor}.
+ */
 public class ProfileVersionMajorXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProfileVersionMajor,
         ProfileVersionMajor.ProfileVersionMajorBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileVersionMajorXmlDeserializer}.
+   */
   public ProfileVersionMajorXmlDeserializer() {
     super(ProfileVersionMajor.kmipTag, ProfileVersionMajor.encodingType);
   }

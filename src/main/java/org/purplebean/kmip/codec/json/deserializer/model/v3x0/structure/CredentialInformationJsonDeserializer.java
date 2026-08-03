@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.CredentialInformation;
 
+/**
+ * JSON deserializer for {@link CredentialInformation}.
+ */
 public class CredentialInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CredentialInformation,
         CredentialInformation.CredentialInformationBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialInformationJsonDeserializer}.
+   */
   public CredentialInformationJsonDeserializer() {
     super(CredentialInformation.kmipTag, CredentialInformation.encodingType);
   }

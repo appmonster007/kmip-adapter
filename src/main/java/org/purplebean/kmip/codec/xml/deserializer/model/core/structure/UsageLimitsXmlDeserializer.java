@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.core.structure.UsageLimits;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.core.type.UsageLimitsTotal;
 
+/**
+ * XML deserializer for {@link UsageLimits}.
+ */
 public class UsageLimitsXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<UsageLimits, UsageLimits.UsageLimitsBuilder> {
 
+  /**
+   * Constructs a new {@link UsageLimitsXmlDeserializer}.
+   */
   public UsageLimitsXmlDeserializer() {
     super(UsageLimits.kmipTag, UsageLimits.encodingType);
   }

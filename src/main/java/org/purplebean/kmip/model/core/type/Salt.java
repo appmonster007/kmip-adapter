@@ -42,10 +42,16 @@ public class Salt implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Salt} instance wrapping the given value.
+   */
   public static Salt of(@NonNull ByteBuffer value) {
     return new Salt(value);
   }
 
+  /**
+   * Returns the {@link Salt} instance wrapping the given value.
+   */
   public static Salt of(byte[] value) {
     return Salt
         .builder()

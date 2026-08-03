@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 
+/**
+ * JSON deserializer for {@link PaddingMethod}.
+ */
 public class PaddingMethodJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PaddingMethod, PaddingMethod.PaddingMethodBuilder> {
 
+  /**
+   * Constructs a new {@link PaddingMethodJsonDeserializer}.
+   */
   public PaddingMethodJsonDeserializer() {
     super(PaddingMethod.kmipTag, PaddingMethod.encodingType);
   }

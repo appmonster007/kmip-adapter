@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
 
+/**
+ * JSON deserializer for {@link TicketType}.
+ */
 public class TicketTypeJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<TicketType, TicketType.TicketTypeBuilder> {
 
+  /**
+   * Constructs a new {@link TicketTypeJsonDeserializer}.
+   */
   public TicketTypeJsonDeserializer() {
     super(TicketType.kmipTag, TicketType.encodingType);
   }

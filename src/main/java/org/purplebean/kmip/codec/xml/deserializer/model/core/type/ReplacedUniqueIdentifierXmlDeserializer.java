@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ReplacedUniqueIdentifier;
 
+/**
+ * XML deserializer for {@link ReplacedUniqueIdentifier}.
+ */
 public class ReplacedUniqueIdentifierXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ReplacedUniqueIdentifier,
         ReplacedUniqueIdentifier.ReplacedUniqueIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link ReplacedUniqueIdentifierXmlDeserializer}.
+   */
   public ReplacedUniqueIdentifierXmlDeserializer() {
     super(ReplacedUniqueIdentifier.kmipTag, ReplacedUniqueIdentifier.encodingType);
   }

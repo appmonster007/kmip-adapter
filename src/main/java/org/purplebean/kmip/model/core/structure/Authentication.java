@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP Authentication attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Authentication implements KmipStructure {
@@ -45,12 +48,18 @@ public class Authentication implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Authentication} instance wrapping the given value.
+   */
   public static Authentication of(
       Credential... credentials
   ) {
     return of(List.of(credentials));
   }
 
+  /**
+   * Returns the {@link Authentication} instance wrapping the given value.
+   */
   public static Authentication of(
       List<Credential> credentials
   ) {

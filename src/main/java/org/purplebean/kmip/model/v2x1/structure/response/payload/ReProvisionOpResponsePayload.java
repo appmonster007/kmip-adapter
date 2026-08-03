@@ -51,6 +51,9 @@ public class ReProvisionOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReProvisionOpResponsePayload} instance wrapping the given value.
+   */
   public static ReProvisionOpResponsePayload of(List<KmipDataType> values) {
     var builder = ReProvisionOpResponsePayload.builder();
     values.forEach(value -> {
@@ -61,6 +64,9 @@ public class ReProvisionOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link ReProvisionOpResponsePayload} instance wrapping the given value.
+   */
   public static ReProvisionOpResponsePayload of(UniqueIdentifier uniqueIdentifier) {
     return ReProvisionOpResponsePayload
         .builder()

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * TTLV deserializer for {@link ServerUri}.
+ */
 public class ServerUriTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<ServerUri, ServerUri.ServerUriBuilder> {
 
+  /**
+   * Constructs a new {@link ServerUriTtlvDeserializer}.
+   */
   public ServerUriTtlvDeserializer() {
     super(ServerUri.kmipTag, ServerUri.encodingType);
   }

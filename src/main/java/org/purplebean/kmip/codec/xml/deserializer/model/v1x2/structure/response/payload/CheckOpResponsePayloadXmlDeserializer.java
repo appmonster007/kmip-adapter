@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CheckOpResponsePayload;
 
+/**
+ * XML deserializer for {@link CheckOpResponsePayload}.
+ */
 public class CheckOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CheckOpResponsePayload,
         CheckOpResponsePayload.CheckOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CheckOpResponsePayloadXmlDeserializer}.
+   */
   public CheckOpResponsePayloadXmlDeserializer() {
     super(CheckOpResponsePayload.kmipTag, CheckOpResponsePayload.encodingType);
   }

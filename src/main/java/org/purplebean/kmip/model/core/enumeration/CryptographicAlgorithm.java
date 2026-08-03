@@ -74,10 +74,16 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CryptographicAlgorithm} instance wrapping the given value.
+   */
   public static CryptographicAlgorithm of(@NonNull Value value) {
     return new CryptographicAlgorithm(value);
   }
 
+  /**
+   * Returns the {@link CryptographicAlgorithm} instance wrapping the given value.
+   */
   public static CryptographicAlgorithm of(@NonNull AttributeName attributeName,
                                           @NonNull AttributeValue attributeValue) {
     if (!attributeName
@@ -415,6 +421,9 @@ public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

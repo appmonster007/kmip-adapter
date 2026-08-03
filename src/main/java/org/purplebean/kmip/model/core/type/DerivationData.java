@@ -42,10 +42,16 @@ public class DerivationData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DerivationData} instance wrapping the given value.
+   */
   public static DerivationData of(@NonNull ByteBuffer value) {
     return new DerivationData(value);
   }
 
+  /**
+   * Returns the {@link DerivationData} instance wrapping the given value.
+   */
   public static DerivationData of(byte[] value) {
     return DerivationData
         .builder()

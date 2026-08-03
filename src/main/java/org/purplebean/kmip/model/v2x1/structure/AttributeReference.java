@@ -47,6 +47,9 @@ public class AttributeReference implements KmipStructure {
     validate();
   }
 
+  /**
+   * Creates a {@link AttributeReference} wrapping a Vendor value.
+   */
   public static AttributeReference ofVendor(
       @lombok.NonNull VendorIdentification vendorIdentification,
       @lombok.NonNull AttributeName attributeName) {
@@ -57,6 +60,9 @@ public class AttributeReference implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link AttributeReference} instance wrapping the given value.
+   */
   public static AttributeReference of(@lombok.NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

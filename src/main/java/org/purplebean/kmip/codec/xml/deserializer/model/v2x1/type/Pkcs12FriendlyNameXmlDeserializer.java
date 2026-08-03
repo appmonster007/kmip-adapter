@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
 
+/**
+ * XML deserializer for {@link Pkcs12FriendlyName}.
+ */
 public class Pkcs12FriendlyNameXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs12FriendlyName,
         Pkcs12FriendlyName.Pkcs12FriendlyNameBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12FriendlyNameXmlDeserializer}.
+   */
   public Pkcs12FriendlyNameXmlDeserializer() {
     super(Pkcs12FriendlyName.kmipTag, Pkcs12FriendlyName.encodingType);
   }

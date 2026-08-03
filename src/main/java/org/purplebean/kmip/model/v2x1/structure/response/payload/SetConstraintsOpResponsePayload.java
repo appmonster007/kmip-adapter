@@ -42,6 +42,9 @@ public class SetConstraintsOpResponsePayload implements ResponsePayloadStructure
     validate();
   }
 
+  /**
+   * Returns the {@link SetConstraintsOpResponsePayload} instance wrapping the given value.
+   */
   public static SetConstraintsOpResponsePayload of(List<KmipDataType> values) {
     return SetConstraintsOpResponsePayload
         .builder()

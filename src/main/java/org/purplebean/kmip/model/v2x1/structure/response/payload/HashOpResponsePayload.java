@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * KMIP HashOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class HashOpResponsePayload implements ResponsePayloadStructure {
@@ -50,6 +53,9 @@ public class HashOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link HashOpResponsePayload} instance wrapping the given value.
+   */
   public static HashOpResponsePayload of(List<KmipDataType> values) {
     var builder = HashOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

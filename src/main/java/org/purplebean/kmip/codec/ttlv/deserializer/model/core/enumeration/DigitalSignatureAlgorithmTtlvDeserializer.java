@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
 
+/**
+ * TTLV deserializer for {@link DigitalSignatureAlgorithm}.
+ */
 public class DigitalSignatureAlgorithmTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DigitalSignatureAlgorithm,
         DigitalSignatureAlgorithm.DigitalSignatureAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link DigitalSignatureAlgorithmTtlvDeserializer}.
+   */
   public DigitalSignatureAlgorithmTtlvDeserializer() {
     super(DigitalSignatureAlgorithm.kmipTag, DigitalSignatureAlgorithm.encodingType);
   }

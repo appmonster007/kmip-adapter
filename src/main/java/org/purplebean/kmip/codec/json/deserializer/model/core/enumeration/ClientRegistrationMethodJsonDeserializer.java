@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ClientRegistrationMethod;
 
+/**
+ * JSON deserializer for {@link ClientRegistrationMethod}.
+ */
 public class ClientRegistrationMethodJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ClientRegistrationMethod,
         ClientRegistrationMethod.ClientRegistrationMethodBuilder> {
 
+  /**
+   * Constructs a new {@link ClientRegistrationMethodJsonDeserializer}.
+   */
   public ClientRegistrationMethodJsonDeserializer() {
     super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType);
   }

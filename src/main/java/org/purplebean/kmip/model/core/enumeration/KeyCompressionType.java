@@ -77,6 +77,9 @@ public class KeyCompressionType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyCompressionType} instance wrapping the given value.
+   */
   public static KeyCompressionType of(@NonNull Value value) {
     return new KeyCompressionType(value);
   }
@@ -257,6 +260,9 @@ public class KeyCompressionType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

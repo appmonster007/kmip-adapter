@@ -67,10 +67,16 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link UniqueIdentifier} instance wrapping the given value.
+     */
     public static UniqueIdentifier of(@NonNull String value) {
         return new UniqueIdentifier(value, null);
     }
 
+    /**
+     * Returns the {@link UniqueIdentifier} instance wrapping the given value.
+     */
     public static UniqueIdentifier of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
             throw new IllegalArgumentException("Invalid attribute value");

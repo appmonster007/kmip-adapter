@@ -14,10 +14,16 @@ import org.purplebean.kmip.model.core.type.ApplicationNamespace;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.QueryOpResponsePayload;
 
+/**
+ * XML deserializer for {@link QueryOpResponsePayload}.
+ */
 public class QueryOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<QueryOpResponsePayload,
         QueryOpResponsePayload.QueryOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link QueryOpResponsePayloadXmlDeserializer}.
+   */
   public QueryOpResponsePayloadXmlDeserializer() {
     super(QueryOpResponsePayload.kmipTag, QueryOpResponsePayload.encodingType);
   }

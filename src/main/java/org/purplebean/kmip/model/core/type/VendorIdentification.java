@@ -42,6 +42,9 @@ public class VendorIdentification implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link VendorIdentification} instance wrapping the given value.
+   */
   public static VendorIdentification of(@NonNull String value) {
     return new VendorIdentification(value);
   }

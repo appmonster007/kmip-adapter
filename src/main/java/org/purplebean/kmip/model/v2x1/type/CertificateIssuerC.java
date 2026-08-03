@@ -48,10 +48,16 @@ public class CertificateIssuerC implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateIssuerC} instance wrapping the given value.
+   */
   public static CertificateIssuerC of(@NonNull String value) {
     return new CertificateIssuerC(value);
   }
 
+  /**
+   * Returns the {@link CertificateIssuerC} instance wrapping the given value.
+   */
   public static CertificateIssuerC of(@NonNull AttributeName attributeName,
                                       @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

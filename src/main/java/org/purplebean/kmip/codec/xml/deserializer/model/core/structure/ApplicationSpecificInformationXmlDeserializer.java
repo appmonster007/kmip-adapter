@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.ApplicationSpecificInformation;
 import org.purplebean.kmip.model.core.type.ApplicationData;
 import org.purplebean.kmip.model.core.type.ApplicationNamespace;
 
+/**
+ * XML deserializer for {@link ApplicationSpecificInformation}.
+ */
 public class ApplicationSpecificInformationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ApplicationSpecificInformation,
         ApplicationSpecificInformation.ApplicationSpecificInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ApplicationSpecificInformationXmlDeserializer}.
+   */
   public ApplicationSpecificInformationXmlDeserializer() {
     super(ApplicationSpecificInformation.kmipTag, ApplicationSpecificInformation.encodingType);
   }

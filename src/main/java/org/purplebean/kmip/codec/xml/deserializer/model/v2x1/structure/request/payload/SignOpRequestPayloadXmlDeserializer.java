@@ -14,10 +14,16 @@ import org.purplebean.kmip.model.v2x1.type.DigestedData;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * XML deserializer for {@link SignOpRequestPayload}.
+ */
 public class SignOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SignOpRequestPayload,
         SignOpRequestPayload.SignOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SignOpRequestPayloadXmlDeserializer}.
+   */
   public SignOpRequestPayloadXmlDeserializer() {
     super(SignOpRequestPayload.kmipTag, SignOpRequestPayload.encodingType);
   }

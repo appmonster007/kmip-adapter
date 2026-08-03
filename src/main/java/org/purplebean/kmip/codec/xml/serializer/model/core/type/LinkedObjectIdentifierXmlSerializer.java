@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * XML serializer for {@link LinkedObjectIdentifier}.
+ */
 public class LinkedObjectIdentifierXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<LinkedObjectIdentifier> {
 }

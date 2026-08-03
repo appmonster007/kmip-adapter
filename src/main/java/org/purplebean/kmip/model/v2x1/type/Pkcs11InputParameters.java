@@ -41,10 +41,16 @@ public class Pkcs11InputParameters implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11InputParameters} instance wrapping the given value.
+   */
   public static Pkcs11InputParameters of(@NonNull ByteBuffer value) {
     return new Pkcs11InputParameters(value);
   }
 
+  /**
+   * Returns the {@link Pkcs11InputParameters} instance wrapping the given value.
+   */
   public static Pkcs11InputParameters of(byte[] value) {
     return Pkcs11InputParameters
         .builder()

@@ -17,10 +17,16 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * XML deserializer for {@link DecryptOpRequestPayload}.
+ */
 public class DecryptOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DecryptOpRequestPayload,
         DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DecryptOpRequestPayloadXmlDeserializer}.
+   */
   public DecryptOpRequestPayloadXmlDeserializer() {
     super(DecryptOpRequestPayload.kmipTag, DecryptOpRequestPayload.encodingType);
   }

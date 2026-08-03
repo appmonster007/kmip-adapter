@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP CreateSplitKeyOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateSplitKeyOpResponsePayload implements ResponsePayloadStructure {
@@ -66,6 +69,9 @@ public class CreateSplitKeyOpResponsePayload implements ResponsePayloadStructure
     validate();
   }
 
+  /**
+   * Returns the {@link CreateSplitKeyOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateSplitKeyOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateSplitKeyOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

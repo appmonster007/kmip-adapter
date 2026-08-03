@@ -8,10 +8,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.structure.ServerInformation;
 
+/**
+ * XML deserializer for {@link ServerInformation}.
+ */
 public class ServerInformationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ServerInformation,
         ServerInformation.ServerInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ServerInformationXmlDeserializer}.
+   */
   public ServerInformationXmlDeserializer() {
     super(ServerInformation.kmipTag, ServerInformation.encodingType);
   }

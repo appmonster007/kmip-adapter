@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.TtlvDataType;
 
+/**
+ * KMIP VendorExtension attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class VendorExtension implements KmipStructure {
@@ -41,6 +44,9 @@ public class VendorExtension implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link VendorExtension} instance wrapping the given value.
+   */
   public static VendorExtension of(
       TtlvDataType ttlvDataType
   ) {

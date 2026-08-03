@@ -24,6 +24,9 @@ import org.purplebean.kmip.model.core.structure.DerivationParameters;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP DeriveKeyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeriveKeyOpRequestPayload implements RequestPayloadStructure {
@@ -73,6 +76,9 @@ public class DeriveKeyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeriveKeyOpRequestPayload} instance wrapping the given value.
+   */
   public static DeriveKeyOpRequestPayload of(List<KmipDataType> values) {
     var builder = DeriveKeyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

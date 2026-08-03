@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * KMIP CreateCredentialOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateCredentialOpRequestPayload implements RequestPayloadStructure {
@@ -55,6 +58,9 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
     validate();
   }
 
+  /**
+   * Returns the {@link CreateCredentialOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateCredentialOpRequestPayload of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

@@ -41,6 +41,9 @@ public class ServerCorrelationValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ServerCorrelationValue} instance wrapping the given value.
+   */
   public static ServerCorrelationValue of(@NonNull String value) {
     return new ServerCorrelationValue(value);
   }

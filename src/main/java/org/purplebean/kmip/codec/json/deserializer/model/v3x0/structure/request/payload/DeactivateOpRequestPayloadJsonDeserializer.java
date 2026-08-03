@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.DeactivateOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link DeactivateOpRequestPayload}.
+ */
 public class DeactivateOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DeactivateOpRequestPayload,
         DeactivateOpRequestPayload.DeactivateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivateOpRequestPayloadJsonDeserializer}.
+   */
   public DeactivateOpRequestPayloadJsonDeserializer() {
     super(DeactivateOpRequestPayload.kmipTag, DeactivateOpRequestPayload.encodingType);
   }

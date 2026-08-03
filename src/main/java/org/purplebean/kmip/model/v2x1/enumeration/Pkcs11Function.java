@@ -60,6 +60,9 @@ public class Pkcs11Function implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11Function} instance wrapping the given value.
+   */
   public static Pkcs11Function of(@NonNull Value value) {
     return new Pkcs11Function(value);
   }
@@ -180,6 +183,9 @@ public class Pkcs11Function implements KmipEnumeration {
     return value.getValue();
   }
 
+  /**
+   * Standard KMIP-defined values.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -213,9 +219,15 @@ public class Pkcs11Function implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+  /**
+   * Represents a specific value of the enclosing enumeration.
+   */
   public interface Value extends KmipEnumeration.Value<Pkcs11Function> {
   }
 
+  /**
+   * Vendor-defined extension value.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -226,6 +238,9 @@ public class Pkcs11Function implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -40,6 +40,9 @@ public class InitIndicator implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link InitIndicator} instance wrapping the given value.
+   */
   public static InitIndicator of(@NonNull Boolean value) {
     return new InitIndicator(value);
   }

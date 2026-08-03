@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.SignatureVerifyOpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * TTLV deserializer for {@link SignatureVerifyOpResponsePayload}.
+ */
 public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SignatureVerifyOpResponsePayload,
         SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SignatureVerifyOpResponsePayloadTtlvDeserializer}.
+   */
   public SignatureVerifyOpResponsePayloadTtlvDeserializer() {
     super(SignatureVerifyOpResponsePayload.kmipTag, SignatureVerifyOpResponsePayload.encodingType);
   }

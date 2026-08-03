@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.core.type.AttestationAssertion;
 import org.purplebean.kmip.model.core.type.AttestationMeasurement;
 
+/**
+ * KMIP AttestationCredential attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class AttestationCredential implements CredentialValue, KmipStructure {
@@ -63,6 +66,9 @@ public class AttestationCredential implements CredentialValue, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link AttestationCredential} instance wrapping the given value.
+   */
   public static AttestationCredential of(CredentialValue value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid credential value: " + value);
@@ -70,10 +76,16 @@ public class AttestationCredential implements CredentialValue, KmipStructure {
     return of(structure.getValue());
   }
 
+  /**
+   * Returns the {@link AttestationCredential} instance wrapping the given value.
+   */
   public static AttestationCredential of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link AttestationCredential} instance wrapping the given value.
+   */
   public static AttestationCredential of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

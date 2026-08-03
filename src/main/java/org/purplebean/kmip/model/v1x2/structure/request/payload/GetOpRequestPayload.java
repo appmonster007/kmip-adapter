@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP GetOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class GetOpRequestPayload implements RequestPayloadStructure {
@@ -61,6 +64,9 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link GetOpRequestPayload} instance wrapping the given value.
+   */
   public static GetOpRequestPayload of(List<KmipDataType> values) {
     var builder = GetOpRequestPayload.builder();
     values.forEach(value -> {
@@ -79,6 +85,9 @@ public class GetOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link GetOpRequestPayload} instance wrapping the given value.
+   */
   public static GetOpRequestPayload of(
       UniqueIdentifier uniqueIdentifier,
       KeyFormatType keyFormatType,

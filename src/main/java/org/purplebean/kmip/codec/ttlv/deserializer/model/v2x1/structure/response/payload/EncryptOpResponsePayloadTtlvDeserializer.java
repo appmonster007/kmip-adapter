@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.v2x1.structure.response.payload.EncryptOpRespon
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * TTLV deserializer for {@link EncryptOpResponsePayload}.
+ */
 public class EncryptOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<EncryptOpResponsePayload,
         EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link EncryptOpResponsePayloadTtlvDeserializer}.
+   */
   public EncryptOpResponsePayloadTtlvDeserializer() {
     super(EncryptOpResponsePayload.kmipTag, EncryptOpResponsePayload.encodingType);
   }

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.RegisterOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link RegisterOpRequestPayload}.
+ */
 public class RegisterOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RegisterOpRequestPayload,
         RegisterOpRequestPayload.RegisterOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link RegisterOpRequestPayloadJsonDeserializer}.
+   */
   public RegisterOpRequestPayloadJsonDeserializer() {
     super(RegisterOpRequestPayload.kmipTag, RegisterOpRequestPayload.encodingType);
   }

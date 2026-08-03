@@ -53,6 +53,9 @@ public class DeactivateOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeactivateOpResponsePayload} instance wrapping the given value.
+   */
   public static DeactivateOpResponsePayload of(List<KmipDataType> values) {
     var builder = DeactivateOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class DeactivateOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link DeactivateOpResponsePayload} instance wrapping the given value.
+   */
   public static DeactivateOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return DeactivateOpResponsePayload
         .builder()

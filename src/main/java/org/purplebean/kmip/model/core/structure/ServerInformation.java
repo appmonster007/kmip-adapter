@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP ServerInformation attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ServerInformation implements KmipStructure {

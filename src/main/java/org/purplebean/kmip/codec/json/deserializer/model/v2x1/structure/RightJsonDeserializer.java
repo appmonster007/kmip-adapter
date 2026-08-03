@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
 import org.purplebean.kmip.model.v2x1.structure.Operations;
 import org.purplebean.kmip.model.v2x1.structure.Right;
 
+/**
+ * JSON deserializer for {@link Right}.
+ */
 public class RightJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Right, Right.RightBuilder> {
 
+  /**
+   * Constructs a new {@link RightJsonDeserializer}.
+   */
   public RightJsonDeserializer() {
     super(Right.kmipTag, Right.encodingType);
   }

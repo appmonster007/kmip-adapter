@@ -64,11 +64,17 @@ public class RotateName implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateName} instance wrapping the given value.
+   */
   public static RotateName of(@NonNull RotateNameValue rotateNameValue,
                               @NonNull RotateNameType rotateNameType) {
     return new RotateName(rotateNameValue, rotateNameType);
   }
 
+  /**
+   * Returns the {@link RotateName} instance wrapping the given value.
+   */
   public static RotateName of(@NonNull AttributeName attributeName,
                               @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

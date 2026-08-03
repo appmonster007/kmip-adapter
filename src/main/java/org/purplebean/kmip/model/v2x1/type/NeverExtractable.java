@@ -47,10 +47,16 @@ public class NeverExtractable implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link NeverExtractable} instance wrapping the given value.
+   */
   public static NeverExtractable of(@NonNull Boolean value) {
     return new NeverExtractable(value);
   }
 
+  /**
+   * Returns the {@link NeverExtractable} instance wrapping the given value.
+   */
   public static NeverExtractable of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -39,6 +39,9 @@ public class AttributeName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttributeName} instance wrapping the given value.
+   */
   public static AttributeName of(@NonNull String name) {
     return new AttributeName(name);
   }

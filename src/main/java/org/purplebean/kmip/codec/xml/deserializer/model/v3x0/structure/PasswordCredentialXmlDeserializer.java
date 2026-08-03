@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.v3x0.type.PasswordSalt;
 import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
 import org.purplebean.kmip.model.v3x0.type.SaltedPassword;
 
+/**
+ * XML deserializer for {@link PasswordCredential}.
+ */
 public class PasswordCredentialXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PasswordCredential,
         PasswordCredential.PasswordCredentialBuilder> {
 
+  /**
+   * Constructs a new {@link PasswordCredentialXmlDeserializer}.
+   */
   public PasswordCredentialXmlDeserializer() {
     super(PasswordCredential.kmipTag, PasswordCredential.encodingType);
   }

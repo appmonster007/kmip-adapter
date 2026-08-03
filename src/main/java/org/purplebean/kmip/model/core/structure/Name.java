@@ -68,14 +68,23 @@ public class Name implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Name} instance wrapping the given value.
+   */
   public static Name of(@NonNull String name, @NonNull NameType type) {
     return new Name(NameValue.of(name), type);
   }
 
+  /**
+   * Returns the {@link Name} instance wrapping the given value.
+   */
   public static Name of(@NonNull NameValue nameValue, @NonNull NameType nameType) {
     return new Name(nameValue, nameType);
   }
 
+  /**
+   * Returns the {@link Name} instance wrapping the given value.
+   */
   public static Name of(@NonNull AttributeName attributeName,
                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

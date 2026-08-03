@@ -42,6 +42,9 @@ public class OtpCounter implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpCounter} instance wrapping the given value.
+   */
   public static OtpCounter of(@NonNull Integer value) {
     return new OtpCounter(value);
   }

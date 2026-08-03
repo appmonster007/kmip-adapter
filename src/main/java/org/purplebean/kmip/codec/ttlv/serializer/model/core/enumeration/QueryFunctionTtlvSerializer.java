@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.enumeration;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.enumeration.QueryFunction;
 
+/**
+ * TTLV serializer for {@link QueryFunction}.
+ */
 public class QueryFunctionTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<QueryFunction> {
 }

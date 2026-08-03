@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.DeviceIdentifier;
 
+/**
+ * TTLV deserializer for {@link DeviceIdentifier}.
+ */
 public class DeviceIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeviceIdentifier,
         DeviceIdentifier.DeviceIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link DeviceIdentifierTtlvDeserializer}.
+   */
   public DeviceIdentifierTtlvDeserializer() {
     super(DeviceIdentifier.kmipTag, DeviceIdentifier.encodingType);
   }

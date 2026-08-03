@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.type.CertificateRequest;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CertifyOpRequestPayload;
 
+/**
+ * XML deserializer for {@link CertifyOpRequestPayload}.
+ */
 public class CertifyOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CertifyOpRequestPayload,
         CertifyOpRequestPayload.CertifyOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CertifyOpRequestPayloadXmlDeserializer}.
+   */
   public CertifyOpRequestPayloadXmlDeserializer() {
     super(CertifyOpRequestPayload.kmipTag, CertifyOpRequestPayload.encodingType);
   }

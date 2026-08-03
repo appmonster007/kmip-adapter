@@ -42,10 +42,16 @@ public class DigestValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DigestValue} instance wrapping the given value.
+   */
   public static DigestValue of(@NonNull ByteBuffer value) {
     return new DigestValue(value);
   }
 
+  /**
+   * Returns the {@link DigestValue} instance wrapping the given value.
+   */
   public static DigestValue of(byte[] value) {
     return DigestValue
         .builder()

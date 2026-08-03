@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ProcessStartDate;
 
+/**
+ * TTLV deserializer for {@link ProcessStartDate}.
+ */
 public class ProcessStartDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProcessStartDate,
         ProcessStartDate.ProcessStartDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessStartDateTtlvDeserializer}.
+   */
   public ProcessStartDateTtlvDeserializer() {
     super(ProcessStartDate.kmipTag, ProcessStartDate.encodingType);
   }

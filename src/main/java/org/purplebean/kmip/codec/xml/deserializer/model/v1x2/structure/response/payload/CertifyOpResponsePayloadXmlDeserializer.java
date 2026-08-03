@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CertifyOpResponsePayload;
 
+/**
+ * XML deserializer for {@link CertifyOpResponsePayload}.
+ */
 public class CertifyOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CertifyOpResponsePayload,
         CertifyOpResponsePayload.CertifyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CertifyOpResponsePayloadXmlDeserializer}.
+   */
   public CertifyOpResponsePayloadXmlDeserializer() {
     super(CertifyOpResponsePayload.kmipTag, CertifyOpResponsePayload.encodingType);
   }

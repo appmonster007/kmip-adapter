@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.ModifyAttributeOpResponsePayload;
 
+/**
+ * TTLV deserializer for {@link ModifyAttributeOpResponsePayload}.
+ */
 public class ModifyAttributeOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ModifyAttributeOpResponsePayload,
         ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ModifyAttributeOpResponsePayloadTtlvDeserializer}.
+   */
   public ModifyAttributeOpResponsePayloadTtlvDeserializer() {
     super(ModifyAttributeOpResponsePayload.kmipTag, ModifyAttributeOpResponsePayload.encodingType);
   }

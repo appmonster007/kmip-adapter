@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.CryptographicUsageMask;
 
+/**
+ * JSON deserializer for {@link CryptographicUsageMask}.
+ */
 public class CryptographicUsageMaskJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CryptographicUsageMask,
         CryptographicUsageMask.CryptographicUsageMaskBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicUsageMaskJsonDeserializer}.
+   */
   public CryptographicUsageMaskJsonDeserializer() {
     super(CryptographicUsageMask.kmipTag, CryptographicUsageMask.encodingType);
   }

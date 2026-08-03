@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.v2x1.structure.AsynchronousCorrelationValues;
 import org.purplebean.kmip.model.v2x1.structure.Operations;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryAsynchronousRequestsOpRequestPayload;
 
+/**
+ * XML deserializer for {@link QueryAsynchronousRequestsOpRequestPayload}.
+ */
 public class QueryAsynchronousRequestsOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<QueryAsynchronousRequestsOpRequestPayload,
         QueryAsynchronousRequestsOpRequestPayload.QueryAsynchronousRequestsOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link QueryAsynchronousRequestsOpRequestPayloadXmlDeserializer}.
+   */
   public QueryAsynchronousRequestsOpRequestPayloadXmlDeserializer() {
     super(QueryAsynchronousRequestsOpRequestPayload.kmipTag,
         QueryAsynchronousRequestsOpRequestPayload.encodingType);

@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * KMIP Attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Attribute implements KmipStructure, KmipAttribute {
@@ -57,6 +60,9 @@ public class Attribute implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Attribute} instance wrapping the given value.
+   */
   public static Attribute of(List<KmipDataType> values) {
     var builder = Attribute.builder();
     Map<KmipTag, List<KmipDataType>> map = values

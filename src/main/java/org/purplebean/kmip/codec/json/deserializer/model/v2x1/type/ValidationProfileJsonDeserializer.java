@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ValidationProfile;
 
+/**
+ * JSON deserializer for {@link ValidationProfile}.
+ */
 public class ValidationProfileJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ValidationProfile,
         ValidationProfile.ValidationProfileBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationProfileJsonDeserializer}.
+   */
   public ValidationProfileJsonDeserializer() {
     super(ValidationProfile.kmipTag, ValidationProfile.encodingType);
   }

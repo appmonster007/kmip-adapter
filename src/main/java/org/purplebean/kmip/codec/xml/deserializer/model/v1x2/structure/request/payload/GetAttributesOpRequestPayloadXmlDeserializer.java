@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetAttributesOpRequestPayload;
 
+/**
+ * XML deserializer for {@link GetAttributesOpRequestPayload}.
+ */
 public class GetAttributesOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<GetAttributesOpRequestPayload,
         GetAttributesOpRequestPayload.GetAttributesOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link GetAttributesOpRequestPayloadXmlDeserializer}.
+   */
   public GetAttributesOpRequestPayloadXmlDeserializer() {
     super(GetAttributesOpRequestPayload.kmipTag, GetAttributesOpRequestPayload.encodingType);
   }

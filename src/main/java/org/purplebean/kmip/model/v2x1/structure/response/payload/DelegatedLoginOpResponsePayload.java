@@ -53,6 +53,9 @@ public class DelegatedLoginOpResponsePayload implements ResponsePayloadStructure
     validate();
   }
 
+  /**
+   * Returns the {@link DelegatedLoginOpResponsePayload} instance wrapping the given value.
+   */
   public static DelegatedLoginOpResponsePayload of(List<KmipDataType> values) {
     var builder = DelegatedLoginOpResponsePayload.builder();
     values.forEach(value -> {

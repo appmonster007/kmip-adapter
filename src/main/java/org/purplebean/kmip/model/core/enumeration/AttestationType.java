@@ -75,6 +75,9 @@ public class AttestationType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link AttestationType} instance wrapping the given value.
+   */
   public static AttestationType of(@NonNull Value value) {
     return new AttestationType(value);
   }
@@ -253,6 +256,9 @@ public class AttestationType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

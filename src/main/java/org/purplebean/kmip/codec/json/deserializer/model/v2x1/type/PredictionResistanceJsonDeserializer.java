@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
+/**
+ * JSON deserializer for {@link PredictionResistance}.
+ */
 public class PredictionResistanceJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PredictionResistance,
         PredictionResistance.PredictionResistanceBuilder> {
 
+  /**
+   * Constructs a new {@link PredictionResistanceJsonDeserializer}.
+   */
   public PredictionResistanceJsonDeserializer() {
     super(PredictionResistance.kmipTag, PredictionResistance.encodingType);
   }

@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Constraints;
 
+/**
+ * KMIP SetConstraintsOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
@@ -49,6 +52,9 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SetConstraintsOpRequestPayload} instance wrapping the given value.
+   */
   public static SetConstraintsOpRequestPayload of(List<KmipDataType> values) {
     var builder = SetConstraintsOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

@@ -33,10 +33,16 @@ import org.purplebean.kmip.model.core.type.ActivationDate;
 import org.purplebean.kmip.model.core.type.AttributeIndex;
 import org.purplebean.kmip.model.core.type.CertificateValue;
 
+/**
+ * Application entry point for the KMIP adapter.
+ */
 public class Main {
 
   private static final String SEP = "================================================";
 
+  /**
+   * Application entry point.
+   */
   public static void main(String[] args) throws IOException {
 
     printHeader("KMIP Serialization/Deserialization Demo");

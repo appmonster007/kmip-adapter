@@ -42,10 +42,16 @@ public class CertificateSerialNumber implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateSerialNumber} instance wrapping the given value.
+   */
   public static CertificateSerialNumber of(@NonNull ByteBuffer value) {
     return new CertificateSerialNumber(value);
   }
 
+  /**
+   * Returns the {@link CertificateSerialNumber} instance wrapping the given value.
+   */
   public static CertificateSerialNumber of(byte[] value) {
     return CertificateSerialNumber
         .builder()

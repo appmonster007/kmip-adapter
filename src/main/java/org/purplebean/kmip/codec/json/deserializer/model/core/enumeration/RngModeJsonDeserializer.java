@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.RngMode;
 
+/**
+ * JSON deserializer for {@link RngMode}.
+ */
 public class RngModeJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<RngMode, RngMode.RngModeBuilder> {
 
+  /**
+   * Constructs a new {@link RngModeJsonDeserializer}.
+   */
   public RngModeJsonDeserializer() {
     super(RngMode.kmipTag, RngMode.encodingType);
   }

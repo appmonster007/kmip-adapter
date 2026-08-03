@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.InteropOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
 
+/**
+ * XML deserializer for {@link InteropOpRequestPayload}.
+ */
 public class InteropOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<InteropOpRequestPayload,
         InteropOpRequestPayload.InteropOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link InteropOpRequestPayloadXmlDeserializer}.
+   */
   public InteropOpRequestPayloadXmlDeserializer() {
     super(InteropOpRequestPayload.kmipTag, InteropOpRequestPayload.encodingType);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.IvLength;
 
+/**
+ * JSON deserializer for {@link IvLength}.
+ */
 public class IvLengthJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<IvLength, IvLength.IvLengthBuilder> {
 
+  /**
+   * Constructs a new {@link IvLengthJsonDeserializer}.
+   */
   public IvLengthJsonDeserializer() {
     super(IvLength.kmipTag, IvLength.encodingType);
   }

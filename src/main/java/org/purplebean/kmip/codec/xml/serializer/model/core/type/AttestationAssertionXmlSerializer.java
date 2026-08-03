@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.type.AttestationAssertion;
 
+/**
+ * XML serializer for {@link AttestationAssertion}.
+ */
 public class AttestationAssertionXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<AttestationAssertion> {
 }

@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.DerivedObjectLink;
 
+/**
+ * TTLV deserializer for {@link DerivedObjectLink}.
+ */
 public class DerivedObjectLinkTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DerivedObjectLink,
         DerivedObjectLink.DerivedObjectLinkBuilder> {
 
+  /**
+   * Constructs a new {@link DerivedObjectLinkTtlvDeserializer}.
+   */
   public DerivedObjectLinkTtlvDeserializer() {
     super(DerivedObjectLink.kmipTag, DerivedObjectLink.encodingType);
   }

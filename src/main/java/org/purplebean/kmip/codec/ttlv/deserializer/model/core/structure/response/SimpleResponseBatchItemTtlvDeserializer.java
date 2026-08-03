@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.enumeration.ResultStatus;
 import org.purplebean.kmip.model.core.structure.response.SimpleResponseBatchItem;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 
+/**
+ * TTLV deserializer for {@link SimpleResponseBatchItem}.
+ */
 public class SimpleResponseBatchItemTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SimpleResponseBatchItem,
         SimpleResponseBatchItem.SimpleResponseBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleResponseBatchItemTtlvDeserializer}.
+   */
   public SimpleResponseBatchItemTtlvDeserializer() {
     super(SimpleResponseBatchItem.kmipTag, SimpleResponseBatchItem.encodingType);
   }

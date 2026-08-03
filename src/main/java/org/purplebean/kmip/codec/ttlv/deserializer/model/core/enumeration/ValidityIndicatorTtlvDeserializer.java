@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 
+/**
+ * TTLV deserializer for {@link ValidityIndicator}.
+ */
 public class ValidityIndicatorTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidityIndicator,
         ValidityIndicator.ValidityIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link ValidityIndicatorTtlvDeserializer}.
+   */
   public ValidityIndicatorTtlvDeserializer() {
     super(ValidityIndicator.kmipTag, ValidityIndicator.encodingType);
   }

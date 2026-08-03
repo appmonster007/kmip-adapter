@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.structure;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
 
+/**
+ * XML serializer for {@link CommonTemplateAttribute}.
+ */
 public class CommonTemplateAttributeXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<CommonTemplateAttribute> {
 }

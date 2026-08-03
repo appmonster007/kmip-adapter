@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.RevocationReasonCode;
 
+/**
+ * TTLV deserializer for {@link RevocationReasonCode}.
+ */
 public class RevocationReasonCodeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RevocationReasonCode,
         RevocationReasonCode.RevocationReasonCodeBuilder> {
 
+  /**
+   * Constructs a new {@link RevocationReasonCodeTtlvDeserializer}.
+   */
   public RevocationReasonCodeTtlvDeserializer() {
     super(RevocationReasonCode.kmipTag, RevocationReasonCode.encodingType);
   }

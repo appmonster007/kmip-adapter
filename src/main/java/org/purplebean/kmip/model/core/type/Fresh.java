@@ -44,10 +44,16 @@ public class Fresh implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Fresh} instance wrapping the given value.
+   */
   public static Fresh of(@NonNull Boolean value) {
     return new Fresh(value);
   }
 
+  /**
+   * Returns the {@link Fresh} instance wrapping the given value.
+   */
   public static Fresh of(@NonNull AttributeName attributeName,
                          @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

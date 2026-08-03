@@ -69,6 +69,9 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
     validate();
   }
 
+  /**
+   * Returns the {@link DataEnumeration} instance wrapping the given value.
+   */
   public static DataEnumeration of(@NonNull Value value) {
     return new DataEnumeration(value);
   }
@@ -189,6 +192,9 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
     return value.getValue();
   }
 
+  /**
+   * Standard KMIP-defined values.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -228,9 +234,15 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
   }
 
   // ----- Value hierarchy -----
+  /**
+   * Represents a specific value of the enclosing enumeration.
+   */
   public interface Value extends KmipEnumeration.Value<DataEnumeration> {
   }
 
+  /**
+   * Vendor-defined extension value.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -241,6 +253,9 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

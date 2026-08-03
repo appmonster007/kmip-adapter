@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.core.structure.ServerInformation;
 import org.purplebean.kmip.model.core.type.ApplicationNamespace;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * KMIP QueryOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class QueryOpResponsePayload implements ResponsePayloadStructure {
@@ -81,6 +84,9 @@ public class QueryOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link QueryOpResponsePayload} instance wrapping the given value.
+   */
   public static QueryOpResponsePayload of(List<KmipDataType> values) {
     var builder = QueryOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

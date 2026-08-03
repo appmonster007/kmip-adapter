@@ -78,6 +78,9 @@ public class Fips186Variation implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link Fips186Variation} instance wrapping the given value.
+   */
   public static Fips186Variation of(@NonNull Value value) {
     return new Fips186Variation(value);
   }
@@ -260,6 +263,9 @@ public class Fips186Variation implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

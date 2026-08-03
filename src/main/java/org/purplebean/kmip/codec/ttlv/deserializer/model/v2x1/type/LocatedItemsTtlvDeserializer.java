@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.LocatedItems;
 
+/**
+ * TTLV deserializer for {@link LocatedItems}.
+ */
 public class LocatedItemsTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<LocatedItems, LocatedItems.LocatedItemsBuilder> {
 
+  /**
+   * Constructs a new {@link LocatedItemsTtlvDeserializer}.
+   */
   public LocatedItemsTtlvDeserializer() {
     super(LocatedItems.kmipTag, LocatedItems.encodingType);
   }

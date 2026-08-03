@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.LastChangeDate;
 
+/**
+ * XML deserializer for {@link LastChangeDate}.
+ */
 public class LastChangeDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<LastChangeDate, LastChangeDate.LastChangeDateBuilder> {
 
+  /**
+   * Constructs a new {@link LastChangeDateXmlDeserializer}.
+   */
   public LastChangeDateXmlDeserializer() {
     super(LastChangeDate.kmipTag, LastChangeDate.encodingType);
   }

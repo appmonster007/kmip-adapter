@@ -53,6 +53,9 @@ public class Ticket implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Ticket} instance wrapping the given value.
+   */
   public static Ticket of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()

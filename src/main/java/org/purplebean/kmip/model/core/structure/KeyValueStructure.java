@@ -52,6 +52,9 @@ public class KeyValueStructure implements KeyValue, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValueStructure} instance wrapping the given value.
+   */
   public static KeyValueStructure of(@NonNull KeyMaterial keyMaterial,
                                      @NonNull List<KmipAttribute> attributes) {
     return KeyValueStructure

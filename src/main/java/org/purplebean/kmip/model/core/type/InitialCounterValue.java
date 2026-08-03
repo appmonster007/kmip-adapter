@@ -41,6 +41,9 @@ public class InitialCounterValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link InitialCounterValue} instance wrapping the given value.
+   */
   public static InitialCounterValue of(@NonNull Integer value) {
     return new InitialCounterValue(value);
   }

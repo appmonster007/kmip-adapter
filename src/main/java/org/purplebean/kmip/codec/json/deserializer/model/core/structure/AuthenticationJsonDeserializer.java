@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.structure.Authentication;
 import org.purplebean.kmip.model.core.structure.Credential;
 
+/**
+ * JSON deserializer for {@link Authentication}.
+ */
 public class AuthenticationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Authentication, Authentication.AuthenticationBuilder> {
 
+  /**
+   * Constructs a new {@link AuthenticationJsonDeserializer}.
+   */
   public AuthenticationJsonDeserializer() {
     super(Authentication.kmipTag, Authentication.encodingType);
   }

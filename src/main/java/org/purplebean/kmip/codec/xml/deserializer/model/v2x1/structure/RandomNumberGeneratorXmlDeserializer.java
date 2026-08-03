@@ -16,10 +16,16 @@ import org.purplebean.kmip.model.v2x1.structure.RandomNumberGenerator;
 import org.purplebean.kmip.model.v2x1.structure.RngParameters;
 import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
+/**
+ * XML deserializer for {@link RandomNumberGenerator}.
+ */
 public class RandomNumberGeneratorXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RandomNumberGenerator,
         RandomNumberGenerator.RandomNumberGeneratorBuilder> {
 
+  /**
+   * Constructs a new {@link RandomNumberGeneratorXmlDeserializer}.
+   */
   public RandomNumberGeneratorXmlDeserializer() {
     super(RandomNumberGenerator.kmipTag, RandomNumberGenerator.encodingType);
   }

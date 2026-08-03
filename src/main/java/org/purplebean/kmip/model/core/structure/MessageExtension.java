@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.CriticalityIndicator;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * KMIP MessageExtension attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MessageExtension implements KmipStructure {

@@ -41,6 +41,9 @@ public class ProfileVersionMinor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ProfileVersionMinor} instance wrapping the given value.
+   */
   public static ProfileVersionMinor of(@NonNull Integer value) {
     return new ProfileVersionMinor(value);
   }

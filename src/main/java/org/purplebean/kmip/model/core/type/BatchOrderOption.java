@@ -41,6 +41,9 @@ public class BatchOrderOption implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link BatchOrderOption} instance wrapping the given value.
+   */
   public static BatchOrderOption of(@NonNull Boolean value) {
     return new BatchOrderOption(value);
   }

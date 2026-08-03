@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CounterLength;
 
+/**
+ * TTLV deserializer for {@link CounterLength}.
+ */
 public class CounterLengthTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CounterLength, CounterLength.CounterLengthBuilder> {
 
+  /**
+   * Constructs a new {@link CounterLengthTtlvDeserializer}.
+   */
   public CounterLengthTtlvDeserializer() {
     super(CounterLength.kmipTag, CounterLength.encodingType);
   }

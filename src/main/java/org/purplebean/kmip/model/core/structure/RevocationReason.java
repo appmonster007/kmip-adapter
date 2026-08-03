@@ -60,6 +60,9 @@ public class RevocationReason implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RevocationReason} instance wrapping the given value.
+   */
   public static RevocationReason of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -47,10 +47,16 @@ public class Extractable implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Extractable} instance wrapping the given value.
+   */
   public static Extractable of(@NonNull Boolean value) {
     return new Extractable(value);
   }
 
+  /**
+   * Returns the {@link Extractable} instance wrapping the given value.
+   */
   public static Extractable of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

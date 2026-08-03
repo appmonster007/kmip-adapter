@@ -74,6 +74,9 @@ public class AdjustmentType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link AdjustmentType} instance wrapping the given value.
+   */
   public static AdjustmentType of(@NonNull Value value) {
     return new AdjustmentType(value);
   }
@@ -249,6 +252,9 @@ public class AdjustmentType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -42,10 +42,16 @@ public class SubjectDistinguishedName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SubjectDistinguishedName} instance wrapping the given value.
+   */
   public static SubjectDistinguishedName of(@NonNull ByteBuffer value) {
     return new SubjectDistinguishedName(value);
   }
 
+  /**
+   * Returns the {@link SubjectDistinguishedName} instance wrapping the given value.
+   */
   public static SubjectDistinguishedName of(byte[] value) {
     return SubjectDistinguishedName
         .builder()

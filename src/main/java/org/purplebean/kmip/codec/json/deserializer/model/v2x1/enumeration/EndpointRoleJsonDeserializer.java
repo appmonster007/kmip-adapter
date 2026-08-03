@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
 
+/**
+ * JSON deserializer for {@link EndpointRole}.
+ */
 public class EndpointRoleJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<EndpointRole, EndpointRole.EndpointRoleBuilder> {
 
+  /**
+   * Constructs a new {@link EndpointRoleJsonDeserializer}.
+   */
   public EndpointRoleJsonDeserializer() {
     super(EndpointRole.kmipTag, EndpointRole.encodingType);
   }

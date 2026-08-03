@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.LastChangeDate;
 
+/**
+ * TTLV deserializer for {@link LastChangeDate}.
+ */
 public class LastChangeDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LastChangeDate, LastChangeDate.LastChangeDateBuilder> {
 
+  /**
+   * Constructs a new {@link LastChangeDateTtlvDeserializer}.
+   */
   public LastChangeDateTtlvDeserializer() {
     super(LastChangeDate.kmipTag, LastChangeDate.encodingType);
   }

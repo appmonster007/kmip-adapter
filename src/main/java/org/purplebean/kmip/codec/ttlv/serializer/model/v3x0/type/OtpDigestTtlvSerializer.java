@@ -8,6 +8,9 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v3x0.type.OtpDigest;
 
+/**
+ * TTLV serializer for {@link OtpDigest}.
+ */
 public class OtpDigestTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<OtpDigest> {
 
   @Override

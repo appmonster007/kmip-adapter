@@ -27,6 +27,9 @@ import org.purplebean.kmip.model.v2x1.type.ValidationVendorUri;
 import org.purplebean.kmip.model.v2x1.type.ValidationVersionMajor;
 import org.purplebean.kmip.model.v2x1.type.ValidationVersionMinor;
 
+/**
+ * KMIP ValidationInformation structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ValidationInformation implements KmipStructure {
@@ -88,6 +91,9 @@ public class ValidationInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationInformation} instance wrapping the given value.
+   */
   public static ValidationInformation of(@NonNull ValidationAuthorityType authorityType,
                                          @NonNull ValidationVersionMajor versionMajor,
                                          @NonNull ValidationType type,
@@ -101,6 +107,9 @@ public class ValidationInformation implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ValidationInformation} instance wrapping the given value.
+   */
   public static ValidationInformation of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

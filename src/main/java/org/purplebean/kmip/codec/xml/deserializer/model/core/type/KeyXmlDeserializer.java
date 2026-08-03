@@ -7,8 +7,14 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.Key;
 
+/**
+ * XML deserializer for {@link Key}.
+ */
 public class KeyXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Key, Key.KeyBuilder> {
 
+  /**
+   * Constructs a new {@link KeyXmlDeserializer}.
+   */
   public KeyXmlDeserializer() {
     super(Key.kmipTag, Key.encodingType);
   }

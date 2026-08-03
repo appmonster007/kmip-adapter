@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.type.ReplacedUniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.PutOpRequestPayload;
 
+/**
+ * XML deserializer for {@link PutOpRequestPayload}.
+ */
 public class PutOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PutOpRequestPayload,
         PutOpRequestPayload.PutOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PutOpRequestPayloadXmlDeserializer}.
+   */
   public PutOpRequestPayloadXmlDeserializer() {
     super(PutOpRequestPayload.kmipTag, PutOpRequestPayload.encodingType);
   }

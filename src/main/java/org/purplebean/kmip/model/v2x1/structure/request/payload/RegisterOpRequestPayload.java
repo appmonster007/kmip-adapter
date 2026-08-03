@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP RegisterOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RegisterOpRequestPayload implements RequestPayloadStructure {
@@ -58,6 +61,9 @@ public class RegisterOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RegisterOpRequestPayload} instance wrapping the given value.
+   */
   public static RegisterOpRequestPayload of(List<KmipDataType> values) {
     var builder = RegisterOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

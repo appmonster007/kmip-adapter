@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.InitialCounterValue;
 
+/**
+ * TTLV deserializer for {@link InitialCounterValue}.
+ */
 public class InitialCounterValueTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<InitialCounterValue,
         InitialCounterValue.InitialCounterValueBuilder> {
 
+  /**
+   * Constructs a new {@link InitialCounterValueTtlvDeserializer}.
+   */
   public InitialCounterValueTtlvDeserializer() {
     super(InitialCounterValue.kmipTag, InitialCounterValue.encodingType);
   }

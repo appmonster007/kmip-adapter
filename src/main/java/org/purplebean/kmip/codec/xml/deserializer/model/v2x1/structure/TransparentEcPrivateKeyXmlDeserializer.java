@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.type.D;
 import org.purplebean.kmip.model.v2x1.structure.TransparentEcPrivateKey;
 
+/**
+ * XML deserializer for {@link TransparentEcPrivateKey}.
+ */
 public class TransparentEcPrivateKeyXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<TransparentEcPrivateKey,
         TransparentEcPrivateKey.TransparentEcPrivateKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentEcPrivateKeyXmlDeserializer}.
+   */
   public TransparentEcPrivateKeyXmlDeserializer() {
     super(TransparentEcPrivateKey.kmipTag, TransparentEcPrivateKey.encodingType);
   }

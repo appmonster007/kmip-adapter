@@ -13,9 +13,15 @@ import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * TTLV deserializer for {@link SplitKey}.
+ */
 public class SplitKeyTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyTtlvDeserializer}.
+   */
   public SplitKeyTtlvDeserializer() {
     super(SplitKey.kmipTag, SplitKey.encodingType);
   }

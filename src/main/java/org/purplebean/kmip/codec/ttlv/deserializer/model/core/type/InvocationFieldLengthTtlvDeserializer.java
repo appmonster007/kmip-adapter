@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.InvocationFieldLength;
 
+/**
+ * TTLV deserializer for {@link InvocationFieldLength}.
+ */
 public class InvocationFieldLengthTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<InvocationFieldLength,
         InvocationFieldLength.InvocationFieldLengthBuilder> {
 
+  /**
+   * Constructs a new {@link InvocationFieldLengthTtlvDeserializer}.
+   */
   public InvocationFieldLengthTtlvDeserializer() {
     super(InvocationFieldLength.kmipTag, InvocationFieldLength.encodingType);
   }

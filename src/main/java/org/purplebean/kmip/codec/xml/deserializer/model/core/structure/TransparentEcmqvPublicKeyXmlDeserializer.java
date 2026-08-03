@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.TransparentEcmqvPublicKey;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * XML deserializer for {@link TransparentEcmqvPublicKey}.
+ */
 public class TransparentEcmqvPublicKeyXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<TransparentEcmqvPublicKey,
         TransparentEcmqvPublicKey.TransparentEcmqvPublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentEcmqvPublicKeyXmlDeserializer}.
+   */
   public TransparentEcmqvPublicKeyXmlDeserializer() {
     super(TransparentEcmqvPublicKey.kmipTag, TransparentEcmqvPublicKey.encodingType);
   }

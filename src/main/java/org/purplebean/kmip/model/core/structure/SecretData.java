@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 
+/**
+ * KMIP SecretData attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SecretData implements ManagedObject, KmipStructure {
@@ -55,6 +58,9 @@ public class SecretData implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SecretData} instance wrapping the given value.
+   */
   public static SecretData of(
       @NonNull SecretDataType secretDataType,
       @NonNull KeyBlock keyBlock
@@ -66,6 +72,9 @@ public class SecretData implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link SecretData} instance wrapping the given value.
+   */
   public static SecretData of(List<KmipDataType> values) {
     var builder = SecretData.builder();
     Map<KmipTag, List<KmipDataType>> map = values

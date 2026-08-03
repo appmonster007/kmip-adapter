@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.core.type.Username;
 
+/**
+ * XML deserializer for {@link UsernameAndPassword}.
+ */
 public class UsernameAndPasswordXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<UsernameAndPassword,
         UsernameAndPassword.UsernameAndPasswordBuilder> {
 
+  /**
+   * Constructs a new {@link UsernameAndPasswordXmlDeserializer}.
+   */
   public UsernameAndPasswordXmlDeserializer() {
     super(UsernameAndPassword.kmipTag, UsernameAndPassword.encodingType);
   }

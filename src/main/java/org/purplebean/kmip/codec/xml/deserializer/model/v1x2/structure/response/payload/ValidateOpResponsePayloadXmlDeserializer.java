@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.ValidateOpResponsePayload;
 
+/**
+ * XML deserializer for {@link ValidateOpResponsePayload}.
+ */
 public class ValidateOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ValidateOpResponsePayload,
         ValidateOpResponsePayload.ValidateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ValidateOpResponsePayloadXmlDeserializer}.
+   */
   public ValidateOpResponsePayloadXmlDeserializer() {
     super(ValidateOpResponsePayload.kmipTag, ValidateOpResponsePayload.encodingType);
   }

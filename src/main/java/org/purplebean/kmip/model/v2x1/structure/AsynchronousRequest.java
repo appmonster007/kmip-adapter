@@ -17,6 +17,9 @@ import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
 
+/**
+ * KMIP AsynchronousRequest structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class AsynchronousRequest implements KmipStructure {
@@ -54,6 +57,9 @@ public class AsynchronousRequest implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousRequest} instance wrapping the given value.
+   */
   public static AsynchronousRequest of(@NonNull AsynchronousCorrelationValue correlationValue,
                                        @NonNull Operation operation,
                                        @NonNull SubmissionDate submissionDate,
@@ -67,6 +73,9 @@ public class AsynchronousRequest implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link AsynchronousRequest} instance wrapping the given value.
+   */
   public static AsynchronousRequest of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

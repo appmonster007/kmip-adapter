@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.OriginalCreationDate;
 
+/**
+ * TTLV deserializer for {@link OriginalCreationDate}.
+ */
 public class OriginalCreationDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<OriginalCreationDate,
         OriginalCreationDate.OriginalCreationDateBuilder> {
 
+  /**
+   * Constructs a new {@link OriginalCreationDateTtlvDeserializer}.
+   */
   public OriginalCreationDateTtlvDeserializer() {
     super(OriginalCreationDate.kmipTag, OriginalCreationDate.encodingType);
   }

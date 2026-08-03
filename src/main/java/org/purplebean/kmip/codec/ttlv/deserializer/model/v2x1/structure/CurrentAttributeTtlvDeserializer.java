@@ -10,10 +10,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
 
+/**
+ * TTLV deserializer for {@link CurrentAttribute}.
+ */
 public class CurrentAttributeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CurrentAttribute,
         CurrentAttribute.CurrentAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link CurrentAttributeTtlvDeserializer}.
+   */
   public CurrentAttributeTtlvDeserializer() {
     super(CurrentAttribute.kmipTag, CurrentAttribute.encodingType);
   }

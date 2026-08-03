@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.SplitKeyMethod;
 
+/**
+ * TTLV deserializer for {@link SplitKeyMethod}.
+ */
 public class SplitKeyMethodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SplitKeyMethod, SplitKeyMethod.SplitKeyMethodBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyMethodTtlvDeserializer}.
+   */
   public SplitKeyMethodTtlvDeserializer() {
     super(SplitKeyMethod.kmipTag, SplitKeyMethod.encodingType);
   }

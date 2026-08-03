@@ -8,6 +8,9 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
 
+/**
+ * TTLV serializer for {@link PasswordSaltAlgorithm}.
+ */
 public class PasswordSaltAlgorithmTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<PasswordSaltAlgorithm> {
 

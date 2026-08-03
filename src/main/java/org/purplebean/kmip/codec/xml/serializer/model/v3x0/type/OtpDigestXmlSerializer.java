@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v3x0.type.OtpDigest;
 
+/**
+ * XML serializer for {@link OtpDigest}.
+ */
 public class OtpDigestXmlSerializer extends AbstractKmipDataTypeXmlSerializer<OtpDigest> {
 
   @Override

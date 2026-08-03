@@ -12,9 +12,15 @@ import org.purplebean.kmip.model.core.type.BatchCount;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseHeader;
 
+/**
+ * JSON deserializer for {@link ResponseHeader}.
+ */
 public class ResponseHeaderJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ResponseHeader, ResponseHeader.ResponseHeaderBuilder> {
 
+  /**
+   * Constructs a new {@link ResponseHeaderJsonDeserializer}.
+   */
   public ResponseHeaderJsonDeserializer() {
     super(ResponseHeader.kmipTag, ResponseHeader.encodingType);
   }

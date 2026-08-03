@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 
+/**
+ * JSON deserializer for {@link FinalIndicator}.
+ */
 public class FinalIndicatorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<FinalIndicator, FinalIndicator.FinalIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link FinalIndicatorJsonDeserializer}.
+   */
   public FinalIndicatorJsonDeserializer() {
     super(FinalIndicator.kmipTag, FinalIndicator.encodingType);
   }

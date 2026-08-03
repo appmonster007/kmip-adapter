@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AttributeReferenceTag;
 
+/**
+ * XML deserializer for {@link AttributeReferenceTag}.
+ */
 public class AttributeReferenceTagXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AttributeReferenceTag,
         AttributeReferenceTag.AttributeReferenceTagBuilder> {
 
+  /**
+   * Constructs a new {@link AttributeReferenceTagXmlDeserializer}.
+   */
   public AttributeReferenceTagXmlDeserializer() {
     super(AttributeReferenceTag.kmipTag, AttributeReferenceTag.encodingType);
   }

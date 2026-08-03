@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.RotateLatest;
 
+/**
+ * XML deserializer for {@link RotateLatest}.
+ */
 public class RotateLatestXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<RotateLatest, RotateLatest.RotateLatestBuilder> {
 
+  /**
+   * Constructs a new {@link RotateLatestXmlDeserializer}.
+   */
   public RotateLatestXmlDeserializer() {
     super(RotateLatest.kmipTag, RotateLatest.encodingType);
   }

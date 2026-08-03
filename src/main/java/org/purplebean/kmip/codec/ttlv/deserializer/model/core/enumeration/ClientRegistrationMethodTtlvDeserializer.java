@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.ClientRegistrationMethod;
 
+/**
+ * TTLV deserializer for {@link ClientRegistrationMethod}.
+ */
 public class ClientRegistrationMethodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ClientRegistrationMethod,
         ClientRegistrationMethod.ClientRegistrationMethodBuilder> {
 
+  /**
+   * Constructs a new {@link ClientRegistrationMethodTtlvDeserializer}.
+   */
   public ClientRegistrationMethodTtlvDeserializer() {
     super(ClientRegistrationMethod.kmipTag, ClientRegistrationMethod.encodingType);
   }

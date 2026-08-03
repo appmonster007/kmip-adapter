@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * KMIP SplitKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SplitKey implements ManagedObject, KmipStructure {
@@ -78,6 +81,9 @@ public class SplitKey implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SplitKey} instance wrapping the given value.
+   */
   public static SplitKey of(List<KmipDataType> values) {
     var builder = SplitKey.builder();
     Map<KmipTag, List<KmipDataType>> map = values

@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
+/**
+ * KMIP RngParameters structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RngParameters implements KmipStructure {
@@ -63,6 +66,9 @@ public class RngParameters implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RngParameters} instance wrapping the given value.
+   */
   public static RngParameters of(@NonNull RngAlgorithm rngAlgorithm) {
     return RngParameters
         .builder()
@@ -70,6 +76,9 @@ public class RngParameters implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link RngParameters} instance wrapping the given value.
+   */
   public static RngParameters of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

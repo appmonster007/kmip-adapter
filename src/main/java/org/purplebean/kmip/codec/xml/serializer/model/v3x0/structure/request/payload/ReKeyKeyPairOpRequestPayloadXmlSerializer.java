@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.request.pa
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayload;
 
+/**
+ * XML serializer for {@link ReKeyKeyPairOpRequestPayload}.
+ */
 public class ReKeyKeyPairOpRequestPayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<ReKeyKeyPairOpRequestPayload> {
 }

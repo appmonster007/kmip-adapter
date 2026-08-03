@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.Fips186Variation;
 
+/**
+ * JSON deserializer for {@link Fips186Variation}.
+ */
 public class Fips186VariationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Fips186Variation,
         Fips186Variation.Fips186VariationBuilder> {
 
+  /**
+   * Constructs a new {@link Fips186VariationJsonDeserializer}.
+   */
   public Fips186VariationJsonDeserializer() {
     super(Fips186Variation.kmipTag, Fips186Variation.encodingType);
   }

@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.v2x1.structure.Rights;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * KMIP DelegatedLoginOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
@@ -59,6 +62,9 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DelegatedLoginOpRequestPayload} instance wrapping the given value.
+   */
   public static DelegatedLoginOpRequestPayload of(List<KmipDataType> values) {
     var builder = DelegatedLoginOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

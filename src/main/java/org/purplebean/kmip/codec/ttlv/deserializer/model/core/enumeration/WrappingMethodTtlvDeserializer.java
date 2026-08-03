@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.WrappingMethod;
 
+/**
+ * TTLV deserializer for {@link WrappingMethod}.
+ */
 public class WrappingMethodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<WrappingMethod, WrappingMethod.WrappingMethodBuilder> {
 
+  /**
+   * Constructs a new {@link WrappingMethodTtlvDeserializer}.
+   */
   public WrappingMethodTtlvDeserializer() {
     super(WrappingMethod.kmipTag, WrappingMethod.encodingType);
   }

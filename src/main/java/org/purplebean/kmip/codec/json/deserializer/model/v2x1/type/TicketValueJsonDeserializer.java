@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * JSON deserializer for {@link TicketValue}.
+ */
 public class TicketValueJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<TicketValue, TicketValue.TicketValueBuilder> {
 
+  /**
+   * Constructs a new {@link TicketValueJsonDeserializer}.
+   */
   public TicketValueJsonDeserializer() {
     super(TicketValue.kmipTag, TicketValue.encodingType);
   }

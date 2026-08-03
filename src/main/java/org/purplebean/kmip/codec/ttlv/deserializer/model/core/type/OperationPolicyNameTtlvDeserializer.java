@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.OperationPolicyName;
 
+/**
+ * TTLV deserializer for {@link OperationPolicyName}.
+ */
 public class OperationPolicyNameTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<OperationPolicyName,
         OperationPolicyName.OperationPolicyNameBuilder> {
 
+  /**
+   * Constructs a new {@link OperationPolicyNameTtlvDeserializer}.
+   */
   public OperationPolicyNameTtlvDeserializer() {
     super(OperationPolicyName.kmipTag, OperationPolicyName.encodingType);
   }

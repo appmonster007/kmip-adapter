@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.LinkType;
 
+/**
+ * JSON deserializer for {@link LinkType}.
+ */
 public class LinkTypeJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<LinkType, LinkType.LinkTypeBuilder> {
 
+  /**
+   * Constructs a new {@link LinkTypeJsonDeserializer}.
+   */
   public LinkTypeJsonDeserializer() {
     super(LinkType.kmipTag, LinkType.encodingType);
   }

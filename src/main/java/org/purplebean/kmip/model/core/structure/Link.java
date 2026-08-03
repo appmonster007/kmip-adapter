@@ -58,6 +58,9 @@ public class Link implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Link} instance wrapping the given value.
+   */
   public static Link of(@NonNull LinkType linkType,
                         @NonNull LinkedObjectIdentifier linkedObjectIdentifier) {
     return Link
@@ -67,6 +70,9 @@ public class Link implements KmipStructure, KmipAttribute {
         .build();
   }
 
+  /**
+   * Returns the {@link Link} instance wrapping the given value.
+   */
   public static Link of(@NonNull AttributeName attributeName,
                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

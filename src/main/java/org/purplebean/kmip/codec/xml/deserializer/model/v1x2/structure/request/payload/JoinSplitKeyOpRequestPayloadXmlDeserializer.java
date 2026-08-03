@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.JoinSplitKeyOpRequestPayload;
 
+/**
+ * XML deserializer for {@link JoinSplitKeyOpRequestPayload}.
+ */
 public class JoinSplitKeyOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<JoinSplitKeyOpRequestPayload,
         JoinSplitKeyOpRequestPayload.JoinSplitKeyOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link JoinSplitKeyOpRequestPayloadXmlDeserializer}.
+   */
   public JoinSplitKeyOpRequestPayloadXmlDeserializer() {
     super(JoinSplitKeyOpRequestPayload.kmipTag, JoinSplitKeyOpRequestPayload.encodingType);
   }

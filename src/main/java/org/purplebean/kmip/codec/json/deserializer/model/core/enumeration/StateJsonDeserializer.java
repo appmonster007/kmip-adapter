@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.State;
 
+/**
+ * JSON deserializer for {@link State}.
+ */
 public class StateJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<State, State.StateBuilder> {
 
+  /**
+   * Constructs a new {@link StateJsonDeserializer}.
+   */
   public StateJsonDeserializer() {
     super(State.kmipTag, State.encodingType);
   }

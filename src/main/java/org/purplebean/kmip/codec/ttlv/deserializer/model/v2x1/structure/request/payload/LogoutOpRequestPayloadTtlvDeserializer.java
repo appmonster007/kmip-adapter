@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.Ticket;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LogoutOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link LogoutOpRequestPayload}.
+ */
 public class LogoutOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LogoutOpRequestPayload,
         LogoutOpRequestPayload.LogoutOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LogoutOpRequestPayloadTtlvDeserializer}.
+   */
   public LogoutOpRequestPayloadTtlvDeserializer() {
     super(LogoutOpRequestPayload.kmipTag, LogoutOpRequestPayload.encodingType);
   }

@@ -48,10 +48,16 @@ public class ActivationDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ActivationDate} instance wrapping the given value.
+   */
   public static ActivationDate of(@NonNull OffsetDateTime value) {
     return new ActivationDate(value);
   }
 
+  /**
+   * Returns the {@link ActivationDate} instance wrapping the given value.
+   */
   public static ActivationDate of(@NonNull AttributeName attributeName,
                                   @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

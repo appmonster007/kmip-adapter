@@ -9,10 +9,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.structure.KeyValueStructure;
 
+/**
+ * XML deserializer for {@link KeyValueStructure}.
+ */
 public class KeyValueStructureXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyValueStructure,
         KeyValueStructure.KeyValueStructureBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueStructureXmlDeserializer}.
+   */
   public KeyValueStructureXmlDeserializer() {
     super(KeyValueStructure.kmipTag, KeyValueStructure.encodingType);
   }

@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.structure.ProfileVersion;
 import org.purplebean.kmip.model.v2x1.type.ServerPort;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * JSON deserializer for {@link ProfileInformation}.
+ */
 public class ProfileInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProfileInformation,
         ProfileInformation.ProfileInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileInformationJsonDeserializer}.
+   */
   public ProfileInformationJsonDeserializer() {
     super(ProfileInformation.kmipTag, ProfileInformation.encodingType);
   }

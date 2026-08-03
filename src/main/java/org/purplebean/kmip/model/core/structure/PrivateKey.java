@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
+/**
+ * KMIP PrivateKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PrivateKey implements ManagedObject, KmipStructure {
@@ -49,6 +52,9 @@ public class PrivateKey implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PrivateKey} instance wrapping the given value.
+   */
   public static PrivateKey of(
       @NonNull KeyBlock keyBlock
   ) {
@@ -58,6 +64,9 @@ public class PrivateKey implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link PrivateKey} instance wrapping the given value.
+   */
   public static PrivateKey of(List<KmipDataType> values) {
     var builder = PrivateKey.builder();
     Map<KmipTag, List<KmipDataType>> map = values

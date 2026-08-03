@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
 
+/**
+ * KMIP ResponseBatchItem response structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ResponseBatchItem implements ResponseBatchItemStructure {
@@ -78,6 +81,9 @@ public class ResponseBatchItem implements ResponseBatchItemStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ResponseBatchItem} instance wrapping the given value.
+   */
   public static ResponseBatchItem of(List<KmipDataType> values) {
     var builder = ResponseBatchItem.builder();
     Map<KmipTag, List<KmipDataType>> map = values

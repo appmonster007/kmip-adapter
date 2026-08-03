@@ -47,6 +47,9 @@ public class DataInteger implements org.purplebean.kmip.api.DataValue {
     validate();
   }
 
+  /**
+   * Returns the {@link DataInteger} instance wrapping the given value.
+   */
   public static DataInteger of(@NonNull Integer value) {
     return new DataInteger(value);
   }

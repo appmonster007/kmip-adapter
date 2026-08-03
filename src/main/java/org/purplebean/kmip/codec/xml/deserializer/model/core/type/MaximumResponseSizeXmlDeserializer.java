@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.MaximumResponseSize;
 
+/**
+ * XML deserializer for {@link MaximumResponseSize}.
+ */
 public class MaximumResponseSizeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<MaximumResponseSize,
         MaximumResponseSize.MaximumResponseSizeBuilder> {
 
+  /**
+   * Constructs a new {@link MaximumResponseSizeXmlDeserializer}.
+   */
   public MaximumResponseSizeXmlDeserializer() {
     super(MaximumResponseSize.kmipTag, MaximumResponseSize.encodingType);
   }

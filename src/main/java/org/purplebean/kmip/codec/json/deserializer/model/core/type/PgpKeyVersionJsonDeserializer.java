@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * JSON deserializer for {@link PgpKeyVersion}.
+ */
 public class PgpKeyVersionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PgpKeyVersion, PgpKeyVersion.PgpKeyVersionBuilder> {
 
+  /**
+   * Constructs a new {@link PgpKeyVersionJsonDeserializer}.
+   */
   public PgpKeyVersionJsonDeserializer() {
     super(PgpKeyVersion.kmipTag, PgpKeyVersion.encodingType);
   }

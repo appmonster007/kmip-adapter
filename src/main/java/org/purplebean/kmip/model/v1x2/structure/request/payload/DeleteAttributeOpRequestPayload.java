@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.AttributeIndex;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP DeleteAttributeOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DeleteAttributeOpRequestPayload implements RequestPayloadStructure {
@@ -59,6 +62,9 @@ public class DeleteAttributeOpRequestPayload implements RequestPayloadStructure 
     validate();
   }
 
+  /**
+   * Returns the {@link DeleteAttributeOpRequestPayload} instance wrapping the given value.
+   */
   public static DeleteAttributeOpRequestPayload of(List<KmipDataType> values) {
     var builder = DeleteAttributeOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

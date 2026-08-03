@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.NextLink;
 
+/**
+ * XML deserializer for {@link NextLink}.
+ */
 public class NextLinkXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<NextLink, NextLink.NextLinkBuilder> {
 
+  /**
+   * Constructs a new {@link NextLinkXmlDeserializer}.
+   */
   public NextLinkXmlDeserializer() {
     super(NextLink.kmipTag, NextLink.encodingType);
   }

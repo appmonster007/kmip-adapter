@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 
+/**
+ * JSON deserializer for {@link TimeStamp}.
+ */
 public class TimeStampJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<TimeStamp, TimeStamp.TimeStampBuilder> {
 
+  /**
+   * Constructs a new {@link TimeStampJsonDeserializer}.
+   */
   public TimeStampJsonDeserializer() {
     super(TimeStamp.kmipTag, TimeStamp.encodingType);
   }

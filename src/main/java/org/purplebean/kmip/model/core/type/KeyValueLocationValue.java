@@ -41,6 +41,9 @@ public class KeyValueLocationValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValueLocationValue} instance wrapping the given value.
+   */
   public static KeyValueLocationValue of(@NonNull String value) {
     return new KeyValueLocationValue(value);
   }

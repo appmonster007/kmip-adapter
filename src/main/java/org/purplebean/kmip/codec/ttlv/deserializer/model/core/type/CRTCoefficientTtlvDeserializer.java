@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CRTCoefficient;
 
+/**
+ * TTLV deserializer for {@link CRTCoefficient}.
+ */
 public class CRTCoefficientTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CRTCoefficient, CRTCoefficient.CRTCoefficientBuilder> {
 
+  /**
+   * Constructs a new {@link CRTCoefficientTtlvDeserializer}.
+   */
   public CRTCoefficientTtlvDeserializer() {
     super(CRTCoefficient.kmipTag, CRTCoefficient.encodingType);
   }

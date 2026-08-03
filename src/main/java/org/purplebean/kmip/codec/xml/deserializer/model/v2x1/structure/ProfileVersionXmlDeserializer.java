@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.v2x1.structure.ProfileVersion;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMajor;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMinor;
 
+/**
+ * XML deserializer for {@link ProfileVersion}.
+ */
 public class ProfileVersionXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProfileVersion, ProfileVersion.ProfileVersionBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileVersionXmlDeserializer}.
+   */
   public ProfileVersionXmlDeserializer() {
     super(ProfileVersion.kmipTag, ProfileVersion.encodingType);
   }

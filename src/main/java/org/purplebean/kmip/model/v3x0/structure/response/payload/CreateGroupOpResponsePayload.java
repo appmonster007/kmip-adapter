@@ -53,6 +53,9 @@ public class CreateGroupOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateGroupOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateGroupOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateGroupOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class CreateGroupOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link CreateGroupOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateGroupOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return CreateGroupOpResponsePayload
         .builder()

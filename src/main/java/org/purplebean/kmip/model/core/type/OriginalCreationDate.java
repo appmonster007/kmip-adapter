@@ -48,10 +48,16 @@ public class OriginalCreationDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link OriginalCreationDate} instance wrapping the given value.
+   */
   public static OriginalCreationDate of(@NonNull OffsetDateTime value) {
     return new OriginalCreationDate(value);
   }
 
+  /**
+   * Returns the {@link OriginalCreationDate} instance wrapping the given value.
+   */
   public static OriginalCreationDate of(@NonNull AttributeName attributeName,
                                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

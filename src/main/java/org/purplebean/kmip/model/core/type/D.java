@@ -42,6 +42,9 @@ public class D implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link D} instance wrapping the given value.
+   */
   public static D of(@NonNull BigInteger value) {
     return new D(value);
   }

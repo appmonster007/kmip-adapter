@@ -43,6 +43,9 @@ public class AttributeReferenceTag implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttributeReferenceTag} instance wrapping the given value.
+   */
   public static AttributeReferenceTag of(@NonNull String tagDescription) {
     return new AttributeReferenceTag(tagDescription);
   }

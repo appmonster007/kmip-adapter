@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ArchiveOpRequestPayload;
 
+/**
+ * XML deserializer for {@link ArchiveOpRequestPayload}.
+ */
 public class ArchiveOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ArchiveOpRequestPayload,
         ArchiveOpRequestPayload.ArchiveOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ArchiveOpRequestPayloadXmlDeserializer}.
+   */
   public ArchiveOpRequestPayloadXmlDeserializer() {
     super(ArchiveOpRequestPayload.kmipTag, ArchiveOpRequestPayload.encodingType);
   }

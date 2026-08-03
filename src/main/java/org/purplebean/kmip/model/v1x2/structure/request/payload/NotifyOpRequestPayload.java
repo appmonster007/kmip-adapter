@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP NotifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class NotifyOpRequestPayload implements RequestPayloadStructure {
@@ -56,6 +59,9 @@ public class NotifyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link NotifyOpRequestPayload} instance wrapping the given value.
+   */
   public static NotifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = NotifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

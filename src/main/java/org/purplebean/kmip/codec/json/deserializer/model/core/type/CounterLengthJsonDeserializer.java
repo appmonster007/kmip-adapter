@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.CounterLength;
 
+/**
+ * JSON deserializer for {@link CounterLength}.
+ */
 public class CounterLengthJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CounterLength, CounterLength.CounterLengthBuilder> {
 
+  /**
+   * Constructs a new {@link CounterLengthJsonDeserializer}.
+   */
   public CounterLengthJsonDeserializer() {
     super(CounterLength.kmipTag, CounterLength.encodingType);
   }

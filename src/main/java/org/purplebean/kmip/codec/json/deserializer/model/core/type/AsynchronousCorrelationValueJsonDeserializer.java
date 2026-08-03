@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 
+/**
+ * JSON deserializer for {@link AsynchronousCorrelationValue}.
+ */
 public class AsynchronousCorrelationValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AsynchronousCorrelationValue,
         AsynchronousCorrelationValue.AsynchronousCorrelationValueBuilder> {
 
+  /**
+   * Constructs a new {@link AsynchronousCorrelationValueJsonDeserializer}.
+   */
   public AsynchronousCorrelationValueJsonDeserializer() {
     super(AsynchronousCorrelationValue.kmipTag, AsynchronousCorrelationValue.encodingType);
   }

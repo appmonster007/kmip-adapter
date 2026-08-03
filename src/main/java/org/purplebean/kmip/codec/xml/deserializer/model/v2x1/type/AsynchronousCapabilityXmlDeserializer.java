@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AsynchronousCapability;
 
+/**
+ * XML deserializer for {@link AsynchronousCapability}.
+ */
 public class AsynchronousCapabilityXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AsynchronousCapability,
         AsynchronousCapability.AsynchronousCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link AsynchronousCapabilityXmlDeserializer}.
+   */
   public AsynchronousCapabilityXmlDeserializer() {
     super(AsynchronousCapability.kmipTag, AsynchronousCapability.encodingType);
   }

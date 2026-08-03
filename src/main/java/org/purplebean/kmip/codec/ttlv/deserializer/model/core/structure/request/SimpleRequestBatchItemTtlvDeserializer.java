@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 
+/**
+ * TTLV deserializer for {@link SimpleRequestBatchItem}.
+ */
 public class SimpleRequestBatchItemTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SimpleRequestBatchItem,
         SimpleRequestBatchItem.SimpleRequestBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleRequestBatchItemTtlvDeserializer}.
+   */
   public SimpleRequestBatchItemTtlvDeserializer() {
     super(SimpleRequestBatchItem.kmipTag, SimpleRequestBatchItem.encodingType);
   }

@@ -42,6 +42,9 @@ public class MaximumItems implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MaximumItems} instance wrapping the given value.
+   */
   public static MaximumItems of(@NonNull Integer value) {
     return new MaximumItems(value);
   }

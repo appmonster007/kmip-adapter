@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.type.OtpInterval;
 
+/**
+ * TTLV deserializer for {@link OtpInterval}.
+ */
 public class OtpIntervalTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<OtpInterval, OtpInterval.OtpIntervalBuilder> {
 
+  /**
+   * Constructs a new {@link OtpIntervalTtlvDeserializer}.
+   */
   public OtpIntervalTtlvDeserializer() {
     super(OtpInterval.kmipTag, OtpInterval.encodingType);
   }

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CreateSplitKeyOpResponsePayload;
 
+/**
+ * XML deserializer for {@link CreateSplitKeyOpResponsePayload}.
+ */
 public class CreateSplitKeyOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CreateSplitKeyOpResponsePayload,
         CreateSplitKeyOpResponsePayload.CreateSplitKeyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateSplitKeyOpResponsePayloadXmlDeserializer}.
+   */
   public CreateSplitKeyOpResponsePayloadXmlDeserializer() {
     super(CreateSplitKeyOpResponsePayload.kmipTag, CreateSplitKeyOpResponsePayload.encodingType);
   }

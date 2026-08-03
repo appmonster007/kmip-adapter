@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMajor;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMinor;
 
+/**
+ * KMIP ProfileVersion structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProfileVersion implements KmipStructure {
@@ -44,6 +47,9 @@ public class ProfileVersion implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ProfileVersion} instance wrapping the given value.
+   */
   public static ProfileVersion of(@NonNull ProfileVersionMajor major,
                                   @NonNull ProfileVersionMinor minor) {
     return ProfileVersion
@@ -53,10 +59,16 @@ public class ProfileVersion implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ProfileVersion} instance wrapping the given value.
+   */
   public static ProfileVersion of(int major, int minor) {
     return of(ProfileVersionMajor.of(major), ProfileVersionMinor.of(minor));
   }
 
+  /**
+   * Returns the {@link ProfileVersion} instance wrapping the given value.
+   */
   public static ProfileVersion of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 
+/**
+ * JSON deserializer for {@link SplitKeyParts}.
+ */
 public class SplitKeyPartsJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SplitKeyParts, SplitKeyParts.SplitKeyPartsBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyPartsJsonDeserializer}.
+   */
   public SplitKeyPartsJsonDeserializer() {
     super(SplitKeyParts.kmipTag, SplitKeyParts.encodingType);
   }

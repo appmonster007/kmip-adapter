@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.TransparentRsaPublicKey;
 import org.purplebean.kmip.model.core.type.Modulus;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * TTLV deserializer for {@link TransparentRsaPublicKey}.
+ */
 public class TransparentRsaPublicKeyTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<TransparentRsaPublicKey,
         TransparentRsaPublicKey.TransparentRsaPublicKeyBuilder> {
 
+  /**
+   * Constructs a new {@link TransparentRsaPublicKeyTtlvDeserializer}.
+   */
   public TransparentRsaPublicKeyTtlvDeserializer() {
     super(TransparentRsaPublicKey.kmipTag, TransparentRsaPublicKey.encodingType);
   }

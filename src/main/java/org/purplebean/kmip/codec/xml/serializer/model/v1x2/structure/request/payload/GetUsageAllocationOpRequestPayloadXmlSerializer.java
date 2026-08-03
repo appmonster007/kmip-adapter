@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v1x2.structure.request.pa
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetUsageAllocationOpRequestPayload;
 
+/**
+ * XML serializer for {@link GetUsageAllocationOpRequestPayload}.
+ */
 public class GetUsageAllocationOpRequestPayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<GetUsageAllocationOpRequestPayload> {
 }

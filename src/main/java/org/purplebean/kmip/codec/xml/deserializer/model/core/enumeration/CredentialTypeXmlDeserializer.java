@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 
+/**
+ * XML deserializer for {@link CredentialType}.
+ */
 public class CredentialTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CredentialType, CredentialType.CredentialTypeBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialTypeXmlDeserializer}.
+   */
   public CredentialTypeXmlDeserializer() {
     super(CredentialType.kmipTag, CredentialType.encodingType);
   }

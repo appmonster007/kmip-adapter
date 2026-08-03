@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * TTLV deserializer for {@link EncryptionKeyInformation}.
+ */
 public class EncryptionKeyInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<EncryptionKeyInformation,
         EncryptionKeyInformation.EncryptionKeyInformationBuilder> {
 
+  /**
+   * Constructs a new {@link EncryptionKeyInformationTtlvDeserializer}.
+   */
   public EncryptionKeyInformationTtlvDeserializer() {
     super(EncryptionKeyInformation.kmipTag, EncryptionKeyInformation.encodingType);
   }

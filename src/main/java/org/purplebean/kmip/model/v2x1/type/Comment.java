@@ -46,10 +46,16 @@ public class Comment implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Comment} instance wrapping the given value.
+   */
   public static Comment of(@NonNull String value) {
     return new Comment(value);
   }
 
+  /**
+   * Returns the {@link Comment} instance wrapping the given value.
+   */
   public static Comment of(@NonNull AttributeName attributeName,
                            @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

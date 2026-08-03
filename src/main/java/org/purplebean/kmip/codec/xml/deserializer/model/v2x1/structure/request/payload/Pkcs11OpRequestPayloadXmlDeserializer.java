@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestP
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
+/**
+ * XML deserializer for {@link Pkcs11OpRequestPayload}.
+ */
 public class Pkcs11OpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs11OpRequestPayload,
         Pkcs11OpRequestPayload.Pkcs11OpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11OpRequestPayloadXmlDeserializer}.
+   */
   public Pkcs11OpRequestPayloadXmlDeserializer() {
     super(Pkcs11OpRequestPayload.kmipTag, Pkcs11OpRequestPayload.encodingType);
   }

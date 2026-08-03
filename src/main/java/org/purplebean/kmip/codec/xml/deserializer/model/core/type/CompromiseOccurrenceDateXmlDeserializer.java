@@ -7,10 +7,16 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 
+/**
+ * XML deserializer for {@link CompromiseOccurrenceDate}.
+ */
 public class CompromiseOccurrenceDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CompromiseOccurrenceDate,
         CompromiseOccurrenceDate.CompromiseOccurrenceDateBuilder> {
 
+  /**
+   * Constructs a new {@link CompromiseOccurrenceDateXmlDeserializer}.
+   */
   public CompromiseOccurrenceDateXmlDeserializer() {
     super(CompromiseOccurrenceDate.kmipTag, CompromiseOccurrenceDate.encodingType);
   }

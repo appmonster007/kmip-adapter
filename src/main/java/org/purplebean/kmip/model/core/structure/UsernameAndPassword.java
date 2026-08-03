@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.core.type.Username;
 
+/**
+ * KMIP UsernameAndPassword attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class UsernameAndPassword implements CredentialValue, KmipStructure {
@@ -54,10 +57,16 @@ public class UsernameAndPassword implements CredentialValue, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link UsernameAndPassword} instance wrapping the given value.
+   */
   public static UsernameAndPassword of(@NonNull String username, @NonNull String password) {
     return of(Username.of(username), Password.of(password));
   }
 
+  /**
+   * Returns the {@link UsernameAndPassword} instance wrapping the given value.
+   */
   public static UsernameAndPassword of(@NonNull Username username, @NonNull Password password) {
     return UsernameAndPassword
         .builder()
@@ -66,10 +75,16 @@ public class UsernameAndPassword implements CredentialValue, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link UsernameAndPassword} instance wrapping the given value.
+   */
   public static UsernameAndPassword of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link UsernameAndPassword} instance wrapping the given value.
+   */
   public static UsernameAndPassword of(List<KmipDataType> values) {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()
@@ -88,6 +103,9 @@ public class UsernameAndPassword implements CredentialValue, KmipStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link UsernameAndPassword} instance wrapping the given value.
+   */
   public static UsernameAndPassword of(CredentialValue value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid credential value: " + value);

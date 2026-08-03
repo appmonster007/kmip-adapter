@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.CertificateRequest;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP CertifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CertifyOpRequestPayload implements RequestPayloadStructure {
@@ -58,6 +61,9 @@ public class CertifyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CertifyOpRequestPayload} instance wrapping the given value.
+   */
   public static CertifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = CertifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

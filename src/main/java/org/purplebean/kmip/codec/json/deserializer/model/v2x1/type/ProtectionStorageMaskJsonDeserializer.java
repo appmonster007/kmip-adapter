@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
 
+/**
+ * JSON deserializer for {@link ProtectionStorageMask}.
+ */
 public class ProtectionStorageMaskJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtectionStorageMask,
         ProtectionStorageMask.ProtectionStorageMaskBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionStorageMaskJsonDeserializer}.
+   */
   public ProtectionStorageMaskJsonDeserializer() {
     super(ProtectionStorageMask.kmipTag, ProtectionStorageMask.encodingType);
   }

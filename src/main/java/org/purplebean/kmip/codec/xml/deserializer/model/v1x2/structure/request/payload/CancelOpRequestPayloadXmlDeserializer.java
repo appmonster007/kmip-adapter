@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CancelOpRequestPayload;
 
+/**
+ * XML deserializer for {@link CancelOpRequestPayload}.
+ */
 public class CancelOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CancelOpRequestPayload,
         CancelOpRequestPayload.CancelOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CancelOpRequestPayloadXmlDeserializer}.
+   */
   public CancelOpRequestPayloadXmlDeserializer() {
     super(CancelOpRequestPayload.kmipTag, CancelOpRequestPayload.encodingType);
   }

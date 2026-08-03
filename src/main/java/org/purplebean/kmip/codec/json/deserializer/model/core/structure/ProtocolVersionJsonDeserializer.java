@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 
+/**
+ * JSON deserializer for {@link ProtocolVersion}.
+ */
 public class ProtocolVersionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
 
+  /**
+   * Constructs a new {@link ProtocolVersionJsonDeserializer}.
+   */
   public ProtocolVersionJsonDeserializer() {
     super(ProtocolVersion.kmipTag, ProtocolVersion.encodingType);
   }

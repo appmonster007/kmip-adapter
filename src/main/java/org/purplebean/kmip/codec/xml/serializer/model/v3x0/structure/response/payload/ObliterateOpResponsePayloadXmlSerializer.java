@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.response.p
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v3x0.structure.response.payload.ObliterateOpResponsePayload;
 
+/**
+ * XML serializer for {@link ObliterateOpResponsePayload}.
+ */
 public class ObliterateOpResponsePayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<ObliterateOpResponsePayload> {
 }

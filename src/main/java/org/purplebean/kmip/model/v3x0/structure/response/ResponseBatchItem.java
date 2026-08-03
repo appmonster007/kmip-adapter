@@ -77,6 +77,9 @@ public class ResponseBatchItem implements ResponseBatchItemStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ResponseBatchItem} instance wrapping the given value.
+   */
   public static ResponseBatchItem of(List<KmipDataType> values) {
     var builder = ResponseBatchItem.builder();
     Map<KmipTag, List<KmipDataType>> map = values

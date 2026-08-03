@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v2x1.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v2x1.type.ValidationProfile;
 
+/**
+ * XML serializer for {@link ValidationProfile}.
+ */
 public class ValidationProfileXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<ValidationProfile> {
 }

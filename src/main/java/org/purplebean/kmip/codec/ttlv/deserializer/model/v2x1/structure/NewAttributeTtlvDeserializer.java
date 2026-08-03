@@ -10,9 +10,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 
+/**
+ * TTLV deserializer for {@link NewAttribute}.
+ */
 public class NewAttributeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NewAttribute, NewAttribute.NewAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link NewAttributeTtlvDeserializer}.
+   */
   public NewAttributeTtlvDeserializer() {
     super(NewAttribute.kmipTag, NewAttribute.encodingType);
   }

@@ -47,10 +47,16 @@ public class RotateLatest implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateLatest} instance wrapping the given value.
+   */
   public static RotateLatest of(@NonNull Boolean value) {
     return new RotateLatest(value);
   }
 
+  /**
+   * Returns the {@link RotateLatest} instance wrapping the given value.
+   */
   public static RotateLatest of(@NonNull AttributeName attributeName,
                                 @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

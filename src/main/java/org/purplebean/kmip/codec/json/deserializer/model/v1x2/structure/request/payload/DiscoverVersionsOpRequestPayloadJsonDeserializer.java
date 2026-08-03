@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.DiscoverVersionsOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link DiscoverVersionsOpRequestPayload}.
+ */
 public class DiscoverVersionsOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DiscoverVersionsOpRequestPayload,
         DiscoverVersionsOpRequestPayload.DiscoverVersionsOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DiscoverVersionsOpRequestPayloadJsonDeserializer}.
+   */
   public DiscoverVersionsOpRequestPayloadJsonDeserializer() {
     super(DiscoverVersionsOpRequestPayload.kmipTag, DiscoverVersionsOpRequestPayload.encodingType);
   }

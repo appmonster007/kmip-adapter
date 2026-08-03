@@ -66,6 +66,9 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
     validate();
   }
 
+  /**
+   * Returns the {@link AdjustAttributeOpRequestPayload} instance wrapping the given value.
+   */
   public static AdjustAttributeOpRequestPayload of(List<KmipDataType> values) {
     var builder = AdjustAttributeOpRequestPayload.builder();
     values.forEach(value -> {

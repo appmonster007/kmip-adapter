@@ -8,10 +8,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.ServerInformation;
 
+/**
+ * JSON deserializer for {@link ServerInformation}.
+ */
 public class ServerInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ServerInformation,
         ServerInformation.ServerInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ServerInformationJsonDeserializer}.
+   */
   public ServerInformationJsonDeserializer() {
     super(ServerInformation.kmipTag, ServerInformation.encodingType);
   }

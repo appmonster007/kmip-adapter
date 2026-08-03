@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.request.RequestBatchItemStructure;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * KMIP SimpleRequestBatchItem structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestBatchItem implements RequestBatchItemStructure {
@@ -48,10 +51,16 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SimpleRequestBatchItem} instance wrapping the given value.
+   */
   public static SimpleRequestBatchItem of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link SimpleRequestBatchItem} instance wrapping the given value.
+   */
   public static SimpleRequestBatchItem of(List<KmipDataType> values) {
     var builder = SimpleRequestBatchItem.builder();
     Map<KmipTag, List<KmipDataType>> map = values

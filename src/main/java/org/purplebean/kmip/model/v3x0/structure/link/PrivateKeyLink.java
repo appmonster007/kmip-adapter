@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP PrivateKeyLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class PrivateKeyLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class PrivateKeyLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PrivateKeyLink} instance wrapping the given value.
+   */
   public static PrivateKeyLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return PrivateKeyLink
         .builder()

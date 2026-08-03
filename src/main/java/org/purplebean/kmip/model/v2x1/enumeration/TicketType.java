@@ -72,6 +72,9 @@ public class TicketType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link TicketType} instance wrapping the given value.
+   */
   public static TicketType of(@NonNull Value value) {
     return new TicketType(value);
   }
@@ -245,6 +248,9 @@ public class TicketType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

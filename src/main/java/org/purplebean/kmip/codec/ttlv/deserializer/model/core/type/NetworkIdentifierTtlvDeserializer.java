@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.NetworkIdentifier;
 
+/**
+ * TTLV deserializer for {@link NetworkIdentifier}.
+ */
 public class NetworkIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<NetworkIdentifier,
         NetworkIdentifier.NetworkIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link NetworkIdentifierTtlvDeserializer}.
+   */
   public NetworkIdentifierTtlvDeserializer() {
     super(NetworkIdentifier.kmipTag, NetworkIdentifier.encodingType);
   }

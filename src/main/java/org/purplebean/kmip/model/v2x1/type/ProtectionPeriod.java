@@ -47,10 +47,16 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtectionPeriod} instance wrapping the given value.
+   */
   public static ProtectionPeriod of(@NonNull Long value) {
     return new ProtectionPeriod(value);
   }
 
+  /**
+   * Returns the {@link ProtectionPeriod} instance wrapping the given value.
+   */
   public static ProtectionPeriod of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

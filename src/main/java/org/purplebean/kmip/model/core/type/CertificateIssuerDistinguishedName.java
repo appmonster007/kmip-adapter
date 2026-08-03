@@ -42,6 +42,9 @@ public class CertificateIssuerDistinguishedName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateIssuerDistinguishedName} instance wrapping the given value.
+   */
   public static CertificateIssuerDistinguishedName of(@NonNull String value) {
     return new CertificateIssuerDistinguishedName(value);
   }

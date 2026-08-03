@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.type.InitializationVector;
 import org.purplebean.kmip.model.core.type.IterationCount;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * KMIP DerivationParameters attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class DerivationParameters implements KmipStructure {
@@ -58,6 +61,9 @@ public class DerivationParameters implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DerivationParameters} instance wrapping the given value.
+   */
   public static DerivationParameters of(List<KmipDataType> values) {
     var builder = DerivationParameters.builder();
     Map<KmipTag, List<KmipDataType>> map = values

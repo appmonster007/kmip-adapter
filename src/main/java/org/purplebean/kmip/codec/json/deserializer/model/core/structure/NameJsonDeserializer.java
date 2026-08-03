@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.NameType;
 import org.purplebean.kmip.model.core.structure.Name;
 import org.purplebean.kmip.model.core.type.NameValue;
 
+/**
+ * JSON deserializer for {@link Name}.
+ */
 public class NameJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Name, Name.NameBuilder> {
 
+  /**
+   * Constructs a new {@link NameJsonDeserializer}.
+   */
   public NameJsonDeserializer() {
     super(Name.kmipTag, Name.encodingType);
   }

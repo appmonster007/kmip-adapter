@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.AlternativeNameType;
 import org.purplebean.kmip.model.core.structure.AlternativeName;
 import org.purplebean.kmip.model.core.type.AlternativeNameValue;
 
+/**
+ * XML deserializer for {@link AlternativeName}.
+ */
 public class AlternativeNameXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AlternativeName, AlternativeName.AlternativeNameBuilder> {
 
+  /**
+   * Constructs a new {@link AlternativeNameXmlDeserializer}.
+   */
   public AlternativeNameXmlDeserializer() {
     super(AlternativeName.kmipTag, AlternativeName.encodingType);
   }

@@ -41,6 +41,9 @@ public class RevocationMessage implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link RevocationMessage} instance wrapping the given value.
+   */
   public static RevocationMessage of(@NonNull String value) {
     return new RevocationMessage(value);
   }

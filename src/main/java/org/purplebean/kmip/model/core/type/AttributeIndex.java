@@ -39,6 +39,9 @@ public class AttributeIndex implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttributeIndex} instance wrapping the given value.
+   */
   public static AttributeIndex of(int index) {
     return new AttributeIndex(index);
   }

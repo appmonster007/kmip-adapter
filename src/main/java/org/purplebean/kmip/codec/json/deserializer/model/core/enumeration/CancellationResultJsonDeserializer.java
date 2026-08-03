@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.CancellationResult;
 
+/**
+ * JSON deserializer for {@link CancellationResult}.
+ */
 public class CancellationResultJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CancellationResult,
         CancellationResult.CancellationResultBuilder> {
 
+  /**
+   * Constructs a new {@link CancellationResultJsonDeserializer}.
+   */
   public CancellationResultJsonDeserializer() {
     super(CancellationResult.kmipTag, CancellationResult.encodingType);
   }

@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.CancellationResult;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CancelOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link CancelOpResponsePayload}.
+ */
 public class CancelOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CancelOpResponsePayload,
         CancelOpResponsePayload.CancelOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CancelOpResponsePayloadJsonDeserializer}.
+   */
   public CancelOpResponsePayloadJsonDeserializer() {
     super(CancelOpResponsePayload.kmipTag, CancelOpResponsePayload.encodingType);
   }

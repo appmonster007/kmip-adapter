@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.UnwrapMode;
 
+/**
+ * JSON deserializer for {@link UnwrapMode}.
+ */
 public class UnwrapModeJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<UnwrapMode, UnwrapMode.UnwrapModeBuilder> {
 
+  /**
+   * Constructs a new {@link UnwrapModeJsonDeserializer}.
+   */
   public UnwrapModeJsonDeserializer() {
     super(UnwrapMode.kmipTag, UnwrapMode.encodingType);
   }

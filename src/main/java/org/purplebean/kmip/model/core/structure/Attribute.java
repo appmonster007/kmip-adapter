@@ -54,18 +54,30 @@ public class Attribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Attribute} instance wrapping the given value.
+   */
   public static Attribute of(@NonNull String name, AttributeValue value) {
     return Attribute.of(CustomAttribute.of(name, value));
   }
 
+  /**
+   * Returns the {@link Attribute} instance wrapping the given value.
+   */
   public static Attribute of(AttributeName name, AttributeValue value) {
     return new Attribute(name, AttributeIndex.of(0), value);
   }
 
+  /**
+   * Returns the {@link Attribute} instance wrapping the given value.
+   */
   public static Attribute of(@NonNull KmipAttribute attribute) {
     return new Attribute(attribute.getAttributeName(), null, attribute.getAttributeValue());
   }
 
+  /**
+   * Converts the given {@link Attribute} into its {@link KmipAttribute} representation.
+   */
   public static KmipAttribute toKmipAttribute(@NonNull Attribute attribute) {
     String name = attribute
         .getAttributeName()

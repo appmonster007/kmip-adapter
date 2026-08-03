@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.MediaIdentifier;
 
+/**
+ * TTLV deserializer for {@link MediaIdentifier}.
+ */
 public class MediaIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MediaIdentifier, MediaIdentifier.MediaIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link MediaIdentifierTtlvDeserializer}.
+   */
   public MediaIdentifierTtlvDeserializer() {
     super(MediaIdentifier.kmipTag, MediaIdentifier.encodingType);
   }

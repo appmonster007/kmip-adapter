@@ -73,6 +73,9 @@ public class OtpAlgorithm implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpAlgorithm} instance wrapping the given value.
+   */
   public static OtpAlgorithm of(@NonNull Value value) {
     return new OtpAlgorithm(value);
   }
@@ -247,6 +250,9 @@ public class OtpAlgorithm implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

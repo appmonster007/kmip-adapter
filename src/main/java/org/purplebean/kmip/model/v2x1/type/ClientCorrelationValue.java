@@ -41,6 +41,9 @@ public class ClientCorrelationValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ClientCorrelationValue} instance wrapping the given value.
+   */
   public static ClientCorrelationValue of(@NonNull String value) {
     return new ClientCorrelationValue(value);
   }

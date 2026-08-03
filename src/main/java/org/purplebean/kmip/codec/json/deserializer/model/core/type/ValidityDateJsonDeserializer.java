@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 
+/**
+ * JSON deserializer for {@link ValidityDate}.
+ */
 public class ValidityDateJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<ValidityDate, ValidityDate.ValidityDateBuilder> {
 
+  /**
+   * Constructs a new {@link ValidityDateJsonDeserializer}.
+   */
   public ValidityDateJsonDeserializer() {
     super(ValidityDate.kmipTag, ValidityDate.encodingType);
   }

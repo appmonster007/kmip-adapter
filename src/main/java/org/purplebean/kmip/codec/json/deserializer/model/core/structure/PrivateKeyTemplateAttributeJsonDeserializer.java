@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.structure.Name;
 import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 
+/**
+ * JSON deserializer for {@link PrivateKeyTemplateAttribute}.
+ */
 public class PrivateKeyTemplateAttributeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PrivateKeyTemplateAttribute,
         PrivateKeyTemplateAttribute.PrivateKeyTemplateAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link PrivateKeyTemplateAttributeJsonDeserializer}.
+   */
   public PrivateKeyTemplateAttributeJsonDeserializer() {
     super(PrivateKeyTemplateAttribute.kmipTag, PrivateKeyTemplateAttribute.encodingType);
   }

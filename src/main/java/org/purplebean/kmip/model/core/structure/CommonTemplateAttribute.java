@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP CommonTemplateAttribute attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CommonTemplateAttribute implements KmipStructure {
@@ -48,6 +51,9 @@ public class CommonTemplateAttribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CommonTemplateAttribute} instance wrapping the given value.
+   */
   public static CommonTemplateAttribute of(List<Name> names, List<Attribute> attributes) {
     return CommonTemplateAttribute
         .builder()

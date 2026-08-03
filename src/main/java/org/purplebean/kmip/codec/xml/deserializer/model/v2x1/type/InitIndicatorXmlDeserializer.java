@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * XML deserializer for {@link InitIndicator}.
+ */
 public class InitIndicatorXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<InitIndicator, InitIndicator.InitIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link InitIndicatorXmlDeserializer}.
+   */
   public InitIndicatorXmlDeserializer() {
     super(InitIndicator.kmipTag, InitIndicator.encodingType);
   }

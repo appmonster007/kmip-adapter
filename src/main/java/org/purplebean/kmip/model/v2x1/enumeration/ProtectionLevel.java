@@ -72,6 +72,9 @@ public class ProtectionLevel implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtectionLevel} instance wrapping the given value.
+   */
   public static ProtectionLevel of(@NonNull Value value) {
     return new ProtectionLevel(value);
   }
@@ -246,6 +249,9 @@ public class ProtectionLevel implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

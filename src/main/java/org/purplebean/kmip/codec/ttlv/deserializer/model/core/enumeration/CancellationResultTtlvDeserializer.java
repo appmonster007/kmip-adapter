@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.CancellationResult;
 
+/**
+ * TTLV deserializer for {@link CancellationResult}.
+ */
 public class CancellationResultTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CancellationResult,
         CancellationResult.CancellationResultBuilder> {
 
+  /**
+   * Constructs a new {@link CancellationResultTtlvDeserializer}.
+   */
   public CancellationResultTtlvDeserializer() {
     super(CancellationResult.kmipTag, CancellationResult.encodingType);
   }

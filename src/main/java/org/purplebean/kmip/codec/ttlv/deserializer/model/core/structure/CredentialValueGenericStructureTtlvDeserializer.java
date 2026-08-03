@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.CredentialValueGenericStructure;
 
+/**
+ * TTLV deserializer for {@link CredentialValueGenericStructure}.
+ */
 public class CredentialValueGenericStructureTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CredentialValueGenericStructure,
         CredentialValueGenericStructure.CredentialValueGenericStructureBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialValueGenericStructureTtlvDeserializer}.
+   */
   public CredentialValueGenericStructureTtlvDeserializer() {
     super(CredentialValueGenericStructure.kmipTag, CredentialValueGenericStructure.encodingType);
   }

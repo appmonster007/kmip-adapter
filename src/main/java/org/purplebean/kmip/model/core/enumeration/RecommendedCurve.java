@@ -67,6 +67,9 @@ public class RecommendedCurve implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link RecommendedCurve} instance wrapping the given value.
+   */
   public static RecommendedCurve of(@NonNull Value value) {
     return new RecommendedCurve(value);
   }
@@ -362,6 +365,9 @@ public class RecommendedCurve implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -101,10 +101,16 @@ public class KeyFormatType implements KmipEnumeration, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyFormatType} instance wrapping the given value.
+   */
   public static KeyFormatType of(@NonNull Value value) {
     return new KeyFormatType(value);
   }
 
+  /**
+   * Returns the {@link KeyFormatType} instance wrapping the given value.
+   */
   public static KeyFormatType of(@NonNull AttributeName attributeName,
                                  @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||
@@ -378,6 +384,9 @@ public class KeyFormatType implements KmipEnumeration, KmipAttribute {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

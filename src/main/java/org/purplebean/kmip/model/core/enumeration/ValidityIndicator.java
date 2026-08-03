@@ -74,6 +74,9 @@ public class ValidityIndicator implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidityIndicator} instance wrapping the given value.
+   */
   public static ValidityIndicator of(@NonNull Value value) {
     return new ValidityIndicator(value);
   }
@@ -252,6 +255,9 @@ public class ValidityIndicator implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

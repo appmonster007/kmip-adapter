@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.ServerInformation;
 
+/**
+ * TTLV deserializer for {@link ServerInformation}.
+ */
 public class ServerInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ServerInformation,
         ServerInformation.ServerInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ServerInformationTtlvDeserializer}.
+   */
   public ServerInformationTtlvDeserializer() {
     super(ServerInformation.kmipTag, ServerInformation.encodingType);
   }

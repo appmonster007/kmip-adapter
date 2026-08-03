@@ -12,6 +12,9 @@ import org.purplebean.kmip.api.response.ResponseHeaderStructure;
 import org.purplebean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.response.SimpleResponseHeader;
 
+/**
+ * JSON deserializer for {@link ResponseHeaderStructure}.
+ */
 public class ResponseHeaderStructureJsonDeserializer
     extends KmipDataTypeJsonDeserializer<ResponseHeaderStructure> {
 

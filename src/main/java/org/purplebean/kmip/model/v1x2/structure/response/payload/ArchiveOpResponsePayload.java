@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ArchiveOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ArchiveOpResponsePayload implements ResponsePayloadStructure {
@@ -49,6 +52,9 @@ public class ArchiveOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ArchiveOpResponsePayload} instance wrapping the given value.
+   */
   public static ArchiveOpResponsePayload of(List<KmipDataType> values) {
     var builder = ArchiveOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

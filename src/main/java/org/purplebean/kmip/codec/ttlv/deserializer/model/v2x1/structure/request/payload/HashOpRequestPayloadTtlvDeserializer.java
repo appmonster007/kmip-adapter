@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * TTLV deserializer for {@link HashOpRequestPayload}.
+ */
 public class HashOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<HashOpRequestPayload,
         HashOpRequestPayload.HashOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link HashOpRequestPayloadTtlvDeserializer}.
+   */
   public HashOpRequestPayloadTtlvDeserializer() {
     super(HashOpRequestPayload.kmipTag, HashOpRequestPayload.encodingType);
   }

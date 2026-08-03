@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.OpaqueDataValue;
 
+/**
+ * JSON deserializer for {@link OpaqueDataValue}.
+ */
 public class OpaqueDataValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<OpaqueDataValue, OpaqueDataValue.OpaqueDataValueBuilder> {
 
+  /**
+   * Constructs a new {@link OpaqueDataValueJsonDeserializer}.
+   */
   public OpaqueDataValueJsonDeserializer() {
     super(OpaqueDataValue.kmipTag, OpaqueDataValue.encodingType);
   }

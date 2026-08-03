@@ -71,6 +71,9 @@ public class PasswordCredential implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PasswordCredential} instance wrapping the given value.
+   */
   public static PasswordCredential of(
       Password password,
       PasswordSalt passwordSalt,

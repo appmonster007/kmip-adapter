@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.v2x1.structure.ProtectionStorageMasks;
 import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
 
+/**
+ * XML deserializer for {@link ProtectionStorageMasks}.
+ */
 public class ProtectionStorageMasksXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProtectionStorageMasks,
         ProtectionStorageMasks.ProtectionStorageMasksBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionStorageMasksXmlDeserializer}.
+   */
   public ProtectionStorageMasksXmlDeserializer() {
     super(ProtectionStorageMasks.kmipTag, ProtectionStorageMasks.encodingType);
   }

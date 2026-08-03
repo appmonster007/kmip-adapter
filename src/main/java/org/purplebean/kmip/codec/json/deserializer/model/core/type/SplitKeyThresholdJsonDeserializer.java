@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * JSON deserializer for {@link SplitKeyThreshold}.
+ */
 public class SplitKeyThresholdJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SplitKeyThreshold,
         SplitKeyThreshold.SplitKeyThresholdBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyThresholdJsonDeserializer}.
+   */
   public SplitKeyThresholdJsonDeserializer() {
     super(SplitKeyThreshold.kmipTag, SplitKeyThreshold.encodingType);
   }

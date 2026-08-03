@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.OperationPolicyName;
 
+/**
+ * XML deserializer for {@link OperationPolicyName}.
+ */
 public class OperationPolicyNameXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<OperationPolicyName,
         OperationPolicyName.OperationPolicyNameBuilder> {
 
+  /**
+   * Constructs a new {@link OperationPolicyNameXmlDeserializer}.
+   */
   public OperationPolicyNameXmlDeserializer() {
     super(OperationPolicyName.kmipTag, OperationPolicyName.encodingType);
   }

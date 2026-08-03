@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.FixedFieldLength;
 
+/**
+ * JSON deserializer for {@link FixedFieldLength}.
+ */
 public class FixedFieldLengthJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<FixedFieldLength,
         FixedFieldLength.FixedFieldLengthBuilder> {
 
+  /**
+   * Constructs a new {@link FixedFieldLengthJsonDeserializer}.
+   */
   public FixedFieldLengthJsonDeserializer() {
     super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
   }

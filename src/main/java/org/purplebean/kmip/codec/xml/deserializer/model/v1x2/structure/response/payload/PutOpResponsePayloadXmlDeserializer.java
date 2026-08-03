@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.PutOpResponsePayload;
 
+/**
+ * XML deserializer for {@link PutOpResponsePayload}.
+ */
 public class PutOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PutOpResponsePayload,
         PutOpResponsePayload.PutOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PutOpResponsePayloadXmlDeserializer}.
+   */
   public PutOpResponsePayloadXmlDeserializer() {
     super(PutOpResponsePayload.kmipTag, PutOpResponsePayload.encodingType);
   }

@@ -41,6 +41,9 @@ public class PgpKeyVersion implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PgpKeyVersion} instance wrapping the given value.
+   */
   public static PgpKeyVersion of(@NonNull Integer value) {
     return new PgpKeyVersion(value);
   }

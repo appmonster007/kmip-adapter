@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.BatchContinueCapability;
 
+/**
+ * XML deserializer for {@link BatchContinueCapability}.
+ */
 public class BatchContinueCapabilityXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<BatchContinueCapability,
         BatchContinueCapability.BatchContinueCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link BatchContinueCapabilityXmlDeserializer}.
+   */
   public BatchContinueCapabilityXmlDeserializer() {
     super(BatchContinueCapability.kmipTag, BatchContinueCapability.encodingType);
   }

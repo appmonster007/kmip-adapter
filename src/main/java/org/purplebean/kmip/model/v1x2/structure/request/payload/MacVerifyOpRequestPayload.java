@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.MacData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP MacVerifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacVerifyOpRequestPayload implements RequestPayloadStructure {
@@ -62,6 +65,9 @@ public class MacVerifyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacVerifyOpRequestPayload} instance wrapping the given value.
+   */
   public static MacVerifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = MacVerifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

@@ -43,6 +43,9 @@ public class AuthenticatedEncryptionAdditionalData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AuthenticatedEncryptionAdditionalData} instance wrapping the given value.
+   */
   public static AuthenticatedEncryptionAdditionalData of(@NonNull ByteBuffer value) {
     return new AuthenticatedEncryptionAdditionalData(value);
   }

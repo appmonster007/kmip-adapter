@@ -42,6 +42,9 @@ public class CriticalityIndicator implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CriticalityIndicator} instance wrapping the given value.
+   */
   public static CriticalityIndicator of(@NonNull Boolean value) {
     return new CriticalityIndicator(value);
   }

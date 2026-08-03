@@ -9,9 +9,15 @@ import org.purplebean.kmip.api.request.RequestHeaderStructure;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v1x2.structure.request.RequestMessage;
 
+/**
+ * XML deserializer for {@link RequestMessage}.
+ */
 public class RequestMessageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RequestMessage, RequestMessage.RequestMessageBuilder> {
 
+  /**
+   * Constructs a new {@link RequestMessageXmlDeserializer}.
+   */
   public RequestMessageXmlDeserializer() {
     super(RequestMessage.kmipTag, RequestMessage.encodingType);
   }

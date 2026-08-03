@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.NistKeyType;
 
+/**
+ * TTLV deserializer for {@link NistKeyType}.
+ */
 public class NistKeyTypeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NistKeyType, NistKeyType.NistKeyTypeBuilder> {
 
+  /**
+   * Constructs a new {@link NistKeyTypeTtlvDeserializer}.
+   */
   public NistKeyTypeTtlvDeserializer() {
     super(NistKeyType.kmipTag, NistKeyType.encodingType);
   }

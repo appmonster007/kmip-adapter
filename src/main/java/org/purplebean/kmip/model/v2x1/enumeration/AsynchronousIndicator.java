@@ -61,6 +61,9 @@ public class AsynchronousIndicator implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousIndicator} instance wrapping the given value.
+   */
   public static AsynchronousIndicator of(@NonNull Value value) {
     return new AsynchronousIndicator(value);
   }
@@ -183,6 +186,9 @@ public class AsynchronousIndicator implements KmipEnumeration {
     return value.getValue();
   }
 
+  /**
+   * Standard KMIP-defined values.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -217,9 +223,15 @@ public class AsynchronousIndicator implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+  /**
+   * Represents a specific value of the enclosing enumeration.
+   */
   public interface Value extends KmipEnumeration.Value<AsynchronousIndicator> {
   }
 
+  /**
+   * Vendor-defined extension value.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -230,6 +242,9 @@ public class AsynchronousIndicator implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

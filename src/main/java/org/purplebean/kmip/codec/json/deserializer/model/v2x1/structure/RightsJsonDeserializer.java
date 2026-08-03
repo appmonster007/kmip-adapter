@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.v2x1.structure.Right;
 import org.purplebean.kmip.model.v2x1.structure.Rights;
 
+/**
+ * JSON deserializer for {@link Rights}.
+ */
 public class RightsJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Rights, Rights.RightsBuilder> {
 
+  /**
+   * Constructs a new {@link RightsJsonDeserializer}.
+   */
   public RightsJsonDeserializer() {
     super(Rights.kmipTag, Rights.encodingType);
   }

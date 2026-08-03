@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
 
+/**
+ * JSON deserializer for {@link KeyPartIdentifier}.
+ */
 public class KeyPartIdentifierJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyPartIdentifier,
         KeyPartIdentifier.KeyPartIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link KeyPartIdentifierJsonDeserializer}.
+   */
   public KeyPartIdentifierJsonDeserializer() {
     super(KeyPartIdentifier.kmipTag, KeyPartIdentifier.encodingType);
   }

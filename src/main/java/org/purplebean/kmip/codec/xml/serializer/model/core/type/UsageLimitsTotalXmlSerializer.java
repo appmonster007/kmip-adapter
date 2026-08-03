@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.type.UsageLimitsTotal;
 
+/**
+ * XML serializer for {@link UsageLimitsTotal}.
+ */
 public class UsageLimitsTotalXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<UsageLimitsTotal> {
 }

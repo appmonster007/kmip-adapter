@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.AttestationAssertion;
 
+/**
+ * XML deserializer for {@link AttestationAssertion}.
+ */
 public class AttestationAssertionXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AttestationAssertion,
         AttestationAssertion.AttestationAssertionBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationAssertionXmlDeserializer}.
+   */
   public AttestationAssertionXmlDeserializer() {
     super(AttestationAssertion.kmipTag, AttestationAssertion.encodingType);
   }

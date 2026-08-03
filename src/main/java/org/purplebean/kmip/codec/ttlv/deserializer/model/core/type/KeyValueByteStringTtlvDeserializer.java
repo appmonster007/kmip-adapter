@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.KeyValueByteString;
 
+/**
+ * TTLV deserializer for {@link KeyValueByteString}.
+ */
 public class KeyValueByteStringTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<KeyValueByteString,
         KeyValueByteString.KeyValueByteStringBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueByteStringTtlvDeserializer}.
+   */
   public KeyValueByteStringTtlvDeserializer() {
     super(KeyValueByteString.kmipTag, KeyValueByteString.encodingType);
   }

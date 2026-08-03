@@ -12,6 +12,9 @@ import org.purplebean.kmip.api.request.RequestBatchItemStructure;
 import org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 
+/**
+ * XML deserializer for {@link RequestBatchItemStructure}.
+ */
 public class RequestBatchItemStructureXmlDeserializer
     extends KmipDataTypeXmlDeserializer<RequestBatchItemStructure> {
 

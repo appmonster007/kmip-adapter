@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.LocatedItems;
 
+/**
+ * JSON deserializer for {@link LocatedItems}.
+ */
 public class LocatedItemsJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<LocatedItems, LocatedItems.LocatedItemsBuilder> {
 
+  /**
+   * Constructs a new {@link LocatedItemsJsonDeserializer}.
+   */
   public LocatedItemsJsonDeserializer() {
     super(LocatedItems.kmipTag, LocatedItems.encodingType);
   }

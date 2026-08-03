@@ -43,6 +43,9 @@ public class PublicExponent implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PublicExponent} instance wrapping the given value.
+   */
   public static PublicExponent of(@NonNull BigInteger value) {
     return new PublicExponent(value);
   }

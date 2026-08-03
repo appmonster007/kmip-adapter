@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * KMIP TransparentEcdhPublicKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentEcdhPublicKey implements KeyMaterial, KmipStructure {
@@ -53,6 +56,9 @@ public class TransparentEcdhPublicKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentEcdhPublicKey} instance wrapping the given value.
+   */
   public static TransparentEcdhPublicKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -70,6 +76,9 @@ public class TransparentEcdhPublicKey implements KeyMaterial, KmipStructure {
     );
   }
 
+  /**
+   * Returns the {@link TransparentEcdhPublicKey} instance wrapping the given value.
+   */
   public static TransparentEcdhPublicKey of(@NonNull RecommendedCurve recommendedCurve,
                                             @NonNull QString qString) {
     return TransparentEcdhPublicKey

@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.v1x2.structure.response.
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.JoinSplitKeyOpResponsePayload;
 
+/**
+ * TTLV serializer for {@link JoinSplitKeyOpResponsePayload}.
+ */
 public class JoinSplitKeyOpResponsePayloadTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<JoinSplitKeyOpResponsePayload> {
 }

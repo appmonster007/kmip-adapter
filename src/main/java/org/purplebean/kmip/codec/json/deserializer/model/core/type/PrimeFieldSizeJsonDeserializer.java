@@ -7,9 +7,15 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 
+/**
+ * JSON deserializer for {@link PrimeFieldSize}.
+ */
 public class PrimeFieldSizeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PrimeFieldSize, PrimeFieldSize.PrimeFieldSizeBuilder> {
 
+  /**
+   * Constructs a new {@link PrimeFieldSizeJsonDeserializer}.
+   */
   public PrimeFieldSizeJsonDeserializer() {
     super(PrimeFieldSize.kmipTag, PrimeFieldSize.encodingType);
   }

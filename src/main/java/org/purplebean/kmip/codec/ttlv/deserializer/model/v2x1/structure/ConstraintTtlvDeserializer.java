@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.Constraint;
 
+/**
+ * TTLV deserializer for {@link Constraint}.
+ */
 public class ConstraintTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Constraint, Constraint.ConstraintBuilder> {
 
+  /**
+   * Constructs a new {@link ConstraintTtlvDeserializer}.
+   */
   public ConstraintTtlvDeserializer() {
     super(Constraint.kmipTag, Constraint.encodingType);
   }

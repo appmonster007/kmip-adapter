@@ -45,10 +45,16 @@ public class OperationPolicyName implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link OperationPolicyName} instance wrapping the given value.
+   */
   public static OperationPolicyName of(@NonNull String value) {
     return new OperationPolicyName(value);
   }
 
+  /**
+   * Returns the {@link OperationPolicyName} instance wrapping the given value.
+   */
   public static OperationPolicyName of(@NonNull AttributeName attributeName,
                                        @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

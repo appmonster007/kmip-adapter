@@ -42,6 +42,9 @@ public class Offset implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Offset} instance wrapping the given value.
+   */
   public static Offset of(@NonNull Integer value) {
     return new Offset(value);
   }

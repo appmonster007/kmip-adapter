@@ -13,6 +13,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.structure.UsageLimits;
 
+/**
+ * KMIP Right structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Right implements KmipStructure {
@@ -45,6 +48,9 @@ public class Right implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Right} instance wrapping the given value.
+   */
   public static Right of(@NonNull KmipDataType value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid value: " + value);

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.enumeration.SplitKeyPolynomial;
 
+/**
+ * JSON deserializer for {@link SplitKeyPolynomial}.
+ */
 public class SplitKeyPolynomialJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SplitKeyPolynomial,
         SplitKeyPolynomial.SplitKeyPolynomialBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyPolynomialJsonDeserializer}.
+   */
   public SplitKeyPolynomialJsonDeserializer() {
     super(SplitKeyPolynomial.kmipTag, SplitKeyPolynomial.encodingType);
   }

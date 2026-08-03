@@ -14,10 +14,16 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * TTLV deserializer for {@link MacVerifyOpRequestPayload}.
+ */
 public class MacVerifyOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MacVerifyOpRequestPayload,
         MacVerifyOpRequestPayload.MacVerifyOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link MacVerifyOpRequestPayloadTtlvDeserializer}.
+   */
   public MacVerifyOpRequestPayloadTtlvDeserializer() {
     super(MacVerifyOpRequestPayload.kmipTag, MacVerifyOpRequestPayload.encodingType);
   }

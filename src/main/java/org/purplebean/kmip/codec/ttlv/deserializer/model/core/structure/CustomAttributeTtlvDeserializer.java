@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.CustomAttribute;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 
+/**
+ * TTLV deserializer for {@link CustomAttribute}.
+ */
 public class CustomAttributeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CustomAttribute, CustomAttribute.CustomAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link CustomAttributeTtlvDeserializer}.
+   */
   public CustomAttributeTtlvDeserializer() {
     super(CustomAttribute.kmipTag, CustomAttribute.encodingType);
   }

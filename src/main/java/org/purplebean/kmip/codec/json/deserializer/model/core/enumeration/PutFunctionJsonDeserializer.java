@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.PutFunction;
 
+/**
+ * JSON deserializer for {@link PutFunction}.
+ */
 public class PutFunctionJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<PutFunction, PutFunction.PutFunctionBuilder> {
 
+  /**
+   * Constructs a new {@link PutFunctionJsonDeserializer}.
+   */
   public PutFunctionJsonDeserializer() {
     super(PutFunction.kmipTag, PutFunction.encodingType);
   }

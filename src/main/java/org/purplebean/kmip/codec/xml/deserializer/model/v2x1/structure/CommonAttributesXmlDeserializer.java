@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.CommonAttributes;
 
+/**
+ * XML deserializer for {@link CommonAttributes}.
+ */
 public class CommonAttributesXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CommonAttributes,
         CommonAttributes.CommonAttributesBuilder> {
 
+  /**
+   * Constructs a new {@link CommonAttributesXmlDeserializer}.
+   */
   public CommonAttributesXmlDeserializer() {
     super(CommonAttributes.kmipTag, CommonAttributes.encodingType);
   }

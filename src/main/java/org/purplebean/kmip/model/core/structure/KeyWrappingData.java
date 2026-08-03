@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.WrappingMethod;
 import org.purplebean.kmip.model.core.type.IVCounterNonce;
 import org.purplebean.kmip.model.core.type.MACSignature;
 
+/**
+ * KMIP KeyWrappingData attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyWrappingData implements KmipStructure {

@@ -74,6 +74,9 @@ public class NameType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link NameType} instance wrapping the given value.
+   */
   public static NameType of(@NonNull Value value) {
     return new NameType(value);
   }
@@ -249,6 +252,9 @@ public class NameType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -7,10 +7,16 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.DeactivationDate;
 
+/**
+ * XML deserializer for {@link DeactivationDate}.
+ */
 public class DeactivationDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DeactivationDate,
         DeactivationDate.DeactivationDateBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationDateXmlDeserializer}.
+   */
   public DeactivationDateXmlDeserializer() {
     super(DeactivationDate.kmipTag, DeactivationDate.encodingType);
   }

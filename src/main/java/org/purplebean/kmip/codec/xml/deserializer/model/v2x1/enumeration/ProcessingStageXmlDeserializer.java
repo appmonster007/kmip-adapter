@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 
+/**
+ * XML deserializer for {@link ProcessingStage}.
+ */
 public class ProcessingStageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProcessingStage, ProcessingStage.ProcessingStageBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessingStageXmlDeserializer}.
+   */
   public ProcessingStageXmlDeserializer() {
     super(ProcessingStage.kmipTag, ProcessingStage.encodingType);
   }

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.SignOpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * JSON deserializer for {@link SignOpResponsePayload}.
+ */
 public class SignOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SignOpResponsePayload,
         SignOpResponsePayload.SignOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SignOpResponsePayloadJsonDeserializer}.
+   */
   public SignOpResponsePayloadJsonDeserializer() {
     super(SignOpResponsePayload.kmipTag, SignOpResponsePayload.encodingType);
   }

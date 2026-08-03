@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.HashOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link HashOpRequestPayload}.
+ */
 public class HashOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<HashOpRequestPayload,
         HashOpRequestPayload.HashOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link HashOpRequestPayloadTtlvDeserializer}.
+   */
   public HashOpRequestPayloadTtlvDeserializer() {
     super(HashOpRequestPayload.kmipTag, HashOpRequestPayload.encodingType);
   }

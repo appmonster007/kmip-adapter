@@ -96,6 +96,9 @@ public class RequestHeader implements RequestHeaderStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RequestHeader} instance wrapping the given value.
+   */
   public static RequestHeader of(List<KmipDataType> values) {
     var builder = RequestHeader.builder();
     Map<KmipTag, List<KmipDataType>> map = values

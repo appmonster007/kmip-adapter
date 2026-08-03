@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * KMIP NotifyOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class NotifyOpResponsePayload implements ResponsePayloadStructure {
@@ -39,6 +42,9 @@ public class NotifyOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link NotifyOpResponsePayload} instance wrapping the given value.
+   */
   public static NotifyOpResponsePayload of(List<KmipDataType> values) {
     return NotifyOpResponsePayload
         .builder()

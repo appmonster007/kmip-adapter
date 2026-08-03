@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.Right;
 import org.purplebean.kmip.model.v2x1.structure.Rights;
 
+/**
+ * TTLV deserializer for {@link Rights}.
+ */
 public class RightsTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Rights, Rights.RightsBuilder> {
 
+  /**
+   * Constructs a new {@link RightsTtlvDeserializer}.
+   */
   public RightsTtlvDeserializer() {
     super(Rights.kmipTag, Rights.encodingType);
   }

@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.WrappingKeyLink;
 
+/**
+ * JSON deserializer for {@link WrappingKeyLink}.
+ */
 public class WrappingKeyLinkJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<WrappingKeyLink, WrappingKeyLink.WrappingKeyLinkBuilder> {
 
+  /**
+   * Constructs a new {@link WrappingKeyLinkJsonDeserializer}.
+   */
   public WrappingKeyLinkJsonDeserializer() {
     super(WrappingKeyLink.kmipTag, WrappingKeyLink.encodingType);
   }

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.SignatureData;
 
+/**
+ * TTLV deserializer for {@link SignatureData}.
+ */
 public class SignatureDataTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SignatureData, SignatureData.SignatureDataBuilder> {
 
+  /**
+   * Constructs a new {@link SignatureDataTtlvDeserializer}.
+   */
   public SignatureDataTtlvDeserializer() {
     super(SignatureData.kmipTag, SignatureData.encodingType);
   }

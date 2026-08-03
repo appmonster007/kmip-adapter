@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.structure.RevocationReason;
 import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP RevokeOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RevokeOpRequestPayload implements RequestPayloadStructure {
@@ -60,6 +63,9 @@ public class RevokeOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RevokeOpRequestPayload} instance wrapping the given value.
+   */
   public static RevokeOpRequestPayload of(List<KmipDataType> values) {
     var builder = RevokeOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

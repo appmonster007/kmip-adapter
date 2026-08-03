@@ -7,6 +7,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
+/**
+ * TTLV deserializer for {@link Boolean}.
+ */
 public class BooleanTtlvDeserializer extends TtlvDeserializer<Boolean> {
   private final EncodingType type = EncodingType.BOOLEAN;
 

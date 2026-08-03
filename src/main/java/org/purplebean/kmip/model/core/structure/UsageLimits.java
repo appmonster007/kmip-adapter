@@ -68,6 +68,9 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link UsageLimits} instance wrapping the given value.
+   */
   public static UsageLimits of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

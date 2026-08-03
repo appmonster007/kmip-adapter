@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.StorageStatusMask;
 
+/**
+ * TTLV deserializer for {@link StorageStatusMask}.
+ */
 public class StorageStatusMaskTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<StorageStatusMask,
         StorageStatusMask.StorageStatusMaskBuilder> {
 
+  /**
+   * Constructs a new {@link StorageStatusMaskTtlvDeserializer}.
+   */
   public StorageStatusMaskTtlvDeserializer() {
     super(StorageStatusMask.kmipTag, StorageStatusMask.encodingType);
   }

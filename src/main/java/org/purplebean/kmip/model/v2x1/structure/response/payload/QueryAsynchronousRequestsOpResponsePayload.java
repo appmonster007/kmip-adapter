@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.AsynchronousRequest;
 
+/**
+ * KMIP QueryAsynchronousRequestsOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class QueryAsynchronousRequestsOpResponsePayload implements ResponsePayloadStructure {
@@ -48,6 +51,9 @@ public class QueryAsynchronousRequestsOpResponsePayload implements ResponsePaylo
     validate();
   }
 
+  /**
+   * Returns the {@link QueryAsynchronousRequestsOpResponsePayload} instance wrapping the given value.
+   */
   public static QueryAsynchronousRequestsOpResponsePayload of(List<KmipDataType> values) {
     QueryAsynchronousRequestsOpResponsePayloadBuilder builder =
         QueryAsynchronousRequestsOpResponsePayload.builder();

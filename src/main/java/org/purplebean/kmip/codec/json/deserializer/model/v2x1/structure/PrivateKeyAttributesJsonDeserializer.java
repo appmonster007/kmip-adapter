@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.PrivateKeyAttributes;
 
+/**
+ * JSON deserializer for {@link PrivateKeyAttributes}.
+ */
 public class PrivateKeyAttributesJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PrivateKeyAttributes,
         PrivateKeyAttributes.PrivateKeyAttributesBuilder> {
 
+  /**
+   * Constructs a new {@link PrivateKeyAttributesJsonDeserializer}.
+   */
   public PrivateKeyAttributesJsonDeserializer() {
     super(PrivateKeyAttributes.kmipTag, PrivateKeyAttributes.encodingType);
   }

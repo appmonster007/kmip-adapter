@@ -41,6 +41,9 @@ public class PingOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link PingOpRequestPayload} instance wrapping the given value.
+   */
   public static PingOpRequestPayload of(List<KmipDataType> values) {
     return PingOpRequestPayload
         .builder()

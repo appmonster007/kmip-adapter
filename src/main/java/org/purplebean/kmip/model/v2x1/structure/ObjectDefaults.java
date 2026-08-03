@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
+/**
+ * KMIP ObjectDefaults structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ObjectDefaults implements KmipStructure {

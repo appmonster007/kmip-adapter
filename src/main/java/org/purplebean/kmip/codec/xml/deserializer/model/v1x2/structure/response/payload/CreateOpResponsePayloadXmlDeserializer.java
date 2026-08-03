@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CreateOpResponsePayload;
 
+/**
+ * XML deserializer for {@link CreateOpResponsePayload}.
+ */
 public class CreateOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CreateOpResponsePayload,
         CreateOpResponsePayload.CreateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateOpResponsePayloadXmlDeserializer}.
+   */
   public CreateOpResponsePayloadXmlDeserializer() {
     super(CreateOpResponsePayload.kmipTag, CreateOpResponsePayload.encodingType);
   }

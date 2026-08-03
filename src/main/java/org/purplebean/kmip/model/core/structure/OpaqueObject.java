@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.enumeration.OpaqueDataType;
 import org.purplebean.kmip.model.core.type.OpaqueDataValue;
 
+/**
+ * KMIP OpaqueObject attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class OpaqueObject implements ManagedObject, KmipStructure {
@@ -56,6 +59,9 @@ public class OpaqueObject implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link OpaqueObject} instance wrapping the given value.
+   */
   public static OpaqueObject of(
       @NonNull OpaqueDataType opaqueDataType,
       @NonNull OpaqueDataValue opaqueDataValue
@@ -67,6 +73,9 @@ public class OpaqueObject implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link OpaqueObject} instance wrapping the given value.
+   */
   public static OpaqueObject of(List<KmipDataType> values) {
     var builder = OpaqueObject.builder();
     Map<KmipTag, List<KmipDataType>> map = values

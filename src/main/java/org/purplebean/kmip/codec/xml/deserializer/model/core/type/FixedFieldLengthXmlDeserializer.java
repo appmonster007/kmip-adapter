@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.FixedFieldLength;
 
+/**
+ * XML deserializer for {@link FixedFieldLength}.
+ */
 public class FixedFieldLengthXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<FixedFieldLength,
         FixedFieldLength.FixedFieldLengthBuilder> {
 
+  /**
+   * Constructs a new {@link FixedFieldLengthXmlDeserializer}.
+   */
   public FixedFieldLengthXmlDeserializer() {
     super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
   }

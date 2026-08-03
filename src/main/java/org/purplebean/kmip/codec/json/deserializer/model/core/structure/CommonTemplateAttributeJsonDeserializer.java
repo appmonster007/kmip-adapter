@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.Name;
 
+/**
+ * JSON deserializer for {@link CommonTemplateAttribute}.
+ */
 public class CommonTemplateAttributeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CommonTemplateAttribute,
         CommonTemplateAttribute.CommonTemplateAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link CommonTemplateAttributeJsonDeserializer}.
+   */
   public CommonTemplateAttributeJsonDeserializer() {
     super(CommonTemplateAttribute.kmipTag, CommonTemplateAttribute.encodingType);
   }

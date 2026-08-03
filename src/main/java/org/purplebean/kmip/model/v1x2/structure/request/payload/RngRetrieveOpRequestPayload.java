@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.DataLength;
 
+/**
+ * KMIP RngRetrieveOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RngRetrieveOpRequestPayload implements RequestPayloadStructure {
@@ -51,6 +54,9 @@ public class RngRetrieveOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RngRetrieveOpRequestPayload} instance wrapping the given value.
+   */
   public static RngRetrieveOpRequestPayload of(List<KmipDataType> values) {
     var builder = RngRetrieveOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

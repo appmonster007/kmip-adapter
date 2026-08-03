@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ProfileName;
 
+/**
+ * JSON deserializer for {@link ProfileName}.
+ */
 public class ProfileNameJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<ProfileName, ProfileName.ProfileNameBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileNameJsonDeserializer}.
+   */
   public ProfileNameJsonDeserializer() {
     super(ProfileName.kmipTag, ProfileName.encodingType);
   }

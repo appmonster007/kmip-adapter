@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.pa
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.QueryAsynchronousRequestsOpRequestPayload;
 
+/**
+ * XML serializer for {@link QueryAsynchronousRequestsOpRequestPayload}.
+ */
 public class QueryAsynchronousRequestsOpRequestPayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<QueryAsynchronousRequestsOpRequestPayload> {
 }

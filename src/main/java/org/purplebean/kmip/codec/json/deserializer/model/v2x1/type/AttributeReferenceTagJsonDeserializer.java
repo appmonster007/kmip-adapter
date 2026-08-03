@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AttributeReferenceTag;
 
+/**
+ * JSON deserializer for {@link AttributeReferenceTag}.
+ */
 public class AttributeReferenceTagJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttributeReferenceTag,
         AttributeReferenceTag.AttributeReferenceTagBuilder> {
 
+  /**
+   * Constructs a new {@link AttributeReferenceTagJsonDeserializer}.
+   */
   public AttributeReferenceTagJsonDeserializer() {
     super(AttributeReferenceTag.kmipTag, AttributeReferenceTag.encodingType);
   }

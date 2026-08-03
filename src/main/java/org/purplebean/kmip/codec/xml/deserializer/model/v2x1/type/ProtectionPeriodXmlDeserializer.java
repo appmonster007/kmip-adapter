@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ProtectionPeriod;
 
+/**
+ * XML deserializer for {@link ProtectionPeriod}.
+ */
 public class ProtectionPeriodXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProtectionPeriod,
         ProtectionPeriod.ProtectionPeriodBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionPeriodXmlDeserializer}.
+   */
   public ProtectionPeriodXmlDeserializer() {
     super(ProtectionPeriod.kmipTag, ProtectionPeriod.encodingType);
   }

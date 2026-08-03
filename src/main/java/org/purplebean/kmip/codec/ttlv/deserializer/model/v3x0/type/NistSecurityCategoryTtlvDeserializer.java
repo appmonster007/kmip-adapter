@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.type.NistSecurityCategory;
 
+/**
+ * TTLV deserializer for {@link NistSecurityCategory}.
+ */
 public class NistSecurityCategoryTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<NistSecurityCategory,
         NistSecurityCategory.NistSecurityCategoryBuilder> {
 
+  /**
+   * Constructs a new {@link NistSecurityCategoryTtlvDeserializer}.
+   */
   public NistSecurityCategoryTtlvDeserializer() {
     super(NistSecurityCategory.kmipTag, NistSecurityCategory.encodingType);
   }

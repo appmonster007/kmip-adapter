@@ -51,6 +51,9 @@ public class GetConstraintsOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link GetConstraintsOpRequestPayload} instance wrapping the given value.
+   */
   public static GetConstraintsOpRequestPayload of(List<KmipDataType> values) {
     var builder = GetConstraintsOpRequestPayload.builder();
     values.forEach(value -> {
@@ -61,6 +64,9 @@ public class GetConstraintsOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link GetConstraintsOpRequestPayload} instance wrapping the given value.
+   */
   public static GetConstraintsOpRequestPayload of(UniqueIdentifier uniqueIdentifier) {
     return GetConstraintsOpRequestPayload
         .builder()

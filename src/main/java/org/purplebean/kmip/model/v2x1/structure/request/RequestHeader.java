@@ -22,6 +22,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP RequestHeader request structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RequestHeader implements RequestHeaderStructure {
@@ -93,6 +96,9 @@ public class RequestHeader implements RequestHeaderStructure {
         validate();
     }
 
+    /**
+     * Returns the {@link RequestHeader} instance wrapping the given value.
+     */
     public static RequestHeader of(List<KmipDataType> values) {
         var builder = RequestHeader.builder();
         Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));

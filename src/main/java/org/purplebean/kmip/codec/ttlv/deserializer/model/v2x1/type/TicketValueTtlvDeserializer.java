@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * TTLV deserializer for {@link TicketValue}.
+ */
 public class TicketValueTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<TicketValue, TicketValue.TicketValueBuilder> {
 
+  /**
+   * Constructs a new {@link TicketValueTtlvDeserializer}.
+   */
   public TicketValueTtlvDeserializer() {
     super(TicketValue.kmipTag, TicketValue.encodingType);
   }

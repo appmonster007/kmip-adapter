@@ -43,6 +43,9 @@ public class OtpInterval implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpInterval} instance wrapping the given value.
+   */
   public static OtpInterval of(@NonNull Integer value) {
     return new OtpInterval(value);
   }

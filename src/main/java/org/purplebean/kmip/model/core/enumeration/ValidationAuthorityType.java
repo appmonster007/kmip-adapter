@@ -75,6 +75,9 @@ public class ValidationAuthorityType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationAuthorityType} instance wrapping the given value.
+   */
   public static ValidationAuthorityType of(@NonNull Value value) {
     return new ValidationAuthorityType(value);
   }
@@ -253,6 +256,9 @@ public class ValidationAuthorityType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

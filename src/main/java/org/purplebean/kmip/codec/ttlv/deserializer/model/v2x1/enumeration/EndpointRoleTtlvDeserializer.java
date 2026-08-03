@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
 
+/**
+ * TTLV deserializer for {@link EndpointRole}.
+ */
 public class EndpointRoleTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<EndpointRole, EndpointRole.EndpointRoleBuilder> {
 
+  /**
+   * Constructs a new {@link EndpointRoleTtlvDeserializer}.
+   */
   public EndpointRoleTtlvDeserializer() {
     super(EndpointRole.kmipTag, EndpointRole.encodingType);
   }

@@ -47,10 +47,16 @@ public class Description implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Description} instance wrapping the given value.
+   */
   public static Description of(@NonNull String value) {
     return new Description(value);
   }
 
+  /**
+   * Returns the {@link Description} instance wrapping the given value.
+   */
   public static Description of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.IVCounterNonce;
 
+/**
+ * TTLV deserializer for {@link IVCounterNonce}.
+ */
 public class IVCounterNonceTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<IVCounterNonce, IVCounterNonce.IVCounterNonceBuilder> {
 
+  /**
+   * Constructs a new {@link IVCounterNonceTtlvDeserializer}.
+   */
   public IVCounterNonceTtlvDeserializer() {
     super(IVCounterNonce.kmipTag, IVCounterNonce.encodingType);
   }

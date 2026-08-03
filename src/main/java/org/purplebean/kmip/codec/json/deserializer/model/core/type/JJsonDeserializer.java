@@ -7,8 +7,14 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.J;
 
+/**
+ * JSON deserializer for {@link J}.
+ */
 public class JJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<J, J.JBuilder> {
 
+  /**
+   * Constructs a new {@link JJsonDeserializer}.
+   */
   public JJsonDeserializer() {
     super(J.kmipTag, J.encodingType);
   }

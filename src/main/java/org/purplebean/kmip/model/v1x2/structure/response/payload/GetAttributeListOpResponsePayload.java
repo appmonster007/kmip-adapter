@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP GetAttributeListOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class GetAttributeListOpResponsePayload implements ResponsePayloadStructure {
@@ -64,6 +67,9 @@ public class GetAttributeListOpResponsePayload implements ResponsePayloadStructu
     validate();
   }
 
+  /**
+   * Returns the {@link GetAttributeListOpResponsePayload} instance wrapping the given value.
+   */
   public static GetAttributeListOpResponsePayload of(List<KmipDataType> values) {
     var builder = GetAttributeListOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

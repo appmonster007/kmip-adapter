@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
 
+/**
+ * JSON deserializer for {@link BlockCipherMode}.
+ */
 public class BlockCipherModeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<BlockCipherMode, BlockCipherMode.BlockCipherModeBuilder> {
 
+  /**
+   * Constructs a new {@link BlockCipherModeJsonDeserializer}.
+   */
   public BlockCipherModeJsonDeserializer() {
     super(BlockCipherMode.kmipTag, BlockCipherMode.encodingType);
   }

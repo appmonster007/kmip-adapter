@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 
+/**
+ * KMIP Credential attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Credential implements KmipStructure {
@@ -48,6 +51,9 @@ public class Credential implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Credential} instance wrapping the given value.
+   */
   public static Credential of(
       @NonNull CredentialType credentialType,
       @NonNull CredentialValue credentialValue

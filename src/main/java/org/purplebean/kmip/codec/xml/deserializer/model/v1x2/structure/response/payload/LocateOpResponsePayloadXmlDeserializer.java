@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.LocateOpResponsePayload;
 
+/**
+ * XML deserializer for {@link LocateOpResponsePayload}.
+ */
 public class LocateOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<LocateOpResponsePayload,
         LocateOpResponsePayload.LocateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LocateOpResponsePayloadXmlDeserializer}.
+   */
   public LocateOpResponsePayloadXmlDeserializer() {
     super(LocateOpResponsePayload.kmipTag, LocateOpResponsePayload.encodingType);
   }

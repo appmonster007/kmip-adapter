@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for {@link Integer}.
+ */
 public class IntegerXmlDeserializer extends JsonDeserializer<Integer> {
 
   @Override

@@ -56,6 +56,9 @@ public class CredentialInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CredentialInformation} instance wrapping the given value.
+   */
   public static CredentialInformation of(@NonNull List<CredentialType> credentialTypes) {
     return CredentialInformation
         .builder()
@@ -63,6 +66,9 @@ public class CredentialInformation implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link CredentialInformation} instance wrapping the given value.
+   */
   public static CredentialInformation of(@NonNull CredentialType credentialType) {
     return CredentialInformation
         .builder()

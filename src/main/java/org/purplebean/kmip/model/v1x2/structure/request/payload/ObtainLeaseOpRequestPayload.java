@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ObtainLeaseOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ObtainLeaseOpRequestPayload implements RequestPayloadStructure {
@@ -47,6 +50,9 @@ public class ObtainLeaseOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObtainLeaseOpRequestPayload} instance wrapping the given value.
+   */
   public static ObtainLeaseOpRequestPayload of(List<KmipDataType> values) {
     var builder = ObtainLeaseOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

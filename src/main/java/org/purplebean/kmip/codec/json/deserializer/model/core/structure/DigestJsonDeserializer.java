@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.structure.Digest;
 import org.purplebean.kmip.model.core.type.DigestValue;
 
+/**
+ * JSON deserializer for {@link Digest}.
+ */
 public class DigestJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Digest, Digest.DigestBuilder> {
 
+  /**
+   * Constructs a new {@link DigestJsonDeserializer}.
+   */
   public DigestJsonDeserializer() {
     super(Digest.kmipTag, Digest.encodingType);
   }

@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.DigestValue;
 
+/**
+ * XML deserializer for {@link DigestValue}.
+ */
 public class DigestValueXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<DigestValue, DigestValue.DigestValueBuilder> {
 
+  /**
+   * Constructs a new {@link DigestValueXmlDeserializer}.
+   */
   public DigestValueXmlDeserializer() {
     super(DigestValue.kmipTag, DigestValue.encodingType);
   }

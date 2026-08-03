@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP RegisterOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RegisterOpResponsePayload implements ResponsePayloadStructure {
@@ -54,6 +57,9 @@ public class RegisterOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RegisterOpResponsePayload} instance wrapping the given value.
+   */
   public static RegisterOpResponsePayload of(
       @NonNull UniqueIdentifier uniqueIdentifier,
       TemplateAttribute templateAttribute
@@ -65,6 +71,9 @@ public class RegisterOpResponsePayload implements ResponsePayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link RegisterOpResponsePayload} instance wrapping the given value.
+   */
   public static RegisterOpResponsePayload of(List<KmipDataType> values) {
     var builder = RegisterOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

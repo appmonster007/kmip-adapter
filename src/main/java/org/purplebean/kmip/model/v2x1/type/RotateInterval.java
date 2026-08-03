@@ -47,10 +47,16 @@ public class RotateInterval implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateInterval} instance wrapping the given value.
+   */
   public static RotateInterval of(@NonNull Long value) {
     return new RotateInterval(value);
   }
 
+  /**
+   * Returns the {@link RotateInterval} instance wrapping the given value.
+   */
   public static RotateInterval of(@NonNull AttributeName attributeName,
                                   @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

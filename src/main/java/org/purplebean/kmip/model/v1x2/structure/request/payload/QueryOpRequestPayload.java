@@ -19,6 +19,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.enumeration.QueryFunction;
 
+/**
+ * KMIP QueryOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class QueryOpRequestPayload implements RequestPayloadStructure {
@@ -50,6 +53,9 @@ public class QueryOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link QueryOpRequestPayload} instance wrapping the given value.
+   */
   public static QueryOpRequestPayload of(List<KmipDataType> values) {
     var builder = QueryOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

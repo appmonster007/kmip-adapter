@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.WrappingMethod;
 
+/**
+ * JSON deserializer for {@link WrappingMethod}.
+ */
 public class WrappingMethodJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<WrappingMethod, WrappingMethod.WrappingMethodBuilder> {
 
+  /**
+   * Constructs a new {@link WrappingMethodJsonDeserializer}.
+   */
   public WrappingMethodJsonDeserializer() {
     super(WrappingMethod.kmipTag, WrappingMethod.encodingType);
   }

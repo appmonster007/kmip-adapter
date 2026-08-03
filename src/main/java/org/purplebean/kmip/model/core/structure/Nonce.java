@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.NonceId;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * KMIP Nonce attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Nonce implements KmipStructure {
@@ -49,6 +52,9 @@ public class Nonce implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Nonce} instance wrapping the given value.
+   */
   public static Nonce of(
       @NonNull NonceId nonceId,
       @NonNull NonceValue nonceValue

@@ -7,6 +7,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
+/**
+ * TTLV serializer for {@link String}.
+ */
 public class TextStringTtlvSerializer extends TtlvSerializer<String> {
   private final EncodingType type = EncodingType.TEXT_STRING;
 

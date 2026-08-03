@@ -42,6 +42,9 @@ public class DigestedData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DigestedData} instance wrapping the given value.
+   */
   public static DigestedData of(@NonNull ByteBuffer value) {
     return new DigestedData(value);
   }

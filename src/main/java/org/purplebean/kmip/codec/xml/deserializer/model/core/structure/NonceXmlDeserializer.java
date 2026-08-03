@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.Nonce;
 import org.purplebean.kmip.model.core.type.NonceId;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * XML deserializer for {@link Nonce}.
+ */
 public class NonceXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Nonce, Nonce.NonceBuilder> {
 
+  /**
+   * Constructs a new {@link NonceXmlDeserializer}.
+   */
   public NonceXmlDeserializer() {
     super(Nonce.kmipTag, Nonce.encodingType);
   }

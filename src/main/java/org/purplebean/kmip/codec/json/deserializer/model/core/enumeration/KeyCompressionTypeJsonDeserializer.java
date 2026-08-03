@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
 
+/**
+ * JSON deserializer for {@link KeyCompressionType}.
+ */
 public class KeyCompressionTypeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyCompressionType,
         KeyCompressionType.KeyCompressionTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyCompressionTypeJsonDeserializer}.
+   */
   public KeyCompressionTypeJsonDeserializer() {
     super(KeyCompressionType.kmipTag, KeyCompressionType.encodingType);
   }

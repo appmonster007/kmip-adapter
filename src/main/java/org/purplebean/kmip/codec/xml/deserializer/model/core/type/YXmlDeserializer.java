@@ -7,8 +7,14 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * XML deserializer for {@link Y}.
+ */
 public class YXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Y, Y.YBuilder> {
 
+  /**
+   * Constructs a new {@link YXmlDeserializer}.
+   */
   public YXmlDeserializer() {
     super(Y.kmipTag, Y.encodingType);
   }

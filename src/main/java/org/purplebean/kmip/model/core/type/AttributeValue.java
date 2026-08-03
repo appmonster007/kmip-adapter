@@ -55,10 +55,16 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
     validate();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Structure value.
+   */
   public static AttributeValue ofStructure(List<KmipDataType> kmipDataTypes) {
     return ofStructure(kmipDataTypes.toArray(KmipDataType[]::new));
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Structure value.
+   */
   public static AttributeValue ofStructure(KmipDataType... kmipDataTypes) {
     return AttributeValue
         .builder()
@@ -67,6 +73,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Integer value.
+   */
   public static AttributeValue ofInteger(Integer value) {
     return AttributeValue
         .builder()
@@ -75,6 +84,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a MaskInteger value.
+   */
   public static AttributeValue ofMaskInteger(Integer value, String maskString) {
     return AttributeValue
         .builder()
@@ -84,6 +96,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a LongInteger value.
+   */
   public static AttributeValue ofLongInteger(Long value) {
     return AttributeValue
         .builder()
@@ -92,6 +107,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a BigInteger value.
+   */
   public static AttributeValue ofBigInteger(BigInteger value) {
     return AttributeValue
         .builder()
@@ -100,6 +118,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Enumeration value.
+   */
   public static AttributeValue ofEnumeration(KmipEnumeration.Value<?> value) {
     return AttributeValue
         .builder()
@@ -108,6 +129,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Boolean value.
+   */
   public static AttributeValue ofBoolean(Boolean value) {
     return AttributeValue
         .builder()
@@ -116,6 +140,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a TextString value.
+   */
   public static AttributeValue ofTextString(String value) {
     return AttributeValue
         .builder()
@@ -124,6 +151,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a ByteString value.
+   */
   public static AttributeValue ofByteString(ByteBuffer value) {
     return AttributeValue
         .builder()
@@ -132,10 +162,16 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a ByteString value.
+   */
   public static AttributeValue ofByteString(byte[] value) {
     return ofByteString(ByteBuffer.wrap(value));
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a DateTime value.
+   */
   public static AttributeValue ofDateTime(OffsetDateTime value) {
     return AttributeValue
         .builder()
@@ -144,6 +180,9 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
         .build();
   }
 
+  /**
+   * Creates a {@link AttributeValue} wrapping a Interval value.
+   */
   public static AttributeValue ofInterval(Integer value) {
     return AttributeValue
         .builder()

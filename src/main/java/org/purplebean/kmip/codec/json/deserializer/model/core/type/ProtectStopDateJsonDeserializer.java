@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.ProtectStopDate;
 
+/**
+ * JSON deserializer for {@link ProtectStopDate}.
+ */
 public class ProtectStopDateJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtectStopDate, ProtectStopDate.ProtectStopDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectStopDateJsonDeserializer}.
+   */
   public ProtectStopDateJsonDeserializer() {
     super(ProtectStopDate.kmipTag, ProtectStopDate.encodingType);
   }

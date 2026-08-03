@@ -41,6 +41,9 @@ public class AlternativeNameValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AlternativeNameValue} instance wrapping the given value.
+   */
   public static AlternativeNameValue of(@NonNull String value) {
     return new AlternativeNameValue(value);
   }

@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ReplacedObjectLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ReplacedObjectLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class ReplacedObjectLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReplacedObjectLink} instance wrapping the given value.
+   */
   public static ReplacedObjectLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return ReplacedObjectLink
         .builder()

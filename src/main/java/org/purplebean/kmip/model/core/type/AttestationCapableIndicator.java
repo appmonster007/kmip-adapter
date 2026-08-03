@@ -42,6 +42,9 @@ public class AttestationCapableIndicator implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttestationCapableIndicator} instance wrapping the given value.
+   */
   public static AttestationCapableIndicator of(@NonNull Boolean value) {
     return new AttestationCapableIndicator(value);
   }

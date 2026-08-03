@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 
+/**
+ * JSON deserializer for {@link ProcessingStage}.
+ */
 public class ProcessingStageJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProcessingStage, ProcessingStage.ProcessingStageBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessingStageJsonDeserializer}.
+   */
   public ProcessingStageJsonDeserializer() {
     super(ProcessingStage.kmipTag, ProcessingStage.encodingType);
   }

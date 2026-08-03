@@ -43,6 +43,9 @@ public class PrivateExponent implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PrivateExponent} instance wrapping the given value.
+   */
   public static PrivateExponent of(@NonNull BigInteger value) {
     return new PrivateExponent(value);
   }

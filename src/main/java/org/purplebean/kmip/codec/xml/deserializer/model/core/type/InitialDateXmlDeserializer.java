@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.InitialDate;
 
+/**
+ * XML deserializer for {@link InitialDate}.
+ */
 public class InitialDateXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<InitialDate, InitialDate.InitialDateBuilder> {
 
+  /**
+   * Constructs a new {@link InitialDateXmlDeserializer}.
+   */
   public InitialDateXmlDeserializer() {
     super(InitialDate.kmipTag, InitialDate.encodingType);
   }

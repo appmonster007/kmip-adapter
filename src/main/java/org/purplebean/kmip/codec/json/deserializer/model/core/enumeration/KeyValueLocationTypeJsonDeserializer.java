@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.KeyValueLocationType;
 
+/**
+ * JSON deserializer for {@link KeyValueLocationType}.
+ */
 public class KeyValueLocationTypeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyValueLocationType,
         KeyValueLocationType.KeyValueLocationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueLocationTypeJsonDeserializer}.
+   */
   public KeyValueLocationTypeJsonDeserializer() {
     super(KeyValueLocationType.kmipTag, KeyValueLocationType.encodingType);
   }

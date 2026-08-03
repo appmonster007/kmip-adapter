@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.type.NistSecurityCategory;
 
+/**
+ * XML deserializer for {@link NistSecurityCategory}.
+ */
 public class NistSecurityCategoryXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<NistSecurityCategory,
         NistSecurityCategory.NistSecurityCategoryBuilder> {
 
+  /**
+   * Constructs a new {@link NistSecurityCategoryXmlDeserializer}.
+   */
   public NistSecurityCategoryXmlDeserializer() {
     super(NistSecurityCategory.kmipTag, NistSecurityCategory.encodingType);
   }

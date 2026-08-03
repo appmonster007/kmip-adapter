@@ -77,6 +77,9 @@ public class DrbgAlgorithm implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link DrbgAlgorithm} instance wrapping the given value.
+   */
   public static DrbgAlgorithm of(@NonNull Value value) {
     return new DrbgAlgorithm(value);
   }
@@ -254,6 +257,9 @@ public class DrbgAlgorithm implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.SecretData;
 
+/**
+ * JSON deserializer for {@link SecretData}.
+ */
 public class SecretDataJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<SecretData, SecretData.SecretDataBuilder> {
 
+  /**
+   * Constructs a new {@link SecretDataJsonDeserializer}.
+   */
   public SecretDataJsonDeserializer() {
     super(SecretData.kmipTag, SecretData.encodingType);
   }

@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 
+/**
+ * KMIP KeyBlock attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyBlock implements KmipStructure {
@@ -67,6 +70,9 @@ public class KeyBlock implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyBlock} instance wrapping the given value.
+   */
   public static KeyBlock of(
       @NonNull KeyFormatType keyFormatType,
       KeyCompressionType keyCompressionType,

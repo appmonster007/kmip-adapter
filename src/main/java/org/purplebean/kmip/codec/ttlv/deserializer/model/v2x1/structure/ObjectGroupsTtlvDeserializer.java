@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ObjectGroup;
 import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
 
+/**
+ * TTLV deserializer for {@link ObjectGroups}.
+ */
 public class ObjectGroupsTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<ObjectGroups, ObjectGroups.ObjectGroupsBuilder> {
 
+  /**
+   * Constructs a new {@link ObjectGroupsTtlvDeserializer}.
+   */
   public ObjectGroupsTtlvDeserializer() {
     super(ObjectGroups.kmipTag, ObjectGroups.encodingType);
   }

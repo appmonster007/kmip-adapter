@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.RandomIv;
 
+/**
+ * JSON deserializer for {@link RandomIv}.
+ */
 public class RandomIvJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<RandomIv, RandomIv.RandomIvBuilder> {
 
+  /**
+   * Constructs a new {@link RandomIvJsonDeserializer}.
+   */
   public RandomIvJsonDeserializer() {
     super(RandomIv.kmipTag, RandomIv.encodingType);
   }

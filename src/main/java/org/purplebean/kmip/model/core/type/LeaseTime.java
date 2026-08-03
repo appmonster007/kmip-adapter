@@ -46,10 +46,16 @@ public class LeaseTime implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link LeaseTime} instance wrapping the given value.
+   */
   public static LeaseTime of(@NonNull Integer value) {
     return new LeaseTime(value);
   }
 
+  /**
+   * Returns the {@link LeaseTime} instance wrapping the given value.
+   */
   public static LeaseTime of(@NonNull AttributeName attributeName,
                              @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.Pkcs12CertificateLink;
 
+/**
+ * JSON deserializer for {@link Pkcs12CertificateLink}.
+ */
 public class Pkcs12CertificateLinkJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs12CertificateLink,
         Pkcs12CertificateLink.Pkcs12CertificateLinkBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12CertificateLinkJsonDeserializer}.
+   */
   public Pkcs12CertificateLinkJsonDeserializer() {
     super(Pkcs12CertificateLink.kmipTag, Pkcs12CertificateLink.encodingType);
   }

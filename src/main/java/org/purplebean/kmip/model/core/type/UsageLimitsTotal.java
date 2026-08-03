@@ -42,6 +42,9 @@ public class UsageLimitsTotal implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link UsageLimitsTotal} instance wrapping the given value.
+   */
   public static UsageLimitsTotal of(@NonNull Long value) {
     return new UsageLimitsTotal(value);
   }

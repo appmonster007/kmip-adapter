@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.SetEndpointRoleOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link SetEndpointRoleOpRequestPayload}.
+ */
 public class SetEndpointRoleOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SetEndpointRoleOpRequestPayload,
         SetEndpointRoleOpRequestPayload.SetEndpointRoleOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SetEndpointRoleOpRequestPayloadTtlvDeserializer}.
+   */
   public SetEndpointRoleOpRequestPayloadTtlvDeserializer() {
     super(SetEndpointRoleOpRequestPayload.kmipTag, SetEndpointRoleOpRequestPayload.encodingType);
   }

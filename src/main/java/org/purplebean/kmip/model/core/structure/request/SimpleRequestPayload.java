@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * KMIP SimpleRequestPayload structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SimpleRequestPayload implements RequestPayloadStructure {
@@ -32,12 +35,18 @@ public class SimpleRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SimpleRequestPayload} instance wrapping the given value.
+   */
   public static SimpleRequestPayload of() {
     return SimpleRequestPayload
         .builder()
         .build();
   }
 
+  /**
+   * Returns the {@link SimpleRequestPayload} instance wrapping the given value.
+   */
   public static SimpleRequestPayload of(List<KmipDataType> values) {
     return SimpleRequestPayload
         .builder()

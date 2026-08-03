@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
+/**
+ * KMIP SymmetricKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SymmetricKey implements ManagedObject, KmipStructure {
@@ -49,6 +52,9 @@ public class SymmetricKey implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SymmetricKey} instance wrapping the given value.
+   */
   public static SymmetricKey of(
       @NonNull KeyBlock keyBlock
   ) {
@@ -58,6 +64,9 @@ public class SymmetricKey implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link SymmetricKey} instance wrapping the given value.
+   */
   public static SymmetricKey of(List<KmipDataType> values) {
     var builder = SymmetricKey.builder();
     Map<KmipTag, List<KmipDataType>> map = values

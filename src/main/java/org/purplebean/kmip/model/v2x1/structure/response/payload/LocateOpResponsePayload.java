@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.type.LocatedItems;
 
+/**
+ * KMIP LocateOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class LocateOpResponsePayload implements ResponsePayloadStructure {
@@ -55,6 +58,9 @@ public class LocateOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LocateOpResponsePayload} instance wrapping the given value.
+   */
   public static LocateOpResponsePayload of(List<KmipDataType> values) {
     var builder = LocateOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

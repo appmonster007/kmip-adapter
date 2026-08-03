@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.Operations;
 
+/**
+ * XML deserializer for {@link Operations}.
+ */
 public class OperationsXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Operations, Operations.OperationsBuilder> {
 
+  /**
+   * Constructs a new {@link OperationsXmlDeserializer}.
+   */
   public OperationsXmlDeserializer() {
     super(Operations.kmipTag, Operations.encodingType);
   }

@@ -18,12 +18,18 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.util.StringUtils;
 
+/**
+ * TTLV deserializer for {@link AttributeValue}.
+ */
 public class AttributeValueTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AttributeValue, AttributeValue.AttributeValueBuilder> {
 
   private final Stack<EncodingType> encodingTypeStack = new Stack<>();
   private final Stack<Object> valueStack = new Stack<>();
 
+  /**
+   * Constructs a new {@link AttributeValueTtlvDeserializer}.
+   */
   public AttributeValueTtlvDeserializer() {
     super(AttributeValue.kmipTag, null);
   }

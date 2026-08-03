@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.SignatureData;
 
+/**
+ * JSON deserializer for {@link SignatureData}.
+ */
 public class SignatureDataJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SignatureData, SignatureData.SignatureDataBuilder> {
 
+  /**
+   * Constructs a new {@link SignatureDataJsonDeserializer}.
+   */
   public SignatureDataJsonDeserializer() {
     super(SignatureData.kmipTag, SignatureData.encodingType);
   }

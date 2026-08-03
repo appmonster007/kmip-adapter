@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.v2x1.structure.Ticket;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LogoutOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link LogoutOpRequestPayload}.
+ */
 public class LogoutOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<LogoutOpRequestPayload,
         LogoutOpRequestPayload.LogoutOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LogoutOpRequestPayloadJsonDeserializer}.
+   */
   public LogoutOpRequestPayloadJsonDeserializer() {
     super(LogoutOpRequestPayload.kmipTag, LogoutOpRequestPayload.encodingType);
   }

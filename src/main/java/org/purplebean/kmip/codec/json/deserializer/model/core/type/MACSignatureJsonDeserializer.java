@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.MACSignature;
 
+/**
+ * JSON deserializer for {@link MACSignature}.
+ */
 public class MACSignatureJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<MACSignature, MACSignature.MACSignatureBuilder> {
 
+  /**
+   * Constructs a new {@link MACSignatureJsonDeserializer}.
+   */
   public MACSignatureJsonDeserializer() {
     super(MACSignature.kmipTag, MACSignature.encodingType);
   }

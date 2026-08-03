@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * XML deserializer for {@link VendorIdentification}.
+ */
 public class VendorIdentificationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<VendorIdentification,
         VendorIdentification.VendorIdentificationBuilder> {
 
+  /**
+   * Constructs a new {@link VendorIdentificationXmlDeserializer}.
+   */
   public VendorIdentificationXmlDeserializer() {
     super(VendorIdentification.kmipTag, VendorIdentification.encodingType);
   }

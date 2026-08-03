@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.Operations;
 
+/**
+ * JSON deserializer for {@link Operations}.
+ */
 public class OperationsJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Operations, Operations.OperationsBuilder> {
 
+  /**
+   * Constructs a new {@link OperationsJsonDeserializer}.
+   */
   public OperationsJsonDeserializer() {
     super(Operations.kmipTag, Operations.encodingType);
   }

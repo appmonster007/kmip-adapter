@@ -7,10 +7,16 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.ProcessStartDate;
 
+/**
+ * JSON deserializer for {@link ProcessStartDate}.
+ */
 public class ProcessStartDateJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProcessStartDate,
         ProcessStartDate.ProcessStartDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessStartDateJsonDeserializer}.
+   */
   public ProcessStartDateJsonDeserializer() {
     super(ProcessStartDate.kmipTag, ProcessStartDate.encodingType);
   }

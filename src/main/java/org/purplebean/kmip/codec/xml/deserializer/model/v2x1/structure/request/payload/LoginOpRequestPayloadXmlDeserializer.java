@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * XML deserializer for {@link LoginOpRequestPayload}.
+ */
 public class LoginOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<LoginOpRequestPayload,
         LoginOpRequestPayload.LoginOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LoginOpRequestPayloadXmlDeserializer}.
+   */
   public LoginOpRequestPayloadXmlDeserializer() {
     super(LoginOpRequestPayload.kmipTag, LoginOpRequestPayload.encodingType);
   }

@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.ObjectGroup;
 
+/**
+ * KMIP ObjectGroups structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ObjectGroups implements KmipStructure {
@@ -41,6 +44,9 @@ public class ObjectGroups implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObjectGroups} instance wrapping the given value.
+   */
   public static ObjectGroups of(@NonNull List<ObjectGroup> objectGroups) {
     return ObjectGroups
         .builder()

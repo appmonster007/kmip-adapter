@@ -12,10 +12,16 @@ import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetOpRequestPayload;
 
+/**
+ * XML deserializer for {@link GetOpRequestPayload}.
+ */
 public class GetOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<GetOpRequestPayload,
         GetOpRequestPayload.GetOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link GetOpRequestPayloadXmlDeserializer}.
+   */
   public GetOpRequestPayloadXmlDeserializer() {
     super(GetOpRequestPayload.kmipTag, GetOpRequestPayload.encodingType);
   }

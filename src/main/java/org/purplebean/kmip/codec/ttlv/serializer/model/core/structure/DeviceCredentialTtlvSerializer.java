@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.structure;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.structure.DeviceCredential;
 
+/**
+ * TTLV serializer for {@link DeviceCredential}.
+ */
 public class DeviceCredentialTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<DeviceCredential> {
 }

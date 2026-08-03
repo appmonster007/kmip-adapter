@@ -43,6 +43,9 @@ public class PrimeFieldSize implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PrimeFieldSize} instance wrapping the given value.
+   */
   public static PrimeFieldSize of(@NonNull BigInteger value) {
     return new PrimeFieldSize(value);
   }

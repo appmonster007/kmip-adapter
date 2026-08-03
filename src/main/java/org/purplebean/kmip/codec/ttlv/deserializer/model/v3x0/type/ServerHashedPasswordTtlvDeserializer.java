@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.type.ServerHashedPassword;
 
+/**
+ * TTLV deserializer for {@link ServerHashedPassword}.
+ */
 public class ServerHashedPasswordTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ServerHashedPassword,
         ServerHashedPassword.ServerHashedPasswordBuilder> {
 
+  /**
+   * Constructs a new {@link ServerHashedPasswordTtlvDeserializer}.
+   */
   public ServerHashedPasswordTtlvDeserializer() {
     super(ServerHashedPassword.kmipTag, ServerHashedPassword.encodingType);
   }

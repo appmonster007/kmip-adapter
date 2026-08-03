@@ -14,9 +14,15 @@ import org.purplebean.kmip.model.v3x0.type.OtpInterval;
 import org.purplebean.kmip.model.v3x0.type.OtpSeed;
 import org.purplebean.kmip.model.v3x0.type.OtpSerial;
 
+/**
+ * JSON deserializer for {@link OtpCredential}.
+ */
 public class OtpCredentialJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<OtpCredential, OtpCredential.OtpCredentialBuilder> {
 
+  /**
+   * Constructs a new {@link OtpCredentialJsonDeserializer}.
+   */
   public OtpCredentialJsonDeserializer() {
     super(OtpCredential.kmipTag, OtpCredential.encodingType);
   }

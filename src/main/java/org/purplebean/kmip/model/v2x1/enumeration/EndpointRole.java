@@ -72,6 +72,9 @@ public class EndpointRole implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link EndpointRole} instance wrapping the given value.
+   */
   public static EndpointRole of(@NonNull Value value) {
     return new EndpointRole(value);
   }
@@ -246,6 +249,9 @@ public class EndpointRole implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

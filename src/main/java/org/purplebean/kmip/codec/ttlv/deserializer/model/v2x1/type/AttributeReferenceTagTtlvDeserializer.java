@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.AttributeReferenceTag;
 
+/**
+ * TTLV deserializer for {@link AttributeReferenceTag}.
+ */
 public class AttributeReferenceTagTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AttributeReferenceTag,
         AttributeReferenceTag.AttributeReferenceTagBuilder> {
 
+  /**
+   * Constructs a new {@link AttributeReferenceTagTtlvDeserializer}.
+   */
   public AttributeReferenceTagTtlvDeserializer() {
     super(AttributeReferenceTag.kmipTag, AttributeReferenceTag.encodingType);
   }

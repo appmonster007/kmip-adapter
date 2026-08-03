@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ProfileVersionMinor;
 
+/**
+ * JSON deserializer for {@link ProfileVersionMinor}.
+ */
 public class ProfileVersionMinorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProfileVersionMinor,
         ProfileVersionMinor.ProfileVersionMinorBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileVersionMinorJsonDeserializer}.
+   */
   public ProfileVersionMinorJsonDeserializer() {
     super(ProfileVersionMinor.kmipTag, ProfileVersionMinor.encodingType);
   }

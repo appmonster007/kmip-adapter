@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
+/**
+ * XML deserializer for {@link Pkcs11ReturnCode}.
+ */
 public class Pkcs11ReturnCodeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs11ReturnCode,
         Pkcs11ReturnCode.Pkcs11ReturnCodeBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11ReturnCodeXmlDeserializer}.
+   */
   public Pkcs11ReturnCodeXmlDeserializer() {
     super(Pkcs11ReturnCode.kmipTag, Pkcs11ReturnCode.encodingType);
   }

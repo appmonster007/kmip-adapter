@@ -82,6 +82,9 @@ public class OtpCredential implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpCredential} instance wrapping the given value.
+   */
   public static OtpCredential of(
       @NonNull OtpAlgorithm otpAlgorithm,
       OtpDigest otpDigest,
@@ -102,6 +105,9 @@ public class OtpCredential implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link OtpCredential} instance wrapping the given value.
+   */
   public static OtpCredential of(@NonNull OtpAlgorithm otpAlgorithm) {
     return OtpCredential
         .builder()

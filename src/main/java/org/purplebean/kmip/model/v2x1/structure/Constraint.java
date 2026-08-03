@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP Constraint structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Constraint implements KmipStructure {
@@ -42,6 +45,9 @@ public class Constraint implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Constraint} instance wrapping the given value.
+   */
   public static Constraint of(List<KmipDataType> values) {
     return Constraint
         .builder()

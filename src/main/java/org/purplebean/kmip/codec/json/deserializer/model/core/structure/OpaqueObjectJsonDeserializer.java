@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.OpaqueDataType;
 import org.purplebean.kmip.model.core.structure.OpaqueObject;
 import org.purplebean.kmip.model.core.type.OpaqueDataValue;
 
+/**
+ * JSON deserializer for {@link OpaqueObject}.
+ */
 public class OpaqueObjectJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<OpaqueObject, OpaqueObject.OpaqueObjectBuilder> {
 
+  /**
+   * Constructs a new {@link OpaqueObjectJsonDeserializer}.
+   */
   public OpaqueObjectJsonDeserializer() {
     super(OpaqueObject.kmipTag, OpaqueObject.encodingType);
   }

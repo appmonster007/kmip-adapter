@@ -41,6 +41,9 @@ public class LogOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LogOpResponsePayload} instance wrapping the given value.
+   */
   public static LogOpResponsePayload of(List<KmipDataType> values) {
     return LogOpResponsePayload
         .builder()

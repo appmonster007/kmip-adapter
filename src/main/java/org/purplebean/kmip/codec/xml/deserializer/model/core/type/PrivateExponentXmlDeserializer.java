@@ -7,9 +7,15 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.PrivateExponent;
 
+/**
+ * XML deserializer for {@link PrivateExponent}.
+ */
 public class PrivateExponentXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PrivateExponent, PrivateExponent.PrivateExponentBuilder> {
 
+  /**
+   * Constructs a new {@link PrivateExponentXmlDeserializer}.
+   */
   public PrivateExponentXmlDeserializer() {
     super(PrivateExponent.kmipTag, PrivateExponent.encodingType);
   }

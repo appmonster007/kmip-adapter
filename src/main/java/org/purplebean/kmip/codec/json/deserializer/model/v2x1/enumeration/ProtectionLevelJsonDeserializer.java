@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.ProtectionLevel;
 
+/**
+ * JSON deserializer for {@link ProtectionLevel}.
+ */
 public class ProtectionLevelJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtectionLevel, ProtectionLevel.ProtectionLevelBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionLevelJsonDeserializer}.
+   */
   public ProtectionLevelJsonDeserializer() {
     super(ProtectionLevel.kmipTag, ProtectionLevel.encodingType);
   }

@@ -9,8 +9,14 @@ import org.purplebean.kmip.model.v1x2.structure.response.payload.ArchiveOpRespon
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+/**
+ * TTLV deserializer for {@link ArchiveOpResponsePayload}.
+ */
 public class ArchiveOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ArchiveOpResponsePayload, ArchiveOpResponsePayload.ArchiveOpResponsePayloadBuilder> {
 
+    /**
+     * Constructs a new {@link ArchiveOpResponsePayloadTtlvDeserializer}.
+     */
     public ArchiveOpResponsePayloadTtlvDeserializer() {
         super(ArchiveOpResponsePayload.kmipTag, ArchiveOpResponsePayload.encodingType);
     }

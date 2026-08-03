@@ -42,6 +42,9 @@ public class CorrelationValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CorrelationValue} instance wrapping the given value.
+   */
   public static CorrelationValue of(@NonNull ByteBuffer value) {
     return new CorrelationValue(value);
   }

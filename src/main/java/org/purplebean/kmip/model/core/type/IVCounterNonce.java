@@ -42,10 +42,16 @@ public class IVCounterNonce implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link IVCounterNonce} instance wrapping the given value.
+   */
   public static IVCounterNonce of(@NonNull ByteBuffer value) {
     return new IVCounterNonce(value);
   }
 
+  /**
+   * Returns the {@link IVCounterNonce} instance wrapping the given value.
+   */
   public static IVCounterNonce of(byte[] value) {
     return IVCounterNonce
         .builder()

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.type.DeactivationMessage;
 
+/**
+ * XML deserializer for {@link DeactivationMessage}.
+ */
 public class DeactivationMessageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DeactivationMessage,
         DeactivationMessage.DeactivationMessageBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationMessageXmlDeserializer}.
+   */
   public DeactivationMessageXmlDeserializer() {
     super(DeactivationMessage.kmipTag, DeactivationMessage.encodingType);
   }

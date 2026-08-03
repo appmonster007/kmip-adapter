@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP Attributes structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Attributes implements KmipStructure {
@@ -43,6 +46,9 @@ public class Attributes implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Attributes} instance wrapping the given value.
+   */
   public static Attributes of(List<KmipAttribute> attributes) {
     return Attributes
         .builder()

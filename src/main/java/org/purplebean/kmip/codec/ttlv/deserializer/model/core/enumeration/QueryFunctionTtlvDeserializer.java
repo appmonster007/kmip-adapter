@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.QueryFunction;
 
+/**
+ * TTLV deserializer for {@link QueryFunction}.
+ */
 public class QueryFunctionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<QueryFunction, QueryFunction.QueryFunctionBuilder> {
 
+  /**
+   * Constructs a new {@link QueryFunctionTtlvDeserializer}.
+   */
   public QueryFunctionTtlvDeserializer() {
     super(QueryFunction.kmipTag, QueryFunction.encodingType);
   }

@@ -83,6 +83,9 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReKeyKeyPairOpRequestPayload} instance wrapping the given value.
+   */
   public static ReKeyKeyPairOpRequestPayload of(
       PrivateKeyUniqueIdentifier privateKeyUniqueIdentifier,
       Offset offset,
@@ -100,6 +103,9 @@ public class ReKeyKeyPairOpRequestPayload implements RequestPayloadStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ReKeyKeyPairOpRequestPayload} instance wrapping the given value.
+   */
   public static ReKeyKeyPairOpRequestPayload of(List<KmipDataType> values) {
     var builder = ReKeyKeyPairOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

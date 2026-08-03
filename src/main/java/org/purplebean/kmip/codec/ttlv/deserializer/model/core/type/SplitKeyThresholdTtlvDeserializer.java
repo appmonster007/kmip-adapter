@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * TTLV deserializer for {@link SplitKeyThreshold}.
+ */
 public class SplitKeyThresholdTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SplitKeyThreshold,
         SplitKeyThreshold.SplitKeyThresholdBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyThresholdTtlvDeserializer}.
+   */
   public SplitKeyThresholdTtlvDeserializer() {
     super(SplitKeyThreshold.kmipTag, SplitKeyThreshold.encodingType);
   }

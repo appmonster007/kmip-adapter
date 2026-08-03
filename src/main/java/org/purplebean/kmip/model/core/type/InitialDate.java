@@ -48,10 +48,16 @@ public class InitialDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link InitialDate} instance wrapping the given value.
+   */
   public static InitialDate of(@NonNull OffsetDateTime value) {
     return new InitialDate(value);
   }
 
+  /**
+   * Returns the {@link InitialDate} instance wrapping the given value.
+   */
   public static InitialDate of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

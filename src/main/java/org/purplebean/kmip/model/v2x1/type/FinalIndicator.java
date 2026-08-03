@@ -40,6 +40,9 @@ public class FinalIndicator implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link FinalIndicator} instance wrapping the given value.
+   */
   public static FinalIndicator of(@NonNull Boolean value) {
     return new FinalIndicator(value);
   }

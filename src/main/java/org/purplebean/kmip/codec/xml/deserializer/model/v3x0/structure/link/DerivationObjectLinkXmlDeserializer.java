@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.DerivationObjectLink;
 
+/**
+ * XML deserializer for {@link DerivationObjectLink}.
+ */
 public class DerivationObjectLinkXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DerivationObjectLink,
         DerivationObjectLink.DerivationObjectLinkBuilder> {
 
+  /**
+   * Constructs a new {@link DerivationObjectLinkXmlDeserializer}.
+   */
   public DerivationObjectLinkXmlDeserializer() {
     super(DerivationObjectLink.kmipTag, DerivationObjectLink.encodingType);
   }

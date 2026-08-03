@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
 
+/**
+ * JSON deserializer for {@link Pkcs11InputParameters}.
+ */
 public class Pkcs11InputParametersJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<Pkcs11InputParameters,
         Pkcs11InputParameters.Pkcs11InputParametersBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11InputParametersJsonDeserializer}.
+   */
   public Pkcs11InputParametersJsonDeserializer() {
     super(Pkcs11InputParameters.kmipTag, Pkcs11InputParameters.encodingType);
   }

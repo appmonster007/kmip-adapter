@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.v2x1.enumeration.EndpointRole;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayload;
 
+/**
+ * XML deserializer for {@link SetEndpointRoleOpResponsePayload}.
+ */
 public class SetEndpointRoleOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SetEndpointRoleOpResponsePayload,
         SetEndpointRoleOpResponsePayload.SetEndpointRoleOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SetEndpointRoleOpResponsePayloadXmlDeserializer}.
+   */
   public SetEndpointRoleOpResponsePayloadXmlDeserializer() {
     super(SetEndpointRoleOpResponsePayload.kmipTag, SetEndpointRoleOpResponsePayload.encodingType);
   }

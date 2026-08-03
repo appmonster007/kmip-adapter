@@ -42,10 +42,16 @@ public class SubjectAlternativeName implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SubjectAlternativeName} instance wrapping the given value.
+   */
   public static SubjectAlternativeName of(@NonNull ByteBuffer value) {
     return new SubjectAlternativeName(value);
   }
 
+  /**
+   * Returns the {@link SubjectAlternativeName} instance wrapping the given value.
+   */
   public static SubjectAlternativeName of(byte[] value) {
     return SubjectAlternativeName
         .builder()

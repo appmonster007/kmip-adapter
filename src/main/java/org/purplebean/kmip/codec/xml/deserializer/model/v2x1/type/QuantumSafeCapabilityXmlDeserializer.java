@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 
+/**
+ * XML deserializer for {@link QuantumSafeCapability}.
+ */
 public class QuantumSafeCapabilityXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<QuantumSafeCapability,
         QuantumSafeCapability.QuantumSafeCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link QuantumSafeCapabilityXmlDeserializer}.
+   */
   public QuantumSafeCapabilityXmlDeserializer() {
     super(QuantumSafeCapability.kmipTag, QuantumSafeCapability.encodingType);
   }

@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * XML deserializer for {@link RequestPayloadStructure}.
+ */
 public class RequestPayloadStructureXmlDeserializer
     extends KmipDataTypeXmlDeserializer<RequestPayloadStructure> {
 

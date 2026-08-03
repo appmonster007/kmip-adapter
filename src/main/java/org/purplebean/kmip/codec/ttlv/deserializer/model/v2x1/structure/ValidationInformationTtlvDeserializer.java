@@ -18,10 +18,16 @@ import org.purplebean.kmip.model.v2x1.type.ValidationVendorUri;
 import org.purplebean.kmip.model.v2x1.type.ValidationVersionMajor;
 import org.purplebean.kmip.model.v2x1.type.ValidationVersionMinor;
 
+/**
+ * TTLV deserializer for {@link ValidationInformation}.
+ */
 public class ValidationInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidationInformation,
         ValidationInformation.ValidationInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationInformationTtlvDeserializer}.
+   */
   public ValidationInformationTtlvDeserializer() {
     super(ValidationInformation.kmipTag, ValidationInformation.encodingType);
   }

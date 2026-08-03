@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.TtlvDataType;
 import org.purplebean.kmip.model.core.structure.VendorExtension;
 
+/**
+ * JSON deserializer for {@link VendorExtension}.
+ */
 public class VendorExtensionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<VendorExtension, VendorExtension.VendorExtensionBuilder> {
 
+  /**
+   * Constructs a new {@link VendorExtensionJsonDeserializer}.
+   */
   public VendorExtensionJsonDeserializer() {
     super(VendorExtension.kmipTag, VendorExtension.encodingType);
   }

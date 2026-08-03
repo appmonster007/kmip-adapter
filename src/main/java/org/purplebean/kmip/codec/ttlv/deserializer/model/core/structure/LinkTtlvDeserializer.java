@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.LinkType;
 import org.purplebean.kmip.model.core.structure.Link;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * TTLV deserializer for {@link Link}.
+ */
 public class LinkTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Link, Link.LinkBuilder> {
 
+  /**
+   * Constructs a new {@link LinkTtlvDeserializer}.
+   */
   public LinkTtlvDeserializer() {
     super(Link.kmipTag, Link.encodingType);
   }

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 
+/**
+ * XML deserializer for {@link RecommendedCurve}.
+ */
 public class RecommendedCurveXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RecommendedCurve,
         RecommendedCurve.RecommendedCurveBuilder> {
 
+  /**
+   * Constructs a new {@link RecommendedCurveXmlDeserializer}.
+   */
   public RecommendedCurveXmlDeserializer() {
     super(RecommendedCurve.kmipTag, RecommendedCurve.encodingType);
   }

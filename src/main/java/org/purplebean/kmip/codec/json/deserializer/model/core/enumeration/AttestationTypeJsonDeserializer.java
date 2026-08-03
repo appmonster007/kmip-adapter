@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.AttestationType;
 
+/**
+ * JSON deserializer for {@link AttestationType}.
+ */
 public class AttestationTypeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttestationType, AttestationType.AttestationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationTypeJsonDeserializer}.
+   */
   public AttestationTypeJsonDeserializer() {
     super(AttestationType.kmipTag, AttestationType.encodingType);
   }

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ValidationCertificateUri;
 
+/**
+ * XML deserializer for {@link ValidationCertificateUri}.
+ */
 public class ValidationCertificateUriXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ValidationCertificateUri,
         ValidationCertificateUri.ValidationCertificateUriBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationCertificateUriXmlDeserializer}.
+   */
   public ValidationCertificateUriXmlDeserializer() {
     super(ValidationCertificateUri.kmipTag, ValidationCertificateUri.encodingType);
   }

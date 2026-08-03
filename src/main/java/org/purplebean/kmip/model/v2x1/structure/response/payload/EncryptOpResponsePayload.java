@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * KMIP EncryptOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class EncryptOpResponsePayload implements ResponsePayloadStructure {
@@ -62,6 +65,9 @@ public class EncryptOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link EncryptOpResponsePayload} instance wrapping the given value.
+   */
   public static EncryptOpResponsePayload of(List<KmipDataType> values) {
     var builder = EncryptOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

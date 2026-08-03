@@ -45,6 +45,9 @@ public class TimeStamp implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link TimeStamp} instance wrapping the given value.
+   */
   public static TimeStamp of(@NonNull OffsetDateTime value) {
     return new TimeStamp(value);
   }

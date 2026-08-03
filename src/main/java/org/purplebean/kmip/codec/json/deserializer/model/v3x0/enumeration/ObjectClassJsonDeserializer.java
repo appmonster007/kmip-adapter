@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.enumeration.ObjectClass;
 
+/**
+ * JSON deserializer for {@link ObjectClass}.
+ */
 public class ObjectClassJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<ObjectClass, ObjectClass.ObjectClassBuilder> {
 
+  /**
+   * Constructs a new {@link ObjectClassJsonDeserializer}.
+   */
   public ObjectClassJsonDeserializer() {
     super(ObjectClass.kmipTag, ObjectClass.encodingType);
   }

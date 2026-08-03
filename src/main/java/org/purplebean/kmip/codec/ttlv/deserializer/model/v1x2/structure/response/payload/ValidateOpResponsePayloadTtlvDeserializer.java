@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.ValidateOpResponsePayload;
 
+/**
+ * TTLV deserializer for {@link ValidateOpResponsePayload}.
+ */
 public class ValidateOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidateOpResponsePayload,
         ValidateOpResponsePayload.ValidateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ValidateOpResponsePayloadTtlvDeserializer}.
+   */
   public ValidateOpResponsePayloadTtlvDeserializer() {
     super(ValidateOpResponsePayload.kmipTag, ValidateOpResponsePayload.encodingType);
   }

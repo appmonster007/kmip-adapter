@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.MacData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.MacOpResponsePayload;
 
+/**
+ * TTLV deserializer for {@link MacOpResponsePayload}.
+ */
 public class MacOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MacOpResponsePayload,
         MacOpResponsePayload.MacOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link MacOpResponsePayloadTtlvDeserializer}.
+   */
   public MacOpResponsePayloadTtlvDeserializer() {
     super(MacOpResponsePayload.kmipTag, MacOpResponsePayload.encodingType);
   }

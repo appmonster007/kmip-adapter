@@ -43,6 +43,9 @@ public class Modulus implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Modulus} instance wrapping the given value.
+   */
   public static Modulus of(@NonNull BigInteger value) {
     return new Modulus(value);
   }

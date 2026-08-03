@@ -40,10 +40,16 @@ public class Pkcs11ReturnCode implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11ReturnCode} instance wrapping the given value.
+   */
   public static Pkcs11ReturnCode of(@NonNull Integer value) {
     return new Pkcs11ReturnCode(value);
   }
 
+  /**
+   * Returns the {@link Pkcs11ReturnCode} instance wrapping the given value.
+   */
   public static Pkcs11ReturnCode of(int value) {
     return new Pkcs11ReturnCode(value);
   }

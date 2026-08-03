@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.UsageLimitsUnit;
 
+/**
+ * XML deserializer for {@link UsageLimitsUnit}.
+ */
 public class UsageLimitsUnitXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<UsageLimitsUnit, UsageLimitsUnit.UsageLimitsUnitBuilder> {
 
+  /**
+   * Constructs a new {@link UsageLimitsUnitXmlDeserializer}.
+   */
   public UsageLimitsUnitXmlDeserializer() {
     super(UsageLimitsUnit.kmipTag, UsageLimitsUnit.encodingType);
   }

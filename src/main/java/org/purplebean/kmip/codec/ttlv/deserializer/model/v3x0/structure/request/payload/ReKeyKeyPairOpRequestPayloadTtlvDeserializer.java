@@ -15,10 +15,16 @@ import org.purplebean.kmip.model.v2x1.structure.PublicKeyAttributes;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayload;
 import org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier;
 
+/**
+ * TTLV deserializer for {@link ReKeyKeyPairOpRequestPayload}.
+ */
 public class ReKeyKeyPairOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ReKeyKeyPairOpRequestPayload,
         ReKeyKeyPairOpRequestPayload.ReKeyKeyPairOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ReKeyKeyPairOpRequestPayloadTtlvDeserializer}.
+   */
   public ReKeyKeyPairOpRequestPayloadTtlvDeserializer() {
     super(ReKeyKeyPairOpRequestPayload.kmipTag, ReKeyKeyPairOpRequestPayload.encodingType);
   }

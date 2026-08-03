@@ -42,6 +42,9 @@ public class ServerHashedPassword implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ServerHashedPassword} instance wrapping the given value.
+   */
   public static ServerHashedPassword of(@NonNull ByteBuffer value) {
     return new ServerHashedPassword(value);
   }

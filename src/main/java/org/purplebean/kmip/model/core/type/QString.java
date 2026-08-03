@@ -41,10 +41,16 @@ public class QString implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link QString} instance wrapping the given value.
+   */
   public static QString of(@NonNull ByteBuffer value) {
     return new QString(value);
   }
 
+  /**
+   * Returns the {@link QString} instance wrapping the given value.
+   */
   public static QString of(byte[] value) {
     return new QString(ByteBuffer.wrap(value));
   }

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.v3x0.structure.HashedPasswordCredential;
 import org.purplebean.kmip.model.v3x0.type.HashedPasswordUsername;
 import org.purplebean.kmip.model.v3x0.type.HashedUsernamePassword;
 
+/**
+ * XML deserializer for {@link HashedPasswordCredential}.
+ */
 public class HashedPasswordCredentialXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<HashedPasswordCredential,
         HashedPasswordCredential.HashedPasswordCredentialBuilder> {
 
+  /**
+   * Constructs a new {@link HashedPasswordCredentialXmlDeserializer}.
+   */
   public HashedPasswordCredentialXmlDeserializer() {
     super(HashedPasswordCredential.kmipTag, HashedPasswordCredential.encodingType);
   }

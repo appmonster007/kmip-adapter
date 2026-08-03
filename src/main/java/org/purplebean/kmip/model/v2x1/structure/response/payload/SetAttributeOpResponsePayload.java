@@ -53,6 +53,9 @@ public class SetAttributeOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SetAttributeOpResponsePayload} instance wrapping the given value.
+   */
   public static SetAttributeOpResponsePayload of(List<KmipDataType> values) {
     var builder = SetAttributeOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class SetAttributeOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link SetAttributeOpResponsePayload} instance wrapping the given value.
+   */
   public static SetAttributeOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return SetAttributeOpResponsePayload
         .builder()

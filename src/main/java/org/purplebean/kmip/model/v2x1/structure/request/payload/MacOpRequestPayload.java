@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * KMIP MacOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacOpRequestPayload implements RequestPayloadStructure {
@@ -66,6 +69,9 @@ public class MacOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacOpRequestPayload} instance wrapping the given value.
+   */
   public static MacOpRequestPayload of(List<KmipDataType> values) {
     var builder = MacOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

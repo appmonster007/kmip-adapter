@@ -9,10 +9,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.KeyValueStructure;
 
+/**
+ * JSON deserializer for {@link KeyValueStructure}.
+ */
 public class KeyValueStructureJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyValueStructure,
         KeyValueStructure.KeyValueStructureBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueStructureJsonDeserializer}.
+   */
   public KeyValueStructureJsonDeserializer() {
     super(KeyValueStructure.kmipTag, KeyValueStructure.encodingType);
   }

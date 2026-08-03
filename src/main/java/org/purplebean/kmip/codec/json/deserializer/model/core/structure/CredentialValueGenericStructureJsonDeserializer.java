@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.CredentialValueGenericStructure;
 
+/**
+ * JSON deserializer for {@link CredentialValueGenericStructure}.
+ */
 public class CredentialValueGenericStructureJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CredentialValueGenericStructure,
         CredentialValueGenericStructure.CredentialValueGenericStructureBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialValueGenericStructureJsonDeserializer}.
+   */
   public CredentialValueGenericStructureJsonDeserializer() {
     super(CredentialValueGenericStructure.kmipTag, CredentialValueGenericStructure.encodingType);
   }

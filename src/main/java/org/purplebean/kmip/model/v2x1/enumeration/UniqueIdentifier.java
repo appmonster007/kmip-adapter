@@ -79,6 +79,9 @@ public class UniqueIdentifier implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link UniqueIdentifier} instance wrapping the given value.
+   */
   public static UniqueIdentifier of(@NonNull Value value) {
     return new UniqueIdentifier(value);
   }
@@ -208,6 +211,9 @@ public class UniqueIdentifier implements KmipEnumeration {
     return AttributeValue.ofEnumeration(value);
   }
 
+  /**
+   * Standard KMIP-defined values.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -264,9 +270,15 @@ public class UniqueIdentifier implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+  /**
+   * Represents a specific value of the enclosing enumeration.
+   */
   public interface Value extends KmipEnumeration.Value<UniqueIdentifier> {
   }
 
+  /**
+   * Vendor-defined extension value.
+   */
   @Getter
   @AllArgsConstructor
   @ToString
@@ -277,6 +289,9 @@ public class UniqueIdentifier implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -41,6 +41,9 @@ public class ValidationProfile implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationProfile} instance wrapping the given value.
+   */
   public static ValidationProfile of(@NonNull String value) {
     return new ValidationProfile(value);
   }

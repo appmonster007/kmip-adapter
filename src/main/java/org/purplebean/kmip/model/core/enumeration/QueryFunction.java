@@ -96,6 +96,9 @@ public class QueryFunction implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link QueryFunction} instance wrapping the given value.
+   */
   public static QueryFunction of(@NonNull Value value) {
     return new QueryFunction(value);
   }
@@ -297,6 +300,9 @@ public class QueryFunction implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

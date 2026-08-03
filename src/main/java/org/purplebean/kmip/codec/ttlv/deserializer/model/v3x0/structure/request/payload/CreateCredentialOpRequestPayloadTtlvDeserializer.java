@@ -9,10 +9,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link CreateCredentialOpRequestPayload}.
+ */
 public class CreateCredentialOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CreateCredentialOpRequestPayload,
         CreateCredentialOpRequestPayload.CreateCredentialOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateCredentialOpRequestPayloadTtlvDeserializer}.
+   */
   public CreateCredentialOpRequestPayloadTtlvDeserializer() {
     super(CreateCredentialOpRequestPayload.kmipTag, CreateCredentialOpRequestPayload.encodingType);
   }

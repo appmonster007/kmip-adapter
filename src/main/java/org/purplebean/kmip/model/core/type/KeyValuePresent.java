@@ -45,10 +45,16 @@ public class KeyValuePresent implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValuePresent} instance wrapping the given value.
+   */
   public static KeyValuePresent of(@NonNull Boolean value) {
     return new KeyValuePresent(value);
   }
 
+  /**
+   * Returns the {@link KeyValuePresent} instance wrapping the given value.
+   */
   public static KeyValuePresent of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

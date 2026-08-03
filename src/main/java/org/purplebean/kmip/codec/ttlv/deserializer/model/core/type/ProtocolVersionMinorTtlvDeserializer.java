@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 
+/**
+ * TTLV deserializer for {@link ProtocolVersionMinor}.
+ */
 public class ProtocolVersionMinorTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtocolVersionMinor,
         ProtocolVersionMinor.ProtocolVersionMinorBuilder> {
 
+  /**
+   * Constructs a new {@link ProtocolVersionMinorTtlvDeserializer}.
+   */
   public ProtocolVersionMinorTtlvDeserializer() {
     super(ProtocolVersionMinor.kmipTag, ProtocolVersionMinor.encodingType);
   }

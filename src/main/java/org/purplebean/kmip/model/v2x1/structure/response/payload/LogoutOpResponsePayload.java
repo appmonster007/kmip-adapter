@@ -41,6 +41,9 @@ public class LogoutOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LogoutOpResponsePayload} instance wrapping the given value.
+   */
   public static LogoutOpResponsePayload of(List<KmipDataType> values) {
     return LogoutOpResponsePayload
         .builder()

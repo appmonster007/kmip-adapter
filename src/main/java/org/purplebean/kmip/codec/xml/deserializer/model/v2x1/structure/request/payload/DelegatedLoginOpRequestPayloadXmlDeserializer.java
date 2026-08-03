@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.structure.Rights;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * XML deserializer for {@link DelegatedLoginOpRequestPayload}.
+ */
 public class DelegatedLoginOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DelegatedLoginOpRequestPayload,
         DelegatedLoginOpRequestPayload.DelegatedLoginOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DelegatedLoginOpRequestPayloadXmlDeserializer}.
+   */
   public DelegatedLoginOpRequestPayloadXmlDeserializer() {
     super(DelegatedLoginOpRequestPayload.kmipTag, DelegatedLoginOpRequestPayload.encodingType);
   }

@@ -46,6 +46,9 @@ public class CurrentAttribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CurrentAttribute} instance wrapping the given value.
+   */
   public static CurrentAttribute of(List<KmipDataType> values) {
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("CurrentAttribute requires exactly one attribute child");

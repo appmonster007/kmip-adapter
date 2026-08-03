@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UsageLimitsTotal;
 
+/**
+ * TTLV deserializer for {@link UsageLimitsTotal}.
+ */
 public class UsageLimitsTotalTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<UsageLimitsTotal,
         UsageLimitsTotal.UsageLimitsTotalBuilder> {
 
+  /**
+   * Constructs a new {@link UsageLimitsTotalTtlvDeserializer}.
+   */
   public UsageLimitsTotalTtlvDeserializer() {
     super(UsageLimitsTotal.kmipTag, UsageLimitsTotal.encodingType);
   }

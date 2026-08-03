@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * XML deserializer for {@link NonceValue}.
+ */
 public class NonceValueXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<NonceValue, NonceValue.NonceValueBuilder> {
 
+  /**
+   * Constructs a new {@link NonceValueXmlDeserializer}.
+   */
   public NonceValueXmlDeserializer() {
     super(NonceValue.kmipTag, NonceValue.encodingType);
   }

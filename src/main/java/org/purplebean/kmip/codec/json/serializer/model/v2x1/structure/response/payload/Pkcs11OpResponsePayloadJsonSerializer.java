@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
 
+/**
+ * JSON serializer for {@link Pkcs11OpResponsePayload}.
+ */
 public class Pkcs11OpResponsePayloadJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<Pkcs11OpResponsePayload> {
 }

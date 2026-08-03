@@ -42,10 +42,16 @@ public class MacData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MacData} instance wrapping the given value.
+   */
   public static MacData of(@NonNull ByteBuffer value) {
     return new MacData(value);
   }
 
+  /**
+   * Returns the {@link MacData} instance wrapping the given value.
+   */
   public static MacData of(byte[] value) {
     return MacData
         .builder()

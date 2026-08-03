@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 
+/**
+ * TTLV deserializer for {@link ProtocolVersion}.
+ */
 public class ProtocolVersionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtocolVersion, ProtocolVersion.ProtocolVersionBuilder> {
 
+  /**
+   * Constructs a new {@link ProtocolVersionTtlvDeserializer}.
+   */
   public ProtocolVersionTtlvDeserializer() {
     super(ProtocolVersion.kmipTag, ProtocolVersion.encodingType);
   }

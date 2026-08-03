@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ShortUniqueIdentifier;
 
+/**
+ * JSON deserializer for {@link ShortUniqueIdentifier}.
+ */
 public class ShortUniqueIdentifierJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ShortUniqueIdentifier,
         ShortUniqueIdentifier.ShortUniqueIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link ShortUniqueIdentifierJsonDeserializer}.
+   */
   public ShortUniqueIdentifierJsonDeserializer() {
     super(ShortUniqueIdentifier.kmipTag, ShortUniqueIdentifier.encodingType);
   }

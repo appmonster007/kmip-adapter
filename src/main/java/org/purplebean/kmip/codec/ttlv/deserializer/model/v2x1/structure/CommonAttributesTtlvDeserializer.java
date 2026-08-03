@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.CommonAttributes;
 
+/**
+ * TTLV deserializer for {@link CommonAttributes}.
+ */
 public class CommonAttributesTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CommonAttributes,
         CommonAttributes.CommonAttributesBuilder> {
 
+  /**
+   * Constructs a new {@link CommonAttributesTtlvDeserializer}.
+   */
   public CommonAttributesTtlvDeserializer() {
     super(CommonAttributes.kmipTag, CommonAttributes.encodingType);
   }

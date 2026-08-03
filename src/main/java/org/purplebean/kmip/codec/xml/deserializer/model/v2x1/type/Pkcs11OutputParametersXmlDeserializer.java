@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
+/**
+ * XML deserializer for {@link Pkcs11OutputParameters}.
+ */
 public class Pkcs11OutputParametersXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs11OutputParameters,
         Pkcs11OutputParameters.Pkcs11OutputParametersBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11OutputParametersXmlDeserializer}.
+   */
   public Pkcs11OutputParametersXmlDeserializer() {
     super(Pkcs11OutputParameters.kmipTag, Pkcs11OutputParameters.encodingType);
   }

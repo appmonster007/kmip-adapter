@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
 
+/**
+ * XML deserializer for {@link DigitalSignatureAlgorithm}.
+ */
 public class DigitalSignatureAlgorithmXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DigitalSignatureAlgorithm,
         DigitalSignatureAlgorithm.DigitalSignatureAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link DigitalSignatureAlgorithmXmlDeserializer}.
+   */
   public DigitalSignatureAlgorithmXmlDeserializer() {
     super(DigitalSignatureAlgorithm.kmipTag, DigitalSignatureAlgorithm.encodingType);
   }

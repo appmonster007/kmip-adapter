@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 
+/**
+ * XML deserializer for {@link SplitKeyParts}.
+ */
 public class SplitKeyPartsXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<SplitKeyParts, SplitKeyParts.SplitKeyPartsBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyPartsXmlDeserializer}.
+   */
   public SplitKeyPartsXmlDeserializer() {
     super(SplitKeyParts.kmipTag, SplitKeyParts.encodingType);
   }

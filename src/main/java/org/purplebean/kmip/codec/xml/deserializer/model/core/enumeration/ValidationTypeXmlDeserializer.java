@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ValidationType;
 
+/**
+ * XML deserializer for {@link ValidationType}.
+ */
 public class ValidationTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ValidationType, ValidationType.ValidationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationTypeXmlDeserializer}.
+   */
   public ValidationTypeXmlDeserializer() {
     super(ValidationType.kmipTag, ValidationType.encodingType);
   }

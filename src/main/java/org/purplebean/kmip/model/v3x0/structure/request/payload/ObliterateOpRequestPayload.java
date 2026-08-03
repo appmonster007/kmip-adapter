@@ -53,6 +53,9 @@ public class ObliterateOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObliterateOpRequestPayload} instance wrapping the given value.
+   */
   public static ObliterateOpRequestPayload of(List<KmipDataType> values) {
     var builder = ObliterateOpRequestPayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class ObliterateOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link ObliterateOpRequestPayload} instance wrapping the given value.
+   */
   public static ObliterateOpRequestPayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return ObliterateOpRequestPayload
         .builder()

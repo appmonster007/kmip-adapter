@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ValidateOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link ValidateOpRequestPayload}.
+ */
 public class ValidateOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ValidateOpRequestPayload,
         ValidateOpRequestPayload.ValidateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ValidateOpRequestPayloadJsonDeserializer}.
+   */
   public ValidateOpRequestPayloadJsonDeserializer() {
     super(ValidateOpRequestPayload.kmipTag, ValidateOpRequestPayload.encodingType);
   }

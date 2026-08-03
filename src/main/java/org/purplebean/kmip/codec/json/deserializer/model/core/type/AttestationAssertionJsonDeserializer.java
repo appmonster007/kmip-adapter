@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.AttestationAssertion;
 
+/**
+ * JSON deserializer for {@link AttestationAssertion}.
+ */
 public class AttestationAssertionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttestationAssertion,
         AttestationAssertion.AttestationAssertionBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationAssertionJsonDeserializer}.
+   */
   public AttestationAssertionJsonDeserializer() {
     super(AttestationAssertion.kmipTag, AttestationAssertion.encodingType);
   }

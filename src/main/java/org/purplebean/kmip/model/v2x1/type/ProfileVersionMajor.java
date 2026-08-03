@@ -41,6 +41,9 @@ public class ProfileVersionMajor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ProfileVersionMajor} instance wrapping the given value.
+   */
   public static ProfileVersionMajor of(@NonNull Integer value) {
     return new ProfileVersionMajor(value);
   }

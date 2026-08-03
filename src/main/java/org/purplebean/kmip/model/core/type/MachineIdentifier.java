@@ -42,6 +42,9 @@ public class MachineIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MachineIdentifier} instance wrapping the given value.
+   */
   public static MachineIdentifier of(@NonNull String value) {
     return new MachineIdentifier(value);
   }

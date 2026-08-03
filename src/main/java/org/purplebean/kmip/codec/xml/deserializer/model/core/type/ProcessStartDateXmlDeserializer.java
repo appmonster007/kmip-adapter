@@ -7,10 +7,16 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ProcessStartDate;
 
+/**
+ * XML deserializer for {@link ProcessStartDate}.
+ */
 public class ProcessStartDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ProcessStartDate,
         ProcessStartDate.ProcessStartDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessStartDateXmlDeserializer}.
+   */
   public ProcessStartDateXmlDeserializer() {
     super(ProcessStartDate.kmipTag, ProcessStartDate.encodingType);
   }

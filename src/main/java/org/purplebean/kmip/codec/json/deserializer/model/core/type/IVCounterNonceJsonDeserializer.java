@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.IVCounterNonce;
 
+/**
+ * JSON deserializer for {@link IVCounterNonce}.
+ */
 public class IVCounterNonceJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<IVCounterNonce, IVCounterNonce.IVCounterNonceBuilder> {
 
+  /**
+   * Constructs a new {@link IVCounterNonceJsonDeserializer}.
+   */
   public IVCounterNonceJsonDeserializer() {
     super(IVCounterNonce.kmipTag, IVCounterNonce.encodingType);
   }

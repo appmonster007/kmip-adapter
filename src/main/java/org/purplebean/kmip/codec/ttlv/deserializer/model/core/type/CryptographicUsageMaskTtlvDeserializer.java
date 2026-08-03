@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CryptographicUsageMask;
 
+/**
+ * TTLV deserializer for {@link CryptographicUsageMask}.
+ */
 public class CryptographicUsageMaskTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CryptographicUsageMask,
         CryptographicUsageMask.CryptographicUsageMaskBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicUsageMaskTtlvDeserializer}.
+   */
   public CryptographicUsageMaskTtlvDeserializer() {
     super(CryptographicUsageMask.kmipTag, CryptographicUsageMask.encodingType);
   }

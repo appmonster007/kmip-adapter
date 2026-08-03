@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.NextLink;
 
+/**
+ * TTLV deserializer for {@link NextLink}.
+ */
 public class NextLinkTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NextLink, NextLink.NextLinkBuilder> {
 
+  /**
+   * Constructs a new {@link NextLinkTtlvDeserializer}.
+   */
   public NextLinkTtlvDeserializer() {
     super(NextLink.kmipTag, NextLink.encodingType);
   }

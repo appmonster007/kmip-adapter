@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.DrbgAlgorithm;
 
+/**
+ * JSON deserializer for {@link DrbgAlgorithm}.
+ */
 public class DrbgAlgorithmJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DrbgAlgorithm, DrbgAlgorithm.DrbgAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link DrbgAlgorithmJsonDeserializer}.
+   */
   public DrbgAlgorithmJsonDeserializer() {
     super(DrbgAlgorithm.kmipTag, DrbgAlgorithm.encodingType);
   }

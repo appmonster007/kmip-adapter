@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * JSON deserializer for {@link InitIndicator}.
+ */
 public class InitIndicatorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<InitIndicator, InitIndicator.InitIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link InitIndicatorJsonDeserializer}.
+   */
   public InitIndicatorJsonDeserializer() {
     super(InitIndicator.kmipTag, InitIndicator.encodingType);
   }

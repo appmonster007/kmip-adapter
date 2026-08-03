@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.SerialNumber;
 
+/**
+ * XML deserializer for {@link SerialNumber}.
+ */
 public class SerialNumberXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<SerialNumber, SerialNumber.SerialNumberBuilder> {
 
+  /**
+   * Constructs a new {@link SerialNumberXmlDeserializer}.
+   */
   public SerialNumberXmlDeserializer() {
     super(SerialNumber.kmipTag, SerialNumber.encodingType);
   }

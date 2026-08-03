@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP MacVerifyOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
@@ -54,6 +57,9 @@ public class MacVerifyOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacVerifyOpResponsePayload} instance wrapping the given value.
+   */
   public static MacVerifyOpResponsePayload of(List<KmipDataType> values) {
     var builder = MacVerifyOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

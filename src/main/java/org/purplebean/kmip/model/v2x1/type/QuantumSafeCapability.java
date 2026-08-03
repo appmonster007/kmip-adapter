@@ -41,6 +41,9 @@ public class QuantumSafeCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link QuantumSafeCapability} instance wrapping the given value.
+   */
   public static QuantumSafeCapability of(@NonNull Boolean value) {
     return new QuantumSafeCapability(value);
   }

@@ -13,9 +13,15 @@ import org.purplebean.kmip.model.v2x1.type.ServerCorrelationValue;
 import org.purplebean.kmip.model.v3x0.structure.response.ResponseHeader;
 import org.purplebean.kmip.model.v3x0.type.ServerHashedPassword;
 
+/**
+ * JSON deserializer for {@link ResponseHeader}.
+ */
 public class ResponseHeaderJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ResponseHeader, ResponseHeader.ResponseHeaderBuilder> {
 
+  /**
+   * Constructs a new {@link ResponseHeaderJsonDeserializer}.
+   */
   public ResponseHeaderJsonDeserializer() {
     super(ResponseHeader.kmipTag, ResponseHeader.encodingType);
   }

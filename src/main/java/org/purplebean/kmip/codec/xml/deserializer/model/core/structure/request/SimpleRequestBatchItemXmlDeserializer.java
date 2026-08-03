@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestBatchItem;
 
+/**
+ * XML deserializer for {@link SimpleRequestBatchItem}.
+ */
 public class SimpleRequestBatchItemXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SimpleRequestBatchItem,
         SimpleRequestBatchItem.SimpleRequestBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleRequestBatchItemXmlDeserializer}.
+   */
   public SimpleRequestBatchItemXmlDeserializer() {
     super(SimpleRequestBatchItem.kmipTag, SimpleRequestBatchItem.encodingType);
   }

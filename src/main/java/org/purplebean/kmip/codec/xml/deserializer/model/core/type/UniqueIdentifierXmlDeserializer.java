@@ -8,10 +8,16 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * XML deserializer for {@link UniqueIdentifier}.
+ */
 public class UniqueIdentifierXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<UniqueIdentifier,
         UniqueIdentifier.UniqueIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link UniqueIdentifierXmlDeserializer}.
+   */
   public UniqueIdentifierXmlDeserializer() {
     super(UniqueIdentifier.kmipTag, UniqueIdentifier.encodingType);
   }

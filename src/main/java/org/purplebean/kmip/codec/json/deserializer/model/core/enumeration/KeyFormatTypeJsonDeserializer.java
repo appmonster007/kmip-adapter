@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
+/**
+ * JSON deserializer for {@link KeyFormatType}.
+ */
 public class KeyFormatTypeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyFormatType, KeyFormatType.KeyFormatTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyFormatTypeJsonDeserializer}.
+   */
   public KeyFormatTypeJsonDeserializer() {
     super(KeyFormatType.kmipTag, KeyFormatType.encodingType);
   }

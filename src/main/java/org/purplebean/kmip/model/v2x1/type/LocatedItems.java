@@ -41,6 +41,9 @@ public class LocatedItems implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link LocatedItems} instance wrapping the given value.
+   */
   public static LocatedItems of(@NonNull Integer value) {
     return new LocatedItems(value);
   }

@@ -8,6 +8,9 @@ import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.v3x0.type.OtpDigest;
 
+/**
+ * JSON serializer for {@link OtpDigest}.
+ */
 public class OtpDigestJsonSerializer extends AbstractKmipDataTypeJsonSerializer<OtpDigest> {
 
   @Override

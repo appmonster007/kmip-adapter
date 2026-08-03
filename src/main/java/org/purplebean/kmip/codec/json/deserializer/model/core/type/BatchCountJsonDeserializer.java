@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.BatchCount;
 
+/**
+ * JSON deserializer for {@link BatchCount}.
+ */
 public class BatchCountJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<BatchCount, BatchCount.BatchCountBuilder> {
 
+  /**
+   * Constructs a new {@link BatchCountJsonDeserializer}.
+   */
   public BatchCountJsonDeserializer() {
     super(BatchCount.kmipTag, BatchCount.encodingType);
   }

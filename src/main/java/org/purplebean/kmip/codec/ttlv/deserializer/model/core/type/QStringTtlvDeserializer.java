@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * TTLV deserializer for {@link QString}.
+ */
 public class QStringTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<QString, QString.QStringBuilder> {
 
+  /**
+   * Constructs a new {@link QStringTtlvDeserializer}.
+   */
   public QStringTtlvDeserializer() {
     super(QString.kmipTag, QString.encodingType);
   }

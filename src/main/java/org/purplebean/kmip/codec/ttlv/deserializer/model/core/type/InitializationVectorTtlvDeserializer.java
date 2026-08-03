@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.InitializationVector;
 
+/**
+ * TTLV deserializer for {@link InitializationVector}.
+ */
 public class InitializationVectorTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<InitializationVector,
         InitializationVector.InitializationVectorBuilder> {
 
+  /**
+   * Constructs a new {@link InitializationVectorTtlvDeserializer}.
+   */
   public InitializationVectorTtlvDeserializer() {
     super(InitializationVector.kmipTag, InitializationVector.encodingType);
   }

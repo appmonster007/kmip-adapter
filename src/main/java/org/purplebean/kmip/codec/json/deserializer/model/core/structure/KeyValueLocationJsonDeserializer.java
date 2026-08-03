@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purplebean.kmip.model.core.structure.KeyValueLocation;
 import org.purplebean.kmip.model.core.type.KeyValueLocationValue;
 
+/**
+ * JSON deserializer for {@link KeyValueLocation}.
+ */
 public class KeyValueLocationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyValueLocation,
         KeyValueLocation.KeyValueLocationBuilder> {
 
+  /**
+   * Constructs a new {@link KeyValueLocationJsonDeserializer}.
+   */
   public KeyValueLocationJsonDeserializer() {
     super(KeyValueLocation.kmipTag, KeyValueLocation.encodingType);
   }

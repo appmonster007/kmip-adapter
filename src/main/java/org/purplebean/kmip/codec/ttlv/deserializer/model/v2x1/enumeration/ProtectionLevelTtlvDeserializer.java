@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.ProtectionLevel;
 
+/**
+ * TTLV deserializer for {@link ProtectionLevel}.
+ */
 public class ProtectionLevelTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtectionLevel, ProtectionLevel.ProtectionLevelBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionLevelTtlvDeserializer}.
+   */
   public ProtectionLevelTtlvDeserializer() {
     super(ProtectionLevel.kmipTag, ProtectionLevel.encodingType);
   }

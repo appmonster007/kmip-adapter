@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.LogOpResponsePayload;
 
+/**
+ * JSON deserializer for {@link LogOpResponsePayload}.
+ */
 public class LogOpResponsePayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<LogOpResponsePayload,
         LogOpResponsePayload.LogOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LogOpResponsePayloadJsonDeserializer}.
+   */
   public LogOpResponsePayloadJsonDeserializer() {
     super(LogOpResponsePayload.kmipTag, LogOpResponsePayload.encodingType);
   }

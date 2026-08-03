@@ -74,6 +74,9 @@ public class PutFunction implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link PutFunction} instance wrapping the given value.
+   */
   public static PutFunction of(@NonNull Value value) {
     return new PutFunction(value);
   }
@@ -249,6 +252,9 @@ public class PutFunction implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.RevokeOpRequestPayload;
 
+/**
+ * XML deserializer for {@link RevokeOpRequestPayload}.
+ */
 public class RevokeOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RevokeOpRequestPayload,
         RevokeOpRequestPayload.RevokeOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link RevokeOpRequestPayloadXmlDeserializer}.
+   */
   public RevokeOpRequestPayloadXmlDeserializer() {
     super(RevokeOpRequestPayload.kmipTag, RevokeOpRequestPayload.encodingType);
   }

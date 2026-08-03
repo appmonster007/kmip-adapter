@@ -61,6 +61,9 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link AlternativeName} instance wrapping the given value.
+   */
   public static AlternativeName of(@NonNull AlternativeNameValue alternativeNameValue,
                                    @NonNull AlternativeNameType alternativeNameType) {
     return AlternativeName
@@ -70,6 +73,9 @@ public class AlternativeName implements KmipStructure, KmipAttribute {
         .build();
   }
 
+  /**
+   * Returns the {@link AlternativeName} instance wrapping the given value.
+   */
   public static AlternativeName of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

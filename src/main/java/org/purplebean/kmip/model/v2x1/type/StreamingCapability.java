@@ -41,6 +41,9 @@ public class StreamingCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link StreamingCapability} instance wrapping the given value.
+   */
   public static StreamingCapability of(@NonNull Boolean value) {
     return new StreamingCapability(value);
   }

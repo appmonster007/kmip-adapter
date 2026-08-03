@@ -69,6 +69,9 @@ public class ExportOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ExportOpResponsePayload} instance wrapping the given value.
+   */
   public static ExportOpResponsePayload of(List<KmipDataType> values) {
     var builder = ExportOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

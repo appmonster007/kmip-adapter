@@ -43,10 +43,16 @@ public class HashedPasswordUsername implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link HashedPasswordUsername} instance wrapping the given value.
+   */
   public static HashedPasswordUsername of(@NonNull ByteBuffer value) {
     return new HashedPasswordUsername(value);
   }
 
+  /**
+   * Returns the {@link HashedPasswordUsername} instance wrapping the given value.
+   */
   public static HashedPasswordUsername of(byte[] value) {
     return HashedPasswordUsername
         .builder()

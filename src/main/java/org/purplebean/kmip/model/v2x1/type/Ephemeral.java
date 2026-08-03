@@ -40,6 +40,9 @@ public class Ephemeral implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Ephemeral} instance wrapping the given value.
+   */
   public static Ephemeral of(@NonNull Boolean value) {
     return new Ephemeral(value);
   }

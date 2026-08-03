@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 
+/**
+ * KMIP ProtocolVersion attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProtocolVersion implements KmipStructure {
@@ -46,6 +49,9 @@ public class ProtocolVersion implements KmipStructure {
   }
 
   // Static factory methods for validation
+  /**
+   * Returns the {@link ProtocolVersion} instance wrapping the given value.
+   */
   public static ProtocolVersion of(int major, int minor) {
     return ProtocolVersion
         .builder()
@@ -54,6 +60,9 @@ public class ProtocolVersion implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link ProtocolVersion} instance wrapping the given value.
+   */
   public static ProtocolVersion of(@NonNull ProtocolVersionMajor protocolVersionMajor,
                                    @NonNull ProtocolVersionMinor protocolVersionMinor) {
     Objects.requireNonNull(protocolVersionMajor, "protocolVersionMajor cannot be null");

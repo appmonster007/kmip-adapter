@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.structure.Nonce;
 import org.purplebean.kmip.model.core.type.AttestationAssertion;
 import org.purplebean.kmip.model.core.type.AttestationMeasurement;
 
+/**
+ * XML deserializer for {@link AttestationCredential}.
+ */
 public class AttestationCredentialXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AttestationCredential,
         AttestationCredential.AttestationCredentialBuilder> {
 
+  /**
+   * Constructs a new {@link AttestationCredentialXmlDeserializer}.
+   */
   public AttestationCredentialXmlDeserializer() {
     super(AttestationCredential.kmipTag, AttestationCredential.encodingType);
   }

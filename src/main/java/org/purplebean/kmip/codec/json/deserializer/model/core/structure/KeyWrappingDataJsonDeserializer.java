@@ -13,9 +13,15 @@ import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
 import org.purplebean.kmip.model.core.type.IVCounterNonce;
 import org.purplebean.kmip.model.core.type.MACSignature;
 
+/**
+ * JSON deserializer for {@link KeyWrappingData}.
+ */
 public class KeyWrappingDataJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyWrappingData, KeyWrappingData.KeyWrappingDataBuilder> {
 
+  /**
+   * Constructs a new {@link KeyWrappingDataJsonDeserializer}.
+   */
   public KeyWrappingDataJsonDeserializer() {
     super(KeyWrappingData.kmipTag, KeyWrappingData.encodingType);
   }

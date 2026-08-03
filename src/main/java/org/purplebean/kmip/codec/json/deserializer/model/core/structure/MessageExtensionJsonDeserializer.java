@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.VendorExtension;
 import org.purplebean.kmip.model.core.type.CriticalityIndicator;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * JSON deserializer for {@link MessageExtension}.
+ */
 public class MessageExtensionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MessageExtension,
         MessageExtension.MessageExtensionBuilder> {
 
+  /**
+   * Constructs a new {@link MessageExtensionJsonDeserializer}.
+   */
   public MessageExtensionJsonDeserializer() {
     super(MessageExtension.kmipTag, MessageExtension.encodingType);
   }

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.type.OtpCounter;
 
+/**
+ * TTLV deserializer for {@link OtpCounter}.
+ */
 public class OtpCounterTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<OtpCounter, OtpCounter.OtpCounterBuilder> {
 
+  /**
+   * Constructs a new {@link OtpCounterTtlvDeserializer}.
+   */
   public OtpCounterTtlvDeserializer() {
     super(OtpCounter.kmipTag, OtpCounter.encodingType);
   }

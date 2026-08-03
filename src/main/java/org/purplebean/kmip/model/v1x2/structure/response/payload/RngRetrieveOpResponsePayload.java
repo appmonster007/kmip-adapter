@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.DataByteString;
 
+/**
+ * KMIP RngRetrieveOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RngRetrieveOpResponsePayload implements ResponsePayloadStructure {
@@ -50,6 +53,9 @@ public class RngRetrieveOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RngRetrieveOpResponsePayload} instance wrapping the given value.
+   */
   public static RngRetrieveOpResponsePayload of(List<KmipDataType> values) {
     var builder = RngRetrieveOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

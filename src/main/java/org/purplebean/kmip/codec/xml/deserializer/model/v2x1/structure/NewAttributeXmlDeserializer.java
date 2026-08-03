@@ -7,9 +7,15 @@ import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 
+/**
+ * XML deserializer for {@link NewAttribute}.
+ */
 public class NewAttributeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<NewAttribute, NewAttribute.NewAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link NewAttributeXmlDeserializer}.
+   */
   public NewAttributeXmlDeserializer() {
     super(NewAttribute.kmipTag, NewAttribute.encodingType);
   }

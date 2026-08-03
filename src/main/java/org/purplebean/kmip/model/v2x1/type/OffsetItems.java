@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP OffsetItems dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class OffsetItems implements KmipDataType {
@@ -37,6 +40,9 @@ public class OffsetItems implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OffsetItems} instance wrapping the given value.
+   */
   public static OffsetItems of(@NonNull Integer value) {
     return new OffsetItems(value);
   }

@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.json.serializer.model.core.type;
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
 
+/**
+ * JSON serializer for {@link KeyPartIdentifier}.
+ */
 public class KeyPartIdentifierJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<KeyPartIdentifier> {
 }

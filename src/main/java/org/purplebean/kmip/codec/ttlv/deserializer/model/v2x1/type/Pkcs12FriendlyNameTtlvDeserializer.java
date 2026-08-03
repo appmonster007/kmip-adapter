@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName;
 
+/**
+ * TTLV deserializer for {@link Pkcs12FriendlyName}.
+ */
 public class Pkcs12FriendlyNameTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Pkcs12FriendlyName,
         Pkcs12FriendlyName.Pkcs12FriendlyNameBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs12FriendlyNameTtlvDeserializer}.
+   */
   public Pkcs12FriendlyNameTtlvDeserializer() {
     super(Pkcs12FriendlyName.kmipTag, Pkcs12FriendlyName.encodingType);
   }

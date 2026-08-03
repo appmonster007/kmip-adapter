@@ -42,6 +42,9 @@ public class OtpSerial implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpSerial} instance wrapping the given value.
+   */
   public static OtpSerial of(@NonNull String value) {
     return new OtpSerial(value);
   }

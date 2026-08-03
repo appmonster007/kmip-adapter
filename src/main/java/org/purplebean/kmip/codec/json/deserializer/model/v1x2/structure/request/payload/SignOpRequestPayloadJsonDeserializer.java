@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.SignOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link SignOpRequestPayload}.
+ */
 public class SignOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SignOpRequestPayload,
         SignOpRequestPayload.SignOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SignOpRequestPayloadJsonDeserializer}.
+   */
   public SignOpRequestPayloadJsonDeserializer() {
     super(SignOpRequestPayload.kmipTag, SignOpRequestPayload.encodingType);
   }

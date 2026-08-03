@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.BlockCipherMode;
 
+/**
+ * TTLV deserializer for {@link BlockCipherMode}.
+ */
 public class BlockCipherModeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<BlockCipherMode, BlockCipherMode.BlockCipherModeBuilder> {
 
+  /**
+   * Constructs a new {@link BlockCipherModeTtlvDeserializer}.
+   */
   public BlockCipherModeTtlvDeserializer() {
     super(BlockCipherMode.kmipTag, BlockCipherMode.encodingType);
   }

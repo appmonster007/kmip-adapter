@@ -43,6 +43,9 @@ public class CRTCoefficient implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CRTCoefficient} instance wrapping the given value.
+   */
   public static CRTCoefficient of(@NonNull BigInteger value) {
     return new CRTCoefficient(value);
   }

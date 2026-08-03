@@ -47,6 +47,9 @@ public final class TtlvObject {
     this.length = this.value.length;
   }
 
+  /**
+   * Encodes multiple {@link TtlvObject} instances into a single concatenated byte array.
+   */
   public static byte[] toBytesMultiple(TtlvObject... ttlvObjects) {
     return serializeMultiple(ttlvObjects);
   }
@@ -76,6 +79,9 @@ public final class TtlvObject {
     return buffer.array();
   }
 
+  /**
+   * Parses a single {@link TtlvObject} from the given TTLV-encoded bytes.
+   */
   public static TtlvObject fromBytes(byte[] data) {
     Objects.requireNonNull(data, TtlvConstants.ERROR_NULL_DATA);
     validateInput(data);
@@ -84,6 +90,9 @@ public final class TtlvObject {
         .order(TtlvConstants.BYTE_ORDER));
   }
 
+  /**
+   * Parses a sequence of concatenated {@link TtlvObject} instances from the given TTLV-encoded bytes.
+   */
   public static List<TtlvObject> fromBytesMultiple(byte[] data) {
     Objects.requireNonNull(data, TtlvConstants.ERROR_NULL_DATA);
     if (data.length == 0) {
@@ -102,6 +111,9 @@ public final class TtlvObject {
     return Collections.unmodifiableList(result);
   }
 
+  /**
+   * Parses a single {@link TtlvObject} from the given byte buffer.
+   */
   public static TtlvObject fromBuffer(ByteBuffer buffer) {
     if (buffer.remaining() < TtlvConstants.HEADER_SIZE) {
       throw new IllegalArgumentException(
@@ -192,6 +204,9 @@ public final class TtlvObject {
     return Arrays.copyOf(tag, tag.length);
   }
 
+  /**
+   * Sets the tag bytes for this TTLV object.
+   */
   public void setTag(byte[] tag) {
     if (tag.length != TtlvConstants.TAG_SIZE) {
       throw new IllegalArgumentException(
@@ -206,6 +221,9 @@ public final class TtlvObject {
 
   // Helpers
 
+  /**
+   * Returns the raw primitive value bytes of this TTLV object.
+   */
   public byte[] getPrimitiveValue() {
     if (isStructure()) {
       throw new IllegalStateException("This object contains nested values. Use getNestedValue().");
@@ -213,6 +231,9 @@ public final class TtlvObject {
     return Arrays.copyOf(value, value.length);
   }
 
+  /**
+   * Returns the nested {@link TtlvObject} children of this structure.
+   */
   public List<TtlvObject> getNestedValue() {
     if (!isStructure()) {
       throw new IllegalStateException(
@@ -221,6 +242,9 @@ public final class TtlvObject {
     return fromBytesMultiple(value);
   }
 
+  /**
+   * Returns {@code true} if this TTLV object's value is empty.
+   */
   public boolean hasEmptyValue() {
     return value.length == 0;
   }
@@ -231,6 +255,9 @@ public final class TtlvObject {
 
   // Deserialization
 
+  /**
+   * Encodes this TTLV object into its TTLV byte representation.
+   */
   public byte[] toBytes() {
     byte[] valueBytes = this.value;
     int totalLength = calculateTotalLength(valueBytes.length);
@@ -247,6 +274,9 @@ public final class TtlvObject {
     return buffer.array();
   }
 
+  /**
+   * Encodes this TTLV object into a {@link ByteBuffer}.
+   */
   public ByteBuffer toByteBuffer() {
     return ByteBuffer
         .wrap(toBytes())
@@ -275,6 +305,9 @@ public final class TtlvObject {
     return result;
   }
 
+  /**
+   * Returns this TTLV object's primitive value as a hex-encoded byte string.
+   */
   public String getByteString() {
     HexFormat hexFormat = HexFormat.of();
     int paddedSize = TtlvConstants.calculatePaddedLength(TtlvConstants.HEADER_SIZE + length);

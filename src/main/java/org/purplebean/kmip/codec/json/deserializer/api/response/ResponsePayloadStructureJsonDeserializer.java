@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.codec.json.deserializer.api.KmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * JSON deserializer for {@link ResponsePayloadStructure}.
+ */
 public class ResponsePayloadStructureJsonDeserializer
     extends KmipDataTypeJsonDeserializer<ResponsePayloadStructure> {
 

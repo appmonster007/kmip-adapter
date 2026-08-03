@@ -48,10 +48,16 @@ public class RotateDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateDate} instance wrapping the given value.
+   */
   public static RotateDate of(@NonNull OffsetDateTime value) {
     return new RotateDate(value);
   }
 
+  /**
+   * Returns the {@link RotateDate} instance wrapping the given value.
+   */
   public static RotateDate of(@NonNull AttributeName attributeName,
                               @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

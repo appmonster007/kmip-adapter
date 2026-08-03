@@ -16,6 +16,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP TemplateAttribute attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TemplateAttribute implements KmipStructure {
@@ -51,6 +54,9 @@ public class TemplateAttribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TemplateAttribute} instance wrapping the given value.
+   */
   public static TemplateAttribute of(
       List<Name> names,
       List<Attribute> attributes

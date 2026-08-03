@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 
+/**
+ * JSON deserializer for {@link BatchErrorContinuationOption}.
+ */
 public class BatchErrorContinuationOptionJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<BatchErrorContinuationOption,
         BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder> {
 
+  /**
+   * Constructs a new {@link BatchErrorContinuationOptionJsonDeserializer}.
+   */
   public BatchErrorContinuationOptionJsonDeserializer() {
     super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType);
   }

@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.enumeration.Ephemeral;
 
+/**
+ * XML deserializer for {@link Ephemeral}.
+ */
 public class EphemeralXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Ephemeral, Ephemeral.EphemeralBuilder> {
 
+  /**
+   * Constructs a new {@link EphemeralXmlDeserializer}.
+   */
   public EphemeralXmlDeserializer() {
     super(Ephemeral.kmipTag, Ephemeral.encodingType);
   }

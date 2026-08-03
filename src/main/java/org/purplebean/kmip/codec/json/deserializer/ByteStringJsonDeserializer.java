@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HexFormat;
 
+/**
+ * JSON deserializer for {@link ByteBuffer}.
+ */
 public class ByteStringJsonDeserializer extends JsonDeserializer<ByteBuffer> {
 
   @Override

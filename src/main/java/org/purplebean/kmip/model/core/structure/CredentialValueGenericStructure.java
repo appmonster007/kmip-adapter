@@ -17,6 +17,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP CredentialValueGenericStructure attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CredentialValueGenericStructure implements CredentialValue, KmipStructure {
@@ -48,10 +51,16 @@ public class CredentialValueGenericStructure implements CredentialValue, KmipStr
     validate();
   }
 
+  /**
+   * Returns the {@link CredentialValueGenericStructure} instance wrapping the given value.
+   */
   public static CredentialValueGenericStructure of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link CredentialValueGenericStructure} instance wrapping the given value.
+   */
   public static CredentialValueGenericStructure of(
       List<KmipDataType> values
   ) {

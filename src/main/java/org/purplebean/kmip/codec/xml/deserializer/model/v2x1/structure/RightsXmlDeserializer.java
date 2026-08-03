@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.v2x1.structure.Right;
 import org.purplebean.kmip.model.v2x1.structure.Rights;
 
+/**
+ * XML deserializer for {@link Rights}.
+ */
 public class RightsXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Rights, Rights.RightsBuilder> {
 
+  /**
+   * Constructs a new {@link RightsXmlDeserializer}.
+   */
   public RightsXmlDeserializer() {
     super(Rights.kmipTag, Rights.encodingType);
   }

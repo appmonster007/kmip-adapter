@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
 
+/**
+ * XML deserializer for {@link TicketType}.
+ */
 public class TicketTypeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<TicketType, TicketType.TicketTypeBuilder> {
 
+  /**
+   * Constructs a new {@link TicketTypeXmlDeserializer}.
+   */
   public TicketTypeXmlDeserializer() {
     super(TicketType.kmipTag, TicketType.encodingType);
   }

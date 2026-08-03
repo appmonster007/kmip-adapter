@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ModifyAttributeOpResponsePayload operation response payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ModifyAttributeOpResponsePayload implements ResponsePayloadStructure {
@@ -56,6 +59,9 @@ public class ModifyAttributeOpResponsePayload implements ResponsePayloadStructur
     validate();
   }
 
+  /**
+   * Returns the {@link ModifyAttributeOpResponsePayload} instance wrapping the given value.
+   */
   public static ModifyAttributeOpResponsePayload of(List<KmipDataType> values) {
     var builder = ModifyAttributeOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

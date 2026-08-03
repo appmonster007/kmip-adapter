@@ -41,6 +41,9 @@ public class BatchContinueCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link BatchContinueCapability} instance wrapping the given value.
+   */
   public static BatchContinueCapability of(@NonNull Boolean value) {
     return new BatchContinueCapability(value);
   }

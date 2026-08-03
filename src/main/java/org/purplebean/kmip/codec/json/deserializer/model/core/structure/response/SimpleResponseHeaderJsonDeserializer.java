@@ -9,10 +9,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.structure.response.SimpleResponseHeader;
 
+/**
+ * JSON deserializer for {@link SimpleResponseHeader}.
+ */
 public class SimpleResponseHeaderJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SimpleResponseHeader,
         SimpleResponseHeader.SimpleResponseHeaderBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleResponseHeaderJsonDeserializer}.
+   */
   public SimpleResponseHeaderJsonDeserializer() {
     super(SimpleResponseHeader.kmipTag, SimpleResponseHeader.encodingType);
   }

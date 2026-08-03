@@ -41,6 +41,9 @@ public class AttestationCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AttestationCapability} instance wrapping the given value.
+   */
   public static AttestationCapability of(@NonNull Boolean value) {
     return new AttestationCapability(value);
   }

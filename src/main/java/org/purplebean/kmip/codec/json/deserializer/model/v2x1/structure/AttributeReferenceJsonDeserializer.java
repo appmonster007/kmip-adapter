@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
 
+/**
+ * JSON deserializer for {@link AttributeReference}.
+ */
 public class AttributeReferenceJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttributeReference,
         AttributeReference.AttributeReferenceBuilder> {
 
+  /**
+   * Constructs a new {@link AttributeReferenceJsonDeserializer}.
+   */
   public AttributeReferenceJsonDeserializer() {
     super(AttributeReference.kmipTag, AttributeReference.encodingType);
   }

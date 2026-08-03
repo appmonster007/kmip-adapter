@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.Attribute;
 import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.Name;
 
+/**
+ * XML deserializer for {@link CommonTemplateAttribute}.
+ */
 public class CommonTemplateAttributeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CommonTemplateAttribute,
         CommonTemplateAttribute.CommonTemplateAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link CommonTemplateAttributeXmlDeserializer}.
+   */
   public CommonTemplateAttributeXmlDeserializer() {
     super(CommonTemplateAttribute.kmipTag, CommonTemplateAttribute.encodingType);
   }

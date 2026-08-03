@@ -42,10 +42,16 @@ public class AsynchronousCorrelationValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousCorrelationValue} instance wrapping the given value.
+   */
   public static AsynchronousCorrelationValue of(@NonNull ByteBuffer value) {
     return new AsynchronousCorrelationValue(value);
   }
 
+  /**
+   * Returns the {@link AsynchronousCorrelationValue} instance wrapping the given value.
+   */
   public static AsynchronousCorrelationValue of(byte[] value) {
     return AsynchronousCorrelationValue
         .builder()

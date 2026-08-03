@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.IVCounterNonce;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP EncryptOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class EncryptOpRequestPayload implements RequestPayloadStructure {
@@ -61,6 +64,9 @@ public class EncryptOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link EncryptOpRequestPayload} instance wrapping the given value.
+   */
   public static EncryptOpRequestPayload of(List<KmipDataType> values) {
     var builder = EncryptOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

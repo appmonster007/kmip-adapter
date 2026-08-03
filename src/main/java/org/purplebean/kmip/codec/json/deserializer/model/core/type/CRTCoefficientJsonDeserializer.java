@@ -7,9 +7,15 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.CRTCoefficient;
 
+/**
+ * JSON deserializer for {@link CRTCoefficient}.
+ */
 public class CRTCoefficientJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CRTCoefficient, CRTCoefficient.CRTCoefficientBuilder> {
 
+  /**
+   * Constructs a new {@link CRTCoefficientJsonDeserializer}.
+   */
   public CRTCoefficientJsonDeserializer() {
     super(CRTCoefficient.kmipTag, CRTCoefficient.encodingType);
   }

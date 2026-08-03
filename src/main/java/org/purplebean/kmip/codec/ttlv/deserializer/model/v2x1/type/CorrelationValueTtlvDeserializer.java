@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * TTLV deserializer for {@link CorrelationValue}.
+ */
 public class CorrelationValueTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CorrelationValue,
         CorrelationValue.CorrelationValueBuilder> {
 
+  /**
+   * Constructs a new {@link CorrelationValueTtlvDeserializer}.
+   */
   public CorrelationValueTtlvDeserializer() {
     super(CorrelationValue.kmipTag, CorrelationValue.encodingType);
   }

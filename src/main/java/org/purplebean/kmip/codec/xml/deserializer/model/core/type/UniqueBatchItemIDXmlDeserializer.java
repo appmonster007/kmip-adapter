@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
 
+/**
+ * XML deserializer for {@link UniqueBatchItemID}.
+ */
 public class UniqueBatchItemIDXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<UniqueBatchItemID,
         UniqueBatchItemID.UniqueBatchItemIDBuilder> {
 
+  /**
+   * Constructs a new {@link UniqueBatchItemIDXmlDeserializer}.
+   */
   public UniqueBatchItemIDXmlDeserializer() {
     super(UniqueBatchItemID.kmipTag, UniqueBatchItemID.encodingType);
   }

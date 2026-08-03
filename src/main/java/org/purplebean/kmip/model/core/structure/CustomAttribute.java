@@ -55,15 +55,24 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CustomAttribute} instance wrapping the given value.
+   */
   public static CustomAttribute of(@NonNull AttributeName attributeName,
                                    @NonNull AttributeValue attributeValue) {
     return new CustomAttribute(attributeName, attributeValue);
   }
 
+  /**
+   * Returns the {@link CustomAttribute} instance wrapping the given value.
+   */
   public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue value) {
     return of(AttributeName.of(name), value);
   }
 
+  /**
+   * Returns the {@link CustomAttribute} instance wrapping the given value.
+   */
   public static CustomAttribute of(@NonNull AttributeName name, @NonNull KmipDataType... values) {
     if (Stream
         .of(values)
@@ -73,14 +82,23 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     return of(name, AttributeValue.ofStructure(values));
   }
 
+  /**
+   * Returns the {@link CustomAttribute} instance wrapping the given value.
+   */
   public static CustomAttribute of(@NonNull String name, @NonNull AttributeValue... values) {
     return of(AttributeName.of(name), AttributeValue.ofStructure(values));
   }
 
+  /**
+   * Returns {@code true} if the given attribute name is a valid custom attribute name.
+   */
   public static boolean isValidCustomAttributeName(@NonNull String name) {
     return isCustomServerAttribute(name) || isCustomClientAttribute(name);
   }
 
+  /**
+   * Returns {@code true} if the given attribute name is a valid custom attribute name.
+   */
   public static boolean isValidCustomAttributeName(@NonNull AttributeName name) {
     return isValidCustomAttributeName(name.getValue());
   }
@@ -95,6 +113,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
     return true;
   }
 
+  /**
+   * Returns {@code true} if the given name identifies a custom server attribute.
+   */
   public static boolean isCustomServerAttribute(@NonNull String name) {
     Pattern pattern = Pattern.compile("^y-.*?", Pattern.CASE_INSENSITIVE);
     return pattern
@@ -102,6 +123,9 @@ public class CustomAttribute implements KmipStructure, KmipAttribute {
         .matches();
   }
 
+  /**
+   * Returns {@code true} if the given name identifies a custom client attribute.
+   */
   public static boolean isCustomClientAttribute(@NonNull String name) {
     Pattern pattern = Pattern.compile("^x-.*?", Pattern.CASE_INSENSITIVE);
     return pattern

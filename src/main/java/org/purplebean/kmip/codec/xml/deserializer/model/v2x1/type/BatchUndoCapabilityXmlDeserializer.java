@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 
+/**
+ * XML deserializer for {@link BatchUndoCapability}.
+ */
 public class BatchUndoCapabilityXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<BatchUndoCapability,
         BatchUndoCapability.BatchUndoCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link BatchUndoCapabilityXmlDeserializer}.
+   */
   public BatchUndoCapabilityXmlDeserializer() {
     super(BatchUndoCapability.kmipTag, BatchUndoCapability.encodingType);
   }

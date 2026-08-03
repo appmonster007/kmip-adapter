@@ -48,10 +48,16 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ProcessStartDate} instance wrapping the given value.
+   */
   public static ProcessStartDate of(@NonNull OffsetDateTime value) {
     return new ProcessStartDate(value);
   }
 
+  /**
+   * Returns the {@link ProcessStartDate} instance wrapping the given value.
+   */
   public static ProcessStartDate of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

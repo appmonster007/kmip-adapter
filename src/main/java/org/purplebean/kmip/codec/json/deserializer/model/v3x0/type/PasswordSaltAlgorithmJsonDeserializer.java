@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v3x0.type.PasswordSaltAlgorithm;
 
+/**
+ * JSON deserializer for {@link PasswordSaltAlgorithm}.
+ */
 public class PasswordSaltAlgorithmJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PasswordSaltAlgorithm,
         PasswordSaltAlgorithm.PasswordSaltAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link PasswordSaltAlgorithmJsonDeserializer}.
+   */
   public PasswordSaltAlgorithmJsonDeserializer() {
     super(PasswordSaltAlgorithm.kmipTag, PasswordSaltAlgorithm.encodingType);
   }

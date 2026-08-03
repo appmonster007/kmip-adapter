@@ -43,10 +43,16 @@ public class PasswordSalt implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PasswordSalt} instance wrapping the given value.
+   */
   public static PasswordSalt of(@NonNull ByteBuffer value) {
     return new PasswordSalt(value);
   }
 
+  /**
+   * Returns the {@link PasswordSalt} instance wrapping the given value.
+   */
   public static PasswordSalt of(byte[] value) {
     return PasswordSalt
         .builder()

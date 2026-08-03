@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.enumeration;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
 
+/**
+ * XML serializer for {@link KeyCompressionType}.
+ */
 public class KeyCompressionTypeXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<KeyCompressionType> {
 }

@@ -7,10 +7,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 
+/**
+ * TTLV deserializer for {@link CompromiseOccurrenceDate}.
+ */
 public class CompromiseOccurrenceDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CompromiseOccurrenceDate,
         CompromiseOccurrenceDate.CompromiseOccurrenceDateBuilder> {
 
+  /**
+   * Constructs a new {@link CompromiseOccurrenceDateTtlvDeserializer}.
+   */
   public CompromiseOccurrenceDateTtlvDeserializer() {
     super(CompromiseOccurrenceDate.kmipTag, CompromiseOccurrenceDate.encodingType);
   }

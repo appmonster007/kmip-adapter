@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionTag;
 
+/**
+ * TTLV deserializer for {@link AuthenticatedEncryptionTag}.
+ */
 public class AuthenticatedEncryptionTagTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<AuthenticatedEncryptionTag,
         AuthenticatedEncryptionTag.AuthenticatedEncryptionTagBuilder> {
 
+  /**
+   * Constructs a new {@link AuthenticatedEncryptionTagTtlvDeserializer}.
+   */
   public AuthenticatedEncryptionTagTtlvDeserializer() {
     super(AuthenticatedEncryptionTag.kmipTag, AuthenticatedEncryptionTag.encodingType);
   }

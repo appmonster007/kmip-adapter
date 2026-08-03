@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 
+/**
+ * JSON deserializer for {@link QuantumSafeCapability}.
+ */
 public class QuantumSafeCapabilityJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<QuantumSafeCapability,
         QuantumSafeCapability.QuantumSafeCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link QuantumSafeCapabilityJsonDeserializer}.
+   */
   public QuantumSafeCapabilityJsonDeserializer() {
     super(QuantumSafeCapability.kmipTag, QuantumSafeCapability.encodingType);
   }

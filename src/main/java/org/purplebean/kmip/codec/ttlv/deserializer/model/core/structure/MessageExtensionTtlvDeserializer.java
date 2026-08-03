@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.VendorExtension;
 import org.purplebean.kmip.model.core.type.CriticalityIndicator;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * TTLV deserializer for {@link MessageExtension}.
+ */
 public class MessageExtensionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<MessageExtension,
         MessageExtension.MessageExtensionBuilder> {
 
+  /**
+   * Constructs a new {@link MessageExtensionTtlvDeserializer}.
+   */
   public MessageExtensionTtlvDeserializer() {
     super(MessageExtension.kmipTag, MessageExtension.encodingType);
   }

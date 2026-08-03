@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.MacData;
 
+/**
+ * TTLV deserializer for {@link MacData}.
+ */
 public class MacDataTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<MacData, MacData.MacDataBuilder> {
 
+  /**
+   * Constructs a new {@link MacDataTtlvDeserializer}.
+   */
   public MacDataTtlvDeserializer() {
     super(MacData.kmipTag, MacData.encodingType);
   }

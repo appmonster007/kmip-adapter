@@ -77,6 +77,9 @@ public class CancellationResult implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link CancellationResult} instance wrapping the given value.
+   */
   public static CancellationResult of(@NonNull Value value) {
     return new CancellationResult(value);
   }
@@ -259,6 +262,9 @@ public class CancellationResult implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

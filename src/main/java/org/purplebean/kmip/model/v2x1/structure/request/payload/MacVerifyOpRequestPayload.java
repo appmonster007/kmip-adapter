@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * KMIP MacVerifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacVerifyOpRequestPayload implements RequestPayloadStructure {
@@ -71,6 +74,9 @@ public class MacVerifyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacVerifyOpRequestPayload} instance wrapping the given value.
+   */
   public static MacVerifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = MacVerifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

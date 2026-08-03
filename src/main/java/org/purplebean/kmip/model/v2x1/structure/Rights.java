@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP Rights structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Rights implements KmipStructure {
@@ -40,6 +43,9 @@ public class Rights implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Rights} instance wrapping the given value.
+   */
   public static Rights of(@NonNull List<Right> rights) {
     return Rights
         .builder()

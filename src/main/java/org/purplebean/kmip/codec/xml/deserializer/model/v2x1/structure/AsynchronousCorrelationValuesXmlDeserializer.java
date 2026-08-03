@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v2x1.structure.AsynchronousCorrelationValues;
 
+/**
+ * XML deserializer for {@link AsynchronousCorrelationValues}.
+ */
 public class AsynchronousCorrelationValuesXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<AsynchronousCorrelationValues,
         AsynchronousCorrelationValues.AsynchronousCorrelationValuesBuilder> {
 
+  /**
+   * Constructs a new {@link AsynchronousCorrelationValuesXmlDeserializer}.
+   */
   public AsynchronousCorrelationValuesXmlDeserializer() {
     super(AsynchronousCorrelationValues.kmipTag, AsynchronousCorrelationValues.encodingType);
   }

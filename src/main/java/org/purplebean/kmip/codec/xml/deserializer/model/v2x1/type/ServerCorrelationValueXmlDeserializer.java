@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ServerCorrelationValue;
 
+/**
+ * XML deserializer for {@link ServerCorrelationValue}.
+ */
 public class ServerCorrelationValueXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ServerCorrelationValue,
         ServerCorrelationValue.ServerCorrelationValueBuilder> {
 
+  /**
+   * Constructs a new {@link ServerCorrelationValueXmlDeserializer}.
+   */
   public ServerCorrelationValueXmlDeserializer() {
     super(ServerCorrelationValue.kmipTag, ServerCorrelationValue.encodingType);
   }

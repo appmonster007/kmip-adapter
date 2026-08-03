@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.BatchCount;
 
+/**
+ * XML deserializer for {@link BatchCount}.
+ */
 public class BatchCountXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<BatchCount, BatchCount.BatchCountBuilder> {
 
+  /**
+   * Constructs a new {@link BatchCountXmlDeserializer}.
+   */
   public BatchCountXmlDeserializer() {
     super(BatchCount.kmipTag, BatchCount.encodingType);
   }

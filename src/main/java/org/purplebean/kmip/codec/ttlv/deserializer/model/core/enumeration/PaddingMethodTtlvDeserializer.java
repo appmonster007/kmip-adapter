@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 
+/**
+ * TTLV deserializer for {@link PaddingMethod}.
+ */
 public class PaddingMethodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PaddingMethod, PaddingMethod.PaddingMethodBuilder> {
 
+  /**
+   * Constructs a new {@link PaddingMethodTtlvDeserializer}.
+   */
   public PaddingMethodTtlvDeserializer() {
     super(PaddingMethod.kmipTag, PaddingMethod.encodingType);
   }

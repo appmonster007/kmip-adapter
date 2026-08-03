@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ContactInformation;
 
+/**
+ * TTLV deserializer for {@link ContactInformation}.
+ */
 public class ContactInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ContactInformation,
         ContactInformation.ContactInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ContactInformationTtlvDeserializer}.
+   */
   public ContactInformationTtlvDeserializer() {
     super(ContactInformation.kmipTag, ContactInformation.encodingType);
   }

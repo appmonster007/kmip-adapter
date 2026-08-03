@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.DigestedData;
 
+/**
+ * JSON deserializer for {@link DigestedData}.
+ */
 public class DigestedDataJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<DigestedData, DigestedData.DigestedDataBuilder> {
 
+  /**
+   * Constructs a new {@link DigestedDataJsonDeserializer}.
+   */
   public DigestedDataJsonDeserializer() {
     super(DigestedData.kmipTag, DigestedData.encodingType);
   }

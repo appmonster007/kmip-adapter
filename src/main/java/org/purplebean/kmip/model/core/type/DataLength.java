@@ -41,6 +41,9 @@ public class DataLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DataLength} instance wrapping the given value.
+   */
   public static DataLength of(@NonNull Integer value) {
     return new DataLength(value);
   }

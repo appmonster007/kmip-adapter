@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ArchiveDate;
 
+/**
+ * XML deserializer for {@link ArchiveDate}.
+ */
 public class ArchiveDateXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<ArchiveDate, ArchiveDate.ArchiveDateBuilder> {
 
+  /**
+   * Constructs a new {@link ArchiveDateXmlDeserializer}.
+   */
   public ArchiveDateXmlDeserializer() {
     super(ArchiveDate.kmipTag, ArchiveDate.encodingType);
   }

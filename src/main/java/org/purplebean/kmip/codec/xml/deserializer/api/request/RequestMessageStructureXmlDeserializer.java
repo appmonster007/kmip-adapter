@@ -13,6 +13,9 @@ import org.purplebean.kmip.api.request.RequestMessageStructure;
 import org.purplebean.kmip.codec.xml.deserializer.api.KmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
+/**
+ * XML deserializer for {@link RequestMessageStructure}.
+ */
 public class RequestMessageStructureXmlDeserializer
     extends KmipDataTypeXmlDeserializer<RequestMessageStructure> {
 

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.Password;
 
+/**
+ * TTLV deserializer for {@link Password}.
+ */
 public class PasswordTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Password, Password.PasswordBuilder> {
 
+  /**
+   * Constructs a new {@link PasswordTtlvDeserializer}.
+   */
   public PasswordTtlvDeserializer() {
     super(Password.kmipTag, Password.encodingType);
   }

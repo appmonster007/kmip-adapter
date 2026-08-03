@@ -13,10 +13,16 @@ import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
 import org.purplebean.kmip.model.v2x1.structure.request.RequestBatchItem;
 import org.purplebean.kmip.model.v2x1.type.Ephemeral;
 
+/**
+ * TTLV deserializer for {@link RequestBatchItem}.
+ */
 public class RequestBatchItemTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RequestBatchItem,
         RequestBatchItem.RequestBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link RequestBatchItemTtlvDeserializer}.
+   */
   public RequestBatchItemTtlvDeserializer() {
     super(RequestBatchItem.kmipTag, RequestBatchItem.encodingType);
   }

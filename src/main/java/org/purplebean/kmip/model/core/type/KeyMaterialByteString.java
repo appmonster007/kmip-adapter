@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
+/**
+ * KMIP KeyMaterialByteString dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyMaterialByteString implements KeyMaterial {
@@ -55,6 +58,9 @@ public class KeyMaterialByteString implements KeyMaterial {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyMaterialByteString} instance wrapping the given value.
+   */
   public static KeyMaterialByteString of(@NonNull KeyMaterial value) {
     if (!(value instanceof KeyMaterialByteString byteString)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -62,10 +68,16 @@ public class KeyMaterialByteString implements KeyMaterial {
     return new KeyMaterialByteString(byteString.getValue());
   }
 
+  /**
+   * Returns the {@link KeyMaterialByteString} instance wrapping the given value.
+   */
   public static KeyMaterialByteString of(@NonNull ByteBuffer value) {
     return new KeyMaterialByteString(value);
   }
 
+  /**
+   * Returns the {@link KeyMaterialByteString} instance wrapping the given value.
+   */
   public static KeyMaterialByteString of(byte[] value) {
     return KeyMaterialByteString
         .builder()

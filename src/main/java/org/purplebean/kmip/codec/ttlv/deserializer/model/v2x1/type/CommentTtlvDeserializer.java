@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.Comment;
 
+/**
+ * TTLV deserializer for {@link Comment}.
+ */
 public class CommentTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Comment, Comment.CommentBuilder> {
 
+  /**
+   * Constructs a new {@link CommentTtlvDeserializer}.
+   */
   public CommentTtlvDeserializer() {
     super(Comment.kmipTag, Comment.encodingType);
   }

@@ -52,6 +52,9 @@ public class LoginOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LoginOpResponsePayload} instance wrapping the given value.
+   */
   public static LoginOpResponsePayload of(List<KmipDataType> values) {
     var builder = LoginOpResponsePayload.builder();
     values.forEach(value -> {

@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
+/**
+ * KMIP CreateOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateOpRequestPayload implements RequestPayloadStructure {
@@ -53,6 +56,9 @@ public class CreateOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateOpRequestPayload of(List<KmipDataType> values) {
     var builder = CreateOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

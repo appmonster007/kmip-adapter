@@ -7,9 +7,15 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.MacData;
 
+/**
+ * XML deserializer for {@link MacData}.
+ */
 public class MacDataXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<MacData, MacData.MacDataBuilder> {
 
+  /**
+   * Constructs a new {@link MacDataXmlDeserializer}.
+   */
   public MacDataXmlDeserializer() {
     super(MacData.kmipTag, MacData.encodingType);
   }

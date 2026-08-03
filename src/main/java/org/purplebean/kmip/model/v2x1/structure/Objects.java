@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP Objects structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Objects implements KmipStructure {
@@ -42,6 +45,9 @@ public class Objects implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Objects} instance wrapping the given value.
+   */
   public static Objects of(@NonNull List<UniqueIdentifier> uniqueIdentifiers) {
     return Objects
         .builder()

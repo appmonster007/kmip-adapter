@@ -11,9 +11,15 @@ import org.purplebean.kmip.model.v2x1.structure.ObjectDefaults;
 import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
 import org.purplebean.kmip.model.v2x1.structure.ObjectTypes;
 
+/**
+ * XML deserializer for {@link ObjectDefaults}.
+ */
 public class ObjectDefaultsXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ObjectDefaults, ObjectDefaults.ObjectDefaultsBuilder> {
 
+  /**
+   * Constructs a new {@link ObjectDefaultsXmlDeserializer}.
+   */
   public ObjectDefaultsXmlDeserializer() {
     super(ObjectDefaults.kmipTag, ObjectDefaults.encodingType);
   }

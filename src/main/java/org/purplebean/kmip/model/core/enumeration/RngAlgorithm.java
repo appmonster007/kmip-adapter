@@ -78,6 +78,9 @@ public class RngAlgorithm implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link RngAlgorithm} instance wrapping the given value.
+   */
   public static RngAlgorithm of(@NonNull Value value) {
     return new RngAlgorithm(value);
   }
@@ -256,6 +259,9 @@ public class RngAlgorithm implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

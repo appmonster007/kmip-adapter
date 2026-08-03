@@ -63,6 +63,9 @@ public class Digest implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Digest} instance wrapping the given value.
+   */
   public static Digest of(@NonNull AttributeName attributeName,
                           @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

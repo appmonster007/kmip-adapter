@@ -52,6 +52,9 @@ public class ImportOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ImportOpResponsePayload} instance wrapping the given value.
+   */
   public static ImportOpResponsePayload of(List<KmipDataType> values) {
     var builder = ImportOpResponsePayload.builder();
     values.forEach(value -> {
@@ -62,6 +65,9 @@ public class ImportOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link ImportOpResponsePayload} instance wrapping the given value.
+   */
   public static ImportOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return ImportOpResponsePayload
         .builder()

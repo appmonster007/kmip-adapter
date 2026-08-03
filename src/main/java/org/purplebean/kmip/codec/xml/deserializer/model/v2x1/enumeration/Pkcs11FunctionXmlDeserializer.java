@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 
+/**
+ * XML deserializer for {@link Pkcs11Function}.
+ */
 public class Pkcs11FunctionXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs11Function, Pkcs11Function.Pkcs11FunctionBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11FunctionXmlDeserializer}.
+   */
   public Pkcs11FunctionXmlDeserializer() {
     super(Pkcs11Function.kmipTag, Pkcs11Function.encodingType);
   }

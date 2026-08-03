@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 
+/**
+ * XML deserializer for {@link BatchErrorContinuationOption}.
+ */
 public class BatchErrorContinuationOptionXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<BatchErrorContinuationOption,
         BatchErrorContinuationOption.BatchErrorContinuationOptionBuilder> {
 
+  /**
+   * Constructs a new {@link BatchErrorContinuationOptionXmlDeserializer}.
+   */
   public BatchErrorContinuationOptionXmlDeserializer() {
     super(BatchErrorContinuationOption.kmipTag, BatchErrorContinuationOption.encodingType);
   }

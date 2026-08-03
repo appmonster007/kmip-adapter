@@ -67,6 +67,9 @@ public class X509CertificateIssuer implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link X509CertificateIssuer} instance wrapping the given value.
+   */
   public static X509CertificateIssuer of(@NonNull AttributeName attributeName,
                                          @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

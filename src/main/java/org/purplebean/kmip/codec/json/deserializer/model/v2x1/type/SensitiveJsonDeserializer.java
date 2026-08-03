@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Sensitive;
 
+/**
+ * JSON deserializer for {@link Sensitive}.
+ */
 public class SensitiveJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Sensitive, Sensitive.SensitiveBuilder> {
 
+  /**
+   * Constructs a new {@link SensitiveJsonDeserializer}.
+   */
   public SensitiveJsonDeserializer() {
     super(Sensitive.kmipTag, Sensitive.encodingType);
   }

@@ -67,6 +67,9 @@ public class NistKeyType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link NistKeyType} instance wrapping the given value.
+   */
   public static NistKeyType of(@NonNull Value value) {
     return new NistKeyType(value);
   }
@@ -277,6 +280,9 @@ public class NistKeyType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

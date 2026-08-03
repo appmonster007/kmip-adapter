@@ -66,6 +66,9 @@ public class ProfileName implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ProfileName} instance wrapping the given value.
+   */
   public static ProfileName of(@NonNull Value value) {
     return new ProfileName(value);
   }
@@ -308,6 +311,9 @@ public class ProfileName implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

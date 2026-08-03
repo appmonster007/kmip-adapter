@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.request;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v2x1.structure.request.RequestHeader;
 
+/**
+ * TTLV serializer for {@link RequestHeader}.
+ */
 public class RequestHeaderTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RequestHeader> {
 }

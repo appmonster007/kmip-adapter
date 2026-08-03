@@ -41,6 +41,9 @@ public class ValidationAuthorityUri implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationAuthorityUri} instance wrapping the given value.
+   */
   public static ValidationAuthorityUri of(@NonNull String value) {
     return new ValidationAuthorityUri(value);
   }

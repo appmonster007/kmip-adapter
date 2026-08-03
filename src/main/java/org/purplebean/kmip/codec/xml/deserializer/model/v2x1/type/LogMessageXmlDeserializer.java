@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.LogMessage;
 
+/**
+ * XML deserializer for {@link LogMessage}.
+ */
 public class LogMessageXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<LogMessage, LogMessage.LogMessageBuilder> {
 
+  /**
+   * Constructs a new {@link LogMessageXmlDeserializer}.
+   */
   public LogMessageXmlDeserializer() {
     super(LogMessage.kmipTag, LogMessage.encodingType);
   }

@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.InitialDate;
 
+/**
+ * TTLV deserializer for {@link InitialDate}.
+ */
 public class InitialDateTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<InitialDate, InitialDate.InitialDateBuilder> {
 
+  /**
+   * Constructs a new {@link InitialDateTtlvDeserializer}.
+   */
   public InitialDateTtlvDeserializer() {
     super(InitialDate.kmipTag, InitialDate.encodingType);
   }

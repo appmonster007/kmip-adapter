@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.xml.serializer.model.core.type;
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 
+/**
+ * XML serializer for {@link SplitKeyParts}.
+ */
 public class SplitKeyPartsXmlSerializer extends AbstractKmipDataTypeXmlSerializer<SplitKeyParts> {
 }

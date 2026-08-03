@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
 
+/**
+ * JSON deserializer for {@link AuthenticatedEncryptionAdditionalData}.
+ */
 public class AuthenticatedEncryptionAdditionalDataJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AuthenticatedEncryptionAdditionalData,
         AuthenticatedEncryptionAdditionalData.AuthenticatedEncryptionAdditionalDataBuilder> {
 
+  /**
+   * Constructs a new {@link AuthenticatedEncryptionAdditionalDataJsonDeserializer}.
+   */
   public AuthenticatedEncryptionAdditionalDataJsonDeserializer() {
     super(AuthenticatedEncryptionAdditionalData.kmipTag,
         AuthenticatedEncryptionAdditionalData.encodingType);

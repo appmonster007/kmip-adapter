@@ -7,10 +7,16 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.structure.KeyMaterialStructure;
 
+/**
+ * JSON deserializer for {@link KeyMaterialStructure}.
+ */
 public class KeyMaterialStructureJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<KeyMaterialStructure,
         KeyMaterialStructure.KeyMaterialStructureBuilder> {
 
+  /**
+   * Constructs a new {@link KeyMaterialStructureJsonDeserializer}.
+   */
   public KeyMaterialStructureJsonDeserializer() {
     super(KeyMaterialStructure.kmipTag, KeyMaterialStructure.encodingType);
   }

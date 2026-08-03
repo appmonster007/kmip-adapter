@@ -41,6 +41,9 @@ public class InteropOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link InteropOpResponsePayload} instance wrapping the given value.
+   */
   public static InteropOpResponsePayload of(List<KmipDataType> values) {
     return InteropOpResponsePayload
         .builder()

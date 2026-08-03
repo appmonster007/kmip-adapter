@@ -47,10 +47,16 @@ public class RotateOffset implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateOffset} instance wrapping the given value.
+   */
   public static RotateOffset of(@NonNull Long value) {
     return new RotateOffset(value);
   }
 
+  /**
+   * Returns the {@link RotateOffset} instance wrapping the given value.
+   */
   public static RotateOffset of(@NonNull AttributeName attributeName,
                                 @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

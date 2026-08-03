@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * JSON deserializer for {@link EncryptionKeyInformation}.
+ */
 public class EncryptionKeyInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<EncryptionKeyInformation,
         EncryptionKeyInformation.EncryptionKeyInformationBuilder> {
 
+  /**
+   * Constructs a new {@link EncryptionKeyInformationJsonDeserializer}.
+   */
   public EncryptionKeyInformationJsonDeserializer() {
     super(EncryptionKeyInformation.kmipTag, EncryptionKeyInformation.encodingType);
   }

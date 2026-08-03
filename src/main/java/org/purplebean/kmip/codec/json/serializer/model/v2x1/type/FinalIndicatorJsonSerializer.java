@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.json.serializer.model.v2x1.type;
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 
+/**
+ * JSON serializer for {@link FinalIndicator}.
+ */
 public class FinalIndicatorJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<FinalIndicator> {
 }

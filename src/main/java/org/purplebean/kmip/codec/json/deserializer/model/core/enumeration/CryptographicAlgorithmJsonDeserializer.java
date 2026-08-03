@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 
+/**
+ * JSON deserializer for {@link CryptographicAlgorithm}.
+ */
 public class CryptographicAlgorithmJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CryptographicAlgorithm,
         CryptographicAlgorithm.CryptographicAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicAlgorithmJsonDeserializer}.
+   */
   public CryptographicAlgorithmJsonDeserializer() {
     super(CryptographicAlgorithm.kmipTag, CryptographicAlgorithm.encodingType);
   }

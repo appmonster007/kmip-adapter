@@ -9,6 +9,9 @@ import java.math.BigInteger;
 import java.util.HexFormat;
 import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
+/**
+ * JSON deserializer for {@link BigInteger}.
+ */
 public class BigIntegerJsonDeserializer extends JsonDeserializer<BigInteger> {
   @Override
   public BigInteger deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

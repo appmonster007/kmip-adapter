@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ExtensionTag;
 
+/**
+ * XML deserializer for {@link ExtensionTag}.
+ */
 public class ExtensionTagXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<ExtensionTag, ExtensionTag.ExtensionTagBuilder> {
 
+  /**
+   * Constructs a new {@link ExtensionTagXmlDeserializer}.
+   */
   public ExtensionTagXmlDeserializer() {
     super(ExtensionTag.kmipTag, ExtensionTag.encodingType);
   }

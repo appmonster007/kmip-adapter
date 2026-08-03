@@ -14,10 +14,16 @@ import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 import org.purplebean.kmip.model.v3x0.structure.response.ResponseBatchItem;
 
+/**
+ * XML deserializer for {@link ResponseBatchItem}.
+ */
 public class ResponseBatchItemXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ResponseBatchItem,
         ResponseBatchItem.ResponseBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link ResponseBatchItemXmlDeserializer}.
+   */
   public ResponseBatchItemXmlDeserializer() {
     super(ResponseBatchItem.kmipTag, ResponseBatchItem.encodingType);
   }

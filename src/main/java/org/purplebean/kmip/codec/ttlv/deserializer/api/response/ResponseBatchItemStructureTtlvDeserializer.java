@@ -12,6 +12,9 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeseriali
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.response.SimpleResponseBatchItem;
 
+/**
+ * TTLV deserializer for {@link ResponseBatchItemStructure}.
+ */
 public class ResponseBatchItemStructureTtlvDeserializer
     extends KmipDataTypeTtlvDeserializer<ResponseBatchItemStructure> {
 

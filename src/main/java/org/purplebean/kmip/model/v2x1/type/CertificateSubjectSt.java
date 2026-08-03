@@ -48,10 +48,16 @@ public class CertificateSubjectSt implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateSubjectSt} instance wrapping the given value.
+   */
   public static CertificateSubjectSt of(@NonNull String value) {
     return new CertificateSubjectSt(value);
   }
 
+  /**
+   * Returns the {@link CertificateSubjectSt} instance wrapping the given value.
+   */
   public static CertificateSubjectSt of(@NonNull AttributeName attributeName,
                                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

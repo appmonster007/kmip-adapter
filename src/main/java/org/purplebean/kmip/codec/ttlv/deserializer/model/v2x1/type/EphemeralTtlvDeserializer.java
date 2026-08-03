@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.Ephemeral;
 
+/**
+ * TTLV deserializer for {@link Ephemeral}.
+ */
 public class EphemeralTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Ephemeral, Ephemeral.EphemeralBuilder> {
 
+  /**
+   * Constructs a new {@link EphemeralTtlvDeserializer}.
+   */
   public EphemeralTtlvDeserializer() {
     super(Ephemeral.kmipTag, Ephemeral.encodingType);
   }

@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 
+/**
+ * TTLV deserializer for {@link TimeStamp}.
+ */
 public class TimeStampTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<TimeStamp, TimeStamp.TimeStampBuilder> {
 
+  /**
+   * Constructs a new {@link TimeStampTtlvDeserializer}.
+   */
   public TimeStampTtlvDeserializer() {
     super(TimeStamp.kmipTag, TimeStamp.encodingType);
   }

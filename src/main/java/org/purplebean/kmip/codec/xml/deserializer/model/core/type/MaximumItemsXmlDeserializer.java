@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.MaximumItems;
 
+/**
+ * XML deserializer for {@link MaximumItems}.
+ */
 public class MaximumItemsXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<MaximumItems, MaximumItems.MaximumItemsBuilder> {
 
+  /**
+   * Constructs a new {@link MaximumItemsXmlDeserializer}.
+   */
   public MaximumItemsXmlDeserializer() {
     super(MaximumItems.kmipTag, MaximumItems.encodingType);
   }

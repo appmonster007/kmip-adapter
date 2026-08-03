@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LogOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.LogMessage;
 
+/**
+ * TTLV deserializer for {@link LogOpRequestPayload}.
+ */
 public class LogOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LogOpRequestPayload,
         LogOpRequestPayload.LogOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LogOpRequestPayloadTtlvDeserializer}.
+   */
   public LogOpRequestPayloadTtlvDeserializer() {
     super(LogOpRequestPayload.kmipTag, LogOpRequestPayload.encodingType);
   }

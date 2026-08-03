@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.LocateOpResponsePayload;
 
+/**
+ * TTLV deserializer for {@link LocateOpResponsePayload}.
+ */
 public class LocateOpResponsePayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LocateOpResponsePayload,
         LocateOpResponsePayload.LocateOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LocateOpResponsePayloadTtlvDeserializer}.
+   */
   public LocateOpResponsePayloadTtlvDeserializer() {
     super(LocateOpResponsePayload.kmipTag, LocateOpResponsePayload.encodingType);
   }

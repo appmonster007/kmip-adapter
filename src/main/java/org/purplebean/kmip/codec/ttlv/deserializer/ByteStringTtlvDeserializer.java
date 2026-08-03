@@ -6,6 +6,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
+/**
+ * TTLV deserializer for {@link ByteBuffer}.
+ */
 public class ByteStringTtlvDeserializer extends TtlvDeserializer<ByteBuffer> {
   private final EncodingType type = EncodingType.BYTE_STRING;
 

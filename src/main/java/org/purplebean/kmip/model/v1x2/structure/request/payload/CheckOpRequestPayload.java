@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 
+/**
+ * KMIP CheckOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CheckOpRequestPayload implements RequestPayloadStructure {
@@ -58,6 +61,9 @@ public class CheckOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CheckOpRequestPayload} instance wrapping the given value.
+   */
   public static CheckOpRequestPayload of(List<KmipDataType> values) {
     var builder = CheckOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

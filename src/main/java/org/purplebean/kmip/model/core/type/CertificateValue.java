@@ -41,10 +41,16 @@ public class CertificateValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateValue} instance wrapping the given value.
+   */
   public static CertificateValue of(@NonNull ByteBuffer value) {
     return new CertificateValue(value);
   }
 
+  /**
+   * Returns the {@link CertificateValue} instance wrapping the given value.
+   */
   public static CertificateValue of(byte[] value) {
     return CertificateValue
         .builder()

@@ -52,6 +52,9 @@ public class LogOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link LogOpRequestPayload} instance wrapping the given value.
+   */
   public static LogOpRequestPayload of(List<KmipDataType> values) {
     var builder = LogOpRequestPayload.builder();
     values.forEach(value -> {
@@ -62,6 +65,9 @@ public class LogOpRequestPayload implements RequestPayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link LogOpRequestPayload} instance wrapping the given value.
+   */
   public static LogOpRequestPayload of(@NonNull LogMessage logMessage) {
     return LogOpRequestPayload
         .builder()

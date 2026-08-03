@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 
+/**
+ * KMIP AsynchronousCorrelationValues structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class AsynchronousCorrelationValues implements KmipStructure {
@@ -45,6 +48,9 @@ public class AsynchronousCorrelationValues implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousCorrelationValues} instance wrapping the given value.
+   */
   public static AsynchronousCorrelationValues of(
       @NonNull List<AsynchronousCorrelationValue> values) {
     return AsynchronousCorrelationValues

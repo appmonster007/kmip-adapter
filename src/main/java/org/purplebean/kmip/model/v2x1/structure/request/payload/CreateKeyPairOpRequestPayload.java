@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.v2x1.structure.CommonAttributes;
 import org.purplebean.kmip.model.v2x1.structure.PrivateKeyAttributes;
 import org.purplebean.kmip.model.v2x1.structure.PublicKeyAttributes;
 
+/**
+ * KMIP CreateKeyPairOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
@@ -55,6 +58,9 @@ public class CreateKeyPairOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateKeyPairOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateKeyPairOpRequestPayload of(List<KmipDataType> values) {
     var builder = CreateKeyPairOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

@@ -43,10 +43,16 @@ public class OtpSeed implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpSeed} instance wrapping the given value.
+   */
   public static OtpSeed of(@NonNull ByteBuffer value) {
     return new OtpSeed(value);
   }
 
+  /**
+   * Returns the {@link OtpSeed} instance wrapping the given value.
+   */
   public static OtpSeed of(byte[] value) {
     return OtpSeed
         .builder()

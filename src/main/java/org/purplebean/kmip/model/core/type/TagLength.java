@@ -41,6 +41,9 @@ public class TagLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link TagLength} instance wrapping the given value.
+   */
   public static TagLength of(@NonNull Integer value) {
     return new TagLength(value);
   }

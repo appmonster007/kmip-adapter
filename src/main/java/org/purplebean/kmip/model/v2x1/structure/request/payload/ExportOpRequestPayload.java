@@ -18,6 +18,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP ExportOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ExportOpRequestPayload implements RequestPayloadStructure {
@@ -48,6 +51,9 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ExportOpRequestPayload} instance wrapping the given value.
+   */
   public static ExportOpRequestPayload of(List<KmipDataType> values) {
     var builder = ExportOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

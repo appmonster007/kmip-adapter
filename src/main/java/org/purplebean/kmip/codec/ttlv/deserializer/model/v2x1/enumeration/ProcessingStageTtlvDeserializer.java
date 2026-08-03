@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 
+/**
+ * TTLV deserializer for {@link ProcessingStage}.
+ */
 public class ProcessingStageTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProcessingStage, ProcessingStage.ProcessingStageBuilder> {
 
+  /**
+   * Constructs a new {@link ProcessingStageTtlvDeserializer}.
+   */
   public ProcessingStageTtlvDeserializer() {
     super(ProcessingStage.kmipTag, ProcessingStage.encodingType);
   }

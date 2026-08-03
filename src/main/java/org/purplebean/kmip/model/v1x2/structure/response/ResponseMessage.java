@@ -20,6 +20,9 @@ import org.purplebean.kmip.api.response.ResponseBatchItemStructure;
 import org.purplebean.kmip.api.response.ResponseHeaderStructure;
 import org.purplebean.kmip.api.response.ResponseMessageStructure;
 
+/**
+ * KMIP ResponseMessage response structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ResponseMessage implements ResponseMessageStructure {
@@ -61,6 +64,9 @@ public class ResponseMessage implements ResponseMessageStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ResponseMessage} instance wrapping the given value.
+   */
   public static ResponseMessage of(List<KmipDataType> values, List<Exception> errors) {
     var builder = ResponseMessage.builder();
     builder.responseBatchItemErrors(errors);

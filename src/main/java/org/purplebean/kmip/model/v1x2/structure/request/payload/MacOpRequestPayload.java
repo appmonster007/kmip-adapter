@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP MacOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MacOpRequestPayload implements RequestPayloadStructure {
@@ -56,6 +59,9 @@ public class MacOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MacOpRequestPayload} instance wrapping the given value.
+   */
   public static MacOpRequestPayload of(List<KmipDataType> values) {
     var builder = MacOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

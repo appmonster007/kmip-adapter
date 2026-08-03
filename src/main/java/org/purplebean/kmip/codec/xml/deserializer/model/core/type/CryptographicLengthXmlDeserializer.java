@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 
+/**
+ * XML deserializer for {@link CryptographicLength}.
+ */
 public class CryptographicLengthXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CryptographicLength,
         CryptographicLength.CryptographicLengthBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicLengthXmlDeserializer}.
+   */
   public CryptographicLengthXmlDeserializer() {
     super(CryptographicLength.kmipTag, CryptographicLength.encodingType);
   }

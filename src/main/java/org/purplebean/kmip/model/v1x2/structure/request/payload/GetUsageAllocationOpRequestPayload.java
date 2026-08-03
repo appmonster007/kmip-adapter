@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 
+/**
+ * KMIP GetUsageAllocationOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class GetUsageAllocationOpRequestPayload implements RequestPayloadStructure {
@@ -54,6 +57,9 @@ public class GetUsageAllocationOpRequestPayload implements RequestPayloadStructu
     validate();
   }
 
+  /**
+   * Returns the {@link GetUsageAllocationOpRequestPayload} instance wrapping the given value.
+   */
   public static GetUsageAllocationOpRequestPayload of(List<KmipDataType> values) {
     var builder = GetUsageAllocationOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.RevocationMessage;
 
+/**
+ * XML deserializer for {@link RevocationMessage}.
+ */
 public class RevocationMessageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<RevocationMessage,
         RevocationMessage.RevocationMessageBuilder> {
 
+  /**
+   * Constructs a new {@link RevocationMessageXmlDeserializer}.
+   */
   public RevocationMessageXmlDeserializer() {
     super(RevocationMessage.kmipTag, RevocationMessage.encodingType);
   }

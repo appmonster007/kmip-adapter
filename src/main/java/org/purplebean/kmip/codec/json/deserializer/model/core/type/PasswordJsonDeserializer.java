@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.Password;
 
+/**
+ * JSON deserializer for {@link Password}.
+ */
 public class PasswordJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Password, Password.PasswordBuilder> {
 
+  /**
+   * Constructs a new {@link PasswordJsonDeserializer}.
+   */
   public PasswordJsonDeserializer() {
     super(Password.kmipTag, Password.encodingType);
   }

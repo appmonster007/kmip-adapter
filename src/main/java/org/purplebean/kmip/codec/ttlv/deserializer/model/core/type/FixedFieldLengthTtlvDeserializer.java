@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.FixedFieldLength;
 
+/**
+ * TTLV deserializer for {@link FixedFieldLength}.
+ */
 public class FixedFieldLengthTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<FixedFieldLength,
         FixedFieldLength.FixedFieldLengthBuilder> {
 
+  /**
+   * Constructs a new {@link FixedFieldLengthTtlvDeserializer}.
+   */
   public FixedFieldLengthTtlvDeserializer() {
     super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
   }

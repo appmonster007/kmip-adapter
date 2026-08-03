@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.CertificateSubjectEmail;
 
+/**
+ * XML deserializer for {@link CertificateSubjectEmail}.
+ */
 public class CertificateSubjectEmailXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CertificateSubjectEmail,
         CertificateSubjectEmail.CertificateSubjectEmailBuilder> {
 
+  /**
+   * Constructs a new {@link CertificateSubjectEmailXmlDeserializer}.
+   */
   public CertificateSubjectEmailXmlDeserializer() {
     super(CertificateSubjectEmail.kmipTag, CertificateSubjectEmail.encodingType);
   }

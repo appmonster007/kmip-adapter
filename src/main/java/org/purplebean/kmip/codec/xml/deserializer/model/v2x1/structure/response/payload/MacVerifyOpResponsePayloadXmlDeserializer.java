@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.MacVerifyOpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * XML deserializer for {@link MacVerifyOpResponsePayload}.
+ */
 public class MacVerifyOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<MacVerifyOpResponsePayload,
         MacVerifyOpResponsePayload.MacVerifyOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link MacVerifyOpResponsePayloadXmlDeserializer}.
+   */
   public MacVerifyOpResponsePayloadXmlDeserializer() {
     super(MacVerifyOpResponsePayload.kmipTag, MacVerifyOpResponsePayload.encodingType);
   }

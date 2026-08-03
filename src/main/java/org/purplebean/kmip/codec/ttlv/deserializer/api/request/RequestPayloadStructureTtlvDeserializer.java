@@ -10,6 +10,9 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.KmipDataTypeTtlvDeseriali
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * TTLV deserializer for {@link RequestPayloadStructure}.
+ */
 public class RequestPayloadStructureTtlvDeserializer
     extends KmipDataTypeTtlvDeserializer<RequestPayloadStructure> {
 

@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 
+/**
+ * TTLV deserializer for {@link SecretDataType}.
+ */
 public class SecretDataTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SecretDataType, SecretDataType.SecretDataTypeBuilder> {
 
+  /**
+   * Constructs a new {@link SecretDataTypeTtlvDeserializer}.
+   */
   public SecretDataTypeTtlvDeserializer() {
     super(SecretDataType.kmipTag, SecretDataType.encodingType);
   }

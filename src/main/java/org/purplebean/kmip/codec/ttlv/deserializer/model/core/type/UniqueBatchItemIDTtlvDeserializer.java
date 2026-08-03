@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
 
+/**
+ * TTLV deserializer for {@link UniqueBatchItemID}.
+ */
 public class UniqueBatchItemIDTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<UniqueBatchItemID,
         UniqueBatchItemID.UniqueBatchItemIDBuilder> {
 
+  /**
+   * Constructs a new {@link UniqueBatchItemIDTtlvDeserializer}.
+   */
   public UniqueBatchItemIDTtlvDeserializer() {
     super(UniqueBatchItemID.kmipTag, UniqueBatchItemID.encodingType);
   }

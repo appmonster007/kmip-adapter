@@ -13,6 +13,9 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestMessage;
 
+/**
+ * TTLV deserializer for {@link RequestMessageStructure}.
+ */
 public class RequestMessageStructureTtlvDeserializer
     extends KmipDataTypeTtlvDeserializer<RequestMessageStructure> {
 

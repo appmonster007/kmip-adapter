@@ -8,9 +8,15 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.SymmetricKey;
 
+/**
+ * TTLV deserializer for {@link SymmetricKey}.
+ */
 public class SymmetricKeyTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<SymmetricKey, SymmetricKey.SymmetricKeyBuilder> {
 
+  /**
+   * Constructs a new {@link SymmetricKeyTtlvDeserializer}.
+   */
   public SymmetricKeyTtlvDeserializer() {
     super(SymmetricKey.kmipTag, SymmetricKey.encodingType);
   }

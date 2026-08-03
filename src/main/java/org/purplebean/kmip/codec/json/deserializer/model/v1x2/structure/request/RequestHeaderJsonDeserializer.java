@@ -17,9 +17,15 @@ import org.purplebean.kmip.model.core.type.MaximumResponseSize;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 import org.purplebean.kmip.model.v1x2.structure.request.RequestHeader;
 
+/**
+ * JSON deserializer for {@link RequestHeader}.
+ */
 public class RequestHeaderJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
 
+  /**
+   * Constructs a new {@link RequestHeaderJsonDeserializer}.
+   */
   public RequestHeaderJsonDeserializer() {
     super(RequestHeader.kmipTag, RequestHeader.encodingType);
   }

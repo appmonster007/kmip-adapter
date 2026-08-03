@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.InitializationVector;
 
+/**
+ * JSON deserializer for {@link InitializationVector}.
+ */
 public class InitializationVectorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<InitializationVector,
         InitializationVector.InitializationVectorBuilder> {
 
+  /**
+   * Constructs a new {@link InitializationVectorJsonDeserializer}.
+   */
   public InitializationVectorJsonDeserializer() {
     super(InitializationVector.kmipTag, InitializationVector.encodingType);
   }

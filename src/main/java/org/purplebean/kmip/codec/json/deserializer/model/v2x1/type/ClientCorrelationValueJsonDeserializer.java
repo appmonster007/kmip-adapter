@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.ClientCorrelationValue;
 
+/**
+ * JSON deserializer for {@link ClientCorrelationValue}.
+ */
 public class ClientCorrelationValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ClientCorrelationValue,
         ClientCorrelationValue.ClientCorrelationValueBuilder> {
 
+  /**
+   * Constructs a new {@link ClientCorrelationValueJsonDeserializer}.
+   */
   public ClientCorrelationValueJsonDeserializer() {
     super(ClientCorrelationValue.kmipTag, ClientCorrelationValue.encodingType);
   }

@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
 
+/**
+ * TTLV deserializer for {@link SubmissionDate}.
+ */
 public class SubmissionDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SubmissionDate, SubmissionDate.SubmissionDateBuilder> {
 
+  /**
+   * Constructs a new {@link SubmissionDateTtlvDeserializer}.
+   */
   public SubmissionDateTtlvDeserializer() {
     super(SubmissionDate.kmipTag, SubmissionDate.encodingType);
   }

@@ -67,6 +67,9 @@ public class RequestBatchItem implements RequestBatchItemStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RequestBatchItem} instance wrapping the given value.
+   */
   public static RequestBatchItem of(List<KmipDataType> values) {
     var builder = RequestBatchItem.builder();
     Map<KmipTag, List<KmipDataType>> map = values

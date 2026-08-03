@@ -42,6 +42,9 @@ public class IterationCount implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link IterationCount} instance wrapping the given value.
+   */
   public static IterationCount of(@NonNull Integer value) {
     return new IterationCount(value);
   }

@@ -42,6 +42,9 @@ public class SplitKeyThreshold implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SplitKeyThreshold} instance wrapping the given value.
+   */
   public static SplitKeyThreshold of(@NonNull Integer value) {
     return new SplitKeyThreshold(value);
   }

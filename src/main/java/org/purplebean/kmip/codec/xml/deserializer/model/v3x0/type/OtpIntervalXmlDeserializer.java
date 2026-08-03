@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v3x0.type.OtpInterval;
 
+/**
+ * XML deserializer for {@link OtpInterval}.
+ */
 public class OtpIntervalXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<OtpInterval, OtpInterval.OtpIntervalBuilder> {
 
+  /**
+   * Constructs a new {@link OtpIntervalXmlDeserializer}.
+   */
   public OtpIntervalXmlDeserializer() {
     super(OtpInterval.kmipTag, OtpInterval.encodingType);
   }

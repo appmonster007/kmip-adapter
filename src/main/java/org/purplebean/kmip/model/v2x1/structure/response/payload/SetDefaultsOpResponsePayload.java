@@ -42,6 +42,9 @@ public class SetDefaultsOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SetDefaultsOpResponsePayload} instance wrapping the given value.
+   */
   public static SetDefaultsOpResponsePayload of(List<KmipDataType> values) {
     return SetDefaultsOpResponsePayload
         .builder()

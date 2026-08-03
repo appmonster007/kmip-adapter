@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafe;
 
+/**
+ * TTLV deserializer for {@link QuantumSafe}.
+ */
 public class QuantumSafeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<QuantumSafe, QuantumSafe.QuantumSafeBuilder> {
 
+  /**
+   * Constructs a new {@link QuantumSafeTtlvDeserializer}.
+   */
   public QuantumSafeTtlvDeserializer() {
     super(QuantumSafe.kmipTag, QuantumSafe.encodingType);
   }

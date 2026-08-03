@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.KeyRoleType;
 
+/**
+ * TTLV deserializer for {@link KeyRoleType}.
+ */
 public class KeyRoleTypeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<KeyRoleType, KeyRoleType.KeyRoleTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyRoleTypeTtlvDeserializer}.
+   */
   public KeyRoleTypeTtlvDeserializer() {
     super(KeyRoleType.kmipTag, KeyRoleType.encodingType);
   }

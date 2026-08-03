@@ -52,10 +52,16 @@ public class TtlvDataType implements KmipDataType {
     }
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Structure value.
+   */
   public static TtlvDataType ofStructure(KmipTag.Value kmipTag, List<KmipDataType> kmipDataTypes) {
     return ofStructure(kmipTag, kmipDataTypes.toArray(KmipDataType[]::new));
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Structure value.
+   */
   public static TtlvDataType ofStructure(KmipTag.Value kmipTag, KmipDataType... kmipDataTypes) {
     return TtlvDataType
         .builder()
@@ -65,6 +71,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Integer value.
+   */
   public static TtlvDataType ofInteger(KmipTag.Value kmipTag, Integer value) {
     return TtlvDataType
         .builder()
@@ -74,6 +83,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a LongInteger value.
+   */
   public static TtlvDataType ofLongInteger(KmipTag.Value kmipTag, Long value) {
     return TtlvDataType
         .builder()
@@ -83,6 +95,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a BigInteger value.
+   */
   public static TtlvDataType ofBigInteger(KmipTag.Value kmipTag, BigInteger value) {
     return TtlvDataType
         .builder()
@@ -92,6 +107,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Enumeration value.
+   */
   public static TtlvDataType ofEnumeration(KmipTag.Value kmipTag, KmipEnumeration.Value<?> value) {
     return TtlvDataType
         .builder()
@@ -101,6 +119,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Boolean value.
+   */
   public static TtlvDataType ofBoolean(KmipTag.Value kmipTag, Boolean value) {
     return TtlvDataType
         .builder()
@@ -110,6 +131,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a TextString value.
+   */
   public static TtlvDataType ofTextString(KmipTag.Value kmipTag, String value) {
     return TtlvDataType
         .builder()
@@ -119,6 +143,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a ByteString value.
+   */
   public static TtlvDataType ofByteString(KmipTag.Value kmipTag, ByteBuffer value) {
     return TtlvDataType
         .builder()
@@ -128,10 +155,16 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a ByteString value.
+   */
   public static TtlvDataType ofByteString(KmipTag.Value kmipTag, byte[] value) {
     return ofByteString(kmipTag, ByteBuffer.wrap(value));
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a DateTime value.
+   */
   public static TtlvDataType ofDateTime(KmipTag.Value kmipTag, OffsetDateTime value) {
     return TtlvDataType
         .builder()
@@ -141,6 +174,9 @@ public class TtlvDataType implements KmipDataType {
         .build();
   }
 
+  /**
+   * Creates a {@link TtlvDataType} wrapping a Interval value.
+   */
   public static TtlvDataType ofInterval(KmipTag.Value kmipTag, Integer value) {
     return TtlvDataType
         .builder()

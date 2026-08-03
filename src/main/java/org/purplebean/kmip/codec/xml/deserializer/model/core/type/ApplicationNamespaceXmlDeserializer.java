@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ApplicationNamespace;
 
+/**
+ * XML deserializer for {@link ApplicationNamespace}.
+ */
 public class ApplicationNamespaceXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ApplicationNamespace,
         ApplicationNamespace.ApplicationNamespaceBuilder> {
 
+  /**
+   * Constructs a new {@link ApplicationNamespaceXmlDeserializer}.
+   */
   public ApplicationNamespaceXmlDeserializer() {
     super(ApplicationNamespace.kmipTag, ApplicationNamespace.encodingType);
   }

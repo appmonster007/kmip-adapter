@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.RotateGeneration;
 
+/**
+ * TTLV deserializer for {@link RotateGeneration}.
+ */
 public class RotateGenerationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RotateGeneration,
         RotateGeneration.RotateGenerationBuilder> {
 
+  /**
+   * Constructs a new {@link RotateGenerationTtlvDeserializer}.
+   */
   public RotateGenerationTtlvDeserializer() {
     super(RotateGeneration.kmipTag, RotateGeneration.encodingType);
   }

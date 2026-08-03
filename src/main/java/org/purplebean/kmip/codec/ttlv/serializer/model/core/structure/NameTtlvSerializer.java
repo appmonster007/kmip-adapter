@@ -3,5 +3,8 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.structure;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.structure.Name;
 
+/**
+ * TTLV serializer for {@link Name}.
+ */
 public class NameTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<Name> {
 }

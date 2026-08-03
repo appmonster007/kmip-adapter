@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
 
+/**
+ * XML deserializer for {@link KeyCompressionType}.
+ */
 public class KeyCompressionTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<KeyCompressionType,
         KeyCompressionType.KeyCompressionTypeBuilder> {
 
+  /**
+   * Constructs a new {@link KeyCompressionTypeXmlDeserializer}.
+   */
   public KeyCompressionTypeXmlDeserializer() {
     super(KeyCompressionType.kmipTag, KeyCompressionType.encodingType);
   }

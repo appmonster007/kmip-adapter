@@ -47,10 +47,16 @@ public class Name implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link Name} instance wrapping the given value.
+   */
   public static Name of(@NonNull String value) {
     return new Name(value);
   }
 
+  /**
+   * Returns the {@link Name} instance wrapping the given value.
+   */
   public static Name of(@NonNull AttributeName attributeName,
                         @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

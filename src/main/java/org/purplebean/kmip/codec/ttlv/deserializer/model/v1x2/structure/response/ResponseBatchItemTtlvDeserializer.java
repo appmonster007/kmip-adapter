@@ -15,10 +15,16 @@ import org.purplebean.kmip.model.core.type.ResultMessage;
 import org.purplebean.kmip.model.core.type.UniqueBatchItemID;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
 
+/**
+ * TTLV deserializer for {@link ResponseBatchItem}.
+ */
 public class ResponseBatchItemTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ResponseBatchItem,
         ResponseBatchItem.ResponseBatchItemBuilder> {
 
+  /**
+   * Constructs a new {@link ResponseBatchItemTtlvDeserializer}.
+   */
   public ResponseBatchItemTtlvDeserializer() {
     super(ResponseBatchItem.kmipTag, ResponseBatchItem.encodingType);
   }

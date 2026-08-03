@@ -46,6 +46,9 @@ public class NewAttribute implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link NewAttribute} instance wrapping the given value.
+   */
   public static NewAttribute of(List<KmipDataType> values) {
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("NewAttribute requires exactly one attribute child");

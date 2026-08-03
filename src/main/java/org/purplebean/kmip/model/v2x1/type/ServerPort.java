@@ -41,6 +41,9 @@ public class ServerPort implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ServerPort} instance wrapping the given value.
+   */
   public static ServerPort of(@NonNull Integer value) {
     return new ServerPort(value);
   }

@@ -15,10 +15,16 @@ import org.purplebean.kmip.model.core.type.CryptographicLength;
 import org.purplebean.kmip.model.v2x1.structure.RandomNumberGenerator;
 import org.purplebean.kmip.model.v2x1.structure.RngParameters;
 
+/**
+ * JSON deserializer for {@link RandomNumberGenerator}.
+ */
 public class RandomNumberGeneratorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RandomNumberGenerator,
         RandomNumberGenerator.RandomNumberGeneratorBuilder> {
 
+  /**
+   * Constructs a new {@link RandomNumberGeneratorJsonDeserializer}.
+   */
   public RandomNumberGeneratorJsonDeserializer() {
     super(RandomNumberGenerator.kmipTag, RandomNumberGenerator.encodingType);
   }

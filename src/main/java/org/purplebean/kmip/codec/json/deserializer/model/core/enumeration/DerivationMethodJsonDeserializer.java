@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.DerivationMethod;
 
+/**
+ * JSON deserializer for {@link DerivationMethod}.
+ */
 public class DerivationMethodJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DerivationMethod,
         DerivationMethod.DerivationMethodBuilder> {
 
+  /**
+   * Constructs a new {@link DerivationMethodJsonDeserializer}.
+   */
   public DerivationMethodJsonDeserializer() {
     super(DerivationMethod.kmipTag, DerivationMethod.encodingType);
   }

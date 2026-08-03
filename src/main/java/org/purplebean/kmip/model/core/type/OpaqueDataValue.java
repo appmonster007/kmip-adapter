@@ -42,10 +42,16 @@ public class OpaqueDataValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OpaqueDataValue} instance wrapping the given value.
+   */
   public static OpaqueDataValue of(@NonNull ByteBuffer value) {
     return new OpaqueDataValue(value);
   }
 
+  /**
+   * Returns the {@link OpaqueDataValue} instance wrapping the given value.
+   */
   public static OpaqueDataValue of(byte[] value) {
     return OpaqueDataValue
         .builder()

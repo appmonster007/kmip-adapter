@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.Salt;
 
+/**
+ * TTLV deserializer for {@link Salt}.
+ */
 public class SaltTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Salt, Salt.SaltBuilder> {
 
+  /**
+   * Constructs a new {@link SaltTtlvDeserializer}.
+   */
   public SaltTtlvDeserializer() {
     super(Salt.kmipTag, Salt.encodingType);
   }

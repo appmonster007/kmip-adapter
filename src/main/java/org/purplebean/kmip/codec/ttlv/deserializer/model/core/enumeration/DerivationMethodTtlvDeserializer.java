@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.DerivationMethod;
 
+/**
+ * TTLV deserializer for {@link DerivationMethod}.
+ */
 public class DerivationMethodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DerivationMethod,
         DerivationMethod.DerivationMethodBuilder> {
 
+  /**
+   * Constructs a new {@link DerivationMethodTtlvDeserializer}.
+   */
   public DerivationMethodTtlvDeserializer() {
     super(DerivationMethod.kmipTag, DerivationMethod.encodingType);
   }

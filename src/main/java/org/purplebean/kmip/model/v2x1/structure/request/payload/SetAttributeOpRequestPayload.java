@@ -59,6 +59,9 @@ public class SetAttributeOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SetAttributeOpRequestPayload} instance wrapping the given value.
+   */
   public static SetAttributeOpRequestPayload of(List<KmipDataType> values) {
     var builder = SetAttributeOpRequestPayload.builder();
     values.forEach(value -> {

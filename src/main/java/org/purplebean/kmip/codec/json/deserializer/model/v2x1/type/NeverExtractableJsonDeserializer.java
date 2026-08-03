@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.type.NeverExtractable;
 
+/**
+ * JSON deserializer for {@link NeverExtractable}.
+ */
 public class NeverExtractableJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<NeverExtractable,
         NeverExtractable.NeverExtractableBuilder> {
 
+  /**
+   * Constructs a new {@link NeverExtractableJsonDeserializer}.
+   */
   public NeverExtractableJsonDeserializer() {
     super(NeverExtractable.kmipTag, NeverExtractable.encodingType);
   }

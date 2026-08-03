@@ -78,6 +78,9 @@ public class ResultStatus implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ResultStatus} instance wrapping the given value.
+   */
   public static ResultStatus of(@NonNull Value value) {
     return new ResultStatus(value);
   }
@@ -258,6 +261,9 @@ public class ResultStatus implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

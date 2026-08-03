@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.ProtectionPeriod;
 
+/**
+ * TTLV deserializer for {@link ProtectionPeriod}.
+ */
 public class ProtectionPeriodTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtectionPeriod,
         ProtectionPeriod.ProtectionPeriodBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectionPeriodTtlvDeserializer}.
+   */
   public ProtectionPeriodTtlvDeserializer() {
     super(ProtectionPeriod.kmipTag, ProtectionPeriod.encodingType);
   }

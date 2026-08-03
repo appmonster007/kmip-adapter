@@ -41,6 +41,9 @@ public class RandomIv implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link RandomIv} instance wrapping the given value.
+   */
   public static RandomIv of(@NonNull Boolean value) {
     return new RandomIv(value);
   }

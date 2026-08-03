@@ -64,6 +64,9 @@ public class CreateKeyPairOpResponsePayload implements ResponsePayloadStructure 
     validate();
   }
 
+  /**
+   * Returns the {@link CreateKeyPairOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateKeyPairOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateKeyPairOpResponsePayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

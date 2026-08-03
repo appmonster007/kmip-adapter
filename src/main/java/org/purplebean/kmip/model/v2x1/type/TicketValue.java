@@ -41,10 +41,16 @@ public class TicketValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link TicketValue} instance wrapping the given value.
+   */
   public static TicketValue of(@NonNull ByteBuffer value) {
     return new TicketValue(value);
   }
 
+  /**
+   * Returns the {@link TicketValue} instance wrapping the given value.
+   */
   public static TicketValue of(byte[] value) {
     return TicketValue
         .builder()

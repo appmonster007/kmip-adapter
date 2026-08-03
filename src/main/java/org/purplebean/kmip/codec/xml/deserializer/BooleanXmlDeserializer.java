@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
 
+/**
+ * XML deserializer for {@link Boolean}.
+ */
 public class BooleanXmlDeserializer extends JsonDeserializer<Boolean> {
 
   @Override

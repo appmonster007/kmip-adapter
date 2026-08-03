@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.type.BatchCount;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 
+/**
+ * KMIP ResponseHeader response structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ResponseHeader implements ResponseHeaderStructure {
@@ -68,6 +71,9 @@ public class ResponseHeader implements ResponseHeaderStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ResponseHeader} instance wrapping the given value.
+   */
   public static ResponseHeader of(List<KmipDataType> values) {
     var builder = ResponseHeader.builder();
     Map<KmipTag, List<KmipDataType>> map = values

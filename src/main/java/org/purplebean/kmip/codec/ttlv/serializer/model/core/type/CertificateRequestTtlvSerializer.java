@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.core.type.CertificateRequest;
 
+/**
+ * TTLV serializer for {@link CertificateRequest}.
+ */
 public class CertificateRequestTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<CertificateRequest> {
 }

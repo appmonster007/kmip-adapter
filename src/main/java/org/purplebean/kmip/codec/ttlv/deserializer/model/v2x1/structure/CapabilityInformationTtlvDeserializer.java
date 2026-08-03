@@ -17,10 +17,16 @@ import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
+/**
+ * TTLV deserializer for {@link CapabilityInformation}.
+ */
 public class CapabilityInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<CapabilityInformation,
         CapabilityInformation.CapabilityInformationBuilder> {
 
+  /**
+   * Constructs a new {@link CapabilityInformationTtlvDeserializer}.
+   */
   public CapabilityInformationTtlvDeserializer() {
     super(CapabilityInformation.kmipTag, CapabilityInformation.encodingType);
   }

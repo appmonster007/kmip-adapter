@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.InitialCounterValue;
 
+/**
+ * JSON deserializer for {@link InitialCounterValue}.
+ */
 public class InitialCounterValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<InitialCounterValue,
         InitialCounterValue.InitialCounterValueBuilder> {
 
+  /**
+   * Constructs a new {@link InitialCounterValueJsonDeserializer}.
+   */
   public InitialCounterValueJsonDeserializer() {
     super(InitialCounterValue.kmipTag, InitialCounterValue.encodingType);
   }

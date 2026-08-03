@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ProtectStopDate;
 
+/**
+ * TTLV deserializer for {@link ProtectStopDate}.
+ */
 public class ProtectStopDateTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProtectStopDate, ProtectStopDate.ProtectStopDateBuilder> {
 
+  /**
+   * Constructs a new {@link ProtectStopDateTtlvDeserializer}.
+   */
   public ProtectStopDateTtlvDeserializer() {
     super(ProtectStopDate.kmipTag, ProtectStopDate.encodingType);
   }

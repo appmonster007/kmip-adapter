@@ -41,6 +41,9 @@ public class ValidationVersionMinor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationVersionMinor} instance wrapping the given value.
+   */
   public static ValidationVersionMinor of(@NonNull Integer value) {
     return new ValidationVersionMinor(value);
   }

@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
+/**
+ * TTLV deserializer for {@link Pkcs11OutputParameters}.
+ */
 public class Pkcs11OutputParametersTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<Pkcs11OutputParameters,
         Pkcs11OutputParameters.Pkcs11OutputParametersBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11OutputParametersTtlvDeserializer}.
+   */
   public Pkcs11OutputParametersTtlvDeserializer() {
     super(Pkcs11OutputParameters.kmipTag, Pkcs11OutputParameters.encodingType);
   }

@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
+/**
+ * KMIP Pkcs11OpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Pkcs11OpRequestPayload implements RequestPayloadStructure {
@@ -63,6 +66,9 @@ public class Pkcs11OpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Pkcs11OpRequestPayload} instance wrapping the given value.
+   */
   public static Pkcs11OpRequestPayload of(List<KmipDataType> values) {
     var builder = Pkcs11OpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

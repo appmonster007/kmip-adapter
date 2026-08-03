@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 
+/**
+ * XML deserializer for {@link CorrelationValue}.
+ */
 public class CorrelationValueXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CorrelationValue,
         CorrelationValue.CorrelationValueBuilder> {
 
+  /**
+   * Constructs a new {@link CorrelationValueXmlDeserializer}.
+   */
   public CorrelationValueXmlDeserializer() {
     super(CorrelationValue.kmipTag, CorrelationValue.encodingType);
   }

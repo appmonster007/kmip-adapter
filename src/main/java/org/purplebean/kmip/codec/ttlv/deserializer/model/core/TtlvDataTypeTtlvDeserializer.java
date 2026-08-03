@@ -22,6 +22,9 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.TtlvDataType;
 
+/**
+ * TTLV deserializer for {@link TtlvDataType}.
+ */
 public class TtlvDataTypeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<TtlvDataType, TtlvDataType.TtlvDataTypeBuilder> {
 
@@ -29,6 +32,9 @@ public class TtlvDataTypeTtlvDeserializer
   private final Stack<EncodingType> encodingTypeStack = new Stack<>();
   private final Stack<Object> valueStack = new Stack<>();
 
+  /**
+   * Constructs a new {@link TtlvDataTypeTtlvDeserializer}.
+   */
   public TtlvDataTypeTtlvDeserializer() {
     super(null, null);
   }

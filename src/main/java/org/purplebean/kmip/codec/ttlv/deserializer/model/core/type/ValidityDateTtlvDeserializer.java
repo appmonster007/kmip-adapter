@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 
+/**
+ * TTLV deserializer for {@link ValidityDate}.
+ */
 public class ValidityDateTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<ValidityDate, ValidityDate.ValidityDateBuilder> {
 
+  /**
+   * Constructs a new {@link ValidityDateTtlvDeserializer}.
+   */
   public ValidityDateTtlvDeserializer() {
     super(ValidityDate.kmipTag, ValidityDate.encodingType);
   }

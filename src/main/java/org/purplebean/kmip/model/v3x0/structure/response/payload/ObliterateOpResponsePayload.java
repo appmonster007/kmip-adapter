@@ -42,6 +42,9 @@ public class ObliterateOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ObliterateOpResponsePayload} instance wrapping the given value.
+   */
   public static ObliterateOpResponsePayload of(List<KmipDataType> values) {
     return ObliterateOpResponsePayload
         .builder()

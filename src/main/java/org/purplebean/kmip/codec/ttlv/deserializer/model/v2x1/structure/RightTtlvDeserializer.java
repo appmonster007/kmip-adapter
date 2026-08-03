@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.v2x1.structure.ObjectGroups;
 import org.purplebean.kmip.model.v2x1.structure.Operations;
 import org.purplebean.kmip.model.v2x1.structure.Right;
 
+/**
+ * TTLV deserializer for {@link Right}.
+ */
 public class RightTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<Right, Right.RightBuilder> {
 
+  /**
+   * Constructs a new {@link RightTtlvDeserializer}.
+   */
   public RightTtlvDeserializer() {
     super(Right.kmipTag, Right.encodingType);
   }

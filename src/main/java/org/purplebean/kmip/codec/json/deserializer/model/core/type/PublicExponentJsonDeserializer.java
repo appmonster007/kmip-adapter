@@ -7,9 +7,15 @@ import java.math.BigInteger;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * JSON deserializer for {@link PublicExponent}.
+ */
 public class PublicExponentJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PublicExponent, PublicExponent.PublicExponentBuilder> {
 
+  /**
+   * Constructs a new {@link PublicExponentJsonDeserializer}.
+   */
   public PublicExponentJsonDeserializer() {
     super(PublicExponent.kmipTag, PublicExponent.encodingType);
   }

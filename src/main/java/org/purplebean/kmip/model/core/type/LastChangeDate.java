@@ -49,10 +49,16 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link LastChangeDate} instance wrapping the given value.
+   */
   public static LastChangeDate of(@NonNull OffsetDateTime value) {
     return new LastChangeDate(value);
   }
 
+  /**
+   * Returns the {@link LastChangeDate} instance wrapping the given value.
+   */
   public static LastChangeDate of(@NonNull AttributeName attributeName,
                                   @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

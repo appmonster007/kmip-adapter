@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.json.serializer.model.core.structure;
 import org.purplebean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 
+/**
+ * JSON serializer for {@link CryptographicParameters}.
+ */
 public class CryptographicParametersJsonSerializer
     extends AbstractKmipDataTypeJsonSerializer<CryptographicParameters> {
 }

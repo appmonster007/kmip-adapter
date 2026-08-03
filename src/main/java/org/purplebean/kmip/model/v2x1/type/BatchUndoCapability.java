@@ -41,6 +41,9 @@ public class BatchUndoCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link BatchUndoCapability} instance wrapping the given value.
+   */
   public static BatchUndoCapability of(@NonNull Boolean value) {
     return new BatchUndoCapability(value);
   }

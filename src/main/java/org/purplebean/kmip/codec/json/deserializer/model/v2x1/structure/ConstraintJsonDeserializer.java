@@ -7,9 +7,15 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.Constraint;
 
+/**
+ * JSON deserializer for {@link Constraint}.
+ */
 public class ConstraintJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<Constraint, Constraint.ConstraintBuilder> {
 
+  /**
+   * Constructs a new {@link ConstraintJsonDeserializer}.
+   */
   public ConstraintJsonDeserializer() {
     super(Constraint.kmipTag, Constraint.encodingType);
   }

@@ -41,6 +41,9 @@ public class AsynchronousIndicator implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousIndicator} instance wrapping the given value.
+   */
   public static AsynchronousIndicator of(@NonNull Boolean value) {
     return new AsynchronousIndicator(value);
   }

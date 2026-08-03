@@ -18,12 +18,18 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.util.StringUtils;
 
+/**
+ * JSON deserializer for {@link AttributeValue}.
+ */
 public class AttributeValueJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<AttributeValue, AttributeValue.AttributeValueBuilder> {
 
   private final Stack<EncodingType> encodingTypeStack = new Stack<>();
   private final Stack<Object> valueStack = new Stack<>();
 
+  /**
+   * Constructs a new {@link AttributeValueJsonDeserializer}.
+   */
   public AttributeValueJsonDeserializer() {
     super(AttributeValue.kmipTag, null);
   }

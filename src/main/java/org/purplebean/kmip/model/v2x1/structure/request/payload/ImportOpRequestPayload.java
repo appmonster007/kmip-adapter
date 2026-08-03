@@ -77,6 +77,9 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ImportOpRequestPayload} instance wrapping the given value.
+   */
   public static ImportOpRequestPayload of(List<KmipDataType> values) {
     var builder = ImportOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

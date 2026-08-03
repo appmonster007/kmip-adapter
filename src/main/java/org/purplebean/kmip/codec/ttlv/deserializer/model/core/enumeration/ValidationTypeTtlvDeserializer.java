@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.ValidationType;
 
+/**
+ * TTLV deserializer for {@link ValidationType}.
+ */
 public class ValidationTypeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidationType, ValidationType.ValidationTypeBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationTypeTtlvDeserializer}.
+   */
   public ValidationTypeTtlvDeserializer() {
     super(ValidationType.kmipTag, ValidationType.encodingType);
   }

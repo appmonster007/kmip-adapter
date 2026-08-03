@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.SubmissionDate;
 
+/**
+ * XML deserializer for {@link SubmissionDate}.
+ */
 public class SubmissionDateXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SubmissionDate, SubmissionDate.SubmissionDateBuilder> {
 
+  /**
+   * Constructs a new {@link SubmissionDateXmlDeserializer}.
+   */
   public SubmissionDateXmlDeserializer() {
     super(SubmissionDate.kmipTag, SubmissionDate.encodingType);
   }

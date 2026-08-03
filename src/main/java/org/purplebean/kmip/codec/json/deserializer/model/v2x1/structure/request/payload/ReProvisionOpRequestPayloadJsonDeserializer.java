@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.structure.Certificate;
 import org.purplebean.kmip.model.core.type.CertificateRequest;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.ReProvisionOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link ReProvisionOpRequestPayload}.
+ */
 public class ReProvisionOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ReProvisionOpRequestPayload,
         ReProvisionOpRequestPayload.ReProvisionOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link ReProvisionOpRequestPayloadJsonDeserializer}.
+   */
   public ReProvisionOpRequestPayloadJsonDeserializer() {
     super(ReProvisionOpRequestPayload.kmipTag, ReProvisionOpRequestPayload.encodingType);
   }

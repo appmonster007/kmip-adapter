@@ -91,10 +91,16 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
     validate();
   }
 
+  /**
+   * Returns the {@link DigitalSignatureAlgorithm} instance wrapping the given value.
+   */
   public static DigitalSignatureAlgorithm of(@NonNull Value value) {
     return new DigitalSignatureAlgorithm(value);
   }
 
+  /**
+   * Returns the {@link DigitalSignatureAlgorithm} instance wrapping the given value.
+   */
   public static DigitalSignatureAlgorithm of(@NonNull AttributeName attributeName,
                                              @NonNull AttributeValue attributeValue) {
     if (!attributeName
@@ -372,6 +378,9 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

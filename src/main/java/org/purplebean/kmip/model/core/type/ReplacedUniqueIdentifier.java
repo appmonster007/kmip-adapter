@@ -42,6 +42,9 @@ public class ReplacedUniqueIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ReplacedUniqueIdentifier} instance wrapping the given value.
+   */
   public static ReplacedUniqueIdentifier of(@NonNull String value) {
     return new ReplacedUniqueIdentifier(value);
   }

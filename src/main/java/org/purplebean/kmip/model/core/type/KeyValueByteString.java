@@ -12,6 +12,9 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP KeyValueByteString dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class KeyValueByteString implements KeyValue {
@@ -40,10 +43,16 @@ public class KeyValueByteString implements KeyValue {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyValueByteString} instance wrapping the given value.
+   */
   public static KeyValueByteString of(@NonNull ByteBuffer value) {
     return new KeyValueByteString(value);
   }
 
+  /**
+   * Returns the {@link KeyValueByteString} instance wrapping the given value.
+   */
   public static KeyValueByteString of(byte[] value) {
     return KeyValueByteString
         .builder()

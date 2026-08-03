@@ -41,10 +41,16 @@ public class UniqueBatchItemID implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link UniqueBatchItemID} instance wrapping the given value.
+   */
   public static UniqueBatchItemID of(@NonNull ByteBuffer value) {
     return new UniqueBatchItemID(value);
   }
 
+  /**
+   * Returns the {@link UniqueBatchItemID} instance wrapping the given value.
+   */
   public static UniqueBatchItemID of(byte[] value) {
     return UniqueBatchItemID
         .builder()

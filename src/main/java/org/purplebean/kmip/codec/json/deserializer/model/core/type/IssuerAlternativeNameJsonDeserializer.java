@@ -7,10 +7,16 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.IssuerAlternativeName;
 
+/**
+ * JSON deserializer for {@link IssuerAlternativeName}.
+ */
 public class IssuerAlternativeNameJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<IssuerAlternativeName,
         IssuerAlternativeName.IssuerAlternativeNameBuilder> {
 
+  /**
+   * Constructs a new {@link IssuerAlternativeNameJsonDeserializer}.
+   */
   public IssuerAlternativeNameJsonDeserializer() {
     super(IssuerAlternativeName.kmipTag, IssuerAlternativeName.encodingType);
   }

@@ -15,9 +15,15 @@ import org.purplebean.kmip.model.core.type.CryptographicLength;
 import org.purplebean.kmip.model.v2x1.structure.RngParameters;
 import org.purplebean.kmip.model.v2x1.type.PredictionResistance;
 
+/**
+ * XML deserializer for {@link RngParameters}.
+ */
 public class RngParametersXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<RngParameters, RngParameters.RngParametersBuilder> {
 
+  /**
+   * Constructs a new {@link RngParametersXmlDeserializer}.
+   */
   public RngParametersXmlDeserializer() {
     super(RngParameters.kmipTag, RngParameters.encodingType);
   }

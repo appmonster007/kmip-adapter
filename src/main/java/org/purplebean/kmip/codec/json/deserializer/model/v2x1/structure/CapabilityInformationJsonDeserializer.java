@@ -17,10 +17,16 @@ import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
+/**
+ * JSON deserializer for {@link CapabilityInformation}.
+ */
 public class CapabilityInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CapabilityInformation,
         CapabilityInformation.CapabilityInformationBuilder> {
 
+  /**
+   * Constructs a new {@link CapabilityInformationJsonDeserializer}.
+   */
   public CapabilityInformationJsonDeserializer() {
     super(CapabilityInformation.kmipTag, CapabilityInformation.encodingType);
   }

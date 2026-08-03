@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.RngMode;
 
+/**
+ * TTLV deserializer for {@link RngMode}.
+ */
 public class RngModeTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<RngMode, RngMode.RngModeBuilder> {
 
+  /**
+   * Constructs a new {@link RngModeTtlvDeserializer}.
+   */
   public RngModeTtlvDeserializer() {
     super(RngMode.kmipTag, RngMode.encodingType);
   }

@@ -41,6 +41,9 @@ public class PredictionResistance implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link PredictionResistance} instance wrapping the given value.
+   */
   public static PredictionResistance of(@NonNull Boolean value) {
     return new PredictionResistance(value);
   }

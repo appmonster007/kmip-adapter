@@ -10,6 +10,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
+/**
+ * JSON deserializer for {@link OffsetDateTime}.
+ */
 public class OffsetDateTimeJsonDeserializer extends JsonDeserializer<OffsetDateTime> {
 
   @Override

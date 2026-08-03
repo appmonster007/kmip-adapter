@@ -9,10 +9,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.structure.response.SimpleResponseMessage;
 
+/**
+ * TTLV deserializer for {@link SimpleResponseMessage}.
+ */
 public class SimpleResponseMessageTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<SimpleResponseMessage,
         SimpleResponseMessage.SimpleResponseMessageBuilder> {
 
+  /**
+   * Constructs a new {@link SimpleResponseMessageTtlvDeserializer}.
+   */
   public SimpleResponseMessageTtlvDeserializer() {
     super(SimpleResponseMessage.kmipTag, SimpleResponseMessage.encodingType);
   }

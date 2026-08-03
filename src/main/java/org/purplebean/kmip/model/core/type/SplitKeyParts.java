@@ -42,6 +42,9 @@ public class SplitKeyParts implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SplitKeyParts} instance wrapping the given value.
+   */
   public static SplitKeyParts of(@NonNull Integer value) {
     return new SplitKeyParts(value);
   }

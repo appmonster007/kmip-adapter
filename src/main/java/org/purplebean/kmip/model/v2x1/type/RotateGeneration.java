@@ -47,10 +47,16 @@ public class RotateGeneration implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateGeneration} instance wrapping the given value.
+   */
   public static RotateGeneration of(@NonNull Integer value) {
     return new RotateGeneration(value);
   }
 
+  /**
+   * Returns the {@link RotateGeneration} instance wrapping the given value.
+   */
   public static RotateGeneration of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

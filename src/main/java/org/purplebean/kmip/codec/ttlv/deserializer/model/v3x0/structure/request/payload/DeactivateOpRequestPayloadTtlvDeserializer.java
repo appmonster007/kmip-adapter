@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.DeactivateOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link DeactivateOpRequestPayload}.
+ */
 public class DeactivateOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeactivateOpRequestPayload,
         DeactivateOpRequestPayload.DeactivateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivateOpRequestPayloadTtlvDeserializer}.
+   */
   public DeactivateOpRequestPayloadTtlvDeserializer() {
     super(DeactivateOpRequestPayload.kmipTag, DeactivateOpRequestPayload.encodingType);
   }

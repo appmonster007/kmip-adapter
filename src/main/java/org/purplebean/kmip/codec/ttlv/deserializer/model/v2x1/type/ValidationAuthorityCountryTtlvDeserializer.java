@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityCountry;
 
+/**
+ * TTLV deserializer for {@link ValidationAuthorityCountry}.
+ */
 public class ValidationAuthorityCountryTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ValidationAuthorityCountry,
         ValidationAuthorityCountry.ValidationAuthorityCountryBuilder> {
 
+  /**
+   * Constructs a new {@link ValidationAuthorityCountryTtlvDeserializer}.
+   */
   public ValidationAuthorityCountryTtlvDeserializer() {
     super(ValidationAuthorityCountry.kmipTag, ValidationAuthorityCountry.encodingType);
   }

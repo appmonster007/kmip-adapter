@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v3x0.type.DeactivationMessage;
 
+/**
+ * TTLV deserializer for {@link DeactivationMessage}.
+ */
 public class DeactivationMessageTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<DeactivationMessage,
         DeactivationMessage.DeactivationMessageBuilder> {
 
+  /**
+   * Constructs a new {@link DeactivationMessageTtlvDeserializer}.
+   */
   public DeactivationMessageTtlvDeserializer() {
     super(DeactivationMessage.kmipTag, DeactivationMessage.encodingType);
   }

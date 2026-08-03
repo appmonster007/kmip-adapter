@@ -11,10 +11,16 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
 
+/**
+ * JSON deserializer for {@link CurrentAttribute}.
+ */
 public class CurrentAttributeJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<CurrentAttribute,
         CurrentAttribute.CurrentAttributeBuilder> {
 
+  /**
+   * Constructs a new {@link CurrentAttributeJsonDeserializer}.
+   */
   public CurrentAttributeJsonDeserializer() {
     super(CurrentAttribute.kmipTag, CurrentAttribute.encodingType);
   }

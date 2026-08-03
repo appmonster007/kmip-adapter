@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * KMIP TransparentDsaPublicKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
@@ -62,6 +65,9 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentDsaPublicKey} instance wrapping the given value.
+   */
   public static TransparentDsaPublicKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -85,6 +91,9 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
     );
   }
 
+  /**
+   * Returns the {@link TransparentDsaPublicKey} instance wrapping the given value.
+   */
   public static TransparentDsaPublicKey of(@NonNull P p, @NonNull Q q, @NonNull G g, @NonNull Y y) {
     return TransparentDsaPublicKey
         .builder()

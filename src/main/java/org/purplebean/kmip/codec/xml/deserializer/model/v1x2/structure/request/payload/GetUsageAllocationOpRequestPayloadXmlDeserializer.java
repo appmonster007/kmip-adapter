@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetUsageAllocationOpRequestPayload;
 
+/**
+ * XML deserializer for {@link GetUsageAllocationOpRequestPayload}.
+ */
 public class GetUsageAllocationOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<GetUsageAllocationOpRequestPayload,
         GetUsageAllocationOpRequestPayload.GetUsageAllocationOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link GetUsageAllocationOpRequestPayloadXmlDeserializer}.
+   */
   public GetUsageAllocationOpRequestPayloadXmlDeserializer() {
     super(GetUsageAllocationOpRequestPayload.kmipTag,
         GetUsageAllocationOpRequestPayload.encodingType);

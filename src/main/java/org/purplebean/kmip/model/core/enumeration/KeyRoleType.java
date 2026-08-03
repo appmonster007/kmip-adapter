@@ -66,6 +66,9 @@ public class KeyRoleType implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link KeyRoleType} instance wrapping the given value.
+   */
   public static KeyRoleType of(@NonNull Value value) {
     return new KeyRoleType(value);
   }
@@ -275,6 +278,9 @@ public class KeyRoleType implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

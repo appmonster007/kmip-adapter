@@ -58,6 +58,9 @@ public class ReProvisionOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ReProvisionOpRequestPayload} instance wrapping the given value.
+   */
   public static ReProvisionOpRequestPayload of(List<KmipDataType> values) {
     var builder = ReProvisionOpRequestPayload.builder();
     values.forEach(value -> {

@@ -40,6 +40,9 @@ public class ReplaceExisting implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ReplaceExisting} instance wrapping the given value.
+   */
   public static ReplaceExisting of(@NonNull Boolean value) {
     return new ReplaceExisting(value);
   }

@@ -42,6 +42,9 @@ public class MaximumResponseSize implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link MaximumResponseSize} instance wrapping the given value.
+   */
   public static MaximumResponseSize of(@NonNull Integer value) {
     return new MaximumResponseSize(value);
   }

@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.enumeration.CertificateType;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.type.CertificateValue;
 
+/**
+ * KMIP Certificate attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Certificate implements ManagedObject, KmipStructure {
@@ -56,6 +59,9 @@ public class Certificate implements ManagedObject, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Certificate} instance wrapping the given value.
+   */
   public static Certificate of(
       @NonNull CertificateType certificateType,
       @NonNull CertificateValue certificateValue
@@ -67,6 +73,9 @@ public class Certificate implements ManagedObject, KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link Certificate} instance wrapping the given value.
+   */
   public static Certificate of(List<KmipDataType> values) {
     var builder = Certificate.builder();
     Map<KmipTag, List<KmipDataType>> map = values

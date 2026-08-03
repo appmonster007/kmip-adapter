@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.MediaIdentifier;
 
+/**
+ * JSON deserializer for {@link MediaIdentifier}.
+ */
 public class MediaIdentifierJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<MediaIdentifier, MediaIdentifier.MediaIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link MediaIdentifierJsonDeserializer}.
+   */
   public MediaIdentifierJsonDeserializer() {
     super(MediaIdentifier.kmipTag, MediaIdentifier.encodingType);
   }

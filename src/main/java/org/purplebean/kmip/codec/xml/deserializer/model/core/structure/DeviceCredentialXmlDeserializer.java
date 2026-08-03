@@ -13,10 +13,16 @@ import org.purplebean.kmip.model.core.type.MediaIdentifier;
 import org.purplebean.kmip.model.core.type.NetworkIdentifier;
 import org.purplebean.kmip.model.core.type.Password;
 
+/**
+ * XML deserializer for {@link DeviceCredential}.
+ */
 public class DeviceCredentialXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DeviceCredential,
         DeviceCredential.DeviceCredentialBuilder> {
 
+  /**
+   * Constructs a new {@link DeviceCredentialXmlDeserializer}.
+   */
   public DeviceCredentialXmlDeserializer() {
     super(DeviceCredential.kmipTag, DeviceCredential.encodingType);
   }

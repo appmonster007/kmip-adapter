@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.PingOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link PingOpRequestPayload}.
+ */
 public class PingOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<PingOpRequestPayload,
         PingOpRequestPayload.PingOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PingOpRequestPayloadJsonDeserializer}.
+   */
   public PingOpRequestPayloadJsonDeserializer() {
     super(PingOpRequestPayload.kmipTag, PingOpRequestPayload.encodingType);
   }

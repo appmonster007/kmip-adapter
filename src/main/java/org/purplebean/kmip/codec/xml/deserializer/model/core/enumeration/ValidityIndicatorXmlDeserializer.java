@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 
+/**
+ * XML deserializer for {@link ValidityIndicator}.
+ */
 public class ValidityIndicatorXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ValidityIndicator,
         ValidityIndicator.ValidityIndicatorBuilder> {
 
+  /**
+   * Constructs a new {@link ValidityIndicatorXmlDeserializer}.
+   */
   public ValidityIndicatorXmlDeserializer() {
     super(ValidityIndicator.kmipTag, ValidityIndicator.encodingType);
   }

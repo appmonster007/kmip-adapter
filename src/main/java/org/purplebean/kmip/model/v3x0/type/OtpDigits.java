@@ -42,6 +42,9 @@ public class OtpDigits implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link OtpDigits} instance wrapping the given value.
+   */
   public static OtpDigits of(@NonNull Integer value) {
     return new OtpDigits(value);
   }

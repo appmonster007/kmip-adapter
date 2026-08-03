@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 
+/**
+ * JSON deserializer for {@link ProtocolVersionMajor}.
+ */
 public class ProtocolVersionMajorJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ProtocolVersionMajor,
         ProtocolVersionMajor.ProtocolVersionMajorBuilder> {
 
+  /**
+   * Constructs a new {@link ProtocolVersionMajorJsonDeserializer}.
+   */
   public ProtocolVersionMajorJsonDeserializer() {
     super(ProtocolVersionMajor.kmipTag, ProtocolVersionMajor.encodingType);
   }

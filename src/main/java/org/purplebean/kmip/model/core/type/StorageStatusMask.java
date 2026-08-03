@@ -40,10 +40,16 @@ public class StorageStatusMask implements KmipMaskType {
         validate();
     }
 
+    /**
+     * Returns the {@link StorageStatusMask} instance wrapping the given value.
+     */
     public static StorageStatusMask of(@NonNull Integer value) {
         return new StorageStatusMask(value);
     }
 
+    /**
+     * Parses a space-separated mask description string into a {@link StorageStatusMask}.
+     */
     public static StorageStatusMask fromMaskString(@NonNull String value) {
         int mask = StorageStatusMask.MaskEnum.fromMaskString(value);
         return StorageStatusMask.builder().value(mask).build();
@@ -77,6 +83,9 @@ public class StorageStatusMask implements KmipMaskType {
     }
 
 
+    /**
+     * Marker interface for mask-based enumeration values.
+     */
     public interface MaskEnum {
         Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
         Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
@@ -136,6 +145,9 @@ public class StorageStatusMask implements KmipMaskType {
                     ));
         }
 
+        /**
+         * Converts a storage status mask bit value into its space-separated description string.
+         */
         static String toMaskString(int value) {
             StringBuilder sb = new StringBuilder();
             VALUE_REGISTRY.values().stream()
@@ -145,6 +157,9 @@ public class StorageStatusMask implements KmipMaskType {
             return sb.toString().trim();
         }
 
+        /**
+         * Parses a space-separated mask description string into its integer bit value.
+         */
         static int fromMaskString(String value) {
             List<String> maskNames = List.of(value.split(" "));
             int maskValue = 0;
@@ -162,6 +177,9 @@ public class StorageStatusMask implements KmipMaskType {
             return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
         }
 
+        /**
+         * Standard KMIP-defined values.
+         */
         @Getter
         @AllArgsConstructor
         @ToString
@@ -174,6 +192,9 @@ public class StorageStatusMask implements KmipMaskType {
             private final boolean custom = false;
         }
 
+        /**
+         * Represents a specific value of the enclosing enumeration.
+         */
         interface Value {
             int getValue();
 
@@ -183,6 +204,9 @@ public class StorageStatusMask implements KmipMaskType {
 
         }
 
+        /**
+         * Vendor-defined extension value.
+         */
         @Getter
         @AllArgsConstructor
         @ToString

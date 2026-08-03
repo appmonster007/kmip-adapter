@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 
+/**
+ * XML deserializer for {@link LeaseTime}.
+ */
 public class LeaseTimeXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<LeaseTime, LeaseTime.LeaseTimeBuilder> {
 
+  /**
+   * Constructs a new {@link LeaseTimeXmlDeserializer}.
+   */
   public LeaseTimeXmlDeserializer() {
     super(LeaseTime.kmipTag, LeaseTime.encodingType);
   }

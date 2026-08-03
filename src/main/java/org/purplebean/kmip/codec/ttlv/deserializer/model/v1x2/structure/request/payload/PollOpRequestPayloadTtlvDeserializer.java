@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.PollOpRequestPayload;
 
+/**
+ * TTLV deserializer for {@link PollOpRequestPayload}.
+ */
 public class PollOpRequestPayloadTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PollOpRequestPayload,
         PollOpRequestPayload.PollOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PollOpRequestPayloadTtlvDeserializer}.
+   */
   public PollOpRequestPayloadTtlvDeserializer() {
     super(PollOpRequestPayload.kmipTag, PollOpRequestPayload.encodingType);
   }

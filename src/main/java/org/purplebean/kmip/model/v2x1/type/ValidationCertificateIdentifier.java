@@ -42,6 +42,9 @@ public class ValidationCertificateIdentifier implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidationCertificateIdentifier} instance wrapping the given value.
+   */
   public static ValidationCertificateIdentifier of(@NonNull String value) {
     return new ValidationCertificateIdentifier(value);
   }

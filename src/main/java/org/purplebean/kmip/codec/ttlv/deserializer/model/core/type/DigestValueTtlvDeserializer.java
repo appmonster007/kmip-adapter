@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.DigestValue;
 
+/**
+ * TTLV deserializer for {@link DigestValue}.
+ */
 public class DigestValueTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<DigestValue, DigestValue.DigestValueBuilder> {
 
+  /**
+   * Constructs a new {@link DigestValueTtlvDeserializer}.
+   */
   public DigestValueTtlvDeserializer() {
     super(DigestValue.kmipTag, DigestValue.encodingType);
   }

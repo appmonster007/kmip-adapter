@@ -25,6 +25,9 @@ import org.purplebean.kmip.model.v2x1.type.DigestedData;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * KMIP SignatureVerifyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure {
@@ -77,6 +80,9 @@ public class SignatureVerifyOpRequestPayload implements RequestPayloadStructure 
     validate();
   }
 
+  /**
+   * Returns the {@link SignatureVerifyOpRequestPayload} instance wrapping the given value.
+   */
   public static SignatureVerifyOpRequestPayload of(List<KmipDataType> values) {
     var builder = SignatureVerifyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

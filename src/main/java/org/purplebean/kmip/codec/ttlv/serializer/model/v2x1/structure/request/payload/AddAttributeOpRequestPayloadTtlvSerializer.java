@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.request.p
 import org.purplebean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.AddAttributeOpRequestPayload;
 
+/**
+ * TTLV serializer for {@link AddAttributeOpRequestPayload}.
+ */
 public class AddAttributeOpRequestPayloadTtlvSerializer
     extends AbstractKmipDataTypeTtlvSerializer<AddAttributeOpRequestPayload> {
 }

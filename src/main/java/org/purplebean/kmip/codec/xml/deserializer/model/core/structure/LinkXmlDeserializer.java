@@ -9,9 +9,15 @@ import org.purplebean.kmip.model.core.enumeration.LinkType;
 import org.purplebean.kmip.model.core.structure.Link;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * XML deserializer for {@link Link}.
+ */
 public class LinkXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<Link, Link.LinkBuilder> {
 
+  /**
+   * Constructs a new {@link LinkXmlDeserializer}.
+   */
   public LinkXmlDeserializer() {
     super(Link.kmipTag, Link.encodingType);
   }

@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.type.ExtensionName;
 import org.purplebean.kmip.model.core.type.ExtensionTag;
 import org.purplebean.kmip.model.core.type.ExtensionType;
 
+/**
+ * JSON deserializer for {@link ExtensionInformation}.
+ */
 public class ExtensionInformationJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<ExtensionInformation,
         ExtensionInformation.ExtensionInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ExtensionInformationJsonDeserializer}.
+   */
   public ExtensionInformationJsonDeserializer() {
     super(ExtensionInformation.kmipTag, ExtensionInformation.encodingType);
   }

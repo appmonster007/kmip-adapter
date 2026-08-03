@@ -42,6 +42,9 @@ public class DeactivationMessage implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DeactivationMessage} instance wrapping the given value.
+   */
   public static DeactivationMessage of(@NonNull String value) {
     return new DeactivationMessage(value);
   }

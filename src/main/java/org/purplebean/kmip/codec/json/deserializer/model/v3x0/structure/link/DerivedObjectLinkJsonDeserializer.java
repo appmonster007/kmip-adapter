@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonD
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.DerivedObjectLink;
 
+/**
+ * JSON deserializer for {@link DerivedObjectLink}.
+ */
 public class DerivedObjectLinkJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<DerivedObjectLink,
         DerivedObjectLink.DerivedObjectLinkBuilder> {
 
+  /**
+   * Constructs a new {@link DerivedObjectLinkJsonDeserializer}.
+   */
   public DerivedObjectLinkJsonDeserializer() {
     super(DerivedObjectLink.kmipTag, DerivedObjectLink.encodingType);
   }

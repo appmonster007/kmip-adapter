@@ -20,6 +20,9 @@ import org.purplebean.kmip.model.core.structure.Certificate;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 
+/**
+ * KMIP ValidateOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ValidateOpRequestPayload implements RequestPayloadStructure {
@@ -59,6 +62,9 @@ public class ValidateOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidateOpRequestPayload} instance wrapping the given value.
+   */
   public static ValidateOpRequestPayload of(List<KmipDataType> values) {
     var builder = ValidateOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

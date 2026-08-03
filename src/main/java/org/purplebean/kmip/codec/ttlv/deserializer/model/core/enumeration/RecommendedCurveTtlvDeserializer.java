@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 
+/**
+ * TTLV deserializer for {@link RecommendedCurve}.
+ */
 public class RecommendedCurveTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<RecommendedCurve,
         RecommendedCurve.RecommendedCurveBuilder> {
 
+  /**
+   * Constructs a new {@link RecommendedCurveTtlvDeserializer}.
+   */
   public RecommendedCurveTtlvDeserializer() {
     super(RecommendedCurve.kmipTag, RecommendedCurve.encodingType);
   }

@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.type.IVCounterNonce;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.DecryptOpRequestPayload;
 
+/**
+ * XML deserializer for {@link DecryptOpRequestPayload}.
+ */
 public class DecryptOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<DecryptOpRequestPayload,
         DecryptOpRequestPayload.DecryptOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link DecryptOpRequestPayloadXmlDeserializer}.
+   */
   public DecryptOpRequestPayloadXmlDeserializer() {
     super(DecryptOpRequestPayload.kmipTag, DecryptOpRequestPayload.encodingType);
   }

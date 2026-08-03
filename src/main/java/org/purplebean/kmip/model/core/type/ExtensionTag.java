@@ -41,6 +41,9 @@ public class ExtensionTag implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ExtensionTag} instance wrapping the given value.
+   */
   public static ExtensionTag of(@NonNull Integer value) {
     return new ExtensionTag(value);
   }

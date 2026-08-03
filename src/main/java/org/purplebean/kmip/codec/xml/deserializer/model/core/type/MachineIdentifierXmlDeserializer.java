@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.MachineIdentifier;
 
+/**
+ * XML deserializer for {@link MachineIdentifier}.
+ */
 public class MachineIdentifierXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<MachineIdentifier,
         MachineIdentifier.MachineIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link MachineIdentifierXmlDeserializer}.
+   */
   public MachineIdentifierXmlDeserializer() {
     super(MachineIdentifier.kmipTag, MachineIdentifier.encodingType);
   }

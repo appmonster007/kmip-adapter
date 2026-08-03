@@ -81,6 +81,9 @@ public class RevocationReasonCode implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link RevocationReasonCode} instance wrapping the given value.
+   */
   public static RevocationReasonCode of(@NonNull Value value) {
     return new RevocationReasonCode(value);
   }
@@ -268,6 +271,9 @@ public class RevocationReasonCode implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

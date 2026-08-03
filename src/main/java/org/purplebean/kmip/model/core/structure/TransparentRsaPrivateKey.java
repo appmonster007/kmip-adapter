@@ -26,6 +26,9 @@ import org.purplebean.kmip.model.core.type.PrivateExponent;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 import org.purplebean.kmip.model.core.type.Q;
 
+/**
+ * KMIP TransparentRsaPrivateKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
@@ -77,6 +80,9 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentRsaPrivateKey} instance wrapping the given value.
+   */
   public static TransparentRsaPrivateKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -112,6 +118,9 @@ public class TransparentRsaPrivateKey implements KeyMaterial, KmipStructure {
     );
   }
 
+  /**
+   * Returns the {@link TransparentRsaPrivateKey} instance wrapping the given value.
+   */
   public static TransparentRsaPrivateKey of(@NonNull Modulus modulus,
                                             PrivateExponent privateExponent,
                                             PublicExponent publicExponent, P p, Q q,

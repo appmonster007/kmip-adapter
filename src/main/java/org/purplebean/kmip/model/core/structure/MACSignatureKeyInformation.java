@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP MACSignatureKeyInformation attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class MACSignatureKeyInformation implements KmipStructure {
@@ -45,6 +48,9 @@ public class MACSignatureKeyInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link MACSignatureKeyInformation} instance wrapping the given value.
+   */
   public static MACSignatureKeyInformation of(@NonNull UniqueIdentifier uniqueIdentifier,
                                               CryptographicParameters cryptographicParameters) {
     return MACSignatureKeyInformation

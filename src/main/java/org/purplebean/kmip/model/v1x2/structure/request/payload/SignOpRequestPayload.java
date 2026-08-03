@@ -19,6 +19,9 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP SignOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SignOpRequestPayload implements RequestPayloadStructure {
@@ -56,6 +59,9 @@ public class SignOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SignOpRequestPayload} instance wrapping the given value.
+   */
   public static SignOpRequestPayload of(List<KmipDataType> values) {
     var builder = SignOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

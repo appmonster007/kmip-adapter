@@ -7,9 +7,15 @@ import java.time.OffsetDateTime;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.RotateDate;
 
+/**
+ * XML deserializer for {@link RotateDate}.
+ */
 public class RotateDateXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<RotateDate, RotateDate.RotateDateBuilder> {
 
+  /**
+   * Constructs a new {@link RotateDateXmlDeserializer}.
+   */
   public RotateDateXmlDeserializer() {
     super(RotateDate.kmipTag, RotateDate.encodingType);
   }

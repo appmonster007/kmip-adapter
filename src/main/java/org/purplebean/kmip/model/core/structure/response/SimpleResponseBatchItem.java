@@ -21,6 +21,9 @@ import org.purplebean.kmip.model.core.enumeration.ResultReason;
 import org.purplebean.kmip.model.core.enumeration.ResultStatus;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 
+/**
+ * KMIP SimpleResponseBatchItem structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class SimpleResponseBatchItem implements ResponseBatchItemStructure {
@@ -61,10 +64,16 @@ public class SimpleResponseBatchItem implements ResponseBatchItemStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link SimpleResponseBatchItem} instance wrapping the given value.
+   */
   public static SimpleResponseBatchItem of(KmipDataType... values) {
     return of(List.of(values));
   }
 
+  /**
+   * Returns the {@link SimpleResponseBatchItem} instance wrapping the given value.
+   */
   public static SimpleResponseBatchItem of(List<KmipDataType> values) {
     var builder = SimpleResponseBatchItem.builder();
     Map<KmipTag, List<KmipDataType>> map = values

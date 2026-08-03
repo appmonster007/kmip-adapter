@@ -49,10 +49,16 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ArchiveDate} instance wrapping the given value.
+   */
   public static ArchiveDate of(@NonNull OffsetDateTime value) {
     return new ArchiveDate(value);
   }
 
+  /**
+   * Returns the {@link ArchiveDate} instance wrapping the given value.
+   */
   public static ArchiveDate of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

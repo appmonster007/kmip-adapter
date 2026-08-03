@@ -42,6 +42,9 @@ public class DeviceSerialNumber implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link DeviceSerialNumber} instance wrapping the given value.
+   */
   public static DeviceSerialNumber of(@NonNull String value) {
     return new DeviceSerialNumber(value);
   }

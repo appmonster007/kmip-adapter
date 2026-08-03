@@ -41,6 +41,9 @@ public class RotateNameValue implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link RotateNameValue} instance wrapping the given value.
+   */
   public static RotateNameValue of(@NonNull String value) {
     return new RotateNameValue(value);
   }

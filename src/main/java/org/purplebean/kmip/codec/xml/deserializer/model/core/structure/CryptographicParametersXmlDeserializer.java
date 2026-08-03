@@ -20,10 +20,16 @@ import org.purplebean.kmip.model.core.type.IvLength;
 import org.purplebean.kmip.model.core.type.RandomIv;
 import org.purplebean.kmip.model.core.type.TagLength;
 
+/**
+ * XML deserializer for {@link CryptographicParameters}.
+ */
 public class CryptographicParametersXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CryptographicParameters,
         CryptographicParameters.CryptographicParametersBuilder> {
 
+  /**
+   * Constructs a new {@link CryptographicParametersXmlDeserializer}.
+   */
   public CryptographicParametersXmlDeserializer() {
     super(CryptographicParameters.kmipTag, CryptographicParameters.encodingType);
   }

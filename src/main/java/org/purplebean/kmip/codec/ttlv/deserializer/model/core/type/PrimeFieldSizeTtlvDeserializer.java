@@ -7,9 +7,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 
+/**
+ * TTLV deserializer for {@link PrimeFieldSize}.
+ */
 public class PrimeFieldSizeTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PrimeFieldSize, PrimeFieldSize.PrimeFieldSizeBuilder> {
 
+  /**
+   * Constructs a new {@link PrimeFieldSizeTtlvDeserializer}.
+   */
   public PrimeFieldSizeTtlvDeserializer() {
     super(PrimeFieldSize.kmipTag, PrimeFieldSize.encodingType);
   }

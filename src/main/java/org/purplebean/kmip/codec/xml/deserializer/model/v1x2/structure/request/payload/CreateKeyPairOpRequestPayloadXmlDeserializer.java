@@ -10,10 +10,16 @@ import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
 
+/**
+ * XML deserializer for {@link CreateKeyPairOpRequestPayload}.
+ */
 public class CreateKeyPairOpRequestPayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CreateKeyPairOpRequestPayload,
         CreateKeyPairOpRequestPayload.CreateKeyPairOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link CreateKeyPairOpRequestPayloadXmlDeserializer}.
+   */
   public CreateKeyPairOpRequestPayloadXmlDeserializer() {
     super(CreateKeyPairOpRequestPayload.kmipTag, CreateKeyPairOpRequestPayload.encodingType);
   }

@@ -72,6 +72,9 @@ public class ObjectClass implements KmipEnumeration {
     validate();
   }
 
+  /**
+   * Returns the {@link ObjectClass} instance wrapping the given value.
+   */
   public static ObjectClass of(@NonNull Value value) {
     return new ObjectClass(value);
   }
@@ -246,6 +249,9 @@ public class ObjectClass implements KmipEnumeration {
 
     private final boolean custom = true;
 
+    /**
+     * Constructs a custom vendor extension value.
+     */
     public Extension(int value, String description, KmipSpec... supportedVersions) {
       this.value = value;
       this.description = description;

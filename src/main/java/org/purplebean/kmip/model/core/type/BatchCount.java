@@ -40,6 +40,9 @@ public class BatchCount implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link BatchCount} instance wrapping the given value.
+   */
   public static BatchCount of(@NonNull Integer value) {
     return new BatchCount(value);
   }

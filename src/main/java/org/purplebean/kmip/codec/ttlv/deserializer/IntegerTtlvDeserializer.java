@@ -7,6 +7,9 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
+/**
+ * TTLV deserializer for {@link Integer}.
+ */
 public class IntegerTtlvDeserializer extends TtlvDeserializer<Integer> {
   private final EncodingType type = EncodingType.INTEGER;
 

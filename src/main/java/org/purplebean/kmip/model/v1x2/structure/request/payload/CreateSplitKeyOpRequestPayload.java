@@ -24,6 +24,9 @@ import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP CreateSplitKeyOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CreateSplitKeyOpRequestPayload implements RequestPayloadStructure {
@@ -83,6 +86,9 @@ public class CreateSplitKeyOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateSplitKeyOpRequestPayload} instance wrapping the given value.
+   */
   public static CreateSplitKeyOpRequestPayload of(List<KmipDataType> values) {
     var builder = CreateSplitKeyOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

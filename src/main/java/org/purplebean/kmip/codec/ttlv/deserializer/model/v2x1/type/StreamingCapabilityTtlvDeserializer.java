@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.v2x1.type.StreamingCapability;
 
+/**
+ * TTLV deserializer for {@link StreamingCapability}.
+ */
 public class StreamingCapabilityTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<StreamingCapability,
         StreamingCapability.StreamingCapabilityBuilder> {
 
+  /**
+   * Constructs a new {@link StreamingCapabilityTtlvDeserializer}.
+   */
   public StreamingCapabilityTtlvDeserializer() {
     super(StreamingCapability.kmipTag, StreamingCapability.encodingType);
   }

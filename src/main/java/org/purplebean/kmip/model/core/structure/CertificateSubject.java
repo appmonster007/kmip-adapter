@@ -67,6 +67,9 @@ public class CertificateSubject implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateSubject} instance wrapping the given value.
+   */
   public static CertificateSubject of(@NonNull AttributeName attributeName,
                                       @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

@@ -41,6 +41,9 @@ public class FixedFieldLength implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link FixedFieldLength} instance wrapping the given value.
+   */
   public static FixedFieldLength of(@NonNull Integer value) {
     return new FixedFieldLength(value);
   }

@@ -42,6 +42,9 @@ public class ExtensionType implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ExtensionType} instance wrapping the given value.
+   */
   public static ExtensionType of(@NonNull Integer value) {
     return new ExtensionType(value);
   }

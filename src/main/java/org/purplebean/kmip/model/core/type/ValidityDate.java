@@ -45,6 +45,9 @@ public class ValidityDate implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ValidityDate} instance wrapping the given value.
+   */
   public static ValidityDate of(@NonNull OffsetDateTime value) {
     return new ValidityDate(value);
   }

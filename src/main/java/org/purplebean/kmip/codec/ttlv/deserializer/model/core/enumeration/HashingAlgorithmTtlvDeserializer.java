@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
 
+/**
+ * TTLV deserializer for {@link HashingAlgorithm}.
+ */
 public class HashingAlgorithmTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<HashingAlgorithm,
         HashingAlgorithm.HashingAlgorithmBuilder> {
 
+  /**
+   * Constructs a new {@link HashingAlgorithmTtlvDeserializer}.
+   */
   public HashingAlgorithmTtlvDeserializer() {
     super(HashingAlgorithm.kmipTag, HashingAlgorithm.encodingType);
   }

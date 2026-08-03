@@ -41,6 +41,9 @@ public class AsynchronousCapability implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link AsynchronousCapability} instance wrapping the given value.
+   */
   public static AsynchronousCapability of(@NonNull Boolean value) {
     return new AsynchronousCapability(value);
   }

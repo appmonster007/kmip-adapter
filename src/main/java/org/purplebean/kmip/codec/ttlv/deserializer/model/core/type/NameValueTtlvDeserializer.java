@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.NameValue;
 
+/**
+ * TTLV deserializer for {@link NameValue}.
+ */
 public class NameValueTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<NameValue, NameValue.NameValueBuilder> {
 
+  /**
+   * Constructs a new {@link NameValueTtlvDeserializer}.
+   */
   public NameValueTtlvDeserializer() {
     super(NameValue.kmipTag, NameValue.encodingType);
   }

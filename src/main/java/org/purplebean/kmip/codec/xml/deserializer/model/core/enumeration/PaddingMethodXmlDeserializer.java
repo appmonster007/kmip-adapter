@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 
+/**
+ * XML deserializer for {@link PaddingMethod}.
+ */
 public class PaddingMethodXmlDeserializer
     extends AbstractKmipDataTypeXmlDeserializer<PaddingMethod, PaddingMethod.PaddingMethodBuilder> {
 
+  /**
+   * Constructs a new {@link PaddingMethodXmlDeserializer}.
+   */
   public PaddingMethodXmlDeserializer() {
     super(PaddingMethod.kmipTag, PaddingMethod.encodingType);
   }

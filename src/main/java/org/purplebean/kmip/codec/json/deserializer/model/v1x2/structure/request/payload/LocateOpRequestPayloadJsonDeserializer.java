@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.core.type.MaximumItems;
 import org.purplebean.kmip.model.core.type.StorageStatusMask;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.LocateOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link LocateOpRequestPayload}.
+ */
 public class LocateOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<LocateOpRequestPayload,
         LocateOpRequestPayload.LocateOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link LocateOpRequestPayloadJsonDeserializer}.
+   */
   public LocateOpRequestPayloadJsonDeserializer() {
     super(LocateOpRequestPayload.kmipTag, LocateOpRequestPayload.encodingType);
   }

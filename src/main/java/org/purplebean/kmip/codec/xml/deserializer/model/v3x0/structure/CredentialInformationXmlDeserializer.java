@@ -8,10 +8,16 @@ import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDes
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.CredentialInformation;
 
+/**
+ * XML deserializer for {@link CredentialInformation}.
+ */
 public class CredentialInformationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<CredentialInformation,
         CredentialInformation.CredentialInformationBuilder> {
 
+  /**
+   * Constructs a new {@link CredentialInformationXmlDeserializer}.
+   */
   public CredentialInformationXmlDeserializer() {
     super(CredentialInformation.kmipTag, CredentialInformation.encodingType);
   }

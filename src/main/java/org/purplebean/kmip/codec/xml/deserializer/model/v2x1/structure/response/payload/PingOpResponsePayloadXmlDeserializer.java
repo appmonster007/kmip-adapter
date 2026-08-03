@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.PingOpResponsePayload;
 
+/**
+ * XML deserializer for {@link PingOpResponsePayload}.
+ */
 public class PingOpResponsePayloadXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<PingOpResponsePayload,
         PingOpResponsePayload.PingOpResponsePayloadBuilder> {
 
+  /**
+   * Constructs a new {@link PingOpResponsePayloadXmlDeserializer}.
+   */
   public PingOpResponsePayloadXmlDeserializer() {
     super(PingOpResponsePayload.kmipTag, PingOpResponsePayload.encodingType);
   }

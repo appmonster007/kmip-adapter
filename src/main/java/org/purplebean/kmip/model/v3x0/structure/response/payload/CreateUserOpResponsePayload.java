@@ -53,6 +53,9 @@ public class CreateUserOpResponsePayload implements ResponsePayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CreateUserOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateUserOpResponsePayload of(List<KmipDataType> values) {
     var builder = CreateUserOpResponsePayload.builder();
     values.forEach(value -> {
@@ -63,6 +66,9 @@ public class CreateUserOpResponsePayload implements ResponsePayloadStructure {
     return builder.build();
   }
 
+  /**
+   * Returns the {@link CreateUserOpResponsePayload} instance wrapping the given value.
+   */
   public static CreateUserOpResponsePayload of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return CreateUserOpResponsePayload
         .builder()

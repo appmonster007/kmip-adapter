@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 
+/**
+ * KMIP Operations structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class Operations implements KmipStructure {
@@ -41,6 +44,9 @@ public class Operations implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link Operations} instance wrapping the given value.
+   */
   public static Operations of(@NonNull List<Operation> operations) {
     return Operations
         .builder()
@@ -48,6 +54,9 @@ public class Operations implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link Operations} instance wrapping the given value.
+   */
   public static Operations of(@NonNull Operation... operations) {
     return Operations
         .builder()

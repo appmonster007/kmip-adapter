@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 
+/**
+ * XML deserializer for {@link SecretDataType}.
+ */
 public class SecretDataTypeXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<SecretDataType, SecretDataType.SecretDataTypeBuilder> {
 
+  /**
+   * Constructs a new {@link SecretDataTypeXmlDeserializer}.
+   */
   public SecretDataTypeXmlDeserializer() {
     super(SecretDataType.kmipTag, SecretDataType.encodingType);
   }

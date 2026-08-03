@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * TTLV deserializer for {@link PgpKeyVersion}.
+ */
 public class PgpKeyVersionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<PgpKeyVersion, PgpKeyVersion.PgpKeyVersionBuilder> {
 
+  /**
+   * Constructs a new {@link PgpKeyVersionTtlvDeserializer}.
+   */
   public PgpKeyVersionTtlvDeserializer() {
     super(PgpKeyVersion.kmipTag, PgpKeyVersion.encodingType);
   }

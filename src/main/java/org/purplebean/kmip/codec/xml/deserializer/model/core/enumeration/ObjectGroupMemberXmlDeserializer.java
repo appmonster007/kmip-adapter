@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.enumeration.ObjectGroupMember;
 
+/**
+ * XML deserializer for {@link ObjectGroupMember}.
+ */
 public class ObjectGroupMemberXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ObjectGroupMember,
         ObjectGroupMember.ObjectGroupMemberBuilder> {
 
+  /**
+   * Constructs a new {@link ObjectGroupMemberXmlDeserializer}.
+   */
   public ObjectGroupMemberXmlDeserializer() {
     super(ObjectGroupMember.kmipTag, ObjectGroupMember.encodingType);
   }

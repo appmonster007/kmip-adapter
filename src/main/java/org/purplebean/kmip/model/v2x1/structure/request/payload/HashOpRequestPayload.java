@@ -22,6 +22,9 @@ import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.FinalIndicator;
 import org.purplebean.kmip.model.v2x1.type.InitIndicator;
 
+/**
+ * KMIP HashOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class HashOpRequestPayload implements RequestPayloadStructure {
@@ -64,6 +67,9 @@ public class HashOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link HashOpRequestPayload} instance wrapping the given value.
+   */
   public static HashOpRequestPayload of(List<KmipDataType> values) {
     var builder = HashOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

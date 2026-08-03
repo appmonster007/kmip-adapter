@@ -41,6 +41,9 @@ public class Username implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link Username} instance wrapping the given value.
+   */
   public static Username of(@NonNull String value) {
     return new Username(value);
   }

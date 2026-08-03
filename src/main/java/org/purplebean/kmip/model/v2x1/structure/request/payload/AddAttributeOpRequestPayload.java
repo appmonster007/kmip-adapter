@@ -17,6 +17,9 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 
+/**
+ * KMIP AddAttributeOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class AddAttributeOpRequestPayload implements RequestPayloadStructure {
@@ -51,6 +54,9 @@ public class AddAttributeOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link AddAttributeOpRequestPayload} instance wrapping the given value.
+   */
   public static AddAttributeOpRequestPayload of(List<KmipDataType> values) {
     var builder = AddAttributeOpRequestPayload.builder();
     values.forEach(value -> {

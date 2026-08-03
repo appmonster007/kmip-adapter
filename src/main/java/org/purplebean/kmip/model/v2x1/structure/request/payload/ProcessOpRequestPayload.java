@@ -18,6 +18,9 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 
+/**
+ * KMIP ProcessOpRequestPayload operation request payload.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProcessOpRequestPayload implements RequestPayloadStructure {
@@ -47,6 +50,9 @@ public class ProcessOpRequestPayload implements RequestPayloadStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ProcessOpRequestPayload} instance wrapping the given value.
+   */
   public static ProcessOpRequestPayload of(List<KmipDataType> values) {
     var builder = ProcessOpRequestPayload.builder();
     Map<KmipTag, List<KmipDataType>> map = values

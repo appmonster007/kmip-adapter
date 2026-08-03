@@ -11,10 +11,16 @@ import org.purplebean.kmip.model.v2x1.structure.ProfileVersion;
 import org.purplebean.kmip.model.v2x1.type.ServerPort;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * TTLV deserializer for {@link ProfileInformation}.
+ */
 public class ProfileInformationTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<ProfileInformation,
         ProfileInformation.ProfileInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ProfileInformationTtlvDeserializer}.
+   */
   public ProfileInformationTtlvDeserializer() {
     super(ProfileInformation.kmipTag, ProfileInformation.encodingType);
   }

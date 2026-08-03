@@ -6,10 +6,16 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.ContactInformation;
 
+/**
+ * XML deserializer for {@link ContactInformation}.
+ */
 public class ContactInformationXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ContactInformation,
         ContactInformation.ContactInformationBuilder> {
 
+  /**
+   * Constructs a new {@link ContactInformationXmlDeserializer}.
+   */
   public ContactInformationXmlDeserializer() {
     super(ContactInformation.kmipTag, ContactInformation.encodingType);
   }

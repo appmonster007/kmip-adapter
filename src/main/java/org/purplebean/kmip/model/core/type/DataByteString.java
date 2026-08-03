@@ -42,10 +42,16 @@ public class DataByteString implements org.purplebean.kmip.api.DataValue {
     validate();
   }
 
+  /**
+   * Returns the {@link DataByteString} instance wrapping the given value.
+   */
   public static DataByteString of(@NonNull ByteBuffer value) {
     return new DataByteString(value);
   }
 
+  /**
+   * Returns the {@link DataByteString} instance wrapping the given value.
+   */
   public static DataByteString of(byte[] value) {
     return DataByteString
         .builder()

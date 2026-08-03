@@ -6,10 +6,16 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * TTLV deserializer for {@link LinkedObjectIdentifier}.
+ */
 public class LinkedObjectIdentifierTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<LinkedObjectIdentifier,
         LinkedObjectIdentifier.LinkedObjectIdentifierBuilder> {
 
+  /**
+   * Constructs a new {@link LinkedObjectIdentifierTtlvDeserializer}.
+   */
   public LinkedObjectIdentifierTtlvDeserializer() {
     super(LinkedObjectIdentifier.kmipTag, LinkedObjectIdentifier.encodingType);
   }

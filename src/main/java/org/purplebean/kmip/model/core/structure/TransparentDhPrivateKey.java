@@ -23,6 +23,9 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.X;
 
+/**
+ * KMIP TransparentDhPrivateKey attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
@@ -61,6 +64,9 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link TransparentDhPrivateKey} instance wrapping the given value.
+   */
   public static TransparentDhPrivateKey of(@NonNull KeyMaterial value) {
     if (!(value instanceof KmipStructure structure)) {
       throw new IllegalArgumentException("Invalid key material: " + value);
@@ -87,6 +93,9 @@ public class TransparentDhPrivateKey implements KeyMaterial, KmipStructure {
     );
   }
 
+  /**
+   * Returns the {@link TransparentDhPrivateKey} instance wrapping the given value.
+   */
   public static TransparentDhPrivateKey of(@NonNull P p, Q q, @NonNull G g, J j, @NonNull X x) {
     return TransparentDhPrivateKey
         .builder()

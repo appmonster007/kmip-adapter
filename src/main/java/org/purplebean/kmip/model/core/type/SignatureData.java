@@ -42,10 +42,16 @@ public class SignatureData implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SignatureData} instance wrapping the given value.
+   */
   public static SignatureData of(@NonNull ByteBuffer value) {
     return new SignatureData(value);
   }
 
+  /**
+   * Returns the {@link SignatureData} instance wrapping the given value.
+   */
   public static SignatureData of(byte[] value) {
     return SignatureData
         .builder()

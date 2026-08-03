@@ -14,6 +14,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * KMIP CertificateLink link attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class CertificateLink implements KmipStructure {
@@ -39,6 +42,9 @@ public class CertificateLink implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link CertificateLink} instance wrapping the given value.
+   */
   public static CertificateLink of(@NonNull UniqueIdentifier uniqueIdentifier) {
     return CertificateLink
         .builder()

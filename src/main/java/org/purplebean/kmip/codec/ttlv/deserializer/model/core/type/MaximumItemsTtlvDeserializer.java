@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.MaximumItems;
 
+/**
+ * TTLV deserializer for {@link MaximumItems}.
+ */
 public class MaximumItemsTtlvDeserializer
     extends AbstractKmipDataTypeTtlvDeserializer<MaximumItems, MaximumItems.MaximumItemsBuilder> {
 
+  /**
+   * Constructs a new {@link MaximumItemsTtlvDeserializer}.
+   */
   public MaximumItemsTtlvDeserializer() {
     super(MaximumItems.kmipTag, MaximumItems.encodingType);
   }

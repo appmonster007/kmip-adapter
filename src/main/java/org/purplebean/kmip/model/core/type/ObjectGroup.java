@@ -45,10 +45,16 @@ public class ObjectGroup implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link ObjectGroup} instance wrapping the given value.
+   */
   public static ObjectGroup of(@NonNull String value) {
     return new ObjectGroup(value);
   }
 
+  /**
+   * Returns the {@link ObjectGroup} instance wrapping the given value.
+   */
   public static ObjectGroup of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

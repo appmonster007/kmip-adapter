@@ -48,10 +48,16 @@ public class CompromiseOccurrenceDate implements KmipDataType, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CompromiseOccurrenceDate} instance wrapping the given value.
+   */
   public static CompromiseOccurrenceDate of(@NonNull OffsetDateTime value) {
     return new CompromiseOccurrenceDate(value);
   }
 
+  /**
+   * Returns the {@link CompromiseOccurrenceDate} instance wrapping the given value.
+   */
   public static CompromiseOccurrenceDate of(@NonNull AttributeName attributeName,
                                             @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

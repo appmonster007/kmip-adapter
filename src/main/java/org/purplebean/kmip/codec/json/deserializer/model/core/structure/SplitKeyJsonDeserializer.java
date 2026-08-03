@@ -13,9 +13,15 @@ import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * JSON deserializer for {@link SplitKey}.
+ */
 public class SplitKeyJsonDeserializer
     extends AbstractKmipDataTypeJsonDeserializer<SplitKey, SplitKey.SplitKeyBuilder> {
 
+  /**
+   * Constructs a new {@link SplitKeyJsonDeserializer}.
+   */
   public SplitKeyJsonDeserializer() {
     super(SplitKey.kmipTag, SplitKey.encodingType);
   }

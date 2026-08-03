@@ -9,10 +9,16 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Constraints;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
 
+/**
+ * JSON deserializer for {@link SetConstraintsOpRequestPayload}.
+ */
 public class SetConstraintsOpRequestPayloadJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<SetConstraintsOpRequestPayload,
         SetConstraintsOpRequestPayload.SetConstraintsOpRequestPayloadBuilder> {
 
+  /**
+   * Constructs a new {@link SetConstraintsOpRequestPayloadJsonDeserializer}.
+   */
   public SetConstraintsOpRequestPayloadJsonDeserializer() {
     super(SetConstraintsOpRequestPayload.kmipTag, SetConstraintsOpRequestPayload.encodingType);
   }

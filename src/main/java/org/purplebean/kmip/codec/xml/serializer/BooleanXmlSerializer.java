@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
+/**
+ * XML serializer for {@link Boolean}.
+ */
 public class BooleanXmlSerializer extends JsonSerializer<Boolean> {
 
   @Override

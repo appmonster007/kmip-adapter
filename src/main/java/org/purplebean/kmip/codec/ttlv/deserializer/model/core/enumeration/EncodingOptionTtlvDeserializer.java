@@ -6,9 +6,15 @@ import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvD
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.enumeration.EncodingOption;
 
+/**
+ * TTLV deserializer for {@link EncodingOption}.
+ */
 public class EncodingOptionTtlvDeserializer extends
     AbstractKmipDataTypeTtlvDeserializer<EncodingOption, EncodingOption.EncodingOptionBuilder> {
 
+  /**
+   * Constructs a new {@link EncodingOptionTtlvDeserializer}.
+   */
   public EncodingOptionTtlvDeserializer() {
     super(EncodingOption.kmipTag, EncodingOption.encodingType);
   }

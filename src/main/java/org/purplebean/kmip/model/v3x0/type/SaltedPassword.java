@@ -43,10 +43,16 @@ public class SaltedPassword implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link SaltedPassword} instance wrapping the given value.
+   */
   public static SaltedPassword of(@NonNull ByteBuffer value) {
     return new SaltedPassword(value);
   }
 
+  /**
+   * Returns the {@link SaltedPassword} instance wrapping the given value.
+   */
   public static SaltedPassword of(byte[] value) {
     return SaltedPassword
         .builder()

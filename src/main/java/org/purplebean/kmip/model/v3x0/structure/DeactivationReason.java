@@ -58,6 +58,9 @@ public class DeactivationReason implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link DeactivationReason} instance wrapping the given value.
+   */
   public static DeactivationReason of(
       @NonNull DeactivationReasonCode deactivationReasonCode,
       DeactivationMessage deactivationMessage) {
@@ -68,6 +71,9 @@ public class DeactivationReason implements KmipStructure {
         .build();
   }
 
+  /**
+   * Returns the {@link DeactivationReason} instance wrapping the given value.
+   */
   public static DeactivationReason of(@NonNull DeactivationReasonCode deactivationReasonCode) {
     return DeactivationReason
         .builder()

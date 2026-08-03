@@ -10,6 +10,9 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 
+/**
+ * KMIP ProtocolVersionMajor dataType.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProtocolVersionMajor implements KmipDataType {
@@ -36,6 +39,9 @@ public class ProtocolVersionMajor implements KmipDataType {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtocolVersionMajor} instance wrapping the given value.
+   */
   public static ProtocolVersionMajor of(int major) {
     return ProtocolVersionMajor
         .builder()

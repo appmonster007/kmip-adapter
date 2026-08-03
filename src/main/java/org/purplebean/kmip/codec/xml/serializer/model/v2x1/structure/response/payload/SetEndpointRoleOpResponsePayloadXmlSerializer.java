@@ -3,6 +3,9 @@ package org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.p
 import org.purplebean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayload;
 
+/**
+ * XML serializer for {@link SetEndpointRoleOpResponsePayload}.
+ */
 public class SetEndpointRoleOpResponsePayloadXmlSerializer
     extends AbstractKmipDataTypeXmlSerializer<SetEndpointRoleOpResponsePayload> {
 }

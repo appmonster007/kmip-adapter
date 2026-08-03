@@ -6,9 +6,15 @@ import java.io.IOException;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 
+/**
+ * XML deserializer for {@link Pkcs11Interface}.
+ */
 public class Pkcs11InterfaceXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<Pkcs11Interface, Pkcs11Interface.Pkcs11InterfaceBuilder> {
 
+  /**
+   * Constructs a new {@link Pkcs11InterfaceXmlDeserializer}.
+   */
   public Pkcs11InterfaceXmlDeserializer() {
     super(Pkcs11Interface.kmipTag, Pkcs11Interface.encodingType);
   }

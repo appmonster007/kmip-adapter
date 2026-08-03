@@ -10,9 +10,15 @@ import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseHeader;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseMessage;
 
+/**
+ * XML deserializer for {@link ResponseMessage}.
+ */
 public class ResponseMessageXmlDeserializer extends
     AbstractKmipDataTypeXmlDeserializer<ResponseMessage, ResponseMessage.ResponseMessageBuilder> {
 
+  /**
+   * Constructs a new {@link ResponseMessageXmlDeserializer}.
+   */
   public ResponseMessageXmlDeserializer() {
     super(ResponseMessage.kmipTag, ResponseMessage.encodingType);
   }

@@ -15,6 +15,9 @@ import org.purplebean.kmip.api.KmipStructure;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.model.v2x1.type.ProtectionStorageMask;
 
+/**
+ * KMIP ProtectionStorageMasks structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ProtectionStorageMasks implements KmipStructure {
@@ -42,6 +45,9 @@ public class ProtectionStorageMasks implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ProtectionStorageMasks} instance wrapping the given value.
+   */
   public static ProtectionStorageMasks of(@NonNull List<ProtectionStorageMask> masks) {
     return ProtectionStorageMasks
         .builder()

@@ -27,6 +27,9 @@ import org.purplebean.kmip.model.core.type.BatchOrderOption;
 import org.purplebean.kmip.model.core.type.MaximumResponseSize;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 
+/**
+ * KMIP RequestHeader request structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class RequestHeader implements RequestHeaderStructure {
@@ -92,6 +95,9 @@ public class RequestHeader implements RequestHeaderStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link RequestHeader} instance wrapping the given value.
+   */
   public static RequestHeader of(List<KmipDataType> values) {
     var builder = RequestHeader.builder();
     Map<KmipTag, List<KmipDataType>> map = values

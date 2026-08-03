@@ -105,6 +105,9 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     validate();
   }
 
+  /**
+   * Returns the {@link CryptographicParameters} instance wrapping the given value.
+   */
   public static CryptographicParameters of(@NonNull AttributeName attributeName,
                                            @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType ||

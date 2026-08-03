@@ -19,9 +19,15 @@ import org.purplebean.kmip.model.v2x1.structure.request.RequestHeader;
 import org.purplebean.kmip.model.v2x1.type.ClientCorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.ServerCorrelationValue;
 
+/**
+ * JSON deserializer for {@link RequestHeader}.
+ */
 public class RequestHeaderJsonDeserializer extends
     AbstractKmipDataTypeJsonDeserializer<RequestHeader, RequestHeader.RequestHeaderBuilder> {
 
+  /**
+   * Constructs a new {@link RequestHeaderJsonDeserializer}.
+   */
   public RequestHeaderJsonDeserializer() {
     super(RequestHeader.kmipTag, RequestHeader.encodingType);
   }

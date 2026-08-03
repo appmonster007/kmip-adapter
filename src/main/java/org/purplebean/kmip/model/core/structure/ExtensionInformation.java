@@ -17,6 +17,9 @@ import org.purplebean.kmip.model.core.type.ExtensionName;
 import org.purplebean.kmip.model.core.type.ExtensionTag;
 import org.purplebean.kmip.model.core.type.ExtensionType;
 
+/**
+ * KMIP ExtensionInformation attribute structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class ExtensionInformation implements KmipStructure {
@@ -53,6 +56,9 @@ public class ExtensionInformation implements KmipStructure {
     validate();
   }
 
+  /**
+   * Returns the {@link ExtensionInformation} instance wrapping the given value.
+   */
   public static ExtensionInformation of(
       @NonNull ExtensionName extensionName,
       ExtensionTag extensionTag,
