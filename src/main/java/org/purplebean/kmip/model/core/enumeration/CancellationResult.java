@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * result of a {@code Cancel} operation.
- * <p>
- * This enumeration is used in the response to a {@code Cancel} operation to indicate
+ *
+ * <p>This enumeration is used in the response to a {@code Cancel} operation to indicate
  * whether the requested asynchronous operation was successfully canceled.
  *
  * <p><b>Standards:</b></p>

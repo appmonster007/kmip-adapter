@@ -5,8 +5,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvSerializer;
 
 /**
  * Base TTLV serializer for {@link KmipDataType} objects.
- * <p>
- * This abstract class extends {@link TtlvSerializer} and serves as the base for all
+ *
+ * <p>This abstract class extends {@link TtlvSerializer} and serves as the base for all
  * serializers that handle KMIP data types. It provides a common type hierarchy for
  * TTLV serialization of KMIP objects.
  *

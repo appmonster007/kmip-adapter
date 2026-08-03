@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * compression type for an elliptic curve public key.
- * <p>
- * This enumeration is used to indicate how an elliptic curve point (representing a
+ *
+ * <p>This enumeration is used to indicate how an elliptic curve point (representing a
  * public key) is compressed.
  *
  * <p><b>Standards:</b></p>

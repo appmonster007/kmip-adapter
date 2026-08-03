@@ -2,8 +2,8 @@ package org.purplebean.kmip.api;
 
 /**
  * Marker interface for KMIP {@code Data} values.
- * <p>
- * KMIP §11.13 defines the {@code Data} tag ({@code 0x4200C2}) as polymorphic across encodings:
+ *
+ * <p>KMIP §11.13 defines the {@code Data} tag ({@code 0x4200C2}) as polymorphic across encodings:
  * <ul>
  *   <li><b>ByteString</b> — literal bytes of data (see
  *       {@link org.purplebean.kmip.model.core.type.DataByteString}).</li>
@@ -13,8 +13,8 @@ package org.purplebean.kmip.api;
  *       is introduced in KMIP 2.1 for Encrypt/Decrypt/Hash/MAC/RNG-Retrieve/Sign/SignatureVerify
  *       payloads that consume the output of a prior batch item.</li>
  * </ul>
- * <p>
- * Structurally mirrors {@link KeyValue} — both are single-tag polymorphic containers whose
+ *
+ * <p>Structurally mirrors {@link KeyValue} — both are single-tag polymorphic containers whose
  * concrete implementations differ by {@link EncodingType}. Payload fields typed as {@code
  * DataValue}
  * should be deserialized via polymorphic {@code KmipDataType.class} dispatch (see

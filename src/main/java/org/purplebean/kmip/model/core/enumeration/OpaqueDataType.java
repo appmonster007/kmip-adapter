@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of an opaque object.
- * <p>
- * Opaque objects are used to store data that is not interpreted by the KMIP server.
+ *
+ * <p>Opaque objects are used to store data that is not interpreted by the KMIP server.
  * This enumeration provides a way to give a hint about the nature of the data,
  * even if the server does not process it.
  *

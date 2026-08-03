@@ -17,8 +17,8 @@ import org.purplebean.kmip.api.KmipTag;
 
 /**
  * Base XML deserializer for {@link KmipDataType} objects.
- * <p>
- * This class provides the common logic for deserializing KMIP data types from XML.
+ *
+ * <p>This class provides the common logic for deserializing KMIP data types from XML.
  * It handles the extraction of the KMIP tag (from the XML element name) and encoding type
  * (from the 'type' attribute) and uses the {@link KmipDataType} registry to find the
  * appropriate concrete class to instantiate.

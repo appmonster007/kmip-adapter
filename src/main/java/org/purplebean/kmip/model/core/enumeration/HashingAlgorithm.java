@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * hashing algorithm to be used in cryptographic operations.
- * <p>
- * Hashing algorithms are used to produce a fixed-size digest of a message, which is
+ *
+ * <p>Hashing algorithms are used to produce a fixed-size digest of a message, which is
  * essential for digital signatures, message authentication codes (MACs), and other
  * cryptographic mechanisms.
  *

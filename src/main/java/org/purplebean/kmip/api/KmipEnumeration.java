@@ -6,8 +6,8 @@ import java.util.function.Function;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) Enumeration data type.
- * <p>
- * This interface extends {@link KmipDataType} and serves as the base for all KMIP
+ *
+ * <p>This interface extends {@link KmipDataType} and serves as the base for all KMIP
  * enumerations. An enumeration in KMIP is a set of named integer constants that
  * represent specific values for a given attribute or parameter (e.g., Result Status,
  * Cryptographic Algorithm).
@@ -90,8 +90,8 @@ public interface KmipEnumeration extends KmipDataType {
 
   /**
    * Gets the integer value of the enumeration constant.
-   * <p>
-   * This is the value that is used in the TTLV encoding of the KMIP message.
+   *
+   * <p>This is the value that is used in the TTLV encoding of the KMIP message.
    *
    * @return The integer value of the enumeration.
    */

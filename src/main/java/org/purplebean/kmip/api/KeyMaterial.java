@@ -7,8 +7,8 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * Represents the Key Material data type in KMIP.
- * <p>
- * This interface extends {@link KmipDataType} and defines the contract for all KMIP Key Material
+ *
+ * <p>This interface extends {@link KmipDataType} and defines the contract for all KMIP Key Material
  * objects. Key Material refers to the actual cryptographic key data itself, which can be
  * represented in various formats (e.g., raw, PKCS#1, X.509).
  *
@@ -47,8 +47,8 @@ public interface KeyMaterial extends KmipDataType {
 
   /**
    * Registers a {@link KeyMaterial} class and its builder function with the central registries.
-   * <p>
-   * This method should be called for each supported key material format to enable dynamic
+   *
+   * <p>This method should be called for each supported key material format to enable dynamic
    * handling by the codec.
    *
    * @param spec                 The {@link KmipSpec} version for which this mapping is valid.

@@ -16,8 +16,8 @@ import org.purplebean.kmip.api.KmipStructure;
 
 /**
  * Abstract base class for XML serialization of {@link KmipDataType} objects.
- * <p>
- * This class implements the core logic for serializing KMIP objects to XML, ensuring
+ *
+ * <p>This class implements the core logic for serializing KMIP objects to XML, ensuring
  * compliance with the KMIP XML encoding specification. It handles the serialization
  * of the KMIP tag (as the element name or 'tag' attribute), type (as the 'type' attribute),
  * and value, including support for nested structures and enumerations.

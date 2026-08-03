@@ -13,14 +13,15 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
 /**
  * Represents the header of a KMIP (Key Management Interoperability Protocol) Response Message.
- * <p>
- * This interface defines the structure and essential components of a KMIP response header. The
+ *
+ * <p>This interface defines the structure and essential components of a KMIP response header. The
  * header
  * contains metadata about the response, such as the protocol version used by the server, a
  * timestamp,
  * and the number of batch items in the response.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Response Header is a {@link KmipStructure} that typically contains:</p>
  * <ul>
  *   <li><b>Protocol Version:</b> (Required) Specifies the version of the KMIP protocol the
@@ -31,6 +32,7 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration mechanism to support different header
  * structures across
  * various KMIP specification versions. Implementations for specific versions register

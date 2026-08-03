@@ -11,8 +11,8 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * JSON deserializer for {@link KeyMaterial} objects.
- * <p>
- * This class extends {@link KmipDataTypeJsonDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeJsonDeserializer} to handle the specific logic required
  * for deserializing KMIP Key Material from JSON. It uses the {@code keyFormatType} attribute
  * from the deserialization context to determine the concrete class to instantiate.
  */

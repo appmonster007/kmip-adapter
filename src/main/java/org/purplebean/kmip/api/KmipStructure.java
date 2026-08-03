@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * Represents a KMIP Structure data type.
- * <p>
- * This interface extends {@link KmipDataType} and serves as a marker for all KMIP
+ *
+ * <p>This interface extends {@link KmipDataType} and serves as a marker for all KMIP
  * data types that are structures. A KMIP Structure is a composite data type that
  * contains an ordered sequence of other {@link KmipDataType} instances.
  *
@@ -33,8 +33,8 @@ public interface KmipStructure extends KmipDataType {
 
   /**
    * Retrieves the ordered list of {@link KmipDataType} instances that make up this structure.
-   * <p>
-   * The order of the elements in the list is significant and corresponds to their
+   *
+   * <p>The order of the elements in the list is significant and corresponds to their
    * sequence within the KMIP structure as defined by the specification.
    *
    * @return A {@link List} of {@link KmipDataType} objects contained within this structure.

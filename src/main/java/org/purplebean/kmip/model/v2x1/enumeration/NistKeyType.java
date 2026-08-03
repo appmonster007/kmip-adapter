@@ -25,8 +25,8 @@ import org.purplebean.kmip.api.KmipTag;
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a cryptographic key according to NIST (National Institute of Standards
  * and Technology) classifications.
- * <p>
- * This enumeration provides a standardized way to categorize keys based on their
+ *
+ * <p>This enumeration provides a standardized way to categorize keys based on their
  * intended cryptographic function, such as signing, encryption, or key agreement.
  *
  * @see KmipEnumeration

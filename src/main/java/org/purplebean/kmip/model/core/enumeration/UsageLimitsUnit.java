@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.UsageLimits;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * unit for a usage limit.
- * <p>
- * This enumeration is used in the {@code UsageLimits} attribute to define whether
+ *
+ * <p>This enumeration is used in the {@code UsageLimits} attribute to define whether
  * the usage limit is measured in bytes or in number of objects.
  *
  * <p><b>Standards:</b></p>

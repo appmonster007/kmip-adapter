@@ -14,8 +14,8 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 /**
  * Represents the payload of a single KMIP (Key Management Interoperability Protocol) operation
  * request.
- * <p>
- * This interface defines the structure for the payload associated with a specific KMIP operation
+ *
+ * <p>This interface defines the structure for the payload associated with a specific KMIP operation
  * (e.g., Create,
  * Get, Destroy). The payload contains all the parameters and attributes necessary to perform
  * that operation.
@@ -23,6 +23,7 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
  * registration mechanism to map specific operations to their corresponding payload implementations.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Request Payload is a {@link KmipStructure} whose contents depend entirely on the KMIP
  * operation
  * it is associated with. For example:</p>
@@ -33,6 +34,7 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration system where each concrete payload
  * implementation
  * registers itself against a specific {@link KmipSpec} and {@link Operation}. This allows the

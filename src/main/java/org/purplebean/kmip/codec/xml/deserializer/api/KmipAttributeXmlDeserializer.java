@@ -10,8 +10,8 @@ import org.purplebean.kmip.api.KmipTag;
 
 /**
  * XML deserializer for {@link KmipAttribute} objects.
- * <p>
- * This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
  * for deserializing KMIP Attributes from XML. It delegates the class lookup to the
  * {@link KmipAttribute} registry.
  */

@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Handles the dynamic initialization of KMIP (Key Management Interoperability Protocol) data types.
- * <p>
- * This class uses the Java Service Provider Interface (SPI) pattern to discover and load all
+ *
+ * <p>This class uses the Java Service Provider Interface (SPI) pattern to discover and load all
  * classes that implement the {@link KmipDataType} interface. It reads a service definition file
  * located at {@code META-INF/services/org.purplebean.kmip.api.KmipDataType}, which should contain
  * the fully qualified names of all concrete KMIP data type implementations.
@@ -48,8 +48,8 @@ public class KmipInitializer {
 
   /**
    * Initializes all KMIP data types listed in the service definition file.
-   * <p>
-   * This method ensures that the static initializers of all discovered POJOs are executed.
+   *
+   * <p>This method ensures that the static initializers of all discovered POJOs are executed.
    * It is idempotent and thread-safe; the initialization process will only run once.
    */
   public static void initialize() {

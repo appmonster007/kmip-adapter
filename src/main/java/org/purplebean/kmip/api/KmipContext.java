@@ -4,8 +4,8 @@ import java.util.function.Supplier;
 
 /**
  * Manages the thread-local context for KMIP (Key Management Interoperability Protocol) operations.
- * <p>
- * This class provides a mechanism to set, get, and clear the current KMIP specification version
+ *
+ * <p>This class provides a mechanism to set, get, and clear the current KMIP specification version
  * on a per-thread basis. This is crucial for the codec to correctly serialize and deserialize
  * data according to the rules of a specific KMIP version, as the representation of objects
  * and attributes can vary between specifications.
@@ -81,8 +81,8 @@ public final class KmipContext {
 
   /**
    * Executes a block of code within a specific KMIP specification context.
-   * <p>
-   * This method sets the context to the provided {@link KmipSpec}, executes the given
+   *
+   * <p>This method sets the context to the provided {@link KmipSpec}, executes the given
    * {@link Supplier}, and ensures that the original context is restored afterward,
    * even if an exception occurs.
    *

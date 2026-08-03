@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * mode of operation for a block cipher.
- * <p>
- * Block cipher modes define how a block cipher, which encrypts fixed-size blocks of
+ *
+ * <p>Block cipher modes define how a block cipher, which encrypts fixed-size blocks of
  * data, can be used to securely handle variable-length messages. This enumeration
  * includes common modes like CBC, CTR, and GCM.
  *

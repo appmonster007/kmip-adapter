@@ -11,8 +11,8 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
 /**
  * XML deserializer for {@link ManagedObject} objects.
- * <p>
- * This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeXmlDeserializer} to handle the specific logic required
  * for deserializing KMIP Managed Objects from XML. It uses the {@code objectType} attribute
  * from the deserialization context to determine the concrete class to instantiate, falling back
  * to the standard registry lookup if the object type is not present.

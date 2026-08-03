@@ -12,14 +12,14 @@ import java.util.Set;
 
 /**
  * KMIP {@code UniqueIdentifier} dataType ({@code 0x420094}, KMIP §5 / 3.0 §4.68).
- * <p>
- * Polymorphic across wire encodings — TextString (v1.2+, the default form), Integer (v2.1+
+ *
+ * <p>Polymorphic across wire encodings — TextString (v1.2+, the default form), Integer (v2.1+
  * batch-index reference) and, in KMIP 3.0 (§4.68), Identifier/Reference/NameReference. All of
  * these share the same underlying character/string shape and are represented by this single
  * class, with {@link #sourceEncoding} tracking which wire variant was actually parsed so that
  * round-trip (de)serialization preserves it.
- * <p>
- * The Enumeration variant (v2.1+ ID-Placeholder / batch-item references) is NOT represented here
+ *
+ * <p>The Enumeration variant (v2.1+ ID-Placeholder / batch-item references) is NOT represented here
  * — it is owned exclusively by {@link org.purplebean.kmip.model.v2x1.enumeration.UniqueIdentifier}
  * (a proper {@link org.purplebean.kmip.api.KmipEnumeration}), to avoid a registry collision on
  * {@code (tag=UNIQUE_IDENTIFIER, encoding=ENUMERATION)}.

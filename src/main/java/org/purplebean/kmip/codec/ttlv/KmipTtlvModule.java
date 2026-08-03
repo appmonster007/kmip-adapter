@@ -10,8 +10,8 @@ import org.purplebean.kmip.codec.ttlv.serializer.api.KmipDataTypeTtlvSerializer;
 /**
  * A {@link TtlvModule} that automatically discovers and registers KMIP-specific TTLV serializers
  * and deserializers.
- * <p>
- * This module leverages the Java {@link ServiceLoader} mechanism to find and register custom
+ *
+ * <p>This module leverages the Java {@link ServiceLoader} mechanism to find and register custom
  * handlers for
  * KMIP data types. It simplifies the process of extending the TTLV codec with new or custom KMIP
  * objects

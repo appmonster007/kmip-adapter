@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.Link;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of link between two managed objects.
- * <p>
- * Links are used to establish relationships between objects, such as a private key
+ *
+ * <p>Links are used to establish relationships between objects, such as a private key
  * and its corresponding public key, or a key and the certificate that contains it.
  *
  * <p><b>Standards:</b></p>

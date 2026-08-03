@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of credential used for authentication.
- * <p>
- * This enumeration is used in the {@code Credential} structure to identify the
+ *
+ * <p>This enumeration is used in the {@code Credential} structure to identify the
  * type of authentication material being provided.
  *
  * <p><b>Standards:</b></p>

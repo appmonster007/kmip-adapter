@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * role of a cryptographic key.
- * <p>
- * This enumeration is used to categorize keys based on their intended use in a
+ *
+ * <p>This enumeration is used to categorize keys based on their intended use in a
  * specific cryptographic system, such as a payment card system.
  *
  * @see KmipEnumeration

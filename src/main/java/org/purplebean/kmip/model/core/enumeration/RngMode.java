@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * mode of operation for a Random Number Generator (RNG).
- * <p>
- * This enumeration is used in the {@code RNGParameters} structure to indicate how
+ *
+ * <p>This enumeration is used in the {@code RNGParameters} structure to indicate how
  * the RNG is instantiated and managed.
  *
  * <p><b>Standards:</b></p>

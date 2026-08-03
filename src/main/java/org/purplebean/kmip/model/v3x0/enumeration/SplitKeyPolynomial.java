@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * polynomial to be used in a polynomial-based key splitting scheme.
- * <p>
- * This enumeration is used when the {@link SplitKeyMethod} is a polynomial sharing
+ *
+ * <p>This enumeration is used when the {@link SplitKeyMethod} is a polynomial sharing
  * scheme, to define the specific polynomial for the finite field arithmetic.
  *
  * <p><b>Standards:</b></p>

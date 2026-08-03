@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * method used to split a key into multiple parts.
- * <p>
- * Key splitting is a technique used to divide a key into multiple shares, where a
+ *
+ * <p>Key splitting is a technique used to divide a key into multiple shares, where a
  * certain threshold of shares is required to reconstruct the original key. This
  * enumeration lists the methods supported by KMIP for this purpose.
  *

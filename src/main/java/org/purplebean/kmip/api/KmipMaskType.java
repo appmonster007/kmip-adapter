@@ -6,8 +6,8 @@ import java.util.function.Function;
 
 /**
  * Represents a KMIP Mask data type.
- * <p>
- * This interface extends {@link KmipDataType} and defines the contract for KMIP mask types.
+ *
+ * <p>This interface extends {@link KmipDataType} and defines the contract for KMIP mask types.
  * A mask type in KMIP is typically a bitmask represented as an integer, where each bit
  * corresponds to a specific permission or capability.
  *

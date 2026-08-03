@@ -9,8 +9,8 @@ import org.purplebean.kmip.model.core.type.AttributeValue;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) attribute.
- * <p>
- * This interface extends {@link KmipDataType} and defines the contract for all KMIP attributes.
+ *
+ * <p>This interface extends {@link KmipDataType} and defines the contract for all KMIP attributes.
  * Attributes are used to describe the properties of managed objects (e.g., cryptographic keys,
  * certificates). This interface provides methods to query the characteristics and capabilities
  * of an attribute, such as whether it is server-initializable, client-modifiable, or always

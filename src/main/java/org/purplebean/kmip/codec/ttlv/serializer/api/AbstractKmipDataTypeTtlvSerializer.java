@@ -15,8 +15,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * Abstract base class for TTLV serialization of {@link KmipDataType} objects.
- * <p>
- * This class implements the core logic for serializing KMIP objects to TTLV format.
+ *
+ * <p>This class implements the core logic for serializing KMIP objects to TTLV format.
  * It handles the construction of the {@link TtlvObject}, including the tag, type,
  * and value. It supports recursive serialization of nested structures and proper
  * encoding of enumerations and other data types.

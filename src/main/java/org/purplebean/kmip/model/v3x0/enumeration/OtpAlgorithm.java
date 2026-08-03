@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * One-Time Password (OTP) algorithm to be used.
- * <p>
- * This enumeration is used in the {@code OtpCredential} structure to define the
+ *
+ * <p>This enumeration is used in the {@code OtpCredential} structure to define the
  * algorithm for generating and validating one-time passwords.
  *
  * <p><b>Standards:</b></p>

@@ -12,8 +12,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * Base TTLV deserializer for {@link KmipDataType} objects.
- * <p>
- * This class provides the common logic for deserializing KMIP data types from TTLV
+ *
+ * <p>This class provides the common logic for deserializing KMIP data types from TTLV
  * (Tag-Type-Length-Value)
  * format. It reads the tag and type from the TTLV buffer and uses the {@link KmipDataType} registry
  * to find the appropriate concrete class to instantiate.

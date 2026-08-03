@@ -9,8 +9,8 @@ import java.nio.ByteBuffer;
  * An abstract base class for creating custom deserializers that convert a TTLV
  * (Tag-Type-Length-Value)
  * byte representation into a Java object.
- * <p>
- * This class provides the core logic for deserialization and includes a mechanism to automatically
+ *
+ * <p>This class provides the core logic for deserialization and includes a mechanism to automatically
  * determine the target type {@code <T>} that the deserializer handles. This is essential for the
  * {@link TtlvMapper} to correctly associate the deserializer with the appropriate class.
  *
@@ -68,8 +68,8 @@ public abstract class TtlvDeserializer<T> {
 
   /**
    * Infers and returns the class of the type {@code T} that this deserializer handles.
-   * <p>
-   * This method uses reflection to inspect the generic type arguments of the class that extends
+   *
+   * <p>This method uses reflection to inspect the generic type arguments of the class that extends
    * {@code TtlvDeserializer}. It first checks the generic superclass and then falls back to
    * implemented interfaces. This allows the {@link TtlvMapper} to automatically register the
    * deserializer for the correct target type.

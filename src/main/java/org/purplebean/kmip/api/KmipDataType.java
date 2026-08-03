@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Represents a fundamental data type within the Key Management Interoperability Protocol (KMIP)
  * framework.
- * <p>
- * This interface serves as the base for all specific KMIP data types, establishing a common
+ *
+ * <p>This interface serves as the base for all specific KMIP data types, establishing a common
  * contract for identifying
  * and handling different kinds of data in KMIP messages. It provides a centralized registry
  * system to map protocol-specific
@@ -56,8 +56,8 @@ public interface KmipDataType {
 
   /**
    * Registers a KMIP data type class with the central registry.
-   * <p>
-   * This method should be called once for each supported KMIP specification when a data type
+   *
+   * <p>This method should be called once for each supported KMIP specification when a data type
    * class is loaded.
    * It creates a unique key based on the provided parameters and maps it to the given class.
    *
@@ -74,8 +74,8 @@ public interface KmipDataType {
   /**
    * Retrieves the corresponding {@link KmipDataType} class from the registry based on a tag and
    * encoding type.
-   * <p>
-   * This method uses the {@link KmipContext} to determine the currently active KMIP
+   *
+   * <p>This method uses the {@link KmipContext} to determine the currently active KMIP
    * specification and looks up
    * the appropriate class for the given tag and encoding.
    *
@@ -121,8 +121,8 @@ public interface KmipDataType {
 
   /**
    * A composite key used for the {@link #TAG_REGISTRY}.
-   * <p>
-   * This record uniquely identifies a data type by combining its specification version, tag, and
+   *
+   * <p>This record uniquely identifies a data type by combining its specification version, tag, and
    * encoding type.
    *
    * @param spec         The KMIP specification version.

@@ -28,8 +28,8 @@ import org.purplebean.kmip.util.StringUtils;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * cryptographic algorithm of a key or other cryptographic object.
- * <p>
- * This enumeration is a critical attribute for any cryptographic object, as it defines
+ *
+ * <p>This enumeration is a critical attribute for any cryptographic object, as it defines
  * the mathematical operations that the object can be used for. It includes a wide range
  * of symmetric and asymmetric algorithms.
  *

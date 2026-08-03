@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
  * KMIP profile that a server or client conforms to.
- * <p>
- * Profiles define subsets of the KMIP specification that are relevant to specific
+ *
+ * <p>Profiles define subsets of the KMIP specification that are relevant to specific
  * use cases, ensuring interoperability between different vendors' products.
  *
  * @see KmipEnumeration

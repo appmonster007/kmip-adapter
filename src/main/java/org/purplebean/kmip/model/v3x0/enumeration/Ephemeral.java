@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that indicates
  * whether an object is ephemeral (i.e., not stored by the server).
- * <p>
- * This enumeration is used as an attribute to specify the persistence of an object.
+ *
+ * <p>This enumeration is used as an attribute to specify the persistence of an object.
  *
  * <p><b>Standards:</b></p>
  * <ul>

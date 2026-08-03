@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a secret data object.
- * <p>
- * This enumeration is used in the {@code SecretData} object to indicate the nature
+ *
+ * <p>This enumeration is used in the {@code SecretData} object to indicate the nature
  * of the secret data being managed.
  *
  * <p><b>Standards:</b></p>

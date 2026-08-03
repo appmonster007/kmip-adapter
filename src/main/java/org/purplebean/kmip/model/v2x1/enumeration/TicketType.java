@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a security ticket.
- * <p>
- * This enumeration is used in the {@code Ticket} structure to identify the nature
+ *
+ * <p>This enumeration is used in the {@code Ticket} structure to identify the nature
  * of the authentication or authorization ticket being used.
  *
  * <p><b>Standards:</b></p>

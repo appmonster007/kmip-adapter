@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * class of an object.
- * <p>
- * This enumeration is used to categorize objects based on their origin or management
+ *
+ * <p>This enumeration is used to categorize objects based on their origin or management
  * context, such as whether they are user-defined or system-defined.
  *
  * <p><b>Standards:</b></p>

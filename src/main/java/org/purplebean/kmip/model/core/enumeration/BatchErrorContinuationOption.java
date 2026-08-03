@@ -25,8 +25,8 @@ import org.purplebean.kmip.api.request.RequestHeaderStructure;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies how
  * to proceed when an error occurs in a batch of operations.
- * <p>
- * When multiple operations are sent in a single request batch, this option in the
+ *
+ * <p>When multiple operations are sent in a single request batch, this option in the
  * request header tells the server what to do if one of the operations fails.
  *
  * <p><b>Standards:</b></p>

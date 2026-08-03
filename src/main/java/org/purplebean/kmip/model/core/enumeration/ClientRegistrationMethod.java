@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * method used for client registration.
- * <p>
- * This enumeration is used in the server's capability information to indicate which
+ *
+ * <p>This enumeration is used in the server's capability information to indicate which
  * methods of client registration it supports.
  *
  * <p><b>Standards:</b></p>

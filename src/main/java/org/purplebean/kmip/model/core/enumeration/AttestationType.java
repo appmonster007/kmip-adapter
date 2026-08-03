@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of attestation used to prove the identity and state of a device or application.
- * <p>
- * Attestation is a process where a client provides evidence to the server to prove
+ *
+ * <p>Attestation is a process where a client provides evidence to the server to prove
  * its identity and that its software and hardware have not been tampered with.
  *
  * <p><b>Standards:</b></p>

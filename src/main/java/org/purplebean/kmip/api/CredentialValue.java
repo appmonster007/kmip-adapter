@@ -7,8 +7,8 @@ import org.purplebean.kmip.model.core.enumeration.CredentialType;
 
 /**
  * Represents the CredentialValue data type in KMIP.
- * <p>
- * This interface extends {@link KmipDataType} and serves as a marker for all
+ *
+ * <p>This interface extends {@link KmipDataType} and serves as a marker for all
  * KMIP CredentialValue objects. A CredentialValue contains authentication
  * information, such as a username and password, or a certificate.
  *
@@ -48,8 +48,8 @@ public interface CredentialValue extends KmipDataType {
 
   /**
    * Registers a {@link CredentialValue} class and its builder function with the central registries.
-   * <p>
-   * This method should be called for each supported credential format to enable dynamic
+   *
+   * <p>This method should be called for each supported credential format to enable dynamic
    * handling by the codec.
    *
    * @param spec                  The {@link KmipSpec} version for which this mapping is valid.

@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
  * the desired level of protection for a cryptographic object.
- * <p>
- * This enumeration is used to indicate the strength or assurance level associated
+ *
+ * <p>This enumeration is used to indicate the strength or assurance level associated
  * with the protection of a key or other sensitive material.
  *
  * <p><b>Standards:</b></p>

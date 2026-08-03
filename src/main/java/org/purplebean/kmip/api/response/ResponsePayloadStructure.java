@@ -14,8 +14,8 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 /**
  * Represents the payload of a single KMIP (Key Management Interoperability Protocol) operation
  * response.
- * <p>
- * This interface defines the structure for the payload associated with the result of a specific
+ *
+ * <p>This interface defines the structure for the payload associated with the result of a specific
  * KMIP operation.
  * The payload contains all the data returned by the server for that operation. Because the
  * content of the
@@ -24,6 +24,7 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
  * specific operations to their corresponding payload implementations.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Response Payload is a {@link KmipStructure} whose contents depend entirely on the KMIP
  * operation
  * it is associated with. For example:</p>
@@ -34,6 +35,7 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration system where each concrete payload
  * implementation
  * registers itself against a specific {@link KmipSpec} and {@link Operation}. This allows the

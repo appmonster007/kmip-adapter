@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of information being requested in a {@code Query} operation.
- * <p>
- * The {@code Query} operation is a general-purpose mechanism for a client to discover
+ *
+ * <p>The {@code Query} operation is a general-purpose mechanism for a client to discover
  * the capabilities and status of a KMIP server. This enumeration defines the different
  * categories of information that can be queried.
  *

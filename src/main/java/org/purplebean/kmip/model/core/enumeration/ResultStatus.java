@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * overall status of a KMIP operation.
- * <p>
- * This enumeration is returned in the response to every KMIP operation, indicating
+ *
+ * <p>This enumeration is returned in the response to every KMIP operation, indicating
  * whether the operation succeeded, failed, or is still pending.
  *
  * <p><b>Standards:</b></p>

@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
  * whether a key is wrapped or not.
- * <p>
- * This enumeration is used in operations like {@code Register} to indicate the
+ *
+ * <p>This enumeration is used in operations like {@code Register} to indicate the
  * wrapping state of the key being registered.
  *
  * <p><b>Standards:</b></p>

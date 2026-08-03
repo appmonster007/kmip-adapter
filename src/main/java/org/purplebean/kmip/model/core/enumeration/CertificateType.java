@@ -28,8 +28,8 @@ import org.purplebean.kmip.util.StringUtils;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a certificate.
- * <p>
- * This enumeration is used to identify the format and standard of a certificate object,
+ *
+ * <p>This enumeration is used to identify the format and standard of a certificate object,
  * such as X.509 or PGP.
  *
  * <p><b>Standards:</b></p>

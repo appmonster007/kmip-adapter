@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * processing stage of an asynchronous operation.
- * <p>
- * This enumeration is used in the response to an asynchronous operation to indicate
+ *
+ * <p>This enumeration is used in the response to an asynchronous operation to indicate
  * its current status.
  *
  * <p><b>Standards:</b></p>

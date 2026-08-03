@@ -13,14 +13,15 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * Represents the top-level structure of a KMIP (Key Management Interoperability Protocol)
  * Response Message.
- * <p>
- * This interface defines the standard layout for any KMIP response message. A response message
+ *
+ * <p>This interface defines the standard layout for any KMIP response message. A response message
  * acts as a
  * container, holding a header and one or more "batch items," where each batch item represents
  * the result of a single
  * KMIP operation.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Response Message is a {@link KmipStructure} composed of:</p>
  * <ul>
  *   <li><b>Response Header:</b> (Required, 1) A {@link ResponseHeaderStructure} containing
@@ -32,6 +33,7 @@ import org.purplebean.kmip.api.KmipTag;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration mechanism to support different message
  * structures across
  * various KMIP specification versions. Implementations for specific versions register

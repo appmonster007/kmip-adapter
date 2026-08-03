@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link KmipTag}.
- * <p>
- * These tests verify the behavior of KMIP tags, including encoding, version support,
+ *
+ * <p>These tests verify the behavior of KMIP tags, including encoding, version support,
  * registry operations, and lookup mechanisms.
  */
 @DisplayName("KmipTag Tests")

@@ -13,8 +13,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * KMIP {@code PrivateKeyUniqueIdentifier} dataType ({@code 0x420066}), encoded as a {@code
  * TextString} (v1.2-v2.1).
- * <p>
- * Sibling of {@link org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier} (KMIP 3
+ *
+ * <p>Sibling of {@link org.purplebean.kmip.model.v3x0.type.PrivateKeyUniqueIdentifier} (KMIP 3
  * .0-only {@code Identifier}
  * wire type) — the two are unrelated Java types that happen to share a KMIP tag and value shape.
  */

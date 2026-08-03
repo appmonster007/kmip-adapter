@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * lifecycle state of a managed object.
- * <p>
- * This enumeration is a fundamental attribute of every managed object, defining its
+ *
+ * <p>This enumeration is a fundamental attribute of every managed object, defining its
  * current status in the key lifecycle.
  *
  * <p><b>Standards:</b></p>

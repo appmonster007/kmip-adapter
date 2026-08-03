@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * role of an endpoint in a KMIP communication.
- * <p>
- * This enumeration is used to identify whether an endpoint is acting as a client
+ *
+ * <p>This enumeration is used to identify whether an endpoint is acting as a client
  * or a server.
  *
  * <p><b>Standards:</b></p>

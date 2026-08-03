@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * encoding of a data item.
- * <p>
- * This enumeration is used to indicate whether a data item is encoded, and if so,
+ *
+ * <p>This enumeration is used to indicate whether a data item is encoded, and if so,
  * what encoding is used.
  *
  * <p><b>Standards:</b></p>

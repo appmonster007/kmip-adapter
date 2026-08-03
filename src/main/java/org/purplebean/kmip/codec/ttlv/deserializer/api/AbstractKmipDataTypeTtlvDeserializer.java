@@ -17,8 +17,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 /**
  * Abstract base class for custom TTLV deserializers of specific {@link KmipDataType}
  * implementations.
- * <p>
- * This class provides a template for deserializing complex KMIP objects from TTLV. It handles
+ *
+ * <p>This class provides a template for deserializing complex KMIP objects from TTLV. It handles
  * the validation of the KMIP tag and encoding type, and orchestrates the parsing of the
  * TTLV structure into a builder object, which is then used to construct the final result.
  *

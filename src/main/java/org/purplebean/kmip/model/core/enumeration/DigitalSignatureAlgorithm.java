@@ -28,8 +28,8 @@ import org.purplebean.kmip.util.StringUtils;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * algorithm to be used for digital signatures.
- * <p>
- * This enumeration lists various combinations of hashing algorithms and public-key
+ *
+ * <p>This enumeration lists various combinations of hashing algorithms and public-key
  * algorithms that can be used to create and verify digital signatures.
  *
  * <p><b>Standards:</b></p>

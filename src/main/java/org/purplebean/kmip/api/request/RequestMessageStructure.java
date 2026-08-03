@@ -13,14 +13,15 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * Represents the top-level structure of a KMIP (Key Management Interoperability Protocol)
  * Request Message.
- * <p>
- * This interface defines the standard layout for any KMIP request message. A request message
+ *
+ * <p>This interface defines the standard layout for any KMIP request message. A request message
  * acts as a
  * container, holding a header and one or more "batch items," where each batch item represents a
  * single
  * KMIP operation (e.g., Create, Get, Destroy).
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Request Message is a {@link KmipStructure} composed of:</p>
  * <ul>
  *   <li><b>Request Header:</b> (Required, 1) A {@link RequestHeaderStructure} containing
@@ -32,6 +33,7 @@ import org.purplebean.kmip.api.KmipTag;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration mechanism to support different message
  * structures across
  * various KMIP specification versions. Implementations for specific versions register

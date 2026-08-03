@@ -14,6 +14,7 @@ import org.purplebean.kmip.api.KmipTag;
  * KMIP OtpInterval dataType (Interval).
  *
  * <p>Introduced in KMIP v3.0. Specifies the time step interval (in seconds) for TOTP.</p>
+ *
  * <p>Uses KMIP {@link EncodingType#INTERVAL} (4-byte unsigned integer stored as Integer).</p>
  */
 @Data

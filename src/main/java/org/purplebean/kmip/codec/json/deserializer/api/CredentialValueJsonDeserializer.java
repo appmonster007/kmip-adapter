@@ -11,8 +11,8 @@ import org.purplebean.kmip.model.core.enumeration.CredentialType;
 
 /**
  * JSON deserializer for {@link CredentialValue} objects.
- * <p>
- * This class extends {@link KmipDataTypeJsonDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeJsonDeserializer} to handle the specific logic required
  * for deserializing KMIP Credential Values from JSON. It uses the {@code credentialType} attribute
  * from the deserialization context to determine the concrete class to instantiate.
  */

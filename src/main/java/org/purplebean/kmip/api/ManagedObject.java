@@ -8,8 +8,8 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 
 /**
  * Represents the Managed Object data type in KMIP.
- * <p>
- * This interface extends {@link KmipDataType} and defines the contract for all KMIP Managed
+ *
+ * <p>This interface extends {@link KmipDataType} and defines the contract for all KMIP Managed
  * Objects. Managed Objects are the primary entities managed by the KMIP server, such as
  * Symmetric Keys, Public Keys, Private Keys, Certificates, etc.
  *
@@ -48,8 +48,8 @@ public interface ManagedObject extends KmipDataType {
 
   /**
    * Registers a {@link ManagedObject} class and its builder function with the central registries.
-   * <p>
-   * This method should be called for each supported managed object type to enable dynamic
+   *
+   * <p>This method should be called for each supported managed object type to enable dynamic
    * handling by the codec.
    *
    * @param spec              The {@link KmipSpec} version for which this mapping is valid.

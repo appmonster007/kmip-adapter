@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 /**
  * An abstract base class for creating custom serializers that convert a Java object
  * into its TTLV (Tag-Type-Length-Value) byte representation.
- * <p>
- * This class provides the core logic for serialization and includes a mechanism to automatically
+ *
+ * <p>This class provides the core logic for serialization and includes a mechanism to automatically
  * determine the target type {@code <T>} that the serializer handles. This is essential for the
  * {@link TtlvMapper} to correctly associate the serializer with the appropriate class.
  *
@@ -66,8 +66,8 @@ public abstract class TtlvSerializer<T> {
 
   /**
    * Infers and returns the class of the type {@code T} that this serializer handles.
-   * <p>
-   * This method uses reflection to inspect the generic type arguments of the class that extends
+   *
+   * <p>This method uses reflection to inspect the generic type arguments of the class that extends
    * {@code TtlvSerializer}. It first checks the generic superclass and then falls back to
    * implemented interfaces. This allows the {@link TtlvMapper} to automatically register the
    * serializer for the correct target type.

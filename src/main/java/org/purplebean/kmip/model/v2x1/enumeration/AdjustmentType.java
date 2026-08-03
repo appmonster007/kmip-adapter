@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of adjustment to be made to an attribute's value.
- * <p>
- * This enumeration is used in the {@code AdjustAttribute} operation to specify how
+ *
+ * <p>This enumeration is used in the {@code AdjustAttribute} operation to specify how
  * to modify a numeric attribute.
  *
  * <p><b>Standards:</b></p>

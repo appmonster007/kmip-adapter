@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * format of a certificate request.
- * <p>
- * This enumeration is used in the {@code CertificateRequest} structure to indicate
+ *
+ * <p>This enumeration is used in the {@code CertificateRequest} structure to indicate
  * the format of the certificate signing request (CSR) being provided.
  *
  * <p><b>Standards:</b></p>

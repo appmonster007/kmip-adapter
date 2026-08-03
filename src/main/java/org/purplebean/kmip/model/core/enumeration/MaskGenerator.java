@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * mask generation function to be used in certain cryptographic operations.
- * <p>
- * Mask Generation Functions (MGFs) are typically used in asymmetric cryptography,
+ *
+ * <p>Mask Generation Functions (MGFs) are typically used in asymmetric cryptography,
  * such as with the RSA-PSS padding scheme, to generate a mask that is combined with
  * the message before encryption or signing.
  *

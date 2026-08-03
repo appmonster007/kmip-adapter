@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * method used to wrap a key or other sensitive material.
- * <p>
- * Key wrapping is the process of encrypting a key with another key to protect it
+ *
+ * <p>Key wrapping is the process of encrypting a key with another key to protect it
  * while it is being stored or transmitted. This enumeration defines the different
  * techniques that can be used for this purpose, including encryption, signing, and
  * authenticated encryption.

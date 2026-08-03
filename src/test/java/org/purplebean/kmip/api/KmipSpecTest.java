@@ -8,8 +8,8 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
 /**
  * Unit tests for {@link KmipSpec}.
- * <p>
- * These tests verify the invariants of the KmipSpec enum, including its string representation
+ *
+ * <p>These tests verify the invariants of the KmipSpec enum, including its string representation
  * and conversion from ProtocolVersion.
  */
 @DisplayName("KmipSpec invariants")

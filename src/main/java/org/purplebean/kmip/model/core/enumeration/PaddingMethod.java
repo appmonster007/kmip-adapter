@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * padding method to be used in cryptographic operations.
- * <p>
- * Padding is a process of adding data to a message before encryption to ensure that
+ *
+ * <p>Padding is a process of adding data to a message before encryption to ensure that
  * the message length is a multiple of the block size of the cipher. This enumeration
  * lists the padding methods supported by KMIP.
  *

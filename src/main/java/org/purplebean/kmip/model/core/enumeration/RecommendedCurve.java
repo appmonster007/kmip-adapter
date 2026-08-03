@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
  * recommended elliptic curve for use in cryptographic operations.
- * <p>
- * This enumeration lists standard elliptic curves that are recommended for use in
+ *
+ * <p>This enumeration lists standard elliptic curves that are recommended for use in
  * elliptic curve cryptography (ECC).
  *
  * @see KmipEnumeration

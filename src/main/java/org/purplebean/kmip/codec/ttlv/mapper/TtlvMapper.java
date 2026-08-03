@@ -10,8 +10,8 @@ import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 /**
  * A central class for mapping Java objects to and from their TTLV (Tag-Type-Length-Value) byte
  * representations.
- * <p>
- * This class functions similarly to object mappers in other data-binding libraries (like
+ *
+ * <p>This class functions similarly to object mappers in other data-binding libraries (like
  * Jackson's {@code ObjectMapper}).
  * It manages a collection of {@link TtlvSerializer} and {@link TtlvDeserializer} instances and
  * orchestrates the

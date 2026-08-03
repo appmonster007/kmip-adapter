@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * method used to derive a new key from an existing key or secret.
- * <p>
- * Key derivation is the process of generating one or more keys from a master key
+ *
+ * <p>Key derivation is the process of generating one or more keys from a master key
  * or a shared secret, often using a pseudorandom function. This enumeration lists
  * the key derivation methods supported by KMIP.
  *

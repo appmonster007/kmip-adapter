@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
  * functions for managing streaming and interoperability contexts.
- * <p>
- * This enumeration is used in operations that involve streaming of large objects
+ *
+ * <p>This enumeration is used in operations that involve streaming of large objects
  * or maintaining a persistent context across multiple requests, such as with the
  * PKCS#11 interoperability features.
  *

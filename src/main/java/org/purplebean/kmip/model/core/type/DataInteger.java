@@ -12,12 +12,12 @@ import org.purplebean.kmip.api.KmipTag;
 
 /**
  * KMIP {@code Data} value encoded as an Integer batch-item index.
- * <p>
- * KMIP 2.1 §11.13 allows the {@code Data} tag ({@code 0x4200C2}) to reference the output of
+ *
+ * <p>KMIP 2.1 §11.13 allows the {@code Data} tag ({@code 0x4200C2}) to reference the output of
  * another batch item within a streaming batch by providing an integer index rather than raw bytes,
  * e.g. {@code <Data type="Integer" value="0"/>}.
- * <p>
- * Sibling of {@link DataByteString} (byte-string data) and
+ *
+ * <p>Sibling of {@link DataByteString} (byte-string data) and
  * {@link org.purplebean.kmip.model.v2x1.enumeration.DataEnumeration} (named placeholder).
  */
 @Data

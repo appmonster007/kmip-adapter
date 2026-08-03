@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
  * the action to be taken when adding an attribute to a managed object.
- * <p>
- * This enumeration is used in operations like {@code AddAttribute} to control
+ *
+ * <p>This enumeration is used in operations like {@code AddAttribute} to control
  * whether a new attribute should be added or an existing one should be replaced.
  *
  * <p><b>Standards:</b></p>

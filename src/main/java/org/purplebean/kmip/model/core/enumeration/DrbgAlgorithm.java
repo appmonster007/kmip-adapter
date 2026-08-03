@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * Deterministic Random Bit Generator (DRBG) algorithm to be used.
- * <p>
- * DRBGs are algorithms that produce a sequence of bits that are computationally
+ *
+ * <p>DRBGs are algorithms that produce a sequence of bits that are computationally
  * indistinguishable from random, based on an initial seed. This enumeration
  * lists the DRBG algorithms supported by KMIP.
  *

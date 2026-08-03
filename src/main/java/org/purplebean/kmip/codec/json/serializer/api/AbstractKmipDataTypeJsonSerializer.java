@@ -14,8 +14,8 @@ import org.purplebean.kmip.api.KmipTag;
 
 /**
  * Abstract base class for JSON serialization of {@link KmipDataType} objects.
- * <p>
- * This class implements the core logic for serializing KMIP objects to JSON, ensuring
+ *
+ * <p>This class implements the core logic for serializing KMIP objects to JSON, ensuring
  * compliance with the KMIP JSON encoding specification. It handles the serialization
  * of the KMIP tag, type, and value, including support for nested structures and
  * enumerations.

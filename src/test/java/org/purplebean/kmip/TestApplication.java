@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Primary;
 
 /**
  * Test application configuration for Spring Boot integration tests.
- * <p>
- * This class serves as the main entry point for Spring Boot test context
+ *
+ * <p>This class serves as the main entry point for Spring Boot test context
  * initialization and provides the necessary configuration for integration tests.
  * It includes proper Jackson configuration for KMIP serialization testing.
  */

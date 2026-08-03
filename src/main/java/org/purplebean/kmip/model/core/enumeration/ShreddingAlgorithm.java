@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * algorithm to be used for shredding a cryptographic object.
- * <p>
- * Shredding is the process of securely deleting an object by overwriting its storage
+ *
+ * <p>Shredding is the process of securely deleting an object by overwriting its storage
  * location with new data. This enumeration defines the methods that can be used for
  * this purpose.
  *

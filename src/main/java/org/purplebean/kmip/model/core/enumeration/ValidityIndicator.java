@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that indicates the
  * validity of a cryptographic object or other data.
- * <p>
- * This enumeration is used in the {@code Validate} operation response to indicate
+ *
+ * <p>This enumeration is used in the {@code Validate} operation response to indicate
  * the result of the validation check.
  *
  * <p><b>Standards:</b></p>

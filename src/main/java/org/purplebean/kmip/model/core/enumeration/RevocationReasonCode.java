@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.RevocationReason;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * reason for the revocation of a managed object.
- * <p>
- * This enumeration is used in the {@code RevocationReason} structure to provide a
+ *
+ * <p>This enumeration is used in the {@code RevocationReason} structure to provide a
  * machine-readable code indicating why an object was revoked.
  *
  * <p><b>Standards:</b></p>

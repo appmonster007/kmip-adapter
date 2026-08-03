@@ -29,8 +29,8 @@ import org.purplebean.kmip.util.StringUtils;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * format of a cryptographic key.
- * <p>
- * This enumeration is used to indicate the encoding or structure of a key's material,
+ *
+ * <p>This enumeration is used to indicate the encoding or structure of a key's material,
  * allowing the server and client to correctly interpret the key data.
  *
  * <p><b>Standards:</b></p>

@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
  * the result of an unwrap operation.
- * <p>
- * This enumeration is used in the response to an operation that involves unwrapping
+ *
+ * <p>This enumeration is used in the response to an operation that involves unwrapping
  * a key (e.g., {@code Decrypt}) to indicate whether the unwrap was successful.
  *
  * <p><b>Standards:</b></p>

@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.Name;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a name associated with a managed object.
- * <p>
- * This enumeration is used in the {@code Name} structure to indicate how the name
+ *
+ * <p>This enumeration is used in the {@code Name} structure to indicate how the name
  * value should be interpreted.
  *
  * <p><b>Standards:</b></p>

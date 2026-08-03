@@ -16,8 +16,8 @@ import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Concurrency tests for {@link KmipContext}.
- * <p>
- * These tests verify that the KmipContext behaves correctly in a multi-threaded environment,
+ *
+ * <p>These tests verify that the KmipContext behaves correctly in a multi-threaded environment,
  * ensuring that the thread-local storage isolates the context for each thread.
  */
 @DisplayName("KmipContext Concurrency Tests")

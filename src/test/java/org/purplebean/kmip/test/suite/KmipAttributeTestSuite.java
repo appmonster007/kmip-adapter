@@ -12,8 +12,8 @@ import org.purplebean.kmip.util.StringUtils;
 
 /**
  * Interface defining the test contract for KMIP attributes.
- * <p>
- * This interface provides default test methods to validate the behavior of any class
+ *
+ * <p>This interface provides default test methods to validate the behavior of any class
  * implementing {@link KmipAttribute}. It covers capability flags, state-dependent
  * modifiability, attribute round-trip reconstruction, and validation of attribute
  * name, value, and canonical name.

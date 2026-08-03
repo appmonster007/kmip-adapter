@@ -15,8 +15,8 @@ import org.purplebean.kmip.api.KmipTag;
  * Identifier}
  * (KMIP 3.0 {@code §4.68} only — same underlying bytes as {@code TextString} but a distinct TTLV
  * Item Type).
- * <p>
- * Unrelated to {@link org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier} (the pre-3
+ *
+ * <p>Unrelated to {@link org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier} (the pre-3
  * .0 {@code TextString}
  * form) — the two are separate Java types that happen to share a KMIP tag and value shape; no
  * single KMIP message

@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.AlternativeName;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of an alternative name for a managed object.
- * <p>
- * Alternative names provide additional identifiers for objects, which can be useful
+ *
+ * <p>Alternative names provide additional identifiers for objects, which can be useful
  * for linking objects to external systems or for providing more descriptive names.
  * This enumeration defines the format of the alternative name.
  *

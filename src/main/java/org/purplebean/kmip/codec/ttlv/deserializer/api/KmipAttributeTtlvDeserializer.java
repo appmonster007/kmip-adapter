@@ -10,8 +10,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 
 /**
  * TTLV deserializer for {@link KmipAttribute} objects.
- * <p>
- * This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
  * for deserializing KMIP Attributes from TTLV. It delegates the class lookup to the
  * {@link KmipAttribute} registry.
  */

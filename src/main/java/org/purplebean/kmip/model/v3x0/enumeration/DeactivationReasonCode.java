@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * reason for the deactivation of a managed object.
- * <p>
- * This enumeration is used in the {@code DeactivationReason} structure to provide
+ *
+ * <p>This enumeration is used in the {@code DeactivationReason} structure to provide
  * a machine-readable code indicating why an object was deactivated.
  *
  * <p><b>Standards:</b></p>

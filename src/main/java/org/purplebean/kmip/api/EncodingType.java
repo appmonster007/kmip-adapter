@@ -11,8 +11,8 @@ import lombok.Getter;
 /**
  * An enumeration representing the data types used in the KMIP (Key Management
  * Interoperability Protocol) TTLV (Tag-Type-Length-Value) encoding scheme.
- * <p>
- * Each constant in this enum corresponds to a specific data type defined in the
+ *
+ * <p>Each constant in this enum corresponds to a specific data type defined in the
  * KMIP specification, along with its byte representation and size characteristics.
  *
  * @see KmipDataType

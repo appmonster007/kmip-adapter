@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link EncodingType}.
- * <p>
- * These tests verify the invariants of the EncodingType enum, including value lookup,
+ *
+ * <p>These tests verify the invariants of the EncodingType enum, including value lookup,
  * name lookup, and property checks.
  */
 @DisplayName("EncodingType basic invariants")

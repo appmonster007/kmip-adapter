@@ -15,8 +15,8 @@ import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
 /**
  * Standalone JMH runner to execute benchmarks only when explicitly invoked.
  * This is not picked up by Surefire/Failsafe.
- * <p>
- * Usage examples:
+ *
+ * <p>Usage examples:
  * - mvn -q -DskipTests test-compile exec:java -Dexec.mainClass="org.purplebean.kmip.benchmark
  * .JmhBenchmarkRunner"
  * - mvn -q -DskipTests verify -P perf

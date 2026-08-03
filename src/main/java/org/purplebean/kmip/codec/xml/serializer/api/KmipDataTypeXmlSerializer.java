@@ -5,8 +5,8 @@ import org.purplebean.kmip.api.KmipDataType;
 
 /**
  * Base XML serializer for {@link KmipDataType} objects.
- * <p>
- * This abstract class extends Jackson's {@link JsonSerializer} and provides a mechanism
+ *
+ * <p>This abstract class extends Jackson's {@link JsonSerializer} and provides a mechanism
  * to automatically determine the handled type based on the generic type argument of the
  * concrete subclass. This simplifies the registration of serializers with the Jackson
  * module.

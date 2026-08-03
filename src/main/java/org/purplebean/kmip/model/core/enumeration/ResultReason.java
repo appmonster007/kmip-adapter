@@ -25,8 +25,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * reason for a particular {@link ResultStatus} in a KMIP response.
- * <p>
- * This enumeration provides more granular detail about why an operation succeeded,
+ *
+ * <p>This enumeration provides more granular detail about why an operation succeeded,
  * failed, or was partially successful. It often accompanies a {@link ResultStatus}
  * of {@code OperationFailed} or {@code OperationPartiallySuccessful}.
  *

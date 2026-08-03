@@ -11,8 +11,8 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * TTLV deserializer for {@link KeyMaterial} objects.
- * <p>
- * This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
+ *
+ * <p>This class extends {@link KmipDataTypeTtlvDeserializer} to handle the specific logic required
  * for deserializing KMIP Key Material from TTLV. It uses the {@code keyFormatType} attribute
  * from the deserialization context (mapper) to determine the concrete class to instantiate.
  */

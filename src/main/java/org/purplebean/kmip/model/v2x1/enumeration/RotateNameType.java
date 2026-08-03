@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a name used in a key rotation operation.
- * <p>
- * This enumeration is used in the {@code RotateName} structure to indicate how the
+ *
+ * <p>This enumeration is used in the {@code RotateName} structure to indicate how the
  * name value should be interpreted.
  *
  * <p><b>Standards:</b></p>

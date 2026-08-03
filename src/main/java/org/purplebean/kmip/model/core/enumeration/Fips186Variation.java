@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
  * variation of the FIPS 186 standard for digital signatures.
- * <p>
- * This enumeration is used to indicate a specific version or change notice of the
+ *
+ * <p>This enumeration is used to indicate a specific version or change notice of the
  * FIPS 186 standard that applies to a given cryptographic operation or object.
  *
  * <p><b>Standards:</b></p>

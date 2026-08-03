@@ -8,8 +8,8 @@ import org.purplebean.kmip.test.BaseKmipTest;
 
 /**
  * Unit tests for {@link KmipContext}.
- * <p>
- * These tests verify the basic lifecycle of the KmipContext, including setting, getting,
+ *
+ * <p>These tests verify the basic lifecycle of the KmipContext, including setting, getting,
  * and clearing the current KMIP specification.
  */
 @DisplayName("KmipContext basic lifecycle")

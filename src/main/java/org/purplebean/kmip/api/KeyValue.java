@@ -4,8 +4,8 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
 /**
  * Represents the Key Value data type in KMIP.
- * <p>
- * This interface extends {@link KmipDataType} and serves as a marker for all KMIP
+ *
+ * <p>This interface extends {@link KmipDataType} and serves as a marker for all KMIP
  * Key Value objects. A Key Value structure contains the {@link KeyMaterial} of a
  * cryptographic key. It acts as a container for the actual key data, which can be
  * in various formats as specified by the {@link KeyFormatType}.

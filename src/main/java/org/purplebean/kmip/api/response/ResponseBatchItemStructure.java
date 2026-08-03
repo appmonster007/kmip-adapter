@@ -17,13 +17,14 @@ import org.purplebean.kmip.model.core.type.ResultMessage;
 /**
  * Represents a single batch item within a KMIP (Key Management Interoperability Protocol)
  * Response Message.
- * <p>
- * A batch item is a container that encapsulates the result of a single KMIP operation.
+ *
+ * <p>A batch item is a container that encapsulates the result of a single KMIP operation.
  * A {@link ResponseMessageStructure} can contain one or more batch items, allowing multiple
  * operation results
  * to be sent from a KMIP server in a single response.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Batch Item is a {@link KmipStructure} that typically contains:</p>
  * <ul>
  *   <li><b>Operation:</b> (Required) An {@link Operation} enumeration value that specifies the
@@ -44,6 +45,7 @@ import org.purplebean.kmip.model.core.type.ResultMessage;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration mechanism to support different batch item
  * structures across
  * various KMIP specification versions. Implementations for specific versions register

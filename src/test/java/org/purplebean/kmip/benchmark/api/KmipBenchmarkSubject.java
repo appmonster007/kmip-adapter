@@ -12,8 +12,8 @@ import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 /**
  * SPI for adding new KMIP serialization/deserialization benchmark subjects
  * without modifying the core benchmark class.
- * <p>
- * This abstract class defines the contract for benchmark subjects. A benchmark subject
+ *
+ * <p>This abstract class defines the contract for benchmark subjects. A benchmark subject
  * encapsulates a specific KMIP object and the logic to serialize and deserialize it
  * using JSON, XML, and TTLV formats. This allows the benchmarking framework to easily
  * plug in different test cases.
@@ -42,8 +42,8 @@ public abstract class KmipBenchmarkSubject<T> {
 
   /**
    * Prepare mappers and test objects.
-   * <p>
-   * This method sets up the KMIP context with the appropriate specification version.
+   *
+   * <p>This method sets up the KMIP context with the appropriate specification version.
    *
    * @throws Exception if setup fails.
    */
@@ -53,8 +53,8 @@ public abstract class KmipBenchmarkSubject<T> {
 
   /**
    * Cleanup any state after benchmark.
-   * <p>
-   * This method clears the KMIP context.
+   *
+   * <p>This method clears the KMIP context.
    */
   public void tearDown() {
     KmipContext.clear();
@@ -62,8 +62,8 @@ public abstract class KmipBenchmarkSubject<T> {
 
   /**
    * Initializes the benchmark subject with the object to test and its type.
-   * <p>
-   * This method also initializes the codecs and pre-calculates the serialized forms
+   *
+   * <p>This method also initializes the codecs and pre-calculates the serialized forms
    * of the object to be used in deserialization benchmarks.
    *
    * @param obj  The object to benchmark.

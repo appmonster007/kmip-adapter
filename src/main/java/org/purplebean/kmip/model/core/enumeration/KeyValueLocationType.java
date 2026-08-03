@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.core.structure.KeyValueLocation;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of location for a key value.
- * <p>
- * This enumeration is used in the {@code KeyValueLocation} structure to indicate
+ *
+ * <p>This enumeration is used in the {@code KeyValueLocation} structure to indicate
  * how the location value should be interpreted.
  *
  * <p><b>Standards:</b></p>

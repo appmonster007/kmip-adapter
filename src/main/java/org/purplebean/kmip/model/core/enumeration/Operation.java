@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * cryptographic or administrative operation to be performed.
- * <p>
- * This enumeration lists all the standard operations defined in the KMIP specifications,
+ *
+ * <p>This enumeration lists all the standard operations defined in the KMIP specifications,
  * such as creating keys, encrypting data, and managing attributes.
  *
  * @see KmipEnumeration

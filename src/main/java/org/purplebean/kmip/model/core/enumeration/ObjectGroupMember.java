@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * role of an object within an object group.
- * <p>
- * This enumeration is used in the {@code ObjectGroup} attribute to indicate whether
+ *
+ * <p>This enumeration is used in the {@code ObjectGroup} attribute to indicate whether
  * an object is a fresh member of the group or the default member.
  *
  * <p><b>Standards:</b></p>

@@ -28,8 +28,8 @@ import org.purplebean.kmip.util.StringUtils;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * type of a managed object.
- * <p>
- * This enumeration is a fundamental attribute of every managed object, defining its
+ *
+ * <p>This enumeration is a fundamental attribute of every managed object, defining its
  * category and intended use.
  *
  * <p><b>Standards:</b></p>

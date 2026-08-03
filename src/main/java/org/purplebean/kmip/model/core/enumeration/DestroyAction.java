@@ -24,8 +24,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
  * action to be taken when destroying a managed object.
- * <p>
- * This enumeration is used in the {@code Destroy} operation to indicate the desired
+ *
+ * <p>This enumeration is used in the {@code Destroy} operation to indicate the desired
  * level of destruction.
  *
  * <p><b>Standards:</b></p>

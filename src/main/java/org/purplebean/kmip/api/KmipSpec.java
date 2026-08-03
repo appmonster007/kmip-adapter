@@ -10,8 +10,8 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 /**
  * An enumeration representing the different versions of the Key Management
  * Interoperability Protocol (KMIP) specification.
- * <p>
- * This enum provides a type-safe way to refer to specific KMIP versions and includes
+ *
+ * <p>This enum provides a type-safe way to refer to specific KMIP versions and includes
  * utility methods to convert from a {@link ProtocolVersion} structure.
  *
  * @see KmipContext

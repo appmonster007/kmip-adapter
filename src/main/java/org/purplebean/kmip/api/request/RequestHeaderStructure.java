@@ -13,14 +13,15 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 
 /**
  * Represents the header of a KMIP (Key Management Interoperability Protocol) Request Message.
- * <p>
- * This interface defines the structure and essential components of a KMIP request header. The
+ *
+ * <p>This interface defines the structure and essential components of a KMIP request header. The
  * header
  * contains metadata about the request, with the most critical piece being the protocol version,
  * which
  * dictates how the rest of the message should be interpreted.
  *
  * <p><b>Structure:</b></p>
+ *
  * <p>A Request Header is a {@link KmipStructure} that typically contains:</p>
  * <ul>
  *   <li><b>Protocol Version:</b> (Required) Specifies the version of the KMIP protocol the
@@ -35,6 +36,7 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
  * </ul>
  *
  * <p><b>Dynamic Registration:</b></p>
+ *
  * <p>This interface includes a static registration mechanism to support different header
  * structures across
  * various KMIP specification versions. Implementations for specific versions register
@@ -69,8 +71,8 @@ public interface RequestHeaderStructure extends KmipStructure {
   /**
    * Registers a {@link RequestHeaderStructure} implementation and its builder for a specific
    * KMIP version.
-   * <p>
-   * This method is called by concrete implementation classes in their static initializers to
+   *
+   * <p>This method is called by concrete implementation classes in their static initializers to
    * make themselves
    * discoverable by the framework.
    *
@@ -126,8 +128,8 @@ public interface RequestHeaderStructure extends KmipStructure {
 
   /**
    * Retrieves the {@link ProtocolVersion} from the request header.
-   * <p>
-   * The protocol version indicates which version of the KMIP specification the
+   *
+   * <p>The protocol version indicates which version of the KMIP specification the
    * request conforms to.
    *
    * @return The {@link ProtocolVersion} of the request.

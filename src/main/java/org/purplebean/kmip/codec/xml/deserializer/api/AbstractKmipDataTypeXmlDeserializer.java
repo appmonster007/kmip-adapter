@@ -17,8 +17,8 @@ import org.purplebean.kmip.api.KmipTag;
 /**
  * Abstract base class for custom XML deserializers of specific {@link KmipDataType}
  * implementations.
- * <p>
- * This class provides a template for deserializing complex KMIP objects from XML. It handles
+ *
+ * <p>This class provides a template for deserializing complex KMIP objects from XML. It handles
  * the validation of the KMIP tag and encoding type, and orchestrates the parsing of the
  * XML structure into a builder object, which is then used to construct the final result.
  * It also handles the differences between Jackson's XML and JSON tree models, particularly

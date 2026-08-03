@@ -21,8 +21,8 @@ import org.purplebean.kmip.codec.ttlv.TtlvConstants;
 
 /**
  * Represents a KMIP (Key Management Interoperability Protocol) tag.
- * <p>
- * A KMIP tag is a 3-byte value that uniquely identifies a specific element (item) within a KMIP
+ *
+ * <p>A KMIP tag is a 3-byte value that uniquely identifies a specific element (item) within a KMIP
  * message.
  * Tags are fundamental to the Tag-Type-Length-Value (TTLV) encoding scheme used by KMIP.
  * This class provides a comprehensive way to work with both standard tags defined in the KMIP
@@ -121,8 +121,8 @@ public class KmipTag {
 
   /**
    * Registers a new extension tag using an integer value.
-   * <p>
-   * This method allows applications to define custom tags within the designated extension range
+   *
+   * <p>This method allows applications to define custom tags within the designated extension range
    * (0x540000 - 0x54FFFF). If the tag is already registered, it updates the supported versions
    * if necessary.
    *
