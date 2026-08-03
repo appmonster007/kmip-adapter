@@ -2,7 +2,6 @@ package org.purplebean.kmip.model.core.enumeration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;

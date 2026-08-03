@@ -1,7 +1,6 @@
 package org.purplebean.kmip.model.v2x1.structure.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;

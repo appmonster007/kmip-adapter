@@ -1,7 +1,6 @@
 package org.purplebean.kmip.model.core.structure;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;

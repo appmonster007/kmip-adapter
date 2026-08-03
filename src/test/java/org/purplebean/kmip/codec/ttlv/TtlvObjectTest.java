@@ -2,7 +2,6 @@ package org.purplebean.kmip.codec.ttlv;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import java.nio.ByteBuffer;
 import java.util.HexFormat;
 import java.util.List;

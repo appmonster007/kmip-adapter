@@ -1,7 +1,6 @@
 package org.purplebean.kmip.model.v3x0.structure.response.payload;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;

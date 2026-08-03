@@ -1,7 +1,6 @@
 package org.purplebean.kmip.codec.ttlv.model.v2x1.structure;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.KmipSpec;
