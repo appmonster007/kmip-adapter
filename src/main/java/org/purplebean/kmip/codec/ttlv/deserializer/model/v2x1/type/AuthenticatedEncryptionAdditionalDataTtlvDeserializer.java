@@ -22,7 +22,8 @@ public class AuthenticatedEncryptionAdditionalDataTtlvDeserializer extends
   }
 
   @Override
-  protected AuthenticatedEncryptionAdditionalData.AuthenticatedEncryptionAdditionalDataBuilder createBuilder() {
+  protected AuthenticatedEncryptionAdditionalData.AuthenticatedEncryptionAdditionalDataBuilder
+      createBuilder() {
     return AuthenticatedEncryptionAdditionalData.builder();
   }
 

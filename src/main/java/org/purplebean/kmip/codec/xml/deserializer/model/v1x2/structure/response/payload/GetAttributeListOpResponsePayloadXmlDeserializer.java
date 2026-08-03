@@ -26,7 +26,8 @@ public class GetAttributeListOpResponsePayloadXmlDeserializer extends
   }
 
   @Override
-  protected GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder createBuilder() {
+  protected GetAttributeListOpResponsePayload.GetAttributeListOpResponsePayloadBuilder
+      createBuilder() {
     return GetAttributeListOpResponsePayload.builder();
   }
 

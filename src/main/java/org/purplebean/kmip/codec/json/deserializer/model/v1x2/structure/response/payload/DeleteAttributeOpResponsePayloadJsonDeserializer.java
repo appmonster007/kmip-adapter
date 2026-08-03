@@ -24,7 +24,8 @@ public class DeleteAttributeOpResponsePayloadJsonDeserializer extends
   }
 
   @Override
-  protected DeleteAttributeOpResponsePayload.DeleteAttributeOpResponsePayloadBuilder createBuilder() {
+  protected DeleteAttributeOpResponsePayload.DeleteAttributeOpResponsePayloadBuilder
+      createBuilder() {
     return DeleteAttributeOpResponsePayload.builder();
   }
 

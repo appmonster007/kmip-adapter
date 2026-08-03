@@ -25,7 +25,8 @@ public class GetUsageAllocationOpRequestPayloadJsonDeserializer extends
   }
 
   @Override
-  protected GetUsageAllocationOpRequestPayload.GetUsageAllocationOpRequestPayloadBuilder createBuilder() {
+  protected GetUsageAllocationOpRequestPayload.GetUsageAllocationOpRequestPayloadBuilder
+      createBuilder() {
     return GetUsageAllocationOpRequestPayload.builder();
   }
 

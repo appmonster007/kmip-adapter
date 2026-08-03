@@ -24,7 +24,8 @@ public class CreateCredentialOpRequestPayloadXmlDeserializer extends
   }
 
   @Override
-  protected CreateCredentialOpRequestPayload.CreateCredentialOpRequestPayloadBuilder createBuilder() {
+  protected CreateCredentialOpRequestPayload.CreateCredentialOpRequestPayloadBuilder
+      createBuilder() {
     return CreateCredentialOpRequestPayload.builder();
   }
 

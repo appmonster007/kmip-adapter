@@ -24,7 +24,8 @@ public class ModifyAttributeOpResponsePayloadJsonDeserializer extends
   }
 
   @Override
-  protected ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder createBuilder() {
+  protected ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder
+      createBuilder() {
     return ModifyAttributeOpResponsePayload.builder();
   }
 

@@ -22,7 +22,8 @@ public class CertificateIssuerDistinguishedNameJsonDeserializer extends
   }
 
   @Override
-  protected CertificateIssuerDistinguishedName.CertificateIssuerDistinguishedNameBuilder createBuilder() {
+  protected CertificateIssuerDistinguishedName.CertificateIssuerDistinguishedNameBuilder
+      createBuilder() {
     return CertificateIssuerDistinguishedName.builder();
   }
 

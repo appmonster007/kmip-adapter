@@ -25,7 +25,8 @@ public class SignatureVerifyOpResponsePayloadTtlvDeserializer extends
   }
 
   @Override
-  protected SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder createBuilder() {
+  protected SignatureVerifyOpResponsePayload.SignatureVerifyOpResponsePayloadBuilder
+      createBuilder() {
     return SignatureVerifyOpResponsePayload.builder();
   }
 

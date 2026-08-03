@@ -22,7 +22,8 @@ public class CertificateSubjectDistinguishedNameTtlvDeserializer extends
   }
 
   @Override
-  protected CertificateSubjectDistinguishedName.CertificateSubjectDistinguishedNameBuilder createBuilder() {
+  protected CertificateSubjectDistinguishedName.CertificateSubjectDistinguishedNameBuilder
+      createBuilder() {
     return CertificateSubjectDistinguishedName.builder();
   }
 

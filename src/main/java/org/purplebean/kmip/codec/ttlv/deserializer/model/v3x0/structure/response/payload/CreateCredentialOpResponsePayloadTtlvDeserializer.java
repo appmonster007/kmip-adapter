@@ -24,7 +24,8 @@ public class CreateCredentialOpResponsePayloadTtlvDeserializer extends
   }
 
   @Override
-  protected CreateCredentialOpResponsePayload.CreateCredentialOpResponsePayloadBuilder createBuilder() {
+  protected CreateCredentialOpResponsePayload.CreateCredentialOpResponsePayloadBuilder
+      createBuilder() {
     return CreateCredentialOpResponsePayload.builder();
   }
 

@@ -24,7 +24,8 @@ public class GetUsageAllocationOpResponsePayloadTtlvDeserializer extends
   }
 
   @Override
-  protected GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder createBuilder() {
+  protected GetUsageAllocationOpResponsePayload.GetUsageAllocationOpResponsePayloadBuilder
+      createBuilder() {
     return GetUsageAllocationOpResponsePayload.builder();
   }
 

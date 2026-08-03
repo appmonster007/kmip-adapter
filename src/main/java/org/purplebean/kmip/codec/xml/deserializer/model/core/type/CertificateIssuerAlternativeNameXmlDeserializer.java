@@ -21,7 +21,8 @@ public class CertificateIssuerAlternativeNameXmlDeserializer extends
   }
 
   @Override
-  protected CertificateIssuerAlternativeName.CertificateIssuerAlternativeNameBuilder createBuilder() {
+  protected CertificateIssuerAlternativeName.CertificateIssuerAlternativeNameBuilder
+      createBuilder() {
     return CertificateIssuerAlternativeName.builder();
   }
 

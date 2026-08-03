@@ -24,7 +24,8 @@ public class QueryAsynchronousRequestsOpResponsePayloadJsonDeserializer extends
   }
 
   @Override
-  protected QueryAsynchronousRequestsOpResponsePayload.QueryAsynchronousRequestsOpResponsePayloadBuilder createBuilder() {
+  protected QueryAsynchronousRequestsOpResponsePayload.QueryAsynchronousRequestsOpResponsePayloadBuilder
+      createBuilder() {
     return QueryAsynchronousRequestsOpResponsePayload.builder();
   }
 

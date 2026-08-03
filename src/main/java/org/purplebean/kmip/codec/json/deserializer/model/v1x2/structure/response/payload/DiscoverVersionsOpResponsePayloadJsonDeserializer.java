@@ -24,7 +24,8 @@ public class DiscoverVersionsOpResponsePayloadJsonDeserializer extends
   }
 
   @Override
-  protected DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder createBuilder() {
+  protected DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder
+      createBuilder() {
     return DiscoverVersionsOpResponsePayload.builder();
   }
 

@@ -24,7 +24,8 @@ public class AdjustAttributeOpResponsePayloadXmlDeserializer extends
   }
 
   @Override
-  protected AdjustAttributeOpResponsePayload.AdjustAttributeOpResponsePayloadBuilder createBuilder() {
+  protected AdjustAttributeOpResponsePayload.AdjustAttributeOpResponsePayloadBuilder
+      createBuilder() {
     return AdjustAttributeOpResponsePayload.builder();
   }
 

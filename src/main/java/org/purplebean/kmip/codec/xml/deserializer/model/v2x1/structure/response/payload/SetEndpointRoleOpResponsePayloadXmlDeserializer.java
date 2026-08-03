@@ -23,7 +23,8 @@ public class SetEndpointRoleOpResponsePayloadXmlDeserializer extends
   }
 
   @Override
-  protected SetEndpointRoleOpResponsePayload.SetEndpointRoleOpResponsePayloadBuilder createBuilder() {
+  protected SetEndpointRoleOpResponsePayload.SetEndpointRoleOpResponsePayloadBuilder
+      createBuilder() {
     return SetEndpointRoleOpResponsePayload.builder();
   }
 

@@ -24,7 +24,8 @@ public class DiscoverVersionsOpResponsePayloadTtlvDeserializer extends
   }
 
   @Override
-  protected DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder createBuilder() {
+  protected DiscoverVersionsOpResponsePayload.DiscoverVersionsOpResponsePayloadBuilder
+      createBuilder() {
     return DiscoverVersionsOpResponsePayload.builder();
   }
 
