@@ -32,7 +32,6 @@ public class IterationCount implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

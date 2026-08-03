@@ -31,7 +31,6 @@ public class LinkedObjectIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

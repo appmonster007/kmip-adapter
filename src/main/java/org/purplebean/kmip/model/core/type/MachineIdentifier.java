@@ -32,7 +32,6 @@ public class MachineIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

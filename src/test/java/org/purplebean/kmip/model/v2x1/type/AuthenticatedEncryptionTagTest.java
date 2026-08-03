@@ -6,7 +6,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("AuthenticatedEncryptionTag Domain Tests")
 class AuthenticatedEncryptionTagTest
     extends AbstractKmipDataTypeTestSuite<AuthenticatedEncryptionTag> {

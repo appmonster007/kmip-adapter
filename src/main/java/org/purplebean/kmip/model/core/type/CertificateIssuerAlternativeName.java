@@ -32,7 +32,6 @@ public class CertificateIssuerAlternativeName implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

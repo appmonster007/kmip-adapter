@@ -56,7 +56,6 @@ public class VendorExtension implements KmipStructure {
         .build();
   }
 
-
   private void validate() {
     if (!isSupported()) {
       throw new IllegalArgumentException(

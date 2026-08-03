@@ -32,7 +32,6 @@ public class Offset implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

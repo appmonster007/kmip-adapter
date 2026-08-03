@@ -37,7 +37,6 @@ public class CertificateLength implements KmipDataType, KmipAttribute {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

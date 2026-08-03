@@ -33,7 +33,6 @@ public class Y implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

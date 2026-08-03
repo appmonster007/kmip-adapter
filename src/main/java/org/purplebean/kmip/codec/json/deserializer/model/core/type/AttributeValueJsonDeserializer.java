@@ -98,7 +98,6 @@ public class AttributeValueJsonDeserializer extends
     return builder.build();
   }
 
-
   @Override
   protected String getType(JsonNode node, DeserializationContext ctxt,
                            AttributeValue.AttributeValueBuilder builder) throws IOException {

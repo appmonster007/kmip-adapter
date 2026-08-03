@@ -31,7 +31,6 @@ public class SerialNumber implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

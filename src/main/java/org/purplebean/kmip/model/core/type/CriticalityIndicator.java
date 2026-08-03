@@ -32,7 +32,6 @@ public class CriticalityIndicator implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Boolean value;
 

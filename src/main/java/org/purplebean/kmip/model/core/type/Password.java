@@ -31,7 +31,6 @@ public class Password implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

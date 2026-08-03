@@ -31,7 +31,6 @@ public class AsynchronousIndicator implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Boolean value;
 

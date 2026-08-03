@@ -33,7 +33,6 @@ public class PrimeExponentP implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

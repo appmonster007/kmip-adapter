@@ -32,7 +32,6 @@ public class UsageLimitsCount implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Long value;
 

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
-
 @DisplayName("CryptographicLength TTLV Serialization Tests")
 class CryptographicLengthTtlvTest extends AbstractTtlvSerializationTestSuite<CryptographicLength> {
 

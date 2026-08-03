@@ -23,7 +23,6 @@ class ExportOpResponsePayloadTtlvTest
     defaultSpec = KmipSpec.V2_1;
   }
 
-
   @Override
   public ExportOpResponsePayload createDefault() {
     return ExportOpResponsePayload

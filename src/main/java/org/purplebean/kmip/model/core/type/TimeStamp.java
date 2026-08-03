@@ -35,7 +35,6 @@ public class TimeStamp implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final OffsetDateTime value;
 

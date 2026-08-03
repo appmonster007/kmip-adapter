@@ -32,7 +32,6 @@ public class VendorIdentification implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

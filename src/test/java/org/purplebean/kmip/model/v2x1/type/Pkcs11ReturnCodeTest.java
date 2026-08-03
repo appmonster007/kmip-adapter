@@ -5,7 +5,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("Pkcs11ReturnCode Domain Tests")
 class Pkcs11ReturnCodeTest extends AbstractKmipDataTypeTestSuite<Pkcs11ReturnCode> {
 

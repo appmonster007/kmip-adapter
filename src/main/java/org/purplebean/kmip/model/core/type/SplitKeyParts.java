@@ -32,7 +32,6 @@ public class SplitKeyParts implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

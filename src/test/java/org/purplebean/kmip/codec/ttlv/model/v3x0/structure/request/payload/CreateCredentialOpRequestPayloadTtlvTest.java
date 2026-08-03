@@ -21,7 +21,6 @@ class CreateCredentialOpRequestPayloadTtlvTest
     defaultSpec = KmipSpec.V3_0;
   }
 
-
   @Override
   public CreateCredentialOpRequestPayload createDefault() {
     return CreateCredentialOpRequestPayload

@@ -6,7 +6,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("Pkcs11OutputParameters Domain Tests")
 class Pkcs11OutputParametersTest extends AbstractKmipDataTypeTestSuite<Pkcs11OutputParameters> {
 

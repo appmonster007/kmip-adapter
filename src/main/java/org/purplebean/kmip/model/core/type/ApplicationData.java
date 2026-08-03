@@ -32,7 +32,6 @@ public class ApplicationData implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

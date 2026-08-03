@@ -32,7 +32,6 @@ public class MaximumItems implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

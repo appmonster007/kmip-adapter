@@ -31,7 +31,6 @@ public class Username implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

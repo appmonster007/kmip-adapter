@@ -32,7 +32,6 @@ public class DeviceIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

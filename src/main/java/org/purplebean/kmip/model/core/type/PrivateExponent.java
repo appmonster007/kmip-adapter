@@ -33,7 +33,6 @@ public class PrivateExponent implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

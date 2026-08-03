@@ -20,7 +20,6 @@ public class AlternativeNameTypeXmlDeserializer extends
     super(AlternativeNameType.kmipTag, AlternativeNameType.encodingType);
   }
 
-
   @Override
   protected AlternativeNameType.AlternativeNameTypeBuilder createBuilder() {
     return AlternativeNameType.builder();

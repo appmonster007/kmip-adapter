@@ -32,7 +32,6 @@ public class Qlength implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

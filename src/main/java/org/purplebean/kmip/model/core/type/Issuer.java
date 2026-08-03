@@ -31,7 +31,6 @@ public class Issuer implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

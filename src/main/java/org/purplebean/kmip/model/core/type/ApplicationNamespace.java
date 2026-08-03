@@ -32,7 +32,6 @@ public class ApplicationNamespace implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

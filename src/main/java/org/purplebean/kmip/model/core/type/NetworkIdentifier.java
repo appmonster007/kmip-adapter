@@ -32,7 +32,6 @@ public class NetworkIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

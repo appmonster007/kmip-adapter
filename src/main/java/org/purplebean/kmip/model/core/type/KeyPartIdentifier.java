@@ -32,7 +32,6 @@ public class KeyPartIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

@@ -28,7 +28,6 @@ public class BigIntegerXmlDeserializer extends JsonDeserializer<BigInteger> {
     // Remove any whitespace and handle potential JSON-like formatting
     hexString = hexString.trim();
 
-
     // Parse hex string to bytes
     HexFormat hexFormat = HexFormat.of();
     byte[] data;

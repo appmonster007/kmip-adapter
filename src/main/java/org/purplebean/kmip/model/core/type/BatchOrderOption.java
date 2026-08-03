@@ -31,7 +31,6 @@ public class BatchOrderOption implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Boolean value;
 

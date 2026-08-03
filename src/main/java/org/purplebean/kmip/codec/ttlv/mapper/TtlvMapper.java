@@ -75,7 +75,6 @@ public class TtlvMapper {
     deserializers.putAll(module.getDeserializers());
   }
 
-
   /**
    * Serializes a Java object into a {@link ByteBuffer} containing its full TTLV encoding.
    *
@@ -97,7 +96,6 @@ public class TtlvMapper {
       endOperation();
     }
   }
-
 
   /**
    * Deserializes a single TTLV element from a {@link ByteBuffer} into a Java object of the
@@ -121,7 +119,6 @@ public class TtlvMapper {
     }
   }
 
-
   /**
    * A convenience method to serialize a Java object directly into a byte array.
    *
@@ -136,7 +133,6 @@ public class TtlvMapper {
     bb.get(out);
     return out;
   }
-
 
   /**
    * A convenience method to deserialize a byte array containing TTLV data into a Java object.
@@ -153,7 +149,6 @@ public class TtlvMapper {
         .order(TtlvConstants.BYTE_ORDER);
     return readValue(buffer, clazz);
   }
-
 
   @SuppressWarnings("unchecked")
   private <T> TtlvSerializer<T> getSerializer(Class<?> type) {

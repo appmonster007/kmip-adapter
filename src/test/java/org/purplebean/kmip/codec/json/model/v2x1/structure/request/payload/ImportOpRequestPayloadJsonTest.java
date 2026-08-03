@@ -23,7 +23,6 @@ class ImportOpRequestPayloadJsonTest
     defaultSpec = KmipSpec.V2_1;
   }
 
-
   @Override
   public ImportOpRequestPayload createDefault() {
     return ImportOpRequestPayload

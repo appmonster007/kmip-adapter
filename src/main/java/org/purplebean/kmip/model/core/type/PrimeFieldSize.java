@@ -33,7 +33,6 @@ public class PrimeFieldSize implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

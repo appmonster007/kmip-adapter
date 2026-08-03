@@ -21,7 +21,6 @@ class LoginOpRequestPayloadJsonTest
     defaultSpec = KmipSpec.V2_1;
   }
 
-
   @Override
   public LoginOpRequestPayload createDefault() {
     return LoginOpRequestPayload

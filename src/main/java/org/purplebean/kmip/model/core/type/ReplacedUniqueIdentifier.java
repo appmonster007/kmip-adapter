@@ -32,7 +32,6 @@ public class ReplacedUniqueIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

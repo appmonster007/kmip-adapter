@@ -1,6 +1,5 @@
 package org.purplebean.kmip.codec.ttlv.serializer;
 
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.purplebean.kmip.api.EncodingType;

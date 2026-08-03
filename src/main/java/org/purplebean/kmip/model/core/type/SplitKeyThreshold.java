@@ -32,7 +32,6 @@ public class SplitKeyThreshold implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

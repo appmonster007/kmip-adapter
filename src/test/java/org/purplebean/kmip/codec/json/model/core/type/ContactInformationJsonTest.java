@@ -7,7 +7,6 @@ import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ContactInformation JSON Serialization Tests")
 class ContactInformationJsonTest extends AbstractJsonSerializationTestSuite<ContactInformation> {
 
-
   @Override
   public Class<ContactInformation> type() {
     return ContactInformation.class;

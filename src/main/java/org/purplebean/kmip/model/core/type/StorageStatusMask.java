@@ -49,7 +49,6 @@ public class StorageStatusMask implements KmipMaskType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 
@@ -104,7 +103,6 @@ public class StorageStatusMask implements KmipMaskType {
   public String getMaskString() {
     return StorageStatusMask.MaskEnum.toMaskString(value);
   }
-
 
   /**
    * Marker interface for mask-based enumeration values.

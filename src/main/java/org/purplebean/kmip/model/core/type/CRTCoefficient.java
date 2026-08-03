@@ -33,7 +33,6 @@ public class CRTCoefficient implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

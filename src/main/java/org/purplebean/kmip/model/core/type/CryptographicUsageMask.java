@@ -96,7 +96,6 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
         .build();
   }
 
-
   public String getMaskString() {
     return MaskEnum.toMaskString(value);
   }

@@ -32,7 +32,6 @@ public class DeviceSerialNumber implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

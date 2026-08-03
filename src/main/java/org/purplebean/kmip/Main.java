@@ -108,7 +108,6 @@ public class Main {
 //                certificate,
     };
 
-
     JsonMapper jsonMapper = buildJsonMapper();
     XmlMapper xmlMapper = buildXmlMapper();
     TtlvMapper ttlvMapper = buildTtlvMapper();

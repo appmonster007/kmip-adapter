@@ -32,7 +32,6 @@ public class MaximumResponseSize implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final Integer value;
 

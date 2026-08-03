@@ -33,7 +33,6 @@ public class Modulus implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final BigInteger value;
 

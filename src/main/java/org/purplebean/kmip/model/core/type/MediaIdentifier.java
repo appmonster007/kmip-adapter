@@ -32,7 +32,6 @@ public class MediaIdentifier implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

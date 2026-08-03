@@ -32,7 +32,6 @@ public class ExtensionName implements KmipDataType {
     }
   }
 
-
   @NonNull
   private final String value;
 

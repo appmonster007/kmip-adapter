@@ -6,7 +6,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("DigestedData Domain Tests")
 class DigestedDataTest extends AbstractKmipDataTypeTestSuite<DigestedData> {
 

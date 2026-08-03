@@ -5,7 +5,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("InitIndicator Domain Tests")
 class InitIndicatorTest extends AbstractKmipDataTypeTestSuite<InitIndicator> {
 

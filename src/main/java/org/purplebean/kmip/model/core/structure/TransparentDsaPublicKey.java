@@ -143,5 +143,4 @@ public class TransparentDsaPublicKey implements KeyMaterial, KmipStructure {
         .toArray(KmipDataType[]::new);
   }
 
-
 }

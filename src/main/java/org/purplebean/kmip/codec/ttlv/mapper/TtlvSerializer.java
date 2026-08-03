@@ -63,7 +63,6 @@ public abstract class TtlvSerializer<T> {
    */
   public abstract ByteBuffer serialize(T value, TtlvMapper mapper) throws IOException;
 
-
   /**
    * Infers and returns the class of the type {@code T} that this serializer handles.
    *

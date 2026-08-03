@@ -7,7 +7,6 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
-
 @DisplayName("SubmissionDate Domain Tests")
 class SubmissionDateTest extends AbstractKmipDataTypeTestSuite<SubmissionDate> {
 
