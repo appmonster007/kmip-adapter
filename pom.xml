@@ -280,7 +280,8 @@
                 </dependencies>
                 <configuration>
                     <configLocation>config/checkstyle/google_checks.xml</configLocation>
-                    <propertyExpansion>org.checkstyle.google.severity=error</propertyExpansion>
+                    <propertyExpansion>org.checkstyle.google.severity=error
+                        org.checkstyle.google.suppressionfilter.config=config/checkstyle/checkstyle-suppressions.xml</propertyExpansion>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>

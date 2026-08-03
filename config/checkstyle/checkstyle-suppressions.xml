@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<!--
+    These identifiers are direct transcriptions of official OASIS KMIP specification field
+    names (single-letter RSA/DSA key components D/G/J/P/Q/X/Y, X.509 DN attribute codes
+    CertificateIssuerC/L/O and CertificateSubjectC/L/O, and terms like CRTCoefficient,
+    IVCounterNonce, MACSignature, UniqueBatchItemID). Renaming them to satisfy
+    AbbreviationAsWordInName would break the 1:1 correspondence between this library's
+    class/field names and the spec they implement, which matters more here than Java
+    naming-convention purity.
+-->
+<suppressions>
+    <suppress checks="AbbreviationAsWordInName"
+              message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO])(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer)?'"/>
+</suppressions>
