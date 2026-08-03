@@ -140,7 +140,7 @@ public class StorageStatusMask implements KmipMaskType {
             StringBuilder sb = new StringBuilder();
             VALUE_REGISTRY.values().stream()
                     .filter(entry -> (value & entry.getValue()) != 0)
-                    .sorted(Comparator.comparing(Value::getDescription))
+                    .sorted(Comparator.comparing(Value::getValue))
                     .forEach(entry -> sb.append(entry.getDescription()).append(" "));
             return sb.toString().trim();
         }

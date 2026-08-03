@@ -197,13 +197,10 @@ public class CryptographicUsageMask implements KmipMaskType, KmipAttribute {
 
         static String toMaskString(int value) {
             StringBuilder sb = new StringBuilder();
-            VALUE_REGISTRY.entrySet().stream()
-                    .sorted(java.util.Map.Entry.<Integer, Value>comparingByKey().reversed())
-                    .forEach(entry -> {
-                        if ((value & entry.getValue().getValue()) != 0) {
-                            sb.append(entry.getValue().getDescription()).append(" ");
-                        }
-                    });
+            VALUE_REGISTRY.values().stream()
+                    .filter(entry -> (value & entry.getValue()) != 0)
+                    .sorted(Comparator.comparing(Value::getValue))
+                    .forEach(entry -> sb.append(entry.getDescription()).append(" "));
             return sb.toString().trim();
         }
 
