@@ -117,7 +117,7 @@ public enum EncodingType {
    */
   private final int rawByteSize;
   /**
-   * The corresponding expected class for encoded type
+   * The corresponding expected class for encoded type.
    */
   private final Class<?> clazz;
 

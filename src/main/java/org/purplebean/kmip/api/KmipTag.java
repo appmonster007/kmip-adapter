@@ -1112,31 +1112,43 @@ public class KmipTag {
    */
   public interface Value {
     /**
+     * Returns the integer value of the tag.
+     *
      * @return The integer value of the tag.
      */
     int getValue();
 
     /**
+     * Returns the description of the tag.
+     *
      * @return The description of the tag.
      */
     String getDescription();
 
     /**
+     * Returns whether the tag is supported by the current KMIP specification.
+     *
      * @return True if the tag is supported by the current KMIP specification, false otherwise.
      */
     boolean isSupported();
 
     /**
+     * Returns the set of KMIP specification versions this tag is supported in.
+     *
      * @return the set of KMIP specification versions this tag is supported in.
      */
     Set<KmipSpec> getSupportedVersions();
 
     /**
+     * Returns whether the tag is a custom extension.
+     *
      * @return True if the tag is a custom extension, false otherwise.
      */
     boolean isCustom();
 
     /**
+     * Returns a new KmipTag instance from this value.
+     *
      * @return A new KmipTag instance from this value.
      */
     KmipTag inst();

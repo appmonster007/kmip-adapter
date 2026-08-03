@@ -111,26 +111,36 @@ public interface KmipEnumeration extends KmipDataType {
    */
   interface Value<T> {
     /**
+     * Returns the integer value of the enumeration.
+     *
      * @return the integer value of the enumeration.
      */
     int getValue();
 
     /**
+     * Returns the description of the enumeration.
+     *
      * @return the description of the enumeration.
      */
     String getDescription();
 
     /**
+     * Returns whether the enumeration is supported in the current KMIP context.
+     *
      * @return true if the enumeration is supported in the current KMIP context, false otherwise.
      */
     boolean isSupported();
 
     /**
+     * Returns whether the enumeration is a custom extension.
+     *
      * @return true if the enumeration is a custom extension, false otherwise.
      */
     boolean isCustom();
 
     /**
+     * Returns a new instance of the {@link T} with the current value.
+     *
      * @return a new instance of the {@link T} with the current value.
      */
     T inst();

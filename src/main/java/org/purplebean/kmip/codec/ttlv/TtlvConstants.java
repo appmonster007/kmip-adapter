@@ -10,29 +10,29 @@ import java.nio.ByteOrder;
 public final class TtlvConstants {
 
   /**
-   * Size of the tag field in bytes
+   * Size of the tag field in bytes.
    */
   public static final int TAG_SIZE = 3;
 
   // TTLV Format Constants
   /**
-   * Size of the type field in bytes
+   * Size of the type field in bytes.
    */
   public static final int TYPE_SIZE = 1;
   /**
-   * Size of the length field in bytes
+   * Size of the length field in bytes.
    */
   public static final int LENGTH_SIZE = 4;
   /**
-   * Total size of the TTLV header (tag + type + length)
+   * Total size of the TTLV header (tag + type + length).
    */
   public static final int HEADER_SIZE = TAG_SIZE + TYPE_SIZE + LENGTH_SIZE;
   /**
-   * Minimum size for a valid TTLV object (header only)
+   * Minimum size for a valid TTLV object (header only).
    */
   public static final int MINIMUM_TTLV_SIZE = HEADER_SIZE;
   /**
-   * Error message for data too short
+   * Error message for data too short.
    */
   public static final String ERROR_DATA_TOO_SHORT =
       "Data too short for TTLV format. Minimum required: " + MINIMUM_TTLV_SIZE
@@ -40,78 +40,78 @@ public final class TtlvConstants {
 
   // Byte Order
   /**
-   * Padding size requirement - all TTLV data must be padded to multiples of this value
+   * Padding size requirement - all TTLV data must be padded to multiples of this value.
    */
   public static final int PADDING_SIZE = 8;
 
   // Validation Constants
   /**
-   * Byte order used for TTLV format (big-endian)
+   * Byte order used for TTLV format (big-endian).
    */
   public static final ByteOrder BYTE_ORDER = ByteOrder.BIG_ENDIAN;
   /**
-   * Maximum value length (2^32 - 1, as length is stored in 4 bytes)
+   * Maximum value length (2^32 - 1, as length is stored in 4 bytes).
    */
   public static final long MAX_VALUE_LENGTH = 0xFFFFFFFFL;
 
   // Padding Constants
   /**
-   * Padding byte value (zero padding)
+   * Padding byte value (zero padding).
    */
   public static final byte PADDING_BYTE = 0x00;
 
   // Error Messages
   /**
-   * Error message for null TTLV object
+   * Error message for null TTLV object.
    */
   public static final String ERROR_NULL_TTLV_OBJECT = "TTLVObject cannot be null";
 
   /**
-   * Error message for null tag
+   * Error message for null tag.
    */
   public static final String ERROR_NULL_TAG = "Tag cannot be null";
 
   /**
-   * Error message for invalid tag size
+   * Error message for invalid tag size.
    */
   public static final String ERROR_INVALID_TAG_SIZE = "Tag must be " + TAG_SIZE + " bytes long";
 
   /**
-   * Error message for negative length
+   * Error message for negative length.
    */
   public static final String ERROR_NEGATIVE_LENGTH = "Length cannot be negative";
 
   /**
-   * Error message for length mismatch
+   * Error message for length mismatch.
    */
   public static final String ERROR_LENGTH_MISMATCH = "Value length does not match specified length";
 
   /**
-   * Error message for null data
+   * Error message for null data.
    */
   public static final String ERROR_NULL_DATA = "Data cannot be null";
 
   /**
-   * Error message for empty data
+   * Error message for empty data.
    */
   public static final String ERROR_EMPTY_DATA = "Data cannot be empty";
   /**
-   * Error message for invalid padding
+   * Error message for invalid padding.
    */
   public static final String ERROR_INVALID_PADDING =
       "Data length must be multiple of " + PADDING_SIZE + ". Got: %d bytes";
   /**
-   * Error message for insufficient data for value
+   * Error message for insufficient data for value.
    */
   public static final String ERROR_INSUFFICIENT_VALUE_DATA =
       "Insufficient data for value. Required: %d bytes, available: %d bytes";
   /**
-   * Error message for insufficient data for padding
+   * Error message for insufficient data for padding.
    */
   public static final String ERROR_INSUFFICIENT_PADDING_DATA =
       "Insufficient data for padding. Required: %d bytes, available: %d bytes";
   /**
-   * Error message for invalid value length
+   * Error message for invalid value length.
    */
   public static final String ERROR_INVALID_VALUE_LENGTH = "Invalid value length: %d";
 
