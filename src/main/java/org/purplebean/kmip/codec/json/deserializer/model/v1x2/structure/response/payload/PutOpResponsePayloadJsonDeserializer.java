@@ -31,7 +31,7 @@ public class PutOpResponsePayloadJsonDeserializer extends
                           String type, JsonParser p, DeserializationContext ctxt)
       throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
-// No fields to deserialize
+    // No fields to deserialize
   }
 
   @Override

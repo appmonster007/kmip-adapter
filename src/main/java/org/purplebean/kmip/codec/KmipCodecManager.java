@@ -69,7 +69,7 @@ public final class KmipCodecManager {
 
     return switch (defaultType) {
 //            TODO: Add TTLV support
-//            case TTLV -> {}
+      //            case TTLV -> {}
       case XML -> StringEscapeUtils.escapeXml11(getXmlMapper().writeValueAsString(obj));
       case JSON -> StringEscapeUtils.escapeJson(getJsonMapper().writeValueAsString(obj));
       default -> throw new IllegalArgumentException("Unsupported mapper type: " + defaultType);
@@ -86,7 +86,7 @@ public final class KmipCodecManager {
 
     return switch (defaultType) {
 //            TODO: Add TTLV support
-//            case TTLV -> {}
+      //            case TTLV -> {}
       case XML -> getXmlMapper().readValue(StringEscapeUtils.unescapeXml((String) value), type);
       case JSON -> getJsonMapper().readValue(StringEscapeUtils.unescapeJson((String) value), type);
       default -> throw new IllegalArgumentException("Unsupported mapper type: " + defaultType);

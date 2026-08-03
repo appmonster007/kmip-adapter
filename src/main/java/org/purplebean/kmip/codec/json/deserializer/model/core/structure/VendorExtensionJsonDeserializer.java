@@ -30,7 +30,7 @@ public class VendorExtensionJsonDeserializer extends
   protected void setValue(VendorExtension.VendorExtensionBuilder builder, String tag, String type,
                           JsonParser p, DeserializationContext ctxt) throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
-// Usually VendorExtension in KMIP is a structure containing the vendor-specific tag.
+    // Usually VendorExtension in KMIP is a structure containing the vendor-specific tag.
     // { "VendorExtension": [ { "tag": "0x...", "type": "...", "value": ... } ] }
     builder.ttlvDataType(ctxt.readValue(p, TtlvDataType.class));
   }

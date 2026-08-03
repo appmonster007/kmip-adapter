@@ -41,7 +41,7 @@ public class SimpleRequestBatchItem implements RequestBatchItemStructure {
   private final RequestPayloadStructure requestPayloadStructure;
 
   private SimpleRequestBatchItem(
-//            @NonNull
+      //            @NonNull
       Operation operation,
       @NonNull
       RequestPayloadStructure requestPayloadStructure

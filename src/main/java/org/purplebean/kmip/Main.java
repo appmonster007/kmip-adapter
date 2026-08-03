@@ -105,7 +105,7 @@ public class Main {
         name,
         requestMessage,
 //                attr,
-//                certificate,
+        //                certificate,
     };
 
     JsonMapper jsonMapper = buildJsonMapper();
@@ -116,7 +116,7 @@ public class Main {
     System.out.println(strx);
     var desx = xmlMapper.readValue(strx, RequestMessageStructure.class);
 
-//        KmipContext.setSpec(KmipSpec.V1_2);
+    //        KmipContext.setSpec(KmipSpec.V1_2);
 
     demoJson(jsonMapper, dataTypes);
     demoXml(xmlMapper, dataTypes);
