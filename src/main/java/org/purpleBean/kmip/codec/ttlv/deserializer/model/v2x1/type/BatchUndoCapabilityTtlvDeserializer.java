@@ -1,0 +1,32 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.type;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.v2x1.type.BatchUndoCapability;
+
+public class BatchUndoCapabilityTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<BatchUndoCapability,
+        BatchUndoCapability.BatchUndoCapabilityBuilder> {
+
+  public BatchUndoCapabilityTtlvDeserializer() {
+    super(BatchUndoCapability.kmipTag, BatchUndoCapability.encodingType);
+  }
+
+  @Override
+  protected BatchUndoCapability.BatchUndoCapabilityBuilder createBuilder() {
+    return BatchUndoCapability.builder();
+  }
+
+  @Override
+  protected void setValue(BatchUndoCapability.BatchUndoCapabilityBuilder builder, byte[] tag,
+                          byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    builder.value(mapper.readValue(p, Boolean.class));
+  }
+
+  @Override
+  protected BatchUndoCapability build(BatchUndoCapability.BatchUndoCapabilityBuilder builder) {
+    return builder.build();
+  }
+}

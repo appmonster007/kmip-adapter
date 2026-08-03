@@ -14,7 +14,7 @@ import org.purpleBean.kmip.api.KmipTag;
  * KMIP {@code PublicKeyUniqueIdentifier} dataType ({@code 0x42006F}), encoded as a {@code
  * TextString} (v1.2-v2.1).
  * <p>
- * Sibling of {@link org.purpleBean.kmip.model.v3_0.type.PublicKeyUniqueIdentifier} (KMIP 3
+ * Sibling of {@link org.purpleBean.kmip.model.v3x0.type.PublicKeyUniqueIdentifier} (KMIP 3
  * .0-only {@code Identifier}
  * wire type) — the two are unrelated Java types that happen to share a KMIP tag and value shape.
  */

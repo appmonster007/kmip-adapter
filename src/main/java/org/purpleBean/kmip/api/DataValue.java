@@ -9,7 +9,7 @@ package org.purpleBean.kmip.api;
  *       {@link org.purpleBean.kmip.model.core.type.DataByteString}).</li>
  *   <li><b>Enumeration</b> — a placeholder reference to another batch item's data output,
  *       e.g. {@code <Data type="Enumeration" value="Encrypt"/>} in streaming batches
- *       (see {@link org.purpleBean.kmip.model.v2_1.enumeration.DataEnumeration}). This form
+ *       (see {@link org.purpleBean.kmip.model.v2x1.enumeration.DataEnumeration}). This form
  *       is introduced in KMIP 2.1 for Encrypt/Decrypt/Hash/MAC/RNG-Retrieve/Sign/SignatureVerify
  *       payloads that consume the output of a prior batch item.</li>
  * </ul>
@@ -25,7 +25,7 @@ package org.purpleBean.kmip.api;
  *
  * @see KmipDataType
  * @see org.purpleBean.kmip.model.core.type.DataByteString
- * @see org.purpleBean.kmip.model.v2_1.enumeration.DataEnumeration
+ * @see org.purpleBean.kmip.model.v2x1.enumeration.DataEnumeration
  */
 public interface DataValue extends KmipDataType {
   /**

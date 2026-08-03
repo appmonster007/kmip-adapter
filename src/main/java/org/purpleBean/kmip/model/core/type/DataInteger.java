@@ -18,7 +18,7 @@ import org.purpleBean.kmip.api.KmipTag;
  * e.g. {@code <Data type="Integer" value="0"/>}.
  * <p>
  * Sibling of {@link DataByteString} (byte-string data) and
- * {@link org.purpleBean.kmip.model.v2_1.enumeration.DataEnumeration} (named placeholder).
+ * {@link org.purpleBean.kmip.model.v2x1.enumeration.DataEnumeration} (named placeholder).
  */
 @Data
 @Builder(toBuilder = true)

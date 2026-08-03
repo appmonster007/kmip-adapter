@@ -1,0 +1,31 @@
+package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2x1.type;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
+import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purpleBean.kmip.model.v2x1.type.ReplaceExisting;
+
+public class ReplaceExistingTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<ReplaceExisting, ReplaceExisting.ReplaceExistingBuilder> {
+
+  public ReplaceExistingTtlvDeserializer() {
+    super(ReplaceExisting.kmipTag, ReplaceExisting.encodingType);
+  }
+
+  @Override
+  protected ReplaceExisting.ReplaceExistingBuilder createBuilder() {
+    return ReplaceExisting.builder();
+  }
+
+  @Override
+  protected void setValue(ReplaceExisting.ReplaceExistingBuilder builder, byte[] tag, byte type,
+                          ByteBuffer p, TtlvMapper mapper) throws IOException {
+    builder.value(mapper.readValue(p, Boolean.class));
+  }
+
+  @Override
+  protected ReplaceExisting build(ReplaceExisting.ReplaceExistingBuilder builder) {
+    return builder.build();
+  }
+}

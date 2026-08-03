@@ -1,0 +1,22 @@
+package org.purpleBean.kmip.benchmark.subjects.model.v2x1.type;
+
+import lombok.Getter;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.v2x1.type.CertificateIssuerOu;
+
+public class CertificateIssuerOuBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuerOu> {
+
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
+
+  public CertificateIssuerOuBenchmarkSubject() throws Exception {
+    CertificateIssuerOu subject = CertificateIssuerOu.of("default-string");
+    initialize(subject, CertificateIssuerOu.class);
+  }
+
+  @Override
+  public String name() {
+    return "CertificateIssuerOu";
+  }
+}

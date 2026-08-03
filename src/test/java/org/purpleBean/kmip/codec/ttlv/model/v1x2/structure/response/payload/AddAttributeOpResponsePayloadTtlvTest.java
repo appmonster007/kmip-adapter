@@ -1,0 +1,45 @@
+package org.purpleBean.kmip.codec.ttlv.model.v1x2.structure.response.payload;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.structure.Attribute;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v1x2.structure.response.payload.AddAttributeOpResponsePayload;
+import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
+
+@DisplayName("AddAttributeOpResponsePayload Ttlv Serialization Tests")
+class AddAttributeOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<AddAttributeOpResponsePayload> {
+
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
+
+  @Override
+  public Class<AddAttributeOpResponsePayload> type() {
+    return AddAttributeOpResponsePayload.class;
+  }
+
+  @Override
+  public AddAttributeOpResponsePayload createDefault() {
+    return AddAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+  }
+
+  @Override
+  public AddAttributeOpResponsePayload createVariant() {
+    return AddAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .attribute(Attribute.of(AttributeName.of("variant-attribute"),
+            AttributeValue.ofTextString("variant-value")))
+        .build();
+  }
+}

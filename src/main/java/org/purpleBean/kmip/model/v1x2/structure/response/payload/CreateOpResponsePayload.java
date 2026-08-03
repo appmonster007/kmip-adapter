@@ -1,0 +1,139 @@
+package org.purpleBean.kmip.model.v1x2.structure.response.payload;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+
+@Data
+@Builder(toBuilder = true)
+public class CreateOpResponsePayload implements ResponsePayloadStructure {
+
+  private static final Operation.Value operation = Operation.Standard.CREATE;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4);
+
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, CreateOpResponsePayload.class);
+      ResponsePayloadStructure.register(spec, operation, CreateOpResponsePayload.class,
+          CreateOpResponsePayload::of);
+    }
+  }
+
+  @NonNull
+  private final ObjectType objectType;
+  @NonNull
+  private final UniqueIdentifier uniqueIdentifier;
+  private final TemplateAttribute templateAttribute;
+
+  @Builder
+  private CreateOpResponsePayload(
+      @NonNull ObjectType objectType,
+      @NonNull UniqueIdentifier uniqueIdentifier,
+      TemplateAttribute templateAttribute
+  ) {
+    this.objectType = objectType;
+    this.uniqueIdentifier = uniqueIdentifier;
+    this.templateAttribute = templateAttribute;
+    validate();
+  }
+
+  public static CreateOpResponsePayload of(
+      @NonNull ObjectType objectType,
+      @NonNull UniqueIdentifier uniqueIdentifier,
+      TemplateAttribute templateAttribute
+  ) {
+    return CreateOpResponsePayload
+        .builder()
+        .objectType(objectType)
+        .uniqueIdentifier(uniqueIdentifier)
+        .templateAttribute(templateAttribute)
+        .build();
+  }
+
+  public static CreateOpResponsePayload of(List<KmipDataType> values) {
+    var builder = CreateOpResponsePayload.builder();
+    Map<KmipTag, List<KmipDataType>> map = values
+        .stream()
+        .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    if (map.containsKey(ObjectType.kmipTag)) {
+      builder.objectType((ObjectType) map
+          .get(ObjectType.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(UniqueIdentifier.kmipTag)) {
+      builder.uniqueIdentifier((UniqueIdentifier) map
+          .get(UniqueIdentifier.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(TemplateAttribute.kmipTag)) {
+      builder.templateAttribute((TemplateAttribute) map
+          .get(TemplateAttribute.kmipTag)
+          .getFirst());
+    }
+    return builder.build();
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
+    }
+    // Add validation logic here
+  }
+
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
+
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
+
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && Stream
+        .of(getValue())
+        .allMatch(KmipDataType::isSupported);
+  }
+
+  @Override
+  public KmipDataType[] getValue() {
+    return Stream
+        .of(
+            objectType,
+            uniqueIdentifier,
+            templateAttribute)
+        .filter(Objects::nonNull)
+        .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+        .map(KmipDataType.class::cast)
+        .toArray(KmipDataType[]::new);
+  }
+
+  @Override
+  public Operation getCorrespondingOperation() {
+    return operation.inst();
+  }
+}

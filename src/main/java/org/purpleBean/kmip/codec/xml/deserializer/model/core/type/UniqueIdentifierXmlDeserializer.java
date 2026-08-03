@@ -26,7 +26,7 @@ public class UniqueIdentifierXmlDeserializer extends
                            UniqueIdentifier.UniqueIdentifierBuilder builder) throws IOException {
     // In KMIP 2.1+, UniqueIdentifier may appear as TextString, Enumeration (e.g. "IDPlaceholder",
     // batch-item / ID-Placeholder references — same string shape as the separate
-    // model.v2_1.enumeration.UniqueIdentifier class used for generic KmipDataType-dispatch
+    // model.v2x1.enumeration.UniqueIdentifier class used for generic KmipDataType-dispatch
     // contexts, but accepted here too since this class is the fixed Java type of most
     // UniqueIdentifier fields), or Integer (batch item index). KMIP 3.0 §4.68 additionally
     // allows Identifier/Reference/NameReference — distinct TTLV Item Types (bytes 0x0C-0x0E)

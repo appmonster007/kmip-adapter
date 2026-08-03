@@ -1,8 +1,0 @@
-package org.purpleBean.kmip.codec.json.serializer.model.v2_1.structure;
-
-import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
-import org.purpleBean.kmip.model.v2_1.structure.ProfileInformation;
-
-public class ProfileInformationJsonSerializer
-    extends AbstractKmipDataTypeJsonSerializer<ProfileInformation> {
-}

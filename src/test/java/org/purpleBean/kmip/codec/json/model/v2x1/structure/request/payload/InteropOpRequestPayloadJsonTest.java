@@ -1,0 +1,32 @@
+package org.purpleBean.kmip.codec.json.model.v2x1.structure.request.payload;
+
+import org.junit.jupiter.api.DisplayName;
+import org.purpleBean.kmip.model.v2x1.enumeration.InteropFunction;
+import org.purpleBean.kmip.model.v2x1.structure.request.payload.InteropOpRequestPayload;
+import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
+
+@DisplayName("InteropOpRequestPayload Json Serialization Tests")
+class InteropOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<InteropOpRequestPayload> {
+
+  @Override
+  public Class<InteropOpRequestPayload> type() {
+    return InteropOpRequestPayload.class;
+  }
+
+  @Override
+  public InteropOpRequestPayload createDefault() {
+    return InteropOpRequestPayload
+        .builder()
+        .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .build();
+  }
+
+  @Override
+  public InteropOpRequestPayload createVariant() {
+    return InteropOpRequestPayload
+        .builder()
+        .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .build();
+  }
+}

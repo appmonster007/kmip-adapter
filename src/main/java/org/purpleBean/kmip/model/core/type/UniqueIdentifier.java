@@ -20,11 +20,11 @@ import java.util.Set;
  * round-trip (de)serialization preserves it.
  * <p>
  * The Enumeration variant (v2.1+ ID-Placeholder / batch-item references) is NOT represented here
- * — it is owned exclusively by {@link org.purpleBean.kmip.model.v2_1.enumeration.UniqueIdentifier}
+ * — it is owned exclusively by {@link org.purpleBean.kmip.model.v2x1.enumeration.UniqueIdentifier}
  * (a proper {@link org.purpleBean.kmip.api.KmipEnumeration}), to avoid a registry collision on
  * {@code (tag=UNIQUE_IDENTIFIER, encoding=ENUMERATION)}.
  *
- * @see org.purpleBean.kmip.model.v2_1.enumeration.UniqueIdentifier
+ * @see org.purpleBean.kmip.model.v2x1.enumeration.UniqueIdentifier
  */
 @Data
 @Builder(toBuilder = true)
@@ -41,7 +41,7 @@ public class UniqueIdentifier implements KmipDataType, KmipAttribute {
             // polymorphic dispatch (e.g. inside an Attributes wrapper) resolves regardless of which
             // variant is on the wire, not just the class-level default (TextString).
             // NOTE: ENUMERATION is intentionally excluded — that variant is owned exclusively by
-            // model.v2_1.enumeration.UniqueIdentifier (proper KmipEnumeration semantics for
+            // model.v2x1.enumeration.UniqueIdentifier (proper KmipEnumeration semantics for
             // "IDPlaceholder" etc.); registering it here too would collide on the same registry key.
             for (EncodingType variant : new EncodingType[]{encodingType, EncodingType.INTEGER, EncodingType.IDENTIFIER, EncodingType.REFERENCE, EncodingType.NAME_REFERENCE}) {
                 KmipDataType.register(spec, kmipTag.getValue(), variant, UniqueIdentifier.class);
