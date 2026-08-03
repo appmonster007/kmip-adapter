@@ -37,7 +37,7 @@ public class SimpleRequestHeaderJsonDeserializer extends
       case KmipTag.Standard.PROTOCOL_VERSION ->
           builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
       default -> {
-        while (p.nextToken() != JsonToken.END_OBJECT) ;
+        while (p.nextToken() != JsonToken.END_OBJECT) {}
       }
     }
   }

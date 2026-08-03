@@ -87,16 +87,6 @@ public interface ManagedObject extends KmipDataType {
   }
 
   /**
-   * Checks if the given KMIP tag corresponds to a registered managed object.
-   *
-   * @param kmipTag The {@link KmipTag.Value} to check.
-   * @return {@code true} if the tag corresponds to a managed object, {@code false} otherwise.
-   */
-  static boolean isManagedObject(KmipTag.Value kmipTag) {
-    return OBJECT_TAG_REGISTRY.containsKey(kmipTag);
-  }
-
-  /**
    * Retrieves the corresponding {@link KmipDataType} class from the registry based on
    * the KMIP specification, encoding type, and object type.
    *
@@ -104,10 +94,20 @@ public interface ManagedObject extends KmipDataType {
    * @param objectTypeValue The {@link ObjectType.Value} of the managed object.
    * @return The registered {@link Class}, or {@code null} if no mapping is found.
    */
-  static Class<? extends KmipDataType> getClassFromRegistry(EncodingType encodingType,
-                                                            ObjectType.Value objectTypeValue) {
+  static Class<? extends KmipDataType> getClassFromRegistry(
+      EncodingType encodingType, ObjectType.Value objectTypeValue) {
     KmipSpec spec = KmipContext.getSpec();
     return OBJECT_TYPE_REGISTRY.get(new RegistryKey(spec, encodingType, objectTypeValue));
+  }
+
+  /**
+   * Checks if the given KMIP tag corresponds to a registered managed object.
+   *
+   * @param kmipTag The {@link KmipTag.Value} to check.
+   * @return {@code true} if the tag corresponds to a managed object, {@code false} otherwise.
+   */
+  static boolean isManagedObject(KmipTag.Value kmipTag) {
+    return OBJECT_TAG_REGISTRY.containsKey(kmipTag);
   }
 
   /**

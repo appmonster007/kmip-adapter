@@ -30,7 +30,7 @@ public class SimpleRequestPayloadJsonDeserializer extends
   protected void setValue(SimpleRequestPayload.SimpleRequestPayloadBuilder builder, String tag,
                           String type, JsonParser p, DeserializationContext ctxt)
       throws IOException {
-    KmipTag.Value nodeTag = KmipTag.fromName(tag);// No fields to set
+    KmipTag.Value nodeTag = KmipTag.fromName(tag); // No fields to set
   }
 
   @Override

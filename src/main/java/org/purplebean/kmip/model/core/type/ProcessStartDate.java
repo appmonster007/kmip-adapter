@@ -114,7 +114,7 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     return (
         state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
             || state.getIntValue() == State.Standard.ACTIVE.getValue()
-    ) && value
+        ) && value
         .withNano(0)
         .atZoneSameInstant(ZoneOffset.UTC)
         .isAfter(OffsetDateTime
@@ -153,7 +153,7 @@ public class ProcessStartDate implements KmipDataType, KmipAttribute {
     return (
         state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
             || state.getIntValue() == State.Standard.ACTIVE.getValue()
-    ) && value
+        ) && value
         .withNano(0)
         .atZoneSameInstant(ZoneOffset.UTC)
         .isAfter(OffsetDateTime

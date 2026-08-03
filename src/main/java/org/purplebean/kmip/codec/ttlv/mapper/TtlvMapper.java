@@ -120,21 +120,6 @@ public class TtlvMapper {
   }
 
   /**
-   * A convenience method to serialize a Java object directly into a byte array.
-   *
-   * @param value The object to serialize.
-   * @param <T>   The type of the value.
-   * @return A byte array containing the TTLV representation of the object.
-   * @throws IOException if an error occurs during serialization.
-   */
-  public <T> byte[] writeValueAsBytes(T value) throws IOException {
-    ByteBuffer bb = writeValueAsByteBuffer(value);
-    byte[] out = new byte[bb.remaining()];
-    bb.get(out);
-    return out;
-  }
-
-  /**
    * A convenience method to deserialize a byte array containing TTLV data into a Java object.
    *
    * @param data  The byte array to deserialize.
@@ -148,6 +133,21 @@ public class TtlvMapper {
         .wrap(data)
         .order(TtlvConstants.BYTE_ORDER);
     return readValue(buffer, clazz);
+  }
+
+  /**
+   * A convenience method to serialize a Java object directly into a byte array.
+   *
+   * @param value The object to serialize.
+   * @param <T>   The type of the value.
+   * @return A byte array containing the TTLV representation of the object.
+   * @throws IOException if an error occurs during serialization.
+   */
+  public <T> byte[] writeValueAsBytes(T value) throws IOException {
+    ByteBuffer bb = writeValueAsByteBuffer(value);
+    byte[] out = new byte[bb.remaining()];
+    bb.get(out);
+    return out;
   }
 
   @SuppressWarnings("unchecked")
