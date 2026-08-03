@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PutFunction TTLV Serialization")
 class PutFunctionTtlvTest extends AbstractTtlvSerializationTestSuite<PutFunction> {
-    @Override
-    public Class<PutFunction> type() {
-        return PutFunction.class;
-    }
+  @Override
+  public Class<PutFunction> type() {
+    return PutFunction.class;
+  }
 
-    @Override
-    public PutFunction createDefault() {
-        return PutFunction.Standard.NEW.inst();
-    }
+  @Override
+  public PutFunction createDefault() {
+    return PutFunction.Standard.NEW.inst();
+  }
 
-    @Override
-    public PutFunction createVariant() {
-        return PutFunction.Standard.REPLACE.inst();
-    }
+  @Override
+  public PutFunction createVariant() {
+    return PutFunction.Standard.REPLACE.inst();
+  }
 }

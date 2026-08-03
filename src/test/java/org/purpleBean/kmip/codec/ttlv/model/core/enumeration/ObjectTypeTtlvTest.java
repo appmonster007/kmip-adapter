@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ObjectType TTLV Serialization")
 class ObjectTypeTtlvTest extends AbstractTtlvSerializationTestSuite<ObjectType> {
-    @Override
-    public Class<ObjectType> type() {
-        return ObjectType.class;
-    }
+  @Override
+  public Class<ObjectType> type() {
+    return ObjectType.class;
+  }
 
-    @Override
-    public ObjectType createDefault() {
-        return ObjectType.Standard.CERTIFICATE.inst();
-    }
+  @Override
+  public ObjectType createDefault() {
+    return ObjectType.Standard.CERTIFICATE.inst();
+  }
 
-    @Override
-    public ObjectType createVariant() {
-        return ObjectType.Standard.SYMMETRIC_KEY.inst();
-    }
+  @Override
+  public ObjectType createVariant() {
+    return ObjectType.Standard.SYMMETRIC_KEY.inst();
+  }
 }

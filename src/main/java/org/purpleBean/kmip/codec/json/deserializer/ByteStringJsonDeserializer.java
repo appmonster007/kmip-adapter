@@ -11,9 +11,13 @@ import java.util.HexFormat;
 
 public class ByteStringJsonDeserializer extends JsonDeserializer<ByteBuffer> {
 
-    @Override
-    public ByteBuffer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
-        return ByteBuffer.wrap(HexFormat.of().parseHex(node.asText()));
-    }
+  @Override
+  public ByteBuffer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    JsonNode node = p
+        .getCodec()
+        .readTree(p);
+    return ByteBuffer.wrap(HexFormat
+        .of()
+        .parseHex(node.asText()));
+  }
 }

@@ -9,16 +9,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("Link Xml Serialization Tests")
 class LinkXmlTest extends AbstractXmlSerializationTestSuite<Link> {
 
-    @Override
-    public Class<Link> type() {
-        return Link.class;
-    }
+  @Override
+  public Class<Link> type() {
+    return Link.class;
+  }
 
-    @Override
-    public Link createDefault() {
-        return Link.builder()
-                .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
-                .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
-                .build();
-    }
+  @Override
+  public Link createDefault() {
+    return Link
+        .builder()
+        .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
+        .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
+        .build();
+  }
 }

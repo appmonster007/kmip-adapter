@@ -90,7 +90,7 @@ public class KmipV30VerificationTest {
     public void diagnoseTargetedFiles() {
         String base = projectRoot + TEST_CASES_ROOT;
         // Populate with failing files once the mandatory/optional sweeps expose them.
-        String[] targets = new String[] {
+        String[] targets = new String[]{
                 // "mandatory/AKLC-M-1-30.xml",
                 // "optional/AKLC-O-1-30.xml",
         };

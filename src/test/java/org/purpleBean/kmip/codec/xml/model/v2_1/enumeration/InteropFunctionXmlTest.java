@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("InteropFunction XML Serialization")
 class InteropFunctionXmlTest extends AbstractXmlSerializationTestSuite<InteropFunction> {
-    @Override
-    public Class<InteropFunction> type() {
-        return InteropFunction.class;
-    }
+  @Override
+  public Class<InteropFunction> type() {
+    return InteropFunction.class;
+  }
 
-    @Override
-    public InteropFunction createDefault() {
-        return InteropFunction.Standard.BEGIN.inst();
-    }
+  @Override
+  public InteropFunction createDefault() {
+    return InteropFunction.Standard.BEGIN.inst();
+  }
 
-    @Override
-    public InteropFunction createVariant() {
-        return InteropFunction.Standard.END.inst();
-    }
+  @Override
+  public InteropFunction createVariant() {
+    return InteropFunction.Standard.END.inst();
+  }
 }

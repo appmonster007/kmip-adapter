@@ -9,29 +9,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.DiscoverVersion
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DiscoverVersionsOpResponsePayload Ttlv Serialization Tests")
-class DiscoverVersionsOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<DiscoverVersionsOpResponsePayload> {
+class DiscoverVersionsOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<DiscoverVersionsOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<DiscoverVersionsOpResponsePayload> type() {
-        return DiscoverVersionsOpResponsePayload.class;
-    }
+  @Override
+  public Class<DiscoverVersionsOpResponsePayload> type() {
+    return DiscoverVersionsOpResponsePayload.class;
+  }
 
-    @Override
-    public DiscoverVersionsOpResponsePayload createDefault() {
-        return DiscoverVersionsOpResponsePayload.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                .build();
-    }
+  @Override
+  public DiscoverVersionsOpResponsePayload createDefault() {
+    return DiscoverVersionsOpResponsePayload
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+        .build();
+  }
 
-    @Override
-    public DiscoverVersionsOpResponsePayload createVariant() {
-        return DiscoverVersionsOpResponsePayload.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
-                .build();
-    }
+  @Override
+  public DiscoverVersionsOpResponsePayload createVariant() {
+    return DiscoverVersionsOpResponsePayload
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
+        .build();
+  }
 }

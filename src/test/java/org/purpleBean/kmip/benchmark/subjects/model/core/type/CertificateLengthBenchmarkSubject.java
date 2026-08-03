@@ -7,18 +7,21 @@ import org.purpleBean.kmip.model.core.type.CertificateLength;
 
 public class CertificateLengthBenchmarkSubject extends KmipBenchmarkSubject<CertificateLength> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public CertificateLengthBenchmarkSubject() throws Exception {
-        Integer value = 10;
-        CertificateLength certificateLength = CertificateLength.builder().value(value).build();
-        initialize(certificateLength, CertificateLength.class);
-    }
+  public CertificateLengthBenchmarkSubject() throws Exception {
+    Integer value = 10;
+    CertificateLength certificateLength = CertificateLength
+        .builder()
+        .value(value)
+        .build();
+    initialize(certificateLength, CertificateLength.class);
+  }
 
-    @Override
-    public String name() {
-        return "CertificateLength";
-    }
+  @Override
+  public String name() {
+    return "CertificateLength";
+  }
 
 }

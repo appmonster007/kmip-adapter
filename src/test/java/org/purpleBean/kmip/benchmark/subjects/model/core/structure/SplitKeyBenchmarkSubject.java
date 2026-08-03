@@ -13,25 +13,27 @@ import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 
 public class SplitKeyBenchmarkSubject extends KmipBenchmarkSubject<SplitKey> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public SplitKeyBenchmarkSubject() throws Exception {
-        SplitKey subject = SplitKey.builder()
-                .splitKeyParts(SplitKeyParts.of(1))
-                .keyPartIdentifier(KeyPartIdentifier.of(1))
-                .splitKeyThreshold(SplitKeyThreshold.of(1))
-                .splitKeyMethod(SplitKeyMethod.Standard.XOR.inst())
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-        initialize(subject, SplitKey.class);
-    }
+  public SplitKeyBenchmarkSubject() throws Exception {
+    SplitKey subject = SplitKey
+        .builder()
+        .splitKeyParts(SplitKeyParts.of(1))
+        .keyPartIdentifier(KeyPartIdentifier.of(1))
+        .splitKeyThreshold(SplitKeyThreshold.of(1))
+        .splitKeyMethod(SplitKeyMethod.Standard.XOR.inst())
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+    initialize(subject, SplitKey.class);
+  }
 
-    @Override
-    public String name() {
-        return "SplitKey";
-    }
+  @Override
+  public String name() {
+    return "SplitKey";
+  }
 
 }

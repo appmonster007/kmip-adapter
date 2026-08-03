@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ActivateOpReques
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ActivateOpRequestPayload Xml Serialization Tests")
-class ActivateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<ActivateOpRequestPayload> {
+class ActivateOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<ActivateOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ActivateOpRequestPayload> type() {
-        return ActivateOpRequestPayload.class;
-    }
+  @Override
+  public Class<ActivateOpRequestPayload> type() {
+    return ActivateOpRequestPayload.class;
+  }
 
-    @Override
-    public ActivateOpRequestPayload createDefault() {
-        return ActivateOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public ActivateOpRequestPayload createDefault() {
+    return ActivateOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public ActivateOpRequestPayload createVariant() {
-        return ActivateOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public ActivateOpRequestPayload createVariant() {
+    return ActivateOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

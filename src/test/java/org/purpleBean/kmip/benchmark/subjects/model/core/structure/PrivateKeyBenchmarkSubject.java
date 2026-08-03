@@ -9,21 +9,23 @@ import org.purpleBean.kmip.model.core.structure.PrivateKey;
 
 public class PrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<PrivateKey> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public PrivateKeyBenchmarkSubject() throws Exception {
-        PrivateKey subject = PrivateKey.builder()
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-        initialize(subject, PrivateKey.class);
-    }
+  public PrivateKeyBenchmarkSubject() throws Exception {
+    PrivateKey subject = PrivateKey
+        .builder()
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+    initialize(subject, PrivateKey.class);
+  }
 
-    @Override
-    public String name() {
-        return "PrivateKey";
-    }
+  @Override
+  public String name() {
+    return "PrivateKey";
+  }
 
 }

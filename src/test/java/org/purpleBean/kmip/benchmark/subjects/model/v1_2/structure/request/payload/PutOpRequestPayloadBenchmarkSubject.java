@@ -12,24 +12,27 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.PutOpRequestPayl
 
 public class PutOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<PutOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public PutOpRequestPayloadBenchmarkSubject() throws Exception {
-        PutOpRequestPayload subject = PutOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .putFunction(PutFunction.of(PutFunction.Standard.NEW))
-                .object(SymmetricKey.builder()
-                        .keyBlock(KeyBlock.builder()
-                                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                                .build())
-                        .build())
-                .build();
-        initialize(subject, PutOpRequestPayload.class);
-    }
+  public PutOpRequestPayloadBenchmarkSubject() throws Exception {
+    PutOpRequestPayload subject = PutOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .putFunction(PutFunction.of(PutFunction.Standard.NEW))
+        .object(SymmetricKey
+            .builder()
+            .keyBlock(KeyBlock
+                .builder()
+                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+                .build())
+            .build())
+        .build();
+    initialize(subject, PutOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "PutOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "PutOpRequestPayload";
+  }
 }

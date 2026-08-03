@@ -7,18 +7,20 @@ import org.purpleBean.kmip.model.core.type.ApplicationNamespace;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ApplicationSpecificInformation Ttlv Serialization Tests")
-class ApplicationSpecificInformationTtlvTest extends AbstractTtlvSerializationTestSuite<ApplicationSpecificInformation> {
+class ApplicationSpecificInformationTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ApplicationSpecificInformation> {
 
-    @Override
-    public Class<ApplicationSpecificInformation> type() {
-        return ApplicationSpecificInformation.class;
-    }
+  @Override
+  public Class<ApplicationSpecificInformation> type() {
+    return ApplicationSpecificInformation.class;
+  }
 
-    @Override
-    public ApplicationSpecificInformation createDefault() {
-        return ApplicationSpecificInformation.builder()
-                .applicationNamespace(ApplicationNamespace.of("namespace"))
-                .applicationData(ApplicationData.of("data"))
-                .build();
-    }
+  @Override
+  public ApplicationSpecificInformation createDefault() {
+    return ApplicationSpecificInformation
+        .builder()
+        .applicationNamespace(ApplicationNamespace.of("namespace"))
+        .applicationData(ApplicationData.of("data"))
+        .build();
+  }
 }

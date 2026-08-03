@@ -1,39 +1,48 @@
 package org.purpleBean.kmip.codec.json.model.v2_1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.enumeration.CertificateType;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purpleBean.kmip.model.core.structure.Certificate;
+import org.purpleBean.kmip.model.core.type.CertificateValue;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.ExportOpResponsePayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ExportOpResponsePayload Json Serialization Tests")
-class ExportOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<ExportOpResponsePayload> {
+class ExportOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<ExportOpResponsePayload> {
 
-    @Override
-    public Class<ExportOpResponsePayload> type() {
-        return ExportOpResponsePayload.class;
-    }
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
-    }
+  @Override
+  public Class<ExportOpResponsePayload> type() {
+    return ExportOpResponsePayload.class;
+  }
+
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V2_1;
+  }
 
 
+  @Override
+  public ExportOpResponsePayload createDefault() {
+    return ExportOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.CERTIFICATE.inst())
+        .uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-1"))
+        .object(Certificate.of(CertificateType.Standard.X_509.inst(),
+            CertificateValue.of(new byte[] {0x01})))
+        .build();
+  }
 
-    @Override
-    public ExportOpResponsePayload createDefault() {
-        return ExportOpResponsePayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-1")).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x01}))).build();
-    }
-
-    @Override
-    public ExportOpResponsePayload createVariant() {
-        return ExportOpResponsePayload.builder().objectType(ObjectType.Standard.CERTIFICATE.inst()).uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-2")).object(Certificate.of(CertificateType.Standard.X_509.inst(), CertificateValue.of(new byte[]{0x02}))).build();
-    }
+  @Override
+  public ExportOpResponsePayload createVariant() {
+    return ExportOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.CERTIFICATE.inst())
+        .uniqueIdentifier(org.purpleBean.kmip.model.core.type.UniqueIdentifier.of("cert-2"))
+        .object(Certificate.of(CertificateType.Standard.X_509.inst(),
+            CertificateValue.of(new byte[] {0x02})))
+        .build();
+  }
 }

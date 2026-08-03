@@ -10,29 +10,31 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("UsernameAndPassword Ttlv Serialization Tests")
 class UsernameAndPasswordTtlvTest extends AbstractTtlvSerializationTestSuite<UsernameAndPassword> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<UsernameAndPassword> type() {
-        return UsernameAndPassword.class;
-    }
+  @Override
+  public Class<UsernameAndPassword> type() {
+    return UsernameAndPassword.class;
+  }
 
-    @Override
-    public UsernameAndPassword createDefault() {
-        return UsernameAndPassword.builder()
-                .username(Username.of("test-user"))
-                .password(Password.of("test-password"))
-                .build();
-    }
+  @Override
+  public UsernameAndPassword createDefault() {
+    return UsernameAndPassword
+        .builder()
+        .username(Username.of("test-user"))
+        .password(Password.of("test-password"))
+        .build();
+  }
 
-    @Override
-    public UsernameAndPassword createVariant() {
-        return UsernameAndPassword.builder()
-                .username(Username.of("test-user-variant"))
-                .password(Password.of("test-password-variant"))
-                .build();
-    }
+  @Override
+  public UsernameAndPassword createVariant() {
+    return UsernameAndPassword
+        .builder()
+        .username(Username.of("test-user-variant"))
+        .password(Password.of("test-password-variant"))
+        .build();
+  }
 }

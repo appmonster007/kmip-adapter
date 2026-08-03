@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -8,36 +10,36 @@ import org.purpleBean.kmip.model.core.structure.VendorExtension;
 import org.purpleBean.kmip.model.core.type.CriticalityIndicator;
 import org.purpleBean.kmip.model.core.type.VendorIdentification;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class MessageExtensionTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<MessageExtension,
+        MessageExtension.MessageExtensionBuilder> {
 
-public class MessageExtensionTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<MessageExtension, MessageExtension.MessageExtensionBuilder> {
+  public MessageExtensionTtlvDeserializer() {
+    super(MessageExtension.kmipTag, MessageExtension.encodingType);
+  }
 
-    public MessageExtensionTtlvDeserializer() {
-        super(MessageExtension.kmipTag, MessageExtension.encodingType);
+  @Override
+  protected MessageExtension.MessageExtensionBuilder createBuilder() {
+    return MessageExtension.builder();
+  }
+
+  @Override
+  protected void setValue(MessageExtension.MessageExtensionBuilder builder, byte[] tag, byte type,
+                          ByteBuffer p, TtlvMapper mapper) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.VENDOR_IDENTIFICATION ->
+          builder.vendorIdentification(mapper.readValue(p, VendorIdentification.class));
+      case KmipTag.Standard.CRITICALITY_INDICATOR ->
+          builder.criticalityIndicator(mapper.readValue(p, CriticalityIndicator.class));
+      case KmipTag.Standard.VENDOR_EXTENSION ->
+          builder.vendorExtension(mapper.readValue(p, VendorExtension.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected MessageExtension.MessageExtensionBuilder createBuilder() {
-        return MessageExtension.builder();
-    }
-
-    @Override
-    protected void setValue(MessageExtension.MessageExtensionBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.VENDOR_IDENTIFICATION ->
-                    builder.vendorIdentification(mapper.readValue(p, VendorIdentification.class));
-            case KmipTag.Standard.CRITICALITY_INDICATOR ->
-                    builder.criticalityIndicator(mapper.readValue(p, CriticalityIndicator.class));
-            case KmipTag.Standard.VENDOR_EXTENSION ->
-                    builder.vendorExtension(mapper.readValue(p, VendorExtension.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected MessageExtension build(MessageExtension.MessageExtensionBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected MessageExtension build(MessageExtension.MessageExtensionBuilder builder) {
+    return builder.build();
+  }
 }

@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.request.p
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.DestroyOpRequestPayload;
 
-public class DestroyOpRequestPayloadTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<DestroyOpRequestPayload> {
+public class DestroyOpRequestPayloadTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<DestroyOpRequestPayload> {
 }

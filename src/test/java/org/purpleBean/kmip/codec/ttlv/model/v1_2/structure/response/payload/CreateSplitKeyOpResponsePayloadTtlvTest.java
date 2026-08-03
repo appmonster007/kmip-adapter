@@ -8,33 +8,36 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateSplitKeyO
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateSplitKeyOpResponsePayload Ttlv Serialization Tests")
-class CreateSplitKeyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<CreateSplitKeyOpResponsePayload> {
+class CreateSplitKeyOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<CreateSplitKeyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CreateSplitKeyOpResponsePayload> type() {
-        return CreateSplitKeyOpResponsePayload.class;
-    }
+  @Override
+  public Class<CreateSplitKeyOpResponsePayload> type() {
+    return CreateSplitKeyOpResponsePayload.class;
+  }
 
-    @Override
-    public CreateSplitKeyOpResponsePayload createDefault() {
-        return CreateSplitKeyOpResponsePayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public CreateSplitKeyOpResponsePayload createDefault() {
+    return CreateSplitKeyOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 
-    @Override
-    public CreateSplitKeyOpResponsePayload createVariant() {
-        return CreateSplitKeyOpResponsePayload.builder()
-                .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174003"))
-                .build();
-    }
+  @Override
+  public CreateSplitKeyOpResponsePayload createVariant() {
+    return CreateSplitKeyOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174003"))
+        .build();
+  }
 }

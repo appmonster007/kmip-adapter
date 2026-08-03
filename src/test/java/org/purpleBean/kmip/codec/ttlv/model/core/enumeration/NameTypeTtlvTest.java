@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("NameType TTLV Serialization")
 class NameTypeTtlvTest extends AbstractTtlvSerializationTestSuite<NameType> {
-    @Override
-    public Class<NameType> type() {
-        return NameType.class;
-    }
+  @Override
+  public Class<NameType> type() {
+    return NameType.class;
+  }
 
-    @Override
-    public NameType createDefault() {
-        return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
-    }
+  @Override
+  public NameType createDefault() {
+    return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
+  }
 
-    @Override
-    public NameType createVariant() {
-        return NameType.Standard.URI.inst();
-    }
+  @Override
+  public NameType createVariant() {
+    return NameType.Standard.URI.inst();
+  }
 }

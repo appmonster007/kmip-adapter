@@ -1,5 +1,8 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
+import java.math.BigInteger;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.model.core.structure.TransparentRsaPrivateKey;
 import org.purpleBean.kmip.model.core.type.Modulus;
@@ -8,45 +11,43 @@ import org.purpleBean.kmip.model.core.type.PrivateExponent;
 import org.purpleBean.kmip.model.core.type.Q;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
-import java.math.BigInteger;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
 @DisplayName("TransparentRsaPrivateKey JSON Serialization Tests")
-class TransparentRsaPrivateKeyJsonTest extends AbstractJsonSerializationTestSuite<TransparentRsaPrivateKey> {
+class TransparentRsaPrivateKeyJsonTest
+    extends AbstractJsonSerializationTestSuite<TransparentRsaPrivateKey> {
 
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+  private static final OffsetDateTime FIXED_TIME =
+      OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Override
-    public Class<TransparentRsaPrivateKey> type() {
-        return TransparentRsaPrivateKey.class;
-    }
+  @Override
+  public Class<TransparentRsaPrivateKey> type() {
+    return TransparentRsaPrivateKey.class;
+  }
 
-    @Override
-    public TransparentRsaPrivateKey createDefault() {
-        return TransparentRsaPrivateKey.of(
-                Modulus.of(BigInteger.valueOf(1)),
-                PrivateExponent.of(BigInteger.valueOf(2)),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-    }
+  @Override
+  public TransparentRsaPrivateKey createDefault() {
+    return TransparentRsaPrivateKey.of(
+        Modulus.of(BigInteger.valueOf(1)),
+        PrivateExponent.of(BigInteger.valueOf(2)),
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+  }
 
-    @Override
-    public TransparentRsaPrivateKey createVariant() {
-        return TransparentRsaPrivateKey.of(
-                Modulus.of(BigInteger.valueOf(3)),
-                null,
-                null,
-                P.of(BigInteger.valueOf(4)),
-                Q.of(BigInteger.valueOf(5)),
-                null,
-                null,
-                null
-        );
-    }
+  @Override
+  public TransparentRsaPrivateKey createVariant() {
+    return TransparentRsaPrivateKey.of(
+        Modulus.of(BigInteger.valueOf(3)),
+        null,
+        null,
+        P.of(BigInteger.valueOf(4)),
+        Q.of(BigInteger.valueOf(5)),
+        null,
+        null,
+        null
+    );
+  }
 }

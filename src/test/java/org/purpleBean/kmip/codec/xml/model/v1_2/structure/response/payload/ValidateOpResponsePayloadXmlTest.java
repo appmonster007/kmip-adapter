@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ValidateOpRespo
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ValidateOpResponsePayload Xml Serialization Tests")
-class ValidateOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<ValidateOpResponsePayload> {
+class ValidateOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<ValidateOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ValidateOpResponsePayload> type() {
-        return ValidateOpResponsePayload.class;
-    }
+  @Override
+  public Class<ValidateOpResponsePayload> type() {
+    return ValidateOpResponsePayload.class;
+  }
 
-    @Override
-    public ValidateOpResponsePayload createDefault() {
-        return ValidateOpResponsePayload.builder()
-                .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.VALID))
-                .build();
-    }
+  @Override
+  public ValidateOpResponsePayload createDefault() {
+    return ValidateOpResponsePayload
+        .builder()
+        .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.VALID))
+        .build();
+  }
 
-    @Override
-    public ValidateOpResponsePayload createVariant() {
-        return ValidateOpResponsePayload.builder()
-                .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.INVALID))
-                .build();
-    }
+  @Override
+  public ValidateOpResponsePayload createVariant() {
+    return ValidateOpResponsePayload
+        .builder()
+        .validityIndicator(ValidityIndicator.of(ValidityIndicator.Standard.INVALID))
+        .build();
+  }
 }

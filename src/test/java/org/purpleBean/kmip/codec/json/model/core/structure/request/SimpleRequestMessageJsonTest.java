@@ -9,43 +9,52 @@ import org.purpleBean.kmip.model.core.structure.request.SimpleRequestPayload;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("SimpleRequestMessage JSON Serialization")
-class SimpleRequestMessageJsonTest extends AbstractJsonSerializationTestSuite<SimpleRequestMessage> {
+class SimpleRequestMessageJsonTest
+    extends AbstractJsonSerializationTestSuite<SimpleRequestMessage> {
 
-    @Override
-    public Class<SimpleRequestMessage> type() {
-        return SimpleRequestMessage.class;
-    }
+  @Override
+  public Class<SimpleRequestMessage> type() {
+    return SimpleRequestMessage.class;
+  }
 
-    @Override
-    public SimpleRequestMessage createDefault() {
-        SimpleRequestHeader header = SimpleRequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(1, 2))
-                .build();
-        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
-                .requestPayloadStructure(SimpleRequestPayload.of())
-                .build();
-        return SimpleRequestMessage.builder()
-                .requestHeader(header)
-                .requestBatchItem(item).requestBatchItemError(null)
-                .build();
-    }
+  @Override
+  public SimpleRequestMessage createDefault() {
+    SimpleRequestHeader header = SimpleRequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(1, 2))
+        .build();
+    SimpleRequestBatchItem item = SimpleRequestBatchItem
+        .builder()
+        .requestPayloadStructure(SimpleRequestPayload.of())
+        .build();
+    return SimpleRequestMessage
+        .builder()
+        .requestHeader(header)
+        .requestBatchItem(item)
+        .requestBatchItemError(null)
+        .build();
+  }
 
-    @Override
-    public SimpleRequestMessage createVariant() {
-        SimpleRequestHeader header = SimpleRequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(2, 0))
-                .build();
-        SimpleRequestBatchItem item = SimpleRequestBatchItem.builder()
-                .requestPayloadStructure(SimpleRequestPayload.of())
-                .build();
-        return SimpleRequestMessage.builder()
-                .requestHeader(header)
-                .requestBatchItem(item).requestBatchItemError(null)
-                .build();
-    }
+  @Override
+  public SimpleRequestMessage createVariant() {
+    SimpleRequestHeader header = SimpleRequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(2, 0))
+        .build();
+    SimpleRequestBatchItem item = SimpleRequestBatchItem
+        .builder()
+        .requestPayloadStructure(SimpleRequestPayload.of())
+        .build();
+    return SimpleRequestMessage
+        .builder()
+        .requestHeader(header)
+        .requestBatchItem(item)
+        .requestBatchItemError(null)
+        .build();
+  }
 
-    @Override
-    public boolean unsupportedSpecShouldFailSerialize() {
-        return false; // model supports UnsupportedVersion
-    }
+  @Override
+  public boolean unsupportedSpecShouldFailSerialize() {
+    return false; // model supports UnsupportedVersion
+  }
 }

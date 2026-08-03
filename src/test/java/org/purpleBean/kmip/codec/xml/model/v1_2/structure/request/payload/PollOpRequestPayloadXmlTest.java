@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("PollOpRequestPayload Xml Serialization Tests")
 class PollOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<PollOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<PollOpRequestPayload> type() {
-        return PollOpRequestPayload.class;
-    }
+  @Override
+  public Class<PollOpRequestPayload> type() {
+    return PollOpRequestPayload.class;
+  }
 
-    @Override
-    public PollOpRequestPayload createDefault() {
-        return PollOpRequestPayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public PollOpRequestPayload createDefault() {
+    return PollOpRequestPayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public PollOpRequestPayload createVariant() {
-        return PollOpRequestPayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public PollOpRequestPayload createVariant() {
+    return PollOpRequestPayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

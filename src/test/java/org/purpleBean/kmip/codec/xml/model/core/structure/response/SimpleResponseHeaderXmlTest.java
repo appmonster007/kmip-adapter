@@ -11,27 +11,29 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("SimpleResponseHeader Xml Serialization Tests")
 class SimpleResponseHeaderXmlTest extends AbstractXmlSerializationTestSuite<SimpleResponseHeader> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<SimpleResponseHeader> type() {
-        return SimpleResponseHeader.class;
-    }
+  @Override
+  public Class<SimpleResponseHeader> type() {
+    return SimpleResponseHeader.class;
+  }
 
-    @Override
-    public SimpleResponseHeader createDefault() {
-        return SimpleResponseHeader.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                .build();
-    }
+  @Override
+  public SimpleResponseHeader createDefault() {
+    return SimpleResponseHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+        .build();
+  }
 
-    @Override
-    public SimpleResponseHeader createVariant() {
-        return SimpleResponseHeader.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
-                .build();
-    }
+  @Override
+  public SimpleResponseHeader createVariant() {
+    return SimpleResponseHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
+        .build();
+  }
 }

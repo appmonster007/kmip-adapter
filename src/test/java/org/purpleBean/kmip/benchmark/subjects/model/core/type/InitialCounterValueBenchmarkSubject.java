@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.InitialCounterValue;
 
 public class InitialCounterValueBenchmarkSubject extends KmipBenchmarkSubject<InitialCounterValue> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public InitialCounterValueBenchmarkSubject() throws Exception {
-        InitialCounterValue initialCounterValue = InitialCounterValue.of(1);
-        initialize(initialCounterValue, InitialCounterValue.class);
-    }
+  public InitialCounterValueBenchmarkSubject() throws Exception {
+    InitialCounterValue initialCounterValue = InitialCounterValue.of(1);
+    initialize(initialCounterValue, InitialCounterValue.class);
+  }
 
-    @Override
-    public String name() {
-        return "InitialCounterValue";
-    }
+  @Override
+  public String name() {
+    return "InitialCounterValue";
+  }
 
 }

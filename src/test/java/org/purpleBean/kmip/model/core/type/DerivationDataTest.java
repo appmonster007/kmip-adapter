@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("DerivationData Domain Tests")
 class DerivationDataTest extends AbstractKmipDataTypeTestSuite<DerivationData> {
 
-    @Override
-    protected Class<DerivationData> type() {
-        return DerivationData.class;
-    }
+  @Override
+  protected Class<DerivationData> type() {
+    return DerivationData.class;
+  }
 
-    @Override
-    protected DerivationData createDefault() {
-        return DerivationData.of(new byte[]{0x01, 0x02, 0x03});
-    }
+  @Override
+  protected DerivationData createDefault() {
+    return DerivationData.of(new byte[] {0x01, 0x02, 0x03});
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.BYTE_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.BYTE_STRING;
+  }
 }

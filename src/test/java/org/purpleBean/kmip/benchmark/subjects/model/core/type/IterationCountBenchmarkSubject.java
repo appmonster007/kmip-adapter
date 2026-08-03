@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.IterationCount;
 
 public class IterationCountBenchmarkSubject extends KmipBenchmarkSubject<IterationCount> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public IterationCountBenchmarkSubject() throws Exception {
-        IterationCount iterationCount = IterationCount.builder().value(1000).build();
-        initialize(iterationCount, IterationCount.class);
-    }
+  public IterationCountBenchmarkSubject() throws Exception {
+    IterationCount iterationCount = IterationCount
+        .builder()
+        .value(1000)
+        .build();
+    initialize(iterationCount, IterationCount.class);
+  }
 
-    @Override
-    public String name() {
-        return "IterationCount";
-    }
+  @Override
+  public String name() {
+    return "IterationCount";
+  }
 
 }

@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.QueryOpResponse
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("QueryOpResponsePayload Xml Serialization Tests")
-class QueryOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<QueryOpResponsePayload> {
+class QueryOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<QueryOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<QueryOpResponsePayload> type() {
-        return QueryOpResponsePayload.class;
-    }
+  @Override
+  public Class<QueryOpResponsePayload> type() {
+    return QueryOpResponsePayload.class;
+  }
 
-    @Override
-    public QueryOpResponsePayload createDefault() {
-        return QueryOpResponsePayload.builder()
-                .operation(Operation.of(Operation.Standard.QUERY))
-                .build();
-    }
+  @Override
+  public QueryOpResponsePayload createDefault() {
+    return QueryOpResponsePayload
+        .builder()
+        .operation(Operation.of(Operation.Standard.QUERY))
+        .build();
+  }
 
-    @Override
-    public QueryOpResponsePayload createVariant() {
-        return QueryOpResponsePayload.builder()
-                .operation(Operation.of(Operation.Standard.CREATE))
-                .build();
-    }
+  @Override
+  public QueryOpResponsePayload createVariant() {
+    return QueryOpResponsePayload
+        .builder()
+        .operation(Operation.of(Operation.Standard.CREATE))
+        .build();
+  }
 }

@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
 
 public class KeyFormatTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyFormatType> {
 
-    public KeyFormatTypeBenchmarkSubject() throws Exception {
-        KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
-        initialize(keyFormatType, KeyFormatType.class);
-    }
+  public KeyFormatTypeBenchmarkSubject() throws Exception {
+    KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
+    initialize(keyFormatType, KeyFormatType.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyFormatType";
-    }
+  @Override
+  public String name() {
+    return "KeyFormatType";
+  }
 
 }

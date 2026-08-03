@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
 
 public class HashingAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<HashingAlgorithm> {
 
-    public HashingAlgorithmBenchmarkSubject() throws Exception {
-        HashingAlgorithm hashingAlgorithm = HashingAlgorithm.Standard.MD2.inst();
-        initialize(hashingAlgorithm, HashingAlgorithm.class);
-    }
+  public HashingAlgorithmBenchmarkSubject() throws Exception {
+    HashingAlgorithm hashingAlgorithm = HashingAlgorithm.Standard.MD2.inst();
+    initialize(hashingAlgorithm, HashingAlgorithm.class);
+  }
 
-    @Override
-    public String name() {
-        return "HashingAlgorithm";
-    }
+  @Override
+  public String name() {
+    return "HashingAlgorithm";
+  }
 
 }

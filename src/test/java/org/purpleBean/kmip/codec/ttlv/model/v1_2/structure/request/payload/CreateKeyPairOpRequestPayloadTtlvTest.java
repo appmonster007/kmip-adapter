@@ -9,32 +9,45 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateKeyPairOpR
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateKeyPairOpRequestPayload Ttlv Serialization Tests")
-class CreateKeyPairOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<CreateKeyPairOpRequestPayload> {
+class CreateKeyPairOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<CreateKeyPairOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CreateKeyPairOpRequestPayload> type() {
-        return CreateKeyPairOpRequestPayload.class;
-    }
+  @Override
+  public Class<CreateKeyPairOpRequestPayload> type() {
+    return CreateKeyPairOpRequestPayload.class;
+  }
 
-    @Override
-    public CreateKeyPairOpRequestPayload createDefault() {
-        return CreateKeyPairOpRequestPayload.builder()
-                .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateKeyPairOpRequestPayload createDefault() {
+    return CreateKeyPairOpRequestPayload
+        .builder()
+        .commonTemplateAttribute(CommonTemplateAttribute
+            .builder()
+            .build())
+        .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute
+            .builder()
+            .build())
+        .publicKeyTemplateAttribute(PublicKeyTemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public CreateKeyPairOpRequestPayload createVariant() {
-        return CreateKeyPairOpRequestPayload.builder()
-                .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateKeyPairOpRequestPayload createVariant() {
+    return CreateKeyPairOpRequestPayload
+        .builder()
+        .commonTemplateAttribute(CommonTemplateAttribute
+            .builder()
+            .build())
+        .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 }

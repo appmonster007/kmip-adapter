@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.DrbgAlgorithm;
 
 public class DrbgAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<DrbgAlgorithm> {
 
-    public DrbgAlgorithmBenchmarkSubject() throws Exception {
-        DrbgAlgorithm drbgAlgorithm = DrbgAlgorithm.Standard.UNSPECIFIED.inst();
-        initialize(drbgAlgorithm, DrbgAlgorithm.class);
-    }
+  public DrbgAlgorithmBenchmarkSubject() throws Exception {
+    DrbgAlgorithm drbgAlgorithm = DrbgAlgorithm.Standard.UNSPECIFIED.inst();
+    initialize(drbgAlgorithm, DrbgAlgorithm.class);
+  }
 
-    @Override
-    public String name() {
-        return "DrbgAlgorithm";
-    }
+  @Override
+  public String name() {
+    return "DrbgAlgorithm";
+  }
 
 }

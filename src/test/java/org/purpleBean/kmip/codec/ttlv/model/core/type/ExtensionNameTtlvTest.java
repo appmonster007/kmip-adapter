@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ExtensionName TTLV Serialization Tests")
 class ExtensionNameTtlvTest extends AbstractTtlvSerializationTestSuite<ExtensionName> {
 
-    @Override
-    public Class<ExtensionName> type() {
-        return ExtensionName.class;
-    }
+  @Override
+  public Class<ExtensionName> type() {
+    return ExtensionName.class;
+  }
 
-    @Override
-    public ExtensionName createDefault() {
-        return ExtensionName.builder().value("test-extension").build();
-    }
+  @Override
+  public ExtensionName createDefault() {
+    return ExtensionName
+        .builder()
+        .value("test-extension")
+        .build();
+  }
 
-    @Override
-    public ExtensionName createVariant() {
-        return ExtensionName.builder().value("another-extension").build();
-    }
+  @Override
+  public ExtensionName createVariant() {
+    return ExtensionName
+        .builder()
+        .value("another-extension")
+        .build();
+  }
 }

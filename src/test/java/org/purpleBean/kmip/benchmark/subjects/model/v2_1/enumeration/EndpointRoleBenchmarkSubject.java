@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v2_1.enumeration.EndpointRole;
 
 public class EndpointRoleBenchmarkSubject extends KmipBenchmarkSubject<EndpointRole> {
 
-    public EndpointRoleBenchmarkSubject() throws Exception {
-        EndpointRole endpointRole = EndpointRole.Standard.CLIENT.inst();
-        initialize(endpointRole, EndpointRole.class);
-    }
+  public EndpointRoleBenchmarkSubject() throws Exception {
+    EndpointRole endpointRole = EndpointRole.Standard.CLIENT.inst();
+    initialize(endpointRole, EndpointRole.class);
+  }
 
-    @Override
-    public String name() {
-        return "EndpointRole";
-    }
+  @Override
+  public String name() {
+    return "EndpointRole";
+  }
 
 }

@@ -12,35 +12,39 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Credential Json Serialization Tests")
 class CredentialJsonTest extends AbstractJsonSerializationTestSuite<Credential> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<Credential> type() {
-        return Credential.class;
-    }
+  @Override
+  public Class<Credential> type() {
+    return Credential.class;
+  }
 
-    @Override
-    public Credential createDefault() {
-        return Credential.builder()
-                .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
-                .credentialValue(UsernameAndPassword.builder()
-                        .username(Username.of("test-user"))
-                        .password(Password.of("test-password"))
-                        .build())
-                .build();
-    }
+  @Override
+  public Credential createDefault() {
+    return Credential
+        .builder()
+        .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .credentialValue(UsernameAndPassword
+            .builder()
+            .username(Username.of("test-user"))
+            .password(Password.of("test-password"))
+            .build())
+        .build();
+  }
 
-    @Override
-    public Credential createVariant() {
-        return Credential.builder()
-                .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
-                .credentialValue(UsernameAndPassword.builder()
-                        .username(Username.of("test-user-variant"))
-                        .password(Password.of("test-password-variant"))
-                        .build())
-                .build();
-    }
+  @Override
+  public Credential createVariant() {
+    return Credential
+        .builder()
+        .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .credentialValue(UsernameAndPassword
+            .builder()
+            .username(Username.of("test-user-variant"))
+            .password(Password.of("test-password-variant"))
+            .build())
+        .build();
+  }
 }

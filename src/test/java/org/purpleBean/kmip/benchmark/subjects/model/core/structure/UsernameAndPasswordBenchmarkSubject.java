@@ -9,20 +9,21 @@ import org.purpleBean.kmip.model.core.type.Username;
 
 public class UsernameAndPasswordBenchmarkSubject extends KmipBenchmarkSubject<UsernameAndPassword> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public UsernameAndPasswordBenchmarkSubject() throws Exception {
-        UsernameAndPassword subject = UsernameAndPassword.builder()
-                .username(Username.of("test-user"))
-                .password(Password.of("test-password"))
-                .build();
-        initialize(subject, UsernameAndPassword.class);
-    }
+  public UsernameAndPasswordBenchmarkSubject() throws Exception {
+    UsernameAndPassword subject = UsernameAndPassword
+        .builder()
+        .username(Username.of("test-user"))
+        .password(Password.of("test-password"))
+        .build();
+    initialize(subject, UsernameAndPassword.class);
+  }
 
-    @Override
-    public String name() {
-        return "UsernameAndPassword";
-    }
+  @Override
+  public String name() {
+    return "UsernameAndPassword";
+  }
 
 }

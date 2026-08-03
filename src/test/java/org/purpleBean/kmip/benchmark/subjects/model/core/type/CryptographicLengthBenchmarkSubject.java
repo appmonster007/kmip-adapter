@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.type.CryptographicLength;
 
 public class CryptographicLengthBenchmarkSubject extends KmipBenchmarkSubject<CryptographicLength> {
 
-    public CryptographicLengthBenchmarkSubject() throws Exception {
-        CryptographicLength cryptographicLength = CryptographicLength.of(256);
-        initialize(cryptographicLength, CryptographicLength.class);
-    }
+  public CryptographicLengthBenchmarkSubject() throws Exception {
+    CryptographicLength cryptographicLength = CryptographicLength.of(256);
+    initialize(cryptographicLength, CryptographicLength.class);
+  }
 
-    @Override
-    public String name() {
-        return "CryptographicLength";
-    }
+  @Override
+  public String name() {
+    return "CryptographicLength";
+  }
 
 }

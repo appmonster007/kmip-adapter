@@ -7,22 +7,23 @@ import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.TransparentEcdsaPublicKey;
 import org.purpleBean.kmip.model.core.type.QString;
 
-public class TransparentEcdsaPublicKeyBenchmarkSubject extends KmipBenchmarkSubject<TransparentEcdsaPublicKey> {
+public class TransparentEcdsaPublicKeyBenchmarkSubject
+    extends KmipBenchmarkSubject<TransparentEcdsaPublicKey> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public TransparentEcdsaPublicKeyBenchmarkSubject() throws Exception {
-        TransparentEcdsaPublicKey transparentEcdsaPublicKey = TransparentEcdsaPublicKey.of(
-                RecommendedCurve.Standard.P_192.inst(),
-                QString.of("test".getBytes())
-        );
-        initialize(transparentEcdsaPublicKey, TransparentEcdsaPublicKey.class);
-    }
+  public TransparentEcdsaPublicKeyBenchmarkSubject() throws Exception {
+    TransparentEcdsaPublicKey transparentEcdsaPublicKey = TransparentEcdsaPublicKey.of(
+        RecommendedCurve.Standard.P_192.inst(),
+        QString.of("test".getBytes())
+    );
+    initialize(transparentEcdsaPublicKey, TransparentEcdsaPublicKey.class);
+  }
 
-    @Override
-    public String name() {
-        return "TransparentEcdsaPublicKey";
-    }
+  @Override
+  public String name() {
+    return "TransparentEcdsaPublicKey";
+  }
 
 }

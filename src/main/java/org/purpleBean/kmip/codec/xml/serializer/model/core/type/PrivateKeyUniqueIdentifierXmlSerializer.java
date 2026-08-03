@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 
-public class PrivateKeyUniqueIdentifierXmlSerializer extends AbstractKmipDataTypeXmlSerializer<PrivateKeyUniqueIdentifier> {
+public class PrivateKeyUniqueIdentifierXmlSerializer
+    extends AbstractKmipDataTypeXmlSerializer<PrivateKeyUniqueIdentifier> {
 }

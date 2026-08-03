@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.ApplicationData;
 
-import java.io.IOException;
+public class ApplicationDataXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<ApplicationData, ApplicationData.ApplicationDataBuilder> {
 
-public class ApplicationDataXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<ApplicationData, ApplicationData.ApplicationDataBuilder> {
+  public ApplicationDataXmlDeserializer() {
+    super(ApplicationData.kmipTag, ApplicationData.encodingType);
+  }
 
-    public ApplicationDataXmlDeserializer() {
-        super(ApplicationData.kmipTag, ApplicationData.encodingType);
-    }
+  @Override
+  protected ApplicationData.ApplicationDataBuilder createBuilder() {
+    return ApplicationData.builder();
+  }
 
-    @Override
-    protected ApplicationData.ApplicationDataBuilder createBuilder() {
-        return ApplicationData.builder();
-    }
+  @Override
+  protected void setValue(ApplicationData.ApplicationDataBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, String.class));
+  }
 
-    @Override
-    protected void setValue(ApplicationData.ApplicationDataBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, String.class));
-    }
-
-    @Override
-    protected ApplicationData build(ApplicationData.ApplicationDataBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected ApplicationData build(ApplicationData.ApplicationDataBuilder builder) {
+    return builder.build();
+  }
 }

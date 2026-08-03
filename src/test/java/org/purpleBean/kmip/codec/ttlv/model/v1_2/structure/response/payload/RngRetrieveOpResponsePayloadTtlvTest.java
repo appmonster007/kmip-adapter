@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RngRetrieveOpRe
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RngRetrieveOpResponsePayload Ttlv Serialization Tests")
-class RngRetrieveOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<RngRetrieveOpResponsePayload> {
+class RngRetrieveOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<RngRetrieveOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RngRetrieveOpResponsePayload> type() {
-        return RngRetrieveOpResponsePayload.class;
-    }
+  @Override
+  public Class<RngRetrieveOpResponsePayload> type() {
+    return RngRetrieveOpResponsePayload.class;
+  }
 
-    @Override
-    public RngRetrieveOpResponsePayload createDefault() {
-        return RngRetrieveOpResponsePayload.builder()
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public RngRetrieveOpResponsePayload createDefault() {
+    return RngRetrieveOpResponsePayload
+        .builder()
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public RngRetrieveOpResponsePayload createVariant() {
-        return RngRetrieveOpResponsePayload.builder()
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public RngRetrieveOpResponsePayload createVariant() {
+    return RngRetrieveOpResponsePayload
+        .builder()
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

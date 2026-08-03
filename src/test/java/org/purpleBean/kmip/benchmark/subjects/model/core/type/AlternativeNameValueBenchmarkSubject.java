@@ -5,19 +5,20 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.AlternativeNameValue;
 
-public class AlternativeNameValueBenchmarkSubject extends KmipBenchmarkSubject<AlternativeNameValue> {
+public class AlternativeNameValueBenchmarkSubject
+    extends KmipBenchmarkSubject<AlternativeNameValue> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public AlternativeNameValueBenchmarkSubject() throws Exception {
-        AlternativeNameValue alternativeNameValue = AlternativeNameValue.of("some value");
-        initialize(alternativeNameValue, AlternativeNameValue.class);
-    }
+  public AlternativeNameValueBenchmarkSubject() throws Exception {
+    AlternativeNameValue alternativeNameValue = AlternativeNameValue.of("some value");
+    initialize(alternativeNameValue, AlternativeNameValue.class);
+  }
 
-    @Override
-    public String name() {
-        return "AlternativeNameValue";
-    }
+  @Override
+  public String name() {
+    return "AlternativeNameValue";
+  }
 
 }

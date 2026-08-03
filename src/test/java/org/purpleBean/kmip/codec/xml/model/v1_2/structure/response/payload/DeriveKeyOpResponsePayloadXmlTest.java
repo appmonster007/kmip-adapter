@@ -8,30 +8,41 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.DeriveKeyOpResp
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DeriveKeyOpResponsePayload Xml Serialization Tests")
-class DeriveKeyOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<DeriveKeyOpResponsePayload> {
+class DeriveKeyOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<DeriveKeyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<DeriveKeyOpResponsePayload> type() {
-        return DeriveKeyOpResponsePayload.class;
-    }
+  @Override
+  public Class<DeriveKeyOpResponsePayload> type() {
+    return DeriveKeyOpResponsePayload.class;
+  }
 
-    @Override
-    public DeriveKeyOpResponsePayload createDefault() {
-        return DeriveKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public DeriveKeyOpResponsePayload createDefault() {
+    return DeriveKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public DeriveKeyOpResponsePayload createVariant() {
-        return DeriveKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
-                .build();
-    }
+  @Override
+  public DeriveKeyOpResponsePayload createVariant() {
+    return DeriveKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid2")
+            .build())
+        .build();
+  }
 }

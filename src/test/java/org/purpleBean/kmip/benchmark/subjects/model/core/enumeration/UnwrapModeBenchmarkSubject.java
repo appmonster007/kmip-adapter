@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.UnwrapMode;
 
 public class UnwrapModeBenchmarkSubject extends KmipBenchmarkSubject<UnwrapMode> {
 
-    public UnwrapModeBenchmarkSubject() throws Exception {
-        UnwrapMode unwrapMode = UnwrapMode.Standard.UNSPECIFIED.inst();
-        initialize(unwrapMode, UnwrapMode.class);
-    }
+  public UnwrapModeBenchmarkSubject() throws Exception {
+    UnwrapMode unwrapMode = UnwrapMode.Standard.UNSPECIFIED.inst();
+    initialize(unwrapMode, UnwrapMode.class);
+  }
 
-    @Override
-    public String name() {
-        return "UnwrapMode";
-    }
+  @Override
+  public String name() {
+    return "UnwrapMode";
+  }
 
 }

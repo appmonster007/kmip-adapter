@@ -8,18 +8,19 @@ import org.purpleBean.kmip.model.core.type.NameValue;
 
 public class ServerInformationBenchmarkSubject extends KmipBenchmarkSubject<ServerInformation> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ServerInformationBenchmarkSubject() throws Exception {
-        ServerInformation subject = ServerInformation.builder()
-                .value(NameValue.of("Test Server"))
-                .build();
-        initialize(subject, ServerInformation.class);
-    }
+  public ServerInformationBenchmarkSubject() throws Exception {
+    ServerInformation subject = ServerInformation
+        .builder()
+        .value(NameValue.of("Test Server"))
+        .build();
+    initialize(subject, ServerInformation.class);
+  }
 
-    @Override
-    public String name() {
-        return "ServerInformation";
-    }
+  @Override
+  public String name() {
+    return "ServerInformation";
+  }
 }

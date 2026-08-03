@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.response.
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.MacVerifyOpResponsePayload;
 
-public class MacVerifyOpResponsePayloadJsonSerializer extends AbstractKmipDataTypeJsonSerializer<MacVerifyOpResponsePayload> {
+public class MacVerifyOpResponsePayloadJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<MacVerifyOpResponsePayload> {
 }

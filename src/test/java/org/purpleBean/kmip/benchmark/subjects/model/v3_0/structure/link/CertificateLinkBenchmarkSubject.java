@@ -1,32 +1,23 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v3_0.structure.link;
 
 import lombok.Getter;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v3_0.structure.link.CertificateLink;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
+import org.purpleBean.kmip.model.v3_0.structure.link.CertificateLink;
 
 public class CertificateLinkBenchmarkSubject extends KmipBenchmarkSubject<CertificateLink> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V3_0;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V3_0;
 
-    public CertificateLinkBenchmarkSubject() throws Exception {
-        CertificateLink subject = CertificateLink.of(UniqueIdentifier.of("test-id"));
-        initialize(subject, CertificateLink.class);
-    }
+  public CertificateLinkBenchmarkSubject() throws Exception {
+    CertificateLink subject = CertificateLink.of(UniqueIdentifier.of("test-id"));
+    initialize(subject, CertificateLink.class);
+  }
 
-    @Override
-    public String name() {
-        return "CertificateLink";
-    }
+  @Override
+  public String name() {
+    return "CertificateLink";
+  }
 }

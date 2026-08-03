@@ -9,9 +9,11 @@ import java.io.IOException;
 
 public class IntegerJsonDeserializer extends JsonDeserializer<Integer> {
 
-    @Override
-    public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
-        return node.intValue();
-    }
+  @Override
+  public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    JsonNode node = p
+        .getCodec()
+        .readTree(p);
+    return node.intValue();
+  }
 }

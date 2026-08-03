@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("QueryFunction XML Serialization")
 class QueryFunctionXmlTest extends AbstractXmlSerializationTestSuite<QueryFunction> {
-    @Override
-    public Class<QueryFunction> type() {
-        return QueryFunction.class;
-    }
+  @Override
+  public Class<QueryFunction> type() {
+    return QueryFunction.class;
+  }
 
-    @Override
-    public QueryFunction createDefault() {
-        return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
-    }
+  @Override
+  public QueryFunction createDefault() {
+    return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
+  }
 
-    @Override
-    public QueryFunction createVariant() {
-        return QueryFunction.Standard.QUERY_OPERATIONS.inst();
-    }
+  @Override
+  public QueryFunction createVariant() {
+    return QueryFunction.Standard.QUERY_OPERATIONS.inst();
+  }
 }

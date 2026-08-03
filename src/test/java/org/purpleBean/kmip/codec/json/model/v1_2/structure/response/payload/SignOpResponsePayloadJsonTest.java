@@ -8,31 +8,34 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponseP
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("SignOpResponsePayload Json Serialization Tests")
-class SignOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<SignOpResponsePayload> {
+class SignOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<SignOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<SignOpResponsePayload> type() {
-        return SignOpResponsePayload.class;
-    }
+  @Override
+  public Class<SignOpResponsePayload> type() {
+    return SignOpResponsePayload.class;
+  }
 
-    @Override
-    public SignOpResponsePayload createDefault() {
-        return SignOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .signatureData(SignatureData.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public SignOpResponsePayload createDefault() {
+    return SignOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .signatureData(SignatureData.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public SignOpResponsePayload createVariant() {
-        return SignOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .signatureData(SignatureData.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public SignOpResponsePayload createVariant() {
+    return SignOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .signatureData(SignatureData.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

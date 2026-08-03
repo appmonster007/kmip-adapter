@@ -1,30 +1,31 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.ExtensionTag;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class ExtensionTagTtlvDeserializer
+    extends AbstractKmipDataTypeTtlvDeserializer<ExtensionTag, ExtensionTag.ExtensionTagBuilder> {
 
-public class ExtensionTagTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ExtensionTag, ExtensionTag.ExtensionTagBuilder> {
+  public ExtensionTagTtlvDeserializer() {
+    super(ExtensionTag.kmipTag, ExtensionTag.encodingType);
+  }
 
-    public ExtensionTagTtlvDeserializer() {
-        super(ExtensionTag.kmipTag, ExtensionTag.encodingType);
-    }
+  @Override
+  protected ExtensionTag.ExtensionTagBuilder createBuilder() {
+    return ExtensionTag.builder();
+  }
 
-    @Override
-    protected ExtensionTag.ExtensionTagBuilder createBuilder() {
-        return ExtensionTag.builder();
-    }
+  @Override
+  protected void setValue(ExtensionTag.ExtensionTagBuilder builder, byte[] tag, byte type,
+                          ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    builder.value(mapper.readValue(byteBuffer, Integer.class));
+  }
 
-    @Override
-    protected void setValue(ExtensionTag.ExtensionTagBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
-        builder.value(mapper.readValue(byteBuffer, Integer.class));
-    }
-
-    @Override
-    protected ExtensionTag build(ExtensionTag.ExtensionTagBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected ExtensionTag build(ExtensionTag.ExtensionTagBuilder builder) {
+    return builder.build();
+  }
 }

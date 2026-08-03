@@ -1,32 +1,24 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v3_0.type;
 
 import lombok.Getter;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v3_0.type.OtpDigest;
 import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purpleBean.kmip.model.v3_0.type.OtpDigest;
 
 public class OtpDigestBenchmarkSubject extends KmipBenchmarkSubject<OtpDigest> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V3_0; // TODO: Adjust if needed
+  @Getter
+  private final KmipSpec spec = KmipSpec.V3_0; // TODO: Adjust if needed
 
-    public OtpDigestBenchmarkSubject() throws Exception {
-        OtpDigest subject = OtpDigest.of(CryptographicAlgorithm.Standard.AES);  // TODO: Create a default instance
-        initialize(subject, OtpDigest.class);
-    }
+  public OtpDigestBenchmarkSubject() throws Exception {
+    OtpDigest subject =
+        OtpDigest.of(CryptographicAlgorithm.Standard.AES);  // TODO: Create a default instance
+    initialize(subject, OtpDigest.class);
+  }
 
-    @Override
-    public String name() {
-        return "OtpDigest";
-    }
+  @Override
+  public String name() {
+    return "OtpDigest";
+  }
 }

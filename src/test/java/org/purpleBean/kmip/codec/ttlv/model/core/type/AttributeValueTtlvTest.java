@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("AttributeValue Ttlv Serialization Tests")
 class AttributeValueTtlvTest extends AbstractTtlvSerializationTestSuite<AttributeValue> {
 
-    @Override
-    public Class<AttributeValue> type() {
-        return AttributeValue.class;
-    }
+  @Override
+  public Class<AttributeValue> type() {
+    return AttributeValue.class;
+  }
 
-    @Override
-    public AttributeValue createDefault() {
-        return AttributeValue.ofTextString("default-string");
-    }
+  @Override
+  public AttributeValue createDefault() {
+    return AttributeValue.ofTextString("default-string");
+  }
 
-    @Override
-    public AttributeValue createVariant() {
-        return AttributeValue.ofInteger(123);
-    }
+  @Override
+  public AttributeValue createVariant() {
+    return AttributeValue.ofInteger(123);
+  }
 }

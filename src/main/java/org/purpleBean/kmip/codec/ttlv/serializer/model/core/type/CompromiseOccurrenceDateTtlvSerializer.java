@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.type;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.type.CompromiseOccurrenceDate;
 
-public class CompromiseOccurrenceDateTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CompromiseOccurrenceDate> {
+public class CompromiseOccurrenceDateTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<CompromiseOccurrenceDate> {
 }

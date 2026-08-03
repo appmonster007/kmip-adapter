@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("OtpAlgorithm TTLV Serialization")
 class OtpAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<OtpAlgorithm> {
-    @Override
-    public Class<OtpAlgorithm> type() {
-        return OtpAlgorithm.class;
-    }
+  @Override
+  public Class<OtpAlgorithm> type() {
+    return OtpAlgorithm.class;
+  }
 
-    @Override
-    public OtpAlgorithm createDefault() {
-        return OtpAlgorithm.Standard.HOTP.inst();
-    }
+  @Override
+  public OtpAlgorithm createDefault() {
+    return OtpAlgorithm.Standard.HOTP.inst();
+  }
 
-    @Override
-    public OtpAlgorithm createVariant() {
-        return OtpAlgorithm.Standard.TOTP.inst();
-    }
+  @Override
+  public OtpAlgorithm createVariant() {
+    return OtpAlgorithm.Standard.TOTP.inst();
+  }
 }

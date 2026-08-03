@@ -1,113 +1,134 @@
 package org.purpleBean.kmip.model.v1_2.structure.response.payload;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.ObjectType;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.Singular;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.ObjectType;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.core.structure.TemplateAttribute;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 @Data
 @Builder(toBuilder = true)
 public class CreateSplitKeyOpResponsePayload implements ResponsePayloadStructure {
 
-    private static final Operation.Value operation = Operation.Standard.CREATE_SPLIT_KEY;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
+  private static final Operation.Value operation = Operation.Standard.CREATE_SPLIT_KEY;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0,
+          KmipSpec.V2_1, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CreateSplitKeyOpResponsePayload.class);
-            ResponsePayloadStructure.register(spec, operation, CreateSplitKeyOpResponsePayload.class, CreateSplitKeyOpResponsePayload::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType,
+          CreateSplitKeyOpResponsePayload.class);
+      ResponsePayloadStructure.register(spec, operation, CreateSplitKeyOpResponsePayload.class,
+          CreateSplitKeyOpResponsePayload::of);
     }
+  }
 
-    // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
-    // @NonNull
-    private final ObjectType objectType;
+  // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
+  // @NonNull
+  private final ObjectType objectType;
 
-    @NonNull
-    @Singular
-    private final List<UniqueIdentifier> uniqueIdentifiers;
+  @NonNull
+  @Singular
+  private final List<UniqueIdentifier> uniqueIdentifiers;
 
-    private final TemplateAttribute templateAttribute;
+  private final TemplateAttribute templateAttribute;
 
-    @Builder
-    private CreateSplitKeyOpResponsePayload(
-            // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
-            // @NonNull
-            ObjectType objectType,
-            @NonNull List<UniqueIdentifier> uniqueIdentifiers,
-            TemplateAttribute templateAttribute
-    ) {
-        this.objectType = objectType;
-        this.uniqueIdentifiers = uniqueIdentifiers;
-        this.templateAttribute = templateAttribute;
-        validate();
+  @Builder
+  private CreateSplitKeyOpResponsePayload(
+      // Null check disabled due to 2.3.49 TC-SJ-4-12 - Register and Split / Join with XOR
+      // @NonNull
+      ObjectType objectType,
+      @NonNull List<UniqueIdentifier> uniqueIdentifiers,
+      TemplateAttribute templateAttribute
+  ) {
+    this.objectType = objectType;
+    this.uniqueIdentifiers = uniqueIdentifiers;
+    this.templateAttribute = templateAttribute;
+    validate();
+  }
+
+  public static CreateSplitKeyOpResponsePayload of(List<KmipDataType> values) {
+    var builder = CreateSplitKeyOpResponsePayload.builder();
+    Map<KmipTag, List<KmipDataType>> map = values
+        .stream()
+        .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    if (map.containsKey(ObjectType.kmipTag)) {
+      builder.objectType((ObjectType) map
+          .get(ObjectType.kmipTag)
+          .getFirst());
     }
-
-    public static CreateSplitKeyOpResponsePayload of(List<KmipDataType> values) {
-        var builder = CreateSplitKeyOpResponsePayload.builder();
-        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        if (map.containsKey(ObjectType.kmipTag)) {
-            builder.objectType((ObjectType) map.get(ObjectType.kmipTag).getFirst());
-        }
-        if (map.containsKey(UniqueIdentifier.kmipTag)) {
-            map.get(UniqueIdentifier.kmipTag).forEach(item -> builder.uniqueIdentifier((UniqueIdentifier) item));
-        }
-        if (map.containsKey(TemplateAttribute.kmipTag)) {
-            builder.templateAttribute((TemplateAttribute) map.get(TemplateAttribute.kmipTag).getFirst());
-        }
-        return builder.build();
+    if (map.containsKey(UniqueIdentifier.kmipTag)) {
+      map
+          .get(UniqueIdentifier.kmipTag)
+          .forEach(item -> builder.uniqueIdentifier((UniqueIdentifier) item));
     }
-
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
+    if (map.containsKey(TemplateAttribute.kmipTag)) {
+      builder.templateAttribute((TemplateAttribute) map
+          .get(TemplateAttribute.kmipTag)
+          .getFirst());
     }
+    return builder.build();
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipDataType[] getValue() {
-        return Stream.of(
-                        objectType,
-                        uniqueIdentifiers,
-                        templateAttribute)
-                .filter(Objects::nonNull)
-                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-                .map(KmipDataType.class::cast)
-                .toArray(KmipDataType[]::new);
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && Stream
+        .of(getValue())
+        .allMatch(KmipDataType::isSupported);
+  }
 
-    @Override
-    public Operation getCorrespondingOperation() {
-        return operation.inst();
-    }
+  @Override
+  public KmipDataType[] getValue() {
+    return Stream
+        .of(
+            objectType,
+            uniqueIdentifiers,
+            templateAttribute)
+        .filter(Objects::nonNull)
+        .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+        .map(KmipDataType.class::cast)
+        .toArray(KmipDataType[]::new);
+  }
+
+  @Override
+  public Operation getCorrespondingOperation() {
+    return operation.inst();
+  }
 }

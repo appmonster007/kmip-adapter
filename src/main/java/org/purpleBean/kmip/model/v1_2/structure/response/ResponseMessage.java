@@ -1,103 +1,125 @@
 package org.purpleBean.kmip.model.v1_2.structure.response;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
-import org.purpleBean.kmip.api.*;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.response.ResponseBatchItemStructure;
 import org.purpleBean.kmip.api.response.ResponseHeaderStructure;
 import org.purpleBean.kmip.api.response.ResponseMessageStructure;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 @Builder(toBuilder = true)
 public class ResponseMessage implements ResponseMessageStructure {
 
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
+  private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.V1_2);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ResponseMessage.class);
-            ResponseMessageStructure.register(spec, ResponseMessage.class, ResponseMessage::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, ResponseMessage.class);
+      ResponseMessageStructure.register(spec, ResponseMessage.class, ResponseMessage::of);
     }
+  }
 
-    @NonNull
-    private final ResponseHeaderStructure responseHeader;
+  @NonNull
+  private final ResponseHeaderStructure responseHeader;
 
-    @NonNull
-    @Singular
-    private final List<ResponseBatchItemStructure> responseBatchItems;
+  @NonNull
+  @Singular
+  private final List<ResponseBatchItemStructure> responseBatchItems;
 
-    @NonNull
-    @Singular
-    private final List<Exception> responseBatchItemErrors;
+  @NonNull
+  @Singular
+  private final List<Exception> responseBatchItemErrors;
 
-    @Builder
-    private ResponseMessage(
-            @NonNull ResponseHeaderStructure responseHeader,
-            List<ResponseBatchItemStructure> responseBatchItems,
-            List<Exception> responseBatchItemErrors
-    ) {
-        this.responseHeader = responseHeader;
-        this.responseBatchItems = (responseBatchItems == null) ? Collections.emptyList() : responseBatchItems;
-        this.responseBatchItemErrors = (responseBatchItemErrors == null) ? Collections.emptyList() : responseBatchItemErrors;
-        validate();
+  @Builder
+  private ResponseMessage(
+      @NonNull ResponseHeaderStructure responseHeader,
+      List<ResponseBatchItemStructure> responseBatchItems,
+      List<Exception> responseBatchItemErrors
+  ) {
+    this.responseHeader = responseHeader;
+    this.responseBatchItems =
+        (responseBatchItems == null) ? Collections.emptyList() : responseBatchItems;
+    this.responseBatchItemErrors =
+        (responseBatchItemErrors == null) ? Collections.emptyList() : responseBatchItemErrors;
+    validate();
+  }
+
+  public static ResponseMessage of(List<KmipDataType> values, List<Exception> errors) {
+    var builder = ResponseMessage.builder();
+    builder.responseBatchItemErrors(errors);
+    Map<KmipTag, List<KmipDataType>> map = values
+        .stream()
+        .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    if (map.containsKey(ResponseHeaderStructure.kmipTag)) {
+      builder.responseHeader((ResponseHeaderStructure) map
+          .get(ResponseHeaderStructure.kmipTag)
+          .getFirst());
     }
-
-    public static ResponseMessage of(List<KmipDataType> values, List<Exception> errors) {
-        var builder = ResponseMessage.builder();
-        builder.responseBatchItemErrors(errors);
-        Map<KmipTag, List<KmipDataType>> map = values.stream().collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-        if (map.containsKey(ResponseHeaderStructure.kmipTag)) {
-            builder.responseHeader((ResponseHeaderStructure) map.get(ResponseHeaderStructure.kmipTag).getFirst());
-        }
-        if (map.containsKey(ResponseBatchItemStructure.kmipTag)) {
-            builder.responseBatchItems(
-                    map.get(ResponseBatchItemStructure.kmipTag).stream()
-                            .map(ResponseBatchItemStructure.class::cast)
-                            .collect(Collectors.toList())
-            );
-        }
-        return builder.build();
+    if (map.containsKey(ResponseBatchItemStructure.kmipTag)) {
+      builder.responseBatchItems(
+          map
+              .get(ResponseBatchItemStructure.kmipTag)
+              .stream()
+              .map(ResponseBatchItemStructure.class::cast)
+              .collect(Collectors.toList())
+      );
     }
+    return builder.build();
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        if (responseBatchItems.size() != responseBatchItemErrors.size()) {
-            throw new IllegalArgumentException("responseBatchItems and responseBatchItemErrors must have the same size");
-        }
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+    if (responseBatchItems.size() != responseBatchItemErrors.size()) {
+      throw new IllegalArgumentException(
+          "responseBatchItems and responseBatchItemErrors must have the same size");
+    }
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && Stream
+        .of(getValue())
+        .allMatch(KmipDataType::isSupported);
+  }
 
-    @Override
-    public KmipDataType[] getValue() {
-        return Stream.concat(Stream.of(responseHeader), responseBatchItems.stream())
-                .filter(Objects::nonNull)
-                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-                .map(KmipDataType.class::cast)
-                .toArray(KmipDataType[]::new);
-    }
+  @Override
+  public KmipDataType[] getValue() {
+    return Stream
+        .concat(Stream.of(responseHeader), responseBatchItems.stream())
+        .filter(Objects::nonNull)
+        .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+        .map(KmipDataType.class::cast)
+        .toArray(KmipDataType[]::new);
+  }
 }

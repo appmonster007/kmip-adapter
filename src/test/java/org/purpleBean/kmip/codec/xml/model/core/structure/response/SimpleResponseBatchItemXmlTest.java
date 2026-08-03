@@ -10,35 +10,42 @@ import org.purpleBean.kmip.model.core.type.ResultMessage;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SimpleResponseBatchItem Xml Serialization Tests")
-class SimpleResponseBatchItemXmlTest extends AbstractXmlSerializationTestSuite<SimpleResponseBatchItem> {
+class SimpleResponseBatchItemXmlTest
+    extends AbstractXmlSerializationTestSuite<SimpleResponseBatchItem> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<SimpleResponseBatchItem> type() {
-        return SimpleResponseBatchItem.class;
-    }
+  @Override
+  public Class<SimpleResponseBatchItem> type() {
+    return SimpleResponseBatchItem.class;
+  }
 
-    @Override
-    public SimpleResponseBatchItem createDefault() {
-        return SimpleResponseBatchItem.builder()
-                .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
-                .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
-                .resultMessage(ResultMessage.of("Success"))
-                .responsePayloadStructure(SimpleResponsePayload.builder().build())
-                .build();
-    }
+  @Override
+  public SimpleResponseBatchItem createDefault() {
+    return SimpleResponseBatchItem
+        .builder()
+        .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+        .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
+        .resultMessage(ResultMessage.of("Success"))
+        .responsePayloadStructure(SimpleResponsePayload
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public SimpleResponseBatchItem createVariant() {
-        return SimpleResponseBatchItem.builder()
-                .resultStatus(ResultStatus.of(ResultStatus.Standard.OPERATION_FAILED))
-                .resultReason(ResultReason.of(ResultReason.Standard.PERMISSION_DENIED))
-                .resultMessage(ResultMessage.of("Failure"))
-                .responsePayloadStructure(SimpleResponsePayload.builder().build())
-                .build();
-    }
+  @Override
+  public SimpleResponseBatchItem createVariant() {
+    return SimpleResponseBatchItem
+        .builder()
+        .resultStatus(ResultStatus.of(ResultStatus.Standard.OPERATION_FAILED))
+        .resultReason(ResultReason.of(ResultReason.Standard.PERMISSION_DENIED))
+        .resultMessage(ResultMessage.of("Failure"))
+        .responsePayloadStructure(SimpleResponsePayload
+            .builder()
+            .build())
+        .build();
+  }
 }

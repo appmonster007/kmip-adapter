@@ -1,21 +1,20 @@
 package org.purpleBean.kmip.model.v3_0.type;
 
+import java.util.Objects;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipAttribute;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
-
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * KMIP Name datatype attribute.
@@ -23,123 +22,136 @@ import java.util.Set;
 @Data
 @Builder(toBuilder = true)
 public class Name implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = KmipTag.Standard.NAME.inst();
-    public static final EncodingType encodingType = EncodingType.TEXT_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0); // introduced in KMIP 3.0 — extend if present in later specs
+  public static final KmipTag kmipTag = KmipTag.Standard.NAME.inst();
+  public static final EncodingType encodingType = EncodingType.TEXT_STRING;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
+      // introduced in KMIP 3.0 — extend if present in later specs
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, Name.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, Name.class, Name::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, Name.class);
+      KmipAttribute.register(spec, kmipTag.getValue(), encodingType, Name.class, Name::of);
     }
+  }
 
-    @NonNull
-    private final String value;
+  @NonNull
+  private final String value;
 
-    @Builder
-    private Name(@NonNull String value) {
-        this.value = value;
-        validate();
+  @Builder
+  private Name(@NonNull String value) {
+    this.value = value;
+    validate();
+  }
+
+  public static Name of(@NonNull String value) {
+    return new Name(value);
+  }
+
+  public static Name of(@NonNull AttributeName attributeName,
+                        @NonNull AttributeValue attributeValue) {
+    if (attributeValue.getEncodingType() != encodingType ||
+        !(attributeValue.getValue() instanceof String value)) {
+      throw new IllegalArgumentException("Invalid attribute value");
     }
+    return new Name(value);
+  }
 
-    public static Name of(@NonNull String value) {
-        return new Name(value);
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+    // No validation needed for this structure
+  }
 
-    public static Name of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof String value)) {
-            throw new IllegalArgumentException("Invalid attribute value");
-        }
-        return new Name(value);
-    }
+  @Override
+  public AttributeValue getAttributeValue() {
+    return AttributeValue.ofTextString(value);
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        // No validation needed for this structure
-    }
+  @Override
+  public AttributeName getAttributeName() {
+    return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
+  }
 
-    @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.ofTextString(value);
-    }
+  @Override
+  public String getCanonicalName() {
+    return kmipTag.getDescription();
+  }
 
-    @Override
-    public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public String getCanonicalName() {
-        return kmipTag.getDescription();
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec);
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  @Override
+  public boolean isAlwaysPresent() {
+    return false;
+  }
 
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
-    }
+  @Override
+  public boolean isServerInitializable() {
+    return false;
+  }
 
-    @Override
-    public boolean isAlwaysPresent() {
-        return false;
-    }
+  @Override
+  public boolean isClientInitializable() {
+    return true;
+  }
 
-    @Override
-    public boolean isServerInitializable() {
-        return false;
-    }
+  @Override
+  public boolean isServerModifiable(@NonNull State state) {
+    return false;
+  }
 
-    @Override
-    public boolean isClientInitializable() {
-        return true;
-    }
+  @Override
+  public boolean isClientModifiable(@NonNull State state) {
+    return true;
+  }
 
-    @Override
-    public boolean isServerModifiable(@NonNull State state) {
-        return false;
-    }
+  @Override
+  public boolean isClientDeletable() {
+    return true;
+  }
 
-    @Override
-    public boolean isClientModifiable(@NonNull State state) {
-        return true;
-    }
+  @Override
+  public boolean isMultiInstanceAllowed() {
+    return true;
+  }
 
-    @Override
-    public boolean isClientDeletable() {
-        return true;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Name that = (Name) o;
+    // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0)
+    //  .atZoneSameInstant(ZoneOffset.UTC))
+    return Objects.equals(value, that.value);
+  }
 
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Name that = (Name) o;
-        // TODO: Adjust equals for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0).atZoneSameInstant(ZoneOffset.UTC))
-        return Objects.hash(value);
-    }
+  @Override
+  public int hashCode() {
+    // TODO: Adjust hashCode for specific data type if needed (e.g., OffsetDateTime.withNano(0)
+    //  .atZoneSameInstant(ZoneOffset.UTC))
+    return Objects.hash(value);
+  }
 }

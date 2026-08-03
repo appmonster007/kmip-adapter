@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.structure.response.payload;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -10,35 +12,41 @@ import org.purpleBean.kmip.model.v2_1.structure.response.payload.EncryptOpRespon
 import org.purpleBean.kmip.model.v2_1.type.AuthenticatedEncryptionTag;
 import org.purpleBean.kmip.model.v2_1.type.CorrelationValue;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class EncryptOpResponsePayloadTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<EncryptOpResponsePayload,
+        EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder> {
 
-public class EncryptOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<EncryptOpResponsePayload, EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder> {
+  public EncryptOpResponsePayloadTtlvDeserializer() {
+    super(EncryptOpResponsePayload.kmipTag, EncryptOpResponsePayload.encodingType);
+  }
 
-    public EncryptOpResponsePayloadTtlvDeserializer() {
-        super(EncryptOpResponsePayload.kmipTag, EncryptOpResponsePayload.encodingType);
+  @Override
+  protected EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder createBuilder() {
+    return EncryptOpResponsePayload.builder();
+  }
+
+  @Override
+  protected void setValue(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder,
+                          byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
+          builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+      case KmipTag.Standard.DATA -> builder.data(mapper.readValue(p, DataByteString.class));
+      case KmipTag.Standard.IV_COUNTER_NONCE ->
+          builder.ivCounterNonce(mapper.readValue(p, IVCounterNonce.class));
+      case KmipTag.Standard.CORRELATION_VALUE ->
+          builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
+      case KmipTag.Standard.AUTHENTICATED_ENCRYPTION_TAG ->
+          builder.authenticatedEncryptionTag(mapper.readValue(p, AuthenticatedEncryptionTag.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder createBuilder() {
-        return EncryptOpResponsePayload.builder();
-    }
-
-    @Override
-    protected void setValue(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
-            case KmipTag.Standard.DATA -> builder.data(mapper.readValue(p, DataByteString.class));
-            case KmipTag.Standard.IV_COUNTER_NONCE -> builder.ivCounterNonce(mapper.readValue(p, IVCounterNonce.class));
-            case KmipTag.Standard.CORRELATION_VALUE -> builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
-            case KmipTag.Standard.AUTHENTICATED_ENCRYPTION_TAG -> builder.authenticatedEncryptionTag(mapper.readValue(p, AuthenticatedEncryptionTag.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected EncryptOpResponsePayload build(EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected EncryptOpResponsePayload build(
+      EncryptOpResponsePayload.EncryptOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
 }

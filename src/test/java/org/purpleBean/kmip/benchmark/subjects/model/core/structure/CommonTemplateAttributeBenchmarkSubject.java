@@ -8,24 +8,27 @@ import org.purpleBean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
 
-public class CommonTemplateAttributeBenchmarkSubject extends KmipBenchmarkSubject<CommonTemplateAttribute> {
+public class CommonTemplateAttributeBenchmarkSubject
+    extends KmipBenchmarkSubject<CommonTemplateAttribute> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public CommonTemplateAttributeBenchmarkSubject() throws Exception {
-        CommonTemplateAttribute subject = CommonTemplateAttribute.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-        initialize(subject, CommonTemplateAttribute.class);
-    }
+  public CommonTemplateAttributeBenchmarkSubject() throws Exception {
+    CommonTemplateAttribute subject = CommonTemplateAttribute
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+    initialize(subject, CommonTemplateAttribute.class);
+  }
 
-    @Override
-    public String name() {
-        return "CommonTemplateAttribute";
-    }
+  @Override
+  public String name() {
+    return "CommonTemplateAttribute";
+  }
 
 }

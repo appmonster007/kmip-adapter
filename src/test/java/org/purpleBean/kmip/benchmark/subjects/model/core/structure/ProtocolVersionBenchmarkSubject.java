@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 
 public class ProtocolVersionBenchmarkSubject extends KmipBenchmarkSubject<ProtocolVersion> {
 
-    public ProtocolVersionBenchmarkSubject() throws Exception {
-        ProtocolVersion protocolVersion = ProtocolVersion.of(1, 0);
-        initialize(protocolVersion, ProtocolVersion.class);
-    }
+  public ProtocolVersionBenchmarkSubject() throws Exception {
+    ProtocolVersion protocolVersion = ProtocolVersion.of(1, 0);
+    initialize(protocolVersion, ProtocolVersion.class);
+  }
 
-    @Override
-    public String name() {
-        return "ProtocolVersion";
-    }
+  @Override
+  public String name() {
+    return "ProtocolVersion";
+  }
 
 }

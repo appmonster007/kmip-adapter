@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
 
 public class UniqueBatchItemIDBenchmarkSubject extends KmipBenchmarkSubject<UniqueBatchItemID> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public UniqueBatchItemIDBenchmarkSubject() throws Exception {
-        UniqueBatchItemID uniqueBatchItemID = UniqueBatchItemID.of(new byte[]{0x01, 0x02, 0x03});
-        initialize(uniqueBatchItemID, UniqueBatchItemID.class);
-    }
+  public UniqueBatchItemIDBenchmarkSubject() throws Exception {
+    UniqueBatchItemID uniqueBatchItemID = UniqueBatchItemID.of(new byte[] {0x01, 0x02, 0x03});
+    initialize(uniqueBatchItemID, UniqueBatchItemID.class);
+  }
 
-    @Override
-    public String name() {
-        return "UniqueBatchItemID";
-    }
+  @Override
+  public String name() {
+    return "UniqueBatchItemID";
+  }
 
 }

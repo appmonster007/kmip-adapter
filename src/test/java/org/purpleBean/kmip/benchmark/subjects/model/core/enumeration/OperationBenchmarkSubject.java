@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 public class OperationBenchmarkSubject extends KmipBenchmarkSubject<Operation> {
 
-    public OperationBenchmarkSubject() throws Exception {
-        Operation operation = Operation.Standard.CREATE.inst();
-        initialize(operation, Operation.class);
-    }
+  public OperationBenchmarkSubject() throws Exception {
+    Operation operation = Operation.Standard.CREATE.inst();
+    initialize(operation, Operation.class);
+  }
 
-    @Override
-    public String name() {
-        return "Operation";
-    }
+  @Override
+  public String name() {
+    return "Operation";
+  }
 
 }

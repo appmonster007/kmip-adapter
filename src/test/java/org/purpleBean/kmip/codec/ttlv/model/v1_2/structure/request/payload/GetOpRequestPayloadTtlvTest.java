@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("GetOpRequestPayload Ttlv Serialization Tests")
 class GetOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<GetOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<GetOpRequestPayload> type() {
-        return GetOpRequestPayload.class;
-    }
+  @Override
+  public Class<GetOpRequestPayload> type() {
+    return GetOpRequestPayload.class;
+  }
 
-    @Override
-    public GetOpRequestPayload createDefault() {
-        return GetOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
-                .build();
-    }
+  @Override
+  public GetOpRequestPayload createDefault() {
+    return GetOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+        .build();
+  }
 
-    @Override
-    public GetOpRequestPayload createVariant() {
-        return GetOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("test-uid-variant"))
-                .build();
-    }
+  @Override
+  public GetOpRequestPayload createVariant() {
+    return GetOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("test-uid-variant"))
+        .build();
+  }
 }

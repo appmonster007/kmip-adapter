@@ -8,25 +8,27 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("PutOpResponsePayload Xml Serialization Tests")
 class PutOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<PutOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<PutOpResponsePayload> type() {
-        return PutOpResponsePayload.class;
-    }
+  @Override
+  public Class<PutOpResponsePayload> type() {
+    return PutOpResponsePayload.class;
+  }
 
-    @Override
-    public PutOpResponsePayload createDefault() {
-        return PutOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public PutOpResponsePayload createDefault() {
+    return PutOpResponsePayload
+        .builder()
+        .build();
+  }
 
-    @Override
-    public PutOpResponsePayload createVariant() {
-        return PutOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public PutOpResponsePayload createVariant() {
+    return PutOpResponsePayload
+        .builder()
+        .build();
+  }
 }

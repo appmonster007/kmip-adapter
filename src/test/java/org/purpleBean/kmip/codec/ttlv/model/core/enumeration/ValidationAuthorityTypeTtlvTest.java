@@ -5,19 +5,20 @@ import org.purpleBean.kmip.model.core.enumeration.ValidationAuthorityType;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ValidationAuthorityType TTLV Serialization")
-class ValidationAuthorityTypeTtlvTest extends AbstractTtlvSerializationTestSuite<ValidationAuthorityType> {
-    @Override
-    public Class<ValidationAuthorityType> type() {
-        return ValidationAuthorityType.class;
-    }
+class ValidationAuthorityTypeTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ValidationAuthorityType> {
+  @Override
+  public Class<ValidationAuthorityType> type() {
+    return ValidationAuthorityType.class;
+  }
 
-    @Override
-    public ValidationAuthorityType createDefault() {
-        return ValidationAuthorityType.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public ValidationAuthorityType createDefault() {
+    return ValidationAuthorityType.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public ValidationAuthorityType createVariant() {
-        return ValidationAuthorityType.Standard.NIST_CMVP.inst();
-    }
+  @Override
+  public ValidationAuthorityType createVariant() {
+    return ValidationAuthorityType.Standard.NIST_CMVP.inst();
+  }
 }

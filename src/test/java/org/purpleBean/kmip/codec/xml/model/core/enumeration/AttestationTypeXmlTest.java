@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AttestationType XML Serialization")
 class AttestationTypeXmlTest extends AbstractXmlSerializationTestSuite<AttestationType> {
-    @Override
-    public Class<AttestationType> type() {
-        return AttestationType.class;
-    }
+  @Override
+  public Class<AttestationType> type() {
+    return AttestationType.class;
+  }
 
-    @Override
-    public AttestationType createDefault() {
-        return AttestationType.Standard.TPM_QUOTE.inst();
-    }
+  @Override
+  public AttestationType createDefault() {
+    return AttestationType.Standard.TPM_QUOTE.inst();
+  }
 
-    @Override
-    public AttestationType createVariant() {
-        return AttestationType.Standard.TCG_INTEGRITY_REPORT.inst();
-    }
+  @Override
+  public AttestationType createVariant() {
+    return AttestationType.Standard.TCG_INTEGRITY_REPORT.inst();
+  }
 }

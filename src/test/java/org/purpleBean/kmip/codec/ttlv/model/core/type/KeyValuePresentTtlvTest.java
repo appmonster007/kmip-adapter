@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("KeyValuePresent Ttlv Serialization Tests")
 class KeyValuePresentTtlvTest extends AbstractTtlvSerializationTestSuite<KeyValuePresent> {
 
-    @Override
-    public Class<KeyValuePresent> type() {
-        return KeyValuePresent.class;
-    }
+  @Override
+  public Class<KeyValuePresent> type() {
+    return KeyValuePresent.class;
+  }
 
-    @Override
-    public KeyValuePresent createDefault() {
-        return KeyValuePresent.of(Boolean.FALSE);
-    }
+  @Override
+  public KeyValuePresent createDefault() {
+    return KeyValuePresent.of(Boolean.FALSE);
+  }
 
-    @Override
-    public KeyValuePresent createVariant() {
-        return KeyValuePresent.of(Boolean.TRUE);
-    }
+  @Override
+  public KeyValuePresent createVariant() {
+    return KeyValuePresent.of(Boolean.TRUE);
+  }
 }

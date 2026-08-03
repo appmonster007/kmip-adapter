@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("BatchCount JSON Serialization Tests")
 class BatchCountJsonTest extends AbstractJsonSerializationTestSuite<BatchCount> {
 
-    @Override
-    public Class<BatchCount> type() {
-        return BatchCount.class;
-    }
+  @Override
+  public Class<BatchCount> type() {
+    return BatchCount.class;
+  }
 
-    @Override
-    public BatchCount createDefault() {
-        return BatchCount.builder().value(5).build();
-    }
+  @Override
+  public BatchCount createDefault() {
+    return BatchCount
+        .builder()
+        .value(5)
+        .build();
+  }
 
-    @Override
-    public BatchCount createVariant() {
-        return BatchCount.builder().value(10).build();
-    }
+  @Override
+  public BatchCount createVariant() {
+    return BatchCount
+        .builder()
+        .value(10)
+        .build();
+  }
 }

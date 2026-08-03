@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.MediaIdentifier;
 
 public class MediaIdentifierBenchmarkSubject extends KmipBenchmarkSubject<MediaIdentifier> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public MediaIdentifierBenchmarkSubject() throws Exception {
-        MediaIdentifier mediaIdentifier = MediaIdentifier.builder().value("test-media-id").build();
-        initialize(mediaIdentifier, MediaIdentifier.class);
-    }
+  public MediaIdentifierBenchmarkSubject() throws Exception {
+    MediaIdentifier mediaIdentifier = MediaIdentifier
+        .builder()
+        .value("test-media-id")
+        .build();
+    initialize(mediaIdentifier, MediaIdentifier.class);
+  }
 
-    @Override
-    public String name() {
-        return "MediaIdentifier";
-    }
+  @Override
+  public String name() {
+    return "MediaIdentifier";
+  }
 
 }

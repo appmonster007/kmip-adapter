@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.LinkType;
 
 public class LinkTypeBenchmarkSubject extends KmipBenchmarkSubject<LinkType> {
 
-    public LinkTypeBenchmarkSubject() throws Exception {
-        LinkType linkType = LinkType.Standard.CERTIFICATE_LINK.inst();
-        initialize(linkType, LinkType.class);
-    }
+  public LinkTypeBenchmarkSubject() throws Exception {
+    LinkType linkType = LinkType.Standard.CERTIFICATE_LINK.inst();
+    initialize(linkType, LinkType.class);
+  }
 
-    @Override
-    public String name() {
-        return "LinkType";
-    }
+  @Override
+  public String name() {
+    return "LinkType";
+  }
 
 }

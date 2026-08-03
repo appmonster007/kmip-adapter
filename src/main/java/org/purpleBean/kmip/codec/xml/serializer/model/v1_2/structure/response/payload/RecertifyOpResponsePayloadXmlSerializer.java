@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.xml.serializer.model.v1_2.structure.response.p
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePayload;
 
-public class RecertifyOpResponsePayloadXmlSerializer extends AbstractKmipDataTypeXmlSerializer<RecertifyOpResponsePayload> {
+public class RecertifyOpResponsePayloadXmlSerializer
+    extends AbstractKmipDataTypeXmlSerializer<RecertifyOpResponsePayload> {
 }

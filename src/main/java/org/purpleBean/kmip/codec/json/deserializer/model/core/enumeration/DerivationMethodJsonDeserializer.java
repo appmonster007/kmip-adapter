@@ -2,29 +2,31 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.DerivationMethod;
 
-import java.io.IOException;
+public class DerivationMethodJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<DerivationMethod,
+        DerivationMethod.DerivationMethodBuilder> {
 
-public class DerivationMethodJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<DerivationMethod, DerivationMethod.DerivationMethodBuilder> {
+  public DerivationMethodJsonDeserializer() {
+    super(DerivationMethod.kmipTag, DerivationMethod.encodingType);
+  }
 
-    public DerivationMethodJsonDeserializer() {
-        super(DerivationMethod.kmipTag, DerivationMethod.encodingType);
-    }
+  @Override
+  protected DerivationMethod.DerivationMethodBuilder createBuilder() {
+    return DerivationMethod.builder();
+  }
 
-    @Override
-    protected DerivationMethod.DerivationMethodBuilder createBuilder() {
-        return DerivationMethod.builder();
-    }
+  @Override
+  protected void setValue(DerivationMethod.DerivationMethodBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(DerivationMethod.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(DerivationMethod.DerivationMethodBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(DerivationMethod.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected DerivationMethod build(DerivationMethod.DerivationMethodBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected DerivationMethod build(DerivationMethod.DerivationMethodBuilder builder) {
+    return builder.build();
+  }
 }

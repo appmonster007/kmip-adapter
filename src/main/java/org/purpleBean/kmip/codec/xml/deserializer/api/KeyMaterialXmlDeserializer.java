@@ -2,13 +2,12 @@ package org.purpleBean.kmip.codec.xml.deserializer.api;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KeyMaterial;
 import org.purpleBean.kmip.api.KmipDataType;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
-
-import java.io.IOException;
 
 /**
  * XML deserializer for {@link KeyMaterial} objects.
@@ -19,20 +18,22 @@ import java.io.IOException;
  */
 public class KeyMaterialXmlDeserializer extends KmipDataTypeXmlDeserializer<KeyMaterial> {
 
-    @Override
-    public KeyMaterial deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return super.deserialize(p, ctxt);
-    }
+  @Override
+  public KeyMaterial deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return super.deserialize(p, ctxt);
+  }
 
-    @Override
-    public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag, EncodingType encodingType, DeserializationContext ctxt) {
-        String ctxtKeyFormatType = (String) ctxt.getAttribute("keyFormatType");
-        KeyFormatType.Value keyFormatTypeValue;
-        if (ctxtKeyFormatType == null) {
-            keyFormatTypeValue = null;
-        } else {
-            keyFormatTypeValue = KeyFormatType.fromName(ctxtKeyFormatType);
-        }
-        return KeyMaterial.getClassFromRegistry(encodingType, keyFormatTypeValue);
+  @Override
+  public Class<? extends KmipDataType> getKmipDataTypeClass(KmipTag.Value kmipTag,
+                                                            EncodingType encodingType,
+                                                            DeserializationContext ctxt) {
+    String ctxtKeyFormatType = (String) ctxt.getAttribute("keyFormatType");
+    KeyFormatType.Value keyFormatTypeValue;
+    if (ctxtKeyFormatType == null) {
+      keyFormatTypeValue = null;
+    } else {
+      keyFormatTypeValue = KeyFormatType.fromName(ctxtKeyFormatType);
     }
+    return KeyMaterial.getClassFromRegistry(encodingType, keyFormatTypeValue);
+  }
 }

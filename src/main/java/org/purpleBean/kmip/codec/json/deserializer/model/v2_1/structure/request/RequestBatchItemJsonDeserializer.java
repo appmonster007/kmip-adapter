@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v2_1.structure.request
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.request.RequestPayloadStructure;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
@@ -12,39 +13,44 @@ import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
 import org.purpleBean.kmip.model.v2_1.structure.request.RequestBatchItem;
 import org.purpleBean.kmip.model.v2_1.type.Ephemeral;
 
-import java.io.IOException;
+public class RequestBatchItemJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<RequestBatchItem,
+        RequestBatchItem.RequestBatchItemBuilder> {
 
-public class RequestBatchItemJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<RequestBatchItem, RequestBatchItem.RequestBatchItemBuilder> {
+  public RequestBatchItemJsonDeserializer() {
+    super(RequestBatchItem.kmipTag, RequestBatchItem.encodingType);
+  }
 
-    public RequestBatchItemJsonDeserializer() {
-        super(RequestBatchItem.kmipTag, RequestBatchItem.encodingType);
+  @Override
+  protected RequestBatchItem.RequestBatchItemBuilder createBuilder() {
+    return RequestBatchItem.builder();
+  }
+
+  @Override
+  protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.OPERATION -> {
+        Operation operation = ctxt.readValue(p, Operation.class);
+        builder.operation(operation);
+        ctxt.setAttribute("operation", operation.getDescription());
+      }
+      case KmipTag.Standard.EPHEMERAL -> builder.ephemeral(ctxt.readValue(p, Ephemeral.class));
+      case KmipTag.Standard.UNIQUE_BATCH_ITEM_ID ->
+          builder.uniqueBatchItemID(ctxt.readValue(p, UniqueBatchItemID.class));
+      case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(
+          ctxt.readValue(p, AsynchronousCorrelationValue.class));
+      case KmipTag.Standard.REQUEST_PAYLOAD ->
+          builder.requestPayloadStructure(ctxt.readValue(p, RequestPayloadStructure.class));
+      case KmipTag.Standard.MESSAGE_EXTENSION ->
+          builder.messageExtension(ctxt.readValue(p, MessageExtension.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected RequestBatchItem.RequestBatchItemBuilder createBuilder() {
-        return RequestBatchItem.builder();
-    }
-
-    @Override
-    protected void setValue(RequestBatchItem.RequestBatchItemBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.OPERATION -> {
-                Operation operation = ctxt.readValue(p, Operation.class);
-                builder.operation(operation);
-                ctxt.setAttribute("operation", operation.getDescription());
-            }
-            case KmipTag.Standard.EPHEMERAL -> builder.ephemeral(ctxt.readValue(p, Ephemeral.class));
-            case KmipTag.Standard.UNIQUE_BATCH_ITEM_ID -> builder.uniqueBatchItemID(ctxt.readValue(p, UniqueBatchItemID.class));
-            case KmipTag.Standard.ASYNCHRONOUS_CORRELATION_VALUE -> builder.asynchronousCorrelationValue(ctxt.readValue(p, AsynchronousCorrelationValue.class));
-            case KmipTag.Standard.REQUEST_PAYLOAD -> builder.requestPayloadStructure(ctxt.readValue(p, RequestPayloadStructure.class));
-            case KmipTag.Standard.MESSAGE_EXTENSION -> builder.messageExtension(ctxt.readValue(p, MessageExtension.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected RequestBatchItem build(RequestBatchItem.RequestBatchItemBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected RequestBatchItem build(RequestBatchItem.RequestBatchItemBuilder builder) {
+    return builder.build();
+  }
 }

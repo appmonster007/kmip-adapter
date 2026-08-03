@@ -1,63 +1,79 @@
 package org.purpleBean.kmip.model.v3_0.type;
 
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.*;
-
-import java.util.Set;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 
 /**
- * KMIP {@code PublicKeyUniqueIdentifier} dataType ({@code 0x42006F}), encoded as an {@code Identifier}
- * (KMIP 3.0 {@code §4.68} only — same underlying bytes as {@code TextString} but a distinct TTLV Item Type).
+ * KMIP {@code PublicKeyUniqueIdentifier} dataType ({@code 0x42006F}), encoded as an {@code
+ * Identifier}
+ * (KMIP 3.0 {@code §4.68} only — same underlying bytes as {@code TextString} but a distinct TTLV
+ * Item Type).
  * <p>
- * Unrelated to {@link org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier} (the pre-3.0 {@code TextString}
- * form) — the two are separate Java types that happen to share a KMIP tag and value shape; no single KMIP message
+ * Unrelated to {@link org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier} (the pre-3
+ * .0 {@code TextString}
+ * form) — the two are separate Java types that happen to share a KMIP tag and value shape; no
+ * single KMIP message
  * ever needs both, so this is a per-spec-version fork rather than a polymorphic interface.
  */
 @Data
 @Builder(toBuilder = true)
 public class PublicKeyUniqueIdentifier implements KmipDataType {
 
-    public static final KmipTag kmipTag = KmipTag.Standard.PUBLIC_KEY_UNIQUE_IDENTIFIER.inst();
-    public static final EncodingType encodingType = EncodingType.IDENTIFIER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
+  public static final KmipTag kmipTag = KmipTag.Standard.PUBLIC_KEY_UNIQUE_IDENTIFIER.inst();
+  public static final EncodingType encodingType = EncodingType.IDENTIFIER;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, PublicKeyUniqueIdentifier.class);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType,
+          PublicKeyUniqueIdentifier.class);
     }
+  }
 
-    @NonNull
-    private final String value;
+  @NonNull
+  private final String value;
 
-    @Builder
-    private PublicKeyUniqueIdentifier(@NonNull String value) {
-        this.value = value;
-        validate();
+  @Builder
+  private PublicKeyUniqueIdentifier(@NonNull String value) {
+    this.value = value;
+    validate();
+  }
+
+  public static PublicKeyUniqueIdentifier of(@NonNull String value) {
+    return new PublicKeyUniqueIdentifier(value);
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    public static PublicKeyUniqueIdentifier of(@NonNull String value) {
-        return new PublicKeyUniqueIdentifier(value);
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipTag getKmipTag() { return kmipTag; }
-
-    @Override
-    public EncodingType getEncodingType() { return encodingType; }
-
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec);
+  }
 }

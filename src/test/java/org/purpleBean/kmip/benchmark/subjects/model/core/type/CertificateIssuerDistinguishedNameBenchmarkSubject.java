@@ -5,19 +5,21 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.CertificateIssuerDistinguishedName;
 
-public class CertificateIssuerDistinguishedNameBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuerDistinguishedName> {
+public class CertificateIssuerDistinguishedNameBenchmarkSubject
+    extends KmipBenchmarkSubject<CertificateIssuerDistinguishedName> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CertificateIssuerDistinguishedNameBenchmarkSubject() throws Exception {
-        CertificateIssuerDistinguishedName certificateIssuerDistinguishedName = CertificateIssuerDistinguishedName.of("CN=Test Issuer");
-        initialize(certificateIssuerDistinguishedName, CertificateIssuerDistinguishedName.class);
-    }
+  public CertificateIssuerDistinguishedNameBenchmarkSubject() throws Exception {
+    CertificateIssuerDistinguishedName certificateIssuerDistinguishedName =
+        CertificateIssuerDistinguishedName.of("CN=Test Issuer");
+    initialize(certificateIssuerDistinguishedName, CertificateIssuerDistinguishedName.class);
+  }
 
-    @Override
-    public String name() {
-        return "CertificateIssuerDistinguishedName";
-    }
+  @Override
+  public String name() {
+    return "CertificateIssuerDistinguishedName";
+  }
 
 }

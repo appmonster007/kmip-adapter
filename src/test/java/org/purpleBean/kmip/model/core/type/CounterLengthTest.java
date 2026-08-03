@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("CounterLength Domain Tests")
 class CounterLengthTest extends AbstractKmipDataTypeTestSuite<CounterLength> {
 
-    @Override
-    protected Class<CounterLength> type() {
-        return CounterLength.class;
-    }
+  @Override
+  protected Class<CounterLength> type() {
+    return CounterLength.class;
+  }
 
-    @Override
-    protected CounterLength createDefault() {
-        return CounterLength.of(128);
-    }
+  @Override
+  protected CounterLength createDefault() {
+    return CounterLength.of(128);
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.INTEGER;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.INTEGER;
+  }
 }

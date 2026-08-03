@@ -1,10 +1,25 @@
 package org.purpleBean.kmip.model.core.enumeration;
 
-import lombok.*;
-import org.purpleBean.kmip.api.*;
-
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipEnumeration;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies a
@@ -18,251 +33,296 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder(toBuilder = true)
 public class ProfileName implements KmipEnumeration {
-    public static final KmipTag kmipTag = KmipTag.Standard.PROFILE_NAME.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
-    private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+  public static final KmipTag kmipTag = KmipTag.Standard.PROFILE_NAME.inst();
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+  private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
+  private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+  private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY =
+      new ConcurrentHashMap<>();
 
-    static {
-        for (Standard s : Standard.values()) {
-            VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
-        }
-
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProfileName.class);
-            KmipEnumeration.register(spec, kmipTag.getValue(), ProfileName::fromName, ProfileName::fromValue);
-        }
+  static {
+    for (Standard s : Standard.values()) {
+      VALUE_REGISTRY.put(s.value, s);
+      DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
     }
 
-    @NonNull
-    private final Value value;
-
-    @Builder
-    private ProfileName(@NonNull Value value) {
-        this.value = value;
-        validate();
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProfileName.class);
+      KmipEnumeration.register(spec, kmipTag.getValue(), ProfileName::fromName,
+          ProfileName::fromValue);
     }
+  }
 
-    public static ProfileName of(@NonNull Value value) {
-        return new ProfileName(value);
+  @NonNull
+  private final Value value;
+
+  @Builder
+  private ProfileName(@NonNull Value value) {
+    this.value = value;
+    validate();
+  }
+
+  public static ProfileName of(@NonNull Value value) {
+    return new ProfileName(value);
+  }
+
+  private static void checkValidExtensionValue(int value) {
+    int extensionStart = 0x80000000;
+    if (value < extensionStart || value > 0) {
+      throw new IllegalArgumentException(
+          String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
+      );
     }
+  }
 
-    private static void checkValidExtensionValue(int value) {
-        int extensionStart = 0x80000000;
-        if (value < extensionStart || value > 0) {
-            throw new IllegalArgumentException(
-                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
-            );
-        }
+  /**
+   * Register an extension value.
+   */
+  public static Value register(int value, @NonNull String description,
+                               @NonNull Set<KmipSpec> supportedVersions) {
+    checkValidExtensionValue(value);
+
+    final String name = description.toLowerCase(Locale.ROOT);
+    if (description
+        .trim()
+        .isEmpty()) {
+      throw new IllegalArgumentException("Description cannot be empty");
     }
-
-    /**
-     * Register an extension value.
-     */
-    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        checkValidExtensionValue(value);
-
-        final String name = description.toLowerCase(Locale.ROOT);
-        if (description.trim().isEmpty()) {
-            throw new IllegalArgumentException("Description cannot be empty");
-        }
-        if (supportedVersions.isEmpty()) {
-            throw new IllegalArgumentException("At least one supported version must be specified");
-        }
-        Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
-        if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
-        }
-        Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(value, custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
-        return custom;
+    if (supportedVersions.isEmpty()) {
+      throw new IllegalArgumentException("At least one supported version must be specified");
     }
-
-    /**
-     * Look up by name.
-     */
-    public static Value fromName(String name) {
-        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No ProfileName value found for '%s' in KMIP spec %s", name, spec)
-                ));
+    Value existingEnumByValue = VALUE_REGISTRY.get(value);
+    Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
+    if (existingEnumByValue != null || existingEnumByDescription != null) {
+      return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
     }
+    Extension custom = new Extension(value, description, supportedVersions);
+    VALUE_REGISTRY.putIfAbsent(value, custom);
+    DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+    EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+    return custom;
+  }
 
-    /**
-     * Look up by value.
-     */
-    public static Value fromValue(int value) {
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = VALUE_REGISTRY.get(value);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No ProfileName value found for %d in KMIP spec %s", value, spec)
-                ));
+  /**
+   * Look up by name.
+   */
+  public static Value fromName(String name) {
+    final String nameLowerCase = name.toLowerCase(Locale.ROOT);
+    KmipSpec spec = KmipContext.getSpec();
+    Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
+    return Optional
+        .ofNullable(v)
+        .filter(Value::isSupported)
+        .orElseThrow(() -> new NoSuchElementException(
+            String.format("No ProfileName value found for '%s' in KMIP spec %s", name, spec)
+        ));
+  }
+
+  /**
+   * Look up by value.
+   */
+  public static Value fromValue(int value) {
+    KmipSpec spec = KmipContext.getSpec();
+    Value v = VALUE_REGISTRY.get(value);
+    return Optional
+        .ofNullable(v)
+        .filter(Value::isSupported)
+        .orElseThrow(() -> new NoSuchElementException(
+            String.format("No ProfileName value found for %d in KMIP spec %s", value, spec)
+        ));
+  }
+
+  /**
+   * Get registered values.
+   */
+  public static Collection<Value> registeredValues() {
+    return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+  }
+
+  private void validate() {
+    // KMIP spec compatibility validation
+    KmipSpec spec = KmipContext.getSpec();
+    if (!value.isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Value '%s' for ProfileName is not supported for KMIP spec %s",
+              value.getDescription(), spec)
+      );
     }
-
-    /**
-     * Get registered values.
-     */
-    public static Collection<Value> registeredValues() {
-        return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    private void validate() {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for ProfileName is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  public String getDescription() {
+    return value.getDescription();
+  }
 
-    public String getDescription() {
-        return value.getDescription();
-    }
+  public boolean isCustom() {
+    return value.isCustom();
+  }
 
-    public boolean isCustom() {
-        return value.isCustom();
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && value.isSupported();
+  }
+
+  public int getIntValue() {
+    return value.getValue();
+  }
+
+  /**
+   * The standard enumeration of Profile Names.
+   */
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public enum Standard implements Value {
+    COMPLETE_SERVER_BASIC(0x00000104, "CompleteServerBasic", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    COMPLETE_SERVER_TLS_V1_2(0x00000105, "CompleteServerTlsV12", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    TAPE_LIBRARY_CLIENT(0x00000106, "TapeLibraryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    TAPE_LIBRARY_SERVER(0x00000107, "TapeLibraryServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    SYMMETRIC_KEY_LIFECYCLE_CLIENT(0x00000108, "SymmetricKeyLifecycleClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SYMMETRIC_KEY_LIFECYCLE_SERVER(0x00000109, "SymmetricKeyLifecycleServer",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ASYMMETRIC_KEY_LIFECYCLE_CLIENT(0x0000010A, "AsymmetricKeyLifecycleClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ASYMMETRIC_KEY_LIFECYCLE_SERVER(0x0000010B, "AsymmetricKeyLifecycleServer",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    BASIC_CRYPTOGRAPHIC_CLIENT(0x0000010C, "BasicCryptographicClient", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    BASIC_CRYPTOGRAPHIC_SERVER(0x0000010D, "BasicCryptographicServer", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    ADVANCED_CRYPTOGRAPHIC_CLIENT(0x0000010E, "AdvancedCryptographicClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ADVANCED_CRYPTOGRAPHIC_SERVER(0x0000010F, "AdvancedCryptographicServer",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    RNG_CRYPTOGRAPHIC_CLIENT(0x00000110, "RngCryptographicClient", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    RNG_CRYPTOGRAPHIC_SERVER(0x00000111, "RngCryptographicServer", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    BASIC_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000112, "BasicSymmetricKeyFoundryClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    INTERMEDIATE_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000113, "IntermediateSymmetricKeyFoundryClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ADVANCED_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000114, "AdvancedSymmetricKeyFoundryClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SYMMETRIC_KEY_FOUNDRY_SERVER(0x00000115, "SymmetricKeyFoundryServer", KmipSpec.UnknownVersion,
+        KmipSpec.V2_1, KmipSpec.V3_0),
+    OPAQUE_MANAGED_OBJECT_STORE_CLIENT(0x00000116, "OpaqueManagedObjectStoreClient",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    OPAQUE_MANAGED_OBJECT_STORE_SERVER(0x00000117, "OpaqueManagedObjectStoreServer",
+        KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    STORAGE_ARRAY_WITH_SELF_ENCRYPTING_DRIVE_CLIENT(0x0000011C,
+        "StorageArrayWithSelfEncryptingDriveClient", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    STORAGE_ARRAY_WITH_SELF_ENCRYPTING_DRIVE_SERVER(0x0000011D,
+        "StorageArrayWithSelfEncryptingDriveServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HTTPS_CLIENT(0x0000011E, "HttpsClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    HTTPS_SERVER(0x0000011F, "HttpsServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    JSON_CLIENT(0x00000120, "JsonClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    JSON_SERVER(0x00000121, "JsonServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    XML_CLIENT(0x00000122, "XmlClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    XML_SERVER(0x00000123, "XmlServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    AES_XTS_CLIENT(0x00000124, "AesXtsClient", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    AES_XTS_SERVER(0x00000125, "AesXtsServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    QUANTUM_SAFE_CLIENT(0x00000126, "QuantumSafeClient", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    QUANTUM_SAFE_SERVER(0x00000127, "QuantumSafeServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    PKCS_11_CLIENT(0x00000128, "Pkcs11Client", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    PKCS_11_SERVER(0x00000129, "Pkcs11Server", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    BASELINE_CLIENT(0x0000012A, "BaselineClient", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    BASELINE_SERVER(0x0000012B, "BaselineServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    COMPLETE_SERVER(0x0000012C, "CompleteServer", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0);
+
+    private final int value;
+    private final String description;
+    private final Set<KmipSpec> supportedVersions;
+
+    private final boolean custom = false;
+
+    Standard(int value, String description, KmipSpec... supportedVersions) {
+      this.value = value;
+      this.description = description;
+      this.supportedVersions = Set.of(supportedVersions);
     }
 
     @Override
     public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && value.isSupported();
+      KmipSpec spec = KmipContext.getSpec();
+      return supportedVersions.contains(spec);
     }
 
-    public int getIntValue() {
-        return value.getValue();
+    @Override
+    public ProfileName inst() {
+      return ProfileName.of(this);
+    }
+  }
+
+  /**
+   * An interface representing a Profile Name value, which can be either a standard
+   * value or a custom extension.
+   */
+  public interface Value extends KmipEnumeration.Value<ProfileName> {
+  }
+
+  /**
+   * Represents a custom, vendor-specific Profile Name.
+   */
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class Extension implements Value {
+    private final int value;
+    private final String description;
+    private final Set<KmipSpec> supportedVersions;
+
+    private final boolean custom = true;
+
+    public Extension(int value, String description, KmipSpec... supportedVersions) {
+      this.value = value;
+      this.description = description;
+      this.supportedVersions = Set.of(supportedVersions);
     }
 
-    /**
-     * The standard enumeration of Profile Names.
-     */
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public enum Standard implements Value {
-        COMPLETE_SERVER_BASIC(0x00000104, "CompleteServerBasic", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        COMPLETE_SERVER_TLS_V1_2(0x00000105, "CompleteServerTlsV12", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        TAPE_LIBRARY_CLIENT(0x00000106, "TapeLibraryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        TAPE_LIBRARY_SERVER(0x00000107, "TapeLibraryServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SYMMETRIC_KEY_LIFECYCLE_CLIENT(0x00000108, "SymmetricKeyLifecycleClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SYMMETRIC_KEY_LIFECYCLE_SERVER(0x00000109, "SymmetricKeyLifecycleServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ASYMMETRIC_KEY_LIFECYCLE_CLIENT(0x0000010A, "AsymmetricKeyLifecycleClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ASYMMETRIC_KEY_LIFECYCLE_SERVER(0x0000010B, "AsymmetricKeyLifecycleServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        BASIC_CRYPTOGRAPHIC_CLIENT(0x0000010C, "BasicCryptographicClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        BASIC_CRYPTOGRAPHIC_SERVER(0x0000010D, "BasicCryptographicServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ADVANCED_CRYPTOGRAPHIC_CLIENT(0x0000010E, "AdvancedCryptographicClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ADVANCED_CRYPTOGRAPHIC_SERVER(0x0000010F, "AdvancedCryptographicServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        RNG_CRYPTOGRAPHIC_CLIENT(0x00000110, "RngCryptographicClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        RNG_CRYPTOGRAPHIC_SERVER(0x00000111, "RngCryptographicServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        BASIC_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000112, "BasicSymmetricKeyFoundryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        INTERMEDIATE_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000113, "IntermediateSymmetricKeyFoundryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ADVANCED_SYMMETRIC_KEY_FOUNDRY_CLIENT(0x00000114, "AdvancedSymmetricKeyFoundryClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SYMMETRIC_KEY_FOUNDRY_SERVER(0x00000115, "SymmetricKeyFoundryServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        OPAQUE_MANAGED_OBJECT_STORE_CLIENT(0x00000116, "OpaqueManagedObjectStoreClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        OPAQUE_MANAGED_OBJECT_STORE_SERVER(0x00000117, "OpaqueManagedObjectStoreServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        STORAGE_ARRAY_WITH_SELF_ENCRYPTING_DRIVE_CLIENT(0x0000011C, "StorageArrayWithSelfEncryptingDriveClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        STORAGE_ARRAY_WITH_SELF_ENCRYPTING_DRIVE_SERVER(0x0000011D, "StorageArrayWithSelfEncryptingDriveServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HTTPS_CLIENT(0x0000011E, "HttpsClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HTTPS_SERVER(0x0000011F, "HttpsServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        JSON_CLIENT(0x00000120, "JsonClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        JSON_SERVER(0x00000121, "JsonServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        XML_CLIENT(0x00000122, "XmlClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        XML_SERVER(0x00000123, "XmlServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        AES_XTS_CLIENT(0x00000124, "AesXtsClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        AES_XTS_SERVER(0x00000125, "AesXtsServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        QUANTUM_SAFE_CLIENT(0x00000126, "QuantumSafeClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        QUANTUM_SAFE_SERVER(0x00000127, "QuantumSafeServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        PKCS_11_CLIENT(0x00000128, "Pkcs11Client", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        PKCS_11_SERVER(0x00000129, "Pkcs11Server", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        BASELINE_CLIENT(0x0000012A, "BaselineClient", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        BASELINE_SERVER(0x0000012B, "BaselineServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        COMPLETE_SERVER(0x0000012C, "CompleteServer", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
-
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = false;
-
-        Standard(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-
-        @Override
-        public ProfileName inst() {
-            return ProfileName.of(this);
-        }
+    @Override
+    public boolean isSupported() {
+      KmipSpec spec = KmipContext.getSpec();
+      return supportedVersions.contains(spec);
     }
 
-    /**
-     * An interface representing a Profile Name value, which can be either a standard
-     * value or a custom extension.
-     */
-    public interface Value extends KmipEnumeration.Value<ProfileName> {
+    @Override
+    public ProfileName inst() {
+      return ProfileName.of(this);
     }
-
-    /**
-     * Represents a custom, vendor-specific Profile Name.
-     */
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public static class Extension implements Value {
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = true;
-
-        public Extension(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-
-        @Override
-        public ProfileName inst() {
-            return ProfileName.of(this);
-        }
-    }
+  }
 }

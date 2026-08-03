@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Username JSON Serialization Tests")
 class UsernameJsonTest extends AbstractJsonSerializationTestSuite<Username> {
 
-    @Override
-    public Class<Username> type() {
-        return Username.class;
-    }
+  @Override
+  public Class<Username> type() {
+    return Username.class;
+  }
 
-    @Override
-    public Username createDefault() {
-        return Username.builder().value("test-user").build();
-    }
+  @Override
+  public Username createDefault() {
+    return Username
+        .builder()
+        .value("test-user")
+        .build();
+  }
 
-    @Override
-    public Username createVariant() {
-        return Username.builder().value("another-user").build();
-    }
+  @Override
+  public Username createVariant() {
+    return Username
+        .builder()
+        .value("another-user")
+        .build();
+  }
 }

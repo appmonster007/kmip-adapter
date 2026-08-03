@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v2_1.enumeration.InteropFunction;
 
 public class InteropFunctionBenchmarkSubject extends KmipBenchmarkSubject<InteropFunction> {
 
-    public InteropFunctionBenchmarkSubject() throws Exception {
-        InteropFunction interopFunction = InteropFunction.Standard.BEGIN.inst();
-        initialize(interopFunction, InteropFunction.class);
-    }
+  public InteropFunctionBenchmarkSubject() throws Exception {
+    InteropFunction interopFunction = InteropFunction.Standard.BEGIN.inst();
+    initialize(interopFunction, InteropFunction.class);
+  }
 
-    @Override
-    public String name() {
-        return "InteropFunction";
-    }
+  @Override
+  public String name() {
+    return "InteropFunction";
+  }
 
 }

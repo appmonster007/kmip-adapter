@@ -10,22 +10,24 @@ import org.purpleBean.kmip.model.core.structure.SecretData;
 
 public class SecretDataBenchmarkSubject extends KmipBenchmarkSubject<SecretData> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public SecretDataBenchmarkSubject() throws Exception {
-        SecretData subject = SecretData.builder()
-                .secretDataType(SecretDataType.Standard.PASSWORD.inst())
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-        initialize(subject, SecretData.class);
-    }
+  public SecretDataBenchmarkSubject() throws Exception {
+    SecretData subject = SecretData
+        .builder()
+        .secretDataType(SecretDataType.Standard.PASSWORD.inst())
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+    initialize(subject, SecretData.class);
+  }
 
-    @Override
-    public String name() {
-        return "SecretData";
-    }
+  @Override
+  public String name() {
+    return "SecretData";
+  }
 
 }

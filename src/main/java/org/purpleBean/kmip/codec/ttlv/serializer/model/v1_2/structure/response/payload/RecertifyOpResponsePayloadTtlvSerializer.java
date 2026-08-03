@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.v1_2.structure.response.
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecertifyOpResponsePayload;
 
-public class RecertifyOpResponsePayloadTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<RecertifyOpResponsePayload> {
+public class RecertifyOpResponsePayloadTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<RecertifyOpResponsePayload> {
 }

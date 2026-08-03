@@ -1,33 +1,25 @@
 package org.purpleBean.kmip.codec.ttlv.model.v2_1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.model.v2_1.type.ClientCorrelationValue;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ClientCorrelationValue Ttlv Serialization Tests")
-class ClientCorrelationValueTtlvTest extends AbstractTtlvSerializationTestSuite<ClientCorrelationValue> {
+class ClientCorrelationValueTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ClientCorrelationValue> {
 
-    @Override
-    public Class<ClientCorrelationValue> type() {
-        return ClientCorrelationValue.class;
-    }
+  @Override
+  public Class<ClientCorrelationValue> type() {
+    return ClientCorrelationValue.class;
+  }
 
-    @Override
-    public ClientCorrelationValue createDefault() {
-        return ClientCorrelationValue.of("default-string");
-    }
+  @Override
+  public ClientCorrelationValue createDefault() {
+    return ClientCorrelationValue.of("default-string");
+  }
 
-    @Override
-    public ClientCorrelationValue createVariant() {
-        return ClientCorrelationValue.of("variant-string");
-    }
+  @Override
+  public ClientCorrelationValue createVariant() {
+    return ClientCorrelationValue.of("variant-string");
+  }
 }

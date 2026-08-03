@@ -12,35 +12,40 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestP
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("LocateOpRequestPayload Json Serialization Tests")
-class LocateOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<LocateOpRequestPayload> {
+class LocateOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<LocateOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<LocateOpRequestPayload> type() {
-        return LocateOpRequestPayload.class;
-    }
+  @Override
+  public Class<LocateOpRequestPayload> type() {
+    return LocateOpRequestPayload.class;
+  }
 
-    @Override
-    public LocateOpRequestPayload createDefault() {
-        return LocateOpRequestPayload.builder()
-                .maximumItems(MaximumItems.of(10))
-                .storageStatusMask(StorageStatusMask.of(1))
-                .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
-                .build();
-    }
+  @Override
+  public LocateOpRequestPayload createDefault() {
+    return LocateOpRequestPayload
+        .builder()
+        .maximumItems(MaximumItems.of(10))
+        .storageStatusMask(StorageStatusMask.of(1))
+        .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+  }
 
-    @Override
-    public LocateOpRequestPayload createVariant() {
-        return LocateOpRequestPayload.builder()
-                .maximumItems(MaximumItems.of(20))
-                .storageStatusMask(StorageStatusMask.of(2))
-                .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT))
-                .attribute(Attribute.of(AttributeName.of("test-attribute-2"), AttributeValue.ofTextString("test-value-2")))
-                .build();
-    }
+  @Override
+  public LocateOpRequestPayload createVariant() {
+    return LocateOpRequestPayload
+        .builder()
+        .maximumItems(MaximumItems.of(20))
+        .storageStatusMask(StorageStatusMask.of(2))
+        .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_DEFAULT))
+        .attribute(Attribute.of(AttributeName.of("test-attribute-2"),
+            AttributeValue.ofTextString("test-value-2")))
+        .build();
+  }
 }

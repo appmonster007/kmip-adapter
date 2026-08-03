@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ValidationType XML Serialization")
 class ValidationTypeXmlTest extends AbstractXmlSerializationTestSuite<ValidationType> {
-    @Override
-    public Class<ValidationType> type() {
-        return ValidationType.class;
-    }
+  @Override
+  public Class<ValidationType> type() {
+    return ValidationType.class;
+  }
 
-    @Override
-    public ValidationType createDefault() {
-        return ValidationType.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public ValidationType createDefault() {
+    return ValidationType.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public ValidationType createVariant() {
-        return ValidationType.Standard.HARDWARE.inst();
-    }
+  @Override
+  public ValidationType createVariant() {
+    return ValidationType.Standard.HARDWARE.inst();
+  }
 }

@@ -12,27 +12,34 @@ import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 
-public class SimpleResponseMessageBenchmarkSubject extends KmipBenchmarkSubject<SimpleResponseMessage> {
+public class SimpleResponseMessageBenchmarkSubject
+    extends KmipBenchmarkSubject<SimpleResponseMessage> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public SimpleResponseMessageBenchmarkSubject() throws Exception {
-        SimpleResponseMessage subject = SimpleResponseMessage.builder()
-                .responseHeader(SimpleResponseHeader.builder()
-                        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                        .build())
-                .responseBatchItem(SimpleResponseBatchItem.builder()
-                        .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
-                        .responsePayloadStructure(SimpleResponsePayload.builder().build())
-                        .build())
-                .responseBatchItemError(null)
-                .build();
-        initialize(subject, SimpleResponseMessage.class);
-    }
+  public SimpleResponseMessageBenchmarkSubject() throws Exception {
+    SimpleResponseMessage subject = SimpleResponseMessage
+        .builder()
+        .responseHeader(SimpleResponseHeader
+            .builder()
+            .protocolVersion(
+                ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+            .build())
+        .responseBatchItem(SimpleResponseBatchItem
+            .builder()
+            .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+            .responsePayloadStructure(SimpleResponsePayload
+                .builder()
+                .build())
+            .build())
+        .responseBatchItemError(null)
+        .build();
+    initialize(subject, SimpleResponseMessage.class);
+  }
 
-    @Override
-    public String name() {
-        return "SimpleResponseMessage";
-    }
+  @Override
+  public String name() {
+    return "SimpleResponseMessage";
+  }
 }

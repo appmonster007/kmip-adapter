@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DestroyAction TTLV Serialization")
 class DestroyActionTtlvTest extends AbstractTtlvSerializationTestSuite<DestroyAction> {
-    @Override
-    public Class<DestroyAction> type() {
-        return DestroyAction.class;
-    }
+  @Override
+  public Class<DestroyAction> type() {
+    return DestroyAction.class;
+  }
 
-    @Override
-    public DestroyAction createDefault() {
-        return DestroyAction.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public DestroyAction createDefault() {
+    return DestroyAction.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public DestroyAction createVariant() {
-        return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
-    }
+  @Override
+  public DestroyAction createVariant() {
+    return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
+  }
 }

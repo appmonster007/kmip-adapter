@@ -7,17 +7,18 @@ import org.purpleBean.kmip.model.core.type.RevocationMessage;
 
 public class RevocationReasonBenchmarkSubject extends KmipBenchmarkSubject<RevocationReason> {
 
-    public RevocationReasonBenchmarkSubject() throws Exception {
-        RevocationReason revocationReason = RevocationReason.builder()
-                .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
-                .revocationMessage(RevocationMessage.of("test-message"))
-                .build();
-        initialize(revocationReason, RevocationReason.class);
-    }
+  public RevocationReasonBenchmarkSubject() throws Exception {
+    RevocationReason revocationReason = RevocationReason
+        .builder()
+        .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
+        .revocationMessage(RevocationMessage.of("test-message"))
+        .build();
+    initialize(revocationReason, RevocationReason.class);
+  }
 
-    @Override
-    public String name() {
-        return "RevocationReason";
-    }
+  @Override
+  public String name() {
+    return "RevocationReason";
+  }
 
 }

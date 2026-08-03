@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ObjectGroup TTLV Serialization Tests")
 class ObjectGroupTtlvTest extends AbstractTtlvSerializationTestSuite<ObjectGroup> {
 
-    @Override
-    public Class<ObjectGroup> type() {
-        return ObjectGroup.class;
-    }
+  @Override
+  public Class<ObjectGroup> type() {
+    return ObjectGroup.class;
+  }
 
-    @Override
-    public ObjectGroup createDefault() {
-        return ObjectGroup.builder().value("test").build();
-    }
+  @Override
+  public ObjectGroup createDefault() {
+    return ObjectGroup
+        .builder()
+        .value("test")
+        .build();
+  }
 
-    @Override
-    public ObjectGroup createVariant() {
-        return ObjectGroup.builder().value("test-2").build();
-    }
+  @Override
+  public ObjectGroup createVariant() {
+    return ObjectGroup
+        .builder()
+        .value("test-2")
+        .build();
+  }
 }

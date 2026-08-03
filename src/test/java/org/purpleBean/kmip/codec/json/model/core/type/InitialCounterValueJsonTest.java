@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("InitialCounterValue JSON Serialization Tests")
 class InitialCounterValueJsonTest extends AbstractJsonSerializationTestSuite<InitialCounterValue> {
 
-    @Override
-    public Class<InitialCounterValue> type() {
-        return InitialCounterValue.class;
-    }
+  @Override
+  public Class<InitialCounterValue> type() {
+    return InitialCounterValue.class;
+  }
 
-    @Override
-    public InitialCounterValue createDefault() {
-        return InitialCounterValue.of(1);
-    }
+  @Override
+  public InitialCounterValue createDefault() {
+    return InitialCounterValue.of(1);
+  }
 
-    @Override
-    public InitialCounterValue createVariant() {
-        return InitialCounterValue.of(2);
-    }
+  @Override
+  public InitialCounterValue createVariant() {
+    return InitialCounterValue.of(2);
+  }
 }

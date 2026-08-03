@@ -6,27 +6,30 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.NotifyOpRespons
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("NotifyOpResponsePayload Json Serialization Tests")
-class NotifyOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<NotifyOpResponsePayload> {
+class NotifyOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<NotifyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<NotifyOpResponsePayload> type() {
-        return NotifyOpResponsePayload.class;
-    }
+  @Override
+  public Class<NotifyOpResponsePayload> type() {
+    return NotifyOpResponsePayload.class;
+  }
 
-    @Override
-    public NotifyOpResponsePayload createDefault() {
-        return NotifyOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public NotifyOpResponsePayload createDefault() {
+    return NotifyOpResponsePayload
+        .builder()
+        .build();
+  }
 
-    @Override
-    public NotifyOpResponsePayload createVariant() {
-        return NotifyOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public NotifyOpResponsePayload createVariant() {
+    return NotifyOpResponsePayload
+        .builder()
+        .build();
+  }
 }

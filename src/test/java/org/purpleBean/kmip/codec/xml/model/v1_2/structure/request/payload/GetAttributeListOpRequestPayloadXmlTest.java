@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetAttributeList
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("GetAttributeListOpRequestPayload Xml Serialization Tests")
-class GetAttributeListOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<GetAttributeListOpRequestPayload> {
+class GetAttributeListOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<GetAttributeListOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<GetAttributeListOpRequestPayload> type() {
-        return GetAttributeListOpRequestPayload.class;
-    }
+  @Override
+  public Class<GetAttributeListOpRequestPayload> type() {
+    return GetAttributeListOpRequestPayload.class;
+  }
 
-    @Override
-    public GetAttributeListOpRequestPayload createDefault() {
-        return GetAttributeListOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public GetAttributeListOpRequestPayload createDefault() {
+    return GetAttributeListOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public GetAttributeListOpRequestPayload createVariant() {
-        return GetAttributeListOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public GetAttributeListOpRequestPayload createVariant() {
+    return GetAttributeListOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

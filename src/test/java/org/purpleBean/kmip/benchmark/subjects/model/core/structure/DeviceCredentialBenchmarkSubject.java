@@ -8,19 +8,20 @@ import org.purpleBean.kmip.model.core.type.DeviceSerialNumber;
 
 public class DeviceCredentialBenchmarkSubject extends KmipBenchmarkSubject<DeviceCredential> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public DeviceCredentialBenchmarkSubject() throws Exception {
-        DeviceCredential subject = DeviceCredential.builder()
-                .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number"))
-                .build();
-        initialize(subject, DeviceCredential.class);
-    }
+  public DeviceCredentialBenchmarkSubject() throws Exception {
+    DeviceCredential subject = DeviceCredential
+        .builder()
+        .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number"))
+        .build();
+    initialize(subject, DeviceCredential.class);
+  }
 
-    @Override
-    public String name() {
-        return "DeviceCredential";
-    }
+  @Override
+  public String name() {
+    return "DeviceCredential";
+  }
 
 }

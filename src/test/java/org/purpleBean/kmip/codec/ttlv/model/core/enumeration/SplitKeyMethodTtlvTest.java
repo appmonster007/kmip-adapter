@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SplitKeyMethod TTLV Serialization")
 class SplitKeyMethodTtlvTest extends AbstractTtlvSerializationTestSuite<SplitKeyMethod> {
-    @Override
-    public Class<SplitKeyMethod> type() {
-        return SplitKeyMethod.class;
-    }
+  @Override
+  public Class<SplitKeyMethod> type() {
+    return SplitKeyMethod.class;
+  }
 
-    @Override
-    public SplitKeyMethod createDefault() {
-        return SplitKeyMethod.Standard.XOR.inst();
-    }
+  @Override
+  public SplitKeyMethod createDefault() {
+    return SplitKeyMethod.Standard.XOR.inst();
+  }
 
-    @Override
-    public SplitKeyMethod createVariant() {
-        return SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216.inst();
-    }
+  @Override
+  public SplitKeyMethod createVariant() {
+    return SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_216.inst();
+  }
 }

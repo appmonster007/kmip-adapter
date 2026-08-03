@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ProcessingStage TTLV Serialization")
 class ProcessingStageTtlvTest extends AbstractTtlvSerializationTestSuite<ProcessingStage> {
-    @Override
-    public Class<ProcessingStage> type() {
-        return ProcessingStage.class;
-    }
+  @Override
+  public Class<ProcessingStage> type() {
+    return ProcessingStage.class;
+  }
 
-    @Override
-    public ProcessingStage createDefault() {
-        return ProcessingStage.Standard.SUBMITTED.inst();
-    }
+  @Override
+  public ProcessingStage createDefault() {
+    return ProcessingStage.Standard.SUBMITTED.inst();
+  }
 
-    @Override
-    public ProcessingStage createVariant() {
-        return ProcessingStage.Standard.IN_PROCESS.inst();
-    }
+  @Override
+  public ProcessingStage createVariant() {
+    return ProcessingStage.Standard.IN_PROCESS.inst();
+  }
 }

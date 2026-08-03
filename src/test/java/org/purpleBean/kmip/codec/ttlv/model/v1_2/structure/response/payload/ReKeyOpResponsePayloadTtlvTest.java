@@ -8,30 +8,41 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponse
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ReKeyOpResponsePayload Ttlv Serialization Tests")
-class ReKeyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<ReKeyOpResponsePayload> {
+class ReKeyOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ReKeyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ReKeyOpResponsePayload> type() {
-        return ReKeyOpResponsePayload.class;
-    }
+  @Override
+  public Class<ReKeyOpResponsePayload> type() {
+    return ReKeyOpResponsePayload.class;
+  }
 
-    @Override
-    public ReKeyOpResponsePayload createDefault() {
-        return ReKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public ReKeyOpResponsePayload createDefault() {
+    return ReKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public ReKeyOpResponsePayload createVariant() {
-        return ReKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
-                .build();
-    }
+  @Override
+  public ReKeyOpResponsePayload createVariant() {
+    return ReKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid2")
+            .build())
+        .build();
+  }
 }

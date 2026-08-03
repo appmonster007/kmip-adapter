@@ -2,55 +2,73 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purpleBean.kmip.model.core.enumeration.*;
+import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
+import org.purpleBean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.HashingAlgorithm;
+import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
+import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
 import org.purpleBean.kmip.model.core.structure.CryptographicParameters;
-import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.model.core.type.CounterLength;
+import org.purpleBean.kmip.model.core.type.FixedFieldLength;
+import org.purpleBean.kmip.model.core.type.InitialCounterValue;
+import org.purpleBean.kmip.model.core.type.InvocationFieldLength;
+import org.purpleBean.kmip.model.core.type.IvLength;
+import org.purpleBean.kmip.model.core.type.RandomIv;
+import org.purpleBean.kmip.model.core.type.TagLength;
 
-import java.io.IOException;
+public class CryptographicParametersJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<CryptographicParameters,
+        CryptographicParameters.CryptographicParametersBuilder> {
 
-public class CryptographicParametersJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<CryptographicParameters, CryptographicParameters.CryptographicParametersBuilder> {
+  public CryptographicParametersJsonDeserializer() {
+    super(CryptographicParameters.kmipTag, CryptographicParameters.encodingType);
+  }
 
-    public CryptographicParametersJsonDeserializer() {
-        super(CryptographicParameters.kmipTag, CryptographicParameters.encodingType);
+  @Override
+  protected CryptographicParameters.CryptographicParametersBuilder createBuilder() {
+    return CryptographicParameters.builder();
+  }
+
+  @Override
+  protected void setValue(CryptographicParameters.CryptographicParametersBuilder builder,
+                          String tag, String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.BLOCK_CIPHER_MODE ->
+          builder.blockCipherMode(ctxt.readValue(p, BlockCipherMode.class));
+      case KmipTag.Standard.PADDING_METHOD ->
+          builder.paddingMethod(ctxt.readValue(p, PaddingMethod.class));
+      case KmipTag.Standard.HASHING_ALGORITHM ->
+          builder.hashingAlgorithm(ctxt.readValue(p, HashingAlgorithm.class));
+      case KmipTag.Standard.KEY_ROLE_TYPE ->
+          builder.keyRoleType(ctxt.readValue(p, KeyRoleType.class));
+      case KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM ->
+          builder.digitalSignatureAlgorithm(ctxt.readValue(p, DigitalSignatureAlgorithm.class));
+      case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM ->
+          builder.cryptographicAlgorithm(ctxt.readValue(p, CryptographicAlgorithm.class));
+      case KmipTag.Standard.RANDOM_IV -> builder.randomIv(ctxt.readValue(p, RandomIv.class));
+      case KmipTag.Standard.IV_LENGTH -> builder.ivLength(ctxt.readValue(p, IvLength.class));
+      case KmipTag.Standard.TAG_LENGTH -> builder.tagLength(ctxt.readValue(p, TagLength.class));
+      case KmipTag.Standard.FIXED_FIELD_LENGTH ->
+          builder.fixedFieldLength(ctxt.readValue(p, FixedFieldLength.class));
+      case KmipTag.Standard.INVOCATION_FIELD_LENGTH ->
+          builder.invocationFieldLength(ctxt.readValue(p, InvocationFieldLength.class));
+      case KmipTag.Standard.COUNTER_LENGTH ->
+          builder.counterLength(ctxt.readValue(p, CounterLength.class));
+      case KmipTag.Standard.INITIAL_COUNTER_VALUE ->
+          builder.initialCounterValue(ctxt.readValue(p, InitialCounterValue.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected CryptographicParameters.CryptographicParametersBuilder createBuilder() {
-        return CryptographicParameters.builder();
-    }
-
-    @Override
-    protected void setValue(CryptographicParameters.CryptographicParametersBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.BLOCK_CIPHER_MODE ->
-                    builder.blockCipherMode(ctxt.readValue(p, BlockCipherMode.class));
-            case KmipTag.Standard.PADDING_METHOD -> builder.paddingMethod(ctxt.readValue(p, PaddingMethod.class));
-            case KmipTag.Standard.HASHING_ALGORITHM ->
-                    builder.hashingAlgorithm(ctxt.readValue(p, HashingAlgorithm.class));
-            case KmipTag.Standard.KEY_ROLE_TYPE -> builder.keyRoleType(ctxt.readValue(p, KeyRoleType.class));
-            case KmipTag.Standard.DIGITAL_SIGNATURE_ALGORITHM ->
-                    builder.digitalSignatureAlgorithm(ctxt.readValue(p, DigitalSignatureAlgorithm.class));
-            case KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM ->
-                    builder.cryptographicAlgorithm(ctxt.readValue(p, CryptographicAlgorithm.class));
-            case KmipTag.Standard.RANDOM_IV -> builder.randomIv(ctxt.readValue(p, RandomIv.class));
-            case KmipTag.Standard.IV_LENGTH -> builder.ivLength(ctxt.readValue(p, IvLength.class));
-            case KmipTag.Standard.TAG_LENGTH -> builder.tagLength(ctxt.readValue(p, TagLength.class));
-            case KmipTag.Standard.FIXED_FIELD_LENGTH ->
-                    builder.fixedFieldLength(ctxt.readValue(p, FixedFieldLength.class));
-            case KmipTag.Standard.INVOCATION_FIELD_LENGTH ->
-                    builder.invocationFieldLength(ctxt.readValue(p, InvocationFieldLength.class));
-            case KmipTag.Standard.COUNTER_LENGTH -> builder.counterLength(ctxt.readValue(p, CounterLength.class));
-            case KmipTag.Standard.INITIAL_COUNTER_VALUE ->
-                    builder.initialCounterValue(ctxt.readValue(p, InitialCounterValue.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected CryptographicParameters build(CryptographicParameters.CryptographicParametersBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected CryptographicParameters build(
+      CryptographicParameters.CryptographicParametersBuilder builder) {
+    return builder.build();
+  }
 }

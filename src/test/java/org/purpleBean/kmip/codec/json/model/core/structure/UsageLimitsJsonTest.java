@@ -10,17 +10,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("UsageLimits Json Serialization Tests")
 class UsageLimitsJsonTest extends AbstractJsonSerializationTestSuite<UsageLimits> {
 
-    @Override
-    public Class<UsageLimits> type() {
-        return UsageLimits.class;
-    }
+  @Override
+  public Class<UsageLimits> type() {
+    return UsageLimits.class;
+  }
 
-    @Override
-    public UsageLimits createDefault() {
-        return UsageLimits.builder()
-                .usageLimitsTotal(UsageLimitsTotal.of(100L))
-                .usageLimitsCount(UsageLimitsCount.of(10L))
-                .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
-                .build();
-    }
+  @Override
+  public UsageLimits createDefault() {
+    return UsageLimits
+        .builder()
+        .usageLimitsTotal(UsageLimitsTotal.of(100L))
+        .usageLimitsCount(UsageLimitsCount.of(10L))
+        .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
+        .build();
+  }
 }

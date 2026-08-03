@@ -11,35 +11,39 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("VendorExtension Ttlv Serialization Tests")
 class VendorExtensionTtlvTest extends AbstractTtlvSerializationTestSuite<VendorExtension> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<VendorExtension> type() {
-        return VendorExtension.class;
-    }
+  @Override
+  public Class<VendorExtension> type() {
+    return VendorExtension.class;
+  }
 
-    @Override
-    public VendorExtension createDefault() {
-        return VendorExtension.builder()
-                .ttlvDataType(TtlvDataType.builder()
-                        .kmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER.inst())
-                        .encodingType(EncodingType.TEXT_STRING)
-                        .value("test-value")
-                        .build())
-                .build();
-    }
+  @Override
+  public VendorExtension createDefault() {
+    return VendorExtension
+        .builder()
+        .ttlvDataType(TtlvDataType
+            .builder()
+            .kmipTag(KmipTag.Standard.UNIQUE_IDENTIFIER.inst())
+            .encodingType(EncodingType.TEXT_STRING)
+            .value("test-value")
+            .build())
+        .build();
+  }
 
-    @Override
-    public VendorExtension createVariant() {
-        return VendorExtension.builder()
-                .ttlvDataType(TtlvDataType.builder()
-                        .kmipTag(KmipTag.Standard.ATTRIBUTE_NAME.inst())
-                        .encodingType(EncodingType.TEXT_STRING)
-                        .value("variant-value")
-                        .build())
-                .build();
-    }
+  @Override
+  public VendorExtension createVariant() {
+    return VendorExtension
+        .builder()
+        .ttlvDataType(TtlvDataType
+            .builder()
+            .kmipTag(KmipTag.Standard.ATTRIBUTE_NAME.inst())
+            .encodingType(EncodingType.TEXT_STRING)
+            .value("variant-value")
+            .build())
+        .build();
+  }
 }

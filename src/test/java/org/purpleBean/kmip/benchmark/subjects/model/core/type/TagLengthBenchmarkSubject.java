@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.TagLength;
 
 public class TagLengthBenchmarkSubject extends KmipBenchmarkSubject<TagLength> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public TagLengthBenchmarkSubject() throws Exception {
-        TagLength tagLength = TagLength.of(128);
-        initialize(tagLength, TagLength.class);
-    }
+  public TagLengthBenchmarkSubject() throws Exception {
+    TagLength tagLength = TagLength.of(128);
+    initialize(tagLength, TagLength.class);
+  }
 
-    @Override
-    public String name() {
-        return "TagLength";
-    }
+  @Override
+  public String name() {
+    return "TagLength";
+  }
 
 }

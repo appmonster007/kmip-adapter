@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 
 public class ObjectTypeBenchmarkSubject extends KmipBenchmarkSubject<ObjectType> {
 
-    public ObjectTypeBenchmarkSubject() throws Exception {
-        ObjectType objectType = ObjectType.Standard.CERTIFICATE.inst();
-        initialize(objectType, ObjectType.class);
-    }
+  public ObjectTypeBenchmarkSubject() throws Exception {
+    ObjectType objectType = ObjectType.Standard.CERTIFICATE.inst();
+    initialize(objectType, ObjectType.class);
+  }
 
-    @Override
-    public String name() {
-        return "ObjectType";
-    }
+  @Override
+  public String name() {
+    return "ObjectType";
+  }
 
 }

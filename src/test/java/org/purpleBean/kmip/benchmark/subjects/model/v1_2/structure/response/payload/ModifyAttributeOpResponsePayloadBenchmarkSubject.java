@@ -9,21 +9,24 @@ import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.ModifyAttributeOpResponsePayload;
 
-public class ModifyAttributeOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<ModifyAttributeOpResponsePayload> {
+public class ModifyAttributeOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<ModifyAttributeOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ModifyAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
-        ModifyAttributeOpResponsePayload subject = ModifyAttributeOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
-                .build();
-        initialize(subject, ModifyAttributeOpResponsePayload.class);
-    }
+  public ModifyAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
+    ModifyAttributeOpResponsePayload subject = ModifyAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+    initialize(subject, ModifyAttributeOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "ModifyAttributeOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "ModifyAttributeOpResponsePayload";
+  }
 }

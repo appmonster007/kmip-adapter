@@ -9,9 +9,11 @@ import java.io.IOException;
 
 public class LongJsonDeserializer extends JsonDeserializer<Long> {
 
-    @Override
-    public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
-        return node.longValue();
-    }
+  @Override
+  public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    JsonNode node = p
+        .getCodec()
+        .readTree(p);
+    return node.longValue();
+  }
 }

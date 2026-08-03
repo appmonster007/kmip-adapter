@@ -1,13 +1,29 @@
 package org.purpleBean.kmip.model.core.enumeration;
 
-import lombok.*;
-import org.purpleBean.kmip.api.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipAttribute;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipEnumeration;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
-
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
@@ -23,351 +39,397 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Builder(toBuilder = true)
 public class CryptographicAlgorithm implements KmipEnumeration, KmipAttribute {
-    public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
-    private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
-    private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+  public static final KmipTag kmipTag = KmipTag.Standard.CRYPTOGRAPHIC_ALGORITHM.inst();
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0);
+  private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
+  private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
+  private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY =
+      new ConcurrentHashMap<>();
 
-    static {
-        for (Standard s : Standard.values()) {
-            VALUE_REGISTRY.put(s.value, s);
-            DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
-        }
-
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class, CryptographicAlgorithm::of);
-            KmipEnumeration.register(spec, kmipTag.getValue(), CryptographicAlgorithm::fromName, CryptographicAlgorithm::fromValue);
-        }
+  static {
+    for (Standard s : Standard.values()) {
+      VALUE_REGISTRY.put(s.value, s);
+      DESCRIPTION_REGISTRY.put(s.description.toLowerCase(Locale.ROOT), s);
     }
 
-    @NonNull
-    private final Value value;
-
-    @Builder
-    private CryptographicAlgorithm(@NonNull Value value) {
-        this.value = value;
-        validate();
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class);
+      KmipAttribute.register(spec, kmipTag.getValue(), encodingType, CryptographicAlgorithm.class,
+          CryptographicAlgorithm::of);
+      KmipEnumeration.register(spec, kmipTag.getValue(), CryptographicAlgorithm::fromName,
+          CryptographicAlgorithm::fromValue);
     }
+  }
 
-    public static CryptographicAlgorithm of(@NonNull Value value) {
-        return new CryptographicAlgorithm(value);
+  @NonNull
+  private final Value value;
+
+  @Builder
+  private CryptographicAlgorithm(@NonNull Value value) {
+    this.value = value;
+    validate();
+  }
+
+  public static CryptographicAlgorithm of(@NonNull Value value) {
+    return new CryptographicAlgorithm(value);
+  }
+
+  public static CryptographicAlgorithm of(@NonNull AttributeName attributeName,
+                                          @NonNull AttributeValue attributeValue) {
+    if (!attributeName
+        .getValue()
+        .equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
+      throw new IllegalArgumentException("Invalid attribute name");
     }
-
-    public static CryptographicAlgorithm of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (!attributeName.getValue().equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
-            throw new IllegalArgumentException("Invalid attribute name");
-        }
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
-            throw new IllegalArgumentException("Invalid encoding type");
-        }
-        CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
-        return CryptographicAlgorithm.builder().value(v).build();
+    if (attributeValue.getEncodingType() != encodingType ||
+        !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+      throw new IllegalArgumentException("Invalid encoding type");
     }
+    CryptographicAlgorithm.Value v = CryptographicAlgorithm.fromValue(enumeration.getValue());
+    return CryptographicAlgorithm
+        .builder()
+        .value(v)
+        .build();
+  }
 
-    private static void checkValidExtensionValue(int value) {
-        int extensionStart = 0x80000000;
-        if (value < extensionStart || value > 0) {
-            throw new IllegalArgumentException(
-                    String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
-            );
-        }
+  private static void checkValidExtensionValue(int value) {
+    int extensionStart = 0x80000000;
+    if (value < extensionStart || value > 0) {
+      throw new IllegalArgumentException(
+          String.format("Extension value %d must be in range 8XXXXXXX (hex)", value)
+      );
     }
+  }
 
-    /**
-     * Register an extension value.
-     */
-    public static Value register(int value, @NonNull String description, @NonNull Set<KmipSpec> supportedVersions) {
-        checkValidExtensionValue(value);
+  /**
+   * Register an extension value.
+   */
+  public static Value register(int value, @NonNull String description,
+                               @NonNull Set<KmipSpec> supportedVersions) {
+    checkValidExtensionValue(value);
 
-        final String name = description.toLowerCase(Locale.ROOT);
-        if (description.trim().isEmpty()) {
-            throw new IllegalArgumentException("Description cannot be empty");
-        }
-        if (supportedVersions.isEmpty()) {
-            throw new IllegalArgumentException("At least one supported version must be specified");
-        }
-        Value existingEnumByValue = VALUE_REGISTRY.get(value);
-        Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
-        if (existingEnumByValue != null || existingEnumByDescription != null) {
-            return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
-        }
-        Extension custom = new Extension(value, description, supportedVersions);
-        VALUE_REGISTRY.putIfAbsent(value, custom);
-        DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
-        EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
-        return custom;
+    final String name = description.toLowerCase(Locale.ROOT);
+    if (description
+        .trim()
+        .isEmpty()) {
+      throw new IllegalArgumentException("Description cannot be empty");
     }
-
-    /**
-     * Look up by name.
-     */
-    public static Value fromName(String name) {
-        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No CryptographicAlgorithm value found for '%s' in KMIP spec %s", name, spec)
-                ));
+    if (supportedVersions.isEmpty()) {
+      throw new IllegalArgumentException("At least one supported version must be specified");
     }
-
-    /**
-     * Look up by value.
-     */
-    public static Value fromValue(int value) {
-        KmipSpec spec = KmipContext.getSpec();
-        Value v = VALUE_REGISTRY.get(value);
-        return Optional.ofNullable(v)
-                .filter(Value::isSupported)
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("No CryptographicAlgorithm value found for %d in KMIP spec %s", value, spec)
-                ));
+    Value existingEnumByValue = VALUE_REGISTRY.get(value);
+    Value existingEnumByDescription = EXTENSION_DESCRIPTION_REGISTRY.get(name);
+    if (existingEnumByValue != null || existingEnumByDescription != null) {
+      return existingEnumByValue != null ? existingEnumByValue : existingEnumByDescription;
     }
+    Extension custom = new Extension(value, description, supportedVersions);
+    VALUE_REGISTRY.putIfAbsent(value, custom);
+    DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+    EXTENSION_DESCRIPTION_REGISTRY.putIfAbsent(name, custom);
+    return custom;
+  }
 
-    /**
-     * Get registered values.
-     */
-    public static Collection<Value> registeredValues() {
-        return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+  /**
+   * Look up by name.
+   */
+  public static Value fromName(String name) {
+    final String nameLowerCase = name.toLowerCase(Locale.ROOT);
+    KmipSpec spec = KmipContext.getSpec();
+    Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);
+    return Optional
+        .ofNullable(v)
+        .filter(Value::isSupported)
+        .orElseThrow(() -> new NoSuchElementException(
+            String.format("No CryptographicAlgorithm value found for '%s' in KMIP spec %s", name,
+                spec)
+        ));
+  }
+
+  /**
+   * Look up by value.
+   */
+  public static Value fromValue(int value) {
+    KmipSpec spec = KmipContext.getSpec();
+    Value v = VALUE_REGISTRY.get(value);
+    return Optional
+        .ofNullable(v)
+        .filter(Value::isSupported)
+        .orElseThrow(() -> new NoSuchElementException(
+            String.format("No CryptographicAlgorithm value found for %d in KMIP spec %s", value,
+                spec)
+        ));
+  }
+
+  /**
+   * Get registered values.
+   */
+  public static Collection<Value> registeredValues() {
+    return List.copyOf(EXTENSION_DESCRIPTION_REGISTRY.values());
+  }
+
+  private void validate() {
+    // KMIP spec compatibility validation
+    KmipSpec spec = KmipContext.getSpec();
+    if (!value.isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s",
+              value.getDescription(), spec)
+      );
     }
-
-    private void validate() {
-        // KMIP spec compatibility validation
-        KmipSpec spec = KmipContext.getSpec();
-        if (!value.isSupported()) {
-            throw new IllegalArgumentException(
-                    String.format("Value '%s' for CryptographicAlgorithm is not supported for KMIP spec %s", value.getDescription(), spec)
-            );
-        }
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    public String getDescription() {
-        return value.getDescription();
-    }
+  public String getDescription() {
+    return value.getDescription();
+  }
 
-    public boolean isCustom() {
-        return value.isCustom();
+  public boolean isCustom() {
+    return value.isCustom();
+  }
+
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && value.isSupported();
+  }
+
+  @Override
+  public AttributeValue getAttributeValue() {
+    return AttributeValue.ofEnumeration(value);
+  }
+
+  @Override
+  public AttributeName getAttributeName() {
+    return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
+  }
+
+  @Override
+  public String getCanonicalName() {
+    return kmipTag.getDescription();
+  }
+
+  @Override
+  public boolean isAlwaysPresent() {
+    return true;
+  }
+
+  @Override
+  public boolean isServerInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean isClientInitializable() {
+    return false;
+  }
+
+  @Override
+  public boolean isServerModifiable(State state) {
+    return false;
+  }
+
+  @Override
+  public boolean isClientModifiable(State state) {
+    return false;
+  }
+
+  @Override
+  public boolean isClientDeletable() {
+    return false;
+  }
+
+  @Override
+  public boolean isMultiInstanceAllowed() {
+    return false;
+  }
+
+  public int getIntValue() {
+    return value.getValue();
+  }
+
+  /**
+   * The standard enumeration of Cryptographic Algorithms.
+   */
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public enum Standard implements Value {
+    // TODO: fix all enum descriptions
+    DES(0x00000001, "DES", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    TRIPLE_DES(0x00000002, "DES3", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    AES(0x00000003, "AES", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    RSA(0x00000004, "RSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    DSA(0x00000005, "DSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    ECDSA(0x00000006, "ECDSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA1(0x00000007, "HMAC_SHA1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA224(0x00000008, "HMAC_SHA224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA256(0x00000009, "HMAC_SHA256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA384(0x0000000A, "HMAC_SHA384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA512(0x0000000B, "HMAC_SHA512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_MD5(0x0000000C, "HMAC_MD5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    DH(0x0000000D, "DH", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    ECDH(0x0000000E, "ECDH", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    ECMQV(0x0000000F, "ECMQV", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    BLOWFISH(0x00000010, "Blowfish", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    CAMELLIA(0x00000011, "Camellia", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    CAST5(0x00000012, "CAST5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    IDEA(0x00000013, "IDEA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    MARS(0x00000014, "MARS", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    RC2(0x00000015, "RC2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    RC4(0x00000016, "RC4", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    RC5(0x00000017, "RC5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    SKIPJACK(0x00000018, "Skipjack", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    TWOFISH(0x00000019, "Twofish", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    EC(0x0000001A, "EC", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
+    ONE_TIME_PAD(0x0000001B, "OneTimePad", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    CHACHA20(0x0000001C, "ChaCha20", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    POLY1305(0x0000001D, "Poly1305", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    CHACHA20_POLY1305(0x0000001E, "ChaCha20Poly1305", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    SHA3_224(0x0000001F, "SHA3_224", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SHA3_256(0x00000020, "SHA3_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SHA3_384(0x00000021, "SHA3_384", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SHA3_512(0x00000022, "SHA3_512", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    HMAC_SHA3_224(0x00000023, "HMAC_SHA3_224", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA3_256(0x00000024, "HMAC_SHA3_256", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA3_384(0x00000025, "HMAC_SHA3_384", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    HMAC_SHA3_512(0x00000026, "HMAC_SHA3_512", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    SHAKE_128(0x00000027, "SHAKE_128", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SHAKE_256(0x00000028, "SHAKE_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ARIA(0x00000029, "ARIA", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SEED(0x0000002A, "SEED", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SM2(0x0000002B, "SM2", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SM3(0x0000002C, "SM3", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SM4(0x0000002D, "SM4", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    GOST_R_34_10_2012(0x0000002E, "GOSTR34102012", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    GOST_R_34_11_2012(0x0000002F, "GOSTR34112012", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    GOST_R_34_13_2015(0x00000030, "GOSTR34132015", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    GOST_28147_89(0x00000031, "GOST2814789", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    XMSS(0x00000032, "XMSS", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    SPHINCS_256(0x00000033, "SPHINCS256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    MCELIECE(0x00000034, "McEliece", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    MCELIECE_6960119(0x00000035, "McEliece6960119", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    MCELIECE_8192128(0x00000036, "McEliece8192128", KmipSpec.UnknownVersion, KmipSpec.V2_1,
+        KmipSpec.V3_0),
+    ED25519(0x00000037, "Ed25519", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ED448(0x00000038, "Ed448", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    ML_KEM_512(0x00000039, "MLKEM512", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    ML_KEM_768(0x0000003A, "MLKEM768", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    ML_KEM_1024(0x0000003B, "MLKEM1024", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    ML_DSA_44(0x0000003C, "MLDSA44", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    ML_DSA_65(0x0000003D, "MLDSA65", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    ML_DSA_87(0x0000003E, "MLDSA87", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_128S(0x0000003F, "SLHDSASHA2128s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_128F(0x00000040, "SLHDSASHA2128f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_192S(0x00000041, "SLHDSASHA2192s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_192F(0x00000042, "SLHDSASHA2192f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_256S(0x00000043, "SLHDSASHA2256s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHA2_256F(0x00000044, "SLHDSASHA2256f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_128S(0x00000045, "SLHDSASHAKE128s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_128F(0x00000046, "SLHDSASHAKE128f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_192S(0x00000047, "SLHDSASHAKE192s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_192F(0x00000048, "SLHDSASHAKE192f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_256S(0x00000049, "SLHDSASHAKE256s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
+    SLH_DSA_SHAKE_256F(0x0000004A, "SLHDSASHAKE256f", KmipSpec.UnknownVersion, KmipSpec.V3_0);
+
+    private final int value;
+    private final String description;
+    private final Set<KmipSpec> supportedVersions;
+
+    private final boolean custom = false;
+
+    Standard(int value, String description, KmipSpec... supportedVersions) {
+      this.value = value;
+      this.description = description;
+      this.supportedVersions = Set.of(supportedVersions);
     }
 
     @Override
     public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && value.isSupported();
+      KmipSpec spec = KmipContext.getSpec();
+      return supportedVersions.contains(spec);
     }
 
     @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.ofEnumeration(value);
+    public CryptographicAlgorithm inst() {
+      return CryptographicAlgorithm.of(this);
+    }
+  }
+
+  /**
+   * An interface representing a Cryptographic Algorithm value, which can be either a standard
+   * value or a custom extension.
+   */
+  public interface Value extends KmipEnumeration.Value<CryptographicAlgorithm> {
+  }
+
+  /**
+   * Represents a custom, vendor-specific Cryptographic Algorithm.
+   */
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class Extension implements Value {
+    private final int value;
+    private final String description;
+    private final Set<KmipSpec> supportedVersions;
+
+    private final boolean custom = true;
+
+    public Extension(int value, String description, KmipSpec... supportedVersions) {
+      this.value = value;
+      this.description = description;
+      this.supportedVersions = Set.of(supportedVersions);
     }
 
     @Override
-    public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
+    public boolean isSupported() {
+      KmipSpec spec = KmipContext.getSpec();
+      return supportedVersions.contains(spec);
     }
 
     @Override
-    public String getCanonicalName() {
-        return kmipTag.getDescription();
+    public CryptographicAlgorithm inst() {
+      return CryptographicAlgorithm.of(this);
     }
-
-    @Override
-    public boolean isAlwaysPresent() {
-        return true;
-    }
-
-    @Override
-    public boolean isServerInitializable() {
-        return true;
-    }
-
-    @Override
-    public boolean isClientInitializable() {
-        return false;
-    }
-
-    @Override
-    public boolean isServerModifiable(State state) {
-        return false;
-    }
-
-    @Override
-    public boolean isClientModifiable(State state) {
-        return false;
-    }
-
-    @Override
-    public boolean isClientDeletable() {
-        return false;
-    }
-
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return false;
-    }
-
-    public int getIntValue() {
-        return value.getValue();
-    }
-
-    /**
-     * The standard enumeration of Cryptographic Algorithms.
-     */
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public enum Standard implements Value {
-        // TODO: fix all enum descriptions
-        DES(0x00000001, "DES", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        TRIPLE_DES(0x00000002, "DES3", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        AES(0x00000003, "AES", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RSA(0x00000004, "RSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DSA(0x00000005, "DSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDSA(0x00000006, "ECDSA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA1(0x00000007, "HMAC_SHA1", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA224(0x00000008, "HMAC_SHA224", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA256(0x00000009, "HMAC_SHA256", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA384(0x0000000A, "HMAC_SHA384", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA512(0x0000000B, "HMAC_SHA512", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_MD5(0x0000000C, "HMAC_MD5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        DH(0x0000000D, "DH", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECDH(0x0000000E, "ECDH", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ECMQV(0x0000000F, "ECMQV", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        BLOWFISH(0x00000010, "Blowfish", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CAMELLIA(0x00000011, "Camellia", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        CAST5(0x00000012, "CAST5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        IDEA(0x00000013, "IDEA", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        MARS(0x00000014, "MARS", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RC2(0x00000015, "RC2", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RC4(0x00000016, "RC4", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        RC5(0x00000017, "RC5", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        SKIPJACK(0x00000018, "Skipjack", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        TWOFISH(0x00000019, "Twofish", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        EC(0x0000001A, "EC", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1, KmipSpec.V3_0),
-        ONE_TIME_PAD(0x0000001B, "OneTimePad", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CHACHA20(0x0000001C, "ChaCha20", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        POLY1305(0x0000001D, "Poly1305", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        CHACHA20_POLY1305(0x0000001E, "ChaCha20Poly1305", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_224(0x0000001F, "SHA3_224", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_256(0x00000020, "SHA3_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_384(0x00000021, "SHA3_384", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHA3_512(0x00000022, "SHA3_512", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA3_224(0x00000023, "HMAC_SHA3_224", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA3_256(0x00000024, "HMAC_SHA3_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA3_384(0x00000025, "HMAC_SHA3_384", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        HMAC_SHA3_512(0x00000026, "HMAC_SHA3_512", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHAKE_128(0x00000027, "SHAKE_128", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SHAKE_256(0x00000028, "SHAKE_256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ARIA(0x00000029, "ARIA", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SEED(0x0000002A, "SEED", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SM2(0x0000002B, "SM2", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SM3(0x0000002C, "SM3", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SM4(0x0000002D, "SM4", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        GOST_R_34_10_2012(0x0000002E, "GOSTR34102012", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        GOST_R_34_11_2012(0x0000002F, "GOSTR34112012", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        GOST_R_34_13_2015(0x00000030, "GOSTR34132015", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        GOST_28147_89(0x00000031, "GOST2814789", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        XMSS(0x00000032, "XMSS", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        SPHINCS_256(0x00000033, "SPHINCS256", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        MCELIECE(0x00000034, "McEliece", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        MCELIECE_6960119(0x00000035, "McEliece6960119", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        MCELIECE_8192128(0x00000036, "McEliece8192128", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ED25519(0x00000037, "Ed25519", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ED448(0x00000038, "Ed448", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
-        ML_KEM_512(0x00000039, "MLKEM512", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        ML_KEM_768(0x0000003A, "MLKEM768", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        ML_KEM_1024(0x0000003B, "MLKEM1024", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        ML_DSA_44(0x0000003C, "MLDSA44", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        ML_DSA_65(0x0000003D, "MLDSA65", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        ML_DSA_87(0x0000003E, "MLDSA87", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_128S(0x0000003F, "SLHDSASHA2128s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_128F(0x00000040, "SLHDSASHA2128f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_192S(0x00000041, "SLHDSASHA2192s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_192F(0x00000042, "SLHDSASHA2192f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_256S(0x00000043, "SLHDSASHA2256s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHA2_256F(0x00000044, "SLHDSASHA2256f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_128S(0x00000045, "SLHDSASHAKE128s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_128F(0x00000046, "SLHDSASHAKE128f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_192S(0x00000047, "SLHDSASHAKE192s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_192F(0x00000048, "SLHDSASHAKE192f", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_256S(0x00000049, "SLHDSASHAKE256s", KmipSpec.UnknownVersion, KmipSpec.V3_0),
-        SLH_DSA_SHAKE_256F(0x0000004A, "SLHDSASHAKE256f", KmipSpec.UnknownVersion, KmipSpec.V3_0);
-
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = false;
-
-        Standard(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-
-        @Override
-        public CryptographicAlgorithm inst() {
-            return CryptographicAlgorithm.of(this);
-        }
-    }
-
-    /**
-     * An interface representing a Cryptographic Algorithm value, which can be either a standard
-     * value or a custom extension.
-     */
-    public interface Value extends KmipEnumeration.Value<CryptographicAlgorithm> {
-    }
-
-    /**
-     * Represents a custom, vendor-specific Cryptographic Algorithm.
-     */
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public static class Extension implements Value {
-        private final int value;
-        private final String description;
-        private final Set<KmipSpec> supportedVersions;
-
-        private final boolean custom = true;
-
-        public Extension(int value, String description, KmipSpec... supportedVersions) {
-            this.value = value;
-            this.description = description;
-            this.supportedVersions = Set.of(supportedVersions);
-        }
-
-        @Override
-        public boolean isSupported() {
-            KmipSpec spec = KmipContext.getSpec();
-            return supportedVersions.contains(spec);
-        }
-
-        @Override
-        public CryptographicAlgorithm inst() {
-            return CryptographicAlgorithm.of(this);
-        }
-    }
+  }
 }

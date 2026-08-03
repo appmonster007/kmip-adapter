@@ -11,33 +11,37 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("Template Ttlv Serialization Tests")
 class TemplateTtlvTest extends AbstractTtlvSerializationTestSuite<Template> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<Template> type() {
-        return Template.class;
-    }
+  @Override
+  public Class<Template> type() {
+    return Template.class;
+  }
 
-    @Override
-    public Template createDefault() {
-        return Template.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-    }
+  @Override
+  public Template createDefault() {
+    return Template
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+  }
 
-    @Override
-    public Template createVariant() {
-        return Template.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute-variant"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-    }
+  @Override
+  public Template createVariant() {
+    return Template
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute-variant"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+  }
 }

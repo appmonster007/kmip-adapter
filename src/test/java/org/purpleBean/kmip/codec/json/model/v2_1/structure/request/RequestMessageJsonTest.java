@@ -11,34 +11,37 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("RequestMessage Json Serialization Tests")
 class RequestMessageJsonTest extends AbstractJsonSerializationTestSuite<RequestMessage> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V2_1;
+  }
 
-    @Override
-    public Class<RequestMessage> type() {
-        return RequestMessage.class;
-    }
+  @Override
+  public Class<RequestMessage> type() {
+    return RequestMessage.class;
+  }
 
-    private RequestHeader header(int count) {
-        return RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(2, 1))
-                .batchCount(BatchCount.of(count))
-                .build();
-    }
+  private RequestHeader header(int count) {
+    return RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(2, 1))
+        .batchCount(BatchCount.of(count))
+        .build();
+  }
 
-    @Override
-    public RequestMessage createDefault() {
-        return RequestMessage.builder()
-                .requestHeader(header(0))
-                .build();
-    }
+  @Override
+  public RequestMessage createDefault() {
+    return RequestMessage
+        .builder()
+        .requestHeader(header(0))
+        .build();
+  }
 
-    @Override
-    public RequestMessage createVariant() {
-        return RequestMessage.builder()
-                .requestHeader(header(0))
-                .build();
-    }
+  @Override
+  public RequestMessage createVariant() {
+    return RequestMessage
+        .builder()
+        .requestHeader(header(0))
+        .build();
+  }
 }

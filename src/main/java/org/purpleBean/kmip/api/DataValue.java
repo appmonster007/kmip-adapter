@@ -15,7 +15,8 @@ package org.purpleBean.kmip.api;
  * </ul>
  * <p>
  * Structurally mirrors {@link KeyValue} — both are single-tag polymorphic containers whose
- * concrete implementations differ by {@link EncodingType}. Payload fields typed as {@code DataValue}
+ * concrete implementations differ by {@link EncodingType}. Payload fields typed as {@code
+ * DataValue}
  * should be deserialized via polymorphic {@code KmipDataType.class} dispatch (see
  * {@code KmipDataTypeXmlDeserializer}) and cast to this interface.
  *
@@ -27,8 +28,8 @@ package org.purpleBean.kmip.api;
  * @see org.purpleBean.kmip.model.v2_1.enumeration.DataEnumeration
  */
 public interface DataValue extends KmipDataType {
-    /**
-     * The standard KMIP tag for a Data value, always {@link KmipTag.Standard#DATA}.
-     */
-    KmipTag kmipTag = KmipTag.Standard.DATA.inst();
+  /**
+   * The standard KMIP tag for a Data value, always {@link KmipTag.Standard#DATA}.
+   */
+  KmipTag kmipTag = KmipTag.Standard.DATA.inst();
 }

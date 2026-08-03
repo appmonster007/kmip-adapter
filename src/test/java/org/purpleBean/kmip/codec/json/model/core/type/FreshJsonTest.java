@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Fresh JSON Serialization Tests")
 class FreshJsonTest extends AbstractJsonSerializationTestSuite<Fresh> {
 
-    @Override
-    public Class<Fresh> type() {
-        return Fresh.class;
-    }
+  @Override
+  public Class<Fresh> type() {
+    return Fresh.class;
+  }
 
-    @Override
-    public Fresh createDefault() {
-        return Fresh.builder().value(true).build();
-    }
+  @Override
+  public Fresh createDefault() {
+    return Fresh
+        .builder()
+        .value(true)
+        .build();
+  }
 
-    @Override
-    public Fresh createVariant() {
-        return Fresh.builder().value(false).build();
-    }
+  @Override
+  public Fresh createVariant() {
+    return Fresh
+        .builder()
+        .value(false)
+        .build();
+  }
 }

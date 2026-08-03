@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.structure;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.structure.KeyMaterialStructure;
 
-public class KeyMaterialStructureJsonSerializer extends AbstractKmipDataTypeJsonSerializer<KeyMaterialStructure> {
+public class KeyMaterialStructureJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<KeyMaterialStructure> {
 }

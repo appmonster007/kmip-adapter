@@ -9,21 +9,23 @@ import org.purpleBean.kmip.model.core.structure.SymmetricKey;
 
 public class SymmetricKeyBenchmarkSubject extends KmipBenchmarkSubject<SymmetricKey> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public SymmetricKeyBenchmarkSubject() throws Exception {
-        SymmetricKey subject = SymmetricKey.builder()
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-        initialize(subject, SymmetricKey.class);
-    }
+  public SymmetricKeyBenchmarkSubject() throws Exception {
+    SymmetricKey subject = SymmetricKey
+        .builder()
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+    initialize(subject, SymmetricKey.class);
+  }
 
-    @Override
-    public String name() {
-        return "SymmetricKey";
-    }
+  @Override
+  public String name() {
+    return "SymmetricKey";
+  }
 
 }

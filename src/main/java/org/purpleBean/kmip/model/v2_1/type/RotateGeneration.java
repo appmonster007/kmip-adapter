@@ -1,22 +1,20 @@
 package org.purpleBean.kmip.model.v2_1.type;
 
+import java.util.Objects;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipAttribute;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.model.core.enumeration.State;
+import org.purpleBean.kmip.model.core.type.AttributeName;
+import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.util.StringUtils;
-
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Objects;
-import java.util.Set;
-import org.purpleBean.kmip.model.v2_1.type.RotateGeneration;
 
 /**
  * KMIP RotateGeneration datatype attribute.
@@ -24,121 +22,132 @@ import org.purpleBean.kmip.model.v2_1.type.RotateGeneration;
 @Data
 @Builder(toBuilder = true)
 public class RotateGeneration implements KmipDataType, KmipAttribute {
-    public static final KmipTag kmipTag = KmipTag.Standard.ROTATE_GENERATION.inst();
-    public static final EncodingType encodingType = EncodingType.INTEGER;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+  public static final KmipTag kmipTag = KmipTag.Standard.ROTATE_GENERATION.inst();
+  public static final EncodingType encodingType = EncodingType.INTEGER;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, RotateGeneration.class);
-            KmipAttribute.register(spec, kmipTag.getValue(), encodingType, RotateGeneration.class, RotateGeneration::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, RotateGeneration.class);
+      KmipAttribute.register(spec, kmipTag.getValue(), encodingType, RotateGeneration.class,
+          RotateGeneration::of);
     }
+  }
 
-    @NonNull
-    private final Integer value;
+  @NonNull
+  private final Integer value;
 
-    @Builder
-    private RotateGeneration(@NonNull Integer value) {
-        this.value = value;
-        validate();
+  @Builder
+  private RotateGeneration(@NonNull Integer value) {
+    this.value = value;
+    validate();
+  }
+
+  public static RotateGeneration of(@NonNull Integer value) {
+    return new RotateGeneration(value);
+  }
+
+  public static RotateGeneration of(@NonNull AttributeName attributeName,
+                                    @NonNull AttributeValue attributeValue) {
+    if (attributeValue.getEncodingType() != encodingType ||
+        !(attributeValue.getValue() instanceof Integer value)) {
+      throw new IllegalArgumentException("Invalid attribute value");
     }
+    return new RotateGeneration(value);
+  }
 
-    public static RotateGeneration of(@NonNull Integer value) {
-        return new RotateGeneration(value);
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+    // No validation needed for this structure
+  }
 
-    public static RotateGeneration of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
-        if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof Integer value)) {
-            throw new IllegalArgumentException("Invalid attribute value");
-        }
-        return new RotateGeneration(value);
-    }
+  @Override
+  public AttributeValue getAttributeValue() {
+    return AttributeValue.ofInteger(value);
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        // No validation needed for this structure
-    }
+  @Override
+  public AttributeName getAttributeName() {
+    return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
+  }
 
-    @Override
-    public AttributeValue getAttributeValue() {
-        return AttributeValue.ofInteger(value);
-    }
+  @Override
+  public String getCanonicalName() {
+    return kmipTag.getDescription();
+  }
 
-    @Override
-    public AttributeName getAttributeName() {
-        return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    @Override
-    public String getCanonicalName() {
-        return kmipTag.getDescription();
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec);
+  }
 
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
+  @Override
+  public boolean isAlwaysPresent() {
+    return false;
+  }
 
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec);
-    }
+  @Override
+  public boolean isServerInitializable() {
+    return true;
+  }
 
-    @Override
-    public boolean isAlwaysPresent() {
-        return false;
-    }
+  @Override
+  public boolean isClientInitializable() {
+    return false;
+  }
 
-    @Override
-    public boolean isServerInitializable() {
-        return true;
-    }
+  @Override
+  public boolean isServerModifiable(@NonNull State state) {
+    return false;
+  }
 
-    @Override
-    public boolean isClientInitializable() {
-        return false;
-    }
+  @Override
+  public boolean isClientModifiable(@NonNull State state) {
+    return false;
+  }
 
-    @Override
-    public boolean isServerModifiable(@NonNull State state) {
-        return false;
-    }
+  @Override
+  public boolean isClientDeletable() {
+    return false;
+  }
 
-    @Override
-    public boolean isClientModifiable(@NonNull State state) {
-        return false;
-    }
+  @Override
+  public boolean isMultiInstanceAllowed() {
+    return false;
+  }
 
-    @Override
-    public boolean isClientDeletable() {
-        return false;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RotateGeneration that = (RotateGeneration) o;
+    return Objects.equals(value, that.value);
+  }
 
-    @Override
-    public boolean isMultiInstanceAllowed() {
-        return false;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RotateGeneration that = (RotateGeneration) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
+  }
 }

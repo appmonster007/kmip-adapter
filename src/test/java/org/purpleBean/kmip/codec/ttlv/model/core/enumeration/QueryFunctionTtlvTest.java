@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("QueryFunction TTLV Serialization")
 class QueryFunctionTtlvTest extends AbstractTtlvSerializationTestSuite<QueryFunction> {
-    @Override
-    public Class<QueryFunction> type() {
-        return QueryFunction.class;
-    }
+  @Override
+  public Class<QueryFunction> type() {
+    return QueryFunction.class;
+  }
 
-    @Override
-    public QueryFunction createDefault() {
-        return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
-    }
+  @Override
+  public QueryFunction createDefault() {
+    return QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
+  }
 
-    @Override
-    public QueryFunction createVariant() {
-        return QueryFunction.Standard.QUERY_OPERATIONS.inst();
-    }
+  @Override
+  public QueryFunction createVariant() {
+    return QueryFunction.Standard.QUERY_OPERATIONS.inst();
+  }
 }

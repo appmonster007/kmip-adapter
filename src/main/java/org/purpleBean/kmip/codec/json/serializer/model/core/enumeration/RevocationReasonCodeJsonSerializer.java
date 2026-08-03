@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 
-public class RevocationReasonCodeJsonSerializer extends AbstractKmipDataTypeJsonSerializer<RevocationReasonCode> {
+public class RevocationReasonCodeJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<RevocationReasonCode> {
 }

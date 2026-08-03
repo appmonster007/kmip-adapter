@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 
 public class StorageStatusMaskBenchmarkSubject extends KmipBenchmarkSubject<StorageStatusMask> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public StorageStatusMaskBenchmarkSubject() throws Exception {
-        StorageStatusMask storageStatusMask = StorageStatusMask.builder().value(1).build();
-        initialize(storageStatusMask, StorageStatusMask.class);
-    }
+  public StorageStatusMaskBenchmarkSubject() throws Exception {
+    StorageStatusMask storageStatusMask = StorageStatusMask
+        .builder()
+        .value(1)
+        .build();
+    initialize(storageStatusMask, StorageStatusMask.class);
+  }
 
-    @Override
-    public String name() {
-        return "StorageStatusMask";
-    }
+  @Override
+  public String name() {
+    return "StorageStatusMask";
+  }
 
 }

@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.DeviceIdentifier;
 
 public class DeviceIdentifierBenchmarkSubject extends KmipBenchmarkSubject<DeviceIdentifier> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public DeviceIdentifierBenchmarkSubject() throws Exception {
-        DeviceIdentifier deviceIdentifier = DeviceIdentifier.builder().value("test-device-id").build();
-        initialize(deviceIdentifier, DeviceIdentifier.class);
-    }
+  public DeviceIdentifierBenchmarkSubject() throws Exception {
+    DeviceIdentifier deviceIdentifier = DeviceIdentifier
+        .builder()
+        .value("test-device-id")
+        .build();
+    initialize(deviceIdentifier, DeviceIdentifier.class);
+  }
 
-    @Override
-    public String name() {
-        return "DeviceIdentifier";
-    }
+  @Override
+  public String name() {
+    return "DeviceIdentifier";
+  }
 
 }

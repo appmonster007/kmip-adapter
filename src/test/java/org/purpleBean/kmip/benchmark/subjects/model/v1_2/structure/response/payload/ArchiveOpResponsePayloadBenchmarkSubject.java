@@ -6,20 +6,22 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.ArchiveOpResponsePayload;
 
-public class ArchiveOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<ArchiveOpResponsePayload> {
+public class ArchiveOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<ArchiveOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ArchiveOpResponsePayloadBenchmarkSubject() throws Exception {
-        ArchiveOpResponsePayload subject = ArchiveOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-        initialize(subject, ArchiveOpResponsePayload.class);
-    }
+  public ArchiveOpResponsePayloadBenchmarkSubject() throws Exception {
+    ArchiveOpResponsePayload subject = ArchiveOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+    initialize(subject, ArchiveOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "ArchiveOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "ArchiveOpResponsePayload";
+  }
 }

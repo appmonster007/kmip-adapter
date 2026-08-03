@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v3_0.enumeration.SplitKeyPolynomial;
 
 public class SplitKeyPolynomialBenchmarkSubject extends KmipBenchmarkSubject<SplitKeyPolynomial> {
 
-    public SplitKeyPolynomialBenchmarkSubject() throws Exception {
-        SplitKeyPolynomial splitKeyPolynomial = SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
-        initialize(splitKeyPolynomial, SplitKeyPolynomial.class);
-    }
+  public SplitKeyPolynomialBenchmarkSubject() throws Exception {
+    SplitKeyPolynomial splitKeyPolynomial = SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
+    initialize(splitKeyPolynomial, SplitKeyPolynomial.class);
+  }
 
-    @Override
-    public String name() {
-        return "SplitKeyPolynomial";
-    }
+  @Override
+  public String name() {
+    return "SplitKeyPolynomial";
+  }
 
 }

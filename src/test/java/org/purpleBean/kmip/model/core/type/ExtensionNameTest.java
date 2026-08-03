@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("ExtensionName Domain Tests")
 class ExtensionNameTest extends AbstractKmipDataTypeTestSuite<ExtensionName> {
 
-    @Override
-    protected Class<ExtensionName> type() {
-        return ExtensionName.class;
-    }
+  @Override
+  protected Class<ExtensionName> type() {
+    return ExtensionName.class;
+  }
 
-    @Override
-    protected ExtensionName createDefault() {
-        return ExtensionName.builder().value("test-extension").build();
-    }
+  @Override
+  protected ExtensionName createDefault() {
+    return ExtensionName
+        .builder()
+        .value("test-extension")
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

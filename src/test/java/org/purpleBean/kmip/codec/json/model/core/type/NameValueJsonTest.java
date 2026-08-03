@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("NameValue JSON Serialization Tests")
 class NameValueJsonTest extends AbstractJsonSerializationTestSuite<NameValue> {
 
-    @Override
-    public Class<NameValue> type() {
-        return NameValue.class;
-    }
+  @Override
+  public Class<NameValue> type() {
+    return NameValue.class;
+  }
 
-    @Override
-    public NameValue createDefault() {
-        return NameValue.of("some-name");
-    }
+  @Override
+  public NameValue createDefault() {
+    return NameValue.of("some-name");
+  }
 
-    @Override
-    public NameValue createVariant() {
-        return NameValue.of("some-variant-name");
-    }
+  @Override
+  public NameValue createVariant() {
+    return NameValue.of("some-variant-name");
+  }
 }

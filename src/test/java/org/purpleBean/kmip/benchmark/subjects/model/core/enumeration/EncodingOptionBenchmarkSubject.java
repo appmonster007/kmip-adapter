@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
 
 public class EncodingOptionBenchmarkSubject extends KmipBenchmarkSubject<EncodingOption> {
 
-    public EncodingOptionBenchmarkSubject() throws Exception {
-        EncodingOption encodingOption = EncodingOption.Standard.NO_ENCODING.inst();
-        initialize(encodingOption, EncodingOption.class);
-    }
+  public EncodingOptionBenchmarkSubject() throws Exception {
+    EncodingOption encodingOption = EncodingOption.Standard.NO_ENCODING.inst();
+    initialize(encodingOption, EncodingOption.class);
+  }
 
-    @Override
-    public String name() {
-        return "EncodingOption";
-    }
+  @Override
+  public String name() {
+    return "EncodingOption";
+  }
 
 }

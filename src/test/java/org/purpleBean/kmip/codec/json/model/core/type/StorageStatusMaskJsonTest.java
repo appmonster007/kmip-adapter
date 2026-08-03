@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("StorageStatusMask JSON Serialization Tests")
 class StorageStatusMaskJsonTest extends AbstractJsonSerializationTestSuite<StorageStatusMask> {
 
-    @Override
-    public Class<StorageStatusMask> type() {
-        return StorageStatusMask.class;
-    }
+  @Override
+  public Class<StorageStatusMask> type() {
+    return StorageStatusMask.class;
+  }
 
-    @Override
-    public StorageStatusMask createDefault() {
-        return StorageStatusMask.builder().value(1).build();
-    }
+  @Override
+  public StorageStatusMask createDefault() {
+    return StorageStatusMask
+        .builder()
+        .value(1)
+        .build();
+  }
 
-    @Override
-    public StorageStatusMask createVariant() {
-        return StorageStatusMask.builder().value(2).build();
-    }
+  @Override
+  public StorageStatusMask createVariant() {
+    return StorageStatusMask
+        .builder()
+        .value(2)
+        .build();
+  }
 }

@@ -18,50 +18,62 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("RequestMessage Ttlv Serialization Tests")
 class RequestMessageTtlvTest extends AbstractTtlvSerializationTestSuite<RequestMessage> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RequestMessage> type() {
-        return RequestMessage.class;
-    }
+  @Override
+  public Class<RequestMessage> type() {
+    return RequestMessage.class;
+  }
 
-    @Override
-    public RequestMessage createDefault() {
-        RequestHeader header = RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(1, 2))
-                .batchCount(BatchCount.of(0))
-                .build();
-        RequestBatchItem item = RequestBatchItem.builder()
-                .operation(Operation.Standard.CREATE.inst())
-                .requestPayloadStructure(CreateOpRequestPayload.builder()
-                        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                        .templateAttribute(TemplateAttribute.builder().build())
-                        .build())
-                .build();
-        return RequestMessage.builder()
-                .requestHeader(header)
-                .requestBatchItem(item).requestBatchItemError(null)
-                .build();
-    }
+  @Override
+  public RequestMessage createDefault() {
+    RequestHeader header = RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(1, 2))
+        .batchCount(BatchCount.of(0))
+        .build();
+    RequestBatchItem item = RequestBatchItem
+        .builder()
+        .operation(Operation.Standard.CREATE.inst())
+        .requestPayloadStructure(CreateOpRequestPayload
+            .builder()
+            .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+            .templateAttribute(TemplateAttribute
+                .builder()
+                .build())
+            .build())
+        .build();
+    return RequestMessage
+        .builder()
+        .requestHeader(header)
+        .requestBatchItem(item)
+        .requestBatchItemError(null)
+        .build();
+  }
 
-    @Override
-    public RequestMessage createVariant() {
-        RequestHeader header = RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(1, 2))
-                .batchCount(BatchCount.of(0))
-                .build();
-        RequestBatchItem item = RequestBatchItem.builder()
-                .operation(Operation.Standard.GET.inst())
-                .requestPayloadStructure(GetOpRequestPayload.builder()
-                        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
-                        .build())
-                .build();
-        return RequestMessage.builder()
-                .requestHeader(header)
-                .requestBatchItem(item).requestBatchItemError(null)
-                .build();
-    }
+  @Override
+  public RequestMessage createVariant() {
+    RequestHeader header = RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(1, 2))
+        .batchCount(BatchCount.of(0))
+        .build();
+    RequestBatchItem item = RequestBatchItem
+        .builder()
+        .operation(Operation.Standard.GET.inst())
+        .requestPayloadStructure(GetOpRequestPayload
+            .builder()
+            .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+            .build())
+        .build();
+    return RequestMessage
+        .builder()
+        .requestHeader(header)
+        .requestBatchItem(item)
+        .requestBatchItemError(null)
+        .build();
+  }
 }

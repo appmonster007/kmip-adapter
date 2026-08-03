@@ -8,18 +8,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("CryptographicLength JSON Serialization Tests")
 class CryptographicLengthJsonTest extends AbstractJsonSerializationTestSuite<CryptographicLength> {
 
-    @Override
-    public Class<CryptographicLength> type() {
-        return CryptographicLength.class;
-    }
+  @Override
+  public Class<CryptographicLength> type() {
+    return CryptographicLength.class;
+  }
 
-    @Override
-    public CryptographicLength createDefault() {
-        return CryptographicLength.of(256);
-    }
+  @Override
+  public CryptographicLength createDefault() {
+    return CryptographicLength.of(256);
+  }
 
-    @Override
-    public CryptographicLength createVariant() {
-        return CryptographicLength.of(512);
-    }
+  @Override
+  public CryptographicLength createVariant() {
+    return CryptographicLength.of(512);
+  }
 }

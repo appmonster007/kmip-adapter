@@ -11,34 +11,42 @@ import org.purpleBean.kmip.model.core.type.Offset;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.RecertifyOpRequestPayload;
 
-public class RecertifyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<RecertifyOpRequestPayload> {
+public class RecertifyOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<RecertifyOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public RecertifyOpRequestPayloadBenchmarkSubject() throws Exception {
-        RecertifyOpRequestPayload subject = RecertifyOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
-                .certificateRequest(CertificateRequest.of(new byte[]{0x01, 0x02, 0x03}))
-                .offset(Offset.builder().value(100).build())
-                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .build();
-        initialize(subject, RecertifyOpRequestPayload.class);
-    }
+  public RecertifyOpRequestPayloadBenchmarkSubject() throws Exception {
+    RecertifyOpRequestPayload subject = RecertifyOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .certificateRequestType(CertificateRequestType.Standard.PKCS_10.inst())
+        .certificateRequest(CertificateRequest.of(new byte[] {0x01, 0x02, 0x03}))
+        .offset(Offset
+            .builder()
+            .value(100)
+            .build())
+        .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .build();
+    initialize(subject, RecertifyOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "RecertifyOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "RecertifyOpRequestPayload";
+  }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
+  @Override
+  public void setup() throws Exception {
+    KmipContext.setSpec(spec);
+  }
 
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
+  @Override
+  public void tearDown() {
+    KmipContext.clear();
+  }
 }

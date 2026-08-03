@@ -10,8 +10,11 @@ import java.util.HexFormat;
 
 public class ByteStringJsonSerializer extends JsonSerializer<ByteBuffer> {
 
-    @Override
-    public void serialize(ByteBuffer value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(HexFormat.of().formatHex(value.array()));
-    }
+  @Override
+  public void serialize(ByteBuffer value, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    gen.writeString(HexFormat
+        .of()
+        .formatHex(value.array()));
+  }
 }

@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.RngMode;
 
-import java.io.IOException;
+public class RngModeJsonDeserializer
+    extends AbstractKmipDataTypeJsonDeserializer<RngMode, RngMode.RngModeBuilder> {
 
-public class RngModeJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<RngMode, RngMode.RngModeBuilder> {
+  public RngModeJsonDeserializer() {
+    super(RngMode.kmipTag, RngMode.encodingType);
+  }
 
-    public RngModeJsonDeserializer() {
-        super(RngMode.kmipTag, RngMode.encodingType);
-    }
+  @Override
+  protected RngMode.RngModeBuilder createBuilder() {
+    return RngMode.builder();
+  }
 
-    @Override
-    protected RngMode.RngModeBuilder createBuilder() {
-        return RngMode.builder();
-    }
+  @Override
+  protected void setValue(RngMode.RngModeBuilder builder, String tag, String type, JsonParser p,
+                          DeserializationContext ctxt) throws IOException {
+    builder.value(RngMode.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(RngMode.RngModeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(RngMode.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected RngMode build(RngMode.RngModeBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected RngMode build(RngMode.RngModeBuilder builder) {
+    return builder.build();
+  }
 }

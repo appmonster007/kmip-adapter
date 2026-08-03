@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.enumeration;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 
-public class UsageLimitsUnitXmlSerializer extends AbstractKmipDataTypeXmlSerializer<UsageLimitsUnit> {
+public class UsageLimitsUnitXmlSerializer
+    extends AbstractKmipDataTypeXmlSerializer<UsageLimitsUnit> {
 }

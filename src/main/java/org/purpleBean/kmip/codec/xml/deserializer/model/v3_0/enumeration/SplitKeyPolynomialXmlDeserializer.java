@@ -2,29 +2,32 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.v3_0.enumeration.SplitKeyPolynomial;
 
-import java.io.IOException;
+public class SplitKeyPolynomialXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<SplitKeyPolynomial,
+        SplitKeyPolynomial.SplitKeyPolynomialBuilder> {
 
-public class SplitKeyPolynomialXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<SplitKeyPolynomial, SplitKeyPolynomial.SplitKeyPolynomialBuilder> {
+  public SplitKeyPolynomialXmlDeserializer() {
+    super(SplitKeyPolynomial.kmipTag, SplitKeyPolynomial.encodingType);
+  }
 
-    public SplitKeyPolynomialXmlDeserializer() {
-        super(SplitKeyPolynomial.kmipTag, SplitKeyPolynomial.encodingType);
-    }
+  @Override
+  protected SplitKeyPolynomial.SplitKeyPolynomialBuilder createBuilder() {
+    return SplitKeyPolynomial.builder();
+  }
 
-    @Override
-    protected SplitKeyPolynomial.SplitKeyPolynomialBuilder createBuilder() {
-        return SplitKeyPolynomial.builder();
-    }
+  @Override
+  protected void setValue(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder, String tag,
+                          String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    builder.value(SplitKeyPolynomial.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(SplitKeyPolynomial.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected SplitKeyPolynomial build(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected SplitKeyPolynomial build(SplitKeyPolynomial.SplitKeyPolynomialBuilder builder) {
+    return builder.build();
+  }
 }

@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("Username TTLV Serialization Tests")
 class UsernameTtlvTest extends AbstractTtlvSerializationTestSuite<Username> {
 
-    @Override
-    public Class<Username> type() {
-        return Username.class;
-    }
+  @Override
+  public Class<Username> type() {
+    return Username.class;
+  }
 
-    @Override
-    public Username createDefault() {
-        return Username.builder().value("test-user").build();
-    }
+  @Override
+  public Username createDefault() {
+    return Username
+        .builder()
+        .value("test-user")
+        .build();
+  }
 
-    @Override
-    public Username createVariant() {
-        return Username.builder().value("another-user").build();
-    }
+  @Override
+  public Username createVariant() {
+    return Username
+        .builder()
+        .value("another-user")
+        .build();
+  }
 }

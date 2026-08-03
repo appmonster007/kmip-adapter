@@ -1,90 +1,103 @@
 package org.purpleBean.kmip.model.core.structure;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Singular;
-import org.purpleBean.kmip.api.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.Singular;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipStructure;
+import org.purpleBean.kmip.api.KmipTag;
 
 @Data
 @Builder(toBuilder = true)
 public class TemplateAttribute implements KmipStructure {
-    public static final KmipTag kmipTag = KmipTag.Standard.TEMPLATE_ATTRIBUTE.inst();
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0, KmipSpec.V2_1, KmipSpec.V3_0);
+  public static final KmipTag kmipTag = KmipTag.Standard.TEMPLATE_ATTRIBUTE.inst();
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V1_3, KmipSpec.V1_4, KmipSpec.V2_0,
+          KmipSpec.V2_1, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, TemplateAttribute.class);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, TemplateAttribute.class);
     }
+  }
 
-    @NonNull
-    @Singular
-    private final List<Name> names;
-    @NonNull
-    @Singular
-    private final List<Attribute> attributes;
+  @NonNull
+  @Singular
+  private final List<Name> names;
+  @NonNull
+  @Singular
+  private final List<Attribute> attributes;
 
-    @Builder
-    private TemplateAttribute(
-            List<Name> names,
-            List<Attribute> attributes
+  @Builder
+  private TemplateAttribute(
+      List<Name> names,
+      List<Attribute> attributes
 
-    ) {
-        this.names = (names == null) ? Collections.emptyList() : names;
-        this.attributes = (attributes == null) ? Collections.emptyList() : attributes;
-        validate();
+  ) {
+    this.names = (names == null) ? Collections.emptyList() : names;
+    this.attributes = (attributes == null) ? Collections.emptyList() : attributes;
+    validate();
+  }
+
+  public static TemplateAttribute of(
+      List<Name> names,
+      List<Attribute> attributes
+
+  ) {
+    return TemplateAttribute
+        .builder()
+        .names(names)
+        .attributes(attributes)
+        .build();
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+    // Add validation logic here
+  }
 
-    public static TemplateAttribute of(
-            List<Name> names,
-            List<Attribute> attributes
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    ) {
-        return TemplateAttribute.builder()
-                .names(names)
-                .attributes(attributes)
-                .build();
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-        // Add validation logic here
-    }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && Stream
+        .of(getValue())
+        .allMatch(KmipDataType::isSupported);
+  }
 
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
-
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
-
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
-    }
-
-    @Override
-    public KmipDataType[] getValue() {
-        return Stream.of(
-                        names,
-                        attributes)
-                .filter(Objects::nonNull)
-                .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
-                .map(KmipDataType.class::cast)
-                .toArray(KmipDataType[]::new);
-    }
+  @Override
+  public KmipDataType[] getValue() {
+    return Stream
+        .of(
+            names,
+            attributes)
+        .filter(Objects::nonNull)
+        .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))
+        .map(KmipDataType.class::cast)
+        .toArray(KmipDataType[]::new);
+  }
 }

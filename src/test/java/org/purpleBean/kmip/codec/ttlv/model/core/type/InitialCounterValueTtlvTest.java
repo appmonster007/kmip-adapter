@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("InitialCounterValue TTLV Serialization Tests")
 class InitialCounterValueTtlvTest extends AbstractTtlvSerializationTestSuite<InitialCounterValue> {
 
-    @Override
-    public Class<InitialCounterValue> type() {
-        return InitialCounterValue.class;
-    }
+  @Override
+  public Class<InitialCounterValue> type() {
+    return InitialCounterValue.class;
+  }
 
-    @Override
-    public InitialCounterValue createDefault() {
-        return InitialCounterValue.of(1);
-    }
+  @Override
+  public InitialCounterValue createDefault() {
+    return InitialCounterValue.of(1);
+  }
 
-    @Override
-    public InitialCounterValue createVariant() {
-        return InitialCounterValue.of(2);
-    }
+  @Override
+  public InitialCounterValue createVariant() {
+    return InitialCounterValue.of(2);
+  }
 }

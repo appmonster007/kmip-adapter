@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.structure.response
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
@@ -11,39 +12,45 @@ import org.purpleBean.kmip.model.core.enumeration.ResultStatus;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem;
 import org.purpleBean.kmip.model.core.type.ResultMessage;
 
-import java.io.IOException;
+public class SimpleResponseBatchItemXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<SimpleResponseBatchItem,
+        SimpleResponseBatchItem.SimpleResponseBatchItemBuilder> {
 
-public class SimpleResponseBatchItemXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<SimpleResponseBatchItem, SimpleResponseBatchItem.SimpleResponseBatchItemBuilder> {
+  public SimpleResponseBatchItemXmlDeserializer() {
+    super(SimpleResponseBatchItem.kmipTag, SimpleResponseBatchItem.encodingType);
+  }
 
-    public SimpleResponseBatchItemXmlDeserializer() {
-        super(SimpleResponseBatchItem.kmipTag, SimpleResponseBatchItem.encodingType);
+  @Override
+  protected SimpleResponseBatchItem.SimpleResponseBatchItemBuilder createBuilder() {
+    return SimpleResponseBatchItem.builder();
+  }
+
+  @Override
+  protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder,
+                          String tag, String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.OPERATION -> {
+        Operation operation = ctxt.readValue(p, Operation.class);
+        builder.operation(operation);
+        ctxt.setAttribute("operation", operation.getDescription());
+      }
+      case KmipTag.Standard.RESULT_STATUS ->
+          builder.resultStatus(ctxt.readValue(p, ResultStatus.class));
+      case KmipTag.Standard.RESULT_REASON ->
+          builder.resultReason(ctxt.readValue(p, ResultReason.class));
+      case KmipTag.Standard.RESULT_MESSAGE ->
+          builder.resultMessage(ctxt.readValue(p, ResultMessage.class));
+      case KmipTag.Standard.RESPONSE_PAYLOAD ->
+          builder.responsePayloadStructure(ctxt.readValue(p, ResponsePayloadStructure.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected SimpleResponseBatchItem.SimpleResponseBatchItemBuilder createBuilder() {
-        return SimpleResponseBatchItem.builder();
-    }
-
-    @Override
-    protected void setValue(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.OPERATION -> {
-                Operation operation = ctxt.readValue(p, Operation.class);
-                builder.operation(operation);
-                ctxt.setAttribute("operation", operation.getDescription());
-            }
-            case KmipTag.Standard.RESULT_STATUS -> builder.resultStatus(ctxt.readValue(p, ResultStatus.class));
-            case KmipTag.Standard.RESULT_REASON -> builder.resultReason(ctxt.readValue(p, ResultReason.class));
-            case KmipTag.Standard.RESULT_MESSAGE -> builder.resultMessage(ctxt.readValue(p, ResultMessage.class));
-            case KmipTag.Standard.RESPONSE_PAYLOAD ->
-                    builder.responsePayloadStructure(ctxt.readValue(p, ResponsePayloadStructure.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected SimpleResponseBatchItem build(SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected SimpleResponseBatchItem build(
+      SimpleResponseBatchItem.SimpleResponseBatchItemBuilder builder) {
+    return builder.build();
+  }
 }

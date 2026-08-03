@@ -1,38 +1,32 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v2_1.type;
 
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
+import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.v2_1.type.CertificateSubjectO;
 
-import java.io.IOException;
+public class CertificateSubjectOTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<CertificateSubjectO,
+        CertificateSubjectO.CertificateSubjectOBuilder> {
 
-public class CertificateSubjectOTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CertificateSubjectO, CertificateSubjectO.CertificateSubjectOBuilder> {
+  public CertificateSubjectOTtlvDeserializer() {
+    super(CertificateSubjectO.kmipTag, CertificateSubjectO.encodingType);
+  }
 
-    public CertificateSubjectOTtlvDeserializer() {
-        super(CertificateSubjectO.kmipTag, CertificateSubjectO.encodingType);
-    }
+  @Override
+  protected CertificateSubjectO.CertificateSubjectOBuilder createBuilder() {
+    return CertificateSubjectO.builder();
+  }
 
-    @Override
-    protected CertificateSubjectO.CertificateSubjectOBuilder createBuilder() {
-        return CertificateSubjectO.builder();
-    }
+  @Override
+  protected void setValue(CertificateSubjectO.CertificateSubjectOBuilder builder, byte[] tag,
+                          byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    builder.value(mapper.readValue(p, String.class));
+  }
 
-    @Override
-    protected void setValue(CertificateSubjectO.CertificateSubjectOBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        builder.value(mapper.readValue(p, String.class));
-    }
-
-    @Override
-    protected CertificateSubjectO build(CertificateSubjectO.CertificateSubjectOBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected CertificateSubjectO build(CertificateSubjectO.CertificateSubjectOBuilder builder) {
+    return builder.build();
+  }
 }

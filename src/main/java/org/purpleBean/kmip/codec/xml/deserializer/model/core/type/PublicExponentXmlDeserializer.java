@@ -2,30 +2,31 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
+import java.math.BigInteger;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.PublicExponent;
 
-import java.io.IOException;
-import java.math.BigInteger;
+public class PublicExponentXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<PublicExponent, PublicExponent.PublicExponentBuilder> {
 
-public class PublicExponentXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<PublicExponent, PublicExponent.PublicExponentBuilder> {
+  public PublicExponentXmlDeserializer() {
+    super(PublicExponent.kmipTag, PublicExponent.encodingType);
+  }
 
-    public PublicExponentXmlDeserializer() {
-        super(PublicExponent.kmipTag, PublicExponent.encodingType);
-    }
+  @Override
+  protected PublicExponent.PublicExponentBuilder createBuilder() {
+    return PublicExponent.builder();
+  }
 
-    @Override
-    protected PublicExponent.PublicExponentBuilder createBuilder() {
-        return PublicExponent.builder();
-    }
+  @Override
+  protected void setValue(PublicExponent.PublicExponentBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, BigInteger.class));
+  }
 
-    @Override
-    protected void setValue(PublicExponent.PublicExponentBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, BigInteger.class));
-    }
-
-    @Override
-    protected PublicExponent build(PublicExponent.PublicExponentBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected PublicExponent build(PublicExponent.PublicExponentBuilder builder) {
+    return builder.build();
+  }
 }

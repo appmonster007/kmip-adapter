@@ -7,16 +7,16 @@ import org.purpleBean.kmip.model.v3_0.structure.Name;
 
 public class NameBenchmarkSubject extends KmipBenchmarkSubject<Name> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V3_0;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V3_0;
 
-    public NameBenchmarkSubject() throws Exception {
-        Name subject = Name.of("benchmark-name");
-        initialize(subject, Name.class);
-    }
+  public NameBenchmarkSubject() throws Exception {
+    Name subject = Name.of("benchmark-name");
+    initialize(subject, Name.class);
+  }
 
-    @Override
-    public String name() {
-        return "Name";
-    }
+  @Override
+  public String name() {
+    return "Name";
+  }
 }

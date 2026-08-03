@@ -1,34 +1,27 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v3_0.structure;
 
 import lombok.Getter;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 import org.purpleBean.kmip.model.v3_0.enumeration.DeactivationReasonCode;
+import org.purpleBean.kmip.model.v3_0.structure.DeactivationReason;
 
 public class DeactivationReasonBenchmarkSubject extends KmipBenchmarkSubject<DeactivationReason> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V3_0;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V3_0;
 
-    public DeactivationReasonBenchmarkSubject() throws Exception {
-        DeactivationReason subject = DeactivationReason.builder()
-                .deactivationReasonCode(DeactivationReasonCode.of(DeactivationReasonCode.Standard.UNSPECIFIED))
-                .build();
-        initialize(subject, DeactivationReason.class);
-    }
+  public DeactivationReasonBenchmarkSubject() throws Exception {
+    DeactivationReason subject = DeactivationReason
+        .builder()
+        .deactivationReasonCode(
+            DeactivationReasonCode.of(DeactivationReasonCode.Standard.UNSPECIFIED))
+        .build();
+    initialize(subject, DeactivationReason.class);
+  }
 
-    @Override
-    public String name() {
-        return "DeactivationReason";
-    }
+  @Override
+  public String name() {
+    return "DeactivationReason";
+  }
 }

@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("Key XML Serialization Tests")
 class KeyXmlTest extends AbstractXmlSerializationTestSuite<Key> {
 
-    @Override
-    public Class<Key> type() {
-        return Key.class;
-    }
+  @Override
+  public Class<Key> type() {
+    return Key.class;
+  }
 
-    @Override
-    public Key createDefault() {
-        return Key.of(new byte[]{0x01, 0x02, 0x03});
-    }
+  @Override
+  public Key createDefault() {
+    return Key.of(new byte[] {0x01, 0x02, 0x03});
+  }
 
-    @Override
-    public Key createVariant() {
-        return Key.of(new byte[]{0x04, 0x05, 0x06});
-    }
+  @Override
+  public Key createVariant() {
+    return Key.of(new byte[] {0x04, 0x05, 0x06});
+  }
 }

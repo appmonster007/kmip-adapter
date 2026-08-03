@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.v1_2.structure.request.p
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.DeleteAttributeOpRequestPayload;
 
-public class DeleteAttributeOpRequestPayloadJsonSerializer extends AbstractKmipDataTypeJsonSerializer<DeleteAttributeOpRequestPayload> {
+public class DeleteAttributeOpRequestPayloadJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<DeleteAttributeOpRequestPayload> {
 }

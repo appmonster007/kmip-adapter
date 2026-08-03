@@ -1,35 +1,36 @@
 package org.purpleBean.kmip.model.core;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.type.*;
-
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("TtlvDataType Domain Tests")
 class TtlvDataTypeTest extends AbstractKmipDataTypeTestSuite<TtlvDataType> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    protected Class<TtlvDataType> type() {
-        return TtlvDataType.class;
-    }
+  @Override
+  protected Class<TtlvDataType> type() {
+    return TtlvDataType.class;
+  }
 
-    @Override
-    protected TtlvDataType createDefault() {
-        return TtlvDataType.builder()
-                .kmipTag(UniqueIdentifier.kmipTag)
-                .encodingType(UniqueIdentifier.encodingType)
-                .value("default-string")
-                .build();
-    }
+  @Override
+  protected TtlvDataType createDefault() {
+    return TtlvDataType
+        .builder()
+        .kmipTag(UniqueIdentifier.kmipTag)
+        .encodingType(UniqueIdentifier.encodingType)
+        .value("default-string")
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v3_0.structure.response.payload;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -9,38 +11,40 @@ import org.purpleBean.kmip.model.v3_0.structure.response.payload.ReKeyKeyPairOpR
 import org.purpleBean.kmip.model.v3_0.type.PrivateKeyUniqueIdentifier;
 import org.purpleBean.kmip.model.v3_0.type.PublicKeyUniqueIdentifier;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class ReKeyKeyPairOpResponsePayloadTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<ReKeyKeyPairOpResponsePayload,
+        ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder> {
 
-public class ReKeyKeyPairOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ReKeyKeyPairOpResponsePayload, ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder> {
+  public ReKeyKeyPairOpResponsePayloadTtlvDeserializer() {
+    super(ReKeyKeyPairOpResponsePayload.kmipTag, ReKeyKeyPairOpResponsePayload.encodingType);
+  }
 
-    public ReKeyKeyPairOpResponsePayloadTtlvDeserializer() {
-        super(ReKeyKeyPairOpResponsePayload.kmipTag, ReKeyKeyPairOpResponsePayload.encodingType);
+  @Override
+  protected ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder createBuilder() {
+    return ReKeyKeyPairOpResponsePayload.builder();
+  }
+
+  @Override
+  protected void setValue(
+      ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder, byte[] tag,
+      byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER ->
+          builder.privateKeyUniqueIdentifier(mapper.readValue(p, PrivateKeyUniqueIdentifier.class));
+      case KmipTag.Standard.PUBLIC_KEY_UNIQUE_IDENTIFIER ->
+          builder.publicKeyUniqueIdentifier(mapper.readValue(p, PublicKeyUniqueIdentifier.class));
+      case KmipTag.Standard.PRIVATE_KEY_TEMPLATE_ATTRIBUTE -> builder.privateKeyTemplateAttribute(
+          mapper.readValue(p, PrivateKeyTemplateAttribute.class));
+      case KmipTag.Standard.PUBLIC_KEY_TEMPLATE_ATTRIBUTE ->
+          builder.publicKeyTemplateAttribute(mapper.readValue(p, PublicKeyTemplateAttribute.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder createBuilder() {
-        return ReKeyKeyPairOpResponsePayload.builder();
-    }
-
-    @Override
-    protected void setValue(ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.PRIVATE_KEY_UNIQUE_IDENTIFIER ->
-                    builder.privateKeyUniqueIdentifier(mapper.readValue(p, PrivateKeyUniqueIdentifier.class));
-            case KmipTag.Standard.PUBLIC_KEY_UNIQUE_IDENTIFIER ->
-                    builder.publicKeyUniqueIdentifier(mapper.readValue(p, PublicKeyUniqueIdentifier.class));
-            case KmipTag.Standard.PRIVATE_KEY_TEMPLATE_ATTRIBUTE ->
-                    builder.privateKeyTemplateAttribute(mapper.readValue(p, PrivateKeyTemplateAttribute.class));
-            case KmipTag.Standard.PUBLIC_KEY_TEMPLATE_ATTRIBUTE ->
-                    builder.publicKeyTemplateAttribute(mapper.readValue(p, PublicKeyTemplateAttribute.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected ReKeyKeyPairOpResponsePayload build(ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected ReKeyKeyPairOpResponsePayload build(
+      ReKeyKeyPairOpResponsePayload.ReKeyKeyPairOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
 }

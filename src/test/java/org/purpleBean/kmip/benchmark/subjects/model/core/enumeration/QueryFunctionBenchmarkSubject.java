@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.QueryFunction;
 
 public class QueryFunctionBenchmarkSubject extends KmipBenchmarkSubject<QueryFunction> {
 
-    public QueryFunctionBenchmarkSubject() throws Exception {
-        QueryFunction queryFunction = QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
-        initialize(queryFunction, QueryFunction.class);
-    }
+  public QueryFunctionBenchmarkSubject() throws Exception {
+    QueryFunction queryFunction = QueryFunction.Standard.QUERY_SERVER_INFORMATION.inst();
+    initialize(queryFunction, QueryFunction.class);
+  }
 
-    @Override
-    public String name() {
-        return "QueryFunction";
-    }
+  @Override
+  public String name() {
+    return "QueryFunction";
+  }
 
 }

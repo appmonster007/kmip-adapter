@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.type;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.type.KeyValueByteString;
 
-public class KeyValueByteStringXmlSerializer extends AbstractKmipDataTypeXmlSerializer<KeyValueByteString> {
+public class KeyValueByteStringXmlSerializer
+    extends AbstractKmipDataTypeXmlSerializer<KeyValueByteString> {
 }

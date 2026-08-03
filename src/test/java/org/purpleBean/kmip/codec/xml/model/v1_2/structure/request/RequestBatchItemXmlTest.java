@@ -14,34 +14,40 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("RequestBatchItem Xml Serialization Tests")
 class RequestBatchItemXmlTest extends AbstractXmlSerializationTestSuite<RequestBatchItem> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RequestBatchItem> type() {
-        return RequestBatchItem.class;
-    }
+  @Override
+  public Class<RequestBatchItem> type() {
+    return RequestBatchItem.class;
+  }
 
-    @Override
-    public RequestBatchItem createDefault() {
-        return RequestBatchItem.builder()
-                .operation(Operation.Standard.CREATE.inst())
-                .requestPayloadStructure(CreateOpRequestPayload.builder()
-                        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                        .templateAttribute(TemplateAttribute.builder().build())
-                        .build())
-                .build();
-    }
+  @Override
+  public RequestBatchItem createDefault() {
+    return RequestBatchItem
+        .builder()
+        .operation(Operation.Standard.CREATE.inst())
+        .requestPayloadStructure(CreateOpRequestPayload
+            .builder()
+            .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+            .templateAttribute(TemplateAttribute
+                .builder()
+                .build())
+            .build())
+        .build();
+  }
 
-    @Override
-    public RequestBatchItem createVariant() {
-        return RequestBatchItem.builder()
-                .operation(Operation.Standard.GET.inst())
-                .requestPayloadStructure(GetOpRequestPayload.builder()
-                        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
-                        .build())
-                .build();
-    }
+  @Override
+  public RequestBatchItem createVariant() {
+    return RequestBatchItem
+        .builder()
+        .operation(Operation.Standard.GET.inst())
+        .requestPayloadStructure(GetOpRequestPayload
+            .builder()
+            .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+            .build())
+        .build();
+  }
 }

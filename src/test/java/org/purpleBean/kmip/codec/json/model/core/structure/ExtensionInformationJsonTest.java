@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.core.type.ExtensionName;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ExtensionInformation Json Serialization Tests")
-class ExtensionInformationJsonTest extends AbstractJsonSerializationTestSuite<ExtensionInformation> {
+class ExtensionInformationJsonTest
+    extends AbstractJsonSerializationTestSuite<ExtensionInformation> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<ExtensionInformation> type() {
-        return ExtensionInformation.class;
-    }
+  @Override
+  public Class<ExtensionInformation> type() {
+    return ExtensionInformation.class;
+  }
 
-    @Override
-    public ExtensionInformation createDefault() {
-        return ExtensionInformation.builder()
-                .extensionName(ExtensionName.of("test-extension"))
-                .build();
-    }
+  @Override
+  public ExtensionInformation createDefault() {
+    return ExtensionInformation
+        .builder()
+        .extensionName(ExtensionName.of("test-extension"))
+        .build();
+  }
 
-    @Override
-    public ExtensionInformation createVariant() {
-        return ExtensionInformation.builder()
-                .extensionName(ExtensionName.of("test-extension-variant"))
-                .build();
-    }
+  @Override
+  public ExtensionInformation createVariant() {
+    return ExtensionInformation
+        .builder()
+        .extensionName(ExtensionName.of("test-extension-variant"))
+        .build();
+  }
 }

@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.QueryOpRequestPa
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("QueryOpRequestPayload Ttlv Serialization Tests")
-class QueryOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<QueryOpRequestPayload> {
+class QueryOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<QueryOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<QueryOpRequestPayload> type() {
-        return QueryOpRequestPayload.class;
-    }
+  @Override
+  public Class<QueryOpRequestPayload> type() {
+    return QueryOpRequestPayload.class;
+  }
 
-    @Override
-    public QueryOpRequestPayload createDefault() {
-        return QueryOpRequestPayload.builder()
-                .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OPERATIONS))
-                .build();
-    }
+  @Override
+  public QueryOpRequestPayload createDefault() {
+    return QueryOpRequestPayload
+        .builder()
+        .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OPERATIONS))
+        .build();
+  }
 
-    @Override
-    public QueryOpRequestPayload createVariant() {
-        return QueryOpRequestPayload.builder()
-                .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OBJECTS))
-                .build();
-    }
+  @Override
+  public QueryOpRequestPayload createVariant() {
+    return QueryOpRequestPayload
+        .builder()
+        .queryFunction(QueryFunction.of(QueryFunction.Standard.QUERY_OBJECTS))
+        .build();
+  }
 }

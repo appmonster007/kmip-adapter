@@ -10,10 +10,12 @@ import java.time.format.DateTimeFormatter;
 
 public class OffsetDateTimeXmlSerializer extends JsonSerializer<OffsetDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx");
+  private static final DateTimeFormatter FORMATTER =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx");
 
-    @Override
-    public void serialize(OffsetDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(value.format(FORMATTER));
-    }
+  @Override
+  public void serialize(OffsetDateTime value, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    gen.writeString(value.format(FORMATTER));
+  }
 }

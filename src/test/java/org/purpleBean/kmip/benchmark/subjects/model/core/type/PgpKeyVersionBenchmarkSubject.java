@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.PgpKeyVersion;
 
 public class PgpKeyVersionBenchmarkSubject extends KmipBenchmarkSubject<PgpKeyVersion> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public PgpKeyVersionBenchmarkSubject() throws Exception {
-        PgpKeyVersion subject = PgpKeyVersion.of(123);
-        initialize(subject, PgpKeyVersion.class);
-    }
+  public PgpKeyVersionBenchmarkSubject() throws Exception {
+    PgpKeyVersion subject = PgpKeyVersion.of(123);
+    initialize(subject, PgpKeyVersion.class);
+  }
 
-    @Override
-    public String name() {
-        return "PgpKeyVersion";
-    }
+  @Override
+  public String name() {
+    return "PgpKeyVersion";
+  }
 
 }

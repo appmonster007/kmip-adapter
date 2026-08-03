@@ -1,10 +1,9 @@
 package org.purpleBean.kmip.codec.json.serializer.api;
 
 import com.fasterxml.jackson.databind.JsonSerializer;
-import org.purpleBean.kmip.api.KmipDataType;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import org.purpleBean.kmip.api.KmipDataType;
 
 /**
  * Base JSON serializer for {@link KmipDataType} objects.
@@ -17,19 +16,20 @@ import java.lang.reflect.Type;
  * @param <T> The specific type of {@link KmipDataType} to serialize.
  */
 public abstract class KmipDataTypeJsonSerializer<T extends KmipDataType> extends JsonSerializer<T> {
-    @SuppressWarnings("unchecked")
-    @Override
-    public Class<T> handledType() {
-        // Try to infer the generic parameter (T) from the concrete subclass declaration
-        // e.g., class FooSerializer extends KmipDataTypeJsonSerializer<Foo>
-        // This allows SimpleModule.addSerializer(JsonSerializer) to work without passing Class explicitly
-        Type superType = getClass().getGenericSuperclass();
-        if (superType instanceof ParameterizedType pt) {
-            Type tArg = pt.getActualTypeArguments()[0];
-            if (tArg instanceof Class<?> c) {
-                return (Class<T>) c;
-            }
-        }
-        return super.handledType();
+  @SuppressWarnings("unchecked")
+  @Override
+  public Class<T> handledType() {
+    // Try to infer the generic parameter (T) from the concrete subclass declaration
+    // e.g., class FooSerializer extends KmipDataTypeJsonSerializer<Foo>
+    // This allows SimpleModule.addSerializer(JsonSerializer) to work without passing Class
+    // explicitly
+    Type superType = getClass().getGenericSuperclass();
+    if (superType instanceof ParameterizedType pt) {
+      Type tArg = pt.getActualTypeArguments()[0];
+      if (tArg instanceof Class<?> c) {
+        return (Class<T>) c;
+      }
     }
+    return super.handledType();
+  }
 }

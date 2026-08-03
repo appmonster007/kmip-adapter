@@ -8,19 +8,20 @@ import org.purpleBean.kmip.model.core.structure.KeyBlock;
 
 public class KeyBlockBenchmarkSubject extends KmipBenchmarkSubject<KeyBlock> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public KeyBlockBenchmarkSubject() throws Exception {
-        KeyBlock subject = KeyBlock.builder()
-                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                .build();
-        initialize(subject, KeyBlock.class);
-    }
+  public KeyBlockBenchmarkSubject() throws Exception {
+    KeyBlock subject = KeyBlock
+        .builder()
+        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+        .build();
+    initialize(subject, KeyBlock.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyBlock";
-    }
+  @Override
+  public String name() {
+    return "KeyBlock";
+  }
 
 }

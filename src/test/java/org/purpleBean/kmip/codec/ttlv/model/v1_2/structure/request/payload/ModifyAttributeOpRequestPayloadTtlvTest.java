@@ -10,31 +10,36 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ModifyAttributeO
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ModifyAttributeOpRequestPayload Ttlv Serialization Tests")
-class ModifyAttributeOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<ModifyAttributeOpRequestPayload> {
+class ModifyAttributeOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ModifyAttributeOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ModifyAttributeOpRequestPayload> type() {
-        return ModifyAttributeOpRequestPayload.class;
-    }
+  @Override
+  public Class<ModifyAttributeOpRequestPayload> type() {
+    return ModifyAttributeOpRequestPayload.class;
+  }
 
-    @Override
-    public ModifyAttributeOpRequestPayload createDefault() {
-        return ModifyAttributeOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
-                .build();
-    }
+  @Override
+  public ModifyAttributeOpRequestPayload createDefault() {
+    return ModifyAttributeOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+  }
 
-    @Override
-    public ModifyAttributeOpRequestPayload createVariant() {
-        return ModifyAttributeOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .attribute(Attribute.of(AttributeName.of("variant-attribute"), AttributeValue.ofTextString("variant-value")))
-                .build();
-    }
+  @Override
+  public ModifyAttributeOpRequestPayload createVariant() {
+    return ModifyAttributeOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .attribute(Attribute.of(AttributeName.of("variant-attribute"),
+            AttributeValue.ofTextString("variant-value")))
+        .build();
+  }
 }

@@ -6,27 +6,30 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.PutOpResponsePa
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("PutOpResponsePayload Json Serialization Tests")
-class PutOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<PutOpResponsePayload> {
+class PutOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<PutOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<PutOpResponsePayload> type() {
-        return PutOpResponsePayload.class;
-    }
+  @Override
+  public Class<PutOpResponsePayload> type() {
+    return PutOpResponsePayload.class;
+  }
 
-    @Override
-    public PutOpResponsePayload createDefault() {
-        return PutOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public PutOpResponsePayload createDefault() {
+    return PutOpResponsePayload
+        .builder()
+        .build();
+  }
 
-    @Override
-    public PutOpResponsePayload createVariant() {
-        return PutOpResponsePayload.builder()
-                .build();
-    }
+  @Override
+  public PutOpResponsePayload createVariant() {
+    return PutOpResponsePayload
+        .builder()
+        .build();
+  }
 }

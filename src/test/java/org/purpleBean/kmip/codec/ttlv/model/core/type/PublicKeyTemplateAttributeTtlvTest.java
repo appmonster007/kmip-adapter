@@ -6,25 +6,26 @@ import org.purpleBean.kmip.model.core.type.PublicKeyTemplateAttribute;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("PublicKeyTemplateAttribute Ttlv Serialization Tests")
-class PublicKeyTemplateAttributeTtlvTest extends AbstractTtlvSerializationTestSuite<PublicKeyTemplateAttribute> {
+class PublicKeyTemplateAttributeTtlvTest
+    extends AbstractTtlvSerializationTestSuite<PublicKeyTemplateAttribute> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<PublicKeyTemplateAttribute> type() {
-        return PublicKeyTemplateAttribute.class;
-    }
+  @Override
+  public Class<PublicKeyTemplateAttribute> type() {
+    return PublicKeyTemplateAttribute.class;
+  }
 
-    @Override
-    public PublicKeyTemplateAttribute createDefault() {
-        return PublicKeyTemplateAttribute.of("default-string");
-    }
+  @Override
+  public PublicKeyTemplateAttribute createDefault() {
+    return PublicKeyTemplateAttribute.of("default-string");
+  }
 
-    @Override
-    public PublicKeyTemplateAttribute createVariant() {
-        return PublicKeyTemplateAttribute.of("variant-string");
-    }
+  @Override
+  public PublicKeyTemplateAttribute createVariant() {
+    return PublicKeyTemplateAttribute.of("variant-string");
+  }
 }

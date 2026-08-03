@@ -8,32 +8,35 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributeLis
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("GetAttributeListOpResponsePayload Json Serialization Tests")
-class GetAttributeListOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<GetAttributeListOpResponsePayload> {
+class GetAttributeListOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<GetAttributeListOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<GetAttributeListOpResponsePayload> type() {
-        return GetAttributeListOpResponsePayload.class;
-    }
+  @Override
+  public Class<GetAttributeListOpResponsePayload> type() {
+    return GetAttributeListOpResponsePayload.class;
+  }
 
-    @Override
-    public GetAttributeListOpResponsePayload createDefault() {
-        return GetAttributeListOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attributeName(AttributeName.of("Attribute1"))
-                .build();
-    }
+  @Override
+  public GetAttributeListOpResponsePayload createDefault() {
+    return GetAttributeListOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attributeName(AttributeName.of("Attribute1"))
+        .build();
+  }
 
-    @Override
-    public GetAttributeListOpResponsePayload createVariant() {
-        return GetAttributeListOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .attributeName(AttributeName.of("AttributeA"))
-                .attributeName(AttributeName.of("AttributeB"))
-                .build();
-    }
+  @Override
+  public GetAttributeListOpResponsePayload createVariant() {
+    return GetAttributeListOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .attributeName(AttributeName.of("AttributeA"))
+        .attributeName(AttributeName.of("AttributeB"))
+        .build();
+  }
 }

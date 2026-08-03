@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("LeaseTime TTLV Serialization Tests")
 class LeaseTimeTtlvTest extends AbstractTtlvSerializationTestSuite<LeaseTime> {
 
-    @Override
-    public Class<LeaseTime> type() {
-        return LeaseTime.class;
-    }
+  @Override
+  public Class<LeaseTime> type() {
+    return LeaseTime.class;
+  }
 
-    @Override
-    public LeaseTime createDefault() {
-        return LeaseTime.builder().value(10).build();
-    }
+  @Override
+  public LeaseTime createDefault() {
+    return LeaseTime
+        .builder()
+        .value(10)
+        .build();
+  }
 
-    @Override
-    public LeaseTime createVariant() {
-        return LeaseTime.builder().value(100).build();
-    }
+  @Override
+  public LeaseTime createVariant() {
+    return LeaseTime
+        .builder()
+        .value(100)
+        .build();
+  }
 }

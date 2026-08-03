@@ -7,22 +7,24 @@ import org.purpleBean.kmip.model.core.enumeration.ObjectType;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.JoinSplitKeyOpRequestPayload;
 
-public class JoinSplitKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<JoinSplitKeyOpRequestPayload> {
+public class JoinSplitKeyOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<JoinSplitKeyOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public JoinSplitKeyOpRequestPayloadBenchmarkSubject() throws Exception {
-        JoinSplitKeyOpRequestPayload subject = JoinSplitKeyOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-        initialize(subject, JoinSplitKeyOpRequestPayload.class);
-    }
+  public JoinSplitKeyOpRequestPayloadBenchmarkSubject() throws Exception {
+    JoinSplitKeyOpRequestPayload subject = JoinSplitKeyOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+    initialize(subject, JoinSplitKeyOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "JoinSplitKeyOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "JoinSplitKeyOpRequestPayload";
+  }
 }

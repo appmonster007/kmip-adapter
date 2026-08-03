@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RecommendedCurve TTLV Serialization")
 class RecommendedCurveTtlvTest extends AbstractTtlvSerializationTestSuite<RecommendedCurve> {
-    @Override
-    public Class<RecommendedCurve> type() {
-        return RecommendedCurve.class;
-    }
+  @Override
+  public Class<RecommendedCurve> type() {
+    return RecommendedCurve.class;
+  }
 
-    @Override
-    public RecommendedCurve createDefault() {
-        return RecommendedCurve.Standard.P_192.inst();
-    }
+  @Override
+  public RecommendedCurve createDefault() {
+    return RecommendedCurve.Standard.P_192.inst();
+  }
 
-    @Override
-    public RecommendedCurve createVariant() {
-        return RecommendedCurve.Standard.K_163.inst();
-    }
+  @Override
+  public RecommendedCurve createVariant() {
+    return RecommendedCurve.Standard.K_163.inst();
+  }
 }

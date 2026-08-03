@@ -18,78 +18,78 @@ import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 @ExtendWith(MockitoExtension.class)
 public abstract class BaseKmipTest {
 
-    protected JsonMapper jsonMapper;
-    protected XmlMapper xmlMapper;
-    protected TtlvMapper ttlvMapper;
-    protected KmipSpec defaultSpec;
+  protected JsonMapper jsonMapper;
+  protected XmlMapper xmlMapper;
+  protected TtlvMapper ttlvMapper;
+  protected KmipSpec defaultSpec;
 
-    @BeforeEach
-    void setUp() {
-        setupDefaultSpec();
-        setupMappers();
-        setupContext();
-        setupTestSpecificResources();
-    }
+  @BeforeEach
+  void setUp() {
+    setupDefaultSpec();
+    setupMappers();
+    setupContext();
+    setupTestSpecificResources();
+  }
 
-    @AfterEach
-    void tearDown() {
-        cleanupContext();
-        cleanupTestSpecificResources();
-    }
+  @AfterEach
+  void tearDown() {
+    cleanupContext();
+    cleanupTestSpecificResources();
+  }
 
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    protected void setupContext() {
-        KmipContext.setSpec(defaultSpec);
-    }
+  protected void setupContext() {
+    KmipContext.setSpec(defaultSpec);
+  }
 
-    protected void cleanupContext() {
+  protected void cleanupContext() {
+    KmipContext.clear();
+  }
+
+  protected void setupMappers() {
+    jsonMapper = KmipCodecManager.getJsonMapper();
+    xmlMapper = KmipCodecManager.getXmlMapper();
+    ttlvMapper = KmipCodecManager.getTtlvMapper();
+  }
+
+  protected void setupTestSpecificResources() {
+    // Default implementation - override in subclasses if needed
+  }
+
+  protected void cleanupTestSpecificResources() {
+    // Default implementation - override in subclasses if needed
+  }
+
+  protected void withKmipSpec(KmipSpec spec) {
+    KmipContext.setSpec(spec);
+  }
+
+  protected void withKmipSpec(KmipSpec spec, Runnable operation) {
+    KmipSpec originalSpec = KmipContext.getSpec();
+    try {
+      KmipContext.setSpec(spec);
+      operation.run();
+    } finally {
+      if (originalSpec != null) {
+        KmipContext.setSpec(originalSpec);
+      } else {
         KmipContext.clear();
+      }
     }
+  }
 
-    protected void setupMappers() {
-        jsonMapper = KmipCodecManager.getJsonMapper();
-        xmlMapper = KmipCodecManager.getXmlMapper();
-        ttlvMapper = KmipCodecManager.getTtlvMapper();
-    }
+  protected JsonMapper getJsonMapper() {
+    return jsonMapper;
+  }
 
-    protected void setupTestSpecificResources() {
-        // Default implementation - override in subclasses if needed
-    }
+  protected XmlMapper getXmlMapper() {
+    return xmlMapper;
+  }
 
-    protected void cleanupTestSpecificResources() {
-        // Default implementation - override in subclasses if needed
-    }
-
-    protected void withKmipSpec(KmipSpec spec) {
-        KmipContext.setSpec(spec);
-    }
-
-    protected void withKmipSpec(KmipSpec spec, Runnable operation) {
-        KmipSpec originalSpec = KmipContext.getSpec();
-        try {
-            KmipContext.setSpec(spec);
-            operation.run();
-        } finally {
-            if (originalSpec != null) {
-                KmipContext.setSpec(originalSpec);
-            } else {
-                KmipContext.clear();
-            }
-        }
-    }
-
-    protected JsonMapper getJsonMapper() {
-        return jsonMapper;
-    }
-
-    protected XmlMapper getXmlMapper() {
-        return xmlMapper;
-    }
-
-    protected TtlvMapper getTtlvMapper() {
-        return ttlvMapper;
-    }
+  protected TtlvMapper getTtlvMapper() {
+    return ttlvMapper;
+  }
 }

@@ -1,31 +1,33 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.AlternativeNameType;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class AlternativeNameTypeTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<AlternativeNameType,
+        AlternativeNameType.AlternativeNameTypeBuilder> {
 
-public class AlternativeNameTypeTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<AlternativeNameType, AlternativeNameType.AlternativeNameTypeBuilder> {
+  public AlternativeNameTypeTtlvDeserializer() {
+    super(AlternativeNameType.kmipTag, AlternativeNameType.encodingType);
+  }
 
-    public AlternativeNameTypeTtlvDeserializer() {
-        super(AlternativeNameType.kmipTag, AlternativeNameType.encodingType);
-    }
+  @Override
+  protected AlternativeNameType.AlternativeNameTypeBuilder createBuilder() {
+    return AlternativeNameType.builder();
+  }
 
-    @Override
-    protected AlternativeNameType.AlternativeNameTypeBuilder createBuilder() {
-        return AlternativeNameType.builder();
-    }
+  @Override
+  protected void setValue(AlternativeNameType.AlternativeNameTypeBuilder builder, byte[] tag,
+                          byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    Integer value = mapper.readValue(p, Integer.class);
+    builder.value(AlternativeNameType.fromValue(value));
+  }
 
-    @Override
-    protected void setValue(AlternativeNameType.AlternativeNameTypeBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        Integer value = mapper.readValue(p, Integer.class);
-        builder.value(AlternativeNameType.fromValue(value));
-    }
-
-    @Override
-    protected AlternativeNameType build(AlternativeNameType.AlternativeNameTypeBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected AlternativeNameType build(AlternativeNameType.AlternativeNameTypeBuilder builder) {
+    return builder.build();
+  }
 }

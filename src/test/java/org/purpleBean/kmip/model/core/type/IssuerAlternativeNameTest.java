@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("IssuerAlternativeName Domain Tests")
 class IssuerAlternativeNameTest extends AbstractKmipDataTypeTestSuite<IssuerAlternativeName> {
 
-    @Override
-    protected Class<IssuerAlternativeName> type() {
-        return IssuerAlternativeName.class;
-    }
+  @Override
+  protected Class<IssuerAlternativeName> type() {
+    return IssuerAlternativeName.class;
+  }
 
-    @Override
-    protected IssuerAlternativeName createDefault() {
-        return IssuerAlternativeName.of(new byte[]{0x01, 0x02, 0x03});
-    }
+  @Override
+  protected IssuerAlternativeName createDefault() {
+    return IssuerAlternativeName.of(new byte[] {0x01, 0x02, 0x03});
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.BYTE_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.BYTE_STRING;
+  }
 }

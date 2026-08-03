@@ -10,32 +10,38 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetAttributesOp
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("GetAttributesOpResponsePayload Ttlv Serialization Tests")
-class GetAttributesOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<GetAttributesOpResponsePayload> {
+class GetAttributesOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<GetAttributesOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<GetAttributesOpResponsePayload> type() {
-        return GetAttributesOpResponsePayload.class;
-    }
+  @Override
+  public Class<GetAttributesOpResponsePayload> type() {
+    return GetAttributesOpResponsePayload.class;
+  }
 
-    @Override
-    public GetAttributesOpResponsePayload createDefault() {
-        return GetAttributesOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attribute(Attribute.of(AttributeName.of("Attribute1"), AttributeValue.ofTextString("Value1")))
-                .build();
-    }
+  @Override
+  public GetAttributesOpResponsePayload createDefault() {
+    return GetAttributesOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attribute(
+            Attribute.of(AttributeName.of("Attribute1"), AttributeValue.ofTextString("Value1")))
+        .build();
+  }
 
-    @Override
-    public GetAttributesOpResponsePayload createVariant() {
-        return GetAttributesOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .attribute(Attribute.of(AttributeName.of("AttributeA"), AttributeValue.ofTextString("ValueA")))
-                .attribute(Attribute.of(AttributeName.of("AttributeB"), AttributeValue.ofTextString("ValueB")))
-                .build();
-    }
+  @Override
+  public GetAttributesOpResponsePayload createVariant() {
+    return GetAttributesOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .attribute(
+            Attribute.of(AttributeName.of("AttributeA"), AttributeValue.ofTextString("ValueA")))
+        .attribute(
+            Attribute.of(AttributeName.of("AttributeB"), AttributeValue.ofTextString("ValueB")))
+        .build();
+  }
 }

@@ -10,29 +10,31 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("RequestHeader Json Serialization Tests")
 class RequestHeaderJsonTest extends AbstractJsonSerializationTestSuite<RequestHeader> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V2_1;
+  }
 
-    @Override
-    public Class<RequestHeader> type() {
-        return RequestHeader.class;
-    }
+  @Override
+  public Class<RequestHeader> type() {
+    return RequestHeader.class;
+  }
 
-    @Override
-    public RequestHeader createDefault() {
-        return RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(2, 1))
-                .batchCount(BatchCount.of(1))
-                .build();
-    }
+  @Override
+  public RequestHeader createDefault() {
+    return RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(2, 1))
+        .batchCount(BatchCount.of(1))
+        .build();
+  }
 
-    @Override
-    public RequestHeader createVariant() {
-        return RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(2, 1))
-                .batchCount(BatchCount.of(2))
-                .build();
-    }
+  @Override
+  public RequestHeader createVariant() {
+    return RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(2, 1))
+        .batchCount(BatchCount.of(2))
+        .build();
+  }
 }

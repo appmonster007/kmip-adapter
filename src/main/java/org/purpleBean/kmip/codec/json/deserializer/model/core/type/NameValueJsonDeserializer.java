@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.type.NameValue;
 
-import java.io.IOException;
+public class NameValueJsonDeserializer
+    extends AbstractKmipDataTypeJsonDeserializer<NameValue, NameValue.NameValueBuilder> {
 
-public class NameValueJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<NameValue, NameValue.NameValueBuilder> {
+  public NameValueJsonDeserializer() {
+    super(NameValue.kmipTag, NameValue.encodingType);
+  }
 
-    public NameValueJsonDeserializer() {
-        super(NameValue.kmipTag, NameValue.encodingType);
-    }
+  @Override
+  protected NameValue.NameValueBuilder createBuilder() {
+    return NameValue.builder();
+  }
 
-    @Override
-    protected NameValue.NameValueBuilder createBuilder() {
-        return NameValue.builder();
-    }
+  @Override
+  protected void setValue(NameValue.NameValueBuilder builder, String tag, String type, JsonParser p,
+                          DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, String.class));
+  }
 
-    @Override
-    protected void setValue(NameValue.NameValueBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, String.class));
-    }
-
-    @Override
-    protected NameValue build(NameValue.NameValueBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected NameValue build(NameValue.NameValueBuilder builder) {
+    return builder.build();
+  }
 }

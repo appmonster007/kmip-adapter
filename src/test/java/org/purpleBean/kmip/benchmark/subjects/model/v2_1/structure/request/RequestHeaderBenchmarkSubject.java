@@ -10,21 +10,22 @@ import org.purpleBean.kmip.model.v2_1.structure.request.RequestHeader;
 
 public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestHeader> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V2_1;
 
-    public RequestHeaderBenchmarkSubject() throws Exception {
-        KmipContext.setSpec(getSpec());
-        RequestHeader subject = RequestHeader.builder()
-                .protocolVersion(ProtocolVersion.of(2, 1))
-                .batchCount(BatchCount.of(1))
-                .build();
-        initialize(subject, RequestHeader.class);
-        KmipContext.clear();
-    }
+  public RequestHeaderBenchmarkSubject() throws Exception {
+    KmipContext.setSpec(getSpec());
+    RequestHeader subject = RequestHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(2, 1))
+        .batchCount(BatchCount.of(1))
+        .build();
+    initialize(subject, RequestHeader.class);
+    KmipContext.clear();
+  }
 
-    @Override
-    public String name() {
-        return "RequestHeader";
-    }
+  @Override
+  public String name() {
+    return "RequestHeader";
+  }
 }

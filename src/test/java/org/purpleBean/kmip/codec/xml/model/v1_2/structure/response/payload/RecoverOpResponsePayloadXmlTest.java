@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RecoverOpRespon
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("RecoverOpResponsePayload Xml Serialization Tests")
-class RecoverOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<RecoverOpResponsePayload> {
+class RecoverOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<RecoverOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RecoverOpResponsePayload> type() {
-        return RecoverOpResponsePayload.class;
-    }
+  @Override
+  public Class<RecoverOpResponsePayload> type() {
+    return RecoverOpResponsePayload.class;
+  }
 
-    @Override
-    public RecoverOpResponsePayload createDefault() {
-        return RecoverOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public RecoverOpResponsePayload createDefault() {
+    return RecoverOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public RecoverOpResponsePayload createVariant() {
-        return RecoverOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public RecoverOpResponsePayload createVariant() {
+    return RecoverOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

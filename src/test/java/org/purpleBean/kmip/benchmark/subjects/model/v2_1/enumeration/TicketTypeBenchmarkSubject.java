@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v2_1.enumeration.TicketType;
 
 public class TicketTypeBenchmarkSubject extends KmipBenchmarkSubject<TicketType> {
 
-    public TicketTypeBenchmarkSubject() throws Exception {
-        TicketType ticketType = TicketType.Standard.LOGIN.inst();
-        initialize(ticketType, TicketType.class);
-    }
+  public TicketTypeBenchmarkSubject() throws Exception {
+    TicketType ticketType = TicketType.Standard.LOGIN.inst();
+    initialize(ticketType, TicketType.class);
+  }
 
-    @Override
-    public String name() {
-        return "TicketType";
-    }
+  @Override
+  public String name() {
+    return "TicketType";
+  }
 
 }

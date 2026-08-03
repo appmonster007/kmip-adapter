@@ -9,20 +9,21 @@ import org.purpleBean.kmip.model.core.type.CertificateValue;
 
 public class CertificateBenchmarkSubject extends KmipBenchmarkSubject<Certificate> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CertificateBenchmarkSubject() throws Exception {
-        Certificate subject = Certificate.builder()
-                .certificateType(CertificateType.Standard.X_509.inst())
-                .certificateValue(CertificateValue.of(new byte[0]))
-                .build();
-        initialize(subject, Certificate.class);
-    }
+  public CertificateBenchmarkSubject() throws Exception {
+    Certificate subject = Certificate
+        .builder()
+        .certificateType(CertificateType.Standard.X_509.inst())
+        .certificateValue(CertificateValue.of(new byte[0]))
+        .build();
+    initialize(subject, Certificate.class);
+  }
 
-    @Override
-    public String name() {
-        return "Certificate";
-    }
+  @Override
+  public String name() {
+    return "Certificate";
+  }
 
 }

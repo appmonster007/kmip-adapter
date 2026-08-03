@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.DestroyOpRespon
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("DestroyOpResponsePayload Ttlv Serialization Tests")
-class DestroyOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<DestroyOpResponsePayload> {
+class DestroyOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<DestroyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<DestroyOpResponsePayload> type() {
-        return DestroyOpResponsePayload.class;
-    }
+  @Override
+  public Class<DestroyOpResponsePayload> type() {
+    return DestroyOpResponsePayload.class;
+  }
 
-    @Override
-    public DestroyOpResponsePayload createDefault() {
-        return DestroyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public DestroyOpResponsePayload createDefault() {
+    return DestroyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public DestroyOpResponsePayload createVariant() {
-        return DestroyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public DestroyOpResponsePayload createVariant() {
+    return DestroyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.ExtensionTag;
 
 public class ExtensionTagBenchmarkSubject extends KmipBenchmarkSubject<ExtensionTag> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ExtensionTagBenchmarkSubject() throws Exception {
-        ExtensionTag extensionTag = ExtensionTag.builder().value(1).build();
-        initialize(extensionTag, ExtensionTag.class);
-    }
+  public ExtensionTagBenchmarkSubject() throws Exception {
+    ExtensionTag extensionTag = ExtensionTag
+        .builder()
+        .value(1)
+        .build();
+    initialize(extensionTag, ExtensionTag.class);
+  }
 
-    @Override
-    public String name() {
-        return "ExtensionTag";
-    }
+  @Override
+  public String name() {
+    return "ExtensionTag";
+  }
 
 }

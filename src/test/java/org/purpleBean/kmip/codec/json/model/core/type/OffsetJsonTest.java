@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Offset JSON Serialization Tests")
 class OffsetJsonTest extends AbstractJsonSerializationTestSuite<Offset> {
 
-    @Override
-    public Class<Offset> type() {
-        return Offset.class;
-    }
+  @Override
+  public Class<Offset> type() {
+    return Offset.class;
+  }
 
-    @Override
-    public Offset createDefault() {
-        return Offset.builder().value(10).build();
-    }
+  @Override
+  public Offset createDefault() {
+    return Offset
+        .builder()
+        .value(10)
+        .build();
+  }
 
-    @Override
-    public Offset createVariant() {
-        return Offset.builder().value(20).build();
-    }
+  @Override
+  public Offset createVariant() {
+    return Offset
+        .builder()
+        .value(20)
+        .build();
+  }
 }

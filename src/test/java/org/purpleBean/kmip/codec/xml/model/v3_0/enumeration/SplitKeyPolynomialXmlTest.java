@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("SplitKeyPolynomial XML Serialization")
 class SplitKeyPolynomialXmlTest extends AbstractXmlSerializationTestSuite<SplitKeyPolynomial> {
-    @Override
-    public Class<SplitKeyPolynomial> type() {
-        return SplitKeyPolynomial.class;
-    }
+  @Override
+  public Class<SplitKeyPolynomial> type() {
+    return SplitKeyPolynomial.class;
+  }
 
-    @Override
-    public SplitKeyPolynomial createDefault() {
-        return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
-    }
+  @Override
+  public SplitKeyPolynomial createDefault() {
+    return SplitKeyPolynomial.Standard.POLYNOMIAL_283.inst();
+  }
 
-    @Override
-    public SplitKeyPolynomial createVariant() {
-        return SplitKeyPolynomial.Standard.POLYNOMIAL_285.inst();
-    }
+  @Override
+  public SplitKeyPolynomial createVariant() {
+    return SplitKeyPolynomial.Standard.POLYNOMIAL_285.inst();
+  }
 }

@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("ExtensionType JSON Serialization Tests")
 class ExtensionTypeJsonTest extends AbstractJsonSerializationTestSuite<ExtensionType> {
 
-    @Override
-    public Class<ExtensionType> type() {
-        return ExtensionType.class;
-    }
+  @Override
+  public Class<ExtensionType> type() {
+    return ExtensionType.class;
+  }
 
-    @Override
-    public ExtensionType createDefault() {
-        return ExtensionType.builder().value(1).build();
-    }
+  @Override
+  public ExtensionType createDefault() {
+    return ExtensionType
+        .builder()
+        .value(1)
+        .build();
+  }
 
-    @Override
-    public ExtensionType createVariant() {
-        return ExtensionType.builder().value(2).build();
-    }
+  @Override
+  public ExtensionType createVariant() {
+    return ExtensionType
+        .builder()
+        .value(2)
+        .build();
+  }
 }

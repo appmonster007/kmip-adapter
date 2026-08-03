@@ -10,33 +10,43 @@ import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 import org.purpleBean.kmip.model.core.type.PublicKeyUniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateKeyPairOpResponsePayload;
 
-public class CreateKeyPairOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<CreateKeyPairOpResponsePayload> {
+public class CreateKeyPairOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<CreateKeyPairOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CreateKeyPairOpResponsePayloadBenchmarkSubject() throws Exception {
-        CreateKeyPairOpResponsePayload subject = CreateKeyPairOpResponsePayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
-                .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier.builder().value("public-uid").build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .build();
-        initialize(subject, CreateKeyPairOpResponsePayload.class);
-    }
+  public CreateKeyPairOpResponsePayloadBenchmarkSubject() throws Exception {
+    CreateKeyPairOpResponsePayload subject = CreateKeyPairOpResponsePayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid")
+            .build())
+        .publicKeyUniqueIdentifier(PublicKeyUniqueIdentifier
+            .builder()
+            .value("public-uid")
+            .build())
+        .privateKeyTemplateAttribute(
+            PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .publicKeyTemplateAttribute(
+            PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .build();
+    initialize(subject, CreateKeyPairOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "CreateKeyPairOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "CreateKeyPairOpResponsePayload";
+  }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
+  @Override
+  public void setup() throws Exception {
+    KmipContext.setSpec(spec);
+  }
 
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
+  @Override
+  public void tearDown() {
+    KmipContext.clear();
+  }
 }

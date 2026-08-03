@@ -1,30 +1,34 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.response.payload;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.NotifyOpResponsePayload;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class NotifyOpResponsePayloadTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<NotifyOpResponsePayload,
+        NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder> {
 
-public class NotifyOpResponsePayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<NotifyOpResponsePayload, NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder> {
+  public NotifyOpResponsePayloadTtlvDeserializer() {
+    super(NotifyOpResponsePayload.kmipTag, NotifyOpResponsePayload.encodingType);
+  }
 
-    public NotifyOpResponsePayloadTtlvDeserializer() {
-        super(NotifyOpResponsePayload.kmipTag, NotifyOpResponsePayload.encodingType);
-    }
+  @Override
+  protected NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder createBuilder() {
+    return NotifyOpResponsePayload.builder();
+  }
 
-    @Override
-    protected NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder createBuilder() {
-        return NotifyOpResponsePayload.builder();
-    }
+  @Override
+  protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder,
+                          byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper)
+      throws IOException {
+    // No fields to deserialize
+  }
 
-    @Override
-    protected void setValue(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        // No fields to deserialize
-    }
-
-    @Override
-    protected NotifyOpResponsePayload build(NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected NotifyOpResponsePayload build(
+      NotifyOpResponsePayload.NotifyOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
 }

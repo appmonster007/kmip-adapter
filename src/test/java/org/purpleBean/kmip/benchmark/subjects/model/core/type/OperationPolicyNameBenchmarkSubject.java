@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.OperationPolicyName;
 
 public class OperationPolicyNameBenchmarkSubject extends KmipBenchmarkSubject<OperationPolicyName> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public OperationPolicyNameBenchmarkSubject() throws Exception {
-        OperationPolicyName operationPolicyName = OperationPolicyName.builder().value("test").build();
-        initialize(operationPolicyName, OperationPolicyName.class);
-    }
+  public OperationPolicyNameBenchmarkSubject() throws Exception {
+    OperationPolicyName operationPolicyName = OperationPolicyName
+        .builder()
+        .value("test")
+        .build();
+    initialize(operationPolicyName, OperationPolicyName.class);
+  }
 
-    @Override
-    public String name() {
-        return "OperationPolicyName";
-    }
+  @Override
+  public String name() {
+    return "OperationPolicyName";
+  }
 
 }

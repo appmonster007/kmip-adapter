@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Issuer JSON Serialization Tests")
 class IssuerJsonTest extends AbstractJsonSerializationTestSuite<Issuer> {
 
-    @Override
-    public Class<Issuer> type() {
-        return Issuer.class;
-    }
+  @Override
+  public Class<Issuer> type() {
+    return Issuer.class;
+  }
 
-    @Override
-    public Issuer createDefault() {
-        return Issuer.builder().value("test-issuer").build();
-    }
+  @Override
+  public Issuer createDefault() {
+    return Issuer
+        .builder()
+        .value("test-issuer")
+        .build();
+  }
 
-    @Override
-    public Issuer createVariant() {
-        return Issuer.builder().value("another-issuer").build();
-    }
+  @Override
+  public Issuer createVariant() {
+    return Issuer
+        .builder()
+        .value("another-issuer")
+        .build();
+  }
 }

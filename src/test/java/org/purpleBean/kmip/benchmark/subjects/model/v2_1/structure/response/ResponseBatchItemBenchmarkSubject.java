@@ -10,21 +10,22 @@ import org.purpleBean.kmip.model.v2_1.structure.response.ResponseBatchItem;
 
 public class ResponseBatchItemBenchmarkSubject extends KmipBenchmarkSubject<ResponseBatchItem> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V2_1;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V2_1;
 
-    public ResponseBatchItemBenchmarkSubject() throws Exception {
-        KmipContext.setSpec(getSpec());
-        ResponseBatchItem subject = ResponseBatchItem.builder()
-                .operation(Operation.of(Operation.Standard.CREATE))
-                .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
-                .build();
-        initialize(subject, ResponseBatchItem.class);
-        KmipContext.clear();
-    }
+  public ResponseBatchItemBenchmarkSubject() throws Exception {
+    KmipContext.setSpec(getSpec());
+    ResponseBatchItem subject = ResponseBatchItem
+        .builder()
+        .operation(Operation.of(Operation.Standard.CREATE))
+        .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+        .build();
+    initialize(subject, ResponseBatchItem.class);
+    KmipContext.clear();
+  }
 
-    @Override
-    public String name() {
-        return "ResponseBatchItem";
-    }
+  @Override
+  public String name() {
+    return "ResponseBatchItem";
+  }
 }

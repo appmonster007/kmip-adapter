@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("InteropFunction TTLV Serialization")
 class InteropFunctionTtlvTest extends AbstractTtlvSerializationTestSuite<InteropFunction> {
-    @Override
-    public Class<InteropFunction> type() {
-        return InteropFunction.class;
-    }
+  @Override
+  public Class<InteropFunction> type() {
+    return InteropFunction.class;
+  }
 
-    @Override
-    public InteropFunction createDefault() {
-        return InteropFunction.Standard.BEGIN.inst();
-    }
+  @Override
+  public InteropFunction createDefault() {
+    return InteropFunction.Standard.BEGIN.inst();
+  }
 
-    @Override
-    public InteropFunction createVariant() {
-        return InteropFunction.Standard.END.inst();
-    }
+  @Override
+  public InteropFunction createVariant() {
+    return InteropFunction.Standard.END.inst();
+  }
 }

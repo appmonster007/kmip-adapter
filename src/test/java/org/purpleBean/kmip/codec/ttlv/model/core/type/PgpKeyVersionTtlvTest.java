@@ -8,23 +8,23 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("PgpKeyVersion Ttlv Serialization Tests")
 class PgpKeyVersionTtlvTest extends AbstractTtlvSerializationTestSuite<PgpKeyVersion> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<PgpKeyVersion> type() {
-        return PgpKeyVersion.class;
-    }
+  @Override
+  public Class<PgpKeyVersion> type() {
+    return PgpKeyVersion.class;
+  }
 
-    @Override
-    public PgpKeyVersion createDefault() {
-        return PgpKeyVersion.of(123);
-    }
+  @Override
+  public PgpKeyVersion createDefault() {
+    return PgpKeyVersion.of(123);
+  }
 
-    @Override
-    public PgpKeyVersion createVariant() {
-        return PgpKeyVersion.of(456);
-    }
+  @Override
+  public PgpKeyVersion createVariant() {
+    return PgpKeyVersion.of(456);
+  }
 }

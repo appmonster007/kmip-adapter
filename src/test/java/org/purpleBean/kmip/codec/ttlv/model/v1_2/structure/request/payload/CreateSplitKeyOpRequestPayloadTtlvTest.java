@@ -11,37 +11,44 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateSplitKeyOp
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CreateSplitKeyOpRequestPayload Ttlv Serialization Tests")
-class CreateSplitKeyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<CreateSplitKeyOpRequestPayload> {
+class CreateSplitKeyOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<CreateSplitKeyOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CreateSplitKeyOpRequestPayload> type() {
-        return CreateSplitKeyOpRequestPayload.class;
-    }
+  @Override
+  public Class<CreateSplitKeyOpRequestPayload> type() {
+    return CreateSplitKeyOpRequestPayload.class;
+  }
 
-    @Override
-    public CreateSplitKeyOpRequestPayload createDefault() {
-        return CreateSplitKeyOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .splitKeyParts(SplitKeyParts.of(3))
-                .splitKeyThreshold(SplitKeyThreshold.of(2))
-                .splitKeyMethod(SplitKeyMethod.of(SplitKeyMethod.Standard.XOR))
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateSplitKeyOpRequestPayload createDefault() {
+    return CreateSplitKeyOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .splitKeyParts(SplitKeyParts.of(3))
+        .splitKeyThreshold(SplitKeyThreshold.of(2))
+        .splitKeyMethod(SplitKeyMethod.of(SplitKeyMethod.Standard.XOR))
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public CreateSplitKeyOpRequestPayload createVariant() {
-        return CreateSplitKeyOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
-                .splitKeyParts(SplitKeyParts.of(5))
-                .splitKeyThreshold(SplitKeyThreshold.of(3))
-                .splitKeyMethod(SplitKeyMethod.of(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_28))
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateSplitKeyOpRequestPayload createVariant() {
+    return CreateSplitKeyOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
+        .splitKeyParts(SplitKeyParts.of(5))
+        .splitKeyThreshold(SplitKeyThreshold.of(3))
+        .splitKeyMethod(SplitKeyMethod.of(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_GF_28))
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 }

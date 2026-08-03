@@ -10,8 +10,10 @@ import java.util.HexFormat;
 
 public class ByteStringXmlDeserializer extends JsonDeserializer<ByteBuffer> {
 
-    @Override
-    public ByteBuffer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return ByteBuffer.wrap(HexFormat.of().parseHex(p.getText()));
-    }
+  @Override
+  public ByteBuffer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return ByteBuffer.wrap(HexFormat
+        .of()
+        .parseHex(p.getText()));
+  }
 }

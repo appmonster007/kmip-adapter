@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CancelOpRequestP
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CancelOpRequestPayload Ttlv Serialization Tests")
-class CancelOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<CancelOpRequestPayload> {
+class CancelOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<CancelOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CancelOpRequestPayload> type() {
-        return CancelOpRequestPayload.class;
-    }
+  @Override
+  public Class<CancelOpRequestPayload> type() {
+    return CancelOpRequestPayload.class;
+  }
 
-    @Override
-    public CancelOpRequestPayload createDefault() {
-        return CancelOpRequestPayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public CancelOpRequestPayload createDefault() {
+    return CancelOpRequestPayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public CancelOpRequestPayload createVariant() {
-        return CancelOpRequestPayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public CancelOpRequestPayload createVariant() {
+    return CancelOpRequestPayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

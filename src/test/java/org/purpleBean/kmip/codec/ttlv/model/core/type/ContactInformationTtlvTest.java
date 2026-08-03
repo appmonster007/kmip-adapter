@@ -7,19 +7,25 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ContactInformation TTLV Serialization Tests")
 class ContactInformationTtlvTest extends AbstractTtlvSerializationTestSuite<ContactInformation> {
 
-    @Override
-    public Class<ContactInformation> type() {
-        return ContactInformation.class;
-    }
+  @Override
+  public Class<ContactInformation> type() {
+    return ContactInformation.class;
+  }
 
-    @Override
-    public ContactInformation createDefault() {
-        return ContactInformation.builder().value("test").build();
-    }
+  @Override
+  public ContactInformation createDefault() {
+    return ContactInformation
+        .builder()
+        .value("test")
+        .build();
+  }
 
-    @Override
-    public ContactInformation createVariant() {
+  @Override
+  public ContactInformation createVariant() {
 
-        return ContactInformation.builder().value("test-2").build();
-    }
+    return ContactInformation
+        .builder()
+        .value("test-2")
+        .build();
+  }
 }

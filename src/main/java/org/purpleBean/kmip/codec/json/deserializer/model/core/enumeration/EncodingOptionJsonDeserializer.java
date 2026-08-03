@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.EncodingOption;
 
-import java.io.IOException;
+public class EncodingOptionJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<EncodingOption, EncodingOption.EncodingOptionBuilder> {
 
-public class EncodingOptionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<EncodingOption, EncodingOption.EncodingOptionBuilder> {
+  public EncodingOptionJsonDeserializer() {
+    super(EncodingOption.kmipTag, EncodingOption.encodingType);
+  }
 
-    public EncodingOptionJsonDeserializer() {
-        super(EncodingOption.kmipTag, EncodingOption.encodingType);
-    }
+  @Override
+  protected EncodingOption.EncodingOptionBuilder createBuilder() {
+    return EncodingOption.builder();
+  }
 
-    @Override
-    protected EncodingOption.EncodingOptionBuilder createBuilder() {
-        return EncodingOption.builder();
-    }
+  @Override
+  protected void setValue(EncodingOption.EncodingOptionBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(EncodingOption.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(EncodingOption.EncodingOptionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(EncodingOption.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected EncodingOption build(EncodingOption.EncodingOptionBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected EncodingOption build(EncodingOption.EncodingOptionBuilder builder) {
+    return builder.build();
+  }
 }

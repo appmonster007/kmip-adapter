@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.core.type.Username;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("CredentialValueGenericStructure Ttlv Serialization Tests")
-class CredentialValueGenericStructureTtlvTest extends AbstractTtlvSerializationTestSuite<CredentialValueGenericStructure> {
+class CredentialValueGenericStructureTtlvTest
+    extends AbstractTtlvSerializationTestSuite<CredentialValueGenericStructure> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CredentialValueGenericStructure> type() {
-        return CredentialValueGenericStructure.class;
-    }
+  @Override
+  public Class<CredentialValueGenericStructure> type() {
+    return CredentialValueGenericStructure.class;
+  }
 
-    @Override
-    public CredentialValueGenericStructure createDefault() {
-        return CredentialValueGenericStructure.builder()
-                .value(Username.of("test-value"))
-                .build();
-    }
+  @Override
+  public CredentialValueGenericStructure createDefault() {
+    return CredentialValueGenericStructure
+        .builder()
+        .value(Username.of("test-value"))
+        .build();
+  }
 
-    @Override
-    public CredentialValueGenericStructure createVariant() {
-        return CredentialValueGenericStructure.builder()
-                .value(Username.of("test-value-variant"))
-                .build();
-    }
+  @Override
+  public CredentialValueGenericStructure createVariant() {
+    return CredentialValueGenericStructure
+        .builder()
+        .value(Username.of("test-value-variant"))
+        .build();
+  }
 }

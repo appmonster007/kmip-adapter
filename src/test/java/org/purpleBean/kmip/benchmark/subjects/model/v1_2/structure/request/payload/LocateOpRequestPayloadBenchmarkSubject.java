@@ -11,23 +11,26 @@ import org.purpleBean.kmip.model.core.type.MaximumItems;
 import org.purpleBean.kmip.model.core.type.StorageStatusMask;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.LocateOpRequestPayload;
 
-public class LocateOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<LocateOpRequestPayload> {
+public class LocateOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<LocateOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public LocateOpRequestPayloadBenchmarkSubject() throws Exception {
-        LocateOpRequestPayload subject = LocateOpRequestPayload.builder()
-                .maximumItems(MaximumItems.of(10))
-                .storageStatusMask(StorageStatusMask.of(1))
-                .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
-                .build();
-        initialize(subject, LocateOpRequestPayload.class);
-    }
+  public LocateOpRequestPayloadBenchmarkSubject() throws Exception {
+    LocateOpRequestPayload subject = LocateOpRequestPayload
+        .builder()
+        .maximumItems(MaximumItems.of(10))
+        .storageStatusMask(StorageStatusMask.of(1))
+        .objectGroupMember(ObjectGroupMember.of(ObjectGroupMember.Standard.GROUP_MEMBER_FRESH))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+    initialize(subject, LocateOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "LocateOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "LocateOpRequestPayload";
+  }
 }

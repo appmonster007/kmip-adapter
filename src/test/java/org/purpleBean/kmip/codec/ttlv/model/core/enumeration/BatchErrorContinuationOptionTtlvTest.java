@@ -5,19 +5,20 @@ import org.purpleBean.kmip.model.core.enumeration.BatchErrorContinuationOption;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("BatchErrorContinuationOption TTLV Serialization")
-class BatchErrorContinuationOptionTtlvTest extends AbstractTtlvSerializationTestSuite<BatchErrorContinuationOption> {
-    @Override
-    public Class<BatchErrorContinuationOption> type() {
-        return BatchErrorContinuationOption.class;
-    }
+class BatchErrorContinuationOptionTtlvTest
+    extends AbstractTtlvSerializationTestSuite<BatchErrorContinuationOption> {
+  @Override
+  public Class<BatchErrorContinuationOption> type() {
+    return BatchErrorContinuationOption.class;
+  }
 
-    @Override
-    public BatchErrorContinuationOption createDefault() {
-        return BatchErrorContinuationOption.Standard.CONTINUE.inst();
-    }
+  @Override
+  public BatchErrorContinuationOption createDefault() {
+    return BatchErrorContinuationOption.Standard.CONTINUE.inst();
+  }
 
-    @Override
-    public BatchErrorContinuationOption createVariant() {
-        return BatchErrorContinuationOption.Standard.STOP.inst();
-    }
+  @Override
+  public BatchErrorContinuationOption createVariant() {
+    return BatchErrorContinuationOption.Standard.STOP.inst();
+  }
 }

@@ -9,29 +9,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.DiscoverVersions
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DiscoverVersionsOpRequestPayload Json Serialization Tests")
-class DiscoverVersionsOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<DiscoverVersionsOpRequestPayload> {
+class DiscoverVersionsOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<DiscoverVersionsOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<DiscoverVersionsOpRequestPayload> type() {
-        return DiscoverVersionsOpRequestPayload.class;
-    }
+  @Override
+  public Class<DiscoverVersionsOpRequestPayload> type() {
+    return DiscoverVersionsOpRequestPayload.class;
+  }
 
-    @Override
-    public DiscoverVersionsOpRequestPayload createDefault() {
-        return DiscoverVersionsOpRequestPayload.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                .build();
-    }
+  @Override
+  public DiscoverVersionsOpRequestPayload createDefault() {
+    return DiscoverVersionsOpRequestPayload
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+        .build();
+  }
 
-    @Override
-    public DiscoverVersionsOpRequestPayload createVariant() {
-        return DiscoverVersionsOpRequestPayload.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
-                .build();
-    }
+  @Override
+  public DiscoverVersionsOpRequestPayload createVariant() {
+    return DiscoverVersionsOpRequestPayload
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
+        .build();
+  }
 }

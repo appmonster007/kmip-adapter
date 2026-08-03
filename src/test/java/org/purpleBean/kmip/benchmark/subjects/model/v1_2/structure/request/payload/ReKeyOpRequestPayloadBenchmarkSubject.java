@@ -9,32 +9,40 @@ import org.purpleBean.kmip.model.core.type.Offset;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyOpRequestPayload;
 
-public class ReKeyOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<ReKeyOpRequestPayload> {
+public class ReKeyOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<ReKeyOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public ReKeyOpRequestPayloadBenchmarkSubject() throws Exception {
-        ReKeyOpRequestPayload subject = ReKeyOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .offset(Offset.builder().value(100).build())
-                .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .build();
-        initialize(subject, ReKeyOpRequestPayload.class);
-    }
+  public ReKeyOpRequestPayloadBenchmarkSubject() throws Exception {
+    ReKeyOpRequestPayload subject = ReKeyOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(100)
+            .build())
+        .templateAttribute(TemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .build();
+    initialize(subject, ReKeyOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "ReKeyOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "ReKeyOpRequestPayload";
+  }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
+  @Override
+  public void setup() throws Exception {
+    KmipContext.setSpec(spec);
+  }
 
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
+  @Override
+  public void tearDown() {
+    KmipContext.clear();
+  }
 }

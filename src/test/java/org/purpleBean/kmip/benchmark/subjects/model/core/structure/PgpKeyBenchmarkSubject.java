@@ -10,22 +10,24 @@ import org.purpleBean.kmip.model.core.type.PgpKeyVersion;
 
 public class PgpKeyBenchmarkSubject extends KmipBenchmarkSubject<PgpKey> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public PgpKeyBenchmarkSubject() throws Exception {
-        PgpKey subject = PgpKey.builder()
-                .pgpKeyVersion(PgpKeyVersion.of(4))
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-        initialize(subject, PgpKey.class);
-    }
+  public PgpKeyBenchmarkSubject() throws Exception {
+    PgpKey subject = PgpKey
+        .builder()
+        .pgpKeyVersion(PgpKeyVersion.of(4))
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+    initialize(subject, PgpKey.class);
+  }
 
-    @Override
-    public String name() {
-        return "PgpKey";
-    }
+  @Override
+  public String name() {
+    return "PgpKey";
+  }
 
 }

@@ -25,18 +25,19 @@ import java.util.List;
  */
 public interface KmipStructure extends KmipDataType {
 
-    /**
-     * The fixed encoding type for all KMIP Structures, which is always {@link EncodingType#STRUCTURE}.
-     */
-    EncodingType encodingType = EncodingType.STRUCTURE;
+  /**
+   * The fixed encoding type for all KMIP Structures, which is always
+   * {@link EncodingType#STRUCTURE}.
+   */
+  EncodingType encodingType = EncodingType.STRUCTURE;
 
-    /**
-     * Retrieves the ordered list of {@link KmipDataType} instances that make up this structure.
-     * <p>
-     * The order of the elements in the list is significant and corresponds to their
-     * sequence within the KMIP structure as defined by the specification.
-     *
-     * @return A {@link List} of {@link KmipDataType} objects contained within this structure.
-     */
-    KmipDataType[] getValue();
+  /**
+   * Retrieves the ordered list of {@link KmipDataType} instances that make up this structure.
+   * <p>
+   * The order of the elements in the list is significant and corresponds to their
+   * sequence within the KMIP structure as defined by the specification.
+   *
+   * @return A {@link List} of {@link KmipDataType} objects contained within this structure.
+   */
+  KmipDataType[] getValue();
 }

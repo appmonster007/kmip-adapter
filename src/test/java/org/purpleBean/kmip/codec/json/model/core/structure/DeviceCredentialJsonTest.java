@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("DeviceCredential Json Serialization Tests")
 class DeviceCredentialJsonTest extends AbstractJsonSerializationTestSuite<DeviceCredential> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<DeviceCredential> type() {
-        return DeviceCredential.class;
-    }
+  @Override
+  public Class<DeviceCredential> type() {
+    return DeviceCredential.class;
+  }
 
-    @Override
-    public DeviceCredential createDefault() {
-        return DeviceCredential.builder()
-                .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number"))
-                .build();
-    }
+  @Override
+  public DeviceCredential createDefault() {
+    return DeviceCredential
+        .builder()
+        .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number"))
+        .build();
+  }
 
-    @Override
-    public DeviceCredential createVariant() {
-        return DeviceCredential.builder()
-                .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number-variant"))
-                .build();
-    }
+  @Override
+  public DeviceCredential createVariant() {
+    return DeviceCredential
+        .builder()
+        .deviceSerialNumber(DeviceSerialNumber.of("test-serial-number-variant"))
+        .build();
+  }
 }

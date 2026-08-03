@@ -10,37 +10,40 @@ import org.purpleBean.kmip.model.core.type.NonceValue;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("AttestationCredential Ttlv Serialization Tests")
-class AttestationCredentialTtlvTest extends AbstractTtlvSerializationTestSuite<AttestationCredential> {
+class AttestationCredentialTtlvTest
+    extends AbstractTtlvSerializationTestSuite<AttestationCredential> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<AttestationCredential> type() {
-        return AttestationCredential.class;
-    }
+  @Override
+  public Class<AttestationCredential> type() {
+    return AttestationCredential.class;
+  }
 
-    @Override
-    public AttestationCredential createDefault() {
-        return AttestationCredential.builder()
-                .nonce(Nonce.of(
-                        NonceId.of(new byte[8]),
-                        NonceValue.of(new byte[16])
-                ))
-                .attestationType(AttestationType.Standard.TPM_QUOTE.inst())
-                .build();
-    }
+  @Override
+  public AttestationCredential createDefault() {
+    return AttestationCredential
+        .builder()
+        .nonce(Nonce.of(
+            NonceId.of(new byte[8]),
+            NonceValue.of(new byte[16])
+        ))
+        .attestationType(AttestationType.Standard.TPM_QUOTE.inst())
+        .build();
+  }
 
-    @Override
-    public AttestationCredential createVariant() {
-        return AttestationCredential.builder()
-                .nonce(Nonce.of(
-                        NonceId.of(new byte[8]),
-                        NonceValue.of(new byte[8])
-                ))
-                .attestationType(AttestationType.Standard.SAML_ASSERTION.inst())
-                .build();
-    }
+  @Override
+  public AttestationCredential createVariant() {
+    return AttestationCredential
+        .builder()
+        .nonce(Nonce.of(
+            NonceId.of(new byte[8]),
+            NonceValue.of(new byte[8])
+        ))
+        .attestationType(AttestationType.Standard.SAML_ASSERTION.inst())
+        .build();
+  }
 }

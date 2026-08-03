@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("StorageStatusMask XML Serialization Tests")
 class StorageStatusMaskXmlTest extends AbstractXmlSerializationTestSuite<StorageStatusMask> {
 
-    @Override
-    public Class<StorageStatusMask> type() {
-        return StorageStatusMask.class;
-    }
+  @Override
+  public Class<StorageStatusMask> type() {
+    return StorageStatusMask.class;
+  }
 
-    @Override
-    public StorageStatusMask createDefault() {
-        return StorageStatusMask.builder().value(1).build();
-    }
+  @Override
+  public StorageStatusMask createDefault() {
+    return StorageStatusMask
+        .builder()
+        .value(1)
+        .build();
+  }
 
-    @Override
-    public StorageStatusMask createVariant() {
-        return StorageStatusMask.builder().value(3).build();
-    }
+  @Override
+  public StorageStatusMask createVariant() {
+    return StorageStatusMask
+        .builder()
+        .value(3)
+        .build();
+  }
 }

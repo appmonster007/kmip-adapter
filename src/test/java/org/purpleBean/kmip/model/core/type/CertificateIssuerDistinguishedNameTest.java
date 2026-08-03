@@ -5,20 +5,21 @@ import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 @DisplayName("CertificateIssuerDistinguishedName Domain Tests")
-class CertificateIssuerDistinguishedNameTest extends AbstractKmipDataTypeTestSuite<CertificateIssuerDistinguishedName> {
+class CertificateIssuerDistinguishedNameTest
+    extends AbstractKmipDataTypeTestSuite<CertificateIssuerDistinguishedName> {
 
-    @Override
-    protected Class<CertificateIssuerDistinguishedName> type() {
-        return CertificateIssuerDistinguishedName.class;
-    }
+  @Override
+  protected Class<CertificateIssuerDistinguishedName> type() {
+    return CertificateIssuerDistinguishedName.class;
+  }
 
-    @Override
-    protected CertificateIssuerDistinguishedName createDefault() {
-        return CertificateIssuerDistinguishedName.of("CN=Test Issuer");
-    }
+  @Override
+  protected CertificateIssuerDistinguishedName createDefault() {
+    return CertificateIssuerDistinguishedName.of("CN=Test Issuer");
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

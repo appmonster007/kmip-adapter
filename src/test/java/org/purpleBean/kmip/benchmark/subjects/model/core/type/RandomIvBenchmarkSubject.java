@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.RandomIv;
 
 public class RandomIvBenchmarkSubject extends KmipBenchmarkSubject<RandomIv> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public RandomIvBenchmarkSubject() throws Exception {
-        RandomIv randomIv = RandomIv.of(true);
-        initialize(randomIv, RandomIv.class);
-    }
+  public RandomIvBenchmarkSubject() throws Exception {
+    RandomIv randomIv = RandomIv.of(true);
+    initialize(randomIv, RandomIv.class);
+  }
 
-    @Override
-    public String name() {
-        return "RandomIv";
-    }
+  @Override
+  public String name() {
+    return "RandomIv";
+  }
 
 }

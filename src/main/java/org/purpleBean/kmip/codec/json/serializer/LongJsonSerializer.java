@@ -8,8 +8,9 @@ import java.io.IOException;
 
 public class LongJsonSerializer extends JsonSerializer<Long> {
 
-    @Override
-    public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeNumber(value);
-    }
+  @Override
+  public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    gen.writeNumber(value);
+  }
 }

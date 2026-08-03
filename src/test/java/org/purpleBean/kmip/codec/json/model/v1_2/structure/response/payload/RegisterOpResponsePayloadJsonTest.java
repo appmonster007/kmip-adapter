@@ -8,30 +8,41 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RegisterOpRespo
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RegisterOpResponsePayload Json Serialization Tests")
-class RegisterOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<RegisterOpResponsePayload> {
+class RegisterOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<RegisterOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<RegisterOpResponsePayload> type() {
-        return RegisterOpResponsePayload.class;
-    }
+  @Override
+  public Class<RegisterOpResponsePayload> type() {
+    return RegisterOpResponsePayload.class;
+  }
 
-    @Override
-    public RegisterOpResponsePayload createDefault() {
-        return RegisterOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public RegisterOpResponsePayload createDefault() {
+    return RegisterOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public RegisterOpResponsePayload createVariant() {
-        return RegisterOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
-                .build();
-    }
+  @Override
+  public RegisterOpResponsePayload createVariant() {
+    return RegisterOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid2")
+            .build())
+        .build();
+  }
 }

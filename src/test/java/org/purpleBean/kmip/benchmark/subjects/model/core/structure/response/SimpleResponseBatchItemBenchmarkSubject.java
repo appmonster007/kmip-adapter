@@ -9,23 +9,27 @@ import org.purpleBean.kmip.model.core.structure.response.SimpleResponseBatchItem
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponsePayload;
 import org.purpleBean.kmip.model.core.type.ResultMessage;
 
-public class SimpleResponseBatchItemBenchmarkSubject extends KmipBenchmarkSubject<SimpleResponseBatchItem> {
+public class SimpleResponseBatchItemBenchmarkSubject
+    extends KmipBenchmarkSubject<SimpleResponseBatchItem> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public SimpleResponseBatchItemBenchmarkSubject() throws Exception {
-        SimpleResponseBatchItem subject = SimpleResponseBatchItem.builder()
-                .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
-                .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
-                .resultMessage(ResultMessage.of("Success"))
-                .responsePayloadStructure(SimpleResponsePayload.builder().build())
-                .build();
-        initialize(subject, SimpleResponseBatchItem.class);
-    }
+  public SimpleResponseBatchItemBenchmarkSubject() throws Exception {
+    SimpleResponseBatchItem subject = SimpleResponseBatchItem
+        .builder()
+        .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+        .resultReason(ResultReason.of(ResultReason.Standard.ITEM_NOT_FOUND))
+        .resultMessage(ResultMessage.of("Success"))
+        .responsePayloadStructure(SimpleResponsePayload
+            .builder()
+            .build())
+        .build();
+    initialize(subject, SimpleResponseBatchItem.class);
+  }
 
-    @Override
-    public String name() {
-        return "SimpleResponseBatchItem";
-    }
+  @Override
+  public String name() {
+    return "SimpleResponseBatchItem";
+  }
 }

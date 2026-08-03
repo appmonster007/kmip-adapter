@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.KeyWrapType;
 
 public class KeyWrapTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyWrapType> {
 
-    public KeyWrapTypeBenchmarkSubject() throws Exception {
-        KeyWrapType keyWrapType = KeyWrapType.Standard.NOT_WRAPPED.inst();
-        initialize(keyWrapType, KeyWrapType.class);
-    }
+  public KeyWrapTypeBenchmarkSubject() throws Exception {
+    KeyWrapType keyWrapType = KeyWrapType.Standard.NOT_WRAPPED.inst();
+    initialize(keyWrapType, KeyWrapType.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyWrapType";
-    }
+  @Override
+  public String name() {
+    return "KeyWrapType";
+  }
 
 }

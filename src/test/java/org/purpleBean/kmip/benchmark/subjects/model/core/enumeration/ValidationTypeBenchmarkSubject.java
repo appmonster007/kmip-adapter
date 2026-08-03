@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.ValidationType;
 
 public class ValidationTypeBenchmarkSubject extends KmipBenchmarkSubject<ValidationType> {
 
-    public ValidationTypeBenchmarkSubject() throws Exception {
-        ValidationType validationType = ValidationType.Standard.UNSPECIFIED.inst();
-        initialize(validationType, ValidationType.class);
-    }
+  public ValidationTypeBenchmarkSubject() throws Exception {
+    ValidationType validationType = ValidationType.Standard.UNSPECIFIED.inst();
+    initialize(validationType, ValidationType.class);
+  }
 
-    @Override
-    public String name() {
-        return "ValidationType";
-    }
+  @Override
+  public String name() {
+    return "ValidationType";
+  }
 
 }

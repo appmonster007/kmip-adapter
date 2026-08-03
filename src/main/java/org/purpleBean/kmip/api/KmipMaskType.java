@@ -23,51 +23,52 @@ import java.util.function.Function;
  */
 public interface KmipMaskType extends KmipDataType {
 
-    /**
-     * A registry mapping a unique key (KMIP spec, KMIP tag) to a function that can
-     * create a {@link KmipMaskType} from a string representation.
-     */
-    Map<RegistryKey, Function<String, ? extends KmipMaskType>> FROM_MASK_STRING_REGISTRY = new ConcurrentHashMap<>();
+  /**
+   * A registry mapping a unique key (KMIP spec, KMIP tag) to a function that can
+   * create a {@link KmipMaskType} from a string representation.
+   */
+  Map<RegistryKey, Function<String, ? extends KmipMaskType>> FROM_MASK_STRING_REGISTRY =
+      new ConcurrentHashMap<>();
 
-    /**
-     * Registers a function to create a {@link KmipMaskType} from a string.
-     *
-     * @param spec           The {@link KmipSpec} version.
-     * @param kmipTagValue   The {@link KmipTag.Value} of the mask type.
-     * @param fromMaskString The function to create the mask type from a string.
-     */
-    static void register(
-            KmipSpec spec,
-            KmipTag.Value kmipTagValue,
-            Function<String, ? extends KmipMaskType> fromMaskString
-    ) {
-        FROM_MASK_STRING_REGISTRY.put(new RegistryKey(spec, kmipTagValue), fromMaskString);
-    }
+  /**
+   * Registers a function to create a {@link KmipMaskType} from a string.
+   *
+   * @param spec           The {@link KmipSpec} version.
+   * @param kmipTagValue   The {@link KmipTag.Value} of the mask type.
+   * @param fromMaskString The function to create the mask type from a string.
+   */
+  static void register(
+      KmipSpec spec,
+      KmipTag.Value kmipTagValue,
+      Function<String, ? extends KmipMaskType> fromMaskString
+  ) {
+    FROM_MASK_STRING_REGISTRY.put(new RegistryKey(spec, kmipTagValue), fromMaskString);
+  }
 
-    /**
-     * Retrieves the registered function to create a {@link KmipMaskType} from a string.
-     *
-     * @param kmipTagValue The {@link KmipTag.Value} of the mask type.
-     * @return The registered function, or {@code null} if not found.
-     */
-    static Function<String, ? extends KmipMaskType> getFromMaskString(KmipTag.Value kmipTagValue) {
-        KmipSpec spec = KmipContext.getSpec();
-        return FROM_MASK_STRING_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
-    }
+  /**
+   * Retrieves the registered function to create a {@link KmipMaskType} from a string.
+   *
+   * @param kmipTagValue The {@link KmipTag.Value} of the mask type.
+   * @return The registered function, or {@code null} if not found.
+   */
+  static Function<String, ? extends KmipMaskType> getFromMaskString(KmipTag.Value kmipTagValue) {
+    KmipSpec spec = KmipContext.getSpec();
+    return FROM_MASK_STRING_REGISTRY.get(new RegistryKey(spec, kmipTagValue));
+  }
 
-    /**
-     * Gets the string representation of the mask.
-     *
-     * @return The mask string.
-     */
-    String getMaskString();
+  /**
+   * Gets the string representation of the mask.
+   *
+   * @return The mask string.
+   */
+  String getMaskString();
 
-    /**
-     * A composite key for the mask string registry.
-     *
-     * @param spec         The KMIP specification version.
-     * @param kmipTagValue The KMIP tag.
-     */
-    record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue) {
-    }
+  /**
+   * A composite key for the mask string registry.
+   *
+   * @param spec         The KMIP specification version.
+   * @param kmipTagValue The KMIP tag.
+   */
+  record RegistryKey(KmipSpec spec, KmipTag.Value kmipTagValue) {
+  }
 }

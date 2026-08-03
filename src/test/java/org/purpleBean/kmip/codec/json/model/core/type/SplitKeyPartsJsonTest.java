@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("SplitKeyParts JSON Serialization Tests")
 class SplitKeyPartsJsonTest extends AbstractJsonSerializationTestSuite<SplitKeyParts> {
 
-    @Override
-    public Class<SplitKeyParts> type() {
-        return SplitKeyParts.class;
-    }
+  @Override
+  public Class<SplitKeyParts> type() {
+    return SplitKeyParts.class;
+  }
 
-    @Override
-    public SplitKeyParts createDefault() {
-        return SplitKeyParts.builder().value(2).build();
-    }
+  @Override
+  public SplitKeyParts createDefault() {
+    return SplitKeyParts
+        .builder()
+        .value(2)
+        .build();
+  }
 
-    @Override
-    public SplitKeyParts createVariant() {
-        return SplitKeyParts.builder().value(3).build();
-    }
+  @Override
+  public SplitKeyParts createVariant() {
+    return SplitKeyParts
+        .builder()
+        .value(3)
+        .build();
+  }
 }

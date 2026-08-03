@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("UniqueBatchItemID Domain Tests")
 class UniqueBatchItemIDTest extends AbstractKmipDataTypeTestSuite<UniqueBatchItemID> {
 
-    @Override
-    protected Class<UniqueBatchItemID> type() {
-        return UniqueBatchItemID.class;
-    }
+  @Override
+  protected Class<UniqueBatchItemID> type() {
+    return UniqueBatchItemID.class;
+  }
 
-    @Override
-    protected UniqueBatchItemID createDefault() {
-        return UniqueBatchItemID.of(new byte[]{0x01, 0x02, 0x03});
-    }
+  @Override
+  protected UniqueBatchItemID createDefault() {
+    return UniqueBatchItemID.of(new byte[] {0x01, 0x02, 0x03});
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.BYTE_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.BYTE_STRING;
+  }
 }

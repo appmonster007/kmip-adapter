@@ -8,31 +8,38 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateOpRequestP
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CreateOpRequestPayload Xml Serialization Tests")
-class CreateOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<CreateOpRequestPayload> {
+class CreateOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<CreateOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<CreateOpRequestPayload> type() {
-        return CreateOpRequestPayload.class;
-    }
+  @Override
+  public Class<CreateOpRequestPayload> type() {
+    return CreateOpRequestPayload.class;
+  }
 
-    @Override
-    public CreateOpRequestPayload createDefault() {
-        return CreateOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateOpRequestPayload createDefault() {
+    return CreateOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public CreateOpRequestPayload createVariant() {
-        return CreateOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateOpRequestPayload createVariant() {
+    return CreateOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 }

@@ -6,20 +6,22 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.DataLength;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.RngSeedOpResponsePayload;
 
-public class RngSeedOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<RngSeedOpResponsePayload> {
+public class RngSeedOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<RngSeedOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public RngSeedOpResponsePayloadBenchmarkSubject() throws Exception {
-        RngSeedOpResponsePayload subject = RngSeedOpResponsePayload.builder()
-                .dataLength(DataLength.of(16))
-                .build();
-        initialize(subject, RngSeedOpResponsePayload.class);
-    }
+  public RngSeedOpResponsePayloadBenchmarkSubject() throws Exception {
+    RngSeedOpResponsePayload subject = RngSeedOpResponsePayload
+        .builder()
+        .dataLength(DataLength.of(16))
+        .build();
+    initialize(subject, RngSeedOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "RngSeedOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "RngSeedOpResponsePayload";
+  }
 }

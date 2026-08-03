@@ -10,29 +10,31 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("MacOpRequestPayload Ttlv Serialization Tests")
 class MacOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<MacOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<MacOpRequestPayload> type() {
-        return MacOpRequestPayload.class;
-    }
+  @Override
+  public Class<MacOpRequestPayload> type() {
+    return MacOpRequestPayload.class;
+  }
 
-    @Override
-    public MacOpRequestPayload createDefault() {
-        return MacOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public MacOpRequestPayload createDefault() {
+    return MacOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public MacOpRequestPayload createVariant() {
-        return MacOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public MacOpRequestPayload createVariant() {
+    return MacOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

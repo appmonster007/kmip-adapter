@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("AdjustmentType Xml Serialization Tests")
 class AdjustmentTypeXmlTest extends AbstractXmlSerializationTestSuite<AdjustmentType> {
 
-    @Override
-    public Class<AdjustmentType> type() {
-        return AdjustmentType.class;
-    }
+  @Override
+  public Class<AdjustmentType> type() {
+    return AdjustmentType.class;
+  }
 
-    @Override
-    public AdjustmentType createDefault() {
-        return AdjustmentType.Standard.INCREMENT.inst();
-    }
+  @Override
+  public AdjustmentType createDefault() {
+    return AdjustmentType.Standard.INCREMENT.inst();
+  }
 
-    @Override
-    public AdjustmentType createVariant() {
-        return AdjustmentType.Standard.DECREMENT.inst();
-    }
+  @Override
+  public AdjustmentType createVariant() {
+    return AdjustmentType.Standard.DECREMENT.inst();
+  }
 }

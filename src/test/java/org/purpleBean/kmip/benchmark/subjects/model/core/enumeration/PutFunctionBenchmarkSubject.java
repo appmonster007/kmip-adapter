@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.PutFunction;
 
 public class PutFunctionBenchmarkSubject extends KmipBenchmarkSubject<PutFunction> {
 
-    public PutFunctionBenchmarkSubject() throws Exception {
-        PutFunction putFunction = PutFunction.Standard.NEW.inst();
-        initialize(putFunction, PutFunction.class);
-    }
+  public PutFunctionBenchmarkSubject() throws Exception {
+    PutFunction putFunction = PutFunction.Standard.NEW.inst();
+    initialize(putFunction, PutFunction.class);
+  }
 
-    @Override
-    public String name() {
-        return "PutFunction";
-    }
+  @Override
+  public String name() {
+    return "PutFunction";
+  }
 
 }

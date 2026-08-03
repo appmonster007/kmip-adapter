@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.RngSeedOpRespon
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RngSeedOpResponsePayload Json Serialization Tests")
-class RngSeedOpResponsePayloadJsonTest extends AbstractJsonSerializationTestSuite<RngSeedOpResponsePayload> {
+class RngSeedOpResponsePayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<RngSeedOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RngSeedOpResponsePayload> type() {
-        return RngSeedOpResponsePayload.class;
-    }
+  @Override
+  public Class<RngSeedOpResponsePayload> type() {
+    return RngSeedOpResponsePayload.class;
+  }
 
-    @Override
-    public RngSeedOpResponsePayload createDefault() {
-        return RngSeedOpResponsePayload.builder()
-                .dataLength(DataLength.of(16))
-                .build();
-    }
+  @Override
+  public RngSeedOpResponsePayload createDefault() {
+    return RngSeedOpResponsePayload
+        .builder()
+        .dataLength(DataLength.of(16))
+        .build();
+  }
 
-    @Override
-    public RngSeedOpResponsePayload createVariant() {
-        return RngSeedOpResponsePayload.builder()
-                .dataLength(DataLength.of(32))
-                .build();
-    }
+  @Override
+  public RngSeedOpResponsePayload createVariant() {
+    return RngSeedOpResponsePayload
+        .builder()
+        .dataLength(DataLength.of(32))
+        .build();
+  }
 }

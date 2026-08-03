@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("Issuer XML Serialization Tests")
 class IssuerXmlTest extends AbstractXmlSerializationTestSuite<Issuer> {
 
-    @Override
-    public Class<Issuer> type() {
-        return Issuer.class;
-    }
+  @Override
+  public Class<Issuer> type() {
+    return Issuer.class;
+  }
 
-    @Override
-    public Issuer createDefault() {
-        return Issuer.builder().value("test-issuer").build();
-    }
+  @Override
+  public Issuer createDefault() {
+    return Issuer
+        .builder()
+        .value("test-issuer")
+        .build();
+  }
 
-    @Override
-    public Issuer createVariant() {
-        return Issuer.builder().value("another-issuer").build();
-    }
+  @Override
+  public Issuer createVariant() {
+    return Issuer
+        .builder()
+        .value("another-issuer")
+        .build();
+  }
 }

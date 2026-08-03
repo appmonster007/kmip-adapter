@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class LongXmlDeserializer extends JsonDeserializer<Long> {
 
-    @Override
-    public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return Long.parseLong(p.getText());
-    }
+  @Override
+  public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return Long.parseLong(p.getText());
+  }
 }

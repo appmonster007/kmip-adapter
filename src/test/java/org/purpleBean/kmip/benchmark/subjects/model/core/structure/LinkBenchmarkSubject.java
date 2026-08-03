@@ -7,17 +7,18 @@ import org.purpleBean.kmip.model.core.type.LinkedObjectIdentifier;
 
 public class LinkBenchmarkSubject extends KmipBenchmarkSubject<Link> {
 
-    public LinkBenchmarkSubject() throws Exception {
-        Link link = Link.builder()
-                .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
-                .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
-                .build();
-        initialize(link, Link.class);
-    }
+  public LinkBenchmarkSubject() throws Exception {
+    Link link = Link
+        .builder()
+        .linkType(LinkType.Standard.CERTIFICATE_LINK.inst())
+        .linkedObjectIdentifier(LinkedObjectIdentifier.of("test-id"))
+        .build();
+    initialize(link, Link.class);
+  }
 
-    @Override
-    public String name() {
-        return "Link";
-    }
+  @Override
+  public String name() {
+    return "Link";
+  }
 
 }

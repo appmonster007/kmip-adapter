@@ -9,33 +9,36 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.DeleteAttributeO
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("DeleteAttributeOpRequestPayload Json Serialization Tests")
-class DeleteAttributeOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<DeleteAttributeOpRequestPayload> {
+class DeleteAttributeOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<DeleteAttributeOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<DeleteAttributeOpRequestPayload> type() {
-        return DeleteAttributeOpRequestPayload.class;
-    }
+  @Override
+  public Class<DeleteAttributeOpRequestPayload> type() {
+    return DeleteAttributeOpRequestPayload.class;
+  }
 
-    @Override
-    public DeleteAttributeOpRequestPayload createDefault() {
-        return DeleteAttributeOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attributeName(AttributeName.of("test-attribute"))
-                .attributeIndex(AttributeIndex.of(1))
-                .build();
-    }
+  @Override
+  public DeleteAttributeOpRequestPayload createDefault() {
+    return DeleteAttributeOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attributeName(AttributeName.of("test-attribute"))
+        .attributeIndex(AttributeIndex.of(1))
+        .build();
+  }
 
-    @Override
-    public DeleteAttributeOpRequestPayload createVariant() {
-        return DeleteAttributeOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .attributeName(AttributeName.of("variant-attribute"))
-                .attributeIndex(AttributeIndex.of(2))
-                .build();
-    }
+  @Override
+  public DeleteAttributeOpRequestPayload createVariant() {
+    return DeleteAttributeOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .attributeName(AttributeName.of("variant-attribute"))
+        .attributeIndex(AttributeIndex.of(2))
+        .build();
+  }
 }

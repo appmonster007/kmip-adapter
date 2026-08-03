@@ -5,19 +5,20 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.AttestationCapableIndicator;
 
-public class AttestationCapableIndicatorBenchmarkSubject extends KmipBenchmarkSubject<AttestationCapableIndicator> {
+public class AttestationCapableIndicatorBenchmarkSubject
+    extends KmipBenchmarkSubject<AttestationCapableIndicator> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public AttestationCapableIndicatorBenchmarkSubject() throws Exception {
-        AttestationCapableIndicator subject = AttestationCapableIndicator.of(true);
-        initialize(subject, AttestationCapableIndicator.class);
-    }
+  public AttestationCapableIndicatorBenchmarkSubject() throws Exception {
+    AttestationCapableIndicator subject = AttestationCapableIndicator.of(true);
+    initialize(subject, AttestationCapableIndicator.class);
+  }
 
-    @Override
-    public String name() {
-        return "AttestationCapableIndicator";
-    }
+  @Override
+  public String name() {
+    return "AttestationCapableIndicator";
+  }
 
 }

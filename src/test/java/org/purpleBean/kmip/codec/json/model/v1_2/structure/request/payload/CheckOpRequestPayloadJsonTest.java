@@ -10,35 +10,38 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.CheckOpRequestPa
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CheckOpRequestPayload Json Serialization Tests")
-class CheckOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<CheckOpRequestPayload> {
+class CheckOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<CheckOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CheckOpRequestPayload> type() {
-        return CheckOpRequestPayload.class;
-    }
+  @Override
+  public Class<CheckOpRequestPayload> type() {
+    return CheckOpRequestPayload.class;
+  }
 
-    @Override
-    public CheckOpRequestPayload createDefault() {
-        return CheckOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .usageLimitsCount(UsageLimitsCount.of(100L))
-                .cryptographicUsageMask(CryptographicUsageMask.of(1))
-                .leaseTime(LeaseTime.of(3600))
-                .build();
-    }
+  @Override
+  public CheckOpRequestPayload createDefault() {
+    return CheckOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .usageLimitsCount(UsageLimitsCount.of(100L))
+        .cryptographicUsageMask(CryptographicUsageMask.of(1))
+        .leaseTime(LeaseTime.of(3600))
+        .build();
+  }
 
-    @Override
-    public CheckOpRequestPayload createVariant() {
-        return CheckOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .usageLimitsCount(UsageLimitsCount.of(200L))
-                .cryptographicUsageMask(CryptographicUsageMask.of(2))
-                .leaseTime(LeaseTime.of(7200))
-                .build();
-    }
+  @Override
+  public CheckOpRequestPayload createVariant() {
+    return CheckOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .usageLimitsCount(UsageLimitsCount.of(200L))
+        .cryptographicUsageMask(CryptographicUsageMask.of(2))
+        .leaseTime(LeaseTime.of(7200))
+        .build();
+  }
 }

@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.UsageLimitsUnit;
 
-import java.io.IOException;
+public class UsageLimitsUnitJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<UsageLimitsUnit, UsageLimitsUnit.UsageLimitsUnitBuilder> {
 
-public class UsageLimitsUnitJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<UsageLimitsUnit, UsageLimitsUnit.UsageLimitsUnitBuilder> {
+  public UsageLimitsUnitJsonDeserializer() {
+    super(UsageLimitsUnit.kmipTag, UsageLimitsUnit.encodingType);
+  }
 
-    public UsageLimitsUnitJsonDeserializer() {
-        super(UsageLimitsUnit.kmipTag, UsageLimitsUnit.encodingType);
-    }
+  @Override
+  protected UsageLimitsUnit.UsageLimitsUnitBuilder createBuilder() {
+    return UsageLimitsUnit.builder();
+  }
 
-    @Override
-    protected UsageLimitsUnit.UsageLimitsUnitBuilder createBuilder() {
-        return UsageLimitsUnit.builder();
-    }
+  @Override
+  protected void setValue(UsageLimitsUnit.UsageLimitsUnitBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(UsageLimitsUnit.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(UsageLimitsUnit.UsageLimitsUnitBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(UsageLimitsUnit.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected UsageLimitsUnit build(UsageLimitsUnit.UsageLimitsUnitBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected UsageLimitsUnit build(UsageLimitsUnit.UsageLimitsUnitBuilder builder) {
+    return builder.build();
+  }
 }

@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v2_1.enumeration.ProtectionLevel;
 
 public class ProtectionLevelBenchmarkSubject extends KmipBenchmarkSubject<ProtectionLevel> {
 
-    public ProtectionLevelBenchmarkSubject() throws Exception {
-        ProtectionLevel protectionLevel = ProtectionLevel.Standard.HIGH.inst();
-        initialize(protectionLevel, ProtectionLevel.class);
-    }
+  public ProtectionLevelBenchmarkSubject() throws Exception {
+    ProtectionLevel protectionLevel = ProtectionLevel.Standard.HIGH.inst();
+    initialize(protectionLevel, ProtectionLevel.class);
+  }
 
-    @Override
-    public String name() {
-        return "ProtectionLevel";
-    }
+  @Override
+  public String name() {
+    return "ProtectionLevel";
+  }
 
 }

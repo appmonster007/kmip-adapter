@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("DeviceIdentifier JSON Serialization Tests")
 class DeviceIdentifierJsonTest extends AbstractJsonSerializationTestSuite<DeviceIdentifier> {
 
-    @Override
-    public Class<DeviceIdentifier> type() {
-        return DeviceIdentifier.class;
-    }
+  @Override
+  public Class<DeviceIdentifier> type() {
+    return DeviceIdentifier.class;
+  }
 
-    @Override
-    public DeviceIdentifier createDefault() {
-        return DeviceIdentifier.builder().value("test-device-id").build();
-    }
+  @Override
+  public DeviceIdentifier createDefault() {
+    return DeviceIdentifier
+        .builder()
+        .value("test-device-id")
+        .build();
+  }
 
-    @Override
-    public DeviceIdentifier createVariant() {
-        return DeviceIdentifier.builder().value("another-device-id").build();
-    }
+  @Override
+  public DeviceIdentifier createVariant() {
+    return DeviceIdentifier
+        .builder()
+        .value("another-device-id")
+        .build();
+  }
 }

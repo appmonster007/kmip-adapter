@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.v2_1.structure;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.v2_1.structure.TransparentEcPrivateKey;
 
-public class TransparentEcPrivateKeyTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<TransparentEcPrivateKey> {
+public class TransparentEcPrivateKeyTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<TransparentEcPrivateKey> {
 }

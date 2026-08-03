@@ -11,34 +11,55 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRe
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ReKeyKeyPairOpRequestPayload Xml Serialization Tests")
-class ReKeyKeyPairOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<ReKeyKeyPairOpRequestPayload> {
+class ReKeyKeyPairOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<ReKeyKeyPairOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<ReKeyKeyPairOpRequestPayload> type() {
-        return ReKeyKeyPairOpRequestPayload.class;
-    }
+  @Override
+  public Class<ReKeyKeyPairOpRequestPayload> type() {
+    return ReKeyKeyPairOpRequestPayload.class;
+  }
 
-    @Override
-    public ReKeyKeyPairOpRequestPayload createDefault() {
-        return ReKeyKeyPairOpRequestPayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
-                .offset(Offset.builder().value(100).build())
-                .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public ReKeyKeyPairOpRequestPayload createDefault() {
+    return ReKeyKeyPairOpRequestPayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(100)
+            .build())
+        .commonTemplateAttribute(CommonTemplateAttribute
+            .builder()
+            .build())
+        .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute
+            .builder()
+            .build())
+        .publicKeyTemplateAttribute(PublicKeyTemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public ReKeyKeyPairOpRequestPayload createVariant() {
-        return ReKeyKeyPairOpRequestPayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid2").build())
-                .offset(Offset.builder().value(200).build())
-                .build();
-    }
+  @Override
+  public ReKeyKeyPairOpRequestPayload createVariant() {
+    return ReKeyKeyPairOpRequestPayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid2")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(200)
+            .build())
+        .build();
+  }
 }

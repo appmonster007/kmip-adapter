@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("SerialNumber Domain Tests")
 class SerialNumberTest extends AbstractKmipDataTypeTestSuite<SerialNumber> {
 
-    @Override
-    protected Class<SerialNumber> type() {
-        return SerialNumber.class;
-    }
+  @Override
+  protected Class<SerialNumber> type() {
+    return SerialNumber.class;
+  }
 
-    @Override
-    protected SerialNumber createDefault() {
-        return SerialNumber.builder().value("12345").build();
-    }
+  @Override
+  protected SerialNumber createDefault() {
+    return SerialNumber
+        .builder()
+        .value("12345")
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

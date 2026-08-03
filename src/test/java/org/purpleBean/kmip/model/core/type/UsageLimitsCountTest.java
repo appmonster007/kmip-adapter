@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("UsageLimitsCount Domain Tests")
 class UsageLimitsCountTest extends AbstractKmipDataTypeTestSuite<UsageLimitsCount> {
 
-    @Override
-    protected Class<UsageLimitsCount> type() {
-        return UsageLimitsCount.class;
-    }
+  @Override
+  protected Class<UsageLimitsCount> type() {
+    return UsageLimitsCount.class;
+  }
 
-    @Override
-    protected UsageLimitsCount createDefault() {
-        return UsageLimitsCount.builder().value(100L).build();
-    }
+  @Override
+  protected UsageLimitsCount createDefault() {
+    return UsageLimitsCount
+        .builder()
+        .value(100L)
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.LONG_INTEGER;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.LONG_INTEGER;
+  }
 }

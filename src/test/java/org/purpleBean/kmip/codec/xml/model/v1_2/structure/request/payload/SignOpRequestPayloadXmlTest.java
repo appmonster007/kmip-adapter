@@ -10,29 +10,31 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("SignOpRequestPayload Xml Serialization Tests")
 class SignOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<SignOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<SignOpRequestPayload> type() {
-        return SignOpRequestPayload.class;
-    }
+  @Override
+  public Class<SignOpRequestPayload> type() {
+    return SignOpRequestPayload.class;
+  }
 
-    @Override
-    public SignOpRequestPayload createDefault() {
-        return SignOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public SignOpRequestPayload createDefault() {
+    return SignOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public SignOpRequestPayload createVariant() {
-        return SignOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public SignOpRequestPayload createVariant() {
+    return SignOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

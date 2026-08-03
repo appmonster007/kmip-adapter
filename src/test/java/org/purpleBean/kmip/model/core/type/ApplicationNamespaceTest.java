@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("ApplicationNamespace Domain Tests")
 class ApplicationNamespaceTest extends AbstractKmipDataTypeTestSuite<ApplicationNamespace> {
 
-    @Override
-    protected Class<ApplicationNamespace> type() {
-        return ApplicationNamespace.class;
-    }
+  @Override
+  protected Class<ApplicationNamespace> type() {
+    return ApplicationNamespace.class;
+  }
 
-    @Override
-    protected ApplicationNamespace createDefault() {
-        return ApplicationNamespace.builder().value("test-namespace").build();
-    }
+  @Override
+  protected ApplicationNamespace createDefault() {
+    return ApplicationNamespace
+        .builder()
+        .value("test-namespace")
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

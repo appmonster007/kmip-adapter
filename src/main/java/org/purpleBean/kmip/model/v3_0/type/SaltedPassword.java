@@ -1,12 +1,15 @@
 package org.purpleBean.kmip.model.v3_0.type;
 
+import java.nio.ByteBuffer;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.purpleBean.kmip.api.*;
-
-import java.nio.ByteBuffer;
-import java.util.Set;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
 
 /**
  * KMIP SaltedPassword dataType (ByteString).
@@ -17,52 +20,59 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class SaltedPassword implements KmipDataType {
 
-    public static final KmipTag kmipTag = KmipTag.Standard.SALTED_PASSWORD.inst();
-    public static final EncodingType encodingType = EncodingType.BYTE_STRING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
+  public static final KmipTag kmipTag = KmipTag.Standard.SALTED_PASSWORD.inst();
+  public static final EncodingType encodingType = EncodingType.BYTE_STRING;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, SaltedPassword.class);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, SaltedPassword.class);
     }
+  }
 
-    @NonNull
-    private final ByteBuffer value;
+  @NonNull
+  private final ByteBuffer value;
 
-    @Builder
-    private SaltedPassword(@NonNull ByteBuffer value) {
-        this.value = value;
-        validate();
+  @Builder
+  private SaltedPassword(@NonNull ByteBuffer value) {
+    this.value = value;
+    validate();
+  }
+
+  public static SaltedPassword of(@NonNull ByteBuffer value) {
+    return new SaltedPassword(value);
+  }
+
+  public static SaltedPassword of(byte[] value) {
+    return SaltedPassword
+        .builder()
+        .value(ByteBuffer.wrap(value))
+        .build();
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    public static SaltedPassword of(@NonNull ByteBuffer value) {
-        return new SaltedPassword(value);
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    public static SaltedPassword of(byte[] value) {
-        return SaltedPassword.builder().value(ByteBuffer.wrap(value)).build();
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
-
-    @Override
-    public KmipTag getKmipTag() {
-        return kmipTag;
-    }
-
-    @Override
-    public EncodingType getEncodingType() {
-        return encodingType;
-    }
-
-    @Override
-    public boolean isSupported() {
-        return supportedVersions.contains(KmipContext.getSpec());
-    }
+  @Override
+  public boolean isSupported() {
+    return supportedVersions.contains(KmipContext.getSpec());
+  }
 }

@@ -5,14 +5,17 @@ import org.purpleBean.kmip.model.core.type.NameValue;
 
 public class NameValueBenchmarkSubject extends KmipBenchmarkSubject<NameValue> {
 
-    public NameValueBenchmarkSubject() throws Exception {
-        NameValue nameValue = NameValue.builder().value("some-name").build();
-        initialize(nameValue, NameValue.class);
-    }
+  public NameValueBenchmarkSubject() throws Exception {
+    NameValue nameValue = NameValue
+        .builder()
+        .value("some-name")
+        .build();
+    initialize(nameValue, NameValue.class);
+  }
 
-    @Override
-    public String name() {
-        return "NameValue";
-    }
+  @Override
+  public String name() {
+    return "NameValue";
+  }
 
 }

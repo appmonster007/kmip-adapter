@@ -8,31 +8,38 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.HashOpRequestPay
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("HashOpRequestPayload Json Serialization Tests")
-class HashOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<HashOpRequestPayload> {
+class HashOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<HashOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<HashOpRequestPayload> type() {
-        return HashOpRequestPayload.class;
-    }
+  @Override
+  public Class<HashOpRequestPayload> type() {
+    return HashOpRequestPayload.class;
+  }
 
-    @Override
-    public HashOpRequestPayload createDefault() {
-        return HashOpRequestPayload.builder()
-                .cryptographicParameters(CryptographicParameters.builder().build())
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public HashOpRequestPayload createDefault() {
+    return HashOpRequestPayload
+        .builder()
+        .cryptographicParameters(CryptographicParameters
+            .builder()
+            .build())
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public HashOpRequestPayload createVariant() {
-        return HashOpRequestPayload.builder()
-                .cryptographicParameters(CryptographicParameters.builder().build())
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public HashOpRequestPayload createVariant() {
+    return HashOpRequestPayload
+        .builder()
+        .cryptographicParameters(CryptographicParameters
+            .builder()
+            .build())
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

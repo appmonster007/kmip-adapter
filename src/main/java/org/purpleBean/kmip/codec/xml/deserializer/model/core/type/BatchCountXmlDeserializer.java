@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.BatchCount;
 
-import java.io.IOException;
+public class BatchCountXmlDeserializer
+    extends AbstractKmipDataTypeXmlDeserializer<BatchCount, BatchCount.BatchCountBuilder> {
 
-public class BatchCountXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<BatchCount, BatchCount.BatchCountBuilder> {
+  public BatchCountXmlDeserializer() {
+    super(BatchCount.kmipTag, BatchCount.encodingType);
+  }
 
-    public BatchCountXmlDeserializer() {
-        super(BatchCount.kmipTag, BatchCount.encodingType);
-    }
+  @Override
+  protected BatchCount.BatchCountBuilder createBuilder() {
+    return BatchCount.builder();
+  }
 
-    @Override
-    protected BatchCount.BatchCountBuilder createBuilder() {
-        return BatchCount.builder();
-    }
+  @Override
+  protected void setValue(BatchCount.BatchCountBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, Integer.class));
+  }
 
-    @Override
-    protected void setValue(BatchCount.BatchCountBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, Integer.class));
-    }
-
-    @Override
-    protected BatchCount build(BatchCount.BatchCountBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected BatchCount build(BatchCount.BatchCountBuilder builder) {
+    return builder.build();
+  }
 }

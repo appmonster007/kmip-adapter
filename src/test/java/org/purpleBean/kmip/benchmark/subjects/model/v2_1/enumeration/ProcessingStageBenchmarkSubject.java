@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.v2_1.enumeration.ProcessingStage;
 
 public class ProcessingStageBenchmarkSubject extends KmipBenchmarkSubject<ProcessingStage> {
 
-    public ProcessingStageBenchmarkSubject() throws Exception {
-        ProcessingStage processingStage = ProcessingStage.Standard.SUBMITTED.inst();
-        initialize(processingStage, ProcessingStage.class);
-    }
+  public ProcessingStageBenchmarkSubject() throws Exception {
+    ProcessingStage processingStage = ProcessingStage.Standard.SUBMITTED.inst();
+    initialize(processingStage, ProcessingStage.class);
+  }
 
-    @Override
-    public String name() {
-        return "ProcessingStage";
-    }
+  @Override
+  public String name() {
+    return "ProcessingStage";
+  }
 
 }

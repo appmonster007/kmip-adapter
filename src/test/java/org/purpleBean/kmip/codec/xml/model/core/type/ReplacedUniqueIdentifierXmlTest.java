@@ -5,20 +5,27 @@ import org.purpleBean.kmip.model.core.type.ReplacedUniqueIdentifier;
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ReplacedUniqueIdentifier XML Serialization Tests")
-class ReplacedUniqueIdentifierXmlTest extends AbstractXmlSerializationTestSuite<ReplacedUniqueIdentifier> {
+class ReplacedUniqueIdentifierXmlTest
+    extends AbstractXmlSerializationTestSuite<ReplacedUniqueIdentifier> {
 
-    @Override
-    public Class<ReplacedUniqueIdentifier> type() {
-        return ReplacedUniqueIdentifier.class;
-    }
+  @Override
+  public Class<ReplacedUniqueIdentifier> type() {
+    return ReplacedUniqueIdentifier.class;
+  }
 
-    @Override
-    public ReplacedUniqueIdentifier createDefault() {
-        return ReplacedUniqueIdentifier.builder().value("test-id").build();
-    }
+  @Override
+  public ReplacedUniqueIdentifier createDefault() {
+    return ReplacedUniqueIdentifier
+        .builder()
+        .value("test-id")
+        .build();
+  }
 
-    @Override
-    public ReplacedUniqueIdentifier createVariant() {
-        return ReplacedUniqueIdentifier.builder().value("another-id").build();
-    }
+  @Override
+  public ReplacedUniqueIdentifier createVariant() {
+    return ReplacedUniqueIdentifier
+        .builder()
+        .value("another-id")
+        .build();
+  }
 }

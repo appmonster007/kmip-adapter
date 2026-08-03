@@ -2,29 +2,32 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.RevocationReasonCode;
 
-import java.io.IOException;
+public class RevocationReasonCodeXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<RevocationReasonCode,
+        RevocationReasonCode.RevocationReasonCodeBuilder> {
 
-public class RevocationReasonCodeXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<RevocationReasonCode, RevocationReasonCode.RevocationReasonCodeBuilder> {
+  public RevocationReasonCodeXmlDeserializer() {
+    super(RevocationReasonCode.kmipTag, RevocationReasonCode.encodingType);
+  }
 
-    public RevocationReasonCodeXmlDeserializer() {
-        super(RevocationReasonCode.kmipTag, RevocationReasonCode.encodingType);
-    }
+  @Override
+  protected RevocationReasonCode.RevocationReasonCodeBuilder createBuilder() {
+    return RevocationReasonCode.builder();
+  }
 
-    @Override
-    protected RevocationReasonCode.RevocationReasonCodeBuilder createBuilder() {
-        return RevocationReasonCode.builder();
-    }
+  @Override
+  protected void setValue(RevocationReasonCode.RevocationReasonCodeBuilder builder, String tag,
+                          String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    builder.value(RevocationReasonCode.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(RevocationReasonCode.RevocationReasonCodeBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(RevocationReasonCode.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected RevocationReasonCode build(RevocationReasonCode.RevocationReasonCodeBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected RevocationReasonCode build(RevocationReasonCode.RevocationReasonCodeBuilder builder) {
+    return builder.build();
+  }
 }

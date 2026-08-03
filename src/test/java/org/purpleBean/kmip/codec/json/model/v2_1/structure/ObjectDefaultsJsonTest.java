@@ -1,5 +1,6 @@
 package org.purpleBean.kmip.codec.json.model.v2_1.structure;
 
+import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.ObjectType;
@@ -7,34 +8,34 @@ import org.purpleBean.kmip.model.v2_1.structure.Attributes;
 import org.purpleBean.kmip.model.v2_1.structure.ObjectDefaults;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
-import java.util.Collections;
-
 @DisplayName("ObjectDefaults Json Serialization Tests")
 class ObjectDefaultsJsonTest extends AbstractJsonSerializationTestSuite<ObjectDefaults> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V2_1;
+  }
 
-    @Override
-    public Class<ObjectDefaults> type() {
-        return ObjectDefaults.class;
-    }
+  @Override
+  public Class<ObjectDefaults> type() {
+    return ObjectDefaults.class;
+  }
 
-    @Override
-    public ObjectDefaults createDefault() {
-        return ObjectDefaults.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .attributes(Attributes.of(Collections.emptyList()))
-                .build();
-    }
+  @Override
+  public ObjectDefaults createDefault() {
+    return ObjectDefaults
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .attributes(Attributes.of(Collections.emptyList()))
+        .build();
+  }
 
-    @Override
-    public ObjectDefaults createVariant() {
-        return ObjectDefaults.builder()
-                .objectType(ObjectType.Standard.CERTIFICATE.inst())
-                .attributes(Attributes.of(Collections.emptyList()))
-                .build();
-    }
+  @Override
+  public ObjectDefaults createVariant() {
+    return ObjectDefaults
+        .builder()
+        .objectType(ObjectType.Standard.CERTIFICATE.inst())
+        .attributes(Attributes.of(Collections.emptyList()))
+        .build();
+  }
 }

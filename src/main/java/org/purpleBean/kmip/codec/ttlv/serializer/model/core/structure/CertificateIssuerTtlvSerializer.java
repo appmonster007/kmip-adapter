@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.core.structure;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.core.structure.CertificateIssuer;
 
-public class CertificateIssuerTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<CertificateIssuer> {
+public class CertificateIssuerTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<CertificateIssuer> {
 }

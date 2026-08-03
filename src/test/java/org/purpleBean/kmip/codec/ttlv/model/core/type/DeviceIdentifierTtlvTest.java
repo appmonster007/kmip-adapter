@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("DeviceIdentifier TTLV Serialization Tests")
 class DeviceIdentifierTtlvTest extends AbstractTtlvSerializationTestSuite<DeviceIdentifier> {
 
-    @Override
-    public Class<DeviceIdentifier> type() {
-        return DeviceIdentifier.class;
-    }
+  @Override
+  public Class<DeviceIdentifier> type() {
+    return DeviceIdentifier.class;
+  }
 
-    @Override
-    public DeviceIdentifier createDefault() {
-        return DeviceIdentifier.builder().value("test-device-id").build();
-    }
+  @Override
+  public DeviceIdentifier createDefault() {
+    return DeviceIdentifier
+        .builder()
+        .value("test-device-id")
+        .build();
+  }
 
-    @Override
-    public DeviceIdentifier createVariant() {
-        return DeviceIdentifier.builder().value("another-device-id").build();
-    }
+  @Override
+  public DeviceIdentifier createVariant() {
+    return DeviceIdentifier
+        .builder()
+        .value("another-device-id")
+        .build();
+  }
 }

@@ -9,16 +9,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("AlternativeName Xml Serialization Tests")
 class AlternativeNameXmlTest extends AbstractXmlSerializationTestSuite<AlternativeName> {
 
-    @Override
-    public Class<AlternativeName> type() {
-        return AlternativeName.class;
-    }
+  @Override
+  public Class<AlternativeName> type() {
+    return AlternativeName.class;
+  }
 
-    @Override
-    public AlternativeName createDefault() {
-        return AlternativeName.builder()
-                .alternativeNameValue(AlternativeNameValue.of("some-name"))
-                .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
-                .build();
-    }
+  @Override
+  public AlternativeName createDefault() {
+    return AlternativeName
+        .builder()
+        .alternativeNameValue(AlternativeNameValue.of("some-name"))
+        .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
+        .build();
+  }
 }

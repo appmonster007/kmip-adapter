@@ -10,22 +10,24 @@ import org.purpleBean.kmip.model.core.type.AttributeValue;
 
 public class TemplateBenchmarkSubject extends KmipBenchmarkSubject<Template> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public TemplateBenchmarkSubject() throws Exception {
-        Template subject = Template.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-        initialize(subject, Template.class);
-    }
+  public TemplateBenchmarkSubject() throws Exception {
+    Template subject = Template
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+    initialize(subject, Template.class);
+  }
 
-    @Override
-    public String name() {
-        return "Template";
-    }
+  @Override
+  public String name() {
+    return "Template";
+  }
 
 }

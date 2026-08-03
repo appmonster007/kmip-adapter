@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.MaximumItems;
 
 public class MaximumItemsBenchmarkSubject extends KmipBenchmarkSubject<MaximumItems> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public MaximumItemsBenchmarkSubject() throws Exception {
-        MaximumItems maximumItems = MaximumItems.builder().value(100).build();
-        initialize(maximumItems, MaximumItems.class);
-    }
+  public MaximumItemsBenchmarkSubject() throws Exception {
+    MaximumItems maximumItems = MaximumItems
+        .builder()
+        .value(100)
+        .build();
+    initialize(maximumItems, MaximumItems.class);
+  }
 
-    @Override
-    public String name() {
-        return "MaximumItems";
-    }
+  @Override
+  public String name() {
+    return "MaximumItems";
+  }
 
 }

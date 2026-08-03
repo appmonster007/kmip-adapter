@@ -11,23 +11,25 @@ import org.purpleBean.kmip.model.core.type.Username;
 
 public class CredentialBenchmarkSubject extends KmipBenchmarkSubject<Credential> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CredentialBenchmarkSubject() throws Exception {
-        Credential subject = Credential.builder()
-                .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
-                .credentialValue(UsernameAndPassword.builder()
-                        .username(Username.of("test-user"))
-                        .password(Password.of("test-password"))
-                        .build())
-                .build();
-        initialize(subject, Credential.class);
-    }
+  public CredentialBenchmarkSubject() throws Exception {
+    Credential subject = Credential
+        .builder()
+        .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .credentialValue(UsernameAndPassword
+            .builder()
+            .username(Username.of("test-user"))
+            .password(Password.of("test-password"))
+            .build())
+        .build();
+    initialize(subject, Credential.class);
+  }
 
-    @Override
-    public String name() {
-        return "Credential";
-    }
+  @Override
+  public String name() {
+    return "Credential";
+  }
 
 }

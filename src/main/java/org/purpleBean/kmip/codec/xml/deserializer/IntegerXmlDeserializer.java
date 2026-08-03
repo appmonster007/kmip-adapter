@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class IntegerXmlDeserializer extends JsonDeserializer<Integer> {
 
-    @Override
-    public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return Integer.parseInt(p.getText());
-    }
+  @Override
+  public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return Integer.parseInt(p.getText());
+  }
 }

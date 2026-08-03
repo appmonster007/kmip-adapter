@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Operation XML Serialization")
 class OperationXmlTest extends AbstractXmlSerializationTestSuite<Operation> {
-    @Override
-    public Class<Operation> type() {
-        return Operation.class;
-    }
+  @Override
+  public Class<Operation> type() {
+    return Operation.class;
+  }
 
-    @Override
-    public Operation createDefault() {
-        return Operation.Standard.CREATE.inst();
-    }
+  @Override
+  public Operation createDefault() {
+    return Operation.Standard.CREATE.inst();
+  }
 
-    @Override
-    public Operation createVariant() {
-        return Operation.Standard.CREATE_KEY_PAIR.inst();
-    }
+  @Override
+  public Operation createVariant() {
+    return Operation.Standard.CREATE_KEY_PAIR.inst();
+  }
 }

@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.ttlv.serializer.model.v3_0.structure.request.p
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.model.v3_0.structure.request.payload.ReKeyKeyPairOpRequestPayload;
 
-public class ReKeyKeyPairOpRequestPayloadTtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<ReKeyKeyPairOpRequestPayload> {
+public class ReKeyKeyPairOpRequestPayloadTtlvSerializer
+    extends AbstractKmipDataTypeTtlvSerializer<ReKeyKeyPairOpRequestPayload> {
 }

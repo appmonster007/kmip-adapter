@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.BlockCipherMode;
 
 public class BlockCipherModeBenchmarkSubject extends KmipBenchmarkSubject<BlockCipherMode> {
 
-    public BlockCipherModeBenchmarkSubject() throws Exception {
-        BlockCipherMode blockCipherMode = BlockCipherMode.Standard.CBC.inst();
-        initialize(blockCipherMode, BlockCipherMode.class);
-    }
+  public BlockCipherModeBenchmarkSubject() throws Exception {
+    BlockCipherMode blockCipherMode = BlockCipherMode.Standard.CBC.inst();
+    initialize(blockCipherMode, BlockCipherMode.class);
+  }
 
-    @Override
-    public String name() {
-        return "BlockCipherMode";
-    }
+  @Override
+  public String name() {
+    return "BlockCipherMode";
+  }
 
 }

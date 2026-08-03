@@ -2,6 +2,7 @@ package org.purpleBean.kmip.codec.json.deserializer.model.v1_2.structure.request
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.KeyCompressionType;
@@ -10,37 +11,41 @@ import org.purpleBean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayload;
 
-import java.io.IOException;
+public class GetOpRequestPayloadJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<GetOpRequestPayload,
+        GetOpRequestPayload.GetOpRequestPayloadBuilder> {
 
-public class GetOpRequestPayloadJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<GetOpRequestPayload, GetOpRequestPayload.GetOpRequestPayloadBuilder> {
+  public GetOpRequestPayloadJsonDeserializer() {
+    super(GetOpRequestPayload.kmipTag, GetOpRequestPayload.encodingType);
+  }
 
-    public GetOpRequestPayloadJsonDeserializer() {
-        super(GetOpRequestPayload.kmipTag, GetOpRequestPayload.encodingType);
+  @Override
+  protected GetOpRequestPayload.GetOpRequestPayloadBuilder createBuilder() {
+    return GetOpRequestPayload.builder();
+  }
+
+  @Override
+  protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, String tag,
+                          String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
+          builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+      case KmipTag.Standard.KEY_FORMAT_TYPE ->
+          builder.keyFormatType(ctxt.readValue(p, KeyFormatType.class));
+      case KmipTag.Standard.KEY_WRAP_TYPE -> builder.keyWrapType(
+          ctxt.readValue(p, org.purpleBean.kmip.model.core.enumeration.KeyWrapType.class));
+      case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
+          builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
+      case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
+          builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected GetOpRequestPayload.GetOpRequestPayloadBuilder createBuilder() {
-        return GetOpRequestPayload.builder();
-    }
-
-    @Override
-    protected void setValue(GetOpRequestPayload.GetOpRequestPayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER ->
-                    builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
-            case KmipTag.Standard.KEY_FORMAT_TYPE -> builder.keyFormatType(ctxt.readValue(p, KeyFormatType.class));
-            case KmipTag.Standard.KEY_WRAP_TYPE -> builder.keyWrapType(ctxt.readValue(p, org.purpleBean.kmip.model.core.enumeration.KeyWrapType.class));
-            case KmipTag.Standard.KEY_COMPRESSION_TYPE ->
-                    builder.keyCompressionType(ctxt.readValue(p, KeyCompressionType.class));
-            case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
-                    builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected GetOpRequestPayload build(GetOpRequestPayload.GetOpRequestPayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected GetOpRequestPayload build(GetOpRequestPayload.GetOpRequestPayloadBuilder builder) {
+    return builder.build();
+  }
 }

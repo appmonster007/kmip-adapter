@@ -6,20 +6,27 @@ import org.purpleBean.kmip.model.v2_1.structure.response.payload.AddAttributeOpR
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("AddAttributeOpResponsePayload Xml Serialization Tests")
-class AddAttributeOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<AddAttributeOpResponsePayload> {
+class AddAttributeOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<AddAttributeOpResponsePayload> {
 
-    @Override
-    public Class<AddAttributeOpResponsePayload> type() {
-        return AddAttributeOpResponsePayload.class;
-    }
+  @Override
+  public Class<AddAttributeOpResponsePayload> type() {
+    return AddAttributeOpResponsePayload.class;
+  }
 
-    @Override
-    public AddAttributeOpResponsePayload createDefault() {
-        return AddAttributeOpResponsePayload.builder().uniqueIdentifier(UniqueIdentifier.of("test-uid")).build();
-    }
+  @Override
+  public AddAttributeOpResponsePayload createDefault() {
+    return AddAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+        .build();
+  }
 
-    @Override
-    public AddAttributeOpResponsePayload createVariant() {
-        return AddAttributeOpResponsePayload.builder().uniqueIdentifier(UniqueIdentifier.of("other-uid")).build();
-    }
+  @Override
+  public AddAttributeOpResponsePayload createVariant() {
+    return AddAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("other-uid"))
+        .build();
+  }
 }

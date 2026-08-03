@@ -1,13 +1,16 @@
 package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
-import lombok.Builder;
-import lombok.Data;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-
 import java.util.List;
 import java.util.Set;
+import lombok.Builder;
+import lombok.Data;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
 
 /**
  * KMIP Ping Response Payload (V2_1).
@@ -18,44 +21,61 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class PingOpResponsePayload implements ResponsePayloadStructure {
 
-    private static final Operation.Value operation = Operation.Standard.PING;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+  private static final Operation.Value operation = Operation.Standard.PING;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, PingOpResponsePayload.class);
-            ResponsePayloadStructure.register(spec, operation, PingOpResponsePayload.class, PingOpResponsePayload::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, PingOpResponsePayload.class);
+      ResponsePayloadStructure.register(spec, operation, PingOpResponsePayload.class,
+          PingOpResponsePayload::of);
     }
+  }
 
-    @Builder
-    private PingOpResponsePayload() {
-        validate();
+  @Builder
+  private PingOpResponsePayload() {
+    validate();
+  }
+
+  public static PingOpResponsePayload of(List<KmipDataType> values) {
+    return PingOpResponsePayload
+        .builder()
+        .build();
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    public static PingOpResponsePayload of(List<KmipDataType> values) {
-        return PingOpResponsePayload.builder().build();
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipTag getKmipTag() { return kmipTag; }
+  @Override
+  public boolean isSupported() {
+    return supportedVersions.contains(KmipContext.getSpec());
+  }
 
-    @Override
-    public EncodingType getEncodingType() { return encodingType; }
+  @Override
+  public KmipDataType[] getValue() {
+    return new KmipDataType[0];
+  }
 
-    @Override
-    public boolean isSupported() { return supportedVersions.contains(KmipContext.getSpec()); }
-
-    @Override
-    public KmipDataType[] getValue() { return new KmipDataType[0]; }
-
-    @Override
-    public Operation getCorrespondingOperation() { return operation.inst(); }
+  @Override
+  public Operation getCorrespondingOperation() {
+    return operation.inst();
+  }
 }

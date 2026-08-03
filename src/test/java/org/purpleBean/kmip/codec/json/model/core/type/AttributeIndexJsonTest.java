@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("AttributeIndex JSON Serialization Tests")
 class AttributeIndexJsonTest extends AbstractJsonSerializationTestSuite<AttributeIndex> {
 
-    @Override
-    public Class<AttributeIndex> type() {
-        return AttributeIndex.class;
-    }
+  @Override
+  public Class<AttributeIndex> type() {
+    return AttributeIndex.class;
+  }
 
-    @Override
-    public AttributeIndex createDefault() {
-        return AttributeIndex.builder().value(10).build();
-    }
+  @Override
+  public AttributeIndex createDefault() {
+    return AttributeIndex
+        .builder()
+        .value(10)
+        .build();
+  }
 
-    @Override
-    public AttributeIndex createVariant() {
-        return AttributeIndex.builder().value(50).build();
-    }
+  @Override
+  public AttributeIndex createVariant() {
+    return AttributeIndex
+        .builder()
+        .value(50)
+        .build();
+  }
 }

@@ -10,29 +10,31 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("Certificate Json Serialization Tests")
 class CertificateJsonTest extends AbstractJsonSerializationTestSuite<Certificate> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<Certificate> type() {
-        return Certificate.class;
-    }
+  @Override
+  public Class<Certificate> type() {
+    return Certificate.class;
+  }
 
-    @Override
-    public Certificate createDefault() {
-        return Certificate.builder()
-                .certificateType(CertificateType.Standard.X_509.inst())
-                .certificateValue(CertificateValue.of(new byte[0]))
-                .build();
-    }
+  @Override
+  public Certificate createDefault() {
+    return Certificate
+        .builder()
+        .certificateType(CertificateType.Standard.X_509.inst())
+        .certificateValue(CertificateValue.of(new byte[0]))
+        .build();
+  }
 
-    @Override
-    public Certificate createVariant() {
-        return Certificate.builder()
-                .certificateType(CertificateType.Standard.PGP.inst())
-                .certificateValue(CertificateValue.of(new byte[1]))
-                .build();
-    }
+  @Override
+  public Certificate createVariant() {
+    return Certificate
+        .builder()
+        .certificateType(CertificateType.Standard.PGP.inst())
+        .certificateValue(CertificateValue.of(new byte[1]))
+        .build();
+  }
 }

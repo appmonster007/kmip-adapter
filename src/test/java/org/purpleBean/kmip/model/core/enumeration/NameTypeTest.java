@@ -1,91 +1,93 @@
 package org.purpleBean.kmip.model.core.enumeration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 @DisplayName("NameType Domain Tests")
 class NameTypeTest extends AbstractKmipEnumerationTestSuite<NameType> {
 
-    @Override
-    protected Class<NameType> type() {
-        return NameType.class;
-    }
+  @Override
+  protected Class<NameType> type() {
+    return NameType.class;
+  }
 
-    @Override
-    protected NameType createDefault() {
-        return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
-    }
+  @Override
+  protected NameType createDefault() {
+    return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
+  }
 
-    @Override
-    protected NameType createEqualToDefault() {
-        return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
-    }
+  @Override
+  protected NameType createEqualToDefault() {
+    return NameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
+  }
 
-    @Override
-    protected NameType createDifferentFromDefault() {
-        return NameType.Standard.URI.inst();
-    }
+  @Override
+  protected NameType createDifferentFromDefault() {
+    return NameType.Standard.URI.inst();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.ENUMERATION;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.ENUMERATION;
+  }
 
-    @Override
-    protected boolean supportsRegistryBehavior() {
-        return true;
-    }
+  @Override
+  protected boolean supportsRegistryBehavior() {
+    return true;
+  }
 
-    @Override
-    protected void assertLookupBehaviour() {
-        // Lookup by name/value
-        withKmipSpec(
-                KmipSpec.UnknownVersion,
-                () -> {
-                    NameType.Value byName = NameType.fromName("X-Enum-Custom");
-                    NameType.Value byVal = NameType.fromValue(0x80000010);
-                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
-                }
-        );
+  @Override
+  protected void assertLookupBehaviour() {
+    // Lookup by name/value
+    withKmipSpec(
+        KmipSpec.UnknownVersion,
+        () -> {
+          NameType.Value byName = NameType.fromName("X-Enum-Custom");
+          NameType.Value byVal = NameType.fromValue(0x80000010);
+          assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+          assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        }
+    );
 
-        // Lookup by name/value with unsupported version
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> NameType.fromName("X-Enum-Custom"))
-        );
-    }
+    // Lookup by name/value with unsupported version
+    withKmipSpec(
+        KmipSpec.UnsupportedVersion,
+        () -> assertThatThrownBy(() -> NameType.fromName("X-Enum-Custom"))
+    );
+  }
 
-    @Override
-    protected void assertEnumerationRegistryBehavior() {
-        // Valid registration in NameType requires 8XXXXXXX (hex) range per implementation
-        NameType.Value custom = NameType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
-        assertThat(custom.isCustom()).isTrue();
-        assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
+  @Override
+  protected void assertEnumerationRegistryBehavior() {
+    // Valid registration in NameType requires 8XXXXXXX (hex) range per implementation
+    NameType.Value custom =
+        NameType.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion));
+    assertThat(custom.isCustom()).isTrue();
+    assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
 
-        withKmipSpec(KmipSpec.UnknownVersion, () -> {
-            assertThat(custom.isSupported()).isTrue();
-        });
-        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
-            assertThat(custom.isSupported()).isFalse();
-        });
+    withKmipSpec(KmipSpec.UnknownVersion, () -> {
+      assertThat(custom.isSupported()).isTrue();
+    });
+    withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+      assertThat(custom.isSupported()).isFalse();
+    });
 
-        // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> NameType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> NameType.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> NameType.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> NameType.register(0x80000012, "X-Empty-Versions", Set.of()))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+    // Negative cases: invalid range, empty description, empty versions
+    assertThatThrownBy(
+        () -> NameType.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(
+        () -> NameType.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion)))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> NameType.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion)))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> NameType.register(0x80000012, "X-Empty-Versions", Set.of()))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }
 

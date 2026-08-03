@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RngRetrieveOpReq
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("RngRetrieveOpRequestPayload Ttlv Serialization Tests")
-class RngRetrieveOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<RngRetrieveOpRequestPayload> {
+class RngRetrieveOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<RngRetrieveOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RngRetrieveOpRequestPayload> type() {
-        return RngRetrieveOpRequestPayload.class;
-    }
+  @Override
+  public Class<RngRetrieveOpRequestPayload> type() {
+    return RngRetrieveOpRequestPayload.class;
+  }
 
-    @Override
-    public RngRetrieveOpRequestPayload createDefault() {
-        return RngRetrieveOpRequestPayload.builder()
-                .dataLength(DataLength.of(16))
-                .build();
-    }
+  @Override
+  public RngRetrieveOpRequestPayload createDefault() {
+    return RngRetrieveOpRequestPayload
+        .builder()
+        .dataLength(DataLength.of(16))
+        .build();
+  }
 
-    @Override
-    public RngRetrieveOpRequestPayload createVariant() {
-        return RngRetrieveOpRequestPayload.builder()
-                .dataLength(DataLength.of(32))
-                .build();
-    }
+  @Override
+  public RngRetrieveOpRequestPayload createVariant() {
+    return RngRetrieveOpRequestPayload
+        .builder()
+        .dataLength(DataLength.of(32))
+        .build();
+  }
 }

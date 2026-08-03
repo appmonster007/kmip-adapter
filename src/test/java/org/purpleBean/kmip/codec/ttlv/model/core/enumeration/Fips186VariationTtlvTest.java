@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("Fips186Variation TTLV Serialization")
 class Fips186VariationTtlvTest extends AbstractTtlvSerializationTestSuite<Fips186Variation> {
-    @Override
-    public Class<Fips186Variation> type() {
-        return Fips186Variation.class;
-    }
+  @Override
+  public Class<Fips186Variation> type() {
+    return Fips186Variation.class;
+  }
 
-    @Override
-    public Fips186Variation createDefault() {
-        return Fips186Variation.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public Fips186Variation createDefault() {
+    return Fips186Variation.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public Fips186Variation createVariant() {
-        return Fips186Variation.Standard.GP_X_ORIGINAL.inst();
-    }
+  @Override
+  public Fips186Variation createVariant() {
+    return Fips186Variation.Standard.GP_X_ORIGINAL.inst();
+  }
 }

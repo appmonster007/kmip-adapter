@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.xml.serializer.model.core.structure;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.model.core.structure.AlternativeName;
 
-public class AlternativeNameXmlSerializer extends AbstractKmipDataTypeXmlSerializer<AlternativeName> {
+public class AlternativeNameXmlSerializer
+    extends AbstractKmipDataTypeXmlSerializer<AlternativeName> {
 }

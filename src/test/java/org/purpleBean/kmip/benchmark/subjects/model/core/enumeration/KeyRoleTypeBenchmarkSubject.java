@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.KeyRoleType;
 
 public class KeyRoleTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyRoleType> {
 
-    public KeyRoleTypeBenchmarkSubject() throws Exception {
-        KeyRoleType keyRoleType = KeyRoleType.Standard.BDK.inst();
-        initialize(keyRoleType, KeyRoleType.class);
-    }
+  public KeyRoleTypeBenchmarkSubject() throws Exception {
+    KeyRoleType keyRoleType = KeyRoleType.Standard.BDK.inst();
+    initialize(keyRoleType, KeyRoleType.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyRoleType";
-    }
+  @Override
+  public String name() {
+    return "KeyRoleType";
+  }
 
 }

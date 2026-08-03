@@ -9,25 +9,27 @@ import org.purpleBean.kmip.model.core.structure.Nonce;
 import org.purpleBean.kmip.model.core.type.NonceId;
 import org.purpleBean.kmip.model.core.type.NonceValue;
 
-public class AttestationCredentialBenchmarkSubject extends KmipBenchmarkSubject<AttestationCredential> {
+public class AttestationCredentialBenchmarkSubject
+    extends KmipBenchmarkSubject<AttestationCredential> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public AttestationCredentialBenchmarkSubject() throws Exception {
-        AttestationCredential subject = AttestationCredential.builder()
-                .nonce(Nonce.of(
-                        NonceId.of(new byte[8]),
-                        NonceValue.of(new byte[16])
-                ))
-                .attestationType(AttestationType.Standard.TPM_QUOTE.inst())
-                .build();
-        initialize(subject, AttestationCredential.class);
-    }
+  public AttestationCredentialBenchmarkSubject() throws Exception {
+    AttestationCredential subject = AttestationCredential
+        .builder()
+        .nonce(Nonce.of(
+            NonceId.of(new byte[8]),
+            NonceValue.of(new byte[16])
+        ))
+        .attestationType(AttestationType.Standard.TPM_QUOTE.inst())
+        .build();
+    initialize(subject, AttestationCredential.class);
+  }
 
-    @Override
-    public String name() {
-        return "AttestationCredential";
-    }
+  @Override
+  public String name() {
+    return "AttestationCredential";
+  }
 
 }

@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("OperationPolicyName XML Serialization Tests")
 class OperationPolicyNameXmlTest extends AbstractXmlSerializationTestSuite<OperationPolicyName> {
 
-    @Override
-    public Class<OperationPolicyName> type() {
-        return OperationPolicyName.class;
-    }
+  @Override
+  public Class<OperationPolicyName> type() {
+    return OperationPolicyName.class;
+  }
 
-    @Override
-    public OperationPolicyName createDefault() {
-        return OperationPolicyName.builder().value("test").build();
-    }
+  @Override
+  public OperationPolicyName createDefault() {
+    return OperationPolicyName
+        .builder()
+        .value("test")
+        .build();
+  }
 
-    @Override
-    public OperationPolicyName createVariant() {
-        return OperationPolicyName.builder().value("test2").build();
-    }
+  @Override
+  public OperationPolicyName createVariant() {
+    return OperationPolicyName
+        .builder()
+        .value("test2")
+        .build();
+  }
 }

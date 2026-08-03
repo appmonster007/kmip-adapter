@@ -2,43 +2,40 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v3_0.structure.response
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.io.IOException;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v3_0.structure.response.payload.DeactivateOpResponsePayload;
 
-import java.io.IOException;
+public class DeactivateOpResponsePayloadXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<DeactivateOpResponsePayload,
+        DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder> {
 
-public class DeactivateOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DeactivateOpResponsePayload, DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder> {
+  public DeactivateOpResponsePayloadXmlDeserializer() {
+    super(DeactivateOpResponsePayload.kmipTag, DeactivateOpResponsePayload.encodingType);
+  }
 
-    public DeactivateOpResponsePayloadXmlDeserializer() {
-        super(DeactivateOpResponsePayload.kmipTag, DeactivateOpResponsePayload.encodingType);
+  @Override
+  protected DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder createBuilder() {
+    return DeactivateOpResponsePayload.builder();
+  }
+
+  @Override
+  protected void setValue(DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder builder,
+                          String tag, String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
+          builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder createBuilder() {
-        return DeactivateOpResponsePayload.builder();
-    }
-
-    @Override
-    protected void setValue(DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.UNIQUE_IDENTIFIER -> builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected DeactivateOpResponsePayload build(DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected DeactivateOpResponsePayload build(
+      DeactivateOpResponsePayload.DeactivateOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
 }

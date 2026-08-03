@@ -5,20 +5,21 @@ import org.purpleBean.kmip.model.core.type.CertificateSerialNumber;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateSerialNumber JSON Serialization Tests")
-class CertificateSerialNumberJsonTest extends AbstractJsonSerializationTestSuite<CertificateSerialNumber> {
+class CertificateSerialNumberJsonTest
+    extends AbstractJsonSerializationTestSuite<CertificateSerialNumber> {
 
-    @Override
-    public Class<CertificateSerialNumber> type() {
-        return CertificateSerialNumber.class;
-    }
+  @Override
+  public Class<CertificateSerialNumber> type() {
+    return CertificateSerialNumber.class;
+  }
 
-    @Override
-    public CertificateSerialNumber createDefault() {
-        return CertificateSerialNumber.of("12345".getBytes());
-    }
+  @Override
+  public CertificateSerialNumber createDefault() {
+    return CertificateSerialNumber.of("12345".getBytes());
+  }
 
-    @Override
-    public CertificateSerialNumber createVariant() {
-        return CertificateSerialNumber.of("67890".getBytes());
-    }
+  @Override
+  public CertificateSerialNumber createVariant() {
+    return CertificateSerialNumber.of("67890".getBytes());
+  }
 }

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class BooleanXmlDeserializer extends JsonDeserializer<Boolean> {
 
-    @Override
-    public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return Boolean.parseBoolean(p.getText());
-    }
+  @Override
+  public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return Boolean.parseBoolean(p.getText());
+  }
 }

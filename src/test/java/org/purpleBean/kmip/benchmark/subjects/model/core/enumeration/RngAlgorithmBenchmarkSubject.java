@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.RngAlgorithm;
 
 public class RngAlgorithmBenchmarkSubject extends KmipBenchmarkSubject<RngAlgorithm> {
 
-    public RngAlgorithmBenchmarkSubject() throws Exception {
-        RngAlgorithm rngAlgorithm = RngAlgorithm.Standard.UNSPECIFIED.inst();
-        initialize(rngAlgorithm, RngAlgorithm.class);
-    }
+  public RngAlgorithmBenchmarkSubject() throws Exception {
+    RngAlgorithm rngAlgorithm = RngAlgorithm.Standard.UNSPECIFIED.inst();
+    initialize(rngAlgorithm, RngAlgorithm.class);
+  }
 
-    @Override
-    public String name() {
-        return "RngAlgorithm";
-    }
+  @Override
+  public String name() {
+    return "RngAlgorithm";
+  }
 
 }

@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.structure;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -7,33 +9,35 @@ import org.purpleBean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purpleBean.kmip.model.core.structure.TransparentEcdhPrivateKey;
 import org.purpleBean.kmip.model.core.type.D;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class TransparentEcdhPrivateKeyTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<TransparentEcdhPrivateKey,
+        TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder> {
 
-public class TransparentEcdhPrivateKeyTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<TransparentEcdhPrivateKey, TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder> {
+  public TransparentEcdhPrivateKeyTtlvDeserializer() {
+    super(TransparentEcdhPrivateKey.kmipTag, TransparentEcdhPrivateKey.encodingType);
+  }
 
-    public TransparentEcdhPrivateKeyTtlvDeserializer() {
-        super(TransparentEcdhPrivateKey.kmipTag, TransparentEcdhPrivateKey.encodingType);
+  @Override
+  protected TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder createBuilder() {
+    return TransparentEcdhPrivateKey.builder();
+  }
+
+  @Override
+  protected void setValue(TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder builder,
+                          byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.RECOMMENDED_CURVE ->
+          builder.recommendedCurve(mapper.readValue(p, RecommendedCurve.class));
+      case KmipTag.Standard.D -> builder.d(mapper.readValue(p, D.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder createBuilder() {
-        return TransparentEcdhPrivateKey.builder();
-    }
-
-    @Override
-    protected void setValue(TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.RECOMMENDED_CURVE ->
-                    builder.recommendedCurve(mapper.readValue(p, RecommendedCurve.class));
-            case KmipTag.Standard.D -> builder.d(mapper.readValue(p, D.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected TransparentEcdhPrivateKey build(TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected TransparentEcdhPrivateKey build(
+      TransparentEcdhPrivateKey.TransparentEcdhPrivateKeyBuilder builder) {
+    return builder.build();
+  }
 }

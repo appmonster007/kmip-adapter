@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.IVCounterNonce;
 
 public class IVCounterNonceBenchmarkSubject extends KmipBenchmarkSubject<IVCounterNonce> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public IVCounterNonceBenchmarkSubject() throws Exception {
-        IVCounterNonce iVCounterNonce = IVCounterNonce.of(new byte[]{0x01, 0x02, 0x03});
-        initialize(iVCounterNonce, IVCounterNonce.class);
-    }
+  public IVCounterNonceBenchmarkSubject() throws Exception {
+    IVCounterNonce iVCounterNonce = IVCounterNonce.of(new byte[] {0x01, 0x02, 0x03});
+    initialize(iVCounterNonce, IVCounterNonce.class);
+  }
 
-    @Override
-    public String name() {
-        return "IVCounterNonce";
-    }
+  @Override
+  public String name() {
+    return "IVCounterNonce";
+  }
 
 }

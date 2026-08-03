@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.ApplicationData;
 
 public class ApplicationDataBenchmarkSubject extends KmipBenchmarkSubject<ApplicationData> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ApplicationDataBenchmarkSubject() throws Exception {
-        ApplicationData applicationData = ApplicationData.builder().value("test-data").build();
-        initialize(applicationData, ApplicationData.class);
-    }
+  public ApplicationDataBenchmarkSubject() throws Exception {
+    ApplicationData applicationData = ApplicationData
+        .builder()
+        .value("test-data")
+        .build();
+    initialize(applicationData, ApplicationData.class);
+  }
 
-    @Override
-    public String name() {
-        return "ApplicationData";
-    }
+  @Override
+  public String name() {
+    return "ApplicationData";
+  }
 
 }

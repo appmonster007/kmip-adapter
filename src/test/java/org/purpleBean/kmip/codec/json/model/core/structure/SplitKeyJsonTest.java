@@ -1,5 +1,6 @@
 package org.purpleBean.kmip.codec.json.model.core.structure;
 
+import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
@@ -12,45 +13,47 @@ import org.purpleBean.kmip.model.core.type.SplitKeyParts;
 import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
-import java.math.BigInteger;
-
 @DisplayName("SplitKey Json Serialization Tests")
 class SplitKeyJsonTest extends AbstractJsonSerializationTestSuite<SplitKey> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<SplitKey> type() {
-        return SplitKey.class;
-    }
+  @Override
+  public Class<SplitKey> type() {
+    return SplitKey.class;
+  }
 
-    @Override
-    public SplitKey createDefault() {
-        return SplitKey.builder()
-                .splitKeyParts(SplitKeyParts.of(1))
-                .keyPartIdentifier(KeyPartIdentifier.of(1))
-                .splitKeyThreshold(SplitKeyThreshold.of(1))
-                .splitKeyMethod(SplitKeyMethod.Standard.XOR.inst())
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-    }
+  @Override
+  public SplitKey createDefault() {
+    return SplitKey
+        .builder()
+        .splitKeyParts(SplitKeyParts.of(1))
+        .keyPartIdentifier(KeyPartIdentifier.of(1))
+        .splitKeyThreshold(SplitKeyThreshold.of(1))
+        .splitKeyMethod(SplitKeyMethod.Standard.XOR.inst())
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+  }
 
-    @Override
-    public SplitKey createVariant() {
-        return SplitKey.builder()
-                .splitKeyParts(SplitKeyParts.of(2))
-                .keyPartIdentifier(KeyPartIdentifier.of(2))
-                .splitKeyThreshold(SplitKeyThreshold.of(2))
-                .splitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_PRIME_FIELD.inst())
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
-                        .build())
-                .primeFieldSize(PrimeFieldSize.of(BigInteger.ONE))
-                .build();
-    }
+  @Override
+  public SplitKey createVariant() {
+    return SplitKey
+        .builder()
+        .splitKeyParts(SplitKeyParts.of(2))
+        .keyPartIdentifier(KeyPartIdentifier.of(2))
+        .splitKeyThreshold(SplitKeyThreshold.of(2))
+        .splitKeyMethod(SplitKeyMethod.Standard.POLYNOMIAL_SHARING_PRIME_FIELD.inst())
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+            .build())
+        .primeFieldSize(PrimeFieldSize.of(BigInteger.ONE))
+        .build();
+  }
 }

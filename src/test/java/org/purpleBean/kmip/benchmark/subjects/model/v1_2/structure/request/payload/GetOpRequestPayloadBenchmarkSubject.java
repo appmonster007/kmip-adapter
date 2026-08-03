@@ -9,28 +9,29 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.GetOpRequestPayl
 
 public class GetOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<GetOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public GetOpRequestPayloadBenchmarkSubject() throws Exception {
-        GetOpRequestPayload subject = GetOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
-                .build();
-        initialize(subject, GetOpRequestPayload.class);
-    }
+  public GetOpRequestPayloadBenchmarkSubject() throws Exception {
+    GetOpRequestPayload subject = GetOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("test-uid"))
+        .build();
+    initialize(subject, GetOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "GetOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "GetOpRequestPayload";
+  }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
+  @Override
+  public void setup() throws Exception {
+    KmipContext.setSpec(spec);
+  }
 
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
+  @Override
+  public void tearDown() {
+    KmipContext.clear();
+  }
 }

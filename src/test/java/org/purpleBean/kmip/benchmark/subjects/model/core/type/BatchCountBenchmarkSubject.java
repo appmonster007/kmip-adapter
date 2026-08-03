@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.BatchCount;
 
 public class BatchCountBenchmarkSubject extends KmipBenchmarkSubject<BatchCount> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public BatchCountBenchmarkSubject() throws Exception {
-        BatchCount batchCount = BatchCount.builder().value(5).build();
-        initialize(batchCount, BatchCount.class);
-    }
+  public BatchCountBenchmarkSubject() throws Exception {
+    BatchCount batchCount = BatchCount
+        .builder()
+        .value(5)
+        .build();
+    initialize(batchCount, BatchCount.class);
+  }
 
-    @Override
-    public String name() {
-        return "BatchCount";
-    }
+  @Override
+  public String name() {
+    return "BatchCount";
+  }
 
 }

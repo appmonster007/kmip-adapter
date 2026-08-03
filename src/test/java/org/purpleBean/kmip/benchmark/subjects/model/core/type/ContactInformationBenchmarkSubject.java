@@ -7,18 +7,21 @@ import org.purpleBean.kmip.model.core.type.ContactInformation;
 
 public class ContactInformationBenchmarkSubject extends KmipBenchmarkSubject<ContactInformation> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ContactInformationBenchmarkSubject() throws Exception {
-        var fixed = "test";
-        ContactInformation contactInformation = ContactInformation.builder().value(fixed).build();
-        initialize(contactInformation, ContactInformation.class);
-    }
+  public ContactInformationBenchmarkSubject() throws Exception {
+    var fixed = "test";
+    ContactInformation contactInformation = ContactInformation
+        .builder()
+        .value(fixed)
+        .build();
+    initialize(contactInformation, ContactInformation.class);
+  }
 
-    @Override
-    public String name() {
-        return "ContactInformation";
-    }
+  @Override
+  public String name() {
+    return "ContactInformation";
+  }
 
 }

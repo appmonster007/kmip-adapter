@@ -1,5 +1,10 @@
 package org.purpleBean.kmip.model.core.structure;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
@@ -11,54 +16,53 @@ import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 import org.purpleBean.kmip.util.StringUtils;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("Attribute Domain Tests")
 class AttributeTest extends AbstractKmipStructureTestSuite<Attribute> {
 
-    private static final OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+  private static final OffsetDateTime FIXED_TIME =
+      OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    protected Class<Attribute> type() {
-        return Attribute.class;
-    }
+  @Override
+  protected Class<Attribute> type() {
+    return Attribute.class;
+  }
 
-    @Override
-    protected Attribute createDefault() {
-        ActivationDate activationDate = ActivationDate.builder().value(FIXED_TIME).build();
-        return Attribute.of(activationDate);
-    }
+  @Override
+  protected Attribute createDefault() {
+    ActivationDate activationDate = ActivationDate
+        .builder()
+        .value(FIXED_TIME)
+        .build();
+    return Attribute.of(activationDate);
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.STRUCTURE;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.STRUCTURE;
+  }
 
-    @Override
-    protected int expectedMinComponentCount() {
-        return 2;
-    }
+  @Override
+  protected int expectedMinComponentCount() {
+    return 2;
+  }
 
-    @Override
-    protected void validateComponents(List<KmipDataType> values) {
-        // Add assertions for components if desired
-        assertThat(values.get(0)).isInstanceOf(AttributeName.class);
-        assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(StringUtils.convertPascalToTitleCase("Activation Date"));
-        if (values.size() == 2) {
-            assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
-        }
-        if (values.size() > 2) {
-            assertThat(values.get(1)).isInstanceOf(AttributeIndex.class);
-            assertThat(values.get(2)).isInstanceOf(AttributeValue.class);
-        }
+  @Override
+  protected void validateComponents(List<KmipDataType> values) {
+    // Add assertions for components if desired
+    assertThat(values.get(0)).isInstanceOf(AttributeName.class);
+    assertThat(((AttributeName) values.get(0)).getValue()).isEqualTo(
+        StringUtils.convertPascalToTitleCase("Activation Date"));
+    if (values.size() == 2) {
+      assertThat(values.get(1)).isInstanceOf(AttributeValue.class);
     }
+    if (values.size() > 2) {
+      assertThat(values.get(1)).isInstanceOf(AttributeIndex.class);
+      assertThat(values.get(2)).isInstanceOf(AttributeValue.class);
+    }
+  }
 }

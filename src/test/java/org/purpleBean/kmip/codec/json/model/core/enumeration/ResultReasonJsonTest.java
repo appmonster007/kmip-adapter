@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("ResultReason JSON Serialization")
 class ResultReasonJsonTest extends AbstractJsonSerializationTestSuite<ResultReason> {
-    @Override
-    public Class<ResultReason> type() {
-        return ResultReason.class;
-    }
+  @Override
+  public Class<ResultReason> type() {
+    return ResultReason.class;
+  }
 
-    @Override
-    public ResultReason createDefault() {
-        return ResultReason.Standard.ITEM_NOT_FOUND.inst();
-    }
+  @Override
+  public ResultReason createDefault() {
+    return ResultReason.Standard.ITEM_NOT_FOUND.inst();
+  }
 
-    @Override
-    public ResultReason createVariant() {
-        return ResultReason.Standard.RESPONSE_TOO_LARGE.inst();
-    }
+  @Override
+  public ResultReason createVariant() {
+    return ResultReason.Standard.RESPONSE_TOO_LARGE.inst();
+  }
 }

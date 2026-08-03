@@ -9,8 +9,8 @@ import java.time.OffsetDateTime;
 
 public class OffsetDateTimeXmlDeserializer extends JsonDeserializer<OffsetDateTime> {
 
-    @Override
-    public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return OffsetDateTime.parse(p.getText());
-    }
+  @Override
+  public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return OffsetDateTime.parse(p.getText());
+  }
 }

@@ -3,11 +3,16 @@ package org.purpleBean.kmip.codec.xml.serializer.api;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import org.purpleBean.kmip.api.*;
-
-import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import javax.xml.namespace.QName;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipEnumeration;
+import org.purpleBean.kmip.api.KmipMaskType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipStructure;
 
 /**
  * Abstract base class for XML serialization of {@link KmipDataType} objects.
@@ -32,64 +37,79 @@ import java.io.UnsupportedEncodingException;
  *
  * @param <T> The type of {@link KmipDataType} to serialize.
  */
-public abstract class AbstractKmipDataTypeXmlSerializer<T extends KmipDataType> extends KmipDataTypeXmlSerializer<T> {
+public abstract class AbstractKmipDataTypeXmlSerializer<T extends KmipDataType>
+    extends KmipDataTypeXmlSerializer<T> {
 
-    @Override
-    public void serialize(T obj, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        // Validation: KMIP spec compatibility
-        KmipSpec spec = KmipContext.getSpec();
-        if (!obj.isSupported()) {
-            throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", obj.getClass().getSimpleName(), spec));
-        }
-
-        if (!(gen instanceof ToXmlGenerator xmlGen)) {
-            throw new IllegalStateException("Expected ToXmlGenerator");
-        }
-
-        if (!obj.getKmipTag().getDescription().matches("^[0-9][xX].*")) {
-            xmlGen.setNextName(new QName(obj.getKmipTag().getDescription()));
-            xmlGen.writeStartObject();
-        } else {
-            xmlGen.setNextName(new QName("TTLV"));
-            xmlGen.writeStartObject();
-            xmlGen.setNextIsAttribute(true);
-            xmlGen.writeStringField("tag", obj.getKmipTag().getDescription());
-        }
-
-        if (obj.getEncodingType() == EncodingType.STRUCTURE) {
-            KmipDataType[] values = (KmipDataType[]) obj.getValue();
-            if (values != null) {
-                for (KmipDataType kmipDataType : values) {
-                    if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
-                        serializers.defaultSerializeField(kmipDataType.getKmipTag().getDescription(), kmipDataType, gen);
-                    }
-                }
-            }
-        } else {
-            Object value;
-            if (obj.getEncodingType() == EncodingType.ENUMERATION) {
-                Object rawValue = obj.getValue();
-                if (rawValue instanceof KmipEnumeration.Value<?> enumValue) {
-                    value = enumValue.getDescription();
-                } else {
-                    // KMIP polymorphic types (e.g. UniqueIdentifier) may report ENUMERATION encoding
-                    // while storing the value as a plain String (enum name). Serialize as-is.
-                    value = rawValue;
-                }
-            } else {
-                if (obj instanceof KmipMaskType mask) {
-                    value = mask.getMaskString() != null ? mask.getMaskString() : obj.getValue();
-                } else {
-                    value = obj.getValue();
-                }
-            }
-            xmlGen.setNextIsAttribute(true);
-            xmlGen.writeStringField("type", obj.getEncodingType().getDescription());
-
-            xmlGen.setNextIsAttribute(true);
-            xmlGen.writeFieldName("value");
-            serializers.defaultSerializeValue(value, gen);
-        }
-        xmlGen.writeEndObject();
+  @Override
+  public void serialize(T obj, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    // Validation: KMIP spec compatibility
+    KmipSpec spec = KmipContext.getSpec();
+    if (!obj.isSupported()) {
+      throw new UnsupportedEncodingException(String.format("%s not supported for KMIP spec %s", obj
+          .getClass()
+          .getSimpleName(), spec));
     }
+
+    if (!(gen instanceof ToXmlGenerator xmlGen)) {
+      throw new IllegalStateException("Expected ToXmlGenerator");
+    }
+
+    if (!obj
+        .getKmipTag()
+        .getDescription()
+        .matches("^[0-9][xX].*")) {
+      xmlGen.setNextName(new QName(obj
+          .getKmipTag()
+          .getDescription()));
+      xmlGen.writeStartObject();
+    } else {
+      xmlGen.setNextName(new QName("TTLV"));
+      xmlGen.writeStartObject();
+      xmlGen.setNextIsAttribute(true);
+      xmlGen.writeStringField("tag", obj
+          .getKmipTag()
+          .getDescription());
+    }
+
+    if (obj.getEncodingType() == EncodingType.STRUCTURE) {
+      KmipDataType[] values = (KmipDataType[]) obj.getValue();
+      if (values != null) {
+        for (KmipDataType kmipDataType : values) {
+          if (kmipDataType != null && kmipDataType.getKmipTag() != null) {
+            serializers.defaultSerializeField(kmipDataType
+                .getKmipTag()
+                .getDescription(), kmipDataType, gen);
+          }
+        }
+      }
+    } else {
+      Object value;
+      if (obj.getEncodingType() == EncodingType.ENUMERATION) {
+        Object rawValue = obj.getValue();
+        if (rawValue instanceof KmipEnumeration.Value<?> enumValue) {
+          value = enumValue.getDescription();
+        } else {
+          // KMIP polymorphic types (e.g. UniqueIdentifier) may report ENUMERATION encoding
+          // while storing the value as a plain String (enum name). Serialize as-is.
+          value = rawValue;
+        }
+      } else {
+        if (obj instanceof KmipMaskType mask) {
+          value = mask.getMaskString() != null ? mask.getMaskString() : obj.getValue();
+        } else {
+          value = obj.getValue();
+        }
+      }
+      xmlGen.setNextIsAttribute(true);
+      xmlGen.writeStringField("type", obj
+          .getEncodingType()
+          .getDescription());
+
+      xmlGen.setNextIsAttribute(true);
+      xmlGen.writeFieldName("value");
+      serializers.defaultSerializeValue(value, gen);
+    }
+    xmlGen.writeEndObject();
+  }
 }

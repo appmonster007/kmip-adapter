@@ -7,17 +7,17 @@ import org.purpleBean.kmip.model.core.type.QString;
 
 public class QStringBenchmarkSubject extends KmipBenchmarkSubject<QString> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public QStringBenchmarkSubject() throws Exception {
-        QString qString = QString.of("test-qstring".getBytes());
-        initialize(qString, QString.class);
-    }
+  public QStringBenchmarkSubject() throws Exception {
+    QString qString = QString.of("test-qstring".getBytes());
+    initialize(qString, QString.class);
+  }
 
-    @Override
-    public String name() {
-        return "QString";
-    }
+  @Override
+  public String name() {
+    return "QString";
+  }
 
 }

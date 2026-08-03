@@ -9,20 +9,21 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("CertificateIssuer Xml Serialization Tests")
 class CertificateIssuerXmlTest extends AbstractXmlSerializationTestSuite<CertificateIssuer> {
 
-    @Override
-    public Class<CertificateIssuer> type() {
-        return CertificateIssuer.class;
-    }
+  @Override
+  public Class<CertificateIssuer> type() {
+    return CertificateIssuer.class;
+  }
 
-    @Override
-    public CertificateIssuer createDefault() {
-        return CertificateIssuer.builder()
-                .certificateIssuerDistinguishedName(
-                        CertificateIssuerDistinguishedName.of("CN=Test Issuer")
-                )
-                .certificateIssuerAlternativeName(
-                        CertificateIssuerAlternativeName.of("alt.issuer.com")
-                )
-                .build();
-    }
+  @Override
+  public CertificateIssuer createDefault() {
+    return CertificateIssuer
+        .builder()
+        .certificateIssuerDistinguishedName(
+            CertificateIssuerDistinguishedName.of("CN=Test Issuer")
+        )
+        .certificateIssuerAlternativeName(
+            CertificateIssuerAlternativeName.of("alt.issuer.com")
+        )
+        .build();
+  }
 }

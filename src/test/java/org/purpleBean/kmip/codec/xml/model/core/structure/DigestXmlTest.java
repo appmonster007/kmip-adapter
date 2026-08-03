@@ -10,17 +10,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("Digest Xml Serialization Tests")
 class DigestXmlTest extends AbstractXmlSerializationTestSuite<Digest> {
 
-    @Override
-    public Class<Digest> type() {
-        return Digest.class;
-    }
+  @Override
+  public Class<Digest> type() {
+    return Digest.class;
+  }
 
-    @Override
-    public Digest createDefault() {
-        return Digest.builder()
-                .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
-                .digestValue(DigestValue.of(new byte[0]))
-                .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
-                .build();
-    }
+  @Override
+  public Digest createDefault() {
+    return Digest
+        .builder()
+        .hashingAlgorithm(HashingAlgorithm.Standard.SHA_256.inst())
+        .digestValue(DigestValue.of(new byte[0]))
+        .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+        .build();
+  }
 }

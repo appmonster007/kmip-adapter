@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.Fresh;
 
-import java.io.IOException;
+public class FreshXmlDeserializer
+    extends AbstractKmipDataTypeXmlDeserializer<Fresh, Fresh.FreshBuilder> {
 
-public class FreshXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<Fresh, Fresh.FreshBuilder> {
+  public FreshXmlDeserializer() {
+    super(Fresh.kmipTag, Fresh.encodingType);
+  }
 
-    public FreshXmlDeserializer() {
-        super(Fresh.kmipTag, Fresh.encodingType);
-    }
+  @Override
+  protected Fresh.FreshBuilder createBuilder() {
+    return Fresh.builder();
+  }
 
-    @Override
-    protected Fresh.FreshBuilder createBuilder() {
-        return Fresh.builder();
-    }
+  @Override
+  protected void setValue(Fresh.FreshBuilder builder, String tag, String type, JsonParser p,
+                          DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, Boolean.class));
+  }
 
-    @Override
-    protected void setValue(Fresh.FreshBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, Boolean.class));
-    }
-
-    @Override
-    protected Fresh build(Fresh.FreshBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected Fresh build(Fresh.FreshBuilder builder) {
+    return builder.build();
+  }
 }

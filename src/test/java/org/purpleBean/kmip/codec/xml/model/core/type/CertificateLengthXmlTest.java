@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("CertificateLength XML Serialization Tests")
 class CertificateLengthXmlTest extends AbstractXmlSerializationTestSuite<CertificateLength> {
 
-    @Override
-    public Class<CertificateLength> type() {
-        return CertificateLength.class;
-    }
+  @Override
+  public Class<CertificateLength> type() {
+    return CertificateLength.class;
+  }
 
-    @Override
-    public CertificateLength createDefault() {
-        return CertificateLength.builder().value(10).build();
-    }
+  @Override
+  public CertificateLength createDefault() {
+    return CertificateLength
+        .builder()
+        .value(10)
+        .build();
+  }
 
-    @Override
-    public CertificateLength createVariant() {
-        return CertificateLength.builder().value(15).build();
-    }
+  @Override
+  public CertificateLength createVariant() {
+    return CertificateLength
+        .builder()
+        .value(15)
+        .build();
+  }
 }

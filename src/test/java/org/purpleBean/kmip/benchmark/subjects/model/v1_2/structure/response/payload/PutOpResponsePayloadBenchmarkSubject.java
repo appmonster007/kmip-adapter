@@ -5,19 +5,21 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.PutOpResponsePayload;
 
-public class PutOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<PutOpResponsePayload> {
+public class PutOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<PutOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public PutOpResponsePayloadBenchmarkSubject() throws Exception {
-        PutOpResponsePayload subject = PutOpResponsePayload.builder()
-                .build();
-        initialize(subject, PutOpResponsePayload.class);
-    }
+  public PutOpResponsePayloadBenchmarkSubject() throws Exception {
+    PutOpResponsePayload subject = PutOpResponsePayload
+        .builder()
+        .build();
+    initialize(subject, PutOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "PutOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "PutOpResponsePayload";
+  }
 }

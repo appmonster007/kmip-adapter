@@ -13,43 +13,49 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("Authentication Ttlv Serialization Tests")
 class AuthenticationTtlvTest extends AbstractTtlvSerializationTestSuite<Authentication> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<Authentication> type() {
-        return Authentication.class;
-    }
+  @Override
+  public Class<Authentication> type() {
+    return Authentication.class;
+  }
 
-    @Override
-    public Authentication createDefault() {
-        Credential credential = Credential.builder()
-                .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
-                .credentialValue(UsernameAndPassword.builder()
-                        .username(Username.of("test-user"))
-                        .password(Password.of("test-password"))
-                        .build())
-                .build();
-        return Authentication.builder()
-                .credential(credential)
-                .credential(credential)
-                .build();
-    }
+  @Override
+  public Authentication createDefault() {
+    Credential credential = Credential
+        .builder()
+        .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .credentialValue(UsernameAndPassword
+            .builder()
+            .username(Username.of("test-user"))
+            .password(Password.of("test-password"))
+            .build())
+        .build();
+    return Authentication
+        .builder()
+        .credential(credential)
+        .credential(credential)
+        .build();
+  }
 
-    @Override
-    public Authentication createVariant() {
-        Credential credential = Credential.builder()
-                .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
-                .credentialValue(UsernameAndPassword.builder()
-                        .username(Username.of("test-user-variant"))
-                        .password(Password.of("test-password-variant"))
-                        .build())
-                .build();
-        return Authentication.builder()
-                .credential(credential)
-                .credential(credential)
-                .build();
-    }
+  @Override
+  public Authentication createVariant() {
+    Credential credential = Credential
+        .builder()
+        .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .credentialValue(UsernameAndPassword
+            .builder()
+            .username(Username.of("test-user-variant"))
+            .password(Password.of("test-password-variant"))
+            .build())
+        .build();
+    return Authentication
+        .builder()
+        .credential(credential)
+        .credential(credential)
+        .build();
+  }
 }

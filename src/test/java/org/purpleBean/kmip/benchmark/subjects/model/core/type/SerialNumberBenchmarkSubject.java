@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.SerialNumber;
 
 public class SerialNumberBenchmarkSubject extends KmipBenchmarkSubject<SerialNumber> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public SerialNumberBenchmarkSubject() throws Exception {
-        SerialNumber serialNumber = SerialNumber.builder().value("12345").build();
-        initialize(serialNumber, SerialNumber.class);
-    }
+  public SerialNumberBenchmarkSubject() throws Exception {
+    SerialNumber serialNumber = SerialNumber
+        .builder()
+        .value("12345")
+        .build();
+    initialize(serialNumber, SerialNumber.class);
+  }
 
-    @Override
-    public String name() {
-        return "SerialNumber";
-    }
+  @Override
+  public String name() {
+    return "SerialNumber";
+  }
 
 }

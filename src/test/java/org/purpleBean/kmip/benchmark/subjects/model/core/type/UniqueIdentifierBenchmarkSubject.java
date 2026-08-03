@@ -5,14 +5,17 @@ import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 
 public class UniqueIdentifierBenchmarkSubject extends KmipBenchmarkSubject<UniqueIdentifier> {
 
-    public UniqueIdentifierBenchmarkSubject() throws Exception {
-        UniqueIdentifier uniqueIdentifier = UniqueIdentifier.builder().value("FIXED_STRING").build();
-        initialize(uniqueIdentifier, UniqueIdentifier.class);
-    }
+  public UniqueIdentifierBenchmarkSubject() throws Exception {
+    UniqueIdentifier uniqueIdentifier = UniqueIdentifier
+        .builder()
+        .value("FIXED_STRING")
+        .build();
+    initialize(uniqueIdentifier, UniqueIdentifier.class);
+  }
 
-    @Override
-    public String name() {
-        return "UniqueIdentifier";
-    }
+  @Override
+  public String name() {
+    return "UniqueIdentifier";
+  }
 
 }

@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.core.type;
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.core.type.UniqueBatchItemID;
 
-public class UniqueBatchItemIDJsonSerializer extends AbstractKmipDataTypeJsonSerializer<UniqueBatchItemID> {
+public class UniqueBatchItemIDJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<UniqueBatchItemID> {
 }

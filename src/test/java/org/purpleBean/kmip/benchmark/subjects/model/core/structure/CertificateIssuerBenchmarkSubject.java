@@ -7,21 +7,22 @@ import org.purpleBean.kmip.model.core.type.CertificateIssuerDistinguishedName;
 
 public class CertificateIssuerBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuer> {
 
-    public CertificateIssuerBenchmarkSubject() throws Exception {
-        CertificateIssuer certificateIssuer = CertificateIssuer.builder()
-                .certificateIssuerDistinguishedName(
-                        CertificateIssuerDistinguishedName.of("CN=Test Issuer")
-                )
-                .certificateIssuerAlternativeName(
-                        CertificateIssuerAlternativeName.of("alt.issuer.com")
-                )
-                .build();
-        initialize(certificateIssuer, CertificateIssuer.class);
-    }
+  public CertificateIssuerBenchmarkSubject() throws Exception {
+    CertificateIssuer certificateIssuer = CertificateIssuer
+        .builder()
+        .certificateIssuerDistinguishedName(
+            CertificateIssuerDistinguishedName.of("CN=Test Issuer")
+        )
+        .certificateIssuerAlternativeName(
+            CertificateIssuerAlternativeName.of("alt.issuer.com")
+        )
+        .build();
+    initialize(certificateIssuer, CertificateIssuer.class);
+  }
 
-    @Override
-    public String name() {
-        return "CertificateIssuer";
-    }
+  @Override
+  public String name() {
+    return "CertificateIssuer";
+  }
 
 }

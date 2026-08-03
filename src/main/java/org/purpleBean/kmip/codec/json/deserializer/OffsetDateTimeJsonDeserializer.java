@@ -12,9 +12,11 @@ import java.time.ZoneOffset;
 
 public class OffsetDateTimeJsonDeserializer extends JsonDeserializer<OffsetDateTime> {
 
-    @Override
-    public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
-        return OffsetDateTime.ofInstant(Instant.parse(node.asText()), ZoneOffset.UTC);
-    }
+  @Override
+  public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    JsonNode node = p
+        .getCodec()
+        .readTree(p);
+    return OffsetDateTime.ofInstant(Instant.parse(node.asText()), ZoneOffset.UTC);
+  }
 }

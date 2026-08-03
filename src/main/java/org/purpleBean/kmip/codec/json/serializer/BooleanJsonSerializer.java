@@ -8,8 +8,9 @@ import java.io.IOException;
 
 public class BooleanJsonSerializer extends JsonSerializer<Boolean> {
 
-    @Override
-    public void serialize(Boolean value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(value.toString());
-    }
+  @Override
+  public void serialize(Boolean value, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    gen.writeString(value.toString());
+  }
 }

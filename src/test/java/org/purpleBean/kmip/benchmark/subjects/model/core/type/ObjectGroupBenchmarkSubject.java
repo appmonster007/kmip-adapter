@@ -7,17 +7,20 @@ import org.purpleBean.kmip.model.core.type.ObjectGroup;
 
 public class ObjectGroupBenchmarkSubject extends KmipBenchmarkSubject<ObjectGroup> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ObjectGroupBenchmarkSubject() throws Exception {
-        ObjectGroup objectGroup = ObjectGroup.builder().value("test").build();
-        initialize(objectGroup, ObjectGroup.class);
-    }
+  public ObjectGroupBenchmarkSubject() throws Exception {
+    ObjectGroup objectGroup = ObjectGroup
+        .builder()
+        .value("test")
+        .build();
+    initialize(objectGroup, ObjectGroup.class);
+  }
 
-    @Override
-    public String name() {
-        return "ObjectGroup";
-    }
+  @Override
+  public String name() {
+    return "ObjectGroup";
+  }
 
 }

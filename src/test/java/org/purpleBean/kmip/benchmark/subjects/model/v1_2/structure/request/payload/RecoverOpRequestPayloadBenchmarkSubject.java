@@ -6,20 +6,22 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.RecoverOpRequestPayload;
 
-public class RecoverOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<RecoverOpRequestPayload> {
+public class RecoverOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<RecoverOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public RecoverOpRequestPayloadBenchmarkSubject() throws Exception {
-        RecoverOpRequestPayload subject = RecoverOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-        initialize(subject, RecoverOpRequestPayload.class);
-    }
+  public RecoverOpRequestPayloadBenchmarkSubject() throws Exception {
+    RecoverOpRequestPayload subject = RecoverOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+    initialize(subject, RecoverOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "RecoverOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "RecoverOpRequestPayload";
+  }
 }

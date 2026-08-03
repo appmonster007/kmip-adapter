@@ -11,33 +11,37 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("PgpKey Ttlv Serialization Tests")
 class PgpKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PgpKey> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<PgpKey> type() {
-        return PgpKey.class;
-    }
+  @Override
+  public Class<PgpKey> type() {
+    return PgpKey.class;
+  }
 
-    @Override
-    public PgpKey createDefault() {
-        return PgpKey.builder()
-                .pgpKeyVersion(PgpKeyVersion.of(4))
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-    }
+  @Override
+  public PgpKey createDefault() {
+    return PgpKey
+        .builder()
+        .pgpKeyVersion(PgpKeyVersion.of(4))
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+  }
 
-    @Override
-    public PgpKey createVariant() {
-        return PgpKey.builder()
-                .pgpKeyVersion(PgpKeyVersion.of(5))
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
-                        .build())
-                .build();
-    }
+  @Override
+  public PgpKey createVariant() {
+    return PgpKey
+        .builder()
+        .pgpKeyVersion(PgpKeyVersion.of(5))
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+            .build())
+        .build();
+  }
 }

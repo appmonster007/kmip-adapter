@@ -5,19 +5,24 @@ import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.CertificateIssuerAlternativeName;
 
-public class CertificateIssuerAlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuerAlternativeName> {
+public class CertificateIssuerAlternativeNameBenchmarkSubject
+    extends KmipBenchmarkSubject<CertificateIssuerAlternativeName> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CertificateIssuerAlternativeNameBenchmarkSubject() throws Exception {
-        CertificateIssuerAlternativeName certificateIssuerAlternativeName = CertificateIssuerAlternativeName.builder().value("test-issuer-alt-name").build();
-        initialize(certificateIssuerAlternativeName, CertificateIssuerAlternativeName.class);
-    }
+  public CertificateIssuerAlternativeNameBenchmarkSubject() throws Exception {
+    CertificateIssuerAlternativeName certificateIssuerAlternativeName =
+        CertificateIssuerAlternativeName
+            .builder()
+            .value("test-issuer-alt-name")
+            .build();
+    initialize(certificateIssuerAlternativeName, CertificateIssuerAlternativeName.class);
+  }
 
-    @Override
-    public String name() {
-        return "CertificateIssuerAlternativeName";
-    }
+  @Override
+  public String name() {
+    return "CertificateIssuerAlternativeName";
+  }
 
 }

@@ -5,20 +5,27 @@ import org.purpleBean.kmip.model.core.type.KeyValueLocationValue;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("KeyValueLocationValue TTLV Serialization Tests")
-class KeyValueLocationValueTtlvTest extends AbstractTtlvSerializationTestSuite<KeyValueLocationValue> {
+class KeyValueLocationValueTtlvTest
+    extends AbstractTtlvSerializationTestSuite<KeyValueLocationValue> {
 
-    @Override
-    public Class<KeyValueLocationValue> type() {
-        return KeyValueLocationValue.class;
-    }
+  @Override
+  public Class<KeyValueLocationValue> type() {
+    return KeyValueLocationValue.class;
+  }
 
-    @Override
-    public KeyValueLocationValue createDefault() {
-        return KeyValueLocationValue.builder().value("test").build();
-    }
+  @Override
+  public KeyValueLocationValue createDefault() {
+    return KeyValueLocationValue
+        .builder()
+        .value("test")
+        .build();
+  }
 
-    @Override
-    public KeyValueLocationValue createVariant() {
-        return KeyValueLocationValue.builder().value("test-2").build();
-    }
+  @Override
+  public KeyValueLocationValue createVariant() {
+    return KeyValueLocationValue
+        .builder()
+        .value("test-2")
+        .build();
+  }
 }

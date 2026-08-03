@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("CriticalityIndicator Domain Tests")
 class CriticalityIndicatorTest extends AbstractKmipDataTypeTestSuite<CriticalityIndicator> {
 
-    @Override
-    protected Class<CriticalityIndicator> type() {
-        return CriticalityIndicator.class;
-    }
+  @Override
+  protected Class<CriticalityIndicator> type() {
+    return CriticalityIndicator.class;
+  }
 
-    @Override
-    protected CriticalityIndicator createDefault() {
-        return CriticalityIndicator.builder().value(true).build();
-    }
+  @Override
+  protected CriticalityIndicator createDefault() {
+    return CriticalityIndicator
+        .builder()
+        .value(true)
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.BOOLEAN;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.BOOLEAN;
+  }
 }

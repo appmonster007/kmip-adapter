@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("EncodingOption TTLV Serialization")
 class EncodingOptionTtlvTest extends AbstractTtlvSerializationTestSuite<EncodingOption> {
-    @Override
-    public Class<EncodingOption> type() {
-        return EncodingOption.class;
-    }
+  @Override
+  public Class<EncodingOption> type() {
+    return EncodingOption.class;
+  }
 
-    @Override
-    public EncodingOption createDefault() {
-        return EncodingOption.Standard.NO_ENCODING.inst();
-    }
+  @Override
+  public EncodingOption createDefault() {
+    return EncodingOption.Standard.NO_ENCODING.inst();
+  }
 
-    @Override
-    public EncodingOption createVariant() {
-        return EncodingOption.Standard.TTLV_ENCODING.inst();
-    }
+  @Override
+  public EncodingOption createVariant() {
+    return EncodingOption.Standard.TTLV_ENCODING.inst();
+  }
 }

@@ -8,31 +8,34 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.DecryptOpRequest
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DecryptOpRequestPayload Xml Serialization Tests")
-class DecryptOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<DecryptOpRequestPayload> {
+class DecryptOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<DecryptOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<DecryptOpRequestPayload> type() {
-        return DecryptOpRequestPayload.class;
-    }
+  @Override
+  public Class<DecryptOpRequestPayload> type() {
+    return DecryptOpRequestPayload.class;
+  }
 
-    @Override
-    public DecryptOpRequestPayload createDefault() {
-        return DecryptOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public DecryptOpRequestPayload createDefault() {
+    return DecryptOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public DecryptOpRequestPayload createVariant() {
-        return DecryptOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public DecryptOpRequestPayload createVariant() {
+    return DecryptOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.ProfileName;
 
 public class ProfileNameBenchmarkSubject extends KmipBenchmarkSubject<ProfileName> {
 
-    public ProfileNameBenchmarkSubject() throws Exception {
-        ProfileName profileName = ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
-        initialize(profileName, ProfileName.class);
-    }
+  public ProfileNameBenchmarkSubject() throws Exception {
+    ProfileName profileName = ProfileName.Standard.COMPLETE_SERVER_BASIC.inst();
+    initialize(profileName, ProfileName.class);
+  }
 
-    @Override
-    public String name() {
-        return "ProfileName";
-    }
+  @Override
+  public String name() {
+    return "ProfileName";
+  }
 
 }

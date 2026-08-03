@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.HashOpResponseP
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("HashOpResponsePayload Ttlv Serialization Tests")
-class HashOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<HashOpResponsePayload> {
+class HashOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<HashOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<HashOpResponsePayload> type() {
-        return HashOpResponsePayload.class;
-    }
+  @Override
+  public Class<HashOpResponsePayload> type() {
+    return HashOpResponsePayload.class;
+  }
 
-    @Override
-    public HashOpResponsePayload createDefault() {
-        return HashOpResponsePayload.builder()
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .build();
-    }
+  @Override
+  public HashOpResponsePayload createDefault() {
+    return HashOpResponsePayload
+        .builder()
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .build();
+  }
 
-    @Override
-    public HashOpResponsePayload createVariant() {
-        return HashOpResponsePayload.builder()
-                .data(DataByteString.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public HashOpResponsePayload createVariant() {
+    return HashOpResponsePayload
+        .builder()
+        .data(DataByteString.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 }

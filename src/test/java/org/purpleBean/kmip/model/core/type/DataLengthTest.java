@@ -7,18 +7,18 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("DataLength Domain Tests")
 class DataLengthTest extends AbstractKmipDataTypeTestSuite<DataLength> {
 
-    @Override
-    protected Class<DataLength> type() {
-        return DataLength.class;
-    }
+  @Override
+  protected Class<DataLength> type() {
+    return DataLength.class;
+  }
 
-    @Override
-    protected DataLength createDefault() {
-        return DataLength.of(128);
-    }
+  @Override
+  protected DataLength createDefault() {
+    return DataLength.of(128);
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.INTEGER;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.INTEGER;
+  }
 }

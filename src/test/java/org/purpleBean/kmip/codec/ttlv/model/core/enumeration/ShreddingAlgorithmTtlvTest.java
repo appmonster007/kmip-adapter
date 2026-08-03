@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ShreddingAlgorithm TTLV Serialization")
 class ShreddingAlgorithmTtlvTest extends AbstractTtlvSerializationTestSuite<ShreddingAlgorithm> {
-    @Override
-    public Class<ShreddingAlgorithm> type() {
-        return ShreddingAlgorithm.class;
-    }
+  @Override
+  public Class<ShreddingAlgorithm> type() {
+    return ShreddingAlgorithm.class;
+  }
 
-    @Override
-    public ShreddingAlgorithm createDefault() {
-        return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public ShreddingAlgorithm createDefault() {
+    return ShreddingAlgorithm.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public ShreddingAlgorithm createVariant() {
-        return ShreddingAlgorithm.Standard.CRYPTOGRAPHIC.inst();
-    }
+  @Override
+  public ShreddingAlgorithm createVariant() {
+    return ShreddingAlgorithm.Standard.CRYPTOGRAPHIC.inst();
+  }
 }

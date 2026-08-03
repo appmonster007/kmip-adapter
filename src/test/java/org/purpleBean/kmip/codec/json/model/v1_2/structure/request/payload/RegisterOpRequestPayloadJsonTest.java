@@ -12,41 +12,52 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.RegisterOpReques
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("RegisterOpRequestPayload Json Serialization Tests")
-class RegisterOpRequestPayloadJsonTest extends AbstractJsonSerializationTestSuite<RegisterOpRequestPayload> {
+class RegisterOpRequestPayloadJsonTest
+    extends AbstractJsonSerializationTestSuite<RegisterOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<RegisterOpRequestPayload> type() {
-        return RegisterOpRequestPayload.class;
-    }
+  @Override
+  public Class<RegisterOpRequestPayload> type() {
+    return RegisterOpRequestPayload.class;
+  }
 
-    @Override
-    public RegisterOpRequestPayload createDefault() {
-        return RegisterOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .object(SymmetricKey.builder()
-                        .keyBlock(KeyBlock.builder()
-                                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                                .build())
-                        .build())
-                .build();
-    }
+  @Override
+  public RegisterOpRequestPayload createDefault() {
+    return RegisterOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .object(SymmetricKey
+            .builder()
+            .keyBlock(KeyBlock
+                .builder()
+                .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+                .build())
+            .build())
+        .build();
+  }
 
-    @Override
-    public RegisterOpRequestPayload createVariant() {
-        return RegisterOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .object(PublicKey.builder()
-                        .keyBlock(KeyBlock.builder()
-                                .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
-                                .build())
-                        .build())
-                .build();
-    }
+  @Override
+  public RegisterOpRequestPayload createVariant() {
+    return RegisterOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .object(PublicKey
+            .builder()
+            .keyBlock(KeyBlock
+                .builder()
+                .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+                .build())
+            .build())
+        .build();
+  }
 }

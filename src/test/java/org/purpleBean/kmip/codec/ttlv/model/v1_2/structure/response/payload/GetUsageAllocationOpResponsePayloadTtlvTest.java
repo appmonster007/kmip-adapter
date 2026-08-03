@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.GetUsageAllocat
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("GetUsageAllocationOpResponsePayload Ttlv Serialization Tests")
-class GetUsageAllocationOpResponsePayloadTtlvTest extends AbstractTtlvSerializationTestSuite<GetUsageAllocationOpResponsePayload> {
+class GetUsageAllocationOpResponsePayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<GetUsageAllocationOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<GetUsageAllocationOpResponsePayload> type() {
-        return GetUsageAllocationOpResponsePayload.class;
-    }
+  @Override
+  public Class<GetUsageAllocationOpResponsePayload> type() {
+    return GetUsageAllocationOpResponsePayload.class;
+  }
 
-    @Override
-    public GetUsageAllocationOpResponsePayload createDefault() {
-        return GetUsageAllocationOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public GetUsageAllocationOpResponsePayload createDefault() {
+    return GetUsageAllocationOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public GetUsageAllocationOpResponsePayload createVariant() {
-        return GetUsageAllocationOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public GetUsageAllocationOpResponsePayload createVariant() {
+    return GetUsageAllocationOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

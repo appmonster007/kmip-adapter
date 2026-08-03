@@ -3,37 +3,41 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.structure.respons
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.structure.ProtocolVersion;
 import org.purpleBean.kmip.model.core.structure.response.SimpleResponseHeader;
 
-import java.io.IOException;
+public class SimpleResponseHeaderJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<SimpleResponseHeader,
+        SimpleResponseHeader.SimpleResponseHeaderBuilder> {
 
-public class SimpleResponseHeaderJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<SimpleResponseHeader, SimpleResponseHeader.SimpleResponseHeaderBuilder> {
+  public SimpleResponseHeaderJsonDeserializer() {
+    super(SimpleResponseHeader.kmipTag, SimpleResponseHeader.encodingType);
+  }
 
-    public SimpleResponseHeaderJsonDeserializer() {
-        super(SimpleResponseHeader.kmipTag, SimpleResponseHeader.encodingType);
+  @Override
+  protected SimpleResponseHeader.SimpleResponseHeaderBuilder createBuilder() {
+    return SimpleResponseHeader.builder();
+  }
+
+  @Override
+  protected void setValue(SimpleResponseHeader.SimpleResponseHeaderBuilder builder, String tag,
+                          String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.PROTOCOL_VERSION ->
+          builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
+      default -> {
+        while (p.nextToken() != JsonToken.END_OBJECT) ;
+      }
     }
+  }
 
-    @Override
-    protected SimpleResponseHeader.SimpleResponseHeaderBuilder createBuilder() {
-        return SimpleResponseHeader.builder();
-    }
-
-    @Override
-    protected void setValue(SimpleResponseHeader.SimpleResponseHeaderBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.PROTOCOL_VERSION -> builder.protocolVersion(ctxt.readValue(p, ProtocolVersion.class));
-            default -> {
-                while (p.nextToken() != JsonToken.END_OBJECT) ;
-            }
-        }
-    }
-
-    @Override
-    protected SimpleResponseHeader build(SimpleResponseHeader.SimpleResponseHeaderBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected SimpleResponseHeader build(SimpleResponseHeader.SimpleResponseHeaderBuilder builder) {
+    return builder.build();
+  }
 }

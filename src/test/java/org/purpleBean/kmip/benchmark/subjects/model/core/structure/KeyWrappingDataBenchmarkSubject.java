@@ -8,19 +8,20 @@ import org.purpleBean.kmip.model.core.structure.KeyWrappingData;
 
 public class KeyWrappingDataBenchmarkSubject extends KmipBenchmarkSubject<KeyWrappingData> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public KeyWrappingDataBenchmarkSubject() throws Exception {
-        KeyWrappingData subject = KeyWrappingData.builder()
-                .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
-                .build();
-        initialize(subject, KeyWrappingData.class);
-    }
+  public KeyWrappingDataBenchmarkSubject() throws Exception {
+    KeyWrappingData subject = KeyWrappingData
+        .builder()
+        .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
+        .build();
+    initialize(subject, KeyWrappingData.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyWrappingData";
-    }
+  @Override
+  public String name() {
+    return "KeyWrappingData";
+  }
 
 }

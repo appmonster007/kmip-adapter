@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.DestroyAction;
 
 public class DestroyActionBenchmarkSubject extends KmipBenchmarkSubject<DestroyAction> {
 
-    public DestroyActionBenchmarkSubject() throws Exception {
-        DestroyAction destroyAction = DestroyAction.Standard.UNSPECIFIED.inst();
-        initialize(destroyAction, DestroyAction.class);
-    }
+  public DestroyActionBenchmarkSubject() throws Exception {
+    DestroyAction destroyAction = DestroyAction.Standard.UNSPECIFIED.inst();
+    initialize(destroyAction, DestroyAction.class);
+  }
 
-    @Override
-    public String name() {
-        return "DestroyAction";
-    }
+  @Override
+  public String name() {
+    return "DestroyAction";
+  }
 
 }

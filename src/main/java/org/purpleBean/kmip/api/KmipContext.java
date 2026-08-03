@@ -41,66 +41,67 @@ import java.util.function.Supplier;
  * @see ThreadLocal
  */
 public final class KmipContext {
-    private static final ThreadLocal<KmipSpec> currentSpec = ThreadLocal.withInitial(() -> KmipSpec.UnknownVersion);
+  private static final ThreadLocal<KmipSpec> currentSpec =
+      ThreadLocal.withInitial(() -> KmipSpec.UnknownVersion);
 
-    // Prevent instantiation
-    private KmipContext() {
-    }
+  // Prevent instantiation
+  private KmipContext() {
+  }
 
-    /**
-     * Gets the current KMIP specification for the current thread.
-     *
-     * @return the current {@link KmipSpec}, or {@link KmipSpec#UnknownVersion} if not set.
-     */
-    public static KmipSpec getSpec() {
-        KmipSpec spec = currentSpec.get();
-        return spec != null ? spec : KmipSpec.UnknownVersion;
-    }
+  /**
+   * Gets the current KMIP specification for the current thread.
+   *
+   * @return the current {@link KmipSpec}, or {@link KmipSpec#UnknownVersion} if not set.
+   */
+  public static KmipSpec getSpec() {
+    KmipSpec spec = currentSpec.get();
+    return spec != null ? spec : KmipSpec.UnknownVersion;
+  }
 
-    /**
-     * Sets the KMIP specification for the current thread.
-     *
-     * @param spec the {@link KmipSpec} to set. If {@code null}, the context is cleared.
-     */
-    public static void setSpec(KmipSpec spec) {
-        if (spec == null) {
-            clear();
-        } else {
-            currentSpec.set(spec);
-        }
+  /**
+   * Sets the KMIP specification for the current thread.
+   *
+   * @param spec the {@link KmipSpec} to set. If {@code null}, the context is cleared.
+   */
+  public static void setSpec(KmipSpec spec) {
+    if (spec == null) {
+      clear();
+    } else {
+      currentSpec.set(spec);
     }
+  }
 
-    /**
-     * Clears the current thread's KMIP specification and resets it to the default
-     * ({@link KmipSpec#UnknownVersion}).
-     */
-    public static void clear() {
-        currentSpec.remove();
-    }
+  /**
+   * Clears the current thread's KMIP specification and resets it to the default
+   * ({@link KmipSpec#UnknownVersion}).
+   */
+  public static void clear() {
+    currentSpec.remove();
+  }
 
-    /**
-     * Executes a block of code within a specific KMIP specification context.
-     * <p>
-     * This method sets the context to the provided {@link KmipSpec}, executes the given
-     * {@link Supplier}, and ensures that the original context is restored afterward,
-     * even if an exception occurs.
-     *
-     * @param spec     the {@link KmipSpec} to use for the duration of the operation.
-     * @param supplier the code to execute, provided as a {@link Supplier}.
-     * @param <T>      the result type of the supplier.
-     * @return the value returned by the supplier.
-     */
-    public static <T> T withSpec(KmipSpec spec, Supplier<T> supplier) {
-        KmipSpec previous = currentSpec.get();
-        try {
-            setSpec(spec);
-            return supplier.get();
-        } finally {
-            if (previous != null) {
-                setSpec(previous);
-            } else {
-                clear();
-            }
-        }
+  /**
+   * Executes a block of code within a specific KMIP specification context.
+   * <p>
+   * This method sets the context to the provided {@link KmipSpec}, executes the given
+   * {@link Supplier}, and ensures that the original context is restored afterward,
+   * even if an exception occurs.
+   *
+   * @param spec     the {@link KmipSpec} to use for the duration of the operation.
+   * @param supplier the code to execute, provided as a {@link Supplier}.
+   * @param <T>      the result type of the supplier.
+   * @return the value returned by the supplier.
+   */
+  public static <T> T withSpec(KmipSpec spec, Supplier<T> supplier) {
+    KmipSpec previous = currentSpec.get();
+    try {
+      setSpec(spec);
+      return supplier.get();
+    } finally {
+      if (previous != null) {
+        setSpec(previous);
+      } else {
+        clear();
+      }
     }
+  }
 }

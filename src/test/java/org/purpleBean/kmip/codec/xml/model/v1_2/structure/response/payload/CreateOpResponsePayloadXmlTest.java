@@ -9,32 +9,43 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.CreateOpRespons
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CreateOpResponsePayload Xml Serialization Tests")
-class CreateOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<CreateOpResponsePayload> {
+class CreateOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<CreateOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<CreateOpResponsePayload> type() {
-        return CreateOpResponsePayload.class;
-    }
+  @Override
+  public Class<CreateOpResponsePayload> type() {
+    return CreateOpResponsePayload.class;
+  }
 
-    @Override
-    public CreateOpResponsePayload createDefault() {
-        return CreateOpResponsePayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public CreateOpResponsePayload createDefault() {
+    return CreateOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public CreateOpResponsePayload createVariant() {
-        return CreateOpResponsePayload.builder()
-                .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
-                .build();
-    }
+  @Override
+  public CreateOpResponsePayload createVariant() {
+    return CreateOpResponsePayload
+        .builder()
+        .objectType(ObjectType.Standard.PUBLIC_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid2")
+            .build())
+        .build();
+  }
 }

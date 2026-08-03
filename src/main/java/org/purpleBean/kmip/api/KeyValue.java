@@ -23,8 +23,8 @@ import org.purpleBean.kmip.model.core.enumeration.KeyFormatType;
  * @see org.purpleBean.kmip.model.core.structure.KeyBlock
  */
 public interface KeyValue extends KmipDataType {
-    /**
-     * The standard KMIP tag for a Key Value, which is always {@link KmipTag.Standard#KEY_VALUE}.
-     */
-    KmipTag kmipTag = KmipTag.Standard.KEY_VALUE.inst();
+  /**
+   * The standard KMIP tag for a Key Value, which is always {@link KmipTag.Standard#KEY_VALUE}.
+   */
+  KmipTag kmipTag = KmipTag.Standard.KEY_VALUE.inst();
 }

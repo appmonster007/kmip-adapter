@@ -8,23 +8,23 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("AttributeValue Domain Tests")
 class AttributeValueTest extends AbstractKmipDataTypeTestSuite<AttributeValue> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    protected Class<AttributeValue> type() {
-        return AttributeValue.class;
-    }
+  @Override
+  protected Class<AttributeValue> type() {
+    return AttributeValue.class;
+  }
 
-    @Override
-    protected AttributeValue createDefault() {
-        return AttributeValue.ofTextString("default-string");
-    }
+  @Override
+  protected AttributeValue createDefault() {
+    return AttributeValue.ofTextString("default-string");
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

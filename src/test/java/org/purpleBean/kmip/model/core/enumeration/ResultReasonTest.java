@@ -1,91 +1,99 @@
 package org.purpleBean.kmip.model.core.enumeration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.test.suite.AbstractKmipEnumerationTestSuite;
 
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 @DisplayName("ResultReason Domain Tests")
 class ResultReasonTest extends AbstractKmipEnumerationTestSuite<ResultReason> {
 
-    @Override
-    protected Class<ResultReason> type() {
-        return ResultReason.class;
-    }
+  @Override
+  protected Class<ResultReason> type() {
+    return ResultReason.class;
+  }
 
-    @Override
-    protected ResultReason createDefault() {
-        return ResultReason.Standard.ITEM_NOT_FOUND.inst();
-    }
+  @Override
+  protected ResultReason createDefault() {
+    return ResultReason.Standard.ITEM_NOT_FOUND.inst();
+  }
 
-    @Override
-    protected ResultReason createEqualToDefault() {
-        return ResultReason.Standard.ITEM_NOT_FOUND.inst();
-    }
+  @Override
+  protected ResultReason createEqualToDefault() {
+    return ResultReason.Standard.ITEM_NOT_FOUND.inst();
+  }
 
-    @Override
-    protected ResultReason createDifferentFromDefault() {
-        return ResultReason.Standard.RESPONSE_TOO_LARGE.inst();
-    }
+  @Override
+  protected ResultReason createDifferentFromDefault() {
+    return ResultReason.Standard.RESPONSE_TOO_LARGE.inst();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.ENUMERATION;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.ENUMERATION;
+  }
 
-    @Override
-    protected boolean supportsRegistryBehavior() {
-        return true;
-    }
+  @Override
+  protected boolean supportsRegistryBehavior() {
+    return true;
+  }
 
-    @Override
-    protected void assertLookupBehaviour() {
-        // Lookup by name/value
-        withKmipSpec(
-                KmipSpec.UnknownVersion,
-                () -> {
-                    ResultReason.Value byName = ResultReason.fromName("X-Enum-Custom");
-                    ResultReason.Value byVal = ResultReason.fromValue(0x80000010);
-                    assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
-                    assertThat(byVal.getValue()).isEqualTo(0x80000010);
-                }
-        );
+  @Override
+  protected void assertLookupBehaviour() {
+    // Lookup by name/value
+    withKmipSpec(
+        KmipSpec.UnknownVersion,
+        () -> {
+          ResultReason.Value byName = ResultReason.fromName("X-Enum-Custom");
+          ResultReason.Value byVal = ResultReason.fromValue(0x80000010);
+          assertThat(byName.getDescription()).isEqualTo("X-Enum-Custom");
+          assertThat(byVal.getValue()).isEqualTo(0x80000010);
+        }
+    );
 
-        // Lookup by name/value with unsupported version
-        withKmipSpec(
-                KmipSpec.UnsupportedVersion,
-                () -> assertThatThrownBy(() -> ResultReason.fromName("X-Enum-Custom"))
-        );
-    }
+    // Lookup by name/value with unsupported version
+    withKmipSpec(
+        KmipSpec.UnsupportedVersion,
+        () -> assertThatThrownBy(() -> ResultReason.fromName("X-Enum-Custom"))
+    );
+  }
 
-    @Override
-    protected void assertEnumerationRegistryBehavior() {
-        // Valid registration in ResultReason requires 8XXXXXXX (hex) range per implementation
-        ResultReason.Value custom = ResultReason.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE);
-        assertThat(custom.isCustom()).isTrue();
-        assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
+  @Override
+  protected void assertEnumerationRegistryBehavior() {
+    // Valid registration in ResultReason requires 8XXXXXXX (hex) range per implementation
+    ResultReason.Value custom =
+        ResultReason.register(0x80000010, "X-Enum-Custom", Set.of(KmipSpec.UnknownVersion),
+            ResultReason.Standard.GENERAL_FAILURE);
+    assertThat(custom.isCustom()).isTrue();
+    assertThat(custom.getDescription()).isEqualTo("X-Enum-Custom");
 
-        withKmipSpec(KmipSpec.UnknownVersion, () -> {
-            assertThat(custom.isSupported()).isTrue();
-        });
-        withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
-            assertThat(custom.isSupported()).isFalse();
-        });
+    withKmipSpec(KmipSpec.UnknownVersion, () -> {
+      assertThat(custom.isSupported()).isTrue();
+    });
+    withKmipSpec(KmipSpec.UnsupportedVersion, () -> {
+      assertThat(custom.isSupported()).isFalse();
+    });
 
-        // Negative cases: invalid range, empty description, empty versions
-        assertThatThrownBy(() -> ResultReason.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion), ResultReason.Standard.GENERAL_FAILURE))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> ResultReason.register(0x80000012, "X-Empty-Versions", Set.of(), ResultReason.Standard.GENERAL_FAILURE))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+    // Negative cases: invalid range, empty description, empty versions
+    assertThatThrownBy(
+        () -> ResultReason.register(0x7FFFFFFF, "Bad-Range", Set.of(KmipSpec.UnknownVersion),
+            ResultReason.Standard.GENERAL_FAILURE))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(
+        () -> ResultReason.register(0x00000001, "Bad-Range", Set.of(KmipSpec.UnknownVersion),
+            ResultReason.Standard.GENERAL_FAILURE))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(
+        () -> ResultReason.register(0x80000011, "   ", Set.of(KmipSpec.UnknownVersion),
+            ResultReason.Standard.GENERAL_FAILURE))
+        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> ResultReason.register(0x80000012, "X-Empty-Versions", Set.of(),
+        ResultReason.Standard.GENERAL_FAILURE))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }
 

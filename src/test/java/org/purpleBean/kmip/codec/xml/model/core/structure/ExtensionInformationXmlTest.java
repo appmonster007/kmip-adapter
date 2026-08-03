@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ExtensionInformation Xml Serialization Tests")
 class ExtensionInformationXmlTest extends AbstractXmlSerializationTestSuite<ExtensionInformation> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<ExtensionInformation> type() {
-        return ExtensionInformation.class;
-    }
+  @Override
+  public Class<ExtensionInformation> type() {
+    return ExtensionInformation.class;
+  }
 
-    @Override
-    public ExtensionInformation createDefault() {
-        return ExtensionInformation.builder()
-                .extensionName(ExtensionName.of("test-extension"))
-                .build();
-    }
+  @Override
+  public ExtensionInformation createDefault() {
+    return ExtensionInformation
+        .builder()
+        .extensionName(ExtensionName.of("test-extension"))
+        .build();
+  }
 
-    @Override
-    public ExtensionInformation createVariant() {
-        return ExtensionInformation.builder()
-                .extensionName(ExtensionName.of("test-extension-variant"))
-                .build();
-    }
+  @Override
+  public ExtensionInformation createVariant() {
+    return ExtensionInformation
+        .builder()
+        .extensionName(ExtensionName.of("test-extension-variant"))
+        .build();
+  }
 }

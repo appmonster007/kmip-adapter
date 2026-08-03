@@ -8,18 +8,24 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 class ContactInformationJsonTest extends AbstractJsonSerializationTestSuite<ContactInformation> {
 
 
-    @Override
-    public Class<ContactInformation> type() {
-        return ContactInformation.class;
-    }
+  @Override
+  public Class<ContactInformation> type() {
+    return ContactInformation.class;
+  }
 
-    @Override
-    public ContactInformation createDefault() {
-        return ContactInformation.builder().value("test").build();
-    }
+  @Override
+  public ContactInformation createDefault() {
+    return ContactInformation
+        .builder()
+        .value("test")
+        .build();
+  }
 
-    @Override
-    public ContactInformation createVariant() {
-        return ContactInformation.builder().value("test-2").build();
-    }
+  @Override
+  public ContactInformation createVariant() {
+    return ContactInformation
+        .builder()
+        .value("test-2")
+        .build();
+  }
 }

@@ -11,34 +11,55 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRe
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ReKeyKeyPairOpRequestPayload Ttlv Serialization Tests")
-class ReKeyKeyPairOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<ReKeyKeyPairOpRequestPayload> {
+class ReKeyKeyPairOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ReKeyKeyPairOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ReKeyKeyPairOpRequestPayload> type() {
-        return ReKeyKeyPairOpRequestPayload.class;
-    }
+  @Override
+  public Class<ReKeyKeyPairOpRequestPayload> type() {
+    return ReKeyKeyPairOpRequestPayload.class;
+  }
 
-    @Override
-    public ReKeyKeyPairOpRequestPayload createDefault() {
-        return ReKeyKeyPairOpRequestPayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
-                .offset(Offset.builder().value(100).build())
-                .commonTemplateAttribute(CommonTemplateAttribute.builder().build())
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.builder().build())
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public ReKeyKeyPairOpRequestPayload createDefault() {
+    return ReKeyKeyPairOpRequestPayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(100)
+            .build())
+        .commonTemplateAttribute(CommonTemplateAttribute
+            .builder()
+            .build())
+        .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute
+            .builder()
+            .build())
+        .publicKeyTemplateAttribute(PublicKeyTemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public ReKeyKeyPairOpRequestPayload createVariant() {
-        return ReKeyKeyPairOpRequestPayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid2").build())
-                .offset(Offset.builder().value(200).build())
-                .build();
-    }
+  @Override
+  public ReKeyKeyPairOpRequestPayload createVariant() {
+    return ReKeyKeyPairOpRequestPayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid2")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(200)
+            .build())
+        .build();
+  }
 }

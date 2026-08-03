@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.State;
 
 public class StateBenchmarkSubject extends KmipBenchmarkSubject<State> {
 
-    public StateBenchmarkSubject() throws Exception {
-        State state = State.Standard.ACTIVE.inst();
-        initialize(state, State.class);
-    }
+  public StateBenchmarkSubject() throws Exception {
+    State state = State.Standard.ACTIVE.inst();
+    initialize(state, State.class);
+  }
 
-    @Override
-    public String name() {
-        return "State";
-    }
+  @Override
+  public String name() {
+    return "State";
+  }
 
 }

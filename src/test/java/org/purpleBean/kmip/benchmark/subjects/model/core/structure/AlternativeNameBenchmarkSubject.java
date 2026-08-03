@@ -9,19 +9,20 @@ import org.purpleBean.kmip.model.core.type.AlternativeNameValue;
 
 public class AlternativeNameBenchmarkSubject extends KmipBenchmarkSubject<AlternativeName> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public AlternativeNameBenchmarkSubject() throws Exception {
-        AlternativeName alternativename = AlternativeName.builder()
-                .alternativeNameValue(AlternativeNameValue.of("SomeAliasName"))
-                .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
-                .build();
-        initialize(alternativename, AlternativeName.class);
-    }
+  public AlternativeNameBenchmarkSubject() throws Exception {
+    AlternativeName alternativename = AlternativeName
+        .builder()
+        .alternativeNameValue(AlternativeNameValue.of("SomeAliasName"))
+        .alternativeNameType(AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst())
+        .build();
+    initialize(alternativename, AlternativeName.class);
+  }
 
-    @Override
-    public String name() {
-        return "AlternativeName";
-    }
+  @Override
+  public String name() {
+    return "AlternativeName";
+  }
 }

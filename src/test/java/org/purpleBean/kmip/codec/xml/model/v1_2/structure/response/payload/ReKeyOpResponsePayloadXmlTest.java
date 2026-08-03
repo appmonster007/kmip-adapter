@@ -8,30 +8,41 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.ReKeyOpResponse
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ReKeyOpResponsePayload Xml Serialization Tests")
-class ReKeyOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<ReKeyOpResponsePayload> {
+class ReKeyOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<ReKeyOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<ReKeyOpResponsePayload> type() {
-        return ReKeyOpResponsePayload.class;
-    }
+  @Override
+  public Class<ReKeyOpResponsePayload> type() {
+    return ReKeyOpResponsePayload.class;
+  }
 
-    @Override
-    public ReKeyOpResponsePayload createDefault() {
-        return ReKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid").build())
-                .templateAttribute(TemplateAttribute.builder().build())
-                .build();
-    }
+  @Override
+  public ReKeyOpResponsePayload createDefault() {
+    return ReKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid")
+            .build())
+        .templateAttribute(TemplateAttribute
+            .builder()
+            .build())
+        .build();
+  }
 
-    @Override
-    public ReKeyOpResponsePayload createVariant() {
-        return ReKeyOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("uid2").build())
-                .build();
-    }
+  @Override
+  public ReKeyOpResponsePayload createVariant() {
+    return ReKeyOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("uid2")
+            .build())
+        .build();
+  }
 }

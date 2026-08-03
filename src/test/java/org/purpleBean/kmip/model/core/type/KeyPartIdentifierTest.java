@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("KeyPartIdentifier Domain Tests")
 class KeyPartIdentifierTest extends AbstractKmipDataTypeTestSuite<KeyPartIdentifier> {
 
-    @Override
-    protected Class<KeyPartIdentifier> type() {
-        return KeyPartIdentifier.class;
-    }
+  @Override
+  protected Class<KeyPartIdentifier> type() {
+    return KeyPartIdentifier.class;
+  }
 
-    @Override
-    protected KeyPartIdentifier createDefault() {
-        return KeyPartIdentifier.builder().value(1).build();
-    }
+  @Override
+  protected KeyPartIdentifier createDefault() {
+    return KeyPartIdentifier
+        .builder()
+        .value(1)
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.INTEGER;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.INTEGER;
+  }
 }

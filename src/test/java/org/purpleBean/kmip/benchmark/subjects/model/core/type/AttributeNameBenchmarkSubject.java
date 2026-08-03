@@ -5,14 +5,17 @@ import org.purpleBean.kmip.model.core.type.AttributeName;
 
 public class AttributeNameBenchmarkSubject extends KmipBenchmarkSubject<AttributeName> {
 
-    public AttributeNameBenchmarkSubject() throws Exception {
-        AttributeName attributeName = AttributeName.builder().value("attribute name").build();
-        initialize(attributeName, AttributeName.class);
-    }
+  public AttributeNameBenchmarkSubject() throws Exception {
+    AttributeName attributeName = AttributeName
+        .builder()
+        .value("attribute name")
+        .build();
+    initialize(attributeName, AttributeName.class);
+  }
 
-    @Override
-    public String name() {
-        return "AttributeName";
-    }
+  @Override
+  public String name() {
+    return "AttributeName";
+  }
 
 }

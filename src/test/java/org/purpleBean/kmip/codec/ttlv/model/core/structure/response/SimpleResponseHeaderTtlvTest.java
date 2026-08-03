@@ -9,29 +9,32 @@ import org.purpleBean.kmip.model.core.type.ProtocolVersionMinor;
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("SimpleResponseHeader Ttlv Serialization Tests")
-class SimpleResponseHeaderTtlvTest extends AbstractTtlvSerializationTestSuite<SimpleResponseHeader> {
+class SimpleResponseHeaderTtlvTest
+    extends AbstractTtlvSerializationTestSuite<SimpleResponseHeader> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<SimpleResponseHeader> type() {
-        return SimpleResponseHeader.class;
-    }
+  @Override
+  public Class<SimpleResponseHeader> type() {
+    return SimpleResponseHeader.class;
+  }
 
-    @Override
-    public SimpleResponseHeader createDefault() {
-        return SimpleResponseHeader.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                .build();
-    }
+  @Override
+  public SimpleResponseHeader createDefault() {
+    return SimpleResponseHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+        .build();
+  }
 
-    @Override
-    public SimpleResponseHeader createVariant() {
-        return SimpleResponseHeader.builder()
-                .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
-                .build();
-    }
+  @Override
+  public SimpleResponseHeader createVariant() {
+    return SimpleResponseHeader
+        .builder()
+        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(3)))
+        .build();
+  }
 }

@@ -1,30 +1,32 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.type;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.type.ProtocolVersionMajor;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class ProtocolVersionMajorTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<ProtocolVersionMajor,
+        ProtocolVersionMajor.ProtocolVersionMajorBuilder> {
 
-public class ProtocolVersionMajorTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<ProtocolVersionMajor, ProtocolVersionMajor.ProtocolVersionMajorBuilder> {
+  public ProtocolVersionMajorTtlvDeserializer() {
+    super(ProtocolVersionMajor.kmipTag, ProtocolVersionMajor.encodingType);
+  }
 
-    public ProtocolVersionMajorTtlvDeserializer() {
-        super(ProtocolVersionMajor.kmipTag, ProtocolVersionMajor.encodingType);
-    }
+  @Override
+  protected ProtocolVersionMajor.ProtocolVersionMajorBuilder createBuilder() {
+    return ProtocolVersionMajor.builder();
+  }
 
-    @Override
-    protected ProtocolVersionMajor.ProtocolVersionMajorBuilder createBuilder() {
-        return ProtocolVersionMajor.builder();
-    }
+  @Override
+  protected void setValue(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder, byte[] tag,
+                          byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
+    builder.value(mapper.readValue(byteBuffer, Integer.class));
+  }
 
-    @Override
-    protected void setValue(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder, byte[] tag, byte type, ByteBuffer byteBuffer, TtlvMapper mapper) throws IOException {
-        builder.value(mapper.readValue(byteBuffer, Integer.class));
-    }
-
-    @Override
-    protected ProtocolVersionMajor build(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected ProtocolVersionMajor build(ProtocolVersionMajor.ProtocolVersionMajorBuilder builder) {
+    return builder.build();
+  }
 }

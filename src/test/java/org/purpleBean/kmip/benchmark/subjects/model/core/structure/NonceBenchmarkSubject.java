@@ -9,20 +9,21 @@ import org.purpleBean.kmip.model.core.type.NonceValue;
 
 public class NonceBenchmarkSubject extends KmipBenchmarkSubject<Nonce> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public NonceBenchmarkSubject() throws Exception {
-        Nonce subject = Nonce.builder()
-                .nonceId(NonceId.of("test-id".getBytes()))
-                .nonceValue(NonceValue.of(new byte[8]))
-                .build();
-        initialize(subject, Nonce.class);
-    }
+  public NonceBenchmarkSubject() throws Exception {
+    Nonce subject = Nonce
+        .builder()
+        .nonceId(NonceId.of("test-id".getBytes()))
+        .nonceValue(NonceValue.of(new byte[8]))
+        .build();
+    initialize(subject, Nonce.class);
+  }
 
-    @Override
-    public String name() {
-        return "Nonce";
-    }
+  @Override
+  public String name() {
+    return "Nonce";
+  }
 
 }

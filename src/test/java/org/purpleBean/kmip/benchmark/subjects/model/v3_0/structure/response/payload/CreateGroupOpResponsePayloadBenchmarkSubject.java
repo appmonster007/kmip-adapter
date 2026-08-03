@@ -1,34 +1,30 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v3_0.structure.response.payload;
 
 import lombok.Getter;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
+import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateGroupOpResponsePayload;
 
-public class CreateGroupOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<CreateGroupOpResponsePayload> {
+public class CreateGroupOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<CreateGroupOpResponsePayload> {
 
-    @Getter
-    private KmipSpec spec = KmipSpec.V3_0;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V3_0;
 
-    public CreateGroupOpResponsePayloadBenchmarkSubject() throws Exception {
-        CreateGroupOpResponsePayload subject = CreateGroupOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.builder().value("test-uid-1").build())
-                .build();
-        initialize(subject, CreateGroupOpResponsePayload.class);
-    }
+  public CreateGroupOpResponsePayloadBenchmarkSubject() throws Exception {
+    CreateGroupOpResponsePayload subject = CreateGroupOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("test-uid-1")
+            .build())
+        .build();
+    initialize(subject, CreateGroupOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "CreateGroupOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "CreateGroupOpResponsePayload";
+  }
 }

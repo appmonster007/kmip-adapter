@@ -9,16 +9,17 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("RevocationReason Xml Serialization Tests")
 class RevocationReasonXmlTest extends AbstractXmlSerializationTestSuite<RevocationReason> {
 
-    @Override
-    public Class<RevocationReason> type() {
-        return RevocationReason.class;
-    }
+  @Override
+  public Class<RevocationReason> type() {
+    return RevocationReason.class;
+  }
 
-    @Override
-    public RevocationReason createDefault() {
-        return RevocationReason.builder()
-                .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
-                .revocationMessage(RevocationMessage.of("test-message"))
-                .build();
-    }
+  @Override
+  public RevocationReason createDefault() {
+    return RevocationReason
+        .builder()
+        .revocationReasonCode(RevocationReasonCode.Standard.KEY_COMPROMISE.inst())
+        .revocationMessage(RevocationMessage.of("test-message"))
+        .build();
+  }
 }

@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("ServerInformation Ttlv Serialization Tests")
 class ServerInformationTtlvTest extends AbstractTtlvSerializationTestSuite<ServerInformation> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ServerInformation> type() {
-        return ServerInformation.class;
-    }
+  @Override
+  public Class<ServerInformation> type() {
+    return ServerInformation.class;
+  }
 
-    @Override
-    public ServerInformation createDefault() {
-        return ServerInformation.builder()
-                .value(NameValue.of("Test Server"))
-                .build();
-    }
+  @Override
+  public ServerInformation createDefault() {
+    return ServerInformation
+        .builder()
+        .value(NameValue.of("Test Server"))
+        .build();
+  }
 
-    @Override
-    public ServerInformation createVariant() {
-        return ServerInformation.builder()
-                .value(NameValue.of("Variant Server"))
-                .build();
-    }
+  @Override
+  public ServerInformation createVariant() {
+    return ServerInformation
+        .builder()
+        .value(NameValue.of("Variant Server"))
+        .build();
+  }
 }

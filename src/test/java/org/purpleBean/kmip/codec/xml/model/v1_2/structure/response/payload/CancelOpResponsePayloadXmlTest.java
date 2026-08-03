@@ -8,31 +8,34 @@ import org.purpleBean.kmip.model.v1_2.structure.response.payload.CancelOpRespons
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("CancelOpResponsePayload Xml Serialization Tests")
-class CancelOpResponsePayloadXmlTest extends AbstractXmlSerializationTestSuite<CancelOpResponsePayload> {
+class CancelOpResponsePayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<CancelOpResponsePayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<CancelOpResponsePayload> type() {
-        return CancelOpResponsePayload.class;
-    }
+  @Override
+  public Class<CancelOpResponsePayload> type() {
+    return CancelOpResponsePayload.class;
+  }
 
-    @Override
-    public CancelOpResponsePayload createDefault() {
-        return CancelOpResponsePayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{1, 2, 3}))
-                .cancellationResult(CancellationResult.of(CancellationResult.Standard.CANCELED))
-                .build();
-    }
+  @Override
+  public CancelOpResponsePayload createDefault() {
+    return CancelOpResponsePayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {1, 2, 3}))
+        .cancellationResult(CancellationResult.of(CancellationResult.Standard.CANCELED))
+        .build();
+  }
 
-    @Override
-    public CancelOpResponsePayload createVariant() {
-        return CancelOpResponsePayload.builder()
-                .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[]{4, 5, 6}))
-                .cancellationResult(CancellationResult.of(CancellationResult.Standard.UNABLE_TO_CANCEL))
-                .build();
-    }
+  @Override
+  public CancelOpResponsePayload createVariant() {
+    return CancelOpResponsePayload
+        .builder()
+        .asynchronousCorrelationValue(AsynchronousCorrelationValue.of(new byte[] {4, 5, 6}))
+        .cancellationResult(CancellationResult.of(CancellationResult.Standard.UNABLE_TO_CANCEL))
+        .build();
+  }
 }

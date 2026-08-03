@@ -3,5 +3,6 @@ package org.purpleBean.kmip.codec.json.serializer.model.v3_0.structure.response.
 import org.purpleBean.kmip.codec.json.serializer.api.AbstractKmipDataTypeJsonSerializer;
 import org.purpleBean.kmip.model.v3_0.structure.response.payload.CreateKeyPairOpResponsePayload;
 
-public class CreateKeyPairOpResponsePayloadJsonSerializer extends AbstractKmipDataTypeJsonSerializer<CreateKeyPairOpResponsePayload> {
+public class CreateKeyPairOpResponsePayloadJsonSerializer
+    extends AbstractKmipDataTypeJsonSerializer<CreateKeyPairOpResponsePayload> {
 }

@@ -1,31 +1,32 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.core.enumeration;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purpleBean.kmip.model.core.enumeration.WrappingMethod;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class WrappingMethodTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<WrappingMethod, WrappingMethod.WrappingMethodBuilder> {
 
-public class WrappingMethodTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<WrappingMethod, WrappingMethod.WrappingMethodBuilder> {
+  public WrappingMethodTtlvDeserializer() {
+    super(WrappingMethod.kmipTag, WrappingMethod.encodingType);
+  }
 
-    public WrappingMethodTtlvDeserializer() {
-        super(WrappingMethod.kmipTag, WrappingMethod.encodingType);
-    }
+  @Override
+  protected WrappingMethod.WrappingMethodBuilder createBuilder() {
+    return WrappingMethod.builder();
+  }
 
-    @Override
-    protected WrappingMethod.WrappingMethodBuilder createBuilder() {
-        return WrappingMethod.builder();
-    }
+  @Override
+  protected void setValue(WrappingMethod.WrappingMethodBuilder builder, byte[] tag, byte type,
+                          ByteBuffer p, TtlvMapper mapper) throws IOException {
+    Integer value = mapper.readValue(p, Integer.class);
+    builder.value(WrappingMethod.fromValue(value));
+  }
 
-    @Override
-    protected void setValue(WrappingMethod.WrappingMethodBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        Integer value = mapper.readValue(p, Integer.class);
-        builder.value(WrappingMethod.fromValue(value));
-    }
-
-    @Override
-    protected WrappingMethod build(WrappingMethod.WrappingMethodBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected WrappingMethod build(WrappingMethod.WrappingMethodBuilder builder) {
+    return builder.build();
+  }
 }

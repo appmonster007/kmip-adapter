@@ -9,27 +9,29 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 @DisplayName("KeyWrappingData Json Serialization Tests")
 class KeyWrappingDataJsonTest extends AbstractJsonSerializationTestSuite<KeyWrappingData> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V2_1;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V2_1;
+  }
 
-    @Override
-    public Class<KeyWrappingData> type() {
-        return KeyWrappingData.class;
-    }
+  @Override
+  public Class<KeyWrappingData> type() {
+    return KeyWrappingData.class;
+  }
 
-    @Override
-    public KeyWrappingData createDefault() {
-        return KeyWrappingData.builder()
-                .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
-                .build();
-    }
+  @Override
+  public KeyWrappingData createDefault() {
+    return KeyWrappingData
+        .builder()
+        .wrappingMethod(WrappingMethod.Standard.ENCRYPT.inst())
+        .build();
+  }
 
-    @Override
-    public KeyWrappingData createVariant() {
-        return KeyWrappingData.builder()
-                .wrappingMethod(WrappingMethod.Standard.MAC_SIGN.inst())
-                .build();
-    }
+  @Override
+  public KeyWrappingData createVariant() {
+    return KeyWrappingData
+        .builder()
+        .wrappingMethod(WrappingMethod.Standard.MAC_SIGN.inst())
+        .build();
+  }
 }

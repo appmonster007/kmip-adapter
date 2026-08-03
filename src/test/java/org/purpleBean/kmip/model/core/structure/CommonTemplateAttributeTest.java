@@ -1,5 +1,8 @@
 package org.purpleBean.kmip.model.core.structure;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.purpleBean.kmip.api.EncodingType;
 import org.purpleBean.kmip.api.KmipDataType;
@@ -8,46 +11,44 @@ import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("CommonTemplateAttribute Domain Tests")
 class CommonTemplateAttributeTest extends AbstractKmipStructureTestSuite<CommonTemplateAttribute> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    protected Class<CommonTemplateAttribute> type() {
-        return CommonTemplateAttribute.class;
-    }
+  @Override
+  protected Class<CommonTemplateAttribute> type() {
+    return CommonTemplateAttribute.class;
+  }
 
-    @Override
-    protected CommonTemplateAttribute createDefault() {
-        return CommonTemplateAttribute.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-    }
+  @Override
+  protected CommonTemplateAttribute createDefault() {
+    return CommonTemplateAttribute
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.STRUCTURE;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.STRUCTURE;
+  }
 
-    @Override
-    protected int expectedMinComponentCount() {
-        return 0;
-    }
+  @Override
+  protected int expectedMinComponentCount() {
+    return 0;
+  }
 
-    @Override
-    protected void validateComponents(List<KmipDataType> values) {
-        assertThat(values).hasSize(1);
-        assertThat(values.getFirst()).isInstanceOf(Attribute.class);
-    }
+  @Override
+  protected void validateComponents(List<KmipDataType> values) {
+    assertThat(values).hasSize(1);
+    assertThat(values.getFirst()).isInstanceOf(Attribute.class);
+  }
 }

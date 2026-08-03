@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.codec.ttlv.deserializer.model.v1_2.structure.request.payload;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purpleBean.kmip.codec.ttlv.mapper.TtlvMapper;
@@ -12,40 +14,46 @@ import org.purpleBean.kmip.model.core.type.SplitKeyThreshold;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.CreateSplitKeyOpRequestPayload;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+public class CreateSplitKeyOpRequestPayloadTtlvDeserializer extends
+    AbstractKmipDataTypeTtlvDeserializer<CreateSplitKeyOpRequestPayload,
+        CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder> {
 
-public class CreateSplitKeyOpRequestPayloadTtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<CreateSplitKeyOpRequestPayload, CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder> {
+  public CreateSplitKeyOpRequestPayloadTtlvDeserializer() {
+    super(CreateSplitKeyOpRequestPayload.kmipTag, CreateSplitKeyOpRequestPayload.encodingType);
+  }
 
-    public CreateSplitKeyOpRequestPayloadTtlvDeserializer() {
-        super(CreateSplitKeyOpRequestPayload.kmipTag, CreateSplitKeyOpRequestPayload.encodingType);
+  @Override
+  protected CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder createBuilder() {
+    return CreateSplitKeyOpRequestPayload.builder();
+  }
+
+  @Override
+  protected void setValue(
+      CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder builder, byte[] tag,
+      byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.OBJECT_TYPE ->
+          builder.objectType(mapper.readValue(p, ObjectType.class));
+      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
+          builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+      case KmipTag.Standard.SPLIT_KEY_PARTS ->
+          builder.splitKeyParts(mapper.readValue(p, SplitKeyParts.class));
+      case KmipTag.Standard.SPLIT_KEY_THRESHOLD ->
+          builder.splitKeyThreshold(mapper.readValue(p, SplitKeyThreshold.class));
+      case KmipTag.Standard.SPLIT_KEY_METHOD ->
+          builder.splitKeyMethod(mapper.readValue(p, SplitKeyMethod.class));
+      case KmipTag.Standard.PRIME_FIELD_SIZE ->
+          builder.primeFieldSize(mapper.readValue(p, PrimeFieldSize.class));
+      case KmipTag.Standard.TEMPLATE_ATTRIBUTE ->
+          builder.templateAttribute(mapper.readValue(p, TemplateAttribute.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder createBuilder() {
-        return CreateSplitKeyOpRequestPayload.builder();
-    }
-
-    @Override
-    protected void setValue(CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder builder, byte[] tag, byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(mapper.readValue(p, ObjectType.class));
-            case KmipTag.Standard.UNIQUE_IDENTIFIER ->
-                    builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
-            case KmipTag.Standard.SPLIT_KEY_PARTS -> builder.splitKeyParts(mapper.readValue(p, SplitKeyParts.class));
-            case KmipTag.Standard.SPLIT_KEY_THRESHOLD ->
-                    builder.splitKeyThreshold(mapper.readValue(p, SplitKeyThreshold.class));
-            case KmipTag.Standard.SPLIT_KEY_METHOD -> builder.splitKeyMethod(mapper.readValue(p, SplitKeyMethod.class));
-            case KmipTag.Standard.PRIME_FIELD_SIZE -> builder.primeFieldSize(mapper.readValue(p, PrimeFieldSize.class));
-            case KmipTag.Standard.TEMPLATE_ATTRIBUTE ->
-                    builder.templateAttribute(mapper.readValue(p, TemplateAttribute.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected CreateSplitKeyOpRequestPayload build(CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected CreateSplitKeyOpRequestPayload build(
+      CreateSplitKeyOpRequestPayload.CreateSplitKeyOpRequestPayloadBuilder builder) {
+    return builder.build();
+  }
 }

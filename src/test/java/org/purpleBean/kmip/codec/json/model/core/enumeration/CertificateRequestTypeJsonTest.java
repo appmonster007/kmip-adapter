@@ -5,19 +5,20 @@ import org.purpleBean.kmip.model.core.enumeration.CertificateRequestType;
 import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("CertificateRequestType JSON Serialization")
-class CertificateRequestTypeJsonTest extends AbstractJsonSerializationTestSuite<CertificateRequestType> {
-    @Override
-    public Class<CertificateRequestType> type() {
-        return CertificateRequestType.class;
-    }
+class CertificateRequestTypeJsonTest
+    extends AbstractJsonSerializationTestSuite<CertificateRequestType> {
+  @Override
+  public Class<CertificateRequestType> type() {
+    return CertificateRequestType.class;
+  }
 
-    @Override
-    public CertificateRequestType createDefault() {
-        return CertificateRequestType.Standard.CRMF.inst();
-    }
+  @Override
+  public CertificateRequestType createDefault() {
+    return CertificateRequestType.Standard.CRMF.inst();
+  }
 
-    @Override
-    public CertificateRequestType createVariant() {
-        return CertificateRequestType.Standard.PKCS_10.inst();
-    }
+  @Override
+  public CertificateRequestType createVariant() {
+    return CertificateRequestType.Standard.PKCS_10.inst();
+  }
 }

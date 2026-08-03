@@ -2,29 +2,31 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.core.type;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.core.type.FixedFieldLength;
 
-import java.io.IOException;
+public class FixedFieldLengthXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<FixedFieldLength,
+        FixedFieldLength.FixedFieldLengthBuilder> {
 
-public class FixedFieldLengthXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<FixedFieldLength, FixedFieldLength.FixedFieldLengthBuilder> {
+  public FixedFieldLengthXmlDeserializer() {
+    super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
+  }
 
-    public FixedFieldLengthXmlDeserializer() {
-        super(FixedFieldLength.kmipTag, FixedFieldLength.encodingType);
-    }
+  @Override
+  protected FixedFieldLength.FixedFieldLengthBuilder createBuilder() {
+    return FixedFieldLength.builder();
+  }
 
-    @Override
-    protected FixedFieldLength.FixedFieldLengthBuilder createBuilder() {
-        return FixedFieldLength.builder();
-    }
+  @Override
+  protected void setValue(FixedFieldLength.FixedFieldLengthBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(ctxt.readValue(p, Integer.class));
+  }
 
-    @Override
-    protected void setValue(FixedFieldLength.FixedFieldLengthBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ctxt.readValue(p, Integer.class));
-    }
-
-    @Override
-    protected FixedFieldLength build(FixedFieldLength.FixedFieldLengthBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected FixedFieldLength build(FixedFieldLength.FixedFieldLengthBuilder builder) {
+    return builder.build();
+  }
 }

@@ -2,29 +2,30 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.QueryFunction;
 
-import java.io.IOException;
+public class QueryFunctionJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<QueryFunction, QueryFunction.QueryFunctionBuilder> {
 
-public class QueryFunctionJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<QueryFunction, QueryFunction.QueryFunctionBuilder> {
+  public QueryFunctionJsonDeserializer() {
+    super(QueryFunction.kmipTag, QueryFunction.encodingType);
+  }
 
-    public QueryFunctionJsonDeserializer() {
-        super(QueryFunction.kmipTag, QueryFunction.encodingType);
-    }
+  @Override
+  protected QueryFunction.QueryFunctionBuilder createBuilder() {
+    return QueryFunction.builder();
+  }
 
-    @Override
-    protected QueryFunction.QueryFunctionBuilder createBuilder() {
-        return QueryFunction.builder();
-    }
+  @Override
+  protected void setValue(QueryFunction.QueryFunctionBuilder builder, String tag, String type,
+                          JsonParser p, DeserializationContext ctxt) throws IOException {
+    builder.value(QueryFunction.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(QueryFunction.QueryFunctionBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(QueryFunction.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected QueryFunction build(QueryFunction.QueryFunctionBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected QueryFunction build(QueryFunction.QueryFunctionBuilder builder) {
+    return builder.build();
+  }
 }

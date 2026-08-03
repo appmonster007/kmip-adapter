@@ -7,18 +7,21 @@ import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 @DisplayName("RevocationMessage Domain Tests")
 class RevocationMessageTest extends AbstractKmipDataTypeTestSuite<RevocationMessage> {
 
-    @Override
-    protected Class<RevocationMessage> type() {
-        return RevocationMessage.class;
-    }
+  @Override
+  protected Class<RevocationMessage> type() {
+    return RevocationMessage.class;
+  }
 
-    @Override
-    protected RevocationMessage createDefault() {
-        return RevocationMessage.builder().value("test-revocation-message").build();
-    }
+  @Override
+  protected RevocationMessage createDefault() {
+    return RevocationMessage
+        .builder()
+        .value("test-revocation-message")
+        .build();
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

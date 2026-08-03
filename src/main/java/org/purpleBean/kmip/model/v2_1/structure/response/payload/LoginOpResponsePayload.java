@@ -1,17 +1,20 @@
 package org.purpleBean.kmip.model.v2_1.structure.response.payload;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
-import org.purpleBean.kmip.model.core.enumeration.Operation;
-import org.purpleBean.kmip.model.v2_1.structure.Ticket;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipContext;
+import org.purpleBean.kmip.api.KmipDataType;
+import org.purpleBean.kmip.api.KmipSpec;
+import org.purpleBean.kmip.api.KmipTag;
+import org.purpleBean.kmip.api.response.ResponsePayloadStructure;
+import org.purpleBean.kmip.model.core.enumeration.Operation;
+import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 
 /**
  * KMIP Login Response Payload (V2.1+, §6.1.30).
@@ -25,57 +28,76 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class LoginOpResponsePayload implements ResponsePayloadStructure {
 
-    private static final Operation.Value operation = Operation.Standard.LOGIN;
-    private static final Set<KmipSpec> supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
+  private static final Operation.Value operation = Operation.Standard.LOGIN;
+  private static final Set<KmipSpec> supportedVersions =
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
-    static {
-        for (KmipSpec spec : supportedVersions) {
-            if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) continue;
-            KmipDataType.register(spec, kmipTag.getValue(), encodingType, LoginOpResponsePayload.class);
-            ResponsePayloadStructure.register(spec, operation, LoginOpResponsePayload.class, LoginOpResponsePayload::of);
-        }
+  static {
+    for (KmipSpec spec : supportedVersions) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion) {
+        continue;
+      }
+      KmipDataType.register(spec, kmipTag.getValue(), encodingType, LoginOpResponsePayload.class);
+      ResponsePayloadStructure.register(spec, operation, LoginOpResponsePayload.class,
+          LoginOpResponsePayload::of);
     }
+  }
 
-    @NonNull
-    private final Ticket ticket;
+  @NonNull
+  private final Ticket ticket;
 
-    @Builder
-    private LoginOpResponsePayload(@NonNull Ticket ticket) {
-        this.ticket = ticket;
-        validate();
+  @Builder
+  private LoginOpResponsePayload(@NonNull Ticket ticket) {
+    this.ticket = ticket;
+    validate();
+  }
+
+  public static LoginOpResponsePayload of(List<KmipDataType> values) {
+    var builder = LoginOpResponsePayload.builder();
+    values.forEach(value -> {
+      if (value instanceof Ticket) {
+        builder.ticket((Ticket) value);
+      }
+    });
+    return builder.build();
+  }
+
+  private void validate() {
+    if (!isSupported()) {
+      throw new IllegalArgumentException(
+          String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
+  }
 
-    public static LoginOpResponsePayload of(List<KmipDataType> values) {
-        var builder = LoginOpResponsePayload.builder();
-        values.forEach(value -> {
-            if (value instanceof Ticket) builder.ticket((Ticket) value);
-        });
-        return builder.build();
-    }
+  @Override
+  public KmipTag getKmipTag() {
+    return kmipTag;
+  }
 
-    private void validate() {
-        if (!isSupported()) {
-            throw new IllegalArgumentException(String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
-        }
-    }
+  @Override
+  public EncodingType getEncodingType() {
+    return encodingType;
+  }
 
-    @Override
-    public KmipTag getKmipTag() { return kmipTag; }
+  @Override
+  public boolean isSupported() {
+    KmipSpec spec = KmipContext.getSpec();
+    return supportedVersions.contains(spec) && Stream
+        .of(getValue())
+        .allMatch(KmipDataType::isSupported);
+  }
 
-    @Override
-    public EncodingType getEncodingType() { return encodingType; }
+  @Override
+  public KmipDataType[] getValue() {
+    return Stream
+        .of(ticket)
+        .filter(Objects::nonNull)
+        .map(KmipDataType.class::cast)
+        .toArray(KmipDataType[]::new);
+  }
 
-    @Override
-    public boolean isSupported() {
-        KmipSpec spec = KmipContext.getSpec();
-        return supportedVersions.contains(spec) && Stream.of(getValue()).allMatch(KmipDataType::isSupported);
-    }
-
-    @Override
-    public KmipDataType[] getValue() {
-        return Stream.of(ticket).filter(Objects::nonNull).map(KmipDataType.class::cast).toArray(KmipDataType[]::new);
-    }
-
-    @Override
-    public Operation getCorrespondingOperation() { return operation.inst(); }
+  @Override
+  public Operation getCorrespondingOperation() {
+    return operation.inst();
+  }
 }

@@ -9,33 +9,36 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.MacVerifyOpReque
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("MacVerifyOpRequestPayload Ttlv Serialization Tests")
-class MacVerifyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<MacVerifyOpRequestPayload> {
+class MacVerifyOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<MacVerifyOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<MacVerifyOpRequestPayload> type() {
-        return MacVerifyOpRequestPayload.class;
-    }
+  @Override
+  public Class<MacVerifyOpRequestPayload> type() {
+    return MacVerifyOpRequestPayload.class;
+  }
 
-    @Override
-    public MacVerifyOpRequestPayload createDefault() {
-        return MacVerifyOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .data(DataByteString.of(new byte[]{1, 2, 3}))
-                .macData(MacData.of(new byte[]{4, 5, 6}))
-                .build();
-    }
+  @Override
+  public MacVerifyOpRequestPayload createDefault() {
+    return MacVerifyOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .data(DataByteString.of(new byte[] {1, 2, 3}))
+        .macData(MacData.of(new byte[] {4, 5, 6}))
+        .build();
+  }
 
-    @Override
-    public MacVerifyOpRequestPayload createVariant() {
-        return MacVerifyOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .data(DataByteString.of(new byte[]{7, 8, 9}))
-                .macData(MacData.of(new byte[]{10, 11, 12}))
-                .build();
-    }
+  @Override
+  public MacVerifyOpRequestPayload createVariant() {
+    return MacVerifyOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .data(DataByteString.of(new byte[] {7, 8, 9}))
+        .macData(MacData.of(new byte[] {10, 11, 12}))
+        .build();
+  }
 }

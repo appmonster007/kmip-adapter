@@ -1,38 +1,31 @@
 package org.purpleBean.kmip.model.v2_1.type;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.purpleBean.kmip.api.EncodingType;
+import org.purpleBean.kmip.api.KmipSpec;
 import org.purpleBean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
 
 
 @DisplayName("ServerUri Domain Tests")
 class ServerUriTest extends AbstractKmipDataTypeTestSuite<ServerUri> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    protected Class<ServerUri> type() {
-        return ServerUri.class;
-    }
+  @Override
+  protected Class<ServerUri> type() {
+    return ServerUri.class;
+  }
 
-    @Override
-    protected ServerUri createDefault() {
-        return ServerUri.of("default-string");
-    }
+  @Override
+  protected ServerUri createDefault() {
+    return ServerUri.of("default-string");
+  }
 
-    @Override
-    protected EncodingType expectedEncodingType() {
-        return EncodingType.TEXT_STRING;
-    }
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.TEXT_STRING;
+  }
 }

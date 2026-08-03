@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("KeyFormatType JSON Serialization")
 class KeyFormatTypeJsonTest extends AbstractJsonSerializationTestSuite<KeyFormatType> {
-    @Override
-    public Class<KeyFormatType> type() {
-        return KeyFormatType.class;
-    }
+  @Override
+  public Class<KeyFormatType> type() {
+    return KeyFormatType.class;
+  }
 
-    @Override
-    public KeyFormatType createDefault() {
-        return KeyFormatType.Standard.RAW.inst();
-    }
+  @Override
+  public KeyFormatType createDefault() {
+    return KeyFormatType.Standard.RAW.inst();
+  }
 
-    @Override
-    public KeyFormatType createVariant() {
-        return KeyFormatType.Standard.OPAQUE.inst();
-    }
+  @Override
+  public KeyFormatType createVariant() {
+    return KeyFormatType.Standard.OPAQUE.inst();
+  }
 }

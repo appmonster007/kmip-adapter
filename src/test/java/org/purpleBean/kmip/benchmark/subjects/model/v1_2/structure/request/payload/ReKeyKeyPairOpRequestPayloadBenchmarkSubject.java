@@ -11,34 +11,45 @@ import org.purpleBean.kmip.model.core.type.Offset;
 import org.purpleBean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ReKeyKeyPairOpRequestPayload;
 
-public class ReKeyKeyPairOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<ReKeyKeyPairOpRequestPayload> {
+public class ReKeyKeyPairOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<ReKeyKeyPairOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public ReKeyKeyPairOpRequestPayloadBenchmarkSubject() throws Exception {
-        ReKeyKeyPairOpRequestPayload subject = ReKeyKeyPairOpRequestPayload.builder()
-                .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier.builder().value("private-uid").build())
-                .offset(Offset.builder().value(100).build())
-                .commonTemplateAttribute(CommonTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .privateKeyTemplateAttribute(PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .publicKeyTemplateAttribute(PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
-                .build();
-        initialize(subject, ReKeyKeyPairOpRequestPayload.class);
-    }
+  public ReKeyKeyPairOpRequestPayloadBenchmarkSubject() throws Exception {
+    ReKeyKeyPairOpRequestPayload subject = ReKeyKeyPairOpRequestPayload
+        .builder()
+        .privateKeyUniqueIdentifier(PrivateKeyUniqueIdentifier
+            .builder()
+            .value("private-uid")
+            .build())
+        .offset(Offset
+            .builder()
+            .value(100)
+            .build())
+        .commonTemplateAttribute(
+            CommonTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .privateKeyTemplateAttribute(
+            PrivateKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .publicKeyTemplateAttribute(
+            PublicKeyTemplateAttribute.of(java.util.List.of(), java.util.List.of()))
+        .build();
+    initialize(subject, ReKeyKeyPairOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "ReKeyKeyPairOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "ReKeyKeyPairOpRequestPayload";
+  }
 
-    @Override
-    public void setup() throws Exception {
-        KmipContext.setSpec(spec);
-    }
+  @Override
+  public void setup() throws Exception {
+    KmipContext.setSpec(spec);
+  }
 
-    @Override
-    public void tearDown() {
-        KmipContext.clear();
-    }
+  @Override
+  public void tearDown() {
+    KmipContext.clear();
+  }
 }

@@ -6,20 +6,22 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpRequestPayload;
 
-public class ObtainLeaseOpRequestPayloadBenchmarkSubject extends KmipBenchmarkSubject<ObtainLeaseOpRequestPayload> {
+public class ObtainLeaseOpRequestPayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<ObtainLeaseOpRequestPayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ObtainLeaseOpRequestPayloadBenchmarkSubject() throws Exception {
-        ObtainLeaseOpRequestPayload subject = ObtainLeaseOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-        initialize(subject, ObtainLeaseOpRequestPayload.class);
-    }
+  public ObtainLeaseOpRequestPayloadBenchmarkSubject() throws Exception {
+    ObtainLeaseOpRequestPayload subject = ObtainLeaseOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+    initialize(subject, ObtainLeaseOpRequestPayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "ObtainLeaseOpRequestPayload";
-    }
+  @Override
+  public String name() {
+    return "ObtainLeaseOpRequestPayload";
+  }
 }

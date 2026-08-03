@@ -7,18 +7,24 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 @DisplayName("ExtensionTag XML Serialization Tests")
 class ExtensionTagXmlTest extends AbstractXmlSerializationTestSuite<ExtensionTag> {
 
-    @Override
-    public Class<ExtensionTag> type() {
-        return ExtensionTag.class;
-    }
+  @Override
+  public Class<ExtensionTag> type() {
+    return ExtensionTag.class;
+  }
 
-    @Override
-    public ExtensionTag createDefault() {
-        return ExtensionTag.builder().value(1).build();
-    }
+  @Override
+  public ExtensionTag createDefault() {
+    return ExtensionTag
+        .builder()
+        .value(1)
+        .build();
+  }
 
-    @Override
-    public ExtensionTag createVariant() {
-        return ExtensionTag.builder().value(2).build();
-    }
+  @Override
+  public ExtensionTag createVariant() {
+    return ExtensionTag
+        .builder()
+        .value(2)
+        .build();
+  }
 }

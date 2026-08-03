@@ -5,14 +5,15 @@ import org.purpleBean.kmip.model.core.enumeration.AlternativeNameType;
 
 public class AlternativeNameTypeBenchmarkSubject extends KmipBenchmarkSubject<AlternativeNameType> {
 
-    public AlternativeNameTypeBenchmarkSubject() throws Exception {
-        AlternativeNameType alternativeNameType = AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
-        initialize(alternativeNameType, AlternativeNameType.class);
-    }
+  public AlternativeNameTypeBenchmarkSubject() throws Exception {
+    AlternativeNameType alternativeNameType =
+        AlternativeNameType.Standard.UNINTERPRETED_TEXT_STRING.inst();
+    initialize(alternativeNameType, AlternativeNameType.class);
+  }
 
-    @Override
-    public String name() {
-        return "AlternativeNameType";
-    }
+  @Override
+  public String name() {
+    return "AlternativeNameType";
+  }
 
 }

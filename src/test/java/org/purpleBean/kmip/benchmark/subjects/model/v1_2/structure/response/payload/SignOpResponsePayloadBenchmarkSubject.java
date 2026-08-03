@@ -7,21 +7,23 @@ import org.purpleBean.kmip.model.core.type.SignatureData;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.SignOpResponsePayload;
 
-public class SignOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<SignOpResponsePayload> {
+public class SignOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<SignOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public SignOpResponsePayloadBenchmarkSubject() throws Exception {
-        SignOpResponsePayload subject = SignOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .signatureData(SignatureData.of(new byte[]{1, 2, 3}))
-                .build();
-        initialize(subject, SignOpResponsePayload.class);
-    }
+  public SignOpResponsePayloadBenchmarkSubject() throws Exception {
+    SignOpResponsePayload subject = SignOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .signatureData(SignatureData.of(new byte[] {1, 2, 3}))
+        .build();
+    initialize(subject, SignOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "SignOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "SignOpResponsePayload";
+  }
 }

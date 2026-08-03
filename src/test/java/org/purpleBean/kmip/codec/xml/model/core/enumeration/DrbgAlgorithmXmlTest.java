@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DrbgAlgorithm XML Serialization")
 class DrbgAlgorithmXmlTest extends AbstractXmlSerializationTestSuite<DrbgAlgorithm> {
-    @Override
-    public Class<DrbgAlgorithm> type() {
-        return DrbgAlgorithm.class;
-    }
+  @Override
+  public Class<DrbgAlgorithm> type() {
+    return DrbgAlgorithm.class;
+  }
 
-    @Override
-    public DrbgAlgorithm createDefault() {
-        return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public DrbgAlgorithm createDefault() {
+    return DrbgAlgorithm.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public DrbgAlgorithm createVariant() {
-        return DrbgAlgorithm.Standard.DUAL_EC.inst();
-    }
+  @Override
+  public DrbgAlgorithm createVariant() {
+    return DrbgAlgorithm.Standard.DUAL_EC.inst();
+  }
 }

@@ -8,18 +8,19 @@ import org.purpleBean.kmip.model.core.type.UsageLimitsTotal;
 
 public class UsageLimitsBenchmarkSubject extends KmipBenchmarkSubject<UsageLimits> {
 
-    public UsageLimitsBenchmarkSubject() throws Exception {
-        UsageLimits usageLimits = UsageLimits.builder()
-                .usageLimitsTotal(UsageLimitsTotal.of(100L))
-                .usageLimitsCount(UsageLimitsCount.of(10L))
-                .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
-                .build();
-        initialize(usageLimits, UsageLimits.class);
-    }
+  public UsageLimitsBenchmarkSubject() throws Exception {
+    UsageLimits usageLimits = UsageLimits
+        .builder()
+        .usageLimitsTotal(UsageLimitsTotal.of(100L))
+        .usageLimitsCount(UsageLimitsCount.of(10L))
+        .usageLimitsUnit(UsageLimitsUnit.Standard.BYTE.inst())
+        .build();
+    initialize(usageLimits, UsageLimits.class);
+  }
 
-    @Override
-    public String name() {
-        return "UsageLimits";
-    }
+  @Override
+  public String name() {
+    return "UsageLimits";
+  }
 
 }

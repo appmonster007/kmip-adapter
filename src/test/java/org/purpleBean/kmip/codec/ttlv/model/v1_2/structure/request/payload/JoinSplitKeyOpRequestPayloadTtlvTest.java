@@ -8,33 +8,36 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.JoinSplitKeyOpRe
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("JoinSplitKeyOpRequestPayload Ttlv Serialization Tests")
-class JoinSplitKeyOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<JoinSplitKeyOpRequestPayload> {
+class JoinSplitKeyOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<JoinSplitKeyOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<JoinSplitKeyOpRequestPayload> type() {
-        return JoinSplitKeyOpRequestPayload.class;
-    }
+  @Override
+  public Class<JoinSplitKeyOpRequestPayload> type() {
+    return JoinSplitKeyOpRequestPayload.class;
+  }
 
-    @Override
-    public JoinSplitKeyOpRequestPayload createDefault() {
-        return JoinSplitKeyOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public JoinSplitKeyOpRequestPayload createDefault() {
+    return JoinSplitKeyOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.SYMMETRIC_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 
-    @Override
-    public JoinSplitKeyOpRequestPayload createVariant() {
-        return JoinSplitKeyOpRequestPayload.builder()
-                .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174003"))
-                .build();
-    }
+  @Override
+  public JoinSplitKeyOpRequestPayload createVariant() {
+    return JoinSplitKeyOpRequestPayload
+        .builder()
+        .objectType(ObjectType.Standard.PRIVATE_KEY.inst())
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174002"))
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174003"))
+        .build();
+  }
 }

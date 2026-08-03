@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.enumeration.PaddingMethod;
 
 public class PaddingMethodBenchmarkSubject extends KmipBenchmarkSubject<PaddingMethod> {
 
-    public PaddingMethodBenchmarkSubject() throws Exception {
-        PaddingMethod paddingMethod = PaddingMethod.Standard.NONE.inst();
-        initialize(paddingMethod, PaddingMethod.class);
-    }
+  public PaddingMethodBenchmarkSubject() throws Exception {
+    PaddingMethod paddingMethod = PaddingMethod.Standard.NONE.inst();
+    initialize(paddingMethod, PaddingMethod.class);
+  }
 
-    @Override
-    public String name() {
-        return "PaddingMethod";
-    }
+  @Override
+  public String name() {
+    return "PaddingMethod";
+  }
 
 }

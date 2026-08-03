@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ArchiveOpRequest
 import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("ArchiveOpRequestPayload Xml Serialization Tests")
-class ArchiveOpRequestPayloadXmlTest extends AbstractXmlSerializationTestSuite<ArchiveOpRequestPayload> {
+class ArchiveOpRequestPayloadXmlTest
+    extends AbstractXmlSerializationTestSuite<ArchiveOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ArchiveOpRequestPayload> type() {
-        return ArchiveOpRequestPayload.class;
-    }
+  @Override
+  public Class<ArchiveOpRequestPayload> type() {
+    return ArchiveOpRequestPayload.class;
+  }
 
-    @Override
-    public ArchiveOpRequestPayload createDefault() {
-        return ArchiveOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public ArchiveOpRequestPayload createDefault() {
+    return ArchiveOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public ArchiveOpRequestPayload createVariant() {
-        return ArchiveOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public ArchiveOpRequestPayload createVariant() {
+    return ArchiveOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

@@ -8,8 +8,9 @@ import java.io.IOException;
 
 public class IntegerJsonSerializer extends JsonSerializer<Integer> {
 
-    @Override
-    public void serialize(Integer value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeNumber(value);
-    }
+  @Override
+  public void serialize(Integer value, JsonGenerator gen, SerializerProvider serializers)
+      throws IOException {
+    gen.writeNumber(value);
+  }
 }

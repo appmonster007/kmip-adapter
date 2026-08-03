@@ -6,18 +6,18 @@ import org.purpleBean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("DestroyAction XML Serialization")
 class DestroyActionXmlTest extends AbstractXmlSerializationTestSuite<DestroyAction> {
-    @Override
-    public Class<DestroyAction> type() {
-        return DestroyAction.class;
-    }
+  @Override
+  public Class<DestroyAction> type() {
+    return DestroyAction.class;
+  }
 
-    @Override
-    public DestroyAction createDefault() {
-        return DestroyAction.Standard.UNSPECIFIED.inst();
-    }
+  @Override
+  public DestroyAction createDefault() {
+    return DestroyAction.Standard.UNSPECIFIED.inst();
+  }
 
-    @Override
-    public DestroyAction createVariant() {
-        return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
-    }
+  @Override
+  public DestroyAction createVariant() {
+    return DestroyAction.Standard.KEY_MATERIAL_DELETED.inst();
+  }
 }

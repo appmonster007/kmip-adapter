@@ -2,43 +2,39 @@ package org.purpleBean.kmip.codec.xml.deserializer.model.v2_1.structure.response
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import org.purpleBean.kmip.*;
-import org.purpleBean.kmip.api.*;
-import org.purpleBean.kmip.model.core.enumeration.*;
-import org.purpleBean.kmip.model.core.structure.*;
-import org.purpleBean.kmip.model.core.type.*;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.io.IOException;
+import org.purpleBean.kmip.api.KmipTag;
 import org.purpleBean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purpleBean.kmip.model.v2_1.structure.Ticket;
 import org.purpleBean.kmip.model.v2_1.structure.response.payload.DelegatedLoginOpResponsePayload;
 
-import java.io.IOException;
+public class DelegatedLoginOpResponsePayloadXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<DelegatedLoginOpResponsePayload,
+        DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder> {
 
-public class DelegatedLoginOpResponsePayloadXmlDeserializer extends AbstractKmipDataTypeXmlDeserializer<DelegatedLoginOpResponsePayload, DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder> {
+  public DelegatedLoginOpResponsePayloadXmlDeserializer() {
+    super(DelegatedLoginOpResponsePayload.kmipTag, DelegatedLoginOpResponsePayload.encodingType);
+  }
 
-    public DelegatedLoginOpResponsePayloadXmlDeserializer() {
-        super(DelegatedLoginOpResponsePayload.kmipTag, DelegatedLoginOpResponsePayload.encodingType);
+  @Override
+  protected DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder createBuilder() {
+    return DelegatedLoginOpResponsePayload.builder();
+  }
+
+  @Override
+  protected void setValue(
+      DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder builder, String tag,
+      String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.TICKET -> builder.ticket(ctxt.readValue(p, Ticket.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
+  }
 
-    @Override
-    protected DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder createBuilder() {
-        return DelegatedLoginOpResponsePayload.builder();
-    }
-
-    @Override
-    protected void setValue(DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        KmipTag.Value nodeTag = KmipTag.fromName(tag);
-        switch (nodeTag) {
-            case KmipTag.Standard.TICKET -> builder.ticket(ctxt.readValue(p, Ticket.class));
-            default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
-        }
-    }
-
-    @Override
-    protected DelegatedLoginOpResponsePayload build(DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected DelegatedLoginOpResponsePayload build(
+      DelegatedLoginOpResponsePayload.DelegatedLoginOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
 }

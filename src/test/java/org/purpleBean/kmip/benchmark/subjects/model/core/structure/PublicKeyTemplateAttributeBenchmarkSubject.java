@@ -8,24 +8,27 @@ import org.purpleBean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import org.purpleBean.kmip.model.core.type.AttributeName;
 import org.purpleBean.kmip.model.core.type.AttributeValue;
 
-public class PublicKeyTemplateAttributeBenchmarkSubject extends KmipBenchmarkSubject<PublicKeyTemplateAttribute> {
+public class PublicKeyTemplateAttributeBenchmarkSubject
+    extends KmipBenchmarkSubject<PublicKeyTemplateAttribute> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public PublicKeyTemplateAttributeBenchmarkSubject() throws Exception {
-        PublicKeyTemplateAttribute subject = PublicKeyTemplateAttribute.builder()
-                .attribute(Attribute.builder()
-                        .attributeName(AttributeName.of("test-attribute"))
-                        .attributeValue(AttributeValue.ofInteger(1))
-                        .build())
-                .build();
-        initialize(subject, PublicKeyTemplateAttribute.class);
-    }
+  public PublicKeyTemplateAttributeBenchmarkSubject() throws Exception {
+    PublicKeyTemplateAttribute subject = PublicKeyTemplateAttribute
+        .builder()
+        .attribute(Attribute
+            .builder()
+            .attributeName(AttributeName.of("test-attribute"))
+            .attributeValue(AttributeValue.ofInteger(1))
+            .build())
+        .build();
+    initialize(subject, PublicKeyTemplateAttribute.class);
+  }
 
-    @Override
-    public String name() {
-        return "PublicKeyTemplateAttribute";
-    }
+  @Override
+  public String name() {
+    return "PublicKeyTemplateAttribute";
+  }
 
 }

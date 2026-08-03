@@ -9,21 +9,24 @@ import org.purpleBean.kmip.model.core.type.AttributeValue;
 import org.purpleBean.kmip.model.core.type.UniqueIdentifier;
 import org.purpleBean.kmip.model.v1_2.structure.response.payload.DeleteAttributeOpResponsePayload;
 
-public class DeleteAttributeOpResponsePayloadBenchmarkSubject extends KmipBenchmarkSubject<DeleteAttributeOpResponsePayload> {
+public class DeleteAttributeOpResponsePayloadBenchmarkSubject
+    extends KmipBenchmarkSubject<DeleteAttributeOpResponsePayload> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public DeleteAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
-        DeleteAttributeOpResponsePayload subject = DeleteAttributeOpResponsePayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .attribute(Attribute.of(AttributeName.of("test-attribute"), AttributeValue.ofTextString("test-value")))
-                .build();
-        initialize(subject, DeleteAttributeOpResponsePayload.class);
-    }
+  public DeleteAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
+    DeleteAttributeOpResponsePayload subject = DeleteAttributeOpResponsePayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .attribute(Attribute.of(AttributeName.of("test-attribute"),
+            AttributeValue.ofTextString("test-value")))
+        .build();
+    initialize(subject, DeleteAttributeOpResponsePayload.class);
+  }
 
-    @Override
-    public String name() {
-        return "DeleteAttributeOpResponsePayload";
-    }
+  @Override
+  public String name() {
+    return "DeleteAttributeOpResponsePayload";
+  }
 }

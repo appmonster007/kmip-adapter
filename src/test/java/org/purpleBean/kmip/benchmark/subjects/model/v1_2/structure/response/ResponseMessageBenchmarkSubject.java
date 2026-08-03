@@ -1,5 +1,7 @@
 package org.purpleBean.kmip.benchmark.subjects.model.v1_2.structure.response;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import lombok.Getter;
 import org.purpleBean.kmip.api.KmipContext;
 import org.purpleBean.kmip.api.KmipSpec;
@@ -15,34 +17,35 @@ import org.purpleBean.kmip.model.v1_2.structure.response.ResponseBatchItem;
 import org.purpleBean.kmip.model.v1_2.structure.response.ResponseHeader;
 import org.purpleBean.kmip.model.v1_2.structure.response.ResponseMessage;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
 public class ResponseMessageBenchmarkSubject extends KmipBenchmarkSubject<ResponseMessage> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.V1_2;
+  @Getter
+  private final KmipSpec spec = KmipSpec.V1_2;
 
-    public ResponseMessageBenchmarkSubject() throws Exception {
-        KmipContext.setSpec(spec);
-        ResponseMessage subject = ResponseMessage.builder()
-                .responseHeader(ResponseHeader.builder()
-                        .protocolVersion(ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
-                        .timeStamp(TimeStamp.of(OffsetDateTime.now(ZoneOffset.UTC)))
-                        .batchCount(BatchCount.of(1))
-                        .build())
-                .responseBatchItem(ResponseBatchItem.builder()
-                        .operation(Operation.of(Operation.Standard.CREATE))
-                        .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
-                        .build())
-                .responseBatchItemError(null)
-                .build();
-        initialize(subject, ResponseMessage.class);
-        KmipContext.clear();
-    }
+  public ResponseMessageBenchmarkSubject() throws Exception {
+    KmipContext.setSpec(spec);
+    ResponseMessage subject = ResponseMessage
+        .builder()
+        .responseHeader(ResponseHeader
+            .builder()
+            .protocolVersion(
+                ProtocolVersion.of(ProtocolVersionMajor.of(1), ProtocolVersionMinor.of(2)))
+            .timeStamp(TimeStamp.of(OffsetDateTime.now(ZoneOffset.UTC)))
+            .batchCount(BatchCount.of(1))
+            .build())
+        .responseBatchItem(ResponseBatchItem
+            .builder()
+            .operation(Operation.of(Operation.Standard.CREATE))
+            .resultStatus(ResultStatus.of(ResultStatus.Standard.SUCCESS))
+            .build())
+        .responseBatchItemError(null)
+        .build();
+    initialize(subject, ResponseMessage.class);
+    KmipContext.clear();
+  }
 
-    @Override
-    public String name() {
-        return "ResponseMessage";
-    }
+  @Override
+  public String name() {
+    return "ResponseMessage";
+  }
 }

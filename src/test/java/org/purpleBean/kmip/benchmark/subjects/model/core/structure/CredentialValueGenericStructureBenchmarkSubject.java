@@ -6,21 +6,23 @@ import org.purpleBean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purpleBean.kmip.model.core.structure.CredentialValueGenericStructure;
 import org.purpleBean.kmip.model.core.type.Username;
 
-public class CredentialValueGenericStructureBenchmarkSubject extends KmipBenchmarkSubject<CredentialValueGenericStructure> {
+public class CredentialValueGenericStructureBenchmarkSubject
+    extends KmipBenchmarkSubject<CredentialValueGenericStructure> {
 
-    @Getter
-    private final KmipSpec spec = KmipSpec.UnknownVersion;
+  @Getter
+  private final KmipSpec spec = KmipSpec.UnknownVersion;
 
-    public CredentialValueGenericStructureBenchmarkSubject() throws Exception {
-        CredentialValueGenericStructure subject = CredentialValueGenericStructure.builder()
-                .value(Username.of("test-value"))
-                .build();
-        initialize(subject, CredentialValueGenericStructure.class);
-    }
+  public CredentialValueGenericStructureBenchmarkSubject() throws Exception {
+    CredentialValueGenericStructure subject = CredentialValueGenericStructure
+        .builder()
+        .value(Username.of("test-value"))
+        .build();
+    initialize(subject, CredentialValueGenericStructure.class);
+  }
 
-    @Override
-    public String name() {
-        return "CredentialValueGenericStructure";
-    }
+  @Override
+  public String name() {
+    return "CredentialValueGenericStructure";
+  }
 
 }

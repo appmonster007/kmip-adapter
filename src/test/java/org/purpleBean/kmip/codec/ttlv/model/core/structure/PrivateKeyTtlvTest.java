@@ -10,31 +10,35 @@ import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 @DisplayName("PrivateKey Ttlv Serialization Tests")
 class PrivateKeyTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateKey> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.UnknownVersion;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.UnknownVersion;
+  }
 
-    @Override
-    public Class<PrivateKey> type() {
-        return PrivateKey.class;
-    }
+  @Override
+  public Class<PrivateKey> type() {
+    return PrivateKey.class;
+  }
 
-    @Override
-    public PrivateKey createDefault() {
-        return PrivateKey.builder()
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
-                        .build())
-                .build();
-    }
+  @Override
+  public PrivateKey createDefault() {
+    return PrivateKey
+        .builder()
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.OPAQUE.inst())
+            .build())
+        .build();
+  }
 
-    @Override
-    public PrivateKey createVariant() {
-        return PrivateKey.builder()
-                .keyBlock(KeyBlock.builder()
-                        .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
-                        .build())
-                .build();
-    }
+  @Override
+  public PrivateKey createVariant() {
+    return PrivateKey
+        .builder()
+        .keyBlock(KeyBlock
+            .builder()
+            .keyFormatType(KeyFormatType.Standard.PKCS_1.inst())
+            .build())
+        .build();
+  }
 }

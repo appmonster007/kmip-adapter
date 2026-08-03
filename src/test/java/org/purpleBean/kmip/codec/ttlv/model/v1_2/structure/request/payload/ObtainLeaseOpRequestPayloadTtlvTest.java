@@ -7,29 +7,32 @@ import org.purpleBean.kmip.model.v1_2.structure.request.payload.ObtainLeaseOpReq
 import org.purpleBean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
 @DisplayName("ObtainLeaseOpRequestPayload Ttlv Serialization Tests")
-class ObtainLeaseOpRequestPayloadTtlvTest extends AbstractTtlvSerializationTestSuite<ObtainLeaseOpRequestPayload> {
+class ObtainLeaseOpRequestPayloadTtlvTest
+    extends AbstractTtlvSerializationTestSuite<ObtainLeaseOpRequestPayload> {
 
-    @Override
-    protected void setupDefaultSpec() {
-        defaultSpec = KmipSpec.V1_2;
-    }
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V1_2;
+  }
 
-    @Override
-    public Class<ObtainLeaseOpRequestPayload> type() {
-        return ObtainLeaseOpRequestPayload.class;
-    }
+  @Override
+  public Class<ObtainLeaseOpRequestPayload> type() {
+    return ObtainLeaseOpRequestPayload.class;
+  }
 
-    @Override
-    public ObtainLeaseOpRequestPayload createDefault() {
-        return ObtainLeaseOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
-                .build();
-    }
+  @Override
+  public ObtainLeaseOpRequestPayload createDefault() {
+    return ObtainLeaseOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174000"))
+        .build();
+  }
 
-    @Override
-    public ObtainLeaseOpRequestPayload createVariant() {
-        return ObtainLeaseOpRequestPayload.builder()
-                .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
-                .build();
-    }
+  @Override
+  public ObtainLeaseOpRequestPayload createVariant() {
+    return ObtainLeaseOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier.of("123e4567-e89b-12d3-a456-426614174001"))
+        .build();
+  }
 }

@@ -5,14 +5,14 @@ import org.purpleBean.kmip.model.core.type.KeyValuePresent;
 
 public class KeyValuePresentBenchmarkSubject extends KmipBenchmarkSubject<KeyValuePresent> {
 
-    public KeyValuePresentBenchmarkSubject() throws Exception {
-        KeyValuePresent keyValuePresent = KeyValuePresent.of(Boolean.FALSE);
-        initialize(keyValuePresent, KeyValuePresent.class);
-    }
+  public KeyValuePresentBenchmarkSubject() throws Exception {
+    KeyValuePresent keyValuePresent = KeyValuePresent.of(Boolean.FALSE);
+    initialize(keyValuePresent, KeyValuePresent.class);
+  }
 
-    @Override
-    public String name() {
-        return "KeyValuePresent";
-    }
+  @Override
+  public String name() {
+    return "KeyValuePresent";
+  }
 
 }

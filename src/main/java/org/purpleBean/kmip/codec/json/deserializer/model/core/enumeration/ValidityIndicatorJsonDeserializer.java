@@ -2,29 +2,32 @@ package org.purpleBean.kmip.codec.json.deserializer.model.core.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
 import org.purpleBean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purpleBean.kmip.model.core.enumeration.ValidityIndicator;
 
-import java.io.IOException;
+public class ValidityIndicatorJsonDeserializer extends
+    AbstractKmipDataTypeJsonDeserializer<ValidityIndicator,
+        ValidityIndicator.ValidityIndicatorBuilder> {
 
-public class ValidityIndicatorJsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<ValidityIndicator, ValidityIndicator.ValidityIndicatorBuilder> {
+  public ValidityIndicatorJsonDeserializer() {
+    super(ValidityIndicator.kmipTag, ValidityIndicator.encodingType);
+  }
 
-    public ValidityIndicatorJsonDeserializer() {
-        super(ValidityIndicator.kmipTag, ValidityIndicator.encodingType);
-    }
+  @Override
+  protected ValidityIndicator.ValidityIndicatorBuilder createBuilder() {
+    return ValidityIndicator.builder();
+  }
 
-    @Override
-    protected ValidityIndicator.ValidityIndicatorBuilder createBuilder() {
-        return ValidityIndicator.builder();
-    }
+  @Override
+  protected void setValue(ValidityIndicator.ValidityIndicatorBuilder builder, String tag,
+                          String type, JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    builder.value(ValidityIndicator.fromName(ctxt.readValue(p, String.class)));
+  }
 
-    @Override
-    protected void setValue(ValidityIndicator.ValidityIndicatorBuilder builder, String tag, String type, JsonParser p, DeserializationContext ctxt) throws IOException {
-        builder.value(ValidityIndicator.fromName(ctxt.readValue(p, String.class)));
-    }
-
-    @Override
-    protected ValidityIndicator build(ValidityIndicator.ValidityIndicatorBuilder builder) {
-        return builder.build();
-    }
+  @Override
+  protected ValidityIndicator build(ValidityIndicator.ValidityIndicatorBuilder builder) {
+    return builder.build();
+  }
 }
