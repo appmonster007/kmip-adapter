@@ -53,8 +53,8 @@ public class KmipJsonModule extends SimpleModule {
       try {
         addSerializer(ser);
       } catch (Throwable t) {
-        System.err.println("[KmipJsonModule] Failed to register serializer via ServiceLoader: " +
-            ser
+        System.err.println("[KmipJsonModule] Failed to register serializer via ServiceLoader: "
+            + ser
                 .getClass()
                 .getName() + ": " + t.getMessage());
       }
@@ -66,14 +66,14 @@ public class KmipJsonModule extends SimpleModule {
         if (target != null) {
           addDeserializer((Class) target, deser);
         } else {
-          System.err.println("[KmipJsonModule] Could not infer handled type for deserializer: " +
-              deser
+          System.err.println("[KmipJsonModule] Could not infer handled type for deserializer: "
+              + deser
                   .getClass()
                   .getName());
         }
       } catch (Throwable t) {
-        System.err.println("[KmipJsonModule] Failed to register deserializer via ServiceLoader: " +
-            deser
+        System.err.println("[KmipJsonModule] Failed to register deserializer via ServiceLoader: "
+            + deser
                 .getClass()
                 .getName() + ": " + t.getMessage());
       }

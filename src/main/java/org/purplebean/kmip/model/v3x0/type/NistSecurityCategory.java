@@ -58,8 +58,8 @@ public class NistSecurityCategory implements KmipDataType, KmipAttribute {
    */
   public static NistSecurityCategory of(@NonNull AttributeName attributeName,
                                         @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof Integer value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof Integer value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new NistSecurityCategory(value);

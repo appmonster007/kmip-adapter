@@ -61,8 +61,8 @@ public class DestroyDate implements KmipDataType, KmipAttribute {
    */
   public static DestroyDate of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return DestroyDate

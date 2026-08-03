@@ -59,8 +59,8 @@ public class RotateOffset implements KmipDataType, KmipAttribute {
    */
   public static RotateOffset of(@NonNull AttributeName attributeName,
                                 @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof Long value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof Long value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new RotateOffset(value);

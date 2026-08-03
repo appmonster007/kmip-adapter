@@ -61,8 +61,8 @@ public class ArchiveDate implements KmipDataType, KmipAttribute {
    */
   public static ArchiveDate of(@NonNull AttributeName attributeName,
                                @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return ArchiveDate

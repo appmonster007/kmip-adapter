@@ -60,8 +60,8 @@ public class CompromiseDate implements KmipDataType, KmipAttribute {
    */
   public static CompromiseDate of(@NonNull AttributeName attributeName,
                                   @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return CompromiseDate

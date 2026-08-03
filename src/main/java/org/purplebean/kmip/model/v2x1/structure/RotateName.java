@@ -77,8 +77,8 @@ public class RotateName implements KmipStructure, KmipAttribute {
    */
   public static RotateName of(@NonNull AttributeName attributeName,
                               @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     Map<KmipTag, List<KmipDataType>> map = Stream

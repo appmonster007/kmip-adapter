@@ -35,8 +35,8 @@ public final class TtlvConstants {
    * Error message for data too short
    */
   public static final String ERROR_DATA_TOO_SHORT =
-      "Data too short for TTLV format. Minimum required: " + MINIMUM_TTLV_SIZE +
-          " bytes, got: %d bytes";
+      "Data too short for TTLV format. Minimum required: " + MINIMUM_TTLV_SIZE
+          + " bytes, got: %d bytes";
 
   // Byte Order
   /**

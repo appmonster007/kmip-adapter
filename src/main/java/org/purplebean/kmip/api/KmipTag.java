@@ -213,9 +213,9 @@ public class KmipTag {
   }
 
   private static int getValueFromBytes(byte[] bytes) {
-    return ((bytes[0] & 0xFF) << 16) |
-        ((bytes[1] & 0xFF) << 8) |
-        (bytes[2] & 0xFF);
+    return ((bytes[0] & 0xFF) << 16)
+        | ((bytes[1] & 0xFF) << 8)
+        | (bytes[2] & 0xFF);
   }
 
   /**

@@ -89,8 +89,8 @@ public class KmipTtlvModule extends TtlvModule {
         if (target != null) {
           addDeserializer((Class) target, (TtlvDeserializer) deser);
         } else {
-          System.err.println("[KmipTtlvModule] Could not infer handled type for deserializer: " +
-              deser
+          System.err.println("[KmipTtlvModule] Could not infer handled type for deserializer: "
+              + deser
                   .getClass()
                   .getName());
         }
@@ -126,8 +126,8 @@ public class KmipTtlvModule extends TtlvModule {
         if (target != null) {
           addDeserializer((Class) target, (TtlvDeserializer) deser);
         } else {
-          System.err.println("[KmipTtlvModule] Could not infer handled type for deserializer: " +
-              deser
+          System.err.println("[KmipTtlvModule] Could not infer handled type for deserializer: "
+              + deser
                   .getClass()
                   .getName());
         }

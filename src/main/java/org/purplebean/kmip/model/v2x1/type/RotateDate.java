@@ -60,8 +60,8 @@ public class RotateDate implements KmipDataType, KmipAttribute {
    */
   public static RotateDate of(@NonNull AttributeName attributeName,
                               @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new RotateDate(value);

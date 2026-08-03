@@ -97,8 +97,8 @@ public class CertificateType implements KmipEnumeration, KmipAttribute {
         .equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
       throw new IllegalArgumentException("Invalid attribute name");
     }
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
       throw new IllegalArgumentException("Invalid encoding type");
     }
     CertificateType.Value v = fromValue(enumeration.getValue());

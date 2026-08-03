@@ -229,8 +229,8 @@ public class AttributeValue implements KmipDataType, KmipMaskType {
     if (!(o instanceof KmipDataType that)) {
       return false;
     }
-    return encodingType == that.getEncodingType() &&
-        deepEqualsValue(this.value, that.getValue());
+    return encodingType == that.getEncodingType()
+        && deepEqualsValue(this.value, that.getValue());
   }
 
   private boolean deepEqualsValue(Object v1, Object v2) {

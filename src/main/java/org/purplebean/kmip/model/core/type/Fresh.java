@@ -56,8 +56,8 @@ public class Fresh implements KmipDataType, KmipAttribute {
    */
   public static Fresh of(@NonNull AttributeName attributeName,
                          @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof Boolean value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof Boolean value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return Fresh

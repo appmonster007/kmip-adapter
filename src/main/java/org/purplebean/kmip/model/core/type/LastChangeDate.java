@@ -61,8 +61,8 @@ public class LastChangeDate implements KmipDataType, KmipAttribute {
    */
   public static LastChangeDate of(@NonNull AttributeName attributeName,
                                   @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return LastChangeDate

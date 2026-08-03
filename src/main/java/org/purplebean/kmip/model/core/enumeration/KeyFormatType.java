@@ -113,8 +113,8 @@ public class KeyFormatType implements KmipEnumeration, KmipAttribute {
    */
   public static KeyFormatType of(@NonNull AttributeName attributeName,
                                  @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return KeyFormatType

@@ -67,8 +67,8 @@ public class Name implements KmipStructure, KmipAttribute {
    */
   public static Name of(@NonNull AttributeName attributeName,
                         @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     for (KmipDataType component : structure) {

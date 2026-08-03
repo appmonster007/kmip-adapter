@@ -65,14 +65,14 @@ public class KmipXmlModule extends SimpleModule {
         if (target != null) {
           addDeserializer((Class) target, deser);
         } else {
-          System.err.println("[KmipXmlModule] Could not infer handled type for deserializer: " +
-              deser
+          System.err.println("[KmipXmlModule] Could not infer handled type for deserializer: "
+              + deser
                   .getClass()
                   .getName());
         }
       } catch (Throwable t) {
-        System.err.println("[KmipXmlModule] Failed to register deserializer via ServiceLoader: " +
-            deser
+        System.err.println("[KmipXmlModule] Failed to register deserializer via ServiceLoader: "
+            + deser
                 .getClass()
                 .getName() + ": " + t.getMessage());
       }

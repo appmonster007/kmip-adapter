@@ -38,8 +38,8 @@ public class SimpleRequestMessageJsonDeserializer extends
           builder.requestHeader(ctxt.readValue(p, RequestHeaderStructure.class));
       case KmipTag.Standard.BATCH_ITEM -> {
         if (p.isExpectedStartArrayToken()) {
-          while (p.nextToken() !=
-              com.fasterxml.jackson.core.JsonToken.END_ARRAY) { // KMIP JSON profile encodes
+          while (p.nextToken()
+              != com.fasterxml.jackson.core.JsonToken.END_ARRAY) { // KMIP JSON profile encodes
             // multiple batch items as a JSON array
             try {
               builder.requestBatchItem(ctxt.readValue(p, RequestBatchItemStructure.class));

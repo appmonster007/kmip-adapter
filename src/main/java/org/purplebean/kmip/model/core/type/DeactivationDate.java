@@ -59,8 +59,8 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
    */
   public static DeactivationDate of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof OffsetDateTime value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof OffsetDateTime value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return DeactivationDate
@@ -110,8 +110,8 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
 
   @Override
   public boolean isClientModifiable(@NonNull State state) {
-    return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue() ||
-        state.getIntValue() == State.Standard.ACTIVE.getValue();
+    return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
+        || state.getIntValue() == State.Standard.ACTIVE.getValue();
   }
 
   @Override
@@ -141,8 +141,8 @@ public class DeactivationDate implements KmipDataType, KmipAttribute {
 
   @Override
   public boolean isServerModifiable(@NonNull State state) {
-    return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue() ||
-        state.getIntValue() == State.Standard.ACTIVE.getValue();
+    return state.getIntValue() == State.Standard.PRE_ACTIVE.getValue()
+        || state.getIntValue() == State.Standard.ACTIVE.getValue();
   }
 
   @Override

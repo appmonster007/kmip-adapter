@@ -110,8 +110,8 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
    */
   public static CryptographicParameters of(@NonNull AttributeName attributeName,
                                            @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     Map<KmipTag, List<KmipDataType>> map = Stream
@@ -131,12 +131,12 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
         .keyRoleType(map.containsKey(KeyRoleType.kmipTag) ? (KeyRoleType) map
             .get(KeyRoleType.kmipTag)
             .get(0) : null)
-        .digitalSignatureAlgorithm(map.containsKey(DigitalSignatureAlgorithm.kmipTag) ?
-            (DigitalSignatureAlgorithm) map
+        .digitalSignatureAlgorithm(map.containsKey(DigitalSignatureAlgorithm.kmipTag)
+            ? (DigitalSignatureAlgorithm) map
                 .get(DigitalSignatureAlgorithm.kmipTag)
                 .get(0) : null)
-        .cryptographicAlgorithm(map.containsKey(CryptographicAlgorithm.kmipTag) ?
-            (CryptographicAlgorithm) map
+        .cryptographicAlgorithm(map.containsKey(CryptographicAlgorithm.kmipTag)
+            ? (CryptographicAlgorithm) map
                 .get(CryptographicAlgorithm.kmipTag)
                 .get(0) : null)
         .randomIv(map.containsKey(RandomIv.kmipTag) ? (RandomIv) map
@@ -151,15 +151,15 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
         .fixedFieldLength(map.containsKey(FixedFieldLength.kmipTag) ? (FixedFieldLength) map
             .get(FixedFieldLength.kmipTag)
             .get(0) : null)
-        .invocationFieldLength(map.containsKey(InvocationFieldLength.kmipTag) ?
-            (InvocationFieldLength) map
+        .invocationFieldLength(map.containsKey(InvocationFieldLength.kmipTag)
+            ? (InvocationFieldLength) map
                 .get(InvocationFieldLength.kmipTag)
                 .get(0) : null)
         .counterLength(map.containsKey(CounterLength.kmipTag) ? (CounterLength) map
             .get(CounterLength.kmipTag)
             .get(0) : null)
-        .initialCounterValue(map.containsKey(InitialCounterValue.kmipTag) ?
-            (InitialCounterValue) map
+        .initialCounterValue(map.containsKey(InitialCounterValue.kmipTag)
+            ? (InitialCounterValue) map
                 .get(InitialCounterValue.kmipTag)
                 .get(0) : null)
         .build();

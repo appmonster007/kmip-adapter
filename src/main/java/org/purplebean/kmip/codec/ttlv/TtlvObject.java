@@ -294,8 +294,8 @@ public final class TtlvObject {
     }
 
     TtlvObject that = (TtlvObject) o;
-    return type == that.type && length == that.length && Arrays.equals(tag, that.tag) &&
-        Arrays.equals(value, that.value);
+    return type == that.type && length == that.length && Arrays.equals(tag, that.tag)
+        && Arrays.equals(value, that.value);
   }
 
   @Override

@@ -59,8 +59,8 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
    */
   public static ProtectionPeriod of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof Long value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof Long value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new ProtectionPeriod(value);

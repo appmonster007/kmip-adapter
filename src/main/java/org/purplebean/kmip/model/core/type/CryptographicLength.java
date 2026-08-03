@@ -58,8 +58,8 @@ public class CryptographicLength implements KmipAttribute, KmipDataType {
    */
   public static CryptographicLength of(@NonNull AttributeName attributeName,
                                        @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof Integer value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof Integer value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new CryptographicLength(value);

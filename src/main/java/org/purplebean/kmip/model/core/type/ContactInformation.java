@@ -57,8 +57,8 @@ public class ContactInformation implements KmipDataType, KmipAttribute {
    */
   public static ContactInformation of(@NonNull AttributeName attributeName,
                                       @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof String value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof String value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return ContactInformation

@@ -72,8 +72,8 @@ public class X509CertificateSubject implements KmipStructure, KmipAttribute {
    */
   public static X509CertificateSubject of(@NonNull AttributeName attributeName,
                                           @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     Map<KmipTag, List<KmipDataType>> map = Stream

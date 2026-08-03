@@ -60,8 +60,8 @@ public class CertificateSubjectC implements KmipDataType, KmipAttribute {
    */
   public static CertificateSubjectC of(@NonNull AttributeName attributeName,
                                        @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof String value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof String value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new CertificateSubjectC(value);

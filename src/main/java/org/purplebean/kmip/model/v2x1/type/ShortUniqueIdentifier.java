@@ -60,8 +60,8 @@ public class ShortUniqueIdentifier implements KmipDataType, KmipAttribute {
    */
   public static ShortUniqueIdentifier of(@NonNull AttributeName attributeName,
                                          @NonNull AttributeValue attributeValue) {
-    if (attributeValue.getEncodingType() != encodingType ||
-        !(attributeValue.getValue() instanceof ByteBuffer value)) {
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof ByteBuffer value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new ShortUniqueIdentifier(value);

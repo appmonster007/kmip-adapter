@@ -44,8 +44,8 @@ public class TtlvDataType implements KmipDataType {
     validate();
 
     for (KmipSpec spec : kmipTag.getSupportedVersions()) {
-      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion ||
-          !kmipTag.isCustom()) {
+      if (spec == KmipSpec.UnknownVersion || spec == KmipSpec.UnsupportedVersion
+          || !kmipTag.isCustom()) {
         continue;
       }
       KmipDataType.register(spec, kmipTag.getValue(), encodingType, TtlvDataType.class);
@@ -213,9 +213,9 @@ public class TtlvDataType implements KmipDataType {
     if (!(o instanceof KmipDataType that)) {
       return false;
     }
-    return Objects.equals(kmipTag, that.getKmipTag()) &&
-        encodingType == that.getEncodingType() &&
-        deepEqualsValue(this.value, that.getValue());
+    return Objects.equals(kmipTag, that.getKmipTag())
+        && encodingType == that.getEncodingType()
+        && deepEqualsValue(this.value, that.getValue());
   }
 
   private boolean deepEqualsValue(Object v1, Object v2) {
