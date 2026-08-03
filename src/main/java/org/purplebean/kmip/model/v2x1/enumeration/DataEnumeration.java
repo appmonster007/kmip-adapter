@@ -234,6 +234,7 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
   }
 
   // ----- Value hierarchy -----
+
   /**
    * Represents a specific value of the enclosing enumeration.
    */

@@ -91,7 +91,8 @@ public final class TtlvObject {
   }
 
   /**
-   * Parses a sequence of concatenated {@link TtlvObject} instances from the given TTLV-encoded bytes.
+   * Parses a sequence of concatenated {@link TtlvObject} instances from the given TTLV-encoded
+   * bytes.
    */
   public static List<TtlvObject> fromBytesMultiple(byte[] data) {
     Objects.requireNonNull(data, TtlvConstants.ERROR_NULL_DATA);

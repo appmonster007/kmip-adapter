@@ -30,7 +30,7 @@ public class AsynchronousIndicator implements KmipEnumeration {
   public static final KmipTag kmipTag = KmipTag.Standard.ASYNCHRONOUS_INDICATOR.inst();
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
-      // introduced in KMIP 2.1 — extend if present in later specs
+  // introduced in KMIP 2.1 — extend if present in later specs
   private static final Map<Integer, Value> VALUE_REGISTRY = new ConcurrentHashMap<>();
   private static final Map<String, Value> DESCRIPTION_REGISTRY = new ConcurrentHashMap<>();
   private static final Map<String, Value> EXTENSION_DESCRIPTION_REGISTRY =
@@ -223,6 +223,7 @@ public class AsynchronousIndicator implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+
   /**
    * Represents a specific value of the enclosing enumeration.
    */

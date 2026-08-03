@@ -61,6 +61,7 @@ public final class KmipCodecManager {
   }
 
   // Convenience method to serialize using default mapper
+
   /**
    * Serializes the given object using the mapper appropriate for its registered KMIP encoding.
    */
@@ -76,6 +77,7 @@ public final class KmipCodecManager {
   }
 
   // Convenience method to serialize using default mapper
+
   /**
    * Deserializes the given value into an instance of the given type using the mapper
    * appropriate for its registered KMIP encoding.

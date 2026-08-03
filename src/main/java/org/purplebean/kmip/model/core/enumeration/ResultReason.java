@@ -252,7 +252,7 @@ public class ResultReason implements KmipEnumeration {
    * @param name The case-sensitive description of the reason.
    * @return The corresponding {@link Value}.
    * @throws NoSuchElementException if no reason is found for the given name in the current KMIP
-   * context.
+   *                                context.
    */
   public static Value fromName(String name) {
     final String nameLowerCase = name.toLowerCase(Locale.ROOT);
@@ -272,7 +272,7 @@ public class ResultReason implements KmipEnumeration {
    * @param value The integer value of the reason.
    * @return The corresponding {@link Value}.
    * @throws NoSuchElementException if no reason is found for the given value in the current KMIP
-   * context.
+   *                                context.
    */
   public static Value fromValue(int value) {
     KmipSpec spec = KmipContext.getSpec();

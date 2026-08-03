@@ -21,7 +21,7 @@ public class LocatedItems implements KmipDataType {
   public static final EncodingType encodingType = EncodingType.INTEGER;
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
-      // introduced in KMIP 2.1 — extend if present in later specs
+  // introduced in KMIP 2.1 — extend if present in later specs
 
   static {
     for (KmipSpec spec : supportedVersions) {

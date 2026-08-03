@@ -219,6 +219,7 @@ public class Pkcs11Function implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+
   /**
    * Represents a specific value of the enclosing enumeration.
    */

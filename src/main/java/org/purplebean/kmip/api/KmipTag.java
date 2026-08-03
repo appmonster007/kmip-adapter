@@ -131,7 +131,7 @@ public class KmipTag {
    * @param supportedVersions The set of KMIP specifications that support this extension tag.
    * @return The registered {@link Value} definition.
    * @throws IllegalArgumentException if the value is outside the extension range, the
-   * description is empty,
+   *                                  description is empty,
    *                                  or the tag conflicts with an existing standard tag.
    */
   public static Value register(int value, @NonNull String description,
@@ -224,7 +224,7 @@ public class KmipTag {
    * @param value The integer value of the tag.
    * @return The corresponding {@link Value} definition.
    * @throws NoSuchElementException if no tag is found for the given value in the current KMIP
-   * context.
+   *                                context.
    */
   public static Value fromValue(int value) {
     KmipSpec spec = KmipContext.getSpec();
@@ -243,7 +243,7 @@ public class KmipTag {
    * @param name The name or description of the tag.
    * @return The corresponding {@link Value} definition.
    * @throws NoSuchElementException if no tag is found for the given name in the current KMIP
-   * context.
+   *                                context.
    */
   public static Value fromName(String name) {
     final String nameLowerCase = name.toLowerCase(Locale.ROOT);

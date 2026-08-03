@@ -6,7 +6,8 @@ package org.purplebean.kmip.util;
 public class StringUtils {
 
   /**
-   * Converts a PascalCase or camelCase name to Title Case (e.g. {@code fooBar} becomes {@code foo Bar}).
+   * Converts a PascalCase or camelCase name to Title Case (e.g. {@code fooBar} becomes {@code
+   * foo Bar}).
    */
   public static String convertPascalToTitleCase(String name) {
     return name.replaceAll("([a-z])([A-Z])", "$1 $2");

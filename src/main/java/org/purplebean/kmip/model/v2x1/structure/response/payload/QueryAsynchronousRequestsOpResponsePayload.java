@@ -52,7 +52,8 @@ public class QueryAsynchronousRequestsOpResponsePayload implements ResponsePaylo
   }
 
   /**
-   * Returns the {@link QueryAsynchronousRequestsOpResponsePayload} instance wrapping the given value.
+   * Returns the {@link QueryAsynchronousRequestsOpResponsePayload} instance wrapping the given
+   * value.
    */
   public static QueryAsynchronousRequestsOpResponsePayload of(List<KmipDataType> values) {
     QueryAsynchronousRequestsOpResponsePayloadBuilder builder =

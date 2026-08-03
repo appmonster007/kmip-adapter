@@ -26,7 +26,7 @@ public class Name implements KmipDataType, KmipAttribute {
   public static final EncodingType encodingType = EncodingType.TEXT_STRING;
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
-      // introduced in KMIP 3.0 — extend if present in later specs
+  // introduced in KMIP 3.0 — extend if present in later specs
 
   static {
     for (KmipSpec spec : supportedVersions) {

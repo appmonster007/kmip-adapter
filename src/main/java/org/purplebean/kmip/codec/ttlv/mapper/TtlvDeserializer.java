@@ -10,7 +10,8 @@ import java.nio.ByteBuffer;
  * (Tag-Type-Length-Value)
  * byte representation into a Java object.
  *
- * <p>This class provides the core logic for deserialization and includes a mechanism to automatically
+ * <p>This class provides the core logic for deserialization and includes a mechanism to
+ * automatically
  * determine the target type {@code <T>} that the deserializer handles. This is essential for the
  * {@link TtlvMapper} to correctly associate the deserializer with the appropriate class.
  *

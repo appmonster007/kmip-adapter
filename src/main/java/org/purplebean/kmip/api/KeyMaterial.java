@@ -54,7 +54,7 @@ public interface KeyMaterial extends KmipDataType {
    * @param spec                 The {@link KmipSpec} version for which this mapping is valid.
    * @param encodingType         The {@link EncodingType} of the key material.
    * @param keyFormatTypeValue   The {@link KeyFormatType.Value} that specifies the format of the
-   *                            key material.
+   *                             key material.
    * @param clazz                The {@link Class} that implements the specific key material format.
    * @param keyFormatTypeBuilder A {@link Function} that constructs an instance of the specific
    *                             key material format from a generic {@link KeyMaterial} object.

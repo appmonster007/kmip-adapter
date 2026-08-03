@@ -270,6 +270,7 @@ public class UniqueIdentifier implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+
   /**
    * Represents a specific value of the enclosing enumeration.
    */

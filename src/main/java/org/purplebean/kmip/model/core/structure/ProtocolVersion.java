@@ -49,6 +49,7 @@ public class ProtocolVersion implements KmipStructure {
   }
 
   // Static factory methods for validation
+
   /**
    * Returns the {@link ProtocolVersion} instance wrapping the given value.
    */

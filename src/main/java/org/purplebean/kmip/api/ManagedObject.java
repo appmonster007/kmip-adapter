@@ -56,7 +56,7 @@ public interface ManagedObject extends KmipDataType {
    * @param kmipTag           The {@link KmipTag.Value} of the managed object.
    * @param encodingType      The {@link EncodingType} of the managed object.
    * @param objectTypeValue   The {@link ObjectType.Value} that specifies the type of the managed
-   *                         object.
+   *                          object.
    * @param clazz             The {@link Class} that implements the specific managed object type.
    * @param objectTypeBuilder A {@link Function} that constructs an instance of the specific
    *                          managed object type from a generic {@link ManagedObject} object.

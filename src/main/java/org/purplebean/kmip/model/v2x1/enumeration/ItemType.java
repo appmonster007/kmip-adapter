@@ -230,6 +230,7 @@ public class ItemType implements KmipEnumeration {
   }
 
   // ----- Value hierarchy -----
+
   /**
    * Represents a specific value of the enclosing enumeration.
    */

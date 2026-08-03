@@ -53,7 +53,8 @@ public class QueryAsynchronousRequestsOpRequestPayload implements RequestPayload
   }
 
   /**
-   * Returns the {@link QueryAsynchronousRequestsOpRequestPayload} instance wrapping the given value.
+   * Returns the {@link QueryAsynchronousRequestsOpRequestPayload} instance wrapping the given
+   * value.
    */
   public static QueryAsynchronousRequestsOpRequestPayload of(List<KmipDataType> values) {
     var builder = QueryAsynchronousRequestsOpRequestPayload.builder();

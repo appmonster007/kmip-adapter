@@ -22,7 +22,7 @@ public class SubmissionDate implements KmipDataType {
   public static final EncodingType encodingType = EncodingType.DATE_TIME_EXTENDED;
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
-      // TODO: Adjust supported versions
+  // TODO: Adjust supported versions
 
   static {
     for (KmipSpec spec : supportedVersions) {
