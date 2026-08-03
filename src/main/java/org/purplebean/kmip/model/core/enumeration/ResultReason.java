@@ -299,7 +299,7 @@ public class ResultReason implements KmipEnumeration {
    *
    * @param reason The result reason to get the parent for.
    * @return The parent reason, or {@code null} if the reason is {@code GENERAL_FAILURE} or not
-   * found.
+   *     found.
    */
   public static Value getParentReason(Value reason) {
     return PARENT_REASON_MAP.get(reason);

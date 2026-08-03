@@ -89,7 +89,7 @@ public interface ResponseMessageStructure extends KmipStructure {
    * currently active {@link KmipContext}.
    *
    * @return The registered {@link Class} for the active KMIP specification, or {@code null} if
-   * none is found.
+   *     none is found.
    */
   static Class<? extends ResponseMessageStructure> getClassFromRegistry() {
     KmipSpec spec = KmipContext.getSpec();
@@ -101,7 +101,7 @@ public interface ResponseMessageStructure extends KmipStructure {
    * {@link KmipContext}.
    *
    * @return The registered {@link BiFunction} builder for the active KMIP specification, or
-   * {@code null} if none is found.
+   *     {@code null} if none is found.
    */
   static BiFunction<List<KmipDataType>, List<Exception>, ? extends ResponseMessageStructure>
       getBuilderFromRegistry() {

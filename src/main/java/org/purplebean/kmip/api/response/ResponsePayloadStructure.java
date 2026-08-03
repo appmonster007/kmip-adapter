@@ -96,7 +96,7 @@ public interface ResponsePayloadStructure extends KmipStructure {
    *
    * @param operationValue The {@link Operation.Value} to look up.
    * @return The registered {@link Class} for the active KMIP spec and operation, or {@code null}
-   * if none is found.
+   *     if none is found.
    */
   static Class<? extends ResponsePayloadStructure> getClassFromRegistry(
       Operation.Value operationValue) {

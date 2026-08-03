@@ -82,7 +82,7 @@ public interface KmipDataType {
    * @param kmipTagValue The {@link KmipTag.Value} of the data type to look up.
    * @param encodingType The {@link EncodingType} of the data type.
    * @return The registered {@link Class} for the given parameters, or {@code null} if no mapping
-   * is found.
+   *     is found.
    */
   static Class<? extends KmipDataType> getClassFromRegistry(KmipTag.Value kmipTagValue,
                                                             EncodingType encodingType) {
@@ -115,7 +115,7 @@ public interface KmipDataType {
    * Checks if this data type is supported in the current KMIP specification context.
    *
    * @return {@code true} if the data type is supported under the active {@link KmipContext},
-   * {@code false} otherwise.
+   *     {@code false} otherwise.
    */
   boolean isSupported();
 

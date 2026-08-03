@@ -103,7 +103,7 @@ public interface ResponseBatchItemStructure extends KmipStructure {
    * currently active {@link KmipContext}.
    *
    * @return The registered {@link Class} for the active KMIP specification, or {@code null} if
-   * none is found.
+   *     none is found.
    */
   static Class<? extends ResponseBatchItemStructure> getClassFromRegistry() {
     KmipSpec spec = KmipContext.getSpec();
@@ -115,7 +115,7 @@ public interface ResponseBatchItemStructure extends KmipStructure {
    * {@link KmipContext}.
    *
    * @return The registered {@link Function} builder for the active KMIP specification, or
-   * {@code null} if none is found.
+   *     {@code null} if none is found.
    */
   static Function<List<KmipDataType>, ? extends ResponseBatchItemStructure>
       getBuilderFromRegistry() {
@@ -168,7 +168,7 @@ public interface ResponseBatchItemStructure extends KmipStructure {
    * Retrieves the {@link ResponsePayloadStructure} for this batch item.
    *
    * @return The {@link ResponsePayloadStructure} containing the data returned by the operation,
-   * or {@code null} if not present.
+   *     or {@code null} if not present.
    */
   ResponsePayloadStructure getResponsePayload();
 

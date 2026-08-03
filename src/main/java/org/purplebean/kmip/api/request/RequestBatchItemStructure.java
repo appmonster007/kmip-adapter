@@ -94,7 +94,7 @@ public interface RequestBatchItemStructure extends KmipStructure {
    * currently active {@link KmipContext}.
    *
    * @return The registered {@link Class} for the active KMIP specification, or {@code null} if
-   * none is found.
+   *     none is found.
    */
   static Class<? extends RequestBatchItemStructure> getClassFromRegistry() {
     KmipSpec spec = KmipContext.getSpec();
@@ -106,7 +106,7 @@ public interface RequestBatchItemStructure extends KmipStructure {
    * {@link KmipContext}.
    *
    * @return The registered {@link Function} builder for the active KMIP specification, or
-   * {@code null} if none is found.
+   *     {@code null} if none is found.
    */
   static Function<List<KmipDataType>, ? extends RequestBatchItemStructure>
       getBuilderFromRegistry() {

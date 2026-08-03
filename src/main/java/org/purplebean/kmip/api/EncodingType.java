@@ -141,7 +141,7 @@ public enum EncodingType {
    *
    * @param typeValue the byte value to look up.
    * @return an {@link Optional} containing the {@link EncodingType} if found, otherwise an empty
-   * Optional.
+   *     Optional.
    */
   public static Optional<EncodingType> fromTypeValue(byte typeValue) {
     return Optional.ofNullable(VALUE_MAP.get(typeValue));
@@ -152,7 +152,7 @@ public enum EncodingType {
    *
    * @param name the enum name or description string to look up.
    * @return an {@link Optional} containing the {@link EncodingType} if found, otherwise an empty
-   * Optional.
+   *     Optional.
    */
   public static Optional<EncodingType> fromName(String name) {
     return Optional.ofNullable(NAME_LOOKUP.get(name));
@@ -163,7 +163,7 @@ public enum EncodingType {
    *
    * @param typeValue the byte value to check.
    * @return {@code true} if the byte value corresponds to a valid encoding type, {@code false}
-   * otherwise.
+   *     otherwise.
    */
   public static boolean isValidTypeValue(byte typeValue) {
     return VALUE_MAP.containsKey(typeValue);
@@ -173,7 +173,7 @@ public enum EncodingType {
    * Determines if this encoding type has a fixed length.
    *
    * @return {@code true} if this encoding type has a fixed length, {@code false} if it is
-   * variable-length.
+   *     variable-length.
    */
   public boolean isFixedLength() {
     return rawByteSize != VARIABLE_LENGTH;
