@@ -46,8 +46,6 @@ public abstract class AbstractKmipDataTypeXmlDeserializer<T extends KmipDataType
 
   @Override
   public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-    B builder = createBuilder();
-
     if (p.currentToken() == null) {
       p.nextToken();
     }
@@ -68,6 +66,7 @@ public abstract class AbstractKmipDataTypeXmlDeserializer<T extends KmipDataType
       return null;
     }
 
+    B builder = createBuilder();
     String tag = getTag(xmlTagName, node, ctxt, builder);
     if (tag == null) {
       return null;

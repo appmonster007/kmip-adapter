@@ -32,4 +32,14 @@
     -->
     <suppress checks="LineLength"
               files="[/\\]QueryAsynchronousRequestsOp(Request|Response)Payload(Json|Xml|Ttlv)Deserializer\.java$"/>
+
+    <!--
+        TtlvObject.fromBuffer reads tag, type, length, and value from the buffer in strict
+        sequence (each buffer.get()/getInt() call advances the read position). The 'type'
+        variable can't be moved closer to its first use without reordering those reads, which
+        would corrupt parsing.
+    -->
+    <suppress checks="VariableDeclarationUsageDistance"
+              files="[/\\]TtlvObject\.java$"
+              message="'type'"/>
 </suppressions>

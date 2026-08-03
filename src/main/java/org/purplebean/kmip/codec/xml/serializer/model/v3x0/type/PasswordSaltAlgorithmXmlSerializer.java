@@ -32,15 +32,15 @@ public class PasswordSaltAlgorithmXmlSerializer
         .getKmipTag()
         .getDescription()));
     xmlGen.writeStartObject();
-    String description = PasswordSaltAlgorithm
-        .fromValue((Integer) obj.getValue())
-        .getDescription();
     xmlGen.setNextIsAttribute(true);
     xmlGen.writeStringField("type", obj
         .getEncodingType()
         .getDescription());
     xmlGen.setNextIsAttribute(true);
     xmlGen.writeFieldName("value");
+    String description = PasswordSaltAlgorithm
+        .fromValue((Integer) obj.getValue())
+        .getDescription();
     serializers.defaultSerializeValue(description, gen);
     xmlGen.writeEndObject();
   }

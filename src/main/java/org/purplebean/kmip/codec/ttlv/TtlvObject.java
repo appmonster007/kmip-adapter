@@ -310,7 +310,6 @@ public final class TtlvObject {
    * Returns this TTLV object's primitive value as a hex-encoded byte string.
    */
   public String getByteString() {
-    HexFormat hexFormat = HexFormat.of();
     int paddedSize = TtlvConstants.calculatePaddedLength(TtlvConstants.HEADER_SIZE + length);
     ByteBuffer buffer = ByteBuffer.allocate(paddedSize);
     buffer.put(tag);
@@ -318,6 +317,7 @@ public final class TtlvObject {
     buffer.putInt(length);
     buffer.put(value);
 
+    HexFormat hexFormat = HexFormat.of();
     return hexFormat.formatHex(buffer.array());
   }
 

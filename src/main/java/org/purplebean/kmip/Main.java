@@ -110,7 +110,6 @@ public class Main {
 
     JsonMapper jsonMapper = buildJsonMapper();
     XmlMapper xmlMapper = buildXmlMapper();
-    TtlvMapper ttlvMapper = buildTtlvMapper();
 
     String strx = xmlMapper.writeValueAsString(requestMessage);
     System.out.println(strx);
@@ -120,6 +119,7 @@ public class Main {
 
     demoJson(jsonMapper, dataTypes);
     demoXml(xmlMapper, dataTypes);
+    TtlvMapper ttlvMapper = buildTtlvMapper();
     demoTtlv(ttlvMapper, dataTypes);
 
     printHeader("DONE");

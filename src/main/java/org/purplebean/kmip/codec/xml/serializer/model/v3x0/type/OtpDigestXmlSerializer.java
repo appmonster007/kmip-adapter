@@ -31,15 +31,15 @@ public class OtpDigestXmlSerializer extends AbstractKmipDataTypeXmlSerializer<Ot
         .getKmipTag()
         .getDescription()));
     xmlGen.writeStartObject();
-    String description = OtpDigest
-        .fromValue((Integer) obj.getValue())
-        .getDescription();
     xmlGen.setNextIsAttribute(true);
     xmlGen.writeStringField("type", obj
         .getEncodingType()
         .getDescription());
     xmlGen.setNextIsAttribute(true);
     xmlGen.writeFieldName("value");
+    String description = OtpDigest
+        .fromValue((Integer) obj.getValue())
+        .getDescription();
     serializers.defaultSerializeValue(description, gen);
     xmlGen.writeEndObject();
   }

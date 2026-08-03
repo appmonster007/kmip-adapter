@@ -40,8 +40,6 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType>
       currentName = (String) ctxt.getAttribute("tag");
     }
 
-    KmipTag.Value kmipTag = KmipTag.fromName(currentName);
-
     TokenBuffer buffer = new TokenBuffer(p, ctxt);
     buffer.copyCurrentStructure(p);
 
@@ -76,6 +74,7 @@ public class KmipDataTypeXmlDeserializer<T extends KmipDataType>
       }
     }
 
+    KmipTag.Value kmipTag = KmipTag.fromName(currentName);
     Class<? extends KmipDataType> clazz = getKmipDataTypeClass(kmipTag, encodingType, ctxt);
     if (clazz == null) {
       throw new NoSuchElementException(
