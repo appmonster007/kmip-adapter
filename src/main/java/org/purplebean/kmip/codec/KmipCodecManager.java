@@ -68,7 +68,7 @@ public final class KmipCodecManager {
   public static <T> Object serialize(T obj) throws IOException {
 
     return switch (defaultType) {
-//            TODO: Add TTLV support
+      // TODO: Add TTLV support
       //            case TTLV -> {}
       case XML -> StringEscapeUtils.escapeXml11(getXmlMapper().writeValueAsString(obj));
       case JSON -> StringEscapeUtils.escapeJson(getJsonMapper().writeValueAsString(obj));
@@ -85,7 +85,7 @@ public final class KmipCodecManager {
   public static <T> T deserialize(Object value, Class<T> type) throws IOException {
 
     return switch (defaultType) {
-//            TODO: Add TTLV support
+      // TODO: Add TTLV support
       //            case TTLV -> {}
       case XML -> getXmlMapper().readValue(StringEscapeUtils.unescapeXml((String) value), type);
       case JSON -> getJsonMapper().readValue(StringEscapeUtils.unescapeJson((String) value), type);

@@ -104,8 +104,8 @@ public class Main {
         activationDate,
         name,
         requestMessage,
-//                attr,
-        //                certificate,
+        // attr,
+        // certificate,
     };
 
     JsonMapper jsonMapper = buildJsonMapper();

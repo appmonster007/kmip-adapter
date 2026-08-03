@@ -36,22 +36,22 @@ public class SimpleRequestPayloadTtlvDeserializer extends
     return builder.build();
   }
 
-//    @Override
-//    public SimpleRequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws
-//    IOException {
-//        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
-//        if (Arrays.equals(obj.getTag(), SimpleRequestPayload.kmipTag.getTagBytes()) && obj
-//        .getType() != getEncodingType().getTypeValue()) {
-//            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s",
-//            getEncodingType().getTypeValue(), SimpleRequestPayload.kmipTag.getDescription(),
-//            obj.getType()));
-//        }
-//
-//        SimpleRequestPayload simpleRequestPayload = SimpleRequestPayload.builder().build();
-//
-//        if (!simpleRequestPayload.isSupported()) {
-//            throw new NoSuchElementException();
-//        }
-//        return simpleRequestPayload;
+  //    @Override
+  //    public SimpleRequestPayload deserialize(ByteBuffer ttlvBuffer, TtlvMapper mapper) throws
+  //    IOException {
+  //        TtlvObject obj = TtlvObject.fromBuffer(ttlvBuffer);
+  //        if (Arrays.equals(obj.getTag(), SimpleRequestPayload.kmipTag.getTagBytes()) && obj
+  //        .getType() != getEncodingType().getTypeValue()) {
+  //            throw new IllegalArgumentException(String.format("Expected %s type for %s, got %s",
+  //            getEncodingType().getTypeValue(), SimpleRequestPayload.kmipTag.getDescription(),
+  //            obj.getType()));
+  //        }
+  //
+  //        SimpleRequestPayload simpleRequestPayload = SimpleRequestPayload.builder().build();
+  //
+  //        if (!simpleRequestPayload.isSupported()) {
+  //            throw new NoSuchElementException();
+  //        }
+  //        return simpleRequestPayload;
   //    }
 }
