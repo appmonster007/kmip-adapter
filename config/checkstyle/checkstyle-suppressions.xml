@@ -15,4 +15,13 @@
 <suppressions>
     <suppress checks="AbbreviationAsWordInName"
               message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO])(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer)?'"/>
+
+    <!--
+        QueryAsynchronousRequestsOp{Request,Response}Payload.QueryAsynchronousRequestsOp{Request,
+        Response}PayloadBuilder is ~95 characters on its own, a single unbreakable Java type
+        reference that cannot be wrapped across lines, so the generated codec (de)serializers for
+        it cannot satisfy the 100-column limit no matter how the surrounding code is formatted.
+    -->
+    <suppress checks="LineLength"
+              files="[/\\]QueryAsynchronousRequestsOp(Request|Response)Payload(Json|Xml|Ttlv)Deserializer\.java$"/>
 </suppressions>

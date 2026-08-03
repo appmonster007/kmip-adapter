@@ -102,7 +102,8 @@ public interface RequestMessageStructure extends KmipStructure {
    * @return The registered {@link BiFunction} builder for the active KMIP specification, or
    * {@code null} if none is found.
    */
-  static BiFunction<List<KmipDataType>, List<Exception>, ? extends RequestMessageStructure> getBuilderFromRegistry() {
+  static BiFunction<List<KmipDataType>, List<Exception>, ? extends RequestMessageStructure>
+      getBuilderFromRegistry() {
     KmipSpec spec = KmipContext.getSpec();
     return BUILDER_REGISTRY.get(new RegistryKey(spec));
   }

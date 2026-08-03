@@ -25,8 +25,8 @@ import org.purplebean.kmip.model.v3x0.type.PublicKeyUniqueIdentifier;
  * KMIP ReKeyKeyPair Response Payload (V3_0).
  *
  * <p>Fork of
- * {@link org.purplebean.kmip.model.v1x2.structure.response.payload.ReKeyKeyPairOpResponsePayload} for
- * KMIP 3.0, where {@code PrivateKeyUniqueIdentifier}/{@code PublicKeyUniqueIdentifier} are
+ * {@link org.purplebean.kmip.model.v1x2.structure.response.payload.ReKeyKeyPairOpResponsePayload}
+ * for KMIP 3.0, where {@code PrivateKeyUniqueIdentifier}/{@code PublicKeyUniqueIdentifier} are
  * encoded as
  * {@code Identifier} rather than {@code TextString} (see {@link PrivateKeyUniqueIdentifier},
  * {@link PublicKeyUniqueIdentifier}).

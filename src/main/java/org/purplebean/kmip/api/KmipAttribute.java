@@ -93,8 +93,8 @@ public interface KmipAttribute extends KmipDataType {
    * @param encodingType The {@link EncodingType} of the attribute.
    * @return The registered {@link BiFunction} builder, or {@code null} if not found.
    */
-  static BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> getAttributeBuilderFromRegistry(
-      KmipTag.Value kmipTagValue, EncodingType encodingType) {
+  static BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute>
+      getAttributeBuilderFromRegistry(KmipTag.Value kmipTagValue, EncodingType encodingType) {
     KmipSpec spec = KmipContext.getSpec();
     return ATTRIBUTE_BUILDER_REGISTRY.get(new RegistryKey(spec, kmipTagValue, encodingType));
   }

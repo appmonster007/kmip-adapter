@@ -80,8 +80,8 @@ public interface CredentialValue extends KmipDataType {
    * @param credentialTypeValue The {@link CredentialType.Value} of the credential.
    * @return The registered {@link Class}, or {@code null} if no mapping is found.
    */
-  static Class<? extends KmipDataType> getClassFromRegistry(EncodingType encodingType,
-                                                            CredentialType.Value credentialTypeValue) {
+  static Class<? extends KmipDataType> getClassFromRegistry(
+      EncodingType encodingType, CredentialType.Value credentialTypeValue) {
     KmipSpec spec = KmipContext.getSpec();
     return CREDENTIAL_TYPE_REGISTRY.get(new RegistryKey(spec, encodingType, credentialTypeValue));
   }

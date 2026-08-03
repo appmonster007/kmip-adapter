@@ -79,8 +79,8 @@ public interface KeyMaterial extends KmipDataType {
    * @param keyFormatTypeValue The {@link KeyFormatType.Value} of the key material.
    * @return The registered {@link Class}, or {@code null} if no mapping is found.
    */
-  static Class<? extends KmipDataType> getClassFromRegistry(EncodingType encodingType,
-                                                            KeyFormatType.Value keyFormatTypeValue) {
+  static Class<? extends KmipDataType> getClassFromRegistry(
+      EncodingType encodingType, KeyFormatType.Value keyFormatTypeValue) {
     KmipSpec spec = KmipContext.getSpec();
     return KEY_FORMAT_TYPE_REGISTRY.get(new RegistryKey(spec, encodingType, keyFormatTypeValue));
   }

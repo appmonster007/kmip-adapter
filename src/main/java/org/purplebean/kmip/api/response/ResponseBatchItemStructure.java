@@ -117,7 +117,8 @@ public interface ResponseBatchItemStructure extends KmipStructure {
    * @return The registered {@link Function} builder for the active KMIP specification, or
    * {@code null} if none is found.
    */
-  static Function<List<KmipDataType>, ? extends ResponseBatchItemStructure> getBuilderFromRegistry() {
+  static Function<List<KmipDataType>, ? extends ResponseBatchItemStructure>
+      getBuilderFromRegistry() {
     KmipSpec spec = KmipContext.getSpec();
     return BUILDER_REGISTRY.get(new RegistryKey(spec));
   }
