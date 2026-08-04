@@ -338,6 +338,7 @@ org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.InteropFunctionBen
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.ItemTypeBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.NistKeyTypeBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.Pkcs11FunctionBenchmarkSubject
+org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.Pkcs11ReturnCodeBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.ProcessingStageBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.ProtectionLevelBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration.RotateNameTypeBenchmarkSubject
@@ -485,7 +486,6 @@ org.purplebean.kmip.benchmark.subjects.model.v2x1.type.NeverExtractableBenchmark
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.Pkcs11InputParametersBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.Pkcs11InterfaceBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.Pkcs11OutputParametersBenchmarkSubject
-org.purplebean.kmip.benchmark.subjects.model.v2x1.type.Pkcs11ReturnCodeBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.Pkcs12FriendlyNameBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.PredictionResistanceBenchmarkSubject
 org.purplebean.kmip.benchmark.subjects.model.v2x1.type.ProfileVersionMajorBenchmarkSubject

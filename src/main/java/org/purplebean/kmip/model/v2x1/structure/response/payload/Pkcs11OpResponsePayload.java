@@ -16,9 +16,10 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
 /**
  * KMIP Pkcs11OpResponsePayload operation response payload.
@@ -43,6 +44,9 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
   }
 
   @NonNull
+  private final Pkcs11Function pkcs11Function;
+
+  @NonNull
   private final Pkcs11ReturnCode pkcs11ReturnCode;
 
   private final Pkcs11OutputParameters pkcs11OutputParameters;
@@ -52,10 +56,12 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
 
   @Builder
   private Pkcs11OpResponsePayload(
+      @NonNull Pkcs11Function pkcs11Function,
       @NonNull Pkcs11ReturnCode pkcs11ReturnCode,
       Pkcs11OutputParameters pkcs11OutputParameters,
       @NonNull CorrelationValue correlationValue
   ) {
+    this.pkcs11Function = pkcs11Function;
     this.pkcs11ReturnCode = pkcs11ReturnCode;
     this.pkcs11OutputParameters = pkcs11OutputParameters;
     this.correlationValue = correlationValue;
@@ -70,6 +76,9 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()
         .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    builder.pkcs11Function((Pkcs11Function) map
+        .get(Pkcs11Function.kmipTag)
+        .getFirst());
     builder.pkcs11ReturnCode((Pkcs11ReturnCode) map
         .get(Pkcs11ReturnCode.kmipTag)
         .getFirst());
@@ -112,7 +121,7 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(pkcs11ReturnCode, pkcs11OutputParameters, correlationValue)
+        .of(pkcs11Function, pkcs11ReturnCode, pkcs11OutputParameters, correlationValue)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

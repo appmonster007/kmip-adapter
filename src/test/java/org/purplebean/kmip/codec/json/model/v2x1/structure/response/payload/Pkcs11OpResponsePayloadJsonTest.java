@@ -2,9 +2,10 @@ package org.purplebean.kmip.codec.json.model.v2x1.structure.response.payload;
 
 import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("Pkcs11OpResponsePayload Json Serialization Tests")
@@ -20,7 +21,8 @@ class Pkcs11OpResponsePayloadJsonTest
   public Pkcs11OpResponsePayload createDefault() {
     return Pkcs11OpResponsePayload
         .builder()
-        .pkcs11ReturnCode(Pkcs11ReturnCode.of(0))
+        .pkcs11Function(Pkcs11Function.of(Pkcs11Function.Standard.INITIALIZE))
+        .pkcs11ReturnCode(Pkcs11ReturnCode.of(Pkcs11ReturnCode.Standard.OK))
         .correlationValue(CorrelationValue.of(ByteBuffer.wrap(new byte[] {0x01, 0x02})))
         .build();
   }
@@ -29,7 +31,8 @@ class Pkcs11OpResponsePayloadJsonTest
   public Pkcs11OpResponsePayload createVariant() {
     return Pkcs11OpResponsePayload
         .builder()
-        .pkcs11ReturnCode(Pkcs11ReturnCode.of(1))
+        .pkcs11Function(Pkcs11Function.of(Pkcs11Function.Standard.GET_INFO))
+        .pkcs11ReturnCode(Pkcs11ReturnCode.of(Pkcs11ReturnCode.Standard.CANCEL))
         .correlationValue(CorrelationValue.of(ByteBuffer.wrap(new byte[] {0x03, 0x04})))
         .build();
   }

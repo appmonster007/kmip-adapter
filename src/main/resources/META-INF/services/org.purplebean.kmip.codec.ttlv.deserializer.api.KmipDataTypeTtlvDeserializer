@@ -357,6 +357,7 @@ org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.InteropFuncti
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.ItemTypeTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.NistKeyTypeTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.Pkcs11FunctionTtlvDeserializer
+org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.Pkcs11ReturnCodeTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.ProcessingStageTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.ProtectionLevelTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration.RotateNameTypeTtlvDeserializer
@@ -511,7 +512,6 @@ org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.OffsetItemsTtlvDeser
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.Pkcs11InputParametersTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.Pkcs11InterfaceTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.Pkcs11OutputParametersTtlvDeserializer
-org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.Pkcs11ReturnCodeTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.Pkcs12FriendlyNameTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.PredictionResistanceTtlvDeserializer
 org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type.ProfileVersionMajorTtlvDeserializer

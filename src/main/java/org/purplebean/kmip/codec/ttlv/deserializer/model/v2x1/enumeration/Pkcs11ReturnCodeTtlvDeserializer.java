@@ -1,10 +1,10 @@
-package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.type;
+package org.purplebean.kmip.codec.ttlv.deserializer.model.v2x1.enumeration;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 
 /**
  * TTLV deserializer for {@link Pkcs11ReturnCode}.
@@ -28,7 +28,7 @@ public class Pkcs11ReturnCodeTtlvDeserializer extends
   @Override
   protected void setValue(Pkcs11ReturnCode.Pkcs11ReturnCodeBuilder builder, byte[] tag, byte type,
                           ByteBuffer p, TtlvMapper mapper) throws IOException {
-    builder.value(mapper.readValue(p, Integer.class));
+    builder.value(Pkcs11ReturnCode.fromValue(mapper.readValue(p, Integer.class)));
   }
 
   @Override

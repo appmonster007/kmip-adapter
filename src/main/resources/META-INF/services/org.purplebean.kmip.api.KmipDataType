@@ -344,6 +344,7 @@ org.purplebean.kmip.model.v2x1.enumeration.InteropFunction
 org.purplebean.kmip.model.v2x1.enumeration.ItemType
 org.purplebean.kmip.model.v2x1.enumeration.NistKeyType
 org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function
+org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode
 org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage
 org.purplebean.kmip.model.v2x1.enumeration.ProtectionLevel
 org.purplebean.kmip.model.v2x1.enumeration.RotateNameType
@@ -498,7 +499,6 @@ org.purplebean.kmip.model.v2x1.type.OffsetItems
 org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters
 org.purplebean.kmip.model.v2x1.type.Pkcs11Interface
 org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters
-org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode
 org.purplebean.kmip.model.v2x1.type.Pkcs12FriendlyName
 org.purplebean.kmip.model.v2x1.type.PredictionResistance
 org.purplebean.kmip.model.v2x1.type.ProfileVersionMajor

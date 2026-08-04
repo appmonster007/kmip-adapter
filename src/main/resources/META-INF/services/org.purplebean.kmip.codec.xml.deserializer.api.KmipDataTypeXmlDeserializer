@@ -357,6 +357,7 @@ org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.InteropFunctio
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.ItemTypeXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.NistKeyTypeXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.Pkcs11FunctionXmlDeserializer
+org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.Pkcs11ReturnCodeXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.ProcessingStageXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.ProtectionLevelXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration.RotateNameTypeXmlDeserializer
@@ -511,7 +512,6 @@ org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.OffsetItemsXmlDeseria
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.Pkcs11InputParametersXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.Pkcs11InterfaceXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.Pkcs11OutputParametersXmlDeserializer
-org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.Pkcs11ReturnCodeXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.Pkcs12FriendlyNameXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.PredictionResistanceXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v2x1.type.ProfileVersionMajorXmlDeserializer

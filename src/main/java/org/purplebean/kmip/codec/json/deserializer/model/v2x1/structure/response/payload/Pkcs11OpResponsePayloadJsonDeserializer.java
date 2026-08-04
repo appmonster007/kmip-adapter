@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
 /**
  * JSON deserializer for {@link Pkcs11OpResponsePayload}.
@@ -35,6 +36,8 @@ public class Pkcs11OpResponsePayloadJsonDeserializer extends
       throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
     switch (nodeTag) {
+      case KmipTag.Standard.PKCS_11_FUNCTION ->
+          builder.pkcs11Function(ctxt.readValue(p, Pkcs11Function.class));
       case KmipTag.Standard.PKCS_11_RETURN_CODE ->
           builder.pkcs11ReturnCode(ctxt.readValue(p, Pkcs11ReturnCode.class));
       case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS ->

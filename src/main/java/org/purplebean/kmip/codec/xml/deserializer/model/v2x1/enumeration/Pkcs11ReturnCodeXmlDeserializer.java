@@ -1,22 +1,22 @@
-package org.purplebean.kmip.codec.json.deserializer.model.v2x1.type;
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.enumeration;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
-import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 
 /**
- * JSON deserializer for {@link Pkcs11ReturnCode}.
+ * XML deserializer for {@link Pkcs11ReturnCode}.
  */
-public class Pkcs11ReturnCodeJsonDeserializer extends
-    AbstractKmipDataTypeJsonDeserializer<Pkcs11ReturnCode,
+public class Pkcs11ReturnCodeXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<Pkcs11ReturnCode,
         Pkcs11ReturnCode.Pkcs11ReturnCodeBuilder> {
 
   /**
-   * Constructs a new {@link Pkcs11ReturnCodeJsonDeserializer}.
+   * Constructs a new {@link Pkcs11ReturnCodeXmlDeserializer}.
    */
-  public Pkcs11ReturnCodeJsonDeserializer() {
+  public Pkcs11ReturnCodeXmlDeserializer() {
     super(Pkcs11ReturnCode.kmipTag, Pkcs11ReturnCode.encodingType);
   }
 
@@ -28,7 +28,7 @@ public class Pkcs11ReturnCodeJsonDeserializer extends
   @Override
   protected void setValue(Pkcs11ReturnCode.Pkcs11ReturnCodeBuilder builder, String tag, String type,
                           JsonParser p, DeserializationContext ctxt) throws IOException {
-    builder.value(ctxt.readValue(p, Integer.class));
+    builder.value(Pkcs11ReturnCode.fromName(ctxt.readValue(p, String.class)));
   }
 
   @Override

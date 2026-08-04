@@ -1,9 +1,10 @@
-package org.purplebean.kmip.benchmark.subjects.model.v2x1.type;
+package org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration;
 
+import java.util.Set;
 import lombok.Getter;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 
 public class Pkcs11ReturnCodeBenchmarkSubject extends KmipBenchmarkSubject<Pkcs11ReturnCode> {
 
@@ -11,7 +12,10 @@ public class Pkcs11ReturnCodeBenchmarkSubject extends KmipBenchmarkSubject<Pkcs1
   private final KmipSpec spec = KmipSpec.V2_1;
 
   public Pkcs11ReturnCodeBenchmarkSubject() throws Exception {
-    Pkcs11ReturnCode subject = Pkcs11ReturnCode.of(1);
+    Pkcs11ReturnCode subject = Pkcs11ReturnCode
+        .register(0x80000099, "X-Benchmark",
+            Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0))
+        .inst();
     initialize(subject, Pkcs11ReturnCode.class);
   }
 

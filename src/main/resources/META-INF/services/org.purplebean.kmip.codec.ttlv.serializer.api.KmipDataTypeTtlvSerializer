@@ -344,6 +344,7 @@ org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.InteropFunction
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.ItemTypeTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.NistKeyTypeTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.Pkcs11FunctionTtlvSerializer
+org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.Pkcs11ReturnCodeTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.ProcessingStageTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.ProtectionLevelTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.enumeration.RotateNameTypeTtlvSerializer
@@ -498,7 +499,6 @@ org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.OffsetItemsTtlvSeriali
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.Pkcs11InputParametersTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.Pkcs11InterfaceTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.Pkcs11OutputParametersTtlvSerializer
-org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.Pkcs11ReturnCodeTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.Pkcs12FriendlyNameTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.PredictionResistanceTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.ProfileVersionMajorTtlvSerializer
