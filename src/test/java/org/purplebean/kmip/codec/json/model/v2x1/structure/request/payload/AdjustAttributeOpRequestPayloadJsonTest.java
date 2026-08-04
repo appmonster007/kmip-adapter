@@ -2,11 +2,12 @@ package org.purplebean.kmip.codec.json.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.KmipSpec;
-import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
-import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
+import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.AdjustAttributeOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.AdjustmentValue;
 import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("AdjustAttributeOpRequestPayload Json Serialization Tests")
@@ -31,11 +32,12 @@ class AdjustAttributeOpRequestPayloadJsonTest
             .builder()
             .value("adj-attr-uid-1")
             .build())
-        .currentAttribute(CurrentAttribute
+        .attributeReference(AttributeReference
             .builder()
-            .attribute(CryptographicAlgorithm.Standard.AES.inst())
+            .attributeName(AttributeName.of("Usage Limits Count"))
             .build())
         .adjustmentType(AdjustmentType.Standard.INCREMENT.inst())
+        .adjustmentValue(AdjustmentValue.ofLongInteger(1L))
         .build();
   }
 
@@ -47,11 +49,12 @@ class AdjustAttributeOpRequestPayloadJsonTest
             .builder()
             .value("adj-attr-uid-2")
             .build())
-        .currentAttribute(CurrentAttribute
+        .attributeReference(AttributeReference
             .builder()
-            .attribute(CryptographicAlgorithm.Standard.RSA.inst())
+            .attributeName(AttributeName.of("Usage Limits Count"))
             .build())
         .adjustmentType(AdjustmentType.Standard.DECREMENT.inst())
+        .adjustmentValue(AdjustmentValue.ofLongInteger(2L))
         .build();
   }
 }

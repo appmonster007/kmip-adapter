@@ -460,6 +460,7 @@ org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.response.payload.
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayloadTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.response.payload.SignOpResponsePayloadTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.structure.response.payload.SignatureVerifyOpResponsePayloadTtlvSerializer
+org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.AdjustmentValueTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.AlwaysSensitiveTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.AsynchronousCapabilityTtlvSerializer
 org.purplebean.kmip.codec.ttlv.serializer.model.v2x1.type.AttestationCapabilityTtlvSerializer

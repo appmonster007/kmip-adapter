@@ -473,6 +473,7 @@ org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.response.payloa
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayloadJsonDeserializer
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.response.payload.SignOpResponsePayloadJsonDeserializer
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.structure.response.payload.SignatureVerifyOpResponsePayloadJsonDeserializer
+org.purplebean.kmip.codec.json.deserializer.model.v2x1.type.AdjustmentValueJsonDeserializer
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.type.AlwaysSensitiveJsonDeserializer
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.type.AsynchronousCapabilityJsonDeserializer
 org.purplebean.kmip.codec.json.deserializer.model.v2x1.type.AttestationCapabilityJsonDeserializer

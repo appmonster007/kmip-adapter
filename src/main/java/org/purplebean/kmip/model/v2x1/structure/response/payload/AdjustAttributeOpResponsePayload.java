@@ -15,15 +15,13 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
-import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 
 /**
  * KMIP AdjustAttribute Response Payload (V2_1, V3_0).
  *
- * <p>Per KMIP v2.1 spec:
+ * <p>Per KMIP v2.0/v2.1/v3.0 spec §6.1.3:
  * <ul>
  *   <li>UniqueIdentifier — Required</li>
- *   <li>NewAttribute — Required</li>
  * </ul>
  */
 @Data
@@ -49,14 +47,9 @@ public class AdjustAttributeOpResponsePayload implements ResponsePayloadStructur
   @NonNull
   private final UniqueIdentifier uniqueIdentifier;
 
-  @NonNull
-  private final NewAttribute newAttribute;
-
   @Builder
-  private AdjustAttributeOpResponsePayload(@NonNull UniqueIdentifier uniqueIdentifier,
-                                           @NonNull NewAttribute newAttribute) {
+  private AdjustAttributeOpResponsePayload(@NonNull UniqueIdentifier uniqueIdentifier) {
     this.uniqueIdentifier = uniqueIdentifier;
-    this.newAttribute = newAttribute;
     validate();
   }
 
@@ -68,8 +61,6 @@ public class AdjustAttributeOpResponsePayload implements ResponsePayloadStructur
     values.forEach(value -> {
       if (value instanceof UniqueIdentifier) {
         builder.uniqueIdentifier((UniqueIdentifier) value);
-      } else if (value instanceof NewAttribute) {
-        builder.newAttribute((NewAttribute) value);
       }
     });
     return builder.build();
@@ -103,7 +94,7 @@ public class AdjustAttributeOpResponsePayload implements ResponsePayloadStructur
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(uniqueIdentifier, newAttribute)
+        .of(uniqueIdentifier)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

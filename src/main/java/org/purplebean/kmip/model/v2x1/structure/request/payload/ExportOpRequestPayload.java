@@ -14,12 +14,24 @@ import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.KeyCompressionType;
+import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
+import org.purplebean.kmip.model.core.enumeration.KeyWrapType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
 /**
- * KMIP ExportOpRequestPayload operation request payload.
+ * KMIP Export Request Payload (V2_1, V3_0).
+ *
+ * <p>Per KMIP spec §6.1.22 (v2.1 §6.1.18):
+ * <ul>
+ *   <li>UniqueIdentifier — Optional</li>
+ *   <li>KeyFormatType — Optional</li>
+ *   <li>KeyWrapType — Optional</li>
+ *   <li>KeyCompressionType — Optional</li>
+ *   <li>KeyWrappingSpecification — Optional</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -41,12 +53,21 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
   }
 
   private final UniqueIdentifier uniqueIdentifier;
+  private final KeyFormatType keyFormatType;
+  private final KeyWrapType keyWrapType;
+  private final KeyCompressionType keyCompressionType;
   private final KeyWrappingSpecification keyWrappingSpecification;
 
   @Builder
   private ExportOpRequestPayload(UniqueIdentifier uniqueIdentifier,
+                                 KeyFormatType keyFormatType,
+                                 KeyWrapType keyWrapType,
+                                 KeyCompressionType keyCompressionType,
                                  KeyWrappingSpecification keyWrappingSpecification) {
     this.uniqueIdentifier = uniqueIdentifier;
+    this.keyFormatType = keyFormatType;
+    this.keyWrapType = keyWrapType;
+    this.keyCompressionType = keyCompressionType;
     this.keyWrappingSpecification = keyWrappingSpecification;
     validate();
   }
@@ -62,6 +83,21 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
     if (map.containsKey(UniqueIdentifier.kmipTag)) {
       builder.uniqueIdentifier((UniqueIdentifier) map
           .get(UniqueIdentifier.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(KeyFormatType.kmipTag)) {
+      builder.keyFormatType((KeyFormatType) map
+          .get(KeyFormatType.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(KeyWrapType.kmipTag)) {
+      builder.keyWrapType((KeyWrapType) map
+          .get(KeyWrapType.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(KeyCompressionType.kmipTag)) {
+      builder.keyCompressionType((KeyCompressionType) map
+          .get(KeyCompressionType.kmipTag)
           .getFirst());
     }
     if (map.containsKey(KeyWrappingSpecification.kmipTag)) {
@@ -100,7 +136,12 @@ public class ExportOpRequestPayload implements RequestPayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(uniqueIdentifier, keyWrappingSpecification)
+        .of(
+            uniqueIdentifier,
+            keyFormatType,
+            keyWrapType,
+            keyCompressionType,
+            keyWrappingSpecification)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

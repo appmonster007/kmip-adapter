@@ -16,16 +16,18 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
-import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
+import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
+import org.purplebean.kmip.model.v2x1.type.AdjustmentValue;
 
 /**
  * KMIP AdjustAttribute Request Payload (V2_1, V3_0).
  *
- * <p>Per KMIP v2.1 spec:
+ * <p>Per KMIP v2.0/v2.1/v3.0 spec §6.1.3:
  * <ul>
  *   <li>UniqueIdentifier — Optional</li>
- *   <li>CurrentAttribute — Required</li>
+ *   <li>AttributeReference — Required</li>
  *   <li>AdjustmentType — Required</li>
+ *   <li>AdjustmentValue — Optional</li>
  * </ul>
  */
 @Data
@@ -51,18 +53,22 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
   private final UniqueIdentifier uniqueIdentifier;
 
   @NonNull
-  private final CurrentAttribute currentAttribute;
+  private final AttributeReference attributeReference;
 
   @NonNull
   private final AdjustmentType adjustmentType;
 
+  private final AdjustmentValue adjustmentValue;
+
   @Builder
   private AdjustAttributeOpRequestPayload(UniqueIdentifier uniqueIdentifier,
-                                          @NonNull CurrentAttribute currentAttribute,
-                                          @NonNull AdjustmentType adjustmentType) {
+                                          @NonNull AttributeReference attributeReference,
+                                          @NonNull AdjustmentType adjustmentType,
+                                          AdjustmentValue adjustmentValue) {
     this.uniqueIdentifier = uniqueIdentifier;
-    this.currentAttribute = currentAttribute;
+    this.attributeReference = attributeReference;
     this.adjustmentType = adjustmentType;
+    this.adjustmentValue = adjustmentValue;
     validate();
   }
 
@@ -74,10 +80,12 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
     values.forEach(value -> {
       if (value instanceof UniqueIdentifier) {
         builder.uniqueIdentifier((UniqueIdentifier) value);
-      } else if (value instanceof CurrentAttribute) {
-        builder.currentAttribute((CurrentAttribute) value);
+      } else if (value instanceof AttributeReference) {
+        builder.attributeReference((AttributeReference) value);
       } else if (value instanceof AdjustmentType) {
         builder.adjustmentType((AdjustmentType) value);
+      } else if (value instanceof AdjustmentValue) {
+        builder.adjustmentValue((AdjustmentValue) value);
       }
     });
     return builder.build();
@@ -111,7 +119,7 @@ public class AdjustAttributeOpRequestPayload implements RequestPayloadStructure 
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(uniqueIdentifier, currentAttribute, adjustmentType)
+        .of(uniqueIdentifier, attributeReference, adjustmentType, adjustmentValue)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

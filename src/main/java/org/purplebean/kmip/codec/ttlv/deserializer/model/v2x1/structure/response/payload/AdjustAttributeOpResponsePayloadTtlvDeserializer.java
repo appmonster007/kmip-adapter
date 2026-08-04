@@ -6,7 +6,6 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
-import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.AdjustAttributeOpResponsePayload;
 
 /**
@@ -37,8 +36,6 @@ public class AdjustAttributeOpResponsePayloadTtlvDeserializer extends
     switch (nodeTag) {
       case KmipTag.Standard.UNIQUE_IDENTIFIER ->
           builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
-      case KmipTag.Standard.NEW_ATTRIBUTE ->
-          builder.newAttribute(mapper.readValue(p, NewAttribute.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

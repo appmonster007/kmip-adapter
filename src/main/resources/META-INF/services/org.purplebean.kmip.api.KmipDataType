@@ -460,6 +460,7 @@ org.purplebean.kmip.model.v2x1.structure.response.payload.SetDefaultsOpResponseP
 org.purplebean.kmip.model.v2x1.structure.response.payload.SetEndpointRoleOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.SignOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.SignatureVerifyOpResponsePayload
+org.purplebean.kmip.model.v2x1.type.AdjustmentValue
 org.purplebean.kmip.model.v2x1.type.AlwaysSensitive
 org.purplebean.kmip.model.v2x1.type.AsynchronousCapability
 org.purplebean.kmip.model.v2x1.type.AttestationCapability

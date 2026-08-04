@@ -1,7 +1,6 @@
 package org.purplebean.kmip.codec.ttlv.model.v2x1.structure.request.payload;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.GetConstraintsOpRequestPayload;
 import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
@@ -25,10 +24,6 @@ class GetConstraintsOpRequestPayloadTtlvTest
   public GetConstraintsOpRequestPayload createVariant() {
     return GetConstraintsOpRequestPayload
         .builder()
-        .uniqueIdentifier(UniqueIdentifier
-            .builder()
-            .value("test-uid-1")
-            .build())
         .build();
   }
 }

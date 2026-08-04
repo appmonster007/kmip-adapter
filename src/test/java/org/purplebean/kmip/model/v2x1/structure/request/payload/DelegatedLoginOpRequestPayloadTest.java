@@ -6,6 +6,8 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.model.core.type.LeaseTime;
+import org.purplebean.kmip.model.v2x1.structure.Right;
+import org.purplebean.kmip.model.v2x1.structure.Rights;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
@@ -29,6 +31,10 @@ class DelegatedLoginOpRequestPayloadTest
         .builder()
         .leaseTime(LeaseTime.of(3600))
         .requestCount(RequestCount.of(10))
+        .rights(Rights
+            .builder()
+            .right(Right.builder().build())
+            .build())
         .build();
   }
 

@@ -2,9 +2,7 @@ package org.purplebean.kmip.codec.json.model.v2x1.structure.response.payload;
 
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.KmipSpec;
-import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
-import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.AdjustAttributeOpResponsePayload;
 import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
@@ -30,10 +28,6 @@ class AdjustAttributeOpResponsePayloadJsonTest
             .builder()
             .value("adj-attr-resp-uid-1")
             .build())
-        .newAttribute(NewAttribute
-            .builder()
-            .attribute(CryptographicAlgorithm.Standard.AES.inst())
-            .build())
         .build();
   }
 
@@ -44,10 +38,6 @@ class AdjustAttributeOpResponsePayloadJsonTest
         .uniqueIdentifier(UniqueIdentifier
             .builder()
             .value("adj-attr-resp-uid-2")
-            .build())
-        .newAttribute(NewAttribute
-            .builder()
-            .attribute(CryptographicAlgorithm.Standard.RSA.inst())
             .build())
         .build();
   }

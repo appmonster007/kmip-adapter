@@ -6,10 +6,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
-import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
-import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
+import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
+import org.purplebean.kmip.model.v2x1.type.AdjustmentValue;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("AdjustAttributeOpRequestPayload Domain Tests")
@@ -34,11 +35,12 @@ class AdjustAttributeOpRequestPayloadTest
             .builder()
             .value("adj-attr-uid-1")
             .build())
-        .currentAttribute(CurrentAttribute
+        .attributeReference(AttributeReference
             .builder()
-            .attribute(CryptographicAlgorithm.Standard.AES.inst())
+            .attributeName(AttributeName.of("Usage Limits Count"))
             .build())
         .adjustmentType(AdjustmentType.Standard.INCREMENT.inst())
+        .adjustmentValue(AdjustmentValue.ofLongInteger(1L))
         .build();
   }
 
@@ -55,7 +57,7 @@ class AdjustAttributeOpRequestPayloadTest
   @Override
   public void validateComponents(List<KmipDataType> values) {
     assertThat(values).hasSizeGreaterThanOrEqualTo(2);
-    assertThat(values).anyMatch(v -> v instanceof CurrentAttribute);
+    assertThat(values).anyMatch(v -> v instanceof AttributeReference);
     assertThat(values).anyMatch(v -> v instanceof AdjustmentType);
   }
 }

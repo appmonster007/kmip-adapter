@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
@@ -46,6 +47,8 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
   private final LeaseTime leaseTime;
   private final RequestCount requestCount;
   private final UsageLimits usageLimits;
+
+  @NonNull
   private final Rights rights;
 
   @Builder
@@ -53,7 +56,7 @@ public class DelegatedLoginOpRequestPayload implements RequestPayloadStructure {
       LeaseTime leaseTime,
       RequestCount requestCount,
       UsageLimits usageLimits,
-      Rights rights
+      @NonNull Rights rights
   ) {
     this.leaseTime = leaseTime;
     this.requestCount = requestCount;

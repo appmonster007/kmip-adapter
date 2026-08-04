@@ -7,8 +7,9 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
-import org.purplebean.kmip.model.v2x1.structure.CurrentAttribute;
+import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.AdjustAttributeOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.AdjustmentValue;
 
 /**
  * XML deserializer for {@link AdjustAttributeOpRequestPayload}.
@@ -37,10 +38,12 @@ public class AdjustAttributeOpRequestPayloadXmlDeserializer extends
     switch (nodeTag) {
       case KmipTag.Standard.UNIQUE_IDENTIFIER ->
           builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
-      case KmipTag.Standard.CURRENT_ATTRIBUTE ->
-          builder.currentAttribute(ctxt.readValue(p, CurrentAttribute.class));
+      case KmipTag.Standard.ATTRIBUTE_REFERENCE ->
+          builder.attributeReference(ctxt.readValue(p, AttributeReference.class));
       case KmipTag.Standard.ADJUSTMENT_TYPE ->
           builder.adjustmentType(ctxt.readValue(p, AdjustmentType.class));
+      case KmipTag.Standard.ADJUSTMENT_VALUE ->
+          builder.adjustmentValue(ctxt.readValue(p, AdjustmentValue.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

@@ -6,9 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
-import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
-import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("AdjustAttributeOpResponsePayload Domain Tests")
@@ -33,10 +31,6 @@ class AdjustAttributeOpResponsePayloadTest
             .builder()
             .value("adj-attr-resp-uid-1")
             .build())
-        .newAttribute(NewAttribute
-            .builder()
-            .attribute(CryptographicAlgorithm.Standard.AES.inst())
-            .build())
         .build();
   }
 
@@ -47,13 +41,12 @@ class AdjustAttributeOpResponsePayloadTest
 
   @Override
   public int expectedMinComponentCount() {
-    return 2;
+    return 1;
   }
 
   @Override
   public void validateComponents(List<KmipDataType> values) {
-    assertThat(values).hasSize(2);
+    assertThat(values).hasSize(1);
     assertThat(values).anyMatch(v -> v instanceof UniqueIdentifier);
-    assertThat(values).anyMatch(v -> v instanceof NewAttribute);
   }
 }
