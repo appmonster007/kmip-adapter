@@ -11,7 +11,7 @@ public class ProtectionPeriodBenchmarkSubject extends KmipBenchmarkSubject<Prote
   private final KmipSpec spec = KmipSpec.V2_1;
 
   public ProtectionPeriodBenchmarkSubject() throws Exception {
-    ProtectionPeriod subject = ProtectionPeriod.of(12345L);
+    ProtectionPeriod subject = ProtectionPeriod.of(12345);
     initialize(subject, ProtectionPeriod.class);
   }
 

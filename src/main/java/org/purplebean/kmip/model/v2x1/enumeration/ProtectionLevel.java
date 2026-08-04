@@ -15,11 +15,16 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipEnumeration;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies
@@ -38,7 +43,7 @@ import org.purplebean.kmip.api.KmipTag;
  */
 @Data
 @Builder(toBuilder = true)
-public class ProtectionLevel implements KmipEnumeration {
+public class ProtectionLevel implements KmipEnumeration, KmipAttribute {
   public static final KmipTag kmipTag = KmipTag.Standard.PROTECTION_LEVEL.inst();
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
@@ -58,6 +63,8 @@ public class ProtectionLevel implements KmipEnumeration {
         continue;
       }
       KmipDataType.register(spec, kmipTag.getValue(), encodingType, ProtectionLevel.class);
+      KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ProtectionLevel.class,
+          ProtectionLevel::of);
       KmipEnumeration.register(spec, kmipTag.getValue(), ProtectionLevel::fromName,
           ProtectionLevel::fromValue);
     }
@@ -77,6 +84,27 @@ public class ProtectionLevel implements KmipEnumeration {
    */
   public static ProtectionLevel of(@NonNull Value value) {
     return new ProtectionLevel(value);
+  }
+
+  /**
+   * Returns the {@link ProtectionLevel} instance wrapping the given value.
+   */
+  public static ProtectionLevel of(@NonNull AttributeName attributeName,
+                                   @NonNull AttributeValue attributeValue) {
+    if (!attributeName
+        .getValue()
+        .equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
+      throw new IllegalArgumentException("Invalid attribute name");
+    }
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+      throw new IllegalArgumentException("Invalid encoding type");
+    }
+    ProtectionLevel.Value v = ProtectionLevel.fromValue(enumeration.getValue());
+    return ProtectionLevel
+        .builder()
+        .value(v)
+        .build();
   }
 
   private static void checkValidExtensionValue(int value) {
@@ -183,6 +211,56 @@ public class ProtectionLevel implements KmipEnumeration {
 
   public boolean isCustom() {
     return value.isCustom();
+  }
+
+  @Override
+  public boolean isAlwaysPresent() {
+    return false;
+  }
+
+  @Override
+  public boolean isServerInitializable() {
+    return false;
+  }
+
+  @Override
+  public boolean isClientInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean isServerModifiable(@NonNull State state) {
+    return false;
+  }
+
+  @Override
+  public boolean isClientModifiable(@NonNull State state) {
+    return true;
+  }
+
+  @Override
+  public boolean isClientDeletable() {
+    return true;
+  }
+
+  @Override
+  public boolean isMultiInstanceAllowed() {
+    return false;
+  }
+
+  @Override
+  public String getCanonicalName() {
+    return kmipTag.getDescription();
+  }
+
+  @Override
+  public AttributeValue getAttributeValue() {
+    return AttributeValue.ofEnumeration(value);
+  }
+
+  @Override
+  public AttributeName getAttributeName() {
+    return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
   }
 
   @Override

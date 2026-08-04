@@ -1,16 +1,21 @@
 package org.purplebean.kmip.model.v3x0.structure.link;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.List;
+import java.util.function.BiFunction;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;
-import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.api.KmipSpec;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
-import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.test.suite.AbstractKmipDataTypeTestSuite;
+import org.purplebean.kmip.test.suite.KmipAttributeTestSuite;
 
 @DisplayName("PublicKeyLink Domain Tests")
-class PublicKeyLinkTest extends AbstractKmipStructureTestSuite<PublicKeyLink> {
+class PublicKeyLinkTest extends AbstractKmipDataTypeTestSuite<PublicKeyLink>
+    implements KmipAttributeTestSuite<PublicKeyLink> {
 
   @Override
   protected void setupDefaultSpec() {
@@ -23,25 +28,95 @@ class PublicKeyLinkTest extends AbstractKmipStructureTestSuite<PublicKeyLink> {
   }
 
   @Override
-  protected PublicKeyLink createDefault() {
-    // TODO: Create a default instance of the structure
-    return PublicKeyLink.of(UniqueIdentifier.of("test-id"));
+  public PublicKeyLink createDefault() {
+    return PublicKeyLink.of("test-id");
   }
 
   @Override
   protected EncodingType expectedEncodingType() {
-    return EncodingType.STRUCTURE;
+    return EncodingType.REFERENCE;
   }
 
   @Override
-  public int expectedMinComponentCount() {
-    // TODO: Set the expected minimum number of components
-    return 1;
+  public boolean expectAlwaysPresent() {
+    return false;
   }
 
   @Override
-  public void validateComponents(List<KmipDataType> values) {
-    // TODO: Validate the components of the structure
-    assertThat(values).hasSize(1);
+  public boolean expectServerInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean expectClientInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean expectClientDeletable() {
+    return true;
+  }
+
+  @Override
+  public boolean expectMultiInstanceAllowed() {
+    return false;
+  }
+
+  @Override
+  public State stateForServerModifiableTrue() {
+    return State.Standard.ACTIVE.inst(); // Always modifiable
+  }
+
+  @Override
+  public State stateForServerModifiableFalse() {
+    return null; // Always modifiable
+  }
+
+  @Override
+  public State stateForClientModifiableTrue() {
+    return State.Standard.ACTIVE.inst(); // Always modifiable
+  }
+
+  @Override
+  public State stateForClientModifiableFalse() {
+    return null; // Always modifiable
+  }
+
+  @Override
+  public AttributeValue expectedAttributeValue() {
+    return AttributeValue
+        .builder()
+        .encodingType(EncodingType.REFERENCE)
+        .value("test-id")
+        .build();
+  }
+
+  @Override
+  public void attribute_serverModifiable_respectsState() {
+    // Always true
+  }
+
+  @Override
+  public void attribute_clientModifiable_respectsState() {
+    // Always true
+  }
+
+  // The legacy core.structure.Attribute wrapper used by the default attribute_roundTrip()
+  // only supports KMIP V1.1/V1.2 (it was superseded by NewAttribute in V2.1+), so a V3.0-only
+  // attribute like PublicKeyLink round-trips directly through the KmipAttribute registry
+  // instead.
+  @Override
+  public void attribute_roundTrip() {
+    PublicKeyLink obj = createDefault();
+    BiFunction<AttributeName, AttributeValue, ? extends KmipAttribute> builder =
+        KmipAttribute.getAttributeBuilderFromRegistry(KmipTag.Standard.PUBLIC_KEY_LINK,
+            obj.getEncodingType());
+    KmipAttribute reconstructed = builder.apply(obj.getAttributeName(), obj.getAttributeValue());
+    assertThat(reconstructed.getAttributeValue())
+        .as("AttributeValue equality")
+        .isEqualTo(obj.getAttributeValue());
+    assertThat(reconstructed.getAttributeName())
+        .as("AttributeName equality")
+        .isEqualTo(obj.getAttributeName());
   }
 }

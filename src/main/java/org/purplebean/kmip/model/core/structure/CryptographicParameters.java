@@ -21,6 +21,8 @@ import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.KeyRoleType;
+import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
+import org.purplebean.kmip.model.core.enumeration.MaskGeneratorHashingAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 import org.purplebean.kmip.model.core.enumeration.State;
 import org.purplebean.kmip.model.core.type.AttributeName;
@@ -30,7 +32,9 @@ import org.purplebean.kmip.model.core.type.FixedFieldLength;
 import org.purplebean.kmip.model.core.type.InitialCounterValue;
 import org.purplebean.kmip.model.core.type.InvocationFieldLength;
 import org.purplebean.kmip.model.core.type.IvLength;
+import org.purplebean.kmip.model.core.type.PSource;
 import org.purplebean.kmip.model.core.type.RandomIv;
+import org.purplebean.kmip.model.core.type.SaltLength;
 import org.purplebean.kmip.model.core.type.TagLength;
 import org.purplebean.kmip.util.StringUtils;
 
@@ -72,6 +76,10 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
   private final InvocationFieldLength invocationFieldLength;
   private final CounterLength counterLength;
   private final InitialCounterValue initialCounterValue;
+  private final MaskGenerator maskGenerator;
+  private final MaskGeneratorHashingAlgorithm maskGeneratorHashingAlgorithm;
+  private final SaltLength saltLength;
+  private final PSource pSource;
 
   @Builder
   private CryptographicParameters(
@@ -87,7 +95,11 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
       FixedFieldLength fixedFieldLength,
       InvocationFieldLength invocationFieldLength,
       CounterLength counterLength,
-      InitialCounterValue initialCounterValue
+      InitialCounterValue initialCounterValue,
+      MaskGenerator maskGenerator,
+      MaskGeneratorHashingAlgorithm maskGeneratorHashingAlgorithm,
+      SaltLength saltLength,
+      PSource pSource
   ) {
     this.blockCipherMode = blockCipherMode;
     this.paddingMethod = paddingMethod;
@@ -102,6 +114,10 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
     this.invocationFieldLength = invocationFieldLength;
     this.counterLength = counterLength;
     this.initialCounterValue = initialCounterValue;
+    this.maskGenerator = maskGenerator;
+    this.maskGeneratorHashingAlgorithm = maskGeneratorHashingAlgorithm;
+    this.saltLength = saltLength;
+    this.pSource = pSource;
     validate();
   }
 
@@ -162,6 +178,19 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
             ? (InitialCounterValue) map
                 .get(InitialCounterValue.kmipTag)
                 .get(0) : null)
+        .maskGenerator(map.containsKey(MaskGenerator.kmipTag) ? (MaskGenerator) map
+            .get(MaskGenerator.kmipTag)
+            .get(0) : null)
+        .maskGeneratorHashingAlgorithm(map.containsKey(MaskGeneratorHashingAlgorithm.kmipTag)
+            ? (MaskGeneratorHashingAlgorithm) map
+                .get(MaskGeneratorHashingAlgorithm.kmipTag)
+                .get(0) : null)
+        .saltLength(map.containsKey(SaltLength.kmipTag) ? (SaltLength) map
+            .get(SaltLength.kmipTag)
+            .get(0) : null)
+        .pSource(map.containsKey(PSource.kmipTag) ? (PSource) map
+            .get(PSource.kmipTag)
+            .get(0) : null)
         .build();
   }
 
@@ -199,7 +228,11 @@ public class CryptographicParameters implements KmipStructure, KmipAttribute {
             fixedFieldLength,
             invocationFieldLength,
             counterLength,
-            initialCounterValue
+            initialCounterValue,
+            maskGenerator,
+            maskGeneratorHashingAlgorithm,
+            saltLength,
+            pSource
         )
         .filter(Objects::nonNull)
         .flatMap(val -> val instanceof List ? ((List<?>) val).stream() : Stream.of(val))

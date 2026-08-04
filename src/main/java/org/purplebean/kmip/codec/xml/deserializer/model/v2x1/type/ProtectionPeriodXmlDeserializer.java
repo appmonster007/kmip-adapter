@@ -28,7 +28,7 @@ public class ProtectionPeriodXmlDeserializer extends
   @Override
   protected void setValue(ProtectionPeriod.ProtectionPeriodBuilder builder, String tag, String type,
                           JsonParser p, DeserializationContext ctxt) throws IOException {
-    builder.value(ctxt.readValue(p, Long.class));
+    builder.value(ctxt.readValue(p, Integer.class));
   }
 
   @Override

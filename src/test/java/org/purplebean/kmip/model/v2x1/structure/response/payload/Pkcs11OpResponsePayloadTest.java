@@ -1,10 +1,12 @@
 package org.purplebean.kmip.model.v2x1.structure.response.payload;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("Pkcs11OpResponsePayload Domain Tests")
@@ -25,6 +27,7 @@ class Pkcs11OpResponsePayloadTest extends AbstractKmipStructureTestSuite<Pkcs11O
     return Pkcs11OpResponsePayload
         .builder()
         .pkcs11ReturnCode(org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode.of(0))
+        .correlationValue(CorrelationValue.of(ByteBuffer.wrap(new byte[] {0x01, 0x02})))
         .build();
   }
 

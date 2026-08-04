@@ -1,7 +1,6 @@
 package org.purplebean.kmip.codec.ttlv.model.v3x0.structure.link;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.PrivateKeyLink;
 import org.purplebean.kmip.test.suite.AbstractTtlvSerializationTestSuite;
 
@@ -15,11 +14,11 @@ class PrivateKeyLinkTtlvTest extends AbstractTtlvSerializationTestSuite<PrivateK
 
   @Override
   public PrivateKeyLink createDefault() {
-    return PrivateKeyLink.of(UniqueIdentifier.of("test-id"));
+    return PrivateKeyLink.of("test-id");
   }
 
   @Override
   public PrivateKeyLink createVariant() {
-    return PrivateKeyLink.of(UniqueIdentifier.of("test-id"));
+    return PrivateKeyLink.of("test-id");
   }
 }

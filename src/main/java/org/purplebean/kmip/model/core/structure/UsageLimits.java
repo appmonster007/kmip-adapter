@@ -51,7 +51,6 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
 
   @NonNull
   private final UsageLimitsTotal usageLimitsTotal;
-  @NonNull
   private final UsageLimitsCount usageLimitsCount;
   @NonNull
   private final UsageLimitsUnit usageLimitsUnit;
@@ -59,7 +58,7 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
   @Builder
   private UsageLimits(
       @NonNull UsageLimitsTotal usageLimitsTotal,
-      @NonNull UsageLimitsCount usageLimitsCount,
+      UsageLimitsCount usageLimitsCount,
       @NonNull UsageLimitsUnit usageLimitsUnit
   ) {
     this.usageLimitsTotal = usageLimitsTotal;
@@ -85,9 +84,11 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
         .usageLimitsTotal((UsageLimitsTotal) map
             .get(UsageLimitsTotal.kmipTag)
             .get(0))
-        .usageLimitsCount((UsageLimitsCount) map
-            .get(UsageLimitsCount.kmipTag)
-            .get(0))
+        .usageLimitsCount(map.containsKey(UsageLimitsCount.kmipTag)
+            ? (UsageLimitsCount) map
+                .get(UsageLimitsCount.kmipTag)
+                .get(0)
+            : null)
         .usageLimitsUnit((UsageLimitsUnit) map
             .get(UsageLimitsUnit.kmipTag)
             .get(0))
@@ -100,7 +101,6 @@ public class UsageLimits implements KmipStructure, KmipAttribute {
           String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
     Objects.requireNonNull(usageLimitsTotal, "UsageLimitsTotal cannot be null");
-    Objects.requireNonNull(usageLimitsCount, "UsageLimitsCount cannot be null");
     Objects.requireNonNull(usageLimitsUnit, "UsageLimitsUnit cannot be null");
   }
 

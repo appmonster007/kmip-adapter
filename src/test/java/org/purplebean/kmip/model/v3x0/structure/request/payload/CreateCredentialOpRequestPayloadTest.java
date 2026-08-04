@@ -9,6 +9,7 @@ import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.core.type.Username;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("CreateCredentialOpRequestPayload Domain Tests")
@@ -30,6 +31,7 @@ class CreateCredentialOpRequestPayloadTest
     return CreateCredentialOpRequestPayload
         .builder()
         .credentialType(CredentialType.Standard.USERNAME_AND_PASSWORD.inst())
+        .attributes(Attributes.of(List.of()))
         .credentialValue(UsernameAndPassword.of(Username.of("test"), Password.of("pass")))
         .build();
   }

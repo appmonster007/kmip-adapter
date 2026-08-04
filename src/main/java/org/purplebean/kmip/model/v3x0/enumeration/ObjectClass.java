@@ -15,11 +15,16 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipAttribute;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipEnumeration;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.model.core.enumeration.State;
+import org.purplebean.kmip.model.core.type.AttributeName;
+import org.purplebean.kmip.model.core.type.AttributeValue;
+import org.purplebean.kmip.util.StringUtils;
 
 /**
  * A KMIP (Key Management Interoperability Protocol) enumeration that specifies the
@@ -38,7 +43,7 @@ import org.purplebean.kmip.api.KmipTag;
  */
 @Data
 @Builder(toBuilder = true)
-public class ObjectClass implements KmipEnumeration {
+public class ObjectClass implements KmipEnumeration, KmipAttribute {
   public static final KmipTag kmipTag = KmipTag.Standard.OBJECT_CLASS.inst();
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
@@ -58,6 +63,8 @@ public class ObjectClass implements KmipEnumeration {
         continue;
       }
       KmipDataType.register(spec, kmipTag.getValue(), encodingType, ObjectClass.class);
+      KmipAttribute.register(spec, kmipTag.getValue(), encodingType, ObjectClass.class,
+          ObjectClass::of);
       KmipEnumeration.register(spec, kmipTag.getValue(), ObjectClass::fromName,
           ObjectClass::fromValue);
     }
@@ -77,6 +84,27 @@ public class ObjectClass implements KmipEnumeration {
    */
   public static ObjectClass of(@NonNull Value value) {
     return new ObjectClass(value);
+  }
+
+  /**
+   * Returns the {@link ObjectClass} instance wrapping the given value.
+   */
+  public static ObjectClass of(@NonNull AttributeName attributeName,
+                               @NonNull AttributeValue attributeValue) {
+    if (!attributeName
+        .getValue()
+        .equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
+      throw new IllegalArgumentException("Invalid attribute name");
+    }
+    if (attributeValue.getEncodingType() != encodingType
+        || !(attributeValue.getValue() instanceof KmipEnumeration.Value<?> enumeration)) {
+      throw new IllegalArgumentException("Invalid encoding type");
+    }
+    ObjectClass.Value v = ObjectClass.fromValue(enumeration.getValue());
+    return ObjectClass
+        .builder()
+        .value(v)
+        .build();
   }
 
   private static void checkValidExtensionValue(int value) {
@@ -193,6 +221,56 @@ public class ObjectClass implements KmipEnumeration {
 
   public int getIntValue() {
     return value.getValue();
+  }
+
+  @Override
+  public boolean isAlwaysPresent() {
+    return true;
+  }
+
+  @Override
+  public boolean isServerInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean isClientInitializable() {
+    return true;
+  }
+
+  @Override
+  public boolean isServerModifiable(@NonNull State state) {
+    return false;
+  }
+
+  @Override
+  public boolean isClientModifiable(@NonNull State state) {
+    return false;
+  }
+
+  @Override
+  public boolean isClientDeletable() {
+    return false;
+  }
+
+  @Override
+  public boolean isMultiInstanceAllowed() {
+    return false;
+  }
+
+  @Override
+  public String getCanonicalName() {
+    return kmipTag.getDescription();
+  }
+
+  @Override
+  public AttributeValue getAttributeValue() {
+    return AttributeValue.ofEnumeration(value);
+  }
+
+  @Override
+  public AttributeName getAttributeName() {
+    return AttributeName.of(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()));
   }
 
   /**

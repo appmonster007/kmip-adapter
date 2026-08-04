@@ -23,7 +23,7 @@ import org.purplebean.kmip.util.StringUtils;
 @Builder(toBuilder = true)
 public class ProtectionPeriod implements KmipDataType, KmipAttribute {
   public static final KmipTag kmipTag = KmipTag.Standard.PROTECTION_PERIOD.inst();
-  public static final EncodingType encodingType = EncodingType.LONG_INTEGER;
+  public static final EncodingType encodingType = EncodingType.INTERVAL;
   private static final Set<KmipSpec> supportedVersions =
       Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0);
 
@@ -39,10 +39,10 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
   }
 
   @NonNull
-  private final Long value;
+  private final Integer value;
 
   @Builder
-  private ProtectionPeriod(@NonNull Long value) {
+  private ProtectionPeriod(@NonNull Integer value) {
     this.value = value;
     validate();
   }
@@ -50,7 +50,7 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
   /**
    * Returns the {@link ProtectionPeriod} instance wrapping the given value.
    */
-  public static ProtectionPeriod of(@NonNull Long value) {
+  public static ProtectionPeriod of(@NonNull Integer value) {
     return new ProtectionPeriod(value);
   }
 
@@ -60,7 +60,7 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
   public static ProtectionPeriod of(@NonNull AttributeName attributeName,
                                     @NonNull AttributeValue attributeValue) {
     if (attributeValue.getEncodingType() != encodingType
-        || !(attributeValue.getValue() instanceof Long value)) {
+        || !(attributeValue.getValue() instanceof Integer value)) {
       throw new IllegalArgumentException("Invalid attribute value");
     }
     return new ProtectionPeriod(value);
@@ -76,7 +76,7 @@ public class ProtectionPeriod implements KmipDataType, KmipAttribute {
 
   @Override
   public AttributeValue getAttributeValue() {
-    return AttributeValue.ofLongInteger(value);
+    return AttributeValue.ofInterval(value);
   }
 
   @Override

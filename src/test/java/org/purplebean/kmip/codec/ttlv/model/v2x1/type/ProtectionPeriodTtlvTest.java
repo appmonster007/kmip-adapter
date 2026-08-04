@@ -14,11 +14,11 @@ class ProtectionPeriodTtlvTest extends AbstractTtlvSerializationTestSuite<Protec
 
   @Override
   public ProtectionPeriod createDefault() {
-    return ProtectionPeriod.of(12345L);
+    return ProtectionPeriod.of(12345);
   }
 
   @Override
   public ProtectionPeriod createVariant() {
-    return ProtectionPeriod.of(54321L);
+    return ProtectionPeriod.of(54321);
   }
 }

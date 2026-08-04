@@ -28,7 +28,7 @@ public class ProtectionPeriodTtlvDeserializer extends
   @Override
   protected void setValue(ProtectionPeriod.ProtectionPeriodBuilder builder, byte[] tag, byte type,
                           ByteBuffer p, TtlvMapper mapper) throws IOException {
-    builder.value(mapper.readValue(p, Long.class));
+    builder.value(mapper.readValue(p, Integer.class));
   }
 
   @Override

@@ -16,6 +16,7 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.response.ResponsePayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
@@ -46,13 +47,18 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
 
   private final Pkcs11OutputParameters pkcs11OutputParameters;
 
+  @NonNull
+  private final CorrelationValue correlationValue;
+
   @Builder
   private Pkcs11OpResponsePayload(
       @NonNull Pkcs11ReturnCode pkcs11ReturnCode,
-      Pkcs11OutputParameters pkcs11OutputParameters
+      Pkcs11OutputParameters pkcs11OutputParameters,
+      @NonNull CorrelationValue correlationValue
   ) {
     this.pkcs11ReturnCode = pkcs11ReturnCode;
     this.pkcs11OutputParameters = pkcs11OutputParameters;
+    this.correlationValue = correlationValue;
     validate();
   }
 
@@ -72,6 +78,9 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
           .get(Pkcs11OutputParameters.kmipTag)
           .getFirst());
     }
+    builder.correlationValue((CorrelationValue) map
+        .get(CorrelationValue.kmipTag)
+        .getFirst());
     return builder.build();
   }
 
@@ -103,7 +112,7 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(pkcs11ReturnCode, pkcs11OutputParameters)
+        .of(pkcs11ReturnCode, pkcs11OutputParameters, correlationValue)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import org.purplebean.kmip.api.CredentialValue;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
@@ -25,7 +26,7 @@ import org.purplebean.kmip.model.core.type.CertificateValue;
  */
 @Data
 @Builder(toBuilder = true)
-public class Certificate implements ManagedObject, KmipStructure {
+public class Certificate implements ManagedObject, CredentialValue, KmipStructure {
   public static final KmipTag kmipTag = KmipTag.Standard.CERTIFICATE.inst();
   public static final ObjectType.Value objectTypeValue = ObjectType.Standard.CERTIFICATE;
   private static final Set<KmipSpec> supportedVersions =

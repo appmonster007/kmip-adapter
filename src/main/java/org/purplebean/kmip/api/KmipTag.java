@@ -705,7 +705,7 @@ public class KmipTag {
         KmipSpec.V3_0),
     DATA_LENGTH(0x4200C4, "DataLength", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
         KmipSpec.V3_0),
-    RANDOM_IV(0x4200C5, "RandomIv", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
+    RANDOM_IV(0x4200C5, "RandomIV", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
         KmipSpec.V3_0),
     MAC_DATA(0x4200C6, "MACData", KmipSpec.UnknownVersion, KmipSpec.V1_2, KmipSpec.V2_1,
         KmipSpec.V3_0),

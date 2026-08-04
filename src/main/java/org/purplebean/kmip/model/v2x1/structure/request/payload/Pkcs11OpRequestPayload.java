@@ -18,6 +18,7 @@ import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
@@ -52,17 +53,21 @@ public class Pkcs11OpRequestPayload implements RequestPayloadStructure {
 
   private final Pkcs11OutputParameters pkcs11OutputParameters;
 
+  private final CorrelationValue correlationValue;
+
   @Builder
   private Pkcs11OpRequestPayload(
       UniqueIdentifier uniqueIdentifier,
       @NonNull Pkcs11Function pkcs11Function,
       Pkcs11InputParameters pkcs11InputParameters,
-      Pkcs11OutputParameters pkcs11OutputParameters
+      Pkcs11OutputParameters pkcs11OutputParameters,
+      CorrelationValue correlationValue
   ) {
     this.uniqueIdentifier = uniqueIdentifier;
     this.pkcs11Function = pkcs11Function;
     this.pkcs11InputParameters = pkcs11InputParameters;
     this.pkcs11OutputParameters = pkcs11OutputParameters;
+    this.correlationValue = correlationValue;
     validate();
   }
 
@@ -90,6 +95,11 @@ public class Pkcs11OpRequestPayload implements RequestPayloadStructure {
     if (map.containsKey(Pkcs11OutputParameters.kmipTag)) {
       builder.pkcs11OutputParameters((Pkcs11OutputParameters) map
           .get(Pkcs11OutputParameters.kmipTag)
+          .getFirst());
+    }
+    if (map.containsKey(CorrelationValue.kmipTag)) {
+      builder.correlationValue((CorrelationValue) map
+          .get(CorrelationValue.kmipTag)
           .getFirst());
     }
     return builder.build();
@@ -123,7 +133,8 @@ public class Pkcs11OpRequestPayload implements RequestPayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(uniqueIdentifier, pkcs11Function, pkcs11InputParameters, pkcs11OutputParameters)
+        .of(uniqueIdentifier, pkcs11Function, pkcs11InputParameters, pkcs11OutputParameters,
+            correlationValue)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

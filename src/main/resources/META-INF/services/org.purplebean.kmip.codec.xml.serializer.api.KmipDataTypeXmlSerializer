@@ -22,6 +22,7 @@ org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.KeyRoleTypeXmlSe
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.KeyValueLocationTypeXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.KeyWrapTypeXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.LinkTypeXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.MaskGeneratorHashingAlgorithmXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.MaskGeneratorXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.NameTypeXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.enumeration.ObjectGroupMemberXmlSerializer
@@ -203,6 +204,7 @@ org.purplebean.kmip.codec.xml.serializer.model.core.type.OffsetXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.OpaqueDataValueXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.OperationPolicyNameXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.OriginalCreationDateXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.core.type.PSourceXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.PXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.PasswordXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.PgpKeyVersionXmlSerializer
@@ -226,6 +228,7 @@ org.purplebean.kmip.codec.xml.serializer.model.core.type.RandomIvXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.ReplacedUniqueIdentifierXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.ResultMessageXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.RevocationMessageXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.core.type.SaltLengthXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.SaltXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.SerialNumberXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.core.type.SignatureDataXmlSerializer
@@ -388,6 +391,7 @@ org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.Cr
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.CreateSplitKeyOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.DecryptOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayloadXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.DeleteAttributeOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.DeriveKeyOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.EncryptOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.ExportOpRequestPayloadXmlSerializer
@@ -403,6 +407,7 @@ org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.Lo
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.LogoutOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.MacOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.MacVerifyOpRequestPayloadXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.ModifyAttributeOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.PingOpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.Pkcs11OpRequestPayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.request.payload.ProcessOpRequestPayloadXmlSerializer
@@ -427,6 +432,7 @@ org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.C
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.CreateOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.DecryptOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.DelegatedLoginOpResponsePayloadXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.DeleteAttributeOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.EncryptOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.ExportOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.GetAttributesOpResponsePayloadXmlSerializer
@@ -440,6 +446,7 @@ org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.L
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.LogoutOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.MacOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.MacVerifyOpResponsePayloadXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.ModifyAttributeOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.PingOpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.Pkcs11OpResponsePayloadXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v2x1.structure.response.payload.ProcessOpResponsePayloadXmlSerializer
@@ -539,8 +546,10 @@ org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.OtpCredentialXmlSe
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.PasswordCredentialXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.CertificateLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.ChildLinkXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.CredentialLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.DerivationObjectLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.DerivedObjectLinkXmlSerializer
+org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.GroupLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.NextLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.ParentLinkXmlSerializer
 org.purplebean.kmip.codec.xml.serializer.model.v3x0.structure.link.Pkcs12CertificateLinkXmlSerializer

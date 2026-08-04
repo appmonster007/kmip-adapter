@@ -7,22 +7,22 @@
     These identifiers are direct transcriptions of official OASIS KMIP specification field
     names (single-letter RSA/DSA key components D/G/J/P/Q/X/Y, X.509 DN attribute codes
     CertificateIssuerC/L/O and CertificateSubjectC/L/O, and terms like CRTCoefficient,
-    IVCounterNonce, MACSignature, UniqueBatchItemID). Renaming them to satisfy
+    IVCounterNonce, MACSignature, UniqueBatchItemID, PSource). Renaming them to satisfy
     AbbreviationAsWordInName would break the 1:1 correspondence between this library's
     class/field names and the spec they implement, which matters more here than Java
     naming-convention purity.
 -->
 <suppressions>
     <suppress checks="AbbreviationAsWordInName"
-              message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO])(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer)?'"/>
+              message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO]|PSource)(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer)?'"/>
 
     <!-- Same identifiers as above, appearing as field names (RSA/DSA transparent key material). -->
     <suppress checks="GoogleNonConstantFieldName"
-              message="'(d|g|j|p|q|x|y|qString)'"/>
+              message="'(d|g|j|p|q|x|y|qString|pSource)'"/>
 
     <!-- Same identifiers as above, appearing as constructor/method parameter names. -->
     <suppress checks="ParameterName"
-              message="'(d|g|j|p|q|x|y|qString)'"/>
+              message="'(d|g|j|p|q|x|y|qString|pSource)'"/>
 
     <!--
         QueryAsynchronousRequestsOp{Request,Response}Payload.QueryAsynchronousRequestsOp{Request,

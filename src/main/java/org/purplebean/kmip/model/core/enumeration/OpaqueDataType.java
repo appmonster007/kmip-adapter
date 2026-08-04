@@ -119,6 +119,18 @@ public class OpaqueDataType implements KmipEnumeration {
    * Look up by name.
    */
   public static Value fromName(String name) {
+    // Unlike other KMIP enumerations, OpaqueDataType defines no Standard values at all -
+    // every value is a vendor extension (8XXXXXXX). The wire format may therefore present
+    // an unregistered extension directly as a hex literal (e.g. "0x80000001") rather than a
+    // pre-registered description; auto-register it on first sight so round-tripping works.
+    if (name != null && (name.startsWith("0x") || name.startsWith("0X"))) {
+      try {
+        int hexValue = (int) Long.parseLong(name.substring(2), 16);
+        return register(hexValue, name, Set.of(KmipContext.getSpec()));
+      } catch (NumberFormatException ignored) {
+        // Not a valid hex literal; fall through to the description lookup below.
+      }
+    }
     final String nameLowerCase = name.toLowerCase(Locale.ROOT);
     KmipSpec spec = KmipContext.getSpec();
     Value v = DESCRIPTION_REGISTRY.get(nameLowerCase);

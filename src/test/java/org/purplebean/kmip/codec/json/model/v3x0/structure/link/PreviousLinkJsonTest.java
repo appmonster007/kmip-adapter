@@ -1,7 +1,6 @@
 package org.purplebean.kmip.codec.json.model.v3x0.structure.link;
 
 import org.junit.jupiter.api.DisplayName;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.PreviousLink;
 import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
@@ -15,11 +14,11 @@ class PreviousLinkJsonTest extends AbstractJsonSerializationTestSuite<PreviousLi
 
   @Override
   public PreviousLink createDefault() {
-    return PreviousLink.of(UniqueIdentifier.of("test-id"));
+    return PreviousLink.of("test-id");
   }
 
   @Override
   public PreviousLink createVariant() {
-    return PreviousLink.of(UniqueIdentifier.of("test-id"));
+    return PreviousLink.of("test-id");
   }
 }

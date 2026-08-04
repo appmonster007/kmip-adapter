@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
+import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11ReturnCode;
 
@@ -38,6 +39,8 @@ public class Pkcs11OpResponsePayloadXmlDeserializer extends
           builder.pkcs11ReturnCode(ctxt.readValue(p, Pkcs11ReturnCode.class));
       case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS ->
           builder.pkcs11OutputParameters(ctxt.readValue(p, Pkcs11OutputParameters.class));
+      case KmipTag.Standard.CORRELATION_VALUE ->
+          builder.correlationValue(ctxt.readValue(p, CorrelationValue.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

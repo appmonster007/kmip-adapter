@@ -7,6 +7,11 @@ import org.purplebean.kmip.api.CredentialValue;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.json.deserializer.api.AbstractKmipDataTypeJsonDeserializer;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
+import org.purplebean.kmip.model.core.structure.Certificate;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
+import org.purplebean.kmip.model.v3x0.structure.HashedPasswordCredential;
+import org.purplebean.kmip.model.v3x0.structure.OtpCredential;
+import org.purplebean.kmip.model.v3x0.structure.PasswordCredential;
 import org.purplebean.kmip.model.v3x0.structure.request.payload.CreateCredentialOpRequestPayload;
 
 /**
@@ -40,8 +45,17 @@ public class CreateCredentialOpRequestPayloadJsonDeserializer extends
         builder.credentialType(credentialType);
         ctxt.setAttribute("credentialType", credentialType.getDescription());
       }
+      case KmipTag.Standard.ATTRIBUTES -> builder.attributes(ctxt.readValue(p, Attributes.class));
       case KmipTag.Standard.CREDENTIAL_VALUE ->
           builder.credentialValue(ctxt.readValue(p, CredentialValue.class));
+      case KmipTag.Standard.PASSWORD_CREDENTIAL ->
+          builder.credentialValue(ctxt.readValue(p, PasswordCredential.class));
+      case KmipTag.Standard.HASHED_PASSWORD_CREDENTIAL ->
+          builder.credentialValue(ctxt.readValue(p, HashedPasswordCredential.class));
+      case KmipTag.Standard.OTP_CREDENTIAL ->
+          builder.credentialValue(ctxt.readValue(p, OtpCredential.class));
+      case KmipTag.Standard.CERTIFICATE ->
+          builder.credentialValue(ctxt.readValue(p, Certificate.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

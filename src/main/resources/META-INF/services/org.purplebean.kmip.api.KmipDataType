@@ -23,6 +23,7 @@ org.purplebean.kmip.model.core.enumeration.KeyValueLocationType
 org.purplebean.kmip.model.core.enumeration.KeyWrapType
 org.purplebean.kmip.model.core.enumeration.LinkType
 org.purplebean.kmip.model.core.enumeration.MaskGenerator
+org.purplebean.kmip.model.core.enumeration.MaskGeneratorHashingAlgorithm
 org.purplebean.kmip.model.core.enumeration.NameType
 org.purplebean.kmip.model.core.enumeration.ObjectGroupMember
 org.purplebean.kmip.model.core.enumeration.ObjectType
@@ -204,6 +205,7 @@ org.purplebean.kmip.model.core.type.OpaqueDataValue
 org.purplebean.kmip.model.core.type.OperationPolicyName
 org.purplebean.kmip.model.core.type.OriginalCreationDate
 org.purplebean.kmip.model.core.type.P
+org.purplebean.kmip.model.core.type.PSource
 org.purplebean.kmip.model.core.type.Password
 org.purplebean.kmip.model.core.type.PgpKeyVersion
 org.purplebean.kmip.model.core.type.PrimeExponentP
@@ -227,6 +229,7 @@ org.purplebean.kmip.model.core.type.ReplacedUniqueIdentifier
 org.purplebean.kmip.model.core.type.ResultMessage
 org.purplebean.kmip.model.core.type.RevocationMessage
 org.purplebean.kmip.model.core.type.Salt
+org.purplebean.kmip.model.core.type.SaltLength
 org.purplebean.kmip.model.core.type.SerialNumber
 org.purplebean.kmip.model.core.type.SignatureData
 org.purplebean.kmip.model.core.type.SplitKeyParts
@@ -388,6 +391,7 @@ org.purplebean.kmip.model.v2x1.structure.request.payload.CreateOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.CreateSplitKeyOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.DecryptOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload
+org.purplebean.kmip.model.v2x1.structure.request.payload.DeleteAttributeOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.DeriveKeyOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.EncryptOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.ExportOpRequestPayload
@@ -403,6 +407,7 @@ org.purplebean.kmip.model.v2x1.structure.request.payload.LoginOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.LogoutOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.MacOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.MacVerifyOpRequestPayload
+org.purplebean.kmip.model.v2x1.structure.request.payload.ModifyAttributeOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.PingOpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload
 org.purplebean.kmip.model.v2x1.structure.request.payload.ProcessOpRequestPayload
@@ -427,6 +432,7 @@ org.purplebean.kmip.model.v2x1.structure.response.payload.CreateKeyPairOpRespons
 org.purplebean.kmip.model.v2x1.structure.response.payload.CreateOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.DecryptOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.DelegatedLoginOpResponsePayload
+org.purplebean.kmip.model.v2x1.structure.response.payload.DeleteAttributeOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.EncryptOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.ExportOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.GetAttributesOpResponsePayload
@@ -440,6 +446,7 @@ org.purplebean.kmip.model.v2x1.structure.response.payload.LoginOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.LogoutOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.MacOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.MacVerifyOpResponsePayload
+org.purplebean.kmip.model.v2x1.structure.response.payload.ModifyAttributeOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.PingOpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload
 org.purplebean.kmip.model.v2x1.structure.response.payload.ProcessOpResponsePayload
@@ -539,8 +546,10 @@ org.purplebean.kmip.model.v3x0.structure.OtpCredential
 org.purplebean.kmip.model.v3x0.structure.PasswordCredential
 org.purplebean.kmip.model.v3x0.structure.link.CertificateLink
 org.purplebean.kmip.model.v3x0.structure.link.ChildLink
+org.purplebean.kmip.model.v3x0.structure.link.CredentialLink
 org.purplebean.kmip.model.v3x0.structure.link.DerivationObjectLink
 org.purplebean.kmip.model.v3x0.structure.link.DerivedObjectLink
+org.purplebean.kmip.model.v3x0.structure.link.GroupLink
 org.purplebean.kmip.model.v3x0.structure.link.NextLink
 org.purplebean.kmip.model.v3x0.structure.link.ParentLink
 org.purplebean.kmip.model.v3x0.structure.link.Pkcs12CertificateLink

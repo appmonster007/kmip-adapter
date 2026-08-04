@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import org.purplebean.kmip.api.CredentialValue;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
@@ -38,7 +39,7 @@ import org.purplebean.kmip.model.v3x0.type.OtpSerial;
  */
 @Data
 @Builder(toBuilder = true)
-public class OtpCredential implements KmipStructure {
+public class OtpCredential implements CredentialValue, KmipStructure {
 
   public static final KmipTag kmipTag = KmipTag.Standard.OTP_CREDENTIAL.inst();
   private static final Set<KmipSpec> supportedVersions =

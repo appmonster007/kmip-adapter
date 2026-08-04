@@ -1,0 +1,48 @@
+package org.purplebean.kmip.codec.xml.deserializer.model.v2x1.structure.response.payload;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import java.io.IOException;
+import org.purplebean.kmip.api.KmipTag;
+import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.response.payload.ModifyAttributeOpResponsePayload;
+
+/**
+ * XML deserializer for {@link ModifyAttributeOpResponsePayload}.
+ */
+public class ModifyAttributeOpResponsePayloadXmlDeserializer extends
+    AbstractKmipDataTypeXmlDeserializer<ModifyAttributeOpResponsePayload,
+        ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder> {
+
+  /**
+   * Constructs a new {@link ModifyAttributeOpResponsePayloadXmlDeserializer}.
+   */
+  public ModifyAttributeOpResponsePayloadXmlDeserializer() {
+    super(ModifyAttributeOpResponsePayload.kmipTag, ModifyAttributeOpResponsePayload.encodingType);
+  }
+
+  @Override
+  protected ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder
+      createBuilder() {
+    return ModifyAttributeOpResponsePayload.builder();
+  }
+
+  @Override
+  protected void setValue(
+      ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder builder, String tag,
+      String type, JsonParser p, DeserializationContext ctxt) throws IOException {
+    KmipTag.Value nodeTag = KmipTag.fromName(tag);
+    switch (nodeTag) {
+      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
+          builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+      default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
+    }
+  }
+
+  @Override
+  protected ModifyAttributeOpResponsePayload build(
+      ModifyAttributeOpResponsePayload.ModifyAttributeOpResponsePayloadBuilder builder) {
+    return builder.build();
+  }
+}

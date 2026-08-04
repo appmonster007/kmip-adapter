@@ -10,6 +10,8 @@ import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.DigitalSignatureAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.HashingAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.KeyRoleType;
+import org.purplebean.kmip.model.core.enumeration.MaskGenerator;
+import org.purplebean.kmip.model.core.enumeration.MaskGeneratorHashingAlgorithm;
 import org.purplebean.kmip.model.core.enumeration.PaddingMethod;
 import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.CounterLength;
@@ -17,7 +19,9 @@ import org.purplebean.kmip.model.core.type.FixedFieldLength;
 import org.purplebean.kmip.model.core.type.InitialCounterValue;
 import org.purplebean.kmip.model.core.type.InvocationFieldLength;
 import org.purplebean.kmip.model.core.type.IvLength;
+import org.purplebean.kmip.model.core.type.PSource;
 import org.purplebean.kmip.model.core.type.RandomIv;
+import org.purplebean.kmip.model.core.type.SaltLength;
 import org.purplebean.kmip.model.core.type.TagLength;
 
 /**
@@ -68,6 +72,13 @@ public class CryptographicParametersTtlvDeserializer extends
           builder.counterLength(mapper.readValue(p, CounterLength.class));
       case KmipTag.Standard.INITIAL_COUNTER_VALUE ->
           builder.initialCounterValue(mapper.readValue(p, InitialCounterValue.class));
+      case KmipTag.Standard.MASK_GENERATOR ->
+          builder.maskGenerator(mapper.readValue(p, MaskGenerator.class));
+      case KmipTag.Standard.MASK_GENERATOR_HASHING_ALGORITHM -> builder
+          .maskGeneratorHashingAlgorithm(mapper.readValue(p, MaskGeneratorHashingAlgorithm.class));
+      case KmipTag.Standard.SALT_LENGTH ->
+          builder.saltLength(mapper.readValue(p, SaltLength.class));
+      case KmipTag.Standard.P_SOURCE -> builder.pSource(mapper.readValue(p, PSource.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

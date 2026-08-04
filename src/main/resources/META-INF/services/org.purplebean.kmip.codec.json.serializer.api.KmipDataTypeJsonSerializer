@@ -22,6 +22,7 @@ org.purplebean.kmip.codec.json.serializer.model.core.enumeration.KeyRoleTypeJson
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.KeyValueLocationTypeJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.KeyWrapTypeJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.LinkTypeJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.core.enumeration.MaskGeneratorHashingAlgorithmJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.MaskGeneratorJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.NameTypeJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.enumeration.ObjectGroupMemberJsonSerializer
@@ -204,6 +205,7 @@ org.purplebean.kmip.codec.json.serializer.model.core.type.OpaqueDataValueJsonSer
 org.purplebean.kmip.codec.json.serializer.model.core.type.OperationPolicyNameJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.OriginalCreationDateJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.PJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.core.type.PSourceJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.PasswordJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.PgpKeyVersionJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.PrimeExponentPJsonSerializer
@@ -227,6 +229,7 @@ org.purplebean.kmip.codec.json.serializer.model.core.type.ReplacedUniqueIdentifi
 org.purplebean.kmip.codec.json.serializer.model.core.type.ResultMessageJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.RevocationMessageJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.SaltJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.core.type.SaltLengthJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.SerialNumberJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.SignatureDataJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.core.type.SplitKeyPartsJsonSerializer
@@ -388,6 +391,7 @@ org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.C
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.CreateSplitKeyOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.DecryptOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayloadJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.DeleteAttributeOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.DeriveKeyOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.EncryptOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.ExportOpRequestPayloadJsonSerializer
@@ -403,6 +407,7 @@ org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.L
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.LogoutOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.MacOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.MacVerifyOpRequestPayloadJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.ModifyAttributeOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.PingOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.Pkcs11OpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.request.payload.ProcessOpRequestPayloadJsonSerializer
@@ -427,6 +432,7 @@ org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.CreateOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.DecryptOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.DelegatedLoginOpResponsePayloadJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.DeleteAttributeOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.EncryptOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.ExportOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.GetAttributesOpResponsePayloadJsonSerializer
@@ -440,6 +446,7 @@ org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.LogoutOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.MacOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.MacVerifyOpResponsePayloadJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.ModifyAttributeOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.PingOpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.Pkcs11OpResponsePayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v2x1.structure.response.payload.ProcessOpResponsePayloadJsonSerializer
@@ -539,8 +546,10 @@ org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.OtpCredentialJson
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.PasswordCredentialJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.CertificateLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.ChildLinkJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.CredentialLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.DerivationObjectLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.DerivedObjectLinkJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.GroupLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.NextLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.ParentLinkJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.link.Pkcs12CertificateLinkJsonSerializer

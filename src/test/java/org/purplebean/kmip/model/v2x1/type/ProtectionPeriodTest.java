@@ -14,7 +14,7 @@ class ProtectionPeriodTest extends AbstractKmipDataTypeTestSuite<ProtectionPerio
     implements KmipAttributeTestSuite<ProtectionPeriod> {
 
   // TODO: Adjust FIXED_VALUE based on DATA_TYPE
-  private static final Long FIXED_VALUE = 12345L;
+  private static final Integer FIXED_VALUE = 12345;
 
   @Override
   protected void setupDefaultSpec() {
@@ -33,7 +33,7 @@ class ProtectionPeriodTest extends AbstractKmipDataTypeTestSuite<ProtectionPerio
 
   @Override
   protected EncodingType expectedEncodingType() {
-    return EncodingType.LONG_INTEGER;
+    return EncodingType.INTERVAL;
   }
 
   @Override
@@ -83,7 +83,7 @@ class ProtectionPeriodTest extends AbstractKmipDataTypeTestSuite<ProtectionPerio
 
   @Override
   public AttributeValue expectedAttributeValue() {
-    return AttributeValue.ofLongInteger(FIXED_VALUE);
+    return AttributeValue.ofInterval(FIXED_VALUE);
   }
 
   @Override

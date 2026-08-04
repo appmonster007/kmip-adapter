@@ -18,6 +18,7 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
+import org.purplebean.kmip.model.v2x1.structure.Attributes;
 
 /**
  * KMIP CreateCredentialOpRequestPayload operation request payload.
@@ -46,14 +47,19 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
   private final CredentialType credentialType;
 
   @NonNull
+  private final Attributes attributes;
+
+  @NonNull
   private final CredentialValue credentialValue;
 
   @Builder
   private CreateCredentialOpRequestPayload(
       @NonNull CredentialType credentialType,
+      @NonNull Attributes attributes,
       @NonNull CredentialValue credentialValue
   ) {
     this.credentialType = credentialType;
+    this.attributes = attributes;
     this.credentialValue = credentialValue;
     validate();
   }
@@ -65,9 +71,13 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()
         .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    // CredentialType must appear before CredentialValue in the encoded stream per KMIP spec
+    // CredentialType must appear before Attributes and CredentialValue in the encoded stream
+    // per KMIP spec
     CredentialType credentialType = (CredentialType) map
         .get(CredentialType.kmipTag)
+        .getFirst();
+    Attributes attributes = (Attributes) map
+        .get(Attributes.kmipTag)
         .getFirst();
     CredentialValue credentialValue = (CredentialValue) map
         .get(CredentialValue.kmipTag)
@@ -75,6 +85,7 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
     return CreateCredentialOpRequestPayload
         .builder()
         .credentialType(credentialType)
+        .attributes(attributes)
         .credentialValue(credentialValue)
         .build();
   }
@@ -85,6 +96,7 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
           String.format("Unsupported object type for %s: %s", KmipContext.getSpec(), getKmipTag()));
     }
     Objects.requireNonNull(credentialType, "CredentialType cannot be null");
+    Objects.requireNonNull(attributes, "Attributes cannot be null");
     Objects.requireNonNull(credentialValue, "CredentialValue cannot be null");
   }
 
@@ -109,7 +121,7 @@ public class CreateCredentialOpRequestPayload implements RequestPayloadStructure
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(credentialType, credentialValue)
+        .of(credentialType, attributes, credentialValue)
         .filter(Objects::nonNull)
         .toArray(KmipDataType[]::new);
   }

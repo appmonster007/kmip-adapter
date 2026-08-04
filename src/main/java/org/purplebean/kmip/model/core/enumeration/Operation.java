@@ -284,7 +284,7 @@ public class Operation implements KmipEnumeration {
         KmipSpec.V3_0),
     SET_ENDPOINT_ROLE(0x00000032, "SetEndpointRole", KmipSpec.UnknownVersion, KmipSpec.V2_1,
         KmipSpec.V3_0),
-    PKCS_11(0x00000033, "Pkcs11", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
+    PKCS_11(0x00000033, "PKCS_11", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
     INTEROP(0x00000034, "Interop", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
     RE_PROVISION(0x00000035, "ReProvision", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
     SET_DEFAULTS(0x00000036, "SetDefaults", KmipSpec.UnknownVersion, KmipSpec.V2_1, KmipSpec.V3_0),
