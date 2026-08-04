@@ -582,6 +582,7 @@ org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request.payload.
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request.payload.DeactivateOpRequestPayloadXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request.payload.ObliterateOpRequestPayloadXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayloadXmlDeserializer
+org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.request.payload.SetAttributeOpRequestPayloadXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.response.ResponseBatchItemXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.response.ResponseHeaderXmlDeserializer
 org.purplebean.kmip.codec.xml.deserializer.model.v3x0.structure.response.payload.CreateCredentialOpResponsePayloadXmlDeserializer

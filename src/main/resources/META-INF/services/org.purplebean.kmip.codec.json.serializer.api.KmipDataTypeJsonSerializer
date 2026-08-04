@@ -569,6 +569,7 @@ org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.request.payload.C
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.request.payload.DeactivateOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.request.payload.ObliterateOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayloadJsonSerializer
+org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.request.payload.SetAttributeOpRequestPayloadJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.response.ResponseBatchItemJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.response.ResponseHeaderJsonSerializer
 org.purplebean.kmip.codec.json.serializer.model.v3x0.structure.response.payload.CreateCredentialOpResponsePayloadJsonSerializer

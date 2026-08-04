@@ -1,4 +1,4 @@
-package org.purplebean.kmip.model.v2x1.structure.request.payload;
+package org.purplebean.kmip.model.v3x0.structure.request.payload;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,17 +18,17 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
 
 /**
- * KMIP SetAttribute Request Payload (V2_1).
- *
- * <p>Per KMIP v2.1 spec §6.1.51:
- * <ul>
- *   <li>UniqueIdentifier — Optional</li>
- *   <li>NewAttribute — Required</li>
- * </ul>
+ * KMIP SetAttribute Request Payload (V3_0).
  *
  * <p>Fork of
- * {@link org.purplebean.kmip.model.v3x0.structure.request.payload.SetAttributeOpRequestPayload}
- * for KMIP 3.0, where {@code UniqueIdentifier} becomes REQUIRED (see KMIP v3.0 spec §6.1.56).
+ * {@link org.purplebean.kmip.model.v2x1.structure.request.payload.SetAttributeOpRequestPayload}
+ * for KMIP 3.0, where {@code UniqueIdentifier} becomes REQUIRED.
+ *
+ * <p>Per KMIP v3.0 spec §6.1.56:
+ * <ul>
+ *   <li>UniqueIdentifier — Required</li>
+ *   <li>NewAttribute — Required</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -36,7 +36,7 @@ public class SetAttributeOpRequestPayload implements RequestPayloadStructure {
 
   private static final Operation.Value operation = Operation.Standard.SET_ATTRIBUTE;
   private static final Set<KmipSpec> supportedVersions =
-      Set.of(KmipSpec.UnknownVersion, KmipSpec.V2_1);
+      Set.of(KmipSpec.UnknownVersion, KmipSpec.V3_0);
 
   static {
     for (KmipSpec spec : supportedVersions) {
@@ -50,13 +50,14 @@ public class SetAttributeOpRequestPayload implements RequestPayloadStructure {
     }
   }
 
+  @NonNull
   private final UniqueIdentifier uniqueIdentifier;
 
   @NonNull
   private final NewAttribute newAttribute;
 
   @Builder
-  private SetAttributeOpRequestPayload(UniqueIdentifier uniqueIdentifier,
+  private SetAttributeOpRequestPayload(@NonNull UniqueIdentifier uniqueIdentifier,
                                        @NonNull NewAttribute newAttribute) {
     this.uniqueIdentifier = uniqueIdentifier;
     this.newAttribute = newAttribute;

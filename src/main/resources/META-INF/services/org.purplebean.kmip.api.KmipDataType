@@ -569,6 +569,7 @@ org.purplebean.kmip.model.v3x0.structure.request.payload.CreateUserOpRequestPayl
 org.purplebean.kmip.model.v3x0.structure.request.payload.DeactivateOpRequestPayload
 org.purplebean.kmip.model.v3x0.structure.request.payload.ObliterateOpRequestPayload
 org.purplebean.kmip.model.v3x0.structure.request.payload.ReKeyKeyPairOpRequestPayload
+org.purplebean.kmip.model.v3x0.structure.request.payload.SetAttributeOpRequestPayload
 org.purplebean.kmip.model.v3x0.structure.response.ResponseBatchItem
 org.purplebean.kmip.model.v3x0.structure.response.ResponseHeader
 org.purplebean.kmip.model.v3x0.structure.response.payload.CreateCredentialOpResponsePayload

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Constraints;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.SetConstraintsOpRequestPayload;
 
@@ -34,8 +33,6 @@ public class SetConstraintsOpRequestPayloadXmlDeserializer extends
       String type, JsonParser p, DeserializationContext ctxt) throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
     switch (nodeTag) {
-      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
-          builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
       case KmipTag.Standard.CONSTRAINTS ->
           builder.constraints(ctxt.readValue(p, Constraints.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

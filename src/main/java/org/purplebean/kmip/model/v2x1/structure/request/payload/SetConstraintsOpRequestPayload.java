@@ -15,11 +15,21 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
 import org.purplebean.kmip.model.core.enumeration.Operation;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Constraints;
 
 /**
- * KMIP SetConstraintsOpRequestPayload operation request payload.
+ * KMIP SetConstraints Request Payload (V2_1, V3_0).
+ *
+ * <p>Per KMIP spec §6.1.57, the request payload defines a single field:
+ * <ul>
+ *   <li>Constraints — the set of Constraints to apply during operations. Although the
+ *   spec table marks this field REQUIRED, OASIS conformance test case TC-MD-22-21
+ *   demonstrates a SetConstraints request with an empty payload (used to clear all
+ *   constraints), so it is modeled here as optional to match observed wire behavior.</li>
+ * </ul>
+ *
+ * <p>There is no Unique Identifier field in this payload; SetConstraints applies globally,
+ * not to a specific Managed Object.
  */
 @Data
 @Builder(toBuilder = true)
@@ -41,13 +51,10 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
     }
   }
 
-  private final UniqueIdentifier uniqueIdentifier;
   private final Constraints constraints;
 
   @Builder
-  private SetConstraintsOpRequestPayload(UniqueIdentifier uniqueIdentifier,
-                                         Constraints constraints) {
-    this.uniqueIdentifier = uniqueIdentifier;
+  private SetConstraintsOpRequestPayload(Constraints constraints) {
     this.constraints = constraints;
     validate();
   }
@@ -60,11 +67,6 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()
         .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
-    if (map.containsKey(UniqueIdentifier.kmipTag)) {
-      builder.uniqueIdentifier((UniqueIdentifier) map
-          .get(UniqueIdentifier.kmipTag)
-          .getFirst());
-    }
     if (map.containsKey(Constraints.kmipTag)) {
       builder.constraints((Constraints) map
           .get(Constraints.kmipTag)
@@ -101,7 +103,7 @@ public class SetConstraintsOpRequestPayload implements RequestPayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(uniqueIdentifier, constraints)
+        .of(constraints)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

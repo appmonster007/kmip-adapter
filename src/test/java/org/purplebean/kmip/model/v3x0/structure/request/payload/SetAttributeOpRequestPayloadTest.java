@@ -1,0 +1,59 @@
+package org.purplebean.kmip.model.v3x0.structure.request.payload;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.purplebean.kmip.api.EncodingType;
+import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.model.core.enumeration.CryptographicAlgorithm;
+import org.purplebean.kmip.model.core.type.UniqueIdentifier;
+import org.purplebean.kmip.model.v2x1.structure.NewAttribute;
+import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
+
+@DisplayName("SetAttributeOpRequestPayload Domain Tests")
+class SetAttributeOpRequestPayloadTest
+    extends AbstractKmipStructureTestSuite<SetAttributeOpRequestPayload> {
+
+  @Override
+  protected void setupDefaultSpec() {
+    defaultSpec = KmipSpec.V3_0;
+  }
+
+  @Override
+  protected Class<SetAttributeOpRequestPayload> type() {
+    return SetAttributeOpRequestPayload.class;
+  }
+
+  @Override
+  protected SetAttributeOpRequestPayload createDefault() {
+    return SetAttributeOpRequestPayload
+        .builder()
+        .uniqueIdentifier(UniqueIdentifier
+            .builder()
+            .value("set-attr-uid-1")
+            .build())
+        .newAttribute(NewAttribute
+            .builder()
+            .attribute(CryptographicAlgorithm.Standard.AES.inst())
+            .build())
+        .build();
+  }
+
+  @Override
+  protected EncodingType expectedEncodingType() {
+    return EncodingType.STRUCTURE;
+  }
+
+  @Override
+  public int expectedMinComponentCount() {
+    return 2;
+  }
+
+  @Override
+  public void validateComponents(List<KmipDataType> values) {
+    assertThat(values).hasSizeGreaterThanOrEqualTo(2);
+    assertThat(values).anyMatch(v -> v instanceof UniqueIdentifier);
+    assertThat(values).anyMatch(v -> v instanceof NewAttribute);
+  }
+}
