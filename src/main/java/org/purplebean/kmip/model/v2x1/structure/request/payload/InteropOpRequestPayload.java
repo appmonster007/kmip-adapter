@@ -23,7 +23,7 @@ import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
  * <p>Per KMIP v2.1 spec:
  * <ul>
  *   <li>InteropFunction — Required</li>
- *   <li>InteropIdentifier — Optional</li>
+ *   <li>InteropIdentifier — Required</li>
  * </ul>
  */
 @Data
@@ -47,12 +47,13 @@ public class InteropOpRequestPayload implements RequestPayloadStructure {
 
   @NonNull
   private final InteropFunction interopFunction;
+  @NonNull
   private final InteropIdentifier interopIdentifier;
 
   @Builder
   private InteropOpRequestPayload(
       @NonNull InteropFunction interopFunction,
-      InteropIdentifier interopIdentifier
+      @NonNull InteropIdentifier interopIdentifier
   ) {
     this.interopFunction = interopFunction;
     this.interopIdentifier = interopIdentifier;
@@ -79,7 +80,7 @@ public class InteropOpRequestPayload implements RequestPayloadStructure {
    */
   public static InteropOpRequestPayload of(
       @NonNull InteropFunction interopFunction,
-      InteropIdentifier interopIdentifier
+      @NonNull InteropIdentifier interopIdentifier
   ) {
     return InteropOpRequestPayload
         .builder()

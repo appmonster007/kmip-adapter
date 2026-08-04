@@ -19,10 +19,20 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
 /**
  * KMIP Pkcs11OpResponsePayload operation response payload.
+ *
+ * <p>Per KMIP v2.1/v3.0 spec §6.1.42:
+ * <ul>
+ *   <li>PKCS#11 Interface — Optional</li>
+ *   <li>PKCS#11 Function — Required</li>
+ *   <li>Correlation Value — Optional</li>
+ *   <li>PKCS#11 Output Parameters — Optional</li>
+ *   <li>PKCS#11 Return Code — Required</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -43,28 +53,31 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
     }
   }
 
+  private final Pkcs11Interface pkcs11Interface;
+
   @NonNull
   private final Pkcs11Function pkcs11Function;
 
-  @NonNull
-  private final Pkcs11ReturnCode pkcs11ReturnCode;
+  private final CorrelationValue correlationValue;
 
   private final Pkcs11OutputParameters pkcs11OutputParameters;
 
   @NonNull
-  private final CorrelationValue correlationValue;
+  private final Pkcs11ReturnCode pkcs11ReturnCode;
 
   @Builder
   private Pkcs11OpResponsePayload(
+      Pkcs11Interface pkcs11Interface,
       @NonNull Pkcs11Function pkcs11Function,
-      @NonNull Pkcs11ReturnCode pkcs11ReturnCode,
+      CorrelationValue correlationValue,
       Pkcs11OutputParameters pkcs11OutputParameters,
-      @NonNull CorrelationValue correlationValue
+      @NonNull Pkcs11ReturnCode pkcs11ReturnCode
   ) {
+    this.pkcs11Interface = pkcs11Interface;
     this.pkcs11Function = pkcs11Function;
-    this.pkcs11ReturnCode = pkcs11ReturnCode;
-    this.pkcs11OutputParameters = pkcs11OutputParameters;
     this.correlationValue = correlationValue;
+    this.pkcs11OutputParameters = pkcs11OutputParameters;
+    this.pkcs11ReturnCode = pkcs11ReturnCode;
     validate();
   }
 
@@ -76,19 +89,26 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
     Map<KmipTag, List<KmipDataType>> map = values
         .stream()
         .collect(Collectors.groupingBy(KmipDataType::getKmipTag));
+    if (map.containsKey(Pkcs11Interface.kmipTag)) {
+      builder.pkcs11Interface((Pkcs11Interface) map
+          .get(Pkcs11Interface.kmipTag)
+          .getFirst());
+    }
     builder.pkcs11Function((Pkcs11Function) map
         .get(Pkcs11Function.kmipTag)
         .getFirst());
-    builder.pkcs11ReturnCode((Pkcs11ReturnCode) map
-        .get(Pkcs11ReturnCode.kmipTag)
-        .getFirst());
+    if (map.containsKey(CorrelationValue.kmipTag)) {
+      builder.correlationValue((CorrelationValue) map
+          .get(CorrelationValue.kmipTag)
+          .getFirst());
+    }
     if (map.containsKey(Pkcs11OutputParameters.kmipTag)) {
       builder.pkcs11OutputParameters((Pkcs11OutputParameters) map
           .get(Pkcs11OutputParameters.kmipTag)
           .getFirst());
     }
-    builder.correlationValue((CorrelationValue) map
-        .get(CorrelationValue.kmipTag)
+    builder.pkcs11ReturnCode((Pkcs11ReturnCode) map
+        .get(Pkcs11ReturnCode.kmipTag)
         .getFirst());
     return builder.build();
   }
@@ -121,7 +141,8 @@ public class Pkcs11OpResponsePayload implements ResponsePayloadStructure {
   @Override
   public KmipDataType[] getValue() {
     return Stream
-        .of(pkcs11Function, pkcs11ReturnCode, pkcs11OutputParameters, correlationValue)
+        .of(pkcs11Interface, pkcs11Function, correlationValue, pkcs11OutputParameters,
+            pkcs11ReturnCode)
         .filter(Objects::nonNull)
         .map(kmipDataType -> kmipDataType)
         .toArray(KmipDataType[]::new);

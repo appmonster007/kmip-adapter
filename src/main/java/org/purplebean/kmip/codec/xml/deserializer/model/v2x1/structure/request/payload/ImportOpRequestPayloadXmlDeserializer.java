@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.enumeration.KeyWrapType;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
-import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.ReplaceExisting;
@@ -42,8 +42,8 @@ public class ImportOpRequestPayloadXmlDeserializer extends
       case KmipTag.Standard.OBJECT_TYPE -> builder.objectType(ctxt.readValue(p, ObjectType.class));
       case KmipTag.Standard.REPLACE_EXISTING ->
           builder.replaceExisting(ctxt.readValue(p, ReplaceExisting.class));
-      case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
-          builder.keyWrappingSpecification(ctxt.readValue(p, KeyWrappingSpecification.class));
+      case KmipTag.Standard.KEY_WRAP_TYPE ->
+          builder.keyWrapType(ctxt.readValue(p, KeyWrapType.class));
       case KmipTag.Standard.ATTRIBUTES -> builder.attributes(
           ctxt.readValue(p, org.purplebean.kmip.model.v2x1.structure.Attributes.class));
       default -> {

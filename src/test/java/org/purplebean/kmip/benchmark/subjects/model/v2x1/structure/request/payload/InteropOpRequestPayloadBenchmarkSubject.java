@@ -5,6 +5,7 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.InteropOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
 
 public class InteropOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<InteropOpRequestPayload> {
@@ -16,6 +17,7 @@ public class InteropOpRequestPayloadBenchmarkSubject
     InteropOpRequestPayload subject = InteropOpRequestPayload
         .builder()
         .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .interopIdentifier(InteropIdentifier.of("*"))
         .build();
     initialize(subject, InteropOpRequestPayload.class);
   }

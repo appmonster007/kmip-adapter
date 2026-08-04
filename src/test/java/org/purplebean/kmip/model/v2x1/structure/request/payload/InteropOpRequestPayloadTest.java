@@ -7,6 +7,7 @@ import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipDataType;
 import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
+import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
 import org.purplebean.kmip.test.suite.AbstractKmipStructureTestSuite;
 
 @DisplayName("InteropOpRequestPayload Domain Tests")
@@ -27,6 +28,7 @@ class InteropOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Interop
     return InteropOpRequestPayload
         .builder()
         .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .interopIdentifier(InteropIdentifier.of("*"))
         .build();
   }
 
@@ -37,12 +39,13 @@ class InteropOpRequestPayloadTest extends AbstractKmipStructureTestSuite<Interop
 
   @Override
   public int expectedMinComponentCount() {
-    return 1;
+    return 2;
   }
 
   @Override
   public void validateComponents(List<KmipDataType> values) {
-    assertThat(values).hasSize(1);
+    assertThat(values).hasSize(2);
     assertThat(values.get(0)).isInstanceOf(InteropFunction.class);
+    assertThat(values.get(1)).isInstanceOf(InteropIdentifier.class);
   }
 }

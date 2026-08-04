@@ -27,6 +27,7 @@ class Pkcs11OpResponsePayloadTest extends AbstractKmipStructureTestSuite<Pkcs11O
   protected Pkcs11OpResponsePayload createDefault() {
     return Pkcs11OpResponsePayload
         .builder()
+        .pkcs11Interface(org.purplebean.kmip.model.v2x1.type.Pkcs11Interface.of("V3.0"))
         .pkcs11Function(Pkcs11Function.of(Pkcs11Function.Standard.INITIALIZE))
         .pkcs11ReturnCode(org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode.of(org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode.Standard.OK))
         .correlationValue(CorrelationValue.of(ByteBuffer.wrap(new byte[] {0x01, 0x02})))

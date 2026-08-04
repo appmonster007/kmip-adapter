@@ -5,12 +5,11 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 
 /**
  * XML deserializer for {@link Pkcs11OpRequestPayload}.
@@ -37,14 +36,12 @@ public class Pkcs11OpRequestPayloadXmlDeserializer extends
       throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
     switch (nodeTag) {
-      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
-          builder.uniqueIdentifier(ctxt.readValue(p, UniqueIdentifier.class));
+      case KmipTag.Standard.PKCS_11_INTERFACE ->
+          builder.pkcs11Interface(ctxt.readValue(p, Pkcs11Interface.class));
       case KmipTag.Standard.PKCS_11_FUNCTION ->
           builder.pkcs11Function(ctxt.readValue(p, Pkcs11Function.class));
       case KmipTag.Standard.PKCS_11_INPUT_PARAMETERS ->
           builder.pkcs11InputParameters(ctxt.readValue(p, Pkcs11InputParameters.class));
-      case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS ->
-          builder.pkcs11OutputParameters(ctxt.readValue(p, Pkcs11OutputParameters.class));
       case KmipTag.Standard.CORRELATION_VALUE ->
           builder.correlationValue(ctxt.readValue(p, CorrelationValue.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

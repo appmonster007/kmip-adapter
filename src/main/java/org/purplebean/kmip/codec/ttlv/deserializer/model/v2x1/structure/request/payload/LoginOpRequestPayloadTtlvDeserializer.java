@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.structure.UsageLimits;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
@@ -36,6 +37,8 @@ public class LoginOpRequestPayloadTtlvDeserializer extends
       case KmipTag.Standard.LEASE_TIME -> builder.leaseTime(mapper.readValue(p, LeaseTime.class));
       case KmipTag.Standard.REQUEST_COUNT ->
           builder.requestCount(mapper.readValue(p, RequestCount.class));
+      case KmipTag.Standard.USAGE_LIMITS ->
+          builder.usageLimits(mapper.readValue(p, UsageLimits.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

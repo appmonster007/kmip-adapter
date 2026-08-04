@@ -9,6 +9,7 @@ import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
 
 /**
@@ -36,6 +37,8 @@ public class Pkcs11OpResponsePayloadJsonDeserializer extends
       throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromName(tag);
     switch (nodeTag) {
+      case KmipTag.Standard.PKCS_11_INTERFACE ->
+          builder.pkcs11Interface(ctxt.readValue(p, Pkcs11Interface.class));
       case KmipTag.Standard.PKCS_11_FUNCTION ->
           builder.pkcs11Function(ctxt.readValue(p, Pkcs11Function.class));
       case KmipTag.Standard.PKCS_11_RETURN_CODE ->

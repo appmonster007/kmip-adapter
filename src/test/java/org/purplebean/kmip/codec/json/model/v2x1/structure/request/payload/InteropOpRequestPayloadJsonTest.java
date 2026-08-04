@@ -3,6 +3,7 @@ package org.purplebean.kmip.codec.json.model.v2x1.structure.request.payload;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.model.v2x1.enumeration.InteropFunction;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.InteropOpRequestPayload;
+import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
 import org.purplebean.kmip.test.suite.AbstractJsonSerializationTestSuite;
 
 @DisplayName("InteropOpRequestPayload Json Serialization Tests")
@@ -19,6 +20,7 @@ class InteropOpRequestPayloadJsonTest
     return InteropOpRequestPayload
         .builder()
         .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .interopIdentifier(InteropIdentifier.of("*"))
         .build();
   }
 
@@ -26,7 +28,8 @@ class InteropOpRequestPayloadJsonTest
   public InteropOpRequestPayload createVariant() {
     return InteropOpRequestPayload
         .builder()
-        .interopFunction(InteropFunction.Standard.BEGIN.inst())
+        .interopFunction(InteropFunction.Standard.END.inst())
+        .interopIdentifier(InteropIdentifier.of("test-case-1"))
         .build();
   }
 }

@@ -6,8 +6,8 @@ import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
+import org.purplebean.kmip.model.core.enumeration.KeyWrapType;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
-import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.ImportOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.ReplaceExisting;
@@ -42,8 +42,8 @@ public class ImportOpRequestPayloadTtlvDeserializer extends
           builder.objectType(mapper.readValue(p, ObjectType.class));
       case KmipTag.Standard.REPLACE_EXISTING ->
           builder.replaceExisting(mapper.readValue(p, ReplaceExisting.class));
-      case KmipTag.Standard.KEY_WRAPPING_SPECIFICATION ->
-          builder.keyWrappingSpecification(mapper.readValue(p, KeyWrappingSpecification.class));
+      case KmipTag.Standard.KEY_WRAP_TYPE ->
+          builder.keyWrapType(mapper.readValue(p, KeyWrapType.class));
       case KmipTag.Standard.ATTRIBUTES -> builder.attributes(
           mapper.readValue(p, org.purplebean.kmip.model.v2x1.structure.Attributes.class));
       default -> {

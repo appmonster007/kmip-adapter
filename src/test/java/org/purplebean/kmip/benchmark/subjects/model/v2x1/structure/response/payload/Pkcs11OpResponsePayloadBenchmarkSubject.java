@@ -17,6 +17,7 @@ public class Pkcs11OpResponsePayloadBenchmarkSubject
   public Pkcs11OpResponsePayloadBenchmarkSubject() throws Exception {
     Pkcs11OpResponsePayload subject = Pkcs11OpResponsePayload
         .builder()
+        .pkcs11Interface(org.purplebean.kmip.model.v2x1.type.Pkcs11Interface.of("V3.0"))
         .pkcs11Function(Pkcs11Function.of(Pkcs11Function.Standard.INITIALIZE))
         .pkcs11ReturnCode(org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode.of(org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode.Standard.OK))
         .correlationValue(CorrelationValue.of(ByteBuffer.wrap(new byte[] {0x01, 0x02})))

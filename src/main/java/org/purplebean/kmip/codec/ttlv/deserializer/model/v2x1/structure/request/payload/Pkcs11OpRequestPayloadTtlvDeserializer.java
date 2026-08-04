@@ -5,12 +5,11 @@ import java.nio.ByteBuffer;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.ttlv.deserializer.api.AbstractKmipDataTypeTtlvDeserializer;
 import org.purplebean.kmip.codec.ttlv.mapper.TtlvMapper;
-import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
-import org.purplebean.kmip.model.v2x1.type.Pkcs11OutputParameters;
+import org.purplebean.kmip.model.v2x1.type.Pkcs11Interface;
 
 /**
  * TTLV deserializer for {@link Pkcs11OpRequestPayload}.
@@ -36,14 +35,12 @@ public class Pkcs11OpRequestPayloadTtlvDeserializer extends
                           byte type, ByteBuffer p, TtlvMapper mapper) throws IOException {
     KmipTag.Value nodeTag = KmipTag.fromBytes(tag);
     switch (nodeTag) {
-      case KmipTag.Standard.UNIQUE_IDENTIFIER ->
-          builder.uniqueIdentifier(mapper.readValue(p, UniqueIdentifier.class));
+      case KmipTag.Standard.PKCS_11_INTERFACE ->
+          builder.pkcs11Interface(mapper.readValue(p, Pkcs11Interface.class));
       case KmipTag.Standard.PKCS_11_FUNCTION ->
           builder.pkcs11Function(mapper.readValue(p, Pkcs11Function.class));
       case KmipTag.Standard.PKCS_11_INPUT_PARAMETERS ->
           builder.pkcs11InputParameters(mapper.readValue(p, Pkcs11InputParameters.class));
-      case KmipTag.Standard.PKCS_11_OUTPUT_PARAMETERS ->
-          builder.pkcs11OutputParameters(mapper.readValue(p, Pkcs11OutputParameters.class));
       case KmipTag.Standard.CORRELATION_VALUE ->
           builder.correlationValue(mapper.readValue(p, CorrelationValue.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import java.io.IOException;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.codec.xml.deserializer.api.AbstractKmipDataTypeXmlDeserializer;
+import org.purplebean.kmip.model.core.structure.UsageLimits;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
@@ -37,6 +38,8 @@ public class LoginOpRequestPayloadXmlDeserializer extends
       case KmipTag.Standard.LEASE_TIME -> builder.leaseTime(ctxt.readValue(p, LeaseTime.class));
       case KmipTag.Standard.REQUEST_COUNT ->
           builder.requestCount(ctxt.readValue(p, RequestCount.class));
+      case KmipTag.Standard.USAGE_LIMITS ->
+          builder.usageLimits(ctxt.readValue(p, UsageLimits.class));
       default -> throw new IllegalArgumentException("Unsupported tag: " + nodeTag);
     }
   }

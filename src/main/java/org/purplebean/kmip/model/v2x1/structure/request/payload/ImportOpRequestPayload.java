@@ -16,15 +16,25 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.ManagedObject;
 import org.purplebean.kmip.api.request.RequestPayloadStructure;
+import org.purplebean.kmip.model.core.enumeration.KeyWrapType;
 import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.enumeration.Operation;
-import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v2x1.type.ReplaceExisting;
 
 /**
  * KMIP Import Request Payload.
+ *
+ * <p>Per KMIP v2.1/v3.0 spec §6.1.29:
+ * <ul>
+ *   <li>UniqueIdentifier — Required</li>
+ *   <li>ObjectType — Required</li>
+ *   <li>ReplaceExisting — Optional</li>
+ *   <li>KeyWrapType — Required if and only if the key object is wrapped</li>
+ *   <li>Attributes — Required</li>
+ *   <li>Any Object — Required</li>
+ * </ul>
  */
 @Data
 @Builder(toBuilder = true)
@@ -52,7 +62,7 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
 
   private final ReplaceExisting replaceExisting;
 
-  private final KeyWrappingSpecification keyWrappingSpecification;
+  private final KeyWrapType keyWrapType;
 
   private final Attributes attributes;
 
@@ -64,14 +74,14 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
       UniqueIdentifier uniqueIdentifier,
       @NonNull ObjectType objectType,
       ReplaceExisting replaceExisting,
-      KeyWrappingSpecification keyWrappingSpecification,
+      KeyWrapType keyWrapType,
       Attributes attributes,
       @NonNull ManagedObject object
   ) {
     this.uniqueIdentifier = uniqueIdentifier;
     this.objectType = objectType;
     this.replaceExisting = replaceExisting;
-    this.keyWrappingSpecification = keyWrappingSpecification;
+    this.keyWrapType = keyWrapType;
     this.attributes = attributes;
     this.object = object;
     validate();
@@ -100,9 +110,9 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
           .get(ReplaceExisting.kmipTag)
           .getFirst());
     }
-    if (map.containsKey(KeyWrappingSpecification.kmipTag)) {
-      builder.keyWrappingSpecification((KeyWrappingSpecification) map
-          .get(KeyWrappingSpecification.kmipTag)
+    if (map.containsKey(KeyWrapType.kmipTag)) {
+      builder.keyWrapType((KeyWrapType) map
+          .get(KeyWrapType.kmipTag)
           .getFirst());
     }
     if (map.containsKey(Attributes.kmipTag)) {
@@ -123,7 +133,7 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
             .equals(ReplaceExisting.kmipTag)
             && !v
             .getKmipTag()
-            .equals(KeyWrappingSpecification.kmipTag)
+            .equals(KeyWrapType.kmipTag)
             && !v
             .getKmipTag()
             .equals(Attributes.kmipTag))
@@ -165,7 +175,7 @@ public class ImportOpRequestPayload implements RequestPayloadStructure {
             uniqueIdentifier,
             objectType,
             replaceExisting,
-            keyWrappingSpecification,
+            keyWrapType,
             attributes,
             object)
         .filter(Objects::nonNull)
