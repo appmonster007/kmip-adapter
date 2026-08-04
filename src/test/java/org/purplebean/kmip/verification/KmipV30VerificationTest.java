@@ -3,6 +3,7 @@ package org.purplebean.kmip.verification;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Stream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,7 +27,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.KmipContext;
 import org.purplebean.kmip.api.KmipDataType;
+import org.purplebean.kmip.api.KmipMaskType;
 import org.purplebean.kmip.api.KmipSpec;
+import org.purplebean.kmip.api.KmipTag;
 import org.purplebean.kmip.api.request.RequestMessageStructure;
 import org.purplebean.kmip.api.response.ResponseMessageStructure;
 import org.purplebean.kmip.codec.KmipCodecManager;
@@ -347,9 +352,69 @@ public class KmipV30VerificationTest {
         .replaceAll(">\\s+<", "><")
         .trim();
 
-    JsonNode originalNode = verificationMapper.readTree(minifiedOriginal);
-    JsonNode newNode = verificationMapper.readTree(minifiedNew);
+    JsonNode originalNode = normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedOriginal));
+    JsonNode newNode = normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedNew));
 
     assertEquals(originalNode, newNode, "Round-trip mismatch in " + fileName + " <" + tag + ">");
+  }
+
+  /**
+   * Normalizes wire-representation choices the KMIP spec does not assign semantic meaning to,
+   * applied identically to both sides of the comparison so it cannot mask a real asymmetric bug:
+   * <ul>
+   *   <li>Bitmask flag-name ordering (e.g. CryptographicUsageMask's "Decrypt Encrypt") - re-parses
+   *       via the field's own {@link KmipMaskType#getFromMaskString} and re-renders via
+   *       {@link KmipMaskType#getMaskString()}, so the canonical form is exactly what this
+   *       codebase's own mask type (e.g. CryptographicUsageMask.MaskEnum#toMaskString, already
+   *       fixed to sort ascending by bit value) would produce - not an independently-invented
+   *       test-side convention. The OASIS v3.0 corpus itself is internally inconsistent about
+   *       flag order (both orderings appear for the identical bitmask, occasionally within the
+   *       same file), so this cannot be satisfied by any single serialization choice.</li>
+   *   <li>ByteString hex text case - a byte's value is unaffected by whether its hex digits are
+   *       rendered upper or lower case.</li>
+   * </ul>
+   */
+  private JsonNode normalizeNonSemanticRepresentation(JsonNode node) {
+    if (node.isObject()) {
+      ObjectNode obj = (ObjectNode) node;
+      obj.fields().forEachRemaining(entry -> normalizeField(entry.getKey(), entry.getValue()));
+    } else if (node.isArray()) {
+      for (JsonNode child : node) {
+        normalizeNonSemanticRepresentation(child);
+      }
+    }
+    return node;
+  }
+
+  private void normalizeField(String fieldName, JsonNode child) {
+    if (child.isObject()) {
+      ObjectNode childObj = (ObjectNode) child;
+      JsonNode typeNode = childObj.get("type");
+      JsonNode valueNode = childObj.get("value");
+      if (typeNode != null && valueNode != null && valueNode.isTextual()) {
+        String type = typeNode.asText();
+        String value = valueNode.asText();
+        if ("Integer".equals(type) && value.contains(" ")) {
+          canonicalizeMaskString(fieldName, value).ifPresent(v -> childObj.put("value", v));
+        } else if ("ByteString".equals(type)) {
+          childObj.put("value", value.toLowerCase(Locale.ROOT));
+        }
+      }
+    }
+    normalizeNonSemanticRepresentation(child);
+  }
+
+  private Optional<String> canonicalizeMaskString(String fieldName, String value) {
+    KmipTag.Value tag;
+    try {
+      tag = KmipTag.fromName(fieldName);
+    } catch (RuntimeException e) {
+      return Optional.empty();
+    }
+    var fromMaskString = KmipMaskType.getFromMaskString(tag);
+    if (fromMaskString == null) {
+      return Optional.empty();
+    }
+    return Optional.of(fromMaskString.apply(value).getMaskString());
   }
 }

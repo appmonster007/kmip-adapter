@@ -126,7 +126,10 @@ public class OpaqueDataType implements KmipEnumeration {
     if (name != null && (name.startsWith("0x") || name.startsWith("0X"))) {
       try {
         int hexValue = (int) Long.parseLong(name.substring(2), 16);
-        return register(hexValue, name, Set.of(KmipContext.getSpec()));
+        // Register against every spec this class supports, not just whichever spec happens to
+        // be active the first time this literal is seen - otherwise test/run order determines
+        // which spec(s) the extension is usable under, since register() only stores it once.
+        return register(hexValue, name, supportedVersions);
       } catch (NumberFormatException ignored) {
         // Not a valid hex literal; fall through to the description lookup below.
       }

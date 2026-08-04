@@ -26,7 +26,7 @@ class OpaqueObjectJsonTest extends AbstractJsonSerializationTestSuite<OpaqueObje
     return OpaqueObject
         .builder()
         .opaqueDataType(OpaqueDataType
-            .register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion))
+            .register(0x8000CDEF, "Custom", Set.of(KmipSpec.UnknownVersion))
             .inst())
         .opaqueDataValue(OpaqueDataValue.of(new byte[0]))
         .build();
@@ -37,7 +37,7 @@ class OpaqueObjectJsonTest extends AbstractJsonSerializationTestSuite<OpaqueObje
     return OpaqueObject
         .builder()
         .opaqueDataType(OpaqueDataType
-            .register(0x80000001, "Custom-2", Set.of(KmipSpec.UnknownVersion))
+            .register(0x8000CDF0, "Custom-2", Set.of(KmipSpec.UnknownVersion))
             .inst())
         .opaqueDataValue(OpaqueDataValue.of(new byte[1]))
         .build();

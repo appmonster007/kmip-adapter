@@ -16,14 +16,14 @@ class OpaqueDataTypeXmlTest extends AbstractXmlSerializationTestSuite<OpaqueData
   @Override
   public OpaqueDataType createDefault() {
     return OpaqueDataType
-        .register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion))
+        .register(0x8000ABCD, "Custom", Set.of(KmipSpec.UnknownVersion))
         .inst();
   }
 
   @Override
   public OpaqueDataType createVariant() {
     return OpaqueDataType
-        .register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion))
+        .register(0x8000ABCE, "Custom2", Set.of(KmipSpec.UnknownVersion))
         .inst();
   }
 }

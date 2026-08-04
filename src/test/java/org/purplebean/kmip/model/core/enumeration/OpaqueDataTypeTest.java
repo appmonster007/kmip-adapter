@@ -19,21 +19,21 @@ class OpaqueDataTypeTest extends AbstractKmipEnumerationTestSuite<OpaqueDataType
   @Override
   protected OpaqueDataType createDefault() {
     return OpaqueDataType
-        .register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion))
+        .register(0x8000ABCD, "Custom", Set.of(KmipSpec.UnknownVersion))
         .inst();
   }
 
   @Override
   protected OpaqueDataType createEqualToDefault() {
     return OpaqueDataType
-        .register(0x80000000, "Custom", Set.of(KmipSpec.UnknownVersion))
+        .register(0x8000ABCD, "Custom", Set.of(KmipSpec.UnknownVersion))
         .inst();
   }
 
   @Override
   protected OpaqueDataType createDifferentFromDefault() {
     return OpaqueDataType
-        .register(0x80000001, "Custom2", Set.of(KmipSpec.UnknownVersion))
+        .register(0x8000ABCE, "Custom2", Set.of(KmipSpec.UnknownVersion))
         .inst();
   }
 
