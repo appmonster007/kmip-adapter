@@ -5,6 +5,5 @@
 
 | Name | Value | Versions |
 |---|---|---|
-| No Encoding | `0x00000001` | `v1.2` `v1.3` `v1.4` |
-| TTLV Encoding | `0x00000002` | `v1.2` `v1.3` `v1.4` |
-| TTLV Encoding | `the wrapped TTLV-encoded Key Value structure` | `v2.0` `v2.1` `v3.0` |
+| No Encoding | `0x00000001` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |
+| TTLV Encoding | `0x00000002` | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` |

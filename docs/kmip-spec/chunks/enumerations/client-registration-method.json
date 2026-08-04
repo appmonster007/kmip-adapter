@@ -14,7 +14,10 @@
       "value": "0x00000001",
       "versions": [
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
       ]
     },
     {
@@ -22,7 +25,10 @@
       "value": "0x00000002",
       "versions": [
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
       ]
     },
     {
@@ -30,7 +36,10 @@
       "value": "0x00000003",
       "versions": [
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
       ]
     },
     {
@@ -38,7 +47,10 @@
       "value": "0x00000004",
       "versions": [
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1",
+        "3.0"
       ]
     },
     {
@@ -46,31 +58,7 @@
       "value": "0x00000005",
       "versions": [
         "1.3",
-        "1.4"
-      ]
-    },
-    {
-      "name": "Client Generated",
-      "value": "The client generates the private key and sends a Certificate Signing Request to the server to generate the certificate. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Client Registered",
-      "value": "The client generates the private key and the certificates and registers the certificate with the server.",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Server On-Demand",
-      "value": "The server generates the client\u2019s private key on demand. The returned PKCS#12 is protected with HEX(SHA256(Username || Password)).",
-      "versions": [
+        "1.4",
         "2.0",
         "2.1",
         "3.0"

@@ -10,28 +10,14 @@
   "introduced_in": "1.2",
   "values": [
     {
-      "name": "PKCS#12 Certificate Link",
-      "value": "",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "PKCS#12 Password Link",
-      "value": "",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
       "name": "Certificate Link",
       "value": "0x00000101",
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -40,7 +26,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -49,7 +37,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -58,7 +48,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -67,7 +59,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -76,7 +70,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -85,7 +81,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -94,7 +92,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -103,7 +103,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -112,7 +114,9 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
@@ -121,106 +125,32 @@
       "versions": [
         "1.2",
         "1.3",
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
       "name": "PKCS#12 Certificate Link",
       "value": "0x0000010C",
       "versions": [
-        "1.4"
+        "1.4",
+        "2.0",
+        "2.1"
       ]
     },
     {
       "name": "PKCS#12 Password Link",
       "value": "0x0000010D",
       "versions": [
-        "1.4"
-      ]
-    },
-    {
-      "name": "Certificate Link",
-      "value": "For Certificate objects: the parent certificate for a certificate in a certificate chain. For Public Key objects: the corresponding certificate(s), containing the same public key.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Public Key Link",
-      "value": "For a Private Key object: the public key corresponding to the private key. For a Certificate object: the public key contained in the certificate.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Replacement Object Link",
-      "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that resulted from the re-key of the current key. For a Certificate object: the certificate that resulted from the re-certify. Note that there SHALL be only one such replacement object per Managed Object.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Replaced Object Link",
-      "value": "For a Symmetric Key, an Asymmetric Private Key, or an Asymmetric Public Key object: the key that was re-keyed to obtain the current key. For a Certificate object: the certificate that was re-certified to obtain the current certificate.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Derivation Base Object Link",
-      "value": "For a derived Symmetric Key or Secret Data object: the object(s) from which the current symmetric key was derived.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Parent Link",
-      "value": "For all object types: the container or other parent object corresponding to the object.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Next Link",
-      "value": "For all object types: the next object to this object.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Previous Link",
-      "value": "For all object types: the previous object to this object.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Child Link",
-      "value": "For all object types: the subordinate, derived or other child object corresponding to the object.",
-      "versions": [
+        "1.4",
         "2.0",
         "2.1"
       ]
     },
     {
       "name": "Wrapping Key Link",
-      "value": "For wrapped objects: the object that was used to wrap this object.",
-      "versions": [
-        "2.0",
-        "2.1"
-      ]
-    },
-    {
-      "name": "Derived Key Link",
-      "value": "The symmetric key(s) or Secret Data object(s) that were derived from the current object.",
+      "value": "0x0000010E",
       "versions": [
         "2.0",
         "2.1"

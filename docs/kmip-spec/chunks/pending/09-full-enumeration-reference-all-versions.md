@@ -6,8 +6,9 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Negate | `Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types.` | v2.0 | v3.0 |
-| Decrement | `Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.` | v2.0 | v3.0 |
+| Increment | `0x00000001` | v2.0 | v3.0 |
+| Decrement | `0x00000002` | v2.0 | v3.0 |
+| Negate | `0x00000003` | v2.0 | v3.0 |
 
 ### Alternative Name Type  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -25,8 +26,9 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Optional | `The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol.` | v2.0 | v3.0 |
-| Prohibited | `The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously.` | v2.0 | v3.0 |
+| Mandatory | `0x00000001` | v2.0 | v3.0 |
+| Optional | `0x00000002` | v2.0 | v3.0 |
+| Prohibited | `0x00000003` | v2.0 | v3.0 |
 
 ### Attestation Type  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -42,7 +44,7 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 |---|---|---|---|
 | Continue | `0x00000001` | v1.2 | v3.0 |
 | Stop | `0x00000002` | v1.2 | v3.0 |
-| Undo | `0x00000003` | v1.2 | v1.4 ⚠️ |
+| Undo | `0x00000003` | v1.2 | v3.0 |
 
 ### Block Cipher Mode  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -71,7 +73,7 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Canceled | `0x00000001` | v1.2 | v1.4 ⚠️ |
+| Canceled | `0x00000001` | v1.2 | v3.0 |
 | Unable to Cancel | `0x00000002` | v1.2 | v3.0 |
 | Completed | `0x00000003` | v1.2 | v3.0 |
 | Failed | `0x00000004` | v1.2 | v3.0 |
@@ -98,8 +100,8 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Unspecified | `0x00000001` | v1.3 | v1.4 ⚠️ |
-| Server Pre-Generated | `0x00000002` | v1.3 | v1.4 ⚠️ |
+| Unspecified | `0x00000001` | v1.3 | v3.0 |
+| Server Pre-Generated | `0x00000002` | v1.3 | v3.0 |
 | Server On-Demand | `0x00000003` | v1.3 | v3.0 |
 | Client Generated | `0x00000004` | v1.3 | v3.0 |
 | Client Registered | `0x00000005` | v1.3 | v3.0 |
@@ -290,21 +292,23 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| No Encoding | `0x00000001` | v1.2 | v1.4 ⚠️ |
+| No Encoding | `0x00000001` | v1.2 | v3.0 |
 | TTLV Encoding | `0x00000002` | v1.2 | v3.0 |
 
 ### Endpoint Role  ✅  —  `v2.0` `v2.1` `v3.0`
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Server | `The endpoint that receives requests and sends responses.` | v2.0 | v3.0 |
+| Client | `0x00000001` | v2.0 | v3.0 |
+| Server | `0x00000002` | v2.0 | v3.0 |
 
 ### Ephemeral  ✅  —  `v3.0`
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Unique Identifier | `All fields in the Response Payload other than the Unique Identifier are omitted.` | v3.0 | v3.0 |
-| Empty | `The Response Payload is returned as empty (all fields are omitted)` | v3.0 | v3.0 |
+| Data | `0x00000001` | v3.0 | v3.0 |
+| Empty | `0x00000002` | v3.0 | v3.0 |
+| Unique Identifier | `0x00000003` | v3.0 | v3.0 |
 
 ### FIPS186 Variation  ✅  —  `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -351,23 +355,24 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 | End | `A specified test has ended` | v2.0 | v3.0 |
 | Reset | `Resets the server to the state it would be in at the beginning of an interop session` | v2.0 | v3.0 |
 
-### Item Type  ❌ **NOT IMPLEMENTED**  —  `v2.0` `v2.1` `v3.0`
+### Item Type  ✅  —  `v2.0` `v2.1` `v3.0`
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Boolean | `0x0EAEEFAE` | v2.0 | v3.0 |
-| Big Integer | `A sequence of eight-bit bytes` | v2.0 | v3.0 |
-| Date Time Extended | `Eight-byte long (64 bit) POSIX Time values in micro-seconds.` | v2.0 | v3.0 |
-| Date Time | `Eight-byte long (64 bit) POSIX Time values in seconds. .` | v2.0 | v3.0 |
-| Long Integer | `Eight-byte long (64 bit) signed numbers.` | v2.0 | v3.0 |
-| Integer | `Four-byte long (32 bit) signed numbers` | v2.0 | v3.0 |
-| Enumeration | `Four-byte long (32 bit) unsigned numbers` | v2.0 | v3.0 |
-| Interval | `Four-byte long (32 bit) unsigned numbers in seconds` | v2.0 | v3.0 |
-| Name Reference | `Sequence of character values.` | v3.0 | v3.0 |
-| Byte String | `Sequences of bytes containing individual unspecified eight-bit binary values` | v2.0 | v3.0 |
-| Text String | `Sequences of character values.` | v2.0 | v3.0 |
-| Identifier | `Sequences of character values.` | v3.0 | v3.0 |
-| Reference | `Sequences of character values.` | v3.0 | v3.0 |
+| Structure | `0x00000001` | v2.0 | v3.0 |
+| Integer | `0x00000002` | v2.0 | v3.0 |
+| Long Integer | `0x00000003` | v2.0 | v3.0 |
+| Big Integer | `0x00000004` | v2.0 | v3.0 |
+| Enumeration | `0x00000005` | v2.0 | v3.0 |
+| Boolean | `0x00000006` | v2.0 | v3.0 |
+| Text String | `0x00000007` | v2.0 | v3.0 |
+| Byte String | `0x00000008` | v2.0 | v3.0 |
+| Date Time | `0x00000009` | v2.0 | v3.0 |
+| Interval | `0x0000000A` | v2.0 | v3.0 |
+| Date Time Extended | `0x0000000B` | v2.0 | v3.0 |
+| Identifier | `0x0000000C` | v3.0 | v3.0 |
+| Reference | `0x0000000D` | v3.0 | v3.0 |
+| Name Reference | `0x0000000E` | v3.0 | v3.0 |
 
 ### Key Compression Type  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -382,31 +387,29 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Raw | `0x00000001` | v1.2 | v1.4 ⚠️ |
+| Raw | `0x00000001` | v1.2 | v3.0 |
 | Opaque | `0x00000002` | v1.2 | v3.0 |
-| PKCS#1 | `0x00000003` | v1.2 | v1.4 ⚠️ |
-| PKCS#8 | `0x00000004` | v1.2 | v1.4 ⚠️ |
+| PKCS#1 | `0x00000003` | v1.2 | v3.0 |
+| PKCS#8 | `0x00000004` | v1.2 | v3.0 |
 | X.509 | `0x00000005` | v1.2 | v3.0 |
 | ECPrivateKey | `0x00000006` | v1.2 | v3.0 |
-| Transparent Symmetric Key | `0x00000007` | v1.2 | v1.4 ⚠️ |
-| Transparent DSA Private Key | `0x00000008` | v1.2 | v1.4 ⚠️ |
-| Transparent DSA Public Key | `0x00000009` | v1.2 | v1.4 ⚠️ |
-| Transparent RSA Private Key | `0x0000000A` | v1.2 | v1.4 ⚠️ |
-| Transparent RSA Public Key | `0x0000000B` | v1.2 | v1.4 ⚠️ |
-| Transparent DH Private Key | `0x0000000C` | v1.2 | v1.4 ⚠️ |
-| Transparent DH Public Key | `0x0000000D` | v1.2 | v1.4 ⚠️ |
+| Transparent Symmetric Key | `0x00000007` | v1.2 | v3.0 |
+| Transparent DSA Private Key | `0x00000008` | v1.2 | v3.0 |
+| Transparent DSA Public Key | `0x00000009` | v1.2 | v3.0 |
+| Transparent RSA Private Key | `0x0000000A` | v1.2 | v3.0 |
+| Transparent RSA Public Key | `0x0000000B` | v1.2 | v3.0 |
+| Transparent DH Private Key | `0x0000000C` | v1.2 | v3.0 |
+| Transparent DH Public Key | `0x0000000D` | v1.2 | v3.0 |
 | Transparent ECDSA Private Key | `0x0000000E` | v1.2 | v1.4 ⚠️ |
 | Transparent ECDSA Public Key | `0x0000000F` | v1.2 | v1.4 ⚠️ |
 | Transparent ECDH Private Key | `0x00000010` | v1.2 | v1.4 ⚠️ |
 | Transparent ECDH Public Key | `0x00000011` | v1.2 | v1.4 ⚠️ |
 | Transparent ECMQV Private Key | `0x00000012` | v1.2 | v1.4 ⚠️ |
 | Transparent ECMQV Public Key | `0x00000013` | v1.2 | v1.4 ⚠️ |
-| Transparent EC Private Key | `0x00000014` | v1.3 | v1.4 ⚠️ |
-| Transparent EC Public Key | `0x00000015` | v1.3 | v1.4 ⚠️ |
-| PKCS#12 | `0x00000016` | v1.4 | v1.4 ⚠️ |
-| PKCS8 | `An encoded private key, expressed as a DER-encoded ASN.1 PKCS#8 object, supporting both the RSAPrivateKey syntax and EncryptedPrivateKey` | v2.0 | v3.0 |
-| Several Transparent Key types | `algorithm-specific structures containing defined values for the various key types.` | v2.0 | v3.0 |
-| PKCS1 | `an encoded private key, expressed as a DER-encoded ASN.1 PKCS#1 object.` | v2.0 | v3.0 |
+| Transparent EC Private Key | `0x00000014` | v1.3 | v3.0 |
+| Transparent EC Public Key | `0x00000015` | v1.3 | v3.0 |
+| PKCS#12 | `0x00000016` | v1.4 | v3.0 |
+| PKCS#10 | `0x00000017` | v2.0 | v3.0 |
 
 ### Key Role Type  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -457,7 +460,7 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 |---|---|---|---|
 | Certificate Link | `0x00000101` | v1.2 | v2.1 ⚠️ |
 | Public Key Link | `0x00000102` | v1.2 | v2.1 ⚠️ |
-| Private Key Link | `0x00000103` | v1.2 | v1.4 ⚠️ |
+| Private Key Link | `0x00000103` | v1.2 | v2.1 ⚠️ |
 | Derivation Base Object Link | `0x00000104` | v1.2 | v2.1 ⚠️ |
 | Derived Key Link | `0x00000105` | v1.2 | v2.1 ⚠️ |
 | Replacement Object Link | `0x00000106` | v1.2 | v2.1 ⚠️ |
@@ -468,7 +471,7 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 | Next Link | `0x0000010B` | v1.2 | v2.1 ⚠️ |
 | PKCS#12 Certificate Link | `0x0000010C` | v1.4 | v2.1 ⚠️ |
 | PKCS#12 Password Link | `0x0000010D` | v1.4 | v2.1 ⚠️ |
-| Wrapping Key Link | `For wrapped objects: the object that was used to wrap this object.` | v2.0 | v2.1 ⚠️ |
+| Wrapping Key Link | `0x0000010E` | v2.0 | v2.1 ⚠️ |
 
 ### Mask Generator  ✅  —  `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -512,7 +515,8 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| TOTP | `Time-Based One-Time Password Algorithm [RFC6238]` | v3.0 | v3.0 |
+| HOTP | `0x00000001` | v3.0 | v3.0 |
+| TOTP | `0x00000002` | v3.0 | v3.0 |
 
 ### Object Class  ✅  —  `v3.0`
 
@@ -971,22 +975,22 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| Invalid Password | `` | v2.0 | v3.0 |
 | Item Not Found | `0x00000001` | v1.2 | v3.0 |
 | Response Too Large | `0x00000002` | v1.2 | v3.0 |
-| Authentication Not Successful | `0x00000003` | v1.2 | v1.4 ⚠️ |
+| Authentication Not Successful | `0x00000003` | v1.2 | v3.0 |
 | Invalid Message | `0x00000004` | v1.2 | v3.0 |
 | Operation Not Supported | `0x00000005` | v1.2 | v3.0 |
-| Missing Data | `0x00000006` | v1.2 | v1.4 ⚠️ |
+| Missing Data | `0x00000006` | v1.2 | v3.0 |
 | Invalid Field | `0x00000007` | v1.2 | v3.0 |
 | Feature Not Supported | `0x00000008` | v1.2 | v3.0 |
-| Operation Canceled By Requester | `0x00000009` | v1.2 | v1.4 ⚠️ |
+| Operation Canceled By Requester | `0x00000009` | v1.2 | v3.0 |
 | Cryptographic Failure | `0x0000000A` | v1.2 | v3.0 |
 | Illegal Operation | `0x0000000B` | v1.2 | v1.4 ⚠️ |
 | Permission Denied | `0x0000000C` | v1.2 | v3.0 |
 | Object archived | `0x0000000D` | v1.2 | v1.4 ⚠️ |
+| Object Archived | `0x0000000D` | v2.0 | v3.0 |
 | Index Out of Bounds | `0x0000000E` | v1.2 | v1.4 ⚠️ |
-| Application Namespace Not Supported | `0x0000000F` | v1.2 | v1.4 ⚠️ |
+| Application Namespace Not Supported | `0x0000000F` | v1.2 | v3.0 |
 | Key Format Type Not Supported | `0x00000010` | v1.2 | v3.0 |
 | Key Compression Type Not Supported | `0x00000011` | v1.2 | v3.0 |
 | Encoding Option Error | `0x00000012` | v1.2 | v3.0 |
@@ -996,59 +1000,56 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 | Sensitive | `0x00000016` | v1.4 | v3.0 |
 | Not Extractable | `0x00000017` | v1.4 | v3.0 |
 | Object Already Exists | `0x00000018` | v1.4 | v3.0 |
-| General Failure | `0x00000100` | v1.2 | v1.4 ⚠️ |
-| Unknown Tag | `0x00AABEEE` | v2.0 | v3.0 |
-| Invalid Ticket | `0x00ECEAAD` | v2.0 | v3.0 |
-| Wrapping Object Not Found | `0x0ABECDEE` | v2.0 | v3.0 |
-| Wrapping Object Archived | `0xABECACED` | v2.0 | v3.0 |
-| Missing Initialization Vector | `0xEEEDFCEA` | v2.0 | v3.0 |
-| Invalid Correlation Value | `0xFEACACEA` | v2.0 | v3.0 |
-| Unknown Object Group | `<insert>` | v2.1 | v2.1 ⚠️ |
-| Circular Link Error | `A ParentLink sets up a directed acyclic relationship. Detection of a cycle in the relationship graph results in this reason code.` | v3.0 | v3.0 |
-| Invalid Data Type | `A data type was invalid for the requested operation` | v2.0 | v3.0 |
-| Attribute Instance Not Found | `A referenced attribute was found, but the specific instance was not found` | v2.0 | v3.0 |
-| Attribute Not Found | `A referenced attribute was not found at all on an object` | v2.0 | v3.0 |
-| Object Not Found | `A requested managed object was not found or did not exist` | v2.0 | v3.0 |
-| Invalid Attribute | `An attribute is invalid for this object for this operation` | v2.0 | v3.0 |
-| Unknown Enumeration | `An enumerated value is not known by the server` | v2.0 | v3.0 |
-| Numeric Range | `An operation produced a number that is to large or too small to be stored in the specified data type` | v2.0 | v3.0 |
-| Multi Valued Attribute | `Attempt to Set or Adjust an attribute that has multiple values` | v2.0 | v3.0 |
-| Attribute Single Instance | `Attempt to provide multiple values for a single instance attribute` | v2.0 | v3.0 |
-| Attribute Read Only | `Attempt to set a Read Only Attribute` | v2.0 | v3.0 |
-| Read Only Attribute | `Attempt to set a Read Only Attribute` | v2.0 | v3.0 |
-| Unsupported Attribute | `Attribute is valid in the specification but unsupported by the Server` | v2.0 | v3.0 |
-| Bad Cryptographic Parameters | `Bad Cryptographic Parameters` | v2.0 | v3.0 |
-| Illegal Object Type | `Check cannot be performed on this object type` | v2.0 | v3.0 |
-| Unsupported Cryptographic Parameters | `Cryptographic Parameters are valid in the specification but unsupported by the Server` | v2.0 | v3.0 |
-| Invalid CSR | `Invalid Certifcate Signing Request` | v2.0 | v3.0 |
-| Object Type | `Invalid object type for the operation` | v2.0 | v3.0 |
-| Bad Password | `Key Format Type is PKCS#12, but missing or multiple PKCS#12 Password Links, or not Secret Data, or not Active` | v2.0 | v3.0 |
-| Key Wrap Type Not Supported | `Key Wrap Type Type is not supported by the server` | v2.0 | v3.0 |
-| Invalid Asynchronous Correlation Value | `No outstanding operation with the specified Asynchronous Correlation Value exists` | v2.0 | v3.0 |
-| Object Destroyed | `Object exists, but has already been destroyed` | v2.0 | v3.0 |
-| Server Limit Exceeded | `Some limit on the server such as database size has been exceeded` | v2.0 | v3.0 |
-| Invalid Object Type | `Specificed object is not valid for the requested operation` | v2.0 | v3.0 |
-| PKCS#11 Invalid Function | `The PKCS function is not in the interface` | v2.0 | v3.0 |
-| Duplicate Process Request | `The asynchronous request specified was already processed` | v2.1 | v3.0 |
-| Authentication not successful | `The authentication information in the request could not be validated, or was not found` | v2.0 | v3.0 |
-| Incompatible Cryptographic Usage Mask | `The cryptographic algorithm or other parameters is not valid for the requested operation` | v2.0 | v3.0 |
-| PKCS#11 Invalid Interface | `The interface is unknown or unavailable in the server` | v2.0 | v3.0 |
-| Wrong Key Lifecycle State | `The key lifecycle state is invalid for the operation, for example not Active for an Encrypt operation` | v2.0 | v3.0 |
-| Codec Error | `The low level TTLV, XML, JSON etc. was badly formed and not understood by the server.TTLV connections should be closed as future requests might not be correctly separated` | v2.0 | v3.0 |
-| Object Archived | `The object SHALL be recovered from the archive before performing the operation` | v2.0 | v3.0 |
-| Wrapping Object Destroyed | `The object exists, but is destroyed` | v2.0 | v3.0 |
-| Missing data | `The operation REQUIRED additional information in the request, which was not present` | v2.0 | v3.0 |
-| Unsupported Protocol Version | `The operation cannot be performed with the provided protocol version` | v2.0 | v3.0 |
-| Protection Storage Unavailable, Private Protection Storage Unavailable, Public Protection Storage Unavailable | `The operation could not be completed with the protections requested (or defaulted).` | v2.0 | v3.0 |
-| Operation canceled by requester | `The operation was asynchronous, and the operation was canceled by the Cancel operation before it completed successfully` | v2.0 | v3.0 |
-| Constraint Violation | `The request failed because one or more constraints were violated` | v2.1 | v3.0 |
-| General failure | `The request failed for a reason other than the defined reasons above` | v2.0 | v3.0 |
-| Unknown Message Extension | `The server does not support the supplied Message Extension` | v2.0 | v3.0 |
-| Internal Server Error | `The server had an internal error and could not process the request at this time.` | v2.0 | v3.0 |
-| Usage Limit Exceeded | `The usage limits or request count has been exceeded` | v2.0 | v3.0 |
-| Invalid Attribute Value | `The value supplied for an attribute is invalid` | v2.0 | v3.0 |
-| PKCS#11 Codec Error | `There is a Codec error in the Input parameter` | v2.0 | v3.0 |
-| Non Unique Name Attribute | `Trying to perform an operation that requests the server to break the constraint on Name attribute being unique` | v2.0 | v3.0 |
+| Invalid Ticket | `0x00000019` | v2.0 | v3.0 |
+| Usage Limit Exceeded | `0x0000001A` | v2.0 | v3.0 |
+| Numeric Range | `0x0000001B` | v2.0 | v3.0 |
+| Invalid Data Type | `0x0000001C` | v2.0 | v3.0 |
+| Read Only Attribute | `0x0000001D` | v2.0 | v3.0 |
+| Multi Valued Attribute | `0x0000001E` | v2.0 | v3.0 |
+| Unsupported Attribute | `0x0000001F` | v2.0 | v3.0 |
+| Attribute Instance Not Found | `0x00000020` | v2.0 | v3.0 |
+| Attribute Not Found | `0x00000021` | v2.0 | v3.0 |
+| Attribute Read Only | `0x00000022` | v2.0 | v3.0 |
+| Attribute Single Valued | `0x00000023` | v2.0 | v3.0 |
+| Bad Cryptographic Parameters | `0x00000024` | v2.0 | v3.0 |
+| Bad Password | `0x00000025` | v2.0 | v3.0 |
+| Codec Error | `0x00000026` | v2.0 | v3.0 |
+| Illegal Object Type | `0x00000028` | v2.0 | v3.0 |
+| Incompatible Cryptographic Usage Mask | `0x00000029` | v2.0 | v3.0 |
+| Internal Server Error | `0x0000002A` | v2.0 | v3.0 |
+| Invalid Asynchronous Correlation Value | `0x0000002B` | v2.0 | v3.0 |
+| Invalid Attribute | `0x0000002C` | v2.0 | v3.0 |
+| Invalid Attribute Value | `0x0000002D` | v2.0 | v3.0 |
+| Invalid Correlation Value | `0x0000002E` | v2.0 | v3.0 |
+| Invalid CSR | `0x0000002F` | v2.0 | v3.0 |
+| Invalid Object Type | `0x00000030` | v2.0 | v3.0 |
+| Key Wrap Type Not Supported | `0x00000032` | v2.0 | v3.0 |
+| Missing Initialization Vector | `0x00000034` | v2.0 | v3.0 |
+| Non Unique Name Attribute | `0x00000035` | v2.0 | v3.0 |
+| Object Destroyed | `0x00000036` | v2.0 | v3.0 |
+| Object Not Found | `0x00000037` | v2.0 | v3.0 |
+| Not Authorised | `0x00000039` | v2.0 | v3.0 |
+| Server Limit Exceeded | `0x0000003A` | v2.0 | v3.0 |
+| Unknown Enumeration | `0x0000003B` | v2.0 | v3.0 |
+| Unknown Message Extension | `0x0000003C` | v2.0 | v3.0 |
+| Unknown Tag | `0x0000003D` | v2.0 | v3.0 |
+| Unsupported Cryptographic Parameters | `0x0000003E` | v2.0 | v3.0 |
+| Unsupported Protocol Version | `0x0000003F` | v2.0 | v3.0 |
+| Wrapping Object Archived | `0x00000040` | v2.0 | v3.0 |
+| Wrapping Object Destroyed | `0x00000041` | v2.0 | v3.0 |
+| Wrapping Object Not Found | `0x00000042` | v2.0 | v3.0 |
+| Wrong Key Lifecycle State | `0x00000043` | v2.0 | v3.0 |
+| Protection Storage Unavailable | `0x00000044` | v2.0 | v3.0 |
+| PKCS#11 Codec Error | `0x00000045` | v2.0 | v3.0 |
+| PKCS#11 Invalid Function | `0x00000046` | v2.0 | v3.0 |
+| PKCS#11 Invalid Interface | `0x00000047` | v2.0 | v3.0 |
+| Private Protection Storage Unavailable | `0x00000048` | v2.0 | v3.0 |
+| Public Protection Storage Unavailable | `0x00000049` | v2.0 | v3.0 |
+| Unknown Object Group | `0x0000004A` | v2.1 | v2.1 ⚠️ |
+| Constraint Violation | `0x0000004B` | v2.1 | v3.0 |
+| Duplicate Process Request | `0x0000004C` | v2.1 | v3.0 |
+| Circular Link Error | `0x0000004D` | v3.0 | v3.0 |
+| General Failure | `0x00000100` | v1.2 | v3.0 |
 
 ### Result Status  ✅  —  `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0`
 
@@ -1197,13 +1198,11 @@ Complete value tables for every enumeration parsed across all versions. ⚠️ o
 
 | Value Name | Hex | First Seen | Last Seen |
 |---|---|---|---|
-| MAC/sign then encrypt. | `` | v2.0 | v3.0 |
-| Encrypt | `0x00000001` | v1.2 | v1.4 ⚠️ |
-| MAC/sign | `0x00000002` | v1.2 | v1.4 ⚠️ |
+| Encrypt | `0x00000001` | v1.2 | v3.0 |
+| MAC/sign | `0x00000002` | v1.2 | v3.0 |
 | Encrypt then MAC/sign | `0x00000003` | v1.2 | v3.0 |
-| MAC/sign then encrypt | `0x00000004` | v1.2 | v1.4 ⚠️ |
+| MAC/sign then encrypt | `0x00000004` | v1.2 | v3.0 |
 | TR-31 | `0x00000005` | v1.2 | v3.0 |
-| MAC/sign only | `either MACing the Key Value with a symmetric key, or signing the Key Value with a private key` | v2.0 | v3.0 |
 
 ---
 

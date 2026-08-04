@@ -5,4 +5,5 @@
 
 | Name | Value | Versions |
 |---|---|---|
-| TOTP | `Time-Based One-Time Password Algorithm [RFC6238]` | `v3.0` |
+| HOTP | `0x00000001` | `v3.0` |
+| TOTP | `0x00000002` | `v3.0` |

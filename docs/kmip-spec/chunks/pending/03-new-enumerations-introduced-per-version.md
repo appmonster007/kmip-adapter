@@ -72,7 +72,7 @@
 | Data | ✅ |
 | Endpoint Role | ✅ |
 | Interop Function | ✅ |
-| Item Type | ❌ |
+| Item Type | ✅ |
 | NIST Key Type | ✅ |
 | Protection Level | ✅ |
 | Ticket Type | ✅ |

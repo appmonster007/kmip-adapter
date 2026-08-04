@@ -5,5 +5,6 @@
 
 | Name | Value | Versions |
 |---|---|---|
-| Unique Identifier | `All fields in the Response Payload other than the Unique Identifier are omitted.` | `v3.0` |
-| Empty | `The Response Payload is returned as empty (all fields are omitted)` | `v3.0` |
+| Data | `0x00000001` | `v3.0` |
+| Empty | `0x00000002` | `v3.0` |
+| Unique Identifier | `0x00000003` | `v3.0` |

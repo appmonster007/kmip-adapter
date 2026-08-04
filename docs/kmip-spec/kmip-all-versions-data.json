@@ -19972,14 +19972,258 @@
           "Signature Verify",
           "Validate"
         ],
-        "Put Function": [
-          "New",
-          "Replace"
+        "Certificate Request Type": [
+          "CRMF",
+          "PEM",
+          "PGP",
+          "PKCS#10"
+        ],
+        "Hashing Algorithm": [
+          "MD2",
+          "MD4",
+          "MD5",
+          "RIPEMD-160",
+          "SHA-1",
+          "SHA-224",
+          "SHA-256",
+          "SHA-384",
+          "SHA-512",
+          "SHA-512/224",
+          "SHA-512/256",
+          "Tiger",
+          "Whirlpool"
+        ],
+        "Cryptographic Algorithm": [
+          "3DES",
+          "AES",
+          "Blowfish",
+          "CAST5",
+          "Camellia",
+          "DES",
+          "DH",
+          "DSA",
+          "EC",
+          "ECDH",
+          "ECDSA",
+          "ECMQV",
+          "HMAC-MD5",
+          "HMAC-SHA1",
+          "HMAC-SHA224",
+          "HMAC-SHA256",
+          "HMAC-SHA384",
+          "HMAC-SHA512",
+          "IDEA",
+          "MARS",
+          "RC2",
+          "RC4",
+          "RC5",
+          "RSA",
+          "SKIPJACK",
+          "Twofish"
+        ],
+        "Usage Limits Unit": [
+          "Byte",
+          "Object"
+        ],
+        "Secret Data Type": [
+          "Password",
+          "Seed"
+        ],
+        "Result Reason": [
+          "Application Namespace Not Supported",
+          "Attestation Failed",
+          "Attestation Required",
+          "Authentication Not Successful",
+          "Cryptographic Failure",
+          "Encoding Option Error",
+          "Feature Not Supported",
+          "General Failure",
+          "Illegal Operation",
+          "Index Out of Bounds",
+          "Invalid Field",
+          "Invalid Message",
+          "Item Not Found",
+          "Key Compression Type Not Supported",
+          "Key Format Type Not Supported",
+          "Key Value Not Present",
+          "Missing Data",
+          "Object archived",
+          "Operation Canceled By Requester",
+          "Operation Not Supported",
+          "Permission Denied",
+          "Response Too Large"
+        ],
+        "Name Type": [
+          "URI",
+          "Uninterpreted Text String"
+        ],
+        "Object Type": [
+          "Certificate",
+          "Opaque Object",
+          "PGP Key",
+          "Private Key",
+          "Public Key",
+          "Secret Data",
+          "Split Key",
+          "Symmetric Key",
+          "Template"
+        ],
+        "Wrapping Method": [
+          "Encrypt",
+          "Encrypt then MAC/sign",
+          "MAC/sign",
+          "MAC/sign then encrypt",
+          "TR-31"
+        ],
+        "Result Status": [
+          "Operation Failed",
+          "Operation Pending",
+          "Operation Undone",
+          "Success"
+        ],
+        "Encoding Option": [
+          "No Encoding",
+          "TTLV Encoding"
+        ],
+        "Digital Signature Algorithm": [
+          "DSA with SHA-1",
+          "DSA with SHA224",
+          "DSA with SHA256",
+          "ECDSA with SHA-1",
+          "ECDSA with SHA224",
+          "ECDSA with SHA256",
+          "ECDSA with SHA384",
+          "ECDSA with SHA512",
+          "MD2 with RSA Encryption (PKCS#1 v1.5)",
+          "MD5 with RSA Encryption (PKCS#1 v1.5)",
+          "RSASSA-PSS (PKCS#1 v2.1)",
+          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
+          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
+        ],
+        "Alternative Name Type": [
+          "DNS Name",
+          "Email Address",
+          "IP Address",
+          "Object Serial Number",
+          "URI",
+          "Uninterpreted Text String",
+          "X.500 Distinguished Name"
+        ],
+        "Padding Method": [
+          "ANSI X9.23",
+          "ISO 10126",
+          "None",
+          "OAEP",
+          "PKCS1 v1.5",
+          "PKCS5",
+          "PSS",
+          "SSL3",
+          "X9.31",
+          "Zeros"
         ],
         "Attestation Type": [
           "SAML Assertion",
           "TCG Integrity Report",
           "TPM Quote"
+        ],
+        "Revocation Reason Code": [
+          "Affiliation Changed",
+          "CA Compromise",
+          "Cessation of Operation",
+          "Key Compromise",
+          "Privilege Withdrawn",
+          "Superseded",
+          "Unspecified"
+        ],
+        "Put Function": [
+          "New",
+          "Replace"
+        ],
+        "Validity Indicator": [
+          "Invalid",
+          "Unknown",
+          "Valid"
+        ],
+        "Credential Type": [
+          "Attestation",
+          "Device",
+          "Username and Password"
+        ],
+        "Link Type": [
+          "Certificate Link",
+          "Child Link",
+          "Derivation Base Object Link",
+          "Derived Key Link",
+          "Next Link",
+          "Parent Link",
+          "Previous Link",
+          "Private Key Link",
+          "Public Key Link",
+          "Replaced Object Link",
+          "Replacement Object Link"
+        ],
+        "Query Function": [
+          "Query Application Namespaces",
+          "Query Attestation Types",
+          "Query Extension List",
+          "Query Extension Map",
+          "Query Objects",
+          "Query Operations",
+          "Query Server Information"
+        ],
+        "Derivation Method": [
+          "ENCRYPT",
+          "HASH",
+          "HMAC",
+          "NIST800-108-C",
+          "NIST800-108-DPI",
+          "NIST800-108-F",
+          "PBKDF2"
+        ],
+        "Key Value Location Type": [
+          "URI",
+          "Uninterpreted Text String"
+        ],
+        "Split Key Method": [
+          "Polynomial Sharing GF (216)",
+          "Polynomial Sharing GF (28)",
+          "Polynomial Sharing Prime Field",
+          "XOR"
+        ],
+        "Cancellation Result": [
+          "Canceled",
+          "Completed",
+          "Failed",
+          "Unable to Cancel",
+          "Unavailable"
+        ],
+        "Key Format Type": [
+          "ECPrivateKey",
+          "Opaque",
+          "PKCS#1",
+          "PKCS#8",
+          "Raw",
+          "Transparent DH Private Key",
+          "Transparent DH Public Key",
+          "Transparent DSA Private Key",
+          "Transparent DSA Public Key",
+          "Transparent ECDH Private Key",
+          "Transparent ECDH Public Key",
+          "Transparent ECDSA Private Key",
+          "Transparent ECDSA Public Key",
+          "Transparent ECMQV Private Key",
+          "Transparent ECMQV Public Key",
+          "Transparent RSA Private Key",
+          "Transparent RSA Public Key",
+          "Transparent Symmetric Key",
+          "X.509"
+        ],
+        "Certificate Type": [
+          "PGP",
+          "X.509"
         ],
         "Recommended Curve": [
           "ANSIX9C2PNB163V1",
@@ -20051,23 +20295,17 @@
           "SECT193R2",
           "SECT239K1"
         ],
-        "Name Type": [
-          "URI",
-          "Uninterpreted Text String"
+        "State": [
+          "Active",
+          "Compromised",
+          "Deactivated",
+          "Destroyed",
+          "Destroyed Compromised",
+          "Pre-Active"
         ],
-        "Alternative Name Type": [
-          "DNS Name",
-          "Email Address",
-          "IP Address",
-          "Object Serial Number",
-          "URI",
-          "Uninterpreted Text String",
-          "X.500 Distinguished Name"
-        ],
-        "Batch Error Continuation Option": [
-          "Continue",
-          "Stop",
-          "Undo"
+        "Object Group Member": [
+          "Group Member Default",
+          "Group Member Fresh"
         ],
         "Key Role Type": [
           "BDK",
@@ -20092,131 +20330,10 @@
           "PVKPVV",
           "ZPK"
         ],
-        "Usage Limits Unit": [
-          "Byte",
-          "Object"
-        ],
-        "Cancellation Result": [
-          "Canceled",
-          "Completed",
-          "Failed",
-          "Unable to Cancel",
-          "Unavailable"
-        ],
-        "Key Compression Type": [
-          "EC Public Key Type Uncompressed",
-          "EC Public Key Type X9.62 Compressed Char2",
-          "EC Public Key Type X9.62 Compressed Prime",
-          "EC Public Key Type X9.62 Hybrid"
-        ],
-        "Padding Method": [
-          "ANSI X9.23",
-          "ISO 10126",
-          "None",
-          "OAEP",
-          "PKCS1 v1.5",
-          "PKCS5",
-          "PSS",
-          "SSL3",
-          "X9.31",
-          "Zeros"
-        ],
-        "Validity Indicator": [
-          "Invalid",
-          "Unknown",
-          "Valid"
-        ],
-        "Object Group Member": [
-          "Group Member Default",
-          "Group Member Fresh"
-        ],
-        "Credential Type": [
-          "Attestation",
-          "Device",
-          "Username and Password"
-        ],
-        "Result Reason": [
-          "Application Namespace Not Supported",
-          "Attestation Failed",
-          "Attestation Required",
-          "Authentication Not Successful",
-          "Cryptographic Failure",
-          "Encoding Option Error",
-          "Feature Not Supported",
-          "General Failure",
-          "Illegal Operation",
-          "Index Out of Bounds",
-          "Invalid Field",
-          "Invalid Message",
-          "Item Not Found",
-          "Key Compression Type Not Supported",
-          "Key Format Type Not Supported",
-          "Key Value Not Present",
-          "Missing Data",
-          "Object archived",
-          "Operation Canceled By Requester",
-          "Operation Not Supported",
-          "Permission Denied",
-          "Response Too Large"
-        ],
-        "Cryptographic Algorithm": [
-          "3DES",
-          "AES",
-          "Blowfish",
-          "CAST5",
-          "Camellia",
-          "DES",
-          "DH",
-          "DSA",
-          "EC",
-          "ECDH",
-          "ECDSA",
-          "ECMQV",
-          "HMAC-MD5",
-          "HMAC-SHA1",
-          "HMAC-SHA224",
-          "HMAC-SHA256",
-          "HMAC-SHA384",
-          "HMAC-SHA512",
-          "IDEA",
-          "MARS",
-          "RC2",
-          "RC4",
-          "RC5",
-          "RSA",
-          "SKIPJACK",
-          "Twofish"
-        ],
-        "Certificate Type": [
-          "PGP",
-          "X.509"
-        ],
-        "Digital Signature Algorithm": [
-          "DSA with SHA-1",
-          "DSA with SHA224",
-          "DSA with SHA256",
-          "ECDSA with SHA-1",
-          "ECDSA with SHA224",
-          "ECDSA with SHA256",
-          "ECDSA with SHA384",
-          "ECDSA with SHA512",
-          "MD2 with RSA Encryption (PKCS#1 v1.5)",
-          "MD5 with RSA Encryption (PKCS#1 v1.5)",
-          "RSASSA-PSS (PKCS#1 v2.1)",
-          "SHA-1 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-224 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-256 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-384 with RSA Encryption (PKCS#1 v1.5)",
-          "SHA-512 with RSA Encryption (PKCS#1 v1.5)"
-        ],
-        "Revocation Reason Code": [
-          "Affiliation Changed",
-          "CA Compromise",
-          "Cessation of Operation",
-          "Key Compromise",
-          "Privilege Withdrawn",
-          "Superseded",
-          "Unspecified"
+        "Batch Error Continuation Option": [
+          "Continue",
+          "Stop",
+          "Undo"
         ],
         "Block Cipher Mode": [
           "AESKeyWrapPadding",
@@ -20237,128 +20354,11 @@
           "X9.102 TDKW",
           "XTS"
         ],
-        "Object Type": [
-          "Certificate",
-          "Opaque Object",
-          "PGP Key",
-          "Private Key",
-          "Public Key",
-          "Secret Data",
-          "Split Key",
-          "Symmetric Key",
-          "Template"
-        ],
-        "Query Function": [
-          "Query Application Namespaces",
-          "Query Attestation Types",
-          "Query Extension List",
-          "Query Extension Map",
-          "Query Objects",
-          "Query Operations",
-          "Query Server Information"
-        ],
-        "Certificate Request Type": [
-          "CRMF",
-          "PEM",
-          "PGP",
-          "PKCS#10"
-        ],
-        "State": [
-          "Active",
-          "Compromised",
-          "Deactivated",
-          "Destroyed",
-          "Destroyed Compromised",
-          "Pre-Active"
-        ],
-        "Key Format Type": [
-          "ECPrivateKey",
-          "Opaque",
-          "PKCS#1",
-          "PKCS#8",
-          "Raw",
-          "Transparent DH Private Key",
-          "Transparent DH Public Key",
-          "Transparent DSA Private Key",
-          "Transparent DSA Public Key",
-          "Transparent ECDH Private Key",
-          "Transparent ECDH Public Key",
-          "Transparent ECDSA Private Key",
-          "Transparent ECDSA Public Key",
-          "Transparent ECMQV Private Key",
-          "Transparent ECMQV Public Key",
-          "Transparent RSA Private Key",
-          "Transparent RSA Public Key",
-          "Transparent Symmetric Key",
-          "X.509"
-        ],
-        "Result Status": [
-          "Operation Failed",
-          "Operation Pending",
-          "Operation Undone",
-          "Success"
-        ],
-        "Encoding Option": [
-          "No Encoding",
-          "TTLV Encoding"
-        ],
-        "Split Key Method": [
-          "Polynomial Sharing GF (216)",
-          "Polynomial Sharing GF (28)",
-          "Polynomial Sharing Prime Field",
-          "XOR"
-        ],
-        "Derivation Method": [
-          "ENCRYPT",
-          "HASH",
-          "HMAC",
-          "NIST800-108-C",
-          "NIST800-108-DPI",
-          "NIST800-108-F",
-          "PBKDF2"
-        ],
-        "Key Value Location Type": [
-          "URI",
-          "Uninterpreted Text String"
-        ],
-        "Wrapping Method": [
-          "Encrypt",
-          "Encrypt then MAC/sign",
-          "MAC/sign",
-          "MAC/sign then encrypt",
-          "TR-31"
-        ],
-        "Secret Data Type": [
-          "Password",
-          "Seed"
-        ],
-        "Link Type": [
-          "Certificate Link",
-          "Child Link",
-          "Derivation Base Object Link",
-          "Derived Key Link",
-          "Next Link",
-          "Parent Link",
-          "Previous Link",
-          "Private Key Link",
-          "Public Key Link",
-          "Replaced Object Link",
-          "Replacement Object Link"
-        ],
-        "Hashing Algorithm": [
-          "MD2",
-          "MD4",
-          "MD5",
-          "RIPEMD-160",
-          "SHA-1",
-          "SHA-224",
-          "SHA-256",
-          "SHA-384",
-          "SHA-512",
-          "SHA-512/224",
-          "SHA-512/256",
-          "Tiger",
-          "Whirlpool"
+        "Key Compression Type": [
+          "EC Public Key Type Uncompressed",
+          "EC Public Key Type X9.62 Compressed Char2",
+          "EC Public Key Type X9.62 Compressed Prime",
+          "EC Public Key Type X9.62 Hybrid"
         ]
       },
       "tags": []
@@ -20378,51 +20378,15 @@
         "Validation Type"
       ],
       "enum_values": {
+        "Cryptographic Algorithm": [
+          "One Time Pad"
+        ],
         "Client Registration Method": [
           "Client Generated",
           "Client Registered",
           "Server On-Demand",
           "Server Pre-Generated",
           "Unspecified"
-        ],
-        "RNG Algorithm": [
-          "ANSI X9.31",
-          "ANSI X9.62",
-          "DRBG",
-          "FIPS 186-2",
-          "NRBG",
-          "Unspecified"
-        ],
-        "Destroy Action": [
-          "Deleted",
-          "Key Material Deleted",
-          "Key Material Shredded",
-          "Meta Data Deleted",
-          "Meta Data Shredded",
-          "Shredded",
-          "Unspecified"
-        ],
-        "Validation Type": [
-          "Firmware",
-          "Hardware",
-          "Hybrid",
-          "Software",
-          "Unspecified"
-        ],
-        "RNG Mode": [
-          "Non-Shared Instantiation",
-          "Shared Instantiation",
-          "Unspecified"
-        ],
-        "DRBG Algorithm": [
-          "CTR",
-          "Dual-EC",
-          "HMAC",
-          "Hash",
-          "Unspecified"
-        ],
-        "Cryptographic Algorithm": [
-          "One Time Pad"
         ],
         "Profile Name": [
           "Advanced Cryptographic Client KMIP v1.2",
@@ -20546,16 +20510,12 @@
           "XML Server KMIP v1.2",
           "XML Server KMIP v1.3"
         ],
-        "Query Function": [
-          "Query Capabilities",
-          "Query Client Registration Methods",
-          "Query Profiles",
-          "Query RNGs",
-          "Query Validations"
-        ],
-        "Key Format Type": [
-          "Transparent EC Private Key",
-          "Transparent EC Public Key"
+        "Validation Type": [
+          "Firmware",
+          "Hardware",
+          "Hybrid",
+          "Software",
+          "Unspecified"
         ],
         "Validation Authority Type": [
           "Common Criteria",
@@ -20576,6 +20536,46 @@
           "Processed",
           "Unspecified"
         ],
+        "DRBG Algorithm": [
+          "CTR",
+          "Dual-EC",
+          "HMAC",
+          "Hash",
+          "Unspecified"
+        ],
+        "RNG Mode": [
+          "Non-Shared Instantiation",
+          "Shared Instantiation",
+          "Unspecified"
+        ],
+        "RNG Algorithm": [
+          "ANSI X9.31",
+          "ANSI X9.62",
+          "DRBG",
+          "FIPS 186-2",
+          "NRBG",
+          "Unspecified"
+        ],
+        "Query Function": [
+          "Query Capabilities",
+          "Query Client Registration Methods",
+          "Query Profiles",
+          "Query RNGs",
+          "Query Validations"
+        ],
+        "Destroy Action": [
+          "Deleted",
+          "Key Material Deleted",
+          "Key Material Shredded",
+          "Meta Data Deleted",
+          "Meta Data Shredded",
+          "Shredded",
+          "Unspecified"
+        ],
+        "Key Format Type": [
+          "Transparent EC Private Key",
+          "Transparent EC Public Key"
+        ],
         "Shredding Algorithm": [
           "Cryptographic",
           "Unspecified",
@@ -20590,30 +20590,9 @@
         "Mask Generator"
       ],
       "enum_values": {
-        "Key Role Type": [
-          "DUKPT",
-          "IV",
-          "TRKBK"
-        ],
-        "Result Reason": [
-          "Not Extractable",
-          "Object Already Exists",
-          "Sensitive"
-        ],
-        "Derivation Method": [
-          "Asymmetric Key"
-        ],
-        "Link Type": [
-          "PKCS#12 Certificate Link",
-          "PKCS#12 Password Link"
-        ],
         "Operation": [
           "Export",
           "Import"
-        ],
-        "Key Wrap Type": [
-          "As Registered",
-          "Not Wrapped"
         ],
         "Cryptographic Algorithm": [
           "ChaCha20",
@@ -20673,20 +20652,41 @@
           "XML Client KMIP v1.4",
           "XML Server KMIP v1.4"
         ],
+        "Derivation Method": [
+          "Asymmetric Key"
+        ],
         "Block Cipher Mode": [
           "AEAD"
-        ],
-        "Key Format Type": [
-          "PKCS#12"
-        ],
-        "Mask Generator": [
-          "MGF1"
         ],
         "Hashing Algorithm": [
           "SHA-3-224",
           "SHA-3-256",
           "SHA-3-384",
           "SHA-3-512"
+        ],
+        "Result Reason": [
+          "Not Extractable",
+          "Object Already Exists",
+          "Sensitive"
+        ],
+        "Mask Generator": [
+          "MGF1"
+        ],
+        "Key Wrap Type": [
+          "As Registered",
+          "Not Wrapped"
+        ],
+        "Link Type": [
+          "PKCS#12 Certificate Link",
+          "PKCS#12 Password Link"
+        ],
+        "Key Format Type": [
+          "PKCS#12"
+        ],
+        "Key Role Type": [
+          "DUKPT",
+          "IV",
+          "TRKBK"
         ]
       },
       "tags": []
@@ -20705,14 +20705,150 @@
         "Unique Identifier"
       ],
       "enum_values": {
+        "Operation": [
+          "Adjust Attribute",
+          "Delegated Login",
+          "Interop",
+          "Log",
+          "Login",
+          "Logout",
+          "PKCS#11",
+          "Re-Provision",
+          "Set Attribute",
+          "Set Endpoint Role"
+        ],
+        "Cryptographic Algorithm": [
+          "ARIA",
+          "Ed25519",
+          "Ed448",
+          "GOST 28147-89",
+          "GOST R 34.10-2012",
+          "GOST R 34.11-2012",
+          "GOST R 34.13-2015",
+          "McEliece",
+          "McEliece-6960119",
+          "McEliece-8192128",
+          "SEED",
+          "SM2",
+          "SM3",
+          "SM4",
+          "SPHINCS-256",
+          "XMSS"
+        ],
+        "Interop Function": [
+          "End",
+          "Reset"
+        ],
+        "Protection Level": [
+          "High",
+          "Low"
+        ],
+        "Digital Signature Algorithm": [
+          "MD2 with RSA Encryption",
+          "MD5 with RSA Encryption",
+          "RSASSA-PSS",
+          "SHA-1 with RSA Encryption",
+          "SHA-224 with RSA Encryption",
+          "SHA-256 with RSA Encryption",
+          "SHA-384 with RSA Encryption",
+          "SHA-512 with RSA Encryption"
+        ],
+        "Unique Identifier": [
+          "Certify",
+          "Create",
+          "Create Key Pair",
+          "Create Key Pair Private Key",
+          "Create Key Pair Public Key",
+          "Create Split Key",
+          "Derive Key",
+          "ID Placeholder",
+          "Import",
+          "Join Split Key",
+          "Locate",
+          "Re-certify",
+          "Re-key",
+          "Re-key Key Pair",
+          "Re-key Key Pair Private Key",
+          "Re-key Key Pair Public Key",
+          "Register"
+        ],
+        "Profile Name": [
+          "AES XTS Client",
+          "AES XTS Server",
+          "Advanced Cryptographic Client",
+          "Advanced Cryptographic Server",
+          "Advanced Symmetric Key Foundry Client",
+          "Asymmetric Key Lifecycle Client",
+          "Asymmetric Key Lifecycle Server",
+          "Baseline Client",
+          "Baseline Server",
+          "Basic Cryptographic Client",
+          "Basic Cryptographic Server",
+          "Basic Symmetric Key Foundry Client",
+          "Complete Server",
+          "Complete Server Basic",
+          "Complete Server TLS v1.2",
+          "HTTPS Client",
+          "HTTPS Server",
+          "Intermediate Symmetric Key Foundry Client",
+          "JSON Client",
+          "JSON Server",
+          "Opaque Managed Object Store Client",
+          "Opaque Managed Object Store Server",
+          "PKCS#11 Client",
+          "PKCS#11 Server",
+          "Quantum Safe Client",
+          "Quantum Safe Server",
+          "RNG Cryptographic Client",
+          "RNG Cryptographic Server",
+          "Storage Array with Self Encrypting Drive Client",
+          "Storage Array with Self Encrypting Drive Server",
+          "Symmetric Key Foundry Server",
+          "Symmetric Key Lifecycle Client",
+          "Symmetric Key Lifecycle Server",
+          "Tape Library Client",
+          "Tape Library Server",
+          "XML Client",
+          "XML Server"
+        ],
+        "Derivation Method": [
+          "AWS Signature Version 4",
+          "HKDF"
+        ],
+        "Adjustment Type": [
+          "Decrement",
+          "Increment",
+          "Negate"
+        ],
+        "Item Type": [
+          "Big Integer",
+          "Boolean",
+          "Byte String",
+          "Date Time",
+          "Date Time Extended",
+          "Enumeration",
+          "Integer",
+          "Interval",
+          "Long Integer",
+          "Structure",
+          "Text String"
+        ],
+        "Certificate Type": [
+          "(PGP"
+        ],
         "Recommended Curve": [
           "CURVE25519",
           "CURVE448"
         ],
-        "Credential Type": [
-          "Hashed Password",
-          "One Time Password",
-          "Ticket"
+        "Endpoint Role": [
+          "Client",
+          "Server"
+        ],
+        "Hashing Algorithm": [
+          "SHA3-224",
+          "SHA3-256",
+          "SHA3-384",
+          "SHA3-512"
         ],
         "Result Reason": [
           "Attribute Instance Not Found",
@@ -20762,21 +20898,16 @@
           "Wrapping Object Not Found",
           "Wrong Key Lifecycle State"
         ],
-        "Certificate Type": [
-          "(PGP"
+        "Object Type": [
+          "Certificate Request"
         ],
-        "Interop Function": [
-          "End",
-          "Reset"
+        "Mask Generator": [
+          "MFG1"
         ],
         "Asynchronous Indicator": [
           "Mandatory",
           "Optional",
           "Prohibited"
-        ],
-        "Derivation Method": [
-          "AWS Signature Version 4",
-          "HKDF"
         ],
         "Data": [
           "Decrypt",
@@ -20786,109 +20917,6 @@
           "RNG Retrieve",
           "Sign Signature Data",
           "Signature Verify"
-        ],
-        "Protection Level": [
-          "High",
-          "Low"
-        ],
-        "Endpoint Role": [
-          "Client",
-          "Server"
-        ],
-        "Link Type": [
-          "Wrapping Key Link"
-        ],
-        "Operation": [
-          "Adjust Attribute",
-          "Delegated Login",
-          "Interop",
-          "Log",
-          "Login",
-          "Logout",
-          "PKCS#11",
-          "Re-Provision",
-          "Set Attribute",
-          "Set Endpoint Role"
-        ],
-        "Cryptographic Algorithm": [
-          "ARIA",
-          "Ed25519",
-          "Ed448",
-          "GOST 28147-89",
-          "GOST R 34.10-2012",
-          "GOST R 34.11-2012",
-          "GOST R 34.13-2015",
-          "McEliece",
-          "McEliece-6960119",
-          "McEliece-8192128",
-          "SEED",
-          "SM2",
-          "SM3",
-          "SM4",
-          "SPHINCS-256",
-          "XMSS"
-        ],
-        "Item Type": [
-          "Big Integer",
-          "Boolean",
-          "Byte String",
-          "Date Time",
-          "Date Time Extended",
-          "Enumeration",
-          "Integer",
-          "Interval",
-          "Long Integer",
-          "Structure",
-          "Text String"
-        ],
-        "Digital Signature Algorithm": [
-          "MD2 with RSA Encryption",
-          "MD5 with RSA Encryption",
-          "RSASSA-PSS",
-          "SHA-1 with RSA Encryption",
-          "SHA-224 with RSA Encryption",
-          "SHA-256 with RSA Encryption",
-          "SHA-384 with RSA Encryption",
-          "SHA-512 with RSA Encryption"
-        ],
-        "Profile Name": [
-          "AES XTS Client",
-          "AES XTS Server",
-          "Advanced Cryptographic Client",
-          "Advanced Cryptographic Server",
-          "Advanced Symmetric Key Foundry Client",
-          "Asymmetric Key Lifecycle Client",
-          "Asymmetric Key Lifecycle Server",
-          "Baseline Client",
-          "Baseline Server",
-          "Basic Cryptographic Client",
-          "Basic Cryptographic Server",
-          "Basic Symmetric Key Foundry Client",
-          "Complete Server",
-          "Complete Server Basic",
-          "Complete Server TLS v1.2",
-          "HTTPS Client",
-          "HTTPS Server",
-          "Intermediate Symmetric Key Foundry Client",
-          "JSON Client",
-          "JSON Server",
-          "Opaque Managed Object Store Client",
-          "Opaque Managed Object Store Server",
-          "PKCS#11 Client",
-          "PKCS#11 Server",
-          "Quantum Safe Client",
-          "Quantum Safe Server",
-          "RNG Cryptographic Client",
-          "RNG Cryptographic Server",
-          "Storage Array with Self Encrypting Drive Client",
-          "Storage Array with Self Encrypting Drive Server",
-          "Symmetric Key Foundry Server",
-          "Symmetric Key Lifecycle Client",
-          "Symmetric Key Lifecycle Server",
-          "Tape Library Client",
-          "Tape Library Server",
-          "XML Client",
-          "XML Server"
         ],
         "NIST Key Type": [
           "Private authentication key",
@@ -20911,27 +20939,16 @@
           "Symmetric master key",
           "Symmetric random number generation key"
         ],
-        "Object Type": [
-          "Certificate Request"
+        "Ticket Type": [
+          "Login"
         ],
-        "Unique Identifier": [
-          "Certify",
-          "Create",
-          "Create Key Pair",
-          "Create Key Pair Private Key",
-          "Create Key Pair Public Key",
-          "Create Split Key",
-          "Derive Key",
-          "ID Placeholder",
-          "Import",
-          "Join Split Key",
-          "Locate",
-          "Re-certify",
-          "Re-key",
-          "Re-key Key Pair",
-          "Re-key Key Pair Private Key",
-          "Re-key Key Pair Public Key",
-          "Register"
+        "Credential Type": [
+          "Hashed Password",
+          "One Time Password",
+          "Ticket"
+        ],
+        "Link Type": [
+          "Wrapping Key Link"
         ],
         "Query Function": [
           "Query Defaults Information",
@@ -20939,23 +20956,6 @@
         ],
         "Key Format Type": [
           "PKCS#10"
-        ],
-        "Adjustment Type": [
-          "Decrement",
-          "Increment",
-          "Negate"
-        ],
-        "Mask Generator": [
-          "MFG1"
-        ],
-        "Ticket Type": [
-          "Login"
-        ],
-        "Hashing Algorithm": [
-          "SHA3-224",
-          "SHA3-256",
-          "SHA3-384",
-          "SHA3-512"
         ]
       },
       "tags": [
@@ -21303,23 +21303,6 @@
         "Rotate Name Type"
       ],
       "enum_values": {
-        "Rotate Name Type": [
-          "URI",
-          "Uninterpreted Text String"
-        ],
-        "Result Reason": [
-          "Constraint Violation",
-          "Duplicate Process Request",
-          "Unknown Object Group"
-        ],
-        "Certificate Type": [
-          "PGP"
-        ],
-        "Processing Stage": [
-          "Completed",
-          "In Process",
-          "Submitted"
-        ],
         "Operation": [
           "Get Constraints",
           "Ping",
@@ -21327,6 +21310,23 @@
           "Query Asynchronous Requests",
           "Set Constraints",
           "Set Defaults"
+        ],
+        "Processing Stage": [
+          "Completed",
+          "In Process",
+          "Submitted"
+        ],
+        "Certificate Type": [
+          "PGP"
+        ],
+        "Result Reason": [
+          "Constraint Violation",
+          "Duplicate Process Request",
+          "Unknown Object Group"
+        ],
+        "Rotate Name Type": [
+          "URI",
+          "Uninterpreted Text String"
         ]
       },
       "tags": [
@@ -21358,38 +21358,12 @@
         "Split Key Polynomial"
       ],
       "enum_values": {
-        "Ephemeral": [
-          "Data",
-          "Empty",
-          "Unique Identifier"
-        ],
-        "Deactivation Reason Code": [
-          "Deactivation Date",
-          "Protect Stop Date",
-          "Unspecified",
-          "Usage Limit"
-        ],
-        "Credential Type": [
-          "Certificate",
-          "Password"
-        ],
-        "Result Reason": [
-          "Circular Link Error"
-        ],
         "Operation": [
           "Create Credential",
           "Create Group",
           "Create User",
           "Deactivate",
           "Obliterate"
-        ],
-        "Object Class": [
-          "System",
-          "User"
-        ],
-        "Split Key Polynomial": [
-          "Polynomial-283",
-          "Polynomial-285"
         ],
         "Cryptographic Algorithm": [
           "ML-DSA-44",
@@ -21411,10 +21385,27 @@
           "SLH-DSA-SHAKE-256f",
           "SLH-DSA-SHAKE-256s"
         ],
+        "Unique Identifier": [
+          "Create Credential",
+          "Create Group",
+          "Create User",
+          "Re-Provision"
+        ],
         "Item Type": [
           "Identifier",
           "Name Reference",
           "Reference"
+        ],
+        "OTP Algorithm": [
+          "HOTP",
+          "TOTP"
+        ],
+        "Split Key Polynomial": [
+          "Polynomial-283",
+          "Polynomial-285"
+        ],
+        "Result Reason": [
+          "Circular Link Error"
         ],
         "Object Type": [
           "Device Credential",
@@ -21424,18 +21415,27 @@
           "Password Credential",
           "User"
         ],
-        "Unique Identifier": [
-          "Create Credential",
-          "Create Group",
-          "Create User",
-          "Re-Provision"
+        "Object Class": [
+          "System",
+          "User"
+        ],
+        "Deactivation Reason Code": [
+          "Deactivation Date",
+          "Protect Stop Date",
+          "Unspecified",
+          "Usage Limit"
+        ],
+        "Credential Type": [
+          "Certificate",
+          "Password"
+        ],
+        "Ephemeral": [
+          "Data",
+          "Empty",
+          "Unique Identifier"
         ],
         "Query Function": [
           "Query Credential Information"
-        ],
-        "OTP Algorithm": [
-          "HOTP",
-          "TOTP"
         ]
       },
       "tags": [
@@ -21508,20 +21508,6 @@
     },
     "2.0": {
       "enum_values": {
-        "Result Reason": [
-          "Illegal Operation",
-          "Index Out of Bounds",
-          "Object archived"
-        ],
-        "Certificate Type": [
-          "PGP"
-        ],
-        "Certificate Request Type": [
-          "PGP"
-        ],
-        "Derivation Method": [
-          "PBKDF2"
-        ],
         "Digital Signature Algorithm": [
           "MD2 with RSA Encryption (PKCS#1 v1.5)",
           "MD5 with RSA Encryption (PKCS#1 v1.5)",
@@ -21690,8 +21676,31 @@
           "XML Server KMIP v1.3",
           "XML Server KMIP v1.4"
         ],
+        "Derivation Method": [
+          "PBKDF2"
+        ],
+        "Certificate Type": [
+          "PGP"
+        ],
+        "Certificate Request Type": [
+          "PGP"
+        ],
+        "Hashing Algorithm": [
+          "SHA-3-224",
+          "SHA-3-256",
+          "SHA-3-384",
+          "SHA-3-512"
+        ],
+        "Result Reason": [
+          "Illegal Operation",
+          "Index Out of Bounds",
+          "Object archived"
+        ],
         "Object Type": [
           "Template"
+        ],
+        "Mask Generator": [
+          "MGF1"
         ],
         "Key Format Type": [
           "Transparent ECDH Private Key",
@@ -21700,15 +21709,6 @@
           "Transparent ECDSA Public Key",
           "Transparent ECMQV Private Key",
           "Transparent ECMQV Public Key"
-        ],
-        "Mask Generator": [
-          "MGF1"
-        ],
-        "Hashing Algorithm": [
-          "SHA-3-224",
-          "SHA-3-256",
-          "SHA-3-384",
-          "SHA-3-512"
         ]
       },
       "tags": []
@@ -21723,16 +21723,20 @@
     },
     "3.0": {
       "enum_values": {
-        "Rotate Name Type": [
-          "URI",
-          "Uninterpreted Text String"
-        ],
         "Name Type": [
           "URI",
           "Uninterpreted Text String"
         ],
+        "Object Group Member": [
+          "Group Member Default",
+          "Group Member Fresh"
+        ],
         "Result Reason": [
           "Unknown Object Group"
+        ],
+        "Rotate Name Type": [
+          "URI",
+          "Uninterpreted Text String"
         ],
         "Link Type": [
           "Certificate Link",
@@ -21749,10 +21753,6 @@
           "Replaced Object Link",
           "Replacement Object Link",
           "Wrapping Key Link"
-        ],
-        "Object Group Member": [
-          "Group Member Default",
-          "Group Member Fresh"
         ]
       },
       "tags": [

@@ -26,7 +26,7 @@
 | FIPS186 Variation | `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` | ✅ |
 | Hashing Algorithm | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` | ✅ |
 | Interop Function | `v2.0` `v2.1` `v3.0` | ✅ |
-| Item Type | `v2.0` `v2.1` `v3.0` | ❌ **MISSING** |
+| Item Type | `v2.0` `v2.1` `v3.0` | ✅ |
 | Key Compression Type | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` | ✅ |
 | Key Format Type | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` | ✅ |
 | Key Role Type | `v1.2` `v1.3` `v1.4` `v2.0` `v2.1` `v3.0` | ✅ |

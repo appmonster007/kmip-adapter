@@ -5,4 +5,5 @@
 
 | Name | Value | Versions |
 |---|---|---|
-| Server | `The endpoint that receives requests and sends responses.` | `v2.0` `v2.1` `v3.0` |
+| Client | `0x00000001` | `v2.0` `v2.1` `v3.0` |
+| Server | `0x00000002` | `v2.0` `v2.1` `v3.0` |

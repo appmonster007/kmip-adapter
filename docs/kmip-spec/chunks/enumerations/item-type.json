@@ -8,44 +8,8 @@
   "introduced_in": "2.0",
   "values": [
     {
-      "name": "Boolean",
-      "value": "0x0EAEEFAE",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Big Integer",
-      "value": "A sequence of eight-bit bytes",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Date Time Extended",
-      "value": "Eight-byte long (64 bit) POSIX Time values in micro-seconds.",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Date Time",
-      "value": "Eight-byte long (64 bit) POSIX Time values in seconds. .",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Long Integer",
-      "value": "Eight-byte long (64 bit) signed numbers.",
+      "name": "Structure",
+      "value": "0x00000001",
       "versions": [
         "2.0",
         "2.1",
@@ -54,7 +18,25 @@
     },
     {
       "name": "Integer",
-      "value": "Four-byte long (32 bit) signed numbers",
+      "value": "0x00000002",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Long Integer",
+      "value": "0x00000003",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Big Integer",
+      "value": "0x00000004",
       "versions": [
         "2.0",
         "2.1",
@@ -63,7 +45,7 @@
     },
     {
       "name": "Enumeration",
-      "value": "Four-byte long (32 bit) unsigned numbers",
+      "value": "0x00000005",
       "versions": [
         "2.0",
         "2.1",
@@ -71,24 +53,8 @@
       ]
     },
     {
-      "name": "Interval",
-      "value": "Four-byte long (32 bit) unsigned numbers in seconds",
-      "versions": [
-        "2.0",
-        "2.1",
-        "3.0"
-      ]
-    },
-    {
-      "name": "Name Reference",
-      "value": "Sequence of character values.",
-      "versions": [
-        "3.0"
-      ]
-    },
-    {
-      "name": "Byte String",
-      "value": "Sequences of bytes containing individual unspecified eight-bit binary values",
+      "name": "Boolean",
+      "value": "0x00000006",
       "versions": [
         "2.0",
         "2.1",
@@ -97,7 +63,43 @@
     },
     {
       "name": "Text String",
-      "value": "Sequences of character values.",
+      "value": "0x00000007",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Byte String",
+      "value": "0x00000008",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Date Time",
+      "value": "0x00000009",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Interval",
+      "value": "0x0000000A",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Date Time Extended",
+      "value": "0x0000000B",
       "versions": [
         "2.0",
         "2.1",
@@ -106,14 +108,21 @@
     },
     {
       "name": "Identifier",
-      "value": "Sequences of character values.",
+      "value": "0x0000000C",
       "versions": [
         "3.0"
       ]
     },
     {
       "name": "Reference",
-      "value": "Sequences of character values.",
+      "value": "0x0000000D",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Name Reference",
+      "value": "0x0000000E",
       "versions": [
         "3.0"
       ]

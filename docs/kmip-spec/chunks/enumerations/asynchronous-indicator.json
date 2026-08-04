@@ -8,8 +8,17 @@
   "introduced_in": "2.0",
   "values": [
     {
+      "name": "Mandatory",
+      "value": "0x00000001",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
       "name": "Optional",
-      "value": "The server MAY process each batch item in the request either asynchronously (returning an Asynchronous Correlation Value for a batch item) or synchronously. The method or policy by which the server determines whether or not to process an individual batch item asynchronously is a decision of the server and is outside of the scope of this protocol.",
+      "value": "0x00000002",
       "versions": [
         "2.0",
         "2.1",
@@ -18,7 +27,7 @@
     },
     {
       "name": "Prohibited",
-      "value": "The server SHALL NOT process any batch item asynchronously. All batch items SHALL be processed synchronously.",
+      "value": "0x00000003",
       "versions": [
         "2.0",
         "2.1",

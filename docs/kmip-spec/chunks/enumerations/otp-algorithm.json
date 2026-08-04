@@ -6,8 +6,15 @@
   "introduced_in": "3.0",
   "values": [
     {
+      "name": "HOTP",
+      "value": "0x00000001",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
       "name": "TOTP",
-      "value": "Time-Based One-Time Password Algorithm [RFC6238]",
+      "value": "0x00000002",
       "versions": [
         "3.0"
       ]

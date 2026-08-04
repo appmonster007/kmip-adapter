@@ -8,8 +8,8 @@
   "introduced_in": "2.0",
   "values": [
     {
-      "name": "Negate",
-      "value": "Negate the value. Applies to Integer, Long Integers, Big Integer and Boolean types.",
+      "name": "Increment",
+      "value": "0x00000001",
       "versions": [
         "2.0",
         "2.1",
@@ -18,7 +18,16 @@
     },
     {
       "name": "Decrement",
-      "value": "Subtract the Adjustment Parameter to the value. Applies to Integer, Long Integers, Big Integer, Interval, Date Time, and Date Time Extended. The default is parameter is 1 for numeric types, 1 second for Date Time, and 1 microsecond for Date Time Extended.",
+      "value": "0x00000002",
+      "versions": [
+        "2.0",
+        "2.1",
+        "3.0"
+      ]
+    },
+    {
+      "name": "Negate",
+      "value": "0x00000003",
       "versions": [
         "2.0",
         "2.1",

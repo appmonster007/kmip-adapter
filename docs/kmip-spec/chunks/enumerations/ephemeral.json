@@ -6,15 +6,22 @@
   "introduced_in": "3.0",
   "values": [
     {
-      "name": "Unique Identifier",
-      "value": "All fields in the Response Payload other than the Unique Identifier are omitted.",
+      "name": "Data",
+      "value": "0x00000001",
       "versions": [
         "3.0"
       ]
     },
     {
       "name": "Empty",
-      "value": "The Response Payload is returned as empty (all fields are omitted)",
+      "value": "0x00000002",
+      "versions": [
+        "3.0"
+      ]
+    },
+    {
+      "name": "Unique Identifier",
+      "value": "0x00000003",
       "versions": [
         "3.0"
       ]

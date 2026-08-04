@@ -5,16 +5,17 @@
 
 | Name | Value | Versions |
 |---|---|---|
-| Boolean | `0x0EAEEFAE` | `v2.0` `v2.1` `v3.0` |
-| Big Integer | `A sequence of eight-bit bytes` | `v2.0` `v2.1` `v3.0` |
-| Date Time Extended | `Eight-byte long (64 bit) POSIX Time values in micro-seconds.` | `v2.0` `v2.1` `v3.0` |
-| Date Time | `Eight-byte long (64 bit) POSIX Time values in seconds. .` | `v2.0` `v2.1` `v3.0` |
-| Long Integer | `Eight-byte long (64 bit) signed numbers.` | `v2.0` `v2.1` `v3.0` |
-| Integer | `Four-byte long (32 bit) signed numbers` | `v2.0` `v2.1` `v3.0` |
-| Enumeration | `Four-byte long (32 bit) unsigned numbers` | `v2.0` `v2.1` `v3.0` |
-| Interval | `Four-byte long (32 bit) unsigned numbers in seconds` | `v2.0` `v2.1` `v3.0` |
-| Name Reference | `Sequence of character values.` | `v3.0` |
-| Byte String | `Sequences of bytes containing individual unspecified eight-bit binary values` | `v2.0` `v2.1` `v3.0` |
-| Text String | `Sequences of character values.` | `v2.0` `v2.1` `v3.0` |
-| Identifier | `Sequences of character values.` | `v3.0` |
-| Reference | `Sequences of character values.` | `v3.0` |
+| Structure | `0x00000001` | `v2.0` `v2.1` `v3.0` |
+| Integer | `0x00000002` | `v2.0` `v2.1` `v3.0` |
+| Long Integer | `0x00000003` | `v2.0` `v2.1` `v3.0` |
+| Big Integer | `0x00000004` | `v2.0` `v2.1` `v3.0` |
+| Enumeration | `0x00000005` | `v2.0` `v2.1` `v3.0` |
+| Boolean | `0x00000006` | `v2.0` `v2.1` `v3.0` |
+| Text String | `0x00000007` | `v2.0` `v2.1` `v3.0` |
+| Byte String | `0x00000008` | `v2.0` `v2.1` `v3.0` |
+| Date Time | `0x00000009` | `v2.0` `v2.1` `v3.0` |
+| Interval | `0x0000000A` | `v2.0` `v2.1` `v3.0` |
+| Date Time Extended | `0x0000000B` | `v2.0` `v2.1` `v3.0` |
+| Identifier | `0x0000000C` | `v3.0` |
+| Reference | `0x0000000D` | `v3.0` |
+| Name Reference | `0x0000000E` | `v3.0` |
