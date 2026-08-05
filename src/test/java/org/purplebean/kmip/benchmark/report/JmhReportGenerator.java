@@ -23,6 +23,10 @@ public final class JmhReportGenerator {
   private JmhReportGenerator() {
   }
 
+  /**
+   * Reads JMH JSON results from {@code jsonPath} and writes a Markdown summary to
+   * {@code mdOutPath}.
+   */
   public static void generateMarkdownSummary(String jsonPath, String mdOutPath) throws IOException {
     Path in = Path.of(jsonPath);
     if (!Files.exists(in)) {

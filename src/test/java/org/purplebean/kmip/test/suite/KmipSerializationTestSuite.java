@@ -2,6 +2,7 @@ package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.KmipSpec;
@@ -17,16 +18,22 @@ import org.purplebean.kmip.api.KmipSpec;
 public interface KmipSerializationTestSuite<T, M, S> {
 
   /**
+   * Returns the class of the KMIP type being tested.
+   *
    * @return The class of the KMIP type being tested.
    */
   Class<T> type();
 
   /**
+   * Returns a default instance of the type for testing.
+   *
    * @return A default instance of the type for testing.
    */
   T createDefault();
 
   /**
+   * Returns an alternative instance of the type for testing (can be same as default).
+   *
    * @return An alternative instance of the type for testing (can be same as default).
    */
   default T createVariant() {
@@ -34,6 +41,8 @@ public interface KmipSerializationTestSuite<T, M, S> {
   }
 
   /**
+   * Returns the Mapper to use for serialization.
+   *
    * @return The Mapper to use for serialization.
    */
   M getMapper();
@@ -57,8 +66,11 @@ public interface KmipSerializationTestSuite<T, M, S> {
   T deserialize(S serialized) throws Exception;
 
   /**
+   * Returns true if serialization should fail under KmipSpec.UnsupportedVersion. Defaults to
+   * true.
+   *
    * @return True if serialization should fail under KmipSpec.UnsupportedVersion.
-   * Defaults to true.
+   *     Defaults to true.
    */
   default boolean unsupportedSpecShouldFailSerialize() {
     return true;
@@ -95,6 +107,9 @@ public interface KmipSerializationTestSuite<T, M, S> {
     }
   }
 
+  /**
+   * Serializes then deserializes {@code original} and asserts the result is equal to it.
+   */
   default void performRoundTrip(T original) {
     try {
       S serialized = serialize(original);
@@ -105,6 +120,10 @@ public interface KmipSerializationTestSuite<T, M, S> {
     }
   }
 
+  /**
+   * Serializes {@code original}, discarding the result. Used to assert serialization
+   * succeeds or throws.
+   */
   default void performSerialize(T original) throws Exception {
     serialize(original);
   }

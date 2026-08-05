@@ -2,6 +2,7 @@ package org.purplebean.kmip.verification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.ByteArrayInputStream;
@@ -33,6 +34,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * Round-trips every KMIP 2.1 OASIS test-case corpus message through the codec and verifies
+ * semantic equality.
+ */
 public class KmipV21VerificationTest {
 
   private static final String FIXED_TIMESTAMP = "1970-01-01T00:00:00+00:00";
@@ -46,8 +51,8 @@ public class KmipV21VerificationTest {
   @Disabled("Duplicate of testKmip21TestCases; kept as a debug entry point, not run by default")
   @Test
   public void testSpecificFile() {
-    String filePath = projectRoot +
-        "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1/TC-ASYNC-1-21.xml";
+    String filePath = projectRoot
+        + "/docs/kmip-spec/v2.x/kmip-testcases/v2.1/cn01/test-cases/kmip-v2.1/TC-ASYNC-1-21.xml";
     List<String> failures = new java.util.ArrayList<>();
     KmipContext.withSpec(KmipSpec.V2_1, () -> {
       try {
@@ -379,12 +384,11 @@ public class KmipV21VerificationTest {
     normalizeSemanticEquivalents(newNode);
 
     assertEquals(originalNode, newNode, "Round-trip mismatch in " + fileName + " <" + tag + ">");
-//        System.out.println("Verified: " + fileName + " <" + tag + ">");
   }
 
   /**
    * Walks a Jackson JSON tree parsed from KMIP XML and normalizes semantically-equivalent
-   * differences that should not fail round-trip tests:
+   * differences. These should not fail round-trip tests:
    *
    * <ul>
    *   <li>ByteString {@code value} strings are lowercased (spec allows either case).</li>

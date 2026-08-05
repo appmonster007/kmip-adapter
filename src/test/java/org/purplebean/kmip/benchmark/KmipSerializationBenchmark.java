@@ -28,6 +28,9 @@ import org.purplebean.kmip.benchmark.util.BenchmarkSubjects;
 public class KmipSerializationBenchmark {
 
   // JSON serialize/deserialize
+  /**
+   * Benchmarks JSON serialization of the configured subject.
+   */
   @Benchmark
   public String jsonSerialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -39,6 +42,9 @@ public class KmipSerializationBenchmark {
     });
   }
 
+  /**
+   * Benchmarks JSON deserialization of the configured subject.
+   */
   @Benchmark
   public Object jsonDeserialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -51,6 +57,9 @@ public class KmipSerializationBenchmark {
   }
 
   // XML serialize/deserialize
+  /**
+   * Benchmarks XML serialization of the configured subject.
+   */
   @Benchmark
   public String xmlSerialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -62,6 +71,9 @@ public class KmipSerializationBenchmark {
     });
   }
 
+  /**
+   * Benchmarks XML deserialization of the configured subject.
+   */
   @Benchmark
   public Object xmlDeserialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -74,6 +86,9 @@ public class KmipSerializationBenchmark {
   }
 
   // TTLV serialize/deserialize
+  /**
+   * Benchmarks TTLV serialization of the configured subject.
+   */
   @Benchmark
   public ByteBuffer ttlvSerialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -85,6 +100,9 @@ public class KmipSerializationBenchmark {
     });
   }
 
+  /**
+   * Benchmarks TTLV deserialization of the configured subject.
+   */
   @Benchmark
   public Object ttlvDeserialize(BenchState s) throws Exception {
     return KmipContext.withSpec(s.impl.getSpec(), () -> {
@@ -96,6 +114,9 @@ public class KmipSerializationBenchmark {
     });
   }
 
+  /**
+   * Per-thread JMH state holding the resolved {@link KmipBenchmarkSubject} to benchmark.
+   */
   @State(Scope.Thread)
   public static class BenchState {
 
@@ -106,10 +127,10 @@ public class KmipSerializationBenchmark {
       Map<String, KmipBenchmarkSubject> discovered = BenchmarkSubjects.discoverMap();
       if (discovered.isEmpty()) {
         throw new IllegalStateException(
-            "No KmipBenchmarkSubject implementations discovered. " +
-                "Ensure you have ServiceLoader registrations under " +
-                "src/test/resources/META-INF/services/" +
-                "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
+            "No KmipBenchmarkSubject implementations discovered. "
+                + "Ensure you have ServiceLoader registrations under "
+                + "src/test/resources/META-INF/services/"
+                + "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
       }
       REGISTRY.putAll(discovered);
       allSubjects = REGISTRY.values();
@@ -127,14 +148,18 @@ public class KmipSerializationBenchmark {
 
     private KmipBenchmarkSubject<?> impl;
 
+    /**
+     * Resolves and initializes the benchmark subject named by {@link #subject}, or the first
+     * discovered subject if none was specified.
+     */
     @Setup(Level.Trial)
     public void setup() throws Exception {
       if (subject != null && !subject.isEmpty()) {
         // Run specific subject if specified
         impl = REGISTRY.get(subject);
         if (impl == null) {
-          throw new IllegalArgumentException("Unknown subject: " + subject +
-              ". Available: " + REGISTRY.keySet());
+          throw new IllegalArgumentException("Unknown subject: " + subject
+              + ". Available: " + REGISTRY.keySet());
         }
       } else {
         // If no subject specified, use the first one
@@ -148,6 +173,9 @@ public class KmipSerializationBenchmark {
       impl.setup();
     }
 
+    /**
+     * Tears down the resolved benchmark subject.
+     */
     @TearDown(Level.Trial)
     public void tearDown() {
       if (impl != null) {

@@ -1,6 +1,7 @@
 package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.EncodingType;
@@ -16,8 +17,14 @@ import org.purplebean.kmip.test.BaseKmipTest;
 @DisplayName("Abstract KMIP DataType Suite")
 public abstract class AbstractKmipDataTypeTestSuite<T extends KmipDataType> extends BaseKmipTest {
 
+  /**
+   * Returns the concrete {@link KmipDataType} class under test.
+   */
   protected abstract Class<T> type();
 
+  /**
+   * Returns a valid default instance of the type under test.
+   */
   protected abstract T createDefault();
 
   /**
@@ -36,6 +43,10 @@ public abstract class AbstractKmipDataTypeTestSuite<T extends KmipDataType> exte
     return false;
   }
 
+  /**
+   * Asserts that the default instance has a non-null tag and encoding type, matching
+   * {@link #expectedEncodingType()} if one is specified.
+   */
   protected void validateTagAndEncodingType() {
     T obj = createDefault();
     KmipTag tag = obj.getKmipTag();

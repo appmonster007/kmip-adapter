@@ -2,6 +2,7 @@ package org.purplebean.kmip.verification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -352,15 +353,17 @@ public class KmipV30VerificationTest {
         .replaceAll(">\\s+<", "><")
         .trim();
 
-    JsonNode originalNode = normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedOriginal));
-    JsonNode newNode = normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedNew));
+    JsonNode originalNode =
+        normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedOriginal));
+    JsonNode newNode =
+        normalizeNonSemanticRepresentation(verificationMapper.readTree(minifiedNew));
 
     assertEquals(originalNode, newNode, "Round-trip mismatch in " + fileName + " <" + tag + ">");
   }
 
   /**
-   * Normalizes wire-representation choices the KMIP spec does not assign semantic meaning to,
-   * applied identically to both sides of the comparison so it cannot mask a real asymmetric bug:
+   * Normalizes wire-representation choices the KMIP spec does not assign semantic meaning to.
+   * Applied identically to both sides of the comparison so it cannot mask a real asymmetric bug:
    * <ul>
    *   <li>Bitmask flag-name ordering (e.g. CryptographicUsageMask's "Decrypt Encrypt") - re-parses
    *       via the field's own {@link KmipMaskType#getFromMaskString} and re-renders via

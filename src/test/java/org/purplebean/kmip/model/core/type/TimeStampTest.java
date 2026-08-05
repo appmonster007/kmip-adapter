@@ -16,10 +16,10 @@ class TimeStampTest extends AbstractKmipDataTypeTestSuite<TimeStamp> {
 
   @Override
   protected TimeStamp createDefault() {
-    OffsetDateTime FIXED_TIME = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
+    OffsetDateTime fixedTime = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
     return TimeStamp
         .builder()
-        .value(FIXED_TIME)
+        .value(fixedTime)
         .build();
   }
 

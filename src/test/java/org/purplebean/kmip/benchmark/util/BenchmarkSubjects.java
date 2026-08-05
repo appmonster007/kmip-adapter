@@ -29,7 +29,7 @@ public final class BenchmarkSubjects {
   }
 
   /**
-   * Get JSON serialization mapping impl->String
+   * Get JSON serialization mapping impl->String.
    */
   public static String getJsonStr(String subject) {
     return discoverMap()
@@ -38,7 +38,7 @@ public final class BenchmarkSubjects {
   }
 
   /**
-   * Get XML serialization mapping impl->String
+   * Get XML serialization mapping impl->String.
    */
   public static String getXmlStr(String subject) {
     return discoverMap()
@@ -47,7 +47,7 @@ public final class BenchmarkSubjects {
   }
 
   /**
-   * Get TTLV serialization mapping impl->ByteBuffer
+   * Get TTLV serialization mapping impl->ByteBuffer.
    */
   public static String getTtlvBuf(String subject) {
     HexFormat hexFormat = HexFormat.of();

@@ -1,6 +1,7 @@
 package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.KmipEnumeration;
@@ -41,14 +42,14 @@ public abstract class AbstractKmipEnumerationTestSuite<T extends KmipEnumeration
    * Override to assert registry behavior for the specific enumeration (positive cases: register,
    * lookup by value/name).
    */
-  abstract protected void assertLookupBehaviour();
+  protected abstract void assertLookupBehaviour();
 
   /**
    * Override to assert registry behavior for the specific enumeration.
    * positive cases: register, lookup by value/name.
    * negative cases: invalid range, empty description, empty versions, etc.
    */
-  abstract protected void assertEnumerationRegistryBehavior();
+  protected abstract void assertEnumerationRegistryBehavior();
 
   @Test
   @DisplayName("Enumeration: description is non-null and non-empty")

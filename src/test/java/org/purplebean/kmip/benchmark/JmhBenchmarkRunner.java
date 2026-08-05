@@ -27,6 +27,9 @@ public final class JmhBenchmarkRunner {
   private JmhBenchmarkRunner() {
   }
 
+  /**
+   * Runs the JMH benchmark suite in-process, configured via {@code bench.*} system properties.
+   */
   public static void main(String[] args) throws RunnerException {
     // Allow overrides via -Dbench.args="-wi 2 -i 3 -f 1"
     String include = System.getProperty("bench.include", ".*Benchmark");
@@ -63,9 +66,9 @@ public final class JmhBenchmarkRunner {
 
     if (subjects.isEmpty()) {
       throw new IllegalStateException(
-          "No KmipBenchmarkSubject implementations discovered via ServiceLoader. " +
-              "Ensure service entries exist under src/test/resources/META-INF/services/" +
-              "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
+          "No KmipBenchmarkSubject implementations discovered via ServiceLoader. "
+              + "Ensure service entries exist under src/test/resources/META-INF/services/"
+              + "org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject");
     }
     System.out.println("JMH Runner discovered subjects: " + subjects);
 

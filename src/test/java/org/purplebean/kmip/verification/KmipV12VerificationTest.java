@@ -2,6 +2,7 @@ package org.purplebean.kmip.verification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.IOException;
@@ -20,6 +21,10 @@ import org.purplebean.kmip.api.request.RequestMessageStructure;
 import org.purplebean.kmip.api.response.ResponseMessageStructure;
 import org.purplebean.kmip.codec.KmipCodecManager;
 
+/**
+ * Round-trips every KMIP 1.2 OASIS test-case corpus message through the codec and verifies
+ * semantic equality.
+ */
 public class KmipV12VerificationTest {
 
   private final XmlMapper xmlMapper = KmipCodecManager.getXmlMapper();
@@ -28,8 +33,8 @@ public class KmipV12VerificationTest {
   @DisplayName("Test KMIP 1.2 Test Cases")
   @Test
   public void testKmip12TestCases() {
-    String basePath = projectRoot +
-        "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases";
+    String basePath = projectRoot
+        + "/docs/kmip-spec/v1.x/test-cases-messages/2_KMIP_Test_Cases/2.3_KMIP_1.2_Test_Cases";
     KmipContext.withSpec(KmipSpec.V1_2, () -> {
       verifyXmlFiles(basePath);
       return null;

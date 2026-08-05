@@ -1,6 +1,7 @@
 package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.purplebean.kmip.api.KmipAttribute;
@@ -22,66 +23,96 @@ import org.purplebean.kmip.util.StringUtils;
 public interface KmipAttributeTestSuite<T extends KmipAttribute> {
 
   /**
+   * Returns a default instance of the attribute for testing.
+   *
    * @return A default instance of the attribute for testing.
    */
   T createDefault();
 
   /**
+   * Returns the expected value for {@link KmipAttribute#isAlwaysPresent()}.
+   *
    * @return Expected value for {@link KmipAttribute#isAlwaysPresent()}.
    */
   boolean expectAlwaysPresent();
 
   /**
+   * Returns the expected value for {@link KmipAttribute#isServerInitializable()}.
+   *
    * @return Expected value for {@link KmipAttribute#isServerInitializable()}.
    */
   boolean expectServerInitializable();
 
   /**
+   * Returns the expected value for {@link KmipAttribute#isClientInitializable()}.
+   *
    * @return Expected value for {@link KmipAttribute#isClientInitializable()}.
    */
   boolean expectClientInitializable();
 
   /**
+   * Returns the expected value for {@link KmipAttribute#isClientDeletable()}.
+   *
    * @return Expected value for {@link KmipAttribute#isClientDeletable()}.
    */
   boolean expectClientDeletable();
 
   /**
+   * Returns the expected value for {@link KmipAttribute#isMultiInstanceAllowed()}.
+   *
    * @return Expected value for {@link KmipAttribute#isMultiInstanceAllowed()}.
    */
   boolean expectMultiInstanceAllowed();
 
   /**
+   * Returns a state for which {@link KmipAttribute#isServerModifiable(State)} should return
+   * {@code true}.
+   *
    * @return A {@link State} for which {@link KmipAttribute#isServerModifiable(State)} should
-   * return {@code true}.
+   *     return {@code true}.
    */
   State stateForServerModifiableTrue();
 
   /**
+   * Returns a state for which {@link KmipAttribute#isServerModifiable(State)} should return
+   * {@code false}.
+   *
    * @return A {@link State} for which {@link KmipAttribute#isServerModifiable(State)} should
-   * return {@code false}.
+   *     return {@code false}.
    */
   State stateForServerModifiableFalse();
 
   /**
+   * Returns a state for which {@link KmipAttribute#isClientModifiable(State)} should return
+   * {@code true}.
+   *
    * @return A {@link State} for which {@link KmipAttribute#isClientModifiable(State)} should
-   * return {@code true}.
+   *     return {@code true}.
    */
   State stateForClientModifiableTrue();
 
   /**
+   * Returns a state for which {@link KmipAttribute#isClientModifiable(State)} should return
+   * {@code false}.
+   *
    * @return A {@link State} for which {@link KmipAttribute#isClientModifiable(State)} should
-   * return {@code false}.
+   *     return {@code false}.
    */
   State stateForClientModifiableFalse();
 
   /**
+   * Returns the expected AttributeValue for the instance returned by createDefault().
+   *
    * @return The expected AttributeValue for the instance returned by createDefault().
    */
   AttributeValue expectedAttributeValue();
 
   /**
-   * @return The expected name of the attribute. Defaults to Title Case of the KMIP Tag description.
+   * Returns the expected name of the attribute. Defaults to Title Case of the KMIP Tag
+   * description.
+   *
+   * @return The expected name of the attribute. Defaults to Title Case of the KMIP Tag
+   *     description.
    */
   default String expectedAttributeName() {
     return StringUtils.convertPascalToTitleCase(createDefault()

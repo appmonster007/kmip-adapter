@@ -93,8 +93,6 @@ class AllFormatsSerializationTest {
         sb
             .append(subjectResults.get("class"))
             .append("` | ");
-//                sb.append("<details><summary>JSON</summary><pre><code>").append(escapeHtml
-//                (subjectResults.get("json"))).append("</code></pre></details> | ");
         sb
             .append("`")
             .append(escapeHtml(subjectResults.get("json")))
