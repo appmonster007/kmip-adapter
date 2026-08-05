@@ -14,7 +14,7 @@
 -->
 <suppressions>
     <suppress checks="AbbreviationAsWordInName"
-              message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO]|PSource)(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer)?'"/>
+              message="'(D|G|J|P|Q|X|Y|QString|CRTCoefficient|IVCounterNonce|MACSignature|MACSignatureKeyInformation|PrimeExponentP|PrimeExponentQ|UniqueBatchItemID|uniqueBatchItemID|CertificateIssuer[CLO]|CertificateSubject[CLO]|PSource)(JsonSerializer|JsonDeserializer|XmlSerializer|XmlDeserializer|TtlvSerializer|TtlvDeserializer|BenchmarkSubject|JsonTest|XmlTest|TtlvTest|Test)?'"/>
 
     <!-- Same identifiers as above, appearing as field names (RSA/DSA transparent key material). -->
     <suppress checks="GoogleNonConstantFieldName"
@@ -22,6 +22,10 @@
 
     <!-- Same identifiers as above, appearing as constructor/method parameter names. -->
     <suppress checks="ParameterName"
+              message="'(d|g|j|p|q|x|y|qString|pSource)'"/>
+
+    <!-- Same identifiers as above, appearing as local variable names. -->
+    <suppress checks="LocalVariableName"
               message="'(d|g|j|p|q|x|y|qString|pSource)'"/>
 
     <!--
@@ -42,4 +46,14 @@
     <suppress checks="VariableDeclarationUsageDistance"
               files="[/\\]TtlvObject\.java$"
               message="'type'"/>
+
+    <!--
+        JmhBenchmarkRunner.main reads a batch of bench.* system properties up front, then builds
+        a single JMH Options/ChainedOptionsBuilder call using all of them together plus a status
+        line printf that also references all of them - splitting the declarations up to sit right
+        before each individual use would scatter one logical "read config" step across the method
+        for no readability benefit.
+    -->
+    <suppress checks="VariableDeclarationUsageDistance"
+              files="[/\\]JmhBenchmarkRunner\.java$"/>
 </suppressions>

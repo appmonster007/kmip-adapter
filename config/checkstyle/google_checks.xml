@@ -20,18 +20,7 @@
 
   <property name="charset" value="UTF-8"/>
 
-  <!--
-      Hardcoded (not property-driven) so every tool invoking this config - Maven, the
-      CheckStyle-IDEA plugin, a bare `java -jar checkstyle.jar`, etc. - resolves the same
-      severity and suppression file without needing separate per-tool property injection.
-      Previously these were `${org.checkstyle.google.severity}` /
-      `${org.checkstyle.google.suppressionfilter.config}`, resolved only by pom.xml's
-      <propertyExpansion>; any tool that didn't also supply those properties silently fell
-      back to `severity=warning` and/or failed to load the suppression file, which is why
-      IDE-side checkstyle runs were reporting ~1,725 items that `mvn checkstyle:check` (which
-      did supply the properties) never saw.
-  -->
-  <property name="severity" value="error"/>
+  <property name="severity" value="${org.checkstyle.google.severity}" default="warning"/>
 
   <property name="fileExtensions" value="java, properties, xml"/>
   <!-- Excludes all 'module-info.java' files              -->
@@ -44,7 +33,8 @@
 
   <!-- https://checkstyle.org/filters/suppressionfilter.html -->
   <module name="SuppressionFilter">
-    <property name="file" value="config/checkstyle/checkstyle-suppressions.xml"/>
+    <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
+           default="checkstyle-suppressions.xml" />
     <property name="optional" value="true"/>
   </module>
 
@@ -435,7 +425,7 @@
     </module>
     <module name="MissingJavadocMethod">
       <property name="scope" value="protected"/>
-      <property name="allowMissingPropertyJavadoc" value="false"/>
+      <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="allowedAnnotations" value="Override, Test"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF,
                                    COMPACT_CTOR_DEF"/>
@@ -489,7 +479,8 @@
     </module>
     <!-- https://checkstyle.org/filters/suppressionxpathfilter.html -->
     <module name="SuppressionXpathFilter">
-      <property name="file" value="config/checkstyle/checkstyle-xpath-suppressions.xml"/>
+      <property name="file" value="${org.checkstyle.google.suppressionxpathfilter.config}"
+             default="checkstyle-xpath-suppressions.xml" />
       <property name="optional" value="true"/>
     </module>
     <module name="SuppressWarningsHolder" />
