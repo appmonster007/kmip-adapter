@@ -1,6 +1,7 @@
 package org.purplebean.kmip.test.suite;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,8 @@ public abstract class AbstractKmipStructureTestSuite<T extends KmipStructure>
   /**
    * Optional hook to validate individual components.
    */
-  protected void validateComponents(List<KmipDataType> values) { /* no-op by default */ }
+  protected void validateComponents(List<KmipDataType> values) { /* no-op by default */
+  }
 
   @Test
   @DisplayName("Structure: values list present and meets minimal expectations")

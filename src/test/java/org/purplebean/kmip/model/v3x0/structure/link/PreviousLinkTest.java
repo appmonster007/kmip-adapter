@@ -1,6 +1,7 @@
 package org.purplebean.kmip.model.v3x0.structure.link;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.function.BiFunction;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;

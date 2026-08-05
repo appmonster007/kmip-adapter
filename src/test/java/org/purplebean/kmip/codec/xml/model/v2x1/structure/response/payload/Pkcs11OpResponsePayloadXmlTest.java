@@ -3,9 +3,9 @@ package org.purplebean.kmip.codec.xml.model.v2x1.structure.response.payload;
 import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
+import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.Pkcs11OpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.CorrelationValue;
-import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11ReturnCode;
 import org.purplebean.kmip.test.suite.AbstractXmlSerializationTestSuite;
 
 @DisplayName("Pkcs11OpResponsePayload Xml Serialization Tests")

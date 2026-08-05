@@ -1,6 +1,7 @@
 package org.purplebean.kmip.model.v2x1.type;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.purplebean.kmip.api.EncodingType;
 import org.purplebean.kmip.api.KmipSpec;

@@ -1,6 +1,7 @@
 package org.purplebean.kmip.model.core.structure;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.ByteBuffer;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
