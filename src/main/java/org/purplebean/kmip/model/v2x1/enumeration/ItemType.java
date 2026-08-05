@@ -164,10 +164,14 @@ public class ItemType implements KmipEnumeration {
     return encodingType;
   }
 
+  @Override
   public String getDescription() {
     return value.getDescription();
   }
 
+  /**
+   * Returns whether this enumeration value is a custom vendor extension.
+   */
   public boolean isCustom() {
     return value.isCustom();
   }
@@ -178,6 +182,7 @@ public class ItemType implements KmipEnumeration {
     return supportedVersions.contains(spec) && value.isSupported();
   }
 
+  @Override
   public int getIntValue() {
     return value.getValue();
   }

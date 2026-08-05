@@ -79,6 +79,7 @@ public class ProtocolVersion implements KmipStructure {
     // No validation needed for this structure
   }
 
+  @Override
   public KmipDataType[] getValue() {
     return Stream
         .of(protocolVersionMajor, protocolVersionMinor)
@@ -88,10 +89,16 @@ public class ProtocolVersion implements KmipStructure {
         .toArray(KmipDataType[]::new);
   }
 
+  /**
+   * Returns the protocol version major number.
+   */
   public int getMajor() {
     return protocolVersionMajor.getValue();
   }
 
+  /**
+   * Returns the protocol version minor number.
+   */
   public int getMinor() {
     return protocolVersionMinor.getValue();
   }

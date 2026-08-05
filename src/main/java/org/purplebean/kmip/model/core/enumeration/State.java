@@ -220,10 +220,14 @@ public class State implements KmipEnumeration, KmipAttribute {
   }
 
   @SuppressWarnings("checkstyle:Indentation")
+  @Override
   public String getDescription() {
     return value.getDescription();
   }
 
+  /**
+   * Returns whether this enumeration value is a custom vendor extension.
+   */
   @SuppressWarnings("checkstyle:Indentation")
   public boolean isCustom() {
     return value.isCustom();
@@ -297,6 +301,7 @@ public class State implements KmipEnumeration, KmipAttribute {
   }
 
   @SuppressWarnings("checkstyle:Indentation")
+  @Override
   public int getIntValue() {
     return value.getValue();
   }

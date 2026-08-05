@@ -89,6 +89,9 @@ public class ProtectionStorageMask implements KmipMaskType, KmipAttribute {
     return new ProtectionStorageMask(mask);
   }
 
+  /**
+   * Returns the bitmask string representation of this value.
+   */
   public String getMaskString() {
     return MaskEnum.toMaskString(value);
   }

@@ -220,10 +220,14 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
     return encodingType;
   }
 
+  @Override
   public String getDescription() {
     return value.getDescription();
   }
 
+  /**
+   * Returns whether this enumeration value is a custom vendor extension.
+   */
   public boolean isCustom() {
     return value.isCustom();
   }
@@ -284,6 +288,7 @@ public class DigitalSignatureAlgorithm implements KmipEnumeration, KmipAttribute
     return kmipTag.getDescription();
   }
 
+  @Override
   public int getIntValue() {
     return value.getValue();
   }

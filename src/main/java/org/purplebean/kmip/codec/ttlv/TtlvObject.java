@@ -201,6 +201,9 @@ public final class TtlvObject {
   }
 
   // Defensive getters for array/list fields (Lombok won't generate these because we define them)
+  /**
+   * Returns a defensive copy of this TTLV object's tag bytes.
+   */
   public byte[] getTag() {
     return Arrays.copyOf(tag, tag.length);
   }
@@ -216,6 +219,9 @@ public final class TtlvObject {
     this.tag = Arrays.copyOf(tag, tag.length);
   }
 
+  /**
+   * Returns a defensive copy of this TTLV object's raw value bytes.
+   */
   public byte[] getValue() {
     return Arrays.copyOf(value, value.length);
   }
@@ -250,6 +256,9 @@ public final class TtlvObject {
     return value.length == 0;
   }
 
+  /**
+   * Returns {@code true} if this TTLV object's encoding type is {@link EncodingType#STRUCTURE}.
+   */
   public boolean isStructure() {
     return type == EncodingType.STRUCTURE.getTypeValue();
   }
@@ -321,6 +330,10 @@ public final class TtlvObject {
     return hexFormat.formatHex(buffer.array());
   }
 
+  /**
+   * Returns a hex-encoded, indented tree representation of this TTLV object and its
+   * nested structure.
+   */
   public String getStructuredByteString() {
     return getStructuredByteStringAtLevel(0);
   }
@@ -356,6 +369,10 @@ public final class TtlvObject {
     return sb.toString();
   }
 
+  /**
+   * Returns a human-readable, indented tree representation of this TTLV object and its
+   * nested structure.
+   */
   public String getStructuredString() {
     return getStructuredStringAtLevel(0);
   }

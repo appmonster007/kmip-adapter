@@ -174,10 +174,14 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
     return encodingType;
   }
 
+  @Override
   public String getDescription() {
     return value.getDescription();
   }
 
+  /**
+   * Returns whether this enumeration value is a custom vendor extension.
+   */
   public boolean isCustom() {
     return value.isCustom();
   }
@@ -188,6 +192,7 @@ public class DataEnumeration implements KmipEnumeration, org.purplebean.kmip.api
     return supportedVersions.contains(spec) && value.isSupported();
   }
 
+  @Override
   public int getIntValue() {
     return value.getValue();
   }

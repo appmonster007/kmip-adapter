@@ -100,6 +100,9 @@ public class StorageStatusMask implements KmipMaskType {
     return supportedVersions.contains(spec);
   }
 
+  /**
+   * Returns the bitmask string representation of this value.
+   */
   public String getMaskString() {
     return StorageStatusMask.MaskEnum.toMaskString(value);
   }

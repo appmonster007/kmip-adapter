@@ -184,10 +184,14 @@ public class UniqueIdentifier implements KmipEnumeration {
     return encodingType;
   }
 
+  @Override
   public String getDescription() {
     return value.getDescription();
   }
 
+  /**
+   * Returns whether this enumeration value is a custom vendor extension.
+   */
   public boolean isCustom() {
     return value.isCustom();
   }
@@ -198,6 +202,7 @@ public class UniqueIdentifier implements KmipEnumeration {
     return supportedVersions.contains(spec) && value.isSupported();
   }
 
+  @Override
   public int getIntValue() {
     return value.getValue();
   }
@@ -207,6 +212,9 @@ public class UniqueIdentifier implements KmipEnumeration {
   // KmipDataType.register / KmipEnumeration.register), so no KmipAttribute capability-flag
   // methods (isAlwaysPresent, getAttributeName, getCanonicalName, etc.) are declared here.
 
+  /**
+   * Wraps this value as an {@link AttributeValue} for use in an {@code Attributes} structure.
+   */
   public AttributeValue getAttributeValue() {
     return AttributeValue.ofEnumeration(value);
   }
