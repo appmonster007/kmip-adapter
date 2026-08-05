@@ -12,5 +12,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.xml.serializer.api.AbstractKmipDataTypeXmlSerializer;
 import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
+/**
+ * XML serializer for {@link {{NAME}}}.
+ */
 public class {{NAME}}XmlSerializer extends AbstractKmipDataTypeXmlSerializer<{{NAME}}> {
 }

@@ -47,6 +47,9 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         validate();
     }
 
+    /**
+     * Returns the {@link {{ENUM_NAME}}} instance wrapping the given value.
+     */
     public static {{ENUM_NAME}} of(@NonNull Value value) {
         return new {{ENUM_NAME}}(value);
     }
@@ -142,10 +145,14 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         return encodingType;
     }
 
+    @Override
     public String getDescription() {
         return value.getDescription();
     }
 
+    /**
+     * Returns whether this enumeration value is a custom vendor extension.
+     */
     public boolean isCustom() {
         return value.isCustom();
     }
@@ -156,10 +163,14 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
         return supportedVersions.contains(spec) && value.isSupported();
     }
 
+    @Override
     public int getIntValue() {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of {{ENUM_NAME}} values.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -193,9 +204,16 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
     }
 
     // ----- Value hierarchy -----
+    /**
+     * An interface representing a {{ENUM_NAME}} value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value extends KmipEnumeration.Value<{{ENUM_NAME}}> {
     }
 
+    /**
+     * Represents a custom, vendor-specific {{ENUM_NAME}} value.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -206,6 +224,9 @@ public class {{ENUM_NAME}} implements KmipEnumeration {
 
         private final boolean custom = true;
 
+        /**
+         * Constructs a custom vendor extension value.
+         */
         public Extension(int value, String description, KmipSpec... supportedVersions) {
             this.value = value;
             this.description = description;

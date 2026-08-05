@@ -16,8 +16,14 @@ import org.purpleBean.kmip.{{pdot}}.{{STRUCTURE_NAME}};
 
 import java.io.IOException;
 
+/**
+ * JSON deserializer for {@link {{STRUCTURE_NAME}}}.
+ */
 public class {{STRUCTURE_NAME}}JsonDeserializer extends AbstractKmipDataTypeJsonDeserializer<{{STRUCTURE_NAME}}, {{STRUCTURE_NAME}}.{{STRUCTURE_NAME}}Builder> {
 
+    /**
+     * Constructs a new {@link {{STRUCTURE_NAME}}JsonDeserializer}.
+     */
     public {{STRUCTURE_NAME}}JsonDeserializer() {
         super({{STRUCTURE_NAME}}.kmipTag, {{STRUCTURE_NAME}}.encodingType);
     }

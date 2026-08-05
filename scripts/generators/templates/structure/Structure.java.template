@@ -21,6 +21,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * KMIP {{STRUCTURE_NAME}} structure.
+ */
 @Data
 @Builder(toBuilder = true)
 public class {{STRUCTURE_NAME}} implements KmipStructure {
@@ -72,6 +75,9 @@ public class {{STRUCTURE_NAME}} implements KmipStructure {
     // }
 
     // TODO: Add an 'of' method with all the fields as arguments
+    /**
+     * Returns the {@link {{STRUCTURE_NAME}}} instance for the given fields.
+     */
     public static {{STRUCTURE_NAME}} of(
                 // @NonNull Field1 field1,
                 // @NonNull Field2 field2

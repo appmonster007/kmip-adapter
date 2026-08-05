@@ -15,8 +15,14 @@ import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
 import java.io.IOException;
 
+/**
+ * TTLV deserializer for {@link {{NAME}}}.
+ */
 public class {{NAME}}TtlvDeserializer extends AbstractKmipDataTypeTtlvDeserializer<{{NAME}}, {{NAME}}.{{NAME}}Builder> {
 
+    /**
+     * Constructs a new {@link {{NAME}}TtlvDeserializer}.
+     */
     public {{NAME}}TtlvDeserializer() {
         super({{NAME}}.kmipTag, {{NAME}}.encodingType);
     }

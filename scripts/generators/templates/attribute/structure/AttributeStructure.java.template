@@ -58,6 +58,9 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link {{ATTRIBUTE_NAME}}} instance for the given attribute name/value pair.
+     */
     public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof KmipDataType[] structure)) {
             throw new IllegalArgumentException("Invalid attribute value");
@@ -76,6 +79,9 @@ public class {{ATTRIBUTE_NAME}} implements KmipStructure, KmipAttribute {
     }
 
     // TODO: Add an 'of' method with all the fields as arguments
+    /**
+     * Returns the {@link {{STRUCTURE_NAME}}} instance for the given fields.
+     */
     public static {{STRUCTURE_NAME}} of(
                 // @NonNull Field1 field1,
                 // @NonNull Field2 field2

@@ -41,6 +41,9 @@ public class {{DATA_NAME}} implements KmipDataType {
         validate();
     }
 
+    /**
+     * Returns the {@link {{DATA_NAME}}} instance wrapping the given value.
+     */
     public static {{DATA_NAME}} of(@NonNull {{DATA_TYPE}} value) {
         return new {{DATA_NAME}}(value);
     }

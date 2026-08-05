@@ -12,5 +12,8 @@ import java.time.ZoneOffset;
 import org.purpleBean.kmip.codec.ttlv.serializer.api.AbstractKmipDataTypeTtlvSerializer;
 import org.purpleBean.kmip.{{pdot}}.{{NAME}};
 
+/**
+ * TTLV serializer for {@link {{NAME}}}.
+ */
 public class {{NAME}}TtlvSerializer extends AbstractKmipDataTypeTtlvSerializer<{{NAME}}> {
 }

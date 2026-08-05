@@ -44,10 +44,16 @@ public class {{ATTRIBUTE_NAME}} implements KmipDataType, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link {{ATTRIBUTE_NAME}}} instance wrapping the given value.
+     */
     public static {{ATTRIBUTE_NAME}} of(@NonNull {{DATA_TYPE}} value) {
         return new {{ATTRIBUTE_NAME}}(value);
     }
 
+    /**
+     * Returns the {@link {{ATTRIBUTE_NAME}}} instance for the given attribute name/value pair.
+     */
     public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (attributeValue.getEncodingType() != encodingType || !(attributeValue.getValue() instanceof {{DATA_TYPE}} value)) {
             throw new IllegalArgumentException("Invalid attribute value");

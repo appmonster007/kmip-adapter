@@ -46,10 +46,16 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         validate();
     }
 
+    /**
+     * Returns the {@link {{ATTRIBUTE_NAME}}} instance wrapping the given value.
+     */
     public static {{ATTRIBUTE_NAME}} of(@NonNull Value value) {
         return new {{ATTRIBUTE_NAME}}(value);
     }
 
+    /**
+     * Returns the {@link {{ATTRIBUTE_NAME}}} instance for the given attribute name/value pair.
+     */
     public static {{ATTRIBUTE_NAME}} of(@NonNull AttributeName attributeName, @NonNull AttributeValue attributeValue) {
         if (!attributeName.getValue().equals(StringUtils.convertPascalToTitleCase(kmipTag.getDescription()))) {
             throw new IllegalArgumentException("Invalid attribute name");
@@ -152,10 +158,14 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         return encodingType;
     }
 
+    @Override
     public String getDescription() {
         return value.getDescription();
     }
 
+    /**
+     * Returns whether this enumeration value is a custom vendor extension.
+     */
     public boolean isCustom() {
         return value.isCustom();
     }
@@ -216,10 +226,14 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
         return kmipTag.getDescription();
     }
 
+    @Override
     public int getIntValue() {
         return value.getValue();
     }
 
+    /**
+     * The standard enumeration of {{ATTRIBUTE_NAME}} values.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -252,9 +266,16 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
     }
 
     // ----- Value hierarchy -----
+    /**
+     * An interface representing a {{ATTRIBUTE_NAME}} value, which can be either a standard
+     * value or a custom extension.
+     */
     public interface Value extends KmipEnumeration.Value<{{ATTRIBUTE_NAME}}> {
     }
 
+    /**
+     * Represents a custom, vendor-specific {{ATTRIBUTE_NAME}} value.
+     */
     @Getter
     @AllArgsConstructor
     @ToString
@@ -265,6 +286,9 @@ public class {{ATTRIBUTE_NAME}} implements KmipEnumeration, KmipAttribute {
 
         private final boolean custom = true;
 
+        /**
+         * Constructs a custom vendor extension value.
+         */
         public Extension(int value, String description, KmipSpec... supportedVersions) {
             this.value = value;
             this.description = description;
